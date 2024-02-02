@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="generator" content="Hugo 0.121.2">
+<meta name="generator" content="Hugo 0.122.0">
 <meta name="robots" content="index, follow">
 
 <link rel="shortcut icon" href="/favicons/favicon.ico" >
@@ -16,12 +16,12 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/docs/csidriver/troubleshooting/powerstore/" /><meta property="article:section" content="docs" />
 
-<meta property="article:modified_time" content="2023-12-13T23:10:42+05:30" />
+<meta property="article:modified_time" content="2024-02-02T12:19:38+05:30" />
 
 <meta itemprop="name" content="PowerStore">
 <meta itemprop="description" content="Troubleshooting PowerStore Driver">
-<meta itemprop="dateModified" content="2023-12-13T23:10:42+05:30" />
-<meta itemprop="wordCount" content="407">
+<meta itemprop="dateModified" content="2024-02-02T12:19:38+05:30" />
+<meta itemprop="wordCount" content="574">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/><meta name="twitter:title" content="PowerStore"/>
 <meta name="twitter:description" content="Troubleshooting PowerStore Driver"/>
 
@@ -80,7 +80,7 @@
 	
 	
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.9.0)</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.9.1)</a>
 	
 	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.8.0</a>
 	
@@ -102,7 +102,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.7a3f421b812ad475ba59b258a3829232.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.a0524863f1063f9e39caf0f2eec462a0.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -124,7 +124,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.7a3f421b812ad475ba59b258a3829232.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.a0524863f1063f9e39caf0f2eec462a0.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -701,6 +701,30 @@
 <tr>
 <td>Driver install or upgrade fails because of an incompatible Kubernetes version, even though the version seems to be within the range of compatibility. For example: Error: UPGRADE FAILED: chart requires kubeVersion: &gt;= 1.22.0 &lt; 1.25.0 which is incompatible with Kubernetes V1.22.11-mirantis-1</td>
 <td>If you are using an extended Kubernetes version, please see the <a href="https://github.com/dell/helm-charts/blob/main/charts/csi-powerstore/Chart.yaml">helm Chart</a> and use the alternate kubeVersion check that is provided in the comments. Please note that this is not meant to be used to enable the use of pre-release alpha and beta versions, which is not supported.</td>
+</tr>
+<tr>
+<td>If two separate networks are configured for ISCSI and NVMeTCP, the driver may encounter difficulty identifying the second network (e.g., NVMeTCP).</td>
+<td>This is a known issue, and the workaround involves creating a single network on the array to serve both ISCSI and NVMeTCP purposes.</td>
+</tr>
+<tr>
+<td>Unable to provision PVC&rsquo;s via driver</td>
+<td>Ensure that the NAS name matches the one provided on the array side.</td>
+</tr>
+<tr>
+<td>Unable to install or upgrade the driver</td>
+<td>Ensure  that the firewall is configured to grant adequate permissions for downloading images from the registry.</td>
+</tr>
+<tr>
+<td>Faulty paths in the multipath</td>
+<td>Ensure that the configuration of the multipath is correct and connectivity to the underlying hardware is intact.</td>
+</tr>
+<tr>
+<td>Unable to install or upgrade the driver due to minimum Kubernetes version or Openshift version</td>
+<td>Currently CSM only supports n, n-1, n-2 version of Kubernetes and Openshift, if you still wanted to continue with existing version update the <code>verify.sh</code> to continue.</td>
+</tr>
+<tr>
+<td>Volumes are not getting deleted on the array when PV&rsquo;s are deleted</td>
+<td>Ensure <code>persistentVolumeReclaimPolicy</code> is set to Delete.</td>
 </tr>
 </tbody>
 </table>

@@ -1169,7 +1169,7 @@ time=&amp;#34;2022-06-30T17:38:32Z&amp;#34; level=fatal msg=&amp;#34;grpc failed
       <description>
         
         
-        &lt;h2 id=&#34;release-notes---csm-authorization-180&#34;&gt;Release Notes - CSM Authorization 1.8.0&lt;/h2&gt;
+        &lt;h2 id=&#34;release-notes---csm-authorization-191&#34;&gt;Release Notes - CSM Authorization 1.9.1&lt;/h2&gt;
 &lt;h3 id=&#34;new-featureschanges&#34;&gt;New Features/Changes&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/947&#34;&gt;#947 - [FEATURE]: Support for Kubernetes 1.28&lt;/a&gt;&lt;/li&gt;

@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="generator" content="Hugo 0.121.2">
+<meta name="generator" content="Hugo 0.122.0">
 <meta name="robots" content="index, follow">
 
 <link rel="shortcut icon" href="/favicons/favicon.ico" >
@@ -16,11 +16,11 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/docs/csidriver/installation/test/certcsi/" /><meta property="article:section" content="docs" />
 
-<meta property="article:modified_time" content="2023-12-13T23:10:42+05:30" />
+<meta property="article:modified_time" content="2024-02-02T12:19:38+05:30" />
 
 <meta itemprop="name" content="Cert-CSI">
 <meta itemprop="description" content="Tool to validate Dell CSI Drivers">
-<meta itemprop="dateModified" content="2023-12-13T23:10:42+05:30" />
+<meta itemprop="dateModified" content="2024-02-02T12:19:38+05:30" />
 <meta itemprop="wordCount" content="3064">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Cert-CSI"/>
 <meta name="twitter:description" content="Tool to validate Dell CSI Drivers"/>
@@ -80,7 +80,7 @@
 	
 	
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.9.0)</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.9.1)</a>
 	
 	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.8.0</a>
 	
@@ -102,7 +102,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.7a3f421b812ad475ba59b258a3829232.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.a0524863f1063f9e39caf0f2eec462a0.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -124,7 +124,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.7a3f421b812ad475ba59b258a3829232.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.a0524863f1063f9e39caf0f2eec462a0.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -724,20 +724,20 @@
 <ol>
 <li>Download the latest release of the cert-csi zip file.</li>
 </ol>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>curl -LO https://github.com/dell/cert-csi/releases/download/v1.3.0/cert-csi-v1.3.0.zip
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>curl -LO https://github.com/dell/cert-csi/releases/download/v1.3.1/cert-csi-v1.3.1.zip
 </span></span></code></pre></div><ol start="2">
 <li>Unzip the file.</li>
 </ol>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>unzip cert-csi-v1.3.0.zip
-</span></span><span style="display:flex;"><span>chmod +x ./cert-csi-v1.3.0
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>unzip cert-csi-v1.3.1.zip
+</span></span><span style="display:flex;"><span>chmod +x ./cert-csi-v1.3.1
 </span></span></code></pre></div><ol start="3">
-<li>Install cert-csi-v1.3.0 as cert-csi.</li>
+<li>Install cert-csi-v1.3.1 as cert-csi.</li>
 </ol>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo install -o root -g root -m <span style="color:#0000cf;font-weight:bold">0755</span> cert-csi-v1.3.0 /usr/local/bin/cert-csi
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo install -o root -g root -m <span style="color:#0000cf;font-weight:bold">0755</span> cert-csi-v1.3.1 /usr/local/bin/cert-csi
 </span></span></code></pre></div><p>If you do not have root access on the target system, you can still install cert-csi to the ~/.local/bin directory:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>chmod +x cert-csi-v1.3.0
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>chmod +x cert-csi-v1.3.1
 </span></span><span style="display:flex;"><span>mkdir -p ~/.local/bin
-</span></span><span style="display:flex;"><span>mv ./cert-csi-v1.3.0 ~/.local/bin/cert-csi
+</span></span><span style="display:flex;"><span>mv ./cert-csi-v1.3.1 ~/.local/bin/cert-csi
 </span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"># and then append (or prepend) ~/.local/bin to $PATH</span>
 </span></span></code></pre></div><h3 id="pull-the-container-image">Pull The Container Image</h3>
 <ul class="nav nav-tabs" id="pulling-cert-csi-image" role="tablist"><li class="nav-item"><a data-toggle="tab" class="nav-link active" href="#pulling-cert-csi-image-0" role="tab" aria-controls="pulling-cert-csi-image-0" aria-selected="true">Docker</a></li>
@@ -745,11 +745,11 @@
 		<li class="nav-item"><a data-toggle="tab" class="nav-link" href="#pulling-cert-csi-image-1" role="tab" aria-controls="pulling-cert-csi-image-1">Podman</a></li></ul>
 <div class="tab-content" id="pulling-cert-csi-image"><div id="pulling-cert-csi-image-0" class="tab-pane show active" role="tabpanel" aria-labelledby="pulling-cert-csi-image-0">
 
-<p><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>   docker pull dellemc/cert-csi:v1.3.0
+<p><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>   docker pull dellemc/cert-csi:v1.3.1
 </span></span></code></pre></div></div>
   <div id="pulling-cert-csi-image-1" class="tab-pane" role="tabpanel" aria-labelledby="pulling-cert-csi-image-1">
 
-<p><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>   podman pull dellemc/cert-csi:v1.3.0
+<p><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>   podman pull dellemc/cert-csi:v1.3.1
 </span></span></code></pre></div></div></div>
 
 <h3 id="building-locally">Building Locally</h3>
@@ -762,7 +762,7 @@
 <ol>
 <li>Clone the repository</li>
 </ol>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git clone -b <span style="color:#4e9a06">&#34;v1.3.0&#34;</span> https://github.com/dell/cert-csi.git <span style="color:#ce5c00;font-weight:bold">&amp;&amp;</span> <span style="color:#204a87">cd</span> cert-csi
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git clone -b <span style="color:#4e9a06">&#34;v1.3.1&#34;</span> https://github.com/dell/cert-csi.git <span style="color:#ce5c00;font-weight:bold">&amp;&amp;</span> <span style="color:#204a87">cd</span> cert-csi
 </span></span></code></pre></div><ol start="2">
 <li>Build cert-csi</li>
 </ol>
@@ -794,11 +794,11 @@
 </span></span></code></pre></div></div>
   <div id="running-cert-csi-1" class="tab-pane" role="tabpanel" aria-labelledby="running-cert-csi-1">
 
-<p><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>   docker run --rm -it -v ~/.kube/config:/root/.kube/config dellemc/cert-csi:v1.3.0 --help
+<p><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>   docker run --rm -it -v ~/.kube/config:/root/.kube/config dellemc/cert-csi:v1.3.1 --help
 </span></span></code></pre></div></div>
   <div id="running-cert-csi-2" class="tab-pane" role="tabpanel" aria-labelledby="running-cert-csi-2">
 
-<p><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>   podman run --rm -it -v ~/.kube/config:/root/.kube/config dellemc/cert-csi:v1.3.0 --help
+<p><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>   podman run --rm -it -v ~/.kube/config:/root/.kube/config dellemc/cert-csi:v1.3.1 --help
 </span></span></code></pre></div></div></div>
 
 <blockquote>
@@ -1017,11 +1017,11 @@ Database (SQLite) file for functional test suites is <code>cert-csi-functional.d
 		<li class="nav-item"><a data-toggle="tab" class="nav-link" href="#running-container-certify-1" role="tab" aria-controls="running-container-certify-1">Podman</a></li></ul>
 <div class="tab-content" id="running-container-certify"><div id="running-container-certify-0" class="tab-pane show active" role="tabpanel" aria-labelledby="running-container-certify-0">
 
-<p><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>   docker run --rm -it -v ~/.kube/config:/root/.kube/config -v /home/user/example-certify-config.yaml:/example-certify-config.yaml dellemc/cert-csi:v1.3.0 certify --cert-config /example-certify-config.yaml --vsc &lt;volume-snapshot-class&gt;
+<p><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>   docker run --rm -it -v ~/.kube/config:/root/.kube/config -v /home/user/example-certify-config.yaml:/example-certify-config.yaml dellemc/cert-csi:v1.3.1 certify --cert-config /example-certify-config.yaml --vsc &lt;volume-snapshot-class&gt;
 </span></span></code></pre></div></div>
   <div id="running-container-certify-1" class="tab-pane" role="tabpanel" aria-labelledby="running-container-certify-1">
 
-<p><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>   podman run --rm -it -v ~/.kube/config:/root/.kube/config -v /home/user/example-certify-config.yaml:/example-certify-config.yaml dellemc/cert-csi:v1.3.0 certify --cert-config /example-certify-config.yaml --vsc &lt;volume-snapshot-class&gt;
+<p><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>   podman run --rm -it -v ~/.kube/config:/root/.kube/config -v /home/user/example-certify-config.yaml:/example-certify-config.yaml dellemc/cert-csi:v1.3.1 certify --cert-config /example-certify-config.yaml --vsc &lt;volume-snapshot-class&gt;
 </span></span></code></pre></div></div></div>
 
 <h3 id="running-invidual-test-suites">Running Invidual Test Suites</h3>
@@ -1189,11 +1189,11 @@ This suite does not delete resources on success.</p>
 		<li class="nav-item"><a data-toggle="tab" class="nav-link" href="#running-container-ephemeral-volume-1" role="tab" aria-controls="running-container-ephemeral-volume-1">Podman</a></li></ul>
 <div class="tab-content" id="running-container-ephemeral-volume"><div id="running-container-ephemeral-volume-0" class="tab-pane show active" role="tabpanel" aria-labelledby="running-container-ephemeral-volume-0">
 
-<p><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>   docker run --rm -it -v ~/.kube/config:/root/.kube/config -v /home/user/ephemeral-config.properties:/ephemeral-config.properties dellemc/cert-csi:v1.3.0 <span style="color:#204a87">test</span> ephemeral-volume --driver &lt;driver-name&gt; --attr /ephemeral-config.properties
+<p><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>   docker run --rm -it -v ~/.kube/config:/root/.kube/config -v /home/user/ephemeral-config.properties:/ephemeral-config.properties dellemc/cert-csi:v1.3.1 <span style="color:#204a87">test</span> ephemeral-volume --driver &lt;driver-name&gt; --attr /ephemeral-config.properties
 </span></span></code></pre></div></div>
   <div id="running-container-ephemeral-volume-1" class="tab-pane" role="tabpanel" aria-labelledby="running-container-ephemeral-volume-1">
 
-<p><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>   podman run --rm -it -v ~/.kube/config:/root/.kube/config -v /home/user/ephemeral-config.properties:/ephemeral-config.properties dellemc/cert-csi:v1.3.0 <span style="color:#204a87">test</span> ephemeral-volume --driver &lt;driver-name&gt; --attr /ephemeral-config.properties
+<p><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>   podman run --rm -it -v ~/.kube/config:/root/.kube/config -v /home/user/ephemeral-config.properties:/ephemeral-config.properties dellemc/cert-csi:v1.3.1 <span style="color:#204a87">test</span> ephemeral-volume --driver &lt;driver-name&gt; --attr /ephemeral-config.properties
 </span></span></code></pre></div></div></div>
 
 <p>Sample ephemeral-config.properties (key/value pair)

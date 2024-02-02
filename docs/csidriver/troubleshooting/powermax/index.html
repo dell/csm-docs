@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="generator" content="Hugo 0.121.2">
+<meta name="generator" content="Hugo 0.122.0">
 <meta name="robots" content="index, follow">
 
 <link rel="shortcut icon" href="/favicons/favicon.ico" >
@@ -16,12 +16,12 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/docs/csidriver/troubleshooting/powermax/" /><meta property="article:section" content="docs" />
 
-<meta property="article:modified_time" content="2023-12-13T23:10:42+05:30" />
+<meta property="article:modified_time" content="2024-02-02T12:19:38+05:30" />
 
 <meta itemprop="name" content="PowerMax">
 <meta itemprop="description" content="Troubleshooting PowerMax Driver">
-<meta itemprop="dateModified" content="2023-12-13T23:10:42+05:30" />
-<meta itemprop="wordCount" content="534">
+<meta itemprop="dateModified" content="2024-02-02T12:19:38+05:30" />
+<meta itemprop="wordCount" content="561">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/><meta name="twitter:title" content="PowerMax"/>
 <meta name="twitter:description" content="Troubleshooting PowerMax Driver"/>
 
@@ -80,7 +80,7 @@
 	
 	
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.9.0)</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.9.1)</a>
 	
 	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.8.0</a>
 	
@@ -102,7 +102,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.7a3f421b812ad475ba59b258a3829232.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.a0524863f1063f9e39caf0f2eec462a0.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -124,7 +124,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.7a3f421b812ad475ba59b258a3829232.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.a0524863f1063f9e39caf0f2eec462a0.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -725,6 +725,10 @@
 <tr>
 <td>Volume mount is failing on few OS(ex:VMware Virtual Platform) during node publish with error <code>wrong fs type, bad option, bad superblock</code></td>
 <td>1. Check the multipath configuration(if enabled) 2. Edit Vm Advanced settings-&gt;hardware and add the param <code>disk.enableUUID=true</code> and reboot the node</td>
+</tr>
+<tr>
+<td>Standby controller pod is in crashloopbackoff state</td>
+<td>Scale down the replica count of the controller pod&rsquo;s deployment to 1 using <code>kubectl scale deployment &lt;deployment_name&gt; --replicas=1 -n &lt;driver_namespace&gt;</code></td>
 </tr>
 </tbody>
 </table>

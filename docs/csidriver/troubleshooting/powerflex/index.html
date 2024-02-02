@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="generator" content="Hugo 0.121.2">
+<meta name="generator" content="Hugo 0.122.0">
 <meta name="robots" content="index, follow">
 
 <link rel="shortcut icon" href="/favicons/favicon.ico" >
@@ -16,12 +16,12 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/docs/csidriver/troubleshooting/powerflex/" /><meta property="article:section" content="docs" />
 
-<meta property="article:modified_time" content="2023-09-20T19:05:29+05:30" />
+<meta property="article:modified_time" content="2024-02-02T12:19:38+05:30" />
 
 <meta itemprop="name" content="PowerFlex">
 <meta itemprop="description" content="Troubleshooting PowerFlex Driver">
-<meta itemprop="dateModified" content="2023-09-20T19:05:29+05:30" />
-<meta itemprop="wordCount" content="1078">
+<meta itemprop="dateModified" content="2024-02-02T12:19:38+05:30" />
+<meta itemprop="wordCount" content="1095">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/><meta name="twitter:title" content="PowerFlex"/>
 <meta name="twitter:description" content="Troubleshooting PowerFlex Driver"/>
 
@@ -80,7 +80,7 @@
 	
 	
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.9.0)</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.9.1)</a>
 	
 	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.8.0</a>
 	
@@ -102,7 +102,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.7a3f421b812ad475ba59b258a3829232.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.a0524863f1063f9e39caf0f2eec462a0.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -124,7 +124,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.7a3f421b812ad475ba59b258a3829232.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.a0524863f1063f9e39caf0f2eec462a0.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -762,10 +762,13 @@
 <td>A CSI ephemeral pod may not get created in OpenShift 4.13 and fail with the error <code>&quot;error when creating pod: the pod uses an inline volume provided by CSIDriver csi-vxflexos.dellemc.com, and the namespace has a pod security enforcement level that is lower than privileged.&quot;</code></td>
 <td>This issue occurs because OpenShift 4.13 introduced the CSI Volume Admission plugin to restrict the use of a CSI driver capable of provisioning CSI ephemeral volumes during pod admission. Therefore, an additional label <code>security.openshift.io/csi-ephemeral-volume-profile</code> in <a href="https://github.com/dell/helm-charts/blob/csi-vxflexos-2.8.0/charts/csi-vxflexos/templates/csidriver.yaml">csidriver.yaml</a> file with the required security profile value should be provided. Follow <a href="https://docs.openshift.com/container-platform/4.13/storage/container_storage_interface/ephemeral-storage-csi-inline.html">OpenShift 4.13 documentation for CSI Ephemeral Volumes</a> for more information.</td>
 </tr>
+<tr>
+<td>Standby controller pod is in crashloopbackoff state</td>
+<td>Scale down the replica count of the controller pod&rsquo;s deployment to 1 using <code>kubectl scale deployment &lt;deployment_name&gt; --replicas=1 -n &lt;driver_namespace&gt;</code></td>
+</tr>
 </tbody>
 </table>
 <blockquote>
-<p><em>Note</em>: <code>vxflexos-controller-*</code> is the controller pod that acquires leader lease</p>
 </blockquote>
 
 	

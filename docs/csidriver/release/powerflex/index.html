@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="generator" content="Hugo 0.121.2">
+<meta name="generator" content="Hugo 0.122.0">
 <meta name="robots" content="index, follow">
 
 <link rel="shortcut icon" href="/favicons/favicon.ico" >
@@ -16,12 +16,12 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/docs/csidriver/release/powerflex/" /><meta property="article:section" content="docs" />
 
-<meta property="article:modified_time" content="2024-01-23T13:19:56+05:30" />
+<meta property="article:modified_time" content="2024-02-02T12:19:38+05:30" />
 
 <meta itemprop="name" content="PowerFlex">
 <meta itemprop="description" content="Release notes for PowerFlex CSI driver">
-<meta itemprop="dateModified" content="2024-01-23T13:19:56+05:30" />
-<meta itemprop="wordCount" content="643">
+<meta itemprop="dateModified" content="2024-02-02T12:19:38+05:30" />
+<meta itemprop="wordCount" content="625">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/><meta name="twitter:title" content="PowerFlex"/>
 <meta name="twitter:description" content="Release notes for PowerFlex CSI driver"/>
 
@@ -80,7 +80,7 @@
 	
 	
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.9.0)</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.9.1)</a>
 	
 	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.8.0</a>
 	
@@ -102,7 +102,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.7a3f421b812ad475ba59b258a3829232.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.a0524863f1063f9e39caf0f2eec462a0.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -124,7 +124,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.7a3f421b812ad475ba59b258a3829232.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.a0524863f1063f9e39caf0f2eec462a0.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -615,7 +615,7 @@
 
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#release-notes---csi-powerflex-v290">Release Notes - CSI PowerFlex v2.9.0</a>
+    <li><a href="#release-notes---csi-powerflex-v291">Release Notes - CSI PowerFlex v2.9.1</a>
       <ul>
         <li><a href="#new-featureschanges">New Features/Changes</a></li>
         <li><a href="#fixed-issues">Fixed Issues</a></li>
@@ -675,7 +675,7 @@
 	<h1>PowerFlex</h1>
 
 	       
-	<h2 id="release-notes---csi-powerflex-v290">Release Notes - CSI PowerFlex v2.9.0</h2>
+	<h2 id="release-notes---csi-powerflex-v291">Release Notes - CSI PowerFlex v2.9.1</h2>
 <h3 id="new-featureschanges">New Features/Changes</h3>
 <ul>
 <li><a href="https://github.com/dell/csm/issues/947">#947 - [FEATURE]: Support for Kubernetes 1.28</a></li>
@@ -696,6 +696,7 @@
 <li><a href="https://github.com/dell/csm/issues/1057">#1057 - [BUG]: CSI Driver - issue with creation volume from 1 of the worker nodes</a></li>
 <li><a href="https://github.com/dell/csm/issues/1058">#1058 - [BUG]: CSI Health monitor for Node missing for CSM PowerFlex in Operator samples</a></li>
 <li><a href="https://github.com/dell/csm/issues/1061">#1061 - [BUG]: Golint is not installing with go get command</a></li>
+<li><a href="https://github.com/dell/csm/issues/1110">#1110 - [BUG]: Multi Controller defect - sidecars timeout</a></li>
 </ul>
 <h3 id="known-issues">Known Issues</h3>
 <table>
@@ -724,7 +725,7 @@
 </tr>
 <tr>
 <td>A CSI ephemeral pod may not get created in OpenShift 4.13 and fail with the error <code>&quot;error when creating pod: the pod uses an inline volume provided by CSIDriver csi-vxflexos.dellemc.com, and the namespace has a pod security enforcement level that is lower than privileged.&quot;</code></td>
-<td>This issue occurs because OpenShift 4.13 introduced the CSI Volume Admission plugin to restrict the use of a CSI driver capable of provisioning CSI ephemeral volumes during pod admission. Therefore, an additional label <code>security.openshift.io/csi-ephemeral-volume-profile</code> in <a href="https://github.com/dell/helm-charts/blob/csi-vxflexos-2.9.0/charts/csi-vxflexos/templates/csidriver.yaml">csidriver.yaml</a> file with the required security profile value should be provided. Follow <a href="https://docs.openshift.com/container-platform/4.13/storage/container_storage_interface/ephemeral-storage-csi-inline.html">OpenShift 4.13 documentation for CSI Ephemeral Volumes</a> for more information.</td>
+<td>This issue occurs because OpenShift 4.13 introduced the CSI Volume Admission plugin to restrict the use of a CSI driver capable of provisioning CSI ephemeral volumes during pod admission. Therefore, an additional label <code>security.openshift.io/csi-ephemeral-volume-profile</code> in <a href="https://github.com/dell/helm-charts/blob/csi-vxflexos-2.9.1/charts/csi-vxflexos/templates/csidriver.yaml">csidriver.yaml</a> file with the required security profile value should be provided. Follow <a href="https://docs.openshift.com/container-platform/4.13/storage/container_storage_interface/ephemeral-storage-csi-inline.html">OpenShift 4.13 documentation for CSI Ephemeral Volumes</a> for more information.</td>
 </tr>
 <tr>
 <td>If the volume limit is exhausted and there are pending pods and PVCs due to <code>exceed max volume count</code>, the pending PVCs will be bound to PVs and the pending pods will be scheduled to nodes when the driver pods are restarted.</td>
@@ -733,10 +734,6 @@
 <tr>
 <td>The PowerFlex Dockerfile is incorrectly labeling the version as 2.7.0 for the 2.8.0 version.</td>
 <td>Describe the driver pod using <code>kubectl describe pod $podname -n vxflexos</code> to ensure v2.8.0 is installed.</td>
-</tr>
-<tr>
-<td>Standby controller pod is in crashloopbackoff state</td>
-<td>Scale down the replica count of the controller pod&rsquo;s deployment to 1 using <code>kubectl scale deployment &lt;deployment_name&gt; --replicas=1 -n &lt;driver_namespace&gt;</code></td>
 </tr>
 </tbody>
 </table>

@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="generator" content="Hugo 0.121.2">
+<meta name="generator" content="Hugo 0.122.0">
 <meta name="robots" content="index, follow">
 
 <link rel="shortcut icon" href="/favicons/favicon.ico" >
@@ -16,11 +16,11 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/docs/csidriver/upgradation/drivers/powermax/" /><meta property="article:section" content="docs" />
 
-<meta property="article:modified_time" content="2023-12-13T23:10:42+05:30" />
+<meta property="article:modified_time" content="2024-02-02T12:19:38+05:30" />
 
 <meta itemprop="name" content="PowerMax">
 <meta itemprop="description" content="Upgrade PowerMax CSI driver">
-<meta itemprop="dateModified" content="2023-12-13T23:10:42+05:30" />
+<meta itemprop="dateModified" content="2024-02-02T12:19:38+05:30" />
 <meta itemprop="wordCount" content="242">
 <meta itemprop="keywords" content="upgrade,csi-driver," /><meta name="twitter:card" content="summary"/><meta name="twitter:title" content="PowerMax"/>
 <meta name="twitter:description" content="Upgrade PowerMax CSI driver"/>
@@ -80,7 +80,7 @@
 	
 	
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.9.0)</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.9.1)</a>
 	
 	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.8.0</a>
 	
@@ -102,7 +102,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.7a3f421b812ad475ba59b258a3829232.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.a0524863f1063f9e39caf0f2eec462a0.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -124,7 +124,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.7a3f421b812ad475ba59b258a3829232.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.a0524863f1063f9e39caf0f2eec462a0.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -620,7 +620,7 @@
         <li><a href="#updating-the-csi-driver-to-use-100-unisphere">Updating the CSI Driver to use 10.0 Unisphere</a></li>
       </ul>
     </li>
-    <li><a href="#update-driver-from-v28-to-v29-using-helm">Update Driver from v2.8 to v2.9 using Helm</a></li>
+    <li><a href="#update-driver-from-v28-to-v291-using-helm">Update Driver from v2.8 to v2.9.1 using Helm</a></li>
     <li><a href="#upgrade-using-dell-csm-operator">Upgrade using Dell CSM Operator:</a></li>
   </ul>
 </nav>
@@ -681,10 +681,10 @@
 <li>Upgrade the Unisphere to have 10.0 endpoint support.Please find the instructions <a href="https://dl.dell.com/content/manual34878027-dell-unisphere-for-powermax-10-0-0-installation-guide.pdf?language=en-us&amp;ps=true">here.</a></li>
 <li>Update the <code>my-powermax-settings.yaml</code> to have endpoint with 10.0 support.</li>
 </ol>
-<h2 id="update-driver-from-v28-to-v29-using-helm">Update Driver from v2.8 to v2.9 using Helm</h2>
+<h2 id="update-driver-from-v28-to-v291-using-helm">Update Driver from v2.8 to v2.9.1 using Helm</h2>
 <p><strong>Steps</strong></p>
 <ol>
-<li>Run <code>git clone -b v2.9.0 https://github.com/dell/csi-powermax.git</code> to clone the git repository and get the driver.</li>
+<li>Run <code>git clone -b v2.9.1 https://github.com/dell/csi-powermax.git</code> to clone the git repository and get the driver.</li>
 <li>Update the values file as needed.</li>
 <li>Run the <code>csi-install</code> script with the option <em>--upgrade</em> by running:
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>

@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="generator" content="Hugo 0.121.2">
+<meta name="generator" content="Hugo 0.122.0">
 <meta name="robots" content="index, follow">
 
 <link rel="shortcut icon" href="/favicons/favicon.ico" >
@@ -16,11 +16,11 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/docs/csidriver/upgradation/drivers/isilon/" /><meta property="article:section" content="docs" />
 
-<meta property="article:modified_time" content="2023-12-13T23:10:42+05:30" />
+<meta property="article:modified_time" content="2024-02-02T12:19:38+05:30" />
 
 <meta itemprop="name" content="PowerScale">
 <meta itemprop="description" content="Upgrade PowerScale CSI driver">
-<meta itemprop="dateModified" content="2023-12-13T23:10:42+05:30" />
+<meta itemprop="dateModified" content="2024-02-02T12:19:38+05:30" />
 <meta itemprop="wordCount" content="137">
 <meta itemprop="keywords" content="upgrade,csi-driver," /><meta name="twitter:card" content="summary"/><meta name="twitter:title" content="PowerScale"/>
 <meta name="twitter:description" content="Upgrade PowerScale CSI driver"/>
@@ -80,7 +80,7 @@
 	
 	
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.9.0)</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.9.1)</a>
 	
 	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.8.0</a>
 	
@@ -102,7 +102,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.7a3f421b812ad475ba59b258a3829232.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.a0524863f1063f9e39caf0f2eec462a0.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -124,7 +124,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.7a3f421b812ad475ba59b258a3829232.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.a0524863f1063f9e39caf0f2eec462a0.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -615,7 +615,7 @@
 
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#upgrade-driver-from-version-280-to-290-using-helm">Upgrade Driver from version 2.8.0 to 2.9.0 using Helm</a>
+    <li><a href="#upgrade-driver-from-version-280-to-291-using-helm">Upgrade Driver from version 2.8.0 to 2.9.1 using Helm</a>
       <ul>
         <li><a href="#steps">Steps</a></li>
       </ul>
@@ -674,19 +674,19 @@
 
 	       
 	<p>You can upgrade the CSI Driver for Dell PowerScale using Helm or Dell CSM Operator.</p>
-<h2 id="upgrade-driver-from-version-280-to-290-using-helm">Upgrade Driver from version 2.8.0 to 2.9.0 using Helm</h2>
+<h2 id="upgrade-driver-from-version-280-to-291-using-helm">Upgrade Driver from version 2.8.0 to 2.9.1 using Helm</h2>
 <p><strong>Note:</strong> While upgrading the driver via helm, controllerCount variable in myvalues.yaml can be at most one less than the number of worker nodes.</p>
 <h3 id="steps">Steps</h3>
 <ol>
 <li>
-<p>Clone the repository using <code>git clone -b v2.9.0 https://github.com/dell/csi-powerscale.git</code></p>
+<p>Clone the repository using <code>git clone -b v2.9.1 https://github.com/dell/csi-powerscale.git</code></p>
 </li>
 <li>
 <p>Change to directory dell-csi-helm-installer to install the Dell PowerScale <code>cd dell-csi-helm-installer</code></p>
 </li>
 <li>
 <p>Download the default values.yaml using following command:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>wget -O my-isilon-settings.yaml https://raw.githubusercontent.com/dell/helm-charts/csi-isilon-2.9.0/charts/csi-isilon/values.yaml
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>wget -O my-isilon-settings.yaml https://raw.githubusercontent.com/dell/helm-charts/csi-isilon-2.9.1/charts/csi-isilon/values.yaml
 </span></span></code></pre></div><p>Edit the <em>my-isilon-settings.yaml</em> as per the requirements.</p>
 </li>
 <li>
