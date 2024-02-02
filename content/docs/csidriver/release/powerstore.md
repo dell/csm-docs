@@ -5,10 +5,6 @@ description: Release notes for PowerStore CSI driver
 
 ## Release Notes - CSI PowerStore v2.9.1
 
-
-
-
-
 ### New Features/Changes
 
 - [#947 - [FEATURE]: Support for Kubernetes 1.28](https://github.com/dell/csm/issues/947)
