@@ -19,7 +19,7 @@ The CSI Drivers by Dell implement an interface between [CSI](https://kubernetes-
 |---------------|:----------------:|:-------------------:|:----------------:|:-----------------:|:----------------:|
 | Kubernetes    | 1.27, 1.28, 1.29 | 1.27, 1.28, 1.29    | 1.27, 1.28, 1.29 | 1.27, 1.28, 1.29  | 1.27, 1.28, 1.29 |
 | Red Hat OpenShift | 4.13, 4.14 | 4.13, 4.14 | 4.13, 4.14 | 4.13, 4.14 | 4.13, 4.14 |
-| Mirantis Kubernetes Engine | 3.7.x |     3.7.x         |       3.7.x      | 3.6.x, 3.7.x      |        3.7.x     |
+| Mirantis Kubernetes Engine | 3.7.x |     3.7.x         |       3.7.x      |         3.7.x      |        3.7.x     |
 | Google Anthos |        1.15      |          1.15       |        no        |         1.15      |        1.15      |
 | VMware Tanzu  |        no        |          no         |        NFS       |         NFS       |      NFS,iSCSI   |
 | Rancher Kubernetes Engine | 1.4.x|          1.4.x      |        1.4.x     |         1.4.x     |      1.4.x       |
