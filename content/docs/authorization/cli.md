@@ -247,7 +247,11 @@ Usually, you will want to pipe the output to kubectl to apply the secret
 ```bash
 karavictl generate token --tenant Alice --admin-token admintoken.yaml --addr csm-authorization.host.com | kubectl apply -f -
 ```
-Note: If new token that gets generated does not work, restart the driver deployment as well as the deamonset and try again.
+If new token that gets generated does not work, restart the driver deployment as well as the deamonset and try again. The token is read once when the driver pods are started and is not dynamically updated. If you are applying a new token in an existing driver installation, restart the driver pods for the new token to take effect.
+```bash
+kubectl -n <driver-namespace> rollout restart deploy/<driver>-controller
+kubectl -n <driver-namespace> rollout restart ds/<driver>-node
+```
 
 ### karavictl role
 
