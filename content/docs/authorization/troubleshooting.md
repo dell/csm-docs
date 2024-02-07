@@ -15,10 +15,7 @@ The CSM Authorization RPM will be deprecated in a future release. It is highly r
 - [Running `karavictl tenant` commands result in an HTTP 504 error](#running-karavictl-tenant-commands-result-in-an-http-504-error)
 - [Installation fails to install policies](#installation-fails-to-install-policies)
 - [After installation, the create-pvc Pod is in an Error state](#after-installation-the-create-pvc-pod-is-in-an-error-state)
-
-## Helm Deployment
-- [The CSI Driver for Dell PowerFlex v2.3.0 is in an Error or CrashLoopBackoff state due to "request denied for path" errors](#the-csi-driver-for-dell-powerflex-v230-is-in-an-error-or-crashloopbackoff-state-due-to-request-denied-for-path-errors)
-
+- [Intermittent 401 issues with generated token](#intermittent-401-issues-with-generated-token)
 ---
 
 ### The Failure of Building an Authorization RPM
@@ -97,6 +94,23 @@ Run the following commands to allow the PVC to be created:
 semanage fcontext -a -t container_file_t  "/var/lib/rancher/k3s/storage(/.*)?"
 restorecon -R  /var/lib/rancher/k3s/storage/
 ```
+### Intermittent 401 issues with generated token
+This issue occurs when a new access token is generated in an existing driver installation.
+
+__Resolution__
+
+If you are applying a new token in an existing driver installation, restart the driver pods for the new token to take effect. The token is read once when the driver pods are started and is not dynamically updated. 
+```bash
+kubectl -n <driver-namespace> rollout restart deploy/<driver>-controller
+kubectl -n <driver-namespace> rollout restart ds/<driver>-node
+```
+
+## Helm Deployment
+- [The CSI Driver for Dell PowerFlex v2.3.0 is in an Error or CrashLoopBackoff state due to "request denied for path" errors](#the-csi-driver-for-dell-powerflex-v230-is-in-an-error-or-crashloopbackoff-state-due-to-request-denied-for-path-errors)
+- [Intermittent 401 issues with generated token](#intermittent-401-issues-with-generated-token)
+
+---
+
 
 ### The CSI Driver for Dell PowerFlex v2.3.0 is in an Error or CrashLoopBackoff state due to "request denied for path" errors
 The vxflexos-controller pods will have logs similar to:
@@ -183,4 +197,15 @@ kubectl -n <namespace> rollout restart deploy/proxy-server
 ```bash
 kubectl -n <driver-namespace> rollout restart deploy/vxflexos-controller
 kubectl -n <driver-namespace> rollout restart daemonSet/vxflexos-node
+```
+
+### Intermittent 401 issues with generated token
+This issue occurs when a new access token is generated in an existing driver installation.
+
+__Resolution__
+
+If you are applying a new token in an existing driver installation, restart the driver pods for the new token to take effect. The token is read once when the driver pods are started and is not dynamically updated. 
+```bash
+kubectl -n <driver-namespace> rollout restart deploy/<driver>-controller
+kubectl -n <driver-namespace> rollout restart ds/<driver>-node
 ```
