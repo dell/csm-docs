@@ -18,13 +18,13 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/docs/authorization/cli/" /><meta property="article:section" content="docs" />
 
-<meta property="article:modified_time" content="2023-09-20T19:05:29+05:30" />
+<meta property="article:modified_time" content="2024-02-07T16:44:53-06:00" />
 
 <meta itemprop="name" content="CLI">
 <meta itemprop="description" content="Dell Technologies (Dell) Container Storage Modules (CSM) for Authorization CLI
 ">
-<meta itemprop="dateModified" content="2023-09-20T19:05:29+05:30" />
-<meta itemprop="wordCount" content="2607">
+<meta itemprop="dateModified" content="2024-02-07T16:44:53-06:00" />
+<meta itemprop="wordCount" content="2658">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/><meta name="twitter:title" content="CLI"/>
 <meta name="twitter:description" content="Dell Technologies (Dell) Container Storage Modules (CSM) for Authorization CLI
 "/>
@@ -106,7 +106,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.a0524863f1063f9e39caf0f2eec462a0.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.b65e15c480e8955eeda16368601c289c.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -128,7 +128,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.a0524863f1063f9e39caf0f2eec462a0.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.b65e15c480e8955eeda16368601c289c.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -943,6 +943,9 @@ be piped directly to kubectl:</p>
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">type</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">Opaque</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span></code></pre></div><p>Usually, you will want to pipe the output to kubectl to apply the secret</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>karavictl generate token --tenant Alice --admin-token admintoken.yaml --addr csm-authorization.host.com <span style="color:#000;font-weight:bold">|</span> kubectl apply -f -
+</span></span></code></pre></div><p>The token is read once when the driver pods are started and is not dynamically updated. If you are applying a new token in an existing driver installation, restart the driver pods for the new token to take effect.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl -n &lt;driver-namespace&gt; rollout restart deploy/&lt;driver&gt;-controller
+</span></span><span style="display:flex;"><span>kubectl -n &lt;driver-namespace&gt; rollout restart ds/&lt;driver&gt;-node
 </span></span></code></pre></div><h3 id="karavictl-role">karavictl role</h3>
 <p>Manage roles</p>
 <h5 id="synopsis-5">Synopsis</h5>
