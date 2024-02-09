@@ -50,7 +50,7 @@ CSM for Resiliency provides the following capabilities:
 {{<table "table table-striped table-bordered table-sm">}}
 |               | PowerFlex    | Unity XT                          | PowerScale                              | PowerStore                    |
 | ------------- | :----------: | :-------------------------------: | :-------------------------------------: | :---------------------------: |
-| Storage Array | 3.6.x, 4.0.x, 4.5 | 5.1.x, 5.2.x, 5.3.0 | OneFS 9.3, 9.4, 9.5.0.5, 9.5.0.6 | 3.0, 3.2, 3.5, 3.6 |
+| Storage Array | 3.6.x, 4.0.x, 4.5 | 5.1.x, 5.2.x, 5.3.0 | OneFS 9.3, 9.4, 9.5.0.x (x >= 5) | 3.0, 3.2, 3.5, 3.6 |
 {{</table>}}
 
 ## Supported CSI Drivers
