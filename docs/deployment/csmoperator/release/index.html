@@ -102,7 +102,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.f74605b05e5505e62f783166e7f97c82.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.b65e15c480e8955eeda16368601c289c.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -124,7 +124,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.f74605b05e5505e62f783166e7f97c82.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.b65e15c480e8955eeda16368601c289c.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -703,14 +703,6 @@
 </tr>
 </thead>
 <tbody>
-<tr>
-<td>A plain driver install (no modules) will always be marked as failed in the CSM status even when it succeeds.</td>
-<td>We recommend upgrading to v1.4.2 operator for a fix; however, if all the pods are healthy, the driver should be good to use even though it is marked as failed.</td>
-</tr>
-<tr>
-<td>A standalone install of csm-application-mobility will always be marked as failed in the CSM status even when it succeeds.</td>
-<td>We recommend upgrading to v1.4.2 operator for a fix; however, if all the pods are healthy, the module should be good to use even though it is marked as failed.</td>
-</tr>
 <tr>
 <td>The images of sideCars are currently missing in the sample YAMLs in the offline bundle. As a consequence, the csm-operator is pulling them from registry.k8s.io.</td>
 <td>We recommend manually updating the images of sideCars in the sample YAML file, for example, <code>storage_csm_powerflex_v291.yaml</code>, before proceeding with the driver installation. Here is an example snippet for the sideCars section in the YAML file:</td>

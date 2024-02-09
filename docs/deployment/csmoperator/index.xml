@@ -214,14 +214,6 @@ Events
 &lt;/thead&gt;
 &lt;tbody&gt;
 &lt;tr&gt;
-&lt;td&gt;A plain driver install (no modules) will always be marked as failed in the CSM status even when it succeeds.&lt;/td&gt;
-&lt;td&gt;We recommend upgrading to v1.4.2 operator for a fix; however, if all the pods are healthy, the driver should be good to use even though it is marked as failed.&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;A standalone install of csm-application-mobility will always be marked as failed in the CSM status even when it succeeds.&lt;/td&gt;
-&lt;td&gt;We recommend upgrading to v1.4.2 operator for a fix; however, if all the pods are healthy, the module should be good to use even though it is marked as failed.&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
 &lt;td&gt;The images of sideCars are currently missing in the sample YAMLs in the offline bundle. As a consequence, the csm-operator is pulling them from registry.k8s.io.&lt;/td&gt;
 &lt;td&gt;We recommend manually updating the images of sideCars in the sample YAML file, for example, &lt;code&gt;storage_csm_powerflex_v291.yaml&lt;/code&gt;, before proceeding with the driver installation. Here is an example snippet for the sideCars section in the YAML file:&lt;/td&gt;
 &lt;/tr&gt;
