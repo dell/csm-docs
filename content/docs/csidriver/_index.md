@@ -29,7 +29,6 @@ The CSI Drivers by Dell implement an interface between [CSI](https://kubernetes-
 
 > Notes:
 > * The required OS dependencies are only for the protocol needed (e.g. if NVMe isn't the storage access protocol then nvme-cli is not required).
-> * The base OS tested by Dell Technologies are Red Hat Enterprise Linux, Red Hat CoreOS, SUSE Linux Enterprise Server.
 > * The host operating system/version being used must align with what each Dell Storage platform supports. Please visit [E-Lab Navigator](https://elabnavigator.dell.com/eln/modernHomeSSM) for specific Dell Storage platform host operating system level support matrices.
 
 ### CSI Driver Capabilities
@@ -58,7 +57,7 @@ The CSI Drivers by Dell implement an interface between [CSI](https://kubernetes-
 {{<table "table table-striped table-bordered table-sm">}}
 |               | PowerMax                                                | PowerFlex        | Unity XT                   | PowerScale                         |    PowerStore    |
 |---------------|:-------------------------------------------------------:|:----------------:|:--------------------------:|:----------------------------------:|:----------------:|
-| Storage Array | PowerMax 2500/8500 PowerMaxOS 10 (6079) , PowerMaxOS 10.0.1 (6079) , PowerMaxOS 10.1 (6079)<br> PowerMax 2000/8000 - 5978.711.xxx, 5978.479.xxx <br>Unisphere 10.0,10.0.1,10.1 |    3.6.x, 4.0.x, 4.5.x  | 5.1.x, 5.2.x, 5.3.0 | OneFS 9.3, 9.4, 9.5.0.5, 9.5.0.6 | 3.0, 3.2, 3.5     |
+| Storage Array | PowerMax 2500/8500 PowerMaxOS 10 (6079) , PowerMaxOS 10.0.1 (6079) , PowerMaxOS 10.1 (6079)<br> PowerMax 2000/8000 - 5978.711.xxx, 5978.479.xxx <br>Unisphere 10.0,10.0.1,10.1 |    3.6.x, 4.0.x, 4.5.x  | 5.1.x, 5.2.x, 5.3.0 | OneFS 9.3, 9.4, 9.5.0.x (x >= 5) | 3.0, 3.2, 3.5     |
 {{</table>}}
 
 ### Backend Storage Details
