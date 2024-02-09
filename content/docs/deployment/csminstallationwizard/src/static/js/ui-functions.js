@@ -89,7 +89,6 @@ function onArrayChange() {
 		onReplicationChange(replicationNote);
 		validateInput(validateForm, CONSTANTS);
 		onRenameSDCChange(driver, CONSTANTS);
-		hideImageRepo($("#csm-version").val());
 	});
 }
 
@@ -224,19 +223,11 @@ function onRenameSDCChange(driverName, CONSTANTS_PARAM) {
 	}
 }
 
-const hideImageRepo = (csmVersion) => {
-	if (csmVersion === "1.8.0" || csmVersion === "1.7.0"){
-		$(".image-repository").show();
-	} else {
-		$(".image-repository").hide();
-	}
-}
 
 const onCSMVersionChange = () => {
 	csmVersion = document.getElementById("csm-version").value;
 	csmVersion !== ""? loadTemplate(document.getElementById("array").value, document.getElementById("installation-type").value, document.getElementById("csm-version").value) : null;
 	displayModules(installationType, driver, CONSTANTS);
-	hideImageRepo(csmVersion);
 	onObservabilityChange();
 	onObservabilityOperatorChange();
 	onAuthorizationChange();
@@ -478,11 +469,11 @@ function displayCommands(releaseNameValue, commandTitleValue, commandNoteValue, 
 		case "1.8.0":
 			helmChartVersion = CONSTANTS.CSM_HELM_V180;
 			break;
-		case "1.9.1":
-			helmChartVersion = CONSTANTS.CSM_HELM_V191;
+		case "1.9.2":
+			helmChartVersion = CONSTANTS.CSM_HELM_V192;
 			break;
 		default:
-			helmChartVersion = CONSTANTS.CSM_HELM_V191;
+			helmChartVersion = CONSTANTS.CSM_HELM_V192;
 			break;
 	}
 	$("#command-text-area").show();
