@@ -10,10 +10,10 @@ description: Release notes for Unity XT CSI driver
 
 
 
+
 ### New Features/Changes
 
 - [#926 - [FEATURE]: Fixing the linting, formatting and vetting issues](https://github.com/dell/csm/issues/926)
-- [#1091 - [FEATURE]: CSM 1.10 release specific changes](https://github.com/dell/csm/issues/1091)
 
 ### Fixed Issues
 

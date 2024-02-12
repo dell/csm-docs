@@ -11,14 +11,15 @@ description: Release notes for PowerScale CSI driver
 
 
 
+
 ### New Features/Changes
 
 - [#926 - [FEATURE]: Fixing the linting, formatting and vetting issues](https://github.com/dell/csm/issues/926)
-- [#1091 - [FEATURE]: CSM 1.10 release specific changes](https://github.com/dell/csm/issues/1091)
 
 ### Fixed Issues
 
 - [#1081 - [BUG]: CSM driver repositories reference CSI Operator](https://github.com/dell/csm/issues/1081)
+- [#1134 - [BUG]: PowerScale : Driver failing to re-authenticate if session cookies are expired ](https://github.com/dell/csm/issues/1134)
 
 ### Known Issues
 
