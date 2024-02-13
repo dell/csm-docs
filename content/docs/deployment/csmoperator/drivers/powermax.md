@@ -309,6 +309,7 @@ Create a secret named powermax-certs in the namespace where the CSI PowerMax dri
 
 6. Execute the following command to create the PowerMax custom resource:`kubectl create -f <input_sample_file.yaml>`. The above command will deploy the CSI-PowerMax driver.
 7. The mandatory module CSI PowerMax Reverseproxy will be installed automatically with the same command.
+8. Refer https://github.com/dell/csi-powermax/tree/main/samples for the sample files.
 
 ## Other features to enable
 ### Dynamic Logging Configuration

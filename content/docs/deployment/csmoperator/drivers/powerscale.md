@@ -157,6 +157,8 @@ kubectl get csm --all-namespaces
 
 6. [Verify the CSI Driver installation](../#verifying-the-driver-installation)
 
+7. Refer https://github.com/dell/csi-powerscale/tree/main/samples for the sample files.
+
 **Note** :
 
    1. "Kubelet config dir path" is not yet configurable in case of Operator based driver installation.

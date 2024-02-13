@@ -162,6 +162,8 @@ For detailed PowerFlex installation procedure, see the _Dell PowerFlex Deploymen
     This command will deploy the CSI-PowerFlex driver in the namespace specified in the input YAML file.
 
 5.  [Verify the CSI Driver installation](../#verifying-the-driver-installation)
+
+6.  Refer https://github.com/dell/csi-powerflex/tree/main/samples for the sample files.
     
 **Note** : 
    1. Snapshotter and resizer sidecars are installed by default.
