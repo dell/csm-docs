@@ -8,13 +8,6 @@ Description: >
 
 ## Release Notes - Container Storage Modules Operator v1.4.2
 
-
-
-
-
-
-
-
 ### New Features/Changes
 
 - [#947 - [FEATURE]: Support for Kubernetes 1.28](https://github.com/dell/csm/issues/947)
@@ -33,6 +26,7 @@ Description: >
 - [#1117 - [BUG]: Operator crashes when deployed from OpenShift with OLM](https://github.com/dell/csm/issues/1117)
 - [#1120 - [BUG]: Skip Certificate Validation is not propagated to Authorization module in CSM Operator](https://github.com/dell/csm/issues/1120)
 - [#1122 - [BUG]: CSM Operator does not calculate status correctly when module is deployed with driver](https://github.com/dell/csm/issues/1122)
+- [#1103 - [BUG]: CSM Operator doesn't apply fSGroupPolicy value to CSIDriver Object](https://github.com/dell/csm/issues/1103)
 
 ### Known Issues
 | Issue | Workaround |
