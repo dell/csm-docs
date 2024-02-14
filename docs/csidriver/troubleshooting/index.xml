@@ -284,6 +284,10 @@
 &lt;td&gt;Standby controller pod is in crashloopbackoff state&lt;/td&gt;
 &lt;td&gt;Scale down the replica count of the controller pod&amp;rsquo;s deployment to 1 using &lt;code&gt;kubectl scale deployment &amp;lt;deployment_name&amp;gt; --replicas=1 -n &amp;lt;driver_namespace&amp;gt;&lt;/code&gt;&lt;/td&gt;
 &lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Driver install fails because of the incompatible helm values file specified in &lt;code&gt;dell-csi-helm-installer&lt;/code&gt; - expected: v2.9.x, found: v2.8.0.&lt;/td&gt;
+&lt;td&gt;Change driver version in each file in &lt;code&gt;dell/csi-powerscale/dell-csi-helm-installer&lt;/code&gt; from 2.8.0 to 2.9.x&lt;/td&gt;
+&lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
 
