@@ -5,7 +5,7 @@ description: Troubleshooting PowerMax Driver
 ---
 | Symptoms | Prevention, Resolution or Workaround |
 |------------|--------------|
-| Unable to reach Unisphere for PowerMax/ Unable to create volumes | Please check whether the Unisphere endpoint is stated as `https://primary-1.unisphe.re:8443`not `https://primary-1.unisphe.re:8443/` with a backslash at end in `values.yaml`| 
+| Unable to reach Unisphere for PowerMax/ Unable to create volumes | Please check whether the Unisphere endpoint is stated as `https://primary-1.unisphe.re:8443`not `https://primary-1.unisphe.re:8443/` with a front slash at end in `values.yaml`| 
 | `kubectl describe pod powermax-controller-<xyz> –n <namespace>` indicates that the driver image could not be loaded | You may need to put an insecure-registries entry in `/etc/docker/daemon.json` or log in to the docker registry |
 | `kubectl logs powermax-controller-<xyz> –n <namespace> driver` logs show that the driver cannot authenticate | Check your secret’s username and password |
 | `kubectl logs powermax-controller-<xyz> –n <namespace> driver` logs show that the driver failed to connect to the U4P because it could not verify the certificates | Check the powermax-certs secret and ensure it is not empty or it has the valid certificates|
