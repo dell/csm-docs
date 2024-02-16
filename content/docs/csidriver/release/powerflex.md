@@ -30,7 +30,7 @@ description: Release notes for PowerFlex CSI driver
 - [#1058 - [BUG]: CSI Health monitor for Node missing for CSM PowerFlex in Operator samples](https://github.com/dell/csm/issues/1058)
 - [#1061 - [BUG]: Golint is not installing with go get command](https://github.com/dell/csm/issues/1061)
 - [#1110 - [BUG]: Multi Controller defect - sidecars timeout](https://github.com/dell/csm/issues/1110)
-
+- [#1103 - [BUG]: CSM Operator doesn't apply fSGroupPolicy value to CSIDriver Object](https://github.com/dell/csm/issues/1103)
 
 ### Known Issues
 

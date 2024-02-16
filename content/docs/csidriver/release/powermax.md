@@ -32,7 +32,7 @@ description: Release notes for PowerMax CSI driver
 - [#1056 - [BUG]: Missing runtime dependencies reference in PowerMax README file.](https://github.com/dell/csm/issues/1056)
 - [#1061 - [BUG]: Golint is not installing with go get command](https://github.com/dell/csm/issues/1061)
 - [#1110 - [BUG]: Multi Controller defect - sidecars timeout](https://github.com/dell/csm/issues/1110)
-
+- [#1103 - [BUG]: CSM Operator doesn't apply fSGroupPolicy value to CSIDriver Object](https://github.com/dell/csm/issues/1103)
 
 ### Known Issues
 
