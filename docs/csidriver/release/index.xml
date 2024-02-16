@@ -45,6 +45,7 @@
 &lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1058&#34;&gt;#1058 - [BUG]: CSI Health monitor for Node missing for CSM PowerFlex in Operator samples&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1061&#34;&gt;#1061 - [BUG]: Golint is not installing with go get command&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1110&#34;&gt;#1110 - [BUG]: Multi Controller defect - sidecars timeout&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1103&#34;&gt;#1103 - [BUG]: CSM Operator doesn&amp;rsquo;t apply fSGroupPolicy value to CSIDriver Object&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;known-issues&#34;&gt;Known Issues&lt;/h3&gt;
 &lt;table&gt;
@@ -132,6 +133,7 @@
 &lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1056&#34;&gt;#1056 - [BUG]: Missing runtime dependencies reference in PowerMax README file.&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1061&#34;&gt;#1061 - [BUG]: Golint is not installing with go get command&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1110&#34;&gt;#1110 - [BUG]: Multi Controller defect - sidecars timeout&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1103&#34;&gt;#1103 - [BUG]: CSM Operator doesn&amp;rsquo;t apply fSGroupPolicy value to CSIDriver Object&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;known-issues&#34;&gt;Known Issues&lt;/h3&gt;
 &lt;table&gt;
@@ -200,6 +202,7 @@
 &lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1053&#34;&gt;#1053 - [BUG]: make gosec is erroring out - Repos PowerMax,PowerStore,PowerScale (gosec is installed)&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1061&#34;&gt;#1061 - [BUG]: Golint is not installing with go get command&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1110&#34;&gt;#1110 - [BUG]: Multi Controller defect - sidecars timeout&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1103&#34;&gt;#1103 - [BUG]: CSM Operator doesn&amp;rsquo;t apply fSGroupPolicy value to CSIDriver Object&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;known-issues&#34;&gt;Known Issues&lt;/h3&gt;
 &lt;table&gt;
@@ -278,6 +281,7 @@
 &lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1053&#34;&gt;#1053 - [BUG]: make gosec is erroring out - Repos PowerMax,PowerStore,PowerScale (gosec is installed)&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1061&#34;&gt;#1061 - [BUG]: Golint is not installing with go get command&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1108&#34;&gt;#1108 - [BUG]: Volumes failing to mount when customer using NVMeTCP on Powerstore&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1103&#34;&gt;#1103 - [BUG]: CSM Operator doesn&amp;rsquo;t apply fSGroupPolicy value to CSIDriver Object&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;known-issues&#34;&gt;Known Issues&lt;/h3&gt;
 &lt;table&gt;
@@ -356,6 +360,7 @@
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1014&#34;&gt;#1014 - [BUG]: Missing error check for os.Stat call during volume publish&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1110&#34;&gt;#1110 - [BUG]: Multi Controller defect - sidecars timeout&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1103&#34;&gt;#1103 - [BUG]: CSM Operator doesn&amp;rsquo;t apply fSGroupPolicy value to CSIDriver Object&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;known-issues&#34;&gt;Known Issues&lt;/h3&gt;
 &lt;table&gt;

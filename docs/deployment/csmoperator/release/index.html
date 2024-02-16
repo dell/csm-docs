@@ -80,7 +80,7 @@
 	
 	
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.9.1)</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.9.2)</a>
 	
 	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.8.0</a>
 	
@@ -102,7 +102,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.37b6e3e99aafedb20e54d816f3942c5a.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.5002d4b55617b18ca9417748ae738333.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -124,7 +124,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.37b6e3e99aafedb20e54d816f3942c5a.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.5002d4b55617b18ca9417748ae738333.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -615,7 +615,7 @@
 
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#release-notes---container-storage-modules-operator-v141">Release Notes - Container Storage Modules Operator v1.4.1</a>
+    <li><a href="#release-notes---container-storage-modules-operator-v142">Release Notes - Container Storage Modules Operator v1.4.2</a>
       <ul>
         <li><a href="#new-featureschanges">New Features/Changes</a></li>
         <li><a href="#fixed-issues">Fixed Issues</a></li>
@@ -674,7 +674,7 @@
 	<h1>Release notes</h1>
      
 	
-	<h2 id="release-notes---container-storage-modules-operator-v141">Release Notes - Container Storage Modules Operator v1.4.1</h2>
+	<h2 id="release-notes---container-storage-modules-operator-v142">Release Notes - Container Storage Modules Operator v1.4.2</h2>
 <h3 id="new-featureschanges">New Features/Changes</h3>
 <ul>
 <li><a href="https://github.com/dell/csm/issues/947">#947 - [FEATURE]: Support for Kubernetes 1.28</a></li>
@@ -693,6 +693,12 @@
 <li><a href="https://github.com/dell/csm/issues/1117">#1117 - [BUG]: Operator crashes when deployed from OpenShift with OLM</a></li>
 <li><a href="https://github.com/dell/csm/issues/1120">#1120 - [BUG]: Skip Certificate Validation is not propagated to Authorization module in CSM Operator</a></li>
 <li><a href="https://github.com/dell/csm/issues/1122">#1122 - [BUG]: CSM Operator does not calculate status correctly when module is deployed with driver</a></li>
+<li><a href="https://github.com/dell/csm/issues/1103">#1103 - [BUG]: CSM Operator doesn&rsquo;t apply fSGroupPolicy value to CSIDriver Object</a></li>
+<li><a href="https://github.com/dell/csm/issues/1133">#1133 - [BUG]: CSM Operator does not calculate status correctly when application-mobility is deployed by itself</a>)</li>
+<li><a href="https://github.com/dell/csm/issues/1137">#1137 - [BUG]: CSM Operator intermittently does not calculate status correctly when deploying a driver</a>)</li>
+<li><a href="https://github.com/dell/csm/issues/1143">#1143 - [BUG]: CSM Operator does not calculate status correctly when deploying the authorization proxy server</a>)</li>
+<li><a href="https://github.com/dell/csm/issues/1146">#1146 - [BUG]: CSM Operator does not calculate status correctly when deploying observability with csi-powerscale</a>)</li>
+<li><a href="https://github.com/dell/csm/issues/1147">#1147 - [BUG]: CSM Operator labels csm objects with CSMVersion 1.8.0, an old version</a>)</li>
 </ul>
 <h3 id="known-issues">Known Issues</h3>
 <table>
@@ -703,6 +709,14 @@
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>The status calculation done for the csm object associated with the Authorization Proxy Server when deployed with CSM Operator assumes that the proxy server will be deployed in the &ldquo;authorization&rdquo; namespace. If a different namespace is used, the status will stay in the failed state, even though the deployment is healthy.</td>
+<td>We recommend using the &ldquo;authorization&rdquo; namespace for the proxy server. If this is not possible, the health of the deployment can be verified by checking the status of all the pods rather than by checking the status field.</td>
+</tr>
+<tr>
+<td>The status field of a csm object as deployed by CSM Operator may, in limited cases, display a &ldquo;Failed&rdquo; status for a successful deployment.</td>
+<td>As a workaround, the deployment is still usable as long as all pods are running/healthy.</td>
+</tr>
 <tr>
 <td>The images of sideCars are currently missing in the sample YAMLs in the offline bundle. As a consequence, the csm-operator is pulling them from registry.k8s.io.</td>
 <td>We recommend manually updating the images of sideCars in the sample YAML file, for example, <code>storage_csm_powerflex_v291.yaml</code>, before proceeding with the driver installation. Here is an example snippet for the sideCars section in the YAML file:</td>
