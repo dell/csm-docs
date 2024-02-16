@@ -21,6 +21,7 @@ description: Release notes for PowerStore CSI driver
 - [#1053 - [BUG]: make gosec is erroring out - Repos PowerMax,PowerStore,PowerScale (gosec is installed)](https://github.com/dell/csm/issues/1053)
 - [#1061 - [BUG]: Golint is not installing with go get command](https://github.com/dell/csm/issues/1061)
 - [#1108 - [BUG]: Volumes failing to mount when customer using NVMeTCP on Powerstore](https://github.com/dell/csm/issues/1108)
+- [#1103 - [BUG]: CSM Operator doesn't apply fSGroupPolicy value to CSIDriver Object](https://github.com/dell/csm/issues/1103)
 
 ### Known Issues
 

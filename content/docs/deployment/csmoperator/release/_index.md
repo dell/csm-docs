@@ -6,14 +6,7 @@ Description: >
   Release notes for Dell Container Storage Modules Operator
 ---
 
-## Release Notes - Container Storage Modules Operator v1.4.1
-
-
-
-
-
-
-
+## Release Notes - Container Storage Modules Operator v1.4.2
 
 ### New Features/Changes
 
@@ -33,10 +26,18 @@ Description: >
 - [#1117 - [BUG]: Operator crashes when deployed from OpenShift with OLM](https://github.com/dell/csm/issues/1117)
 - [#1120 - [BUG]: Skip Certificate Validation is not propagated to Authorization module in CSM Operator](https://github.com/dell/csm/issues/1120)
 - [#1122 - [BUG]: CSM Operator does not calculate status correctly when module is deployed with driver](https://github.com/dell/csm/issues/1122)
+- [#1103 - [BUG]: CSM Operator doesn't apply fSGroupPolicy value to CSIDriver Object](https://github.com/dell/csm/issues/1103)
+- [#1133 - [BUG]: CSM Operator does not calculate status correctly when application-mobility is deployed by itself](https://github.com/dell/csm/issues/1133))
+- [#1137 - [BUG]: CSM Operator intermittently does not calculate status correctly when deploying a driver](https://github.com/dell/csm/issues/1137))
+- [#1143 - [BUG]: CSM Operator does not calculate status correctly when deploying the authorization proxy server](https://github.com/dell/csm/issues/1143))
+- [#1146 - [BUG]: CSM Operator does not calculate status correctly when deploying observability with csi-powerscale](https://github.com/dell/csm/issues/1146))
+- [#1147 - [BUG]: CSM Operator labels csm objects with CSMVersion 1.8.0, an old version](https://github.com/dell/csm/issues/1147))
 
 ### Known Issues
 | Issue | Workaround |
 |-------|------------|
+| The status calculation done for the csm object associated with the Authorization Proxy Server when deployed with CSM Operator assumes that the proxy server will be deployed in the "authorization" namespace. If a different namespace is used, the status will stay in the failed state, even though the deployment is healthy. | We recommend using the "authorization" namespace for the proxy server. If this is not possible, the health of the deployment can be verified by checking the status of all the pods rather than by checking the status field.|
+| The status field of a csm object as deployed by CSM Operator may, in limited cases, display a "Failed" status for a successful deployment. | As a workaround, the deployment is still usable as long as all pods are running/healthy. |
 | The images of sideCars are currently missing in the sample YAMLs in the offline bundle. As a consequence, the csm-operator is pulling them from registry.k8s.io. | We recommend manually updating the images of sideCars in the sample YAML file, for example, `storage_csm_powerflex_v291.yaml`, before proceeding with the driver installation. Here is an example snippet for the sideCars section in the YAML file:
 
   ```yaml
