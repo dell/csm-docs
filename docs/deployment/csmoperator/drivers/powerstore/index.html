@@ -18,13 +18,13 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/docs/deployment/csmoperator/drivers/powerstore/" /><meta property="article:section" content="docs" />
 
-<meta property="article:modified_time" content="2023-12-13T23:10:42+05:30" />
+<meta property="article:modified_time" content="2024-02-19T16:34:07+05:30" />
 
 <meta itemprop="name" content="PowerStore">
 <meta itemprop="description" content="Installing Dell CSI Driver for PowerStore via Dell CSM Operator
 ">
-<meta itemprop="dateModified" content="2023-12-13T23:10:42+05:30" />
-<meta itemprop="wordCount" content="750">
+<meta itemprop="dateModified" content="2024-02-19T16:34:07+05:30" />
+<meta itemprop="wordCount" content="1435">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/><meta name="twitter:title" content="PowerStore"/>
 <meta name="twitter:description" content="Installing Dell CSI Driver for PowerStore via Dell CSM Operator
 "/>
@@ -106,7 +106,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.5002d4b55617b18ca9417748ae738333.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.7dad682d16f69f57f44216c5ece5d90b.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -128,7 +128,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.5002d4b55617b18ca9417748ae738333.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.7dad682d16f69f57f44216c5ece5d90b.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -623,6 +623,12 @@
       <ul>
         <li><a href="#listing-installed-drivers-with-the-containerstoragemodule-crd">Listing installed drivers with the ContainerStorageModule CRD</a></li>
         <li><a href="#prerequisite">Prerequisite</a></li>
+        <li><a href="#fibre-channel-requirements">Fibre Channel requirements</a></li>
+        <li><a href="#set-up-the-iscsi-initiator">Set up the iSCSI Initiator</a></li>
+        <li><a href="#set-up-the-nvme-initiator">Set up the NVMe Initiator</a></li>
+        <li><a href="#linux-multipathing-requirements">Linux multipathing requirements</a></li>
+        <li><a href="#optional-volume-snapshot-requirements">(Optional) Volume Snapshot Requirements</a></li>
+        <li><a href="#optional-replication-feature-requirements">(Optional) Replication feature Requirements</a></li>
         <li><a href="#user-privileges">User Privileges</a></li>
         <li><a href="#install-driver">Install Driver</a></li>
       </ul>
@@ -690,6 +696,106 @@ To deploy the Operator, follow the instructions available <a href="../../#instal
 <p>User can query for all Dell CSI drivers using the following command:</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl get csm --all-namespaces
 </span></span></code></pre></div><h3 id="prerequisite">Prerequisite</h3>
+<h3 id="fibre-channel-requirements">Fibre Channel requirements</h3>
+<p>Dell PowerStore supports Fibre Channel communication. If you use the Fibre Channel protocol, ensure that the
+following requirement is met before you install the CSI Driver for Dell PowerStore:</p>
+<ul>
+<li>Zoning of the Host Bus Adapters (HBAs) to the Fibre Channel port must be done.</li>
+</ul>
+<h3 id="set-up-the-iscsi-initiator">Set up the iSCSI Initiator</h3>
+<p>The CSI Driver for Dell PowerStore v1.4 and higher supports iSCSI connectivity.</p>
+<p>If you use the iSCSI protocol, set up the iSCSI initiators as follows:</p>
+<ul>
+<li>Ensure that the iSCSI initiators are available on both Controller and Worker nodes.</li>
+<li>Kubernetes nodes must have access (network connectivity) to an iSCSI port on the Dell PowerStore array that
+has IP interfaces. Manually create IP routes for each node that connects to the Dell PowerStore.</li>
+<li>All Kubernetes nodes must have the <em>iscsi-initiator-utils</em> package for CentOS/RHEL or <em>open-iscsi</em> package for Ubuntu installed, and the <em>iscsid</em> service must be enabled and running.
+To do this, run the <code>systemctl enable --now iscsid</code> command.</li>
+<li>Ensure that the unique initiator name is set in <em>/etc/iscsi/initiatorname.iscsi</em>.</li>
+</ul>
+<p>For information about configuring iSCSI, see <em>Dell PowerStore documentation</em> on Dell Support.</p>
+<h3 id="set-up-the-nvme-initiator">Set up the NVMe Initiator</h3>
+<p>If you want to use the protocol, set up the NVMe initiators as follows:</p>
+<ul>
+<li>The driver requires NVMe management command-line interface (nvme-cli) to use configure, edit, view or start the NVMe client and target. The nvme-cli utility provides a command-line and interactive shell option. The NVMe CLI tool is installed in the host using the below command.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo apt install nvme-cli
+</span></span></code></pre></div><p><strong>Requirements for NVMeTCP</strong></p>
+<ul>
+<li>Modules including the nvme, nvme_core, nvme_fabrics, and nvme_tcp are required for using NVMe over Fabrics using TCP. Load the NVMe and NVMe-OF Modules using the below commands:</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>modprobe nvme
+</span></span><span style="display:flex;"><span>modprobe nvme_tcp
+</span></span></code></pre></div><ul>
+<li>The NVMe modules may not be available after a node reboot. Loading the modules at startup is recommended.</li>
+</ul>
+<p><strong>Requirements for NVMeFC</strong></p>
+<ul>
+<li>NVMeFC Zoning of the Host Bus Adapters (HBAs) to the Fibre Channel port must be done.</li>
+</ul>
+<p><em>NOTE:</em></p>
+<ul>
+<li>Do not load the nvme_tcp module for NVMeFC</li>
+</ul>
+<h3 id="linux-multipathing-requirements">Linux multipathing requirements</h3>
+<p>Dell PowerStore supports Linux multipathing. Configure Linux multipathing before installing the CSI Driver for Dell
+PowerStore.</p>
+<p>Set up Linux multipathing as follows:</p>
+<ul>
+<li>Ensure that all nodes have the <em>Device Mapper Multipathing</em> package installed.</li>
+</ul>
+<blockquote>
+<p>You can install it by running <code>yum install device-mapper-multipath</code> on CentOS or <code>apt install multipath-tools</code> on Ubuntu. This package should create a multipath configuration file located in <code>/etc/multipath.conf</code>.</p>
+</blockquote>
+<ul>
+<li>Enable multipathing using the <code>mpathconf --enable --with_multipathd y</code> command.</li>
+<li>Enable <code>user_friendly_names</code> and <code>find_multipaths</code> in the <code>multipath.conf</code> file.</li>
+<li>Ensure that the multipath command for <code>multipath.conf</code> is available on all Kubernetes nodes.</li>
+</ul>
+<h4 id="multipathd-machineconfig">multipathd <code>MachineConfig</code></h4>
+<p>If you are installing a CSI Driver which requires the installation of the Linux native Multipath software - <em>multipathd</em>, please follow the below instructions</p>
+<p>To enable multipathd on RedHat CoreOS nodes you need to prepare a working configuration encoded in base64.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>user_friendly_names yes
+</span></span><span style="display:flex;"><span>find_multipaths yes
+</span></span><span style="display:flex;"><span><span style="color:#ce5c00;font-weight:bold">}</span>
+</span></span><span style="display:flex;"><span>blacklist <span style="color:#ce5c00;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span><span style="color:#ce5c00;font-weight:bold">}</span><span style="color:#a40000">&#39;</span> <span style="color:#000;font-weight:bold">|</span> base64 -w0
+</span></span></code></pre></div><p>Use the base64 encoded string output in the following <code>MachineConfig</code> yaml file (under source section)</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">apiVersion</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">machineconfiguration.openshift.io/v1</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">kind</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">MachineConfig</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">metadata</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">workers-multipath-conf-default</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">labels</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">machineconfiguration.openshift.io/role</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">worker</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">spec</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">config</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">ignition</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">version</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#0000cf;font-weight:bold">3.2.0</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">storage</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">files</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span>- <span style="color:#204a87;font-weight:bold">contents</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">          </span><span style="color:#204a87;font-weight:bold">source</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">data:text/plain;charset=utf-8;base64,ZGVmYXVsdHMgewp1c2VyX2ZyaWVuZGx5X25hbWVzIHllcwpmaW5kX211bHRpcGF0aHMgeWVzCn0KCmJsYWNrbGlzdCB7Cn0K</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">          </span><span style="color:#204a87;font-weight:bold">verification</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>{}<span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">filesystem</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">root</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">mode</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#0000cf;font-weight:bold">400</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">path</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">/etc/multipath.conf</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span></code></pre></div><p>After deploying this<code>MachineConfig</code> object, CoreOS will start multipath service automatically.
+Alternatively, you can check the status of the multipath service by entering the following command in each worker nodes.
+<code>sudo multipath -ll</code></p>
+<p>If the above command is not successful, ensure that the /etc/multipath.conf file is present and configured properly. Once the file has been configured correctly, enable the multipath service by running the following command:
+<code>sudo /sbin/mpathconf –-enable --with_multipathd y</code></p>
+<p>Finally, you have to restart the service by providing the command
+<code>sudo systemctl restart multipathd</code></p>
+<p>For additional information refer to official documentation of the multipath configuration.</p>
+<h3 id="optional-volume-snapshot-requirements">(Optional) Volume Snapshot Requirements</h3>
+<p>For detailed snapshot setup procedure, <a href="../../../../snapshots/#optional-volume-snapshot-requirements">click here.</a></p>
+<h3 id="optional-replication-feature-requirements">(Optional) Replication feature Requirements</h3>
+<p>Applicable only if you decided to enable the Replication feature in <code>sample.yaml</code></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">replication</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">enabled</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span></code></pre></div><h4 id="replication-crds">Replication CRD&rsquo;s</h4>
+<p>The CRDs for replication can be obtained and installed from the csm-replication project on Github. Use <code>csm-replication/deploy/replicationcrds.all.yaml</code> located in csm-replication git repo for the installation.</p>
+<p>CRDs should be configured during replication prepare stage with repctl as described in <a href="../../../../replication/deployment/install-repctl">install-repctl</a></p>
 <ol>
 <li>
 <p>Create namespace.
