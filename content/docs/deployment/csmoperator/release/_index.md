@@ -17,6 +17,7 @@ Description: >
 
 
 
+
 ### New Features/Changes
 
 - [#926 - [FEATURE]: Fixing the linting, formatting and vetting issues](https://github.com/dell/csm/issues/926)
@@ -24,7 +25,6 @@ Description: >
 ### Fixed Issues
 
 - [#1094 - [BUG]: CSM Operator offline install powerflex csi driver sidecar trying to pull from registry.k8s.io](https://github.com/dell/csm/issues/1094)
-- [#1103 - [BUG]: CSM Operator doesn't apply `fSGroupPolicy` value to `CSIDriver` Object](https://github.com/dell/csm/issues/1103)
 
 ### Known Issues
 There are no known issues in this release.
