@@ -23,7 +23,7 @@
       <description>
         
         
-        &lt;p&gt;The &lt;a href=&#34;./src/index.html&#34;&gt;Dell Container Storage Modules Installation Wizard&lt;/a&gt; is a webpage that generates a manifest file for installing Dell CSI Drivers and its supported CSM Modules, based on input from the user. It generates a single manifest file to install both Dell CSI Drivers and its supported CSM Modules, thereby eliminating the need to download individual Helm charts for drivers and modules. The user can enable or disable the necessary modules through the UI, and a manifest file is generated accordingly without manually editing the helm charts.&lt;/p&gt;
+        &lt;p&gt;The &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v1/deployment/csminstallationwizard/src/&#34;&gt;Dell Container Storage Modules Installation Wizard&lt;/a&gt; is a webpage that generates a manifest file for installing Dell CSI Drivers and its supported CSM Modules, based on input from the user. It generates a single manifest file to install both Dell CSI Drivers and its supported CSM Modules, thereby eliminating the need to download individual Helm charts for drivers and modules. The user can enable or disable the necessary modules through the UI, and a manifest file is generated accordingly without manually editing the helm charts.&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;NOTE: The CSM Installation Wizard supports Helm and Operator based manifest file generation.&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -128,7 +128,7 @@
 &lt;/table&gt;
 &lt;h2 id=&#34;installation&#34;&gt;Installation&lt;/h2&gt;
 &lt;ol&gt;
-&lt;li&gt;Open the &lt;a href=&#34;./src/index.html&#34;&gt;CSM Installation Wizard&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;Open the &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v1/deployment/csminstallationwizard/src/&#34;&gt;CSM Installation Wizard&lt;/a&gt;.&lt;/li&gt;
 &lt;li&gt;Select the &lt;code&gt;Installation Type&lt;/code&gt; as &lt;code&gt;Helm&lt;/code&gt;/&lt;code&gt;Operator&lt;/code&gt;.&lt;/li&gt;
 &lt;li&gt;Select the &lt;code&gt;Array&lt;/code&gt;.&lt;/li&gt;
 &lt;li&gt;Enter the &lt;code&gt;Image Repository&lt;/code&gt;. The default value is &lt;code&gt;dellemc&lt;/code&gt;.&lt;/li&gt;
@@ -162,7 +162,7 @@ helm repo update
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;blockquote&gt;
-&lt;p&gt;NOTE: The CSM Installation Wizard generates &lt;code&gt;values.yaml&lt;/code&gt; with the minimal inputs required to install the CSM. To configure additional parameters in values.yaml, you can follow the steps outlined in &lt;a href=&#34;../../csidriver/installation/helm/powerstore/#install-the-driver&#34;&gt;PowerStore&lt;/a&gt;, &lt;a href=&#34;../../csidriver/installation/helm/powermax/#install-the-driver&#34;&gt;PowerMax&lt;/a&gt;, &lt;a href=&#34;../../csidriver/installation/helm/isilon/#install-the-driver&#34;&gt;PowerScale&lt;/a&gt;, &lt;a href=&#34;../../csidriver/installation/helm/powerflex/#install-the-driver&#34;&gt;PowerFlex&lt;/a&gt;, &lt;a href=&#34;../../csidriver/installation/helm/unity/#install-csi-driver&#34;&gt;Unity XT&lt;/a&gt;, &lt;a href=&#34;../../observability/&#34;&gt;Observability&lt;/a&gt;, &lt;a href=&#34;../../replication/&#34;&gt;Replication&lt;/a&gt;, &lt;a href=&#34;../../resiliency/&#34;&gt;Resiliency&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;NOTE: The CSM Installation Wizard generates &lt;code&gt;values.yaml&lt;/code&gt; with the minimal inputs required to install the CSM. To configure additional parameters in values.yaml, you can follow the steps outlined in &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v1/csidriver/installation/helm/powerstore/#install-the-driver&#34;&gt;PowerStore&lt;/a&gt;, &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v1/csidriver/installation/helm/powermax/#install-the-driver&#34;&gt;PowerMax&lt;/a&gt;, &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v1/csidriver/installation/helm/isilon/#install-the-driver&#34;&gt;PowerScale&lt;/a&gt;, &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v1/csidriver/installation/helm/powerflex/#install-the-driver&#34;&gt;PowerFlex&lt;/a&gt;, &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v1/csidriver/installation/helm/unity/#install-csi-driver&#34;&gt;Unity XT&lt;/a&gt;, &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v1/observability/&#34;&gt;Observability&lt;/a&gt;, &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v1/replication/&#34;&gt;Replication&lt;/a&gt;, &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v1/resiliency/&#34;&gt;Resiliency&lt;/a&gt;.&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;ol start=&#34;4&#34;&gt;
 &lt;li&gt;
@@ -171,16 +171,16 @@ helm repo update
 `kubectl patch secret vxflexos-config -n vxflexos -p &amp;#34;{\&amp;#34;data\&amp;#34;: { \&amp;#34;MDM\&amp;#34;: \&amp;#34;&amp;lt;GENERATED_BASE64&amp;gt;\&amp;#34;}}&amp;#34;`
 &lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;If Observability is checked in the wizard, refer to &lt;a href=&#34;../../observability/deployment/#post-installation-dependencies&#34;&gt;Observability&lt;/a&gt; to export metrics to Prometheus and load the Grafana dashboards.&lt;/p&gt;
+&lt;p&gt;If Observability is checked in the wizard, refer to &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v1/observability/deployment/#post-installation-dependencies&#34;&gt;Observability&lt;/a&gt; to export metrics to Prometheus and load the Grafana dashboards.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;If Authorization is checked in the wizard, only the sidecar is enabled. Refer to &lt;a href=&#34;../../authorization/deployment/helm/&#34;&gt;Authorization&lt;/a&gt; to install and configure the CSM Authorization Proxy Server.&lt;/p&gt;
+&lt;p&gt;If Authorization is checked in the wizard, only the sidecar is enabled. Refer to &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v1/authorization/deployment/helm/&#34;&gt;Authorization&lt;/a&gt; to install and configure the CSM Authorization Proxy Server.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;If Replication is checked in the wizard, refer to &lt;a href=&#34;../../replication/deployment/&#34;&gt;Replication&lt;/a&gt; on configuring communication between Kubernetes clusters.&lt;/p&gt;
+&lt;p&gt;If Replication is checked in the wizard, refer to &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v1/replication/deployment/&#34;&gt;Replication&lt;/a&gt; on configuring communication between Kubernetes clusters.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;If your Kubernetes distribution doesn&amp;rsquo;t have the Volume Snapshot feature enabled, refer to &lt;a href=&#34;../../snapshots&#34;&gt;this section&lt;/a&gt; to install the Volume Snapshot CRDs and the default snapshot controller.&lt;/p&gt;
+&lt;p&gt;If your Kubernetes distribution doesn&amp;rsquo;t have the Volume Snapshot feature enabled, refer to &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v1/snapshots/&#34;&gt;this section&lt;/a&gt; to install the Volume Snapshot CRDs and the default snapshot controller.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Install the Helm chart.&lt;/p&gt;
@@ -203,17 +203,17 @@ Example: helm install powerstore dell/container-storage-modules -n csi-powerstor
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;blockquote&gt;
-&lt;p&gt;NOTE: The CSM Installation Wizard generates &lt;code&gt;values.yaml&lt;/code&gt; with the minimal inputs required to install the CSM. To configure additional parameters in values.yaml, you can follow the steps outlined in &lt;a href=&#34;../csmoperator/drivers/powerstore&#34;&gt;PowerStore&lt;/a&gt;, &lt;a href=&#34;../csmoperator/drivers/powermax&#34;&gt;PowerMax&lt;/a&gt;, &lt;a href=&#34;../csmoperator/drivers/powerscale&#34;&gt;PowerScale&lt;/a&gt;, &lt;a href=&#34;../csmoperator/modules/resiliency&#34;&gt;Resiliency&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;NOTE: The CSM Installation Wizard generates &lt;code&gt;values.yaml&lt;/code&gt; with the minimal inputs required to install the CSM. To configure additional parameters in values.yaml, you can follow the steps outlined in &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v1/deployment/csmoperator/drivers/powerstore/&#34;&gt;PowerStore&lt;/a&gt;, &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v1/deployment/csmoperator/drivers/powermax/&#34;&gt;PowerMax&lt;/a&gt;, &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v1/deployment/csmoperator/drivers/powerscale/&#34;&gt;PowerScale&lt;/a&gt;, &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v1/deployment/csmoperator/modules/resiliency/&#34;&gt;Resiliency&lt;/a&gt;.&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;ol start=&#34;3&#34;&gt;
 &lt;li&gt;
-&lt;p&gt;If Observability is checked in the wizard, refer to &lt;a href=&#34;../csmoperator/modules/observability&#34;&gt;Observability&lt;/a&gt; to export metrics to Prometheus and load the Grafana dashboards.&lt;/p&gt;
+&lt;p&gt;If Observability is checked in the wizard, refer to &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v1/deployment/csmoperator/modules/observability/&#34;&gt;Observability&lt;/a&gt; to export metrics to Prometheus and load the Grafana dashboards.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;If Authorization is checked in the wizard, only the sidecar is enabled. Refer to &lt;a href=&#34;../csmoperator/modules/authorization&#34;&gt;Authorization&lt;/a&gt; to install and configure the CSM Authorization Proxy Server.&lt;/p&gt;
+&lt;p&gt;If Authorization is checked in the wizard, only the sidecar is enabled. Refer to &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v1/deployment/csmoperator/modules/authorization/&#34;&gt;Authorization&lt;/a&gt; to install and configure the CSM Authorization Proxy Server.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;If Replication is checked in the wizard, refer to &lt;a href=&#34;../csmoperator/modules/replication&#34;&gt;Replication&lt;/a&gt; for the necessary prerequisites required for this module.&lt;/p&gt;
+&lt;p&gt;If Replication is checked in the wizard, refer to &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v1/deployment/csmoperator/modules/replication/&#34;&gt;Replication&lt;/a&gt; for the necessary prerequisites required for this module.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Install the Operator.&lt;/p&gt;
@@ -393,7 +393,7 @@ Example: helm install powerstore dell/container-storage-modules -n csi-powerstor
 &lt;/blockquote&gt;
 &lt;h2 id=&#34;installation&#34;&gt;Installation&lt;/h2&gt;
 &lt;p&gt;Dell CSM Operator can be installed manually or via Operator Hub.&lt;/p&gt;
-&lt;p&gt;Once installed you will be able to deploy &lt;a href=&#34;drivers&#34;&gt;drivers&lt;/a&gt; and &lt;a href=&#34;modules&#34;&gt;modules&lt;/a&gt; from the Operator.&lt;/p&gt;
+&lt;p&gt;Once installed you will be able to deploy &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v1/deployment/csmoperator/drivers/&#34;&gt;drivers&lt;/a&gt; and &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v1/deployment/csmoperator/modules/&#34;&gt;modules&lt;/a&gt; from the Operator.&lt;/p&gt;
 &lt;h3 id=&#34;openshift-installation-via-operator-hub&#34;&gt;OpenShift Installation via Operator Hub&lt;/h3&gt;
 &lt;p&gt;&lt;code&gt;dell-csm-operator&lt;/code&gt; can be installed via Operator Hub on upstream Kubernetes clusters &amp;amp; Red Hat OpenShift Clusters.&lt;/p&gt;
 &lt;p&gt;The installation process involves the creation of a &lt;code&gt;Subscription&lt;/code&gt; object either via the &lt;em&gt;OperatorHub&lt;/em&gt; UI or using &lt;code&gt;kubectl/oc&lt;/code&gt;. While creating the &lt;code&gt;Subscription&lt;/code&gt; you can set the Approval strategy for the &lt;code&gt;InstallPlan&lt;/code&gt; for the operator to:&lt;/p&gt;
@@ -401,13 +401,13 @@ Example: helm install powerstore dell/container-storage-modules -n csi-powerstor
 &lt;li&gt;&lt;em&gt;Automatic&lt;/em&gt; - If you want the operator to be automatically installed or upgraded (once an upgrade is available).&lt;/li&gt;
 &lt;li&gt;&lt;em&gt;Manual&lt;/em&gt; - If you want a cluster administrator to manually review and approve the &lt;code&gt;InstallPlan&lt;/code&gt; for installation/upgrades.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;&lt;img src=&#34;operator_hub_install.gif&#34; alt=&#34;OpenShit Operator Hub CSM install&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;OpenShit Operator Hub CSM install&#34; src=&#34;https://dell.github.io/csm-docs/csm-docs/v1/deployment/csmoperator/operator_hub_install.gif&#34;&gt;&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;NOTE: Dell CSM Operator is distributed as both &lt;code&gt;Certified&lt;/code&gt; &amp;amp; &lt;code&gt;Community&lt;/code&gt; editions. Both editions have the same codebase and are supported by Dell Technologies, the only difference is that the &lt;code&gt;Certified&lt;/code&gt; version is validated by RedHat. The &lt;code&gt;Certified&lt;/code&gt; version is often released couple of days/weeks after the &lt;code&gt;Community&lt;/code&gt; version.&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;h3 id=&#34;manual-installation-on-a-cluster-without-olm&#34;&gt;Manual Installation on a cluster without OLM&lt;/h3&gt;
 &lt;ol&gt;
-&lt;li&gt;Install volume snapshot CRDs. For detailed snapshot setup procedure, &lt;a href=&#34;../../snapshots/#volume-snapshot-feature&#34;&gt;click here&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;Install volume snapshot CRDs. For detailed snapshot setup procedure, &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v1/snapshots/#volume-snapshot-feature&#34;&gt;click here&lt;/a&gt;.&lt;/li&gt;
 &lt;li&gt;Clone and checkout the required csm-operator version using&lt;/li&gt;
 &lt;/ol&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;git clone -b v1.3.0 https://github.com/dell/csm-operator.git
@@ -766,7 +766,7 @@ The following notes explain some of the general items to take care of.&lt;/li&gt
 &lt;p&gt;Each CSI Driver and CSM Module installation is represented by a Custom Resource.&lt;/p&gt;
 &lt;p&gt;The specification for the Custom Resource is the same for all the drivers.Below is a list of all the mandatory and optional fields in the Custom Resource specification&lt;/p&gt;
 &lt;h4 id=&#34;mandatory-fields&#34;&gt;Mandatory fields&lt;/h4&gt;
-&lt;p&gt;&lt;strong&gt;configVersion&lt;/strong&gt; - Configuration version - refer &lt;a href=&#34;#supported-csi-drivers&#34;&gt;here&lt;/a&gt; for appropriate config version.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;configVersion&lt;/strong&gt; - Configuration version - refer &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v1/deployment/csmoperator/#supported-csi-drivers&#34;&gt;here&lt;/a&gt; for appropriate config version.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;replicas&lt;/strong&gt;  - Number of replicas for controller plugin - must be set to 1 for all drivers.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;dnsPolicy&lt;/strong&gt; - Determines the dnsPolicy for the node daemonset. Accepted values are &lt;code&gt;Default&lt;/code&gt;, &lt;code&gt;ClusterFirst&lt;/code&gt;, &lt;code&gt;ClusterFirstWithHostNet&lt;/code&gt;, &lt;code&gt;None&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;common&lt;/strong&gt; - This field is mandatory and is used to specify common properties for both controller and the node plugin.&lt;/p&gt;

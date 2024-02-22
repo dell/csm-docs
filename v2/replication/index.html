@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="generator" content="Hugo 0.122.0">
+<meta name="generator" content="Hugo 0.123.1">
 <link rel="alternate" type="application/rss&#43;xml" href="https://dell.github.io/csm-docs/v2/replication/index.xml">
 <meta name="robots" content="index, follow">
 
@@ -102,7 +102,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.7dad682d16f69f57f44216c5ece5d90b.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.b2461058d7fc1f7ffea2f9edd5cdfce8.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -124,7 +124,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.7dad682d16f69f57f44216c5ece5d90b.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.b2461058d7fc1f7ffea2f9edd5cdfce8.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -143,7 +143,9 @@
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv2deploymentcsminstallationwizard-li">
   <a href="/csm-docs/v2/deployment/csminstallationwizard/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv2deploymentcsminstallationwizard"><span class="">CSM Installation Wizard</span></a>
   <ul class="ul-3 foldable">
-    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2deploymentcsminstallationwizardrelease_notes-li">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2deploymentcsminstallationwizardsrc-li">
+  <a href="/csm-docs/v2/deployment/csminstallationwizard/src/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2deploymentcsminstallationwizardsrc"><span class=""></span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2deploymentcsminstallationwizardrelease_notes-li">
   <a href="/csm-docs/v2/deployment/csminstallationwizard/release_notes/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2deploymentcsminstallationwizardrelease_notes"><span class="">Release Notes</span></a>
 </li>
   </ul>
@@ -623,22 +625,6 @@
             
 
 	
-		
-
-
-
-  
-  
-
-	
-		
-
-
-
-  
-  
-
-	
 
           </aside>
           <main class="col-12 col-md-9 col-xl-8 pl-md-5" role="main">
@@ -661,14 +647,6 @@
   <div class="lead">Dell Container Storage Modules (CSM) for Replication</div>
 	<header class="article-meta">
 		
-
-  
-    
-
-
-  
-    
-
 
   
 
@@ -894,9 +872,9 @@ applications in case of both planned and unplanned migration.</p>
 <li>Pair of Kubernetes Clusters</li>
 <li>Pair of replication enabled Storage classes</li>
 <li>Pair of PersistentVolumes representing the replicated pair on the storage array</li>
-<li>Pair of <a href="architecture/#dellcsireplicationgroup">DellCSIReplicationGroup</a> objects representing the replicated protection groups on the storage array</li>
+<li>Pair of <a href="/csm-docs/v2/replication/architecture/#dellcsireplicationgroup">DellCSIReplicationGroup</a> objects representing the replicated protection groups on the storage array</li>
 </ol>
-<p>You can also use a single stretched Kubernetes cluster for protecting your applications. Even in this <a href="cluster-topologies">topology</a>, rest of
+<p>You can also use a single stretched Kubernetes cluster for protecting your applications. Even in this <a href="/csm-docs/v2/replication/cluster-topologies/">topology</a>, rest of
 the objects still exist in pairs.</p>
 <h3 id="what-it-does-not-do">What it does not do</h3>
 <ul>
@@ -928,7 +906,7 @@ the objects still exist in pairs.</p>
 <li>A <code>DellCSIReplicationGroup</code> object is created in the cluster representing the protection group on the storage array</li>
 <li>A replica of the <code>PersistentVolume</code> &amp; <code>DellCSIReplicationGroup</code> is created</li>
 </ol>
-<p>You can refer this <a href="architecture">page</a> for more details about the architecture.</p>
+<p>You can refer this <a href="/csm-docs/v2/replication/architecture/">page</a> for more details about the architecture.</p>
 <p>Once the <code>DellCSIReplicationGroup</code> &amp; <code>PersistentVolume</code> objects have been replicated across clusters (or within the same cluster), you
 can exercise the general Disaster Recovery workflows -</p>
 <ol>

@@ -65,7 +65,7 @@
         
 
 &lt;div class=&#34;pageinfo pageinfo-primary&#34;&gt;
-&lt;p&gt;The Dell CSI Operator is no longer actively maintained or supported. Dell CSI Operator has been replaced with &lt;a href=&#34;https://dell.github.io/csm-docs/docs/deployment/csmoperator/&#34;&gt;Dell CSM Operator&lt;/a&gt;. If you are currently using Dell CSI Operator, refer to the &lt;a href=&#34;operator_migration/&#34;&gt;operator migration documentation&lt;/a&gt; to migrate from Dell CSI Operator to Dell CSM Operator.&lt;/p&gt;
+&lt;p&gt;The Dell CSI Operator is no longer actively maintained or supported. Dell CSI Operator has been replaced with &lt;a href=&#34;https://dell.github.io/csm-docs/docs/deployment/csmoperator/&#34;&gt;Dell CSM Operator&lt;/a&gt;. If you are currently using Dell CSI Operator, refer to the &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/docs/csidriver/installation/operator/operator_migration/&#34;&gt;operator migration documentation&lt;/a&gt; to migrate from Dell CSI Operator to Dell CSM Operator.&lt;/p&gt;
 
 &lt;/div&gt;
 
@@ -95,7 +95,7 @@
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm-operator&#34;&gt;Dell CSM Operator&lt;/a&gt;
 &lt;ul&gt;
-&lt;li&gt;Directions for offline installation can be found &lt;a href=&#34;../../../deployment/csmoperator/#building-an-offline-bundle&#34;&gt;here&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;Directions for offline installation can be found &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/docs/deployment/csmoperator/#building-an-offline-bundle&#34;&gt;here&lt;/a&gt;.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
@@ -304,7 +304,7 @@ Loaded image: registry.k8s.io/sig-storage/csi-snapshotter:v6.2.2
 *
 * Complete
 &lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;perform-either-a-helm-installation-or-operator-installation&#34;&gt;Perform either a Helm installation or Operator installation&lt;/h3&gt;
-&lt;p&gt;Now that the required images are available and the Helm Charts/Operator configuration updated, you can proceed by following the usual installation procedure as documented either via &lt;a href=&#34;../helm&#34;&gt;Helm&lt;/a&gt; or &lt;a href=&#34;../../../deployment/csmoperator/#installation&#34;&gt;Operator&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Now that the required images are available and the Helm Charts/Operator configuration updated, you can proceed by following the usual installation procedure as documented either via &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/docs/csidriver/installation/helm/&#34;&gt;Helm&lt;/a&gt; or &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/docs/deployment/csmoperator/#installation&#34;&gt;Operator&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;NOTES:&lt;/em&gt;&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;Offline bundle installation is only supported with manual installs i.e. without using Operator Lifecycle Manager.&lt;/li&gt;

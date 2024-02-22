@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="generator" content="Hugo 0.122.0">
+<meta name="generator" content="Hugo 0.123.1">
 <meta name="robots" content="index, follow">
 
 <link rel="shortcut icon" href="/favicons/favicon.ico" >
@@ -106,7 +106,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.7dad682d16f69f57f44216c5ece5d90b.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.b2461058d7fc1f7ffea2f9edd5cdfce8.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -128,7 +128,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.7dad682d16f69f57f44216c5ece5d90b.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.b2461058d7fc1f7ffea2f9edd5cdfce8.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -149,6 +149,8 @@
   <ul class="ul-3 foldable">
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymentcsminstallationwizardrelease-li">
   <a href="/csm-docs/docs/deployment/csminstallationwizard/release/" title="Release Notes" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsdeploymentcsminstallationwizardrelease"><span class="">Release notes</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymentcsminstallationwizardsrc-li">
+  <a href="/csm-docs/docs/deployment/csminstallationwizard/src/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsdeploymentcsminstallationwizardsrc"><span class=""></span></a>
 </li>
   </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsdocsdeploymentcsmoperator-li">
@@ -634,22 +636,6 @@
             
 
 	
-		
-
-
-
-  
-  
-
-	
-		
-
-
-
-  
-  
-
-	
 
           </aside>
           <main class="col-12 col-md-9 col-xl-8 pl-md-5" role="main">
@@ -682,7 +668,7 @@
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span> ./repctl --rg rg-id failover --target target-cluster-name
 </span></span></code></pre></div><p>b. Execute &ldquo;reprotect&rdquo; action on selected ReplicationGroup which will resume the replication from new &ldquo;source&rdquo;</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span> ./repctl --rg rg-id reprotect --at new-source-cluster-name
-</span></span></code></pre></div><p><img src="../state_changes1.png" alt="state_changes1"></p>
+</span></span></code></pre></div><p><img alt="state_changes1" src="../state_changes1.png"></p>
 <h3 id="unplanned-migration-to-the-target-clusterarray">Unplanned Migration to the target cluster/array</h3>
 <p>This scenario is the typical choice when a site goes down:</p>
 <p>a. Execute &ldquo;failover&rdquo; action on selected ReplicationGroup using the cluster name</p>
@@ -694,7 +680,7 @@
 </blockquote>
 <p>c. Execute &ldquo;reprotect&rdquo; action on selected ReplicationGroup which will resume the replication.</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span> ./repctl --rg rg-id reprotect --at new-source-cluster-name
-</span></span></code></pre></div><p><img src="../state_changes2.png" alt="state_changes2"></p>
+</span></span></code></pre></div><p><img alt="state_changes2" src="../state_changes2.png"></p>
 <blockquote>
 <p><em><strong>NOTE</strong></em>: When users do Failover and Failback, the tests pods on the source cluster may go &ldquo;CrashLoopOff&rdquo; state since it will try to remount the same volume which is already mounted. To get around this problem, bring down the number of replicas to 0 and then after that is done, bring it up to 1.</p>
 </blockquote>

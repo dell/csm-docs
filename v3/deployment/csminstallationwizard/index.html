@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="generator" content="Hugo 0.122.0">
+<meta name="generator" content="Hugo 0.123.1">
 <link rel="alternate" type="application/rss&#43;xml" href="https://dell.github.io/csm-docs/v3/deployment/csminstallationwizard/index.xml">
 <meta name="robots" content="index, follow">
 
@@ -98,7 +98,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.7dad682d16f69f57f44216c5ece5d90b.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.b2461058d7fc1f7ffea2f9edd5cdfce8.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -120,7 +120,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.7dad682d16f69f57f44216c5ece5d90b.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.b2461058d7fc1f7ffea2f9edd5cdfce8.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -136,8 +136,13 @@
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id="m-csm-docsv3deployment-li">
   <a href="/csm-docs/v3/deployment/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3deployment"><span class="">Deployment</span></a>
   <ul class="ul-2 foldable">
-    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child active-path" id="m-csm-docsv3deploymentcsminstallationwizard-li">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id="m-csm-docsv3deploymentcsminstallationwizard-li">
   <a href="/csm-docs/v3/deployment/csminstallationwizard/" class="align-left pl-0 active td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3deploymentcsminstallationwizard"><span class="td-sidebar-nav-active-item">CSM Installation Wizard</span></a>
+  <ul class="ul-3 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsv3deploymentcsminstallationwizardsrc-li">
+  <a href="/csm-docs/v3/deployment/csminstallationwizard/src/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3deploymentcsminstallationwizardsrc"><span class=""></span></a>
+</li>
+  </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-csm-docsv3deploymentcsmoperator-li">
   <a href="/csm-docs/v3/deployment/csmoperator/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3deploymentcsmoperator"><span class="">CSM Operator</span></a>
   <ul class="ul-3 foldable">
@@ -600,22 +605,6 @@
             
 
 	
-		
-
-
-
-  
-  
-
-	
-		
-
-
-
-  
-  
-
-	
 
           </aside>
           <main class="col-12 col-md-9 col-xl-8 pl-md-5" role="main">
@@ -643,18 +632,10 @@
 		
 
   
-    
-
-
-  
-    
-
-
-  
 
 		
 	</header>
-	<p>The <a href="./src/index.html">Dell Container Storage Modules Installation Wizard</a> is a webpage that generates a manifest file for installing Dell CSI Drivers and its supported CSM Modules, based on input from the user. It generates a single manifest file to install both Dell CSI Drivers and its supported CSM Modules, thereby eliminating the need to download individual Helm charts for drivers and modules. The user can enable or disable the necessary modules through the UI, and a manifest file is generated accordingly without manually editing the helm charts.</p>
+	<p>The <a href="/csm-docs/v3/deployment/csminstallationwizard/src/">Dell Container Storage Modules Installation Wizard</a> is a webpage that generates a manifest file for installing Dell CSI Drivers and its supported CSM Modules, based on input from the user. It generates a single manifest file to install both Dell CSI Drivers and its supported CSM Modules, thereby eliminating the need to download individual Helm charts for drivers and modules. The user can enable or disable the necessary modules through the UI, and a manifest file is generated accordingly without manually editing the helm charts.</p>
 <blockquote>
 <p>NOTE: The CSM Installation Wizard currently supports Helm based manifest file generation only.</p>
 </blockquote>
@@ -706,7 +687,7 @@
 </table>
 <h2 id="installation">Installation</h2>
 <ol>
-<li>Open the <a href="./src/index.html">CSM Installation Wizard</a>.</li>
+<li>Open the <a href="/csm-docs/v3/deployment/csminstallationwizard/src/">CSM Installation Wizard</a>.</li>
 <li>Select the <code>Installation Type</code> as <code>Helm</code>.</li>
 <li>Select the <code>Array</code>.</li>
 <li>Enter the <code>Image Repository</code>. The default value is <code>dellemc</code>.</li>
@@ -743,10 +724,10 @@ helm repo update
 <p>Look over all the fields in the generated <code>values.yaml</code> and fill in/adjust any as needed.</p>
 </li>
 <li>
-<p>For the Observability module, please refer <a href="../../observability/deployment/#post-installation-dependencies">Observability</a> to install the post installation dependencies.</p>
+<p>For the Observability module, please refer <a href="/csm-docs/v3/observability/deployment/#post-installation-dependencies">Observability</a> to install the post installation dependencies.</p>
 </li>
 <li>
-<p>If Authorization is enabled , please refer to <a href="../../authorization/deployment/helm/">Authorization</a> for the installation and configuration of the Proxy Server.</p>
+<p>If Authorization is enabled , please refer to <a href="/csm-docs/v3/authorization/deployment/helm/">Authorization</a> for the installation and configuration of the Proxy Server.</p>
 </li>
 </ol>
 <blockquote>
@@ -755,11 +736,11 @@ helm repo update
 </blockquote>
 </blockquote>
 <ol start="6">
-<li>If the Volume Snapshot feature is enabled, please refer to <a href="../../csidriver/installation/helm/powerstore/#optional-volume-snapshot-requirements">Volume Snapshot for PowerStore</a> and <a href="../../csidriver/installation/helm/powermax/#optional-volume-snapshot-requirements">Volume Snapshot for PowerMax</a> to install the Volume Snapshot CRDs and the default snapshot controller.</li>
+<li>If the Volume Snapshot feature is enabled, please refer to <a href="/csm-docs/v3/csidriver/installation/helm/powerstore/#optional-volume-snapshot-requirements">Volume Snapshot for PowerStore</a> and <a href="/csm-docs/v3/csidriver/installation/helm/powermax/#optional-volume-snapshot-requirements">Volume Snapshot for PowerMax</a> to install the Volume Snapshot CRDs and the default snapshot controller.</li>
 </ol>
 <blockquote>
 <blockquote>
-<p>NOTE: The CSM Installation Wizard generates values.yaml with the minimal inputs required to install the CSM. To configure additional parameters in values.yaml, please follow the steps outlined in <a href="../../csidriver/installation/helm/powerstore/#install-the-driver">PowerStore</a>, <a href="../../csidriver/installation/helm/powermax/#install-the-driver">PowerMax</a>, <a href="../../observability/">Observability</a>, <a href="../../replication/">Replication</a>, <a href="../../resiliency/">Resiliency</a>, and <a href="../../applicationmobility/">Application Mobility</a>.</p>
+<p>NOTE: The CSM Installation Wizard generates values.yaml with the minimal inputs required to install the CSM. To configure additional parameters in values.yaml, please follow the steps outlined in <a href="/csm-docs/v3/csidriver/installation/helm/powerstore/#install-the-driver">PowerStore</a>, <a href="/csm-docs/v3/csidriver/installation/helm/powermax/#install-the-driver">PowerMax</a>, <a href="/csm-docs/v3/observability/">Observability</a>, <a href="/csm-docs/v3/replication/">Replication</a>, <a href="/csm-docs/v3/resiliency/">Resiliency</a>, and <a href="/csm-docs/v3/applicationmobility/">Application Mobility</a>.</p>
 </blockquote>
 </blockquote>
 <ol start="7">
@@ -780,6 +761,16 @@ Example: helm install powerstore dell/container-storage-modules -f values.yaml
     
     
     
+    <hr class="panel-line">
+        
+            
+            <div class="entry">
+                <h5>
+                    <a href="/csm-docs/v3/deployment/csminstallationwizard/src/"></a>
+                </h5>
+                <p></p>
+            </div>
+        
     
 </div>
 

@@ -25,7 +25,7 @@
         
         &lt;h2 id=&#34;installing-csi-driver-for-powerflex-via-dell-csm-operator&#34;&gt;Installing CSI Driver for PowerFlex via Dell CSM Operator&lt;/h2&gt;
 &lt;p&gt;The CSI Driver for Dell PowerFlex can be installed via the Dell CSM Operator.
-To deploy the Operator, follow the instructions available &lt;a href=&#34;../../#installation&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+To deploy the Operator, follow the instructions available &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v1/deployment/#installation&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Note that the deployment of the driver using the operator does not use any Helm charts and the installation and configuration parameters will be slightly different from the one specified via the Helm installer.&lt;/p&gt;
 &lt;h3 id=&#34;listing-installed-drivers-with-the-containerstoragemodule-crd&#34;&gt;Listing installed drivers with the ContainerStorageModule CRD&lt;/h3&gt;
 &lt;p&gt;User can query for all Dell CSI drivers using this command:&lt;/p&gt;
@@ -144,7 +144,7 @@ Execute &lt;code&gt;kubectl create namespace vxflexos&lt;/code&gt; to create the
 &lt;h3 id=&#34;install-driver&#34;&gt;Install Driver&lt;/h3&gt;
 &lt;ol&gt;
 &lt;li&gt;
-&lt;p&gt;Follow all the &lt;a href=&#34;#prerequisite&#34;&gt;prerequisites&lt;/a&gt; above&lt;/p&gt;
+&lt;p&gt;Follow all the &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v1/deployment/csmoperator/drivers/powerflex/#prerequisite&#34;&gt;prerequisites&lt;/a&gt; above&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Create a CR (Custom Resource) for PowerFlex using the sample files provided
@@ -261,7 +261,7 @@ Execute &lt;code&gt;kubectl create namespace vxflexos&lt;/code&gt; to create the
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;This command will deploy the CSI-PowerFlex driver in the namespace specified in the input YAML file.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;&lt;a href=&#34;../#verifying-the-driver-installation&#34;&gt;Verify the CSI Driver installation&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v1/deployment/csmoperator/#verifying-the-driver-installation&#34;&gt;Verify the CSI Driver installation&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt; :&lt;/p&gt;
@@ -282,7 +282,7 @@ Execute &lt;code&gt;kubectl create namespace vxflexos&lt;/code&gt; to create the
         
         
         &lt;p&gt;The CSI Driver for Dell PowerMax can be installed via the Dell CSM Operator.
-To deploy the Operator, follow the instructions available &lt;a href=&#34;../../#installation&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+To deploy the Operator, follow the instructions available &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v1/deployment/#installation&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Note that the deployment of the driver using the operator does not use any Helm charts and the installation and configuration parameters will be slightly different from the one specified via the Helm installer.&lt;/p&gt;
 &lt;h2 id=&#34;prerequisites&#34;&gt;Prerequisites&lt;/h2&gt;
 &lt;p&gt;The CSI Driver for Dell PowerMax can create PVC with different storage protocols access :&lt;/p&gt;
@@ -344,9 +344,9 @@ Note: If your worker nodes are running Red Hat CoreOS, make sure that automatic 
 &lt;h3 id=&#34;nfs-requirements&#34;&gt;NFS requirements&lt;/h3&gt;
 &lt;p&gt;CSI Driver for Dell PowerMax supports NFS communication. Ensure that the following requirements are met before you install CSI Driver:&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;Configure the NFS network. Please refer &lt;a href=&#34;https://dl.dell.com/content/manual57826791-dell-powermax-file-protocol-guide.pdf?language=en-us&amp;amp;ps=true&#34;&gt;here&lt;/a&gt; for more details.&lt;/li&gt;
+&lt;li&gt;Configure the NFS network. Please refer &lt;a href=&#34;https://dl.dell.com/content/manual57826791-dell-powermax-file-protocol-guide.pdf?language=en-us&amp;ps=true&#34;&gt;here&lt;/a&gt; for more details.&lt;/li&gt;
 &lt;li&gt;PowerMax Embedded Management guest to access Unisphere for PowerMax.&lt;/li&gt;
-&lt;li&gt;Create the NAS server. Please refer &lt;a href=&#34;https://dl.dell.com/content/manual55638050-dell-powermax-file-quick-start-guide.pdf?language=en-us&amp;amp;ps=true&#34;&gt;here&lt;/a&gt; for more details.&lt;/li&gt;
+&lt;li&gt;Create the NAS server. Please refer &lt;a href=&#34;https://dl.dell.com/content/manual55638050-dell-powermax-file-quick-start-guide.pdf?language=en-us&amp;ps=true&#34;&gt;here&lt;/a&gt; for more details.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;linux-multipathing-requirements&#34;&gt;Linux multipathing requirements&lt;/h3&gt;
 &lt;p&gt;CSI Driver for Dell PowerMax supports Linux multipathing. Configure Linux multipathing before installing the CSI Driver.&lt;/p&gt;
@@ -423,7 +423,7 @@ Alternatively, you can check the status of the multipath service by entering the
 &lt;p&gt;Add initiators from all ESX/ESXis to a host(initiator group)/host group(cascaded initiator group) where the cluster is hosted.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;Create a secret which contains vCenter privileges. Follow the steps &lt;a href=&#34;#support-for-auto-rdm-for-vsphere-over-fc&#34;&gt;here&lt;/a&gt; to create the same.&lt;/p&gt;
+&lt;p&gt;Create a secret which contains vCenter privileges. Follow the steps &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v1/deployment/csmoperator/drivers/powermax/#support-for-auto-rdm-for-vsphere-over-fc&#34;&gt;here&lt;/a&gt; to create the same.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;installation&#34;&gt;Installation&lt;/h2&gt;
@@ -859,7 +859,7 @@ Example:&lt;/p&gt;
         
         &lt;h2 id=&#34;installing-csi-driver-for-powerscale-via-dell-csm-operator&#34;&gt;Installing CSI Driver for PowerScale via Dell CSM Operator&lt;/h2&gt;
 &lt;p&gt;The CSI Driver for Dell PowerScale can be installed via the Dell CSM Operator.
-To deploy the Operator, follow the instructions available &lt;a href=&#34;../../#installation&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+To deploy the Operator, follow the instructions available &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v1/deployment/#installation&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Note that the deployment of the driver using the operator does not use any Helm charts and the installation and configuration parameters will be slightly different from the one specified via the Helm installer.&lt;/p&gt;
 &lt;h3 id=&#34;listing-installed-drivers-with-the-containerstoragemodule-crd&#34;&gt;Listing installed drivers with the ContainerStorageModule CRD&lt;/h3&gt;
 &lt;p&gt;User can query for all Dell CSI drivers using the following command:&lt;/p&gt;
@@ -947,7 +947,7 @@ Please refer &lt;a href=&#34;../../../../csidriver/installation/helm/isilon/#cer
 &lt;h3 id=&#34;install-driver&#34;&gt;Install Driver&lt;/h3&gt;
 &lt;ol&gt;
 &lt;li&gt;
-&lt;p&gt;Follow all the &lt;a href=&#34;#prerequisite&#34;&gt;prerequisites&lt;/a&gt; above&lt;/p&gt;
+&lt;p&gt;Follow all the &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v1/deployment/csmoperator/drivers/powerscale/#prerequisite&#34;&gt;prerequisites&lt;/a&gt; above&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Create a CR (Custom Resource) for PowerScale using the sample files provided
@@ -1076,7 +1076,7 @@ Please refer &lt;a href=&#34;../../../../csidriver/installation/helm/isilon/#cer
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;This command will deploy the CSI-PowerScale driver in the namespace specified in the input YAML file.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;&lt;a href=&#34;../#verifying-the-driver-installation&#34;&gt;Verify the CSI Driver installation&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v1/deployment/csmoperator/#verifying-the-driver-installation&#34;&gt;Verify the CSI Driver installation&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt; :&lt;/p&gt;
@@ -1099,7 +1099,7 @@ Please refer &lt;a href=&#34;../../../../csidriver/installation/helm/isilon/#cer
         
         &lt;h2 id=&#34;installing-csi-driver-for-powerstore-via-dell-csm-operator&#34;&gt;Installing CSI Driver for PowerStore via Dell CSM Operator&lt;/h2&gt;
 &lt;p&gt;The CSI Driver for Dell PowerStore can be installed via the Dell CSM Operator.
-To deploy the Operator, follow the instructions available &lt;a href=&#34;../../#installation&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+To deploy the Operator, follow the instructions available &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v1/deployment/#installation&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Note that the deployment of the driver using the operator does not use any Helm charts and the installation and configuration parameters will be slightly different from the one specified via the Helm installer.&lt;/p&gt;
 &lt;h3 id=&#34;listing-installed-drivers-with-the-containerstoragemodule-crd&#34;&gt;Listing installed drivers with the ContainerStorageModule CRD&lt;/h3&gt;
 &lt;p&gt;User can query for all Dell CSI drivers using the following command:&lt;/p&gt;
@@ -1147,7 +1147,7 @@ Add more blocks similar to above for each PowerStore array if necessary.&lt;/p&g
 &lt;h3 id=&#34;install-driver&#34;&gt;Install Driver&lt;/h3&gt;
 &lt;ol&gt;
 &lt;li&gt;
-&lt;p&gt;Follow all the &lt;a href=&#34;#prerequisite&#34;&gt;prerequisites&lt;/a&gt; above&lt;/p&gt;
+&lt;p&gt;Follow all the &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v1/deployment/csmoperator/drivers/powerstore/#prerequisite&#34;&gt;prerequisites&lt;/a&gt; above&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Create a CR (Custom Resource) for PowerStore using the sample files provided
@@ -1252,7 +1252,7 @@ Add more blocks similar to above for each PowerStore array if necessary.&lt;/p&g
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;ol start=&#34;5&#34;&gt;
-&lt;li&gt;&lt;a href=&#34;../#verifying-the-driver-installation&#34;&gt;Verify the CSI Driver installation&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v1/deployment/csmoperator/#verifying-the-driver-installation&#34;&gt;Verify the CSI Driver installation&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt; :&lt;/p&gt;
 &lt;ol&gt;
@@ -1274,7 +1274,7 @@ Add more blocks similar to above for each PowerStore array if necessary.&lt;/p&g
         
         &lt;h2 id=&#34;installing-csi-driver-for-unity-xt-via-dell-csm-operator&#34;&gt;Installing CSI Driver for Unity XT via Dell CSM Operator&lt;/h2&gt;
 &lt;p&gt;The CSI Driver for Dell Unity XT can be installed via the Dell CSM Operator.
-To deploy the Operator, follow the instructions available &lt;a href=&#34;../../#installation&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+To deploy the Operator, follow the instructions available &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v1/deployment/#installation&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Note that the deployment of the driver using the operator does not use any Helm charts and the installation and configuration parameters will be slightly different from the one specified via the Helm installer.&lt;/p&gt;
 &lt;h3 id=&#34;listing-installed-drivers-with-the-containerstoragemodule-crd&#34;&gt;Listing installed drivers with the ContainerStorageModule CRD&lt;/h3&gt;
 &lt;p&gt;User can query for all Dell CSI drivers using the following command:&lt;/p&gt;
@@ -1307,7 +1307,7 @@ Add more blocks similar to above for each Unity XT array if necessary.&lt;/p&gt;
 &lt;h3 id=&#34;install-driver&#34;&gt;Install Driver&lt;/h3&gt;
 &lt;ol&gt;
 &lt;li&gt;
-&lt;p&gt;Follow all the &lt;a href=&#34;#prerequisite&#34;&gt;prerequisites&lt;/a&gt; above&lt;/p&gt;
+&lt;p&gt;Follow all the &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v1/deployment/csmoperator/drivers/unity/#prerequisite&#34;&gt;prerequisites&lt;/a&gt; above&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Create a CR (Custom Resource) for Unity XT using the sample files provided
@@ -1436,7 +1436,7 @@ Add more blocks similar to above for each Unity XT array if necessary.&lt;/p&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;ol start=&#34;5&#34;&gt;
-&lt;li&gt;&lt;a href=&#34;../#verifying-the-driver-installation&#34;&gt;Verify the CSI Driver installation&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v1/deployment/csmoperator/#verifying-the-driver-installation&#34;&gt;Verify the CSI Driver installation&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt; :&lt;/p&gt;
 &lt;ol&gt;

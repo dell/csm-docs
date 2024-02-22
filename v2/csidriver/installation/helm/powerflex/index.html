@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="generator" content="Hugo 0.122.0">
+<meta name="generator" content="Hugo 0.123.1">
 <meta name="robots" content="index, follow">
 
 <link rel="shortcut icon" href="/favicons/favicon.ico" >
@@ -106,7 +106,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.7dad682d16f69f57f44216c5ece5d90b.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.b2461058d7fc1f7ffea2f9edd5cdfce8.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -128,7 +128,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.7dad682d16f69f57f44216c5ece5d90b.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.b2461058d7fc1f7ffea2f9edd5cdfce8.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -147,7 +147,9 @@
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv2deploymentcsminstallationwizard-li">
   <a href="/csm-docs/v2/deployment/csminstallationwizard/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv2deploymentcsminstallationwizard"><span class="">CSM Installation Wizard</span></a>
   <ul class="ul-3 foldable">
-    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2deploymentcsminstallationwizardrelease_notes-li">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2deploymentcsminstallationwizardsrc-li">
+  <a href="/csm-docs/v2/deployment/csminstallationwizard/src/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2deploymentcsminstallationwizardsrc"><span class=""></span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2deploymentcsminstallationwizardrelease_notes-li">
   <a href="/csm-docs/v2/deployment/csminstallationwizard/release_notes/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2deploymentcsminstallationwizardrelease_notes"><span class="">Release Notes</span></a>
 </li>
   </ul>
@@ -633,22 +635,6 @@
             
 
 	
-		
-
-
-
-  
-  
-
-	
-		
-
-
-
-  
-  
-
-	
 
           </aside>
           <main class="col-12 col-md-9 col-xl-8 pl-md-5" role="main">
@@ -712,10 +698,10 @@
 <p>Run the command to install Helm 3.0.</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 <span style="color:#000;font-weight:bold">|</span> bash
 </span></span></code></pre></div><h3 id="enable-zero-padding-on-powerflex">Enable Zero Padding on PowerFlex</h3>
-<p>Verify that zero padding is enabled on the PowerFlex storage pools that will be used. Use PowerFlex GUI or the PowerFlex CLI to check this setting. For more information to configure this setting, see <a href="https://www.dell.com/support/manuals/en-us/scaleio/pfx_powerflex_config_customize_3.6.x/enable-or-disable-zero-padding-policy?guid=guid-d32bdff7-3014-4894-8e1e-2a31a86d343a&amp;lang=en-us">Dell PowerFlex documentation</a>.</p>
+<p>Verify that zero padding is enabled on the PowerFlex storage pools that will be used. Use PowerFlex GUI or the PowerFlex CLI to check this setting. For more information to configure this setting, see <a href="https://www.dell.com/support/manuals/en-us/scaleio/pfx_powerflex_config_customize_3.6.x/enable-or-disable-zero-padding-policy?guid=guid-d32bdff7-3014-4894-8e1e-2a31a86d343a&lang=en-us">Dell PowerFlex documentation</a>.</p>
 <h3 id="install-powerflex-storage-data-client">Install PowerFlex Storage Data Client</h3>
 <p>The CSI Driver for PowerFlex requires you to have installed the PowerFlex Storage Data Client (SDC) on all Kubernetes nodes which run the node portion of the CSI driver.
-SDC could be installed automatically by CSI driver install on Kubernetes nodes with OS platform which support automatic SDC deployment; for Red Hat CoreOS (RHCOS), RHEL 7.9, RHEL 8.4, RHEL 8.6. On Kubernetes nodes with OS version not supported by automatic install, you must perform the Manual SDC Deployment steps <a href="#manual-sdc-deployment">below</a>.
+SDC could be installed automatically by CSI driver install on Kubernetes nodes with OS platform which support automatic SDC deployment; for Red Hat CoreOS (RHCOS), RHEL 7.9, RHEL 8.4, RHEL 8.6. On Kubernetes nodes with OS version not supported by automatic install, you must perform the Manual SDC Deployment steps <a href="/csm-docs/v2/csidriver/installation/helm/powerflex/#manual-sdc-deployment">below</a>.
 Refer to <a href="https://hub.docker.com/r/dellemc/sdc">https://hub.docker.com/r/dellemc/sdc</a> for supported OS versions.</p>
 <p><em>NOTE:</em> To install CSI driver for Powerflex with automated SDC deployment, you need below two packages on worker nodes.</p>
 <ol>
@@ -824,7 +810,7 @@ Note that the namespace can be any user-defined name that follows the convention
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">isDefault</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span><span style="color:#f8f8f8;text-decoration:underline"> 
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">mdm</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;10.0.0.3,10.0.0.4&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span></code></pre></div><p><em>NOTE: To use multiple arrays, copy and paste section above for each array. Make sure isDefault is set to true for only one array.</em></p>
-<p>After editing the file, run the below command to create a secret called <code>vxflexos-config</code>. This assumes <code>vxflexos</code> is release name, but it can be modified during <a href="../#install-the-driver">install</a>:</p>
+<p>After editing the file, run the below command to create a secret called <code>vxflexos-config</code>. This assumes <code>vxflexos</code> is release name, but it can be modified during <a href="/csm-docs/v2/csidriver/installation/#install-the-driver">install</a>:</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>kubectl create secret generic vxflexos-config -n vxflexos --from-file<span style="color:#ce5c00;font-weight:bold">=</span><span style="color:#000">config</span><span style="color:#ce5c00;font-weight:bold">=</span>samples/secret.yaml
 </span></span></code></pre></div><p>Use the below command to replace or update the secret:</p>

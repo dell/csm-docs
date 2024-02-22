@@ -132,7 +132,7 @@ The implications of this are that if more than one pod on a node is sharing the 
         
         
         &lt;p&gt;CSM for Resiliency is primarily designed to detect pod failures due to some kind of node failure or node communication failure. The diagram below shows the hardware environment that is assumed in the design.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;../resiliency_model.jpg&#34; alt=&#34;CSM for Resiliency Hardware Model&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;CSM for Resiliency Hardware Model&#34; src=&#34;../resiliency_model.jpg&#34;&gt;&lt;/p&gt;
 &lt;p&gt;A Kubernetes Control Plane is assumed to exist that provides the K8S API service used by CSM for Resiliency. There is an arbitrary number of worker nodes (two are shown in the diagram) that
 are connected to the Control Plane through a K8S Control Plane IP Network.&lt;/p&gt;
 &lt;p&gt;The worker nodes (e.g. Node1 and Node2) can run a mix of CSM for Resiliency monitored Application Pods as well as unmonitored Application Pods.  Monitored Pods are designated by a specific label that is applied to each monitored pod. The label key and value are configurable for each driver type when CSM for Resiliency is installed and &lt;em&gt;must&lt;/em&gt; be unique for each driver instance.&lt;/p&gt;

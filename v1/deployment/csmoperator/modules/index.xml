@@ -32,7 +32,7 @@
 
 &lt;h2 id=&#34;install-csm-authorization-via-dell-csm-operator&#34;&gt;Install CSM Authorization via Dell CSM Operator&lt;/h2&gt;
 &lt;p&gt;The CSM Authorization module for supported Dell CSI Drivers can be installed via the Dell CSM Operator.
-To deploy the Operator, follow the instructions available &lt;a href=&#34;../../#installation&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+To deploy the Operator, follow the instructions available &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v1/deployment/#installation&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
 &lt;h3 id=&#34;prerequisite&#34;&gt;Prerequisite&lt;/h3&gt;
 &lt;ol&gt;
 &lt;li&gt;
@@ -167,7 +167,7 @@ To deploy the Operator, follow the instructions available &lt;a href=&#34;../../
 &lt;h3 id=&#34;install-csm-authorization-proxy-server&#34;&gt;Install CSM Authorization Proxy Server&lt;/h3&gt;
 &lt;ol&gt;
 &lt;li&gt;
-&lt;p&gt;Follow all the &lt;a href=&#34;#prerequisite&#34;&gt;prerequisites&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Follow all the &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v1/deployment/csmoperator/modules/authorization/#prerequisite&#34;&gt;prerequisites&lt;/a&gt;.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Create a CR (Custom Resource) for Authorization using the sample file provided &lt;a href=&#34;https://github.com/dell/csm-operator/blob/main/samples/authorization/csm_authorization_proxy_server_v170.yaml&#34;&gt;here&lt;/a&gt;. This file can be modified to use custom parameters if needed.&lt;/p&gt;
@@ -375,7 +375,7 @@ This change will need to be made to the /etc/hosts file on:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;The bastion node(s) (or wherever &lt;code&gt;repctl&lt;/code&gt; is used).&lt;/li&gt;
 &lt;li&gt;Either the CSM Operator Deployment or ClusterServiceVersion custom resource if using an Operator Lifecycle Manager (such as with an OperatorHub install).&lt;/li&gt;
-&lt;li&gt;Both dell-replication-controller-manager deployments (covered in &lt;a href=&#34;#configuration-steps&#34;&gt;Configuration Steps&lt;/a&gt; below).&lt;/li&gt;
+&lt;li&gt;Both dell-replication-controller-manager deployments (covered in &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v1/deployment/csmoperator/modules/replication/#configuration-steps&#34;&gt;Configuration Steps&lt;/a&gt; below).&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;Update the ClusterServiceVersion before continuing. Execute the command below, replacing the fields for the remote cluster&amp;rsquo;s FQDN and IP.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl patch clusterserviceversions.operators.coreos.com -n &amp;lt;operator-namespace&amp;gt; dell-csm-operator-certified.v1.3.0 &lt;span style=&#34;color:#4e9a06&#34;&gt;\

@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="generator" content="Hugo 0.122.0">
+<meta name="generator" content="Hugo 0.123.1">
 <link rel="alternate" type="application/rss&#43;xml" href="https://dell.github.io/csm-docs/v2/authorization/deployment/helm/index.xml">
 <meta name="robots" content="index, follow">
 
@@ -102,7 +102,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.7dad682d16f69f57f44216c5ece5d90b.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.b2461058d7fc1f7ffea2f9edd5cdfce8.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -124,7 +124,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.7dad682d16f69f57f44216c5ece5d90b.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.b2461058d7fc1f7ffea2f9edd5cdfce8.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -143,7 +143,9 @@
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv2deploymentcsminstallationwizard-li">
   <a href="/csm-docs/v2/deployment/csminstallationwizard/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv2deploymentcsminstallationwizard"><span class="">CSM Installation Wizard</span></a>
   <ul class="ul-3 foldable">
-    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2deploymentcsminstallationwizardrelease_notes-li">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2deploymentcsminstallationwizardsrc-li">
+  <a href="/csm-docs/v2/deployment/csminstallationwizard/src/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2deploymentcsminstallationwizardsrc"><span class=""></span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2deploymentcsminstallationwizardrelease_notes-li">
   <a href="/csm-docs/v2/deployment/csminstallationwizard/release_notes/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2deploymentcsminstallationwizardrelease_notes"><span class="">Release Notes</span></a>
 </li>
   </ul>
@@ -619,22 +621,6 @@
             
 
 	
-		
-
-
-
-  
-  
-
-	
-		
-
-
-
-  
-  
-
-	
 
           </aside>
           <main class="col-12 col-md-9 col-xl-8 pl-md-5" role="main">
@@ -663,14 +649,6 @@
   <div class="lead">Dell Technologies (Dell) Container Storage Modules (CSM) for Authorization Helm deployment</div>
 	<header class="article-meta">
 		
-
-  
-    
-
-
-  
-    
-
 
   
 
@@ -928,7 +906,7 @@
 </span></span><span style="display:flex;"><span>mkdir -p ~/.local/bin
 </span></span><span style="display:flex;"><span>mv ./karavictl ~/.local/bin/karavictl
 </span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"># and then append (or prepend) ~/.local/bin to $PATH</span>
-</span></span></code></pre></div><p>Karavictl commands and intended use can be found <a href="../../cli/">here</a>.</p>
+</span></span></code></pre></div><p>Karavictl commands and intended use can be found <a href="/csm-docs/v2/authorization/cli/">here</a>.</p>
 <h2 id="configuring-the-csm-authorization-proxy-server">Configuring the CSM Authorization Proxy Server</h2>
 <p>The first part of CSM for Authorization deployment is to configure the proxy server. This is controlled by the Storage Administrator.</p>
 <p>Configuration is achieved by using <code>karavictl</code> to connect to the proxy service. In this example, we will be referencing an installation using <code>csm-authorization.com</code> as the authorization.hostname value and the NGINX Ingress Controller accessed via the cluster&rsquo;s master node.</p>
@@ -950,10 +928,10 @@ storage-service                                    ClusterIP      00.000.000.000
 tenant-service                                     ClusterIP      00.000.000.000    &lt;none&gt;        000/TCP                    28s
 </code></pre><p>On the machine running <code>karavictl</code>, the <code>/etc/hosts</code> file needs to be updated with the Ingress hosts for the proxy, storage, and role services. For example:</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>&lt;master_node_ip&gt; csm-authorization.com
-</span></span></code></pre></div><p>Please continue following the steps outlined in the <a href="../../configuration/proxy-server">proxy server</a> configuration.</p>
+</span></span></code></pre></div><p>Please continue following the steps outlined in the <a href="/csm-docs/v2/authorization/configuration/proxy-server/">proxy server</a> configuration.</p>
 <h2 id="configuring-a-dell-csi-driver-with-csm-for-authorization">Configuring a Dell CSI Driver with CSM for Authorization</h2>
-<p>The second part of CSM for Authorization deployment is to configure one or more of the <a href="../../../authorization#supported-csi-drivers">supported</a> CSI drivers. This is controlled by the Kubernetes tenant admin.</p>
-<p>Please follow the steps outlined in <a href="../../configuration/powerflex">PowerFlex</a>, <a href="../../configuration/powermax">PowerMax</a>, or <a href="../../configuration/powerscale">PowerScale</a> to configure the CSI Driver to work with the Authorization sidecar.</p>
+<p>The second part of CSM for Authorization deployment is to configure one or more of the <a href="/csm-docs/v2/authorization/#supported-csi-drivers">supported</a> CSI drivers. This is controlled by the Kubernetes tenant admin.</p>
+<p>Please follow the steps outlined in <a href="/csm-docs/v2/authorization/configuration/powerflex/">PowerFlex</a>, <a href="/csm-docs/v2/authorization/configuration/powermax/">PowerMax</a>, or <a href="/csm-docs/v2/authorization/configuration/powerscale/">PowerScale</a> to configure the CSI Driver to work with the Authorization sidecar.</p>
 <h2 id="updating-csm-for-authorization-proxy-server-configuration">Updating CSM for Authorization Proxy Server Configuration</h2>
 <p>CSM for Authorization has a subset of configuration parameters that can be updated dynamically:</p>
 <table>

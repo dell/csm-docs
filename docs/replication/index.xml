@@ -37,7 +37,7 @@
         
         
         &lt;h2 id=&#34;replication-design-and-architecture&#34;&gt;Replication design and architecture&lt;/h2&gt;
-&lt;p&gt;&lt;img src=&#34;../arch.png&#34; alt=&#34;arch&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;arch&#34; src=&#34;../arch.png&#34;&gt;&lt;/p&gt;
 &lt;p&gt;Container Storage Modules (CSM) for Replication project consists of the following components:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;code&gt;DellCSIReplicationGroup&lt;/code&gt;, a Kubernetes &lt;a href=&#34;https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/&#34;&gt;Custom Resource&lt;/a&gt;.&lt;/li&gt;
@@ -112,9 +112,9 @@ have been performed on the object.&lt;/p&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;state&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Synchronized&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;state&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Ready&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Here is a diagram representing how the &lt;em&gt;state&lt;/em&gt; of the CustomResource changes based on actions:
-&lt;img src=&#34;../state.png&#34; alt=&#34;state&#34;&gt;&lt;/p&gt;
+&lt;img alt=&#34;state&#34; src=&#34;../state.png&#34;&gt;&lt;/p&gt;
 &lt;h3 id=&#34;csm-replication-sidecar&#34;&gt;CSM Replication Sidecar&lt;/h3&gt;
-&lt;p&gt;&lt;img src=&#34;../sidecar.png&#34; alt=&#34;sidecar&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;sidecar&#34; src=&#34;../sidecar.png&#34;&gt;&lt;/p&gt;
 &lt;p&gt;CSM Replication sidecar is deployed as sidecar container in &lt;em&gt;each&lt;/em&gt; CSI driver&amp;rsquo;s controller pod. This container is similar to Kubernetes CSI Sidecar
 &lt;a href=&#34;https://kubernetes-csi.github.io/docs/sidecar-containers.html&#34;&gt;containers&lt;/a&gt; and runs a Controller Manager
 which manages the following controllers:&lt;/p&gt;
@@ -136,7 +136,7 @@ It is primarily responsible for the following:&lt;/p&gt;
 &lt;li&gt;Updates to the status sub resource&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;csm-replication-controller&#34;&gt;CSM Replication Controller&lt;/h3&gt;
-&lt;p&gt;&lt;img src=&#34;../common.png&#34; alt=&#34;common&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;common&#34; src=&#34;../common.png&#34;&gt;&lt;/p&gt;
 &lt;p&gt;CSM Replication Controller is a Kubernetes application deployed independently of CSI drivers and is responsible for
 the communication between Kubernetes clusters. &lt;em&gt;One&lt;/em&gt; CSM Replication Controller manages replication operations for &lt;em&gt;all&lt;/em&gt; CSI driver installations on the Kubernetes cluster.&lt;/p&gt;
 &lt;p&gt;The details about the clusters it needs to connect to are provided in the form of a ConfigMap with references to secrets
@@ -157,7 +157,7 @@ information about the respective objects in the source cluster.&lt;/p&gt;
 &lt;p&gt;The PVC objects are never replicated across the clusters. Instead, the remote PV objects have annotations related to the
 source PVC objects. This information can be easily used to create the PVCs whenever required using &lt;code&gt;repctl&lt;/code&gt; or &lt;code&gt;kubectl&lt;/code&gt;.&lt;/p&gt;
 &lt;h3 id=&#34;supported-cluster-topologies&#34;&gt;Supported Cluster Topologies&lt;/h3&gt;
-&lt;p&gt;Click &lt;a href=&#34;../cluster-topologies&#34;&gt;here&lt;/a&gt; for details for the various types of supported cluster topologies&lt;/p&gt;
+&lt;p&gt;Click &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/docs/replication/cluster-topologies/&#34;&gt;here&lt;/a&gt; for details for the various types of supported cluster topologies&lt;/p&gt;
 
       </description>
     </item>
@@ -283,7 +283,7 @@ rg-240721b0-12fb-4151-8dd8-94794ae2493e   30s   Ready   SYNCHRONIZED   2021-08-0
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt; ./repctl --rg rg-id failover --target target-cluster-name
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;b. Execute &amp;ldquo;reprotect&amp;rdquo; action on selected ReplicationGroup which will resume the replication from new &amp;ldquo;source&amp;rdquo;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt; ./repctl --rg rg-id reprotect --at new-source-cluster-name
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;../state_changes1.png&#34; alt=&#34;state_changes1&#34;&gt;&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img alt=&#34;state_changes1&#34; src=&#34;../state_changes1.png&#34;&gt;&lt;/p&gt;
 &lt;h3 id=&#34;unplanned-migration-to-the-target-clusterarray&#34;&gt;Unplanned Migration to the target cluster/array&lt;/h3&gt;
 &lt;p&gt;This scenario is the typical choice when a site goes down:&lt;/p&gt;
 &lt;p&gt;a. Execute &amp;ldquo;failover&amp;rdquo; action on selected ReplicationGroup using the cluster name&lt;/p&gt;
@@ -295,7 +295,7 @@ rg-240721b0-12fb-4151-8dd8-94794ae2493e   30s   Ready   SYNCHRONIZED   2021-08-0
 &lt;/blockquote&gt;
 &lt;p&gt;c. Execute &amp;ldquo;reprotect&amp;rdquo; action on selected ReplicationGroup which will resume the replication.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt; ./repctl --rg rg-id reprotect --at new-source-cluster-name
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;../state_changes2.png&#34; alt=&#34;state_changes2&#34;&gt;&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img alt=&#34;state_changes2&#34; src=&#34;../state_changes2.png&#34;&gt;&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;&lt;em&gt;&lt;strong&gt;NOTE&lt;/strong&gt;&lt;/em&gt;: When users do Failover and Failback, the tests pods on the source cluster may go &amp;ldquo;CrashLoopOff&amp;rdquo; state since it will try to remount the same volume which is already mounted. To get around this problem, bring down the number of replicas to 0 and then after that is done, bring it up to 1.&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -314,7 +314,7 @@ rg-240721b0-12fb-4151-8dd8-94794ae2493e   30s   Ready   SYNCHRONIZED   2021-08-0
         
         &lt;p&gt;One of the goals of high availability is to eliminate single points of failure in a storage system. In Kubernetes, this can mean that a single PV represents multiple read/write enabled volumes on different arrays, located at reasonable distances with both the volumes in sync with each other. If one of the volumes goes down, there will still be another volume available for read and write. This kind of high availability can be achieved by using SRDF Metro replication mode, supported only by PowerMax arrays.&lt;/p&gt;
 &lt;h2 id=&#34;srdf-metro-architecture&#34;&gt;SRDF Metro Architecture&lt;/h2&gt;
-&lt;p&gt;&lt;img src=&#34;../metro.png&#34; alt=&#34;metro architecture diagram&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;metro architecture diagram&#34; src=&#34;../metro.png&#34;&gt;&lt;/p&gt;
 &lt;p&gt;In SRDF metro configurations:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;R2 devices are Read/Write accessible to application hosts.&lt;/li&gt;
@@ -832,7 +832,7 @@ controller, because different versions could be incompatible with each other.&lt
 &lt;p&gt;Make sure the appropriate release branch is available on the machine performing the upgrade by running:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;git clone -b v1.7.1 https://github.com/dell/csm-replication.git
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;upgrading-with-helm&#34;&gt;Upgrading with Helm&lt;/h3&gt;
-&lt;p&gt;This option will only work if you have previously installed replication via Helm chart, available since version 1.1. If you used simple manifest or &lt;code&gt;repctl&lt;/code&gt; please use &lt;a href=&#34;#upgrading-with-repctl&#34;&gt;upgrading with repctl&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;This option will only work if you have previously installed replication via Helm chart, available since version 1.1. If you used simple manifest or &lt;code&gt;repctl&lt;/code&gt; please use &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/docs/replication/upgrade/#upgrading-with-repctl&#34;&gt;upgrading with repctl&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Steps&lt;/strong&gt;&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;
