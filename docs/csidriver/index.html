@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="generator" content="Hugo 0.122.0">
+<meta name="generator" content="Hugo 0.123.1">
 <link rel="alternate" type="application/rss&#43;xml" href="https://dell.github.io/csm-docs/docs/csidriver/index.xml">
 <meta name="robots" content="index, follow">
 
@@ -98,7 +98,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.7dad682d16f69f57f44216c5ece5d90b.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.b2461058d7fc1f7ffea2f9edd5cdfce8.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -120,7 +120,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.7dad682d16f69f57f44216c5ece5d90b.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.b2461058d7fc1f7ffea2f9edd5cdfce8.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -141,6 +141,8 @@
   <ul class="ul-3 foldable">
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymentcsminstallationwizardrelease-li">
   <a href="/csm-docs/docs/deployment/csminstallationwizard/release/" title="Release Notes" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsdeploymentcsminstallationwizardrelease"><span class="">Release notes</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymentcsminstallationwizardsrc-li">
+  <a href="/csm-docs/docs/deployment/csminstallationwizard/src/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsdeploymentcsminstallationwizardsrc"><span class=""></span></a>
 </li>
   </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsdocsdeploymentcsmoperator-li">
@@ -617,6 +619,7 @@
         <li><a href="#csi-driver-capabilities">CSI Driver Capabilities</a></li>
         <li><a href="#supported-storage-platforms">Supported Storage Platforms</a></li>
         <li><a href="#backend-storage-details">Backend Storage Details</a></li>
+        <li><a href="#community-qualified-platforms">Community Qualified Platforms</a></li>
       </ul>
     </li>
   </ul>
@@ -626,22 +629,6 @@
 
 
             
-
-	
-		
-
-
-
-  
-  
-
-	
-		
-
-
-
-  
-  
 
 	
 
@@ -666,7 +653,7 @@
      
 	
 	<p>The CSI Drivers by Dell implement an interface between <a href="https://kubernetes-csi.github.io/docs/">CSI</a> (CSI spec v1.6) enabled Container Orchestrator (CO) and Dell Storage Arrays. It is a plug-in that is installed into Kubernetes to provide persistent storage using the Dell storage system.</p>
-<p><img src="Architecture_Diagram.png" alt="CSI Architecture"></p>
+<p><img alt="CSI Architecture" src="/csm-docs/docs/csidriver/Architecture_Diagram.png"></p>
 <h2 id="features-and-capabilities">Features and capabilities</h2>
 <h3 id="supported-container-orchestrator-platforms">Supported Container Orchestrator Platforms</h3>
 
@@ -741,14 +728,6 @@
 <td style="text-align:center">yes</td>
 <td style="text-align:center">yes</td>
 <td style="text-align:center">yes</td>
-</tr>
-<tr>
-<td>Kubernetes K3s Engine on Debian OS</td>
-<td style="text-align:center">no</td>
-<td style="text-align:center">no</td>
-<td style="text-align:center">yes</td>
-<td style="text-align:center">no</td>
-<td style="text-align:center">no</td>
 </tr>
 <tr>
 <td>OS dependencies</td>
@@ -1054,6 +1033,36 @@
 <td style="text-align:center">N/A</td>
 <td style="text-align:center">N/A</td>
 <td style="text-align:center">N/A</td>
+</tr>
+</tbody>
+</table>
+
+
+<h3 id="community-qualified-platforms">Community Qualified Platforms</h3>
+
+
+
+
+
+<table class="table table-striped table-bordered table-sm">
+<thead>
+<tr>
+<th>cert-csi results</th>
+<th style="text-align:center">OS</th>
+<th style="text-align:center">CO</th>
+<th style="text-align:center">Storage Platform</th>
+<th style="text-align:center">Protocol</th>
+<th style="text-align:center">CSM</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://github.com/dell/csm/issues/1079">Ticket 1079</a></td>
+<td style="text-align:center">Debian 10</td>
+<td style="text-align:center">K3s v1.24.7+k3s1</td>
+<td style="text-align:center">Unity VSA 5.3.1.0.5.008</td>
+<td style="text-align:center">iSCSI</td>
+<td style="text-align:center">CSI v1.8.0</td>
 </tr>
 </tbody>
 </table>

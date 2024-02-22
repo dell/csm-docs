@@ -106,7 +106,7 @@
 &lt;p&gt;&lt;code&gt;kubectl -n vxflexos create secret generic proxy-server-root-certificate --from-file=rootCertificate.pem=/path/to/rootCA -o yaml --dry-run=client | kubectl apply -f -&lt;/code&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;Please refer to step 4 in the &lt;a href=&#34;../../../csidriver/installation/helm/powerflex/#install-the-driver&#34;&gt;installation steps for PowerFlex&lt;/a&gt; to edit the parameters in &lt;code&gt;samples/config.yaml&lt;/code&gt; file to communicate with the sidecar.&lt;/p&gt;
+&lt;p&gt;Please refer to step 4 in the &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v3/csidriver/installation/helm/powerflex/#install-the-driver&#34;&gt;installation steps for PowerFlex&lt;/a&gt; to edit the parameters in &lt;code&gt;samples/config.yaml&lt;/code&gt; file to communicate with the sidecar.&lt;/p&gt;
 &lt;p&gt;Update &lt;em&gt;endpoint&lt;/em&gt; to match the endpoint in &lt;code&gt;samples/secret/karavi-authorization-config.json&lt;/code&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
@@ -114,14 +114,14 @@
 &lt;p&gt;&lt;code&gt;kubectl create secret generic vxflexos-config -n vxflexos --from-file=config=config.yaml -o yaml --dry-run=client | kubectl apply -f -&lt;/code&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;Please refer to step 9 in the &lt;a href=&#34;../../../csidriver/installation/helm/powerflex/#install-the-driver&#34;&gt;installation steps for PowerFlex&lt;/a&gt; to edit the parameters in &lt;em&gt;myvalues.yaml&lt;/em&gt; file to communicate with the sidecar.&lt;/p&gt;
+&lt;p&gt;Please refer to step 9 in the &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v3/csidriver/installation/helm/powerflex/#install-the-driver&#34;&gt;installation steps for PowerFlex&lt;/a&gt; to edit the parameters in &lt;em&gt;myvalues.yaml&lt;/em&gt; file to communicate with the sidecar.&lt;/p&gt;
 &lt;p&gt;Enable CSM for Authorization and provide the &lt;em&gt;proxyHost&lt;/em&gt; address&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Install the CSI PowerFlex driver&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;(Optional) Install &lt;a href=&#34;../../../references/cli&#34;&gt;dellctl&lt;/a&gt; to perform Kubernetes administrator commands for additional capabilities (e.g., list volumes). Please refer to the &lt;a href=&#34;../../../references/cli&#34;&gt;dellctl documentation page&lt;/a&gt; for the installation steps and command list.&lt;/p&gt;
+&lt;p&gt;(Optional) Install &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v3/references/cli/&#34;&gt;dellctl&lt;/a&gt; to perform Kubernetes administrator commands for additional capabilities (e.g., list volumes). Please refer to the &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v3/references/cli/&#34;&gt;dellctl documentation page&lt;/a&gt; for the installation steps and command list.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
 
@@ -220,7 +220,7 @@
 &lt;p&gt;&lt;code&gt;kubectl -n powermax create secret generic proxy-server-root-certificate --from-file=rootCertificate.pem=/path/to/rootCA -o yaml --dry-run=client | kubectl apply -f -&lt;/code&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;Please refer to step 8 in the &lt;a href=&#34;../../../csidriver/installation/helm/powermax/#install-the-driver&#34;&gt;installation steps for PowerMax&lt;/a&gt; to edit the parameters in &lt;em&gt;my-powermax-settings.yaml&lt;/em&gt; to communicate with the sidecar.&lt;/p&gt;
+&lt;p&gt;Please refer to step 8 in the &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v3/csidriver/installation/helm/powermax/#install-the-driver&#34;&gt;installation steps for PowerMax&lt;/a&gt; to edit the parameters in &lt;em&gt;my-powermax-settings.yaml&lt;/em&gt; to communicate with the sidecar.&lt;/p&gt;
 &lt;p&gt;Update &lt;em&gt;endpoint&lt;/em&gt; to match the endpoint in &lt;code&gt;samples/secret/karavi-authorization-config.json&lt;/code&gt;.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
@@ -328,7 +328,7 @@
 &lt;p&gt;&lt;code&gt;kubectl -n isilon create secret generic proxy-server-root-certificate --from-file=rootCertificate.pem=/path/to/rootCA -o yaml --dry-run=client | kubectl apply -f -&lt;/code&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;Please refer to step 5 in the &lt;a href=&#34;../../../csidriver/installation/helm/isilon/#install-the-driver&#34;&gt;installation steps for PowerScale&lt;/a&gt; to edit the parameters in &lt;em&gt;my-isilon-settings.yaml&lt;/em&gt; to communicate with the sidecar.&lt;/p&gt;
+&lt;p&gt;Please refer to step 5 in the &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v3/csidriver/installation/helm/isilon/#install-the-driver&#34;&gt;installation steps for PowerScale&lt;/a&gt; to edit the parameters in &lt;em&gt;my-isilon-settings.yaml&lt;/em&gt; to communicate with the sidecar.&lt;/p&gt;
 &lt;p&gt;Update &lt;em&gt;endpointPort&lt;/em&gt; to match the endpoint port number in &lt;code&gt;samples/secret/karavi-authorization-config.json&lt;/code&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
@@ -343,7 +343,7 @@
 &lt;p&gt;Enable CSM for Authorization and provide the &lt;em&gt;proxyHost&lt;/em&gt; address&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;Please refer to step 6 in the &lt;a href=&#34;../../../csidriver/installation/helm/isilon/#install-the-driver&#34;&gt;installation steps for PowerScale&lt;/a&gt; to edit the parameters in &lt;code&gt;samples/secret/secret.yaml&lt;/code&gt; file to communicate with the sidecar.&lt;/p&gt;
+&lt;p&gt;Please refer to step 6 in the &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v3/csidriver/installation/helm/isilon/#install-the-driver&#34;&gt;installation steps for PowerScale&lt;/a&gt; to edit the parameters in &lt;code&gt;samples/secret/secret.yaml&lt;/code&gt; file to communicate with the sidecar.&lt;/p&gt;
 &lt;p&gt;Update &lt;em&gt;endpoint&lt;/em&gt; to match the endpoint in &lt;code&gt;samples/secret/karavi-authorization-config.json&lt;/code&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
@@ -466,8 +466,8 @@
 &lt;/blockquote&gt;
 &lt;h3 id=&#34;generate-a-token&#34;&gt;Generate a Token&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;#rpm&#34;&gt;RPM Deployment&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#helm&#34;&gt;Helm Deployment&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v3/authorization/configuration/proxy-server/#rpm&#34;&gt;RPM Deployment&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v3/authorization/configuration/proxy-server/#helm&#34;&gt;Helm Deployment&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h4 id=&#34;rpm&#34;&gt;RPM&lt;/h4&gt;
 &lt;p&gt;After creating the role bindings, the next logical step is to generate the access token. The storage admin is responsible for generating and sending the token to the Kubernetes tenant admin.&lt;/p&gt;

@@ -194,7 +194,7 @@ Dell CSI Operator can be upgraded based on the supported platforms in one of the
 &lt;li&gt;Add the Dell Helm Charts repository
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;helm repo add dell https://dell.github.io/helm-charts
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
-&lt;li&gt;Either create a values.yml file or provide the &lt;code&gt;--set&lt;/code&gt; options to the &lt;code&gt;helm install&lt;/code&gt; to override default values from the &lt;a href=&#34;#configuration&#34;&gt;Configuration&lt;/a&gt; section.&lt;/li&gt;
+&lt;li&gt;Either create a values.yml file or provide the &lt;code&gt;--set&lt;/code&gt; options to the &lt;code&gt;helm install&lt;/code&gt; to override default values from the &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v2/applicationmobility/deployment/#configuration&#34;&gt;Configuration&lt;/a&gt; section.&lt;/li&gt;
 &lt;li&gt;Install the helm chart
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;helm install application-mobility -n application-mobility dell/csm-application-mobility
@@ -691,7 +691,7 @@ methods supported by the Storage Array itself, e.g. Basic authentication over TL
 &lt;h3 id=&#34;sidecar-proxy&#34;&gt;Sidecar Proxy&lt;/h3&gt;
 &lt;p&gt;The CSM for Authorization Sidecar Proxy is deployed as a sidecar in the CSI Driver&amp;rsquo;s Pod. It acts as a proxy and forwards all requests to a
 CSM Authorization Server.&lt;/p&gt;
-&lt;p&gt;The &lt;a href=&#34;#csi-driver&#34;&gt;CSI Driver section&lt;/a&gt; noted the limitation of a CSI Driver using Storage Array supported authentication methods only. By nature of being a proxy, the CSM for Authorization
+&lt;p&gt;The &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v2/authorization/design/#csi-driver&#34;&gt;CSI Driver section&lt;/a&gt; noted the limitation of a CSI Driver using Storage Array supported authentication methods only. By nature of being a proxy, the CSM for Authorization
 Sidecar Proxy is able to override the Authorization HTTP header for outbound requests to use Bearer tokens. Such tokens are managed by CSM for Authorization as will
 be described later in this document.&lt;/p&gt;
 &lt;h3 id=&#34;csm-for-authorization-server&#34;&gt;CSM for Authorization Server&lt;/h3&gt;
@@ -1648,7 +1648,7 @@ Check this section in installation documentation:  &lt;a href=&#34;../../../inst
 &lt;h2 id=&#34;io-performance-metrics&#34;&gt;I/O Performance Metrics&lt;/h2&gt;
 &lt;p&gt;Storage system I/O performance metrics (IOPS, bandwidth, latency) are available by default and broken down by export node and volume.&lt;/p&gt;
 &lt;p&gt;To disable these metrics, set the &lt;code&gt;sdc_metrics_enabled&lt;/code&gt; field to false in helm/values.yaml.&lt;/p&gt;
-&lt;p&gt;The following I/O performance metrics are available from the OpenTelemetry collector endpoint. Please see the &lt;a href=&#34;../../&#34;&gt;CSM for Observability&lt;/a&gt; for more information on deploying and configuring the OpenTelemetry collector.&lt;/p&gt;
+&lt;p&gt;The following I/O performance metrics are available from the OpenTelemetry collector endpoint. Please see the &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v2/&#34;&gt;CSM for Observability&lt;/a&gt; for more information on deploying and configuring the OpenTelemetry collector.&lt;/p&gt;
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
@@ -1710,7 +1710,7 @@ Check this section in installation documentation:  &lt;a href=&#34;../../../inst
 &lt;h2 id=&#34;storage-capacity-metrics&#34;&gt;Storage Capacity Metrics&lt;/h2&gt;
 &lt;p&gt;Provides visibility into the total, used, and available capacity for a storage class and associated underlying storage construct.&lt;/p&gt;
 &lt;p&gt;To disable these metrics, set the &lt;code&gt;storage_class_pool_metrics_enabled&lt;/code&gt; field to false in helm/values.yaml.&lt;/p&gt;
-&lt;p&gt;The following storage capacity metrics are available from the OpenTelemetry collector endpoint. Please see the &lt;a href=&#34;../../&#34;&gt;CSM for Observability&lt;/a&gt; for more information on deploying and configuring the OpenTelemetry collector.&lt;/p&gt;
+&lt;p&gt;The following storage capacity metrics are available from the OpenTelemetry collector endpoint. Please see the &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v2/&#34;&gt;CSM for Observability&lt;/a&gt; for more information on deploying and configuring the OpenTelemetry collector.&lt;/p&gt;
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
@@ -2262,7 +2262,7 @@ RDMs should not be added/removed manually from vCenter on any of the cluster VMs
 &lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; CSI Driver for PowerMax v2.4.0 requires 10.0 REST endpoint support of Unisphere.&lt;/p&gt;
 &lt;h3 id=&#34;updating-the-csi-driver-to-use-100-unisphere&#34;&gt;Updating the CSI Driver to use 10.0 Unisphere&lt;/h3&gt;
 &lt;ol&gt;
-&lt;li&gt;Upgrade the Unisphere to have 10.0 endpoint support.Please find the instructions &lt;a href=&#34;https://dl.dell.com/content/manual34878027-dell-unisphere-for-powermax-10-0-0-installation-guide.pdf?language=en-us&amp;amp;ps=true&#34;&gt;here.&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Upgrade the Unisphere to have 10.0 endpoint support.Please find the instructions &lt;a href=&#34;https://dl.dell.com/content/manual34878027-dell-unisphere-for-powermax-10-0-0-installation-guide.pdf?language=en-us&amp;ps=true&#34;&gt;here.&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;Update the &lt;code&gt;my-powermax-settings.yaml&lt;/code&gt; to have endpoint with 10.0 support.&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h2 id=&#34;update-driver-from-v26-to-v27-using-helm&#34;&gt;Update Driver from v2.6 to v2.7 using Helm&lt;/h2&gt;
@@ -2327,7 +2327,7 @@ RDMs should not be added/removed manually from vCenter on any of the cluster VMs
 &lt;h2 id=&#34;io-performance-metrics&#34;&gt;I/O Performance Metrics&lt;/h2&gt;
 &lt;p&gt;Storage system I/O performance metrics (IOPS, bandwidth, latency) are available by default and broken down by storage group and volume.&lt;/p&gt;
 &lt;p&gt;To disable these metrics, set the &lt;code&gt;performanceMetricsEnabled&lt;/code&gt; field under &lt;code&gt;karaviMetricsPowerMax&lt;/code&gt; to false in helm/values.yaml.&lt;/p&gt;
-&lt;p&gt;The following I/O performance metrics are available from the OpenTelemetry collector endpoint. Please see the &lt;a href=&#34;../../&#34;&gt;CSM for Observability&lt;/a&gt; for more information on deploying and configuring the OpenTelemetry collector.&lt;/p&gt;
+&lt;p&gt;The following I/O performance metrics are available from the OpenTelemetry collector endpoint. Please see the &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v2/&#34;&gt;CSM for Observability&lt;/a&gt; for more information on deploying and configuring the OpenTelemetry collector.&lt;/p&gt;
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
@@ -2393,7 +2393,7 @@ RDMs should not be added/removed manually from vCenter on any of the cluster VMs
 &lt;h2 id=&#34;storage-capacity-metrics&#34;&gt;Storage Capacity Metrics&lt;/h2&gt;
 &lt;p&gt;Provides visibility into the total, used, and available capacity for a storage class and associated underlying storage construct.&lt;/p&gt;
 &lt;p&gt;To disable these metrics, set the &lt;code&gt;capacityMetricsEnabled&lt;/code&gt; field under &lt;code&gt;karaviMetricsPowerMax&lt;/code&gt; to false in helm/values.yaml.&lt;/p&gt;
-&lt;p&gt;The following storage capacity metrics are available from the OpenTelemetry collector endpoint. Please see the &lt;a href=&#34;../../&#34;&gt;CSM for Observability&lt;/a&gt; for more information on deploying and configuring the OpenTelemetry collector.&lt;/p&gt;
+&lt;p&gt;The following storage capacity metrics are available from the OpenTelemetry collector endpoint. Please see the &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v2/&#34;&gt;CSM for Observability&lt;/a&gt; for more information on deploying and configuring the OpenTelemetry collector.&lt;/p&gt;
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
@@ -3061,7 +3061,7 @@ For example, if a volume were to be deleted from the array, or unmounted outside
 &lt;h2 id=&#34;io-performance-metrics&#34;&gt;I/O Performance Metrics&lt;/h2&gt;
 &lt;p&gt;Storage system I/O performance metrics (IOPS, bandwidth) are available by default and broken down by cluster and quota.&lt;/p&gt;
 &lt;p&gt;To disable these metrics, set the &lt;code&gt;performanceMetricsEnabled&lt;/code&gt; field to false in helm/values.yaml.&lt;/p&gt;
-&lt;p&gt;The following I/O performance metrics are available from the OpenTelemetry collector endpoint. Please see the &lt;a href=&#34;../../&#34;&gt;CSM for Observability&lt;/a&gt; for more information on deploying and configuring the OpenTelemetry collector.&lt;/p&gt;
+&lt;p&gt;The following I/O performance metrics are available from the OpenTelemetry collector endpoint. Please see the &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v2/&#34;&gt;CSM for Observability&lt;/a&gt; for more information on deploying and configuring the OpenTelemetry collector.&lt;/p&gt;
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
@@ -3095,7 +3095,7 @@ For example, if a volume were to be deleted from the array, or unmounted outside
 &lt;h2 id=&#34;storage-capacity-metrics&#34;&gt;Storage Capacity Metrics&lt;/h2&gt;
 &lt;p&gt;Provides visibility into the total, used, and available capacity for PowerScale cluster and quotas.&lt;/p&gt;
 &lt;p&gt;To disable these metrics, set the &lt;code&gt;capacityMetricsEnabled&lt;/code&gt; field to false in helm/values.yaml.&lt;/p&gt;
-&lt;p&gt;The following storage capacity metrics are available from the OpenTelemetry collector endpoint. Please see the &lt;a href=&#34;../../&#34;&gt;CSM for Observability&lt;/a&gt; for more information on deploying and configuring the OpenTelemetry collector.&lt;/p&gt;
+&lt;p&gt;The following storage capacity metrics are available from the OpenTelemetry collector endpoint. Please see the &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v2/&#34;&gt;CSM for Observability&lt;/a&gt; for more information on deploying and configuring the OpenTelemetry collector.&lt;/p&gt;
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
@@ -3815,7 +3815,7 @@ NFSv4 ACls are supported for NFSv4 shares on NFSv4 enabled NAS servers only. POS
 &lt;h2 id=&#34;io-performance-metrics&#34;&gt;I/O Performance Metrics&lt;/h2&gt;
 &lt;p&gt;Storage system I/O performance metrics (IOPS, bandwidth, latency) are available by default and broken down by export node and volume.&lt;/p&gt;
 &lt;p&gt;To disable these metrics, set the &lt;code&gt;karaviMetricsPowerstore.volumeMetricsEnabled&lt;/code&gt; field to false in helm/values.yaml.&lt;/p&gt;
-&lt;p&gt;The following I/O performance metrics are available from the OpenTelemetry collector endpoint. Please see the &lt;a href=&#34;../../&#34;&gt;CSM for Observability&lt;/a&gt; for more information on deploying and configuring the OpenTelemetry collector.&lt;/p&gt;
+&lt;p&gt;The following I/O performance metrics are available from the OpenTelemetry collector endpoint. Please see the &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v2/&#34;&gt;CSM for Observability&lt;/a&gt; for more information on deploying and configuring the OpenTelemetry collector.&lt;/p&gt;
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
@@ -3877,7 +3877,7 @@ NFSv4 ACls are supported for NFSv4 shares on NFSv4 enabled NAS servers only. POS
 &lt;h2 id=&#34;storage-capacity-metrics&#34;&gt;Storage Capacity Metrics&lt;/h2&gt;
 &lt;p&gt;Provides visibility into the total, used, and available capacity for a storage class and associated underlying storage construct.&lt;/p&gt;
 &lt;p&gt;To disable these metrics, set the &lt;code&gt;enable_powerstore_metrics&lt;/code&gt; field to false in helm/values.yaml.&lt;/p&gt;
-&lt;p&gt;The following storage capacity metrics are available from the OpenTelemetry collector endpoint. Please see the &lt;a href=&#34;../../&#34;&gt;CSM for Observability&lt;/a&gt; for more information on deploying and configuring the OpenTelemetry collector.&lt;/p&gt;
+&lt;p&gt;The following storage capacity metrics are available from the OpenTelemetry collector endpoint. Please see the &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v2/&#34;&gt;CSM for Observability&lt;/a&gt; for more information on deploying and configuring the OpenTelemetry collector.&lt;/p&gt;
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
@@ -4594,7 +4594,7 @@ This could be done with similar command to single PV migration:&lt;/p&gt;
 &lt;p&gt;You can use this command to do so:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;./repctl migrate sts test-sts --to-sc powermax-replication -n default
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;By default, it will find every Pod, PVC and PV for provided StatefulSet and patch every PV with annotation.&lt;/p&gt;
-&lt;p&gt;You can also optionally provide &lt;code&gt;--ndu&lt;/code&gt; flag, with this flag provided repctl will do steps provided in &lt;a href=&#34;#non-disruptive-migration&#34;&gt;Non Disruptive Migration&lt;/a&gt; section automatically.&lt;/p&gt;
+&lt;p&gt;You can also optionally provide &lt;code&gt;--ndu&lt;/code&gt; flag, with this flag provided repctl will do steps provided in &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v2/replication/migration/migrating-volumes-same-array/#non-disruptive-migration&#34;&gt;Non Disruptive Migration&lt;/a&gt; section automatically.&lt;/p&gt;
 
       </description>
     </item>
@@ -4821,7 +4821,7 @@ VQrpjsCPCu3fpVjvvwfspVOftbn/sNgY1J3lz0pdgvJ3yQs6pa+DODQyin5Rt//19rIGifPxi/Hk/k49
         
         
         &lt;p&gt;CSM for Resiliency is primarily designed to detect pod failures due to some kind of node failure or node communication failure. The diagram below shows the hardware environment that is assumed in the design.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;../resiliency_model.jpg&#34; alt=&#34;CSM for Resiliency Hardware Model&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;CSM for Resiliency Hardware Model&#34; src=&#34;../resiliency_model.jpg&#34;&gt;&lt;/p&gt;
 &lt;p&gt;A Kubernetes Control Plane is assumed to exist that provides the K8S API service used by CSM for Resiliency. There is an arbitrary number of worker nodes (two are shown in the diagram) that
 are connected to the Control Plane through a K8S Control Plane IP Network.&lt;/p&gt;
 &lt;p&gt;The worker nodes (e.g. Node1 and Node2) can run a mix of CSM for Resiliency monitored Application Pods as well as unmonitored Application Pods.  Monitored Pods are designated by a specific label that is applied to each monitored pod. The label key and value are configurable for each driver type when CSM for Resiliency is installed and &lt;em&gt;must&lt;/em&gt; be unique for each driver instance.&lt;/p&gt;
@@ -5392,7 +5392,7 @@ The ConfigMap to edit will have this pattern: &lt;storage&gt;-config-params (e.g
 &lt;h2 id=&#34;prerequisites&#34;&gt;Prerequisites&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;Helm 3.3&lt;/li&gt;
-&lt;li&gt;The deployment of one or more &lt;a href=&#34;../../#supported-csi-drivers&#34;&gt;supported&lt;/a&gt; Dell CSI drivers&lt;/li&gt;
+&lt;li&gt;The deployment of one or more &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v2/#supported-csi-drivers&#34;&gt;supported&lt;/a&gt; Dell CSI drivers&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;install-the-csm-for-observability-helm-chart&#34;&gt;Install the CSM for Observability Helm Chart&lt;/h2&gt;
 &lt;p&gt;&lt;strong&gt;Steps&lt;/strong&gt;&lt;/p&gt;
@@ -5517,7 +5517,7 @@ The ConfigMap to edit will have this pattern: &lt;storage&gt;-config-params (e.g
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl get secret karavi-authorization-config proxy-server-root-certificate proxy-authz-tokens -n &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;CSI_DRIVER_NAMESPACE&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt; -o yaml &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; sed &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;s/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; sed &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;s/name: karavi-authorization-config/name: powermax-karavi-authorization-config/&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; sed &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;s/name: proxy-server-root-certificate/name: powermax-proxy-server-root-certificate/&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; sed &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;s/name: proxy-authz-tokens/name: powermax-proxy-authz-tokens/&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; kubectl create -f -
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;Configure the &lt;a href=&#34;#configuration&#34;&gt;parameters&lt;/a&gt; and install the CSM for Observability Helm Chart&lt;/p&gt;
+&lt;p&gt;Configure the &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v2/observability/deployment/helm/#configuration&#34;&gt;parameters&lt;/a&gt; and install the CSM for Observability Helm Chart&lt;/p&gt;
 &lt;p&gt;A default values.yaml file is located &lt;a href=&#34;https://github.com/dell/helm-charts/blob/main/charts/karavi-observability/values.yaml&#34;&gt;here&lt;/a&gt; that can be used for installation. This can be copied into a file named &lt;code&gt;myvalues.yaml&lt;/code&gt; and either used as is or modified accordingly.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt;&lt;/p&gt;
 &lt;ul&gt;
@@ -5951,7 +5951,7 @@ You may obtain a copy of the License at
 &lt;h2 id=&#34;prerequisites&#34;&gt;Prerequisites&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;Helm 3.3&lt;/li&gt;
-&lt;li&gt;The deployment of one or more &lt;a href=&#34;../#supported-csi-drivers&#34;&gt;supported&lt;/a&gt; Dell CSI drivers&lt;/li&gt;
+&lt;li&gt;The deployment of one or more &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v2/observability/#supported-csi-drivers&#34;&gt;supported&lt;/a&gt; Dell CSI drivers&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;online-installer&#34;&gt;Online Installer&lt;/h2&gt;
 &lt;p&gt;The following instructions can be followed to install CSM for Observability in an environment that has an internet connection and is capable of downloading the required Helm chart and Docker images.&lt;br&gt;
@@ -6108,7 +6108,7 @@ The following example will install CSM for Observability into the CSM namespace.
 &lt;h2 id=&#34;prerequisites&#34;&gt;Prerequisites&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;Helm 3.3&lt;/li&gt;
-&lt;li&gt;The deployment of one or more &lt;a href=&#34;../#supported-csi-drivers&#34;&gt;supported&lt;/a&gt; Dell CSI drivers&lt;/li&gt;
+&lt;li&gt;The deployment of one or more &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v2/observability/#supported-csi-drivers&#34;&gt;supported&lt;/a&gt; Dell CSI drivers&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;dependencies&#34;&gt;Dependencies&lt;/h3&gt;
 &lt;p&gt;Multiple Linux-based systems may be required to create and process an offline bundle for use.&lt;/p&gt;
@@ -6319,15 +6319,15 @@ The following example will install CSM for Observability into the CSM namespace.
 &lt;ol&gt;
 &lt;li&gt;Search &lt;em&gt;dell&lt;/em&gt; in the storage category in &lt;a href=&#34;https://operatorhub.io/?keyword=dell&#34;&gt;Operatorhub.io&lt;/a&gt;.&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;&lt;img src=&#34;../ophub1.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../ophub1.png&#34;&gt;&lt;/p&gt;
 &lt;ol start=&#34;2&#34;&gt;
 &lt;li&gt;Click Dell Operator.&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;&lt;img src=&#34;../ophub2.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../ophub2.png&#34;&gt;&lt;/p&gt;
 &lt;ol start=&#34;3&#34;&gt;
 &lt;li&gt;Check the desired version is selected and click &lt;em&gt;Install&lt;/em&gt;.  Follow the provided instructions.&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;&lt;img src=&#34;../ophub3.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../ophub3.png&#34;&gt;&lt;/p&gt;
 &lt;h2 id=&#34;install-csi-drivers-via-operator&#34;&gt;Install CSI Drivers via Operator&lt;/h2&gt;
 &lt;p&gt;Proceed to &lt;a href=&#34;../../installation/operator/#installing-csi-driver-via-operator&#34;&gt;this link&lt;/a&gt; for further installing the driver using Operator&lt;/p&gt;
 
@@ -6343,44 +6343,44 @@ The following example will install CSM for Observability into the CSM namespace.
       <description>
         
         
-        &lt;p&gt;The Dell CSI Drivers support Red Hat OpenShift.  Please see the &lt;a href=&#34;../../#features-and-capabilities&#34;&gt;Supported Platforms&lt;/a&gt; table for more details.&lt;/p&gt;
+        &lt;p&gt;The Dell CSI Drivers support Red Hat OpenShift.  Please see the &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v2/#features-and-capabilities&#34;&gt;Supported Platforms&lt;/a&gt; table for more details.&lt;/p&gt;
 &lt;p&gt;The CSI drivers can be installed via Helm charts or Dell CSI Operator.  The Dell CSI Operator allows for easy installation of the driver via the Openshift UI. The process to install the Operator via the OpenShift UI can be found below.&lt;/p&gt;
 &lt;h2 id=&#34;install-operator-via-the-openshift-ui&#34;&gt;Install Operator via the OpenShift UI&lt;/h2&gt;
 &lt;p&gt;&lt;strong&gt;Steps&lt;/strong&gt;&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;Type &amp;ldquo;Dell&amp;rdquo; in the OperatorHub section under Operators, to get the list of available Dell CSI Operators.&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;&lt;img src=&#34;../oc1.PNG&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../oc1.PNG&#34;&gt;&lt;/p&gt;
 &lt;ol start=&#34;2&#34;&gt;
 &lt;li&gt;Check the version you want to install from the list, you can check the details by clicking it.&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;&lt;img src=&#34;../oc2.PNG&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../oc2.PNG&#34;&gt;&lt;/p&gt;
 &lt;ol start=&#34;3&#34;&gt;
 &lt;li&gt;Once selected, click &amp;ldquo;Install&amp;rdquo; to proceed with the installation process.&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;&lt;img src=&#34;../oc3.PNG&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../oc3.PNG&#34;&gt;&lt;/p&gt;
 &lt;ol start=&#34;4&#34;&gt;
 &lt;li&gt;You can verify the list of available operators by selecting the &amp;ldquo;Installed Operator&amp;rdquo; section.&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;&lt;img src=&#34;../oc4.PNG&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../oc4.PNG&#34;&gt;&lt;/p&gt;
 &lt;ol start=&#34;5&#34;&gt;
 &lt;li&gt;Select the Dell CSI Operator for further details.&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;&lt;img src=&#34;../oc5.PNG&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../oc5.PNG&#34;&gt;&lt;/p&gt;
 &lt;h2 id=&#34;install-csi-drivers-via-operator&#34;&gt;Install CSI Drivers via Operator&lt;/h2&gt;
 &lt;p&gt;&lt;strong&gt;Steps&lt;/strong&gt;&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;Select the particular CSI driver which you want to install, as seen in step 5 above. In this example, CSI Unity is selected.&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;&lt;img src=&#34;../driver1.PNG&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../driver1.PNG&#34;&gt;&lt;/p&gt;
 &lt;ol start=&#34;2&#34;&gt;
 &lt;li&gt;After clicking the &amp;ldquo;Create CSIUnity&amp;rdquo; option in the above snippet, you can set relevant parameters in your yaml file, as shown below.  Refer to the &lt;a href=&#34;../../installation/operator/#installing-csi-driver-via-operator&#34;&gt;driver install pages for the Dell CSI Operator&lt;/a&gt; for information on the parameters.&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;&lt;img src=&#34;../driver2.PNG&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../driver2.PNG&#34;&gt;&lt;/p&gt;
 &lt;ol start=&#34;3&#34;&gt;
 &lt;li&gt;You can check the driver installed and node and controller pods running in the Pods section under Workloads.&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;&lt;img src=&#34;../driver3.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../driver3.png&#34;&gt;&lt;/p&gt;
 
       </description>
     </item>
@@ -6400,7 +6400,7 @@ The following example will install CSM for Observability into the CSM namespace.
 &lt;li&gt;Upgrading the Dell CSI drivers with CSM for Authorization enabled&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;upgrading-csm-for-authorization-proxy-server&#34;&gt;Upgrading CSM for Authorization proxy server&lt;/h3&gt;
-&lt;p&gt;Obtain the latest single binary installer RPM by following one of our two options &lt;a href=&#34;../deployment/#single-binary-installer&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Obtain the latest single binary installer RPM by following one of our two options &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v2/deployment/#single-binary-installer&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;To update the rpm package on the system, run the below command from within the extracted folder:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sh install_karavi_auth.sh --upgrade
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;As an option, on version 1.6.0, the Nodeports for the ingress controller can be specified:&lt;/p&gt;
@@ -6504,7 +6504,7 @@ The following example will install CSM for Observability into the CSM namespace.
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl describe backups.mobility.storage.dell.com/backup1 -n application-mobility
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;If the Storage Class name on the target cluster is different than the Storage Class name on the source cluster where the backup was created, a mapping between source and target Storage Class names must be defined. See &lt;a href=&#34;#changing-pvpvc-storage-classes&#34;&gt;Changing PV/PVC Storage Classes&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;If the Storage Class name on the target cluster is different than the Storage Class name on the source cluster where the backup was created, a mapping between source and target Storage Class names must be defined. See &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v2/applicationmobility/use_cases/#changing-pvpvc-storage-classes&#34;&gt;Changing PV/PVC Storage Classes&lt;/a&gt;.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;The application and its data can be restored on either the same cluster or another cluster by referring to the backup name and providing an optional mapping of the original namespace to the target namespace.&lt;/p&gt;
@@ -6544,7 +6544,7 @@ The following example will install CSM for Observability into the CSM namespace.
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;dellctl cluster add -n targetcluster -u &amp;lt;kube-system-namespace-uuid&amp;gt; -f ~/kubeconfigs/target-cluster-kubeconfig
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;If the Storage Class name on the target cluster is different than the Storage Class name on the source cluster where the backup was created, a mapping between source and target Storage Class names must be defined. See &lt;a href=&#34;#changing-pvpvc-storage-classes&#34;&gt;Changing PV/PVC Storage Classes&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;If the Storage Class name on the target cluster is different than the Storage Class name on the source cluster where the backup was created, a mapping between source and target Storage Class names must be defined. See &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v2/applicationmobility/use_cases/#changing-pvpvc-storage-classes&#34;&gt;Changing PV/PVC Storage Classes&lt;/a&gt;.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Create a Backup by providing a name, the included namespace where the application is installed, and the target cluster and namespace mapping where the application will be restored.&lt;/p&gt;
@@ -6603,7 +6603,7 @@ The following example will install CSM for Observability into the CSM namespace.
         
         
         &lt;h2 id=&#34;vault-server-installation&#34;&gt;Vault Server Installation&lt;/h2&gt;
-&lt;p&gt;If there is already a Vault server available, skip to &lt;a href=&#34;#minimum-server-configuration&#34;&gt;Minimum Server Configuration&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;If there is already a Vault server available, skip to &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v2/secure/encryption/vault/#minimum-server-configuration&#34;&gt;Minimum Server Configuration&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;If there is no Vault server available to use with Encryption, it can be installed in many ways following &lt;a href=&#34;https://www.vaultproject.io/docs&#34;&gt;Hashicorp Vault documentation&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;For testing environment, however, a simple deployment suggested in this section may suffice.
 It creates a standalone server with in-memory (non-persistent) storage, running in a Docker container.&lt;/p&gt;
@@ -6718,14 +6718,14 @@ The same address should be used for &lt;code&gt;vault_addr&lt;/code&gt; in &lt;a
 Refer to the &lt;a href=&#34;https://www.vaultproject.io/docs&#34;&gt;Hashicorp Vault documentation&lt;/a&gt; for recommended configuration options.&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;blockquote&gt;
-&lt;p&gt;If a &lt;a href=&#34;#vault-server-installation&#34;&gt;test instance of Vault&lt;/a&gt; is used, the &lt;code&gt;vault&lt;/code&gt; commands below can be executed in the Vault server container shell.
+&lt;p&gt;If a &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v2/secure/encryption/vault/#vault-server-installation&#34;&gt;test instance of Vault&lt;/a&gt; is used, the &lt;code&gt;vault&lt;/code&gt; commands below can be executed in the Vault server container shell.
 To enter the shell, run &lt;code&gt;docker exec -it vault-server sh&lt;/code&gt;. After completing the configuration process, exit the shell by typing &lt;code&gt;exit&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;Alternatively, you can &lt;a href=&#34;https://www.vaultproject.io/downloads&#34;&gt;download the vault binary&lt;/a&gt; and run it anywhere.
 It will require two environment variables to communicate with the Vault server:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;code&gt;VAULT_ADDR&lt;/code&gt; - URL similar to &lt;code&gt;http://127.0.0.1:8200&lt;/code&gt;. You may need to change the address in the URL to the address of
 the Docker host where the server is running.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;VAULT_TOKEN&lt;/code&gt; - Authentication token, e.g. the root token &lt;code&gt;DemoRootToken&lt;/code&gt; used in the &lt;a href=&#34;#vault-server-installation&#34;&gt;test instance of Vault&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;VAULT_TOKEN&lt;/code&gt; - Authentication token, e.g. the root token &lt;code&gt;DemoRootToken&lt;/code&gt; used in the &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v2/secure/encryption/vault/#vault-server-installation&#34;&gt;test instance of Vault&lt;/a&gt;.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/blockquote&gt;
 &lt;h3 id=&#34;enable-keyvalue-secret-engine&#34;&gt;Enable Key/Value secret engine&lt;/h3&gt;
@@ -6765,7 +6765,7 @@ The role only needs read access to the Key/Value secret engine config endpoint f
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;vault write auth/approle/role/dea-role/custom-secret-id &lt;span style=&#34;color:#000&#34;&gt;secret_id&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;demo-secret-id
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;
 &lt;p&gt;Secret ID has an expiration time after which it becomes invalid resulting in &lt;a href=&#34;../troubleshooting#expired-approle-secret-id&#34;&gt;authorization failure&lt;/a&gt;.
-The expiration time for new secret IDs can be set in &lt;code&gt;secret_id_ttl&lt;/code&gt; parameter when &lt;a href=&#34;#create-a-role&#34;&gt;the role is created&lt;/a&gt; or later on using
+The expiration time for new secret IDs can be set in &lt;code&gt;secret_id_ttl&lt;/code&gt; parameter when &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v2/secure/encryption/vault/#create-a-role&#34;&gt;the role is created&lt;/a&gt; or later on using
 &lt;code&gt;vault write auth/approle/role/dea-role/secret-id-ttl secret_id_ttl=24h&lt;/code&gt;.&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;h2 id=&#34;token-ttl-considerations&#34;&gt;Token TTL Considerations&lt;/h2&gt;
@@ -6803,111 +6803,111 @@ This document outlines all karavictl commands, their intended use, options that 
 &lt;/thead&gt;
 &lt;tbody&gt;
 &lt;tr&gt;
-&lt;td&gt;&lt;a href=&#34;#karavictl&#34;&gt;karavictl&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v2/authorization/cli/#karavictl&#34;&gt;karavictl&lt;/a&gt;&lt;/td&gt;
 &lt;td&gt;karavictl is used to interact with CSM Authorization Server&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;&lt;a href=&#34;#karavictl-admin-token&#34;&gt;karavictl admin token&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v2/authorization/cli/#karavictl-admin-token&#34;&gt;karavictl admin token&lt;/a&gt;&lt;/td&gt;
 &lt;td&gt;Generate admin tokens&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;&lt;a href=&#34;#karavictl-cluster-info&#34;&gt;karavictl cluster-info&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v2/authorization/cli/#karavictl-cluster-info&#34;&gt;karavictl cluster-info&lt;/a&gt;&lt;/td&gt;
 &lt;td&gt;Display the state of resources within the cluster&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;&lt;a href=&#34;#karavictl-generate&#34;&gt;karavictl generate&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v2/authorization/cli/#karavictl-generate&#34;&gt;karavictl generate&lt;/a&gt;&lt;/td&gt;
 &lt;td&gt;Generate resources for use with CSM&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;&lt;a href=&#34;#karavictl-generate-token&#34;&gt;karavictl generate token&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v2/authorization/cli/#karavictl-generate-token&#34;&gt;karavictl generate token&lt;/a&gt;&lt;/td&gt;
 &lt;td&gt;Generate tokens&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;&lt;a href=&#34;#karavictl-role&#34;&gt;karavictl role&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v2/authorization/cli/#karavictl-role&#34;&gt;karavictl role&lt;/a&gt;&lt;/td&gt;
 &lt;td&gt;Manage role&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;&lt;a href=&#34;#karavictl-role-get&#34;&gt;karavictl role get&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v2/authorization/cli/#karavictl-role-get&#34;&gt;karavictl role get&lt;/a&gt;&lt;/td&gt;
 &lt;td&gt;Get role&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;&lt;a href=&#34;#karavictl-role-list&#34;&gt;karavictl role list&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v2/authorization/cli/#karavictl-role-list&#34;&gt;karavictl role list&lt;/a&gt;&lt;/td&gt;
 &lt;td&gt;List roles&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;&lt;a href=&#34;#karavictl-role-create&#34;&gt;karavictl role create&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v2/authorization/cli/#karavictl-role-create&#34;&gt;karavictl role create&lt;/a&gt;&lt;/td&gt;
 &lt;td&gt;Create one or more CSM roles&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;&lt;a href=&#34;#karavictl-role-update&#34;&gt;karavictl role update&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v2/authorization/cli/#karavictl-role-update&#34;&gt;karavictl role update&lt;/a&gt;&lt;/td&gt;
 &lt;td&gt;Update the quota of one or more CSM roles&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;&lt;a href=&#34;#karavictl-role-delete&#34;&gt;karavictl role delete&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v2/authorization/cli/#karavictl-role-delete&#34;&gt;karavictl role delete&lt;/a&gt;&lt;/td&gt;
 &lt;td&gt;Delete role&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;&lt;a href=&#34;#karavictl-rolebinding&#34;&gt;karavictl rolebinding&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v2/authorization/cli/#karavictl-rolebinding&#34;&gt;karavictl rolebinding&lt;/a&gt;&lt;/td&gt;
 &lt;td&gt;Manage role bindings&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;&lt;a href=&#34;#karavictl-rolebinding-create&#34;&gt;karavictl rolebinding create&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v2/authorization/cli/#karavictl-rolebinding-create&#34;&gt;karavictl rolebinding create&lt;/a&gt;&lt;/td&gt;
 &lt;td&gt;Create a rolebinding between role and tenant&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;&lt;a href=&#34;#karavictl-rolebinding-delete&#34;&gt;karavictl rolebinding delete&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v2/authorization/cli/#karavictl-rolebinding-delete&#34;&gt;karavictl rolebinding delete&lt;/a&gt;&lt;/td&gt;
 &lt;td&gt;Delete a rolebinding between role and tenant&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;&lt;a href=&#34;#karavictl-storage&#34;&gt;karavictl storage&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v2/authorization/cli/#karavictl-storage&#34;&gt;karavictl storage&lt;/a&gt;&lt;/td&gt;
 &lt;td&gt;Manage storage systems&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;&lt;a href=&#34;#karavictl-storage-get&#34;&gt;karavictl storage get&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v2/authorization/cli/#karavictl-storage-get&#34;&gt;karavictl storage get&lt;/a&gt;&lt;/td&gt;
 &lt;td&gt;Get details on a registered storage system&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;&lt;a href=&#34;#karavictl-storage-list&#34;&gt;karavictl storage list&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v2/authorization/cli/#karavictl-storage-list&#34;&gt;karavictl storage list&lt;/a&gt;&lt;/td&gt;
 &lt;td&gt;List registered storage systems&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;&lt;a href=&#34;#karavictl-storage-create&#34;&gt;karavictl storage create&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v2/authorization/cli/#karavictl-storage-create&#34;&gt;karavictl storage create&lt;/a&gt;&lt;/td&gt;
 &lt;td&gt;Create and register a storage system&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;&lt;a href=&#34;#karavictl-storage-update&#34;&gt;karavictl storage update&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v2/authorization/cli/#karavictl-storage-update&#34;&gt;karavictl storage update&lt;/a&gt;&lt;/td&gt;
 &lt;td&gt;Update a registered storage system&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;&lt;a href=&#34;#karavictl-storage-delete&#34;&gt;karavictl storage delete&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v2/authorization/cli/#karavictl-storage-delete&#34;&gt;karavictl storage delete&lt;/a&gt;&lt;/td&gt;
 &lt;td&gt;Delete a registered storage system&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;&lt;a href=&#34;#karavictl-tenant&#34;&gt;karavictl tenant &lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v2/authorization/cli/#karavictl-tenant&#34;&gt;karavictl tenant &lt;/a&gt;&lt;/td&gt;
 &lt;td&gt;Manage tenants&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;&lt;a href=&#34;#karavictl-tenant-create&#34;&gt;karavictl tenant create&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v2/authorization/cli/#karavictl-tenant-create&#34;&gt;karavictl tenant create&lt;/a&gt;&lt;/td&gt;
 &lt;td&gt;Create a tenant resource within CSM&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;&lt;a href=&#34;#karavictl-tenant-get&#34;&gt;karavictl tenant get&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v2/authorization/cli/#karavictl-tenant-get&#34;&gt;karavictl tenant get&lt;/a&gt;&lt;/td&gt;
 &lt;td&gt;Get a tenant resource within CSM&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;&lt;a href=&#34;#karavictl-tenant-list&#34;&gt;karavictl tenant list&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v2/authorization/cli/#karavictl-tenant-list&#34;&gt;karavictl tenant list&lt;/a&gt;&lt;/td&gt;
 &lt;td&gt;Lists tenant resources within CSM&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;&lt;a href=&#34;#karavictl-tenant-revoke&#34;&gt;karavictl tenant revoke&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v2/authorization/cli/#karavictl-tenant-revoke&#34;&gt;karavictl tenant revoke&lt;/a&gt;&lt;/td&gt;
 &lt;td&gt;Get a tenant resource within CSM&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;&lt;a href=&#34;#karavictl-tenant-delete&#34;&gt;karavictl tenant delete&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v2/authorization/cli/#karavictl-tenant-delete&#34;&gt;karavictl tenant delete&lt;/a&gt;&lt;/td&gt;
 &lt;td&gt;Deletes a tenant resource within CSM&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;&lt;a href=&#34;#karavictl-tenant-update&#34;&gt;karavictl tenant update&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v2/authorization/cli/#karavictl-tenant-update&#34;&gt;karavictl tenant update&lt;/a&gt;&lt;/td&gt;
 &lt;td&gt;Updates a tenant resource within CSM&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
@@ -7444,7 +7444,7 @@ be piped directly to kubectl:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt; ./repctl --rg rg-id failover --target target-cluster-name
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;b. Execute &amp;ldquo;reprotect&amp;rdquo; action on selected ReplicationGroup which will resume the replication from new &amp;ldquo;source&amp;rdquo;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt; ./repctl --rg rg-id reprotect --at new-source-cluster-name
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;../state_changes1.png&#34; alt=&#34;state_changes1&#34;&gt;&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img alt=&#34;state_changes1&#34; src=&#34;../state_changes1.png&#34;&gt;&lt;/p&gt;
 &lt;h3 id=&#34;unplanned-migration-to-the-target-clusterarray&#34;&gt;Unplanned Migration to the target cluster/array&lt;/h3&gt;
 &lt;p&gt;This scenario is the typical choice when a site goes down:&lt;/p&gt;
 &lt;p&gt;a. Execute &amp;ldquo;failover&amp;rdquo; action on selected ReplicationGroup using the cluster name&lt;/p&gt;
@@ -7456,7 +7456,7 @@ be piped directly to kubectl:&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;c. Execute &amp;ldquo;reprotect&amp;rdquo; action on selected ReplicationGroup which will resume the replication.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt; ./repctl --rg rg-id reprotect --at new-source-cluster-name
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;../state_changes2.png&#34; alt=&#34;state_changes2&#34;&gt;&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img alt=&#34;state_changes2&#34; src=&#34;../state_changes2.png&#34;&gt;&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;&lt;em&gt;&lt;strong&gt;NOTE&lt;/strong&gt;&lt;/em&gt;: When users do Failover and Failback, the tests pods on the source cluster may go &amp;ldquo;CrashLoopOff&amp;rdquo; state since it will try to remount the same volume which is already mounted. To get around this problem, bring down the number of replicas to 0 and then after that is done, bring it up to 1.&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -7676,9 +7676,9 @@ Deploy the controller using a command similar to this:&lt;/p&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;A rekey-controller pod should now be up and running.&lt;/p&gt;
 &lt;h2 id=&#34;rekey-usage&#34;&gt;Rekey Usage&lt;/h2&gt;
 &lt;p&gt;Rekeying is initiated and monitored via Kubernetes custom resources of type &lt;code&gt;rekeys.encryption.storage.dell.com&lt;/code&gt;.
-This can be done directly &lt;a href=&#34;#rekey-with-kubectl&#34;&gt;using kubectl&lt;/a&gt; or in a more user-friendly way &lt;a href=&#34;#rekey-with-dellctl&#34;&gt;using dellctl&lt;/a&gt;.
+This can be done directly &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v2/secure/encryption/rekey/#rekey-with-kubectl&#34;&gt;using kubectl&lt;/a&gt; or in a more user-friendly way &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v2/secure/encryption/rekey/#rekey-with-dellctl&#34;&gt;using dellctl&lt;/a&gt;.
 Creation of a rekey resource for a PV will kick off a rekey process on this PV. The rekey resource will contain the result
-of the operation. Refer to &lt;a href=&#34;#rekey-status&#34;&gt;Rekey Status&lt;/a&gt; for possible status values.&lt;/p&gt;
+of the operation. Refer to &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v2/secure/encryption/rekey/#rekey-status&#34;&gt;Rekey Status&lt;/a&gt; for possible status values.&lt;/p&gt;
 &lt;h3 id=&#34;rekey-with-dellctl&#34;&gt;Rekey with dellctl&lt;/h3&gt;
 &lt;p&gt;If &lt;code&gt;dellctl&lt;/code&gt; CLI is installed, rekeying an encrypted volume is simple.
 For example, to rekey a PV with the name &lt;code&gt;k8s-112a5d41bc&lt;/code&gt; use a command like this:&lt;/p&gt;
@@ -7757,10 +7757,10 @@ the rekey can be inspected through the &lt;code&gt;status.phase&lt;/code&gt; fie
         
         &lt;h2 id=&#34;frequently-asked-questions&#34;&gt;Frequently Asked Questions&lt;/h2&gt;
 &lt;ol&gt;
-&lt;li&gt;&lt;a href=&#34;#how-can-i-diagnose-an-issue-with-application-mobility&#34;&gt;How can I diagnose an issue with Application Mobility?&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#how-can-i-view-logs&#34;&gt;How can I view logs?&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#how-can-i-debug-and-troubleshoot-issues-with-kubernetes&#34;&gt;How can I debug and troubleshoot issues with Kubernetes?&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#why-are-there-error-logs-about-a-license&#34;&gt;Why are there error logs about a license?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v2/applicationmobility/troubleshooting/#how-can-i-diagnose-an-issue-with-application-mobility&#34;&gt;How can I diagnose an issue with Application Mobility?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v2/applicationmobility/troubleshooting/#how-can-i-view-logs&#34;&gt;How can I view logs?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v2/applicationmobility/troubleshooting/#how-can-i-debug-and-troubleshoot-issues-with-kubernetes&#34;&gt;How can I debug and troubleshoot issues with Kubernetes?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v2/applicationmobility/troubleshooting/#why-are-there-error-logs-about-a-license&#34;&gt;Why are there error logs about a license?&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h3 id=&#34;how-can-i-diagnose-an-issue-with-application-mobility&#34;&gt;How can I diagnose an issue with Application Mobility?&lt;/h3&gt;
 &lt;p&gt;Once you have attempted to install Application Mobility to your Kubernetes or OpenShift cluster, the first step in troubleshooting is locating the problem.&lt;/p&gt;
@@ -7782,7 +7782,7 @@ the rekey can be inspected through the &lt;code&gt;status.phase&lt;/code&gt; fie
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;why-are-there-error-logs-about-a-license&#34;&gt;Why are there error logs about a license?&lt;/h3&gt;
-&lt;p&gt;Application Mobility requires a license in order to function. See the &lt;a href=&#34;../deployment&#34;&gt;Deployment&lt;/a&gt; instructions for steps to request a license.&lt;/p&gt;
+&lt;p&gt;Application Mobility requires a license in order to function. See the &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v2/deployment/&#34;&gt;Deployment&lt;/a&gt; instructions for steps to request a license.&lt;/p&gt;
 &lt;p&gt;There will be errors in the logs about the license for these cases:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;License does not exist&lt;/li&gt;
@@ -7851,7 +7851,7 @@ If you experience a problem with CSM for Resiliency it is important you provide 
         
         &lt;p&gt;One of the goals of high availability is to eliminate single points of failure in a storage system. In Kubernetes, this can mean that a single PV represents multiple read/write enabled volumes on different arrays, located at reasonable distances with both the volumes in sync with each other. If one of the volumes goes down, there will still be another volume available for read and write. This kind of high availability can be achieved by using SRDF Metro replication mode, supported only by PowerMax arrays.&lt;/p&gt;
 &lt;h2 id=&#34;srdf-metro-architecture&#34;&gt;SRDF Metro Architecture&lt;/h2&gt;
-&lt;p&gt;&lt;img src=&#34;../metro.png&#34; alt=&#34;metro architecture diagram&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;metro architecture diagram&#34; src=&#34;../metro.png&#34;&gt;&lt;/p&gt;
 &lt;p&gt;In SRDF metro configurations:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;R2 devices are Read/Write accessible to application hosts.&lt;/li&gt;

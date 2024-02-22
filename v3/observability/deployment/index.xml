@@ -27,7 +27,7 @@
 &lt;h2 id=&#34;prerequisites&#34;&gt;Prerequisites&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;Helm 3.3&lt;/li&gt;
-&lt;li&gt;The deployment of one or more &lt;a href=&#34;../../#supported-csi-drivers&#34;&gt;supported&lt;/a&gt; Dell CSI drivers&lt;/li&gt;
+&lt;li&gt;The deployment of one or more &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v3/#supported-csi-drivers&#34;&gt;supported&lt;/a&gt; Dell CSI drivers&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;install-the-csm-for-observability-helm-chart&#34;&gt;Install the CSM for Observability Helm Chart&lt;/h2&gt;
 &lt;p&gt;&lt;strong&gt;Steps&lt;/strong&gt;&lt;/p&gt;
@@ -133,7 +133,7 @@
 &lt;/ol&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;Configure the &lt;a href=&#34;#configuration&#34;&gt;parameters&lt;/a&gt; and install the CSM for Observability Helm Chart&lt;/p&gt;
+&lt;p&gt;Configure the &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v3/observability/deployment/helm/#configuration&#34;&gt;parameters&lt;/a&gt; and install the CSM for Observability Helm Chart&lt;/p&gt;
 &lt;p&gt;A default values.yaml file is located &lt;a href=&#34;https://github.com/dell/helm-charts/blob/main/charts/karavi-observability/values.yaml&#34;&gt;here&lt;/a&gt; that can be used for installation. This can be copied into a file named &lt;code&gt;myvalues.yaml&lt;/code&gt; and either used as is or modified accordingly.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt;&lt;/p&gt;
 &lt;ul&gt;
@@ -570,7 +570,7 @@ You may obtain a copy of the License at
 &lt;h2 id=&#34;prerequisites&#34;&gt;Prerequisites&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;Helm 3.3&lt;/li&gt;
-&lt;li&gt;The deployment of one or more &lt;a href=&#34;../#supported-csi-drivers&#34;&gt;supported&lt;/a&gt; Dell CSI drivers&lt;/li&gt;
+&lt;li&gt;The deployment of one or more &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v3/observability/#supported-csi-drivers&#34;&gt;supported&lt;/a&gt; Dell CSI drivers&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;online-installer&#34;&gt;Online Installer&lt;/h2&gt;
 &lt;p&gt;The following instructions can be followed to install CSM for Observability in an environment that has an internet connection and is capable of downloading the required Helm chart and Docker images.&lt;br&gt;
@@ -727,7 +727,7 @@ The following example will install CSM for Observability into the CSM namespace.
 &lt;h2 id=&#34;prerequisites&#34;&gt;Prerequisites&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;Helm 3.3&lt;/li&gt;
-&lt;li&gt;The deployment of one or more &lt;a href=&#34;../#supported-csi-drivers&#34;&gt;supported&lt;/a&gt; Dell CSI drivers&lt;/li&gt;
+&lt;li&gt;The deployment of one or more &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v3/observability/#supported-csi-drivers&#34;&gt;supported&lt;/a&gt; Dell CSI drivers&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;dependencies&#34;&gt;Dependencies&lt;/h3&gt;
 &lt;p&gt;Multiple Linux-based systems may be required to create and process an offline bundle for use.&lt;/p&gt;

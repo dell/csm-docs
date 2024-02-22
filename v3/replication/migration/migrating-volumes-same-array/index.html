@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="generator" content="Hugo 0.122.0">
+<meta name="generator" content="Hugo 0.123.1">
 <meta name="robots" content="index, follow">
 
 <link rel="shortcut icon" href="/favicons/favicon.ico" >
@@ -106,7 +106,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.7dad682d16f69f57f44216c5ece5d90b.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.b2461058d7fc1f7ffea2f9edd5cdfce8.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -128,7 +128,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.7dad682d16f69f57f44216c5ece5d90b.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.b2461058d7fc1f7ffea2f9edd5cdfce8.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -144,8 +144,13 @@
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-csm-docsv3deployment-li">
   <a href="/csm-docs/v3/deployment/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3deployment"><span class="">Deployment</span></a>
   <ul class="ul-2 foldable">
-    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3deploymentcsminstallationwizard-li">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv3deploymentcsminstallationwizard-li">
   <a href="/csm-docs/v3/deployment/csminstallationwizard/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3deploymentcsminstallationwizard"><span class="">CSM Installation Wizard</span></a>
+  <ul class="ul-3 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3deploymentcsminstallationwizardsrc-li">
+  <a href="/csm-docs/v3/deployment/csminstallationwizard/src/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3deploymentcsminstallationwizardsrc"><span class=""></span></a>
+</li>
+  </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv3deploymentcsmoperator-li">
   <a href="/csm-docs/v3/deployment/csmoperator/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3deploymentcsmoperator"><span class="">CSM Operator</span></a>
   <ul class="ul-3 foldable">
@@ -616,22 +621,6 @@
             
 
 	
-		
-
-
-
-  
-  
-
-	
-		
-
-
-
-  
-  
-
-	
 
           </aside>
           <main class="col-12 col-md-9 col-xl-8 pl-md-5" role="main">
@@ -766,7 +755,7 @@ This could be done with similar command to single PV migration:</p>
 <p>You can use this command to do so:</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>./repctl migrate sts test-sts --to-sc powermax-replication -n default
 </span></span></code></pre></div><p>By default, it will find every Pod, PVC and PV for provided StatefulSet and patch every PV with annotation.</p>
-<p>You can also optionally provide <code>--ndu</code> flag, with this flag provided repctl will do steps provided in <a href="#non-disruptive-migration">Non Disruptive Migration</a> section automatically.</p>
+<p>You can also optionally provide <code>--ndu</code> flag, with this flag provided repctl will do steps provided in <a href="/csm-docs/v3/replication/migration/migrating-volumes-same-array/#non-disruptive-migration">Non Disruptive Migration</a> section automatically.</p>
 
 	
 	

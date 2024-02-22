@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="generator" content="Hugo 0.122.0">
+<meta name="generator" content="Hugo 0.123.1">
 <link rel="alternate" type="application/rss&#43;xml" href="https://dell.github.io/csm-docs/v2/authorization/index.xml">
 <meta name="robots" content="index, follow">
 
@@ -102,7 +102,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.7dad682d16f69f57f44216c5ece5d90b.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.b2461058d7fc1f7ffea2f9edd5cdfce8.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -124,7 +124,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.7dad682d16f69f57f44216c5ece5d90b.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.b2461058d7fc1f7ffea2f9edd5cdfce8.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -143,7 +143,9 @@
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv2deploymentcsminstallationwizard-li">
   <a href="/csm-docs/v2/deployment/csminstallationwizard/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv2deploymentcsminstallationwizard"><span class="">CSM Installation Wizard</span></a>
   <ul class="ul-3 foldable">
-    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2deploymentcsminstallationwizardrelease_notes-li">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2deploymentcsminstallationwizardsrc-li">
+  <a href="/csm-docs/v2/deployment/csminstallationwizard/src/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2deploymentcsminstallationwizardsrc"><span class=""></span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2deploymentcsminstallationwizardrelease_notes-li">
   <a href="/csm-docs/v2/deployment/csminstallationwizard/release_notes/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2deploymentcsminstallationwizardrelease_notes"><span class="">Release Notes</span></a>
 </li>
   </ul>
@@ -625,22 +627,6 @@
             
 
 	
-		
-
-
-
-  
-  
-
-	
-		
-
-
-
-  
-  
-
-	
 
           </aside>
           <main class="col-12 col-md-9 col-xl-8 pl-md-5" role="main">
@@ -665,14 +651,6 @@
 		
 
   
-    
-
-
-  
-    
-
-
-  
 
 		
 	</header>
@@ -681,7 +659,7 @@
 <p>Storage administrators of compatible storage platforms will be able to apply quota and RBAC rules that instantly and automatically restrict cluster tenants usage of storage resources. Users of storage through CSM for Authorization do not need to have storage admin root credentials to access the storage system.</p>
 <p>Kubernetes administrators will have an interface to create, delete, and manage roles/groups that storage rules may be applied. Administrators and/or users may then generate authentication tokens that may be used by tenants to use storage with proper access policies being automatically enforced.</p>
 <p>The following diagram shows a high-level overview of CSM for Authorization with a <code>tenant-app</code> that is using a CSI driver to perform storage operations through the CSM for Authorization <code>proxy-server</code> to access the a Dell storage system. All requests from the CSI driver will contain the token for the given tenant that was granted by the Storage Administrator.</p>
-<p><img src="./karavi-authorization-example.png" alt="CSM for Authorization" title="CSM for Authorization"></p>
+<p><img alt="CSM for Authorization" src="./karavi-authorization-example.png" title="CSM for Authorization"></p>
 <h2 id="csm-for-authorization-capabilities">CSM for Authorization Capabilities</h2>
 
 
@@ -821,7 +799,7 @@
 
 </p>
 <p><strong>NOTE:</strong> If the deployed CSI driver has a number of controller pods equal to the number of schedulable nodes in your cluster, CSM for Authorization may not be able to inject properly into the driver&rsquo;s controller pod.
-To resolve this, please refer to our <a href="./troubleshooting">troubleshooting guide</a> on the topic.</p>
+To resolve this, please refer to our <a href="/csm-docs/v2/authorization/troubleshooting/">troubleshooting guide</a> on the topic.</p>
 <h2 id="authorization-components-support-matrix">Authorization Components Support Matrix</h2>
 <p>CSM for Authorization consists of 2 components - the Authorization sidecar and the Authorization proxy server.  It is important that the version of the Authorization sidecar image maps to a supported version of the Authorization proxy server.</p>
 
@@ -900,7 +878,7 @@ c) Assign the role to the tenant and generate a token.<br></li>
 <li>Tenant Admin inputs the Token into their Kubernetes cluster as a Secret.</li>
 <li>Tenant Admin updates CSI driver with CSM Authorization sidecar module.</li>
 </ol>
-<p><img src="./design2.png" alt="CSM for Authorization Workflow" title="CSM for Authorization Workflow"></p>
+<p><img alt="CSM for Authorization Workflow" src="./design2.png" title="CSM for Authorization Workflow"></p>
 
         <div class="section-index">
     

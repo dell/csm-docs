@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="generator" content="Hugo 0.122.0">
+<meta name="generator" content="Hugo 0.123.1">
 <link rel="alternate" type="application/rss&#43;xml" href="https://dell.github.io/csm-docs/docs/authorization/backup-and-restore/helm/index.xml">
 <meta name="robots" content="index, follow">
 
@@ -102,7 +102,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.7dad682d16f69f57f44216c5ece5d90b.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.b2461058d7fc1f7ffea2f9edd5cdfce8.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -124,7 +124,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.7dad682d16f69f57f44216c5ece5d90b.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.b2461058d7fc1f7ffea2f9edd5cdfce8.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -145,6 +145,8 @@
   <ul class="ul-3 foldable">
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymentcsminstallationwizardrelease-li">
   <a href="/csm-docs/docs/deployment/csminstallationwizard/release/" title="Release Notes" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsdeploymentcsminstallationwizardrelease"><span class="">Release notes</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymentcsminstallationwizardsrc-li">
+  <a href="/csm-docs/docs/deployment/csminstallationwizard/src/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsdeploymentcsminstallationwizardsrc"><span class=""></span></a>
 </li>
   </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsdocsdeploymentcsmoperator-li">
@@ -642,22 +644,6 @@
             
 
 	
-		
-
-
-
-  
-  
-
-	
-		
-
-
-
-  
-  
-
-	
 
           </aside>
           <main class="col-12 col-md-9 col-xl-8 pl-md-5" role="main">
@@ -729,7 +715,7 @@
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl -n &lt;authorization-namespace&gt; rollout restart deploy/proxy-server
 </span></span><span style="display:flex;"><span>deployment.apps/proxy-server restarted
 </span></span></code></pre></div><h2 id="tenants-quota-and-volume-ownership">Tenants, Quota, and Volume ownership</h2>
-<p>Redis is used to store application data regarding <a href="../../design#quota--volume-ownership">tenants, quota, and volume ownership</a> with the Storage Class specified in the <code>redis.storageClass</code> parameter in the values file, or with the default Storage Class if that parameter was not specified.</p>
+<p>Redis is used to store application data regarding <a href="/csm-docs/docs/authorization/design/#quota--volume-ownership">tenants, quota, and volume ownership</a> with the Storage Class specified in the <code>redis.storageClass</code> parameter in the values file, or with the default Storage Class if that parameter was not specified.</p>
 <p>The Persistent Volume for Redis is dynamically provisioned by this Storage Class with the <code>redis-primary-pv-claim</code> Persistent Volume Claim. See the example.</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl get persistentvolume
 </span></span></code></pre></div><pre tabindex="0"><code>NAME                CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS     CLAIM                                      STORAGECLASS    REASON   AGE

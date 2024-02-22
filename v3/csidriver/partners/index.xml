@@ -28,15 +28,15 @@
 &lt;ol&gt;
 &lt;li&gt;Search &lt;em&gt;dell&lt;/em&gt; in the storage category in &lt;a href=&#34;https://operatorhub.io/?keyword=dell&#34;&gt;Operatorhub.io&lt;/a&gt;.&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;&lt;img src=&#34;../ophub1.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../ophub1.png&#34;&gt;&lt;/p&gt;
 &lt;ol start=&#34;2&#34;&gt;
 &lt;li&gt;Click Dell Operator.&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;&lt;img src=&#34;../ophub2.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../ophub2.png&#34;&gt;&lt;/p&gt;
 &lt;ol start=&#34;3&#34;&gt;
 &lt;li&gt;Check the desired version is selected and click &lt;em&gt;Install&lt;/em&gt;.  Follow the provided instructions.&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;&lt;img src=&#34;../ophub3.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../ophub3.png&#34;&gt;&lt;/p&gt;
 &lt;h2 id=&#34;install-csi-drivers-via-operator&#34;&gt;Install CSI Drivers via Operator&lt;/h2&gt;
 &lt;p&gt;Proceed to &lt;a href=&#34;../../installation/operator/#installing-csi-driver-via-operator&#34;&gt;this link&lt;/a&gt; for further installing the driver using Operator&lt;/p&gt;
 
@@ -52,44 +52,44 @@
       <description>
         
         
-        &lt;p&gt;The Dell CSI Drivers support Red Hat OpenShift.  Please see the &lt;a href=&#34;../../#features-and-capabilities&#34;&gt;Supported Platforms&lt;/a&gt; table for more details.&lt;/p&gt;
+        &lt;p&gt;The Dell CSI Drivers support Red Hat OpenShift.  Please see the &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v3/#features-and-capabilities&#34;&gt;Supported Platforms&lt;/a&gt; table for more details.&lt;/p&gt;
 &lt;p&gt;The CSI drivers can be installed via Helm charts or Dell CSI Operator.  The Dell CSI Operator allows for easy installation of the driver via the Openshift UI. The process to install the Operator via the OpenShift UI can be found below.&lt;/p&gt;
 &lt;h2 id=&#34;install-operator-via-the-openshift-ui&#34;&gt;Install Operator via the OpenShift UI&lt;/h2&gt;
 &lt;p&gt;&lt;strong&gt;Steps&lt;/strong&gt;&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;Type &amp;ldquo;Dell&amp;rdquo; in the OperatorHub section under Operators, to get the list of available Dell CSI Operators.&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;&lt;img src=&#34;../oc1.PNG&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../oc1.PNG&#34;&gt;&lt;/p&gt;
 &lt;ol start=&#34;2&#34;&gt;
 &lt;li&gt;Check the version you want to install from the list, you can check the details by clicking it.&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;&lt;img src=&#34;../oc2.PNG&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../oc2.PNG&#34;&gt;&lt;/p&gt;
 &lt;ol start=&#34;3&#34;&gt;
 &lt;li&gt;Once selected, click &amp;ldquo;Install&amp;rdquo; to proceed with the installation process.&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;&lt;img src=&#34;../oc3.PNG&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../oc3.PNG&#34;&gt;&lt;/p&gt;
 &lt;ol start=&#34;4&#34;&gt;
 &lt;li&gt;You can verify the list of available operators by selecting the &amp;ldquo;Installed Operator&amp;rdquo; section.&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;&lt;img src=&#34;../oc4.PNG&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../oc4.PNG&#34;&gt;&lt;/p&gt;
 &lt;ol start=&#34;5&#34;&gt;
 &lt;li&gt;Select the Dell CSI Operator for further details.&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;&lt;img src=&#34;../oc5.PNG&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../oc5.PNG&#34;&gt;&lt;/p&gt;
 &lt;h2 id=&#34;install-csi-drivers-via-operator&#34;&gt;Install CSI Drivers via Operator&lt;/h2&gt;
 &lt;p&gt;&lt;strong&gt;Steps&lt;/strong&gt;&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;Select the particular CSI driver which you want to install, as seen in step 5 above. In this example, CSI Unity is selected.&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;&lt;img src=&#34;../driver1.PNG&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../driver1.PNG&#34;&gt;&lt;/p&gt;
 &lt;ol start=&#34;2&#34;&gt;
 &lt;li&gt;After clicking the &amp;ldquo;Create CSIUnity&amp;rdquo; option in the above snippet, you can set relevant parameters in your yaml file, as shown below.  Refer to the &lt;a href=&#34;../../installation/operator/#installing-csi-driver-via-operator&#34;&gt;driver install pages for the Dell CSI Operator&lt;/a&gt; for information on the parameters.&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;&lt;img src=&#34;../driver2.PNG&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../driver2.PNG&#34;&gt;&lt;/p&gt;
 &lt;ol start=&#34;3&#34;&gt;
 &lt;li&gt;You can check the driver installed and node and controller pods running in the Pods section under Workloads.&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;&lt;img src=&#34;../driver3.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../driver3.png&#34;&gt;&lt;/p&gt;
 
       </description>
     </item>
@@ -108,9 +108,9 @@
 &lt;p&gt;On MKE-based clusters, kubectl may not be installed by default, it is important that kubectl is installed prior to the installation of the driver.&lt;/p&gt;
 &lt;p&gt;The worker nodes on MKE-backed clusters may run any of the OS which we support with upstream clusters.&lt;/p&gt;
 &lt;h2 id=&#34;mke-ui-examples&#34;&gt;MKE UI Examples&lt;/h2&gt;
-&lt;p&gt;&lt;img src=&#34;../first.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;../second.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;../third.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../first.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../second.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../third.png&#34;&gt;&lt;/p&gt;
 
       </description>
     </item>
@@ -127,7 +127,7 @@
         &lt;p&gt;The Dell CSI Drivers support Rancher Kubernetes Engine (RKE) v1.4.1.&lt;/p&gt;
 &lt;p&gt;The installation process for the drivers on such clusters remains the same as the installation process on regular Kubernetes clusters. Installation on this cluster is done using helm and via Operator has not been qualified.&lt;/p&gt;
 &lt;h2 id=&#34;rke-examples&#34;&gt;RKE Examples&lt;/h2&gt;
-&lt;p&gt;&lt;img src=&#34;../rancher1.PNG&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../rancher1.PNG&#34;&gt;&lt;/p&gt;
 
       </description>
     </item>
@@ -151,10 +151,10 @@ The CSI driver can be installed on  this cluster using Helm. Installation of CSI
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Once login is done to the Tanzu cluster, the installation of CSI driver is done using kubectl binary similar to how we do for other systems.&lt;/p&gt;
 &lt;h2 id=&#34;tanzu-example&#34;&gt;Tanzu example&lt;/h2&gt;
-&lt;p&gt;&lt;img src=&#34;../tanzu1.JPG&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;../tanzu2.JPG&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;../tanzu3.JPG&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;../tanzu4.JPG&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../tanzu1.JPG&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../tanzu2.JPG&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../tanzu3.JPG&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../tanzu4.JPG&#34;&gt;&lt;/p&gt;
 
       </description>
     </item>

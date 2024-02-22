@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="generator" content="Hugo 0.122.0">
+<meta name="generator" content="Hugo 0.123.1">
 <link rel="alternate" type="application/rss&#43;xml" href="https://dell.github.io/csm-docs/v1/csidriver/installation/operator/index.xml">
 <meta name="robots" content="index, follow">
 
@@ -102,7 +102,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.7dad682d16f69f57f44216c5ece5d90b.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.b2461058d7fc1f7ffea2f9edd5cdfce8.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -124,7 +124,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.7dad682d16f69f57f44216c5ece5d90b.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.b2461058d7fc1f7ffea2f9edd5cdfce8.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -145,6 +145,8 @@
   <ul class="ul-3 foldable">
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1deploymentcsminstallationwizardrelease-li">
   <a href="/csm-docs/v1/deployment/csminstallationwizard/release/" title="Release Notes" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv1deploymentcsminstallationwizardrelease"><span class="">Release notes</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1deploymentcsminstallationwizardsrc-li">
+  <a href="/csm-docs/v1/deployment/csminstallationwizard/src/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv1deploymentcsminstallationwizardsrc"><span class=""></span></a>
 </li>
   </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv1deploymentcsmoperator-li">
@@ -676,22 +678,6 @@
             
 
 	
-		
-
-
-
-  
-  
-
-	
-		
-
-
-
-  
-  
-
-	
 
           </aside>
           <main class="col-12 col-md-9 col-xl-8 pl-md-5" role="main">
@@ -722,14 +708,6 @@
 		
 
   
-    
-
-
-  
-    
-
-
-  
 
 		
 	</header>
@@ -748,17 +726,17 @@
 <li>VolumeSnapshot CRDs - Install v1 VolumeSnapshot CRDs</li>
 <li>External Volume Snapshot Controller</li>
 </ul>
-<p>For detailed snapshot setup procedure, <a href="../../../snapshots/#optional-volume-snapshot-requirements">click here.</a></p>
+<p>For detailed snapshot setup procedure, <a href="/csm-docs/v1/snapshots/#optional-volume-snapshot-requirements">click here.</a></p>
 <blockquote>
 <p>NOTE: That step can be skipped with OpenShift.</p>
 </blockquote>
 <h2 id="installation">Installation</h2>
 <p>Dell CSI Operator has been tested and qualified with</p>
 <ul>
-<li>Upstream Kubernetes or OpenShift (see <a href="../../../csidriver/#features-and-capabilities">supported versions</a>)</li>
+<li>Upstream Kubernetes or OpenShift (see <a href="/csm-docs/v1/csidriver/#features-and-capabilities">supported versions</a>)</li>
 </ul>
 <h3 id="before-you-begin">Before you begin</h3>
-<p>If you have installed an old version of the <code>dell-csi-operator</code> which was available with the name <em>CSI Operator</em>, please refer to this <a href="#replacing-csi-operator-with-dell-csi-operator">section</a> before continuing.</p>
+<p>If you have installed an old version of the <code>dell-csi-operator</code> which was available with the name <em>CSI Operator</em>, please refer to this <a href="/csm-docs/v1/csidriver/installation/operator/#replacing-csi-operator-with-dell-csi-operator">section</a> before continuing.</p>
 <h3 id="full-list-of-csi-drivers-and-versions-supported-by-the-dell-csi-operator">Full list of CSI Drivers and versions supported by the Dell CSI Operator</h3>
 <table>
 <thead>
@@ -897,11 +875,11 @@ The installation process involves the creation of a <code>Subscription</code> ob
 </span></span><span style="display:flex;"><span>kubectl create configmap dell-csi-operator-config --from-file config.tar.gz -n &lt;operator-namespace&gt;
 </span></span></code></pre></div><h5 id="upstream-kubernetes">Upstream Kubernetes</h5>
 <ul>
-<li>For installing via OperatorHub.io on Kubernetes, go to the <a href="../../partners/operator/">OperatorHub page</a>.</li>
+<li>For installing via OperatorHub.io on Kubernetes, go to the <a href="/csm-docs/v1/csidriver/partners/operator/">OperatorHub page</a>.</li>
 </ul>
 <h5 id="red-hat-openshift-clusters">Red Hat OpenShift Clusters</h5>
 <ul>
-<li>For installing via OpenShift with the Operator, go to the <a href="../../partners/redhat/">OpenShift page</a>.</li>
+<li>For installing via OpenShift with the Operator, go to the <a href="/csm-docs/v1/csidriver/partners/redhat/">OpenShift page</a>.</li>
 </ul>
 <h3 id="manual-installation">Manual Installation</h3>
 <h4 id="steps">Steps</h4>
@@ -1039,9 +1017,9 @@ These files follow the naming convention</p>
 <li>samples/powermax_v270_k8s_127.yaml* &lt;- To install CSI PowerMax driver v2.7.0 on a Kubernetes 1.27 cluster</li>
 <li>samples/powermax_v270_ops_412.yaml* &lt;- To install CSI PowerMax driver v2.7.0 on an OpenShift 4.12 cluster</li>
 </ul>
-<p>Copy the correct sample file and edit the mandatory &amp; any optional parameters specific to your driver installation by following the instructions <a href="#modify-the-driver-specification">here</a></p>
+<p>Copy the correct sample file and edit the mandatory &amp; any optional parameters specific to your driver installation by following the instructions <a href="/csm-docs/v1/csidriver/installation/operator/#modify-the-driver-specification">here</a></p>
 <blockquote>
-<p>NOTE: A detailed explanation of the various mandatory and optional fields in the CustomResource is available <a href="#custom-resource-specification">here</a>. Please make sure to read through and understand the various fields.</p>
+<p>NOTE: A detailed explanation of the various mandatory and optional fields in the CustomResource is available <a href="/csm-docs/v1/csidriver/installation/operator/#custom-resource-specification">here</a>. Please make sure to read through and understand the various fields.</p>
 </blockquote>
 <p>Run the following command to install the CSI driver.</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl create -f &lt;driver-manifest.yaml&gt;
@@ -1061,7 +1039,7 @@ You can edit these manifests and install the driver using the <code>OperatorHub<
 </ul>
 <p>If the driver-namespace was set to <em>test-powermax</em>, and the name of the driver is <em>powermax</em>, then run the command <code>kubectl get csipowermax/powermax -n test-powermax -o yaml</code> to get the details of the Custom Resource.</p>
 <p>Note: If the <em>state</em> of the <code>CustomResource</code> is <em>Running</em> then all the driver pods have been successfully installed. If the <em>state</em> is <em>SuccessFul</em>, then it means the driver deployment was successful but some driver pods may not be in a <em>Running</em> state.
-Please refer to the <em>Troubleshooting</em> section <a href="../../troubleshooting/operator">here</a> if you encounter any issues during installation.</p>
+Please refer to the <em>Troubleshooting</em> section <a href="/csm-docs/v1/csidriver/troubleshooting/operator/">here</a> if you encounter any issues during installation.</p>
 <h2 id="update-csi-drivers">Update CSI Drivers</h2>
 <p>The CSI Drivers installed by the Dell CSI Operator can be updated like any Kubernetes resource. This can be achieved in various ways which include –</p>
 <ul>
@@ -1174,7 +1152,7 @@ i. Add controller and node section as below:
 <p>The specification for the Custom Resource is the same for all the drivers.<br>
 Below is a list of all the mandatory and optional fields in the Custom Resource specification</p>
 <h3 id="mandatory-fields">Mandatory fields</h3>
-<p><strong>configVersion</strong> - Configuration version  - Refer full list of supported driver for finding out the appropriate config version <a href="#full-list-of-csi-drivers-and-versions-supported-by-the-dell-csi-operator">here</a>               <br>
+<p><strong>configVersion</strong> - Configuration version  - Refer full list of supported driver for finding out the appropriate config version <a href="/csm-docs/v1/csidriver/installation/operator/#full-list-of-csi-drivers-and-versions-supported-by-the-dell-csi-operator">here</a>               <br>
 <strong>replicas</strong>  - Number of replicas for controller plugin - Must be set to 1 for all drivers<br>
 <strong>dnsPolicy</strong> - Determines the dnsPolicy for the node daemonset. Accepted values are <code>Default</code>, <code>ClusterFirst</code>, <code>ClusterFirstWithHostNet</code>, <code>None</code>
 <strong>common</strong><br>

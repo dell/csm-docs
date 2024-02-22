@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="generator" content="Hugo 0.122.0">
+<meta name="generator" content="Hugo 0.123.1">
 <link rel="alternate" type="application/rss&#43;xml" href="https://dell.github.io/csm-docs/v1/deployment/csminstallationwizard/index.xml">
 <meta name="robots" content="index, follow">
 
@@ -98,7 +98,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.7dad682d16f69f57f44216c5ece5d90b.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.b2461058d7fc1f7ffea2f9edd5cdfce8.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -120,7 +120,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.7dad682d16f69f57f44216c5ece5d90b.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.b2461058d7fc1f7ffea2f9edd5cdfce8.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -141,6 +141,8 @@
   <ul class="ul-3 foldable">
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsv1deploymentcsminstallationwizardrelease-li">
   <a href="/csm-docs/v1/deployment/csminstallationwizard/release/" title="Release Notes" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv1deploymentcsminstallationwizardrelease"><span class="">Release notes</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsv1deploymentcsminstallationwizardsrc-li">
+  <a href="/csm-docs/v1/deployment/csminstallationwizard/src/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv1deploymentcsminstallationwizardsrc"><span class=""></span></a>
 </li>
   </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-csm-docsv1deploymentcsmoperator-li">
@@ -637,22 +639,6 @@
             
 
 	
-		
-
-
-
-  
-  
-
-	
-		
-
-
-
-  
-  
-
-	
 
           </aside>
           <main class="col-12 col-md-9 col-xl-8 pl-md-5" role="main">
@@ -680,18 +666,10 @@
 		
 
   
-    
-
-
-  
-    
-
-
-  
 
 		
 	</header>
-	<p>The <a href="./src/index.html">Dell Container Storage Modules Installation Wizard</a> is a webpage that generates a manifest file for installing Dell CSI Drivers and its supported CSM Modules, based on input from the user. It generates a single manifest file to install both Dell CSI Drivers and its supported CSM Modules, thereby eliminating the need to download individual Helm charts for drivers and modules. The user can enable or disable the necessary modules through the UI, and a manifest file is generated accordingly without manually editing the helm charts.</p>
+	<p>The <a href="/csm-docs/v1/deployment/csminstallationwizard/src/">Dell Container Storage Modules Installation Wizard</a> is a webpage that generates a manifest file for installing Dell CSI Drivers and its supported CSM Modules, based on input from the user. It generates a single manifest file to install both Dell CSI Drivers and its supported CSM Modules, thereby eliminating the need to download individual Helm charts for drivers and modules. The user can enable or disable the necessary modules through the UI, and a manifest file is generated accordingly without manually editing the helm charts.</p>
 <blockquote>
 <p>NOTE: The CSM Installation Wizard supports Helm and Operator based manifest file generation.</p>
 </blockquote>
@@ -796,7 +774,7 @@
 </table>
 <h2 id="installation">Installation</h2>
 <ol>
-<li>Open the <a href="./src/index.html">CSM Installation Wizard</a>.</li>
+<li>Open the <a href="/csm-docs/v1/deployment/csminstallationwizard/src/">CSM Installation Wizard</a>.</li>
 <li>Select the <code>Installation Type</code> as <code>Helm</code>/<code>Operator</code>.</li>
 <li>Select the <code>Array</code>.</li>
 <li>Enter the <code>Image Repository</code>. The default value is <code>dellemc</code>.</li>
@@ -830,7 +808,7 @@ helm repo update
 </li>
 </ol>
 <blockquote>
-<p>NOTE: The CSM Installation Wizard generates <code>values.yaml</code> with the minimal inputs required to install the CSM. To configure additional parameters in values.yaml, you can follow the steps outlined in <a href="../../csidriver/installation/helm/powerstore/#install-the-driver">PowerStore</a>, <a href="../../csidriver/installation/helm/powermax/#install-the-driver">PowerMax</a>, <a href="../../csidriver/installation/helm/isilon/#install-the-driver">PowerScale</a>, <a href="../../csidriver/installation/helm/powerflex/#install-the-driver">PowerFlex</a>, <a href="../../csidriver/installation/helm/unity/#install-csi-driver">Unity XT</a>, <a href="../../observability/">Observability</a>, <a href="../../replication/">Replication</a>, <a href="../../resiliency/">Resiliency</a>.</p>
+<p>NOTE: The CSM Installation Wizard generates <code>values.yaml</code> with the minimal inputs required to install the CSM. To configure additional parameters in values.yaml, you can follow the steps outlined in <a href="/csm-docs/v1/csidriver/installation/helm/powerstore/#install-the-driver">PowerStore</a>, <a href="/csm-docs/v1/csidriver/installation/helm/powermax/#install-the-driver">PowerMax</a>, <a href="/csm-docs/v1/csidriver/installation/helm/isilon/#install-the-driver">PowerScale</a>, <a href="/csm-docs/v1/csidriver/installation/helm/powerflex/#install-the-driver">PowerFlex</a>, <a href="/csm-docs/v1/csidriver/installation/helm/unity/#install-csi-driver">Unity XT</a>, <a href="/csm-docs/v1/observability/">Observability</a>, <a href="/csm-docs/v1/replication/">Replication</a>, <a href="/csm-docs/v1/resiliency/">Resiliency</a>.</p>
 </blockquote>
 <ol start="4">
 <li>
@@ -839,16 +817,16 @@ helm repo update
 `kubectl patch secret vxflexos-config -n vxflexos -p &#34;{\&#34;data\&#34;: { \&#34;MDM\&#34;: \&#34;&lt;GENERATED_BASE64&gt;\&#34;}}&#34;`
 </code></pre></li>
 <li>
-<p>If Observability is checked in the wizard, refer to <a href="../../observability/deployment/#post-installation-dependencies">Observability</a> to export metrics to Prometheus and load the Grafana dashboards.</p>
+<p>If Observability is checked in the wizard, refer to <a href="/csm-docs/v1/observability/deployment/#post-installation-dependencies">Observability</a> to export metrics to Prometheus and load the Grafana dashboards.</p>
 </li>
 <li>
-<p>If Authorization is checked in the wizard, only the sidecar is enabled. Refer to <a href="../../authorization/deployment/helm/">Authorization</a> to install and configure the CSM Authorization Proxy Server.</p>
+<p>If Authorization is checked in the wizard, only the sidecar is enabled. Refer to <a href="/csm-docs/v1/authorization/deployment/helm/">Authorization</a> to install and configure the CSM Authorization Proxy Server.</p>
 </li>
 <li>
-<p>If Replication is checked in the wizard, refer to <a href="../../replication/deployment/">Replication</a> on configuring communication between Kubernetes clusters.</p>
+<p>If Replication is checked in the wizard, refer to <a href="/csm-docs/v1/replication/deployment/">Replication</a> on configuring communication between Kubernetes clusters.</p>
 </li>
 <li>
-<p>If your Kubernetes distribution doesn&rsquo;t have the Volume Snapshot feature enabled, refer to <a href="../../snapshots">this section</a> to install the Volume Snapshot CRDs and the default snapshot controller.</p>
+<p>If your Kubernetes distribution doesn&rsquo;t have the Volume Snapshot feature enabled, refer to <a href="/csm-docs/v1/snapshots/">this section</a> to install the Volume Snapshot CRDs and the default snapshot controller.</p>
 </li>
 <li>
 <p>Install the Helm chart.</p>
@@ -871,17 +849,17 @@ Example: helm install powerstore dell/container-storage-modules -n csi-powerstor
 </li>
 </ol>
 <blockquote>
-<p>NOTE: The CSM Installation Wizard generates <code>values.yaml</code> with the minimal inputs required to install the CSM. To configure additional parameters in values.yaml, you can follow the steps outlined in <a href="../csmoperator/drivers/powerstore">PowerStore</a>, <a href="../csmoperator/drivers/powermax">PowerMax</a>, <a href="../csmoperator/drivers/powerscale">PowerScale</a>, <a href="../csmoperator/modules/resiliency">Resiliency</a>.</p>
+<p>NOTE: The CSM Installation Wizard generates <code>values.yaml</code> with the minimal inputs required to install the CSM. To configure additional parameters in values.yaml, you can follow the steps outlined in <a href="/csm-docs/v1/deployment/csmoperator/drivers/powerstore/">PowerStore</a>, <a href="/csm-docs/v1/deployment/csmoperator/drivers/powermax/">PowerMax</a>, <a href="/csm-docs/v1/deployment/csmoperator/drivers/powerscale/">PowerScale</a>, <a href="/csm-docs/v1/deployment/csmoperator/modules/resiliency/">Resiliency</a>.</p>
 </blockquote>
 <ol start="3">
 <li>
-<p>If Observability is checked in the wizard, refer to <a href="../csmoperator/modules/observability">Observability</a> to export metrics to Prometheus and load the Grafana dashboards.</p>
+<p>If Observability is checked in the wizard, refer to <a href="/csm-docs/v1/deployment/csmoperator/modules/observability/">Observability</a> to export metrics to Prometheus and load the Grafana dashboards.</p>
 </li>
 <li>
-<p>If Authorization is checked in the wizard, only the sidecar is enabled. Refer to <a href="../csmoperator/modules/authorization">Authorization</a> to install and configure the CSM Authorization Proxy Server.</p>
+<p>If Authorization is checked in the wizard, only the sidecar is enabled. Refer to <a href="/csm-docs/v1/deployment/csmoperator/modules/authorization/">Authorization</a> to install and configure the CSM Authorization Proxy Server.</p>
 </li>
 <li>
-<p>If Replication is checked in the wizard, refer to <a href="../csmoperator/modules/replication">Replication</a> for the necessary prerequisites required for this module.</p>
+<p>If Replication is checked in the wizard, refer to <a href="/csm-docs/v1/deployment/csmoperator/modules/replication/">Replication</a> for the necessary prerequisites required for this module.</p>
 </li>
 <li>
 <p>Install the Operator.</p>
@@ -907,6 +885,14 @@ Example: helm install powerstore dell/container-storage-modules -n csi-powerstor
                     <a href="/csm-docs/v1/deployment/csminstallationwizard/release/">Release Notes</a>
                 </h5>
                 <p>Release notes for CSM Installation Wizard</p>
+            </div>
+        
+            
+            <div class="entry">
+                <h5>
+                    <a href="/csm-docs/v1/deployment/csminstallationwizard/src/"></a>
+                </h5>
+                <p></p>
             </div>
         
     

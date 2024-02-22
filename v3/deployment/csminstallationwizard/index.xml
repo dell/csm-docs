@@ -14,5 +14,526 @@
       
     
     
+    <item>
+      <title>V3: </title>
+      <link>https://dell.github.io/csm-docs/v3/deployment/csminstallationwizard/src/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dell.github.io/csm-docs/v3/deployment/csminstallationwizard/src/</guid>
+      <description>
+        
+        
+        &lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;meta charset=&#34;utf-8&#34;&gt;
+    &lt;title&gt;CSM Installation Wizard | Dell Technologies&lt;/title&gt;
+    &lt;link rel=&#34;stylesheet&#34; type=&#34;text/css&#34; href=&#34;static/css/bootstrap.min.css&#34;&gt;
+    &lt;link rel=&#34;stylesheet&#34; href=&#34;static/css/dds-icons.min.css&#34; /&gt;
+    &lt;link rel=&#34;stylesheet&#34; href=&#34;static/css/dds-icons.css&#34; /&gt;
+    &lt;link rel=&#34;stylesheet&#34; type=&#34;text/css&#34; href=&#34;static/css/style.css&#34;&gt;
+    &lt;script type=&#34;text/javascript&#34; src=&#34;static/js/jquery-3.6.1.min.js&#34;&gt;&lt;/script&gt;
+    &lt;script type=&#34;text/javascript&#34; src=&#34;static/js/bootstrap.bundle.min.js&#34;&gt;&lt;/script&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;header class=&#34;fixed-top&#34;&gt;
+      &lt;nav class=&#34;installation-wizard-navbar&#34;&gt;
+        &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs&#34;&gt;
+          &lt;span&gt;
+            &lt;img src=&#34;static/images/logo.svg&#34; class=&#34;img&#34; alt=&#34;Dell Technologies logo&#34;&gt;
+          &lt;/span&gt;
+        &lt;/a&gt;
+      &lt;/nav&gt;
+    &lt;/header&gt;
+    &lt;div class=&#34;container-fluid pt-5 page-container&#34;&gt;
+      &lt;main class=&#34;container mt-5&#34;&gt;
+        &lt;div class=&#34;row&#34;&gt;
+          &lt;div class=&#34;col-12 pl-md-5&#34;&gt;
+            &lt;span class=&#34;heading&#34;&gt;Container Storage Modules (CSM) Installation Wizard &lt;/span&gt;
+          &lt;/div&gt;
+          &lt;div class=&#34;col-4&#34;&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;!-- form body starts --&gt;
+        &lt;form class=&#34;needs-validation&#34; id=&#34;csm-form&#34;&gt;
+          &lt;div class=&#34;row mt-5 pb-5&#34;&gt;
+            &lt;div class=&#34;card&#34;&gt;
+              &lt;div class=&#34;col-2&#34;&gt;&lt;/div&gt;
+              &lt;!-- card body starts --&gt;
+              &lt;div class=&#34;col-12&#34;&gt;
+                &lt;div class=&#34;row mt-3 mb-4&#34;&gt;
+                  &lt;div class=&#34;col-sm-12 h5&#34;&gt;Configure installation settings and repository &lt;/div&gt;
+                &lt;/div&gt;
+
+                &lt;div class=&#34;was-validated row mb-4&#34;&gt;
+                  &lt;label for=&#34;installation-type&#34; class=&#34;col-sm-2 col-form-label&#34; data-bs-toggle=&#34;tooltip&#34; data-bs-placement=&#34;right&#34; title=&#34;Select the installation type&#34; style=&#34;width: 140px;&#34;&gt;Installation Type&lt;/label&gt;
+                  &lt;div class=&#34;col-sm-9&#34;&gt;&lt;/div&gt;
+                  &lt;div class=&#34;col-sm-3&#34;&gt;
+                    &lt;select id=&#34;installation-type&#34; class=&#34;form-select&#34; onchange=&#34;validateInput(validateForm, CONSTANTS)&#34; required&gt;
+                      &lt;option value=&#34;&#34; selected&gt; Select the Installation type&lt;/option&gt;
+                      &lt;option value=&#34;helm&#34;&gt;Helm&lt;/option&gt;
+                      &lt;option value=&#34;operator&#34; disabled&gt;Operator&lt;/option&gt;
+                    &lt;/select&gt;
+                  &lt;/div&gt;
+                &lt;/div&gt;
+
+                &lt;div class=&#34;was-validated row mb-4&#34;&gt;
+                  &lt;label for=&#34;array&#34; class=&#34;col-sm-1 col-form-label&#34; data-bs-toggle=&#34;tooltip&#34; data-bs-placement=&#34;right&#34; title=&#34;Refers to the storage array&#34; style=&#34;width: 65px;&#34;&gt;Array&lt;/label&gt;
+                  &lt;div class=&#34;col-sm-9&#34;&gt;&lt;/div&gt;
+                  &lt;div class=&#34;col-sm-3&#34;&gt;
+                    &lt;select id=&#34;array&#34; class=&#34;form-select&#34; onchange=&#34;validateInput(validateForm, CONSTANTS)&#34; required&gt;
+                      &lt;option value=&#34;&#34; selected&gt;Select the Array&lt;/option&gt;
+                      &lt;option value=&#34;csi-powerstore&#34;&gt;PowerStore&lt;/option&gt;
+                      &lt;option value=&#34;powermax&#34;&gt;PowerMax&lt;/option&gt;
+                      &lt;option value=&#34;csi-powerscale&#34; disabled&gt;PowerScale&lt;/option&gt;
+                      &lt;option value=&#34;csi-powerflex&#34; disabled&gt;PowerFlex&lt;/option&gt;
+                      &lt;option value=&#34;csi-unity&#34; disabled&gt;Unity&lt;/option&gt;
+                    &lt;/select&gt;
+                  &lt;/div&gt;
+                &lt;/div&gt;
+
+                &lt;!-- main content starts --&gt;
+                &lt;div id=&#34;main&#34;&gt;
+                  &lt;div class=&#34;was-validated row mb-4&#34;&gt;
+                    &lt;label for=&#34;image-repository&#34; class=&#34;col-sm-2 col-form-label&#34; data-bs-toggle=&#34;tooltip&#34; data-bs-placement=&#34;right&#34; title=&#34;Specify the registry from where the image should be pulled&#34; style=&#34;width: 150px;&#34;&gt;Image Repository&lt;/label&gt;
+                    &lt;div class=&#34;col-sm-9&#34;&gt;&lt;/div&gt;
+                    &lt;div class=&#34;col-sm-3&#34;&gt;
+                      &lt;input class=&#34;form-control input-lg&#34; type=&#34;text&#34; id=&#34;image-repository&#34; placeholder=&#34;dellemc&#34;  oninput=&#34;validateInput(validateForm, CONSTANTS)&#34; required&gt;
+                    &lt;/div&gt;
+                    &lt;div class=&#34;col-sm-4&#34;&gt;
+                      &lt;div class=&#34;row mt-1&#34;&gt;
+                        &lt;a class=&#34;reset&#34; id=&#34;reset-image-repository&#34; onclick=&#34;resetImageRepository(csmMap)&#34;&gt;Reset to default&lt;/a&gt;
+                      &lt;/div&gt;
+                    &lt;/div&gt;
+                  &lt;/div&gt;
+                  &lt;div class=&#34;was-validated row mb-4&#34;&gt;
+                    &lt;label for=&#34;csm-version&#34; class=&#34;col-sm-2 col-form-label&#34; data-bs-toggle=&#34;tooltip&#34; data-bs-placement=&#34;right&#34; title=&#34;Refers to the CSM version&#34; style=&#34;width: 115px;&#34;&gt;CSM Version&lt;/label&gt;
+                    &lt;div class=&#34;col-sm-9&#34;&gt;&lt;/div&gt;
+                    &lt;div class=&#34;col-sm-3&#34;&gt;
+                      &lt;select id=&#34;csm-version&#34; class=&#34;form-select&#34; onchange=&#34;onCSMVersionChange(); validateInput(validateForm, CONSTANTS)&#34; required&gt;
+                        &lt;option value=&#34;1.6.0&#34; selected&gt;CSM 1.6&lt;/option&gt;
+                      &lt;/select&gt;
+                    &lt;/div&gt;
+                  &lt;/div&gt;
+
+                  &lt;hr&gt;
+                  &lt;div class=&#34;row mb-4&#34;&gt;
+                    &lt;div class=&#34;col-sm-12 h5&#34;&gt;Select modules for installation&lt;/div&gt;
+                  &lt;/div&gt;
+
+                  &lt;div class=&#34;row mb-4 app-mobility col-sm-11&#34;&gt;
+                    &lt;div class=&#34;col-sm-12&#34;&gt;
+                      &lt;input class=&#34;form-check-input&#34; type=&#34;checkbox&#34; id=&#34;application-mobility&#34; value=&#34;&#34; onchange=&#34;onAppMobilityChange(veleroNote)&#34;&gt;
+                      &lt;label for=&#34;application-mobility&#34; class=&#34;form-check-label ms-2 text-dark&#34; data-bs-toggle=&#34;tooltip&#34; data-bs-placement=&#34;right&#34; title=&#34;Enable/Disable Application Mobility module&#34;&gt;Application Mobility&lt;/label&gt;
+                    &lt;/div&gt;
+                    &lt;div class=&#34;row mt-3 child-level-one&#34; id=&#34;velero-wrapper&#34;&gt;
+                      &lt;div class=&#34;col-sm-12&#34;&gt;
+                        &lt;input class=&#34;form-check-input&#34; type=&#34;checkbox&#34; id=&#34;velero&#34; value=&#34;&#34; checked&gt;
+                        &lt;label for=&#34;velero&#34; class=&#34;form-check-label ms-2 text-dark&#34; data-bs-toggle=&#34;tooltip&#34; data-bs-placement=&#34;right&#34; title=&#34;Enable/Disable Velero feature&#34;&gt;Velero&lt;/label&gt;
+                      &lt;/div&gt;
+                      &lt;div class=&#34;mt-3 py-2 note&#34;&gt;
+                        &lt;i class=&#34;icon dds__icon dds__icon--alert-info-cir&#34;&gt;&lt;/i&gt;
+                        &lt;span class=&#34;h6&#34; id=&#34;velero-note&#34;&gt;&lt;/span&gt;
+                      &lt;/div&gt;
+                    &lt;/div&gt;
+                  &lt;/div&gt;
+
+                  &lt;div class=&#34;row mb-4 observability&#34;&gt;
+                    &lt;div class=&#34;col-sm-12&#34;&gt;
+                      &lt;input class=&#34;form-check-input&#34; type=&#34;checkbox&#34; id=&#34;observability&#34; value=&#34;&#34; onchange=&#34;onObservabilityChange()&#34;&gt;
+                      &lt;label for=&#34;observability&#34; class=&#34;form-check-label ms-2 text-dark&#34; data-bs-toggle=&#34;tooltip&#34; data-bs-placement=&#34;right&#34; title=&#34;Enable/Disable Observability module&#34;&gt;Observability&lt;/label&gt;
+                    &lt;/div&gt;
+                    &lt;div class=&#34;row mt-3 observability child-level-one&#34; id=&#34;observability-metrics-wrapper&#34;&gt;
+                      &lt;div class=&#34;col-sm-12&#34;&gt;
+                        &lt;input class=&#34;form-check-input&#34; type=&#34;checkbox&#34; id=&#34;observability-metrics&#34; value=&#34;&#34;&gt;
+                        &lt;label for=&#34;observability-metrics&#34; class=&#34;form-check-label ms-2 text-dark&#34; data-bs-toggle=&#34;tooltip&#34; data-bs-placement=&#34;right&#34; title=&#34;Enable/Disable Observability Metrics&#34;&gt;Observability Metrics&lt;/label&gt;
+                      &lt;/div&gt;
+                    &lt;/div&gt;
+                  &lt;/div&gt;
+
+                  &lt;div class=&#34;row mb-4&#34;&gt;
+                    &lt;div class=&#34;col-sm-12&#34;&gt;
+                      &lt;input class=&#34;form-check-input&#34; type=&#34;checkbox&#34; id=&#34;replication&#34; value=&#34;&#34;&gt;
+                      &lt;label for=&#34;replication&#34; class=&#34;form-check-label ms-2 text-dark&#34; data-bs-toggle=&#34;tooltip&#34; data-bs-placement=&#34;right&#34; title=&#34;Enable/Disable Replication module&#34;&gt;Replication&lt;/label&gt;
+                    &lt;/div&gt;
+                  &lt;/div&gt;
+
+                  &lt;div class=&#34;row mb-4 resiliency col-sm-11&#34;&gt;
+                    &lt;div class=&#34;col-sm-12&#34;&gt;
+                      &lt;input class=&#34;form-check-input&#34; type=&#34;checkbox&#34; id=&#34;resiliency&#34; value=&#34;&#34; onchange=&#34;onResiliencyChange(podmonNote)&#34;&gt;
+                      &lt;label for=&#34;resiliency&#34; class=&#34;form-check-label ms-2 text-dark&#34; data-bs-toggle=&#34;tooltip&#34; data-bs-placement=&#34;right&#34; title=&#34;Enable/Disable Resiliency module&#34;&gt;Resiliency&lt;/label&gt;
+                    &lt;/div&gt;
+                    &lt;div class=&#34;row child-level-one&#34; id=&#34;podmon-note-wrapper&#34;&gt;
+                      &lt;div class=&#34;mt-3 py-2 note&#34;&gt;
+                        &lt;i class=&#34;icon dds__icon dds__icon--alert-info-cir&#34;&gt;&lt;/i&gt;
+                        &lt;span class=&#34;h6&#34; id=&#34;podmon-note&#34;&gt;&lt;/span&gt;
+                      &lt;/div&gt;
+                    &lt;/div&gt;
+                  &lt;/div&gt;
+
+                  &lt;hr&gt;
+                  &lt;div class=&#34;row mb-4&#34;&gt;
+                    &lt;div class=&#34;col-sm-12 h5&#34;&gt;Select the features for installation.&lt;/div&gt;
+                  &lt;/div&gt;
+                
+                  &lt;div class=&#34;row mb-4 authorization col-sm-11&#34;&gt;
+                    &lt;div class=&#34;col-sm-12&#34;&gt;
+                      &lt;input class=&#34;form-check-input&#34; type=&#34;checkbox&#34; id=&#34;authorization&#34; value=&#34;&#34; onchange=&#34;onAuthorizationChange(authorizationNote)&#34;&gt;
+                      &lt;label for=&#34;authorization&#34; class=&#34;form-check-label ms-2 text-dark&#34; data-bs-toggle=&#34;tooltip&#34; data-bs-placement=&#34;right&#34; title=&#34;Enable/Disable Authorization module&#34;&gt;Authorization&lt;/label&gt;
+                    &lt;/div&gt;
+                    &lt;div class=&#34;row mt-3 child-level-one authorization-wrapper&#34;&gt;
+                      &lt;div class=&#34;col-sm-12&#34;&gt;
+                        &lt;input class=&#34;form-check-input&#34; type=&#34;checkbox&#34; id=&#34;authorization-skip-cert-validation&#34; value=&#34;&#34; checked&gt;
+                        &lt;label for=&#34;authorization-skip-cert-validation&#34; class=&#34;form-check-label ms-2 text-dark&#34; data-bs-toggle=&#34;tooltip&#34; data-bs-placement=&#34;right&#34; title=&#34;Enable/Disable certificate validation of the csm-authorization server&#34;&gt;Authorization Skip Certificate Validation&lt;/label&gt;
+                      &lt;/div&gt;
+                    &lt;/div&gt;
+                    &lt;div class=&#34;row mt-3 child-level-one authorization-wrapper&#34;&gt;
+                      &lt;label for=&#34;authorization-proxy-host&#34; class=&#34;col-sm-3 col-form-label&#34; data-bs-toggle=&#34;tooltip&#34; data-bs-placement=&#34;right&#34; title=&#34;Hostname of the csm-authorization server&#34; style=&#34;width: 110px;&#34;&gt;Proxy Host&lt;/label&gt;
+                      &lt;div class=&#34;col-sm-9&#34;&gt;&lt;/div&gt;
+                      &lt;div class=&#34;col-sm-3&#34;&gt;
+                        &lt;input class=&#34;form-control input-lg&#34; type=&#34;text&#34; id=&#34;authorization-proxy-host&#34; placeholder=&#34;&#34;&gt;
+                      &lt;/div&gt;
+                    &lt;/div&gt;
+                    &lt;div class=&#34;row child-level-one authorization-wrapper&#34;&gt;
+                      &lt;div class=&#34;mt-3 py-2 note&#34;&gt;
+                        &lt;i class=&#34;icon dds__icon dds__icon--alert-info-cir&#34;&gt;&lt;/i&gt;
+                        &lt;span class=&#34;h6&#34; id=&#34;authorization-note&#34;&gt;&lt;/span&gt;
+                      &lt;/div&gt;
+                    &lt;/div&gt;
+                  &lt;/div&gt;
+
+                  &lt;div class=&#34;row mb-4&#34;&gt;
+                    &lt;div class=&#34;col-sm-12&#34;&gt;
+                      &lt;input class=&#34;form-check-input&#34; type=&#34;checkbox&#34; id=&#34;cert-manager-enabled&#34; value=&#34;&#34;&gt;
+                      &lt;label for=&#34;cert-manager-enabled&#34; class=&#34;form-check-label ms-2 text-dark&#34; data-bs-toggle=&#34;tooltip&#34; data-bs-placement=&#34;right&#34; title=&#34;Enable/Disable Cert Manager feature&#34;&gt;Cert Manager&lt;/label&gt;
+                    &lt;/div&gt;
+                  &lt;/div&gt;
+
+                  &lt;div class=&#34;row mb-4&#34;&gt;
+                    &lt;div class=&#34;col-sm-12&#34;&gt;
+                      &lt;input class=&#34;form-check-input&#34; type=&#34;checkbox&#34; id=&#34;health-monitor&#34; value=&#34;&#34;&gt;
+                      &lt;label for=&#34;health-monitor&#34; class=&#34;form-check-label ms-2 text-dark&#34; data-bs-toggle=&#34;tooltip&#34; data-bs-placement=&#34;right&#34; title=&#34;Enable/Disable Health Monitor of CSI volumes&#34;&gt;Health Monitor&lt;/label&gt;
+                    &lt;/div&gt;
+                  &lt;/div&gt;
+
+                  &lt;div class=&#34;row mb-4 migration&#34;&gt;
+                    &lt;div class=&#34;col-sm-12&#34;&gt;
+                      &lt;input class=&#34;form-check-input&#34; type=&#34;checkbox&#34; id=&#34;migration&#34; value=&#34;&#34;&gt;
+                      &lt;label for=&#34;migration&#34; class=&#34;form-check-label ms-2 text-dark&#34; data-bs-toggle=&#34;tooltip&#34; data-bs-placement=&#34;right&#34; title=&#34;Enable/Disable Migration feature&#34;&gt;Migration&lt;/label&gt;
+                    &lt;/div&gt;
+                  &lt;/div&gt;
+
+                  &lt;div class=&#34;row mb-4&#34;&gt;
+                    &lt;div class=&#34;col-sm-12&#34;&gt;
+                      &lt;input class=&#34;form-check-input&#34; type=&#34;checkbox&#34; id=&#34;resizer&#34; value=&#34;&#34; checked&gt;
+                      &lt;label for=&#34;resizer&#34; class=&#34;form-check-label ms-2 text-dark&#34; data-bs-toggle=&#34;tooltip&#34; data-bs-placement=&#34;right&#34; title=&#34;Enable/Disable Volume Expansion feature&#34;&gt;Resizer&lt;/label&gt;
+                    &lt;/div&gt;
+                  &lt;/div&gt;
+
+                  &lt;div class=&#34;row mb-4 col-sm-11&#34;&gt;
+                    &lt;div class=&#34;col-sm-12&#34;&gt;
+                      &lt;input class=&#34;form-check-input&#34; type=&#34;checkbox&#34; id=&#34;snapshot&#34; value=&#34;&#34; onchange=&#34;onSnapshotChange(snapshotNote)&#34; checked&gt;
+                      &lt;label for=&#34;snapshot&#34; class=&#34;form-check-label ms-2 text-dark&#34; data-bs-toggle=&#34;tooltip&#34; data-bs-placement=&#34;right&#34; title=&#34;Enable/Disable Volume Snapshot feature&#34;&gt;Snapshot&lt;/label&gt;
+                    &lt;/div&gt;
+                    &lt;div class=&#34;row child-level-one&#34; id=&#34;snapshot-note-wrapper&#34;&gt;
+                      &lt;div class=&#34;mt-3 py-2 note&#34;&gt;
+                        &lt;i class=&#34;icon dds__icon dds__icon--alert-info-cir&#34;&gt;&lt;/i&gt;
+                        &lt;span class=&#34;h6&#34; id=&#34;snapshot-note&#34;&gt;&lt;/span&gt;
+                      &lt;/div&gt;
+                    &lt;/div&gt;
+                  &lt;/div&gt;
+
+                  &lt;div class=&#34;row mb-4 storage-capacity&#34;&gt;
+                    &lt;div class=&#34;col-sm-12&#34;&gt;
+                      &lt;input class=&#34;form-check-input&#34; type=&#34;checkbox&#34; id=&#34;storage-capacity&#34; value=&#34;&#34;&gt;
+                      &lt;label for=&#34;storage-capacity&#34; class=&#34;form-check-label ms-2 text-dark&#34; data-bs-toggle=&#34;tooltip&#34; data-bs-placement=&#34;right&#34; title=&#34;Enable/Disable Storage Capacity Tracking&#34;&gt;Storage Capacity Tracking&lt;/label&gt;
+                    &lt;/div&gt;
+                  &lt;/div&gt;
+
+                  &lt;div class=&#34;row mb-4 vgsnapshot&#34;&gt;
+                    &lt;div class=&#34;col-sm-12&#34;&gt;
+                      &lt;input class=&#34;form-check-input&#34; type=&#34;checkbox&#34; id=&#34;vgsnapshot&#34; value=&#34;&#34;&gt;
+                      &lt;label for=&#34;vgsnapshot&#34; class=&#34;form-check-label ms-2 text-dark&#34; data-bs-toggle=&#34;tooltip&#34; data-bs-placement=&#34;right&#34; title=&#34;Enable/Disable Volume Group Snapshot feature&#34;&gt;Volume Group Snapshot&lt;/label&gt;
+                    &lt;/div&gt;
+                  &lt;/div&gt;
+
+                  &lt;hr&gt;
+                  &lt;div class=&#34;row mb-3&#34;&gt;
+                    &lt;div class=&#34;col-sm-12 h5&#34;&gt;Other configurations for installation&lt;/div&gt;
+                  &lt;/div&gt;
+
+                  &lt;div class=&#34;storageArrays mb-4&#34;&gt;
+                    &lt;div class=&#34;row mb-4&#34;&gt;
+                      &lt;label for=&#34;storage-array-id&#34; class=&#34;col-sm-2 col-form-label&#34; data-bs-toggle=&#34;tooltip&#34; data-bs-placement=&#34;right&#34; title=&#34;This refers to PowerMax Symmetrix ID&#34; style=&#34;width: 140px;&#34;&gt;Storage Array Id&lt;/label&gt;
+                      &lt;div class=&#34;col-sm-9&#34;&gt;&lt;/div&gt;
+                      &lt;div class=&#34;was-validated col-sm-3&#34;&gt;
+                        &lt;input class=&#34;form-control input-lg&#34; type=&#34;text&#34; id=&#34;storage-array-id&#34; placeholder=&#34;Example: 000000000001&#34; oninput=&#34;validateInput(validateForm, CONSTANTS)&#34; required&gt;
+                      &lt;/div&gt;
+                    &lt;/div&gt;
+
+                    &lt;div class=&#34;row mb-4&#34;&gt;
+                      &lt;label for=&#34;storage-array-endpoint-url&#34; class=&#34;col-sm-3 col-form-label&#34; data-bs-toggle=&#34;tooltip&#34; data-bs-placement=&#34;right&#34; title=&#34;This refers to the URL of the Unisphere server managing storageArrayId. If authorization is enabled, endpoint should be the HTTPS localhost endpoint that the authorization sidecar will listen on.&#34; style=&#34;width: 225px;&#34;&gt;Storage Array Endpoint URL&lt;/label&gt;
+                      &lt;div class=&#34;row&#34;&gt;
+                        &lt;div class=&#34;was-validated col-sm-3&#34;&gt;
+                          &lt;input class=&#34;form-control input-lg&#34; type=&#34;text&#34; id=&#34;storage-array-endpoint-url&#34; placeholder=&#34;Example: https://primary-2.unisphe.re:8443&#34; oninput=&#34;validateInput(validateForm, CONSTANTS)&#34; required&gt;
+                        &lt;/div&gt;
+                      &lt;/div&gt;
+                    &lt;/div&gt;
+
+                    &lt;div class=&#34;row mb-4&#34;&gt;
+                      &lt;label for=&#34;storage-array-backup-endpoint-url&#34; class=&#34;col-sm-3 col-form-label&#34; data-bs-toggle=&#34;tooltip&#34; data-bs-placement=&#34;right&#34; title=&#34;This refers to the URL of the backup Unisphere server managing storageArrayId. If authorization is enabled, endpoint should be the HTTPS localhost endpoint that the authorization sidecar will listen on.&#34; style=&#34;width: 280px;&#34;&gt;Storage Array Backup Endpoint URL&lt;/label&gt;
+                      &lt;div class=&#34;row&#34;&gt;
+                      &lt;div class=&#34;col-sm-3&#34;&gt;
+                        &lt;input class=&#34;form-control input-lg&#34; type=&#34;text&#34; id=&#34;storage-array-backup-endpoint-url&#34; placeholder=&#34;Example: https://backup-1.unisphe.re:8443&#34;&gt;
+                      &lt;/div&gt;
+                      &lt;/div&gt;
+                    &lt;/div&gt;
+                  &lt;/div&gt;
+
+                  &lt;div class=&#34;row mb-3 powermax-csi-reverse-proxy&#34;&gt;
+                    &lt;div class=&#34;col-sm-12&#34;&gt;
+                      &lt;input class=&#34;form-check-input&#34; type=&#34;checkbox&#34; id=&#34;powermax-csi-reverse-proxy&#34; value=&#34;&#34; checked&gt;
+                      &lt;label for=&#34;powermax-csi-reverse-proxy&#34; class=&#34;form-check-label ms-2 text-dark&#34; data-bs-toggle=&#34;tooltip&#34; data-bs-placement=&#34;right&#34; title=&#34;If enabled Reverse Proxy will be installed as a sidecar to the driver&#39;s controller pod&#34;&gt;CSI Reverse Proxy&lt;/label&gt;
+                    &lt;/div&gt;
+                  &lt;/div&gt;
+
+                  &lt;div class=&#34;cluster-prefix&#34;&gt;
+                    &lt;div class=&#34;row mb-4&#34;&gt;
+                      &lt;label for=&#34;cluster-prefix&#34; class=&#34;col-sm-2 col-form-label&#34; data-bs-toggle=&#34;tooltip&#34; data-bs-placement=&#34;right&#34; title=&#34;Prefix that is used during the creation of various masking-related entities (Storage Groups, Masking Views, Hosts, and Volume Identifiers) on the array.&#34; style=&#34;width: 120px;&#34;&gt;Cluster Prefix&lt;/label&gt;
+                      &lt;div class=&#34;col-sm-9&#34;&gt;&lt;/div&gt;
+                      &lt;div class=&#34;was-validated col-sm-3&#34;&gt;
+                        &lt;input class=&#34;form-control input-lg&#34; type=&#34;text&#34; id=&#34;cluster-prefix&#34; placeholder=&#34;Example: XYZ&#34; title=&#34;Please provide 3 letter cluster prefix&#34; maxlength=&#34;3&#34; oninput=&#34;validateInput(validateForm, CONSTANTS)&#34; required&gt;
+                      &lt;/div&gt;
+                    &lt;/div&gt;
+                  &lt;/div&gt;
+
+                  &lt;div class=&#34;port-groups&#34;&gt;
+                    &lt;div class=&#34;row mb-4&#34;&gt;
+                      &lt;label for=&#34;port-groups&#34; class=&#34;col-sm-2 col-form-label&#34; data-bs-toggle=&#34;tooltip&#34; data-bs-placement=&#34;right&#34; title=&#34;Define the set of existing port groups that the driver will use. Mandatory for ISCSI and Optional for FC&#34; style=&#34;width: 110px;&#34;&gt;Port Groups&lt;/label&gt;
+                      &lt;div class=&#34;col-sm-9&#34;&gt;&lt;/div&gt;
+                      &lt;div class=&#34;col-sm-3&#34;&gt;
+                        &lt;input class=&#34;form-control input-lg&#34; type=&#34;text&#34; id=&#34;port-groups&#34; placeholder=&#34;Example: pg1, pg2, pg3, pg1&#34; required&gt;
+                      &lt;/div&gt;
+                    &lt;/div&gt;
+                  &lt;/div&gt;
+
+                  &lt;div class=&#34;row mb-4 vSphere&#34;&gt;
+                    &lt;div class=&#34;col-sm-12&#34;&gt;
+                      &lt;input class=&#34;form-check-input&#34; type=&#34;checkbox&#34; id=&#34;vSphere&#34; value=&#34;&#34; onchange=&#34;onVSphereChange()&#34; oninput=&#34;validateInput(validateForm, CONSTANTS)&#34;&gt;
+                      &lt;label for=&#34;vSphere&#34; class=&#34;form-check-label ms-2 text-dark&#34; data-bs-toggle=&#34;tooltip&#34; data-bs-placement=&#34;right&#34; title=&#34;Enable/Disable VMware virtualized environment support&#34;&gt;vSphere&lt;/label&gt;
+                    &lt;/div&gt;
+                    &lt;div class=&#34;row mt-3 child-level-one&#34; id=&#34;vSphere-wrapper&#34;&gt;
+                      &lt;div class=&#34;row mb-3&#34;&gt;
+                        &lt;label for=&#34;vSphere-fc-port-group&#34; class=&#34;col-sm-2 col-form-label&#34; data-bs-toggle=&#34;tooltip&#34; data-bs-placement=&#34;right&#34; title=&#34;Existing portGroup that driver will use for vSphere&#34; style=&#34;width: 120px;&#34;&gt;fc Port Group&lt;/label&gt;
+                        &lt;div class=&#34;col-sm-9&#34;&gt;&lt;/div&gt;
+                        &lt;div class=&#34;was-validated col-sm-3&#34;&gt;
+                          &lt;input class=&#34;form-control input-lg&#34; type=&#34;text&#34; id=&#34;vSphere-fc-port-group&#34; placeholder=&#34;Example: csi-vsphere-VC-PG&#34; value=&#34;csi-vsphere-VC-PG&#34; oninput=&#34;validateInput(validateForm, CONSTANTS)&#34; required&gt;
+                        &lt;/div&gt;
+                      &lt;/div&gt;
+
+                      &lt;div class=&#34;row mb-3&#34;&gt;
+                        &lt;label for=&#34;vSphere-fc-host-name&#34; class=&#34;col-sm-2 col-form-label&#34; data-bs-toggle=&#34;tooltip&#34; data-bs-placement=&#34;right&#34; title=&#34;Existing host (initiator group) that the driver will use for vSphere&#34; style=&#34;width: 125px;&#34;&gt;fc Host Name&lt;/label&gt;
+                        &lt;div class=&#34;col-sm-9&#34;&gt;&lt;/div&gt;
+                        &lt;div class=&#34;was-validated col-sm-3&#34;&gt;
+                          &lt;input class=&#34;form-control input-lg&#34; type=&#34;text&#34; id=&#34;vSphere-fc-host-name&#34; placeholder=&#34;Example: csi-vsphere-VC-HN&#34; value=&#34;csi-vsphere-VC-HN&#34; oninput=&#34;validateInput(validateForm, CONSTANTS)&#34; required&gt;
+                        &lt;/div&gt;
+                      &lt;/div&gt;
+
+                      &lt;div class=&#34;row mb-3&#34;&gt;
+                        &lt;label for=&#34;vSphere-vCenter-host&#34; class=&#34;col-sm-2 col-form-label&#34; data-bs-toggle=&#34;tooltip&#34; data-bs-placement=&#34;right&#34; title=&#34;URL/Endpoint of the vCenter where all the ESX are present&#34; style=&#34;width: 120px;&#34;&gt;vCenter Host&lt;/label&gt;
+                        &lt;div class=&#34;col-sm-9&#34;&gt;&lt;/div&gt;
+                        &lt;div class=&#34;was-validated col-sm-3&#34;&gt;
+                          &lt;input class=&#34;form-control input-lg&#34; type=&#34;text&#34; id=&#34;vSphere-vCenter-host&#34; placeholder=&#34;Example: 00.000.000.00&#34; value=&#34;00.000.000.00&#34; oninput=&#34;validateInput(validateForm, CONSTANTS)&#34; required&gt;
+                        &lt;/div&gt;
+                      &lt;/div&gt;
+
+                      &lt;div class=&#34;row mb-3&#34;&gt;
+                        &lt;label for=&#34;vSphere-vCenter-cred-secret&#34; class=&#34;col-sm-2 col-form-label&#34; data-bs-toggle=&#34;tooltip&#34; data-bs-placement=&#34;right&#34; title=&#34;Secret name for the vCenter credentials&#34; style=&#34;width: 170px;&#34;&gt;vCenter Cred Secret&lt;/label&gt;
+                        &lt;div class=&#34;col-sm-9&#34;&gt;&lt;/div&gt;
+                        &lt;div class=&#34;was-validated col-sm-3&#34;&gt;
+                          &lt;input class=&#34;form-control input-lg&#34; type=&#34;text&#34; id=&#34;vSphere-vCenter-cred-secret&#34; placeholder=&#34;Example: vcenter-creds&#34; value=&#34;vcenter-creds&#34; oninput=&#34;validateInput(validateForm, CONSTANTS)&#34; required&gt;
+                        &lt;/div&gt;
+                      &lt;/div&gt;
+                    &lt;/div&gt;
+                  &lt;/div&gt;
+
+                  &lt;div class=&#34;was-validated row mb-4&#34;&gt;
+                    &lt;label for=&#34;controller-count&#34; class=&#34;col-sm-2 col-form-label&#34; data-bs-toggle=&#34;tooltip&#34; data-bs-placement=&#34;right&#34; title=&#34;Defines the number of controller pods to deploy.&#34; style=&#34;width: 180px;&#34;&gt;Controller Pods Count&lt;/label&gt;
+                    &lt;div class=&#34;row&#34;&gt;
+                      &lt;div class=&#34;col-sm-2&#34;&gt;
+                        &lt;input class=&#34;form-control input-sm&#34; type=&#34;number&#34; id=&#34;controller-count&#34; min=&#34;1&#34; oninput=&#34;validateInput(validateForm, CONSTANTS)&#34; required&gt;
+                      &lt;/div&gt;
+                      &lt;div class=&#34;col-sm-4&#34;&gt;
+                        &lt;div class=&#34;row mt-1&#34;&gt;
+                          &lt;a class=&#34;reset&#34; id=&#34;reset-controller-count&#34; onclick=&#34;resetControllerCount(csmMap)&#34;&gt;Reset to default&lt;/a&gt;
+                        &lt;/div&gt;
+                      &lt;/div&gt;
+                    &lt;/div&gt;
+                  &lt;/div&gt;
+
+                  &lt;div class=&#34;row mb-4 nodeselector&#34;&gt;
+                    &lt;div class=&#34;col-sm-12&#34;&gt;
+                      &lt;input class=&#34;form-check-input&#34; type=&#34;checkbox&#34; id=&#34;controller-pods-node-selector&#34; value=&#34;&#34; onchange=&#34;onNodeSelectorChange(nodeSelectorNote, csmMap)&#34;&gt;
+                      &lt;label for=&#34;controller-pods-node-selector&#34; class=&#34;form-check-label ms-2 text-dark&#34; data-bs-toggle=&#34;tooltip&#34; data-bs-placement=&#34;right&#34; title=&#34;Enable the installation of controller pods on control plane&#34;&gt;Install Controller Pods On Control Plane&lt;/label&gt;
+                    &lt;/div&gt;
+                  &lt;/div&gt;
+                  &lt;div class=&#34;row mb-4 nodeselector&#34;&gt;
+                    &lt;div class=&#34;col-sm-12&#34;&gt;
+                      &lt;input class=&#34;form-check-input&#34; type=&#34;checkbox&#34; id=&#34;node-pods-node-selector&#34; value=&#34;&#34; onchange=&#34;onNodeSelectorChange(nodeSelectorNote, csmMap)&#34;&gt;
+                      &lt;label for=&#34;node-pods-node-selector&#34; class=&#34;form-check-label ms-2 text-dark&#34; data-bs-toggle=&#34;tooltip&#34; data-bs-placement=&#34;right&#34; title=&#34;Enable the installation of node pods on control plane&#34;&gt;Install Node Pods On Control Plane&lt;/label&gt;
+                    &lt;/div&gt;
+                  &lt;/div&gt;
+                  &lt;div class=&#34;row mb-4 col-sm-12 node-sel-attributes child-level-one&#34;&gt;
+                    &lt;div class=&#34;col-sm-11 py-2 note&#34;&gt;
+                      &lt;i class=&#34;icon dds__icon dds__icon--alert-info-cir&#34;&gt;&lt;/i&gt;
+                      &lt;span id=&#34;node-selector-note&#34; class=&#34;h6&#34;&gt;&lt;/span&gt;
+                    &lt;/div&gt;
+                  &lt;/div&gt;
+                  &lt;div class=&#34;row mb-3 node-sel-attributes child-level-one&#34;&gt;
+                    &lt;label for=&#34;node-selector-label&#34; class=&#34;col-sm-12 col-form-label&#34; data-bs-toggle=&#34;tooltip&#34; data-bs-placement=&#34;right&#34; title=&#34;&#34;&gt;Node Selector Label&lt;/label&gt;
+                    &lt;div class=&#34;col-sm-4&#34;&gt;
+                      &lt;input class=&#34;form-control input-lg&#34; type=&#34;text&#34; id=&#34;node-selector-label&#34; required&gt;
+                    &lt;/div&gt;
+                    &lt;div class=&#34;col-sm-4&#34;&gt;
+                      &lt;div class=&#34;row mt-1&#34;&gt;
+                        &lt;a class=&#34;reset&#34; id=&#34;reset-node-selector-label&#34; onclick=&#34;resetNodeSelectorLabel(csmMap)&#34;&gt;Reset to default&lt;/a&gt;
+                      &lt;/div&gt;
+                    &lt;/div&gt;
+                  &lt;/div&gt;
+
+                  &lt;div class=&#34;row mb-4 namespace&#34;&gt;
+                    &lt;div class=&#34;col-sm-12&#34;&gt;
+                      &lt;input class=&#34;form-check-input&#34; type=&#34;checkbox&#34; id=&#34;single-namespace&#34; value=&#34;&#34; onchange=&#34;singleNamespaceCheck()&#34;&gt;
+                      &lt;label for=&#34;single-namespace&#34; class=&#34;form-check-label ms-2 text-dark&#34; data-bs-toggle=&#34;tooltip&#34; data-bs-placement=&#34;right&#34; title=&#34;Deploy the CSM driver and module in a single namespace.&#34;&gt;Single Namespace&lt;/label&gt;
+                    &lt;/div&gt;
+                  &lt;/div&gt;
+                  &lt;div id=&#34;single-namespace-disabled&#34;&gt;
+                    &lt;div class=&#34;row mb-4 namespace&#34;&gt;
+                      &lt;label for=&#34;driver-namespace&#34; class=&#34;col-sm-2 col-form-label&#34; data-bs-toggle=&#34;tooltip&#34; data-bs-placement=&#34;right&#34; title=&#34;Define the namespace to deploy the CSM driver&#34; style=&#34;width: 155px;&#34;&gt;Driver Namespace&lt;/label&gt;
+                      &lt;div class=&#34;col-sm-9&#34;&gt;&lt;/div&gt;
+                      &lt;div class=&#34;was-validated col-sm-3&#34;&gt;
+                        &lt;input class=&#34;form-control input-lg&#34; type=&#34;text&#34; id=&#34;driver-namespace&#34; oninput=&#34;validateInput(validateForm, CONSTANTS)&#34; required&gt;
+                      &lt;/div&gt;
+                      &lt;div class=&#34;col-sm-4&#34;&gt;
+                        &lt;div class=&#34;row mt-1&#34;&gt;
+                          &lt;a class=&#34;reset&#34; id=&#34;reset-driver-namespace&#34; onclick=&#34;resetDriverNamespace(driver)&#34;&gt;Reset to default&lt;/a&gt;
+                        &lt;/div&gt;
+                      &lt;/div&gt;
+                    &lt;/div&gt;
+                    &lt;div class=&#34;row mb-4 namespace&#34;&gt;
+                      &lt;label for=&#34;module-namespace&#34; class=&#34;col-sm-2 col-form-label&#34; data-bs-toggle=&#34;tooltip&#34; data-bs-placement=&#34;right&#34; title=&#34;Define the namespace to deploy the CSM module&#34; style=&#34;width: 170px;&#34;&gt;Module Namespace&lt;/label&gt;
+                      &lt;div class=&#34;col-sm-9&#34;&gt;&lt;/div&gt;
+                      &lt;div class=&#34;was-validated col-sm-3&#34;&gt;
+                        &lt;input class=&#34;form-control input-lg&#34; type=&#34;text&#34; id=&#34;module-namespace&#34; oninput=&#34;validateInput(validateForm, CONSTANTS)&#34; required&gt;
+                      &lt;/div&gt;
+                      &lt;div class=&#34;col-sm-4&#34;&gt;
+                        &lt;div class=&#34;row mt-1&#34;&gt;
+                          &lt;a class=&#34;reset&#34; id=&#34;reset-module-namespace&#34; onclick=&#34;resetModuleNameSpace(moduleNamespace)&#34;&gt;Reset to default&lt;/a&gt;
+                        &lt;/div&gt;
+                      &lt;/div&gt;
+                    &lt;/div&gt;
+                  &lt;/div&gt;
+
+                  &lt;!-- main content ends --&gt;
+                &lt;/div&gt;
+                &lt;div class=&#34;row mb-4&#34;&gt;
+                  &lt;div class=&#34;col-sm-6&#34;&gt;
+                    &lt;a class=&#34;btn button-primary col-5&#34; id=&#34;download-file&#34; download=&#34;values.yaml&#34;&gt;Generate YAML&lt;/a&gt;
+                  &lt;/div&gt;
+                &lt;/div&gt;
+                &lt;!-- card body ends --&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+          &lt;!-- form body ends --&gt;
+        &lt;/form&gt;
+        &lt;div class=&#34;row mb-4&#34;&gt;
+          &lt;div class=&#34;col-2&#34;&gt;&lt;/div&gt;
+          &lt;div class=&#34;col-10 card&#34; id=&#34;command-text-area&#34; style=&#34;width: 100rem;&#34;&gt;
+            &lt;div class=&#34;row&#34;&gt;
+              &lt;div class=&#34;col-10 card-body h4&#34; id=&#34;command-title&#34;&gt;&lt;/div&gt;
+              &lt;div class=&#34;col-2&#34;&gt;
+                &lt;button type=&#34;button&#34; class=&#34;copy&#34;&gt;
+                  &lt;i class=&#34;dds__icon dds__icon--copy-alt&#34; style=&#34;vertical-align: middle;padding-right: 2px;&#34;&gt;&lt;/i&gt;
+                  &lt;span id=&#34;copy&#34;&gt;Copy&lt;/span&gt;
+                &lt;/button&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div class=&#34;mt-3 mx-1 py-2 note&#34;&gt;
+              &lt;i class=&#34;icon dds__icon dds__icon--alert-info-cir&#34;&gt;&lt;/i&gt;
+              &lt;span class=&#34;h6&#34; id=&#34;command-note&#34;&gt;&lt;/span&gt;
+            &lt;/div&gt;
+            &lt;div class=&#34;mt-3 mx-1&#34;&gt;
+              &lt;span id=&#34;command1&#34;&gt;&lt;/span&gt;
+            &lt;/div&gt;
+            &lt;div class=&#34;mt-3 mx-1&#34;&gt;
+              &lt;span id=&#34;command2&#34;&gt;&lt;/span&gt;
+            &lt;/div&gt;
+            &lt;div class=&#34;mt-3 mx-1 py-2 note&#34; id=&#34;reverseProxyNote&#34;&gt;
+              &lt;i class=&#34;icon dds__icon dds__icon--alert-info-cir&#34;&gt;&lt;/i&gt;
+              &lt;span class=&#34;h6&#34;&gt;Click on the &lt;a href=&#34;https://dell.github.io/csm-docs/docs/csidriver/features/powermax/#prerequisite&#34; target=&#34;_blank&#34;&gt;documentation link&lt;/a&gt; for the steps to generate the certificates&lt;/span&gt;
+            &lt;/div&gt;
+            &lt;div class=&#34;my-3&#34;&gt;&lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/main&gt;
+      &lt;footer class=&#34;py-5 row d-print-none&#34;&gt;
+        &lt;div class=&#34;container-fluid mx-sm-5&#34;&gt;
+          &lt;div class=&#34;row&#34;&gt;
+            &lt;div class=&#34;col-6 col-sm-4 text-xs-center order-sm-2&#34;&gt;&lt;/div&gt;
+            &lt;div class=&#34;col-12 col-sm-4 text-center py-2 order-sm-2&#34;&gt;
+              &lt;small class=&#34;text-white&#34;&gt;&amp;copy; 2023 The Dell Technologies All Rights Reserved&lt;/small&gt;
+              &lt;small class=&#34;ml-1&#34;&gt;
+                &lt;a href=&#34;https://www.dell.com/learn/us/en/uscorp1/policies-privacy&#34; target=&#34;_blank&#34;&gt;Privacy Policy&lt;/a&gt;
+              &lt;/small&gt;
+            &lt;/div&gt;
+            &lt;div class=&#34;col-6 col-sm-4 text-right text-xs-center order-sm-3 text-align-right&#34;&gt;
+              &lt;ul class=&#34;list-inline mb-0&#34;&gt;
+                &lt;li class=&#34;list-inline-item mx-2 h3&#34; data-toggle=&#34;tooltip&#34; data-placement=&#34;top&#34; title=&#34;&#34; aria-label=&#34;GitHub&#34; data-original-title=&#34;GitHub&#34;&gt;
+                  &lt;a class=&#34;text-white&#34; target=&#34;_blank&#34; href=&#34;https://github.com/dell/csm&#34;&gt;
+                    &lt;svg viewBox=&#34;0 0 496 512&#34; height=&#34;24&#34;&gt;&lt;path d=&#34;M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z&#34;  fill=&#34;#ffffff&#34;/&gt;&lt;/svg&gt;
+                  &lt;/a&gt;
+                &lt;/li&gt;
+                &lt;li class=&#34;list-inline-item mx-2 h3&#34; data-toggle=&#34;tooltip&#34; data-placement=&#34;top&#34; title=&#34;&#34; aria-label=&#34;Slack&#34; data-original-title=&#34;Slack&#34;&gt;
+                  &lt;a class=&#34;text-white&#34; target=&#34;_blank&#34; href=&#34;http://del.ly/Slack_request&#34;&gt;
+                    &lt;svg viewBox=&#34;0 0 448 512&#34; height=&#34;24&#34;&gt;&lt;path d=&#34;M94.12 315.1c0 25.9-21.16 47.06-47.06 47.06S0 341 0 315.1c0-25.9 21.16-47.06 47.06-47.06h47.06v47.06zm23.72 0c0-25.9 21.16-47.06 47.06-47.06s47.06 21.16 47.06 47.06v117.84c0 25.9-21.16 47.06-47.06 47.06s-47.06-21.16-47.06-47.06V315.1zm47.06-188.98c-25.9 0-47.06-21.16-47.06-47.06S139 32 164.9 32s47.06 21.16 47.06 47.06v47.06H164.9zm0 23.72c25.9 0 47.06 21.16 47.06 47.06s-21.16 47.06-47.06 47.06H47.06C21.16 243.96 0 222.8 0 196.9s21.16-47.06 47.06-47.06H164.9zm188.98 47.06c0-25.9 21.16-47.06 47.06-47.06 25.9 0 47.06 21.16 47.06 47.06s-21.16 47.06-47.06 47.06h-47.06V196.9zm-23.72 0c0 25.9-21.16 47.06-47.06 47.06-25.9 0-47.06-21.16-47.06-47.06V79.06c0-25.9 21.16-47.06 47.06-47.06 25.9 0 47.06 21.16 47.06 47.06V196.9zM283.1 385.88c25.9 0 47.06 21.16 47.06 47.06 0 25.9-21.16 47.06-47.06 47.06-25.9 0-47.06-21.16-47.06-47.06v-47.06h47.06zm0-23.72c-25.9 0-47.06-21.16-47.06-47.06 0-25.9 21.16-47.06 47.06-47.06h117.84c25.9 0 47.06 21.16 47.06 47.06 0 25.9-21.16 47.06-47.06 47.06H283.1z&#34; fill=&#34;#ffffff&#34;/&gt;&lt;/svg&gt;
+                  &lt;/a&gt;
+                &lt;/li&gt;
+              &lt;/ul&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/footer&gt;
+    &lt;/div&gt;
+    &lt;script type=&#34;text/javascript&#34; src=&#34;static/js/constants.js&#34;&gt;&lt;/script&gt;
+    &lt;script type=&#34;text/javascript&#34; src=&#34;static/js/commands.js&#34;&gt;&lt;/script&gt;
+    &lt;script type=&#34;text/javascript&#34; src=&#34;static/js/utility.js&#34;&gt;&lt;/script&gt;
+    &lt;script type=&#34;text/javascript&#34; src=&#34;static/js/ui-functions.js&#34;&gt;&lt;/script&gt;
+    &lt;script type=&#34;text/javascript&#34;&gt;
+      onPageLoad();
+    &lt;/script&gt;
+    &lt;script type=&#34;text/javascript&#34; src=&#34;static/js/generate-yaml.js&#34;&gt;&lt;/script&gt;
+    &lt;script type=&#34;text/javascript&#34;&gt;
+      //  Function to validate form
+      (function() {
+        &#39;use strict&#39;
+        var forms = document.querySelectorAll(&#39;.needs-validation&#39;)
+        forms.style.display = &#39;none&#39;
+        // Loop over them and prevent submission
+        Array.prototype.slice.call(forms).forEach(function(form) {
+          form.addEventListener(&#39;click&#39;, function(event) {
+            if (!form.checkValidity()) {
+              event.preventDefault()
+              event.stopPropagation()
+            }
+            form.classList.add(&#39;was-validated&#39;)
+          }, false)
+        })
+      })();
+    &lt;/script&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+      </description>
+    </item>
+    
   </channel>
 </rss>

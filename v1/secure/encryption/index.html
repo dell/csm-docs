@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="generator" content="Hugo 0.122.0">
+<meta name="generator" content="Hugo 0.123.1">
 <link rel="alternate" type="application/rss&#43;xml" href="https://dell.github.io/csm-docs/v1/secure/encryption/index.xml">
 <meta name="robots" content="index, follow">
 
@@ -102,7 +102,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.7dad682d16f69f57f44216c5ece5d90b.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.b2461058d7fc1f7ffea2f9edd5cdfce8.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -124,7 +124,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.7dad682d16f69f57f44216c5ece5d90b.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.b2461058d7fc1f7ffea2f9edd5cdfce8.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -145,6 +145,8 @@
   <ul class="ul-3 foldable">
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1deploymentcsminstallationwizardrelease-li">
   <a href="/csm-docs/v1/deployment/csminstallationwizard/release/" title="Release Notes" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv1deploymentcsminstallationwizardrelease"><span class="">Release notes</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1deploymentcsminstallationwizardsrc-li">
+  <a href="/csm-docs/v1/deployment/csminstallationwizard/src/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv1deploymentcsminstallationwizardsrc"><span class=""></span></a>
 </li>
   </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv1deploymentcsmoperator-li">
@@ -648,22 +650,6 @@
             
 
 	
-		
-
-
-
-  
-  
-
-	
-		
-
-
-
-  
-  
-
-	
 
           </aside>
           <main class="col-12 col-md-9 col-xl-8 pl-md-5" role="main">
@@ -691,14 +677,6 @@
 		
 
   
-    
-
-
-  
-    
-
-
-  
 
 		
 	</header>
@@ -707,7 +685,7 @@
 <p><strong>NOTE:</strong> This tech-preview release is not intended for use in production environment.</p>
 </blockquote>
 <blockquote>
-<p><strong>NOTE:</strong> Encryption requires a time-based license to create new encrypted volumes. Request a <a href="../../license">trial license</a> prior to deployment.</p>
+<p><strong>NOTE:</strong> Encryption requires a time-based license to create new encrypted volumes. Request a <a href="/csm-docs/v1/license/">trial license</a> prior to deployment.</p>
 <p>After the license expiration, existing encrypted volume can still be unlocked and used, but no new encrypted volumes can be created.</p>
 </blockquote>
 <p>The volume data is encrypted on the Kubernetes worker host running the application workload, transparently for the application.</p>
@@ -720,7 +698,7 @@ Encryption generates 32 random bytes for the password and stores them in Hashico
 <p><strong>Provisioner for unencrypted volumes</strong></p>
 <p>This provisioner belongs to the storage driver and does not depend on the Encryption feature. Use a storage class with this provisioner to create regular unencrypted volumes.</p>
 <p><strong>Provisioner for encrypted volumes</strong></p>
-<p>This provisioner belongs to Encryption and registers with the name <a href="deployment/#helm-chart-values"><code>encryption.pluginName</code></a> when Encryption is enabled. Use a storage class with this provisioner to create encrypted volumes.</p>
+<p>This provisioner belongs to Encryption and registers with the name <a href="/csm-docs/v1/secure/encryption/deployment/#helm-chart-values"><code>encryption.pluginName</code></a> when Encryption is enabled. Use a storage class with this provisioner to create encrypted volumes.</p>
 <h2 id="capabilities">Capabilities</h2>
 
 
@@ -894,7 +872,7 @@ Please refer to the Hashicorp Vault documentation regarding recommended deployme
 <p><strong>CAUTION:</strong> Destroyed Vault storage back-end or the encryption key stored in it, will make it impossible to unlock the volume encrypted with Encryption.
 Access to the data will be lost for ever.</p>
 </blockquote>
-<p>Refer to <a href="vault">Vault Configuration section</a> for minimal configuration steps required to support Encryption and other configuration considerations.</p>
+<p>Refer to <a href="/csm-docs/v1/secure/encryption/vault/">Vault Configuration section</a> for minimal configuration steps required to support Encryption and other configuration considerations.</p>
 <h2 id="key-rotation-rekey">Key Rotation (rekey)</h2>
 <p>This preview of Encryption includes the ability to change the KEK (Key Encryption Key) of an encrypted volume, an operation commonly known as Shallow Rekey, or
 Shallow Key Rotation. The KEK is the 256-bit key that encrypts the Data Encryption Key which encrypts the data on the volume.</p>
@@ -905,7 +883,7 @@ Shallow Key Rotation. The KEK is the 256-bit key that encrypts the Data Encrypti
 <li>SSH server should remain running all the time whenever an application with an encrypted volume is running on the host.</li>
 </ul>
 <blockquote>
-<p><strong>NOTE:</strong> Stopping the SSH server on the worker host makes any encrypted volume attached to this host <a href="troubleshooting#ssh-stopped">inaccessible</a>.</p>
+<p><strong>NOTE:</strong> Stopping the SSH server on the worker host makes any encrypted volume attached to this host <a href="/csm-docs/v1/secure/encryption/troubleshooting/#ssh-stopped">inaccessible</a>.</p>
 </blockquote>
 <ul>
 <li>Each Kubernetes worker host should have commands <code>fusermount</code> and <code>mount.fuse</code>. They are pre-installed in most Linux distros.

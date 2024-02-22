@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="generator" content="Hugo 0.122.0">
+<meta name="generator" content="Hugo 0.123.1">
 <link rel="alternate" type="application/rss&#43;xml" href="https://dell.github.io/csm-docs/v1/authorization/deployment/rpm/index.xml">
 <meta name="robots" content="index, follow">
 
@@ -102,7 +102,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.7dad682d16f69f57f44216c5ece5d90b.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.b2461058d7fc1f7ffea2f9edd5cdfce8.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -124,7 +124,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.7dad682d16f69f57f44216c5ece5d90b.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.b2461058d7fc1f7ffea2f9edd5cdfce8.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -145,6 +145,8 @@
   <ul class="ul-3 foldable">
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1deploymentcsminstallationwizardrelease-li">
   <a href="/csm-docs/v1/deployment/csminstallationwizard/release/" title="Release Notes" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv1deploymentcsminstallationwizardrelease"><span class="">Release notes</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1deploymentcsminstallationwizardsrc-li">
+  <a href="/csm-docs/v1/deployment/csminstallationwizard/src/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv1deploymentcsminstallationwizardsrc"><span class=""></span></a>
 </li>
   </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv1deploymentcsmoperator-li">
@@ -653,22 +655,6 @@
             
 
 	
-		
-
-
-
-  
-  
-
-	
-		
-
-
-
-  
-  
-
-	
 
           </aside>
           <main class="col-12 col-md-9 col-xl-8 pl-md-5" role="main">
@@ -699,14 +685,6 @@
 		
 
   
-    
-
-
-  
-    
-
-
-  
 
 		
 	</header>
@@ -720,7 +698,7 @@
 <p>This section outlines the deployment steps for Container Storage Modules (CSM) for Authorization.  The deployment of CSM for Authorization is handled in 2 parts:</p>
 <ul>
 <li>Deploying the CSM for Authorization proxy server, to be controlled by storage administrators</li>
-<li>Configuring one to many <a href="../../../authorization#supported-csi-drivers">supported</a> Dell CSI drivers with CSM for Authorization</li>
+<li>Configuring one to many <a href="/csm-docs/v1/authorization/#supported-csi-drivers">supported</a> Dell CSI drivers with CSM for Authorization</li>
 </ul>
 <h2 id="prerequisites">Prerequisites</h2>
 <p>The CSM for Authorization proxy server requires a Linux host with the following minimum resource allocations:</p>
@@ -807,13 +785,13 @@ This allows CSM for Authorization to be installed in network-restricted environm
 <p>After installation, application data will be stored on the system under <code>/var/lib/rancher/k3s/storage/</code>.</p>
 </li>
 </ol>
-<p>If errors occur during installation, review the <a href="../../troubleshooting">Troubleshooting</a> section.</p>
+<p>If errors occur during installation, review the <a href="/csm-docs/v1/authorization/troubleshooting/">Troubleshooting</a> section.</p>
 <h2 id="configuring-the-csm-for-authorization-proxy-server">Configuring the CSM for Authorization Proxy Server</h2>
 <p>The first part of CSM for Authorization deployment is to configure the proxy server. This is controlled by the Storage Administrator.</p>
-<p>Please follow the steps outlined in the <a href="../../configuration/proxy-server">proxy server</a> configuration.</p>
+<p>Please follow the steps outlined in the <a href="/csm-docs/v1/authorization/configuration/proxy-server/">proxy server</a> configuration.</p>
 <h2 id="configuring-a-dell-csi-driver-with-csm-for-authorization">Configuring a Dell CSI Driver with CSM for Authorization</h2>
-<p>The second part of CSM for Authorization deployment is to configure one or more of the <a href="../../../authorization#supported-csi-drivers">supported</a> CSI drivers. This is controlled by the Kubernetes tenant administrator.</p>
-<p>Please follow the steps outlined in <a href="../../configuration/powerflex">PowerFlex</a>, <a href="../../configuration/powermax">PowerMax</a>, or <a href="../../configuration/powerscale">PowerScale</a> to configure the CSI Driver to work with the Authorization sidecar.</p>
+<p>The second part of CSM for Authorization deployment is to configure one or more of the <a href="/csm-docs/v1/authorization/#supported-csi-drivers">supported</a> CSI drivers. This is controlled by the Kubernetes tenant administrator.</p>
+<p>Please follow the steps outlined in <a href="/csm-docs/v1/authorization/configuration/powerflex/">PowerFlex</a>, <a href="/csm-docs/v1/authorization/configuration/powermax/">PowerMax</a>, or <a href="/csm-docs/v1/authorization/configuration/powerscale/">PowerScale</a> to configure the CSI Driver to work with the Authorization sidecar.</p>
 <h2 id="updating-csm-for-authorization-proxy-server-configuration">Updating CSM for Authorization Proxy Server Configuration</h2>
 <p>CSM for Authorization has a subset of configuration parameters that can be updated dynamically:</p>
 <table>

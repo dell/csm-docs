@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="generator" content="Hugo 0.122.0">
+<meta name="generator" content="Hugo 0.123.1">
 <meta name="robots" content="index, follow">
 
 <link rel="shortcut icon" href="/favicons/favicon.ico" >
@@ -106,7 +106,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.7dad682d16f69f57f44216c5ece5d90b.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.b2461058d7fc1f7ffea2f9edd5cdfce8.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -128,7 +128,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.7dad682d16f69f57f44216c5ece5d90b.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.b2461058d7fc1f7ffea2f9edd5cdfce8.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -144,8 +144,13 @@
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-csm-docsv3deployment-li">
   <a href="/csm-docs/v3/deployment/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3deployment"><span class="">Deployment</span></a>
   <ul class="ul-2 foldable">
-    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3deploymentcsminstallationwizard-li">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv3deploymentcsminstallationwizard-li">
   <a href="/csm-docs/v3/deployment/csminstallationwizard/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3deploymentcsminstallationwizard"><span class="">CSM Installation Wizard</span></a>
+  <ul class="ul-3 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3deploymentcsminstallationwizardsrc-li">
+  <a href="/csm-docs/v3/deployment/csminstallationwizard/src/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3deploymentcsminstallationwizardsrc"><span class=""></span></a>
+</li>
+  </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv3deploymentcsmoperator-li">
   <a href="/csm-docs/v3/deployment/csmoperator/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3deploymentcsmoperator"><span class="">CSM Operator</span></a>
   <ul class="ul-3 foldable">
@@ -621,22 +626,6 @@
             
 
 	
-		
-
-
-
-  
-  
-
-	
-		
-
-
-
-  
-  
-
-	
 
           </aside>
           <main class="col-12 col-md-9 col-xl-8 pl-md-5" role="main">
@@ -665,7 +654,7 @@
 
 	       
 	<h2 id="vault-server-installation">Vault Server Installation</h2>
-<p>If there is already a Vault server available, skip to <a href="#minimum-server-configuration">Minimum Server Configuration</a>.</p>
+<p>If there is already a Vault server available, skip to <a href="/csm-docs/v3/secure/encryption/vault/#minimum-server-configuration">Minimum Server Configuration</a>.</p>
 <p>If there is no Vault server available to use with Encryption, it can be installed in many ways following <a href="https://www.vaultproject.io/docs">Hashicorp Vault documentation</a>.</p>
 <p>For testing environment, however, a simple deployment suggested in this section may suffice.
 It creates a standalone server with in-memory (non-persistent) storage, running in a Docker container.</p>
@@ -780,14 +769,14 @@ The same address should be used for <code>vault_addr</code> in <a href="../deplo
 Refer to the <a href="https://www.vaultproject.io/docs">Hashicorp Vault documentation</a> for recommended configuration options.</p>
 </blockquote>
 <blockquote>
-<p>If a <a href="#vault-server-installation">test instance of Vault</a> is used, the <code>vault</code> commands below can be executed in the Vault server container shell.
+<p>If a <a href="/csm-docs/v3/secure/encryption/vault/#vault-server-installation">test instance of Vault</a> is used, the <code>vault</code> commands below can be executed in the Vault server container shell.
 To enter the shell, run <code>docker exec -it vault-server sh</code>. After completing the configuration process, exit the shell by typing <code>exit</code>.</p>
 <p>Alternatively, you can <a href="https://www.vaultproject.io/downloads">download the vault binary</a> and run it anywhere.
 It will require two environment variables to communicate with the Vault server:</p>
 <ul>
 <li><code>VAULT_ADDR</code> - URL similar to <code>http://127.0.0.1:8200</code>. You may need to change the address in the URL to the address of
 the Docker host where the server is running.</li>
-<li><code>VAULT_TOKEN</code> - Authentication token, e.g. the root token <code>DemoRootToken</code> used in the <a href="#vault-server-installation">test instance of Vault</a>.</li>
+<li><code>VAULT_TOKEN</code> - Authentication token, e.g. the root token <code>DemoRootToken</code> used in the <a href="/csm-docs/v3/secure/encryption/vault/#vault-server-installation">test instance of Vault</a>.</li>
 </ul>
 </blockquote>
 <h3 id="enable-keyvalue-secret-engine">Enable Key/Value secret engine</h3>
@@ -827,7 +816,7 @@ The role only needs read access to the Key/Value secret engine config endpoint f
 </span></span><span style="display:flex;"><span>vault write auth/approle/role/dea-role/custom-secret-id <span style="color:#000">secret_id</span><span style="color:#ce5c00;font-weight:bold">=</span>demo-secret-id
 </span></span></code></pre></div><blockquote>
 <p>Secret ID has an expiration time after which it becomes invalid resulting in <a href="../troubleshooting#expired-approle-secret-id">authorization failure</a>.
-The expiration time for new secret IDs can be set in <code>secret_id_ttl</code> parameter when <a href="#create-a-role">the role is created</a> or later on using
+The expiration time for new secret IDs can be set in <code>secret_id_ttl</code> parameter when <a href="/csm-docs/v3/secure/encryption/vault/#create-a-role">the role is created</a> or later on using
 <code>vault write auth/approle/role/dea-role/secret-id-ttl secret_id_ttl=24h</code>.</p>
 </blockquote>
 <h2 id="token-ttl-considerations">Token TTL Considerations</h2>

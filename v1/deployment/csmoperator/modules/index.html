@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="generator" content="Hugo 0.122.0">
+<meta name="generator" content="Hugo 0.123.1">
 <link rel="alternate" type="application/rss&#43;xml" href="https://dell.github.io/csm-docs/v1/deployment/csmoperator/modules/index.xml">
 <meta name="robots" content="index, follow">
 
@@ -98,7 +98,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.7dad682d16f69f57f44216c5ece5d90b.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.b2461058d7fc1f7ffea2f9edd5cdfce8.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -120,7 +120,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.7dad682d16f69f57f44216c5ece5d90b.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.b2461058d7fc1f7ffea2f9edd5cdfce8.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -141,6 +141,8 @@
   <ul class="ul-3 foldable">
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1deploymentcsminstallationwizardrelease-li">
   <a href="/csm-docs/v1/deployment/csminstallationwizard/release/" title="Release Notes" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv1deploymentcsminstallationwizardrelease"><span class="">Release notes</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1deploymentcsminstallationwizardsrc-li">
+  <a href="/csm-docs/v1/deployment/csminstallationwizard/src/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv1deploymentcsminstallationwizardsrc"><span class=""></span></a>
 </li>
   </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id="m-csm-docsv1deploymentcsmoperator-li">
@@ -627,22 +629,6 @@
             
 
 	
-		
-
-
-
-  
-  
-
-	
-		
-
-
-
-  
-  
-
-	
 
           </aside>
           <main class="col-12 col-md-9 col-xl-8 pl-md-5" role="main">
@@ -673,23 +659,15 @@
 		
 
   
-    
-
-
-  
-    
-
-
-  
 
 		
 	</header>
 	<p>The CSM Operator can optionally enable modules that are supported by the specific Dell CSI driver. By default, the modules are disabled but they can be enabled by setting any pre-requisite configuration options for the given module and setting the enabled flag to true  in the custom resource.
 The steps include:</p>
 <ol>
-<li>Deploy the Dell CSM Operator (if it is not already deployed). Please follow the instructions available <a href="../../#installation">here</a>.</li>
+<li>Deploy the Dell CSM Operator (if it is not already deployed). Please follow the instructions available <a href="/csm-docs/v1/deployment/#installation">here</a>.</li>
 <li>Configure any pre-requisite for the desired module(s). See the specific module below for more information</li>
-<li>Follow the instructions <a href="../drivers">here</a> to install Dell CSI Drivers via the CSM Operator. The module section in the ContainerStorageModule CR should be updated to enable the desired module(s). There are <a href="https://github.com/dell/csm-operator/tree/main/samples">sample manifests</a> provided which can be edited to do an easy installation of the driver along with the module.</li>
+<li>Follow the instructions <a href="/csm-docs/v1/deployment/csmoperator/drivers/">here</a> to install Dell CSI Drivers via the CSM Operator. The module section in the ContainerStorageModule CR should be updated to enable the desired module(s). There are <a href="https://github.com/dell/csm-operator/tree/main/samples">sample manifests</a> provided which can be edited to do an easy installation of the driver along with the module.</li>
 </ol>
 
         <div class="section-index">
