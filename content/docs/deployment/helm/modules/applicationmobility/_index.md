@@ -60,7 +60,7 @@ This table lists the configurable parameters of the Application Mobility Helm ch
 | `velero.configuration.backupStorageLocation.config` |  Additional provider-specific configuration. See https://velero.io/docs/v1.9/api-types/backupstoragelocation/ for specific details. | Yes | ` ` |
 | `velero.initContainers` |  List of plugins used by Velero. Dell Velero plugin is required and plugins for other providers can be added.  | Yes | ` ` |
 | `velero.initContainers[0].name` |  Name of the Dell Velero plugin.  | Yes | `dell-custom-velero-plugin` |
-| `velero.initContainers[0].image` |  Location of the Dell Velero plugin image.  | Yes | `dellemc/csm-application-mobility-velero-plugin:v0.3.0` |
+| `velero.initContainers[0].image` |  Location of the Dell Velero plugin image.  | Yes | `dellemc/csm-application-mobility-velero-plugin:v0.4.0` |
 | `velero.initContainers[0].volumeMounts[0].mountPath` |  Mount path of the volume mount.  | Yes | `/target` |
 | `velero.initContainers[0].volumeMounts[0].name` |  Name of the volume mount.  | Yes | `plugins` |
 | `velero.restic.privileged` | If set to true, Restic Pods will be run in privileged mode. Note: Set to true when using Red Hat OpenShift | No | `false` | 
