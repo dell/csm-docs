@@ -6,7 +6,7 @@ Description: >
   Release notes for Dell Container Storage Modules Operator
 ---
 
-## Release Notes - Container Storage Modules Operator v1.4.0
+## Release Notes - Container Storage Modules Operator v1.5.0
 
 
 
@@ -24,7 +24,6 @@ Description: >
 ### Fixed Issues
 
 - [#1094 - [BUG]: CSM Operator offline install powerflex csi driver sidecar trying to pull from registry.k8s.io](https://github.com/dell/csm/issues/1094)
-- [#1103 - [BUG]: CSM Operator doesn't apply `fSGroupPolicy` value to `CSIDriver` Object](https://github.com/dell/csm/issues/1103)
 
 ### Known Issues
 | Issue | Workaround |
