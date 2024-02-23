@@ -27,4 +27,4 @@ Description: >
 - [#1103 - [BUG]: CSM Operator doesn't apply `fSGroupPolicy` value to `CSIDriver` Object](https://github.com/dell/csm/issues/1103)
 
 ### Known Issues
-- When CSM-Operator creates a deployment that includes secrets (e.g., application-mobility, observability, cert-manager, velero, these secrets are not necessarily deleted on uninstall and may be left behind. For example, the `karavi-topology-tls`, `otel-collector-tls`, and `cert-manager-webhook-ca` secrets will not be deleted. This should not cause any issues on the system, but any unwanted secrets can be deleted with `kubectl delete secret -n <secret-namespace> <secret-name>
+- When CSM Operator creates a deployment that includes secrets (e.g., application-mobility, observability, cert-manager, velero, these secrets are not necessarily deleted on uninstall and may be left behind. For example, the `karavi-topology-tls`, `otel-collector-tls`, and `cert-manager-webhook-ca` secrets will not be deleted. This should not cause any issues on the system, but any unwanted secrets can be deleted with `kubectl delete secret -n <secret-namespace> <secret-name>
