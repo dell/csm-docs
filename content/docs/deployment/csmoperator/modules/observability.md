@@ -22,22 +22,22 @@ The CSM Observability module for supported Dell CSI Drivers can be installed via
           # certificate: base64-encoded certificate for cert/private-key pair -- add cert here to use custom certificates
           #  for self-signed certs, leave empty string
           # Allowed values: string
-          certificate: "<INSERT TOPOLOGY CERTIFICATE HERE>"
+          certificate: "<INSERT BASE64-ENCODED TOPOLOGY CERTIFICATE HERE>"
           # privateKey: base64-encoded private key for cert/private-key pair -- add private key here to use custom certificates
           #  for self-signed certs, leave empty string
           # Allowed values: string
-          privateKey: "<INSERT TOPOLOGY PRIVATE KEY HERE>"
+          privateKey: "<INSERT BASE64-ENCODED TOPOLOGY PRIVATE KEY HERE>"
 ...
         - name: otel-collector
 ...
           # certificate: base64-encoded certificate for cert/private-key pair -- add cert here to use custom certificates
           #  for self-signed certs, leave empty string
           # Allowed values: string
-          certificate: "<INSERT OTEL-COLLECTOR CERTIFICATE HERE>"
+          certificate: "<INSERT BASE64-ENCODED OTEL-COLLECTOR CERTIFICATE HERE>"
           # privateKey: base64-encoded private key for cert/private-key pair -- add private key here to use custom certificates
           #  for self-signed certs, leave empty string
           # Allowed values: string
-          privateKey: "<INSERT OTEL-COLLECTOR PRIVATE KEY HERE>"
+          privateKey: "<INSERT BASE64-ENCODED OTEL-COLLECTOR PRIVATE KEY HERE>"
 ...
 ```
   - Scenario 1: Deploy one supported CSI Driver and enable Observability module
