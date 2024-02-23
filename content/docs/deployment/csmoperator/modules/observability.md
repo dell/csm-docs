@@ -40,11 +40,9 @@ The CSM Observability module for supported Dell CSI Drivers can be installed via
           privateKey: "<INSERT BASE64-ENCODED OTEL-COLLECTOR PRIVATE KEY HERE>"
 ...
 ```
-  - Scenario 1: Deploy one supported CSI Driver and enable Observability module
-    - If you enable `metrics-powerscale` or `metrics-powerflex`, must enable `otel-collector` as well.
-    
-  - Scenario 2: Deploy multiple supported CSI Drivers and enable Observability module
-    - When deploying the first driver, enable all components of Observability module in the CR. 
-    - For the following drivers, only enable the metrics service, and remove `topology` and `otel-collector` sections from the CR.
-    - The CR created first must be deleted last.
+- Once you have prepared the sample file, deploy by running `kubectl apply -f <SAMPLE FILE>` on the created sample file.
+- Notes:
+    - If you enable `metrics-powerscale` or `metrics-powerflex`, you must enable `otel-collector` as well.
+    - otel-collector cannot be enabled without a metrics component also enabled.
+    - If you are deploying multiple drivers, only enable topology, otel-collector, and cert-manager in the first driver. For subsequent drivers, only enable the metrics component. When deleting the deployment, the driver that was created first must be deleted last.
 
