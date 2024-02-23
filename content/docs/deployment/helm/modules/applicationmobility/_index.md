@@ -42,7 +42,7 @@ This table lists the configurable parameters of the Application Mobility Helm ch
 | - | - | - | - |
 | `replicaCount` | Number of replicas for the Application Mobility controllers | Yes | `1` |
 | `image.pullPolicy` | Image pull policy for the Application Mobility controller images | Yes | `IfNotPresent` |
-| `controller.image` | Location of the Application Mobility Docker image | Yes | `dellemc/csm-application-mobility-controller:v0.3.0` |
+| `controller.image` | Location of the Application Mobility Docker image | Yes | `dellemc/csm-application-mobility-controller:v0.4.0` |
 | `cert-manager.enabled` |  If set to true, cert-manager will be installed during Application Mobility installation | Yes | `false` |
 | `veleroNamespace` |  If Velero is already installed, set to the namespace where Velero is installed | No | `velero` |
 | `licenseName` |  Name of the Secret that contains the License for Application Mobility | Yes | `license` |
