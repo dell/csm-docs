@@ -14,14 +14,17 @@ description: Release notes for PowerMax CSI driver
 
 
 
+
 ### New Features/Changes
 
 - [#926 - [FEATURE]: Fixing the linting, formatting and vetting issues](https://github.com/dell/csm/issues/926)
+- [#1091 - [FEATURE]: CSM 1.10 release specific changes](https://github.com/dell/csm/issues/1091)
 
 ### Fixed Issues
 
 - [#1081 - [BUG]: CSM driver repositories reference CSI Operator](https://github.com/dell/csm/issues/1081)
 - [#1115 - [BUG]: CSI Powermax: Driver fails to restore snapshot to Metro Volumes](https://github.com/dell/csm/issues/1115)
+- [#1140 - [BUG]: Cert-csi tests are not reporting the passed testcases in K8S E2E tests ](https://github.com/dell/csm/issues/1140)
 
 ### Known Issues
 
