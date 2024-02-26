@@ -21,10 +21,10 @@ To deploy the Operator, follow the instructions available [here](../../#installa
 2. Install cert-manager CRDs 
 ```bash
 
-kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v1.6.1/cert-manager.crds.yaml
+kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v1.11.0/cert-manager.crds.yaml
 ```
 
-3. Prepare `samples/authorization/config.yaml` provided [here](https://github.com/dell/csm-operator/blob/main/samples/authorization/config.yaml) which contains the JWT signing secret. The following table lists the configuration parameters.
+3. Prepare [samples/authorization/config.yaml](https://github.com/dell/csm-operator/blob/main/samples/authorization/config.yaml) which contains the JWT signing secret. The following table lists the configuration parameters.
 
     | Parameter | Description                                                  | Required | Default |
     | --------- | ------------------------------------------------------------ | -------- | ------- |
@@ -51,7 +51,7 @@ kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/relea
     kubectl create secret generic karavi-config-secret -n authorization --from-file=config.yaml=samples/authorization/config.yaml -o yaml --dry-run=client | kubectl replace -f -
     ```
 
-4. Create the `karavi-storage-secret` using the file provided [here](https://github.com/dell/csm-operator/blob/main/samples/authorization/karavi-storage-secret.yaml) to store storage system credentials.
+4. Create the [karavi-storage-secret](https://github.com/dell/csm-operator/blob/main/samples/authorization/karavi-storage-secret.yaml) to store storage system credentials.
 
     Use this command to create the secret:
 
@@ -64,7 +64,7 @@ kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/relea
 
 1. Follow all the [prerequisites](#prerequisite).
 
-2. Create a CR (Custom Resource) for Authorization using the sample file provided [here](https://github.com/dell/csm-operator/blob/main/samples/authorization/csm_authorization_proxy_server_v170.yaml). This file can be modified to use custom parameters if needed.
+2. Create a CR (Custom Resource) for Authorization from a [sample manifest](https://github.com/dell/csm-operator/tree/main/samples/authorization). This file can be modified to use custom parameters if needed.
 
 3. Users should configure the parameters in the CR. This table lists the primary configurable parameters of the Authorization Proxy Server and their default values:
 
@@ -96,7 +96,7 @@ To enable reporting of trace data with [Zipkin](https://zipkin.io/), use the `cs
 
     ```bash
     
-    kubectl create -f samples/authorization/csm_authorization_proxy_server_v190.yaml
+    kubectl create -f <SAMPLE FILE>
     ```
 
   >__Note__:  
@@ -111,12 +111,12 @@ To enable reporting of trace data with [Zipkin](https://zipkin.io/), use the `cs
     kubectl create secret tls karavi-auth-tls -n authorization --key <location-of-private-key-file> --cert <location-of-certificate-file>
     ```
 
-    If using a self-signed certificate, prepare `samples/authorization/certificate_v190.yaml` provided [here](https://github.com/dell/csm-operator/blob/main/samples/authorization/certificate_v170.yaml). An entry for each hostname specified in the CR must be added under `dnsNames` for the certificate to be valid for each Ingress. 
+    If using a self-signed certificate, prepare a certificate file provided [here](https://github.com/dell/csm-operator/tree/main/samples/authorization). An entry for each hostname specified in the CR must be added under `dnsNames` for the certificate to be valid for each Ingress. 
 
     Use this command to create the `karavi-auth-tls` secret:
 
     ```bash
-    kubectl create -f samples/authorization/certificate_v190.yaml
+    kubectl create -f <CERTIFICATE FILE>
     ```
 
 ### Verify Installation of the CSM Authorization Proxy Server
@@ -128,12 +128,12 @@ Once the Authorization CR is created, you can verify the installation as mention
 
 ### Install Karavictl
 
-Follow the instructions available in CSM Authorization for [Installing karavictl](../../../../authorization/deployment/helm/#install-karavictl).
+Follow the instructions available in CSM Authorization for [Installing karavictl](../../../helm/modules/authorization/#install-karavictl).
 
-### Configuring the CSM Authorization Proxy Server
+### Configure the CSM Authorization Proxy Server
 
-Follow the instructions available in CSM Authorization for [Configuring the CSM Authorization Proxy Server](../../../../authorization/configuration/proxy-server/#configuring-the-csm-authorization-proxy-server).
+Follow the instructions available in CSM Authorization for [Configuring the CSM Authorization Proxy Server](../../../helm/modules/authorization/#configuring-the-csm-authorization-proxy-server).
 
-### Configuring a Dell CSI Driver with CSM Authorization
+### Configure a Dell CSI Driver with CSM Authorization
 
-Follow the instructions available in CSM Authorization for [Configuring a Dell CSI Driver with CSM for Authorization](../../../../authorization/configuration/#configuring-a-dell-csi-driver-with-csm-for-authorization).
+Follow the instructions available in CSM Authorization for [Configuring a Dell CSI Driver with CSM for Authorization](../../../helm/modules/authorization/#configuring-a-dell-csi-driver-with-csm-for-authorization).
