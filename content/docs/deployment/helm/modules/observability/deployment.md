@@ -74,7 +74,7 @@ The Container Storage Modules (CSM) for Observability Helm chart bootstraps an O
 
     ### PowerStore
 
-    4. Copy the config Secret from the CSI PowerStore namespace into the CSM for Observability namespace:
+    1. Copy the config Secret from the CSI PowerStore namespace into the CSM for Observability namespace:
 
        ```bash
        
@@ -90,7 +90,7 @@ The Container Storage Modules (CSM) for Observability Helm chart bootstraps an O
    
     ### PowerScale
 
-    5. Copy the config Secret from the CSI PowerScale namespace into the CSM for Observability namespace:
+    1. Copy the config Secret from the CSI PowerScale namespace into the CSM for Observability namespace:
 
        ```bash
        
@@ -106,7 +106,7 @@ The Container Storage Modules (CSM) for Observability Helm chart bootstraps an O
 
     If [CSM for Authorization is enabled](../../authorization/#configuring-a-dell-csi-driver-with-csm-for-authorization) for CSI PowerScale, perform these steps:
 
-    6. Copy the driver configuration parameters ConfigMap from the CSI PowerScale namespace into the CSM for Observability namespace:
+    2. Copy the driver configuration parameters ConfigMap from the CSI PowerScale namespace into the CSM for Observability namespace:
 
        ```bash
 
@@ -120,7 +120,7 @@ The Container Storage Modules (CSM) for Observability Helm chart bootstraps an O
        kubectl get configmap [ISILON-CONFIG-PARAMS] -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/name: [ISILON-CONFIG-PARAMS]/name: isilon-config-params/' | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -
        ```
 
-    7. Copy the `karavi-authorization-config`, `proxy-server-root-certificate`, `proxy-authz-tokens` Secret from the CSI PowerScale namespace into the CSM for Observability namespace:
+    3. Copy the `karavi-authorization-config`, `proxy-server-root-certificate`, `proxy-authz-tokens` Secret from the CSI PowerScale namespace into the CSM for Observability namespace:
 
        ```bash
        
@@ -129,7 +129,7 @@ The Container Storage Modules (CSM) for Observability Helm chart bootstraps an O
 
     ### PowerMax
 
-    8. Copy the configmap `powermax-reverseproxy-config` from the CSI Driver for Dell PowerMax namespace to the CSM namespace.  
+    1. Copy the configmap `powermax-reverseproxy-config` from the CSI Driver for Dell PowerMax namespace to the CSM namespace.  
        
        ```bash
 
@@ -143,7 +143,7 @@ The Container Storage Modules (CSM) for Observability Helm chart bootstraps an O
        kubectl get configmap [POWERMAX-REVERSEPROXY-CONFIG] -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/name: [POWERMAX-REVERSEPROXY-CONFIG]/name: powermax-reverseproxy-config/' | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -
        ```
 
-    9. Copy the secrets in `powermax-reverseproxy-config` from the CSI Driver for Dell PowerMax namespace to the CSM namespace.  
+    2. Copy the secrets in `powermax-reverseproxy-config` from the CSI Driver for Dell PowerMax namespace to the CSM namespace.  
        ```console
 
        for secret in $(kubectl get configmap powermax-reverseproxy-config -n [CSI_DRIVER_NAMESPACE] -o jsonpath="{.data.config\.yaml}" | grep arrayCredentialSecret | awk 'BEGIN{FS=":"}{print $2}' | uniq)
@@ -163,7 +163,7 @@ The Container Storage Modules (CSM) for Observability Helm chart bootstraps an O
 
        If [CSM for Authorization is enabled](../../authorization/#configuring-a-dell-csi-driver-with-csm-for-authorization) for CSI PowerMax, perform these steps:
 
-    10. Copy the driver configuration parameters ConfigMap from the CSI PowerMax namespace into the CSM for Observability namespace:
+    3. Copy the driver configuration parameters ConfigMap from the CSI PowerMax namespace into the CSM for Observability namespace:
 
        ```bash
 
@@ -177,7 +177,7 @@ The Container Storage Modules (CSM) for Observability Helm chart bootstraps an O
        kubectl get configmap [POWERMAX-CONFIG-PARAMS] -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/name: [POWERMAX-CONFIG-PARAMS]/name: powermax-config-params/' | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -
        ```
 
-    11. Copy the `karavi-authorization-config`, `proxy-server-root-certificate`, `proxy-authz-tokens` Secret from the CSI PowerMax namespace into the CSM for Observability namespace:
+    4. Copy the `karavi-authorization-config`, `proxy-server-root-certificate`, `proxy-authz-tokens` Secret from the CSI PowerMax namespace into the CSM for Observability namespace:
 
        ```bash
        
@@ -185,31 +185,31 @@ The Container Storage Modules (CSM) for Observability Helm chart bootstraps an O
        ``` 
 
 
-    5. Configure the [parameters](#configuration) and install the CSM for Observability Helm Chart
+5. Configure the [parameters](#configuration) and install the CSM for Observability Helm Chart
 
-       A default values.yaml file is located [here](https://github.com/dell/helm-charts/blob/main/charts/karavi-observability/values.yaml) that can be used for installation. This can be copied into a file named `myvalues.yaml` and either used as is or modified accordingly. 
+   A default values.yaml file is located [here](https://github.com/dell/helm-charts/blob/main/charts/karavi-observability/values.yaml) that can be used for installation. This can be copied into a file named `myvalues.yaml` and either used as is or modified accordingly. 
 
-       __Note:__ 
-       - The default `values.yaml` is configured to deploy the CSM for Observability Topology service on install.
-       - If CSM for Authorization is enabled for CSI PowerFlex, the `karaviMetricsPowerflex.authorization` parameters must be properly configured in your values file for CSM Observability. 
-       - If CSM for Authorization is enabled for CSI PowerScale, the `karaviMetricsPowerscale.authorization` parameters must be properly configured in your values file for CSM Observability.
-       - If CSM for Authorization is enabled for CSI PowerMax, the `karaviMetricsPowerMax.authorization` parameters must be properly configured in your values file for CSM Observability.
+   __Note:__ 
+   - The default `values.yaml` is configured to deploy the CSM for Observability Topology service on install.
+   - If CSM for Authorization is enabled for CSI PowerFlex, the `karaviMetricsPowerflex.authorization` parameters must be properly configured in your values file for CSM Observability. 
+   - If CSM for Authorization is enabled for CSI PowerScale, the `karaviMetricsPowerscale.authorization` parameters must be properly configured in your values file for CSM Observability.
+   - If CSM for Authorization is enabled for CSI PowerMax, the `karaviMetricsPowerMax.authorization` parameters must be properly configured in your values file for CSM Observability.
 
-       ```console
+   ```console
 
-       helm install karavi-observability dell/karavi-observability -n [CSM_NAMESPACE] -f myvalues.yaml
-       ```
+   helm install karavi-observability dell/karavi-observability -n [CSM_NAMESPACE] -f myvalues.yaml
+   ```
 
-       Alternatively, you can specify each parameter using the '--set key=value[,key=value]' and/or '--set-file key=value[,key=value] arguments to 'helm install'. For example:
+   Alternatively, you can specify each parameter using the '--set key=value[,key=value]' and/or '--set-file key=value[,key=value] arguments to 'helm install'. For example:
 
-       ```console
+   ```console
 
-       helm install karavi-observability dell/karavi-observability -n [CSM_NAMESPACE] \
-        --set-file karaviTopology.certificateFile=<location-of-karavi-topology-certificate-file> \
-        --set-file karaviTopology.privateKeyFile=<location-of-karavi-topology-private-key-file> \
-        --set-file otelCollector.certificateFile=<location-of-otel-collector-certificate-file> \
-        --set-file otelCollector.privateKeyFile=<location-of-otel-collector-private-key-file>
-       ```
+   helm install karavi-observability dell/karavi-observability -n [CSM_NAMESPACE] \
+   --set-file karaviTopology.certificateFile=<location-of-karavi-topology-certificate-file> \
+   --set-file karaviTopology.privateKeyFile=<location-of-karavi-topology-private-key-file> \
+   --set-file otelCollector.certificateFile=<location-of-otel-collector-certificate-file> \
+   --set-file otelCollector.privateKeyFile=<location-of-otel-collector-private-key-file>
+   ```
 
 ## Configuration
 
