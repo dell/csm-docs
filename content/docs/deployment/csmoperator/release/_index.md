@@ -36,6 +36,7 @@ Description: >
 - [#1156 - [BUG]: CSM object in success state when all CSI Powerflex pods are failing due to bad secret credentials](https://github.com/dell/csm/issues/1156))
 - [#1157 - [BUG]: If Authorization Proxy Server is installed in an alternate namespace by CSM Operator, the deployment fails](https://github.com/dell/csm/issues/1157))
 - [#1159 - [BUG]: CSM status is not always accurate when Observability installed with only one or two components](https://github.com/dell/csm/issues/1159))
+- [#1152 - [BUG]: CSI driver changes to facilitate SDC brownfield deployments](https://github.com/dell/csm/issues/1152))
 
 ### Known Issues
 | Issue | Workaround |
