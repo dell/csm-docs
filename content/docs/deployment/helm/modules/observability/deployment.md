@@ -49,7 +49,7 @@ The Container Storage Modules (CSM) for Observability Helm chart bootstraps an O
        kubectl get secret [VXFLEXOS-CONFIG] -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/name: [VXFLEXOS-CONFIG]/name: vxflexos-config/' | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -
        ```
 
-    If [CSM for Authorization is enabled](../../../authorization/deployment/#configuring-a-dell-csi-driver-with-csm-for-authorization) for CSI PowerFlex, perform the following steps:
+    If [CSM for Authorization is enabled](../../authorization/#configuring-a-dell-csi-driver-with-csm-for-authorization) for CSI PowerFlex, perform the following steps:
 
     2. Copy the driver configuration parameters ConfigMap from the CSI PowerFlex namespace into the CSM for Observability namespace:
     
@@ -104,7 +104,7 @@ The Container Storage Modules (CSM) for Observability Helm chart bootstraps an O
        kubectl get secret [ISILON-CREDS] -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/name: [ISILON-CREDS]/name: isilon-creds/' | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -
        ```
 
-    If [CSM for Authorization is enabled](../../../authorization/deployment/#configuring-a-dell-csi-driver-with-csm-for-authorization) for CSI PowerScale, perform these steps:
+    If [CSM for Authorization is enabled](../../authorization/#configuring-a-dell-csi-driver-with-csm-for-authorization) for CSI PowerScale, perform these steps:
 
     2. Copy the driver configuration parameters ConfigMap from the CSI PowerScale namespace into the CSM for Observability namespace:
 
@@ -185,31 +185,31 @@ The Container Storage Modules (CSM) for Observability Helm chart bootstraps an O
        ``` 
 
 
-    5. Configure the [parameters](#configuration) and install the CSM for Observability Helm Chart
+5. Configure the [parameters](#configuration) and install the CSM for Observability Helm Chart
 
-       A default values.yaml file is located [here](https://github.com/dell/helm-charts/blob/main/charts/karavi-observability/values.yaml) that can be used for installation. This can be copied into a file named `myvalues.yaml` and either used as is or modified accordingly. 
+   A default values.yaml file is located [here](https://github.com/dell/helm-charts/blob/main/charts/karavi-observability/values.yaml) that can be used for installation. This can be copied into a file named `myvalues.yaml` and either used as is or modified accordingly. 
 
-       __Note:__ 
-       - The default `values.yaml` is configured to deploy the CSM for Observability Topology service on install.
-       - If CSM for Authorization is enabled for CSI PowerFlex, the `karaviMetricsPowerflex.authorization` parameters must be properly configured in your values file for CSM Observability. 
-       - If CSM for Authorization is enabled for CSI PowerScale, the `karaviMetricsPowerscale.authorization` parameters must be properly configured in your values file for CSM Observability.
-       - If CSM for Authorization is enabled for CSI PowerMax, the `karaviMetricsPowerMax.authorization` parameters must be properly configured in your values file for CSM Observability.
+   __Note:__ 
+   - The default `values.yaml` is configured to deploy the CSM for Observability Topology service on install.
+   - If CSM for Authorization is enabled for CSI PowerFlex, the `karaviMetricsPowerflex.authorization` parameters must be properly configured in your values file for CSM Observability. 
+   - If CSM for Authorization is enabled for CSI PowerScale, the `karaviMetricsPowerscale.authorization` parameters must be properly configured in your values file for CSM Observability.
+   - If CSM for Authorization is enabled for CSI PowerMax, the `karaviMetricsPowerMax.authorization` parameters must be properly configured in your values file for CSM Observability.
 
-       ```console
+   ```console
 
-       helm install karavi-observability dell/karavi-observability -n [CSM_NAMESPACE] -f myvalues.yaml
-       ```
+   helm install karavi-observability dell/karavi-observability -n [CSM_NAMESPACE] -f myvalues.yaml
+   ```
 
-       Alternatively, you can specify each parameter using the '--set key=value[,key=value]' and/or '--set-file key=value[,key=value] arguments to 'helm install'. For example:
+   Alternatively, you can specify each parameter using the '--set key=value[,key=value]' and/or '--set-file key=value[,key=value] arguments to 'helm install'. For example:
 
-       ```console
+   ```console
 
-       helm install karavi-observability dell/karavi-observability -n [CSM_NAMESPACE] \
-        --set-file karaviTopology.certificateFile=<location-of-karavi-topology-certificate-file> \
-        --set-file karaviTopology.privateKeyFile=<location-of-karavi-topology-private-key-file> \
-        --set-file otelCollector.certificateFile=<location-of-otel-collector-certificate-file> \
-        --set-file otelCollector.privateKeyFile=<location-of-otel-collector-private-key-file>
-       ```
+   helm install karavi-observability dell/karavi-observability -n [CSM_NAMESPACE] \
+   --set-file karaviTopology.certificateFile=<location-of-karavi-topology-certificate-file> \
+   --set-file karaviTopology.privateKeyFile=<location-of-karavi-topology-private-key-file> \
+   --set-file otelCollector.certificateFile=<location-of-otel-collector-certificate-file> \
+   --set-file otelCollector.privateKeyFile=<location-of-otel-collector-private-key-file>
+   ```
 
 ## Configuration
 

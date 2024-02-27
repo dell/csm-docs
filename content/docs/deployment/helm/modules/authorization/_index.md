@@ -136,7 +136,7 @@ mv ./karavictl ~/.local/bin/karavictl
 # and then append (or prepend) ~/.local/bin to $PATH
 ```
 
-Karavictl commands and intended use can be found [here](../../cli/). 
+Karavictl commands and intended use can be found [here](../../../../authorization/cli/). 
 
 ## Configuring the CSM Authorization Proxy Server
 
@@ -176,13 +176,13 @@ On the machine running `karavictl`, the `/etc/hosts` file needs to be updated wi
 <master_node_ip> csm-authorization.com
 ```
 
-Please continue following the steps outlined in the [proxy server](../../configuration/proxy-server) configuration.
+Please continue following the steps outlined in the [proxy server](../../../../authorization/configuration/proxy-server) configuration.
 
 ## Configuring a Dell CSI Driver with CSM for Authorization
 
-The second part of CSM for Authorization deployment is to configure one or more of the [supported](../../../authorization#supported-csi-drivers) CSI drivers. This is controlled by the Kubernetes tenant admin.
+The second part of CSM for Authorization deployment is to configure one or more of the [supported](../../../../authorization#supported-csi-drivers) CSI drivers. This is controlled by the Kubernetes tenant admin.
 
-Please follow the steps outlined in [PowerFlex](../../configuration/powerflex), [PowerMax](../../configuration/powermax), or [PowerScale](../../configuration/powerscale) to configure the CSI Driver to work with the Authorization sidecar.
+Please continue following the configuration steps for a specific CSI Driver [here](../../../../authorization/configuration/).
 
 ## Updating CSM for Authorization Proxy Server Configuration
 
