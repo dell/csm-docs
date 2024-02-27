@@ -10,4 +10,10 @@ This section outlines the uninstallation steps for Container Storage Modules (CS
 
 ## Uninstalling the sidecar in the CSI Driver
 
-To uninstall the sidecar in the CSI Driver, [uninstall](../../csidriver/uninstall) the driver and [reinstall](../../deployment) the driver with the `podmon` feature disabled.
+To uninstall the sidecar in the CSI Driver, the following steps are required.
+
+**Steps**
+1. Uninstall the driver
+    - [Helm uninstallation](../../deployment/helm/drivers/uninstall/#uninstall-a-csi-driver-installed-via-helm)
+    - [Operator uninstallation](../../deployment/csmoperator/drivers/#uninstall-csi-driver)
+2. [Reinstall](../../deployment) the driver with the `podmon` feature disabled.
