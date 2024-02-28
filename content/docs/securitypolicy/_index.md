@@ -6,9 +6,10 @@ Description: >
   Dell Container Storage Modules (CSM) Security Policy
 ---
 
+# Reporting Security Issues/Vulnerabilities
 
-The CSM services/repositories are inspected for security vulnerabilities via [gosec](https://github.com/securego/gosec), 
-Instructions for reporting a vulnerability can be found on the [Dell Vulnerability Policy](https://www.dell.com/support/contents/en-in/article/product-support/self-support-knowledgebase/security-antivirus/alerts-vulnerabilities/dell-vulnerability-response-policy#:~:text=To%20report%20a%20security%20vulnerability%20or%20issue%20in%20Dell.com,instructions%20to%20reproduce%20the%20issue)
+The Dell Container Storage Modules team and community take security bugs seriously. We sincerely appreciate all your efforts and responsibility to disclose your findings.
 
+To report a security issue, please submit the security advisory form ["Report a Vulnerability"](https://github.com/dell/csm/security/advisories/new).
 
-CSM recommends to stay on the [lastest release](https://github.com/dell/csm/releases/latest) of Dell Container Storage Modules to take advantage of new features, enhancements, bug fixes, and security fixes.
+>CSM recommends staying on the [latest release](https://github.com/dell/csm/releases/latest) of Dell Container Storage Modules to take advantage of new features, enhancements, bug fixes, and security fixes.
