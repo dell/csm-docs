@@ -49,9 +49,9 @@ k3s kubectl version
 
 Given a setup where the CSM for Authorization proxy server is already upgraded to the latest version, follow the upgrade instructions for the applicable CSI Driver(s) to upgrade the driver and the CSM for Authorization sidecar
 
-- [Upgrade PowerFlex CSI driver](../../csidriver/upgradation/drivers/powerflex/)
-- [Upgrade PowerMax CSI driver](../../csidriver/upgradation/drivers/powermax/)
-- [Upgrade PowerScale CSI driver](../../csidriver/upgradation/drivers/isilon/)
+- [Upgrade PowerFlex CSI driver](../../deployment/helm/drivers/upgradation/drivers/powerflex/)
+- [Upgrade PowerMax CSI driver](../../deployment/helm/drivers/upgradation/drivers/powermax/)
+- [Upgrade PowerScale CSI driver](../../deployment/helm/drivers/upgradation/drivers/isilon/)
 
 ## Rollback
 

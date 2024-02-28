@@ -10,11 +10,11 @@ CSM for Resiliency can be upgraded as part of the Dell CSI driver upgrade proces
 
 For information on the PowerFlex CSI driver upgrade process, see [PowerFlex CSI Driver](../../csidriver/upgradation/drivers/powerflex).
 
-For information on the Unity XT CSI driver upgrade process, see [Unity XT CSI Driver](../../csidriver/upgradation/drivers/unity).
+For information on the Unity XT CSI driver upgrade process, see [Unity XT CSI Driver](../../deployment/helm/drivers/upgradation/drivers/unity).
 
-For information on the PowerScale CSI driver upgrade process, see [PowerScale CSI Driver](../../csidriver/upgradation/drivers/isilon).
+For information on the PowerScale CSI driver upgrade process, see [PowerScale CSI Driver](../../deployment/helm/drivers/upgradation/drivers/isilon).
 
-For information on the PowerStore CSI driver upgrade process, see [PowerStore CSI Driver](../../csidriver/upgradation/drivers/powerstore).
+For information on the PowerStore CSI driver upgrade process, see [PowerStore CSI Driver](../../deployment/helm/drivers/upgradation/drivers/powerstore).
 
 ## Helm Chart Upgrade
 
