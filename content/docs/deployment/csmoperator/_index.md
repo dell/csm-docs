@@ -40,6 +40,7 @@ The table below lists the driver and modules versions installable with the CSM O
 | CSI Unity XT       | 2.9.0   | ❌                | ❌             | ❌                | ❌            |
 | CSI Unity XT       | 2.8.0   | ❌                | ❌             | ❌                | ❌            |
 
+>NOTE:
 >- Refer to sample files [here](https://github.com/dell/csm-operator/tree/main/samples).
 
 ## Installation
