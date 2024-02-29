@@ -13,7 +13,7 @@ Dell CSM Operator has been tested and qualified on Upstream Kubernetes and OpenS
 
 | Kubernetes Version         | OpenShift Version    |
 | -------------------------- | -------------------- |
-| 1.26, 1.27, 1.28           | 4.13, 4.14           |
+| 1.27, 1.28, 1.29           | 4.13, 4.14           |
 
 >NOTE:
 >- Authorization module is only supported on Kubernetes platforms.
@@ -27,25 +27,19 @@ The table below lists the driver and modules versions installable with the CSM O
 | CSI PowerScale     | 2.10.0   | ✔ 1.10.0           | ✔ 1.8.0        | ✔ 1.8.0           | ✔ 1.9.0       |
 | CSI PowerScale     | 2.9.0   | ✔ 1.9.0           | ✔ 1.7.0        | ✔ 1.7.0           | ✔ 1.8.0       |
 | CSI PowerScale     | 2.8.0   | ✔ 1.8.0           | ✔ 1.6.0        | ✔ 1.6.0           | ✔ 1.7.0       |
-| CSI PowerScale     | 2.7.0   | ✔ 1.7.0           | ✔ 1.5.0        | ✔ 1.5.0           | ✔ 1.6.0       |
 | CSI PowerFlex      | 2.10.0   | ✔ 1.10.0           | ✔ 1.8.0        | ✔ 1.8.0           | ✔ 1.9.0       |
 | CSI PowerFlex      | 2.9.0   | ✔ 1.9.0           | ✔ 1.7.0        | ✔ 1.7.0           | ✔ 1.8.0       |
 | CSI PowerFlex      | 2.8.0   | ✔ 1.8.0           | ✔ 1.6.0        | ✔ 1.6.0           | ✔ 1.7.0       |
-| CSI PowerFlex      | 2.7.0   | ✔ 1.7.0           | ✔ 1.5.0        | ✔ 1.5.0           | ✔ 1.6.0       |
 | CSI PowerStore     | 2.10.0   | ❌                | ❌             | ❌                | ✔ 1.9.0       |
 | CSI PowerStore     | 2.9.0   | ❌                | ❌             | ❌                | ✔ 1.8.0       |
 | CSI PowerStore     | 2.8.0   | ❌                | ❌             | ❌                | ✔ 1.7.0       |
-| CSI PowerStore     | 2.7.0   | ❌                | ❌             | ❌                | ✔ 1.6.0       |
 | CSI PowerMax       | 2.10.0   | ✔ 1.10.0           | ✔ 1.8.0        | ✔ 1.8.0           | ❌            |
 | CSI PowerMax       | 2.9.0   | ✔ 1.9.0           | ✔ 1.7.0        | ✔ 1.7.0           | ❌            |
 | CSI PowerMax       | 2.8.0   | ✔ 1.8.0           | ✔ 1.6.0        | ✔ 1.6.0           | ❌            |
-| CSI PowerMax       | 2.7.0   | ✔ 1.7.0           | ✔ 1.5.0        | ❌                | ❌            |
 | CSI Unity XT       | 2.10.0   | ❌                | ❌             | ❌                | ❌            |
 | CSI Unity XT       | 2.9.0   | ❌                | ❌             | ❌                | ❌            |
 | CSI Unity XT       | 2.8.0   | ❌                | ❌             | ❌                | ❌            |
-| CSI Unity XT       | 2.7.0   | ❌                | ❌             | ❌                | ❌            |
 
->NOTE:
 >- Refer to sample files [here](https://github.com/dell/csm-operator/tree/main/samples).
 
 ## Installation
@@ -69,7 +63,7 @@ The installation process involves the creation of a `Subscription` object either
 1. Install volume snapshot CRDs. For detailed snapshot setup procedure, [click here](../../snapshots/#volume-snapshot-feature).
 2. Clone and checkout the required csm-operator version using
 ```bash
-git clone -b v1.4.0 https://github.com/dell/csm-operator.git
+git clone -b v1.5.0 https://github.com/dell/csm-operator.git
 ```
 3. `cd csm-operator`
 4. _(Optional)_ If using a local Docker image, edit the `deploy/operator.yaml` file and set the image name for the CSM Operator Deployment.
@@ -141,7 +135,7 @@ This needs to be performed on a Linux system with access to the Internet as a gi
 To build an offline bundle, the following steps are needed:
 1. Clone and checkout the required csm-operator version using
 ```bash
-git clone -b v1.4.0 https://github.com/dell/csm-operator.git
+git clone -b v1.5.0 https://github.com/dell/csm-operator.git
 ```
 2. `cd csm-operator`
 3. Run the `csm-offline-bundle.sh` script which will be found in the `scripts` directory with an argument of `-c` in order to create an offline bundle
@@ -313,7 +307,7 @@ bash scripts/install.sh
 
 Now that the required images are available and the Operator is installed, you can proceed to install the driver by executing `kubectl create -f <manifest-name>`. Manifests for all the supported drivers will be available inside the samples directory. Using Unity XT as an example
 ```bash
-kubectl create -f samples/storage_csm_unity_v280.yaml
+kubectl create -f samples/storage_csm_unity_v2100.yaml
 ```
 >NOTE: Offline bundle supports install of only the latest version of Dell CSI Drivers
 
@@ -347,7 +341,7 @@ The `Update approval` (**`InstallPlan`** in OLM terms) strategy plays a role whi
 #### Using Installation Script
 1. Clone and checkout the required csm-operator version using
 ```bash
-git clone -b v1.4.0 https://github.com/dell/csm-operator.git
+git clone -b v1.5.0 https://github.com/dell/csm-operator.git
 ```
 2. `cd csm-operator`
 3. Execute `bash scripts/install.sh --upgrade`  . This command will install the latest version of the operator.
