@@ -74,4 +74,4 @@ description: >
 
 ## Testing
 
-To test that the new installation is working, please follow the steps outlined [here](../../test) for your specific driver.
+To test that the new installation is working, please follow the steps outlined [here](../../../csidriver/test) for your specific driver.

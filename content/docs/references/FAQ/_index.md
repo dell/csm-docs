@@ -30,12 +30,12 @@ The umbrella repository for every Dell Container Storage Module is: [https://git
 
 ### What are the prerequisites for deploying Container Storage Modules?
 Prerequisites can be found on the respective module deployment pages:
-- [Dell Container Storage Module for Observability Deployment](../../observability/deployment/#prerequisites)
-- [Dell Container Storage Module for Authorization Deployment](../../authorization/deployment/#prerequisites)
-- [Dell Container Storage Module for Resiliency Deployment](../../resiliency/deployment/)
-- [Dell Container Storage Module for Replication Deployment](../../replication/deployment/installation/#before-you-begin)
-- [Dell Container Storage Module for Application Mobility Deployment](../..//applicationmobility/deployment/#pre-requisites)
-- [Dell Container Storage Module for Encryption Deployment](../../secure/encryption/deployment/#vault-server)
+- [Dell Container Storage Module for Observability Deployment](../../deployment/helm/modules/observability/deployment#prerequisites)
+- [Dell Container Storage Module for Authorization Deployment](../../deployment/helm/modules/authorization#prerequisites)
+- [Dell Container Storage Module for Resiliency Deployment](../../deployment/helm/modules/resiliency)
+- [Dell Container Storage Module for Replication Deployment](../../deployment/helm/modules/replication/installation/#before-you-begin)
+- [Dell Container Storage Module for Application Mobility Deployment](../../deployment/helm/modules/applicationmobility#pre-requisites)
+- [Dell Container Storage Module for Encryption Deployment](../../deployment/helm/modules/encryption#vault-server)
 
 Prerequisites for deploying the Dell CSI drivers can be found here:
 - [Dell CSI Drivers Deployment](../../csidriver/installation/)

@@ -224,7 +224,7 @@ vault write auth/approle/role/dea-role/role-id role_id=demo-role-id
 vault write auth/approle/role/dea-role/custom-secret-id secret_id=demo-secret-id
 ```
 
-> Secret ID has an expiration time after which it becomes invalid resulting in [authorization failure](../../../../secure/encryption/troubleshooting#expired-approle-secret-id).
+> Secret ID has an expiration time after which it becomes invalid resulting in [authorization failure](../../../../../secure/encryption/troubleshooting#expired-approle-secret-id).
 > The expiration time for new secret IDs can be set in `secret_id_ttl` parameter when [the role is created](#create-a-role) or later on using
 > `vault write auth/approle/role/dea-role/secret-id-ttl secret_id_ttl=24h`.
 
