@@ -3,7 +3,7 @@ title: PowerFlex
 description: Release notes for PowerFlex CSI driver
 ---
 
-## Release Notes - CSI PowerFlex v2.9.1
+## Release Notes - CSI PowerFlex v2.9.2
 
 
 
@@ -31,6 +31,7 @@ description: Release notes for PowerFlex CSI driver
 - [#1061 - [BUG]: Golint is not installing with go get command](https://github.com/dell/csm/issues/1061)
 - [#1110 - [BUG]: Multi Controller defect - sidecars timeout](https://github.com/dell/csm/issues/1110)
 - [#1103 - [BUG]: CSM Operator doesn't apply fSGroupPolicy value to CSIDriver Object](https://github.com/dell/csm/issues/1103)
+- [#1152 - [BUG]: CSI driver changes to facilitate SDC brownfield deployments](https://github.com/dell/csm/issues/1152))
 
 ### Known Issues
 

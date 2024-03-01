@@ -65,7 +65,7 @@ The resulting offline bundle file can be copied to another machine, if necessary
 
 For example, here is the output of a request to build an offline bundle for the Dell CSM Operator:
 ```bash
-git clone -b v1.4.2 https://github.com/dell/csm-operator.git
+git clone -b v1.4.3 https://github.com/dell/csm-operator.git
 ```
 ```bash
 cd csm-operator
@@ -89,7 +89,7 @@ bash scripts/csm-offline-bundle.sh -c
    dellemc/csi-powermax:v2.9.1
    dellemc/csi-powerstore:v2.9.1
    dellemc/csi-unity:v2.8.1
-   dellemc/csi-vxflexos:v2.9.1
+   dellemc/csi-vxflexos:v2.9.2
    dellemc/csm-authorization-sidecar:v1.9.1
    dellemc/csm-metrics-powerflex:v1.5.0
    dellemc/csm-metrics-powerscale:v1.2.0
@@ -97,7 +97,7 @@ bash scripts/csm-offline-bundle.sh -c
    dellemc/dell-csi-replicator:v1.7.1
    dellemc/dell-replication-controller:v1.7.0
    dellemc/sdc:4.5
-   docker.io/dellemc/dell-csm-operator:v1.4.2
+   docker.io/dellemc/dell-csm-operator:v1.4.3
    gcr.io/kubebuilder/kube-rbac-proxy:v0.8.0
    nginxinc/nginx-unprivileged:1.20
    otel/opentelemetry-collector:0.42.0

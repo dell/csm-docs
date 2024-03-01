@@ -6,7 +6,7 @@ Description: >
   Release notes for Dell Container Storage Modules Operator
 ---
 
-## Release Notes - Container Storage Modules Operator v1.4.2
+## Release Notes - Container Storage Modules Operator v1.4.3
 
 ### New Features/Changes
 
@@ -14,6 +14,7 @@ Description: >
 - [#1066 - [FEATURE]: Support for Openshift 4.14](https://github.com/dell/csm/issues/1066)
 - [#996 - [FEATURE]: Dell CSI to Dell CSM Operator Migration Process](https://github.com/dell/csm/issues/996)
 - [#1062 - [FEATURE]: CSM PowerMax: Support PowerMax v10.1 ](https://github.com/dell/csm/issues/1062)
+- [#1158 - [FEATURE]: Automatically create certificates with CSM Operator Observability deployment ](https://github.com/dell/csm/issues/1158)
 
 ### Fixed Issues
 
@@ -32,12 +33,17 @@ Description: >
 - [#1143 - [BUG]: CSM Operator does not calculate status correctly when deploying the authorization proxy server](https://github.com/dell/csm/issues/1143))
 - [#1146 - [BUG]: CSM Operator does not calculate status correctly when deploying observability with csi-powerscale](https://github.com/dell/csm/issues/1146))
 - [#1147 - [BUG]: CSM Operator labels csm objects with CSMVersion 1.8.0, an old version](https://github.com/dell/csm/issues/1147))
+- [#1156 - [BUG]: CSM object in success state when all CSI Powerflex pods are failing due to bad secret credentials](https://github.com/dell/csm/issues/1156))
+- [#1157 - [BUG]: If Authorization Proxy Server is installed in an alternate namespace by CSM Operator, the deployment fails](https://github.com/dell/csm/issues/1157))
+- [#1159 - [BUG]: CSM status is not always accurate when Observability installed with only one or two components](https://github.com/dell/csm/issues/1159))
+- [#1152 - [BUG]: CSI driver changes to facilitate SDC brownfield deployments](https://github.com/dell/csm/issues/1152))
+- [#1171 - [BUG]: CSM object occasionally stays in failed state when app-mobility is successfully deployed with csm-operator](https://github.com/dell/csm/issues/1171))
 
 ### Known Issues
 | Issue | Workaround |
 |-------|------------|
-| The status calculation done for the csm object associated with the Authorization Proxy Server when deployed with CSM Operator assumes that the proxy server will be deployed in the "authorization" namespace. If a different namespace is used, the status will stay in the failed state, even though the deployment is healthy. | We recommend using the "authorization" namespace for the proxy server. If this is not possible, the health of the deployment can be verified by checking the status of all the pods rather than by checking the status field.|
-| The status field of a csm object as deployed by CSM Operator may, in limited cases, display a "Failed" status for a successful deployment. | As a workaround, the deployment is still usable as long as all pods are running/healthy. |
+| The status field of a csm object as deployed by CSM Operator may, in limited cases, display an incorrect status for a deployment. | As a workaround, the health of the deployment can be determined by checking the health of the pods. |
+| When CSM Operator creates a deployment that includes secrets (e.g., application-mobility, observability, cert-manager, velero), these secrets are not deleted on uninstall and will be left behind. For example, the `karavi-topology-tls`, `otel-collector-tls`, and `cert-manager-webhook-ca` secrets will not be deleted. | This should not cause any issues on the system, but all secrets present on the cluster can be found with `kubectl get secrets -A`, and any unwanted secrets can be deleted with `kubectl delete secret -n <secret-namespace> <secret-name>`|
 | The images of sideCars are currently missing in the sample YAMLs in the offline bundle. As a consequence, the csm-operator is pulling them from registry.k8s.io. | We recommend manually updating the images of sideCars in the sample YAML file, for example, `storage_csm_powerflex_v291.yaml`, before proceeding with the driver installation. Here is an example snippet for the sideCars section in the YAML file:
 
   ```yaml
