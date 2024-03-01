@@ -137,7 +137,7 @@
                       &lt;select id=&#34;csm-version&#34; class=&#34;form-select&#34; onchange=&#34;onCSMVersionChange(); validateInput(validateForm, CONSTANTS)&#34; required&gt;
                         &lt;option value=&#34;1.7.0&#34;&gt;CSM 1.7&lt;/option&gt;
                         &lt;option value=&#34;1.8.0&#34;&gt;CSM 1.8&lt;/option&gt;
-                        &lt;option value=&#34;1.9.2&#34; selected&gt;CSM 1.9.2&lt;/option&gt;
+                        &lt;option value=&#34;1.9.3&#34; selected&gt;CSM 1.9.3&lt;/option&gt;
                       &lt;/select&gt;
                     &lt;/div&gt;
                   &lt;/div&gt;

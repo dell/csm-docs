@@ -327,7 +327,7 @@ Example: helm install powerstore dell/container-storage-modules -n csi-powerstor
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;CSI PowerFlex&lt;/td&gt;
-&lt;td&gt;2.9.1&lt;/td&gt;
+&lt;td&gt;2.9.2&lt;/td&gt;
 &lt;td&gt;✔ 1.9.1&lt;/td&gt;
 &lt;td&gt;✔ 1.7.1&lt;/td&gt;
 &lt;td&gt;✔ 1.7.0&lt;/td&gt;
@@ -448,7 +448,7 @@ Example: helm install powerstore dell/container-storage-modules -n csi-powerstor
 &lt;li&gt;Install volume snapshot CRDs. For detailed snapshot setup procedure, &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/docs/snapshots/#volume-snapshot-feature&#34;&gt;click here&lt;/a&gt;.&lt;/li&gt;
 &lt;li&gt;Clone and checkout the required csm-operator version using&lt;/li&gt;
 &lt;/ol&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;git clone -b v1.4.2 https://github.com/dell/csm-operator.git
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;git clone -b v1.4.3 https://github.com/dell/csm-operator.git
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;3&#34;&gt;
 &lt;li&gt;&lt;code&gt;cd csm-operator&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;&lt;em&gt;(Optional)&lt;/em&gt; If using a local Docker image, edit the &lt;code&gt;deploy/operator.yaml&lt;/code&gt; file and set the image name for the CSM Operator Deployment.&lt;/li&gt;
@@ -561,7 +561,7 @@ Example: helm install powerstore dell/container-storage-modules -n csi-powerstor
 &lt;ol&gt;
 &lt;li&gt;Clone and checkout the required csm-operator version using&lt;/li&gt;
 &lt;/ol&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;git clone -b v1.4.2 https://github.com/dell/csm-operator.git
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;git clone -b v1.4.3 https://github.com/dell/csm-operator.git
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;2&#34;&gt;
 &lt;li&gt;&lt;code&gt;cd csm-operator&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;Run the &lt;code&gt;csm-offline-bundle.sh&lt;/code&gt; script which will be found in the &lt;code&gt;scripts&lt;/code&gt; directory with an argument of &lt;code&gt;-c&lt;/code&gt; in order to create an offline bundle&lt;/li&gt;
@@ -590,7 +590,7 @@ Example: helm install powerstore dell/container-storage-modules -n csi-powerstor
    dellemc/csi-powermax:v2.9.1
    dellemc/csi-powerstore:v2.9.1
    dellemc/csi-unity:v2.9.1
-   dellemc/csi-vxflexos:v2.9.1
+   dellemc/csi-vxflexos:v2.9.2
    dellemc/csm-authorization-sidecar:v1.9.1
    dellemc/csm-metrics-powerflex:v1.7.0
    dellemc/csm-metrics-powerscale:v1.4.0
@@ -598,7 +598,7 @@ Example: helm install powerstore dell/container-storage-modules -n csi-powerstor
    dellemc/dell-csi-replicator:v1.7.0
    dellemc/dell-replication-controller:v1.7.0
    dellemc/sdc:4.5
-   docker.io/dellemc/dell-csm-operator:v1.4.2
+   docker.io/dellemc/dell-csm-operator:v1.4.3
    gcr.io/kubebuilder/kube-rbac-proxy:v0.8.0
    nginxinc/nginx-unprivileged:1.20
    otel/opentelemetry-collector:0.42.0
@@ -763,7 +763,7 @@ Loaded image: registry.k8s.io/sig-storage/csi-snapshotter:v6.3.2
 &lt;ol&gt;
 &lt;li&gt;Clone and checkout the required csm-operator version using&lt;/li&gt;
 &lt;/ol&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;git clone -b v1.4.2 https://github.com/dell/csm-operator.git
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;git clone -b v1.4.3 https://github.com/dell/csm-operator.git
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;2&#34;&gt;
 &lt;li&gt;&lt;code&gt;cd csm-operator&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;Execute &lt;code&gt;bash scripts/install.sh --upgrade&lt;/code&gt;  . This command will install the latest version of the operator.&lt;/li&gt;

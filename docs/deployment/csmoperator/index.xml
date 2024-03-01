@@ -184,13 +184,14 @@ Events
       <description>
         
         
-        &lt;h2 id=&#34;release-notes---container-storage-modules-operator-v142&#34;&gt;Release Notes - Container Storage Modules Operator v1.4.2&lt;/h2&gt;
+        &lt;h2 id=&#34;release-notes---container-storage-modules-operator-v143&#34;&gt;Release Notes - Container Storage Modules Operator v1.4.3&lt;/h2&gt;
 &lt;h3 id=&#34;new-featureschanges&#34;&gt;New Features/Changes&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/947&#34;&gt;#947 - [FEATURE]: Support for Kubernetes 1.28&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1066&#34;&gt;#1066 - [FEATURE]: Support for Openshift 4.14&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/996&#34;&gt;#996 - [FEATURE]: Dell CSI to Dell CSM Operator Migration Process&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1062&#34;&gt;#1062 - [FEATURE]: CSM PowerMax: Support PowerMax v10.1 &lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1158&#34;&gt;#1158 - [FEATURE]: Automatically create certificates with CSM Operator Observability deployment &lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;fixed-issues&#34;&gt;Fixed Issues&lt;/h3&gt;
 &lt;ul&gt;
@@ -209,6 +210,11 @@ Events
 &lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1143&#34;&gt;#1143 - [BUG]: CSM Operator does not calculate status correctly when deploying the authorization proxy server&lt;/a&gt;)&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1146&#34;&gt;#1146 - [BUG]: CSM Operator does not calculate status correctly when deploying observability with csi-powerscale&lt;/a&gt;)&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1147&#34;&gt;#1147 - [BUG]: CSM Operator labels csm objects with CSMVersion 1.8.0, an old version&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1156&#34;&gt;#1156 - [BUG]: CSM object in success state when all CSI Powerflex pods are failing due to bad secret credentials&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1157&#34;&gt;#1157 - [BUG]: If Authorization Proxy Server is installed in an alternate namespace by CSM Operator, the deployment fails&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1159&#34;&gt;#1159 - [BUG]: CSM status is not always accurate when Observability installed with only one or two components&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1152&#34;&gt;#1152 - [BUG]: CSI driver changes to facilitate SDC brownfield deployments&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1171&#34;&gt;#1171 - [BUG]: CSM object occasionally stays in failed state when app-mobility is successfully deployed with csm-operator&lt;/a&gt;)&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;known-issues&#34;&gt;Known Issues&lt;/h3&gt;
 &lt;table&gt;
@@ -220,12 +226,12 @@ Events
 &lt;/thead&gt;
 &lt;tbody&gt;
 &lt;tr&gt;
-&lt;td&gt;The status calculation done for the csm object associated with the Authorization Proxy Server when deployed with CSM Operator assumes that the proxy server will be deployed in the &amp;ldquo;authorization&amp;rdquo; namespace. If a different namespace is used, the status will stay in the failed state, even though the deployment is healthy.&lt;/td&gt;
-&lt;td&gt;We recommend using the &amp;ldquo;authorization&amp;rdquo; namespace for the proxy server. If this is not possible, the health of the deployment can be verified by checking the status of all the pods rather than by checking the status field.&lt;/td&gt;
+&lt;td&gt;The status field of a csm object as deployed by CSM Operator may, in limited cases, display an incorrect status for a deployment.&lt;/td&gt;
+&lt;td&gt;As a workaround, the health of the deployment can be determined by checking the health of the pods.&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;The status field of a csm object as deployed by CSM Operator may, in limited cases, display a &amp;ldquo;Failed&amp;rdquo; status for a successful deployment.&lt;/td&gt;
-&lt;td&gt;As a workaround, the deployment is still usable as long as all pods are running/healthy.&lt;/td&gt;
+&lt;td&gt;When CSM Operator creates a deployment that includes secrets (e.g., application-mobility, observability, cert-manager, velero), these secrets are not deleted on uninstall and will be left behind. For example, the &lt;code&gt;karavi-topology-tls&lt;/code&gt;, &lt;code&gt;otel-collector-tls&lt;/code&gt;, and &lt;code&gt;cert-manager-webhook-ca&lt;/code&gt; secrets will not be deleted.&lt;/td&gt;
+&lt;td&gt;This should not cause any issues on the system, but all secrets present on the cluster can be found with &lt;code&gt;kubectl get secrets -A&lt;/code&gt;, and any unwanted secrets can be deleted with &lt;code&gt;kubectl delete secret -n &amp;lt;secret-namespace&amp;gt; &amp;lt;secret-name&amp;gt;&lt;/code&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;The images of sideCars are currently missing in the sample YAMLs in the offline bundle. As a consequence, the csm-operator is pulling them from registry.k8s.io.&lt;/td&gt;

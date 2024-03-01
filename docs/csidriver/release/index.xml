@@ -23,7 +23,7 @@
       <description>
         
         
-        &lt;h2 id=&#34;release-notes---csi-powerflex-v291&#34;&gt;Release Notes - CSI PowerFlex v2.9.1&lt;/h2&gt;
+        &lt;h2 id=&#34;release-notes---csi-powerflex-v292&#34;&gt;Release Notes - CSI PowerFlex v2.9.2&lt;/h2&gt;
 &lt;h3 id=&#34;new-featureschanges&#34;&gt;New Features/Changes&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/947&#34;&gt;#947 - [FEATURE]: Support for Kubernetes 1.28&lt;/a&gt;&lt;/li&gt;
@@ -46,6 +46,7 @@
 &lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1061&#34;&gt;#1061 - [BUG]: Golint is not installing with go get command&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1110&#34;&gt;#1110 - [BUG]: Multi Controller defect - sidecars timeout&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1103&#34;&gt;#1103 - [BUG]: CSM Operator doesn&amp;rsquo;t apply fSGroupPolicy value to CSIDriver Object&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1152&#34;&gt;#1152 - [BUG]: CSI driver changes to facilitate SDC brownfield deployments&lt;/a&gt;)&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;known-issues&#34;&gt;Known Issues&lt;/h3&gt;
 &lt;table&gt;

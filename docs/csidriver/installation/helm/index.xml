@@ -80,7 +80,7 @@ Refer to &lt;a href=&#34;https://hub.docker.com/r/dellemc/sdc&#34;&gt;https://hu
 &lt;p&gt;&lt;strong&gt;Steps&lt;/strong&gt;&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;
-&lt;p&gt;Run &lt;code&gt;git clone -b v2.9.1 https://github.com/dell/csi-powerflex.git&lt;/code&gt; to clone the git repository.&lt;/p&gt;
+&lt;p&gt;Run &lt;code&gt;git clone -b v2.9.2 https://github.com/dell/csi-powerflex.git&lt;/code&gt; to clone the git repository.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;A namespace for the driver is expected prior to running the command below. If one is not created already, you can run &lt;code&gt;kubectl create namespace vxflexos&lt;/code&gt; to create a new one.
@@ -206,7 +206,7 @@ kubeVersion: &amp;ldquo;&amp;gt;= 1.21.0-0 &amp;lt; 1.29.0-0&amp;rdquo;&lt;/li&g
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Download the default values.yaml file&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#204a87&#34;&gt;cd&lt;/span&gt; dell-csi-helm-installer &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; wget -O myvalues.yaml https://github.com/dell/helm-charts/raw/csi-vxflexos-2.9.1/charts/csi-vxflexos/values.yaml
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#204a87&#34;&gt;cd&lt;/span&gt; dell-csi-helm-installer &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; wget -O myvalues.yaml https://github.com/dell/helm-charts/raw/csi-vxflexos-2.9.2/charts/csi-vxflexos/values.yaml
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;If you are using custom images, check the fields under &lt;code&gt;images&lt;/code&gt; in &lt;code&gt;my-vxflexos-settings.yaml&lt;/code&gt; to make sure that they are pointing to the correct image repository.&lt;/p&gt;
@@ -229,7 +229,7 @@ kubeVersion: &amp;ldquo;&amp;gt;= 1.21.0-0 &amp;lt; 1.29.0-0&amp;rdquo;&lt;/li&g
 &lt;td&gt;version&lt;/td&gt;
 &lt;td&gt;Set to verify the values file version matches driver version and used to pull the image as part of the image name.&lt;/td&gt;
 &lt;td&gt;Yes&lt;/td&gt;
-&lt;td&gt;2.9.1&lt;/td&gt;
+&lt;td&gt;2.9.2&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;images&lt;/td&gt;
