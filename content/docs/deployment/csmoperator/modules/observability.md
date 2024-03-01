@@ -46,7 +46,8 @@ The CSM Observability module for supported Dell CSI Drivers can be installed via
 - Notes:
     - If you enable `metrics-powerscale` or `metrics-powerflex`, you must enable `otel-collector` as well.
     - otel-collector cannot be enabled without a metrics component also enabled.
-    - If you are deploying multiple drivers, only enable topology, otel-collector, and cert-manager in the first driver. For subsequent drivers, only enable the metrics component. When deleting the deployment, the driver that was created first must be deleted last.
+    - If you are deploying multiple drivers, only enable topology, otel-collector, and cert-manager in the first driver. **For subsequent drivers, only enable the metrics component**.
+    - **When deleting a deployment with multiple drivers**, the driver that was created first must be deleted last.
 
 ## Install Observability
 
