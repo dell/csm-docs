@@ -9,7 +9,7 @@ Encryption for Dell Container Storage Modules is enabled via the Dell CSI driver
 In the tech preview release, Encryption can only be enabled via Helm chart installation.
 
 Except for additional Encryption related configuration outlined on this page, 
-the rest of the deployment process is described in the correspondent [CSI driver documentation](../../../helm/drivers/installation/).
+the rest of the deployment process is described in the correspondent [CSI driver documentation](../../../drivers/installation/).
 
 ## Vault Server
 
@@ -82,7 +82,7 @@ Apart from any secrets and config maps described in the CSI driver documentation
 
 ### Secret *encryption-license*
 
-Request a trial license following instructions on the [License page](../../../../license). You will be provided with a YAML file similar to:
+Request a trial license following instructions on the [License page](../../../../../license). You will be provided with a YAML file similar to:
 
 ```yaml
 apiVersion: v1

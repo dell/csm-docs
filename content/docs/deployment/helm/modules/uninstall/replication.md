@@ -1,6 +1,6 @@
 ---
-title: Uninstall
-linktitle: Uninstall 
+title: Replication
+linktitle: Replication 
 weight: 10
 description: >
   Dell Container Storage Modules (CSM) for Replication Uninstallation
@@ -43,4 +43,4 @@ All replication groups should be deleted before deleting the replication group C
 
 ## Uninstalling the replication sidecar
 
-To uninstall the replication sidecar, you need to uninstall the CSI Driver. Please view the [uninstall](../../csidriver/uninstall) page for the driver itself.
+To uninstall the replication sidecar, you need to uninstall the CSI Driver. Please view the [uninstall](../../../drivers/uninstall) page for the driver itself.

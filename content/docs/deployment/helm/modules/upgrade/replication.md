@@ -1,6 +1,6 @@
 ---
-title: Upgrade
-linktitle: Upgrade
+title: Replication
+linktitle: Replication
 weight: 9
 description: >
    Upgrade guide
@@ -30,7 +30,7 @@ To upgrade the CSM Replication sidecar that is installed along with the driver, 
       ```
 3. Run the same command on the second Kubernetes cluster if you use multi-cluster replication topology
 
->For more information on upgrading the CSI driver, please visit the [CSI driver upgrade page](../../csidriver/upgradation).
+>For more information on upgrading the CSI driver, please visit the [CSI driver upgrade page](../../../drivers/upgrade).
 
 ### PowerScale
 
@@ -71,7 +71,7 @@ This option will only work if you have previously installed replication via Helm
 
 ### Upgrading with repctl
 
-> _**Note**_: These steps assume that you already have `repctl` configured to use correct clusters, if you don't know how to do that please refer to [installing with repctl](../deployment/install-repctl) 
+> _**Note**_: These steps assume that you already have `repctl` configured to use correct clusters, if you don't know how to do that please refer to [installing with repctl](../../installation/replication/install-repctl) 
 
 **Steps**
 1. Find a new version of deployment manifest that can be found in `deploy/controller.yaml`, with newer `image` pointing to the version of CSM Replication controller you want to upgrade to.

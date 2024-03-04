@@ -1,6 +1,6 @@
 ---
-title: Uninstallation
-linktitle: Uninstallation
+title: Observability
+linktitle: Observability
 weight: 3
 description: >
   Dell Container Storage Modules (CSM) for Observability Uninstallation

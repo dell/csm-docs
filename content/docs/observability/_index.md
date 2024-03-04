@@ -14,7 +14,7 @@ Description: >
 
 Metrics data is collected and pushed to the [OpenTelemetry Collector](https://github.com/open-telemetry/opentelemetry-collector), so it can be processed, and exported in a format consumable by Prometheus. SSL certificates for TLS between nodes are handled by [cert-manager](https://github.com/jetstack/cert-manager).
 
-CSM for Observability is composed of several services, each residing in its own GitHub repository, that can be installed following one of the four deployments we support [here](deployment). Contributions can be made to this repository or any of the CSM for Observability repositories listed below.
+CSM for Observability is composed of several services, each residing in its own GitHub repository, that can be installed following one of the four deployments we support [here](../deployment/helm/modules/installation/observability/). Contributions can be made to this repository or any of the CSM for Observability repositories listed below.
 
 {{<table "table table-striped table-bordered table-sm">}}
 | Name | Repository | Description |
@@ -94,7 +94,7 @@ CSM for Observability provides Kubernetes administrators with the topology data 
 
 ## TLS Encryption
 
-CSM for Observability deployment relies on [cert-manager](https://github.com/jetstack/cert-manager) to manage SSL certificates that are used to encrypt communication between various components. When [deploying CSM for Observability](./deployment), cert-manager is installed and configured automatically.  The cert-manager components listed below will be installed alongside CSM for Observability.
+CSM for Observability deployment relies on [cert-manager](https://github.com/jetstack/cert-manager) to manage SSL certificates that are used to encrypt communication between various components. When [deploying CSM for Observability](../deployment/helm/modules/installation/observability), cert-manager is installed and configured automatically.  The cert-manager components listed below will be installed alongside CSM for Observability.
 
 {{<table "table table-striped table-bordered table-sm">}}
 | Component |

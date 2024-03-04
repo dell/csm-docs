@@ -1,6 +1,6 @@
 ---
-title: "Uninstallation"
-linkTitle: "Uninstallation"
+title: "Encryption"
+linkTitle: "Encryption"
 weight: 2
 Description: >
   Uninstallation
@@ -32,12 +32,12 @@ It can be removed with `sed -i '/^ssh-rsa .* driver-sec$/d' /root/.ssh/authorize
 
 ## Remove Kubernetes Resources
 
-Remove [the resources](../deployment#secrets-and-config-maps) created in Kubernetes cluster for Encryption.
+Remove [the resources](../../installation/encryption#secrets-and-config-maps) created in Kubernetes cluster for Encryption.
 
 ## Remove Vault Server Configuration
 
-Remove [the configuration](../vault#minimum-server-configuration) created in the Vault server for Encryption.
+Remove [the configuration](../../installation/encryption/vault#minimum-server-configuration) created in the Vault server for Encryption.
 
 ## Remove Rekey Controller
 
-Remove [the resources](../rekey#rekey-controller-installation) created during the installation of the Rekey Controller.
+Remove [the resources](../../installation/encryption/rekey#rekey-controller-installation) created during the installation of the Rekey Controller.

@@ -1,6 +1,6 @@
 ---
-title: Uninstallation
-linktitle: Uninstallation
+title: Application mobility
+linktitle: Application mobility
 weight: 2
 description: >
   Uninstallation

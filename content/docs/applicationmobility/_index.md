@@ -8,7 +8,7 @@ Description: >
 
 >> NOTE: This tech-preview release is not intended for use in production environment.
 
->> NOTE: Application Mobility requires a time-based license. See [Deployment](./deployment) for instructions.
+>> NOTE: Application Mobility requires a time-based license. See [Deployment](../deployment/helm/modules/installation/applicationmobility/) for instructions.
 
 Container Storage Modules for Application Mobility provide Kubernetes administrators the ability to clone their stateful application workloads and application data to other clusters, either on-premise or in the cloud.
 

@@ -38,7 +38,7 @@ Note that the `targets` parameter is left empty since we don't require any targe
 This also means that you don't need to create any Secrets that contain connection information to such clusters, since in this use case, we
 are limited to a single cluster.
 
-You can find more info about configs and secrets for cluster communication in [configmaps-secrets](../../deployment/helm/modules/replication/configmap-secrets/).
+You can find more info about configs and secrets for cluster communication in [configmaps-secrets](../../deployment/helm/modules/installation/replication/configmap-secrets/).
 
 #### Storage Class Configuration
 
@@ -48,7 +48,7 @@ be set to `self` to indicate that we want to replicate the volume inside the cur
 
 Also, you would need to create another storage class in the same cluster that would serve as a `target` storage class. This means that all replicated volumes would be derived from it. Its `replication.storage.dell.com/remoteClusterID` parameter should be also set to `self`.
 
-You can find out more about replication StorageClasses and replication specific parameters in [storageclasses](../../deployment/helm/modules/replication/storageclasses).
+You can find out more about replication StorageClasses and replication specific parameters in [storageclasses](../../deployment/helm/modules/installation/replication/storageclasses).
 
 #### Replicated Resources
 
@@ -95,7 +95,7 @@ metadata:
 ```
 Note that target cluster information contains a field called `secretRef`. This field points to a secret available in the current cluster that contains connection information of `cluster-B` in the form of a kubeconfig file.
 
-You can find more information about how to create such secrets in [configmaps-secrets](../../deployment/helm/modules/replication/configmap-secrets/#communication-between-clusters).
+You can find more information about how to create such secrets in [configmaps-secrets](../../deployment/helm/modules/installation/replication/configmap-secrets/#communication-between-clusters).
 
 #### Storage Class Configuration
 
@@ -106,7 +106,7 @@ want to replicate your volumes.
 For multi-cluster replication, we can choose one of the target cluster ids we specified in
 ConfigMap. In our example replication parameter, the target cluster id should be equal to `cluster-B`.
 
-You can find more information about other replication parameters available in storage classes [here](../../deployment/helm/modules/replication/storageclasses#common-parameters).
+You can find more information about other replication parameters available in storage classes [here](../../deployment/helm/modules/installation/replication/storageclasses#common-parameters).
 
 #### Replicated Resources
 

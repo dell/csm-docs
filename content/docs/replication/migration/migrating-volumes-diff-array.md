@@ -61,7 +61,7 @@ migration:
   migrationPrefix: "migration.storage.dell.com" 
 ``` 
 
-Target array configuration and endpoint needs to be updated in the driver's [myvalues.yaml](../../deployment/helm/drivers/installation/powermax#csi-powermax-driver-with-proxy-in-standalone-mode) file as shown below:  
+Target array configuration and endpoint needs to be updated in the driver's [myvalues.yaml](../../../deployment/helm/drivers/installation/powermax#csi-powermax-driver-with-proxy-in-standalone-mode) file as shown below:  
 
 ```yaml
   ########################## 
