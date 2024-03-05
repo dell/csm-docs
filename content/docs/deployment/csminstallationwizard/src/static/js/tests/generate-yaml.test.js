@@ -44,6 +44,7 @@ const CONSTANTS = {
 	OPERATOR: "operator",
 	CSM_HELM_V170: "1.0.0",
 	CSM_HELM_V180: "1.1.0",
+	CSM_HELM_V190: "1.2.0",
 	HELM_TAINTS: `
     - key: "$KEY"
       operator: "Exists"
@@ -158,8 +159,8 @@ describe("GIVEN setValues function", () => {
 			authorizationSkipCertValidation: false,
 			authorizationProxyHost: '',
 			certManagerEnabled: false,
-			storageArrayId: undefined,
-			storageArrayEndpointUrl: '""',
+			storageArrayId: "0000000000",
+			storageArrayEndpointUrl: 'https://primary-1.unisphe.re:8443',
 			storageArrayBackupEndpointUrl: '""',
 			operatorResiliency: false,
 			labelValue: "",
@@ -283,8 +284,8 @@ describe("GIVEN setValues function", () => {
 			authorizationSkipCertValidation: false,
 			authorizationProxyHost: '',
 			certManagerEnabled: false,
-			storageArrayId: undefined,
-			storageArrayEndpointUrl: '""',
+			storageArrayId: "0000000000",
+			storageArrayEndpointUrl: 'https://primary-1.unisphe.re:8443',
 			storageArrayBackupEndpointUrl: '""',
 			operatorResiliency: false,
 			labelValue: "",

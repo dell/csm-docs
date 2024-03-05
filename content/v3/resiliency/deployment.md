@@ -14,6 +14,8 @@ For information on the Unity XT CSI driver, see [Unity XT CSI Driver](https://gi
 
 For information on the PowerScale CSI driver, see [PowerScale CSI Driver](https://github.com/dell/csi-powerscale).
 
+For information on the PowerStore CSI driver, see [PowerStore CSI Driver](https://github.com/dell/csi-powerstore).
+
 Configure all the helm chart parameters described below before installing the drivers.
 
 ## Helm Chart Installation
@@ -161,6 +163,39 @@ podmon:
       - "--mode=node"
       - "--leaderelection=false"
       - "--driver-config-params=/csi-isilon-config-params/driver-config-params.yaml"
+      - "--driverPodLabelValue=dell-storage"
+      - "--ignoreVolumelessPods=false"
+```
+
+## PowerStore Specific Recommendations
+
+Here is a typical installation used for testing:
+
+```yaml
+podmon:
+  enabled: true
+  image: dellemc/podmon
+  controller:
+    args:
+      - "--csisock=unix:/var/run/csi/csi.sock"
+      - "--labelvalue=csi-powerstore"
+      - "--arrayConnectivityPollRate=60"
+      - "--driverPath=csi-powerstore.dellemc.com"
+      - "--mode=controller"
+      - "--skipArrayConnectionValidation=false"
+      - "--driver-config-params=/powerstore-config-params/driver-config-params.yaml"
+      - "--driverPodLabelValue=dell-storage"
+      - "--ignoreVolumelessPods=false"
+
+  node:
+    args:
+      - "--csisock=unix:/var/lib/kubelet/plugins/csi-powerstore.dellemc.com/csi_sock"
+      - "--labelvalue=csi-powerstore"
+      - "--arrayConnectivityPollRate=60"
+      - "--driverPath=csi-powerstore.dellemc.com"
+      - "--mode=node"
+      - "--leaderelection=false"
+      - "--driver-config-params=/powerstore-config-params/driver-config-params.yaml"
       - "--driverPodLabelValue=dell-storage"
       - "--ignoreVolumelessPods=false"
 ```

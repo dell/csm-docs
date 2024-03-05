@@ -5,8 +5,6 @@ weight: 1
 Description: Code features for PowerMax Driver
 ---
 
-{{% pageinfo color="primary" %}} Linked Proxy mode for CSI reverse proxy is no longer actively maintained or supported. It will be deprecated in CSM 1.9 (Driver Version 2.9.0). It is highly recommended that you use stand alone mode going forward. {{% /pageinfo %}}
-
 ## Multi Unisphere Support 
 
 Starting with v1.7, the CSI PowerMax driver can communicate with multiple Unisphere for PowerMax servers to manage multiple PowerMax arrays.
@@ -31,6 +29,8 @@ snapshot:
 
 >Note: From v1.7, the CSI PowerMax driver installation process will no longer create VolumeSnapshotClass. 
 > If you want to create VolumeSnapshots, then create a VolumeSnapshotClass using the sample provided in the _csi-powermax/samples/volumesnapshotclass_ folder
+
+>Note: Snapshots for File in PowerMax is currently not supported. 
 
 ### Creating Volume Snapshots
 The following is a sample manifest for creating a Volume Snapshot using the **v1** snapshot APIs:
@@ -295,11 +295,9 @@ In the `my-powermax-settings.yaml` file, the csireverseproxy section can be used
 
 The new Helm chart is configured as a sub chart for the CSI PowerMax helm chart. The install script automatically installs the CSI PowerMax Reverse Proxy and configures the CSI PowerMax driver to use this service.
 
-### Using Dell CSI Operator
+### Using Dell CSM Operator
 
-Starting with the v1.1.0 release of the Dell CSI Operator, a new Custom Resource Definition can be used to install CSI PowerMax Reverse Proxy.
-
-This Custom Resource has to be created in the same namespace as the CSI PowerMax driver and it has to be created before the driver Custom Resource. To use the service, the driver Custom Resource manifest must be configured with the service name "powermax-reverseproxy". For complete installation instructions for the CSI PowerMax driver and the CSI PowerMax Reverse Proxy, see the [Dell CSI Operator documentation](../../installation/operator/powermax) for PowerMax.
+For complete installation instructions for the CSI PowerMax driver and the CSI PowerMax Reverse Proxy, see the [Dell CSM Operator documentation](../../../deployment/csmoperator/drivers/powermax/) for PowerMax.
 
 ## User-friendly hostnames
 
@@ -313,7 +311,8 @@ For example, if `nodeNameTemplate` is _abc-%foo%-hostname_ and nodename is _work
 
 ## Controller HA
 
-Starting with version 1.5, the CSI PowerMax driver supports running multiple replicas of the controller Pod. At any time, only one controller Pod is active(leader), and the rest are on standby. In case of a failure, one of the standby Pods becomes active and takes the position of leader. This is achieved by using native leader election mechanisms utilizing `kubernetes leases`. Additionally by leveraging `pod anti-affinity`, no two-controller Pods are ever scheduled on the same node.
+Starting with version 1.5, the CSI PowerMax driver supports running multiple replicas of the controller Pod.
+Leader election is only applicable for all sidecar containers and driver container will be running in all controller pods . In case of a failure, one of the standby Pods becomes active and takes the position of leader. This is achieved by using native leader election mechanisms utilizing `kubernetes leases`. Additionally by leveraging `pod anti-affinity`, no two-controller Pods are ever scheduled on the same node.
 
 To increase or decrease the number of controller Pods, edit the following value in `values.yaml` file:
 ```yaml
@@ -322,12 +321,12 @@ controllerCount: 2
 > *NOTE:* The default value for controllerCount is 2. We recommend not changing this unless it is really necessary.
 > Also, if the controller count is greater than the number of available nodes (where the Pods can be scheduled), some controller Pods will remain in the Pending state  
    
-If you are using `dell-csi-operator`, adjust the following value in your Custom Resource manifest
+If you are using the Dell CSM Operator, the value to adjust is: 
 ```yaml
 replicas: 2  
 ```
 
-For more details about configuring Controller HA using the Dell CSI Operator, see the [Dell CSI Operator documentation](../../installation/operator/#custom-resource-specification).
+For more details about configuring Controller HA using the Dell CSM Operator, see the [Dell CSM Operator documentation](../../../deployment/csmoperator/#custom-resource-specification).
 
 ## NodeSelectors and Tolerations
 
@@ -623,7 +622,6 @@ Without storage capacity tracking, pods get scheduled on a node satisfying the t
 
 Storage capacity can be tracked by setting the attribute `storageCapacity.enabled` to true in values.yaml (set to true by default) during driver installation. To configure how often driver checks for changed capacity, set the `storageCapacity.pollInterval` attribute (set to 5m by default). In case of driver installed via operator, this interval can be configured in the sample file provided [here.](https://github.com/dell/csm-operator/blob/main/samples) by editing the `--capacity-poll-interval` argument present in the provisioner sidecar.
 
->Note: This feature requires kubernetes v1.24 and above and will be automatically disabled in lower version of kubernetes.
 
 
 ## Volume Limits

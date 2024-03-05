@@ -27,12 +27,12 @@ Ensure you installed CRDs and replication controller in your clusters.
 
 To verify you have everything in order you can execute the following commands:
 
-* Check controller pods
+* Check controller pods:
     ```shell
     kubectl get pods -n dell-replication-controller
     ```
-  Pods should be `READY` and `RUNNING`
-* Check that controller config map is properly populated
+  Pods should be `READY` and `RUNNING`.
+* Check that controller config map is properly populated:
     ```shell
     kubectl get cm -n dell-replication-controller dell-replication-controller-config -o yaml
     ```
@@ -45,10 +45,10 @@ If you don't have something installed or something is out-of-place, please refer
 ### Installing Driver With Replication Module
 
 To install the driver with replication enabled you need to ensure you have set
-helm parameter `controller.replication.enabled` in your copy of example `values.yaml` file
+Helm parameter `controller.replication.enabled` in your copy of example `values.yaml` file
 (usually called `my-powerstore-settings.yaml`, `myvalues.yaml` etc.).
 
-Here is an example of what that would look like
+Here is an example of what that would look like:
 ```yaml
 ...
 # controller: configure controller specific parameters
@@ -108,15 +108,14 @@ Let's go through each parameter and what it means:
 * `replication.storage.dell.com/isReplicationEnabled` if set to `true` will mark this storage class as replication enabled,
   just leave it as `true`.
 * `replication.storage.dell.com/remoteStorageClassName` points to the name of the remote storage class. If you are using replication with the multi-cluster configuration you can make it the same as the current storage class name.
-* `replication.storage.dell.com/remoteClusterID` represents ID of a remote cluster. It is the same id you put in the replication controller config map.
+* `replication.storage.dell.com/remoteClusterID` represents ID of a remote cluster. It is the same ID you put in the replication controller config map.
 * `replication.storage.dell.com/remoteSystem` is the name of the remote system as seen from the current PowerStore instance.
 * `replication.storage.dell.com/rpo` is an acceptable amount of data, which is measured in units of time,
   that may be lost due to a failure.
 * `replication.storage.dell.com/ignoreNamespaces`, if set to `true` PowerStore driver, it will ignore in what namespace volumes are created and put every volume created using this storage class into a single volume group.
-* `replication.storage.dell.com/volumeGroupPrefix` represents what string would be appended to the volume group name
-  to differentiate them.
+* `replication.storage.dell.com/volumeGroupPrefix` represents what string would be appended to the volume group name to differentiate them. It is important to not use the same prefix for different kubernetes clusters, otherwise any action on a replication group in one kubernetes cluster will impact the other.
   
->NOTE: To configure the VolumeGroupPrefix, the name format of \'\<volumeGroupPrefix\>-\<namespace\>-\<Cluster Name\>-\<rpo\>' cannot be more than 63 characters.
+> _**NOTE**_: To configure the VolumeGroupPrefix, the name format of \'\<volumeGroupPrefix\>-\<namespace\>-\<Cluster Name\>-\<rpo\>' cannot be more than 63 characters.
 
 * `arrayID` is a unique identifier of the storage array you specified in array connection secret.
 
@@ -171,20 +170,19 @@ parameters:
   arrayID: "PS000000002"
 ```
 
-After figuring out how storage classes would look, you just need to go and apply them to
-your Kubernetes clusters with `kubectl`.
+After creating storage class YAML files, they must be applied to your Kubernetes clusters with `kubectl`.
 
 #### Storage Class Creation With repctl
 
 `repctl` can simplify storage class creation by creating a pair of mirrored storage classes in both clusters
 (using a single storage class configuration) in one command.
 
-To create storage classes with `repctl` you need to fill up the config with necessary information.
+To create storage classes with `repctl` you need to fill the config with necessary information.
 You can find an example in [here](https://github.com/dell/csm-replication/blob/main/repctl/examples/powerstore_example_values.yaml), copy it, and modify it to your needs.
 
-If you open this example you can see a lot of similar fields and parameters you can modify in the storage class.
+If you open this example you can see similar fields and parameters to what was seen in manual storage class creation.
 
-Let's use the same example from manual installation and see how config would look like
+Let's use the same example from manual installation and see what its repctl config file would look like:
 ```yaml
 sourceClusterID: "cluster-1"
 targetClusterID: "cluster-2"
@@ -208,13 +206,13 @@ After preparing the config you can apply it to both clusters with repctl. Just m
 added your clusters to repctl via the `add` command before.
 
 To create storage classes just run `./repctl create sc --from-config <config-file>` and storage classes
-would be applied to both clusters.
+will be applied to both clusters.
 
 After creating storage classes you can make sure they are in place by using `./repctl get storageclasses` command.
 
 ### Provisioning Replicated Volumes
 
-After installing the driver and creating storage classes you are good to create volumes using newly
+After installing the driver and creating storage classes you are good to create volumes using the newly
 created storage classes.
 
 On your source cluster, create a PersistentVolumeClaim using one of the replication enabled Storage Classes.

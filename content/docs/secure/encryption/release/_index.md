@@ -8,9 +8,7 @@ Description: >
 
 ### New Features/Changes
 
-- [Technical preview release](https://github.com/dell/csm/issues/437)
-- Kubernetes 1.26 support.
-- Security updates.
+- Supports the latest version of CSM. 
 
 ### Fixed Issues
 

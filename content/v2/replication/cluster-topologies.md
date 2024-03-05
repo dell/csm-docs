@@ -55,11 +55,17 @@ You can find out more about replication StorageClasses and replication specific 
 When creating PersistentVolumeClaims using StorageClass for a single cluster replication, replicated resources (PersistentVolumes,
 ReplicationGroups) would be created in the same cluster with the `replicated-` prefix added to them. For example:
 ```shell
-$ kubectl get pv 
+kubectl get pv 
+```
+```
 NAME                           CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS      STORAGECLASS                 AGE
 csivol-06d51bfcc5              3Gi        RWO            Retain           Bound       powerstore-replication       23s
 replicated-csivol-06d51bfcc5   3Gi        RWO            Retain           Available   powerstore-replication-tgt   23s
-$ kubectl get rg
+```
+```shell
+kubectl get rg
+```
+```
 NAME                                                 AGE   STATE   LINK STATE     LAST LINKSTATE UPDATE
 replicated-rg-240721b0-12fb-4151-8dd8-94794ae2493e   34s   Ready   SYNCHRONIZED   2021-08-03T11:23:18Z
 rg-240721b0-12fb-4151-8dd8-94794ae2493e              34s   Ready   SYNCHRONIZED   2021-08-03T11:22:18Z
@@ -107,22 +113,34 @@ You can find more information about other replication parameters available in st
 When creating PersistentVolumeClaims using StorageClass for a multi-cluster replication, replicated resources would be
 created in both `source` and `target` clusters under the same names. For example:
 
+
+>[CLUSTER-A]
 ```shell
-[CLUSTER-A]
-$ kubectl get pv
+kubectl get pv
+```
+```
 NAME                           CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS      STORAGECLASS                 AGE
 csivol-06d51bfcc5              3Gi        RWO            Retain           Bound       powerstore-replication       23s
-$ kubectl get rg
+```
+```shell
+kubectl get rg
+```
+```
 NAME                                      AGE   STATE   LINK STATE     LAST LINKSTATE UPDATE
 rg-240721b0-12fb-4151-8dd8-94794ae2493e   34s   Ready   SYNCHRONIZED   2021-08-03T11:22:18Z
 ```
-
+>[CLUSTER-B]
 ```shell
-[CLUSTER-B]
-$ kubectl get pv
+kubectl get pv
+```
+```
 NAME                           CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS          STORAGECLASS                 AGE
 csivol-06d51bfcc5              3Gi        RWO            Retain           Available       powerstore-replication       18s
-$ kubectl get rg
+```
+```shell
+kubectl get rg
+```
+```
 NAME                                      AGE   STATE   LINK STATE     LAST LINKSTATE UPDATE
 rg-240721b0-12fb-4151-8dd8-94794ae2493e   30s   Ready   SYNCHRONIZED   2021-08-03T11:22:18Z
 ```
