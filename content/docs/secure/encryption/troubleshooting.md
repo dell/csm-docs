@@ -27,7 +27,7 @@ List containers in pod `isi-node-4gtwf` with `kubectl -n <driver namespace> logs
 Each pod has containers called `driver` which is the storage driver container and `driver-sec` which is the Encryption driver container. 
 These container's logs tend to provide the most important information, but other containers may give a hint too.
 View the logs of `driver-sec` in `isi-node-4gtwf` with `kubectl -n <driver namespace> logs isi-node-4gtwf driver-sec`.
-The log level of this container can be changed by setting value [encryption.logLevel](../deployment#helm-chart-values) and restarting the driver.
+The log level of this container can be changed by setting value [encryption.logLevel](../../../deployment/helm/modules/installation/encryption#helm-chart-values) and restarting the driver.
 
 Often it is necessary to see the logs produced on a specific Kubernetes worker host. 
 To find which *node* pod is running on which worker host, use `kubectl -n <driver namespace> get pods -o wide`.
@@ -39,25 +39,25 @@ Some errors may be logged to the related resource events that can be viewed with
 ### Vault Server Logs
 
 Some errors related to communication with the Vault server and key requests may be logged on the Vault server side.
-If you run a [test instance of the server in a Docker container](../../../deployment/helm/modules/encryption/vault#vault-server-installation) you can view the logs with `docker logs vault-server`.
+If you run a [test instance of the server in a Docker container](../../../deployment/helm/modules/installation/encryption/vault#vault-server-installation) you can view the logs with `docker logs vault-server`.
 
 ## Typical Failure Reasons
 
 ### Incorrect Vault related configuration
 
 - check [logs](#logs-and-events)
-- check [vault-auth secret](../../../deployment/helm/modules/encryption#secret-vault-auth)
-- check [vault-cert secret](../../../deployment/helm/modules/encryption#secret-vault-cert)
-- check [vault-client-conf config map](../../../deployment/helm/modules/encryption/#configmap-vault-client-conf)
+- check [vault-auth secret](../../../deployment/helm/modules/installation/encryption#secret-vault-auth)
+- check [vault-cert secret](../../../deployment/helm/modules/installation/encryption#secret-vault-cert)
+- check [vault-client-conf config map](../../../deployment/helm/modules/installation/encryption/#configmap-vault-client-conf)
 
 ### Incorrect Vault server-side configuration
 
 - check [logs](#logs-and-events)
-- check [Vault server configuration](../../../deployment/helm/modules/encryption/vault#minimum-server-configuration)
+- check [Vault server configuration](../../../deployment/helm/modules/installation/encryption/vault#minimum-server-configuration)
 
 ### Expired AppRole secret ID
 
-- [reset the role secret ID](../../../deployment/helm/modules/encryption/vault#set-role-id-and-secret-id-to-the-role) 
+- [reset the role secret ID](../../../deployment/helm/modules/installation/encryption/vault#set-role-id-and-secret-id-to-the-role) 
 
 ### Incorrect CSI driver configuration
 
@@ -83,7 +83,7 @@ This may manifest in:
 Resolution:
 - obtain a [new valid license](../../../license)
 - check the license is for the cluster on which the encrypted volumes are created
-- check [encryption-license secret](../../../deployment/helm/modules/encryption#secret-encryption-license)
+- check [encryption-license secret](../../../deployment/helm/modules/installation/encryption#secret-encryption-license)
 
 ## Typical Rekey Failure reasons
 If all rekeys in the cluster are failing 

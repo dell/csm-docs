@@ -1,5 +1,5 @@
 ---
-title: "Upgrade Modules"
+title: "Upgrade"
 tags: 
  - upgrade
 weight: 3

@@ -1,6 +1,6 @@
 ---
-title: Upgrade
-linktitle: Upgrade 
+title: Authorization
+linktitle: Authorization 
 weight: 3
 description: >
   Upgrade Dell Technologies (Dell) Container Storage Modules (CSM) for Authorization
@@ -16,7 +16,7 @@ This section outlines the upgrade steps for Container Storage Modules (CSM) for 
 
 ### Upgrading CSM for Authorization proxy server
 
-Obtain the latest single binary installer RPM by following one of our two options [here](../deployment/#single-binary-installer).
+Obtain the latest single binary installer RPM by following one of our two options [here](../../installation/authorization#single-binary-installer).
 
 To update the rpm package on the system, run the below command from within the extracted folder:
 
@@ -49,9 +49,9 @@ k3s kubectl version
 
 Given a setup where the CSM for Authorization proxy server is already upgraded to the latest version, follow the upgrade instructions for the applicable CSI Driver(s) to upgrade the driver and the CSM for Authorization sidecar
 
-- [Upgrade PowerFlex CSI driver](../../deployment/helm/drivers/upgradation/drivers/powerflex/)
-- [Upgrade PowerMax CSI driver](../../deployment/helm/drivers/upgradation/drivers/powermax/)
-- [Upgrade PowerScale CSI driver](../../deployment/helm/drivers/upgradation/drivers/isilon/)
+- [Upgrade PowerFlex CSI driver](../../../drivers/upgrade/powerflex/)
+- [Upgrade PowerMax CSI driver](../../../drivers/upgrade/powermax/)
+- [Upgrade PowerScale CSI driver](../../../drivers/upgrade/isilon/)
 
 ## Rollback
 

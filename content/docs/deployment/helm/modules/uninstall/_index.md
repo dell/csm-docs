@@ -1,6 +1,6 @@
 ---
-title: "CSM modules"
-linkTitle: "CSM modules"
-description: Installation of Dell CSM modules using helm
+title: "Uninstallation"
+linkTitle: "Uninstallation"
+description: Uninstallation of Dell CSM modules using helm
 weight: 1
 ---

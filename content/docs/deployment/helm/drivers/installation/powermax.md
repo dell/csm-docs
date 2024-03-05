@@ -20,7 +20,7 @@ The following requirements must be met before installing CSI Driver for Dell Pow
 - Mount propagation is enabled on container runtime that is being used
 - Linux multipathing requirements
 - If using Snapshot feature, satisfy all Volume Snapshot requirements
-- If enabling CSM for Authorization, please refer to the [Authorization deployment steps](../../../../../deployment/helm/modules/authorization/) first
+- If enabling CSM for Authorization, please refer to the [Authorization deployment steps](../../../../../deployment/helm/modules/installation/authorization/) first
 - If using Powerpath , install the PowerPath for Linux requirements
 
 ### Prerequisite for CSI Reverse Proxy
@@ -185,7 +185,7 @@ replication:
 
 The CRDs for replication can be obtained and installed from the csm-replication project on Github. Use `csm-replication/deploy/replicationcrds.all.yaml` located in the csm-replication git repo for the installation.
 
-CRDs should be configured during replication prepare stage with repctl as described in [install-repctl](../../../../../deployment/helm/modules/replication/install-repctl)
+CRDs should be configured during replication prepare stage with repctl as described in [install-repctl](../../../../../deployment/helm/modules/installation/replication/install-repctl)
 
 ## Install the Driver
 
@@ -273,7 +273,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
 | selfSignedCert | Set selfSignedCert to use a self-signed certificate | No | true |
 | certificateFile | certificateFile has tls.key content in encoded format | No | tls.crt.encoded64 |
 | privateKeyFile | privateKeyFile has tls.key content in encoded format | No | tls.key.encoded64 |
-| **authorization** | [Authorization](../../../../../deployment/helm/modules/authorization/) is an optional feature to apply credential shielding of the backend PowerMax. | - | - |
+| **authorization** | [Authorization](../../../../../deployment/helm/modules/installation/authorization/) is an optional feature to apply credential shielding of the backend PowerMax. | - | - |
 | enabled                  | A boolean that enables/disables authorization feature. |  No      |   false   |
 | proxyHost | Hostname of the csm-authorization server. | No | Empty |
 | skipCertificateValidation | A boolean that enables/disables certificate validation of the csm-authorization proxy server. | No | true |
@@ -282,7 +282,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
 | image | Image for dell-csi-migrator sidecar. | No | " " |
 | nodeRescanSidecarImage | Image for node rescan sidecar which rescans nodes for identifying new paths. | No | " " |
 | migrationPrefix | enables migration sidecar to read required information from the storage class fields | No | migration.storage.dell.com |
-| **replication** | [Replication](../../../../../deployment/helm/modules/replication/) is an optional feature to enable replication & disaster recovery capabilities of PowerMax to Kubernetes clusters.| - | - |
+| **replication** | [Replication](../../../../../deployment/helm/modules/installation/replication/) is an optional feature to enable replication & disaster recovery capabilities of PowerMax to Kubernetes clusters.| - | - |
 | enabled                  | A boolean that enables/disables replication feature. |  No      |   false   |
 | replicationContextPrefix | enables side cars to read required information from the volume context | No | powermax |
 | replicationPrefix | Determine if replication is enabled | No | replication.storage.dell.com |

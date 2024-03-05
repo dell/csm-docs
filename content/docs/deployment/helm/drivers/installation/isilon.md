@@ -14,10 +14,10 @@ The following are requirements to be met before installing the CSI Driver for De
 - Mount propagation is enabled on container runtime that is being used
 - `nfs-utils` package must be installed on nodes that will mount volumes
 - If using Snapshot feature, satisfy all Volume Snapshot requirements
-- If enabling CSM for Authorization, please refer to the [Authorization deployment steps](../../../../../deployment/helm/modules/authorization/) first
-- If enabling CSM for Replication, please refer to the [Replication deployment steps](../../../../../deployment/helm/modules/replication/) first
-- If enabling CSM for Resiliency, please refer to the [Resiliency deployment steps](../../../../../deployment/helm/modules/resiliency/) first
-- If enabling Encryption, please refer to the [Encryption deployment steps](../../../../../deployment/helm/modules/encryption/) first
+- If enabling CSM for Authorization, please refer to the [Authorization deployment steps](../../../../../deployment/helm/modules/installation/authorization/) first
+- If enabling CSM for Replication, please refer to the [Replication deployment steps](../../../../../deployment/helm/modules/installation/replication/) first
+- If enabling CSM for Resiliency, please refer to the [Resiliency deployment steps](../../../../../deployment/helm/modules/installation/resiliency/) first
+- If enabling Encryption, please refer to the [Encryption deployment steps](../../../../../deployment/helm/modules/installation/encryption/) first
 
 ### Install Helm 3.0
 
@@ -88,7 +88,7 @@ replication:
 
 The CRDs for replication can be obtained and installed from the csm-replication project on Github. Use `csm-replication/deploy/replicationcrds.all.yaml` located in the csm-replication git repo for the installation.
 
-CRDs should be configured during replication prepare stage with repctl as described in [install-repctl](../../../../helm/modules/replication/install-repctl)
+CRDs should be configured during replication prepare stage with repctl as described in [install-repctl](../../../../helm/modules/installation/replication/install-repctl)
 
 ## Install the Driver
 
@@ -146,13 +146,13 @@ CRDs should be configured during replication prepare stage with repctl as descri
    | ignoreUnresolvableHosts | Allows new host to add to existing export list though any of the existing hosts from the same exports are unresolvable/doesn't exist anymore. | No | false |
    | noProbeOnStart | Define whether the controller/node plugin should probe all the PowerScale clusters during driver initialization | No | false |
    | autoProbe | Specify if automatically probe the PowerScale cluster if not done already during CSI calls | No | true |
-   | **authorization** | [Authorization](../../../../../deployment/helm/modules/authorization/) is an optional feature to apply credential shielding of the backend PowerScale. | - | - |
+   | **authorization** | [Authorization](../../../../../deployment/helm/modules/installation/authorization/) is an optional feature to apply credential shielding of the backend PowerScale. | - | - |
    | enabled                  | A boolean that enables/disables authorization feature. If enabled, isiAuthType must be set to 1. |  No      |   false   |
    | proxyHost | Hostname of the csm-authorization server. | No | Empty |
    | skipCertificateValidation | A boolean that enables/disables certificate validation of the csm-authorization proxy server. | No | true |
-   | **podmon**               | [Podmon](../../../../../deployment/helm/modules/resiliency/) is an optional feature to enable application pods to be resilient to node failure.  |  -        |  -       |
+   | **podmon**               | [Podmon](../../../../../deployment/helm/modules/installation/resiliency/) is an optional feature to enable application pods to be resilient to node failure.  |  -        |  -       |
    | enabled                  | A boolean that enables/disables podmon feature. |  No      |   false   |
-   | **encryption** | [Encryption](.../../../../../modules/encryption/) is an optional feature to apply encryption to CSI volumes. | - | - |
+   | **encryption** | [Encryption](.../../../../../modules/installation/encryption/) is an optional feature to apply encryption to CSI volumes. | - | - |
    | enabled        | A boolean that enables/disables Encryption feature. | No | false |
 
    *NOTE:*

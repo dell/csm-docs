@@ -36,38 +36,38 @@ The Container Storage Modules and the required CSI Drivers can each be deployed 
   {{< /card >}}
 {{< /cardpane >}}
 {{< cardpane >}}
-  {{< card header="[Dell Container Storage Module for Observability](helm/modules/observability/)"
+  {{< card header="[Dell Container Storage Module for Observability](helm/modules/installation/observability/)"
           footer="Installs Observability Module">}}
   CSM for Observability can be deployed either via Helm/CSM operator/CSM for Observability Installer/CSM for Observability Offline Installer
-  [...More on installation instructions](helm/modules/observability/)
+  [...More on installation instructions](helm/modules/installation/observability/)
   {{< /card >}}
-   {{< card header="[Dell Container Storage Module for Authorization](helm/modules/authorization/)"
+   {{< card header="[Dell Container Storage Module for Authorization](helm/modules/installation/authorization/)"
           footer="Installs Authorization Module">}}
   CSM Authorization can be installed by using the provided Helm v3 charts on Kubernetes platforms or CSM operator. 
-  [...More on installation instructions](helm/modules/authorization/)
+  [...More on installation instructions](helm/modules/installation/authorization/)
   {{< /card >}}
 {{< /cardpane >}}
 {{< cardpane >}}
-  {{< card header="[Dell Container Storage Module for Resiliency](helm/modules/resiliency)"
+  {{< card header="[Dell Container Storage Module for Resiliency](helm/modules/installation/resiliency)"
           footer="Installs Resiliency Module">}}
   CSI drivers that support Helm chart installation allow CSM for Resiliency to be _optionally_ installed by variables in the chart. It can be updated via _podmon_ block specified in the _values.yaml_. It can be installed via CSM operator as well. 
-  [...More on installation instructions](helm/modules/resiliency)
+  [...More on installation instructions](helm/modules/installation/resiliency)
   {{< /card >}}
-   {{< card header="[Dell Container Storage Module for Replication](helm/modules/replication)"
+   {{< card header="[Dell Container Storage Module for Replication](helm/modules/installation/replication)"
           footer="Installs Replication Module">}}
   Replication module can be installed by installing repctl,Container Storage Modules (CSM) for Replication Controller,CSI driver after enabling replication. It can be installed via CSM operator as well.
-   [...More on installation instructions](helm/modules/replication)
+   [...More on installation instructions](helm/modules/installation/replication)
   {{< /card >}}
 {{< /cardpane >}}
 {{< cardpane >}}
-  {{< card header="[Dell Container Storage Module for Application Mobility](helm/modules/applicationmobility)"
+  {{< card header="[Dell Container Storage Module for Application Mobility](helm/modules/installation/applicationmobility)"
           footer="Installs Application Mobility Module">}}
   Application mobility module can be installed via helm charts. This is a tech preview release and it requires a license for installation.
-  [...More on installation instructions](helm/modules/applicationmobility)
+  [...More on installation instructions](helm/modules/installation/applicationmobility)
   {{< /card >}}
-  {{< card header="[Dell Container Storage Module for Encryption](helm/modules/encryption)"
+  {{< card header="[Dell Container Storage Module for Encryption](helm/modules/installation/encryption)"
           footer="Installs Encryption Module">}}
   Encryption can be optionally installed via the PowerScale CSI driver Helm chart.
-   [...More on installation instructions](helm/modules/encryption)
+   [...More on installation instructions](helm/modules/installation/encryption)
   {{< /card >}}
 {{< /cardpane >}}

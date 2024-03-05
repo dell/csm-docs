@@ -1,6 +1,6 @@
 ---
-title: Uninstallation
-linktitle: Uninstallation 
+title: Authorization
+linktitle: Authorization 
 weight: 2
 description: >
   Dell Technologies (Dell) Container Storage Modules (CSM) for Authorization Uninstallation
@@ -28,4 +28,4 @@ rpm -e <rpm_file_name>
 
 ## Uninstalling the sidecar-proxy in the CSI Driver
 
-To uninstall the sidecar-proxy in the CSI Driver, [uninstall](../../csidriver/uninstall) the driver and [reinstall](../../deployment) the driver using the original configuration secret.
+To uninstall the sidecar-proxy in the CSI Driver, [uninstall](../../../drivers/uninstall) the driver and [reinstall](../../../drivers/installation) the driver using the original configuration secret.

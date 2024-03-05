@@ -90,9 +90,9 @@ The [Dell Container Storage Modules Installation Wizard](./src/index.html) is a 
 
 5. If Observability is checked in the wizard, refer to [Observability](../csmoperator/modules/observability#post-installation-dependencies) to export metrics to Prometheus and load the Grafana dashboards.
 
-6. If Authorization is checked in the wizard, only the sidecar is enabled. Refer to [Authorization](../../authorization/deployment/helm/) to install and configure the CSM Authorization Proxy Server.
+6. If Authorization is checked in the wizard, only the sidecar is enabled. Refer to [Authorization](../../deployment/helm/modules/installation/authorization/) to install and configure the CSM Authorization Proxy Server.
 
-7. If Replication is checked in the wizard, refer to [Replication](../../replication/deployment/) on configuring communication between Kubernetes clusters.
+7. If Replication is checked in the wizard, refer to [Replication](../../deployment/helm/modules/installation/replication/) on configuring communication between Kubernetes clusters.
 
 8. If your Kubernetes distribution doesn't have the Volume Snapshot feature enabled, refer to [this section](../../snapshots) to install the Volume Snapshot CRDs and the default snapshot controller.
 

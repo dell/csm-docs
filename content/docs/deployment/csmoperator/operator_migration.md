@@ -38,9 +38,9 @@ description: >
       kubectl delete <driver_type>/<driver_name> -n <driver_namespace>
   ```
 5. Uninstall the CSI Operator itself
-    - Instructions can be found [here](../../../../deployment/csmoperator/#uninstall)
+    - Instructions can be found [here](../../../deployment/csmoperator/#uninstall)
 6. Install the CSM Operator
-    - Instructions can be found [here](../../../../deployment/csmoperator/#installation)
+    - Instructions can be found [here](../../../deployment/csmoperator/#installation)
 7. Install the CR updated in step 2
     - Instructions can be found [here](../#installing-csi-driver-via-operator)
 >NOTE: Uninstallation of the driver and the Operator is non-disruptive for mounted volumes. Nonetheless you can not create new volume, snapshot or move a Pod.
