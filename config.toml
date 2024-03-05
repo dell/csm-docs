@@ -205,3 +205,4 @@ enable = false
     path = "github.com/google/docsy/dependencies"
     disable = false
 
+ignoreFiles = ['^content/docs/deployment/csminstallationwizard/src/index\.html$']
