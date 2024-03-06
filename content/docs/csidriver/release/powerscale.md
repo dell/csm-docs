@@ -12,13 +12,18 @@ description: Release notes for PowerScale CSI driver
 
 
 
+
 ### New Features/Changes
 
 - [#926 - [FEATURE]: Fixing the linting, formatting and vetting issues](https://github.com/dell/csm/issues/926)
+- [#1091 - [FEATURE]: CSM 1.10 release specific changes](https://github.com/dell/csm/issues/1091)
 
 ### Fixed Issues
 
 - [#1081 - [BUG]: CSM driver repositories reference CSI Operator](https://github.com/dell/csm/issues/1081)
+- [#1140 - [BUG]: Cert-csi tests are not reporting the passed testcases in K8S E2E tests ](https://github.com/dell/csm/issues/1140)
+- [#1174 - [BUG]: Kubelet Configuration Directory setting should not have a comment about default value being None](https://github.com/dell/csm/issues/1174)
+- [#1104 - [BUG]: The csm-isilon-controller keeps getting panic and is restarting ](https://github.com/dell/csm/issues/1104)
 - [#1134 - [BUG]: PowerScale : Driver failing to re-authenticate if session cookies are expired ](https://github.com/dell/csm/issues/1134)
 
 ### Known Issues
