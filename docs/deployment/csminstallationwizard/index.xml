@@ -51,7 +51,7 @@
         &lt;!DOCTYPE html&gt;
 &lt;!-- 
 +++
-disable_footer: false
+disable_footer: true
 +++
  --&gt;
 &lt;html&gt;
