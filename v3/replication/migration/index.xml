@@ -250,7 +250,7 @@ This could be done with similar command to single PV migration:&lt;/p&gt;
 &lt;p&gt;You can use this command to do so:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;./repctl migrate sts test-sts --to-sc powermax-replication -n default
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;By default, it will find every Pod, PVC and PV for provided StatefulSet and patch every PV with annotation.&lt;/p&gt;
-&lt;p&gt;You can also optionally provide &lt;code&gt;--ndu&lt;/code&gt; flag, with this flag provided repctl will do steps provided in &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v3/replication/migration/migrating-volumes-same-array/#non-disruptive-migration&#34;&gt;Non Disruptive Migration&lt;/a&gt; section automatically.&lt;/p&gt;
+&lt;p&gt;You can also optionally provide &lt;code&gt;--ndu&lt;/code&gt; flag, with this flag provided repctl will do steps provided in &lt;a href=&#34;#non-disruptive-migration&#34;&gt;Non Disruptive Migration&lt;/a&gt; section automatically.&lt;/p&gt;
 
       </description>
     </item>

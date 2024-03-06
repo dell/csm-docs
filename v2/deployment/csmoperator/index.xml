@@ -29,16 +29,16 @@
 &lt;li&gt;VolumeSnapshot CRDs - Install v1 VolumeSnapshot CRDs&lt;/li&gt;
 &lt;li&gt;External Volume Snapshot Controller&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;For detailed snapshot setup procedure, &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v2/snapshots/#optional-volume-snapshot-requirements&#34;&gt;click here.&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;For detailed snapshot setup procedure, &lt;a href=&#34;../../../snapshots/#optional-volume-snapshot-requirements&#34;&gt;click here.&lt;/a&gt;&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;NOTE: This step can be skipped with OpenShift.&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;h2 id=&#34;installing-csi-driver-via-operator&#34;&gt;Installing CSI Driver via Operator&lt;/h2&gt;
-&lt;p&gt;Refer &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v2/deployment/csmoperator/drivers/powerscale/&#34;&gt;PowerScale Driver&lt;/a&gt; to install the driver via Operator &lt;br&gt;
-Refer &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v2/deployment/csmoperator/drivers/powerflex/&#34;&gt;PowerFlex Driver&lt;/a&gt; to install the driver via Operator &lt;br&gt;
-Refer &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v2/deployment/csmoperator/drivers/powermax/&#34;&gt;PowerMax Driver&lt;/a&gt; to install the driver via Operator &lt;br&gt;
-Refer &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v2/deployment/csmoperator/drivers/powerstore/&#34;&gt;PowerStore Driver&lt;/a&gt; to install the driver via Operator &lt;br&gt;
-Refer &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v2/deployment/csmoperator/drivers/unity/&#34;&gt;Unity XT Driver&lt;/a&gt; to install the driver via Operator &lt;br&gt;&lt;/p&gt;
+&lt;p&gt;Refer &lt;a href=&#34;../drivers/powerscale&#34;&gt;PowerScale Driver&lt;/a&gt; to install the driver via Operator &lt;br&gt;
+Refer &lt;a href=&#34;../drivers/powerflex&#34;&gt;PowerFlex Driver&lt;/a&gt; to install the driver via Operator &lt;br&gt;
+Refer &lt;a href=&#34;../drivers/powermax&#34;&gt;PowerMax Driver&lt;/a&gt; to install the driver via Operator &lt;br&gt;
+Refer &lt;a href=&#34;../drivers/powerstore&#34;&gt;PowerStore Driver&lt;/a&gt; to install the driver via Operator &lt;br&gt;
+Refer &lt;a href=&#34;../drivers/unity&#34;&gt;Unity XT Driver&lt;/a&gt; to install the driver via Operator &lt;br&gt;&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;NOTE: If you are using an OLM based installation, example manifests are available in &lt;code&gt;OperatorHub&lt;/code&gt; UI.
 You can edit these manifests and install the driver using the &lt;code&gt;OperatorHub&lt;/code&gt; UI.&lt;/p&gt;
@@ -50,7 +50,7 @@ You can edit these manifests and install the driver using the &lt;code&gt;Operat
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl get csm/&amp;lt;name-of-custom-resource&amp;gt; -n &amp;lt;driver-namespace&amp;gt; -o yaml
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
-&lt;li&gt;Check the status of the CR to verify if the driver installation is in the &lt;code&gt;Succeeded&lt;/code&gt; state. If the status is not &lt;code&gt;Succeeded&lt;/code&gt;, see the &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v2/deployment/csmoperator/troubleshooting/#my-dell-csi-driver-install-failed-how-do-i-fix-it&#34;&gt;Troubleshooting guide&lt;/a&gt; for more information.&lt;/li&gt;
+&lt;li&gt;Check the status of the CR to verify if the driver installation is in the &lt;code&gt;Succeeded&lt;/code&gt; state. If the status is not &lt;code&gt;Succeeded&lt;/code&gt;, see the &lt;a href=&#34;../troubleshooting/#my-dell-csi-driver-install-failed-how-do-i-fix-it&#34;&gt;Troubleshooting guide&lt;/a&gt; for more information.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;update-csi-drivers&#34;&gt;Update CSI Drivers&lt;/h3&gt;
 &lt;p&gt;The CSI Drivers and CSM Modules installed by the Dell CSM Operator can be updated like any Kubernetes resource. This can be achieved in various ways which include:&lt;/p&gt;
@@ -99,9 +99,9 @@ For example - If the name of the installed PowerScale driver is powerscale, then
         &lt;p&gt;The CSM Operator can optionally enable modules that are supported by the specific Dell CSI driver. By default, the modules are disabled but they can be enabled by setting any pre-requisite configuration options for the given module and setting the enabled flag to true  in the custom resource.
 The steps include:&lt;/p&gt;
 &lt;ol&gt;
-&lt;li&gt;Deploy the Dell CSM Operator (if it is not already deployed). Please follow the instructions available &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v2/deployment/#installation&#34;&gt;here&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;Deploy the Dell CSM Operator (if it is not already deployed). Please follow the instructions available &lt;a href=&#34;../../#installation&#34;&gt;here&lt;/a&gt;.&lt;/li&gt;
 &lt;li&gt;Configure any pre-requisite for the desired module(s). See the specific module below for more information&lt;/li&gt;
-&lt;li&gt;Follow the instructions &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v2/deployment/csmoperator/drivers/&#34;&gt;here&lt;/a&gt; to install Dell CSI Drivers via the CSM Operator. The module section in the ContainerStorageModule CR should be updated to enable the desired module(s). There are &lt;a href=&#34;https://github.com/dell/csm-operator/tree/main/samples&#34;&gt;sample manifests&lt;/a&gt; provided which can be edited to do an easy installation of the driver along with the module.&lt;/li&gt;
+&lt;li&gt;Follow the instructions &lt;a href=&#34;../drivers&#34;&gt;here&lt;/a&gt; to install Dell CSI Drivers via the CSM Operator. The module section in the ContainerStorageModule CR should be updated to enable the desired module(s). There are &lt;a href=&#34;https://github.com/dell/csm-operator/tree/main/samples&#34;&gt;sample manifests&lt;/a&gt; provided which can be edited to do an easy installation of the driver along with the module.&lt;/li&gt;
 &lt;/ol&gt;
 
       </description>
@@ -117,10 +117,10 @@ The steps include:&lt;/p&gt;
         
         
         &lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v2/deployment/csmoperator/troubleshooting/#can-csm-operator-manage-existing-drivers-installed-using-helm-charts-or-the-dell-csi-operator&#34;&gt;Can CSM Operator manage existing drivers installed using Helm charts or the Dell CSI Operator?&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v2/deployment/csmoperator/troubleshooting/#why-does-some-of-the-custom-resource-fields-show-up-as-invalid-or-unsupported-in-the-operatorhub-gui&#34;&gt;Why does some of the Custom Resource fields show up as invalid or unsupported in the OperatorHub GUI?&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v2/deployment/csmoperator/troubleshooting/#how-can-i-view-detailed-logs-for-the-csm-operator&#34;&gt;How can I view detailed logs for the CSM Operator?&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v2/deployment/csmoperator/troubleshooting/#my-dell-csi-driver-install-failed-how-do-i-fix-it&#34;&gt;My Dell CSI Driver install failed. How do I fix it?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#can-csm-operator-manage-existing-drivers-installed-using-helm-charts-or-the-dell-csi-operator&#34;&gt;Can CSM Operator manage existing drivers installed using Helm charts or the Dell CSI Operator?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#why-does-some-of-the-custom-resource-fields-show-up-as-invalid-or-unsupported-in-the-operatorhub-gui&#34;&gt;Why does some of the Custom Resource fields show up as invalid or unsupported in the OperatorHub GUI?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#how-can-i-view-detailed-logs-for-the-csm-operator&#34;&gt;How can I view detailed logs for the CSM Operator?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#my-dell-csi-driver-install-failed-how-do-i-fix-it&#34;&gt;My Dell CSI Driver install failed. How do I fix it?&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;can-csm-operator-manage-existing-drivers-installed-using-helm-charts-or-the-dell-csi-operator&#34;&gt;Can CSM Operator manage existing drivers installed using Helm charts or the Dell CSI Operator?&lt;/h3&gt;
 &lt;p&gt;The Dell CSM Operator is unable to manage any existing driver installed using Helm charts or the Dell CSI Operator. If you already have installed one of the Dell CSI driver in your cluster and  want to use the CSM operator based deployment, uninstall the driver and then redeploy the driver via Dell CSM Operator&lt;/p&gt;

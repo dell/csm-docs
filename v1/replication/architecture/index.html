@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="generator" content="Hugo 0.123.7">
+<meta name="generator" content="Hugo 0.120.3">
 <link rel="alternate" type="application/rss&#43;xml" href="https://dell.github.io/csm-docs/v1/replication/architecture/index.xml">
 <meta name="robots" content="index, follow">
 
@@ -21,7 +21,8 @@
 
 <meta itemprop="name" content="Architecture">
 <meta itemprop="description" content="High level architecture for CSM for Replication
-"><meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Architecture"/>
+"><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Architecture"/>
 <meta name="twitter:description" content="High level architecture for CSM for Replication
 "/>
 
@@ -102,7 +103,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.2f82b3957db346265e459b28dfe2d4c7.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.4b03eb415a4b7ce6c5b813326b279dbc.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -124,7 +125,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.2f82b3957db346265e459b28dfe2d4c7.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.4b03eb415a4b7ce6c5b813326b279dbc.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -145,8 +146,6 @@
   <ul class="ul-3 foldable">
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1deploymentcsminstallationwizardrelease-li">
   <a href="/csm-docs/v1/deployment/csminstallationwizard/release/" title="Release Notes" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv1deploymentcsminstallationwizardrelease"><span class="">Release notes</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1deploymentcsminstallationwizardsrc-li">
-  <a href="/csm-docs/v1/deployment/csminstallationwizard/src/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv1deploymentcsminstallationwizardsrc"><span class=""></span></a>
 </li>
   </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv1deploymentcsmoperator-li">
@@ -646,6 +645,22 @@
             
 
 	
+		
+
+
+
+  
+  
+
+	
+		
+
+
+
+  
+  
+
+	
 
           </aside>
           <main class="col-12 col-md-9 col-xl-8 pl-md-5" role="main">
@@ -673,11 +688,19 @@
 		
 
   
+    
+
+
+  
+    
+
+
+  
 
 		
 	</header>
 	<h2 id="replication-design-and-architecture">Replication design and architecture</h2>
-<p><img alt="arch" src="../arch.png"></p>
+<p><img src="../arch.png" alt="arch"></p>
 <p>Container Storage Modules (CSM) for Replication project consists of the following components:</p>
 <ul>
 <li><code>DellCSIReplicationGroup</code>, a Kubernetes <a href="https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/">Custom Resource</a>.</li>
@@ -752,9 +775,9 @@ have been performed on the object.</p>
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">state</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">Synchronized</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">state</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">Ready</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span></code></pre></div><p>Here is a diagram representing how the <em>state</em> of the CustomResource changes based on actions:
-<img alt="state" src="../state.png"></p>
+<img src="../state.png" alt="state"></p>
 <h3 id="csm-replication-sidecar">CSM Replication Sidecar</h3>
-<p><img alt="sidecar" src="../sidecar.png"></p>
+<p><img src="../sidecar.png" alt="sidecar"></p>
 <p>CSM Replication sidecar is deployed as sidecar container in <em>each</em> CSI driver&rsquo;s controller pod. This container is similar to Kubernetes CSI Sidecar
 <a href="https://kubernetes-csi.github.io/docs/sidecar-containers.html">containers</a> and runs a Controller Manager
 which manages the following controllers:</p>
@@ -776,7 +799,7 @@ It is primarily responsible for the following:</p>
 <li>Updates to the status sub resource</li>
 </ul>
 <h3 id="csm-replication-controller">CSM Replication Controller</h3>
-<p><img alt="common" src="../common.png"></p>
+<p><img src="../common.png" alt="common"></p>
 <p>CSM Replication Controller is a Kubernetes application deployed independently of CSI drivers and is responsible for
 the communication between Kubernetes clusters. <em>One</em> CSM Replication Controller manages replication operations for <em>all</em> CSI driver installations on the Kubernetes cluster.</p>
 <p>The details about the clusters it needs to connect to are provided in the form of a ConfigMap with references to secrets
@@ -797,7 +820,7 @@ information about the respective objects in the source cluster.</p>
 <p>The PVC objects are never replicated across the clusters. Instead, the remote PV objects have annotations related to the
 source PVC objects. This information can be easily used to create the PVCs whenever required using <code>repctl</code> or <code>kubectl</code>.</p>
 <h3 id="supported-cluster-topologies">Supported Cluster Topologies</h3>
-<p>Click <a href="/csm-docs/v1/replication/cluster-topologies/">here</a> for details for the various types of supported cluster topologies</p>
+<p>Click <a href="../cluster-topologies">here</a> for details for the various types of supported cluster topologies</p>
 
         <div class="section-index">
     

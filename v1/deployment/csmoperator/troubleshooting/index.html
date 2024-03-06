@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="generator" content="Hugo 0.123.7">
+<meta name="generator" content="Hugo 0.120.3">
 <link rel="alternate" type="application/rss&#43;xml" href="https://dell.github.io/csm-docs/v1/deployment/csmoperator/troubleshooting/index.xml">
 <meta name="robots" content="index, follow">
 
@@ -21,7 +21,8 @@
 
 <meta itemprop="name" content="Troubleshooting">
 <meta itemprop="description" content="Troubleshooting guide  for Dell CSM Operator
-"><meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Troubleshooting"/>
+"><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Troubleshooting"/>
 <meta name="twitter:description" content="Troubleshooting guide  for Dell CSM Operator
 "/>
 
@@ -102,7 +103,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.2f82b3957db346265e459b28dfe2d4c7.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.4b03eb415a4b7ce6c5b813326b279dbc.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -124,7 +125,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.2f82b3957db346265e459b28dfe2d4c7.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.4b03eb415a4b7ce6c5b813326b279dbc.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -145,8 +146,6 @@
   <ul class="ul-3 foldable">
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1deploymentcsminstallationwizardrelease-li">
   <a href="/csm-docs/v1/deployment/csminstallationwizard/release/" title="Release Notes" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv1deploymentcsminstallationwizardrelease"><span class="">Release notes</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1deploymentcsminstallationwizardsrc-li">
-  <a href="/csm-docs/v1/deployment/csminstallationwizard/src/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv1deploymentcsminstallationwizardsrc"><span class=""></span></a>
 </li>
   </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id="m-csm-docsv1deploymentcsmoperator-li">
@@ -647,6 +646,22 @@
             
 
 	
+		
+
+
+
+  
+  
+
+	
+		
+
+
+
+  
+  
+
+	
 
           </aside>
           <main class="col-12 col-md-9 col-xl-8 pl-md-5" role="main">
@@ -677,15 +692,23 @@
 		
 
   
+    
+
+
+  
+    
+
+
+  
 
 		
 	</header>
 	<ul>
-<li><a href="/csm-docs/v1/deployment/csmoperator/troubleshooting/#can-csm-operator-manage-existing-drivers-installed-using-helm-charts-or-the-dell-csi-operator">Can CSM Operator manage existing drivers installed using Helm charts or the Dell CSI Operator?</a></li>
-<li><a href="/csm-docs/v1/deployment/csmoperator/troubleshooting/#why-does-some-of-the-custom-resource-fields-show-up-as-invalid-or-unsupported-in-the-operatorhub-gui">Why does some of the Custom Resource fields show up as invalid or unsupported in the OperatorHub GUI?</a></li>
-<li><a href="/csm-docs/v1/deployment/csmoperator/troubleshooting/#how-can-i-view-detailed-logs-for-the-csm-operator">How can I view detailed logs for the CSM Operator?</a></li>
-<li><a href="/csm-docs/v1/deployment/csmoperator/troubleshooting/#my-dell-csi-driver-install-failed-how-do-i-fix-it">My Dell CSI Driver install failed. How do I fix it?</a></li>
-<li><a href="/csm-docs/v1/deployment/csmoperator/troubleshooting/#my-csm-replication-install-fails-to-validate-replication-prechecks-with-no-such-host">My CSM Replication install fails to validate replication prechecks with &rsquo;no such host&rsquo;.</a></li>
+<li><a href="#can-csm-operator-manage-existing-drivers-installed-using-helm-charts-or-the-dell-csi-operator">Can CSM Operator manage existing drivers installed using Helm charts or the Dell CSI Operator?</a></li>
+<li><a href="#why-does-some-of-the-custom-resource-fields-show-up-as-invalid-or-unsupported-in-the-operatorhub-gui">Why does some of the Custom Resource fields show up as invalid or unsupported in the OperatorHub GUI?</a></li>
+<li><a href="#how-can-i-view-detailed-logs-for-the-csm-operator">How can I view detailed logs for the CSM Operator?</a></li>
+<li><a href="#my-dell-csi-driver-install-failed-how-do-i-fix-it">My Dell CSI Driver install failed. How do I fix it?</a></li>
+<li><a href="#my-csm-replication-install-fails-to-validate-replication-prechecks-with-no-such-host">My CSM Replication install fails to validate replication prechecks with &rsquo;no such host&rsquo;.</a></li>
 </ul>
 <h3 id="can-csm-operator-manage-existing-drivers-installed-using-helm-charts-or-the-dell-csi-operator">Can CSM Operator manage existing drivers installed using Helm charts or the Dell CSI Operator?</h3>
 <p>The Dell CSM Operator is unable to manage any existing driver installed using Helm charts or the Dell CSI Operator. If you already have installed one of the Dell CSI driver in your cluster and  want to use the CSM operator based deployment, uninstall the driver and then redeploy the driver via Dell CSM Operator</p>

@@ -329,7 +329,7 @@ VQrpjsCPCu3fpVjvvwfspVOftbn/sNgY1J3lz0pdgvJ3yQs6pa+DODQyin5Rt//19rIGifPxi/Hk/k49
         
         
         &lt;h2 id=&#34;vault-server-installation&#34;&gt;Vault Server Installation&lt;/h2&gt;
-&lt;p&gt;If there is already a Vault server available, skip to &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/docs/secure/encryption/vault/#minimum-server-configuration&#34;&gt;Minimum Server Configuration&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;If there is already a Vault server available, skip to &lt;a href=&#34;#minimum-server-configuration&#34;&gt;Minimum Server Configuration&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;If there is no Vault server available to use with Encryption, it can be installed in many ways following &lt;a href=&#34;https://www.vaultproject.io/docs&#34;&gt;Hashicorp Vault documentation&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;For testing environment, however, a simple deployment suggested in this section may suffice.
 It creates a standalone server with in-memory (non-persistent) storage, running in a Docker container.&lt;/p&gt;
@@ -444,14 +444,14 @@ The same address should be used for &lt;code&gt;vault_addr&lt;/code&gt; in &lt;a
 Refer to the &lt;a href=&#34;https://www.vaultproject.io/docs&#34;&gt;Hashicorp Vault documentation&lt;/a&gt; for recommended configuration options.&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;blockquote&gt;
-&lt;p&gt;If a &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/docs/secure/encryption/vault/#vault-server-installation&#34;&gt;test instance of Vault&lt;/a&gt; is used, the &lt;code&gt;vault&lt;/code&gt; commands below can be executed in the Vault server container shell.
+&lt;p&gt;If a &lt;a href=&#34;#vault-server-installation&#34;&gt;test instance of Vault&lt;/a&gt; is used, the &lt;code&gt;vault&lt;/code&gt; commands below can be executed in the Vault server container shell.
 To enter the shell, run &lt;code&gt;docker exec -it vault-server sh&lt;/code&gt;. After completing the configuration process, exit the shell by typing &lt;code&gt;exit&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;Alternatively, you can &lt;a href=&#34;https://www.vaultproject.io/downloads&#34;&gt;download the vault binary&lt;/a&gt; and run it anywhere.
 It will require two environment variables to communicate with the Vault server:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;code&gt;VAULT_ADDR&lt;/code&gt; - URL similar to &lt;code&gt;http://127.0.0.1:8200&lt;/code&gt;. You may need to change the address in the URL to the address of
 the Docker host where the server is running.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;VAULT_TOKEN&lt;/code&gt; - Authentication token, e.g. the root token &lt;code&gt;DemoRootToken&lt;/code&gt; used in the &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/docs/secure/encryption/vault/#vault-server-installation&#34;&gt;test instance of Vault&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;VAULT_TOKEN&lt;/code&gt; - Authentication token, e.g. the root token &lt;code&gt;DemoRootToken&lt;/code&gt; used in the &lt;a href=&#34;#vault-server-installation&#34;&gt;test instance of Vault&lt;/a&gt;.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/blockquote&gt;
 &lt;h3 id=&#34;enable-keyvalue-secret-engine&#34;&gt;Enable Key/Value secret engine&lt;/h3&gt;
@@ -491,7 +491,7 @@ The role only needs read access to the Key/Value secret engine config endpoint f
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;vault write auth/approle/role/dea-role/custom-secret-id &lt;span style=&#34;color:#000&#34;&gt;secret_id&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;demo-secret-id
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;
 &lt;p&gt;Secret ID has an expiration time after which it becomes invalid resulting in &lt;a href=&#34;../troubleshooting#expired-approle-secret-id&#34;&gt;authorization failure&lt;/a&gt;.
-The expiration time for new secret IDs can be set in &lt;code&gt;secret_id_ttl&lt;/code&gt; parameter when &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/docs/secure/encryption/vault/#create-a-role&#34;&gt;the role is created&lt;/a&gt; or later on using
+The expiration time for new secret IDs can be set in &lt;code&gt;secret_id_ttl&lt;/code&gt; parameter when &lt;a href=&#34;#create-a-role&#34;&gt;the role is created&lt;/a&gt; or later on using
 &lt;code&gt;vault write auth/approle/role/dea-role/secret-id-ttl secret_id_ttl=24h&lt;/code&gt;.&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;h2 id=&#34;token-ttl-considerations&#34;&gt;Token TTL Considerations&lt;/h2&gt;
@@ -598,9 +598,9 @@ Deploy the controller using a command similar to this:&lt;/p&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;A rekey-controller pod should now be up and running.&lt;/p&gt;
 &lt;h2 id=&#34;rekey-usage&#34;&gt;Rekey Usage&lt;/h2&gt;
 &lt;p&gt;Rekeying is initiated and monitored via Kubernetes custom resources of type &lt;code&gt;rekeys.encryption.storage.dell.com&lt;/code&gt;.
-This can be done directly &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/docs/secure/encryption/rekey/#rekey-with-kubectl&#34;&gt;using kubectl&lt;/a&gt; or in a more user-friendly way &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/docs/secure/encryption/rekey/#rekey-with-dellctl&#34;&gt;using dellctl&lt;/a&gt;.
+This can be done directly &lt;a href=&#34;#rekey-with-kubectl&#34;&gt;using kubectl&lt;/a&gt; or in a more user-friendly way &lt;a href=&#34;#rekey-with-dellctl&#34;&gt;using dellctl&lt;/a&gt;.
 Creation of a rekey resource for a PV will kick off a rekey process on this PV. The rekey resource will contain the result
-of the operation. Refer to &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/docs/secure/encryption/rekey/#rekey-status&#34;&gt;Rekey Status&lt;/a&gt; for possible status values.&lt;/p&gt;
+of the operation. Refer to &lt;a href=&#34;#rekey-status&#34;&gt;Rekey Status&lt;/a&gt; for possible status values.&lt;/p&gt;
 &lt;h3 id=&#34;rekey-with-dellctl&#34;&gt;Rekey with dellctl&lt;/h3&gt;
 &lt;p&gt;If &lt;code&gt;dellctl&lt;/code&gt; CLI is installed, rekeying an encrypted volume is simple.
 For example, to rekey a PV with the name &lt;code&gt;k8s-112a5d41bc&lt;/code&gt; use a command like this:&lt;/p&gt;
@@ -723,14 +723,14 @@ If you run a &lt;a href=&#34;../vault#vault-server-installation&#34;&gt;test ins
 &lt;h2 id=&#34;typical-failure-reasons&#34;&gt;Typical Failure Reasons&lt;/h2&gt;
 &lt;h3 id=&#34;incorrect-vault-related-configuration&#34;&gt;Incorrect Vault related configuration&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;check &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/docs/secure/encryption/troubleshooting/#logs-and-events&#34;&gt;logs&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;check &lt;a href=&#34;#logs-and-events&#34;&gt;logs&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;check &lt;a href=&#34;../deployment#secret-vault-auth&#34;&gt;vault-auth secret&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;check &lt;a href=&#34;../deployment#secret-vault-cert&#34;&gt;vault-cert secret&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;check &lt;a href=&#34;../deployment#configmap-vault-client-conf&#34;&gt;vault-client-conf config map&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;incorrect-vault-server-side-configuration&#34;&gt;Incorrect Vault server-side configuration&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;check &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/docs/secure/encryption/troubleshooting/#logs-and-events&#34;&gt;logs&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;check &lt;a href=&#34;#logs-and-events&#34;&gt;logs&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;check &lt;a href=&#34;../vault#minimum-server-configuration&#34;&gt;Vault server configuration&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;expired-approle-secret-id&#34;&gt;Expired AppRole secret ID&lt;/h3&gt;

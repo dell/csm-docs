@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="generator" content="Hugo 0.123.7">
+<meta name="generator" content="Hugo 0.120.3">
 <link rel="alternate" type="application/rss&#43;xml" href="https://dell.github.io/csm-docs/v1/observability/deployment/index.xml">
 <meta name="robots" content="index, follow">
 
@@ -21,7 +21,8 @@
 
 <meta itemprop="name" content="Deployment">
 <meta itemprop="description" content="Dell Container Storage Modules (CSM) for Observability Deployment
-"><meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Deployment"/>
+"><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Deployment"/>
 <meta name="twitter:description" content="Dell Container Storage Modules (CSM) for Observability Deployment
 "/>
 
@@ -102,7 +103,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.2f82b3957db346265e459b28dfe2d4c7.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.4b03eb415a4b7ce6c5b813326b279dbc.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -124,7 +125,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.2f82b3957db346265e459b28dfe2d4c7.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.4b03eb415a4b7ce6c5b813326b279dbc.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -145,8 +146,6 @@
   <ul class="ul-3 foldable">
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1deploymentcsminstallationwizardrelease-li">
   <a href="/csm-docs/v1/deployment/csminstallationwizard/release/" title="Release Notes" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv1deploymentcsminstallationwizardrelease"><span class="">Release notes</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1deploymentcsminstallationwizardsrc-li">
-  <a href="/csm-docs/v1/deployment/csminstallationwizard/src/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv1deploymentcsminstallationwizardsrc"><span class=""></span></a>
 </li>
   </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv1deploymentcsmoperator-li">
@@ -654,6 +653,22 @@
             
 
 	
+		
+
+
+
+  
+  
+
+	
+		
+
+
+
+  
+  
+
+	
 
           </aside>
           <main class="col-12 col-md-9 col-xl-8 pl-md-5" role="main">
@@ -681,21 +696,29 @@
 		
 
   
+    
+
+
+  
+    
+
+
+  
 
 		
 	</header>
 	<p>CSM for Observability can be deployed in one of three ways:</p>
 <ul>
-<li><a href="/csm-docs/v1/observability/deployment/helm/">Helm</a></li>
-<li><a href="/csm-docs/v1/observability/deployment/online/">CSM for Observability Installer</a></li>
-<li><a href="/csm-docs/v1/observability/deployment/offline/">CSM for Observability Offline Installer</a></li>
+<li><a href="./helm">Helm</a></li>
+<li><a href="./online">CSM for Observability Installer</a></li>
+<li><a href="./offline">CSM for Observability Offline Installer</a></li>
 </ul>
 <h2 id="post-installation-dependencies">Post Installation Dependencies</h2>
 <p>The following third-party components are required in the same Kubernetes cluster where CSM for Observability has been deployed:</p>
 <ul>
-<li><a href="/csm-docs/v1/observability/deployment/#prometheus">Prometheus</a></li>
-<li><a href="/csm-docs/v1/observability/deployment/#grafana">Grafana</a></li>
-<li><a href="/csm-docs/v1/observability/deployment/#other-deployment-methods">Other Deployment Methods</a></li>
+<li><a href="#prometheus">Prometheus</a></li>
+<li><a href="#grafana">Grafana</a></li>
+<li><a href="#other-deployment-methods">Other Deployment Methods</a></li>
 </ul>
 <p>There are various ways to deploy these components. We recommend following the Helm deployments according to the specifications defined below.</p>
 <p><strong>Tip</strong>: CSM for Observability must be deployed first. Once the module has been deployed, you can proceed to deploying/configuring Prometheus and Grafana.</p>
@@ -1156,7 +1179,7 @@ helm install grafana grafana/grafana -n [CSM_NAMESPACE] -f grafana-values.yaml
 <li>
 <p>Add the Zipkin URI to the CSM for Observability ConfigMaps. Based on the manifest above, Zipkin will be running on port 9411.</p>
 <p><strong>Note</strong>: Zipkin tracing is currently not supported for the collection of PowerFlex metrics.</p>
-<p>Update the ConfigMaps from the <a href="/csm-docs/v1/observability/deployment/#dynamic-configuration">table above</a>. Here is an example updating the karavi-topology-configmap based on the deployment manifest above.</p>
+<p>Update the ConfigMaps from the <a href="#dynamic-configuration">table above</a>. Here is an example updating the karavi-topology-configmap based on the deployment manifest above.</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span><span style="color:#a40000">
 </span></span></span><span style="display:flex;"><span><span style="color:#a40000"></span><span style="color:#000;font-style:italic">kubectl edit configmap/karavi-topology-configmap -n [CSM_NAMESPACE]
 </span></span></span></code></pre></div><p>Update the ZIPKIN_URI and ZIPKIN_PROBABILITY values and save the ConfigMap.</p>
@@ -1316,7 +1339,7 @@ helm install grafana grafana/grafana -n [CSM_NAMESPACE] -f grafana-values.yaml
 </span></span></span></code></pre></div></li>
 <li>
 <p>Copy the configmap <code>powermax-reverseproxy-config</code> from the CSI Driver for Dell PowerMax namespace to the CSM namespace.<br>
-<strong>Note:</strong> Observability for PowerMax works only with <a href="/csm-docs/v1/csidriver/installation/helm/powermax/#csi-powermax-driver-with-proxy-in-standalone-mode">CSI PowerMax driver with Proxy in StandAlone mode</a>.</p>
+<strong>Note:</strong> Observability for PowerMax works only with <a href="../../csidriver/installation/helm/powermax/#csi-powermax-driver-with-proxy-in-standalone-mode">CSI PowerMax driver with Proxy in StandAlone mode</a>.</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span><span style="color:#a40000">
 </span></span></span><span style="display:flex;"><span><span style="color:#a40000"></span><span style="color:#000;font-style:italic">kubectl get configmap powermax-reverseproxy-config -n [CSI_DRIVER_NAMESPACE] -o yaml | sed &#39;s/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/&#39; | kubectl create -f -
 </span></span></span></code></pre></div><p>If the CSI driver configmap name is not the default <code>powermax-reverseproxy-config</code>, please use the following command to copy configmap:</p>

@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="generator" content="Hugo 0.123.7">
+<meta name="generator" content="Hugo 0.120.3">
 <link rel="alternate" type="application/rss&#43;xml" href="https://dell.github.io/csm-docs/v1/authorization/backup-and-restore/rpm/index.xml">
 <meta name="robots" content="index, follow">
 
@@ -21,7 +21,8 @@
 
 <meta itemprop="name" content="RPM">
 <meta itemprop="description" content="Dell Technologies (Dell) Container Storage Modules (CSM) for Authorization RPM backup and restore
-"><meta name="twitter:card" content="summary"/><meta name="twitter:title" content="RPM"/>
+"><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="RPM"/>
 <meta name="twitter:description" content="Dell Technologies (Dell) Container Storage Modules (CSM) for Authorization RPM backup and restore
 "/>
 
@@ -102,7 +103,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.2f82b3957db346265e459b28dfe2d4c7.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.4b03eb415a4b7ce6c5b813326b279dbc.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -124,7 +125,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.2f82b3957db346265e459b28dfe2d4c7.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.4b03eb415a4b7ce6c5b813326b279dbc.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -145,8 +146,6 @@
   <ul class="ul-3 foldable">
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1deploymentcsminstallationwizardrelease-li">
   <a href="/csm-docs/v1/deployment/csminstallationwizard/release/" title="Release Notes" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv1deploymentcsminstallationwizardrelease"><span class="">Release notes</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1deploymentcsminstallationwizardsrc-li">
-  <a href="/csm-docs/v1/deployment/csminstallationwizard/src/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv1deploymentcsminstallationwizardsrc"><span class=""></span></a>
 </li>
   </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv1deploymentcsmoperator-li">
@@ -656,6 +655,22 @@
             
 
 	
+		
+
+
+
+  
+  
+
+	
+		
+
+
+
+  
+  
+
+	
 
           </aside>
           <main class="col-12 col-md-9 col-xl-8 pl-md-5" role="main">
@@ -684,6 +699,14 @@
   <div class="lead">Dell Technologies (Dell) Container Storage Modules (CSM) for Authorization RPM backup and restore</div>
 	<header class="article-meta">
 		
+
+  
+    
+
+
+  
+    
+
 
   
 
@@ -739,7 +762,7 @@
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>k3s kubectl -n karavi rollout restart deploy/proxy-server
 </span></span><span style="display:flex;"><span>deployment.apps/proxy-server restarted
 </span></span></code></pre></div><h2 id="tenants-quota-and-volume-ownership">Tenants, Quota, and Volume ownership</h2>
-<p>Redis is used to store application data regarding <a href="/csm-docs/v1/authorization/design/#quota--volume-ownership">tenants, quota, and volume ownership</a>. This data is stored on the system under <code>/var/lib/rancher/k3s/storage/&lt;redis-primary-pv-claim-volume-name&gt;/appendonly.aof</code>.</p>
+<p>Redis is used to store application data regarding <a href="../../design#quota--volume-ownership">tenants, quota, and volume ownership</a>. This data is stored on the system under <code>/var/lib/rancher/k3s/storage/&lt;redis-primary-pv-claim-volume-name&gt;/appendonly.aof</code>.</p>
 <p><code>appendonly.aof</code> can be copied and used to restore this appliation data in Authorization deployments. See the example.</p>
 <h3 id="steps-to-execute-in-the-existing-authorization-deployment-2">Steps to execute in the existing Authorization deployment</h3>
 <ol>

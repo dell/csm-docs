@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="generator" content="Hugo 0.123.7">
+<meta name="generator" content="Hugo 0.120.3">
 <meta name="robots" content="index, follow">
 
 <link rel="shortcut icon" href="/favicons/favicon.ico" >
@@ -25,7 +25,8 @@
 ">
 <meta itemprop="dateModified" content="2023-12-13T23:10:42+05:30" />
 <meta itemprop="wordCount" content="841">
-<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/><meta name="twitter:title" content="PowerScale"/>
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="PowerScale"/>
 <meta name="twitter:description" content="Installing Dell CSI Driver for PowerScale via Dell CSM Operator
 "/>
 
@@ -106,7 +107,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.2f82b3957db346265e459b28dfe2d4c7.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.4b03eb415a4b7ce6c5b813326b279dbc.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -128,7 +129,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.2f82b3957db346265e459b28dfe2d4c7.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.4b03eb415a4b7ce6c5b813326b279dbc.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -144,13 +145,8 @@
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id="m-csm-docsv3deployment-li">
   <a href="/csm-docs/v3/deployment/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3deployment"><span class="">Deployment</span></a>
   <ul class="ul-2 foldable">
-    <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-csm-docsv3deploymentcsminstallationwizard-li">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsv3deploymentcsminstallationwizard-li">
   <a href="/csm-docs/v3/deployment/csminstallationwizard/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3deploymentcsminstallationwizard"><span class="">CSM Installation Wizard</span></a>
-  <ul class="ul-3 foldable">
-    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3deploymentcsminstallationwizardsrc-li">
-  <a href="/csm-docs/v3/deployment/csminstallationwizard/src/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3deploymentcsminstallationwizardsrc"><span class=""></span></a>
-</li>
-  </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id="m-csm-docsv3deploymentcsmoperator-li">
   <a href="/csm-docs/v3/deployment/csmoperator/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3deploymentcsmoperator"><span class="">CSM Operator</span></a>
   <ul class="ul-3 foldable">
@@ -616,6 +612,22 @@
             
 
 	
+		
+
+
+
+  
+  
+
+	
+		
+
+
+
+  
+  
+
+	
 
           </aside>
           <main class="col-12 col-md-9 col-xl-8 pl-md-5" role="main">
@@ -648,7 +660,7 @@
 	       
 	<h2 id="installing-csi-driver-for-powerscale-via-dell-csm-operator">Installing CSI Driver for PowerScale via Dell CSM Operator</h2>
 <p>The CSI Driver for Dell PowerScale can be installed via the Dell CSM Operator.
-To deploy the Operator, follow the instructions available <a href="/csm-docs/v3/deployment/#installation">here</a>.</p>
+To deploy the Operator, follow the instructions available <a href="../../#installation">here</a>.</p>
 <p>Note that the deployment of the driver using the operator does not use any Helm charts and the installation and configuration parameters will be slightly different from the one specified via the Helm installer.</p>
 <p><strong>Note</strong>: MKE (Mirantis Kubernetes Engine) does not support the installation of CSI-PowerScale via Operator.</p>
 <h3 id="listing-installed-drivers-with-the-containerstoragemodule-crd">Listing installed drivers with the ContainerStorageModule CRD</h3>
@@ -737,7 +749,7 @@ Please refer <a href="../../../../csidriver/installation/helm/isilon/#certificat
 <h3 id="install-driver">Install Driver</h3>
 <ol>
 <li>
-<p>Follow all the <a href="/csm-docs/v3/deployment/csmoperator/drivers/powerscale/#prerequisite">prerequisites</a> above</p>
+<p>Follow all the <a href="#prerequisite">prerequisites</a> above</p>
 </li>
 <li>
 <p>Create a CR (Custom Resource) for PowerScale using the sample files provided
@@ -860,7 +872,7 @@ Please refer <a href="../../../../csidriver/installation/helm/isilon/#certificat
 This command will deploy the CSI-PowerScale driver in the namespace specified in the input YAML file.</p>
 </li>
 <li>
-<p><a href="/csm-docs/v3/deployment/csmoperator/#verifying-the-driver-installation">Verify the CSI Driver installation</a></p>
+<p><a href="../#verifying-the-driver-installation">Verify the CSI Driver installation</a></p>
 </li>
 </ol>
 <p><strong>Note</strong> :</p>

@@ -41,7 +41,7 @@
 &lt;li&gt;Add the Dell Helm Charts repository
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;helm repo add dell https://dell.github.io/helm-charts
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
-&lt;li&gt;Either create a values.yml file or provide the &lt;code&gt;--set&lt;/code&gt; options to the &lt;code&gt;helm install&lt;/code&gt; to override default values from the &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v1/applicationmobility/deployment/#configuration&#34;&gt;Configuration&lt;/a&gt; section.&lt;/li&gt;
+&lt;li&gt;Either create a values.yml file or provide the &lt;code&gt;--set&lt;/code&gt; options to the &lt;code&gt;helm install&lt;/code&gt; to override default values from the &lt;a href=&#34;#configuration&#34;&gt;Configuration&lt;/a&gt; section.&lt;/li&gt;
 &lt;li&gt;Install the helm chart
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;helm install application-mobility -n application-mobility dell/csm-application-mobility
@@ -269,7 +269,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl describe backups.mobility.storage.dell.com/backup1 -n application-mobility
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;If the Storage Class name on the target cluster is different than the Storage Class name on the source cluster where the backup was created, a mapping between source and target Storage Class names must be defined. See &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v1/applicationmobility/use_cases/#changing-pvpvc-storage-classes&#34;&gt;Changing PV/PVC Storage Classes&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;If the Storage Class name on the target cluster is different than the Storage Class name on the source cluster where the backup was created, a mapping between source and target Storage Class names must be defined. See &lt;a href=&#34;#changing-pvpvc-storage-classes&#34;&gt;Changing PV/PVC Storage Classes&lt;/a&gt;.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;The application and its data can be restored on either the same cluster or another cluster by referring to the backup name and providing an optional mapping of the original namespace to the target namespace.&lt;/p&gt;
@@ -309,7 +309,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;dellctl cluster add -n targetcluster -u &amp;lt;kube-system-namespace-uuid&amp;gt; -f ~/kubeconfigs/target-cluster-kubeconfig
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;If the Storage Class name on the target cluster is different than the Storage Class name on the source cluster where the backup was created, a mapping between source and target Storage Class names must be defined. See &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v1/applicationmobility/use_cases/#changing-pvpvc-storage-classes&#34;&gt;Changing PV/PVC Storage Classes&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;If the Storage Class name on the target cluster is different than the Storage Class name on the source cluster where the backup was created, a mapping between source and target Storage Class names must be defined. See &lt;a href=&#34;#changing-pvpvc-storage-classes&#34;&gt;Changing PV/PVC Storage Classes&lt;/a&gt;.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Create a Backup by providing a name, the included namespace where the application is installed, and the target cluster and namespace mapping where the application will be restored.&lt;/p&gt;
@@ -369,10 +369,10 @@
         
         &lt;h2 id=&#34;frequently-asked-questions&#34;&gt;Frequently Asked Questions&lt;/h2&gt;
 &lt;ol&gt;
-&lt;li&gt;&lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v1/applicationmobility/troubleshooting/#how-can-i-diagnose-an-issue-with-application-mobility&#34;&gt;How can I diagnose an issue with Application Mobility?&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v1/applicationmobility/troubleshooting/#how-can-i-view-logs&#34;&gt;How can I view logs?&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v1/applicationmobility/troubleshooting/#how-can-i-debug-and-troubleshoot-issues-with-kubernetes&#34;&gt;How can I debug and troubleshoot issues with Kubernetes?&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v1/applicationmobility/troubleshooting/#why-are-there-error-logs-about-a-license&#34;&gt;Why are there error logs about a license?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#how-can-i-diagnose-an-issue-with-application-mobility&#34;&gt;How can I diagnose an issue with Application Mobility?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#how-can-i-view-logs&#34;&gt;How can I view logs?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#how-can-i-debug-and-troubleshoot-issues-with-kubernetes&#34;&gt;How can I debug and troubleshoot issues with Kubernetes?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#why-are-there-error-logs-about-a-license&#34;&gt;Why are there error logs about a license?&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h3 id=&#34;how-can-i-diagnose-an-issue-with-application-mobility&#34;&gt;How can I diagnose an issue with Application Mobility?&lt;/h3&gt;
 &lt;p&gt;Once you have attempted to install Application Mobility to your Kubernetes or OpenShift cluster, the first step in troubleshooting is locating the problem.&lt;/p&gt;
@@ -394,7 +394,7 @@
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;why-are-there-error-logs-about-a-license&#34;&gt;Why are there error logs about a license?&lt;/h3&gt;
-&lt;p&gt;Application Mobility requires a license in order to function. See the &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v1/deployment/&#34;&gt;Deployment&lt;/a&gt; instructions for steps to request a license.&lt;/p&gt;
+&lt;p&gt;Application Mobility requires a license in order to function. See the &lt;a href=&#34;../deployment&#34;&gt;Deployment&lt;/a&gt; instructions for steps to request a license.&lt;/p&gt;
 &lt;p&gt;There will be errors in the logs about the license for these cases:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;License does not exist&lt;/li&gt;

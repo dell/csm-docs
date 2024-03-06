@@ -27,7 +27,7 @@
 &lt;h2 id=&#34;io-performance-metrics&#34;&gt;I/O Performance Metrics&lt;/h2&gt;
 &lt;p&gt;Storage system I/O performance metrics (IOPS, bandwidth, latency) are available by default and broken down by export node and volume.&lt;/p&gt;
 &lt;p&gt;To disable these metrics, set the &lt;code&gt;sdc_metrics_enabled&lt;/code&gt; field to false in helm/values.yaml.&lt;/p&gt;
-&lt;p&gt;The following I/O performance metrics are available from the OpenTelemetry collector endpoint. Please see the &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v1/&#34;&gt;CSM for Observability&lt;/a&gt; for more information on deploying and configuring the OpenTelemetry collector.&lt;/p&gt;
+&lt;p&gt;The following I/O performance metrics are available from the OpenTelemetry collector endpoint. Please see the &lt;a href=&#34;../../&#34;&gt;CSM for Observability&lt;/a&gt; for more information on deploying and configuring the OpenTelemetry collector.&lt;/p&gt;
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
@@ -89,7 +89,7 @@
 &lt;h2 id=&#34;storage-capacity-metrics&#34;&gt;Storage Capacity Metrics&lt;/h2&gt;
 &lt;p&gt;Provides visibility into the total, used, and available capacity for a storage class and associated underlying storage construct.&lt;/p&gt;
 &lt;p&gt;To disable these metrics, set the &lt;code&gt;storage_class_pool_metrics_enabled&lt;/code&gt; field to false in helm/values.yaml.&lt;/p&gt;
-&lt;p&gt;The following storage capacity metrics are available from the OpenTelemetry collector endpoint. Please see the &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v1/&#34;&gt;CSM for Observability&lt;/a&gt; for more information on deploying and configuring the OpenTelemetry collector.&lt;/p&gt;
+&lt;p&gt;The following storage capacity metrics are available from the OpenTelemetry collector endpoint. Please see the &lt;a href=&#34;../../&#34;&gt;CSM for Observability&lt;/a&gt; for more information on deploying and configuring the OpenTelemetry collector.&lt;/p&gt;
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
@@ -138,7 +138,7 @@
 &lt;h2 id=&#34;io-performance-metrics&#34;&gt;I/O Performance Metrics&lt;/h2&gt;
 &lt;p&gt;Storage system I/O performance metrics (IOPS, bandwidth, latency) are available by default and broken down by storage group and volume.&lt;/p&gt;
 &lt;p&gt;To disable these metrics, set the &lt;code&gt;performanceMetricsEnabled&lt;/code&gt; field under &lt;code&gt;karaviMetricsPowerMax&lt;/code&gt; to false in helm/values.yaml.&lt;/p&gt;
-&lt;p&gt;The following I/O performance metrics are available from the OpenTelemetry collector endpoint. Please see the &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v1/&#34;&gt;CSM for Observability&lt;/a&gt; for more information on deploying and configuring the OpenTelemetry collector.&lt;/p&gt;
+&lt;p&gt;The following I/O performance metrics are available from the OpenTelemetry collector endpoint. Please see the &lt;a href=&#34;../../&#34;&gt;CSM for Observability&lt;/a&gt; for more information on deploying and configuring the OpenTelemetry collector.&lt;/p&gt;
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
@@ -204,7 +204,7 @@
 &lt;h2 id=&#34;storage-capacity-metrics&#34;&gt;Storage Capacity Metrics&lt;/h2&gt;
 &lt;p&gt;Provides visibility into the total, used, and available capacity for a storage class and associated underlying storage construct.&lt;/p&gt;
 &lt;p&gt;To disable these metrics, set the &lt;code&gt;capacityMetricsEnabled&lt;/code&gt; field under &lt;code&gt;karaviMetricsPowerMax&lt;/code&gt; to false in helm/values.yaml.&lt;/p&gt;
-&lt;p&gt;The following storage capacity metrics are available from the OpenTelemetry collector endpoint. Please see the &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v1/&#34;&gt;CSM for Observability&lt;/a&gt; for more information on deploying and configuring the OpenTelemetry collector.&lt;/p&gt;
+&lt;p&gt;The following storage capacity metrics are available from the OpenTelemetry collector endpoint. Please see the &lt;a href=&#34;../../&#34;&gt;CSM for Observability&lt;/a&gt; for more information on deploying and configuring the OpenTelemetry collector.&lt;/p&gt;
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
@@ -292,7 +292,7 @@
 &lt;h2 id=&#34;io-performance-metrics&#34;&gt;I/O Performance Metrics&lt;/h2&gt;
 &lt;p&gt;Storage system I/O performance metrics (IOPS, bandwidth) are available by default and broken down by cluster and quota.&lt;/p&gt;
 &lt;p&gt;To disable these metrics, set the &lt;code&gt;performanceMetricsEnabled&lt;/code&gt; field to false in helm/values.yaml.&lt;/p&gt;
-&lt;p&gt;The following I/O performance metrics are available from the OpenTelemetry collector endpoint. Please see the &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v1/&#34;&gt;CSM for Observability&lt;/a&gt; for more information on deploying and configuring the OpenTelemetry collector.&lt;/p&gt;
+&lt;p&gt;The following I/O performance metrics are available from the OpenTelemetry collector endpoint. Please see the &lt;a href=&#34;../../&#34;&gt;CSM for Observability&lt;/a&gt; for more information on deploying and configuring the OpenTelemetry collector.&lt;/p&gt;
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
@@ -326,7 +326,7 @@
 &lt;h2 id=&#34;storage-capacity-metrics&#34;&gt;Storage Capacity Metrics&lt;/h2&gt;
 &lt;p&gt;Provides visibility into the total, used, and available capacity for PowerScale cluster and quotas.&lt;/p&gt;
 &lt;p&gt;To disable these metrics, set the &lt;code&gt;capacityMetricsEnabled&lt;/code&gt; field to false in helm/values.yaml.&lt;/p&gt;
-&lt;p&gt;The following storage capacity metrics are available from the OpenTelemetry collector endpoint. Please see the &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v1/&#34;&gt;CSM for Observability&lt;/a&gt; for more information on deploying and configuring the OpenTelemetry collector.&lt;/p&gt;
+&lt;p&gt;The following storage capacity metrics are available from the OpenTelemetry collector endpoint. Please see the &lt;a href=&#34;../../&#34;&gt;CSM for Observability&lt;/a&gt; for more information on deploying and configuring the OpenTelemetry collector.&lt;/p&gt;
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
@@ -390,7 +390,7 @@
 &lt;h2 id=&#34;io-performance-metrics&#34;&gt;I/O Performance Metrics&lt;/h2&gt;
 &lt;p&gt;Storage system I/O performance metrics (IOPS, bandwidth, latency) are available by default and broken down by export node and volume.&lt;/p&gt;
 &lt;p&gt;To disable these metrics, set the &lt;code&gt;karaviMetricsPowerstore.volumeMetricsEnabled&lt;/code&gt; field to false in helm/values.yaml.&lt;/p&gt;
-&lt;p&gt;The following I/O performance metrics are available from the OpenTelemetry collector endpoint. Please see the &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v1/&#34;&gt;CSM for Observability&lt;/a&gt; for more information on deploying and configuring the OpenTelemetry collector.&lt;/p&gt;
+&lt;p&gt;The following I/O performance metrics are available from the OpenTelemetry collector endpoint. Please see the &lt;a href=&#34;../../&#34;&gt;CSM for Observability&lt;/a&gt; for more information on deploying and configuring the OpenTelemetry collector.&lt;/p&gt;
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
@@ -452,7 +452,7 @@
 &lt;h2 id=&#34;storage-capacity-metrics&#34;&gt;Storage Capacity Metrics&lt;/h2&gt;
 &lt;p&gt;Provides visibility into the total, used, and available capacity for a storage class and associated underlying storage construct.&lt;/p&gt;
 &lt;p&gt;To disable these metrics, set the &lt;code&gt;enable_powerstore_metrics&lt;/code&gt; field to false in helm/values.yaml.&lt;/p&gt;
-&lt;p&gt;The following storage capacity metrics are available from the OpenTelemetry collector endpoint. Please see the &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v1/&#34;&gt;CSM for Observability&lt;/a&gt; for more information on deploying and configuring the OpenTelemetry collector.&lt;/p&gt;
+&lt;p&gt;The following storage capacity metrics are available from the OpenTelemetry collector endpoint. Please see the &lt;a href=&#34;../../&#34;&gt;CSM for Observability&lt;/a&gt; for more information on deploying and configuring the OpenTelemetry collector.&lt;/p&gt;
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;

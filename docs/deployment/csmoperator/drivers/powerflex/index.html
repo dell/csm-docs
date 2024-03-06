@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="generator" content="Hugo 0.123.7">
+<meta name="generator" content="Hugo 0.120.3">
 <meta name="robots" content="index, follow">
 
 <link rel="shortcut icon" href="/favicons/favicon.ico" >
@@ -25,7 +25,8 @@
 ">
 <meta itemprop="dateModified" content="2023-12-13T23:10:42+05:30" />
 <meta itemprop="wordCount" content="1284">
-<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/><meta name="twitter:title" content="PowerFlex"/>
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="PowerFlex"/>
 <meta name="twitter:description" content="Installing Dell CSI Driver for PowerFlex via Dell CSM Operator
 "/>
 
@@ -106,7 +107,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.2f82b3957db346265e459b28dfe2d4c7.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.4b03eb415a4b7ce6c5b813326b279dbc.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -128,7 +129,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.2f82b3957db346265e459b28dfe2d4c7.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.4b03eb415a4b7ce6c5b813326b279dbc.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -149,8 +150,6 @@
   <ul class="ul-3 foldable">
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymentcsminstallationwizardrelease-li">
   <a href="/csm-docs/docs/deployment/csminstallationwizard/release/" title="Release Notes" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsdeploymentcsminstallationwizardrelease"><span class="">Release notes</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymentcsminstallationwizardsrc-li">
-  <a href="/csm-docs/docs/deployment/csminstallationwizard/src/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsdeploymentcsminstallationwizardsrc"><span class=""></span></a>
 </li>
   </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id="m-csm-docsdocsdeploymentcsmoperator-li">
@@ -637,6 +636,22 @@
             
 
 	
+		
+
+
+
+  
+  
+
+	
+		
+
+
+
+  
+  
+
+	
 
           </aside>
           <main class="col-12 col-md-9 col-xl-8 pl-md-5" role="main">
@@ -669,7 +684,7 @@
 	       
 	<h2 id="installing-csi-driver-for-powerflex-via-dell-csm-operator">Installing CSI Driver for PowerFlex via Dell CSM Operator</h2>
 <p>The CSI Driver for Dell PowerFlex can be installed via the Dell CSM Operator.
-To deploy the Operator, follow the instructions available <a href="/csm-docs/docs/deployment/#installation">here</a>.</p>
+To deploy the Operator, follow the instructions available <a href="../../#installation">here</a>.</p>
 <p>Note that the deployment of the driver using the operator does not use any Helm charts and the installation and configuration parameters will be slightly different from the one specified via the Helm installer.</p>
 <h3 id="listing-installed-drivers-with-the-containerstoragemodule-crd">Listing installed drivers with the ContainerStorageModule CRD</h3>
 <p>User can query for all Dell CSI drivers using this command:</p>
@@ -785,7 +800,7 @@ Execute <code>kubectl create namespace vxflexos</code> to create the <code>vxfle
 <h3 id="install-driver">Install Driver</h3>
 <ol>
 <li>
-<p>Follow all the <a href="/csm-docs/docs/deployment/csmoperator/drivers/powerflex/#prerequisite">prerequisites</a> above</p>
+<p>Follow all the <a href="#prerequisite">prerequisites</a> above</p>
 </li>
 <li>
 <p>Create a CR (Custom Resource) for PowerFlex using the sample files provided
@@ -926,7 +941,7 @@ Execute <code>kubectl create namespace vxflexos</code> to create the <code>vxfle
 </span></span></code></pre></div><p>This command will deploy the CSI-PowerFlex driver in the namespace specified in the input YAML file.</p>
 </li>
 <li>
-<p><a href="/csm-docs/docs/deployment/csmoperator/#verifying-the-driver-installation">Verify the CSI Driver installation</a></p>
+<p><a href="../#verifying-the-driver-installation">Verify the CSI Driver installation</a></p>
 </li>
 </ol>
 <p><strong>Note</strong> :</p>

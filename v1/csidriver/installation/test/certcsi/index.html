@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="generator" content="Hugo 0.123.7">
+<meta name="generator" content="Hugo 0.120.3">
 <meta name="robots" content="index, follow">
 
 <link rel="shortcut icon" href="/favicons/favicon.ico" >
@@ -22,7 +22,8 @@
 <meta itemprop="description" content="Tool to validate Dell CSI Drivers">
 <meta itemprop="dateModified" content="2023-12-13T23:10:42+05:30" />
 <meta itemprop="wordCount" content="1939">
-<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Cert-CSI"/>
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Cert-CSI"/>
 <meta name="twitter:description" content="Tool to validate Dell CSI Drivers"/>
 
 
@@ -102,7 +103,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.2f82b3957db346265e459b28dfe2d4c7.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.4b03eb415a4b7ce6c5b813326b279dbc.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -124,7 +125,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.2f82b3957db346265e459b28dfe2d4c7.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.4b03eb415a4b7ce6c5b813326b279dbc.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -145,8 +146,6 @@
   <ul class="ul-3 foldable">
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1deploymentcsminstallationwizardrelease-li">
   <a href="/csm-docs/v1/deployment/csminstallationwizard/release/" title="Release Notes" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv1deploymentcsminstallationwizardrelease"><span class="">Release notes</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1deploymentcsminstallationwizardsrc-li">
-  <a href="/csm-docs/v1/deployment/csminstallationwizard/src/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv1deploymentcsminstallationwizardsrc"><span class=""></span></a>
 </li>
   </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv1deploymentcsmoperator-li">
@@ -680,6 +679,22 @@
             
 
 	
+		
+
+
+
+  
+  
+
+	
+		
+
+
+
+  
+  
+
+	
 
           </aside>
           <main class="col-12 col-md-9 col-xl-8 pl-md-5" role="main">
@@ -846,7 +861,7 @@ For example if you press TAB while passing &ndash;storageclass (or &ndash;sc) ar
 </span></span><span style="display:flex;"><span>arrayIds: arr-1
 </span></span></code></pre></div><h3 id="screenshots">Screenshots</h3>
 <p>Tabular Report example</p>
-<p><img alt="img9" src="../img/tabularReport.png"></p>
+<p><img src="../img/tabularReport.png" alt="img9"></p>
 <h2 id="kubernetes-end-to-end-tests">Kubernetes End-To-End Tests</h2>
 <p>All Kubernetes end to end tests require that you provide the driver config based on the storage class you want to test and the version of the kubernetes you want to test against. These are the mandatory parameters that you can provide in command like..</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span> --driver-config &lt;path of driver config file&gt; and --version <span style="color:#4e9a06">&#34;v1.25.0&#34;</span> 
@@ -986,24 +1001,24 @@ For example if you press TAB while passing &ndash;storageclass (or &ndash;sc) ar
 </span></span><span style="display:flex;"><span>cert-csi <span style="color:#204a87">test</span> &lt;<span style="color:#204a87">test</span> suite&gt; --sc &lt;storage class&gt; &lt;...&gt; --sh ./hooks/start.sh --rh ./hooks/ready.sh --fh ./hooks/finish.sh
 </span></span></code></pre></div><h2 id="screenshots-1">Screenshots</h2>
 <h3 id="running-provisioning-test">Running provisioning test</h3>
-<p><img alt="img1" src="../img/unifiedTest.png"></p>
+<p><img src="../img/unifiedTest.png" alt="img1"></p>
 <p>You can interrupt the application by sending an interruption signal (for example pressing Ctrl + C).
 It will stop polling and try to cleanup resources.</p>
-<p><img alt="img2" src="../img/interruptTest.png"></p>
+<p><img src="../img/interruptTest.png" alt="img2"></p>
 <h3 id="running-scaling-test">Running scaling test</h3>
-<p><img alt="img3" src="../img/scaling.PNG"></p>
+<p><img src="../img/scaling.PNG" alt="img3"></p>
 <h3 id="listing-available-test-runs">Listing available test runs</h3>
-<p><img alt="img4" src="../img/listRuns.png"></p>
+<p><img src="../img/listRuns.png" alt="img4"></p>
 <h3 id="running-longevity-mode-1">Running longevity mode</h3>
-<p><img alt="img5" src="../img/longevity.png"></p>
+<p><img src="../img/longevity.png" alt="img5"></p>
 <h3 id="multi-db-tabular-report-example">Multi DB Tabular report example</h3>
-<p><img alt="img6" src="../img/multiDBTabularReport.png"></p>
+<p><img src="../img/multiDBTabularReport.png" alt="img6"></p>
 <p>Text report example</p>
-<p><img alt="img7" src="../img/textReport.png"></p>
+<p><img src="../img/textReport.png" alt="img7"></p>
 <h3 id="html-report-example">HTML report example</h3>
-<p><img alt="img8" src="../img/HTMLReport.png"></p>
+<p><img src="../img/HTMLReport.png" alt="img8"></p>
 <h3 id="resource-usage-example-chart">Resource usage example chart</h3>
-<p><img alt="img9" src="../img/resourceUsage.png"></p>
+<p><img src="../img/resourceUsage.png" alt="img9"></p>
 
 	
 	

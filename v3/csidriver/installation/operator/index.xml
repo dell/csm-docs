@@ -25,7 +25,7 @@
         
         &lt;h2 id=&#34;installing-csi-driver-for-powerflex-via-operator&#34;&gt;Installing CSI Driver for PowerFlex via Operator&lt;/h2&gt;
 &lt;p&gt;The CSI Driver for Dell PowerFlex can be installed via the Dell CSI Operator.&lt;/p&gt;
-&lt;p&gt;To deploy the Operator, follow the instructions available &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v3/csidriver/installation/&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;To deploy the Operator, follow the instructions available &lt;a href=&#34;../&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;There are sample manifests provided which can be edited to do an easy installation of the driver. Note that the deployment of the driver using the operator does not use any Helm charts. The installation and configuration parameters will be slightly different from the ones specified via the Helm installer.&lt;/p&gt;
 &lt;p&gt;Kubernetes Operators make it easy to deploy and manage the entire lifecycle of complex Kubernetes applications. Operators use Custom Resource Definitions (CRD) which represents the application and use custom controllers to manage them.&lt;/p&gt;
 &lt;h3 id=&#34;prerequisites&#34;&gt;Prerequisites:&lt;/h3&gt;
@@ -353,7 +353,7 @@ volume stats value under node should be set to true.&lt;/p&gt;
         
         &lt;h2 id=&#34;installing-csi-driver-for-powermax-via-operator&#34;&gt;Installing CSI Driver for PowerMax via Operator&lt;/h2&gt;
 &lt;p&gt;CSI Driver for Dell PowerMax can be installed via the Dell CSI Operator.&lt;/p&gt;
-&lt;p&gt;To deploy the Operator, follow the instructions available &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v3/csidriver/installation/&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;To deploy the Operator, follow the instructions available &lt;a href=&#34;../&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;There are sample manifests provided which can be edited to do an easy installation of the driver. Please note that the deployment of the driver using the operator does not use any Helm charts and the installation and configuration parameters will be slightly different from the ones specified via the Helm installer.&lt;/p&gt;
 &lt;p&gt;Kubernetes Operators make it easy to deploy and manage the entire lifecycle of complex Kubernetes applications. Operators use Custom Resource Definitions (CRD) which represents the application and use custom controllers to manage them.&lt;/p&gt;
 &lt;h3 id=&#34;prerequisite&#34;&gt;Prerequisite&lt;/h3&gt;
@@ -389,7 +389,7 @@ volume stats value under node should be set to true.&lt;/p&gt;
 &lt;p&gt;Add initiators from all ESX/ESXis to a host(initiator group) where the cluster is hosted.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;Create a secret which contains vCenter privileges. Follow the steps &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v3/csidriver/installation/operator/powermax/#support-for-auto-rdm-for-vsphere-over-fc&#34;&gt;here&lt;/a&gt; to create the same.&lt;/p&gt;
+&lt;p&gt;Create a secret which contains vCenter privileges. Follow the steps &lt;a href=&#34;#support-for-auto-rdm-for-vsphere-over-fc&#34;&gt;here&lt;/a&gt; to create the same.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;h4 id=&#34;linux-multipathing-requirements&#34;&gt;Linux multipathing requirements&lt;/h4&gt;
@@ -785,7 +785,7 @@ To get the volume health state &lt;code&gt;value&lt;/code&gt; under controller s
         - name: X_CSI_TOPOLOGY_CONTROL_ENABLED
           value: &amp;#34;false&amp;#34;
 &lt;/code&gt;&lt;/pre&gt;&lt;ol start=&#34;2&#34;&gt;
-&lt;li&gt;Edit the sample config map &amp;ldquo;node-topology-config&amp;rdquo; present in &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v3/csidriver/installation/operator/powermax/#sample--crd-file-for--powermax&#34;&gt;sample CRD&lt;/a&gt; with appropriate values:
+&lt;li&gt;Edit the sample config map &amp;ldquo;node-topology-config&amp;rdquo; present in &lt;a href=&#34;#sample--crd-file-for--powermax&#34;&gt;sample CRD&lt;/a&gt; with appropriate values:
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
@@ -887,7 +887,7 @@ data:
         
         &lt;h2 id=&#34;installing-csi-driver-for-powerscale-via-operator&#34;&gt;Installing CSI Driver for PowerScale via Operator&lt;/h2&gt;
 &lt;p&gt;The CSI Driver for Dell PowerScale can be installed via the Dell CSI Operator.&lt;/p&gt;
-&lt;p&gt;To deploy the Operator, follow the instructions available &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v3/csidriver/installation/&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;To deploy the Operator, follow the instructions available &lt;a href=&#34;../&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;There are sample manifests provided which can be edited to do an easy installation of the driver. Note that the deployment of the driver using the operator does not use any Helm charts and the installation and configuration parameters will be slightly different from the one specified via the Helm installer.&lt;/p&gt;
 &lt;p&gt;Kubernetes Operators make it easy to deploy and manage the entire lifecycle of complex Kubernetes applications. Operators use Custom Resource Definitions (CRD) which represents the application and use custom controllers to manage them.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: MKE (Mirantis Kubernetes Engine) does not support the installation of CSI-PowerScale via Operator.&lt;/p&gt;
@@ -1204,7 +1204,7 @@ To enable this feature, add the below block to the driver manifest before instal
         
         &lt;h2 id=&#34;installing-csi-driver-for-powerstore-via-operator&#34;&gt;Installing CSI Driver for PowerStore via Operator&lt;/h2&gt;
 &lt;p&gt;The CSI Driver for Dell PowerStore can be installed via the Dell CSI Operator.&lt;/p&gt;
-&lt;p&gt;To deploy the Operator, follow the instructions available &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v3/csidriver/installation/&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;To deploy the Operator, follow the instructions available &lt;a href=&#34;../&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;There are sample manifests provided which can be edited to do an easy installation of the driver.
 Note: The deployment of the driver using the operator does not use any Helm charts. The installation and configuration parameters will be slightly different from the ones specified via the Helm installer.&lt;/p&gt;
 &lt;p&gt;Kubernetes Operators make it easy to deploy and manage the entire lifecycle of complex Kubernetes applications. Operators use Custom Resource Definitions (CRD) which represents the application and use custom controllers to manage them.&lt;/p&gt;

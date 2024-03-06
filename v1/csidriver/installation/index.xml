@@ -77,17 +77,17 @@
 &lt;li&gt;VolumeSnapshot CRDs - Install v1 VolumeSnapshot CRDs&lt;/li&gt;
 &lt;li&gt;External Volume Snapshot Controller&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;For detailed snapshot setup procedure, &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v1/snapshots/#optional-volume-snapshot-requirements&#34;&gt;click here.&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;For detailed snapshot setup procedure, &lt;a href=&#34;../../../snapshots/#optional-volume-snapshot-requirements&#34;&gt;click here.&lt;/a&gt;&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;NOTE: That step can be skipped with OpenShift.&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;h2 id=&#34;installation&#34;&gt;Installation&lt;/h2&gt;
 &lt;p&gt;Dell CSI Operator has been tested and qualified with&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;Upstream Kubernetes or OpenShift (see &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v1/csidriver/#features-and-capabilities&#34;&gt;supported versions&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Upstream Kubernetes or OpenShift (see &lt;a href=&#34;../../../csidriver/#features-and-capabilities&#34;&gt;supported versions&lt;/a&gt;)&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;before-you-begin&#34;&gt;Before you begin&lt;/h3&gt;
-&lt;p&gt;If you have installed an old version of the &lt;code&gt;dell-csi-operator&lt;/code&gt; which was available with the name &lt;em&gt;CSI Operator&lt;/em&gt;, please refer to this &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v1/csidriver/installation/operator/#replacing-csi-operator-with-dell-csi-operator&#34;&gt;section&lt;/a&gt; before continuing.&lt;/p&gt;
+&lt;p&gt;If you have installed an old version of the &lt;code&gt;dell-csi-operator&lt;/code&gt; which was available with the name &lt;em&gt;CSI Operator&lt;/em&gt;, please refer to this &lt;a href=&#34;#replacing-csi-operator-with-dell-csi-operator&#34;&gt;section&lt;/a&gt; before continuing.&lt;/p&gt;
 &lt;h3 id=&#34;full-list-of-csi-drivers-and-versions-supported-by-the-dell-csi-operator&#34;&gt;Full list of CSI Drivers and versions supported by the Dell CSI Operator&lt;/h3&gt;
 &lt;table&gt;
 &lt;thead&gt;
@@ -226,11 +226,11 @@ The installation process involves the creation of a &lt;code&gt;Subscription&lt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl create configmap dell-csi-operator-config --from-file config.tar.gz -n &amp;lt;operator-namespace&amp;gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id=&#34;upstream-kubernetes&#34;&gt;Upstream Kubernetes&lt;/h5&gt;
 &lt;ul&gt;
-&lt;li&gt;For installing via OperatorHub.io on Kubernetes, go to the &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v1/csidriver/partners/operator/&#34;&gt;OperatorHub page&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;For installing via OperatorHub.io on Kubernetes, go to the &lt;a href=&#34;../../partners/operator/&#34;&gt;OperatorHub page&lt;/a&gt;.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h5 id=&#34;red-hat-openshift-clusters&#34;&gt;Red Hat OpenShift Clusters&lt;/h5&gt;
 &lt;ul&gt;
-&lt;li&gt;For installing via OpenShift with the Operator, go to the &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v1/csidriver/partners/redhat/&#34;&gt;OpenShift page&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;For installing via OpenShift with the Operator, go to the &lt;a href=&#34;../../partners/redhat/&#34;&gt;OpenShift page&lt;/a&gt;.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;manual-installation&#34;&gt;Manual Installation&lt;/h3&gt;
 &lt;h4 id=&#34;steps&#34;&gt;Steps&lt;/h4&gt;
@@ -368,9 +368,9 @@ These files follow the naming convention&lt;/p&gt;
 &lt;li&gt;samples/powermax_v270_k8s_127.yaml* &amp;lt;- To install CSI PowerMax driver v2.7.0 on a Kubernetes 1.27 cluster&lt;/li&gt;
 &lt;li&gt;samples/powermax_v270_ops_412.yaml* &amp;lt;- To install CSI PowerMax driver v2.7.0 on an OpenShift 4.12 cluster&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;Copy the correct sample file and edit the mandatory &amp;amp; any optional parameters specific to your driver installation by following the instructions &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v1/csidriver/installation/operator/#modify-the-driver-specification&#34;&gt;here&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Copy the correct sample file and edit the mandatory &amp;amp; any optional parameters specific to your driver installation by following the instructions &lt;a href=&#34;#modify-the-driver-specification&#34;&gt;here&lt;/a&gt;&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;NOTE: A detailed explanation of the various mandatory and optional fields in the CustomResource is available &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v1/csidriver/installation/operator/#custom-resource-specification&#34;&gt;here&lt;/a&gt;. Please make sure to read through and understand the various fields.&lt;/p&gt;
+&lt;p&gt;NOTE: A detailed explanation of the various mandatory and optional fields in the CustomResource is available &lt;a href=&#34;#custom-resource-specification&#34;&gt;here&lt;/a&gt;. Please make sure to read through and understand the various fields.&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;Run the following command to install the CSI driver.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl create -f &amp;lt;driver-manifest.yaml&amp;gt;
@@ -390,7 +390,7 @@ You can edit these manifests and install the driver using the &lt;code&gt;Operat
 &lt;/ul&gt;
 &lt;p&gt;If the driver-namespace was set to &lt;em&gt;test-powermax&lt;/em&gt;, and the name of the driver is &lt;em&gt;powermax&lt;/em&gt;, then run the command &lt;code&gt;kubectl get csipowermax/powermax -n test-powermax -o yaml&lt;/code&gt; to get the details of the Custom Resource.&lt;/p&gt;
 &lt;p&gt;Note: If the &lt;em&gt;state&lt;/em&gt; of the &lt;code&gt;CustomResource&lt;/code&gt; is &lt;em&gt;Running&lt;/em&gt; then all the driver pods have been successfully installed. If the &lt;em&gt;state&lt;/em&gt; is &lt;em&gt;SuccessFul&lt;/em&gt;, then it means the driver deployment was successful but some driver pods may not be in a &lt;em&gt;Running&lt;/em&gt; state.
-Please refer to the &lt;em&gt;Troubleshooting&lt;/em&gt; section &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v1/csidriver/troubleshooting/operator/&#34;&gt;here&lt;/a&gt; if you encounter any issues during installation.&lt;/p&gt;
+Please refer to the &lt;em&gt;Troubleshooting&lt;/em&gt; section &lt;a href=&#34;../../troubleshooting/operator&#34;&gt;here&lt;/a&gt; if you encounter any issues during installation.&lt;/p&gt;
 &lt;h2 id=&#34;update-csi-drivers&#34;&gt;Update CSI Drivers&lt;/h2&gt;
 &lt;p&gt;The CSI Drivers installed by the Dell CSI Operator can be updated like any Kubernetes resource. This can be achieved in various ways which include –&lt;/p&gt;
 &lt;ul&gt;
@@ -503,7 +503,7 @@ i. Add controller and node section as below:
 &lt;p&gt;The specification for the Custom Resource is the same for all the drivers.&lt;br&gt;
 Below is a list of all the mandatory and optional fields in the Custom Resource specification&lt;/p&gt;
 &lt;h3 id=&#34;mandatory-fields&#34;&gt;Mandatory fields&lt;/h3&gt;
-&lt;p&gt;&lt;strong&gt;configVersion&lt;/strong&gt; - Configuration version  - Refer full list of supported driver for finding out the appropriate config version &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v1/csidriver/installation/operator/#full-list-of-csi-drivers-and-versions-supported-by-the-dell-csi-operator&#34;&gt;here&lt;/a&gt;               &lt;br&gt;
+&lt;p&gt;&lt;strong&gt;configVersion&lt;/strong&gt; - Configuration version  - Refer full list of supported driver for finding out the appropriate config version &lt;a href=&#34;#full-list-of-csi-drivers-and-versions-supported-by-the-dell-csi-operator&#34;&gt;here&lt;/a&gt;               &lt;br&gt;
 &lt;strong&gt;replicas&lt;/strong&gt;  - Number of replicas for controller plugin - Must be set to 1 for all drivers&lt;br&gt;
 &lt;strong&gt;dnsPolicy&lt;/strong&gt; - Determines the dnsPolicy for the node daemonset. Accepted values are &lt;code&gt;Default&lt;/code&gt;, &lt;code&gt;ClusterFirst&lt;/code&gt;, &lt;code&gt;ClusterFirstWithHostNet&lt;/code&gt;, &lt;code&gt;None&lt;/code&gt;
 &lt;strong&gt;common&lt;/strong&gt;&lt;br&gt;
@@ -848,7 +848,7 @@ dell-csi-operator-bundle/README.md
 *
 * Complete
 &lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;perform-either-a-helm-installation-or-operator-installation&#34;&gt;Perform either a Helm installation or Operator installation&lt;/h3&gt;
-&lt;p&gt;Now that the required images are available and the Helm Charts/Operator configuration updated, you can proceed by following the usual installation procedure as documented either via &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v1/csidriver/installation/helm/&#34;&gt;Helm&lt;/a&gt; or &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v1/csidriver/installation/operator/#manual-installation&#34;&gt;Operator&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Now that the required images are available and the Helm Charts/Operator configuration updated, you can proceed by following the usual installation procedure as documented either via &lt;a href=&#34;../helm&#34;&gt;Helm&lt;/a&gt; or &lt;a href=&#34;../operator/#manual-installation&#34;&gt;Operator&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;NOTES:&lt;/em&gt;&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;Offline bundle installation is only supported with manual installs i.e. without using Operator Lifecycle Manager.&lt;/li&gt;
