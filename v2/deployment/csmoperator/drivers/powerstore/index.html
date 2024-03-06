@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="generator" content="Hugo 0.123.7">
+<meta name="generator" content="Hugo 0.120.3">
 <meta name="robots" content="index, follow">
 
 <link rel="shortcut icon" href="/favicons/favicon.ico" >
@@ -25,7 +25,8 @@
 ">
 <meta itemprop="dateModified" content="2023-12-13T23:10:42+05:30" />
 <meta itemprop="wordCount" content="734">
-<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/><meta name="twitter:title" content="PowerStore"/>
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="PowerStore"/>
 <meta name="twitter:description" content="Installing Dell CSI Driver for PowerStore via Dell CSM Operator
 "/>
 
@@ -106,7 +107,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.2f82b3957db346265e459b28dfe2d4c7.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.4b03eb415a4b7ce6c5b813326b279dbc.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -128,7 +129,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.2f82b3957db346265e459b28dfe2d4c7.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.4b03eb415a4b7ce6c5b813326b279dbc.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -147,9 +148,7 @@
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-csm-docsv2deploymentcsminstallationwizard-li">
   <a href="/csm-docs/v2/deployment/csminstallationwizard/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv2deploymentcsminstallationwizard"><span class="">CSM Installation Wizard</span></a>
   <ul class="ul-3 foldable">
-    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2deploymentcsminstallationwizardsrc-li">
-  <a href="/csm-docs/v2/deployment/csminstallationwizard/src/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2deploymentcsminstallationwizardsrc"><span class=""></span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2deploymentcsminstallationwizardrelease_notes-li">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2deploymentcsminstallationwizardrelease_notes-li">
   <a href="/csm-docs/v2/deployment/csminstallationwizard/release_notes/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2deploymentcsminstallationwizardrelease_notes"><span class="">Release Notes</span></a>
 </li>
   </ul>
@@ -627,6 +626,22 @@
             
 
 	
+		
+
+
+
+  
+  
+
+	
+		
+
+
+
+  
+  
+
+	
 
           </aside>
           <main class="col-12 col-md-9 col-xl-8 pl-md-5" role="main">
@@ -659,7 +674,7 @@
 	       
 	<h2 id="installing-csi-driver-for-powerstore-via-dell-csm-operator">Installing CSI Driver for PowerStore via Dell CSM Operator</h2>
 <p>The CSI Driver for Dell PowerStore can be installed via the Dell CSM Operator.
-To deploy the Operator, follow the instructions available <a href="/csm-docs/v2/deployment/#installation">here</a>.</p>
+To deploy the Operator, follow the instructions available <a href="../../#installation">here</a>.</p>
 <p>Note that the deployment of the driver using the operator does not use any Helm charts and the installation and configuration parameters will be slightly different from the one specified via the Helm installer.</p>
 <h3 id="listing-installed-drivers-with-the-containerstoragemodule-crd">Listing installed drivers with the ContainerStorageModule CRD</h3>
 <p>User can query for all Dell CSI drivers using the following command:</p>
@@ -707,7 +722,7 @@ Add more blocks similar to above for each PowerStore array if necessary.</p>
 <h3 id="install-driver">Install Driver</h3>
 <ol>
 <li>
-<p>Follow all the <a href="/csm-docs/v2/deployment/csmoperator/drivers/powerstore/#prerequisite">prerequisites</a> above</p>
+<p>Follow all the <a href="#prerequisite">prerequisites</a> above</p>
 </li>
 <li>
 <p>Create a CR (Custom Resource) for PowerStore using the sample files provided
@@ -812,7 +827,7 @@ Add more blocks similar to above for each PowerStore array if necessary.</p>
 </span></span></code></pre></div></li>
 </ul>
 <ol start="5">
-<li><a href="/csm-docs/v2/deployment/csmoperator/#verifying-the-driver-installation">Verify the CSI Driver installation</a></li>
+<li><a href="../#verifying-the-driver-installation">Verify the CSI Driver installation</a></li>
 </ol>
 <p><strong>Note</strong> :</p>
 <ol>

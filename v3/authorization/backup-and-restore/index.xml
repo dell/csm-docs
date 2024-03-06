@@ -66,7 +66,7 @@ deployment.apps/proxy-server restarted
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;kubectl -n &amp;lt;authorization-namespace&amp;gt; rollout restart deploy/proxy-server
 deployment.apps/proxy-server restarted
 &lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;tenants-quota-and-volume-ownership&#34;&gt;Tenants, Quota, and Volume ownership&lt;/h2&gt;
-&lt;p&gt;Redis is used to store application data regarding &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v3/authorization/design/#quota--volume-ownership&#34;&gt;tenants, quota, and volume ownership&lt;/a&gt; with the Storage Class specified in the &lt;code&gt;redis.storageClass&lt;/code&gt; parameter in the values file, or with the default Storage Class if that parameter was not specified.&lt;/p&gt;
+&lt;p&gt;Redis is used to store application data regarding &lt;a href=&#34;../../design#quota--volume-ownership&#34;&gt;tenants, quota, and volume ownership&lt;/a&gt; with the Storage Class specified in the &lt;code&gt;redis.storageClass&lt;/code&gt; parameter in the values file, or with the default Storage Class if that parameter was not specified.&lt;/p&gt;
 &lt;p&gt;The Persistent Volume for Redis is dynamically provisioned by this Storage Class with the &lt;code&gt;redis-primary-pv-claim&lt;/code&gt; Persistent Volume Claim. See the example.&lt;/p&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;kubectl get persistentvolume
 NAME                CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS     CLAIM                                      STORAGECLASS    REASON   AGE
@@ -154,7 +154,7 @@ deployment.apps/proxy-server restarted
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;k3s kubectl -n karavi rollout restart deploy/proxy-server
 deployment.apps/proxy-server restarted
 &lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;tenants-quota-and-volume-ownership&#34;&gt;Tenants, Quota, and Volume ownership&lt;/h2&gt;
-&lt;p&gt;Redis is used to store application data regarding &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v3/authorization/design/#quota--volume-ownership&#34;&gt;tenants, quota, and volume ownership&lt;/a&gt;. This data is stored on the system under &lt;code&gt;/var/lib/rancher/k3s/storage/&amp;lt;redis-primary-pv-claim-volume-name&amp;gt;/appendonly.aof&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Redis is used to store application data regarding &lt;a href=&#34;../../design#quota--volume-ownership&#34;&gt;tenants, quota, and volume ownership&lt;/a&gt;. This data is stored on the system under &lt;code&gt;/var/lib/rancher/k3s/storage/&amp;lt;redis-primary-pv-claim-volume-name&amp;gt;/appendonly.aof&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;appendonly.aof&lt;/code&gt; can be copied and used to restore this appliation data in Authorization deployments. See the example.&lt;/p&gt;
 &lt;h3 id=&#34;steps-to-execute-in-the-existing-authorization-deployment-2&#34;&gt;Steps to execute in the existing Authorization deployment&lt;/h3&gt;
 &lt;ol&gt;

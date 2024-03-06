@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="generator" content="Hugo 0.123.7">
+<meta name="generator" content="Hugo 0.120.3">
 <link rel="alternate" type="application/rss&#43;xml" href="https://dell.github.io/csm-docs/v2/applicationmobility/index.xml">
 <meta name="robots" content="index, follow">
 
@@ -21,7 +21,8 @@
 
 <meta itemprop="name" content="Application Mobility">
 <meta itemprop="description" content="Application Mobility
-"><meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Application Mobility"/>
+"><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Application Mobility"/>
 <meta name="twitter:description" content="Application Mobility
 "/>
 
@@ -102,7 +103,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.2f82b3957db346265e459b28dfe2d4c7.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.4b03eb415a4b7ce6c5b813326b279dbc.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -124,7 +125,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.2f82b3957db346265e459b28dfe2d4c7.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.4b03eb415a4b7ce6c5b813326b279dbc.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -143,9 +144,7 @@
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv2deploymentcsminstallationwizard-li">
   <a href="/csm-docs/v2/deployment/csminstallationwizard/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv2deploymentcsminstallationwizard"><span class="">CSM Installation Wizard</span></a>
   <ul class="ul-3 foldable">
-    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2deploymentcsminstallationwizardsrc-li">
-  <a href="/csm-docs/v2/deployment/csminstallationwizard/src/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2deploymentcsminstallationwizardsrc"><span class=""></span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2deploymentcsminstallationwizardrelease_notes-li">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2deploymentcsminstallationwizardrelease_notes-li">
   <a href="/csm-docs/v2/deployment/csminstallationwizard/release_notes/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2deploymentcsminstallationwizardrelease_notes"><span class="">Release Notes</span></a>
 </li>
   </ul>
@@ -617,6 +616,22 @@
             
 
 	
+		
+
+
+
+  
+  
+
+	
+		
+
+
+
+  
+  
+
+	
 
           </aside>
           <main class="col-12 col-md-9 col-xl-8 pl-md-5" role="main">
@@ -641,6 +656,14 @@
 		
 
   
+    
+
+
+  
+    
+
+
+  
 
 		
 	</header>
@@ -651,14 +674,14 @@
 </blockquote>
 <blockquote>
 <blockquote>
-<p>NOTE: Application Mobility requires a time-based license. See <a href="/csm-docs/v2/applicationmobility/deployment/">Deployment</a> for instructions.</p>
+<p>NOTE: Application Mobility requires a time-based license. See <a href="./deployment">Deployment</a> for instructions.</p>
 </blockquote>
 </blockquote>
 <p>Container Storage Modules for Application Mobility provide Kubernetes administrators the ability to clone their stateful application workloads and application data to other clusters, either on-premise or in the cloud.</p>
 <p>Application Mobility uses <a href="https://velero.io">Velero</a> and its integration of <a href="https://restic.net">Restic</a> to copy both application metadata and data to object storage. When a backup is requested, Application Mobility uses these options to determine how the application data is backed up:</p>
 <ul>
-<li>If <a href="/csm-docs/v2/snapshots/volume-group-snapshots/">Volume Group Snapshots</a> are enabled on the CSI driver backing the application&rsquo;s Persistent Volumes, crash consistent snapshots of all volumes are used for the backup.</li>
-<li>If <a href="/csm-docs/v2/snapshots/">Volume Snapshots</a> are enabled on the Kubernetes cluster and supported by the CSI driver, individual snapshots are used for each Persistent Volume used by the application.</li>
+<li>If <a href="../snapshots/volume-group-snapshots/">Volume Group Snapshots</a> are enabled on the CSI driver backing the application&rsquo;s Persistent Volumes, crash consistent snapshots of all volumes are used for the backup.</li>
+<li>If <a href="../snapshots/">Volume Snapshots</a> are enabled on the Kubernetes cluster and supported by the CSI driver, individual snapshots are used for each Persistent Volume used by the application.</li>
 <li>If no snapshot options are enabled, default to using full copies of each Persistent Volume used by the application.</li>
 </ul>
 <p>After a backup has been created, it can be restored on the same Kubernetes cluster or any other cluster(s) if this criteria is met:</p>

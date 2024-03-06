@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="generator" content="Hugo 0.123.7">
+<meta name="generator" content="Hugo 0.120.3">
 <link rel="alternate" type="application/rss&#43;xml" href="https://dell.github.io/csm-docs/v2/deployment/csmoperator/index.xml">
 <meta name="robots" content="index, follow">
 
@@ -18,7 +18,8 @@
 <meta property="og:url" content="https://dell.github.io/csm-docs/v2/deployment/csmoperator/" />
 
 <meta itemprop="name" content="CSM Operator">
-<meta itemprop="description" content="Container Storage Modules Operator"><meta name="twitter:card" content="summary"/><meta name="twitter:title" content="CSM Operator"/>
+<meta itemprop="description" content="Container Storage Modules Operator"><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="CSM Operator"/>
 <meta name="twitter:description" content="Container Storage Modules Operator"/>
 
 
@@ -98,7 +99,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.2f82b3957db346265e459b28dfe2d4c7.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.4b03eb415a4b7ce6c5b813326b279dbc.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -120,7 +121,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.2f82b3957db346265e459b28dfe2d4c7.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.4b03eb415a4b7ce6c5b813326b279dbc.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -139,9 +140,7 @@
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-csm-docsv2deploymentcsminstallationwizard-li">
   <a href="/csm-docs/v2/deployment/csminstallationwizard/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv2deploymentcsminstallationwizard"><span class="">CSM Installation Wizard</span></a>
   <ul class="ul-3 foldable">
-    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2deploymentcsminstallationwizardsrc-li">
-  <a href="/csm-docs/v2/deployment/csminstallationwizard/src/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2deploymentcsminstallationwizardsrc"><span class=""></span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2deploymentcsminstallationwizardrelease_notes-li">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2deploymentcsminstallationwizardrelease_notes-li">
   <a href="/csm-docs/v2/deployment/csminstallationwizard/release_notes/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2deploymentcsminstallationwizardrelease_notes"><span class="">Release Notes</span></a>
 </li>
   </ul>
@@ -635,6 +634,22 @@
             
 
 	
+		
+
+
+
+  
+  
+
+	
+		
+
+
+
+  
+  
+
+	
 
           </aside>
           <main class="col-12 col-md-9 col-xl-8 pl-md-5" role="main">
@@ -660,6 +675,14 @@
   <div class="lead">Container Storage Modules Operator</div>
 	<header class="article-meta">
 		
+
+  
+    
+
+
+  
+    
+
 
   
 
@@ -799,7 +822,7 @@
 </blockquote>
 <h2 id="installation">Installation</h2>
 <p>Dell CSM Operator can be installed manually or via Operator Hub.</p>
-<p>Once installed you will be able to deploy <a href="/csm-docs/v2/deployment/csmoperator/drivers/">drivers</a> and <a href="/csm-docs/v2/deployment/csmoperator/modules/">modules</a> from the Operator.</p>
+<p>Once installed you will be able to deploy <a href="drivers">drivers</a> and <a href="modules">modules</a> from the Operator.</p>
 <h3 id="openshift-installation-via-operator-hub">OpenShift Installation via Operator Hub</h3>
 <p><code>dell-csm-operator</code> can be installed via Operator Hub on upstream Kubernetes clusters &amp; Red Hat OpenShift Clusters.</p>
 <p>The installation process involves the creation of a <code>Subscription</code> object either via the <em>OperatorHub</em> UI or using <code>kubectl/oc</code>. While creating the <code>Subscription</code> you can set the Approval strategy for the <code>InstallPlan</code> for the operator to:</p>
@@ -807,7 +830,7 @@
 <li><em>Automatic</em> - If you want the operator to be automatically installed or upgraded (once an upgrade is available).</li>
 <li><em>Manual</em> - If you want a cluster administrator to manually review and approve the <code>InstallPlan</code> for installation/upgrades.</li>
 </ul>
-<p><img alt="OpenShit Operator Hub CSM install" src="/csm-docs/v2/deployment/csmoperator/operator_hub_install.gif"></p>
+<p><img src="operator_hub_install.gif" alt="OpenShit Operator Hub CSM install"></p>
 <blockquote>
 <p>NOTE: Dell CSM Operator is distributed as a <code>Certified</code> &amp; <code>Community</code> versions. Both are the exact same code and supported by Dell Technologies, the only difference is that the <code>Certified</code> version is validated by RedHat. The <code>Certified</code> version often release couple of days/weeks after the <code>Community</code> version.</p>
 </blockquote>
@@ -932,7 +955,7 @@ The following notes explain some of the general items to take care of.</li>
 <p>Each CSI Driver and CSM Module installation is represented by a Custom Resource.</p>
 <p>The specification for the Custom Resource is the same for all the drivers.Below is a list of all the mandatory and optional fields in the Custom Resource specification</p>
 <h4 id="mandatory-fields">Mandatory fields</h4>
-<p><strong>configVersion</strong> - Configuration version - refer <a href="/csm-docs/v2/deployment/csmoperator/#supported-csi-drivers">here</a> for appropriate config version.</p>
+<p><strong>configVersion</strong> - Configuration version - refer <a href="#supported-csi-drivers">here</a> for appropriate config version.</p>
 <p><strong>replicas</strong>  - Number of replicas for controller plugin - must be set to 1 for all drivers.</p>
 <p><strong>dnsPolicy</strong> - Determines the dnsPolicy for the node daemonset. Accepted values are <code>Default</code>, <code>ClusterFirst</code>, <code>ClusterFirstWithHostNet</code>, <code>None</code>.</p>
 <p><strong>common</strong> - This field is mandatory and is used to specify common properties for both controller and the node plugin.</p>

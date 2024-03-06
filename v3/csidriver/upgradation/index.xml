@@ -114,7 +114,7 @@ Spec:
 &lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; CSI Driver for Powermax v2.4.0 requires 10.0 REST endpoint support of Unisphere.&lt;/p&gt;
 &lt;h3 id=&#34;updating-the-csi-driver-to-use-100-unisphere&#34;&gt;Updating the CSI Driver to use 10.0 Unisphere&lt;/h3&gt;
 &lt;ol&gt;
-&lt;li&gt;Upgrade the Unisphere to have 10.0 endpoint support.Please find the instructions &lt;a href=&#34;https://dl.dell.com/content/manual34878027-dell-unisphere-for-powermax-10-0-0-installation-guide.pdf?language=en-us&amp;ps=true&#34;&gt;here.&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Upgrade the Unisphere to have 10.0 endpoint support.Please find the instructions &lt;a href=&#34;https://dl.dell.com/content/manual34878027-dell-unisphere-for-powermax-10-0-0-installation-guide.pdf?language=en-us&amp;amp;ps=true&#34;&gt;here.&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;Update the &lt;code&gt;my-powermax-settings.yaml&lt;/code&gt; to have endpoint with 10.0 support.&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h2 id=&#34;update-driver-from-v25-to-v26-using-helm&#34;&gt;Update Driver from v2.5 to v2.6 using Helm&lt;/h2&gt;

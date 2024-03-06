@@ -32,7 +32,7 @@
 
 &lt;h2 id=&#34;install-csm-authorization-via-dell-csm-operator&#34;&gt;Install CSM Authorization via Dell CSM Operator&lt;/h2&gt;
 &lt;p&gt;The CSM Authorization module for supported Dell CSI Drivers can be installed via the Dell CSM Operator.
-To deploy the Operator, follow the instructions available &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v3/deployment/#installation&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+To deploy the Operator, follow the instructions available &lt;a href=&#34;../../#installation&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
 &lt;h3 id=&#34;prerequisite&#34;&gt;Prerequisite&lt;/h3&gt;
 &lt;ol&gt;
 &lt;li&gt;
@@ -159,7 +159,7 @@ To deploy the Operator, follow the instructions available &lt;a href=&#34;https:
 &lt;h3 id=&#34;install-csm-authorization-proxy-server&#34;&gt;Install CSM Authorization Proxy Server&lt;/h3&gt;
 &lt;ol&gt;
 &lt;li&gt;
-&lt;p&gt;Follow all the &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v3/deployment/csmoperator/modules/authorization/#prerequisite&#34;&gt;prerequisites&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Follow all the &lt;a href=&#34;#prerequisite&#34;&gt;prerequisites&lt;/a&gt;.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Create a CR (Custom Resource) for Authorization using the sample file provided &lt;a href=&#34;https://github.com/dell/csm-operator/blob/main/samples/authorization/csm_authorization_proxy_server_v190.yaml&#34;&gt;here&lt;/a&gt;. This file can be modified to use custom parameters if needed.&lt;/p&gt;

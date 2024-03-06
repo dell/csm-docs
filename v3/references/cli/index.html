@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="generator" content="Hugo 0.123.7">
+<meta name="generator" content="Hugo 0.120.3">
 <link rel="alternate" type="application/rss&#43;xml" href="https://dell.github.io/csm-docs/v3/references/cli/index.xml">
 <meta name="robots" content="index, follow">
 
@@ -21,7 +21,8 @@
 
 <meta itemprop="name" content="CLI">
 <meta itemprop="description" content="CLI for Dell Container Storage Modules (CSM)
-"><meta name="twitter:card" content="summary"/><meta name="twitter:title" content="CLI"/>
+"><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="CLI"/>
 <meta name="twitter:description" content="CLI for Dell Container Storage Modules (CSM)
 "/>
 
@@ -102,7 +103,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.2f82b3957db346265e459b28dfe2d4c7.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.4b03eb415a4b7ce6c5b813326b279dbc.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -124,7 +125,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.2f82b3957db346265e459b28dfe2d4c7.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.4b03eb415a4b7ce6c5b813326b279dbc.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -140,13 +141,8 @@
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-csm-docsv3deployment-li">
   <a href="/csm-docs/v3/deployment/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3deployment"><span class="">Deployment</span></a>
   <ul class="ul-2 foldable">
-    <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv3deploymentcsminstallationwizard-li">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3deploymentcsminstallationwizard-li">
   <a href="/csm-docs/v3/deployment/csminstallationwizard/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3deploymentcsminstallationwizard"><span class="">CSM Installation Wizard</span></a>
-  <ul class="ul-3 foldable">
-    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3deploymentcsminstallationwizardsrc-li">
-  <a href="/csm-docs/v3/deployment/csminstallationwizard/src/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3deploymentcsminstallationwizardsrc"><span class=""></span></a>
-</li>
-  </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv3deploymentcsmoperator-li">
   <a href="/csm-docs/v3/deployment/csmoperator/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3deploymentcsmoperator"><span class="">CSM Operator</span></a>
   <ul class="ul-3 foldable">
@@ -636,6 +632,22 @@
             
 
 	
+		
+
+
+
+  
+  
+
+	
+		
+
+
+
+  
+  
+
+	
 
           </aside>
           <main class="col-12 col-md-9 col-xl-8 pl-md-5" role="main">
@@ -663,6 +675,14 @@
 		
 
   
+    
+
+
+  
+    
+
+
+  
 
 		
 	</header>
@@ -677,91 +697,91 @@ This document outlines all dellctl commands, their intended use, options that ca
 </thead>
 <tbody>
 <tr>
-<td><a href="/csm-docs/v3/references/cli/#dellctl">dellctl</a></td>
+<td><a href="#dellctl">dellctl</a></td>
 <td>dellctl is used to interact with Container Storage Modules</td>
 </tr>
 <tr>
-<td><a href="/csm-docs/v3/references/cli/#dellctl-cluster">dellctl cluster</a></td>
+<td><a href="#dellctl-cluster">dellctl cluster</a></td>
 <td>Manipulate one or more k8s cluster configurations</td>
 </tr>
 <tr>
-<td><a href="/csm-docs/v3/references/cli/#dellctl-cluster-add">dellctl cluster add</a></td>
+<td><a href="#dellctl-cluster-add">dellctl cluster add</a></td>
 <td>Add a k8s cluster to be managed by dellctl</td>
 </tr>
 <tr>
-<td><a href="/csm-docs/v3/references/cli/#dellctl-cluster-remove">dellctl cluster remove</a></td>
+<td><a href="#dellctl-cluster-remove">dellctl cluster remove</a></td>
 <td>Removes a k8s cluster managed by dellctl</td>
 </tr>
 <tr>
-<td><a href="/csm-docs/v3/references/cli/#dellctl-cluster-get">dellctl cluster get</a></td>
+<td><a href="#dellctl-cluster-get">dellctl cluster get</a></td>
 <td>List all clusters currently being managed by dellctl</td>
 </tr>
 <tr>
-<td><a href="/csm-docs/v3/references/cli/#dellctl-backup">dellctl backup</a></td>
+<td><a href="#dellctl-backup">dellctl backup</a></td>
 <td>Allows you to manipulate application backups/clones</td>
 </tr>
 <tr>
-<td><a href="/csm-docs/v3/references/cli/#dellctl-backup-create">dellctl backup create</a></td>
+<td><a href="#dellctl-backup-create">dellctl backup create</a></td>
 <td>Create an application backup/clones</td>
 </tr>
 <tr>
-<td><a href="/csm-docs/v3/references/cli/#dellctl-backup-delete">dellctl backup delete</a></td>
+<td><a href="#dellctl-backup-delete">dellctl backup delete</a></td>
 <td>Delete application backups</td>
 </tr>
 <tr>
-<td><a href="/csm-docs/v3/references/cli/#dellctl-backup-get">dellctl backup get</a></td>
+<td><a href="#dellctl-backup-get">dellctl backup get</a></td>
 <td>Get application backups</td>
 </tr>
 <tr>
-<td><a href="/csm-docs/v3/references/cli/#dellctl-restore">dellctl restore</a></td>
+<td><a href="#dellctl-restore">dellctl restore</a></td>
 <td>Allows you to manipulate application restores</td>
 </tr>
 <tr>
-<td><a href="/csm-docs/v3/references/cli/#dellctl-restore-create">dellctl restore create</a></td>
+<td><a href="#dellctl-restore-create">dellctl restore create</a></td>
 <td>Restore an application backup</td>
 </tr>
 <tr>
-<td><a href="/csm-docs/v3/references/cli/#dellctl-restore-delete">dellctl restore delete</a></td>
+<td><a href="#dellctl-restore-delete">dellctl restore delete</a></td>
 <td>Delete application restores</td>
 </tr>
 <tr>
-<td><a href="/csm-docs/v3/references/cli/#dellctl-restore-get">dellctl restore get</a></td>
+<td><a href="#dellctl-restore-get">dellctl restore get</a></td>
 <td>Get application restores</td>
 </tr>
 <tr>
-<td><a href="/csm-docs/v3/references/cli/#dellctl-schedule">dellctl schedule</a></td>
+<td><a href="#dellctl-schedule">dellctl schedule</a></td>
 <td>Allows you to manipulate schedules</td>
 </tr>
 <tr>
-<td><a href="/csm-docs/v3/references/cli/#dellctl-schedule-create">dellctl schedule create</a></td>
+<td><a href="#dellctl-schedule-create">dellctl schedule create</a></td>
 <td>Create a schedule</td>
 </tr>
 <tr>
-<td><a href="/csm-docs/v3/references/cli/#dellctl-schedule-create-for-backup">dellctl schedule create for-backup</a></td>
+<td><a href="#dellctl-schedule-create-for-backup">dellctl schedule create for-backup</a></td>
 <td>Create a schedule for application backups</td>
 </tr>
 <tr>
-<td><a href="/csm-docs/v3/references/cli/#dellctl-schedule-delete">dellctl schedule delete</a></td>
+<td><a href="#dellctl-schedule-delete">dellctl schedule delete</a></td>
 <td>Delete schedules</td>
 </tr>
 <tr>
-<td><a href="/csm-docs/v3/references/cli/#dellctl-schedule-get">dellctl schedule get</a></td>
+<td><a href="#dellctl-schedule-get">dellctl schedule get</a></td>
 <td>Get schedules</td>
 </tr>
 <tr>
-<td><a href="/csm-docs/v3/references/cli/#dellctl-encryption-rekey">dellctl encryption rekey</a></td>
+<td><a href="#dellctl-encryption-rekey">dellctl encryption rekey</a></td>
 <td>Rekey an encrypted volume</td>
 </tr>
 <tr>
-<td><a href="/csm-docs/v3/references/cli/#dellctl-encryption-rekey-status">dellctl encryption rekey-status</a></td>
+<td><a href="#dellctl-encryption-rekey-status">dellctl encryption rekey-status</a></td>
 <td>Get status of an encryption rekey operation</td>
 </tr>
 <tr>
-<td><a href="/csm-docs/v3/references/cli/#dellctl-images">dellctl images</a></td>
+<td><a href="#dellctl-images">dellctl images</a></td>
 <td>List the container images needed by csi driver</td>
 </tr>
 <tr>
-<td><a href="/csm-docs/v3/references/cli/#dellctl-volume-get">dellctl volume get</a></td>
+<td><a href="#dellctl-volume-get">dellctl volume get</a></td>
 <td>Gets PowerFlex volume infomation for a given tenant on a local cluster</td>
 </tr>
 </tbody>

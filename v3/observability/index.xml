@@ -44,11 +44,11 @@
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;deployment-architectures&#34;&gt;Deployment Architectures&lt;/h2&gt;
-&lt;p&gt;CSM for Observability can be deployed to either direct storage system requests directly to the storage system or through the &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v3/authorization/&#34;&gt;CSM for Authorization&lt;/a&gt; proxy.  The CSI driver must be configured to route storage system requests through the CSM for Authorization proxy in order for CSM for Observability to do the same.&lt;/p&gt;
+&lt;p&gt;CSM for Observability can be deployed to either direct storage system requests directly to the storage system or through the &lt;a href=&#34;../../authorization&#34;&gt;CSM for Authorization&lt;/a&gt; proxy.  The CSI driver must be configured to route storage system requests through the CSM for Authorization proxy in order for CSM for Observability to do the same.&lt;/p&gt;
 &lt;h3 id=&#34;default-deployment-of-csm-for-observability&#34;&gt;Default Deployment of CSM for Observability&lt;/h3&gt;
-&lt;p&gt;&lt;img alt=&#34;Default Deployment&#34; src=&#34;../obs_architecture1.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../obs_architecture1.png&#34; alt=&#34;Default Deployment&#34;&gt;&lt;/p&gt;
 &lt;h3 id=&#34;deployment-of-csm-for-observability-with-csm-for-authorization&#34;&gt;Deployment of CSM for Observability with CSM for Authorization&lt;/h3&gt;
-&lt;p&gt;&lt;img alt=&#34;CSM for Observability with CSM for Authorization&#34; src=&#34;../obs_architecture2.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../obs_architecture2.png&#34; alt=&#34;CSM for Observability with CSM for Authorization&#34;&gt;&lt;/p&gt;
 
       </description>
     </item>
@@ -62,7 +62,7 @@
       <description>
         
         
-        &lt;p&gt;This section outlines the metrics collected by Container Storage Modules (CSM) for Observability in the areas of I/O Performance and Storage Capacity. All metrics are available from the OpenTelemetry collector endpoint. Please see the &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v3/observability/&#34;&gt;CSM for Observability&lt;/a&gt; for more information on deploying and configuring the OpenTelemetry collector.&lt;/p&gt;
+        &lt;p&gt;This section outlines the metrics collected by Container Storage Modules (CSM) for Observability in the areas of I/O Performance and Storage Capacity. All metrics are available from the OpenTelemetry collector endpoint. Please see the &lt;a href=&#34;../&#34;&gt;CSM for Observability&lt;/a&gt; for more information on deploying and configuring the OpenTelemetry collector.&lt;/p&gt;
 
       </description>
     </item>
@@ -78,16 +78,16 @@
         
         &lt;p&gt;CSM for Observability can be deployed in one of three ways:&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v3/observability/deployment/helm/&#34;&gt;Helm&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v3/observability/deployment/online/&#34;&gt;CSM for Observability Installer&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v3/observability/deployment/offline/&#34;&gt;CSM for Observability Offline Installer&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;./helm&#34;&gt;Helm&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;./online&#34;&gt;CSM for Observability Installer&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;./offline&#34;&gt;CSM for Observability Offline Installer&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;post-installation-dependencies&#34;&gt;Post Installation Dependencies&lt;/h2&gt;
 &lt;p&gt;The following third-party components are required in the same Kubernetes cluster where CSM for Observability has been deployed:&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v3/observability/deployment/#prometheus&#34;&gt;Prometheus&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v3/observability/deployment/#grafana&#34;&gt;Grafana&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v3/observability/deployment/#other-deployment-methods&#34;&gt;Other Deployment Methods&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#prometheus&#34;&gt;Prometheus&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#grafana&#34;&gt;Grafana&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#other-deployment-methods&#34;&gt;Other Deployment Methods&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;There are various ways to deploy these components. We recommend following the Helm deployments according to the specifications defined below.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Tip&lt;/strong&gt;: CSM for Observability must be deployed first. Once the module has been deployed, you can proceed to deploying/configuring Prometheus and Grafana.&lt;/p&gt;
@@ -545,7 +545,7 @@ helm repo update
 &lt;li&gt;
 &lt;p&gt;Add the Zipkin URI to the CSM for Observability ConfigMaps. Based on the manifest above, Zipkin will be running on port 9411.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: Zipkin tracing is currently not supported for the collection of PowerFlex metrics.&lt;/p&gt;
-&lt;p&gt;Update the ConfigMaps from the &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v3/observability/deployment/#dynamic-configuration&#34;&gt;table above&lt;/a&gt;. Here is an example updating the karavi-topology-configmap based on the deployment manifest above.&lt;/p&gt;
+&lt;p&gt;Update the ConfigMaps from the &lt;a href=&#34;#dynamic-configuration&#34;&gt;table above&lt;/a&gt;. Here is an example updating the karavi-topology-configmap based on the deployment manifest above.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-console&#34; data-lang=&#34;console&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;kubectl edit configmap/karavi-topology-configmap -n [CSM_NAMESPACE]
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Update the ZIPKIN_URI and ZIPKIN_PROBABILITY values and save the ConfigMap.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-console&#34; data-lang=&#34;console&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;ZIPKIN_URI: &amp;#34;http://zipkin:9411/api/v2/spans&amp;#34;
@@ -683,7 +683,7 @@ helm repo update
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Copy the configmap &lt;code&gt;powermax-reverseproxy-config&lt;/code&gt; from the CSI Driver for Dell PowerMax namespace to the CSM namespace.&lt;br&gt;
-&lt;strong&gt;Note:&lt;/strong&gt; Observability for PowerMax works only with &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v3/csidriver/installation/helm/powermax/#csi-powermax-driver-with-proxy-in-standalone-mode&#34;&gt;CSI PowerMax driver with Proxy in StandAlone mode&lt;/a&gt;.&lt;/p&gt;
+&lt;strong&gt;Note:&lt;/strong&gt; Observability for PowerMax works only with &lt;a href=&#34;../../csidriver/installation/helm/powermax/#csi-powermax-driver-with-proxy-in-standalone-mode&#34;&gt;CSI PowerMax driver with Proxy in StandAlone mode&lt;/a&gt;.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-console&#34; data-lang=&#34;console&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8f5902&#34;&gt;$&lt;/span&gt; kubectl get configmap powermax-reverseproxy-config -n &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;CSI_DRIVER_NAMESPACE&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt; -o yaml &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; sed &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;s/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; kubectl create -f -
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;If the CSI driver configmap name is not the default &lt;code&gt;powermax-reverseproxy-config&lt;/code&gt;, please use the following command to copy configmap:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-console&#34; data-lang=&#34;console&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8f5902&#34;&gt;$&lt;/span&gt; kubectl get configmap &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;POWERMAX-REVERSEPROXY-CONFIG&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt; -n &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;CSI_DRIVER_NAMESPACE&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt; -o yaml &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; sed &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;s/name: [POWERMAX-REVERSEPROXY-CONFIG]/name: powermax-reverseproxy-config/&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; sed &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;s/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; kubectl create -f -
@@ -739,7 +739,7 @@ helm repo update
 &lt;li&gt;Online Installer Upgrade&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;helm-chart-upgrade&#34;&gt;Helm Chart Upgrade&lt;/h2&gt;
-&lt;p&gt;CSM for Observability Helm upgrade supports &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v3/observability/deployment/helm/&#34;&gt;Helm&lt;/a&gt;, &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v3/observability/deployment/online/&#34;&gt;Online Installer&lt;/a&gt;, and &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v3/observability/deployment/offline/&#34;&gt;Offline Installer&lt;/a&gt; deployments.&lt;/p&gt;
+&lt;p&gt;CSM for Observability Helm upgrade supports &lt;a href=&#34;../deployment/helm&#34;&gt;Helm&lt;/a&gt;, &lt;a href=&#34;../deployment/online&#34;&gt;Online Installer&lt;/a&gt;, and &lt;a href=&#34;../deployment/offline&#34;&gt;Offline Installer&lt;/a&gt; deployments.&lt;/p&gt;
 &lt;p&gt;To upgrade an existing Helm installation of CSM for Observability to the latest release, download the latest Helm charts.&lt;/p&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;helm repo update
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Check if the latest Helm chart version is available:&lt;/p&gt;
@@ -747,7 +747,7 @@ helm repo update
 NAME                            CHART VERSION   APP VERSION     DESCRIPTION
 dell/karavi-observability       1.5.0           1.5.0           CSM for Observability is part of the [Container...
 &lt;/code&gt;&lt;/pre&gt;&lt;blockquote&gt;
-&lt;p&gt;Note: If using cert-manager CustomResourceDefinitions older than v1.5.3, delete the old CRDs and install v1.5.3 of the CRDs prior to upgrade. See &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v3/observability/deployment/helm/#prerequisites&#34;&gt;Prerequisites&lt;/a&gt; for location of CRDs.&lt;/p&gt;
+&lt;p&gt;Note: If using cert-manager CustomResourceDefinitions older than v1.5.3, delete the old CRDs and install v1.5.3 of the CRDs prior to upgrade. See &lt;a href=&#34;../deployment/helm#prerequisites&#34;&gt;Prerequisites&lt;/a&gt; for location of CRDs.&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;Upgrade to the latest CSM for Observability release:&lt;/p&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;Upgrade Helm and Online Installer deployments:
@@ -757,16 +757,16 @@ dell/karavi-observability       1.5.0           1.5.0           CSM for Observab
 Upgrade Offline Installer deployment:
 
   $ helm upgrade --version $latest_chart_version karavi-observability dell/karavi-observability -n $namespace
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;The &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v3/observability/deployment/helm/#configuration&#34;&gt;configuration&lt;/a&gt; section lists all the parameters that can be configured using the &lt;code&gt;values.yaml&lt;/code&gt; file.&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;The &lt;a href=&#34;../deployment/helm#configuration&#34;&gt;configuration&lt;/a&gt; section lists all the parameters that can be configured using the &lt;code&gt;values.yaml&lt;/code&gt; file.&lt;/p&gt;
 &lt;h2 id=&#34;online-installer-upgrade&#34;&gt;Online Installer Upgrade&lt;/h2&gt;
-&lt;p&gt;CSM for Observability online installer upgrade can be used if the initial deployment was performed using the &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v3/observability/deployment/online/&#34;&gt;Online Installer&lt;/a&gt; or &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v3/observability/deployment/helm/&#34;&gt;Helm&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;CSM for Observability online installer upgrade can be used if the initial deployment was performed using the &lt;a href=&#34;../deployment/online&#34;&gt;Online Installer&lt;/a&gt; or &lt;a href=&#34;../deployment/helm&#34;&gt;Helm&lt;/a&gt;.&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;
 &lt;p&gt;Change to the installer directory:&lt;/p&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;[user@system /home/user]# cd karavi-observability/installer
 &lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;Update &lt;code&gt;values.yaml&lt;/code&gt; file as needed. Configuration options are outlined in the &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v3/observability/deployment/helm/#configuration&#34;&gt;Helm chart deployment section&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Update &lt;code&gt;values.yaml&lt;/code&gt; file as needed. Configuration options are outlined in the &lt;a href=&#34;../deployment/helm#configuration&#34;&gt;Helm chart deployment section&lt;/a&gt;.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Execute the &lt;code&gt;./karavi-observability-install.sh&lt;/code&gt; script:&lt;/p&gt;
@@ -800,11 +800,11 @@ These instructions can be followed when a Helm chart was installed and will be u
 &lt;ol&gt;
 &lt;li&gt;
 &lt;p&gt;Build the Offline Bundle
-Follow &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v3/observability/deployment/offline/&#34;&gt;Offline Karavi Observability Helm Chart Installer&lt;/a&gt; to build the latest bundle.&lt;/p&gt;
+Follow &lt;a href=&#34;../deployment/offline&#34;&gt;Offline Karavi Observability Helm Chart Installer&lt;/a&gt; to build the latest bundle.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Unpack the Offline Bundle
-Follow &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v3/observability/deployment/offline/&#34;&gt;Offline Karavi Observability Helm Chart Installer&lt;/a&gt;, copy and unpack the Offline Bundle to another Linux system, and push Docker images to the internal Docker registry.&lt;/p&gt;
+Follow &lt;a href=&#34;../deployment/offline&#34;&gt;Offline Karavi Observability Helm Chart Installer&lt;/a&gt;, copy and unpack the Offline Bundle to another Linux system, and push Docker images to the internal Docker registry.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Perform Helm upgrade&lt;/p&gt;
@@ -819,14 +819,14 @@ Follow &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v3/observability
 &lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;(Optional) Enable Karavi Observability for PowerFlex/PowerScale to use an existing instance of Karavi Authorization for accessing the REST API for the given storage systems.&lt;br&gt;
-&lt;strong&gt;Note&lt;/strong&gt;: Assuming that if the Karavi Observability&amp;rsquo;s Authorization has been enabled in the phase of &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v3/observability/deployment/offline/&#34;&gt;Offline Karavi Observability Helm Chart Installer&lt;/a&gt;, the Authorization Secrets/Configmap have been copied to the Karavi Observability namespace.&lt;br&gt;
+&lt;strong&gt;Note&lt;/strong&gt;: Assuming that if the Karavi Observability&amp;rsquo;s Authorization has been enabled in the phase of &lt;a href=&#34;../deployment/offline&#34;&gt;Offline Karavi Observability Helm Chart Installer&lt;/a&gt;, the Authorization Secrets/Configmap have been copied to the Karavi Observability namespace.&lt;br&gt;
 A sample configuration values.yaml file is located &lt;a href=&#34;https://github.com/dell/helm-charts/blob/main/charts/karavi-observability/values.yaml&#34;&gt;here&lt;/a&gt;.&lt;br&gt;
 In your own configuration values.yaml, you need to enable PowerFlex/PowerScale Authorization, and provide the location of the sidecar-proxy Docker image and URL of the Karavi Authorization proxyHost address.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Now that the required images have been made available and the Helm chart&amp;rsquo;s configuration updated with references to the internal registry location, installation can proceed by following the instructions that are documented within the Helm chart&amp;rsquo;s repository.&lt;br&gt;
-&lt;strong&gt;Note&lt;/strong&gt;: Assuming that Your Secrets from CSI Drivers have been copied to the Karavi Observability namespace in the phase of &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v3/observability/deployment/offline/&#34;&gt;Offline Karavi Observability Helm Chart Installer&lt;/a&gt;&lt;br&gt;
-Optionally, you could provide your own &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v3/observability/deployment/helm/#configuration&#34;&gt;configurations&lt;/a&gt;. A sample values.yaml file is located &lt;a href=&#34;https://github.com/dell/helm-charts/blob/main/charts/karavi-observability/values.yaml&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;strong&gt;Note&lt;/strong&gt;: Assuming that Your Secrets from CSI Drivers have been copied to the Karavi Observability namespace in the phase of &lt;a href=&#34;../deployment/offline&#34;&gt;Offline Karavi Observability Helm Chart Installer&lt;/a&gt;&lt;br&gt;
+Optionally, you could provide your own &lt;a href=&#34;../deployment/helm/#configuration&#34;&gt;configurations&lt;/a&gt;. A sample values.yaml file is located &lt;a href=&#34;https://github.com/dell/helm-charts/blob/main/charts/karavi-observability/values.yaml&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  [user@anothersystem /home/user/offline-karavi-observability-bundle/helm]# helm upgrade -n install-namespace app-name karavi-observability
   NAME: app-name
   LAST DEPLOYED: Wed Aug 17 14:44:04 2022
@@ -853,14 +853,14 @@ Optionally, you could provide your own &lt;a href=&#34;https://dell.github.io/cs
         
         &lt;h2 id=&#34;frequently-asked-questions&#34;&gt;Frequently Asked Questions&lt;/h2&gt;
 &lt;ol&gt;
-&lt;li&gt;&lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v3/observability/troubleshooting/#why-do-i-see-a-certificate-problem-when-accessing-the-topology-service-outside-of-my-kubernetes-cluster&#34;&gt;Why do I see a certificate problem when accessing the topology service outside of my Kubernetes cluster?&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v3/observability/troubleshooting/#how-can-i-diagnose-an-issue-with-csm-for-observability&#34;&gt;How can I diagnose an issue with Container Storage Modules (CSM) for Observability?&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v3/observability/troubleshooting/#how-can-i-create-a-servicemonitor-object-for-prometheus-if-im-using-rancher-monitoring-stack&#34;&gt;How can I create a ServiceMonitor object for Prometheus if I&amp;rsquo;m using Rancher monitoring stack?&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v3/observability/troubleshooting/#how-can-i-debug-and-troubleshoot-issues-with-kubernetes&#34;&gt;How can I debug and troubleshoot issues with Kubernetes?&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v3/observability/troubleshooting/#how-can-i-troubleshoot-latency-problems-with-csm-for-observability&#34;&gt;How can I troubleshoot latency problems with CSM for Observability?&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v3/observability/troubleshooting/#why-does-the-observability-installation-timeout-with-pods-stuck-in-containercreatingcrashloopbackofferror-stage&#34;&gt;Why does the Observability installation timeout with pods stuck in &amp;lsquo;ContainerCreating&amp;rsquo;/&amp;lsquo;CrashLoopBackOff&amp;rsquo;/&amp;lsquo;Error&amp;rsquo; stage?&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v3/observability/troubleshooting/#why-do-i-see-failedmount-warnings-when-describing-pods-in-my-cluster&#34;&gt;Why do I see FailedMount warnings when describing pods in my cluster?&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v3/observability/troubleshooting/#why-do-i-see-failed-calling-webhook-error-when-reinstalling-CSM-for-Observability&#34;&gt;Why do I see &amp;lsquo;Failed calling webhook&amp;rsquo; error when reinstalling CSM for Observability?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#why-do-i-see-a-certificate-problem-when-accessing-the-topology-service-outside-of-my-kubernetes-cluster&#34;&gt;Why do I see a certificate problem when accessing the topology service outside of my Kubernetes cluster?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#how-can-i-diagnose-an-issue-with-csm-for-observability&#34;&gt;How can I diagnose an issue with Container Storage Modules (CSM) for Observability?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#how-can-i-create-a-servicemonitor-object-for-prometheus-if-im-using-rancher-monitoring-stack&#34;&gt;How can I create a ServiceMonitor object for Prometheus if I&amp;rsquo;m using Rancher monitoring stack?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#how-can-i-debug-and-troubleshoot-issues-with-kubernetes&#34;&gt;How can I debug and troubleshoot issues with Kubernetes?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#how-can-i-troubleshoot-latency-problems-with-csm-for-observability&#34;&gt;How can I troubleshoot latency problems with CSM for Observability?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#why-does-the-observability-installation-timeout-with-pods-stuck-in-containercreatingcrashloopbackofferror-stage&#34;&gt;Why does the Observability installation timeout with pods stuck in &amp;lsquo;ContainerCreating&amp;rsquo;/&amp;lsquo;CrashLoopBackOff&amp;rsquo;/&amp;lsquo;Error&amp;rsquo; stage?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#why-do-i-see-failedmount-warnings-when-describing-pods-in-my-cluster&#34;&gt;Why do I see FailedMount warnings when describing pods in my cluster?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#why-do-i-see-failed-calling-webhook-error-when-reinstalling-CSM-for-Observability&#34;&gt;Why do I see &amp;lsquo;Failed calling webhook&amp;rsquo; error when reinstalling CSM for Observability?&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h3 id=&#34;why-do-i-see-a-certificate-problem-when-accessing-the-topology-service-outside-of-my-kubernetes-cluster&#34;&gt;Why do I see a certificate problem when accessing the topology service outside of my Kubernetes cluster?&lt;/h3&gt;
 &lt;p&gt;This issue can arise when the topology service manifest is updated to expose the service as NodePort and a client makes a request to the service. Karavi-toplogy is configured with a self-signed or custom certificate and when a client does not recognize a server&amp;rsquo;s certificate, it shows an error and pings the server(karavi-topology) with the error.  You would see the issue when accessing the service through a browser or curl:&lt;/p&gt;
@@ -869,7 +869,7 @@ Optionally, you could provide your own &lt;a href=&#34;https://dell.github.io/cs
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-console&#34; data-lang=&#34;console&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;There is a problem with this website&amp;#39;s security certificate. 
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;The security certificate presented by this website was not
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;issued by a trusted certificate authority
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;While this certificate problem may indicate an attempt to fool you or intercept data you send to the server, see &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v3/observability/troubleshooting/#resolution&#34;&gt;resolution&lt;/a&gt; on how to fix it&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;While this certificate problem may indicate an attempt to fool you or intercept data you send to the server, see &lt;a href=&#34;#resolution&#34;&gt;resolution&lt;/a&gt; on how to fix it&lt;/p&gt;
 &lt;h4 id=&#34;curl-experience&#34;&gt;Curl experience&lt;/h4&gt;
 &lt;p&gt;A user who tries to connect to &lt;code&gt;karavi-topology&lt;/code&gt; by using &lt;code&gt;curl&lt;/code&gt; may receive the following warning or error message:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-console&#34; data-lang=&#34;console&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8f5902&#34;&gt;[root@:~]$&lt;/span&gt; curl -v https://&amp;lt;karavi-topology-cluster-IP&amp;gt;:&amp;lt;port?/query
@@ -1015,9 +1015,9 @@ Optionally, you could provide your own &lt;a href=&#34;https://dell.github.io/cs
 &lt;p&gt;View pod container logs. Output logs to a file for further debugging.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-console&#34; data-lang=&#34;console&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;kubectl logs -n $namespace $pod $container
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;kubectl logs -n $namespace $pod $container &amp;gt; $logFileName
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;More information for viewing logs can be found &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v3/observability/#viewing-logs&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;More information for viewing logs can be found &lt;a href=&#34;../#viewing-logs&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
 &lt;h3 id=&#34;how-can-i-create-a-servicemonitor-object-for-prometheus-if-im-using-rancher-monitoring-stack&#34;&gt;How can I create a ServiceMonitor object for Prometheus if I&amp;rsquo;m using Rancher monitoring stack?&lt;/h3&gt;
-&lt;p&gt;The ServiceMonitor allows us to define how a set of services should be monitored by Prometheus. Please see our &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v3/observability/deployment/#prometheus&#34;&gt;prometheus&lt;/a&gt; documentation for creating a ServiceMonitor.&lt;/p&gt;
+&lt;p&gt;The ServiceMonitor allows us to define how a set of services should be monitored by Prometheus. Please see our &lt;a href=&#34;../deployment#prometheus&#34;&gt;prometheus&lt;/a&gt; documentation for creating a ServiceMonitor.&lt;/p&gt;
 &lt;h3 id=&#34;how-can-i-debug-and-troubleshoot-issues-with-kubernetes&#34;&gt;How can I debug and troubleshoot issues with Kubernetes?&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;
@@ -1028,7 +1028,7 @@ Optionally, you could provide your own &lt;a href=&#34;https://dell.github.io/cs
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;how-can-i-troubleshoot-latency-problems-with-csm-for-observability&#34;&gt;How can I troubleshoot latency problems with CSM for Observability?&lt;/h3&gt;
-&lt;p&gt;CSM for Observability is instrumented to report trace data to &lt;a href=&#34;https://zipkin.io/&#34;&gt;Zipkin&lt;/a&gt;.  Please see &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v3/observability/deployment/#tracing&#34;&gt;Tracing&lt;/a&gt; for more information on enabling tracing for CSM for Observability.&lt;/p&gt;
+&lt;p&gt;CSM for Observability is instrumented to report trace data to &lt;a href=&#34;https://zipkin.io/&#34;&gt;Zipkin&lt;/a&gt;.  Please see &lt;a href=&#34;../deployment/#tracing&#34;&gt;Tracing&lt;/a&gt; for more information on enabling tracing for CSM for Observability.&lt;/p&gt;
 &lt;h3 id=&#34;why-does-the-observability-installation-timeout-with-pods-stuck-in-containercreatingcrashloopbackofferror-stage&#34;&gt;Why does the Observability installation timeout with pods stuck in &amp;lsquo;ContainerCreating&amp;rsquo;/&amp;lsquo;CrashLoopBackOff&amp;rsquo;/&amp;lsquo;Error&amp;rsquo; stage?&lt;/h3&gt;
 &lt;p&gt;Check the pods in the CSM for Observability namespace. If the pod starting with &amp;lsquo;karavi-observability-cert-manager-cainjector-*&amp;rsquo; is in &amp;lsquo;CrashLoopBackOff&amp;rsquo; or &amp;lsquo;Error&amp;quot; stage with a number of restarts, check if the logs for that pod show the below error:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-console&#34; data-lang=&#34;console&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;kubectl logs -n $namespace $cert-manager-cainjector-podname

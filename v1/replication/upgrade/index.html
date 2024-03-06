@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="generator" content="Hugo 0.123.7">
+<meta name="generator" content="Hugo 0.120.3">
 <meta name="robots" content="index, follow">
 
 <link rel="shortcut icon" href="/favicons/favicon.ico" >
@@ -25,7 +25,8 @@
 ">
 <meta itemprop="dateModified" content="2023-12-13T23:10:42+05:30" />
 <meta itemprop="wordCount" content="716">
-<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Upgrade"/>
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Upgrade"/>
 <meta name="twitter:description" content="Upgrade guide
 "/>
 
@@ -106,7 +107,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.2f82b3957db346265e459b28dfe2d4c7.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.4b03eb415a4b7ce6c5b813326b279dbc.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -128,7 +129,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.2f82b3957db346265e459b28dfe2d4c7.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.4b03eb415a4b7ce6c5b813326b279dbc.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -149,8 +150,6 @@
   <ul class="ul-3 foldable">
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1deploymentcsminstallationwizardrelease-li">
   <a href="/csm-docs/v1/deployment/csminstallationwizard/release/" title="Release Notes" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv1deploymentcsminstallationwizardrelease"><span class="">Release notes</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1deploymentcsminstallationwizardsrc-li">
-  <a href="/csm-docs/v1/deployment/csminstallationwizard/src/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv1deploymentcsminstallationwizardsrc"><span class=""></span></a>
 </li>
   </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv1deploymentcsmoperator-li">
@@ -654,6 +653,22 @@
             
 
 	
+		
+
+
+
+  
+  
+
+	
+		
+
+
+
+  
+  
+
+	
 
           </aside>
           <main class="col-12 col-md-9 col-xl-8 pl-md-5" role="main">
@@ -716,7 +731,7 @@ controller, because different versions could be incompatible with each other.</p
 <p>Make sure the appropriate release branch is available on the machine performing the upgrade by running:</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git clone -b v1.6.0 https://github.com/dell/csm-replication.git
 </span></span></code></pre></div><h3 id="upgrading-with-helm">Upgrading with Helm</h3>
-<p>This option will only work if you have previously installed replication via Helm chart, available since version 1.1. If you used simple manifest or <code>repctl</code> please use <a href="/csm-docs/v1/replication/upgrade/#upgrading-with-repctl">upgrading with repctl</a></p>
+<p>This option will only work if you have previously installed replication via Helm chart, available since version 1.1. If you used simple manifest or <code>repctl</code> please use <a href="#upgrading-with-repctl">upgrading with repctl</a></p>
 <p><strong>Steps</strong></p>
 <ol>
 <li>

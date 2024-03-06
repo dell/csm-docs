@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="generator" content="Hugo 0.123.7">
+<meta name="generator" content="Hugo 0.120.3">
 <link rel="alternate" type="application/rss&#43;xml" href="https://dell.github.io/csm-docs/v3/observability/upgrade/index.xml">
 <meta name="robots" content="index, follow">
 
@@ -21,7 +21,8 @@
 
 <meta itemprop="name" content="Upgrade">
 <meta itemprop="description" content="Dell Container Storage Modules (CSM) for Observability Upgrade
-"><meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Upgrade"/>
+"><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Upgrade"/>
 <meta name="twitter:description" content="Dell Container Storage Modules (CSM) for Observability Upgrade
 "/>
 
@@ -102,7 +103,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.2f82b3957db346265e459b28dfe2d4c7.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.4b03eb415a4b7ce6c5b813326b279dbc.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -124,7 +125,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.2f82b3957db346265e459b28dfe2d4c7.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.4b03eb415a4b7ce6c5b813326b279dbc.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -140,13 +141,8 @@
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-csm-docsv3deployment-li">
   <a href="/csm-docs/v3/deployment/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3deployment"><span class="">Deployment</span></a>
   <ul class="ul-2 foldable">
-    <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv3deploymentcsminstallationwizard-li">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3deploymentcsminstallationwizard-li">
   <a href="/csm-docs/v3/deployment/csminstallationwizard/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3deploymentcsminstallationwizard"><span class="">CSM Installation Wizard</span></a>
-  <ul class="ul-3 foldable">
-    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3deploymentcsminstallationwizardsrc-li">
-  <a href="/csm-docs/v3/deployment/csminstallationwizard/src/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3deploymentcsminstallationwizardsrc"><span class=""></span></a>
-</li>
-  </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv3deploymentcsmoperator-li">
   <a href="/csm-docs/v3/deployment/csmoperator/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3deploymentcsmoperator"><span class="">CSM Operator</span></a>
   <ul class="ul-3 foldable">
@@ -608,6 +604,22 @@
             
 
 	
+		
+
+
+
+  
+  
+
+	
+		
+
+
+
+  
+  
+
+	
 
           </aside>
           <main class="col-12 col-md-9 col-xl-8 pl-md-5" role="main">
@@ -635,6 +647,14 @@
 		
 
   
+    
+
+
+  
+    
+
+
+  
 
 		
 	</header>
@@ -644,7 +664,7 @@
 <li>Online Installer Upgrade</li>
 </ul>
 <h2 id="helm-chart-upgrade">Helm Chart Upgrade</h2>
-<p>CSM for Observability Helm upgrade supports <a href="/csm-docs/v3/observability/deployment/helm/">Helm</a>, <a href="/csm-docs/v3/observability/deployment/online/">Online Installer</a>, and <a href="/csm-docs/v3/observability/deployment/offline/">Offline Installer</a> deployments.</p>
+<p>CSM for Observability Helm upgrade supports <a href="../deployment/helm">Helm</a>, <a href="../deployment/online">Online Installer</a>, and <a href="../deployment/offline">Offline Installer</a> deployments.</p>
 <p>To upgrade an existing Helm installation of CSM for Observability to the latest release, download the latest Helm charts.</p>
 <pre tabindex="0"><code>helm repo update
 </code></pre><p>Check if the latest Helm chart version is available:</p>
@@ -652,7 +672,7 @@
 NAME                            CHART VERSION   APP VERSION     DESCRIPTION
 dell/karavi-observability       1.5.0           1.5.0           CSM for Observability is part of the [Container...
 </code></pre><blockquote>
-<p>Note: If using cert-manager CustomResourceDefinitions older than v1.5.3, delete the old CRDs and install v1.5.3 of the CRDs prior to upgrade. See <a href="/csm-docs/v3/observability/deployment/helm/#prerequisites">Prerequisites</a> for location of CRDs.</p>
+<p>Note: If using cert-manager CustomResourceDefinitions older than v1.5.3, delete the old CRDs and install v1.5.3 of the CRDs prior to upgrade. See <a href="../deployment/helm#prerequisites">Prerequisites</a> for location of CRDs.</p>
 </blockquote>
 <p>Upgrade to the latest CSM for Observability release:</p>
 <pre tabindex="0"><code>Upgrade Helm and Online Installer deployments:
@@ -662,16 +682,16 @@ dell/karavi-observability       1.5.0           1.5.0           CSM for Observab
 Upgrade Offline Installer deployment:
 
   $ helm upgrade --version $latest_chart_version karavi-observability dell/karavi-observability -n $namespace
-</code></pre><p>The <a href="/csm-docs/v3/observability/deployment/helm/#configuration">configuration</a> section lists all the parameters that can be configured using the <code>values.yaml</code> file.</p>
+</code></pre><p>The <a href="../deployment/helm#configuration">configuration</a> section lists all the parameters that can be configured using the <code>values.yaml</code> file.</p>
 <h2 id="online-installer-upgrade">Online Installer Upgrade</h2>
-<p>CSM for Observability online installer upgrade can be used if the initial deployment was performed using the <a href="/csm-docs/v3/observability/deployment/online/">Online Installer</a> or <a href="/csm-docs/v3/observability/deployment/helm/">Helm</a>.</p>
+<p>CSM for Observability online installer upgrade can be used if the initial deployment was performed using the <a href="../deployment/online">Online Installer</a> or <a href="../deployment/helm">Helm</a>.</p>
 <ol>
 <li>
 <p>Change to the installer directory:</p>
 <pre tabindex="0"><code>[user@system /home/user]# cd karavi-observability/installer
 </code></pre></li>
 <li>
-<p>Update <code>values.yaml</code> file as needed. Configuration options are outlined in the <a href="/csm-docs/v3/observability/deployment/helm/#configuration">Helm chart deployment section</a>.</p>
+<p>Update <code>values.yaml</code> file as needed. Configuration options are outlined in the <a href="../deployment/helm#configuration">Helm chart deployment section</a>.</p>
 </li>
 <li>
 <p>Execute the <code>./karavi-observability-install.sh</code> script:</p>
@@ -705,11 +725,11 @@ These instructions can be followed when a Helm chart was installed and will be u
 <ol>
 <li>
 <p>Build the Offline Bundle
-Follow <a href="/csm-docs/v3/observability/deployment/offline/">Offline Karavi Observability Helm Chart Installer</a> to build the latest bundle.</p>
+Follow <a href="../deployment/offline">Offline Karavi Observability Helm Chart Installer</a> to build the latest bundle.</p>
 </li>
 <li>
 <p>Unpack the Offline Bundle
-Follow <a href="/csm-docs/v3/observability/deployment/offline/">Offline Karavi Observability Helm Chart Installer</a>, copy and unpack the Offline Bundle to another Linux system, and push Docker images to the internal Docker registry.</p>
+Follow <a href="../deployment/offline">Offline Karavi Observability Helm Chart Installer</a>, copy and unpack the Offline Bundle to another Linux system, and push Docker images to the internal Docker registry.</p>
 </li>
 <li>
 <p>Perform Helm upgrade</p>
@@ -724,14 +744,14 @@ Follow <a href="/csm-docs/v3/observability/deployment/offline/">Offline Karavi O
 </code></pre></li>
 <li>
 <p>(Optional) Enable Karavi Observability for PowerFlex/PowerScale to use an existing instance of Karavi Authorization for accessing the REST API for the given storage systems.<br>
-<strong>Note</strong>: Assuming that if the Karavi Observability&rsquo;s Authorization has been enabled in the phase of <a href="/csm-docs/v3/observability/deployment/offline/">Offline Karavi Observability Helm Chart Installer</a>, the Authorization Secrets/Configmap have been copied to the Karavi Observability namespace.<br>
+<strong>Note</strong>: Assuming that if the Karavi Observability&rsquo;s Authorization has been enabled in the phase of <a href="../deployment/offline">Offline Karavi Observability Helm Chart Installer</a>, the Authorization Secrets/Configmap have been copied to the Karavi Observability namespace.<br>
 A sample configuration values.yaml file is located <a href="https://github.com/dell/helm-charts/blob/main/charts/karavi-observability/values.yaml">here</a>.<br>
 In your own configuration values.yaml, you need to enable PowerFlex/PowerScale Authorization, and provide the location of the sidecar-proxy Docker image and URL of the Karavi Authorization proxyHost address.</p>
 </li>
 <li>
 <p>Now that the required images have been made available and the Helm chart&rsquo;s configuration updated with references to the internal registry location, installation can proceed by following the instructions that are documented within the Helm chart&rsquo;s repository.<br>
-<strong>Note</strong>: Assuming that Your Secrets from CSI Drivers have been copied to the Karavi Observability namespace in the phase of <a href="/csm-docs/v3/observability/deployment/offline/">Offline Karavi Observability Helm Chart Installer</a><br>
-Optionally, you could provide your own <a href="/csm-docs/v3/observability/deployment/helm/#configuration">configurations</a>. A sample values.yaml file is located <a href="https://github.com/dell/helm-charts/blob/main/charts/karavi-observability/values.yaml">here</a>.</p>
+<strong>Note</strong>: Assuming that Your Secrets from CSI Drivers have been copied to the Karavi Observability namespace in the phase of <a href="../deployment/offline">Offline Karavi Observability Helm Chart Installer</a><br>
+Optionally, you could provide your own <a href="../deployment/helm/#configuration">configurations</a>. A sample values.yaml file is located <a href="https://github.com/dell/helm-charts/blob/main/charts/karavi-observability/values.yaml">here</a>.</p>
 <pre tabindex="0"><code>  [user@anothersystem /home/user/offline-karavi-observability-bundle/helm]# helm upgrade -n install-namespace app-name karavi-observability
   NAME: app-name
   LAST DEPLOYED: Wed Aug 17 14:44:04 2022

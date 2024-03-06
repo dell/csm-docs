@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="generator" content="Hugo 0.123.7">
+<meta name="generator" content="Hugo 0.120.3">
 <link rel="alternate" type="application/rss&#43;xml" href="https://dell.github.io/csm-docs/docs/deployment/csmoperator/drivers/index.xml">
 <meta name="robots" content="index, follow">
 
@@ -18,7 +18,8 @@
 <meta property="og:url" content="https://dell.github.io/csm-docs/docs/deployment/csmoperator/drivers/" />
 
 <meta itemprop="name" content="CSI Drivers">
-<meta itemprop="description" content="Installation of Dell CSI Drivers using Dell CSM Operator"><meta name="twitter:card" content="summary"/><meta name="twitter:title" content="CSI Drivers"/>
+<meta itemprop="description" content="Installation of Dell CSI Drivers using Dell CSM Operator"><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="CSI Drivers"/>
 <meta name="twitter:description" content="Installation of Dell CSI Drivers using Dell CSM Operator"/>
 
 
@@ -98,7 +99,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.2f82b3957db346265e459b28dfe2d4c7.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.4b03eb415a4b7ce6c5b813326b279dbc.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -120,7 +121,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.2f82b3957db346265e459b28dfe2d4c7.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.4b03eb415a4b7ce6c5b813326b279dbc.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -141,8 +142,6 @@
   <ul class="ul-3 foldable">
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymentcsminstallationwizardrelease-li">
   <a href="/csm-docs/docs/deployment/csminstallationwizard/release/" title="Release Notes" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsdeploymentcsminstallationwizardrelease"><span class="">Release notes</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymentcsminstallationwizardsrc-li">
-  <a href="/csm-docs/docs/deployment/csminstallationwizard/src/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsdeploymentcsminstallationwizardsrc"><span class=""></span></a>
 </li>
   </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id="m-csm-docsdocsdeploymentcsmoperator-li">
@@ -631,6 +630,22 @@
             
 
 	
+		
+
+
+
+  
+  
+
+	
+		
+
+
+
+  
+  
+
+	
 
           </aside>
           <main class="col-12 col-md-9 col-xl-8 pl-md-5" role="main">
@@ -664,16 +679,16 @@
 <li>VolumeSnapshot CRDs - Install v1 VolumeSnapshot CRDs</li>
 <li>External Volume Snapshot Controller</li>
 </ul>
-<p>For detailed snapshot setup procedure, <a href="/csm-docs/docs/snapshots/#optional-volume-snapshot-requirements">click here.</a></p>
+<p>For detailed snapshot setup procedure, <a href="../../../snapshots/#optional-volume-snapshot-requirements">click here.</a></p>
 <blockquote>
 <p>NOTE: This step can be skipped with OpenShift.</p>
 </blockquote>
 <h2 id="installing-csi-driver-via-operator">Installing CSI Driver via Operator</h2>
-<p>Refer <a href="/csm-docs/docs/deployment/csmoperator/drivers/powerscale/">PowerScale Driver</a> to install the driver via Operator <br>
-Refer <a href="/csm-docs/docs/deployment/csmoperator/drivers/powerflex/">PowerFlex Driver</a> to install the driver via Operator <br>
-Refer <a href="/csm-docs/docs/deployment/csmoperator/drivers/powermax/">PowerMax Driver</a> to install the driver via Operator <br>
-Refer <a href="/csm-docs/docs/deployment/csmoperator/drivers/powerstore/">PowerStore Driver</a> to install the driver via Operator <br>
-Refer <a href="/csm-docs/docs/deployment/csmoperator/drivers/unity/">Unity XT Driver</a> to install the driver via Operator <br></p>
+<p>Refer <a href="../drivers/powerscale">PowerScale Driver</a> to install the driver via Operator <br>
+Refer <a href="../drivers/powerflex">PowerFlex Driver</a> to install the driver via Operator <br>
+Refer <a href="../drivers/powermax">PowerMax Driver</a> to install the driver via Operator <br>
+Refer <a href="../drivers/powerstore">PowerStore Driver</a> to install the driver via Operator <br>
+Refer <a href="../drivers/unity">Unity XT Driver</a> to install the driver via Operator <br></p>
 <blockquote>
 <p>NOTE: If you are using an OLM based installation, example manifests are available in <code>OperatorHub</code> UI.
 You can edit these manifests and install the driver using the <code>OperatorHub</code> UI.</p>
@@ -685,7 +700,7 @@ You can edit these manifests and install the driver using the <code>OperatorHub<
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>kubectl get csm/&lt;name-of-custom-resource&gt; -n &lt;driver-namespace&gt; -o yaml
 </span></span></code></pre></div></li>
-<li>Check the status of the CR to verify if the driver installation is in the <code>Succeeded</code> state. If the status is not <code>Succeeded</code>, see the <a href="/csm-docs/docs/deployment/csmoperator/troubleshooting/#my-dell-csi-driver-install-failed-how-do-i-fix-it">Troubleshooting guide</a> for more information.</li>
+<li>Check the status of the CR to verify if the driver installation is in the <code>Succeeded</code> state. If the status is not <code>Succeeded</code>, see the <a href="../troubleshooting/#my-dell-csi-driver-install-failed-how-do-i-fix-it">Troubleshooting guide</a> for more information.</li>
 </ul>
 <h3 id="update-csi-drivers">Update CSI Drivers</h3>
 <p>The CSI Drivers and CSM Modules installed by the Dell CSM Operator can be updated like any Kubernetes resource. This can be achieved in various ways which include:</p>

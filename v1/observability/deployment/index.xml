@@ -27,7 +27,7 @@
 &lt;h2 id=&#34;prerequisites&#34;&gt;Prerequisites&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;Helm 3.3&lt;/li&gt;
-&lt;li&gt;The deployment of one or more &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v1/#supported-csi-drivers&#34;&gt;supported&lt;/a&gt; Dell CSI drivers&lt;/li&gt;
+&lt;li&gt;The deployment of one or more &lt;a href=&#34;../../#supported-csi-drivers&#34;&gt;supported&lt;/a&gt; Dell CSI drivers&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;install-the-csm-for-observability-helm-chart&#34;&gt;Install the CSM for Observability Helm Chart&lt;/h2&gt;
 &lt;p&gt;&lt;strong&gt;Steps&lt;/strong&gt;&lt;/p&gt;
@@ -152,7 +152,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl get secret karavi-authorization-config proxy-server-root-certificate proxy-authz-tokens -n &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;CSI_DRIVER_NAMESPACE&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt; -o yaml &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; sed &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;s/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; sed &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;s/name: karavi-authorization-config/name: powermax-karavi-authorization-config/&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; sed &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;s/name: proxy-server-root-certificate/name: powermax-proxy-server-root-certificate/&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; sed &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;s/name: proxy-authz-tokens/name: powermax-proxy-authz-tokens/&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; kubectl create -f -
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;Configure the &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v1/observability/deployment/helm/#configuration&#34;&gt;parameters&lt;/a&gt; and install the CSM for Observability Helm Chart&lt;/p&gt;
+&lt;p&gt;Configure the &lt;a href=&#34;#configuration&#34;&gt;parameters&lt;/a&gt; and install the CSM for Observability Helm Chart&lt;/p&gt;
 &lt;p&gt;A default values.yaml file is located &lt;a href=&#34;https://github.com/dell/helm-charts/blob/main/charts/karavi-observability/values.yaml&#34;&gt;here&lt;/a&gt; that can be used for installation. This can be copied into a file named &lt;code&gt;myvalues.yaml&lt;/code&gt; and either used as is or modified accordingly.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt;&lt;/p&gt;
 &lt;ul&gt;
@@ -586,7 +586,7 @@ You may obtain a copy of the License at
 &lt;h2 id=&#34;prerequisites&#34;&gt;Prerequisites&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;Helm 3.3&lt;/li&gt;
-&lt;li&gt;The deployment of one or more &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v1/observability/#supported-csi-drivers&#34;&gt;supported&lt;/a&gt; Dell CSI drivers&lt;/li&gt;
+&lt;li&gt;The deployment of one or more &lt;a href=&#34;../#supported-csi-drivers&#34;&gt;supported&lt;/a&gt; Dell CSI drivers&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;online-installer&#34;&gt;Online Installer&lt;/h2&gt;
 &lt;p&gt;Follow the instructions below to install CSM for Observability in an environment that has an Internet connection and is capable of downloading the required Helm chart and Docker images.
@@ -743,7 +743,7 @@ The following example will install CSM for Observability into the CSM namespace.
 &lt;h2 id=&#34;prerequisites&#34;&gt;Prerequisites&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;Helm 3.3&lt;/li&gt;
-&lt;li&gt;The deployment of one or more &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v1/observability/#supported-csi-drivers&#34;&gt;supported&lt;/a&gt; Dell CSI drivers&lt;/li&gt;
+&lt;li&gt;The deployment of one or more &lt;a href=&#34;../#supported-csi-drivers&#34;&gt;supported&lt;/a&gt; Dell CSI drivers&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;dependencies&#34;&gt;Dependencies&lt;/h3&gt;
 &lt;p&gt;Multiple Linux-based systems may be required to create and process an offline bundle for use.&lt;/p&gt;

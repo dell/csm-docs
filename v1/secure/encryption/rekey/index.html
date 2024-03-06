@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="generator" content="Hugo 0.123.7">
+<meta name="generator" content="Hugo 0.120.3">
 <meta name="robots" content="index, follow">
 
 <link rel="shortcut icon" href="/favicons/favicon.ico" >
@@ -25,7 +25,8 @@
 ">
 <meta itemprop="dateModified" content="2023-09-20T19:05:29+05:30" />
 <meta itemprop="wordCount" content="643">
-<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Rekey Configuration"/>
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Rekey Configuration"/>
 <meta name="twitter:description" content="Rekey Configuration and Usage
 "/>
 
@@ -106,7 +107,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.2f82b3957db346265e459b28dfe2d4c7.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.4b03eb415a4b7ce6c5b813326b279dbc.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -128,7 +129,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.2f82b3957db346265e459b28dfe2d4c7.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.4b03eb415a4b7ce6c5b813326b279dbc.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -149,8 +150,6 @@
   <ul class="ul-3 foldable">
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1deploymentcsminstallationwizardrelease-li">
   <a href="/csm-docs/v1/deployment/csminstallationwizard/release/" title="Release Notes" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv1deploymentcsminstallationwizardrelease"><span class="">Release notes</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1deploymentcsminstallationwizardsrc-li">
-  <a href="/csm-docs/v1/deployment/csminstallationwizard/src/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv1deploymentcsminstallationwizardsrc"><span class=""></span></a>
 </li>
   </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv1deploymentcsmoperator-li">
@@ -657,6 +656,22 @@
             
 
 	
+		
+
+
+
+  
+  
+
+	
+		
+
+
+
+  
+  
+
+	
 
           </aside>
           <main class="col-12 col-md-9 col-xl-8 pl-md-5" role="main">
@@ -765,9 +780,9 @@ Deploy the controller using a command similar to this:</p>
 </span></span></code></pre></div><p>A rekey-controller pod should now be up and running.</p>
 <h2 id="rekey-usage">Rekey Usage</h2>
 <p>Rekeying is initiated and monitored via Kubernetes custom resources of type <code>rekeys.encryption.storage.dell.com</code>.
-This can be done directly <a href="/csm-docs/v1/secure/encryption/rekey/#rekey-with-kubectl">using kubectl</a> or in a more user-friendly way <a href="/csm-docs/v1/secure/encryption/rekey/#rekey-with-dellctl">using dellctl</a>.
+This can be done directly <a href="#rekey-with-kubectl">using kubectl</a> or in a more user-friendly way <a href="#rekey-with-dellctl">using dellctl</a>.
 Creation of a rekey resource for a PV will kick off a rekey process on this PV. The rekey resource will contain the result
-of the operation. Refer to <a href="/csm-docs/v1/secure/encryption/rekey/#rekey-status">Rekey Status</a> for possible status values.</p>
+of the operation. Refer to <a href="#rekey-status">Rekey Status</a> for possible status values.</p>
 <h3 id="rekey-with-dellctl">Rekey with dellctl</h3>
 <p>If <code>dellctl</code> CLI is installed, rekeying an encrypted volume is simple.
 For example, to rekey a PV with the name <code>k8s-112a5d41bc</code> use a command like this:</p>

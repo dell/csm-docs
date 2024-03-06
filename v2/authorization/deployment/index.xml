@@ -26,7 +26,7 @@
         &lt;p&gt;This section outlines the deployment steps for Container Storage Modules (CSM) for Authorization.  The deployment of CSM for Authorization is handled in 2 parts:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Deploying the CSM for Authorization proxy server, to be controlled by storage administrators&lt;/li&gt;
-&lt;li&gt;Configuring one to many &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v2/authorization/#supported-csi-drivers&#34;&gt;supported&lt;/a&gt; Dell CSI drivers with CSM for Authorization&lt;/li&gt;
+&lt;li&gt;Configuring one to many &lt;a href=&#34;../../../authorization#supported-csi-drivers&#34;&gt;supported&lt;/a&gt; Dell CSI drivers with CSM for Authorization&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;prerequisites&#34;&gt;Prerequisites&lt;/h2&gt;
 &lt;p&gt;The CSM for Authorization proxy server requires a Linux host with the following minimum resource allocations:&lt;/p&gt;
@@ -113,13 +113,13 @@ This allows CSM for Authorization to be installed in network-restricted environm
 &lt;p&gt;After installation, application data will be stored on the system under &lt;code&gt;/var/lib/rancher/k3s/storage/&lt;/code&gt;.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;If errors occur during installation, review the &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v2/authorization/troubleshooting/&#34;&gt;Troubleshooting&lt;/a&gt; section.&lt;/p&gt;
+&lt;p&gt;If errors occur during installation, review the &lt;a href=&#34;../../troubleshooting&#34;&gt;Troubleshooting&lt;/a&gt; section.&lt;/p&gt;
 &lt;h2 id=&#34;configuring-the-csm-for-authorization-proxy-server&#34;&gt;Configuring the CSM for Authorization Proxy Server&lt;/h2&gt;
 &lt;p&gt;The first part of CSM for Authorization deployment is to configure the proxy server. This is controlled by the Storage Administrator.&lt;/p&gt;
-&lt;p&gt;Please follow the steps outlined in the &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v2/authorization/configuration/proxy-server/&#34;&gt;proxy server&lt;/a&gt; configuration.&lt;/p&gt;
+&lt;p&gt;Please follow the steps outlined in the &lt;a href=&#34;../../configuration/proxy-server&#34;&gt;proxy server&lt;/a&gt; configuration.&lt;/p&gt;
 &lt;h2 id=&#34;configuring-a-dell-csi-driver-with-csm-for-authorization&#34;&gt;Configuring a Dell CSI Driver with CSM for Authorization&lt;/h2&gt;
-&lt;p&gt;The second part of CSM for Authorization deployment is to configure one or more of the &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v2/authorization/#supported-csi-drivers&#34;&gt;supported&lt;/a&gt; CSI drivers. This is controlled by the Kubernetes tenant administrator.&lt;/p&gt;
-&lt;p&gt;Please follow the steps outlined in &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v2/authorization/configuration/powerflex/&#34;&gt;PowerFlex&lt;/a&gt;, &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v2/authorization/configuration/powermax/&#34;&gt;PowerMax&lt;/a&gt;, or &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v2/authorization/configuration/powerscale/&#34;&gt;PowerScale&lt;/a&gt; to configure the CSI Driver to work with the Authorization sidecar.&lt;/p&gt;
+&lt;p&gt;The second part of CSM for Authorization deployment is to configure one or more of the &lt;a href=&#34;../../../authorization#supported-csi-drivers&#34;&gt;supported&lt;/a&gt; CSI drivers. This is controlled by the Kubernetes tenant administrator.&lt;/p&gt;
+&lt;p&gt;Please follow the steps outlined in &lt;a href=&#34;../../configuration/powerflex&#34;&gt;PowerFlex&lt;/a&gt;, &lt;a href=&#34;../../configuration/powermax&#34;&gt;PowerMax&lt;/a&gt;, or &lt;a href=&#34;../../configuration/powerscale&#34;&gt;PowerScale&lt;/a&gt; to configure the CSI Driver to work with the Authorization sidecar.&lt;/p&gt;
 &lt;h2 id=&#34;updating-csm-for-authorization-proxy-server-configuration&#34;&gt;Updating CSM for Authorization Proxy Server Configuration&lt;/h2&gt;
 &lt;p&gt;CSM for Authorization has a subset of configuration parameters that can be updated dynamically:&lt;/p&gt;
 &lt;table&gt;
@@ -427,7 +427,7 @@ This allows CSM for Authorization to be installed in network-restricted environm
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;mkdir -p ~/.local/bin
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;mv ./karavictl ~/.local/bin/karavictl
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# and then append (or prepend) ~/.local/bin to $PATH&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Karavictl commands and intended use can be found &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v2/authorization/cli/&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Karavictl commands and intended use can be found &lt;a href=&#34;../../cli/&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
 &lt;h2 id=&#34;configuring-the-csm-authorization-proxy-server&#34;&gt;Configuring the CSM Authorization Proxy Server&lt;/h2&gt;
 &lt;p&gt;The first part of CSM for Authorization deployment is to configure the proxy server. This is controlled by the Storage Administrator.&lt;/p&gt;
 &lt;p&gt;Configuration is achieved by using &lt;code&gt;karavictl&lt;/code&gt; to connect to the proxy service. In this example, we will be referencing an installation using &lt;code&gt;csm-authorization.com&lt;/code&gt; as the authorization.hostname value and the NGINX Ingress Controller accessed via the cluster&amp;rsquo;s master node.&lt;/p&gt;
@@ -449,10 +449,10 @@ storage-service                                    ClusterIP      00.000.000.000
 tenant-service                                     ClusterIP      00.000.000.000    &amp;lt;none&amp;gt;        000/TCP                    28s
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;On the machine running &lt;code&gt;karavictl&lt;/code&gt;, the &lt;code&gt;/etc/hosts&lt;/code&gt; file needs to be updated with the Ingress hosts for the proxy, storage, and role services. For example:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&amp;lt;master_node_ip&amp;gt; csm-authorization.com
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Please continue following the steps outlined in the &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v2/authorization/configuration/proxy-server/&#34;&gt;proxy server&lt;/a&gt; configuration.&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Please continue following the steps outlined in the &lt;a href=&#34;../../configuration/proxy-server&#34;&gt;proxy server&lt;/a&gt; configuration.&lt;/p&gt;
 &lt;h2 id=&#34;configuring-a-dell-csi-driver-with-csm-for-authorization&#34;&gt;Configuring a Dell CSI Driver with CSM for Authorization&lt;/h2&gt;
-&lt;p&gt;The second part of CSM for Authorization deployment is to configure one or more of the &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v2/authorization/#supported-csi-drivers&#34;&gt;supported&lt;/a&gt; CSI drivers. This is controlled by the Kubernetes tenant admin.&lt;/p&gt;
-&lt;p&gt;Please follow the steps outlined in &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v2/authorization/configuration/powerflex/&#34;&gt;PowerFlex&lt;/a&gt;, &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v2/authorization/configuration/powermax/&#34;&gt;PowerMax&lt;/a&gt;, or &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v2/authorization/configuration/powerscale/&#34;&gt;PowerScale&lt;/a&gt; to configure the CSI Driver to work with the Authorization sidecar.&lt;/p&gt;
+&lt;p&gt;The second part of CSM for Authorization deployment is to configure one or more of the &lt;a href=&#34;../../../authorization#supported-csi-drivers&#34;&gt;supported&lt;/a&gt; CSI drivers. This is controlled by the Kubernetes tenant admin.&lt;/p&gt;
+&lt;p&gt;Please follow the steps outlined in &lt;a href=&#34;../../configuration/powerflex&#34;&gt;PowerFlex&lt;/a&gt;, &lt;a href=&#34;../../configuration/powermax&#34;&gt;PowerMax&lt;/a&gt;, or &lt;a href=&#34;../../configuration/powerscale&#34;&gt;PowerScale&lt;/a&gt; to configure the CSI Driver to work with the Authorization sidecar.&lt;/p&gt;
 &lt;h2 id=&#34;updating-csm-for-authorization-proxy-server-configuration&#34;&gt;Updating CSM for Authorization Proxy Server Configuration&lt;/h2&gt;
 &lt;p&gt;CSM for Authorization has a subset of configuration parameters that can be updated dynamically:&lt;/p&gt;
 &lt;table&gt;
@@ -507,9 +507,9 @@ tenant-service                                     ClusterIP      00.000.000.000
         
         
         &lt;p&gt;The CSM Authorization module for supported Dell CSI Drivers can be installed via the Dell CSM Operator.
-To deploy the Operator, follow the instructions available &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v2/deployment/csmoperator/#installation&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;To install CSM Authorization via the Dell CSM Operator, follow the instructions &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v2/deployment/csmoperator/modules/authorization/&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;To enable CSM Authorization with a supported Dell CSI Driver, follow the configuration steps for the relevant driver &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/v2/authorization/configuration/&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+To deploy the Operator, follow the instructions available &lt;a href=&#34;../../../deployment/csmoperator/#installation&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;To install CSM Authorization via the Dell CSM Operator, follow the instructions &lt;a href=&#34;../../../deployment/csmoperator/modules/authorization&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;To enable CSM Authorization with a supported Dell CSI Driver, follow the configuration steps for the relevant driver &lt;a href=&#34;../../../authorization/configuration&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
 
       </description>
     </item>

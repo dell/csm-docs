@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="generator" content="Hugo 0.123.7">
+<meta name="generator" content="Hugo 0.120.3">
 <meta name="robots" content="index, follow">
 
 <link rel="shortcut icon" href="/favicons/favicon.ico" >
@@ -25,7 +25,8 @@
 ">
 <meta itemprop="dateModified" content="2023-12-13T23:10:42+05:30" />
 <meta itemprop="wordCount" content="3052">
-<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/><meta name="twitter:title" content="PowerMax"/>
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="PowerMax"/>
 <meta name="twitter:description" content="Installing Dell CSI Driver for PowerMax via Dell CSM Operator
 "/>
 
@@ -106,7 +107,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.2f82b3957db346265e459b28dfe2d4c7.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.4b03eb415a4b7ce6c5b813326b279dbc.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -128,7 +129,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.2f82b3957db346265e459b28dfe2d4c7.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.4b03eb415a4b7ce6c5b813326b279dbc.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -149,8 +150,6 @@
   <ul class="ul-3 foldable">
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymentcsminstallationwizardrelease-li">
   <a href="/csm-docs/docs/deployment/csminstallationwizard/release/" title="Release Notes" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsdeploymentcsminstallationwizardrelease"><span class="">Release notes</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymentcsminstallationwizardsrc-li">
-  <a href="/csm-docs/docs/deployment/csminstallationwizard/src/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsdeploymentcsminstallationwizardsrc"><span class=""></span></a>
 </li>
   </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id="m-csm-docsdocsdeploymentcsmoperator-li">
@@ -655,6 +654,22 @@
             
 
 	
+		
+
+
+
+  
+  
+
+	
+		
+
+
+
+  
+  
+
+	
 
           </aside>
           <main class="col-12 col-md-9 col-xl-8 pl-md-5" role="main">
@@ -686,7 +701,7 @@
 
 	       
 	<p>The CSI Driver for Dell PowerMax can be installed via the Dell CSM Operator.
-To deploy the Operator, follow the instructions available <a href="/csm-docs/docs/deployment/#installation">here</a>.</p>
+To deploy the Operator, follow the instructions available <a href="../../#installation">here</a>.</p>
 <p>Note that the deployment of the driver using the operator does not use any Helm charts and the installation and configuration parameters will be slightly different from the one specified via the Helm installer.</p>
 <h2 id="prerequisites">Prerequisites</h2>
 <p>The CSI Driver for Dell PowerMax can create PVC with different storage protocols access :</p>
@@ -748,9 +763,9 @@ Note: If your worker nodes are running Red Hat CoreOS, make sure that automatic 
 <h3 id="nfs-requirements">NFS requirements</h3>
 <p>CSI Driver for Dell PowerMax supports NFS communication. Ensure that the following requirements are met before you install CSI Driver:</p>
 <ul>
-<li>Configure the NFS network. Please refer <a href="https://dl.dell.com/content/manual57826791-dell-powermax-file-protocol-guide.pdf?language=en-us&ps=true">here</a> for more details.</li>
+<li>Configure the NFS network. Please refer <a href="https://dl.dell.com/content/manual57826791-dell-powermax-file-protocol-guide.pdf?language=en-us&amp;ps=true">here</a> for more details.</li>
 <li>PowerMax Embedded Management guest to access Unisphere for PowerMax.</li>
-<li>Create the NAS server. Please refer <a href="https://dl.dell.com/content/manual55638050-dell-powermax-file-quick-start-guide.pdf?language=en-us&ps=true">here</a> for more details.</li>
+<li>Create the NAS server. Please refer <a href="https://dl.dell.com/content/manual55638050-dell-powermax-file-quick-start-guide.pdf?language=en-us&amp;ps=true">here</a> for more details.</li>
 </ul>
 <h3 id="linux-multipathing-requirements">Linux multipathing requirements</h3>
 <p>CSI Driver for Dell PowerMax supports Linux multipathing. Configure Linux multipathing before installing the CSI Driver.</p>
@@ -827,7 +842,7 @@ Alternatively, you can check the status of the multipath service by entering the
 <p>Add initiators from all ESX/ESXis to a host(initiator group)/host group(cascaded initiator group) where the cluster is hosted.</p>
 </li>
 <li>
-<p>Create a secret which contains vCenter privileges. Follow the steps <a href="/csm-docs/docs/deployment/csmoperator/drivers/powermax/#support-for-auto-rdm-for-vsphere-over-fc">here</a> to create the same.</p>
+<p>Create a secret which contains vCenter privileges. Follow the steps <a href="#support-for-auto-rdm-for-vsphere-over-fc">here</a> to create the same.</p>
 </li>
 </ul>
 <h3 id="csi-powermax-reverseproxy">CSI PowerMax ReverseProxy</h3>
