@@ -176,7 +176,7 @@ enable = false
   url = "https://dell.github.io/csm-docs/docs/"
 
 [[params.versions]]
-  version = "v1.9.1"
+  version = "v1.9.3"
   url = "https://dell.github.io/csm-docs/v1"
 
 [[params.versions]]
@@ -205,3 +205,4 @@ enable = false
     path = "github.com/google/docsy/dependencies"
     disable = false
 
+ignoreFiles = ['^content/docs/deployment/csminstallationwizard/src/index\.html$']

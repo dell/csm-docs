@@ -21,28 +21,28 @@ There are three methods of installing `cert-csi`.
 1. Download the latest release of the cert-csi zip file.
 
 ```bash
-curl -LO https://github.com/dell/cert-csi/releases/download/v1.3.0/cert-csi-v1.3.0.zip
+curl -LO https://github.com/dell/cert-csi/releases/download/v1.3.1/cert-csi-v1.3.1.zip
 ```
 
 2. Unzip the file.
 
 ``` bash
-unzip cert-csi-v1.3.0.zip
-chmod +x ./cert-csi-v1.3.0
+unzip cert-csi-v1.3.1.zip
+chmod +x ./cert-csi-v1.3.1
 ```
 
-3. Install cert-csi-v1.3.0 as cert-csi.
+3. Install cert-csi-v1.3.1 as cert-csi.
 
 ```bash
-sudo install -o root -g root -m 0755 cert-csi-v1.3.0 /usr/local/bin/cert-csi
+sudo install -o root -g root -m 0755 cert-csi-v1.3.1 /usr/local/bin/cert-csi
 ```
 
 If you do not have root access on the target system, you can still install cert-csi to the ~/.local/bin directory:
 
 ```bash
-chmod +x cert-csi-v1.3.0
+chmod +x cert-csi-v1.3.1
 mkdir -p ~/.local/bin
-mv ./cert-csi-v1.3.0 ~/.local/bin/cert-csi
+mv ./cert-csi-v1.3.1 ~/.local/bin/cert-csi
 # and then append (or prepend) ~/.local/bin to $PATH
 ```
 
@@ -52,14 +52,14 @@ mv ./cert-csi-v1.3.0 ~/.local/bin/cert-csi
    {{% tab name="Docker" %}}
 
    ```bash
-      docker pull dellemc/cert-csi:v1.3.0
+      docker pull dellemc/cert-csi:v1.3.1
    ```
 
    {{% /tab %}}
    {{% tab name="Podman" %}}
 
    ```bash
-      podman pull dellemc/cert-csi:v1.3.0
+      podman pull dellemc/cert-csi:v1.3.1
    ```
 
    {{% /tab %}}
@@ -74,7 +74,7 @@ mv ./cert-csi-v1.3.0 ~/.local/bin/cert-csi
 1. Clone the repository
 
 ```bash
-git clone -b "v1.3.0" https://github.com/dell/cert-csi.git && cd cert-csi
+git clone -b "v1.3.1" https://github.com/dell/cert-csi.git && cd cert-csi
 ```
 
 2. Build cert-csi
@@ -116,12 +116,12 @@ make install-ms
 {{% /tab %}}
 {{% tab name="Docker" %}}
 ```bash
-   docker run --rm -it -v ~/.kube/config:/root/.kube/config dellemc/cert-csi:v1.3.0 --help
+   docker run --rm -it -v ~/.kube/config:/root/.kube/config dellemc/cert-csi:v1.3.1 --help
 ```
 {{% /tab %}}
 {{% tab name="Podman" %}}
 ```bash
-   podman run --rm -it -v ~/.kube/config:/root/.kube/config dellemc/cert-csi:v1.3.0 --help
+   podman run --rm -it -v ~/.kube/config:/root/.kube/config dellemc/cert-csi:v1.3.1 --help
 ```
 
 {{% /tab %}}
@@ -389,12 +389,12 @@ If you are using the container image, the `cert-config` file must be mounted int
 {{< tabs name="running-container-certify" >}}
 {{% tab name="Docker" %}}
 ```bash
-   docker run --rm -it -v ~/.kube/config:/root/.kube/config -v /home/user/example-certify-config.yaml:/example-certify-config.yaml dellemc/cert-csi:v1.3.0 certify --cert-config /example-certify-config.yaml --vsc <volume-snapshot-class>
+   docker run --rm -it -v ~/.kube/config:/root/.kube/config -v /home/user/example-certify-config.yaml:/example-certify-config.yaml dellemc/cert-csi:v1.3.1 certify --cert-config /example-certify-config.yaml --vsc <volume-snapshot-class>
 ```
 {{% /tab %}}
 {{% tab name="Podman" %}}
 ```bash
-   podman run --rm -it -v ~/.kube/config:/root/.kube/config -v /home/user/example-certify-config.yaml:/example-certify-config.yaml dellemc/cert-csi:v1.3.0 certify --cert-config /example-certify-config.yaml --vsc <volume-snapshot-class>
+   podman run --rm -it -v ~/.kube/config:/root/.kube/config -v /home/user/example-certify-config.yaml:/example-certify-config.yaml dellemc/cert-csi:v1.3.1 certify --cert-config /example-certify-config.yaml --vsc <volume-snapshot-class>
 ```
 
 {{% /tab %}}
@@ -587,12 +587,12 @@ If you are using the container image, the `attr` file must be mounted into the c
 {{< tabs name="running-container-ephemeral-volume" >}}
 {{% tab name="Docker" %}}
 ```bash
-   docker run --rm -it -v ~/.kube/config:/root/.kube/config -v /home/user/ephemeral-config.properties:/ephemeral-config.properties dellemc/cert-csi:v1.3.0 test ephemeral-volume --driver <driver-name> --attr /ephemeral-config.properties
+   docker run --rm -it -v ~/.kube/config:/root/.kube/config -v /home/user/ephemeral-config.properties:/ephemeral-config.properties dellemc/cert-csi:v1.3.1 test ephemeral-volume --driver <driver-name> --attr /ephemeral-config.properties
 ```
 {{% /tab %}}
 {{% tab name="Podman" %}}
 ```bash
-   podman run --rm -it -v ~/.kube/config:/root/.kube/config -v /home/user/ephemeral-config.properties:/ephemeral-config.properties dellemc/cert-csi:v1.3.0 test ephemeral-volume --driver <driver-name> --attr /ephemeral-config.properties
+   podman run --rm -it -v ~/.kube/config:/root/.kube/config -v /home/user/ephemeral-config.properties:/ephemeral-config.properties dellemc/cert-csi:v1.3.1 test ephemeral-volume --driver <driver-name> --attr /ephemeral-config.properties
 ```
 
 {{% /tab %}}

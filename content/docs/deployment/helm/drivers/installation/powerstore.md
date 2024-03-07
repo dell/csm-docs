@@ -86,6 +86,53 @@ Set up Linux multipathing as follows:
 - Enable `user_friendly_names` and `find_multipaths` in the `multipath.conf` file.
 - Ensure that the multipath command for `multipath.conf` is available on all Kubernetes nodes.
 
+#### multipathd `MachineConfig`
+
+If you are installing a CSI Driver which requires the installation of the Linux native Multipath software - _multipathd_, please follow the below instructions
+
+To enable multipathd on RedHat CoreOS nodes you need to prepare a working configuration encoded in base64.
+
+```bash echo 'defaults {
+user_friendly_names yes
+find_multipaths yes
+}
+blacklist {
+}' | base64 -w0
+```
+
+Use the base64 encoded string output in the following `MachineConfig` yaml file (under source section)
+```yaml
+apiVersion: machineconfiguration.openshift.io/v1
+kind: MachineConfig
+metadata:
+  name: workers-multipath-conf-default
+  labels:
+    machineconfiguration.openshift.io/role: worker
+spec:
+  config:
+    ignition:
+      version: 3.2.0
+    storage:
+      files:
+      - contents:
+          source: data:text/plain;charset=utf-8;base64,ZGVmYXVsdHMgewp1c2VyX2ZyaWVuZGx5X25hbWVzIHllcwpmaW5kX211bHRpcGF0aHMgeWVzCn0KCmJsYWNrbGlzdCB7Cn0K
+          verification: {}
+        filesystem: root
+        mode: 400
+        path: /etc/multipath.conf
+```
+After deploying this`MachineConfig` object, CoreOS will start multipath service automatically.
+Alternatively, you can check the status of the multipath service by entering the following command in each worker nodes.
+`sudo multipath -ll`
+
+If the above command is not successful, ensure that the /etc/multipath.conf file is present and configured properly. Once the file has been configured correctly, enable the multipath service by running the following command:
+`sudo /sbin/mpathconf –-enable --with_multipathd y`
+
+Finally, you have to restart the service by providing the command
+`sudo systemctl restart multipathd`
+
+For additional information refer to official documentation of the multipath configuration.
+
 ### (Optional) Volume Snapshot Requirements
   For detailed snapshot setup procedure, [click here.](../../../../../snapshots/#optional-volume-snapshot-requirements)
 
