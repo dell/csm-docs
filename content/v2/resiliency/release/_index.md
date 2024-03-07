@@ -6,14 +6,19 @@ Description: >
   Dell Container Storage Modules (CSM) release notes for resiliency
 ---
 
-## Release Notes - CSM Resiliency 1.6.0
+## Release Notes - CSM Resiliency 1.7.0
+
+
 
 ### New Features/Changes
-- CSM support for Kubernetes 1.27. ([#761](https://github.com/dell/csm/issues/761))
-- CSM 1.7 release specific changes. ([#743](https://github.com/dell/csm/issues/743))
-- CSM Operator: Support install of Resiliency module. ([#739](https://github.com/dell/csm/issues/739))
+
+- [#724 - [FEATURE]: CSM support for Openshift 4.13](https://github.com/dell/csm/issues/724)
+- [#922 - [FEATURE]: Use ubi9 micro as base image](https://github.com/dell/csm/issues/922)
 
 ### Fixed Issues
-- CSM for Resiliency openshift test required to pass ssh options in scp command. ([#737](https://github.com/dell/csm/issues/737))
-- CSM Resiliency GitHub actions produce sporadic failure. ([#733](https://github.com/dell/csm/issues/733))
-- CSI PODMON is tainting the worker node ([#765](https://github.com/dell/csm/issues/765))
+
+- [#916 - [BUG]: Remove references to deprecated io/ioutil package](https://github.com/dell/csm/issues/916)
+
+### Known Issues
+
+There are no known issues in this release.

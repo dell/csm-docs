@@ -35,7 +35,7 @@ If the Authorization module is enabled for the CSI drivers installed in the same
 
 ## Prerequisites
 
-- Helm 3.3
+- Helm 3.x
 - The deployment of one or more [supported](../#supported-csi-drivers) Dell CSI drivers
 
 ## Online Installer

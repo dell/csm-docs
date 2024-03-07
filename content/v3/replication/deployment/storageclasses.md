@@ -29,7 +29,6 @@ This should contain the name of the storage class on the remote cluster which is
 >**_NOTE_**: You still need to create a pair of storage classes even while using a single stretched cluster.
 
 ### Driver specific parameters
-
 Please refer to the driver specific sections for [PowerMax](../powermax/#creating-storage-classes), [PowerStore](../powerstore/#creating-storage-classes), [PowerScale](../powerscale/#creating-storage-classes) or [PowerFlex](../powerflex#creating-storage-classes) for a detailed list of parameters.
 
 ### PV sync Deletion
@@ -38,7 +37,7 @@ The dell-csm-replicator supports 'sync deletion' of replicated PV resources i.e 
 
 The decision to whether or not sync delete the corresponding PV depends on a Storage Class parameter which can be configured by the user: 
 
-```
+```yaml
 replication.storage.dell.com/remotePVRetentionPolicy: 'delete' | 'retain'
 ```
 
@@ -54,7 +53,7 @@ The dell-csm-replicator supports 'sync deletion' of RG (DellCSIReplicationGroup)
 
 The decision to whether or not sync delete the corresponding RG depends on a Storage Class parameter which can be configured by the user. 
 
-```
+```yaml
 replication.storage.dell.com/remoteRGRetentionPolicy: 'delete' | 'retain'
 ```
 

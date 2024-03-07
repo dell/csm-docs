@@ -4,8 +4,7 @@ linktitle: Offline Installer
 description: Offline Installation of Dell CSI Storage Providers
 ---
 
-The `csi-offline-bundle.sh` script can be used to create a package usable for offline installation of the Dell CSI Storage Providers, via either Helm 
-or the Dell CSI Operator. 
+The `csi-offline-bundle.sh` script can be used to create a package usable for offline installation of the Dell CSI Storage Providers, via either Helm or the Dell CSM Operator. 
 
 This includes the following drivers:
 * [PowerFlex](https://github.com/dell/csi-vxflexos)
@@ -14,8 +13,9 @@ This includes the following drivers:
 * [PowerStore](https://github.com/dell/csi-powerstore)
 * [Unity XT](https://github.com/dell/csi-unity)
 
-As well as the Dell CSI Operator
-* [Dell CSI Operator](https://github.com/dell/dell-csi-operator)
+As well as the Dell CSM Operator.
+* [Dell CSM Operator](https://github.com/dell/csm-operator)
+   - Directions for offline installation can be found [here](../../../deployment/csmoperator/#building-an-offline-bundle).
 
 ## Dependencies
 
@@ -50,93 +50,93 @@ To perform an offline installation of a driver or the Operator, the following st
 This needs to be performed on a Linux system with access to the Internet as a git repo will need to be cloned, and container images pulled from public registries.
 
 To build an offline bundle, the following steps are needed:
-1. Perform a `git clone` of the desired repository. For a helm-based install, the specific driver repo should be cloned. For an Operator based deployment, the Dell CSI Operator repo should be cloned
+1. Perform a `git clone` of the desired repository. For a helm-based install, the specific driver repo should be cloned. For an Operator based deployment, the Dell CSM Operator repo should be cloned
 2. Run the `csi-offline-bundle.sh` script with an argument of `-c` in order to create an offline bundle
   - For Helm installs, the `csi-offline-bundle.sh` script will be found in the `dell-csi-helm-installer` directory
-  - For Operator installs, the `csi-offline-bundle.sh` script will be found in the `scripts` directory
+  - For Operator installs, the `csm-offline-bundle.sh` script will be found in the `scripts` directory
 
 The script will perform the following steps:
-  - Determine required images by parsing either the driver Helm charts (if run from a cloned CSI Driver git repository) or the Dell CSI Operator configuration files (if run from a clone of the Dell CSI Operator repository)
+  - Determine required images by parsing either the driver Helm charts (if run from a cloned CSI Driver git repository) or the Dell CSM Operator configuration files (if run from a clone of the Dell CSM Operator repository)
   - Perform an image `pull` of each image required
   - Save all required images to a file by running `docker save` or `podman save`
   - Build a `tar.gz` file containing the images as well as files required to installer the driver and/or Operator
 
 The resulting offline bundle file can be copied to another machine, if necessary, to gain access to the desired image registry.
 
-For example, here is the output of a request to build an offline bundle for the Dell CSI Operator:
+For example, here is the output of a request to build an offline bundle for the Dell CSM Operator:
 ```bash
-git clone -b v1.12.0 https://github.com/dell/dell-csi-operator.git
+git clone -b v1.4.3 https://github.com/dell/csm-operator.git
 ```
 ```bash
-cd dell-csi-operator/scripts
+cd csm-operator
 ```
 ```bash
-./csi-offline-bundle.sh -c
+bash scripts/csm-offline-bundle.sh -c
 ```
 ```
 *
+* Building image manifest file
+
+   Processing file /root/csm-operator/operatorconfig/driverconfig/common/default.yaml
+   Processing file /root/csm-operator/bundle/manifests/dell-csm-operator.clusterserviceversion.yaml
+
+*
 * Pulling and saving container images
 
-   dellemc/csi-isilon:v2.5.0
-   dellemc/csi-isilon:v2.6.0
-   dellemc/csi-isilon:v2.7.0
-   dellemc/csipowermax-reverseproxy:v2.4.0
-   dellemc/csi-powermax:v2.3.1
-   dellemc/csi-powermax:v2.4.0
-   dellemc/csi-powermax:v2.5.0
-   dellemc/csi-powerstore:v2.6.0
-   dellemc/csi-powerstore:v2.7.0
-   dellemc/csi-powerstore:v2.8.0
-   dellemc/csi-unity:v2.3.0
-   dellemc/csi-unity:v2.4.0
-   dellemc/csi-unity:v2.5.0
-   dellemc/csi-vxflexos:v2.6.0
-   dellemc/csi-vxflexos:v2.7.0
-   dellemc/csi-vxflexos:v2.8.0
-   dellemc/dell-csi-operator:v1.12.0
-   dellemc/sdc:3.6
-   dellemc/sdc:3.6.0.6
-   dellemc/sdc:3.6.1
-   docker.io/busybox:1.32.0
-   ...
-   ...
+   dellemc/csi-isilon:v2.9.1
+   dellemc/csi-metadata-retriever:v1.6.1
+   dellemc/csipowermax-reverseproxy:v2.8.1
+   dellemc/csi-powermax:v2.9.1
+   dellemc/csi-powerstore:v2.9.1
+   dellemc/csi-unity:v2.8.1
+   dellemc/csi-vxflexos:v2.9.2
+   dellemc/csm-authorization-sidecar:v1.9.1
+   dellemc/csm-metrics-powerflex:v1.5.0
+   dellemc/csm-metrics-powerscale:v1.2.0
+   dellemc/csm-topology:v1.5.0
+   dellemc/dell-csi-replicator:v1.7.1
+   dellemc/dell-replication-controller:v1.7.0
+   dellemc/sdc:4.5
+   docker.io/dellemc/dell-csm-operator:v1.4.3
+   gcr.io/kubebuilder/kube-rbac-proxy:v0.8.0
+   nginxinc/nginx-unprivileged:1.20
+   otel/opentelemetry-collector:0.42.0
+   registry.k8s.io/sig-storage/csi-attacher:v4.3.0
+   registry.k8s.io/sig-storage/csi-external-health-monitor-controller:v0.9.0
+   registry.k8s.io/sig-storage/csi-node-driver-registrar:v2.8.0
+   registry.k8s.io/sig-storage/csi-provisioner:v3.5.0
+   registry.k8s.io/sig-storage/csi-resizer:v1.8.0
+   registry.k8s.io/sig-storage/csi-snapshotter:v6.2.2
 
 *
 * Copying necessary files
 
-   /root/dell-csi-operator/driverconfig
-   /root/dell-csi-operator/deploy
-   /root/dell-csi-operator/samples
-   /root/dell-csi-operator/scripts
-   /root/dell-csi-operator/OLM.md
-   /root/dell-csi-operator/README.md
-   /root/dell-csi-operator/LICENSE
+ /root/csm-operator/deploy
+ /root/csm-operator/operatorconfig
+ /root/csm-operator/samples
+ /root/csm-operator/scripts
+ /root/csm-operator/README.md
+ /root/csm-operator/LICENSE
 
 *
 * Compressing release
 
-   dell-csi-operator-bundle/
-   dell-csi-operator-bundle/driverconfig/
-   dell-csi-operator-bundle/driverconfig/config.yaml
-   dell-csi-operator-bundle/driverconfig/isilon_v230_v121.json
-   dell-csi-operator-bundle/driverconfig/isilon_v230_v122.json
-   dell-csi-operator-bundle/driverconfig/isilon_v230_v123.json
-   dell-csi-operator-bundle/driverconfig/isilon_v230_v124.json
-   dell-csi-operator-bundle/driverconfig/isilon_v240_v121.json
-   dell-csi-operator-bundle/driverconfig/isilon_v240_v122.json
-   dell-csi-operator-bundle/driverconfig/isilon_v240_v123.json
-   dell-csi-operator-bundle/driverconfig/isilon_v240_v124.json
-   dell-csi-operator-bundle/driverconfig/isilon_v250_v123.json
-   dell-csi-operator-bundle/driverconfig/isilon_v250_v124.json
-   dell-csi-operator-bundle/driverconfig/isilon_v250_v125.json
-   dell-csi-operator-bundle/driverconfig/powermax_v230_v121.json
-   ...
-   ...
+dell-csm-operator-bundle/
+dell-csm-operator-bundle/deploy/
+dell-csm-operator-bundle/deploy/operator.yaml
+dell-csm-operator-bundle/deploy/crds/
+dell-csm-operator-bundle/deploy/crds/storage.dell.com_containerstoragemodules.yaml
+dell-csm-operator-bundle/deploy/olm/
+dell-csm-operator-bundle/deploy/olm/operator_community.yaml
+...
+...
+dell-csm-operator-bundle/README.md
+dell-csm-operator-bundle/LICENSE
 
 *
 * Complete
 
-Offline bundle file is: /root/dell-csi-operator/dell-csi-operator-bundle.tar.gz
+Offline bundle file is: /root/csm-operator/dell-csm-operator-bundle.tar.gz
 
 ```
 
@@ -148,6 +148,7 @@ To prepare for the driver or Operator installation, the following steps need to 
 1. Copy the offline bundle file created from the previous step to a system with access to an image registry available to your Kubernetes/OpenShift cluster
 2. Expand the bundle file by running `tar xvfz <filename>`
 3. Run the `csi-offline-bundle.sh` script and supply the `-p` option as well as the path to the internal registry with the `-r` option
+    - For Operator installs, the `csm-offline-bundle.sh` script will be found in the `scripts` directory
 
 The script will then perform the following steps:
   - Load the required container images into the local system
@@ -156,24 +157,28 @@ The script will then perform the following steps:
   - Modify the Helm charts or Operator configuration to refer to the newly tagged/pushed images
 
 
-An example of preparing the bundle for installation (192.168.75.40:5000 refers to an image registry accessible to Kubernetes/OpenShift):
+An example of preparing the bundle for installation for the Dell CSM Operator:
 ```bash
-tar xvfz dell-csi-operator-bundle.tar.gz
+tar xvfz dell-csm-operator-bundle.tar.gz
 ```
 ```
-dell-csi-operator-bundle/
-dell-csi-operator-bundle/samples/
+dell-csm-operator-bundle/
+dell-csm-operator-bundle/deploy/
+dell-csm-operator-bundle/deploy/operator.yaml
+dell-csm-operator-bundle/deploy/crds/
+dell-csm-operator-bundle/deploy/crds/storage.dell.com_containerstoragemodules.yaml
+dell-csm-operator-bundle/deploy/olm/
+dell-csm-operator-bundle/deploy/olm/operator_community.yaml
 ...
-<listing of files included in bundle>
 ...
-dell-csi-operator-bundle/LICENSE
-dell-csi-operator-bundle/README.md
+dell-csm-operator-bundle/README.md
+dell-csm-operator-bundle/LICENSE
 ```
 ```bash
-cd dell-csi-operator-bundle
+cd dell-csm-operator-bundle
 ```
 ```bash
-./csi-offline-bundle.sh -p -r localregistry:5000/csi-operator
+bash scripts/csm-offline-bundle.sh -p -r localregistry:5000/dell-csm-operator/
 ```
 ```
 Preparing a offline bundle for installation
@@ -181,93 +186,43 @@ Preparing a offline bundle for installation
 *
 * Loading docker images
 
-   5b1fa8e3e100: Loading layer [==================================================>]  3.697MB/3.697MB
-   e20ed4c73206: Loading layer [==================================================>]  17.22MB/17.22MB
-   Loaded image: k8s.gcr.io/sig-storage/csi-node-driver-registrar:v2.6.0
-   d72a74c56330: Loading layer [==================================================>]  3.031MB/3.031MB
-   f2d2ab12e2a7: Loading layer [==================================================>]  48.08MB/48.08MB
-   Loaded image: k8s.gcr.io/sig-storage/csi-snapshotter-v6.1.0
-   417cb9b79ade: Loading layer [==================================================>]  3.062MB/3.062MB
-   61fefb35ccee: Loading layer [==================================================>]  16.88MB/16.88MB
-   Loaded image: k8s.gcr.io/sig-storage/csi-node-driver-registrar:v2.5.1
-   7a5b9c0b4b14: Loading layer [==================================================>]  3.031MB/3.031MB
-   1555ad6e2d44: Loading layer [==================================================>]  49.86MB/49.86MB
-   Loaded image: k8s.gcr.io/sig-storage/csi-attacher-v4.0.0
-   2de1422d5d2d: Loading layer [==================================================>]  54.56MB/54.56MB
-   Loaded image: k8s.gcr.io/sig-storage/csi-resizer-v1.6.0
-   25a1c1010608: Loading layer [==================================================>]  54.54MB/54.54MB
-   Loaded image: k8s.gcr.io/sig-storage/csi-snapshotter-v6.0.1
-   07363fa84210: Loading layer [==================================================>]  3.062MB/3.062MB
-   5227e51ea570: Loading layer [==================================================>]  54.92MB/54.92MB
-   Loaded image: k8s.gcr.io/sig-storage/csi-attacher-v3.5.0
-   cfb5cbeabdb2: Loading layer [==================================================>]  55.38MB/55.38MB
-   Loaded image: k8s.gcr.io/sig-storage/csi-resizer-v1.5.0
-   ...
-   ...
+Loaded image: docker.io/dellemc/csi-powerstore:v2.9.1
+Loaded image: docker.io/dellemc/csi-isilon:v2.9.1
+...
+...
+Loaded image: registry.k8s.io/sig-storage/csi-resizer:v1.8.0
+Loaded image: registry.k8s.io/sig-storage/csi-snapshotter:v6.2.2
 
 *
 * Tagging and pushing images
 
-   dellemc/dell-csi-operator:v1.12.0 -> localregistry:5000/csi-operator/dell-csi-operator:v1.12.0
-   dellemc/csi-isilon:v2.3.0 -> localregistry:5000/csi-operator/csi-isilon:v2.3.0
-   dellemc/csi-isilon:v2.4.0 -> localregistry:5000/csi-operator/csi-isilon:v2.4.0
-   dellemc/csi-isilon:v2.5.0 -> localregistry:5000/csi-operator/csi-isilon:v2.5.0
-   dellemc/csipowermax-reverseproxy:v2.4.0 -> localregistry:5000/csi-operator/csipowermax-reverseproxy:v2.4.0
-   dellemc/csi-powermax:v2.3.1 -> localregistry:5000/csi-operator/csi-powermax:v2.3.1
-   dellemc/csi-powermax:v2.4.0 -> localregistry:5000/csi-operator/csi-powermax:v2.4.0
-   dellemc/csi-powermax:v2.5.0 -> localregistry:5000/csi-operator/csi-powermax:v2.5.0
-   dellemc/csi-powerstore:v2.6.0 -> localregistry:5000/csi-operator/csi-powerstore:v2.6.0
-   dellemc/csi-powerstore:v2.7.0 -> localregistry:5000/csi-operator/csi-powerstore:v2.7.0
-   dellemc/csi-powerstore:v2.8.0 -> localregistry:5000/csi-operator/csi-powerstore:v2.8.0
-   dellemc/csi-unity:v2.3.0 -> localregistry:5000/csi-operator/csi-unity:v2.3.0
-   dellemc/csi-unity:v2.4.0 -> localregistry:5000/csi-operator/csi-unity:v2.4.0
-   dellemc/csi-unity:v2.5.0 -> localregistry:5000/csi-operator/csi-unity:v2.5.0
-   dellemc/csi-vxflexos:v2.6.0 -> localregistry:5000/csi-operator/csi-vxflexos:v2.6.0
-   dellemc/csi-vxflexos:v2.7.0 -> localregistry:5000/csi-operator/csi-vxflexos:v2.7.0
-   dellemc/csi-vxflexos:v2.8.0 -> localregistry:5000/csi-operator/csi-vxflexos:v2.8.0
-   dellemc/sdc:3.6 -> localregistry:5000/csi-operator/sdc:3.6
-   dellemc/sdc:3.6.0.6 -> localregistry:5000/csi-operator/sdc:3.6.0.6
-   dellemc/sdc:3.6.1 -> localregistry:5000/csi-operator/sdc:3.6.1
-   docker.io/busybox:1.32.0 -> localregistry:5000/csi-operator/busybox:1.32.0
+   dellemc/csi-isilon:v2.8.0 -> localregistry:5000/dell-csm-operator/csi-isilon:v2.8.0
+   dellemc/csi-metadata-retriever:v1.5.0 -> localregistry:5000/dell-csm-operator/csi-metadata-retriever:v1.5.0
    ...
    ...
+   registry.k8s.io/sig-storage/csi-resizer:v1.8.0 -> localregistry:5000/dell-csm-operator/csi-resizer:v1.8.0
+   registry.k8s.io/sig-storage/csi-snapshotter:v6.2.2 -> localregistry:5000/dell-csm-operator/csi-snapshotter:v6.2.2
 
 *
-* Preparing operator files within /root/dell-csi-operator-bundle
+* Preparing files within /root/dell-csm-operator-bundle
 
-   changing: dellemc/dell-csi-operator:v1.12.0 -> localregistry:5000/csi-operator/dell-csi-operator:v1.12.0
-   changing: dellemc/csi-isilon:v2.3.0 -> localregistry:5000/csi-operator/csi-isilon:v2.3.0
-   changing: dellemc/csi-isilon:v2.4.0 -> localregistry:5000/csi-operator/csi-isilon:v2.4.0
-   changing: dellemc/csi-isilon:v2.5.0 -> localregistry:5000/csi-operator/csi-isilon:v2.5.0
-   changing: dellemc/csipowermax-reverseproxy:v2.4.0 -> localregistry:5000/csi-operator/csipowermax-reverseproxy:v2.4.0
-   changing: dellemc/csi-powermax:v2.3.1 -> localregistry:5000/csi-operator/csi-powermax:v2.3.1
-   changing: dellemc/csi-powermax:v2.4.0 -> localregistry:5000/csi-operator/csi-powermax:v2.4.0
-   changing: dellemc/csi-powermax:v2.5.0 -> localregistry:5000/csi-operator/csi-powermax:v2.5.0
-   changing: dellemc/csi-powerstore:v2.6.0 -> localregistry:5000/csi-operator/csi-powerstore:v2.6.0
-   changing: dellemc/csi-powerstore:v2.7.0 -> localregistry:5000/csi-operator/csi-powerstore:v2.7.0
-   changing: dellemc/csi-powerstore:v2.8.0 -> localregistry:5000/csi-operator/csi-powerstore:v2.8.0
-   changing: dellemc/csi-unity:v2.3.0 -> localregistry:5000/csi-operator/csi-unity:v2.3.0
-   changing: dellemc/csi-unity:v2.4.0 -> localregistry:5000/csi-operator/csi-unity:v2.4.0
-   changing: dellemc/csi-unity:v2.5.0 -> localregistry:5000/csi-operator/csi-unity:v2.5.0
-   changing: dellemc/csi-vxflexos:v2.6.0 -> localregistry:5000/csi-operator/csi-vxflexos:v2.6.0
-   changing: dellemc/csi-vxflexos:v2.7.0 -> localregistry:5000/csi-operator/csi-vxflexos:v2.7.0
-   changing: dellemc/csi-vxflexos:v2.8.0 -> localregistry:5000/csi-operator/csi-vxflexos:v2.8.0
-   changing: dellemc/sdc:3.6 -> localregistry:5000/csi-operator/sdc:3.6
-   changing: dellemc/sdc:3.6.0.6 -> localregistry:5000/csi-operator/sdc:3.6.0.6
-   changing: dellemc/sdc:3.6.1 -> localregistry:5000/csi-operator/sdc:3.6.1
-   changing: docker.io/busybox:1.32.0 -> localregistry:5000/csi-operator/busybox:1.32.0
+   changing: dellemc/csi-isilon:v2.8.0 -> localregistry:5000/dell-csm-operator/csi-isilon:v2.8.0
+   changing: dellemc/csi-metadata-retriever:v1.5.0 -> localregistry:5000/dell-csm-operator/csi-metadata-retriever:v1.5.0
    ...
    ...
- 
+   changing: registry.k8s.io/sig-storage/csi-resizer:v1.8.0 -> localregistry:5000/dell-csm-operator/csi-resizer:v1.8.0
+   changing: registry.k8s.io/sig-storage/csi-snapshotter:v6.2.2 -> localregistry:5000/dell-csm-operator/csi-snapshotter:v6.2.2
+
 *
 * Complete
+
 ```
 
 ### Perform either a Helm installation or Operator installation
 
-Now that the required images are available and the Helm Charts/Operator configuration updated, you can proceed by following the usual installation procedure as documented either via [Helm](../helm) or [Operator](../operator/#manual-installation).
+Now that the required images are available and the Helm Charts/Operator configuration updated, you can proceed by following the usual installation procedure as documented either via [Helm](../helm) or [Operator](../../../deployment/csmoperator/#installation).
 
 *NOTES:* 
 1. Offline bundle installation is only supported with manual installs i.e. without using Operator Lifecycle Manager.
-2. Installation should be done using the files that are obtained after unpacking the offline bundle (dell-csi-operator-bundle.tar.gz) as the image tags in the manifests are modified to point to the internal registry. 
+2. Installation should be done using the files that are obtained after unpacking the offline bundle (dell-csm-operator-bundle.tar.gz) as the image tags in the manifests are modified to point to the internal registry. 
 3. Offline bundle installs operator in `default` namespace via install.sh script. Make sure that the current context in kubeconfig file has the namespace set to `default`.

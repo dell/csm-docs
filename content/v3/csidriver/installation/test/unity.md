@@ -4,7 +4,7 @@ linktitle: Unity XT
 description: Tests to validate Unity XT CSI Driver installation
 ---
 
-## Test deploying a simple Pod and Pvc with Unity XT storage
+## Test deploying a simple Pod and PVC with Unity XT storage
 In the repository, a simple test manifest exists that creates three different PersistentVolumeClaims using default NFS and iSCSI and FC storage classes and automatically mounts them to the pod.
 
 **Steps**
@@ -13,11 +13,11 @@ In the repository, a simple test manifest exists that creates three different Pe
    ```bash
    kubectl create -f ./test/sample.yaml
    ```
-You can find all the created resources in `test-unity` namespace.
+You can find all the created resources in `unity` namespace.
 
 2. Check if the pod is created and Ready and Running by running:
    ```bash
-   kubectl get all -n test-unity
+   kubectl get all -n unity
    ```
    If it is in CrashLoopback state then the driver installation was not successful. Check the logs of the node and the controller.
 

@@ -130,6 +130,7 @@ Create a secret named powermax-certs in the namespace where the CSI PowerMax dri
    | --------- | ----------- | -------- |-------- |
    | replicas | Controls the number of controller Pods you deploy. If controller Pods are greater than the number of available nodes, excess Pods will become stuck in pending. The default is 2 which allows for Controller high availability. | Yes | 2 |
    | fsGroupPolicy | Defines which FS Group policy mode to be used, Supported modes `None, File and ReadWriteOnceWithFSType` | No | "ReadWriteOnceWithFSType" |
+   | storageCapacity | Helps the scheduler to schedule the pod on a node satisfying the topology constraints, only if the requested capacity is available on the storage array | - | true |
    | ***Common parameters for node and controller*** |
    | X_CSI_K8S_CLUSTER_PREFIX | Define a prefix that is appended to all resources created in the array; unique per K8s/CSI deployment; max length - 3 characters | Yes | XYZ |
    | X_CSI_POWERMAX_ENDPOINT | IP address of the Unisphere for PowerMax | Yes | https://0.0.0.0:8443 |
@@ -149,6 +150,7 @@ Create a secret named powermax-certs in the namespace where the CSI PowerMax dri
    | ***Node parameters***|
    | X_CSI_POWERMAX_ISCSI_ENABLE_CHAP | Enable ISCSI CHAP authentication. For more details on this feature see the related [documentation](../../../features/powermax/#iscsi-chap) | No | false |
    | X_CSI_TOPOLOGY_CONTROL_ENABLED | Enable/Disabe topology control. It filters out arrays, associated transport protocol available to each node and creates topology keys based on any such user input. | No | false |
+   | X_CSI_MAX_VOLUMES_PER_NODE | Enable volume limits. It specifies the maximum number of volumes that can be created on a node. | Yes | 0 |
    
 5. Execute the following command to create the PowerMax custom resource:`kubectl create -f <input_sample_file.yaml>`. The above command will deploy the CSI-PowerMax driver.
 
@@ -208,7 +210,8 @@ Use a tool such as `openssl` to generate this secret using the example below:
 openssl genrsa -out tls.key 2048
 openssl req -new -x509 -sha256 -key tls.key -out tls.crt -days 3650
 kubectl create secret -n <namespace> tls revproxy-certs --cert=tls.crt --key=tls.key
-kubectl create secret -n <namespace> tls csirevproxy-tls-secret --cert=tls.crt --key=tls.key
+kubectl create secret -n <namespace> tls csirevproxy-tls-secret --cert=tls.crt --
+key=tls.key
 ```
 
 #### Set the following parameters in the CSI PowerMaxReverseProxy Spec
