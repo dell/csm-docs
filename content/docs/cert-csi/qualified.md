@@ -1,7 +1,7 @@
 ---
-title: Community Qualified Configuration
-linktitle: Community Qualified Configuration
-description: Community Qualified Configuration
+title: Community Qualified Configurations
+linktitle: Community Qualified Configurations
+description: Community Qualified Configurations
 ---
 
 {{<table "table table-striped table-bordered table-sm">}}
