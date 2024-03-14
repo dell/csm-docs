@@ -19,6 +19,10 @@ weight: 3
 | Amazon Elastic Kubernetes Service<br> Anywhere | ?? |
 {{</table>}}
 
+> Notes:
+> * The host operating system/version being used must align with what each Dell Storage platform supports. Please visit [E-Lab Navigator](https://elabnavigator.dell.com/eln/modernHomeSSM) for specific Dell Storage platform host operating system level support matrices.
+> * Any orchestrator platform or version that's not mentioned here must be self-certified using Cert-CSI in order to be supported.  Although not mandatory, we recommend users to use orchestrator platforms and versions that have not met their end of life.
+
 ## Supported Storage Platforms
 
 {{<table "table table-striped table-bordered table-sm">}}
@@ -31,3 +35,6 @@ weight: 3
 | PowerStore  | 3.0, 3.2, 3.5 | iscsi-initiator-utils<br>multipathd<br>nvme-cli<br>nfs-utils |
 | Rancher Kubernetes Engine | 1.4.x|
 {{</table>}}
+
+> Notes:
+> * The required OS dependencies are only for the protocol needed (e.g. if NVMe isn't the storage access protocol then nvme-cli is not required).
