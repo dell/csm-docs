@@ -5,23 +5,6 @@ description: Prerequisites for CSM
 weight: 1
 ---
 
-## Supported Container Orchestrator Platforms
-
-{{<table "table table-striped table-bordered table-sm">}}
-| Platform      | Version          |
-|---------------|:----------------:|
-| Kubernetes    | 1.27, 1.28, 1.29 |
-| Red Hat OpenShift | 4.13, 4.14 |
-| Mirantis Kubernetes Engine | 3.7.x |
-| Google Anthos |        1.15      |
-| Rancher Kubernetes Engine | 1.4.x|
-| Amazon Elastic Kubernetes Service | ?? |
-{{</table>}}
-
-> Notes:
-> * The host operating system/version being used must align with what each Dell Storage platform supports. Please visit [E-Lab Navigator](https://elabnavigator.dell.com/eln/modernHomeSSM) for specific Dell Storage platform host operating system level support matrices.
-> * Any orchestrator platform or version that's not mentioned here must be self-certified using [Cert-CSI](https://dell.github.io/csm-docs/docs/csidriver/installation/test/certcsi/) in order to be supported.  Although not mandatory, we recommend users to use orchestrator platforms and versions that have not met their end of life.
-
 ## Supported Storage Platforms
 
 {{<table "table table-striped table-bordered table-sm">}}
@@ -40,3 +23,20 @@ weight: 1
 > * [CSM Authorization](https://dell.github.io/csm-docs/docs/authorization/) only supports Kubernetes and the following Storage Platforms: PowerMax, PowerFlex, and PowerScale.
 > * [CSM Observability](https://dell.github.io/csm-docs/docs/observability/) does not support the Unity XT Storage Platform.
 > * [CSM Replication](https://dell.github.io/csm-docs/docs/replication/) does not support the Unity XT Storage Platform or File Replication for PowerMax.
+
+## Supported Container Orchestrator Platforms
+
+{{<table "table table-striped table-bordered table-sm">}}
+| Platform      | Version          |
+|---------------|:----------------:|
+| Kubernetes    | 1.27, 1.28, 1.29 |
+| Red Hat OpenShift | 4.13, 4.14 |
+| Mirantis Kubernetes Engine | 3.7.x |
+| Google Anthos |        1.15      |
+| Rancher Kubernetes Engine | 1.4.x|
+| Amazon Elastic Kubernetes Service | ?? |
+{{</table>}}
+
+> Notes:
+> * The host operating system/version being used must align with what each Dell Storage platform supports. Please visit [E-Lab Navigator](https://elabnavigator.dell.com/eln/modernHomeSSM) for specific Dell Storage platform host operating system level support matrices.
+> * Any orchestrator platform or version that's not mentioned here must be self-certified using [Cert-CSI](https://dell.github.io/csm-docs/docs/csidriver/installation/test/certcsi/) in order to be supported.  Although not mandatory, we recommend users to use orchestrator platforms and versions that have not met their end of life.
