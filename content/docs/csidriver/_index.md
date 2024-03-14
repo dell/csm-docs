@@ -12,25 +12,6 @@ The CSI Drivers by Dell implement an interface between [CSI](https://kubernetes-
 
 ## Features and capabilities
 
-### Supported Container Orchestrator Platforms
-
-{{<table "table table-striped table-bordered table-sm">}}
-|               | PowerMax         | PowerFlex           | Unity XT         | PowerScale        | PowerStore       |
-|---------------|:----------------:|:-------------------:|:----------------:|:-----------------:|:----------------:|
-| Kubernetes    | 1.27, 1.28, 1.29 | 1.27, 1.28, 1.29    | 1.27, 1.28, 1.29 | 1.27, 1.28, 1.29  | 1.27, 1.28, 1.29 |
-| Red Hat OpenShift | 4.13, 4.14 | 4.13, 4.14 | 4.13, 4.14 | 4.13, 4.14 | 4.13, 4.14 |
-| Mirantis Kubernetes Engine | 3.7.x |     3.7.x         |       3.7.x      |         3.7.x      |        3.7.x     |
-| Google Anthos |        1.15      |          1.15       |        no        |         1.15      |        1.15      |
-| VMware Tanzu  |        no        |          no         |        NFS       |         NFS       |      NFS,iSCSI   |
-| Rancher Kubernetes Engine | 1.4.x|          1.4.x      |        1.4.x     |         1.4.x     |      1.4.x       |
-| Amazon Elastic Kubernetes Service<br> Anywhere | yes  | yes  |   yes      |        yes        |      yes         |
-| OS dependencies | iscsi-initiator-utils<br>multipathd or powerpath<br>nvme-cli<br>nfs-utils | [SDC](https://www.dell.com/support/home/en-us/product-support/product/scaleio/drivers) |    iscsi-initiator-utils<br>multipathd<br>nfs-utils | nfs-utils | iscsi-initiator-utils<br>multipathd<br>nvme-cli<br>nfs-utils |
-{{</table>}}
-
-> Notes:
-> * The required OS dependencies are only for the protocol needed (e.g. if NVMe isn't the storage access protocol then nvme-cli is not required).
-> * The host operating system/version being used must align with what each Dell Storage platform supports. Please visit [E-Lab Navigator](https://elabnavigator.dell.com/eln/modernHomeSSM) for specific Dell Storage platform host operating system level support matrices.
-
 ### CSI Driver Capabilities
 {{<table "table table-striped table-bordered table-sm">}}
 | Features                 | PowerMax | PowerFlex | Unity XT  | PowerScale | PowerStore |
