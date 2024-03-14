@@ -28,11 +28,3 @@ After a backup has been created, it can be restored on the same Kubernetes clust
 |-|-|
 | Restic           | Persistent Volume data will be stored in the provided object store bucket |
 {{</table>}}
-
-## Supported Container Orchestrator Platforms
-{{<table "table table-striped table-bordered table-sm">}}
-| COP/OS | Supported Versions |
-|-|-|
-| Kubernetes           |    1.26, 1.27. 1.28 |
-| Red Hat OpenShift    |    4.13, 4.14       |
-{{</table>}}
