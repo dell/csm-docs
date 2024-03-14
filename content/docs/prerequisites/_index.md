@@ -2,7 +2,7 @@
 title: "Prerequisites"
 linkTitle: "Prerequisites"
 description: Prerequisites for CSM 
-weight: 3
+weight: 1
 ---
 
 ## Supported Container Orchestrator Platforms
