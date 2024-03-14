@@ -3,7 +3,7 @@ title: "Deployment"
 linkTitle: "Deployment"
 no_list: true
 description: Deployment of CSM
-weight: 1
+weight: 2
 ---
 
 The Container Storage Modules along with the required CSI Drivers can each be deployed using CSM operator.
