@@ -39,4 +39,4 @@ weight: 1
 
 > Notes:
 > * The host operating system/version being used must align with what each Dell Storage platform supports. Please visit [E-Lab Navigator](https://elabnavigator.dell.com/eln/modernHomeSSM) for specific Dell Storage platform host operating system level support matrices.
-> * Any orchestrator platform or version that's not mentioned here must be self-certified using [Cert-CSI](../cert-csi/) in order to be supported.  Although not mandatory, we recommend users to use orchestrator platforms and versions that have not met their end of life.
+> * Any orchestrator platform, operating system or version that's not mentioned here must be self-certified using [Cert-CSI](../cert-csi/) in order to be supported.  Although not mandatory, we recommend users to use orchestrator platforms and versions that have not met their end of life.
