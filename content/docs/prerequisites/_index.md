@@ -33,7 +33,8 @@ weight: 1
 | Red Hat OpenShift | 4.13, 4.14 |
 | Mirantis Kubernetes Engine | 3.7.x |
 | Google Anthos |        1.15      |
-| Rancher Kubernetes Engine | 1.4.x|
+| Rancher Kubernetes Engine | 1.4.x |
+| VMware Tanzu | 7.0 |
 {{</table>}}
 
 > Notes:
