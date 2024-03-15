@@ -1,6 +1,7 @@
 ---
 title: Cert-CSI
 linktitle: Cert-CSI
+weight: 13
 description: Tool to validate Dell CSI Drivers
 ---
 
