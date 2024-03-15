@@ -803,41 +803,41 @@ cert-csi test <test suite> --sc <storage class> <...> --sh ./hooks/start.sh --rh
 
 ### Running provisioning test
 
-![img1](../img/unifiedTest.png)
+![img1](./img/unifiedTest.png)
 
 You can interrupt the application by sending an interruption signal (for example pressing Ctrl + C).
 It will stop polling and try to cleanup resources.
 
-![img2](../img/interruptTest.png)
+![img2](./img/interruptTest.png)
 
 ### Running scaling test
 
-![img3](../img/scaling.PNG)
+![img3](./img/scaling.PNG)
 
 ### Listing available test runs
 
-![img4](../img/listRuns.png)
+![img4](./img/listRuns.png)
 
 ### Running longevity mode
 
-![img5](../img/longevity.png)
+![img5](./img/longevity.png)
 
 ### Multi DB Tabular report example
 
-![img6](../img/multiDBTabularReport.png)
+![img6](./img/multiDBTabularReport.png)
 
 Text report example
 
-![img7](../img/textReport.png)
+![img7](./img/textReport.png)
 
 Tabular Report example
 
-![img9](../img/tabularReport.png)
+![img9](./img/tabularReport.png)
 
 ### HTML report example
 
-![img8](../img/HTMLReport.png)
+![img8](./img/HTMLReport.png)
 
 ### Resource usage example chart
 
-![img9](../img/resourceUsage.png)
+![img9](./img/resourceUsage.png)
