@@ -34,7 +34,6 @@ weight: 1
 | Mirantis Kubernetes Engine | 3.7.x |
 | Google Anthos |        1.15      |
 | Rancher Kubernetes Engine | 1.4.x|
-| Amazon Elastic Kubernetes Service | ?? |
 {{</table>}}
 
 > Notes:
