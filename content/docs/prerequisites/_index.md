@@ -40,3 +40,19 @@ weight: 1
 > Notes:
 > * The host operating system/version being used must align with what each Dell Storage platform supports. Please visit [E-Lab Navigator](https://elabnavigator.dell.com/eln/modernHomeSSM) for specific Dell Storage platform host operating system level support matrices.
 > * Any orchestrator platform, operating system or version that's not mentioned here must be self-certified using [Cert-CSI](../cert-csi/) in order to be supported.  Although not mandatory, we recommend users to use orchestrator platforms and versions that have not met their end of life.
+
+## Supported CSM Modules
+
+{{<table "table table-striped table-bordered table-sm">}}
+| CSM Module      | PowerMax          | PowerFlex          | Unity XT          | PowerScale          | PowerStore          |
+|---------------|:----------------:|:----------------:|:----------------:|:----------------:|:----------------:|
+| Authorization    | Yes | Yes |  Yes | Yes | No | 
+| Observability | Yes | Yes |  No | Yes | Yes |
+| Replication | Yes | Yes |  No | Yes | Yes |
+| Resiliency | No | Yes |  Yes | Yes | Yes |
+| Encryption | No | No |  No | Yes | No |
+| Application Mobility | Yes | Yes |  Yes | Yes | Yes |
+{{</table>}}
+
+> Notes:
+> * Encryption and Application Mobility are available as a Technical Preview only and are not officially supported.
