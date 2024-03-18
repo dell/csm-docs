@@ -47,7 +47,7 @@ weight: 1
 | [CSM Observability](../observability/) | Yes | Yes |  No | Yes | Yes |
 | [CSM Replication](../replication/) | Yes | Yes |  No | Yes | Yes |
 | [CSM Resiliency](../resiliency/) | No | Yes |  Yes | Yes | Yes |
-| [CSM Encryption](../secure/) | No | No |  No | Yes | No |
+| [CSM Encryption](../secure/encryption/) | No | No |  No | Yes | No |
 | [CSM Application Mobility](../applicationmobility/) | Yes | Yes |  Yes | Yes | Yes |
 {{</table>}}
 
