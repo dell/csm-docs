@@ -16,7 +16,7 @@ This example details the steps when an application in namespace `demo1` is being
     Using dellctl:
     ```bash
 
-    dellctl backup create backup1 --include-namespaces demo1 --namespace application-mobility
+    dellctl backup create backup1 --include-namespaces demo1 --namespace dell-csm
     ```
     Using Backup Custom Resource:
     ```yaml
