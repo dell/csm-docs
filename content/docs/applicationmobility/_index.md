@@ -6,9 +6,7 @@ Description: >
   Application Mobility
 ---
 
->> NOTE: This tech-preview release is not intended for use in production environment.
-
->> NOTE: Application Mobility requires a time-based license. See [Deployment](./deployment) for instructions.
+>> NOTE: Starting With v1.0, Application Mobility is only available under Dell Apex Navigator for Kubernetes.  
 
 Container Storage Modules for Application Mobility provide Kubernetes administrators the ability to clone their stateful application workloads and application data to other clusters, either on-premise or in the cloud.
 
