@@ -9,12 +9,8 @@ Description: >
 After Application Mobility is installed, the [dellctl CLI](../../references/cli/) can be used to register clusters and manage backups and restores of applications. These examples also provide references for using the Application Mobility Custom Resource Definitions (CRDs) to define Custom Resources (CRs) as an alternative to using the `dellctl` CLI.
 
 ## Backup and Restore an Application
-This example details the steps when an application in namespace `demo1` is being backed up and then later restored to either the same cluster or another cluster. In this sample, both Application Mobility and Velero are installed in the `application-mobility` namespace.
+This example details the steps when an application in namespace `demo1` is being backed up and then later restored to either the same cluster or another cluster. In this sample, both Application Mobility and Velero are installed in the `dell-csm` namespace.
 
-1. If Velero is not installed in the default `velero` namespace and `dellctl` is being used, set this environment variable to the namespace where it is installed:
-    ```bash
-    export VELERO_NAMESPACE=application-mobility 
-    ```
 1. On the source cluster, create a Backup by providing a name and the included namespace where the application is installed. The application and its data will be available in the object store bucket and can be restored at a later time.
     
     Using dellctl:
@@ -24,11 +20,11 @@ This example details the steps when an application in namespace `demo1` is being
     ```
     Using Backup Custom Resource:
     ```yaml
-    apiVersion: mobility.storage.dell.com/v1alpha1
+    apiVersion: mobility.storage.dell.com/v1
     kind: Backup
     metadata:
       name: backup1
-      namespace: application-mobility
+      namespace: dell-csm
     spec:
       includedNamespaces: [demo1]
       datamover: Restic
@@ -38,13 +34,13 @@ This example details the steps when an application in namespace `demo1` is being
 
     Using dellctl:
     ```bash
-    dellctl backup get --namespace application-mobility
+    dellctl backup get --namespace dell-csm
     ```
 
     Using kubectl:
     ```bash
 
-    kubectl describe backups.mobility.storage.dell.com/backup1 -n application-mobility
+    kubectl describe backups.mobility.storage.dell.com/backup1 -n dell-csm
     ```
 
 1. If the Storage Class name on the target cluster is different than the Storage Class name on the source cluster where the backup was created, a mapping between source and target Storage Class names must be defined. See [Changing PV/PVC Storage Classes](#changing-pvpvc-storage-classes).
@@ -53,7 +49,7 @@ This example details the steps when an application in namespace `demo1` is being
     Using dellctl:
     ```bash
     dellctl restore create restore1 --from-backup backup1 \
-        --namespace-mappings "demo1:restorens1" --namespace application-mobility
+        --namespace-mappings "demo1:restorens1" --namespace dell-csm
     ```
 
     Using Restore Custom Resource:
@@ -62,7 +58,7 @@ This example details the steps when an application in namespace `demo1` is being
     kind: Restore
     metadata:
       name: restore1
-      namespace: application-mobility
+      namespace: dell-csm
     spec:
       backupName: backup1
       namespaceMapping:
@@ -72,23 +68,19 @@ This example details the steps when an application in namespace `demo1` is being
 
     Using dellctl:
     ```bash
-    dellctl restore get --namespace application-mobility
+    dellctl restore get --namespace dell-csm
     ```
 
     Using kubectl:
     ```bash
 
-    kubectl describe restores.mobility.storage.dell.com/restore1 -n application-mobility
+    kubectl describe restores.mobility.storage.dell.com/restore1 -n dell-csm
     ```
 
 
 ## Clone an Application
-This example details the steps when an application in namespace `demo1` is cloned from a source cluster to a target cluster in a single operation. In this sample, both Application Mobility and Velero are installed in the `application-mobility` namespace.
+This example details the steps when an application in namespace `demo1` is cloned from a source cluster to a target cluster in a single operation. In this sample, both Application Mobility and Velero are installed in the `dell-csm` namespace.
 
-1. If Velero is not installed in the default `velero` namespace and `dellctl` is being used, set this environment variable to the namespace where it is installed:
-    ```bash
-    export VELERO_NAMESPACE=application-mobility 
-    ```
 1. Register the target cluster if using `dellctl`
     ```bash
 
@@ -101,16 +93,16 @@ This example details the steps when an application in namespace `demo1` is clone
     ```bash
 
     dellctl backup create backup1 --include-namespaces demo1 --clones "targetcluster/demo1:restore-ns2" \
-        --namespace application-mobility
+        --namespace dell-csm
     ```
 
     Using Backup Custom Resource:
     ```yaml
-    apiVersion: mobility.storage.dell.com/v1alpha1
+    apiVersion: mobility.storage.dell.com/v1
     kind: Backup
     metadata:
       name: backup1
-      namespace: application-mobility
+      namespace: dell-csm
     spec:
       includedNamespaces: [demo1]
       datamover: Restic
@@ -125,14 +117,14 @@ This example details the steps when an application in namespace `demo1` is clone
 
     Using dellctl:
     ```bash
-    dellctl restore get --namespace application-mobility
+    dellctl restore get --namespace dell-csm
     ```
 
     Using kubectl:
     ```bash
 
-    kubectl get restores.mobility.storage.dell.com -n application-mobility
-    kubectl describe restores.mobility.storage.dell.com/<restore-name> -n application-mobility
+    kubectl get restores.mobility.storage.dell.com -n dell-csm
+    kubectl describe restores.mobility.storage.dell.com/<restore-name> -n dell-csm
     ```
 
 ## Changing PV/PVC Storage Classes
