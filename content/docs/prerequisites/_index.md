@@ -19,10 +19,7 @@ weight: 1
 {{</table>}}
 
 > Notes:
-> * The required OS dependencies are only for the protocol needed (e.g. if NVMe isn't the storage access protocol then nvme-cli is not required).
-> * [CSM Authorization](../authorization/) only supports Kubernetes and the following Storage Platforms: PowerMax, PowerFlex, and PowerScale.
-> * [CSM Observability](../observability/) does not support the Unity XT Storage Platform.
-> * [CSM Replication](../replication/) does not support the Unity XT Storage Platform or File Replication for PowerMax.
+> * The required OS dependencies are only for the protocol needed (e.g. if NVMe isn't the storage access protocol then nvme-cli is not required)..
 
 ## Supported Container Orchestrator Platforms
 
@@ -46,12 +43,12 @@ weight: 1
 {{<table "table table-striped table-bordered table-sm">}}
 | CSM Module      | PowerMax          | PowerFlex          | Unity XT          | PowerScale          | PowerStore          |
 |---------------|:----------------:|:----------------:|:----------------:|:----------------:|:----------------:|
-| Authorization    | Yes | Yes |  Yes | Yes | No | 
-| Observability | Yes | Yes |  No | Yes | Yes |
-| Replication | Yes | Yes |  No | Yes | Yes |
-| Resiliency | No | Yes |  Yes | Yes | Yes |
-| Encryption | No | No |  No | Yes | No |
-| Application Mobility | Yes | Yes |  Yes | Yes | Yes |
+| [CSM Authorization](../authorization/) | Yes | Yes |  Yes | Yes | No | 
+| [CSM Observability](../observability/) | Yes | Yes |  No | Yes | Yes |
+| [CSM Replication](../replication/) | Yes | Yes |  No | Yes | Yes |
+| [CSM Resiliency](../resiliency/) | No | Yes |  Yes | Yes | Yes |
+| [CSM Encryption](../secure/) | No | No |  No | Yes | No |
+| [CSM Application Mobility](../applicationmobility/) | Yes | Yes |  Yes | Yes | Yes |
 {{</table>}}
 
 > Notes:
