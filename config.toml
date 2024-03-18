@@ -172,7 +172,7 @@ enable = false
 #	icon = "fa fa-envelope"
 #        desc = "Discuss development issues around the project"
 [[params.versions]]
-  version = "Current(v1.9.3)"
+  version = "Current(v1.9.4)"
   url = "https://dell.github.io/csm-docs/docs/"
 
 [[params.versions]]
