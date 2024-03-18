@@ -5,8 +5,6 @@ weight: 13
 description: Tool to validate Dell CSI Drivers
 ---
 
-As we begin to see more flavors of operating systems and orchestrator platforms, qualifying Dell CSI drivers against different storage arrays is a challenging task. Validating five different storage arrays with different permutations of orchestrators, operating systems, and their versions is not feasible.
-
 Dell's Cert-CSI is a tool to validate Dell CSI Drivers. It contains various test suites to validate the drivers and addresses the complexity involved with certifiying Dell CSI drivers in different customer environments.
 
 Any orchestrator platform, operating system or version that is not mentioned in the support matrix but self-certified by the customer using cert-csi is supported for customer use.
