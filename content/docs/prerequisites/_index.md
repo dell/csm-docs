@@ -38,6 +38,13 @@ weight: 1
 > * The host operating system/version being used must align with what each Dell Storage platform supports. Please visit [E-Lab Navigator](https://elabnavigator.dell.com/eln/modernHomeSSM) for specific Dell Storage platform host operating system level support matrices.
 > * Any orchestrator platform, operating system or version that's not mentioned here must be self-certified using [Cert-CSI](../cert-csi/) in order to be supported.  Although not mandatory, we recommend users to use orchestrator platforms and versions that have not met their end of life.
 
+## Tested Host Operating Systems
+
+Container Storage Modules (CSM) does not officially support specific operating systems.  However, the following operating systems are known to work:
+- RedHat CoreOS (RHCOS) versions as supported by OpenShift Container Platform
+- RHEL 8+
+- SLES 15SP5
+
 ## Supported CSM Modules
 
 {{<table "table table-striped table-bordered table-sm">}}
