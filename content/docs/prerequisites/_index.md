@@ -35,7 +35,7 @@ weight: 1
 {{</table>}}
 
 > Notes:
-> * Any orchestrator platform, operating system or version that's not mentioned here must be self-certified using [Cert-CSI](../cert-csi/) in order to be supported.  Although not mandatory, we recommend users to use orchestrator platforms and versions that have not met their end of life.
+> * Any orchestrator platform or version that's not mentioned here must be self-certified using [Cert-CSI](../cert-csi/) in order to be supported.  Although not mandatory, we recommend users to use orchestrator platforms and versions that have not met their end of life.
 
 ## Tested Host Operating Systems
 
