@@ -43,6 +43,11 @@ Container Storage Modules (CSM) does not officially support specific operating s
 - RedHat CoreOS (RHCOS) versions as supported by OpenShift Container Platform
 - RHEL 8+
 - SLES 15SP5
+- Ubuntu 22.04
+
+> Notes: 
+> * The host operating system/version being used must align with what each Dell Storage platform supports. Please visit [E-Lab Navigator](https://elabnavigator.dell.com/eln/modernHomeSSM) for specific Dell Storage platform host operating system level support matrices.
+> * Any operating system or version that's not mentioned here must be self-certified using [Cert-CSI](../cert-csi/) in order to be supported. Although not mandatory, we recommend users to use operating systems and versions that have not met their end of life.
 
 ## Supported CSM Modules
 
