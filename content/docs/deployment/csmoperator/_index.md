@@ -293,18 +293,6 @@ bash scripts/install.sh
 ```
 >NOTE: Dell CSM Operator would install to the 'dell-csm-operator' namespace by default.
 
-#### Perform Driver installation
-
-Now that the required images are available and the Operator is installed, you can proceed to install the driver by executing `kubectl create -f <manifest-name>`. Manifests for all the supported drivers will be available inside the samples directory. Using Unity XT as an example
-```bash
-kubectl create -f samples/storage_csm_unity_v2100.yaml
-```
->NOTE: Offline bundle supports install of only the latest version of Dell CSI Drivers
-
-**NOTE:**
-1. Offline bundle installation is only supported with manual installs i.e. without using Operator Lifecycle Manager (OLM).
-2. Install/uninstall of operator and drivers should be done using the files that are obtained after unpacking the offline bundle (dell-csm-operator-bundle.tar.gz) as that is where the image tags in the manifests are modified to point to the specified internal registry.
-
 ## Uninstall
 ### Operator uninstallation on a cluster without OLM
 To uninstall a CSM operator, run `bash scripts/uninstall.sh`. This will uninstall the operator in `dell-csm-operator` namespace.
