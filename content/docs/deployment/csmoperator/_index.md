@@ -7,17 +7,6 @@ weight: 1
 
 The Dell Container Storage Modules Operator is a Kubernetes Operator, which can be used to install and manage the CSI Drivers and CSM Modules provided by Dell for various storage platforms. This operator is available as a community operator for upstream Kubernetes and can be deployed using OperatorHub.io. The operator can be installed using OLM (Operator Lifecycle Manager) or manually.
 
-## Support Matrix
-
-Dell CSM Operator has been tested and qualified on Upstream Kubernetes and OpenShift. Supported versions are listed below:
-
-| Kubernetes Version         | OpenShift Version    |
-| -------------------------- | -------------------- |
-| 1.27, 1.28, 1.29           | 4.13, 4.14           |
-
->NOTE:
->- Authorization module is only supported on Kubernetes platforms.
-
 ## Supported CSM Components
 
 The table below lists the driver and modules versions installable with the CSM Operator:

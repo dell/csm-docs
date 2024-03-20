@@ -43,36 +43,6 @@ CSM for Observability provides the following capabilities:
 | Grafana Dashboards for displaying metrics and topology data | yes |  yes | no | yes | yes |
 {{</table>}}
 
-## Supported Operating Systems/Container Orchestrator Platforms
-
-{{<table "table table-striped table-bordered table-sm">}}
-| COP/OS | Supported Versions |
-|-|-|
-| Kubernetes    | 1.27, 1.28, 1.29 |
-| Red Hat OpenShift | 4.13, 4.14 |
-| Rancher Kubernetes Engine | yes |
-{{</table>}}
-
-## Supported Storage Platforms
-
-{{<table "table table-striped table-bordered table-sm">}}
-|               | PowerFlex | PowerStore | PowerScale | PowerMax |
-|---------------|:-------------------:|:----------------:|:----------------:|:----------------:|
-| Storage Array | 3.6.x, 4.0.x, 4.5 | 3.0, 3.2, 3.5, 3.6 | OneFS 9.3, 9.4, 9.5.0.x (x >= 5) | PowerMax 2000/8000 <br> PowerMax 2500/8500 PowerMaxOS 10 (6079) , PowerMaxOS 10.0.1 (6079) ,  PowerMaxOS 10.1 (6079) <br> PowerMax 2000/8000 - 5978.711.xxx, 5978.479.xxx <br> Unisphere 10.0, 10.0.1, 10.1 |
-{{</table>}}
-
-## Supported CSI Drivers
-
-CSM for Observability supports the following CSI drivers and versions.
-{{<table "table table-striped table-bordered table-sm">}}
-| Storage Array | CSI Driver | Supported Versions |
-| ------------- | ---------- | ------------------ |
-| CSI Driver for Dell PowerFlex | [csi-powerflex](https://github.com/dell/csi-powerflex) | v2.0 + |
-| CSI Driver for Dell PowerStore | [csi-powerstore](https://github.com/dell/csi-powerstore) | v2.0 + |
-| CSI Driver for Dell PowerScale | [csi-powerscale](https://github.com/dell/csi-powerscale) | v2.0 + |
-| CSI Driver for Dell PowerMax | [csi-powermax](https://github.com/dell/csi-powermax) | v2.5 + |
-{{</table>}}
-
 ## Topology Data
 
 CSM for Observability provides Kubernetes administrators with the topology data related to containerized storage. This topology data is visualized using Grafana:
