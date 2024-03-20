@@ -3,25 +3,27 @@ title: PowerStore
 description: Release notes for PowerStore CSI driver
 ---
 
-## Release Notes - CSI PowerStore v2.9.1
+## Release Notes - CSI PowerStore v2.10.0
+
+
+
+
+
+
+
 
 ### New Features/Changes
 
-- [#947 - [FEATURE]: Support for Kubernetes 1.28](https://github.com/dell/csm/issues/947)
-- [#1066 - [FEATURE]: Support for Openshift 4.14](https://github.com/dell/csm/issues/1066)
-- [#851 - [FEATURE]: Helm Chart Enhancement - Container Images Configurable in values.yaml](https://github.com/dell/csm/issues/851)
-- [#905 - [FEATURE]: Add support for CSI Spec 1.6](https://github.com/dell/csm/issues/905)
-- [#996 - [FEATURE]: Dell CSI to Dell CSM Operator Migration Process](https://github.com/dell/csm/issues/996)
-- [#1031 - [FEATURE]: Update to the latest UBI Micro image for CSM](https://github.com/dell/csm/issues/1031)
+- [#926 - [FEATURE]: Fixing the linting, formatting and vetting issues](https://github.com/dell/csm/issues/926)
+- [#1129 - [FEATURE]: Support PowerStore v3.6](https://github.com/dell/csm/issues/1129)
 
 ### Fixed Issues
 
-- [#1006 - [BUG]: Too many login sessions in gopowerstore client causes unexpected session termination in UI](https://github.com/dell/csm/issues/1006)
-- [#1014 - [BUG]: Missing error check for os.Stat call during volume publish](https://github.com/dell/csm/issues/1014)
-- [#1053 - [BUG]: make gosec is erroring out - Repos PowerMax,PowerStore,PowerScale (gosec is installed)](https://github.com/dell/csm/issues/1053)
-- [#1061 - [BUG]: Golint is not installing with go get command](https://github.com/dell/csm/issues/1061)
-- [#1108 - [BUG]: Volumes failing to mount when customer using NVMeTCP on Powerstore](https://github.com/dell/csm/issues/1108)
-- [#1103 - [BUG]: CSM Operator doesn't apply fSGroupPolicy value to CSIDriver Object](https://github.com/dell/csm/issues/1103)
+- [#1081 - [BUG]: CSM driver repositories reference CSI Operator](https://github.com/dell/csm/issues/1081)
+- [#1097 - [BUG]: Powerstore sanity tests are not working](https://github.com/dell/csm/issues/1097)
+- [#1140 - [BUG]: Cert-csi tests are not reporting the passed testcases in K8S E2E tests ](https://github.com/dell/csm/issues/1140)
+- [#1142 - [BUG]: Documentation : Multipath related instructions are missing in Powerstore prerequisites ](https://github.com/dell/csm/issues/1142)
+- [#1174 - [BUG]: Kubelet Configuration Directory setting should not have a comment about default value being None](https://github.com/dell/csm/issues/1174)
 
 ### Known Issues
 

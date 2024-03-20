@@ -35,7 +35,7 @@ If you have installed an old version of the `dell-csi-operator` which was availa
 | ------------------ | --------- | -------------- | -------------------- | --------------------- |
 | CSI PowerMax       | 2.5.0     | v2.5.0         | 1.23, 1.24, 1.25     | 4.10, 4.10 EUS, 4.11  |
 | CSI PowerMax       | 2.6.0     | v2.6.0         | 1.24, 1.25, 1.26     | 4.10, 4.10 EUS, 4.11  |
-| CSI PowerMax       | 2.7.0     | v2.7.0         | 1.25, 1.26, 1.27     | 4.11, 4.12 EUS, 4.12  |
+| CSI PowerMax       | 2.7.0     | v2.7.0         | 1.25, 1.26, 1.27     | 4.11, 4.12, 4.12 EUS  |
 | CSI PowerFlex      | 2.5.0     | v2.5.0         | 1.23, 1.24, 1.25     | 4.10, 4.10 EUS, 4.11  |
 | CSI PowerFlex      | 2.6.0     | v2.6.0         | 1.24, 1.25, 1.26     | 4.10, 4.10 EUS, 4.11  |
 | CSI PowerFlex      | 2.7.0     | v2.7.0         | 1.25, 1.26, 1.27     | 4.11, 4.12 EUS, 4.12  |
@@ -206,8 +206,8 @@ Or
   {driver name}_{driver version}_ops_{OpenShift version}.yaml
 ```
 For e.g.
-* samples/powermax_v270_k8s_126.yaml* <- To install CSI PowerMax driver v2.7.0 on a Kubernetes 1.26 cluster  
-* samples/powermax_v270_ops_411.yaml* <- To install CSI PowerMax driver v2.7.0 on an OpenShift 4.11 cluster
+* samples/powermax_v270_k8s_127.yaml* <- To install CSI PowerMax driver v2.7.0 on a Kubernetes 1.27 cluster  
+* samples/powermax_v270_ops_412.yaml* <- To install CSI PowerMax driver v2.7.0 on an OpenShift 4.12 cluster
 
 Copy the correct sample file and edit the mandatory & any optional parameters specific to your driver installation by following the instructions [here](#modify-the-driver-specification)  
 >NOTE: A detailed explanation of the various mandatory and optional fields in the CustomResource is available [here](#custom-resource-specification). Please make sure to read through and understand the various fields.

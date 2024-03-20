@@ -4,25 +4,8 @@ linktitle: PowerMax
 description: >
   Installing CSI Driver for PowerMax via Helm
 ---
-{{% pageinfo color="primary" %}} Linked Proxy mode for CSI reverse proxy is no longer actively maintained or supported. It will be deprecated in CSM 1.9 (Driver Version 2.9.0). It is highly recommended that you use stand alone mode going forward. {{% /pageinfo %}}
 
 CSI Driver for Dell PowerMax can be deployed by using the provided Helm v3 charts and installation scripts on both Kubernetes and OpenShift platforms. For more detailed information on the installation scripts, see the script [documentation](https://github.com/dell/csi-powermax/tree/master/dell-csi-helm-installer).
-
-The controller section of the Helm chart installs the following components in a _Deployment_ in the specified namespace:
-- CSI Driver for Dell PowerMax
-- Kubernetes External Provisioner, which provisions the volumes
-- Kubernetes External Attacher, which attaches the volumes to the containers
-- Kubernetes External Snapshotter, which provides snapshot support- 
-- CSI PowerMax ReverseProxy, which maximizes CSI driver and Unisphere performance
-- Kubernetes External Resizer, which resizes the volume
-- (optional) Kubernetes External health monitor, which provides volume health status
-- (optional) Dell CSI Replicator, which provides Replication capability. 
-- (optional) Dell CSI Migrator, which provides migrating capability within and across arrays
-- (optional) Node rescanner, which rescans the node for new data paths after migration 
-
-The node section of the Helm chart installs the following component in a _DaemonSet_ in the specified namespace:
-- CSI Driver for Dell PowerMax
-- Kubernetes Node Registrar, which handles the driver registration
 
 ## Prerequisites
 
@@ -169,6 +152,53 @@ features "1 queue_if_no_path"
 path_selector "round-robin 0"
 no_path_retry 10
 ```
+#### multipathd `MachineConfig`
+
+If you are installing a CSI Driver which requires the installation of the Linux native Multipath software - _multipathd_, please follow the below instructions
+
+To enable multipathd on RedHat CoreOS nodes you need to prepare a working configuration encoded in base64.
+
+```bash echo 'defaults {
+user_friendly_names yes
+find_multipaths yes
+}
+blacklist {
+}' | base64 -w0
+```
+
+Use the base64 encoded string output in the following `MachineConfig` yaml file (under source section)
+```yaml
+apiVersion: machineconfiguration.openshift.io/v1
+kind: MachineConfig
+metadata:
+  name: workers-multipath-conf-default
+  labels:
+    machineconfiguration.openshift.io/role: worker
+spec:
+  config:
+    ignition:
+      version: 3.2.0
+    storage:
+      files:
+      - contents:
+          source: data:text/plain;charset=utf-8;base64,ZGVmYXVsdHMgewp1c2VyX2ZyaWVuZGx5X25hbWVzIHllcwpmaW5kX211bHRpcGF0aHMgeWVzCn0KCmJsYWNrbGlzdCB7Cn0K
+          verification: {}
+        filesystem: root
+        mode: 400
+        path: /etc/multipath.conf
+```
+After deploying this`MachineConfig` object, CoreOS will start multipath service automatically.
+Alternatively, you can check the status of the multipath service by entering the following command in each worker nodes.
+`sudo multipath -ll`
+
+If the above command is not successful, ensure that the /etc/multipath.conf file is present and configured properly. Once the file has been configured correctly, enable the multipath service by running the following command:
+`sudo /sbin/mpathconf –-enable --with_multipathd y`
+
+Finally, you have to restart the service by providing the command
+`sudo systemctl restart multipathd`
+
+For additional information refer to official documentation of the multipath configuration.
+
 
 ### PowerPath for Linux requirements
 
@@ -208,7 +238,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
 
 **Steps**
 
-1. Run `git clone -b v2.8.0 https://github.com/dell/csi-powermax.git` to clone the git repository. This will include the Helm charts and dell-csi-helm-installer scripts.
+1. Run `git clone -b v2.9.1 https://github.com/dell/csi-powermax.git` to clone the git repository. This will include the Helm charts and dell-csi-helm-installer scripts.
 2. Ensure that you have created a namespace where you want to install the driver. You can run `kubectl create namespace powermax` to create a new one 
 3. Edit the `samples/secret/secret.yaml` file,to point to the correct namespace, and replace the values for the username and password parameters.
     These values can be obtained using base64 encoding as described in the following example:
@@ -223,7 +253,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
     ```
 5. Download the default values.yaml file 
     ```bash
-    cd dell-csi-helm-installer && wget -O my-powermax-settings.yaml https://github.com/dell/helm-charts/raw/csi-powermax-2.8.0/charts/csi-powermax/values.yaml
+    cd dell-csi-helm-installer && wget -O my-powermax-settings.yaml https://github.com/dell/helm-charts/raw/csi-powermax-2.9.1/charts/csi-powermax/values.yaml
     ```
 6. Ensure the unisphere have 10.0 REST endpoint support by clicking on Unisphere -> Help (?) -> About in Unisphere for PowerMax GUI.
 7. Edit the newly created file and provide values for the following parameters 
@@ -234,7 +264,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
 | Parameter | Description  | Required   | Default  |
 |-----------|--------------|------------|----------|
 | **global**| This section refers to configuration options for both CSI PowerMax Driver and Reverse Proxy | - | - |
-|defaultCredentialsSecret| This secret name refers to:<br> 1. The Unisphere credentials if the driver is installed without proxy or with proxy in Linked mode.<br>2. The proxy credentials if the driver is installed with proxy in StandAlone mode.<br>3. The default Unisphere credentials if credentialsSecret is not specified for a management server.| Yes | powermax-creds |
+|defaultCredentialsSecret| This secret name refers to:<br> 1 The proxy credentials if the driver is installed with proxy in StandAlone mode.<br>2. The default Unisphere credentials if credentialsSecret is not specified for a management server.| Yes | powermax-creds |
 | storageArrays| This section refers to the list of arrays managed by the driver and Reverse Proxy in StandAlone mode.| - | - |
 | storageArrayId | This refers to PowerMax Symmetrix ID.| Yes | 000000000001|
 | endpoint | This refers to the URL of the Unisphere server managing _storageArrayId_. If authorization is enabled, endpoint should be the HTTPS localhost endpoint that the authorization sidecar will listen on| Yes if Reverse Proxy mode is _StandAlone_ | https://primary-1.unisphe.re:8443 |
@@ -264,9 +294,8 @@ CRDs should be configured during replication prepare stage with repctl as descri
 | powerMaxDebug | Enables low level and http traffic logging between the CSI driver and Unisphere. Don't enable this unless asked to do so by the support team. | No | false |
 | enableCHAP | Determine if the driver is going to configure SCSI node databases on the nodes with the CHAP credentials. If enabled, the CHAP secret must be provided in the credentials secret and set to the key "chapsecret" | No | false |
 | fsGroupPolicy | Defines which FS Group policy mode to be used, Supported modes `None, File and ReadWriteOnceWithFSType` | No | "ReadWriteOnceWithFSType" |
-| version | Current version of the driver. Don't modify this value as this value will be used by the install script. | Yes | v2.3.0 | 
-| images | Defines the container images used by the driver.  | - | - |
-| driverRepository | Defines the registry of the container image used for the driver. | Yes | dellemc |
+| version | Current version of the driver. Don't modify this value as this value will be used by the install script. | Yes | v2.9.1 | 
+| images | List all the images used by the CSI driver and CSM. If you use a private repository, change the registries accordingly. | Yes | "" || driverRepository | Defines the registry of the container image used for the driver. | Yes | dellemc |
 | maxPowerMaxVolumesPerNode | Specifies the maximum number of volume that can be created on a node. | Yes| 0 |
 | **controller** | Allows configuration of the controller-specific parameters.| - | - |
 | controllerCount | Defines the number of csi-powerscale controller pods to deploy to the Kubernetes release| Yes | 2 |
@@ -284,18 +313,15 @@ CRDs should be configured during replication prepare stage with repctl as descri
 | healthMonitor.enabled | Allows to enable/disable volume health monitor | No | false |
 | topologyControl.enabled | Allows to enable/disable topology control to filter topology keys | No | false |
 | **csireverseproxy**| This section refers to the configuration options for CSI PowerMax Reverse Proxy  |  -  | - |
-| image | This refers to the image of the CSI PowerMax Reverse Proxy container. | Yes | dellemc/csipowermax-reverseproxy:v2.4.0 |
 | tlsSecret | This refers to the TLS secret of the Reverse Proxy Server.| Yes | csirevproxy-tls-secret |
 | deployAsSidecar | If set to _true_, the Reverse Proxy is installed as a sidecar to the driver's controller pod otherwise it is installed as a separate deployment.| Yes | "True" |
 | port  | Specify the port number that is used by the NodePort service created by the CSI PowerMax Reverse Proxy installation| Yes | 2222 |
-| mode | This refers to the installation mode of Reverse Proxy. It can be set to:<br> 1. _Linked_: In this mode, the Reverse Proxy communicates with a primary or a backup Unisphere managing the same set of arrays.<br>2. _StandAlone_: In this mode, the Reverse Proxy communicates with multiple arrays managed by different Unispheres.| Yes | "StandAlone" |
 | **certManager** | Auto-create TLS certificate for csi-reverseproxy | - | - |
 | selfSignedCert | Set selfSignedCert to use a self-signed certificate | No | true |
 | certificateFile | certificateFile has tls.key content in encoded format | No | tls.crt.encoded64 |
 | privateKeyFile | privateKeyFile has tls.key content in encoded format | No | tls.key.encoded64 |
 | **authorization** | [Authorization](../../../../authorization/deployment) is an optional feature to apply credential shielding of the backend PowerMax. | - | - |
 | enabled                  | A boolean that enables/disables authorization feature. |  No      |   false   |
-| sidecarProxyImage | Image for csm-authorization-sidecar. | No | " " |
 | proxyHost | Hostname of the csm-authorization server. | No | Empty |
 | skipCertificateValidation | A boolean that enables/disables certificate validation of the csm-authorization proxy server. | No | true |
 | **migration** | [Migration](../../../../replication/migration/migrating-volumes-same-array) is an optional feature to enable migration between storage classes | - | - |
@@ -305,7 +331,6 @@ CRDs should be configured during replication prepare stage with repctl as descri
 | migrationPrefix | enables migration sidecar to read required information from the storage class fields | No | migration.storage.dell.com |
 | **replication** | [Replication](../../../../replication/deployment) is an optional feature to enable replication & disaster recovery capabilities of PowerMax to Kubernetes clusters.| - | - |
 | enabled                  | A boolean that enables/disables replication feature. |  No      |   false   |
-| image | Image for dell-csi-replicator sidecar. | No | " " |
 | replicationContextPrefix | enables side cars to read required information from the volume context | No | powermax |
 | replicationPrefix | Determine if replication is enabled | No | replication.storage.dell.com |
 | **storageCapacity** | It is an optional feature that enable storagecapacity & helps the scheduler to check whether the requested capacity is available on the PowerMax array and allocate it to the nodes.| - | - |
@@ -334,7 +359,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
 - This script also runs the verify.sh script in the same directory. You will be prompted to enter the credentials for each of the Kubernetes nodes. The `verify.sh` script needs the credentials to check if the iSCSI initiators have been configured on all nodes. You can also skip the verification step by specifying the `--skip-verify-node` option
 - In order to enable authorization, there should be an authorization proxy server already installed. 
 - PowerMax Array username must have role as `StorageAdmin` to be able to perform CRUD operations.
-- If the user is using complex K8s version like “v1.23.3-mirantis-1”, use this kubeVersion check in [helm Chart](https://github.com/dell/helm-charts/blob/main/charts/csi-powermax/Chart.yaml) file. kubeVersion: “>= 1.23.0-0 < 1.27.0-0”.
+- If the user is using complex K8s version like “v1.24.3-mirantis-1”, use this kubeVersion check in [helm Chart](https://github.com/dell/helm-charts/blob/main/charts/csi-powermax/Chart.yaml) file. kubeVersion: “>= 1.24.0-0 < 1.29.0-0”.
 - User should provide all boolean values with double-quotes. This applies only for values.yaml. Example: “true”/“false”.
 - controllerCount parameter value should be <= number of nodes in the kubernetes cluster else install script fails.
 - Endpoint should not have any special character at the end apart from port number.
@@ -348,44 +373,7 @@ A wide set of annotated storage class manifests has been provided in the `sample
 Starting with CSI PowerMax v1.7.0, `dell-csi-helm-installer` will not create any Volume Snapshot Class during the driver installation. There is a sample Volume Snapshot Class manifest present in the _samples/volumesnapshotclass_ folder. Please use this sample to create a new Volume Snapshot Class to create Volume Snapshots.
 
 ## Sample values file
-The following sections have useful snippets from `values.yaml` file which provides more information on how to configure the CSI PowerMax driver along with CSI PowerMax ReverseProxy in various modes
-
-### CSI PowerMax driver with Proxy in Linked mode
-In this mode, the CSI PowerMax ReverseProxy acts as a `passthrough` for the RESTAPI calls and only provides limited functionality
-such as rate limiting, backup Unisphere server. The CSI PowerMax driver is still responsible for the authentication with the Unisphere server.
-
-The first endpoint in the list of management servers is the primary Unisphere server and if you provide a second endpoint, then
-it will be considered as the backup Unisphere's endpoint.
-
-```yaml
-global:
-  defaultCredentialsSecret: powermax-creds
-  storageArrays:
-    - storageArrayId: "000000000001"
-    - storageArrayId: "000000000002"
-  managementServers:
-    - endpoint: https://primary-unisphere:8443
-      skipCertificateValidation: false
-      certSecret: primary-cert
-      limits:
-        maxActiveRead: 5
-        maxActiveWrite: 4
-        maxOutStandingRead: 50
-        maxOutStandingWrite: 50
-    - endpoint: https://backup-unisphere:8443 
-
-# "csireverseproxy" refers to the subchart csireverseproxy
-csireverseproxy:
-  # Set enabled to true if you want to use proxy
-  image: dellemc/csipowermax-reverseproxy:v2.4.0
-  tlsSecret: csirevproxy-tls-secret
-  deployAsSidecar: true
-  port: 2222
-  mode: Linked
-```
-
->Note: Since the driver is still responsible for authentication when used with Proxy in `Linked` mode, the credentials for both
-> primary and backup Unisphere need to be the same.
+The following sections have useful snippets from `values.yaml` file which provides more information on how to configure the CSI PowerMax driver along with CSI PowerMax ReverseProxy in StandAlone mode.
 
 ### CSI PowerMax driver with Proxy in StandAlone mode
 This is the most advanced configuration which provides you with the capability to connect to Multiple Unisphere servers.
@@ -423,7 +411,6 @@ global:
 
 # "csireverseproxy" refers to the subchart csireverseproxy
 csireverseproxy:
-  image: dellemc/csipowermax-reverseproxy:v2.4.0
   tlsSecret: csirevproxy-tls-secret
   deployAsSidecar: true
   port: 2222

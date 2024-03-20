@@ -7,7 +7,7 @@ weight: 1
 Description: Upgrade Unity XT CSI driver
 ---
 
-You can upgrade the CSI Driver for Dell Unity XT using Helm or Dell CSI Operator.
+You can upgrade the CSI Driver for Dell Unity XT using Helm or Dell CSM Operator.
 
 **Note:**
 1. User has to re-create existing custom-storage classes (if any) according to the latest format.
@@ -20,9 +20,9 @@ You can upgrade the CSI Driver for Dell Unity XT using Helm or Dell CSI Operator
 
 Preparing myvalues.yaml is the same as explained in the install section.
 
-To upgrade the driver from csi-unity v2.7.0 to csi-unity v2.8.0
+To upgrade the driver from csi-unity v2.8.0 to csi-unity v2.9.1
 
-1. Get the latest csi-unity v2.8.0 code from Github using `git clone -b v2.8.0 https://github.com/dell/csi-unity.git`.
+1. Get the latest csi-unity v2.9.1 code from Github using `git clone -b v2.9.1 https://github.com/dell/csi-unity.git`.
 2. Copy the helm/csi-unity/values.yaml to the new location csi-unity/dell-csi-helm-installer and rename it to myvalues.yaml. Customize settings for installation by editing myvalues.yaml as needed.
 3. Navigate to csi-unity/dell-csi-hem-installer folder and execute this command:
    ```bash

@@ -6,10 +6,6 @@ description: >
   Dell Technologies (Dell) Container Storage Modules (CSM) for Authorization design
 ---
 
-{{% pageinfo color="primary" %}}
-The CSM Authorization karavictl CLI is no longer actively maintained or supported. It will be deprecated in CSM 2.0.
-{{% /pageinfo %}}
-
 Container Storage Modules (CSM) for Authorization is designed as a service mesh solution and consists of many internal components that work together in concert to achieve its overall functionality.
 
 This document provides an overview of the major components, including how they fit together and pointers to implementation details.
@@ -258,6 +254,13 @@ Both the CSM for Authorization Server and Sidecar Proxy are long-running process
 
 The following otel exporters are used:
 
-* `go.opentelemetry.io/otel/exporters/metric/prometheus`
-* `go.opentelemetry.io/otel/exporters/trace/zipkin`
-* `go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp`
+* ```bash
+  go.opentelemetry.io/otel/exporters/metric/prometheus
+  ```
+* ```bash
+  go.opentelemetry.io/otel/exporters/trace/zipkin
+  ```
+* ```bash
+
+  go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp    
+  ```

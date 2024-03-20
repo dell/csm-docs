@@ -14,8 +14,8 @@ The following command creates a statefulset that consumes three volumes of defau
 kubectl create -f test/sample.yaml
 ```
 
-After executing this command 3 PVC and statefulset are created in the `test-unity` namespace.
-You can check created PVCs by running `kubectl get pvc -n test-unity` and check statefulset's pods by running `kubectl get pods -n test-unity` command.
+After executing this command 3 PVC and statefulset are created in the `unity` namespace.
+You can check created PVCs by running `kubectl get pvc -n unity` and check statefulset's pods by running `kubectl get pods -n unity` command.
 The pod should be `Ready` and `Running`.
 
 > If Pod is in CrashLoopback or PVCs is in a Pending state then driver installation is not successful, check logs of node and controller.
@@ -126,7 +126,7 @@ apiVersion: snapshot.storage.k8s.io/v1
 kind: VolumeSnapshot
 metadata:
   name: pvol0-snap
-  namespace: test-unity
+  namespace: unity
 spec:
   volumeSnapshotClassName: unity-snapclass
   source:
@@ -155,7 +155,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: restorepvc
-  namespace: test-unity
+  namespace: unity
 spec:
   storageClassName: unity-iscsi
   dataSource:
@@ -275,7 +275,7 @@ kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
   name: vol0
-  namespace: test-unity
+  namespace: unity
 spec:
   storageClassName: unity-nfs
   accessModes:
@@ -293,7 +293,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: cloned-pvc
-  namespace: test-unity
+  namespace: unity
 spec:
   storageClassName: unity-nfs
   dataSource:
@@ -459,26 +459,37 @@ CSI Driver for Unity XT supports a new accessmode `ReadWriteOncePod` for Persist
 
 Prerequisites
 1. Enable the ReadWriteOncePod feature gate for kube-apiserver, kube-scheduler, and kubelet as the ReadWriteOncePod access mode is in alpha for Kubernetes v1.22 and is only supported for CSI volumes. You can enable the feature by setting command line arguments:
-`--feature-gates="...,ReadWriteOncePod=true"`
+   ```bash
+   --feature-gates="...,ReadWriteOncePod=true"
+   ```
 2. Create a PVC with access mode set to ReadWriteOncePod like shown in the sample below
-```yaml
-kind: PersistentVolumeClaim
-apiVersion: v1
-metadata:
-  name: single-writer-only
-spec:
-  accessModes:
-  - ReadWriteOncePod # Allow only a single pod to access single-writer-only.
-  resources:
-    requests:
-      storage: 1Gi
-```
+    ```yaml
+    kind: PersistentVolumeClaim
+    apiVersion: v1
+    metadata:
+      name: single-writer-only
+    spec:
+      accessModes:
+      - ReadWriteOncePod # Allow only a single pod to access single-writer-only.
+      resources:
+        requests:
+          storage: 1Gi
+    ```
 
 ## Volume Health Monitoring
-CSI Driver for Unity XT supports volume health monitoring. This is an alpha feature and requires feature gate to be enabled by setting command line arguments `--feature-gates="...,CSIVolumeHealth=true"`.  
+CSI Driver for Unity XT supports volume health monitoring. This is an alpha feature and requires feature gate to be enabled by setting command line arguments 
+```bash
+--feature-gates="...,CSIVolumeHealth=true"
+```  
 This feature:
-1. Reports on the condition of the underlying volumes via events when a volume condition is abnormal. We can watch the events on the describe of pvc `kubectl describe pvc <pvc name> -n <namespace>`
-2. Collects the volume stats. We can see the volume usage in the node logs `kubectl logs <nodepod> -n <namespacename> -c driver`
+1. Reports on the condition of the underlying volumes via events when a volume condition is abnormal. We can watch the events on the describe of pvc 
+    ```bash
+    kubectl describe pvc <pvc name> -n <namespace>
+    ```
+2. Collects the volume stats. We can see the volume usage in the node logs 
+    ```bash
+    kubectl logs <nodepod> -n <namespacename> -c driver
+    ```
 By default this is disabled in CSI Driver for Unity XT. You will have to set the `healthMonitor.enable` flag for controller, node or for both in `values.yaml` to get the volume stats and volume condition.
 
 ## Dynamic Logging Configuration
@@ -489,7 +500,7 @@ As part of driver installation, a ConfigMap with the name `unity-config-params` 
 Users can set the default log level by specifying log level to `logLevel` attribute in values.yaml during driver installation.
 
 To change the log level dynamically to a different value user can edit the same values.yaml, and run the following command
-```
+```bash
 cd dell-csi-helm-installer
 ./csi-install.sh --namespace unity --values ./myvalues.yaml --upgrade
 ```
@@ -501,7 +512,7 @@ Note: myvalues.yaml is a values.yaml file which user has used for driver install
 As part of driver installation, a ConfigMap with the name `unity-config-params` is created using the manifest located in the sample file. This ConfigMap contains an attribute `CSI_LOG_LEVEL` which specifies the current log level of the CSI driver. To set the default/initial log level user can set this field during driver installation.
 
 To update the log level dynamically user has to edit the ConfigMap `unity-config-params` and update `CSI_LOG_LEVEL` to the desired log level.
-```
+```bash
 kubectl edit configmap -n unity unity-config-params
 ```  
 
@@ -620,7 +631,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: unity-config-params
-  namespace: test-unity
+  namespace: unity
 data:
   driver-config-params.yaml: |
     CSI_LOG_LEVEL: "info"

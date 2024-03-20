@@ -55,7 +55,7 @@ Given a setup where Kubernetes, a storage system, and the CSM for Authorization 
 
     **Helm**
 
-    Refer to the [Install the Driver](../../../csidriver/installation/helm/powerflex/#install-the-driver) section to edit the parameters in `samples/config.yaml` to configure the driver to communicate with the CSM Authorization sidecar.
+    Refer to the [Install the Driver](../../../deployment/helm/drivers/installation/powerflex/#install-the-driver) section to edit the parameters in `samples/config.yaml` to configure the driver to communicate with the CSM Authorization sidecar.
 
     - Update `endpoint` to match the localhost endpoint in `samples/secret/karavi-authorization-config.json`.
 
@@ -78,7 +78,7 @@ Given a setup where Kubernetes, a storage system, and the CSM for Authorization 
 
     **Operator**
 
-    Refer to the [Create Secret](../../../deployment/csmoperator/drivers/powerflex/#create-secret) section to prepare `config.yaml` to configure the driver to communicate with the CSM Authorization sidecar.
+    Refer to the [Create Secret](../../../deployment/csmoperator/drivers/powerflex/#create-secret) section to prepare `secret.yaml` to configure the driver to communicate with the CSM Authorization sidecar.
 
     - Update `endpoint` to match the localhost endpoint in `samples/secret/karavi-authorization-config.json`.
 
@@ -102,13 +102,13 @@ Given a setup where Kubernetes, a storage system, and the CSM for Authorization 
 
     **Helm**
 
-    Refer to the [Install the Driver](../../../csidriver/installation/helm/powerflex/#install-the-driver) section to edit the parameters in `myvalues.yaml` to enable CSM Authorization.
+    Refer to the [Install the Driver](../../../deployment/helm/drivers/installation/powerflex/#install-the-driver) section to edit the parameters in `myvalues.yaml` to enable CSM Authorization.
 
     - Update `authorization.enabled` to `true`.
     
     - Update `images.authorization` to the image of the CSM Authorization sidecar. In most cases, you can leave the default value.
 
-    - Update `authorization.proxyHost` to the hostname of the CSM Authorization Proxy Server.
+    - Update `authorization.proxyHost` to the hostname of the CSM Authorization Proxy Server. `csm-authorization.com` is a placeholder for the proxyHost. See the administrator of CSM for Authorization for the correct value.
     
     - Update `authorization.skipCertificateValidation` to `true` or `false` depending on if you want to disable or enable certificate validation of the CSM Authorization Proxy Server.
 
@@ -119,8 +119,8 @@ Given a setup where Kubernetes, a storage system, and the CSM for Authorization 
       enabled: true
 
       # sidecarProxyImage: the container image used for the csm-authorization-sidecar.
-      # Default value: dellemc/csm-authorization-sidecar:v1.9.0
-      sidecarProxyImage: dellemc/csm-authorization-sidecar:v1.9.0
+      # Default value: dellemc/csm-authorization-sidecar:v1.10.0
+      sidecarProxyImage: dellemc/csm-authorization-sidecar:v1.10.0
 
       # proxyHost: hostname of the csm-authorization server
       # Default value: None
@@ -144,7 +144,7 @@ Given a setup where Kubernetes, a storage system, and the CSM for Authorization 
 
     - Update the `image` to the image of the CSM Authorization sidecar. In most cases, you can leave the default value.
 
-    - Update the `PROXY_HOST` environment value to the hostname of the CSM Authorization Proxy Server.
+    - Update the `PROXY_HOST` environment value to the hostname of the CSM Authorization Proxy Server. `csm-authorization.com` is a placeholder for the proxyHost. See the administrator of CSM for Authorization for the correct value.
 
     - Update the `SKIP_CERTIFICATE_VALIDATION` environment value to `true` or `false` depending on if you want to disable or enable certificate validation of the CSM Authorization Proxy Server.
 
@@ -156,10 +156,10 @@ Given a setup where Kubernetes, a storage system, and the CSM for Authorization 
       - name: authorization
         # enable: Enable/Disable csm-authorization
         enabled: true
-        configVersion: v1.9.0
+        configVersion: v1.10.0
         components:
         - name: karavi-authorization-proxy
-          image: dellemc/csm-authorization-sidecar:v1.9.0
+          image: dellemc/csm-authorization-sidecar:v1.10.0
           envs:
             # proxyHost: hostname of the csm-authorization server
             - name: "PROXY_HOST"

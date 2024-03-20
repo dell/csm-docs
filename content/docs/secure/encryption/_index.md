@@ -32,7 +32,7 @@ This provisioner belongs to the storage driver and does not depend on the Encryp
 
 **Provisioner for encrypted volumes**
 
-This provisioner belongs to Encryption and registers with the name [`encryption.pluginName`](deployment/#helm-chart-values) when Encryption is enabled. Use a storage class with this provisioner to create encrypted volumes.
+This provisioner belongs to Encryption and registers with the name [`encryption.pluginName`](../../deployment/helm/modules/installation/encryption/#helm-chart-values) when Encryption is enabled. Use a storage class with this provisioner to create encrypted volumes.
 
 ## Capabilities
 
@@ -113,7 +113,7 @@ Please refer to the Hashicorp Vault documentation regarding recommended deployme
 > **CAUTION:** Destroyed Vault storage back-end or the encryption key stored in it, will make it impossible to unlock the volume encrypted with Encryption. 
 Access to the data will be lost for ever.
 
-Refer to [Vault Configuration section](vault) for minimal configuration steps required to support Encryption and other configuration considerations.
+Refer to [Vault Configuration section](../../deployment/helm/modules/installation/encryption/vault) for minimal configuration steps required to support Encryption and other configuration considerations.
 
 ## Key Rotation (rekey)
 This preview of Encryption includes the ability to change the KEK (Key Encryption Key) of an encrypted volume, an operation commonly known as Shallow Rekey, or 

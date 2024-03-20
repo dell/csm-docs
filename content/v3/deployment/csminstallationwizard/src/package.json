@@ -3,7 +3,7 @@
 	"version": "1.0.0",
 	"description": "",
 	"scripts": {
-		"test": "jest",
+		"test": "jest --ci",
 		"coverage": "jest --coverage"
 	},
 	"repository": {
@@ -19,6 +19,7 @@
 	"devDependencies": {
 		"jest": "^29.3.1",
 		"jest-environment-jsdom": "^29.3.1",
-		"jquery": "^3.6.3"
+		"jquery": "^3.6.3",
+		"jest-junit": "^15.0.0"
 	}
 }

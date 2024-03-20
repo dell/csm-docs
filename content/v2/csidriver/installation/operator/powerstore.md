@@ -116,6 +116,8 @@ spec:
           value: "true"
         - name: X_CSI_HEALTH_MONITOR_ENABLED
           value: "false"
+        - name: X_CSI_POWERSTORE_MAX_VOLUMES_PER_NODE
+          value: "0"
       nodeSelector:
         node-role.kubernetes.io/worker: ""
 
@@ -151,6 +153,7 @@ data:
 | X_CSI_NFS_ACLS | Defines permissions - POSIX mode bits or NFSv4 ACLs, to be set on NFS target mount directory. | No | "0777" |
 | ***Node parameters*** |
 | X_CSI_POWERSTORE_ENABLE_CHAP | Set to true if you want to enable iSCSI CHAP feature | No | false |
+| X_CSI_POWERSTORE_MAX_VOLUMES_PER_NODE | Specify the default value for the maximum number of volumes that the controller can publish to the node | No | 0 |
 
 6.  Execute the following command to create PowerStore custom resource:`kubectl create -f <input_sample_file.yaml>`. The above command will deploy the CSI-PowerStore driver.
       - After that the driver should be installed, you can check the condition of driver pods by running `kubectl get all -n <driver-namespace>`

@@ -6,10 +6,6 @@ description: >
   Dell Container Storage Modules (CSM) for Observability Installer
 ---
 
-{{% pageinfo color="primary" %}}
-The CSM Authorization karavictl CLI is no longer actively maintained or supported. It will be deprecated in CSM 2.0.
-{{% /pageinfo %}}
-
 <!--
 Copyright (c) 2020 Dell Inc., or its subsidiaries. All Rights Reserved.
 
@@ -59,9 +55,10 @@ A Linux-based system, with internet access, will be used to execute the script t
 
 
 ### Installer Usage
+```bash
+./karavi-observability-install.sh --help
 ```
-[user@system /home/user/karavi-observability/installer]# ./karavi-observability-install.sh --help
-
+```
 Help for ./karavi-observability-install.sh
 
 Usage: ./karavi-observability-install.sh mode options...
@@ -92,13 +89,13 @@ __Note:__ CSM for Authorization currently does not support the Observability mod
 To perform an online installation of CSM for Observability, the following steps should be performed:
 
 1. Clone the GitHub repository:
-    ```
-    [user@system /home/user]# git clone https://github.com/dell/karavi-observability.git
+    ```bash
+    git clone https://github.com/dell/karavi-observability.git
     ```
 
 2. Change to the installer directory:
-    ```
-    [user@system /home/user]# cd karavi-observability/installer
+    ```bash
+    cd karavi-observability/installer
     ```
 
 3. Execute the installation script.
@@ -110,10 +107,13 @@ To perform an online installation of CSM for Observability, the following steps 
     - The default `values.yaml` is configured to deploy the CSM for Observability Topology service on install.
     - If CSM for Authorization is enabled for CSI PowerFlex, the `karaviMetricsPowerflex.authorization` parameters must be properly configured in `myvalues.yaml` for CSM Observability. 
     - If CSM for Authorization is enabled for CSI PowerScale, the `karaviMetricsPowerscale.authorization` parameters must be properly configured in `myvalues.yaml` for CSM Observability.
-    - If CSM for Authorization is enabled for CSI PowerMax, the `karaviMetricsPowermax.authorization` parameters must be properly configured in `myvalues.yaml` for CSM Observability.
+    - If CSM for Authorization is enabled for CSI PowerMax, the `karaviMetricsPowerMax.authorization` parameters must be properly configured in `myvalues.yaml` for CSM Observability.
 
+    ```bash
+    
+    ./karavi-observability-install.sh install --namespace [CSM_NAMESPACE] --values myvalues.yaml
     ```
-    [user@system /home/user/karavi-observability/installer]# ./karavi-observability-install.sh install --namespace [CSM_NAMESPACE] --values myvalues.yaml
+    ```
     ---------------------------------------------------------------------------------
     > Installing Karavi Observability in namespace karavi on 1.21
     ---------------------------------------------------------------------------------

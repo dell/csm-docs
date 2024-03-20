@@ -272,7 +272,6 @@ helm delete karavi-observability --namespace [CSM_NAMESPACE]
 
 Then delete the namespace `kubectl delete ns [CSM_NAMESPACE]`. Wait until namespace is fully deleted, recreate the namespace, and reinstall Observability again.
 
-
 ### Other issues and workarounds
 
 | Symptoms | Prevention, Resolution or Workaround |

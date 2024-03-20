@@ -1,4 +1,9 @@
 <!DOCTYPE html>
+<!-- 
++++
+disable_footer: true
++++
+ -->
 <html>
   <head>
     <meta charset="utf-8">
@@ -72,7 +77,7 @@
                     <label for="image-repository" class="col-sm-2 col-form-label" data-bs-toggle="tooltip" data-bs-placement="right" title="Specify the registry from where the image should be pulled" style="width: 150px;">Image Repository</label>
                     <div class="col-sm-9"></div>
                     <div class="col-sm-3">
-                      <input class="form-control input-lg" type="text" id="image-repository" placeholder="dellemc"  oninput="validateInput(validateForm, CONSTANTS)" required>
+                      <input class="form-control input-lg" type="text" id="image-repository" placeholder="dellemc" oninput="validateInput(validateForm, CONSTANTS)" required>
                     </div>
                     <div class="col-sm-4">
                       <div class="row mt-1">
@@ -86,7 +91,8 @@
                     <div class="col-sm-3">
                       <select id="csm-version" class="form-select" onchange="onCSMVersionChange(); validateInput(validateForm, CONSTANTS)" required>
                         <option value="1.7.0">CSM 1.7</option>
-                        <option value="1.8.0" selected>CSM 1.8</option>
+                        <option value="1.8.0">CSM 1.8</option>
+                        <option value="1.9.3" selected>CSM 1.9.3</option>
                       </select>
                     </div>
                   </div>
@@ -726,7 +732,7 @@
           <div class="row">
             <div class="col-6 col-sm-4 text-xs-center order-sm-2"></div>
             <div class="col-12 col-sm-4 text-center py-2 order-sm-2">
-              <small class="text-white">&copy; 2023 The Dell Technologies All Rights Reserved</small>
+              <small class="text-white">&copy; 2024 The Dell Technologies All Rights Reserved</small>
               <small class="ml-1">
                 <a href="https://www.dell.com/learn/us/en/uscorp1/policies-privacy" target="_blank">Privacy Policy</a>
               </small>

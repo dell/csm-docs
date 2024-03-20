@@ -9,7 +9,7 @@ Description: Code features for PowerMax Driver
 
 Starting with v1.7, the CSI PowerMax driver can communicate with multiple Unisphere for PowerMax servers to manage multiple PowerMax arrays.
 In order to use this feature, you must install CSI PowerMax ReverseProxy in `StandAlone` mode with the driver. For more details on how
-to configure the driver and ReverseProxy, see the relevant section [here](../../installation/helm/powermax/#sample-values-file)
+to configure the driver and ReverseProxy, see the relevant section [here](../../../deployment/helm/drivers/installation/powermax#sample-values-file)
 
 ## Volume Snapshot Feature
 
@@ -582,7 +582,7 @@ It will be supported only on new/freshly installed clusters where the cluster is
 
 To use this feature
 - Set `vSphere.enabled` to true.
-- Create a secret which contains vCenter privileges. Follow the steps [here](../../installation/helm/powermax/#auto-rdm-for-vsphere-over-fc-requirements) to create it. Update `vCenterCredSecret` with the secret name created.
+- Create a secret which contains vCenter privileges. Follow the steps [here](../../../deployment/helm/drivers/installation/powermax#auto-rdm-for-vsphere-over-fc-requirements) to create it. Update `vCenterCredSecret` with the secret name created.
   
 ```yaml
  VMware/vSphere virtualization support

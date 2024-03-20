@@ -30,23 +30,23 @@ The umbrella repository for every Dell Container Storage Module is: [https://git
 
 ### What are the prerequisites for deploying Container Storage Modules?
 Prerequisites can be found on the respective module deployment pages:
-- [Dell Container Storage Module for Observability Deployment](../../observability/deployment/#prerequisites)
-- [Dell Container Storage Module for Authorization Deployment](../../authorization/deployment/#prerequisites)
-- [Dell Container Storage Module for Resiliency Deployment](../../resiliency/deployment/)
-- [Dell Container Storage Module for Replication Deployment](../../replication/deployment/installation/#before-you-begin)
-- [Dell Container Storage Module for Application Mobility Deployment](../..//applicationmobility/deployment/#pre-requisites)
-- [Dell Container Storage Module for Encryption Deployment](../../secure/encryption/deployment/#vault-server)
+- [Dell Container Storage Module for Observability Deployment](../../deployment/helm/modules/installation/observability/deployment#prerequisites)
+- [Dell Container Storage Module for Authorization Deployment](../../deployment/helm/modules/installation/authorization#prerequisites)
+- [Dell Container Storage Module for Resiliency Deployment](../../deployment/helm/modules/installation/resiliency)
+- [Dell Container Storage Module for Replication Deployment](../../deployment/helm/modules/installation/replication/installation/#before-you-begin)
+- [Dell Container Storage Module for Application Mobility Deployment](../../deployment/helm/modules/installation/applicationmobility#pre-requisites)
+- [Dell Container Storage Module for Encryption Deployment](../../deployment/helm/modules/installation/encryption#vault-server)
 
 Prerequisites for deploying the Dell CSI drivers can be found here:
-- [Dell CSI Drivers Deployment](../../csidriver/installation/)
+- [Dell CSI Drivers Deployment](../../deployment/helm/drivers/installation/)
 
 ### How do I uninstall or disable a module?
-- [Dell Container Storage Module for Authorization](../../authorization/uninstallation/)
-- [Dell Container Storage Module for Observability](../../observability/uninstall/)
-- [Dell Container Storage Module for Resiliency](../../resiliency/uninstallation/)
-- [Dell Container Storage Module for Replication](../../replication/uninstall/)
-- [Dell Container Storage Module for Application Mobility](../../applicationmobility/uninstallation/)
-- [Dell Container Storage Module for Encryption](../../secure/encryption/uninstallation/)
+- [Dell Container Storage Module for Authorization](../../deployment/helm/modules/uninstall/authorization/)
+- [Dell Container Storage Module for Observability](../../deployment/helm/modules/uninstall/observability/)
+- [Dell Container Storage Module for Resiliency](../../deployment/helm/modules/uninstall/resiliency/)
+- [Dell Container Storage Module for Replication](../../deployment/helm/modules/uninstall/replication/)
+- [Dell Container Storage Module for Application Mobility](../../deployment/helm/modules/uninstall/applicationmobility/)
+- [Dell Container Storage Module for Encryption](../../deployment/helm/modules/uninstall/encryption/)
 
 ### How do I troubleshoot Container Storage Modules?
 - [Dell CSI Drivers](../../csidriver/troubleshooting/)

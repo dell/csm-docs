@@ -28,7 +28,7 @@ There are some important limitations that apply to how CSI PowerMax driver uses 
 * When using SRDF mode Sync/Metro, a single SRDF group can be used to provision volumes from multiple namespaces.
 
 #### Automatic creation of SRDF Groups
-CSI Driver for Powermax supports automatic creation of SRDF Groups as of **v2.4.0** with help of **10.0** REST endpoints.
+CSI Driver for PowerMax supports automatic creation of SRDF Groups as of **v2.4.0** with help of **10.0** REST endpoints.
 To use this feature:
 * Remove _replication.storage.dell.com/RemoteRDFGroup_ and _replication.storage.dell.com/RDFGroup_ params from the storage classes before creating first replicated volume.
 * Driver will check next available RDF pair and use them to create volumes.
@@ -50,14 +50,15 @@ To verify you have everything in order you can execute the following commands:
   Pods should be `READY` and `RUNNING`.
 * Check that controller config map is properly populated:
     ```shell
+    
     kubectl get cm -n dell-replication-controller dell-replication-controller-config -o yaml
     ```
   `data` field should be properly populated with cluster-id of your choosing and, if using multi-cluster
   installation, your `targets:` parameter should be populated by a list of target clusters IDs.
 
 
-If you don't have something installed or something out-of-place please refer to installation instructions
-in [installation-repctl](../install-repctl) or [installation](../installation).
+If you don't have something installed or something is out-of-place, please refer to installation instructions [here](../installation).
+
 
 ### Installing Driver With Replication Module
 

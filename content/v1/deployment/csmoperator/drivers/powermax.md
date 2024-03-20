@@ -182,6 +182,21 @@ Set up the environment as follows:
 - Add initiators from all ESX/ESXis to a host(initiator group)/host group(cascaded initiator group) where the cluster is hosted.
 - Create a secret which contains vCenter privileges. Follow the steps [here](#support-for-auto-rdm-for-vsphere-over-fc) to create the same.
 
+### CSI PowerMax ReverseProxy
+
+CSI PowerMax ReverseProxy is a component that will be installed with the CSI PowerMax driver. For more details on this feature, see the related [documentation](https://dell.github.io/csm-docs/docs/csidriver/features/powermax/#csi-powermax-reverse-proxy).
+
+#### Pre-requisites
+Create a TLS secret that holds an SSL certificate and a private key. This is required by the reverse proxy server.
+Use a tool such as `openssl` to generate this secret using the example below:
+
+```bash
+openssl genrsa -out tls.key 2048
+openssl req -new -x509 -sha256 -key tls.key -out tls.crt -days 3650
+kubectl create secret -n <namespace> tls revproxy-certs --cert=tls.crt --key=tls.key
+kubectl create secret -n <namespace> tls csirevproxy-tls-secret --cert=tls.crt --key=tls.key
+```
+
 ## Installation
 
 ### (Optional) Create secret for client-side TLS verification

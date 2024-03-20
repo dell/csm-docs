@@ -5,6 +5,10 @@ description: >
   Dell Technologies (Dell) Container Storage Modules (CSM) for Authorization Helm deployment
 ---
 
+{{% pageinfo color="primary" %}}
+The CSM Authorization karavictl CLI is no longer actively maintained or supported. It will be deprecated in CSM 2.0.
+{{% /pageinfo %}}
+
 CSM Authorization can be installed by using the provided Helm v3 charts on Kubernetes platforms. 
 
 The following CSM Authorization components are installed in the specified namespace:

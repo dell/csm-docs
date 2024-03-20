@@ -5,7 +5,7 @@ weight: 1
 Description: >
   Deployment
 ---
-Encryption for Dell Container Storage Modules is enabled via the Dell CSI driver installation. The drivers can be installed either by a Helm chart or by the Dell CSI Operator. 
+Encryption for Dell Container Storage Modules is enabled via the Dell CSI driver installation. The drivers can be installed either by a Helm chart or by the Dell CSM Operator. 
 In the tech preview release, Encryption can only be enabled via Helm chart installation.
 
 Except for additional Encryption related configuration outlined on this page, 
@@ -32,9 +32,6 @@ encryption:
 
   # pluginName: The name of the provisioner to use for encrypted volumes.
   pluginName: "sec-isilon.dellemc.com"
-
-  # image: Encryption driver image name.
-  image: "dellemc/csm-encryption:v0.3.0"
 
   # logLevel: Log level of the encryption driver.
   # Allowed values: "error", "warning", "info", "debug", "trace".

@@ -283,7 +283,7 @@ allowedTopologies:
 ```
 For additional information, see the [Kubernetes Topology documentation](https://kubernetes-csi.github.io/docs/topology.html).
 
-> *NOTE*: In the manifest file of the Dell CSI operator, topology can be enabled by specifying the system name or _systemid_ in the allowed topologies field. _Volumebindingmode_ is also set to _WaitForFirstConsumer_ by default.
+> *NOTE*: In the manifest file of the Dell CSM operator, topology can be enabled by specifying the system name or _systemid_ in the allowed topologies field. _Volumebindingmode_ is also set to _WaitForFirstConsumer_ by default.
 
 ## Controller HA   
 
@@ -295,7 +295,7 @@ in your values file to the desired number of controller pods. By default, the dr
 
 > *NOTE:* If the controller count is greater than the number of available nodes, excess controller pods will be stuck in a pending state. 
 
-If you are using the Dell CSI Operator, the value to adjust is:  
+If you are using the Dell CSM Operator, the value to adjust is:  
 ```yaml  
 replicas: 1  
 ```
@@ -373,7 +373,7 @@ controller:
 ```
 > *NOTE:* Tolerations/selectors work the same way for node pods.   
 
-For configuring Controller HA on the Dell CSI Operator, please refer to the [Dell CSI Operator documentation](../../installation/operator/#custom-resource-specification).  
+For configuring Controller HA on the Dell CSM Operator, please refer to the [Dell CSM Operator documentation](../../../deployment/csmoperator/#custom-resource-specification).  
 
 ## SDC Deployment
 
@@ -824,7 +824,7 @@ allowedTopologies:
     - "true"
 ```
 
-[`helm/csi-vxflexos/values.yaml`](https://github.com/dell/csi-powerflex/blob/main/helm/csi-vxflexos/values.yaml)
+[`helm/csi-vxflexos/values.yaml`](https://github.com/dell/helm-charts/blob/main/charts/csi-vxflexos/values.yaml)
 ```yaml
 ...
 enableQuota: false
@@ -834,7 +834,7 @@ enableQuota: false
 ## Usage of Quotas to Limit Storage Consumption for NFS volumes
 Starting with version 2.8, the CSI driver for PowerFlex will support enabling tree quotas for limiting capacity for NFS volumes. To use the quota feature user can specify the boolean value `enableQuota` in values.yaml.
 
-To enable quota for NFS volumes, make the following edits to [values.yaml](https://github.com/dell/csi-powerflex/blob/main/helm/csi-vxflexos/values.yaml) file:
+To enable quota for NFS volumes, make the following edits to [values.yaml](https://github.com/dell/helm-charts/blob/main/charts/csi-vxflexos/values.yaml) file:
 ```yaml
 ...
 ...
@@ -907,6 +907,20 @@ allowedTopologies:
       values:
         - "true"
 ```
+## Configuring custom access to NFS exports
+
+CSI PowerFlex driver Version 2.9.0 and later supports the ability to configure NFS access to nodes that use dedicated storage networks.
+
+To enable this feature you need to specify `externalAccess` parameter in your helm `values.yaml` file or `X_CSI_POWERFLEX_EXTERNAL_ACCESS` variable when creating CustomResource using an operator.
+
+The value of that parameter is added as an additional entry to NFS Export host access.
+
+For example the following notation:
+```yaml
+externalAccess: "10.0.0.0/24"
+```
+
+This means that we allow for NFS Export created by driver to be consumed by address range `10.0.0.0-10.0.0.255`.
 
 ## Storage Capacity Tracking
 CSI-PowerFlex driver version 2.8.0 and above supports Storage Capacity Tracking.

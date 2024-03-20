@@ -200,7 +200,7 @@ kubectl create secret -n <namespace> tls csirevproxy-tls-secret --cert=tls.crt -
 ## Installation
 
 ### (Optional) Create secret for client-side TLS verification
-Create a secret named powermax-certs in the namespace where the CSI PowerMax driver will be installed. This is an optional step and is only required if you are setting the env variable X_CSI_POWERMAX_SKIP_CERTIFICATE_VALIDATION to false. See the detailed documentation on how to create this secret [here](../../../../csidriver/installation/helm/powermax#certificate-validation-for-unisphere-rest-api-calls).
+Create a secret named powermax-certs in the namespace where the CSI PowerMax driver will be installed. This is an optional step and is only required if you are setting the env variable X_CSI_POWERMAX_SKIP_CERTIFICATE_VALIDATION to false. See the detailed documentation on how to create this secret [here](../../../helm/drivers/installation/powermax#certificate-validation-for-unisphere-rest-api-calls).
 
 
 ### Install Driver
@@ -309,6 +309,7 @@ Create a secret named powermax-certs in the namespace where the CSI PowerMax dri
 
 6. Execute the following command to create the PowerMax custom resource:`kubectl create -f <input_sample_file.yaml>`. The above command will deploy the CSI-PowerMax driver.
 7. The mandatory module CSI PowerMax Reverseproxy will be installed automatically with the same command.
+8. Refer https://github.com/dell/csi-powermax/tree/main/samples for the sample files.
 
 ## Other features to enable
 ### Dynamic Logging Configuration

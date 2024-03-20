@@ -75,9 +75,9 @@ deployment.apps/proxy-server restarted
 
 ## Tenants, Quota, and Volume ownership
 
-Redis is used to store application data regarding [tenants, quota, and volume ownership](../../design#quota--volume-ownership) with the Storage Class specified in the `redis.storageClass` parameter in the values file, or with the default Storage Class if that parameter was not specified. 
+Redis is used to store application data regarding [tenants, quota, and volume ownership](../../design#quota--volume-ownership) with the Storage Class `csm-authorization-local-storage` or the one specified in the `redis.storageClass` parameter in the values file. 
 
-The Persistent Volume for Redis is dynamically provisioned by this Storage Class with the `redis-primary-pv-claim` Persistent Volume Claim. See the example.
+The Persistent Volume for Redis is provisioned by the above Storage Class with the `redis-primary-pv-claim` Persistent Volume Claim. See the example.
 
 ```bash
 kubectl get persistentvolume
