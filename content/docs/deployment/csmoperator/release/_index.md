@@ -17,6 +17,7 @@ Description: >
 
 
 
+
 ### New Features/Changes
 
 - [#926 - [FEATURE]: Fixing the linting, formatting and vetting issues](https://github.com/dell/csm/issues/926)
@@ -24,6 +25,7 @@ Description: >
 ### Fixed Issues
 
 - [#1094 - [BUG]: CSM Operator offline install powerflex csi driver sidecar trying to pull from registry.k8s.io](https://github.com/dell/csm/issues/1094)
+- [#1174 - [BUG]: Kubelet Configuration Directory setting should not have a comment about default value being None](https://github.com/dell/csm/issues/1174)
 
 ### Known Issues
 | Issue | Workaround |

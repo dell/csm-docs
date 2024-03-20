@@ -11,6 +11,7 @@ description: Release notes for PowerFlex CSI driver
 
 
 
+
 ### New Features/Changes
 
 - [#926 - [FEATURE]: Fixing the linting, formatting and vetting issues](https://github.com/dell/csm/issues/926)
@@ -20,8 +21,9 @@ description: Release notes for PowerFlex CSI driver
 - [#1081 - [BUG]: CSM driver repositories reference CSI Operator](https://github.com/dell/csm/issues/1081)
 - [#1086 - [BUG]: PowerFlex driver fails to start on RKE](https://github.com/dell/csm/issues/1086)
 - [#1101 - [BUG]: the `nasName` parameter in the powerflex secret is now mandatory](https://github.com/dell/csm/issues/1101)
-- [#1103 - [BUG]: CSM Operator doesn't apply `fSGroupPolicy` value to `CSIDriver` Object](https://github.com/dell/csm/issues/1103)
-- [#1138 - [BUG]: `nasName` setting is said optional but is mandatory from the driver](https://github.com/dell/csm/issues/1138)
+- [#1140 - [BUG]: Cert-csi tests are not reporting the passed testcases in K8S E2E tests ](https://github.com/dell/csm/issues/1140)
+- [#1163 - [BUG]: Resource quota bypass](https://github.com/dell/csm/issues/1163)
+- [#1174 - [BUG]: Kubelet Configuration Directory setting should not have a comment about default value being None](https://github.com/dell/csm/issues/1174)
 
 ### Known Issues
 
