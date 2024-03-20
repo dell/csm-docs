@@ -38,14 +38,14 @@ The following CSI drivers support replication:
 
 Please follow the steps outlined in [PowerMax](../powermax), [PowerStore](../powerstore), [PowerScale](../powerscale), or [PowerFlex](../powerflex) pages during the driver installation.
 
-
 >Note: Please ensure that replication CRDs are installed in the clusters where you are installing the CSI drivers. These CRDs are generally installed as part of the CSM Replication controller installation process.
 
 ### Dynamic Log Level Change
 CSM Replication Controller can dynamically change its logs' verbosity level.
 To set log level in runtime, you need to edit the controllers ConfigMap:
 ```shell
-    kubectl edit cm dell-replication-controller-config -n dell-replication-controller
+  
+kubectl edit cm dell-replication-controller-config -n dell-replication-controller
 ```
 And set the *CSI_LOG_LEVEL* field to the level of your choosing.
 CSM Replication controller supports following log levels:

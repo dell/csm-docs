@@ -70,7 +70,7 @@ For detailed PowerFlex installation procedure, see the _Dell PowerFlex Deploymen
      ```yaml
       # Username for accessing PowerFlex system.
       # If authorization is enabled, username will be ignored.
-     - username: "admin"
+    - username: "admin"
       # Password for accessing PowerFlex system.
       # If authorization is enabled, password will be ignored.
       password: "password"
@@ -121,7 +121,7 @@ For detailed PowerFlex installation procedure, see the _Dell PowerFlex Deploymen
 
     ```bash
     
-    kubectl create secret generic vxflexos-config -n vxflexos --from-file=config=config.yaml -o yaml --dry-run=client | kubectl replace -f -
+    kubectl create secret generic vxflexos-config -n vxflexos --from-file=config=secret.yaml -o yaml --dry-run=client | kubectl replace -f -
     ```
 
 ### Install Driver
@@ -162,6 +162,8 @@ For detailed PowerFlex installation procedure, see the _Dell PowerFlex Deploymen
     This command will deploy the CSI-PowerFlex driver in the namespace specified in the input YAML file.
 
 5.  [Verify the CSI Driver installation](../#verifying-the-driver-installation)
+
+6.  Refer https://github.com/dell/csi-powerflex/tree/main/samples for the sample files.
     
 **Note** : 
    1. Snapshotter and resizer sidecars are installed by default.

@@ -18,7 +18,7 @@ The only pre-requisite required is the external-snapshotter, which is available 
 The external-snapshotter is split into two controllers, the common snapshot controller and a CSI external-snapshotter sidecar. The common snapshot controller must be installed only once per cluster.
 
 Here are sample instructions on installing the external-snapshotter CRDs:
-```
+```bash
 git clone https://github.com/kubernetes-csi/external-snapshotter/
 cd ./external-snapshotter
 git checkout release-<your-version>
@@ -33,7 +33,7 @@ IMPORTANT: delete previous v1aplha2 version of CRD and vgs resources created usi
 	   Snapshots on array will remain if memberReclaimPolicy=retain was used.
 ```
 If you want to install the VGS CRD from a pre-generated yaml, you can do so with this command (run in top-level folder):
-```
+```bash
 git clone https://github.com/dell/csi-volumegroup-snapshotter.git
 cd csi-volumegroup-snapshotter
 kubectl apply -f config/crd/vgs-install.yaml
@@ -45,7 +45,7 @@ If you want to create your own CRD for installation with Kustomize, then the com
 The drivers that support Helm chart deployment allow the CSM Volume Group Snapshotter to be _optionally_ deployed 
 by variables in the chart. There is a _vgsnapshotter_ block specified in the _values.yaml_ file of the chart that will look similar this default text:
 
-```
+```yaml
 # volume group snapshotter(vgsnapshotter) details
 # These options control the running of the vgsnapshotter container
 vgsnapshotter:
@@ -53,6 +53,8 @@ vgsnapshotter:
   image: 
  
 ```
+> Note: It is recommended you set controllerCount to 1 in your [values file](https://github.com/dell/csi-powerflex/blob/fea900ff9b528837714c215af0e7e340a8773e94/helm/csi-vxflexos/values.yaml#L132), to avoid duplicate vgs controllers running  
+    
 To deploy CSM Volume Group Snapshotter with the driver, these changes are required:
 1. Enable CSM Volume Group Snapshotter by changing the vgsnapshotter.enabled boolean to true. 
 2. In the vgsnapshotter.image field, put the location of the image you created, or link to the one already built (such as the one on DockerHub, `dellemc/csi-volumegroup-snapshotter:v1.2.0`).

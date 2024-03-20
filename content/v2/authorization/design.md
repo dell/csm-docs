@@ -5,7 +5,6 @@ weight: 1
 description: >
   Dell Technologies (Dell) Container Storage Modules (CSM) for Authorization design
 ---
-
 Container Storage Modules (CSM) for Authorization is designed as a service mesh solution and consists of many internal components that work together in concert to achieve its overall functionality.
 
 This document provides an overview of the major components, including how they fit together and pointers to implementation details.

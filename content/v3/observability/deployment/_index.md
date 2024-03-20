@@ -100,6 +100,7 @@ Here is a sample minimal configuration for Prometheus. Please note that the conf
     On your terminal, run each of the commands below:
 
     ```terminal
+
     helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
     helm repo add stable https://charts.helm.sh/stable
     helm repo update
@@ -110,6 +111,7 @@ Here is a sample minimal configuration for Prometheus. Please note that the conf
     On your terminal, run the command below:
 
     ```terminal
+
     helm install prometheus prometheus-community/prometheus -n [CSM_NAMESPACE] -f prometheus-values.yaml
     ```
 
@@ -263,6 +265,7 @@ Below are the steps to deploy a new Grafana instance into your Kubernetes cluste
     On your terminal, run the commands below:
 
     ```terminal
+
     helm install grafana grafana/grafana -n [CSM_NAMESPACE] -f grafana-values.yaml
     ```
 
@@ -373,6 +376,7 @@ CSM for Observability is instrumented to report trace data to [Zipkin](https://z
     Update the ConfigMaps from the [table above](#dynamic-configuration). Here is an example updating the karavi-topology-configmap based on the deployment manifest above.
    
     ```console
+    
     kubectl edit configmap/karavi-topology-configmap -n [CSM_NAMESPACE]
     ```
     
@@ -400,36 +404,42 @@ In this case, all storage system requests made by CSM for Observability will be 
 
 1. Delete the current `proxy-authz-tokens` Secret from the CSM namespace.
     ```console
-    $ kubectl delete secret proxy-authz-tokens -n [CSM_NAMESPACE]
+
+    kubectl delete secret proxy-authz-tokens -n [CSM_NAMESPACE]
     ```
 
 2. Copy the `proxy-authz-tokens` Secret from the CSI Driver for Dell PowerFlex to the CSM namespace.
     ```console
-    $ kubectl get secret proxy-authz-tokens -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -
+
+    kubectl get secret proxy-authz-tokens -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -
     ```
 
 ##### CSI Driver for Dell PowerScale
 
 1. Delete the current `isilon-proxy-authz-tokens` Secret from the CSM namespace.
     ```console
-    $ kubectl delete secret isilon-proxy-authz-tokens -n [CSM_NAMESPACE] 
+
+    kubectl delete secret isilon-proxy-authz-tokens -n [CSM_NAMESPACE] 
     ```
 
 2. Copy the `isilon-proxy-authz-tokens` Secret from the CSI Driver for Dell PowerScale namespace to the CSM namespace.
     ```console
-    $ kubectl get secret proxy-authz-tokens -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/'| sed 's/name: proxy-authz-tokens/name: isilon-proxy-authz-tokens/' | kubectl create -f
+
+    kubectl get secret proxy-authz-tokens -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/'| sed 's/name: proxy-authz-tokens/name: isilon-proxy-authz-tokens/' | kubectl create -f
     ```
 
 ##### CSI Driver for Dell PowerMax
 
 1. Delete the current `powermax-proxy-authz-tokens` Secret from the CSM namespace.
     ```console
-    $ kubectl delete secret powermax-proxy-authz-tokens -n [CSM_NAMESPACE] 
+
+    kubectl delete secret powermax-proxy-authz-tokens -n [CSM_NAMESPACE] 
     ```
 
 2. Copy the `powermax-proxy-authz-tokens` Secret from the CSI Driver for Dell PowerMax namespace to the CSM namespace. 
     ```console
-    $ kubectl get secret proxy-authz-tokens -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/'| sed 's/name: proxy-authz-tokens/name: powermax-proxy-authz-tokens/' | kubectl create -f
+
+    kubectl get secret proxy-authz-tokens -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/'| sed 's/name: proxy-authz-tokens/name: powermax-proxy-authz-tokens/' | kubectl create -f
     ```
    
 #### Update Storage Systems
@@ -439,36 +449,42 @@ If the list of storage systems managed by a Dell CSI Driver have changed, the fo
 
 1. Delete the current `karavi-authorization-config` Secret from the CSM namespace.
     ```console
-    $ kubectl delete secret karavi-authorization-config -n [CSM_NAMESPACE]
+
+    kubectl delete secret karavi-authorization-config -n [CSM_NAMESPACE]
     ```
 
 2. Copy the `karavi-authorization-config` Secret from the CSI Driver for Dell PowerFlex namespace to CSM for Observability namespace.
     ```console
-    $ kubectl get secret karavi-authorization-config -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -
+
+    kubectl get secret karavi-authorization-config -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -
     ```
 
 ##### CSI Driver for Dell PowerScale
 
 1. Delete the current `isilon-karavi-authorization-config` Secret from the CSM namespace.
     ```console
-    $ kubectl delete secret isilon-karavi-authorization-config -n [CSM_NAMESPACE]
+
+    kubectl delete secret isilon-karavi-authorization-config -n [CSM_NAMESPACE]
     ```
 
 2. Copy the `isilon-karavi-authorization-config` Secret from the CSI Driver for Dell PowerScale namespace to CSM for Observability namespace.
     ```console
-    $ kubectl get secret karavi-authorization-config -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | sed 's/name: karavi-authorization-config/name: isilon-karavi-authorization-config/' | kubectl create -f
+
+    kubectl get secret karavi-authorization-config -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | sed 's/name: karavi-authorization-config/name: isilon-karavi-authorization-config/' | kubectl create -f
     ```
 
 ##### CSI Driver for Dell PowerMax
 
 1. Delete the current `powermax-karavi-authorization-config` secret from the CSM namespace.
    ```console
-   $ kubectl delete secret powermax-karavi-authorization-config -n [CSM_NAMESPACE]
+
+   kubectl delete secret powermax-karavi-authorization-config -n [CSM_NAMESPACE]
    ```
 
 2. Copy `powermax-karavi-authorization-config` secret from the CSI Driver for Dell PowerMax to the CSM namespace.
    ```console
-   $ kubectl get secret karavi-authorization-config proxy-server-root-certificate -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | sed 's/name: karavi-authorization-config/name: powermax-karavi-authorization-config/' | kubectl create -f - 
+
+   kubectl get secret karavi-authorization-config proxy-server-root-certificate -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | sed 's/name: karavi-authorization-config/name: powermax-karavi-authorization-config/' | kubectl create -f - 
    ```
 
 ### When CSM for Observability does not use the Authorization module
@@ -479,57 +495,65 @@ In this case all storage system requests made by CSM for Observability will not 
 
 1. Delete the current `vxflexos-config` Secret from the CSM namespace.
     ```console
-    $ kubectl delete secret vxflexos-config -n [CSM_NAMESPACE]
+    kubectl delete secret vxflexos-config -n [CSM_NAMESPACE]
     ```
 
 2. Copy the `vxflexos-config` Secret from the CSI Driver for Dell PowerFlex namespace to the CSM namespace.
     ```console
-    $ kubectl get secret vxflexos-config -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -
+
+    kubectl get secret vxflexos-config -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -
     ```
 
    If the CSI driver secret name is not the default `vxflexos-config`, please use the following command to copy secret:
     ```console
-    $ kubectl get secret [VXFLEXOS-CONFIG] -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/name: [VXFLEXOS-CONFIG]/name: vxflexos-config/' | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -
+
+    kubectl get secret [VXFLEXOS-CONFIG] -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/name: [VXFLEXOS-CONFIG]/name: vxflexos-config/' | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -
     ```
 
 #### CSI Driver for Dell PowerStore
 
 1. Delete the current `powerstore-config` Secret from the CSM namespace.
     ```console
-    $ kubectl delete secret powerstore-config -n [CSM_NAMESPACE]
+
+    kubectl delete secret powerstore-config -n [CSM_NAMESPACE]
     ```
 
 2. Copy the `powerstore-config` Secret from the CSI Driver for Dell PowerStore namespace to the CSM namespace.
     ```console
-    $ kubectl get secret powerstore-config -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -
+
+    kubectl get secret powerstore-config -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -
     ```
 
    If the CSI driver secret name is not the default `powerstore-config`, please use the following command to copy secret:
     ```console
-    $ kubectl get secret [POWERSTORE-CONFIG] -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/name: [POWERSTORE-CONFIG]/name: powerstore-config/' | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -
+
+    kubectl get secret [POWERSTORE-CONFIG] -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/name: [POWERSTORE-CONFIG]/name: powerstore-config/' | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -
     ```
 
 #### CSI Driver for Dell PowerScale
 
 1. Delete the current `isilon-creds` Secret from the CSM namespace.
     ```console
-    $ kubectl delete secret isilon-creds -n [CSM_NAMESPACE]
+    kubectl delete secret isilon-creds -n [CSM_NAMESPACE]
     ```
 
 2. Copy the `isilon-creds` Secret from the CSI Driver for Dell PowerScale namespace to the CSM namespace.
     ```console
-    $ kubectl get secret isilon-creds -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -
+
+    kubectl get secret isilon-creds -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -
     ```
 
     If the CSI driver secret name is not the default `isilon-creds`, please use the following command to copy secret:  
     ```console
-    $ kubectl get secret [ISILON-CREDS] -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/name: [ISILON-CREDS]/name: isilon-creds/' | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -
+
+    kubectl get secret [ISILON-CREDS] -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/name: [ISILON-CREDS]/name: isilon-creds/' | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -
     ```
 
 #### CSI Driver for Dell PowerMax
 
 1. Delete the secrets in `powermax-reverseproxy-config` configmap from the CSM namespace. 
    ```console
+
    for secret in $(kubectl get configmap powermax-reverseproxy-config -n [CSM_NAMESPACE] -o jsonpath="{.data.config\.yaml}" | grep arrayCredentialSecret | awk 'BEGIN{FS=":"}{print $2}' | uniq)
    do
       kubectl delete secret $secret -n [CSM_NAMESPACE]
@@ -538,23 +562,27 @@ In this case all storage system requests made by CSM for Observability will not 
 
 2. Delete the current `powermax-reverseproxy-config` configmap from the CSM namespace.
    ```console
-   $ kubectl delete configmap powermax-reverseproxy-config -n [CSM_NAMESPACE] 
+
+   kubectl delete configmap powermax-reverseproxy-config -n [CSM_NAMESPACE] 
    ```
 
 3. Copy the configmap `powermax-reverseproxy-config` from the CSI Driver for Dell PowerMax namespace to the CSM namespace.  
    __Note:__ Observability for PowerMax works only with [CSI PowerMax driver with Proxy in StandAlone mode](../../csidriver/installation/helm/powermax/#csi-powermax-driver-with-proxy-in-standalone-mode).
    ```console
-   $ kubectl get configmap powermax-reverseproxy-config -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -
+
+   kubectl get configmap powermax-reverseproxy-config -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -
    ```
 
    If the CSI driver configmap name is not the default `powermax-reverseproxy-config`, please use the following command to copy configmap:
 
    ```console
-   $ kubectl get configmap [POWERMAX-REVERSEPROXY-CONFIG] -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/name: [POWERMAX-REVERSEPROXY-CONFIG]/name: powermax-reverseproxy-config/' | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -
+
+   kubectl get configmap [POWERMAX-REVERSEPROXY-CONFIG] -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/name: [POWERMAX-REVERSEPROXY-CONFIG]/name: powermax-reverseproxy-config/' | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -
    ```
 
 4. Copy the secrets in `powermax-reverseproxy-config` from the CSI Driver for Dell PowerMax namespace to the CSM namespace.  
     ```console
+
     for secret in $(kubectl get configmap powermax-reverseproxy-config -n [CSI_DRIVER_NAMESPACE] -o jsonpath="{.data.config\.yaml}" | grep arrayCredentialSecret | awk 'BEGIN{FS=":"}{print $2}' | uniq)
     do
        kubectl get secret $secret -n [CSI_DRIVER_NAMESPACE] -o yaml | sed "s/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/" | kubectl create -f -
@@ -563,6 +591,7 @@ In this case all storage system requests made by CSM for Observability will not 
 
     If the CSI driver configmap name is not the default `powermax-reverseproxy-config`, please use the following command to copy secrets:
     ```console
+
     for secret in $(kubectl get configmap [POWERMAX-REVERSEPROXY-CONFIG] -n [CSI_DRIVER_NAMESPACE] -o jsonpath="{.data.config\.yaml}" | grep arrayCredentialSecret | awk 'BEGIN{FS=":"}{print $2}' | uniq)
     do
        kubectl get secret $secret -n [CSI_DRIVER_NAMESPACE] -o yaml | sed "s/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/" | kubectl create -f -
