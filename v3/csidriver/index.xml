@@ -39,10 +39,10 @@
         
         &lt;h2 id=&#34;uninstall-a-csi-driver-installed-via-helm&#34;&gt;Uninstall a CSI driver installed via Helm&lt;/h2&gt;
 &lt;p&gt;To uninstall a driver, the &lt;code&gt;csi-uninstall.sh&lt;/code&gt; script provides a handy wrapper around the &lt;code&gt;helm&lt;/code&gt; utility. The only required argument for uninstallation is the namespace name. For example, to uninstall the driver:&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;./csi-uninstall.sh --namespace &amp;lt;driver-namespace&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;For usage information:&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;[dell-csi-helm-installer]# ./csi-uninstall.sh -h
-Help for ./csi-uninstall.sh
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;./csi-uninstall.sh --namespace &amp;lt;driver-namespace&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;For usage information:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;./csi-uninstall.sh -h
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;Help for ./csi-uninstall.sh
 
 Usage: ./csi-uninstall.sh options...
 Options:
@@ -55,9 +55,9 @@ Options:
 &lt;p&gt;For uninstalling any CSI drivers deployed by the Dell CSI Operator, just delete the respective Custom Resources.&lt;br&gt;
 This can be done using OperatorHub GUI by deleting the CR or via kubectl.&lt;/p&gt;
 &lt;p&gt;For example - To uninstall the driver installed via the operator, delete the Custom Resource(CR)&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;# Replace driver-type, driver-name and driver-namespace with their respective values
-kubectl delete &amp;lt;driver-type&amp;gt;/&amp;lt;driver-name&amp;gt; -n &amp;lt;driver-namespace&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;#Replace driver-type, driver-name and driver-namespace with their respective values&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl delete &amp;lt;driver-type&amp;gt;/&amp;lt;driver-name&amp;gt; -n &amp;lt;driver-namespace&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
       </description>
     </item>
     

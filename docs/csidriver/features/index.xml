@@ -816,7 +816,7 @@ If such a node is not available, the pods stay in Pending state. This means pods
         &lt;h2 id=&#34;multi-unisphere-support&#34;&gt;Multi Unisphere Support&lt;/h2&gt;
 &lt;p&gt;Starting with v1.7, the CSI PowerMax driver can communicate with multiple Unisphere for PowerMax servers to manage multiple PowerMax arrays.
 In order to use this feature, you must install CSI PowerMax ReverseProxy in &lt;code&gt;StandAlone&lt;/code&gt; mode with the driver. For more details on how
-to configure the driver and ReverseProxy, see the relevant section &lt;a href=&#34;../../installation/helm/powermax/#sample-values-file&#34;&gt;here&lt;/a&gt;&lt;/p&gt;
+to configure the driver and ReverseProxy, see the relevant section &lt;a href=&#34;../../../deployment/helm/drivers/installation/powermax#sample-values-file&#34;&gt;here&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&#34;volume-snapshot-feature&#34;&gt;Volume Snapshot Feature&lt;/h2&gt;
 &lt;p&gt;The CSI PowerMax driver version 1.7 and later supports v1 snapshots.&lt;/p&gt;
 &lt;p&gt;In order to use Volume Snapshots, ensure the following components have been deployed to your cluster:&lt;/p&gt;
@@ -1277,7 +1277,7 @@ N2 and N3: None&lt;/p&gt;
 &lt;p&gt;To use this feature&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Set &lt;code&gt;vSphere.enabled&lt;/code&gt; to true.&lt;/li&gt;
-&lt;li&gt;Create a secret which contains vCenter privileges. Follow the steps &lt;a href=&#34;../../installation/helm/powermax/#auto-rdm-for-vsphere-over-fc-requirements&#34;&gt;here&lt;/a&gt; to create it. Update &lt;code&gt;vCenterCredSecret&lt;/code&gt; with the secret name created.&lt;/li&gt;
+&lt;li&gt;Create a secret which contains vCenter privileges. Follow the steps &lt;a href=&#34;../../../deployment/helm/drivers/installation/powermax#auto-rdm-for-vsphere-over-fc-requirements&#34;&gt;here&lt;/a&gt; to create it. Update &lt;code&gt;vCenterCredSecret&lt;/code&gt; with the secret name created.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;VMware/vSphere virtualization support&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# set enable to true, if you to enable VMware virtualized environment support via RDM&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;

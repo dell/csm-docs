@@ -1,0 +1,487 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Dell Technologies – Offline</title>
+    <link>https://dell.github.io/csm-docs/docs/deployment/offline/</link>
+    <description>Recent content in Offline on Dell Technologies</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    
+	  <atom:link href="https://dell.github.io/csm-docs/docs/deployment/offline/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+    <item>
+      <title>Docs: Offline Installer for Observability</title>
+      <link>https://dell.github.io/csm-docs/docs/deployment/offline/modules/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dell.github.io/csm-docs/docs/deployment/offline/modules/</guid>
+      <description>
+        
+        
+        &lt;p&gt;The following instructions can be followed when a Helm chart will be installed in an environment that does not have an Internet connection and will be unable to download the Helm chart and related Docker images.&lt;/p&gt;
+&lt;h2 id=&#34;prerequisites&#34;&gt;Prerequisites&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Helm 3.x&lt;/li&gt;
+&lt;li&gt;The deployment of one or more Dell CSI drivers&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;dependencies&#34;&gt;Dependencies&lt;/h3&gt;
+&lt;p&gt;Multiple Linux-based systems may be required to create and process an offline bundle for use.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;One Linux-based system, with Internet access, will be used to create the bundle. This involves the user invoking a script that utilizes &lt;code&gt;docker&lt;/code&gt; to pull and save container images to file.&lt;/li&gt;
+&lt;li&gt;One Linux-based system, with access to an image registry, to invoke a script that uses &lt;code&gt;docker&lt;/code&gt; to restore container images from file and push them to a registry&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;If one Linux system has both Internet access and access to an internal registry, that system can be used for both steps.&lt;/p&gt;
+&lt;p&gt;Preparing an offline bundle requires the following utilities:&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Dependency&lt;/th&gt;
+&lt;th&gt;Usage&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;docker&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;docker&lt;/code&gt; will be used to pull images from public image registries, tag them, and push them to a private registry.&lt;br&gt;Required on both the system building the offline bundle as well as the system preparing for installation. &lt;br&gt;Tested version is &lt;code&gt;docker&lt;/code&gt; 18.09+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;executing-the-installer&#34;&gt;Executing the Installer&lt;/h3&gt;
+&lt;p&gt;To perform an offline installation of a Helm chart, the following steps should be performed:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Build an offline bundle.&lt;/li&gt;
+&lt;li&gt;Unpack the offline bundle and prepare for installation.&lt;/li&gt;
+&lt;li&gt;Perform a Helm installation.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;build-the-offline-bundle&#34;&gt;Build the Offline Bundle&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Copy the &lt;code&gt;offline-installer.sh&lt;/code&gt; script to a local Linux system using &lt;code&gt;curl&lt;/code&gt; or &lt;code&gt;wget&lt;/code&gt;:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;curl https://raw.githubusercontent.com/dell/karavi-observability/main/installer/offline-installer.sh --output offline-installer.sh
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;or&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;wget -O offline-installer.sh https://raw.githubusercontent.com/dell/karavi-observability/main/installer/offline-installer.sh
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Set the file as executable.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;chmod +x offline-installer.sh
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Build the bundle by providing the Helm chart name as the argument. Below is a sample output that may be different on your machine.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;./offline-installer.sh -c dell/karavi-observability
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;*
+* Adding Helm repository https://dell.github.io/helm-charts
+
+
+*
+* Downloading Helm chart dell/karavi-observability to directory /home/user/offline-karavi-observability-bundle/helm-original
+
+
+*
+* Downloading and saving Docker images
+
+  dellemc/csm-topology:v1.6.0
+  dellemc/csm-metrics-powerflex:v1.6.0
+  dellemc/csm-metrics-powerstore:v1.6.0
+  dellemc/csm-metrics-powerscale:v1.3.0
+  dellemc/csm-metrics-powermax:v1.1.0
+  otel/opentelemetry-collector:0.42.0
+  nginxinc/nginx-unprivileged:1.20
+
+*
+* Compressing offline-karavi-observability-bundle.tar.gz
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;unpack-the-offline-bundle&#34;&gt;Unpack the Offline Bundle&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Copy the bundle file to another Linux system that has access to the internal Docker registry and that can install the Helm chart. From that Linux system, unpack the bundle.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;tar -xzf offline-karavi-observability-bundle.tar.gz
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Change directory into the new directory created from unpacking the bundle:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#204a87&#34;&gt;cd&lt;/span&gt; offline-karavi-observability-bundle
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Prepare the bundle by providing the internal Docker registry URL. Below is a sample output that may be different on your machine.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;./offline-installer.sh -p &amp;lt;my-registry&amp;gt;:5000
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;*
+* Loading, tagging, and pushing Docker images to registry &amp;lt;my-registry&amp;gt;:5000/
+
+  dellemc/csm-topology:v1.6.0 -&amp;gt; &amp;lt;my-registry&amp;gt;:5000/csm-topology:v1.6.0
+  dellemc/csm-metrics-powerflex:v1.6.0 -&amp;gt; &amp;lt;my-registry&amp;gt;:5000/csm-metrics-powerflex:v1.6.0
+  dellemc/csm-metrics-powerstore:v1.6.0 -&amp;gt; &amp;lt;my-registry&amp;gt;:5000/csm-metrics-powerstore:v1.6.0
+  dellemc/csm-metrics-powerscale:v1.3.0 -&amp;gt; &amp;lt;my-registry&amp;gt;:5000/csm-metrics-powerscale:v1.3.0
+  dellemc/csm-metrics-powermax:v1.1.0 -&amp;gt; &amp;lt;my-registry&amp;gt;:5000/csm-metrics-powermax:v1.1.0
+  otel/opentelemetry-collector:0.42.0 -&amp;gt; &amp;lt;my-registry&amp;gt;:5000/opentelemetry-collector:0.42.0
+  nginxinc/nginx-unprivileged:1.20 -&amp;gt; &amp;lt;my-registry&amp;gt;:5000/nginx-unprivileged:1.20
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;perform-helm-installation&#34;&gt;Perform Helm installation&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Change directory to &lt;code&gt;helm&lt;/code&gt; which contains the updated Helm chart directory:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#204a87&#34;&gt;cd&lt;/span&gt; helm
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Install necessary cert-manager CustomResourceDefinitions provided:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl apply --validate&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#204a87&#34;&gt;false&lt;/span&gt; -f cert-manager.crds.yaml
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Copy the CSI Driver Secret(s)&lt;/p&gt;
+&lt;p&gt;Copy the CSI Driver Secret from the namespace where CSI Driver is installed to the namespace where CSM for Observability is to be installed.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;CSI Driver for PowerFlex:&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl get secret vxflexos-config -n &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;CSI_DRIVER_NAMESPACE&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt; -o yaml &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; sed &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;s/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; kubectl create -f -
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;If the CSI driver secret name is not the default &lt;code&gt;vxflexos-config&lt;/code&gt;, please use the following command to copy secret:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl get secret &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;VXFLEXOS-CONFIG&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt; -n &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;CSI_DRIVER_NAMESPACE&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt; -o yaml &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; sed &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;s/name: [VXFLEXOS-CONFIG]/name: vxflexos-config/&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; sed &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;s/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; kubectl create -f -
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;If &lt;a href=&#34;../../../deployment/helm/modules/installation/authorization#configuring-a-dell-csi-driver-with-csm-for-authorization&#34;&gt;CSM for Authorization is enabled&lt;/a&gt; for CSI PowerFlex, perform these steps:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl get configmap vxflexos-config-params -n &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;CSI_DRIVER_NAMESPACE&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt; -o yaml &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; sed &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;s/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; kubectl create -f -
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;If the CSI driver configmap name is not the default &lt;code&gt;vxflexos-config-params&lt;/code&gt;, please use the following command to copy configmap:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl get configmap &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;VXFLEXOS-CONFIG-PARAMS&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt; -n &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;CSI_DRIVER_NAMESPACE&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt; -o yaml &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; sed &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;s/name: [VXFLEXOS-CONFIG-PARAMS]/name: vxflexos-config-params/&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; sed &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;s/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; kubectl create -f -
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl get secret karavi-authorization-config proxy-server-root-certificate proxy-authz-tokens -n &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;CSI_DRIVER_NAMESPACE&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt; -o yaml &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; sed &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;s/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; kubectl create -f -
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;CSI Driver for PowerStore:&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl get secret powerstore-config -n &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;CSI_DRIVER_NAMESPACE&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt; -o yaml &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; sed &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;s/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; kubectl create -f -
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;If the CSI driver secret name is not the default &lt;code&gt;powerstore-config&lt;/code&gt;, please use the following command to copy secret:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl get secret &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;POWERSTORE-CONFIG&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt; -n &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;CSI_DRIVER_NAMESPACE&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt; -o yaml &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; sed &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;s/name: [POWERSTORE-CONFIG]/name: powerstore-config/&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; sed &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;s/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; kubectl create -f -
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;CSI Driver for PowerScale:&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl get secret isilon-creds -n &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;CSI_DRIVER_NAMESPACE&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt; -o yaml &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; sed &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;s/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; kubectl create -f -
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;If the CSI driver secret name is not the default &lt;code&gt;isilon-creds&lt;/code&gt;, please use the following command to copy secret:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl get secret &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;ISILON-CREDS&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt; -n &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;CSI_DRIVER_NAMESPACE&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt; -o yaml &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; sed &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;s/name: [ISILON-CREDS]/name: isilon-creds/&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; sed &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;s/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; kubectl create -f -
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;If &lt;a href=&#34;../../../deployment/helm/modules/installation/authorization#configuring-a-dell-csi-driver-with-csm-for-authorization&#34;&gt;CSM for Authorization is enabled&lt;/a&gt; for CSI PowerScale, perform these steps:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl get configmap isilon-config-params -n &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;CSI_DRIVER_NAMESPACE&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt; -o yaml &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; sed &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;s/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; kubectl create -f -
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;If the CSI driver configmap name is not the default &lt;code&gt;isilon-config-params&lt;/code&gt;, please use the following command to copy configmap:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl get configmap &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;ISILON-CONFIG-PARAMS&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt; -n &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;CSI_DRIVER_NAMESPACE&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt; -o yaml &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; sed &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;s/name: [ISILON-CONFIG-PARAMS]/name: isilon-config-params/&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; sed &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;s/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; kubectl create -f -
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl get secret karavi-authorization-config proxy-server-root-certificate proxy-authz-tokens -n &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;CSI_DRIVER_NAMESPACE&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt; -o yaml &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; sed &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;s/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; sed &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;s/name: karavi-authorization-config/name: isilon-karavi-authorization-config/&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; sed &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;s/name: proxy-server-root-certificate/name: isilon-proxy-server-root-certificate/&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; sed &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;s/name: proxy-authz-tokens/name: isilon-proxy-authz-tokens/&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; kubectl create -f -
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;CSI Driver for PowerMax:&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Copy the configmap from the CSI Driver for Dell PowerMax namespace to the CSM namespace.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl get configmap powermax-reverseproxy-config -n &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;CSI_DRIVER_NAMESPACE&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt; -o yaml &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; sed &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;s/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; kubectl create -f -
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;If the CSI driver configmap name is not the default &lt;code&gt;powermax-reverseproxy-config&lt;/code&gt;, please use the following command to copy configmap:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl get configmap &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;POWERMAX-REVERSEPROXY-CONFIG&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt; -n &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;CSI_DRIVER_NAMESPACE&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt; -o yaml &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; sed &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;s/name: [POWERMAX-REVERSEPROXY-CONFIG]/name: powermax-reverseproxy-config/&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; sed &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;s/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; kubectl create -f -
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Copy the secrets from the CSI Driver for Dell PowerMax namespace to the CSM namespace.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;for&lt;/span&gt; secret in &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;$(&lt;/span&gt;kubectl get configmap powermax-reverseproxy-config -n &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;CSI_DRIVER_NAMESPACE&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt; -o &lt;span style=&#34;color:#000&#34;&gt;jsonpath&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;{.data.config\.yaml}&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; grep arrayCredentialSecret &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; awk &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;BEGIN{FS=&amp;#34;:&amp;#34;}{print $2}&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; uniq&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;do&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   kubectl get secret &lt;span style=&#34;color:#000&#34;&gt;$secret&lt;/span&gt; -n &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;CSI_DRIVER_NAMESPACE&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt; -o yaml &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; sed &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;s/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; kubectl create -f -
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;done&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;If the CSI driver configmap name is not the default &lt;code&gt;powermax-reverseproxy-config&lt;/code&gt;, please use the following command to copy secrets:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-console&#34; data-lang=&#34;console&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a40000&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a40000&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;for secret in $(kubectl get configmap [POWERMAX-REVERSEPROXY-CONFIG] -n [CSI_DRIVER_NAMESPACE] -o jsonpath=&amp;#34;{.data.config\.yaml}&amp;#34; | grep arrayCredentialSecret | awk &amp;#39;BEGIN{FS=&amp;#34;:&amp;#34;}{print $2}&amp;#39; | uniq)
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;do
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;   kubectl get secret $secret -n [CSI_DRIVER_NAMESPACE] -o yaml | sed &amp;#34;s/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/&amp;#34; | kubectl create -f -
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;done
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;If &lt;a href=&#34;../../../deployment/helm/modules/installation/authorization#configuring-a-dell-csi-driver-with-csm-for-authorization&#34;&gt;CSM for Authorization is enabled&lt;/a&gt; for CSI PowerMax, perform these steps:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl get configmap powermax-config-params -n &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;CSI_DRIVER_NAMESPACE&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt; -o yaml &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; sed &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;s/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; kubectl create -f -
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;If the CSI driver configmap name is not the default &lt;code&gt;powermax-config-params&lt;/code&gt;, use the following command to copy the configmap:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl get configmap &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;POWERMAX-CONFIG-PARAMS&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt; -n &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;CSI_DRIVER_NAMESPACE&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt; -o yaml &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; sed &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;s/name: [POWERMAX-CONFIG-PARAMS]/name: powermax-config-params/&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; sed &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;s/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; kubectl create -f -
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl get secret karavi-authorization-config proxy-server-root-certificate proxy-authz-tokens -n &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;CSI_DRIVER_NAMESPACE&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt; -o yaml &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; sed &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;s/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; sed &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;s/name: karavi-authorization-config/name: powermax-karavi-authorization-config/&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; sed &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;s/name: proxy-server-root-certificate/name: powermax-proxy-server-root-certificate/&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; sed &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;s/name: proxy-authz-tokens/name: powermax-proxy-authz-tokens/&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; kubectl create -f -
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;After the images have been made available and the Helm chart configuration is updated, follow the instructions within the Helm chart&amp;rsquo;s repository to complete the installation.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Optionally, you could provide your own configurations. A sample values.yaml file is located &lt;a href=&#34;https://github.com/dell/helm-charts/blob/main/charts/karavi-observability/values.yaml&#34;&gt;here&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;The default &lt;code&gt;values.yaml&lt;/code&gt; is configured to deploy the CSM for Observability Topology service on install.&lt;/li&gt;
+&lt;li&gt;If CSM for Authorization is enabled for CSI PowerFlex, the &lt;code&gt;karaviMetricsPowerflex.authorization&lt;/code&gt; parameters must be properly configured.&lt;/li&gt;
+&lt;li&gt;If CSM for Authorization is enabled for CSI PowerScale, the &lt;code&gt;karaviMetricsPowerscale.authorization&lt;/code&gt; parameters must be properly configured.&lt;/li&gt;
+&lt;li&gt;If CSM for Authorization is enabled for CSI PowerMax, the &lt;code&gt;karaviMetricsPowerMax.authorization&lt;/code&gt; parameters must be properly configured.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;helm install -n install-namespace app-name karavi-observability
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;NAME: app-name
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;LAST DEPLOYED: Fri Nov  &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;6&lt;/span&gt; 08:48:13 &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;2020&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;NAMESPACE: install-namespace
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;STATUS: deployed
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;REVISION: &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;TEST SUITE: None
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Docs: Offline Installation of Dell CSI Storage Providers</title>
+      <link>https://dell.github.io/csm-docs/docs/deployment/offline/drivers/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dell.github.io/csm-docs/docs/deployment/offline/drivers/</guid>
+      <description>
+        
+        
+        &lt;p&gt;The &lt;code&gt;csi-offline-bundle.sh&lt;/code&gt; script can be used to create a package usable for offline installation of the Dell CSI Storage Providers, via either Helm or the Dell CSM Operator.&lt;/p&gt;
+&lt;p&gt;This includes the following drivers:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csi-vxflexos&#34;&gt;PowerFlex&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csi-powermax&#34;&gt;PowerMax&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csi-powerscale&#34;&gt;PowerScale&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csi-powerstore&#34;&gt;PowerStore&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csi-unity&#34;&gt;Unity XT&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;As well as the Dell CSM Operator.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm-operator&#34;&gt;Dell CSM Operator&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;Directions for offline installation can be found &lt;a href=&#34;../../../deployment/csmoperator/#building-an-offline-bundle&#34;&gt;here&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;dependencies&#34;&gt;Dependencies&lt;/h2&gt;
+&lt;p&gt;Multiple Linux-based systems may be required to create and process an offline bundle for use.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;One Linux-based system, with Internet access, will be used to create the bundle. This involved the user cloning a git repository hosted on github.com and then invoking a script that utilizes &lt;code&gt;docker&lt;/code&gt; or &lt;code&gt;podman&lt;/code&gt; to pull and save container images to file.&lt;/li&gt;
+&lt;li&gt;One Linux-based system, with access to an image registry, to invoke a script that uses &lt;code&gt;docker&lt;/code&gt; or &lt;code&gt;podman&lt;/code&gt; to restore container images from file and push them to a registry&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;If one Linux system has both Internet access and access to an internal registry, that system can be used for both steps.&lt;/p&gt;
+&lt;p&gt;Preparing an offline bundle requires the following utilities:&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Dependency&lt;/th&gt;
+&lt;th&gt;Usage&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;docker&lt;/code&gt; or &lt;code&gt;podman&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;docker&lt;/code&gt; or &lt;code&gt;podman&lt;/code&gt; will be used to pull images from public image registries, tag them, and push them to a private registry.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;One of these will be required on both the system building the offline bundle as well as the system preparing for installation.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;Tested version(s) are &lt;code&gt;docker&lt;/code&gt; 19.03+ and &lt;code&gt;podman&lt;/code&gt; 1.6.4+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;git&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;git&lt;/code&gt; will be used to manually clone one of the above repositories in order to create an offline bundle.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;This is only needed on the system preparing the offline bundle.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;Tested version(s) are &lt;code&gt;git&lt;/code&gt; 1.8+ but any version should work.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;workflow&#34;&gt;Workflow&lt;/h2&gt;
+&lt;p&gt;To perform an offline installation of a driver or the Operator, the following steps should be performed:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Build an offline bundle&lt;/li&gt;
+&lt;li&gt;Unpacking the offline bundle created in Step 1 and preparing for installation&lt;/li&gt;
+&lt;li&gt;Perform either a Helm installation or Operator installation using the files obtained after unpacking in Step 2&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;NOTE:&lt;/strong&gt; It is recommended to use the same build tool for packing and unpacking of images (either docker or podman).&lt;/p&gt;
+&lt;h3 id=&#34;building-an-offline-bundle&#34;&gt;Building an offline bundle&lt;/h3&gt;
+&lt;p&gt;This needs to be performed on a Linux system with access to the Internet as a git repo will need to be cloned, and container images pulled from public registries.&lt;/p&gt;
+&lt;p&gt;To build an offline bundle, the following steps are needed:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Perform a &lt;code&gt;git clone&lt;/code&gt; of the desired repository. For a helm-based install, the specific driver repo should be cloned. For an Operator based deployment, the Dell CSM Operator repo should be cloned&lt;/li&gt;
+&lt;li&gt;Run the &lt;code&gt;csi-offline-bundle.sh&lt;/code&gt; script with an argument of &lt;code&gt;-c&lt;/code&gt; in order to create an offline bundle&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;For Helm installs, the &lt;code&gt;csi-offline-bundle.sh&lt;/code&gt; script will be found in the &lt;code&gt;dell-csi-helm-installer&lt;/code&gt; directory&lt;/li&gt;
+&lt;li&gt;For Operator installs, the &lt;code&gt;csm-offline-bundle.sh&lt;/code&gt; script will be found in the &lt;code&gt;scripts&lt;/code&gt; directory&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The script will perform the following steps:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Determine required images by parsing either the driver Helm charts (if run from a cloned CSI Driver git repository) or the Dell CSM Operator configuration files (if run from a clone of the Dell CSM Operator repository)&lt;/li&gt;
+&lt;li&gt;Perform an image &lt;code&gt;pull&lt;/code&gt; of each image required&lt;/li&gt;
+&lt;li&gt;Save all required images to a file by running &lt;code&gt;docker save&lt;/code&gt; or &lt;code&gt;podman save&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Build a &lt;code&gt;tar.gz&lt;/code&gt; file containing the images as well as files required to installer the driver and/or Operator&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The resulting offline bundle file can be copied to another machine, if necessary, to gain access to the desired image registry.&lt;/p&gt;
+&lt;p&gt;For example, here is the output of a request to build an offline bundle for the Dell CSM Operator:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;git clone -b v1.4.3 https://github.com/dell/csm-operator.git
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#204a87&#34;&gt;cd&lt;/span&gt; csm-operator
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;bash scripts/csm-offline-bundle.sh -c
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;*
+* Building image manifest file
+
+   Processing file /root/csm-operator/operatorconfig/driverconfig/common/default.yaml
+   Processing file /root/csm-operator/bundle/manifests/dell-csm-operator.clusterserviceversion.yaml
+
+*
+* Pulling and saving container images
+
+   dellemc/csi-isilon:v2.10.0
+   dellemc/csi-metadata-retriever:v1.6.0
+   dellemc/csipowermax-reverseproxy:v2.6.0
+   dellemc/csi-powermax:v2.10.0
+   dellemc/csi-powerstore:v2.10.0
+   dellemc/csi-unity:v2.10.0
+   dellemc/csi-vxflexos:v2.10.0
+   dellemc/csm-authorization-sidecar:v1.10.0
+   dellemc/csm-metrics-powerflex:v1.5.0
+   dellemc/csm-metrics-powerscale:v1.2.0
+   dellemc/csm-topology:v1.5.0
+   dellemc/dell-csi-replicator:v1.8.0
+   dellemc/dell-replication-controller:v1.8.0
+   dellemc/sdc:4.5
+   docker.io/dellemc/dell-csm-operator:v1.4.3
+   gcr.io/kubebuilder/kube-rbac-proxy:v0.8.0
+   nginxinc/nginx-unprivileged:1.20
+   otel/opentelemetry-collector:0.42.0
+   registry.k8s.io/sig-storage/csi-attacher:v4.3.0
+   registry.k8s.io/sig-storage/csi-external-health-monitor-controller:v0.9.0
+   registry.k8s.io/sig-storage/csi-node-driver-registrar:v2.8.0
+   registry.k8s.io/sig-storage/csi-provisioner:v3.5.0
+   registry.k8s.io/sig-storage/csi-resizer:v1.8.0
+   registry.k8s.io/sig-storage/csi-snapshotter:v6.2.2
+
+*
+* Copying necessary files
+
+ /root/csm-operator/deploy
+ /root/csm-operator/operatorconfig
+ /root/csm-operator/samples
+ /root/csm-operator/scripts
+ /root/csm-operator/README.md
+ /root/csm-operator/LICENSE
+
+*
+* Compressing release
+
+dell-csm-operator-bundle/
+dell-csm-operator-bundle/deploy/
+dell-csm-operator-bundle/deploy/operator.yaml
+dell-csm-operator-bundle/deploy/crds/
+dell-csm-operator-bundle/deploy/crds/storage.dell.com_containerstoragemodules.yaml
+dell-csm-operator-bundle/deploy/olm/
+dell-csm-operator-bundle/deploy/olm/operator_community.yaml
+...
+...
+dell-csm-operator-bundle/README.md
+dell-csm-operator-bundle/LICENSE
+
+*
+* Complete
+
+Offline bundle file is: /root/csm-operator/dell-csm-operator-bundle.tar.gz
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;unpacking-the-offline-bundle-and-preparing-for-installation&#34;&gt;Unpacking the offline bundle and preparing for installation&lt;/h3&gt;
+&lt;p&gt;This needs to be performed on a Linux system with access to an image registry that will host container images. If the registry requires &lt;code&gt;login&lt;/code&gt;, that should be done before proceeding.&lt;/p&gt;
+&lt;p&gt;To prepare for the driver or Operator installation, the following steps need to be performed:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Copy the offline bundle file created from the previous step to a system with access to an image registry available to your Kubernetes/OpenShift cluster&lt;/li&gt;
+&lt;li&gt;Expand the bundle file by running &lt;code&gt;tar xvfz &amp;lt;filename&amp;gt;&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Run the &lt;code&gt;csi-offline-bundle.sh&lt;/code&gt; script and supply the &lt;code&gt;-p&lt;/code&gt; option as well as the path to the internal registry with the &lt;code&gt;-r&lt;/code&gt; option
+&lt;ul&gt;
+&lt;li&gt;For Operator installs, the &lt;code&gt;csm-offline-bundle.sh&lt;/code&gt; script will be found in the &lt;code&gt;scripts&lt;/code&gt; directory&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;The script will then perform the following steps:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Load the required container images into the local system&lt;/li&gt;
+&lt;li&gt;Tag the images according to the user-supplied registry information&lt;/li&gt;
+&lt;li&gt;Push the newly tagged images to the registry&lt;/li&gt;
+&lt;li&gt;Modify the Helm charts or Operator configuration to refer to the newly tagged/pushed images&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;An example of preparing the bundle for installation for the Dell CSM Operator:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;tar xvfz dell-csm-operator-bundle.tar.gz
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;dell-csm-operator-bundle/
+dell-csm-operator-bundle/deploy/
+dell-csm-operator-bundle/deploy/operator.yaml
+dell-csm-operator-bundle/deploy/crds/
+dell-csm-operator-bundle/deploy/crds/storage.dell.com_containerstoragemodules.yaml
+dell-csm-operator-bundle/deploy/olm/
+dell-csm-operator-bundle/deploy/olm/operator_community.yaml
+...
+...
+dell-csm-operator-bundle/README.md
+dell-csm-operator-bundle/LICENSE
+&lt;/code&gt;&lt;/pre&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#204a87&#34;&gt;cd&lt;/span&gt; dell-csm-operator-bundle
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;bash scripts/csm-offline-bundle.sh -p -r localregistry:5000/dell-csm-operator/
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;Preparing a offline bundle for installation
+
+*
+* Loading docker images
+
+Loaded image: docker.io/dellemc/csi-powerstore:v2.10.0
+Loaded image: docker.io/dellemc/csi-isilon:v2.10.0
+...
+...
+Loaded image: registry.k8s.io/sig-storage/csi-resizer:v1.8.0
+Loaded image: registry.k8s.io/sig-storage/csi-snapshotter:v6.2.2
+
+*
+* Tagging and pushing images
+
+   dellemc/csi-isilon:v2.8.0 -&amp;gt; localregistry:5000/dell-csm-operator/csi-isilon:v2.8.0
+   dellemc/csi-metadata-retriever:v1.5.0 -&amp;gt; localregistry:5000/dell-csm-operator/csi-metadata-retriever:v1.5.0
+   ...
+   ...
+   registry.k8s.io/sig-storage/csi-resizer:v1.8.0 -&amp;gt; localregistry:5000/dell-csm-operator/csi-resizer:v1.8.0
+   registry.k8s.io/sig-storage/csi-snapshotter:v6.2.2 -&amp;gt; localregistry:5000/dell-csm-operator/csi-snapshotter:v6.2.2
+
+*
+* Preparing files within /root/dell-csm-operator-bundle
+
+   changing: dellemc/csi-isilon:v2.8.0 -&amp;gt; localregistry:5000/dell-csm-operator/csi-isilon:v2.8.0
+   changing: dellemc/csi-metadata-retriever:v1.5.0 -&amp;gt; localregistry:5000/dell-csm-operator/csi-metadata-retriever:v1.5.0
+   ...
+   ...
+   changing: registry.k8s.io/sig-storage/csi-resizer:v1.8.0 -&amp;gt; localregistry:5000/dell-csm-operator/csi-resizer:v1.8.0
+   changing: registry.k8s.io/sig-storage/csi-snapshotter:v6.2.2 -&amp;gt; localregistry:5000/dell-csm-operator/csi-snapshotter:v6.2.2
+
+*
+* Complete
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;perform-either-a-helm-installation-or-operator-installation&#34;&gt;Perform either a Helm installation or Operator installation&lt;/h3&gt;
+&lt;p&gt;Now that the required images are available and the Helm Charts/Operator configuration updated, you can proceed by following the usual installation procedure as documented either via &lt;a href=&#34;../../../deployment/helm/drivers/installation&#34;&gt;Helm&lt;/a&gt; or &lt;a href=&#34;../../../deployment/csmoperator/#installation&#34;&gt;Operator&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;NOTES:&lt;/em&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Offline bundle installation is only supported with manual installs i.e. without using Operator Lifecycle Manager.&lt;/li&gt;
+&lt;li&gt;Installation should be done using the files that are obtained after unpacking the offline bundle (dell-csm-operator-bundle.tar.gz) as the image tags in the manifests are modified to point to the internal registry.&lt;/li&gt;
+&lt;li&gt;Offline bundle installs operator in &lt;code&gt;default&lt;/code&gt; namespace via install.sh script. Make sure that the current context in kubeconfig file has the namespace set to &lt;code&gt;default&lt;/code&gt;.&lt;/li&gt;
+&lt;/ol&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Docs: Offline Upgrade of Dell CSI Storage Providers</title>
+      <link>https://dell.github.io/csm-docs/docs/deployment/offline/upgrade/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dell.github.io/csm-docs/docs/deployment/offline/upgrade/</guid>
+      <description>
+        
+        
+        &lt;ol&gt;
+&lt;li&gt;To perform offline upgrade of the driver, please create an offline bundle as mentioned &lt;a href=&#34;../drivers#building-an-offline-bundle&#34;&gt;here&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;Once the bundle is created, please unpack the bundle by following the steps mentioned &lt;a href=&#34;../drivers#unpacking-the-offline-bundle-and-preparing-for-installation&#34;&gt;here&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;Please use the driver specific upgrade steps to upgrade.&lt;/li&gt;
+&lt;/ol&gt;
+
+      </description>
+    </item>
+    
+  </channel>
+</rss>

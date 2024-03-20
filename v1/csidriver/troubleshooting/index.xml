@@ -15,42 +15,6 @@
     
     
     <item>
-      <title>V1: Dell CSI Operator</title>
-      <link>https://dell.github.io/csm-docs/v1/csidriver/troubleshooting/operator/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://dell.github.io/csm-docs/v1/csidriver/troubleshooting/operator/</guid>
-      <description>
-        
-        
-        &lt;hr&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;Before installing the drivers, Dell CSI Operator tries to validate the Custom Resource being created. If some mandatory environment variables are missing or there is a type mismatch, then the Operator will report an error during the reconciliation attempts.&lt;/p&gt;
-&lt;p&gt;Because of this, the status of the Custom Resource will change to &amp;ldquo;Failed&amp;rdquo; and the error captured in the &amp;ldquo;ErrorMessage&amp;rdquo; field in the status.&lt;/p&gt;
-&lt;p&gt;For example - If the PowerMax driver was installed in the namespace test-powermax and has the name powermax, then run the command &lt;code&gt;kubectl get csipowermax/powermax -n test-powermax -o yaml&lt;/code&gt; to get the Custom Resource details.&lt;/p&gt;
-&lt;p&gt;If there was an error while installing the driver, then you would see a status like this:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;status&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;status&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;errorMessage&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;mandatory Env - X_CSI_K8S_CLUSTER_PREFIX not specified in user spec&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;state&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Failed&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;The state of the Custom Resource can also change to &lt;code&gt;Failed&lt;/code&gt; because of any other prohibited updates or any failure while installing the driver. In order to recover from this failure, fix the error in the manifest and update/patch the Custom Resource&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;After an update to the driver, the controller pod may not have the latest desired specification.&lt;/p&gt;
-&lt;p&gt;This happens when the controller pod was in a failed state before applying the update. Even though the Dell CSI Operator updates the pod template specification for the StatefulSet, the StatefulSet controller does not apply the update to the pod. This happens because of the unique nature of StatefulSets where the controller tries to retain the last known working state.&lt;/p&gt;
-&lt;p&gt;To get around this problem, the Dell CSI Operator forces an update of the pod specification by deleting the older pod. In case the Dell CSI Operator fails to do so, delete the controller pod to force an update of the controller pod specification&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;The Status of the CSI Driver Custom Resource shows the state of the driver pods after installation. This state will not be updated automatically if there are any changes to the driver pods outside any Operator operations.&lt;/p&gt;
-&lt;p&gt;At times because of inconsistencies in fetching data from the Kubernetes cache, the state of some driver pods may not be updated correctly in the status. To force an update of the state, you can update the Custom Resource forcefully by setting forceUpdate to true. If all the driver pods are in the &lt;code&gt;Available&lt;/code&gt; State, then the state of the Custom Resource will be updated as &lt;code&gt;Running&lt;/code&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-
-      </description>
-    </item>
-    
-    <item>
       <title>V1: PowerFlex</title>
       <link>https://dell.github.io/csm-docs/v1/csidriver/troubleshooting/powerflex/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -159,10 +123,13 @@
 &lt;td&gt;A CSI ephemeral pod may not get created in OpenShift 4.13 and fail with the error &lt;code&gt;&amp;quot;error when creating pod: the pod uses an inline volume provided by CSIDriver csi-vxflexos.dellemc.com, and the namespace has a pod security enforcement level that is lower than privileged.&amp;quot;&lt;/code&gt;&lt;/td&gt;
 &lt;td&gt;This issue occurs because OpenShift 4.13 introduced the CSI Volume Admission plugin to restrict the use of a CSI driver capable of provisioning CSI ephemeral volumes during pod admission. Therefore, an additional label &lt;code&gt;security.openshift.io/csi-ephemeral-volume-profile&lt;/code&gt; in &lt;a href=&#34;https://github.com/dell/helm-charts/blob/csi-vxflexos-2.8.0/charts/csi-vxflexos/templates/csidriver.yaml&#34;&gt;csidriver.yaml&lt;/a&gt; file with the required security profile value should be provided. Follow &lt;a href=&#34;https://docs.openshift.com/container-platform/4.13/storage/container_storage_interface/ephemeral-storage-csi-inline.html&#34;&gt;OpenShift 4.13 documentation for CSI Ephemeral Volumes&lt;/a&gt; for more information.&lt;/td&gt;
 &lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Standby controller pod is in crashloopbackoff state&lt;/td&gt;
+&lt;td&gt;Scale down the replica count of the controller pod&amp;rsquo;s deployment to 1 using &lt;code&gt;kubectl scale deployment &amp;lt;deployment_name&amp;gt; --replicas=1 -n &amp;lt;driver_namespace&amp;gt;&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;blockquote&gt;
-&lt;p&gt;&lt;em&gt;Note&lt;/em&gt;: &lt;code&gt;vxflexos-controller-*&lt;/code&gt; is the controller pod that acquires leader lease&lt;/p&gt;
 &lt;/blockquote&gt;
 
       </description>
@@ -241,6 +208,10 @@
 &lt;td&gt;Volume mount is failing on few OS(ex:VMware Virtual Platform) during node publish with error &lt;code&gt;wrong fs type, bad option, bad superblock&lt;/code&gt;&lt;/td&gt;
 &lt;td&gt;1. Check the multipath configuration(if enabled) 2. Edit Vm Advanced settings-&amp;gt;hardware and add the param &lt;code&gt;disk.enableUUID=true&lt;/code&gt; and reboot the node&lt;/td&gt;
 &lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Standby controller pod is in crashloopbackoff state&lt;/td&gt;
+&lt;td&gt;Scale down the replica count of the controller pod&amp;rsquo;s deployment to 1 using &lt;code&gt;kubectl scale deployment &amp;lt;deployment_name&amp;gt; --replicas=1 -n &amp;lt;driver_namespace&amp;gt;&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
 
@@ -287,7 +258,7 @@
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;While deleting a volume, if there are files or folders created on the volume that are owned by different users. If the Isilon credentials used are for a nonprivileged Isilon user, the delete volume action fails. It is due to the limitation in Linux permission control.&lt;/td&gt;
-&lt;td&gt;To perform the delete volume action, the user account must be assigned a role that has the privilege ISI_PRIV_IFS_RESTORE. The user account must have the following set of privileges to ensure that all the CSI Isilon driver capabilities work properly:&lt;br&gt; * ISI_PRIV_LOGIN_PAPI&lt;br&gt; * ISI_PRIV_NFS&lt;br&gt; * ISI_PRIV_QUOTA&lt;br&gt; * ISI_PRIV_SNAPSHOT&lt;br&gt; * ISI_PRIV_IFS_RESTORE&lt;br&gt; * ISI_PRIV_NS_IFS_ACCESS&lt;br&gt; In some cases, ISI_PRIV_BACKUP is also required, for example, when files owned by other users have mode bits set to 700.&lt;/td&gt;
+&lt;td&gt;To perform the delete volume action, the user account must be assigned a role that has the privilege ISI_PRIV_IFS_RESTORE. The user account must have the following set of privileges to ensure that all the CSI Isilon driver capabilities work properly:&lt;br&gt; * ISI_PRIV_LOGIN_PAPI&lt;br&gt; * ISI_PRIV_NFS&lt;br&gt; * ISI_PRIV_QUOTA&lt;br&gt; * ISI_PRIV_SNAPSHOT&lt;br&gt; * ISI_PRIV_IFS_RESTORE&lt;br&gt; * ISI_PRIV_NS_IFS_ACCESS&lt;br&gt; * ISI_PRIV_STATISTICS&lt;br&gt; In some cases, ISI_PRIV_BACKUP is also required, for example, when files owned by other users have mode bits set to 700.&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;If the hostname is mapped to loopback IP in /etc/hosts file, and pods are created using 1.3.0.1 release, after upgrade to driver version 1.4.0 or later there is a possibility of &amp;ldquo;localhost&amp;rdquo; as a stale entry in export&lt;/td&gt;
@@ -307,7 +278,15 @@
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;Driver install or upgrade fails because of an incompatible Kubernetes version, even though the version seems to be within the range of compatibility. For example: Error: UPGRADE FAILED: chart requires kubeVersion: &amp;gt;= 1.22.0 &amp;lt; 1.25.0 which is incompatible with Kubernetes V1.22.11-mirantis-1&lt;/td&gt;
-&lt;td&gt;If you are using an extended Kubernetes version, please see the &lt;a href=&#34;https://github.com/dell/csi-powerscale/blob/main/helm/csi-isilon/Chart.yaml&#34;&gt;helm Chart&lt;/a&gt; and use the alternate kubeVersion check that is provided in the comments. Please note that this is not meant to be used to enable the use of pre-release alpha and beta versions, which is not supported.&lt;/td&gt;
+&lt;td&gt;If you are using an extended Kubernetes version, please see the &lt;a href=&#34;https://github.com/dell/helm-charts/blob/main/charts/csi-isilon/Chart.yaml&#34;&gt;helm Chart&lt;/a&gt; and use the alternate kubeVersion check that is provided in the comments. Please note that this is not meant to be used to enable the use of pre-release alpha and beta versions, which is not supported.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Standby controller pod is in crashloopbackoff state&lt;/td&gt;
+&lt;td&gt;Scale down the replica count of the controller pod&amp;rsquo;s deployment to 1 using &lt;code&gt;kubectl scale deployment &amp;lt;deployment_name&amp;gt; --replicas=1 -n &amp;lt;driver_namespace&amp;gt;&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Driver install fails because of the incompatible helm values file specified in &lt;code&gt;dell-csi-helm-installer&lt;/code&gt; - expected: v2.9.x, found: v2.8.0.&lt;/td&gt;
+&lt;td&gt;Change driver version in each file in &lt;code&gt;dell/csi-powerscale/dell-csi-helm-installer&lt;/code&gt; from 2.8.0 to 2.9.x&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
@@ -364,6 +343,30 @@
 &lt;td&gt;Driver install or upgrade fails because of an incompatible Kubernetes version, even though the version seems to be within the range of compatibility. For example: Error: UPGRADE FAILED: chart requires kubeVersion: &amp;gt;= 1.22.0 &amp;lt; 1.25.0 which is incompatible with Kubernetes V1.22.11-mirantis-1&lt;/td&gt;
 &lt;td&gt;If you are using an extended Kubernetes version, please see the &lt;a href=&#34;https://github.com/dell/helm-charts/blob/main/charts/csi-powerstore/Chart.yaml&#34;&gt;helm Chart&lt;/a&gt; and use the alternate kubeVersion check that is provided in the comments. Please note that this is not meant to be used to enable the use of pre-release alpha and beta versions, which is not supported.&lt;/td&gt;
 &lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;If two separate networks are configured for ISCSI and NVMeTCP, the driver may encounter difficulty identifying the second network (e.g., NVMeTCP).&lt;/td&gt;
+&lt;td&gt;This is a known issue, and the workaround involves creating a single network on the array to serve both ISCSI and NVMeTCP purposes.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Unable to provision PVC&amp;rsquo;s via driver&lt;/td&gt;
+&lt;td&gt;Ensure that the NAS name matches the one provided on the array side.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Unable to install or upgrade the driver&lt;/td&gt;
+&lt;td&gt;Ensure  that the firewall is configured to grant adequate permissions for downloading images from the registry.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Faulty paths in the multipath&lt;/td&gt;
+&lt;td&gt;Ensure that the configuration of the multipath is correct and connectivity to the underlying hardware is intact.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Unable to install or upgrade the driver due to minimum Kubernetes version or Openshift version&lt;/td&gt;
+&lt;td&gt;Currently CSM only supports n, n-1, n-2 version of Kubernetes and Openshift, if you still wanted to continue with existing version update the &lt;code&gt;verify.sh&lt;/code&gt; to continue.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Volumes are not getting deleted on the array when PV&amp;rsquo;s are deleted&lt;/td&gt;
+&lt;td&gt;Ensure &lt;code&gt;persistentVolumeReclaimPolicy&lt;/code&gt; is set to Delete.&lt;/td&gt;
+&lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
 
@@ -419,6 +422,10 @@
 &lt;tr&gt;
 &lt;td&gt;When a node goes down, the block volumes attached to the node cannot be attached to another node&lt;/td&gt;
 &lt;td&gt;1. Force delete the pod running on the node that went down &lt;br /&gt; 2. Delete the VolumeAttachment to the node that went down. &lt;br /&gt; Now the volume can be attached to the new node.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Standby controller pod is in crashloopbackoff state&lt;/td&gt;
+&lt;td&gt;Scale down the replica count of the controller pod&amp;rsquo;s deployment to 1 using &lt;code&gt;kubectl scale deployment &amp;lt;deployment_name&amp;gt; --replicas=1 -n &amp;lt;driver_namespace&amp;gt;&lt;/code&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;

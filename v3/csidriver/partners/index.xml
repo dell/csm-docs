@@ -147,9 +147,9 @@ The CSI driver can be installed on  this cluster using Helm. Installation of CSI
 &lt;p&gt;To login to the Tanzu cluster, download kubectl and kubectl vsphere binaries to any of the system&lt;/p&gt;
 &lt;p&gt;Refer: &lt;a href=&#34;https://docs.vmware.com/en/VMware-vSphere/7.0/vmware-vsphere-with-tanzu/GUID-0F6E45C4-3CB1-4562-9370-686668519FCA.html&#34;&gt;https://docs.vmware.com/en/VMware-vSphere/7.0/vmware-vsphere-with-tanzu/GUID-0F6E45C4-3CB1-4562-9370-686668519FCA.html&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;Connect to the VCenter using kubectl vSphere commands as shown below.&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;kubectl vsphere login --insecure-skip-tls-verify --vsphere-username vSphere username --server=https://&amp;lt;tanzu-server-ip&amp;gt;/ -v 5
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Once login is done to the Tanzu cluster, the installation of CSI driver is done using kubectl binary similar to how we do for other systems.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl vsphere login --insecure-skip-tls-verify --vsphere-username vSphere username --server&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;https://&amp;lt;tanzu-server-ip&amp;gt;/ -v &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;5&lt;/span&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Once login is done to the Tanzu cluster, the installation of CSI driver is done using kubectl binary similar to how we do for other systems.&lt;/p&gt;
 &lt;h2 id=&#34;tanzu-example&#34;&gt;Tanzu example&lt;/h2&gt;
 &lt;p&gt;&lt;img src=&#34;../tanzu1.JPG&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;../tanzu2.JPG&#34; alt=&#34;&#34;&gt;&lt;/p&gt;

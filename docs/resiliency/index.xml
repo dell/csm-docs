@@ -15,19 +15,6 @@
     
     
     <item>
-      <title>Docs: Deployment</title>
-      <link>https://dell.github.io/csm-docs/docs/resiliency/deployment/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://dell.github.io/csm-docs/docs/resiliency/deployment/</guid>
-      <description>
-        
-        
-        
-      </description>
-    </item>
-    
-    <item>
       <title>Docs: Design</title>
       <link>https://dell.github.io/csm-docs/docs/resiliency/design/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -103,33 +90,14 @@ The implications of this are that if more than one pod on a node is sharing the 
       <description>
         
         
-        &lt;h2 id=&#34;release-notes---csm-resiliency-181&#34;&gt;Release Notes - CSM Resiliency 1.8.1&lt;/h2&gt;
+        &lt;h2 id=&#34;release-notes---csm-resiliency-190&#34;&gt;Release Notes - CSM Resiliency 1.9.0&lt;/h2&gt;
 &lt;h3 id=&#34;new-featureschanges&#34;&gt;New Features/Changes&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/947&#34;&gt;#947 - [FEATURE]: Support for Kubernetes 1.28&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1066&#34;&gt;#1066 - [FEATURE]: Support for Openshift 4.14&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/996&#34;&gt;#996 - [FEATURE]: Dell CSI to Dell CSM Operator Migration Process&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1031&#34;&gt;#1031 - [FEATURE]: Update to the latest UBI Micro image for CSM&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/926&#34;&gt;#926 - [FEATURE]: Fixing the linting, formatting and vetting issues&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;fixed-issues&#34;&gt;Fixed Issues&lt;/h3&gt;
 &lt;h3 id=&#34;known-issues&#34;&gt;Known Issues&lt;/h3&gt;
 &lt;p&gt;There are no known issues in this release.&lt;/p&gt;
-
-      </description>
-    </item>
-    
-    <item>
-      <title>Docs: Uninstallation</title>
-      <link>https://dell.github.io/csm-docs/docs/resiliency/uninstallation/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://dell.github.io/csm-docs/docs/resiliency/uninstallation/</guid>
-      <description>
-        
-        
-        &lt;p&gt;This section outlines the uninstallation steps for Container Storage Modules (CSM) for Resiliency.&lt;/p&gt;
-&lt;h2 id=&#34;uninstalling-the-sidecar-in-the-csi-driver&#34;&gt;Uninstalling the sidecar in the CSI Driver&lt;/h2&gt;
-&lt;p&gt;To uninstall the sidecar in the CSI Driver, &lt;a href=&#34;../../csidriver/uninstall&#34;&gt;uninstall&lt;/a&gt; the driver and &lt;a href=&#34;../../deployment&#34;&gt;reinstall&lt;/a&gt; the driver with the &lt;code&gt;podmon&lt;/code&gt; feature disabled.&lt;/p&gt;
 
       </description>
     </item>
@@ -180,36 +148,6 @@ are connected to the Control Plane through a K8S Control Plane IP Network.&lt;/p
 &lt;/li&gt;
 &lt;/ol&gt;
 
-      </description>
-    </item>
-    
-    <item>
-      <title>Docs: Upgrade</title>
-      <link>https://dell.github.io/csm-docs/docs/resiliency/upgrade/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://dell.github.io/csm-docs/docs/resiliency/upgrade/</guid>
-      <description>
-        
-        
-        &lt;p&gt;CSM for Resiliency can be upgraded as part of the Dell CSI driver upgrade process. The drivers can be upgraded either by a &lt;em&gt;helm chart&lt;/em&gt; or by the &lt;em&gt;Dell CSM Operator&lt;/em&gt;. Currently, only &lt;em&gt;Helm chart&lt;/em&gt; upgrade is supported for CSM for Resiliency.&lt;/p&gt;
-&lt;p&gt;For information on the PowerFlex CSI driver upgrade process, see &lt;a href=&#34;../../csidriver/upgradation/drivers/powerflex&#34;&gt;PowerFlex CSI Driver&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;For information on the Unity XT CSI driver upgrade process, see &lt;a href=&#34;../../csidriver/upgradation/drivers/unity&#34;&gt;Unity XT CSI Driver&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;For information on the PowerScale CSI driver upgrade process, see &lt;a href=&#34;../../csidriver/upgradation/drivers/isilon&#34;&gt;PowerScale CSI Driver&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;For information on the PowerStore CSI driver upgrade process, see &lt;a href=&#34;../../csidriver/upgradation/drivers/powerstore&#34;&gt;PowerStore CSI Driver&lt;/a&gt;.&lt;/p&gt;
-&lt;h2 id=&#34;helm-chart-upgrade&#34;&gt;Helm Chart Upgrade&lt;/h2&gt;
-&lt;p&gt;To upgrade CSM for Resiliency with the driver, the following steps are required.&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Note: These steps refer to the values file and &lt;code&gt;csi-install.sh&lt;/code&gt; script that were used during initial installation of the Dell CSI driver.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;&lt;strong&gt;Steps&lt;/strong&gt;&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;Update the podmon.image value in the values files to reference the new podmon image.&lt;/li&gt;
-&lt;li&gt;Run the csi-install script with the option &amp;ndash;upgrade by running:&lt;/li&gt;
-&lt;/ol&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#204a87&#34;&gt;cd&lt;/span&gt; ../dell-csi-helm-installer &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; ./csi-install.sh --namespace vxflexos --values ./myvalues.yaml --upgrade
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
       </description>
     </item>
     

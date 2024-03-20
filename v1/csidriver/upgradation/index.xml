@@ -15,46 +15,6 @@
     
     
     <item>
-      <title>V1: Dell CSI Operator</title>
-      <link>https://dell.github.io/csm-docs/v1/csidriver/upgradation/drivers/operator/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://dell.github.io/csm-docs/v1/csidriver/upgradation/drivers/operator/</guid>
-      <description>
-        
-        
-        
-
-&lt;div class=&#34;pageinfo pageinfo-primary&#34;&gt;
-&lt;p&gt;The Dell CSI Operator is no longer actively maintained or supported. It will be deprecated in CSM 1.9. It is highly recommended that you use &lt;a href=&#34;../../../../deployment/csmoperator&#34;&gt;CSM Operator&lt;/a&gt; going forward.&lt;/p&gt;
-
-&lt;/div&gt;
-
-&lt;p&gt;To upgrade Dell CSI Operator, perform the following steps.
-Dell CSI Operator can be upgraded based on the supported platforms in one of the 2 ways:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;Using script (for non-OLM based installation)&lt;/li&gt;
-&lt;li&gt;Using Operator Lifecycle Manager (OLM)&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h3 id=&#34;using-installation-script&#34;&gt;Using Installation Script&lt;/h3&gt;
-&lt;ol&gt;
-&lt;li&gt;Clone and checkout the required dell-csi-operator version using &lt;code&gt;git clone -b v1.12.0 https://github.com/dell/dell-csi-operator.git&lt;/code&gt;.&lt;/li&gt;
-&lt;li&gt;cd dell-csi-operator&lt;/li&gt;
-&lt;li&gt;Execute &lt;code&gt;bash scripts/install.sh --upgrade&lt;/code&gt;. This command will install the latest version of the operator.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h3 id=&#34;using-olm&#34;&gt;Using OLM&lt;/h3&gt;
-&lt;p&gt;The upgrade of the Dell CSI Operator is done via Operator Lifecycle Manager.&lt;/p&gt;
-&lt;p&gt;The &lt;code&gt;Update approval&lt;/code&gt; (&lt;strong&gt;&lt;code&gt;InstallPlan&lt;/code&gt;&lt;/strong&gt; in OLM terms) strategy plays a role while upgrading dell-csi-operator on OpenShift. This option can be set during installation of dell-csi-operator on OpenShift via the console and can be either set to &lt;code&gt;Manual&lt;/code&gt; or &lt;code&gt;Automatic&lt;/code&gt;.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;If the &lt;strong&gt;&lt;code&gt;Update approval&lt;/code&gt;&lt;/strong&gt; is set to &lt;code&gt;Automatic&lt;/code&gt;, OpenShift automatically detects whenever the latest version of dell-csi-operator is available in the &lt;strong&gt;&lt;code&gt;Operator hub&lt;/code&gt;&lt;/strong&gt;, and upgrades it to the latest available version.&lt;/li&gt;
-&lt;li&gt;If the upgrade policy is set to &lt;code&gt;Manual&lt;/code&gt;, OpenShift notifies of an available upgrade. This notification can be viewed by the user in the &lt;strong&gt;&lt;code&gt;Installed Operators&lt;/code&gt;&lt;/strong&gt; section of the OpenShift console. Clicking on the hyperlink to &lt;code&gt;Approve&lt;/code&gt; the installation would trigger the dell-csi-operator upgrade process.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;NOTE&lt;/strong&gt;: The recommended version of OLM for Upstream Kubernetes is &lt;strong&gt;&lt;code&gt;v0.18.3&lt;/code&gt;&lt;/strong&gt; when upgrading operator to &lt;code&gt;v1.12.0&lt;/code&gt;.&lt;/p&gt;
-
-      </description>
-    </item>
-    
-    <item>
       <title>V1: PowerFlex</title>
       <link>https://dell.github.io/csm-docs/v1/csidriver/upgradation/drivers/powerflex/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -63,11 +23,11 @@ Dell CSI Operator can be upgraded based on the supported platforms in one of the
       <description>
         
         
-        &lt;p&gt;You can upgrade the CSI Driver for Dell PowerFlex using Helm or Dell CSI Operator.&lt;/p&gt;
-&lt;h2 id=&#34;update-driver-from-v271-to-v28-using-helm&#34;&gt;Update Driver from v2.7.1 to v2.8 using Helm&lt;/h2&gt;
+        &lt;p&gt;You can upgrade the CSI Driver for Dell PowerFlex using Helm or Dell CSM Operator.&lt;/p&gt;
+&lt;h2 id=&#34;update-driver-from-v280-to-v292-using-helm&#34;&gt;Update Driver from v2.8.0 to v2.9.2 using Helm&lt;/h2&gt;
 &lt;p&gt;&lt;strong&gt;Steps&lt;/strong&gt;&lt;/p&gt;
 &lt;ol&gt;
-&lt;li&gt;Run &lt;code&gt;git clone -b v2.8.0 https://github.com/dell/csi-powerflex.git&lt;/code&gt; to clone the git repository and get the v2.8.0 driver.&lt;/li&gt;
+&lt;li&gt;Run &lt;code&gt;git clone -b v2.9.2 https://github.com/dell/csi-powerflex.git&lt;/code&gt; to clone the git repository and get the v2.9.2 driver.&lt;/li&gt;
 &lt;li&gt;You need to create secret.yaml with the configuration of your system.
 Check this section in installation documentation:  &lt;a href=&#34;../../../installation/helm/powerflex#install-the-driver&#34;&gt;Install the Driver&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;Update myvalues file as needed.&lt;/li&gt;
@@ -122,17 +82,17 @@ Check this section in installation documentation:  &lt;a href=&#34;../../../inst
       <description>
         
         
-        &lt;p&gt;You can upgrade CSI Driver for Dell PowerMax using Helm or Dell CSI Operator.&lt;/p&gt;
+        &lt;p&gt;You can upgrade CSI Driver for Dell PowerMax using Helm or Dell CSM Operator.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; CSI Driver for PowerMax v2.4.0 requires 10.0 REST endpoint support of Unisphere.&lt;/p&gt;
 &lt;h3 id=&#34;updating-the-csi-driver-to-use-100-unisphere&#34;&gt;Updating the CSI Driver to use 10.0 Unisphere&lt;/h3&gt;
 &lt;ol&gt;
 &lt;li&gt;Upgrade the Unisphere to have 10.0 endpoint support.Please find the instructions &lt;a href=&#34;https://dl.dell.com/content/manual34878027-dell-unisphere-for-powermax-10-0-0-installation-guide.pdf?language=en-us&amp;amp;ps=true&#34;&gt;here.&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;Update the &lt;code&gt;my-powermax-settings.yaml&lt;/code&gt; to have endpoint with 10.0 support.&lt;/li&gt;
 &lt;/ol&gt;
-&lt;h2 id=&#34;update-driver-from-v27-to-v28-using-helm&#34;&gt;Update Driver from v2.7 to v2.8 using Helm&lt;/h2&gt;
+&lt;h2 id=&#34;update-driver-from-v28-to-v291-using-helm&#34;&gt;Update Driver from v2.8 to v2.9.1 using Helm&lt;/h2&gt;
 &lt;p&gt;&lt;strong&gt;Steps&lt;/strong&gt;&lt;/p&gt;
 &lt;ol&gt;
-&lt;li&gt;Run &lt;code&gt;git clone -b v2.8.0 https://github.com/dell/csi-powermax.git&lt;/code&gt; to clone the git repository and get the driver.&lt;/li&gt;
+&lt;li&gt;Run &lt;code&gt;git clone -b v2.9.1 https://github.com/dell/csi-powermax.git&lt;/code&gt; to clone the git repository and get the driver.&lt;/li&gt;
 &lt;li&gt;Update the values file as needed.&lt;/li&gt;
 &lt;li&gt;Run the &lt;code&gt;csi-install&lt;/code&gt; script with the option &lt;em&gt;--upgrade&lt;/em&gt; by running:
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
@@ -182,20 +142,20 @@ Check this section in installation documentation:  &lt;a href=&#34;../../../inst
       <description>
         
         
-        &lt;p&gt;You can upgrade the CSI Driver for Dell PowerScale using Helm or Dell CSI Operator.&lt;/p&gt;
-&lt;h2 id=&#34;upgrade-driver-from-version-270-to-280-using-helm&#34;&gt;Upgrade Driver from version 2.7.0 to 2.8.0 using Helm&lt;/h2&gt;
+        &lt;p&gt;You can upgrade the CSI Driver for Dell PowerScale using Helm or Dell CSM Operator.&lt;/p&gt;
+&lt;h2 id=&#34;upgrade-driver-from-version-280-to-291-using-helm&#34;&gt;Upgrade Driver from version 2.8.0 to 2.9.1 using Helm&lt;/h2&gt;
 &lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; While upgrading the driver via helm, controllerCount variable in myvalues.yaml can be at most one less than the number of worker nodes.&lt;/p&gt;
 &lt;h3 id=&#34;steps&#34;&gt;Steps&lt;/h3&gt;
 &lt;ol&gt;
 &lt;li&gt;
-&lt;p&gt;Clone the repository using &lt;code&gt;git clone -b v2.8.0 https://github.com/dell/csi-powerscale.git&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Clone the repository using &lt;code&gt;git clone -b v2.9.1 https://github.com/dell/csi-powerscale.git&lt;/code&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Change to directory dell-csi-helm-installer to install the Dell PowerScale &lt;code&gt;cd dell-csi-helm-installer&lt;/code&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Download the default values.yaml using following command:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;wget -O my-isilon-settings.yaml https://raw.githubusercontent.com/dell/helm-charts/csi-isilon-2.8.0/charts/csi-isilon/values.yaml
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;wget -O my-isilon-settings.yaml https://raw.githubusercontent.com/dell/helm-charts/csi-isilon-2.9.1/charts/csi-isilon/values.yaml
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Edit the &lt;em&gt;my-isilon-settings.yaml&lt;/em&gt; as per the requirements.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
@@ -223,12 +183,12 @@ Check this section in installation documentation:  &lt;a href=&#34;../../../inst
         
         
         &lt;p&gt;You can upgrade the CSI Driver for Dell PowerStore using Helm.&lt;/p&gt;
-&lt;h2 id=&#34;update-driver-from-v27-to-v28-using-helm&#34;&gt;Update Driver from v2.7 to v2.8 using Helm&lt;/h2&gt;
+&lt;h2 id=&#34;update-driver-from-v280-to-v291-using-helm&#34;&gt;Update Driver from v2.8.0 to v2.9.1 using Helm&lt;/h2&gt;
 &lt;p&gt;Note: While upgrading the driver via helm, controllerCount variable in myvalues.yaml can be at most one less than the number of worker nodes.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Steps&lt;/strong&gt;&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;
-&lt;p&gt;Run &lt;code&gt;git clone -b v2.8.0 https://github.com/dell/csi-powerstore.git&lt;/code&gt; to clone the git repository and get the driver.&lt;/p&gt;
+&lt;p&gt;Run &lt;code&gt;git clone -b v2.9.1 https://github.com/dell/csi-powerstore.git&lt;/code&gt; to clone the git repository and get the driver.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Edit &lt;code&gt;samples/secret/secret.yaml&lt;/code&gt; file and configure connection information for your PowerStore arrays changing the following parameters:&lt;/p&gt;
@@ -258,7 +218,7 @@ NFSv4 ACls are supported for NFSv4 shares on NFSv4 enabled NAS servers only. POS
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl create secret generic powerstore-config -n csi-powerstore --from-file&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;config&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;secret.yaml
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;Download the default values.yaml file &lt;code&gt;cd dell-csi-helm-installer &amp;amp;&amp;amp; wget -O my-powerstore-settings.yaml https://github.com/dell/helm-charts/raw/csi-powerstore-2.8.0/charts/csi-powerstore/values.yaml&lt;/code&gt; and update parameters as per the requirement.&lt;/p&gt;
+&lt;p&gt;Download the default values.yaml file &lt;code&gt;cd dell-csi-helm-installer &amp;amp;&amp;amp; wget -O my-powerstore-settings.yaml https://github.com/dell/helm-charts/raw/csi-powerstore-2.9.1/charts/csi-powerstore/values.yaml&lt;/code&gt; and update parameters as per the requirement.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Run the &lt;code&gt;csi-install&lt;/code&gt; script with the option &lt;em&gt;--upgrade&lt;/em&gt; by running:&lt;/p&gt;
@@ -285,7 +245,7 @@ NFSv4 ACls are supported for NFSv4 shares on NFSv4 enabled NAS servers only. POS
       <description>
         
         
-        &lt;p&gt;You can upgrade the CSI Driver for Dell Unity XT using Helm or Dell CSI Operator.&lt;/p&gt;
+        &lt;p&gt;You can upgrade the CSI Driver for Dell Unity XT using Helm or Dell CSM Operator.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt;&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;User has to re-create existing custom-storage classes (if any) according to the latest format.&lt;/li&gt;
@@ -295,9 +255,9 @@ NFSv4 ACls are supported for NFSv4 shares on NFSv4 enabled NAS servers only. POS
 &lt;h3 id=&#34;using-helm&#34;&gt;Using Helm&lt;/h3&gt;
 &lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; While upgrading the driver via helm, controllerCount variable in myvalues.yaml can be at most one less than the number of worker nodes.&lt;/p&gt;
 &lt;p&gt;Preparing myvalues.yaml is the same as explained in the install section.&lt;/p&gt;
-&lt;p&gt;To upgrade the driver from csi-unity v2.7.0 to csi-unity v2.8.0&lt;/p&gt;
+&lt;p&gt;To upgrade the driver from csi-unity v2.8.0 to csi-unity v2.9.1&lt;/p&gt;
 &lt;ol&gt;
-&lt;li&gt;Get the latest csi-unity v2.8.0 code from Github using &lt;code&gt;git clone -b v2.8.0 https://github.com/dell/csi-unity.git&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Get the latest csi-unity v2.9.1 code from Github using &lt;code&gt;git clone -b v2.9.1 https://github.com/dell/csi-unity.git&lt;/code&gt;.&lt;/li&gt;
 &lt;li&gt;Copy the helm/csi-unity/values.yaml to the new location csi-unity/dell-csi-helm-installer and rename it to myvalues.yaml. Customize settings for installation by editing myvalues.yaml as needed.&lt;/li&gt;
 &lt;li&gt;Navigate to csi-unity/dell-csi-hem-installer folder and execute this command:
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;

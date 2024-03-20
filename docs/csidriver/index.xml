@@ -15,62 +15,6 @@
     
     
     <item>
-      <title>Docs: Installation</title>
-      <link>https://dell.github.io/csm-docs/docs/csidriver/installation/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://dell.github.io/csm-docs/docs/csidriver/installation/</guid>
-      <description>
-        
-        
-        &lt;p&gt;Installation information for all the drivers/modules can be found on the individual driver&amp;rsquo;s page in this section&lt;/p&gt;
-
-      </description>
-    </item>
-    
-    <item>
-      <title>Docs: Uninstallation</title>
-      <link>https://dell.github.io/csm-docs/docs/csidriver/uninstall/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://dell.github.io/csm-docs/docs/csidriver/uninstall/</guid>
-      <description>
-        
-        
-        &lt;h2 id=&#34;uninstall-a-csi-driver-installed-via-helm&#34;&gt;Uninstall a CSI driver installed via Helm&lt;/h2&gt;
-&lt;p&gt;To uninstall a driver, the &lt;code&gt;csi-uninstall.sh&lt;/code&gt; script provides a handy wrapper around the &lt;code&gt;helm&lt;/code&gt; utility. The only required argument for uninstallation is the namespace name. For example, to uninstall the driver:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;./csi-uninstall.sh --namespace &amp;lt;driver-namespace&amp;gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;For usage information:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;./csi-uninstall.sh -h
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;Help for ./csi-uninstall.sh
-
-Usage: ./csi-uninstall.sh options...
-Options:
-  Required
-  --namespace[=]&amp;lt;namespace&amp;gt;  Kubernetes namespace to uninstall the CSI driver from
-  Optional
-  --release[=]&amp;lt;helm release&amp;gt; Name to register with helm, default value will match the driver name
-  -h                         Help
-&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;uninstall-a-csi-driver-installed-via-dell-csm-operator&#34;&gt;Uninstall a CSI driver installed via Dell CSM Operator&lt;/h2&gt;
-&lt;p&gt;For uninstalling any CSI drivers deployed by the Dell CSM Operator, refer to instructions &lt;a href=&#34;../../deployment/csmoperator/drivers/#uninstall-csi-driver&#34;&gt;here&lt;/a&gt;&lt;/p&gt;
-
-      </description>
-    </item>
-    
-    <item>
-      <title>Docs: Upgrade</title>
-      <link>https://dell.github.io/csm-docs/docs/csidriver/upgradation/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://dell.github.io/csm-docs/docs/csidriver/upgradation/</guid>
-      <description>
-        
-        
-        
-      </description>
-    </item>
-    
-    <item>
       <title>Docs: Features</title>
       <link>https://dell.github.io/csm-docs/docs/csidriver/features/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -102,6 +46,19 @@ Options:
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://dell.github.io/csm-docs/docs/csidriver/release/</guid>
+      <description>
+        
+        
+        
+      </description>
+    </item>
+    
+    <item>
+      <title>Docs: Testing Drivers</title>
+      <link>https://dell.github.io/csm-docs/docs/csidriver/test/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dell.github.io/csm-docs/docs/csidriver/test/</guid>
       <description>
         
         
