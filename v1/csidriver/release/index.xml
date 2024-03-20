@@ -15,48 +15,6 @@
     
     
     <item>
-      <title>V1: Operator</title>
-      <link>https://dell.github.io/csm-docs/v1/csidriver/release/operator/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://dell.github.io/csm-docs/v1/csidriver/release/operator/</guid>
-      <description>
-        
-        
-        &lt;h2 id=&#34;release-notes---dell-csi-operator-1120&#34;&gt;Release Notes - Dell CSI Operator 1.12.0&lt;/h2&gt;
-
-
-&lt;div class=&#34;pageinfo pageinfo-primary&#34;&gt;
-&lt;p&gt;The Dell CSI Operator is no longer actively maintained or supported. Dell CSI Operator has been replaced with &lt;a href=&#34;https://dell.github.io/csm-docs/docs/deployment/csmoperator/&#34;&gt;Dell CSM Operator&lt;/a&gt;. If you are currently using Dell CSI Operator, refer to the &lt;a href=&#34;https://dell.github.io/csm-docs/docs/csidriver/installation/operator/operator_migration/&#34;&gt;operator migration documentation&lt;/a&gt; to migrate from Dell CSI Operator to Dell CSM Operator.&lt;/p&gt;
-
-&lt;/div&gt;
-
-&lt;h3 id=&#34;new-featureschanges&#34;&gt;New Features/Changes&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/761&#34;&gt;Added support to Kubernetes 1.27&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/571&#34;&gt;Added support to Openshift 4.12&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/824&#34;&gt;Added Storage Capacity Tracking support for CSI-PowerScale&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/744&#34;&gt;Migrated image registry from k8s.gcr.io to registry.k8s.io&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/742&#34;&gt;Allow user to set Quota limit parameters from the PVC request in CSI PowerScale&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; There will be a delay in certification of Dell CSI Operator 1.12.0 and it will not be available for download from the Red Hat OpenShift certified catalog right away. The operator will still be available for download from the Red Hat OpenShift Community Catalog soon after the 1.12.0 release.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h3 id=&#34;fixed-issues&#34;&gt;Fixed Issues&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/812&#34;&gt;CHAP is set to true in the CSI-PowerStore sample file in CSI Operator&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/799&#34;&gt;Vsphere credentials for vsphere secrets is expected when vsphere enable is set to false in CSI PowerMax&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;known-issues&#34;&gt;Known Issues&lt;/h3&gt;
-&lt;p&gt;There are no known issues in this release.&lt;/p&gt;
-&lt;h3 id=&#34;support&#34;&gt;Support&lt;/h3&gt;
-&lt;p&gt;The Dell CSI Operator image is available on Docker Hub and is officially supported by Dell.
-For any CSI operator and driver issues, questions or feedback, please follow our &lt;a href=&#34;../../../support/&#34;&gt;support process&lt;/a&gt;.&lt;/p&gt;
-
-      </description>
-    </item>
-    
-    <item>
       <title>V1: PowerFlex</title>
       <link>https://dell.github.io/csm-docs/v1/csidriver/release/powerflex/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -65,18 +23,30 @@ For any CSI operator and driver issues, questions or feedback, please follow our
       <description>
         
         
-        &lt;h2 id=&#34;release-notes---csi-powerflex-v280&#34;&gt;Release Notes - CSI PowerFlex v2.8.0&lt;/h2&gt;
+        &lt;h2 id=&#34;release-notes---csi-powerflex-v292&#34;&gt;Release Notes - CSI PowerFlex v2.9.2&lt;/h2&gt;
 &lt;h3 id=&#34;new-featureschanges&#34;&gt;New Features/Changes&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/724&#34;&gt;#724 - [FEATURE]: CSM support for Openshift 4.13&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/763&#34;&gt;#763 - [FEATURE]: CSI-PowerFlex 4.0 NFS support&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/876&#34;&gt;#876 - [FEATURE]: CSI 1.5 spec support -StorageCapacityTracking&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/878&#34;&gt;#878 - [FEATURE]: CSI 1.5 spec support: Implement Volume Limits&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/885&#34;&gt;#885 - [FEATURE]: SDC 3.6.1 support&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/947&#34;&gt;#947 - [FEATURE]: Support for Kubernetes 1.28&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1066&#34;&gt;#1066 - [FEATURE]: Support for Openshift 4.14&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1067&#34;&gt;#1067 - [FEATURE]: Support For PowerFlex 4.5&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/851&#34;&gt;#851 - [FEATURE]: Helm Chart Enhancement - Container Images Configurable in values.yaml&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/905&#34;&gt;#905 - [FEATURE]: Add support for CSI Spec 1.6&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/996&#34;&gt;#996 - [FEATURE]: Dell CSI to Dell CSM Operator Migration Process&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;fixed-issues&#34;&gt;Fixed Issues&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/916&#34;&gt;#916 - [BUG]: Remove references to deprecated io/ioutil package&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1011&#34;&gt;#1011 - [BUG]: PowerFlex RWX volume no option to configure the nfs export host access ip address.&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1014&#34;&gt;#1014 - [BUG]: Missing error check for os.Stat call during volume publish&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1020&#34;&gt;#1020 - [BUG]: CSI-PowerFlex: SDC Rename fails when configuring multiple arrays in the secret&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1030&#34;&gt;#1030 - [BUG]: Comment out duplicate entries in the sample secret.yaml file&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1050&#34;&gt;#1050 - [BUG]: NFS Export gets deleted when one pod is deleted from the multiple pods consuming the same PowerFlex RWX NFS volume&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1054&#34;&gt;#1054 - [BUG]:  The PowerFlex Dockerfile is incorrectly labeling the version as 2.7.0 for the 2.8.0 version.&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1057&#34;&gt;#1057 - [BUG]: CSI Driver - issue with creation volume from 1 of the worker nodes&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1058&#34;&gt;#1058 - [BUG]: CSI Health monitor for Node missing for CSM PowerFlex in Operator samples&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1061&#34;&gt;#1061 - [BUG]: Golint is not installing with go get command&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1110&#34;&gt;#1110 - [BUG]: Multi Controller defect - sidecars timeout&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1103&#34;&gt;#1103 - [BUG]: CSM Operator doesn&amp;rsquo;t apply fSGroupPolicy value to CSIDriver Object&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1152&#34;&gt;#1152 - [BUG]: CSI driver changes to facilitate SDC brownfield deployments&lt;/a&gt;)&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;known-issues&#34;&gt;Known Issues&lt;/h3&gt;
 &lt;table&gt;
@@ -104,8 +74,8 @@ For any CSI operator and driver issues, questions or feedback, please follow our
 &lt;td&gt;Workaround: &lt;br /&gt; Change the powerflexSdc to sdc:3.6 in values.yaml &lt;a href=&#34;https://github.com/dell/csi-powerflex/blob/72b27acee7553006cc09df97f85405f58478d2e4/helm/csi-vxflexos/values.yaml#L13&#34;&gt;https://github.com/dell/csi-powerflex/blob/72b27acee7553006cc09df97f85405f58478d2e4/helm/csi-vxflexos/values.yaml#L13&lt;/a&gt; &lt;br /&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;A CSI ephemeral pod may not get created in OpenShift 4.13 and fail with the error &lt;code&gt;&amp;quot;error when creating pod: the pod uses an inline volume provided by CSIDriver csi-unity.dellemc.com, and the namespace has a pod security enforcement level that is lower than privileged.&amp;quot;&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;This issue occurs because OpenShift 4.13 introduced the CSI Volume Admission plugin to restrict the use of a CSI driver capable of provisioning CSI ephemeral volumes during pod admission. Therefore, an additional label &lt;code&gt;security.openshift.io/csi-ephemeral-volume-profile&lt;/code&gt; in &lt;a href=&#34;https://github.com/dell/helm-charts/blob/csi-unity-2.8.0/charts/csi-unity/templates/csidriver.yaml&#34;&gt;csidriver.yaml&lt;/a&gt; file with the required security profile value should be provided. Follow &lt;a href=&#34;https://docs.openshift.com/container-platform/4.13/storage/container_storage_interface/ephemeral-storage-csi-inline.html&#34;&gt;OpenShift 4.13 documentation for CSI Ephemeral Volumes&lt;/a&gt; for more information.&lt;/td&gt;
+&lt;td&gt;A CSI ephemeral pod may not get created in OpenShift 4.13 and fail with the error &lt;code&gt;&amp;quot;error when creating pod: the pod uses an inline volume provided by CSIDriver csi-vxflexos.dellemc.com, and the namespace has a pod security enforcement level that is lower than privileged.&amp;quot;&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;This issue occurs because OpenShift 4.13 introduced the CSI Volume Admission plugin to restrict the use of a CSI driver capable of provisioning CSI ephemeral volumes during pod admission. Therefore, an additional label &lt;code&gt;security.openshift.io/csi-ephemeral-volume-profile&lt;/code&gt; in &lt;a href=&#34;https://github.com/dell/helm-charts/blob/csi-vxflexos-2.9.1/charts/csi-vxflexos/templates/csidriver.yaml&#34;&gt;csidriver.yaml&lt;/a&gt; file with the required security profile value should be provided. Follow &lt;a href=&#34;https://docs.openshift.com/container-platform/4.13/storage/container_storage_interface/ephemeral-storage-csi-inline.html&#34;&gt;OpenShift 4.13 documentation for CSI Ephemeral Volumes&lt;/a&gt; for more information.&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;If the volume limit is exhausted and there are pending pods and PVCs due to &lt;code&gt;exceed max volume count&lt;/code&gt;, the pending PVCs will be bound to PVs and the pending pods will be scheduled to nodes when the driver pods are restarted.&lt;/td&gt;
@@ -134,13 +104,10 @@ For any CSI operator and driver issues, questions or feedback, please follow our
       <description>
         
         
-        &lt;h2 id=&#34;release-notes---csi-powermax-v280&#34;&gt;Release Notes - CSI PowerMax v2.8.0&lt;/h2&gt;
-
-
-&lt;div class=&#34;pageinfo pageinfo-primary&#34;&gt;
-Linked Proxy mode for CSI reverse proxy is no longer actively maintained or supported. It will be deprecated in CSM 1.9. It is highly recommended that you use stand alone mode going forward.
-&lt;/div&gt;
-
+        &lt;h2 id=&#34;release-notes---csi-powermax-v291&#34;&gt;Release Notes - CSI PowerMax v2.9.1&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Note: Auto SRDF group creation is currently not supported in PowerMaxOS 10.1 (6079) Arrays.&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;blockquote&gt;
 &lt;p&gt;Note: Starting from CSI v2.4.0, Only Unisphere 10.0 REST endpoints are supported. It is mandatory that Unisphere should be updated to 10.0. Please find the instructions &lt;a href=&#34;https://dl.dell.com/content/manual34878027-dell-unisphere-for-powermax-10-0-0-installation-guide.pdf?language=en-us&amp;amp;ps=true&#34;&gt;here.&lt;/a&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -149,17 +116,25 @@ Linked Proxy mode for CSI reverse proxy is no longer actively maintained or supp
 &lt;/blockquote&gt;
 &lt;h3 id=&#34;new-featureschanges&#34;&gt;New Features/Changes&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/724&#34;&gt;#724 - [FEATURE]: CSM support for Openshift 4.13&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/861&#34;&gt;#861 - [FEATURE]: CSM for PowerMax file support &lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/876&#34;&gt;#876 - [FEATURE]: CSI 1.5 spec support -StorageCapacityTracking&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/877&#34;&gt;#877 - [FEATURE]: Make standalone helm chart available from helm repository : https://dell.github.io/dell/helm-charts&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/878&#34;&gt;#878 - [FEATURE]: CSI 1.5 spec support: Implement Volume Limits&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/922&#34;&gt;#922 - [FEATURE]: Use ubi9 micro as base image&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/937&#34;&gt;#937 - [FEATURE]: Google Anthos 1.15 support  for PowerMax&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/947&#34;&gt;#947 - [FEATURE]: Support for Kubernetes 1.28&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1066&#34;&gt;#1066 - [FEATURE]: Support for Openshift 4.14&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/851&#34;&gt;#851 - [FEATURE]: Helm Chart Enhancement - Container Images Configurable in values.yaml&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/905&#34;&gt;#905 - [FEATURE]: Add support for CSI Spec 1.6&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/991&#34;&gt;#991 - [FEATURE]:Remove linked proxy mode for PowerMax&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/996&#34;&gt;#996 - [FEATURE]: Dell CSI to Dell CSM Operator Migration Process&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1062&#34;&gt;#1062 - [FEATURE]: CSM PowerMax: Support PowerMax v10.1 &lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;fixed-issues&#34;&gt;Fixed Issues&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/916&#34;&gt;#916 - [BUG]: Remove references to deprecated io/ioutil package&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/983&#34;&gt;#983 - [BUG]: storageCapacity can be set in unsupported CSI Powermax with CSM Operator&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1014&#34;&gt;#1014 - [BUG]: Missing error check for os.Stat call during volume publish&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1037&#34;&gt;#1037 - [BUG]: Document instructions update: Either Multi-Path or the Power-Path software should be enabled for PowerMax &lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1051&#34;&gt;#1051 - [BUG]: make docker command is failing with error &lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1053&#34;&gt;#1053 - [BUG]: make gosec is erroring out - Repos PowerMax,PowerStore,PowerScale (gosec is installed)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1056&#34;&gt;#1056 - [BUG]: Missing runtime dependencies reference in PowerMax README file.&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1061&#34;&gt;#1061 - [BUG]: Golint is not installing with go get command&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1110&#34;&gt;#1110 - [BUG]: Multi Controller defect - sidecars timeout&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1103&#34;&gt;#1103 - [BUG]: CSM Operator doesn&amp;rsquo;t apply fSGroupPolicy value to CSIDriver Object&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;known-issues&#34;&gt;Known Issues&lt;/h3&gt;
 &lt;table&gt;
@@ -182,6 +157,14 @@ Linked Proxy mode for CSI reverse proxy is no longer actively maintained or supp
 &lt;td&gt;If the volume limit is exhausted and there are pending pods and PVCs due to &lt;code&gt;exceed max volume count&lt;/code&gt;, the pending PVCs will be bound to PVs and the pending pods will be scheduled to nodes when the driver pods are restarted.&lt;/td&gt;
 &lt;td&gt;It is advised not to have any pending pods or PVCs once the volume limit per node is exhausted on a CSI Driver. There is an open issue reported with kubenetes at &lt;a href=&#34;https://github.com/kubernetes/kubernetes/issues/95911&#34;&gt;https://github.com/kubernetes/kubernetes/issues/95911&lt;/a&gt; with the same behavior.&lt;/td&gt;
 &lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Automatic SRDF group creation is failing with &amp;ldquo;Unable to get Remote Port on SAN for Auto SRDF&amp;rdquo; for PowerMaxOS 10.1 arrays&lt;/td&gt;
+&lt;td&gt;Create the SRDF Group and add it to the storage class&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1070&#34;&gt;Node stage is failing with error &amp;ldquo;wwn for FC device not found&amp;rdquo;&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;This is an intermittent issue, rebooting the node will resolve this issue&lt;/td&gt;
+&lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;h3 id=&#34;note&#34;&gt;Note:&lt;/h3&gt;
@@ -201,19 +184,26 @@ Linked Proxy mode for CSI reverse proxy is no longer actively maintained or supp
       <description>
         
         
-        &lt;h2 id=&#34;release-notes---csi-driver-for-powerscale-v280&#34;&gt;Release Notes - CSI Driver for PowerScale v2.8.0&lt;/h2&gt;
+        &lt;h2 id=&#34;release-notes---csi-driver-for-powerscale-v291&#34;&gt;Release Notes - CSI Driver for PowerScale v2.9.1&lt;/h2&gt;
 &lt;h3 id=&#34;new-featureschanges&#34;&gt;New Features/Changes&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/724&#34;&gt;#724 - [FEATURE]: CSM support for Openshift 4.13&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/877&#34;&gt;#877 - [FEATURE]: Make standalone helm chart available from helm repository : https://dell.github.io/dell/helm-charts&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/950&#34;&gt;#950 - [FEATURE]: PowerScale 9.5.0.4 support&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/967&#34;&gt;#967 - [FEATURE]: SLES15 SP4 support in csi powerscale&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/922&#34;&gt;#922 - [FEATURE]: Use ubi9 micro as base image&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/947&#34;&gt;#947 - [FEATURE]: Support for Kubernetes 1.28&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1066&#34;&gt;#1066 - [FEATURE]: Support for Openshift 4.14&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/851&#34;&gt;#851 - [FEATURE]: Helm Chart Enhancement - Container Images Configurable in values.yaml&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/905&#34;&gt;#905 - [FEATURE]: Add support for CSI Spec 1.6&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/996&#34;&gt;#996 - [FEATURE]: Dell CSI to Dell CSM Operator Migration Process&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;fixed-issues&#34;&gt;Fixed Issues&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/916&#34;&gt;#916 - [BUG]: Remove references to deprecated io/ioutil package&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/487&#34;&gt;#487 - [BUG]: Powerscale CSI driver RO PVC-from-snapshot wrong zone&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/771&#34;&gt;#771 - [BUG]: Gopowerscale unit test fails&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/990&#34;&gt;#990 - [BUG]: X_CSI_AUTH_TYPE cannot be set in CSM Operator&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/999&#34;&gt;#999 - [BUG]: Volume health fails because it looks to a wrong path&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1014&#34;&gt;#1014 - [BUG]: Missing error check for os.Stat call during volume publish&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1046&#34;&gt;#1046 - [BUG]:Is cert-csi expansion expected to successfully run with enableQuota: false on PowerScale?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1053&#34;&gt;#1053 - [BUG]: make gosec is erroring out - Repos PowerMax,PowerStore,PowerScale (gosec is installed)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1061&#34;&gt;#1061 - [BUG]: Golint is not installing with go get command&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1110&#34;&gt;#1110 - [BUG]: Multi Controller defect - sidecars timeout&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1103&#34;&gt;#1103 - [BUG]: CSM Operator doesn&amp;rsquo;t apply fSGroupPolicy value to CSIDriver Object&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;known-issues&#34;&gt;Known Issues&lt;/h3&gt;
 &lt;table&gt;
@@ -224,6 +214,10 @@ Linked Proxy mode for CSI reverse proxy is no longer actively maintained or supp
 &lt;/tr&gt;
 &lt;/thead&gt;
 &lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Storage capacity tracking does not return &lt;code&gt;MaximumVolumeSize&lt;/code&gt; parameter. PowerScale is purely NFS based meaning it has no actual volumes. Therefore &lt;code&gt;MaximumVolumeSize&lt;/code&gt; cannot be implemented if there is no volume creation.&lt;/td&gt;
+&lt;td&gt;CSI PowerScale 2.9.1 is compliant with CSI 1.6 specification since the field &lt;code&gt;MaximumVolumeSize&lt;/code&gt; is optional.&lt;/td&gt;
+&lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;If the length of the nodeID exceeds 128 characters, the driver fails to update the CSINode object and installation fails. This is due to a limitation set by CSI spec which doesn&amp;rsquo;t allow nodeID to be greater than 128 characters.&lt;/td&gt;
 &lt;td&gt;The CSI PowerScale driver uses the hostname for building the nodeID which is set in the CSINode resource object, hence we recommend not having very long hostnames in order to avoid this issue. This current limitation of 128 characters is likely to be relaxed in future Kubernetes versions as per this issue in the community: &lt;a href=&#34;https://github.com/kubernetes-sigs/gcp-compute-persistent-disk-csi-driver/issues/581&#34;&gt;https://github.com/kubernetes-sigs/gcp-compute-persistent-disk-csi-driver/issues/581&lt;/a&gt; &lt;br&gt;&lt;br&gt; &lt;strong&gt;Note:&lt;/strong&gt; In kubernetes 1.22 this limit has been relaxed to 192 characters.&lt;/td&gt;
@@ -271,19 +265,24 @@ Linked Proxy mode for CSI reverse proxy is no longer actively maintained or supp
       <description>
         
         
-        &lt;h2 id=&#34;release-notes---csi-powerstore-v280&#34;&gt;Release Notes - CSI PowerStore v2.8.0&lt;/h2&gt;
+        &lt;h2 id=&#34;release-notes---csi-powerstore-v291&#34;&gt;Release Notes - CSI PowerStore v2.9.1&lt;/h2&gt;
 &lt;h3 id=&#34;new-featureschanges&#34;&gt;New Features/Changes&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/724&#34;&gt;#724 - [FEATURE]: CSM support for Openshift 4.13&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/877&#34;&gt;#877 - [FEATURE]: Make standalone helm chart available from helm repository : https://dell.github.io/dell/helm-charts&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/878&#34;&gt;#878 - [FEATURE]: CSI 1.5 spec support: Implement Volume Limits&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/879&#34;&gt;#879 - [FEATURE]: Configurable Volume Attributes use recommended naming convention &lt;prefix&gt;/&lt;name&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/922&#34;&gt;#922 - [FEATURE]: Use ubi9 micro as base image&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/947&#34;&gt;#947 - [FEATURE]: Support for Kubernetes 1.28&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1066&#34;&gt;#1066 - [FEATURE]: Support for Openshift 4.14&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/851&#34;&gt;#851 - [FEATURE]: Helm Chart Enhancement - Container Images Configurable in values.yaml&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/905&#34;&gt;#905 - [FEATURE]: Add support for CSI Spec 1.6&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/996&#34;&gt;#996 - [FEATURE]: Dell CSI to Dell CSM Operator Migration Process&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1031&#34;&gt;#1031 - [FEATURE]: Update to the latest UBI Micro image for CSM&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;fixed-issues&#34;&gt;Fixed Issues&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/916&#34;&gt;#916 - [BUG]: Remove references to deprecated io/ioutil package&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/928&#34;&gt;#928 - [BUG]: PowerStore Replication - Delete RG request hangs&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1006&#34;&gt;#1006 - [BUG]: Too many login sessions in gopowerstore client causes unexpected session termination in UI&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1014&#34;&gt;#1014 - [BUG]: Missing error check for os.Stat call during volume publish&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1053&#34;&gt;#1053 - [BUG]: make gosec is erroring out - Repos PowerMax,PowerStore,PowerScale (gosec is installed)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1061&#34;&gt;#1061 - [BUG]: Golint is not installing with go get command&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1108&#34;&gt;#1108 - [BUG]: Volumes failing to mount when customer using NVMeTCP on Powerstore&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1103&#34;&gt;#1103 - [BUG]: CSM Operator doesn&amp;rsquo;t apply fSGroupPolicy value to CSIDriver Object&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;known-issues&#34;&gt;Known Issues&lt;/h3&gt;
 &lt;table&gt;
@@ -326,6 +325,10 @@ Linked Proxy mode for CSI reverse proxy is no longer actively maintained or supp
 &lt;td&gt;If the volume limit is exhausted and there are pending pods and PVCs due to &lt;code&gt;exceed max volume count&lt;/code&gt;, the pending PVCs will be bound to PVs, and the pending pods will be scheduled to nodes when the driver pods are restarted.&lt;/td&gt;
 &lt;td&gt;It is advised not to have any pending pods or PVCs once the volume limit per node is exhausted on a CSI Driver. There is an open issue reported with Kubenetes at &lt;a href=&#34;https://github.com/kubernetes/kubernetes/issues/95911&#34;&gt;https://github.com/kubernetes/kubernetes/issues/95911&lt;/a&gt; with the same behavior.&lt;/td&gt;
 &lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;If two separate networks are configured for ISCSI and NVMeTCP, the driver may encounter difficulty identifying the second network (e.g., NVMeTCP).&lt;/td&gt;
+&lt;td&gt;This is a known issue, and the workaround involves creating a single network on the array to serve both ISCSI and NVMeTCP purposes.&lt;/td&gt;
+&lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;h3 id=&#34;note&#34;&gt;Note:&lt;/h3&gt;
@@ -345,18 +348,20 @@ Linked Proxy mode for CSI reverse proxy is no longer actively maintained or supp
       <description>
         
         
-        &lt;h2 id=&#34;release-notes---csi-unity-xt-v280&#34;&gt;Release Notes - CSI Unity XT v2.8.0&lt;/h2&gt;
+        &lt;h2 id=&#34;release-notes---csi-unity-xt-v291&#34;&gt;Release Notes - CSI Unity XT v2.9.1&lt;/h2&gt;
 &lt;h3 id=&#34;new-featureschanges&#34;&gt;New Features/Changes&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/724&#34;&gt;#724 - [FEATURE]: CSM support for Openshift 4.13&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/876&#34;&gt;#876 - [FEATURE]: CSI 1.5 spec support -StorageCapacityTracking&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/877&#34;&gt;#877 - [FEATURE]: Make standalone helm chart available from helm repository : https://dell.github.io/dell/helm-charts&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/891&#34;&gt;#891 - [FEATURE]: Enhancing Unity XT driver to handle API requests after the sessionIdleTimeOut in STIG mode&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/947&#34;&gt;#947 - [FEATURE]: Support for Kubernetes 1.28&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1066&#34;&gt;#1066 - [FEATURE]: Support for Openshift 4.14&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/851&#34;&gt;#851 - [FEATURE]: Helm Chart Enhancement - Container Images Configurable in values.yaml&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/905&#34;&gt;#905 - [FEATURE]: Add support for CSI Spec 1.6&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/996&#34;&gt;#996 - [FEATURE]: Dell CSI to Dell CSM Operator Migration Process&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;fixed-issues&#34;&gt;Fixed Issues&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/849&#34;&gt;#849 - [BUG]: CSI driver does not verify iSCSI initiators on the array correctly&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/916&#34;&gt;#916 - [BUG]: Remove references to deprecated io/ioutil package&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1014&#34;&gt;#1014 - [BUG]: Missing error check for os.Stat call during volume publish&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1110&#34;&gt;#1110 - [BUG]: Multi Controller defect - sidecars timeout&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1103&#34;&gt;#1103 - [BUG]: CSM Operator doesn&amp;rsquo;t apply fSGroupPolicy value to CSIDriver Object&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;known-issues&#34;&gt;Known Issues&lt;/h3&gt;
 &lt;table&gt;

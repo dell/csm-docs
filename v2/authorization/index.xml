@@ -277,7 +277,14 @@ today.  Support for more Storage Arrays will come in the future.&lt;/p&gt;
       <description>
         
         
-        &lt;p&gt;Installation information for CSM Authorization can be found in this section.&lt;/p&gt;
+        
+
+&lt;div class=&#34;pageinfo pageinfo-primary&#34;&gt;
+&lt;p&gt;The CSM Authorization RPM will be deprecated in a future release. It is highly recommended that you use CSM Authorization Helm deployment or CSM Operator going forward.&lt;/p&gt;
+
+&lt;/div&gt;
+
+&lt;p&gt;Installation information for CSM Authorization can be found in this section.&lt;/p&gt;
 
       </description>
     </item>
@@ -291,7 +298,14 @@ today.  Support for more Storage Arrays will come in the future.&lt;/p&gt;
       <description>
         
         
-        &lt;p&gt;This section outlines the uninstallation steps for Container Storage Modules (CSM) for Authorization.&lt;/p&gt;
+        
+
+&lt;div class=&#34;pageinfo pageinfo-primary&#34;&gt;
+&lt;p&gt;The CSM Authorization RPM will be deprecated in a future release. It is highly recommended that you use CSM Authorization Helm deployment or CSM Operator going forward.&lt;/p&gt;
+
+&lt;/div&gt;
+
+&lt;p&gt;This section outlines the uninstallation steps for Container Storage Modules (CSM) for Authorization.&lt;/p&gt;
 &lt;h2 id=&#34;uninstalling-the-rpm&#34;&gt;Uninstalling the RPM&lt;/h2&gt;
 &lt;p&gt;To uninstall the rpm package on the system, you must first uninstall the K3s SELinux package if SELinux is enabled. To uninstall the K3s SELinux package, run:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;rpm -e k3s-selinux
@@ -312,7 +326,14 @@ today.  Support for more Storage Arrays will come in the future.&lt;/p&gt;
       <description>
         
         
-        &lt;p&gt;This section outlines the upgrade steps for Container Storage Modules (CSM) for Authorization.  The upgrade of CSM for Authorization is handled in 2 parts:&lt;/p&gt;
+        
+
+&lt;div class=&#34;pageinfo pageinfo-primary&#34;&gt;
+&lt;p&gt;The CSM Authorization RPM will be deprecated in a future release. It is highly recommended that you use CSM Authorization Helm deployment or CSM Operator going forward.&lt;/p&gt;
+
+&lt;/div&gt;
+
+&lt;p&gt;This section outlines the upgrade steps for Container Storage Modules (CSM) for Authorization.  The upgrade of CSM for Authorization is handled in 2 parts:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Upgrading the CSM for Authorization proxy server&lt;/li&gt;
 &lt;li&gt;Upgrading the Dell CSI drivers with CSM for Authorization enabled&lt;/li&gt;
@@ -359,7 +380,14 @@ today.  Support for more Storage Arrays will come in the future.&lt;/p&gt;
       <description>
         
         
-        &lt;p&gt;karavictl is a command-line interface (CLI) used to interact with and manage your Container Storage Modules (CSM) Authorization deployment.
+        
+
+&lt;div class=&#34;pageinfo pageinfo-primary&#34;&gt;
+&lt;p&gt;The CSM Authorization karavictl CLI is no longer actively maintained or supported. It will be deprecated in CSM 2.0.&lt;/p&gt;
+
+&lt;/div&gt;
+
+&lt;p&gt;karavictl is a command-line interface (CLI) used to interact with and manage your Container Storage Modules (CSM) Authorization deployment.
 This document outlines all karavictl commands, their intended use, options that can be provided to alter their execution, and expected output from those commands.&lt;/p&gt;
 &lt;p&gt;If you feel that something is unclear or missing in this document, please open up an &lt;a href=&#34;https://github.com/dell/csm/issues&#34;&gt;issue&lt;/a&gt;.&lt;/p&gt;
 &lt;table&gt;
@@ -1004,7 +1032,14 @@ be piped directly to kubectl:&lt;/p&gt;
       <description>
         
         
-        &lt;h2 id=&#34;rpm-deployment&#34;&gt;RPM Deployment&lt;/h2&gt;
+        
+
+&lt;div class=&#34;pageinfo pageinfo-primary&#34;&gt;
+&lt;p&gt;The CSM Authorization RPM will be deprecated in a future release. It is highly recommended that you use CSM Authorization Helm deployment or CSM Operator going forward.&lt;/p&gt;
+
+&lt;/div&gt;
+
+&lt;h2 id=&#34;rpm-deployment&#34;&gt;RPM Deployment&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;#The-Failure-of-Building-an-Authorization-RPM&#34;&gt;The Failure of Building an Authorization RPM&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#running-karavictl-tenant-commands-result-in-an-http-504-error&#34;&gt;Running &lt;code&gt;karavictl tenant&lt;/code&gt; commands result in an HTTP 504 error&lt;/a&gt;&lt;/li&gt;
@@ -1134,22 +1169,18 @@ time=&amp;#34;2022-06-30T17:38:32Z&amp;#34; level=fatal msg=&amp;#34;grpc failed
       <description>
         
         
-        &lt;h2 id=&#34;release-notes---csm-authorization-170&#34;&gt;Release Notes - CSM Authorization 1.7.0&lt;/h2&gt;
+        &lt;h2 id=&#34;release-notes---csm-authorization-180&#34;&gt;Release Notes - CSM Authorization 1.8.0&lt;/h2&gt;
 &lt;h3 id=&#34;new-featureschanges&#34;&gt;New Features/Changes&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;CSM Authorization karavictl requires an admin token. (&lt;a href=&#34;https://github.com/dell/csm/issues/725&#34;&gt;#725&lt;/a&gt;)&lt;/li&gt;
-&lt;li&gt;CSM support for Kubernetes 1.27. (&lt;a href=&#34;https://github.com/dell/csm/issues/761&#34;&gt;#761&lt;/a&gt;)&lt;/li&gt;
-&lt;li&gt;CSM 1.7 release specific changes. (&lt;a href=&#34;https://github.com/dell/csm/issues/743&#34;&gt;#743&lt;/a&gt;)&lt;/li&gt;
-&lt;li&gt;CSM Authorization encryption for secrets in K3S. (&lt;a href=&#34;https://github.com/dell/csm/issues/774&#34;&gt;#774&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/922&#34;&gt;#922 - [FEATURE]: Use ubi9 micro as base image&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id=&#34;bugs&#34;&gt;Bugs&lt;/h3&gt;
+&lt;h3 id=&#34;fixed-issues&#34;&gt;Fixed Issues&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;Authorization should have sample CRD for every supported version in csm-operator. (&lt;a href=&#34;https://github.com/dell/csm/issues/826&#34;&gt;#826&lt;/a&gt;)&lt;/li&gt;
-&lt;li&gt;Improve CSM Operator Authorization documentation. (&lt;a href=&#34;https://github.com/dell/csm/issues/800&#34;&gt;#800&lt;/a&gt;)&lt;/li&gt;
-&lt;li&gt;CSM Authorization doesn&amp;rsquo;t write the status code on error for csi-powerscale. (&lt;a href=&#34;https://github.com/dell/csm/issues/787&#34;&gt;#787&lt;/a&gt;)&lt;/li&gt;
-&lt;li&gt;Authorization RPM installation should use nogpgcheck for k3s-selinux package. (&lt;a href=&#34;https://github.com/dell/csm/issues/772&#34;&gt;#772&lt;/a&gt;)&lt;/li&gt;
-&lt;li&gt;CSM Authorization - karavictl generate token should output valid yaml. (&lt;a href=&#34;https://github.com/dell/csm/issues/767&#34;&gt;#767&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/895&#34;&gt;#895 - [BUG]: Update CSM Authorization karavictl CLI flag descriptions&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/916&#34;&gt;#916 - [BUG]: Remove references to deprecated io/ioutil package&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
+&lt;h3 id=&#34;known-issues&#34;&gt;Known Issues&lt;/h3&gt;
+&lt;p&gt;There are no known issues in this release.&lt;/p&gt;
 
       </description>
     </item>

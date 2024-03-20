@@ -65,11 +65,11 @@
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;Installation of the driver on Kubernetes v1.25/v1.26/v1.27 fails with the following error: &lt;br /&gt;&lt;code&gt;Error: unable to build kubernetes objects from release manifest: unable to recognize &amp;quot;&amp;quot;: no matches for kind &amp;quot;VolumeSnapshotClass&amp;quot; in version &amp;quot;snapshot.storage.k8s.io/v1&amp;quot;&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Kubernetes v1.23/v1.24/v1.25 requires v1 version of snapshot CRDs to be created in cluster, see the &lt;a href=&#34;../../installation/helm/powerflex/#optional-volume-snapshot-requirements&#34;&gt;Volume Snapshot Requirements&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Kubernetes v1.23/v1.24/v1.25 requires v1 version of snapshot CRDs to be created in cluster, see the &lt;a href=&#34;../../../deployment/helm/drivers/installation/powerflex/#optional-volume-snapshot-requirements&#34;&gt;Volume Snapshot Requirements&lt;/a&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;The &lt;code&gt;kubectl logs -n vxflexos vxflexos-controller-* driver&lt;/code&gt; logs show &lt;code&gt;x509: certificate signed by unknown authority&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;A self assigned certificate is used for PowerFlex array. See &lt;a href=&#34;../../installation/helm/powerflex/#certificate-validation-for-powerflex-gateway-rest-api-calls&#34;&gt;certificate validation for PowerFlex Gateway&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;A self assigned certificate is used for PowerFlex array. See &lt;a href=&#34;../../../deployment/helm/drivers/installation/powerflex/#certificate-validation-for-powerflex-gateway-rest-api-calls&#34;&gt;certificate validation for PowerFlex Gateway&lt;/a&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;When you run the command &lt;code&gt;kubectl apply -f snapclass-v1.yaml&lt;/code&gt;, you get the error &lt;code&gt;error: unable to recognize &amp;quot;snapclass-v1.yaml&amp;quot;: no matches for kind &amp;quot;VolumeSnapshotClass&amp;quot; in version &amp;quot;snapshot.storage.k8s.io/v1&amp;quot;&lt;/code&gt;&lt;/td&gt;
@@ -97,7 +97,7 @@
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;When attempting a driver upgrade, you see: &lt;code&gt;spec.fsGroupPolicy: Invalid value: &amp;quot;xxx&amp;quot;: field is immutable&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;You cannot upgrade between drivers with different fsGroupPolicies. See &lt;a href=&#34;../../upgradation/drivers/powerflex&#34;&gt;upgrade documentation&lt;/a&gt; for more details&lt;/td&gt;
+&lt;td&gt;You cannot upgrade between drivers with different fsGroupPolicies. See &lt;a href=&#34;../../../deployment/helm/drivers/upgrade/powerflex&#34;&gt;upgrade documentation&lt;/a&gt; for more details&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;When accessing ROX mode PVC in OpenShift where the worker nodes are non-root user, you see: &lt;code&gt;Permission denied&lt;/code&gt; while accesing the PVC mount location from the pod.&lt;/td&gt;
@@ -174,7 +174,7 @@
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;When attempting a driver upgrade, you see: &lt;code&gt;spec.fsGroupPolicy: Invalid value: &amp;quot;xxx&amp;quot;: field is immutable&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;You cannot upgrade between drivers with different fsGroupPolicies. See &lt;a href=&#34;../../upgradation/drivers/powermax&#34;&gt;upgrade documentation&lt;/a&gt; for more details&lt;/td&gt;
+&lt;td&gt;You cannot upgrade between drivers with different fsGroupPolicies. See &lt;a href=&#34;../../../deployment/helm/drivers/upgrade/powermax&#34;&gt;upgrade documentation&lt;/a&gt; for more details&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;Ater the migration group is in “migrated” state but unable to move to “commit ready” state because the new paths are not being discovered on the cluster nodes.&lt;/td&gt;
@@ -321,7 +321,7 @@
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;Installation of the driver on Kubernetes supported versions fails with the following error: &lt;br /&gt;&lt;code&gt;Error: unable to build kubernetes objects from release manifest: unable to recognize &amp;quot;&amp;quot;: no matches for kind &amp;quot;VolumeSnapshotClass&amp;quot; in version &amp;quot;snapshot.storage.k8s.io/v1&amp;quot;&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Kubernetes v1.21/v1.22/v1.23 requires v1 version of snapshot CRDs to be created in cluster, see the &lt;a href=&#34;../../installation/helm/powerstore/#optional-volume-snapshot-requirements&#34;&gt;Volume Snapshot Requirements&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Kubernetes v1.21/v1.22/v1.23 requires v1 version of snapshot CRDs to be created in cluster, see the &lt;a href=&#34;../../../deployment/helm/drivers/installation/powerstore/#optional-volume-snapshot-requirements&#34;&gt;Volume Snapshot Requirements&lt;/a&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;If PVC is not getting created and getting the following error in PVC description: &lt;br /&gt;&lt;code&gt;failed to provision volume with StorageClass &amp;quot;powerstore-iscsi&amp;quot;: rpc error: code = Internal desc = : Unknown error:&lt;/code&gt;&lt;/td&gt;

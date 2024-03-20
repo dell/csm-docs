@@ -135,7 +135,7 @@ Execute &lt;code&gt;kubectl create namespace vxflexos&lt;/code&gt; to create the
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl create secret generic vxflexos-config -n vxflexos --from-file&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;config&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;secret.yaml
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Use this command to replace or update the secret:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl create secret generic vxflexos-config -n vxflexos --from-file&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;config&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;config.yaml -o yaml --dry-run&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;client &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; kubectl replace -f -
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl create secret generic vxflexos-config -n vxflexos --from-file&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;config&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;secret.yaml -o yaml --dry-run&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;client &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; kubectl replace -f -
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h3 id=&#34;install-driver&#34;&gt;Install Driver&lt;/h3&gt;
@@ -283,6 +283,9 @@ Execute &lt;code&gt;kubectl create namespace vxflexos&lt;/code&gt; to create the
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;a href=&#34;../#verifying-the-driver-installation&#34;&gt;Verify the CSI Driver installation&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Refer &lt;a href=&#34;https://github.com/dell/csi-powerflex/tree/main/samples&#34;&gt;https://github.com/dell/csi-powerflex/tree/main/samples&lt;/a&gt; for the sample files.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt; :&lt;/p&gt;
@@ -458,7 +461,7 @@ Use a tool such as &lt;code&gt;openssl&lt;/code&gt; to generate this secret usin
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl create secret -n &amp;lt;namespace&amp;gt; tls csirevproxy-tls-secret --cert&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;tls.crt --key&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;tls.key
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;installation&#34;&gt;Installation&lt;/h2&gt;
 &lt;h3 id=&#34;optional-create-secret-for-client-side-tls-verification&#34;&gt;(Optional) Create secret for client-side TLS verification&lt;/h3&gt;
-&lt;p&gt;Create a secret named powermax-certs in the namespace where the CSI PowerMax driver will be installed. This is an optional step and is only required if you are setting the env variable X_CSI_POWERMAX_SKIP_CERTIFICATE_VALIDATION to false. See the detailed documentation on how to create this secret &lt;a href=&#34;../../../../csidriver/installation/helm/powermax#certificate-validation-for-unisphere-rest-api-calls&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Create a secret named powermax-certs in the namespace where the CSI PowerMax driver will be installed. This is an optional step and is only required if you are setting the env variable X_CSI_POWERMAX_SKIP_CERTIFICATE_VALIDATION to false. See the detailed documentation on how to create this secret &lt;a href=&#34;../../../helm/drivers/installation/powermax#certificate-validation-for-unisphere-rest-api-calls&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
 &lt;h3 id=&#34;install-driver&#34;&gt;Install Driver&lt;/h3&gt;
 &lt;ol&gt;
 &lt;li&gt;
@@ -701,6 +704,9 @@ Example: config.yaml&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;The mandatory module CSI PowerMax Reverseproxy will be installed automatically with the same command.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Refer &lt;a href=&#34;https://github.com/dell/csi-powermax/tree/main/samples&#34;&gt;https://github.com/dell/csi-powermax/tree/main/samples&lt;/a&gt; for the sample files.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;h2 id=&#34;other-features-to-enable&#34;&gt;Other features to enable&lt;/h2&gt;
@@ -963,7 +969,7 @@ The driver will continue to use previous values in case of an error found in the
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Create isilon-certs-n secret.
-Please refer &lt;a href=&#34;../../../../csidriver/installation/helm/isilon/#certificate-validation-for-onefs-rest-api-calls&#34;&gt;this section&lt;/a&gt; for creating cert-secrets.&lt;/p&gt;
+Please refer &lt;a href=&#34;../../../../deployment/helm/drivers/installation/isilon/#certificate-validation-for-onefs-rest-api-calls&#34;&gt;this section&lt;/a&gt; for creating cert-secrets.&lt;/p&gt;
 &lt;p&gt;If certificate validation is skipped, empty secret must be created. To create an empty secret. Ex: empty-secret.yaml&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;apiVersion&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;v1&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;kind&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Secret&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
@@ -1115,6 +1121,9 @@ Please refer &lt;a href=&#34;../../../../csidriver/installation/helm/isilon/#cer
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;a href=&#34;../#verifying-the-driver-installation&#34;&gt;Verify the CSI Driver installation&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Refer &lt;a href=&#34;https://github.com/dell/csi-powerscale/tree/main/samples&#34;&gt;https://github.com/dell/csi-powerscale/tree/main/samples&lt;/a&gt; for the sample files.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt; :&lt;/p&gt;
@@ -1391,7 +1400,12 @@ Add more blocks similar to above for each PowerStore array if necessary.&lt;/p&g
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;ol start=&#34;5&#34;&gt;
-&lt;li&gt;&lt;a href=&#34;../#verifying-the-driver-installation&#34;&gt;Verify the CSI Driver installation&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;../#verifying-the-driver-installation&#34;&gt;Verify the CSI Driver installation&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Refer &lt;a href=&#34;https://github.com/dell/csi-powerstore/tree/main/samples&#34;&gt;https://github.com/dell/csi-powerstore/tree/main/samples&lt;/a&gt; for the sample files.&lt;/p&gt;
+&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt; :&lt;/p&gt;
 &lt;ol&gt;
@@ -1575,7 +1589,12 @@ Add more blocks similar to above for each Unity XT array if necessary.&lt;/p&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;ol start=&#34;5&#34;&gt;
-&lt;li&gt;&lt;a href=&#34;../#verifying-the-driver-installation&#34;&gt;Verify the CSI Driver installation&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;../#verifying-the-driver-installation&#34;&gt;Verify the CSI Driver installation&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Refer &lt;a href=&#34;https://github.com/dell/csi-unity/tree/main/samples&#34;&gt;https://github.com/dell/csi-unity/tree/main/samples&lt;/a&gt; for the sample files.&lt;/p&gt;
+&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt; :&lt;/p&gt;
 &lt;ol&gt;

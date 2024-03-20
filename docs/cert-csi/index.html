@@ -1,0 +1,1469 @@
+<!doctype html>
+<html itemscope itemtype="http://schema.org/WebPage" lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="generator" content="Hugo 0.120.3">
+<link rel="alternate" type="application/rss&#43;xml" href="https://dell.github.io/csm-docs/docs/cert-csi/index.xml">
+<meta name="robots" content="index, follow">
+
+<link rel="shortcut icon" href="/favicons/favicon.ico" >
+<link rel="icon" type="image/png" href="/csm-docs/favicons/favicon-16x16.png" sizes="16x16">
+
+<title>Cert-CSI | Dell Technologies</title>
+<meta name="description" content="Tool to validate Dell CSI Drivers">
+<meta property="og:title" content="Cert-CSI" />
+<meta property="og:description" content="Tool to validate Dell CSI Drivers" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://dell.github.io/csm-docs/docs/cert-csi/" />
+
+<meta itemprop="name" content="Cert-CSI">
+<meta itemprop="description" content="Tool to validate Dell CSI Drivers"><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Cert-CSI"/>
+<meta name="twitter:description" content="Tool to validate Dell CSI Drivers"/>
+
+
+
+
+<link rel="preload" href="/csm-docs/scss/main.min.d6268f24d21f31a22b6a61f0826fd9fe19150353c8e51b64ee5cb484384f0dae.css" as="style">
+<link href="/csm-docs/scss/main.min.d6268f24d21f31a22b6a61f0826fd9fe19150353c8e51b64ee5cb484384f0dae.css" rel="stylesheet" integrity="">
+
+<script
+  src="https://code.jquery.com/jquery-3.6.0.min.js"
+  integrity="sha384-vtXRMe3mGCbOeY7l30aIg8H9p3GdeSe4IFlP6G8JMa7o7lXvnz3GFKzPxzJdPfGK"
+  crossorigin="anonymous"></script>
+<script defer
+  src="https://unpkg.com/lunr@2.3.9/lunr.min.js"
+  integrity="sha384-203J0SNzyqHby3iU6hzvzltrWi/M41wOP5Gu+BiJMz5nwKykbkUx8Kp7iti0Lpli"
+  crossorigin="anonymous"></script>
+<link rel="stylesheet" href="/css/prism.css"/>
+
+  </head>
+  <body class="td-section">
+    <header>
+      
+<nav class="js-navbar-scroll navbar navbar-expand navbar-dark flex-column flex-md-row td-navbar">
+        <a class="navbar-brand" href="/csm-docs/">
+		<span class="navbar-logo"><svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1017 132"><defs><style>.cls-1{fill:#fff}</style></defs><title>DellTech_Logo_Prm_Wht_rgb</title><path class="cls-1" d="M1015 84.89c0-12.23-6.8-17.66-20.39-20.38s-21.73-4.08-21.73-13.58c0-6.8 5.44-10.87 15-10.87 12.22.0 16.3 5.43 16.3 12.22l1.36 1.36h5.43l1.37-1.36c0-13.58-10.88-19-24.46-19-15 0-23.1 8.15-23.1 17.67.0 10.86 8.15 16.3 21.73 19s20.38 4.08 20.38 15c0 6.79-4.07 12.23-17.66 12.23-12.22.0-17.66-6.8-17.66-15l-1.35-1.36h-5.44l-1.35 1.36c0 12.23 9.5 21.74 25.8 21.74 17.66.0 25.82-8.15 25.82-19M956.58 71.31l1.36-1.37V65.87c0-19-10.87-32.61-29.89-32.61s-29.89 13.59-29.89 32.61v2.72c0 19 9.51 35.32 31.25 35.32 19 0 25.81-12.23 27.17-20.38l-1.36-1.36h-5.43l-1.36 1.36c-2.72 8.15-8.16 13.59-19 13.59-17.66.0-23.1-16.31-23.1-24.46l1.36-1.35zm-8.15-6.8H907.67l-1.36-1.36c0-9.51 5.44-23.09 21.74-23.09s21.74 13.58 21.74 23.09zm-59.78 36.68V36l-1.36-1.35h-5.43L880.5 36v65.22l1.36 1.36h5.43zm0-78.8V14.24l-1.36-1.36h-5.43l-1.36 1.36v8.15l1.36 1.36h5.43zM837 97.12c-13.59.0-21.74-9.52-21.74-28.53S823.44 40.06 837 40.06s21.73 9.5 21.73 28.53S850.61 97.12 837 97.12M858.76 93c0 17.66-4.07 31.25-20.38 31.25-12.22.0-16.3-5.44-17.66-12.23l-1.35-1.36h-5.44l-1.36 1.36c1.36 10.87 9.51 19 25.81 19 17.67.0 28.53-10.87 28.53-38V36l-1.35-1.35h-4.08L860.12 36l-1.36 8.16H857.4c-2.71-5.43-9.5-10.87-21.74-10.87-19 0-28.53 15-28.53 35.33s9.52 35.32 28.53 35.32c12.24.0 19-5.43 21.74-10.87zm-88.3-53c13.58.0 23.09 10.87 23.09 28.53S784 97.12 770.46 97.12s-23.1-10.87-23.1-28.53 9.51-28.53 23.1-28.53m0 63.85c17.66.0 31.25-12.23 31.25-35.32s-13.59-35.33-31.25-35.33-31.25 12.23-31.25 35.33 13.59 35.32 31.25 35.32m-40.76-2.72V8.81l-1.36-1.36h-5.43l-1.36 1.36v92.38l1.36 1.36h5.43zM680.8 40.06c13.58.0 23.09 10.87 23.09 28.53s-9.51 28.53-23.09 28.53-23.1-10.87-23.1-28.53 9.51-28.53 23.1-28.53m0 63.85c17.66.0 31.25-12.23 31.25-35.32S698.46 33.26 680.8 33.26s-31.25 12.23-31.25 35.33 13.59 35.32 31.25 35.32m-39.4-2.72V60.43c0-17.66-9.51-27.17-24.45-27.17-9.52.0-17.67 4.08-21.74 10.87h-1.36L592.49 36l-1.36-1.35h-4.08L585.7 36v65.22l1.35 1.36h5.44l1.36-1.36V64.51c0-15 6.79-24.45 21.73-24.45 10.87.0 17.66 6.79 17.66 20.37v40.76l1.37 1.36H640zm-69.29.0V60.43c0-17.66-9.51-27.17-24.45-27.17-9.52.0-17.66 4.08-21.74 10.87h-1.36V8.81L523.2 7.45h-5.43l-1.36 1.36v92.38l1.36 1.36h5.43l1.36-1.36V64.51c0-15 6.8-24.45 21.74-24.45 10.87.0 17.66 6.79 17.66 20.37v40.76l1.36 1.36h5.44zM455.28 68.59c0-19 9.5-28.53 23.09-28.53s19 8.15 20.38 16.29l1.35 1.37h5.44l1.36-1.37c-1.36-13.58-12.23-23.09-28.53-23.09-17.66.0-31.24 10.87-31.24 35.33s13.58 35.32 31.24 35.32c16.3.0 27.17-9.51 28.53-23.1l-1.36-1.36H500.1l-1.35 1.36C497.39 89 492 97.12 478.37 97.12s-23.09-9.52-23.09-28.53m-14.95 2.72 1.36-1.37V65.87c0-19-10.87-32.61-29.9-32.61s-29.88 13.59-29.88 32.61v2.72c0 19 9.51 35.32 31.25 35.32 19 0 25.81-12.23 27.17-20.38L439 82.17h-5.43l-1.36 1.36c-2.72 8.15-8.15 13.59-19 13.59-17.66.0-23.1-16.31-23.1-24.46l1.36-1.35zm-8.15-6.8H391.42l-1.36-1.36c0-9.51 5.44-23.09 21.73-23.09s21.75 13.58 21.75 23.09zM395.57 12.88V8.81l-1.36-1.36H323.56L322.2 8.81v4.07l1.36 1.36h29.89l1.36 1.36v85.59l1.36 1.36h5.43l1.36-1.36V15.6l1.36-1.36h29.89z"/><path class="cls-1" d="M322.2 83.65v18.9H260.85V7.45h21.6v76.2zM38.55 102.55A47.57 47.57.0 0084.58 67l53.8 42 53.77-42v35.56H253.5V83.65H213.75V7.45h-21.6V43L140.58 83.3l-11.54-9L153.73 55l26.89-21-15.35-12-51.58 40.3-11.53-9L153.73 13 138.38 1 84.58 43a47.57 47.57.0 00-46-35.58H0v95.1zM21.6 83.65V26.35H38.55c14.33.0 26 12.83 26 28.65s-11.67 28.65-26 28.65z"/></svg></span>
+	</a>
+	<div class="td-navbar-nav-scroll ml-md-auto" id="main_navbar">
+		<ul class="navbar-nav mt-2 mt-lg-0">
+			
+			
+			<li class="nav-item mr-4 mb-2 mb-lg-0">
+				
+				
+				
+				
+				
+				
+				<a class="nav-link active" href="/csm-docs/docs/" ><span class="active">Container Storage Modules</span></a>
+			</li>
+			
+			<li class="nav-item mr-4 mb-2 mb-lg-0">
+				
+				
+				
+				
+				<a class="nav-link" href="https://github.com/dell/csm" target="_blank" ><span>GitHub</span></a>
+			</li>
+			
+			
+			<li class="nav-item dropdown d-none d-lg-block">
+				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+	Releases
+</a>
+<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+	
+	
+	
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.10.0)</a>
+	
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.9.3</a>
+	
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.8.0</a>
+	
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">v1.7.1</a>
+	
+</div>
+
+			</li>
+			
+			
+		</ul>
+	</div>
+	<div class="navbar-nav d-none d-lg-block"><input
+  type="search"
+  class="form-control td-search-input"
+  placeholder="&#xf002; Search this site…"
+  aria-label="Search this site…"
+  autocomplete="off"
+  
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.adf1db760753c8ca2fde32410440f6e1.json"
+  data-offline-search-base-href="/"
+  data-offline-search-max-results="10"
+>
+</div>
+</nav>
+
+    </header>
+    <div class="container-fluid td-outer">
+      <div class="td-main">
+        <div class="row flex-xl-nowrap">
+          <aside class="col-12 col-md-3 col-xl-2 td-sidebar d-print-none">
+            
+<div id="td-sidebar-menu" class="td-sidebar__inner">
+  <form class="td-sidebar__search d-flex align-items-center">
+    <input
+  type="search"
+  class="form-control td-search-input"
+  placeholder="&#xf002; Search this site…"
+  aria-label="Search this site…"
+  autocomplete="off"
+  
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.adf1db760753c8ca2fde32410440f6e1.json"
+  data-offline-search-base-href="/"
+  data-offline-search-max-results="10"
+>
+
+    <button class="btn btn-link td-sidebar__toggle d-md-none p-0 ml-3 fas fa-bars" type="button" data-toggle="collapse" data-target="#td-section-nav" aria-controls="td-section-nav" aria-expanded="false" aria-label="Toggle section navigation">
+    </button>
+  </form>
+  <nav class="collapse td-sidebar-nav" id="td-section-nav">
+    <ul class="td-sidebar-nav__section pr-md-3 ul-0">
+      <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id="m-csm-docsdocs-li">
+  <a href="/csm-docs/docs/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section tree-root" id="m-csm-docsdocs"><span class="">Container Storage Modules</span></a>
+  <ul class="ul-1">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsdocsprerequisites-li">
+  <a href="/csm-docs/docs/prerequisites/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsprerequisites"><span class="">Prerequisites</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-csm-docsdocsdeployment-li">
+  <a href="/csm-docs/docs/deployment/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsdeployment"><span class="">Deployment</span></a>
+  <ul class="ul-2 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsdocsdeploymentcsminstallationwizard-li">
+  <a href="/csm-docs/docs/deployment/csminstallationwizard/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsdeploymentcsminstallationwizard"><span class="">CSM Installation Wizard</span></a>
+  <ul class="ul-3 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymentcsminstallationwizardrelease-li">
+  <a href="/csm-docs/docs/deployment/csminstallationwizard/release/" title="Release Notes" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsdeploymentcsminstallationwizardrelease"><span class="">Release notes</span></a>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsdocsdeploymentcsmoperator-li">
+  <a href="/csm-docs/docs/deployment/csmoperator/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsdeploymentcsmoperator"><span class="">CSM Operator</span></a>
+  <ul class="ul-3 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsdocsdeploymentcsmoperatordrivers-li">
+  <a href="/csm-docs/docs/deployment/csmoperator/drivers/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsdeploymentcsmoperatordrivers"><span class="">CSI Drivers</span></a>
+  <ul class="ul-4 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymentcsmoperatordriverspowerflex-li">
+  <a href="/csm-docs/docs/deployment/csmoperator/drivers/powerflex/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsdeploymentcsmoperatordriverspowerflex"><span class="">PowerFlex</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymentcsmoperatordriverspowermax-li">
+  <a href="/csm-docs/docs/deployment/csmoperator/drivers/powermax/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsdeploymentcsmoperatordriverspowermax"><span class="">PowerMax</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymentcsmoperatordriverspowerscale-li">
+  <a href="/csm-docs/docs/deployment/csmoperator/drivers/powerscale/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsdeploymentcsmoperatordriverspowerscale"><span class="">PowerScale</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymentcsmoperatordriverspowerstore-li">
+  <a href="/csm-docs/docs/deployment/csmoperator/drivers/powerstore/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsdeploymentcsmoperatordriverspowerstore"><span class="">PowerStore</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymentcsmoperatordriversunity-li">
+  <a href="/csm-docs/docs/deployment/csmoperator/drivers/unity/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsdeploymentcsmoperatordriversunity"><span class="">Unity XT</span></a>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsdocsdeploymentcsmoperatormodules-li">
+  <a href="/csm-docs/docs/deployment/csmoperator/modules/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsdeploymentcsmoperatormodules"><span class="">CSM Modules</span></a>
+  <ul class="ul-4 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymentcsmoperatormodulesauthorization-li">
+  <a href="/csm-docs/docs/deployment/csmoperator/modules/authorization/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsdeploymentcsmoperatormodulesauthorization"><span class="">Authorization</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymentcsmoperatormodulesobservability-li">
+  <a href="/csm-docs/docs/deployment/csmoperator/modules/observability/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsdeploymentcsmoperatormodulesobservability"><span class="">Observability</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymentcsmoperatormodulesreplication-li">
+  <a href="/csm-docs/docs/deployment/csmoperator/modules/replication/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsdeploymentcsmoperatormodulesreplication"><span class="">Replication</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymentcsmoperatormodulesresiliency-li">
+  <a href="/csm-docs/docs/deployment/csmoperator/modules/resiliency/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsdeploymentcsmoperatormodulesresiliency"><span class="">Resiliency</span></a>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymentcsmoperatortroubleshooting-li">
+  <a href="/csm-docs/docs/deployment/csmoperator/troubleshooting/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsdeploymentcsmoperatortroubleshooting"><span class="">Troubleshooting</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymentcsmoperatorrelease-li">
+  <a href="/csm-docs/docs/deployment/csmoperator/release/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsdeploymentcsmoperatorrelease"><span class="">Release notes</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymentcsmoperatoroperator_migration-li">
+  <a href="/csm-docs/docs/deployment/csmoperator/operator_migration/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsdeploymentcsmoperatoroperator_migration"><span class="">CSI to CSM Operator Migration</span></a>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsdocsdeploymenthelm-li">
+  <a href="/csm-docs/docs/deployment/helm/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsdeploymenthelm"><span class="">Helm</span></a>
+  <ul class="ul-3 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsdocsdeploymenthelmdrivers-li">
+  <a href="/csm-docs/docs/deployment/helm/drivers/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsdeploymenthelmdrivers"><span class="">CSI Drivers</span></a>
+  <ul class="ul-4 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsdocsdeploymenthelmdriversinstallation-li">
+  <a href="/csm-docs/docs/deployment/helm/drivers/installation/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsdeploymenthelmdriversinstallation"><span class="">Installation</span></a>
+  <ul class="ul-5 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymenthelmdriversinstallationpowerflex-li">
+  <a href="/csm-docs/docs/deployment/helm/drivers/installation/powerflex/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsdeploymenthelmdriversinstallationpowerflex"><span class="">PowerFlex</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymenthelmdriversinstallationpowermax-li">
+  <a href="/csm-docs/docs/deployment/helm/drivers/installation/powermax/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsdeploymenthelmdriversinstallationpowermax"><span class="">PowerMax</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymenthelmdriversinstallationisilon-li">
+  <a href="/csm-docs/docs/deployment/helm/drivers/installation/isilon/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsdeploymenthelmdriversinstallationisilon"><span class="">PowerScale</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymenthelmdriversinstallationpowerstore-li">
+  <a href="/csm-docs/docs/deployment/helm/drivers/installation/powerstore/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsdeploymenthelmdriversinstallationpowerstore"><span class="">PowerStore</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymenthelmdriversinstallationunity-li">
+  <a href="/csm-docs/docs/deployment/helm/drivers/installation/unity/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsdeploymenthelmdriversinstallationunity"><span class="">Unity XT</span></a>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymenthelmdriversuninstall-li">
+  <a href="/csm-docs/docs/deployment/helm/drivers/uninstall/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsdeploymenthelmdriversuninstall"><span class="">Uninstallation</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsdocsdeploymenthelmdriversupgrade-li">
+  <a href="/csm-docs/docs/deployment/helm/drivers/upgrade/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsdeploymenthelmdriversupgrade"><span class="">Upgrade</span></a>
+  <ul class="ul-5 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymenthelmdriversupgradepowerflex-li">
+  <a href="/csm-docs/docs/deployment/helm/drivers/upgrade/powerflex/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsdeploymenthelmdriversupgradepowerflex"><span class="">PowerFlex</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymenthelmdriversupgradepowermax-li">
+  <a href="/csm-docs/docs/deployment/helm/drivers/upgrade/powermax/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsdeploymenthelmdriversupgradepowermax"><span class="">PowerMax</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymenthelmdriversupgradeisilon-li">
+  <a href="/csm-docs/docs/deployment/helm/drivers/upgrade/isilon/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsdeploymenthelmdriversupgradeisilon"><span class="">PowerScale</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymenthelmdriversupgradepowerstore-li">
+  <a href="/csm-docs/docs/deployment/helm/drivers/upgrade/powerstore/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsdeploymenthelmdriversupgradepowerstore"><span class="">PowerStore</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymenthelmdriversupgradeunity-li">
+  <a href="/csm-docs/docs/deployment/helm/drivers/upgrade/unity/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsdeploymenthelmdriversupgradeunity"><span class="">Unity XT</span></a>
+</li>
+  </ul>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsdocsdeploymenthelmmodules-li">
+  <a href="/csm-docs/docs/deployment/helm/modules/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsdeploymenthelmmodules"><span class="">CSM modules</span></a>
+  <ul class="ul-4 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsdocsdeploymenthelmmodulesinstallation-li">
+  <a href="/csm-docs/docs/deployment/helm/modules/installation/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsdeploymenthelmmodulesinstallation"><span class="">Installation</span></a>
+  <ul class="ul-5 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymenthelmmodulesinstallationapplicationmobility-li">
+  <a href="/csm-docs/docs/deployment/helm/modules/installation/applicationmobility/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsdeploymenthelmmodulesinstallationapplicationmobility"><span class="">ApplicationMobility</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsdocsdeploymenthelmmodulesinstallationencryption-li">
+  <a href="/csm-docs/docs/deployment/helm/modules/installation/encryption/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsdeploymenthelmmodulesinstallationencryption"><span class="">Encryption</span></a>
+  <ul class="ul-6 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymenthelmmodulesinstallationencryptionvault-li">
+  <a href="/csm-docs/docs/deployment/helm/modules/installation/encryption/vault/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsdeploymenthelmmodulesinstallationencryptionvault"><span class="">Vault Configuration</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymenthelmmodulesinstallationencryptionrekey-li">
+  <a href="/csm-docs/docs/deployment/helm/modules/installation/encryption/rekey/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsdeploymenthelmmodulesinstallationencryptionrekey"><span class="">Rekey Configuration</span></a>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsdocsdeploymenthelmmodulesinstallationreplication-li">
+  <a href="/csm-docs/docs/deployment/helm/modules/installation/replication/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsdeploymenthelmmodulesinstallationreplication"><span class="">Replication</span></a>
+  <ul class="ul-6 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymenthelmmodulesinstallationreplicationinstallation-li">
+  <a href="/csm-docs/docs/deployment/helm/modules/installation/replication/installation/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsdeploymenthelmmodulesinstallationreplicationinstallation"><span class="">Installation</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymenthelmmodulesinstallationreplicationconfigmap-secrets-li">
+  <a href="/csm-docs/docs/deployment/helm/modules/installation/replication/configmap-secrets/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsdeploymenthelmmodulesinstallationreplicationconfigmap-secrets"><span class="">ConfigMap &amp; Secrets</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymenthelmmodulesinstallationreplicationinstall-repctl-li">
+  <a href="/csm-docs/docs/deployment/helm/modules/installation/replication/install-repctl/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsdeploymenthelmmodulesinstallationreplicationinstall-repctl"><span class="">Installation using repctl</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymenthelmmodulesinstallationreplicationinstall-script-li">
+  <a href="/csm-docs/docs/deployment/helm/modules/installation/replication/install-script/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsdeploymenthelmmodulesinstallationreplicationinstall-script"><span class="">Installation using script</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymenthelmmodulesinstallationreplicationstorageclasses-li">
+  <a href="/csm-docs/docs/deployment/helm/modules/installation/replication/storageclasses/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsdeploymenthelmmodulesinstallationreplicationstorageclasses"><span class="">Storage Class</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymenthelmmodulesinstallationreplicationpowerflex-li">
+  <a href="/csm-docs/docs/deployment/helm/modules/installation/replication/powerflex/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsdeploymenthelmmodulesinstallationreplicationpowerflex"><span class="">PowerFlex</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymenthelmmodulesinstallationreplicationpowermax-li">
+  <a href="/csm-docs/docs/deployment/helm/modules/installation/replication/powermax/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsdeploymenthelmmodulesinstallationreplicationpowermax"><span class="">PowerMax</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymenthelmmodulesinstallationreplicationpowerscale-li">
+  <a href="/csm-docs/docs/deployment/helm/modules/installation/replication/powerscale/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsdeploymenthelmmodulesinstallationreplicationpowerscale"><span class="">PowerScale</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymenthelmmodulesinstallationreplicationpowerstore-li">
+  <a href="/csm-docs/docs/deployment/helm/modules/installation/replication/powerstore/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsdeploymenthelmmodulesinstallationreplicationpowerstore"><span class="">PowerStore</span></a>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsdocsdeploymenthelmmodulesinstallationobservability-li">
+  <a href="/csm-docs/docs/deployment/helm/modules/installation/observability/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsdeploymenthelmmodulesinstallationobservability"><span class="">Observability</span></a>
+  <ul class="ul-6 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymenthelmmodulesinstallationobservabilitydeployment-li">
+  <a href="/csm-docs/docs/deployment/helm/modules/installation/observability/deployment/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsdeploymenthelmmodulesinstallationobservabilitydeployment"><span class="">Helm</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymenthelmmodulesinstallationobservabilityinstaller-li">
+  <a href="/csm-docs/docs/deployment/helm/modules/installation/observability/installer/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsdeploymenthelmmodulesinstallationobservabilityinstaller"><span class="">Installer</span></a>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymenthelmmodulesinstallationresiliency-li">
+  <a href="/csm-docs/docs/deployment/helm/modules/installation/resiliency/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsdeploymenthelmmodulesinstallationresiliency"><span class="">Resiliency</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymenthelmmodulesinstallationauthorization-li">
+  <a href="/csm-docs/docs/deployment/helm/modules/installation/authorization/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsdeploymenthelmmodulesinstallationauthorization"><span class="">Authorization</span></a>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsdocsdeploymenthelmmodulesuninstall-li">
+  <a href="/csm-docs/docs/deployment/helm/modules/uninstall/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsdeploymenthelmmodulesuninstall"><span class="">Uninstallation</span></a>
+  <ul class="ul-5 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymenthelmmodulesuninstallapplicationmobility-li">
+  <a href="/csm-docs/docs/deployment/helm/modules/uninstall/applicationmobility/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsdeploymenthelmmodulesuninstallapplicationmobility"><span class="">Application mobility</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymenthelmmodulesuninstallauthorization-li">
+  <a href="/csm-docs/docs/deployment/helm/modules/uninstall/authorization/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsdeploymenthelmmodulesuninstallauthorization"><span class="">Authorization</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymenthelmmodulesuninstallencryption-li">
+  <a href="/csm-docs/docs/deployment/helm/modules/uninstall/encryption/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsdeploymenthelmmodulesuninstallencryption"><span class="">Encryption</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymenthelmmodulesuninstallresiliency-li">
+  <a href="/csm-docs/docs/deployment/helm/modules/uninstall/resiliency/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsdeploymenthelmmodulesuninstallresiliency"><span class="">Resiliency</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymenthelmmodulesuninstallobservability-li">
+  <a href="/csm-docs/docs/deployment/helm/modules/uninstall/observability/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsdeploymenthelmmodulesuninstallobservability"><span class="">Observability</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymenthelmmodulesuninstallreplication-li">
+  <a href="/csm-docs/docs/deployment/helm/modules/uninstall/replication/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsdeploymenthelmmodulesuninstallreplication"><span class="">Replication</span></a>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsdocsdeploymenthelmmodulesupgrade-li">
+  <a href="/csm-docs/docs/deployment/helm/modules/upgrade/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsdeploymenthelmmodulesupgrade"><span class="">Upgrade</span></a>
+  <ul class="ul-5 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymenthelmmodulesupgradeauthorization-li">
+  <a href="/csm-docs/docs/deployment/helm/modules/upgrade/authorization/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsdeploymenthelmmodulesupgradeauthorization"><span class="">Authorization</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymenthelmmodulesupgradeobservability-li">
+  <a href="/csm-docs/docs/deployment/helm/modules/upgrade/observability/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsdeploymenthelmmodulesupgradeobservability"><span class="">Observability</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymenthelmmodulesupgraderesiliency-li">
+  <a href="/csm-docs/docs/deployment/helm/modules/upgrade/resiliency/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsdeploymenthelmmodulesupgraderesiliency"><span class="">Resiliency</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymenthelmmodulesupgradereplication-li">
+  <a href="/csm-docs/docs/deployment/helm/modules/upgrade/replication/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsdeploymenthelmmodulesupgradereplication"><span class="">Replication</span></a>
+</li>
+  </ul>
+</li>
+  </ul>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsdocsdeploymentoffline-li">
+  <a href="/csm-docs/docs/deployment/offline/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsdeploymentoffline"><span class="">Offline</span></a>
+  <ul class="ul-3 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymentofflinemodules-li">
+  <a href="/csm-docs/docs/deployment/offline/modules/" title="Offline Installer for Observability" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsdeploymentofflinemodules"><span class="">Observability</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymentofflinedrivers-li">
+  <a href="/csm-docs/docs/deployment/offline/drivers/" title="Offline Installation of Dell CSI Storage Providers" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsdeploymentofflinedrivers"><span class="">Offline Installer</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymentofflineupgrade-li">
+  <a href="/csm-docs/docs/deployment/offline/upgrade/" title="Offline Upgrade of Dell CSI Storage Providers" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsdeploymentofflineupgrade"><span class="">Offline Upgrade</span></a>
+</li>
+  </ul>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsdocsinteractive-tutorials-li">
+  <a href="/csm-docs/docs/interactive-tutorials/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsinteractive-tutorials"><span class="">Interactive Tutorials</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-csm-docsdocscosidriver-li">
+  <a href="/csm-docs/docs/cosidriver/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocscosidriver"><span class="">COSI Driver</span></a>
+  <ul class="ul-2 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocscosidriveruninstallation-li">
+  <a href="/csm-docs/docs/cosidriver/uninstallation/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocscosidriveruninstallation"><span class="">Uninstallation</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsdocscosidriverfeatures-li">
+  <a href="/csm-docs/docs/cosidriver/features/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocscosidriverfeatures"><span class="">Features</span></a>
+  <ul class="ul-3 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocscosidriverfeaturesobjectscale-li">
+  <a href="/csm-docs/docs/cosidriver/features/objectscale/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocscosidriverfeaturesobjectscale"><span class="">ObjectScale</span></a>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsdocscosidriverinstallation-li">
+  <a href="/csm-docs/docs/cosidriver/installation/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocscosidriverinstallation"><span class="">Installation</span></a>
+  <ul class="ul-3 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocscosidriverinstallationconfiguration_file-li">
+  <a href="/csm-docs/docs/cosidriver/installation/configuration_file/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocscosidriverinstallationconfiguration_file"><span class="">Configuration File</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocscosidriverinstallationhelm-li">
+  <a href="/csm-docs/docs/cosidriver/installation/helm/" title="COSI Driver installation using Helm" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocscosidriverinstallationhelm"><span class="">Using Helm</span></a>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocscosidrivertroubleshooting-li">
+  <a href="/csm-docs/docs/cosidriver/troubleshooting/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocscosidrivertroubleshooting"><span class="">Troubleshooting</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocscosidriverupgrade-li">
+  <a href="/csm-docs/docs/cosidriver/upgrade/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocscosidriverupgrade"><span class="">Upgrade</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocscosidriverrelease-li">
+  <a href="/csm-docs/docs/cosidriver/release/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocscosidriverrelease"><span class="">Release Notes</span></a>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-csm-docsdocscsidriver-li">
+  <a href="/csm-docs/docs/csidriver/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocscsidriver"><span class="">CSI Drivers</span></a>
+  <ul class="ul-2 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsdocscsidriverfeatures-li">
+  <a href="/csm-docs/docs/csidriver/features/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocscsidriverfeatures"><span class="">Features</span></a>
+  <ul class="ul-3 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocscsidriverfeaturespowerflex-li">
+  <a href="/csm-docs/docs/csidriver/features/powerflex/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocscsidriverfeaturespowerflex"><span class="">PowerFlex</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocscsidriverfeaturespowermax-li">
+  <a href="/csm-docs/docs/csidriver/features/powermax/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocscsidriverfeaturespowermax"><span class="">PowerMax</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocscsidriverfeaturespowerscale-li">
+  <a href="/csm-docs/docs/csidriver/features/powerscale/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocscsidriverfeaturespowerscale"><span class="">PowerScale</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocscsidriverfeaturespowerstore-li">
+  <a href="/csm-docs/docs/csidriver/features/powerstore/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocscsidriverfeaturespowerstore"><span class="">PowerStore</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocscsidriverfeaturesunity-li">
+  <a href="/csm-docs/docs/csidriver/features/unity/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocscsidriverfeaturesunity"><span class="">Unity XT</span></a>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsdocscsidrivertroubleshooting-li">
+  <a href="/csm-docs/docs/csidriver/troubleshooting/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocscsidrivertroubleshooting"><span class="">Troubleshooting</span></a>
+  <ul class="ul-3 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocscsidrivertroubleshootingpowerflex-li">
+  <a href="/csm-docs/docs/csidriver/troubleshooting/powerflex/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocscsidrivertroubleshootingpowerflex"><span class="">PowerFlex</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocscsidrivertroubleshootingpowermax-li">
+  <a href="/csm-docs/docs/csidriver/troubleshooting/powermax/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocscsidrivertroubleshootingpowermax"><span class="">PowerMax</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocscsidrivertroubleshootingpowerscale-li">
+  <a href="/csm-docs/docs/csidriver/troubleshooting/powerscale/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocscsidrivertroubleshootingpowerscale"><span class="">PowerScale</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocscsidrivertroubleshootingpowerstore-li">
+  <a href="/csm-docs/docs/csidriver/troubleshooting/powerstore/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocscsidrivertroubleshootingpowerstore"><span class="">PowerStore</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocscsidrivertroubleshootingunity-li">
+  <a href="/csm-docs/docs/csidriver/troubleshooting/unity/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocscsidrivertroubleshootingunity"><span class="">Unity XT</span></a>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsdocscsidriverrelease-li">
+  <a href="/csm-docs/docs/csidriver/release/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocscsidriverrelease"><span class="">Release Notes</span></a>
+  <ul class="ul-3 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocscsidriverreleasepowerflex-li">
+  <a href="/csm-docs/docs/csidriver/release/powerflex/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocscsidriverreleasepowerflex"><span class="">PowerFlex</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocscsidriverreleasepowermax-li">
+  <a href="/csm-docs/docs/csidriver/release/powermax/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocscsidriverreleasepowermax"><span class="">PowerMax</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocscsidriverreleasepowerscale-li">
+  <a href="/csm-docs/docs/csidriver/release/powerscale/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocscsidriverreleasepowerscale"><span class="">PowerScale</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocscsidriverreleasepowerstore-li">
+  <a href="/csm-docs/docs/csidriver/release/powerstore/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocscsidriverreleasepowerstore"><span class="">PowerStore</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocscsidriverreleaseunity-li">
+  <a href="/csm-docs/docs/csidriver/release/unity/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocscsidriverreleaseunity"><span class="">Unity XT</span></a>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsdocscsidrivertest-li">
+  <a href="/csm-docs/docs/csidriver/test/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocscsidrivertest"><span class="">Testing Drivers</span></a>
+  <ul class="ul-3 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocscsidrivertestpowerflex-li">
+  <a href="/csm-docs/docs/csidriver/test/powerflex/" title="Test PowerFlex CSI Driver" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocscsidrivertestpowerflex"><span class="">PowerFlex</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocscsidrivertestpowermax-li">
+  <a href="/csm-docs/docs/csidriver/test/powermax/" title="Test PowerMax CSI Driver" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocscsidrivertestpowermax"><span class="">PowerMax</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocscsidrivertestpowerscale-li">
+  <a href="/csm-docs/docs/csidriver/test/powerscale/" title="Test PowerScale CSI Driver" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocscsidrivertestpowerscale"><span class="">PowerScale</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocscsidrivertestpowerstore-li">
+  <a href="/csm-docs/docs/csidriver/test/powerstore/" title="Test PowerStore CSI Driver" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocscsidrivertestpowerstore"><span class="">PowerStore</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocscsidrivertestunity-li">
+  <a href="/csm-docs/docs/csidriver/test/unity/" title="Test Unity XT CSI Driver" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocscsidrivertestunity"><span class="">Unity XT</span></a>
+</li>
+  </ul>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-csm-docsdocsauthorization-li">
+  <a href="/csm-docs/docs/authorization/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsauthorization"><span class="">Authorization</span></a>
+  <ul class="ul-2 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsauthorizationdesign-li">
+  <a href="/csm-docs/docs/authorization/design/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsauthorizationdesign"><span class="">Design</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsdocsauthorizationbackup-and-restore-li">
+  <a href="/csm-docs/docs/authorization/backup-and-restore/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsauthorizationbackup-and-restore"><span class="">Backup and Restore</span></a>
+  <ul class="ul-3 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsauthorizationbackup-and-restorehelm-li">
+  <a href="/csm-docs/docs/authorization/backup-and-restore/helm/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsauthorizationbackup-and-restorehelm"><span class="">Helm</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsauthorizationbackup-and-restorerpm-li">
+  <a href="/csm-docs/docs/authorization/backup-and-restore/rpm/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsauthorizationbackup-and-restorerpm"><span class="">RPM</span></a>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsdocsauthorizationconfiguration-li">
+  <a href="/csm-docs/docs/authorization/configuration/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsauthorizationconfiguration"><span class="">Configuration</span></a>
+  <ul class="ul-3 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsauthorizationconfigurationpowerflex-li">
+  <a href="/csm-docs/docs/authorization/configuration/powerflex/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsauthorizationconfigurationpowerflex"><span class="">PowerFlex</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsauthorizationconfigurationpowermax-li">
+  <a href="/csm-docs/docs/authorization/configuration/powermax/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsauthorizationconfigurationpowermax"><span class="">PowerMax</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsauthorizationconfigurationpowerscale-li">
+  <a href="/csm-docs/docs/authorization/configuration/powerscale/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsauthorizationconfigurationpowerscale"><span class="">PowerScale</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsauthorizationconfigurationproxy-server-li">
+  <a href="/csm-docs/docs/authorization/configuration/proxy-server/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsauthorizationconfigurationproxy-server"><span class="">Proxy Server</span></a>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsauthorizationcli-li">
+  <a href="/csm-docs/docs/authorization/cli/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsauthorizationcli"><span class="">CLI</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsauthorizationtroubleshooting-li">
+  <a href="/csm-docs/docs/authorization/troubleshooting/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsauthorizationtroubleshooting"><span class="">Troubleshooting</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsauthorizationrelease-li">
+  <a href="/csm-docs/docs/authorization/release/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsauthorizationrelease"><span class="">Release notes</span></a>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-csm-docsdocsobservability-li">
+  <a href="/csm-docs/docs/observability/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsobservability"><span class="">Observability</span></a>
+  <ul class="ul-2 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsobservabilitydesign-li">
+  <a href="/csm-docs/docs/observability/design/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsobservabilitydesign"><span class="">Design</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsdocsobservabilitymetrics-li">
+  <a href="/csm-docs/docs/observability/metrics/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsobservabilitymetrics"><span class="">Metrics</span></a>
+  <ul class="ul-3 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsobservabilitymetricspowerflex-li">
+  <a href="/csm-docs/docs/observability/metrics/powerflex/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsobservabilitymetricspowerflex"><span class="">PowerFlex Metrics</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsobservabilitymetricspowermax-li">
+  <a href="/csm-docs/docs/observability/metrics/powermax/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsobservabilitymetricspowermax"><span class="">PowerMax Metrics</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsobservabilitymetricspowerscale-li">
+  <a href="/csm-docs/docs/observability/metrics/powerscale/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsobservabilitymetricspowerscale"><span class="">PowerScale Metrics</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsobservabilitymetricspowerstore-li">
+  <a href="/csm-docs/docs/observability/metrics/powerstore/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsobservabilitymetricspowerstore"><span class="">PowerStore Metrics</span></a>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsobservabilitytroubleshooting-li">
+  <a href="/csm-docs/docs/observability/troubleshooting/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsobservabilitytroubleshooting"><span class="">Troubleshooting</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsobservabilityrelease-li">
+  <a href="/csm-docs/docs/observability/release/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsobservabilityrelease"><span class="">Release notes</span></a>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-csm-docsdocsreplication-li">
+  <a href="/csm-docs/docs/replication/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsreplication"><span class="">Replication</span></a>
+  <ul class="ul-2 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsdocsreplicationarchitecture-li">
+  <a href="/csm-docs/docs/replication/architecture/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsreplicationarchitecture"><span class="">Architecture</span></a>
+  <ul class="ul-3 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsreplicationarchitecturepowerscale-li">
+  <a href="/csm-docs/docs/replication/architecture/powerscale/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsreplicationarchitecturepowerscale"><span class="">PowerScale</span></a>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsreplicationcluster-topologies-li">
+  <a href="/csm-docs/docs/replication/cluster-topologies/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsreplicationcluster-topologies"><span class="">Cluster Topologies</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsreplicationdisaster-recovery-li">
+  <a href="/csm-docs/docs/replication/disaster-recovery/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsreplicationdisaster-recovery"><span class="">Disaster Recovery</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsreplicationhigh-availability-li">
+  <a href="/csm-docs/docs/replication/high-availability/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsreplicationhigh-availability"><span class="">High Availability</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsdocsreplicationmigration-li">
+  <a href="/csm-docs/docs/replication/migration/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsreplicationmigration"><span class="">Migration</span></a>
+  <ul class="ul-3 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsreplicationmigrationmigrating-volumes-diff-array-li">
+  <a href="/csm-docs/docs/replication/migration/migrating-volumes-diff-array/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsreplicationmigrationmigrating-volumes-diff-array"><span class="">Between Storage Arrays</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsreplicationmigrationmigrating-volumes-same-array-li">
+  <a href="/csm-docs/docs/replication/migration/migrating-volumes-same-array/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsreplicationmigrationmigrating-volumes-same-array"><span class="">Between Storage classes</span></a>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsreplicationmonitoring-li">
+  <a href="/csm-docs/docs/replication/monitoring/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsreplicationmonitoring"><span class="">Monitoring</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsreplicationreplication-actions-li">
+  <a href="/csm-docs/docs/replication/replication-actions/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsreplicationreplication-actions"><span class="">Replication Actions</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsreplicationvolume_expansion-li">
+  <a href="/csm-docs/docs/replication/volume_expansion/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsreplicationvolume_expansion"><span class="">Volume Expansion</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsreplicationtools-li">
+  <a href="/csm-docs/docs/replication/tools/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsreplicationtools"><span class="">Tools</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsreplicationtroubleshooting-li">
+  <a href="/csm-docs/docs/replication/troubleshooting/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsreplicationtroubleshooting"><span class="">Troubleshooting</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsreplicationrelease-li">
+  <a href="/csm-docs/docs/replication/release/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsreplicationrelease"><span class="">Release notes</span></a>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-csm-docsdocsresiliency-li">
+  <a href="/csm-docs/docs/resiliency/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsresiliency"><span class="">Resiliency</span></a>
+  <ul class="ul-2 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsresiliencydesign-li">
+  <a href="/csm-docs/docs/resiliency/design/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsresiliencydesign"><span class="">Design</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsresiliencyrelease-li">
+  <a href="/csm-docs/docs/resiliency/release/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsresiliencyrelease"><span class="">Release notes</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsresiliencyusecases-li">
+  <a href="/csm-docs/docs/resiliency/usecases/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsresiliencyusecases"><span class="">Use Cases</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsresiliencytroubleshooting-li">
+  <a href="/csm-docs/docs/resiliency/troubleshooting/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsresiliencytroubleshooting"><span class="">Troubleshooting</span></a>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-csm-docsdocssnapshots-li">
+  <a href="/csm-docs/docs/snapshots/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocssnapshots"><span class="">Snapshots</span></a>
+  <ul class="ul-2 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocssnapshotsvolume-group-snapshots-li">
+  <a href="/csm-docs/docs/snapshots/volume-group-snapshots/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocssnapshotsvolume-group-snapshots"><span class="">Volume Group Snapshots</span></a>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-csm-docsdocsapplicationmobility-li">
+  <a href="/csm-docs/docs/applicationmobility/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsapplicationmobility"><span class="">Application Mobility</span></a>
+  <ul class="ul-2 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsapplicationmobilityuse_cases-li">
+  <a href="/csm-docs/docs/applicationmobility/use_cases/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsapplicationmobilityuse_cases"><span class="">Use Cases</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsapplicationmobilitytroubleshooting-li">
+  <a href="/csm-docs/docs/applicationmobility/troubleshooting/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsapplicationmobilitytroubleshooting"><span class="">Troubleshooting</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsapplicationmobilityrelease-li">
+  <a href="/csm-docs/docs/applicationmobility/release/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsapplicationmobilityrelease"><span class="">Release Notes</span></a>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-csm-docsdocssecure-li">
+  <a href="/csm-docs/docs/secure/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocssecure"><span class="">Secure</span></a>
+  <ul class="ul-2 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsdocssecureencryption-li">
+  <a href="/csm-docs/docs/secure/encryption/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocssecureencryption"><span class="">Encryption</span></a>
+  <ul class="ul-3 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocssecureencryptionrelease-li">
+  <a href="/csm-docs/docs/secure/encryption/release/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocssecureencryptionrelease"><span class="">Release Notes</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocssecureencryptiontroubleshooting-li">
+  <a href="/csm-docs/docs/secure/encryption/troubleshooting/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocssecureencryptiontroubleshooting"><span class="">Troubleshooting</span></a>
+</li>
+  </ul>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsdocstroubleshooting-li">
+  <a href="/csm-docs/docs/troubleshooting/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocstroubleshooting"><span class="">Troubleshooting</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsdocslicense-li">
+  <a href="/csm-docs/docs/license/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocslicense"><span class="">License</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsdocsrelease-li">
+  <a href="/csm-docs/docs/release/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsrelease"><span class="">Release notes</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id="m-csm-docsdocscert-csi-li">
+  <a href="/csm-docs/docs/cert-csi/" class="align-left pl-0 active td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocscert-csi"><span class="td-sidebar-nav-active-item">Cert-CSI</span></a>
+  <ul class="ul-2 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsdocscert-csiqualified-li">
+  <a href="/csm-docs/docs/cert-csi/qualified/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocscert-csiqualified"><span class="">Community Qualified Configurations</span></a>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsdocssecuritypolicy-li">
+  <a href="/csm-docs/docs/securitypolicy/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocssecuritypolicy"><span class="">Security Policy</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsdocssupport-li">
+  <a href="/csm-docs/docs/support/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocssupport"><span class="">Support</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-csm-docsdocsreferences-li">
+  <a href="/csm-docs/docs/references/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsreferences"><span class="">References</span></a>
+  <ul class="ul-2 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsreferencescli-li">
+  <a href="/csm-docs/docs/references/cli/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsreferencescli"><span class="">CLI</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsreferencesfaq-li">
+  <a href="/csm-docs/docs/references/faq/" title="CSM FAQ" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsreferencesfaq"><span class="">FAQ</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsreferenceslearn-li">
+  <a href="/csm-docs/docs/references/learn/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsreferenceslearn"><span class="">Learn</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsreferencescontributionguidelines-li">
+  <a href="/csm-docs/docs/references/contributionguidelines/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsreferencescontributionguidelines"><span class="">Contribution Guidelines</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsdocsreferencespolicies-li">
+  <a href="/csm-docs/docs/references/policies/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsreferencespolicies"><span class="">Policies</span></a>
+  <ul class="ul-3 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsreferencespoliciesdeprecationpolicy-li">
+  <a href="/csm-docs/docs/references/policies/deprecationpolicy/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsreferencespoliciesdeprecationpolicy"><span class="">Deprecation Policy</span></a>
+</li>
+  </ul>
+</li>
+  </ul>
+</li>
+  </ul>
+</li>
+    </ul>
+  </nav>
+</div>
+
+          </aside>
+          <aside class="d-none d-xl-block col-xl-2 td-sidebar-toc d-print-none">
+            
+
+
+
+
+
+
+
+
+            
+
+
+
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#submit-test-results">Submit Test Results</a></li>
+    <li><a href="#installation">Installation</a>
+      <ul>
+        <li><a href="#download-release-linux">Download Release (Linux)</a></li>
+        <li><a href="#pull-the-container-image">Pull The Container Image</a></li>
+        <li><a href="#building-locally">Building Locally</a></li>
+        <li><a href="#optional">Optional</a></li>
+      </ul>
+    </li>
+    <li><a href="#running-cert-csi">Running Cert-CSI</a></li>
+    <li><a href="#run-all-test-suites">Run All Test Suites</a>
+      <ul>
+        <li><a href="#preparing-config">Preparing Config</a></li>
+        <li><a href="#launching-test-run">Launching Test Run</a></li>
+        <li><a href="#running-invidual-test-suites">Running Invidual Test Suites</a></li>
+        <li><a href="#running-longevity-mode">Running Longevity mode</a></li>
+        <li><a href="#use-configurable-container-images">Use configurable container images</a></li>
+      </ul>
+    </li>
+    <li><a href="#kubernetes-end-to-end-tests">Kubernetes End-To-End Tests</a>
+      <ul>
+        <li><a href="#running-kubernetes-end-to-end-tests">Running kubernetes end-to-end tests</a></li>
+        <li><a href="#kubernetes-end-to-end-reporting">Kubernetes end-to-end reporting</a></li>
+        <li><a href="#test-config-files-format">Test config files format</a></li>
+        <li><a href="#example-commands">Example Commands</a></li>
+        <li><a href="#interacting-with-db">Interacting with DB</a></li>
+        <li><a href="#other-options">Other options</a></li>
+      </ul>
+    </li>
+    <li><a href="#screenshots">Screenshots</a>
+      <ul>
+        <li><a href="#running-provisioning-test">Running provisioning test</a></li>
+        <li><a href="#running-scaling-test">Running scaling test</a></li>
+        <li><a href="#listing-available-test-runs">Listing available test runs</a></li>
+        <li><a href="#running-longevity-mode-1">Running longevity mode</a></li>
+        <li><a href="#multi-db-tabular-report-example">Multi DB Tabular report example</a></li>
+        <li><a href="#html-report-example">HTML report example</a></li>
+        <li><a href="#resource-usage-example-chart">Resource usage example chart</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+
+            
+
+	
+		
+
+
+
+  
+  
+
+	
+		
+
+
+
+  
+  
+
+	
+
+          </aside>
+          <main class="col-12 col-md-9 col-xl-8 pl-md-5" role="main">
+            
+  
+
+            <nav aria-label="breadcrumb" class="td-breadcrumbs">
+  <ol class="breadcrumb">
+  <li class="breadcrumb-item">
+    <a href="https://dell.github.io/csm-docs/docs/">Container Storage Modules</a>
+  </li>
+  <li class="breadcrumb-item active" aria-current="page">
+    <a href="https://dell.github.io/csm-docs/docs/cert-csi/" aria-disabled="true" class="btn-link disabled">Cert-CSI</a>
+  </li>
+  </ol>
+</nav>
+            
+<div class="td-content">
+	<h1>Cert-CSI</h1>
+     
+	
+	<p>Dell&rsquo;s Cert-CSI is a tool to validate Dell CSI Drivers. It contains various test suites to validate the drivers and addresses the complexity involved with certifiying Dell CSI drivers in different customer environments.</p>
+<p>Any orchestrator platform, operating system or version that is not mentioned in the support matrix but self-certified by the customer using cert-csi is supported for customer use.</p>
+<h2 id="submit-test-results">Submit Test Results</h2>
+<p>Please submit your test results for our review here (<a href="https://github.com/dell/csm/issues/">https://github.com/dell/csm/issues/</a>) by clicking on &lsquo;New Issue&rsquo;. If the results are a success, the orchestrator platform and version will be published under Community Qualified Configurations.</p>
+<h2 id="installation">Installation</h2>
+<p>There are three methods of installing <code>cert-csi</code>.</p>
+<ol>
+<li><a href="#download-release-linux">Download the executable from the latest GitHub release</a>.</li>
+<li><a href="#pull-the-container-image">Pull the container image from DockerHub</a>.</li>
+<li><a href="#building-locally">Build the exectuable or container image locally</a>.</li>
+</ol>
+<blockquote>
+<p>The exectuable from the GitHub Release only supports Linux. For non-Linux users, you must build the <code>cert-csi</code> executable <a href="#building-locally">locally</a>.</p>
+</blockquote>
+<h3 id="download-release-linux">Download Release (Linux)</h3>
+<ol>
+<li>Download the latest release of the cert-csi zip file.</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>curl -LO https://github.com/dell/cert-csi/releases/download/v1.3.1/cert-csi-v1.3.1.zip
+</span></span></code></pre></div><ol start="2">
+<li>Unzip the file.</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>unzip cert-csi-v1.3.1.zip
+</span></span><span style="display:flex;"><span>chmod +x ./cert-csi-v1.3.1
+</span></span></code></pre></div><ol start="3">
+<li>Install cert-csi-v1.3.1 as cert-csi.</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo install -o root -g root -m <span style="color:#0000cf;font-weight:bold">0755</span> cert-csi-v1.3.1 /usr/local/bin/cert-csi
+</span></span></code></pre></div><p>If you do not have root access on the target system, you can still install cert-csi to the ~/.local/bin directory:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>chmod +x cert-csi-v1.3.1
+</span></span><span style="display:flex;"><span>mkdir -p ~/.local/bin
+</span></span><span style="display:flex;"><span>mv ./cert-csi-v1.3.1 ~/.local/bin/cert-csi
+</span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"># and then append (or prepend) ~/.local/bin to $PATH</span>
+</span></span></code></pre></div><h3 id="pull-the-container-image">Pull The Container Image</h3>
+<ul class="nav nav-tabs" id="pulling-cert-csi-image" role="tablist"><li class="nav-item"><a data-toggle="tab" class="nav-link active" href="#pulling-cert-csi-image-0" role="tab" aria-controls="pulling-cert-csi-image-0" aria-selected="true">Docker</a></li>
+	  
+		<li class="nav-item"><a data-toggle="tab" class="nav-link" href="#pulling-cert-csi-image-1" role="tab" aria-controls="pulling-cert-csi-image-1">Podman</a></li></ul>
+<div class="tab-content" id="pulling-cert-csi-image"><div id="pulling-cert-csi-image-0" class="tab-pane show active" role="tabpanel" aria-labelledby="pulling-cert-csi-image-0">
+
+<p><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>   docker pull dellemc/cert-csi:v1.3.1
+</span></span></code></pre></div></div>
+  <div id="pulling-cert-csi-image-1" class="tab-pane" role="tabpanel" aria-labelledby="pulling-cert-csi-image-1">
+
+<p><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>   podman pull dellemc/cert-csi:v1.3.1
+</span></span></code></pre></div></div></div>
+
+<h3 id="building-locally">Building Locally</h3>
+<h4 id="prerequisites">Prerequisites</h4>
+<ul>
+<li><a href="https://git-scm.com/book/en/v2/Getting-Started-Installing-Git">Git</a></li>
+<li><a href="https://go.dev/doc/install">Go</a> (If buidling the executable)</li>
+<li>Podman or Docker (If building the container image)</li>
+</ul>
+<ol>
+<li>Clone the repository</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git clone -b <span style="color:#4e9a06">&#34;v1.3.1&#34;</span> https://github.com/dell/cert-csi.git <span style="color:#ce5c00;font-weight:bold">&amp;&amp;</span> <span style="color:#204a87">cd</span> cert-csi
+</span></span></code></pre></div><ol start="2">
+<li>Build cert-csi</li>
+</ol>
+<ul class="nav nav-tabs" id="build-cert-csi" role="tablist"><li class="nav-item"><a data-toggle="tab" class="nav-link active" href="#build-cert-csi-0" role="tab" aria-controls="build-cert-csi-0" aria-selected="true">Executable</a></li>
+	  
+		<li class="nav-item"><a data-toggle="tab" class="nav-link" href="#build-cert-csi-1" role="tab" aria-controls="build-cert-csi-1">Container Image</a></li></ul>
+<div class="tab-content" id="build-cert-csi"><div id="build-cert-csi-0" class="tab-pane show active" role="tabpanel" aria-labelledby="build-cert-csi-0">
+
+<p><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>   make build          <span style="color:#8f5902;font-style:italic"># the cert-csi executable will be in the working directory</span>
+</span></span><span style="display:flex;"><span>   chmod +x ./cert-csi <span style="color:#8f5902;font-style:italic"># if building on *nix machine</span>
+</span></span></code></pre></div></div>
+  <div id="build-cert-csi-1" class="tab-pane" role="tabpanel" aria-labelledby="build-cert-csi-1">
+
+<p><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>  <span style="color:#8f5902;font-style:italic"># uses podman if available, otherwise uses docker. The resulting image is tagged cert-csi:latest</span>
+</span></span><span style="display:flex;"><span>  make docker
+</span></span></code></pre></div></div></div>
+
+<h3 id="optional">Optional</h3>
+<p>If you want to collect csi-driver resource usage metrics, then please provide the namespace where it can be found and install the metric-server using this command (kubectl is required):</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>make install-ms
+</span></span></code></pre></div><h2 id="running-cert-csi">Running Cert-CSI</h2>
+<ul class="nav nav-tabs" id="running-cert-csi" role="tablist"><li class="nav-item"><a data-toggle="tab" class="nav-link active" href="#running-cert-csi-0" role="tab" aria-controls="running-cert-csi-0" aria-selected="true">Executable</a></li>
+	  
+		<li class="nav-item"><a data-toggle="tab" class="nav-link" href="#running-cert-csi-1" role="tab" aria-controls="running-cert-csi-1">Docker</a></li>
+		<li class="nav-item"><a data-toggle="tab" class="nav-link" href="#running-cert-csi-2" role="tab" aria-controls="running-cert-csi-2">Podman</a></li></ul>
+<div class="tab-content" id="running-cert-csi"><div id="running-cert-csi-0" class="tab-pane show active" role="tabpanel" aria-labelledby="running-cert-csi-0">
+
+<p><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>   cert-csi --help
+</span></span></code></pre></div></div>
+  <div id="running-cert-csi-1" class="tab-pane" role="tabpanel" aria-labelledby="running-cert-csi-1">
+
+<p><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>   docker run --rm -it -v ~/.kube/config:/root/.kube/config dellemc/cert-csi:v1.3.1 --help
+</span></span></code></pre></div></div>
+  <div id="running-cert-csi-2" class="tab-pane" role="tabpanel" aria-labelledby="running-cert-csi-2">
+
+<p><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>   podman run --rm -it -v ~/.kube/config:/root/.kube/config dellemc/cert-csi:v1.3.1 --help
+</span></span></code></pre></div></div></div>
+
+<blockquote>
+<p>The following sections showing how to execute the various test suites use the executable for brevity. For executions requiring special behavior, such as mounting file arguments into the container image, it will be noted for the relevant command.</p>
+</blockquote>
+<blockquote>
+<p>Log files are located in the <code>logs</code> directory in the working directory of cert-csi.<br>
+Report files are located in the default <code>$HOME/.cert-csi/reports</code> directory.<br>
+Database (SQLite) file for test suites is <code>&lt;storage-class-name&gt;.db</code> in the working directory of cert-csi.<br>
+Database (SQLite) file for functional test suites is <code>cert-csi-functional.db</code> in the working directory of cert-csi.</p>
+</blockquote>
+<blockquote>
+<p>NOTE: If using the container image, these files will be inside the container. If you are interested in these files, it is recommended to use the exectuable.</p>
+</blockquote>
+<h2 id="run-all-test-suites">Run All Test Suites</h2>
+<p>You can use cert-csi to launch a test run against multiple storage classes to check if the driver adheres to advertised capabilities.</p>
+<h3 id="preparing-config">Preparing Config</h3>
+<p>To run the test suites you need to provide <code>.yaml</code> config with storage classes and their capabilities. You can use <code>example-certify-config.yaml</code> as an example.</p>
+<p>Template:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">storageClasses</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span>- <span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#8f5902;font-style:italic"># storage-class-name (ex. powerstore)</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">minSize</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#8f5902;font-style:italic"># minimal size for your sc (ex. 1Gi)</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">rawBlock</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#8f5902;font-style:italic"># is Raw Block supported (true or false)</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">expansion</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#8f5902;font-style:italic"># is volume expansion supported (true or false)</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">clone</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#8f5902;font-style:italic"># is volume cloning supported (true or false)</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">snapshot</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#8f5902;font-style:italic"># is volume snapshotting supported (true or false)</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">RWX</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#8f5902;font-style:italic"># is ReadWriteMany volume access mode supported for non RawBlock volumes (true or false)</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">volumeHealth</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#8f5902;font-style:italic"># set this to enable the execution of the VolumeHealthMetricsSuite (true or false)</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#8f5902;font-style:italic"># Make sure to enable healthMonitor for the driver&#39;s controller and node pods before running this suite. It is recommended to use a smaller interval time for this sidecar and pass the required arguments.</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">VGS</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#8f5902;font-style:italic"># set this to enable the execution of the VolumeGroupSnapSuite (true or false)</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#8f5902;font-style:italic"># Additionally, make sure to provide the necessary required arguments such as volumeSnapshotClass, vgs-volume-label, and any others as needed.</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">RWOP</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#8f5902;font-style:italic"># set this to enable the execution of the MultiAttachSuite with the AccessMode set to ReadWriteOncePod (true or false)</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">ephemeral</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#8f5902;font-style:italic"># if exists, then run EphemeralVolumeSuite. See the Ephemeral Volumes suite section for example Volume Attributes</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">driver</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#8f5902;font-style:italic"># driver name for EphemeralVolumeSuite (e.g., csi-vxflexos.dellemc.com)</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">fstype</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#8f5902;font-style:italic"># fstype for EphemeralVolumeSuite</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">volumeAttributes</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#8f5902;font-style:italic"># volume attrs for EphemeralVolumeSuite.</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">attr1</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#8f5902;font-style:italic"># volume attr for EphemeralVolumeSuite</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">attr2</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#8f5902;font-style:italic"># volume attr for EphemeralVolumeSuite</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">capacityTracking</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">driverNamespace</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#8f5902;font-style:italic"># namepsace where driver is installed</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">pollInterval</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#8f5902;font-style:italic"># duration to poll capacity (e.g., 2m)  </span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span></code></pre></div><p>Driver specific examples:</p>
+<ul class="nav nav-tabs" id="cerity-config-examples" role="tablist"><li class="nav-item"><a data-toggle="tab" class="nav-link active" href="#cerity-config-examples-0" role="tab" aria-controls="cerity-config-examples-0" aria-selected="true">CSI PowerFlex</a></li>
+	  
+		<li class="nav-item"><a data-toggle="tab" class="nav-link" href="#cerity-config-examples-1" role="tab" aria-controls="cerity-config-examples-1">CSI PowerScale</a></li>
+		<li class="nav-item"><a data-toggle="tab" class="nav-link" href="#cerity-config-examples-2" role="tab" aria-controls="cerity-config-examples-2">CSI PowerStore</a></li>
+		<li class="nav-item"><a data-toggle="tab" class="nav-link" href="#cerity-config-examples-3" role="tab" aria-controls="cerity-config-examples-3">CSI Unity</a></li></ul>
+<div class="tab-content" id="cerity-config-examples"><div id="cerity-config-examples-0" class="tab-pane show active" role="tabpanel" aria-labelledby="cerity-config-examples-0">
+
+<p><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">storageClasses</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span>- <span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">vxflexos</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">minSize</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">8Gi</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">rawBlock</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">expansion</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">clone</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">snapshot</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">RWX</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">false</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">ephemeral</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">driver</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">csi-powerstore.dellemc.com</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">fstype</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">ext4</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">volumeAttributes</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">volumeName</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;my-ephemeral-vol&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">size</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;8Gi&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">storagepool</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;sample&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">systemID</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;sample&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span>- <span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">vxflexos-nfs</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">minSize</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">8Gi</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">rawBlock</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">false</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">expansion</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">clone</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">snapshot</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">RWX</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">RWOP</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">ephemeral</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">driver</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">csi-vxflexos.dellemc.com</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">fstype</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;nfs&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">volumeAttributes</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">volumeName</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;my-ephemeral-vol&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">size</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;8Gi&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">storagepool</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;sample&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">systemID</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;sample&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">capacityTracking</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">driverNamespace</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">powerstore</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">pollInterval</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">2m</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span></code></pre></div></div>
+  <div id="cerity-config-examples-1" class="tab-pane" role="tabpanel" aria-labelledby="cerity-config-examples-1">
+
+<p><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">storageClasses</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span>- <span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">isilon</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">minSize</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">8Gi</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">rawBlock</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">false</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">expansion</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">clone</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">snapshot</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">RWX</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">false</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">ephemeral</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">driver</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">csi-isilon.dellemc.com</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">fstype</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">nfs</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">volumeAttributes</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">size</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;10Gi&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">ClusterName</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;sample&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">AccessZone</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;sample&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">IsiPath</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;/ifs/data/sample&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">IsiVolumePathPermissions</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;0777&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">AzServiceIP</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;192.168.2.1&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span></code></pre></div></div>
+  <div id="cerity-config-examples-2" class="tab-pane" role="tabpanel" aria-labelledby="cerity-config-examples-2">
+
+<p><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">storageClasses</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span>- <span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">powerstore</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">minSize</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">5Gi</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">rawBlock</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">expansion</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">clone</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">snapshot</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">RWX</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">false</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">ephemeral</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">driver</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">csi-powerstore.dellemc.com</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">fstype</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">ext4</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">volumeAttributes</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">arrayID</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;arrayid&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">protocol</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">iSCSI</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">size</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">5Gi</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span>- <span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">powerstore-nfs</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">minSize</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">5Gi</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">rawBlock</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">false</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">expansion</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">clone</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">snapshot</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">RWX</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">RWOP</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">ephemeral</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">driver</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">csi-powerstore.dellemc.com</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">fstype</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;nfs&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">volumeAttributes</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">arrayID</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;arrayid&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">protocol</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">NFS</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">size</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">5Gi</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">nasName</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;nas-server&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">capacityTracking</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">driverNamespace</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">powerstore</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">pollInterval</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">2m</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span></code></pre></div></div>
+  <div id="cerity-config-examples-3" class="tab-pane" role="tabpanel" aria-labelledby="cerity-config-examples-3">
+
+<p><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">storageClasses</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span>- <span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">unity-iscsi</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">minSize</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">3Gi</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">rawBlock</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">expansion</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">clone</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">false</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">snapshot</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">RWX</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">false</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">ephemeral</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">driver</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">csi-unity.dellemc.com</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">fstype</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">ext4</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">volumeAttributes</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">arrayId</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;array-id&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">storagePool</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">pool-name</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">protocol</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">NFS</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">size</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">5Gi</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span>- <span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">unity-nfs</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">minSize</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">3Gi</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">rawBlock</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">false</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">expansion</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">clone</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">false</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">snapshot</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">RWX</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">RWOP</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">ephemeral</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">driver</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">csi-unity.dellemc.com</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">fstype</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;nfs&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">volumeAttributes</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">arrayId</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;array-id&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">storagePool</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">pool-name</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">protocol</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">NFS</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">size</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">5Gi</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">nasServer</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;nas-server&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">nasName</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;nas-name&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">capacityTracking</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">driverNamespace</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">unity</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">pollInterval</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">2m</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span></code></pre></div></div></div>
+
+<h3 id="launching-test-run">Launching Test Run</h3>
+<ol>
+<li>Executes the <a href="#volume-io">VolumeIO</a> suite.</li>
+<li>Executes the <a href="#scalability">Scaling</a> suite.</li>
+<li>If <code>storageClasses.clone</code> is <code>true</code>, executes the <a href="#volume-cloning">Volume Cloning</a> suite.</li>
+<li>If <code>storageClasses.expansion</code> is <code>true</code>, executes the <a href="#volume-expansion">Volume Expansion</a> suite.</li>
+<li>If <code>storageClasses.expansion</code> is <code>true</code> and <code>storageClasses.rawBlock</code> is <code>true</code>, executes the <a href="#volume-expansion">Volume Expansion</a> suite with raw block volumes.</li>
+<li>If <code>storageClasses.snapshot</code> is <code>true</code>, exeuctes the <a href="#snapshots">Snapshot</a> suite and the <a href="#replication">Replication</a> suite.</li>
+<li>If <code>storageClasses.rawBlock</code> is <code>true</code>, executes the <a href="#multi-attach-volume">Multi-Attach Volume</a> suite with raw block volumes.</li>
+<li>If <code>storageClasses.rwx</code> is <code>true</code>, executes the <a href="#multi-attach-volume">Multi-Attach Volume</a> suite. (Storgae Class must be NFS.)</li>
+<li>If <code>storageClasses.volumeHealth</code> is <code>true</code>, executes the <a href="#volume-health-metrics">Volume Health Metrics</a> suite.</li>
+<li>If <code>storageClasses.rwop</code> is <code>true</code>, executes the <a href="#multi-attach-volume">Multi-Attach Volume</a> suite with the volume access mode <code>ReadWriteOncePod</code>.</li>
+<li>If <code>storageClasses.ephemeral</code> exists, executes the <a href="#ephemeral-volumes">Ephemeral Volumes</a> suite.</li>
+<li>If <code>storageClasses.vgs</code> is <code>true</code>, executes the <a href="">Volume Group Snapshot</a> suite.</li>
+<li>If <code>storageClasses.capacityTracking</code> exists, exeuctes the <a href="#storage-capacity-tracking">Storage Class Capacity Tracking</a> suite.</li>
+</ol>
+<blockquote>
+<p>NOTE: For testing/debugging purposes, it can be useful to use the <code>--no-cleanup</code> so resources do not get deleted.</p>
+</blockquote>
+<blockquote>
+<p>NOTE: If you are using CSI PowerScale with <a href="../../features/powerscale/#usage-of-smartquotas-to-limit-storage-consumption">SmartQuotas</a> disabled, the <code>Volume Expansion</code> suite is expected to timeout due to the way PowerScale provisions storage. Set <code>storageClasses.expansion</code> to <code>false</code> to skip this suite.</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cert-csi certify --cert-config &lt;path-to-config&gt; --vsc &lt;volume-snapshot-class&gt;
+</span></span></code></pre></div><p>Withold the <code>--vsc</code> argument if Snapshot capabilities are disabled.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cert-csi certify --cert-config &lt;path-to-config&gt;
+</span></span><span style="display:flex;"><span>Optional Params:
+</span></span><span style="display:flex;"><span>   --vsc: volume snapshot class, required <span style="color:#204a87;font-weight:bold">if</span> you specified snapshot capability
+</span></span></code></pre></div><p>Run <code>cert-csi certify -h</code> for more options.</p>
+<p>If you are using the container image, the <code>cert-config</code> file must be mounted into the container. Assuming your <code>cert-config</code> file is <code>/home/user/example-certify-config.yaml</code>, here are examples of how to exeucte this suite with the container image.</p>
+<ul class="nav nav-tabs" id="running-container-certify" role="tablist"><li class="nav-item"><a data-toggle="tab" class="nav-link active" href="#running-container-certify-0" role="tab" aria-controls="running-container-certify-0" aria-selected="true">Docker</a></li>
+	  
+		<li class="nav-item"><a data-toggle="tab" class="nav-link" href="#running-container-certify-1" role="tab" aria-controls="running-container-certify-1">Podman</a></li></ul>
+<div class="tab-content" id="running-container-certify"><div id="running-container-certify-0" class="tab-pane show active" role="tabpanel" aria-labelledby="running-container-certify-0">
+
+<p><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>   docker run --rm -it -v ~/.kube/config:/root/.kube/config -v /home/user/example-certify-config.yaml:/example-certify-config.yaml dellemc/cert-csi:v1.3.1 certify --cert-config /example-certify-config.yaml --vsc &lt;volume-snapshot-class&gt;
+</span></span></code></pre></div></div>
+  <div id="running-container-certify-1" class="tab-pane" role="tabpanel" aria-labelledby="running-container-certify-1">
+
+<p><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>   podman run --rm -it -v ~/.kube/config:/root/.kube/config -v /home/user/example-certify-config.yaml:/example-certify-config.yaml dellemc/cert-csi:v1.3.1 certify --cert-config /example-certify-config.yaml --vsc &lt;volume-snapshot-class&gt;
+</span></span></code></pre></div></div></div>
+
+<h3 id="running-invidual-test-suites">Running Invidual Test Suites</h3>
+<blockquote>
+<p>NOTE: For testing/debugging purposes, it can useful to use the <code>--no-cleanup</code> flag so resources do not get deleted.</p>
+</blockquote>
+<h4 id="volume-io">Volume I/O</h4>
+<ol>
+<li>Creates the namespace <code>volumeio-test-*</code> where resources will be created.</li>
+<li>Creates Persistent Volume Claims.</li>
+<li>If the specified storage class binding mode is not <code>WaitForFirstConsumer</code>, waits for Persistent Volume Claims to be bound to Persistent Volumes.</li>
+<li>For each Persistent Volume Claim, executes the following workflow concurrently:
+<ol>
+<li>Creates a Pod to consume the Persistent Volume Claim.</li>
+<li>Writes data to the volume and verifies the checksum of the data.</li>
+<li>Deletes the Pod.</li>
+<li>Waits for the associated Volume Attachment to be deleted.</li>
+</ol>
+</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cert-csi <span style="color:#204a87">test</span> vio --sc &lt;storage class&gt;
+</span></span></code></pre></div><p>Run <code>cert-csi test vio -h</code> for more options.</p>
+<h4 id="scalability">Scalability</h4>
+<ol>
+<li>Creates the namespace <code>scale-test-*</code> where resources will be created.</li>
+<li>Creates a StatefulSet.</li>
+<li>Scales up the StatefulSet.</li>
+<li>Scales down the StatefulSet to zero.</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cert-csi <span style="color:#204a87">test</span> scaling --sc &lt;storage class&gt;
+</span></span></code></pre></div><p>Run <code>cert-csi test scaling -h</code> for more options.</p>
+<h4 id="snapshots">Snapshots</h4>
+<ol>
+<li>Creates the namespace <code>snap-test-*</code> where resources will be created.</li>
+<li>Creates Persistent Volume Claim.</li>
+<li>If the specified storage class binding mode is not <code>WaitForFirstConsumer</code>, waits for Persistent Volume Claim to be bound to Persistent Volumes.</li>
+<li>Create Pod to consume the Persistent Volume Claim.</li>
+<li>Writes data to the volume.</li>
+<li>Deletes the Pod.</li>
+<li>Creates a Volume Snapshot from the Persistent Volume Claim.</li>
+<li>Waits for the Volume Snapshot to be Ready.</li>
+<li>Creates a new Persistent Volume Claim from the Volume Snapshot.</li>
+<li>Creates a new Pod to consume the new Persistent Volume Claim.</li>
+<li>Verifies the checksum of the data.</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cert-csi <span style="color:#204a87">test</span> snap --sc &lt;storage class&gt; --vsc &lt;volume snapshot class&gt; 
+</span></span></code></pre></div><p>Run <code>cert-csi test snap -h</code> for more options.</p>
+<h4 id="volume-group-snapshots">Volume Group Snapshots</h4>
+<ol>
+<li>Creates the namespace <code>vgs-snap-test-*</code> where resources will be created.</li>
+<li>Creates Persistent Volume Claims.</li>
+<li>If the specified storage class binding mode is not <code>WaitForFirstConsumer</code>, waits for Persistent Volume Claim to be bound to Persistent Volumes.</li>
+<li>Create Pods to consume the Persistent Volume Claims.</li>
+<li>Creates Volume Group Snapshot.</li>
+<li>Waits for Volume Group Snapshot state to be COMPLETE.</li>
+</ol>
+<blockquote>
+<p>Note: Volume Group Snapshots are only supported by CSI PowerFlex and CSI PowerStore.</p>
+</blockquote>
+<h4 id="multi-attach-volume">Multi-Attach Volume</h4>
+<ol>
+<li>Creates the namespace <code>mas-test-*</code> where resources will be created.</li>
+<li>Creates Persistent Volume Claim.</li>
+<li>Creates Pod to consume the Persistent Volume Claim.</li>
+<li>Waits for Pod to be in the Ready state.</li>
+<li>Creates additional Pods to consume the same Persistent Volume Claim.</li>
+<li>Watis for Pods to be in the Ready state.</li>
+<li>Writes data to the volumes on the Pods and verifies checksum of the data.</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cert-csi <span style="color:#204a87">test</span> multi-attach-vol --sc &lt;storage class&gt;
+</span></span></code></pre></div><blockquote>
+<p>The storage class must be an NFS storage class. Otherwise, raw block volumes must be used.</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cert-csi <span style="color:#204a87">test</span> multi-attach-vol --sc &lt;storage class&gt; --block
+</span></span></code></pre></div><p>Run <code>cert-csi test multi-attach-vol -h</code> for more options.</p>
+<h4 id="replication">Replication</h4>
+<ol>
+<li>Creates the namespace <code>replication-suite-*</code> where resources will be created.</li>
+<li>Creates Persistent Volume Claims.</li>
+<li>Create Pods to consume the Persistent Volume Claims.</li>
+<li>Waits for Pods to be in the Ready state.</li>
+<li>Creates a Volume Snapshot from each Persistent Volume Claim.</li>
+<li>Waits for the Volume Snapshots to be Ready.</li>
+<li>Creates Persistent Volume Claims from the Volume Snapshots.</li>
+<li>Creates Pods to consume the Persistent Volume Claims.</li>
+<li>Waits for Pods to be in the Ready state.</li>
+<li>Verifies the replication group name on ersistent Volume Claims.</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cert-csi <span style="color:#204a87">test</span> replication --sc &lt;storage class&gt; --vsc &lt;snapshot class&gt; 
+</span></span></code></pre></div><p>Run <code>cert-csi test replication -h</code> for more options.</p>
+<h4 id="volume-cloning">Volume Cloning</h4>
+<ol>
+<li>Creates the namespace <code>clonevolume-suite-*</code> where resources will be created.</li>
+<li>Creates Persistent Volume Claims.</li>
+<li>Create Pods to consume the Persistent Volume Claims.</li>
+<li>Waits for Pods to be in the Ready state.</li>
+<li>Creates Persistent Volume Claims with the source volume being from the volumes in step 2.</li>
+<li>Create Pods to consume the Persistent Volume Claims.</li>
+<li>Waits for Pods to be in the Ready state.</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cert-csi <span style="color:#204a87">test</span> clone-volume --sc &lt;storage class&gt;
+</span></span></code></pre></div><p>Run <code>cert-csi test clone-volume -h</code> for more options.</p>
+<h4 id="volume-expansion">Volume Expansion</h4>
+<ol>
+<li>Creates the namespace <code>volume-expansion-suite-*</code> where resources will be created.</li>
+<li>Creates Persistent Volume Claims.</li>
+<li>Create Pods to consume the Persistent Volume Claims.</li>
+<li>Waits for Pods to be in the Ready state.</li>
+<li>Expands the size in the Persistent Volume Claims.</li>
+<li>Verifies that the volumes mounted to the Pods were expanded.</li>
+</ol>
+<blockquote>
+<p>Raw block volumes cannot be verified since there is no filesystem.</p>
+</blockquote>
+<blockquote>
+<p>If you are using CSI PowerScale with <a href="../../features/powerscale/#usage-of-smartquotas-to-limit-storage-consumption">SmartQuotas</a> disabled, the <code>Volume Expansion</code> suite is expected to timeout due to the way PowerScale provisions storage.</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cert-csi <span style="color:#204a87">test</span> expansion --sc &lt;storage class&gt;
+</span></span></code></pre></div><p>Run <code>cert-csi test expansion -h</code> for more options.</p>
+<h4 id="blocksnap-suite">Blocksnap suite</h4>
+<ol>
+<li>Creates the namespace <code>block-snap-test-*</code> where resources will be created.</li>
+<li>Creates Persistent Volume Claim.</li>
+<li>If the specified storage class binding mode is not <code>WaitForFirstConsumer</code>, waits for Persistent Volume Claim to be bound to Persistent Volumes.</li>
+<li>Creates Pod to consume the Persistent Volume Claim.</li>
+<li>Writes data to the volume.</li>
+<li>Creates a Volume Snapshot from the Persistent Volume Claim.</li>
+<li>Waits for the Volume Snapshot to be Ready.</li>
+<li>Create a Persistent Volume Claim with raw block volume mode from the Volume Snapshot.</li>
+<li>Creates Pod to consume the Persistent Volume Claim.</li>
+<li>Mounts the raw block volume and verifes the checksum of the data.</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cert-csi <span style="color:#204a87">test</span> blocksnap --sc &lt;storageClass&gt; --vsc &lt;snapshotclass&gt;
+</span></span></code></pre></div><p>Run <code>cert-csi test blocksnap -h</code> for more options.</p>
+<h4 id="volume-health-metrics">Volume Health Metrics</h4>
+<ol>
+<li>Creates the namespace <code>volume-health-metrics-*</code> where resources will be created.</li>
+<li>Creates Persistent Volume Claim.</li>
+<li>Creates Pod to consume the Persistent Volume Claim.</li>
+<li>Waits for Pod to be in the Ready state.</li>
+<li>Veries that ControllerGetVolume and NodeGetVolumeStats are being executed in the controller and node pods, respectively.</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cert-csi <span style="color:#204a87">test</span> volumehealthmetrics --sc &lt;storage-class&gt; --driver-ns &lt;driver-namespace&gt;
+</span></span></code></pre></div><p>Run <code>cert-csi test volumehealthmetrics -h</code> for more options.</p>
+<blockquote>
+<p>Note: Make sure to enable healthMonitor for the driver&rsquo;s controller and node pods before running this suite. It is recommended to use a smaller interval time for this sidecar.</p>
+</blockquote>
+<h4 id="ephemeral-volumes">Ephemeral Volumes</h4>
+<ol>
+<li>Creates namespace <code>functional-test</code> where resources will be created.</li>
+<li>Creates Pods with one ephemeral inline volume each.</li>
+<li>Waits for Pods to be in the Ready state.</li>
+<li>Writes data to the volume on each Pod.</li>
+<li>Verifies the checksum of the data.</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cert-csi <span style="color:#204a87">test</span> ephemeral-volume --driver &lt;driver-name&gt; --attr ephemeral-config.properties
+</span></span></code></pre></div><p>Run <code>cert-csi test ephemeral-volume -h</code> for more options.</p>
+<blockquote>
+<p><code>--driver</code> is the name of a CSI Driver from the output of <code>kubectl get csidriver</code> (e.g, csi-vxflexos.dellemc.com).
+This suite does not delete resources on success.</p>
+</blockquote>
+<p>If you are using the container image, the <code>attr</code> file must be mounted into the container. Assuming your <code>attr</code> file is <code>/home/user/ephemeral-config.properties</code>, here are examples of how to exeucte this suite with the container image.</p>
+<ul class="nav nav-tabs" id="running-container-ephemeral-volume" role="tablist"><li class="nav-item"><a data-toggle="tab" class="nav-link active" href="#running-container-ephemeral-volume-0" role="tab" aria-controls="running-container-ephemeral-volume-0" aria-selected="true">Docker</a></li>
+	  
+		<li class="nav-item"><a data-toggle="tab" class="nav-link" href="#running-container-ephemeral-volume-1" role="tab" aria-controls="running-container-ephemeral-volume-1">Podman</a></li></ul>
+<div class="tab-content" id="running-container-ephemeral-volume"><div id="running-container-ephemeral-volume-0" class="tab-pane show active" role="tabpanel" aria-labelledby="running-container-ephemeral-volume-0">
+
+<p><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>   docker run --rm -it -v ~/.kube/config:/root/.kube/config -v /home/user/ephemeral-config.properties:/ephemeral-config.properties dellemc/cert-csi:v1.3.1 <span style="color:#204a87">test</span> ephemeral-volume --driver &lt;driver-name&gt; --attr /ephemeral-config.properties
+</span></span></code></pre></div></div>
+  <div id="running-container-ephemeral-volume-1" class="tab-pane" role="tabpanel" aria-labelledby="running-container-ephemeral-volume-1">
+
+<p><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>   podman run --rm -it -v ~/.kube/config:/root/.kube/config -v /home/user/ephemeral-config.properties:/ephemeral-config.properties dellemc/cert-csi:v1.3.1 <span style="color:#204a87">test</span> ephemeral-volume --driver &lt;driver-name&gt; --attr /ephemeral-config.properties
+</span></span></code></pre></div></div></div>
+
+<p>Sample ephemeral-config.properties (key/value pair)
+<ul class="nav nav-tabs" id="volume-attributes-examples" role="tablist"><li class="nav-item"><a data-toggle="tab" class="nav-link active" href="#volume-attributes-examples-0" role="tab" aria-controls="volume-attributes-examples-0" aria-selected="true">CSI PowerFlex</a></li>
+	  
+		<li class="nav-item"><a data-toggle="tab" class="nav-link" href="#volume-attributes-examples-1" role="tab" aria-controls="volume-attributes-examples-1">CSI PowerScale</a></li>
+		<li class="nav-item"><a data-toggle="tab" class="nav-link" href="#volume-attributes-examples-2" role="tab" aria-controls="volume-attributes-examples-2">CSI PowerStore</a></li>
+		<li class="nav-item"><a data-toggle="tab" class="nav-link" href="#volume-attributes-examples-3" role="tab" aria-controls="volume-attributes-examples-3">CSI Unity</a></li></ul>
+<div class="tab-content" id="volume-attributes-examples"><div id="volume-attributes-examples-0" class="tab-pane show active" role="tabpanel" aria-labelledby="volume-attributes-examples-0">
+
+<p><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">volumeName</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;my-ephemeral-vol&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">size</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;10Gi&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">storagepool</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;sample&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">systemID</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;sample&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span></code></pre></div></div>
+  <div id="volume-attributes-examples-1" class="tab-pane" role="tabpanel" aria-labelledby="volume-attributes-examples-1">
+
+<p><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">size</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;10Gi&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">ClusterName</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;sample&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">AccessZone</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;sample&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">IsiPath</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;/ifs/data/sample&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">IsiVolumePathPermissions</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;0777&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">AzServiceIP</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;192.168.2.1&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span></code></pre></div></div>
+  <div id="volume-attributes-examples-2" class="tab-pane" role="tabpanel" aria-labelledby="volume-attributes-examples-2">
+
+<p><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">size</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;10Gi&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">arrayID</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;sample&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">nasName</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;sample&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">nfsAcls</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;0777&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span></code></pre></div></div>
+  <div id="volume-attributes-examples-3" class="tab-pane" role="tabpanel" aria-labelledby="volume-attributes-examples-3">
+
+<p><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">size</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;10Gi&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">arrayID</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;sample&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">protocol</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">iSCSI</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">thinProvisioned</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;true&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">isDataReductionEnabled</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;false&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">tieringPolicy</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;1&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">storagePool</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">pool_2</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">nasName</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;sample&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span></code></pre></div></div></div>
+</p>
+<h4 id="storage-capacity-tracking">Storage Capacity Tracking</h4>
+<ol>
+<li>Creates namespace <code>functional-test</code> where resources will be created.</li>
+<li>Creates a duplicate of the provided storge class using prefix <code>capacity-tracking</code>.</li>
+<li>Waits for the associated CSIStorageCapacity object to be created.</li>
+<li>Deletes the duplicate storge class.</li>
+<li>Waits for the associated CSIStorageCapacity to be deleted.</li>
+<li>Sets the capacity of the CSIStorageCapacity of the provided storage class to zero.</li>
+<li>Creates Pod with a volume using the provided storage class.</li>
+<li>Verifies that the Pod is in the Pending state.</li>
+<li>Waits for storage capacity to be polled by the driver.</li>
+<li>Waits for Pod to be Running.</li>
+</ol>
+<blockquote>
+<p>Storage class must use volume binding mode <code>WaitForFirstConsumer</code>.<br>
+This suite does not delete resources on success.</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cert-csi functional-test capacity-tracking --sc &lt;storage-class&gt; --drns &lt;driver-namespace&gt;
+</span></span></code></pre></div><p>Run <code>cert-csi test capacity-tracking -h</code> for more options.</p>
+<h3 id="running-longevity-mode">Running Longevity mode</h3>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cert-csi <span style="color:#204a87">test</span> &lt;suite-name&gt; --sc &lt;storage class&gt; --longevity &lt;number of iterations&gt;
+</span></span></code></pre></div><h3 id="use-configurable-container-images">Use configurable container images</h3>
+<p>To use custom images for creating containers pass an image config YAML file as an argument. The YAML file should have linux(test) and postgres images name with their corresponding image URL. For example</p>
+<p>Example:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">images</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span>- <span style="color:#204a87;font-weight:bold">test</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;docker.io/centos:centos7&#34;</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#8f5902;font-style:italic"># change this to your url</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">postgres</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;docker.io/bitnami/postgresql:11.8.0-debian-10-r72&#34;</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#8f5902;font-style:italic"># change this to your url</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span></code></pre></div><p>To use this feature, run cert-csi with the option <code>--image-config /path/to/config.yaml</code> along with any other arguments.</p>
+<h2 id="kubernetes-end-to-end-tests">Kubernetes End-To-End Tests</h2>
+<p>All Kubernetes end to end tests require that you provide the driver config based on the storage class you want to test and the version of the kubernetes you want to test against. These are the mandatory parameters that you can provide in command like..</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span> --driver-config &lt;path of driver config file&gt; and --version <span style="color:#4e9a06">&#34;v1.25.0&#34;</span> 
+</span></span></code></pre></div><h3 id="running-kubernetes-end-to-end-tests">Running kubernetes end-to-end tests</h3>
+<p>To run kubernetes end-to-end tests, run the command:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>cert-csi k8s-e2e --config &lt;kube config&gt; --driver-config &lt;path to driver config&gt;  --focus &lt;regx pattern to focus Ex: <span style="color:#4e9a06">&#34;External.Storage.*&#34;</span> &gt;  --timeout &lt;timeout Ex: <span style="color:#4e9a06">&#34;2h&#34;</span>&gt; --version &lt; version of k8s Ex: <span style="color:#4e9a06">&#34;v1.25.0&#34;</span>&gt; --skip-tests &lt;skip these steps mentioned in file&gt; --skip &lt;regx pattern to skip tests Ex:<span style="color:#4e9a06">&#34;Generic Ephemeral-volume|(block volmode)&#34;</span>&gt;
+</span></span></code></pre></div><h3 id="kubernetes-end-to-end-reporting">Kubernetes end-to-end reporting</h3>
+<ul>
+<li>All the reports generated by kubernetes end-to-end tests will be under <code>$HOME/reports</code> directory by default if user doesn&rsquo;t mention the report path.</li>
+<li>Kubernetes end to end tests Execution log file will be placed under <code>$HOME/reports/execution_[storage class name].log</code></li>
+<li>Cert-CSI logs will be present in the execution directory <code>info.log</code> , <code>error.log</code></li>
+</ul>
+<h3 id="test-config-files-format">Test config files format</h3>
+<ul>
+<li>
+<h4 id="driver-confighttpsgithubcomdellcert-csiblobmainpkgutilstestdataconfig-nfsyaml"><a href="https://github.com/dell/cert-csi/blob/main/pkg/utils/testdata/config-nfs.yaml">driver-config</a></h4>
+</li>
+<li>
+<h4 id="ignore-testshttpsgithubcomdellcert-csiblobmainpkgutilsignoreyaml"><a href="https://github.com/dell/cert-csi/blob/main/pkg/utils/ignore.yaml">ignore-tests</a></h4>
+</li>
+</ul>
+<h3 id="example-commands">Example Commands</h3>
+<ul>
+<li>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>cert-csi k8s-e2e --config <span style="color:#4e9a06">&#34;/root/.kube/config&#34;</span> --driver-config <span style="color:#4e9a06">&#34;/root/e2e_config/config-nfs.yaml&#34;</span>  --focus <span style="color:#4e9a06">&#34;External.Storage.*&#34;</span>  --timeout <span style="color:#4e9a06">&#34;2h&#34;</span> --version <span style="color:#4e9a06">&#34;v1.25.0&#34;</span> --skip-tests <span style="color:#4e9a06">&#34;/root/e2e_config/ignore.yaml&#34;</span>
+</span></span></code></pre></div></li>
+<li>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>./cert-csi k8s-e2e --config <span style="color:#4e9a06">&#34;/root/.kube/config&#34;</span> --driver-config <span style="color:#4e9a06">&#34;/root/e2e_config/config-iscsi.yaml&#34;</span> --focus <span style="color:#4e9a06">&#34;External.Storage.*&#34;</span>  --timeout <span style="color:#4e9a06">&#34;2h&#34;</span> --version <span style="color:#4e9a06">&#34;v1.25.0&#34;</span> --focus-file <span style="color:#4e9a06">&#34;capacity.go&#34;</span>
+</span></span></code></pre></div></li>
+</ul>
+<h3 id="interacting-with-db">Interacting with DB</h3>
+<h4 id="generating-report-from-runs-without-running-tests">Generating report from runs without running tests</h4>
+<p>To generate test report from the database, run the command:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cert-csi --db &lt;path/to/.db&gt; report --testrun &lt;test-run-name&gt; --html --txt
+</span></span><span style="display:flex;"><span>Report types:
+</span></span><span style="display:flex;"><span>--html: performance html report
+</span></span><span style="display:flex;"><span>--txt: performance txt report
+</span></span><span style="display:flex;"><span>--xml: junit compatible xml report, contains basic run infomation
+</span></span><span style="display:flex;"><span>--tabular: tidy html report with basic run information
+</span></span></code></pre></div><p>To generate tabular report from the database, run the command:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cert-csi -db ./cert-csi-functional.db functional-report -tabular
+</span></span></code></pre></div><p>To generate XML report from the database, run the command:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cert-csi -db ./cert-csi-functional.db functional-report -xml
+</span></span></code></pre></div><h4 id="customizing-report-folder">Customizing report folder</h4>
+<p>To specify test report folder path, use &ndash;path option as follows:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>cert-csi --db &lt;path/to/.db&gt; report --testrun &lt;test-run-name&gt; --path &lt;path-to-folder&gt;
+</span></span><span style="display:flex;"><span>Options:
+</span></span><span style="display:flex;"><span>--path: path to folder where reports will be created <span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#204a87;font-weight:bold">if</span> not specified ~/.cert-csi/ will be used<span style="color:#ce5c00;font-weight:bold">)</span>
+</span></span></code></pre></div><h4 id="generating-report-from-multiple-databases-and-test-runs">Generating report from multiple databases and test runs</h4>
+<p>To generate report from multiple databases, run the command:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cert-csi report --tr &lt;db-path&gt;:&lt;test-run-name&gt; --tr ... --tabular --xml
+</span></span><span style="display:flex;"><span>Supported report types: 
+</span></span><span style="display:flex;"><span>--xml
+</span></span><span style="display:flex;"><span>--tabular
+</span></span></code></pre></div><h4 id="listing-all-known-test-runs">Listing all known test runs</h4>
+<p>To list all test runs, run the command:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cert-csi --db &lt;path/to/.db&gt; list test-runs
+</span></span></code></pre></div><h3 id="other-options">Other options</h3>
+<h4 id="customizing-report-folder-1">Customizing report folder</h4>
+<p>To specify test report folder path, use &ndash;path option as follows:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cert-csi &lt;command&gt; --path &lt;path-to-folder&gt;
+</span></span><span style="display:flex;"><span>Commands:
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87">test</span> &lt;any-subcommand&gt;
+</span></span><span style="display:flex;"><span>    certify
+</span></span><span style="display:flex;"><span>    report
+</span></span></code></pre></div><h4 id="running-with-enabled-driver-resource-usage-metrics">Running with enabled driver resource usage metrics</h4>
+<p>To run tests with driver resource usage metrics enabled, run the command:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cert-csi <span style="color:#204a87">test</span> &lt;<span style="color:#204a87">test</span> suite&gt; --sc &lt;storage class&gt; &lt;...&gt; --ns &lt;driver namespace&gt; 
+</span></span></code></pre></div><h4 id="running-custom-hooks-from-program">Running custom hooks from program</h4>
+<p>To run tests with custom hooks, run the command:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>cert-csi <span style="color:#204a87">test</span> &lt;<span style="color:#204a87">test</span> suite&gt; --sc &lt;storage class&gt; &lt;...&gt; --sh ./hooks/start.sh --rh ./hooks/ready.sh --fh ./hooks/finish.sh
+</span></span></code></pre></div><h2 id="screenshots">Screenshots</h2>
+<h3 id="running-provisioning-test">Running provisioning test</h3>
+<p><img src="./img/unifiedTest.png" alt="img1"></p>
+<p>You can interrupt the application by sending an interruption signal (for example pressing Ctrl + C).
+It will stop polling and try to cleanup resources.</p>
+<p><img src="./img/interruptTest.png" alt="img2"></p>
+<h3 id="running-scaling-test">Running scaling test</h3>
+<p><img src="./img/scaling.PNG" alt="img3"></p>
+<h3 id="listing-available-test-runs">Listing available test runs</h3>
+<p><img src="./img/listRuns.png" alt="img4"></p>
+<h3 id="running-longevity-mode-1">Running longevity mode</h3>
+<p><img src="./img/longevity.png" alt="img5"></p>
+<h3 id="multi-db-tabular-report-example">Multi DB Tabular report example</h3>
+<p><img src="./img/multiDBTabularReport.png" alt="img6"></p>
+<p>Text report example</p>
+<p><img src="./img/textReport.png" alt="img7"></p>
+<p>Tabular Report example</p>
+<p><img src="./img/tabularReport.png" alt="img9"></p>
+<h3 id="html-report-example">HTML report example</h3>
+<p><img src="./img/HTMLReport.png" alt="img8"></p>
+<h3 id="resource-usage-example-chart">Resource usage example chart</h3>
+<p><img src="./img/resourceUsage.png" alt="img9"></p>
+
+        <div class="section-index">
+    
+    
+    
+    
+    
+    
+    
+    
+    <hr class="panel-line">
+        
+            
+            <div class="entry">
+                <h5>
+                    <a href="/csm-docs/docs/cert-csi/qualified/">Community Qualified Configurations</a>
+                </h5>
+                <p>Community Qualified Configurations</p>
+            </div>
+        
+    
+</div>
+
+	
+        
+	
+
+</div>
+
+          </main>
+        </div>
+      </div>
+	  
+      	
+<footer class="bg-dark py-5 row d-print-none">
+  <div class="container-fluid mx-sm-5">
+    <div class="row">
+      <div class="col-6 col-sm-4 text-xs-center order-sm-2">
+        
+        
+        
+      </div>
+      <div class="col-6 col-sm-4 text-right text-xs-center order-sm-3">
+        
+        
+        
+<ul class="list-inline mb-0">
+  
+  <li class="list-inline-item mx-2 h3" data-toggle="tooltip" data-placement="top" title="GitHub" aria-label="GitHub">
+    <a class="text-white" target="_blank" href="https://github.com/dell/csm">
+      <i class="fab fa-github"></i>
+    </a>
+  </li>
+  
+  <li class="list-inline-item mx-2 h3" data-toggle="tooltip" data-placement="top" title="Slack" aria-label="Slack">
+    <a class="text-white" target="_blank" href="http://del.ly/Slack_request">
+      <i class="fab fa-slack"></i>
+    </a>
+  </li>
+  
+</ul>
+
+        
+        
+      </div>
+      <div class="col-12 col-sm-4 text-center py-2 order-sm-2">
+        <small class="text-white">&copy; 2024 The Dell Technologies All Rights Reserved</small>
+        <small class="ml-1"><a href="https://www.dell.com/learn/us/en/uscorp1/policies-privacy" target="_blank">Privacy Policy</a></small>
+	
+		
+	
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+	  
+    </div>
+    <script src='/csm-docs/js/prism.js'></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+<script src="/csm-docs/js/main.min.357cdcbd77fb614ceb215987dafe216ba8720b4aa10ecd38bccb7c0013e32f2a.js" integrity="sha256-NXzcvXf7YUzrIVmH2v4ha6hyC0qhDs04vMt8ABPjLyo=" crossorigin="anonymous"></script>
+
+
+
+  </body>
+</html>

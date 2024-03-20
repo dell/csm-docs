@@ -76,11 +76,12 @@
       <description>
         
         
-        &lt;p&gt;CSM for Observability can be deployed in one of three ways:&lt;/p&gt;
+        &lt;p&gt;CSM for Observability can be deployed in one of four ways:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;./helm&#34;&gt;Helm&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;./online&#34;&gt;CSM for Observability Installer&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;./offline&#34;&gt;CSM for Observability Offline Installer&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;./operator&#34;&gt;Operator&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;post-installation-dependencies&#34;&gt;Post Installation Dependencies&lt;/h2&gt;
 &lt;p&gt;The following third-party components are required in the same Kubernetes cluster where CSM for Observability has been deployed:&lt;/p&gt;
@@ -775,7 +776,7 @@ helm install grafana grafana/grafana -n [CSM_NAMESPACE] -f grafana-values.yaml
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Check if the latest Helm chart version is available:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;helm search repo dell
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;NAME                            CHART VERSION   APP VERSION     DESCRIPTION
-dell/karavi-observability       1.6.0           1.6.0           CSM for Observability is part of the [Container...
+dell/karavi-observability       1.7.0           1.7.0           CSM for Observability is part of the [Container...
 &lt;/code&gt;&lt;/pre&gt;&lt;blockquote&gt;
 &lt;p&gt;Note: If using cert-manager CustomResourceDefinitions older than v1.5.3, delete the old CRDs and install v1.5.3 of the CRDs prior to upgrade. See &lt;a href=&#34;../deployment/helm#prerequisites&#34;&gt;Prerequisites&lt;/a&gt; for location of CRDs.&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -1078,21 +1079,6 @@ Unable to attach or mount volumes: unmounted volumes=[tls-secret], unattached vo
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;To resolve this, leave the CSM namespace in place after a failed installation, and run the below command:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;helm delete karavi-observability --namespace &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;CSM_NAMESPACE&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Then delete the namespace &lt;code&gt;kubectl delete ns [CSM_NAMESPACE]&lt;/code&gt;. Wait until namespace is fully deleted, recreate the namespace, and reinstall Observability again.&lt;/p&gt;
-&lt;h3 id=&#34;other-issues-and-workarounds&#34;&gt;Other issues and workarounds&lt;/h3&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;Symptoms&lt;/th&gt;
-&lt;th&gt;Prevention, Resolution or Workaround&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;karavi-metrics pod crashes for all the supported platforms whenever there are PVs without claim in the cluster&lt;/td&gt;
-&lt;td&gt;Work around is to create PVCs using the PVs which are not in bound state or delete the PVs without claims&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
 
       </description>
     </item>
@@ -1106,15 +1092,18 @@ Unable to attach or mount volumes: unmounted volumes=[tls-secret], unattached vo
       <description>
         
         
-        &lt;h2 id=&#34;release-notes---csm-observability-160&#34;&gt;Release Notes - CSM Observability 1.6.0&lt;/h2&gt;
+        &lt;h2 id=&#34;release-notes---csm-observability-170&#34;&gt;Release Notes - CSM Observability 1.7.0&lt;/h2&gt;
 &lt;h3 id=&#34;new-featureschanges&#34;&gt;New Features/Changes&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/724&#34;&gt;#724 - [FEATURE]: CSM support for Openshift 4.13&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/922&#34;&gt;#922 - [FEATURE]: Use ubi9 micro as base image&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/947&#34;&gt;#947 - [FEATURE]: Support for Kubernetes 1.28&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1066&#34;&gt;#1066 - [FEATURE]: Support for Openshift 4.14&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/996&#34;&gt;#996 - [FEATURE]: Dell CSI to Dell CSM Operator Migration Process&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1031&#34;&gt;#1031 - [FEATURE]: Update to the latest UBI Micro image for CSM&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1062&#34;&gt;#1062 - [FEATURE]: CSM PowerMax: Support PowerMax v10.1 &lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;fixed-issues&#34;&gt;Fixed Issues&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/916&#34;&gt;#916 - [BUG]: Remove references to deprecated io/ioutil package&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1019&#34;&gt;#1019 - [BUG]: karavi-metrics-powerscale pod gets an segmentation violation error during start&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;known-issues&#34;&gt;Known Issues&lt;/h3&gt;
 

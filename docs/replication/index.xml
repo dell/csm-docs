@@ -15,19 +15,6 @@
     
     
     <item>
-      <title>Docs: Deployment</title>
-      <link>https://dell.github.io/csm-docs/docs/replication/deployment/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://dell.github.io/csm-docs/docs/replication/deployment/</guid>
-      <description>
-        
-        
-        
-      </description>
-    </item>
-    
-    <item>
       <title>Docs: Architecture</title>
       <link>https://dell.github.io/csm-docs/docs/replication/architecture/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -197,13 +184,13 @@ field configured to point to the current cluster:&lt;/p&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Note that the &lt;code&gt;targets&lt;/code&gt; parameter is left empty since we don&amp;rsquo;t require any target clusters to work within a single cluster.
 This also means that you don&amp;rsquo;t need to create any Secrets that contain connection information to such clusters, since in this use case, we
 are limited to a single cluster.&lt;/p&gt;
-&lt;p&gt;You can find more info about configs and secrets for cluster communication in &lt;a href=&#34;../deployment/configmap-secrets/&#34;&gt;configmaps-secrets&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;You can find more info about configs and secrets for cluster communication in &lt;a href=&#34;../../deployment/helm/modules/installation/replication/configmap-secrets/&#34;&gt;configmaps-secrets&lt;/a&gt;.&lt;/p&gt;
 &lt;h4 id=&#34;storage-class-configuration&#34;&gt;Storage Class Configuration&lt;/h4&gt;
 &lt;p&gt;To create volumes that would be replicated within a single cluster, you need to create a special StorageClass.
 This StorageClass should contain the usual replication parameter &lt;code&gt;replication.storage.dell.com/remoteClusterID&lt;/code&gt;, and it should
 be set to &lt;code&gt;self&lt;/code&gt; to indicate that we want to replicate the volume inside the current cluster.&lt;/p&gt;
 &lt;p&gt;Also, you would need to create another storage class in the same cluster that would serve as a &lt;code&gt;target&lt;/code&gt; storage class. This means that all replicated volumes would be derived from it. Its &lt;code&gt;replication.storage.dell.com/remoteClusterID&lt;/code&gt; parameter should be also set to &lt;code&gt;self&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;You can find out more about replication StorageClasses and replication specific parameters in &lt;a href=&#34;../deployment/storageclasses&#34;&gt;storageclasses&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;You can find out more about replication StorageClasses and replication specific parameters in &lt;a href=&#34;../../deployment/helm/modules/installation/replication/storageclasses&#34;&gt;storageclasses&lt;/a&gt;.&lt;/p&gt;
 &lt;h4 id=&#34;replicated-resources&#34;&gt;Replicated Resources&lt;/h4&gt;
 &lt;p&gt;When creating PersistentVolumeClaims using StorageClass for a single cluster replication, replicated resources (PersistentVolumes,
 ReplicationGroups) would be created in the same cluster with the &lt;code&gt;replicated-&lt;/code&gt; prefix added to them. For example:&lt;/p&gt;
@@ -233,14 +220,14 @@ cluster. You can provide as many as you like, but be mindful that a single volum
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;dell-replication-controller-config&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;namespace&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;dell-replication-controller&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Note that target cluster information contains a field called &lt;code&gt;secretRef&lt;/code&gt;. This field points to a secret available in the current cluster that contains connection information of &lt;code&gt;cluster-B&lt;/code&gt; in the form of a kubeconfig file.&lt;/p&gt;
-&lt;p&gt;You can find more information about how to create such secrets in &lt;a href=&#34;../deployment/configmap-secrets/#communication-between-clusters&#34;&gt;configmaps-secrets&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;You can find more information about how to create such secrets in &lt;a href=&#34;../../deployment/helm/modules/installation/replication/configmap-secrets/#communication-between-clusters&#34;&gt;configmaps-secrets&lt;/a&gt;.&lt;/p&gt;
 &lt;h4 id=&#34;storage-class-configuration-1&#34;&gt;Storage Class Configuration&lt;/h4&gt;
 &lt;p&gt;To create replicated volumes in the multi-cluster configuration you still need to have a special storage class.
 Replication parameter &lt;code&gt;replication.storage.dell.com/remoteClusterID&lt;/code&gt; should be set to the cluster-id of whatever cluster you
 want to replicate your volumes.&lt;/p&gt;
 &lt;p&gt;For multi-cluster replication, we can choose one of the target cluster ids we specified in
 ConfigMap. In our example replication parameter, the target cluster id should be equal to &lt;code&gt;cluster-B&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;You can find more information about other replication parameters available in storage classes &lt;a href=&#34;../deployment/storageclasses/#common-parameters&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;You can find more information about other replication parameters available in storage classes &lt;a href=&#34;../../deployment/helm/modules/installation/replication/storageclasses#common-parameters&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
 &lt;h4 id=&#34;replicated-resources-1&#34;&gt;Replicated Resources&lt;/h4&gt;
 &lt;p&gt;When creating PersistentVolumeClaims using StorageClass for a multi-cluster replication, replicated resources would be
 created in both &lt;code&gt;source&lt;/code&gt; and &lt;code&gt;target&lt;/code&gt; clusters under the same names. For example:&lt;/p&gt;
@@ -322,8 +309,8 @@ rg-240721b0-12fb-4151-8dd8-94794ae2493e   30s   Ready   SYNCHRONIZED   2021-08-0
 &lt;li&gt;R2 devices assume the same external device identity(geometry, device WWN) as the R1 devices.
 All the above characteristic makes SRDF metro best suited for the scenarios in which high availability of data is desired.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;With respect to Kubernetes, the SRDF metro mode works in single cluster scenarios. In the metro, both the arrays—&lt;a href=&#34;../deployment/powermax/#on-storage-array&#34;&gt;arrays with SRDF metro link setup between them&lt;/a&gt;—involved in the replication are managed by the same &lt;code&gt;csi-powermax&lt;/code&gt; driver. The replication is triggered by creating a volume using a &lt;code&gt;StorageClass&lt;/code&gt; with metro-related parameters.
-The driver on receiving the metro-related parameters in the &lt;code&gt;CreateVolume&lt;/code&gt; call creates a metro replicated volume and the details about both the volumes are returned in the volume context to the Kubernetes cluster. So, the &lt;code&gt;PV&lt;/code&gt; created in the process represents a pair of metro replicated volumes. When a &lt;code&gt;PV&lt;/code&gt;, representing a pair of metro replicated volumes, is claimed by a pod, the host treats each of the volumes represented by the single &lt;code&gt;PV&lt;/code&gt; as a separate data path. The switching between the paths, to read and write the data, is managed by the multipath driver. The switching happens automatically, as configured by the user—in round-robin fashion or otherwise—or it can happen if one of the paths goes down. For details on Linux multipath driver setup, &lt;a href=&#34;../../csidriver/installation/helm/powermax/#linux-multipathing-requirements&#34;&gt;click here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;With respect to Kubernetes, the SRDF metro mode works in single cluster scenarios. In the metro, both the arrays—&lt;a href=&#34;../../deployment/helm/modules/installation/replication/powermax/#on-storage-array&#34;&gt;arrays with SRDF metro link setup between them&lt;/a&gt;—involved in the replication are managed by the same &lt;code&gt;csi-powermax&lt;/code&gt; driver. The replication is triggered by creating a volume using a &lt;code&gt;StorageClass&lt;/code&gt; with metro-related parameters.
+The driver on receiving the metro-related parameters in the &lt;code&gt;CreateVolume&lt;/code&gt; call creates a metro replicated volume and the details about both the volumes are returned in the volume context to the Kubernetes cluster. So, the &lt;code&gt;PV&lt;/code&gt; created in the process represents a pair of metro replicated volumes. When a &lt;code&gt;PV&lt;/code&gt;, representing a pair of metro replicated volumes, is claimed by a pod, the host treats each of the volumes represented by the single &lt;code&gt;PV&lt;/code&gt; as a separate data path. The switching between the paths, to read and write the data, is managed by the multipath driver. The switching happens automatically, as configured by the user—in round-robin fashion or otherwise—or it can happen if one of the paths goes down. For details on Linux multipath driver setup, &lt;a href=&#34;../../deployment/helm/drivers/installation/powermax#linux-multipathing-requirements&#34;&gt;click here&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;The creation of volumes in SRDF metro mode doesn&amp;rsquo;t involve the replication sidecar or the common controller, nor does it cause the creation of any replication related custom resources; it just needs a &lt;code&gt;csi-powermax&lt;/code&gt; driver that implements the &lt;code&gt;CreateVolume&lt;/code&gt; gRPC endpoint with SRDF metro capability for it to work.&lt;/p&gt;
 &lt;h3 id=&#34;usage&#34;&gt;Usage&lt;/h3&gt;
 &lt;p&gt;The metro replicated volumes are created just like the normal volumes, but the &lt;code&gt;StorageClass&lt;/code&gt; contains some
@@ -769,145 +756,10 @@ The name of the StorageClass resource that is created as the &amp;ldquo;target&a
         &lt;h2 id=&#34;release-notes---csm-replication-171&#34;&gt;Release Notes - CSM Replication 1.7.1&lt;/h2&gt;
 &lt;h3 id=&#34;new-featureschanges&#34;&gt;New Features/Changes&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/947&#34;&gt;#947 - [FEATURE]: Support for Kubernetes 1.28&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1066&#34;&gt;#1066 - [FEATURE]: Support for Openshift 4.14&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/996&#34;&gt;#996 - [FEATURE]: Dell CSI to Dell CSM Operator Migration Process&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1031&#34;&gt;#1031 - [FEATURE]: Update to the latest UBI Micro image for CSM&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1062&#34;&gt;#1062 - [FEATURE]: CSM PowerMax: Support PowerMax v10.1 &lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/926&#34;&gt;#926 - [FEATURE]: Fixing the linting, formatting and vetting issues&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;fixed-issues&#34;&gt;Fixed Issues&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/988&#34;&gt;#988 - [BUG]: CSM Operator fails to install CSM Replication on the remote cluster&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1002&#34;&gt;#1002 - [BUG]: CSM Replication - secret file requirement for both sites not documented &lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
 &lt;h3 id=&#34;known-issues&#34;&gt;Known Issues&lt;/h3&gt;
-
-      </description>
-    </item>
-    
-    <item>
-      <title>Docs: Upgrade</title>
-      <link>https://dell.github.io/csm-docs/docs/replication/upgrade/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://dell.github.io/csm-docs/docs/replication/upgrade/</guid>
-      <description>
-        
-        
-        &lt;p&gt;CSM Replication module consists of two components:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;CSM Replication sidecar (installed along with the driver)&lt;/li&gt;
-&lt;li&gt;CSM Replication controller&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Those two components should be upgraded separately. When upgrading them ensure that you use the same versions for both sidecar and
-controller, because different versions could be incompatible with each other.&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;em&gt;&lt;strong&gt;Note&lt;/strong&gt;&lt;/em&gt;: While upgrading the module via helm, the &lt;code&gt;replicas&lt;/code&gt; variable in &lt;code&gt;myvalues.yaml&lt;/code&gt; can be at most one less than the number of worker nodes.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h2 id=&#34;updating-csm-replication-sidecar&#34;&gt;Updating CSM Replication sidecar&lt;/h2&gt;
-&lt;p&gt;To upgrade the CSM Replication sidecar that is installed along with the driver, the following steps are required.&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;em&gt;&lt;strong&gt;Note&lt;/strong&gt;&lt;/em&gt;: These steps refer to the values file and &lt;code&gt;csi-install.sh&lt;/code&gt; script that was used during the initial installation of the Dell CSI driver.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;&lt;strong&gt;Steps&lt;/strong&gt;&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;Update the &lt;code&gt;controller.replication.image&lt;/code&gt; value in the values files to reference the new CSM Replication sidecar image.&lt;/li&gt;
-&lt;li&gt;Run the csi-install script with the option &lt;code&gt;--upgrade&lt;/code&gt; by running: &lt;br&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#204a87&#34;&gt;cd&lt;/span&gt; ../dell-csi-helm-installer &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; ./csi-install.sh --namespace &amp;lt;your-namespace&amp;gt; --values ./myvalues.yaml --upgrade
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
-&lt;li&gt;Run the same command on the second Kubernetes cluster if you use multi-cluster replication topology&lt;/li&gt;
-&lt;/ol&gt;
-&lt;blockquote&gt;
-&lt;p&gt;For more information on upgrading the CSI driver, please visit the &lt;a href=&#34;../../csidriver/upgradation&#34;&gt;CSI driver upgrade page&lt;/a&gt;.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h3 id=&#34;powerscale&#34;&gt;PowerScale&lt;/h3&gt;
-&lt;p&gt;On PowerScale systems, an additional step is needed when upgrading to CSM Replication v1.4.0 or later. Because the SyncIQ policy created on the target-side storage array is no longer used, it must be deleted for any existing &lt;code&gt;DellCSIReplicationGroup&lt;/code&gt; objects after performing the upgrade to the CSM Replication sidecar and PowerScale CSI driver. These steps should be performed before the &lt;code&gt;DellCSIReplicationGroup&lt;/code&gt; objects are used with the new version of the CSI driver. Until this step is performed, existing &lt;code&gt;DellCSIReplicationGroup&lt;/code&gt; objects will display an UNKNOWN link state.&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;Log in to the target PowerScale array.&lt;/li&gt;
-&lt;li&gt;Navigate to the &lt;code&gt;Data Protection &amp;gt; SyncIQ&lt;/code&gt; page and select the &lt;code&gt;Policies&lt;/code&gt; tab.&lt;/li&gt;
-&lt;li&gt;Delete disabled, target-side SyncIQ policies that are used for CSM Replication. Such policies will be distinguished by their names, of the format &lt;code&gt;&amp;lt;prefix&amp;gt;-&amp;lt;kubernetes namespace&amp;gt;-&amp;lt;IP of replication destination&amp;gt;-&amp;lt;RPO duration&amp;gt;&lt;/code&gt;.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h2 id=&#34;updating-csm-replication-controller&#34;&gt;Updating CSM Replication controller&lt;/h2&gt;
-&lt;p&gt;Make sure the appropriate release branch is available on the machine performing the upgrade by running:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;git clone -b v1.7.1 https://github.com/dell/csm-replication.git
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;upgrading-with-helm&#34;&gt;Upgrading with Helm&lt;/h3&gt;
-&lt;p&gt;This option will only work if you have previously installed replication via Helm chart, available since version 1.1. If you used simple manifest or &lt;code&gt;repctl&lt;/code&gt; please use &lt;a href=&#34;#upgrading-with-repctl&#34;&gt;upgrading with repctl&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Steps&lt;/strong&gt;&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;
-&lt;p&gt;Update the &lt;code&gt;image&lt;/code&gt; value in the values files to reference the new CSM Replication controller image or use a new version of the csm-replication Helm chart.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Run the install script with the option &lt;code&gt;--upgrade&lt;/code&gt; by running:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#204a87&#34;&gt;cd&lt;/span&gt; ./scripts &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; ./install.sh --values ./myvalues.yaml --upgrade
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Run the same command on the second Kubernetes cluster if you use multi-cluster replication topology.&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;em&gt;&lt;strong&gt;Note&lt;/strong&gt;&lt;/em&gt;: Upgrade won&amp;rsquo;t override currently existing ConfigMap, even if you change templated values in myvalues.yaml file. If you want to change the logLevel - edit ConfigMap from within the cluster using
-&lt;code&gt;bash  kubectl edit cm -n dell-replication-controller dell-replication-controller-config   &lt;/code&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h3 id=&#34;upgrading-with-repctl&#34;&gt;Upgrading with repctl&lt;/h3&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;em&gt;&lt;strong&gt;Note&lt;/strong&gt;&lt;/em&gt;: These steps assume that you already have &lt;code&gt;repctl&lt;/code&gt; configured to use correct clusters, if you don&amp;rsquo;t know how to do that please refer to &lt;a href=&#34;../deployment/install-repctl&#34;&gt;installing with repctl&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;&lt;strong&gt;Steps&lt;/strong&gt;&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;
-&lt;p&gt;Find a new version of deployment manifest that can be found in &lt;code&gt;deploy/controller.yaml&lt;/code&gt;, with newer &lt;code&gt;image&lt;/code&gt; pointing to the version of CSM Replication controller you want to upgrade to.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Apply said manifest using the usual &lt;code&gt;repctl create&lt;/code&gt; command like so:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;./repctl create -f ../deploy/controller.yaml
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;The output should have this line &lt;code&gt;Successfully updated existing deployment: dell-replication-controller-manager&lt;/code&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Check if everything is OK by querying your Kubernetes clusters using &lt;code&gt;kubectl&lt;/code&gt; using a &lt;code&gt;kubectl get&lt;/code&gt;:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl get pods -n dell-replication-controller&lt;span style=&#34;color:#4e9a06&#34;&gt;`&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Your pods should be &lt;code&gt;READY&lt;/code&gt; and &lt;code&gt;RUNNING&lt;/code&gt;.&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h3 id=&#34;replication-crd-version-update&#34;&gt;Replication CRD version update&lt;/h3&gt;
-&lt;p&gt;CRD &lt;code&gt;dellcsireplicationgroups.replication.storage.dell.com&lt;/code&gt; has been updated to version &lt;code&gt;v1&lt;/code&gt; in CSM Replication v1.4.0. To facilitate the continued use of existing &lt;code&gt;DellCSIReplicationGroup&lt;/code&gt; CR objects after upgrading to CSM Replication v1.4.0 or later, an &lt;code&gt;init container&lt;/code&gt; will be deployed during upgrade. The &lt;code&gt;init container&lt;/code&gt; updates the existing CRs with necessary steps for their continued use.&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;em&gt;&lt;strong&gt;Note&lt;/strong&gt;&lt;/em&gt;: Do not update the CRD as part of upgrade. An &lt;code&gt;init container&lt;/code&gt; included in the replication controller pod takes care of updating existing CRD and CR versions.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;Starting from CSM Replication v1.6.0, the &lt;code&gt;init container&lt;/code&gt; has been removed. Therefore, when upgrading from versions older than v1.4.0 to v1.6.0 or any later versions, it is mandatory to perform an intermediate upgrade to either v1.4.0 or v1.5.0 before proceeding with any further upgrades.&lt;/p&gt;
-
-      </description>
-    </item>
-    
-    <item>
-      <title>Docs: Uninstall</title>
-      <link>https://dell.github.io/csm-docs/docs/replication/uninstall/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://dell.github.io/csm-docs/docs/replication/uninstall/</guid>
-      <description>
-        
-        
-        &lt;p&gt;This section outlines the uninstallation steps for Container Storage Modules (CSM) for Replication.&lt;/p&gt;
-&lt;h2 id=&#34;uninstalling-replication-controller&#34;&gt;Uninstalling replication controller&lt;/h2&gt;
-&lt;p&gt;To uninstall the replication controller, you can use the script &lt;code&gt;uninstall.sh&lt;/code&gt; located in the &lt;code&gt;scripts&lt;/code&gt; folder:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;./uninstall.sh 
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;This script will automatically detect how the current version was installed (repctl or Helm) and use the correct method to delete it.&lt;/p&gt;
-&lt;p&gt;You can also manually uninstall the replication controller using a method that depends on how you installed it.&lt;/p&gt;
-&lt;p&gt;If replication controller was installed using &lt;code&gt;helm&lt;/code&gt;, use this command:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;helm delete -n dell-replication-controller replication
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;If you used &lt;code&gt;controller.yaml&lt;/code&gt; manifest with either &lt;code&gt;kubectl&lt;/code&gt; or &lt;code&gt;repctl&lt;/code&gt;, use this:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl delete -f deploy/controller.yaml
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;To delete the replication group CRD, you can run the command:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl delete crd dellcsireplicationgroups.replication.storage.dell.com
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;All replication groups should be deleted before deleting the replication group CRD.&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;em&gt;&lt;strong&gt;NOTE&lt;/strong&gt;&lt;/em&gt;: Be sure to run the chosen command on all clusters where you want to uninstall the replication controller/CRD.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h2 id=&#34;uninstalling-the-replication-sidecar&#34;&gt;Uninstalling the replication sidecar&lt;/h2&gt;
-&lt;p&gt;To uninstall the replication sidecar, you need to uninstall the CSI Driver. Please view the &lt;a href=&#34;../../csidriver/uninstall&#34;&gt;uninstall&lt;/a&gt; page for the driver itself.&lt;/p&gt;
 
       </description>
     </item>

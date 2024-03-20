@@ -269,109 +269,6 @@ today.  Support for more Storage Arrays will come in the future.&lt;/p&gt;
     </item>
     
     <item>
-      <title>Docs: Deployment</title>
-      <link>https://dell.github.io/csm-docs/docs/authorization/deployment/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://dell.github.io/csm-docs/docs/authorization/deployment/</guid>
-      <description>
-        
-        
-        
-
-&lt;div class=&#34;pageinfo pageinfo-primary&#34;&gt;
-&lt;p&gt;The CSM Authorization RPM will be deprecated in a future release. It is highly recommended that you use CSM Authorization Helm deployment or CSM Operator going forward.&lt;/p&gt;
-
-&lt;/div&gt;
-
-&lt;p&gt;Installation information for CSM Authorization can be found in this section.&lt;/p&gt;
-
-      </description>
-    </item>
-    
-    <item>
-      <title>Docs: Uninstallation</title>
-      <link>https://dell.github.io/csm-docs/docs/authorization/uninstallation/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://dell.github.io/csm-docs/docs/authorization/uninstallation/</guid>
-      <description>
-        
-        
-        
-
-&lt;div class=&#34;pageinfo pageinfo-primary&#34;&gt;
-&lt;p&gt;The CSM Authorization RPM will be deprecated in a future release. It is highly recommended that you use CSM Authorization Helm deployment or CSM Operator going forward.&lt;/p&gt;
-
-&lt;/div&gt;
-
-&lt;p&gt;This section outlines the uninstallation steps for Container Storage Modules (CSM) for Authorization.&lt;/p&gt;
-&lt;h2 id=&#34;uninstalling-the-rpm&#34;&gt;Uninstalling the RPM&lt;/h2&gt;
-&lt;p&gt;To uninstall the rpm package on the system, you must first uninstall the K3s SELinux package if SELinux is enabled. To uninstall the K3s SELinux package, run:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;rpm -e k3s-selinux
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;To uninstall the CSM Authorization rpm package on the system, run:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;rpm -e &amp;lt;rpm_file_name&amp;gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;uninstalling-the-sidecar-proxy-in-the-csi-driver&#34;&gt;Uninstalling the sidecar-proxy in the CSI Driver&lt;/h2&gt;
-&lt;p&gt;To uninstall the sidecar-proxy in the CSI Driver, &lt;a href=&#34;../../csidriver/uninstall&#34;&gt;uninstall&lt;/a&gt; the driver and &lt;a href=&#34;../../deployment&#34;&gt;reinstall&lt;/a&gt; the driver using the original configuration secret.&lt;/p&gt;
-
-      </description>
-    </item>
-    
-    <item>
-      <title>Docs: Upgrade</title>
-      <link>https://dell.github.io/csm-docs/docs/authorization/upgrade/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://dell.github.io/csm-docs/docs/authorization/upgrade/</guid>
-      <description>
-        
-        
-        
-
-&lt;div class=&#34;pageinfo pageinfo-primary&#34;&gt;
-&lt;p&gt;The CSM Authorization RPM will be deprecated in a future release. It is highly recommended that you use CSM Authorization Helm deployment or CSM Operator going forward.&lt;/p&gt;
-
-&lt;/div&gt;
-
-&lt;p&gt;This section outlines the upgrade steps for Container Storage Modules (CSM) for Authorization.  The upgrade of CSM for Authorization is handled in 2 parts:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Upgrading the CSM for Authorization proxy server&lt;/li&gt;
-&lt;li&gt;Upgrading the Dell CSI drivers with CSM for Authorization enabled&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;upgrading-csm-for-authorization-proxy-server&#34;&gt;Upgrading CSM for Authorization proxy server&lt;/h3&gt;
-&lt;p&gt;Obtain the latest single binary installer RPM by following one of our two options &lt;a href=&#34;../deployment/#single-binary-installer&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;To update the rpm package on the system, run the below command from within the extracted folder:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sh install_karavi_auth.sh --upgrade
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;As an option, on version 1.6.0, the Nodeports for the ingress controller can be specified:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sh install_karavi_auth.sh --upgrade  --traefik_web_port &amp;lt;web port number&amp;gt; --traefik_websecure_port &amp;lt;websecure port number&amp;gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Ex.:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sh install_karavi_auth.sh --upgrade  --traefik_web_port &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;30001&lt;/span&gt; --traefik_websecure_port &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;30002&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;To verify that the new version of the rpm is installed and K3s has been updated, run the below commands:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;rpm -qa &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; grep karavi
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;k3s kubectl version
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: The above steps manage install and upgrade of all dependencies that are required by the CSM for Authorization proxy server.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h3 id=&#34;upgrading-dell-csi-drivers-with-csm-for-authorization-enabled&#34;&gt;Upgrading Dell CSI Driver(s) with CSM for Authorization enabled&lt;/h3&gt;
-&lt;p&gt;Given a setup where the CSM for Authorization proxy server is already upgraded to the latest version, follow the upgrade instructions for the applicable CSI Driver(s) to upgrade the driver and the CSM for Authorization sidecar&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;../../csidriver/upgradation/drivers/powerflex/&#34;&gt;Upgrade PowerFlex CSI driver&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;../../csidriver/upgradation/drivers/powermax/&#34;&gt;Upgrade PowerMax CSI driver&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;../../csidriver/upgradation/drivers/isilon/&#34;&gt;Upgrade PowerScale CSI driver&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;rollback&#34;&gt;Rollback&lt;/h2&gt;
-&lt;p&gt;This section outlines the rollback steps for Container Storage Modules (CSM) for Authorization.&lt;/p&gt;
-&lt;h3 id=&#34;rollback-csm-for-authorization-proxy-server&#34;&gt;Rollback CSM for Authorization proxy server&lt;/h3&gt;
-&lt;p&gt;To rollback the rpm package on the system, run the below command:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;rpm -Uvh --oldpackage karavi-authorization-&amp;lt;old_version&amp;gt;.x86_64.rpm --nopreun --nopostun
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-      </description>
-    </item>
-    
-    <item>
       <title>Docs: CLI</title>
       <link>https://dell.github.io/csm-docs/docs/authorization/cli/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -1187,14 +1084,10 @@ time=&amp;#34;2022-06-30T17:38:32Z&amp;#34; level=fatal msg=&amp;#34;grpc failed
       <description>
         
         
-        &lt;h2 id=&#34;release-notes---csm-authorization-191&#34;&gt;Release Notes - CSM Authorization 1.9.1&lt;/h2&gt;
+        &lt;h2 id=&#34;release-notes---csm-authorization-1100&#34;&gt;Release Notes - CSM Authorization 1.10.0&lt;/h2&gt;
 &lt;h3 id=&#34;new-featureschanges&#34;&gt;New Features/Changes&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/947&#34;&gt;#947 - [FEATURE]: Support for Kubernetes 1.28&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1066&#34;&gt;#1066 - [FEATURE]: Support for Openshift 4.14&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/996&#34;&gt;#996 - [FEATURE]: Dell CSI to Dell CSM Operator Migration Process&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1031&#34;&gt;#1031 - [FEATURE]: Update to the latest UBI Micro image for CSM&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1062&#34;&gt;#1062 - [FEATURE]: CSM PowerMax: Support PowerMax v10.1 &lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/926&#34;&gt;#926 - [FEATURE]: Fixing the linting, formatting and vetting issues&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;fixed-issues&#34;&gt;Fixed Issues&lt;/h3&gt;
 &lt;h3 id=&#34;known-issues&#34;&gt;Known Issues&lt;/h3&gt;
