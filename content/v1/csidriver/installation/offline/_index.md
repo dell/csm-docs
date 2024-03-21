@@ -65,7 +65,7 @@ The resulting offline bundle file can be copied to another machine, if necessary
 
 For example, here is the output of a request to build an offline bundle for the Dell CSM Operator:
 ```bash
-git clone -b v1.4.3 https://github.com/dell/csm-operator.git
+git clone -b v1.4.4 https://github.com/dell/csm-operator.git
 ```
 ```bash
 cd csm-operator
