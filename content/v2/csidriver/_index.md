@@ -61,7 +61,7 @@ The CSI Drivers by Dell implement an interface between [CSI](https://kubernetes-
 {{</table>}}
 
 >Note: To connect to a PowerFlex 4.5 array, the SDC image will need to be changed to dellemc/sdc:4.5.
->- If using helm to install, you will need to make this change in your values.yaml file. See [helm install documentation](https://dell.github.io/csm-docs/docs/csidriver/installation/helm/powerflex/) for details.
+>- If using helm to install, you will need to make this change in your values.yaml file. See [helm install documentation](https://dell.github.io/csm-docs/docs/deployment/helm/drivers/installation/powerflex/) for details.
 >- If using CSM-Operator to install, you will need to make this change in your samples file. See [operator install documentation](https://dell.github.io/csm-docs/docs/deployment/csmoperator/drivers/powerflex/) for details.
 
 ### Backend Storage Details

@@ -824,7 +824,7 @@ allowedTopologies:
     - "true"
 ```
 
-[`helm/csi-vxflexos/values.yaml`](https://github.com/dell/csi-powerflex/blob/main/helm/csi-vxflexos/values.yaml)
+[`csi-vxflexos/values.yaml`](https://github.com/dell/helm-charts/blob/main/charts/csi-vxflexos/values.yaml)
 ```yaml
 ...
 enableQuota: false
