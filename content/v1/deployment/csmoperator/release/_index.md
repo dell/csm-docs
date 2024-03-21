@@ -6,7 +6,7 @@ Description: >
   Release notes for Dell Container Storage Modules Operator
 ---
 
-## Release Notes - Container Storage Modules Operator v1.4.3
+## Release Notes - Container Storage Modules Operator v1.4.4
 
 ### New Features/Changes
 
@@ -38,6 +38,8 @@ Description: >
 - [#1159 - [BUG]: CSM status is not always accurate when Observability installed with only one or two components](https://github.com/dell/csm/issues/1159))
 - [#1152 - [BUG]: CSI driver changes to facilitate SDC brownfield deployments](https://github.com/dell/csm/issues/1152))
 - [#1171 - [BUG]: CSM object occasionally stays in failed state when app-mobility is successfully deployed with csm-operator](https://github.com/dell/csm/issues/1171))
+- [#1189 - [BUG]: Change the Apex Connectivity Client access to the kube-proxy port to only connections within the client pod](https://github.com/dell/csm/issues/1189))
+- [#1190 - [BUG]: Change Apex Connectivity Client access to secrets to only the secrets it needs to manage](https://github.com/dell/csm/issues/1190))
 
 ### Known Issues
 | Issue | Workaround |

@@ -64,7 +64,7 @@ The installation process involves the creation of a `Subscription` object either
 1. Install volume snapshot CRDs. For detailed snapshot setup procedure, [click here](../../snapshots/#volume-snapshot-feature).
 2. Clone and checkout the required csm-operator version using
 ```bash
-git clone -b v1.4.3 https://github.com/dell/csm-operator.git
+git clone -b v1.4.4 https://github.com/dell/csm-operator.git
 ```
 3. `cd csm-operator`
 4. _(Optional)_ If using a local Docker image, edit the `deploy/operator.yaml` file and set the image name for the CSM Operator Deployment.
@@ -175,7 +175,7 @@ Here is the output of a request to build an offline bundle for the Dell CSM Oper
    dellemc/dell-csi-replicator:v1.7.0
    dellemc/dell-replication-controller:v1.7.0
    dellemc/sdc:4.5
-   docker.io/dellemc/dell-csm-operator:v1.4.3
+   docker.io/dellemc/dell-csm-operator:v1.4.4
    gcr.io/kubebuilder/kube-rbac-proxy:v0.8.0
    nginxinc/nginx-unprivileged:1.20
    otel/opentelemetry-collector:0.42.0
