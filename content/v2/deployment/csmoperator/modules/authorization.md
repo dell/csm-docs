@@ -152,7 +152,7 @@ kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/relea
 
 1. Follow all the [prerequisites](#prerequisite).
 
-2. Create a CR (Custom Resource) for Authorization using the sample file provided [here](https://github.com/dell/csm-operator/blob/main/samples/authorization/csm_authorization_proxy_server_v170.yaml). This file can be modified to use custom parameters if needed.
+2. Create a CR (Custom Resource) for Authorization using the sample file provided [here](https://github.com/dell/csm-operator/blob/main/samples/authorization/csm_authorization_proxy_server_v1100.yaml). This file can be modified to use custom parameters if needed.
 
 3. Users should configure the parameters in the CR. This table lists the primary configurable parameters of the Authorization Proxy Server and their default values:
 
@@ -181,7 +181,7 @@ To enable reporting of trace data with [Zipkin](https://zipkin.io/), use the `cs
 
     ```bash
     
-    kubectl create -f samples/authorization/csm_authorization_proxy_server_v170.yaml
+    kubectl create -f samples/authorization/csm_authorization_proxy_server_v1100.yaml
     ```
 
   >__Note__:  
@@ -196,12 +196,12 @@ To enable reporting of trace data with [Zipkin](https://zipkin.io/), use the `cs
     kubectl create secret tls karavi-auth-tls -n authorization --key <location-of-private-key-file> --cert <location-of-certificate-file>
     ```
 
-    If using a self-signed certificate, prepare `samples/authorization/certificate_v170.yaml` provided [here](https://github.com/dell/csm-operator/blob/main/samples/authorization/certificate_v170.yaml). An entry for each hostname specified in the CR must be added under `dnsNames` for the certificate to be valid for each Ingress. 
+    If using a self-signed certificate, prepare `samples/authorization/certificate_v1100.yaml` provided [here](https://github.com/dell/csm-operator/blob/main/samples/authorization/certificate_v1100.yaml). An entry for each hostname specified in the CR must be added under `dnsNames` for the certificate to be valid for each Ingress. 
 
     Use this command to create the `karavi-auth-tls` secret:
 
     ```bash
-    kubectl create -f samples/authorization/certificate_v170.yaml
+    kubectl create -f samples/authorization/certificate_v1100.yaml
     ```
 
 ### Verify Installation of the CSM Authorization Proxy Server
