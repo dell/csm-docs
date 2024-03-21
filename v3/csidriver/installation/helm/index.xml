@@ -1466,7 +1466,7 @@ volume stats value under node should be set to true.&lt;/p&gt;
 &lt;li&gt;
 &lt;p&gt;Edit &lt;em&gt;my-isilon-settings.yaml&lt;/em&gt; to set the following parameters for your installation:
 The following table lists the primary configurable parameters of the PowerScale driver Helm chart and their default values. More detailed information can be
-found in the  &lt;a href=&#34;https://github.com/dell/csi-powerscale/blob/master/helm/csi-isilon/values.yaml&#34;&gt;&lt;code&gt;values.yaml&lt;/code&gt;&lt;/a&gt; file in this repository.&lt;/p&gt;
+found in the  &lt;a href=&#34;https://github.com/dell/helm-charts/tree/main/charts/csi-isilon/values.yaml&#34;&gt;&lt;code&gt;values.yaml&lt;/code&gt;&lt;/a&gt; file in this repository.&lt;/p&gt;
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;

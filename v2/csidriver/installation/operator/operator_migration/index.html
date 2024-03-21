@@ -18,12 +18,12 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/v2/csidriver/installation/operator/operator_migration/" /><meta property="article:section" content="v2" />
 
-<meta property="article:modified_time" content="2024-03-21T02:39:59+05:30" />
+<meta property="article:modified_time" content="2024-03-21T15:00:56+05:30" />
 
 <meta itemprop="name" content="CSI to CSM Operator Migration">
 <meta itemprop="description" content="Migrating from CSI Operator to CSM Operator
 ">
-<meta itemprop="dateModified" content="2024-03-21T02:39:59+05:30" />
+<meta itemprop="dateModified" content="2024-03-21T15:00:56+05:30" />
 <meta itemprop="wordCount" content="548">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="CSI to CSM Operator Migration"/>
@@ -107,7 +107,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.adf1db760753c8ca2fde32410440f6e1.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.35f80754d44109526085c66bbee91f2f.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -129,7 +129,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.adf1db760753c8ca2fde32410440f6e1.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.35f80754d44109526085c66bbee91f2f.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -752,7 +752,7 @@
 <ul>
 <li>As the yaml content may differ, ensure the values held in the step 1 CR backup are present in the new CR before installing the new driver
 <ul>
-<li>Ex: spec.driver.fsGroupPolicy in <a href="https://github.com/dell/dell-csi-operator/blob/main/samples/powermax_v260_k8s_126.yaml#L17C5-L17C18">PowerMax 2.6 for CSI Operator</a> maps to spec.driver.csiDriverSpec.fSGroupPolicy in <a href="https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powermax_v260.yaml#L28C7-L28C20">PowerMax 2.6 for CSM Operator</a></li>
+<li>Ex: spec.driver.fsGroupPolicy in <a href="https://github.com/dell/dell-csi-operator/blob/main/samples/powermax_v260_k8s_126.yaml#L17C5-L17C18">PowerMax 2.6 for CSI Operator</a> maps to spec.driver.csiDriverSpec.fSGroupPolicy in <a href="https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powermax_v2100.yaml#L28C7-L28C20">PowerMax 2.10 for CSM Operator</a></li>
 </ul>
 </li>
 </ul>
@@ -811,7 +811,7 @@
 <li>Use the CR backup from step 1 to manually map desired settings to the new CSI driver</li>
 <li>As the yaml content may differ, ensure the values held in the step 1 CR backup are present in the new CR before installing the new driver
 <ul>
-<li>Ex: spec.driver.fsGroupPolicy in <a href="https://github.com/dell/dell-csi-operator/blob/main/samples/powermax_v260_k8s_126.yaml#L17C5-L17C18">PowerMax 2.6 for CSI Operator</a> maps to spec.driver.csiDriverSpec.fSGroupPolicy in <a href="https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powermax_v260.yaml#L28C7-L28C20">PowerMax 2.6 for CSM Operator</a></li>
+<li>Ex: spec.driver.fsGroupPolicy in <a href="https://github.com/dell/dell-csi-operator/blob/main/samples/powermax_v260_k8s_126.yaml#L17C5-L17C18">PowerMax 2.6 for CSI Operator</a> maps to spec.driver.csiDriverSpec.fSGroupPolicy in <a href="https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powermax_v2100.yaml#L28C7-L28C20">PowerMax 2.10 for CSM Operator</a></li>
 </ul>
 </li>
 </ul>

@@ -16,11 +16,11 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/v2/cosidriver/installation/helm/" /><meta property="article:section" content="v2" />
 
-<meta property="article:modified_time" content="2024-03-21T02:39:59+05:30" />
+<meta property="article:modified_time" content="2024-03-21T15:00:56+05:30" />
 
 <meta itemprop="name" content="COSI Driver installation using Helm">
 <meta itemprop="description" content="Installation of COSI Driver using Helm">
-<meta itemprop="dateModified" content="2024-03-21T02:39:59+05:30" />
+<meta itemprop="dateModified" content="2024-03-21T15:00:56+05:30" />
 <meta itemprop="wordCount" content="674">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="COSI Driver installation using Helm"/>
@@ -103,7 +103,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.adf1db760753c8ca2fde32410440f6e1.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.35f80754d44109526085c66bbee91f2f.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -125,7 +125,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.adf1db760753c8ca2fde32410440f6e1.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.35f80754d44109526085c66bbee91f2f.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -734,7 +734,7 @@ To use these tools, a valid <code>KUBECONFIG</code> is required. Ensure that eit
 <li>Run <code>git clone -b main https://github.com/dell/helm-charts.git</code> to clone the git repository.</li>
 <li>Ensure that you have created the namespace where you want to install the driver. You can run <code>kubectl create namespace dell-cosi</code> to create a new one. The use of <em>dell-cosi</em>  as the namespace is just an example. You can choose any name for the namespace.</li>
 <li>Copy the <em>charts/cosi/values.yaml</em> into a new location with name <em>my-cosi-values.yaml</em>, to customize settings for installation.</li>
-<li>Create new file called <em>my-cosi-configuration.yaml</em>, and copy the settings available in the <a href="./configuration_file.md">Configuration File</a> page.</li>
+<li>Create new file called <em>my-cosi-configuration.yaml</em>, and copy the settings available in the <a href="../configuration_file">Configuration File</a> page.</li>
 <li>Edit <em>my-cosi-values.yaml</em> to set the following parameters for your installation:
 The following table lists the primary configurable parameters of the COSI driver Helm chart and their default values. More detailed information can be found in the <a href="https://github.com/dell/helm-charts/blob/master/charts/cosi/values.yaml"><code>values.yaml</code></a> file in this repository.</li>
 </ol>

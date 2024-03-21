@@ -16,12 +16,12 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/docs/csidriver/release/powerstore/" /><meta property="article:section" content="docs" />
 
-<meta property="article:modified_time" content="2024-03-21T02:39:59+05:30" />
+<meta property="article:modified_time" content="2024-03-21T15:00:56+05:30" />
 
 <meta itemprop="name" content="PowerStore">
 <meta itemprop="description" content="Release notes for PowerStore CSI driver">
-<meta itemprop="dateModified" content="2024-03-21T02:39:59+05:30" />
-<meta itemprop="wordCount" content="650">
+<meta itemprop="dateModified" content="2024-03-21T15:00:56+05:30" />
+<meta itemprop="wordCount" content="651">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="PowerStore"/>
 <meta name="twitter:description" content="Release notes for PowerStore CSI driver"/>
@@ -103,7 +103,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.adf1db760753c8ca2fde32410440f6e1.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.35f80754d44109526085c66bbee91f2f.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -125,7 +125,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.adf1db760753c8ca2fde32410440f6e1.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.35f80754d44109526085c66bbee91f2f.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -736,7 +736,7 @@
 </tr>
 <tr>
 <td>If an ephemeral pod is not being created in OpenShift 4.13 and is failing with the error &ldquo;error when creating pod: the pod uses an inline volume provided by CSIDriver csi-powerstore.dellemc.com, and the namespace has a pod security enforcement level that is lower than privileged.&rdquo;</td>
-<td>This issue occurs because OpenShift 4.13 introduced the CSI Volume Admission plugin to restrict the use of a CSI driver capable of provisioning CSI ephemeral volumes during pod admission (<a href="https://docs.openshift.com/container-platform/4.13/storage/container_storage_interface/ephemeral-storage-csi-inline.html)">https://docs.openshift.com/container-platform/4.13/storage/container_storage_interface/ephemeral-storage-csi-inline.html)</a>. Therefore, an additional label &ldquo;security.openshift.io/csi-ephemeral-volume-profile&rdquo; needs to be added to the CSIDriver object to support inline ephemeral volumes.</td>
+<td>This issue occurs because OpenShift 4.13 introduced the CSI Volume Admission plugin to restrict the use of a CSI driver capable of provisioning CSI ephemeral volumes during pod admission <a href="https://docs.openshift.com/container-platform/4.13/storage/container_storage_interface/ephemeral-storage-csi-inline.html">https://docs.openshift.com/container-platform/4.13/storage/container_storage_interface/ephemeral-storage-csi-inline.html</a> . Therefore, an additional label &ldquo;security.openshift.io/csi-ephemeral-volume-profile&rdquo; needs to be added to the CSIDriver object to support inline ephemeral volumes.</td>
 </tr>
 <tr>
 <td>In OpenShift 4.13, the root user is not allowed to perform write operations on NFS shares, when root squashing is enabled.</td>

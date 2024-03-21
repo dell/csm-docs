@@ -1251,7 +1251,7 @@ Alternatively, you can check the status of the multipath service by entering the
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;enabled&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;true&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;replication-crds&#34;&gt;Replication CRD&amp;rsquo;s&lt;/h4&gt;
 &lt;p&gt;The CRDs for replication can be obtained and installed from the csm-replication project on Github. Use &lt;code&gt;csm-replication/deploy/replicationcrds.all.yaml&lt;/code&gt; located in csm-replication git repo for the installation.&lt;/p&gt;
-&lt;p&gt;CRDs should be configured during replication prepare stage with repctl as described in &lt;a href=&#34;../../../../replication/deployment/install-repctl&#34;&gt;install-repctl&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;CRDs should be configured during replication prepare stage with repctl as described in &lt;a href=&#34;../../../helm/modules/installation/replication/install-repctl&#34;&gt;install-repctl&lt;/a&gt;&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;
 &lt;p&gt;Create namespace.
