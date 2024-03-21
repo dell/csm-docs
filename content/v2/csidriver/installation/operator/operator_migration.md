@@ -31,7 +31,7 @@ description: >
   ```
 2. Map and update the settings from the CR in step 1 to the relevant CSM Operator CR
     - As the yaml content may differ, ensure the values held in the step 1 CR backup are present in the new CR before installing the new driver
-        - Ex: spec.driver.fsGroupPolicy in [PowerMax 2.6 for CSI Operator](https://github.com/dell/dell-csi-operator/blob/main/samples/powermax_v260_k8s_126.yaml#L17C5-L17C18) maps to spec.driver.csiDriverSpec.fSGroupPolicy in [PowerMax 2.6 for CSM Operator](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powermax_v260.yaml#L28C7-L28C20)
+        - Ex: spec.driver.fsGroupPolicy in [PowerMax 2.6 for CSI Operator](https://github.com/dell/dell-csi-operator/blob/main/samples/powermax_v260_k8s_126.yaml#L17C5-L17C18) maps to spec.driver.csiDriverSpec.fSGroupPolicy in [PowerMax 2.10 for CSM Operator](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powermax_v2100.yaml#L28C7-L28C20)
 3. Retain (or do not delete) the secret, namespace, storage classes, and volume snapshot classes from the original deployment as they will be re-used in the CSM operator deployment
 4. Uninstall the CR from the CSI Operator
   ```
@@ -69,7 +69,7 @@ description: >
     - Select *Create instance* under the provided Container Storage Module API
     - Use the CR backup from step 1 to manually map desired settings to the new CSI driver
     - As the yaml content may differ, ensure the values held in the step 1 CR backup are present in the new CR before installing the new driver
-        - Ex: spec.driver.fsGroupPolicy in [PowerMax 2.6 for CSI Operator](https://github.com/dell/dell-csi-operator/blob/main/samples/powermax_v260_k8s_126.yaml#L17C5-L17C18) maps to spec.driver.csiDriverSpec.fSGroupPolicy in [PowerMax 2.6 for CSM Operator](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powermax_v260.yaml#L28C7-L28C20)
+        - Ex: spec.driver.fsGroupPolicy in [PowerMax 2.6 for CSI Operator](https://github.com/dell/dell-csi-operator/blob/main/samples/powermax_v260_k8s_126.yaml#L17C5-L17C18) maps to spec.driver.csiDriverSpec.fSGroupPolicy in [PowerMax 2.10 for CSM Operator](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powermax_v2100.yaml#L28C7-L28C20)
 >NOTE: Uninstallation of the driver and the Operator is non-disruptive for mounted volumes. Nonetheless you can not create new volume, snapshot or move a Pod.
 
 ## Testing

@@ -107,7 +107,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
 4. Copy *the helm/csi-isilon/values.yaml* into a new location with name say *my-isilon-settings.yaml*, to customize settings for installation.
 5. Edit *my-isilon-settings.yaml* to set the following parameters for your installation:
    The following table lists the primary configurable parameters of the PowerScale driver Helm chart and their default values. More detailed information can be
-   found in the  [`values.yaml`](https://github.com/dell/csi-powerscale/blob/master/helm/csi-isilon/values.yaml) file in this repository.
+   found in the  [`values.yaml`](https://github.com/dell/helm-charts/tree/main/charts/csi-isilon/values.yaml) file in this repository.
 
    | Parameter | Description | Required | Default |
    | --------- | ----------- | -------- |-------- |  
