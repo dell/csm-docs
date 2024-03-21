@@ -301,7 +301,7 @@ replicas: 1
 ```
 in your driver yaml in `config/samples/`
 
-If you want to specify where controller pods get assigned, make the following edits to your values file at `csi-vxflexos/helm/csi-vxflexos/values.yaml`:    
+If you want to specify where controller pods get assigned, make the following edits to your values file at `csi-vxflexos/values.yaml`:    
 
 To assign controller pods to worker nodes only (Default):   
 ```yaml
@@ -613,7 +613,7 @@ spec:
 ## Dynamic Logging Configuration
 
 The dynamic logging configuration that was introduced in v1.5 of the driver was revamped for v2.0; v1.5 logging configuration is not compatible with v2.0.   
-Two fields in values.yaml (located at helm/csi-vxflexos/values.yaml) are used to configure the dynamic logging: logLevel and logFormat.
+Two fields in values.yaml (located at csi-vxflexos/values.yaml) are used to configure the dynamic logging: logLevel and logFormat.
 
 ```yaml
 # CSI driver log level
@@ -834,7 +834,7 @@ enableQuota: false
 ## Usage of Quotas to Limit Storage Consumption for NFS volumes
 Starting with version 2.8, the CSI driver for PowerFlex will support enabling tree quotas for limiting capacity for NFS volumes. To use the quota feature user can specify the boolean value `enableQuota` in values.yaml.
 
-To enable quota for NFS volumes, make the following edits to [values.yaml](https://github.com/dell/csi-powerflex/blob/main/helm/csi-vxflexos/values.yaml) file:
+To enable quota for NFS volumes, make the following edits to [values.yaml](https://github.com/dell/helm-charts/blob/main/charts/csi-vxflexos/values.yaml) file:
 ```yaml
 ...
 ...
