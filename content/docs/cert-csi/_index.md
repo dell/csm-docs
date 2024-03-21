@@ -9,9 +9,11 @@ Dell's Cert-CSI is a tool to validate Dell CSI Drivers. It contains various test
 
 Any orchestrator platform, operating system or version that is not mentioned in the support matrix but self-certified by the customer using cert-csi is supported for customer use.
 
-## Submit Test Results
+## Qualify and Submit Test Results
 
-Please submit your test results for our review here (https://github.com/dell/csm/issues/) by clicking on 'New Issue'. If the results are a success, the orchestrator platform and version will be published under Community Qualified Configurations. 
+You may qualify your environment for Dell CSI Drivers by executing the [Run All Test Suites](#run-all-test-suites) workflow.
+
+Please submit your test results for our review [here](https://github.com/dell/csm/issues/new?assignees=&labels=type%2Fqualification&projects=&template=community_qualification.yml&title=%5BQualification%5D%3A+). If the results are a success, the orchestrator platform and version will be published under Community Qualified Configurations. 
 
 ## Installation
 
@@ -147,7 +149,7 @@ make install-ms
 
 You can use cert-csi to launch a test run against multiple storage classes to check if the driver adheres to advertised capabilities. 
 
-### Preparing Config
+#### Preparing Config
 
 To run the test suites you need to provide `.yaml` config with storage classes and their capabilities. You can use `example-certify-config.yaml` as an example. 
 
@@ -358,7 +360,7 @@ storageClasses:
    {{% /tab %}}
    {{< /tabs >}}
 
-### Launching Test Run
+#### Launching Test Run
 1. Executes the [VolumeIO](#volume-io) suite.
 2. Executes the [Scaling](#scalability) suite.
 3. If `storageClasses.clone` is `true`, executes the [Volume Cloning](#volume-cloning) suite.
@@ -407,7 +409,7 @@ If you are using the container image, the `cert-config` file must be mounted int
 {{% /tab %}}
 {{< /tabs >}}
 
-### Running Invidual Test Suites
+## Running Individual Test Suites
 
 > NOTE: For testing/debugging purposes, it can useful to use the `--no-cleanup` flag so resources do not get deleted.
 
