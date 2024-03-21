@@ -16,11 +16,11 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/v2/csidriver/features/powerflex/" /><meta property="article:section" content="v2" />
 
-<meta property="article:modified_time" content="2024-03-21T15:00:56+05:30" />
+<meta property="article:modified_time" content="2024-03-21T17:56:49+05:30" />
 
 <meta itemprop="name" content="PowerFlex">
 <meta itemprop="description" content="Code features for PowerFlex Driver">
-<meta itemprop="dateModified" content="2024-03-21T15:00:56+05:30" />
+<meta itemprop="dateModified" content="2024-03-21T17:56:49+05:30" />
 <meta itemprop="wordCount" content="5336">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="PowerFlex"/>
@@ -103,7 +103,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.35f80754d44109526085c66bbee91f2f.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.6a32d0a0b10b198ce185336e5c7dad55.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -125,7 +125,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.35f80754d44109526085c66bbee91f2f.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.6a32d0a0b10b198ce185336e5c7dad55.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -959,7 +959,7 @@ VolumeSnapshotClass instance in <code>samples/volumesnapshotclass</code> directo
 <p>If you are using the Dell CSI Operator, the value to adjust is:</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">replicas</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#0000cf;font-weight:bold">1</span><span style="color:#f8f8f8;text-decoration:underline">  
 </span></span></span></code></pre></div><p>in your driver yaml in <code>config/samples/</code></p>
-<p>If you want to specify where controller pods get assigned, make the following edits to your values file at <code>csi-vxflexos/helm/csi-vxflexos/values.yaml</code>:</p>
+<p>If you want to specify where controller pods get assigned, make the following edits to your values file at <code>csi-vxflexos/values.yaml</code>:</p>
 <p>To assign controller pods to worker nodes only (Default):</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"># &#34;controller&#34; allows to configure controller specific parameters</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">controller</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
@@ -1227,7 +1227,7 @@ When creating ephemeral volumes, it is important to specify the following within
 <p><strong>Note:</strong> Retrieval of the volume ID is possible through the UI. You must select the volume, navigate to <code>Details</code> section and click the volume in the graph. This selection will set the filter to the desired volume. At this point the volume ID can be found in the URL.</p>
 <h2 id="dynamic-logging-configuration">Dynamic Logging Configuration</h2>
 <p>The dynamic logging configuration that was introduced in v1.5 of the driver was revamped for v2.0; v1.5 logging configuration is not compatible with v2.0.<br>
-Two fields in values.yaml (located at helm/csi-vxflexos/values.yaml) are used to configure the dynamic logging: logLevel and logFormat.</p>
+Two fields in values.yaml (located at csi-vxflexos/values.yaml) are used to configure the dynamic logging: logLevel and logFormat.</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"># CSI driver log level</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#8f5902;font-style:italic"># Allowed values: &#34;error&#34;, &#34;warn&#34;/&#34;warning&#34;, &#34;info&#34;, &#34;debug&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#8f5902;font-style:italic"># Default value: &#34;debug&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
@@ -1419,7 +1419,7 @@ CSI PowerFlex driver will detect the SDC mode set on the PowerFlex array and wil
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#000">...</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span></code></pre></div><h2 id="usage-of-quotas-to-limit-storage-consumption-for-nfs-volumes">Usage of Quotas to Limit Storage Consumption for NFS volumes</h2>
 <p>Starting with version 2.8, the CSI driver for PowerFlex will support enabling tree quotas for limiting capacity for NFS volumes. To use the quota feature user can specify the boolean value <code>enableQuota</code> in values.yaml.</p>
-<p>To enable quota for NFS volumes, make the following edits to <a href="https://github.com/dell/csi-powerflex/blob/main/helm/csi-vxflexos/values.yaml">values.yaml</a> file:</p>
+<p>To enable quota for NFS volumes, make the following edits to <a href="https://github.com/dell/helm-charts/blob/main/charts/csi-vxflexos/values.yaml">values.yaml</a> file:</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#000">...</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#000">...</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#8f5902;font-style:italic"># enableQuota: a boolean that, when enabled, will set quota limit for a newly provisioned NFS volume.</span><span style="color:#f8f8f8;text-decoration:underline">
