@@ -246,6 +246,7 @@ storageClasses:
         AzServiceIP: "192.168.2.1"
 ```
 
+   {{% /tab %}}
    {{% tab name="CSI PowerMax" %}}
 
 ```yaml
@@ -271,8 +272,6 @@ storageClasses:
       driverNamespace: powerstore
       pollInterval: 2m
 ```
-
-   {{% /tab %}}
 
    {{% /tab %}}
    {{% tab name="CSI PowerStore" %}}
