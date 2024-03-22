@@ -99,7 +99,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.658c794e40a9bf16601ea78ac105a5f0.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.4e1d29f5b5ce3692f822615e3aff2f23.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -121,7 +121,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.658c794e40a9bf16601ea78ac105a5f0.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.4e1d29f5b5ce3692f822615e3aff2f23.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -627,7 +627,7 @@
 
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#submit-test-results">Submit Test Results</a></li>
+    <li><a href="#qualify-and-submit-test-results">Qualify and Submit Test Results</a></li>
     <li><a href="#installation">Installation</a>
       <ul>
         <li><a href="#download-release-linux">Download Release (Linux)</a></li>
@@ -639,9 +639,12 @@
     <li><a href="#running-cert-csi">Running Cert-CSI</a></li>
     <li><a href="#run-all-test-suites">Run All Test Suites</a>
       <ul>
-        <li><a href="#preparing-config">Preparing Config</a></li>
-        <li><a href="#launching-test-run">Launching Test Run</a></li>
-        <li><a href="#running-invidual-test-suites">Running Invidual Test Suites</a></li>
+        <li></li>
+      </ul>
+    </li>
+    <li><a href="#running-individual-test-suites">Running Individual Test Suites</a>
+      <ul>
+        <li></li>
         <li><a href="#running-longevity-mode">Running Longevity mode</a></li>
         <li><a href="#use-configurable-container-images">Use configurable container images</a></li>
       </ul>
@@ -715,8 +718,9 @@
 	
 	<p>Dell&rsquo;s Cert-CSI is a tool to validate Dell CSI Drivers. It contains various test suites to validate the drivers and addresses the complexity involved with certifiying Dell CSI drivers in different customer environments.</p>
 <p>Any orchestrator platform, operating system or version that is not mentioned in the support matrix but self-certified by the customer using cert-csi is supported for customer use.</p>
-<h2 id="submit-test-results">Submit Test Results</h2>
-<p>Please submit your test results for our review here (<a href="https://github.com/dell/csm/issues/">https://github.com/dell/csm/issues/</a>) by clicking on &lsquo;New Issue&rsquo;. If the results are a success, the orchestrator platform and version will be published under Community Qualified Configurations.</p>
+<h2 id="qualify-and-submit-test-results">Qualify and Submit Test Results</h2>
+<p>You may qualify your environment for Dell CSI Drivers by executing the <a href="#run-all-test-suites">Run All Test Suites</a> workflow.</p>
+<p>Please submit your test results for our review <a href="https://github.com/dell/csm/issues/new?assignees=&amp;labels=type%2Fqualification&amp;projects=&amp;template=community_qualification.yml&amp;title=%5BQualification%5D%3A+">here</a>. If the results are a success, the orchestrator platform and version will be published under Community Qualified Configurations.</p>
 <h2 id="installation">Installation</h2>
 <p>There are three methods of installing <code>cert-csi</code>.</p>
 <ol>
@@ -822,7 +826,7 @@ Database (SQLite) file for functional test suites is <code>cert-csi-functional.d
 </blockquote>
 <h2 id="run-all-test-suites">Run All Test Suites</h2>
 <p>You can use cert-csi to launch a test run against multiple storage classes to check if the driver adheres to advertised capabilities.</p>
-<h3 id="preparing-config">Preparing Config</h3>
+<h4 id="preparing-config">Preparing Config</h4>
 <p>To run the test suites you need to provide <code>.yaml</code> config with storage classes and their capabilities. You can use <code>example-certify-config.yaml</code> as an example.</p>
 <p>Template:</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">storageClasses</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
@@ -851,8 +855,9 @@ Database (SQLite) file for functional test suites is <code>cert-csi-functional.d
 <ul class="nav nav-tabs" id="cerity-config-examples" role="tablist"><li class="nav-item"><a data-toggle="tab" class="nav-link active" href="#cerity-config-examples-0" role="tab" aria-controls="cerity-config-examples-0" aria-selected="true">CSI PowerFlex</a></li>
 	  
 		<li class="nav-item"><a data-toggle="tab" class="nav-link" href="#cerity-config-examples-1" role="tab" aria-controls="cerity-config-examples-1">CSI PowerScale</a></li>
-		<li class="nav-item"><a data-toggle="tab" class="nav-link" href="#cerity-config-examples-2" role="tab" aria-controls="cerity-config-examples-2">CSI PowerStore</a></li>
-		<li class="nav-item"><a data-toggle="tab" class="nav-link" href="#cerity-config-examples-3" role="tab" aria-controls="cerity-config-examples-3">CSI Unity</a></li></ul>
+		<li class="nav-item"><a data-toggle="tab" class="nav-link" href="#cerity-config-examples-2" role="tab" aria-controls="cerity-config-examples-2">CSI PowerMax</a></li>
+		<li class="nav-item"><a data-toggle="tab" class="nav-link" href="#cerity-config-examples-3" role="tab" aria-controls="cerity-config-examples-3">CSI PowerStore</a></li>
+		<li class="nav-item"><a data-toggle="tab" class="nav-link" href="#cerity-config-examples-4" role="tab" aria-controls="cerity-config-examples-4">CSI Unity</a></li></ul>
 <div class="tab-content" id="cerity-config-examples"><div id="cerity-config-examples-0" class="tab-pane show active" role="tabpanel" aria-labelledby="cerity-config-examples-0">
 
 <p><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">storageClasses</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
@@ -915,6 +920,30 @@ Database (SQLite) file for functional test suites is <code>cert-csi-functional.d
   <div id="cerity-config-examples-2" class="tab-pane" role="tabpanel" aria-labelledby="cerity-config-examples-2">
 
 <p><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">storageClasses</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span>- <span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">powermax-iscsi</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">minSize</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">5Gi</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">rawBlock</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">expansion</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">clone</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">snapshot</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">capacityTracking</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">driverNamespace</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">powerstore</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">pollInterval</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">2m</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span>- <span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">powermax-nfs</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">minSize</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">5Gi</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">rawBlock</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">false</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">expansion</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">clone</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">snapshot</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">RWX</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">RWOP</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">capacityTracking</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">driverNamespace</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">powerstore</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">pollInterval</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">2m</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span></code></pre></div></div>
+  <div id="cerity-config-examples-3" class="tab-pane" role="tabpanel" aria-labelledby="cerity-config-examples-3">
+
+<p><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">storageClasses</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span>- <span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">powerstore</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">minSize</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">5Gi</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">rawBlock</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span><span style="color:#f8f8f8;text-decoration:underline">
@@ -949,7 +978,7 @@ Database (SQLite) file for functional test suites is <code>cert-csi-functional.d
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">driverNamespace</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">powerstore</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">pollInterval</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">2m</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span></code></pre></div></div>
-  <div id="cerity-config-examples-3" class="tab-pane" role="tabpanel" aria-labelledby="cerity-config-examples-3">
+  <div id="cerity-config-examples-4" class="tab-pane" role="tabpanel" aria-labelledby="cerity-config-examples-4">
 
 <p><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">storageClasses</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span>- <span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">unity-iscsi</span><span style="color:#f8f8f8;text-decoration:underline">
@@ -990,7 +1019,7 @@ Database (SQLite) file for functional test suites is <code>cert-csi-functional.d
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">pollInterval</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">2m</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span></code></pre></div></div></div>
 
-<h3 id="launching-test-run">Launching Test Run</h3>
+<h4 id="launching-test-run">Launching Test Run</h4>
 <ol>
 <li>Executes the <a href="#volume-io">VolumeIO</a> suite.</li>
 <li>Executes the <a href="#scalability">Scaling</a> suite.</li>
@@ -1031,7 +1060,7 @@ Database (SQLite) file for functional test suites is <code>cert-csi-functional.d
 <p><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>   podman run --rm -it -v ~/.kube/config:/root/.kube/config -v /home/user/example-certify-config.yaml:/example-certify-config.yaml dellemc/cert-csi:v1.3.1 certify --cert-config /example-certify-config.yaml --vsc &lt;volume-snapshot-class&gt;
 </span></span></code></pre></div></div></div>
 
-<h3 id="running-invidual-test-suites">Running Invidual Test Suites</h3>
+<h2 id="running-individual-test-suites">Running Individual Test Suites</h2>
 <blockquote>
 <p>NOTE: For testing/debugging purposes, it can useful to use the <code>--no-cleanup</code> flag so resources do not get deleted.</p>
 </blockquote>
