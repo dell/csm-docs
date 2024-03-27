@@ -211,6 +211,63 @@ spec:
 
 >The Kubernetes Volume Expansion feature can only be used to increase the size of a volume. It cannot be used to shrink a volume.
 
+
+## Snapshot ingestion procedure
+
+1. Create a snapshot for existing volume using Unisphere
+
+2. Create a VolumeSnapshotContent explained below
+
+  ```yaml
+  apiVersion: snapshot.storage.k8s.io/v1
+  kind: VolumeSnapshotContent
+  metadata:
+    name: snap1-content
+  spec:
+    deletionPolicy: Delete
+    driver: csi-unity.dellemc.com
+    volumeSnapshotClassName: unity-snapclass
+    source:
+      snapshotHandle: snap1-<protocol>-<array_id>-<snapshot_id>
+    volumeSnapshotRef:
+      name: snap1
+      namespace: unity
+  ```
+>Exampple snapshot handle format: snap1-FC-apm00123456789-3865491234567 .
+
+3. Create a VolumeSnapshot explained below
+
+ ```yaml
+ apiVersion: snapshot.storage.k8s.io/v1
+ kind: VolumeSnapshot
+ metadata:
+   name: snap1
+   namespace: unity
+ spec:
+   volumeSnapshotClassName: unity-snapclass
+   source:
+     volumeSnapshotContentName: snap1-content
+ ```
+
+4. Create a PersistentVolumeClaim explained below
+```yaml
+  apiVersion: v1
+  kind: PersistentVolumeClaim
+  metadata:
+    name: restore-pvc-from-snap
+  spec:
+    storageClassName: unity-nfs
+    dataSource:
+      name: snap1
+      kind: VolumeSnapshot
+      apiGroup: snapshot.storage.k8s.io
+    accessModes:
+      - ReadWriteOnce
+    resources:
+      requests:
+        storage: 5Gi
+```
+
 ## Raw block support
 
 The CSI Unity XT driver supports Raw Block Volumes.
