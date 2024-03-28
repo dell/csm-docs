@@ -60,6 +60,9 @@ kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/relea
     kubectl create -f samples/authorization/karavi-storage-secret.yaml
     ```
 
+>__Note__:  
+> - If you are installing CSM Authorization in a different namespace than `authorization`, edit the `namespace` field in this file to your namespace.
+
 ### Install CSM Authorization Proxy Server
 
 1. Follow all the [prerequisites](#prerequisite).
@@ -81,7 +84,8 @@ kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/relea
    | enabled | Enable/Disable deployment of cert-manager. Set to false if you already have cert-manager installed. | No | true |
 
 >__Note__:  
-> - If you specify `REDIS_STORAGE_CLASS`, the storage class must NOT be provisioned by the Dell CSI Driver to be configured with this installation of CSM Authorization.
+> - If you specify `REDIS_STORAGE_CLASS`, the storage class must NOT be provisioned by the Dell CSI Driver to be configured with this installation of CSM Authorization. 
+> - If you are installing CSM Authorization in a different namespace than `authorization`, edit the `namespace` fields in this file to your namespace.
 
 **Optional:**
 To enable reporting of trace data with [Zipkin](https://zipkin.io/), use the `csm-config-params` configMap in the sample CR or dynamically by editing the configMap.
@@ -119,11 +123,14 @@ To enable reporting of trace data with [Zipkin](https://zipkin.io/), use the `cs
     kubectl create -f <CERTIFICATE FILE>
     ```
 
+>__Note__:  
+> - If you are installing CSM Authorization in a different namespace than `authorization`, edit the `namespace` field in this file to your namespace.
+
 ### Verify Installation of the CSM Authorization Proxy Server
 Once the Authorization CR is created, you can verify the installation as mentioned below:
 
   ```bash
-  kubectl describe csm/<name-of-custom-resource> -n <namespace>
+  kubectl describe csm/<name-of-custom-resource> -n authorization
   ```
 
 ### Install Karavictl
