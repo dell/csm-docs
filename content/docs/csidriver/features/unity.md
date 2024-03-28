@@ -214,6 +214,9 @@ spec:
 
 ## Snapshot ingestion procedure
 
+The Snapshot Ingestion Procedure outlines the steps required to effectively integrate snapshots into your system. This procedure ensures the seamless acquisition, processing, and utilization of snapshots.
+Below are the key steps involved 
+
 1. Create a snapshot for existing volume using Unisphere
 
 2. Create a VolumeSnapshotContent explained below
@@ -233,20 +236,20 @@ spec:
       name: snap1
       namespace: unity
   ```
->Exampple snapshot handle format: snap1-FC-apm00123456789-3865491234567 .
+>Example snapshot handle format: snap1-FC-apm00123456789-3865491234567 .
 
 3. Create a VolumeSnapshot explained below
 
  ```yaml
- apiVersion: snapshot.storage.k8s.io/v1
- kind: VolumeSnapshot
- metadata:
-   name: snap1
-   namespace: unity
- spec:
-   volumeSnapshotClassName: unity-snapclass
-   source:
-     volumeSnapshotContentName: snap1-content
+  apiVersion: snapshot.storage.k8s.io/v1
+  kind: VolumeSnapshot
+  metadata:
+    name: snap1
+    namespace: unity
+  spec:
+    volumeSnapshotClassName: unity-snapclass
+    source:
+      volumeSnapshotContentName: snap1-content
  ```
 
 4. Create a PersistentVolumeClaim explained below
