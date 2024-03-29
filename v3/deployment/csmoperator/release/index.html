@@ -103,7 +103,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.495760a34b7be24586bd850e0f4e8b72.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.6663827ef80a97f2a410259e9f4780bf.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -125,7 +125,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.495760a34b7be24586bd850e0f4e8b72.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.6663827ef80a97f2a410259e9f4780bf.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -702,7 +702,20 @@
 <li><a href="https://github.com/dell/csm/issues/788">Install issues of the Replication module have been fixed</a></li>
 </ul>
 <h3 id="known-issues">Known Issues</h3>
-<p>There are no known issues in this release.</p>
+<table>
+<thead>
+<tr>
+<th>Issue</th>
+<th>Workaround</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CSM Operator does not support dynamic namespaces for Authorization. Despite successful installation in a namespace other than &ldquo;authorization&rdquo;, errors may arise during volume creation.</td>
+<td>Use the default namespace &ldquo;authorization&rdquo; for installing Authorization using CSM Operator</td>
+</tr>
+</tbody>
+</table>
 
         <div class="section-index">
     

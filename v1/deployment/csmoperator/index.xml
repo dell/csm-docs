@@ -236,6 +236,10 @@ Events
 &lt;td&gt;This should not cause any issues on the system, but all secrets present on the cluster can be found with &lt;code&gt;kubectl get secrets -A&lt;/code&gt;, and any unwanted secrets can be deleted with &lt;code&gt;kubectl delete secret -n &amp;lt;secret-namespace&amp;gt; &amp;lt;secret-name&amp;gt;&lt;/code&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
+&lt;td&gt;CSM Operator does not support dynamic namespaces for Authorization. Despite successful installation in a namespace other than &amp;ldquo;authorization&amp;rdquo;, errors may arise during volume creation.&lt;/td&gt;
+&lt;td&gt;Use the default namespace &amp;ldquo;authorization&amp;rdquo; for installing Authorization using CSM Operator&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
 &lt;td&gt;The images of sideCars are currently missing in the sample YAMLs in the offline bundle. As a consequence, the csm-operator is pulling them from registry.k8s.io.&lt;/td&gt;
 &lt;td&gt;We recommend manually updating the images of sideCars in the sample YAML file, for example, &lt;code&gt;storage_csm_powerflex_v291.yaml&lt;/code&gt;, before proceeding with the driver installation. Here is an example snippet for the sideCars section in the YAML file:&lt;/td&gt;
 &lt;/tr&gt;
