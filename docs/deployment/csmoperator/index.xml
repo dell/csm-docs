@@ -207,6 +207,10 @@ Events
 &lt;td&gt;When CSM Operator creates a deployment that includes secrets (e.g., application-mobility, observability, cert-manager, velero), these secrets are not deleted on uninstall and will be left behind. For example, the &lt;code&gt;karavi-topology-tls&lt;/code&gt;, &lt;code&gt;otel-collector-tls&lt;/code&gt;, and &lt;code&gt;cert-manager-webhook-ca&lt;/code&gt; secrets will not be deleted.&lt;/td&gt;
 &lt;td&gt;This should not cause any issues on the system, but all secrets present on the cluster can be found with &lt;code&gt;kubectl get secrets -A&lt;/code&gt;, and any unwanted secrets can be deleted with &lt;code&gt;kubectl delete secret -n &amp;lt;secret-namespace&amp;gt; &amp;lt;secret-name&amp;gt;&lt;/code&gt;&lt;/td&gt;
 &lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;CSM Operator does not support dynamic namespaces for Authorization. Despite successful installation in a namespace other than &amp;ldquo;authorization&amp;rdquo;, errors may arise during volume creation.&lt;/td&gt;
+&lt;td&gt;Use the default namespace &amp;ldquo;authorization&amp;rdquo; for installing Authorization using CSM Operator&lt;/td&gt;
+&lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
 
