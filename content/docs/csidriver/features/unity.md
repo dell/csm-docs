@@ -236,7 +236,7 @@ Below are the key steps involved
       name: snap1
       namespace: unity
   ```
->Example snapshot handle format: snap1-FC-apm00123456789-3865491234567 .
+>Example snapshot handle format: snap1-FC-apm00123456789-3865491234567
 
 3. Create a VolumeSnapshot as explained below
 
