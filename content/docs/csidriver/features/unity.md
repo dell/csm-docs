@@ -212,14 +212,14 @@ spec:
 >The Kubernetes Volume Expansion feature can only be used to increase the size of a volume. It cannot be used to shrink a volume.
 
 
-## Snapshot ingestion procedure
+## Snapshot Ingestion procedure
 
-The Snapshot Ingestion Procedure outlines the steps required to effectively integrate snapshots into your system. This procedure ensures the seamless acquisition, processing, and utilization of snapshots.
+The Snapshot Ingestion procedure outlines the steps required to effectively integrate existing snapshots from Unity XT into your Kubernetes cluster. This procedure ensures the seamless acquisition, processing, and utilization of snapshots.
 Below are the key steps involved 
 
 1. Create a snapshot for existing volume using Unisphere
 
-2. Create a VolumeSnapshotContent explained below
+2. Create a VolumeSnapshotContent as explained below
 
   ```yaml
   apiVersion: snapshot.storage.k8s.io/v1
@@ -238,7 +238,7 @@ Below are the key steps involved
   ```
 >Example snapshot handle format: snap1-FC-apm00123456789-3865491234567 .
 
-3. Create a VolumeSnapshot explained below
+3. Create a VolumeSnapshot as explained below
 
  ```yaml
   apiVersion: snapshot.storage.k8s.io/v1
@@ -252,7 +252,7 @@ Below are the key steps involved
       volumeSnapshotContentName: snap1-content
  ```
 
-4. Create a PersistentVolumeClaim explained below
+4. Create a PersistentVolumeClaim as explained below
 ```yaml
   apiVersion: v1
   kind: PersistentVolumeClaim
