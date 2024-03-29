@@ -24,4 +24,6 @@ Description: >
 - [#898 - [BUG]: Unable to pull podmon image from local repository for offline install](https://github.com/dell/csm/issues/898)
 
 ### Known Issues
-There are no known issues in this release.
+| Issue | Workaround |
+|-------|------------|
+| CSM Operator does not support dynamic namespaces for Authorization. Despite successful installation in a namespace other than "authorization", errors may arise during volume creation. | Use the default namespace "authorization" for installing Authorization using CSM Operator|
