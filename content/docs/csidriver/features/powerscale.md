@@ -15,7 +15,6 @@ You can connect a single CSI-PowerScale driver with multiple PowerScale clusters
 3. Creation of custom-volumesnapshot classes with proper isiPath matching corresponding storage classes.
 4. Inclusion of cluster name in volume handle, if you want to provision existing static volumes.
 
-
 ## Consuming existing volumes with static provisioning
 
 You can use existing volumes from the PowerScale array as Persistent Volumes in your Kubernetes, perform the following steps:
