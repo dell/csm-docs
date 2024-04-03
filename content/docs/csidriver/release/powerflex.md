@@ -24,6 +24,7 @@ description: Release notes for PowerFlex CSI driver
 - [#1140 - [BUG]: Cert-csi tests are not reporting the passed testcases in K8S E2E tests ](https://github.com/dell/csm/issues/1140)
 - [#1163 - [BUG]: Resource quota bypass](https://github.com/dell/csm/issues/1163)
 - [#1174 - [BUG]: Kubelet Configuration Directory setting should not have a comment about default value being None](https://github.com/dell/csm/issues/1174)
+- [#1210 - [BUG]: Helm deployment of PowerFlex driver is failing](https://github.com/dell/csm/issues/1210)
 
 ### Known Issues
 
@@ -37,6 +38,7 @@ A CSI ephemeral pod may not get created in OpenShift 4.13 and fail with the erro
 | If the volume limit is exhausted and there are pending pods and PVCs due to `exceed max volume count`, the pending PVCs will be bound to PVs and the pending pods will be scheduled to nodes when the driver pods are restarted. | It is advised not to have any pending pods or PVCs once the volume limit per node is exhausted on a CSI Driver. There is an open issue reported with kubenetes at https://github.com/kubernetes/kubernetes/issues/95911 with the same behavior. |
 | The PowerFlex Dockerfile is incorrectly labeling the version as 2.7.0 for the 2.8.0 version. | Describe the driver pod using ```kubectl describe pod $podname -n vxflexos``` to ensure v2.8.0 is installed. |
 | Resource quotas may not work properly with the CSI PowerFlex driver. PowerFlex is only able to assign storage in 8Gi chunks, so if a create volume call is made with a size not divisible by 8Gi, CSI-PowerFlex will round up to the next 8Gi boundary when it provisions storage -- however, the resource quota will not record this size but rather the original size in the create request. This means that, for example, if a 10Gi resource quota is set, and a user provisions 10 1Gi PVCs, 80Gi of storage will actually be allocated, which is well over the amount specified in the resource quota. | For now, users should only provision volumes in 8Gi-divisible chunks if they want to use resource quotas. |
+
 
 ### Note:
 
