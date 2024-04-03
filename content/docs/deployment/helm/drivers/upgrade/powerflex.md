@@ -22,7 +22,7 @@ You can upgrade the CSI Driver for Dell PowerFlex using Helm or Dell CSM Operato
    ```
 
 *NOTE:*
-- If you do not specify the `--helm-charts-version` argument, by default the `csi-install.sh` script will clone the version of the helm chart that is specified in the driver's [csi-install.sh](https://github.com/dell/csi-powerflex/blob/main/dell-csi-helm-installer/csi-install.sh#L24) file. If you wish to upgrade the driver using a different version of the helm chart, you need to include this argument. Also, remember to delete the `helm-charts` repository present in the `csi-powerflex` directory if it was cloned before.
+- If you do not specify the `--helm-charts-version` flag, by default the `csi-install.sh` script will clone the version of the helm chart that is specified in the driver's [csi-install.sh](https://github.com/dell/csi-powerflex/blob/main/dell-csi-helm-installer/csi-install.sh#L24) file. If you wish to upgrade the driver using a different version of the helm chart, you need to include this flag. Also, remember to delete the `helm-charts` repository present in the `csi-powerflex` directory if it was cloned before.
 - If you are upgrading from a driver version that was installed using Helm v2, ensure that you install Helm3 before installing the driver.
 - To update any installation parameter after the driver has been installed, change the `myvalues.yaml` file and run the install script with the option _\-\-upgrade_, for example: 
   ```bash
