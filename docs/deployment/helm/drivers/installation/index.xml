@@ -524,11 +524,14 @@ kubeVersion: &amp;ldquo;&amp;gt;= 1.21.0-0 &amp;lt; 1.29.0-0&amp;rdquo;&lt;/li&g
 &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;ol start=&#34;10&#34;&gt;
-&lt;li&gt;Install the driver using &lt;code&gt;csi-install.sh&lt;/code&gt; bash script by running &lt;code&gt;cd dell-csi-helm-installer &amp;amp;&amp;amp; ./csi-install.sh --namespace vxflexos --values myvalues.yaml&lt;/code&gt;. You may modify the release name with the &lt;code&gt;--release&lt;/code&gt; arg. If arg is not provided, release will be named &lt;code&gt;vxflexos&lt;/code&gt; by default.
+&lt;li&gt;Install the driver using &lt;code&gt;csi-install.sh&lt;/code&gt; bash script by running &lt;code&gt;cd dell-csi-helm-installer &amp;amp;&amp;amp; ./csi-install.sh --namespace vxflexos --values myvalues.yaml --helm-charts-version csi-vxflexos-2.10.1&lt;/code&gt;. You may modify the release name with the &lt;code&gt;--release&lt;/code&gt; arg. If arg is not provided, release will be named &lt;code&gt;vxflexos&lt;/code&gt; by default.
 Alternatively, to do a helm install solely with Helm charts (without shell scripts), refer to &lt;code&gt;helm/README.md&lt;/code&gt;.&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;&lt;em&gt;NOTE:&lt;/em&gt;&lt;/p&gt;
 &lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;If you do not specify the &lt;code&gt;--helm-charts-version&lt;/code&gt; flag, by default the &lt;code&gt;csi-install.sh&lt;/code&gt; script will clone the version of the helm chart that is specified in the driver&amp;rsquo;s &lt;a href=&#34;https://github.com/dell/csi-powerflex/blob/main/dell-csi-helm-installer/csi-install.sh#L24&#34;&gt;csi-install.sh&lt;/a&gt; file. If you wish to install the driver using a different version of the helm chart, you need to include this flag. Also, remember to delete the &lt;code&gt;helm-charts&lt;/code&gt; repository present in the &lt;code&gt;csi-powerflex&lt;/code&gt; directory if it was cloned before.&lt;/p&gt;
+&lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;For detailed instructions on how to run the install scripts, refer to the README.md  in the dell-csi-helm-installer folder.&lt;/p&gt;
 &lt;/li&gt;
