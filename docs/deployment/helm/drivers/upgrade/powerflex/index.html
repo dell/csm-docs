@@ -16,12 +16,12 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/docs/deployment/helm/drivers/upgrade/powerflex/" /><meta property="article:section" content="docs" />
 
-<meta property="article:modified_time" content="2024-03-21T02:39:59+05:30" />
+<meta property="article:modified_time" content="2024-04-04T19:22:05+05:30" />
 
 <meta itemprop="name" content="PowerFlex">
 <meta itemprop="description" content="Upgrade PowerFlex CSI driver">
-<meta itemprop="dateModified" content="2024-03-21T02:39:59+05:30" />
-<meta itemprop="wordCount" content="247">
+<meta itemprop="dateModified" content="2024-04-04T19:22:05+05:30" />
+<meta itemprop="wordCount" content="318">
 <meta itemprop="keywords" content="upgrade,csi-driver," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="PowerFlex"/>
 <meta name="twitter:description" content="Upgrade PowerFlex CSI driver"/>
@@ -81,7 +81,7 @@
 	
 	
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.10.0)</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.10.1)</a>
 	
 	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.9.4</a>
 	
@@ -103,7 +103,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.a0037a1892c8dcb917e929d0f528c0f9.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.b27b8903d8859b635c6317b8210b57d1.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -125,7 +125,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.a0037a1892c8dcb917e929d0f528c0f9.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.b27b8903d8859b635c6317b8210b57d1.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -631,7 +631,7 @@
 
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#update-driver-from-v290-to-v2100-using-helm">Update Driver from v2.9.0 to v2.10.0 using Helm</a></li>
+    <li><a href="#update-driver-from-v292-to-v2100-using-helm">Update Driver from v2.9.2 to v2.10.0 using Helm</a></li>
     <li><a href="#upgrade-using-dell-csm-operator">Upgrade using Dell CSM Operator:</a></li>
   </ul>
 </nav>
@@ -692,7 +692,7 @@
 
 	       
 	<p>You can upgrade the CSI Driver for Dell PowerFlex using Helm or Dell CSM Operator.</p>
-<h2 id="update-driver-from-v290-to-v2100-using-helm">Update Driver from v2.9.0 to v2.10.0 using Helm</h2>
+<h2 id="update-driver-from-v292-to-v2100-using-helm">Update Driver from v2.9.2 to v2.10.0 using Helm</h2>
 <p><strong>Steps</strong></p>
 <ol>
 <li>Run <code>git clone -b v2.10.0 https://github.com/dell/csi-powerflex.git</code> to clone the git repository and get the v2.10.0 driver.</li>
@@ -700,18 +700,21 @@
 <li>Update myvalues file as needed.</li>
 <li>Run the <code>csi-install</code> script with the option <em>--upgrade</em> by running:
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#204a87">cd</span> ../dell-csi-helm-installer <span style="color:#ce5c00;font-weight:bold">&amp;&amp;</span> ./csi-install.sh --namespace vxflexos --values ./myvalues.yaml --upgrade
+</span></span><span style="display:flex;"><span><span style="color:#204a87">cd</span> ../dell-csi-helm-installer <span style="color:#ce5c00;font-weight:bold">&amp;&amp;</span> ./csi-install.sh --namespace vxflexos --values ./myvalues.yaml --helm-charts-version csi-vxflexos-2.10.1 --upgrade
 </span></span></code></pre></div></li>
 </ol>
 <p><em>NOTE:</em></p>
 <ul>
+<li>
+<p>If you do not specify the <code>--helm-charts-version</code> flag, by default the <code>csi-install.sh</code> script will clone the version of the helm chart that is specified in the driver&rsquo;s <a href="https://github.com/dell/csi-powerflex/blob/main/dell-csi-helm-installer/csi-install.sh#L24">csi-install.sh</a> file. If you wish to upgrade the driver using a different version of the helm chart, you need to include this flag. Also, remember to delete the <code>helm-charts</code> repository present in the <code>csi-powerflex</code> directory if it was cloned before.</p>
+</li>
 <li>
 <p>If you are upgrading from a driver version that was installed using Helm v2, ensure that you install Helm3 before installing the driver.</p>
 </li>
 <li>
 <p>To update any installation parameter after the driver has been installed, change the <code>myvalues.yaml</code> file and run the install script with the option <em>--upgrade</em>, for example:</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>./csi-install.sh --namespace vxflexos --values ./myvalues.yaml --upgrade
+</span></span><span style="display:flex;"><span>./csi-install.sh --namespace vxflexos --values ./myvalues.yaml --helm-charts-version csi-vxflexos-2.10.1 --upgrade
 </span></span></code></pre></div></li>
 <li>
 <p>The logging configuration from v1.5 will not work in v2.1, since the log configuration parameters are now set in the myvalues.yaml file located at dell-csi-helm-installer/myvalues.yaml. Please set the logging configuration parameters in the myvalues.yaml file.</p>
