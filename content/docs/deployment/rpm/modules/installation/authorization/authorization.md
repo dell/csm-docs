@@ -11,7 +11,7 @@ The CSM Authorization RPM will be deprecated in a future release. It is highly r
 
 This section outlines the deployment steps for Container Storage Modules (CSM) for Authorization.  The deployment of CSM for Authorization is handled in 2 parts:
 - Deploying the CSM for Authorization proxy server, to be controlled by storage administrators
-- Configuring one to many [supported](../../../authorization#supported-csi-drivers) Dell CSI drivers with CSM for Authorization
+- Configuring one to many [supported](../../../../../prerequisites/#supported-csm-modules) Dell CSI drivers with CSM for Authorization
 
 ## Prerequisites
 
@@ -123,19 +123,19 @@ A Storage Administrator can execute the shell script, install_karavi_auth.sh as 
 
 5. After installation, application data will be stored on the system under `/var/lib/rancher/k3s/storage/`.
 
-If errors occur during installation, review the [Troubleshooting](../../troubleshooting) section.
+If errors occur during installation, review the [Troubleshooting](../../../../../authorization/troubleshooting) section.
 
 ## Configuring the CSM for Authorization Proxy Server
 
 The first part of CSM for Authorization deployment is to configure the proxy server. This is controlled by the Storage Administrator.
 
-Please follow the steps outlined in the [proxy server](../../configuration/proxy-server) configuration.
+Please follow the steps outlined in the [proxy server](../../../../../authorization/configuration/proxy-server) configuration.
 
 ## Configuring a Dell CSI Driver with CSM for Authorization
 
-The second part of CSM for Authorization deployment is to configure one or more of the [supported](../../../authorization#supported-csi-drivers) CSI drivers. This is controlled by the Kubernetes tenant administrator.
+The second part of CSM for Authorization deployment is to configure one or more of the [supported](../../../../../prerequisites/#supported-csm-modules) CSI drivers. This is controlled by the Kubernetes tenant administrator.
 
-Please follow the steps outlined in [PowerFlex](../../configuration/powerflex), [PowerMax](../../configuration/powermax), or [PowerScale](../../configuration/powerscale) to configure the CSI Driver to work with the Authorization sidecar.
+Please follow the steps outlined in [PowerFlex](../../../../../authorization/configuration/powerflex), [PowerMax](../../../../../authorization/configuration/powermax), or [PowerScale](../../../../../authorization/configuration/powerscale) to configure the CSI Driver to work with the Authorization sidecar.
 
 ## Updating CSM for Authorization Proxy Server Configuration
 

@@ -28,4 +28,4 @@ rpm -e <rpm_file_name>
 
 ## Uninstalling the sidecar-proxy in the CSI Driver
 
-To uninstall the sidecar-proxy in the CSI Driver, [uninstall](../../../drivers/uninstall) the driver and [reinstall](../../../drivers/installation) the driver using the original configuration secret.
+To uninstall the sidecar-proxy in the CSI Driver, [uninstall](../../../../helm/drivers/uninstall) the driver and [reinstall](../../../../helm/drivers/installation) the driver using the original configuration secret.
