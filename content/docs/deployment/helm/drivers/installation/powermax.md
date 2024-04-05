@@ -346,7 +346,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
 
 8. Install the driver using `csi-install.sh` bash script by running 
     ```bash
-    cd ../dell-csi-helm-installer && ./csi-install.sh --namespace powermax --values ./my-powermax-settings.yaml
+    cd ../dell-csi-helm-installer && ./csi-install.sh --namespace powermax --values ./my-powermax-settings.yaml --helm-charts-version csi-powermax-2.10.0
     ```
 9. Or you can also install the driver using standalone helm chart using the command 
    ```bash
@@ -354,6 +354,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
    ```
 
 *Note:* 
+- If you do not specify the `--helm-charts-version` flag, by default the `csi-install.sh` script will clone the version of the helm chart that is specified in the driver's [csi-install.sh](https://github.com/dell/csi-powermax/blob/main/dell-csi-helm-installer/csi-install.sh#L52) file. If you wish to install the driver using a different version of the helm chart, you need to include this flag. Also, remember to delete the `helm-charts` repository present in the `csi-powermax` directory if it was cloned before.
 - For detailed instructions on how to run the install scripts, see the readme document in the dell-csi-helm-installer folder.
 - There are a set of samples provided [here](#sample-values-file) to help you configure the driver with reverse proxy
 - This script also runs the verify.sh script in the same directory. You will be prompted to enter the credentials for each of the Kubernetes nodes. The `verify.sh` script needs the credentials to check if the iSCSI initiators have been configured on all nodes. You can also skip the verification step by specifying the `--skip-verify-node` option
