@@ -67,7 +67,7 @@ The following third-party components are optionally installed in the specified n
    
 4. Copy the default values.yaml file `cp charts/csm-authorization/values.yaml myvalues.yaml`
 
-6. Look over all the fields in `myvalues.yaml` and fill in/adjust any as needed.
+5. Look over all the fields in `myvalues.yaml` and fill in/adjust any as needed.
 
 | Parameter                | Description                                                                                                                                                                                                                                                                                                                                                                                                    | Required | Default |
 | ------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ------- |
