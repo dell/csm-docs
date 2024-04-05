@@ -6,20 +6,24 @@ description: >
   Dell Technologies (Dell) Container Storage Modules (CSM) for Authorization Uninstallation
 ---
 
+{{% pageinfo color="primary" %}}
+The CSM Authorization RPM will be deprecated in a future release. It is highly recommended that you use CSM Authorization Helm deployment or CSM Operator going forward.
+{{% /pageinfo %}}
+
 This section outlines the uninstallation steps for Container Storage Modules (CSM) for Authorization. 
 
-## Uninstall the CSM for Authorization Helm Chart
+## Uninstalling the RPM
 
-The command below removes all the Kubernetes components associated with the chart.
+To uninstall the rpm package on the system, you must first uninstall the K3s SELinux package if SELinux is enabled. To uninstall the K3s SELinux package, run: 
 
 ```bash
-helm uninstall authorization --namespace authorization
+rpm -e k3s-selinux
 ```
 
-You may also want to delete the karavi-config-secret secret.
+To uninstall the CSM Authorization rpm package on the system, run:
 
 ```bash
-kubectl delete secret karavi-config-secret -n authorization
+rpm -e <rpm_file_name>
 ```
 
 ## Uninstalling the sidecar-proxy in the CSI Driver
