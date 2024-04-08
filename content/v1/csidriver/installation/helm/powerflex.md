@@ -211,10 +211,11 @@ Use the below command to replace or update the secret:
 | skipCertificateValidation | A boolean that enables/disables certificate validation of the csm-authorization proxy server. | No | true |
 
 
-10. Install the driver using `csi-install.sh` bash script by running `cd dell-csi-helm-installer && ./csi-install.sh --namespace vxflexos --values myvalues.yaml`. You may modify the release name with the `--release` arg. If arg is not provided, release will be named `vxflexos` by default. 
+10. Install the driver using `csi-install.sh` bash script by running `cd dell-csi-helm-installer && ./csi-install.sh --namespace vxflexos --values myvalues.yaml --helm-charts-version <version>`. You may modify the release name with the `--release` arg. If arg is not provided, release will be named `vxflexos` by default. 
 Alternatively, to do a helm install solely with Helm charts (without shell scripts), refer to `helm/README.md`.
 
  *NOTE:*
+- The parameter `--helm-charts-version` is optional and if you do not specify the flag, by default the `csi-install.sh` script will clone the version of the helm chart that is specified in the driver's [csi-install.sh](https://github.com/dell/csi-powerflex/blob/main/dell-csi-helm-installer/csi-install.sh#L24) file. If you wish to install the driver using a different version of the helm chart, you need to include this flag. Also, remember to delete the `helm-charts` repository present in the `csi-powerflex` directory if it was cloned before.
 - For detailed instructions on how to run the install scripts, refer to the README.md  in the dell-csi-helm-installer folder.
 - Install script will validate MDM IP(s) in `vxflexos-config` secret and creates a new field consumed by the init container and sdc-monitor container
 - This install script also runs the `verify.sh` script. You will be prompted to enter the credentials for each of the Kubernetes nodes. 

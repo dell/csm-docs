@@ -211,8 +211,11 @@ Create isilon-creds secret using the following command:
 8.  Install the driver using `csi-install.sh` bash script and default yaml by running
     ```bash
     cd dell-csi-helm-installer && wget -O my-isilon-settings.yaml https://raw.githubusercontent.com/dell/helm-charts/csi-isilon-2.10.0/charts/csi-isilon/values.yaml &&
-    ./csi-install.sh --namespace isilon --values my-isilon-settings.yaml
+    ./csi-install.sh --namespace isilon --values  my-isilon-settings.yaml --helm-charts-version <version>
     ```
+
+*NOTE:*
+- The parameter `--helm-charts-version` is optional and if you do not specify the flag, by default the `csi-install.sh` script will clone the version of the helm chart that is specified in the driver's [csi-install.sh](https://github.com/dell/csi-powerscale/blob/main/dell-csi-helm-installer/csi-install.sh#L16) file. If you wish to install the driver using a different version of the helm chart, you need to include this flag. Also, remember to delete the `helm-charts` repository present in the `csi-powerscale` directory if it was cloned before.
 
 ## Certificate validation for OneFS REST API calls
 
