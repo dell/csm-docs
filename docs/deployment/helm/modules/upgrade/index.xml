@@ -23,48 +23,36 @@
       <description>
         
         
-        
-
-&lt;div class=&#34;pageinfo pageinfo-primary&#34;&gt;
-&lt;p&gt;The CSM Authorization RPM will be deprecated in a future release. It is highly recommended that you use CSM Authorization Helm deployment or CSM Operator going forward.&lt;/p&gt;
-
-&lt;/div&gt;
-
-&lt;p&gt;This section outlines the upgrade steps for Container Storage Modules (CSM) for Authorization.  The upgrade of CSM for Authorization is handled in 2 parts:&lt;/p&gt;
+        &lt;p&gt;This section outlines the upgrade steps for Container Storage Modules (CSM) for Authorization.  The upgrade of CSM for Authorization is handled in 2 parts:&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;Upgrading the CSM for Authorization proxy server&lt;/li&gt;
+&lt;li&gt;Helm Chart Upgrade&lt;/li&gt;
 &lt;li&gt;Upgrading the Dell CSI drivers with CSM for Authorization enabled&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id=&#34;upgrading-csm-for-authorization-proxy-server&#34;&gt;Upgrading CSM for Authorization proxy server&lt;/h3&gt;
-&lt;p&gt;Obtain the latest single binary installer RPM by following one of our two options &lt;a href=&#34;../../installation/authorization#single-binary-installer&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;To update the rpm package on the system, run the below command from within the extracted folder:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sh install_karavi_auth.sh --upgrade
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;As an option, on version 1.6.0, the Nodeports for the ingress controller can be specified:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sh install_karavi_auth.sh --upgrade  --traefik_web_port &amp;lt;web port number&amp;gt; --traefik_websecure_port &amp;lt;websecure port number&amp;gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Ex.:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sh install_karavi_auth.sh --upgrade  --traefik_web_port &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;30001&lt;/span&gt; --traefik_websecure_port &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;30002&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;To verify that the new version of the rpm is installed and K3s has been updated, run the below commands:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;rpm -qa &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; grep karavi
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;k3s kubectl version
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: The above steps manage install and upgrade of all dependencies that are required by the CSM for Authorization proxy server.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h3 id=&#34;upgrading-dell-csi-drivers-with-csm-for-authorization-enabled&#34;&gt;Upgrading Dell CSI Driver(s) with CSM for Authorization enabled&lt;/h3&gt;
+&lt;h2 id=&#34;helm-chart-upgrade&#34;&gt;Helm Chart Upgrade&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;To upgrade an existing Helm installation of CSM for Authorization to the latest release, download the latest Helm charts.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;helm repo update
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Check if the latest Helm chart version is available:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;helm search repo dell
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;NAME                            CHART VERSION   APP VERSION     DESCRIPTION
+dell/csm-authorization          1.10.0          1.10.0          CSM for Authorization is part of the [Container...
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Upgrade to the latest CSM for Authorization release:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;helm upgrade --version &lt;span style=&#34;color:#000&#34;&gt;$latest_chart_version&lt;/span&gt; -f myvalues.yaml authorization dell/csm-authorization -n authorization
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;upgrading-dell-csi-drivers-with-csm-for-authorization-enabled&#34;&gt;Upgrading Dell CSI Driver(s) with CSM for Authorization enabled&lt;/h2&gt;
 &lt;p&gt;Given a setup where the CSM for Authorization proxy server is already upgraded to the latest version, follow the upgrade instructions for the applicable CSI Driver(s) to upgrade the driver and the CSM for Authorization sidecar&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;../../../drivers/upgrade/powerflex/&#34;&gt;Upgrade PowerFlex CSI driver&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;../../../drivers/upgrade/powermax/&#34;&gt;Upgrade PowerMax CSI driver&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;../../../drivers/upgrade/isilon/&#34;&gt;Upgrade PowerScale CSI driver&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2 id=&#34;rollback&#34;&gt;Rollback&lt;/h2&gt;
-&lt;p&gt;This section outlines the rollback steps for Container Storage Modules (CSM) for Authorization.&lt;/p&gt;
-&lt;h3 id=&#34;rollback-csm-for-authorization-proxy-server&#34;&gt;Rollback CSM for Authorization proxy server&lt;/h3&gt;
-&lt;p&gt;To rollback the rpm package on the system, run the below command:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;rpm -Uvh --oldpackage karavi-authorization-&amp;lt;old_version&amp;gt;.x86_64.rpm --nopreun --nopostun
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
       </description>
     </item>
     

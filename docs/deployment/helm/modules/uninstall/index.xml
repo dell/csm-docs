@@ -41,19 +41,12 @@
       <description>
         
         
-        
-
-&lt;div class=&#34;pageinfo pageinfo-primary&#34;&gt;
-&lt;p&gt;The CSM Authorization RPM will be deprecated in a future release. It is highly recommended that you use CSM Authorization Helm deployment or CSM Operator going forward.&lt;/p&gt;
-
-&lt;/div&gt;
-
-&lt;p&gt;This section outlines the uninstallation steps for Container Storage Modules (CSM) for Authorization.&lt;/p&gt;
-&lt;h2 id=&#34;uninstalling-the-rpm&#34;&gt;Uninstalling the RPM&lt;/h2&gt;
-&lt;p&gt;To uninstall the rpm package on the system, you must first uninstall the K3s SELinux package if SELinux is enabled. To uninstall the K3s SELinux package, run:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;rpm -e k3s-selinux
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;To uninstall the CSM Authorization rpm package on the system, run:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;rpm -e &amp;lt;rpm_file_name&amp;gt;
+        &lt;p&gt;This section outlines the uninstallation steps for Container Storage Modules (CSM) for Authorization.&lt;/p&gt;
+&lt;h2 id=&#34;uninstall-the-csm-for-authorization-helm-chart&#34;&gt;Uninstall the CSM for Authorization Helm Chart&lt;/h2&gt;
+&lt;p&gt;The command below removes all the Kubernetes components associated with the chart.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;helm uninstall authorization --namespace authorization
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;You may also want to delete the karavi-config-secret secret.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl delete secret karavi-config-secret -n authorization
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;uninstalling-the-sidecar-proxy-in-the-csi-driver&#34;&gt;Uninstalling the sidecar-proxy in the CSI Driver&lt;/h2&gt;
 &lt;p&gt;To uninstall the sidecar-proxy in the CSI Driver, &lt;a href=&#34;../../../drivers/uninstall&#34;&gt;uninstall&lt;/a&gt; the driver and &lt;a href=&#34;../../../drivers/installation&#34;&gt;reinstall&lt;/a&gt; the driver using the original configuration secret.&lt;/p&gt;
 

@@ -1,8 +1,8 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Dell Technologies – CSM modules</title>
+    <title>Dell Technologies – CSM Modules</title>
     <link>https://dell.github.io/csm-docs/docs/deployment/helm/modules/</link>
-    <description>Recent content in CSM modules on Dell Technologies</description>
+    <description>Recent content in CSM Modules on Dell Technologies</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     
