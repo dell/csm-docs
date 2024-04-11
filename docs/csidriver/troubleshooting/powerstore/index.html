@@ -16,12 +16,12 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/docs/csidriver/troubleshooting/powerstore/" /><meta property="article:section" content="docs" />
 
-<meta property="article:modified_time" content="2024-03-21T02:39:59+05:30" />
+<meta property="article:modified_time" content="2024-04-11T10:20:11-03:00" />
 
 <meta itemprop="name" content="PowerStore">
 <meta itemprop="description" content="Troubleshooting PowerStore Driver">
-<meta itemprop="dateModified" content="2024-03-21T02:39:59+05:30" />
-<meta itemprop="wordCount" content="574">
+<meta itemprop="dateModified" content="2024-04-11T10:20:11-03:00" />
+<meta itemprop="wordCount" content="601">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="PowerStore"/>
 <meta name="twitter:description" content="Troubleshooting PowerStore Driver"/>
@@ -103,7 +103,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.ca2d1ceb8c8320d4ca7844ce08694079.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.5d0d41a0c5f195603570b92a821ba11c.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -125,7 +125,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.ca2d1ceb8c8320d4ca7844ce08694079.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.5d0d41a0c5f195603570b92a821ba11c.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -772,6 +772,10 @@
 <tr>
 <td>Volumes are not getting deleted on the array when PV&rsquo;s are deleted</td>
 <td>Ensure <code>persistentVolumeReclaimPolicy</code> is set to Delete.</td>
+</tr>
+<tr>
+<td>fsGroupPolicy may not work as expected without root privileges for NFS only <a href="https://github.com/kubernetes/examples/issues/260">https://github.com/kubernetes/examples/issues/260</a></td>
+<td>To get the desired behavior set “RootClientEnabled” = “true” in the storage class parameter</td>
 </tr>
 </tbody>
 </table>
