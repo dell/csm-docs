@@ -372,6 +372,10 @@
 &lt;td&gt;If the volume limit is exhausted and there are pending pods and PVCs due to &lt;code&gt;exceed max volume count&lt;/code&gt;, the pending PVCs will be bound to PVs and the pending pods will be scheduled to nodes when the driver pods are restarted.&lt;/td&gt;
 &lt;td&gt;It is advised not to have any pending pods or PVCs once the volume limit per node is exhausted on a CSI Driver. There is an open issue reported with kubenetes at &lt;a href=&#34;https://github.com/kubernetes/kubernetes/issues/95911&#34;&gt;https://github.com/kubernetes/kubernetes/issues/95911&lt;/a&gt; with the same behavior.&lt;/td&gt;
 &lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;fsGroupPolicy may not work as expected without root privileges for NFS only &lt;a href=&#34;https://github.com/kubernetes/examples/issues/260&#34;&gt;https://github.com/kubernetes/examples/issues/260&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;To get the desired behavior set “RootClientEnabled” = “true” in the storage class parameter&lt;/td&gt;
+&lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;h3 id=&#34;note&#34;&gt;Note:&lt;/h3&gt;

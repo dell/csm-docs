@@ -16,12 +16,12 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/docs/csidriver/troubleshooting/powerscale/" /><meta property="article:section" content="docs" />
 
-<meta property="article:modified_time" content="2024-02-14T10:19:49+01:00" />
+<meta property="article:modified_time" content="2024-04-11T10:20:11-03:00" />
 
 <meta itemprop="name" content="PowerScale">
 <meta itemprop="description" content="Troubleshooting PowerScale Driver">
-<meta itemprop="dateModified" content="2024-02-14T10:19:49+01:00" />
-<meta itemprop="wordCount" content="848">
+<meta itemprop="dateModified" content="2024-04-11T10:20:11-03:00" />
+<meta itemprop="wordCount" content="875">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="PowerScale"/>
 <meta name="twitter:description" content="Troubleshooting PowerScale Driver"/>
@@ -103,7 +103,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.ca2d1ceb8c8320d4ca7844ce08694079.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.5d0d41a0c5f195603570b92a821ba11c.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -125,7 +125,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.ca2d1ceb8c8320d4ca7844ce08694079.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.5d0d41a0c5f195603570b92a821ba11c.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -769,6 +769,10 @@
 <tr>
 <td>Driver install fails because of the incompatible helm values file specified in <code>dell-csi-helm-installer</code> - expected: v2.9.x, found: v2.8.0.</td>
 <td>Change driver version in each file in <code>dell/csi-powerscale/dell-csi-helm-installer</code> from 2.8.0 to 2.9.x</td>
+</tr>
+<tr>
+<td>fsGroupPolicy may not work as expected without root privileges for NFS only <a href="https://github.com/kubernetes/examples/issues/260">https://github.com/kubernetes/examples/issues/260</a></td>
+<td>To get the desired behavior set “RootClientEnabled” = “true” in the storage class parameter</td>
 </tr>
 </tbody>
 </table>
