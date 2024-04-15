@@ -18,14 +18,15 @@ Description: >
 
 
 
+
 ### New Features/Changes
 
-- [#926 - [FEATURE]: Fixing the linting, formatting and vetting issues](https://github.com/dell/csm/issues/926)
+- [#1221 - [FEATURE]: CSM 1.11 release-specific changes](https://github.com/dell/csm/issues/1221)
 
 ### Fixed Issues
 
-- [#1094 - [BUG]: CSM Operator offline install powerflex csi driver sidecar trying to pull from registry.k8s.io](https://github.com/dell/csm/issues/1094)
-- [#1174 - [BUG]: Kubelet Configuration Directory setting should not have a comment about default value being None](https://github.com/dell/csm/issues/1174)
+- [#1200 - [BUG]: CrashLoopBackOff and OOMKilled issue in pod : Dell CSM Operator Manager POD](https://github.com/dell/csm/issues/1200)
+- [#1205 - [BUG]: Operator doesn't support non-authorization namespace](https://github.com/dell/csm/issues/1205)
 
 ### Known Issues
 | Issue | Workaround |

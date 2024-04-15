@@ -18,9 +18,10 @@ Description: >
 
 
 
+
 ### New Features/Changes
 
-- [#926 - [FEATURE]: Fixing the linting, formatting and vetting issues](https://github.com/dell/csm/issues/926)
+- [#1221 - [FEATURE]: CSM 1.11 release-specific changes](https://github.com/dell/csm/issues/1221)
 
 ### Fixed Issues
 
