@@ -12,18 +12,15 @@ description: Release notes for PowerFlex CSI driver
 
 
 
+
 ### New Features/Changes
 
-- [#926 - [FEATURE]: Fixing the linting, formatting and vetting issues](https://github.com/dell/csm/issues/926)
+- [#1221 - [FEATURE]: CSM 1.11 release-specific changes](https://github.com/dell/csm/issues/1221)
 
 ### Fixed Issues
 
-- [#1081 - [BUG]: CSM driver repositories reference CSI Operator](https://github.com/dell/csm/issues/1081)
-- [#1086 - [BUG]: PowerFlex driver fails to start on RKE](https://github.com/dell/csm/issues/1086)
-- [#1101 - [BUG]: the `nasName` parameter in the powerflex secret is now mandatory](https://github.com/dell/csm/issues/1101)
-- [#1140 - [BUG]: Cert-csi tests are not reporting the passed testcases in K8S E2E tests ](https://github.com/dell/csm/issues/1140)
-- [#1163 - [BUG]: Resource quota bypass](https://github.com/dell/csm/issues/1163)
-- [#1174 - [BUG]: Kubelet Configuration Directory setting should not have a comment about default value being None](https://github.com/dell/csm/issues/1174)
+- [#1209 - [BUG]: Doc hyper links in driver Readme is broken](https://github.com/dell/csm/issues/1209)
+- [#1218 - [BUG]: Add the helm-charts-version parameter to the install command for all drivers in csm-docs](https://github.com/dell/csm/issues/1218)
 
 ### Known Issues
 
