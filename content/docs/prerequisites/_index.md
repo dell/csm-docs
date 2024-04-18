@@ -64,3 +64,26 @@ Container Storage Modules (CSM) does not officially support specific operating s
 
 > Notes:
 > * Encryption and Application Mobility are available as a Technical Preview only and are not officially supported.
+
+## CSM Operator compatibility matrix
+
+The table below lists the driver and modules versions installable with the CSM Operator:
+{{<table "table table-striped table-bordered table-sm">}}
+| CSI Driver         | Version | CSM Authorization | CSM Replication | CSM Observability | CSM Resiliency |
+| ------------------ |---------|-------------------|-----------------|-------------------|----------------|
+| CSI PowerScale     | 2.10.0   | ✔ 1.10.0           | ✔ 1.8.0        | ✔ 1.8.0           | ✔ 1.9.0       |
+| CSI PowerScale     | 2.9.0   | ✔ 1.9.0           | ✔ 1.7.0        | ✔ 1.7.0           | ✔ 1.8.0       |
+| CSI PowerScale     | 2.8.0   | ✔ 1.8.0           | ✔ 1.6.0        | ✔ 1.6.0           | ✔ 1.7.0       |
+| CSI PowerFlex      | 2.10.0   | ✔ 1.10.0           | ✔ 1.8.0        | ✔ 1.8.0           | ✔ 1.9.0       |
+| CSI PowerFlex      | 2.9.0   | ✔ 1.9.0           | ✔ 1.7.0        | ✔ 1.7.0           | ✔ 1.8.0       |
+| CSI PowerFlex      | 2.8.0   | ✔ 1.8.0           | ✔ 1.6.0        | ✔ 1.6.0           | ✔ 1.7.0       |
+| CSI PowerStore     | 2.10.0   | ❌                | ❌             | ❌                | ✔ 1.9.0       |
+| CSI PowerStore     | 2.9.0   | ❌                | ❌             | ❌                | ✔ 1.8.0       |
+| CSI PowerStore     | 2.8.0   | ❌                | ❌             | ❌                | ✔ 1.7.0       |
+| CSI PowerMax       | 2.10.0   | ✔ 1.10.0           | ✔ 1.8.0        | ✔ 1.8.0           | ❌            |
+| CSI PowerMax       | 2.9.0   | ✔ 1.9.0           | ✔ 1.7.0        | ✔ 1.7.0           | ❌            |
+| CSI PowerMax       | 2.8.0   | ✔ 1.8.0           | ✔ 1.6.0        | ✔ 1.6.0           | ❌            |
+| CSI Unity XT       | 2.10.0   | ❌                | ❌             | ❌                | ❌            |
+| CSI Unity XT       | 2.9.0   | ❌                | ❌             | ❌                | ❌            |
+| CSI Unity XT       | 2.8.0   | ❌                | ❌             | ❌                | ❌            |
+{{</table>}}
