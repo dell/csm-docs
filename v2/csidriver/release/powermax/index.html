@@ -16,12 +16,12 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/v2/csidriver/release/powermax/" /><meta property="article:section" content="v2" />
 
-<meta property="article:modified_time" content="2024-03-21T02:39:59+05:30" />
+<meta property="article:modified_time" content="2024-04-18T12:44:49+05:30" />
 
 <meta itemprop="name" content="PowerMax">
 <meta itemprop="description" content="Release notes for PowerMax CSI driver">
-<meta itemprop="dateModified" content="2024-03-21T02:39:59+05:30" />
-<meta itemprop="wordCount" content="378">
+<meta itemprop="dateModified" content="2024-04-18T12:44:49+05:30" />
+<meta itemprop="wordCount" content="420">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="PowerMax"/>
 <meta name="twitter:description" content="Release notes for PowerMax CSI driver"/>
@@ -103,7 +103,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.5d0d41a0c5f195603570b92a821ba11c.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.ae3751e8a750fdbfd94e236f446add5a.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -125,7 +125,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.5d0d41a0c5f195603570b92a821ba11c.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.ae3751e8a750fdbfd94e236f446add5a.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -735,6 +735,10 @@ Linked Proxy mode for CSI reverse proxy is no longer actively maintained or supp
 <tr>
 <td>If the volume limit is exhausted and there are pending pods and PVCs due to <code>exceed max volume count</code>, the pending PVCs will be bound to PVs and the pending pods will be scheduled to nodes when the driver pods are restarted.</td>
 <td>It is advised not to have any pending pods or PVCs once the volume limit per node is exhausted on a CSI Driver. There is an open issue reported with kubenetes at <a href="https://github.com/kubernetes/kubernetes/issues/95911">https://github.com/kubernetes/kubernetes/issues/95911</a> with the same behavior.</td>
+</tr>
+<tr>
+<td>When the driver is installed using CSM Operator , few times, pods created using block volume are getting stuck in containercreating/terminating state or devices are not available inside the pod.</td>
+<td>Update the daemonset with parameter <code>mountPropagation: &quot;Bidirectional&quot;</code> for volumedevices-path under volumeMounts section.</td>
 </tr>
 </tbody>
 </table>
