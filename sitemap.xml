@@ -71,9 +71,6 @@
     <loc>https://dell.github.io/csm-docs/docs/deployment/rpm/modules/</loc>
     <lastmod>2024-04-08T15:49:08-04:00</lastmod>
   </url><url>
-    <loc>https://dell.github.io/csm-docs/docs/deployment/csmoperator/</loc>
-    <lastmod>2024-03-21T02:39:59+05:30</lastmod>
-  </url><url>
     <loc>https://dell.github.io/csm-docs/v1/deployment/csmoperator/</loc>
     <lastmod>2024-03-21T18:25:42+05:30</lastmod>
   </url><url>
@@ -386,9 +383,6 @@
     <loc>https://dell.github.io/csm-docs/docs/deployment/helm/modules/installation/replication/</loc>
     <lastmod>2024-03-21T02:39:59+05:30</lastmod>
   </url><url>
-    <loc>https://dell.github.io/csm-docs/docs/deployment/rpm/</loc>
-    <lastmod>2024-04-08T15:49:08-04:00</lastmod>
-  </url><url>
     <loc>https://dell.github.io/csm-docs/docs/deployment/helm/modules/uninstall/</loc>
     <lastmod>2024-04-08T15:49:08-04:00</lastmod>
   </url><url>
@@ -487,6 +481,9 @@
   </url><url>
     <loc>https://dell.github.io/csm-docs/v3/deployment/csmoperator/modules/</loc>
     <lastmod>2024-03-21T02:39:59+05:30</lastmod>
+  </url><url>
+    <loc>https://dell.github.io/csm-docs/docs/deployment/csmoperator/</loc>
+    <lastmod>2024-04-18T11:46:06+02:00</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/docs/interactive-tutorials/csm-operator/</loc>
     <lastmod>2024-04-18T10:23:39+02:00</lastmod>
@@ -1150,6 +1147,9 @@
   </url><url>
     <loc>https://dell.github.io/csm-docs/v3/secure/encryption/release/</loc>
     <lastmod>2023-12-13T23:10:42+05:30</lastmod>
+  </url><url>
+    <loc>https://dell.github.io/csm-docs/docs/deployment/rpm/</loc>
+    <lastmod>2024-04-18T11:46:06+02:00</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/docs/deployment/helm/modules/installation/replication/storageclasses/</loc>
     <lastmod>2024-03-21T02:39:59+05:30</lastmod>
