@@ -83,6 +83,9 @@
     <loc>https://dell.github.io/csm-docs/v3/deployment/csmoperator/</loc>
     <lastmod>2024-03-21T02:39:59+05:30</lastmod>
   </url><url>
+    <loc>https://dell.github.io/csm-docs/docs/interactive-tutorials/csm-quickstart/</loc>
+    <lastmod>2024-04-18T10:23:39+02:00</lastmod>
+  </url><url>
     <loc>https://dell.github.io/csm-docs/v2/csidriver/upgradation/drivers/operator/</loc>
     <lastmod>2024-03-21T02:39:59+05:30</lastmod>
   </url><url>
@@ -485,6 +488,9 @@
     <loc>https://dell.github.io/csm-docs/v3/deployment/csmoperator/modules/</loc>
     <lastmod>2024-03-21T02:39:59+05:30</lastmod>
   </url><url>
+    <loc>https://dell.github.io/csm-docs/docs/interactive-tutorials/csm-operator/</loc>
+    <lastmod>2024-04-18T10:23:39+02:00</lastmod>
+  </url><url>
     <loc>https://dell.github.io/csm-docs/docs/deployment/</loc>
     <lastmod>2024-03-21T02:39:59+05:30</lastmod>
   </url><url>
@@ -522,7 +528,7 @@
     <lastmod>2024-03-21T02:39:59+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/docs/interactive-tutorials/</loc>
-    <lastmod>2024-03-19T11:02:31+01:00</lastmod>
+    <lastmod>2024-04-18T10:23:39+02:00</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/v1/interactive-tutorials/</loc>
     <lastmod>2023-06-24T09:21:08+05:30</lastmod>
