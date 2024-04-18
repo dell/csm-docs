@@ -9,29 +9,11 @@ The Dell Container Storage Modules Operator is a Kubernetes Operator, which can 
 
 ## Supported CSM Components
 
-The table below lists the driver and modules versions installable with the CSM Operator:
+Exhaustive sample files for the CRs are available [here (current version: v1.5)](https://github.com/dell/csm-operator/tree/v1.5.0/samples).
 
-| CSI Driver         | Version | CSM Authorization | CSM Replication | CSM Observability | CSM Resiliency |
-| ------------------ |---------|-------------------|-----------------|-------------------|----------------|
-| CSI PowerScale     | 2.10.0   | ✔ 1.10.0           | ✔ 1.8.0        | ✔ 1.8.0           | ✔ 1.9.0       |
-| CSI PowerScale     | 2.9.0   | ✔ 1.9.0           | ✔ 1.7.0        | ✔ 1.7.0           | ✔ 1.8.0       |
-| CSI PowerScale     | 2.8.0   | ✔ 1.8.0           | ✔ 1.6.0        | ✔ 1.6.0           | ✔ 1.7.0       |
-| CSI PowerFlex      | 2.10.0   | ✔ 1.10.0           | ✔ 1.8.0        | ✔ 1.8.0           | ✔ 1.9.0       |
-| CSI PowerFlex      | 2.9.0   | ✔ 1.9.0           | ✔ 1.7.0        | ✔ 1.7.0           | ✔ 1.8.0       |
-| CSI PowerFlex      | 2.8.0   | ✔ 1.8.0           | ✔ 1.6.0        | ✔ 1.6.0           | ✔ 1.7.0       |
-| CSI PowerStore     | 2.10.0   | ❌                | ❌             | ❌                | ✔ 1.9.0       |
-| CSI PowerStore     | 2.9.0   | ❌                | ❌             | ❌                | ✔ 1.8.0       |
-| CSI PowerStore     | 2.8.0   | ❌                | ❌             | ❌                | ✔ 1.7.0       |
-| CSI PowerMax       | 2.10.0   | ✔ 1.10.0           | ✔ 1.8.0        | ✔ 1.8.0           | ❌            |
-| CSI PowerMax       | 2.9.0   | ✔ 1.9.0           | ✔ 1.7.0        | ✔ 1.7.0           | ❌            |
-| CSI PowerMax       | 2.8.0   | ✔ 1.8.0           | ✔ 1.6.0        | ✔ 1.6.0           | ❌            |
-| CSI Unity XT       | 2.10.0   | ❌                | ❌             | ❌                | ❌            |
-| CSI Unity XT       | 2.9.0   | ❌                | ❌             | ❌                | ❌            |
-| CSI Unity XT       | 2.8.0   | ❌                | ❌             | ❌                | ❌            |
+These CR will be used for new deployment or upgrade. In most case, it is recommended to use the latest available version.
 
->NOTE:
->- Refer to sample files [here](https://github.com/dell/csm-operator/tree/main/samples).
-
+The full compatibility matrix of CSI/CSM versions for the CSM Operator is available [here](../../prerequisites/#csm-operator-compatibility-matrix)
 ## Installation
 Dell CSM Operator can be installed manually or via Operator Hub.
 
@@ -46,7 +28,13 @@ The installation process involves the creation of a `Subscription` object either
 
 ![OpenShit Operator Hub CSM install](operator_hub_install.gif)
 
->NOTE: Dell CSM Operator is distributed as both `Certified` & `Community` editions. Both editions have the same codebase and are supported by Dell Technologies, the only difference is that the `Certified` version is validated by RedHat. The `Certified` version is often released couple of days/weeks after the `Community` version.
+### Certified vs Community
+Dell CSM Operator is distributed as both `Certified` & `Community` editions. 
+
+Both editions have the same codebase and are supported by Dell Technologies, the only differences are:
+* The `Certified` version is validated by RedHat.
+* The `Certified` version is often released couple of days/weeks after the `Community` version.
+* The `Certified` version can only be installed on explicitely tested Openshift versions, while the `Community` version can be installed anywhere and with any Openshift version.
 
 ### Manual Installation on a cluster without OLM
 
