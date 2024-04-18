@@ -5,7 +5,7 @@ description: Container Storage Modules Operator
 weight: 1
 ---
 {{% pageinfo color="primary" %}}
-Please be advised the Dell CSM Operator will undergo planned maintenance on Thursday, 4/18/2024 from 2:00 pm to 02:00 am (UTC) (approximately 12 hours). During this period, the following Dell CSM Operator versions will be unavailable for new installations and upgrades:
+Please be advised the Dell CSM Operator will undergo planned maintenance on Thursday, 4/18/2024 from 2:00 pm to 04:00 am (UTC) (approximately 14 hours). During this period, the following Dell CSM Operator versions will be unavailable for new installations and upgrades:
 
 - 1.3.0
 - 1.4.0
