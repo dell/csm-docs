@@ -99,7 +99,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.24291c8d9f36dac91cd1fffc62aa4547.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.d4e2414e732df796cf235dbb103b4901.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -121,7 +121,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.24291c8d9f36dac91cd1fffc62aa4547.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.d4e2414e732df796cf235dbb103b4901.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -669,6 +669,7 @@
     <li><a href="#supported-container-orchestrator-platforms">Supported Container Orchestrator Platforms</a></li>
     <li><a href="#tested-host-operating-systems">Tested Host Operating Systems</a></li>
     <li><a href="#supported-csm-modules">Supported CSM Modules</a></li>
+    <li><a href="#csm-operator-compatibility-matrix">CSM Operator compatibility matrix</a></li>
   </ul>
 </nav>
 
@@ -909,6 +910,149 @@
 <li>Encryption and Application Mobility are available as a Technical Preview only and are not officially supported.</li>
 </ul>
 </blockquote>
+<h2 id="csm-operator-compatibility-matrix">CSM Operator compatibility matrix</h2>
+<p>The table below lists the driver and modules versions installable with the CSM Operator:
+
+
+
+
+
+<table class="table table-striped table-bordered table-sm">
+<thead>
+<tr>
+<th>CSI Driver</th>
+<th>Version</th>
+<th>CSM Authorization</th>
+<th>CSM Replication</th>
+<th>CSM Observability</th>
+<th>CSM Resiliency</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CSI PowerScale</td>
+<td>2.10.0</td>
+<td>✔ 1.10.0</td>
+<td>✔ 1.8.0</td>
+<td>✔ 1.8.0</td>
+<td>✔ 1.9.0</td>
+</tr>
+<tr>
+<td>CSI PowerScale</td>
+<td>2.9.0</td>
+<td>✔ 1.9.0</td>
+<td>✔ 1.7.0</td>
+<td>✔ 1.7.0</td>
+<td>✔ 1.8.0</td>
+</tr>
+<tr>
+<td>CSI PowerScale</td>
+<td>2.8.0</td>
+<td>✔ 1.8.0</td>
+<td>✔ 1.6.0</td>
+<td>✔ 1.6.0</td>
+<td>✔ 1.7.0</td>
+</tr>
+<tr>
+<td>CSI PowerFlex</td>
+<td>2.10.0</td>
+<td>✔ 1.10.0</td>
+<td>✔ 1.8.0</td>
+<td>✔ 1.8.0</td>
+<td>✔ 1.9.0</td>
+</tr>
+<tr>
+<td>CSI PowerFlex</td>
+<td>2.9.0</td>
+<td>✔ 1.9.0</td>
+<td>✔ 1.7.0</td>
+<td>✔ 1.7.0</td>
+<td>✔ 1.8.0</td>
+</tr>
+<tr>
+<td>CSI PowerFlex</td>
+<td>2.8.0</td>
+<td>✔ 1.8.0</td>
+<td>✔ 1.6.0</td>
+<td>✔ 1.6.0</td>
+<td>✔ 1.7.0</td>
+</tr>
+<tr>
+<td>CSI PowerStore</td>
+<td>2.10.0</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+<td>✔ 1.9.0</td>
+</tr>
+<tr>
+<td>CSI PowerStore</td>
+<td>2.9.0</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+<td>✔ 1.8.0</td>
+</tr>
+<tr>
+<td>CSI PowerStore</td>
+<td>2.8.0</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+<td>✔ 1.7.0</td>
+</tr>
+<tr>
+<td>CSI PowerMax</td>
+<td>2.10.0</td>
+<td>✔ 1.10.0</td>
+<td>✔ 1.8.0</td>
+<td>✔ 1.8.0</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>CSI PowerMax</td>
+<td>2.9.0</td>
+<td>✔ 1.9.0</td>
+<td>✔ 1.7.0</td>
+<td>✔ 1.7.0</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>CSI PowerMax</td>
+<td>2.8.0</td>
+<td>✔ 1.8.0</td>
+<td>✔ 1.6.0</td>
+<td>✔ 1.6.0</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>CSI Unity XT</td>
+<td>2.10.0</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>CSI Unity XT</td>
+<td>2.9.0</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>CSI Unity XT</td>
+<td>2.8.0</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+</tbody>
+</table>
+
+</p>
 
         <div class="section-index">
     
