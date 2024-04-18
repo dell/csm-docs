@@ -32,9 +32,10 @@ The installation process involves the creation of a `Subscription` object either
 Dell CSM Operator is distributed as both `Certified` & `Community` editions. 
 
 Both editions have the same codebase and are supported by Dell Technologies, the only differences are:
-* The `Certified` version is validated by RedHat.
+* The `Certified` version is officially supported by Redhat by partnering with software vendors.
 * The `Certified` version is often released couple of days/weeks after the `Community` version.
-* The `Certified` version can only be installed on explicitely tested Openshift versions, while the `Community` version can be installed anywhere and with any Openshift version.
+* The `Certified` version is specific to Openshift and can only be installed on specific Openshift versions where it is certified.
+* The `Community` can be installed on any Kubernetes distributions.
 
 ### Manual Installation on a cluster without OLM
 
