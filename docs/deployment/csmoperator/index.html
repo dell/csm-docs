@@ -99,7 +99,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.24291c8d9f36dac91cd1fffc62aa4547.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.d4e2414e732df796cf235dbb103b4901.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -121,7 +121,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.24291c8d9f36dac91cd1fffc62aa4547.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.d4e2414e732df796cf235dbb103b4901.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -669,6 +669,7 @@
     <li><a href="#installation">Installation</a>
       <ul>
         <li><a href="#openshift-installation-via-operator-hub">OpenShift Installation via Operator Hub</a></li>
+        <li><a href="#certified-vs-community">Certified vs Community</a></li>
         <li><a href="#manual-installation-on-a-cluster-without-olm">Manual Installation on a cluster without OLM</a></li>
         <li><a href="#offline-bundle-installation-on-a-cluster-without-olm">Offline Bundle Installation on a cluster without OLM</a></li>
       </ul>
@@ -756,147 +757,9 @@
 
 <p>The Dell Container Storage Modules Operator is a Kubernetes Operator, which can be used to install and manage the CSI Drivers and CSM Modules provided by Dell for various storage platforms. This operator is available as a community operator for upstream Kubernetes and can be deployed using OperatorHub.io. The operator can be installed using OLM (Operator Lifecycle Manager) or manually.</p>
 <h2 id="supported-csm-components">Supported CSM Components</h2>
-<p>The table below lists the driver and modules versions installable with the CSM Operator:</p>
-<table>
-<thead>
-<tr>
-<th>CSI Driver</th>
-<th>Version</th>
-<th>CSM Authorization</th>
-<th>CSM Replication</th>
-<th>CSM Observability</th>
-<th>CSM Resiliency</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>CSI PowerScale</td>
-<td>2.10.0</td>
-<td>✔ 1.10.0</td>
-<td>✔ 1.8.0</td>
-<td>✔ 1.8.0</td>
-<td>✔ 1.9.0</td>
-</tr>
-<tr>
-<td>CSI PowerScale</td>
-<td>2.9.0</td>
-<td>✔ 1.9.0</td>
-<td>✔ 1.7.0</td>
-<td>✔ 1.7.0</td>
-<td>✔ 1.8.0</td>
-</tr>
-<tr>
-<td>CSI PowerScale</td>
-<td>2.8.0</td>
-<td>✔ 1.8.0</td>
-<td>✔ 1.6.0</td>
-<td>✔ 1.6.0</td>
-<td>✔ 1.7.0</td>
-</tr>
-<tr>
-<td>CSI PowerFlex</td>
-<td>2.10.0</td>
-<td>✔ 1.10.0</td>
-<td>✔ 1.8.0</td>
-<td>✔ 1.8.0</td>
-<td>✔ 1.9.0</td>
-</tr>
-<tr>
-<td>CSI PowerFlex</td>
-<td>2.9.0</td>
-<td>✔ 1.9.0</td>
-<td>✔ 1.7.0</td>
-<td>✔ 1.7.0</td>
-<td>✔ 1.8.0</td>
-</tr>
-<tr>
-<td>CSI PowerFlex</td>
-<td>2.8.0</td>
-<td>✔ 1.8.0</td>
-<td>✔ 1.6.0</td>
-<td>✔ 1.6.0</td>
-<td>✔ 1.7.0</td>
-</tr>
-<tr>
-<td>CSI PowerStore</td>
-<td>2.10.0</td>
-<td>❌</td>
-<td>❌</td>
-<td>❌</td>
-<td>✔ 1.9.0</td>
-</tr>
-<tr>
-<td>CSI PowerStore</td>
-<td>2.9.0</td>
-<td>❌</td>
-<td>❌</td>
-<td>❌</td>
-<td>✔ 1.8.0</td>
-</tr>
-<tr>
-<td>CSI PowerStore</td>
-<td>2.8.0</td>
-<td>❌</td>
-<td>❌</td>
-<td>❌</td>
-<td>✔ 1.7.0</td>
-</tr>
-<tr>
-<td>CSI PowerMax</td>
-<td>2.10.0</td>
-<td>✔ 1.10.0</td>
-<td>✔ 1.8.0</td>
-<td>✔ 1.8.0</td>
-<td>❌</td>
-</tr>
-<tr>
-<td>CSI PowerMax</td>
-<td>2.9.0</td>
-<td>✔ 1.9.0</td>
-<td>✔ 1.7.0</td>
-<td>✔ 1.7.0</td>
-<td>❌</td>
-</tr>
-<tr>
-<td>CSI PowerMax</td>
-<td>2.8.0</td>
-<td>✔ 1.8.0</td>
-<td>✔ 1.6.0</td>
-<td>✔ 1.6.0</td>
-<td>❌</td>
-</tr>
-<tr>
-<td>CSI Unity XT</td>
-<td>2.10.0</td>
-<td>❌</td>
-<td>❌</td>
-<td>❌</td>
-<td>❌</td>
-</tr>
-<tr>
-<td>CSI Unity XT</td>
-<td>2.9.0</td>
-<td>❌</td>
-<td>❌</td>
-<td>❌</td>
-<td>❌</td>
-</tr>
-<tr>
-<td>CSI Unity XT</td>
-<td>2.8.0</td>
-<td>❌</td>
-<td>❌</td>
-<td>❌</td>
-<td>❌</td>
-</tr>
-</tbody>
-</table>
-<blockquote>
-<p>NOTE:</p>
-<ul>
-<li>Refer to sample files <a href="https://github.com/dell/csm-operator/tree/main/samples">here</a>.</li>
-</ul>
-</blockquote>
+<p>Exhaustive sample files for the CRs are available <a href="https://github.com/dell/csm-operator/tree/v1.5.0/samples">here (current version: v1.5)</a>.</p>
+<p>These CR will be used for new deployment or upgrade. In most case, it is recommended to use the latest available version.</p>
+<p>The full compatibility matrix of CSI/CSM versions for the CSM Operator is available <a href="../../prerequisites/#csm-operator-compatibility-matrix">here</a></p>
 <h2 id="installation">Installation</h2>
 <p>Dell CSM Operator can be installed manually or via Operator Hub.</p>
 <p>Once installed you will be able to deploy <a href="drivers">drivers</a> and <a href="modules">modules</a> from the Operator.</p>
@@ -908,9 +771,15 @@
 <li><em>Manual</em> - If you want a cluster administrator to manually review and approve the <code>InstallPlan</code> for installation/upgrades.</li>
 </ul>
 <p><img src="operator_hub_install.gif" alt="OpenShit Operator Hub CSM install"></p>
-<blockquote>
-<p>NOTE: Dell CSM Operator is distributed as both <code>Certified</code> &amp; <code>Community</code> editions. Both editions have the same codebase and are supported by Dell Technologies, the only difference is that the <code>Certified</code> version is validated by RedHat. The <code>Certified</code> version is often released couple of days/weeks after the <code>Community</code> version.</p>
-</blockquote>
+<h3 id="certified-vs-community">Certified vs Community</h3>
+<p>Dell CSM Operator is distributed as both <code>Certified</code> &amp; <code>Community</code> editions.</p>
+<p>Both editions have the same codebase and are supported by Dell Technologies, the only differences are:</p>
+<ul>
+<li>The <code>Certified</code> version is officially supported by Redhat by partnering with software vendors.</li>
+<li>The <code>Certified</code> version is often released couple of days/weeks after the <code>Community</code> version.</li>
+<li>The <code>Certified</code> version is specific to Openshift and can only be installed on specific Openshift versions where it is certified.</li>
+<li>The <code>Community</code> can be installed on any Kubernetes distributions.</li>
+</ul>
 <h3 id="manual-installation-on-a-cluster-without-olm">Manual Installation on a cluster without OLM</h3>
 <ol>
 <li>Install volume snapshot CRDs. For detailed snapshot setup procedure, <a href="../../snapshots/#volume-snapshot-feature">click here</a>.</li>
