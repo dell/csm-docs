@@ -154,6 +154,10 @@
 &lt;td&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1070&#34;&gt;Node stage is failing with error &amp;ldquo;wwn for FC device not found&amp;rdquo;&lt;/a&gt;&lt;/td&gt;
 &lt;td&gt;This is an intermittent issue, rebooting the node will resolve this issue&lt;/td&gt;
 &lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;When the driver is installed using CSM Operator , few times, pods created using block volume are getting stuck in containercreating/terminating state or devices are not available inside the pod.&lt;/td&gt;
+&lt;td&gt;Update the daemonset with parameter &lt;code&gt;mountPropagation: &amp;quot;Bidirectional&amp;quot;&lt;/code&gt; for volumedevices-path under volumeMounts section.&lt;/td&gt;
+&lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;h3 id=&#34;note&#34;&gt;Note:&lt;/h3&gt;
