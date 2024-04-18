@@ -4,6 +4,19 @@ linkTitle: "CSM Operator"
 description: Container Storage Modules Operator
 weight: 2
 ---
+{{% pageinfo color="primary" %}}
+Please be advised the Dell CSM Operator will undergo planned maintenance on Thursday, 4/18/2024 from 2:00 pm to 04:00 am (UTC) (approximately 14 hours). During this period, the following Dell CSM Operator versions will be unavailable for new installations and upgrades:
+
+- 1.3.0
+- 1.4.0
+- 1.4.2
+- 1.4.3
+- 1.4.4 
+ 
+Dell CSM Operators that are already in use will not be impacted and can still be managed by the user.
+
+We apologize for any inconvenience caused and appreciate your patience. Please reach out on [GITHUB Link](https://github.com/dell/csm/issues) if you have any questions.
+{{% /pageinfo %}}
 
 The Dell Container Storage Modules Operator is a Kubernetes Operator, which can be used to install and manage the CSI Drivers and CSM Modules provided by Dell for various storage platforms. This operator is available as a community operator for upstream Kubernetes and can be deployed using OperatorHub.io. The operator can be installed using OLM (Operator Lifecycle Manager) or manually.
 
