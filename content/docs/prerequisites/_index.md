@@ -14,7 +14,7 @@ weight: 1
 | PowerFlex | 3.6.x, 4.0.x, 4.5.x | [SDC](https://www.dell.com/support/home/en-us/product-support/product/scaleio/drivers)|
 | Unity XT | 5.1.x, 5.2.x, 5.3.0 | iscsi-initiator-utils<br>multipathd<br>nfs-utils |
 | PowerScale | OneFS 9.3, 9.4, 9.5.0.x (x >= 5) | nfs-utils |
-| PowerStore  | 3.0, 3.2, 3.5 | iscsi-initiator-utils<br>multipathd<br>nvme-cli<br>nfs-utils |
+| PowerStore  | 3.0, 3.2, 3.5, 3.6 | iscsi-initiator-utils<br>multipathd<br>nvme-cli<br>nfs-utils |
 | ObjectScale | 1.2.x | - |
 {{</table>}}
 
