@@ -12,12 +12,14 @@ description: Release notes for CSM Installation Wizard
 
 
 
+
 ### New Features/Changes
 
+There are no new features in this release.
 
 ### Fixed Issues
 
-
+There are no issues fixed in this release.
 ### Known Issues
 
 There are no known issues in this release
