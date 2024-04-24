@@ -111,6 +111,7 @@ csi-powermax:
   portGroups: "$POWERMAX_PORT_GROUPS"
   fsGroupPolicy: "$FSGROUP_POLICY"
   maxPowerMaxVolumesPerNode: $MAX_VOLUMES_PER_NODE
+  podmonAPIPort: 8083
   enableCHAP: $ISCSI_CHAP_ENABLED
   transportProtocol: "$NODE_TRANSPORT_PROTOCOL"
   storageCapacity:
@@ -147,6 +148,31 @@ csi-powermax:
     deployAsSidecar: true
   replication:
     enabled: $REPLICATION_ENABLED
+  podmon:
+    enabled: $RESILIENCY_ENABLED
+    controller:
+    args:
+      - "--csisock=unix:/var/run/csi/csi.sock"
+      - "--labelvalue=csi-powermax"
+      - "--arrayConnectivityPollRate=60"
+      - "--driverPath=csi-powermax.dellemc.com"
+      - "--mode=controller"
+      - "--skipArrayConnectionValidation=false"
+      - "--driver-config-params=/powermax-config-params/driver-config-params.yaml"
+      - "--driverPodLabelValue=dell-storage"
+      - "--ignoreVolumelessPods=false"
+
+  node:
+    args:
+      - "--csisock=unix:/var/lib/kubelet/plugins/powermax.emc.dell.com/csi_sock"
+      - "--labelvalue=csi-powermax"
+      - "--arrayConnectivityPollRate=60"
+      - "--driverPath=csi-powermax.dellemc.com"
+      - "--mode=node"
+      - "--leaderelection=false"
+      - "--driver-config-params=/powermax-config-params/driver-config-params.yaml"
+      - "--driverPodLabelValue=dell-storage"
+      - "--ignoreVolumelessPods=false"
   migration:
     enabled: $MIGRATION_ENABLED
   authorization:
