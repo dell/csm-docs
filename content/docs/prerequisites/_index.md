@@ -8,14 +8,14 @@ weight: 1
 ## Supported Storage Platforms
 
 {{<table "table table-striped table-bordered table-sm">}}
-| Platform      | Version          | OS Dependencies          |
-|---------------|:----------------:|:------------------------:|
+| Platform      | Version             | OS Dependencies          |
+|---------------|:-------------------:|:------------------------:|
 | PowerMax    | PowerMax 2500/8500 PowerMaxOS 10 (6079)<br>PowerMaxOS 10.0.1 (6079)<br>PowerMaxOS 10.1 (6079)<br>PowerMax 2000/8000 - 5978.711.711, 5978.714.714<br>5978.479.479<br>Unisphere 10.0,10.0.1,10.1 | iscsi-initiator-utils<br>multipathd or powerpath<br>nvme-cli<br>nfs-utils |
-| PowerFlex | 3.6.x, 4.0.x, 4.5.x | [SDC](https://www.dell.com/support/home/en-us/product-support/product/scaleio/drivers)|
-| Unity XT | 5.1.x, 5.2.x, 5.3.0 | iscsi-initiator-utils<br>multipathd<br>nfs-utils |
-| PowerScale | OneFS 9.3, 9.4, 9.5.0.x (x >= 5) | nfs-utils |
-| PowerStore  | 3.0, 3.2, 3.5, 3.6 | iscsi-initiator-utils<br>multipathd<br>nvme-cli<br>nfs-utils |
-| ObjectScale | 1.2.x | - |
+| PowerFlex     | 3.6.x, 4.0.x, 4.5.x | [SDC](https://www.dell.com/support/home/en-us/product-support/product/scaleio/drivers)|
+| Unity XT      | 5.1.x, 5.2.x, 5.3.0 | iscsi-initiator-utils<br>multipathd<br>nfs-utils |
+| PowerScale    | OneFS 9.3, 9.4, 9.5.0.x (x >= 5) | nfs-utils |
+| PowerStore    | 3.0, 3.2, 3.5, 3.6  | iscsi-initiator-utils<br>multipathd<br>nvme-cli<br>nfs-utils |
+| ObjectScale   | 1.2.x               | - |
 {{</table>}}
 
 > Notes:
@@ -24,14 +24,14 @@ weight: 1
 ## Supported Container Orchestrator Platforms
 
 {{<table "table table-striped table-bordered table-sm">}}
-| Platform      | Version          |
-|---------------|:----------------:|
-| Kubernetes    | 1.27, 1.28, 1.29 |
-| Red Hat OpenShift | 4.13, 4.14 |
-| Mirantis Kubernetes Engine | 3.7.x |
-| Google Anthos |        1.15      |
-| Rancher Kubernetes Engine | 1.4.x |
-| VMware Tanzu | 7.0 |
+| Platform                   | Version          |
+|----------------------------|:----------------:|
+| Kubernetes                 | 1.27, 1.28, 1.29 |
+| Red Hat OpenShift          | 4.13, 4.14       |
+| Mirantis Kubernetes Engine | 3.7.x            |
+| Google Anthos              | 1.15             |
+| Rancher Kubernetes Engine  | 1.4.x            |
+| VMware Tanzu               | 7.0              |
 {{</table>}}
 
 > Notes:
@@ -52,14 +52,16 @@ Container Storage Modules (CSM) does not officially support specific operating s
 ## Supported CSM Modules
 
 {{<table "table table-striped table-bordered table-sm">}}
-| CSM Module      | PowerMax          | PowerFlex          | Unity XT          | PowerScale          | PowerStore          |
-|---------------|:----------------:|:----------------:|:----------------:|:----------------:|:----------------:|
-| [CSM Authorization](../authorization/) | Yes | Yes |  Yes | Yes | No | 
-| [CSM Observability](../observability/) | Yes | Yes |  No | Yes | Yes |
-| [CSM Replication](../replication/) | Yes | Yes |  No | Yes | Yes |
-| [CSM Resiliency](../resiliency/) | No | Yes |  Yes | Yes | Yes |
-| [CSM Encryption](../secure/encryption/) | No | No |  No | Yes | No |
-| [CSM Application Mobility](../applicationmobility/) | Yes | Yes |  Yes | Yes | Yes |
+| CSM Module                             | PowerMax | PowerFlex | Unity XT | PowerScale | PowerStore |
+|----------------------------------------|:--------:|:---------:|:--------:|:----------:|:----------:|
+| [CSM Authorization](../authorization/) | Yes      | Yes       |  Yes     | Yes        | No         |
+| [CSM Observability](../observability/) | Yes      | Yes       |  No      | Yes        | Yes        |
+| [CSM Replication](../replication/)     | Yes      | Yes       |  No      | Yes        | Yes        |
+| [CSM Resiliency](../resiliency/)       | No       | Yes       |  Yes     | Yes        | Yes        |
+| [CSM Encryption](../secure/encryption/)| No       | No        |  No      | Yes        | No         |
+| [CSM Application Mobility](../applicationmobility/) | Yes | Yes |  Yes   | Yes        | Yes        |
+| [Volume Group Snapshot](../snapshots/volume-group-snapshots/) | No | Yes | No | No    | Yes        |
+
 {{</table>}}
 
 > Notes:
