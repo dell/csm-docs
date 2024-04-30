@@ -370,6 +370,30 @@ csi-isilon:
   # Enable this feature only after contact support for additional information
   podmon:
     enabled: $RESILIENCY_ENABLED
+    controller:
+      args:
+        - "--csisock=unix:/var/run/csi/csi.sock"
+        - "--labelvalue=csi-isilon"
+        - "--arrayConnectivityPollRate=60"
+        - "--driverPath=csi-isilon.dellemc.com"
+        - "--mode=controller"
+        - "--skipArrayConnectionValidation=false"
+        - "--driver-config-params=/csi-isilon-config-params/driver-config-params.yaml"
+        - "--driverPodLabelValue=dell-storage"
+        - "--ignoreVolumelessPods=false"
+    node:
+      args:
+        - "--csisock=unix:/var/lib/kubelet/plugins/csi-isilon/csi_sock"
+        - "--labelvalue=csi-isilon"
+        - "--arrayConnectivityPollRate=60"
+        - "--driverPath=csi-isilon.dellemc.com"
+        - "--mode=node"
+        - "--leaderelection=false"
+        - "--driver-config-params=/csi-isilon-config-params/driver-config-params.yaml"
+        - "--driverPodLabelValue=dell-storage"
+        - "--ignoreVolumelessPods=false"
+
+  podmonAPIPort: 8083
 
 ## K8S/CSI-Unity ATTRIBUTES
 ##########################################
