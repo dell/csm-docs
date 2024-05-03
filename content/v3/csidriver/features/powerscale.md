@@ -21,7 +21,7 @@ You can use existing volumes from the PowerScale array as Persistent Volumes in 
 
 1. Open your volume in One FS, and take a note of volume-id.
 2. Create PersistentVolume and use this volume-id as a volumeHandle in the manifest. Modify other parameters according to your needs.
-3. In the following example, the PowerScale cluster accessZone is assumed as 'System', storage class as 'isilon', cluster name as 'pscale-cluster' and volume's internal name as 'isilonvol'. The volume-handle should be in the format of <volume_name>=_=_=<export_id>=_=_=<zone>=_=_=<cluster_name>
+3. In the following example, the PowerScale cluster accessZone is assumed as 'System', storage class as 'isilon', cluster name as 'pscale-cluster' and volume's internal name as 'isilonvol'. The volume-handle should be in the format of <volume_name>=_=_=<export_id>=_=_=<zone>=_=_=<cluster_name_from_secret>
 4. If Quotas are enabled in the driver, it is required to add the Quota ID to the description of the NFS export in this format:
    `CSI_QUOTA_ID:sC-kAAEAAAAAAAAAAAAAQEpVAAAAAAAA`
 5. Quota ID can be identified by querying the PowerScale system.

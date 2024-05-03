@@ -27,8 +27,11 @@ To upgrade the driver from csi-unity v2.9.0 to csi-unity v2.10.0
 3. Navigate to csi-unity/dell-csi-hem-installer folder and execute this command:
    ```bash
    
-   ./csi-install.sh --namespace unity --values ./myvalues.yaml --upgrade
+   ./csi-install.sh --namespace unity --values ./myvalues.yaml --helm-charts-version <version> --upgrade
    ```
+
+*NOTE:* 
+- The parameter `--helm-charts-version` is optional and if you do not specify the flag, by default the `csi-install.sh` script will clone the version of the helm chart that is specified in the driver's [csi-install.sh](https://github.com/dell/csi-unity/blob/main/dell-csi-helm-installer/csi-install.sh#L22) file. If you wish to install the driver using a different version of the helm chart, you need to include this flag. Also, remember to delete the `helm-charts` repository present in the `csi-unity` directory if it was cloned before.
 
 ### Upgrade using Dell CSM Operator:
 **Note:**
