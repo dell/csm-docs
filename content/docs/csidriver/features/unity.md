@@ -514,6 +514,8 @@ CSI Driver for Dell Unity XT is supported in the NAT environment for NFS protoco
 
 The user will be able to install the driver and able to create pods.
 
+**NOTE:** On Unity, management port does not support NAT. NAT needs to be disabled on the Unity array's management network.
+
 ## Single Pod Access Mode for PersistentVolumes
 CSI Driver for Unity XT supports a new accessmode `ReadWriteOncePod` for PersistentVolumes and PersistentVolumeClaims. With this feature, CSI Driver for Unity XT restricts volume access to a single pod in the cluster
 
