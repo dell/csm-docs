@@ -4676,6 +4676,7 @@ To do that you will need to use &lt;code&gt;nodeSelector&lt;/code&gt; and &lt;co
 &lt;h2 id=&#34;nat-support&#34;&gt;NAT Support&lt;/h2&gt;
 &lt;p&gt;CSI Driver for Dell Unity XT is supported in the NAT environment for NFS protocol.&lt;/p&gt;
 &lt;p&gt;The user will be able to install the driver and able to create pods.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;NOTE:&lt;/strong&gt; On Unity, management port does not support NAT. NAT needs to be disabled on the Unity array&amp;rsquo;s management network.&lt;/p&gt;
 &lt;h2 id=&#34;single-pod-access-mode-for-persistentvolumes&#34;&gt;Single Pod Access Mode for PersistentVolumes&lt;/h2&gt;
 &lt;p&gt;CSI Driver for Unity XT supports a new accessmode &lt;code&gt;ReadWriteOncePod&lt;/code&gt; for PersistentVolumes and PersistentVolumeClaims. With this feature, CSI Driver for Unity XT restricts volume access to a single pod in the cluster&lt;/p&gt;
 &lt;p&gt;Prerequisites&lt;/p&gt;
