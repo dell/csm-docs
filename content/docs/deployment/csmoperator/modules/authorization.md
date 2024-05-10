@@ -76,8 +76,8 @@ kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/relea
    | **cert-manager** | This section configures the enablement of cert-manager. | - | - |
    | enabled | Enable/Disable deployment of cert-manager. Set to false if you already have cert-manager installed. | No | true |
    | **authorization** | This section configures the CSM-Authorization components. | - | - |
-   | certificate | Location of certificate file, if wanting to use a custom certificate. | No | None |
-   | privateKey | Location of certificate file, if wanting to use a custom certificate. | No | None |
+   | certificate | Location of certificate file, if wanting to use a custom certificate. | No | - |
+   | privateKey | Location of certificate file, if wanting to use a custom certificate. | No | - |
    | hostname | The hostname to configure the self-signed certificate (if applicable), and the proxy service Ingress. | No | csm-authorization.com |
    | proxyServerIngress.ingressClassName | The ingressClassName of the proxy-service Ingress. | Yes | nginx |
    | proxyServerIngress.hosts | Additional host rules to be applied to the proxy-service Ingress. | No | - |
