@@ -3,7 +3,7 @@ title: PowerFlex
 description: Release notes for PowerFlex CSI driver
 ---
 
-## Release Notes - CSI PowerFlex v2.10.0
+## Release Notes - CSI PowerFlex v2.10.1
 
 
 

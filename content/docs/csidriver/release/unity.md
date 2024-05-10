@@ -3,7 +3,7 @@ title: Unity XT
 description: Release notes for Unity XT CSI driver
 ---
 
-## Release Notes - CSI Unity XT v2.10.0
+## Release Notes - CSI Unity XT v2.10.1
 
 
 
