@@ -17,9 +17,6 @@
     <loc>https://dell.github.io/csm-docs/v3/replication/migration/migrating-volumes-diff-array/</loc>
     <lastmod>2024-03-21T02:39:59+05:30</lastmod>
   </url><url>
-    <loc>https://dell.github.io/csm-docs/docs/references/cli/</loc>
-    <lastmod>2023-12-13T23:10:42+05:30</lastmod>
-  </url><url>
     <loc>https://dell.github.io/csm-docs/v1/references/cli/</loc>
     <lastmod>2024-03-21T02:39:59+05:30</lastmod>
   </url><url>
@@ -128,9 +125,6 @@
     <loc>https://dell.github.io/csm-docs/v3/secure/encryption/deployment/</loc>
     <lastmod>2023-12-13T23:10:42+05:30</lastmod>
   </url><url>
-    <loc>https://dell.github.io/csm-docs/docs/references/policies/deprecationpolicy/</loc>
-    <lastmod>2022-07-06T10:26:15+05:30</lastmod>
-  </url><url>
     <loc>https://dell.github.io/csm-docs/v1/references/policies/deprecationpolicy/</loc>
     <lastmod>2022-09-21T18:28:15+05:30</lastmod>
   </url><url>
@@ -190,9 +184,6 @@
   </url><url>
     <loc>https://dell.github.io/csm-docs/v3/secure/encryption/</loc>
     <lastmod>2023-12-13T23:10:42+05:30</lastmod>
-  </url><url>
-    <loc>https://dell.github.io/csm-docs/docs/references/faq/</loc>
-    <lastmod>2024-03-21T02:39:59+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/v1/references/faq/</loc>
     <lastmod>2023-06-24T09:21:08+05:30</lastmod>
@@ -371,6 +362,9 @@
     <loc>https://dell.github.io/csm-docs/docs/resiliency/release/</loc>
     <lastmod>2024-03-21T02:39:59+05:30</lastmod>
   </url><url>
+    <loc>https://dell.github.io/csm-docs/docs/support/release/</loc>
+    <lastmod>2024-05-13T16:16:57+02:00</lastmod>
+  </url><url>
     <loc>https://dell.github.io/csm-docs/v1/resiliency/release/</loc>
     <lastmod>2024-03-21T02:39:59+05:30</lastmod>
   </url><url>
@@ -536,9 +530,6 @@
     <loc>https://dell.github.io/csm-docs/v3/interactive-tutorials/</loc>
     <lastmod>2023-12-13T23:10:42+05:30</lastmod>
   </url><url>
-    <loc>https://dell.github.io/csm-docs/docs/references/learn/</loc>
-    <lastmod>2023-05-17T03:13:39-04:00</lastmod>
-  </url><url>
     <loc>https://dell.github.io/csm-docs/v1/references/learn/</loc>
     <lastmod>2023-06-24T09:21:08+05:30</lastmod>
   </url><url>
@@ -583,6 +574,9 @@
   </url><url>
     <loc>https://dell.github.io/csm-docs/v3/authorization/deployment/rpm/</loc>
     <lastmod>2024-03-21T02:39:59+05:30</lastmod>
+  </url><url>
+    <loc>https://dell.github.io/csm-docs/docs/support/troubleshooting/</loc>
+    <lastmod>2024-05-13T16:16:57+02:00</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/docs/deployment/helm/drivers/uninstall/</loc>
     <lastmod>2024-03-21T02:39:59+05:30</lastmod>
@@ -659,6 +653,9 @@
     <loc>https://dell.github.io/csm-docs/docs/deployment/rpm/modules/upgrade/authorization/</loc>
     <lastmod>2024-04-08T15:49:08-04:00</lastmod>
   </url><url>
+    <loc>https://dell.github.io/csm-docs/docs/support/cert-csi/</loc>
+    <lastmod>2024-05-13T16:16:57+02:00</lastmod>
+  </url><url>
     <loc>https://dell.github.io/csm-docs/docs/replication/cluster-topologies/</loc>
     <lastmod>2024-03-21T02:39:59+05:30</lastmod>
   </url><url>
@@ -682,9 +679,6 @@
   </url><url>
     <loc>https://dell.github.io/csm-docs/v3/replication/deployment/configmap-secrets/</loc>
     <lastmod>2024-03-21T02:39:59+05:30</lastmod>
-  </url><url>
-    <loc>https://dell.github.io/csm-docs/docs/references/contributionguidelines/</loc>
-    <lastmod>2022-07-06T10:26:15+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/v1/references/contributionguidelines/</loc>
     <lastmod>2022-09-21T18:28:15+05:30</lastmod>
@@ -920,6 +914,9 @@
     <loc>https://dell.github.io/csm-docs/docs/authorization/cli/</loc>
     <lastmod>2024-02-07T16:44:53-06:00</lastmod>
   </url><url>
+    <loc>https://dell.github.io/csm-docs/docs/support/cli/</loc>
+    <lastmod>2024-05-13T16:16:57+02:00</lastmod>
+  </url><url>
     <loc>https://dell.github.io/csm-docs/v1/authorization/cli/</loc>
     <lastmod>2024-03-21T02:39:59+05:30</lastmod>
   </url><url>
@@ -928,6 +925,9 @@
   </url><url>
     <loc>https://dell.github.io/csm-docs/v3/authorization/cli/</loc>
     <lastmod>2024-03-21T02:39:59+05:30</lastmod>
+  </url><url>
+    <loc>https://dell.github.io/csm-docs/docs/support/deprecationpolicy/</loc>
+    <lastmod>2024-05-13T16:16:57+02:00</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/docs/replication/disaster-recovery/</loc>
     <lastmod>2023-06-24T09:21:08+05:30</lastmod>
@@ -998,9 +998,6 @@
     <loc>https://dell.github.io/csm-docs/docs/deployment/offline/</loc>
     <lastmod>2024-03-21T02:39:59+05:30</lastmod>
   </url><url>
-    <loc>https://dell.github.io/csm-docs/docs/references/policies/</loc>
-    <lastmod>2022-07-06T10:26:15+05:30</lastmod>
-  </url><url>
     <loc>https://dell.github.io/csm-docs/v1/references/policies/</loc>
     <lastmod>2022-09-21T18:28:15+05:30</lastmod>
   </url><url>
@@ -1066,6 +1063,9 @@
   </url><url>
     <loc>https://dell.github.io/csm-docs/v3/csidriver/installation/operator/</loc>
     <lastmod>2024-03-21T02:39:59+05:30</lastmod>
+  </url><url>
+    <loc>https://dell.github.io/csm-docs/docs/support/contributionguidelines/</loc>
+    <lastmod>2024-05-13T16:16:57+02:00</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/docs/replication/high-availability/</loc>
     <lastmod>2024-03-21T02:39:59+05:30</lastmod>
@@ -1211,6 +1211,9 @@
     <loc>https://dell.github.io/csm-docs/v1/cosidriver/upgrade/</loc>
     <lastmod>2024-03-21T02:39:59+05:30</lastmod>
   </url><url>
+    <loc>https://dell.github.io/csm-docs/docs/support/license/</loc>
+    <lastmod>2024-05-13T16:16:57+02:00</lastmod>
+  </url><url>
     <loc>https://dell.github.io/csm-docs/docs/replication/migration/</loc>
     <lastmod>2023-03-27T17:14:31+05:30</lastmod>
   </url><url>
@@ -1336,6 +1339,9 @@
   </url><url>
     <loc>https://dell.github.io/csm-docs/v3/replication/volume_expansion/</loc>
     <lastmod>2023-12-13T23:10:42+05:30</lastmod>
+  </url><url>
+    <loc>https://dell.github.io/csm-docs/docs/support/learn/</loc>
+    <lastmod>2024-05-13T16:16:57+02:00</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/docs/deployment/helm/modules/installation/replication/powerscale/</loc>
     <lastmod>2024-03-21T02:39:59+05:30</lastmod>
@@ -1475,9 +1481,6 @@
     <loc>https://dell.github.io/csm-docs/v3/replication/uninstall/</loc>
     <lastmod>2023-12-13T23:10:42+05:30</lastmod>
   </url><url>
-    <loc>https://dell.github.io/csm-docs/docs/troubleshooting/</loc>
-    <lastmod>2023-12-13T23:10:42+05:30</lastmod>
-  </url><url>
     <loc>https://dell.github.io/csm-docs/v1/troubleshooting/</loc>
     <lastmod>2023-12-13T23:10:42+05:30</lastmod>
   </url><url>
@@ -1486,9 +1489,6 @@
   </url><url>
     <loc>https://dell.github.io/csm-docs/v3/troubleshooting/</loc>
     <lastmod>2023-12-13T23:10:42+05:30</lastmod>
-  </url><url>
-    <loc>https://dell.github.io/csm-docs/docs/license/</loc>
-    <lastmod>2022-09-21T18:28:15+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/v1/license/</loc>
     <lastmod>2022-12-13T21:01:32+05:30</lastmod>
@@ -1499,9 +1499,6 @@
     <loc>https://dell.github.io/csm-docs/v3/license/</loc>
     <lastmod>2023-06-24T09:21:08+05:30</lastmod>
   </url><url>
-    <loc>https://dell.github.io/csm-docs/docs/release/</loc>
-    <lastmod>2023-09-20T19:05:29+05:30</lastmod>
-  </url><url>
     <loc>https://dell.github.io/csm-docs/v1/release/</loc>
     <lastmod>2023-12-13T23:10:42+05:30</lastmod>
   </url><url>
@@ -1510,12 +1507,6 @@
   </url><url>
     <loc>https://dell.github.io/csm-docs/v3/release/</loc>
     <lastmod>2024-03-21T02:39:59+05:30</lastmod>
-  </url><url>
-    <loc>https://dell.github.io/csm-docs/docs/cert-csi/</loc>
-    <lastmod>2024-03-22T09:10:57-04:00</lastmod>
-  </url><url>
-    <loc>https://dell.github.io/csm-docs/docs/securitypolicy/</loc>
-    <lastmod>2024-02-28T11:33:23+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/v1/securitypolicy/</loc>
     <lastmod>2024-03-21T02:39:59+05:30</lastmod>
@@ -1527,7 +1518,7 @@
     <lastmod>2023-12-13T23:10:42+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/docs/support/</loc>
-    <lastmod>2022-09-21T18:28:15+05:30</lastmod>
+    <lastmod>2024-05-13T16:16:57+02:00</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/v1/support/</loc>
     <lastmod>2022-12-13T21:01:32+05:30</lastmod>
@@ -1537,9 +1528,6 @@
   </url><url>
     <loc>https://dell.github.io/csm-docs/v3/support/</loc>
     <lastmod>2023-06-24T09:21:08+05:30</lastmod>
-  </url><url>
-    <loc>https://dell.github.io/csm-docs/docs/references/</loc>
-    <lastmod>2022-09-21T18:28:15+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/v1/references/</loc>
     <lastmod>2022-12-13T21:01:32+05:30</lastmod>
@@ -1551,7 +1539,7 @@
     <lastmod>2023-06-24T09:21:08+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/docs/</loc>
-    <lastmod>2024-04-19T11:17:45+05:30</lastmod>
+    <lastmod>2024-05-13T16:16:57+02:00</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/docs/deployment/csmoperator/modules/authorization/</loc>
     <lastmod>2024-04-04T19:22:05+05:30</lastmod>
@@ -1580,8 +1568,8 @@
     <loc>https://dell.github.io/csm-docs/v3/csidriver/installation/test/certcsi/</loc>
     <lastmod>2024-03-21T02:39:59+05:30</lastmod>
   </url><url>
-    <loc>https://dell.github.io/csm-docs/docs/cert-csi/qualified/</loc>
-    <lastmod>2024-03-21T02:39:59+05:30</lastmod>
+    <loc>https://dell.github.io/csm-docs/docs/support/cert-csi/qualified/</loc>
+    <lastmod>2024-05-13T16:16:57+02:00</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/docs/deployment/csmoperator/operator_migration/</loc>
     <lastmod>2024-03-21T15:00:56+05:30</lastmod>
