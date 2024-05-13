@@ -1,7 +1,7 @@
 ---
 title: "CLI"
 linkTitle: "CLI"
-weight: 1
+weight: 4
 Description: >
   CLI for Dell Container Storage Modules (CSM)
 ---
