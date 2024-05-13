@@ -12,15 +12,21 @@ description: Release notes for Unity XT CSI driver
 
 
 
+
 ### New Features/Changes
 
-- [#926 - [FEATURE]: Fixing the linting, formatting and vetting issues](https://github.com/dell/csm/issues/926)
+There are no new features in this release.
 
 ### Fixed Issues
 
-- [#1081 - [BUG]: CSM driver repositories reference CSI Operator](https://github.com/dell/csm/issues/1081)
-- [#1140 - [BUG]: Cert-csi tests are not reporting the passed testcases in K8S E2E tests ](https://github.com/dell/csm/issues/1140)
-- [#1174 - [BUG]: Kubelet Configuration Directory setting should not have a comment about default value being None](https://github.com/dell/csm/issues/1174)
+- [#1198 - [BUG]: Topology-related node labels are not added automatically.](https://github.com/dell/csm/issues/1198)
+- [#1206 - [BUG]: Snapshot ingestion procedure for CSI Unity Driver misising ](https://github.com/dell/csm/issues/1206)
+- [#1209 - [BUG]: Doc hyper links in driver Readme is broken](https://github.com/dell/csm/issues/1209)
+- [#1218 - [BUG]: Add the helm-charts-version parameter to the install command for all drivers in csm-docs](https://github.com/dell/csm/issues/1218)
+- [#1222 - [BUG]: Cannot configure export IP for CSI-Unity ](https://github.com/dell/csm/issues/1222)
+- [#1239 - [BUG]: Changes in new release of google.golang.org/protobuf is causing compilation issues](https://github.com/dell/csm/issues/1239)
+- [#1270 - [BUG]: Missing entries for Resiliency in installation wizard template](https://github.com/dell/csm/issues/1270)
+- [#1279 - [BUG]: unable to install the UNITY driver in NAT Env](https://github.com/dell/csm/issues/1279)
 
 ### Known Issues
 
