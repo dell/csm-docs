@@ -1,7 +1,7 @@
 ---
 title: "Troubleshooting"
 linkTitle: "Troubleshooting"
-weight: 11
+weight: 2
 Description: >
   Dell Container Storage Modules (CSM) troubleshooting information
 ---

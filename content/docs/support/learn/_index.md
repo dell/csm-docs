@@ -1,7 +1,7 @@
 ---
-title: Learn
+title: Learn more about CSM
 Description: Blogs and Youtube videos for CSM
-weight: 2
+weight: 7
 ---
 You can learn more and engage with the CSM community over different channels by:
 * Reading the official [blogs](https://infohub.delltechnologies.com/t/blogs-99/) and [white paper](https://infohub.delltechnologies.com/t/persistent-storage-for-containerized-applications-on-kubernetes-with-powermax-san-storage-13/) are on [https://infohub.delltechnologies.com/](https://infohub.delltechnologies.com/)
