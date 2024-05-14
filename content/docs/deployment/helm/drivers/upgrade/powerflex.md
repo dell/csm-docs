@@ -10,15 +10,15 @@ Description: Upgrade PowerFlex CSI driver
 
 You can upgrade the CSI Driver for Dell PowerFlex using Helm or Dell CSM Operator.
 
-## Update Driver from v2.9.2 to v2.10.0 using Helm
+## Update Driver from v2.9.2 to v2.10.1 using Helm
 **Steps**
-1. Run `git clone -b v2.10.0 https://github.com/dell/csi-powerflex.git` to clone the git repository and get the v2.10.0 driver.
+1. Run `git clone -b v2.10.1 https://github.com/dell/csi-powerflex.git` to clone the git repository and get the v2.10.1 driver.
 2. You need to create secret.yaml with the configuration of your system.
 3. Update myvalues file as needed.
 4. Run the `csi-install` script with the option _\-\-upgrade_ by running: 
    ```bash
   
-   cd ../dell-csi-helm-installer && ./csi-install.sh --namespace vxflexos --values ./myvalues.yaml --helm-charts-version csi-vxflexos-2.10.1 --upgrade
+   cd ../dell-csi-helm-installer && ./csi-install.sh --namespace vxflexos --values ./myvalues.yaml --helm-charts-version csi-vxflexos-2.10.2 --upgrade
    ```
 
 *NOTE:*
@@ -27,7 +27,7 @@ You can upgrade the CSI Driver for Dell PowerFlex using Helm or Dell CSM Operato
 - To update any installation parameter after the driver has been installed, change the `myvalues.yaml` file and run the install script with the option _\-\-upgrade_, for example: 
   ```bash
 
-  ./csi-install.sh --namespace vxflexos --values ./myvalues.yaml --helm-charts-version csi-vxflexos-2.10.1 --upgrade
+  ./csi-install.sh --namespace vxflexos --values ./myvalues.yaml --helm-charts-version csi-vxflexos-2.10.2 --upgrade
   ```
 - The logging configuration from v1.5 will not work in v2.1, since the log configuration parameters are now set in the myvalues.yaml file located at dell-csi-helm-installer/myvalues.yaml. Please set the logging configuration parameters in the myvalues.yaml file.
 
