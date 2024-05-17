@@ -37,7 +37,7 @@ jobs:
       - name: Wait
         uses: nev7n/wait_for_response@v1
         with:
-          url: 'https://127.0.0.1:1313/csm-docs/'
+          url: 'http://127.0.0.1:1313/'
           responseCode: 200
           timeout: 40000
           interval: 500
