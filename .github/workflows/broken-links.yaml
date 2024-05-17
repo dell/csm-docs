@@ -17,11 +17,3 @@ jobs:
           version: latest
           extended: false
           args: --cleanDestinationDir --minify --verbose
-      - name: Deploy to GitHub Pages
-        if: github.event_name != 'pull_request'
-        uses: crazy-max/ghaction-github-pages@v4
-        with:
-          target_branch: gh-pages
-          build_dir: public
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
