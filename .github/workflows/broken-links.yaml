@@ -16,4 +16,4 @@ jobs:
         with:
           version: latest
           extended: true
-          args: --cleanDestinationDir --minify --verbose
+          args: --cleanDestinationDir --minify --logLevel info
