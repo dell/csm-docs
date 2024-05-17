@@ -11,6 +11,11 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v2
+        with:
+          hugo-version: '0.120.3'
+          extended: true
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
@@ -28,10 +33,4 @@ jobs:
          npm install -D --save autoprefixer
          npm install -D --save postcss-cli
          npm install -D --save postcss
-         hugo
-      - name: Run Hugo
-        uses: crazy-max/ghaction-hugo@v3
-        with:
-          version: v0.119.0
-          extended: true
-          args: --cleanDestinationDir --minify --logLevel info
+         hugo server --bind 127.0.0.1
