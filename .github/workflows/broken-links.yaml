@@ -37,5 +37,5 @@ jobs:
       - name: wget
         uses: wei/wget@v1
         with:
-          args: --spider -nd -o wget-log -nv http://localhost:1313
+          args: --spider http://localhost:1313
          
