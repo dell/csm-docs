@@ -551,9 +551,6 @@ CSI Driver for Dell PowerMax 2.2.0 and above supports volume health monitoring. 
 
 Use `ReadWriteOncePod(RWOP)` access mode if you want to ensure that only one pod across the whole cluster can read that PVC or write to it. This is only supported for CSI Driver for PowerMax 2.2.0+ and Kubernetes version 1.22+.
 
-To use this feature, enable the ReadWriteOncePod feature gate for kube-apiserver, kube-scheduler, and kubelet, by setting command line arguments:
-`--feature-gates="...,ReadWriteOncePod=true"`
-
 ### Creating a PersistentVolumeClaim
 ```yaml
 kind: PersistentVolumeClaim
