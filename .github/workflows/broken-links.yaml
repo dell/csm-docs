@@ -34,16 +34,8 @@ jobs:
          npm install -D --save postcss-cli
          npm install -D --save postcss
          hugo server --bind 127.0.0.1 &
-      - name: Check for broken links
-        id: link-report
-        uses: celinekurpershoek/link-checker@v1.0.2
+      - name: wget
+        uses: wei/wget@v1
         with:
-          # Required:
-          url: "http://localhost:1313/csm-docs/"
-          # optional:
-          honorRobotExclusions: false
-          ignorePatterns: "github,google"
-          recursiveLinks: true # Check all URLs on all reachable pages (could take a while)
-      - name: Get the result
-        run: echo "${{steps.link-report.outputs.result}}"
+          args: --spider -nd -e robots=off -prb -o wget-log -nv http://localhost:1313
          
