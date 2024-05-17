@@ -16,3 +16,4 @@ jobs:
         with:
           version: v0.111.0
           extended: true
+          args: --cleanDestinationDir --minify --verbose
