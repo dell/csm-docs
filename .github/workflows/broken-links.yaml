@@ -14,6 +14,6 @@ jobs:
       - name: Run Hugo
         uses: crazy-max/ghaction-hugo@v3
         with:
-          version: latest
+          version: v0.124.0
           extended: true
           args: --cleanDestinationDir --minify --logLevel info
