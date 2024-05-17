@@ -33,7 +33,14 @@ jobs:
          npm install -D --save autoprefixer
          npm install -D --save postcss-cli
          npm install -D --save postcss
-         hugo server --bind 127.0.0.1
+         hugo server --bind 127.0.0.1 &
+      - name: Wait
+        uses: nev7n/wait_for_response@v1
+        with:
+          url: 'https://localhost:1313/'
+          responseCode: 200
+          timeout: 2000
+          interval: 500
       - name: wget
         uses: wei/wget@v1
         with:
