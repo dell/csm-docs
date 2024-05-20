@@ -11,7 +11,7 @@ The CSM Authorization RPM will be deprecated in a future release. It is highly r
 
 This section outlines the deployment steps for Container Storage Modules (CSM) for Authorization.  The deployment of CSM for Authorization is handled in 2 parts:
 - Deploying the CSM for Authorization proxy server, to be controlled by storage administrators
-- Configuring one to many [supported](../../../../../prerequisites/#supported-csm-modules) Dell CSI drivers with CSM for Authorization
+- Configuring one to many [supported](../../../../../../docs/prerequisites) Dell CSI drivers with CSM for Authorization
 
 ## Prerequisites
 
@@ -133,7 +133,7 @@ Please follow the steps outlined in the [proxy server](../../../../../authorizat
 
 ## Configuring a Dell CSI Driver with CSM for Authorization
 
-The second part of CSM for Authorization deployment is to configure one or more of the [supported](../../../../../prerequisites/#supported-csm-modules) CSI drivers. This is controlled by the Kubernetes tenant administrator.
+The second part of CSM for Authorization deployment is to configure one or more of the [supported](../../../../../../docs/prerequisites) CSI drivers. This is controlled by the Kubernetes tenant administrator.
 
 Please follow the steps outlined in [PowerFlex](../../../../../authorization/configuration/powerflex), [PowerMax](../../../../../authorization/configuration/powermax), or [PowerScale](../../../../../authorization/configuration/powerscale) to configure the CSI Driver to work with the Authorization sidecar.
 
