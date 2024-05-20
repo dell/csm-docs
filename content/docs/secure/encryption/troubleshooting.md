@@ -81,7 +81,7 @@ This may manifest in:
 - failure to create a new encrypted volume
 
 Resolution:
-- obtain a [new valid license](../../deployment/helm/modules/installation/encryption/)
+- obtain a [new valid license](../../../license)
 - check the license is for the cluster on which the encrypted volumes are created
 - check [encryption-license secret](../../../deployment/helm/modules/installation/encryption#secret-encryption-license)
 

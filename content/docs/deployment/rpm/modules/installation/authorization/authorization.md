@@ -123,7 +123,7 @@ A Storage Administrator can execute the shell script, install_karavi_auth.sh as 
 
 5. After installation, application data will be stored on the system under `/var/lib/rancher/k3s/storage/`.
 
-If errors occur during installation, review the [Troubleshooting](../../../../../authorization/troubleshooting) section.
+If errors occur during installation, review the [Troubleshooting](../../../../../../docs/authorization/troubleshooting) section.
 
 ## Configuring the CSM for Authorization Proxy Server
 
