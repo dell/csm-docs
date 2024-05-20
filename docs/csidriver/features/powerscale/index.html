@@ -16,12 +16,12 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/docs/csidriver/features/powerscale/" /><meta property="article:section" content="docs" />
 
-<meta property="article:modified_time" content="2024-02-02T12:19:38+05:30" />
+<meta property="article:modified_time" content="2024-05-20T07:33:38-04:00" />
 
 <meta itemprop="name" content="PowerScale">
 <meta itemprop="description" content="Code features for PowerScale Driver">
-<meta itemprop="dateModified" content="2024-02-02T12:19:38+05:30" />
-<meta itemprop="wordCount" content="3990">
+<meta itemprop="dateModified" content="2024-05-20T07:33:38-04:00" />
+<meta itemprop="wordCount" content="3968">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="PowerScale"/>
 <meta name="twitter:description" content="Code features for PowerScale Driver"/>
@@ -103,7 +103,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.9a321c547cd5faa5443ee750c22387b5.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.bb87c38a55dcdca3f5e06d298771a5f9.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -125,7 +125,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.9a321c547cd5faa5443ee750c22387b5.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.bb87c38a55dcdca3f5e06d298771a5f9.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -700,7 +700,7 @@
         <li><a href="#this-feature-can-be-enabled">This feature can be enabled</a></li>
       </ul>
     </li>
-    <li><a href="#single-pod-access-mode-for-persistentvolumes--readwriteoncepod-alpha-feature">Single Pod Access Mode for PersistentVolumes- ReadWriteOncePod (ALPHA FEATURE)</a>
+    <li><a href="#single-pod-access-mode-for-persistentvolumes--readwriteoncepod">Single Pod Access Mode for PersistentVolumes- ReadWriteOncePod</a>
       <ul>
         <li><a href="#creating-a-persistentvolumeclaim">Creating a PersistentVolumeClaim</a></li>
       </ul>
@@ -1271,10 +1271,8 @@ For example, if a volume were to be deleted from the array, or unmounted outside
 <li>For controller plugin, by setting attribute <code>controller.healthMonitor.enabled</code> to <code>true</code> in <code>values.yaml</code> file. Also health monitoring interval can be changed through attribute <code>controller.healthMonitor.interval</code> in <code>values.yaml</code> file.</li>
 <li>For node plugin, by setting attribute <code>node.healthMonitor.enabled</code> to <code>true</code> in <code>values.yaml</code> file and by enabling the alpha feature gate <code>CSIVolumeHealth</code>.</li>
 </ol>
-<h2 id="single-pod-access-mode-for-persistentvolumes--readwriteoncepod-alpha-feature">Single Pod Access Mode for PersistentVolumes- ReadWriteOncePod (ALPHA FEATURE)</h2>
+<h2 id="single-pod-access-mode-for-persistentvolumes--readwriteoncepod">Single Pod Access Mode for PersistentVolumes- ReadWriteOncePod</h2>
 <p>Use <code>ReadWriteOncePod(RWOP)</code> access mode if you want to ensure that only one pod across the whole cluster can read that PVC or write to it. This is supported for CSI Driver for PowerScale 2.1.0+ and Kubernetes version 1.22+.</p>
-<p>To use this feature, enable the ReadWriteOncePod feature gate for kube-apiserver, kube-scheduler, and kubelet, by setting command line arguments:
-<code>--feature-gates=&quot;...,ReadWriteOncePod=true&quot;</code></p>
 <h3 id="creating-a-persistentvolumeclaim">Creating a PersistentVolumeClaim</h3>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">kind</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">PersistentVolumeClaim</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">apiVersion</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">v1</span><span style="color:#f8f8f8;text-decoration:underline">
@@ -1287,7 +1285,7 @@ For example, if a volume were to be deleted from the array, or unmounted outside
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">requests</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">storage</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">1Gi</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span></code></pre></div><p>When this feature is enabled, the existing <code>ReadWriteOnce(RWO)</code> access mode restricts volume access to a single node and allows multiple pods on the same node to read from and write to the same volume.</p>
-<p>To migrate existing PersistentVolumes to use <code>ReadWriteOncePod</code>, please follow the instruction from <a href="https://kubernetes.io/blog/2021/09/13/read-write-once-pod-access-mode-alpha/#migrating-existing-persistentvolumes">here</a>.</p>
+<p>To migrate existing PersistentVolumes to use <code>ReadWriteOncePod</code>, please follow the instruction from <a href="https://kubernetes.io/docs/tasks/administer-cluster/change-pv-access-mode-readwriteoncepod/">here</a>.</p>
 
 	
 	
