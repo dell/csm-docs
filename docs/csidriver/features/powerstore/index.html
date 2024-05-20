@@ -16,12 +16,12 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/docs/csidriver/features/powerstore/" /><meta property="article:section" content="docs" />
 
-<meta property="article:modified_time" content="2023-12-13T23:10:42+05:30" />
+<meta property="article:modified_time" content="2024-05-20T07:33:38-04:00" />
 
 <meta itemprop="name" content="PowerStore">
 <meta itemprop="description" content="Code features for PowerStore Driver">
-<meta itemprop="dateModified" content="2023-12-13T23:10:42+05:30" />
-<meta itemprop="wordCount" content="4155">
+<meta itemprop="dateModified" content="2024-05-20T07:33:38-04:00" />
+<meta itemprop="wordCount" content="4149">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="PowerStore"/>
 <meta name="twitter:description" content="Code features for PowerStore Driver"/>
@@ -103,7 +103,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.9a321c547cd5faa5443ee750c22387b5.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.bb87c38a55dcdca3f5e06d298771a5f9.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -125,7 +125,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.9a321c547cd5faa5443ee750c22387b5.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.bb87c38a55dcdca3f5e06d298771a5f9.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -703,7 +703,11 @@
     </li>
     <li><a href="#nat-support">NAT Support</a></li>
     <li><a href="#pvpvc-metrics">PV/PVC Metrics</a></li>
-    <li><a href="#single-pod-access-mode-for-persistentvolumes">Single Pod Access Mode for PersistentVolumes</a></li>
+    <li><a href="#single-pod-access-mode-for-persistentvolumes--readwriteoncepod">Single Pod Access Mode for PersistentVolumes- ReadWriteOncePod</a>
+      <ul>
+        <li><a href="#creating-a-persistentvolumeclaim">Creating a PersistentVolumeClaim</a></li>
+      </ul>
+    </li>
     <li><a href="#posix-mode-bits-and-nfsv4-acls">POSIX mode bits and NFSv4 ACLs</a></li>
     <li><a href="#nvme-support">NVMe Support</a></li>
     <li><a href="#volume-group-snapshot-support">Volume group snapshot Support</a></li>
@@ -1214,16 +1218,9 @@ However, to provision new volumes, make sure to delete old Storage Classes and c
 <p>The user will be able to install the driver and able to create pods.</p>
 <h2 id="pvpvc-metrics">PV/PVC Metrics</h2>
 <p>CSI Driver for Dell Powerstore 2.1.0 and above supports volume health monitoring. To enable Volume Health Monitoring from the node side, the alpha feature gate CSIVolumeHealth needs to be enabled. To use this feature, set controller.healthMonitor.enabled and node.healthMonitor.enabled to true. To change the monitor interval, set controller.healthMonitor.interval parameter.</p>
-<h2 id="single-pod-access-mode-for-persistentvolumes">Single Pod Access Mode for PersistentVolumes</h2>
-<p>Starting from version 2.1, CSI Driver for Powerstore now supports a new access mode <code>ReadWriteOncePod</code> for PersistentVolumes and PersistentVolumeClaims. With this feature, CSI Driver for Powerstore allows restricting volume access to a single pod in the cluster and within a worker node.</p>
-<p>Prerequisites</p>
-<ol>
-<li>Enable the ReadWriteOncePod feature gate for kube-apiserver, kube-scheduler, and kubelet as ReadWriteOncePod access mode is in alpha for Kubernetes v1.22 and is supported only for CSI volumes. You can enable the feature by setting command-line argument:</li>
-</ol>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>--feature-gates<span style="color:#ce5c00;font-weight:bold">=</span><span style="color:#4e9a06">&#34;...,ReadWriteOncePod=true&#34;</span>
-</span></span></code></pre></div><ol start="2">
-<li>Create a PVC with access mode set to ReadWriteOncePod like shown in the sample below</li>
-</ol>
+<h2 id="single-pod-access-mode-for-persistentvolumes--readwriteoncepod">Single Pod Access Mode for PersistentVolumes- ReadWriteOncePod</h2>
+<p>Use <code>ReadWriteOncePod(RWOP)</code> access mode if you want to ensure that only one pod across the whole cluster can read that PVC or write to it. This is supported for CSI Driver for PowerStore 2.1.0+ and Kubernetes version 1.22+.</p>
+<h3 id="creating-a-persistentvolumeclaim">Creating a PersistentVolumeClaim</h3>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">kind</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">PersistentVolumeClaim</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">apiVersion</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">v1</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">metadata</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
@@ -1237,6 +1234,8 @@ However, to provision new volumes, make sure to delete old Storage Classes and c
 </span></span></span></code></pre></div><blockquote>
 <p>Note: The access mode ReadWriteOnce allows multiple pods to access a single volume within a single worker node and the behavior is consistent across all supported Kubernetes versions.</p>
 </blockquote>
+<p>When this feature is enabled, the existing <code>ReadWriteOnce(RWO)</code> access mode restricts volume access to a single node and allows multiple pods on the same node to read from and write to the same volume.</p>
+<p>To migrate existing PersistentVolumes to use <code>ReadWriteOncePod</code>, please follow the instruction from <a href="https://kubernetes.io/docs/tasks/administer-cluster/change-pv-access-mode-readwriteoncepod/">here</a>.</p>
 <h2 id="posix-mode-bits-and-nfsv4-acls">POSIX mode bits and NFSv4 ACLs</h2>
 <p>CSI PowerStore driver version 2.2.0 and later allows users to set user-defined permissions on NFS target mount directory using POSIX mode bits or NFSv4 ACLs.</p>
 <p>NFSv4 ACLs are supported for NFSv4 shares on NFSv4 enabled NAS servers only. Please ensure the order when providing the NFSv4 ACLs.</p>

@@ -16,12 +16,12 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/docs/csidriver/features/unity/" /><meta property="article:section" content="docs" />
 
-<meta property="article:modified_time" content="2024-05-09T11:13:58+05:30" />
+<meta property="article:modified_time" content="2024-05-20T07:33:38-04:00" />
 
 <meta itemprop="name" content="Unity XT">
 <meta itemprop="description" content="Code features for Unity XT Driver">
-<meta itemprop="dateModified" content="2024-05-09T11:13:58+05:30" />
-<meta itemprop="wordCount" content="3093">
+<meta itemprop="dateModified" content="2024-05-20T07:33:38-04:00" />
+<meta itemprop="wordCount" content="3096">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Unity XT"/>
 <meta name="twitter:description" content="Code features for Unity XT Driver"/>
@@ -103,7 +103,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.9a321c547cd5faa5443ee750c22387b5.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.bb87c38a55dcdca3f5e06d298771a5f9.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -125,7 +125,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.9a321c547cd5faa5443ee750c22387b5.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.bb87c38a55dcdca3f5e06d298771a5f9.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -685,7 +685,11 @@
     </li>
     <li><a href="#volume-limit">Volume Limit</a></li>
     <li><a href="#nat-support">NAT Support</a></li>
-    <li><a href="#single-pod-access-mode-for-persistentvolumes">Single Pod Access Mode for PersistentVolumes</a></li>
+    <li><a href="#single-pod-access-mode-for-persistentvolumes--readwriteoncepod">Single Pod Access Mode for PersistentVolumes- ReadWriteOncePod</a>
+      <ul>
+        <li><a href="#creating-a-persistentvolumeclaim">Creating a PersistentVolumeClaim</a></li>
+      </ul>
+    </li>
     <li><a href="#volume-health-monitoring">Volume Health Monitoring</a></li>
     <li><a href="#storage-capacity-tracking">Storage Capacity Tracking</a></li>
     <li><a href="#dynamic-logging-configuration">Dynamic Logging Configuration</a>
@@ -1142,26 +1146,21 @@ To do that you will need to use <code>nodeSelector</code> and <code>tolerations<
 <p>CSI Driver for Dell Unity XT is supported in the NAT environment for NFS protocol.</p>
 <p>The user will be able to install the driver and able to create pods.</p>
 <p><strong>NOTE:</strong> On Unity, management port does not support NAT. NAT needs to be disabled on the Unity array&rsquo;s management network.</p>
-<h2 id="single-pod-access-mode-for-persistentvolumes">Single Pod Access Mode for PersistentVolumes</h2>
-<p>CSI Driver for Unity XT supports a new accessmode <code>ReadWriteOncePod</code> for PersistentVolumes and PersistentVolumeClaims. With this feature, CSI Driver for Unity XT restricts volume access to a single pod in the cluster</p>
-<p>Prerequisites</p>
-<ol>
-<li>Enable the ReadWriteOncePod feature gate for kube-apiserver, kube-scheduler, and kubelet as the ReadWriteOncePod access mode is in alpha for Kubernetes v1.22 and is only supported for CSI volumes. You can enable the feature by setting command line arguments:
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>--feature-gates<span style="color:#ce5c00;font-weight:bold">=</span><span style="color:#4e9a06">&#34;...,ReadWriteOncePod=true&#34;</span>
-</span></span></code></pre></div></li>
-<li>Create a PVC with access mode set to ReadWriteOncePod like shown in the sample below
+<h2 id="single-pod-access-mode-for-persistentvolumes--readwriteoncepod">Single Pod Access Mode for PersistentVolumes- ReadWriteOncePod</h2>
+<p>Use <code>ReadWriteOncePod(RWOP)</code> access mode if you want to ensure that only one pod across the whole cluster can read that PVC or write to it. This is only supported for CSI Driver for Unity 2.1.0+ and Kubernetes version 1.22+.</p>
+<h3 id="creating-a-persistentvolumeclaim">Creating a PersistentVolumeClaim</h3>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">kind</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">PersistentVolumeClaim</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">apiVersion</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">v1</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">metadata</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">single-writer-only</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">single-writer-only</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">spec</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">accessModes</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span>- <span style="color:#000">ReadWriteOncePod</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#8f5902;font-style:italic"># Allow only a single pod to access single-writer-only.</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">resources</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">requests</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">storage</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">1Gi</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span></code></pre></div></li>
-</ol>
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">accessModes</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span>- <span style="color:#000">ReadWriteOncePod</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#8f5902;font-style:italic"># Allow only a single pod to access single-writer-only.</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">resources</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">requests</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">storage</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">1Gi</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span></code></pre></div><p>When this feature is enabled, the existing <code>ReadWriteOnce(RWO)</code> access mode restricts volume access to a single node and allows multiple pods on the same node to read from and write to the same volume.</p>
+<p>To migrate existing PersistentVolumes to use <code>ReadWriteOncePod</code>, please follow the instruction from <a href="https://kubernetes.io/docs/tasks/administer-cluster/change-pv-access-mode-readwriteoncepod/">here</a>.</p>
 <h2 id="volume-health-monitoring">Volume Health Monitoring</h2>
 <p>CSI Driver for Unity XT supports volume health monitoring. This is an alpha feature and requires feature gate to be enabled by setting command line arguments</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>--feature-gates<span style="color:#ce5c00;font-weight:bold">=</span><span style="color:#4e9a06">&#34;...,CSIVolumeHealth=true&#34;</span>
