@@ -135,7 +135,7 @@ Please follow the steps outlined in the [proxy server](../../../../../../docs/au
 
 The second part of CSM for Authorization deployment is to configure one or more of the [supported](../../../../../../docs/prerequisites) CSI drivers. This is controlled by the Kubernetes tenant administrator.
 
-Please follow the steps outlined in [PowerFlex](../../../../../../docs/authorization/configuration/powerflex), [PowerMax](../../../../../../docs/authorization/configuration/powermax), or [PowerScale](../../../../../authorization/configuration/powerscale) to configure the CSI Driver to work with the Authorization sidecar.
+Please follow the steps outlined in [PowerFlex](../../../../../../docs/authorization/configuration/powerflex), [PowerMax](../../../../../../docs/authorization/configuration/powermax), or [PowerScale](../../../../../../docs/authorization/configuration/powerscale) to configure the CSI Driver to work with the Authorization sidecar.
 
 ## Updating CSM for Authorization Proxy Server Configuration
 
