@@ -129,7 +129,7 @@ If errors occur during installation, review the [Troubleshooting](../../../../..
 
 The first part of CSM for Authorization deployment is to configure the proxy server. This is controlled by the Storage Administrator.
 
-Please follow the steps outlined in the [proxy server](../../../../../authorization/configuration/proxy-server) configuration.
+Please follow the steps outlined in the [proxy server](../../../../../../docs/authorization/configuration/proxy-server) configuration.
 
 ## Configuring a Dell CSI Driver with CSM for Authorization
 
