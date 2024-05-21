@@ -39,7 +39,7 @@ jobs:
       - name: Run wget spider
         run: |
           wget --help
-          wget --spider -o spider.log -e robots=off -rp http://127.0.0.1:1313/csm-docs/
+          wget --spider -e -rp http://127.0.0.1:1313/csm-docs/
       - name: Output logs
         run: |
          cat spider.log
