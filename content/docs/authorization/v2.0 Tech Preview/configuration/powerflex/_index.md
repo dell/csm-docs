@@ -7,7 +7,7 @@ description: >
 
 ## Configuring PowerFlex CSI Driver with CSM for Authorization
 
-After CSM Authorization is installed and a tenant has been created, the [dellctl CLI](../../references/cli/) can be used to generate a token for that tenant.
+After CSM Authorization is installed and a tenant has been created, the [dellctl CLI](../../../../references/cli/) can be used to generate a token for that tenant.
 
 1. Generate the token for the desired tenant that will be used for Authorization.
    
@@ -56,7 +56,7 @@ After CSM Authorization is installed and a tenant has been created, the [dellctl
 
     **Operator**
 
-    Refer to the [Create Secret](../../../deployment/csmoperator/drivers/powerflex/#create-secret) section to prepare `secret.yaml` to configure the driver to communicate with the CSM Authorization sidecar.
+    Refer to the [Create Secret](../../../../deployment/csmoperator/drivers/powerflex/#create-secret) section to prepare `secret.yaml` to configure the driver to communicate with the CSM Authorization sidecar.
 
     - Update `endpoint` to match the localhost endpoint in `samples/secret/karavi-authorization-config.json`.
 
@@ -80,7 +80,7 @@ After CSM Authorization is installed and a tenant has been created, the [dellctl
 
     **Operator**
 
-    Refer to the [Install Driver](../../../deployment/csmoperator/drivers/powerflex/#install-driver) section to edit the parameters in the Custom Resource to enable CSM Authorization.
+    Refer to the [Install Driver](../../../../deployment/csmoperator/drivers/powerflex/#install-driver) section to edit the parameters in the Custom Resource to enable CSM Authorization.
 
     Under `modules`, enable the module named `authorization`:
 

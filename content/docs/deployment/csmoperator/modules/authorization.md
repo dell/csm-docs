@@ -85,6 +85,20 @@ kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/relea
    | **redis** | This section configures the Redis components. | - | - |
    | storageclass | The storage class for Redis to use for persistence. If not supplied, a locally provisioned volume is used. | No | - |
 
+    **Additional v2.0 Technical Preview Parameters:**
+   | Parameter | Description | Required | Default |
+   | --------- | ----------- | -------- |-------- |
+   | **redis** | This section configures the Redis components. | - | - |
+   | redisName | The prefix of the redis pods. The number of pods is determined by the number of replicas. | Yes | redis-csm |
+   | redisCommander | The prefix of the redis commander pod. | Yes | rediscommander |
+   | sentinel | The prefix of the redis sentinel pods. The number of pods is determined by the number of replicas. | Yes | sentinel |
+   | redisReplicas | The number of replicas for the sentinel and redis pods. | Yes | 5 |
+   | storageclass | The storage class for Redis to use for persistence. If not supplied, a locally provisioned volume is used. | No | - |
+   | **vault** | This section configures the vault components. | - | - |
+   | vaultAddress | The address where vault is hosted with the credentials to the array (`https://10.0.0.1:<port>`). | Yes | - |
+   | vaultRole | The configured authentication role in vault. | Yes | csm-authorization |
+   | kvEnginePath | The vault path where the credentials are stored. | Yes | secret |
+
 >__Note__:  
 > - If you specify `storageclass`, the storage class must NOT be provisioned by the Dell CSI Driver to be configured with this installation of CSM Authorization. 
 
@@ -116,12 +130,26 @@ Once the Authorization CR is created, you can verify the installation as mention
 
 ### Install Karavictl
 
+>> NOTE: Authorization v2.0 Tech Preview does not use `karavictl` so installation is not necessary.
+
 Follow the instructions available in CSM Authorization for [Installing karavictl](../../../helm/modules/installation/authorization/#install-karavictl).
 
 ### Configure the CSM Authorization Proxy Server
 
+**Authorization v1.x GA**
+
 Follow the instructions available in CSM Authorization for [Configuring the CSM Authorization Proxy Server](../../../helm/modules/installation/authorization/#configuring-the-csm-authorization-proxy-server).
+
+**Authorization v2.0 Technical Preview**
+
+Follow the instructions available in CSM Authorization for [Configuring the CSM Authorization Proxy Server](../../../../authorization/v2.0-tech-preview/configuration/proxy-server/).
 
 ### Configure a Dell CSI Driver with CSM Authorization
 
+**Authorization v1.x GA**
+
 Follow the instructions available in CSM Authorization for [Configuring a Dell CSI Driver with CSM for Authorization](../../../helm/modules/installation/authorization/#configuring-a-dell-csi-driver-with-csm-for-authorization).
+
+**Authorization v2.0 Technical Preview**
+
+Follow the instructions available in CSM Authorization for [Configuring PowerFlex with Authorization](../../../../authorization/v2.0-tech-preview/configuration/powerflex).
