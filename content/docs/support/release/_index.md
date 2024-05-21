@@ -8,7 +8,7 @@ Description: >
 
 Release notes for Container Storage Modules:
 
-[CSI Drivers](../csidriver/release)
+[CSI Drivers](../../csidriver/release)
 
 [CSM for Authorization](../authorization/release)
 
