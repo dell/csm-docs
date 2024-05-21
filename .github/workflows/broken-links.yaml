@@ -34,15 +34,15 @@ jobs:
          npm install -D --save postcss-cli
          npm install -D --save postcss
          hugo server --bind 127.0.0.1 &
-      - name: Wait
-        uses: nev7n/wait_for_response@v1
+      - name: curl
+        uses: sozo-design/curl@v1.0.2
         with:
-          url: 'http://127.0.0.1:1313/'
-          responseCode: 200
-          timeout: 40000
-          interval: 500
+          args: --head -X GET --retry 50 --retry-connrefused --retry-delay 10 http://127.0.0.1:1313/csm-docs/
       - name: wget
         uses: wei/wget@v1
         with:
-          args: --spider https://localhost:1313/
+          args: --spider -o spider.log -e robots=off -rp http://127.0.0.1:1313/csm-docs/
+      - name: Output logs
+        run: |
+         cat spider.log
          
