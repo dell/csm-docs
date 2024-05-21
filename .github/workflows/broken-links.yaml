@@ -37,7 +37,7 @@ jobs:
       - name: Install curl and wget
         run: |
           sudo apt-get install -y curl
-          sudo apt-get install -y wget=1.20.3
+          sudo apt-get install -y wget=1.20.3-150000.3.17.1
       - name: Wait for Hugo server
         run: curl --head -X GET --retry 5 --retry-connrefused --retry-delay 10 http://127.0.0.1:1313/csm-docs/
       - name: Run wget spider
