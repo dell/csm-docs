@@ -37,13 +37,11 @@ jobs:
       - name: Install curl and wget
         run: |
           sudo apt-get install -y curl
-          sudo apt-get install -y wget
+          sudo apt-get install -y wget=1.20.3
       - name: Wait for Hugo server
         run: curl --head -X GET --retry 5 --retry-connrefused --retry-delay 10 http://127.0.0.1:1313/csm-docs/
       - name: Run wget spider
-        run: |
-          curl --head -X GET --retry 5 --retry-connrefused --retry-delay 10 http://127.0.0.1:1313/csm-docs/
-          wget --spider -o spider.log -e robots=off -rp http://127.0.0.1:1313/csm-docs/
+        run: wget --spider -o spider.log -e robots=off -rp http://127.0.0.1:1313/csm-docs/
       - name: Output logs
         run: |
          cat spider.log
