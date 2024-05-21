@@ -37,7 +37,7 @@ jobs:
       - name: Wait for Hugo server
         run: curl --head -X GET --retry 5 --retry-connrefused --retry-delay 10 http://127.0.0.1:1313/csm-docs/
       - name: Run wget spider
-        run: wget --spider -o spider.log --execute="robots=off" http://127.0.0.1:1313/csm-docs/
+        run: wget --spider -o spider.log --execute="robots=off" -r http://127.0.0.1:1313/csm-docs/
       - name: Output logs
         run: |
          cat spider.log         
