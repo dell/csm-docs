@@ -42,7 +42,8 @@ jobs:
         run: curl --head -X GET --retry 5 --retry-connrefused --retry-delay 10 http://127.0.0.1:1313/csm-docs/
       - name: Run wget spider
         run: |
-          sudo wget --spider -o spider.log -e robots=off -rp http://127.0.0.1:1313/csm-docs/
+          wget --version
+          wget --spider -o spider.log -e robots=off -rp http://127.0.0.1:1313/csm-docs/
       - name: Output logs
         run: |
          cat spider.log
