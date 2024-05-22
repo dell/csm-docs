@@ -19,10 +19,9 @@ To deploy the Operator, follow the instructions available [here](../../#installa
 1. Execute `kubectl create namespace authorization` to create the authorization namespace (if not already present). Note that the namespace can be any user-defined name, in this example, we assume that the namespace is 'authorization'. 
 
 2. Install cert-manager CRDs 
-```bash
-
-kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v1.11.0/cert-manager.crds.yaml
-```
+    ```bash
+    kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v1.11.0/cert-manager.crds.yaml
+    ```
 
 3. Prepare [samples/authorization/config.yaml](https://github.com/dell/csm-operator/blob/main/samples/authorization/config.yaml) which contains the JWT signing secret. The following table lists the configuration parameters.
 
@@ -59,6 +58,8 @@ kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/relea
 
     kubectl create -f samples/authorization/karavi-storage-secret.yaml
     ```
+
+  > NOTE: Authorization v2.0 Tech Preview does not need the creation of the `karavi-storage-secret`.
 
 ### Install CSM Authorization Proxy Server
 
