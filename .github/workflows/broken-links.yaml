@@ -6,7 +6,7 @@ on:
   pull_request:
     branches: [ main, release-* ]
 jobs:
-  hugo:
+  check-broken-links:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -42,5 +42,5 @@ jobs:
       - name: Output logs
         run: |
          cat spider.log         
-      - name: Check for broken links
-        run: grep -Fxq "Found 32 broken links" spider.log
+      - name: Checking for broken links
+        run: grep -Fxq "Found 0 broken links." spider.log
