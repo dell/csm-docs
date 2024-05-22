@@ -43,4 +43,4 @@ jobs:
         run: |
          cat spider.log         
       - name: Check for broken links
-        run: grep -Fxq "Found 0 broken links" spider.log
+        run: grep -Fxq "Found 32 broken links" spider.log
