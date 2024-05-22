@@ -514,27 +514,29 @@ CSI Driver for Dell Unity XT is supported in the NAT environment for NFS protoco
 
 The user will be able to install the driver and able to create pods.
 
-## Single Pod Access Mode for PersistentVolumes
-CSI Driver for Unity XT supports a new accessmode `ReadWriteOncePod` for PersistentVolumes and PersistentVolumeClaims. With this feature, CSI Driver for Unity XT restricts volume access to a single pod in the cluster
+**NOTE:** On Unity, management port does not support NAT. NAT needs to be disabled on the Unity array's management network.
 
-Prerequisites
-1. Enable the ReadWriteOncePod feature gate for kube-apiserver, kube-scheduler, and kubelet as the ReadWriteOncePod access mode is in alpha for Kubernetes v1.22 and is only supported for CSI volumes. You can enable the feature by setting command line arguments:
-   ```bash
-   --feature-gates="...,ReadWriteOncePod=true"
-   ```
-2. Create a PVC with access mode set to ReadWriteOncePod like shown in the sample below
-    ```yaml
-    kind: PersistentVolumeClaim
-    apiVersion: v1
-    metadata:
-      name: single-writer-only
-    spec:
-      accessModes:
-      - ReadWriteOncePod # Allow only a single pod to access single-writer-only.
-      resources:
-        requests:
-          storage: 1Gi
-    ```
+## Single Pod Access Mode for PersistentVolumes- ReadWriteOncePod 
+
+Use `ReadWriteOncePod(RWOP)` access mode if you want to ensure that only one pod across the whole cluster can read that PVC or write to it. This is only supported for CSI Driver for Unity 2.1.0+ and Kubernetes version 1.22+.
+
+### Creating a PersistentVolumeClaim
+```yaml
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+name: single-writer-only
+spec:
+accessModes:
+- ReadWriteOncePod # Allow only a single pod to access single-writer-only.
+resources:
+requests:
+  storage: 1Gi
+```
+
+When this feature is enabled, the existing `ReadWriteOnce(RWO)` access mode restricts volume access to a single node and allows multiple pods on the same node to read from and write to the same volume.
+
+To migrate existing PersistentVolumes to use `ReadWriteOncePod`, please follow the instruction from [here](https://kubernetes.io/docs/tasks/administer-cluster/change-pv-access-mode-readwriteoncepod/).
 
 ## Volume Health Monitoring
 CSI Driver for Unity XT supports volume health monitoring. This is an alpha feature and requires feature gate to be enabled by setting command line arguments 
