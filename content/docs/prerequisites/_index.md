@@ -36,6 +36,7 @@ weight: 1
 
 > Notes:
 > * Any orchestrator platform or version that's not mentioned here must be self-certified using [Cert-CSI](../cert-csi/) in order to be supported.  Although not mandatory, we recommend users to use orchestrator platforms and versions that have not met their end of life.
+> CSM Authorization is not supported on Red Hat OpenShift.
 
 ## Tested Host Operating Systems
 
