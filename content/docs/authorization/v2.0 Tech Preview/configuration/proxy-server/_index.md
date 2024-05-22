@@ -47,7 +47,7 @@ Afterwards, the storage administrator can configure Authorization with the follo
 
 ## Configuring Storage
 
-A `storage` entity in CSM Authorization consists of the storage type (PowerFlex), the system ID, the API endpoint, and the vault credentials. For example, to create PowerFlex storage:
+A `storage` entity in CSM Authorization consists of the storage type (PowerFlex), the system ID, the API endpoint, and the vault credentials path. For example, to create PowerFlex storage:
 
 ```yaml
 apiVersion: csm-authorization.storage.dell.com/v1alpha1
@@ -70,7 +70,7 @@ spec:
 
 ## Configuring Roles
 
-A `role` consists of a name, the storage to use, and the quota limit for the storage pool to be used. For example, to create a role named `rol1` using the PowerFlex storage created above with a quota limit of 128GB in storage pool `myStoragePool`:
+A `role` consists of a name, the storage array to use, and the quota limit for the storage pool to be used. For example, to create a role named `role1` using the PowerFlex storage created above with a quota limit of 128GB in storage pool `myStoragePool`:
 
 ```yaml
 apiVersion: csm-authorization.storage.dell.com/v1alpha1
