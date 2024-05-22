@@ -34,7 +34,7 @@ storage-service                                    ClusterIP      00.000.000.000
 tenant-service                                     ClusterIP      00.000.000.000    <none>        000/TCP                     28s
 ```
 
-On the machine running `dellctl`, the `/etc/hosts` file needs to be updated with the Ingress hosts for the proxy, storage, and role services. For example:
+On the machine running `dellctl`, if the Ingress host is left default (`csm-authorization.com`) during installation or any of the hostnames don't resolve, the hostnames needs to be add to the `/etc/hosts` file. For example:
 
 ```bash
 <master_node_ip> csm-authorization.com
@@ -45,7 +45,7 @@ Afterwards, the storage administrator can configure Authorization with the follo
 - Tenants
 - Roles
 
-## Configuring Storage
+### Configuring Storage
 
 A `storage` entity in CSM Authorization consists of the storage type (PowerFlex), the system ID, the API endpoint, and the vault credentials path. For example, to create PowerFlex storage:
 
@@ -68,7 +68,7 @@ spec:
 > - The `credentialStore` is the way that credentials for the storage array are stored.
 > - The `credentialPath` is the location within the store that the credentials for the array are stored.
 
-## Configuring Roles
+### Configuring Roles
 
 A `role` consists of a name, the storage array to use, and the quota limit for the storage pool to be used. For example, to create a role named `role1` using the PowerFlex storage created above with a quota limit of 128GB in storage pool `myStoragePool`:
 
@@ -94,7 +94,7 @@ spec:
 > - The `name` is the name of the role that will be used to bind with the tenant.
 > - The `quota` is the amount of allocated space for the specified role.
 
-## Configuring Tenants
+### Configuring Tenants
 
 A `tenant` is a Kubernetes cluster that a role will be bound to. For example, to create a tenant named `csmtenant-sample`:
 
@@ -123,3 +123,32 @@ spec:
 > - The `roles` are a comma seperate list of roles that the tenant can be associated with.
 > - The `volumePrefix` is the prefix that all volumes and snapshots will contain to show association with the tenant.
 > - By creating a tenant, it will automatically bind with the roles for usage.
+
+### Generate a Token
+
+Once the tenant is created, an access/refresh token pair can be created for the tenant. The storage admin is responsible for generating and sending the token to the Kubernetes tenant admin.
+
+```bash
+  dellctl generate token --addr csm-authorization.com:<ingress-controller-port> --insecure true --tenant <tenant> --access-token-expiration 30m0s --refresh-token-expiration 1480h0m0s > token.yaml
+```
+
+`token.yaml` will have a Kubernetes secret manifest that looks like this:
+
+```yaml
+apiVersion: v1
+data:
+  access: ZXlKaGJHY2lPaUpJVXpJMU5pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SmhkV1FpT2lKamMyMGlMQ0psZUhBaU9qRTNNVFkwTURRd016UXNJbWR5YjNWd0lqb2lZM050ZEdWdVlXNTBMWE5oYlhCc1pTSXNJbWx6Y3lJNkltTnZiUzVrWld4c0xtTnpiU0lzSW5KdmJHVnpJam9pY205c1pURWlMQ0p6ZFdJaU9pSmpjMjB0ZEdWdVlXNTBJbjAuRmtVTGotT01mSW9rN3ZWNmFKQURXR1dva1Bsd1huT2tZeWxSclZjN2F5Zw==
+  refresh: ZXlKaGJHY2lPaUpJVXpJMU5pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SmhkV1FpT2lKamMyMGlMQ0psZUhBaU9qRTNNakUzTXpBeU16UXNJbWR5YjNWd0lqb2lZM050ZEdWdVlXNTBMWE5oYlhCc1pTSXNJbWx6Y3lJNkltTnZiUzVrWld4c0xtTnpiU0lzSW5KdmJHVnpJam9pY205c1pURWlMQ0p6ZFdJaU9pSmpjMjB0ZEdWdVlXNTBJbjAudWRYSFZ3MGg1dTdoTjZaVGJlNHgyYXRMWWhIamQta1ZtTFBVUHpXOHNIaw==
+kind: Secret
+metadata:
+  creationTimestamp: null
+  name: proxy-authz-tokens
+type: Opaque
+```
+
+This secret must be applied in the driver namespace.
+
+>__Note__: 
+> - The `insecure` flag specifies to skip certificate validation when connecting to the Authorization proxy-server.
+> - The `addr` flag is the address of the Authorization proxy-server.
+> - The `tenant` flag specifies which tenant to generate the token for.

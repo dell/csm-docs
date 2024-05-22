@@ -42,11 +42,12 @@ Storage Administrators perform the following:
 - Storage System Management (create, get, delete)
 - Role Management (create, get, delete)
 - Tenant Management (create, get, delete)
+- Token Management (create, revoke)
 
 For more information on the configuration of the above, see the configuration of the [Proxy Server](../v2.0-tech-preview/configuration/proxy-server/#configuring-storage).
 
 ### Tenant Administrators
 
-Tenants of CSM for Authorization can use dellctl to generate a token for the configured tenant  by the Storage Administrators.
+Tenants of CSM for Authorization can use the token provided by the Storage Administrators in their storage requests.
 
-For more information on the token generation, see the configuration for the [PowerFlex driver](../v2.0-tech-preview/configuration/powerflex).
+For more information on how to use the token and configuration, see configuration for the [PowerFlex driver](../v2.0-tech-preview/configuration/powerflex).
