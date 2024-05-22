@@ -36,16 +36,11 @@ jobs:
          hugo server --bind 127.0.0.1 &
       - name: Wait for Hugo server
         run: curl --head -X GET --retry 5 --retry-connrefused --retry-delay 10 http://127.0.0.1:1313/csm-docs/
-      - name: Run wget spider
+      - name: Scanning docs for broken links
         continue-on-error: true
         run: |
           wget --verbose --spider -o spider.log -e robots=off -rp http://127.0.0.1:1313/csm-docs/
-          cat spider.log
-          grep -Fxq "Found 0 broken links." spider.log
       - name: Checking for broken links
         run: |          
-          retVal=$?
-          if [ $retVal -eq 1 ]; then
-            echo "Found Broken Links"
-          fi
-          exit $retVal
+          cat spider.log
+          grep -Fxq "Found 0 broken links." spider.log
