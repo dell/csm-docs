@@ -19,10 +19,9 @@ To deploy the Operator, follow the instructions available [here](../../#installa
 1. Execute `kubectl create namespace authorization` to create the authorization namespace (if not already present). Note that the namespace can be any user-defined name, in this example, we assume that the namespace is 'authorization'. 
 
 2. Install cert-manager CRDs 
-```bash
-
-kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v1.11.0/cert-manager.crds.yaml
-```
+    ```bash
+    kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v1.11.0/cert-manager.crds.yaml
+    ```
 
 3. Prepare [samples/authorization/config.yaml](https://github.com/dell/csm-operator/blob/main/samples/authorization/config.yaml) which contains the JWT signing secret. The following table lists the configuration parameters.
 
@@ -62,6 +61,7 @@ kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/relea
 
 >__Note__:  
 > - If you are installing CSM Authorization in a different namespace than `authorization`, edit the `namespace` field in this file to your namespace.
+> - Authorization v2.0 Tech Preview does not need the creation of the `karavi-storage-secret`.
 
 ### Install CSM Authorization Proxy Server
 
@@ -73,19 +73,39 @@ kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/relea
 
    | Parameter | Description | Required | Default |
    | --------- | ----------- | -------- |-------- |
-   | **authorization** | This section configures the CSM-Authorization components. | - | - |
-   | PROXY_HOST | The hostname to configure the self-signed certificate (if applicable), and the proxy service Ingress. | Yes | csm-authorization.com |
-   | PROXY_INGRESS_CLASSNAME | The ingressClassName of the proxy-service Ingress. | Yes | nginx |
-   | PROXY_INGRESS_HOSTS | Additional host rules to be applied to the proxy-service Ingress.  | No | authorization-ingress-nginx-controller.authorization.svc.cluster.local |
-   | REDIS_STORAGE_CLASS | The storage class for Redis to use for persistence. If not supplied, a locally provisioned volume is used. | No | - |
-   | **ingress-nginx** | This section configures the enablement of the NGINX Ingress Controller. | - | - |
-   | enabled | Enable/Disable deployment of the NGINX Ingress Controller. Set to false if you already have an Ingress Controller installed. | No | true |
+   | openshift | For OpenShift Container Platform only: Enable/Disable use of the OpenShift Ingress Controller. Set to false if you already have an Ingress Controller installed. | No | False |
+   | **nginx** | This section configures the enablement of the NGINX Ingress Controller. | - | - |
+   | enabled | For Kubernetes Container Platform only: Enable/Disable deployment of the NGINX Ingress Controller. Set to false if you already have an Ingress Controller installed. | No | true |
    | **cert-manager** | This section configures the enablement of cert-manager. | - | - |
    | enabled | Enable/Disable deployment of cert-manager. Set to false if you already have cert-manager installed. | No | true |
+   | **authorization** | This section configures the CSM-Authorization components. | - | - |
+   | certificate | Location of certificate file, if wanting to use a custom certificate. | No | - |
+   | privateKey | Location of certificate file, if wanting to use a custom certificate. | No | - |
+   | hostname | The hostname to configure the self-signed certificate (if applicable), and the proxy service Ingress. | No | csm-authorization.com |
+   | proxyServerIngress.ingressClassName | The ingressClassName of the proxy-service Ingress. | Yes | nginx |
+   | proxyServerIngress.hosts | Additional host rules to be applied to the proxy-service Ingress. | No | - |
+   | proxyServerIngress.annotations | Additional annotations for the proxy-service Ingress. | No | - |
+   | **redis** | This section configures the Redis components. | - | - |
+   | storageclass | The storage class for Redis to use for persistence. If not supplied, a locally provisioned volume is used. | No | - |
+
+    **Additional v2.0 Technical Preview Parameters:**
+   | Parameter | Description | Required | Default |
+   | --------- | ----------- | -------- |-------- |
+   | **redis** | This section configures the Redis components. | - | - |
+   | redisName | The prefix of the redis pods. The number of pods is determined by the number of replicas. | Yes | redis-csm |
+   | redisCommander | The prefix of the redis commander pod. | Yes | rediscommander |
+   | sentinel | The prefix of the redis sentinel pods. The number of pods is determined by the number of replicas. | Yes | sentinel |
+   | redisReplicas | The number of replicas for the sentinel and redis pods. | Yes | 5 |
+   | storageclass | The storage class for Redis to use for persistence. If not supplied, a locally provisioned volume is used. | No | - |
+   | **vault** | This section configures the vault components. | - | - |
+   | vaultAddress | The address where vault is hosted with the credentials to the array (`https://10.0.0.1:<port>`). | Yes | - |
+   | vaultRole | The configured authentication role in vault. | Yes | csm-authorization |
+   | kvEnginePath | The vault path where the credentials are stored. | Yes | secret |
 
 >__Note__:  
 > - If you specify `REDIS_STORAGE_CLASS`, the storage class must NOT be provisioned by the Dell CSI Driver to be configured with this installation of CSM Authorization. 
 > - If you are installing CSM Authorization in a different namespace than `authorization`, edit the `namespace` fields in this file to your namespace.
+> - If you specify `storageclass`, the storage class must NOT be provisioned by the Dell CSI Driver to be configured with this installation of CSM Authorization. 
 
 **Optional:**
 To enable reporting of trace data with [Zipkin](https://zipkin.io/), use the `csm-config-params` configMap in the sample CR or dynamically by editing the configMap.
@@ -135,13 +155,23 @@ Once the Authorization CR is created, you can verify the installation as mention
 
 ### Install Karavictl
 
+>> NOTE: Authorization v2.0 Tech Preview does not use `karavictl` so installation is not necessary.
+
 Follow the instructions available in CSM Authorization for [Installing karavictl](../../../helm/modules/installation/authorization/#install-karavictl).
 
 ### Configure the CSM Authorization Proxy Server
 
+**Authorization v1.x GA**
+
 Follow the instructions available in CSM Authorization for [Configuring the CSM Authorization Proxy Server](../../../helm/modules/installation/authorization/#configuring-the-csm-authorization-proxy-server).
 
+**Authorization v2.0 Technical Preview**
+
+Follow the instructions available in CSM Authorization for [Configuring the CSM Authorization Proxy Server](../../../../authorization/v2.0-tech-preview/configuration/proxy-server/).
+
 ### Configure a Dell CSI Driver with CSM Authorization
+
+**Authorization v1.x GA**
 
 Follow the instructions available in CSM Authorization for [Configuring a Dell CSI Driver with CSM for Authorization](../../../helm/modules/installation/authorization/#configuring-a-dell-csi-driver-with-csm-for-authorization).
 
@@ -218,3 +248,6 @@ This section outlines the upgrade steps for Container Storage Modules (CSM) for 
 >NOTE:
 
 - In Authorization module upgrade, only `n-1` to `n` upgrade is supported, e.g. if the current observability version is `v1.8.x`, it can be upgraded to `1.9.x`.
+**Authorization v2.0 Technical Preview**
+
+Follow the instructions available in CSM Authorization for [Configuring PowerFlex with Authorization](../../../../authorization/v2.0-tech-preview/configuration/powerflex).
