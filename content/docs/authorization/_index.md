@@ -14,4 +14,4 @@ Storage administrators of compatible storage platforms will be able to apply quo
 
 Kubernetes administrators will have an interface to create, delete, and manage roles/groups that storage rules may be applied. Administrators and/or users may then generate authentication tokens that may be used by tenants to use storage with proper access policies being automatically enforced.
 
-Currently, we have two version of Authorization, **v1.x GA** and **v2.0 Tech Preview**.
+Currently, we have two versions of Authorization, **v1.x GA** and **v2.0 Tech Preview**.
