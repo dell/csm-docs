@@ -136,7 +136,7 @@ Given a setup where Kubernetes, a storage system, and the CSM for Authorization 
 
     **Operator**
 
-    Refer to the [Install Driver](../../../deployment/csmoperator/drivers/powerflex/#install-driver) section to edit the parameters in the Custom Resource to enable CSM Authorization.
+    Refer to the [Install Driver](../../../deployment/csmoperator/drivers/powerflex.md/#install-driver) section to edit the parameters in the Custom Resource to enable CSM Authorization.
 
     Under `modules`, enable the module named `authorization`:
 
