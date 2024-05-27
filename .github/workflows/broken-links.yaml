@@ -48,7 +48,6 @@ jobs:
           sed -n '/broken links/,$p' spider.log | grep 'http' > broken_links
       - name: Check for broken links
         run: |
-          cat spider.log
           wc -l broken_links
           cat broken_links
           grep -v 'http' broken_links || true
