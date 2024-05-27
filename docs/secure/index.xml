@@ -28,7 +28,7 @@
 &lt;p&gt;&lt;strong&gt;NOTE:&lt;/strong&gt; This tech-preview release is not intended for use in production environment.&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;NOTE:&lt;/strong&gt; Encryption requires a time-based license to create new encrypted volumes. Request a &lt;a href=&#34;../../license&#34;&gt;trial license&lt;/a&gt; prior to deployment.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;NOTE:&lt;/strong&gt; Encryption requires a time-based license to create new encrypted volumes. Request a &lt;a href=&#34;../../support/license&#34;&gt;trial license&lt;/a&gt; prior to deployment.&lt;/p&gt;
 &lt;p&gt;After the license expiration, existing encrypted volume can still be unlocked and used, but no new encrypted volumes can be created.&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;The volume data is encrypted on the Kubernetes worker host running the application workload, transparently for the application.&lt;/p&gt;

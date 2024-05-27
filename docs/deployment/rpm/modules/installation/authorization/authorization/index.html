@@ -18,12 +18,12 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/docs/deployment/rpm/modules/installation/authorization/authorization/" /><meta property="article:section" content="docs" />
 
-<meta property="article:modified_time" content="2024-04-08T15:49:08-04:00" />
+<meta property="article:modified_time" content="2024-05-27T22:31:22+05:30" />
 
 <meta itemprop="name" content="Authorization">
 <meta itemprop="description" content="Dell Technologies (Dell) Container Storage Modules (CSM) for Authorization RPM deployment
 ">
-<meta itemprop="dateModified" content="2024-04-08T15:49:08-04:00" />
+<meta itemprop="dateModified" content="2024-05-27T22:31:22+05:30" />
 <meta itemprop="wordCount" content="1166">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Authorization"/>
@@ -747,7 +747,7 @@
 <p>This section outlines the deployment steps for Container Storage Modules (CSM) for Authorization.  The deployment of CSM for Authorization is handled in 2 parts:</p>
 <ul>
 <li>Deploying the CSM for Authorization proxy server, to be controlled by storage administrators</li>
-<li>Configuring one to many <a href="../../../../../prerequisites/#supported-csm-modules">supported</a> Dell CSI drivers with CSM for Authorization</li>
+<li>Configuring one to many <a href="../../../../../../prerequisites/#supported-csm-modules">supported</a> Dell CSI drivers with CSM for Authorization</li>
 </ul>
 <h2 id="prerequisites">Prerequisites</h2>
 <p>The CSM for Authorization proxy server requires a Linux host with the following minimum resource allocations:</p>
@@ -833,13 +833,13 @@ This allows CSM for Authorization to be installed in network-restricted environm
 <p>After installation, application data will be stored on the system under <code>/var/lib/rancher/k3s/storage/</code>.</p>
 </li>
 </ol>
-<p>If errors occur during installation, review the <a href="../../../../../authorization/troubleshooting">Troubleshooting</a> section.</p>
+<p>If errors occur during installation, review the <a href="../../../../../../authorization/troubleshooting">Troubleshooting</a> section.</p>
 <h2 id="configuring-the-csm-for-authorization-proxy-server">Configuring the CSM for Authorization Proxy Server</h2>
 <p>The first part of CSM for Authorization deployment is to configure the proxy server. This is controlled by the Storage Administrator.</p>
-<p>Please follow the steps outlined in the <a href="../../../../../authorization/configuration/proxy-server">proxy server</a> configuration.</p>
+<p>Please follow the steps outlined in the <a href="../../../../../../authorization/configuration/proxy-server">proxy server</a> configuration.</p>
 <h2 id="configuring-a-dell-csi-driver-with-csm-for-authorization">Configuring a Dell CSI Driver with CSM for Authorization</h2>
-<p>The second part of CSM for Authorization deployment is to configure one or more of the <a href="../../../../../prerequisites/#supported-csm-modules">supported</a> CSI drivers. This is controlled by the Kubernetes tenant administrator.</p>
-<p>Please follow the steps outlined in <a href="../../../../../authorization/configuration/powerflex">PowerFlex</a>, <a href="../../../../../authorization/configuration/powermax">PowerMax</a>, or <a href="../../../../../authorization/configuration/powerscale">PowerScale</a> to configure the CSI Driver to work with the Authorization sidecar.</p>
+<p>The second part of CSM for Authorization deployment is to configure one or more of the <a href="../../../../../../prerequisites/#supported-csm-modules">supported</a> CSI drivers. This is controlled by the Kubernetes tenant administrator.</p>
+<p>Please follow the steps outlined in <a href="../../../../../../authorization/configuration/powerflex">PowerFlex</a>, <a href="../../../../../../authorization/configuration/powermax">PowerMax</a>, or <a href="../../../../../../authorization/configuration/powerscale">PowerScale</a> to configure the CSI Driver to work with the Authorization sidecar.</p>
 <h2 id="updating-csm-for-authorization-proxy-server-configuration">Updating CSM for Authorization Proxy Server Configuration</h2>
 <p>CSM for Authorization has a subset of configuration parameters that can be updated dynamically:</p>
 <table>

@@ -36,7 +36,7 @@
 &lt;li&gt;Upgrading the Dell CSI drivers with CSM for Authorization enabled&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;upgrading-csm-for-authorization-proxy-server&#34;&gt;Upgrading CSM for Authorization proxy server&lt;/h2&gt;
-&lt;p&gt;Obtain the latest single binary installer RPM by following one of our two options &lt;a href=&#34;../../installation/authorization#single-binary-installer&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Obtain the latest single binary installer RPM by following one of our two options &lt;a href=&#34;../../installation/authorization/authorization#single-binary-installer&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;To update the rpm package on the system, run the below command from within the extracted folder:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sh install_karavi_auth.sh --upgrade
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;As an option, on version 1.6.0, the Nodeports for the ingress controller can be specified:&lt;/p&gt;

@@ -33,7 +33,7 @@
 &lt;p&gt;This section outlines the deployment steps for Container Storage Modules (CSM) for Authorization.  The deployment of CSM for Authorization is handled in 2 parts:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Deploying the CSM for Authorization proxy server, to be controlled by storage administrators&lt;/li&gt;
-&lt;li&gt;Configuring one to many &lt;a href=&#34;../../../../../prerequisites/#supported-csm-modules&#34;&gt;supported&lt;/a&gt; Dell CSI drivers with CSM for Authorization&lt;/li&gt;
+&lt;li&gt;Configuring one to many &lt;a href=&#34;../../../../../../prerequisites/#supported-csm-modules&#34;&gt;supported&lt;/a&gt; Dell CSI drivers with CSM for Authorization&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;prerequisites&#34;&gt;Prerequisites&lt;/h2&gt;
 &lt;p&gt;The CSM for Authorization proxy server requires a Linux host with the following minimum resource allocations:&lt;/p&gt;
@@ -119,13 +119,13 @@ This allows CSM for Authorization to be installed in network-restricted environm
 &lt;p&gt;After installation, application data will be stored on the system under &lt;code&gt;/var/lib/rancher/k3s/storage/&lt;/code&gt;.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;If errors occur during installation, review the &lt;a href=&#34;../../../../../authorization/troubleshooting&#34;&gt;Troubleshooting&lt;/a&gt; section.&lt;/p&gt;
+&lt;p&gt;If errors occur during installation, review the &lt;a href=&#34;../../../../../../authorization/troubleshooting&#34;&gt;Troubleshooting&lt;/a&gt; section.&lt;/p&gt;
 &lt;h2 id=&#34;configuring-the-csm-for-authorization-proxy-server&#34;&gt;Configuring the CSM for Authorization Proxy Server&lt;/h2&gt;
 &lt;p&gt;The first part of CSM for Authorization deployment is to configure the proxy server. This is controlled by the Storage Administrator.&lt;/p&gt;
-&lt;p&gt;Please follow the steps outlined in the &lt;a href=&#34;../../../../../authorization/configuration/proxy-server&#34;&gt;proxy server&lt;/a&gt; configuration.&lt;/p&gt;
+&lt;p&gt;Please follow the steps outlined in the &lt;a href=&#34;../../../../../../authorization/configuration/proxy-server&#34;&gt;proxy server&lt;/a&gt; configuration.&lt;/p&gt;
 &lt;h2 id=&#34;configuring-a-dell-csi-driver-with-csm-for-authorization&#34;&gt;Configuring a Dell CSI Driver with CSM for Authorization&lt;/h2&gt;
-&lt;p&gt;The second part of CSM for Authorization deployment is to configure one or more of the &lt;a href=&#34;../../../../../prerequisites/#supported-csm-modules&#34;&gt;supported&lt;/a&gt; CSI drivers. This is controlled by the Kubernetes tenant administrator.&lt;/p&gt;
-&lt;p&gt;Please follow the steps outlined in &lt;a href=&#34;../../../../../authorization/configuration/powerflex&#34;&gt;PowerFlex&lt;/a&gt;, &lt;a href=&#34;../../../../../authorization/configuration/powermax&#34;&gt;PowerMax&lt;/a&gt;, or &lt;a href=&#34;../../../../../authorization/configuration/powerscale&#34;&gt;PowerScale&lt;/a&gt; to configure the CSI Driver to work with the Authorization sidecar.&lt;/p&gt;
+&lt;p&gt;The second part of CSM for Authorization deployment is to configure one or more of the &lt;a href=&#34;../../../../../../prerequisites/#supported-csm-modules&#34;&gt;supported&lt;/a&gt; CSI drivers. This is controlled by the Kubernetes tenant administrator.&lt;/p&gt;
+&lt;p&gt;Please follow the steps outlined in &lt;a href=&#34;../../../../../../authorization/configuration/powerflex&#34;&gt;PowerFlex&lt;/a&gt;, &lt;a href=&#34;../../../../../../authorization/configuration/powermax&#34;&gt;PowerMax&lt;/a&gt;, or &lt;a href=&#34;../../../../../../authorization/configuration/powerscale&#34;&gt;PowerScale&lt;/a&gt; to configure the CSI Driver to work with the Authorization sidecar.&lt;/p&gt;
 &lt;h2 id=&#34;updating-csm-for-authorization-proxy-server-configuration&#34;&gt;Updating CSM for Authorization Proxy Server Configuration&lt;/h2&gt;
 &lt;p&gt;CSM for Authorization has a subset of configuration parameters that can be updated dynamically:&lt;/p&gt;
 &lt;table&gt;

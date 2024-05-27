@@ -1069,7 +1069,7 @@ Database (SQLite) file for functional test suites is <code>cert-csi-functional.d
 <p>NOTE: For testing/debugging purposes, it can be useful to use the <code>--no-cleanup</code> so resources do not get deleted.</p>
 </blockquote>
 <blockquote>
-<p>NOTE: If you are using CSI PowerScale with <a href="../csidriver/features/powerscale/#usage-of-smartquotas-to-limit-storage-consumption">SmartQuotas</a> disabled, the <code>Volume Expansion</code> suite is expected to timeout due to the way PowerScale provisions storage. Set <code>storageClasses.expansion</code> to <code>false</code> to skip this suite.</p>
+<p>NOTE: If you are using CSI PowerScale with <a href="../../csidriver/features/powerscale/#usage-of-smartquotas-to-limit-storage-consumption">SmartQuotas</a> disabled, the <code>Volume Expansion</code> suite is expected to timeout due to the way PowerScale provisions storage. Set <code>storageClasses.expansion</code> to <code>false</code> to skip this suite.</p>
 </blockquote>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cert-csi certify --cert-config &lt;path-to-config&gt; --vsc &lt;volume-snapshot-class&gt;
 </span></span></code></pre></div><p>Withold the <code>--vsc</code> argument if Snapshot capabilities are disabled.</p>
@@ -1203,7 +1203,7 @@ Database (SQLite) file for functional test suites is <code>cert-csi-functional.d
 <p>Raw block volumes cannot be verified since there is no filesystem.</p>
 </blockquote>
 <blockquote>
-<p>If you are using CSI PowerScale with <a href="../csidriver/features/powerscale/#usage-of-smartquotas-to-limit-storage-consumption">SmartQuotas</a> disabled, the <code>Volume Expansion</code> suite is expected to timeout due to the way PowerScale provisions storage.</p>
+<p>If you are using CSI PowerScale with <a href="../../csidriver/features/powerscale/#usage-of-smartquotas-to-limit-storage-consumption">SmartQuotas</a> disabled, the <code>Volume Expansion</code> suite is expected to timeout due to the way PowerScale provisions storage.</p>
 </blockquote>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cert-csi <span style="color:#204a87">test</span> expansion --sc &lt;storage class&gt;
 </span></span></code></pre></div><p>Run <code>cert-csi test expansion -h</code> for more options.</p>
