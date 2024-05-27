@@ -50,4 +50,4 @@ jobs:
         run: |
           wc -l broken_links
           cat broken_links
-          grep -v 'http' broken_links
+          grep -v 'http' broken_links || true
