@@ -50,4 +50,4 @@ jobs:
         run: |
           wc -l broken_links
           cat broken_links
-          wc -l broken_links | grep -q 0
+          wc -l broken_links | grep -Fxq "0 broken_links"
