@@ -6,7 +6,7 @@ Description: >
   Use Cases
 ---
 
-After Application Mobility is installed, the [dellctl CLI](../support/cli) can be used to register clusters and manage backups and restores of applications. These examples also provide references for using the Application Mobility Custom Resource Definitions (CRDs) to define Custom Resources (CRs) as an alternative to using the `dellctl` CLI.
+After Application Mobility is installed, the [dellctl CLI](../../support/cli) can be used to register clusters and manage backups and restores of applications. These examples also provide references for using the Application Mobility Custom Resource Definitions (CRDs) to define Custom Resources (CRs) as an alternative to using the `dellctl` CLI.
 
 ## Backup and Restore an Application
 This example details the steps when an application in namespace `demo1` is being backed up and then later restored to either the same cluster or another cluster. In this sample, both Application Mobility and Velero are installed in the `application-mobility` namespace.
