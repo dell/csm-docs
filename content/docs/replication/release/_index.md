@@ -18,11 +18,13 @@ Description: >
 
 
 
+
 ### New Features/Changes
 
-- [#926 - [FEATURE]: Fixing the linting, formatting and vetting issues](https://github.com/dell/csm/issues/926)
+There are no new features in this release.
 
 ### Fixed Issues
 
+- [#1295 - [BUG]: csm replication - volume prefix in target cluster is ignored](https://github.com/dell/csm/issues/1295)
 
 ### Known Issues
