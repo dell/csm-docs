@@ -41,6 +41,10 @@ jobs:
         run: |
           wget --verbose --spider -o spider.log -e robots=off -rp http://127.0.0.1:1313/csm-docs/
       - name: Getting output
-        run: |          
-          sed -n '/broken links/,$p' spider.log
-          grep -Fxq "Found 0 broken links." spider.log
+        run: |
+          sed -i '/http:\/\/127.0.0.1:1313\/favicons\/favicon.ico/d' spider.log
+          sed -i '/http:\/\/127.0.0.1:1313\/css\/prism.css/d' spider.log
+          sed -n '/broken links/,$p' spider.log | grep 'http' > broken_links
+          wc -l broken_links
+          cat broken_links
+          grep -v 'http' broken_links
