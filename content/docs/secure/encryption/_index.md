@@ -9,7 +9,7 @@ Encryption provides the capability to encrypt user data residing on volumes crea
 
 > **NOTE:** This tech-preview release is not intended for use in production environment.
 
-> **NOTE:** Encryption requires a time-based license to create new encrypted volumes. Request a [trial license](../../license) prior to deployment.
+> **NOTE:** Encryption requires a time-based license to create new encrypted volumes. Request a [trial license](../../support/license) prior to deployment.
 > 
 > After the license expiration, existing encrypted volume can still be unlocked and used, but no new encrypted volumes can be created.
 

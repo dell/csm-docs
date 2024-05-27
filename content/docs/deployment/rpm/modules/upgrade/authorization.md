@@ -16,7 +16,7 @@ This section outlines the upgrade steps for Container Storage Modules (CSM) for 
 
 ## Upgrading CSM for Authorization proxy server
 
-Obtain the latest single binary installer RPM by following one of our two options [here](../../installation/authorization#single-binary-installer).
+Obtain the latest single binary installer RPM by following one of our two options [here](../../installation/authorization/authorization#single-binary-installer).
 
 To update the rpm package on the system, run the below command from within the extracted folder:
 

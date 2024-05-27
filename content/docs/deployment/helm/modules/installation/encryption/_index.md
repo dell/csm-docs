@@ -82,7 +82,7 @@ Apart from any secrets and config maps described in the CSI driver documentation
 
 ### Secret *encryption-license*
 
-Request a trial license following instructions on the [License page](../../../../../license). You will be provided with a YAML file similar to:
+Request a trial license following instructions on the [License page](../../../../../support/license/). You will be provided with a YAML file similar to:
 
 ```yaml
 apiVersion: v1
