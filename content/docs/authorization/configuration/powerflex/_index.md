@@ -55,7 +55,7 @@ Given a setup where Kubernetes, a storage system, and the CSM for Authorization 
 
     **Helm**
 
-    Refer to the [Install the Driver](../../../deployment/helm/drivers/installation/powerflex.md/#install-the-driver) section to edit the parameters in `samples/config.yaml` to configure the driver to communicate with the CSM Authorization sidecar.
+    Refer to the [Install the Driver](../../../deployment/helm/drivers/installation/powerflex/#install-the-driver) section to edit the parameters in `samples/config.yaml` to configure the driver to communicate with the CSM Authorization sidecar.
 
     - Update `endpoint` to match the localhost endpoint in `samples/secret/karavi-authorization-config.json`.
 
@@ -102,7 +102,7 @@ Given a setup where Kubernetes, a storage system, and the CSM for Authorization 
 
     **Helm**
 
-    Refer to the [Install the Driver](../../../deployment/helm/drivers/installation/powerflex.md/#install-the-driver) section to edit the parameters in `myvalues.yaml` to enable CSM Authorization.
+    Refer to the [Install the Driver](../../../deployment/helm/drivers/installation/powerflex/#install-the-driver) section to edit the parameters in `myvalues.yaml` to enable CSM Authorization.
 
     - Update `authorization.enabled` to `true`.
     
@@ -136,7 +136,7 @@ Given a setup where Kubernetes, a storage system, and the CSM for Authorization 
 
     **Operator**
 
-    Refer to the [Install Driver](../../../deployment/csmoperator/drivers/powerflex.md/#install-driver) section to edit the parameters in the Custom Resource to enable CSM Authorization.
+    Refer to the [Install Driver](../../../deployment/csmoperator/drivers/powerflex/#install-driver) section to edit the parameters in the Custom Resource to enable CSM Authorization.
 
     Under `modules`, enable the module named `authorization`:
 
@@ -172,4 +172,4 @@ Given a setup where Kubernetes, a storage system, and the CSM for Authorization 
 
 6. Install the Dell CSI PowerFlex driver following the appropriate documenation for your installation method.
 
-7. (Optional) Install [dellctl](../../../support/cli/_index.md/#installation-instructions) to perform Kubernetes administrator commands for additional capabilities (e.g., list volumes). Please refer to the [dellctl documentation page](../../../support/cli) for the installation steps and command list.
+7. (Optional) Install [dellctl](../../../support/cli/#installation-instructions) to perform Kubernetes administrator commands for additional capabilities (e.g., list volumes). Please refer to the [dellctl documentation page](../../../support/cli) for the installation steps and command list.
