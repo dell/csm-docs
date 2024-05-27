@@ -47,6 +47,7 @@ jobs:
           sed -i '/http:\/\/127.0.0.1:1313\/css\/prism.css/d' spider.log
           sed -n '/broken links/,$p' spider.log | grep 'http' > broken_links
           wc -l broken_links
-          cat broken_links
       - name: Check for broken links
-        run: grep -v 'http' broken_links
+        run: |
+          cat broken_links
+          grep -v 'http' broken_links
