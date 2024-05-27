@@ -5542,7 +5542,7 @@ dell/csm-authorization          1.10.0          1.10.0          CSM for Authoriz
 &lt;li&gt;Upgrading the Dell CSI drivers with CSM for Authorization enabled&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;upgrading-csm-for-authorization-proxy-server&#34;&gt;Upgrading CSM for Authorization proxy server&lt;/h2&gt;
-&lt;p&gt;Obtain the latest single binary installer RPM by following one of our two options &lt;a href=&#34;../../installation/authorization#single-binary-installer&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Obtain the latest single binary installer RPM by following one of our two options &lt;a href=&#34;../../installation/authorization/authorization#single-binary-installer&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;To update the rpm package on the system, run the below command from within the extracted folder:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sh install_karavi_auth.sh --upgrade
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;As an option, on version 1.6.0, the Nodeports for the ingress controller can be specified:&lt;/p&gt;
@@ -6677,7 +6677,7 @@ Optionally, you could provide your own &lt;a href=&#34;../../installation/observ
       <description>
         
         
-        &lt;p&gt;After Application Mobility is installed, the &lt;a href=&#34;../../references/cli/&#34;&gt;dellctl CLI&lt;/a&gt; can be used to register clusters and manage backups and restores of applications. These examples also provide references for using the Application Mobility Custom Resource Definitions (CRDs) to define Custom Resources (CRs) as an alternative to using the &lt;code&gt;dellctl&lt;/code&gt; CLI.&lt;/p&gt;
+        &lt;p&gt;After Application Mobility is installed, the &lt;a href=&#34;../../support/cli&#34;&gt;dellctl CLI&lt;/a&gt; can be used to register clusters and manage backups and restores of applications. These examples also provide references for using the Application Mobility Custom Resource Definitions (CRDs) to define Custom Resources (CRs) as an alternative to using the &lt;code&gt;dellctl&lt;/code&gt; CLI.&lt;/p&gt;
 &lt;h2 id=&#34;backup-and-restore-an-application&#34;&gt;Backup and Restore an Application&lt;/h2&gt;
 &lt;p&gt;This example details the steps when an application in namespace &lt;code&gt;demo1&lt;/code&gt; is being backed up and then later restored to either the same cluster or another cluster. In this sample, both Application Mobility and Velero are installed in the &lt;code&gt;application-mobility&lt;/code&gt; namespace.&lt;/p&gt;
 &lt;ol&gt;

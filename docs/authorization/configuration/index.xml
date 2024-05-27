@@ -221,7 +221,7 @@
 &lt;p&gt;Install the Dell CSI PowerFlex driver following the appropriate documenation for your installation method.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;(Optional) Install &lt;a href=&#34;../../../references/cli&#34;&gt;dellctl&lt;/a&gt; to perform Kubernetes administrator commands for additional capabilities (e.g., list volumes). Please refer to the &lt;a href=&#34;../../../references/cli&#34;&gt;dellctl documentation page&lt;/a&gt; for the installation steps and command list.&lt;/p&gt;
+&lt;p&gt;(Optional) Install &lt;a href=&#34;../../../support/cli/#installation-instructions&#34;&gt;dellctl&lt;/a&gt; to perform Kubernetes administrator commands for additional capabilities (e.g., list volumes). Please refer to the &lt;a href=&#34;../../../support/cli&#34;&gt;dellctl documentation page&lt;/a&gt; for the installation steps and command list.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
 
@@ -412,7 +412,7 @@
 &lt;p&gt;Install the Dell CSI PowerMax driver following the appropriate documenation for your installation method.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;(Optional) Install &lt;a href=&#34;../../../references/cli&#34;&gt;dellctl&lt;/a&gt; to perform Kubernetes administrator commands for additional capabilities (e.g., list volumes). Please refer to the &lt;a href=&#34;../../../references/cli&#34;&gt;dellctl documentation page&lt;/a&gt; for the installation steps and command list.&lt;/p&gt;
+&lt;p&gt;(Optional) Install &lt;a href=&#34;../../../support/cli/#installation-instructions&#34;&gt;dellctl&lt;/a&gt; to perform Kubernetes administrator commands for additional capabilities (e.g., list volumes). Please refer to the &lt;a href=&#34;../../../support/cli&#34;&gt;dellctl documentation page&lt;/a&gt; for the installation steps and command list.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
 
@@ -637,7 +637,7 @@
 &lt;p&gt;Install the Dell CSI PowerScale driver following the appropriate documenation for your installation method.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;(Optional) Install &lt;a href=&#34;../../../references/cli&#34;&gt;dellctl&lt;/a&gt; to perform Kubernetes administrator commands for additional capabilities (e.g., list volumes). Please refer to the &lt;a href=&#34;../../../references/cli&#34;&gt;dellctl documentation page&lt;/a&gt; for the installation steps and command list.&lt;/p&gt;
+&lt;p&gt;(Optional) Install &lt;a href=&#34;../../../support/cli/#installation-instructions&#34;&gt;dellctl&lt;/a&gt; to perform Kubernetes administrator commands for additional capabilities (e.g., list volumes). Please refer to the &lt;a href=&#34;../../../support/cli&#34;&gt;dellctl documentation page&lt;/a&gt; for the installation steps and command list.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
 

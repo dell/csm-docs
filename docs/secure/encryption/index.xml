@@ -107,7 +107,7 @@ If you run a &lt;a href=&#34;../../../deployment/helm/modules/installation/encry
 &lt;/ul&gt;
 &lt;p&gt;Resolution:&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;obtain a &lt;a href=&#34;../../../license&#34;&gt;new valid license&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;obtain a &lt;a href=&#34;../../../support/license&#34;&gt;new valid license&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;check the license is for the cluster on which the encrypted volumes are created&lt;/li&gt;
 &lt;li&gt;check &lt;a href=&#34;../../../deployment/helm/modules/installation/encryption#secret-encryption-license&#34;&gt;encryption-license secret&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;

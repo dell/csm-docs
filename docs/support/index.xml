@@ -24,15 +24,15 @@
         
         
         &lt;p&gt;Release notes for Container Storage Modules:&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;../csidriver/release&#34;&gt;CSI Drivers&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;../authorization/release&#34;&gt;CSM for Authorization&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;../observability/release&#34;&gt;CSM for Observability&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;../replication/release&#34;&gt;CSM for Replication&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;../resiliency/release&#34;&gt;CSM for Resiliency&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;../secure/encryption/release&#34;&gt;CSM for Encryption&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;../applicationmobility/release&#34;&gt;CSM for Application Mobility&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;../deployment/csmoperator/release&#34;&gt;CSM Operator&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;../deployment/csminstallationwizard/release&#34;&gt;CSM Installation Wizard&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;../../csidriver/release&#34;&gt;CSI Drivers&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;../../authorization/release&#34;&gt;CSM for Authorization&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;../../observability/release&#34;&gt;CSM for Observability&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;../../replication/release&#34;&gt;CSM for Replication&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;../../resiliency/release&#34;&gt;CSM for Resiliency&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;../../secure/encryption/release&#34;&gt;CSM for Encryption&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;../../applicationmobility/release&#34;&gt;CSM for Application Mobility&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;../../deployment/csmoperator/release&#34;&gt;CSM Operator&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;../../deployment/csminstallationwizard/release&#34;&gt;CSM Installation Wizard&lt;/a&gt;&lt;/p&gt;
 
       </description>
     </item>
@@ -47,14 +47,14 @@
         
         
         &lt;p&gt;Troubleshooting links for Container Storage Modules:&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;../csidriver/troubleshooting&#34;&gt;CSI Drivers&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;../authorization/troubleshooting&#34;&gt;CSM for Authorization&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;../observability/troubleshooting&#34;&gt;CSM for Observability&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;../replication/troubleshooting&#34;&gt;CSM for Replication&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;../resiliency/troubleshooting&#34;&gt;CSM for Resiliency&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;../secure/encryption/troubleshooting&#34;&gt;CSM for Encryption&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;../applicationmobility/troubleshooting&#34;&gt;CSM for Application Mobility&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;../deployment/csmoperator/troubleshooting&#34;&gt;CSM Operator&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;../../csidriver/troubleshooting&#34;&gt;CSI Drivers&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;../../authorization/troubleshooting&#34;&gt;CSM for Authorization&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;../../observability/troubleshooting&#34;&gt;CSM for Observability&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;../../replication/troubleshooting&#34;&gt;CSM for Replication&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;../../resiliency/troubleshooting&#34;&gt;CSM for Resiliency&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;../../secure/encryption/troubleshooting&#34;&gt;CSM for Encryption&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;../../applicationmobility/troubleshooting&#34;&gt;CSM for Application Mobility&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;../../deployment/csmoperator/troubleshooting&#34;&gt;CSM Operator&lt;/a&gt;&lt;/p&gt;
 
       </description>
     </item>
@@ -391,7 +391,7 @@ Database (SQLite) file for functional test suites is &lt;code&gt;cert-csi-functi
 &lt;p&gt;NOTE: For testing/debugging purposes, it can be useful to use the &lt;code&gt;--no-cleanup&lt;/code&gt; so resources do not get deleted.&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;blockquote&gt;
-&lt;p&gt;NOTE: If you are using CSI PowerScale with &lt;a href=&#34;../csidriver/features/powerscale/#usage-of-smartquotas-to-limit-storage-consumption&#34;&gt;SmartQuotas&lt;/a&gt; disabled, the &lt;code&gt;Volume Expansion&lt;/code&gt; suite is expected to timeout due to the way PowerScale provisions storage. Set &lt;code&gt;storageClasses.expansion&lt;/code&gt; to &lt;code&gt;false&lt;/code&gt; to skip this suite.&lt;/p&gt;
+&lt;p&gt;NOTE: If you are using CSI PowerScale with &lt;a href=&#34;../../csidriver/features/powerscale/#usage-of-smartquotas-to-limit-storage-consumption&#34;&gt;SmartQuotas&lt;/a&gt; disabled, the &lt;code&gt;Volume Expansion&lt;/code&gt; suite is expected to timeout due to the way PowerScale provisions storage. Set &lt;code&gt;storageClasses.expansion&lt;/code&gt; to &lt;code&gt;false&lt;/code&gt; to skip this suite.&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cert-csi certify --cert-config &amp;lt;path-to-config&amp;gt; --vsc &amp;lt;volume-snapshot-class&amp;gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Withold the &lt;code&gt;--vsc&lt;/code&gt; argument if Snapshot capabilities are disabled.&lt;/p&gt;
@@ -525,7 +525,7 @@ Database (SQLite) file for functional test suites is &lt;code&gt;cert-csi-functi
 &lt;p&gt;Raw block volumes cannot be verified since there is no filesystem.&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;blockquote&gt;
-&lt;p&gt;If you are using CSI PowerScale with &lt;a href=&#34;../csidriver/features/powerscale/#usage-of-smartquotas-to-limit-storage-consumption&#34;&gt;SmartQuotas&lt;/a&gt; disabled, the &lt;code&gt;Volume Expansion&lt;/code&gt; suite is expected to timeout due to the way PowerScale provisions storage.&lt;/p&gt;
+&lt;p&gt;If you are using CSI PowerScale with &lt;a href=&#34;../../csidriver/features/powerscale/#usage-of-smartquotas-to-limit-storage-consumption&#34;&gt;SmartQuotas&lt;/a&gt; disabled, the &lt;code&gt;Volume Expansion&lt;/code&gt; suite is expected to timeout due to the way PowerScale provisions storage.&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cert-csi &lt;span style=&#34;color:#204a87&#34;&gt;test&lt;/span&gt; expansion --sc &amp;lt;storage class&amp;gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Run &lt;code&gt;cert-csi test expansion -h&lt;/code&gt; for more options.&lt;/p&gt;
