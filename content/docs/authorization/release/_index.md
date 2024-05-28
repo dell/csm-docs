@@ -8,17 +8,6 @@ Description: >
 
 ## Release Notes - CSM Authorization 1.11.0
 
-
-
-
-
-
-
-
-
-
-
-
 ### New Features/Changes
 
 There are no new features in this release.
@@ -28,5 +17,5 @@ There are no new features in this release.
 - [#1205 - [BUG]: Operator doesn't support non-authorization namespace](https://github.com/dell/csm/issues/1205)
 
 ### Known Issues
-
-There are no known issues in this release.
+| Issue | Workaround |
+|-------|------------|
