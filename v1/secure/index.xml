@@ -23,7 +23,8 @@
       <description>
         
         
-        &lt;p&gt;Encryption provides the capability to encrypt user data residing on volumes created by Dell CSI Drivers.&lt;/p&gt;
+        &lt;p&gt;&lt;strong&gt;NOTE:&lt;/strong&gt;  Encryption is not supported for CSM 1.9.x release. Please refer to the &lt;a href=&#34;./release/&#34;&gt;release notes&lt;/a&gt; for more details.&lt;/p&gt;
+&lt;p&gt;Encryption provides the capability to encrypt user data residing on volumes created by Dell CSI Drivers.&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;&lt;strong&gt;NOTE:&lt;/strong&gt; This tech-preview release is not intended for use in production environment.&lt;/p&gt;
 &lt;/blockquote&gt;

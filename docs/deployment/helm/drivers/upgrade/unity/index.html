@@ -16,11 +16,11 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/docs/deployment/helm/drivers/upgrade/unity/" /><meta property="article:section" content="docs" />
 
-<meta property="article:modified_time" content="2024-03-21T02:39:59+05:30" />
+<meta property="article:modified_time" content="2024-05-29T01:50:52+05:30" />
 
 <meta itemprop="name" content="Unity XT">
 <meta itemprop="description" content="Upgrade Unity XT CSI driver">
-<meta itemprop="dateModified" content="2024-03-21T02:39:59+05:30" />
+<meta itemprop="dateModified" content="2024-05-29T01:50:52+05:30" />
 <meta itemprop="wordCount" content="186">
 <meta itemprop="keywords" content="upgrade,csi-driver," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Unity XT"/>
@@ -81,7 +81,7 @@
 	
 	
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.10.1)</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.10.2)</a>
 	
 	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.9.4</a>
 	
@@ -103,7 +103,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.ffe9698dbb68c8428e259500c4a19f11.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.917c77bb7489bf8dff02d16b628a6ff8.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -125,7 +125,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.ffe9698dbb68c8428e259500c4a19f11.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.917c77bb7489bf8dff02d16b628a6ff8.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -732,9 +732,9 @@
 <h3 id="using-helm">Using Helm</h3>
 <p><strong>Note:</strong> While upgrading the driver via helm, controllerCount variable in myvalues.yaml can be at most one less than the number of worker nodes.</p>
 <p>Preparing myvalues.yaml is the same as explained in the install section.</p>
-<p>To upgrade the driver from csi-unity v2.9.0 to csi-unity v2.10.0</p>
+<p>To upgrade the driver from csi-unity v2.9.0 to csi-unity v2.10.1</p>
 <ol>
-<li>Get the latest csi-unity v2.10.0 code from Github using <code>git clone -b v2.10.0 https://github.com/dell/csi-unity.git</code>.</li>
+<li>Get the latest csi-unity v2.10.1 code from Github using <code>git clone -b v2.10.1 https://github.com/dell/csi-unity.git</code>.</li>
 <li>Copy the helm/csi-unity/values.yaml to the new location csi-unity/dell-csi-helm-installer and rename it to myvalues.yaml. Customize settings for installation by editing myvalues.yaml as needed.</li>
 <li>Navigate to csi-unity/dell-csi-hem-installer folder and execute this command:
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>

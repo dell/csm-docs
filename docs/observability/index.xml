@@ -284,9 +284,11 @@ Unable to attach or mount volumes: unmounted volumes=[tls-secret], unattached vo
       <description>
         
         
-        &lt;h2 id=&#34;release-notes---csm-observability-180&#34;&gt;Release Notes - CSM Observability 1.8.0&lt;/h2&gt;
+        &lt;h2 id=&#34;release-notes---csm-observability-181&#34;&gt;Release Notes - CSM Observability 1.8.1&lt;/h2&gt;
 &lt;h3 id=&#34;new-featureschanges&#34;&gt;New Features/Changes&lt;/h3&gt;
 &lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1284&#34;&gt;#1284 - [FEATURE]: Support for Openshift 4.15&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1285&#34;&gt;#1285 - [FEATURE]: Remove checks in code for non-supported installs of CSM&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/926&#34;&gt;#926 - [FEATURE]: Fixing the linting, formatting and vetting issues&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;fixed-issues&#34;&gt;Fixed Issues&lt;/h3&gt;

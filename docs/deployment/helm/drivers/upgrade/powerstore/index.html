@@ -16,11 +16,11 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/docs/deployment/helm/drivers/upgrade/powerstore/" /><meta property="article:section" content="docs" />
 
-<meta property="article:modified_time" content="2024-03-21T02:39:59+05:30" />
+<meta property="article:modified_time" content="2024-05-29T01:50:52+05:30" />
 
 <meta itemprop="name" content="PowerStore">
 <meta itemprop="description" content="Upgrade PowerStore CSI driver">
-<meta itemprop="dateModified" content="2024-03-21T02:39:59+05:30" />
+<meta itemprop="dateModified" content="2024-05-29T01:50:52+05:30" />
 <meta itemprop="wordCount" content="373">
 <meta itemprop="keywords" content="upgrade,csi-driver," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="PowerStore"/>
@@ -81,7 +81,7 @@
 	
 	
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.10.1)</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.10.2)</a>
 	
 	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.9.4</a>
 	
@@ -103,7 +103,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.ffe9698dbb68c8428e259500c4a19f11.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.917c77bb7489bf8dff02d16b628a6ff8.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -125,7 +125,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.ffe9698dbb68c8428e259500c4a19f11.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.917c77bb7489bf8dff02d16b628a6ff8.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -658,7 +658,7 @@
 
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#update-driver-from-v290-to-v2100-using-helm">Update Driver from v2.9.0 to v2.10.0 using Helm</a></li>
+    <li><a href="#update-driver-from-v290-to-v2101-using-helm">Update Driver from v2.9.0 to v2.10.1 using Helm</a></li>
     <li><a href="#upgrade-using-dell-csm-operator">Upgrade using Dell CSM Operator:</a></li>
   </ul>
 </nav>
@@ -719,12 +719,12 @@
 
 	       
 	<p>You can upgrade the CSI Driver for Dell PowerStore using Helm.</p>
-<h2 id="update-driver-from-v290-to-v2100-using-helm">Update Driver from v2.9.0 to v2.10.0 using Helm</h2>
+<h2 id="update-driver-from-v290-to-v2101-using-helm">Update Driver from v2.9.0 to v2.10.1 using Helm</h2>
 <p>Note: While upgrading the driver via helm, controllerCount variable in myvalues.yaml can be at most one less than the number of worker nodes.</p>
 <p><strong>Steps</strong></p>
 <ol>
 <li>
-<p>Run <code>git clone -b v2.10.0 https://github.com/dell/csi-powerstore.git</code> to clone the git repository and get the driver.</p>
+<p>Run <code>git clone -b v2.10.1 https://github.com/dell/csi-powerstore.git</code> to clone the git repository and get the driver.</p>
 </li>
 <li>
 <p>Edit <code>samples/secret/secret.yaml</code> file and configure connection information for your PowerStore arrays changing the following parameters:</p>
@@ -754,7 +754,7 @@ NFSv4 ACls are supported for NFSv4 shares on NFSv4 enabled NAS servers only. POS
 </span></span><span style="display:flex;"><span>kubectl create secret generic powerstore-config -n csi-powerstore --from-file<span style="color:#ce5c00;font-weight:bold">=</span><span style="color:#000">config</span><span style="color:#ce5c00;font-weight:bold">=</span>secret.yaml
 </span></span></code></pre></div></li>
 <li>
-<p>Download the default values.yaml file <code>cd dell-csi-helm-installer &amp;&amp; wget -O my-powerstore-settings.yaml https://github.com/dell/helm-charts/raw/csi-powerstore-2.10.0/charts/csi-powerstore/values.yaml</code> and update parameters as per the requirement.</p>
+<p>Download the default values.yaml file <code>cd dell-csi-helm-installer &amp;&amp; wget -O my-powerstore-settings.yaml https://github.com/dell/helm-charts/raw/csi-powerstore-2.10.1/charts/csi-powerstore/values.yaml</code> and update parameters as per the requirement.</p>
 </li>
 <li>
 <p>Run the <code>csi-install</code> script with the option <em>--upgrade</em> by running:</p>

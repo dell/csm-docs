@@ -77,7 +77,7 @@
 	
 	
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.10.1)</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.10.2)</a>
 	
 	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.9.4</a>
 	
@@ -99,7 +99,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.ffe9698dbb68c8428e259500c4a19f11.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.917c77bb7489bf8dff02d16b628a6ff8.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -121,7 +121,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.ffe9698dbb68c8428e259500c4a19f11.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.917c77bb7489bf8dff02d16b628a6ff8.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -730,7 +730,7 @@
 	
 	<p>The Dell Container Storage Modules Operator is a Kubernetes Operator, which can be used to install and manage the CSI Drivers and CSM Modules provided by Dell for various storage platforms. This operator is available as a community operator for upstream Kubernetes and can be deployed using OperatorHub.io. The operator can be installed using OLM (Operator Lifecycle Manager) or manually.</p>
 <h2 id="supported-csm-components">Supported CSM Components</h2>
-<p>Exhaustive sample files for the CRs are available <a href="https://github.com/dell/csm-operator/tree/v1.5.0/samples">here (current version: v1.5)</a>.</p>
+<p>Exhaustive sample files for the CRs are available <a href="https://github.com/dell/csm-operator/tree/v1.5.1/samples">here (current version: v1.5.1)</a>.</p>
 <p>These CR will be used for new deployment or upgrade. In most case, it is recommended to use the latest available version.</p>
 <p>The full compatibility matrix of CSI/CSM versions for the CSM Operator is available <a href="../../prerequisites/#csm-operator-compatibility-matrix">here</a></p>
 <h2 id="installation">Installation</h2>
@@ -758,7 +758,7 @@
 <li>Install volume snapshot CRDs. For detailed snapshot setup procedure, <a href="../../snapshots/#volume-snapshot-feature">click here</a>.</li>
 <li>Clone and checkout the required csm-operator version using</li>
 </ol>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git clone -b v1.5.0 https://github.com/dell/csm-operator.git
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git clone -b v1.5.1 https://github.com/dell/csm-operator.git
 </span></span></code></pre></div><ol start="3">
 <li><code>cd csm-operator</code></li>
 <li><em>(Optional)</em> If using a local Docker image, edit the <code>deploy/operator.yaml</code> file and set the image name for the CSM Operator Deployment.</li>
@@ -871,7 +871,7 @@
 <ol>
 <li>Clone and checkout the required csm-operator version using</li>
 </ol>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git clone -b v1.5.0 https://github.com/dell/csm-operator.git
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git clone -b v1.5.1 https://github.com/dell/csm-operator.git
 </span></span></code></pre></div><ol start="2">
 <li><code>cd csm-operator</code></li>
 <li>Run the <code>csm-offline-bundle.sh</code> script which will be found in the <code>scripts</code> directory with an argument of <code>-c</code> in order to create an offline bundle</li>
@@ -894,13 +894,13 @@
 *
 * Pulling and saving container images
 
-   dellemc/csi-isilon:v2.10.0
+   dellemc/csi-isilon:v2.10.1
    dellemc/csi-metadata-retriever:v1.6.0
    dellemc/csipowermax-reverseproxy:v2.9.0
-   dellemc/csi-powermax:v2.10.0
-   dellemc/csi-powerstore:v2.10.0
-   dellemc/csi-unity:v2.10.0
-   dellemc/csi-vxflexos:v2.10.0
+   dellemc/csi-powermax:v2.10.1
+   dellemc/csi-powerstore:v2.10.1
+   dellemc/csi-unity:v2.10.1
+   dellemc/csi-vxflexos:v2.10.1
    dellemc/csm-authorization-sidecar:v1.10.0
    dellemc/csm-metrics-powerflex:v1.8.0
    dellemc/csm-metrics-powerscale:v1.5.0
@@ -908,7 +908,7 @@
    dellemc/dell-csi-replicator:v1.8.0
    dellemc/dell-replication-controller:v1.8.0
    dellemc/sdc:4.5
-   docker.io/dellemc/dell-csm-operator:v1.5.0
+   docker.io/dellemc/dell-csm-operator:v1.5.1
    gcr.io/kubebuilder/kube-rbac-proxy:v0.8.0
    nginxinc/nginx-unprivileged:1.20
    otel/opentelemetry-collector:0.42.0
@@ -987,8 +987,8 @@ dell-csm-operator-bundle/LICENSE
 *
 * Loading docker images
 
-Loaded image: docker.io/dellemc/csi-powerstore:v2.10.0
-Loaded image: docker.io/dellemc/csi-isilon:v2.10.0
+Loaded image: docker.io/dellemc/csi-powerstore:v2.10.1
+Loaded image: docker.io/dellemc/csi-isilon:v2.10.1
 ...
 ...
 Loaded image: registry.k8s.io/sig-storage/csi-resizer:v1.9.2
@@ -997,7 +997,7 @@ Loaded image: registry.k8s.io/sig-storage/csi-snapshotter:v6.3.2
 *
 * Tagging and pushing images
 
-   dellemc/csi-isilon:v2.10.0 -&gt; localregistry:5000/dell-csm-operator/csi-isilon:v2.10.0
+   dellemc/csi-isilon:v2.10.1 -&gt; localregistry:5000/dell-csm-operator/csi-isilon:v2.10.1
    dellemc/csi-metadata-retriever:v1.6.0 -&gt; localregistry:5000/dell-csm-operator/csi-metadata-retriever:v1.6.0
    ...
    ...
@@ -1007,7 +1007,7 @@ Loaded image: registry.k8s.io/sig-storage/csi-snapshotter:v6.3.2
 *
 * Preparing files within /root/dell-csm-operator-bundle
 
-   changing: dellemc/csi-isilon:v2.10.0 -&gt; localregistry:5000/dell-csm-operator/csi-isilon:v2.10.0
+   changing: dellemc/csi-isilon:v2.10.1 -&gt; localregistry:5000/dell-csm-operator/csi-isilon:v2.10.1
    changing: dellemc/csi-metadata-retriever:v1.6.0 -&gt; localregistry:5000/dell-csm-operator/csi-metadata-retriever:v1.6.0
    ...
    ...

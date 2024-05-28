@@ -23,9 +23,11 @@
       <description>
         
         
-        &lt;h2 id=&#34;release-notes---csi-powerflex-v2100&#34;&gt;Release Notes - CSI PowerFlex v2.10.0&lt;/h2&gt;
+        &lt;h2 id=&#34;release-notes---csi-powerflex-v2101&#34;&gt;Release Notes - CSI PowerFlex v2.10.1&lt;/h2&gt;
 &lt;h3 id=&#34;new-featureschanges&#34;&gt;New Features/Changes&lt;/h3&gt;
 &lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1284&#34;&gt;#1284 - [FEATURE]: Support for Openshift 4.15&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1285&#34;&gt;#1285 - [FEATURE]: Remove checks in code for non-supported installs of CSM&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/926&#34;&gt;#926 - [FEATURE]: Fixing the linting, formatting and vetting issues&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;fixed-issues&#34;&gt;Fixed Issues&lt;/h3&gt;
@@ -99,7 +101,7 @@
       <description>
         
         
-        &lt;h2 id=&#34;release-notes---csi-powermax-v2100&#34;&gt;Release Notes - CSI PowerMax v2.10.0&lt;/h2&gt;
+        &lt;h2 id=&#34;release-notes---csi-powermax-v2101&#34;&gt;Release Notes - CSI PowerMax v2.10.1&lt;/h2&gt;
 &lt;blockquote&gt;
 &lt;p&gt;Note: Auto SRDF group creation is currently not supported in PowerMaxOS 10.1 (6079) Arrays.&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -111,6 +113,8 @@
 &lt;/blockquote&gt;
 &lt;h3 id=&#34;new-featureschanges&#34;&gt;New Features/Changes&lt;/h3&gt;
 &lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1284&#34;&gt;#1284 - [FEATURE]: Support for Openshift 4.15&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1285&#34;&gt;#1285 - [FEATURE]: Remove checks in code for non-supported installs of CSM&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/926&#34;&gt;#926 - [FEATURE]: Fixing the linting, formatting and vetting issues&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;fixed-issues&#34;&gt;Fixed Issues&lt;/h3&gt;
@@ -173,9 +177,11 @@
       <description>
         
         
-        &lt;h2 id=&#34;release-notes---csi-driver-for-powerscale-v2100&#34;&gt;Release Notes - CSI Driver for PowerScale v2.10.0&lt;/h2&gt;
+        &lt;h2 id=&#34;release-notes---csi-driver-for-powerscale-v2101&#34;&gt;Release Notes - CSI Driver for PowerScale v2.10.1&lt;/h2&gt;
 &lt;h3 id=&#34;new-featureschanges&#34;&gt;New Features/Changes&lt;/h3&gt;
 &lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1284&#34;&gt;#1284 - [FEATURE]: Support for Openshift 4.15&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1285&#34;&gt;#1285 - [FEATURE]: Remove checks in code for non-supported installs of CSM&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/926&#34;&gt;#926 - [FEATURE]: Fixing the linting, formatting and vetting issues&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;fixed-issues&#34;&gt;Fixed Issues&lt;/h3&gt;
@@ -246,9 +252,11 @@
       <description>
         
         
-        &lt;h2 id=&#34;release-notes---csi-powerstore-v2100&#34;&gt;Release Notes - CSI PowerStore v2.10.0&lt;/h2&gt;
+        &lt;h2 id=&#34;release-notes---csi-powerstore-v2101&#34;&gt;Release Notes - CSI PowerStore v2.10.1&lt;/h2&gt;
 &lt;h3 id=&#34;new-featureschanges&#34;&gt;New Features/Changes&lt;/h3&gt;
 &lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1284&#34;&gt;#1284 - [FEATURE]: Support for Openshift 4.15&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1285&#34;&gt;#1285 - [FEATURE]: Remove checks in code for non-supported installs of CSM&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/926&#34;&gt;#926 - [FEATURE]: Fixing the linting, formatting and vetting issues&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1129&#34;&gt;#1129 - [FEATURE]: Support PowerStore v3.6&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
@@ -324,9 +332,11 @@
       <description>
         
         
-        &lt;h2 id=&#34;release-notes---csi-unity-xt-v2100&#34;&gt;Release Notes - CSI Unity XT v2.10.0&lt;/h2&gt;
+        &lt;h2 id=&#34;release-notes---csi-unity-xt-v2101&#34;&gt;Release Notes - CSI Unity XT v2.10.1&lt;/h2&gt;
 &lt;h3 id=&#34;new-featureschanges&#34;&gt;New Features/Changes&lt;/h3&gt;
 &lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1284&#34;&gt;#1284 - [FEATURE]: Support for Openshift 4.15&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1285&#34;&gt;#1285 - [FEATURE]: Remove checks in code for non-supported installs of CSM&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/926&#34;&gt;#926 - [FEATURE]: Fixing the linting, formatting and vetting issues&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;fixed-issues&#34;&gt;Fixed Issues&lt;/h3&gt;

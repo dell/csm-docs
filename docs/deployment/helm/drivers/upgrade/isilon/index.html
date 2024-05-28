@@ -16,11 +16,11 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/docs/deployment/helm/drivers/upgrade/isilon/" /><meta property="article:section" content="docs" />
 
-<meta property="article:modified_time" content="2024-03-21T02:39:59+05:30" />
+<meta property="article:modified_time" content="2024-05-29T01:50:52+05:30" />
 
 <meta itemprop="name" content="PowerScale">
 <meta itemprop="description" content="Upgrade PowerScale CSI driver">
-<meta itemprop="dateModified" content="2024-03-21T02:39:59+05:30" />
+<meta itemprop="dateModified" content="2024-05-29T01:50:52+05:30" />
 <meta itemprop="wordCount" content="137">
 <meta itemprop="keywords" content="upgrade,csi-driver," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="PowerScale"/>
@@ -81,7 +81,7 @@
 	
 	
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.10.1)</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.10.2)</a>
 	
 	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.9.4</a>
 	
@@ -103,7 +103,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.ffe9698dbb68c8428e259500c4a19f11.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.917c77bb7489bf8dff02d16b628a6ff8.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -125,7 +125,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.ffe9698dbb68c8428e259500c4a19f11.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.917c77bb7489bf8dff02d16b628a6ff8.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -658,7 +658,7 @@
 
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#upgrade-driver-from-version-290-to-2100-using-helm">Upgrade Driver from version 2.9.0 to 2.10.0 using Helm</a>
+    <li><a href="#upgrade-driver-from-version-290-to-2101-using-helm">Upgrade Driver from version 2.9.0 to 2.10.1 using Helm</a>
       <ul>
         <li><a href="#steps">Steps</a></li>
       </ul>
@@ -723,19 +723,19 @@
 
 	       
 	<p>You can upgrade the CSI Driver for Dell PowerScale using Helm or Dell CSM Operator.</p>
-<h2 id="upgrade-driver-from-version-290-to-2100-using-helm">Upgrade Driver from version 2.9.0 to 2.10.0 using Helm</h2>
+<h2 id="upgrade-driver-from-version-290-to-2101-using-helm">Upgrade Driver from version 2.9.0 to 2.10.1 using Helm</h2>
 <p><strong>Note:</strong> While upgrading the driver via helm, controllerCount variable in myvalues.yaml can be at most one less than the number of worker nodes.</p>
 <h3 id="steps">Steps</h3>
 <ol>
 <li>
-<p>Clone the repository using <code>git clone -b v2.10.0 https://github.com/dell/csi-powerscale.git</code></p>
+<p>Clone the repository using <code>git clone -b v2.10.1 https://github.com/dell/csi-powerscale.git</code></p>
 </li>
 <li>
 <p>Change to directory dell-csi-helm-installer to install the Dell PowerScale <code>cd dell-csi-helm-installer</code></p>
 </li>
 <li>
 <p>Download the default values.yaml using following command:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>wget -O my-isilon-settings.yaml https://raw.githubusercontent.com/dell/helm-charts/csi-isilon-2.10.0/charts/csi-isilon/values.yaml
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>wget -O my-isilon-settings.yaml https://raw.githubusercontent.com/dell/helm-charts/csi-isilon-2.10.1/charts/csi-isilon/values.yaml
 </span></span></code></pre></div><p>Edit the <em>my-isilon-settings.yaml</em> as per the requirements.</p>
 </li>
 <li>

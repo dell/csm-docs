@@ -18,12 +18,12 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/docs/deployment/helm/drivers/installation/unity/" /><meta property="article:section" content="docs" />
 
-<meta property="article:modified_time" content="2024-03-21T02:39:59+05:30" />
+<meta property="article:modified_time" content="2024-05-29T01:50:52+05:30" />
 
 <meta itemprop="name" content="Unity XT">
 <meta itemprop="description" content="Installing CSI Driver for Unity XT via Helm
 ">
-<meta itemprop="dateModified" content="2024-03-21T02:39:59+05:30" />
+<meta itemprop="dateModified" content="2024-05-29T01:50:52+05:30" />
 <meta itemprop="wordCount" content="2904">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Unity XT"/>
@@ -85,7 +85,7 @@
 	
 	
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.10.1)</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.10.2)</a>
 	
 	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.9.4</a>
 	
@@ -107,7 +107,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.ffe9698dbb68c8428e259500c4a19f11.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.917c77bb7489bf8dff02d16b628a6ff8.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -129,7 +129,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.ffe9698dbb68c8428e259500c4a19f11.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.917c77bb7489bf8dff02d16b628a6ff8.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -804,7 +804,7 @@ Unity XT.</p>
 <p><em>Before you begin</em></p>
 <ul>
 <li>As a pre-requisite for running this procedure, you must have the downloaded files, including the Helm chart from the source <a href="https://github.com/dell/csi-unity">git repository</a> with the command
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git clone -b v2.10.0 https://github.com/dell/csi-unity.git
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git clone -b v2.10.1 https://github.com/dell/csi-unity.git
 </span></span></code></pre></div></li>
 <li>In the top-level dell-csi-helm-installer directory, there should be two scripts, <code>csi-install.sh</code> and <code>csi-uninstall.sh</code>.</li>
 <li>Ensure <em>unity</em> namespace exists in Kubernetes cluster. Use the <code>kubectl create namespace unity</code> command to create the namespace if the namespace is not present.</li>
@@ -825,11 +825,11 @@ kubeVersion: &ldquo;&gt;= 1.24.0-0 &lt; 1.29.0-0&rdquo;</li>
 <p>Get the required values.yaml using the command below:</p>
 </li>
 </ol>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#204a87">cd</span> dell-csi-helm-installer <span style="color:#ce5c00;font-weight:bold">&amp;&amp;</span> wget -O my-unity-settings.yaml https://github.com/dell/helm-charts/raw/csi-unity-2.10.0/charts/csi-unity/values.yaml
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#204a87">cd</span> dell-csi-helm-installer <span style="color:#ce5c00;font-weight:bold">&amp;&amp;</span> wget -O my-unity-settings.yaml https://github.com/dell/helm-charts/raw/csi-unity-2.10.1/charts/csi-unity/values.yaml
 </span></span></code></pre></div><ol start="3">
 <li>
 <p>Edit <code>values.yaml</code> to set the following parameters for your installation:</p>
-<p>The following table lists the primary configurable parameters of the Unity XT driver chart and their default values. More detailed information can be found in the <a href="https://github.com/dell/helm-charts/blob/csi-unity-2.10.0/charts/csi-unity/values.yaml"><code>values.yaml</code></a> file in this repository.</p>
+<p>The following table lists the primary configurable parameters of the Unity XT driver chart and their default values. More detailed information can be found in the <a href="https://github.com/dell/helm-charts/blob/csi-unity-2.10.1/charts/csi-unity/values.yaml"><code>values.yaml</code></a> file in this repository.</p>
 <table>
 <thead>
 <tr>
@@ -1218,7 +1218,7 @@ To install nightly or latest csi driver build using bash script use this command
 <p>You can also install the driver using standalone helm chart by cloning the centralised helm charts and running the helm install command as shown.</p>
 <p><strong>Syntax</strong>:</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>git clone -b csi-unity-2.10.0 https://github.com/dell/helm-charts
+</span></span><span style="display:flex;"><span>git clone -b csi-unity-2.10.1 https://github.com/dell/helm-charts
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>helm install &lt;release-name&gt; dell/container-storage-modules -n &lt;namespace&gt; --version &lt;container-storage-module chart-version&gt; -f &lt;values.yaml location&gt;
 </span></span><span style="display:flex;"><span>
