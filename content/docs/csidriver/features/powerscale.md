@@ -660,15 +660,11 @@ For example, if a volume were to be deleted from the array, or unmounted outside
 1. For controller plugin, by setting attribute `controller.healthMonitor.enabled` to `true` in `values.yaml` file. Also health monitoring interval can be changed through attribute `controller.healthMonitor.interval` in `values.yaml` file.
 2. For node plugin, by setting attribute `node.healthMonitor.enabled` to `true` in `values.yaml` file and by enabling the alpha feature gate `CSIVolumeHealth`.
 
-## Single Pod Access Mode for PersistentVolumes- ReadWriteOncePod (ALPHA FEATURE)
+## Single Pod Access Mode for PersistentVolumes- ReadWriteOncePod 
 
 Use `ReadWriteOncePod(RWOP)` access mode if you want to ensure that only one pod across the whole cluster can read that PVC or write to it. This is supported for CSI Driver for PowerScale 2.1.0+ and Kubernetes version 1.22+.
 
-To use this feature, enable the ReadWriteOncePod feature gate for kube-apiserver, kube-scheduler, and kubelet, by setting command line arguments:
-`--feature-gates="...,ReadWriteOncePod=true"`
-
 ### Creating a PersistentVolumeClaim
-
 ```yaml
 kind: PersistentVolumeClaim
 apiVersion: v1
@@ -684,4 +680,4 @@ spec:
 
 When this feature is enabled, the existing `ReadWriteOnce(RWO)` access mode restricts volume access to a single node and allows multiple pods on the same node to read from and write to the same volume.
 
-To migrate existing PersistentVolumes to use `ReadWriteOncePod`, please follow the instruction from [here](https://kubernetes.io/blog/2021/09/13/read-write-once-pod-access-mode-alpha/#migrating-existing-persistentvolumes).
+To migrate existing PersistentVolumes to use `ReadWriteOncePod`, please follow the instruction from [here](https://kubernetes.io/docs/tasks/administer-cluster/change-pv-access-mode-readwriteoncepod/).

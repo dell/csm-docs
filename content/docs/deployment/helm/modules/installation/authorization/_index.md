@@ -6,7 +6,7 @@ description: >
 ---
 
 {{% pageinfo color="primary" %}}
-The CSM Authorization karavictl CLI is no longer actively maintained or supported. It will be deprecated in CSM 2.0.
+The CSM Authorization karavictl CLI is no longer actively maintained or supported. It will be deprecated in a future release.
 {{% /pageinfo %}}
 
 CSM Authorization can be installed by using the provided Helm v3 charts on Kubernetes platforms. 
@@ -28,9 +28,15 @@ The following third-party components are optionally installed in the specified n
 ## Install CSM Authorization
 
 **Steps**
-1. Run `git clone https://github.com/dell/helm-charts.git` to clone the git repository.
+1. Create a namespace where you want to install CSM Authorization.
+   ```bash
+   kubectl create namespace authorization
+   ```
 
-2. Ensure that you have created a namespace where you want to install CSM Authorization. You can run `kubectl create namespace authorization` to create a new one.
+2. Add the Dell Helm Charts repo 
+   ```bash
+     helm repo add dell https://dell.github.io/helm-charts
+   ```
 
 3. Prepare `samples/csm-authorization/config.yaml` which contains the JWT signing secret. The following table lists the configuration parameters.
 
