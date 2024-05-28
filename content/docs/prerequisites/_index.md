@@ -8,14 +8,14 @@ weight: 1
 ## Supported Storage Platforms
 
 {{<table "table table-striped table-bordered table-sm">}}
-| Platform      | Version             | OS Dependencies          |
-|---------------|:-------------------:|:------------------------:|
+| Platform      | Version          | OS Dependencies          |
+|---------------|:----------------:|:------------------------:|
 | PowerMax    | PowerMax 2500/8500 PowerMaxOS 10 (6079)<br>PowerMaxOS 10.0.1 (6079)<br>PowerMaxOS 10.1 (6079)<br>PowerMax 2000/8000 - 5978.711.711, 5978.714.714<br>5978.479.479<br>Unisphere 10.0,10.0.1,10.1 | iscsi-initiator-utils<br>multipathd or powerpath<br>nvme-cli<br>nfs-utils |
-| PowerFlex     | 3.6.x, 4.0.x, 4.5.x | [SDC](https://www.dell.com/support/home/en-us/product-support/product/scaleio/drivers)|
-| Unity XT      | 5.1.x, 5.2.x, 5.3.0 | iscsi-initiator-utils<br>multipathd<br>nfs-utils |
-| PowerScale    | OneFS 9.3, 9.4, 9.5.0.x (x >= 5) | nfs-utils |
-| PowerStore    | 3.0, 3.2, 3.5, 3.6  | iscsi-initiator-utils<br>multipathd<br>nvme-cli<br>nfs-utils |
-| ObjectScale   | 1.2.x               | - |
+| PowerFlex | 3.6.x, 4.0.x, 4.5.x | [SDC](https://www.dell.com/support/home/en-us/product-support/product/scaleio/drivers)|
+| Unity XT | 5.1.x, 5.2.x, 5.3.0 | iscsi-initiator-utils<br>multipathd<br>nfs-utils |
+| PowerScale | OneFS 9.3, 9.4, 9.5.0.x (x >= 5) | nfs-utils |
+| PowerStore  | 3.0, 3.2, 3.5 | iscsi-initiator-utils<br>multipathd<br>nvme-cli<br>nfs-utils |
+| ObjectScale | 1.2.x | - |
 {{</table>}}
 
 > Notes:

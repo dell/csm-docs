@@ -9,7 +9,25 @@ The Dell Container Storage Modules Operator is a Kubernetes Operator, which can 
 
 ## Supported CSM Components
 
-Exhaustive sample files for the CRs are available [here (current version: v1.5)](https://github.com/dell/csm-operator/tree/v1.5.0/samples).
+The table below lists the driver and modules versions installable with the CSM Operator:
+
+| CSI Driver         | Version | CSM Authorization | CSM Replication | CSM Observability | CSM Resiliency |
+| ------------------ |---------|-------------------|-----------------|-------------------|----------------|
+| CSI PowerScale     | 2.11.0  | ✔ 1.11.0          | ✔ 1.9.0        | ✔ 1.9.0           | ✔ 1.10.0       |
+| CSI PowerScale     | 2.10.0  | ✔ 1.10.0          | ✔ 1.8.0        | ✔ 1.8.0           | ✔ 1.9.0        |
+| CSI PowerScale     | 2.9.0   | ✔ 1.9.0           | ✔ 1.7.0        | ✔ 1.7.0           | ✔ 1.8.0        |
+| CSI PowerFlex      | 2.11.0  | ✔ 1.11.0          | ✔ 1.9.0        | ✔ 1.9.0           | ✔ 1.10.0       |
+| CSI PowerFlex      | 2.10.0  | ✔ 1.10.0          | ✔ 1.8.0        | ✔ 1.8.0           | ✔ 1.9.0        |
+| CSI PowerFlex      | 2.9.0   | ✔ 1.9.0           | ✔ 1.7.0        | ✔ 1.7.0           | ✔ 1.8.0        |
+| CSI PowerStore     | 2.11.0  | ❌                | ❌             | ❌                | ✔ 1.10.0       |
+| CSI PowerStore     | 2.10.0  | ❌                | ❌             | ❌                | ✔ 1.9.0        |
+| CSI PowerStore     | 2.9.0   | ❌                | ❌             | ❌                | ✔ 1.8.0        |
+| CSI PowerMax       | 2.11.0  | ✔ 1.11.0          | ✔ 1.9.0        | ✔ 1.9.0           | ❌             |
+| CSI PowerMax       | 2.10.0  | ✔ 1.10.0          | ✔ 1.8.0        | ✔ 1.8.0           | ❌             |
+| CSI PowerMax       | 2.9.0   | ✔ 1.9.0           | ✔ 1.7.0        | ✔ 1.7.0           | ❌             |
+| CSI Unity XT       | 2.11.0  | ❌                | ❌             | ❌                | ❌             |
+| CSI Unity XT       | 2.10.0  | ❌                | ❌             | ❌                | ❌             |
+| CSI Unity XT       | 2.9.0   | ❌                | ❌             | ❌                | ❌             |
 
 These CR will be used for new deployment or upgrade. In most case, it is recommended to use the latest available version.
 
