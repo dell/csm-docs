@@ -18,12 +18,12 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/docs/deployment/helm/drivers/installation/powermax/" /><meta property="article:section" content="docs" />
 
-<meta property="article:modified_time" content="2024-03-21T02:39:59+05:30" />
+<meta property="article:modified_time" content="2024-05-29T01:50:52+05:30" />
 
 <meta itemprop="name" content="PowerMax">
 <meta itemprop="description" content="Installing CSI Driver for PowerMax via Helm
 ">
-<meta itemprop="dateModified" content="2024-03-21T02:39:59+05:30" />
+<meta itemprop="dateModified" content="2024-05-29T01:50:52+05:30" />
 <meta itemprop="wordCount" content="3554">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="PowerMax"/>
@@ -85,7 +85,7 @@
 	
 	
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.10.1)</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.10.2)</a>
 	
 	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.9.4</a>
 	
@@ -107,7 +107,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.ffe9698dbb68c8428e259500c4a19f11.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.917c77bb7489bf8dff02d16b628a6ff8.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -129,7 +129,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.ffe9698dbb68c8428e259500c4a19f11.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.917c77bb7489bf8dff02d16b628a6ff8.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -919,7 +919,7 @@ Alternatively, you can check the status of the multipath service by entering the
 <h2 id="install-the-driver">Install the Driver</h2>
 <p><strong>Steps</strong></p>
 <ol>
-<li>Run <code>git clone -b v2.10.0 https://github.com/dell/csi-powermax.git</code> to clone the git repository. This will include the Helm charts and dell-csi-helm-installer scripts.</li>
+<li>Run <code>git clone -b v2.10.1 https://github.com/dell/csi-powermax.git</code> to clone the git repository. This will include the Helm charts and dell-csi-helm-installer scripts.</li>
 <li>Ensure that you have created a namespace where you want to install the driver. You can run <code>kubectl create namespace powermax</code> to create a new one</li>
 <li>Edit the <code>samples/secret/secret.yaml</code> file,to point to the correct namespace, and replace the values for the username and password parameters.
 These values can be obtained using base64 encoding as described in the following example:
@@ -930,7 +930,7 @@ These values can be obtained using base64 encoding as described in the following
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl create -f samples/secret/secret.yaml
 </span></span></code></pre></div></li>
 <li>Download the default values.yaml file
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#204a87">cd</span> dell-csi-helm-installer <span style="color:#ce5c00;font-weight:bold">&amp;&amp;</span> wget -O my-powermax-settings.yaml https://github.com/dell/helm-charts/raw/csi-powermax-2.10.0/charts/csi-powermax/values.yaml
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#204a87">cd</span> dell-csi-helm-installer <span style="color:#ce5c00;font-weight:bold">&amp;&amp;</span> wget -O my-powermax-settings.yaml https://github.com/dell/helm-charts/raw/csi-powermax-2.10.1/charts/csi-powermax/values.yaml
 </span></span></code></pre></div></li>
 <li>Ensure the unisphere have 10.0 REST endpoint support by clicking on Unisphere -&gt; Help (?) -&gt; About in Unisphere for PowerMax GUI.</li>
 <li>Edit the newly created file and provide values for the following parameters
@@ -1137,7 +1137,7 @@ These values can be obtained using base64 encoding as described in the following
 <td>version</td>
 <td>Current version of the driver. Don&rsquo;t modify this value as this value will be used by the install script.</td>
 <td>Yes</td>
-<td>v2.10.0</td>
+<td>v2.10.1</td>
 </tr>
 <tr>
 <td>images</td>

@@ -77,7 +77,7 @@
 	
 	
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.10.1)</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.10.2)</a>
 	
 	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.9.4</a>
 	
@@ -99,7 +99,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.ffe9698dbb68c8428e259500c4a19f11.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.917c77bb7489bf8dff02d16b628a6ff8.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -121,7 +121,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.ffe9698dbb68c8428e259500c4a19f11.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.917c77bb7489bf8dff02d16b628a6ff8.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -801,7 +801,7 @@
 </ul>
 <p>The resulting offline bundle file can be copied to another machine, if necessary, to gain access to the desired image registry.</p>
 <p>For example, here is the output of a request to build an offline bundle for the Dell CSM Operator:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git clone -b v1.4.3 https://github.com/dell/csm-operator.git
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git clone -b v1.5.1 https://github.com/dell/csm-operator.git
 </span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#204a87">cd</span> csm-operator
 </span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>bash scripts/csm-offline-bundle.sh -c
 </span></span></code></pre></div><pre tabindex="0"><code>*
@@ -813,13 +813,13 @@
 *
 * Pulling and saving container images
 
-   dellemc/csi-isilon:v2.10.0
+   dellemc/csi-isilon:v2.10.1
    dellemc/csi-metadata-retriever:v1.6.0
    dellemc/csipowermax-reverseproxy:v2.6.0
-   dellemc/csi-powermax:v2.10.0
-   dellemc/csi-powerstore:v2.10.0
-   dellemc/csi-unity:v2.10.0
-   dellemc/csi-vxflexos:v2.10.0
+   dellemc/csi-powermax:v2.10.1
+   dellemc/csi-powerstore:v2.10.1
+   dellemc/csi-unity:v2.10.1
+   dellemc/csi-vxflexos:v2.10.1
    dellemc/csm-authorization-sidecar:v1.10.0
    dellemc/csm-metrics-powerflex:v1.5.0
    dellemc/csm-metrics-powerscale:v1.2.0
@@ -827,7 +827,7 @@
    dellemc/dell-csi-replicator:v1.8.0
    dellemc/dell-replication-controller:v1.8.0
    dellemc/sdc:4.5
-   docker.io/dellemc/dell-csm-operator:v1.4.3
+   docker.io/dellemc/dell-csm-operator:v1.5.1
    gcr.io/kubebuilder/kube-rbac-proxy:v0.8.0
    nginxinc/nginx-unprivileged:1.20
    otel/opentelemetry-collector:0.42.0
@@ -906,8 +906,8 @@ dell-csm-operator-bundle/LICENSE
 *
 * Loading docker images
 
-Loaded image: docker.io/dellemc/csi-powerstore:v2.10.0
-Loaded image: docker.io/dellemc/csi-isilon:v2.10.0
+Loaded image: docker.io/dellemc/csi-powerstore:v2.10.1
+Loaded image: docker.io/dellemc/csi-isilon:v2.10.1
 ...
 ...
 Loaded image: registry.k8s.io/sig-storage/csi-resizer:v1.8.0
