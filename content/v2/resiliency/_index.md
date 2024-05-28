@@ -131,6 +131,8 @@ The following provisioning types are supported and have been tested:
 
 * Multiple instances of the same driver type (for example two CSI driver for Dell PowerFlex deployments.)
 
+* PowerFlex with Resiliency is not supported for NFS protocol.
+
 ## Deploying and Managing Applications Protected by CSM for Resiliency
 
  The first thing to remember about _CSM for Resiliency_ is that it only takes action on pods configured with the designated label. Both the key and the value have to match what is in the podmon helm configuration. CSM for Resiliency emits a log message at startup with the label key and value it is using to monitor pods:

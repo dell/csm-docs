@@ -5,11 +5,16 @@ weight: 1
 Description: >
   CSI Volumes Encryption
 ---
+
+**NOTE:**  Encryption is not supported for CSM 1.10.x release. Please refer to the [release notes](./release/) for more details.
+
 Encryption provides the capability to encrypt user data residing on volumes created by Dell CSI Drivers.
+
+
 
 > **NOTE:** This tech-preview release is not intended for use in production environment.
 
-> **NOTE:** Encryption requires a time-based license to create new encrypted volumes. Request a [trial license](../../license) prior to deployment.
+> **NOTE:** Encryption requires a time-based license to create new encrypted volumes. Request a [trial license](../../support/license) prior to deployment.
 > 
 > After the license expiration, existing encrypted volume can still be unlocked and used, but no new encrypted volumes can be created.
 

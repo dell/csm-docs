@@ -19,3 +19,4 @@ description: Troubleshooting PowerStore Driver
 | Faulty paths in the multipath | Ensure that the configuration of the multipath is correct and connectivity to the underlying hardware is intact. |
 | Unable to install or upgrade the driver due to minimum Kubernetes version or Openshift version | Currently CSM only supports n, n-1, n-2 version of Kubernetes and Openshift, if you still wanted to continue with existing version update the `verify.sh` to continue.| 
 | Volumes are not getting deleted on the array when PV's are deleted | Ensure `persistentVolumeReclaimPolicy` is set to Delete. |
+| fsGroupPolicy may not work as expected without root privileges for NFS only [https://github.com/kubernetes/examples/issues/260](https://github.com/kubernetes/examples/issues/260) | To get the desired behavior set “RootClientEnabled” = “true” in the storage class parameter |

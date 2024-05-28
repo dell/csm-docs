@@ -24,18 +24,18 @@ weight: 1
 ## Supported Container Orchestrator Platforms
 
 {{<table "table table-striped table-bordered table-sm">}}
-| Platform      | Version          |
-|---------------|:----------------:|
-| Kubernetes    | 1.27, 1.28, 1.29 |
-| Red Hat OpenShift | 4.13, 4.14 |
-| Mirantis Kubernetes Engine | 3.7.x |
-| Google Anthos |        1.15      |
-| Rancher Kubernetes Engine | 1.4.x |
-| VMware Tanzu | 7.0 |
+| Platform                   | Version          |
+|----------------------------|:----------------:|
+| Kubernetes                 | 1.27, 1.28, 1.29 |
+| Red Hat OpenShift          | 4.13, 4.14       |
+| Mirantis Kubernetes Engine | 3.7.x            |
+| Google Anthos              | 1.15             |
+| Rancher Kubernetes Engine  | 1.4.x            |
+| VMware Tanzu               | 7.0              |
 {{</table>}}
 
 > Notes:
-> * Any orchestrator platform or version that's not mentioned here must be self-certified using [Cert-CSI](../cert-csi/) in order to be supported.  Although not mandatory, we recommend users to use orchestrator platforms and versions that have not met their end of life.
+> * Any orchestrator platform or version that's not mentioned here must be self-certified using [Cert-CSI](../support/cert-csi/) in order to be supported.  Although not mandatory, we recommend users to use orchestrator platforms and versions that have not met their end of life.
 > * CSM Authorization is not supported on Red Hat OpenShift.
 
 ## Tested Host Operating Systems
@@ -48,20 +48,45 @@ Container Storage Modules (CSM) does not officially support specific operating s
 
 > Notes: 
 > * The host operating system/version being used must align with what each Dell Storage platform supports. Please visit [E-Lab Navigator](https://elabnavigator.dell.com/eln/modernHomeSSM) for specific Dell Storage platform host operating system level support matrices.
-> * Any operating system or version that's not mentioned here must be self-certified using [Cert-CSI](../cert-csi/) in order to be supported. Although not mandatory, we recommend users to use operating systems and versions that have not met their end of life.
+> * Any operating system or version that's not mentioned here must be self-certified using [Cert-CSI](../support/cert-csi/) in order to be supported. Although not mandatory, we recommend users to use operating systems and versions that have not met their end of life.
 
 ## Supported CSM Modules
 
 {{<table "table table-striped table-bordered table-sm">}}
-| CSM Module      | PowerMax          | PowerFlex          | Unity XT          | PowerScale          | PowerStore          |
-|---------------|:----------------:|:----------------:|:----------------:|:----------------:|:----------------:|
-| [CSM Authorization](../authorization/) | Yes | Yes |  Yes | Yes | No | 
-| [CSM Observability](../observability/) | Yes | Yes |  No | Yes | Yes |
-| [CSM Replication](../replication/) | Yes | Yes |  No | Yes | Yes |
-| [CSM Resiliency](../resiliency/) | No | Yes |  Yes | Yes | Yes |
-| [CSM Encryption](../secure/encryption/) | No | No |  No | Yes | No |
-| [CSM Application Mobility](../applicationmobility/) | Yes | Yes |  Yes | Yes | Yes |
+| CSM Module                             | PowerMax | PowerFlex | Unity XT | PowerScale | PowerStore |
+|----------------------------------------|:--------:|:---------:|:--------:|:----------:|:----------:|
+| [CSM Authorization](../authorization/) | Yes      | Yes       |  Yes     | Yes        | No         |
+| [CSM Observability](../observability/) | Yes      | Yes       |  No      | Yes        | Yes        |
+| [CSM Replication](../replication/)     | Yes      | Yes       |  No      | Yes        | Yes        |
+| [CSM Resiliency](../resiliency/)       | No       | Yes       |  Yes     | Yes        | Yes        |
+| [CSM Encryption](../secure/encryption/)| No       | No        |  No      | Yes        | No         |
+| [CSM Application Mobility](../applicationmobility/) | Yes | Yes |  Yes   | Yes        | Yes        |
+| [Volume Group Snapshot](../snapshots/volume-group-snapshots/) | No | Yes | No | No    | Yes        |
+
 {{</table>}}
 
 > Notes:
 > * Encryption and Application Mobility are available as a Technical Preview only and are not officially supported.
+
+## CSM Operator compatibility matrix
+
+The table below lists the driver and modules versions installable with the CSM Operator:
+{{<table "table table-striped table-bordered table-sm">}}
+| CSI Driver         | Version | CSM Authorization | CSM Replication | CSM Observability | CSM Resiliency |
+| ------------------ |---------|-------------------|-----------------|-------------------|----------------|
+| CSI PowerScale     | 2.10.0   | ✔ 1.10.0           | ✔ 1.8.0        | ✔ 1.8.0           | ✔ 1.9.0       |
+| CSI PowerScale     | 2.9.0   | ✔ 1.9.0           | ✔ 1.7.0        | ✔ 1.7.0           | ✔ 1.8.0       |
+| CSI PowerScale     | 2.8.0   | ✔ 1.8.0           | ✔ 1.6.0        | ✔ 1.6.0           | ✔ 1.7.0       |
+| CSI PowerFlex      | 2.10.0   | ✔ 1.10.0           | ✔ 1.8.0        | ✔ 1.8.0           | ✔ 1.9.0       |
+| CSI PowerFlex      | 2.9.0   | ✔ 1.9.0           | ✔ 1.7.0        | ✔ 1.7.0           | ✔ 1.8.0       |
+| CSI PowerFlex      | 2.8.0   | ✔ 1.8.0           | ✔ 1.6.0        | ✔ 1.6.0           | ✔ 1.7.0       |
+| CSI PowerStore     | 2.10.0   | ❌                | ❌             | ❌                | ✔ 1.9.0       |
+| CSI PowerStore     | 2.9.0   | ❌                | ❌             | ❌                | ✔ 1.8.0       |
+| CSI PowerStore     | 2.8.0   | ❌                | ❌             | ❌                | ✔ 1.7.0       |
+| CSI PowerMax       | 2.10.0   | ✔ 1.10.0           | ✔ 1.8.0        | ✔ 1.8.0           | ❌            |
+| CSI PowerMax       | 2.9.0   | ✔ 1.9.0           | ✔ 1.7.0        | ✔ 1.7.0           | ❌            |
+| CSI PowerMax       | 2.8.0   | ✔ 1.8.0           | ✔ 1.6.0        | ✔ 1.6.0           | ❌            |
+| CSI Unity XT       | 2.10.0   | ❌                | ❌             | ❌                | ❌            |
+| CSI Unity XT       | 2.9.0   | ❌                | ❌             | ❌                | ❌            |
+| CSI Unity XT       | 2.8.0   | ❌                | ❌             | ❌                | ❌            |
+{{</table>}}
