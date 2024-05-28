@@ -55,14 +55,13 @@ Container Storage Modules (CSM) does not officially support specific operating s
 {{<table "table table-striped table-bordered table-sm">}}
 | CSM Module                             | PowerMax | PowerFlex | Unity XT | PowerScale | PowerStore |
 |----------------------------------------|:--------:|:---------:|:--------:|:----------:|:----------:|
-| [CSM Authorization](../authorization/) | Yes      | Yes       |  Yes     | Yes        | No         |
+| [CSM Authorization](../authorization/) | Yes      | Yes       |  No      | Yes        | No         |
 | [CSM Observability](../observability/) | Yes      | Yes       |  No      | Yes        | Yes        |
 | [CSM Replication](../replication/)     | Yes      | Yes       |  No      | Yes        | Yes        |
 | [CSM Resiliency](../resiliency/)       | No       | Yes       |  Yes     | Yes        | Yes        |
 | [CSM Encryption](../secure/encryption/)| No       | No        |  No      | Yes        | No         |
 | [CSM Application Mobility](../applicationmobility/) | Yes | Yes |  Yes   | Yes        | Yes        |
 | [Volume Group Snapshot](../snapshots/volume-group-snapshots/) | No | Yes | No | No    | Yes        |
-
 {{</table>}}
 
 > Notes:
