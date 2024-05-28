@@ -2,7 +2,7 @@
 title: "CSM Operator"
 linkTitle: "CSM Operator"
 description: Container Storage Modules Operator
-weight: 1
+weight: 2
 ---
 
 The Dell Container Storage Modules Operator is a Kubernetes Operator, which can be used to install and manage the CSI Drivers and CSM Modules provided by Dell for various storage platforms. This operator is available as a community operator for upstream Kubernetes and can be deployed using OperatorHub.io. The operator can be installed using OLM (Operator Lifecycle Manager) or manually.
@@ -29,9 +29,9 @@ The table below lists the driver and modules versions installable with the CSM O
 | CSI Unity XT       | 2.10.0  | ❌                | ❌             | ❌                | ❌             |
 | CSI Unity XT       | 2.9.0   | ❌                | ❌             | ❌                | ❌             |
 
->NOTE:
->- Refer to sample files [here](https://github.com/dell/csm-operator/tree/main/samples).
+These CR will be used for new deployment or upgrade. In most case, it is recommended to use the latest available version.
 
+The full compatibility matrix of CSI/CSM versions for the CSM Operator is available [here](../../prerequisites/#csm-operator-compatibility-matrix)
 ## Installation
 Dell CSM Operator can be installed manually or via Operator Hub.
 
@@ -46,7 +46,14 @@ The installation process involves the creation of a `Subscription` object either
 
 ![OpenShit Operator Hub CSM install](operator_hub_install.gif)
 
->NOTE: Dell CSM Operator is distributed as both `Certified` & `Community` editions. Both editions have the same codebase and are supported by Dell Technologies, the only difference is that the `Certified` version is validated by RedHat. The `Certified` version is often released couple of days/weeks after the `Community` version.
+### Certified vs Community
+Dell CSM Operator is distributed as both `Certified` & `Community` editions. 
+
+Both editions have the same codebase and are supported by Dell Technologies, the only differences are:
+* The `Certified` version is officially supported by Redhat by partnering with software vendors.
+* The `Certified` version is often released couple of days/weeks after the `Community` version.
+* The `Certified` version is specific to Openshift and can only be installed on specific Openshift versions where it is certified.
+* The `Community` can be installed on any Kubernetes distributions.
 
 ### Manual Installation on a cluster without OLM
 

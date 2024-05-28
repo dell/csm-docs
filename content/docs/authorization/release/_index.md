@@ -15,9 +15,6 @@ Description: >
 
 
 
-
-
-
 ### New Features/Changes
 
 - [#926 - [FEATURE]: Fixing the linting, formatting and vetting issues](https://github.com/dell/csm/issues/926)
@@ -26,5 +23,5 @@ Description: >
 
 
 ### Known Issues
-
-There are no known issues in this release.
+| Issue | Workaround |
+|-------|------------|

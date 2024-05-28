@@ -10,7 +10,7 @@ Description: Upgrade PowerFlex CSI driver
 
 You can upgrade the CSI Driver for Dell PowerFlex using Helm or Dell CSM Operator.
 
-## Update Driver from v2.9.0 to v2.10.0 using Helm
+## Update Driver from v2.9.2 to v2.10.0 using Helm
 **Steps**
 1. Run `git clone -b v2.10.0 https://github.com/dell/csi-powerflex.git` to clone the git repository and get the v2.10.0 driver.
 2. You need to create secret.yaml with the configuration of your system.
