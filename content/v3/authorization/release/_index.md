@@ -21,3 +21,7 @@ Description: >
 - Authorization RPM installation should use nogpgcheck for k3s-selinux package. ([#772](https://github.com/dell/csm/issues/772))
 - CSM Authorization - karavictl generate token should output valid yaml. ([#767](https://github.com/dell/csm/issues/767))
 
+### Known Issues
+| Issue | Workaround |
+|-------|------------|
+| CSM Operator does not support dynamic namespaces for Authorization. Despite successful installation in a namespace other than "authorization", errors may arise during volume creation. | Use the default namespace "authorization" for installing Authorization using CSM Operator|

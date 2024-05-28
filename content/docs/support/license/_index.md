@@ -1,9 +1,9 @@
 ---
 title: "License"
 linkTitle: "License"
-weight: 12
+weight: 6
 Description: >
-  Dell Container Storage Modules (CSM) License
+  Obtain trial License for Tech-preview of Dell Container Storage Modules (CSM)
 ---
 
 The tech-preview releases of [Container Storage Modules](https://github.com/dell/csm) for Application Mobility and Encryption require a license. This section details how to request a license.
