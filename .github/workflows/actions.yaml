@@ -3,7 +3,7 @@ on:
   push:
     branches: [ main ]
   pull_request:
-    branches: [ main ]
+    branches: [ main, release-* ]
 jobs:
   malware_security_scan:
     name: Malware Scanner
