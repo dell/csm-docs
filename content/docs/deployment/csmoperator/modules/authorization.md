@@ -60,6 +60,9 @@ kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/relea
     kubectl create -f samples/authorization/karavi-storage-secret.yaml
     ```
 
+>__Note__:  
+> - If you are installing CSM Authorization in a different namespace than `authorization`, edit the `namespace` field in this file to your namespace.
+
 ### Install CSM Authorization Proxy Server
 
 1. Follow all the [prerequisites](#prerequisite).
@@ -120,11 +123,14 @@ To enable reporting of trace data with [Zipkin](https://zipkin.io/), use the `cs
     kubectl create -f <CERTIFICATE FILE>
     ```
 
+>__Note__:  
+> - If you are installing CSM Authorization in a different namespace than `authorization`, edit the `namespace` field in this file to your namespace.
+
 ### Verify Installation of the CSM Authorization Proxy Server
 Once the Authorization CR is created, you can verify the installation as mentioned below:
 
   ```bash
-  kubectl describe csm/<name-of-custom-resource> -n <namespace>
+  kubectl describe csm/<name-of-custom-resource> -n authorization
   ```
 
 ### Install Karavictl

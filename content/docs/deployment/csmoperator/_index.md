@@ -164,14 +164,14 @@ Here is the output of a request to build an offline bundle for the Dell CSM Oper
    dellemc/csi-powerstore:v2.10.0
    dellemc/csi-unity:v2.10.0
    dellemc/csi-vxflexos:v2.10.0
-   dellemc/csm-authorization-sidecar:v1.10.0
-   dellemc/csm-metrics-powerflex:v1.8.0
-   dellemc/csm-metrics-powerscale:v1.5.0
+   dellemc/csm-authorization-sidecar:v1.11.0
+   dellemc/csm-metrics-powerflex:v1.9.0
+   dellemc/csm-metrics-powerscale:v1.6.0
    dellemc/csm-topology:v1.7.0
-   dellemc/dell-csi-replicator:v1.8.0
-   dellemc/dell-replication-controller:v1.8.0
+   dellemc/dell-csi-replicator:v1.9.0
+   dellemc/dell-replication-controller:v1.9.0
    dellemc/sdc:4.5
-   docker.io/dellemc/dell-csm-operator:v1.5.0
+   docker.io/dellemc/dell-csm-operator:v1.6.0
    gcr.io/kubebuilder/kube-rbac-proxy:v0.8.0
    nginxinc/nginx-unprivileged:1.20
    otel/opentelemetry-collector:0.42.0
