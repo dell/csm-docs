@@ -16,12 +16,12 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/docs/csidriver/release/powerflex/" /><meta property="article:section" content="docs" />
 
-<meta property="article:modified_time" content="2024-05-20T07:33:38-04:00" />
+<meta property="article:modified_time" content="2024-05-28T14:56:41+05:30" />
 
 <meta itemprop="name" content="PowerFlex">
 <meta itemprop="description" content="Release notes for PowerFlex CSI driver">
-<meta itemprop="dateModified" content="2024-05-20T07:33:38-04:00" />
-<meta itemprop="wordCount" content="730">
+<meta itemprop="dateModified" content="2024-05-28T14:56:41+05:30" />
+<meta itemprop="wordCount" content="683">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="PowerFlex"/>
 <meta name="twitter:description" content="Release notes for PowerFlex CSI driver"/>
@@ -103,7 +103,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.ec00901bfaf9f680b83e26f12dacb96a.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.4ce2f0a9165802a495451daefda4daf0.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -125,7 +125,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.ec00901bfaf9f680b83e26f12dacb96a.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.4ce2f0a9165802a495451daefda4daf0.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -774,15 +774,11 @@
 <td>Resource quotas may not work properly with the CSI PowerFlex driver. PowerFlex is only able to assign storage in 8Gi chunks, so if a create volume call is made with a size not divisible by 8Gi, CSI-PowerFlex will round up to the next 8Gi boundary when it provisions storage &ndash; however, the resource quota will not record this size but rather the original size in the create request. This means that, for example, if a 10Gi resource quota is set, and a user provisions 10 1Gi PVCs, 80Gi of storage will actually be allocated, which is well over the amount specified in the resource quota.</td>
 <td>For now, users should only provision volumes in 8Gi-divisible chunks if they want to use resource quotas.</td>
 </tr>
-<tr>
-<td>Helm install of CSM for PowerFlex v1.10.0 is failing due to a duplicate <code>mountPath: /host_opt_emc_path</code> being added to volumeMounts charts/csi-vxflexos/templates/node.yaml. Error message is <code>Error: INSTALLATION FAILED: 1 error occurred: DaemonSet.apps &quot;vxflexos-node&quot; is invalid: spec.template.spec.initContainers[0].volumeMounts[4].mountPath: Invalid value: &quot;/host_opt_emc_path&quot;: must be unique</code></td>
-<td>The issue can be resolved by removing the duplicate entry in <a href="https://github.com/dell/helm-charts/blob/main/charts/csi-vxflexos/templates/node.yaml">https://github.com/dell/helm-charts/blob/main/charts/csi-vxflexos/templates/node.yaml</a></td>
-</tr>
 </tbody>
 </table>
 <h3 id="note">Note:</h3>
 <ul>
-<li>Support for Kubernetes alpha features like Volume Health Monitoring will not be available in Openshift environment as Openshift doesn&rsquo;t support enabling of alpha features for Production Grade clusters.</li>
+<li>Support for Kubernetes alpha features like Volume Health Monitoring and RWOP (ReadWriteOncePod) access mode will not be available in Openshift environment as Openshift doesn&rsquo;t support enabling of alpha features for Production Grade clusters.</li>
 <li>For fixing <a href="https://github.com/dell/csm/issues/1210">#1210 - [BUG]: Helm deployment of PowerFlex driver is failing</a>, a new helm-chart has been released. In order to install this helm chart, we need to pass the flag <code>--helm-charts-version</code> during helm installation and flag <code>-v</code> during offline bundle installation with value <code>csi-vxflexos-2.10.1</code>.</li>
 </ul>
 
