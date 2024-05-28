@@ -4,10 +4,10 @@
 ##########################################
 csi-powerstore:
   enabled: $POWERSTORE_ENABLED
-  version: v2.10.0
+  version: v2.10.1
   images:
     # "driver" defines the container image, used for the driver container.
-    driver: dellemc/csi-powerstore:v2.10.0
+    driver: dellemc/csi-powerstore:v2.10.1
     # CSI sidecars
     attacher: registry.k8s.io/sig-storage/csi-attacher:v4.5.0
     provisioner: registry.k8s.io/sig-storage/csi-provisioner:v4.0.0
@@ -114,10 +114,10 @@ csi-powermax:
     managementServers:
       - endpoint: $POWERMAX_MANAGEMENT_SERVERS_ENDPOINT_URL
       - endpoint: $TARGET_UNISPHERE
-  version: v2.10.0
+  version: v2.10.1
   images:
     # "driver" defines the container image, used for the driver container.
-    driver: dellemc/csi-powermax:v2.10.0
+    driver: dellemc/csi-powermax:v2.10.1
     csireverseproxy: dellemc/csipowermax-reverseproxy:v2.9.0
     # CSI sidecars
     attacher: registry.k8s.io/sig-storage/csi-attacher:v4.5.0
@@ -190,10 +190,10 @@ csi-powermax:
 ##########################################
 csi-vxflexos:
   enabled: $POWERFLEX_ENABLED
-  version: v2.10.0
+  version: v2.10.1
   images:
     # "driver" defines the container image, used for the driver container.
-    driver: dellemc/csi-vxflexos:v2.10.0
+    driver: dellemc/csi-vxflexos:v2.10.1
     # "powerflexSdc" defines the SDC image for init container.
     powerflexSdc: dellemc/sdc:4.5
     # CSI sidecars
@@ -289,10 +289,10 @@ csi-vxflexos:
 ##########################################
 csi-isilon:
   enabled: $POWERSCALE_ENABLED
-  version: "v2.10.0"
+  version: "v2.10.1"
   images:
     # "driver" defines the container image, used for the driver container.
-    driver: dellemc/csi-isilon:v2.10.0
+    driver: dellemc/csi-isilon:v2.10.1
     # CSI sidecars
     attacher: registry.k8s.io/sig-storage/csi-attacher:v4.5.0
     provisioner: registry.k8s.io/sig-storage/csi-provisioner:v4.0.0
@@ -399,10 +399,10 @@ csi-isilon:
 ##########################################
 csi-unity:
   enabled: $UNITY_ENABLED
-  version: v2.10.0
+  version: v2.10.1
   images:
     # "driver" defines the container image, used for the driver container.
-    driver: dellemc/csi-unity:v2.10.0
+    driver: dellemc/csi-unity:v2.10.1
     # CSI sidecars
     attacher: registry.k8s.io/sig-storage/csi-attacher:v4.5.0
     provisioner: registry.k8s.io/sig-storage/csi-provisioner:v4.0.0

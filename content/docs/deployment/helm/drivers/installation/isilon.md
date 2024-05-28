@@ -94,13 +94,13 @@ CRDs should be configured during replication prepare stage with repctl as descri
 
 **Steps**
 
-1. Run `git clone -b v2.10.0 https://github.com/dell/csi-powerscale.git` to clone the git repository.
+1. Run `git clone -b v2.10.1 https://github.com/dell/csi-powerscale.git` to clone the git repository.
 2. Ensure that you have created the namespace where you want to install the driver. You can run `kubectl create namespace isilon` to create a new one. The use of "isilon"  as the namespace is just an example. You can choose any name for the namespace.
 3. Collect information from the PowerScale Systems like IP address, IsiPath, username, and password. Make a note of the value for these parameters as they must be entered in the *secret.yaml*.
-4. Download `wget -O my-isilon-settings.yaml https://raw.githubusercontent.com/dell/helm-charts/csi-isilon-2.10.0/charts/csi-isilon/values.yaml` into `cd ../dell-csi-helm-installer` to customize settings for installation.
+4. Download `wget -O my-isilon-settings.yaml https://raw.githubusercontent.com/dell/helm-charts/csi-isilon-2.10.1/charts/csi-isilon/values.yaml` into `cd ../dell-csi-helm-installer` to customize settings for installation.
 5. Edit *my-isilon-settings.yaml* to set the following parameters for your installation:
    The following table lists the primary configurable parameters of the PowerScale driver Helm chart and their default values. More detailed information can be
-   found in the  [`values.yaml`](https://github.com/dell/helm-charts/blob/csi-isilon-2.10.0/charts/csi-isilon/values.yaml) file in this repository.
+   found in the  [`values.yaml`](https://github.com/dell/helm-charts/blob/csi-isilon-2.10.1/charts/csi-isilon/values.yaml) file in this repository.
 
    | Parameter | Description | Required | Default |
    | --------- | ----------- | -------- |-------- |  
@@ -210,7 +210,7 @@ Create isilon-creds secret using the following command:
 
 8.  Install the driver using `csi-install.sh` bash script and default yaml by running
     ```bash
-    cd dell-csi-helm-installer && wget -O my-isilon-settings.yaml https://raw.githubusercontent.com/dell/helm-charts/csi-isilon-2.10.0/charts/csi-isilon/values.yaml &&
+    cd dell-csi-helm-installer && wget -O my-isilon-settings.yaml https://raw.githubusercontent.com/dell/helm-charts/csi-isilon-2.10.1/charts/csi-isilon/values.yaml &&
     ./csi-install.sh --namespace isilon --values my-isilon-settings.yaml
     ```
 
