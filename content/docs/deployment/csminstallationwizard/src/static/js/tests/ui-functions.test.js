@@ -733,7 +733,7 @@ describe("GIVEN displayCommands function", () => {
 		expect($("#command-title").text()).toEqual("Run the following commands to install");
 		expect($("#command-note").text()).toEqual("Ensure that the namespaces and secrets are created before installing the helm chart");
 		expect($("#command1").text()).toEqual("helm repo add dell https://dell.github.io/helm-charts");
-		expect($("#command2").text()).toEqual("helm install powerstore dell/container-storage-modules -n csi-powerstore --version 1.0.0 -f values.yaml");
+		expect($("#command2").text()).toEqual("helm install powerstore dell/container-storage-modules -n csi-powerstore --version 1.3.0 -f values.yaml");
 	});
 
 	test("SHOULD show expected commands: Installation Type: Operator", () => {
