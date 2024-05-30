@@ -18,13 +18,13 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/docs/deployment/csmoperator/drivers/powerstore/" /><meta property="article:section" content="docs" />
 
-<meta property="article:modified_time" content="2024-03-21T15:00:56+05:30" />
+<meta property="article:modified_time" content="2024-05-30T12:03:41+02:00" />
 
 <meta itemprop="name" content="PowerStore">
 <meta itemprop="description" content="Installing Dell CSI Driver for PowerStore via Dell CSM Operator
 ">
-<meta itemprop="dateModified" content="2024-03-21T15:00:56+05:30" />
-<meta itemprop="wordCount" content="1441">
+<meta itemprop="dateModified" content="2024-05-30T12:03:41+02:00" />
+<meta itemprop="wordCount" content="1444">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="PowerStore"/>
 <meta name="twitter:description" content="Installing Dell CSI Driver for PowerStore via Dell CSM Operator
@@ -107,7 +107,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.917c77bb7489bf8dff02d16b628a6ff8.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.a866ed52225a90a5ab4c34b7194ed1b5.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -129,7 +129,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.917c77bb7489bf8dff02d16b628a6ff8.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.a866ed52225a90a5ab4c34b7194ed1b5.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -664,15 +664,9 @@
   <ul>
     <li><a href="#installing-csi-driver-for-powerstore-via-dell-csm-operator">Installing CSI Driver for PowerStore via Dell CSM Operator</a>
       <ul>
-        <li><a href="#listing-installed-drivers-with-the-containerstoragemodule-crd">Listing installed drivers with the ContainerStorageModule CRD</a></li>
-        <li><a href="#prerequisite">Prerequisite</a></li>
-        <li><a href="#fibre-channel-requirements">Fibre Channel requirements</a></li>
-        <li><a href="#set-up-the-iscsi-initiator">Set up the iSCSI Initiator</a></li>
-        <li><a href="#set-up-the-nvme-initiator">Set up the NVMe Initiator</a></li>
-        <li><a href="#linux-multipathing-requirements">Linux multipathing requirements</a></li>
-        <li><a href="#optional-volume-snapshot-requirements">(Optional) Volume Snapshot Requirements</a></li>
-        <li><a href="#optional-replication-feature-requirements">(Optional) Replication feature Requirements</a></li>
-        <li><a href="#user-privileges">User Privileges</a></li>
+        <li><a href="#check-existing-containerstoragemodule-crd">Check existing ContainerStorageModule CRD</a></li>
+        <li><a href="#prerequisites">Prerequisites</a></li>
+        <li><a href="#namespace-and-powerstore-api-access-configuration">Namespace and PowerStore API Access Configuration</a></li>
         <li><a href="#install-driver">Install Driver</a></li>
       </ul>
     </li>
@@ -735,17 +729,17 @@
 <p>The CSI Driver for Dell PowerStore can be installed via the Dell CSM Operator.
 To deploy the Operator, follow the instructions available <a href="../../#installation">here</a>.</p>
 <p>Note that the deployment of the driver using the operator does not use any Helm charts and the installation and configuration parameters will be slightly different from the one specified via the Helm installer.</p>
-<h3 id="listing-installed-drivers-with-the-containerstoragemodule-crd">Listing installed drivers with the ContainerStorageModule CRD</h3>
+<h3 id="check-existing-containerstoragemodule-crd">Check existing ContainerStorageModule CRD</h3>
 <p>User can query for all Dell CSI drivers using the following command:</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl get csm --all-namespaces
-</span></span></code></pre></div><h3 id="prerequisite">Prerequisite</h3>
-<h3 id="fibre-channel-requirements">Fibre Channel requirements</h3>
+</span></span></code></pre></div><h3 id="prerequisites">Prerequisites</h3>
+<h4 id="fibre-channel-requirements">Fibre Channel requirements</h4>
 <p>Dell PowerStore supports Fibre Channel communication. If you use the Fibre Channel protocol, ensure that the
 following requirement is met before you install the CSI Driver for Dell PowerStore:</p>
 <ul>
 <li>Zoning of the Host Bus Adapters (HBAs) to the Fibre Channel port must be done.</li>
 </ul>
-<h3 id="set-up-the-iscsi-initiator">Set up the iSCSI Initiator</h3>
+<h4 id="set-up-the-iscsi-initiator">Set up the iSCSI Initiator</h4>
 <p>The CSI Driver for Dell PowerStore v1.4 and higher supports iSCSI connectivity.</p>
 <p>If you use the iSCSI protocol, set up the iSCSI initiators as follows:</p>
 <ul>
@@ -757,7 +751,7 @@ To do this, run the <code>systemctl enable --now iscsid</code> command.</li>
 <li>Ensure that the unique initiator name is set in <em>/etc/iscsi/initiatorname.iscsi</em>.</li>
 </ul>
 <p>For information about configuring iSCSI, see <em>Dell PowerStore documentation</em> on Dell Support.</p>
-<h3 id="set-up-the-nvme-initiator">Set up the NVMe Initiator</h3>
+<h4 id="set-up-the-nvme-initiator">Set up the NVMe Initiator</h4>
 <p>If you want to use the protocol, set up the NVMe initiators as follows:</p>
 <ul>
 <li>The driver requires NVMe management command-line interface (nvme-cli) to use configure, edit, view or start the NVMe client and target. The nvme-cli utility provides a command-line and interactive shell option. The NVMe CLI tool is installed in the host using the below command.</li>
@@ -780,7 +774,7 @@ To do this, run the <code>systemctl enable --now iscsid</code> command.</li>
 <ul>
 <li>Do not load the nvme_tcp module for NVMeFC</li>
 </ul>
-<h3 id="linux-multipathing-requirements">Linux multipathing requirements</h3>
+<h4 id="linux-multipathing-requirements">Linux multipathing requirements</h4>
 <p>Dell PowerStore supports Linux multipathing. Configure Linux multipathing before installing the CSI Driver for Dell
 PowerStore.</p>
 <p>Set up Linux multipathing as follows:</p>
@@ -795,7 +789,7 @@ PowerStore.</p>
 <li>Enable <code>user_friendly_names</code> and <code>find_multipaths</code> in the <code>multipath.conf</code> file.</li>
 <li>Ensure that the multipath command for <code>multipath.conf</code> is available on all Kubernetes nodes.</li>
 </ul>
-<h4 id="multipathd-machineconfig">multipathd <code>MachineConfig</code></h4>
+<h5 id="multipathd-machineconfig">multipathd <code>MachineConfig</code></h5>
 <p>If you are installing a CSI Driver which requires the installation of the Linux native Multipath software - <em>multipathd</em>, please follow the below instructions</p>
 <p>To enable multipathd on RedHat CoreOS nodes you need to prepare a working configuration encoded in base64.</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>user_friendly_names yes
@@ -830,15 +824,16 @@ Alternatively, you can check the status of the multipath service by entering the
 <p>Finally, you have to restart the service by providing the command
 <code>sudo systemctl restart multipathd</code></p>
 <p>For additional information refer to official documentation of the multipath configuration.</p>
-<h3 id="optional-volume-snapshot-requirements">(Optional) Volume Snapshot Requirements</h3>
+<h4 id="optional-volume-snapshot-requirements">(Optional) Volume Snapshot Requirements</h4>
 <p>For detailed snapshot setup procedure, <a href="../../../../snapshots/#optional-volume-snapshot-requirements">click here.</a></p>
-<h3 id="optional-replication-feature-requirements">(Optional) Replication feature Requirements</h3>
+<h4 id="optional-replication-feature-requirements">(Optional) Replication feature Requirements</h4>
 <p>Applicable only if you decided to enable the Replication feature in <code>sample.yaml</code></p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">replication</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">enabled</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span></code></pre></div><h4 id="replication-crds">Replication CRD&rsquo;s</h4>
+</span></span></span></code></pre></div><h5 id="replication-crds">Replication CRD&rsquo;s</h5>
 <p>The CRDs for replication can be obtained and installed from the csm-replication project on Github. Use <code>csm-replication/deploy/replicationcrds.all.yaml</code> located in csm-replication git repo for the installation.</p>
 <p>CRDs should be configured during replication prepare stage with repctl as described in <a href="../../../helm/modules/installation/replication/install-repctl">install-repctl</a></p>
+<h3 id="namespace-and-powerstore-api-access-configuration">Namespace and PowerStore API Access Configuration</h3>
 <ol>
 <li>
 <p>Create namespace.
@@ -860,7 +855,7 @@ Execute <code>kubectl create namespace powerstore</code> to create the powerstor
 </span></span></span></code></pre></div><p>Change the parameters with relevant values for your PowerStore array.
 Add more blocks similar to above for each PowerStore array if necessary.</p>
 <p>If replication feature is enabled, ensure the secret includes all the PowerStore arrays involved in replication.</p>
-<h3 id="user-privileges">User Privileges</h3>
+<h4 id="user-privileges">User Privileges</h4>
 <p>The username specified in <code>config.yaml</code> must be from the authentication providers of PowerStore. The user must have the correct user role to perform the actions. The minimum requirement is <strong>Storage Operator</strong>.</p>
 </li>
 <li>

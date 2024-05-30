@@ -1148,17 +1148,17 @@ Please refer &lt;a href=&#34;../../../../deployment/helm/drivers/installation/is
 &lt;p&gt;The CSI Driver for Dell PowerStore can be installed via the Dell CSM Operator.
 To deploy the Operator, follow the instructions available &lt;a href=&#34;../../#installation&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Note that the deployment of the driver using the operator does not use any Helm charts and the installation and configuration parameters will be slightly different from the one specified via the Helm installer.&lt;/p&gt;
-&lt;h3 id=&#34;listing-installed-drivers-with-the-containerstoragemodule-crd&#34;&gt;Listing installed drivers with the ContainerStorageModule CRD&lt;/h3&gt;
+&lt;h3 id=&#34;check-existing-containerstoragemodule-crd&#34;&gt;Check existing ContainerStorageModule CRD&lt;/h3&gt;
 &lt;p&gt;User can query for all Dell CSI drivers using the following command:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl get csm --all-namespaces
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;prerequisite&#34;&gt;Prerequisite&lt;/h3&gt;
-&lt;h3 id=&#34;fibre-channel-requirements&#34;&gt;Fibre Channel requirements&lt;/h3&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;prerequisites&#34;&gt;Prerequisites&lt;/h3&gt;
+&lt;h4 id=&#34;fibre-channel-requirements&#34;&gt;Fibre Channel requirements&lt;/h4&gt;
 &lt;p&gt;Dell PowerStore supports Fibre Channel communication. If you use the Fibre Channel protocol, ensure that the
 following requirement is met before you install the CSI Driver for Dell PowerStore:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Zoning of the Host Bus Adapters (HBAs) to the Fibre Channel port must be done.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id=&#34;set-up-the-iscsi-initiator&#34;&gt;Set up the iSCSI Initiator&lt;/h3&gt;
+&lt;h4 id=&#34;set-up-the-iscsi-initiator&#34;&gt;Set up the iSCSI Initiator&lt;/h4&gt;
 &lt;p&gt;The CSI Driver for Dell PowerStore v1.4 and higher supports iSCSI connectivity.&lt;/p&gt;
 &lt;p&gt;If you use the iSCSI protocol, set up the iSCSI initiators as follows:&lt;/p&gt;
 &lt;ul&gt;
@@ -1170,7 +1170,7 @@ To do this, run the &lt;code&gt;systemctl enable --now iscsid&lt;/code&gt; comma
 &lt;li&gt;Ensure that the unique initiator name is set in &lt;em&gt;/etc/iscsi/initiatorname.iscsi&lt;/em&gt;.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;For information about configuring iSCSI, see &lt;em&gt;Dell PowerStore documentation&lt;/em&gt; on Dell Support.&lt;/p&gt;
-&lt;h3 id=&#34;set-up-the-nvme-initiator&#34;&gt;Set up the NVMe Initiator&lt;/h3&gt;
+&lt;h4 id=&#34;set-up-the-nvme-initiator&#34;&gt;Set up the NVMe Initiator&lt;/h4&gt;
 &lt;p&gt;If you want to use the protocol, set up the NVMe initiators as follows:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;The driver requires NVMe management command-line interface (nvme-cli) to use configure, edit, view or start the NVMe client and target. The nvme-cli utility provides a command-line and interactive shell option. The NVMe CLI tool is installed in the host using the below command.&lt;/li&gt;
@@ -1193,7 +1193,7 @@ To do this, run the &lt;code&gt;systemctl enable --now iscsid&lt;/code&gt; comma
 &lt;ul&gt;
 &lt;li&gt;Do not load the nvme_tcp module for NVMeFC&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id=&#34;linux-multipathing-requirements&#34;&gt;Linux multipathing requirements&lt;/h3&gt;
+&lt;h4 id=&#34;linux-multipathing-requirements&#34;&gt;Linux multipathing requirements&lt;/h4&gt;
 &lt;p&gt;Dell PowerStore supports Linux multipathing. Configure Linux multipathing before installing the CSI Driver for Dell
 PowerStore.&lt;/p&gt;
 &lt;p&gt;Set up Linux multipathing as follows:&lt;/p&gt;
@@ -1208,7 +1208,7 @@ PowerStore.&lt;/p&gt;
 &lt;li&gt;Enable &lt;code&gt;user_friendly_names&lt;/code&gt; and &lt;code&gt;find_multipaths&lt;/code&gt; in the &lt;code&gt;multipath.conf&lt;/code&gt; file.&lt;/li&gt;
 &lt;li&gt;Ensure that the multipath command for &lt;code&gt;multipath.conf&lt;/code&gt; is available on all Kubernetes nodes.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h4 id=&#34;multipathd-machineconfig&#34;&gt;multipathd &lt;code&gt;MachineConfig&lt;/code&gt;&lt;/h4&gt;
+&lt;h5 id=&#34;multipathd-machineconfig&#34;&gt;multipathd &lt;code&gt;MachineConfig&lt;/code&gt;&lt;/h5&gt;
 &lt;p&gt;If you are installing a CSI Driver which requires the installation of the Linux native Multipath software - &lt;em&gt;multipathd&lt;/em&gt;, please follow the below instructions&lt;/p&gt;
 &lt;p&gt;To enable multipathd on RedHat CoreOS nodes you need to prepare a working configuration encoded in base64.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;user_friendly_names yes
@@ -1243,15 +1243,16 @@ Alternatively, you can check the status of the multipath service by entering the
 &lt;p&gt;Finally, you have to restart the service by providing the command
 &lt;code&gt;sudo systemctl restart multipathd&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;For additional information refer to official documentation of the multipath configuration.&lt;/p&gt;
-&lt;h3 id=&#34;optional-volume-snapshot-requirements&#34;&gt;(Optional) Volume Snapshot Requirements&lt;/h3&gt;
+&lt;h4 id=&#34;optional-volume-snapshot-requirements&#34;&gt;(Optional) Volume Snapshot Requirements&lt;/h4&gt;
 &lt;p&gt;For detailed snapshot setup procedure, &lt;a href=&#34;../../../../snapshots/#optional-volume-snapshot-requirements&#34;&gt;click here.&lt;/a&gt;&lt;/p&gt;
-&lt;h3 id=&#34;optional-replication-feature-requirements&#34;&gt;(Optional) Replication feature Requirements&lt;/h3&gt;
+&lt;h4 id=&#34;optional-replication-feature-requirements&#34;&gt;(Optional) Replication feature Requirements&lt;/h4&gt;
 &lt;p&gt;Applicable only if you decided to enable the Replication feature in &lt;code&gt;sample.yaml&lt;/code&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;replication&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;enabled&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;true&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;replication-crds&#34;&gt;Replication CRD&amp;rsquo;s&lt;/h4&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id=&#34;replication-crds&#34;&gt;Replication CRD&amp;rsquo;s&lt;/h5&gt;
 &lt;p&gt;The CRDs for replication can be obtained and installed from the csm-replication project on Github. Use &lt;code&gt;csm-replication/deploy/replicationcrds.all.yaml&lt;/code&gt; located in csm-replication git repo for the installation.&lt;/p&gt;
 &lt;p&gt;CRDs should be configured during replication prepare stage with repctl as described in &lt;a href=&#34;../../../helm/modules/installation/replication/install-repctl&#34;&gt;install-repctl&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;namespace-and-powerstore-api-access-configuration&#34;&gt;Namespace and PowerStore API Access Configuration&lt;/h3&gt;
 &lt;ol&gt;
 &lt;li&gt;
 &lt;p&gt;Create namespace.
@@ -1273,7 +1274,7 @@ Execute &lt;code&gt;kubectl create namespace powerstore&lt;/code&gt; to create t
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Change the parameters with relevant values for your PowerStore array.
 Add more blocks similar to above for each PowerStore array if necessary.&lt;/p&gt;
 &lt;p&gt;If replication feature is enabled, ensure the secret includes all the PowerStore arrays involved in replication.&lt;/p&gt;
-&lt;h3 id=&#34;user-privileges&#34;&gt;User Privileges&lt;/h3&gt;
+&lt;h4 id=&#34;user-privileges&#34;&gt;User Privileges&lt;/h4&gt;
 &lt;p&gt;The username specified in &lt;code&gt;config.yaml&lt;/code&gt; must be from the authentication providers of PowerStore. The user must have the correct user role to perform the actions. The minimum requirement is &lt;strong&gt;Storage Operator&lt;/strong&gt;.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
