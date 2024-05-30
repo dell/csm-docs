@@ -3,7 +3,7 @@ title: PowerStore
 description: Release notes for PowerStore CSI driver
 ---
 
-## Release Notes - CSI PowerStore v2.10.0
+## Release Notes - CSI PowerStore v2.11.0
 
 
 
