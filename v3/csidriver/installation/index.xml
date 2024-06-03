@@ -65,7 +65,7 @@
         
 
 &lt;div class=&#34;pageinfo pageinfo-primary&#34;&gt;
-&lt;p&gt;The Dell CSI Operator is no longer actively maintained or supported. Dell CSI Operator has been replaced with &lt;a href=&#34;https://dell.github.io/csm-docs/docs/deployment/csmoperator/&#34;&gt;Dell CSM Operator&lt;/a&gt;. If you are currently using Dell CSI Operator, refer to the &lt;a href=&#34;https://dell.github.io/csm-docs/docs/csidriver/installation/operator/operator_migration/&#34;&gt;operator migration documentation&lt;/a&gt; to migrate from Dell CSI Operator to Dell CSM Operator.&lt;/p&gt;
+&lt;p&gt;The Dell CSI Operator is no longer actively maintained or supported. Dell CSI Operator has been replaced with &lt;a href=&#34;https://dell.github.io/csm-docs/docs/deployment/csmoperator/&#34;&gt;Dell CSM Operator&lt;/a&gt;. If you are currently using Dell CSI Operator, refer to the &lt;a href=&#34;https://dell.github.io/csm-docs/docs/deployment/csmoperator/operator_migration/&#34;&gt;operator migration documentation&lt;/a&gt; to migrate from Dell CSI Operator to Dell CSM Operator.&lt;/p&gt;
 
 &lt;/div&gt;
 
