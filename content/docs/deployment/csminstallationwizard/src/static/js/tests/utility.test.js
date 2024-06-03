@@ -46,7 +46,7 @@ const CONSTANT_PARAM = {
 	HELM: "helm",
 	OPERATOR: "operator",
 	CSM_HELM_V180: "1.1.0",
-	CSM_HELM_V190: "1.2.0",
+	CSM_HELM_V190: "1.2.2",
 	CSM_HELM_V1102: "1.3.2",
 	CSM_HELM_V1110: "1.4.0",
 	HELM_TAINTS: `
