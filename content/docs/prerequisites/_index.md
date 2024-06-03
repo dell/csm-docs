@@ -58,7 +58,7 @@ Container Storage Modules (CSM) does not officially support specific operating s
 | [CSM Authorization](../authorization/) | Yes      | Yes       |  No      | Yes        | No         |
 | [CSM Observability](../observability/) | Yes      | Yes       |  No      | Yes        | Yes        |
 | [CSM Replication](../replication/)     | Yes      | Yes       |  No      | Yes        | Yes        |
-| [CSM Resiliency](../resiliency/)       | No       | Yes       |  Yes     | Yes        | Yes        |
+| [CSM Resiliency](../resiliency/)       | Yes       | Yes       |  Yes     | Yes        | Yes        |
 | [CSM Encryption](../secure/encryption/)| No       | No        |  No      | Yes        | No         |
 | [CSM Application Mobility](../applicationmobility/) | Yes | Yes |  Yes   | Yes        | Yes        |
 | [Volume Group Snapshot](../snapshots/volume-group-snapshots/) | No | Yes | No | No    | Yes        |
@@ -82,9 +82,9 @@ The table below lists the driver and modules versions installable with the CSM O
 | CSI PowerStore     | 2.10.0   | ❌                | ❌             | ❌                | ✔ 1.9.0       |
 | CSI PowerStore     | 2.9.0   | ❌                | ❌             | ❌                | ✔ 1.8.0       |
 | CSI PowerStore     | 2.8.0   | ❌                | ❌             | ❌                | ✔ 1.7.0       |
-| CSI PowerMax       | 2.10.0   | ✔ 1.10.0           | ✔ 1.8.0        | ✔ 1.8.0           | ❌            |
+| CSI PowerMax       | 2.11.0   | ✔ 1.11.0           | ✔ 1.9.0        | ✔ 1.9.0           | ✔ 1.10.0      |
+| CSI PowerMax       | 2.10.1   | ✔ 1.10.1           | ✔ 1.8.1        | ✔ 1.8.1           | ❌            |
 | CSI PowerMax       | 2.9.0   | ✔ 1.9.0           | ✔ 1.7.0        | ✔ 1.7.0           | ❌            |
-| CSI PowerMax       | 2.8.0   | ✔ 1.8.0           | ✔ 1.6.0        | ✔ 1.6.0           | ❌            |
 | CSI Unity XT       | 2.10.0   | ❌                | ❌             | ❌                | ❌            |
 | CSI Unity XT       | 2.9.0   | ❌                | ❌             | ❌                | ❌            |
 | CSI Unity XT       | 2.8.0   | ❌                | ❌             | ❌                | ❌            |
