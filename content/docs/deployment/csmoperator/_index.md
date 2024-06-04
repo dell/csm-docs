@@ -363,6 +363,42 @@ The following notes explain some of the general items to take care of.
         configVersion: v2.10.0
    ```
 
+### Upgrade Observability module using Dell CSM Operator
+
+The Observability module installed by the Dell CSM Operator can be updated like any Kubernetes resource.
+
+* Modifying the existing driver and module installation directly via `kubectl edit`
+
+  ```sh
+  $ kubectl get <driver-object> -n <driver-namespace>
+  ```
+
+  For example - If the CSI PowerScale driver is installed then run this command to get the object name
+
+  ```sh
+  # Replace driver-namespace with the namespace where the CSI PowerScale driver is installed
+  $ kubectl get csm -n <driver-namespace>
+  ```
+
+  use the object name in `kubectl edit` command.
+
+  ```sh
+  $ kubectl edit csm <driver-object>/<object-name> -n <driver-namespace>
+  ```
+
+  For example - If the object name is isilon then use the name as isilon
+
+  ```sh
+  # Replace object-name with the isilon
+  $ kubectl edit csm isilon -n <driver-namespace>
+  ```
+
+* Modify the installation
+
+  * Update the driver config version and image tag
+  
+  * Update the Observability config version, csm-topology image and the driver metrics images(e.g. for CSI PowerScale driver, the metrics driver image would be `csm-metrics-powerscale`)
+
 ## Custom Resource Definitions
 As part of the Dell CSM Operator installation, a CRD representing configuration for the CSI Driver and CSM Modules is also installed.
 `containerstoragemodule` CRD is installed in API Group `storage.dell.com`.
