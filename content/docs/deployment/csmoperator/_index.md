@@ -396,8 +396,13 @@ The Observability module installed by the Dell CSM Operator can be updated like 
 * Modify the installation
 
   * Update the driver config version and image tag
-  
+
   * Update the Observability config version, csm-topology image and the driver metrics images(e.g. for CSI PowerScale driver, the metrics driver image would be `csm-metrics-powerscale`)
+
+>NOTE:
+
+* In observability module upgrade, only `n-1` to `n` upgrade is supported, e.g. if the current observability version is `v1.7.x`, it can be upgrade to `1.8.x`.
+* Upgrade to csm-operator and csi-driver first which support the corresponding observability module version.
 
 ## Custom Resource Definitions
 As part of the Dell CSM Operator installation, a CRD representing configuration for the CSI Driver and CSM Modules is also installed.
