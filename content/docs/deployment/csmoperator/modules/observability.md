@@ -59,4 +59,4 @@ The CSM Observability module for supported Dell CSI Drivers can be installed via
 
 ## Upgrade Observability
 
-- To upgrade observability module, please check the following section: [Upgrade Observability module using Dell CSM Operator](../../csmoperator/#upgrade-observability-module-using-dell-csm-operator)
+- To upgrade observability module, please check the following section: [Upgrade Observability module using Dell CSM Operator](../../#upgrade-observability-module-using-dell-csm-operator)

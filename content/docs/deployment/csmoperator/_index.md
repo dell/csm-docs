@@ -401,7 +401,7 @@ The Observability module installed by the Dell CSM Operator can be updated like 
 
 >NOTE:
 
-* In observability module upgrade, only `n-1` to `n` upgrade is supported, e.g. if the current observability version is `v1.7.x`, it can be upgrade to `1.8.x`.
+* In observability module upgrade, only `n-1` to `n` upgrade is supported, e.g. if the current observability version is `v1.7.x`, it can be upgraded to `1.8.x`.
 * Upgrade to csm-operator and csi-driver first which support the corresponding observability module version.
 
 ## Custom Resource Definitions
