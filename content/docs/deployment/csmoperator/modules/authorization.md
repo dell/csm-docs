@@ -16,14 +16,16 @@ To deploy the Operator, follow the instructions available [here](../../#installa
 
 ### Prerequisite
 
-1. Execute `kubectl create namespace authorization` to create the authorization namespace (if not already present). Note that the namespace can be any user-defined name, in this example, we assume that the namespace is 'authorization'. 
+1. [Install Vault or configure an existing Vault](#vault-server-installation).
 
-2. Install cert-manager CRDs 
+2. Execute `kubectl create namespace authorization` to create the authorization namespace (if not already present). Note that the namespace can be any user-defined name, in this example, we assume that the namespace is 'authorization'. 
+
+3. Install cert-manager CRDs 
     ```bash
     kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v1.11.0/cert-manager.crds.yaml
     ```
 
-3. Prepare [samples/authorization/config.yaml](https://github.com/dell/csm-operator/blob/main/samples/authorization/config.yaml) which contains the JWT signing secret. The following table lists the configuration parameters.
+4. Prepare [samples/authorization/config.yaml](https://github.com/dell/csm-operator/blob/main/samples/authorization/config.yaml) which contains the JWT signing secret. The following table lists the configuration parameters.
 
     | Parameter | Description                                                  | Required | Default |
     | --------- | ------------------------------------------------------------ | -------- | ------- |
@@ -50,7 +52,7 @@ To deploy the Operator, follow the instructions available [here](../../#installa
     kubectl create secret generic karavi-config-secret -n authorization --from-file=config.yaml=samples/authorization/config.yaml -o yaml --dry-run=client | kubectl replace -f -
     ```
 
-4. Create the [karavi-storage-secret](https://github.com/dell/csm-operator/blob/main/samples/authorization/karavi-storage-secret.yaml) to store storage system credentials.
+5. Create the [karavi-storage-secret](https://github.com/dell/csm-operator/blob/main/samples/authorization/karavi-storage-secret.yaml) to store storage system credentials.
 
     Use this command to create the secret:
 
