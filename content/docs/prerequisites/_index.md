@@ -66,7 +66,7 @@ Container Storage Modules (CSM) does not officially support specific operating s
 {{</table>}}
 
 > Notes:
-> * Encryption and Application Mobility are available as a Technical Preview only and are not officially supported.
+> * Encryption is available as a Technical Preview only and are not officially supported.
 
 ## CSM Operator compatibility matrix
 
