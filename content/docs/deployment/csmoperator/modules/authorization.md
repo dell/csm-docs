@@ -319,7 +319,7 @@ the Docker host where the server is running.
 vault secrets enable -version=2 -path=csm-authorization/ kv
 ```
 
-Key/Value secret engine is used to store encryption keys. Each encryption key is represented by a key-value entry. 
+Key/Value secret engine is used to store array credentials.
 
 ### Enable Kubernetes authentication
 
@@ -366,6 +366,8 @@ The role needs to be:
 ```shell
 vault kv put -mount=csm-authorization /storage/powerflex/systemid1 username=user password=pass
 ```
+
+The username must use the key `username` and the password must use the key `password`.
 
 ## Token TTL Considerations
 
