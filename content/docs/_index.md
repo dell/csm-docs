@@ -59,7 +59,7 @@ CSM is made up of multiple components including modules (enterprise capabilities
 {{< /cardpane >}}
 {{< cardpane >}}
    {{< card header="[License](support/license/)"
-          footer="Required for [Application Mobility](applicationmobility/) & [Encryption](secure/encryption/)">}}
+          footer="Required for [Encryption](secure/encryption/)">}}
   The tech-preview release of Encryption requires a license.
   Request a license using the [Container Storage Modules License Request](https://app.smartsheet.com/b/form/5e46fad643874d56b1f9cf4c9f3071fb) by providing the requested details.
    [...Learn more](support/license/)

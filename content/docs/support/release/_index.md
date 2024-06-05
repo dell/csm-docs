@@ -20,8 +20,6 @@ Release notes for Container Storage Modules:
 
 [CSM for Encryption](../../secure/encryption/release)
 
-[CSM for Application Mobility](../../applicationmobility/release)
-
 [CSM Operator](../../deployment/csmoperator/release)
 
 [CSM Installation Wizard](../../deployment/csminstallationwizard/release)
