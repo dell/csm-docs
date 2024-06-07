@@ -367,6 +367,8 @@ The following notes explain some of the general items to take care of.
 
 * Refer [Upgrade Obsevability Module](./modules/observability/#upgrade-observability) to upgrade the Observability Module via Operator
 
+* Refer [Upgrade Authorization Module](./modules/authorization/#upgrade-csm-authorization) to upgrade the Authorization Module via Operator
+
 ## Custom Resource Definitions
 As part of the Dell CSM Operator installation, a CRD representing configuration for the CSI Driver and CSM Modules is also installed.
 `containerstoragemodule` CRD is installed in API Group `storage.dell.com`.
