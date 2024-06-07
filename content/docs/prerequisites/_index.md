@@ -89,3 +89,14 @@ The table below lists the driver and modules versions installable with the CSM O
 | CSI Unity XT       | 2.9.0   | ❌                | ❌             | ❌                | ❌            |
 | CSI Unity XT       | 2.8.0   | ❌                | ❌             | ❌                | ❌            |
 {{</table>}}
+
+## Dell CSM Release and Support Lifecycle
+
+{{<table "table table-striped table-bordered table-sm">}}
+| CSM Version | GA Date | End of Life Date |
+| - | - | -|
+| 1.10 | 03/27/2024 | 03/31/2025 |
+| 1.9 | 12/20/2023 | 12/20/2024 |
+| 1.8 | 09/26/2023 | 09/26/2024 |
+| 1.7 | 06/28/2023 | 06/28/2024 |
+{{</table>}}
