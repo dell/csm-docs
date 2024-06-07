@@ -154,7 +154,9 @@ This section outlines the upgrade steps for Container Storage Modules (CSM) for 
 
 - Upgrading the Authorization Proxy Server
 
-  Modifying the existing Authorization Proxy Server installation directly via `kubectl edit`
+   Modifying the existing Authorization Proxy Server installation directly via `kubectl edit`
+ 
+  ```sh
   kubectl get <csm-object> -n <module-namespace>
   ```
 
@@ -176,6 +178,8 @@ This section outlines the upgrade steps for Container Storage Modules (CSM) for 
   ```sh
   # Replace object-name with the authorization
   kubectl edit csm authorization -n <module-namespace>
+
+- Modify the installation
 
   - Update the CSM Authorization Proxy Server configVersion  
   - Update the images for proxyService, tenantService, roleService and storageService
