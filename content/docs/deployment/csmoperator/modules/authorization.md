@@ -144,3 +144,76 @@ Follow the instructions available in CSM Authorization for [Configuring the CSM 
 ### Configure a Dell CSI Driver with CSM Authorization
 
 Follow the instructions available in CSM Authorization for [Configuring a Dell CSI Driver with CSM for Authorization](../../../helm/modules/installation/authorization/#configuring-a-dell-csi-driver-with-csm-for-authorization).
+
+### Upgrade CSM Authorization
+
+This section outlines the upgrade steps for Container Storage Modules (CSM) for Authorization. The upgrade of CSM for Authorization is handled in 2 parts:
+1) Upgrading the Authorization proxy server
+2) Upgrading CSI Driver , Authorization sidecar with Authorization module enabled
+
+
+- Upgrading the Authorization Proxy Server
+
+  Modifying the existing Authorization Proxy Server installation directly via `kubectl edit`
+  kubectl get <csm-object> -n <module-namespace>
+  ```
+
+  For example - If the Authorization Proxy Server is installed then run this command to get the object name
+
+  ```sh
+  # Replace module-namespace with the namespace where the Authorization Proxy Server is installed
+  $ kubectl get csm -n <module-namespace>
+  ```
+
+  use the object name in `kubectl edit` command.
+
+  ```sh
+  kubectl edit csm <object-name> -n <module-namespace>
+  ```
+
+  For example - If the object name is authorization then use the name as authorization
+
+  ```sh
+  # Replace object-name with the authorization
+  kubectl edit csm authorization -n <module-namespace>
+
+  - Update the CSM Authorization Proxy Server configVersion  
+  - Update the images for proxyService, tenantService, roleService and storageService
+
+
+- Upgrading CSI Driver , Authorization sidecar with Authorization module enabled
+
+  Modifying the existing driver and module installation directly via `kubectl edit`
+
+  ```sh
+  kubectl get <driver-object> -n <driver-namespace>
+  ```
+
+  For example - If the CSI PowerFlex driver is installed then run this command to get the object name
+
+  ```sh
+  # Replace driver-namespace with the namespace where the CSI PowerFlex driver is installed
+  $ kubectl get csm -n <driver-namespace>
+  ```
+
+  use the object name in `kubectl edit` command.
+
+  ```sh
+  kubectl edit csm <driver-object>/<object-name> -n <driver-namespace>
+  ```
+
+  For example - If the object name is vxflexos then use the name as vxflexos
+
+  ```sh
+  # Replace object-name with the vxflexos
+  kubectl edit csm vxflexos -n <driver-namespace>
+  ```
+
+- Modify the installation
+
+  - Update the driver config version and image tag
+  - Update the Authorization config version and karavi-authorization-proxy image.
+
+>NOTE:
+
+- In Authorization module upgrade, only `n-1` to `n` upgrade is supported, e.g. if the current observability version is `v1.8.x`, it can be upgraded to `1.9.x`.
