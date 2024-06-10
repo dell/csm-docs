@@ -145,76 +145,83 @@ Follow the instructions available in CSM Authorization for [Configuring the CSM 
 
 Follow the instructions available in CSM Authorization for [Configuring a Dell CSI Driver with CSM for Authorization](../../../helm/modules/installation/authorization/#configuring-a-dell-csi-driver-with-csm-for-authorization).
 
-### Upgrade CSM Authorization
+## Upgrade CSM Authorization
 
 This section outlines the upgrade steps for Container Storage Modules (CSM) for Authorization. The upgrade of CSM for Authorization is handled in 2 parts:
-1) Upgrading the Authorization proxy server
-2) Upgrading CSI Driver, Authorization sidecar with Authorization module enabled
+1. Upgrading the Authorization proxy server
+2. Upgrading CSI Driver, Authorization sidecar with Authorization module enabled
 
+### Upgrading the Authorization Proxy Server
 
-## Upgrading the Authorization Proxy Server
-
-  1. Modifying the existing Authorization Proxy Server installation directly via `kubectl edit`
+1. Modifying the existing Authorization Proxy Server installation directly via `kubectl edit`
   
-    ```sh
-    kubectl get csm -n <module-namespace>
-    ```
+   ```sh
 
-    For example - If the Authorization Proxy Server is installed in authorization namespace then run this command to get the object name
+   kubectl get csm -n <module-namespace>
+   ```
 
-    ```sh
-    $ kubectl get csm -n authorization
-    ```
+   For example - If the Authorization Proxy Server is installed in authorization namespace, then run this command to get the object name
 
-    use the object name in `kubectl edit` command.
+   ```sh
+    
+   kubectl get csm -n authorization
+   ```
 
-    ```sh
-    kubectl edit csm <object-name> -n <module-namespace>
-    ```
+   use the object name in `kubectl edit` command.
 
-    For example - If the object name is authorization then use the name as authorization and if the namespace is authorization, then run this command to edit the object
+   ```sh
 
-    ```sh
-    kubectl edit csm authorization -n authorization
-    ```
+   kubectl edit csm <object-name> -n <module-namespace>
+   ```
 
-  2. Modify the installation
+   If the object name is authorization and the proxy server is installed in authorization namespace, then run this command to edit the object
 
-    - Update the CSM Authorization Proxy Server configVersion  
-    - Update the images for proxyService, tenantService, roleService and storageService
+   ```sh
+
+   kubectl edit csm authorization -n authorization
+   ```
+
+2. Modify the installation
+
+   - Update the CSM Authorization Proxy Server configVersion  
+   - Update the images for proxyService, tenantService, roleService and storageService
 
 
-## Upgrading CSI Driver, Authorization sidecar with Authorization module enabled
+### Upgrading CSI Driver, Authorization sidecar with Authorization module enabled
 
-  1. Modifying the existing driver and module installation directly via `kubectl edit`
+1. Modifying the existing driver and module installation directly via `kubectl edit`
 
-    ```sh
-    kubectl get <driver-object> -n <driver-namespace>
-    ```
+   ```sh
 
-    For example - If the CSI PowerFlex driver is installed in vxflexos namepace then run this command to get the object name
+   kubectl get csm -n <driver-namespace>
+   ```
 
-    ```sh
-    kubectl get csm -n vxflexos
-    ```
+   For example - If the CSI PowerFlex driver is installed in vxflexos namepace, then run this command to get the object name
 
-    use the object name in `kubectl edit` command.
+   ```sh
 
-    ```sh
-    kubectl edit csm <driver-object>/<object-name> -n <driver-namespace>
-    ```
+   kubectl get csm -n vxflexos
+   ```
 
-    For example - If the object name is vxflexos then use the name as vxflexos and if the driver is installed in vxflexos namespace, then run this command to edit the object
+   use the object name in `kubectl edit` command.
 
-    ```sh
-    kubectl edit csm vxflexos -n vxflexos
-    ```
+   ```sh
 
-  2. Modify the installation
+   kubectl edit csm <object-name> -n <driver-namespace>
+   ```
 
-    - Update the driver config version and image tag
-    - Update the Authorization config version and karavi-authorization-proxy image.
+   For example - If the object name is vxflexos and the driver is installed in vxflexos namespace, then run this command to edit the object
+
+   ```sh
+
+   kubectl edit csm vxflexos -n vxflexos
+   ```
+
+2. Modify the installation
+
+   - Update the driver config version and image.
+   - Update the Authorization config version and karavi-authorization-proxy image.
 
 >NOTE:
 
-- In Authorization module upgrade, only `n-1` to `n` upgrade is supported, e.g. if the current observability version is `v1.8.x`, it can be upgraded to `1.9.x`.
+- In Authorization module upgrade, only `n-1` to `n` upgrade is supported, e.g. if the current authorization version is `v1.8.x`, it can be upgraded to `1.9.x`.
