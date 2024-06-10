@@ -61,38 +61,36 @@ The CSM Observability module for supported Dell CSI Drivers can be installed via
 
 The Observability module installed by the Dell CSM Operator can be updated like any Kubernetes resource.
 
-1. Modifying the existing driver and module installation directly via `kubectl edit`
+- Modifying the existing driver and module installation directly via `kubectl edit`
 
   ```sh
-  
-  kubectl get csm -n <driver-namespace>
+  kubectl get <driver-object> -n <driver-namespace>
   ```
 
-  For example - If the CSI PowerScale driver is installed in isilon namespace, then run this command to get the object name
+  For example - If the CSI PowerScale driver is installed then run this command to get the object name
 
   ```sh
-
-  kubectl get csm -n isilon
+  # Replace driver-namespace with the namespace where the CSI PowerScale driver is installed
+  $ kubectl get csm -n <driver-namespace>
   ```
 
   use the object name in `kubectl edit` command.
 
   ```sh
-
-  kubectl edit csm <object-name> -n <driver-namespace>
+  kubectl edit csm <driver-object>/<object-name> -n <driver-namespace>
   ```
 
-  For example - If the object name is isilon and the driver is installed in isilon namespace, then run this command to edit the object
+  For example - If the object name is isilon then use the name as isilon
 
   ```sh
-  
-  kubectl edit csm isilon -n isilon
+  # Replace object-name with the isilon
+  kubectl edit csm isilon -n <driver-namespace>
   ```
 
-2. Modify the installation
+- Modify the installation
 
-  - Update the driver config version and image.
-  - Update the Observability config version, csm-topology image and the driver metrics images(e.g. for CSI PowerScale driver, the metrics driver image would be `csm-metrics-powerscale`).
+  - Update the driver config version and image tag
+  - Update the Observability config version, csm-topology image and the driver metrics images(e.g. for CSI PowerScale driver, the metrics driver image would be `csm-metrics-powerscale`)
 
 >NOTE:
 

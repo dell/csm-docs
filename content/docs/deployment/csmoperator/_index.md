@@ -337,22 +337,21 @@ git clone -b v1.5.0 https://github.com/dell/csm-operator.git
 The CSI Drivers installed by the Dell CSM Operator can be updated like any Kubernetes resource.
 * Modifying the installation directly via `kubectl edit`
     ```
+    $ kubectl get <driver-object> -n <driver-namespace>
+    ```
+    For example - If the CSI PowerStore driver is installed then run this command to get the object name
+    ```
+    # Replace driver-namespace with the namespace where the CSI PowerStore driver is installed
     $ kubectl get csm -n <driver-namespace>
-    ```
-    For example - If the CSI PowerStore driver is installed in powerstore namespace, then run this command to get the object name
-    ```
-    
-    $ kubectl get csm -n powerstore
     ```
     use the object name in `kubectl edit` command.
     ```
-    
-    $ kubectl edit csm <object-name> -n <driver-namespace>
+    $ kubectl edit csm <driver-object>/<object-name> -n <driver-namespace>
     ```
-    For example - If the object name is powerstore and the driver is installed in powerstore namespace, then run this command to edit the object name
+    For example - If the object name is powerstore then use the name as powerstore
     ```
-    
-    $ kubectl edit csm powerstore -n powerstore
+    # Replace object-name with the powerstore
+    $ kubectl edit csm powerstore -n <driver-namespace>
     ```
     and modify the installation. The usual fields to edit are the version of drivers, sidecars and the environment variables.
 The following notes explain some of the general items to take care of.
@@ -366,9 +365,9 @@ The following notes explain some of the general items to take care of.
 
 ### Upgrade Modules using Dell CSM Operator
 
-* Refer [Upgrade Obsevability Module](modules/observability/#upgrade-observability) to upgrade the Observability Module via Operator
+* Refer [Upgrade Obsevability Module](./modules/observability/#upgrade-observability) to upgrade the Observability Module via Operator
 
-* Refer [Upgrade Authorization Module](modules/authorization/#upgrade-csm-authorization) to upgrade the Authorization Module via Operator
+* Refer [Upgrade Authorization Module](./modules/authorization/#upgrade-csm-authorization) to upgrade the Authorization Module via Operator
 
 ## Custom Resource Definitions
 As part of the Dell CSM Operator installation, a CRD representing configuration for the CSI Driver and CSM Modules is also installed.
