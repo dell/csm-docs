@@ -6,6 +6,10 @@ Description: >
   Obtain trial License for Tech-preview of Dell Container Storage Modules (CSM)
 ---
 
+{{% pageinfo color="primary" %}}
+Application Mobility is available with [APEX Navigator for Kubernetes](https://www.dell.com/en-ca/dt/apex/storage/public-cloud/navigator.htm#kubernetes) for US-based customers. Trial licenses for Application Mobility will not be issued for US-based customers.
+{{% /pageinfo %}}
+
 The tech-preview releases of [Container Storage Modules](https://github.com/dell/csm) for Application Mobility and Encryption require a license. This section details how to request a license.
 
 ## Requesting a License
