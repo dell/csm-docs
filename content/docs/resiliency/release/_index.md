@@ -18,12 +18,14 @@ Description: >
 
 
 
+
 ### New Features/Changes
 
-- [#926 - [FEATURE]: Fixing the linting, formatting and vetting issues](https://github.com/dell/csm/issues/926)
+- [#1082 - [FEATURE]:CSM Resiliency support for PowerMax ](https://github.com/dell/csm/issues/1082)
 
 ### Fixed Issues
 
+- [#1216 - [BUG]: Incorrect Error message in Resiliency Podmon in controllerCleanupPod() func](https://github.com/dell/csm/issues/1216)
 
 ### Known Issues
 
