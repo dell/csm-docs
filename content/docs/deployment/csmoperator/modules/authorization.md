@@ -79,8 +79,8 @@ To deploy the Operator, follow the instructions available [here](../../#installa
    | **cert-manager** | This section configures the enablement of cert-manager. | - | - |
    | enabled | Enable/Disable deployment of cert-manager. Set to false if you already have cert-manager installed. | No | true |
    | **authorization** | This section configures the CSM-Authorization components. | - | - |
-   | certificate | Location of certificate file, if wanting to use a custom certificate. | No | - |
-   | privateKey | Location of certificate file, if wanting to use a custom certificate. | No | - |
+   | certificate | The base64-encoded certificate for the certificate/private-key to configure the proxy-service Ingress. Leave empty to use self-signed certificate. | No | - |
+   | privateKey | The base64-encoded private key for the certificate/private-key to configure the proxy-service Ingress. Leave empty to use self-signed certificate. | No | - |
    | hostname | The hostname to configure the self-signed certificate (if applicable), and the proxy service Ingress. | No | csm-authorization.com |
    | proxyServerIngress.ingressClassName | The ingressClassName of the proxy-service Ingress. | Yes | nginx |
    | proxyServerIngress.hosts | Additional host rules to be applied to the proxy-service Ingress. | No | - |
@@ -101,6 +101,9 @@ To deploy the Operator, follow the instructions available [here](../../#installa
    | vaultAddress | The address where vault is hosted with the credentials to the array (`https://10.0.0.1:<port>`). | Yes | - |
    | vaultRole | The configured authentication role in vault. | Yes | csm-authorization |
    | kvEnginePath | The vault path where the credentials are stored. | Yes | secret |
+   | certificate | The base64-encoded certificate for the certificate/private-key pair to connect to Vault. Leave empty to use self-signed certificate. | No | - |
+   | privateKey | The base64-encoded private key for the certificate/private-key pair to connect to Vault. Leave empty to use self-signed certificate. | No | - |
+   | certificateAuthority | The base64-encoded certificate authority for validating the Vault server. | No | - |
 
 >__Note__:  
 > - If you specify `storageclass`, the storage class must NOT be provisioned by the Dell CSI Driver to be configured with this installation of CSM Authorization. 
