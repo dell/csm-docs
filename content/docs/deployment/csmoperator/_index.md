@@ -409,4 +409,5 @@ The specification for the Custom Resource is the same for all the drivers.Below 
 **nodeSelector** - Used to specify node selectors for the driver StatefulSet/Deployment and DaemonSet.
 
 >NOTE: The `image` field should point to the correct image tag for version of the driver you are installing.
+
 >NOTE: Since CSM Operator 1.6 is a pre-requisite for onboarding brownfield clusters to Apex Navigator For Kubernetes, a role/rolebinding will be created in the namespace that has csm objects to when dell connectivity client is deployed and removed when the connectivity client is uninstalled. If the client already exists in the cluster and csm is deployed/deleted, the roles and rolebindings will be created/deleted respectively as part of csm reconciliation. This is to allow the client access to the secrets in the namespace.
