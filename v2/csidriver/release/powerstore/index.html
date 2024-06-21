@@ -16,12 +16,12 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/v2/csidriver/release/powerstore/" /><meta property="article:section" content="v2" />
 
-<meta property="article:modified_time" content="2024-03-22T12:51:55+05:30" />
+<meta property="article:modified_time" content="2024-06-21T10:32:34+05:30" />
 
 <meta itemprop="name" content="PowerStore">
 <meta itemprop="description" content="Release notes for PowerStore CSI driver">
-<meta itemprop="dateModified" content="2024-03-22T12:51:55+05:30" />
-<meta itemprop="wordCount" content="598">
+<meta itemprop="dateModified" content="2024-06-21T10:32:34+05:30" />
+<meta itemprop="wordCount" content="636">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="PowerStore"/>
 <meta name="twitter:description" content="Release notes for PowerStore CSI driver"/>
@@ -103,7 +103,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.b83b5f088c65894c2880cafb05821adf.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.086d4bc03d5533c10ae3e2930814d111.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -125,7 +125,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.b83b5f088c65894c2880cafb05821adf.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.086d4bc03d5533c10ae3e2930814d111.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -742,6 +742,10 @@
 <tr>
 <td>If the volume limit is exhausted and there are pending pods and PVCs due to <code>exceed max volume count</code>, the pending PVCs will be bound to PVs, and the pending pods will be scheduled to nodes when the driver pods are restarted.</td>
 <td>It is advised not to have any pending pods or PVCs once the volume limit per node is exhausted on a CSI Driver. There is an open issue reported with Kubenetes at <a href="https://github.com/kubernetes/kubernetes/issues/95911">https://github.com/kubernetes/kubernetes/issues/95911</a> with the same behavior.</td>
+</tr>
+<tr>
+<td>Creation of clone PVC using snapshot will fail when the source PVC is deleted</td>
+<td>This is a known issue, and the workaround is do not delete the source PVC if you want to create clone volumes using snapshot.</td>
 </tr>
 </tbody>
 </table>

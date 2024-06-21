@@ -290,6 +290,10 @@ Linked Proxy mode for CSI reverse proxy is no longer actively maintained or supp
 &lt;td&gt;This is a known issue and has been reported at &lt;a href=&#34;https://github.com/kubernetes-csi/external-attacher/issues/215&#34;&gt;https://github.com/kubernetes-csi/external-attacher/issues/215&lt;/a&gt;. Workaround: &lt;br /&gt; 1. Force delete the pod running on the node that went down &lt;br /&gt; 2. Delete the volumeattachment to the node that went down. &lt;br /&gt; Now the volume can be attached to the new node.&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
+&lt;td&gt;Creation of clone PVC using snapshot will fail when the source PVC is deleted&lt;/td&gt;
+&lt;td&gt;This is a known issue, and the workaround is do not delete the source PVC if you want to create clone volumes using snapshot.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
 &lt;td&gt;When driver node pods enter CrashLoopBackOff and PVC remains in pending state with one of the following events:&lt;br /&gt; 1. failed to provision volume with StorageClass &lt;code&gt;&amp;lt;storage-class-name&amp;gt;&lt;/code&gt;: error generating accessibility requirements: no available topology found &lt;br /&gt; 2. waiting for a volume to be created, either by external provisioner &amp;ldquo;csi-powerstore.dellemc.com&amp;rdquo; or manually created by system administrator.&lt;/td&gt;
 &lt;td&gt;Check whether all array details present in the secret file are valid and remove any invalid entries if present. &lt;br/&gt;Redeploy the driver.&lt;/td&gt;
 &lt;/tr&gt;

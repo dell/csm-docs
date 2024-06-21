@@ -16,12 +16,12 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/docs/csidriver/release/powerstore/" /><meta property="article:section" content="docs" />
 
-<meta property="article:modified_time" content="2024-05-29T01:50:52+05:30" />
+<meta property="article:modified_time" content="2024-06-21T10:32:34+05:30" />
 
 <meta itemprop="name" content="PowerStore">
 <meta itemprop="description" content="Release notes for PowerStore CSI driver">
-<meta itemprop="dateModified" content="2024-05-29T01:50:52+05:30" />
-<meta itemprop="wordCount" content="665">
+<meta itemprop="dateModified" content="2024-06-21T10:32:34+05:30" />
+<meta itemprop="wordCount" content="703">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="PowerStore"/>
 <meta name="twitter:description" content="Release notes for PowerStore CSI driver"/>
@@ -103,7 +103,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.b83b5f088c65894c2880cafb05821adf.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.086d4bc03d5533c10ae3e2930814d111.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -125,7 +125,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.b83b5f088c65894c2880cafb05821adf.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.086d4bc03d5533c10ae3e2930814d111.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -778,6 +778,10 @@
 <tr>
 <td>If two separate networks are configured for ISCSI and NVMeTCP, the driver may encounter difficulty identifying the second network (e.g., NVMeTCP).</td>
 <td>This is a known issue, and the workaround involves creating a single network on the array to serve both ISCSI and NVMeTCP purposes.</td>
+</tr>
+<tr>
+<td>Creation of clone PVC using snapshot will fail when the source PVC is deleted</td>
+<td>This is a known issue, and the workaround is do not delete the source PVC if you want to create clone volumes using snapshot.</td>
 </tr>
 </tbody>
 </table>
