@@ -425,6 +425,83 @@ kubectl get nodes --show-labels
 
 For any additional information about the topology, see the [Kubernetes Topology documentation](https://kubernetes-csi.github.io/docs/topology.html).
 
+### Custom Topology keys
+To use the enhanced topology keys:
+1. To use this feature, set node.topologyControl.enabled to true.
+2. Edit the config file [topologyConfig.yaml](https://github.com/dell/csi-powerstore/blob/main/samples/configmap/topologyConfig.yaml) in the `csi-powerstore/samples/configmap` folder and provide values for the following parameters.
+
+| Parameter | Description  |  
+|-----------|--------------|
+| allowedConnections | List of node, array, and protocol info for user-allowed configuration |  
+| allowedConnections.nodeName | Name of the node on which the user wants to apply given rules |
+| allowedConnections.rules | List of StorageArrayID:TransportProtocol pair |
+| deniedConnections | List of node, array, and protocol info for user-denied configuration |  
+| deniedConnections.nodeName | Name of the node on which the user wants to apply given rules  |
+| deniedConnections.rules | List of StorageArrayID:TransportProtocol pair |
+
+<br>
+
+**Sample config file:** 
+
+```
+# allowedConnections contains a list of (node, array and protocol) info for user allowed configuration
+# For any given storage array ID and protocol on a Node, topology keys will be created for just those pair and
+# every other configuration is ignored
+# Please refer to the doc website about a detailed explanation of each configuration parameter
+# and the various possible inputs
+allowedConnections:
+  # nodeName: Name of the node on which user wants to apply given rules
+  # Allowed values:
+  # nodeName - name of a specific node
+  # * -  all the nodes
+  # Examples: "node1", "*"
+  - nodeName: "node1"
+    # rules is a list of 'StorageArrayID:TransportProtocol' pair. ':' is required between both value
+    # Allowed values:
+    # StorageArrayID:
+    #   - PowerStore Storage End Point for specific storage array
+    #   - "*" :- for all the arrays connected to the node
+    # TransportProtocol:
+    #   - FC : Fibre Channel protocol
+    #   - ISCSI : iSCSI protocol
+    #   - NVMe : NVMe protocol
+    #   - "*" - for all the possible Transport Protocol
+    # Examples: "12.34.56.78-FC", "12.34.56.79-*", "*-FC", "*-*"
+    rules:
+      - "12.34.56.78-FC"
+      - "12.34.56.79-FC"
+  - nodeName: "*"
+    rules:
+      - "12.34.56.79-FC"
+  - nodeName: "Node2"
+    rules:
+      - "12.34.56.79-ISCSI"
+# deniedConnections contains a list of (node, array and protocol) info for denied configurations by user
+# For any given storage array ID and protocol on a Node, topology keys will be created for every other configuration but
+# not these input pairs
+deniedConnections:
+  - nodeName: "node2"
+    rules:
+      - "12.34.56.79-*"
+  - nodeName: "node3"
+    rules:
+      - "*-*"
+```
+
+3. Use the below command to create ConfigMap with configmap name as `node-topology-config` in the namespace powerstore,  
+
+`kubectl create configmap node-topology-config --from-file=topologyConfig.yaml -n powerstore`
+
+For example, let there be 3 nodes and 2 arrays, so based on the sample config file above, topology keys will be created as below:
+
+New Topology keys
+N1: csi-driver/12.34.56.78.FC:csi-driver, csi-driver/12.34.56.79.FC:csi-driver
+<br>
+N2 and N3: None 
+
+
+>Note: Name of the configmap should always be `node-topology-config`.
+
 ## Volume Limits
 
 The CSI Driver for Dell PowerStore allows users to specify the maximum number of PowerStore volumes that can be used in a node.
