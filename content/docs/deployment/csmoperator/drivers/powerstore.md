@@ -207,6 +207,8 @@ CRDs should be configured during replication prepare stage with repctl as descri
 | X_CSI_NFS_ACLS | Defines permissions - POSIX mode bits or NFSv4 ACLs, to be set on NFS target mount directory. | No | "0777" |
 | ***Node parameters*** |
 | X_CSI_POWERSTORE_ENABLE_CHAP | Set to true if you want to enable iSCSI CHAP feature | No | false |
+| topologyControl.enabled | Allows to enable/disable topology control to filter topology keys | No | false |
+| X_CSI_TOPOLOGY_CONTROL_ENABLED | Enable/Disable topology control. It filters out arrays, and associated transport protocol available to each node and creates topology keys based on any such user input. | No | false |
 
 4.  Execute the following command to create PowerStore custom resource:
    ```bash
@@ -225,4 +227,40 @@ CRDs should be configured during replication prepare stage with repctl as descri
     
 **Note** : 
    1. "Kubelet config dir path" is not yet configurable in case of Operator based driver installation.
-   2. Snapshotter and resizer sidecars are not optional. They are defaults with Driver installation. 
+   2. Snapshotter and resizer sidecars are not optional. They are defaults with Driver installation.
+
+## Support for custom topology keys 
+
+This feature is introduced in CSI Driver for PowerStore version 2.11.0.
+
+### Operator-based installation
+
+Support for custom topology keys is optional and by default, this feature is disabled for drivers when installed via operator.
+
+X_CSI_TOPOLOGY_CONTROL_ENABLED provides a way to filter topology keys on a node based on array and transport protocol. If enabled, the user can create custom topology keys by editing node-topology-config configmap.
+
+1. To enable this feature, set  `X_CSI_TOPOLOGY_CONTROL_ENABLED` to `true` in the driver manifest under the node section. 
+
+```
+   # X_CSI_TOPOLOGY_CONTROL_ENABLED provides a way to filter topology keys on a node based on array and transport protocol
+        # If enabled, the user can create custom topology keys by editing node-topology-config configmap.
+        # Allowed values:
+        #   true: enable the filtration based on config map
+        #   false: disable the filtration based on config map
+        # Default value: false
+        - name: X_CSI_TOPOLOGY_CONTROL_ENABLED
+          value: "false"
+```
+2. Edit the sample config map "node-topology-config" present in sample CRD with appropriate values:
+
+   | Parameter | Description  |  
+   |-----------|--------------|
+   | allowedConnections | List of node, array and protocol info for user allowed configuration |  
+   | allowedConnections.nodeName | Name of the node on which user wants to apply given rules |
+   | allowedConnections.rules | List of StorageArrayID:TransportProtocol pair |
+   | deniedConnections | List of node, array and protocol info for user denied configuration |  
+   | deniedConnections.nodeName | Name of the node on which user wants to apply given rules  |
+   | deniedConnections.rules | List of StorageArrayID:TransportProtocol pair |
+<br>
+
+ >Note: Name of the configmap should always be `node-topology-config`.
