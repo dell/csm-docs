@@ -42,6 +42,8 @@ csi-powerstore:
   node:
     healthMonitor:
       enabled: $HEALTH_MONITOR_ENABLED
+    topologyControl:
+      enabled: $TOPOLOGY_ENABLED
     nodeSelector: $NODE_POD_NODE_SELECTOR
     tolerations: $NODE_TOLERATIONS
     # Uncomment if CSM for Resiliency and CSI Driver pods monitor are enabled
