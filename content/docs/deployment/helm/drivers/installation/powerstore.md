@@ -237,6 +237,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
 | node.nodeNamePrefix | Defines the string added to each node that the CSI driver registers | No | "csi-node" |
 | node.nodeIDPath | Defines a path to file with a unique identifier identifying the node in the Kubernetes cluster| No | "/etc/machine-id" |
 | node.healthMonitor.enabled | Allows to enable/disable volume health monitor | No | false |
+| node.topologyControl.enabled | Allows to enable/disable topology control to filter topology keys | No | false |
 | node.nodeSelector | Defines what nodes would be selected for pods of node daemonset | Yes | " " |
 | node.tolerations  | Defines tolerations that would be applied to node daemonset | Yes | " " |
 | fsGroupPolicy | Defines which FS Group policy mode to be used, Supported modes `None, File and ReadWriteOnceWithFSType` | No | "ReadWriteOnceWithFSType" |
