@@ -516,27 +516,27 @@ The user will be able to install the driver and able to create pods.
 
 **NOTE:** On Unity, management port does not support NAT. NAT needs to be disabled on the Unity array's management network.
 
-## Single Pod Access Mode for PersistentVolumes
-CSI Driver for Unity XT supports a new accessmode `ReadWriteOncePod` for PersistentVolumes and PersistentVolumeClaims. With this feature, CSI Driver for Unity XT restricts volume access to a single pod in the cluster
+## Single Pod Access Mode for PersistentVolumes- ReadWriteOncePod 
 
-Prerequisites
-1. Enable the ReadWriteOncePod feature gate for kube-apiserver, kube-scheduler, and kubelet as the ReadWriteOncePod access mode is in alpha for Kubernetes v1.22 and is only supported for CSI volumes. You can enable the feature by setting command line arguments:
-   ```bash
-   --feature-gates="...,ReadWriteOncePod=true"
-   ```
-2. Create a PVC with access mode set to ReadWriteOncePod like shown in the sample below
-    ```yaml
-    kind: PersistentVolumeClaim
-    apiVersion: v1
-    metadata:
-      name: single-writer-only
-    spec:
-      accessModes:
-      - ReadWriteOncePod # Allow only a single pod to access single-writer-only.
-      resources:
-        requests:
-          storage: 1Gi
-    ```
+Use `ReadWriteOncePod(RWOP)` access mode if you want to ensure that only one pod across the whole cluster can read that PVC or write to it. This is only supported for CSI Driver for Unity 2.1.0+ and Kubernetes version 1.22+.
+
+### Creating a PersistentVolumeClaim
+```yaml
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+name: single-writer-only
+spec:
+accessModes:
+- ReadWriteOncePod # Allow only a single pod to access single-writer-only.
+resources:
+requests:
+  storage: 1Gi
+```
+
+When this feature is enabled, the existing `ReadWriteOnce(RWO)` access mode restricts volume access to a single node and allows multiple pods on the same node to read from and write to the same volume.
+
+To migrate existing PersistentVolumes to use `ReadWriteOncePod`, please follow the instruction from [here](https://kubernetes.io/docs/tasks/administer-cluster/change-pv-access-mode-readwriteoncepod/).
 
 ## Volume Health Monitoring
 CSI Driver for Unity XT supports volume health monitoring. This is an alpha feature and requires feature gate to be enabled by setting command line arguments 
@@ -713,3 +713,16 @@ data:
     TENANT_NAME: ""
 ```
 >Note: csi-unity supports Tenancy in multi-array setup, provided the TenantName is the same across Unity XT instances.
+
+## Support custom networks for NFS I/O traffic
+
+When `allowedNetworks` is specified for using custom networks to handle NFS traffic, and a user already
+has workloads scheduled, there is a possibility that it might lead to backward compatibility issues. For example, ControllerUnPublish might not be able to completely remove clients from the NFS exports of previously created pods.
+
+Also, the previous workload will still be using the default network and not custom networks. For previous workloads to use custom networks, the recreation of pods is required.
+
+When csi-unity driver creates an NFS export, the traffic flows through the client specified in the export. By default, the client is the network interface for Kubernetes
+communication (same IP/fqdn as k8s node) by default.
+
+For a cluster with multiple network interfaces and if a user wants to segregate k8s traffic from NFS traffic; you can use the `allowedNetworks` option.
+`allowedNetworks` takes CIDR addresses as a parameter to match the IPs to be picked up by the driver to allow and route NFS traffic.

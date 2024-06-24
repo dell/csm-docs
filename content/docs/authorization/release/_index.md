@@ -6,10 +6,7 @@ Description: >
   Dell Container Storage Modules (CSM) release notes for authorization
 ---
 
-## Release Notes - CSM Authorization 1.10.0
-
-
-
+## Release Notes - CSM Authorization 1.11.0
 
 
 
@@ -25,4 +22,3 @@ Description: >
 ### Known Issues
 | Issue | Workaround |
 |-------|------------|
-| CSM Operator does not support dynamic namespaces for Authorization. Despite successful installation in a namespace other than "authorization", errors may arise during volume creation. | Use the default namespace "authorization" for installing Authorization using CSM Operator|

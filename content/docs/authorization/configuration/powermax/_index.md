@@ -93,8 +93,8 @@ Create the karavi-authorization-config secret using this command:
       enabled: true
 
       # sidecarProxyImage: the container image used for the csm-authorization-sidecar.
-      # Default value: dellemc/csm-authorization-sidecar:v1.10.0
-      sidecarProxyImage: dellemc/csm-authorization-sidecar:v1.10.0
+      # Default value: dellemc/csm-authorization-sidecar:v1.11.0
+      sidecarProxyImage: dellemc/csm-authorization-sidecar:v1.11.0
 
       # proxyHost: hostname of the csm-authorization server
       # Default value: None
@@ -130,10 +130,10 @@ Create the karavi-authorization-config secret using this command:
       - name: authorization
         # enable: Enable/Disable csm-authorization
         enabled: true
-        configVersion: v1.10.0
+        configVersion: v1.11.0
         components:
         - name: karavi-authorization-proxy
-          image: dellemc/csm-authorization-sidecar:v1.10.0
+          image: dellemc/csm-authorization-sidecar:v1.11.0
           envs:
             # proxyHost: hostname of the csm-authorization server
             - name: "PROXY_HOST"
@@ -146,4 +146,4 @@ Create the karavi-authorization-config secret using this command:
 
 5. Install the Dell CSI PowerMax driver following the appropriate documenation for your installation method.
 
-6. (Optional) Install [dellctl](../../../references/cli) to perform Kubernetes administrator commands for additional capabilities (e.g., list volumes). Please refer to the [dellctl documentation page](../../../references/cli) for the installation steps and command list.
+6. (Optional) Install [dellctl](../../../support/cli/#installation-instructions) to perform Kubernetes administrator commands for additional capabilities (e.g., list volumes). Please refer to the [dellctl documentation page](../../../support/cli) for the installation steps and command list.

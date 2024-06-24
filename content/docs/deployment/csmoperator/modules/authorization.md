@@ -60,6 +60,9 @@ kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/relea
     kubectl create -f samples/authorization/karavi-storage-secret.yaml
     ```
 
+>__Note__:  
+> - If you are installing CSM Authorization in a different namespace than `authorization`, edit the `namespace` field in this file to your namespace.
+
 ### Install CSM Authorization Proxy Server
 
 1. Follow all the [prerequisites](#prerequisite).
@@ -86,7 +89,8 @@ kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/relea
    | storageclass | The storage class for Redis to use for persistence. If not supplied, a locally provisioned volume is used. | No | - |
 
 >__Note__:  
-> - If you specify `storageclass`, the storage class must NOT be provisioned by the Dell CSI Driver to be configured with this installation of CSM Authorization. 
+> - If you specify `REDIS_STORAGE_CLASS`, the storage class must NOT be provisioned by the Dell CSI Driver to be configured with this installation of CSM Authorization. 
+> - If you are installing CSM Authorization in a different namespace than `authorization`, edit the `namespace` fields in this file to your namespace.
 
 **Optional:**
 To enable reporting of trace data with [Zipkin](https://zipkin.io/), use the `csm-config-params` configMap in the sample CR or dynamically by editing the configMap.
@@ -107,11 +111,31 @@ To enable reporting of trace data with [Zipkin](https://zipkin.io/), use the `cs
   >__Note__:  
   > - This command will deploy the Authorization Proxy Server in the namespace specified in the input YAML file.
 
+5. Create the `karavi-auth-tls` secret using your own certificate or by using a self-signed certificate generated via cert-manager. 
+
+    If using your own certificate that is valid for each Ingress hostname, use this command to create the `karavi-auth-tls` secret:
+
+    ```bash
+
+    kubectl create secret tls karavi-auth-tls -n authorization --key <location-of-private-key-file> --cert <location-of-certificate-file>
+    ```
+
+    If using a self-signed certificate, prepare a certificate file provided [here](https://github.com/dell/csm-operator/tree/main/samples/authorization). An entry for each hostname specified in the CR must be added under `dnsNames` for the certificate to be valid for each Ingress. 
+
+    Use this command to create the `karavi-auth-tls` secret:
+
+    ```bash
+    kubectl create -f <CERTIFICATE FILE>
+    ```
+
+>__Note__:  
+> - If you are installing CSM Authorization in a different namespace than `authorization`, edit the `namespace` field in this file to your namespace.
+
 ### Verify Installation of the CSM Authorization Proxy Server
 Once the Authorization CR is created, you can verify the installation as mentioned below:
 
   ```bash
-  kubectl describe csm/<name-of-custom-resource> -n <namespace>
+  kubectl describe csm/<name-of-custom-resource> -n authorization
   ```
 
 ### Install Karavictl
@@ -125,3 +149,77 @@ Follow the instructions available in CSM Authorization for [Configuring the CSM 
 ### Configure a Dell CSI Driver with CSM Authorization
 
 Follow the instructions available in CSM Authorization for [Configuring a Dell CSI Driver with CSM for Authorization](../../../helm/modules/installation/authorization/#configuring-a-dell-csi-driver-with-csm-for-authorization).
+
+### Upgrade CSM Authorization
+
+This section outlines the upgrade steps for Container Storage Modules (CSM) for Authorization. The upgrade of CSM for Authorization is handled in 2 parts:
+1) Upgrading the Authorization proxy server
+2) Upgrading CSI Driver, Authorization sidecar with Authorization module enabled
+
+
+## Upgrading the Authorization Proxy Server
+
+  1. Modifying the existing Authorization Proxy Server installation directly via `kubectl edit`
+  
+    ```sh
+    kubectl get csm -n <module-namespace>
+    ```
+
+    For example - If the Authorization Proxy Server is installed in authorization namespace then run this command to get the object name
+
+    ```sh
+    $ kubectl get csm -n authorization
+    ```
+
+    use the object name in `kubectl edit` command.
+
+    ```sh
+    kubectl edit csm <object-name> -n <module-namespace>
+    ```
+
+    For example - If the object name is authorization then use the name as authorization and if the namespace is authorization, then run this command to edit the object
+
+    ```sh
+    kubectl edit csm authorization -n authorization
+    ```
+
+  2. Modify the installation
+
+    - Update the CSM Authorization Proxy Server configVersion  
+    - Update the images for proxyService, tenantService, roleService and storageService
+
+
+## Upgrading CSI Driver, Authorization sidecar with Authorization module enabled
+
+  1. Modifying the existing driver and module installation directly via `kubectl edit`
+
+    ```sh
+    kubectl get <driver-object> -n <driver-namespace>
+    ```
+
+    For example - If the CSI PowerFlex driver is installed in vxflexos namepace then run this command to get the object name
+
+    ```sh
+    kubectl get csm -n vxflexos
+    ```
+
+    use the object name in `kubectl edit` command.
+
+    ```sh
+    kubectl edit csm <driver-object>/<object-name> -n <driver-namespace>
+    ```
+
+    For example - If the object name is vxflexos then use the name as vxflexos and if the driver is installed in vxflexos namespace, then run this command to edit the object
+
+    ```sh
+    kubectl edit csm vxflexos -n vxflexos
+    ```
+
+  2. Modify the installation
+
+    - Update the driver config version and image tag
+    - Update the Authorization config version and karavi-authorization-proxy image.
+
+>NOTE:
+
+- In Authorization module upgrade, only `n-1` to `n` upgrade is supported, e.g. if the current observability version is `v1.8.x`, it can be upgraded to `1.9.x`.
