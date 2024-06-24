@@ -134,7 +134,14 @@ spec:
         # Default value: "0"
         - name: X_CSI_POWERSTORE_MAX_VOLUMES_PER_NODE
           value: "$MAX_VOLUMES_PER_NODE"
-
+        # X_CSI_TOPOLOGY_CONTROL_ENABLED provides a way to filter topology keys on a node based on array and transport protocol
+        # If enabled, the user can create custom topology keys by editing the node-topology-config config map.
+        # Allowed values:
+        #   true: enable the filtration based on the config map
+        #   false: disable the filtration based on the config map
+        # Default value: false
+        - name: X_CSI_TOPOLOGY_CONTROL_ENABLED
+          value: "$TOPOLOGY_ENABLED"
       # nodeSelector: Define node selection constraints for node pods.
       # For the pod to be eligible to run on a node, the node must have each
       # of the indicated key-value pairs as labels.
