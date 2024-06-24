@@ -357,6 +357,7 @@ function displayModules(installationType, driverName, CONSTANTS_PARAM) {
 			$("#authorization").prop('checked', false);
 			$(".storage-capacity").show();
 			$(".resiliency").show();
+			$(".topology").show();
 			if (document.getElementById("csm-version").value !== "1.7.0") {
 				$(".max-volumes-per-node").show();
 			}
