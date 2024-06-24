@@ -15,17 +15,19 @@ description: Release notes for PowerMax CSI driver
 
 
 
+
 ### New Features/Changes
 
-- [#926 - [FEATURE]: Fixing the linting, formatting and vetting issues](https://github.com/dell/csm/issues/926)
+- [#1082 - [FEATURE]:CSM Resiliency support for PowerMax ](https://github.com/dell/csm/issues/1082)
+- [#1308 - [FEATURE]: NVMe TCP support for PowerMax ](https://github.com/dell/csm/issues/1308)
 
 ### Fixed Issues
 
-- [#1081 - [BUG]: CSM driver repositories reference CSI Operator](https://github.com/dell/csm/issues/1081)
-- [#1115 - [BUG]: CSI Powermax: Driver fails to restore snapshot to Metro Volumes](https://github.com/dell/csm/issues/1115)
-- [#1140 - [BUG]: Cert-csi tests are not reporting the passed testcases in K8S E2E tests ](https://github.com/dell/csm/issues/1140)
-- [#1174 - [BUG]: Kubelet Configuration Directory setting should not have a comment about default value being None](https://github.com/dell/csm/issues/1174)
-- [#1175 - [BUG]: PowerMax : Metro: Failed to find Remote Symm WWN](https://github.com/dell/csm/issues/1175)
+- [#1209 - [BUG]: Doc hyper links in driver Readme is broken](https://github.com/dell/csm/issues/1209)
+- [#1218 - [BUG]: Add the helm-charts-version parameter to the install command for all drivers in csm-docs](https://github.com/dell/csm/issues/1218)
+- [#1238 - [BUG]: Missing mountPropagation param for Powermax node template in CSM-Operator](https://github.com/dell/csm/issues/1238)
+- [#1239 - [BUG]: Changes in new release of google.golang.org/protobuf is causing compilation issues](https://github.com/dell/csm/issues/1239)
+- [#1305 - [BUG]: Create volume even if the size is smaller than possible](https://github.com/dell/csm/issues/1305)
 
 ### Known Issues
 
