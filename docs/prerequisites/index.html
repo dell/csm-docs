@@ -99,7 +99,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.086d4bc03d5533c10ae3e2930814d111.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.647b808a1b3a2ba911484cd16b7679d6.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -121,7 +121,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.086d4bc03d5533c10ae3e2930814d111.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.647b808a1b3a2ba911484cd16b7679d6.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -758,6 +758,7 @@
 <p>Notes:</p>
 <ul>
 <li>The required OS dependencies are only for the protocol needed (e.g. if NVMe isn&rsquo;t the storage access protocol then nvme-cli is not required)..</li>
+<li>It is important to note that any operations performed outside of the CSM and Kubernetes ecosystem, such as modifying storage configurations directly using GUI or CLI tools provided by the storage array, may not be supported or automatically picked up by the CSM. As a result, metadata and state information within Kubernetes, including Persistent Volume (PV) metadata, may not reflect changes made outside of the driver. For consistent and accurate management of storage resources, it is recommended to perform all operations through the CSM and Kubernetes API. If external modifications are necessary, corresponding updates should be manually synchronized with the Kubernetes cluster to ensure accurate metadata and functionality.</li>
 </ul>
 </blockquote>
 <h2 id="supported-container-orchestrator-platforms">Supported Container Orchestrator Platforms</h2>
