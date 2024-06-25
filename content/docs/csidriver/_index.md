@@ -41,7 +41,7 @@ The CSI Drivers by Dell implement an interface between [CSI](https://kubernetes-
 |---------------|:----------------:|:------------------:|:----------------:|:----------------:|:----------------:|
 | Fibre Channel | yes              | N/A                | yes              | N/A              | yes              |
 | iSCSI         | yes              | N/A                | yes              | N/A              | yes              |
-| NVMeTCP       | N/A              | N/A                | N/A              | N/A              | yes              |
+| NVMeTCP       | yes              | N/A                | N/A              | N/A              | yes              |
 | NVMeFC        | N/A              | N/A                | N/A              | N/A              | yes              |
 | NFS           | yes - SDNAS only (not eNAS)   | yes   | yes              | yes              | yes              |
 | Other         | N/A              | ScaleIO protocol   | N/A              | N/A              | N/A              |
@@ -50,3 +50,4 @@ The CSI Drivers by Dell implement an interface between [CSI](https://kubernetes-
 | Platform-specific configurable settings | Service Level selection<br>iSCSI CHAP | - | Host IO Limit<br>Tiering Policy<br>NFS Host IO size<br>Snapshot Retention duration | Access Zone<br>NFS version (3 or 4);Configurable Export IPs | iSCSI CHAP |
 | Auto RDM(vSphere)  | Yes(over FC) | N/A               | N/A              | N/A              | N/A              |
 {{</table>}}
+
