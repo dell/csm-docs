@@ -9,7 +9,7 @@ description: >
 The CSM Authorization karavictl CLI is no longer actively maintained or supported. It will be deprecated in a future release.
 {{% /pageinfo %}}
 
->> NOTE: Authorization v2.0 Tech Preview is not actively supported through Helm.
+>> NOTE: Authorization v2.0 Tech Preview is not supported through Helm.
 
 CSM Authorization can be installed by using the provided Helm v3 charts on Kubernetes platforms. 
 
