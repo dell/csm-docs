@@ -108,7 +108,6 @@ To deploy the Operator, follow the instructions available [here](../../#installa
    | certificateAuthority | The base64-encoded certificate authority for validating the Vault server. | No | - |
 
 >__Note__:  
-> - If you specify `REDIS_STORAGE_CLASS`, the storage class must NOT be provisioned by the Dell CSI Driver to be configured with this installation of CSM Authorization. 
 > - If you are installing CSM Authorization in a different namespace than `authorization`, edit the `namespace` fields in this file to your namespace.
 > - If you specify `storageclass`, the storage class must NOT be provisioned by the Dell CSI Driver to be configured with this installation of CSM Authorization. 
 
@@ -130,26 +129,6 @@ To enable reporting of trace data with [Zipkin](https://zipkin.io/), use the `cs
 
   >__Note__:  
   > - This command will deploy the Authorization Proxy Server in the namespace specified in the input YAML file.
-
-5. Create the `karavi-auth-tls` secret using your own certificate or by using a self-signed certificate generated via cert-manager. 
-
-    If using your own certificate that is valid for each Ingress hostname, use this command to create the `karavi-auth-tls` secret:
-
-    ```bash
-
-    kubectl create secret tls karavi-auth-tls -n authorization --key <location-of-private-key-file> --cert <location-of-certificate-file>
-    ```
-
-    If using a self-signed certificate, prepare a certificate file provided [here](https://github.com/dell/csm-operator/tree/main/samples/authorization). An entry for each hostname specified in the CR must be added under `dnsNames` for the certificate to be valid for each Ingress. 
-
-    Use this command to create the `karavi-auth-tls` secret:
-
-    ```bash
-    kubectl create -f <CERTIFICATE FILE>
-    ```
-
->__Note__:  
-> - If you are installing CSM Authorization in a different namespace than `authorization`, edit the `namespace` field in this file to your namespace.
 
 ### Verify Installation of the CSM Authorization Proxy Server
 Once the Authorization CR is created, you can verify the installation as mentioned below:
