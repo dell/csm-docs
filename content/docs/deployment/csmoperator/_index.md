@@ -9,6 +9,8 @@ The Dell Container Storage Modules Operator is a Kubernetes Operator, which can 
 
 ## Supported CSM Components
 
+The table below lists the driver and modules versions installable with the CSM Operator:
+
 | CSI Driver         | Version | CSM Authorization | CSM Replication | CSM Observability | CSM Resiliency |
 | ------------------ |---------|-------------------|-----------------|-------------------|----------------|
 | CSI PowerScale     | 2.11.0  | ✔ 1.11.0          | ✔ 1.9.0        | ✔ 1.9.0           | ✔ 1.10.0       |
