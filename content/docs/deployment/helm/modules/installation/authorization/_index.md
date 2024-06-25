@@ -144,7 +144,7 @@ mv ./karavictl ~/.local/bin/karavictl
 # and then append (or prepend) ~/.local/bin to $PATH
 ```
 
-Karavictl commands and intended use can be found [here](../../../../../authorization/cli/). 
+Karavictl commands and intended use can be found [here](../../../../../authorization/v1.x-ga/cli/). 
 
 ## Configuring the CSM Authorization Proxy Server
 
@@ -190,7 +190,7 @@ Please continue following the steps outlined in the [proxy server](../../../../.
 
 The second part of CSM for Authorization deployment is to configure one or more of the [supported](../../../../../authorization#supported-csi-drivers) CSI drivers. This is controlled by the Kubernetes tenant admin.
 
-Please continue following the configuration steps for a specific CSI Driver [here](../../../../../authorization/configuration/).
+Please continue following the configuration steps for a specific CSI Driver [here](../../../../../authorization/v1.x-ga/configuration/).
 
 ## Updating CSM for Authorization Proxy Server Configuration
 

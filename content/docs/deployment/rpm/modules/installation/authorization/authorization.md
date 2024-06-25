@@ -123,19 +123,19 @@ A Storage Administrator can execute the shell script, install_karavi_auth.sh as 
 
 5. After installation, application data will be stored on the system under `/var/lib/rancher/k3s/storage/`.
 
-If errors occur during installation, review the [Troubleshooting](../../../../../../authorization/troubleshooting) section.
+If errors occur during installation, review the [Troubleshooting](../../../../../../authorization/v1.x-ga/troubleshooting) section.
 
 ## Configuring the CSM for Authorization Proxy Server
 
 The first part of CSM for Authorization deployment is to configure the proxy server. This is controlled by the Storage Administrator.
 
-Please follow the steps outlined in the [proxy server](../../../../../../authorization/configuration/proxy-server) configuration.
+Please follow the steps outlined in the [proxy server](../../../../../../authorization/v1.x-ga/configuration/proxy-server) configuration.
 
 ## Configuring a Dell CSI Driver with CSM for Authorization
 
 The second part of CSM for Authorization deployment is to configure one or more of the [supported](../../../../../../prerequisites/#supported-csm-modules) CSI drivers. This is controlled by the Kubernetes tenant administrator.
 
-Please follow the steps outlined in [PowerFlex](../../../../../../authorization/configuration/powerflex), [PowerMax](../../../../../../authorization/configuration/powermax), or [PowerScale](../../../../../../authorization/configuration/powerscale) to configure the CSI Driver to work with the Authorization sidecar.
+Please follow the steps outlined in [PowerFlex](../../../../../../authorization/v1.x-ga/configuration/powerflex), [PowerMax](../../../../../../authorization/v1.x-ga/configuration/powermax), or [PowerScale](../../../../../../authorization/v1.x-ga/configuration/powerscale) to configure the CSI Driver to work with the Authorization sidecar.
 
 ## Updating CSM for Authorization Proxy Server Configuration
 
