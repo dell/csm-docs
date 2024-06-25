@@ -54,19 +54,22 @@ Container Storage Modules (CSM) does not officially support specific operating s
 ## Supported CSM Modules
 
 {{<table "table table-striped table-bordered table-sm">}}
-| CSM Module                             | PowerMax | PowerFlex | Unity XT | PowerScale | PowerStore |
-|----------------------------------------|:--------:|:---------:|:--------:|:----------:|:----------:|
-| [CSM Authorization](../authorization/) | Yes      | Yes       |  No      | Yes        | No         |
-| [CSM Observability](../observability/) | Yes      | Yes       |  No      | Yes        | Yes        |
-| [CSM Replication](../replication/)     | Yes      | Yes       |  No      | Yes        | Yes        |
-| [CSM Resiliency](../resiliency/)       | Yes       | Yes       |  Yes     | Yes        | Yes        |
-| [CSM Encryption](../secure/encryption/)| No       | No        |  No      | Yes        | No         |
-| [CSM Application Mobility](../applicationmobility/) | Yes | Yes |  Yes   | Yes        | Yes        |
-| [Volume Group Snapshot](../snapshots/volume-group-snapshots/) | No | Yes | No | No    | Yes        |
+| CSM Module                                                    | PowerMax | PowerFlex | Unity XT | PowerScale | PowerStore |
+|---------------------------------------------------------------|:--------:|:---------:|:--------:|:----------:|:----------:|
+| [CSM Authorization - v1.x GA](../authorization/)              | Yes      | Yes       | Yes      | Yes        | No         |
+| [CSM Authorization - v2.0 Tech Preview](../authorization/)    | No       | Yes       | No       | No         | No         |
+| [CSM Observability](../observability/)                        | Yes      | Yes       | No       | Yes        | Yes        |
+| [CSM Replication](../replication/)                            | Yes      | Yes       | No       | Yes        | Yes        |
+| [CSM Resiliency](../resiliency/)                              | No       | Yes       | Yes      | Yes        | Yes        |
+| [CSM Encryption](../secure/encryption/)                       | No       | No        | No       | Yes        | No         |
+| [CSM Application Mobility](../applicationmobility/)           | Yes      | Yes       | Yes      | Yes        | Yes        |
+| [Volume Group Snapshot](../snapshots/volume-group-snapshots/) | No       | Yes       | No       | No         | Yes        |
+
 {{</table>}}
 
 > Notes:
 > * Encryption and Application Mobility are available as a Technical Preview only and are not officially supported.
+> * Authorization v2.0 is available as a Technical Preview only on PowerFlex.
 
 ## CSM Operator compatibility matrix
 
