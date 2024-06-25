@@ -100,10 +100,10 @@ Given a setup where Kubernetes, a storage system, and the CSM for Authorization 
       - name: authorization
         # enable: Enable/Disable csm-authorization
         enabled: true
-        configVersion: v1.10.0
+        configVersion: v2.0.0-alpha
         components:
         - name: karavi-authorization-proxy
-          image: dellemc/csm-authorization-sidecar:v1.10.0
+          image: dellemc/csm-authorization-sidecar:v2.0.0-alpha
           envs:
             # proxyHost: hostname of the csm-authorization server
             - name: "PROXY_HOST"
