@@ -16,12 +16,12 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/docs/csidriver/release/powerstore/" /><meta property="article:section" content="docs" />
 
-<meta property="article:modified_time" content="2024-06-21T10:32:34+05:30" />
+<meta property="article:modified_time" content="2024-06-25T18:37:01+05:30" />
 
 <meta itemprop="name" content="PowerStore">
 <meta itemprop="description" content="Release notes for PowerStore CSI driver">
-<meta itemprop="dateModified" content="2024-06-21T10:32:34+05:30" />
-<meta itemprop="wordCount" content="703">
+<meta itemprop="dateModified" content="2024-06-25T18:37:01+05:30" />
+<meta itemprop="wordCount" content="768">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="PowerStore"/>
 <meta name="twitter:description" content="Release notes for PowerStore CSI driver"/>
@@ -103,7 +103,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.647b808a1b3a2ba911484cd16b7679d6.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.5813070c1fce14c624489690248b46c1.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -125,7 +125,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.647b808a1b3a2ba911484cd16b7679d6.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.5813070c1fce14c624489690248b46c1.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -780,8 +780,8 @@
 <td>This is a known issue, and the workaround involves creating a single network on the array to serve both ISCSI and NVMeTCP purposes.</td>
 </tr>
 <tr>
-<td>Creation of clone PVC using snapshot will fail when the source PVC is deleted</td>
-<td>This is a known issue, and the workaround is do not delete the source PVC if you want to create clone volumes using snapshot.</td>
+<td>When a PV/PVC is deleted in Kubernetes, it will trigger the deletion of the underlying volume and snapshot on the array as a default behaviour. This can result in a situation where the VolumeSnapshot and VolumeSnapshotContent will still show &ldquo;readyToUse: true&rdquo;, but leaves them unusable because it is no longer backed by underlying storage snapshot. This will not allow the creation of a PVC from snapshot and this could also lead to a data loss situations.</td>
+<td>This is a known issue, and the workaround is use of <strong>retain</strong> policy on the various PV, VolumeSnapshot and VolumeSnapshotContent that you wish to use for cloning.</td>
 </tr>
 </tbody>
 </table>
