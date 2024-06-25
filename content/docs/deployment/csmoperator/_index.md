@@ -40,6 +40,7 @@ Dell CSM Operator can be installed manually or via Operator Hub.
 Once installed you will be able to deploy [drivers](drivers) and [modules](modules) from the Operator.
 
 ### OpenShift Installation via Operator Hub
+>NOTE: You cannot update the resource requests and limits when you are deploying operator using Operator Hub
 
 `dell-csm-operator` can be installed via Operator Hub on upstream Kubernetes clusters & Red Hat OpenShift Clusters.
 
@@ -61,6 +62,7 @@ Both editions have the same codebase and are supported by Dell Technologies, the
 * The `Community` can be installed on any Kubernetes distributions.
 
 ### Manual Installation on a cluster without OLM
+>NOTE: You can update the resource requests and limits when you are deploying operator using manual installation without OLM
 
 1. Install volume snapshot CRDs. For detailed snapshot setup procedure, [click here](../../snapshots/#volume-snapshot-feature).
 2. Clone and checkout the required csm-operator version using
@@ -69,7 +71,17 @@ git clone -b v1.6.0 https://github.com/dell/csm-operator.git
 ```
 3. `cd csm-operator`
 4. _(Optional)_ If using a local Docker image, edit the `deploy/operator.yaml` file and set the image name for the CSM Operator Deployment.
-5. _(Optional)_ If **CSM Replication** is planned for use and will be deployed using two clusters in an environment where the DNS is not configured, and cluster API endpoints are FQDNs, in order to resolve queries to remote API endpoints, it is necessary to edit the `deploy/operator.yaml` file and add the `hostAliases` field and associated `<FQDN>:<IP>` mappings to the CSM Operator Controller Manager Deployment under `spec.template.spec`. More information on host aliases can be found, [here](https://kubernetes.io/docs/tasks/network/customize-hosts-file-for-pods/).
+5. _(Optional)_ The Dell CSM Operator might need more resources if users have larger environment (>1000 Pods). You can modify the default resource requests and limits in the files `deploy/operator.yaml`, `config/manager/manager.yaml`  and increase the values for cpu and memory. More information on setting the resource requests and limits can be found [here](https://sdk.operatorframework.io/docs/best-practices/managing-resources/). Current default values are set as below:
+    ```yaml
+        resources:
+          limits:
+            cpu: 200m
+            memory: 512Mi
+          requests:
+            cpu: 100m
+            memory: 192Mi
+    ```
+6. _(Optional)_ If **CSM Replication** is planned for use and will be deployed using two clusters in an environment where the DNS is not configured, and cluster API endpoints are FQDNs, in order to resolve queries to remote API endpoints, it is necessary to edit the `deploy/operator.yaml` file and add the `hostAliases` field and associated `<FQDN>:<IP>` mappings to the CSM Operator Controller Manager Deployment under `spec.template.spec`. More information on host aliases can be found, [here](https://kubernetes.io/docs/tasks/network/customize-hosts-file-for-pods/).
     ```yaml
     # example config
     apiVersion: apps/v1
@@ -84,13 +96,20 @@ git clone -b v1.6.0 https://github.com/dell/csm-operator.git
             - "remote.FQDN"
             ip: "255.255.255.1"
     ```
-6. Run `bash scripts/install.sh` to install the operator.
+7. Run `bash scripts/install.sh` to install the operator.
 
 >NOTE: Dell CSM Operator will be installed in the `dell-csm-operator` namespace.
 
+>NOTE: If you want to update the resource requests and limits configuration after the operator is installed. Follow the steps below:
+
+     * Uninstall the operator following the steps [here](https://dell.github.io/csm-docs/v3/deployment/csmoperator/#uninstall)
+
+     * Update the resource configuration as mentioned in step 5 and install the operator using the step 7 above
+
+
 {{< imgproc install.JPG Resize "2500x" >}}{{< /imgproc >}}
 
-6. Run the command to validate the installation.
+8. Run the command to validate the installation.
 ```bash
 kubectl get pods -n dell-csm-operator
 ```
