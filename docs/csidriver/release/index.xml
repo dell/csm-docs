@@ -314,8 +314,8 @@
 &lt;td&gt;This is a known issue, and the workaround involves creating a single network on the array to serve both ISCSI and NVMeTCP purposes.&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;Creation of clone PVC using snapshot will fail when the source PVC is deleted&lt;/td&gt;
-&lt;td&gt;This is a known issue, and the workaround is do not delete the source PVC if you want to create clone volumes using snapshot.&lt;/td&gt;
+&lt;td&gt;When a PV/PVC is deleted in Kubernetes, it will trigger the deletion of the underlying volume and snapshot on the array as a default behaviour. This can result in a situation where the VolumeSnapshot and VolumeSnapshotContent will still show &amp;ldquo;readyToUse: true&amp;rdquo;, but leaves them unusable because it is no longer backed by underlying storage snapshot. This will not allow the creation of a PVC from snapshot and this could also lead to a data loss situations.&lt;/td&gt;
+&lt;td&gt;This is a known issue, and the workaround is use of &lt;strong&gt;retain&lt;/strong&gt; policy on the various PV, VolumeSnapshot and VolumeSnapshotContent that you wish to use for cloning.&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
