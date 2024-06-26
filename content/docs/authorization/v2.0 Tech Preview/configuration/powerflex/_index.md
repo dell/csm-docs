@@ -92,6 +92,8 @@ Given a setup where Kubernetes, a storage system, and the CSM for Authorization 
 
     - Update the `SKIP_CERTIFICATE_VALIDATION` environment value to `true` or `false` depending on if you want to disable or enable certificate validation of the CSM Authorization Proxy Server.
 
+    - Do not update the `configVersion`. You will notice in the example that it is set to v1.11.0, this ensures that checks on version support do not prevent deployment of the v2.0.0-alpha authorization tech preview.
+
     Example: 
 
     ```yaml
@@ -100,7 +102,7 @@ Given a setup where Kubernetes, a storage system, and the CSM for Authorization 
       - name: authorization
         # enable: Enable/Disable csm-authorization
         enabled: true
-        configVersion: v2.0.0-alpha
+        configVersion: v1.11.0
         components:
         - name: karavi-authorization-proxy
           image: dellemc/csm-authorization-sidecar:v2.0.0-alpha
