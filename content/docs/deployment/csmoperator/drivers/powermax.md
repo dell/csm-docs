@@ -36,8 +36,11 @@ CSI Driver for Dell PowerMax supports Fibre Channel communication. Ensure that t
 
 ### NVMeTCP requirements
 If you want to use the protocol, set up the NVMe initiators as follows:
-- Setup on Array
-   - When creating the NVMe endpoints, update the endpoint name as ```<nqn.1988-11.com.dell:<sid><dir><port>>```
+- Setup on Array <br>
+Once the NVMe endpoint is created on the array, follow the following step to update endpoint name to adhere with CSI driver.
+   - Perform a  ```nvme discover --transport=tcp --traddr=<InterfaceAdd> --trsvcid=4420```. <InterfaceAdd> is the placeholder for actual IP address of NVMe Endpoint.
+   - Fetch the _subnqn_, for e.g.,  _nqn.1988-11.com.dell:PowerMax_2500:00:000120001100_, this will be used as the subnqn holder while updating NVMe endpoint name.
+   - Update the NVMe endpoint name as ```<subnqn>:<dir><port>>```. Here is an example how it should look, _nqn.1988-11.com.dell:PowerMax_2500:00:000120001100:OR1C000_
 - Setup on Host
    - The driver requires NVMe management command-line interface (nvme-cli) to use configure, edit, view or start the NVMe client and target. The nvme-cli utility provides a command-line and interactive shell option. The NVMe CLI tool is installed in the host using the below command.
 ```bash
