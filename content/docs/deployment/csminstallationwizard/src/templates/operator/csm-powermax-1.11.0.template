@@ -232,14 +232,14 @@ spec:
     - name: csireverseproxy
       # enabled: Always set to true
       enabled: true
-      configVersion: v2.9.0
+      configVersion: v2.10.0
       forceRemoveModule: true
       components:
       - name: csipowermax-reverseproxy
       # image: Define the container images used for the reverse proxy
       # Default value: None
-      # Example: "csipowermax-reverseproxy:v2.9.0"
-        image: dellemc/csipowermax-reverseproxy:v2.9.0
+      # Example: "csipowermax-reverseproxy:v2.10.0"
+        image: dellemc/csipowermax-reverseproxy:v2.10.0
         envs:
           # "tlsSecret" defines the TLS secret that is created with certificate
           # and its associated key
@@ -299,7 +299,7 @@ spec:
       - name: dell-replication-controller-manager
         # image: Defines controller image. This shouldn't be changed
         # Allowed values: string
-        image: dellemc/dell-replication-controller:v1.7.0
+        image: dellemc/dell-replication-controller:v1.9.0
         envs:
           # TARGET_CLUSTERS_IDS: comma separated list of cluster IDs of the targets clusters. DO NOT include the source(wherever CSM Operator is deployed) cluster ID
           # Set the value to "self" in case of stretched/single cluster configuration
@@ -330,14 +330,14 @@ spec:
     - name: observability
       # enabled: Enable/Disable observability
       enabled: $OBSERVABILITY_OPERATOR_ENABLED
-      configVersion: v1.7.0
+      configVersion: v1.9.0
       components:
       - name: topology
         # enabled: Enable/Disable topology
         enabled: $OBSERVABILITY_OPERATOR_TOPOLOGY
         # image: Defines karavi-topology image. This shouldn't be changed
         # Allowed values: string
-        image: dellemc/csm-topology:v1.7.0
+        image: dellemc/csm-topology:v1.9.0
         envs:
           # topology log level
           # Valid values: TRACE, DEBUG, INFO, WARN, ERROR, FATAL, PANIC
@@ -362,7 +362,7 @@ spec:
         # enabled: Enable/Disable PowerMax metrics
         enabled: $OBSERVABILITY_OPERATOR_METRICS
         # image: Defines PowerMax metrics image. This shouldn't be changed
-        image: dellemc/csm-metrics-powermax:v1.2.0
+        image: dellemc/csm-metrics-powermax:v1.4.0
         envs:
           # POWERMAX_MAX_CONCURRENT_QUERIES: set the default max concurrent queries to PowerMax
           # Allowed values: int

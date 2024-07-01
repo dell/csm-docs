@@ -114,7 +114,7 @@ spec:
       # tolerations: Define tolerations for the controllers, if required.
       # Leave as blank to install controller on worker nodes
       # Default value: None
-      tolerations:$CONTROLLER_TOLERATIONS
+      tolerations: $CONTROLLER_TOLERATIONS
 
     node:
       envs:
@@ -141,12 +141,12 @@ spec:
       # Leave as blank to consider all nodes
       # Allowed values: map of key-value pairs
       # Default value: None
-      nodeSelector:$NODE_POD_NODE_SELECTOR
+      nodeSelector: $NODE_POD_NODE_SELECTOR
 
       # tolerations: Define tolerations for the controllers, if required.
       # Leave as blank to install controller on worker nodes
       # Default value: None
-      tolerations:$NODE_TOLERATIONS
+      tolerations: $NODE_TOLERATIONS
   
   modules:
     - name: resiliency

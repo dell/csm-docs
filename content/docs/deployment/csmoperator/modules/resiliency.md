@@ -18,6 +18,14 @@ When utilizing CSM for Resiliency module, it is crucial to note that it will sol
  ```bash
  kubectl get pods -A -l podmon.dellemc.com/driver=csi-vxflexos
 ```
+Similarly, labels for for csi-powerscale, csi-unity, csi-powerstore and csi-powermax would be as:
+ ```bash
+ podmon.dellemc.com/driver:csi-isilon
+ podmon.dellemc.com/driver:csi-unity
+ podmon.dellemc.com/driver:csi-powerstore
+ podmon.dellemc.com/driver:csi-powermax
+```
+
 ```
 NAMESPACE   NAME           READY   STATUS    RESTARTS   AGE
 pmtu1       podmontest-0   1/1     Running   0          3m7s

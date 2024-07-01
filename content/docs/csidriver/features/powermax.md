@@ -636,3 +636,13 @@ This feature is also supported for limiting the volume provisioning on Kubernete
 >**NOTE:** <br>The default value of `maxPowerMaxVolumesPerNode` is 0. <br>If `maxPowerMaxVolumesPerNode` is set to zero, then CO shall decide how many volumes of this type can be published by the controller to the node.<br><br>The volume limit specified to `maxPowerMaxVolumesPerNode` attribute is applicable to all the nodes in the cluster for which node label `max-powermax-volumes-per-node` is not set.
 <br>Supported maximum number of RDM Volumes per VM is 60 as per the limitations. <br>If the value is set both by node label and values.yaml file then node label value will get the precedence and user has to remove the node label in order to reflect the values.yaml value. 
 
+## NVMe/TCP Support
+
+The CSI Driver for Dell PowerMax supports NVMeTCP from v2.11.0. To enable NVMe/TCP provisioning, blockProtocol in settings file should be specified as NVMETCP.
+
+**Limitations**<br>
+These are the CSM modules not supported with NVMeTCP protocol:
+- CSM Authorization
+- CSM Observability
+- CSM Application Mobility
+- Metro Replication
