@@ -16,12 +16,12 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/v3/csidriver/features/unity/" /><meta property="article:section" content="v3" />
 
-<meta property="article:modified_time" content="2024-03-21T02:39:59+05:30" />
+<meta property="article:modified_time" content="2024-07-01T15:16:31+05:30" />
 
 <meta itemprop="name" content="Unity XT">
 <meta itemprop="description" content="Code features for Unity XT Driver">
-<meta itemprop="dateModified" content="2024-03-21T02:39:59+05:30" />
-<meta itemprop="wordCount" content="2728">
+<meta itemprop="dateModified" content="2024-07-01T15:16:31+05:30" />
+<meta itemprop="wordCount" content="2736">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Unity XT"/>
 <meta name="twitter:description" content="Code features for Unity XT Driver"/>
@@ -103,7 +103,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.5813070c1fce14c624489690248b46c1.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.e95b450f8b2e9e630973f88fb7d83cff.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -125,7 +125,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.5813070c1fce14c624489690248b46c1.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.e95b450f8b2e9e630973f88fb7d83cff.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -1050,9 +1050,8 @@ To do that you will need to use <code>nodeSelector</code> and <code>tolerations<
 </span></span></span></code></pre></div></li>
 </ol>
 <h2 id="volume-health-monitoring">Volume Health Monitoring</h2>
-<p>CSI Driver for Unity XT supports volume health monitoring. This is an alpha feature and requires feature gate to be enabled by setting command line arguments</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>--feature-gates<span style="color:#ce5c00;font-weight:bold">=</span><span style="color:#4e9a06">&#34;...,CSIVolumeHealth=true&#34;</span>
-</span></span></code></pre></div><p>This feature:</p>
+<p>CSI Driver for Unity XT supports volume health monitoring. Alpha feature gate <code>CSIVolumeHealth</code> needs to be enabled for the node side monitoring to take effect. For more information, please refer to the <a href="https://github.com/kubernetes-csi/external-health-monitor/blob/master/README.md">Kubernetes GitHub repository</a>.</p>
+<p>This feature:</p>
 <ol>
 <li>Reports on the condition of the underlying volumes via events when a volume condition is abnormal. We can watch the events on the describe of pvc
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl describe pvc &lt;pvc name&gt; -n &lt;namespace&gt;

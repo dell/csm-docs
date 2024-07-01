@@ -16,12 +16,12 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/v1/csidriver/features/powermax/" /><meta property="article:section" content="v1" />
 
-<meta property="article:modified_time" content="2024-03-21T02:39:59+05:30" />
+<meta property="article:modified_time" content="2024-07-01T15:16:31+05:30" />
 
 <meta itemprop="name" content="PowerMax">
 <meta itemprop="description" content="Code features for PowerMax Driver">
-<meta itemprop="dateModified" content="2024-03-21T02:39:59+05:30" />
-<meta itemprop="wordCount" content="4352">
+<meta itemprop="dateModified" content="2024-07-01T15:16:31+05:30" />
+<meta itemprop="wordCount" content="4360">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="PowerMax"/>
 <meta name="twitter:description" content="Code features for PowerMax Driver"/>
@@ -103,7 +103,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.5813070c1fce14c624489690248b46c1.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.e95b450f8b2e9e630973f88fb7d83cff.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -125,7 +125,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.5813070c1fce14c624489690248b46c1.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.e95b450f8b2e9e630973f88fb7d83cff.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -1164,7 +1164,7 @@ N2 and N3: None</p>
 <p>To update the log level dynamically, the user has to edit the ConfigMap <code>powermax-config-params</code> and update <code>CSI_LOG_LEVEL</code> to the desired log level.</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl edit configmap -n powermax powermax-config-params
 </span></span></code></pre></div><h2 id="volume-health-monitoring">Volume Health Monitoring</h2>
-<p>CSI Driver for Dell PowerMax 2.2.0 and above supports volume health monitoring. To enable Volume Health Monitoring from the node side, the alpha feature gate CSIVolumeHealth needs to be enabled. To use this feature, set controller.healthMonitor.enabled and node.healthMonitor.enabled to true. To change the monitor interval, set controller.healthMonitor.interval parameter.</p>
+<p>CSI Driver for Dell PowerMax 2.2.0 and above supports volume health monitoring. Alpha feature gate <code>CSIVolumeHealth</code> needs to be enabled for the node side monitoring to take effect. For more information, please refer to the <a href="https://github.com/kubernetes-csi/external-health-monitor/blob/master/README.md">Kubernetes GitHub repository</a>. To use this feature, set controller.healthMonitor.enabled and node.healthMonitor.enabled to true. To change the monitor interval, set controller.healthMonitor.interval parameter.</p>
 <h2 id="single-pod-access-mode-for-persistentvolumes--readwriteoncepod-alpha-feature">Single Pod Access Mode for PersistentVolumes- ReadWriteOncePod (ALPHA FEATURE)</h2>
 <p>Use <code>ReadWriteOncePod(RWOP)</code> access mode if you want to ensure that only one pod across the whole cluster can read that PVC or write to it. This is only supported for CSI Driver for PowerMax 2.2.0+ and Kubernetes version 1.22+.</p>
 <p>To use this feature, enable the ReadWriteOncePod feature gate for kube-apiserver, kube-scheduler, and kubelet, by setting command line arguments:

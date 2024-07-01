@@ -16,12 +16,12 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/v3/csidriver/features/powerflex/" /><meta property="article:section" content="v3" />
 
-<meta property="article:modified_time" content="2024-03-21T02:39:59+05:30" />
+<meta property="article:modified_time" content="2024-07-01T15:16:31+05:30" />
 
 <meta itemprop="name" content="PowerFlex">
 <meta itemprop="description" content="Code features for PowerFlex Driver">
-<meta itemprop="dateModified" content="2024-03-21T02:39:59+05:30" />
-<meta itemprop="wordCount" content="4066">
+<meta itemprop="dateModified" content="2024-07-01T15:16:31+05:30" />
+<meta itemprop="wordCount" content="4079">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="PowerFlex"/>
 <meta name="twitter:description" content="Code features for PowerFlex Driver"/>
@@ -103,7 +103,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.5813070c1fce14c624489690248b46c1.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.e95b450f8b2e9e630973f88fb7d83cff.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -125,7 +125,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.5813070c1fce14c624489690248b46c1.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.e95b450f8b2e9e630973f88fb7d83cff.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -1212,7 +1212,7 @@ Two fields in values.yaml (located at helm/csi-vxflexos/values.yaml) are used to
 <p>If either option is set to a value outside of what is supported, the driver will use the default values of &ldquo;debug&rdquo; and &ldquo;text&rdquo; .</p>
 <h2 id="volume-health-monitoring">Volume Health Monitoring</h2>
 <blockquote>
-<p><em>NOTE</em>: This feature requires the alpha feature gate, CSIVolumeHealth to be set to true. If the feature gate is on, and you want to use this feature,
+<p><em>NOTE</em>: Alpha feature gate <code>CSIVolumeHealth</code> needs to be enabled for the node side monitoring to take effect. For more information, please refer to the <a href="https://github.com/kubernetes-csi/external-health-monitor/blob/master/README.md">Kubernetes GitHub repository</a>. If the feature gate is on, and you want to use this feature,
 ensure the proper values are enabled in your values file. See the values table in the installation doc for more details.</p>
 </blockquote>
 <p>Starting in version 2.1, CSI Driver for PowerFlex now supports volume health monitoring. This allows Kubernetes to report on the condition of the underlying volumes via events when a volume condition is abnormal. For example, if a volume were to be deleted from the array, or unmounted outside of Kubernetes, Kubernetes will now report these abnormal conditions as events.</p>

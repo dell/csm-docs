@@ -542,7 +542,7 @@ Two fields in values.yaml (located at helm/csi-vxflexos/values.yaml) are used to
 &lt;p&gt;If either option is set to a value outside of what is supported, the driver will use the default values of &amp;ldquo;debug&amp;rdquo; and &amp;ldquo;text&amp;rdquo; .&lt;/p&gt;
 &lt;h2 id=&#34;volume-health-monitoring&#34;&gt;Volume Health Monitoring&lt;/h2&gt;
 &lt;blockquote&gt;
-&lt;p&gt;&lt;em&gt;NOTE&lt;/em&gt;: This feature requires the alpha feature gate, CSIVolumeHealth to be set to true. If the feature gate is on, and you want to use this feature,
+&lt;p&gt;&lt;em&gt;NOTE&lt;/em&gt;: Alpha feature gate &lt;code&gt;CSIVolumeHealth&lt;/code&gt; needs to be enabled for the node side monitoring to take effect. For more information, please refer to the &lt;a href=&#34;https://github.com/kubernetes-csi/external-health-monitor/blob/master/README.md&#34;&gt;Kubernetes GitHub repository&lt;/a&gt;. If the feature gate is on, and you want to use this feature,
 ensure the proper values are enabled in your values file. See the values table in the installation doc for more details.&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;Starting in version 2.1, CSI Driver for PowerFlex now supports volume health monitoring. This allows Kubernetes to report on the condition of the underlying volumes via events when a volume condition is abnormal. For example, if a volume were to be deleted from the array, or unmounted outside of Kubernetes, Kubernetes will now report these abnormal conditions as events.&lt;/p&gt;
@@ -1252,7 +1252,7 @@ N2 and N3: None&lt;/p&gt;
 &lt;p&gt;To update the log level dynamically, the user has to edit the ConfigMap &lt;code&gt;powermax-config-params&lt;/code&gt; and update &lt;code&gt;CSI_LOG_LEVEL&lt;/code&gt; to the desired log level.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl edit configmap -n powermax powermax-config-params
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;volume-health-monitoring&#34;&gt;Volume Health Monitoring&lt;/h2&gt;
-&lt;p&gt;CSI Driver for Dell PowerMax 2.2.0 and above supports volume health monitoring. To enable Volume Health Monitoring from the node side, the alpha feature gate CSIVolumeHealth needs to be enabled. To use this feature, set controller.healthMonitor.enabled and node.healthMonitor.enabled to true. To change the monitor interval, set controller.healthMonitor.interval parameter.&lt;/p&gt;
+&lt;p&gt;CSI Driver for Dell PowerMax 2.2.0 and above supports volume health monitoring. Alpha feature gate &lt;code&gt;CSIVolumeHealth&lt;/code&gt; needs to be enabled for the node side monitoring to take effect. For more information, please refer to the &lt;a href=&#34;https://github.com/kubernetes-csi/external-health-monitor/blob/master/README.md&#34;&gt;Kubernetes GitHub repository&lt;/a&gt;. To use this feature, set controller.healthMonitor.enabled and node.healthMonitor.enabled to true. To change the monitor interval, set controller.healthMonitor.interval parameter.&lt;/p&gt;
 &lt;h2 id=&#34;single-pod-access-mode-for-persistentvolumes--readwriteoncepod-alpha-feature&#34;&gt;Single Pod Access Mode for PersistentVolumes- ReadWriteOncePod (ALPHA FEATURE)&lt;/h2&gt;
 &lt;p&gt;Use &lt;code&gt;ReadWriteOncePod(RWOP)&lt;/code&gt; access mode if you want to ensure that only one pod across the whole cluster can read that PVC or write to it. This is only supported for CSI Driver for PowerMax 2.2.0+ and Kubernetes version 1.22+.&lt;/p&gt;
 &lt;p&gt;To use this feature, enable the ReadWriteOncePod feature gate for kube-apiserver, kube-scheduler, and kubelet, by setting command line arguments:
@@ -1844,8 +1844,9 @@ Then values set in quota will be advisory limit = 30, soft limit = 50 and soft g
 For example, if a volume were to be deleted from the array, or unmounted outside of Kubernetes, Kubernetes will now report these abnormal conditions as events.&lt;/p&gt;
 &lt;h3 id=&#34;this-feature-can-be-enabled&#34;&gt;This feature can be enabled&lt;/h3&gt;
 &lt;ol&gt;
+&lt;li&gt;Alpha feature gate &lt;code&gt;CSIVolumeHealth&lt;/code&gt; needs to be enabled for the node side monitoring to take effect. For more information, please refer to the &lt;a href=&#34;https://github.com/kubernetes-csi/external-health-monitor/blob/master/README.md&#34;&gt;Kubernetes GitHub repository&lt;/a&gt;.&lt;/li&gt;
 &lt;li&gt;For controller plugin, by setting attribute &lt;code&gt;controller.healthMonitor.enabled&lt;/code&gt; to &lt;code&gt;true&lt;/code&gt; in &lt;code&gt;values.yaml&lt;/code&gt; file. Also health monitoring interval can be changed through attribute &lt;code&gt;controller.healthMonitor.interval&lt;/code&gt; in &lt;code&gt;values.yaml&lt;/code&gt; file.&lt;/li&gt;
-&lt;li&gt;For node plugin, by setting attribute &lt;code&gt;node.healthMonitor.enabled&lt;/code&gt; to &lt;code&gt;true&lt;/code&gt; in &lt;code&gt;values.yaml&lt;/code&gt; file and by enabling the alpha feature gate &lt;code&gt;CSIVolumeHealth&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;For node plugin, by setting attribute &lt;code&gt;node.healthMonitor.enabled&lt;/code&gt; to &lt;code&gt;true&lt;/code&gt; in &lt;code&gt;values.yaml&lt;/code&gt; file.&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h2 id=&#34;single-pod-access-mode-for-persistentvolumes--readwriteoncepod-alpha-feature&#34;&gt;Single Pod Access Mode for PersistentVolumes- ReadWriteOncePod (ALPHA FEATURE)&lt;/h2&gt;
 &lt;p&gt;Use &lt;code&gt;ReadWriteOncePod(RWOP)&lt;/code&gt; access mode if you want to ensure that only one pod across the whole cluster can read that PVC or write to it. This is supported for CSI Driver for PowerScale 2.1.0+ and Kubernetes version 1.22+.&lt;/p&gt;
@@ -2329,7 +2330,7 @@ However, to provision new volumes, make sure to delete old Storage Classes and c
 &lt;p&gt;CSI Driver for Dell Powerstore is supported in the NAT environment for NFS protocol.&lt;/p&gt;
 &lt;p&gt;The user will be able to install the driver and able to create pods.&lt;/p&gt;
 &lt;h2 id=&#34;pvpvc-metrics&#34;&gt;PV/PVC Metrics&lt;/h2&gt;
-&lt;p&gt;CSI Driver for Dell Powerstore 2.1.0 and above supports volume health monitoring. To enable Volume Health Monitoring from the node side, the alpha feature gate CSIVolumeHealth needs to be enabled. To use this feature, set controller.healthMonitor.enabled and node.healthMonitor.enabled to true. To change the monitor interval, set controller.healthMonitor.interval parameter.&lt;/p&gt;
+&lt;p&gt;CSI Driver for Dell Powerstore 2.1.0 and above supports volume health monitoring. Alpha feature gate &lt;code&gt;CSIVolumeHealth&lt;/code&gt; needs to be enabled for the node side monitoring to take effect. For more information, please refer to the &lt;a href=&#34;https://github.com/kubernetes-csi/external-health-monitor/blob/master/README.md&#34;&gt;Kubernetes GitHub repository&lt;/a&gt;. To use this feature, set controller.healthMonitor.enabled and node.healthMonitor.enabled to true. To change the monitor interval, set controller.healthMonitor.interval parameter.&lt;/p&gt;
 &lt;h2 id=&#34;single-pod-access-mode-for-persistentvolumes&#34;&gt;Single Pod Access Mode for PersistentVolumes&lt;/h2&gt;
 &lt;p&gt;Starting from version 2.1, CSI Driver for Powerstore now supports a new access mode &lt;code&gt;ReadWriteOncePod&lt;/code&gt; for PersistentVolumes and PersistentVolumeClaims. With this feature, CSI Driver for Powerstore allows restricting volume access to a single pod in the cluster and within a worker node.&lt;/p&gt;
 &lt;p&gt;Prerequisites&lt;/p&gt;
@@ -2819,9 +2820,8 @@ To do that you will need to use &lt;code&gt;nodeSelector&lt;/code&gt; and &lt;co
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h2 id=&#34;volume-health-monitoring&#34;&gt;Volume Health Monitoring&lt;/h2&gt;
-&lt;p&gt;CSI Driver for Unity XT supports volume health monitoring. This is an alpha feature and requires feature gate to be enabled by setting command line arguments&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;--feature-gates&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;...,CSIVolumeHealth=true&amp;#34;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;This feature:&lt;/p&gt;
+&lt;p&gt;CSI Driver for Unity XT supports volume health monitoring. Alpha feature gate &lt;code&gt;CSIVolumeHealth&lt;/code&gt; needs to be enabled for the node side monitoring to take effect. For more information, please refer to the &lt;a href=&#34;https://github.com/kubernetes-csi/external-health-monitor/blob/master/README.md&#34;&gt;Kubernetes GitHub repository&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;This feature:&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;Reports on the condition of the underlying volumes via events when a volume condition is abnormal. We can watch the events on the describe of pvc
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl describe pvc &amp;lt;pvc name&amp;gt; -n &amp;lt;namespace&amp;gt;
