@@ -67,7 +67,7 @@ For detailed PowerFlex installation procedure, see the _Dell PowerFlex Deploymen
 
     Example: secret.yaml
 
-     ```yaml
+    ```yaml
       # Username for accessing PowerFlex system.
       # If authorization is enabled, username will be ignored.
     - username: "admin"
