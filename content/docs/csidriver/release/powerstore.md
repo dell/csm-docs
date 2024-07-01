@@ -12,18 +12,22 @@ description: Release notes for PowerStore CSI driver
 
 
 
+
 ### New Features/Changes
 
-- [#926 - [FEATURE]: Fixing the linting, formatting and vetting issues](https://github.com/dell/csm/issues/926)
-- [#1129 - [FEATURE]: Support PowerStore v3.6](https://github.com/dell/csm/issues/1129)
+There are no new features in this release.
 
 ### Fixed Issues
 
-- [#1081 - [BUG]: CSM driver repositories reference CSI Operator](https://github.com/dell/csm/issues/1081)
-- [#1097 - [BUG]: Powerstore sanity tests are not working](https://github.com/dell/csm/issues/1097)
-- [#1140 - [BUG]: Cert-csi tests are not reporting the passed testcases in K8S E2E tests ](https://github.com/dell/csm/issues/1140)
-- [#1142 - [BUG]: Documentation : Multipath related instructions are missing in Powerstore prerequisites ](https://github.com/dell/csm/issues/1142)
-- [#1174 - [BUG]: Kubelet Configuration Directory setting should not have a comment about default value being None](https://github.com/dell/csm/issues/1174)
+- [#1188 - [BUG]: Controller Pod keeps restarting due to "Lost connection to CSI driver" error](https://github.com/dell/csm/issues/1188)
+- [#1209 - [BUG]: Doc hyper links in driver Readme is broken](https://github.com/dell/csm/issues/1209)
+- [#1216 - [BUG]: Incorrect Error message in Resiliency Podmon in controllerCleanupPod() func](https://github.com/dell/csm/issues/1216)
+- [#1218 - [BUG]: Add the helm-charts-version parameter to the install command for all drivers in csm-docs](https://github.com/dell/csm/issues/1218)
+- [#1239 - [BUG]: Changes in new release of google.golang.org/protobuf is causing compilation issues](https://github.com/dell/csm/issues/1239)
+- [#1270 - [BUG]: Missing entries for Resiliency in installation wizard template](https://github.com/dell/csm/issues/1270)
+- [#1317 - [BUG]: CSM PowerStore - Remove the RESTAPI code that is not needed](https://github.com/dell/csm/issues/1317)
+- [#1338 - [BUG]: Data loss (DL) when deleting PVC but leaves unusable volumesnapshot and volumesnapshotcontent](https://github.com/dell/csm/issues/1338)
+- [#1346 - [BUG]: Parsing an NVME response fails for list-subsys](https://github.com/dell/csm/issues/1346)
 
 ### Known Issues
 
