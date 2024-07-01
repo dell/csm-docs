@@ -657,8 +657,9 @@ For example, if a volume were to be deleted from the array, or unmounted outside
 
 ### This feature can be enabled
 
-1. For controller plugin, by setting attribute `controller.healthMonitor.enabled` to `true` in `values.yaml` file. Also health monitoring interval can be changed through attribute `controller.healthMonitor.interval` in `values.yaml` file.
-2. For node plugin, by setting attribute `node.healthMonitor.enabled` to `true` in `values.yaml` file and by enabling the alpha feature gate `CSIVolumeHealth`.
+1. Alpha feature gate `CSIVolumeHealth` needs to be enabled for the node side monitoring to take effect. For more information, please refer to the [Kubernetes GitHub repository](https://github.com/kubernetes-csi/external-health-monitor/blob/master/README.md).
+2. For controller plugin, by setting attribute `controller.healthMonitor.enabled` to `true` in `values.yaml` file. Also health monitoring interval can be changed through attribute `controller.healthMonitor.interval` in `values.yaml` file.
+3. For node plugin, by setting attribute `node.healthMonitor.enabled` to `true` in `values.yaml` file.
 
 ## Single Pod Access Mode for PersistentVolumes- ReadWriteOncePod 
 
