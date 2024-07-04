@@ -1,0 +1,53 @@
+name: Check Broken Links
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main, release-* ]
+jobs:
+  check-broken-links:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v2
+        with:
+          hugo-version: '0.120.3'
+          extended: true
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+      - name: Cache dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+      - run: npm ci
+      - name: Build
+        run: |
+         npm install -D --save autoprefixer
+         npm install -D --save postcss-cli
+         npm install -D --save postcss
+         hugo server --bind 127.0.0.1 &
+      - name: Wait for Hugo server
+        run: curl --head -X GET --retry 5 --retry-connrefused --retry-delay 10 http://127.0.0.1:1313/csm-docs/
+      - name: Scanning docs for broken links
+        continue-on-error: true
+        run: |
+          wget --verbose --spider -o spider.log -e robots=off -rp http://127.0.0.1:1313/csm-docs/
+      - name: Getting output
+        continue-on-error: true
+        run: |
+          sed -i '/http:\/\/127.0.0.1:1313\/favicons\/favicon.ico/d' spider.log
+          sed -i '/http:\/\/127.0.0.1:1313\/css\/prism.css/d' spider.log
+          sed -n '/broken links/,$p' spider.log | grep 'http' > broken_links
+      - name: Check for broken links
+        run: |
+          wc -l broken_links
+          cat broken_links
+          wc -l broken_links | grep -Fxq "0 broken_links"
