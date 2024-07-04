@@ -1,7 +1,7 @@
 ---
-title: "Prerequisites"
-linkTitle: "Prerequisites"
-description: Prerequisites for CSM 
+title: "Prerequisites and Support Matrix"
+linkTitle: "Prerequisites and Support Matrix"
+description: Prerequisites and Support Matrix for CSM 
 weight: 1
 ---
 
@@ -28,7 +28,7 @@ weight: 1
 | Platform                   | Version          |
 |----------------------------|:----------------:|
 | Kubernetes                 | 1.28, 1.29, 1.30 |
-| Red Hat OpenShift          | 4.14, 4.15       |
+| Red Hat OpenShift          | 4.15, 4.16       |
 | Mirantis Kubernetes Engine | 3.7.x            |
 | Google Anthos              | 1.15             |
 | Rancher Kubernetes Engine  | 1.4.x            |
