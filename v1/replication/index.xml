@@ -611,7 +611,8 @@ by running &lt;code&gt;cluster get&lt;/code&gt; command:&lt;/p&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Also, you can inject information about all of your current clusters as
 config maps into the same clusters, so it can be used by &lt;code&gt;dell-csi-replicator&lt;/code&gt;:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;./repctl cluster inject
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;You can also generate kubeconfigs from existing replication service accounts and inject them in config maps by providing &lt;code&gt;--use-sa&lt;/code&gt; flag:&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;NOTE:&lt;/strong&gt; Please ensure that CA certificate is present in kubeconfig, as repctl &lt;code&gt;--use-sa&lt;/code&gt; flag requires it for proper operation.&lt;/p&gt;
+&lt;p&gt;You can also generate kubeconfigs from existing replication service accounts and inject them in config maps by providing &lt;code&gt;--use-sa&lt;/code&gt; flag:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;./repctl cluster inject --use-sa
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;querying-resources&#34;&gt;Querying Resources&lt;/h3&gt;
 &lt;p&gt;After adding clusters you want to manage with &lt;code&gt;repctl&lt;/code&gt; you can query
