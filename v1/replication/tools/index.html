@@ -18,13 +18,13 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/v1/replication/tools/" /><meta property="article:section" content="v1" />
 
-<meta property="article:modified_time" content="2023-06-24T09:21:08+05:30" />
+<meta property="article:modified_time" content="2024-07-04T18:34:04+05:30" />
 
 <meta itemprop="name" content="Tools">
 <meta itemprop="description" content="repctl tool for Replication feature in detail
 ">
-<meta itemprop="dateModified" content="2023-06-24T09:21:08+05:30" />
-<meta itemprop="wordCount" content="984">
+<meta itemprop="dateModified" content="2024-07-04T18:34:04+05:30" />
+<meta itemprop="wordCount" content="1003">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Tools"/>
 <meta name="twitter:description" content="repctl tool for Replication feature in detail
@@ -107,7 +107,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.e95b450f8b2e9e630973f88fb7d83cff.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.d657069e9339ded9d12b45abff8ccc39.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -129,7 +129,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.e95b450f8b2e9e630973f88fb7d83cff.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.d657069e9339ded9d12b45abff8ccc39.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -694,7 +694,8 @@ by running <code>cluster get</code> command:</p>
 </span></span></code></pre></div><p>Also, you can inject information about all of your current clusters as
 config maps into the same clusters, so it can be used by <code>dell-csi-replicator</code>:</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>./repctl cluster inject
-</span></span></code></pre></div><p>You can also generate kubeconfigs from existing replication service accounts and inject them in config maps by providing <code>--use-sa</code> flag:</p>
+</span></span></code></pre></div><p><strong>NOTE:</strong> Please ensure that CA certificate is present in kubeconfig, as repctl <code>--use-sa</code> flag requires it for proper operation.</p>
+<p>You can also generate kubeconfigs from existing replication service accounts and inject them in config maps by providing <code>--use-sa</code> flag:</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>./repctl cluster inject --use-sa
 </span></span></code></pre></div><h3 id="querying-resources">Querying Resources</h3>
 <p>After adding clusters you want to manage with <code>repctl</code> you can query
