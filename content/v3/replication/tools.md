@@ -49,6 +49,8 @@ You can also generate kubeconfigs from existing replication service accounts and
 ./repctl cluster inject --use-sa
 ```
 
+**NOTE:** Please ensure that CA certificate is present in kubeconfig, as repctl `--use-sa` flag requires it for proper operation.
+
 ### Querying Resources
 
 After adding clusters you want to manage with `repctl` you can query
