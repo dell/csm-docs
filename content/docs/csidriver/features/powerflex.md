@@ -765,6 +765,9 @@ The user can also set the volume limit for all the nodes in the cluster by speci
 ## NFS volume support
 Starting with version 2.8, the CSI driver for PowerFlex will support NFS volumes for PowerFlex storage systems version 4.0.x.
 
+> NOTE: 
+> Starting from CSM 1.11.0, the CSI-PowerFlex driver will automatically round up NFS volume sizes to a minimum of 3GB if a smaller size is requested. This change prevents backend errors and ensures compatibility.
+
 CSI driver will support following operations for NFS volumes:
 
 * Creation and deletion of a NFS volume with RWO/RWX/ROX access modes.
