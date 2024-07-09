@@ -6,6 +6,7 @@ description: Troubleshooting PowerFlex Driver
 
 | Symptoms | Prevention, Resolution or Workaround |
 |------------|--------------|
+| After installation vxflexos-node pods are in an `Init:CrashLoopBackOff` state in OpenShift 4.16 with error message: ```Back-off restarting failed container sdc in pod vxflexos-node``` on non-supported kernel versions. | Use SDC version 4.5.2.1 in OpenShift 4.16. |
 | The installation fails with the following error message: <br />```Node xxx does not have the SDC installed```| Install the PowerFlex SDC on listed nodes. The SDC must be installed on all the nodes that need to pull an image of the driver. |
 | When you run the command `kubectl describe pods vxflexos-controller-* –n vxflexos`, the system indicates that the driver image could not be loaded. | - If on Kubernetes, edit the `daemon.json` file found in the registry location and add <br />```{ "insecure-registries" :[ "hostname.cloudapp.net:5000" ] }```<br />- If on OpenShift, run the command `oc edit image.config.openshift.io/cluster` and add registries to yaml file that is displayed when you run the command. |
 |The `kubectl logs -n vxflexos vxflexos-controller-* driver` logs show that the driver is not authenticated.| Check the username, password, and the gateway IP address for the PowerFlex system.|
