@@ -137,7 +137,7 @@ Use the below command to replace or update the secret:
 
 *NOTE:* 
 
-- It is mandatory use SDC 4.5.2.1 for OpenShift 4.16
+- It is mandatory to use SDC 4.5.2.1 for OpenShift 4.16 and above.
 - The user needs to validate the YAML syntax and array-related key/values while replacing the vxflexos-creds secret.
 - If you want to create a new array or update the MDM values in the secret, you will need to reinstall the driver. If you change other details, such as login information, the secret will dynamically update -- see [dynamic-array-configuration](../../../../../csidriver/features/powerflex#dynamic-array-configuration) for more details.
 - Old `json` format of the array configuration file is still supported in this release. If you already have your configuration in `json` format, you may continue to maintain it or you may transfer this configuration to `yaml`format and replace/update the secret.  
