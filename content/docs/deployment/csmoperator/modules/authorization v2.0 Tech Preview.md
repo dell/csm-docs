@@ -67,7 +67,6 @@ To deploy the Operator, follow the instructions available [here](../../#installa
 
    | Parameter | Description | Required | Default |
    | --------- | ----------- | -------- |-------- |
-   | openshift | For OpenShift Container Platform only: Enable/Disable use of the OpenShift Ingress Controller. Set to false if you already have an Ingress Controller installed. | No | False |
    | **nginx** | This section configures the enablement of the NGINX Ingress Controller. | - | - |
    | enabled | For Kubernetes Container Platform only: Enable/Disable deployment of the NGINX Ingress Controller. Set to false if you already have an Ingress Controller installed. | No | true |
    | **cert-manager** | This section configures the enablement of cert-manager. | - | - |
@@ -129,11 +128,9 @@ Once the Authorization CR is created, you can verify the installation as mention
   kubectl describe csm/<name-of-custom-resource> -n authorization
   ```
 
-### Install Karavictl
+### Install dellctl
 
->> NOTE: Authorization v2.0 Tech Preview does not use `karavictl` so installation is not necessary.
-
-Follow the instructions available in CSM Authorization for [Installing karavictl](../../../helm/modules/installation/authorization/#install-karavictl).
+Follow the instructions for [Installing dellctl](../../../../support/cli/#installation-instructions).
 
 ### Configure the CSM Authorization Proxy Server
 
