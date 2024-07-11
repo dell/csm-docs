@@ -48,7 +48,7 @@ This will take a snapshot of the `persistent volume claim` named `vol1`. CSM Aut
 
 ### Backend Storage Polling
 
-A configurable polling mechanism has been introduced to ensure that the tenant and Redis are always in sync with the backend storage configured. This is determined by the [volumePrefix](../configuration/proxy-server/#configuring-tenants) specified for the `tenant`. During polling, for each of the tenants and roles, the storage service will ensure that nothing has been removed or added by the storage admin which would lead to Redis being out of sync.
+A configurable polling mechanism has been introduced to ensure that the tenant and Redis are always in sync with the backend storage configured. This is determined by the [volumePrefix](configuration/proxy-server/#configuring-tenants) specified for the `tenant`. During polling, for each of the tenants and roles, the storage service will ensure that nothing has been removed or added by the storage admin which would lead to Redis being out of sync.
 
 If a volume is created with the matching `volumePrefix`, the new entry will be added to Redis and the available quota will be consumed accordingly. Similarly, if a snapshot is created from a volume that is owned by the tenant in the backend storage array, that will be added to Redis.
 
