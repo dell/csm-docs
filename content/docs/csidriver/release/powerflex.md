@@ -14,6 +14,8 @@ description: Release notes for PowerFlex CSI driver
 
 ### New Features/Changes
 
+- [#1284 - [FEATURE]: Support for Openshift 4.15](https://github.com/dell/csm/issues/1284)
+- [#1285 - [FEATURE]: Remove checks in code for non-supported installs of CSM](https://github.com/dell/csm/issues/1285)
 - [#926 - [FEATURE]: Fixing the linting, formatting and vetting issues](https://github.com/dell/csm/issues/926)
 
 ### Fixed Issues
@@ -24,6 +26,7 @@ description: Release notes for PowerFlex CSI driver
 - [#1140 - [BUG]: Cert-csi tests are not reporting the passed testcases in K8S E2E tests ](https://github.com/dell/csm/issues/1140)
 - [#1163 - [BUG]: Resource quota bypass](https://github.com/dell/csm/issues/1163)
 - [#1174 - [BUG]: Kubelet Configuration Directory setting should not have a comment about default value being None](https://github.com/dell/csm/issues/1174)
+- [#1210 - [BUG]: Helm deployment of PowerFlex driver is failing](https://github.com/dell/csm/issues/1210)
 - [#1210 - [BUG]: Helm deployment of PowerFlex driver is failing](https://github.com/dell/csm/issues/1210)
 
 ### Known Issues

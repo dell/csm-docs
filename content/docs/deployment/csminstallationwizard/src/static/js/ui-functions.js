@@ -483,7 +483,7 @@ function displayCommands(releaseNameValue, commandTitleValue, commandNoteValue, 
 			helmChartVersion = CONSTANTS.CSM_HELM_V1100;
 			break;
 		default:
-			helmChartVersion = CONSTANTS.CSM_HELM_V1100;
+			helmChartVersion = CONSTANTS.CSM_HELM_V1102;
 			break;
 	}
 	$("#command-text-area").show();

@@ -65,7 +65,7 @@ The resulting offline bundle file can be copied to another machine, if necessary
 
 For example, here is the output of a request to build an offline bundle for the Dell CSM Operator:
 ```bash
-git clone -b v1.4.3 https://github.com/dell/csm-operator.git
+git clone -b v1.5.1 https://github.com/dell/csm-operator.git
 ```
 ```bash
 cd csm-operator
@@ -83,7 +83,7 @@ bash scripts/csm-offline-bundle.sh -c
 *
 * Pulling and saving container images
 
-   dellemc/csi-isilon:v2.10.0
+   dellemc/csi-isilon:v2.10.1
    dellemc/csi-metadata-retriever:v1.6.0
    dellemc/csipowermax-reverseproxy:v2.6.0
    dellemc/csi-powermax:v2.10.0
@@ -97,7 +97,7 @@ bash scripts/csm-offline-bundle.sh -c
    dellemc/dell-csi-replicator:v1.9.0
    dellemc/dell-replication-controller:v1.9.0
    dellemc/sdc:4.5
-   docker.io/dellemc/dell-csm-operator:v1.4.3
+   docker.io/dellemc/dell-csm-operator:v1.5.1
    gcr.io/kubebuilder/kube-rbac-proxy:v0.8.0
    nginxinc/nginx-unprivileged:1.20
    otel/opentelemetry-collector:0.42.0
@@ -186,8 +186,8 @@ Preparing a offline bundle for installation
 *
 * Loading docker images
 
-Loaded image: docker.io/dellemc/csi-powerstore:v2.10.0
-Loaded image: docker.io/dellemc/csi-isilon:v2.10.0
+Loaded image: docker.io/dellemc/csi-powerstore:v2.10.1
+Loaded image: docker.io/dellemc/csi-isilon:v2.10.1
 ...
 ...
 Loaded image: registry.k8s.io/sig-storage/csi-resizer:v1.11.1
