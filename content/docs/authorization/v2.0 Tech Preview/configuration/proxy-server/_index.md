@@ -128,8 +128,20 @@ spec:
 
 Once the tenant is created, an access/refresh token pair can be created for the tenant. The storage admin is responsible for generating and sending the token to the Kubernetes tenant admin.
 
+Generate an administrator token:
+
 ```bash
-  dellctl generate token --addr csm-authorization.com:<ingress-controller-port> --insecure true --tenant <tenant> --access-token-expiration 30m0s --refresh-token-expiration 1480h0m0s > token.yaml
+dellctl admin token  -n <administrator-name> --access-token-expiration 1m30s --refresh-token-expiration 720h --jwt-signing-secret <secret> > admin.yaml
+```
+
+You can also pass in the `jwt-signing-secret` via terminal prompt by not supplying the `--jwt-signing-secret` argument:
+
+```bash
+dellctl admin token  -n <administrator-name> --access-token-expiration 1m30s --refresh-token-expiration 720h > admin.yaml
+```
+
+```bash
+  dellctl generate token --admin-token admin.yaml --addr csm-authorization.com:<ingress-controller-port> --insecure true --tenant <tenant> --access-token-expiration 30m0s --refresh-token-expiration 1480h0m0s > token.yaml
 ```
 
 `token.yaml` will have a Kubernetes secret manifest that looks like this:
