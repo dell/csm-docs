@@ -4,9 +4,23 @@
 ##########################################
 csi-powerstore:
   enabled: $POWERSTORE_ENABLED
-  version: v2.7.0
+  version: v2.10.1
   images:
-    driverRepository: $IMAGE_REPOSITORY
+    # "driver" defines the container image, used for the driver container.
+    driver: dellemc/csi-powerstore:v2.10.1
+    # CSI sidecars
+    attacher: registry.k8s.io/sig-storage/csi-attacher:v4.5.0
+    provisioner: registry.k8s.io/sig-storage/csi-provisioner:v4.0.0
+    snapshotter: registry.k8s.io/sig-storage/csi-snapshotter:v7.0.1
+    resizer: registry.k8s.io/sig-storage/csi-resizer:v1.10.0
+    registrar: registry.k8s.io/sig-storage/csi-node-driver-registrar:v2.10.0
+    healthmonitor: registry.k8s.io/sig-storage/csi-external-health-monitor-controller:v0.11.0
+
+    # CSM sidecars
+    replication: dellemc/dell-csi-replicator:v1.8.0
+    vgsnapshotter: dellemc/csi-volumegroup-snapshotter:v1.4.0
+    podmon: dellemc/podmon:v1.9.0
+    metadataretriever: dellemc/csi-metadata-retriever:v1.6.0
   ## Controller ATTRIBUTES
   controller:
     controllerCount: $CONTROLLER_COUNT
@@ -17,11 +31,8 @@ csi-powerstore:
     tolerations: $CONTROLLER_TOLERATIONS
     replication:
       enabled: $REPLICATION_ENABLED
-      image: dellemc/dell-csi-replicator:v1.5.0
     vgsnapshot:
       enabled: $VG_SNAPSHOT_ENABLED
-      image: dellemc/csi-volumegroup-snapshotter:v1.2.0
-    metadataretriever: dellemc/csi-metadata-retriever:v1.4.0
     snapshot:
       enabled: $SNAPSHOT_ENABLED
       snapNamePrefix: $SNAP_NAME_PREFIX
@@ -62,30 +73,32 @@ csi-powerstore:
     enabled: $STORAGE_CAPACITY_ENABLED
   podmon:
     enabled: $RESILIENCY_ENABLED
-    image: dellemc/podmon:v1.6.0
-    #controller:
-    #  args:
-    #    - "--csisock=unix:/var/run/csi/csi.sock"
-    #    - "--labelvalue=csi-powerstore"
-    #    - "--arrayConnectivityPollRate=60"
-    #    - "--driverPath=csi-powerstore.dellemc.com"
-    #    - "--mode=controller"
-    #    - "--skipArrayConnectionValidation=false"
-    #    - "--driver-config-params=/powerstore-config-params/driver-config-params.yaml"
-    #    - "--driverPodLabelValue=dell-storage"
-    #    - "--ignoreVolumelessPods=false"
+    controller:
+      args:
+        - "--csisock=unix:/var/run/csi/csi.sock"
+        - "--labelvalue=csi-powerstore"
+        - "--arrayConnectivityPollRate=60"
+        - "--driverPath=csi-powerstore.dellemc.com"
+        - "--mode=controller"
+        - "--skipArrayConnectionValidation=false"
+        - "--driver-config-params=/powerstore-config-params/driver-config-params.yaml"
+        - "--driverPodLabelValue=dell-storage"
+        - "--ignoreVolumelessPods=false"
 
-    #node:
-    #  args:
-    #    - "--csisock=unix:/var/lib/kubelet/plugins/csi-powerstore.dellemc.com/csi_sock"
-    #    - "--labelvalue=csi-powerstore"
-    #    - "--arrayConnectivityPollRate=60"
-    #    - "--driverPath=csi-powerstore.dellemc.com"
-    #    - "--mode=node"
-    #    - "--leaderelection=false"
-    #    - "--driver-config-params=/powerstore-config-params/driver-config-params.yaml"
-    #    - "--driverPodLabelValue=dell-storage"
-    #    - "--ignoreVolumelessPods=false"
+    node:
+      args:
+        - "--csisock=unix:/var/lib/kubelet/plugins/csi-powerstore.dellemc.com/csi_sock"
+        - "--labelvalue=csi-powerstore"
+        - "--arrayConnectivityPollRate=60"
+        - "--driverPath=csi-powerstore.dellemc.com"
+        - "--mode=node"
+        - "--leaderelection=false"
+        - "--driver-config-params=/powerstore-config-params/driver-config-params.yaml"
+        - "--driverPodLabelValue=dell-storage"
+        - "--ignoreVolumelessPods=false"
+
+  maxPowerstoreVolumesPerNode: $MAX_VOLUMES_PER_NODE
+  podmonAPIPort: 8083
 
 ## K8S/CSI-PowerMax ATTRIBUTES
 ##########################################
@@ -96,13 +109,36 @@ csi-powermax:
       - storageArrayId: "$POWERMAX_STORAGE_ARRAY_ID"
         endpoint: $POWERMAX_STORAGE_ARRAY_ENDPOINT_URL
         backupEndpoint: $POWERMAX_STORAGE_ARRAY_BACKUP_ENDPOINT_URL
+      - storageArrayId: "$TARGET_ARRAY_ID"
+        endpoint: $TARGET_UNISPHERE
     managementServers:
       - endpoint: $POWERMAX_MANAGEMENT_SERVERS_ENDPOINT_URL
-  version: v2.7.0
+      - endpoint: $TARGET_UNISPHERE
+  version: v2.10.1
   images:
-    driverRepository: $IMAGE_REPOSITORY
+    # "driver" defines the container image, used for the driver container.
+    driver: dellemc/csi-powermax:v2.10.1
+    csireverseproxy: dellemc/csipowermax-reverseproxy:v2.9.0
+    # CSI sidecars
+    attacher: registry.k8s.io/sig-storage/csi-attacher:v4.5.0
+    provisioner: registry.k8s.io/sig-storage/csi-provisioner:v4.0.0
+    snapshotter: registry.k8s.io/sig-storage/csi-snapshotter:v7.0.1
+    resizer: registry.k8s.io/sig-storage/csi-resizer:v1.10.0
+    registrar: registry.k8s.io/sig-storage/csi-node-driver-registrar:v2.10.0
+    healthmonitor: registry.k8s.io/sig-storage/csi-external-health-monitor-controller:v0.11.0
+    # CSM sidecars
+    replication: dellemc/dell-csi-replicator:v1.8.0
+    authorization: dellemc/csm-authorization-sidecar:v1.10.0
+    migration: dellemc/dell-csi-migrator:v1.3.0
+    noderescan: dellemc/dell-csi-node-rescanner:v1.2.0
   clusterPrefix: $POWERMAX_CLUSTER_PREFIX
   portGroups: "$POWERMAX_PORT_GROUPS"
+  fsGroupPolicy: "$FSGROUP_POLICY"
+  maxPowerMaxVolumesPerNode: $MAX_VOLUMES_PER_NODE
+  enableCHAP: $ISCSI_CHAP_ENABLED
+  transportProtocol: "$NODE_TRANSPORT_PROTOCOL"
+  storageCapacity:
+    enabled: $STORAGE_CAPACITY_ENABLED
   controller:
     controllerCount: $CONTROLLER_COUNT
     volumeNamePrefix: $VOLUME_NAME_PREFIX
@@ -118,6 +154,8 @@ csi-powermax:
   node:
     healthMonitor:
       enabled: $HEALTH_MONITOR_ENABLED
+    topologyControl:
+      enabled: $TOPOLOGY_ENABLED
     nodeSelector: $NODE_POD_NODE_SELECTOR
     tolerations: $NODE_TOLERATIONS
      - key: "node.kubernetes.io/memory-pressure"
@@ -130,20 +168,17 @@ csi-powermax:
        operator: "Exists"
        effect: "NoExecute"
   csireverseproxy:
-    image: dellemc/csipowermax-reverseproxy:v2.6.0
     deployAsSidecar: true
   replication:
     enabled: $REPLICATION_ENABLED
-    image: dellemc/dell-csi-replicator:v1.5.0
   migration:
     enabled: $MIGRATION_ENABLED
-    image: dellemc/dell-csi-migrator:v1.1.1
-    nodeRescanSidecarImage: dellemc/dell-csi-node-rescanner:v1.0.1
   authorization:
     enabled: $AUTHORIZATION_ENABLED
-    sidecarProxyImage: dellemc/csm-authorization-sidecar:v1.7.0
     proxyHost: $AUTHORIZATION_PROXY_HOST
     skipCertificateValidation: $AUTHORIZATION_SKIP_CERTIFICATE_VALIDATION
+  storageCapacity:
+    enabled: $STORAGE_CAPACITY_ENABLED
   vSphere:
     enabled: $VSPHERE_ENABLED
     fcPortGroup: "$VSPHERE_FC_PORT_GROUP"
@@ -155,15 +190,28 @@ csi-powermax:
 ##########################################
 csi-vxflexos:
   enabled: $POWERFLEX_ENABLED
-  version: v2.7.1
+  version: v2.10.1
   images:
-    driverRepository: $IMAGE_REPOSITORY
-    powerflexSdc: dellemc/sdc:3.6.0.6
+    # "driver" defines the container image, used for the driver container.
+    driver: dellemc/csi-vxflexos:v2.10.1
+    # "powerflexSdc" defines the SDC image for init container.
+    powerflexSdc: dellemc/sdc:4.5
+    # CSI sidecars
+    attacher: registry.k8s.io/sig-storage/csi-attacher:v4.5.0
+    provisioner: registry.k8s.io/sig-storage/csi-provisioner:v4.0.0
+    snapshotter: registry.k8s.io/sig-storage/csi-snapshotter:v7.0.1
+    resizer: registry.k8s.io/sig-storage/csi-resizer:v1.10.0
+    registrar: registry.k8s.io/sig-storage/csi-node-driver-registrar:v2.10.0
+    healthmonitor: registry.k8s.io/sig-storage/csi-external-health-monitor-controller:v0.11.0
+    # CSM sidecars
+    replication: dellemc/dell-csi-replicator:v1.8.0
+    vgsnapshotter: dellemc/csi-volumegroup-snapshotter:v1.4.0
+    podmon: dellemc/podmon:v1.9.0
+    authorization: dellemc/csm-authorization-sidecar:v1.10.0
   certSecretCount: $CERT_SECRET_COUNT
   controller:
     replication:
       enabled: $REPLICATION_ENABLED
-      image: dellemc/dell-csi-replicator:v1.5.0
     healthMonitor:
       enabled: $HEALTH_MONITOR_ENABLED
     controllerCount: $CONTROLLER_COUNT
@@ -178,6 +226,11 @@ csi-vxflexos:
     healthMonitor:
       enabled: $HEALTH_MONITOR_ENABLED
     nodeSelector: $NODE_POD_NODE_SELECTOR
+    renameSDC:
+      enabled: $RENAME_SDC_ENABLED
+      sdcPrefix: $SDC_PREFIX
+    approveSDC:
+      enabled: $APPROVE_SDC_ENABLED
     tolerations: $NODE_TOLERATIONS
     # Uncomment if CSM for Resiliency and CSI Driver pods monitor is enabled 
     # - key: "offline.vxflexos.storage.dell.com"
@@ -198,74 +251,82 @@ csi-vxflexos:
     # - key: "isilon.podmon.storage.dell.com"
     #   operator: "Exists"
     #   effect: "NoSchedule"
+  storageCapacity:
+    enabled: $STORAGE_CAPACITY_ENABLED
+  enableQuota: $QUOTA_ENABLED
+  externalAccess:
   monitor:
     enabled: $MONITOR_ENABLED
   vgsnapshotter:
     enabled: $VG_SNAPSHOT_ENABLED
-    image: dellemc/csi-volumegroup-snapshotter:v1.2.0
   podmon:
     enabled: $RESILIENCY_ENABLED
-    image: dellemc/podmon:v1.6.0
-    # controller:
-    #  args:
-    #    - "--csisock=unix:/var/run/csi/csi.sock"
-    #    - "--labelvalue=csi-vxflexos"
-    #    - "--mode=controller"
-    #    - "--skipArrayConnectionValidation=false"
-    #    - "--driver-config-params=/vxflexos-config-params/driver-config-params.yaml"
-    #    - "--driverPodLabelValue=dell-storage"
-    #    - "--ignoreVolumelessPods=false"
-    # node:
-    #   args:
-    #     - "--csisock=unix:/var/lib/kubelet/plugins/vxflexos.emc.dell.com/csi_sock"
-    #     - "--labelvalue=csi-vxflexos"
-    #     - "--mode=node"
-    #     - "--leaderelection=false"
-    #     - "--driver-config-params=/vxflexos-config-params/driver-config-params.yaml"
-    #     - "--driverPodLabelValue=dell-storage"
-    #     - "--ignoreVolumelessPods=false"
+    controller:
+      args:
+        - "--csisock=unix:/var/run/csi/csi.sock"
+        - "--labelvalue=csi-vxflexos"
+        - "--mode=controller"
+        - "--skipArrayConnectionValidation=false"
+        - "--driver-config-params=/vxflexos-config-params/driver-config-params.yaml"
+        - "--driverPodLabelValue=dell-storage"
+        - "--ignoreVolumelessPods=false"
+    node:
+      args:
+        - "--csisock=unix:/var/lib/kubelet/plugins/vxflexos.emc.dell.com/csi_sock"
+        - "--labelvalue=csi-vxflexos"
+        - "--mode=node"
+        - "--leaderelection=false"
+        - "--driver-config-params=/vxflexos-config-params/driver-config-params.yaml"
+        - "--driverPodLabelValue=dell-storage"
+        - "--ignoreVolumelessPods=false"
   authorization:
     enabled: $AUTHORIZATION_ENABLED
-    sidecarProxyImage: dellemc/csm-authorization-sidecar:v1.7.0
     proxyHost: $AUTHORIZATION_PROXY_HOST
     skipCertificateValidation: $AUTHORIZATION_SKIP_CERTIFICATE_VALIDATION
+  maxPowerflexVolumesPerNode: $MAX_VOLUMES_PER_NODE
 
 ## K8S/CSI-PowerScale ATTRIBUTES
 ##########################################
 csi-isilon:
   enabled: $POWERSCALE_ENABLED
-  version: "v2.7.0"
+  version: "v2.10.1"
+  images:
+    # "driver" defines the container image, used for the driver container.
+    driver: dellemc/csi-isilon:v2.10.1
+    # CSI sidecars
+    attacher: registry.k8s.io/sig-storage/csi-attacher:v4.5.0
+    provisioner: registry.k8s.io/sig-storage/csi-provisioner:v4.0.0
+    snapshotter: registry.k8s.io/sig-storage/csi-snapshotter:v7.0.1
+    resizer: registry.k8s.io/sig-storage/csi-resizer:v1.10.0
+    registrar: registry.k8s.io/sig-storage/csi-node-driver-registrar:v2.10.0
+    healthmonitor: registry.k8s.io/sig-storage/csi-external-health-monitor-controller:v0.11.0
+    # CSM sidecars
+    replication: dellemc/dell-csi-replicator:v1.8.0
+    podmon: dellemc/podmon:v1.9.0
+    authorization: dellemc/csm-authorization-sidecar:v1.10.0
+    metadataretriever: dellemc/csi-metadata-retriever:v1.4.0
+    encryption: dellemc/csm-encryption:v0.3.0
+
   certSecretCount: $CERT_SECRET_COUNT
-
   allowedNetworks: []
- 
   verbose: 1
-
   enableCustomTopology: false
-
   fsGroupPolicy: $FSGROUP_POLICY
-
   storageCapacity:
     enabled: $STORAGE_CAPACITY_ENABLED
-
+  maxIsilonVolumesPerNode: $MAX_VOLUMES_PER_NODE
   controller:
     controllerCount: $CONTROLLER_COUNT
     volumeNamePrefix: $VOLUME_NAME_PREFIX
-
     replication:
       enabled: $REPLICATION_ENABLED
-      image: dellemc/dell-csi-replicator:v1.5.0
-
     snapshot:
       enabled: $SNAPSHOT_ENABLED
       snapNamePrefix: $SNAP_NAME_PREFIX
-
     resizer:
       enabled: $RESIZER_ENABLED
-
     healthMonitor:
       enabled: $HEALTH_MONITOR_ENABLED
-
     nodeSelector: $CONTROLLER_POD_NODE_SELECTOR
     tolerations: $CONTROLLER_TOLERATIONS
   node:
@@ -302,51 +363,55 @@ csi-isilon:
 
     healthMonitor:
       enabled: $HEALTH_MONITOR_ENABLED
-
   authorization:
     enabled: $AUTHORIZATION_ENABLED
-    sidecarProxyImage: dellemc/csm-authorization-sidecar:v1.7.0
     proxyHost: $AUTHORIZATION_PROXY_HOST
     skipCertificateValidation: $AUTHORIZATION_SKIP_CERTIFICATE_VALIDATION
-
   # Enable this feature only after contact support for additional information
   podmon:
     enabled: $RESILIENCY_ENABLED
-    image: dellemc/podmon:v1.6.0
-    #controller:
-    #  args:
-    #    - "--csisock=unix:/var/run/csi/csi.sock"
-    #    - "--labelvalue=csi-isilon"
-    #    - "--arrayConnectivityPollRate=60"
-    #    - "--driverPath=csi-isilon.dellemc.com"
-    #    - "--mode=controller"
-    #    - "--skipArrayConnectionValidation=false"
-    #    - "--driver-config-params=/csi-isilon-config-params/driver-config-params.yaml"
-    #    - "--driverPodLabelValue=dell-storage"
-    #    - "--ignoreVolumelessPods=false"
+    controller:
+      args:
+        - "--csisock=unix:/var/run/csi/csi.sock"
+        - "--labelvalue=csi-isilon"
+        - "--arrayConnectivityPollRate=60"
+        - "--driverPath=csi-isilon.dellemc.com"
+        - "--mode=controller"
+        - "--skipArrayConnectionValidation=false"
+        - "--driver-config-params=/csi-isilon-config-params/driver-config-params.yaml"
+        - "--driverPodLabelValue=dell-storage"
+        - "--ignoreVolumelessPods=false"
+    node:
+      args:
+        - "--csisock=unix:/var/lib/kubelet/plugins/csi-isilon/csi_sock"
+        - "--labelvalue=csi-isilon"
+        - "--arrayConnectivityPollRate=60"
+        - "--driverPath=csi-isilon.dellemc.com"
+        - "--mode=node"
+        - "--leaderelection=false"
+        - "--driver-config-params=/csi-isilon-config-params/driver-config-params.yaml"
+        - "--driverPodLabelValue=dell-storage"
+        - "--ignoreVolumelessPods=false"
 
-    #node:
-    #  args:
-    #    - "--csisock=unix:/var/lib/kubelet/plugins/csi-isilon/csi_sock"
-    #    - "--labelvalue=csi-isilon"
-    #    - "--arrayConnectivityPollRate=60"
-    #    - "--driverPath=csi-isilon.dellemc.com"
-    #    - "--mode=node"
-    #    - "--leaderelection=false"
-    #    - "--driver-config-params=/csi-isilon-config-params/driver-config-params.yaml"
-    #    - "--driverPodLabelValue=dell-storage"
-    #    - "--ignoreVolumelessPods=false"
-
-  images:
-    driverRepository: $IMAGE_REPOSITORY
+  podmonAPIPort: 8083
 
 ## K8S/CSI-Unity ATTRIBUTES
 ##########################################
 csi-unity:
   enabled: $UNITY_ENABLED
-  version: v2.7.0
+  version: v2.10.1
   images:
-    driverRepository: $IMAGE_REPOSITORY
+    # "driver" defines the container image, used for the driver container.
+    driver: dellemc/csi-unity:v2.10.1
+    # CSI sidecars
+    attacher: registry.k8s.io/sig-storage/csi-attacher:v4.5.0
+    provisioner: registry.k8s.io/sig-storage/csi-provisioner:v4.0.0
+    snapshotter: registry.k8s.io/sig-storage/csi-snapshotter:v7.0.1
+    resizer: registry.k8s.io/sig-storage/csi-resizer:v1.10.0
+    registrar: registry.k8s.io/sig-storage/csi-node-driver-registrar:v2.10.0
+    healthmonitor: registry.k8s.io/sig-storage/csi-external-health-monitor-controller:v0.11.0
+    # CSM sidecars
+    podmon: dellemc/podmon:v1.9.0
   certSecretCount: $CERT_SECRET_COUNT
   fsGroupPolicy: $FSGROUP_POLICY
   controller:
@@ -394,9 +459,11 @@ csi-unity:
     #  - key: "isilon.podmon.storage.dell.com"
     #    operator: "Exists"
     #    effect: "NoSchedule"
+  storageCapacity:
+    enabled: $STORAGE_CAPACITY_ENABLED
+  maxUnityVolumesPerNode: $MAX_VOLUMES_PER_NODE
   podmon:
     enabled: $RESILIENCY_ENABLED
-    image: dellemc/podmon:v1.6.0
     controller:
       args:
         - "--csisock=unix:/var/run/csi/csi.sock"
@@ -429,7 +496,7 @@ karavi-observability:
   enabled: $OBSERVABILITY_ENABLED
   karaviMetricsPowerstore:
     enabled: $POWERSTORE_OBSERVABILITY_METRICS_ENABLED
-  karaviMetricsPowerMax:
+  karaviMetricsPowermax:
     enabled: $POWERMAX_OBSERVABILITY_METRICS_ENABLED
   karaviMetricsPowerflex:
     enabled: $POWERFLEX_OBSERVABILITY_METRICS_ENABLED

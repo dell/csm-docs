@@ -477,10 +477,8 @@ Prerequisites
     ```
 
 ## Volume Health Monitoring
-CSI Driver for Unity XT supports volume health monitoring. This is an alpha feature and requires feature gate to be enabled by setting command line arguments 
-```bash
---feature-gates="...,CSIVolumeHealth=true"
-```  
+CSI Driver for Unity XT supports volume health monitoring. Alpha feature gate `CSIVolumeHealth` needs to be enabled for the node side monitoring to take effect. For more information, please refer to the [Kubernetes GitHub repository](https://github.com/kubernetes-csi/external-health-monitor/blob/master/README.md).
+
 This feature:
 1. Reports on the condition of the underlying volumes via events when a volume condition is abnormal. We can watch the events on the describe of pvc 
     ```bash
