@@ -25,7 +25,6 @@ The CSI Drivers by Dell implement an interface between [CSI](https://kubernetes-
 | Delete Snapshot          | yes for LUN<br>no for NFS | yes       | yes       | yes        | yes        |
 | [Access Mode](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#access-modes) for [volumeMode: Filesystem](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#volume-mode)| RWO, RWOP<br><br>ROX, RWX **with NFS ONLY**| RWO, ROX, RWOP<br><br>RWX  **with NFS ONLY** | RWO, ROX, RWOP<br><br>RWX  **with NFS ONLY** | RWO, RWX, ROX, RWOP | RWO, RWOP<br><br>ROX, RWX **with NFS ONLY** |
 | Access Mode for `volumeMode: Block`| RWO, RWX, ROX, RWOP | RWO, RWX, ROX, RWOP | RWO, RWX | Not Supported | RWO, RWX, ROX, RWOP |
-| Access Mode for `volumeMode: Block`| RWO, RWX, ROX, RWOP | RWO, RWX, ROX, RWOP | RWO, RWX | Not Supported | RWO, RWX, ROX, RWOP |
 | CSI Volume Cloning       | yes for LUN<br>no for NFS       | yes       | yes       | yes        | yes        |
 | CSI Raw Block Volume     | yes      | yes       | yes       | no         | yes        |
 | CSI Ephemeral Volume     | no       | yes       | yes       | yes        | yes        |
