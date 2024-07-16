@@ -257,7 +257,7 @@ describe("GIVEN onTopologyChange function", () => {
 		document.body.innerHTML = `
             <input type="checkbox" id="topology">
             <div id="topology-note-wrapper" style="display:">
-			<div id="observability-operator-topology-wrapper" style="display:">
+            <div id="observability-operator-topology-wrapper" style="display:">
         `;
 		onCertManagerChange("Temp topology note");
 		expect($("div#topology-note-wrapper").css("display")).toEqual("block");
@@ -268,7 +268,7 @@ describe("GIVEN onTopologyChange function", () => {
 		document.body.innerHTML = `
             <input type="checkbox" id="topology" checked>
             <div id="topology-note-wrapper" style="display:none">
-			<div id="observability-operator-topology-wrapper" style="display:none">
+            <div id="observability-operator-topology-wrapper" style="display:none">
         `;
 		onCertManagerChange("Temp topology note");
 		expect($("div#topology-note-wrapper").css("display")).toEqual("none");
