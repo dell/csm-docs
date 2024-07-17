@@ -27,11 +27,8 @@ You can upgrade the CSI Driver for Dell PowerScale using Helm or Dell CSM Operat
 4. Upgrade the CSI Driver for Dell PowerScale using following command:
 
     ```bash
-    ./csi-install.sh --namespace isilon --values ./my-isilon-settings.yaml --helm-charts-version <version> --upgrade
+    ./csi-install.sh --namespace isilon --values ./my-isilon-settings.yaml --upgrade
     ```
-
-*NOTE:*
-- The parameter `--helm-charts-version` is optional and if you do not specify the flag, by default the `csi-install.sh` script will clone the version of the helm chart that is specified in the driver's [csi-install.sh](https://github.com/dell/csi-powerscale/blob/main/dell-csi-helm-installer/csi-install.sh#L16) file. If you wish to install the driver using a different version of the helm chart, you need to include this flag. Also, remember to delete the `helm-charts` repository present in the `csi-powerscale` directory if it was cloned before.
 
 ## Upgrade using Dell CSM Operator
 
