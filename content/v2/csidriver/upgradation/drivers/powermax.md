@@ -24,10 +24,11 @@ You can upgrade CSI Driver for Dell PowerMax using Helm or Dell CSI Operator.
 3. Run the `csi-install` script with the option _\-\-upgrade_ by running: 
    ```bash
 
-   cd ../dell-csi-helm-installer && ./csi-install.sh --namespace powermax --values ./my-powermax-settings.yaml --upgrade
+   cd ../dell-csi-helm-installer && ./csi-install.sh --namespace powermax --values ./my-powermax-settings.yaml --upgrade --upgrade --helm-charts-version
    ```
 
 *NOTE:*
+- The parameter `--helm-charts-version` is optional and if you do not specify the flag, by default the `csi-install.sh` script will clone the version of the helm chart that is specified in the driver's [csi-install.sh](https://github.com/dell/csi-powermax/blob/main/dell-csi-helm-installer/csi-install.sh#L52) file. If you wish to install the driver using a different version of the helm chart, you need to include this flag. Also, remember to delete the `helm-charts` repository present in the `csi-powermax` directory if it was cloned before.
 - If you are upgrading from a driver version that was installed using Helm v2, ensure that you install Helm3 before installing the driver.
 - To update any installation parameter after the driver has been installed, change the `my-powermax-settings.yaml` file and run the install script with the option _\-\-upgrade_, for example: 
    ```bash

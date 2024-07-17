@@ -15,6 +15,7 @@ The CSI Driver for Dell PowerMax can create PVC with different storage protocols
 * direct Fiber Channel
 * direct iSCSI
 * NFS
+* NVMeTCP
 * Fiber Channel via VMware Raw Device Mapping
 In most cases, you will use one protocol only; therefore you should comply with the according prerequisites and not the others.
 
@@ -32,6 +33,27 @@ CSI Driver for Dell PowerMax supports Fibre Channel communication. Ensure that t
 - Zoning of the Host Bus Adapters (HBAs) to the Fibre Channel port director must be completed.
 - Ensure that the HBA WWNs (initiators) appear on the list of initiators that are logged into the array.
 - If the number of volumes that will be published to nodes is high, then configure the maximum number of LUNs for your HBAs on each node. See the appropriate HBA document to configure the maximum number of LUNs.
+
+### NVMeTCP requirements
+If you want to use the protocol, set up the NVMe initiators as follows:
+- Setup on Array <br>
+Once the NVMe endpoint is created on the array, follow the following step to update endpoint name to adhere with CSI driver.
+   - Perform a  ```nvme discover --transport=tcp --traddr=<InterfaceAdd> --trsvcid=4420```. <InterfaceAdd> is the placeholder for actual IP address of NVMe Endpoint.
+   - Fetch the _subnqn_, for e.g.,  _nqn.1988-11.com.dell:PowerMax_2500:00:000120001100_, this will be used as the subnqn holder while updating NVMe endpoint name.
+   - Update the NVMe endpoint name as ```<subnqn>:<dir><port>>```. Here is an example how it should look, _nqn.1988-11.com.dell:PowerMax_2500:00:000120001100:OR1C000_
+- Setup on Host
+   - The driver requires NVMe management command-line interface (nvme-cli) to use configure, edit, view or start the NVMe client and target. The nvme-cli utility provides a command-line and interactive shell option. The NVMe CLI tool is installed in the host using the below command.
+```bash
+sudo apt install nvme-cli
+```
+**Requirements for NVMeTCP**
+- Modules including the nvme, nvme_core, nvme_fabrics, and nvme_tcp are required for using NVMe over Fabrics using TCP. Load the NVMe and NVMe-OF Modules using the below commands:
+```bash
+modprobe nvme
+modprobe nvme_tcp
+```
+- The NVMe modules may not be available after a node reboot. Loading the modules at startup is recommended.
+- Generate and update the _/etc/nvme/hostnqn_ with hostNQN details.
 
 ### iSCSI Requirements
 

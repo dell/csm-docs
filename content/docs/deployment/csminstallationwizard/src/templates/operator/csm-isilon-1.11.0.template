@@ -16,16 +16,16 @@ spec:
       #   true: enable storage capacity tracking
       #   false: disable storage capacity tracking
       storageCapacity: $STORAGE_CAPACITY_ENABLED
-    # Config version for CSI PowerScale v2.7.0 driver
-    configVersion: v2.7.0
+    # Config version for CSI PowerScale v2.11.0 driver
+    configVersion: v2.11.0
     authSecret: isilon-creds
     replicas: $CONTROLLER_COUNT
     dnsPolicy: ClusterFirstWithHostNet
     # Uninstall CSI Driver and/or modules when CR is deleted
     forceRemoveDriver: true
     common:
-      # Image for CSI PowerScale driver v2.7.0
-      image: "dellemc/csi-isilon:v2.7.0"
+      # Image for CSI PowerScale driver v2.11.0
+      image: "dellemc/csi-isilon:v2.11.0"
       imagePullPolicy: IfNotPresent
       envs:
         # X_CSI_VERBOSE: Indicates what content of the OneFS REST API message should be logged in debug level logs
@@ -165,11 +165,11 @@ spec:
       # Leave as blank to consider all nodes
       # Allowed values: map of key-value pairs
       # Default value: None
-      nodeSelector:$CONTROLLER_POD_NODE_SELECTOR
+      nodeSelector: $CONTROLLER_POD_NODE_SELECTOR
 
       # tolerations: Define tolerations for the controller deployment, if required.
       # Default value: None
-      tolerations:$CONTROLLER_TOLERATIONS
+      tolerations: $CONTROLLER_TOLERATIONS
 
     node:
       envs:
@@ -212,11 +212,11 @@ spec:
       # Leave as blank to consider all nodes
       # Allowed values: map of key-value pairs
       # Default value: None
-      nodeSelector:$NODE_POD_NODE_SELECTOR
+      nodeSelector: $NODE_POD_NODE_SELECTOR
 
       # tolerations: Define tolerations for the node daemonset, if required.
       # Default value: None
-      tolerations:$NODE_TOLERATIONS
+      tolerations: $NODE_TOLERATIONS
       # - key: "node.kubernetes.io/memory-pressure"
       #   operator: "Exists"
       #   effect: "NoExecute"
@@ -245,10 +245,10 @@ spec:
     - name: authorization
       # enable: Enable/Disable csm-authorization
       enabled: $AUTHORIZATION_ENABLED
-      configVersion: v1.7.0
+      configVersion: v1.11.0
       components:
       - name: karavi-authorization-proxy
-        image: dellemc/csm-authorization-sidecar:v1.7.0
+        image: dellemc/csm-authorization-sidecar:v1.11.0
         envs:
           # proxyHost: hostname of the csm-authorization server
           - name: "PROXY_HOST"
@@ -267,13 +267,13 @@ spec:
       #   false: disable replication feature(do not install dell-csi-replicator sidecar)
       # Default value: false
       enabled: $REPLICATION_ENABLED
-      configVersion: v1.5.0
+      configVersion: v1.9.0
       components:
       - name: dell-csi-replicator
         # image: Image to use for dell-csi-replicator. This shouldn't be changed
         # Allowed values: string
         # Default value: None
-        image: dellemc/dell-csi-replicator:v1.5.0
+        image: dellemc/dell-csi-replicator:v1.9.0
         envs:
           # replicationPrefix: prefix to prepend to storage classes parameters
           # Allowed values: string
@@ -289,7 +289,7 @@ spec:
       - name: dell-replication-controller-manager
         # image: Defines controller image. This shouldn't be changed
         # Allowed values: string
-        image: dellemc/dell-replication-controller:v1.5.0
+        image: dellemc/dell-replication-controller:v1.9.0
         envs:
           # TARGET_CLUSTERS_IDS: comma separated list of cluster IDs of the targets clusters. DO NOT include the source(wherever CSM Operator is deployed) cluster ID
           # Set the value to "self" in case of stretched/single cluster configuration
@@ -317,23 +317,18 @@ spec:
           - name: "RETRY_INTERVAL_MAX"
             value: "5m"
 
-      - name: dell-replication-controller-init
-        # image: Defines replication init container image. This shouldn't be changed
-        # Allowed values: string
-        image: dellemc/dell-replication-init:v1.0.1
-
     # observability: allows to configure observability
     - name: observability
       # enabled: Enable/Disable observability
       enabled: $OBSERVABILITY_OPERATOR_ENABLED
-      configVersion: v1.5.0
+      configVersion: v1.9.0
       components:
         - name: topology
           # enabled: Enable/Disable topology
           enabled: $OBSERVABILITY_OPERATOR_TOPOLOGY
           # image: Defines karavi-topology image. This shouldn't be changed
           # Allowed values: string
-          image: dellemc/csm-topology:v1.5.0
+          image: dellemc/csm-topology:v1.9.0
           envs:
             # topology log level
             # Valid values: TRACE, DEBUG, INFO, WARN, ERROR, FATAL, PANIC
@@ -367,7 +362,7 @@ spec:
           enabled: $OBSERVABILITY_OPERATOR_METRICS
           # image: Defines PowerScale metrics image. This shouldn't be changed
           # Allowed values: string
-          image: dellemc/csm-metrics-powerscale:v1.2.0
+          image: dellemc/csm-metrics-powerscale:v1.6.0
           envs:
             # POWERSCALE_MAX_CONCURRENT_QUERIES: set the default max concurrent queries to PowerScale
             # Allowed values: int
@@ -436,10 +431,10 @@ spec:
       #   false: disable Resiliency feature(do not deploy podmon sidecar)
       # Default value: false
       enabled: $OPERATOR_RESILIENCY_ENABLED
-      configVersion: v1.6.0
+      configVersion: v1.10.0
       components:
         - name: podmon-controller
-          image: dellemc/podmon:v1.6.0
+          image: dellemc/podmon:v1.10.0
           imagePullPolicy: IfNotPresent
           args:
             - "--labelvalue=$LABEL_VALUE"
@@ -454,7 +449,7 @@ spec:
             - "--driverPath=csi-isilon.dellemc.com"
             - "--driver-config-params=/csi-isilon-config-params/driver-config-params.yaml"
         - name: podmon-node
-          image: dellemc/podmon:v1.6.0
+          image: dellemc/podmon:v1.10.0
           imagePullPolicy: IfNotPresent
           envs:
             # podmonAPIPort: Defines the port to be used within the kubernetes cluster

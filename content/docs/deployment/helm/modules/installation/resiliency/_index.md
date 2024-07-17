@@ -16,6 +16,8 @@ For information on the PowerScale CSI driver, see [PowerScale CSI Driver](https:
 
 For information on the PowerStore CSI driver, see [PowerStore CSI Driver](https://github.com/dell/csi-powerstore).
 
+For information on the PowerStore CSI driver, see [PowerMax CSI Driver](https://github.com/dell/csi-powermax).
+
 Configure all the helm chart parameters described below before installing the drivers.
 
 ## Helm Chart Installation
@@ -190,6 +192,38 @@ podmon:
       - "--mode=node"
       - "--leaderelection=false"
       - "--driver-config-params=/powerstore-config-params/driver-config-params.yaml"
+      - "--driverPodLabelValue=dell-storage"
+      - "--ignoreVolumelessPods=false"
+```
+
+## PowerMax Specific Recommendations
+
+Here is a typical installation used for testing:
+
+```yaml
+podmon:
+  enabled: false
+  controller:
+    args:
+      - "--csisock=unix:/var/run/csi/csi.sock"
+      - "--labelvalue=csi-powermax"
+      - "--arrayConnectivityPollRate=60"
+      - "--driverPath=csi-powermax.dellemc.com"
+      - "--mode=controller"
+      - "--skipArrayConnectionValidation=false"
+      - "--driver-config-params=/powermax-config-params/driver-config-params.yaml"
+      - "--driverPodLabelValue=dell-storage"
+      - "--ignoreVolumelessPods=false"
+
+  node:
+    args:
+      - "--csisock=unix:/var/lib/kubelet/plugins/powermax.emc.dell.com/csi_sock"
+      - "--labelvalue=csi-powermax"
+      - "--arrayConnectivityPollRate=60"
+      - "--driverPath=csi-powermax.dellemc.com"
+      - "--mode=node"
+      - "--leaderelection=false"
+      - "--driver-config-params=/powermax-config-params/driver-config-params.yaml"
       - "--driverPodLabelValue=dell-storage"
       - "--ignoreVolumelessPods=false"
 ```

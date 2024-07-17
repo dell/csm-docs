@@ -31,8 +31,8 @@ spec:
       #   true: enable storage capacity tracking
       #   false: disable storage capacity tracking
       storageCapacity: $STORAGE_CAPACITY_ENABLED
-    # Config version for CSI PowerStore v2.7.0 driver
-    configVersion: v2.7.0
+    # Config version for CSI PowerStore v2.11.0 driver
+    configVersion: v2.11.0
     # authSecret: This is the secret used to validate the default PowerStore secret used for installation
     # Allowed values: <metadataName specified in the Manifest>-config
     # For example: If the metadataName is set to powerstore, authSecret value should be set to powerstore-config
@@ -43,8 +43,8 @@ spec:
     forceUpdate: false
     forceRemoveDriver: true
     common:
-      # Image for CSI PowerStore driver v2.7.0
-      image: "dellemc/csi-powerstore:v2.7.0"
+      # Image for CSI PowerStore driver v2.11.0
+      image: "dellemc/csi-powerstore:v2.11.0"
       imagePullPolicy: IfNotPresent
       envs:
         - name: X_CSI_POWERSTORE_NODE_NAME_PREFIX
@@ -109,12 +109,12 @@ spec:
       # Leave as blank to consider all nodes
       # Allowed values: map of key-value pairs
       # Default value: None
-      nodeSelector:$CONTROLLER_POD_NODE_SELECTOR
+      nodeSelector: $CONTROLLER_POD_NODE_SELECTOR
 
       # tolerations: Define tolerations for the controllers, if required.
       # Leave as blank to install controller on worker nodes
       # Default value: None
-      tolerations:$CONTROLLER_TOLERATIONS
+      tolerations: $CONTROLLER_TOLERATIONS
 
     node:
       envs:
@@ -129,6 +129,11 @@ spec:
         # Default value: false
         - name: X_CSI_HEALTH_MONITOR_ENABLED
           value: "$HEALTH_MONITOR_ENABLED"
+        # X_CSI_POWERSTORE_MAX_VOLUMES_PER_NODE: Defines the maximum PowerStore volumes that can be created per node
+        # Allowed values: Any value greater than or equal to 0
+        # Default value: "0"
+        - name: X_CSI_POWERSTORE_MAX_VOLUMES_PER_NODE
+          value: "$MAX_VOLUMES_PER_NODE"
 
       # nodeSelector: Define node selection constraints for node pods.
       # For the pod to be eligible to run on a node, the node must have each
@@ -136,13 +141,13 @@ spec:
       # Leave as blank to consider all nodes
       # Allowed values: map of key-value pairs
       # Default value: None
-      nodeSelector:$NODE_POD_NODE_SELECTOR
+      nodeSelector: $NODE_POD_NODE_SELECTOR
 
       # tolerations: Define tolerations for the controllers, if required.
       # Leave as blank to install controller on worker nodes
       # Default value: None
-      tolerations:$NODE_TOLERATIONS
-
+      tolerations: $NODE_TOLERATIONS
+  
   modules:
     - name: resiliency
       # enabled: Enable/Disable Resiliency feature
@@ -151,10 +156,10 @@ spec:
       #   false: disable Resiliency feature(do not deploy podmon sidecar)
       # Default value: false
       enabled: $OPERATOR_RESILIENCY_ENABLED
-      configVersion: v1.6.0
+      configVersion: v1.10.0
       components:
         - name: podmon-controller
-          image: dellemc/podmon:v1.6.0
+          image: dellemc/podmon:v1.10.0
           imagePullPolicy: IfNotPresent
           args:
             - "--labelvalue=$LABEL_VALUE"
@@ -169,7 +174,7 @@ spec:
             - "--driver-config-params=/powerstore-config-params/driver-config-params.yaml"
             - "--driverPath=csi-powerstore.dellemc.com"
         - name: podmon-node
-          image: dellemc/podmon:v1.6.0
+          image: dellemc/podmon:v1.10.0
           imagePullPolicy: IfNotPresent
           envs:
             # podmonAPIPort: Defines the port to be used within the kubernetes cluster

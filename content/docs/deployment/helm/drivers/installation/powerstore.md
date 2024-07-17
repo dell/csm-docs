@@ -183,7 +183,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
 ## Install the Driver
 
 **Steps**
-1. Run `git clone -b v2.10.1 https://github.com/dell/csi-powerstore.git` to clone the git repository.
+1. Run `git clone -b v2.11.0 https://github.com/dell/csi-powerstore.git` to clone the git repository.
 2. Ensure that you have created namespace where you want to install the driver. You can run `kubectl create namespace csi-powerstore` to create a new one. "csi-powerstore" is just an example. You can choose any name for the namespace.
    But make sure to align to the same namespace during the whole installation.
 3. Edit `samples/secret/secret.yaml` file and configure connection information for your PowerStore arrays changing following parameters:
@@ -210,7 +210,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
     > If you do not specify `arrayID` parameter in the storage class then the array that was specified as the default would be used for provisioning volumes.
 6. Download the default values.yaml file 
    ```bash
-   cd dell-csi-helm-installer && wget -O my-powerstore-settings.yaml https://github.com/dell/helm-charts/raw/csi-powerstore-2.10.1/charts/csi-powerstore/values.yaml
+   cd dell-csi-helm-installer && wget -O my-powerstore-settings.yaml https://github.com/dell/helm-charts/raw/csi-powerstore-2.11.0/charts/csi-powerstore/values.yaml
    ```
 7. Edit the newly created values file and provide values for the following parameters `vi my-powerstore-settings.yaml`:
 
@@ -249,11 +249,12 @@ CRDs should be configured during replication prepare stage with repctl as descri
 
 8. Install the driver using `csi-install.sh` bash script by running 
    ```bash
-   ./csi-install.sh --namespace csi-powerstore --values ./my-powerstore-settings.yaml
+   ./csi-install.sh --namespace csi-powerstore --values ./my-powerstore-settings.yaml --helm-charts-version <version>
    ``` 
    - After that the driver should be installed, you can check the condition of driver pods by running `kubectl get all -n csi-powerstore` 
 
 *NOTE:* 
+- The parameter `--helm-charts-version` is optional and if you do not specify the flag, by default the `csi-install.sh` script will clone the version of the helm chart that is specified in the driver's [csi-install.sh](https://github.com/dell/csi-powerstore/blob/main/dell-csi-helm-installer/csi-install.sh#L13) file. If you wish to install the driver using a different version of the helm chart, you need to include this flag. Also, remember to delete the `helm-charts` repository present in the `csi-powerstore` directory if it was cloned before.
 - For detailed instructions on how to run the install scripts, refer to the readme document in the dell-csi-helm-installer folder.
 - By default, the driver scans available SCSI adapters and tries to register them with the storage array under the SCSI hostname using `node.nodeNamePrefix` and the ID read from the file pointed to by `node.nodeIDPath`. If an adapter is already registered with the storage under a different hostname, the adapter is not used by the driver.
 - A hostname the driver uses for registration of adapters is in the form `<nodeNamePrefix>-<nodeID>-<nodeIP>`. By default, these are csi-node and the machine ID read from the file `/etc/machine-id`. 

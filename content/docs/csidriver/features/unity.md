@@ -711,3 +711,16 @@ data:
     TENANT_NAME: ""
 ```
 >Note: csi-unity supports Tenancy in multi-array setup, provided the TenantName is the same across Unity XT instances.
+
+## Support custom networks for NFS I/O traffic
+
+When `allowedNetworks` is specified for using custom networks to handle NFS traffic, and a user already
+has workloads scheduled, there is a possibility that it might lead to backward compatibility issues. For example, ControllerUnPublish might not be able to completely remove clients from the NFS exports of previously created pods.
+
+Also, the previous workload will still be using the default network and not custom networks. For previous workloads to use custom networks, the recreation of pods is required.
+
+When csi-unity driver creates an NFS export, the traffic flows through the client specified in the export. By default, the client is the network interface for Kubernetes
+communication (same IP/fqdn as k8s node) by default.
+
+For a cluster with multiple network interfaces and if a user wants to segregate k8s traffic from NFS traffic; you can use the `allowedNetworks` option.
+`allowedNetworks` takes CIDR addresses as a parameter to match the IPs to be picked up by the driver to allow and route NFS traffic.
