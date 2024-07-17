@@ -1,0 +1,1108 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Dell Technologies – Authorization - v1.x GA</title>
+    <link>https://dell.github.io/csm-docs/docs/authorization/v1.x-ga/</link>
+    <description>Recent content in Authorization - v1.x GA on Dell Technologies</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    
+	  <atom:link href="https://dell.github.io/csm-docs/docs/authorization/v1.x-ga/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+    <item>
+      <title>Docs: Design</title>
+      <link>https://dell.github.io/csm-docs/docs/authorization/v1.x-ga/design/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dell.github.io/csm-docs/docs/authorization/v1.x-ga/design/</guid>
+      <description>
+        
+        
+        &lt;p&gt;Container Storage Modules (CSM) for Authorization is designed as a service mesh solution and consists of many internal components that work together in concert to achieve its overall functionality.&lt;/p&gt;
+&lt;p&gt;This document provides an overview of the major components, including how they fit together and pointers to implementation details.&lt;/p&gt;
+&lt;p&gt;If you are a developer who is new to CSM for Authorization and want to build a mental map of how it works, you&amp;rsquo;re in the right place.&lt;/p&gt;
+&lt;h2 id=&#34;terminology&#34;&gt;Terminology&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Service Mesh&lt;/strong&gt; - An infrastructure layer consisting of proxies that intercept and route requests between existing services.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;CSI&lt;/strong&gt; - Acronym for the Container Storage Interface.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Proxy (L7)&lt;/strong&gt; - A gateway between networked services that inspects request traffic.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Sidecar Proxy&lt;/strong&gt; - A service mesh proxy that runs alongside existing services, rather than within them.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Pod&lt;/strong&gt; - A Kubernetes abstraction for a set of related containers that are to be considered as one unit.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Tenant&lt;/strong&gt; - A named persona who owns a Kubernetes cluster and is considered the &amp;ldquo;client-side&amp;rdquo; user.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Storage Administrator&lt;/strong&gt; - A named persona who owns a storage array and is considered the admin user.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;birds-eye-view&#34;&gt;Bird&amp;rsquo;s Eye View&lt;/h2&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;+-----------------------------------+                                                                                 
+|   Kubernetes                      |                                                                                 
+|                                   |                                                                                 
+|  +---------+         +---------+  |            +---------------+                                            
+|  | CSI     |         | Sidecar |  |            | CSM           |              +---------+        
+|  | Driver  |---------&amp;gt; Proxy   |---------------&amp;gt; Authorization |--------------&amp;gt; Storage |                              
+|  +---------+         +---------+  |            | Server        |              | Array   |                              
+|                                   |            +---------------+              +---------+                              
++-----------------------------------+                  ^                                                              
+                                                       |                                                              
+                                                       |                                                              
+                                                       |                                                              
+                                                 +------------+                                                       
+                                                 |  karavictl |                                                       
+                                                 |  CLI       |                                                       
+                                                 +------------+                                                 
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;NOTE:&lt;/strong&gt; Arrows indicate request or connection initiation, not necessarily data flow direction.&lt;/p&gt;
+&lt;p&gt;The sections below explain each component in the diagram.&lt;/p&gt;
+&lt;h3 id=&#34;kubernetes&#34;&gt;Kubernetes&lt;/h3&gt;
+&lt;p&gt;The architecture assumes a Kubernetes cluster that intends to offer external storage to applications hosted therein.
+The mechanism for managing this storage would utilize a CSI Driver.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Architecture Invariant&lt;/strong&gt;: We assume there may be many Kubernetes clusters, potentially containing multiple CSI Drivers each with their own Sidecar Proxy.&lt;/p&gt;
+&lt;h3 id=&#34;csi-driver&#34;&gt;CSI Driver&lt;/h3&gt;
+&lt;p&gt;A CSI Driver supports the Container Service Interface (CSI) specification. Dell provides customers with CSI Drivers for its various storage arrays.
+CSM for Authorization intends to support a majority, if not all, of these drivers.&lt;/p&gt;
+&lt;p&gt;A CSI Driver will typically be configured to communicate directly to its intended storage array and as such will be limited in using only the authentication
+methods supported by the Storage Array itself, e.g. Basic authentication over TLS.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Architecture Invariant&lt;/strong&gt;: We try to avoid having to make any code changes to the CSI Driver when adding support for it. Any CSI Driver should ideally not be aware that it is communicating to the Sidecar Proxy.&lt;/p&gt;
+&lt;h3 id=&#34;sidecar-proxy&#34;&gt;Sidecar Proxy&lt;/h3&gt;
+&lt;p&gt;The CSM for Authorization Sidecar Proxy is deployed as a sidecar in the CSI Driver&amp;rsquo;s Pod. It acts as a proxy and forwards all requests to a
+CSM Authorization Server.&lt;/p&gt;
+&lt;p&gt;The &lt;a href=&#34;#csi-driver&#34;&gt;CSI Driver section&lt;/a&gt; noted the limitation of a CSI Driver using Storage Array supported authentication methods only. By nature of being a proxy, the CSM for Authorization
+Sidecar Proxy is able to override the Authorization HTTP header for outbound requests to use Bearer tokens. Such tokens are managed by CSM for Authorization as will
+be described later in this document.&lt;/p&gt;
+&lt;h3 id=&#34;csm-for-authorization-server&#34;&gt;CSM for Authorization Server&lt;/h3&gt;
+&lt;p&gt;The CSM for Authorization Server is, at its core, a Layer 7 proxy for intercepting traffic between a CSI Driver and a Storage Array.&lt;/p&gt;
+&lt;p&gt;Inbound requests are expected to originate from the CSM for Authorization Sidecar Proxy, for the following reasons:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Processing a set of agreed upon HTTP headers (added by the CSM for Authorization Sidecar Proxy) to assist in routing traffic to the intended Storage Array.&lt;/li&gt;
+&lt;li&gt;Inspection of CSM-specific Authorization Bearer tokens.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;csm-for-authorization-cli&#34;&gt;CSM for Authorization CLI&lt;/h3&gt;
+&lt;p&gt;The &lt;a href=&#34;../cli&#34;&gt;&lt;em&gt;karavictl&lt;/em&gt;&lt;/a&gt; CLI (Command Line Interface) application allows Storage Admins to manage and interact with a running CSM for Authorization Server.&lt;/p&gt;
+&lt;h3 id=&#34;storage-array&#34;&gt;Storage Array&lt;/h3&gt;
+&lt;p&gt;A Storage Array is typically considered to be one of the various Dell storage offerings, e.g. Dell PowerFlex which is supported by CSM for Authorization
+today.  Support for more Storage Arrays will come in the future.&lt;/p&gt;
+&lt;h2 id=&#34;how-it-works&#34;&gt;How it Works&lt;/h2&gt;
+&lt;p&gt;CSM for Authorization intends to override the existing authorization methods between a CSI Driver and its Storage Array. This may be desirable for several reasons, if:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The CSI Driver requires privileged login credentials (e.g. &amp;ldquo;root&amp;rdquo;) in order to function.&lt;/li&gt;
+&lt;li&gt;The Storage Array does not natively support the concept of RBAC and/or multi-tenancy.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;This section of of the document describes how CSM for Authorization provides a solution to these problems.&lt;/p&gt;
+&lt;h3 id=&#34;bearer-tokens&#34;&gt;Bearer Tokens&lt;/h3&gt;
+&lt;p&gt;CSM for Authorization overrides any existing authorization mechanism between a CSI Driver and its corresponding Storage Array with the use of JSON Web Tokens (JWTs). The CSI Driver and Storage Array will not be aware of this taking place.&lt;/p&gt;
+&lt;p&gt;In the context of &lt;a href=&#34;https://tools.ietf.org/html/rfc6749#section-1.5&#34;&gt;RFC-6749&lt;/a&gt; there are two such JWTs that are used:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Access token: a single token valid for a short period of time.&lt;/li&gt;
+&lt;li&gt;Refresh token: a single token used to obtain access tokens.  Typically valid for a longer period of time.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Both tokens are opaque to the client, yet provide meaningful information to the server, specifically:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The Tenant for whom the token is associated with.&lt;/li&gt;
+&lt;li&gt;The Roles that are bound to the Tenant.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Tokens encode the following set of claims:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-json&#34; data-lang=&#34;json&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;aud&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;karavi&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;exp&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;1915585883&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;iss&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;com.dell.karavi&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;sub&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;karavi-tenant&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;roles&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;role-a,role-b,role-c&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;group&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;Tenant-1&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Both tokens are signed using a server-side secret preventing the risk of tampering by any client. For example, a bad-actor is unable to modify a token to give themselves a role that they should not have, at least without knowing the server-side secret.&lt;/p&gt;
+&lt;p&gt;The refresh approach is beneficial for the following reasons:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Accidental exposure of an access token poses a lesser security concern, given the set expiration time is short (e.g. 30 seconds).&lt;/li&gt;
+&lt;li&gt;The CSM for Authorization Server can fully trust the access token without having to perform a database check on each request (doing so would nullify the benefits of using tokens in the first place).&lt;/li&gt;
+&lt;li&gt;The CSM for Authorization Server can defer Tenant checks at refresh time only, e.g. do not allow refresh if the Tenant&amp;rsquo;s access has been revoked by a Storage Admin. There may be a short time window in between revocation and enforcement, depending on the access token&amp;rsquo;s expiration time.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The following diagram shows the access and refresh tokens in play and how a valid access token is required for a request to be proxied to the intended Storage Array.&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  +---------+                                           +---------------+
+  |         |                                           |               |
+  |         |                                           |               |       +----------+
+  |         |--(A)------------ Access Token -----------&amp;gt;|               |------&amp;gt;|          |
+  |         |                                           |     CSM       |       |          |
+  |         |&amp;lt;-(B)---------- Protected Resource --------| Authorization |&amp;lt;------|  Storage |
+  | Sidecar |                                           |     Server    |       |   Array  |
+  | Proxy   |--(C)------------ Access Token -----------&amp;gt;|               |       |          |
+  |         |                                           |               |       |          |
+  |         |&amp;lt;-(D)------ Invalid Token Error -----------|               |       |          |
+  |         |                                           |               |       +----------+
+  |         |                                           |               |
+  |         |--(E)----------- Refresh Token -----------&amp;gt;|               |
+  |         |            &amp;amp; Expired Access Token         |               |
+  |         |&amp;lt;-(F)----------- Access Token -------------|               |
+  +---------+                                           +---------------+
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;A) CSI Driver makes a request to the Storage Array:
+&lt;ul&gt;
+&lt;li&gt;request is intercepted by the Sidecar Proxy to add the access token.&lt;/li&gt;
+&lt;li&gt;The CSM for Authorization Server deems the access token valid.&lt;/li&gt;
+&lt;li&gt;The CSM for Authorization Server permits the request to be proxied to the intended Storage Array.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;B) Storage Array response is sent back as expected.&lt;/li&gt;
+&lt;li&gt;C) CSI Driver makes a request to the Storage Array:
+&lt;ul&gt;
+&lt;li&gt;request is intercepted by the Sidecar Proxy to add the access token.&lt;/li&gt;
+&lt;li&gt;The CSM for Authorization Server deems the access token is invalid; it has since expired.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;D) The CSM for Authorization Server responds with HTTP 401 Unauthorized.&lt;/li&gt;
+&lt;li&gt;E) Sidecar Proxy requests a new access token by passing both refresh token and expired token.&lt;/li&gt;
+&lt;li&gt;F) The CSM for Authorization Server processes the request:
+&lt;ul&gt;
+&lt;li&gt;is the refresh token valid?&lt;/li&gt;
+&lt;li&gt;is the access token expired?&lt;/li&gt;
+&lt;li&gt;has the Tenant had access revoked?&lt;/li&gt;
+&lt;li&gt;a new access token is sent in response if the checks pass.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;roles&#34;&gt;Roles&lt;/h3&gt;
+&lt;p&gt;So we know a token encodes both the identification of a Tenant and their Roles, but what&amp;rsquo;s in a Role?&lt;/p&gt;
+&lt;p&gt;A role can be defined as follows:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;It has a name, e.g. &amp;ldquo;role-a&amp;rdquo;.&lt;/li&gt;
+&lt;li&gt;It can be bound to a Tenant&lt;/li&gt;
+&lt;li&gt;It can be unbound from a Tenant.&lt;/li&gt;
+&lt;li&gt;It determines access to zero or more storage pools and assigns a storage quota for each.
+&lt;ul&gt;
+&lt;li&gt;Quota represents the upper-limit of the total aggregation of used storage capacity for a Tenant&amp;rsquo;s resources in a storage pool.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;It prevents ambiguity by identifying each storage pool in the form of &lt;em&gt;system-type:system-id:pool-name&lt;/em&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Below is an example of how roles are represented internally in JSON:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-json&#34; data-lang=&#34;json&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;Developer&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;system_types&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;powerflex&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;system_ids&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;          &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;542a2d5f5122210f&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;pool_quotas&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;              &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;bronze&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;99000000&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;          &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;This role says &lt;em&gt;Allow Tenants with the Developer role access to the bronze pool on PowerFlex system 542a2d5f5122210f, and cap their total capacity usage at 99000000Kb (99Gb).&lt;/em&gt;&lt;/p&gt;
+&lt;h3 id=&#34;policy&#34;&gt;Policy&lt;/h3&gt;
+&lt;p&gt;CSM for Authorization leverages the &lt;a href=&#34;https://www.openpolicyagent.org/&#34;&gt;Open Policy Agent&lt;/a&gt; to use a policy-as-code approach to policy management. It stores a collection of policy files written in Rego language.  Each policy file defines a set of policy rules that form the basis of a policy decision. A policy decision is made by processing the inputs provided. For CSM for Authorization, the inputs are:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The set of roles defined by the Storage Admin.&lt;/li&gt;
+&lt;li&gt;The claims section of a validated JWT.&lt;/li&gt;
+&lt;li&gt;The JSON payload of the storage request.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Given these inputs, many decisions can be made to answer questions like &amp;ldquo;Can Tenant X, with &lt;em&gt;these&lt;/em&gt; roles provision &lt;em&gt;this&lt;/em&gt; volume of size Y?&amp;rdquo;.  The result of the policy decision will determine whether or not the request is proxied.&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;                 +----------------+                   
+                  |   Open Policy  |                   
+                  |     Agent      |                   
+                  |                |                   
+  JWT             |   +--------+   |                   
+ Claims ------\   |   | Policy | ----------&amp;gt; Allow/Deny
+               -----&amp;gt; | (Rego) |   |                   
+ Storage       -----&amp;gt; +--------+   |                   
+ Request -----/   +-------^--------+                   
+                          |                            
+                          |                            
+                          |                            
+                        Role                           
+                        Data                           
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;quota--volume-ownership&#34;&gt;Quota &amp;amp; Volume Ownership&lt;/h3&gt;
+&lt;p&gt;Policy decisions based on the current request and set of roles alone are not enough.  CSM for Authorization must maintain a cache of volumes approved for creation and deletion in order to know if a Tenant has already consumed their quota on a given storage pool.&lt;/p&gt;
+&lt;p&gt;A Redis database is used to store this volume data and their relationship with a Tenant, Storage Array and Pool. The use of composite keys provide fast, constant time look up of volumes, e.g. &lt;code&gt;quota:powerflex:542a2d5f5122210f:bronze:Tenant-1:data&lt;/code&gt; is a Redis hash with volume data as its values.&lt;/p&gt;
+&lt;h2 id=&#34;cross-cutting-concerns&#34;&gt;Cross-Cutting Concerns&lt;/h2&gt;
+&lt;p&gt;This section documents the pieces of code that are general in nature and shared across multiple packages.&lt;/p&gt;
+&lt;h3 id=&#34;logging&#34;&gt;Logging&lt;/h3&gt;
+&lt;p&gt;CSM for Authorization uses the &lt;a href=&#34;https://github.com/sirupsen/logrus&#34;&gt;Logrus&lt;/a&gt; package when logging messages.&lt;/p&gt;
+&lt;h2 id=&#34;observability&#34;&gt;Observability&lt;/h2&gt;
+&lt;p&gt;Both the CSM for Authorization Server and Sidecar Proxy are long-running processes, so it&amp;rsquo;s important to understand what&amp;rsquo;s going on inside. We use OpenTelemetry (otel) to help with that.&lt;/p&gt;
+&lt;p&gt;The following otel exporters are used:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;go.opentelemetry.io/otel/exporters/metric/prometheus
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;go.opentelemetry.io/otel/exporters/trace/zipkin
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp    
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Docs: Backup and Restore</title>
+      <link>https://dell.github.io/csm-docs/docs/authorization/v1.x-ga/backup-and-restore/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dell.github.io/csm-docs/docs/authorization/v1.x-ga/backup-and-restore/</guid>
+      <description>
+        
+        
+        &lt;p&gt;Backup and Restore information for CSM Authorization can be found in this section.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Docs: Configuration</title>
+      <link>https://dell.github.io/csm-docs/docs/authorization/v1.x-ga/configuration/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dell.github.io/csm-docs/docs/authorization/v1.x-ga/configuration/</guid>
+      <description>
+        
+        
+        &lt;p&gt;This section provides the details and instructions on how to configure CSM Authorization.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Docs: CLI</title>
+      <link>https://dell.github.io/csm-docs/docs/authorization/v1.x-ga/cli/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dell.github.io/csm-docs/docs/authorization/v1.x-ga/cli/</guid>
+      <description>
+        
+        
+        
+
+&lt;div class=&#34;pageinfo pageinfo-primary&#34;&gt;
+&lt;p&gt;The CSM Authorization karavictl CLI is no longer actively maintained or supported. It will be deprecated in CSM 2.0.&lt;/p&gt;
+
+&lt;/div&gt;
+
+&lt;p&gt;karavictl is a command-line interface (CLI) used to interact with and manage your Container Storage Modules (CSM) Authorization deployment.
+This document outlines all karavictl commands, their intended use, options that can be provided to alter their execution, and expected output from those commands.&lt;/p&gt;
+&lt;p&gt;If you feel that something is unclear or missing in this document, please open up an &lt;a href=&#34;https://github.com/dell/csm/issues&#34;&gt;issue&lt;/a&gt;.&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Command&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;#karavictl&#34;&gt;karavictl&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;karavictl is used to interact with CSM Authorization Server&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;#karavictl-admin-token&#34;&gt;karavictl admin token&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Generate admin tokens&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;#karavictl-cluster-info&#34;&gt;karavictl cluster-info&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Display the state of resources within the cluster&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;#karavictl-generate&#34;&gt;karavictl generate&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Generate resources for use with CSM&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;#karavictl-generate-token&#34;&gt;karavictl generate token&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Generate tokens&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;#karavictl-role&#34;&gt;karavictl role&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Manage role&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;#karavictl-role-get&#34;&gt;karavictl role get&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Get role&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;#karavictl-role-list&#34;&gt;karavictl role list&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;List roles&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;#karavictl-role-create&#34;&gt;karavictl role create&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Create one or more CSM roles&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;#karavictl-role-update&#34;&gt;karavictl role update&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Update the quota of one or more CSM roles&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;#karavictl-role-delete&#34;&gt;karavictl role delete&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Delete role&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;#karavictl-rolebinding&#34;&gt;karavictl rolebinding&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Manage role bindings&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;#karavictl-rolebinding-create&#34;&gt;karavictl rolebinding create&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Create a rolebinding between role and tenant&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;#karavictl-rolebinding-delete&#34;&gt;karavictl rolebinding delete&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Delete a rolebinding between role and tenant&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;#karavictl-storage&#34;&gt;karavictl storage&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Manage storage systems&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;#karavictl-storage-get&#34;&gt;karavictl storage get&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Get details on a registered storage system&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;#karavictl-storage-list&#34;&gt;karavictl storage list&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;List registered storage systems&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;#karavictl-storage-create&#34;&gt;karavictl storage create&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Create and register a storage system&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;#karavictl-storage-update&#34;&gt;karavictl storage update&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Update a registered storage system&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;#karavictl-storage-delete&#34;&gt;karavictl storage delete&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Delete a registered storage system&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;#karavictl-tenant&#34;&gt;karavictl tenant &lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Manage tenants&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;#karavictl-tenant-create&#34;&gt;karavictl tenant create&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Create a tenant resource within CSM&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;#karavictl-tenant-get&#34;&gt;karavictl tenant get&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Get a tenant resource within CSM&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;#karavictl-tenant-list&#34;&gt;karavictl tenant list&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Lists tenant resources within CSM&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;#karavictl-tenant-revoke&#34;&gt;karavictl tenant revoke&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Get a tenant resource within CSM&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;#karavictl-tenant-delete&#34;&gt;karavictl tenant delete&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Deletes a tenant resource within CSM&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;#karavictl-tenant-update&#34;&gt;karavictl tenant update&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Updates a tenant resource within CSM&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;general-commands&#34;&gt;General Commands&lt;/h2&gt;
+&lt;h3 id=&#34;karavictl&#34;&gt;karavictl&lt;/h3&gt;
+&lt;p&gt;karavictl is used to interact with CSM Authorization Server&lt;/p&gt;
+&lt;h5 id=&#34;synopsis&#34;&gt;Synopsis&lt;/h5&gt;
+&lt;p&gt;karavictl provides security, RBAC, and quota limits for accessing Dell
+storage products from Kubernetes clusters&lt;/p&gt;
+&lt;h5 id=&#34;commands&#34;&gt;Commands&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  admin        Generate admin token for use with CSM Authorization
+  cluster-info Display the state of resources within the cluster
+  completion   Generate the autocompletion script for the specified shell
+  generate     Generate resources for use with Karavi
+  help         Help about any command
+  role         Manage roles
+  rolebinding  Manage role bindings
+  storage      Manage storage systems
+  tenant       Manage tenants
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options&#34;&gt;Options&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -h, --help          Help for karavictl
+  -f, --admin-token   Path to admin token file; required for all commands except `admin token` and `cluster-info`
+      --addr          Address of the CSM Authorization Proxy Server; required for all commands except `admin token` and `cluster-info`
+      --insecure      Skip certificate validation of the CSM Authorization Proxy Server
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output&#34;&gt;Output&lt;/h5&gt;
+&lt;p&gt;Outputs help text&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;karavictl-admin-token&#34;&gt;karavictl admin token&lt;/h3&gt;
+&lt;p&gt;Generate admin tokens&lt;/p&gt;
+&lt;h5 id=&#34;synopsis-1&#34;&gt;Synopsis&lt;/h5&gt;
+&lt;p&gt;Generate admin token for use with CSM Authorization commands.
+The tokens output in YAML format, which can be saved in a file.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;karavictl admin token &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;flags&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id=&#34;required-flags&#34;&gt;Required Flags&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -n, --name   Name of the admin
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;optional-flags&#34;&gt;Optional Flags&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -h, --help                       Help for token
+  -s, --jwt-signing-secret         Specify JWT signing secret, or omit to use stdin
+      --refresh-token-expiration   Expiration time of the refresh token, e.g. 48h (default 720h0m0s)
+      --access-token-expiration    Expiration time of the access token, e.g. 1m30s (default 1m0s)
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-1&#34;&gt;Output&lt;/h5&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ karavictl admin token --name admin --access-token-expiration 30s --refresh-token-expiration 120m
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ Enter JWT Signing Secret: ***********
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;Access&amp;#34;&lt;/span&gt;: &amp;lt;ACCESS-TOKEN&amp;gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;Refresh&amp;#34;&lt;/span&gt;: &amp;lt;REFRESH-TOKEN&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Alternatively, one can supply JWT signing secret with command.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ karavictl admin token --name admin --jwt-signing-secret secret --access-token-expiration 30s --refresh-token-expiration 120m
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;Access&amp;#34;&lt;/span&gt;: &amp;lt;ACCESS-TOKEN&amp;gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;Refresh&amp;#34;&lt;/span&gt;: &amp;lt;REFRESH-TOKEN&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;karavictl-cluster-info&#34;&gt;karavictl cluster-info&lt;/h3&gt;
+&lt;p&gt;Display the state of resources within the cluster&lt;/p&gt;
+&lt;h5 id=&#34;synopsis-2&#34;&gt;Synopsis&lt;/h5&gt;
+&lt;p&gt;Prints table of resources within the cluster, including their readiness&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;karavictl cluster-info &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;flags&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id=&#34;optional-flags-1&#34;&gt;Optional Flags&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -h, --help    Help for cluster-info
+  -w, --watch   Watch for changes
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-2&#34;&gt;Output&lt;/h5&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;karavictl cluster-info
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;NAME                   READY   UP-TO-DATE   AVAILABLE   AGE
+tenant-service         1/1     1            1           59m
+redis-primary          1/1     1            1           59m
+proxy-server           1/1     1            1           59m
+redis-commander        1/1     1            1           59m
+storage-service        1/1     1            1           59m
+role-service           1/1     1            1           59m
+&lt;/code&gt;&lt;/pre&gt;&lt;hr&gt;
+&lt;h3 id=&#34;karavictl-generate&#34;&gt;karavictl generate&lt;/h3&gt;
+&lt;p&gt;Generate resources for use with CSM&lt;/p&gt;
+&lt;h5 id=&#34;synopsis-3&#34;&gt;Synopsis&lt;/h5&gt;
+&lt;p&gt;Generates resources for use with CSM&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;karavictl generate &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;flags&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id=&#34;optional-flags-2&#34;&gt;Optional Flags&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -h, --help   Help for generate
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;karavictl-generate-token&#34;&gt;karavictl generate token&lt;/h3&gt;
+&lt;p&gt;Generate tokens&lt;/p&gt;
+&lt;h5 id=&#34;synopsis-4&#34;&gt;Synopsis&lt;/h5&gt;
+&lt;p&gt;Generate tokens for use with the CSI Driver when in proxy mode
+The tokens are output as a Kubernetes Secret resource, so the results may
+be piped directly to kubectl:&lt;/p&gt;
+&lt;p&gt;Example:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;karavictl generate token --tenant Alice --admin-token admintoken.yaml --addr csm-authorization.host.com &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; kubectl apply -f -
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id=&#34;required-flags-1&#34;&gt;Required Flags&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -t, --tenant        Name of the tenant
+  -f, --admin-token   Path to admin token file
+      --addr          Address of the CSM Authorization Proxy Server
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;optional-flags-3&#34;&gt;Optional Flags&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -h, --help                       Help for token
+      --insecure                   Skip certificate validation of the CSM Authorization Proxy Server
+      --access-token-expiration    Expiration time of the access token, e.g. 1m30s (default 1m0s)
+      --refresh-token-expiration   Expiration time of the refresh token, e.g. 48h (default 720h0m0s)
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-3&#34;&gt;Output&lt;/h5&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;karavictl generate token --tenant Alice --admin-token admintoken.yaml --addr csm-authorization.host.com
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;apiVersion&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;v1&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;data&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;access&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;&amp;lt;ACCESS-TOKEN&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;refresh&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;&amp;lt;REFRESH-TOKEN&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;kind&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Secret&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;metadata&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;creationTimestamp&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;null&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;proxy-authz-tokens&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;type&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Opaque&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Usually, you will want to pipe the output to kubectl to apply the secret&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;karavictl generate token --tenant Alice --admin-token admintoken.yaml --addr csm-authorization.host.com &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; kubectl apply -f -
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;The token is read once when the driver pods are started and is not dynamically updated. If you are applying a new token in an existing driver installation, restart the driver pods for the new token to take effect.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl -n &amp;lt;driver-namespace&amp;gt; rollout restart deploy/&amp;lt;driver&amp;gt;-controller
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl -n &amp;lt;driver-namespace&amp;gt; rollout restart ds/&amp;lt;driver&amp;gt;-node
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;karavictl-role&#34;&gt;karavictl role&lt;/h3&gt;
+&lt;p&gt;Manage roles&lt;/p&gt;
+&lt;h5 id=&#34;synopsis-5&#34;&gt;Synopsis&lt;/h5&gt;
+&lt;p&gt;Manage roles&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;karavictl role &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;flags&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id=&#34;options-1&#34;&gt;Options&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -h, --help   Help for role
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;karavictl-role-get&#34;&gt;karavictl role get&lt;/h3&gt;
+&lt;p&gt;Get role&lt;/p&gt;
+&lt;h5 id=&#34;synopsis-6&#34;&gt;Synopsis&lt;/h5&gt;
+&lt;p&gt;Get role&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;karavictl role get &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;flags&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id=&#34;required-flags-2&#34;&gt;Required Flags&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -n, --name          Name of the role
+  -f, --admin-token   Path to admin token file
+      --addr          Address of the CSM Authorization Proxy Server
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;optional-flags-4&#34;&gt;Optional Flags&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -h, --help       Help for get
+      --insecure   Skip certificate validation of the CSM Authorization Proxy Server
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-4&#34;&gt;Output&lt;/h5&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;karavictl role get CSISilver --admin-token admintoken.yaml --addr csm-authorization.host.com
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;Name&amp;#34;: &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;CSISilver&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;StorageSystem&amp;#34;: &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;3000000000011111&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;PoolQuotas&amp;#34;: &lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;[&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;{&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;Pool&amp;#34;: &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;mypool&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;Quota&amp;#34;: &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;16 GB&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;}&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;]&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;}&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;hr&gt;
+&lt;h3 id=&#34;karavictl-role-list&#34;&gt;karavictl role list&lt;/h3&gt;
+&lt;p&gt;List roles&lt;/p&gt;
+&lt;h5 id=&#34;synopsis-7&#34;&gt;Synopsis&lt;/h5&gt;
+&lt;p&gt;List roles&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;karavictl role list &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;flags&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id=&#34;required-flags-3&#34;&gt;Required Flags&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -f, --admin-token   Path to admin token file
+      --addr          Address of the CSM Authorization Proxy Server
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;optional-flags-5&#34;&gt;Optional Flags&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -h, --help       Help for list
+      --insecure   Skip certificate validation of the CSM Authorization Proxy Server
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-5&#34;&gt;Output&lt;/h5&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;karavictl role list --admin-token admintoken.yaml --addr csm-authorization.host.com
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;CSIGold&amp;#34;: &lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;[&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;{&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;storage_system_id&amp;#34;: &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;3000000000011111&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;pool_quotas&amp;#34;: &lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;[&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;{&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;          &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;pool&amp;#34;: &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;mypool&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;          &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;quota&amp;#34;: &lt;/span&gt;&lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;32000000&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;}&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;]&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;}&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;],&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;CSISilver&amp;#34;: &lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;[&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;{&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;storage_system_id&amp;#34;: &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;3000000000011111&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;pool_quotas&amp;#34;: &lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;[&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;{&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;          &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;pool&amp;#34;: &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;mypool&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;          &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;quota&amp;#34;: &lt;/span&gt;&lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;16000000&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;}&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;]&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;}&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;]&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;}&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;hr&gt;
+&lt;h3 id=&#34;karavictl-role-create&#34;&gt;karavictl role create&lt;/h3&gt;
+&lt;p&gt;Create one or more CSM roles&lt;/p&gt;
+&lt;h5 id=&#34;synopsis-8&#34;&gt;Synopsis&lt;/h5&gt;
+&lt;p&gt;Creates one or more CSM roles&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;karavictl role create &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;flags&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id=&#34;required-flags-4&#34;&gt;Required Flags&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;      --role          Role in the form &amp;lt;name&amp;gt;=&amp;lt;type&amp;gt;=&amp;lt;id&amp;gt;=&amp;lt;pool&amp;gt;=&amp;lt;quota&amp;gt;
+  -f, --admin-token   Path to admin token file
+      --addr          Address of the CSM Authorization Proxy Server
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;optional-flags-6&#34;&gt;Optional Flags&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -h, --help       Help for create
+      --insecure   Skip certificate validation of the CSM Authorization Proxy Server
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;em&gt;NOTE:&lt;/em&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Setting the &lt;code&gt;quota&lt;/code&gt; to 0 will not enforce storage quota&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h5 id=&#34;output-6&#34;&gt;Output&lt;/h5&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;karavictl role create --role&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;role-name&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;system-type&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;000000000001&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;mypool&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;200000000&lt;/span&gt; --admin-token admintoken.yaml --addr csm-authorization.host.com
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;On success, there will be no output. You may run &lt;code&gt;karavictl role get &amp;lt;role-name&amp;gt;&lt;/code&gt; to confirm the creation occurred.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;karavictl-role-update&#34;&gt;karavictl role update&lt;/h3&gt;
+&lt;p&gt;Update the quota of one or more CSM roles&lt;/p&gt;
+&lt;h5 id=&#34;synopsis-9&#34;&gt;Synopsis&lt;/h5&gt;
+&lt;p&gt;Updates the quota of one or more CSM roles&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;karavictl role update &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;flags&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id=&#34;required-flags-5&#34;&gt;Required Flags&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;      --role          Role in the form &amp;lt;name&amp;gt;=&amp;lt;type&amp;gt;=&amp;lt;id&amp;gt;=&amp;lt;pool&amp;gt;=&amp;lt;quota&amp;gt;
+  -f, --admin-token   Path to admin token file
+      --addr          Address of the CSM Authorization Proxy Server
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;optional-flags-7&#34;&gt;Optional Flags&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -h, --help       Help for update
+      --insecure   Skip certificate validation of the CSM Authorization Proxy Server
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-7&#34;&gt;Output&lt;/h5&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;karavictl role update --role&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;role-name&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;system-type&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;000000000001&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;mypool&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;400000000&lt;/span&gt; --admin-token admintoken.yaml
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;On success, there will be no output. You may run &lt;code&gt;karavictl role get &amp;lt;role-name&amp;gt;&lt;/code&gt; to confirm the update occurred.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;karavictl-role-delete&#34;&gt;karavictl role delete&lt;/h3&gt;
+&lt;p&gt;Delete role&lt;/p&gt;
+&lt;h5 id=&#34;synopsis-10&#34;&gt;Synopsis&lt;/h5&gt;
+&lt;p&gt;Delete role&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;karavictl role delete &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;flags&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id=&#34;required-flags-6&#34;&gt;Required Flags&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;      --role          Role in the form &amp;lt;name&amp;gt;=&amp;lt;type&amp;gt;=&amp;lt;id&amp;gt;=&amp;lt;pool&amp;gt;=&amp;lt;quota&amp;gt;
+  -f, --admin-token   Path to admin token file
+      --addr          Address of the CSM Authorization Proxy Server
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;optional-flags-8&#34;&gt;Optional Flags&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -h, --help       Help for delete
+      --insecure   Skip certificate validation of the CSM Authorization Proxy Server
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-8&#34;&gt;Output&lt;/h5&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;karavictl role delete --name CSISilver --admin-token admintoken.yaml --addr csm-authorization.host.com
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;On success, there will be no output. You may run &lt;code&gt;karavictl role get &amp;lt;role-name&amp;gt;&lt;/code&gt; to confirm the deletion occurred.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;karavictl-rolebinding&#34;&gt;karavictl rolebinding&lt;/h3&gt;
+&lt;p&gt;Manage role bindings&lt;/p&gt;
+&lt;h5 id=&#34;synopsis-11&#34;&gt;Synopsis&lt;/h5&gt;
+&lt;p&gt;Management for role bindings&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;karavictl rolebinding &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;flags&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id=&#34;options-2&#34;&gt;Options&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -h, --help   help for rolebinding
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;karavictl-rolebinding-create&#34;&gt;karavictl rolebinding create&lt;/h3&gt;
+&lt;p&gt;Create a rolebinding between role and tenant&lt;/p&gt;
+&lt;h5 id=&#34;synopsis-12&#34;&gt;Synopsis&lt;/h5&gt;
+&lt;p&gt;Creates a rolebinding between role and tenant&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;karavictl rolebinding create &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;flags&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id=&#34;required-flags-7&#34;&gt;Required Flags&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -r, --role          Role name
+  -t, --tenant        Tenant name
+  -f, --admin-token   Path to admin token file
+      --addr          Address of the CSM Authorization Proxy Server
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;optional-flags-9&#34;&gt;Optional Flags&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -h, --help       Help for create
+      --insecure   Skip certificate validation of the CSM Authorization Proxy Server
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-9&#34;&gt;Output&lt;/h5&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;karavictl rolebinding create --role CSISilver --tenant Alice --admin-token admintoken.yaml --addr csm-authorization.host.com
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;On success, there will be no output. You may run &lt;code&gt;karavictl tenant get --name &amp;lt;tenant-name&amp;gt;&lt;/code&gt; to confirm the rolebinding creation occurred.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;karavictl-rolebinding-delete&#34;&gt;karavictl rolebinding delete&lt;/h3&gt;
+&lt;p&gt;Delete a rolebinding between role and tenant&lt;/p&gt;
+&lt;h5 id=&#34;synopsis-13&#34;&gt;Synopsis&lt;/h5&gt;
+&lt;p&gt;Deletes a rolebinding between role and tenant&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;karavictl rolebinding delete &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;flags&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id=&#34;required-flags-8&#34;&gt;Required Flags&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -r, --role          Role name
+  -t, --tenant        Tenant name
+  -f, --admin-token   Path to admin token file
+      --addr          Address of the CSM Authorization Proxy Server
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;optional-flags-10&#34;&gt;Optional Flags&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -h, --help       Help for delete
+      --insecure   Skip certificate validation of the CSM Authorization Proxy Server
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-10&#34;&gt;Output&lt;/h5&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;karavictl rolebinding delete --role CSISilver --tenant Alice --admin-token admintoken.yaml --addr csm-authorization.host.com
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;On success, there will be no output.&lt;/p&gt;
+&lt;h2 id=&#34;storage-commands&#34;&gt;Storage Commands&lt;/h2&gt;
+&lt;h3 id=&#34;karavictl-storage&#34;&gt;karavictl storage&lt;/h3&gt;
+&lt;p&gt;Manage storage systems&lt;/p&gt;
+&lt;h5 id=&#34;synopsis-14&#34;&gt;Synopsis&lt;/h5&gt;
+&lt;p&gt;Manages storage systems&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;karavictl storage &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;flags&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id=&#34;options-3&#34;&gt;Options&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -h, --help               Help for storage
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;karavictl-storage-get&#34;&gt;karavictl storage get&lt;/h3&gt;
+&lt;p&gt;Get details on a registered storage system.&lt;/p&gt;
+&lt;h5 id=&#34;synopsis-15&#34;&gt;Synopsis&lt;/h5&gt;
+&lt;p&gt;Gets details on a registered storage system.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;karavictl storage get &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;flags&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id=&#34;required-flags-9&#34;&gt;Required Flags&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -s, --system-id     System identifier (default &amp;#34;systemid&amp;#34;)
+  -t, --type          Type of storage system (&amp;#34;powerflex&amp;#34;, &amp;#34;powermax&amp;#34;, &amp;#34;powerscale&amp;#34;)
+  -f, --admin-token   Path to admin token file
+      --addr          Address of the CSM Authorization Proxy Server
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;optional-flags-11&#34;&gt;Optional Flags&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -h, --help       Help for delete
+      --insecure   Skip certificate validation of the CSM Authorization Proxy Server
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-11&#34;&gt;Output&lt;/h5&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;karavictl storage get --type powerflex --system-id &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;3000000000011111&lt;/span&gt; --admin-token admintoken.yaml --addr csm-authorization.host.com
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;User&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;admin&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;Password&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;(omitted)&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;Endpoint&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;https://1.1.1.1&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;Insecure&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#204a87&#34;&gt;true&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;hr&gt;
+&lt;h3 id=&#34;karavictl-storage-list&#34;&gt;karavictl storage list&lt;/h3&gt;
+&lt;p&gt;List registered storage systems.&lt;/p&gt;
+&lt;h5 id=&#34;synopsis-16&#34;&gt;Synopsis&lt;/h5&gt;
+&lt;p&gt;Lists registered storage systems.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;karavictl storage list &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;flags&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id=&#34;required-flags-10&#34;&gt;Required Flags&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -t, --type          Type of storage system (&amp;#34;powerflex&amp;#34;, &amp;#34;powermax&amp;#34;, &amp;#34;powerscale&amp;#34;)
+  -f, --admin-token   Path to admin token file
+      --addr          Address of the CSM Authorization Proxy Server
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;optional-flags-12&#34;&gt;Optional Flags&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -h, --help       Help for delete
+      --insecure   Skip certificate validation of the CSM Authorization Proxy Server
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-12&#34;&gt;Output&lt;/h5&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;karavictl storage list --admin-token admintoken.yaml --addr csm-authorization.host.com
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;storage&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;powerflex&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;3000000000011111&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;Endpoint&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;https://1.1.1.1&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;Insecure&amp;#34;&lt;/span&gt;: true,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;Password&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;(omitted)&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;User&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;admin&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;hr&gt;
+&lt;h3 id=&#34;karavictl-storage-create&#34;&gt;karavictl storage create&lt;/h3&gt;
+&lt;p&gt;Create and register a storage system.&lt;/p&gt;
+&lt;h5 id=&#34;synopsis-17&#34;&gt;Synopsis&lt;/h5&gt;
+&lt;p&gt;Creates and registers a storage system.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;karavictl storage create &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;flags&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id=&#34;required-flags-11&#34;&gt;Required Flags&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -e, --endpoint         Endpoint of REST API gateway
+  -p, --password         Password (default &amp;#34;****&amp;#34;)
+  -s, --system-id        System identifier (default &amp;#34;systemid&amp;#34;)
+  -t, --type             Type of storage system (&amp;#34;powerflex&amp;#34;, &amp;#34;powermax&amp;#34;)
+  -u, --user             Username (default &amp;#34;admin&amp;#34;)
+  -f, --admin-token      Path to admin token file
+      --addr             Address of the CSM Authorization Proxy Server
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;optional-flags-13&#34;&gt;Optional Flags&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -h, --help             Help for delete
+  -a, --array-insecure   Skip certificate validation of the storage array
+      --insecure         Skip certificate validation of the CSM Authorization Proxy Server
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-13&#34;&gt;Output&lt;/h5&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;karavictl storage create --endpoint https://1.1.1.1 --insecure --array-insecure --system-id &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;3000000000011111&lt;/span&gt; --type powerflex --user admin --password ******** --admin-token admintoken.yaml --addr csm-authorization.host.com
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;On success, there will be no output. You may run &lt;code&gt;karavictl storage get --type &amp;lt;storage-system-type&amp;gt; --system-id &amp;lt;storage-system-id&amp;gt;&lt;/code&gt; to confirm the creation occurred.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;karavictl-storage-update&#34;&gt;karavictl storage update&lt;/h3&gt;
+&lt;p&gt;Update a registered storage system.&lt;/p&gt;
+&lt;h5 id=&#34;synopsis-18&#34;&gt;Synopsis&lt;/h5&gt;
+&lt;p&gt;Updates a registered storage system.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;karavictl storage update &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;flags&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id=&#34;required-flags-12&#34;&gt;Required Flags&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -e, --endpoint         Endpoint of REST API gateway
+  -p, --pass             Password (default &amp;#34;****&amp;#34;)
+  -s, --system-id        System identifier (default &amp;#34;systemid&amp;#34;)
+  -t, --type             Type of storage system (&amp;#34;powerflex&amp;#34;, &amp;#34;powermax&amp;#34;)
+  -u, --user             Username (default &amp;#34;admin&amp;#34;)
+  -f, --admin-token      Path to admin token file
+      --addr             Address of the CSM Authorization Proxy Server
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;optional-flags-14&#34;&gt;Optional Flags&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -h, --help             Help for delete
+  -a, --array-insecure   Skip certificate validation of the storage array
+      --insecure         Skip certificate validation of the CSM Authorization Proxy Server
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-14&#34;&gt;Output&lt;/h5&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;karavictl storage update --endpoint https://1.1.1.1 --insecure --array-insecure --system-id &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;3000000000011111&lt;/span&gt; --type powerflex --user admin --password ******** --admin-token admintoken.yaml --addr csm-authorization.host.com
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;On success, there will be no output. You may run &lt;code&gt;karavictl storage get --type &amp;lt;storage-system-type&amp;gt; --system-id &amp;lt;storage-system-id&amp;gt;&lt;/code&gt; to confirm the update occurred.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;karavictl-storage-delete&#34;&gt;karavictl storage delete&lt;/h3&gt;
+&lt;p&gt;Delete a registered storage system.&lt;/p&gt;
+&lt;h5 id=&#34;synopsis-19&#34;&gt;Synopsis&lt;/h5&gt;
+&lt;p&gt;Deletes a registered storage system.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;karavictl storage delete &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;flags&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id=&#34;required-flags-13&#34;&gt;Required Flags&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -s, --system-id     System identifier (default &amp;#34;systemid&amp;#34;)
+  -t, --type          Type of storage system (&amp;#34;powerflex&amp;#34;, &amp;#34;powermax&amp;#34;)
+  -f, --admin-token   Path to admin token file
+      --addr          Address of the CSM Authorization Proxy Server
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;optional-flags-15&#34;&gt;Optional Flags&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -h, --help       Help for delete
+      --insecure   Skip certificate validation of the CSM Authorization Proxy Server
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-15&#34;&gt;Output&lt;/h5&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;karavictl storage delete --type powerflex --system-id &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;3000000000011111&lt;/span&gt; --admin-token admintoken.yaml --addr csm-authorization.host.com
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;On success, there will be no output. You may run &lt;code&gt;karavictl storage get --type &amp;lt;storage-system-type&amp;gt; --system-id &amp;lt;storage-system-id&amp;gt;&lt;/code&gt; to confirm the deletion occurred.&lt;/p&gt;
+&lt;h2 id=&#34;tenant-commands&#34;&gt;Tenant Commands&lt;/h2&gt;
+&lt;h3 id=&#34;karavictl-tenant&#34;&gt;karavictl tenant&lt;/h3&gt;
+&lt;p&gt;Manage tenants&lt;/p&gt;
+&lt;h5 id=&#34;synopsis-20&#34;&gt;Synopsis&lt;/h5&gt;
+&lt;p&gt;Management for tenants&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;karavictl tenant &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;flags&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id=&#34;options-4&#34;&gt;Options&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -h, --help   help for tenant
+&lt;/code&gt;&lt;/pre&gt;&lt;hr&gt;
+&lt;h3 id=&#34;karavictl-tenant-create&#34;&gt;karavictl tenant create&lt;/h3&gt;
+&lt;p&gt;Create a tenant resource within CSM&lt;/p&gt;
+&lt;h5 id=&#34;synopsis-21&#34;&gt;Synopsis&lt;/h5&gt;
+&lt;p&gt;Creates a tenant resource within CSM&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;karavictl tenant create &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;flags&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id=&#34;required-flags-14&#34;&gt;Required Flags&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -n, --name          Tenant name
+  -f, --admin-token   Path to admin token file
+      --addr          Address of the CSM Authorization Proxy Server
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;optional-flags-16&#34;&gt;Optional Flags&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -h, --help         Help for delete
+  -a, --approvesdc   To allow/deny SDC approval requests (default true | This flag is only applicable to PowerFlex. This flag will Approve/Deny  a tenant&amp;#39;s SDC request)
+      --insecure     Skip certificate validation of the CSM Authorization Proxy Server
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-16&#34;&gt;Output&lt;/h5&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;karavictl tenant create --name Alice --admin-token admintoken.yaml --addr csm-authorization.host.com
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;On success, there will be no output. You may run &lt;code&gt;karavictl tenant get --name &amp;lt;tenant-name&amp;gt;&lt;/code&gt; to confirm the creation occurred.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;karavictl-tenant-get&#34;&gt;karavictl tenant get&lt;/h3&gt;
+&lt;p&gt;Get a tenant resource within CSM&lt;/p&gt;
+&lt;h5 id=&#34;synopsis-22&#34;&gt;Synopsis&lt;/h5&gt;
+&lt;p&gt;Gets a tenant resource and its assigned roles within CSM&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;karavictl tenant get &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;flags&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id=&#34;required-flags-15&#34;&gt;Required Flags&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -n, --name          Tenant name
+  -f, --admin-token   Path to admin token file
+      --addr          Address of the CSM Authorization Proxy Server
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;optional-flags-17&#34;&gt;Optional Flags&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -h, --help       Help for delete
+      --insecure   Skip certificate validation of the CSM Authorization Proxy Server
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-17&#34;&gt;Output&lt;/h5&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;karavictl tenant get --name Alice --admin-token admintoken.yaml --addr csm-authorization.host.com
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;name&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;Alice&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;roles&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;role-1,role-2&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;hr&gt;
+&lt;h3 id=&#34;karavictl-tenant-list&#34;&gt;karavictl tenant list&lt;/h3&gt;
+&lt;p&gt;Lists tenant resources within CSM&lt;/p&gt;
+&lt;h5 id=&#34;synopsis-23&#34;&gt;Synopsis&lt;/h5&gt;
+&lt;p&gt;Lists tenant resources within CSM&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;karavictl tenant list &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;flags&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id=&#34;required-flags-16&#34;&gt;Required Flags&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -f, --admin-token   Path to admin token file
+      --addr          Address of the CSM Authorization Proxy Server
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;optional-flags-18&#34;&gt;Optional Flags&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -h, --help       Help for delete
+      --insecure   Skip certificate validation of the CSM Authorization Proxy Server
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-18&#34;&gt;Output&lt;/h5&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;karavictl tenant list --admin-token admintoken.yaml --addr csm-authorization.host.com
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;tenants&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;name&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;Alice&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;hr&gt;
+&lt;h3 id=&#34;karavictl-tenant-revoke&#34;&gt;karavictl tenant revoke&lt;/h3&gt;
+&lt;p&gt;Revokes access for a tenant&lt;/p&gt;
+&lt;h5 id=&#34;synopsis-24&#34;&gt;Synopsis&lt;/h5&gt;
+&lt;p&gt;Revokes access to storage resources for a tenant&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;karavictl tenant revoke &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;flags&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id=&#34;required-flags-17&#34;&gt;Required Flags&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -n, --name          Tenant name
+  -f, --admin-token   Path to admin token file
+      --addr          Address of the CSM Authorization Proxy Server
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;optional-flags-19&#34;&gt;Optional Flags&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -c, --cancel     Cancel a previous tenant revocation
+  -h, --help       Help for delete
+      --insecure   Skip certificate validation of the CSM Authorization Proxy Server
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-19&#34;&gt;Output&lt;/h5&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;karavictl tenant revoke --name Alice --admin-token admintoken.yaml --addr csm-authorization.host.com
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;On success, there will be no output.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;karavictl-tenant-delete&#34;&gt;karavictl tenant delete&lt;/h3&gt;
+&lt;p&gt;Deletes a tenant resource within CSM&lt;/p&gt;
+&lt;h5 id=&#34;synopsis-25&#34;&gt;Synopsis&lt;/h5&gt;
+&lt;p&gt;Deletes a tenant resource within CSM&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;karavictl tenant delete &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;flags&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id=&#34;required-flags-18&#34;&gt;Required Flags&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -n, --name          Tenant name
+  -f, --admin-token   Path to admin token file
+      --addr          Address of the CSM Authorization Proxy Server
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;optional-flags-20&#34;&gt;Optional Flags&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -h, --help       Help for delete
+      --insecure   Skip certificate validation of the CSM Authorization Proxy Server
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-20&#34;&gt;Output&lt;/h5&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;karavictl tenant delete --name Alice --admin-token admintoken.yaml --addr csm-authorization.host.com
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;On success, there will be no output. You may run &lt;code&gt;karavictl tenant get --name &amp;lt;tenant-name&amp;gt;&lt;/code&gt; to confirm the deletion occurred.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;karavictl-tenant-update&#34;&gt;karavictl tenant update&lt;/h3&gt;
+&lt;p&gt;Updates a tenant&amp;rsquo;s resource within CSM&lt;/p&gt;
+&lt;h5 id=&#34;synopsis-26&#34;&gt;Synopsis&lt;/h5&gt;
+&lt;p&gt;Updates a tenant resource within CSM&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;karavictl tenant update &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;flags&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id=&#34;required-flags-19&#34;&gt;Required Flags&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -n, --name          Tenant name
+  -f, --admin-token   Path to admin token file
+      --addr          Address of the CSM Authorization Proxy Server
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;optional-flags-21&#34;&gt;Optional Flags&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -h, --help         Help for delete
+  -a, --approvesdc   To allow/deny SDC approval requests (default true | This flag is only applicable to PowerFlex. This flag will Approve/Deny a tenant&amp;#39;s SDC request)
+      --insecure     Skip certificate validation of the CSM Authorization Proxy Server
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-21&#34;&gt;Output&lt;/h5&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;karavictl tenant update --name Alice --approvesdc&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#204a87&#34;&gt;false&lt;/span&gt; --admin-token admintoken.yaml --addr csm-authorization.host.com
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;On success, there will be no output. You may run &lt;code&gt;karavictl tenant get --name &amp;lt;tenant-name&amp;gt;&lt;/code&gt; to confirm the update was persisted.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Docs: Troubleshooting</title>
+      <link>https://dell.github.io/csm-docs/docs/authorization/v1.x-ga/troubleshooting/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dell.github.io/csm-docs/docs/authorization/v1.x-ga/troubleshooting/</guid>
+      <description>
+        
+        
+        
+
+&lt;div class=&#34;pageinfo pageinfo-primary&#34;&gt;
+&lt;p&gt;The CSM Authorization RPM will be deprecated in a future release. It is highly recommended that you use CSM Authorization Helm deployment or CSM Operator going forward.&lt;/p&gt;
+
+&lt;/div&gt;
+
+&lt;h2 id=&#34;rpm-deployment&#34;&gt;RPM Deployment&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#The-Failure-of-Building-an-Authorization-RPM&#34;&gt;The Failure of Building an Authorization RPM&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#running-karavictl-tenant-commands-result-in-an-http-504-error&#34;&gt;Running &lt;code&gt;karavictl tenant&lt;/code&gt; commands result in an HTTP 504 error&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#installation-fails-to-install-policies&#34;&gt;Installation fails to install policies&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#after-installation-the-create-pvc-pod-is-in-an-error-state&#34;&gt;After installation, the create-pvc Pod is in an Error state&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#intermittent-401-issues-with-generated-token&#34;&gt;Intermittent 401 issues with generated token&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;the-failure-of-building-an-authorization-rpm&#34;&gt;The Failure of Building an Authorization RPM&lt;/h3&gt;
+&lt;p&gt;This response occurs when running &amp;lsquo;make rpm&amp;rsquo; without the proper permissions or correct pathing of the Authorization repository.&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;Error response from daemon: failed to create shim task: OCI runtime create failed: runc create failed: unable to start container process: error during container init: error mounting &amp;#34;/root/karavi-authorization/bin/deploy&amp;#34; to rootfs at &amp;#34;/home/builder/rpm/deploy&amp;#34;: mount /root/karavi-authorization/bin/deploy:/home/builder/rpm/deploy (via /proc/self/fd/6), flags: 0x5000: not a directory: unknown: Are you trying to mount a directory onto a file (or vice-versa)? Check if the specified host path exists and is the expected type.ERRO[0001] error waiting for container: context canceled 
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;Resolution&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Ensure the cloned repository is in a folder independent of the root or home directory.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;/root/myrepos/karavi-authorization
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;Enable appropriate permissions to the RPM folder (this is where the Authorization RPM is located after being built).&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;chmod o+rwx deploy/rpm
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;retrieve-csm-authorization-server-logs&#34;&gt;Retrieve CSM Authorization Server Logs&lt;/h3&gt;
+&lt;p&gt;To retrieve logs from services on the CSM Authorization Server, run the following command (e.g proxy-server logs):&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;k3s kubectl logs deploy/proxy-server -n karavi -c proxy-server
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;For OPA related logs, run:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt; k3s kubectl logs deploy/proxy-server -n karavi -c opa
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;running-karavictl-tenant-commands-result-in-an-http-504-error&#34;&gt;Running &amp;ldquo;karavictl tenant&amp;rdquo; commands result in an HTTP 504 error&lt;/h3&gt;
+&lt;p&gt;This situation may occur if there are Iptables or other firewall rules preventing communication with the provided &lt;code&gt;DNS-hostname&lt;/code&gt;:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;karavictl tenant list --addr &amp;lt;DNS-hostname&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;{
+  &amp;#34;ErrorMsg&amp;#34;: &amp;#34;rpc error: code = Unavailable desc = Gateway Timeout: HTTP status code 504; 
+  transport: received the unexpected content-type \&amp;#34;text/plain; charset=utf-8\&amp;#34;&amp;#34;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;Resolution&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Consult with your system administrator or Iptables/firewall documentation. If there are rules in place to
+prevent communication with the &lt;code&gt;DNS-hostname&lt;/code&gt;, either new rules must be created or existing rules must be updated.&lt;/p&gt;
+&lt;h3 id=&#34;installation-fails-to-install-policies&#34;&gt;Installation fails to install policies&lt;/h3&gt;
+&lt;p&gt;If SELinux is enabled, the policies may fail to install:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;error: failed to install policies (see /tmp/policy-install-for-karavi3163047435): exit status 1
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;Resolution&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;This issue should only occur with older versions of CSM Authorization. If your system is encountering this issue, upgrade to version 1.5.0 or above.&lt;/p&gt;
+&lt;h3 id=&#34;after-installation-the-create-pvc-pod-is-in-an-error-state&#34;&gt;After installation, the create-pvc Pod is in an Error state&lt;/h3&gt;
+&lt;p&gt;If SELinux is enabled, the create-pvc Pod may be in an Error state:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;kube-system    create-pvc-44a763c7-e70f-4e32-a114-e94615041042   0/1     Error       0          102s
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;Resolution&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Run the following commands to allow the PVC to be created:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;semanage fcontext -a -t container_file_t  &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;/var/lib/rancher/k3s/storage(/.*)?&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;restorecon -R  /var/lib/rancher/k3s/storage/
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;intermittent-401-issues-with-generated-token&#34;&gt;Intermittent 401 issues with generated token&lt;/h3&gt;
+&lt;p&gt;This issue occurs when a new access token is generated in an existing driver installation.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Resolution&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;If you are applying a new token in an existing driver installation, restart the driver pods for the new token to take effect. The token is read once when the driver pods are started and is not dynamically updated.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl -n &amp;lt;driver-namespace&amp;gt; rollout restart deploy/&amp;lt;driver&amp;gt;-controller
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl -n &amp;lt;driver-namespace&amp;gt; rollout restart ds/&amp;lt;driver&amp;gt;-node
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;helm-deployment&#34;&gt;Helm Deployment&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#the-csi-driver-for-dell-powerflex-v230-is-in-an-error-or-crashloopbackoff-state-due-to-request-denied-for-path-errors&#34;&gt;The CSI Driver for Dell PowerFlex v2.3.0 is in an Error or CrashLoopBackoff state due to &amp;ldquo;request denied for path&amp;rdquo; errors&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#intermittent-401-issues-with-generated-token&#34;&gt;Intermittent 401 issues with generated token&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;the-csi-driver-for-dell-powerflex-v230-is-in-an-error-or-crashloopbackoff-state-due-to-request-denied-for-path-errors&#34;&gt;The CSI Driver for Dell PowerFlex v2.3.0 is in an Error or CrashLoopBackoff state due to &amp;ldquo;request denied for path&amp;rdquo; errors&lt;/h3&gt;
+&lt;p&gt;The vxflexos-controller pods will have logs similar to:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;time=&amp;#34;2022-06-30T17:35:03Z&amp;#34; level=error msg=&amp;#34;failed to list vols for array 2d6fb7c6370a990f : rpc error: code = Internal desc = Unable to list volumes: request denied for path &amp;#34; error=&amp;#34;rpc error: code = Internal desc = Unable to list volumes: request denied for path&amp;#34;
+time=&amp;#34;2022-06-30T17:35:03Z&amp;#34; level=error msg=&amp;#34;array 2d6fb7c6370a990f probe failed: failed to list vols for array 2d6fb7c6370a990f : rpc error: code = Internal desc = Unable to list volumes: request denied for path &amp;#34;
+...
+time=&amp;#34;2022-06-30T17:35:03Z&amp;#34; level=fatal msg=&amp;#34;grpc failed&amp;#34; error=&amp;#34;rpc error: code = FailedPrecondition desc = All arrays are not working. Could not proceed further: map[2d6fb7c6370a990f:failed to list vols for array 2d6fb7c6370a990f : rpc error: code = Internal desc = Unable to list volumes: request denied for path ]&amp;#34;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;The vxflexos-node pods will have logs similar to:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;time=&amp;#34;2022-06-30T17:38:32Z&amp;#34; level=error msg=&amp;#34;failed to list vols for array 2d6fb7c6370a990f : rpc error: code = Internal desc = Unable to list volumes: request denied for path &amp;#34; error=&amp;#34;rpc error: code = Internal desc = Unable to list volumes: request denied for path&amp;#34;
+time=&amp;#34;2022-06-30T17:38:32Z&amp;#34; level=error msg=&amp;#34;array 2d6fb7c6370a990f probe failed: failed to list vols for array 2d6fb7c6370a990f : rpc error: code = Internal desc = Unable to list volumes: request denied for path &amp;#34;
+...
+time=&amp;#34;2022-06-30T17:38:32Z&amp;#34; level=fatal msg=&amp;#34;grpc failed&amp;#34; error=&amp;#34;rpc error: code = FailedPrecondition desc = All arrays are not working. Could not proceed further: map[2d6fb7c6370a990f:failed to list vols for array 2d6fb7c6370a990f : rpc error: code = Internal desc = Unable to list volumes: request denied for path ]&amp;#34;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;This occurs when the CSM Authorization proxy-server does not allow all driver HTTPS request paths.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Resolution&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Edit the &lt;code&gt;powerflex-urls&lt;/code&gt; configMap in the namespace where CSM Authorization is deployed to allow all request paths by default.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl -n &amp;lt;namespace&amp;gt; edit configMap powerflex-urls
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;In the &lt;code&gt;data&lt;/code&gt; field, navigate towards the bottom of this field where you see &lt;code&gt;default allow = false&lt;/code&gt;. This is highlighted in &lt;strong&gt;bold&lt;/strong&gt; in the example below. Replace &lt;code&gt;false&lt;/code&gt; with &lt;code&gt;true&lt;/code&gt; and save the edit.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;data&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;url.rego&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;# Copyright © 2022 Dell Inc., or its subsidiaries. All Rights Reserved.\n#\n#
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;    Licensed under the Apache License, Version 2.0 (the \&amp;#34;License\&amp;#34;);\n# you may not
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;    use this file except in compliance with the License.\n# You may obtain a copy
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;    of the License at\n#\n#     http:#www.apache.org/licenses/LICENSE-2.0\n#\n# Unless
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;    required by applicable law or agreed to in writing, software\n# distributed under
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;    the License is distributed on an \&amp;#34;AS IS\&amp;#34; BASIS,\n# WITHOUT WARRANTIES OR CONDITIONS
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;    OF ANY KIND, either express or implied.\n# See the License for the specific language
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;    governing permissions and\n# limitations under the License.\n\npackage karavi.authz.url\n\nallowlist
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;    = [\n    \&amp;#34;GET /api/login/\&amp;#34;,\n\t\t\&amp;#34;POST /proxy/refresh-token/\&amp;#34;,\n\t\t\&amp;#34;GET
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;    /api/version/\&amp;#34;,\n\t\t\&amp;#34;GET /api/types/System/instances/\&amp;#34;,\n\t\t\&amp;#34;GET /api/types/StoragePool/instances/\&amp;#34;,\n\t\t\&amp;#34;POST
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;    /api/types/Volume/instances/\&amp;#34;,\n\t\t\&amp;#34;GET /api/instances/Volume::[a-f0-9]+/$\&amp;#34;,\n\t\t\&amp;#34;POST
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;    /api/types/Volume/instances/action/queryIdByKey/\&amp;#34;,\n\t\t\&amp;#34;GET /api/instances/System::[a-f0-9]+/relationships/Sdc/\&amp;#34;,\n\t\t\&amp;#34;GET
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;    /api/instances/Sdc::[a-f0-9]+/relationships/Statistics/\&amp;#34;,\n\t\t\&amp;#34;GET /api/instances/Sdc::[a-f0-9]+/relationships/Volume/\&amp;#34;,\n\t\t\&amp;#34;GET
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;    /api/instances/Volume::[a-f0-9]+/relationships/Statistics/\&amp;#34;,\n\t\t\&amp;#34;GET /api/instances/StoragePool::[a-f0-9]+/relationships/Statistics/\&amp;#34;,\n\t\t\&amp;#34;POST
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;    /api/instances/Volume::[a-f0-9]+/action/addMappedSdc/\&amp;#34;,\n\t\t\&amp;#34;POST /api/instances/Volume::[a-f0-9]+/action/removeMappedSdc/\&amp;#34;,\n\t\t\&amp;#34;POST
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;    /api/instances/Volume::[a-f0-9]+/action/removeVolume/\&amp;#34;\n]\n\n&amp;lt;b&amp;gt;default allow =
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;    false&amp;lt;/b&amp;gt;\nallow {\n\tregex.match(allowlist[_], sprintf(\&amp;#34;%s %s\&amp;#34;, [input.method,
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;    input.url]))\n}\n&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Edited data:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;data&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;url.rego&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;# Copyright © 2022 Dell Inc., or its subsidiaries. All Rights Reserved.\n#\n#
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;    Licensed under the Apache License, Version 2.0 (the \&amp;#34;License\&amp;#34;);\n# you may not
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;    use this file except in compliance with the License.\n# You may obtain a copy
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;    of the License at\n#\n#     http:#www.apache.org/licenses/LICENSE-2.0\n#\n# Unless
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;    required by applicable law or agreed to in writing, software\n# distributed under
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;    the License is distributed on an \&amp;#34;AS IS\&amp;#34; BASIS,\n# WITHOUT WARRANTIES OR CONDITIONS
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;    OF ANY KIND, either express or implied.\n# See the License for the specific language
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;    governing permissions and\n# limitations under the License.\n\npackage karavi.authz.url\n\nallowlist
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;    = [\n    \&amp;#34;GET /api/login/\&amp;#34;,\n\t\t\&amp;#34;POST /proxy/refresh-token/\&amp;#34;,\n\t\t\&amp;#34;GET
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;    /api/version/\&amp;#34;,\n\t\t\&amp;#34;GET /api/types/System/instances/\&amp;#34;,\n\t\t\&amp;#34;GET /api/types/StoragePool/instances/\&amp;#34;,\n\t\t\&amp;#34;POST
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;    /api/types/Volume/instances/\&amp;#34;,\n\t\t\&amp;#34;GET /api/instances/Volume::[a-f0-9]+/$\&amp;#34;,\n\t\t\&amp;#34;POST
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;    /api/types/Volume/instances/action/queryIdByKey/\&amp;#34;,\n\t\t\&amp;#34;GET /api/instances/System::[a-f0-9]+/relationships/Sdc/\&amp;#34;,\n\t\t\&amp;#34;GET
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;    /api/instances/Sdc::[a-f0-9]+/relationships/Statistics/\&amp;#34;,\n\t\t\&amp;#34;GET /api/instances/Sdc::[a-f0-9]+/relationships/Volume/\&amp;#34;,\n\t\t\&amp;#34;GET
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;    /api/instances/Volume::[a-f0-9]+/relationships/Statistics/\&amp;#34;,\n\t\t\&amp;#34;GET /api/instances/StoragePool::[a-f0-9]+/relationships/Statistics/\&amp;#34;,\n\t\t\&amp;#34;POST
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;    /api/instances/Volume::[a-f0-9]+/action/addMappedSdc/\&amp;#34;,\n\t\t\&amp;#34;POST /api/instances/Volume::[a-f0-9]+/action/removeMappedSdc/\&amp;#34;,\n\t\t\&amp;#34;POST
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;    /api/instances/Volume::[a-f0-9]+/action/removeVolume/\&amp;#34;\n]\n\n&amp;lt;b&amp;gt;default allow =
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;    true&amp;lt;/b&amp;gt;\nallow {\n\tregex.match(allowlist[_], sprintf(\&amp;#34;%s %s\&amp;#34;, [input.method,
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;    input.url]))\n}\n&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;Rollout restart the CSM Authorization proxy-server so the policy change gets applied.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl -n &amp;lt;namespace&amp;gt; rollout restart deploy/proxy-server
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;Optionally, rollout restart the CSI Driver for Dell PowerFlex to restart the driver pods. Alternatively, wait for the Kubernetes CrashLoopBackoff behavior to restart the driver.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl -n &amp;lt;driver-namespace&amp;gt; rollout restart deploy/vxflexos-controller
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl -n &amp;lt;driver-namespace&amp;gt; rollout restart daemonSet/vxflexos-node
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;intermittent-401-issues-with-generated-token-1&#34;&gt;Intermittent 401 issues with generated token&lt;/h3&gt;
+&lt;p&gt;This issue occurs when a new access token is generated in an existing driver installation.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Resolution&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;If you are applying a new token in an existing driver installation, restart the driver pods for the new token to take effect. The token is read once when the driver pods are started and is not dynamically updated.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl -n &amp;lt;driver-namespace&amp;gt; rollout restart deploy/&amp;lt;driver&amp;gt;-controller
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl -n &amp;lt;driver-namespace&amp;gt; rollout restart ds/&amp;lt;driver&amp;gt;-node
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+      </description>
+    </item>
+    
+    <item>
+      <title>Docs: Release notes</title>
+      <link>https://dell.github.io/csm-docs/docs/authorization/v1.x-ga/release/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dell.github.io/csm-docs/docs/authorization/v1.x-ga/release/</guid>
+      <description>
+        
+        
+        &lt;h2 id=&#34;release-notes---csm-authorization-1110&#34;&gt;Release Notes - CSM Authorization 1.11.0&lt;/h2&gt;
+&lt;h3 id=&#34;new-featureschanges&#34;&gt;New Features/Changes&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1284&#34;&gt;#1284 - [FEATURE]: Support for Openshift 4.15&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/926&#34;&gt;#926 - [FEATURE]: Fixing the linting, formatting and vetting issues&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;fixed-issues&#34;&gt;Fixed Issues&lt;/h3&gt;
+&lt;h3 id=&#34;known-issues&#34;&gt;Known Issues&lt;/h3&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Issue&lt;/th&gt;
+&lt;th&gt;Workaround&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;/table&gt;
+
+      </description>
+    </item>
+    
+  </channel>
+</rss>

@@ -82,7 +82,7 @@ Please visit &lt;a href=&#34;https://elabnavigator.dell.com/eln/modernHomeSSM&#3
 &lt;p&gt;&lt;strong&gt;Steps&lt;/strong&gt;&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;
-&lt;p&gt;Run &lt;code&gt;git clone -b v2.10.1 https://github.com/dell/csi-powerflex.git&lt;/code&gt; to clone the git repository.&lt;/p&gt;
+&lt;p&gt;Run &lt;code&gt;git clone -b v2.11.0 https://github.com/dell/csi-powerflex.git&lt;/code&gt; to clone the git repository.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;A namespace for the driver is expected prior to running the command below. If one is not created already, you can run &lt;code&gt;kubectl create namespace vxflexos&lt;/code&gt; to create a new one.
@@ -188,6 +188,7 @@ Note that the namespace can be any user-defined name that follows the convention
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl create secret generic vxflexos-config -n vxflexos --from-file&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;config&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;samples/secret.yaml -o yaml --dry-run&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;client &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; kubectl replace -f -
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;em&gt;NOTE:&lt;/em&gt;&lt;/p&gt;
 &lt;ul&gt;
+&lt;li&gt;It is mandatory to use SDC 4.5.2.1 for OpenShift 4.16 and above.&lt;/li&gt;
 &lt;li&gt;The user needs to validate the YAML syntax and array-related key/values while replacing the vxflexos-creds secret.&lt;/li&gt;
 &lt;li&gt;If you want to create a new array or update the MDM values in the secret, you will need to reinstall the driver. If you change other details, such as login information, the secret will dynamically update &amp;ndash; see &lt;a href=&#34;../../../../../csidriver/features/powerflex#dynamic-array-configuration&#34;&gt;dynamic-array-configuration&lt;/a&gt; for more details.&lt;/li&gt;
 &lt;li&gt;Old &lt;code&gt;json&lt;/code&gt; format of the array configuration file is still supported in this release. If you already have your configuration in &lt;code&gt;json&lt;/code&gt; format, you may continue to maintain it or you may transfer this configuration to &lt;code&gt;yaml&lt;/code&gt;format and replace/update the secret.&lt;/li&gt;
@@ -208,7 +209,7 @@ kubeVersion: &amp;ldquo;&amp;gt;= 1.21.0-0 &amp;lt; 1.29.0-0&amp;rdquo;&lt;/li&g
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Download the default values.yaml file&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#204a87&#34;&gt;cd&lt;/span&gt; dell-csi-helm-installer &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; wget -O myvalues.yaml https://github.com/dell/helm-charts/raw/csi-vxflexos-2.10.2/charts/csi-vxflexos/values.yaml
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#204a87&#34;&gt;cd&lt;/span&gt; dell-csi-helm-installer &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; wget -O myvalues.yaml https://github.com/dell/helm-charts/raw/csi-vxflexos-2.11.0/charts/csi-vxflexos/values.yaml
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;If you are using custom images, check the fields under &lt;code&gt;images&lt;/code&gt; in &lt;code&gt;my-vxflexos-settings.yaml&lt;/code&gt; to make sure that they are pointing to the correct image repository.&lt;/p&gt;
@@ -231,7 +232,7 @@ kubeVersion: &amp;ldquo;&amp;gt;= 1.21.0-0 &amp;lt; 1.29.0-0&amp;rdquo;&lt;/li&g
 &lt;td&gt;version&lt;/td&gt;
 &lt;td&gt;Set to verify the values file version matches driver version and used to pull the image as part of the image name.&lt;/td&gt;
 &lt;td&gt;Yes&lt;/td&gt;
-&lt;td&gt;2.10.1&lt;/td&gt;
+&lt;td&gt;2.11.0&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;images&lt;/td&gt;
@@ -243,7 +244,7 @@ kubeVersion: &amp;ldquo;&amp;gt;= 1.21.0-0 &amp;lt; 1.29.0-0&amp;rdquo;&lt;/li&g
 &lt;td&gt;images.powerflexSdc&lt;/td&gt;
 &lt;td&gt;Set to give the location of the SDC image used if automatic SDC deployment is being utilized.&lt;/td&gt;
 &lt;td&gt;Yes&lt;/td&gt;
-&lt;td&gt;dellemc/sdc:4.5&lt;/td&gt;
+&lt;td&gt;dellemc/sdc:4.5.2.1&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;certSecretCount&lt;/td&gt;
@@ -524,13 +525,13 @@ kubeVersion: &amp;ldquo;&amp;gt;= 1.21.0-0 &amp;lt; 1.29.0-0&amp;rdquo;&lt;/li&g
 &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;ol start=&#34;10&#34;&gt;
-&lt;li&gt;Install the driver using &lt;code&gt;csi-install.sh&lt;/code&gt; bash script by running &lt;code&gt;cd dell-csi-helm-installer &amp;amp;&amp;amp; ./csi-install.sh --namespace vxflexos --values myvalues.yaml --helm-charts-version csi-vxflexos-2.10.2&lt;/code&gt;. You may modify the release name with the &lt;code&gt;--release&lt;/code&gt; arg. If arg is not provided, release will be named &lt;code&gt;vxflexos&lt;/code&gt; by default.
+&lt;li&gt;Install the driver using &lt;code&gt;csi-install.sh&lt;/code&gt; bash script by running &lt;code&gt;cd dell-csi-helm-installer &amp;amp;&amp;amp; ./csi-install.sh --namespace vxflexos --values myvalues.yaml --helm-charts-version &amp;lt;version&amp;gt;&lt;/code&gt;. You may modify the release name with the &lt;code&gt;--release&lt;/code&gt; arg. If arg is not provided, release will be named &lt;code&gt;vxflexos&lt;/code&gt; by default.
 Alternatively, to do a helm install solely with Helm charts (without shell scripts), refer to &lt;code&gt;helm/README.md&lt;/code&gt;.&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;&lt;em&gt;NOTE:&lt;/em&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;
-&lt;p&gt;If you do not specify the &lt;code&gt;--helm-charts-version&lt;/code&gt; flag, by default the &lt;code&gt;csi-install.sh&lt;/code&gt; script will clone the version of the helm chart that is specified in the driver&amp;rsquo;s &lt;a href=&#34;https://github.com/dell/csi-powerflex/blob/main/dell-csi-helm-installer/csi-install.sh#L24&#34;&gt;csi-install.sh&lt;/a&gt; file. If you wish to install the driver using a different version of the helm chart, you need to include this flag. Also, remember to delete the &lt;code&gt;helm-charts&lt;/code&gt; repository present in the &lt;code&gt;csi-powerflex&lt;/code&gt; directory if it was cloned before.&lt;/p&gt;
+&lt;p&gt;The parameter &lt;code&gt;--helm-charts-version&lt;/code&gt; is optional and if you do not specify the flag, by default the &lt;code&gt;csi-install.sh&lt;/code&gt; script will clone the version of the helm chart that is specified in the driver&amp;rsquo;s &lt;a href=&#34;https://github.com/dell/csi-powerflex/blob/main/dell-csi-helm-installer/csi-install.sh#L24&#34;&gt;csi-install.sh&lt;/a&gt; file. If you wish to install the driver using a different version of the helm chart, you need to include this flag. Also, remember to delete the &lt;code&gt;helm-charts&lt;/code&gt; repository present in the &lt;code&gt;csi-powerflex&lt;/code&gt; directory if it was cloned before.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;For detailed instructions on how to run the install scripts, refer to the README.md  in the dell-csi-helm-installer folder.&lt;/p&gt;
@@ -643,6 +644,7 @@ Deleting a storage class has no impact on a running Pod with mounted PVCs. You c
 &lt;li&gt;Fibre Channel requirements&lt;/li&gt;
 &lt;li&gt;iSCSI requirements&lt;/li&gt;
 &lt;li&gt;NFS requirements&lt;/li&gt;
+&lt;li&gt;NVMeTCP requirements&lt;/li&gt;
 &lt;li&gt;Auto RDM for vSphere over FC requirements&lt;/li&gt;
 &lt;li&gt;Certificate validation for Unisphere REST API calls&lt;/li&gt;
 &lt;li&gt;Mount propagation is enabled on container runtime that is being used&lt;/li&gt;
@@ -689,6 +691,34 @@ For this , we need to install cert-manager using below command which manages the
 &lt;li&gt;Configure the NFS network. Please refer &lt;a href=&#34;https://dl.dell.com/content/manual57826791-dell-powermax-file-protocol-guide.pdf?language=en-us&amp;amp;ps=true&#34;&gt;here&lt;/a&gt; for more details.&lt;/li&gt;
 &lt;li&gt;PowerMax Embedded Management guest to access Unisphere for PowerMax.&lt;/li&gt;
 &lt;li&gt;Create the NAS server. Please refer &lt;a href=&#34;https://dl.dell.com/content/manual55638050-dell-powermax-file-quick-start-guide.pdf?language=en-us&amp;amp;ps=true&#34;&gt;here&lt;/a&gt; for more details.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;nvmetcp-requirements&#34;&gt;NVMeTCP requirements&lt;/h3&gt;
+&lt;p&gt;If you want to use the protocol, set up the NVMe initiators as follows:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Setup on Array &lt;br&gt;
+Once the NVMe endpoint is created on the array, follow the following step to update endpoint name to adhere with CSI driver.
+&lt;ul&gt;
+&lt;li&gt;Perform a  &lt;code&gt;nvme discover --transport=tcp --traddr=&amp;lt;InterfaceAdd&amp;gt; --trsvcid=4420&lt;/code&gt;. &lt;InterfaceAdd&gt; is the placeholder for actual IP address of NVMe Endpoint.&lt;/li&gt;
+&lt;li&gt;Fetch the &lt;em&gt;subnqn&lt;/em&gt;, for e.g.,  &lt;em&gt;nqn.1988-11.com.dell:PowerMax_2500:00:000120001100&lt;/em&gt;, this will be used as the subnqn holder while updating NVMe endpoint name.&lt;/li&gt;
+&lt;li&gt;Update the NVMe endpoint name as &lt;code&gt;&amp;lt;subnqn&amp;gt;:&amp;lt;dir&amp;gt;&amp;lt;port&amp;gt;&amp;gt;&lt;/code&gt;. Here is an example how it should look, &lt;em&gt;nqn.1988-11.com.dell:PowerMax_2500:00:000120001100:OR1C000&lt;/em&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Setup on Host
+&lt;ul&gt;
+&lt;li&gt;The driver requires NVMe management command-line interface (nvme-cli) to use configure, edit, view or start the NVMe client and target. The nvme-cli utility provides a command-line and interactive shell option. The NVMe CLI tool is installed in the host using the below command.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo apt install nvme-cli
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;Requirements for NVMeTCP&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Modules including the nvme, nvme_core, nvme_fabrics, and nvme_tcp are required for using NVMe over Fabrics using TCP. Load the NVMe and NVMe-OF Modules using the below commands:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;modprobe nvme
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;modprobe nvme_tcp
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;The NVMe modules may not be available after a node reboot. Loading the modules at startup is recommended.&lt;/li&gt;
+&lt;li&gt;Generate and update the &lt;em&gt;/etc/nvme/hostnqn&lt;/em&gt; with hostNQN details.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;auto-rdm-for-vsphere-over-fc-requirements&#34;&gt;Auto RDM for vSphere over FC requirements&lt;/h3&gt;
 &lt;p&gt;The CSI Driver for Dell PowerMax supports auto RDM for vSphere over FC. These requirements are applicable for the clusters deployed on ESX/ESXi using virtualized environement.&lt;/p&gt;
@@ -809,7 +839,7 @@ Alternatively, you can check the status of the multipath service by entering the
 &lt;h2 id=&#34;install-the-driver&#34;&gt;Install the Driver&lt;/h2&gt;
 &lt;p&gt;&lt;strong&gt;Steps&lt;/strong&gt;&lt;/p&gt;
 &lt;ol&gt;
-&lt;li&gt;Run &lt;code&gt;git clone -b v2.10.1 https://github.com/dell/csi-powermax.git&lt;/code&gt; to clone the git repository. This will include the Helm charts and dell-csi-helm-installer scripts.&lt;/li&gt;
+&lt;li&gt;Run &lt;code&gt;git clone -b v2.11.0 https://github.com/dell/csi-powermax.git&lt;/code&gt; to clone the git repository. This will include the Helm charts and dell-csi-helm-installer scripts.&lt;/li&gt;
 &lt;li&gt;Ensure that you have created a namespace where you want to install the driver. You can run &lt;code&gt;kubectl create namespace powermax&lt;/code&gt; to create a new one&lt;/li&gt;
 &lt;li&gt;Edit the &lt;code&gt;samples/secret/secret.yaml&lt;/code&gt; file,to point to the correct namespace, and replace the values for the username and password parameters.
 These values can be obtained using base64 encoding as described in the following example:
@@ -820,7 +850,7 @@ These values can be obtained using base64 encoding as described in the following
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl create -f samples/secret/secret.yaml
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
 &lt;li&gt;Download the default values.yaml file
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#204a87&#34;&gt;cd&lt;/span&gt; dell-csi-helm-installer &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; wget -O my-powermax-settings.yaml https://github.com/dell/helm-charts/raw/csi-powermax-2.10.1/charts/csi-powermax/values.yaml
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#204a87&#34;&gt;cd&lt;/span&gt; dell-csi-helm-installer &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; wget -O my-powermax-settings.yaml https://github.com/dell/helm-charts/raw/csi-powermax-2.11.0/charts/csi-powermax/values.yaml
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
 &lt;li&gt;Ensure the unisphere have 10.0 REST endpoint support by clicking on Unisphere -&amp;gt; Help (?) -&amp;gt; About in Unisphere for PowerMax GUI.&lt;/li&gt;
 &lt;li&gt;Edit the newly created file and provide values for the following parameters
@@ -989,7 +1019,7 @@ These values can be obtained using base64 encoding as described in the following
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;transportProtocol&lt;/td&gt;
-&lt;td&gt;Set the preferred transport protocol for the Kubernetes cluster which helps the driver choose between FC and iSCSI when a node has both FC and iSCSI connectivity to a PowerMax array.&lt;/td&gt;
+&lt;td&gt;Set the preferred transport protocol for the Kubernetes cluster which helps the driver choose between FC, iSCSI and NVMeTCP, when a node has multiple protocol connectivity to a PowerMax array.&lt;/td&gt;
 &lt;td&gt;No&lt;/td&gt;
 &lt;td&gt;Empty&lt;/td&gt;
 &lt;/tr&gt;
@@ -1027,7 +1057,7 @@ These values can be obtained using base64 encoding as described in the following
 &lt;td&gt;version&lt;/td&gt;
 &lt;td&gt;Current version of the driver. Don&amp;rsquo;t modify this value as this value will be used by the install script.&lt;/td&gt;
 &lt;td&gt;Yes&lt;/td&gt;
-&lt;td&gt;v2.10.1&lt;/td&gt;
+&lt;td&gt;v2.10.0&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;images&lt;/td&gt;
@@ -1315,7 +1345,7 @@ These values can be obtained using base64 encoding as described in the following
 &lt;/table&gt;
 &lt;ol start=&#34;8&#34;&gt;
 &lt;li&gt;Install the driver using &lt;code&gt;csi-install.sh&lt;/code&gt; bash script by running
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#204a87&#34;&gt;cd&lt;/span&gt; ../dell-csi-helm-installer &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; ./csi-install.sh --namespace powermax --values ./my-powermax-settings.yaml
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#204a87&#34;&gt;cd&lt;/span&gt; ../dell-csi-helm-installer &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; ./csi-install.sh --namespace powermax --values ./my-powermax-settings.yaml --helm-charts-version &amp;lt;version&amp;gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
 &lt;li&gt;Or you can also install the driver using standalone helm chart using the command
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;helm install --values  my-powermax-settings.yaml --namespace powermax powermax ./csi-powermax
@@ -1323,6 +1353,7 @@ These values can be obtained using base64 encoding as described in the following
 &lt;/ol&gt;
 &lt;p&gt;&lt;em&gt;Note:&lt;/em&gt;&lt;/p&gt;
 &lt;ul&gt;
+&lt;li&gt;The parameter &lt;code&gt;--helm-charts-version&lt;/code&gt; is optional and if you do not specify the flag, by default the &lt;code&gt;csi-install.sh&lt;/code&gt; script will clone the version of the helm chart that is specified in the driver&amp;rsquo;s &lt;a href=&#34;https://github.com/dell/csi-powermax/blob/main/dell-csi-helm-installer/csi-install.sh#L52&#34;&gt;csi-install.sh&lt;/a&gt; file. If you wish to install the driver using a different version of the helm chart, you need to include this flag. Also, remember to delete the &lt;code&gt;helm-charts&lt;/code&gt; repository present in the &lt;code&gt;csi-powermax&lt;/code&gt; directory if it was cloned before.&lt;/li&gt;
 &lt;li&gt;For detailed instructions on how to run the install scripts, see the readme document in the dell-csi-helm-installer folder.&lt;/li&gt;
 &lt;li&gt;There are a set of samples provided &lt;a href=&#34;#sample-values-file&#34;&gt;here&lt;/a&gt; to help you configure the driver with reverse proxy&lt;/li&gt;
 &lt;li&gt;This script also runs the verify.sh script in the same directory. You will be prompted to enter the credentials for each of the Kubernetes nodes. The &lt;code&gt;verify.sh&lt;/code&gt; script needs the credentials to check if the iSCSI initiators have been configured on all nodes. You can also skip the verification step by specifying the &lt;code&gt;--skip-verify-node&lt;/code&gt; option&lt;/li&gt;
@@ -1458,21 +1489,22 @@ follow either of the way.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Steps&lt;/strong&gt;&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;
-&lt;p&gt;Run &lt;code&gt;git clone -b v2.10.1 https://github.com/dell/csi-powerscale.git&lt;/code&gt; to clone the git repository.&lt;/p&gt;
+&lt;p&gt;Run &lt;code&gt;git clone -b v2.11.0 https://github.com/dell/csi-powerscale.git&lt;/code&gt; to clone the git repository.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Ensure that you have created the namespace where you want to install the driver. You can run &lt;code&gt;kubectl create namespace isilon&lt;/code&gt; to create a new one. The use of &amp;ldquo;isilon&amp;rdquo;  as the namespace is just an example. You can choose any name for the namespace.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Collect information from the PowerScale Systems like IP address, IsiPath, username, and password. Make a note of the value for these parameters as they must be entered in the &lt;em&gt;secret.yaml&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: The &amp;lsquo;clusterName&amp;rsquo; serves as a logical, unique identifier for the array that should remain unchanged once it is included in the volume handle. Altering this identifier is not advisable, as it would result in the failure of all operations associated with the volume that was created earlier.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;Download &lt;code&gt;wget -O my-isilon-settings.yaml https://raw.githubusercontent.com/dell/helm-charts/csi-isilon-2.10.1/charts/csi-isilon/values.yaml&lt;/code&gt; into &lt;code&gt;cd ../dell-csi-helm-installer&lt;/code&gt; to customize settings for installation.&lt;/p&gt;
+&lt;p&gt;Download &lt;code&gt;wget -O my-isilon-settings.yaml https://raw.githubusercontent.com/dell/helm-charts/csi-isilon-2.11.0/charts/csi-isilon/values.yaml&lt;/code&gt; into &lt;code&gt;cd ../dell-csi-helm-installer&lt;/code&gt; to customize settings for installation.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Edit &lt;em&gt;my-isilon-settings.yaml&lt;/em&gt; to set the following parameters for your installation:
 The following table lists the primary configurable parameters of the PowerScale driver Helm chart and their default values. More detailed information can be
-found in the  &lt;a href=&#34;https://github.com/dell/helm-charts/blob/csi-isilon-2.10.1/charts/csi-isilon/values.yaml&#34;&gt;&lt;code&gt;values.yaml&lt;/code&gt;&lt;/a&gt; file in this repository.&lt;/p&gt;
+found in the  &lt;a href=&#34;https://github.com/dell/helm-charts/blob/csi-isilon-2.11.0/charts/csi-isilon/values.yaml&#34;&gt;&lt;code&gt;values.yaml&lt;/code&gt;&lt;/a&gt; file in this repository.&lt;/p&gt;
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
@@ -1940,10 +1972,14 @@ found in the  &lt;a href=&#34;https://github.com/dell/helm-charts/blob/csi-isilo
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Install the driver using &lt;code&gt;csi-install.sh&lt;/code&gt; bash script and default yaml by running&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#204a87&#34;&gt;cd&lt;/span&gt; dell-csi-helm-installer &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; wget -O my-isilon-settings.yaml https://raw.githubusercontent.com/dell/helm-charts/csi-isilon-2.10.1/charts/csi-isilon/values.yaml &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;./csi-install.sh --namespace isilon --values my-isilon-settings.yaml
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#204a87&#34;&gt;cd&lt;/span&gt; dell-csi-helm-installer &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; wget -O my-isilon-settings.yaml https://raw.githubusercontent.com/dell/helm-charts/csi-isilon-2.10.0/charts/csi-isilon/values.yaml &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;./csi-install.sh --namespace isilon --values  my-isilon-settings.yaml --helm-charts-version &amp;lt;version&amp;gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
 &lt;/ol&gt;
+&lt;p&gt;&lt;em&gt;NOTE:&lt;/em&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The parameter &lt;code&gt;--helm-charts-version&lt;/code&gt; is optional and if you do not specify the flag, by default the &lt;code&gt;csi-install.sh&lt;/code&gt; script will clone the version of the helm chart that is specified in the driver&amp;rsquo;s &lt;a href=&#34;https://github.com/dell/csi-powerscale/blob/main/dell-csi-helm-installer/csi-install.sh#L16&#34;&gt;csi-install.sh&lt;/a&gt; file. If you wish to install the driver using a different version of the helm chart, you need to include this flag. Also, remember to delete the &lt;code&gt;helm-charts&lt;/code&gt; repository present in the &lt;code&gt;csi-powerscale&lt;/code&gt; directory if it was cloned before.&lt;/li&gt;
+&lt;/ul&gt;
 &lt;h2 id=&#34;certificate-validation-for-onefs-rest-api-calls&#34;&gt;Certificate validation for OneFS REST API calls&lt;/h2&gt;
 &lt;p&gt;The CSI driver exposes an install parameter &amp;lsquo;skipCertificateValidation&amp;rsquo; which determines if the driver
 performs client-side verification of the OneFS certificates. The &amp;lsquo;skipCertificateValidation&amp;rsquo; parameter is set to true by default and the driver does not verify the OneFS certificates.&lt;/p&gt;
@@ -2223,7 +2259,7 @@ volume stats value under node should be set to true.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Steps&lt;/strong&gt;&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;
-&lt;p&gt;Run &lt;code&gt;git clone -b v2.10.1 https://github.com/dell/csi-powerstore.git&lt;/code&gt; to clone the git repository.&lt;/p&gt;
+&lt;p&gt;Run &lt;code&gt;git clone -b v2.11.0 https://github.com/dell/csi-powerstore.git&lt;/code&gt; to clone the git repository.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Ensure that you have created namespace where you want to install the driver. You can run &lt;code&gt;kubectl create namespace csi-powerstore&lt;/code&gt; to create a new one. &amp;ldquo;csi-powerstore&amp;rdquo; is just an example. You can choose any name for the namespace.
@@ -2258,7 +2294,7 @@ NFSv4 ACls are supported for NFSv4 shares on NFSv4 enabled NAS servers only. POS
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Download the default values.yaml file&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#204a87&#34;&gt;cd&lt;/span&gt; dell-csi-helm-installer &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; wget -O my-powerstore-settings.yaml https://github.com/dell/helm-charts/raw/csi-powerstore-2.10.1/charts/csi-powerstore/values.yaml
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#204a87&#34;&gt;cd&lt;/span&gt; dell-csi-helm-installer &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; wget -O my-powerstore-settings.yaml https://github.com/dell/helm-charts/raw/csi-powerstore-2.11.0/charts/csi-powerstore/values.yaml
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Edit the newly created values file and provide values for the following parameters &lt;code&gt;vi my-powerstore-settings.yaml&lt;/code&gt;:&lt;/p&gt;
@@ -2458,7 +2494,7 @@ NFSv4 ACls are supported for NFSv4 shares on NFSv4 enabled NAS servers only. POS
 &lt;/table&gt;
 &lt;ol start=&#34;8&#34;&gt;
 &lt;li&gt;Install the driver using &lt;code&gt;csi-install.sh&lt;/code&gt; bash script by running
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;./csi-install.sh --namespace csi-powerstore --values ./my-powerstore-settings.yaml
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;./csi-install.sh --namespace csi-powerstore --values ./my-powerstore-settings.yaml --helm-charts-version &amp;lt;version&amp;gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
 &lt;li&gt;After that the driver should be installed, you can check the condition of driver pods by running &lt;code&gt;kubectl get all -n csi-powerstore&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
@@ -2466,6 +2502,7 @@ NFSv4 ACls are supported for NFSv4 shares on NFSv4 enabled NAS servers only. POS
 &lt;/ol&gt;
 &lt;p&gt;&lt;em&gt;NOTE:&lt;/em&gt;&lt;/p&gt;
 &lt;ul&gt;
+&lt;li&gt;The parameter &lt;code&gt;--helm-charts-version&lt;/code&gt; is optional and if you do not specify the flag, by default the &lt;code&gt;csi-install.sh&lt;/code&gt; script will clone the version of the helm chart that is specified in the driver&amp;rsquo;s &lt;a href=&#34;https://github.com/dell/csi-powerstore/blob/main/dell-csi-helm-installer/csi-install.sh#L13&#34;&gt;csi-install.sh&lt;/a&gt; file. If you wish to install the driver using a different version of the helm chart, you need to include this flag. Also, remember to delete the &lt;code&gt;helm-charts&lt;/code&gt; repository present in the &lt;code&gt;csi-powerstore&lt;/code&gt; directory if it was cloned before.&lt;/li&gt;
 &lt;li&gt;For detailed instructions on how to run the install scripts, refer to the readme document in the dell-csi-helm-installer folder.&lt;/li&gt;
 &lt;li&gt;By default, the driver scans available SCSI adapters and tries to register them with the storage array under the SCSI hostname using &lt;code&gt;node.nodeNamePrefix&lt;/code&gt; and the ID read from the file pointed to by &lt;code&gt;node.nodeIDPath&lt;/code&gt;. If an adapter is already registered with the storage under a different hostname, the adapter is not used by the driver.&lt;/li&gt;
 &lt;li&gt;A hostname the driver uses for registration of adapters is in the form &lt;code&gt;&amp;lt;nodeNamePrefix&amp;gt;-&amp;lt;nodeID&amp;gt;-&amp;lt;nodeIP&amp;gt;&lt;/code&gt;. By default, these are csi-node and the machine ID read from the file &lt;code&gt;/etc/machine-id&lt;/code&gt;.&lt;/li&gt;
@@ -2597,7 +2634,7 @@ Unity XT.&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;Before you begin&lt;/em&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;As a pre-requisite for running this procedure, you must have the downloaded files, including the Helm chart from the source &lt;a href=&#34;https://github.com/dell/csi-unity&#34;&gt;git repository&lt;/a&gt; with the command
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;git clone -b v2.10.1 https://github.com/dell/csi-unity.git
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;git clone -b v2.11.0 https://github.com/dell/csi-unity.git
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
 &lt;li&gt;In the top-level dell-csi-helm-installer directory, there should be two scripts, &lt;code&gt;csi-install.sh&lt;/code&gt; and &lt;code&gt;csi-uninstall.sh&lt;/code&gt;.&lt;/li&gt;
 &lt;li&gt;Ensure &lt;em&gt;unity&lt;/em&gt; namespace exists in Kubernetes cluster. Use the &lt;code&gt;kubectl create namespace unity&lt;/code&gt; command to create the namespace if the namespace is not present.&lt;/li&gt;
@@ -2618,11 +2655,11 @@ kubeVersion: &amp;ldquo;&amp;gt;= 1.24.0-0 &amp;lt; 1.29.0-0&amp;rdquo;&lt;/li&g
 &lt;p&gt;Get the required values.yaml using the command below:&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#204a87&#34;&gt;cd&lt;/span&gt; dell-csi-helm-installer &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; wget -O my-unity-settings.yaml https://github.com/dell/helm-charts/raw/csi-unity-2.10.1/charts/csi-unity/values.yaml
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#204a87&#34;&gt;cd&lt;/span&gt; dell-csi-helm-installer &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; wget -O my-unity-settings.yaml https://github.com/dell/helm-charts/raw/csi-unity-2.11.0/charts/csi-unity/values.yaml
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;3&#34;&gt;
 &lt;li&gt;
 &lt;p&gt;Edit &lt;code&gt;values.yaml&lt;/code&gt; to set the following parameters for your installation:&lt;/p&gt;
-&lt;p&gt;The following table lists the primary configurable parameters of the Unity XT driver chart and their default values. More detailed information can be found in the &lt;a href=&#34;https://github.com/dell/helm-charts/blob/csi-unity-2.10.1/charts/csi-unity/values.yaml&#34;&gt;&lt;code&gt;values.yaml&lt;/code&gt;&lt;/a&gt; file in this repository.&lt;/p&gt;
+&lt;p&gt;The following table lists the primary configurable parameters of the Unity XT driver chart and their default values. More detailed information can be found in the &lt;a href=&#34;https://github.com/dell/helm-charts/blob/csi-unity-2.11.0/charts/csi-unity/values.yaml&#34;&gt;&lt;code&gt;values.yaml&lt;/code&gt;&lt;/a&gt; file in this repository.&lt;/p&gt;
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
@@ -2674,6 +2711,12 @@ kubeVersion: &amp;ldquo;&amp;gt;= 1.24.0-0 &amp;lt; 1.29.0-0&amp;rdquo;&lt;/li&g
 &lt;td&gt;Represents the number of certificate secrets, which the user is going to create for SSL authentication. (unity-cert-0..unity-cert-n). The minimum value should be 1.&lt;/td&gt;
 &lt;td&gt;No&lt;/td&gt;
 &lt;td&gt;1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;../../../../../csidriver/features/unity/#support-custom-networks-for-nfs-io-traffic&#34;&gt;allowedNetworks&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Defines the list of networks that can be used for NFS I/O traffic, CIDR format must be used.&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;td&gt;empty&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;imagePullPolicy&lt;/td&gt;
@@ -2937,8 +2980,12 @@ The driver will continue to use previous values in case of an error found in the
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Run the command to proceed with the installation using bash script.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;./csi-install.sh --namespace unity --values ./myvalues.yaml
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;A successful installation must display messages that look similar to the following samples:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;./csi-install.sh --namespace unity --values ./myvalues.yaml --helm-charts-version &amp;lt;version&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;em&gt;NOTE:&lt;/em&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The parameter &lt;code&gt;--helm-charts-version&lt;/code&gt; is optional and if you do not specify the flag, by default the &lt;code&gt;csi-install.sh&lt;/code&gt; script will clone the version of the helm chart that is specified in the driver&amp;rsquo;s &lt;a href=&#34;https://github.com/dell/csi-unity/blob/main/dell-csi-helm-installer/csi-install.sh#L22&#34;&gt;csi-install.sh&lt;/a&gt; file. If you wish to install the driver using a different version of the helm chart, you need to include this flag. Also, remember to delete the &lt;code&gt;helm-charts&lt;/code&gt; repository present in the &lt;code&gt;csi-unity&lt;/code&gt; directory if it was cloned before.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;A successful installation must display messages that look similar to the following samples:&lt;/p&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;------------------------------------------------------
 &amp;gt; Installing CSI Driver: csi-unity on 1.27
 ------------------------------------------------------
@@ -3011,7 +3058,7 @@ To install nightly or latest csi driver build using bash script use this command
 &lt;p&gt;You can also install the driver using standalone helm chart by cloning the centralised helm charts and running the helm install command as shown.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Syntax&lt;/strong&gt;:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;git clone -b csi-unity-2.10.1 https://github.com/dell/helm-charts
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;git clone -b csi-unity-2.11.0 https://github.com/dell/helm-charts
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;helm install &amp;lt;release-name&amp;gt; dell/container-storage-modules -n &amp;lt;namespace&amp;gt; --version &amp;lt;container-storage-module chart-version&amp;gt; -f &amp;lt;values.yaml location&amp;gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;

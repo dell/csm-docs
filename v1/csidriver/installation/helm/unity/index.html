@@ -18,13 +18,13 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/v1/csidriver/installation/helm/unity/" /><meta property="article:section" content="v1" />
 
-<meta property="article:modified_time" content="2024-03-21T02:39:59+05:30" />
+<meta property="article:modified_time" content="2024-07-17T16:10:53+05:30" />
 
 <meta itemprop="name" content="Unity XT">
 <meta itemprop="description" content="Installing CSI Driver for Unity XT via Helm
 ">
-<meta itemprop="dateModified" content="2024-03-21T02:39:59+05:30" />
-<meta itemprop="wordCount" content="2904">
+<meta itemprop="dateModified" content="2024-07-17T16:10:53+05:30" />
+<meta itemprop="wordCount" content="2985">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Unity XT"/>
 <meta name="twitter:description" content="Installing CSI Driver for Unity XT via Helm
@@ -85,13 +85,13 @@
 	
 	
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.10.2)</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.11.0)</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.9.4</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.10.2</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.8.0</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.9.4</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">v1.7.1</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">v1.8.0</a>
 	
 </div>
 
@@ -107,7 +107,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.4fb5864f327a63149f6f5b3c4260167d.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.e74d137ca81b1006f41653f984fe0a5d.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -129,7 +129,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.4fb5864f327a63149f6f5b3c4260167d.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.e74d137ca81b1006f41653f984fe0a5d.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -1099,9 +1099,16 @@ The driver will continue to use previous values in case of an error found in the
 </li>
 <li>
 <p>Run the command to proceed with the installation using bash script.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>./csi-install.sh --namespace unity --values ./myvalues.yaml
-</span></span></code></pre></div><p>A successful installation must display messages that look similar to the following samples:</p>
-<pre tabindex="0"><code>------------------------------------------------------
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>./csi-install.sh --namespace unity --values ./myvalues.yaml --helm-charts-version &lt;version&gt;
+</span></span></code></pre></div></li>
+</ol>
+<p><em>NOTE:</em></p>
+<ul>
+<li>The parameter <code>--helm-charts-version</code> is optional and if you do not specify the flag, by default the <code>csi-install.sh</code> script will clone the version of the helm chart that is specified in the driver&rsquo;s <a href="https://github.com/dell/csi-unity/blob/main/dell-csi-helm-installer/csi-install.sh#L22">csi-install.sh</a> file. If you wish to install the driver using a different version of the helm chart, you need to include this flag. Also, remember to delete the <code>helm-charts</code> repository present in the <code>csi-unity</code> directory if it was cloned before.</li>
+</ul>
+<pre><code>A successful installation must display messages that look similar to the following samples:
+```
+------------------------------------------------------
 &gt; Installing CSI Driver: csi-unity on 1.27
 ------------------------------------------------------
 ------------------------------------------------------
@@ -1159,16 +1166,22 @@ Success
 ------------------------------------------------------
 &gt; Operation complete
 ------------------------------------------------------
-</code></pre><p>Results:</p>
-<p>At the end of the script unity-controller Deployment and DaemonSet unity-node will be ready, execute command <code>kubectl get pods -n unity</code> to get the status of the pods and you will see the following:</p>
-<ul>
-<li>One or more Unity XT Controllers (based on controllerCount) with 5/5 containers ready, and status displayed as Running.</li>
-<li>Agent pods with 2/2 containers and the status displayed as Running.</li>
-</ul>
-<p><strong>Note</strong>:
-To install nightly or latest csi driver build using bash script use this command:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>/csi-install.sh --namespace unity --values ./myvalues.yaml --version latest --helm-charts-version &lt;version&gt;
-</span></span></code></pre></div></li>
+```
+
+Results:
+
+At the end of the script unity-controller Deployment and DaemonSet unity-node will be ready, execute command `kubectl get pods -n unity` to get the status of the pods and you will see the following:
+
+* One or more Unity XT Controllers (based on controllerCount) with 5/5 containers ready, and status displayed as Running.
+* Agent pods with 2/2 containers and the status displayed as Running.
+
+**Note**:
+To install nightly or latest csi driver build using bash script use this command:
+```bash
+/csi-install.sh --namespace unity --values ./myvalues.yaml --version latest --helm-charts-version &lt;version&gt;
+```
+</code></pre>
+<ol start="8">
 <li>
 <p>You can also install the driver using standalone helm chart by cloning the centralised helm charts and running the helm install command as shown.</p>
 <p><strong>Syntax</strong>:</p>

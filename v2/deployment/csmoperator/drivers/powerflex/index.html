@@ -18,13 +18,13 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/v2/deployment/csmoperator/drivers/powerflex/" /><meta property="article:section" content="v2" />
 
-<meta property="article:modified_time" content="2024-07-01T15:07:53+05:30" />
+<meta property="article:modified_time" content="2024-07-17T16:10:53+05:30" />
 
 <meta itemprop="name" content="PowerFlex">
 <meta itemprop="description" content="Installing Dell CSI Driver for PowerFlex via Dell CSM Operator
 ">
-<meta itemprop="dateModified" content="2024-07-01T15:07:53+05:30" />
-<meta itemprop="wordCount" content="1237">
+<meta itemprop="dateModified" content="2024-07-17T16:10:53+05:30" />
+<meta itemprop="wordCount" content="1223">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="PowerFlex"/>
 <meta name="twitter:description" content="Installing Dell CSI Driver for PowerFlex via Dell CSM Operator
@@ -85,13 +85,13 @@
 	
 	
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.10.2)</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.11.0)</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.9.4</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.10.2</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.8.0</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.9.4</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">v1.7.1</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">v1.8.0</a>
 	
 </div>
 
@@ -107,7 +107,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.4fb5864f327a63149f6f5b3c4260167d.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.e74d137ca81b1006f41653f984fe0a5d.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -129,7 +129,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.4fb5864f327a63149f6f5b3c4260167d.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.e74d137ca81b1006f41653f984fe0a5d.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -804,7 +804,7 @@ Execute <code>kubectl create namespace vxflexos</code> to create the <code>vxfle
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">endpoint</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;https://127.0.0.2&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">skipCertificateValidation</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span><span style="color:#f8f8f8;text-decoration:underline"> 
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">mdm</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;10.0.0.3,10.0.0.4&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span></code></pre></div><p>After editing the file, run this command to create a secret called <code>vxflexos-config</code>. If you are using a different namespace/secret name, just substitute those into the command.</p>
+</span></span></span></code></pre></div><p>After editing the file, run this command to create a secret called <code>vxflexos-config</code>.</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>kubectl create secret generic vxflexos-config -n vxflexos --from-file<span style="color:#ce5c00;font-weight:bold">=</span><span style="color:#000">config</span><span style="color:#ce5c00;font-weight:bold">=</span>secret.yaml
 </span></span></code></pre></div><p>Use this command to replace or update the secret:</p>

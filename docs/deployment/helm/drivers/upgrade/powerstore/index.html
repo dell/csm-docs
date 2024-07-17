@@ -16,12 +16,12 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/docs/deployment/helm/drivers/upgrade/powerstore/" /><meta property="article:section" content="docs" />
 
-<meta property="article:modified_time" content="2024-05-29T01:50:52+05:30" />
+<meta property="article:modified_time" content="2024-07-17T16:10:53+05:30" />
 
 <meta itemprop="name" content="PowerStore">
 <meta itemprop="description" content="Upgrade PowerStore CSI driver">
-<meta itemprop="dateModified" content="2024-05-29T01:50:52+05:30" />
-<meta itemprop="wordCount" content="373">
+<meta itemprop="dateModified" content="2024-07-17T16:10:53+05:30" />
+<meta itemprop="wordCount" content="448">
 <meta itemprop="keywords" content="upgrade,csi-driver," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="PowerStore"/>
 <meta name="twitter:description" content="Upgrade PowerStore CSI driver"/>
@@ -81,13 +81,13 @@
 	
 	
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.10.2)</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.11.0)</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.9.4</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.10.2</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.8.0</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.9.4</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">v1.7.1</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">v1.8.0</a>
 	
 </div>
 
@@ -103,7 +103,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.4fb5864f327a63149f6f5b3c4260167d.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.e74d137ca81b1006f41653f984fe0a5d.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -125,7 +125,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.4fb5864f327a63149f6f5b3c4260167d.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.e74d137ca81b1006f41653f984fe0a5d.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -139,7 +139,7 @@
   <a href="/csm-docs/docs/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section tree-root" id="m-csm-docsdocs"><span class="">Container Storage Modules</span></a>
   <ul class="ul-1">
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsdocsprerequisites-li">
-  <a href="/csm-docs/docs/prerequisites/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsprerequisites"><span class="">Prerequisites</span></a>
+  <a href="/csm-docs/docs/prerequisites/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsprerequisites"><span class="">Prerequisites and Support Matrix</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id="m-csm-docsdocsdeployment-li">
   <a href="/csm-docs/docs/deployment/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsdeployment"><span class="">Deployment</span></a>
   <ul class="ul-2 foldable">
@@ -173,6 +173,8 @@
   <ul class="ul-4 foldable">
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymentcsmoperatormodulesauthorization-li">
   <a href="/csm-docs/docs/deployment/csmoperator/modules/authorization/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsdeploymentcsmoperatormodulesauthorization"><span class="">Authorization</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymentcsmoperatormodulesauthorization-v20-tech-preview-li">
+  <a href="/csm-docs/docs/deployment/csmoperator/modules/authorization-v2.0-tech-preview/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsdeploymentcsmoperatormodulesauthorization-v20-tech-preview"><span class="">Authorization v2.0 Tech Preview</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymentcsmoperatormodulesobservability-li">
   <a href="/csm-docs/docs/deployment/csmoperator/modules/observability/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsdeploymentcsmoperatormodulesobservability"><span class="">Observability</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymentcsmoperatormodulesreplication-li">
@@ -468,36 +470,55 @@
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-csm-docsdocsauthorization-li">
   <a href="/csm-docs/docs/authorization/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsauthorization"><span class="">Authorization</span></a>
   <ul class="ul-2 foldable">
-    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsauthorizationdesign-li">
-  <a href="/csm-docs/docs/authorization/design/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsauthorizationdesign"><span class="">Design</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsdocsauthorizationbackup-and-restore-li">
-  <a href="/csm-docs/docs/authorization/backup-and-restore/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsauthorizationbackup-and-restore"><span class="">Backup and Restore</span></a>
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsdocsauthorizationv1x-ga-li">
+  <a href="/csm-docs/docs/authorization/v1.x-ga/" title="Authorization - v1.x GA" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsauthorizationv1x-ga"><span class="">v1.x GA</span></a>
   <ul class="ul-3 foldable">
-    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsauthorizationbackup-and-restorehelm-li">
-  <a href="/csm-docs/docs/authorization/backup-and-restore/helm/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsauthorizationbackup-and-restorehelm"><span class="">Helm</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsauthorizationbackup-and-restorerpm-li">
-  <a href="/csm-docs/docs/authorization/backup-and-restore/rpm/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsauthorizationbackup-and-restorerpm"><span class="">RPM</span></a>
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsauthorizationv1x-gadesign-li">
+  <a href="/csm-docs/docs/authorization/v1.x-ga/design/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsauthorizationv1x-gadesign"><span class="">Design</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsdocsauthorizationv1x-gabackup-and-restore-li">
+  <a href="/csm-docs/docs/authorization/v1.x-ga/backup-and-restore/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsauthorizationv1x-gabackup-and-restore"><span class="">Backup and Restore</span></a>
+  <ul class="ul-4 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsauthorizationv1x-gabackup-and-restorehelm-li">
+  <a href="/csm-docs/docs/authorization/v1.x-ga/backup-and-restore/helm/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsauthorizationv1x-gabackup-and-restorehelm"><span class="">Helm</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsauthorizationv1x-gabackup-and-restorerpm-li">
+  <a href="/csm-docs/docs/authorization/v1.x-ga/backup-and-restore/rpm/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsauthorizationv1x-gabackup-and-restorerpm"><span class="">RPM</span></a>
 </li>
   </ul>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsdocsauthorizationconfiguration-li">
-  <a href="/csm-docs/docs/authorization/configuration/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsauthorizationconfiguration"><span class="">Configuration</span></a>
-  <ul class="ul-3 foldable">
-    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsauthorizationconfigurationpowerflex-li">
-  <a href="/csm-docs/docs/authorization/configuration/powerflex/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsauthorizationconfigurationpowerflex"><span class="">PowerFlex</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsauthorizationconfigurationpowermax-li">
-  <a href="/csm-docs/docs/authorization/configuration/powermax/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsauthorizationconfigurationpowermax"><span class="">PowerMax</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsauthorizationconfigurationpowerscale-li">
-  <a href="/csm-docs/docs/authorization/configuration/powerscale/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsauthorizationconfigurationpowerscale"><span class="">PowerScale</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsauthorizationconfigurationproxy-server-li">
-  <a href="/csm-docs/docs/authorization/configuration/proxy-server/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsauthorizationconfigurationproxy-server"><span class="">Proxy Server</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsdocsauthorizationv1x-gaconfiguration-li">
+  <a href="/csm-docs/docs/authorization/v1.x-ga/configuration/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsauthorizationv1x-gaconfiguration"><span class="">Configuration</span></a>
+  <ul class="ul-4 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsauthorizationv1x-gaconfigurationpowerflex-li">
+  <a href="/csm-docs/docs/authorization/v1.x-ga/configuration/powerflex/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsauthorizationv1x-gaconfigurationpowerflex"><span class="">PowerFlex</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsauthorizationv1x-gaconfigurationpowermax-li">
+  <a href="/csm-docs/docs/authorization/v1.x-ga/configuration/powermax/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsauthorizationv1x-gaconfigurationpowermax"><span class="">PowerMax</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsauthorizationv1x-gaconfigurationpowerscale-li">
+  <a href="/csm-docs/docs/authorization/v1.x-ga/configuration/powerscale/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsauthorizationv1x-gaconfigurationpowerscale"><span class="">PowerScale</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsauthorizationv1x-gaconfigurationproxy-server-li">
+  <a href="/csm-docs/docs/authorization/v1.x-ga/configuration/proxy-server/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsauthorizationv1x-gaconfigurationproxy-server"><span class="">Proxy Server</span></a>
 </li>
   </ul>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsauthorizationcli-li">
-  <a href="/csm-docs/docs/authorization/cli/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsauthorizationcli"><span class="">CLI</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsauthorizationtroubleshooting-li">
-  <a href="/csm-docs/docs/authorization/troubleshooting/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsauthorizationtroubleshooting"><span class="">Troubleshooting</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsauthorizationrelease-li">
-  <a href="/csm-docs/docs/authorization/release/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsauthorizationrelease"><span class="">Release notes</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsauthorizationv1x-gacli-li">
+  <a href="/csm-docs/docs/authorization/v1.x-ga/cli/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsauthorizationv1x-gacli"><span class="">CLI</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsauthorizationv1x-gatroubleshooting-li">
+  <a href="/csm-docs/docs/authorization/v1.x-ga/troubleshooting/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsauthorizationv1x-gatroubleshooting"><span class="">Troubleshooting</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsauthorizationv1x-garelease-li">
+  <a href="/csm-docs/docs/authorization/v1.x-ga/release/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsauthorizationv1x-garelease"><span class="">Release notes</span></a>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsdocsauthorizationv20-tech-preview-li">
+  <a href="/csm-docs/docs/authorization/v2.0-tech-preview/" title="Authorization - v2.0 Tech Preview" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsauthorizationv20-tech-preview"><span class="">v2.0 Tech Preview</span></a>
+  <ul class="ul-3 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsdocsauthorizationv20-tech-previewconfiguration-li">
+  <a href="/csm-docs/docs/authorization/v2.0-tech-preview/configuration/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsauthorizationv20-tech-previewconfiguration"><span class="">Configuration</span></a>
+  <ul class="ul-4 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsauthorizationv20-tech-previewconfigurationpowerflex-li">
+  <a href="/csm-docs/docs/authorization/v2.0-tech-preview/configuration/powerflex/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsauthorizationv20-tech-previewconfigurationpowerflex"><span class="">PowerFlex</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsauthorizationv20-tech-previewconfigurationproxy-server-li">
+  <a href="/csm-docs/docs/authorization/v2.0-tech-preview/configuration/proxy-server/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsauthorizationv20-tech-previewconfigurationproxy-server"><span class="">Proxy Server</span></a>
+</li>
+  </ul>
+</li>
+  </ul>
 </li>
   </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-csm-docsdocsobservability-li">
@@ -658,7 +679,7 @@
 
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#update-driver-from-v290-to-v2101-using-helm">Update Driver from v2.9.0 to v2.10.1 using Helm</a></li>
+    <li><a href="#update-driver-from-v2101-to-v2110-using-helm">Update Driver from v2.10.1 to v2.11.0 using Helm</a></li>
     <li><a href="#upgrade-using-dell-csm-operator">Upgrade using Dell CSM Operator:</a></li>
   </ul>
 </nav>
@@ -719,12 +740,12 @@
 
 	       
 	<p>You can upgrade the CSI Driver for Dell PowerStore using Helm.</p>
-<h2 id="update-driver-from-v290-to-v2101-using-helm">Update Driver from v2.9.0 to v2.10.1 using Helm</h2>
+<h2 id="update-driver-from-v2101-to-v2110-using-helm">Update Driver from v2.10.1 to v2.11.0 using Helm</h2>
 <p>Note: While upgrading the driver via helm, controllerCount variable in myvalues.yaml can be at most one less than the number of worker nodes.</p>
 <p><strong>Steps</strong></p>
 <ol>
 <li>
-<p>Run <code>git clone -b v2.10.1 https://github.com/dell/csi-powerstore.git</code> to clone the git repository and get the driver.</p>
+<p>Run <code>git clone -b v2.11.0 https://github.com/dell/csi-powerstore.git</code> to clone the git repository and get the driver.</p>
 </li>
 <li>
 <p>Edit <code>samples/secret/secret.yaml</code> file and configure connection information for your PowerStore arrays changing the following parameters:</p>
@@ -754,14 +775,18 @@ NFSv4 ACls are supported for NFSv4 shares on NFSv4 enabled NAS servers only. POS
 </span></span><span style="display:flex;"><span>kubectl create secret generic powerstore-config -n csi-powerstore --from-file<span style="color:#ce5c00;font-weight:bold">=</span><span style="color:#000">config</span><span style="color:#ce5c00;font-weight:bold">=</span>secret.yaml
 </span></span></code></pre></div></li>
 <li>
-<p>Download the default values.yaml file <code>cd dell-csi-helm-installer &amp;&amp; wget -O my-powerstore-settings.yaml https://github.com/dell/helm-charts/raw/csi-powerstore-2.10.1/charts/csi-powerstore/values.yaml</code> and update parameters as per the requirement.</p>
+<p>Download the default values.yaml file <code>cd dell-csi-helm-installer &amp;&amp; wget -O my-powerstore-settings.yaml https://github.com/dell/helm-charts/raw/csi-powerstore-2.11.0/charts/csi-powerstore/values.yaml</code> and update parameters as per the requirement.</p>
 </li>
 <li>
 <p>Run the <code>csi-install</code> script with the option <em>--upgrade</em> by running:</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>./csi-install.sh --namespace csi-powerstore --values ./my-powerstore-settings.yaml --upgrade
+</span></span><span style="display:flex;"><span>./csi-install.sh --namespace csi-powerstore --values ./my-powerstore-settings.yaml --upgrade --helm-charts-version &lt;version&gt;
 </span></span></code></pre></div></li>
 </ol>
+<p><em>NOTE:</em></p>
+<ul>
+<li>The parameter <code>--helm-charts-version</code> is optional and if you do not specify the flag, by default the <code>csi-install.sh</code> script will clone the version of the helm chart that is specified in the driver&rsquo;s <a href="https://github.com/dell/csi-powerstore/blob/main/dell-csi-helm-installer/csi-install.sh#L13">csi-install.sh</a> file. If you wish to install the driver using a different version of the helm chart, you need to include this flag. Also, remember to delete the <code>helm-charts</code> repository present in the <code>csi-powerstore</code> directory if it was cloned before.</li>
+</ul>
 <h2 id="upgrade-using-dell-csm-operator">Upgrade using Dell CSM Operator:</h2>
 <p><strong>Note:</strong> Upgrading the Operator does not upgrade the CSI Driver.</p>
 <ol>
