@@ -1459,7 +1459,6 @@ volume stats value under node should be set to true.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Collect information from the PowerScale Systems like IP address, IsiPath, username, and password. Make a note of the value for these parameters as they must be entered in the &lt;em&gt;secret.yaml&lt;/em&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: The &amp;lsquo;clusterName&amp;rsquo; serves as a logical, unique identifier for the array that should remain unchanged once it is included in the volume handle. Altering this identifier is not advisable, as it would result in the failure of all operations associated with the volume that was created earlier.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Copy &lt;em&gt;the helm/csi-isilon/values.yaml&lt;/em&gt; into a new location with name say &lt;em&gt;my-isilon-settings.yaml&lt;/em&gt;, to customize settings for installation.&lt;/p&gt;
