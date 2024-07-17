@@ -18,13 +18,13 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/v2/csidriver/installation/helm/isilon/" /><meta property="article:section" content="v2" />
 
-<meta property="article:modified_time" content="2024-03-21T02:39:59+05:30" />
+<meta property="article:modified_time" content="2024-07-17T16:10:53+05:30" />
 
 <meta itemprop="name" content="PowerScale">
 <meta itemprop="description" content="Installing CSI Driver for PowerScale via Helm
 ">
-<meta itemprop="dateModified" content="2024-03-21T02:39:59+05:30" />
-<meta itemprop="wordCount" content="3211">
+<meta itemprop="dateModified" content="2024-07-17T16:10:53+05:30" />
+<meta itemprop="wordCount" content="3334">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="PowerScale"/>
 <meta name="twitter:description" content="Installing CSI Driver for PowerScale via Helm
@@ -85,13 +85,13 @@
 	
 	
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.10.2)</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.11.0)</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.9.4</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.10.2</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.8.0</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.9.4</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">v1.7.1</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">v1.8.0</a>
 	
 </div>
 
@@ -107,7 +107,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.4fb5864f327a63149f6f5b3c4260167d.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.e74d137ca81b1006f41653f984fe0a5d.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -129,7 +129,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.4fb5864f327a63149f6f5b3c4260167d.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.e74d137ca81b1006f41653f984fe0a5d.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -798,6 +798,7 @@ follow either of the way.</p>
 </li>
 <li>
 <p>Collect information from the PowerScale Systems like IP address, IsiPath, username, and password. Make a note of the value for these parameters as they must be entered in the <em>secret.yaml</em>.</p>
+<p><strong>Note</strong>: The &lsquo;clusterName&rsquo; serves as a logical, unique identifier for the array that should remain unchanged once it is included in the volume handle. Altering this identifier is not advisable, as it would result in the failure of all operations associated with the volume that was created earlier.</p>
 </li>
 <li>
 <p>Download <code>wget -O my-isilon-settings.yaml https://raw.githubusercontent.com/dell/helm-charts/csi-isilon-2.8.0/charts/csi-isilon/values.yaml</code> into <code>cd ../dell-csi-helm-installer</code> to customize settings for installation.</p>
@@ -1288,9 +1289,13 @@ found in the  <a href="https://github.com/dell/helm-charts/blob/csi-isilon-2.8.0
 <li>
 <p>Install the driver using <code>csi-install.sh</code> bash script and default yaml by running</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#204a87">cd</span> dell-csi-helm-installer <span style="color:#ce5c00;font-weight:bold">&amp;&amp;</span> wget -O my-isilon-settings.yaml https://raw.githubusercontent.com/dell/helm-charts/csi-isilon-2.8.0/charts/csi-isilon/values.yaml <span style="color:#ce5c00;font-weight:bold">&amp;&amp;</span>
-</span></span><span style="display:flex;"><span>./csi-install.sh --namespace isilon --values my-isilon-settings.yaml
+</span></span><span style="display:flex;"><span>./csi-install.sh --namespace isilon --values my-isilon-settings.yaml --helm-charts-version &lt;version&gt;
 </span></span></code></pre></div></li>
 </ol>
+<p><em>NOTE:</em></p>
+<ul>
+<li>The parameter <code>--helm-charts-version</code> is optional and if you do not specify the flag, by default the <code>csi-install.sh</code> script will clone the version of the helm chart that is specified in the driver&rsquo;s <a href="https://github.com/dell/csi-powerscale/blob/main/dell-csi-helm-installer/csi-install.sh#L16">csi-install.sh</a> file. If you wish to install the driver using a different version of the helm chart, you need to include this flag. Also, remember to delete the <code>helm-charts</code> repository present in the <code>csi-powerscale</code> directory if it was cloned before.</li>
+</ul>
 <h2 id="certificate-validation-for-onefs-rest-api-calls">Certificate validation for OneFS REST API calls</h2>
 <p>The CSI driver exposes an install parameter &lsquo;skipCertificateValidation&rsquo; which determines if the driver
 performs client-side verification of the OneFS certificates. The &lsquo;skipCertificateValidation&rsquo; parameter is set to true by default and the driver does not verify the OneFS certificates.</p>

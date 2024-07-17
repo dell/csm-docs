@@ -18,13 +18,13 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/v2/csidriver/installation/helm/powerflex/" /><meta property="article:section" content="v2" />
 
-<meta property="article:modified_time" content="2024-03-21T02:39:59+05:30" />
+<meta property="article:modified_time" content="2024-07-17T16:10:53+05:30" />
 
 <meta itemprop="name" content="PowerFlex">
 <meta itemprop="description" content="Installing the CSI Driver for PowerFlex via Helm
 ">
-<meta itemprop="dateModified" content="2024-03-21T02:39:59+05:30" />
-<meta itemprop="wordCount" content="3356">
+<meta itemprop="dateModified" content="2024-07-17T16:10:53+05:30" />
+<meta itemprop="wordCount" content="3430">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="PowerFlex"/>
 <meta name="twitter:description" content="Installing the CSI Driver for PowerFlex via Helm
@@ -85,13 +85,13 @@
 	
 	
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.10.2)</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.11.0)</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.9.4</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.10.2</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.8.0</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.9.4</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">v1.7.1</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">v1.8.0</a>
 	
 </div>
 
@@ -107,7 +107,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.4fb5864f327a63149f6f5b3c4260167d.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.e74d137ca81b1006f41653f984fe0a5d.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -129,7 +129,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.4fb5864f327a63149f6f5b3c4260167d.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.e74d137ca81b1006f41653f984fe0a5d.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -1224,11 +1224,14 @@ kubeVersion: &ldquo;&gt;= 1.21.0-0 &lt; 1.29.0-0&rdquo;</li>
 </tbody>
 </table>
 <ol start="10">
-<li>Install the driver using <code>csi-install.sh</code> bash script by running <code>cd dell-csi-helm-installer &amp;&amp; ./csi-install.sh --namespace vxflexos --values myvalues.yaml</code>. You may modify the release name with the <code>--release</code> arg. If arg is not provided, release will be named <code>vxflexos</code> by default.
+<li>Install the driver using <code>csi-install.sh</code> bash script by running <code>cd dell-csi-helm-installer &amp;&amp; ./csi-install.sh --namespace vxflexos --values myvalues.yaml --helm-charts-version &lt;version&gt;</code>. You may modify the release name with the <code>--release</code> arg. If arg is not provided, release will be named <code>vxflexos</code> by default.
 Alternatively, to do a helm install solely with Helm charts (without shell scripts), refer to <code>helm/README.md</code>.</li>
 </ol>
 <p><em>NOTE:</em></p>
 <ul>
+<li>
+<p>The parameter <code>--helm-charts-version</code> is optional and if you do not specify the flag, by default the <code>csi-install.sh</code> script will clone the version of the helm chart that is specified in the driver&rsquo;s <a href="https://github.com/dell/csi-powerflex/blob/main/dell-csi-helm-installer/csi-install.sh#L24">csi-install.sh</a> file. If you wish to install the driver using a different version of the helm chart, you need to include this flag. Also, remember to delete the <code>helm-charts</code> repository present in the <code>csi-powerflex</code> directory if it was cloned before.</p>
+</li>
 <li>
 <p>For detailed instructions on how to run the install scripts, refer to the README.md  in the dell-csi-helm-installer folder.</p>
 </li>

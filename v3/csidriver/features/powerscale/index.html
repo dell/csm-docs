@@ -16,11 +16,11 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/v3/csidriver/features/powerscale/" /><meta property="article:section" content="v3" />
 
-<meta property="article:modified_time" content="2024-07-01T15:16:31+05:30" />
+<meta property="article:modified_time" content="2024-07-17T16:10:53+05:30" />
 
 <meta itemprop="name" content="PowerScale">
 <meta itemprop="description" content="Code features for PowerScale Driver">
-<meta itemprop="dateModified" content="2024-07-01T15:16:31+05:30" />
+<meta itemprop="dateModified" content="2024-07-17T16:10:53+05:30" />
 <meta itemprop="wordCount" content="3813">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="PowerScale"/>
@@ -81,13 +81,13 @@
 	
 	
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.10.2)</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.11.0)</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.9.4</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.10.2</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.8.0</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.9.4</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">v1.7.1</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">v1.8.0</a>
 	
 </div>
 
@@ -103,7 +103,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.4fb5864f327a63149f6f5b3c4260167d.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.e74d137ca81b1006f41653f984fe0a5d.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -125,7 +125,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.4fb5864f327a63149f6f5b3c4260167d.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.e74d137ca81b1006f41653f984fe0a5d.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -717,7 +717,7 @@
 <ol>
 <li>Open your volume in One FS, and take a note of volume-id.</li>
 <li>Create PersistentVolume and use this volume-id as a volumeHandle in the manifest. Modify other parameters according to your needs.</li>
-<li>In the following example, the PowerScale cluster accessZone is assumed as &lsquo;System&rsquo;, storage class as &lsquo;isilon&rsquo;, cluster name as &lsquo;pscale-cluster&rsquo; and volume&rsquo;s internal name as &lsquo;isilonvol&rsquo;. The volume-handle should be in the format of &lt;volume_name&gt;=<em>=</em>=&lt;export_id&gt;=<em>=</em>=<zone>=<em>=</em>=&lt;cluster_name&gt;</li>
+<li>In the following example, the PowerScale cluster accessZone is assumed as &lsquo;System&rsquo;, storage class as &lsquo;isilon&rsquo;, cluster name as &lsquo;pscale-cluster&rsquo; and volume&rsquo;s internal name as &lsquo;isilonvol&rsquo;. The volume-handle should be in the format of &lt;volume_name&gt;=<em>=</em>=&lt;export_id&gt;=<em>=</em>=<zone>=<em>=</em>=&lt;cluster_name_from_secret&gt;</li>
 <li>If Quotas are enabled in the driver, it is required to add the Quota ID to the description of the NFS export in this format:
 <code>CSI_QUOTA_ID:sC-kAAEAAAAAAAAAAAAAQEpVAAAAAAAA</code></li>
 <li>Quota ID can be identified by querying the PowerScale system.</li>

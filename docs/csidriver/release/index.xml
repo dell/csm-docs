@@ -23,7 +23,7 @@
       <description>
         
         
-        &lt;h2 id=&#34;release-notes---csi-powerflex-v2101&#34;&gt;Release Notes - CSI PowerFlex v2.10.1&lt;/h2&gt;
+        &lt;h2 id=&#34;release-notes---csi-powerflex-v2110&#34;&gt;Release Notes - CSI PowerFlex v2.11.0&lt;/h2&gt;
 &lt;h3 id=&#34;new-featureschanges&#34;&gt;New Features/Changes&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1284&#34;&gt;#1284 - [FEATURE]: Support for Openshift 4.15&lt;/a&gt;&lt;/li&gt;
@@ -81,12 +81,16 @@
 &lt;td&gt;Resource quotas may not work properly with the CSI PowerFlex driver. PowerFlex is only able to assign storage in 8Gi chunks, so if a create volume call is made with a size not divisible by 8Gi, CSI-PowerFlex will round up to the next 8Gi boundary when it provisions storage &amp;ndash; however, the resource quota will not record this size but rather the original size in the create request. This means that, for example, if a 10Gi resource quota is set, and a user provisions 10 1Gi PVCs, 80Gi of storage will actually be allocated, which is well over the amount specified in the resource quota.&lt;/td&gt;
 &lt;td&gt;For now, users should only provision volumes in 8Gi-divisible chunks if they want to use resource quotas.&lt;/td&gt;
 &lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Helm install of CSM for PowerFlex v1.10.0 is failing due to a duplicate &lt;code&gt;mountPath: /host_opt_emc_path&lt;/code&gt; being added to volumeMounts charts/csi-vxflexos/templates/node.yaml. Error message is &lt;code&gt;Error: INSTALLATION FAILED: 1 error occurred: DaemonSet.apps &amp;quot;vxflexos-node&amp;quot; is invalid: spec.template.spec.initContainers[0].volumeMounts[4].mountPath: Invalid value: &amp;quot;/host_opt_emc_path&amp;quot;: must be unique&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;The issue can be resolved by removing the duplicate entry in &lt;a href=&#34;https://github.com/dell/helm-charts/blob/main/charts/csi-vxflexos/templates/node.yaml&#34;&gt;https://github.com/dell/helm-charts/blob/main/charts/csi-vxflexos/templates/node.yaml&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;h3 id=&#34;note&#34;&gt;Note:&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;Support for Kubernetes alpha features like Volume Health Monitoring and RWOP (ReadWriteOncePod) access mode will not be available in Openshift environment as Openshift doesn&amp;rsquo;t support enabling of alpha features for Production Grade clusters.&lt;/li&gt;
-&lt;li&gt;For fixing &lt;a href=&#34;https://github.com/dell/csm/issues/1210&#34;&gt;#1210 - [BUG]: Helm deployment of PowerFlex driver is failing&lt;/a&gt;, a new helm-chart has been released. In order to install this helm chart, we need to pass the flag &lt;code&gt;--helm-charts-version&lt;/code&gt; during helm installation and flag &lt;code&gt;-v&lt;/code&gt; during offline bundle installation with value &lt;code&gt;csi-vxflexos-2.10.1&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Support for Kubernetes alpha features like Volume Health Monitoring will not be available in Openshift environment as Openshift doesn&amp;rsquo;t support enabling of alpha features for Production Grade clusters.&lt;/li&gt;
+&lt;li&gt;For fixing &lt;a href=&#34;https://github.com/dell/csm/issues/1210&#34;&gt;#1210 - [BUG]: Helm deployment of PowerFlex driver is failing&lt;/a&gt;, a new helm-chart has been released. In order to install this helm chart, we need to pass the flag &lt;code&gt;--helm-charts-version&lt;/code&gt; during helm installation and flag &lt;code&gt;-v&lt;/code&gt; during offline bundle installation with value &lt;code&gt;csi-vxflexos-2.11.0&lt;/code&gt;.&lt;/li&gt;
 &lt;/ul&gt;
 
       </description>
@@ -101,7 +105,7 @@
       <description>
         
         
-        &lt;h2 id=&#34;release-notes---csi-powermax-v2101&#34;&gt;Release Notes - CSI PowerMax v2.10.1&lt;/h2&gt;
+        &lt;h2 id=&#34;release-notes---csi-powermax-v2110&#34;&gt;Release Notes - CSI PowerMax v2.11.0&lt;/h2&gt;
 &lt;blockquote&gt;
 &lt;p&gt;Note: Auto SRDF group creation is currently not supported in PowerMaxOS 10.1 (6079) Arrays.&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -177,7 +181,7 @@
       <description>
         
         
-        &lt;h2 id=&#34;release-notes---csi-driver-for-powerscale-v2101&#34;&gt;Release Notes - CSI Driver for PowerScale v2.10.1&lt;/h2&gt;
+        &lt;h2 id=&#34;release-notes---csi-driver-for-powerscale-v2110&#34;&gt;Release Notes - CSI Driver for PowerScale v2.11.0&lt;/h2&gt;
 &lt;h3 id=&#34;new-featureschanges&#34;&gt;New Features/Changes&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1284&#34;&gt;#1284 - [FEATURE]: Support for Openshift 4.15&lt;/a&gt;&lt;/li&gt;
@@ -252,7 +256,7 @@
       <description>
         
         
-        &lt;h2 id=&#34;release-notes---csi-powerstore-v2101&#34;&gt;Release Notes - CSI PowerStore v2.10.1&lt;/h2&gt;
+        &lt;h2 id=&#34;release-notes---csi-powerstore-v2110&#34;&gt;Release Notes - CSI PowerStore v2.11.0&lt;/h2&gt;
 &lt;h3 id=&#34;new-featureschanges&#34;&gt;New Features/Changes&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1284&#34;&gt;#1284 - [FEATURE]: Support for Openshift 4.15&lt;/a&gt;&lt;/li&gt;
@@ -317,6 +321,54 @@
 &lt;td&gt;When a PV/PVC is deleted in Kubernetes, it will trigger the deletion of the underlying volume and snapshot on the array as a default behaviour. This can result in a situation where the VolumeSnapshot and VolumeSnapshotContent will still show &amp;ldquo;readyToUse: true&amp;rdquo;, but leaves them unusable because it is no longer backed by underlying storage snapshot. This will not allow the creation of a PVC from snapshot and this could also lead to a data loss situations.&lt;/td&gt;
 &lt;td&gt;This is a known issue, and the workaround is use of &lt;strong&gt;retain&lt;/strong&gt; policy on the various PV, VolumeSnapshot and VolumeSnapshotContent that you wish to use for cloning.&lt;/td&gt;
 &lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Issue&lt;/td&gt;
+&lt;td&gt;Resolution or workaround, if known&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;ndash;&lt;/td&gt;
+&lt;td&gt;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Delete namespace that has PVCs and pods created with the driver. The External health monitor sidecar crashes as a result of this operation&lt;/td&gt;
+&lt;td&gt;Deleting the namespace deletes the PVCs first and then removes the pods in the namespace. This brings a condition where pods exist without their PVCs and causes the external-health-monitor sidecar to crash. This is a known issue and has been reported at &lt;a href=&#34;https://github.com/kubernetes-csi/external-health-monitor/issues/100&#34;&gt;https://github.com/kubernetes-csi/external-health-monitor/issues/100&lt;/a&gt; &lt;br&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;fsGroupPolicy may not work as expected without root privileges for NFS only&lt;br/&gt;&lt;a href=&#34;https://github.com/kubernetes/examples/issues/260&#34;&gt;https://github.com/kubernetes/examples/issues/260&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;To get the desired behavior set &amp;ldquo;allowRoot: &amp;ldquo;true&amp;rdquo; in the storage class parameter&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;If the NVMeFC pod is not getting created and the host looses the ssh connection, causing the driver pods to go to error state&lt;/td&gt;
+&lt;td&gt;remove the nvme_tcp module from the host incase of NVMeFC connection&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;When a node goes down, the block volumes attached to the node cannot be attached to another node&lt;/td&gt;
+&lt;td&gt;This is a known issue and has been reported at &lt;a href=&#34;https://github.com/kubernetes-csi/external-attacher/issues/215&#34;&gt;https://github.com/kubernetes-csi/external-attacher/issues/215&lt;/a&gt;. Workaround: &lt;br /&gt; 1. Force delete the pod running on the node that went down &lt;br /&gt; 2. Delete the volumeattachment to the node that went down. &lt;br /&gt; Now the volume can be attached to the new node.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;When driver node pods enter CrashLoopBackOff and PVC remains in pending state with one of the following events:&lt;br /&gt; 1. failed to provision volume with StorageClass &lt;code&gt;&amp;lt;storage-class-name&amp;gt;&lt;/code&gt;: error generating accessibility requirements: no available topology found &lt;br /&gt; 2. waiting for a volume to be created, either by external provisioner &amp;ldquo;csi-powerstore.dellemc.com&amp;rdquo; or manually created by system administrator.&lt;/td&gt;
+&lt;td&gt;Check whether all array details present in the secret file are valid and remove any invalid entries if present. &lt;br/&gt;Redeploy the driver.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;If an ephemeral pod is not being created in OpenShift 4.13 and is failing with the error &amp;ldquo;error when creating pod: the pod uses an inline volume provided by CSIDriver csi-powerstore.dellemc.com, and the namespace has a pod security enforcement level that is lower than privileged.&amp;rdquo;&lt;/td&gt;
+&lt;td&gt;This issue occurs because OpenShift 4.13 introduced the CSI Volume Admission plugin to restrict the use of a CSI driver capable of provisioning CSI ephemeral volumes during pod admission &lt;a href=&#34;https://docs.openshift.com/container-platform/4.13/storage/container_storage_interface/ephemeral-storage-csi-inline.html&#34;&gt;https://docs.openshift.com/container-platform/4.13/storage/container_storage_interface/ephemeral-storage-csi-inline.html&lt;/a&gt; . Therefore, an additional label &amp;ldquo;security.openshift.io/csi-ephemeral-volume-profile&amp;rdquo; needs to be added to the CSIDriver object to support inline ephemeral volumes.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;In OpenShift 4.13, the root user is not allowed to perform write operations on NFS shares, when root squashing is enabled.&lt;/td&gt;
+&lt;td&gt;The workaround for this issue is to disable root squashing by setting allowRoot: &amp;ldquo;true&amp;rdquo; in the NFS storage class.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;If the volume limit is exhausted and there are pending pods and PVCs due to &lt;code&gt;exceed max volume count&lt;/code&gt;, the pending PVCs will be bound to PVs, and the pending pods will be scheduled to nodes when the driver pods are restarted.&lt;/td&gt;
+&lt;td&gt;It is advised not to have any pending pods or PVCs once the volume limit per node is exhausted on a CSI Driver. There is an open issue reported with Kubenetes at &lt;a href=&#34;https://github.com/kubernetes/kubernetes/issues/95911&#34;&gt;https://github.com/kubernetes/kubernetes/issues/95911&lt;/a&gt; with the same behavior.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;If two separate networks are configured for ISCSI and NVMeTCP, the driver may encounter difficulty identifying the second network (e.g., NVMeTCP).&lt;/td&gt;
+&lt;td&gt;This is a known issue, and the workaround involves creating a single network on the array to serve both ISCSI and NVMeTCP purposes.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;When a PV/PVC is deleted in Kubernetes, it will trigger the deletion of the underlying volume and snapshot on the array as a default behaviour. This can result in a situation where the VolumeSnapshot and VolumeSnapshotContent will still show &amp;ldquo;readyToUse: true&amp;rdquo;, but leaves them unusable because it is no longer backed by underlying storage snapshot. This will not allow the creation of a PVC from snapshot and this could also lead to a data loss situations.&lt;/td&gt;
+&lt;td&gt;This is a known issue, and the workaround is use of &lt;strong&gt;retain&lt;/strong&gt; policy on the various PV, VolumeSnapshot and VolumeSnapshotContent that you wish to use for cloning.&lt;/td&gt;
+&lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;h3 id=&#34;note&#34;&gt;Note:&lt;/h3&gt;
@@ -336,7 +388,7 @@
       <description>
         
         
-        &lt;h2 id=&#34;release-notes---csi-unity-xt-v2101&#34;&gt;Release Notes - CSI Unity XT v2.10.1&lt;/h2&gt;
+        &lt;h2 id=&#34;release-notes---csi-unity-xt-v2110&#34;&gt;Release Notes - CSI Unity XT v2.11.0&lt;/h2&gt;
 &lt;h3 id=&#34;new-featureschanges&#34;&gt;New Features/Changes&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1284&#34;&gt;#1284 - [FEATURE]: Support for Openshift 4.15&lt;/a&gt;&lt;/li&gt;
