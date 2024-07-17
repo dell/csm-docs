@@ -114,7 +114,7 @@ For detailed PowerFlex installation procedure, see the _Dell PowerFlex Deploymen
       AllSystemNames: "name1,name2"
     ```
 
-    After editing the file, run this command to create a secret called `test-vxflexos-config`. If you are using a different namespace/secret name, just substitute those into the command.
+    After editing the file, run this command to create a secret called `test-vxflexos-config`.
     ```bash
     
     kubectl create secret generic test-vxflexos-config -n test-vxflexos --from-file=config=config.yaml
