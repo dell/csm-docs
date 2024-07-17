@@ -40,12 +40,6 @@
 &lt;tbody&gt;
 &lt;tr&gt;
 &lt;td&gt;CSI PowerStore&lt;/td&gt;
-&lt;td&gt;2.11.0&lt;/td&gt;
-&lt;td&gt;✔️&lt;/td&gt;
-&lt;td&gt;✔️&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;CSI PowerStore&lt;/td&gt;
 &lt;td&gt;2.10.1&lt;/td&gt;
 &lt;td&gt;✔️&lt;/td&gt;
 &lt;td&gt;✔️&lt;/td&gt;
@@ -63,8 +57,8 @@
 &lt;td&gt;✔️&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;CSI PowerMax&lt;/td&gt;
-&lt;td&gt;2.11.0&lt;/td&gt;
+&lt;td&gt;CSI PowerStore&lt;/td&gt;
+&lt;td&gt;2.7.0&lt;/td&gt;
 &lt;td&gt;✔️&lt;/td&gt;
 &lt;td&gt;✔️&lt;/td&gt;
 &lt;/tr&gt;
@@ -87,10 +81,10 @@
 &lt;td&gt;✔️&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;CSI PowerFlex&lt;/td&gt;
-&lt;td&gt;2.11.0&lt;/td&gt;
+&lt;td&gt;CSI PowerMax&lt;/td&gt;
+&lt;td&gt;2.8.0&lt;/td&gt;
 &lt;td&gt;✔️&lt;/td&gt;
-&lt;td&gt;❌&lt;/td&gt;
+&lt;td&gt;✔️&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;CSI PowerFlex&lt;/td&gt;
@@ -111,10 +105,10 @@
 &lt;td&gt;❌&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;CSI PowerScale&lt;/td&gt;
-&lt;td&gt;2.11.0&lt;/td&gt;
+&lt;td&gt;CSI PowerFlex&lt;/td&gt;
+&lt;td&gt;2.7.0&lt;/td&gt;
 &lt;td&gt;✔️&lt;/td&gt;
-&lt;td&gt;✔️&lt;/td&gt;
+&lt;td&gt;❌&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;CSI PowerScale&lt;/td&gt;
@@ -135,10 +129,10 @@
 &lt;td&gt;✔️&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;CSI Unity XT&lt;/td&gt;
-&lt;td&gt;2.11.0&lt;/td&gt;
+&lt;td&gt;CSI PowerScale&lt;/td&gt;
+&lt;td&gt;2.7.0&lt;/td&gt;
 &lt;td&gt;✔️&lt;/td&gt;
-&lt;td&gt;❌&lt;/td&gt;
+&lt;td&gt;✔️&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;CSI Unity XT&lt;/td&gt;
@@ -155,6 +149,12 @@
 &lt;tr&gt;
 &lt;td&gt;CSI Unity XT&lt;/td&gt;
 &lt;td&gt;2.8.0&lt;/td&gt;
+&lt;td&gt;✔️&lt;/td&gt;
+&lt;td&gt;❌&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;CSI Unity XT&lt;/td&gt;
+&lt;td&gt;2.7.0&lt;/td&gt;
 &lt;td&gt;✔️&lt;/td&gt;
 &lt;td&gt;❌&lt;/td&gt;
 &lt;/tr&gt;
@@ -296,150 +296,13 @@ Example: helm install powerstore dell/container-storage-modules -n csi-powerstor
         
         &lt;p&gt;The Dell Container Storage Modules Operator is a Kubernetes Operator, which can be used to install and manage the CSI Drivers and CSM Modules provided by Dell for various storage platforms. This operator is available as a community operator for upstream Kubernetes and can be deployed using OperatorHub.io. The operator can be installed using OLM (Operator Lifecycle Manager) or manually.&lt;/p&gt;
 &lt;h2 id=&#34;supported-csm-components&#34;&gt;Supported CSM Components&lt;/h2&gt;
-&lt;p&gt;The table below lists the driver and modules versions installable with the CSM Operator:&lt;/p&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;CSI Driver&lt;/th&gt;
-&lt;th&gt;Version&lt;/th&gt;
-&lt;th&gt;CSM Authorization&lt;/th&gt;
-&lt;th&gt;CSM Replication&lt;/th&gt;
-&lt;th&gt;CSM Observability&lt;/th&gt;
-&lt;th&gt;CSM Resiliency&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;CSI PowerScale&lt;/td&gt;
-&lt;td&gt;2.11.0&lt;/td&gt;
-&lt;td&gt;✔ 1.11.0&lt;/td&gt;
-&lt;td&gt;✔ 1.9.0&lt;/td&gt;
-&lt;td&gt;✔ 1.9.0&lt;/td&gt;
-&lt;td&gt;✔ 1.10.0&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;CSI PowerScale&lt;/td&gt;
-&lt;td&gt;2.10.0&lt;/td&gt;
-&lt;td&gt;✔ 1.10.0&lt;/td&gt;
-&lt;td&gt;✔ 1.8.0&lt;/td&gt;
-&lt;td&gt;✔ 1.8.0&lt;/td&gt;
-&lt;td&gt;✔ 1.9.0&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;CSI PowerScale&lt;/td&gt;
-&lt;td&gt;2.9.0&lt;/td&gt;
-&lt;td&gt;✔ 1.9.0&lt;/td&gt;
-&lt;td&gt;✔ 1.7.0&lt;/td&gt;
-&lt;td&gt;✔ 1.7.0&lt;/td&gt;
-&lt;td&gt;✔ 1.8.0&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;CSI PowerFlex&lt;/td&gt;
-&lt;td&gt;2.11.0&lt;/td&gt;
-&lt;td&gt;✔ 1.11.0&lt;/td&gt;
-&lt;td&gt;✔ 1.9.0&lt;/td&gt;
-&lt;td&gt;✔ 1.9.0&lt;/td&gt;
-&lt;td&gt;✔ 1.10.0&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;CSI PowerFlex&lt;/td&gt;
-&lt;td&gt;2.10.0&lt;/td&gt;
-&lt;td&gt;✔ 1.10.0&lt;/td&gt;
-&lt;td&gt;✔ 1.8.0&lt;/td&gt;
-&lt;td&gt;✔ 1.8.0&lt;/td&gt;
-&lt;td&gt;✔ 1.9.0&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;CSI PowerFlex&lt;/td&gt;
-&lt;td&gt;2.9.0&lt;/td&gt;
-&lt;td&gt;✔ 1.9.0&lt;/td&gt;
-&lt;td&gt;✔ 1.7.0&lt;/td&gt;
-&lt;td&gt;✔ 1.7.0&lt;/td&gt;
-&lt;td&gt;✔ 1.8.0&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;CSI PowerStore&lt;/td&gt;
-&lt;td&gt;2.11.0&lt;/td&gt;
-&lt;td&gt;❌&lt;/td&gt;
-&lt;td&gt;❌&lt;/td&gt;
-&lt;td&gt;❌&lt;/td&gt;
-&lt;td&gt;✔ 1.10.0&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;CSI PowerStore&lt;/td&gt;
-&lt;td&gt;2.10.0&lt;/td&gt;
-&lt;td&gt;❌&lt;/td&gt;
-&lt;td&gt;❌&lt;/td&gt;
-&lt;td&gt;❌&lt;/td&gt;
-&lt;td&gt;✔ 1.9.0&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;CSI PowerStore&lt;/td&gt;
-&lt;td&gt;2.9.0&lt;/td&gt;
-&lt;td&gt;❌&lt;/td&gt;
-&lt;td&gt;❌&lt;/td&gt;
-&lt;td&gt;❌&lt;/td&gt;
-&lt;td&gt;✔ 1.8.0&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;CSI PowerMax&lt;/td&gt;
-&lt;td&gt;2.11.0&lt;/td&gt;
-&lt;td&gt;✔ 1.11.0&lt;/td&gt;
-&lt;td&gt;✔ 1.9.0&lt;/td&gt;
-&lt;td&gt;✔ 1.9.0&lt;/td&gt;
-&lt;td&gt;❌&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;CSI PowerMax&lt;/td&gt;
-&lt;td&gt;2.10.0&lt;/td&gt;
-&lt;td&gt;✔ 1.10.0&lt;/td&gt;
-&lt;td&gt;✔ 1.8.0&lt;/td&gt;
-&lt;td&gt;✔ 1.8.0&lt;/td&gt;
-&lt;td&gt;❌&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;CSI PowerMax&lt;/td&gt;
-&lt;td&gt;2.9.0&lt;/td&gt;
-&lt;td&gt;✔ 1.9.0&lt;/td&gt;
-&lt;td&gt;✔ 1.7.0&lt;/td&gt;
-&lt;td&gt;✔ 1.7.0&lt;/td&gt;
-&lt;td&gt;❌&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;CSI Unity XT&lt;/td&gt;
-&lt;td&gt;2.11.0&lt;/td&gt;
-&lt;td&gt;❌&lt;/td&gt;
-&lt;td&gt;❌&lt;/td&gt;
-&lt;td&gt;❌&lt;/td&gt;
-&lt;td&gt;❌&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;CSI Unity XT&lt;/td&gt;
-&lt;td&gt;2.10.0&lt;/td&gt;
-&lt;td&gt;❌&lt;/td&gt;
-&lt;td&gt;❌&lt;/td&gt;
-&lt;td&gt;❌&lt;/td&gt;
-&lt;td&gt;❌&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;CSI Unity XT&lt;/td&gt;
-&lt;td&gt;2.9.0&lt;/td&gt;
-&lt;td&gt;❌&lt;/td&gt;
-&lt;td&gt;❌&lt;/td&gt;
-&lt;td&gt;❌&lt;/td&gt;
-&lt;td&gt;❌&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
+&lt;p&gt;Exhaustive sample files for the CRs are available &lt;a href=&#34;https://github.com/dell/csm-operator/tree/v1.5.1/samples&#34;&gt;here (current version: v1.5.1)&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;These CR will be used for new deployment or upgrade. In most case, it is recommended to use the latest available version.&lt;/p&gt;
 &lt;p&gt;The full compatibility matrix of CSI/CSM versions for the CSM Operator is available &lt;a href=&#34;../../prerequisites/#csm-operator-compatibility-matrix&#34;&gt;here&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&#34;installation&#34;&gt;Installation&lt;/h2&gt;
 &lt;p&gt;Dell CSM Operator can be installed manually or via Operator Hub.&lt;/p&gt;
 &lt;p&gt;Once installed you will be able to deploy &lt;a href=&#34;drivers&#34;&gt;drivers&lt;/a&gt; and &lt;a href=&#34;modules&#34;&gt;modules&lt;/a&gt; from the Operator.&lt;/p&gt;
 &lt;h3 id=&#34;openshift-installation-via-operator-hub&#34;&gt;OpenShift Installation via Operator Hub&lt;/h3&gt;
-&lt;blockquote&gt;
-&lt;p&gt;NOTE: You cannot update the resource requests and limits when you are deploying operator using Operator Hub&lt;/p&gt;
-&lt;/blockquote&gt;
 &lt;p&gt;&lt;code&gt;dell-csm-operator&lt;/code&gt; can be installed via Operator Hub on upstream Kubernetes clusters &amp;amp; Red Hat OpenShift Clusters.&lt;/p&gt;
 &lt;p&gt;The installation process involves the creation of a &lt;code&gt;Subscription&lt;/code&gt; object either via the &lt;em&gt;OperatorHub&lt;/em&gt; UI or using &lt;code&gt;kubectl/oc&lt;/code&gt;. While creating the &lt;code&gt;Subscription&lt;/code&gt; you can set the Approval strategy for the &lt;code&gt;InstallPlan&lt;/code&gt; for the operator to:&lt;/p&gt;
 &lt;ul&gt;
@@ -457,26 +320,14 @@ Example: helm install powerstore dell/container-storage-modules -n csi-powerstor
 &lt;li&gt;The &lt;code&gt;Community&lt;/code&gt; can be installed on any Kubernetes distributions.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;manual-installation-on-a-cluster-without-olm&#34;&gt;Manual Installation on a cluster without OLM&lt;/h3&gt;
-&lt;blockquote&gt;
-&lt;p&gt;NOTE: You can update the resource requests and limits when you are deploying operator using manual installation without OLM&lt;/p&gt;
-&lt;/blockquote&gt;
 &lt;ol&gt;
 &lt;li&gt;Install volume snapshot CRDs. For detailed snapshot setup procedure, &lt;a href=&#34;../../snapshots/#volume-snapshot-feature&#34;&gt;click here&lt;/a&gt;.&lt;/li&gt;
 &lt;li&gt;Clone and checkout the required csm-operator version using&lt;/li&gt;
 &lt;/ol&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;git clone -b v1.6.0 https://github.com/dell/csm-operator.git
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;git clone -b v1.5.1 https://github.com/dell/csm-operator.git
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;3&#34;&gt;
 &lt;li&gt;&lt;code&gt;cd csm-operator&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;&lt;em&gt;(Optional)&lt;/em&gt; If using a local Docker image, edit the &lt;code&gt;deploy/operator.yaml&lt;/code&gt; file and set the image name for the CSM Operator Deployment.&lt;/li&gt;
-&lt;li&gt;&lt;em&gt;(Optional)&lt;/em&gt; The Dell CSM Operator might need more resources if users have larger environment (&amp;gt;1000 Pods). You can modify the default resource requests and limits in the files &lt;code&gt;deploy/operator.yaml&lt;/code&gt;, &lt;code&gt;config/manager/manager.yaml&lt;/code&gt;  and increase the values for cpu and memory. More information on setting the resource requests and limits can be found &lt;a href=&#34;https://sdk.operatorframework.io/docs/best-practices/managing-resources/&#34;&gt;here&lt;/a&gt;. Current default values are set as below:
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;resources&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;limits&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;cpu&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;200m&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;memory&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;512Mi&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;requests&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;cpu&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;100m&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;memory&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;192Mi&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
 &lt;li&gt;&lt;em&gt;(Optional)&lt;/em&gt; If &lt;strong&gt;CSM Replication&lt;/strong&gt; is planned for use and will be deployed using two clusters in an environment where the DNS is not configured, and cluster API endpoints are FQDNs, in order to resolve queries to remote API endpoints, it is necessary to edit the &lt;code&gt;deploy/operator.yaml&lt;/code&gt; file and add the &lt;code&gt;hostAliases&lt;/code&gt; field and associated &lt;code&gt;&amp;lt;FQDN&amp;gt;:&amp;lt;IP&amp;gt;&lt;/code&gt; mappings to the CSM Operator Controller Manager Deployment under &lt;code&gt;spec.template.spec&lt;/code&gt;. More information on host aliases can be found, &lt;a href=&#34;https://kubernetes.io/docs/tasks/network/customize-hosts-file-for-pods/&#34;&gt;here&lt;/a&gt;.
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# example config&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;apiVersion&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;apps/v1&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
@@ -496,13 +347,6 @@ Example: helm install powerstore dell/container-storage-modules -n csi-powerstor
 &lt;blockquote&gt;
 &lt;p&gt;NOTE: Dell CSM Operator will be installed in the &lt;code&gt;dell-csm-operator&lt;/code&gt; namespace.&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;blockquote&gt;
-&lt;p&gt;NOTE: If you want to update the resource requests and limits configuration after the operator is installed. Follow the steps below:&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;pre&gt;&lt;code&gt; * Uninstall the operator following the steps [here](https://dell.github.io/csm-docs/v3/deployment/csmoperator/#uninstall)
-
- * Update the resource configuration as mentioned in step 5 and install the operator using the step 7 above
-&lt;/code&gt;&lt;/pre&gt;
 
 
 
@@ -515,7 +359,7 @@ Example: helm install powerstore dell/container-storage-modules -n csi-powerstor
 	
 &lt;/figure&gt;
 
-&lt;ol start=&#34;8&#34;&gt;
+&lt;ol start=&#34;6&#34;&gt;
 &lt;li&gt;Run the command to validate the installation.&lt;/li&gt;
 &lt;/ol&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl get pods -n dell-csm-operator
@@ -593,7 +437,7 @@ Example: helm install powerstore dell/container-storage-modules -n csi-powerstor
 &lt;ol&gt;
 &lt;li&gt;Clone and checkout the required csm-operator version using&lt;/li&gt;
 &lt;/ol&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;git clone -b v1.6.0 https://github.com/dell/csm-operator.git
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;git clone -b v1.5.1 https://github.com/dell/csm-operator.git
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;2&#34;&gt;
 &lt;li&gt;&lt;code&gt;cd csm-operator&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;Run the &lt;code&gt;csm-offline-bundle.sh&lt;/code&gt; script which will be found in the &lt;code&gt;scripts&lt;/code&gt; directory with an argument of &lt;code&gt;-c&lt;/code&gt; in order to create an offline bundle&lt;/li&gt;
@@ -607,38 +451,41 @@ Example: helm install powerstore dell/container-storage-modules -n csi-powerstor
 &lt;li&gt;Build a &lt;code&gt;tar.gz&lt;/code&gt; file containing the images as well as files required to install the Operator and drivers.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;Here is the output of a request to build an offline bundle for the Dell CSM Operator:&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;* Building image manifest file
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;*
+* Building image manifest file
 
    Processing file /root/csm-operator/operatorconfig/driverconfig/common/default.yaml
    Processing file /root/csm-operator/bundle/manifests/dell-csm-operator.clusterserviceversion.yaml
 
+*
 * Pulling and saving container images
 
-   dellemc/csi-isilon:v2.11.0
-   dellemc/csi-metadata-retriever:v1.8.0
-   dellemc/csipowermax-reverseproxy:v2.10.0
-   dellemc/csi-powermax:v2.11.0
-   dellemc/csi-powerstore:v2.11.0
-   dellemc/csi-unity:v2.11.0
-   dellemc/csi-vxflexos:v2.11.0
-   dellemc/csm-authorization-sidecar:v1.11.0
-   dellemc/csm-metrics-powerflex:v1.9.0
-   dellemc/csm-metrics-powerscale:v1.6.0
-   dellemc/csm-topology:v1.9.0
-   dellemc/dell-csi-replicator:v1.9.0
-   dellemc/dell-replication-controller:v1.9.0
-   dellemc/sdc:4.5.1
-   docker.io/dellemc/dell-csm-operator:v1.6.0
+   dellemc/csi-isilon:v2.10.1
+   dellemc/csi-metadata-retriever:v1.6.0
+   dellemc/csipowermax-reverseproxy:v2.9.0
+   dellemc/csi-powermax:v2.10.1
+   dellemc/csi-powerstore:v2.10.1
+   dellemc/csi-unity:v2.10.1
+   dellemc/csi-vxflexos:v2.10.1
+   dellemc/csm-authorization-sidecar:v1.10.0
+   dellemc/csm-metrics-powerflex:v1.8.0
+   dellemc/csm-metrics-powerscale:v1.5.0
+   dellemc/csm-topology:v1.7.0
+   dellemc/dell-csi-replicator:v1.8.0
+   dellemc/dell-replication-controller:v1.8.0
+   dellemc/sdc:4.5
+   docker.io/dellemc/dell-csm-operator:v1.5.1
    gcr.io/kubebuilder/kube-rbac-proxy:v0.8.0
    nginxinc/nginx-unprivileged:1.20
    otel/opentelemetry-collector:0.42.0
-   registry.k8s.io/sig-storage/csi-attacher:v4.6.1
-   registry.k8s.io/sig-storage/csi-external-health-monitor-controller:v0.11.0
-   registry.k8s.io/sig-storage/csi-node-driver-registrar:v2.10.1
-   registry.k8s.io/sig-storage/csi-provisioner:v5.0.1
-   registry.k8s.io/sig-storage/csi-resizer:v1.11.1
-   registry.k8s.io/sig-storage/csi-snapshotter:v8.0.1
+   registry.k8s.io/sig-storage/csi-attacher:v4.4.2
+   registry.k8s.io/sig-storage/csi-external-health-monitor-controller:v0.10.0
+   registry.k8s.io/sig-storage/csi-node-driver-registrar:v2.9.2
+   registry.k8s.io/sig-storage/csi-provisioner:v3.6.2
+   registry.k8s.io/sig-storage/csi-resizer:v1.9.2
+   registry.k8s.io/sig-storage/csi-snapshotter:v6.3.2
 
+*
 * Copying necessary files
 
  /root/csm-operator/deploy
@@ -648,6 +495,7 @@ Example: helm install powerstore dell/container-storage-modules -n csi-powerstor
  /root/csm-operator/README.md
  /root/csm-operator/LICENSE
 
+*
 * Compressing release
 
 dell-csm-operator-bundle/
@@ -662,6 +510,7 @@ dell-csm-operator-bundle/deploy/olm/operator_community.yaml
 dell-csm-operator-bundle/README.md
 dell-csm-operator-bundle/LICENSE
 
+*
 * Complete
 
 Offline bundle file is: /root/csm-operator/dell-csm-operator-bundle.tar.gz
@@ -701,33 +550,37 @@ dell-csm-operator-bundle/LICENSE
 &lt;p&gt;Here is the output for preparing the bundle for installation (&lt;code&gt;localregistry:5000&lt;/code&gt; refers to an image registry accessible to Kubernetes/OpenShift. &lt;code&gt;dell-csm-operator&lt;/code&gt; refers to the folder created within the registry.):&lt;/p&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;Preparing a offline bundle for installation
 
+*
 * Loading docker images
 
-Loaded image: docker.io/dellemc/csi-powerstore:v2.11.0
-Loaded image: docker.io/dellemc/csi-isilon:v2.11.0
+Loaded image: docker.io/dellemc/csi-powerstore:v2.10.1
+Loaded image: docker.io/dellemc/csi-isilon:v2.10.1
 ...
 ...
-Loaded image: registry.k8s.io/sig-storage/csi-resizer:v1.11.1
-Loaded image: registry.k8s.io/sig-storage/csi-snapshotter:v8.0.1
+Loaded image: registry.k8s.io/sig-storage/csi-resizer:v1.9.2
+Loaded image: registry.k8s.io/sig-storage/csi-snapshotter:v6.3.2
 
+*
 * Tagging and pushing images
 
-   dellemc/csi-isilon:v2.11.0 -&amp;gt; localregistry:5000/dell-csm-operator/csi-isilon:v2.11.0
-   dellemc/csi-metadata-retriever:v1.8.0 -&amp;gt; localregistry:5000/dell-csm-operator/csi-metadata-retriever:v1.8.0
+   dellemc/csi-isilon:v2.10.1 -&amp;gt; localregistry:5000/dell-csm-operator/csi-isilon:v2.10.1
+   dellemc/csi-metadata-retriever:v1.6.0 -&amp;gt; localregistry:5000/dell-csm-operator/csi-metadata-retriever:v1.6.0
    ...
    ...
-   registry.k8s.io/sig-storage/csi-resizer:v1.11.1 -&amp;gt; localregistry:5000/dell-csm-operator/csi-resizer:v1.11.1
-   registry.k8s.io/sig-storage/csi-snapshotter:v8.0.1 -&amp;gt; localregistry:5000/dell-csm-operator/csi-snapshotter:v8.0.1
+   registry.k8s.io/sig-storage/csi-resizer:v1.9.2 -&amp;gt; localregistry:5000/dell-csm-operator/csi-resizer:v1.9.2
+   registry.k8s.io/sig-storage/csi-snapshotter:v6.3.2 -&amp;gt; localregistry:5000/dell-csm-operator/csi-snapshotter:v6.3.2
 
+*
 * Preparing files within /root/dell-csm-operator-bundle
 
-   changing: dellemc/csi-isilon:v2.11.0 -&amp;gt; localregistry:5000/dell-csm-operator/csi-isilon:v2.11.0
-   changing: dellemc/csi-metadata-retriever:v1.8.0 -&amp;gt; localregistry:5000/dell-csm-operator/csi-metadata-retriever:v1.8.0
+   changing: dellemc/csi-isilon:v2.10.1 -&amp;gt; localregistry:5000/dell-csm-operator/csi-isilon:v2.10.1
+   changing: dellemc/csi-metadata-retriever:v1.6.0 -&amp;gt; localregistry:5000/dell-csm-operator/csi-metadata-retriever:v1.6.0
    ...
    ...
-   changing: registry.k8s.io/sig-storage/csi-resizer:v1.11.1 -&amp;gt; localregistry:5000/dell-csm-operator/csi-resizer:v1.11.1
-   changing: registry.k8s.io/sig-storage/csi-snapshotter:v8.0.1 -&amp;gt; localregistry:5000/dell-csm-operator/csi-snapshotter:v8.0.1
+   changing: registry.k8s.io/sig-storage/csi-resizer:v1.9.2 -&amp;gt; localregistry:5000/dell-csm-operator/csi-resizer:v1.9.2
+   changing: registry.k8s.io/sig-storage/csi-snapshotter:v6.3.2 -&amp;gt; localregistry:5000/dell-csm-operator/csi-snapshotter:v6.3.2
 
+*
 * Complete
 &lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;perform-operator-installation&#34;&gt;Perform Operator installation&lt;/h4&gt;
 &lt;p&gt;Now that the required images are available and the Operator configuration updated, you can proceed to install the operator by executing &lt;code&gt;install.sh&lt;/code&gt; script.&lt;/p&gt;
@@ -775,7 +628,7 @@ Loaded image: registry.k8s.io/sig-storage/csi-snapshotter:v8.0.1
 &lt;ol&gt;
 &lt;li&gt;Clone and checkout the required csm-operator version using&lt;/li&gt;
 &lt;/ol&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;git clone -b v1.6.0 https://github.com/dell/csm-operator.git
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;git clone -b v1.5.0 https://github.com/dell/csm-operator.git
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;2&#34;&gt;
 &lt;li&gt;&lt;code&gt;cd csm-operator&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;Execute &lt;code&gt;bash scripts/install.sh --upgrade&lt;/code&gt;  . This command will install the latest version of the operator.&lt;/li&gt;
@@ -805,18 +658,9 @@ The following notes explain some of the general items to take care of.&lt;/li&gt
 &lt;ol&gt;
 &lt;li&gt;If you are trying to upgrade the CSI driver from an older version, make sure to modify the &lt;em&gt;configVersion&lt;/em&gt; field.
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;   &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;driver&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;     &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;configVersion&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;v2.11.0&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;     &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;configVersion&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;v2.10.0&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
 &lt;/ol&gt;
-&lt;h3 id=&#34;upgrade-modules-using-dell-csm-operator&#34;&gt;Upgrade Modules using Dell CSM Operator&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;Refer &lt;a href=&#34;./modules/observability/#upgrade-observability&#34;&gt;Upgrade Obsevability Module&lt;/a&gt; to upgrade the Observability Module via Operator&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Refer &lt;a href=&#34;./modules/authorization/#upgrade-csm-authorization&#34;&gt;Upgrade Authorization Module&lt;/a&gt; to upgrade the Authorization Module via Operator&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
 &lt;h2 id=&#34;custom-resource-definitions&#34;&gt;Custom Resource Definitions&lt;/h2&gt;
 &lt;p&gt;As part of the Dell CSM Operator installation, a CRD representing configuration for the CSI Driver and CSM Modules is also installed.
 &lt;code&gt;containerstoragemodule&lt;/code&gt; CRD is installed in API Group &lt;code&gt;storage.dell.com&lt;/code&gt;.&lt;/p&gt;
@@ -843,9 +687,6 @@ The following notes explain some of the general items to take care of.&lt;/li&gt
 &lt;p&gt;&lt;strong&gt;nodeSelector&lt;/strong&gt; - Used to specify node selectors for the driver StatefulSet/Deployment and DaemonSet.&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;NOTE: The &lt;code&gt;image&lt;/code&gt; field should point to the correct image tag for version of the driver you are installing.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;blockquote&gt;
-&lt;p&gt;NOTE: The CSM Operator 1.6 is pre-requisite for onboarding brownfield clusters with Apex Navigator For Kubernetes. When the Dell connectivity client is installed, a role and rolebinding will be established in the namespace containing CSM objects, and these will be removed when the client is uninstalled. If the client is already present in the cluster and CSM is deployed or deleted, the roles and rolebindings will be correspondingly created or removed during CSM reconciliation. This process ensures that the client can access the secrets in the namespace.&lt;/p&gt;
 &lt;/blockquote&gt;
 
       </description>

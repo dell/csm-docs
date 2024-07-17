@@ -653,10 +653,6 @@ CSI PowerFlex driver will detect the SDC mode set on the PowerFlex array and wil
 &lt;/blockquote&gt;
 &lt;h2 id=&#34;nfs-volume-support&#34;&gt;NFS volume support&lt;/h2&gt;
 &lt;p&gt;Starting with version 2.8, the CSI driver for PowerFlex will support NFS volumes for PowerFlex storage systems version 4.0.x.&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;NOTE:
-Starting from CSM 1.11.0, the CSI-PowerFlex driver will automatically round up NFS volume sizes to a minimum of 3GB if a smaller size is requested. This change prevents backend errors and ensures compatibility.&lt;/p&gt;
-&lt;/blockquote&gt;
 &lt;p&gt;CSI driver will support following operations for NFS volumes:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Creation and deletion of a NFS volume with RWO/RWX/ROX access modes.&lt;/li&gt;
@@ -1322,16 +1318,6 @@ RDMs should not be added/removed manually from vCenter on any of the cluster VMs
 &lt;p&gt;&lt;strong&gt;NOTE:&lt;/strong&gt; &lt;br&gt;The default value of &lt;code&gt;maxPowerMaxVolumesPerNode&lt;/code&gt; is 0. &lt;br&gt;If &lt;code&gt;maxPowerMaxVolumesPerNode&lt;/code&gt; is set to zero, then CO shall decide how many volumes of this type can be published by the controller to the node.&lt;br&gt;&lt;br&gt;The volume limit specified to &lt;code&gt;maxPowerMaxVolumesPerNode&lt;/code&gt; attribute is applicable to all the nodes in the cluster for which node label &lt;code&gt;max-powermax-volumes-per-node&lt;/code&gt; is not set.
 &lt;br&gt;Supported maximum number of RDM Volumes per VM is 60 as per the limitations. &lt;br&gt;If the value is set both by node label and values.yaml file then node label value will get the precedence and user has to remove the node label in order to reflect the values.yaml value.&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h2 id=&#34;nvmetcp-support&#34;&gt;NVMe/TCP Support&lt;/h2&gt;
-&lt;p&gt;The CSI Driver for Dell PowerMax supports NVMeTCP from v2.11.0. To enable NVMe/TCP provisioning, blockProtocol in settings file should be specified as NVMETCP.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Limitations&lt;/strong&gt;&lt;br&gt;
-These are the CSM modules not supported with NVMeTCP protocol:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;CSM Authorization&lt;/li&gt;
-&lt;li&gt;CSM Observability&lt;/li&gt;
-&lt;li&gt;CSM Application Mobility&lt;/li&gt;
-&lt;li&gt;Metro Replication&lt;/li&gt;
-&lt;/ul&gt;
 
       </description>
     </item>
@@ -1359,7 +1345,7 @@ These are the CSM modules not supported with NVMeTCP protocol:&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;Open your volume in One FS, and take a note of volume-id.&lt;/li&gt;
 &lt;li&gt;Create PersistentVolume and use this volume-id as a volumeHandle in the manifest. Modify other parameters according to your needs.&lt;/li&gt;
-&lt;li&gt;In the following example, the PowerScale cluster accessZone is assumed as &amp;lsquo;System&amp;rsquo;, storage class as &amp;lsquo;isilon&amp;rsquo;, cluster name as &amp;lsquo;pscale-cluster&amp;rsquo; and volume&amp;rsquo;s internal name as &amp;lsquo;isilonvol&amp;rsquo;. The volume-handle should be in the format of &lt;code&gt;&amp;lt;volume_name&amp;gt;=_=_=&amp;lt;export_id&amp;gt;=_=_=&amp;lt;access_zone_name&amp;gt;=_=_=&amp;lt;cluster_name_from_secret&amp;gt;&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;In the following example, the PowerScale cluster accessZone is assumed as &amp;lsquo;System&amp;rsquo;, storage class as &amp;lsquo;isilon&amp;rsquo;, cluster name as &amp;lsquo;pscale-cluster&amp;rsquo; and volume&amp;rsquo;s internal name as &amp;lsquo;isilonvol&amp;rsquo;. The volume-handle should be in the format of &lt;code&gt;&amp;lt;volume_name&amp;gt;=_=_=&amp;lt;export_id&amp;gt;=_=_=&amp;lt;access_zone_name&amp;gt;=_=_=&amp;lt;cluster_name&amp;gt;&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;If Quotas are enabled in the driver, it is required to add the Quota ID to the description of the NFS export in this format:
 &lt;code&gt;CSI_QUOTA_ID:sC-kAAEAAAAAAAAAAAAAQEpVAAAAAAAA&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;Quota ID can be identified by querying the PowerScale system.&lt;/li&gt;
@@ -3019,14 +3005,6 @@ Example &lt;em&gt;configmap.yaml&lt;/em&gt;&lt;/p&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;
 &lt;p&gt;Note: csi-unity supports Tenancy in multi-array setup, provided the TenantName is the same across Unity XT instances.&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h2 id=&#34;support-custom-networks-for-nfs-io-traffic&#34;&gt;Support custom networks for NFS I/O traffic&lt;/h2&gt;
-&lt;p&gt;When &lt;code&gt;allowedNetworks&lt;/code&gt; is specified for using custom networks to handle NFS traffic, and a user already
-has workloads scheduled, there is a possibility that it might lead to backward compatibility issues. For example, ControllerUnPublish might not be able to completely remove clients from the NFS exports of previously created pods.&lt;/p&gt;
-&lt;p&gt;Also, the previous workload will still be using the default network and not custom networks. For previous workloads to use custom networks, the recreation of pods is required.&lt;/p&gt;
-&lt;p&gt;When csi-unity driver creates an NFS export, the traffic flows through the client specified in the export. By default, the client is the network interface for Kubernetes
-communication (same IP/fqdn as k8s node) by default.&lt;/p&gt;
-&lt;p&gt;For a cluster with multiple network interfaces and if a user wants to segregate k8s traffic from NFS traffic; you can use the &lt;code&gt;allowedNetworks&lt;/code&gt; option.
-&lt;code&gt;allowedNetworks&lt;/code&gt; takes CIDR addresses as a parameter to match the IPs to be picked up by the driver to allow and route NFS traffic.&lt;/p&gt;
 
       </description>
     </item>

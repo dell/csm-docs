@@ -1178,7 +1178,7 @@ RDMs should not be added/removed manually from vCenter on any of the cluster VMs
 &lt;ol&gt;
 &lt;li&gt;Open your volume in One FS, and take a note of volume-id.&lt;/li&gt;
 &lt;li&gt;Create PersistentVolume and use this volume-id as a volumeHandle in the manifest. Modify other parameters according to your needs.&lt;/li&gt;
-&lt;li&gt;In the following example, the PowerScale cluster accessZone is assumed as &amp;lsquo;System&amp;rsquo;, storage class as &amp;lsquo;isilon&amp;rsquo;, cluster name as &amp;lsquo;pscale-cluster&amp;rsquo; and volume&amp;rsquo;s internal name as &amp;lsquo;isilonvol&amp;rsquo;. The volume-handle should be in the format of &amp;lt;volume_name&amp;gt;=&lt;em&gt;=&lt;/em&gt;=&amp;lt;export_id&amp;gt;=&lt;em&gt;=&lt;/em&gt;=&lt;zone&gt;=&lt;em&gt;=&lt;/em&gt;=&amp;lt;cluster_name_from_secret&amp;gt;&lt;/li&gt;
+&lt;li&gt;In the following example, the PowerScale cluster accessZone is assumed as &amp;lsquo;System&amp;rsquo;, storage class as &amp;lsquo;isilon&amp;rsquo;, cluster name as &amp;lsquo;pscale-cluster&amp;rsquo; and volume&amp;rsquo;s internal name as &amp;lsquo;isilonvol&amp;rsquo;. The volume-handle should be in the format of &amp;lt;volume_name&amp;gt;=&lt;em&gt;=&lt;/em&gt;=&amp;lt;export_id&amp;gt;=&lt;em&gt;=&lt;/em&gt;=&lt;zone&gt;=&lt;em&gt;=&lt;/em&gt;=&amp;lt;cluster_name&amp;gt;&lt;/li&gt;
 &lt;li&gt;If Quotas are enabled in the driver, it is required to add the Quota ID to the description of the NFS export in this format:
 &lt;code&gt;CSI_QUOTA_ID:sC-kAAEAAAAAAAAAAAAAQEpVAAAAAAAA&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;Quota ID can be identified by querying the PowerScale system.&lt;/li&gt;

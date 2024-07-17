@@ -754,7 +754,7 @@ The name of the StorageClass resource that is created as the &amp;ldquo;target&a
       <description>
         
         
-        &lt;h2 id=&#34;release-notes---csm-replication-190&#34;&gt;Release Notes - CSM Replication 1.9.0&lt;/h2&gt;
+        &lt;h2 id=&#34;release-notes---csm-replication-181&#34;&gt;Release Notes - CSM Replication 1.8.1&lt;/h2&gt;
 &lt;h3 id=&#34;new-featureschanges&#34;&gt;New Features/Changes&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1284&#34;&gt;#1284 - [FEATURE]: Support for Openshift 4.15&lt;/a&gt;&lt;/li&gt;
