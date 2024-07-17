@@ -111,7 +111,7 @@ For detailed PowerFlex installation procedure, see the _Dell PowerFlex Deploymen
 
     If replication feature is enabled, ensure the secret includes all the PowerFlex arrays involved in replication.
 
-    After editing the file, run this command to create a secret called `vxflexos-config`.
+    After editing the file, run this command to create a secret called `vxflexos-config`. If you are using a different namespace/secret name, just substitute those into the command.
     ```bash
     
     kubectl create secret generic vxflexos-config -n vxflexos --from-file=config=secret.yaml

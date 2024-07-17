@@ -13,26 +13,26 @@ The [Dell Container Storage Modules Installation Wizard](./src/index.html) is a 
 
 | CSI Driver         | Version   | Helm   | Operator  |
 | ------------------ | --------- | ------ | --------- |
-| CSI PowerStore     | 2.11.0    |✔️      |✔️        |
 | CSI PowerStore     | 2.10.1    |✔️      |✔️        |
 | CSI PowerStore     | 2.9.0     |✔️      |✔️        |
 | CSI PowerStore     | 2.8.0     |✔️      |✔️        |
-| CSI PowerMax       | 2.11.0    |✔️      |✔️        |
+| CSI PowerStore     | 2.7.0     |✔️      |✔️        |
 | CSI PowerMax       | 2.10.1    |✔️      |✔️        |
 | CSI PowerMax       | 2.9.0     |✔️      |✔️        |
 | CSI PowerMax       | 2.8.0     |✔️      |✔️        |
-| CSI PowerFlex      | 2.11.0    |✔️      |❌        |
+| CSI PowerMax       | 2.8.0     |✔️      |✔️        |
 | CSI PowerFlex      | 2.10.1    |✔️      |❌        |
-| CSI PowerFlex      | 2.9.0     |✔️      |❌        | 
+| CSI PowerFlex      | 2.9.0     |✔️      |❌        |
 | CSI PowerFlex      | 2.8.0     |✔️      |❌        | 
-| CSI PowerScale     | 2.11.0    |✔️      |✔️        |
+| CSI PowerFlex      | 2.7.0     |✔️      |❌        | 
 | CSI PowerScale     | 2.10.1    |✔️      |✔️        |
-| CSI PowerScale     | 2.9.0     |✔️      |✔️        | 
+| CSI PowerScale     | 2.9.0     |✔️      |✔️        |
 | CSI PowerScale     | 2.8.0     |✔️      |✔️        | 
-| CSI Unity XT       | 2.11.0    |✔️      |❌        |
+| CSI PowerScale     | 2.7.0     |✔️      |✔️        | 
 | CSI Unity XT       | 2.10.1    |✔️      |❌        |
-| CSI Unity XT       | 2.9.0     |✔️      |❌        | 
+| CSI Unity XT       | 2.9.0     |✔️      |❌        |
 | CSI Unity XT       | 2.8.0     |✔️      |❌        | 
+| CSI Unity XT       | 2.7.0     |✔️      |❌        | 
 
 >NOTE: The Installation Wizard currently does not support operator-based manifest file generation for Unity XT and PowerFlex drivers.
 
