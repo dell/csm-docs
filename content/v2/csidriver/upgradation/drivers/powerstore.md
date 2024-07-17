@@ -42,10 +42,9 @@ Note: While upgrading the driver via helm, controllerCount variable in myvalues.
 6. Run the `csi-install` script with the option _\-\-upgrade_ by running: 
      ```bash
 
-     ./csi-install.sh --namespace csi-powerstore --values ./my-powerstore-settings.yaml --upgrade --helm-charts-version <version>
+     ./csi-install.sh --namespace csi-powerstore --values ./my-powerstore-settings.yaml --upgrade
      ```
-*NOTE:*
-- The parameter `--helm-charts-version` is optional and if you do not specify the flag, by default the `csi-install.sh` script will clone the version of the helm chart that is specified in the driver's [csi-install.sh](https://github.com/dell/csi-powerstore/blob/main/dell-csi-helm-installer/csi-install.sh#L13) file. If you wish to install the driver using a different version of the helm chart, you need to include this flag. Also, remember to delete the `helm-charts` repository present in the `csi-powerstore` directory if it was cloned before.
+
 
 ## Upgrade using Dell CSM Operator:
 **Note:** Upgrading the Operator does not upgrade the CSI Driver.

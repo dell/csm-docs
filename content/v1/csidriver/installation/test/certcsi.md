@@ -603,51 +603,50 @@ Sample ephemeral-config.properties (key/value pair)
    {{% tab name="CSI PowerFlex" %}}
 
    ```yaml
-   volumeName=my-ephemeral-vol
-   size=10Gi
-   storagepool=sample
-   systemID=sample
+   volumeName: "my-ephemeral-vol"
+   size: "10Gi"
+   storagepool: "sample"
+   systemID: "sample"
    ```
 
    {{% /tab %}}
    {{% tab name="CSI PowerScale" %}}
 
    ```yaml
-   size=10Gi
-   ClusterName=sample
-   AccessZone=sample
-   IsiPath=/ifs/data/sample
-   IsiVolumePathPermissions=0777
-   AzServiceIP=192.168.2.1
+   size: "10Gi"
+   ClusterName: "sample"
+   AccessZone: "sample"
+   IsiPath: "/ifs/data/sample"
+   IsiVolumePathPermissions: "0777"
+   AzServiceIP: "192.168.2.1"
    ```
 
    {{% /tab %}}
    {{% tab name="CSI PowerStore" %}}
 
    ```yaml
-   size=10Gi
-   arrayID=sample
-   nasName=sample
-   nfsAcls=0777
+   size: "10Gi"
+   arrayID: "sample"
+   nasName: "sample"
+   nfsAcls: "0777"
    ```
 
    {{% /tab %}}
    {{% tab name="CSI Unity" %}}
 
    ```yaml
-   size=10Gi
-   arrayId=sample
-   protocol=iSCSI
-   thinProvisioned=true
-   isDataReductionEnabled=false
-   tieringPolicy=1
-   storagePool=pool_2
-   nasName=sample
+   size: "10Gi"
+   arrayID: "sample"
+   protocol: iSCSI
+   thinProvisioned: "true"
+   isDataReductionEnabled: "false"
+   tieringPolicy: "1"
+   storagePool: pool_2
+   nasName: "sample"
    ```
 
    {{% /tab %}}
    {{< /tabs >}}
-
 
 #### Storage Capacity Tracking
 1. Creates namespace `functional-test` where resources will be created.

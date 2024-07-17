@@ -259,11 +259,8 @@ cd dell-csi-helm-installer && wget -O my-unity-settings.yaml https://github.com/
 
 7. Run the command to proceed with the installation using bash script.
    ```bash
-   ./csi-install.sh --namespace unity --values ./myvalues.yaml --helm-charts-version <version>
+   ./csi-install.sh --namespace unity --values ./myvalues.yaml
    ```
-  *NOTE:* 
-   - The parameter `--helm-charts-version` is optional and if you do not specify the flag, by default the `csi-install.sh` script will clone the version of the helm chart that is specified in the driver's [csi-install.sh](https://github.com/dell/csi-unity/blob/main/dell-csi-helm-installer/csi-install.sh#L22) file. If you wish to install the driver using a different version of the helm chart, you need to include this flag. Also, remember to delete the `helm-charts` repository present in the `csi-unity` directory if it was cloned before.
-
     A successful installation must display messages that look similar to the following samples:
     ```
     ------------------------------------------------------

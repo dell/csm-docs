@@ -9,8 +9,6 @@ description: >
 The CSM Authorization karavictl CLI is no longer actively maintained or supported. It will be deprecated in a future release.
 {{% /pageinfo %}}
 
->> NOTE: Authorization v2.0 Tech Preview is not supported through Helm.
-
 CSM Authorization can be installed by using the provided Helm v3 charts on Kubernetes platforms. 
 
 The following CSM Authorization components are installed in the specified namespace:
@@ -144,7 +142,7 @@ mv ./karavictl ~/.local/bin/karavictl
 # and then append (or prepend) ~/.local/bin to $PATH
 ```
 
-Karavictl commands and intended use can be found [here](../../../../../authorization/v1.x-ga/cli/). 
+Karavictl commands and intended use can be found [here](../../../../../authorization/cli/). 
 
 ## Configuring the CSM Authorization Proxy Server
 
@@ -162,7 +160,7 @@ NAME              CLASS   HOSTS                           ADDRESS   PORTS     AG
 proxy-server      nginx   csm-authorization.com                     00, 000   86s
 ```
 ```bash
-kubectl -n authorization get service
+kubectl -n auth get service
 ```
 ```
 NAME                                               TYPE           CLUSTER-IP       EXTERNAL-IP   PORT(S)                      AGE
@@ -184,13 +182,13 @@ On the machine running `karavictl`, the `/etc/hosts` file needs to be updated wi
 <master_node_ip> csm-authorization.com
 ```
 
-Please continue following the steps outlined in the [proxy server](../../../../../authorization/v1.x-ga/configuration/proxy-server) configuration.
+Please continue following the steps outlined in the [proxy server](../../../../../authorization/configuration/proxy-server) configuration.
 
 ## Configuring a Dell CSI Driver with CSM for Authorization
 
 The second part of CSM for Authorization deployment is to configure one or more of the [supported](../../../../../authorization#supported-csi-drivers) CSI drivers. This is controlled by the Kubernetes tenant admin.
 
-Please continue following the configuration steps for a specific CSI Driver [here](../../../../../authorization/v1.x-ga/configuration/).
+Please continue following the configuration steps for a specific CSI Driver [here](../../../../../authorization/configuration/).
 
 ## Updating CSM for Authorization Proxy Server Configuration
 
