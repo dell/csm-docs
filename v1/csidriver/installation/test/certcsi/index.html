@@ -16,12 +16,12 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/v1/csidriver/installation/test/certcsi/" /><meta property="article:section" content="v1" />
 
-<meta property="article:modified_time" content="2024-07-17T16:26:42+05:30" />
+<meta property="article:modified_time" content="2024-07-18T12:17:18+05:30" />
 
 <meta itemprop="name" content="Cert-CSI">
 <meta itemprop="description" content="Tool to validate Dell CSI Drivers">
-<meta itemprop="dateModified" content="2024-07-17T16:26:42+05:30" />
-<meta itemprop="wordCount" content="3064">
+<meta itemprop="dateModified" content="2024-07-18T12:17:18+05:30" />
+<meta itemprop="wordCount" content="3098">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Cert-CSI"/>
 <meta name="twitter:description" content="Tool to validate Dell CSI Drivers"/>
@@ -103,7 +103,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.4fb5864f327a63149f6f5b3c4260167d.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.48199aa99e70d956f83e8923d213cda5.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -125,7 +125,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.4fb5864f327a63149f6f5b3c4260167d.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.48199aa99e70d956f83e8923d213cda5.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -722,23 +722,25 @@
 <p>The exectuable from the GitHub Release only supports Linux. For non-Linux users, you must build the <code>cert-csi</code> executable <a href="#building-locally">locally</a>.</p>
 </blockquote>
 <h3 id="download-release-linux">Download Release (Linux)</h3>
+<blockquote>
+<p>NOTE: Please ensure you delete any previously downloaded Cert-CSI binaries, as each release uses the same name (<code>cert-csi-linux-amd64</code>). After installing the latest version, run the <code>cert-csi -v</code> command to verify the installed version.</p>
+</blockquote>
 <ol>
 <li>Download the latest release of the cert-csi zip file.</li>
 </ol>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>curl -LO https://github.com/dell/cert-csi/releases/download/v1.3.1/cert-csi-v1.3.1.zip
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>wget https://github.com/dell/cert-csi/releases/download/v1.3.1/cert-csi-linux-amd64
 </span></span></code></pre></div><ol start="2">
-<li>Unzip the file.</li>
+<li>Set the execute permission before running it.</li>
 </ol>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>unzip cert-csi-v1.3.1.zip
-</span></span><span style="display:flex;"><span>chmod +x ./cert-csi-v1.3.1
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>chmod +x ./cert-csi-linux-amd64
 </span></span></code></pre></div><ol start="3">
-<li>Install cert-csi-v1.3.1 as cert-csi.</li>
+<li>Install cert-csi-linux-amd64 as cert-csi.</li>
 </ol>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo install -o root -g root -m <span style="color:#0000cf;font-weight:bold">0755</span> cert-csi-v1.3.1 /usr/local/bin/cert-csi
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo install -o root -g root -m <span style="color:#0000cf;font-weight:bold">0755</span> cert-csi-linux-amd64 /usr/local/bin/cert-csi
 </span></span></code></pre></div><p>If you do not have root access on the target system, you can still install cert-csi to the ~/.local/bin directory:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>chmod +x cert-csi-v1.3.1
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>chmod +x ./cert-csi-linux-amd64
 </span></span><span style="display:flex;"><span>mkdir -p ~/.local/bin
-</span></span><span style="display:flex;"><span>mv ./cert-csi-v1.3.1 ~/.local/bin/cert-csi
+</span></span><span style="display:flex;"><span>mv ./cert-csi-linux-amd64 ~/.local/bin/cert-csi
 </span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"># and then append (or prepend) ~/.local/bin to $PATH</span>
 </span></span></code></pre></div><h3 id="pull-the-container-image">Pull The Container Image</h3>
 <ul class="nav nav-tabs" id="pulling-cert-csi-image" role="tablist"><li class="nav-item"><a data-toggle="tab" class="nav-link active" href="#pulling-cert-csi-image-0" role="tab" aria-controls="pulling-cert-csi-image-0" aria-selected="true">Docker</a></li>
