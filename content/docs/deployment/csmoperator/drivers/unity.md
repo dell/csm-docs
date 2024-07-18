@@ -34,22 +34,22 @@ kubectl get csm --all-namespaces
         skipCertificateValidation: true         # indicates if client side validation of (management)server's certificate can be skipped
         isDefault: true                         # treat current array as a default (would be used by storage classes without arrayID parameter)
    ```
-   Change the parameters with relevant values for your Unity XT array. 
+   Change the parameters with relevant values for your Unity XT array.
    Add more blocks similar to above for each Unity XT array if necessary.
-           
+
 3. Use the following command to create a new secret unity-creds from `secret.yaml` file.
-	
+
     `kubectl create secret generic unity-creds -n unity --from-file=config=secret.yaml`
-    
+
    Use the following command to replace or update the secret:
-    
+
     `kubectl create secret generic unity-creds -n unity --from-file=config=secret.yaml -o yaml --dry-run | kubectl replace -f -`
 
 ### Install Driver
 
 1. Follow all the [prerequisites](#prerequisite) above
-   
-2. Create a CR (Custom Resource) for Unity XT using the sample files provided 
+
+2. Create a CR (Custom Resource) for Unity XT using the sample files provided
    [here](https://github.com/dell/csm-operator/tree/master/samples). This file can be modified to use custom parameters if needed.
 
 3. Users should configure the parameters in CR. The following table lists the primary configurable parameters of the Unity XT driver and their default values:
@@ -58,7 +58,7 @@ kubectl get csm --all-namespaces
 | --------- | ----------- | -------- |-------- |
 | replicas | Controls the number of controller pods you deploy. If the number of controller pods is greater than the number of available nodes, the excess pods will be in pending state until new nodes are available for scheduling. Default is 2 which allows for Controller high availability. | Yes | 2 |
 | namespace | Specifies namespace where the driver will be installed | Yes | "unity" |
-| fsGroupPolicy | Defines which FS Group policy mode to be used. Supported modes `None, File and ReadWriteOnceWithFSType` | No |"ReadWriteOnceWithFSType"|
+| fsGroupPolicy | Defines which FS Group policy mode to be used. Supported modes `None, File and ReadWriteOnceWithFSType`. In OCP <= 4.16 and K8s <= 1.29, fsGroupPolicy is an immutable field. | No |"ReadWriteOnceWithFSType"|
 | storageCapacity.enabled | Enable/Disable storage capacity tracking | No | true |
 | storageCapacity.pollInterval | Configure how often the driver checks for changed capacity | No | 5m |
 | ***Common parameters for node and controller*** |
@@ -79,8 +79,8 @@ kubectl get csm --all-namespaces
    kubectl create -f <input_sample_file.yaml>
    ```
    This command will deploy the CSI Unity XT driver in the namespace specified in the input YAML file.
-      
-   - Next, the driver should be installed, you can check the condition of driver pods by running 
+
+   - Next, the driver should be installed, you can check the condition of driver pods by running
       ```bash
       kubectl get all -n <driver-namespace>
       ```
@@ -88,7 +88,7 @@ kubectl get csm --all-namespaces
 5.  [Verify the CSI Driver installation](../#verifying-the-driver-installation)
 
 6. Refer https://github.com/dell/csi-unity/tree/main/samples for the sample files.
-    
-**Note** : 
+
+**Note** :
    1. "Kubelet config dir path" is not yet configurable in case of Operator based driver installation.
-   2. Snapshotter and resizer sidecars are not optional. They are defaults with Driver installation. 
+   2. Snapshotter and resizer sidecars are not optional. They are defaults with Driver installation.
