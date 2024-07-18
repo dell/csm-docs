@@ -637,7 +637,7 @@ If either option is set to a value outside of what is supported, the driver will
 
 ## Volume Health Monitoring 
 
-> *NOTE*: This feature requires the alpha feature gate, CSIVolumeHealth to be set to true. If the feature gate is on, and you want to use this feature,
+> *NOTE*: Alpha feature gate `CSIVolumeHealth` needs to be enabled for the node side monitoring to take effect. For more information, please refer to the [Kubernetes GitHub repository](https://github.com/kubernetes-csi/external-health-monitor/blob/master/README.md). If the feature gate is on, and you want to use this feature,
 > ensure the proper values are enabled in your values file. See the values table in the installation doc for more details. 
 
 Starting in version 2.1, CSI Driver for PowerFlex now supports volume health monitoring. This allows Kubernetes to report on the condition of the underlying volumes via events when a volume condition is abnormal. For example, if a volume were to be deleted from the array, or unmounted outside of Kubernetes, Kubernetes will now report these abnormal conditions as events.  
@@ -764,6 +764,9 @@ The user can also set the volume limit for all the nodes in the cluster by speci
 
 ## NFS volume support
 Starting with version 2.8, the CSI driver for PowerFlex will support NFS volumes for PowerFlex storage systems version 4.0.x.
+
+> NOTE: 
+> Starting from CSM 1.11.0, the CSI-PowerFlex driver will automatically round up NFS volume sizes to a minimum of 3GB if a smaller size is requested. This change prevents backend errors and ensures compatibility.
 
 CSI driver will support following operations for NFS volumes:
 

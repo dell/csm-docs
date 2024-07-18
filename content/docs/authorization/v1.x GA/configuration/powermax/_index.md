@@ -79,6 +79,8 @@ Create the karavi-authorization-config secret using this command:
     
     - Update `authorization.skipCertificateValidation` to `true` or `false` depending on if you want to disable or enable certificate validation of the CSM Authorization Proxy Server.
 
+    - Update `csireverseproxy.deployAsSidecar` to `true`.
+
     Example:
 
     ```yaml
@@ -88,6 +90,14 @@ Create the karavi-authorization-config secret using this command:
           endpoint: https://localhost:9400
       managementServers:
         - endpoint: https://localhost:9400
+
+    csireverseproxy:
+      # Set enabled to true if you want to deploy csireverseproxy as sidecar
+      # Allowed values:
+      #   "true"  - CSI reverse proxy will be deployed as a sidecar
+      #   "false" - CSI reverse proxy will be deployed along with driver
+      # Default value: "true"
+      deployAsSidecar: true
 
     authorization:
       enabled: true
@@ -122,10 +132,22 @@ Create the karavi-authorization-config secret using this command:
 
     - Update the `SKIP_CERTIFICATE_VALIDATION` environment value to `true` or `false` depending on if you want to disable or enable certificate validation of the CSM Authorization Proxy Server.
 
+    - Update the `DeployAsSidecar` environment variable for the `csipowermax-reverseproxy` component to `true`.
+
     Example: 
 
     ```yaml
     modules:
+      - name: csireverseproxy
+        # enabled: Always set to true
+        enabled: true
+        forceRemoveModule: true
+        configVersion: v2.10.0
+        components:
+          - name: csipowermax-reverseproxy
+            envs:
+              - name: "DeployAsSidecar"
+                value: "true"
       # Authorization: enable csm-authorization for RBAC
       - name: authorization
         # enable: Enable/Disable csm-authorization

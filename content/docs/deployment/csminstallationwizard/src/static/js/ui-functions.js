@@ -382,6 +382,7 @@ function displayModules(installationType, driverName, CONSTANTS_PARAM) {
 			$(".vgsnapshot").hide();
 			$(".storage-capacity").show();
 			$(".max-volumes-per-node").show();
+			$(".topology").show();
 			document.getElementById("driver-namespace").value = CONSTANTS_PARAM.POWERSCALE_NAMESPACE;
 			if (installationType === 'operator'){
 				$(".observability-operator").show();
@@ -480,10 +481,10 @@ function displayCommands(releaseNameValue, commandTitleValue, commandNoteValue, 
 			helmChartVersion = CONSTANTS.CSM_HELM_V1102;
 			break;
 		case "1.11.0":
-			helmChartVersion = CONSTANTS.CSM_HELM_V1100;
+			helmChartVersion = CONSTANTS.CSM_HELM_V1110;
 			break;
 		default:
-			helmChartVersion = CONSTANTS.CSM_HELM_V1100;
+			helmChartVersion = CONSTANTS.CSM_HELM_V1110;
 			break;
 	}
 	$("#command-text-area").show();
