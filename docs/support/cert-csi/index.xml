@@ -56,6 +56,22 @@
 &lt;td style=&#34;text-align:center&#34;&gt;SCINI&lt;/td&gt;
 &lt;td style=&#34;text-align:center&#34;&gt;CSI v2.9.2&lt;/td&gt;
 &lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1361&#34;&gt;Ticket 1361&lt;/a&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;RHCOS 4.12&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;OpenShift 4.12&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;PowerStore&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;iSCSI&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;CSI v2.8.0&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1362&#34;&gt;Ticket 1362&lt;/a&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;RHCOS 4.12&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;OpenShift 4.12&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;PowerScale&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;NFS&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;CSI v2.8.0&lt;/td&gt;
+&lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
 
