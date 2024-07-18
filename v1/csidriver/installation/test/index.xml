@@ -35,23 +35,25 @@
 &lt;p&gt;The exectuable from the GitHub Release only supports Linux. For non-Linux users, you must build the &lt;code&gt;cert-csi&lt;/code&gt; executable &lt;a href=&#34;#building-locally&#34;&gt;locally&lt;/a&gt;.&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;h3 id=&#34;download-release-linux&#34;&gt;Download Release (Linux)&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;NOTE: Please ensure you delete any previously downloaded Cert-CSI binaries, as each release uses the same name (&lt;code&gt;cert-csi-linux-amd64&lt;/code&gt;). After installing the latest version, run the &lt;code&gt;cert-csi -v&lt;/code&gt; command to verify the installed version.&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;ol&gt;
 &lt;li&gt;Download the latest release of the cert-csi zip file.&lt;/li&gt;
 &lt;/ol&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;curl -LO https://github.com/dell/cert-csi/releases/download/v1.3.1/cert-csi-v1.3.1.zip
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;wget https://github.com/dell/cert-csi/releases/download/v1.3.1/cert-csi-linux-amd64
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;2&#34;&gt;
-&lt;li&gt;Unzip the file.&lt;/li&gt;
+&lt;li&gt;Set the execute permission before running it.&lt;/li&gt;
 &lt;/ol&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;unzip cert-csi-v1.3.1.zip
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;chmod +x ./cert-csi-v1.3.1
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;chmod +x ./cert-csi-linux-amd64
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;3&#34;&gt;
-&lt;li&gt;Install cert-csi-v1.3.1 as cert-csi.&lt;/li&gt;
+&lt;li&gt;Install cert-csi-linux-amd64 as cert-csi.&lt;/li&gt;
 &lt;/ol&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo install -o root -g root -m &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;0755&lt;/span&gt; cert-csi-v1.3.1 /usr/local/bin/cert-csi
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo install -o root -g root -m &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;0755&lt;/span&gt; cert-csi-linux-amd64 /usr/local/bin/cert-csi
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;If you do not have root access on the target system, you can still install cert-csi to the ~/.local/bin directory:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;chmod +x cert-csi-v1.3.1
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;chmod +x ./cert-csi-linux-amd64
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;mkdir -p ~/.local/bin
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;mv ./cert-csi-v1.3.1 ~/.local/bin/cert-csi
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;mv ./cert-csi-linux-amd64 ~/.local/bin/cert-csi
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# and then append (or prepend) ~/.local/bin to $PATH&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;pull-the-container-image&#34;&gt;Pull The Container Image&lt;/h3&gt;
 &lt;ul class=&#34;nav nav-tabs&#34; id=&#34;pulling-cert-csi-image&#34; role=&#34;tablist&#34;&gt;&lt;li class=&#34;nav-item&#34;&gt;&lt;a data-toggle=&#34;tab&#34; class=&#34;nav-link active&#34; href=&#34;#pulling-cert-csi-image-0&#34; role=&#34;tab&#34; aria-controls=&#34;pulling-cert-csi-image-0&#34; aria-selected=&#34;true&#34;&gt;Docker&lt;/a&gt;&lt;/li&gt;
