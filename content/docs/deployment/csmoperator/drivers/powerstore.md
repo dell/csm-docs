@@ -12,23 +12,23 @@ To deploy the Operator, follow the instructions available [here](../../#installa
 
 Note that the deployment of the driver using the operator does not use any Helm charts and the installation and configuration parameters will be slightly different from the one specified via the Helm installer.
 
-### Listing installed drivers with the ContainerStorageModule CRD
+### Check existing ContainerStorageModule CRD
 User can query for all Dell CSI drivers using the following command:
 ```bash
 kubectl get csm --all-namespaces
 ```
 
 
-### Prerequisite
+### Prerequisites
 
-### Fibre Channel requirements
+#### Fibre Channel requirements
 
 Dell PowerStore supports Fibre Channel communication. If you use the Fibre Channel protocol, ensure that the
 following requirement is met before you install the CSI Driver for Dell PowerStore:
 - Zoning of the Host Bus Adapters (HBAs) to the Fibre Channel port must be done.
 
 
-### Set up the iSCSI Initiator
+#### Set up the iSCSI Initiator
 The CSI Driver for Dell PowerStore v1.4 and higher supports iSCSI connectivity.
 
 If you use the iSCSI protocol, set up the iSCSI initiators as follows:
@@ -42,7 +42,7 @@ To do this, run the `systemctl enable --now iscsid` command.
 For information about configuring iSCSI, see _Dell PowerStore documentation_ on Dell Support.
 
 
-### Set up the NVMe Initiator
+#### Set up the NVMe Initiator
 
 If you want to use the protocol, set up the NVMe initiators as follows:
 - The driver requires NVMe management command-line interface (nvme-cli) to use configure, edit, view or start the NVMe client and target. The nvme-cli utility provides a command-line and interactive shell option. The NVMe CLI tool is installed in the host using the below command.
@@ -64,7 +64,7 @@ modprobe nvme_tcp
 *NOTE:*
 - Do not load the nvme_tcp module for NVMeFC
 
-### Linux multipathing requirements
+#### Linux multipathing requirements
 Dell PowerStore supports Linux multipathing. Configure Linux multipathing before installing the CSI Driver for Dell
 PowerStore.
 
@@ -75,7 +75,7 @@ Set up Linux multipathing as follows:
 - Enable `user_friendly_names` and `find_multipaths` in the `multipath.conf` file.
 - Ensure that the multipath command for `multipath.conf` is available on all Kubernetes nodes.
 
-#### multipathd `MachineConfig`
+##### multipathd `MachineConfig`
 
 If you are installing a CSI Driver which requires the installation of the Linux native Multipath software - _multipathd_, please follow the below instructions
 
@@ -122,10 +122,10 @@ Finally, you have to restart the service by providing the command
 
 For additional information refer to official documentation of the multipath configuration.
 
-### (Optional) Volume Snapshot Requirements
+#### (Optional) Volume Snapshot Requirements
   For detailed snapshot setup procedure, [click here.](../../../../snapshots/#optional-volume-snapshot-requirements)
 
-### (Optional) Replication feature Requirements
+#### (Optional) Replication feature Requirements
 
 Applicable only if you decided to enable the Replication feature in `sample.yaml`
 
@@ -133,11 +133,12 @@ Applicable only if you decided to enable the Replication feature in `sample.yaml
 replication:
   enabled: true
 ```
-#### Replication CRD's
+##### Replication CRD's
 
 The CRDs for replication can be obtained and installed from the csm-replication project on Github. Use `csm-replication/deploy/replicationcrds.all.yaml` located in csm-replication git repo for the installation.
 
 CRDs should be configured during replication prepare stage with repctl as described in [install-repctl](../../../helm/modules/installation/replication/install-repctl)
+### Namespace and PowerStore API Access Configuration
 
 1. Create namespace.
    Execute `kubectl create namespace powerstore` to create the powerstore namespace (if not already present). Note that the namespace can be any user-defined name, in this example, we assume that the namespace is 'powerstore'.
@@ -161,7 +162,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
 
    If replication feature is enabled, ensure the secret includes all the PowerStore arrays involved in replication.
 
-   ### User Privileges
+   #### User Privileges
    The username specified in `config.yaml` must be from the authentication providers of PowerStore. The user must have the correct user role to perform the actions. The minimum requirement is **Storage Operator**.
 
 3. Create Kubernetes secret:

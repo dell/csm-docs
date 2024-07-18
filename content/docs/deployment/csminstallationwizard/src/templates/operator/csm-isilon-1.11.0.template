@@ -165,11 +165,11 @@ spec:
       # Leave as blank to consider all nodes
       # Allowed values: map of key-value pairs
       # Default value: None
-      nodeSelector:$CONTROLLER_POD_NODE_SELECTOR
+      nodeSelector: $CONTROLLER_POD_NODE_SELECTOR
 
       # tolerations: Define tolerations for the controller deployment, if required.
       # Default value: None
-      tolerations:$CONTROLLER_TOLERATIONS
+      tolerations: $CONTROLLER_TOLERATIONS
 
     node:
       envs:
@@ -212,11 +212,11 @@ spec:
       # Leave as blank to consider all nodes
       # Allowed values: map of key-value pairs
       # Default value: None
-      nodeSelector:$NODE_POD_NODE_SELECTOR
+      nodeSelector: $NODE_POD_NODE_SELECTOR
 
       # tolerations: Define tolerations for the node daemonset, if required.
       # Default value: None
-      tolerations:$NODE_TOLERATIONS
+      tolerations: $NODE_TOLERATIONS
       # - key: "node.kubernetes.io/memory-pressure"
       #   operator: "Exists"
       #   effect: "NoExecute"
@@ -245,10 +245,10 @@ spec:
     - name: authorization
       # enable: Enable/Disable csm-authorization
       enabled: $AUTHORIZATION_ENABLED
-      configVersion: v1.10.0
+      configVersion: v1.11.0
       components:
       - name: karavi-authorization-proxy
-        image: dellemc/csm-authorization-sidecar:v1.10.0
+        image: dellemc/csm-authorization-sidecar:v1.11.0
         envs:
           # proxyHost: hostname of the csm-authorization server
           - name: "PROXY_HOST"
@@ -289,7 +289,7 @@ spec:
       - name: dell-replication-controller-manager
         # image: Defines controller image. This shouldn't be changed
         # Allowed values: string
-        image: dellemc/dell-replication-controller:v1.7.0
+        image: dellemc/dell-replication-controller:v1.9.0
         envs:
           # TARGET_CLUSTERS_IDS: comma separated list of cluster IDs of the targets clusters. DO NOT include the source(wherever CSM Operator is deployed) cluster ID
           # Set the value to "self" in case of stretched/single cluster configuration
@@ -321,14 +321,14 @@ spec:
     - name: observability
       # enabled: Enable/Disable observability
       enabled: $OBSERVABILITY_OPERATOR_ENABLED
-      configVersion: v1.7.0
+      configVersion: v1.9.0
       components:
         - name: topology
           # enabled: Enable/Disable topology
           enabled: $OBSERVABILITY_OPERATOR_TOPOLOGY
           # image: Defines karavi-topology image. This shouldn't be changed
           # Allowed values: string
-          image: dellemc/csm-topology:v1.7.0
+          image: dellemc/csm-topology:v1.9.0
           envs:
             # topology log level
             # Valid values: TRACE, DEBUG, INFO, WARN, ERROR, FATAL, PANIC
@@ -362,7 +362,7 @@ spec:
           enabled: $OBSERVABILITY_OPERATOR_METRICS
           # image: Defines PowerScale metrics image. This shouldn't be changed
           # Allowed values: string
-          image: dellemc/csm-metrics-powerscale:v1.4.0
+          image: dellemc/csm-metrics-powerscale:v1.6.0
           envs:
             # POWERSCALE_MAX_CONCURRENT_QUERIES: set the default max concurrent queries to PowerScale
             # Allowed values: int

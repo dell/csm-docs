@@ -630,21 +630,14 @@ The user will be able to install the driver and able to create pods.
 
 ## PV/PVC Metrics
 
-CSI Driver for Dell Powerstore 2.1.0 and above supports volume health monitoring. To enable Volume Health Monitoring from the node side, the alpha feature gate CSIVolumeHealth needs to be enabled. To use this feature, set controller.healthMonitor.enabled and node.healthMonitor.enabled to true. To change the monitor interval, set controller.healthMonitor.interval parameter.
+CSI Driver for Dell Powerstore 2.1.0 and above supports volume health monitoring. Alpha feature gate `CSIVolumeHealth` needs to be enabled for the node side monitoring to take effect. For more information, please refer to the [Kubernetes GitHub repository](https://github.com/kubernetes-csi/external-health-monitor/blob/master/README.md). To use this feature, set controller.healthMonitor.enabled and node.healthMonitor.enabled to true. To change the monitor interval, set controller.healthMonitor.interval parameter.
 
 
-## Single Pod Access Mode for PersistentVolumes
+## Single Pod Access Mode for PersistentVolumes- ReadWriteOncePod 
 
-Starting from version 2.1, CSI Driver for Powerstore now supports a new access mode `ReadWriteOncePod` for PersistentVolumes and PersistentVolumeClaims. With this feature, CSI Driver for Powerstore allows restricting volume access to a single pod in the cluster and within a worker node.
+Use `ReadWriteOncePod(RWOP)` access mode if you want to ensure that only one pod across the whole cluster can read that PVC or write to it. This is supported for CSI Driver for PowerStore 2.1.0+ and Kubernetes version 1.22+.
 
-Prerequisites
-
-1. Enable the ReadWriteOncePod feature gate for kube-apiserver, kube-scheduler, and kubelet as ReadWriteOncePod access mode is in alpha for Kubernetes v1.22 and is supported only for CSI volumes. You can enable the feature by setting command-line argument:
-```bash
---feature-gates="...,ReadWriteOncePod=true"
-```
-
-2. Create a PVC with access mode set to ReadWriteOncePod like shown in the sample below
+### Creating a PersistentVolumeClaim
 ```yaml
 kind: PersistentVolumeClaim
 apiVersion: v1
@@ -659,6 +652,10 @@ spec:
 ```
 
 >Note: The access mode ReadWriteOnce allows multiple pods to access a single volume within a single worker node and the behavior is consistent across all supported Kubernetes versions.
+
+When this feature is enabled, the existing `ReadWriteOnce(RWO)` access mode restricts volume access to a single node and allows multiple pods on the same node to read from and write to the same volume.
+
+To migrate existing PersistentVolumes to use `ReadWriteOncePod`, please follow the instruction from [here](https://kubernetes.io/docs/tasks/administer-cluster/change-pv-access-mode-readwriteoncepod/).
 
 ## POSIX mode bits and NFSv4 ACLs
 

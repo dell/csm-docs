@@ -176,7 +176,7 @@ enable = false
   url = "https://dell.github.io/csm-docs/docs/"
 
 [[params.versions]]
-  version = "v1.10.0"
+  version = "v1.10.2"
   url = "https://dell.github.io/csm-docs/v1"
 
 [[params.versions]]

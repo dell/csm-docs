@@ -545,14 +545,11 @@ kubectl edit configmap -n powermax powermax-config-params
 
 ## Volume Health Monitoring
 
-CSI Driver for Dell PowerMax 2.2.0 and above supports volume health monitoring. To enable Volume Health Monitoring from the node side, the alpha feature gate CSIVolumeHealth needs to be enabled. To use this feature, set controller.healthMonitor.enabled and node.healthMonitor.enabled to true. To change the monitor interval, set controller.healthMonitor.interval parameter.
+CSI Driver for Dell PowerMax 2.2.0 and above supports volume health monitoring. Alpha feature gate `CSIVolumeHealth` needs to be enabled for the node side monitoring to take effect. For more information, please refer to the [Kubernetes GitHub repository](https://github.com/kubernetes-csi/external-health-monitor/blob/master/README.md). To use this feature, set controller.healthMonitor.enabled and node.healthMonitor.enabled to true. To change the monitor interval, set controller.healthMonitor.interval parameter.
 
-## Single Pod Access Mode for PersistentVolumes- ReadWriteOncePod (ALPHA FEATURE)
+## Single Pod Access Mode for PersistentVolumes- ReadWriteOncePod 
 
 Use `ReadWriteOncePod(RWOP)` access mode if you want to ensure that only one pod across the whole cluster can read that PVC or write to it. This is only supported for CSI Driver for PowerMax 2.2.0+ and Kubernetes version 1.22+.
-
-To use this feature, enable the ReadWriteOncePod feature gate for kube-apiserver, kube-scheduler, and kubelet, by setting command line arguments:
-`--feature-gates="...,ReadWriteOncePod=true"`
 
 ### Creating a PersistentVolumeClaim
 ```yaml
@@ -570,7 +567,7 @@ spec:
 
 When this feature is enabled, the existing `ReadWriteOnce(RWO)` access mode restricts volume access to a single node and allows multiple pods on the same node to read from and write to the same volume.
 
-To migrate existing PersistentVolumes to use `ReadWriteOncePod`, please follow the instruction from [here](https://kubernetes.io/blog/2021/09/13/read-write-once-pod-access-mode-alpha/#migrating-existing-persistentvolumes).
+To migrate existing PersistentVolumes to use `ReadWriteOncePod`, please follow the instruction from [here](https://kubernetes.io/docs/tasks/administer-cluster/change-pv-access-mode-readwriteoncepod/).
   
 ## Support for auto RDM for vSphere over FC
   
@@ -639,3 +636,13 @@ This feature is also supported for limiting the volume provisioning on Kubernete
 >**NOTE:** <br>The default value of `maxPowerMaxVolumesPerNode` is 0. <br>If `maxPowerMaxVolumesPerNode` is set to zero, then CO shall decide how many volumes of this type can be published by the controller to the node.<br><br>The volume limit specified to `maxPowerMaxVolumesPerNode` attribute is applicable to all the nodes in the cluster for which node label `max-powermax-volumes-per-node` is not set.
 <br>Supported maximum number of RDM Volumes per VM is 60 as per the limitations. <br>If the value is set both by node label and values.yaml file then node label value will get the precedence and user has to remove the node label in order to reflect the values.yaml value. 
 
+## NVMe/TCP Support
+
+The CSI Driver for Dell PowerMax supports NVMeTCP from v2.11.0. To enable NVMe/TCP provisioning, blockProtocol in settings file should be specified as NVMETCP.
+
+**Limitations**<br>
+These are the CSM modules not supported with NVMeTCP protocol:
+- CSM Authorization
+- CSM Observability
+- CSM Application Mobility
+- Metro Replication

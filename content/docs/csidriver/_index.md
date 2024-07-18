@@ -16,7 +16,7 @@ The CSI Drivers by Dell implement an interface between [CSI](https://kubernetes-
 {{<table "table table-striped table-bordered table-sm">}}
 | Features                 | PowerMax | PowerFlex | Unity XT  | PowerScale | PowerStore |
 |--------------------------|:--------:|:---------:|:---------:|:----------:|:----------:|
-| CSI Driver version       | 2.10.0    | 2.10.0     | 2.10.0     | 2.10.0      | 2.10.0      |
+| CSI Driver version       | 2.11.0   | 2.11.0    | 2.11.0    | 2.11.0     | 2.11.0     |
 | Static Provisioning      | yes      | yes       | yes       | yes        | yes        |
 | Dynamic Provisioning     | yes      | yes       | yes       | yes        | yes        |
 | Expand Persistent Volume | yes      | yes       | yes       | yes        | yes        |
@@ -24,7 +24,7 @@ The CSI Drivers by Dell implement an interface between [CSI](https://kubernetes-
 | Create Volume from Snapshot | yes for LUN<br>no for NFS | yes       | yes       | yes        | yes        |
 | Delete Snapshot          | yes for LUN<br>no for NFS | yes       | yes       | yes        | yes        |
 | [Access Mode](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#access-modes) for [volumeMode: Filesystem](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#volume-mode)| RWO, RWOP<br><br>ROX, RWX **with NFS ONLY**| RWO, ROX, RWOP<br><br>RWX  **with NFS ONLY** | RWO, ROX, RWOP<br><br>RWX  **with NFS ONLY** | RWO, RWX, ROX, RWOP | RWO, RWOP<br><br>ROX, RWX **with NFS ONLY** |
-| Access Mode for `volumeMode: Block`| RWO, RWX, ROX, RWOP | RWO, RWX, ROX, RWOP |RWO, RWX, ROX, RWOP |Not Supported | RWO, RWX, ROX, RWOP |
+| Access Mode for `volumeMode: Block`| RWO, RWX, ROX, RWOP | RWO, RWX, ROX, RWOP | RWO, RWX | Not Supported | RWO, RWX, ROX, RWOP |
 | CSI Volume Cloning       | yes for LUN<br>no for NFS       | yes       | yes       | yes        | yes        |
 | CSI Raw Block Volume     | yes      | yes       | yes       | no         | yes        |
 | CSI Ephemeral Volume     | no       | yes       | yes       | yes        | yes        |
@@ -41,7 +41,7 @@ The CSI Drivers by Dell implement an interface between [CSI](https://kubernetes-
 |---------------|:----------------:|:------------------:|:----------------:|:----------------:|:----------------:|
 | Fibre Channel | yes              | N/A                | yes              | N/A              | yes              |
 | iSCSI         | yes              | N/A                | yes              | N/A              | yes              |
-| NVMeTCP       | N/A              | N/A                | N/A              | N/A              | yes              |
+| NVMeTCP       | yes              | N/A                | N/A              | N/A              | yes              |
 | NVMeFC        | N/A              | N/A                | N/A              | N/A              | yes              |
 | NFS           | yes - SDNAS only (not eNAS)   | yes   | yes              | yes              | yes              |
 | Other         | N/A              | ScaleIO protocol   | N/A              | N/A              | N/A              |
@@ -50,3 +50,4 @@ The CSI Drivers by Dell implement an interface between [CSI](https://kubernetes-
 | Platform-specific configurable settings | Service Level selection<br>iSCSI CHAP | - | Host IO Limit<br>Tiering Policy<br>NFS Host IO size<br>Snapshot Retention duration | Access Zone<br>NFS version (3 or 4);Configurable Export IPs | iSCSI CHAP |
 | Auto RDM(vSphere)  | Yes(over FC) | N/A               | N/A              | N/A              | N/A              |
 {{</table>}}
+

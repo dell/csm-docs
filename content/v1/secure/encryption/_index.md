@@ -5,6 +5,9 @@ weight: 1
 Description: >
   CSI Volumes Encryption
 ---
+
+**NOTE:**  Encryption is not supported for CSM 1.9.x release. Please refer to the [release notes](./release/) for more details.
+
 Encryption provides the capability to encrypt user data residing on volumes created by Dell CSI Drivers.
 
 > **NOTE:** This tech-preview release is not intended for use in production environment.

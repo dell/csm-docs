@@ -31,9 +31,9 @@ CSM for Resiliency provides the following capabilities:
 {{<table "table table-striped table-bordered table-sm">}}
 | Capability                              | PowerScale | Unity XT | PowerStore | PowerFlex | PowerMax |
 | --------------------------------------- | :--------: | :------: | :--------: | :-------: | :------: |
-| Detect pod failures when: Node failure, K8S Control Plane Network failure, K8S Control Plane failure, Array I/O Network failure | yes  | yes | yes | yes | no |
-| Cleanup pod artifacts from failed nodes | yes         | yes   | yes         | yes       | no       |
-| Revoke PV access from failed nodes      | yes         | yes   | yes         | yes       | no       |
+| Detect pod failures when: Node failure, K8S Control Plane Network failure, K8S Control Plane failure, Array I/O Network failure | yes  | yes | yes | yes | yes |
+| Cleanup pod artifacts from failed nodes | yes         | yes   | yes         | yes       | yes       |
+| Revoke PV access from failed nodes      | yes         | yes   | yes         | yes       | yes       |
 {{</table>}}
 
 ## Supported Operating Systems/Container Orchestrator Platforms
@@ -48,9 +48,9 @@ CSM for Resiliency provides the following capabilities:
 ## Supported Storage Platforms
 
 {{<table "table table-striped table-bordered table-sm">}}
-|               | PowerFlex    | Unity XT                          | PowerScale                              | PowerStore                    |
-| ------------- | :----------: | :-------------------------------: | :-------------------------------------: | :---------------------------: |
-| Storage Array | 3.6.x, 4.0.x, 4.5 | 5.1.x, 5.2.x, 5.3.0 | OneFS 9.3, 9.4, 9.5.0.x (x >= 5) | 3.0, 3.2, 3.5, 3.6 |
+|               | PowerFlex    | Unity XT                          | PowerScale                              | PowerStore                    | PowerMax |
+| ------------- | :----------: | :-------------------------------: | :-------------------------------------: | :---------------------------: | :---------------------------: |
+| Storage Array | 3.6.x, 4.0.x, 4.5 | 5.1.x, 5.2.x, 5.3.0 | OneFS 9.3, 9.4, 9.5.0.x (x >= 5) | 3.0, 3.2, 3.5, 3.6 | 2500/8500 PowerMax OS 10 (6079), Unisphere 10.x |
 {{</table>}}
 
 ## Supported CSI Drivers
@@ -63,6 +63,7 @@ CSM for Resiliency supports the following CSI drivers and versions.
 | CSI Driver for Dell Unity XT  | [csi-unity](https://github.com/dell/csi-unity)         | v2.0.0 + |
 | CSI Driver for Dell PowerScale  | [csi-powerscale](https://github.com/dell/csi-powerscale) | v2.3.0 + |
 | CSI Driver for Dell PowerStore  | [csi-powerstore](https://github.com/dell/csi-powerstore) | v2.6.0 + |
+| CSI Driver for Dell PowerMax | [csi-powermax](https://github.com/dell/csi-powermax) | v2.11.0 + |
 {{</table>}}
 
 ### PowerFlex Support
@@ -102,6 +103,14 @@ PowerStore is a highly scalable array that is very well suited to Kubernetes dep
 * A robust mechanism to detect if Nodes are actively doing I/O to volumes.
 * Low latency REST API supports fast CSI provisioning and de-provisioning operations.
 
+### PowerMax Support
+
+PowerMax is the highest performing block storage array  that is very well suited to Kubernetes deployments. The CSM for Resiliency support for PowerMax leverages the following PowerMax features:
+
+* Detection of Array I/O Network Connectivity status changes.
+* A robust mechanism to detect if Nodes are actively doing I/O to volumes.
+* Low latency REST API supports fast CSI provisioning and de-provisioning operations.
+
 ## Limitations and Exclusions
 
 This file contains information on Limitations and Exclusions that users should be aware of. Additionally, there are driver specific limitations and exclusions that may be called out in the [Deploying CSM for Resiliency](../deployment/helm/modules/installation/resiliency/) page.
@@ -128,6 +137,8 @@ The following provisioning types are supported and have been tested:
 * ReadWriteMany volumes. This may have issues if a node has multiple pods accessing the same volumes. In any case once pod cleanup fences the volumes on a node, they will no longer be available to any pods using those volumes on that node. We will endeavor to support this in the future.
 
 * Multiple instances of the same driver type (for example two CSI driver for Dell PowerFlex deployments.)
+
+* PowerFlex with Resiliency is not supported for NFS protocol.
 
 ## Deploying and Managing Applications Protected by CSM for Resiliency
 
@@ -159,10 +170,12 @@ pmtu3       podmontest-0   1/1     Running   0          3m6s
 
  CSM for Resiliency may also generate events if it is unable to clean up a pod for some reason. For example, it may not clean up a pod because the pod is still doing I/O to the array.
 
- Similarly, the label selector for csi-powerscale and csi-unity would be as shown respectively.
+Similarly, the label selector for csi-powerscale, csi-unity, csi-powerstore and csi-powermax would be as shown respectively.
  ```yaml
  labelSelector: {map[podmon.dellemc.com/driver:csi-isilon]
  labelSelector: {map[podmon.dellemc.com/driver:csi-unity]
+ labelSelector: {map[podmon.dellemc.com/driver:csi-powerstore]
+ labelSelector: {map[podmon.dellemc.com/driver:csi-powermax]
  ```
 
  #### Important
