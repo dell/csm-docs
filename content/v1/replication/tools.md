@@ -43,6 +43,8 @@ config maps into the same clusters, so it can be used by `dell-csi-replicator`:
 ./repctl cluster inject
 ```
 
+**NOTE:** Please ensure that CA certificate is present in kubeconfig, as repctl `--use-sa` flag requires it for proper operation.
+
 You can also generate kubeconfigs from existing replication service accounts and inject them in config maps by providing `--use-sa` flag:
 
 ```shell
