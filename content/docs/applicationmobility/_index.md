@@ -6,6 +6,10 @@ Description: >
   Application Mobility
 ---
 
+{{% pageinfo color="primary" %}}
+Application Mobility is available with [APEX Navigator for Kubernetes](https://www.dell.com/en-ca/dt/apex/storage/public-cloud/navigator.htm#kubernetes) for US-based customers
+{{% /pageinfo %}}
+
 >> NOTE: This tech-preview release is not intended for use in production environment.
 
 >> NOTE: Application Mobility requires a time-based license. See [Deployment](../deployment/helm/modules/installation/applicationmobility/) for instructions.
