@@ -18,13 +18,13 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/docs/deployment/csmoperator/operator_migration/" /><meta property="article:section" content="docs" />
 
-<meta property="article:modified_time" content="2024-03-21T15:00:56+05:30" />
+<meta property="article:modified_time" content="2024-07-23T16:37:02-04:00" />
 
 <meta itemprop="name" content="CSI to CSM Operator Migration">
 <meta itemprop="description" content="Migrating from CSI Operator to CSM Operator
 ">
-<meta itemprop="dateModified" content="2024-03-21T15:00:56+05:30" />
-<meta itemprop="wordCount" content="566">
+<meta itemprop="dateModified" content="2024-07-23T16:37:02-04:00" />
+<meta itemprop="wordCount" content="528">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="CSI to CSM Operator Migration"/>
 <meta name="twitter:description" content="Migrating from CSI Operator to CSM Operator
@@ -107,7 +107,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.59c9bdbe2655053f0e470979ea8acc07.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.3c218d0745cbe78144bd7d33b03d7218.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -129,7 +129,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.59c9bdbe2655053f0e470979ea8acc07.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.3c218d0745cbe78144bd7d33b03d7218.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -662,7 +662,6 @@
 
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#cr-sample-files">CR Sample Files</a></li>
     <li><a href="#migration-steps">Migration Steps</a></li>
     <li><a href="#openshift-web-console-migration-steps">OpenShift Web Console Migration Steps</a></li>
     <li><a href="#testing">Testing</a></li>
@@ -718,54 +717,7 @@
 	<h1>CSI to CSM Operator Migration</h1>
 
 	       
-	<h2 id="cr-sample-files">CR Sample Files</h2>
-
-
-
-
-
-<table class="table table-striped table-bordered table-sm">
-<thead>
-<tr>
-<th></th>
-<th style="text-align:center">CSI Operator</th>
-<th style="text-align:center">CSM Operator</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>PowerScale</td>
-<td style="text-align:center"><a href="https://github.com/dell/dell-csi-operator/blob/main/samples/isilon_v270_k8s_127.yaml">isilon_v270_k8s_127.yaml</a></td>
-<td style="text-align:center"><a href="https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powerscale_v290.yaml">storage_csm_powerscale_v290.yaml</a></td>
-</tr>
-<tr>
-<td>PowerMax</td>
-<td style="text-align:center"><a href="https://github.com/dell/dell-csi-operator/blob/main/samples/powermax_v270_k8s_127.yaml">powermax_v270_k8s_127.yaml</a></td>
-<td style="text-align:center"><a href="https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powermax_v290.yaml">storage_csm_powermax_v290.yaml</a></td>
-</tr>
-<tr>
-<td>PowerStore</td>
-<td style="text-align:center"><a href="https://github.com/dell/dell-csi-operator/blob/main/samples/powerstore_v270_k8s_127.yaml">powerstore_v270_k8s_127.yaml</a></td>
-<td style="text-align:center"><a href="https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powerstore_v290.yaml">storage_csm_powerstore_v290.yaml</a></td>
-</tr>
-<tr>
-<td>Unity XT</td>
-<td style="text-align:center"><a href="https://github.com/dell/dell-csi-operator/blob/main/samples/unity_v270_k8s_127.yaml">unity_v270_k8s_127.yaml</a></td>
-<td style="text-align:center"><a href="https://github.com/dell/csm-operator/blob/main/samples/storage_csm_unity_v290.yaml">storage_csm_unity_v290.yaml</a></td>
-</tr>
-<tr>
-<td>PowerFlex</td>
-<td style="text-align:center"><a href="https://github.com/dell/dell-csi-operator/blob/main/samples/vxflex_v270_k8s_127.yaml">vxflex_v270_k8s_127.yaml</a></td>
-<td style="text-align:center"><a href="https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powerflex_v290.yaml">storage_csm_powerflex_v290.yaml</a></td>
-</tr>
-</tbody>
-</table>
-
-
-<blockquote>
-<p>NOTE: Sample files refer to the latest version for each platform. If you do not want to upgrade, please find your preferred version in the <a href="https://github.com/dell/csm-operator/blob/main/samples">csm-operator repository</a>.</p>
-</blockquote>
-<h2 id="migration-steps">Migration Steps</h2>
+	<h2 id="migration-steps">Migration Steps</h2>
 <ol>
 <li>Save the CR yaml file of the current CSI driver to preserve the settings. Use the following commands in your cluster to get the CR:</li>
 </ol>
@@ -775,9 +727,9 @@
 <pre tabindex="0"><code>    kubectl -n openshift-operators get CSIUnity
     kubectl -n openshift-operators get CSIUnity/test-unity -o yaml
 </code></pre><ol start="2">
-<li>Map and update the settings from the CR in step 1 to the relevant CSM Operator CR
+<li>Map and update the settings from the CR in step 1 to the relevant CSM Operator CR (found in <a href="https://github.com/dell/csm-operator/blob/main/samples">csm-operator repository</a>).
 <ul>
-<li>As the yaml content may differ, ensure the values held in the step 1 CR backup are present in the new CR before installing the new driver. CR Samples table provided above can be used to compare and map the differences in attributes between Dell CSI Operator and CSM Operator CRs
+<li>As the yaml content may differ, ensure the values held in the step 1 CR backup are present in the new CR before installing the new driver. CR Samples for <a href="https://github.com/dell/dell-csi-operator/tree/main/samples">CSI Operator</a> and <a href="https://github.com/dell/csm-operator/tree/main/samples">CSM Operator</a> can be used to compare and map the differences in attributes.
 <ul>
 <li>Ex: spec.driver.fsGroupPolicy in <a href="https://github.com/dell/dell-csi-operator/blob/main/samples/">CSI Operator</a> maps to spec.driver.csiDriverSpec.fSGroupPolicy in <a href="https://github.com/dell/csm-operator/blob/main/samples/">CSM Operator</a></li>
 </ul>
@@ -836,9 +788,9 @@
 <ul>
 <li>Select <em>Create instance</em> under the provided Container Storage Module API</li>
 <li>Use the CR backup from step 1 to manually map desired settings to the new CSI driver</li>
-<li>As the yaml content may differ, ensure the values held in the step 1 CR backup are present in the new CR before installing the new driver
+<li>As the yaml content may differ, ensure the values held in the step 1 CR backup are present in the new CR before installing the new driver. CR Samples for <a href="https://github.com/dell/dell-csi-operator/tree/main/samples">CSI Operator</a> and <a href="https://github.com/dell/csm-operator/tree/main/samples">CSM Operator</a> can be used to compare and map the differences in attributes.
 <ul>
-<li>Ex: spec.driver.fsGroupPolicy in <a href="https://github.com/dell/dell-csi-operator/blob/main/samples/powermax_v270_k8s_127.yaml#L17C5-L17C18">PowerMax 2.7 for CSI Operator</a> maps to spec.driver.csiDriverSpec.fSGroupPolicy in <a href="https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powermax_v2100.yaml#L28C7-L28C20">PowerMax 2.10 for CSM Operator</a></li>
+<li>Ex: spec.driver.fsGroupPolicy in <a href="https://github.com/dell/dell-csi-operator/blob/main/samples/">CSI Operator</a> maps to spec.driver.csiDriverSpec.fSGroupPolicy in <a href="https://github.com/dell/csm-operator/blob/main/samples/">CSM Operator</a></li>
 </ul>
 </li>
 </ul>
