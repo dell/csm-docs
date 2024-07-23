@@ -399,6 +399,8 @@ After a successful installation of the driver, if a node Pod is running successf
 `csi-powermax.dellemc.com/\<array-id\>.fc`
 * If the worker node has ISCSI connectivity to the PowerMax array -
 `csi-powermax.dellemc.com/\<array-id\>.iscsi`
+* If the worker node has NVMeTCP connectivity to the PowerMax array -
+`csi-powermax.dellemc.com/\<array-id\>.nvmetcp`
 
 The values for all these keys are always set to the name of the provisioner which is usually `csi-powermax.dellemc.com`.
 
@@ -575,7 +577,7 @@ CSI Driver for Dell PowerMax 2.5.0 and above supports auto RDM for vSphere over 
 
 This feature supports volume provisioning on Kubernetes clusters running on vSphere (VMware hypervisor) via RDM mechanism. This feature enables the users to use PMAX CSI drivers with VMs on vSphere Hypervisor with the same feature and functionality as there with bare metal servers when they have only FC ports in PMAX storage.
 
-It will be supported only on new/freshly installed clusters where the cluster is exclusively deployed in a virtualized vSphere environment. Having hybrid topologies like ISCSI or FC (in pass-through) is not supported.  
+It will be supported only on new/freshly installed clusters where the cluster is exclusively deployed in a virtualized vSphere environment. Having hybrid topologies like iSCSI, NVMeTCP or FC (in pass-through) is not supported.  
 
 To use this feature
 - Set `vSphere.enabled` to true.
