@@ -92,6 +92,7 @@ spec:
         #   "FC"    - Fiber Channel protocol
         #   "FIBER" - Fiber Channel protocol
         #   "ISCSI" - iSCSI protocol
+        #   "NVMETCP" - NVMe/TCP protocol
         #   ""      - Automatic selection of transport protocol
         # Default value: "" <empty>
         - name: X_CSI_TRANSPORT_PROTOCOL
