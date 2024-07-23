@@ -16,11 +16,11 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/docs/csidriver/features/powerscale/" /><meta property="article:section" content="docs" />
 
-<meta property="article:modified_time" content="2024-07-17T16:26:42+05:30" />
+<meta property="article:modified_time" content="2024-07-23T16:37:02-04:00" />
 
 <meta itemprop="name" content="PowerScale">
 <meta itemprop="description" content="Code features for PowerScale Driver">
-<meta itemprop="dateModified" content="2024-07-17T16:26:42+05:30" />
+<meta itemprop="dateModified" content="2024-07-23T16:37:02-04:00" />
 <meta itemprop="wordCount" content="3986">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="PowerScale"/>
@@ -103,7 +103,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.59c9bdbe2655053f0e470979ea8acc07.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.3c218d0745cbe78144bd7d33b03d7218.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -125,7 +125,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.59c9bdbe2655053f0e470979ea8acc07.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.3c218d0745cbe78144bd7d33b03d7218.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -1105,7 +1105,7 @@ communication (same IP/fqdn as k8s node) by default.</p>
 <p>This feature helps the scheduler to make more informed choices about where to schedule pods which depends on unbound volumes with late binding (aka &ldquo;wait for first consumer&rdquo;). Pods will be scheduled on a node (satisfying the topology constraints) only if the requested capacity is available on the storage array.
 If such a node is not available, the pods stay in Pending state. This means pods are not scheduled.</p>
 <p>Without storage capacity tracking, pods get scheduled on a node satisfying the topology constraints. If the required capacity is not available, volume attachment to the pods fails, and pods remain in ContainerCreating state. Storage capacity tracking eliminates unnecessary scheduling of pods when there is insufficient capacity.</p>
-<p>The attribute <code>storageCapacity.enabled</code> in <code>values.yaml</code> can be used to enable/disable the feature during driver installation using helm. This is by default set to true. To configure how often driver checks for changed capacity set <code>storageCapacity.pollInterval</code> attribute. In case of driver installed via operator, this interval can be configured in the sample file provided <a href="https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powerscale_v280.yaml">here.</a> by editing the <code>--capacity-poll-interval</code> argument present in the provisioner sidecar.</p>
+<p>The attribute <code>storageCapacity.enabled</code> in <code>values.yaml</code> can be used to enable/disable the feature during driver installation using helm. This is by default set to true. To configure how often driver checks for changed capacity set <code>storageCapacity.pollInterval</code> attribute. In case of driver installed via operator, this interval can be configured in the sample file provided <a href="https://github.com/dell/csm-operator/blob/main/samples/">here.</a> by editing the <code>--capacity-poll-interval</code> argument present in the provisioner sidecar.</p>
 <h2 id="node-selector-in-helm-template">Node selector in helm template</h2>
 <p>Now user can define in which worker node, the CSI node pod daemonset can run (just like any other pod in Kubernetes world).For more information, refer to <a href="https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#nodeselector">https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#nodeselector</a></p>
 <p>Similarly, users can define the tolerations based on various conditions like memory pressure, disk pressure and network availability. Refer to <a href="https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/#taints-and-tolerations">https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/#taints-and-tolerations</a> for more information.</p>

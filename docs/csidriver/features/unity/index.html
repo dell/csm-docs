@@ -16,11 +16,11 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/docs/csidriver/features/unity/" /><meta property="article:section" content="docs" />
 
-<meta property="article:modified_time" content="2024-07-17T16:26:42+05:30" />
+<meta property="article:modified_time" content="2024-07-23T16:37:02-04:00" />
 
 <meta itemprop="name" content="Unity XT">
 <meta itemprop="description" content="Code features for Unity XT Driver">
-<meta itemprop="dateModified" content="2024-07-17T16:26:42+05:30" />
+<meta itemprop="dateModified" content="2024-07-23T16:37:02-04:00" />
 <meta itemprop="wordCount" content="3104">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Unity XT"/>
@@ -103,7 +103,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.59c9bdbe2655053f0e470979ea8acc07.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.3c218d0745cbe78144bd7d33b03d7218.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -125,7 +125,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.59c9bdbe2655053f0e470979ea8acc07.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.3c218d0745cbe78144bd7d33b03d7218.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -1178,7 +1178,7 @@ To do that you will need to use <code>nodeSelector</code> and <code>tolerations<
 <p>This feature helps the scheduler to make more informed choices about where to schedule pods which depends on unbound volumes with late binding (aka &ldquo;wait for first consumer&rdquo;). Pods will be scheduled on a node (satisfying the topology constraints) only if the requested capacity is available on the storage array.
 If such a node is not available, the pods stay in Pending state. This means pods are not scheduled.</p>
 <p>Without storage capacity tracking, pods get scheduled on a node satisfying the topology constraints. If the required capacity is not available, volume attachment to the pods fails, and pods remain in ContainerCreating state. Storage capacity tracking eliminates unnecessary scheduling of pods when there is insufficient capacity. Moreover, storage capacity tracking returns <code>MaximumVolumeSize</code> parameter, which may be used as an input to the volume creation.</p>
-<p>The attribute <code>storageCapacity.enabled</code> in <code>values.yaml</code> can be used to enable/disable the feature during driver installation using helm. This is by default set to true. To configure how often driver checks for changed capacity set <code>storageCapacity.pollInterval</code> attribute. In case of driver installed via operator, this interval can be configured in the sample file provided <a href="https://github.com/dell/csm-operator/blob/main/samples/storage_csm_unity_v280.yaml">here.</a> by editing the <code>--capacity-poll-interval</code> argument present in the provisioner sidecar.</p>
+<p>The attribute <code>storageCapacity.enabled</code> in <code>values.yaml</code> can be used to enable/disable the feature during driver installation using helm. This is by default set to true. To configure how often driver checks for changed capacity set <code>storageCapacity.pollInterval</code> attribute. In case of driver installed via operator, this interval can be configured in the sample file provided <a href="https://github.com/dell/csm-operator/blob/main/samples/">here.</a> by editing the <code>--capacity-poll-interval</code> argument present in the provisioner sidecar.</p>
 <h2 id="dynamic-logging-configuration">Dynamic Logging Configuration</h2>
 <h3 id="helm-based-installation">Helm based installation</h3>
 <p>As part of driver installation, a ConfigMap with the name <code>unity-config-params</code> is created, which contains an attribute <code>CSI_LOG_LEVEL</code> which specifies the current log level of CSI driver.</p>
