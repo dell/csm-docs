@@ -15,41 +15,41 @@ Dell COSI Driver is a multi-backend driver, meaning that it can connect to multi
 
 > ℹ️ **NOTE:** during technical preview, no certification is performed. The platforms listed below were tested by developers using integration test suite.
 
-
+{{<table "table table-striped table-bordered table-sm">}}
 |            |    COSI    |
 |------------|:----------:|
 | Kubernetes |    1.27    |
 | K3s        |    1.27    |
-{.table-sm .table-bordered .table-striped}
+{{</table>}}
 
 ### COSI Driver Capabilities
 
-
+{{<table "table table-striped table-bordered table-sm">}}
 | Features               | ObjectScale |
 |------------------------|:-----------:|
 | Bucket Creation        |     yes     |
 | Bucket Deletion        |     yes     |
 | Bucket Access Granting |     yes     |
 | Bucket Access Revoking |     yes     |
-{.table-sm .table-bordered .table-striped}
+{{</table>}}
 
 ## Backend Storage Details
 
-
+{{<table "table table-striped table-bordered table-sm">}}
 | Protocol   | ObjectScale |
 |------------|:-----------:|
 | AWS S3     |     yes     |
 | GCS        |     N/A     |
 | Azure Blob |     N/A     |
-{.table-sm .table-bordered .table-striped}
+{{</table>}}
 
 ## Supported Storage Platforms
 
-
+{{<table "table table-striped table-bordered table-sm">}}
 | Storage Platform | Versions |
 |------------------|:--------:|
 | ObjectScale      |  1.2.x   |
-{.table-sm .table-bordered .table-striped}
+{{</table>}}
 
 ## Bucket Lifecycle Workflow
 

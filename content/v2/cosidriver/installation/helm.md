@@ -18,12 +18,12 @@ The Helm chart installs the following components in a _Deployment_ in the specif
 
 Installing any of the CSI Driver components using Helm requires a few utilities to be installed on the system running the installation.
 
-
+{{<table "table table-striped table-bordered table-sm">}}
 | Dependency | Usage                                                                                                                |
 |------------|----------------------------------------------------------------------------------------------------------------------|
 | `kubectl`  | Kubectl is used to validate that the Kubernetes system meets the requirements of the driver.                         |
 | `helm`     | Helm v3 is used as the deployment tool for Charts. Go [here](https://helm.sh/docs/intro/install/) to install Helm 3. |
-{.table-sm .table-bordered .table-striped}
+{{</table>}}
 
 > ℹ️ **NOTE:**
 > To use these tools, a valid `KUBECONFIG` is required. Ensure that either a valid configuration is in the default location, or, that the `KUBECONFIG` environment variable points to a valid configuration before using these tools.
@@ -42,7 +42,7 @@ Installing any of the CSI Driver components using Helm requires a few utilities 
 5. Edit *my-cosi-values.yaml* to set the following parameters for your installation:
    The following table lists the primary configurable parameters of the COSI driver Helm chart and their default values. More detailed information can be found in the [`values.yaml`](https://github.com/dell/helm-charts/blob/master/charts/cosi/values.yaml) file in this repository.
 
-
+{{<table "table table-striped table-bordered table-sm">}}
    | Parameter                    | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                             | Required | Default                                                                        |
    |------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:--------:|--------------------------------------------------------------------------------|
    | provisioner.logLevel         | The logging level for the COSI driver provisioner.                                                                                                                                                                                                                                                                                                                                                                                                                      |   yes    | `4`                                                                            |
@@ -57,7 +57,7 @@ Installing any of the CSI Driver components using Helm requires a few utilities 
    | configuration.create         | Specifies whether a secret with driver configuration should be created If set to false, you must set `configuration.secretName` field to an existing configuration secret name.                                                                                                                                                                                                                                                                                         |   yes    | `true`                                                                         |
    | configuration.secretName     | Name can be used to specify an existing secret name to use for the driver configuration or override the generated name.                                                                                                                                                                                                                                                                                                                                                 |    no    | `"cosi-config"`                                                                |
    | configuration.data           | Data should be provided when installing chart, it will be used to create the Secret with the driver configuration. `configuration.create` must be set to `true` for this to work.                                                                                                                                                                                                                                                                                       |    no    | `""`                                                                           |
-{.table-sm .table-bordered .table-striped}
+{{</table>}}
 
 > ℹ️ **NOTE:**
 > - Whenever the *configuration.secretName* parameter changes in *my-cosi-values.yaml* user needs to reinstall the driver.

@@ -15,7 +15,7 @@ applications in case of both planned and unplanned migration.
 
 CSM for Replication provides the following capabilities:
 
-
+{{<table "table table-striped table-bordered table-sm">}}
 | Capability                                                                                                                          | PowerMax | PowerStore | PowerScale | PowerFlex | Unity |
 | ----------------------------------------------------------------------------------------------------------------------------------- | :------: | :--------: | :--------: | :-------: | :---: |
 | Replicate data using native storage array based replication                                                                         |   yes    |    yes     |    yes     |    yes    |  no   |
@@ -30,7 +30,7 @@ CSM for Replication provides the following capabilities:
 | Failover & Reprotect applications using the replicated volumes                                                                      |   yes    |    yes     |    yes     |    yes    |  no   |
 | Online Volume Expansion for replicated volumes                                                                                      |   yes    |     no     |     no     |    yes    |  no   |
 | Provides a command line utility - [repctl](tools) for configuring & managing replication related resources across multiple clusters |   yes    |    yes     |    yes     |    yes    |  no   |
-{.table-sm .table-bordered .table-striped}
+{{</table>}}
 
 ## Details
 

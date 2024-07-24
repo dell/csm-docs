@@ -28,44 +28,44 @@ Accordingly, CSM for Resiliency is adapted to and qualified with each CSI driver
 
 CSM for Resiliency provides the following capabilities:
 
-
+{{<table "table table-striped table-bordered table-sm">}}
 | Capability                              | PowerScale | Unity XT | PowerStore | PowerFlex | PowerMax |
 | --------------------------------------- | :--------: | :------: | :--------: | :-------: | :------: |
 | Detect pod failures when: Node failure, K8S Control Plane Network failure, K8S Control Plane failure, Array I/O Network failure | yes  | yes | yes | yes | no |
 | Cleanup pod artifacts from failed nodes | yes         | yes   | yes         | yes       | no       |
 | Revoke PV access from failed nodes      | yes         | yes   | yes         | yes       | no       |
-{.table-sm .table-bordered .table-striped}
+{{</table>}}
 
 ## Supported Operating Systems/Container Orchestrator Platforms
 
-
+{{<table "table table-striped table-bordered table-sm">}}
 | COP/OS            | Supported Versions |
 | ----------------- | :----------------: |
 | Kubernetes        | 1.25, 1.26, 1.27   |
 | Red Hat OpenShift |     4.11, 4.12     |
 | RHEL              |     7.x, 8.x       |
 | CentOS            |     7.8, 7.9       |
-{.table-sm .table-bordered .table-striped}
+{{</table>}}
 
 ## Supported Storage Platforms
 
-
+{{<table "table table-striped table-bordered table-sm">}}
 |               | PowerFlex    | Unity XT                          | PowerScale                              | PowerStore                    |
 | ------------- | :----------: | :-------------------------------: | :-------------------------------------: | :---------------------------: |
 | Storage Array | 3.5.x, 3.6.x | 5.0.5, 5.0.6, 5.0.7, 5.1.0, 5.1.2, 5.2, 5.3 | OneFS 8.1, 8.2, 9.0, 9.1, 9.2, 9.3, 9.4 | 1.0.x, 2.0.x, 2.1.x, 3.0, 3.2 |
-{.table-sm .table-bordered .table-striped}
+{{</table>}}
 
 ## Supported CSI Drivers
 
 CSM for Resiliency supports the following CSI drivers and versions.
-
+{{<table "table table-striped table-bordered table-sm">}}
 | Storage Array                     | CSI Driver   | Supported Versions |
 | --------------------------------- | :----------: | :----------------: |
 | CSI Driver for Dell PowerFlex | [csi-powerflex](https://github.com/dell/csi-powerflex) | v2.0.0 + |
 | CSI Driver for Dell Unity XT  | [csi-unity](https://github.com/dell/csi-unity)         | v2.0.0 + |
 | CSI Driver for Dell PowerScale  | [csi-powerscale](https://github.com/dell/csi-powerscale) | v2.3.0 + |
 | CSI Driver for Dell PowerStore  | [csi-powerstore](https://github.com/dell/csi-powerstore) | v2.6.0 + |
-{.table-sm .table-bordered .table-striped}
+{{</table>}}
 
 ### PowerFlex Support
 

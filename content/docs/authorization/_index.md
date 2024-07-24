@@ -19,13 +19,13 @@ The following diagram shows a high-level overview of CSM for Authorization with 
 ![CSM for Authorization](./karavi-authorization-example.png "CSM for Authorization")
 
 ## CSM for Authorization Capabilities
-
+{{<table "table table-striped table-bordered table-sm">}}
 | Feature | PowerFlex | PowerMax | PowerScale | Unity XT | PowerStore |
 | - | - | - | - | - | - |
 | Ability to set storage quota limits to ensure k8s tenants are not overconsuming storage | Yes | Yes | No (natively supported) | No | No |
 | Ability to create access control policies to ensure k8s tenant clusters are not accessing storage that does not belong to them | Yes | Yes | No (natively supported) | No | No |
 | Ability to shield storage credentials from Kubernetes administrators ensuring credentials are only handled by storage admins | Yes | Yes | Yes | No | No |
-{.table-sm .table-bordered .table-striped}
+{{</table>}}
 
 **NOTE:** PowerScale OneFS implements its own form of Role-Based Access Control (RBAC). CSM for Authorization does not enforce any role-based restrictions for PowerScale. To configure RBAC for PowerScale, refer to the PowerScale OneFS [documentation](https://www.dell.com/support/home/en-us/product-support/product/isilon-onefs/docs).
 

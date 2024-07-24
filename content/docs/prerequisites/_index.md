@@ -7,7 +7,7 @@ weight: 1
 
 ## Supported Storage Platforms
 
-
+{{<table "table table-striped table-bordered table-sm">}}
 | Platform      | Version             | OS Dependencies          |
 |---------------|:-------------------:|:------------------------:|
 | PowerMax    | PowerMax 2500/8500 PowerMaxOS 10 (6079)<br>PowerMaxOS 10.0.1 (6079)<br>PowerMaxOS 10.1 (6079)<br>PowerMax 2000/8000 - 5978.711.711, 5978.714.714<br>5978.479.479<br>Unisphere 10.0,10.0.1,10.1 | iscsi-initiator-utils<br>multipathd or powerpath<br>nvme-cli<br>nfs-utils |
@@ -16,7 +16,7 @@ weight: 1
 | PowerScale    | OneFS 9.3, 9.4, 9.5.0.x (x >= 5) | nfs-utils |
 | PowerStore    | 3.0, 3.2, 3.5, 3.6  | iscsi-initiator-utils<br>multipathd<br>nvme-cli<br>nfs-utils |
 | ObjectScale   | 1.2.x               | - |
-{.table-sm .table-bordered .table-striped}
+{{</table>}}
 
 > Notes:
 > * The required OS dependencies are only for the protocol needed (e.g. if NVMe isn't the storage access protocol then nvme-cli is not required)..
@@ -24,7 +24,7 @@ weight: 1
 
 ## Supported Container Orchestrator Platforms
 
-
+{{<table "table table-striped table-bordered table-sm">}}
 | Platform                   | Version          |
 |----------------------------|:----------------:|
 | Kubernetes                 | 1.27, 1.28, 1.29 |
@@ -33,7 +33,7 @@ weight: 1
 | Google Anthos              | 1.15             |
 | Rancher Kubernetes Engine  | 1.4.x            |
 | VMware Tanzu               | 7.0              |
-{.table-sm .table-bordered .table-striped}
+{{</table>}}
 
 > Notes:
 > * Any orchestrator platform or version that's not mentioned here must be self-certified using [Cert-CSI](../support/cert-csi/) in order to be supported.  Although not mandatory, we recommend users to use orchestrator platforms and versions that have not met their end of life.
@@ -53,7 +53,7 @@ Container Storage Modules (CSM) does not officially support specific operating s
 
 ## Supported CSM Modules
 
-
+{{<table "table table-striped table-bordered table-sm">}}
 | CSM Module                             | PowerMax | PowerFlex | Unity XT | PowerScale | PowerStore |
 |----------------------------------------|:--------:|:---------:|:--------:|:----------:|:----------:|
 | [CSM Authorization](../authorization/) | Yes      | Yes       |  No      | Yes        | No         |
@@ -64,7 +64,7 @@ Container Storage Modules (CSM) does not officially support specific operating s
 | [CSM Application Mobility](../applicationmobility/) | Yes | Yes |  Yes   | Yes        | Yes        |
 | [Volume Group Snapshot](../snapshots/volume-group-snapshots/) | No | Yes | No | No    | Yes        |
 
-{.table-sm .table-bordered .table-striped}
+{{</table>}}
 
 > Notes:
 > * Encryption and Application Mobility are available as a Technical Preview only and are not officially supported.
@@ -72,7 +72,7 @@ Container Storage Modules (CSM) does not officially support specific operating s
 ## CSM Operator compatibility matrix
 
 The table below lists the driver and modules versions installable with the CSM Operator:
-
+{{<table "table table-striped table-bordered table-sm">}}
 | CSI Driver         | Version | CSM Authorization | CSM Replication | CSM Observability | CSM Resiliency |
 | ------------------ |---------|-------------------|-----------------|-------------------|----------------|
 | CSI PowerScale     | 2.10.1  | ✔ 1.10.1          | ✔ 1.8.1        | ✔ 1.8.1           | ✔ 1.9.1        |
@@ -90,4 +90,4 @@ The table below lists the driver and modules versions installable with the CSM O
 | CSI Unity XT       | 2.10.1  | ❌                | ❌             | ❌                | ❌             |
 | CSI Unity XT       | 2.9.0   | ❌                | ❌             | ❌                | ❌             |
 | CSI Unity XT       | 2.8.0   | ❌                | ❌             | ❌                | ❌             |
-{.table-sm .table-bordered .table-striped}
+{{</table>}}

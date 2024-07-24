@@ -16,7 +16,7 @@ Metrics data is collected and pushed to the [OpenTelemetry Collector](https://gi
 
 CSM for Observability is composed of several services, each living in its own GitHub repository, that can be installed following one of the four deployments we support [here](deployment). Contributions can be made to this repository or any of the CSM for Observability repositories listed below. 
 
-
+{{<table "table table-striped table-bordered table-sm">}}
 | Name | Repository | Description |
 | ---- | ---------  | ----------- |
 | Metrics for PowerFlex | [CSM Metrics for PowerFlex](https://github.com/dell/karavi-metrics-powerflex) | Metrics for PowerFlex captures telemetry data about Kubernetes storage usage and performance obtained through the CSI (Container Storage Interface) Driver for Dell PowerFlex. The metrics service pushes it to the OpenTelemetry Collector, so it can be processed, and exported in a format consumable by Prometheus. Prometheus can then be configured to scrape the OpenTelemetry Collector exporter endpoint to provide metrics, so they can be visualized in Grafana. Please visit the repository for more information. |
@@ -24,13 +24,13 @@ CSM for Observability is composed of several services, each living in its own Gi
 | Metrics for PowerScale | [CSM Metrics for PowerScale](https://github.com/dell/csm-metrics-powerscale) | Metrics for PowerScale captures telemetry data about Kubernetes storage usage and performance obtained through the CSI (Container Storage Interface) Driver for Dell PowerScale. The metrics service pushes it to the OpenTelemetry Collector, so it can be processed, and exported in a format consumable by Prometheus. Prometheus can then be configured to scrape the OpenTelemetry Collector exporter endpoint to provide metrics, so they can be visualized in Grafana. Please visit the repository for more information. |
 | Metrics for PowerMax | [CSM Metrics for PowerMax](https://github.com/dell/csm-metrics-powermax) | Metrics for PowerMax captures telemetry data about Kubernetes storage usage and performance obtained through the CSI (Container Storage Interface) Driver for Dell PowerMax. The metrics service pushes it to the OpenTelemetry Collector, so it can be processed, and exported in a format consumable by Prometheus. Prometheus can then be configured to scrape the OpenTelemetry Collector exporter endpoint to provide metrics, so they can be visualized in Grafana. Please visit the repository for more information. |
 | Volume Topology | [CSM Topology](https://github.com/dell/karavi-topology) | Topology provides Kubernetes administrators with the topology data related to containerized storage that is provisioned by a CSI (Container Storage Interface) Driver for Dell storage products. The Topology service is enabled by default as part of the CSM for Observability Helm Chart [values file](https://github.com/dell/helm-charts/blob/main/charts/karavi-observability/values.yaml). Please visit the repository for more information. |
-{.table-sm .table-bordered .table-striped}
+{{</table>}}
 
 ## CSM for Observability Capabilities
 
 CSM for Observability provides the following capabilities:
 
-
+{{<table "table table-striped table-bordered table-sm">}}
 | Capability | PowerMax | PowerFlex | Unity XT | PowerScale | PowerStore |
 | - | :-: | :-: | :-: | :-: | :-: |
 | Collect and expose Volume Metrics via the OpenTelemetry Collector | yes | yes | no | yes | yes |
@@ -41,11 +41,11 @@ CSM for Observability provides the following capabilities:
 | Non-disruptive config changes | yes |  yes | no | yes | yes |
 | Non-disruptive log level changes | yes |  yes | no | yes | yes |
 | Grafana Dashboards for displaying metrics and topology data | yes |  yes | no | yes | yes |
-{.table-sm .table-bordered .table-striped}
+{{</table>}}
 
 ## Supported Operating Systems/Container Orchestrator Platforms
 
-
+{{<table "table table-striped table-bordered table-sm">}}
 | COP/OS | Supported Versions |
 |-|-|
 | Kubernetes    | 1.25, 1.26, 1.27 |
@@ -53,32 +53,32 @@ CSM for Observability provides the following capabilities:
 | Rancher Kubernetes Engine | yes | 
 | RHEL          |     7.x, 8.x      |
 | CentOS        |     7.8, 7.9     |
-{.table-sm .table-bordered .table-striped}
+{{</table>}}
 
 ## Supported Storage Platforms
 
-
+{{<table "table table-striped table-bordered table-sm">}}
 |               | PowerFlex | PowerStore | PowerScale | PowerMax |
 |---------------|:-------------------:|:----------------:|:----------------:|:----------------:|
 | Storage Array | 3.5.x, 3.6.x, 4.0 | 1.0.x, 2.0.x, 2.1.x, 3.0, 3.2, 3.5 | OneFS 8.1, 8.2, 9.0, 9.1, 9.2, 9.3, 9.4 | PowerMax 2000/8000 <br> PowerMax 2500/8500 PowerMaxOS 10 (6079) , PowerMaxOS 10.0.1 (6079) <br> PowerMax 2000/8000 - 5978.711.xxx, 5978.479.xxx <br> Unisphere 10.0, 10.0.1 |
-{.table-sm .table-bordered .table-striped}
+{{</table>}}
 
 ## Supported CSI Drivers
 
 CSM for Observability supports the following CSI drivers and versions.
-
+{{<table "table table-striped table-bordered table-sm">}}
 | Storage Array | CSI Driver | Supported Versions |
 | ------------- | ---------- | ------------------ |
 | CSI Driver for Dell PowerFlex | [csi-powerflex](https://github.com/dell/csi-powerflex) | v2.0 + |
 | CSI Driver for Dell PowerStore | [csi-powerstore](https://github.com/dell/csi-powerstore) | v2.0 + |
 | CSI Driver for Dell PowerScale | [csi-powerscale](https://github.com/dell/csi-powerscale) | v2.0 + |
 | CSI Driver for Dell PowerMax | [csi-powermax](https://github.com/dell/csi-powermax) | v2.5 + |
-{.table-sm .table-bordered .table-striped}
+{{</table>}}
 
 ## Topology Data
 
 CSM for Observability provides Kubernetes administrators with the topology data related to containerized storage. This topology data is visualized using Grafana:
-
+{{<table "table table-striped table-bordered table-sm">}}
 | Field                      | Description                                                                                                                                        |
 | -------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Namespace                  | The namespace associated with the persistent volume claim                                                                                          |
@@ -92,18 +92,18 @@ CSM for Observability provides Kubernetes administrators with the topology data 
 | Protocol                   | The storage system protocol type the volume/storage class is associated with                                                                       |
 | Storage Pool               | The storage pool name the volume/storage class is associated with                                                                                  |
 | Storage System Volume Name | The name of the volume on the storage system that is associated with the persistent volume                                                         |
-{.table-sm .table-bordered .table-striped}
+{{</table>}}
 ## TLS Encryption
 
 CSM for Observability deployment relies on [cert-manager](https://github.com/jetstack/cert-manager) to manage SSL certificates that are used to encrypt communication between various components. When [deploying CSM for Observability](./deployment), cert-manager is installed and configured automatically.  The cert-manager components listed below will be installed alongside CSM for Observability.
 
-
+{{<table "table table-striped table-bordered table-sm">}}
 | Component |
 | --------- |
 | cert-manager |
 | cert-manager-cainjector |
 | cert-manager-webhook |
-{.table-sm .table-bordered .table-striped}
+{{</table>}}
 
 If desired you may provide your own certificate key pair to be used inside the cluster by providing the path to the certificate and key in the Helm chart config. If you do not provide a certificate, one will be generated for you on installation.
 > __NOTE__: The certificate provided must be a CA certificate. This is to facilitate automated certificate rotation.

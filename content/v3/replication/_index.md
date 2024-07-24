@@ -15,7 +15,7 @@ applications in case of both planned and unplanned migration.
 
 CSM for Replication provides the following capabilities:
 
-
+{{<table "table table-striped table-bordered table-sm">}}
 | Capability                                                                                                                          | PowerMax | PowerStore | PowerScale | PowerFlex | Unity |
 | ----------------------------------------------------------------------------------------------------------------------------------- | :------: | :--------: | :--------: | :-------: | :---: |
 | Replicate data using native storage array based replication                                                                         |   yes    |    yes     |    yes     |    yes    |  no   |
@@ -30,12 +30,12 @@ CSM for Replication provides the following capabilities:
 | Failover & Reprotect applications using the replicated volumes                                                                      |   yes    |    yes     |    yes     |    yes    |  no   |
 | Online Volume Expansion for replicated volumes                                                                                      |   yes    |     no     |     no     |    yes    |  no   |
 | Provides a command line utility - [repctl](tools) for configuring & managing replication related resources across multiple clusters |   yes    |    yes     |    yes     |    yes    |  no   |
-{.table-sm .table-bordered .table-striped}
+{{</table>}}
 
 
 ## Supported Operating Systems/Container Orchestrator Platforms
 
-
+{{<table "table table-striped table-bordered table-sm">}}
 | COP/OS            | PowerMax         | PowerStore       | PowerScale       | PowerFlex        |
 | ----------------- | ---------------- | ---------------- | ---------------- | ---------------- |
 | Kubernetes        | 1.25, 1.26, 1.27 | 1.25, 1.26, 1.27 | 1.25, 1.26, 1.27 | 1.25, 1.26, 1.27 |
@@ -44,15 +44,15 @@ CSM for Replication provides the following capabilities:
 | CentOS            | 7.8, 7.9         | 7.8, 7.9         | 7.8, 7.9         | 7.8, 7.9         |
 | Ubuntu            | 20.04            | 20.04            | 20.04            | 20.04            |
 | SLES              | 15SP4            | 15SP2            | 15SP2            | 15SP3            |
-{.table-sm .table-bordered .table-striped}
+{{</table>}}
 
 ## Supported Storage Platforms
 
-
+{{<table "table table-striped table-bordered table-sm">}}
 |               |                                                 PowerMax                                                 |                  PowerStore                  |               PowerScale                     | PowerFlex |
 | ------------- | :------------------------------------------------------------------------------------------------------: | :------------------------------------------: | :------------------------------------------: | :-------: |
 | Storage Array | PowerMax 2500/8500 PowerMaxOS 10 (6079) , PowerMaxOS 10.0.1 (6079) <br> PowerMax 2000/8000 - 5978.711.xxx, 5978.479.xxx <br> Unisphere 10.0,10.0.1 | 1.0.x, <br> 2.0.x, 2.1.x, <br> 3.0, 3.2, 3.5 | OneFS 8.1, 8.2, 9.0, 9.1, 9.2, 9.3, 9.4 | 3.6.x, 4.0|
-{.table-sm .table-bordered .table-striped}
+{{</table>}}
 
 ## Details
 

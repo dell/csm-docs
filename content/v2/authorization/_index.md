@@ -19,43 +19,43 @@ The following diagram shows a high-level overview of CSM for Authorization with 
 ![CSM for Authorization](./karavi-authorization-example.png "CSM for Authorization")
 
 ## CSM for Authorization Capabilities
-
+{{<table "table table-striped table-bordered table-sm">}}
 | Feature | PowerFlex | PowerMax | PowerScale | Unity XT | PowerStore |
 | - | - | - | - | - | - |
 | Ability to set storage quota limits to ensure k8s tenants are not overconsuming storage | Yes | Yes | No (natively supported) | No | No |
 | Ability to create access control policies to ensure k8s tenant clusters are not accessing storage that does not belong to them | Yes | Yes | No (natively supported) | No | No |
 | Ability to shield storage credentials from Kubernetes administrators ensuring credentials are only handled by storage admins | Yes | Yes | Yes | No | No |
-{.table-sm .table-bordered .table-striped}
+{{</table>}}
 
 **NOTE:** PowerScale OneFS implements its own form of Role-Based Access Control (RBAC). CSM for Authorization does not enforce any role-based restrictions for PowerScale. To configure RBAC for PowerScale, refer to the PowerScale OneFS [documentation](https://www.dell.com/support/home/en-us/product-support/product/isilon-onefs/docs).
 
 ## Supported Operating Systems/Container Orchestrator Platforms
-
+{{<table "table table-striped table-bordered table-sm">}}
 | COP/OS | Supported Versions |
 |-|-|
 | Kubernetes    | 1.25, 1.26, 1.27 |
 | RHEL          |     7.x, 8.x     |
 | CentOS        |     7.8, 7.9     |
-{.table-sm .table-bordered .table-striped}
+{{</table>}}
 
 ## Supported Storage Platforms
 
-
+{{<table "table table-striped table-bordered table-sm">}}
 |               | PowerMax         | PowerFlex | PowerScale |
 |---------------|:----------------:|:-------------------:|:----------------:|
 | Storage Array |PowerMax 2500/8500 PowerMaxOS 10 (6079) , PowerMaxOS 10.0.1 (6079) <br> PowerMax 2000/8000 - 5978.711.xxx, 5978.479.xxx,<br> Unisphere 10.0, 10.0.1|    3.5.x, 3.6.x    | OneFS 8.1, 8.2, 9.0, 9.1, 9.2, 9.3, 9.4, 9.5 |
-{.table-sm .table-bordered .table-striped}
+{{</table>}}
 
 ## Supported CSI Drivers
 
 CSM for Authorization supports the following CSI drivers and versions.
-
+{{<table "table table-striped table-bordered table-sm">}}
 | Storage Array | CSI Driver | Supported Versions |
 | ------------- | ---------- | ------------------ |
 | CSI Driver for Dell PowerFlex | [csi-powerflex](https://github.com/dell/csi-powerflex) | v2.0 + |
 | CSI Driver for Dell PowerMax | [csi-powermax](https://github.com/dell/csi-powermax) | v2.0 + |
 | CSI Driver for Dell PowerScale | [csi-powerscale](https://github.com/dell/csi-powerscale) | v2.0 + |
-{.table-sm .table-bordered .table-striped}
+{{</table>}}
 
 **NOTE:** If the deployed CSI driver has a number of controller pods equal to the number of schedulable nodes in your cluster, CSM for Authorization may not be able to inject properly into the driver's controller pod.
 To resolve this, please refer to our [troubleshooting guide](./troubleshooting) on the topic.
@@ -63,7 +63,7 @@ To resolve this, please refer to our [troubleshooting guide](./troubleshooting) 
 ## Authorization Components Support Matrix
 CSM for Authorization consists of 2 components - the Authorization sidecar and the Authorization proxy server.  It is important that the version of the Authorization sidecar image maps to a supported version of the Authorization proxy server.
 
-
+{{<table "table table-striped table-bordered table-sm">}}
 | Authorization Sidecar Image Tag | Authorization Proxy Server Version |
 | ------------------------------- | ---------------------------------- |
 | dellemc/csm-authorization-sidecar:v1.0.0 | v1.0.0, v1.1.0 |
@@ -75,7 +75,7 @@ CSM for Authorization consists of 2 components - the Authorization sidecar and t
 | dellemc/csm-authorization-sidecar:v1.6.0 | v1.1.0, v1.2.0, v1.3.0, v1.4.0, v1.5.0, v1.5.1, v1.6.0 |
 | dellemc/csm-authorization-sidecar:v1.7.0 | v1.1.0, v1.2.0, v1.3.0, v1.4.0, v1.5.0, v1.5.1, v1.6.0, v1.7.0 |
 | dellemc/csm-authorization-sidecar:v1.8.0 | v1.1.0, v1.2.0, v1.3.0, v1.4.0, v1.5.0, v1.5.1, v1.6.0, v1.7.0, v1.8.0 |
-{.table-sm .table-bordered .table-striped}
+{{</table>}}
 ## Roles and Responsibilities
 
 The CSM for Authorization CLI can be executed in the context of the following roles:

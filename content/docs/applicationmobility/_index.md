@@ -27,8 +27,8 @@ After a backup has been created, it can be restored on the same Kubernetes clust
 - Storage Class is defined on the target cluster(s) to support creating the required Persistent Volumes used by the application.
 
 ## Supported Data Movers
-
+{{<table "table table-striped table-bordered table-sm">}}
 | Data Mover | Description |
 |-|-|
 | Restic           | Persistent Volume data will be stored in the provided object store bucket |
-{.table-sm .table-bordered .table-striped}
+{{</table>}}

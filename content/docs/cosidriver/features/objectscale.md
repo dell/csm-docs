@@ -168,7 +168,7 @@ spec:
 
 Each bucket is provisioned using default options:
 
-
+{{<table "table table-striped table-bordered table-sm">}}
 | Category    | Parameter                                   | Description                                                                                                                                                                                                                                                 | Default                                                |
 |-------------|---------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------|
 | Policy      |                                             |                                                                                                                                                                                                                                                             | No policy applied on the bucket.                       |
@@ -190,7 +190,7 @@ Each bucket is provisioned using default options:
 | Event Rules | Prefix                                      | Event rule are applied for object names with the given prefix.                                                                                                                                                                                              | Off                                                    |
 | Event Rules | Suffix                                      | Event rule are applied for object names with the given suffix.                                                                                                                                                                                              | Off                                                    |
 | Event Rules | Send To                                     | The notification destination used to send notification for selected events.                                                                                                                                                                                 | Off                                                    |
-{.table-sm .table-bordered .table-striped}
+{{</table>}}
 
 ### Kubernetes Administrator Steps
 
