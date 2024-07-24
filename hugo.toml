@@ -1,5 +1,5 @@
 baseURL = "https://dell.github.io/csm-docs/"
-title = "Dell Technologies"
+title = ""
 canonifyURLs = false
 
 enableRobotsTXT = true
