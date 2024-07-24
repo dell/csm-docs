@@ -36,7 +36,7 @@ This provisioner belongs to Encryption and registers with the name [`encryption.
 
 ## Capabilities
 
-{{<table "table table-striped table-bordered table-sm">}}
+
 | Feature | PowerScale |
 | ------- | ---------- |
 | Dynamic provisionings of new volumes | Yes |
@@ -47,7 +47,7 @@ This provisioner belongs to Encryption and registers with the name [`encryption.
 | Volume expansion | Yes |
 | Encrypted volume unlocking in a different cluster | Yes |
 | User file and directory names encryption | Yes |
-{{</table>}}
+{.table-sm .table-bordered .table-striped}
 
 ## Limitations
 
@@ -65,7 +65,7 @@ the CSI driver must be restarted to pick up the change.
 
 ## Supported Operating Systems/Container Orchestrator Platforms
 
-{{<table "table table-striped table-bordered table-sm">}}
+
 | COP/OS | Supported Versions |
 |-|-|
 | Kubernetes | 1.24, 1.25, 1.26 |
@@ -73,24 +73,24 @@ the CSI driver must be restarted to pick up the change.
 | RHEL | 7.9, 8.4 |
 | Ubuntu | 18.04, 20.04 |
 | SLES | 15SP2 |
-{{</table>}}
+{.table-sm .table-bordered .table-striped}
 
 ## Supported Storage Platforms
 
-{{<table "table table-striped table-bordered table-sm">}}
+
 |               | PowerScale |
 | ------------- | ---------- |
 | Storage Array | OneFS 9.0 |
-{{</table>}}
+{.table-sm .table-bordered .table-striped}
 
 ## Supported CSI Drivers
 
 Encryption supports these CSI drivers and versions:
-{{<table "table table-striped table-bordered table-sm">}}
+
 | Storage Array | CSI Driver | Supported Versions |
 | ------------- | ---------- | ------------------ |
 | CSI Driver for Dell PowerScale | [csi-powerscale](https://github.com/dell/csi-powerscale) | v2.4 + |
-{{</table>}}
+{.table-sm .table-bordered .table-striped}
 
 ### PowerScale
 

@@ -6,7 +6,7 @@ description: >
 
 ## CR Sample Files
 
-{{<table "table table-striped table-bordered table-sm">}}
+
 |            |    CSI Operator     |    CSM Operator     |
 |------------|:----------:|:----------:|
 | PowerScale |    [isilon_v270_k8s_127.yaml](https://github.com/dell/dell-csi-operator/blob/main/samples/isilon_v270_k8s_127.yaml)    |     [storage_csm_powerscale_v290.yaml](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powerscale_v290.yaml)       |
@@ -14,7 +14,7 @@ description: >
 | PowerStore |    [powerstore_v270_k8s_127.yaml](https://github.com/dell/dell-csi-operator/blob/main/samples/powerstore_v270_k8s_127.yaml)    |     [storage_csm_powerstore_v290.yaml](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powerstore_v290.yaml)       |
 | Unity XT      |    [unity_v270_k8s_127.yaml](https://github.com/dell/dell-csi-operator/blob/main/samples/unity_v270_k8s_127.yaml)    |     [storage_csm_unity_v290.yaml](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_unity_v290.yaml)       |
 | PowerFlex  |     [vxflex_v270_k8s_127.yaml](https://github.com/dell/dell-csi-operator/blob/main/samples/vxflex_v270_k8s_127.yaml)       |      [storage_csm_powerflex_v290.yaml](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powerflex_v290.yaml)      |
-{{</table>}}
+{.table-sm .table-bordered .table-striped}
 >NOTE: Sample files refer to the latest version for each platform. If you do not want to upgrade, please find your preferred version in the [csm-operator repository](https://github.com/dell/csm-operator/blob/main/samples).
 
 ## Migration Steps

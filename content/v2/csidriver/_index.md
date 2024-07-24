@@ -14,7 +14,7 @@ The CSI Drivers by Dell implement an interface between [CSI](https://kubernetes-
 
 ### Supported Operating Systems/Container Orchestrator Platforms
 
-{{<table "table table-striped table-bordered table-sm">}}
+
 |               | PowerMax         | PowerFlex           | Unity XT         | PowerScale        | PowerStore       |
 |---------------|:----------------:|:-------------------:|:----------------:|:-----------------:|:----------------:|
 | Kubernetes    | 1.25, 1.26, 1.27 | 1.25, 1.26, 1.27    | 1.25, 1.26, 1.27 | 1.25, 1.26, 1.27  | 1.25, 1.26, 1.27 |
@@ -29,10 +29,10 @@ The CSI Drivers by Dell implement an interface between [CSI](https://kubernetes-
 | Rancher Kubernetes Engine | 1.4.1|          1.4.7      |        1.4.8     |         1.4.7     |      1.4.5       |
 | Amazon Elastic Kubernetes Service<br> Anywhere | yes  | yes  |   yes      |        yes        |      yes         |
 | Kubernetes K3s Engine on Debian OS |     no    |  no   |      1.26, 1.27  |        no         |        no        |
-{{</table>}}
+{.table-sm .table-bordered .table-striped}
 
 ### CSI Driver Capabilities
-{{<table "table table-striped table-bordered table-sm">}}
+
 | Features                 | PowerMax | PowerFlex | Unity XT  | PowerScale | PowerStore |
 |--------------------------|:--------:|:---------:|:---------:|:----------:|:----------:|
 | CSI Driver version       | 2.8.0    | 2.8.0     | 2.8.0     | 2.8.0      | 2.8.0      |
@@ -52,20 +52,20 @@ The CSI Drivers by Dell implement an interface between [CSI](https://kubernetes-
 | Volume Health Monitoring | yes      | yes       | yes       | yes        | yes        |
 | Storage Capacity Tracking | yes     | yes       | yes       | yes        | yes        |
 | Volume Limit             | yes      | yes       | yes       | yes        | yes        |
-{{</table>}}
+{.table-sm .table-bordered .table-striped}
 ### Supported Storage Platforms
-{{<table "table table-striped table-bordered table-sm">}}
+
 |               | PowerMax                                                | PowerFlex        | Unity XT                   | PowerScale                         |    PowerStore    |
 |---------------|:-------------------------------------------------------:|:----------------:|:--------------------------:|:----------------------------------:|:----------------:|
 | Storage Array | PowerMax 2500/8500 PowerMaxOS 10 (6079) , PowerMaxOS 10.0.1 (6079) <br> PowerMax 2000/8000 - 5978.711.xxx, 5978.479.xxx <br>Unisphere 10.0,10.0.1 |    3.5.x, 3.6.x, 4.0.x, 4.5  | 5.1.x, 5.2.x, 5.3.0 | OneFS 8.1, 8.2, 9.0, 9.1, 9.2, 9.3, 9.4, 9.5.0.5, 9.5.0.6 | 2.0.x, 2.1.x, 3.0, 3.2, 3.5     |
-{{</table>}}
+{.table-sm .table-bordered .table-striped}
 
 >Note: To connect to a PowerFlex 4.5 array, the SDC image will need to be changed to dellemc/sdc:4.5.
 >- If using helm to install, you will need to make this change in your values.yaml file. See [helm install documentation](https://dell.github.io/csm-docs/docs/deployment/helm/drivers/installation/powerflex/) for details.
 >- If using CSM-Operator to install, you will need to make this change in your samples file. See [operator install documentation](https://dell.github.io/csm-docs/docs/deployment/csmoperator/drivers/powerflex/) for details.
 
 ### Backend Storage Details
-{{<table "table table-striped table-bordered table-sm">}}
+
 | Features      | PowerMax         | PowerFlex          | Unity XT         | PowerScale       | PowerStore       |
 |---------------|:----------------:|:------------------:|:----------------:|:----------------:|:----------------:|
 | Fibre Channel | yes              | N/A                | yes              | N/A              | yes              |
@@ -78,4 +78,4 @@ The CSI Drivers by Dell implement an interface between [CSI](https://kubernetes-
 | Thin / Thick provisioning | Thin | Thin               | Thin/Thick       | N/A              | Thin             |
 | Platform-specific configurable settings | Service Level selection<br>iSCSI CHAP | - | Host IO Limit<br>Tiering Policy<br>NFS Host IO size<br>Snapshot Retention duration | Access Zone<br>NFS version (3 or 4);Configurable Export IPs | iSCSI CHAP |
 | Auto RDM(vSphere)  | Yes(over FC) | N/A               | N/A              | N/A              | N/A              |
-{{</table>}}
+{.table-sm .table-bordered .table-striped}

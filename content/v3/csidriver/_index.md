@@ -13,7 +13,7 @@ The CSI Drivers by Dell implement an interface between [CSI](https://kubernetes-
 ## Features and capabilities
 
 ### Supported Operating Systems/Container Orchestrator Platforms
-{{<table "table table-striped table-bordered table-sm">}}
+
 |               | PowerMax         | PowerFlex           | Unity XT         | PowerScale        | PowerStore       |
 |---------------|:----------------:|:-------------------:|:----------------:|:-----------------:|:----------------:|
 | Kubernetes    | 1.25, 1.26, 1.27 | 1.25, 1.26, 1.27    | 1.25, 1.26, 1.27 | 1.25, 1.26, 1.27  | 1.25, 1.26, 1.27 |
@@ -28,10 +28,10 @@ The CSI Drivers by Dell implement an interface between [CSI](https://kubernetes-
 | Rancher Kubernetes Engine | 1.4.1  |          1.4.1        |        1.4.5       |         1.4.1       |      1.4.5         |
 | Amazon Elastic Kubernetes Service<br> Anywhere | yes  |          yes        |        yes      |        yes       |      yes      |
 | Kubernetes K3s Engine on Debian OS |     no      |         no              |      1.25, 1.26, 1.27        |        no       |        no         |
-{{</table>}}
+{.table-sm .table-bordered .table-striped}
 
 ### CSI Driver Capabilities
-{{<table "table table-striped table-bordered table-sm">}}
+
 | Features                 | PowerMax | PowerFlex | Unity XT  | PowerScale | PowerStore |
 |--------------------------|:--------:|:---------:|:---------:|:----------:|:----------:|
 | CSI Driver version       | 2.7.0    | 2.7.1     | 2.7.0     | 2.7.0      | 2.7.0      |
@@ -49,15 +49,15 @@ The CSI Drivers by Dell implement an interface between [CSI](https://kubernetes-
 | Multi-array              | yes      | yes       | yes       | yes        | yes        |
 | Volume Health Monitoring | yes      | yes       | yes       | yes        | yes        |
 | Storage Capacity Tracking | no      | no        | no        | yes        | yes        |
-{{</table>}}
+{.table-sm .table-bordered .table-striped}
 ### Supported Storage Platforms
-{{<table "table table-striped table-bordered table-sm">}}
+
 |               | PowerMax                                                | PowerFlex        | Unity XT                   | PowerScale                         |    PowerStore    |
 |---------------|:-------------------------------------------------------:|:----------------:|:--------------------------:|:----------------------------------:|:----------------:|
 | Storage Array | PowerMax 2500/8500 PowerMaxOS 10 (6079) , PowerMaxOS 10.0.1 (6079) <br> PowerMax 2000/8000 - 5978.711.xxx, 5978.479.xxx <br>Unisphere 10.0,10.0.1 |    3.5.x, 3.6.x, 4.0  | 5.1.x, 5.2.x, 5.3.0 | OneFS 8.1, 8.2, 9.0, 9.1, 9.2, 9.3, 9.4 | 2.0.x, 2.1.x, 3.0, 3.2, 3.5     |
-{{</table>}}
+{.table-sm .table-bordered .table-striped}
 ### Backend Storage Details
-{{<table "table table-striped table-bordered table-sm">}}
+
 | Features      | PowerMax         | PowerFlex          | Unity XT         | PowerScale       | PowerStore       |
 |---------------|:----------------:|:------------------:|:----------------:|:----------------:|:----------------:|
 | Fibre Channel | yes              | N/A                | yes              | N/A              | yes              |
@@ -70,4 +70,4 @@ The CSI Drivers by Dell implement an interface between [CSI](https://kubernetes-
 | Thin / Thick provisioning | Thin  | Thin              | Thin/Thick       | N/A              | Thin             |
 | Platform-specific configurable settings | Service Level selection<br>iSCSI CHAP | - | Host IO Limit<br>Tiering Policy<br>NFS Host IO size<br>Snapshot Retention duration | Access Zone<br>NFS version (3 or 4);Configurable Export IPs | iSCSI CHAP |
 | Auto RDM(vSphere)  | Yes(over FC)  | N/A              | N/A      | N/A              | N/A             |
-{{</table>}}
+{.table-sm .table-bordered .table-striped}

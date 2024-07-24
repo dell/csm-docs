@@ -13,7 +13,7 @@ The CSI Drivers by Dell implement an interface between [CSI](https://kubernetes-
 ## Features and capabilities
 
 ### CSI Driver Capabilities
-{{<table "table table-striped table-bordered table-sm">}}
+
 | Features                 | PowerMax | PowerFlex | Unity XT  | PowerScale | PowerStore |
 |--------------------------|:--------:|:---------:|:---------:|:----------:|:----------:|
 | CSI Driver version       | 2.10.1   | 2.10.1    | 2.10.1    | 2.10.1     | 2.10.1     |
@@ -33,10 +33,10 @@ The CSI Drivers by Dell implement an interface between [CSI](https://kubernetes-
 | Volume Health Monitoring | yes      | yes       | yes       | yes        | yes        |
 | Storage Capacity Tracking | yes     | yes       | yes       | yes        | yes        |
 | Volume Limit             | yes      | yes       | yes       | yes        | yes        |
-{{</table>}}
+{.table-sm .table-bordered .table-striped}
 
 ### Backend Storage Details
-{{<table "table table-striped table-bordered table-sm">}}
+
 | Features      | PowerMax         | PowerFlex          | Unity XT         | PowerScale       | PowerStore       |
 |---------------|:----------------:|:------------------:|:----------------:|:----------------:|:----------------:|
 | Fibre Channel | yes              | N/A                | yes              | N/A              | yes              |
@@ -49,4 +49,4 @@ The CSI Drivers by Dell implement an interface between [CSI](https://kubernetes-
 | Thin / Thick provisioning | Thin | Thin               | Thin/Thick       | N/A              | Thin             |
 | Platform-specific configurable settings | Service Level selection<br>iSCSI CHAP | - | Host IO Limit<br>Tiering Policy<br>NFS Host IO size<br>Snapshot Retention duration | Access Zone<br>NFS version (3 or 4);Configurable Export IPs | iSCSI CHAP |
 | Auto RDM(vSphere)  | Yes(over FC) | N/A               | N/A              | N/A              | N/A              |
-{{</table>}}
+{.table-sm .table-bordered .table-striped}

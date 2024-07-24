@@ -16,7 +16,7 @@ defaultContentLanguage = "en"
 # Useful when translating.
 enableMissingTranslationPlaceholders = true
 
-disableKinds = ["taxonomy", "taxonomyTerm", "term"]
+disableKinds = ["taxonomy", "taxonomy", "term"]
 
 # Highlighting config
 pygmentsCodeFences = true
@@ -52,7 +52,7 @@ anchor = "smart"
 # Language configuration
 
 [languages]
-[languages.en]
+[languages.en.params]
 title = "Dell Technologies"
 description = "Dell Technologies (Dell) Container Storage Modules documentation pages"
 languageName ="English"
@@ -204,5 +204,8 @@ enable = false
   [[module.imports]]
     path = "github.com/google/docsy/dependencies"
     disable = false
+  [[module.mounts]]
+    source = "assets" 
+    target = "assets"
 
 ignoreFiles = ['^content/docs/deployment/csminstallationwizard/src/index\.html$']
