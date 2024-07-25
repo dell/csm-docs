@@ -70,6 +70,7 @@ Container Storage Modules (CSM) does not officially support specific operating s
 > Notes:
 > * Encryption and Application Mobility are available as a Technical Preview only and are not officially supported.
 > * Authorization v2.0 is available as a Technical Preview only on PowerFlex.
+> * This is a note.
 
 ## CSM Operator compatibility matrix
 
