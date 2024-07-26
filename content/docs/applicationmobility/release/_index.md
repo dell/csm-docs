@@ -6,7 +6,7 @@ Description: >
   Release Notes
 ---
 
-## Release Notes - CSM Application Mobility v1.0.4
+## Release Notes - CSM Application Mobility v1.1.0
 
 
 ### New Features/Changes
