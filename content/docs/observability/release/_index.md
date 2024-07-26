@@ -18,13 +18,13 @@ Description: >
 
 
 
+
 ### New Features/Changes
 
-- [#1284 - [FEATURE]: Support for Openshift 4.15](https://github.com/dell/csm/issues/1284)
-- [#1285 - [FEATURE]: Remove checks in code for non-supported installs of CSM](https://github.com/dell/csm/issues/1285)
-- [#926 - [FEATURE]: Fixing the linting, formatting and vetting issues](https://github.com/dell/csm/issues/926)
+- [#1359 - [FEATURE]: Add Support for OpenShift Container Platform (OCP) 4.16 ](https://github.com/dell/csm/issues/1359)
+- [#1400 - [FEATURE]: Support for Kubernetes 1.30](https://github.com/dell/csm/issues/1400)
 
 ### Fixed Issues
 
-
+There are no issues fixed in this release.
 ### Known Issues
