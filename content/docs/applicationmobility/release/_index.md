@@ -8,16 +8,15 @@ Description: >
 
 ## Release Notes - CSM Application Mobility v1.0.4
 
+
 ### New Features/Changes
 
-Adds support for object stores using https
+- [#1359 - [FEATURE]: Add Support for OpenShift Container Platform (OCP) 4.16 ](https://github.com/dell/csm/issues/1359)
+- [#1400 - [FEATURE]: Support for Kubernetes 1.30](https://github.com/dell/csm/issues/1400)
 
 ### Fixed Issues
 
-- Fixed backup sync issue where it was deleting all the backups, when it sees more than one BSLs
-- Fixed the issue in the backup path where podvolumebackup objects were not created for volumes belonging to pods with the same name across namespace.
-- Fixed the issue in the restore plugin.
-
+- [#1299 - [BUG]: Images of application mobility velero plugin and controller is not setting the correct image to the latest ](https://github.com/dell/csm/issues/1299)
 
 ### Known Issues
 
