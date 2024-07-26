@@ -12,21 +12,26 @@ description: Release notes for PowerFlex CSI driver
 
 
 
+
 ### New Features/Changes
 
-- [#1284 - [FEATURE]: Support for Openshift 4.15](https://github.com/dell/csm/issues/1284)
-- [#1285 - [FEATURE]: Remove checks in code for non-supported installs of CSM](https://github.com/dell/csm/issues/1285)
-- [#926 - [FEATURE]: Fixing the linting, formatting and vetting issues](https://github.com/dell/csm/issues/926)
+- [#1359 - [FEATURE]: Add Support for OpenShift Container Platform (OCP) 4.16 ](https://github.com/dell/csm/issues/1359)
+- [#1400 - [FEATURE]: Support for Kubernetes 1.30](https://github.com/dell/csm/issues/1400)
+- [#1358 - [FEATURE]: Support for PowerFlex 4.6](https://github.com/dell/csm/issues/1358)
+- [#1397 - [FEATURE]: Observability upgrade is supported in CSM Operator](https://github.com/dell/csm/issues/1397)
 
 ### Fixed Issues
 
-- [#1081 - [BUG]: CSM driver repositories reference CSI Operator](https://github.com/dell/csm/issues/1081)
-- [#1086 - [BUG]: PowerFlex driver fails to start on RKE](https://github.com/dell/csm/issues/1086)
-- [#1101 - [BUG]: the `nasName` parameter in the powerflex secret is now mandatory](https://github.com/dell/csm/issues/1101)
-- [#1140 - [BUG]: Cert-csi tests are not reporting the passed testcases in K8S E2E tests ](https://github.com/dell/csm/issues/1140)
-- [#1163 - [BUG]: Resource quota bypass](https://github.com/dell/csm/issues/1163)
-- [#1174 - [BUG]: Kubelet Configuration Directory setting should not have a comment about default value being None](https://github.com/dell/csm/issues/1174)
-- [#1210 - [BUG]: Helm deployment of PowerFlex driver is failing](https://github.com/dell/csm/issues/1210)
+- [#1209 - [BUG]: Doc hyper links in driver Readme is broken](https://github.com/dell/csm/issues/1209)
+- [#1218 - [BUG]: Add the helm-charts-version parameter to the install command for all drivers in csm-docs](https://github.com/dell/csm/issues/1218)
+- [#1237 - [BUG]: Error handling not good in node.go:nodeProbe() and other similar functions](https://github.com/dell/csm/issues/1237)
+- [#1239 - [BUG]: Changes in new release of google.golang.org/protobuf is causing compilation issues](https://github.com/dell/csm/issues/1239)
+- [#1270 - [BUG]: Missing entries for Resiliency in installation wizard template](https://github.com/dell/csm/issues/1270)
+- [#1310 - [BUG]:  CSI node pod crash after replacing OCP ingress certificate or restarting kubectl service](https://github.com/dell/csm/issues/1310)
+- [#1350 - [BUG]: Document update : PowerFlex expecting secret CR as <csm-cr-name>-config in operator ](https://github.com/dell/csm/issues/1350)
+- [#1355 - [BUG]: Indentation of secret.yaml mentioned on the csm-doc portal for powerflex driver is incorrect.](https://github.com/dell/csm/issues/1355)
+- [#1364 - [BUG]: mkfsFormatOption not working for powerflex](https://github.com/dell/csm/issues/1364)
+- [#1366 - [BUG]:  Support Minimum 3GB Volume Size for NFS in CSI-PowerFlex](https://github.com/dell/csm/issues/1366)
 
 ### Known Issues
 
