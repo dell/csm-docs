@@ -13,21 +13,21 @@ The table below lists the driver and modules versions installable with the CSM O
 
 | CSI Driver         | Version | CSM Authorization | CSM Replication | CSM Observability | CSM Resiliency |
 | ------------------ |---------|-------------------|-----------------|-------------------|----------------|
-| CSI PowerScale     | 2.11.0  | ✔ 1.11.0          | ✔ 1.9.0        | ✔ 1.9.0           | ✔ 1.10.0       |
-| CSI PowerScale     | 2.10.0  | ✔ 1.10.0          | ✔ 1.8.0        | ✔ 1.8.0           | ✔ 1.9.0        |
-| CSI PowerScale     | 2.9.0   | ✔ 1.9.0           | ✔ 1.7.0        | ✔ 1.7.0           | ✔ 1.8.0        |
-| CSI PowerFlex      | 2.11.0  | ✔ 1.11.0          | ✔ 1.9.0        | ✔ 1.9.0           | ✔ 1.10.0       |
-| CSI PowerFlex      | 2.10.0  | ✔ 1.10.0          | ✔ 1.8.0        | ✔ 1.8.0           | ✔ 1.9.0        |
-| CSI PowerFlex      | 2.9.0   | ✔ 1.9.0           | ✔ 1.7.0        | ✔ 1.7.0           | ✔ 1.8.0        |
-| CSI PowerStore     | 2.11.0  | ❌                | ❌             | ❌                | ✔ 1.10.0       |
-| CSI PowerStore     | 2.10.0  | ❌                | ❌             | ❌                | ✔ 1.9.0        |
-| CSI PowerStore     | 2.9.0   | ❌                | ❌             | ❌                | ✔ 1.8.0        |
-| CSI PowerMax       | 2.11.0  | ✔ 1.11.0          | ✔ 1.9.0        | ✔ 1.9.0           | ❌             |
-| CSI PowerMax       | 2.10.0  | ✔ 1.10.0          | ✔ 1.8.0        | ✔ 1.8.0           | ❌             |
-| CSI PowerMax       | 2.9.0   | ✔ 1.9.0           | ✔ 1.7.0        | ✔ 1.7.0           | ❌             |
-| CSI Unity XT       | 2.11.0  | ❌                | ❌             | ❌                | ❌             |
-| CSI Unity XT       | 2.10.0  | ❌                | ❌             | ❌                | ❌             |
-| CSI Unity XT       | 2.9.0   | ❌                | ❌             | ❌                | ❌             |
+| CSI PowerScale     | 2.11.0  | ✔ 1.11.0          | ✔ 1.9.0        | ✔ 1.9.0           | ✔ 1.10.0      |
+| CSI PowerScale     | 2.10.1  | ✔ 1.10.1          | ✔ 1.8.1        | ✔ 1.8.1           | ✔ 1.9.1       |
+| CSI PowerScale     | 2.9.1   | ✔ 1.9.1           | ✔ 1.7.1        | ✔ 1.7.0           | ✔ 1.8.1       |
+| CSI PowerFlex      | 2.11.0  | ✔ 1.11.0          | ✔ 1.9.0        | ✔ 1.9.0           | ✔ 1.10.0      |
+| CSI PowerFlex      | 2.10.1  | ✔ 1.10.1          | ✔ 1.8.1        | ✔ 1.8.1           | ✔ 1.9.1       |
+| CSI PowerFlex      | 2.9.2   | ✔ 1.9.1           | ✔ 1.7.1        | ✔ 1.7.0           | ✔ 1.8.1       |
+| CSI PowerStore     | 2.11.0  | ❌                | ❌             | ❌                | ✔ 1.10.0      |
+| CSI PowerStore     | 2.10.1  | ❌                | ❌             | ❌                | ✔ 1.9.1       |
+| CSI PowerStore     | 2.9.1   | ❌                | ❌             | ❌                | ✔ 1.8.1       |
+| CSI PowerMax       | 2.11.0  | ✔ 1.11.0          | ✔ 1.9.0        | ✔ 1.9.0           | ✔ 1.10.0      |
+| CSI PowerMax       | 2.10.1  | ✔ 1.10.1          | ✔ 1.8.1        | ✔ 1.8.1           | ❌            |
+| CSI PowerMax       | 2.9.1   | ✔ 1.9.1           | ✔ 1.7.1        | ✔ 1.7.0           | ❌            |
+| CSI Unity XT       | 2.11.0  | ❌                | ❌             | ❌                | ❌            |
+| CSI Unity XT       | 2.10.1  | ❌                | ❌             | ❌                | ❌            |
+| CSI Unity XT       | 2.9.1   | ❌                | ❌             | ❌                | ❌            |
 
 These CR will be used for new deployment or upgrade. In most case, it is recommended to use the latest available version.
 
