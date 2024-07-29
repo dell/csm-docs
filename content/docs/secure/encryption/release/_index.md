@@ -9,10 +9,11 @@ Description: >
 
 ## Release Notes - CSM Encryption
 
-### New Features/Changes
-
-- [#1359 - [FEATURE]: Add Support for OpenShift Container Platform (OCP) 4.16 ](https://github.com/dell/csm/issues/1359)
 
 ### Fixed Issues
 
-There are no issues fixed in this release.
+There are no fixed issues in this release.
+
+### Known Issues
+
+There are no known issues in this release.
