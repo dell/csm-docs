@@ -48,7 +48,7 @@ CSM is made up of multiple components including modules (enterprise capabilities
 {{< cardpane >}}
 {{< card header="[**Application Mobility**](applicationmobility/)"
           footer="Supports all platforms">}}
-  Container Storage Modules for Application Mobility provide Kubernetes administrators the ability to clone their stateful application workloads and application data to other clusters, either on-premise or in the cloud.
+  Container Storage Modules for Application Mobility provide Kubernetes administrators the ability to clone their stateful application workloads and application data to other clusters in the cloud.
   [...Learn more](applicationmobility/)
   {{< /card >}}
    {{< card header="[**Encryption**](secure/encryption)"
