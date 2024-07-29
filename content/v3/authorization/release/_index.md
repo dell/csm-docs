@@ -6,20 +6,18 @@ Description: >
   Dell Container Storage Modules (CSM) release notes for authorization
 ---
 
-## Release Notes - CSM Authorization 1.7.0
+## Release Notes - CSM Authorization 1.8.0
+
+
 
 ### New Features/Changes
-- CSM Authorization karavictl requires an admin token. ([#725](https://github.com/dell/csm/issues/725))
-- CSM support for Kubernetes 1.27. ([#761](https://github.com/dell/csm/issues/761))
-- CSM 1.7 release specific changes. ([#743](https://github.com/dell/csm/issues/743))
-- CSM Authorization encryption for secrets in K3S. ([#774](https://github.com/dell/csm/issues/774))
 
-### Bugs
-- Authorization should have sample CRD for every supported version in csm-operator. ([#826](https://github.com/dell/csm/issues/826))
-- Improve CSM Operator Authorization documentation. ([#800](https://github.com/dell/csm/issues/800))
-- CSM Authorization doesn't write the status code on error for csi-powerscale. ([#787](https://github.com/dell/csm/issues/787))
-- Authorization RPM installation should use nogpgcheck for k3s-selinux package. ([#772](https://github.com/dell/csm/issues/772))
-- CSM Authorization - karavictl generate token should output valid yaml. ([#767](https://github.com/dell/csm/issues/767))
+- [#922 - [FEATURE]: Use ubi9 micro as base image](https://github.com/dell/csm/issues/922)
+
+### Fixed Issues
+
+- [#895 - [BUG]: Update CSM Authorization karavictl CLI flag descriptions](https://github.com/dell/csm/issues/895)
+- [#916 - [BUG]: Remove references to deprecated io/ioutil package](https://github.com/dell/csm/issues/916)
 
 ### Known Issues
 | Issue | Workaround |

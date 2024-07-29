@@ -42,7 +42,7 @@ CSM for Resiliency provides the following capabilities:
 | COP/OS            | Supported Versions |
 | ----------------- | :----------------: |
 | Kubernetes        | 1.25, 1.26, 1.27   |
-| Red Hat OpenShift |     4.11, 4.12     |
+| Red Hat OpenShift |     4.11, 4.12, 4.13     |
 | RHEL              |     7.x, 8.x       |
 | CentOS            |     7.8, 7.9       |
 {{</table>}}
@@ -130,6 +130,8 @@ The following provisioning types are supported and have been tested:
 * ReadWriteMany volumes. This may have issues if a node has multiple pods accessing the same volumes. In any case once pod cleanup fences the volumes on a node, they will no longer be available to any pods using those volumes on that node. We will endeavor to support this in the future.
 
 * Multiple instances of the same driver type (for example two CSI driver for Dell PowerFlex deployments.)
+
+* PowerFlex with Resiliency is not supported for NFS protocol.
 
 ## Deploying and Managing Applications Protected by CSM for Resiliency
 
