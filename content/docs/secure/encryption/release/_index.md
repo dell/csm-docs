@@ -9,9 +9,6 @@ Description: >
 
 ## Release Notes - CSM Encryption
 
-### New Features/Changes
-
-- Supports the latest version of CSM. 
 
 ### Fixed Issues
 
