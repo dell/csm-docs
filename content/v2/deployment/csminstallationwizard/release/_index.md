@@ -5,21 +5,18 @@ weight: 5
 description: Release notes for CSM Installation Wizard
 ---
 
-## Release Notes - CSM Installation Wizard 1.1.0
+## Release Notes - CSM Installation Wizard 1.2.1
+
+
 
 ### New Features/Changes
 
-- Added operator mode of installation for CSI-PowerStore, CSI-PowerMax, CSI-PowerScale and the supported modules
-
-- Helm and Operator based manifest file generation is supported for CSM-1.7 and CSM 1.8 releases
-
-- Volume Limit and Storage Capacity Tracking features have been added.
-- Rename SDC and approve SDC feature added for CSM-1.7 and CSM-1.8 for CSI-PowerFlex driver.
-- NFS volume feature added for CSM-1.8 for CSI-PowerFlex driver.
+- [#947 - [FEATURE]: Support for Kubernetes 1.28](https://github.com/dell/csm/issues/947)
+- [#1066 - [FEATURE]: Support for Openshift 4.14](https://github.com/dell/csm/issues/1066)
 
 ### Fixed Issues
 
-- [#959 - [BUG]: Resiliency fields in the generated values.yaml should be uncommented when resiliency is enabled](https://github.com/dell/csm/issues/959)
+- [#1022 - [BUG]: CSM Installation wizard is issuing the warnings that are false positives ](https://github.com/dell/csm/issues/1022)
 
 ### Known Issues
 

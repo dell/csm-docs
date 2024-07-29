@@ -21,6 +21,124 @@ kubectl get csm --all-namespaces
 
 ### Prerequisite
 
+### Fibre Channel requirements
+
+Dell PowerStore supports Fibre Channel communication. If you use the Fibre Channel protocol, ensure that the
+following requirement is met before you install the CSI Driver for Dell PowerStore:
+- Zoning of the Host Bus Adapters (HBAs) to the Fibre Channel port must be done.
+
+
+### Set up the iSCSI Initiator
+The CSI Driver for Dell PowerStore v1.4 and higher supports iSCSI connectivity.
+
+If you use the iSCSI protocol, set up the iSCSI initiators as follows:
+- Ensure that the iSCSI initiators are available on both Controller and Worker nodes.
+- Kubernetes nodes must have access (network connectivity) to an iSCSI port on the Dell PowerStore array that
+has IP interfaces. Manually create IP routes for each node that connects to the Dell PowerStore.
+- All Kubernetes nodes must have the _iscsi-initiator-utils_ package for CentOS/RHEL or _open-iscsi_ package for Ubuntu installed, and the _iscsid_ service must be enabled and running.
+To do this, run the `systemctl enable --now iscsid` command.
+- Ensure that the unique initiator name is set in _/etc/iscsi/initiatorname.iscsi_.
+
+For information about configuring iSCSI, see _Dell PowerStore documentation_ on Dell Support.
+
+
+### Set up the NVMe Initiator
+
+If you want to use the protocol, set up the NVMe initiators as follows:
+- The driver requires NVMe management command-line interface (nvme-cli) to use configure, edit, view or start the NVMe client and target. The nvme-cli utility provides a command-line and interactive shell option. The NVMe CLI tool is installed in the host using the below command.
+```bash
+sudo apt install nvme-cli
+```
+
+**Requirements for NVMeTCP**
+- Modules including the nvme, nvme_core, nvme_fabrics, and nvme_tcp are required for using NVMe over Fabrics using TCP. Load the NVMe and NVMe-OF Modules using the below commands:
+```bash
+modprobe nvme
+modprobe nvme_tcp
+```
+- The NVMe modules may not be available after a node reboot. Loading the modules at startup is recommended.
+
+**Requirements for NVMeFC**
+- NVMeFC Zoning of the Host Bus Adapters (HBAs) to the Fibre Channel port must be done.
+
+*NOTE:*
+- Do not load the nvme_tcp module for NVMeFC
+
+### Linux multipathing requirements
+Dell PowerStore supports Linux multipathing. Configure Linux multipathing before installing the CSI Driver for Dell
+PowerStore.
+
+Set up Linux multipathing as follows:
+- Ensure that all nodes have the _Device Mapper Multipathing_ package installed.
+> You can install it by running `yum install device-mapper-multipath` on CentOS or `apt install multipath-tools` on Ubuntu. This package should create a multipath configuration file located in `/etc/multipath.conf`.
+- Enable multipathing using the `mpathconf --enable --with_multipathd y` command.
+- Enable `user_friendly_names` and `find_multipaths` in the `multipath.conf` file.
+- Ensure that the multipath command for `multipath.conf` is available on all Kubernetes nodes.
+
+#### multipathd `MachineConfig`
+
+If you are installing a CSI Driver which requires the installation of the Linux native Multipath software - _multipathd_, please follow the below instructions
+
+To enable multipathd on RedHat CoreOS nodes you need to prepare a working configuration encoded in base64.
+
+```bash echo 'defaults {
+user_friendly_names yes
+find_multipaths yes
+}
+blacklist {
+}' | base64 -w0
+```
+
+Use the base64 encoded string output in the following `MachineConfig` yaml file (under source section)
+```yaml
+apiVersion: machineconfiguration.openshift.io/v1
+kind: MachineConfig
+metadata:
+  name: workers-multipath-conf-default
+  labels:
+    machineconfiguration.openshift.io/role: worker
+spec:
+  config:
+    ignition:
+      version: 3.2.0
+    storage:
+      files:
+      - contents:
+          source: data:text/plain;charset=utf-8;base64,ZGVmYXVsdHMgewp1c2VyX2ZyaWVuZGx5X25hbWVzIHllcwpmaW5kX211bHRpcGF0aHMgeWVzCn0KCmJsYWNrbGlzdCB7Cn0K
+          verification: {}
+        filesystem: root
+        mode: 400
+        path: /etc/multipath.conf
+```
+After deploying this`MachineConfig` object, CoreOS will start multipath service automatically.
+Alternatively, you can check the status of the multipath service by entering the following command in each worker nodes.
+`sudo multipath -ll`
+
+If the above command is not successful, ensure that the /etc/multipath.conf file is present and configured properly. Once the file has been configured correctly, enable the multipath service by running the following command:
+`sudo /sbin/mpathconf –-enable --with_multipathd y`
+
+Finally, you have to restart the service by providing the command
+`sudo systemctl restart multipathd`
+
+For additional information refer to official documentation of the multipath configuration.
+
+### (Optional) Volume Snapshot Requirements
+  For detailed snapshot setup procedure, [click here.](../../../../snapshots/#optional-volume-snapshot-requirements)
+
+### (Optional) Replication feature Requirements
+
+Applicable only if you decided to enable the Replication feature in `sample.yaml`
+
+```yaml
+replication:
+  enabled: true
+```
+#### Replication CRD's
+
+The CRDs for replication can be obtained and installed from the csm-replication project on Github. Use `csm-replication/deploy/replicationcrds.all.yaml` located in csm-replication git repo for the installation.
+
+CRDs should be configured during replication prepare stage with repctl as described in [install-repctl](../../../../replication/deployment/install-repctl)
+
 1. Create namespace.
    Execute `kubectl create namespace powerstore` to create the powerstore namespace (if not already present). Note that the namespace can be any user-defined name, in this example, we assume that the namespace is 'powerstore'.
 
@@ -40,6 +158,9 @@ kubectl get csm --all-namespaces
    ```
    Change the parameters with relevant values for your PowerStore array. 
    Add more blocks similar to above for each PowerStore array if necessary.
+
+   If replication feature is enabled, ensure the secret includes all the PowerStore arrays involved in replication.
+
    ### User Privileges
    The username specified in `config.yaml` must be from the authentication providers of PowerStore. The user must have the correct user role to perform the actions. The minimum requirement is **Storage Operator**.
 

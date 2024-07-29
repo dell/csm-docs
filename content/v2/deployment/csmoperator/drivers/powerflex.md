@@ -31,22 +31,19 @@ kubectl get csm --all-namespaces
   - Optionally, enable sdc monitor by setting the enable flag for the sdc-monitor to true. Please note: 
     - **If using sidecar**, you will need to edit the value fields under the HOST_PID and MDM fields by filling the empty quotes with host PID and the MDM IPs. 
     - **If not using sidecar**, leave the enabled field set to false.
-##### Example CR:  [samples/storage_csm_powerflex_v280.yaml](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powerflex_v280.yaml)
+##### Example CR:  [samples/storage_csm_powerflex_v290.yaml](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powerflex_v290.yaml)
 ```yaml
     sideCars:
     # sdc-monitor is disabled by default, due to high CPU usage 
       - name: sdc-monitor
         enabled: false
-        image: dellemc/sdc:3.6.1
+        image: dellemc/sdc:4.5
         envs:
         - name: HOST_PID
           value: "1"
         - name: MDM
           value: "10.xx.xx.xx,10.xx.xx.xx" #provide the same MDM value from secret
 ```  
-
-   >Note: To connect to a PowerFlex 4.5 array, edit the initContainers.image parameter in your samples file to use dellemc/sdc:4.5:  
-   >`- image: dellemc/sdc:4.5`
 
 #### Manual SDC Deployment
 
@@ -112,7 +109,9 @@ For detailed PowerFlex installation procedure, see the _Dell PowerFlex Deploymen
       mdm: "10.0.0.3,10.0.0.4"
     ```
 
-    After editing the file, run this command to create a secret called `vxflexos-config`. If you are using a different namespace/secret name, just substitute those into the command.
+    If replication feature is enabled, ensure the secret includes all the PowerFlex arrays involved in replication.
+
+    After editing the file, run this command to create a secret called `vxflexos-config`.
     ```bash
     
     kubectl create secret generic vxflexos-config -n vxflexos --from-file=config=secret.yaml
@@ -148,9 +147,13 @@ For detailed PowerFlex installation procedure, see the _Dell PowerFlex Deploymen
    | X_CSI_VXFLEXOS_ENABLESNAPSHOTCGDELETE | Enable this to automatically delete all snapshots in a consistency group when a snap in the group is deleted | No | false |
    | X_CSI_DEBUG | To enable debug mode | No | true |
    | X_CSI_ALLOW_RWO_MULTI_POD_ACCESS | Setting allowRWOMultiPodAccess to "true" will allow multiple pods on the same node to access the same RWO volume. This behavior conflicts with the CSI specification version 1.3. NodePublishVolume description that requires an error to be returned in this case. However, some other CSI drivers support this behavior and some customers desire this behavior. Customers use this option at their own risk. | No | false |
+   | ***Controller parameters*** |
+   | X_CSI_POWERFLEX_EXTERNAL_ACCESS | allows specifying additional entries for hostAccess of NFS volumes. Both single IP address and subnet are valid entries | No | empty |
+   | X_CSI_HEALTH_MONITOR_ENABLED | Enable/Disable health monitor of CSI volumes from Controller plugin - volume condition | No | false |
    | ***Node parameters*** |
    | X_CSI_RENAME_SDC_ENABLED | Enable this to rename the SDC with the given prefix. The new name will be ("prefix" + "worker_node_hostname") and it should not exceed 31 chars. | Yes | false |
    | X_CSI_APPROVE_SDC_ENABLED | Enable this to to approve restricted SDC by GUID during setup | Yes | false |
+   | X_CSI_HEALTH_MONITOR_ENABLED | Enable/Disable health monitor of CSI volumes from Node plugin - volume condition | No | false |
 
 4.  Execute this command to create PowerFlex custom resource:
     ```bash

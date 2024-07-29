@@ -157,7 +157,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
         nfsAcls: "0777"                           # (Optional) defines permissions - POSIX mode bits or NFSv4 ACLs, to be set on NFS target mount directory.
                                                   # NFSv4 ACls are supported for NFSv4 shares on NFSv4 enabled NAS servers only. POSIX ACLs are not supported and only POSIX mode bits are supported for NFSv3 shares.
    ```
-   Change the parameters with relevant values for your PowerStore array. 
+   Change the parameters with relevant values for your PowerStore array.
    Add more blocks similar to above for each PowerStore array if necessary.
 
    If replication feature is enabled, ensure the secret includes all the PowerStore arrays involved in replication.
@@ -165,7 +165,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
    #### User Privileges
    The username specified in `config.yaml` must be from the authentication providers of PowerStore. The user must have the correct user role to perform the actions. The minimum requirement is **Storage Operator**.
 
-3. Create Kubernetes secret: 
+3. Create Kubernetes secret:
 
    Create a file called `secret.yaml` in same folder as `config.yaml` with following content
    ```yaml
@@ -188,8 +188,8 @@ CRDs should be configured during replication prepare stage with repctl as descri
 ### Install Driver
 
 1. Follow all the [prerequisites](#prerequisite) above
-   
-2. Create a CR (Custom Resource) for PowerStore using the sample files provided 
+
+2. Create a CR (Custom Resource) for PowerStore using the sample files provided
    [here](https://github.com/dell/csm-operator/tree/master/samples). This file can be modified to use custom parameters if needed.
 
 3. Users should configure the parameters in CR. The following table lists the primary configurable parameters of the PowerStore driver and their default values:
@@ -198,10 +198,10 @@ CRDs should be configured during replication prepare stage with repctl as descri
 | --------- | ----------- | -------- |-------- |
 | replicas | Controls the number of controller pods you deploy. If the number of controller pods is greater than the number of available nodes, the excess pods will be in pending state until new nodes are available for scheduling. Default is 2 which allows for Controller high availability. | Yes | 2 |
 | namespace | Specifies namespace where the driver will be installed | Yes | "powerstore" |
-| fsGroupPolicy | Defines which FS Group policy mode to be used. Supported modes `None, File and ReadWriteOnceWithFSType` | No |"ReadWriteOnceWithFSType"|
+| fsGroupPolicy | Defines which FS Group policy mode to be used. Supported modes `None, File and ReadWriteOnceWithFSType`. In OCP <= 4.16 and K8s <= 1.29, fsGroupPolicy is an immutable field. | No |"ReadWriteOnceWithFSType"|
 | storageCapacity | Enable/Disable storage capacity tracking feature | No | false |
 | ***Common parameters for node and controller*** |
-| X_CSI_POWERSTORE_NODE_NAME_PREFIX | Prefix to add to each node registered by the CSI driver | Yes | "csi-node" 
+| X_CSI_POWERSTORE_NODE_NAME_PREFIX | Prefix to add to each node registered by the CSI driver | Yes | "csi-node"
 | X_CSI_FC_PORTS_FILTER_FILE_PATH | To set path to the file which provides a list of WWPN which should be used by the driver for FC connection on this node | No | "/etc/fc-ports-filter" |
 | ***Controller parameters*** |
 | X_CSI_POWERSTORE_EXTERNAL_ACCESS | allows specifying additional entries for hostAccess of NFS volumes. Both single IP address and subnet are valid entries | No | empty |
@@ -214,8 +214,8 @@ CRDs should be configured during replication prepare stage with repctl as descri
    kubectl create -f <input_sample_file.yaml>
    ```
    This command will deploy the CSI PowerStore driver in the namespace specified in the input YAML file.
-      
-   - Next, the driver should be installed, you can check the condition of driver pods by running 
+
+   - Next, the driver should be installed, you can check the condition of driver pods by running
       ```bash
       kubectl get all -n <driver-namespace>
       ```
@@ -223,7 +223,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
 5.  [Verify the CSI Driver installation](../#verifying-the-driver-installation)
 
 6. Refer https://github.com/dell/csi-powerstore/tree/main/samples for the sample files.
-    
-**Note** : 
+
+**Note** :
    1. "Kubelet config dir path" is not yet configurable in case of Operator based driver installation.
-   2. Snapshotter and resizer sidecars are not optional. They are defaults with Driver installation. 
+   2. Snapshotter and resizer sidecars are not optional. They are defaults with Driver installation.
