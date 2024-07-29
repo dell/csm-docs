@@ -24,7 +24,7 @@ You can upgrade CSI Driver for Dell PowerMax using Helm or Dell CSI Operator.
 3. Run the `csi-install` script with the option _\-\-upgrade_ by running: 
    ```bash
 
-   cd ../dell-csi-helm-installer && ./csi-install.sh --namespace powermax --values ./my-powermax-settings.yaml --upgrade --upgrade --helm-charts-version
+   cd ../dell-csi-helm-installer && ./csi-install.sh --namespace powermax --values ./my-powermax-settings.yaml --upgrade --helm-charts-version <version>
    ```
 
 *NOTE:*
