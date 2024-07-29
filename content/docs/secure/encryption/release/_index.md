@@ -16,6 +16,3 @@ Description: >
 ### Fixed Issues
 
 There are no issues fixed in this release.
-### Known Issues
-
-The encryption module installation fails because sidecars like csi-metadata-retriever-* conflict when trying to access the same domain socket. (/var/run/csi/csi_retriever.sock). Please find the [github issue](https://github.com/dell/csm/issues/1309).
