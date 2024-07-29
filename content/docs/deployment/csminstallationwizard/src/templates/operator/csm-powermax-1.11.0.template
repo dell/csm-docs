@@ -26,8 +26,13 @@ spec:
       # Allowed values: ReadWriteOnceWithFSType, File , None
       # Default value: ReadWriteOnceWithFSType
       fSGroupPolicy: "$FSGROUP_POLICY"
-    # Config version for CSI PowerMax v2.7.0 driver
-    configVersion: v2.7.0
+      # storageCapacity: Helps the scheduler to schedule the pod on a node satisfying the topology constraints, only if the requested capacity is available on the storage array
+      # Allowed values:
+      #   true: enable storage capacity tracking
+      #   false: disable storage capacity tracking
+      storageCapacity: $STORAGE_CAPACITY_ENABLED
+    # Config version for CSI PowerMax v2.11.0 driver
+    configVersion: v2.11.0
     # replica: Define the number of PowerMax controller nodes
     # to deploy to the Kubernetes release
     # Allowed values: n, where n > 0
@@ -39,8 +44,8 @@ spec:
     forceUpdate: false
     forceRemoveDriver: true
     common:
-      # Image for CSI PowerMax driver v2.7.0
-      image: dellemc/csi-powermax:v2.7.0
+      # Image for CSI PowerMax driver v2.11.0
+      image: dellemc/csi-powermax:v2.11.0
       # imagePullPolicy: Policy to determine if the image should be pulled prior to starting the container.
       # Allowed values:
       #  Always: Always pull the image.
@@ -87,6 +92,7 @@ spec:
         #   "FC"    - Fiber Channel protocol
         #   "FIBER" - Fiber Channel protocol
         #   "ISCSI" - iSCSI protocol
+        #   "NVMETCP" - NVMe/TCP protocol
         #   ""      - Automatic selection of transport protocol
         # Default value: "" <empty>
         - name: X_CSI_TRANSPORT_PROTOCOL
@@ -177,6 +183,11 @@ spec:
         # Default value: false
         - name: X_CSI_TOPOLOGY_CONTROL_ENABLED
           value: "$TOPOLOGY_ENABLED"
+        # X_CSI_MAX_VOLUMES_PER_NODE: Defines the maximum PowerMax volumes that the controller can schedule on the node
+        # Allowed values: Any value greater than or equal to 0
+        # Default value: "0"
+        - name: X_CSI_MAX_VOLUMES_PER_NODE
+          value: "$MAX_VOLUMES_PER_NODE"
       # nodeSelector: Define node selection constraints for node pods.
       # For the pod to be eligible to run on a node, the node must have each
       # of the indicated key-value pairs as labels.
@@ -210,20 +221,26 @@ spec:
       - name: external-health-monitor
         enabled: $HEALTH_MONITOR_ENABLED
         args: [ "--monitor-interval=60s" ]
+      
+      # Uncomment the following to configure how often external-provisioner polls the driver to detect changed capacity
+      # Configure only when the storageCapacity is set as "true"
+      # Allowed values: 1m,2m,3m,...,10m,...,60m etc. Default value: 5m
+      #- name: provisioner
+      #  args: ["--capacity-poll-interval=5m"]
 
   modules:
     # CSI Powermax Reverseproxy is a mandatory module for Powermax
     - name: csireverseproxy
       # enabled: Always set to true
       enabled: true
-      configVersion: v2.6.0
+      configVersion: v2.10.0
       forceRemoveModule: true
       components:
       - name: csipowermax-reverseproxy
       # image: Define the container images used for the reverse proxy
       # Default value: None
-      # Example: "csipowermax-reverseproxy:v2.6.0"
-        image: dellemc/csipowermax-reverseproxy:v2.6.0
+      # Example: "csipowermax-reverseproxy:v2.10.0"
+        image: dellemc/csipowermax-reverseproxy:v2.10.0
         envs:
           # "tlsSecret" defines the TLS secret that is created with certificate
           # and its associated key
@@ -240,10 +257,10 @@ spec:
     - name: authorization
       # enabled: Enable/Disable csm-authorization
       enabled: $AUTHORIZATION_ENABLED
-      configVersion: v1.7.0
+      configVersion: v1.11.0
       components:
       - name: karavi-authorization-proxy
-        image: dellemc/csm-authorization-sidecar:v1.7.0
+        image: dellemc/csm-authorization-sidecar:v1.11.0
         envs:
           # proxyHost: hostname of the csm-authorization server
           - name: "PROXY_HOST"
@@ -261,13 +278,13 @@ spec:
       #   false: disable replication feature(do not install dell-csi-replicator sidecar)
       # Default value: false
       enabled: $REPLICATION_ENABLED
-      configVersion: v1.5.0
+      configVersion: v1.9.0
       components:
       - name: dell-csi-replicator
         # image: Image to use for dell-csi-replicator. This shouldn't be changed
         # Allowed values: string
         # Default value: None
-        image: dellemc/dell-csi-replicator:v1.5.0
+        image: dellemc/dell-csi-replicator:v1.9.0
         envs:
           # replicationPrefix: prefix to prepend to storage classes parameters
           # Allowed values: string
@@ -283,7 +300,7 @@ spec:
       - name: dell-replication-controller-manager
         # image: Defines controller image. This shouldn't be changed
         # Allowed values: string
-        image: dellemc/dell-replication-controller:v1.5.0
+        image: dellemc/dell-replication-controller:v1.9.0
         envs:
           # TARGET_CLUSTERS_IDS: comma separated list of cluster IDs of the targets clusters. DO NOT include the source(wherever CSM Operator is deployed) cluster ID
           # Set the value to "self" in case of stretched/single cluster configuration
@@ -310,7 +327,128 @@ spec:
           - name: "RETRY_INTERVAL_MAX"
             value: "5m"
 
-      - name: dell-replication-controller-init
-        # image: Defines replication init container image. This shouldn't be changed
+    # observability: allows to configure observability
+    - name: observability
+      # enabled: Enable/Disable observability
+      enabled: $OBSERVABILITY_OPERATOR_ENABLED
+      configVersion: v1.9.0
+      components:
+      - name: topology
+        # enabled: Enable/Disable topology
+        enabled: $OBSERVABILITY_OPERATOR_TOPOLOGY
+        # image: Defines karavi-topology image. This shouldn't be changed
         # Allowed values: string
-        image: dellemc/dell-replication-init:v1.0.1
+        image: dellemc/csm-topology:v1.9.0
+        envs:
+          # topology log level
+          # Valid values: TRACE, DEBUG, INFO, WARN, ERROR, FATAL, PANIC
+          # Default value: "INFO"
+          - name: "TOPOLOGY_LOG_LEVEL"
+            value: "INFO"
+
+      - name: otel-collector
+        # enabled: Enable/Disable OpenTelemetry Collector
+        enabled: $OBSERVABILITY_OPERATOR_OTEL
+        # image: Defines otel-collector image. This shouldn't be changed
+        # Allowed values: string
+        image: otel/opentelemetry-collector:0.42.0
+        envs:
+          # image of nginx proxy image
+          # Allowed values: string
+          # Default value: "nginxinc/nginx-unprivileged:1.20"
+          - name: "NGINX_PROXY_IMAGE"
+            value: "nginxinc/nginx-unprivileged:1.20"
+
+      - name: metrics-powermax
+        # enabled: Enable/Disable PowerMax metrics
+        enabled: $OBSERVABILITY_OPERATOR_METRICS
+        # image: Defines PowerMax metrics image. This shouldn't be changed
+        image: dellemc/csm-metrics-powermax:v1.4.0
+        envs:
+          # POWERMAX_MAX_CONCURRENT_QUERIES: set the default max concurrent queries to PowerMax
+          # Allowed values: int
+          # Default value: 10
+          - name: "POWERMAX_MAX_CONCURRENT_QUERIES"
+            value: "10"
+          # POWERMAX_CAPACITY_METRICS_ENABLED: enable/disable collection of capacity metrics
+          # Allowed values: ture, false
+          # Default value: true
+          - name: "POWERMAX_CAPACITY_METRICS_ENABLED"
+            value: "true"
+          # POWERMAX_PERFORMANCE_METRICS_ENABLED: enable/disable collection of volume performance metrics
+          # Allowed values: ture, false
+          # Default value: true
+          - name: "POWERMAX_PERFORMANCE_METRICS_ENABLED"
+            value: "true"
+          # POWERMAX_CAPACITY_POLL_FREQUENCY: set polling frequency to get capacity metrics data
+          # Allowed values: int
+          # Default value: 10
+          - name: "POWERMAX_CAPACITY_POLL_FREQUENCY"
+            value: "10"
+          # POWERMAX_PERFORMANCE_POLL_FREQUENCY: set polling frequency to get volume performance data
+          # Allowed values: int
+          # Default value: 10
+          - name: "POWERMAX_PERFORMANCE_POLL_FREQUENCY"
+            value: "10"
+          # PowerMax metrics log level
+          # Valid values: TRACE, DEBUG, INFO, WARN, ERROR, FATAL, PANIC
+          # Default value: "INFO"
+          - name: "POWERMAX_LOG_LEVEL"
+            value: "INFO"
+          # PowerMax Metrics Output logs in the specified format
+          # Valid values: TEXT, JSON
+          # Default value: "TEXT"
+          - name: "POWERMAX_LOG_FORMAT"
+            value: "TEXT"
+          # otel collector address
+          # Allowed values: String
+          # Default value: "otel-collector:55680"
+          - name: "COLLECTOR_ADDRESS"
+            value: "otel-collector:55680"
+           # configMap name which has all array/endpoint related info
+          - name: "X_CSI_CONFIG_MAP_NAME"
+            value: "powermax-reverseproxy-config"
+    - name: resiliency
+      # enabled: Enable/Disable Resiliency feature
+      # Allowed values:
+      #   true: enable Resiliency feature(deploy podmon sidecar)
+      #   false: disable Resiliency feature(do not deploy podmon sidecar)
+      # Default value: false
+      enabled: $OPERATOR_RESILIENCY_ENABLED
+      configVersion: v1.10.0
+      components:
+        - name: podmon-controller
+          image: dellemc/podmon:v1.10.0
+          imagePullPolicy: IfNotPresent
+          args:
+            - "--labelvalue=$LABEL_VALUE"
+            - "--arrayConnectivityPollRate=$POLL_RATE"
+            - "--skipArrayConnectionValidation=$SKIP_ARRAY_CONNECTION_VALIDATION"
+            - "--driverPodLabelValue=$DRIVER_POD_LABEL_VALUE"
+            - "--ignoreVolumelessPods=$IGNORE_VOLUMELESS_PODS"
+            - "--arrayConnectivityConnectionLossThreshold=$ARRAY_THRESHOLD"
+            # Below 4 args should not be modified.
+            - "--csisock=unix:/var/run/csi/csi.sock"
+            - "--mode=controller"
+            - "--driver-config-params=/powermax-config-params/driver-config-params.yaml"
+            - "--driverPath=csi-powermax.dellemc.com"
+        - name: podmon-node
+          image: dellemc/podmon:v1.10.0
+          imagePullPolicy: IfNotPresent
+          envs:
+            # podmonAPIPort: Defines the port to be used within the kubernetes cluster
+            # Allowed values: Any valid and free port (string)
+            # Default value: 8083
+            - name: "X_CSI_PODMON_API_PORT"
+              value: "8083"
+          args:
+            - "--labelvalue=$LABEL_VALUE"
+            - "--arrayConnectivityPollRate=$POLL_RATE"
+            - "--leaderelection=$LEADER_ELECTION"
+            - "--driverPodLabelValue=$DRIVER_POD_LABEL_VALUE"
+            - "--ignoreVolumelessPods=$IGNORE_VOLUMELESS_PODS"
+            # Below 4 args should not be modified.
+            - "--csisock=unix:/var/lib/kubelet/plugins/powermax.emc.dell.com/csi_sock"
+            - "--mode=node"
+            - "--driver-config-params=/powermax-config-params/driver-config-params.yaml"
+            - "--driverPath=csi-powermax.dellemc.com"

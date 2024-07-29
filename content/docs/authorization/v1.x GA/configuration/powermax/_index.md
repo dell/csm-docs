@@ -55,17 +55,17 @@ Create the karavi-authorization-config secret using this command:
 
     **Helm**
 
-    Refer to the [Install the Driver](../../../deployment/helm/drivers/installation/powermax/#install-the-driver) section where you edit `samples/secret/secret.yaml` with the credentials of the PowerMax. Leave `username` and `password` with the default values as they will be ignored.
+    Refer to the [Install the Driver](../../../../deployment/helm/drivers/installation/powermax/#install-the-driver) section where you edit `samples/secret/secret.yaml` with the credentials of the PowerMax. Leave `username` and `password` with the default values as they will be ignored.
 
     **Operator**
 
-    Refer to the [Install the Driver](../../../deployment/csmoperator/drivers/powermax/#install-driver) section to prepare `powermax-creds.yaml`. Leave `username` and `password` with the default values as they will be ignored.
+    Refer to the [Install the Driver](../../../../deployment/csmoperator/drivers/powermax/#install-driver) section to prepare `powermax-creds.yaml`. Leave `username` and `password` with the default values as they will be ignored.
 
 5. Enable CSM Authorization in the driver installation applicable to your installation method.
 
     **Helm**
 
-    Refer to the [Install the Driver](../../../deployment/helm/drivers/installation/powermax/#install-the-driver) section to edit the parameters in `my-powermax-settings.yaml` file to configure the driver to communicate with the CSM Authorization sidecar.
+    Refer to the [Install the Driver](../../../../deployment/helm/drivers/installation/powermax/#install-the-driver) section to edit the parameters in `my-powermax-settings.yaml` file to configure the driver to communicate with the CSM Authorization sidecar.
 
     - Update `global.storageArrays.endpoint` to match the localhost endpoint in `samples/secret/karavi-authorization-config.json`.
 
@@ -79,6 +79,8 @@ Create the karavi-authorization-config secret using this command:
     
     - Update `authorization.skipCertificateValidation` to `true` or `false` depending on if you want to disable or enable certificate validation of the CSM Authorization Proxy Server.
 
+    - Update `csireverseproxy.deployAsSidecar` to `true`.
+
     Example:
 
     ```yaml
@@ -89,12 +91,20 @@ Create the karavi-authorization-config secret using this command:
       managementServers:
         - endpoint: https://localhost:9400
 
+    csireverseproxy:
+      # Set enabled to true if you want to deploy csireverseproxy as sidecar
+      # Allowed values:
+      #   "true"  - CSI reverse proxy will be deployed as a sidecar
+      #   "false" - CSI reverse proxy will be deployed along with driver
+      # Default value: "true"
+      deployAsSidecar: true
+
     authorization:
       enabled: true
 
       # sidecarProxyImage: the container image used for the csm-authorization-sidecar.
-      # Default value: dellemc/csm-authorization-sidecar:v1.10.0
-      sidecarProxyImage: dellemc/csm-authorization-sidecar:v1.10.0
+      # Default value: dellemc/csm-authorization-sidecar:v1.11.0
+      sidecarProxyImage: dellemc/csm-authorization-sidecar:v1.11.0
 
       # proxyHost: hostname of the csm-authorization server
       # Default value: None
@@ -110,7 +120,7 @@ Create the karavi-authorization-config secret using this command:
 
     **Operator**
 
-    Refer to the [Install Driver](../../../deployment/csmoperator/drivers/powermax/#install-driver) section to edit the parameters in the Custom Resource to enable CSM Authorization.
+    Refer to the [Install Driver](../../../../deployment/csmoperator/drivers/powermax/#install-driver) section to edit the parameters in the Custom Resource to enable CSM Authorization.
 
     Under `modules`, enable the module named `authorization`:
 
@@ -122,18 +132,30 @@ Create the karavi-authorization-config secret using this command:
 
     - Update the `SKIP_CERTIFICATE_VALIDATION` environment value to `true` or `false` depending on if you want to disable or enable certificate validation of the CSM Authorization Proxy Server.
 
+    - Update the `DeployAsSidecar` environment variable for the `csipowermax-reverseproxy` component to `true`.
+
     Example: 
 
     ```yaml
     modules:
+      - name: csireverseproxy
+        # enabled: Always set to true
+        enabled: true
+        forceRemoveModule: true
+        configVersion: v2.10.0
+        components:
+          - name: csipowermax-reverseproxy
+            envs:
+              - name: "DeployAsSidecar"
+                value: "true"
       # Authorization: enable csm-authorization for RBAC
       - name: authorization
         # enable: Enable/Disable csm-authorization
         enabled: true
-        configVersion: v1.10.0
+        configVersion: v1.11.0
         components:
         - name: karavi-authorization-proxy
-          image: dellemc/csm-authorization-sidecar:v1.10.0
+          image: dellemc/csm-authorization-sidecar:v1.11.0
           envs:
             # proxyHost: hostname of the csm-authorization server
             - name: "PROXY_HOST"
@@ -146,4 +168,4 @@ Create the karavi-authorization-config secret using this command:
 
 5. Install the Dell CSI PowerMax driver following the appropriate documenation for your installation method.
 
-6. (Optional) Install [dellctl](../../../support/cli/#installation-instructions) to perform Kubernetes administrator commands for additional capabilities (e.g., list volumes). Please refer to the [dellctl documentation page](../../../support/cli) for the installation steps and command list.
+6. (Optional) Install [dellctl](../../../../support/cli/#installation-instructions) to perform Kubernetes administrator commands for additional capabilities (e.g., list volumes). Please refer to the [dellctl documentation page](../../../../support/cli) for the installation steps and command list.
