@@ -5,6 +5,9 @@ weight: 5
 Description: >
   Release Notes
 ---
+{{% pageinfo color="primary" %}}
+Application Mobility is available with [APEX Navigator for Kubernetes](https://www.dell.com/en-ca/dt/apex/storage/public-cloud/navigator.htm#kubernetes)
+{{% /pageinfo %}}
 
 ## Release Notes - CSM Application Mobility v1.1.0
 
