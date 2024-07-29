@@ -138,3 +138,91 @@ spec:
 ```
 
 *NOTE:* The _spec.dataSource_ clause, specifies a source _VolumeSnapshot_ named _pvol0-snap1_ which matches the snapshot's name in `snap1.yaml`.
+
+## Test creating NFS volumes
+**Steps**
+
+1. Navigate to the test/helm directory, which contains the `starttest.sh` and the _1vol-nfs_ directories. This directory contains a simple Helm chart that will deploy a pod that uses one PowerFlex volumes for NFS filesystem type.
+
+*NOTE:*
+- Helm tests are designed assuming users are using the _storageclass_ name: _vxflexos-nfs_. If your _storageclass_ names differ from these values, please update the templates in 1vol-nfs accordingly (located in `test/helm/1vol-nfs/templates` directory). You can use `kubectl get sc` to check for the _storageclass_ names.
+
+3. Run `sh starttest.sh 1vol-nfs` to deploy the pod. You should see the following:
+```
+Normal  Scheduled  default-scheduler, Successfully assigned helmtest-vxflexos/vxflextest-0 to worker-1-zwfjtd4eoblkg.domain
+Normal  SuccessfulAttachVolume  attachdetach-controller, AttachVolume.Attach succeeded for volume "k8s-e279d47296"
+Normal  Pulled  13s   kubelet, Successfully pulled image "docker.io/centos:latest" in 791.117427ms (791.125522ms including waiting)
+Normal  Created  13s   kubelet, Created container test
+Normal  Started  13s   kubelet, Started container test
+10.x.x.x:/k8s-e279d47296   8388608  1582336   6806272  19% /data0
+10.x.x.x:/k8s-e279d47296 on /data0 type nfs4 (rw,relatime,vers=4.2,rsize=262144,wsize=262144,namlen=255,hard,proto=tcp,timeo=600,retrans=2,sec=sys,clientaddr=10.x.x.x,local_lock=none,addr=10.x.x.x)
+```
+3. To stop the test, run `sh stoptest.sh 1vol-nfs`. This script deletes the pods and the volumes depending on the retention setting you have configured.
+
+**Results**
+
+An outline of this workflow is described below:
+1. The _1vol-nfs_ helm chart contains one PersistentVolumeClaim definition in `pvc0.yaml`. It is referenced by the `test.yaml` which creates the pod. The contents of the `pvc0.yaml` file are described below:
+```yaml
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: pvol0
+  namespace: helmtest-vxflexos
+spec:
+  accessModes:
+    - ReadWriteOnce
+  volumeMode: Filesystem
+  resources:
+    requests:
+      storage: 8Gi
+  storageClassName: vxflexos-nfs
+```
+
+2. The _volumeMode: Filesystem_ requires a mounted file system, and the _resources.requests.storage_ of 8Gi requires an 8 GB file. In this case, the _storageClassName: vxflexos-nfs_ directs the system to use a storage class named _vxflexos-nfs_. This step yields a mounted _nfs_ file system. You can create the _vxflexos-nfs_ storage classes by using the yaml located in samples/storageclass.
+3. To see the volumes you created, run `kubectl get persistentvolumeclaim -n helmtest-vxflexos` and `kubectl describe persistentvolumeclaim -n helmtest-vxflexos`.
+>*NOTE:* For more information about Kubernetes objects like _StatefulSet_ and _PersistentVolumeClaim_ see [Kubernetes documentation: Concepts](https://kubernetes.io/docs/concepts/).
+
+## Test restoring NFS volume from snapshot
+Test the restore operation workflow to restore NFS volume from a snapshot.
+
+**Prerequisites**
+
+Ensure that you have stopped any previous test instance before performing this procedure.
+
+**Steps**
+
+1. Run `sh snaprestoretest-nfs.sh` to start the test.
+
+This script deploys the _1vol-nfs_ example, creates a snap of _pvol0_, and then updates the deployed helm chart from the updated directory _1vols+restore-nfs_. This adds an additional volume that is created from the snapshot.
+
+*NOTE:*
+- Helm tests are designed assuming users are using the _storageclass_ name: _vxflexos-nfs_. If your _storageclass_ names differ from these values, update the templates for 1vols+restore-nfs accordingly (located in `test/helm/1vols+restore-nfs/template` directory). You can use `kubectl get sc` to check for the _storageclass_ names.
+- Helm tests are designed assuming users are using the _snapshotclass_ name: _vxflexos-snapclass_ If your _snapshotclass_ name differs from the default values, update `snap1.yaml` accordingly.
+
+**Results**
+
+An outline of this workflow is described below:
+1. The snapshot is taken using `snap1.yaml`.
+2. _Helm_ is called to upgrade the deployment with a new definition, which is found in the _1vols+restore-nfs_ directory. The `csi-vxflexos/test/helm/1vols+restore-nfs/templates` directory contains the newly created `createFromSnap.yaml` file. The script then creates a _PersistentVolumeClaim_, which is a volume that is dynamically created from the snapshot. Then the helm deployment is upgraded to contain the newly created third volume. In other words, when the `snaprestoretest-nfs.sh` creates a new volume with data from the snapshot, the restore operation is tested. The contents of the `createFromSnap.yaml` are described below:
+
+```yaml
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: restorepvc
+  namespace: helmtest-vxflexos
+spec:
+  storageClassName: vxflexos-nfs
+  dataSource:
+    name: pvol0-snap1
+    kind: VolumeSnapshot
+    apiGroup: snapshot.storage.k8s.io
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 8Gi
+```
+
+*NOTE:* The _spec.dataSource_ clause, specifies a source _VolumeSnapshot_ named _pvol0-snap1_ which matches the snapshot's name in `snap1.yaml`.

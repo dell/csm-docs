@@ -58,7 +58,7 @@ Here is an example of how that would look:
 # Set this to true to enable replication
 replication:
   enabled: true
-  image: dellemc/dell-csi-replicator:v1.2.0
+  image: dellemc/dell-csi-replicator:v1.6.0
   replicationContextPrefix: "powerflex"
   replicationPrefix: "replication.storage.dell.com"
 ...
@@ -71,9 +71,8 @@ for PowerFlex following the usual installation procedure, just ensure you've add
 the array information for all of the arrays being used in the
 [secret](../../../csidriver/installation/helm/powerflex#install-the-driver).
 
-> **_NOTE:_** you need to install your driver at least on the source cluster,
-> but it is recommended to install drivers on all clusters you will use for
-> replication.
+> **_NOTE:_** You need to install your driver on all clusters where you want to use
+replication. Both arrays must be accessible from each cluster.
 
 ### Creating Storage Classes
 
@@ -121,7 +120,7 @@ Let's go through each parameter and what it means:
   the remote storage class. If you are using replication with the multi-cluster
   configuration you can make it the same as the current storage class name.
 * `replication.storage.dell.com/remoteClusterID` represents the ID of a remote
-  cluster. It is the same id you put in the replication controller config map.
+  Kubernetes cluster. It is the same id you put in the replication controller config map.
 * `replication.storage.dell.com/remoteSystem` is the name of the remote system
   as seen from the current PowerFlex instance. This parameter is the systemID of
   the array.

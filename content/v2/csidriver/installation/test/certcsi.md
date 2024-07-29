@@ -7,52 +7,144 @@ description: Tool to validate Dell CSI Drivers
 Cert-CSI is a tool to validate Dell CSI Drivers. It contains various test suites to validate the drivers. 
 
 ## Installation
-To install this tool you can download one of binary files located in [RELEASES](https://github.com/dell/cert-csi/releases)
 
-You can build the tool by cloning the repository and running this command:
+There are three methods of installing `cert-csi`.
+
+1. [Download the executable from the latest GitHub release](#download-release-linux).
+2. [Pull the container image from DockerHub](#pull-the-container-image).
+3. [Build the exectuable or container image locally](#building-locally).
+
+> The exectuable from the GitHub Release only supports Linux. For non-Linux users, you must build the `cert-csi` executable [locally](#building-locally).
+
+### Download Release (Linux)
+> NOTE: Please ensure you delete any previously downloaded Cert-CSI binaries, as each release uses the same name (`cert-csi-linux-amd64`). After installing the latest version, run the `cert-csi -v` command to verify the installed version.
+
+1. Download the latest release of the cert-csi zip file.
+
 ```bash
-make build 
+wget https://github.com/dell/cert-csi/releases/download/v1.3.1/cert-csi-linux-amd64
 ```
 
-You can also build a docker container image by running this command:
-```bash
-docker build -t cert-csi . 
+2. Set the execute permission before running it.
+
+``` bash
+chmod +x ./cert-csi-linux-amd64
 ```
+
+3. Install cert-csi-linux-amd64 as cert-csi.
+
+```bash
+sudo install -o root -g root -m 0755 cert-csi-linux-amd64 /usr/local/bin/cert-csi
+```
+
+If you do not have root access on the target system, you can still install cert-csi to the ~/.local/bin directory:
+
+```bash
+chmod +x ./cert-csi-linux-amd64
+mkdir -p ~/.local/bin
+mv ./cert-csi-linux-amd64 ~/.local/bin/cert-csi
+# and then append (or prepend) ~/.local/bin to $PATH
+```
+
+### Pull The Container Image
+
+   {{< tabs name="pulling-cert-csi-image" >}}
+   {{% tab name="Docker" %}}
+
+   ```bash
+      docker pull dellemc/cert-csi:v1.3.1
+   ```
+
+   {{% /tab %}}
+   {{% tab name="Podman" %}}
+
+   ```bash
+      podman pull dellemc/cert-csi:v1.3.1
+   ```
+
+   {{% /tab %}}
+   {{< /tabs >}}
+
+### Building Locally
+#### Prerequisites
+- [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
+- [Go](https://go.dev/doc/install) (If buidling the executable)
+- Podman or Docker (If building the container image)
+
+1. Clone the repository
+
+```bash
+git clone -b "v1.3.1" https://github.com/dell/cert-csi.git && cd cert-csi
+```
+
+2. Build cert-csi
+
+{{< tabs name="build-cert-csi" >}}
+{{% tab name="Executable" %}}
+
+```bash
+   make build          # the cert-csi executable will be in the working directory
+   chmod +x ./cert-csi # if building on *nix machine
+```
+
+{{% /tab %}}
+{{% tab name="Container Image" %}}
+
+```bash
+  # uses podman if available, otherwise uses docker. The resulting image is tagged cert-csi:latest
+  make docker
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### Optional
 
 If you want to collect csi-driver resource usage metrics, then please provide the namespace where it can be found and install the metric-server using this command (kubectl is required):
 
 ```bash
 make install-ms
 ```
-[FOR UNIX] If you want to build and install the tool to your $PATH and enable the **auto-completion** feature, then run this command:
-
-```bash
-make install-nix
-```
-> Alternatively, you can install the metric-server by following the instructions at https://github.com/kubernetes-incubator/metrics-server
 
 ## Running Cert-CSI
 
-To get information on how to use the program, you can use built-in help. If you're using a UNIX-like system and enabled _auto-completion feature_ while installing the tool, then you can use shell's built-in auto-completion to navigate through program's subcommands and flags interactively by just pressing TAB.
+{{< tabs name="running-cert-csi" >}}
+{{% tab name="Executable" %}}
+```bash
+   cert-csi --help
+```
+{{% /tab %}}
+{{% tab name="Docker" %}}
+```bash
+   docker run --rm -it -v ~/.kube/config:/root/.kube/config dellemc/cert-csi:v1.3.1 --help
+```
+{{% /tab %}}
+{{% tab name="Podman" %}}
+```bash
+   podman run --rm -it -v ~/.kube/config:/root/.kube/config dellemc/cert-csi:v1.3.1 --help
+```
 
-To run cert-csi, you have to point your environment to a kube cluster. This allows you to receive dynamically formatted suggestions from your cluster.
-For example if you press TAB while passing --storageclass (or --sc) argument, the tool will parse all existing Storage Classes from your cluster and suggest them as an input for you. 
+{{% /tab %}}
+{{< /tabs >}}
 
-> To run a docker container your command should look something like this
-> ```bash
->
->   docker run --rm -it -v ~/.kube/config:/root/.kube/config -v $(pwd):/app/cert-csi cert-csi <usual program arguments>
->   ```
+> The following sections showing how to execute the various test suites use the executable for brevity. For executions requiring special behavior, such as mounting file arguments into the container image, it will be noted for the relevant command.
 
-## Driver Certification 
+> Log files are located in the `logs` directory in the working directory of cert-csi.\
+> Report files are located in the default `$HOME/.cert-csi/reports` directory.\
+> Database (SQLite) file for test suites is `<storage-class-name>.db` in the working directory of cert-csi.\
+> Database (SQLite) file for functional test suites is `cert-csi-functional.db` in the working directory of cert-csi.
 
-You can use cert-csi to launch a certification test run against multiple storage classes to check if the driver adheres to advertised capabilities. 
+> NOTE: If using the container image, these files will be inside the container. If you are interested in these files, it is recommended to use the exectuable.
+
+## Run All Test Suites
+
+You can use cert-csi to launch a test run against multiple storage classes to check if the driver adheres to advertised capabilities. 
 
 ### Preparing Config
 
-To run the certification test you need to provide `.yaml` config with storage classes and their capabilities. You can use `example-certify-config.yaml` as an example. 
+To run the test suites you need to provide `.yaml` config with storage classes and their capabilities. You can use `example-certify-config.yaml` as an example. 
 
-Example:
+Template:
 ```yaml
 storageClasses:
   - name: # storage-class-name (ex. powerstore)
@@ -62,157 +154,539 @@ storageClasses:
     clone: # is volume cloning supported (true or false)
     snapshot: # is volume snapshotting supported (true or false)
     RWX: # is ReadWriteMany volume access mode supported for non RawBlock volumes (true or false)
-    volumeHealth: false # set this to enable the execution of the VolumeHealthMetricsSuite.
+    volumeHealth: # set this to enable the execution of the VolumeHealthMetricsSuite (true or false)
     # Make sure to enable healthMonitor for the driver's controller and node pods before running this suite. It is recommended to use a smaller interval time for this sidecar and pass the required arguments.
-    VGS: false # set this to enable the execution of the VolumeGroupSnapSuite.
+    VGS: # set this to enable the execution of the VolumeGroupSnapSuite (true or false)
     # Additionally, make sure to provide the necessary required arguments such as volumeSnapshotClass, vgs-volume-label, and any others as needed.
-    RWOP: false # set this to enable the execution of the MultiAttachSuite with the AccessMode set to ReadWriteOncePod.
-    ephemeral: # if exists, then run EphemeralVolumeSuite
-      driver: # driver name for EphemeralVolumeSuite
+    RWOP: # set this to enable the execution of the MultiAttachSuite with the AccessMode set to ReadWriteOncePod (true or false)
+    ephemeral: # if exists, then run EphemeralVolumeSuite. See the Ephemeral Volumes suite section for example Volume Attributes
+      driver: # driver name for EphemeralVolumeSuite (e.g., csi-vxflexos.dellemc.com)
       fstype: # fstype for EphemeralVolumeSuite
-      volumeAttributes: # volume attrs for EphemeralVolumeSuite. 
+      volumeAttributes: # volume attrs for EphemeralVolumeSuite.
         attr1: # volume attr for EphemeralVolumeSuite
         attr2: # volume attr for EphemeralVolumeSuite
+    capacityTracking:
+      driverNamespace: # namepsace where driver is installed
+      pollInterval:    # duration to poll capacity (e.g., 2m)  
 ```
 
-### Launching Certification Test Run
+Driver specific examples:
 
-After preparing a certification configuration file, you can launch certification by running 
+   {{< tabs name="cerity-config-examples" >}}
+   {{% tab name="CSI PowerFlex" %}}
+
+```yaml
+storageClasses:
+  - name: vxflexos
+    minSize: 8Gi
+    rawBlock: true
+    expansion: true
+    clone: true
+    snapshot: true
+    RWX: false
+    ephemeral:
+      driver: csi-powerstore.dellemc.com
+      fstype: ext4
+      volumeAttributes:
+        volumeName: "my-ephemeral-vol"
+        size: "8Gi"
+        storagepool: "sample"
+        systemID: "sample"
+  - name: vxflexos-nfs
+    minSize: 8Gi
+    rawBlock: false
+    expansion: true
+    clone: true
+    snapshot: true
+    RWX: true
+    RWOP: true
+    ephemeral:
+      driver: csi-vxflexos.dellemc.com
+      fstype: "nfs"
+      volumeAttributes:
+        volumeName: "my-ephemeral-vol"
+        size: "8Gi"
+        storagepool: "sample"
+        systemID: "sample"
+    capacityTracking:
+      driverNamespace: powerstore
+      pollInterval: 2m
+```
+
+   {{% /tab %}}
+   {{% tab name="CSI PowerScale" %}}
+
+```yaml
+storageClasses:
+  - name: isilon
+    minSize: 8Gi
+    rawBlock: false
+    expansion: true
+    clone: true
+    snapshot: true
+    RWX: false
+    ephemeral:
+      driver: csi-isilon.dellemc.com
+      fstype: nfs
+      volumeAttributes:
+        size: "10Gi"
+        ClusterName: "sample"
+        AccessZone: "sample"
+        IsiPath: "/ifs/data/sample"
+        IsiVolumePathPermissions: "0777"
+        AzServiceIP: "192.168.2.1"
+```
+
+   {{% tab name="CSI PowerMax" %}}
+
+```yaml
+storageClasses:
+  - name: powermax-iscsi
+    minSize: 5Gi
+    rawBlock: true
+    expansion: true
+    clone: true
+    snapshot: true
+    capacityTracking:
+      driverNamespace: powerstore
+      pollInterval: 2m
+  - name: powermax-nfs
+    minSize: 5Gi
+    rawBlock: false
+    expansion: true
+    clone: true
+    snapshot: true
+    RWX: true
+    RWOP: true
+    capacityTracking:
+      driverNamespace: powerstore
+      pollInterval: 2m
+```
+
+   {{% /tab %}}
+
+   {{% /tab %}}
+   {{% tab name="CSI PowerStore" %}}
+
+```yaml
+storageClasses:
+  - name: powerstore
+    minSize: 5Gi
+    rawBlock: true
+    expansion: true
+    clone: true
+    snapshot: true
+    RWX: false
+    ephemeral:
+      driver: csi-powerstore.dellemc.com
+      fstype: ext4
+      volumeAttributes:
+        arrayID: "arrayid"
+        protocol: iSCSI
+        size: 5Gi
+  - name: powerstore-nfs
+    minSize: 5Gi
+    rawBlock: false
+    expansion: true
+    clone: true
+    snapshot: true
+    RWX: true
+    RWOP: true
+    ephemeral:
+      driver: csi-powerstore.dellemc.com
+      fstype: "nfs"
+      volumeAttributes:
+        arrayID: "arrayid"
+        protocol: NFS
+        size: 5Gi
+        nasName: "nas-server"
+    capacityTracking:
+      driverNamespace: powerstore
+      pollInterval: 2m
+```
+
+   {{% /tab %}}
+   {{% tab name="CSI Unity" %}}
+
+```yaml
+storageClasses:
+  - name: unity-iscsi
+    minSize: 3Gi
+    rawBlock: true
+    expansion: true
+    clone: false
+    snapshot: true
+    RWX: false
+    ephemeral:
+      driver: csi-unity.dellemc.com
+      fstype: ext4
+      volumeAttributes:
+        arrayId: "array-id"
+        storagePool: pool-name
+        protocol: NFS
+        size: 5Gi
+  - name: unity-nfs
+    minSize: 3Gi
+    rawBlock: false
+    expansion: true
+    clone: false
+    snapshot: true
+    RWX: true
+    RWOP: true
+    ephemeral:
+      driver: csi-unity.dellemc.com
+      fstype: "nfs"
+      volumeAttributes:
+        arrayId: "array-id"
+        storagePool: pool-name
+        protocol: NFS
+        size: 5Gi
+        nasServer: "nas-server"
+        nasName: "nas-name"
+    capacityTracking:
+      driverNamespace: unity
+      pollInterval: 2m
+```
+
+   {{% /tab %}}
+   {{< /tabs >}}
+
+### Launching Test Run
+1. Executes the [VolumeIO](#volume-io) suite.
+2. Executes the [Scaling](#scalability) suite.
+3. If `storageClasses.clone` is `true`, executes the [Volume Cloning](#volume-cloning) suite.
+4. If `storageClasses.expansion` is `true`, executes the [Volume Expansion](#volume-expansion) suite.
+5. If `storageClasses.expansion` is `true` and `storageClasses.rawBlock` is `true`, executes the [Volume Expansion](#volume-expansion) suite with raw block volumes.
+6. If `storageClasses.snapshot` is `true`, exeuctes the [Snapshot](#snapshots) suite and the [Replication](#replication) suite.
+7. If `storageClasses.rawBlock` is `true`, executes the [Multi-Attach Volume](#multi-attach-volume) suite with raw block volumes.
+8. If `storageClasses.rwx` is `true`, executes the [Multi-Attach Volume](#multi-attach-volume) suite. (Storgae Class must be NFS.)
+9. If `storageClasses.volumeHealth` is `true`, executes the [Volume Health Metrics](#volume-health-metrics) suite.
+10. If `storageClasses.rwop` is `true`, executes the [Multi-Attach Volume](#multi-attach-volume) suite with the volume access mode `ReadWriteOncePod`.
+11. If `storageClasses.ephemeral` exists, executes the [Ephemeral Volumes](#ephemeral-volumes) suite.
+12. If `storageClasses.vgs` is `true`, executes the [Volume Group Snapshot]() suite.
+13. If `storageClasses.capacityTracking` exists, exeuctes the [Storage Class Capacity Tracking](#storage-capacity-tracking) suite.
+
+> NOTE: For testing/debugging purposes, it can be useful to use the `--no-cleanup` so resources do not get deleted.
+
+> NOTE: If you are using CSI PowerScale with [SmartQuotas](../../../features/powerscale/#usage-of-smartquotas-to-limit-storage-consumption) disabled, the `Volume Expansion` suite is expected to timeout due to the way PowerScale provisions storage. Set `storageClasses.expansion` to `false` to skip this suite.
+
+```bash
+cert-csi certify --cert-config <path-to-config> --vsc <volume-snapshot-class>
+```
+
+Withold the `--vsc` argument if Snapshot capabilities are disabled.
+
 ```bash
 cert-csi certify --cert-config <path-to-config>
 Optional Params:
    --vsc: volume snapshot class, required if you specified snapshot capability
-   --timeout: set the timeout value for certification suites
-   --no-metrics: disables metrics aggregation (set if you encounter k8s performance issues)
-   --path: path to folder where reports will be created (if not specified ~/.cert-csi/ will be used)
 ```
 
-## Functional Tests
+Run `cert-csi certify -h` for more options.
 
-### Running Individual Suites
-#### Volume/PVC Creation
+If you are using the container image, the `cert-config` file must be mounted into the container. Assuming your `cert-config` file is `/home/user/example-certify-config.yaml`, here are examples of how to exeucte this suite with the container image.
 
-To run volume or PVC creation test suite, run the command:
+{{< tabs name="running-container-certify" >}}
+{{% tab name="Docker" %}}
 ```bash
-cert-csi functional-test volume-creation --sc <storage class> -n 5
-Optional Params:
---custom-name : To give custom name for PVC while creating only 1 PVC
---size : To give custom size, possible values for size in Gi/Mi
---access-mode : To set custom access-modes, possible values - ReadWriteOnce,ReadOnlyMany and ReadWriteMany
---block : To create raw block volumes
+   docker run --rm -it -v ~/.kube/config:/root/.kube/config -v /home/user/example-certify-config.yaml:/example-certify-config.yaml dellemc/cert-csi:v1.3.1 certify --cert-config /example-certify-config.yaml --vsc <volume-snapshot-class>
+```
+{{% /tab %}}
+{{% tab name="Podman" %}}
+```bash
+   podman run --rm -it -v ~/.kube/config:/root/.kube/config -v /home/user/example-certify-config.yaml:/example-certify-config.yaml dellemc/cert-csi:v1.3.1 certify --cert-config /example-certify-config.yaml --vsc <volume-snapshot-class>
 ```
 
-#### Provisioning/Pod creation
+{{% /tab %}}
+{{< /tabs >}}
 
-To run volume provisioning or pod creation test suite, run the command:
+### Running Invidual Test Suites
+
+> NOTE: For testing/debugging purposes, it can useful to use the `--no-cleanup` flag so resources do not get deleted.
+
+#### Volume I/O
+1. Creates the namespace `volumeio-test-*` where resources will be created.
+2. Creates Persistent Volume Claims.
+3. If the specified storage class binding mode is not `WaitForFirstConsumer`, waits for Persistent Volume Claims to be bound to Persistent Volumes.
+4. For each Persistent Volume Claim, executes the following workflow concurrently:
+   1. Creates a Pod to consume the Persistent Volume Claim.
+   2. Writes data to the volume and verifies the checksum of the data.
+   3. Deletes the Pod.
+   4. Waits for the associated Volume Attachment to be deleted.
+
 ```bash
-cert-csi functional-test provisioning --sc <storage class>
-Optional Params:
---volumeNumber : number of volumes to attach to each pod 
---podNumber : number of pod to create
---podName : To give custom name for pod while creating only 1 pod
---block : To create raw block volumes and attach it to pods
---vol-access-mode: To set volume access modes 
+cert-csi test vio --sc <storage class>
 ```
 
-#### Running Volume Deletion suite
+Run `cert-csi test vio -h` for more options.
 
-To run volume delete test suite, run the command:
+#### Scalability
+1. Creates the namespace `scale-test-*` where resources will be created.
+2. Creates a StatefulSet.
+3. Scales up the StatefulSet.
+4. Scales down the StatefulSet to zero.
+
 ```bash
-cert-csi functional-test volume-deletion
---pvc-name value : PVC name to delete
---pvc-namespace : PVC namespace where PVC is present
+cert-csi test scaling --sc <storage class>
 ```
 
-#### Running Pod Deletion suite
+Run `cert-csi test scaling -h` for more options.
 
-To run pod deletion test suite, run the command:
+#### Snapshots
+1. Creates the namespace `snap-test-*` where resources will be created.
+2. Creates Persistent Volume Claim.
+3. If the specified storage class binding mode is not `WaitForFirstConsumer`, waits for Persistent Volume Claim to be bound to Persistent Volumes.
+4. Create Pod to consume the Persistent Volume Claim.
+5. Writes data to the volume.
+6. Deletes the Pod.
+7. Creates a Volume Snapshot from the Persistent Volume Claim.
+8. Waits for the Volume Snapshot to be Ready.
+9. Creates a new Persistent Volume Claim from the Volume Snapshot.
+10. Creates a new Pod to consume the new Persistent Volume Claim.
+11. Verifies the checksum of the data.
+
 ```bash
-cert-csi functional-test pod-deletion
---pod-name : Pod name to delete
---pod-namespace : Pod namespace where pod is present
+cert-csi test snap --sc <storage class> --vsc <volume snapshot class> 
 ```
 
-#### Running Cloned Volume deletion suite
+Run `cert-csi test snap -h` for more options.
 
-To run cloned volume deletion test suite, run the command:
+#### Volume Group Snapshots
+1. Creates the namespace `vgs-snap-test-*` where resources will be created.
+2. Creates Persistent Volume Claims.
+3. If the specified storage class binding mode is not `WaitForFirstConsumer`, waits for Persistent Volume Claim to be bound to Persistent Volumes.
+4. Create Pods to consume the Persistent Volume Claims.
+5. Creates Volume Group Snapshot.
+6. Waits for Volume Group Snapshot state to be COMPLETE.
+
+> Note: Volume Group Snapshots are only supported by CSI PowerFlex and CSI PowerStore.
+
+#### Multi-Attach Volume
+1. Creates the namespace `mas-test-*` where resources will be created.
+2. Creates Persistent Volume Claim.
+3. Creates Pod to consume the Persistent Volume Claim.
+4. Waits for Pod to be in the Ready state.
+5. Creates additional Pods to consume the same Persistent Volume Claim.
+6. Watis for Pods to be in the Ready state.
+7. Writes data to the volumes on the Pods and verifies checksum of the data.
+
 ```bash
-cert-csi functional-test clone-volume-deletion
---clone-volume-name : Volume name to delete
+cert-csi test multi-attach-vol --sc <storage class>
 ```
 
-#### Multi Attach Volume Tests
+> The storage class must be an NFS storage class. Otherwise, raw block volumes must be used.
 
-To run multi-attach volume test suite, run the command:
 ```bash
-cert-csi functional-test multi-attach-vol --sc <storage-class>
---pods : Number of pods to create
---block : To create raw block volume 
+cert-csi test multi-attach-vol --sc <storage class> --block
 ```
 
-#### Ephemeral volumes suite
+Run `cert-csi test multi-attach-vol -h` for more options.
 
-To run ephemeral volume test suite, run the command:
+#### Replication
+1. Creates the namespace `replication-suite-*` where resources will be created.
+2. Creates Persistent Volume Claims.
+3. Create Pods to consume the Persistent Volume Claims.
+4. Waits for Pods to be in the Ready state.
+5. Creates a Volume Snapshot from each Persistent Volume Claim.
+6. Waits for the Volume Snapshots to be Ready.
+7. Creates Persistent Volume Claims from the Volume Snapshots.
+8. Creates Pods to consume the Persistent Volume Claims.
+9. Waits for Pods to be in the Ready state.
+10. Verifies the replication group name on ersistent Volume Claims.
+
 ```bash
+cert-csi test replication --sc <storage class> --vsc <snapshot class> 
+```
 
-cert-csi functional-test ephemeral-volume --driver <driver-name> --attr ephemeral-config.properties
---pods : Number of pods to create 
---pod-name : To create pods with custom name
---attr : CSI volume attributes file name
---fs-type: FS Type can be specified
+Run `cert-csi test replication -h` for more options.
+
+#### Volume Cloning
+1. Creates the namespace `clonevolume-suite-*` where resources will be created.
+2. Creates Persistent Volume Claims.
+3. Create Pods to consume the Persistent Volume Claims.
+4. Waits for Pods to be in the Ready state.
+5. Creates Persistent Volume Claims with the source volume being from the volumes in step 2.
+6. Create Pods to consume the Persistent Volume Claims.
+7. Waits for Pods to be in the Ready state.
+
+```bash
+cert-csi test clone-volume --sc <storage class>
+```
+
+Run `cert-csi test clone-volume -h` for more options.
+
+#### Volume Expansion
+1. Creates the namespace `volume-expansion-suite-*` where resources will be created.
+2. Creates Persistent Volume Claims.
+3. Create Pods to consume the Persistent Volume Claims.
+4. Waits for Pods to be in the Ready state.
+5. Expands the size in the Persistent Volume Claims.
+6. Verifies that the volumes mounted to the Pods were expanded.
+
+> Raw block volumes cannot be verified since there is no filesystem.
+
+> If you are using CSI PowerScale with [SmartQuotas](../../../features/powerscale/#usage-of-smartquotas-to-limit-storage-consumption) disabled, the `Volume Expansion` suite is expected to timeout due to the way PowerScale provisions storage.
+
+```bash
+cert-csi test expansion --sc <storage class>
+```
+
+Run `cert-csi test expansion -h` for more options.
+
+#### Blocksnap suite
+1. Creates the namespace `block-snap-test-*` where resources will be created.
+2. Creates Persistent Volume Claim.
+3. If the specified storage class binding mode is not `WaitForFirstConsumer`, waits for Persistent Volume Claim to be bound to Persistent Volumes.
+4. Creates Pod to consume the Persistent Volume Claim.
+5. Writes data to the volume. 
+5. Creates a Volume Snapshot from the Persistent Volume Claim.
+6. Waits for the Volume Snapshot to be Ready.
+7. Create a Persistent Volume Claim with raw block volume mode from the Volume Snapshot.
+8. Creates Pod to consume the Persistent Volume Claim.
+9. Mounts the raw block volume and verifes the checksum of the data.
+
+```bash
+cert-csi test blocksnap --sc <storageClass> --vsc <snapshotclass>
+```
+
+Run `cert-csi test blocksnap -h` for more options.
+
+#### Volume Health Metrics
+1. Creates the namespace `volume-health-metrics-*` where resources will be created.
+2. Creates Persistent Volume Claim.
+3. Creates Pod to consume the Persistent Volume Claim.
+4. Waits for Pod to be in the Ready state.
+4. Veries that ControllerGetVolume and NodeGetVolumeStats are being executed in the controller and node pods, respectively.
+
+```bash
+cert-csi test volumehealthmetrics --sc <storage-class> --driver-ns <driver-namespace>
+```
+
+Run `cert-csi test volumehealthmetrics -h` for more options.
+
+> Note: Make sure to enable healthMonitor for the driver's controller and node pods before running this suite. It is recommended to use a smaller interval time for this sidecar.
+
+#### Ephemeral Volumes
+1. Creates namespace `functional-test` where resources will be created.
+2. Creates Pods with one ephemeral inline volume each.
+3. Waits for Pods to be in the Ready state.
+4. Writes data to the volume on each Pod.
+5. Verifies the checksum of the data.
+
+```bash
+cert-csi test ephemeral-volume --driver <driver-name> --attr ephemeral-config.properties
+```
+
+Run `cert-csi test ephemeral-volume -h` for more options.
+
+> `--driver` is the name of a CSI Driver from the output of `kubectl get csidriver` (e.g, csi-vxflexos.dellemc.com).
+> This suite does not delete resources on success.
+
+If you are using the container image, the `attr` file must be mounted into the container. Assuming your `attr` file is `/home/user/ephemeral-config.properties`, here are examples of how to exeucte this suite with the container image.
+
+{{< tabs name="running-container-ephemeral-volume" >}}
+{{% tab name="Docker" %}}
+```bash
+   docker run --rm -it -v ~/.kube/config:/root/.kube/config -v /home/user/ephemeral-config.properties:/ephemeral-config.properties dellemc/cert-csi:v1.3.1 test ephemeral-volume --driver <driver-name> --attr /ephemeral-config.properties
+```
+{{% /tab %}}
+{{% tab name="Podman" %}}
+```bash
+   podman run --rm -it -v ~/.kube/config:/root/.kube/config -v /home/user/ephemeral-config.properties:/ephemeral-config.properties dellemc/cert-csi:v1.3.1 test ephemeral-volume --driver <driver-name> --attr /ephemeral-config.properties
+```
+
+{{% /tab %}}
+{{< /tabs >}}
 
 Sample ephemeral-config.properties (key/value pair)
-arrayId=arr1
-protocol=iSCSI
-size=5Gi
-```
+   {{< tabs name="volume-attributes-examples" >}}
+   {{% tab name="CSI PowerFlex" %}}
 
-#### Storage Capacity Tracking Suite
+   ```yaml
+   volumeName=my-ephemeral-vol
+   size=10Gi
+   storagepool=sample
+   systemID=sample
+   ```
 
-To run storage capacity tracking test suite, run the command:
+   {{% /tab %}}
+   {{% tab name="CSI PowerScale" %}}
+
+   ```yaml
+   size=10Gi
+   ClusterName=sample
+   AccessZone=sample
+   IsiPath=/ifs/data/sample
+   IsiVolumePathPermissions=0777
+   AzServiceIP=192.168.2.1
+   ```
+
+   {{% /tab %}}
+   {{% tab name="CSI PowerStore" %}}
+
+   ```yaml
+   size=10Gi
+   arrayID=sample
+   nasName=sample
+   nfsAcls=0777
+   ```
+
+   {{% /tab %}}
+   {{% tab name="CSI Unity" %}}
+
+   ```yaml
+   size=10Gi
+   arrayId=sample
+   protocol=iSCSI
+   thinProvisioned=true
+   isDataReductionEnabled=false
+   tieringPolicy=1
+   storagePool=pool_2
+   nasName=sample
+   ```
+
+   {{% /tab %}}
+   {{< /tabs >}}
+
+
+#### Storage Capacity Tracking
+1. Creates namespace `functional-test` where resources will be created.
+2. Creates a duplicate of the provided storge class using prefix `capacity-tracking`.
+3. Waits for the associated CSIStorageCapacity object to be created.
+4. Deletes the duplicate storge class.
+5. Waits for the associated CSIStorageCapacity to be deleted.
+6. Sets the capacity of the CSIStorageCapacity of the provided storage class to zero.
+7. Creates Pod with a volume using the provided storage class.
+8. Verifies that the Pod is in the Pending state.
+9. Waits for storage capacity to be polled by the driver.
+10. Waits for Pod to be Running.
+
+> Storage class must use volume binding mode `WaitForFirstConsumer`.\
+> This suite does not delete resources on success.
+
 ```bash
-
-cert-csi functional-test capacity-tracking --sc <storage-class> --drns <driver-namespace> --pi <poll-interval>
-Optional Params:
---vs : volume size to be created
+cert-csi functional-test capacity-tracking --sc <storage-class> --drns <driver-namespace>
 ```
 
-### Other Options
+Run `cert-csi test capacity-tracking -h` for more options.
 
-#### Generating tabular report from DB
-
-To generate tabular report from the database, run the command:
-```bash
-cert-csi -db <db_path> functional-report -tabular
-Example: cert-csi -db ./test.db functional-report -tabular
-```
-> Note: DB is mandatory parameter
-
-#### Generating XML report from DB
-
-To generate XML report from the database, run the command:
-```bash
-cert-csi -db <db_path> functional-report -xml
-Example: cert-csi -db ./test.db functional-report -xml
-```
-> Note: DB is mandatory parameter
-
-#### Including Array configuration file 
+### Running Longevity mode
 
 ```bash
-# Array properties sample (array-config.properties)
-arrayIPs: 192.168.1.44
-name: Unity
-user: root
-password: test-password
-arrayIds: arr-1
+cert-csi test <suite-name> --sc <storage class> --longevity <number of iterations>
 ```
+### Use configurable container images
 
-### Screenshots
+To use custom images for creating containers pass an image config YAML file as an argument. The YAML file should have linux(test) and postgres images name with their corresponding image URL. For example
 
-Tabular Report example
+Example:
+```yaml
+images:
+  - test: "docker.io/centos:centos7" # change this to your url
+    postgres: "docker.io/bitnami/postgresql:11.8.0-debian-10-r72" # change this to your url
+```
+To use this feature, run cert-csi with the option `--image-config /path/to/config.yaml` along with any other arguments.
 
-![img9](../img/tabularReport.png)
 
 ## Kubernetes End-To-End Tests
 All Kubernetes end to end tests require that you provide the driver config based on the storage class you want to test and the version of the kubernetes you want to test against. These are the mandatory parameters that you can provide in command like..
@@ -221,7 +695,6 @@ All Kubernetes end to end tests require that you provide the driver config based
  ```
 
 ### Running kubernetes end-to-end tests
-
 To run kubernetes end-to-end tests, run the command:
 ```bash
 
@@ -248,128 +721,6 @@ cert-csi k8s-e2e --config <kube config> --driver-config <path to driver config> 
    ./cert-csi k8s-e2e --config "/root/.kube/config" --driver-config "/root/e2e_config/config-iscsi.yaml" --focus "External.Storage.*"  --timeout "2h" --version "v1.25.0" --focus-file "capacity.go"
    ```
 
-## Performance Tests
-
-All performance tests require that you provide a storage class that you want to test. You can provide multiple storage classes in one command. For example, 
-```bash
-... --sc <sc1> --sc <sc2> ...
-```
-
-### Running Individual Suites 
-#### Running Volume Creation test suite
-
-To run volume creation test suite, run the command:
-```bash
-cert-csi test volume-creation --sc <storage class> -n 25
-```
-
-#### Running Provisioning test suite
-
-To run volume provisioning test suite, run the command:
-```bash
-cert-csi test provisioning --sc <storage class> --podNum 1 --volNum 10
-```
-
-#### Running Scalability test suite
-
-To run scalability test suite, run the command:
-```bash
-cert-csi test scaling --sc <storage class> --replicas 5
-```
-
-#### Running VolumeIO test suite
-
-To run volumeIO test suite, run the command:
-```bash
-cert-csi test vio --sc <storage class> --chainNumber 5 --chainLength 20
-```
-
-#### Running Snap test suite
-
-To run volume snapshot test suite, run the command:
-```bash
-cert-csi test snap --sc <storage class> --vsc <volume snapshot class> 
-```
-
-#### Running Multi-attach volume suite
-
-To run multi-attach volume test suite, run the command: 
-```bash
-cert-csi test multi-attach-vol --sc <storage class> --podNum 3
-```
-```bash
-
-cert-csi test multi-attach-vol --sc <storage class> --podNum 3 --block # to use raw block volumes
-```
-
-#### Running Replication test suite
-
-To run replication test suite, run the command:
-```bash
-
-cert-csi test replication --sc <storage class> --pn 1 --vn 5 --vsc <snapshot class> 
-```
-
-#### Running Volume Cloning test suite
-
-To run volume cloning test suite, run the command:
-```bash
-cert-csi test clone-volume --sc <storage class> --pn 1 --vn 5
-```
-
-#### Running Volume Expansion test suite
-
-To run volume expansion test, run the command:
-```bash
-
-cert-csi test expansion --sc <storage class> --pn 1 --vn 5 --iSize 8Gi --expSize 16Gi
-
-cert-csi test expansion --sc <storage class> --pn 1 --vn 5 # `iSize` and `expSize` default to 3Gi and 6Gi respectively
-
-cert-csi test expansion --sc <storage class> --pn 1 --vn 5 --block # to create block volumes
-```
-
-#### Running Blocksnap suite
-
-To run block snapshot test suite, run the command:
-```bash
-cert-csi test blocksnap --sc <storageClass> --vsc <snapshotclass>
-```
-
-#### Volume Health Metric Suite
-
-To run the volume health metric test suite, run the command:
-```bash
-
-cert-csi test volumehealthmetrics --sc <storage-class> --driver-ns <driver-namespace> --podNum <number-of-pods> --volNum <number-of-volumes>
-```
-
-> Note: Make sure to enable healthMonitor for the driver's controller and node pods before running this suite. It is recommended to use a smaller interval time for this sidecar.
-
-#### Ephemeral volumes suite
-
-To run the ephemeral volume test suite, run the command:
-```bash
-cert-csi test ephemeral-volume --driver <driver-name> --attr ephemeral-config.properties
---pods : Number of pods to create 
---pod-name : Create pods with custom name
---attr : File name for the CSI volume attributes file (required)
---fs-type: FS Type
-
-Sample ephemeral-config.properties (key/value pair)
-arrayId=arr1
-protocol=iSCSI
-size=5Gi
-```
-
-### Running Longevity mode
-
-To run longevity test suite, run the command:
-```bash
-
-cert-csi test <any of previous tests> --sc <storage class> --longevity <number of iterations>
-```
-
 ### Interacting with DB 
 
 #### Generating report from runs without running tests
@@ -382,6 +733,16 @@ Report types:
 --txt: performance txt report
 --xml: junit compatible xml report, contains basic run infomation
 --tabular: tidy html report with basic run information
+```
+
+To generate tabular report from the database, run the command:
+```bash
+cert-csi -db ./cert-csi-functional.db functional-report -tabular
+```
+
+To generate XML report from the database, run the command:
+```bash
+cert-csi -db ./cert-csi-functional.db functional-report -xml
 ```
 
 #### Customizing report folder
@@ -469,6 +830,10 @@ It will stop polling and try to cleanup resources.
 Text report example
 
 ![img7](../img/textReport.png)
+
+Tabular Report example
+
+![img9](../img/tabularReport.png)
 
 ### HTML report example
 

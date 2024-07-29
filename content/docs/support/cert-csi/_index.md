@@ -31,7 +31,7 @@ There are three methods of installing `cert-csi`.
 1. Download the latest release of the cert-csi zip file.
 
 ```bash
-wget https://github.com/dell/cert-csi/releases/download/v1.4.1/cert-csi-linux-amd64
+wget https://github.com/dell/cert-csi/releases/download/v1.5.0/cert-csi-linux-amd64
 ```
 
 2. Set the execute permission before running it.
@@ -61,14 +61,14 @@ mv ./cert-csi-linux-amd64 ~/.local/bin/cert-csi
    {{% tab name="Docker" %}}
 
    ```bash
-      docker pull dellemc/cert-csi:v1.4.1
+      docker pull dellemc/cert-csi:v1.5.0
    ```
 
    {{% /tab %}}
    {{% tab name="Podman" %}}
 
    ```bash
-      podman pull dellemc/cert-csi:v1.4.1
+      podman pull dellemc/cert-csi:v1.5.0
    ```
 
    {{% /tab %}}
@@ -83,7 +83,7 @@ mv ./cert-csi-linux-amd64 ~/.local/bin/cert-csi
 1. Clone the repository
 
 ```bash
-git clone -b "v1.4.1" https://github.com/dell/cert-csi.git && cd cert-csi
+git clone -b "v1.5.0" https://github.com/dell/cert-csi.git && cd cert-csi
 ```
 
 2. Build cert-csi
@@ -125,12 +125,12 @@ make install-ms
 {{% /tab %}}
 {{% tab name="Docker" %}}
 ```bash
-   docker run --rm -it -v ~/.kube/config:/root/.kube/config dellemc/cert-csi:v1.4.1 --help
+   docker run --rm -it -v ~/.kube/config:/root/.kube/config dellemc/cert-csi:v1.5.0 --help
 ```
 {{% /tab %}}
 {{% tab name="Podman" %}}
 ```bash
-   podman run --rm -it -v ~/.kube/config:/root/.kube/config dellemc/cert-csi:v1.4.1 --help
+   podman run --rm -it -v ~/.kube/config:/root/.kube/config dellemc/cert-csi:v1.5.0 --help
 ```
 
 {{% /tab %}}
@@ -397,12 +397,12 @@ If you are using the container image, the `cert-config` file must be mounted int
 {{< tabs name="running-container-certify" >}}
 {{% tab name="Docker" %}}
 ```bash
-   docker run --rm -it -v ~/.kube/config:/root/.kube/config -v /home/user/example-certify-config.yaml:/example-certify-config.yaml dellemc/cert-csi:v1.4.1 certify --cert-config /example-certify-config.yaml --vsc <volume-snapshot-class>
+   docker run --rm -it -v ~/.kube/config:/root/.kube/config -v /home/user/example-certify-config.yaml:/example-certify-config.yaml dellemc/cert-csi:v1.5.0 certify --cert-config /example-certify-config.yaml --vsc <volume-snapshot-class>
 ```
 {{% /tab %}}
 {{% tab name="Podman" %}}
 ```bash
-   podman run --rm -it -v ~/.kube/config:/root/.kube/config -v /home/user/example-certify-config.yaml:/example-certify-config.yaml dellemc/cert-csi:v1.4.1 certify --cert-config /example-certify-config.yaml --vsc <volume-snapshot-class>
+   podman run --rm -it -v ~/.kube/config:/root/.kube/config -v /home/user/example-certify-config.yaml:/example-certify-config.yaml dellemc/cert-csi:v1.5.0 certify --cert-config /example-certify-config.yaml --vsc <volume-snapshot-class>
 ```
 
 {{% /tab %}}
@@ -595,12 +595,12 @@ If you are using the container image, the `attr` file must be mounted into the c
 {{< tabs name="running-container-ephemeral-volume" >}}
 {{% tab name="Docker" %}}
 ```bash
-   docker run --rm -it -v ~/.kube/config:/root/.kube/config -v /home/user/ephemeral-config.properties:/ephemeral-config.properties dellemc/cert-csi:v1.4.1 test ephemeral-volume --driver <driver-name> --attr /ephemeral-config.properties
+   docker run --rm -it -v ~/.kube/config:/root/.kube/config -v /home/user/ephemeral-config.properties:/ephemeral-config.properties dellemc/cert-csi:v1.5.0 test ephemeral-volume --driver <driver-name> --attr /ephemeral-config.properties
 ```
 {{% /tab %}}
 {{% tab name="Podman" %}}
 ```bash
-   podman run --rm -it -v ~/.kube/config:/root/.kube/config -v /home/user/ephemeral-config.properties:/ephemeral-config.properties dellemc/cert-csi:v1.4.1 test ephemeral-volume --driver <driver-name> --attr /ephemeral-config.properties
+   podman run --rm -it -v ~/.kube/config:/root/.kube/config -v /home/user/ephemeral-config.properties:/ephemeral-config.properties dellemc/cert-csi:v1.5.0 test ephemeral-volume --driver <driver-name> --attr /ephemeral-config.properties
 ```
 
 {{% /tab %}}
@@ -611,46 +611,46 @@ Sample ephemeral-config.properties (key/value pair)
    {{% tab name="CSI PowerFlex" %}}
 
    ```yaml
-   volumeName: "my-ephemeral-vol"
-   size: "10Gi"
-   storagepool: "sample"
-   systemID: "sample"
+   volumeName=my-ephemeral-vol
+   size=10Gi
+   storagepool=sample
+   systemID=sample
    ```
 
    {{% /tab %}}
    {{% tab name="CSI PowerScale" %}}
 
    ```yaml
-   size: "10Gi"
-   ClusterName: "sample"
-   AccessZone: "sample"
-   IsiPath: "/ifs/data/sample"
-   IsiVolumePathPermissions: "0777"
-   AzServiceIP: "192.168.2.1"
+   size=10Gi
+   ClusterName=sample
+   AccessZone=sample
+   IsiPath=/ifs/data/sample
+   IsiVolumePathPermissions=0777
+   AzServiceIP=192.168.2.1
    ```
 
    {{% /tab %}}
    {{% tab name="CSI PowerStore" %}}
 
    ```yaml
-   size: "10Gi"
-   arrayID: "sample"
-   nasName: "sample"
-   nfsAcls: "0777"
+   size=10Gi
+   arrayID=sample
+   nasName=sample
+   nfsAcls=0777
    ```
 
    {{% /tab %}}
    {{% tab name="CSI Unity" %}}
 
    ```yaml
-   size: "10Gi"
-   arrayID: "sample"
-   protocol: iSCSI
-   thinProvisioned: "true"
-   isDataReductionEnabled: "false"
-   tieringPolicy: "1"
-   storagePool: pool_2
-   nasName: "sample"
+   size=10Gi
+   arrayId=sample
+   protocol=iSCSI
+   thinProvisioned=true
+   isDataReductionEnabled=false
+   tieringPolicy=1
+   storagePool=pool_2
+   nasName=sample
    ```
 
    {{% /tab %}}

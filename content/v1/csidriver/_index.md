@@ -12,30 +12,11 @@ The CSI Drivers by Dell implement an interface between [CSI](https://kubernetes-
 
 ## Features and capabilities
 
-### Supported Container Orchestrator Platforms
-
-{{<table "table table-striped table-bordered table-sm">}}
-|               | PowerMax         | PowerFlex           | Unity XT         | PowerScale        | PowerStore       |
-|---------------|:----------------:|:-------------------:|:----------------:|:-----------------:|:----------------:|
-| Kubernetes    | 1.26, 1.27, 1.28 | 1.26, 1.27, 1.28    | 1.26, 1.27, 1.28 | 1.26, 1.27, 1.28  | 1.26, 1.27, 1.28 |
-| Red Hat OpenShift | 4.13, 4.14 | 4.13, 4.14 | 4.13, 4.14 | 4.13, 4.14 | 4.13, 4.14 |
-| Mirantis Kubernetes Engine | 3.6.x |     3.6.x         |       3.6.x      | 3.5.x, 3.6.x      |        3.6.x     |
-| Google Anthos |        1.15      |          1.15       |        no        |         1.15      |        1.15      |
-| VMware Tanzu  |        no        |          no         |        NFS       |         NFS       |      NFS,iSCSI   |
-| Rancher Kubernetes Engine | 1.4.x|          1.4.x      |        1.4.x     |         1.4.x     |      1.4.x       |
-| Amazon Elastic Kubernetes Service<br> Anywhere | yes  | yes  |   yes      |        yes        |      yes         |
-| OS dependencies | iscsi-initiator-utils<br>multipathd or powerpath<br>nvme-cli<br>nfs-utils | [SDC](https://www.dell.com/support/home/en-us/product-support/product/scaleio/drivers) |    iscsi-initiator-utils<br>multipathd<br>nfs-utils | nfs-utils | iscsi-initiator-utils<br>multipathd<br>nvme-cli<br>nfs-utils |
-{{</table>}}
-
-> Notes:
-> * The required OS dependencies are only for the protocol needed (e.g. if NVMe isn't the storage access protocol then nvme-cli is not required).
-> * The host operating system/version being used must align with what each Dell Storage platform supports. Please visit [E-Lab Navigator](https://elabnavigator.dell.com/eln/modernHomeSSM) for specific Dell Storage platform host operating system level support matrices.
-
 ### CSI Driver Capabilities
 {{<table "table table-striped table-bordered table-sm">}}
 | Features                 | PowerMax | PowerFlex | Unity XT  | PowerScale | PowerStore |
 |--------------------------|:--------:|:---------:|:---------:|:----------:|:----------:|
-| CSI Driver version       | 2.9.1    | 2.9.2     | 2.9.1     | 2.9.1      | 2.9.1      |
+| CSI Driver version       | 2.10.1   | 2.10.1    | 2.10.1    | 2.10.1     | 2.10.1     |
 | Static Provisioning      | yes      | yes       | yes       | yes        | yes        |
 | Dynamic Provisioning     | yes      | yes       | yes       | yes        | yes        |
 | Expand Persistent Volume | yes      | yes       | yes       | yes        | yes        |
@@ -53,12 +34,6 @@ The CSI Drivers by Dell implement an interface between [CSI](https://kubernetes-
 | Storage Capacity Tracking | yes     | yes       | yes       | yes        | yes        |
 | Volume Limit             | yes      | yes       | yes       | yes        | yes        |
 {{</table>}}
-### Supported Storage Platforms
-{{<table "table table-striped table-bordered table-sm">}}
-|               | PowerMax                                                | PowerFlex        | Unity XT                   | PowerScale                         |    PowerStore    |
-|---------------|:-------------------------------------------------------:|:----------------:|:--------------------------:|:----------------------------------:|:----------------:|
-| Storage Array | PowerMax 2500/8500 PowerMaxOS 10 (6079) , PowerMaxOS 10.0.1 (6079) , PowerMaxOS 10.1 (6079)<br> PowerMax 2000/8000 - 5978.711.xxx, 5978.479.xxx <br>Unisphere 10.0,10.0.1,10.1 |    3.6.x, 4.0.x, 4.5.x  | 5.1.x, 5.2.x, 5.3.0 | OneFS 9.3, 9.4, 9.5.0.x (x >= 5) | 3.0, 3.2, 3.5     |
-{{</table>}}
 
 ### Backend Storage Details
 {{<table "table table-striped table-bordered table-sm">}}
@@ -74,12 +49,4 @@ The CSI Drivers by Dell implement an interface between [CSI](https://kubernetes-
 | Thin / Thick provisioning | Thin | Thin               | Thin/Thick       | N/A              | Thin             |
 | Platform-specific configurable settings | Service Level selection<br>iSCSI CHAP | - | Host IO Limit<br>Tiering Policy<br>NFS Host IO size<br>Snapshot Retention duration | Access Zone<br>NFS version (3 or 4);Configurable Export IPs | iSCSI CHAP |
 | Auto RDM(vSphere)  | Yes(over FC) | N/A               | N/A              | N/A              | N/A              |
-{{</table>}}
-
-### Community Qualified Platforms
-{{<table "table table-striped table-bordered table-sm">}}
-| cert-csi results                                       | OS         | CO               | Storage Platform        | Protocol  | CSM        |
-|--------------------------------------------------------|:----------:|:----------------:|:-----------------------:|:---------:|:----------:|
-| [Ticket 1079](https://github.com/dell/csm/issues/1079) | Debian 10  | K3s v1.24.7+k3s1 | Unity VSA 5.3.1.0.5.008 | iSCSI     | CSI v1.8.0 |
-
 {{</table>}}

@@ -7,7 +7,7 @@ weight: 3
 ---
 
   - [Can CSM Operator manage existing drivers installed using Helm charts or the Dell CSI Operator?](#can-csm-operator-manage-existing-drivers-installed-using-helm-charts-or-the-dell-csi-operator)
-  - [Why does some of the Custom Resource fields show up as invalid or unsupported in the OperatorHub GUI?](#why-does-some-of-the-custom-resource-fields-show-up-as-invalid-or-unsupported-in-the-operatorhub-gui)
+  - [Why do some of the Custom Resource fields show up as invalid or unsupported in the OperatorHub GUI?](#why-do-some-of-the-custom-resource-fields-show-up-as-invalid-or-unsupported-in-the-operatorhub-gui)
   - [How can I view detailed logs for the CSM Operator?](#how-can-i-view-detailed-logs-for-the-csm-operator)
   - [My Dell CSI Driver install failed. How do I fix it?](#my-dell-csi-driver-install-failed-how-do-i-fix-it)
   - [My CSM Replication install fails to validate replication prechecks with 'no such host'.](#my-csm-replication-install-fails-to-validate-replication-prechecks-with-no-such-host)

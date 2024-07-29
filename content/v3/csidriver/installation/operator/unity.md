@@ -122,7 +122,7 @@ spec:
         args: ["--snapshot-name-prefix=csiunitysnap"]
       # Enable/Disable health monitor of CSI volumes from node plugin. Provides details of volume usage.
       # - name: external-health-monitor
-      #   args: ["--monitor-interval=60s"]  
+      #   args: ["--monitor-interval=60s"]
 
     controller:
        envs:

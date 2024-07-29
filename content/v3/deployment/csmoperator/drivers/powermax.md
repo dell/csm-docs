@@ -14,6 +14,7 @@ Note that the deployment of the driver using the operator does not use any Helm 
 The CSI Driver for Dell PowerMax can create PVC with different storage protocols access :
 * direct Fiber Channel
 * direct iSCSI
+* NFS
 * Fiber Channel via VMware Raw Device Mapping
 In most cases, you will use one protocol only; therefore you should comply with the according prerequisites and not the others.
 
@@ -79,6 +80,13 @@ If the `iscsid.service` is not running, then perform the following steps on each
 2. If the file doesn't exist or it doesn't contain a valid ISCSI IQN, then make sure it exists with valid entries
 3. Ensure that iscsid service is running - Enable ```sudo systemctl enable iscsid``` & restart ```sudo systemctl restart iscsid``` iscsid if necessary.
 Note: If your worker nodes are running Red Hat CoreOS, make sure that automatic ISCSI login at boot is configured. Please contact RedHat for more details.
+
+### NFS requirements
+
+CSI Driver for Dell PowerMax supports NFS communication. Ensure that the following requirements are met before you install CSI Driver:
+- Configure the NFS network. Please refer [here](https://dl.dell.com/content/manual57826791-dell-powermax-file-protocol-guide.pdf?language=en-us&ps=true) for more details.
+- PowerMax Embedded Management guest to access Unisphere for PowerMax.
+- Create the NAS server. Please refer [here](https://dl.dell.com/content/manual55638050-dell-powermax-file-quick-start-guide.pdf?language=en-us&ps=true) for more details.
 
 ### Linux multipathing requirements
 
@@ -157,6 +165,8 @@ Follow this procedure to set up PowerPath for Linux:
 - All the nodes must have the PowerPath package installed . Download the PowerPath archive for the environment from [Dell Online Support](https://www.dell.com/support/home/en-in/product-support/product/powerpath-for-linux/drivers).
 - `Untar` the PowerPath archive, Copy the RPM package into a temporary folder and Install PowerPath using `rpm -ivh DellEMCPower.LINUX-<version>-<build>.<platform>.x86_64.rpm`
 - Start the PowerPath service using `systemctl start PowerPath`
+
+>Note: Do not install Dell PowerPath if multi-path software is already installed, as they cannot co-exist with native multi-path software.
 
 
 ### Auto RDM for vSphere over FC requirements

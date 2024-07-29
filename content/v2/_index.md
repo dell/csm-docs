@@ -1,4 +1,3 @@
-
 ---
 title: "Documentation"
 linkTitle: "Documentation"
@@ -31,7 +30,7 @@ CSM is made up of multiple components including modules (enterprise capabilities
 {{< /cardpane >}}
 {{< cardpane >}}
 {{< card header="[**Resiliency**](resiliency/)"
-          footer="Supports [PowerFlex](csidriver/features/powerflex/) [PowerScale](csidriver/features/powerscale/) [Unity](csidriver/features/unity/)">}}
+          footer="Supports [PowerFlex](csidriver/features/powerflex/) [PowerScale](csidriver/features/powerscale/) [Unity](csidriver/features/unity/) [PowerStore](csidriver/features/powerstore/)">}}
   CSM for Resiliency is designed to make Kubernetes Applications, including those that utilize persistent storage, more resilient to various failures.
 [...Learn more](resiliency/)
   {{< /card >}}
@@ -61,14 +60,3 @@ CSM is made up of multiple components including modules (enterprise capabilities
    [...Learn more](license/)
   {{< /card >}}
 {{< /cardpane >}}
-
-## CSM Modules Support Matrix for Dell CSI Drivers
-
-| CSM Module                                                  | CSI PowerFlex v2.8.0 | CSI PowerScale v2.8.0 | CSI PowerStore v2.8.0 | CSI PowerMax v2.8.0 | CSI Unity XT v2.8.0 |
-| ----------------------------------------------------------- | -------------------- | --------------------- | --------------------- | ------------------- | ------------------- |
-| [**Authorization**](authorization/) v1.8.0                  | ✔️                    | ✔️                     | ❌                     | ✔️                   | ❌                   |
-| [**Observability**](observability/) v1.6.0                  | ✔️                    | ✔️                     | ✔️                     | ✔️                   | ❌                   |
-| [**Replication**](replication/)   v1.6.0                    | ✔️                    | ✔️                     | ✔️                     | ✔️                   | ❌                   |
-| [**Resiliency**](resiliency/)     v1.7.0                    | ✔️                    | ✔️                     | ✔️                     | ❌                   | ✔️                   |
-| [**Encryption**](secure/encryption)    v0.4.0               | ❌                    | ✔️                     | ❌                     | ❌                   | ❌                   |
-| [**Application Mobility**](applicationmobility/)     v0.4.0 | ✔️                    | ✔️                     | ✔️                     | ✔️                   | ✔️                   |

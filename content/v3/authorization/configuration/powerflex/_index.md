@@ -119,8 +119,8 @@ Given a setup where Kubernetes, a storage system, and the CSM for Authorization 
       enabled: true
 
       # sidecarProxyImage: the container image used for the csm-authorization-sidecar.
-      # Default value: dellemc/csm-authorization-sidecar:v1.7.0
-      sidecarProxyImage: dellemc/csm-authorization-sidecar:v1.7.0
+      # Default value: dellemc/csm-authorization-sidecar:v1.8.0
+      sidecarProxyImage: dellemc/csm-authorization-sidecar:v1.8.0
 
       # proxyHost: hostname of the csm-authorization server
       # Default value: None
@@ -156,10 +156,10 @@ Given a setup where Kubernetes, a storage system, and the CSM for Authorization 
       - name: authorization
         # enable: Enable/Disable csm-authorization
         enabled: true
-        configVersion: v1.7.0
+        configVersion: v1.8.0
         components:
         - name: karavi-authorization-proxy
-          image: dellemc/csm-authorization-sidecar:v1.7.0
+          image: dellemc/csm-authorization-sidecar:v1.8.0
           envs:
             # proxyHost: hostname of the csm-authorization server
             - name: "PROXY_HOST"

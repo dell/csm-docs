@@ -5,6 +5,10 @@ description: >
   Installing Authorization via Dell CSM Operator
 ---
 
+{{% pageinfo color="primary" %}}
+The CSM Authorization karavictl CLI is no longer actively maintained or supported. It will be deprecated in CSM 2.0.
+{{% /pageinfo %}}
+
 ## Install CSM Authorization via Dell CSM Operator
 
 The CSM Authorization module for supported Dell CSI Drivers can be installed via the Dell CSM Operator.
@@ -177,7 +181,7 @@ To enable reporting of trace data with [Zipkin](https://zipkin.io/), use the `cs
 
     ```bash
     
-    kubectl create -f samples/authorization/csm_authorization_proxy_server_v170.yaml
+    kubectl create -f samples/authorization/csm_authorization_proxy_server_v1100.yaml
     ```
 
   >__Note__:  
@@ -197,7 +201,7 @@ To enable reporting of trace data with [Zipkin](https://zipkin.io/), use the `cs
     Use this command to create the `karavi-auth-tls` secret:
 
     ```bash
-    kubectl create -f samples/authorization/certificate_v170.yaml
+    kubectl create -f samples/authorization/certificate_v1100.yaml
     ```
 
 ### Verify Installation of the CSM Authorization Proxy Server

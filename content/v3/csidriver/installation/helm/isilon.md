@@ -82,6 +82,12 @@ node:
     enabled: false
 ```
 
+*NOTE*: To enable this feature to existing driver OR enable this feature while upgrading the driver versions, 
+follow either of the way.
+
+1. Reinstall of Driver
+2. Upgrade the driver smoothly with "--upgrade" option
+
 ### (Optional) Replication feature Requirements
 
 Applicable only if you decided to enable the Replication feature in `values.yaml`
@@ -101,17 +107,20 @@ CRDs should be configured during replication prepare stage with repctl as descri
 
 **Steps**
 
-1. Run `git clone -b v2.7.0 https://github.com/dell/csi-powerscale.git` to clone the git repository.
+1. Run `git clone -b v2.8.0 https://github.com/dell/csi-powerscale.git` to clone the git repository.
 2. Ensure that you have created the namespace where you want to install the driver. You can run `kubectl create namespace isilon` to create a new one. The use of "isilon"  as the namespace is just an example. You can choose any name for the namespace.
 3. Collect information from the PowerScale Systems like IP address, IsiPath, username, and password. Make a note of the value for these parameters as they must be entered in the *secret.yaml*.
-4. Copy *the helm/csi-isilon/values.yaml* into a new location with name say *my-isilon-settings.yaml*, to customize settings for installation.
+
+   **Note**: The 'clusterName' serves as a logical, unique identifier for the array that should remain unchanged once it is included in the volume handle. Altering this identifier is not advisable, as it would result in the failure of all operations associated with the volume that was created earlier.
+
+4. Download `wget -O my-isilon-settings.yaml https://raw.githubusercontent.com/dell/helm-charts/csi-isilon-2.8.0/charts/csi-isilon/values.yaml` into `cd ../dell-csi-helm-installer` to customize settings for installation.
 5. Edit *my-isilon-settings.yaml* to set the following parameters for your installation:
    The following table lists the primary configurable parameters of the PowerScale driver Helm chart and their default values. More detailed information can be
-   found in the  [`values.yaml`](https://github.com/dell/helm-charts/tree/main/charts/csi-isilon/values.yaml) file in this repository.
+   found in the  [`values.yaml`](https://github.com/dell/helm-charts/blob/csi-isilon-2.8.0/charts/csi-isilon/values.yaml) file in this repository.
 
    | Parameter | Description | Required | Default |
    | --------- | ----------- | -------- |-------- |  
-| driverRepository | Set to give the repository containing the driver image (used as part of the image name). | Yes | dellemc |
+   | driverRepository | Set to give the repository containing the driver image (used as part of the image name). | Yes | dellemc |
    | logLevel | CSI driver log level | No | "debug" |
    | certSecretCount | Defines the number of certificate secrets, which the user is going to create for SSL authentication. (isilon-cert-0..isilon-cert-(n-1)); Minimum value should be 1.| Yes | 1 |
    | [allowedNetworks](../../../features/powerscale/#support-custom-networks-for-nfs-io-traffic) | Defines the list of networks that can be used for NFS I/O traffic, CIDR format must be used. | No | [ ] |
@@ -164,17 +173,16 @@ CRDs should be configured during replication prepare stage with repctl as descri
    | **encryption** | [Encryption](../../../../secure/encryption/deployment) is an optional feature to apply encryption to CSI volumes. | - | - |
    | enabled        | A boolean that enables/disables Encryption feature. | No | false |
    | image | Encryption driver image name. | No | "dellemc/csm-encryption:v0.3.0" |
-   
+
    *NOTE:*
 
    - ControllerCount parameter value must not exceed the number of nodes in the Kubernetes cluster. Otherwise, some of the controller pods remain in a "Pending" state till new nodes are available for scheduling. The installer exits with a WARNING on the same.
    - Whenever the *certSecretCount* parameter changes in *my-isilon-setting.yaml* user needs to reinstall the driver.
    - In order to enable authorization, there should be an authorization proxy server already installed.
-   - If you are using a custom image, check the *version* and *driverRepository* fields in *my-isilon-setting.yaml* to make sure that they are pointing to the correct image repository and driver version. These two fields are spliced together to form the image name, as shown here: <driverRepository>/csi-isilon:v<version>
-   
-    
+   - If you are using a custom image, check the *version* and *driverRepository* fields in *my-isilon-setting.yaml* to make sure that they are pointing to the correct image repository and driver version. These two fields are spliced together to form the image name, as shown here: <driverRepository>/csi-isilon:<version>
+
 6. Edit following parameters in samples/secret/secret.yaml file and update/add connection/authentication information for one or more PowerScale clusters.
-   
+
    | Parameter | Description | Required | Default |
    | --------- | ----------- | -------- |-------- |
    | clusterName | Logical name of PoweScale cluster against which volume CRUD operations are performed through this secret. | Yes | - |
@@ -206,24 +214,27 @@ CRDs should be configured during replication prepare stage with repctl as descri
 
 Create isilon-creds secret using the following command:
   <br/> `kubectl create secret generic isilon-creds -n isilon --from-file=config=secret.yaml`
-   
+
    *NOTE:* 
    - If any key/value is present in all *my-isilon-settings.yaml*, *secret*, and storageClass, then the values provided in storageClass parameters take precedence.
    - The user has to validate the yaml syntax and array-related key/values while replacing or appending the isilon-creds secret. The driver will continue to use previous values in case of an error found in the yaml file.
    - For the key isiIP/endpoint, the user can give either IP address or FQDN. Also, the user can prefix 'https' (For example, https://192.168.1.1) with the value.
    - The *isilon-creds* secret has a *mountEndpoint* parameter which should only be updated and used when [Authorization](../../../../authorization) is enabled.
-   
+
 7. Install OneFS CA certificates by following the instructions from the next section, if you want to validate OneFS API server's certificates. If not, create an empty secret using the following command and an empty secret must be created for the successful installation of CSI Driver for Dell PowerScale.
     ```bash
     kubectl create -f empty-secret.yaml
     ```
    This command will create a new secret called `isilon-certs-0` in isilon namespace.
-   
-8.  Install the driver using `csi-install.sh` bash script by running
+
+8.  Install the driver using `csi-install.sh` bash script and default yaml by running
     ```bash
-    cd ../dell-csi-helm-installer && ./csi-install.sh --namespace isilon --values ../helm/my-isilon-settings.yaml
-    ``` 
-(assuming that the current working directory is 'helm' and my-isilon-settings.yaml is also present under 'helm' directory)
+    cd dell-csi-helm-installer && wget -O my-isilon-settings.yaml https://raw.githubusercontent.com/dell/helm-charts/csi-isilon-2.8.0/charts/csi-isilon/values.yaml &&
+    ./csi-install.sh --namespace isilon --values my-isilon-settings.yaml --helm-charts-version <version>
+    ```
+
+*NOTE:*
+- The parameter `--helm-charts-version` is optional and if you do not specify the flag, by default the `csi-install.sh` script will clone the version of the helm chart that is specified in the driver's [csi-install.sh](https://github.com/dell/csi-powerscale/blob/main/dell-csi-helm-installer/csi-install.sh#L16) file. If you wish to install the driver using a different version of the helm chart, you need to include this flag. Also, remember to delete the `helm-charts` repository present in the `csi-powerscale` directory if it was cloned before.
 
 ## Certificate validation for OneFS REST API calls
 
@@ -269,7 +280,7 @@ kubectl create secret generic isilon-creds -n isilon --from-file=config=secret.y
 
 ## Storage Classes
 
-The CSI driver for Dell PowerScale version 1.5 and later, `dell-csi-helm-installer` does not create any storage classes as part of the driver installation. A sample storage class manifest is available at `samples/storageclass/isilon.yaml`. Use this sample manifest to create a storageclass to provision storage; uncomment/ update the manifest as per the requirements.    
+The CSI driver for Dell PowerScale version 1.5 and later, `dell-csi-helm-installer` does not create any storage classes as part of the driver installation. A sample storage class manifest is available at `samples/storageclass/isilon.yaml`. Use this sample manifest to create a storageclass to provision storage; uncomment/ update the manifest as per the requirements.
 
 ### What happens to my existing storage classes?
 
@@ -292,9 +303,9 @@ Deleting a storage class has no impact on a running Pod with mounted PVCs. You c
 
 **Steps to create secondary storage class:**
 
-There are samples storage class yaml files available under `samples/storageclass`.  These can be copied and modified as needed. 
+There are samples storage class yaml files available under `samples/storageclass`.  These can be copied and modified as needed.
 
-1. Copy the `storageclass.yaml` to `second_storageclass.yaml` ( This is just an example, you can rename to file you require. )
+1. Copy the `storageclass.yaml` to `second_storageclass.yaml` (This is just an example, you can rename to file you require.)
 2. Edit the  `second_storageclass.yaml` yaml file and update following parameters:
 - Update the `name` parameter to you require 
    ```yaml
@@ -308,14 +319,14 @@ There are samples storage class yaml files available under `samples/storageclass
     password: "Password"
     endpoint: "10.X.X.X"
     endpointPort: "8080
-  ```                          
+  ```
 - Use same clusterName &#8593; in the  `second_storageclass.yaml`
    ```yaml
     # Optional: true
     ClusterName: "cluster2"
    ```
-- *Note*: These are two essential parameters that you need to change in the "second_storageclass.yaml" file and other parameters that you change as required. 
-3. Save the  `second_storageclass.yaml` file 
+- *Note*: These are two essential parameters that you need to change in the "second_storageclass.yaml" file and other parameters that you change as required.
+3. Save the  `second_storageclass.yaml` file
 4. Create your 2nd storage class by using `kubectl`:
     ```bash
     kubectl create -f <path_to_second_storageclass_file>
@@ -352,6 +363,7 @@ Mount Re-tries handles below scenarios:
 - No such file or directory (NFSv4)
 
 *Sample*:
+
 ```
 level=error clusterName=powerscale runid=10 msg="mount failed: exit status 32
 mounting arguments: -t nfs -o rw XX.XX.XX.XX:/ifs/data/csi/k8s-ac7b91962d /var/lib/kubelet/pods/9f72096a-a7dc-4517-906c-20697f9d7375/volumes/kubernetes.io~csi/k8s-ac7b91962d/mount

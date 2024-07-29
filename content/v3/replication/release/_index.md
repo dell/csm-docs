@@ -6,17 +6,20 @@ Description: >
   Dell Container Storage Modules (CSM) release notes for replication
 ---
 
-## Release Notes - CSM Replication 1.5.0
+## Release Notes - CSM Replication 1.6.0
+
+
 
 ### New Features/Changes
- - [Target Backend Volume Deletion](https://github.com/dell/csm/issues/665)
- - [Base Image Updated to ubi-micro](https://github.com/dell/csm/issues/790)
+
+- [#724 - [FEATURE]: CSM support for Openshift 4.13](https://github.com/dell/csm/issues/724)
+- [#877 - [FEATURE]: Make standalone helm chart available from helm repository : https://dell.github.io/dell/helm-charts](https://github.com/dell/csm/issues/877)
 
 ### Fixed Issues
 
-| Github ID                                     | Description                                                        |
-| --------------------------------------------- | ------------------------------------------------------------------ |
-| [782](https://github.com/dell/csm/issues/782) | **PowerScale:** Target NFS exports are not deleted even though target directories are deleted |
+- [#916 - [BUG]: Remove references to deprecated io/ioutil package](https://github.com/dell/csm/issues/916)
+- [#928 - [BUG]: PowerStore Replication - Delete RG request hangs](https://github.com/dell/csm/issues/928)
+- [#968 - [BUG]: Creating StorageClass for replication failed with unmarshal error](https://github.com/dell/csm/issues/968)
 
 ### Known Issues
 

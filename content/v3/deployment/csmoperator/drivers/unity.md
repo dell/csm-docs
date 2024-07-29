@@ -59,6 +59,8 @@ kubectl get csm --all-namespaces
 | replicas | Controls the number of controller pods you deploy. If the number of controller pods is greater than the number of available nodes, the excess pods will be in pending state until new nodes are available for scheduling. Default is 2 which allows for Controller high availability. | Yes | 2 |
 | namespace | Specifies namespace where the driver will be installed | Yes | "unity" |
 | fsGroupPolicy | Defines which FS Group policy mode to be used. Supported modes `None, File and ReadWriteOnceWithFSType` | No |"ReadWriteOnceWithFSType"|
+| storageCapacity.enabled | Enable/Disable storage capacity tracking | No | true |
+| storageCapacity.pollInterval | Configure how often the driver checks for changed capacity | No | 5m |
 | ***Common parameters for node and controller*** |
 | X_CSI_UNITY_ALLOW_MULTI_POD_ACCESS | To enable sharing of volumes across multiple pods within the same node in RWO access mode | No | false |
 | X_CSI_UNITY_SYNC_NODEINFO_INTERVAL | Time interval to add node info to array. Default 15 minutes. Minimum value should be 1 | No | 15 |

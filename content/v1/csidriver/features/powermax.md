@@ -9,7 +9,7 @@ Description: Code features for PowerMax Driver
 
 Starting with v1.7, the CSI PowerMax driver can communicate with multiple Unisphere for PowerMax servers to manage multiple PowerMax arrays.
 In order to use this feature, you must install CSI PowerMax ReverseProxy in `StandAlone` mode with the driver. For more details on how
-to configure the driver and ReverseProxy, see the relevant section [here](../../installation/helm/powermax/#sample-values-file)
+to configure the driver and ReverseProxy, see the relevant section [here](../../../deployment/helm/drivers/installation/powermax#sample-values-file)
 
 ## Volume Snapshot Feature
 
@@ -547,12 +547,9 @@ kubectl edit configmap -n powermax powermax-config-params
 
 CSI Driver for Dell PowerMax 2.2.0 and above supports volume health monitoring. Alpha feature gate `CSIVolumeHealth` needs to be enabled for the node side monitoring to take effect. For more information, please refer to the [Kubernetes GitHub repository](https://github.com/kubernetes-csi/external-health-monitor/blob/master/README.md). To use this feature, set controller.healthMonitor.enabled and node.healthMonitor.enabled to true. To change the monitor interval, set controller.healthMonitor.interval parameter.
 
-## Single Pod Access Mode for PersistentVolumes- ReadWriteOncePod (ALPHA FEATURE)
+## Single Pod Access Mode for PersistentVolumes- ReadWriteOncePod 
 
 Use `ReadWriteOncePod(RWOP)` access mode if you want to ensure that only one pod across the whole cluster can read that PVC or write to it. This is only supported for CSI Driver for PowerMax 2.2.0+ and Kubernetes version 1.22+.
-
-To use this feature, enable the ReadWriteOncePod feature gate for kube-apiserver, kube-scheduler, and kubelet, by setting command line arguments:
-`--feature-gates="...,ReadWriteOncePod=true"`
 
 ### Creating a PersistentVolumeClaim
 ```yaml
@@ -570,7 +567,7 @@ spec:
 
 When this feature is enabled, the existing `ReadWriteOnce(RWO)` access mode restricts volume access to a single node and allows multiple pods on the same node to read from and write to the same volume.
 
-To migrate existing PersistentVolumes to use `ReadWriteOncePod`, please follow the instruction from [here](https://kubernetes.io/blog/2021/09/13/read-write-once-pod-access-mode-alpha/#migrating-existing-persistentvolumes).
+To migrate existing PersistentVolumes to use `ReadWriteOncePod`, please follow the instruction from [here](https://kubernetes.io/docs/tasks/administer-cluster/change-pv-access-mode-readwriteoncepod/).
   
 ## Support for auto RDM for vSphere over FC
   
@@ -582,7 +579,7 @@ It will be supported only on new/freshly installed clusters where the cluster is
 
 To use this feature
 - Set `vSphere.enabled` to true.
-- Create a secret which contains vCenter privileges. Follow the steps [here](../../installation/helm/powermax/#auto-rdm-for-vsphere-over-fc-requirements) to create it. Update `vCenterCredSecret` with the secret name created.
+- Create a secret which contains vCenter privileges. Follow the steps [here](../../../deployment/helm/drivers/installation/powermax#auto-rdm-for-vsphere-over-fc-requirements) to create it. Update `vCenterCredSecret` with the secret name created.
   
 ```yaml
  VMware/vSphere virtualization support

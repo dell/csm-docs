@@ -78,7 +78,7 @@ Install CSI Driver for Unity XT using this procedure.
 
  * As a pre-requisite for running this procedure, you must have the downloaded files, including the Helm chart from the source [git repository](https://github.com/dell/csi-unity) with the command 
    ```bash
-   git clone -b v2.10.1 https://github.com/dell/csi-unity.git
+   git clone -b v2.11.0 https://github.com/dell/csi-unity.git
    ```
  * In the top-level dell-csi-helm-installer directory, there should be two scripts, `csi-install.sh` and `csi-uninstall.sh`.
  * Ensure _unity_ namespace exists in Kubernetes cluster. Use the `kubectl create namespace unity` command to create the namespace if the namespace is not present.
@@ -98,12 +98,12 @@ Procedure
 2. Get the required values.yaml using the command below:
 
 ```bash
-cd dell-csi-helm-installer && wget -O my-unity-settings.yaml https://github.com/dell/helm-charts/raw/csi-unity-2.10.1/charts/csi-unity/values.yaml
+cd dell-csi-helm-installer && wget -O my-unity-settings.yaml https://github.com/dell/helm-charts/raw/csi-unity-2.11.0/charts/csi-unity/values.yaml
 ```
 
 3. Edit `values.yaml` to set the following parameters for your installation:
    
-    The following table lists the primary configurable parameters of the Unity XT driver chart and their default values. More detailed information can be found in the [`values.yaml`](https://github.com/dell/helm-charts/blob/csi-unity-2.10.1/charts/csi-unity/values.yaml) file in this repository.
+    The following table lists the primary configurable parameters of the Unity XT driver chart and their default values. More detailed information can be found in the [`values.yaml`](https://github.com/dell/helm-charts/blob/csi-unity-2.11.0/charts/csi-unity/values.yaml) file in this repository.
     
     | Parameter | Description | Required | Default |
     | --------- | ----------- | -------- |-------- |
@@ -114,6 +114,7 @@ cd dell-csi-helm-installer && wget -O my-unity-settings.yaml https://github.com/
     | syncNodeInfoInterval | Time interval to add node info to the array. Default 15 minutes. The minimum value should be 1 minute. | No | 15 |
     | maxUnityVolumesPerNode | Maximum number of volumes that controller can publish to the node. | No | 0 |
     | certSecretCount | Represents the number of certificate secrets, which the user is going to create for SSL authentication. (unity-cert-0..unity-cert-n). The minimum value should be 1. | No | 1 |
+    | [allowedNetworks](../../../../../csidriver/features/unity/#support-custom-networks-for-nfs-io-traffic) | Defines the list of networks that can be used for NFS I/O traffic, CIDR format must be used. | No | empty |
     | imagePullPolicy |  The default pull policy is IfNotPresent which causes the Kubelet to skip pulling an image if it already exists. | Yes | IfNotPresent |
     | podmon.enabled | service to monitor failing jobs and notify | No | false |
     | tenantName | Tenant name added while adding host entry to the array | No |  |
@@ -245,8 +246,11 @@ cd dell-csi-helm-installer && wget -O my-unity-settings.yaml https://github.com/
 
 7. Run the command to proceed with the installation using bash script.
    ```bash
-   ./csi-install.sh --namespace unity --values ./myvalues.yaml
+   ./csi-install.sh --namespace unity --values ./myvalues.yaml --helm-charts-version <version>
    ```
+   *NOTE:* 
+   - The parameter `--helm-charts-version` is optional and if you do not specify the flag, by default the `csi-install.sh` script will clone the version of the helm chart that is specified in the driver's [csi-install.sh](https://github.com/dell/csi-unity/blob/main/dell-csi-helm-installer/csi-install.sh#L22) file. If you wish to install the driver using a different version of the helm chart, you need to include this flag. Also, remember to delete the `helm-charts` repository present in the `csi-unity` directory if it was cloned before.
+
     A successful installation must display messages that look similar to the following samples:
     ```
     ------------------------------------------------------
@@ -327,7 +331,7 @@ cd dell-csi-helm-installer && wget -O my-unity-settings.yaml https://github.com/
    **Syntax**:
    ```bash
 
-   git clone -b csi-unity-2.10.1 https://github.com/dell/helm-charts
+   git clone -b csi-unity-2.11.0 https://github.com/dell/helm-charts
 
    helm install <release-name> dell/container-storage-modules -n <namespace> --version <container-storage-module chart-version> -f <values.yaml location>
 

@@ -3,7 +3,8 @@ title: PowerFlex
 description: Release notes for PowerFlex CSI driver
 ---
 
-## Release Notes - CSI PowerFlex v2.10.1
+## Release Notes - CSI PowerFlex v2.11.0
+
 
 
 
@@ -14,19 +15,23 @@ description: Release notes for PowerFlex CSI driver
 
 ### New Features/Changes
 
-- [#1284 - [FEATURE]: Support for Openshift 4.15](https://github.com/dell/csm/issues/1284)
-- [#1285 - [FEATURE]: Remove checks in code for non-supported installs of CSM](https://github.com/dell/csm/issues/1285)
-- [#926 - [FEATURE]: Fixing the linting, formatting and vetting issues](https://github.com/dell/csm/issues/926)
+- [#1359 - [FEATURE]: Add Support for OpenShift Container Platform (OCP) 4.16 ](https://github.com/dell/csm/issues/1359)
+- [#1400 - [FEATURE]: Support for Kubernetes 1.30](https://github.com/dell/csm/issues/1400)
+- [#1358 - [FEATURE]: Support for PowerFlex 4.6](https://github.com/dell/csm/issues/1358)
+- [#1397 - [FEATURE]: Observability upgrade is supported in CSM Operator](https://github.com/dell/csm/issues/1397)
 
 ### Fixed Issues
 
-- [#1081 - [BUG]: CSM driver repositories reference CSI Operator](https://github.com/dell/csm/issues/1081)
-- [#1086 - [BUG]: PowerFlex driver fails to start on RKE](https://github.com/dell/csm/issues/1086)
-- [#1101 - [BUG]: the `nasName` parameter in the powerflex secret is now mandatory](https://github.com/dell/csm/issues/1101)
-- [#1140 - [BUG]: Cert-csi tests are not reporting the passed testcases in K8S E2E tests ](https://github.com/dell/csm/issues/1140)
-- [#1163 - [BUG]: Resource quota bypass](https://github.com/dell/csm/issues/1163)
-- [#1174 - [BUG]: Kubelet Configuration Directory setting should not have a comment about default value being None](https://github.com/dell/csm/issues/1174)
-- [#1210 - [BUG]: Helm deployment of PowerFlex driver is failing](https://github.com/dell/csm/issues/1210)
+- [#1209 - [BUG]: Doc hyper links in driver Readme is broken](https://github.com/dell/csm/issues/1209)
+- [#1218 - [BUG]: Add the helm-charts-version parameter to the install command for all drivers in csm-docs](https://github.com/dell/csm/issues/1218)
+- [#1237 - [BUG]: Error handling not good in node.go:nodeProbe() and other similar functions](https://github.com/dell/csm/issues/1237)
+- [#1239 - [BUG]: Changes in new release of google.golang.org/protobuf is causing compilation issues](https://github.com/dell/csm/issues/1239)
+- [#1270 - [BUG]: Missing entries for Resiliency in installation wizard template](https://github.com/dell/csm/issues/1270)
+- [#1310 - [BUG]:  CSI node pod crash after replacing OCP ingress certificate or restarting kubectl service](https://github.com/dell/csm/issues/1310)
+- [#1350 - [BUG]: Document update : PowerFlex expecting secret CR as <csm-cr-name>-config in operator ](https://github.com/dell/csm/issues/1350)
+- [#1355 - [BUG]: Indentation of secret.yaml mentioned on the csm-doc portal for powerflex driver is incorrect.](https://github.com/dell/csm/issues/1355)
+- [#1364 - [BUG]: mkfsFormatOption not working for powerflex](https://github.com/dell/csm/issues/1364)
+- [#1366 - [BUG]:  Support Minimum 3GB Volume Size for NFS in CSI-PowerFlex](https://github.com/dell/csm/issues/1366)
 
 ### Known Issues
 
@@ -40,9 +45,10 @@ A CSI ephemeral pod may not get created in OpenShift 4.13 and fail with the erro
 | If the volume limit is exhausted and there are pending pods and PVCs due to `exceed max volume count`, the pending PVCs will be bound to PVs and the pending pods will be scheduled to nodes when the driver pods are restarted. | It is advised not to have any pending pods or PVCs once the volume limit per node is exhausted on a CSI Driver. There is an open issue reported with kubenetes at https://github.com/kubernetes/kubernetes/issues/95911 with the same behavior. |
 | The PowerFlex Dockerfile is incorrectly labeling the version as 2.7.0 for the 2.8.0 version. | Describe the driver pod using ```kubectl describe pod $podname -n vxflexos``` to ensure v2.8.0 is installed. |
 | Resource quotas may not work properly with the CSI PowerFlex driver. PowerFlex is only able to assign storage in 8Gi chunks, so if a create volume call is made with a size not divisible by 8Gi, CSI-PowerFlex will round up to the next 8Gi boundary when it provisions storage -- however, the resource quota will not record this size but rather the original size in the create request. This means that, for example, if a 10Gi resource quota is set, and a user provisions 10 1Gi PVCs, 80Gi of storage will actually be allocated, which is well over the amount specified in the resource quota. | For now, users should only provision volumes in 8Gi-divisible chunks if they want to use resource quotas. |
+| Helm install of CSM for PowerFlex v1.10.0 is failing due to a duplicate `mountPath: /host_opt_emc_path` being added to volumeMounts charts/csi-vxflexos/templates/node.yaml. Error message is `Error: INSTALLATION FAILED: 1 error occurred: DaemonSet.apps "vxflexos-node" is invalid: spec.template.spec.initContainers[0].volumeMounts[4].mountPath: Invalid value: "/host_opt_emc_path": must be unique` | The issue can be resolved by removing the duplicate entry in [https://github.com/dell/helm-charts/blob/main/charts/csi-vxflexos/templates/node.yaml](https://github.com/dell/helm-charts/blob/main/charts/csi-vxflexos/templates/node.yaml) |
 
 
 ### Note:
 
-- Support for Kubernetes alpha features like Volume Health Monitoring and RWOP (ReadWriteOncePod) access mode will not be available in Openshift environment as Openshift doesn't support enabling of alpha features for Production Grade clusters.
-- For fixing [#1210 - [BUG]: Helm deployment of PowerFlex driver is failing](https://github.com/dell/csm/issues/1210), a new helm-chart has been released. In order to install this helm chart, we need to pass the flag `--helm-charts-version` during helm installation and flag `-v` during offline bundle installation with value `csi-vxflexos-2.10.1`.
+- Support for Kubernetes alpha features like Volume Health Monitoring will not be available in Openshift environment as Openshift doesn't support enabling of alpha features for Production Grade clusters.
+- For fixing [#1210 - [BUG]: Helm deployment of PowerFlex driver is failing](https://github.com/dell/csm/issues/1210), a new helm-chart has been released. In order to install this helm chart, we need to pass the flag `--helm-charts-version` during helm installation and flag `-v` during offline bundle installation with value `csi-vxflexos-2.11.0`.

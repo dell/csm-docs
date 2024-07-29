@@ -20,24 +20,23 @@ You can upgrade the CSI Driver for Dell Unity XT using Helm or Dell CSI Operator
 
 Preparing myvalues.yaml is the same as explained in the install section.
 
-To upgrade the driver from csi-unity v2.6.0 to csi-unity v2.7.0
+To upgrade the driver from csi-unity v2.7.0 to csi-unity v2.8.0
 
-1. Get the latest csi-unity v2.7.0 code from Github using `git clone -b v2.7.0 https://github.com/dell/csi-unity.git`.
+1. Get the latest csi-unity v2.8.0 code from Github using `git clone -b v2.8.0 https://github.com/dell/csi-unity.git`.
 2. Copy the helm/csi-unity/values.yaml to the new location csi-unity/dell-csi-helm-installer and rename it to myvalues.yaml. Customize settings for installation by editing myvalues.yaml as needed.
 3. Navigate to csi-unity/dell-csi-hem-installer folder and execute this command:
    ```bash
    
-   ./csi-install.sh --namespace unity --values ./myvalues.yaml --upgrade
+   ./csi-install.sh --namespace unity --values ./myvalues.yaml --helm-charts-version <version> --upgrade
    ```
 
-### Using Operator
+*NOTE:* 
+- The parameter `--helm-charts-version` is optional and if you do not specify the flag, by default the `csi-install.sh` script will clone the version of the helm chart that is specified in the driver's [csi-install.sh](https://github.com/dell/csi-unity/blob/main/dell-csi-helm-installer/csi-install.sh#L22) file. If you wish to install the driver using a different version of the helm chart, you need to include this flag. Also, remember to delete the `helm-charts` repository present in the `csi-unity` directory if it was cloned before.
 
-**Notes:**
-1. While upgrading the driver via operator, replicas count in sample CR yaml can be at most one less than the number of worker nodes.
-2. Upgrading the Operator does not upgrade the CSI Driver.
+### Upgrade using Dell CSM Operator:
+**Note:**
+Upgrading the Operator does not upgrade the CSI Driver.
 
-To upgrade the driver:   
-
-1. Please upgrade the Dell CSI Operator by following [here](./../operator).
-2. Once the operator is upgraded, to upgrade the driver, refer [here](./../../../installation/operator/#update-csi-drivers).
+1. Upgrade the Dell CSM Operator by following [here](../../../../deployment/csmoperator/#to-upgrade-dell-csm-operator-perform-the-following-steps)
+2. Once the operator is upgraded, to upgrade the driver, refer [here](../../../../deployment/csmoperator/#upgrade-driver-using-dell-csm-operator)
 

@@ -1,3 +1,4 @@
+
 ---
 title: "Release Notes"
 linkTitle: "Release Notes"
@@ -6,6 +7,13 @@ Description: >
   Release Notes
 ---
 
+## Release Notes - CSM Encryption
+
+
+### Fixed Issues
+
+There are no fixed issues in this release.
+
 ### Known Issues
 
-The encryption module installation fails because sidecars like csi-metadata-retriever-* conflict when trying to access the same domain socket. (/var/run/csi/csi_retriever.sock). Please find the [github issue](https://github.com/dell/csm/issues/1309).
+There are no known issues in this release.

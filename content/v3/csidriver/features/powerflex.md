@@ -301,7 +301,7 @@ replicas: 1
 ```
 in your driver yaml in `config/samples/`
 
-If you want to specify where controller pods get assigned, make the following edits to your values file at `csi-vxflexos/helm/csi-vxflexos/values.yaml`:    
+If you want to specify where controller pods get assigned, make the following edits to your values file at `csi-vxflexos/values.yaml`:    
 
 To assign controller pods to worker nodes only (Default):   
 ```yaml
@@ -469,7 +469,7 @@ Dynamic array configuration change detection is only used for properties of an e
 To add a new array to the secret, or to alter an array's mdm field, you must run `csi-install.sh` with `--upgrade` option to update the MDM key in secret and restart the node pods.
 ```bash
 cd <DRIVER-HOME>/dell-csi-helm-installer
-./csi-install.sh --upgrade --namespace vxflexos --values ../helm/csi-vxflexos/values.yaml
+./csi-install.sh --namespace vxflexos --values ./myvalues.yaml --upgrade
  kubectl delete  pods --all -n vxflexos
 ```
 
@@ -613,7 +613,7 @@ spec:
 ## Dynamic Logging Configuration
 
 The dynamic logging configuration that was introduced in v1.5 of the driver was revamped for v2.0; v1.5 logging configuration is not compatible with v2.0.   
-Two fields in values.yaml (located at helm/csi-vxflexos/values.yaml) are used to configure the dynamic logging: logLevel and logFormat.
+Two fields in values.yaml (located at csi-vxflexos/values.yaml) are used to configure the dynamic logging: logLevel and logFormat.
 
 ```yaml
 # CSI driver log level
@@ -638,7 +638,7 @@ If either option is set to a value outside of what is supported, the driver will
 ## Volume Health Monitoring 
 
 > *NOTE*: Alpha feature gate `CSIVolumeHealth` needs to be enabled for the node side monitoring to take effect. For more information, please refer to the [Kubernetes GitHub repository](https://github.com/kubernetes-csi/external-health-monitor/blob/master/README.md). If the feature gate is on, and you want to use this feature,
-> ensure the proper values are enabled in your values file. See the values table in the installation doc for more details.
+> ensure the proper values are enabled in your values file. See the values table in the installation doc for more details. 
 
 Starting in version 2.1, CSI Driver for PowerFlex now supports volume health monitoring. This allows Kubernetes to report on the condition of the underlying volumes via events when a volume condition is abnormal. For example, if a volume were to be deleted from the array, or unmounted outside of Kubernetes, Kubernetes will now report these abnormal conditions as events.  
 
@@ -750,3 +750,170 @@ node:
 > NOTE: Currently, the CSI-PowerFlex driver only supports GUID for the restricted SDC mode.
 
 If SDC approval is denied, then provisioning of the volume will not be attempted and an appropriate error message is reported in the logs/events so the user is informed.
+
+## Volume Limit
+
+The CSI Driver for Dell PowerFlex allows users to specify the maximum number of PowerFlex volumes that can be used in a node.
+
+The user can set the volume limit for a node by creating a node label `max-vxflexos-volumes-per-node` and specifying the volume limit for that node.
+<br/> `kubectl label node <node_name> max-vxflexos-volumes-per-node=<volume_limit>`
+
+The user can also set the volume limit for all the nodes in the cluster by specifying the same to `maxVxflexosVolumesPerNode` attribute in values.yaml file.
+
+>**NOTE:** <br>To reflect the changes after setting the value either via node label or in values.yaml file, user has to bounce the driver controller and node pods using the command `kubectl get pods -n vxflexos --no-headers=true | awk '/vxflexos-/{print $1}'| xargs kubectl delete -n vxflexos pod`. <br><br> If the value is set both by node label and values.yaml file then node label value will get the precedence and user has to remove the node label in order to reflect the values.yaml value. <br><br>The default value of `maxVxflexosVolumesPerNode` is 0. <br><br>If `maxVxflexosVolumesPerNode` is set to zero, then Container Orchestration decides how many volumes of this type can be published by the controller to the node.<br><br>The volume limit specified to `maxVxflexosVolumesPerNode` attribute is applicable to all the nodes in the cluster for which node label `max-vxflexos-volumes-per-node` is not set.
+
+## NFS volume support
+Starting with version 2.8, the CSI driver for PowerFlex will support NFS volumes for PowerFlex storage systems version 4.0.x.
+
+CSI driver will support following operations for NFS volumes:
+
+* Creation and deletion of a NFS volume with RWO/RWX/ROX access modes.
+* Support of tree quotas while volume creation.
+* Expand the size of a NFS volume.
+* Creation and deletion of snapshot of a NFS volume while retaining file permissions.
+* Create NFS volume from the snapshot.
+
+To enable the support of NFS volumes operations from CSI driver, there are a few new keys introduced which needs to be set before performing the operations for NFS volumes.
+* `nasName`: defines the NAS server name that should be used for NFS volumes.
+* `enableQuota`: when enabled will set quota limit for a newly provisioned NFS volume.
+
+> NOTE:
+> * `nasName`
+>   * nasName is a mandatory parameter and has to be provided in secret yaml, else it will be an error state and will be captured in driver logs.
+>   * nasName can be given at storage class level as well.
+>   * If specified in both, secret and storage class, then precedence is given to storage class value.
+>   * If nasName not given in secret, irrespective of it specified in SC, then it's an error state and will be captured in driver logs.
+>   * If the PowerFlex storage system v4.0.x is configured with only block capabilities, then the user is required to give the default value for nasName as "none".
+
+The user has to update the `secret.yaml`, `values.yaml` and `storageclass-nfs.yaml` with the above keys as like below:
+
+[`samples/secret.yaml`](https://github.com/dell/csi-powerflex/blob/main/samples/secret.yaml)
+```yaml
+- username: "admin"
+  password: "Password123"
+  systemID: "2b11bb111111bb1b"
+  endpoint: "https://127.0.0.2"
+  skipCertificateValidation: true
+  isDefault: true
+  mdm: "10.0.0.3,10.0.0.4"
+  nasName: "nas-server"
+```
+
+[`samples/storageclass/storageclass-nfs.yaml`](https://github.com/dell/csi-powerflex/blob/main/samples/storageclass/storageclass-nfs.yaml)
+```yaml
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: vxflexos-nfs
+provisioner: csi-vxflexos.dellemc.com
+reclaimPolicy: Delete
+allowVolumeExpansion: true
+parameters:
+  storagepool: "pool2" # Insert Storage pool
+  systemID: <SYSTEM_ID> # Insert System ID
+  csi.storage.k8s.io/fstype: nfs
+  nasName: "nas-server"
+#  path: /csi
+#  softLimit: "80"
+#  gracePeriod: "86400"
+volumeBindingMode: WaitForFirstConsumer
+allowedTopologies:
+- matchLabelExpressions:
+  - key: csi-vxflexos.dellemc.com/<SYSTEM_ID>-nfs # Insert System ID
+    values:
+    - "true"
+```
+
+[`csi-vxflexos/values.yaml`](https://github.com/dell/helm-charts/blob/main/charts/csi-vxflexos/values.yaml)
+```yaml
+...
+enableQuota: false
+...
+```
+
+## Usage of Quotas to Limit Storage Consumption for NFS volumes
+Starting with version 2.8, the CSI driver for PowerFlex will support enabling tree quotas for limiting capacity for NFS volumes. To use the quota feature user can specify the boolean value `enableQuota` in values.yaml.
+
+To enable quota for NFS volumes, make the following edits to [values.yaml](https://github.com/dell/helm-charts/blob/main/charts/csi-vxflexos/values.yaml) file:
+```yaml
+...
+...
+# enableQuota: a boolean that, when enabled, will set quota limit for a newly provisioned NFS volume.
+# Allowed values:
+#   true: set quota for volume
+#   false: do not set quota for volume
+# Optional: true
+# Default value: none
+enableQuota: true
+...
+...
+```
+
+For example, if the user creates a PVC with 3 Gi of storage and quotas have already been enabled in PowerFlex system for the specified volume.
+
+When `enableQuota` is set to `true`
+
+* The driver sets the hard limit of the PVC to 3Gi.
+* The user adds data of 2Gi to the PVC (by logging into POD). It works as expected.
+* The user tries to add 2Gi more data.
+* Driver doesn't allow the user to enter more data as total data to be added is 4Gi and PVC limit is 3Gi.
+* The user can expand the volume from 3Gi to 6Gi. The driver allows it and sets the hard limit of PVC to 6Gi.
+* User retries adding 2Gi more data (which has been errored out previously).
+* The driver accepts the data.
+
+When `enableQuota` is set to `false`
+
+* Driver doesn't set any hard limit against the PVC created.
+* The user adds 2Gi data to the PVC, which has a limit of 3Gi. It works as expected.
+* The user tries to add 2Gi more data. Now the total size of data is 4Gi.
+* Driver allows the user to enter more data irrespective of the initial PVC size (since no quota is set against this PVC)
+* The user can expand the volume from an initial size of 3Gi to 4Gi or more. The driver allows it.
+
+If enableQuota feature is set, user can also set other tree quota parameters such as soft limit, soft grace period and path using storage class yaml file.
+
+* `path`: relative path to the root of the associated NFS volume.
+* `softLimit`: soft limit set to quota. Specified as a percentage w.r.t. PVC size.
+* `gracePeriod`: grace period of quota, must be mentioned along with softLimit, in seconds. Soft Limit can be exceeded until the grace period.
+
+> NOTE:
+> * `hardLimit` is set to same size as that of PVC size.
+> *  When a volume with quota enabled is expanded then the hardLimit and softLimit are also recalculated by driver w.r.t. to the new PVC size.
+> * `sofLimit` cannot be set to unlimited value (0), otherwise it will become greater than hardLimit (PVC size).
+> * `softLimit` should be lesser than 100%, since hardLimit will be set to 100% (PVC size) internally by the driver.
+
+### Storage Class Example with Quota Limit Parameters
+[`samples/storageclass/storageclass-nfs.yaml`](https://github.com/dell/csi-powerflex/blob/main/samples/storageclass/storageclass-nfs.yaml)
+
+```yaml
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: vxflexos-nfs
+provisioner: csi-vxflexos.dellemc.com
+reclaimPolicy: Delete
+allowVolumeExpansion: true
+parameters:
+  storagepool: "pool2" # Insert Storage pool
+  systemID: <SYSTEM_ID> # Insert System ID
+  csi.storage.k8s.io/fstype: nfs
+  nasName: "nas-server"
+  path: /csi
+  softLimit: "80"
+  gracePeriod: "86400"
+volumeBindingMode: WaitForFirstConsumer
+allowedTopologies:
+  - matchLabelExpressions:
+    - key: csi-vxflexos.dellemc.com/<SYSTEM_ID>-nfs # Insert System ID
+      values:
+        - "true"
+```
+
+## Storage Capacity Tracking
+CSI-PowerFlex driver version 2.8.0 and above supports Storage Capacity Tracking.
+
+This feature helps the scheduler to make more informed choices about where to schedule pods which depend on unbound volumes with late binding (aka "wait for first consumer"). Pods will be scheduled on a node (satisfying the topology constraints) only if the requested capacity is available on the storage array.
+If such a node is not available, the pods stay in Pending state. This means pods are not scheduled.
+
+Without storage capacity tracking, pods get scheduled on a node satisfying the topology constraints. If the required capacity is not available, volume attachment to the pods fails, and pods remain in ContainerCreating state. Storage capacity tracking eliminates unnecessary scheduling of pods when there is insufficient capacity.
+
+The attribute `storageCapacity.enabled` in `values.yaml` can be used to enable/disable the feature during driver installation using helm. This is by default set to true. To configure how often the driver checks for changed capacity set `storageCapacity.pollInterval` attribute. In case of driver installed via operator, this interval can be configured in the sample file provided [here](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powerflex_v280.yaml) by editing the `--capacity-poll-interval` argument present in the provisioner sidecar.

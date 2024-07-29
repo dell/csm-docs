@@ -5,6 +5,9 @@ weight: 1
 Description: >
   CSI Volumes Encryption
 ---
+
+**NOTE:**  Encryption is not supported for CSM 1.9.x release. Please refer to the [release notes](./release/) for more details.
+
 Encryption provides the capability to encrypt user data residing on volumes created by Dell CSI Drivers.
 
 > **NOTE:** This tech-preview release is not intended for use in production environment.
@@ -68,11 +71,8 @@ the CSI driver must be restarted to pick up the change.
 {{<table "table table-striped table-bordered table-sm">}}
 | COP/OS | Supported Versions |
 |-|-|
-| Kubernetes | 1.24, 1.25, 1.26 |
-| Red Hat OpenShift  | 4.10, 4.11 |
-| RHEL | 7.9, 8.4 |
-| Ubuntu | 18.04, 20.04 |
-| SLES | 15SP2 |
+| Kubernetes | 1.26, 1.27, 1.28 |
+| Red Hat OpenShift  | 4.13, 4.14 |
 {{</table>}}
 
 ## Supported Storage Platforms
@@ -80,7 +80,7 @@ the CSI driver must be restarted to pick up the change.
 {{<table "table table-striped table-bordered table-sm">}}
 |               | PowerScale |
 | ------------- | ---------- |
-| Storage Array | OneFS 9.0 |
+| Storage Array | OneFS 9.3, 9.4, 9.5.0.5, 9.5.0.6 |
 {{</table>}}
 
 ## Supported CSI Drivers
@@ -89,7 +89,7 @@ Encryption supports these CSI drivers and versions:
 {{<table "table table-striped table-bordered table-sm">}}
 | Storage Array | CSI Driver | Supported Versions |
 | ------------- | ---------- | ------------------ |
-| CSI Driver for Dell PowerScale | [csi-powerscale](https://github.com/dell/csi-powerscale) | v2.4 + |
+| CSI Driver for Dell PowerScale | [csi-powerscale](https://github.com/dell/csi-powerscale) | v2.8 + |
 {{</table>}}
 
 ### PowerScale

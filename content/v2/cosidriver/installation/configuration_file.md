@@ -4,11 +4,6 @@ linktitle: Configuration File
 weight: 1
 Description: Description of configuration file for ObjectScale
 ---
-
-> **Notational Conventions**
->
-> The keywords "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and "OPTIONAL" are to be interpreted as described in [RFC 2119](http://tools.ietf.org/html/rfc2119) (Bradner, S., "Key words for use in RFCs to Indicate Requirement Levels", BCP 14, RFC 2119, March 1997).
-
 ## Dell COSI Driver Configuration Schema
 
 This configuration file is used to specify the settings for the Dell COSI Driver, which is responsible for managing connections to the Dell ObjectScale platform. The configuration file is written in YAML format and based on the JSON schema and adheres to its specification.

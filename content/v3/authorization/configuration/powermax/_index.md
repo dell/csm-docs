@@ -85,8 +85,8 @@ Create the karavi-authorization-config secret using this command:
       enabled: true
 
       # sidecarProxyImage: the container image used for the csm-authorization-sidecar.
-      # Default value: dellemc/csm-authorization-sidecar:v1.7.0
-      sidecarProxyImage: dellemc/csm-authorization-sidecar:v1.7.0
+      # Default value: dellemc/csm-authorization-sidecar:v1.8.0
+      sidecarProxyImage: dellemc/csm-authorization-sidecar:v1.8.0
 
       # proxyHost: hostname of the csm-authorization server
       # Default value: None

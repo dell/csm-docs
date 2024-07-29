@@ -68,10 +68,10 @@ const CONSTANTS = {
 	PROPERTIES: ".properties",
 	HELM: "helm",
 	OPERATOR: "operator",
-	CSM_HELM_V170: "1.0.0",
 	CSM_HELM_V180: "1.1.0",
-	CSM_HELM_V190: "1.2.0",
-	CSM_HELM_V1100: "1.3.0",
+	CSM_HELM_V193: "1.2.1",
+	CSM_HELM_V1102: "1.3.2",
+	CSM_HELM_V1110: "1.4.0",
 };
 
 describe("GIVEN onAuthorizationChange function", () => {
@@ -257,18 +257,22 @@ describe("GIVEN onTopologyChange function", () => {
 		document.body.innerHTML = `
             <input type="checkbox" id="topology">
             <div id="topology-note-wrapper" style="display:">
+            <div id="observability-operator-topology-wrapper" style="display:">
         `;
 		onCertManagerChange("Temp topology note");
 		expect($("div#topology-note-wrapper").css("display")).toEqual("block");
+		expect($("div#observability-operator-topology-wrapper").css("display")).toEqual("block");
 	});
 
 	test("SHOULD show topology components when option checked", () => {
 		document.body.innerHTML = `
             <input type="checkbox" id="topology" checked>
             <div id="topology-note-wrapper" style="display:none">
+            <div id="observability-operator-topology-wrapper" style="display:none">
         `;
 		onCertManagerChange("Temp topology note");
 		expect($("div#topology-note-wrapper").css("display")).toEqual("none");
+		expect($("div#observability-operator-topology-wrapper").css("display")).toEqual("none");
 	});
 });
 
@@ -718,7 +722,7 @@ describe("GIVEN displayCommands function", () => {
 			<input id="array" value="powerstore">
 			<input id="installation-type" value="helm">
 			<input type="text" id="driver-namespace" value="csi-powerstore">
-			<input type="text" id="csm-version" value="1.7.0">
+			<input type="text" id="csm-version" value="1.8.0">
             <div id="command-text-area" style="display:none">
                 <div id="command-title"></div>
                 <span id="command-note" style="display:none"></span>
@@ -733,7 +737,7 @@ describe("GIVEN displayCommands function", () => {
 		expect($("#command-title").text()).toEqual("Run the following commands to install");
 		expect($("#command-note").text()).toEqual("Ensure that the namespaces and secrets are created before installing the helm chart");
 		expect($("#command1").text()).toEqual("helm repo add dell https://dell.github.io/helm-charts");
-		expect($("#command2").text()).toEqual("helm install powerstore dell/container-storage-modules -n csi-powerstore --version 1.0.0 -f values.yaml");
+		expect($("#command2").text()).toEqual("helm install powerstore dell/container-storage-modules -n csi-powerstore --version 1.1.0 -f values.yaml");
 	});
 
 	test("SHOULD show expected commands: Installation Type: Operator", () => {

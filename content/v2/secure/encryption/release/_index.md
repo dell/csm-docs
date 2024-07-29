@@ -6,16 +6,6 @@ Description: >
   Release Notes
 ---
 
-### New Features/Changes
-
-- [Technical preview release](https://github.com/dell/csm/issues/437)
-- Kubernetes 1.26 support.
-- Security updates.
-
-### Fixed Issues
-
-There are no fixed issues in this release.
-
 ### Known Issues
 
-There are no known issues in this release.
+The encryption module installation fails because sidecars like csi-metadata-retriever-* conflict when trying to access the same domain socket. (/var/run/csi/csi_retriever.sock). Please find the [github issue](https://github.com/dell/csm/issues/1309).
