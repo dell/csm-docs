@@ -318,74 +318,11 @@
 &lt;li&gt;Build a &lt;code&gt;tar.gz&lt;/code&gt; file containing the images as well as files required to installer the driver and/or Operator&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;The resulting offline bundle file can be copied to another machine, if necessary, to gain access to the desired image registry.&lt;/p&gt;
-&lt;p&gt;For example, here is the output of a request to build an offline bundle for the Dell CSM Operator:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;git clone -b v1.5.1 https://github.com/dell/csm-operator.git
+&lt;p&gt;The following is an example of how to build an offline bundle for the Dell CSM Operator:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;git clone -b &amp;lt;version tag&amp;gt; https://github.com/dell/csm-operator.git
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#204a87&#34;&gt;cd&lt;/span&gt; csm-operator
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;bash scripts/csm-offline-bundle.sh -c
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;*
-* Building image manifest file
-
-   Processing file /root/csm-operator/operatorconfig/driverconfig/common/default.yaml
-   Processing file /root/csm-operator/bundle/manifests/dell-csm-operator.clusterserviceversion.yaml
-
-*
-* Pulling and saving container images
-
-   dellemc/csi-isilon:v2.10.1
-   dellemc/csi-metadata-retriever:v1.6.0
-   dellemc/csipowermax-reverseproxy:v2.6.0
-   dellemc/csi-powermax:v2.10.1
-   dellemc/csi-powerstore:v2.10.1
-   dellemc/csi-unity:v2.10.1
-   dellemc/csi-vxflexos:v2.10.1
-   dellemc/csm-authorization-sidecar:v1.10.0
-   dellemc/csm-metrics-powerflex:v1.5.0
-   dellemc/csm-metrics-powerscale:v1.2.0
-   dellemc/csm-topology:v1.5.0
-   dellemc/dell-csi-replicator:v1.8.0
-   dellemc/dell-replication-controller:v1.8.0
-   dellemc/sdc:4.5
-   docker.io/dellemc/dell-csm-operator:v1.5.1
-   gcr.io/kubebuilder/kube-rbac-proxy:v0.8.0
-   nginxinc/nginx-unprivileged:1.20
-   otel/opentelemetry-collector:0.42.0
-   registry.k8s.io/sig-storage/csi-attacher:v4.3.0
-   registry.k8s.io/sig-storage/csi-external-health-monitor-controller:v0.9.0
-   registry.k8s.io/sig-storage/csi-node-driver-registrar:v2.8.0
-   registry.k8s.io/sig-storage/csi-provisioner:v3.5.0
-   registry.k8s.io/sig-storage/csi-resizer:v1.8.0
-   registry.k8s.io/sig-storage/csi-snapshotter:v6.2.2
-
-*
-* Copying necessary files
-
- /root/csm-operator/deploy
- /root/csm-operator/operatorconfig
- /root/csm-operator/samples
- /root/csm-operator/scripts
- /root/csm-operator/README.md
- /root/csm-operator/LICENSE
-
-*
-* Compressing release
-
-dell-csm-operator-bundle/
-dell-csm-operator-bundle/deploy/
-dell-csm-operator-bundle/deploy/operator.yaml
-dell-csm-operator-bundle/deploy/crds/
-dell-csm-operator-bundle/deploy/crds/storage.dell.com_containerstoragemodules.yaml
-dell-csm-operator-bundle/deploy/olm/
-dell-csm-operator-bundle/deploy/olm/operator_community.yaml
-...
-...
-dell-csm-operator-bundle/README.md
-dell-csm-operator-bundle/LICENSE
-
-*
-* Complete
-
-Offline bundle file is: /root/csm-operator/dell-csm-operator-bundle.tar.gz
-&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;unpacking-the-offline-bundle-and-preparing-for-installation&#34;&gt;Unpacking the offline bundle and preparing for installation&lt;/h3&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;unpacking-the-offline-bundle-and-preparing-for-installation&#34;&gt;Unpacking the offline bundle and preparing for installation&lt;/h3&gt;
 &lt;p&gt;This needs to be performed on a Linux system with access to an image registry that will host container images. If the registry requires &lt;code&gt;login&lt;/code&gt;, that should be done before proceeding.&lt;/p&gt;
 &lt;p&gt;To prepare for the driver or Operator installation, the following steps need to be performed:&lt;/p&gt;
 &lt;ol&gt;
@@ -419,41 +356,7 @@ dell-csm-operator-bundle/README.md
 dell-csm-operator-bundle/LICENSE
 &lt;/code&gt;&lt;/pre&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#204a87&#34;&gt;cd&lt;/span&gt; dell-csm-operator-bundle
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;bash scripts/csm-offline-bundle.sh -p -r localregistry:5000/dell-csm-operator/
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;Preparing a offline bundle for installation
-
-*
-* Loading docker images
-
-Loaded image: docker.io/dellemc/csi-powerstore:v2.10.1
-Loaded image: docker.io/dellemc/csi-isilon:v2.10.1
-...
-...
-Loaded image: registry.k8s.io/sig-storage/csi-resizer:v1.8.0
-Loaded image: registry.k8s.io/sig-storage/csi-snapshotter:v6.2.2
-
-*
-* Tagging and pushing images
-
-   dellemc/csi-isilon:v2.8.0 -&amp;gt; localregistry:5000/dell-csm-operator/csi-isilon:v2.8.0
-   dellemc/csi-metadata-retriever:v1.5.0 -&amp;gt; localregistry:5000/dell-csm-operator/csi-metadata-retriever:v1.5.0
-   ...
-   ...
-   registry.k8s.io/sig-storage/csi-resizer:v1.8.0 -&amp;gt; localregistry:5000/dell-csm-operator/csi-resizer:v1.8.0
-   registry.k8s.io/sig-storage/csi-snapshotter:v6.2.2 -&amp;gt; localregistry:5000/dell-csm-operator/csi-snapshotter:v6.2.2
-
-*
-* Preparing files within /root/dell-csm-operator-bundle
-
-   changing: dellemc/csi-isilon:v2.8.0 -&amp;gt; localregistry:5000/dell-csm-operator/csi-isilon:v2.8.0
-   changing: dellemc/csi-metadata-retriever:v1.5.0 -&amp;gt; localregistry:5000/dell-csm-operator/csi-metadata-retriever:v1.5.0
-   ...
-   ...
-   changing: registry.k8s.io/sig-storage/csi-resizer:v1.8.0 -&amp;gt; localregistry:5000/dell-csm-operator/csi-resizer:v1.8.0
-   changing: registry.k8s.io/sig-storage/csi-snapshotter:v6.2.2 -&amp;gt; localregistry:5000/dell-csm-operator/csi-snapshotter:v6.2.2
-
-*
-* Complete
-&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;perform-either-a-helm-installation-or-operator-installation&#34;&gt;Perform either a Helm installation or Operator installation&lt;/h3&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;perform-either-a-helm-installation-or-operator-installation&#34;&gt;Perform either a Helm installation or Operator installation&lt;/h3&gt;
 &lt;p&gt;Now that the required images are available and the Helm Charts/Operator configuration updated, you can proceed by following the usual installation procedure as documented either via &lt;a href=&#34;../../../deployment/helm/drivers/installation&#34;&gt;Helm&lt;/a&gt; or &lt;a href=&#34;../../../deployment/csmoperator/#installation&#34;&gt;Operator&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;NOTES:&lt;/em&gt;&lt;/p&gt;
 &lt;ol&gt;

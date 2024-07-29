@@ -184,16 +184,21 @@ Events
       <description>
         
         
-        &lt;h2 id=&#34;release-notes---container-storage-modules-operator-v151&#34;&gt;Release Notes - Container Storage Modules Operator v1.5.1&lt;/h2&gt;
+        &lt;h2 id=&#34;release-notes---container-storage-modules-operator-v160&#34;&gt;Release Notes - Container Storage Modules Operator v1.6.0&lt;/h2&gt;
 &lt;h3 id=&#34;new-featureschanges&#34;&gt;New Features/Changes&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1284&#34;&gt;#1284 - [FEATURE]: Support for Openshift 4.15&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/926&#34;&gt;#926 - [FEATURE]: Fixing the linting, formatting and vetting issues&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1359&#34;&gt;#1359 - [FEATURE]: Add Support for OpenShift Container Platform (OCP) 4.16 &lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1277&#34;&gt;#1277 - [FEATURE]: Add Authorization upgrade is supported in CSM Operator&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1396&#34;&gt;#1396 - [FEATURE]: DCM and DN client upgrade is supported in CSM operator &lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1397&#34;&gt;#1397 - [FEATURE]: Observability upgrade is supported in CSM Operator&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;fixed-issues&#34;&gt;Fixed Issues&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1094&#34;&gt;#1094 - [BUG]: CSM Operator offline install powerflex csi driver sidecar trying to pull from registry.k8s.io&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1174&#34;&gt;#1174 - [BUG]: Kubelet Configuration Directory setting should not have a comment about default value being None&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1200&#34;&gt;#1200 - [BUG]: CrashLoopBackOff and OOMKilled issue in pod : Dell CSM Operator Manager POD&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1205&#34;&gt;#1205 - [BUG]: Operator doesn&amp;rsquo;t support non-authorization namespace&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1220&#34;&gt;#1220 - [BUG]: Issue while Configuring Authorization module with Powermax CSI Driver using Operator&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1238&#34;&gt;#1238 - [BUG]: Missing mountPropagation param for Powermax node template in CSM-Operator&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1291&#34;&gt;#1291 - [BUG]: Fix linter errors in csm-operator&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;known-issues&#34;&gt;Known Issues&lt;/h3&gt;
 &lt;table&gt;
@@ -209,8 +214,8 @@ Events
 &lt;td&gt;This should not cause any issues on the system, but all secrets present on the cluster can be found with &lt;code&gt;kubectl get secrets -A&lt;/code&gt;, and any unwanted secrets can be deleted with &lt;code&gt;kubectl delete secret -n &amp;lt;secret-namespace&amp;gt; &amp;lt;secret-name&amp;gt;&lt;/code&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;CSM Operator does not support dynamic namespaces for Authorization. Despite successful installation in a namespace other than &amp;ldquo;authorization&amp;rdquo;, errors may arise during volume creation.&lt;/td&gt;
-&lt;td&gt;Use the default namespace &amp;ldquo;authorization&amp;rdquo; for installing Authorization using CSM Operator&lt;/td&gt;
+&lt;td&gt;In certain environments, users have encountered difficulties in installing drivers using the CSM Operator due to the &amp;lsquo;OOM Killed&amp;rsquo; issue. This issue is attributed to the default resource requests and limits configured in the CSM Operator, which fail to meet the resource requirements of the user environments. OOM error occurs when a process in the container tries to consume more memory than the limit specified in resource configuration.&lt;/td&gt;
+&lt;td&gt;Before deploying the CSM Operator, it is crucial to adjust the memory and CPU requests and limits in the files &lt;a href=&#34;https://github.com/dell/csm-operator/blob/main/config/manager/manager.yaml#L100&#34;&gt;config/manager.yaml&lt;/a&gt;, &lt;a href=&#34;https://github.com/dell/csm-operator/blob/main/deploy/operator.yaml#L1330&#34;&gt;deploy/operator.yaml&lt;/a&gt; to align with the user&amp;rsquo;s environment requirements. If the containers running on the pod exceed the specified CPU and memory limits, the pod may get evicted. Currently CSM Operator do not support updating this configuration dynamically. CSM Operator needs to be redeployed for these updates to take effect in case it is already installed. Steps to manually update the resource configuration and then redeploy CSM Operator are available &lt;a href=&#34;https://dell.github.io/csm-docs/docs/deployment/csmoperator/#installation&#34;&gt;here&lt;/a&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;

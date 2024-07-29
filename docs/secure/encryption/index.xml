@@ -23,8 +23,11 @@
       <description>
         
         
-        &lt;h3 id=&#34;known-issues&#34;&gt;Known Issues&lt;/h3&gt;
-&lt;p&gt;The encryption module installation fails because sidecars like csi-metadata-retriever-* conflict when trying to access the same domain socket. (/var/run/csi/csi_retriever.sock). Please find the &lt;a href=&#34;https://github.com/dell/csm/issues/1309&#34;&gt;github issue&lt;/a&gt;.&lt;/p&gt;
+        &lt;h2 id=&#34;release-notes---csm-encryption&#34;&gt;Release Notes - CSM Encryption&lt;/h2&gt;
+&lt;h3 id=&#34;fixed-issues&#34;&gt;Fixed Issues&lt;/h3&gt;
+&lt;p&gt;There are no fixed issues in this release.&lt;/p&gt;
+&lt;h3 id=&#34;known-issues&#34;&gt;Known Issues&lt;/h3&gt;
+&lt;p&gt;There are no known issues in this release.&lt;/p&gt;
 
       </description>
     </item>
