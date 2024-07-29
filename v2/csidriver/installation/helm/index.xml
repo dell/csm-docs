@@ -24,24 +24,11 @@
         
         
         &lt;p&gt;The CSI Driver for Dell PowerFlex can be deployed by using the provided Helm v3 charts and installation scripts on both Kubernetes and OpenShift platforms. For more detailed information on the installation scripts, review the script &lt;a href=&#34;https://github.com/dell/csi-powerflex/tree/master/dell-csi-helm-installer&#34;&gt;documentation&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;The controller section of the Helm chart installs the following components in a &lt;em&gt;Deployment&lt;/em&gt; in the specified namespace:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;CSI Driver for Dell PowerFlex&lt;/li&gt;
-&lt;li&gt;Kubernetes External Provisioner, which provisions the volumes&lt;/li&gt;
-&lt;li&gt;Kubernetes External Attacher, which attaches the volumes to the containers&lt;/li&gt;
-&lt;li&gt;Kubernetes External Snapshotter, which provides snapshot support&lt;/li&gt;
-&lt;li&gt;Kubernetes External Resizer, which resizes the volume&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;The node section of the Helm chart installs the following component in a &lt;em&gt;DaemonSet&lt;/em&gt; in the specified namespace:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;CSI Driver for Dell PowerFlex&lt;/li&gt;
-&lt;li&gt;Kubernetes Node Registrar, which handles the driver registration&lt;/li&gt;
-&lt;/ul&gt;
 &lt;h2 id=&#34;prerequisites&#34;&gt;Prerequisites&lt;/h2&gt;
 &lt;p&gt;The following are requirements that must be met before installing the CSI Driver for Dell PowerFlex:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Install Kubernetes or OpenShift (see &lt;a href=&#34;../../../../csidriver/#features-and-capabilities&#34;&gt;supported versions&lt;/a&gt;)&lt;/li&gt;
-&lt;li&gt;Install Helm 3&lt;/li&gt;
+&lt;li&gt;Install Helm 3.x&lt;/li&gt;
 &lt;li&gt;Enable Zero Padding on PowerFlex&lt;/li&gt;
 &lt;li&gt;Mount propagation is enabled on container runtime that is being used&lt;/li&gt;
 &lt;li&gt;Install PowerFlex Storage Data Client&lt;/li&gt;
@@ -50,10 +37,10 @@
 &lt;li&gt;If enabling CSM for Authorization, please refer to the &lt;a href=&#34;../../../../authorization/deployment/&#34;&gt;Authorization deployment steps&lt;/a&gt; first&lt;/li&gt;
 &lt;li&gt;If multipath is configured, ensure CSI-PowerFlex volumes are blacklisted by multipathd. See &lt;a href=&#34;../../../troubleshooting/powerflex&#34;&gt;troubleshooting section&lt;/a&gt; for details&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id=&#34;install-helm-30&#34;&gt;Install Helm 3.0&lt;/h3&gt;
-&lt;p&gt;Install Helm 3.0 on the master node before you install the CSI Driver for Dell PowerFlex.&lt;/p&gt;
+&lt;h3 id=&#34;install-helm-3x&#34;&gt;Install Helm 3.x&lt;/h3&gt;
+&lt;p&gt;Install Helm 3.x on the master node before you install the CSI Driver for Dell PowerFlex.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Steps&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;Run the command to install Helm 3.0.&lt;/p&gt;
+&lt;p&gt;Run the command to install Helm 3.x.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; bash
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;enable-zero-padding-on-powerflex&#34;&gt;Enable Zero Padding on PowerFlex&lt;/h3&gt;
 &lt;p&gt;Verify that zero padding is enabled on the PowerFlex storage pools that will be used. Use PowerFlex GUI or the PowerFlex CLI to check this setting. For more information to configure this setting, see &lt;a href=&#34;https://www.dell.com/support/manuals/en-us/scaleio/pfx_powerflex_config_customize_3.6.x/enable-or-disable-zero-padding-policy?guid=guid-d32bdff7-3014-4894-8e1e-2a31a86d343a&amp;amp;lang=en-us&#34;&gt;Dell PowerFlex documentation&lt;/a&gt;.&lt;/p&gt;
@@ -93,7 +80,7 @@ Refer to &lt;a href=&#34;https://hub.docker.com/r/dellemc/sdc&#34;&gt;https://hu
 &lt;p&gt;&lt;strong&gt;Steps&lt;/strong&gt;&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;
-&lt;p&gt;Run &lt;code&gt;git clone -b v2.8.0 https://github.com/dell/csi-powerflex.git&lt;/code&gt; to clone the git repository.&lt;/p&gt;
+&lt;p&gt;Run &lt;code&gt;git clone -b v2.9.2 https://github.com/dell/csi-powerflex.git&lt;/code&gt; to clone the git repository.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;A namespace for the driver is expected prior to running the command below. If one is not created already, you can run &lt;code&gt;kubectl create namespace vxflexos&lt;/code&gt; to create a new one.
@@ -190,6 +177,7 @@ Note that the namespace can be any user-defined name that follows the convention
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;mdm&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;10.0.0.3,10.0.0.4&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;nasName &lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;nasServer&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;em&gt;NOTE: To use multiple arrays, copy and paste section above for each array. Make sure isDefault is set to true for only one array.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;If replication feature is enabled, ensure the secret includes all the PowerFlex arrays involved in replication.&lt;/p&gt;
 &lt;p&gt;After editing the file, run the below command to create a secret called &lt;code&gt;vxflexos-config&lt;/code&gt;. This assumes &lt;code&gt;vxflexos&lt;/code&gt; is release name, but it can be modified during &lt;a href=&#34;../#install-the-driver&#34;&gt;install&lt;/a&gt;:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl create secret generic vxflexos-config -n vxflexos --from-file&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;config&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;samples/secret.yaml
@@ -218,14 +206,10 @@ kubeVersion: &amp;ldquo;&amp;gt;= 1.21.0-0 &amp;lt; 1.29.0-0&amp;rdquo;&lt;/li&g
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Download the default values.yaml file&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#204a87&#34;&gt;cd&lt;/span&gt; dell-csi-helm-installer &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; wget -O myvalues.yaml https://github.com/dell/helm-charts/raw/csi-vxflexos-2.8.0/charts/csi-vxflexos/values.yaml
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;
-&lt;p&gt;Note: To connect to a PowerFlex 4.5 array, edit the powerflexSdc parameter in your values.yaml file to use dellemc/sdc:4.5:&lt;br&gt;
-&lt;code&gt;powerflexSdc: dellemc/sdc:4.5&lt;/code&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;/li&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#204a87&#34;&gt;cd&lt;/span&gt; dell-csi-helm-installer &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; wget -O myvalues.yaml https://github.com/dell/helm-charts/raw/csi-vxflexos-2.9.2/charts/csi-vxflexos/values.yaml
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;If you are using a custom image, check the &lt;code&gt;version&lt;/code&gt; and &lt;code&gt;driverRepository&lt;/code&gt; fields in &lt;code&gt;my-vxflexos-settings.yaml&lt;/code&gt; to make sure that they are pointing to the correct image repository and driver version. These two fields are spliced together to form the image name, as shown here: &lt;code&gt;&amp;lt;driverRepository&amp;gt;/csi-vxflexos:v&amp;lt;version&amp;gt;&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;If you are using custom images, check the fields under &lt;code&gt;images&lt;/code&gt; in &lt;code&gt;my-vxflexos-settings.yaml&lt;/code&gt; to make sure that they are pointing to the correct image repository.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Look over all the other fields &lt;code&gt;myvalues.yaml&lt;/code&gt; and fill in/adjust any as needed. All the fields are described here:&lt;/p&gt;
@@ -245,19 +229,19 @@ kubeVersion: &amp;ldquo;&amp;gt;= 1.21.0-0 &amp;lt; 1.29.0-0&amp;rdquo;&lt;/li&g
 &lt;td&gt;version&lt;/td&gt;
 &lt;td&gt;Set to verify the values file version matches driver version and used to pull the image as part of the image name.&lt;/td&gt;
 &lt;td&gt;Yes&lt;/td&gt;
-&lt;td&gt;2.8.0&lt;/td&gt;
+&lt;td&gt;2.9.2&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;driverRepository&lt;/td&gt;
-&lt;td&gt;Set to give the repository containing the driver image (used as part of the image name).&lt;/td&gt;
+&lt;td&gt;images&lt;/td&gt;
+&lt;td&gt;List all the images used by the CSI driver and CSM. If you use a private repository, change the registries accordingly.&lt;/td&gt;
 &lt;td&gt;Yes&lt;/td&gt;
-&lt;td&gt;dellemc&lt;/td&gt;
+&lt;td&gt;&amp;quot;&amp;quot;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;powerflexSdc&lt;/td&gt;
+&lt;td&gt;images.powerflexSdc&lt;/td&gt;
 &lt;td&gt;Set to give the location of the SDC image used if automatic SDC deployment is being utilized.&lt;/td&gt;
 &lt;td&gt;Yes&lt;/td&gt;
-&lt;td&gt;dellemc/sdc:3.6.1&lt;/td&gt;
+&lt;td&gt;dellemc/sdc:4.5&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;certSecretCount&lt;/td&gt;
@@ -324,6 +308,12 @@ kubeVersion: &amp;ldquo;&amp;gt;= 1.21.0-0 &amp;lt; 1.29.0-0&amp;rdquo;&lt;/li&g
 &lt;td&gt;A boolean that, when enabled, will set quota limit for a newly provisioned NFS volume.&lt;/td&gt;
 &lt;td&gt;No&lt;/td&gt;
 &lt;td&gt;false&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;externalAccess&lt;/td&gt;
+&lt;td&gt;Defines additional entries for hostAccess of NFS volumes, single IP address and subnet are valid entries&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;td&gt;&amp;quot; &amp;quot;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;strong&gt;controller&lt;/strong&gt;&lt;/td&gt;
@@ -506,12 +496,6 @@ kubeVersion: &amp;ldquo;&amp;gt;= 1.21.0-0 &amp;lt; 1.29.0-0&amp;rdquo;&lt;/li&g
 &lt;td&gt;false&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;image&lt;/td&gt;
-&lt;td&gt;image for podmon.&lt;/td&gt;
-&lt;td&gt;No&lt;/td&gt;
-&lt;td&gt;&amp;quot; &amp;quot;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
 &lt;td&gt;&lt;strong&gt;authorization&lt;/strong&gt;&lt;/td&gt;
 &lt;td&gt;&lt;a href=&#34;../../../../authorization/deployment&#34;&gt;Authorization&lt;/a&gt; is an optional feature to apply credential shielding of the backend PowerFlex.&lt;/td&gt;
 &lt;td&gt;-&lt;/td&gt;
@@ -522,12 +506,6 @@ kubeVersion: &amp;ldquo;&amp;gt;= 1.21.0-0 &amp;lt; 1.29.0-0&amp;rdquo;&lt;/li&g
 &lt;td&gt;A boolean that enables/disables authorization feature.&lt;/td&gt;
 &lt;td&gt;No&lt;/td&gt;
 &lt;td&gt;false&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;sidecarProxyImage&lt;/td&gt;
-&lt;td&gt;Image for csm-authorization-sidecar.&lt;/td&gt;
-&lt;td&gt;No&lt;/td&gt;
-&lt;td&gt;&amp;quot; &amp;quot;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;proxyHost&lt;/td&gt;
@@ -544,11 +522,14 @@ kubeVersion: &amp;ldquo;&amp;gt;= 1.21.0-0 &amp;lt; 1.29.0-0&amp;rdquo;&lt;/li&g
 &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;ol start=&#34;10&#34;&gt;
-&lt;li&gt;Install the driver using &lt;code&gt;csi-install.sh&lt;/code&gt; bash script by running &lt;code&gt;cd dell-csi-helm-installer &amp;amp;&amp;amp; ./csi-install.sh --namespace vxflexos --values myvalues.yaml&lt;/code&gt;. You may modify the release name with the &lt;code&gt;--release&lt;/code&gt; arg. If arg is not provided, release will be named &lt;code&gt;vxflexos&lt;/code&gt; by default.
+&lt;li&gt;Install the driver using &lt;code&gt;csi-install.sh&lt;/code&gt; bash script by running &lt;code&gt;cd dell-csi-helm-installer &amp;amp;&amp;amp; ./csi-install.sh --namespace vxflexos --values myvalues.yaml --helm-charts-version &amp;lt;version&amp;gt;&lt;/code&gt;. You may modify the release name with the &lt;code&gt;--release&lt;/code&gt; arg. If arg is not provided, release will be named &lt;code&gt;vxflexos&lt;/code&gt; by default.
 Alternatively, to do a helm install solely with Helm charts (without shell scripts), refer to &lt;code&gt;helm/README.md&lt;/code&gt;.&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;&lt;em&gt;NOTE:&lt;/em&gt;&lt;/p&gt;
 &lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;The parameter &lt;code&gt;--helm-charts-version&lt;/code&gt; is optional and if you do not specify the flag, by default the &lt;code&gt;csi-install.sh&lt;/code&gt; script will clone the version of the helm chart that is specified in the driver&amp;rsquo;s &lt;a href=&#34;https://github.com/dell/csi-powerflex/blob/main/dell-csi-helm-installer/csi-install.sh#L24&#34;&gt;csi-install.sh&lt;/a&gt; file. If you wish to install the driver using a different version of the helm chart, you need to include this flag. Also, remember to delete the &lt;code&gt;helm-charts&lt;/code&gt; repository present in the &lt;code&gt;csi-powerflex&lt;/code&gt; directory if it was cloned before.&lt;/p&gt;
+&lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;For detailed instructions on how to run the install scripts, refer to the README.md  in the dell-csi-helm-installer folder.&lt;/p&gt;
 &lt;/li&gt;
@@ -651,31 +632,7 @@ Deleting a storage class has no impact on a running Pod with mounted PVCs. You c
       <description>
         
         
-        
-
-&lt;div class=&#34;pageinfo pageinfo-primary&#34;&gt;
-Linked Proxy mode for CSI reverse proxy is no longer actively maintained or supported. It will be deprecated in CSM 1.9 (Driver Version 2.9.0). It is highly recommended that you use stand alone mode going forward.
-&lt;/div&gt;
-
-&lt;p&gt;CSI Driver for Dell PowerMax can be deployed by using the provided Helm v3 charts and installation scripts on both Kubernetes and OpenShift platforms. For more detailed information on the installation scripts, see the script &lt;a href=&#34;https://github.com/dell/csi-powermax/tree/master/dell-csi-helm-installer&#34;&gt;documentation&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;The controller section of the Helm chart installs the following components in a &lt;em&gt;Deployment&lt;/em&gt; in the specified namespace:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;CSI Driver for Dell PowerMax&lt;/li&gt;
-&lt;li&gt;Kubernetes External Provisioner, which provisions the volumes&lt;/li&gt;
-&lt;li&gt;Kubernetes External Attacher, which attaches the volumes to the containers&lt;/li&gt;
-&lt;li&gt;Kubernetes External Snapshotter, which provides snapshot support-&lt;/li&gt;
-&lt;li&gt;CSI PowerMax ReverseProxy, which maximizes CSI driver and Unisphere performance&lt;/li&gt;
-&lt;li&gt;Kubernetes External Resizer, which resizes the volume&lt;/li&gt;
-&lt;li&gt;(optional) Kubernetes External health monitor, which provides volume health status&lt;/li&gt;
-&lt;li&gt;(optional) Dell CSI Replicator, which provides Replication capability.&lt;/li&gt;
-&lt;li&gt;(optional) Dell CSI Migrator, which provides migrating capability within and across arrays&lt;/li&gt;
-&lt;li&gt;(optional) Node rescanner, which rescans the node for new data paths after migration&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;The node section of the Helm chart installs the following component in a &lt;em&gt;DaemonSet&lt;/em&gt; in the specified namespace:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;CSI Driver for Dell PowerMax&lt;/li&gt;
-&lt;li&gt;Kubernetes Node Registrar, which handles the driver registration&lt;/li&gt;
-&lt;/ul&gt;
+        &lt;p&gt;CSI Driver for Dell PowerMax can be deployed by using the provided Helm v3 charts and installation scripts on both Kubernetes and OpenShift platforms. For more detailed information on the installation scripts, see the script &lt;a href=&#34;https://github.com/dell/csi-powermax/tree/master/dell-csi-helm-installer&#34;&gt;documentation&lt;/a&gt;.&lt;/p&gt;
 &lt;h2 id=&#34;prerequisites&#34;&gt;Prerequisites&lt;/h2&gt;
 &lt;p&gt;The following requirements must be met before installing CSI Driver for Dell PowerMax:&lt;/p&gt;
 &lt;ul&gt;
@@ -788,7 +745,42 @@ These values can be obtained using base64 encoding as described in the following
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;features &amp;#34;1 queue_if_no_path&amp;#34;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;path_selector &amp;#34;round-robin 0&amp;#34;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;no_path_retry 10
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;powerpath-for-linux-requirements&#34;&gt;PowerPath for Linux requirements&lt;/h3&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;multipathd-machineconfig&#34;&gt;multipathd &lt;code&gt;MachineConfig&lt;/code&gt;&lt;/h4&gt;
+&lt;p&gt;If you are installing a CSI Driver which requires the installation of the Linux native Multipath software - &lt;em&gt;multipathd&lt;/em&gt;, please follow the below instructions&lt;/p&gt;
+&lt;p&gt;To enable multipathd on RedHat CoreOS nodes you need to prepare a working configuration encoded in base64.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;user_friendly_names yes
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;find_multipaths yes
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;blacklist &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#a40000&#34;&gt;&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; base64 -w0
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Use the base64 encoded string output in the following &lt;code&gt;MachineConfig&lt;/code&gt; yaml file (under source section)&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;apiVersion&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;machineconfiguration.openshift.io/v1&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;kind&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;MachineConfig&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;metadata&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;workers-multipath-conf-default&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;labels&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;machineconfiguration.openshift.io/role&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;worker&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;spec&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;config&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;ignition&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;version&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;3.2.0&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;storage&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;files&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;- &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;contents&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;          &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;source&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;data:text/plain;charset=utf-8;base64,ZGVmYXVsdHMgewp1c2VyX2ZyaWVuZGx5X25hbWVzIHllcwpmaW5kX211bHRpcGF0aHMgeWVzCn0KCmJsYWNrbGlzdCB7Cn0K&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;          &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;verification&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;{}&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;filesystem&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;root&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;mode&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;400&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;path&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;/etc/multipath.conf&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;After deploying this&lt;code&gt;MachineConfig&lt;/code&gt; object, CoreOS will start multipath service automatically.
+Alternatively, you can check the status of the multipath service by entering the following command in each worker nodes.
+&lt;code&gt;sudo multipath -ll&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;If the above command is not successful, ensure that the /etc/multipath.conf file is present and configured properly. Once the file has been configured correctly, enable the multipath service by running the following command:
+&lt;code&gt;sudo /sbin/mpathconf –-enable --with_multipathd y&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Finally, you have to restart the service by providing the command
+&lt;code&gt;sudo systemctl restart multipathd&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;For additional information refer to official documentation of the multipath configuration.&lt;/p&gt;
+&lt;h3 id=&#34;powerpath-for-linux-requirements&#34;&gt;PowerPath for Linux requirements&lt;/h3&gt;
 &lt;p&gt;CSI Driver for Dell PowerMax supports PowerPath for Linux. Configure Linux PowerPath before installing the CSI Driver.&lt;/p&gt;
 &lt;p&gt;Set up the PowerPath for Linux as follows:&lt;/p&gt;
 &lt;ul&gt;
@@ -815,7 +807,7 @@ These values can be obtained using base64 encoding as described in the following
 &lt;h2 id=&#34;install-the-driver&#34;&gt;Install the Driver&lt;/h2&gt;
 &lt;p&gt;&lt;strong&gt;Steps&lt;/strong&gt;&lt;/p&gt;
 &lt;ol&gt;
-&lt;li&gt;Run &lt;code&gt;git clone -b v2.8.0 https://github.com/dell/csi-powermax.git&lt;/code&gt; to clone the git repository. This will include the Helm charts and dell-csi-helm-installer scripts.&lt;/li&gt;
+&lt;li&gt;Run &lt;code&gt;git clone -b v2.9.1 https://github.com/dell/csi-powermax.git&lt;/code&gt; to clone the git repository. This will include the Helm charts and dell-csi-helm-installer scripts.&lt;/li&gt;
 &lt;li&gt;Ensure that you have created a namespace where you want to install the driver. You can run &lt;code&gt;kubectl create namespace powermax&lt;/code&gt; to create a new one&lt;/li&gt;
 &lt;li&gt;Edit the &lt;code&gt;samples/secret/secret.yaml&lt;/code&gt; file,to point to the correct namespace, and replace the values for the username and password parameters.
 These values can be obtained using base64 encoding as described in the following example:
@@ -826,7 +818,7 @@ These values can be obtained using base64 encoding as described in the following
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl create -f samples/secret/secret.yaml
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
 &lt;li&gt;Download the default values.yaml file
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#204a87&#34;&gt;cd&lt;/span&gt; dell-csi-helm-installer &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; wget -O my-powermax-settings.yaml https://github.com/dell/helm-charts/raw/csi-powermax-2.8.0/charts/csi-powermax/values.yaml
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#204a87&#34;&gt;cd&lt;/span&gt; dell-csi-helm-installer &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; wget -O my-powermax-settings.yaml https://github.com/dell/helm-charts/raw/csi-powermax-2.9.1/charts/csi-powermax/values.yaml
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
 &lt;li&gt;Ensure the unisphere have 10.0 REST endpoint support by clicking on Unisphere -&amp;gt; Help (?) -&amp;gt; About in Unisphere for PowerMax GUI.&lt;/li&gt;
 &lt;li&gt;Edit the newly created file and provide values for the following parameters
@@ -851,7 +843,7 @@ These values can be obtained using base64 encoding as described in the following
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;defaultCredentialsSecret&lt;/td&gt;
-&lt;td&gt;This secret name refers to:&lt;br&gt; 1. The Unisphere credentials if the driver is installed without proxy or with proxy in Linked mode.&lt;br&gt;2. The proxy credentials if the driver is installed with proxy in StandAlone mode.&lt;br&gt;3. The default Unisphere credentials if credentialsSecret is not specified for a management server.&lt;/td&gt;
+&lt;td&gt;This secret name refers to:&lt;br&gt; 1 The proxy credentials if the driver is installed with proxy in StandAlone mode.&lt;br&gt;2. The default Unisphere credentials if credentialsSecret is not specified for a management server.&lt;/td&gt;
 &lt;td&gt;Yes&lt;/td&gt;
 &lt;td&gt;powermax-creds&lt;/td&gt;
 &lt;/tr&gt;
@@ -1033,19 +1025,13 @@ These values can be obtained using base64 encoding as described in the following
 &lt;td&gt;version&lt;/td&gt;
 &lt;td&gt;Current version of the driver. Don&amp;rsquo;t modify this value as this value will be used by the install script.&lt;/td&gt;
 &lt;td&gt;Yes&lt;/td&gt;
-&lt;td&gt;v2.3.0&lt;/td&gt;
+&lt;td&gt;v2.9.1&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;images&lt;/td&gt;
-&lt;td&gt;Defines the container images used by the driver.&lt;/td&gt;
-&lt;td&gt;-&lt;/td&gt;
-&lt;td&gt;-&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;driverRepository&lt;/td&gt;
-&lt;td&gt;Defines the registry of the container image used for the driver.&lt;/td&gt;
+&lt;td&gt;List all the images used by the CSI driver and CSM. If you use a private repository, change the registries accordingly.&lt;/td&gt;
 &lt;td&gt;Yes&lt;/td&gt;
-&lt;td&gt;dellemc&lt;/td&gt;
+&lt;td&gt;&amp;quot;&amp;quot;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;maxPowerMaxVolumesPerNode&lt;/td&gt;
@@ -1150,12 +1136,6 @@ These values can be obtained using base64 encoding as described in the following
 &lt;td&gt;-&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;image&lt;/td&gt;
-&lt;td&gt;This refers to the image of the CSI PowerMax Reverse Proxy container.&lt;/td&gt;
-&lt;td&gt;Yes&lt;/td&gt;
-&lt;td&gt;dellemc/csipowermax-reverseproxy:v2.4.0&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
 &lt;td&gt;tlsSecret&lt;/td&gt;
 &lt;td&gt;This refers to the TLS secret of the Reverse Proxy Server.&lt;/td&gt;
 &lt;td&gt;Yes&lt;/td&gt;
@@ -1172,12 +1152,6 @@ These values can be obtained using base64 encoding as described in the following
 &lt;td&gt;Specify the port number that is used by the NodePort service created by the CSI PowerMax Reverse Proxy installation&lt;/td&gt;
 &lt;td&gt;Yes&lt;/td&gt;
 &lt;td&gt;2222&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;mode&lt;/td&gt;
-&lt;td&gt;This refers to the installation mode of Reverse Proxy. It can be set to:&lt;br&gt; 1. &lt;em&gt;Linked&lt;/em&gt;: In this mode, the Reverse Proxy communicates with a primary or a backup Unisphere managing the same set of arrays.&lt;br&gt;2. &lt;em&gt;StandAlone&lt;/em&gt;: In this mode, the Reverse Proxy communicates with multiple arrays managed by different Unispheres.&lt;/td&gt;
-&lt;td&gt;Yes&lt;/td&gt;
-&lt;td&gt;&amp;ldquo;StandAlone&amp;rdquo;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;strong&gt;certManager&lt;/strong&gt;&lt;/td&gt;
@@ -1214,12 +1188,6 @@ These values can be obtained using base64 encoding as described in the following
 &lt;td&gt;A boolean that enables/disables authorization feature.&lt;/td&gt;
 &lt;td&gt;No&lt;/td&gt;
 &lt;td&gt;false&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;sidecarProxyImage&lt;/td&gt;
-&lt;td&gt;Image for csm-authorization-sidecar.&lt;/td&gt;
-&lt;td&gt;No&lt;/td&gt;
-&lt;td&gt;&amp;quot; &amp;quot;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;proxyHost&lt;/td&gt;
@@ -1274,12 +1242,6 @@ These values can be obtained using base64 encoding as described in the following
 &lt;td&gt;A boolean that enables/disables replication feature.&lt;/td&gt;
 &lt;td&gt;No&lt;/td&gt;
 &lt;td&gt;false&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;image&lt;/td&gt;
-&lt;td&gt;Image for dell-csi-replicator sidecar.&lt;/td&gt;
-&lt;td&gt;No&lt;/td&gt;
-&lt;td&gt;&amp;quot; &amp;quot;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;replicationContextPrefix&lt;/td&gt;
@@ -1351,7 +1313,7 @@ These values can be obtained using base64 encoding as described in the following
 &lt;/table&gt;
 &lt;ol start=&#34;8&#34;&gt;
 &lt;li&gt;Install the driver using &lt;code&gt;csi-install.sh&lt;/code&gt; bash script by running
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#204a87&#34;&gt;cd&lt;/span&gt; ../dell-csi-helm-installer &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; ./csi-install.sh --namespace powermax --values ./my-powermax-settings.yaml
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#204a87&#34;&gt;cd&lt;/span&gt; ../dell-csi-helm-installer &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; ./csi-install.sh --namespace powermax --values ./my-powermax-settings.yaml --helm-charts-version &amp;lt;version&amp;gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
 &lt;li&gt;Or you can also install the driver using standalone helm chart using the command
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;helm install --values  my-powermax-settings.yaml --namespace powermax powermax ./csi-powermax
@@ -1359,12 +1321,13 @@ These values can be obtained using base64 encoding as described in the following
 &lt;/ol&gt;
 &lt;p&gt;&lt;em&gt;Note:&lt;/em&gt;&lt;/p&gt;
 &lt;ul&gt;
+&lt;li&gt;The parameter &lt;code&gt;--helm-charts-version&lt;/code&gt; is optional and if you do not specify the flag, by default the &lt;code&gt;csi-install.sh&lt;/code&gt; script will clone the version of the helm chart that is specified in the driver&amp;rsquo;s &lt;a href=&#34;https://github.com/dell/csi-powermax/blob/main/dell-csi-helm-installer/csi-install.sh#L52&#34;&gt;csi-install.sh&lt;/a&gt; file. If you wish to install the driver using a different version of the helm chart, you need to include this flag. Also, remember to delete the &lt;code&gt;helm-charts&lt;/code&gt; repository present in the &lt;code&gt;csi-powermax&lt;/code&gt; directory if it was cloned before.&lt;/li&gt;
 &lt;li&gt;For detailed instructions on how to run the install scripts, see the readme document in the dell-csi-helm-installer folder.&lt;/li&gt;
 &lt;li&gt;There are a set of samples provided &lt;a href=&#34;#sample-values-file&#34;&gt;here&lt;/a&gt; to help you configure the driver with reverse proxy&lt;/li&gt;
 &lt;li&gt;This script also runs the verify.sh script in the same directory. You will be prompted to enter the credentials for each of the Kubernetes nodes. The &lt;code&gt;verify.sh&lt;/code&gt; script needs the credentials to check if the iSCSI initiators have been configured on all nodes. You can also skip the verification step by specifying the &lt;code&gt;--skip-verify-node&lt;/code&gt; option&lt;/li&gt;
 &lt;li&gt;In order to enable authorization, there should be an authorization proxy server already installed.&lt;/li&gt;
 &lt;li&gt;PowerMax Array username must have role as &lt;code&gt;StorageAdmin&lt;/code&gt; to be able to perform CRUD operations.&lt;/li&gt;
-&lt;li&gt;If the user is using complex K8s version like “v1.23.3-mirantis-1”, use this kubeVersion check in &lt;a href=&#34;https://github.com/dell/helm-charts/blob/main/charts/csi-powermax/Chart.yaml&#34;&gt;helm Chart&lt;/a&gt; file. kubeVersion: “&amp;gt;= 1.23.0-0 &amp;lt; 1.27.0-0”.&lt;/li&gt;
+&lt;li&gt;If the user is using complex K8s version like “v1.24.3-mirantis-1”, use this kubeVersion check in &lt;a href=&#34;https://github.com/dell/helm-charts/blob/main/charts/csi-powermax/Chart.yaml&#34;&gt;helm Chart&lt;/a&gt; file. kubeVersion: “&amp;gt;= 1.24.0-0 &amp;lt; 1.29.0-0”.&lt;/li&gt;
 &lt;li&gt;User should provide all boolean values with double-quotes. This applies only for values.yaml. Example: “true”/“false”.&lt;/li&gt;
 &lt;li&gt;controllerCount parameter value should be &amp;lt;= number of nodes in the kubernetes cluster else install script fails.&lt;/li&gt;
 &lt;li&gt;Endpoint should not have any special character at the end apart from port number.&lt;/li&gt;
@@ -1374,40 +1337,7 @@ These values can be obtained using base64 encoding as described in the following
 &lt;h2 id=&#34;volume-snapshot-class&#34;&gt;Volume Snapshot Class&lt;/h2&gt;
 &lt;p&gt;Starting with CSI PowerMax v1.7.0, &lt;code&gt;dell-csi-helm-installer&lt;/code&gt; will not create any Volume Snapshot Class during the driver installation. There is a sample Volume Snapshot Class manifest present in the &lt;em&gt;samples/volumesnapshotclass&lt;/em&gt; folder. Please use this sample to create a new Volume Snapshot Class to create Volume Snapshots.&lt;/p&gt;
 &lt;h2 id=&#34;sample-values-file&#34;&gt;Sample values file&lt;/h2&gt;
-&lt;p&gt;The following sections have useful snippets from &lt;code&gt;values.yaml&lt;/code&gt; file which provides more information on how to configure the CSI PowerMax driver along with CSI PowerMax ReverseProxy in various modes&lt;/p&gt;
-&lt;h3 id=&#34;csi-powermax-driver-with-proxy-in-linked-mode&#34;&gt;CSI PowerMax driver with Proxy in Linked mode&lt;/h3&gt;
-&lt;p&gt;In this mode, the CSI PowerMax ReverseProxy acts as a &lt;code&gt;passthrough&lt;/code&gt; for the RESTAPI calls and only provides limited functionality
-such as rate limiting, backup Unisphere server. The CSI PowerMax driver is still responsible for the authentication with the Unisphere server.&lt;/p&gt;
-&lt;p&gt;The first endpoint in the list of management servers is the primary Unisphere server and if you provide a second endpoint, then
-it will be considered as the backup Unisphere&amp;rsquo;s endpoint.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;global&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;defaultCredentialsSecret&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;powermax-creds&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;storageArrays&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;- &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;storageArrayId&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;000000000001&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;- &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;storageArrayId&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;000000000002&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;managementServers&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;- &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;endpoint&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;https://primary-unisphere:8443&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;skipCertificateValidation&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;false&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;certSecret&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;primary-cert&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;limits&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;maxActiveRead&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;5&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;maxActiveWrite&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;4&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;maxOutStandingRead&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;50&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;maxOutStandingWrite&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;50&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;- &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;endpoint&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;https://backup-unisphere:8443 &lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# &amp;#34;csireverseproxy&amp;#34; refers to the subchart csireverseproxy&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;csireverseproxy&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Set enabled to true if you want to use proxy&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;image&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;dellemc/csipowermax-reverseproxy:v2.4.0&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;tlsSecret&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;csirevproxy-tls-secret&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;deployAsSidecar&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;true&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;port&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;2222&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;mode&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Linked&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;
-&lt;p&gt;Note: Since the driver is still responsible for authentication when used with Proxy in &lt;code&gt;Linked&lt;/code&gt; mode, the credentials for both
-primary and backup Unisphere need to be the same.&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;p&gt;The following sections have useful snippets from &lt;code&gt;values.yaml&lt;/code&gt; file which provides more information on how to configure the CSI PowerMax driver along with CSI PowerMax ReverseProxy in StandAlone mode.&lt;/p&gt;
 &lt;h3 id=&#34;csi-powermax-driver-with-proxy-in-standalone-mode&#34;&gt;CSI PowerMax driver with Proxy in StandAlone mode&lt;/h3&gt;
 &lt;p&gt;This is the most advanced configuration which provides you with the capability to connect to Multiple Unisphere servers.
 You can specify primary and backup Unisphere servers for each storage array. If you have different credentials for your Unisphere servers, you can also specify different credential secrets.&lt;/p&gt;
@@ -1442,7 +1372,6 @@ You can specify primary and backup Unisphere servers for each storage array. If 
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# &amp;#34;csireverseproxy&amp;#34; refers to the subchart csireverseproxy&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;csireverseproxy&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;image&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;dellemc/csipowermax-reverseproxy:v2.4.0&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;tlsSecret&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;csirevproxy-tls-secret&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;deployAsSidecar&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;true&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;port&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;2222&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
@@ -1464,19 +1393,6 @@ You can specify primary and backup Unisphere servers for each storage array. If 
         
         
         &lt;p&gt;The CSI Driver for Dell PowerScale can be deployed by using the provided Helm v3 charts and installation scripts on both Kubernetes and OpenShift platforms. For more detailed information on the installation scripts, review the script &lt;a href=&#34;https://github.com/dell/csi-powerscale/tree/master/dell-csi-helm-installer&#34;&gt;documentation&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;The controller section of the Helm chart installs the following components in a &lt;em&gt;Deployment&lt;/em&gt; in the specified namespace:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;CSI Driver for PowerScale&lt;/li&gt;
-&lt;li&gt;Kubernetes External Provisioner, which provisions the volumes&lt;/li&gt;
-&lt;li&gt;Kubernetes External Attacher, which attaches the volumes to the containers&lt;/li&gt;
-&lt;li&gt;Kubernetes External Snapshotter, which provides snapshot support&lt;/li&gt;
-&lt;li&gt;Kubernetes External Resizer, which resizes the volume&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;The node section of the Helm chart installs the following component in a &lt;em&gt;DaemonSet&lt;/em&gt; in the specified namespace:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;CSI Driver for PowerScale&lt;/li&gt;
-&lt;li&gt;Kubernetes Node Registrar, which handles the driver registration&lt;/li&gt;
-&lt;/ul&gt;
 &lt;h2 id=&#34;prerequisites&#34;&gt;Prerequisites&lt;/h2&gt;
 &lt;p&gt;The following are requirements to be met before installing the CSI Driver for Dell PowerScale:&lt;/p&gt;
 &lt;ul&gt;
@@ -1541,21 +1457,22 @@ follow either of the way.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Steps&lt;/strong&gt;&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;
-&lt;p&gt;Run &lt;code&gt;git clone -b v2.8.0 https://github.com/dell/csi-powerscale.git&lt;/code&gt; to clone the git repository.&lt;/p&gt;
+&lt;p&gt;Run &lt;code&gt;git clone -b v2.9.1 https://github.com/dell/csi-powerscale.git&lt;/code&gt; to clone the git repository.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Ensure that you have created the namespace where you want to install the driver. You can run &lt;code&gt;kubectl create namespace isilon&lt;/code&gt; to create a new one. The use of &amp;ldquo;isilon&amp;rdquo;  as the namespace is just an example. You can choose any name for the namespace.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Collect information from the PowerScale Systems like IP address, IsiPath, username, and password. Make a note of the value for these parameters as they must be entered in the &lt;em&gt;secret.yaml&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: The &amp;lsquo;clusterName&amp;rsquo; serves as a logical, unique identifier for the array that should remain unchanged once it is included in the volume handle. Altering this identifier is not advisable, as it would result in the failure of all operations associated with the volume that was created earlier.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;Download &lt;code&gt;wget -O my-isilon-settings.yaml https://raw.githubusercontent.com/dell/helm-charts/csi-isilon-2.8.0/charts/csi-isilon/values.yaml&lt;/code&gt; into &lt;code&gt;cd ../dell-csi-helm-installer&lt;/code&gt; to customize settings for installation.&lt;/p&gt;
+&lt;p&gt;Download &lt;code&gt;wget -O my-isilon-settings.yaml https://raw.githubusercontent.com/dell/helm-charts/csi-isilon-2.9.1/charts/csi-isilon/values.yaml&lt;/code&gt; into &lt;code&gt;cd ../dell-csi-helm-installer&lt;/code&gt; to customize settings for installation.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Edit &lt;em&gt;my-isilon-settings.yaml&lt;/em&gt; to set the following parameters for your installation:
 The following table lists the primary configurable parameters of the PowerScale driver Helm chart and their default values. More detailed information can be
-found in the  &lt;a href=&#34;https://github.com/dell/helm-charts/blob/csi-isilon-2.8.0/charts/csi-isilon/values.yaml&#34;&gt;&lt;code&gt;values.yaml&lt;/code&gt;&lt;/a&gt; file in this repository.&lt;/p&gt;
+found in the  &lt;a href=&#34;https://github.com/dell/helm-charts/blob/csi-isilon-2.9.1/charts/csi-isilon/values.yaml&#34;&gt;&lt;code&gt;values.yaml&lt;/code&gt;&lt;/a&gt; file in this repository.&lt;/p&gt;
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
@@ -1567,10 +1484,10 @@ found in the  &lt;a href=&#34;https://github.com/dell/helm-charts/blob/csi-isilo
 &lt;/thead&gt;
 &lt;tbody&gt;
 &lt;tr&gt;
-&lt;td&gt;driverRepository&lt;/td&gt;
-&lt;td&gt;Set to give the repository containing the driver image (used as part of the image name).&lt;/td&gt;
+&lt;td&gt;images&lt;/td&gt;
+&lt;td&gt;List all the images used by the CSI driver and CSM. If you use a private repository, change the registries accordingly.&lt;/td&gt;
 &lt;td&gt;Yes&lt;/td&gt;
-&lt;td&gt;dellemc&lt;/td&gt;
+&lt;td&gt;&amp;quot;&amp;quot;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;logLevel&lt;/td&gt;
@@ -1778,7 +1695,7 @@ found in the  &lt;a href=&#34;https://github.com/dell/helm-charts/blob/csi-isilo
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;isiAuthType&lt;/td&gt;
-&lt;td&gt;Indicates the authentication method to be used. If set to 1 then it follows as session-based authentication else basic authentication&lt;/td&gt;
+&lt;td&gt;Indicates the authentication method to be used. If set to 1 then it follows as session-based authentication else basic authentication. If authorization.enabled=true, this value must be set to 1.&lt;/td&gt;
 &lt;td&gt;No&lt;/td&gt;
 &lt;td&gt;0&lt;/td&gt;
 &lt;/tr&gt;
@@ -1826,15 +1743,9 @@ found in the  &lt;a href=&#34;https://github.com/dell/helm-charts/blob/csi-isilo
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;enabled&lt;/td&gt;
-&lt;td&gt;A boolean that enables/disables authorization feature.&lt;/td&gt;
+&lt;td&gt;A boolean that enables/disables authorization feature. If enabled, isiAuthType must be set to 1.&lt;/td&gt;
 &lt;td&gt;No&lt;/td&gt;
 &lt;td&gt;false&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;sidecarProxyImage&lt;/td&gt;
-&lt;td&gt;Image for csm-authorization-sidecar.&lt;/td&gt;
-&lt;td&gt;No&lt;/td&gt;
-&lt;td&gt;&amp;quot; &amp;quot;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;proxyHost&lt;/td&gt;
@@ -1861,12 +1772,6 @@ found in the  &lt;a href=&#34;https://github.com/dell/helm-charts/blob/csi-isilo
 &lt;td&gt;false&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;image&lt;/td&gt;
-&lt;td&gt;image for podmon.&lt;/td&gt;
-&lt;td&gt;No&lt;/td&gt;
-&lt;td&gt;&amp;quot; &amp;quot;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
 &lt;td&gt;&lt;strong&gt;encryption&lt;/strong&gt;&lt;/td&gt;
 &lt;td&gt;&lt;a href=&#34;../../../../secure/encryption/deployment&#34;&gt;Encryption&lt;/a&gt; is an optional feature to apply encryption to CSI volumes.&lt;/td&gt;
 &lt;td&gt;-&lt;/td&gt;
@@ -1878,12 +1783,6 @@ found in the  &lt;a href=&#34;https://github.com/dell/helm-charts/blob/csi-isilo
 &lt;td&gt;No&lt;/td&gt;
 &lt;td&gt;false&lt;/td&gt;
 &lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;image&lt;/td&gt;
-&lt;td&gt;Encryption driver image name.&lt;/td&gt;
-&lt;td&gt;No&lt;/td&gt;
-&lt;td&gt;&amp;ldquo;dellemc/csm-encryption:v0.3.0&amp;rdquo;&lt;/td&gt;
-&lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;p&gt;&lt;em&gt;NOTE:&lt;/em&gt;&lt;/p&gt;
@@ -1891,11 +1790,11 @@ found in the  &lt;a href=&#34;https://github.com/dell/helm-charts/blob/csi-isilo
 &lt;li&gt;ControllerCount parameter value must not exceed the number of nodes in the Kubernetes cluster. Otherwise, some of the controller pods remain in a &amp;ldquo;Pending&amp;rdquo; state till new nodes are available for scheduling. The installer exits with a WARNING on the same.&lt;/li&gt;
 &lt;li&gt;Whenever the &lt;em&gt;certSecretCount&lt;/em&gt; parameter changes in &lt;em&gt;my-isilon-setting.yaml&lt;/em&gt; user needs to reinstall the driver.&lt;/li&gt;
 &lt;li&gt;In order to enable authorization, there should be an authorization proxy server already installed.&lt;/li&gt;
-&lt;li&gt;If you are using a custom image, check the &lt;em&gt;version&lt;/em&gt; and &lt;em&gt;driverRepository&lt;/em&gt; fields in &lt;em&gt;my-isilon-setting.yaml&lt;/em&gt; to make sure that they are pointing to the correct image repository and driver version. These two fields are spliced together to form the image name, as shown here: &lt;driverRepository&gt;/csi-isilon:&lt;version&gt;&lt;/li&gt;
+&lt;li&gt;If you are using custom images, update each attributes under the &lt;em&gt;images&lt;/em&gt; field in &lt;em&gt;my-isilon-setting.yaml&lt;/em&gt; to make sure that they are pointing to the correct image repository and version.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;Edit following parameters in samples/secret/secret.yaml file and update/add connection/authentication information for one or more PowerScale clusters.&lt;/p&gt;
+&lt;p&gt;Edit following parameters in samples/secret/secret.yaml file and update/add connection/authentication information for one or more PowerScale clusters. If replication feature is enabled, ensure the secret includes all the PowerScale clusters involved in replication.&lt;/p&gt;
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
@@ -2018,6 +1917,10 @@ found in the  &lt;a href=&#34;https://github.com/dell/helm-charts/blob/csi-isilo
 &lt;td&gt;ISI_PRIV_SYNCIQ&lt;/td&gt;
 &lt;td&gt;Read Write&lt;/td&gt;
 &lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;ISI_PRIV_STATISTICS&lt;/td&gt;
+&lt;td&gt;Read Only&lt;/td&gt;
+&lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;p&gt;Create isilon-creds secret using the following command:
@@ -2037,10 +1940,14 @@ found in the  &lt;a href=&#34;https://github.com/dell/helm-charts/blob/csi-isilo
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Install the driver using &lt;code&gt;csi-install.sh&lt;/code&gt; bash script and default yaml by running&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#204a87&#34;&gt;cd&lt;/span&gt; dell-csi-helm-installer &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; wget -O my-isilon-settings.yaml https://raw.githubusercontent.com/dell/helm-charts/csi-isilon-2.8.0/charts/csi-isilon/values.yaml &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;./csi-install.sh --namespace isilon --values my-isilon-settings.yaml
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#204a87&#34;&gt;cd&lt;/span&gt; dell-csi-helm-installer &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; wget -O my-isilon-settings.yaml https://raw.githubusercontent.com/dell/helm-charts/csi-isilon-2.9.1/charts/csi-isilon/values.yaml &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;./csi-install.sh --namespace isilon --values my-isilon-settings.yaml --helm-charts-version &amp;lt;version&amp;gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
 &lt;/ol&gt;
+&lt;p&gt;&lt;em&gt;NOTE:&lt;/em&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The parameter &lt;code&gt;--helm-charts-version&lt;/code&gt; is optional and if you do not specify the flag, by default the &lt;code&gt;csi-install.sh&lt;/code&gt; script will clone the version of the helm chart that is specified in the driver&amp;rsquo;s &lt;a href=&#34;https://github.com/dell/csi-powerscale/blob/main/dell-csi-helm-installer/csi-install.sh#L16&#34;&gt;csi-install.sh&lt;/a&gt; file. If you wish to install the driver using a different version of the helm chart, you need to include this flag. Also, remember to delete the &lt;code&gt;helm-charts&lt;/code&gt; repository present in the &lt;code&gt;csi-powerscale&lt;/code&gt; directory if it was cloned before.&lt;/li&gt;
+&lt;/ul&gt;
 &lt;h2 id=&#34;certificate-validation-for-onefs-rest-api-calls&#34;&gt;Certificate validation for OneFS REST API calls&lt;/h2&gt;
 &lt;p&gt;The CSI driver exposes an install parameter &amp;lsquo;skipCertificateValidation&amp;rsquo; which determines if the driver
 performs client-side verification of the OneFS certificates. The &amp;lsquo;skipCertificateValidation&amp;rsquo; parameter is set to true by default and the driver does not verify the OneFS certificates.&lt;/p&gt;
@@ -2163,24 +2070,11 @@ output: mount.nfs: access denied by server while mounting XX.XX.XX.XX:/ifs/data/
         
         
         &lt;p&gt;The CSI Driver for Dell PowerStore can be deployed by using the provided Helm v3 charts and installation scripts on both Kubernetes and OpenShift platforms. For more detailed information on the installation scripts, review the script &lt;a href=&#34;https://github.com/dell/csi-powerstore/tree/master/dell-csi-helm-installer&#34;&gt;documentation&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;The controller section of the Helm chart installs the following components in a &lt;em&gt;Deployment&lt;/em&gt; in the specified namespace:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;CSI Driver for Dell PowerStore&lt;/li&gt;
-&lt;li&gt;Kubernetes External Provisioner, which provisions the volumes&lt;/li&gt;
-&lt;li&gt;Kubernetes External Attacher, which attaches the volumes to the containers&lt;/li&gt;
-&lt;li&gt;(Optional) Kubernetes External Snapshotter, which provides snapshot support&lt;/li&gt;
-&lt;li&gt;(Optional) Kubernetes External Resizer, which resizes the volume&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;The node section of the Helm chart installs the following component in a &lt;em&gt;DaemonSet&lt;/em&gt; in the specified namespace:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;CSI Driver for Dell PowerStore&lt;/li&gt;
-&lt;li&gt;Kubernetes Node Registrar, which handles the driver registration&lt;/li&gt;
-&lt;/ul&gt;
 &lt;h2 id=&#34;prerequisites&#34;&gt;Prerequisites&lt;/h2&gt;
 &lt;p&gt;The following are requirements to be met before installing the CSI Driver for Dell PowerStore:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Install Kubernetes or OpenShift (see &lt;a href=&#34;../../../../csidriver/#features-and-capabilities&#34;&gt;supported versions&lt;/a&gt;)&lt;/li&gt;
-&lt;li&gt;Install Helm 3&lt;/li&gt;
+&lt;li&gt;Install Helm 3.x&lt;/li&gt;
 &lt;li&gt;If you plan to use either the Fibre Channel or iSCSI or NVMe/TCP or NVMe/FC protocol, refer to either &lt;em&gt;Fibre Channel requirements&lt;/em&gt; or &lt;em&gt;Set up the iSCSI Initiator&lt;/em&gt; or &lt;em&gt;Set up the NVMe Initiator&lt;/em&gt; sections below. You can use NFS volumes without FC or iSCSI or NVMe/TCP or NVMe/FC configuration.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;blockquote&gt;
@@ -2197,10 +2091,10 @@ output: mount.nfs: access denied by server while mounting XX.XX.XX.XX:/ifs/data/
 &lt;li&gt;You can access your cluster with kubectl and helm.&lt;/li&gt;
 &lt;li&gt;Ensure that your nodes support mounting NFS volumes.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id=&#34;install-helm-30&#34;&gt;Install Helm 3.0&lt;/h3&gt;
-&lt;p&gt;Install Helm 3.0 on the master node before you install the CSI Driver for Dell PowerStore.&lt;/p&gt;
+&lt;h3 id=&#34;install-helm-3x&#34;&gt;Install Helm 3.x&lt;/h3&gt;
+&lt;p&gt;Install Helm 3.x on the master node before you install the CSI Driver for Dell PowerStore.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Steps&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;Run the command to install Helm 3.0.&lt;/p&gt;
+&lt;p&gt;Run the command to install Helm 3.x.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; bash
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;fibre-channel-requirements&#34;&gt;Fibre Channel requirements&lt;/h3&gt;
 &lt;p&gt;Dell PowerStore supports Fibre Channel communication. If you use the Fibre Channel protocol, ensure that the
@@ -2258,6 +2152,41 @@ PowerStore.&lt;/p&gt;
 &lt;li&gt;Enable &lt;code&gt;user_friendly_names&lt;/code&gt; and &lt;code&gt;find_multipaths&lt;/code&gt; in the &lt;code&gt;multipath.conf&lt;/code&gt; file.&lt;/li&gt;
 &lt;li&gt;Ensure that the multipath command for &lt;code&gt;multipath.conf&lt;/code&gt; is available on all Kubernetes nodes.&lt;/li&gt;
 &lt;/ul&gt;
+&lt;h4 id=&#34;multipathd-machineconfig&#34;&gt;multipathd &lt;code&gt;MachineConfig&lt;/code&gt;&lt;/h4&gt;
+&lt;p&gt;If you are installing a CSI Driver which requires the installation of the Linux native Multipath software - &lt;em&gt;multipathd&lt;/em&gt;, please follow the below instructions&lt;/p&gt;
+&lt;p&gt;To enable multipathd on RedHat CoreOS nodes you need to prepare a working configuration encoded in base64.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;user_friendly_names yes
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;find_multipaths yes
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;blacklist &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#a40000&#34;&gt;&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; base64 -w0
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Use the base64 encoded string output in the following &lt;code&gt;MachineConfig&lt;/code&gt; yaml file (under source section)&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;apiVersion&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;machineconfiguration.openshift.io/v1&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;kind&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;MachineConfig&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;metadata&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;workers-multipath-conf-default&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;labels&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;machineconfiguration.openshift.io/role&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;worker&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;spec&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;config&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;ignition&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;version&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;3.2.0&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;storage&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;files&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;- &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;contents&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;          &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;source&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;data:text/plain;charset=utf-8;base64,ZGVmYXVsdHMgewp1c2VyX2ZyaWVuZGx5X25hbWVzIHllcwpmaW5kX211bHRpcGF0aHMgeWVzCn0KCmJsYWNrbGlzdCB7Cn0K&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;          &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;verification&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;{}&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;filesystem&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;root&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;mode&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;400&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;path&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;/etc/multipath.conf&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;After deploying this&lt;code&gt;MachineConfig&lt;/code&gt; object, CoreOS will start multipath service automatically.
+Alternatively, you can check the status of the multipath service by entering the following command in each worker nodes.
+&lt;code&gt;sudo multipath -ll&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;If the above command is not successful, ensure that the /etc/multipath.conf file is present and configured properly. Once the file has been configured correctly, enable the multipath service by running the following command:
+&lt;code&gt;sudo /sbin/mpathconf –-enable --with_multipathd y&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Finally, you have to restart the service by providing the command
+&lt;code&gt;sudo systemctl restart multipathd&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;For additional information refer to official documentation of the multipath configuration.&lt;/p&gt;
 &lt;h3 id=&#34;optional-volume-snapshot-requirements&#34;&gt;(Optional) Volume Snapshot Requirements&lt;/h3&gt;
 &lt;p&gt;For detailed snapshot setup procedure, &lt;a href=&#34;../../../../snapshots/#optional-volume-snapshot-requirements&#34;&gt;click here.&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id=&#34;volume-health-monitoring&#34;&gt;Volume Health Monitoring&lt;/h3&gt;
@@ -2298,7 +2227,7 @@ volume stats value under node should be set to true.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Steps&lt;/strong&gt;&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;
-&lt;p&gt;Run &lt;code&gt;git clone -b v2.8.0 https://github.com/dell/csi-powerstore.git&lt;/code&gt; to clone the git repository.&lt;/p&gt;
+&lt;p&gt;Run &lt;code&gt;git clone -b v2.9.1 https://github.com/dell/csi-powerstore.git&lt;/code&gt; to clone the git repository.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Ensure that you have created namespace where you want to install the driver. You can run &lt;code&gt;kubectl create namespace csi-powerstore&lt;/code&gt; to create a new one. &amp;ldquo;csi-powerstore&amp;rdquo; is just an example. You can choose any name for the namespace.
@@ -2317,7 +2246,7 @@ But make sure to align to the same namespace during the whole installation.&lt;/
 &lt;li&gt;&lt;em&gt;nfsAcls&lt;/em&gt; (Optional): defines permissions - POSIX mode bits or NFSv4 ACLs, to be set on NFS target mount directory.
 NFSv4 ACls are supported for NFSv4 shares on NFSv4 enabled NAS servers only. POSIX ACLs are not supported and only POSIX mode bits are supported for NFSv3 shares.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;Add more blocks similar to above for each PowerStore array if necessary.&lt;/p&gt;
+&lt;p&gt;Add more blocks similar to above for each PowerStore array if necessary. If replication feature is enabled, ensure the secret includes all the PowerStore arrays involved in replication.&lt;/p&gt;
 &lt;h3 id=&#34;user-privileges&#34;&gt;User Privileges&lt;/h3&gt;
 &lt;p&gt;The username specified in &lt;code&gt;secret.yaml&lt;/code&gt; must be from the authentication providers of PowerStore. The user must have the correct user role to perform the actions. The minimum requirement is &lt;strong&gt;Storage Operator&lt;/strong&gt;.&lt;/p&gt;
 &lt;/li&gt;
@@ -2333,7 +2262,7 @@ NFSv4 ACls are supported for NFSv4 shares on NFSv4 enabled NAS servers only. POS
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Download the default values.yaml file&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#204a87&#34;&gt;cd&lt;/span&gt; dell-csi-helm-installer &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; wget -O my-powerstore-settings.yaml https://github.com/dell/helm-charts/raw/csi-powerstore-2.8.0/charts/csi-powerstore/values.yaml
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#204a87&#34;&gt;cd&lt;/span&gt; dell-csi-helm-installer &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; wget -O my-powerstore-settings.yaml https://github.com/dell/helm-charts/raw/csi-powerstore-2.9.1/charts/csi-powerstore/values.yaml
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Edit the newly created values file and provide values for the following parameters &lt;code&gt;vi my-powerstore-settings.yaml&lt;/code&gt;:&lt;/p&gt;
@@ -2349,6 +2278,12 @@ NFSv4 ACls are supported for NFSv4 shares on NFSv4 enabled NAS servers only. POS
 &lt;/tr&gt;
 &lt;/thead&gt;
 &lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;images&lt;/td&gt;
+&lt;td&gt;List all the images used by the CSI driver and CSM. If you use a private repository, change the registries accordingly.&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;td&gt;&amp;quot;&amp;quot;&lt;/td&gt;
+&lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;logLevel&lt;/td&gt;
 &lt;td&gt;Defines CSI driver log level&lt;/td&gt;
@@ -2494,12 +2429,6 @@ NFSv4 ACls are supported for NFSv4 shares on NFSv4 enabled NAS servers only. POS
 &lt;td&gt;&amp;ldquo;true&amp;rdquo;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;images.driverRepository&lt;/td&gt;
-&lt;td&gt;To use an image from custom repository&lt;/td&gt;
-&lt;td&gt;No&lt;/td&gt;
-&lt;td&gt;dockerhub&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
 &lt;td&gt;version&lt;/td&gt;
 &lt;td&gt;To use any driver version&lt;/td&gt;
 &lt;td&gt;No&lt;/td&gt;
@@ -2529,17 +2458,11 @@ NFSv4 ACls are supported for NFSv4 shares on NFSv4 enabled NAS servers only. POS
 &lt;td&gt;No&lt;/td&gt;
 &lt;td&gt;false&lt;/td&gt;
 &lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;podmon.image&lt;/td&gt;
-&lt;td&gt;Sidecar image for resiliency&lt;/td&gt;
-&lt;td&gt;No&lt;/td&gt;
-&lt;td&gt;-&lt;/td&gt;
-&lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;ol start=&#34;8&#34;&gt;
 &lt;li&gt;Install the driver using &lt;code&gt;csi-install.sh&lt;/code&gt; bash script by running
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;./csi-install.sh --namespace csi-powerstore --values ./my-powerstore-settings.yaml
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;./csi-install.sh --namespace csi-powerstore --values ./my-powerstore-settings.yaml --helm-charts-version &amp;lt;version&amp;gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
 &lt;li&gt;After that the driver should be installed, you can check the condition of driver pods by running &lt;code&gt;kubectl get all -n csi-powerstore&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
@@ -2547,6 +2470,7 @@ NFSv4 ACls are supported for NFSv4 shares on NFSv4 enabled NAS servers only. POS
 &lt;/ol&gt;
 &lt;p&gt;&lt;em&gt;NOTE:&lt;/em&gt;&lt;/p&gt;
 &lt;ul&gt;
+&lt;li&gt;The parameter &lt;code&gt;--helm-charts-version&lt;/code&gt; is optional and if you do not specify the flag, by default the &lt;code&gt;csi-install.sh&lt;/code&gt; script will clone the version of the helm chart that is specified in the driver&amp;rsquo;s &lt;a href=&#34;https://github.com/dell/csi-powerstore/blob/main/dell-csi-helm-installer/csi-install.sh#L13&#34;&gt;csi-install.sh&lt;/a&gt; file. If you wish to install the driver using a different version of the helm chart, you need to include this flag. Also, remember to delete the &lt;code&gt;helm-charts&lt;/code&gt; repository present in the &lt;code&gt;csi-powerstore&lt;/code&gt; directory if it was cloned before.&lt;/li&gt;
 &lt;li&gt;For detailed instructions on how to run the install scripts, refer to the readme document in the dell-csi-helm-installer folder.&lt;/li&gt;
 &lt;li&gt;By default, the driver scans available SCSI adapters and tries to register them with the storage array under the SCSI hostname using &lt;code&gt;node.nodeNamePrefix&lt;/code&gt; and the ID read from the file pointed to by &lt;code&gt;node.nodeIDPath&lt;/code&gt;. If an adapter is already registered with the storage under a different hostname, the adapter is not used by the driver.&lt;/li&gt;
 &lt;li&gt;A hostname the driver uses for registration of adapters is in the form &lt;code&gt;&amp;lt;nodeNamePrefix&amp;gt;-&amp;lt;nodeID&amp;gt;-&amp;lt;nodeIP&amp;gt;&lt;/code&gt;. By default, these are csi-node and the machine ID read from the file &lt;code&gt;/etc/machine-id&lt;/code&gt;.&lt;/li&gt;
@@ -2618,20 +2542,6 @@ NFSv4 ACls are supported for NFSv4 shares on NFSv4 enabled NAS servers only. POS
         
         
         &lt;p&gt;The CSI Driver for Dell Unity XT can be deployed by using the provided Helm v3 charts and installation scripts on both Kubernetes and OpenShift platforms. For more detailed information on the installation scripts, review the script &lt;a href=&#34;https://github.com/dell/csi-unity/tree/master/dell-csi-helm-installer&#34;&gt;documentation&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;The controller section of the Helm chart installs the following components in a &lt;em&gt;Deployment&lt;/em&gt;:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;CSI Driver for Unity XT&lt;/li&gt;
-&lt;li&gt;Kubernetes External Provisioner, which provisions the volumes&lt;/li&gt;
-&lt;li&gt;Kubernetes External Attacher, which attaches the volumes to the containers&lt;/li&gt;
-&lt;li&gt;Kubernetes External Snapshotter, which provides snapshot support&lt;/li&gt;
-&lt;li&gt;Kubernetes External Resizer, which resizes the volume&lt;/li&gt;
-&lt;li&gt;Kubernetes External Health Monitor, which provides volume health status&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;The node section of the Helm chart installs the following component in a &lt;em&gt;DaemonSet&lt;/em&gt;:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;CSI Driver for Unity XT&lt;/li&gt;
-&lt;li&gt;Kubernetes Node Registrar, which handles the driver registration&lt;/li&gt;
-&lt;/ul&gt;
 &lt;h2 id=&#34;prerequisites&#34;&gt;Prerequisites&lt;/h2&gt;
 &lt;p&gt;Before you install CSI Driver for Unity XT, verify the requirements that are mentioned in this topic are installed and configured.&lt;/p&gt;
 &lt;h3 id=&#34;requirements&#34;&gt;Requirements&lt;/h3&gt;
@@ -2692,7 +2602,7 @@ Unity XT.&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;Before you begin&lt;/em&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;As a pre-requisite for running this procedure, you must have the downloaded files, including the Helm chart from the source &lt;a href=&#34;https://github.com/dell/csi-unity&#34;&gt;git repository&lt;/a&gt; with the command
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;git clone -b v2.8.0 https://github.com/dell/csi-unity.git
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;git clone -b v2.9.1 https://github.com/dell/csi-unity.git
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
 &lt;li&gt;In the top-level dell-csi-helm-installer directory, there should be two scripts, &lt;code&gt;csi-install.sh&lt;/code&gt; and &lt;code&gt;csi-uninstall.sh&lt;/code&gt;.&lt;/li&gt;
 &lt;li&gt;Ensure &lt;em&gt;unity&lt;/em&gt; namespace exists in Kubernetes cluster. Use the &lt;code&gt;kubectl create namespace unity&lt;/code&gt; command to create the namespace if the namespace is not present.&lt;/li&gt;
@@ -2713,11 +2623,11 @@ kubeVersion: &amp;ldquo;&amp;gt;= 1.24.0-0 &amp;lt; 1.29.0-0&amp;rdquo;&lt;/li&g
 &lt;p&gt;Get the required values.yaml using the command below:&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#204a87&#34;&gt;cd&lt;/span&gt; dell-csi-helm-installer &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; wget -O my-unity-settings.yaml https://github.com/dell/helm-charts/raw/csi-unity-2.8.0/charts/csi-unity/values.yaml
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#204a87&#34;&gt;cd&lt;/span&gt; dell-csi-helm-installer &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; wget -O my-unity-settings.yaml https://github.com/dell/helm-charts/raw/csi-unity-2.9.1/charts/csi-unity/values.yaml
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;3&#34;&gt;
 &lt;li&gt;
 &lt;p&gt;Edit &lt;code&gt;values.yaml&lt;/code&gt; to set the following parameters for your installation:&lt;/p&gt;
-&lt;p&gt;The following table lists the primary configurable parameters of the Unity XT driver chart and their default values. More detailed information can be found in the &lt;a href=&#34;https://github.com/dell/helm-charts/blob/main/charts/csi-unity/values.yaml&#34;&gt;&lt;code&gt;values.yaml&lt;/code&gt;&lt;/a&gt; file in this repository.&lt;/p&gt;
+&lt;p&gt;The following table lists the primary configurable parameters of the Unity XT driver chart and their default values. More detailed information can be found in the &lt;a href=&#34;https://github.com/dell/helm-charts/blob/csi-unity-2.9.1/charts/csi-unity/values.yaml&#34;&gt;&lt;code&gt;values.yaml&lt;/code&gt;&lt;/a&gt; file in this repository.&lt;/p&gt;
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
@@ -2728,6 +2638,12 @@ kubeVersion: &amp;ldquo;&amp;gt;= 1.24.0-0 &amp;lt; 1.29.0-0&amp;rdquo;&lt;/li&g
 &lt;/tr&gt;
 &lt;/thead&gt;
 &lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;images&lt;/td&gt;
+&lt;td&gt;List all the images used by the CSI driver and CSM. If you use a private repository, change the registries accordingly.&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;td&gt;&amp;quot;&amp;quot;&lt;/td&gt;
+&lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;logLevel&lt;/td&gt;
 &lt;td&gt;LogLevel is used to set the logging level of the driver&lt;/td&gt;
@@ -2775,12 +2691,6 @@ kubeVersion: &amp;ldquo;&amp;gt;= 1.24.0-0 &amp;lt; 1.29.0-0&amp;rdquo;&lt;/li&g
 &lt;td&gt;service to monitor failing jobs and notify&lt;/td&gt;
 &lt;td&gt;No&lt;/td&gt;
 &lt;td&gt;false&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;podmon.image&lt;/td&gt;
-&lt;td&gt;pod man image name&lt;/td&gt;
-&lt;td&gt;No&lt;/td&gt;
-&lt;td&gt;-&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;tenantName&lt;/td&gt;
@@ -3032,9 +2942,16 @@ The driver will continue to use previous values in case of an error found in the
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Run the command to proceed with the installation using bash script.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;./csi-install.sh --namespace unity --values ./myvalues.yaml
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;A successful installation must display messages that look similar to the following samples:&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;------------------------------------------------------
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;./csi-install.sh --namespace unity --values ./myvalues.yaml --helm-charts-version &amp;lt;version&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;em&gt;NOTE:&lt;/em&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The parameter &lt;code&gt;--helm-charts-version&lt;/code&gt; is optional and if you do not specify the flag, by default the &lt;code&gt;csi-install.sh&lt;/code&gt; script will clone the version of the helm chart that is specified in the driver&amp;rsquo;s &lt;a href=&#34;https://github.com/dell/csi-unity/blob/main/dell-csi-helm-installer/csi-install.sh#L22&#34;&gt;csi-install.sh&lt;/a&gt; file. If you wish to install the driver using a different version of the helm chart, you need to include this flag. Also, remember to delete the &lt;code&gt;helm-charts&lt;/code&gt; repository present in the &lt;code&gt;csi-unity&lt;/code&gt; directory if it was cloned before.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;A successful installation must display messages that look similar to the following samples:
+```
+------------------------------------------------------
 &amp;gt; Installing CSI Driver: csi-unity on 1.27
 ------------------------------------------------------
 ------------------------------------------------------
@@ -3092,21 +3009,27 @@ Success
 ------------------------------------------------------
 &amp;gt; Operation complete
 ------------------------------------------------------
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Results:&lt;/p&gt;
-&lt;p&gt;At the end of the script unity-controller Deployment and DaemonSet unity-node will be ready, execute command &lt;code&gt;kubectl get pods -n unity&lt;/code&gt; to get the status of the pods and you will see the following:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;One or more Unity XT Controllers (based on controllerCount) with 5/5 containers ready, and status displayed as Running.&lt;/li&gt;
-&lt;li&gt;Agent pods with 2/2 containers and the status displayed as Running.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;:
-To install nightly or latest csi driver build using bash script use this command:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;/csi-install.sh --namespace unity --values ./myvalues.yaml --version latest --helm-charts-version &amp;lt;version&amp;gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+```
+
+Results:
+
+At the end of the script unity-controller Deployment and DaemonSet unity-node will be ready, execute command `kubectl get pods -n unity` to get the status of the pods and you will see the following:
+
+* One or more Unity XT Controllers (based on controllerCount) with 5/5 containers ready, and status displayed as Running.
+* Agent pods with 2/2 containers and the status displayed as Running.
+
+**Note**:
+To install nightly or latest csi driver build using bash script use this command:
+```bash
+/csi-install.sh --namespace unity --values ./myvalues.yaml --version latest --helm-charts-version &amp;lt;version&amp;gt;
+```
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&#34;8&#34;&gt;
 &lt;li&gt;
 &lt;p&gt;You can also install the driver using standalone helm chart by cloning the centralised helm charts and running the helm install command as shown.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Syntax&lt;/strong&gt;:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;git clone -b csi-unity-2.8.0 https://github.com/dell/helm-charts
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;git clone -b csi-unity-2.9.1 https://github.com/dell/helm-charts
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;helm install &amp;lt;release-name&amp;gt; dell/container-storage-modules -n &amp;lt;namespace&amp;gt; --version &amp;lt;container-storage-module chart-version&amp;gt; -f &amp;lt;values.yaml location&amp;gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;

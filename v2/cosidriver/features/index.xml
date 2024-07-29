@@ -23,11 +23,7 @@
       <description>
         
         
-        &lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;Notational Conventions&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;The keywords &amp;ldquo;MUST&amp;rdquo;, &amp;ldquo;MUST NOT&amp;rdquo;, &amp;ldquo;REQUIRED&amp;rdquo;, &amp;ldquo;SHALL&amp;rdquo;, &amp;ldquo;SHALL NOT&amp;rdquo;, &amp;ldquo;SHOULD&amp;rdquo;, &amp;ldquo;SHOULD NOT&amp;rdquo;, &amp;ldquo;RECOMMENDED&amp;rdquo;, &amp;ldquo;NOT RECOMMENDED&amp;rdquo;, &amp;ldquo;MAY&amp;rdquo;, and &amp;ldquo;OPTIONAL&amp;rdquo; are to be interpreted as described in &lt;a href=&#34;http://tools.ietf.org/html/rfc2119&#34;&gt;RFC 2119&lt;/a&gt; (Bradner, S., &amp;ldquo;Key words for use in RFCs to Indicate Requirement Levels&amp;rdquo;, BCP 14, RFC 2119, March 1997).&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;Fields are specified by their path. Consider the following examples:&lt;/p&gt;
+        &lt;p&gt;Fields are specified by their path. Consider the following examples:&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;Field specified by the following path &lt;code&gt;spec.authenticationType=IAM&lt;/code&gt; is reflected in their resources YAML as the following:&lt;/li&gt;
 &lt;/ol&gt;

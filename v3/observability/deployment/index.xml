@@ -556,7 +556,7 @@
         
         
         &lt;!--
-Copyright (c) 2020 Dell Inc., or its subsidiaries. All Rights Reserved.
+Copyright (c) 2020-2023 Dell Inc., or its subsidiaries. All Rights Reserved.
 
 Licensed under the Apache License, Version 2.0 (the &#34;License&#34;);
 you may not use this file except in compliance with the License.
@@ -589,10 +589,10 @@ You may obtain a copy of the License at
 &lt;li&gt;The deployment of one or more &lt;a href=&#34;../#supported-csi-drivers&#34;&gt;supported&lt;/a&gt; Dell CSI drivers&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;online-installer&#34;&gt;Online Installer&lt;/h2&gt;
-&lt;p&gt;The following instructions can be followed to install CSM for Observability in an environment that has an internet connection and is capable of downloading the required Helm chart and Docker images.&lt;br&gt;
+&lt;p&gt;Follow the instructions below to install CSM for Observability in an environment that has an Internet connection and is capable of downloading the required Helm chart and Docker images.
 The installer expects CSI drivers are using the default secret and configmap names.&lt;/p&gt;
 &lt;h3 id=&#34;dependencies&#34;&gt;Dependencies&lt;/h3&gt;
-&lt;p&gt;A Linux-based system, with internet access, will be used to execute the script to install CSM for Observability into a Kubernetes/Openshift environment that also has internet access.&lt;/p&gt;
+&lt;p&gt;A Linux-based system, with Internet access, will be used to execute the script to install CSM for Observability into a Kubernetes/Openshift environment that also has Internet access.&lt;/p&gt;
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
@@ -664,7 +664,7 @@ The following example will install CSM for Observability into the CSM namespace.
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;./karavi-observability-install.sh install --namespace &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;CSM_NAMESPACE&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt; --values myvalues.yaml
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;---------------------------------------------------------------------------------
-&amp;gt; Installing Karavi Observability in namespace karavi on 1.21
+&amp;gt; Installing Karavi Observability in namespace karavi on 1.27
 ---------------------------------------------------------------------------------
 |
 |- Karavi Observability is not installed                            Success
@@ -739,7 +739,7 @@ The following example will install CSM for Observability into the CSM namespace.
       <description>
         
         
-        &lt;p&gt;The following instructions can be followed when a Helm chart will be installed in an environment that does not have an internet connection and will be unable to download the Helm chart and related Docker images.&lt;/p&gt;
+        &lt;p&gt;The following instructions can be followed when a Helm chart will be installed in an environment that does not have an Internet connection and will be unable to download the Helm chart and related Docker images.&lt;/p&gt;
 &lt;h2 id=&#34;prerequisites&#34;&gt;Prerequisites&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;Helm 3.3&lt;/li&gt;
@@ -748,10 +748,10 @@ The following example will install CSM for Observability into the CSM namespace.
 &lt;h3 id=&#34;dependencies&#34;&gt;Dependencies&lt;/h3&gt;
 &lt;p&gt;Multiple Linux-based systems may be required to create and process an offline bundle for use.&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;One Linux-based system, with internet access, will be used to create the bundle. This involves the user invoking a script that utilizes &lt;code&gt;docker&lt;/code&gt; to pull and save container images to file.&lt;/li&gt;
+&lt;li&gt;One Linux-based system, with Internet access, will be used to create the bundle. This involves the user invoking a script that utilizes &lt;code&gt;docker&lt;/code&gt; to pull and save container images to file.&lt;/li&gt;
 &lt;li&gt;One Linux-based system, with access to an image registry, to invoke a script that uses &lt;code&gt;docker&lt;/code&gt; to restore container images from file and push them to a registry&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;If one Linux system has both internet access and access to an internal registry, that system can be used for both steps.&lt;/p&gt;
+&lt;p&gt;If one Linux system has both Internet access and access to an internal registry, that system can be used for both steps.&lt;/p&gt;
 &lt;p&gt;Preparing an offline bundle requires the following utilities:&lt;/p&gt;
 &lt;table&gt;
 &lt;thead&gt;
@@ -802,11 +802,11 @@ The following example will install CSM for Observability into the CSM namespace.
 *
 * Downloading and saving Docker images
 
-  dellemc/csm-topology:v1.5.0
-  dellemc/csm-metrics-powerflex:v1.5.0
-  dellemc/csm-metrics-powerstore:v1.5.0
-  dellemc/csm-metrics-powerscale:v1.2.0
-  dellemc/csm-metrics-powermax:v1.0.0
+  dellemc/csm-topology:v1.6.0
+  dellemc/csm-metrics-powerflex:v1.6.0
+  dellemc/csm-metrics-powerstore:v1.6.0
+  dellemc/csm-metrics-powerscale:v1.3.0
+  dellemc/csm-metrics-powermax:v1.1.0
   otel/opentelemetry-collector:0.42.0
   nginxinc/nginx-unprivileged:1.20
 
@@ -830,11 +830,11 @@ The following example will install CSM for Observability into the CSM namespace.
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;*
 * Loading, tagging, and pushing Docker images to registry &amp;lt;my-registry&amp;gt;:5000/
 
-  dellemc/csm-topology:v1.5.0 -&amp;gt; &amp;lt;my-registry&amp;gt;:5000/csm-topology:v1.5.0
-  dellemc/csm-metrics-powerflex:v1.5.0 -&amp;gt; &amp;lt;my-registry&amp;gt;:5000/csm-metrics-powerflex:v1.5.0
-  dellemc/csm-metrics-powerstore:v1.5.0 -&amp;gt; &amp;lt;my-registry&amp;gt;:5000/csm-metrics-powerstore:v1.5.0
-  dellemc/csm-metrics-powerscale:v1.2.0 -&amp;gt; &amp;lt;my-registry&amp;gt;:5000/csm-metrics-powerscale:v1.2.0
-  dellemc/csm-metrics-powermax:v1.0.0 -&amp;gt; &amp;lt;my-registry&amp;gt;:5000/csm-metrics-powerscale:v1.0.0
+  dellemc/csm-topology:v1.6.0 -&amp;gt; &amp;lt;my-registry&amp;gt;:5000/csm-topology:v1.6.0
+  dellemc/csm-metrics-powerflex:v1.6.0 -&amp;gt; &amp;lt;my-registry&amp;gt;:5000/csm-metrics-powerflex:v1.6.0
+  dellemc/csm-metrics-powerstore:v1.6.0 -&amp;gt; &amp;lt;my-registry&amp;gt;:5000/csm-metrics-powerstore:v1.6.0
+  dellemc/csm-metrics-powerscale:v1.3.0 -&amp;gt; &amp;lt;my-registry&amp;gt;:5000/csm-metrics-powerscale:v1.3.0
+  dellemc/csm-metrics-powermax:v1.1.0 -&amp;gt; &amp;lt;my-registry&amp;gt;:5000/csm-metrics-powermax:v1.1.0
   otel/opentelemetry-collector:0.42.0 -&amp;gt; &amp;lt;my-registry&amp;gt;:5000/opentelemetry-collector:0.42.0
   nginxinc/nginx-unprivileged:1.20 -&amp;gt; &amp;lt;my-registry&amp;gt;:5000/nginx-unprivileged:1.20
 &lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
@@ -874,7 +874,7 @@ The following example will install CSM for Observability into the CSM namespace.
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl get secret &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;POWERSTORE-CONFIG&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt; -n &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;CSI_DRIVER_NAMESPACE&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt; -o yaml &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; sed &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;s/name: [POWERSTORE-CONFIG]/name: powerstore-config/&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; sed &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;s/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; kubectl create -f -
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;CSI Driver for PowerScale:&lt;/strong&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl get secret isilon-creds -n &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;CSI_DRIVER_NAMESPACE&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt; -o yaml &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; sed &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;s/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; kubectl create -f - 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl get secret isilon-creds -n &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;CSI_DRIVER_NAMESPACE&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt; -o yaml &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; sed &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;s/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; kubectl create -f -
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;If the CSI driver secret name is not the default &lt;code&gt;isilon-creds&lt;/code&gt;, please use the following command to copy secret:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl get secret &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;ISILON-CREDS&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt; -n &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;CSI_DRIVER_NAMESPACE&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt; -o yaml &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; sed &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;s/name: [ISILON-CREDS]/name: isilon-creds/&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; sed &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;s/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; kubectl create -f -
@@ -887,7 +887,7 @@ The following example will install CSM for Observability into the CSM namespace.
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl get secret karavi-authorization-config proxy-server-root-certificate proxy-authz-tokens -n &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;CSI_DRIVER_NAMESPACE&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt; -o yaml &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; sed &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;s/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; sed &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;s/name: karavi-authorization-config/name: isilon-karavi-authorization-config/&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; sed &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;s/name: proxy-server-root-certificate/name: isilon-proxy-server-root-certificate/&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; sed &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;s/name: proxy-authz-tokens/name: isilon-proxy-authz-tokens/&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; kubectl create -f -
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;CSI Driver for PowerMax:&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;Copy the configmap from the CSI Driver for Dell PowerMax namespace to the CSM namespace.&lt;br&gt;
+&lt;p&gt;Copy the configmap from the CSI Driver for Dell PowerMax namespace to the CSM namespace.
 &lt;strong&gt;Note:&lt;/strong&gt; Observability for PowerMax works only with &lt;a href=&#34;../../../csidriver/installation/helm/powermax/#csi-powermax-driver-with-proxy-in-standalone-mode&#34;&gt;CSI PowerMax driver with Proxy in StandAlone mode&lt;/a&gt;.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl get configmap powermax-reverseproxy-config -n &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;CSI_DRIVER_NAMESPACE&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt; -o yaml &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; sed &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;s/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; kubectl create -f -
@@ -909,14 +909,14 @@ The following example will install CSM for Observability into the CSM namespace.
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;If &lt;a href=&#34;../../../authorization/deployment/#configuring-a-dell-csi-driver-with-csm-for-authorization&#34;&gt;CSM for Authorization is enabled&lt;/a&gt; for CSI PowerMax, perform these steps:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl get configmap powermax-config-params -n &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;CSI_DRIVER_NAMESPACE&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt; -o yaml &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; sed &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;s/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; kubectl create -f -
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;If the CSI driver configmap name is not the default &lt;code&gt;powermax-config-params&lt;/code&gt;, please use the following command to copy configmap:&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;If the CSI driver configmap name is not the default &lt;code&gt;powermax-config-params&lt;/code&gt;, use the following command to copy the configmap:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl get configmap &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;POWERMAX-CONFIG-PARAMS&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt; -n &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;CSI_DRIVER_NAMESPACE&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt; -o yaml &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; sed &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;s/name: [POWERMAX-CONFIG-PARAMS]/name: powermax-config-params/&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; sed &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;s/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; kubectl create -f -
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl get secret karavi-authorization-config proxy-server-root-certificate proxy-authz-tokens -n &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;CSI_DRIVER_NAMESPACE&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt; -o yaml &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; sed &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;s/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; sed &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;s/name: karavi-authorization-config/name: powermax-karavi-authorization-config/&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; sed &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;s/name: proxy-server-root-certificate/name: powermax-proxy-server-root-certificate/&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; sed &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;s/name: proxy-authz-tokens/name: powermax-proxy-authz-tokens/&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; kubectl create -f -
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;Now that the required images have been made available and the Helm chart&amp;rsquo;s configuration updated with references to the internal registry location, installation can proceed by following the instructions that are documented within the Helm chart&amp;rsquo;s repository.&lt;/p&gt;
+&lt;p&gt;After the images have been made available and the Helm chart configuration is updated, follow the instructions within the Helm chart&amp;rsquo;s repository to complete the installation.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Optionally, you could provide your own &lt;a href=&#34;../helm/#configuration&#34;&gt;configurations&lt;/a&gt;. A sample values.yaml file is located &lt;a href=&#34;https://github.com/dell/helm-charts/blob/main/charts/karavi-observability/values.yaml&#34;&gt;here&lt;/a&gt;.&lt;/li&gt;

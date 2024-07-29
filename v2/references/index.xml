@@ -509,6 +509,14 @@ schedule1     Enabled   2022-11-04 08:33:35 +0000 UTC   false    @every 1h   NA
 &lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;output-20&#34;&gt;Output&lt;/h4&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;dellctl images --component csi-vxflexos
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;Driver/Module Image             Supported Orchestrator Versions         Sidecar Images
+dellemc/csi-vxflexos:v2.9.0     k8s1.28,k8s1.27,k8s1.26,ocp4.14,ocp4.13 registry.k8s.io/sig-storage/csi-attacher:v4.4.2
+                                                                        registry.k8s.io/sig-storage/csi-provisioner:v3.6.2
+                                                                        registry.k8s.io/sig-storage/csi-external-health-monitor-controller:v0.10.0
+                                                                        registry.k8s.io/sig-storage/csi-snapshotter:v6.3.2
+                                                                        registry.k8s.io/sig-storage/csi-resizer:v1.9.2
+                                                                        registry.k8s.io/sig-storage/csi-node-driver-registrar:v2.9.1
+                                                                        dellemc/sdc:4.5
+
 dellemc/csi-vxflexos:v2.8.0     k8s1.27,k8s1.26,k8s1.25,ocp4.13,ocp4.12 registry.k8s.io/sig-storage/csi-attacher:v4.3.0
                                                                         registry.k8s.io/sig-storage/csi-provisioner:v3.5.0
                                                                         registry.k8s.io/sig-storage/csi-external-health-monitor-controller:v0.9.0
@@ -524,16 +532,14 @@ dellemc/csi-vxflexos:v2.7.0     k8s1.27,k8s1.26,k8s1.25,ocp4.12,ocp4.11 registry
                                                                         registry.k8s.io/sig-storage/csi-resizer:v1.8.0
                                                                         registry.k8s.io/sig-storage/csi-node-driver-registrar:v2.8.0
                                                                         dellemc/sdc:3.6.0.6
-
-dellemc/csi-vxflexos:v2.6.0     k8s1.26,k8s1.25,k8s1.24,ocp4.11,ocp4.10 registry.k8s.io/sig-storage/csi-attacher:v4.0.0
-                                                                        registry.k8s.io/sig-storage/csi-provisioner:v3.3.0
-                                                                        registry.k8s.io/sig-storage/csi-external-health-monitor-controller:v0.7.0
-                                                                        registry.k8s.io/sig-storage/csi-snapshotter:v6.1.0
-                                                                        registry.k8s.io/sig-storage/csi-resizer:v1.6.0
-                                                                        registry.k8s.io/sig-storage/csi-node-driver-registrar:v2.6.0
-                                                                        dellemc/sdc:3.6.0.6
 &lt;/code&gt;&lt;/pre&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;dellctl images --component csm-authorization
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;Driver/Module Image                             Supported Orchestrator Versions Sidecar Images
+dellemc/csm-authorization-sidecar:v1.9.0        k8s1.28,k8s1.27,k8s1.26         jetstack/cert-manager-cainjector:v1.6.1
+                                                                                jetstack/cert-manager-controller:v1.6.1
+                                                                                jetstack/cert-manager-webhook:v1.6.1
+                                                                                ingress-nginx/controller:v1.4.0
+                                                                                ingress-nginx/kube-webhook-certgen:v20220916-gd32f8c343
+
 dellemc/csm-authorization-sidecar:v1.8.0        k8s1.27,k8s1.26,k8s1.25         jetstack/cert-manager-cainjector:v1.6.1
                                                                                 jetstack/cert-manager-controller:v1.6.1
                                                                                 jetstack/cert-manager-webhook:v1.6.1
@@ -541,12 +547,6 @@ dellemc/csm-authorization-sidecar:v1.8.0        k8s1.27,k8s1.26,k8s1.25         
                                                                                 ingress-nginx/kube-webhook-certgen:v20220916-gd32f8c343
 
 dellemc/csm-authorization-sidecar:v1.7.0        k8s1.27,k8s1.26,k8s1.25         jetstack/cert-manager-cainjector:v1.6.1
-                                                                                jetstack/cert-manager-controller:v1.6.1
-                                                                                jetstack/cert-manager-webhook:v1.6.1
-                                                                                ingress-nginx/controller:v1.4.0
-                                                                                ingress-nginx/kube-webhook-certgen:v20220916-gd32f8c343
-
-dellemc/csm-authorization-sidecar:v1.6.0        k8s1.26,k8s1.25,k8s1.24         jetstack/cert-manager-cainjector:v1.6.1
                                                                                 jetstack/cert-manager-controller:v1.6.1
                                                                                 jetstack/cert-manager-webhook:v1.6.1
                                                                                 ingress-nginx/controller:v1.4.0

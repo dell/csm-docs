@@ -90,13 +90,17 @@ The implications of this are that if more than one pod on a node is sharing the 
       <description>
         
         
-        &lt;h2 id=&#34;release-notes---csm-resiliency-191&#34;&gt;Release Notes - CSM Resiliency 1.9.1&lt;/h2&gt;
+        &lt;h2 id=&#34;release-notes---csm-resiliency-1100&#34;&gt;Release Notes - CSM Resiliency 1.10.0&lt;/h2&gt;
 &lt;h3 id=&#34;new-featureschanges&#34;&gt;New Features/Changes&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1284&#34;&gt;#1284 - [FEATURE]: Support for Openshift 4.15&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/926&#34;&gt;#926 - [FEATURE]: Fixing the linting, formatting and vetting issues&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1359&#34;&gt;#1359 - [FEATURE]: Add Support for OpenShift Container Platform (OCP) 4.16 &lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1400&#34;&gt;#1400 - [FEATURE]: Support for Kubernetes 1.30&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1082&#34;&gt;#1082 - [FEATURE]: CSM Resiliency support for PowerMax&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;fixed-issues&#34;&gt;Fixed Issues&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1216&#34;&gt;#1216 - [BUG]: Incorrect Error message in Resiliency Podmon in controllerCleanupPod() func&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
 &lt;h3 id=&#34;known-issues&#34;&gt;Known Issues&lt;/h3&gt;
 &lt;p&gt;There are no known issues in this release.&lt;/p&gt;
 

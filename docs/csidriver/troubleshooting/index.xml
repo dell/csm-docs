@@ -32,6 +32,10 @@
 &lt;/thead&gt;
 &lt;tbody&gt;
 &lt;tr&gt;
+&lt;td&gt;After installation vxflexos-node pods are in an &lt;code&gt;Init:CrashLoopBackOff&lt;/code&gt; state in OpenShift 4.16 with error message: &lt;code&gt;Back-off restarting failed container sdc in pod vxflexos-node&lt;/code&gt; on non-supported kernel versions.&lt;/td&gt;
+&lt;td&gt;Use SDC version 4.5.2.1 in OpenShift 4.16.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
 &lt;td&gt;The installation fails with the following error message: &lt;br /&gt;&lt;code&gt;Node xxx does not have the SDC installed&lt;/code&gt;&lt;/td&gt;
 &lt;td&gt;Install the PowerFlex SDC on listed nodes. The SDC must be installed on all the nodes that need to pull an image of the driver.&lt;/td&gt;
 &lt;/tr&gt;
@@ -126,6 +130,10 @@
 &lt;tr&gt;
 &lt;td&gt;Standby controller pod is in crashloopbackoff state&lt;/td&gt;
 &lt;td&gt;Scale down the replica count of the controller pod&amp;rsquo;s deployment to 1 using &lt;code&gt;kubectl scale deployment &amp;lt;deployment_name&amp;gt; --replicas=1 -n &amp;lt;driver_namespace&amp;gt;&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;CSM object &lt;code&gt;vxflexos&lt;/code&gt; is in falied state and CSI-Powerflex driver is not in running state&lt;/td&gt;
+&lt;td&gt;Verify the secret name: &lt;code&gt;kubectl get secret -n &amp;lt;namespace_name&amp;gt;&lt;/code&gt; it should be in &lt;code&gt;&amp;lt;CR-name&amp;gt;-config&lt;/code&gt; format. 1. Retrieve the existing secret: &lt;code&gt;kubectl get secret old-secret-name -n &amp;lt;namespace_name&amp;gt; -o yaml &amp;gt; secret.yaml&lt;/code&gt; &lt;br&gt; 2. Edit the secret.yaml file: Change metadata.name to &lt;CR-name&gt;-Config &lt;br&gt; 3. Apply the new secret: &lt;code&gt;kubectl apply -f secret.yaml&lt;/code&gt; &lt;br&gt; 4. Delete the old secret: kubectl delete secret old-secret-name&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;

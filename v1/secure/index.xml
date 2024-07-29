@@ -23,13 +23,13 @@
       <description>
         
         
-        &lt;p&gt;&lt;strong&gt;NOTE:&lt;/strong&gt;  Encryption is not supported for CSM 1.9.x release. Please refer to the &lt;a href=&#34;./release/&#34;&gt;release notes&lt;/a&gt; for more details.&lt;/p&gt;
+        &lt;p&gt;&lt;strong&gt;NOTE:&lt;/strong&gt;  Encryption is not supported for CSM 1.10.x release. Please refer to the &lt;a href=&#34;./release/&#34;&gt;release notes&lt;/a&gt; for more details.&lt;/p&gt;
 &lt;p&gt;Encryption provides the capability to encrypt user data residing on volumes created by Dell CSI Drivers.&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;&lt;strong&gt;NOTE:&lt;/strong&gt; This tech-preview release is not intended for use in production environment.&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;NOTE:&lt;/strong&gt; Encryption requires a time-based license to create new encrypted volumes. Request a &lt;a href=&#34;../../license&#34;&gt;trial license&lt;/a&gt; prior to deployment.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;NOTE:&lt;/strong&gt; Encryption requires a time-based license to create new encrypted volumes. Request a &lt;a href=&#34;../../support/license&#34;&gt;trial license&lt;/a&gt; prior to deployment.&lt;/p&gt;
 &lt;p&gt;After the license expiration, existing encrypted volume can still be unlocked and used, but no new encrypted volumes can be created.&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;The volume data is encrypted on the Kubernetes worker host running the application workload, transparently for the application.&lt;/p&gt;
@@ -42,7 +42,7 @@ Encryption generates 32 random bytes for the password and stores them in Hashico
 &lt;p&gt;&lt;strong&gt;Provisioner for unencrypted volumes&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;This provisioner belongs to the storage driver and does not depend on the Encryption feature. Use a storage class with this provisioner to create regular unencrypted volumes.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Provisioner for encrypted volumes&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;This provisioner belongs to Encryption and registers with the name &lt;a href=&#34;deployment/#helm-chart-values&#34;&gt;&lt;code&gt;encryption.pluginName&lt;/code&gt;&lt;/a&gt; when Encryption is enabled. Use a storage class with this provisioner to create encrypted volumes.&lt;/p&gt;
+&lt;p&gt;This provisioner belongs to Encryption and registers with the name &lt;a href=&#34;../../deployment/helm/modules/installation/encryption/#helm-chart-values&#34;&gt;&lt;code&gt;encryption.pluginName&lt;/code&gt;&lt;/a&gt; when Encryption is enabled. Use a storage class with this provisioner to create encrypted volumes.&lt;/p&gt;
 &lt;h2 id=&#34;capabilities&#34;&gt;Capabilities&lt;/h2&gt;
 
 
@@ -204,7 +204,7 @@ Please refer to the Hashicorp Vault documentation regarding recommended deployme
 &lt;p&gt;&lt;strong&gt;CAUTION:&lt;/strong&gt; Destroyed Vault storage back-end or the encryption key stored in it, will make it impossible to unlock the volume encrypted with Encryption.
 Access to the data will be lost for ever.&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;Refer to &lt;a href=&#34;vault&#34;&gt;Vault Configuration section&lt;/a&gt; for minimal configuration steps required to support Encryption and other configuration considerations.&lt;/p&gt;
+&lt;p&gt;Refer to &lt;a href=&#34;../../deployment/helm/modules/installation/encryption/vault&#34;&gt;Vault Configuration section&lt;/a&gt; for minimal configuration steps required to support Encryption and other configuration considerations.&lt;/p&gt;
 &lt;h2 id=&#34;key-rotation-rekey&#34;&gt;Key Rotation (rekey)&lt;/h2&gt;
 &lt;p&gt;This preview of Encryption includes the ability to change the KEK (Key Encryption Key) of an encrypted volume, an operation commonly known as Shallow Rekey, or
 Shallow Key Rotation. The KEK is the 256-bit key that encrypts the Data Encryption Key which encrypts the data on the volume.&lt;/p&gt;

@@ -90,19 +90,18 @@ The implications of this are that if more than one pod on a node is sharing the 
       <description>
         
         
-        &lt;h2 id=&#34;release-notes---csm-resiliency-160&#34;&gt;Release Notes - CSM Resiliency 1.6.0&lt;/h2&gt;
+        &lt;h2 id=&#34;release-notes---csm-resiliency-170&#34;&gt;Release Notes - CSM Resiliency 1.7.0&lt;/h2&gt;
 &lt;h3 id=&#34;new-featureschanges&#34;&gt;New Features/Changes&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;CSM support for Kubernetes 1.27. (&lt;a href=&#34;https://github.com/dell/csm/issues/761&#34;&gt;#761&lt;/a&gt;)&lt;/li&gt;
-&lt;li&gt;CSM 1.7 release specific changes. (&lt;a href=&#34;https://github.com/dell/csm/issues/743&#34;&gt;#743&lt;/a&gt;)&lt;/li&gt;
-&lt;li&gt;CSM Operator: Support install of Resiliency module. (&lt;a href=&#34;https://github.com/dell/csm/issues/739&#34;&gt;#739&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/724&#34;&gt;#724 - [FEATURE]: CSM support for Openshift 4.13&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/922&#34;&gt;#922 - [FEATURE]: Use ubi9 micro as base image&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;fixed-issues&#34;&gt;Fixed Issues&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;CSM for Resiliency openshift test required to pass ssh options in scp command. (&lt;a href=&#34;https://github.com/dell/csm/issues/737&#34;&gt;#737&lt;/a&gt;)&lt;/li&gt;
-&lt;li&gt;CSM Resiliency GitHub actions produce sporadic failure. (&lt;a href=&#34;https://github.com/dell/csm/issues/733&#34;&gt;#733&lt;/a&gt;)&lt;/li&gt;
-&lt;li&gt;CSI PODMON is tainting the worker node (&lt;a href=&#34;https://github.com/dell/csm/issues/765&#34;&gt;#765&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/916&#34;&gt;#916 - [BUG]: Remove references to deprecated io/ioutil package&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
+&lt;h3 id=&#34;known-issues&#34;&gt;Known Issues&lt;/h3&gt;
+&lt;p&gt;There are no known issues in this release.&lt;/p&gt;
 
       </description>
     </item>

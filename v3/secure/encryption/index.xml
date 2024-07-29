@@ -680,15 +680,15 @@ the rekey can be inspected through the &lt;code&gt;status.phase&lt;/code&gt; fie
       <description>
         
         
-        &lt;h2 id=&#34;new-featureschanges&#34;&gt;New Features/Changes&lt;/h2&gt;
+        &lt;h3 id=&#34;new-featureschanges&#34;&gt;New Features/Changes&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/437&#34;&gt;Technical preview release&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;Kubernetes 1.26 support.&lt;/li&gt;
 &lt;li&gt;Security updates.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2 id=&#34;fixed-issues&#34;&gt;Fixed Issues&lt;/h2&gt;
+&lt;h3 id=&#34;fixed-issues&#34;&gt;Fixed Issues&lt;/h3&gt;
 &lt;p&gt;There are no fixed issues in this release.&lt;/p&gt;
-&lt;h2 id=&#34;known-issues&#34;&gt;Known Issues&lt;/h2&gt;
+&lt;h3 id=&#34;known-issues&#34;&gt;Known Issues&lt;/h3&gt;
 &lt;p&gt;There are no known issues in this release.&lt;/p&gt;
 
       </description>

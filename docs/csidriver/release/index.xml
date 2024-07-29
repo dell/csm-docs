@@ -23,22 +23,26 @@
       <description>
         
         
-        &lt;h2 id=&#34;release-notes---csi-powerflex-v2101&#34;&gt;Release Notes - CSI PowerFlex v2.10.1&lt;/h2&gt;
+        &lt;h2 id=&#34;release-notes---csi-powerflex-v2110&#34;&gt;Release Notes - CSI PowerFlex v2.11.0&lt;/h2&gt;
 &lt;h3 id=&#34;new-featureschanges&#34;&gt;New Features/Changes&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1284&#34;&gt;#1284 - [FEATURE]: Support for Openshift 4.15&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1285&#34;&gt;#1285 - [FEATURE]: Remove checks in code for non-supported installs of CSM&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/926&#34;&gt;#926 - [FEATURE]: Fixing the linting, formatting and vetting issues&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1359&#34;&gt;#1359 - [FEATURE]: Add Support for OpenShift Container Platform (OCP) 4.16 &lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1400&#34;&gt;#1400 - [FEATURE]: Support for Kubernetes 1.30&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1358&#34;&gt;#1358 - [FEATURE]: Support for PowerFlex 4.6&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1397&#34;&gt;#1397 - [FEATURE]: Observability upgrade is supported in CSM Operator&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;fixed-issues&#34;&gt;Fixed Issues&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1081&#34;&gt;#1081 - [BUG]: CSM driver repositories reference CSI Operator&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1086&#34;&gt;#1086 - [BUG]: PowerFlex driver fails to start on RKE&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1101&#34;&gt;#1101 - [BUG]: the &lt;code&gt;nasName&lt;/code&gt; parameter in the powerflex secret is now mandatory&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1140&#34;&gt;#1140 - [BUG]: Cert-csi tests are not reporting the passed testcases in K8S E2E tests &lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1163&#34;&gt;#1163 - [BUG]: Resource quota bypass&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1174&#34;&gt;#1174 - [BUG]: Kubelet Configuration Directory setting should not have a comment about default value being None&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1210&#34;&gt;#1210 - [BUG]: Helm deployment of PowerFlex driver is failing&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1209&#34;&gt;#1209 - [BUG]: Doc hyper links in driver Readme is broken&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1218&#34;&gt;#1218 - [BUG]: Add the helm-charts-version parameter to the install command for all drivers in csm-docs&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1237&#34;&gt;#1237 - [BUG]: Error handling not good in node.go:nodeProbe() and other similar functions&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1239&#34;&gt;#1239 - [BUG]: Changes in new release of google.golang.org/protobuf is causing compilation issues&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1270&#34;&gt;#1270 - [BUG]: Missing entries for Resiliency in installation wizard template&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1310&#34;&gt;#1310 - [BUG]:  CSI node pod crash after replacing OCP ingress certificate or restarting kubectl service&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1350&#34;&gt;#1350 - [BUG]: Document update : PowerFlex expecting secret CR as &lt;csm-cr-name&gt;-config in operator &lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1355&#34;&gt;#1355 - [BUG]: Indentation of secret.yaml mentioned on the csm-doc portal for powerflex driver is incorrect.&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1364&#34;&gt;#1364 - [BUG]: mkfsFormatOption not working for powerflex&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1366&#34;&gt;#1366 - [BUG]:  Support Minimum 3GB Volume Size for NFS in CSI-PowerFlex&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;known-issues&#34;&gt;Known Issues&lt;/h3&gt;
 &lt;table&gt;
@@ -81,12 +85,16 @@
 &lt;td&gt;Resource quotas may not work properly with the CSI PowerFlex driver. PowerFlex is only able to assign storage in 8Gi chunks, so if a create volume call is made with a size not divisible by 8Gi, CSI-PowerFlex will round up to the next 8Gi boundary when it provisions storage &amp;ndash; however, the resource quota will not record this size but rather the original size in the create request. This means that, for example, if a 10Gi resource quota is set, and a user provisions 10 1Gi PVCs, 80Gi of storage will actually be allocated, which is well over the amount specified in the resource quota.&lt;/td&gt;
 &lt;td&gt;For now, users should only provision volumes in 8Gi-divisible chunks if they want to use resource quotas.&lt;/td&gt;
 &lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Helm install of CSM for PowerFlex v1.10.0 is failing due to a duplicate &lt;code&gt;mountPath: /host_opt_emc_path&lt;/code&gt; being added to volumeMounts charts/csi-vxflexos/templates/node.yaml. Error message is &lt;code&gt;Error: INSTALLATION FAILED: 1 error occurred: DaemonSet.apps &amp;quot;vxflexos-node&amp;quot; is invalid: spec.template.spec.initContainers[0].volumeMounts[4].mountPath: Invalid value: &amp;quot;/host_opt_emc_path&amp;quot;: must be unique&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;The issue can be resolved by removing the duplicate entry in &lt;a href=&#34;https://github.com/dell/helm-charts/blob/main/charts/csi-vxflexos/templates/node.yaml&#34;&gt;https://github.com/dell/helm-charts/blob/main/charts/csi-vxflexos/templates/node.yaml&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;h3 id=&#34;note&#34;&gt;Note:&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;Support for Kubernetes alpha features like Volume Health Monitoring and RWOP (ReadWriteOncePod) access mode will not be available in Openshift environment as Openshift doesn&amp;rsquo;t support enabling of alpha features for Production Grade clusters.&lt;/li&gt;
-&lt;li&gt;For fixing &lt;a href=&#34;https://github.com/dell/csm/issues/1210&#34;&gt;#1210 - [BUG]: Helm deployment of PowerFlex driver is failing&lt;/a&gt;, a new helm-chart has been released. In order to install this helm chart, we need to pass the flag &lt;code&gt;--helm-charts-version&lt;/code&gt; during helm installation and flag &lt;code&gt;-v&lt;/code&gt; during offline bundle installation with value &lt;code&gt;csi-vxflexos-2.10.1&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Support for Kubernetes alpha features like Volume Health Monitoring will not be available in Openshift environment as Openshift doesn&amp;rsquo;t support enabling of alpha features for Production Grade clusters.&lt;/li&gt;
+&lt;li&gt;For fixing &lt;a href=&#34;https://github.com/dell/csm/issues/1210&#34;&gt;#1210 - [BUG]: Helm deployment of PowerFlex driver is failing&lt;/a&gt;, a new helm-chart has been released. In order to install this helm chart, we need to pass the flag &lt;code&gt;--helm-charts-version&lt;/code&gt; during helm installation and flag &lt;code&gt;-v&lt;/code&gt; during offline bundle installation with value &lt;code&gt;csi-vxflexos-2.11.0&lt;/code&gt;.&lt;/li&gt;
 &lt;/ul&gt;
 
       </description>
@@ -101,7 +109,7 @@
       <description>
         
         
-        &lt;h2 id=&#34;release-notes---csi-powermax-v2101&#34;&gt;Release Notes - CSI PowerMax v2.10.1&lt;/h2&gt;
+        &lt;h2 id=&#34;release-notes---csi-powermax-v2110&#34;&gt;Release Notes - CSI PowerMax v2.11.0&lt;/h2&gt;
 &lt;blockquote&gt;
 &lt;p&gt;Note: Auto SRDF group creation is currently not supported in PowerMaxOS 10.1 (6079) Arrays.&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -113,17 +121,22 @@
 &lt;/blockquote&gt;
 &lt;h3 id=&#34;new-featureschanges&#34;&gt;New Features/Changes&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1284&#34;&gt;#1284 - [FEATURE]: Support for Openshift 4.15&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1285&#34;&gt;#1285 - [FEATURE]: Remove checks in code for non-supported installs of CSM&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/926&#34;&gt;#926 - [FEATURE]: Fixing the linting, formatting and vetting issues&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1308&#34;&gt;#1308 - [FEATURE]: NVMe TCP support for PowerMax &lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1359&#34;&gt;#1359 - [FEATURE]: Add Support for OpenShift Container Platform (OCP) 4.16 &lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1400&#34;&gt;#1400 - [FEATURE]: Support for Kubernetes 1.30&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1082&#34;&gt;#1082 - [FEATURE]: CSM Resiliency support for PowerMax&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1397&#34;&gt;#1397 - [FEATURE]: Observability upgrade is supported in CSM Operator&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;fixed-issues&#34;&gt;Fixed Issues&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1081&#34;&gt;#1081 - [BUG]: CSM driver repositories reference CSI Operator&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1115&#34;&gt;#1115 - [BUG]: CSI Powermax: Driver fails to restore snapshot to Metro Volumes&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1140&#34;&gt;#1140 - [BUG]: Cert-csi tests are not reporting the passed testcases in K8S E2E tests &lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1174&#34;&gt;#1174 - [BUG]: Kubelet Configuration Directory setting should not have a comment about default value being None&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1175&#34;&gt;#1175 - [BUG]: PowerMax : Metro: Failed to find Remote Symm WWN&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1209&#34;&gt;#1209 - [BUG]: Doc hyper links in driver Readme is broken&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1218&#34;&gt;#1218 - [BUG]: Add the helm-charts-version parameter to the install command for all drivers in csm-docs&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1238&#34;&gt;#1238 - [BUG]: Missing mountPropagation param for Powermax node template in CSM-Operator&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1239&#34;&gt;#1239 - [BUG]: Changes in new release of google.golang.org/protobuf is causing compilation issues&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1305&#34;&gt;#1305 - [BUG]: Create volume even if the size is smaller than possible&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1346&#34;&gt;#1346 - [BUG]: Parsing an NVME response fails for list-subsys&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1370&#34;&gt;#1370 - [BUG]: API command to check filesystem is taking 20s + causing ControllerUnPublish to take 20+secs &lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1372&#34;&gt;#1372 - [BUG]: Make files in repositories build invalid images&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;known-issues&#34;&gt;Known Issues&lt;/h3&gt;
 &lt;table&gt;
@@ -177,20 +190,24 @@
       <description>
         
         
-        &lt;h2 id=&#34;release-notes---csi-driver-for-powerscale-v2101&#34;&gt;Release Notes - CSI Driver for PowerScale v2.10.1&lt;/h2&gt;
+        &lt;h2 id=&#34;release-notes---csi-driver-for-powerscale-v2110&#34;&gt;Release Notes - CSI Driver for PowerScale v2.11.0&lt;/h2&gt;
 &lt;h3 id=&#34;new-featureschanges&#34;&gt;New Features/Changes&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1284&#34;&gt;#1284 - [FEATURE]: Support for Openshift 4.15&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1285&#34;&gt;#1285 - [FEATURE]: Remove checks in code for non-supported installs of CSM&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/926&#34;&gt;#926 - [FEATURE]: Fixing the linting, formatting and vetting issues&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1359&#34;&gt;#1359 - [FEATURE]: Add Support for OpenShift Container Platform (OCP) 4.16 &lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1400&#34;&gt;#1400 - [FEATURE]: Support for Kubernetes 1.30&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1397&#34;&gt;#1397 - [FEATURE]: Observability upgrade is supported in CSM Operator&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1398&#34;&gt;#1398 - [FEATURE]: PowerScale  OneFS 9.7 support &lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;fixed-issues&#34;&gt;Fixed Issues&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1081&#34;&gt;#1081 - [BUG]: CSM driver repositories reference CSI Operator&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1104&#34;&gt;#1104 - [BUG]: The csm-isilon-controller keeps getting panic and is restarting &lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1134&#34;&gt;#1134 - [BUG]: PowerScale : Driver failing to re-authenticate if session cookies are expired &lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1140&#34;&gt;#1140 - [BUG]: Cert-csi tests are not reporting the passed testcases in K8S E2E tests &lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1174&#34;&gt;#1174 - [BUG]: Kubelet Configuration Directory setting should not have a comment about default value being None&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1203&#34;&gt;#1203 - [BUG]: OCP min/max version support&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1209&#34;&gt;#1209 - [BUG]: Doc hyper links in driver Readme is broken&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1215&#34;&gt;#1215 - [BUG]: Discrepancy in their secret&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1218&#34;&gt;#1218 - [BUG]: Add the helm-charts-version parameter to the install command for all drivers in csm-docs&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1239&#34;&gt;#1239 - [BUG]: Changes in new release of google.golang.org/protobuf is causing compilation issues&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1270&#34;&gt;#1270 - [BUG]: Missing entries for Resiliency in installation wizard template&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1316&#34;&gt;#1316 - [BUG]: PowerScale CSI - Creating PVC from csi snapshot is failing&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1322&#34;&gt;#1322 - [BUG]: PowerScale CSM:  Updating the fsGroupPolicy in the csm is not updating the csidriver&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;known-issues&#34;&gt;Known Issues&lt;/h3&gt;
 &lt;table&gt;
@@ -252,21 +269,23 @@
       <description>
         
         
-        &lt;h2 id=&#34;release-notes---csi-powerstore-v2101&#34;&gt;Release Notes - CSI PowerStore v2.10.1&lt;/h2&gt;
+        &lt;h2 id=&#34;release-notes---csi-powerstore-v2110&#34;&gt;Release Notes - CSI PowerStore v2.11.0&lt;/h2&gt;
 &lt;h3 id=&#34;new-featureschanges&#34;&gt;New Features/Changes&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1284&#34;&gt;#1284 - [FEATURE]: Support for Openshift 4.15&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1285&#34;&gt;#1285 - [FEATURE]: Remove checks in code for non-supported installs of CSM&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/926&#34;&gt;#926 - [FEATURE]: Fixing the linting, formatting and vetting issues&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1129&#34;&gt;#1129 - [FEATURE]: Support PowerStore v3.6&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1359&#34;&gt;#1359 - [FEATURE]: Add Support for OpenShift Container Platform (OCP) 4.16 &lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1400&#34;&gt;#1400 - [FEATURE]: Support for Kubernetes 1.30&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;fixed-issues&#34;&gt;Fixed Issues&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1081&#34;&gt;#1081 - [BUG]: CSM driver repositories reference CSI Operator&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1097&#34;&gt;#1097 - [BUG]: Powerstore sanity tests are not working&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1140&#34;&gt;#1140 - [BUG]: Cert-csi tests are not reporting the passed testcases in K8S E2E tests &lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1142&#34;&gt;#1142 - [BUG]: Documentation : Multipath related instructions are missing in Powerstore prerequisites &lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1174&#34;&gt;#1174 - [BUG]: Kubelet Configuration Directory setting should not have a comment about default value being None&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1188&#34;&gt;#1188 - [BUG]: Controller Pod keeps restarting due to &amp;ldquo;Lost connection to CSI driver&amp;rdquo; error&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1209&#34;&gt;#1209 - [BUG]: Doc hyper links in driver Readme is broken&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1216&#34;&gt;#1216 - [BUG]: Incorrect Error message in Resiliency Podmon in controllerCleanupPod() func&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1218&#34;&gt;#1218 - [BUG]: Add the helm-charts-version parameter to the install command for all drivers in csm-docs&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1239&#34;&gt;#1239 - [BUG]: Changes in new release of google.golang.org/protobuf is causing compilation issues&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1270&#34;&gt;#1270 - [BUG]: Missing entries for Resiliency in installation wizard template&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1317&#34;&gt;#1317 - [BUG]: CSM PowerStore - Remove the RESTAPI code that is not needed&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1338&#34;&gt;#1338 - [BUG]: Data loss (DL) when deleting PVC but leaves unusable volumesnapshot and volumesnapshotcontent&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1346&#34;&gt;#1346 - [BUG]: Parsing an NVME response fails for list-subsys&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;known-issues&#34;&gt;Known Issues&lt;/h3&gt;
 &lt;table&gt;
@@ -336,18 +355,23 @@
       <description>
         
         
-        &lt;h2 id=&#34;release-notes---csi-unity-xt-v2101&#34;&gt;Release Notes - CSI Unity XT v2.10.1&lt;/h2&gt;
+        &lt;h2 id=&#34;release-notes---csi-unity-xt-v2110&#34;&gt;Release Notes - CSI Unity XT v2.11.0&lt;/h2&gt;
 &lt;h3 id=&#34;new-featureschanges&#34;&gt;New Features/Changes&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1284&#34;&gt;#1284 - [FEATURE]: Support for Openshift 4.15&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1285&#34;&gt;#1285 - [FEATURE]: Remove checks in code for non-supported installs of CSM&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/926&#34;&gt;#926 - [FEATURE]: Fixing the linting, formatting and vetting issues&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1359&#34;&gt;#1359 - [FEATURE]: Add Support for OpenShift Container Platform (OCP) 4.16 &lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1400&#34;&gt;#1400 - [FEATURE]: Support for Kubernetes 1.30&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1399&#34;&gt;#1399 - [FEATURE]: Unity 5.4 Support&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;fixed-issues&#34;&gt;Fixed Issues&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1081&#34;&gt;#1081 - [BUG]: CSM driver repositories reference CSI Operator&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1140&#34;&gt;#1140 - [BUG]: Cert-csi tests are not reporting the passed testcases in K8S E2E tests &lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1174&#34;&gt;#1174 - [BUG]: Kubelet Configuration Directory setting should not have a comment about default value being None&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1198&#34;&gt;#1198 - [BUG]: Topology-related node labels are not added automatically&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1206&#34;&gt;#1206 - [BUG]: Snapshot ingestion procedure for CSI Unity Driver misising &lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1209&#34;&gt;#1209 - [BUG]: Doc hyper links in driver Readme is broken&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1218&#34;&gt;#1218 - [BUG]: Add the helm-charts-version parameter to the install command for all drivers in csm-docs&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1222&#34;&gt;#1222 - [BUG]: Cannot configure export IP for CSI-Unity &lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1239&#34;&gt;#1239 - [BUG]: Changes in new release of google.golang.org/protobuf is causing compilation issues&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1270&#34;&gt;#1270 - [BUG]: Missing entries for Resiliency in installation wizard template&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1279&#34;&gt;#1279 - [BUG]: unable to install the UNITY driver in NAT Env&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;known-issues&#34;&gt;Known Issues&lt;/h3&gt;
 &lt;table&gt;
@@ -367,7 +391,7 @@
 &lt;td&gt;Currently, when the driver is uninstalled, topology-related node labels are not getting removed automatically. There is an open issue in the Kubernetes to fix this. Until the fix is released, remove the labels manually after the driver un-installation using command &lt;strong&gt;kubectl label node &amp;lt;node_name&amp;gt; &lt;label1&gt;- &lt;label2&gt;- &amp;hellip;&lt;/strong&gt; Example: &lt;strong&gt;kubectl label node &lt;hostname&gt; csi-unity.dellemc.com/array123-iscsi-&lt;/strong&gt; Note: there must be - at the end of each label to remove it.&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;NFS Clone - Resize of the snapshot is not supported by Unity XT Platform, however the user should never try to resize the cloned NFS volume.&lt;/td&gt;
+&lt;td&gt;NFS Clone - Resize of the snapshot is not supported by Unity XT Platform, however, the user should never try to resize the cloned NFS volume.&lt;/td&gt;
 &lt;td&gt;Currently, when the driver takes a clone of NFS volume, it succeeds but if the user tries to resize the NFS volumesnapshot, the driver will throw an error.&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
@@ -384,17 +408,21 @@
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;If the volume limit is exhausted and there are pending pods and PVCs due to &lt;code&gt;exceed max volume count&lt;/code&gt;, the pending PVCs will be bound to PVs and the pending pods will be scheduled to nodes when the driver pods are restarted.&lt;/td&gt;
-&lt;td&gt;It is advised not to have any pending pods or PVCs once the volume limit per node is exhausted on a CSI Driver. There is an open issue reported with kubenetes at &lt;a href=&#34;https://github.com/kubernetes/kubernetes/issues/95911&#34;&gt;https://github.com/kubernetes/kubernetes/issues/95911&lt;/a&gt; with the same behavior.&lt;/td&gt;
+&lt;td&gt;It is advised not to have any pending pods or PVCs once the volume limit per node is exhausted on a CSI Driver. There is an open issue reported with Kubernetes at &lt;a href=&#34;https://github.com/kubernetes/kubernetes/issues/95911&#34;&gt;https://github.com/kubernetes/kubernetes/issues/95911&lt;/a&gt; with the same behavior.&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;fsGroupPolicy may not work as expected without root privileges for NFS only &lt;a href=&#34;https://github.com/kubernetes/examples/issues/260&#34;&gt;https://github.com/kubernetes/examples/issues/260&lt;/a&gt;&lt;/td&gt;
 &lt;td&gt;To get the desired behavior set “RootClientEnabled” = “true” in the storage class parameter&lt;/td&gt;
 &lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Controller publish is taking too long to complete/ Health monitoring is causing Unity array to panic by opening multiple sessions/ There are error messages in the log &lt;code&gt;context deadline exceeded&lt;/code&gt;, when health monitoring is enabled&lt;/td&gt;
+&lt;td&gt;Disable volume health monitoring on the node and keep it only at the controller level. Refer &lt;a href=&#34;https://dell.github.io/csm-docs/docs/csidriver/features/unity/#volume-health-monitoring&#34;&gt;here&lt;/a&gt; for more information about enabling/disabling volume health monitoring&lt;/td&gt;
+&lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;h3 id=&#34;note&#34;&gt;Note:&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;Support for Kubernetes alpha features like Volume Health Monitoring will not be available in Openshift environment as Openshift doesn&amp;rsquo;t support enabling of alpha features for Production Grade clusters.&lt;/li&gt;
+&lt;li&gt;Support for Kubernetes alpha features like Volume Health Monitoring will not be available in the Openshift environment as Openshift doesn&amp;rsquo;t support enabling of alpha features for Production Grade clusters.&lt;/li&gt;
 &lt;/ul&gt;
 
       </description>

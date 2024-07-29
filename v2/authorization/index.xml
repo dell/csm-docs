@@ -616,6 +616,9 @@ be piped directly to kubectl:&lt;/p&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;type&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Opaque&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Usually, you will want to pipe the output to kubectl to apply the secret&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;karavictl generate token --tenant Alice --admin-token admintoken.yaml --addr csm-authorization.host.com &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; kubectl apply -f -
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;The token is read once when the driver pods are started and is not dynamically updated. If you are applying a new token in an existing driver installation, restart the driver pods for the new token to take effect.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl -n &amp;lt;driver-namespace&amp;gt; rollout restart deploy/&amp;lt;driver&amp;gt;-controller
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl -n &amp;lt;driver-namespace&amp;gt; rollout restart ds/&amp;lt;driver&amp;gt;-node
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;karavictl-role&#34;&gt;karavictl role&lt;/h3&gt;
 &lt;p&gt;Manage roles&lt;/p&gt;
 &lt;h5 id=&#34;synopsis-5&#34;&gt;Synopsis&lt;/h5&gt;
@@ -1045,10 +1048,7 @@ be piped directly to kubectl:&lt;/p&gt;
 &lt;li&gt;&lt;a href=&#34;#running-karavictl-tenant-commands-result-in-an-http-504-error&#34;&gt;Running &lt;code&gt;karavictl tenant&lt;/code&gt; commands result in an HTTP 504 error&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#installation-fails-to-install-policies&#34;&gt;Installation fails to install policies&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#after-installation-the-create-pvc-pod-is-in-an-error-state&#34;&gt;After installation, the create-pvc Pod is in an Error state&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;helm-deployment&#34;&gt;Helm Deployment&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;#the-csi-driver-for-dell-powerflex-v230-is-in-an-error-or-crashloopbackoff-state-due-to-request-denied-for-path-errors&#34;&gt;The CSI Driver for Dell PowerFlex v2.3.0 is in an Error or CrashLoopBackoff state due to &amp;ldquo;request denied for path&amp;rdquo; errors&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#intermittent-401-issues-with-generated-token&#34;&gt;Intermittent 401 issues with generated token&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;hr&gt;
 &lt;h3 id=&#34;the-failure-of-building-an-authorization-rpm&#34;&gt;The Failure of Building an Authorization RPM&lt;/h3&gt;
@@ -1090,7 +1090,19 @@ prevent communication with the &lt;code&gt;DNS-hostname&lt;/code&gt;, either new
 &lt;p&gt;Run the following commands to allow the PVC to be created:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;semanage fcontext -a -t container_file_t  &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;/var/lib/rancher/k3s/storage(/.*)?&amp;#34;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;restorecon -R  /var/lib/rancher/k3s/storage/
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;the-csi-driver-for-dell-powerflex-v230-is-in-an-error-or-crashloopbackoff-state-due-to-request-denied-for-path-errors&#34;&gt;The CSI Driver for Dell PowerFlex v2.3.0 is in an Error or CrashLoopBackoff state due to &amp;ldquo;request denied for path&amp;rdquo; errors&lt;/h3&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;intermittent-401-issues-with-generated-token&#34;&gt;Intermittent 401 issues with generated token&lt;/h3&gt;
+&lt;p&gt;This issue occurs when a new access token is generated in an existing driver installation.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Resolution&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;If you are applying a new token in an existing driver installation, restart the driver pods for the new token to take effect. The token is read once when the driver pods are started and is not dynamically updated.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl -n &amp;lt;driver-namespace&amp;gt; rollout restart deploy/&amp;lt;driver&amp;gt;-controller
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl -n &amp;lt;driver-namespace&amp;gt; rollout restart ds/&amp;lt;driver&amp;gt;-node
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;helm-deployment&#34;&gt;Helm Deployment&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#the-csi-driver-for-dell-powerflex-v230-is-in-an-error-or-crashloopbackoff-state-due-to-request-denied-for-path-errors&#34;&gt;The CSI Driver for Dell PowerFlex v2.3.0 is in an Error or CrashLoopBackoff state due to &amp;ldquo;request denied for path&amp;rdquo; errors&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#intermittent-401-issues-with-generated-token&#34;&gt;Intermittent 401 issues with generated token&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;the-csi-driver-for-dell-powerflex-v230-is-in-an-error-or-crashloopbackoff-state-due-to-request-denied-for-path-errors&#34;&gt;The CSI Driver for Dell PowerFlex v2.3.0 is in an Error or CrashLoopBackoff state due to &amp;ldquo;request denied for path&amp;rdquo; errors&lt;/h3&gt;
 &lt;p&gt;The vxflexos-controller pods will have logs similar to:&lt;/p&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;time=&amp;#34;2022-06-30T17:35:03Z&amp;#34; level=error msg=&amp;#34;failed to list vols for array 2d6fb7c6370a990f : rpc error: code = Internal desc = Unable to list volumes: request denied for path &amp;#34; error=&amp;#34;rpc error: code = Internal desc = Unable to list volumes: request denied for path&amp;#34;
 time=&amp;#34;2022-06-30T17:35:03Z&amp;#34; level=error msg=&amp;#34;array 2d6fb7c6370a990f probe failed: failed to list vols for array 2d6fb7c6370a990f : rpc error: code = Internal desc = Unable to list volumes: request denied for path &amp;#34;
@@ -1156,6 +1168,12 @@ time=&amp;#34;2022-06-30T17:38:32Z&amp;#34; level=fatal msg=&amp;#34;grpc failed
 &lt;/ol&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl -n &amp;lt;driver-namespace&amp;gt; rollout restart deploy/vxflexos-controller
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl -n &amp;lt;driver-namespace&amp;gt; rollout restart daemonSet/vxflexos-node
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;intermittent-401-issues-with-generated-token-1&#34;&gt;Intermittent 401 issues with generated token&lt;/h3&gt;
+&lt;p&gt;This issue occurs when a new access token is generated in an existing driver installation.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Resolution&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;If you are applying a new token in an existing driver installation, restart the driver pods for the new token to take effect. The token is read once when the driver pods are started and is not dynamically updated.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl -n &amp;lt;driver-namespace&amp;gt; rollout restart deploy/&amp;lt;driver&amp;gt;-controller
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl -n &amp;lt;driver-namespace&amp;gt; rollout restart ds/&amp;lt;driver&amp;gt;-node
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
       </description>
     </item>
@@ -1169,16 +1187,16 @@ time=&amp;#34;2022-06-30T17:38:32Z&amp;#34; level=fatal msg=&amp;#34;grpc failed
       <description>
         
         
-        &lt;h2 id=&#34;release-notes---csm-authorization-180&#34;&gt;Release Notes - CSM Authorization 1.8.0&lt;/h2&gt;
+        &lt;h2 id=&#34;release-notes---csm-authorization-191&#34;&gt;Release Notes - CSM Authorization 1.9.1&lt;/h2&gt;
 &lt;h3 id=&#34;new-featureschanges&#34;&gt;New Features/Changes&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/922&#34;&gt;#922 - [FEATURE]: Use ubi9 micro as base image&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/947&#34;&gt;#947 - [FEATURE]: Support for Kubernetes 1.28&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1066&#34;&gt;#1066 - [FEATURE]: Support for Openshift 4.14&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/996&#34;&gt;#996 - [FEATURE]: Dell CSI to Dell CSM Operator Migration Process&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1031&#34;&gt;#1031 - [FEATURE]: Update to the latest UBI Micro image for CSM&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1062&#34;&gt;#1062 - [FEATURE]: CSM PowerMax: Support PowerMax v10.1 &lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;fixed-issues&#34;&gt;Fixed Issues&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/895&#34;&gt;#895 - [BUG]: Update CSM Authorization karavictl CLI flag descriptions&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/916&#34;&gt;#916 - [BUG]: Remove references to deprecated io/ioutil package&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
 &lt;h3 id=&#34;known-issues&#34;&gt;Known Issues&lt;/h3&gt;
 &lt;table&gt;
 &lt;thead&gt;
