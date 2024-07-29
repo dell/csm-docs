@@ -48,22 +48,18 @@ mv ./cert-csi-linux-amd64 ~/.local/bin/cert-csi
 
 ### Pull The Container Image
 
-   {{< tabs name="pulling-cert-csi-image" >}}
-   {{% tab name="Docker" %}}
+   {{< tabpane name="pulling-cert-csi-image" lang="bash">}}
+   {{<tab header="Docker">}}
 
-   ```bash
       docker pull dellemc/cert-csi:v1.3.1
-   ```
 
-   {{% /tab %}}
-   {{% tab name="Podman" %}}
+   {{</tab>}}
+   {{<tab header="Podman">}}
 
-   ```bash
       podman pull dellemc/cert-csi:v1.3.1
-   ```
-
-   {{% /tab %}}
-   {{< /tabs >}}
+      
+   {{</tab>}}
+   {{< /tabpane>}}
 
 ### Building Locally
 #### Prerequisites
@@ -79,24 +75,20 @@ git clone -b "v1.3.1" https://github.com/dell/cert-csi.git && cd cert-csi
 
 2. Build cert-csi
 
-{{< tabs name="build-cert-csi" >}}
-{{% tab name="Executable" %}}
+{{< tabpane name="build-cert-csi" lang="bash">}}
+{{<tab header="Executable" >}}
 
-```bash
    make build          # the cert-csi executable will be in the working directory
    chmod +x ./cert-csi # if building on *nix machine
-```
 
-{{% /tab %}}
-{{% tab name="Container Image" %}}
+{{</tab >}}
+{{<tab header="Container Image" >}}
 
-```bash
   # uses podman if available, otherwise uses docker. The resulting image is tagged cert-csi:latest
   make docker
-```
 
-{{% /tab %}}
-{{< /tabs >}}
+{{</tab >}}
+{{< /tabpane >}}
 
 ### Optional
 
@@ -108,24 +100,24 @@ make install-ms
 
 ## Running Cert-CSI
 
-{{< tabs name="running-cert-csi" >}}
-{{% tab name="Executable" %}}
-```bash
-   cert-csi --help
-```
-{{% /tab %}}
-{{% tab name="Docker" %}}
-```bash
-   docker run --rm -it -v ~/.kube/config:/root/.kube/config dellemc/cert-csi:v1.3.1 --help
-```
-{{% /tab %}}
-{{% tab name="Podman" %}}
-```bash
-   podman run --rm -it -v ~/.kube/config:/root/.kube/config dellemc/cert-csi:v1.3.1 --help
-```
+{{< tabpane name="running-cert-csi" lang="bash">}}
+{{<tab header="Executable"  >}}
 
-{{% /tab %}}
-{{< /tabs >}}
+   cert-csi --help
+
+{{</tab >}}
+{{<tab header="Docker" >}}
+
+   docker run --rm -it -v ~/.kube/config:/root/.kube/config dellemc/cert-csi:v1.3.1 --help
+
+{{</tab >}}
+{{<tab header="Podman" >}}
+
+   podman run --rm -it -v ~/.kube/config:/root/.kube/config dellemc/cert-csi:v1.3.1 --help
+
+
+{{</tab >}}
+{{< /tabpane >}}
 
 > The following sections showing how to execute the various test suites use the executable for brevity. For executions requiring special behavior, such as mounting file arguments into the container image, it will be noted for the relevant command.
 
@@ -172,10 +164,9 @@ storageClasses:
 
 Driver specific examples:
 
-   {{< tabs name="cerity-config-examples" >}}
-   {{% tab name="CSI PowerFlex" %}}
+   {{< tabpane name="cerity-config-examples" lang="yaml">}}
+   {{<tab header="CSI PowerFlex" >}}
 
-```yaml
 storageClasses:
   - name: vxflexos
     minSize: 8Gi
@@ -211,12 +202,11 @@ storageClasses:
     capacityTracking:
       driverNamespace: powerstore
       pollInterval: 2m
-```
 
-   {{% /tab %}}
-   {{% tab name="CSI PowerScale" %}}
+   {{</tab >}}
+   {{<tab header="CSI PowerScale" >}}
 
-```yaml
+
 storageClasses:
   - name: isilon
     minSize: 8Gi
@@ -235,11 +225,11 @@ storageClasses:
         IsiPath: "/ifs/data/sample"
         IsiVolumePathPermissions: "0777"
         AzServiceIP: "192.168.2.1"
-```
 
-   {{% tab name="CSI PowerMax" %}}
 
-```yaml
+   {{</tab >}}
+   {{<tab header="CSI PowerMax" >}}
+
 storageClasses:
   - name: powermax-iscsi
     minSize: 5Gi
@@ -261,14 +251,12 @@ storageClasses:
     capacityTracking:
       driverNamespace: powerstore
       pollInterval: 2m
-```
 
-   {{% /tab %}}
 
-   {{% /tab %}}
-   {{% tab name="CSI PowerStore" %}}
+   {{</tab >}}
 
-```yaml
+   {{<tab header="CSI PowerStore" >}}
+
 storageClasses:
   - name: powerstore
     minSize: 5Gi
@@ -303,12 +291,11 @@ storageClasses:
     capacityTracking:
       driverNamespace: powerstore
       pollInterval: 2m
-```
 
-   {{% /tab %}}
-   {{% tab name="CSI Unity" %}}
 
-```yaml
+   {{</tab >}}
+   {{<tab header="CSI Unity" >}}
+
 storageClasses:
   - name: unity-iscsi
     minSize: 3Gi
@@ -346,10 +333,9 @@ storageClasses:
     capacityTracking:
       driverNamespace: unity
       pollInterval: 2m
-```
 
-   {{% /tab %}}
-   {{< /tabs >}}
+   {{</tab >}}
+   {{< /tabpane >}}
 
 ### Launching Test Run
 1. Executes the [VolumeIO](#volume-io) suite.
@@ -386,19 +372,18 @@ Run `cert-csi certify -h` for more options.
 
 If you are using the container image, the `cert-config` file must be mounted into the container. Assuming your `cert-config` file is `/home/user/example-certify-config.yaml`, here are examples of how to exeucte this suite with the container image.
 
-{{< tabs name="running-container-certify" >}}
-{{% tab name="Docker" %}}
-```bash
-   docker run --rm -it -v ~/.kube/config:/root/.kube/config -v /home/user/example-certify-config.yaml:/example-certify-config.yaml dellemc/cert-csi:v1.3.1 certify --cert-config /example-certify-config.yaml --vsc <volume-snapshot-class>
-```
-{{% /tab %}}
-{{% tab name="Podman" %}}
-```bash
-   podman run --rm -it -v ~/.kube/config:/root/.kube/config -v /home/user/example-certify-config.yaml:/example-certify-config.yaml dellemc/cert-csi:v1.3.1 certify --cert-config /example-certify-config.yaml --vsc <volume-snapshot-class>
-```
+{{< tabpane name="running-container-certify" lang="bash">}}
+{{<tab header="Docker" >}}
 
-{{% /tab %}}
-{{< /tabs >}}
+   docker run --rm -it -v ~/.kube/config:/root/.kube/config -v /home/user/example-certify-config.yaml:/example-certify-config.yaml dellemc/cert-csi:v1.3.1 certify --cert-config /example-certify-config.yaml --vsc <volume-snapshot-class>
+{{</tab >}}
+{{<tab header="Podman" >}}
+
+   podman run --rm -it -v ~/.kube/config:/root/.kube/config -v /home/user/example-certify-config.yaml:/example-certify-config.yaml dellemc/cert-csi:v1.3.1 certify --cert-config /example-certify-config.yaml --vsc <volume-snapshot-class>
+
+
+{{</tab >}}
+{{< /tabpane >}}
 
 ### Running Invidual Test Suites
 
@@ -584,57 +569,46 @@ Run `cert-csi test ephemeral-volume -h` for more options.
 
 If you are using the container image, the `attr` file must be mounted into the container. Assuming your `attr` file is `/home/user/ephemeral-config.properties`, here are examples of how to exeucte this suite with the container image.
 
-{{< tabs name="running-container-ephemeral-volume" >}}
-{{% tab name="Docker" %}}
-```bash
+{{< tabpane name="running-container-ephemeral-volume" lang="bash">}}
+{{<tab header="Docker" >}}
    docker run --rm -it -v ~/.kube/config:/root/.kube/config -v /home/user/ephemeral-config.properties:/ephemeral-config.properties dellemc/cert-csi:v1.3.1 test ephemeral-volume --driver <driver-name> --attr /ephemeral-config.properties
-```
-{{% /tab %}}
-{{% tab name="Podman" %}}
-```bash
+{{</tab >}}
+{{<tab header="Podman" >}}
    podman run --rm -it -v ~/.kube/config:/root/.kube/config -v /home/user/ephemeral-config.properties:/ephemeral-config.properties dellemc/cert-csi:v1.3.1 test ephemeral-volume --driver <driver-name> --attr /ephemeral-config.properties
-```
 
-{{% /tab %}}
-{{< /tabs >}}
+{{</tab >}}
+{{< /tabpane >}}
 
 Sample ephemeral-config.properties (key/value pair)
-   {{< tabs name="volume-attributes-examples" >}}
-   {{% tab name="CSI PowerFlex" %}}
+   {{< tabpane name="volume-attributes-examples" lang="yaml">}}
+   {{<tab header="CSI PowerFlex" >}}
 
-   ```yaml
    volumeName: "my-ephemeral-vol"
    size: "10Gi"
    storagepool: "sample"
    systemID: "sample"
-   ```
 
-   {{% /tab %}}
-   {{% tab name="CSI PowerScale" %}}
+   {{</tab >}}
+   {{<tab header="CSI PowerScale" >}}
 
-   ```yaml
    size: "10Gi"
    ClusterName: "sample"
    AccessZone: "sample"
    IsiPath: "/ifs/data/sample"
    IsiVolumePathPermissions: "0777"
    AzServiceIP: "192.168.2.1"
-   ```
 
-   {{% /tab %}}
-   {{% tab name="CSI PowerStore" %}}
+   {{</tab >}}
+   {{<tab header="CSI PowerStore" >}}
 
-   ```yaml
    size: "10Gi"
    arrayID: "sample"
    nasName: "sample"
    nfsAcls: "0777"
-   ```
 
-   {{% /tab %}}
-   {{% tab name="CSI Unity" %}}
+   {{</tab >}}
+   {{<tab header="CSI Unity" >}}
 
-   ```yaml
    size: "10Gi"
    arrayID: "sample"
    protocol: iSCSI
@@ -643,10 +617,9 @@ Sample ephemeral-config.properties (key/value pair)
    tieringPolicy: "1"
    storagePool: pool_2
    nasName: "sample"
-   ```
 
-   {{% /tab %}}
-   {{< /tabs >}}
+   {{</tab >}}
+   {{< /tabpane >}}
 
 #### Storage Capacity Tracking
 1. Creates namespace `functional-test` where resources will be created.
