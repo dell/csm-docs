@@ -21,7 +21,7 @@ description: Release notes for PowerMax CSI driver
 - [#1308 - [FEATURE]: NVMe TCP support for PowerMax ](https://github.com/dell/csm/issues/1308)
 - [#1359 - [FEATURE]: Add Support for OpenShift Container Platform (OCP) 4.16 ](https://github.com/dell/csm/issues/1359)
 - [#1400 - [FEATURE]: Support for Kubernetes 1.30](https://github.com/dell/csm/issues/1400)
-- [#1082 - [FEATURE]:CSM Resiliency support for PowerMax ](https://github.com/dell/csm/issues/1082)
+- [#1082 - [FEATURE]: CSM Resiliency support for PowerMax](https://github.com/dell/csm/issues/1082)
 - [#1397 - [FEATURE]: Observability upgrade is supported in CSM Operator](https://github.com/dell/csm/issues/1397)
 
 ### Fixed Issues

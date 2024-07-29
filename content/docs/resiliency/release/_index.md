@@ -23,7 +23,7 @@ Description: >
 
 - [#1359 - [FEATURE]: Add Support for OpenShift Container Platform (OCP) 4.16 ](https://github.com/dell/csm/issues/1359)
 - [#1400 - [FEATURE]: Support for Kubernetes 1.30](https://github.com/dell/csm/issues/1400)
-- [#1082 - [FEATURE]:CSM Resiliency support for PowerMax ](https://github.com/dell/csm/issues/1082)
+- [#1082 - [FEATURE]: CSM Resiliency support for PowerMax](https://github.com/dell/csm/issues/1082)
 
 ### Fixed Issues
 
