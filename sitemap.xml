@@ -2,9 +2,6 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://dell.github.io/csm-docs/docs/deployment/helm/modules/installation/applicationmobility/</loc>
-    <lastmod>2024-07-30T01:25:59+05:30</lastmod>
-  </url><url>
     <loc>https://dell.github.io/csm-docs/v1/deployment/helm/modules/installation/applicationmobility/</loc>
     <lastmod>2024-07-30T01:25:59+05:30</lastmod>
   </url><url>
@@ -522,7 +519,7 @@
     <lastmod>2024-07-30T01:25:59+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/docs/deployment/</loc>
-    <lastmod>2024-03-21T02:39:59+05:30</lastmod>
+    <lastmod>2024-07-30T17:24:26+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/v1/deployment/</loc>
     <lastmod>2024-07-30T01:25:59+05:30</lastmod>
@@ -612,7 +609,7 @@
     <lastmod>2024-07-30T01:25:59+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/docs/support/troubleshooting/</loc>
-    <lastmod>2024-07-30T01:25:59+05:30</lastmod>
+    <lastmod>2024-07-30T17:24:26+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/v1/support/troubleshooting/</loc>
     <lastmod>2024-07-30T01:25:59+05:30</lastmod>
@@ -1068,9 +1065,6 @@
     <lastmod>2023-12-13T23:10:42+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/v3/secure/encryption/rekey/</loc>
-    <lastmod>2024-03-21T02:39:59+05:30</lastmod>
-  </url><url>
-    <loc>https://dell.github.io/csm-docs/docs/applicationmobility/troubleshooting/</loc>
     <lastmod>2024-03-21T02:39:59+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/docs/observability/troubleshooting/</loc>

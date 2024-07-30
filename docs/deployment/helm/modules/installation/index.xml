@@ -15,33 +15,6 @@
     
     
     <item>
-      <title>Docs: Application Mobility</title>
-      <link>https://dell.github.io/csm-docs/docs/deployment/helm/modules/installation/applicationmobility/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://dell.github.io/csm-docs/docs/deployment/helm/modules/installation/applicationmobility/</guid>
-      <description>
-        
-        
-        
-
-&lt;div class=&#34;pageinfo pageinfo-primary&#34;&gt;
-&lt;p&gt;Only tech preview version of Application Mobility is available to install via helm&lt;/p&gt;
-
-&lt;/div&gt;
-
-
-
-&lt;div class=&#34;pageinfo pageinfo-primary&#34;&gt;
-&lt;p&gt;Application Mobility is available with &lt;a href=&#34;https://www.dell.com/en-ca/dt/apex/storage/public-cloud/navigator.htm#kubernetes&#34;&gt;APEX Navigator for Kubernetes&lt;/a&gt;&lt;/p&gt;
-
-&lt;/div&gt;
-
-
-      </description>
-    </item>
-    
-    <item>
       <title>Docs: Encryption</title>
       <link>https://dell.github.io/csm-docs/docs/deployment/helm/modules/installation/encryption/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
