@@ -146,53 +146,6 @@
     </item>
     
     <item>
-      <title>Docs: Troubleshooting</title>
-      <link>https://dell.github.io/csm-docs/docs/applicationmobility/troubleshooting/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://dell.github.io/csm-docs/docs/applicationmobility/troubleshooting/</guid>
-      <description>
-        
-        
-        &lt;h2 id=&#34;frequently-asked-questions&#34;&gt;Frequently Asked Questions&lt;/h2&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;a href=&#34;#how-can-i-diagnose-an-issue-with-application-mobility&#34;&gt;How can I diagnose an issue with Application Mobility?&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#how-can-i-view-logs&#34;&gt;How can I view logs?&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#how-can-i-debug-and-troubleshoot-issues-with-kubernetes&#34;&gt;How can I debug and troubleshoot issues with Kubernetes?&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#why-are-there-error-logs-about-a-license&#34;&gt;Why are there error logs about a license?&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h3 id=&#34;how-can-i-diagnose-an-issue-with-application-mobility&#34;&gt;How can I diagnose an issue with Application Mobility?&lt;/h3&gt;
-&lt;p&gt;Once you have attempted to install Application Mobility to your Kubernetes or OpenShift cluster, the first step in troubleshooting is locating the problem.&lt;/p&gt;
-&lt;p&gt;Get information on the state of your Pods.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-console&#34; data-lang=&#34;console&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;kubectl get pods -n $namespace 
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Get verbose output of the current state of a Pod.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-console&#34; data-lang=&#34;console&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;kubectl describe pod -n $namespace $pod
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;how-can-i-view-logs&#34;&gt;How can I view logs?&lt;/h3&gt;
-&lt;p&gt;View pod container logs. Output logs to a file for further debugging.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-console&#34; data-lang=&#34;console&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;kubectl logs -n $namespace $pod $container
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;kubectl logs -n $namespace $pod $container &amp;gt; $logFileName
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;how-can-i-debug-and-troubleshoot-issues-with-kubernetes&#34;&gt;How can I debug and troubleshoot issues with Kubernetes?&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;To debug your application that may not be behaving correctly, please reference Kubernetes &lt;a href=&#34;https://kubernetes.io/docs/tasks/debug-application-cluster/debug-application/&#34;&gt;troubleshooting applications guide&lt;/a&gt;.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;For tips on debugging your cluster, please see this &lt;a href=&#34;https://kubernetes.io/docs/tasks/debug-application-cluster/debug-cluster/&#34;&gt;troubleshooting guide&lt;/a&gt;.&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;why-are-there-error-logs-about-a-license&#34;&gt;Why are there error logs about a license?&lt;/h3&gt;
-&lt;p&gt;Application Mobility requires a license in order to function. See the &lt;a href=&#34;../../deployment/helm/modules/installation/applicationmobility/&#34;&gt;Deployment&lt;/a&gt; instructions for steps to request a license.&lt;/p&gt;
-&lt;p&gt;There will be errors in the logs about the license for these cases:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;License does not exist&lt;/li&gt;
-&lt;li&gt;License is not valid for the current Kubernetes cluster&lt;/li&gt;
-&lt;li&gt;License has expired&lt;/li&gt;
-&lt;/ul&gt;
-
-      </description>
-    </item>
-    
-    <item>
       <title>Docs: Release Notes</title>
       <link>https://dell.github.io/csm-docs/docs/applicationmobility/release/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>

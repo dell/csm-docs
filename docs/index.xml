@@ -8005,53 +8005,6 @@ the rekey can be inspected through the &lt;code&gt;status.phase&lt;/code&gt; fie
     
     <item>
       <title>Docs: Troubleshooting</title>
-      <link>https://dell.github.io/csm-docs/docs/applicationmobility/troubleshooting/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://dell.github.io/csm-docs/docs/applicationmobility/troubleshooting/</guid>
-      <description>
-        
-        
-        &lt;h2 id=&#34;frequently-asked-questions&#34;&gt;Frequently Asked Questions&lt;/h2&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;a href=&#34;#how-can-i-diagnose-an-issue-with-application-mobility&#34;&gt;How can I diagnose an issue with Application Mobility?&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#how-can-i-view-logs&#34;&gt;How can I view logs?&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#how-can-i-debug-and-troubleshoot-issues-with-kubernetes&#34;&gt;How can I debug and troubleshoot issues with Kubernetes?&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#why-are-there-error-logs-about-a-license&#34;&gt;Why are there error logs about a license?&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h3 id=&#34;how-can-i-diagnose-an-issue-with-application-mobility&#34;&gt;How can I diagnose an issue with Application Mobility?&lt;/h3&gt;
-&lt;p&gt;Once you have attempted to install Application Mobility to your Kubernetes or OpenShift cluster, the first step in troubleshooting is locating the problem.&lt;/p&gt;
-&lt;p&gt;Get information on the state of your Pods.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-console&#34; data-lang=&#34;console&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;kubectl get pods -n $namespace 
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Get verbose output of the current state of a Pod.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-console&#34; data-lang=&#34;console&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;kubectl describe pod -n $namespace $pod
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;how-can-i-view-logs&#34;&gt;How can I view logs?&lt;/h3&gt;
-&lt;p&gt;View pod container logs. Output logs to a file for further debugging.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-console&#34; data-lang=&#34;console&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;kubectl logs -n $namespace $pod $container
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;kubectl logs -n $namespace $pod $container &amp;gt; $logFileName
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;how-can-i-debug-and-troubleshoot-issues-with-kubernetes&#34;&gt;How can I debug and troubleshoot issues with Kubernetes?&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;To debug your application that may not be behaving correctly, please reference Kubernetes &lt;a href=&#34;https://kubernetes.io/docs/tasks/debug-application-cluster/debug-application/&#34;&gt;troubleshooting applications guide&lt;/a&gt;.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;For tips on debugging your cluster, please see this &lt;a href=&#34;https://kubernetes.io/docs/tasks/debug-application-cluster/debug-cluster/&#34;&gt;troubleshooting guide&lt;/a&gt;.&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;why-are-there-error-logs-about-a-license&#34;&gt;Why are there error logs about a license?&lt;/h3&gt;
-&lt;p&gt;Application Mobility requires a license in order to function. See the &lt;a href=&#34;../../deployment/helm/modules/installation/applicationmobility/&#34;&gt;Deployment&lt;/a&gt; instructions for steps to request a license.&lt;/p&gt;
-&lt;p&gt;There will be errors in the logs about the license for these cases:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;License does not exist&lt;/li&gt;
-&lt;li&gt;License is not valid for the current Kubernetes cluster&lt;/li&gt;
-&lt;li&gt;License has expired&lt;/li&gt;
-&lt;/ul&gt;
-
-      </description>
-    </item>
-    
-    <item>
-      <title>Docs: Troubleshooting</title>
       <link>https://dell.github.io/csm-docs/docs/resiliency/troubleshooting/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
@@ -8382,6 +8335,105 @@ time=&amp;#34;2022-06-30T17:38:32Z&amp;#34; level=fatal msg=&amp;#34;grpc failed
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl -n &amp;lt;driver-namespace&amp;gt; rollout restart deploy/&amp;lt;driver&amp;gt;-controller
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl -n &amp;lt;driver-namespace&amp;gt; rollout restart ds/&amp;lt;driver&amp;gt;-node
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+      </description>
+    </item>
+    
+    <item>
+      <title>Docs: Troubleshooting</title>
+      <link>https://dell.github.io/csm-docs/docs/secure/encryption/troubleshooting/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dell.github.io/csm-docs/docs/secure/encryption/troubleshooting/</guid>
+      <description>
+        
+        
+        &lt;h2 id=&#34;logs-and-events&#34;&gt;Logs and Events&lt;/h2&gt;
+&lt;p&gt;The first and in most cases sufficient step in troubleshooting issues with a CSI driver that has Encryption enabled
+is exploring logs of the Encryption driver and related Kubernetes components. These are some useful log sources:&lt;/p&gt;
+&lt;h3 id=&#34;csi-driver-containers-logs&#34;&gt;CSI Driver Containers Logs&lt;/h3&gt;
+&lt;p&gt;The driver creates several &lt;em&gt;controller&lt;/em&gt; and &lt;em&gt;node&lt;/em&gt; pods. They can be listed with &lt;code&gt;kubectl -n &amp;lt;driver namespace&amp;gt; get pods&lt;/code&gt;.
+The output will look similar to:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;NAME                              READY   STATUS    RESTARTS   AGE
+isi-controller-84f697c874-2j6d4   10/10   Running   0          16h
+isi-node-4gtwf                    4/4     Running   0          16h
+isi-node-lnzws                    4/4     Running   0          16h
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;List containers in pod &lt;code&gt;isi-node-4gtwf&lt;/code&gt; with &lt;code&gt;kubectl -n &amp;lt;driver namespace&amp;gt; logs isi-node-4gtwf&lt;/code&gt;.
+Each pod has containers called &lt;code&gt;driver&lt;/code&gt; which is the storage driver container and &lt;code&gt;driver-sec&lt;/code&gt; which is the Encryption driver container.
+These container&amp;rsquo;s logs tend to provide the most important information, but other containers may give a hint too.
+View the logs of &lt;code&gt;driver-sec&lt;/code&gt; in &lt;code&gt;isi-node-4gtwf&lt;/code&gt; with &lt;code&gt;kubectl -n &amp;lt;driver namespace&amp;gt; logs isi-node-4gtwf driver-sec&lt;/code&gt;.
+The log level of this container can be changed by setting value &lt;a href=&#34;../../../deployment/helm/modules/installation/encryption#helm-chart-values&#34;&gt;encryption.logLevel&lt;/a&gt; and restarting the driver.&lt;/p&gt;
+&lt;p&gt;Often it is necessary to see the logs produced on a specific Kubernetes worker host.
+To find which &lt;em&gt;node&lt;/em&gt; pod is running on which worker host, use &lt;code&gt;kubectl -n &amp;lt;driver namespace&amp;gt; get pods -o wide&lt;/code&gt;.&lt;/p&gt;
+&lt;h3 id=&#34;persistentvolume-persistentvolumeclaim-and-application-pod-events&#34;&gt;PersistentVolume, PersistentVolumeClaim and Application Pod Events&lt;/h3&gt;
+&lt;p&gt;Some errors may be logged to the related resource events that can be viewed with &lt;code&gt;kubectl describe&lt;/code&gt; command for that resource.&lt;/p&gt;
+&lt;h3 id=&#34;vault-server-logs&#34;&gt;Vault Server Logs&lt;/h3&gt;
+&lt;p&gt;Some errors related to communication with the Vault server and key requests may be logged on the Vault server side.
+If you run a &lt;a href=&#34;../../../deployment/helm/modules/installation/encryption/vault#vault-server-installation&#34;&gt;test instance of the server in a Docker container&lt;/a&gt; you can view the logs with &lt;code&gt;docker logs vault-server&lt;/code&gt;.&lt;/p&gt;
+&lt;h2 id=&#34;typical-failure-reasons&#34;&gt;Typical Failure Reasons&lt;/h2&gt;
+&lt;h3 id=&#34;incorrect-vault-related-configuration&#34;&gt;Incorrect Vault related configuration&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;check &lt;a href=&#34;#logs-and-events&#34;&gt;logs&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;check &lt;a href=&#34;../../../deployment/helm/modules/installation/encryption#secret-vault-auth&#34;&gt;vault-auth secret&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;check &lt;a href=&#34;../../../deployment/helm/modules/installation/encryption#secret-vault-cert&#34;&gt;vault-cert secret&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;check &lt;a href=&#34;../../../deployment/helm/modules/installation/encryption/#configmap-vault-client-conf&#34;&gt;vault-client-conf config map&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;incorrect-vault-server-side-configuration&#34;&gt;Incorrect Vault server-side configuration&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;check &lt;a href=&#34;#logs-and-events&#34;&gt;logs&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;check &lt;a href=&#34;../../../deployment/helm/modules/installation/encryption/vault#minimum-server-configuration&#34;&gt;Vault server configuration&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;expired-approle-secret-id&#34;&gt;Expired AppRole secret ID&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;../../../deployment/helm/modules/installation/encryption/vault#set-role-id-and-secret-id-to-the-role&#34;&gt;reset the role secret ID&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;incorrect-csi-driver-configuration&#34;&gt;Incorrect CSI driver configuration&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;check the related CSI driver &lt;a href=&#34;../../../csidriver/troubleshooting&#34;&gt;troubleshooting steps&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;ssh-stopped&#34;&gt;SSH server is stopped/restarted on the worker host&lt;/h3&gt;
+&lt;p&gt;This may manifest in:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;failure to start the CSI driver&lt;/li&gt;
+&lt;li&gt;failure to create a new encrypted volume&lt;/li&gt;
+&lt;li&gt;failure to access an encrypted volume (IO errors)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Resolution:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;check SSH server is running on all worker host&lt;/li&gt;
+&lt;li&gt;stop all workloads that use encrypted volumes on the node, then restart them&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;no-license-provided-or-license-expired&#34;&gt;No license provided, or license expired&lt;/h3&gt;
+&lt;p&gt;This may manifest in:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;failure to start the CSI driver&lt;/li&gt;
+&lt;li&gt;failure to create a new encrypted volume&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Resolution:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;obtain a &lt;a href=&#34;../../../support/license&#34;&gt;new valid license&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;check the license is for the cluster on which the encrypted volumes are created&lt;/li&gt;
+&lt;li&gt;check &lt;a href=&#34;../../../deployment/helm/modules/installation/encryption#secret-encryption-license&#34;&gt;encryption-license secret&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;typical-rekey-failure-reasons&#34;&gt;Typical Rekey Failure reasons&lt;/h2&gt;
+&lt;p&gt;If all rekeys in the cluster are failing&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;check the Rekey controller helm chart values.yaml &lt;code&gt;provisioner&lt;/code&gt; name against the Dell CSI driver chart &lt;code&gt;encryption.pluginName&lt;/code&gt;, and ensure they match.&lt;/li&gt;
+&lt;li&gt;check the Rekey controller helm chart values.yaml &lt;code&gt;port&lt;/code&gt; number against the Dell CSI driver chart &lt;code&gt;encryption.apiPort&lt;/code&gt;, and ensure they match.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;If Rekeys fail for a particular PV&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;check that the volume is provisioned by the Encryption provisioner&lt;/li&gt;
+&lt;li&gt;check that volume attachments exist for the said PV&lt;/li&gt;
+&lt;li&gt;check that at least one node on which the PV is mounted is available and reachable&lt;/li&gt;
+&lt;li&gt;check the Encryption provisioner logs for details that may indicate the failure reason&lt;/li&gt;
+&lt;li&gt;check the Rekey controller log for the reason for failure&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;If a Rekey results in a &lt;code&gt;Status.Phase&lt;/code&gt; of &lt;code&gt;unknown&lt;/code&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;this implies the connection failed during the rekey process which may mean the volume was rekeyed&lt;/li&gt;
+&lt;li&gt;an additional rekey attempt should work assuming a reliable connection to the Encryption provisioner. This may result in the volume being rekeyed twice.&lt;/li&gt;
+&lt;/ul&gt;
+
       </description>
     </item>
     
