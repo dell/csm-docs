@@ -5,26 +5,23 @@ weight: 5
 Description: >
   Release notes for Dell Container Storage Modules Operator
 ---
-{{% pageinfo color="primary" %}}
-CSM 1.7.1 is applicable to helm based installations of PowerFlex driver.
-{{% /pageinfo %}}
 
-## Release Notes - Container Storage Modules Operator v1.2.0
+## Release Notes - Container Storage Modules Operator v1.3.0
+
+
 
 ### New Features/Changes
-- [Added support for CSI Unity XT Driver](https://github.com/dell/csm/issues/756)
-- [Added support for PowerMax Driver](https://github.com/dell/csm/issues/769)
-- [Added Replication Support for PowerFlex driver](https://github.com/dell/csm/issues/821)
-- [CSM Operator: Support install of Resiliency module](https://github.com/dell/csm/issues/739)
-- [Migrated image registry from k8s.gcr.io to registry.k8s.io](https://github.com/dell/csm/issues/744)
-- [Added support for OpenShift 4.12](https://github.com/dell/csm/issues/571)
-- [Added support for Kubernetes 1.27](https://github.com/dell/csm/issues/761)
 
+- [#724 - [FEATURE]: CSM support for Openshift 4.13](https://github.com/dell/csm/issues/724)
+- [#876 - [FEATURE]: CSI 1.5 spec support -StorageCapacityTracking](https://github.com/dell/csm/issues/876)
+- [#939 - [FEATURE]: Add support for Offline Install of CSM Operator in non OLM environment](https://github.com/dell/csm/issues/939)
+- [#878 - [FEATURE]: CSI 1.5 spec support: Implement Volume Limits](https://github.com/dell/csm/issues/878)
+- [#922 - [FEATURE]: Use ubi9 micro as base image](https://github.com/dell/csm/issues/922)
+- [#955 - [FEATURE]: CSI Unity XT Driver: Add upgrade support to the CSM Operator](https://github.com/dell/csm/issues/955)
 
 ### Fixed Issues
-- [CSM object goes into failed state when deployments are getting scaled down/up](https://github.com/dell/csm/issues/816)
-- [Install issues of the Replication module have been fixed](https://github.com/dell/csm/issues/788)
 
+- [#898 - [BUG]: Unable to pull podmon image from local repository for offline install](https://github.com/dell/csm/issues/898)
 
 ### Known Issues
 | Issue | Workaround |

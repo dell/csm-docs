@@ -3,9 +3,10 @@
 title: "Documentation"
 linkTitle: "Documentation"
 ---
+
 {{% pageinfo color="primary" %}}
 This document version is no longer actively maintained. The site that you are currently viewing is an archived snapshot. For up-to-date documentation, see the [latest version](/csm-docs/)
-CSM 1.7.1 is applicable to helm based installations of PowerFlex driver.
+The CSM Authorization RPM will be deprecated in a future release. It is highly recommended that you use CSM Authorization Helm deployment or CSM Operator going forward.
 {{% /pageinfo %}}
 
 The Dell Technologies (Dell) Container Storage Modules (CSM) enables simple and consistent integration and automation experiences, extending enterprise storage capabilities to Kubernetes for cloud-native stateful applications. It reduces management complexity so developers can independently consume enterprise storage with ease and automate daily operations such as provisioning, snapshotting, replication, observability, authorization, application mobility, encryption, and resiliency.
@@ -61,13 +62,13 @@ CSM is made up of multiple components including modules (enterprise capabilities
   {{< /card >}}
 {{% /cardpane %}}
 
-## CSM Modules Support Matrix for Dell CSI Drivers 
+## CSM Modules Support Matrix for Dell CSI Drivers
 
-| CSM Module                                                  | CSI PowerFlex v2.7.1 | CSI PowerScale v2.7.0 | CSI PowerStore v2.7.0 | CSI PowerMax v2.7.0 | CSI Unity XT v2.7.0 |
+| CSM Module                                                  | CSI PowerFlex v2.8.0 | CSI PowerScale v2.8.0 | CSI PowerStore v2.8.0 | CSI PowerMax v2.8.0 | CSI Unity XT v2.8.0 |
 | ----------------------------------------------------------- | -------------------- | --------------------- | --------------------- | ------------------- | ------------------- |
-| [**Authorization**](authorization/) v1.7.0                  | ✔️                    | ✔️                     | ❌                     | ✔️                   | ❌                   |
-| [**Observability**](observability/) v1.5.0                  | ✔️                    | ✔️                     | ✔️                     | ✔️                   | ❌                   |
-| [**Replication**](replication/)   v1.5.0                    | ✔️                    | ✔️                     | ✔️                     | ✔️                   | ❌                   |
-| [**Resiliency**](resiliency/)     v1.6.0                    | ✔️                    | ✔️                     | ✔️                    | ❌                   | ✔️                   |
+| [**Authorization**](authorization/) v1.8.0                  | ✔️                    | ✔️                     | ❌                     | ✔️                   | ❌                   |
+| [**Observability**](observability/) v1.6.0                  | ✔️                    | ✔️                     | ✔️                     | ✔️                   | ❌                   |
+| [**Replication**](replication/)   v1.6.0                    | ✔️                    | ✔️                     | ✔️                     | ✔️                   | ❌                   |
+| [**Resiliency**](resiliency/)     v1.7.0                    | ✔️                    | ✔️                     | ✔️                     | ❌                   | ✔️                   |
 | [**Encryption**](secure/encryption)    v0.4.0               | ❌                    | ✔️                     | ❌                     | ❌                   | ❌                   |
 | [**Application Mobility**](applicationmobility/)     v0.4.0 | ✔️                    | ✔️                     | ✔️                     | ✔️                   | ✔️                   |

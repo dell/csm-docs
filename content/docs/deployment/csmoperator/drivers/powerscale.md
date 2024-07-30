@@ -129,6 +129,7 @@ kubectl get csm --all-namespaces
    | Parameter | Description | Required | Default |
    | --------- | ----------- | -------- |-------- |
    | dnsPolicy | Determines the DNS Policy of the Node service | Yes | ClusterFirstWithHostNet |
+   | fsGroupPolicy | Defines which FS Group policy mode to be used, Supported modes `None, File and ReadWriteOnceWithFSType`. In OCP <= 4.16 and K8s <= 1.29, fsGroupPolicy is an immutable field. | No | "ReadWriteOnceWithFSType" |
    | storageCapacity | Enable/Disable storage capacity tracking feature | No | false |
    | ***Common parameters for node and controller*** |
    | CSI_ENDPOINT | The UNIX socket address for handling gRPC calls | No | /var/run/csi/csi.sock |
