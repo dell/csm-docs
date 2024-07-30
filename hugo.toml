@@ -100,8 +100,6 @@ github_repo = ""
 # Google Custom Search Engine ID. Remove or comment out to disable search.
 #gcs_engine_id = "011737558837375720776:fsdu1nryfng"
 
-# Enable Algolia DocSearch
-algolia_docsearch = false
 
 # Enable Lunr.js offline search
 offlineSearch = true
@@ -137,6 +135,10 @@ no = 'Sorry to hear that. Please <a href="https://github.com/USERNAME/REPOSITORY
 # add "hide_readingtime: true" to the page's front matter
 [params.ui.readingtime]
 enable = false
+
+[params.search]
+# Enable Algolia DocSearch
+algolia_docsearch = false
 
 [params.links]
 # End user relevant links. These will show up on left side of footer and in the community page if you have one.
