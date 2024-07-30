@@ -62,7 +62,7 @@ Container Storage Modules (CSM) does not officially support specific operating s
 | [CSM Replication](../replication/)                            | Yes      | Yes       | No       | Yes        | Yes        |
 | [CSM Resiliency](../resiliency/)                              | Yes       | Yes       | Yes      | Yes        | Yes        |
 | [CSM Encryption](../secure/encryption/)                       | No       | No        | No       | Yes        | No         |
-| [CSM Application Mobility](../applicationmobility/)           | Yes      | Yes       | Yes      | Yes        | Yes        |
+| [CSM Application Mobility](../applicationmobility/)           | Yes      | No       | No      | No        | No        |
 | [Volume Group Snapshot](../snapshots/volume-group-snapshots/) | No       | Yes       | No       | No         | Yes        |
 
 {{</table>}}
