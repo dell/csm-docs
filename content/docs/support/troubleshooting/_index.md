@@ -20,6 +20,4 @@ Troubleshooting links for Container Storage Modules:
 
 [CSM for Encryption](../../secure/encryption/troubleshooting)
 
-[CSM for Application Mobility](../../applicationmobility/troubleshooting)
-
 [CSM Operator](../../deployment/csmoperator/troubleshooting)
