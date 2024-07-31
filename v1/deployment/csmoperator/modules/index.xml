@@ -1,427 +1,45 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Dell Technologies – CSM Modules</title>
+    <title>CSM Modules on </title>
     <link>https://dell.github.io/csm-docs/v1/deployment/csmoperator/modules/</link>
-    <description>Recent content in CSM Modules on Dell Technologies</description>
+    <description>Recent content in CSM Modules on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    
-	  <atom:link href="https://dell.github.io/csm-docs/v1/deployment/csmoperator/modules/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-      
-        
-      
-    
-    
+    <atom:link href="https://dell.github.io/csm-docs/v1/deployment/csmoperator/modules/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>V1: Authorization</title>
+      <title>Authorization</title>
       <link>https://dell.github.io/csm-docs/v1/deployment/csmoperator/modules/authorization/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>https://dell.github.io/csm-docs/v1/deployment/csmoperator/modules/authorization/</guid>
-      <description>
-        
-        
-        
-
-&lt;div class=&#34;pageinfo pageinfo-primary&#34;&gt;
-&lt;p&gt;The CSM Authorization karavictl CLI is no longer actively maintained or supported. It will be deprecated in CSM 2.0.&lt;/p&gt;
-
-&lt;/div&gt;
-
-&lt;h2 id=&#34;install-csm-authorization-via-dell-csm-operator&#34;&gt;Install CSM Authorization via Dell CSM Operator&lt;/h2&gt;
-&lt;p&gt;The CSM Authorization module for supported Dell CSI Drivers can be installed via the Dell CSM Operator.
-To deploy the Operator, follow the instructions available &lt;a href=&#34;../../#installation&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
-&lt;h3 id=&#34;prerequisite&#34;&gt;Prerequisite&lt;/h3&gt;
-&lt;ol&gt;
-&lt;li&gt;
-&lt;p&gt;Execute &lt;code&gt;kubectl create namespace authorization&lt;/code&gt; to create the authorization namespace (if not already present). Note that the namespace can be any user-defined name, in this example, we assume that the namespace is &amp;lsquo;authorization&amp;rsquo;.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Install cert-manager CRDs&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl apply --validate&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#204a87&#34;&gt;false&lt;/span&gt; -f https://github.com/jetstack/cert-manager/releases/download/v1.11.0/cert-manager.crds.yaml
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;3&#34;&gt;
-&lt;li&gt;
-&lt;p&gt;Prepare &lt;a href=&#34;https://github.com/dell/csm-operator/blob/main/samples/authorization/config.yaml&#34;&gt;samples/authorization/config.yaml&lt;/a&gt; which contains the JWT signing secret. The following table lists the configuration parameters.&lt;/p&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;Parameter&lt;/th&gt;
-&lt;th&gt;Description&lt;/th&gt;
-&lt;th&gt;Required&lt;/th&gt;
-&lt;th&gt;Default&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;web.jwtsigningsecret&lt;/td&gt;
-&lt;td&gt;String used to sign JSON Web Tokens&lt;/td&gt;
-&lt;td&gt;true&lt;/td&gt;
-&lt;td&gt;secret&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;p&gt;Example:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;web&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;jwtsigningsecret&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;randomString123&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;After editing the file, run this command to create a secret called &lt;code&gt;karavi-config-secret&lt;/code&gt;:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl create secret generic karavi-config-secret -n authorization --from-file&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;config.yaml&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;samples/authorization/config.yaml
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Use this command to replace or update the secret:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl create secret generic karavi-config-secret -n authorization --from-file&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;config.yaml&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;samples/authorization/config.yaml -o yaml --dry-run&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;client &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; kubectl replace -f -
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Create the &lt;a href=&#34;https://github.com/dell/csm-operator/blob/main/samples/authorization/karavi-storage-secret.yaml&#34;&gt;karavi-storage-secret&lt;/a&gt; to store storage system credentials.&lt;/p&gt;
-&lt;p&gt;Use this command to create the secret:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl create -f samples/authorization/karavi-storage-secret.yaml
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h3 id=&#34;install-csm-authorization-proxy-server&#34;&gt;Install CSM Authorization Proxy Server&lt;/h3&gt;
-&lt;ol&gt;
-&lt;li&gt;
-&lt;p&gt;Follow all the &lt;a href=&#34;#prerequisite&#34;&gt;prerequisites&lt;/a&gt;.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Create a CR (Custom Resource) for Authorization from a &lt;a href=&#34;https://github.com/dell/csm-operator/tree/main/samples/authorization&#34;&gt;sample manifest&lt;/a&gt;. This file can be modified to use custom parameters if needed.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Users should configure the parameters in the CR. This table lists the primary configurable parameters of the Authorization Proxy Server and their default values:&lt;/p&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;Parameter&lt;/th&gt;
-&lt;th&gt;Description&lt;/th&gt;
-&lt;th&gt;Required&lt;/th&gt;
-&lt;th&gt;Default&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;strong&gt;authorization&lt;/strong&gt;&lt;/td&gt;
-&lt;td&gt;This section configures the CSM-Authorization components.&lt;/td&gt;
-&lt;td&gt;-&lt;/td&gt;
-&lt;td&gt;-&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;PROXY_HOST&lt;/td&gt;
-&lt;td&gt;The hostname to configure the self-signed certificate (if applicable), and the proxy service Ingress.&lt;/td&gt;
-&lt;td&gt;Yes&lt;/td&gt;
-&lt;td&gt;csm-authorization.com&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;PROXY_INGRESS_CLASSNAME&lt;/td&gt;
-&lt;td&gt;The ingressClassName of the proxy-service Ingress.&lt;/td&gt;
-&lt;td&gt;Yes&lt;/td&gt;
-&lt;td&gt;nginx&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;PROXY_INGRESS_HOSTS&lt;/td&gt;
-&lt;td&gt;Additional host rules to be applied to the proxy-service Ingress.&lt;/td&gt;
-&lt;td&gt;No&lt;/td&gt;
-&lt;td&gt;authorization-ingress-nginx-controller.authorization.svc.cluster.local&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;REDIS_STORAGE_CLASS&lt;/td&gt;
-&lt;td&gt;The storage class for Redis to use for persistence. If not supplied, a locally provisioned volume is used.&lt;/td&gt;
-&lt;td&gt;No&lt;/td&gt;
-&lt;td&gt;-&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;strong&gt;ingress-nginx&lt;/strong&gt;&lt;/td&gt;
-&lt;td&gt;This section configures the enablement of the NGINX Ingress Controller.&lt;/td&gt;
-&lt;td&gt;-&lt;/td&gt;
-&lt;td&gt;-&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;enabled&lt;/td&gt;
-&lt;td&gt;Enable/Disable deployment of the NGINX Ingress Controller. Set to false if you already have an Ingress Controller installed.&lt;/td&gt;
-&lt;td&gt;No&lt;/td&gt;
-&lt;td&gt;true&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;strong&gt;cert-manager&lt;/strong&gt;&lt;/td&gt;
-&lt;td&gt;This section configures the enablement of cert-manager.&lt;/td&gt;
-&lt;td&gt;-&lt;/td&gt;
-&lt;td&gt;-&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;enabled&lt;/td&gt;
-&lt;td&gt;Enable/Disable deployment of cert-manager. Set to false if you already have cert-manager installed.&lt;/td&gt;
-&lt;td&gt;No&lt;/td&gt;
-&lt;td&gt;true&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;If you specify &lt;code&gt;REDIS_STORAGE_CLASS&lt;/code&gt;, the storage class must NOT be provisioned by the Dell CSI Driver to be configured with this installation of CSM Authorization.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;&lt;strong&gt;Optional:&lt;/strong&gt;
-To enable reporting of trace data with &lt;a href=&#34;https://zipkin.io/&#34;&gt;Zipkin&lt;/a&gt;, use the &lt;code&gt;csm-config-params&lt;/code&gt; configMap in the sample CR or dynamically by editing the configMap.&lt;/p&gt;
-&lt;p&gt;Add the Zipkin values to the configMap where &lt;code&gt;ZIPKIN_ADDRESS&lt;/code&gt; is the IP address or hostname of the Zipkin server.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;ZIPKIN_URI: &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;http://ZIPKIN_ADDRESS:9411/api/v2/spans&amp;#34;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;ZIPKIN_PROBABILITY: &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;1.0&amp;#34;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;4&#34;&gt;
-&lt;li&gt;
-&lt;p&gt;Execute this command to create the Authorization CR:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl create -f &amp;lt;SAMPLE FILE&amp;gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;This command will deploy the Authorization Proxy Server in the namespace specified in the input YAML file.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/blockquote&gt;
-&lt;ol start=&#34;5&#34;&gt;
-&lt;li&gt;
-&lt;p&gt;Create the &lt;code&gt;karavi-auth-tls&lt;/code&gt; secret using your own certificate or by using a self-signed certificate generated via cert-manager.&lt;/p&gt;
-&lt;p&gt;If using your own certificate that is valid for each Ingress hostname, use this command to create the &lt;code&gt;karavi-auth-tls&lt;/code&gt; secret:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl create secret tls karavi-auth-tls -n authorization --key &amp;lt;location-of-private-key-file&amp;gt; --cert &amp;lt;location-of-certificate-file&amp;gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;If using a self-signed certificate, prepare a certificate file provided &lt;a href=&#34;https://github.com/dell/csm-operator/tree/main/samples/authorization&#34;&gt;here&lt;/a&gt;. An entry for each hostname specified in the CR must be added under &lt;code&gt;dnsNames&lt;/code&gt; for the certificate to be valid for each Ingress.&lt;/p&gt;
-&lt;p&gt;Use this command to create the &lt;code&gt;karavi-auth-tls&lt;/code&gt; secret:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl create -f &amp;lt;CERTIFICATE FILE&amp;gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h3 id=&#34;verify-installation-of-the-csm-authorization-proxy-server&#34;&gt;Verify Installation of the CSM Authorization Proxy Server&lt;/h3&gt;
-&lt;p&gt;Once the Authorization CR is created, you can verify the installation as mentioned below:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl describe csm/&amp;lt;name-of-custom-resource&amp;gt; -n &amp;lt;namespace&amp;gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;install-karavictl&#34;&gt;Install Karavictl&lt;/h3&gt;
-&lt;p&gt;Follow the instructions available in CSM Authorization for &lt;a href=&#34;../../../helm/modules/installation/authorization/#install-karavictl&#34;&gt;Installing karavictl&lt;/a&gt;.&lt;/p&gt;
-&lt;h3 id=&#34;configure-the-csm-authorization-proxy-server&#34;&gt;Configure the CSM Authorization Proxy Server&lt;/h3&gt;
-&lt;p&gt;Follow the instructions available in CSM Authorization for &lt;a href=&#34;../../../helm/modules/installation/authorization/#configuring-the-csm-authorization-proxy-server&#34;&gt;Configuring the CSM Authorization Proxy Server&lt;/a&gt;.&lt;/p&gt;
-&lt;h3 id=&#34;configure-a-dell-csi-driver-with-csm-authorization&#34;&gt;Configure a Dell CSI Driver with CSM Authorization&lt;/h3&gt;
-&lt;p&gt;Follow the instructions available in CSM Authorization for &lt;a href=&#34;../../../helm/modules/installation/authorization/#configuring-a-dell-csi-driver-with-csm-for-authorization&#34;&gt;Configuring a Dell CSI Driver with CSM for Authorization&lt;/a&gt;.&lt;/p&gt;
-
-      </description>
+      <description>The CSM Authorization karavictl CLI is no longer actively maintained or supported. It will be deprecated in CSM 2.0.
+Install CSM Authorization via Dell CSM Operator The CSM Authorization module for supported Dell CSI Drivers can be installed via the Dell CSM Operator. To deploy the Operator, follow the instructions available here.
+Prerequisite Execute kubectl create namespace authorization to create the authorization namespace (if not already present). Note that the namespace can be any user-defined name, in this example, we assume that the namespace is &amp;lsquo;authorization&amp;rsquo;.</description>
     </item>
-    
     <item>
-      <title>V1: Observability</title>
+      <title>Observability</title>
       <link>https://dell.github.io/csm-docs/v1/deployment/csmoperator/modules/observability/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>https://dell.github.io/csm-docs/v1/deployment/csmoperator/modules/observability/</guid>
-      <description>
-        
-        
-        &lt;p&gt;The CSM Observability module for supported Dell CSI Drivers can be installed via the Dell CSM Operator. Dell CSM Operator will deploy CSM Observability, including topology service, Otel collector, and metrics services.&lt;/p&gt;
-&lt;h2 id=&#34;prerequisites&#34;&gt;Prerequisites&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;Create a namespace &lt;code&gt;karavi&lt;/code&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl create namespace karavi
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
-&lt;li&gt;Enable Observability module and components in &lt;a href=&#34;https://github.com/dell/csm-operator/tree/main/samples&#34;&gt;sample manifests&lt;/a&gt;. If cert-manager has already been installed, don&amp;rsquo;t enable it.&lt;/li&gt;
-&lt;li&gt;To use Observablity with CSM Authorization, the &lt;a href=&#34;../authorization/&#34;&gt;Authorization Proxy Server&lt;/a&gt; should be installed and configured first. Then, enable the Authorization module along with the Observability module in the sample manifest.&lt;/li&gt;
-&lt;li&gt;Observability will deploy with self-signed certificates by default. If you want to have custom certificates created instead, please generate certificates and private keys, encode them in base64, and insert them into the sample file as shown below for whichever components you are enabling:&lt;/li&gt;
-&lt;/ul&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;    # observability: allows to configure observability
-    - name: observability
-...
-      components:
-        - name: topology
-...
-          # certificate: base64-encoded certificate for cert/private-key pair -- add cert here to use custom certificates
-          #  for self-signed certs, leave empty string
-          # Allowed values: string
-          certificate: &amp;#34;&amp;lt;INSERT BASE64-ENCODED TOPOLOGY CERTIFICATE HERE&amp;gt;&amp;#34;
-          # privateKey: base64-encoded private key for cert/private-key pair -- add private key here to use custom certificates
-          #  for self-signed certs, leave empty string
-          # Allowed values: string
-          privateKey: &amp;#34;&amp;lt;INSERT BASE64-ENCODED TOPOLOGY PRIVATE KEY HERE&amp;gt;&amp;#34;
-...
-        - name: otel-collector
-...
-          # certificate: base64-encoded certificate for cert/private-key pair -- add cert here to use custom certificates
-          #  for self-signed certs, leave empty string
-          # Allowed values: string
-          certificate: &amp;#34;&amp;lt;INSERT BASE64-ENCODED OTEL-COLLECTOR CERTIFICATE HERE&amp;gt;&amp;#34;
-          # privateKey: base64-encoded private key for cert/private-key pair -- add private key here to use custom certificates
-          #  for self-signed certs, leave empty string
-          # Allowed values: string
-          privateKey: &amp;#34;&amp;lt;INSERT BASE64-ENCODED OTEL-COLLECTOR PRIVATE KEY HERE&amp;gt;&amp;#34;
-...
-&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
-&lt;li&gt;Notes:
-&lt;ul&gt;
-&lt;li&gt;If you enable &lt;code&gt;metrics-powerscale&lt;/code&gt; or &lt;code&gt;metrics-powerflex&lt;/code&gt;, you must enable &lt;code&gt;otel-collector&lt;/code&gt; as well.&lt;/li&gt;
-&lt;li&gt;otel-collector cannot be enabled without a metrics component also enabled.&lt;/li&gt;
-&lt;li&gt;If you are deploying multiple drivers, only enable topology, otel-collector, and cert-manager in the first driver. For subsequent drivers, only enable the metrics component. When deleting the deployment, the driver that was created first must be deleted last.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;install-observability&#34;&gt;Install Observability&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;Once you have prepared the sample file(s) (one per driver being installed), deploy by running &lt;code&gt;kubectl apply -f &amp;lt;SAMPLE FILE&amp;gt;&lt;/code&gt; on the sample file.&lt;/li&gt;
-&lt;/ul&gt;
-
-      </description>
+      <description>The CSM Observability module for supported Dell CSI Drivers can be installed via the Dell CSM Operator. Dell CSM Operator will deploy CSM Observability, including topology service, Otel collector, and metrics services.
+Prerequisites Create a namespace karavi kubectl create namespace karavi Enable Observability module and components in sample manifests. If cert-manager has already been installed, don&amp;rsquo;t enable it. To use Observablity with CSM Authorization, the Authorization Proxy Server should be installed and configured first.</description>
     </item>
-    
     <item>
-      <title>V1: Replication</title>
+      <title>Replication</title>
       <link>https://dell.github.io/csm-docs/v1/deployment/csmoperator/modules/replication/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>https://dell.github.io/csm-docs/v1/deployment/csmoperator/modules/replication/</guid>
-      <description>
-        
-        
-        &lt;p&gt;The CSM Replication module for supported Dell CSI Drivers can be installed via the Dell CSM Operator. Dell CSM Operator will deploy the CSM Replication sidecar and the CSM Replication Controller Manager.&lt;/p&gt;
-&lt;h2 id=&#34;prerequisites&#34;&gt;Prerequisites&lt;/h2&gt;
-&lt;p&gt;To configure Replication prior to installation via CSM Operator, you need:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;a source cluster which is the main cluster&lt;/li&gt;
-&lt;li&gt;a target cluster which will serve as the disaster recovery cluster&lt;/li&gt;
-&lt;/ul&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;NOTE:&lt;/em&gt;&lt;/strong&gt;  If using a single Kubernetes cluster in a stretched configuration, there will be only one cluster. The source cluster is also the target cluster.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;em&gt;(Optional)&lt;/em&gt; If CSM Replication is being deployed using two clusters in an environment where the DNS is not configured, and the cluster API endpoints are
-FQDNs, it is necessary to add the &lt;code&gt;&amp;lt;FQDN&amp;gt;:&amp;lt;IP&amp;gt;&lt;/code&gt; mapping in the /etc/hosts file in order to resolve queries to the remote API server.
-This change will need to be made to the /etc/hosts file on:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;The bastion node(s) (or wherever &lt;code&gt;repctl&lt;/code&gt; is used).&lt;/li&gt;
-&lt;li&gt;Either the CSM Operator Deployment or ClusterServiceVersion custom resource if using an Operator Lifecycle Manager (such as with an OperatorHub install).&lt;/li&gt;
-&lt;li&gt;Both dell-replication-controller-manager deployments (covered in &lt;a href=&#34;#configuration-steps&#34;&gt;Configuration Steps&lt;/a&gt; below).&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Update the ClusterServiceVersion before continuing. Execute the command below, replacing the fields for the remote cluster&amp;rsquo;s FQDN and IP.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl patch clusterserviceversions.operators.coreos.com -n &amp;lt;operator-namespace&amp;gt; dell-csm-operator-certified.v1.3.0 &lt;span style=&#34;color:#4e9a06&#34;&gt;\
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;--type&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;json -p&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;[{&amp;#34;op&amp;#34;: &amp;#34;add&amp;#34;, &amp;#34;path&amp;#34;: &amp;#34;/spec/install/spec/deployments/0/spec/template/spec/hostAliases&amp;#34;, &amp;#34;value&amp;#34;: [{&amp;#34;ip&amp;#34;:&amp;#34;&amp;lt;remote-IP&amp;gt;&amp;#34;,&amp;#34;hostnames&amp;#34;:[&amp;#34;&amp;lt;remote-FQDN&amp;gt;&amp;#34;]}]}]&amp;#39;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;cloning-the-github-repository-and-building-repctl&#34;&gt;Cloning the GitHub Repository and Building repctl&lt;/h3&gt;
-&lt;p&gt;The &lt;a href=&#34;https://github.com/dell/csm-replication.git&#34;&gt;csm-replication&lt;/a&gt; GitHub repository is cloned to your source cluster as part of the installation. On your source cluster run the following to clone and build the repctl tool:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;git clone -b v1.8.0 https://github.com/dell/csm-replication.git
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#204a87&#34;&gt;cd&lt;/span&gt; csm-replication/repctl
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;make build
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Alternately, you can download a pre-built repctl binary from our &lt;a href=&#34;https://github.com/dell/csm-replication/releases&#34;&gt;Releases&lt;/a&gt; page.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;wget https://github.com/dell/csm-replication/releases/download/v1.8.0/repctl-linux-amd64
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;mv repctl-linux-amd64 repctl
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;chmod +x repctl
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;The rest of the instructions will assume that your current working directory is the csm-replication/repctl directory.&lt;/p&gt;
-&lt;h2 id=&#34;configuration-steps&#34;&gt;Configuration Steps&lt;/h2&gt;
-&lt;p&gt;To configure Replication perform the following steps:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;On your main cluster collect the cluster admin configurations for each of the clusters. In the following example the source cluster, &lt;code&gt;cluster-1&lt;/code&gt; uses configuration &lt;code&gt;/root/.kube/config-1&lt;/code&gt; and the target cluster, &lt;code&gt;cluster-2&lt;/code&gt; uses the configuration &lt;code&gt;/root/.config/config-2&lt;/code&gt;. Use repctl to add the clusters:
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  ./repctl cluster add -f &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;/root/.kube/config-1&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;/root/.kube/config-2&amp;#34;&lt;/span&gt; -n &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;cluster-1&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;cluster-2&amp;#34;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;NOTE:&lt;/em&gt;&lt;/strong&gt;  If using a single Kubernetes cluster in a stretched configuration there will be only one cluster.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;ol start=&#34;2&#34;&gt;
-&lt;li&gt;
-&lt;p&gt;Install the replication controller CRDs:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;./repctl create -f ../deploy/replicationcrds.all.yaml
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Inject the service account&amp;rsquo;s configuration into the clusters.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;./repctl cluster inject
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Customize the &lt;code&gt;examples/&amp;lt;storage&amp;gt;_example_values.yaml&lt;/code&gt; sample config. Set the values for sourceClusterID and targetClusterID to the same names used in step 1. For a stretched cluster set both fields to &lt;code&gt;self&lt;/code&gt;:&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Create the replication storage classes using the modified configuration from step 4:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;./repctl create sc --from-config ./examples/&amp;lt;storage&amp;gt;_example_values.yaml
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;On the target cluster, configure the &lt;a href=&#34;../../../csmoperator/drivers/#pre-requisites-for-installation-of-the-csi-drivers&#34;&gt;prerequisites&lt;/a&gt; for deploying the driver via Dell CSM Operator.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Install the CSI driver for your chosen storage platform on the source cluster according to the instructions for &lt;a href=&#34;../../../csmoperator/drivers/#installing-csi-driver-via-operator&#34;&gt;installing the drivers using CSM Operator&lt;/a&gt;.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;em&gt;(Optional)&lt;/em&gt; If CSM Replication is deployed using two clusters in an environment where the DNS is not configured, it is necessary to update the dell-replication-controller-manager Kubernetes deployment to map the API endpoint FQDN to an IP address by adding the &lt;code&gt;hostAliases&lt;/code&gt; field and associated FQDN:IP mappings.&lt;/p&gt;
-&lt;p&gt;To update the dell-replication-controller-manager deployment, execute the command below, replacing the fields for the remote cluster&amp;rsquo;s FQDN and IP. Make sure to update the deployment on both the primary and disaster recovery clusters.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl patch deployment -n dell-replication-controller dell-replication-controller-manager &lt;span style=&#34;color:#4e9a06&#34;&gt;\
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;-p &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;{&amp;#34;spec&amp;#34;:{&amp;#34;template&amp;#34;:{&amp;#34;spec&amp;#34;:{&amp;#34;hostAliases&amp;#34;:[{&amp;#34;hostnames&amp;#34;:[&amp;#34;&amp;lt;remote-FQDN&amp;gt;&amp;#34;],&amp;#34;ip&amp;#34;:&amp;#34;&amp;lt;remote-IP&amp;gt;&amp;#34;}]}}}}&amp;#39;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-      </description>
+      <description>The CSM Replication module for supported Dell CSI Drivers can be installed via the Dell CSM Operator. Dell CSM Operator will deploy the CSM Replication sidecar and the CSM Replication Controller Manager.
+Prerequisites To configure Replication prior to installation via CSM Operator, you need:
+a source cluster which is the main cluster a target cluster which will serve as the disaster recovery cluster NOTE: If using a single Kubernetes cluster in a stretched configuration, there will be only one cluster.</description>
     </item>
-    
     <item>
-      <title>V1: Resiliency</title>
+      <title>Resiliency</title>
       <link>https://dell.github.io/csm-docs/v1/deployment/csmoperator/modules/resiliency/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>https://dell.github.io/csm-docs/v1/deployment/csmoperator/modules/resiliency/</guid>
-      <description>
-        
-        
-        &lt;p&gt;The CSM Resiliency module for supported Dell CSI Drivers can be installed via the Dell CSM Operator. Dell CSM Operator will deploy CSM Resiliency sidecar.&lt;/p&gt;
-&lt;h2 id=&#34;prerequisite&#34;&gt;Prerequisite&lt;/h2&gt;
-&lt;p&gt;When utilizing CSM for Resiliency module, it is crucial to note that it will solely act upon pods that have been assigned a designated label. This label must have both a key and a value that match what has been set in the resiliency module configuration. Upon startup, CSM for Resiliency generates a log message that displays the label key and value being used to monitor pods.:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;labelSelector&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;{&lt;span style=&#34;color:#000&#34;&gt;map[podmon.dellemc.com/driver:csi-vxflexos]&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;The above message indicates the key is: podmon.dellemc.com/driver and the label value is csi-vxflexos. To search for the pods that would be monitored, try this:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl get pods -A -l podmon.dellemc.com/driver&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;csi-vxflexos
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;NAMESPACE   NAME           READY   STATUS    RESTARTS   AGE
-pmtu1       podmontest-0   1/1     Running   0          3m7s
-pmtu2       podmontest-0   1/1     Running   0          3m8s
-pmtu3       podmontest-0   1/1     Running   0          3m6s
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;User must follow all the prerequisites of the respective drivers before enabling this module.&lt;/p&gt;
-&lt;h2 id=&#34;how-to-enable-this-module&#34;&gt;How to enable this module&lt;/h2&gt;
-&lt;p&gt;To enable this module, user should choose the sample file for the respective driver for specific version. By default, the module is disabled but this can be enabled by setting the enabled flag to &lt;code&gt;true&lt;/code&gt; in the sample file.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;modules&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;- &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;resiliency&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# enabled: Enable/Disable Resiliency feature&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Allowed values:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;#   true: enable Resiliency feature(deploy podmon sidecar)&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;#   false: disable Resiliency feature(do not deploy podmon sidecar)&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Default value: false&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;enabled&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;true&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;configVersion&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;v1.9.0&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;components&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;- &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;podmon-controller&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;          &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;args&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;            &lt;/span&gt;- &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;--labelvalue=csi-powerstore&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;            &lt;/span&gt;- &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;--arrayConnectivityPollRate=60&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;            &lt;/span&gt;- &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;--skipArrayConnectionValidation=false&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;            &lt;/span&gt;- &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;--driverPodLabelValue=dell-storage&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;            &lt;/span&gt;- &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;--ignoreVolumelessPods=false&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;            &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Below 4 args should not be modified.&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;            &lt;/span&gt;- &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;--csisock=unix:/var/run/csi/csi.sock&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;            &lt;/span&gt;- &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;--mode=controller&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;            &lt;/span&gt;- &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;--driver-config-params=/powerstore-config-params/driver-config-params.yaml&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;            &lt;/span&gt;- &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;--driverPath=csi-powerstore.dellemc.com&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;- &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;podmon-node&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;          &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;envs&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;            &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# podmonAPIPort: Defines the port to be used within the kubernetes cluster&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;            &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Allowed values: Any valid and free port (string)&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;            &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Default value: 8083&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;            &lt;/span&gt;- &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;X_CSI_PODMON_API_PORT&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;              &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;value&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;8083&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;          &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;args&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;            &lt;/span&gt;- &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;--labelvalue=csi-powerstore&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;            &lt;/span&gt;- &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;--arrayConnectivityPollRate=60&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;            &lt;/span&gt;- &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;--leaderelection=false&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;            &lt;/span&gt;- &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;--driverPodLabelValue=dell-storage&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;            &lt;/span&gt;- &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;--ignoreVolumelessPods=false&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;            &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Below 4 args should not be modified.&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;            &lt;/span&gt;- &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;--csisock=unix:/var/lib/kubelet/plugins/csi-powerstore.dellemc.com/csi_sock&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;            &lt;/span&gt;- &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;--mode=node&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;            &lt;/span&gt;- &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;--driver-config-params=/powerstore-config-params/driver-config-params.yaml&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;            &lt;/span&gt;- &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;--driverPath=csi-powerstore.dellemc.com&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-      </description>
+      <description>The CSM Resiliency module for supported Dell CSI Drivers can be installed via the Dell CSM Operator. Dell CSM Operator will deploy CSM Resiliency sidecar.
+Prerequisite When utilizing CSM for Resiliency module, it is crucial to note that it will solely act upon pods that have been assigned a designated label. This label must have both a key and a value that match what has been set in the resiliency module configuration.</description>
     </item>
-    
   </channel>
 </rss>

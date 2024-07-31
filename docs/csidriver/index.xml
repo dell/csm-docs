@@ -1,70 +1,11 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Dell Technologies – CSI Drivers</title>
+    <title>CSI Drivers on </title>
     <link>https://dell.github.io/csm-docs/docs/csidriver/</link>
-    <description>Recent content in CSI Drivers on Dell Technologies</description>
+    <description>Recent content in CSI Drivers on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    
-	  <atom:link href="https://dell.github.io/csm-docs/docs/csidriver/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-      
-        
-      
-    
-    
-    <item>
-      <title>Docs: Features</title>
-      <link>https://dell.github.io/csm-docs/docs/csidriver/features/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://dell.github.io/csm-docs/docs/csidriver/features/</guid>
-      <description>
-        
-        
-        
-      </description>
-    </item>
-    
-    <item>
-      <title>Docs: Troubleshooting</title>
-      <link>https://dell.github.io/csm-docs/docs/csidriver/troubleshooting/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://dell.github.io/csm-docs/docs/csidriver/troubleshooting/</guid>
-      <description>
-        
-        
-        
-      </description>
-    </item>
-    
-    <item>
-      <title>Docs: Release Notes</title>
-      <link>https://dell.github.io/csm-docs/docs/csidriver/release/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://dell.github.io/csm-docs/docs/csidriver/release/</guid>
-      <description>
-        
-        
-        
-      </description>
-    </item>
-    
-    <item>
-      <title>Docs: Testing Drivers</title>
-      <link>https://dell.github.io/csm-docs/docs/csidriver/test/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://dell.github.io/csm-docs/docs/csidriver/test/</guid>
-      <description>
-        
-        
-        
-      </description>
-    </item>
-    
+    <atom:link href="https://dell.github.io/csm-docs/docs/csidriver/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>

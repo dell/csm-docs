@@ -1,422 +1,49 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Dell Technologies – Release Notes</title>
+    <title>Release Notes on </title>
     <link>https://dell.github.io/csm-docs/v2/csidriver/release/</link>
-    <description>Recent content in Release Notes on Dell Technologies</description>
+    <description>Recent content in Release Notes on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    
-	  <atom:link href="https://dell.github.io/csm-docs/v2/csidriver/release/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-      
-        
-      
-    
-    
+    <atom:link href="https://dell.github.io/csm-docs/v2/csidriver/release/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>V2: PowerFlex</title>
+      <title>PowerFlex</title>
       <link>https://dell.github.io/csm-docs/v2/csidriver/release/powerflex/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>https://dell.github.io/csm-docs/v2/csidriver/release/powerflex/</guid>
-      <description>
-        
-        
-        &lt;h2 id=&#34;release-notes---csi-powerflex-v292&#34;&gt;Release Notes - CSI PowerFlex v2.9.2&lt;/h2&gt;
-&lt;h3 id=&#34;new-featureschanges&#34;&gt;New Features/Changes&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/947&#34;&gt;#947 - [FEATURE]: Support for Kubernetes 1.28&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1066&#34;&gt;#1066 - [FEATURE]: Support for Openshift 4.14&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1067&#34;&gt;#1067 - [FEATURE]: Support For PowerFlex 4.5&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/851&#34;&gt;#851 - [FEATURE]: Helm Chart Enhancement - Container Images Configurable in values.yaml&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/905&#34;&gt;#905 - [FEATURE]: Add support for CSI Spec 1.6&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/996&#34;&gt;#996 - [FEATURE]: Dell CSI to Dell CSM Operator Migration Process&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;fixed-issues&#34;&gt;Fixed Issues&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1011&#34;&gt;#1011 - [BUG]: PowerFlex RWX volume no option to configure the nfs export host access ip address.&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1014&#34;&gt;#1014 - [BUG]: Missing error check for os.Stat call during volume publish&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1020&#34;&gt;#1020 - [BUG]: CSI-PowerFlex: SDC Rename fails when configuring multiple arrays in the secret&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1030&#34;&gt;#1030 - [BUG]: Comment out duplicate entries in the sample secret.yaml file&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1050&#34;&gt;#1050 - [BUG]: NFS Export gets deleted when one pod is deleted from the multiple pods consuming the same PowerFlex RWX NFS volume&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1054&#34;&gt;#1054 - [BUG]:  The PowerFlex Dockerfile is incorrectly labeling the version as 2.7.0 for the 2.8.0 version.&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1057&#34;&gt;#1057 - [BUG]: CSI Driver - issue with creation volume from 1 of the worker nodes&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1058&#34;&gt;#1058 - [BUG]: CSI Health monitor for Node missing for CSM PowerFlex in Operator samples&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1061&#34;&gt;#1061 - [BUG]: Golint is not installing with go get command&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1110&#34;&gt;#1110 - [BUG]: Multi Controller defect - sidecars timeout&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1103&#34;&gt;#1103 - [BUG]: CSM Operator doesn&amp;rsquo;t apply fSGroupPolicy value to CSIDriver Object&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1152&#34;&gt;#1152 - [BUG]: CSI driver changes to facilitate SDC brownfield deployments&lt;/a&gt;)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;known-issues&#34;&gt;Known Issues&lt;/h3&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;Issue&lt;/th&gt;
-&lt;th&gt;Workaround&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;Delete namespace that has PVCs and pods created with the driver. The External health monitor sidecar crashes as a result of this operation.&lt;/td&gt;
-&lt;td&gt;Deleting the namespace deletes the PVCs first and then removes the pods in the namespace. This brings a condition where pods exist without their PVCs and causes the external-health-monitor sidecar to crash. This is a known issue and has been reported at &lt;a href=&#34;https://github.com/kubernetes-csi/external-health-monitor/issues/100&#34;&gt;https://github.com/kubernetes-csi/external-health-monitor/issues/100&lt;/a&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;When a node goes down, the block volumes attached to the node cannot be attached to another node&lt;/td&gt;
-&lt;td&gt;This is a known issue and has been reported at &lt;a href=&#34;https://github.com/kubernetes-csi/external-attacher/issues/215&#34;&gt;https://github.com/kubernetes-csi/external-attacher/issues/215&lt;/a&gt;. Workaround: &lt;br /&gt; 1. Force delete the pod running on the node that went down &lt;br /&gt; 2. Delete the volumeattachment to the node that went down. &lt;br /&gt; Now the volume can be attached to the new node.&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;sdc:3.6.0.6 is causing issues while installing the csi-powerflex driver on ubuntu,RHEL8.3&lt;/td&gt;
-&lt;td&gt;Workaround: &lt;br /&gt; Change the powerflexSdc to sdc:3.6 in values.yaml &lt;a href=&#34;https://github.com/dell/csi-powerflex/blob/72b27acee7553006cc09df97f85405f58478d2e4/helm/csi-vxflexos/values.yaml#L13&#34;&gt;https://github.com/dell/csi-powerflex/blob/72b27acee7553006cc09df97f85405f58478d2e4/helm/csi-vxflexos/values.yaml#L13&lt;/a&gt; &lt;br /&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;sdc:3.6.1 is causing issues while installing the csi-powerflex driver on ubuntu.&lt;/td&gt;
-&lt;td&gt;Workaround: &lt;br /&gt; Change the powerflexSdc to sdc:3.6 in values.yaml &lt;a href=&#34;https://github.com/dell/csi-powerflex/blob/72b27acee7553006cc09df97f85405f58478d2e4/helm/csi-vxflexos/values.yaml#L13&#34;&gt;https://github.com/dell/csi-powerflex/blob/72b27acee7553006cc09df97f85405f58478d2e4/helm/csi-vxflexos/values.yaml#L13&lt;/a&gt; &lt;br /&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;A CSI ephemeral pod may not get created in OpenShift 4.13 and fail with the error &lt;code&gt;&amp;quot;error when creating pod: the pod uses an inline volume provided by CSIDriver csi-vxflexos.dellemc.com, and the namespace has a pod security enforcement level that is lower than privileged.&amp;quot;&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;This issue occurs because OpenShift 4.13 introduced the CSI Volume Admission plugin to restrict the use of a CSI driver capable of provisioning CSI ephemeral volumes during pod admission. Therefore, an additional label &lt;code&gt;security.openshift.io/csi-ephemeral-volume-profile&lt;/code&gt; in &lt;a href=&#34;https://github.com/dell/helm-charts/blob/csi-vxflexos-2.9.1/charts/csi-vxflexos/templates/csidriver.yaml&#34;&gt;csidriver.yaml&lt;/a&gt; file with the required security profile value should be provided. Follow &lt;a href=&#34;https://docs.openshift.com/container-platform/4.13/storage/container_storage_interface/ephemeral-storage-csi-inline.html&#34;&gt;OpenShift 4.13 documentation for CSI Ephemeral Volumes&lt;/a&gt; for more information.&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;If the volume limit is exhausted and there are pending pods and PVCs due to &lt;code&gt;exceed max volume count&lt;/code&gt;, the pending PVCs will be bound to PVs and the pending pods will be scheduled to nodes when the driver pods are restarted.&lt;/td&gt;
-&lt;td&gt;It is advised not to have any pending pods or PVCs once the volume limit per node is exhausted on a CSI Driver. There is an open issue reported with kubenetes at &lt;a href=&#34;https://github.com/kubernetes/kubernetes/issues/95911&#34;&gt;https://github.com/kubernetes/kubernetes/issues/95911&lt;/a&gt; with the same behavior.&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;The PowerFlex Dockerfile is incorrectly labeling the version as 2.7.0 for the 2.8.0 version.&lt;/td&gt;
-&lt;td&gt;Describe the driver pod using &lt;code&gt;kubectl describe pod $podname -n vxflexos&lt;/code&gt; to ensure v2.8.0 is installed.&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;h3 id=&#34;note&#34;&gt;Note:&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;Support for Kubernetes alpha features like Volume Health Monitoring and RWOP (ReadWriteOncePod) access mode will not be available in Openshift environment as Openshift doesn&amp;rsquo;t support enabling of alpha features for Production Grade clusters.&lt;/li&gt;
-&lt;/ul&gt;
-
-      </description>
+      <description>Release Notes - CSI PowerFlex v2.9.2 New Features/Changes #947 - [FEATURE]: Support for Kubernetes 1.28 #1066 - [FEATURE]: Support for Openshift 4.14 #1067 - [FEATURE]: Support For PowerFlex 4.5 #851 - [FEATURE]: Helm Chart Enhancement - Container Images Configurable in values.yaml #905 - [FEATURE]: Add support for CSI Spec 1.6 #996 - [FEATURE]: Dell CSI to Dell CSM Operator Migration Process Fixed Issues #1011 - [BUG]: PowerFlex RWX volume no option to configure the nfs export host access ip address.</description>
     </item>
-    
     <item>
-      <title>V2: PowerMax</title>
+      <title>PowerMax</title>
       <link>https://dell.github.io/csm-docs/v2/csidriver/release/powermax/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>https://dell.github.io/csm-docs/v2/csidriver/release/powermax/</guid>
-      <description>
-        
-        
-        &lt;h2 id=&#34;release-notes---csi-powermax-v291&#34;&gt;Release Notes - CSI PowerMax v2.9.1&lt;/h2&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Note: Auto SRDF group creation is currently not supported in PowerMaxOS 10.1 (6079) Arrays.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Note: Starting from CSI v2.4.0, Only Unisphere 10.0 REST endpoints are supported. It is mandatory that Unisphere should be updated to 10.0. Please find the instructions &lt;a href=&#34;https://dl.dell.com/content/manual34878027-dell-unisphere-for-powermax-10-0-0-installation-guide.pdf?language=en-us&amp;amp;ps=true&#34;&gt;here.&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Note: File Replication for PowerMax is currently not supported&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h3 id=&#34;new-featureschanges&#34;&gt;New Features/Changes&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/947&#34;&gt;#947 - [FEATURE]: Support for Kubernetes 1.28&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1066&#34;&gt;#1066 - [FEATURE]: Support for Openshift 4.14&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/851&#34;&gt;#851 - [FEATURE]: Helm Chart Enhancement - Container Images Configurable in values.yaml&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/905&#34;&gt;#905 - [FEATURE]: Add support for CSI Spec 1.6&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/991&#34;&gt;#991 - [FEATURE]:Remove linked proxy mode for PowerMax&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/996&#34;&gt;#996 - [FEATURE]: Dell CSI to Dell CSM Operator Migration Process&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1062&#34;&gt;#1062 - [FEATURE]: CSM PowerMax: Support PowerMax v10.1 &lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;fixed-issues&#34;&gt;Fixed Issues&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/983&#34;&gt;#983 - [BUG]: storageCapacity can be set in unsupported CSI Powermax with CSM Operator&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1014&#34;&gt;#1014 - [BUG]: Missing error check for os.Stat call during volume publish&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1037&#34;&gt;#1037 - [BUG]: Document instructions update: Either Multi-Path or the Power-Path software should be enabled for PowerMax &lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1051&#34;&gt;#1051 - [BUG]: make docker command is failing with error &lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1053&#34;&gt;#1053 - [BUG]: make gosec is erroring out - Repos PowerMax,PowerStore,PowerScale (gosec is installed)&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1056&#34;&gt;#1056 - [BUG]: Missing runtime dependencies reference in PowerMax README file.&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1061&#34;&gt;#1061 - [BUG]: Golint is not installing with go get command&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1110&#34;&gt;#1110 - [BUG]: Multi Controller defect - sidecars timeout&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1103&#34;&gt;#1103 - [BUG]: CSM Operator doesn&amp;rsquo;t apply fSGroupPolicy value to CSIDriver Object&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;known-issues&#34;&gt;Known Issues&lt;/h3&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;Issue&lt;/th&gt;
-&lt;th&gt;Workaround&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;Unable to update Host: A problem occurred modifying the host resource&lt;/td&gt;
-&lt;td&gt;This issue occurs when the nodes do not have unique hostnames or when an IP address/FQDN with same sub-domains are used as hostnames. The workaround is to use unique hostnames or FQDN with unique sub-domains&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;When a node goes down, the block volumes attached to the node cannot be attached to another node&lt;/td&gt;
-&lt;td&gt;This is a known issue and has been reported at &lt;a href=&#34;https://github.com/kubernetes-csi/external-attacher/issues/215&#34;&gt;https://github.com/kubernetes-csi/external-attacher/issues/215&lt;/a&gt;. Workaround: &lt;br /&gt; 1. Force delete the pod running on the node that went down &lt;br /&gt; 2. Delete the volumeattachment to the node that went down. &lt;br /&gt; Now the volume can be attached to the new node&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;If the volume limit is exhausted and there are pending pods and PVCs due to &lt;code&gt;exceed max volume count&lt;/code&gt;, the pending PVCs will be bound to PVs and the pending pods will be scheduled to nodes when the driver pods are restarted.&lt;/td&gt;
-&lt;td&gt;It is advised not to have any pending pods or PVCs once the volume limit per node is exhausted on a CSI Driver. There is an open issue reported with kubenetes at &lt;a href=&#34;https://github.com/kubernetes/kubernetes/issues/95911&#34;&gt;https://github.com/kubernetes/kubernetes/issues/95911&lt;/a&gt; with the same behavior.&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Automatic SRDF group creation is failing with &amp;ldquo;Unable to get Remote Port on SAN for Auto SRDF&amp;rdquo; for PowerMaxOS 10.1 arrays&lt;/td&gt;
-&lt;td&gt;Create the SRDF Group and add it to the storage class&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1070&#34;&gt;Node stage is failing with error &amp;ldquo;wwn for FC device not found&amp;rdquo;&lt;/a&gt;&lt;/td&gt;
-&lt;td&gt;This is an intermittent issue, rebooting the node will resolve this issue&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;When the driver is installed using CSM Operator , few times, pods created using block volume are getting stuck in containercreating/terminating state or devices are not available inside the pod.&lt;/td&gt;
-&lt;td&gt;Update the daemonset with parameter &lt;code&gt;mountPropagation: &amp;quot;Bidirectional&amp;quot;&lt;/code&gt; for volumedevices-path under volumeMounts section.&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;h3 id=&#34;note&#34;&gt;Note:&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;Support for Kubernetes alpha features like Volume Health Monitoring and RWOP (ReadWriteOncePod) access mode will not be available in Openshift environment as Openshift doesn&amp;rsquo;t support enabling of alpha features for Production Grade clusters.&lt;/li&gt;
-&lt;/ul&gt;
-
-      </description>
+      <description>Release Notes - CSI PowerMax v2.9.1 Note: Auto SRDF group creation is currently not supported in PowerMaxOS 10.1 (6079) Arrays.
+Note: Starting from CSI v2.4.0, Only Unisphere 10.0 REST endpoints are supported. It is mandatory that Unisphere should be updated to 10.0. Please find the instructions here.
+Note: File Replication for PowerMax is currently not supported
+New Features/Changes #947 - [FEATURE]: Support for Kubernetes 1.28 #1066 - [FEATURE]: Support for Openshift 4.</description>
     </item>
-    
     <item>
-      <title>V2: PowerScale</title>
+      <title>PowerScale</title>
       <link>https://dell.github.io/csm-docs/v2/csidriver/release/powerscale/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>https://dell.github.io/csm-docs/v2/csidriver/release/powerscale/</guid>
-      <description>
-        
-        
-        &lt;h2 id=&#34;release-notes---csi-driver-for-powerscale-v291&#34;&gt;Release Notes - CSI Driver for PowerScale v2.9.1&lt;/h2&gt;
-&lt;h3 id=&#34;new-featureschanges&#34;&gt;New Features/Changes&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/947&#34;&gt;#947 - [FEATURE]: Support for Kubernetes 1.28&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1066&#34;&gt;#1066 - [FEATURE]: Support for Openshift 4.14&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/851&#34;&gt;#851 - [FEATURE]: Helm Chart Enhancement - Container Images Configurable in values.yaml&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/905&#34;&gt;#905 - [FEATURE]: Add support for CSI Spec 1.6&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/996&#34;&gt;#996 - [FEATURE]: Dell CSI to Dell CSM Operator Migration Process&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;fixed-issues&#34;&gt;Fixed Issues&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/771&#34;&gt;#771 - [BUG]: Gopowerscale unit test fails&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/990&#34;&gt;#990 - [BUG]: X_CSI_AUTH_TYPE cannot be set in CSM Operator&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/999&#34;&gt;#999 - [BUG]: Volume health fails because it looks to a wrong path&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1014&#34;&gt;#1014 - [BUG]: Missing error check for os.Stat call during volume publish&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1046&#34;&gt;#1046 - [BUG]:Is cert-csi expansion expected to successfully run with enableQuota: false on PowerScale?&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1053&#34;&gt;#1053 - [BUG]: make gosec is erroring out - Repos PowerMax,PowerStore,PowerScale (gosec is installed)&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1061&#34;&gt;#1061 - [BUG]: Golint is not installing with go get command&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1110&#34;&gt;#1110 - [BUG]: Multi Controller defect - sidecars timeout&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1103&#34;&gt;#1103 - [BUG]: CSM Operator doesn&amp;rsquo;t apply fSGroupPolicy value to CSIDriver Object&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;known-issues&#34;&gt;Known Issues&lt;/h3&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;Issue&lt;/th&gt;
-&lt;th&gt;Resolution or workaround, if known&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;Storage capacity tracking does not return &lt;code&gt;MaximumVolumeSize&lt;/code&gt; parameter. PowerScale is purely NFS based meaning it has no actual volumes. Therefore &lt;code&gt;MaximumVolumeSize&lt;/code&gt; cannot be implemented if there is no volume creation.&lt;/td&gt;
-&lt;td&gt;CSI PowerScale 2.9.1 is compliant with CSI 1.6 specification since the field &lt;code&gt;MaximumVolumeSize&lt;/code&gt; is optional.&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;If the length of the nodeID exceeds 128 characters, the driver fails to update the CSINode object and installation fails. This is due to a limitation set by CSI spec which doesn&amp;rsquo;t allow nodeID to be greater than 128 characters.&lt;/td&gt;
-&lt;td&gt;The CSI PowerScale driver uses the hostname for building the nodeID which is set in the CSINode resource object, hence we recommend not having very long hostnames in order to avoid this issue. This current limitation of 128 characters is likely to be relaxed in future Kubernetes versions as per this issue in the community: &lt;a href=&#34;https://github.com/kubernetes-sigs/gcp-compute-persistent-disk-csi-driver/issues/581&#34;&gt;https://github.com/kubernetes-sigs/gcp-compute-persistent-disk-csi-driver/issues/581&lt;/a&gt; &lt;br&gt;&lt;br&gt; &lt;strong&gt;Note:&lt;/strong&gt; In kubernetes 1.22 this limit has been relaxed to 192 characters.&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;If some older NFS exports /terminated worker nodes still in NFS export client list, CSI driver tries to add a new worker node it fails (For RWX volume).&lt;/td&gt;
-&lt;td&gt;User need to manually clean the export client list from old entries to make successful addition of new worker nodes.&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Delete namespace that has PVCs and pods created with the driver. The External health monitor sidecar crashes as a result of this operation.&lt;/td&gt;
-&lt;td&gt;Deleting the namespace deletes the PVCs first and then removes the pods in the namespace. This brings a condition where pods exist without their PVCs and causes the external-health-monitor sidecar to crash. This is a known issue and has been reported at &lt;a href=&#34;https://github.com/kubernetes-csi/external-health-monitor/issues/100&#34;&gt;https://github.com/kubernetes-csi/external-health-monitor/issues/100&lt;/a&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;fsGroupPolicy may not work as expected without root privileges for NFS only&lt;br/&gt;&lt;a href=&#34;https://github.com/kubernetes/examples/issues/260&#34;&gt;https://github.com/kubernetes/examples/issues/260&lt;/a&gt;&lt;/td&gt;
-&lt;td&gt;To get the desired behavior set &amp;ldquo;RootClientEnabled&amp;rdquo; = &amp;ldquo;true&amp;rdquo; in the storage class parameter&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Driver logs shows &amp;ldquo;VendorVersion=2.3.0+dirty&amp;rdquo;&lt;/td&gt;
-&lt;td&gt;Update the driver to csi-powerscale 2.4.0&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;PowerScale 9.5.0, Driver installation fails with session based auth, &amp;ldquo;HTTP/1.1 401 Unauthorized&amp;rdquo;&lt;/td&gt;
-&lt;td&gt;Fix is available in PowerScale &amp;gt;= 9.5.0.4&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;If the volume limit is exhausted and there are pending pods and PVCs due to &lt;code&gt;exceed max volume count&lt;/code&gt;, the pending PVCs will be bound to PVs and the pending pods will be scheduled to nodes when the driver pods are restarted.&lt;/td&gt;
-&lt;td&gt;It is advised not to have any pending pods or PVCs once the volume limit per node is exhausted on a CSI Driver. There is an open issue reported with kubenetes at &lt;a href=&#34;https://github.com/kubernetes/kubernetes/issues/95911&#34;&gt;https://github.com/kubernetes/kubernetes/issues/95911&lt;/a&gt; with the same behavior.&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;h3 id=&#34;note&#34;&gt;Note&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;Support for Kubernetes alpha features like Volume Health Monitoring and RWOP (ReadWriteOncePod) access mode will not be available in Openshift environment as Openshift doesn&amp;rsquo;t support enabling of alpha features for Production Grade clusters.&lt;/li&gt;
-&lt;/ul&gt;
-
-      </description>
+      <description>Release Notes - CSI Driver for PowerScale v2.9.1 New Features/Changes #947 - [FEATURE]: Support for Kubernetes 1.28 #1066 - [FEATURE]: Support for Openshift 4.14 #851 - [FEATURE]: Helm Chart Enhancement - Container Images Configurable in values.yaml #905 - [FEATURE]: Add support for CSI Spec 1.6 #996 - [FEATURE]: Dell CSI to Dell CSM Operator Migration Process Fixed Issues #771 - [BUG]: Gopowerscale unit test fails #990 - [BUG]: X_CSI_AUTH_TYPE cannot be set in CSM Operator #999 - [BUG]: Volume health fails because it looks to a wrong path #1014 - [BUG]: Missing error check for os.</description>
     </item>
-    
     <item>
-      <title>V2: PowerStore</title>
+      <title>PowerStore</title>
       <link>https://dell.github.io/csm-docs/v2/csidriver/release/powerstore/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>https://dell.github.io/csm-docs/v2/csidriver/release/powerstore/</guid>
-      <description>
-        
-        
-        &lt;h2 id=&#34;release-notes---csi-powerstore-v291&#34;&gt;Release Notes - CSI PowerStore v2.9.1&lt;/h2&gt;
-&lt;h3 id=&#34;new-featureschanges&#34;&gt;New Features/Changes&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/947&#34;&gt;#947 - [FEATURE]: Support for Kubernetes 1.28&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1066&#34;&gt;#1066 - [FEATURE]: Support for Openshift 4.14&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/851&#34;&gt;#851 - [FEATURE]: Helm Chart Enhancement - Container Images Configurable in values.yaml&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/905&#34;&gt;#905 - [FEATURE]: Add support for CSI Spec 1.6&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/996&#34;&gt;#996 - [FEATURE]: Dell CSI to Dell CSM Operator Migration Process&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1031&#34;&gt;#1031 - [FEATURE]: Update to the latest UBI Micro image for CSM&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;fixed-issues&#34;&gt;Fixed Issues&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1006&#34;&gt;#1006 - [BUG]: Too many login sessions in gopowerstore client causes unexpected session termination in UI&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1014&#34;&gt;#1014 - [BUG]: Missing error check for os.Stat call during volume publish&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1053&#34;&gt;#1053 - [BUG]: make gosec is erroring out - Repos PowerMax,PowerStore,PowerScale (gosec is installed)&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1061&#34;&gt;#1061 - [BUG]: Golint is not installing with go get command&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1108&#34;&gt;#1108 - [BUG]: Volumes failing to mount when customer using NVMeTCP on Powerstore&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1103&#34;&gt;#1103 - [BUG]: CSM Operator doesn&amp;rsquo;t apply fSGroupPolicy value to CSIDriver Object&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;known-issues&#34;&gt;Known Issues&lt;/h3&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;Issue&lt;/th&gt;
-&lt;th&gt;Resolution or workaround, if known&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;Delete namespace that has PVCs and pods created with the driver. The External health monitor sidecar crashes as a result of this operation&lt;/td&gt;
-&lt;td&gt;Deleting the namespace deletes the PVCs first and then removes the pods in the namespace. This brings a condition where pods exist without their PVCs and causes the external-health-monitor sidecar to crash. This is a known issue and has been reported at &lt;a href=&#34;https://github.com/kubernetes-csi/external-health-monitor/issues/100&#34;&gt;https://github.com/kubernetes-csi/external-health-monitor/issues/100&lt;/a&gt; &lt;br&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;fsGroupPolicy may not work as expected without root privileges for NFS only&lt;br/&gt;&lt;a href=&#34;https://github.com/kubernetes/examples/issues/260&#34;&gt;https://github.com/kubernetes/examples/issues/260&lt;/a&gt;&lt;/td&gt;
-&lt;td&gt;To get the desired behavior set &amp;ldquo;allowRoot: &amp;ldquo;true&amp;rdquo; in the storage class parameter&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;If the NVMeFC pod is not getting created and the host looses the ssh connection, causing the driver pods to go to error state&lt;/td&gt;
-&lt;td&gt;remove the nvme_tcp module from the host incase of NVMeFC connection&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;When a node goes down, the block volumes attached to the node cannot be attached to another node&lt;/td&gt;
-&lt;td&gt;This is a known issue and has been reported at &lt;a href=&#34;https://github.com/kubernetes-csi/external-attacher/issues/215&#34;&gt;https://github.com/kubernetes-csi/external-attacher/issues/215&lt;/a&gt;. Workaround: &lt;br /&gt; 1. Force delete the pod running on the node that went down &lt;br /&gt; 2. Delete the volumeattachment to the node that went down. &lt;br /&gt; Now the volume can be attached to the new node.&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;When driver node pods enter CrashLoopBackOff and PVC remains in pending state with one of the following events:&lt;br /&gt; 1. failed to provision volume with StorageClass &lt;code&gt;&amp;lt;storage-class-name&amp;gt;&lt;/code&gt;: error generating accessibility requirements: no available topology found &lt;br /&gt; 2. waiting for a volume to be created, either by external provisioner &amp;ldquo;csi-powerstore.dellemc.com&amp;rdquo; or manually created by system administrator.&lt;/td&gt;
-&lt;td&gt;Check whether all array details present in the secret file are valid and remove any invalid entries if present. &lt;br/&gt;Redeploy the driver.&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;If an ephemeral pod is not being created in OpenShift 4.13 and is failing with the error &amp;ldquo;error when creating pod: the pod uses an inline volume provided by CSIDriver csi-powerstore.dellemc.com, and the namespace has a pod security enforcement level that is lower than privileged.&amp;rdquo;&lt;/td&gt;
-&lt;td&gt;This issue occurs because OpenShift 4.13 introduced the CSI Volume Admission plugin to restrict the use of a CSI driver capable of provisioning CSI ephemeral volumes during pod admission &lt;a href=&#34;https://docs.openshift.com/container-platform/4.13/storage/container_storage_interface/ephemeral-storage-csi-inline.html&#34;&gt;https://docs.openshift.com/container-platform/4.13/storage/container_storage_interface/ephemeral-storage-csi-inline.html&lt;/a&gt; . Therefore, an additional label &amp;ldquo;security.openshift.io/csi-ephemeral-volume-profile&amp;rdquo; needs to be added to the CSIDriver object to support inline ephemeral volumes.&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;In OpenShift 4.13, the root user is not allowed to perform write operations on NFS shares, when root squashing is enabled.&lt;/td&gt;
-&lt;td&gt;The workaround for this issue is to disable root squashing by setting allowRoot: &amp;ldquo;true&amp;rdquo; in the NFS storage class.&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;If the volume limit is exhausted and there are pending pods and PVCs due to &lt;code&gt;exceed max volume count&lt;/code&gt;, the pending PVCs will be bound to PVs, and the pending pods will be scheduled to nodes when the driver pods are restarted.&lt;/td&gt;
-&lt;td&gt;It is advised not to have any pending pods or PVCs once the volume limit per node is exhausted on a CSI Driver. There is an open issue reported with Kubenetes at &lt;a href=&#34;https://github.com/kubernetes/kubernetes/issues/95911&#34;&gt;https://github.com/kubernetes/kubernetes/issues/95911&lt;/a&gt; with the same behavior.&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;If two separate networks are configured for ISCSI and NVMeTCP, the driver may encounter difficulty identifying the second network (e.g., NVMeTCP).&lt;/td&gt;
-&lt;td&gt;This is a known issue, and the workaround involves creating a single network on the array to serve both ISCSI and NVMeTCP purposes.&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;When a PV/PVC is deleted in Kubernetes, it will trigger the deletion of the underlying volume and snapshot on the array as a default behaviour. This can result in a situation where the VolumeSnapshot and VolumeSnapshotContent will still show &amp;ldquo;readyToUse: true&amp;rdquo;, but leaves them unusable because it is no longer backed by underlying storage snapshot. This will not allow the creation of a PVC from snapshot and this could also lead to a data loss situations.&lt;/td&gt;
-&lt;td&gt;This is a known issue, and the workaround is use of &lt;strong&gt;retain&lt;/strong&gt; policy on the various PV, VolumeSnapshot and VolumeSnapshotContent that you wish to use for cloning.&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;h3 id=&#34;note&#34;&gt;Note:&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;Support for Kubernetes alpha features like Volume Health Monitoring and RWOP (ReadWriteOncePod) access mode will not be available in Openshift environment as Openshift doesn&amp;rsquo;t support enabling of alpha features for Production Grade clusters.&lt;/li&gt;
-&lt;/ul&gt;
-
-      </description>
+      <description>Release Notes - CSI PowerStore v2.9.1 New Features/Changes #947 - [FEATURE]: Support for Kubernetes 1.28 #1066 - [FEATURE]: Support for Openshift 4.14 #851 - [FEATURE]: Helm Chart Enhancement - Container Images Configurable in values.yaml #905 - [FEATURE]: Add support for CSI Spec 1.6 #996 - [FEATURE]: Dell CSI to Dell CSM Operator Migration Process #1031 - [FEATURE]: Update to the latest UBI Micro image for CSM Fixed Issues #1006 - [BUG]: Too many login sessions in gopowerstore client causes unexpected session termination in UI #1014 - [BUG]: Missing error check for os.</description>
     </item>
-    
     <item>
-      <title>V2: Unity XT</title>
+      <title>Unity XT</title>
       <link>https://dell.github.io/csm-docs/v2/csidriver/release/unity/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>https://dell.github.io/csm-docs/v2/csidriver/release/unity/</guid>
-      <description>
-        
-        
-        &lt;h2 id=&#34;release-notes---csi-unity-xt-v291&#34;&gt;Release Notes - CSI Unity XT v2.9.1&lt;/h2&gt;
-&lt;h3 id=&#34;new-featureschanges&#34;&gt;New Features/Changes&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/947&#34;&gt;#947 - [FEATURE]: Support for Kubernetes 1.28&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1066&#34;&gt;#1066 - [FEATURE]: Support for Openshift 4.14&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/851&#34;&gt;#851 - [FEATURE]: Helm Chart Enhancement - Container Images Configurable in values.yaml&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/905&#34;&gt;#905 - [FEATURE]: Add support for CSI Spec 1.6&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/996&#34;&gt;#996 - [FEATURE]: Dell CSI to Dell CSM Operator Migration Process&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;fixed-issues&#34;&gt;Fixed Issues&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1014&#34;&gt;#1014 - [BUG]: Missing error check for os.Stat call during volume publish&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1110&#34;&gt;#1110 - [BUG]: Multi Controller defect - sidecars timeout&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1103&#34;&gt;#1103 - [BUG]: CSM Operator doesn&amp;rsquo;t apply fSGroupPolicy value to CSIDriver Object&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;known-issues&#34;&gt;Known Issues&lt;/h3&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;Issue&lt;/th&gt;
-&lt;th&gt;Workaround&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;Topology-related node labels are not removed automatically.&lt;/td&gt;
-&lt;td&gt;Currently, when the driver is uninstalled, topology-related node labels are not getting removed automatically. There is an open issue in the Kubernetes to fix this. Until the fix is released, remove the labels manually after the driver un-installation using command &lt;strong&gt;kubectl label node &amp;lt;node_name&amp;gt; &lt;label1&gt;- &lt;label2&gt;- &amp;hellip;&lt;/strong&gt; Example: &lt;strong&gt;kubectl label node &lt;hostname&gt; csi-unity.dellemc.com/array123-iscsi-&lt;/strong&gt; Note: there must be - at the end of each label to remove it.&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;NFS Clone - Resize of the snapshot is not supported by Unity XT Platform, however, the user should never try to resize the cloned NFS volume.&lt;/td&gt;
-&lt;td&gt;Currently, when the driver takes a clone of NFS volume, it succeeds but if the user tries to resize the NFS volumesnapshot, the driver will throw an error.&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Delete namespace that has PVCs and pods created with the driver. The External health monitor sidecar crashes as a result of this operation.&lt;/td&gt;
-&lt;td&gt;Deleting the namespace deletes the PVCs first and then removes the pods in the namespace. This brings a condition where pods exist without their PVCs and causes the external-health-monitor sidecar to crash. This is a known issue and has been reported at &lt;a href=&#34;https://github.com/kubernetes-csi/external-health-monitor/issues/100&#34;&gt;https://github.com/kubernetes-csi/external-health-monitor/issues/100&lt;/a&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;When a node goes down, the block volumes attached to the node cannot be attached to another node&lt;/td&gt;
-&lt;td&gt;This is a known issue and has been reported at &lt;a href=&#34;https://github.com/kubernetes-csi/external-attacher/issues/215&#34;&gt;https://github.com/kubernetes-csi/external-attacher/issues/215&lt;/a&gt;. Workaround: &lt;br /&gt; 1. Force delete the pod running on the node that went down &lt;br /&gt; 2. Delete the VolumeAttachment to the node that went down. &lt;br /&gt; Now the volume can be attached to the new node.&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;A CSI ephemeral pod may not get created in OpenShift 4.13 and fail with the error &lt;code&gt;&amp;quot;error when creating pod: the pod uses an inline volume provided by CSIDriver csi-unity.dellemc.com, and the namespace has a pod security enforcement level that is lower than privileged.&amp;quot;&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;This issue occurs because OpenShift 4.13 introduced the CSI Volume Admission plugin to restrict the use of a CSI driver capable of provisioning CSI ephemeral volumes during pod admission. Therefore, an additional label &lt;code&gt;security.openshift.io/csi-ephemeral-volume-profile&lt;/code&gt; in &lt;a href=&#34;https://github.com/dell/helm-charts/blob/csi-unity-2.8.0/charts/csi-unity/templates/csidriver.yaml&#34;&gt;csidriver.yaml&lt;/a&gt; file with the required security profile value should be provided. Follow &lt;a href=&#34;https://docs.openshift.com/container-platform/4.13/storage/container_storage_interface/ephemeral-storage-csi-inline.html&#34;&gt;OpenShift 4.13 documentation for CSI Ephemeral Volumes&lt;/a&gt; for more information.&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;If the volume limit is exhausted and there are pending pods and PVCs due to &lt;code&gt;exceed max volume count&lt;/code&gt;, the pending PVCs will be bound to PVs and the pending pods will be scheduled to nodes when the driver pods are restarted.&lt;/td&gt;
-&lt;td&gt;It is advised not to have any pending pods or PVCs once the volume limit per node is exhausted on a CSI Driver. There is an open issue reported with Kubernetes at &lt;a href=&#34;https://github.com/kubernetes/kubernetes/issues/95911&#34;&gt;https://github.com/kubernetes/kubernetes/issues/95911&lt;/a&gt; with the same behavior.&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Controller publish is taking too long to complete/ Health monitoring is causing Unity array to panic by opening multiple sessions&lt;/td&gt;
-&lt;td&gt;There are error messages in the log &lt;code&gt;context deadline exceeded&lt;/code&gt; when health monitoring is enabled&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;h3 id=&#34;note&#34;&gt;Note:&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;Support for Kubernetes alpha features like Volume Health Monitoring and RWOP (ReadWriteOncePod) access mode will not be available in the Openshift environment as Openshift doesn&amp;rsquo;t support enabling of alpha features for Production Grade clusters.&lt;/li&gt;
-&lt;/ul&gt;
-
-      </description>
+      <description>Release Notes - CSI Unity XT v2.9.1 New Features/Changes #947 - [FEATURE]: Support for Kubernetes 1.28 #1066 - [FEATURE]: Support for Openshift 4.14 #851 - [FEATURE]: Helm Chart Enhancement - Container Images Configurable in values.yaml #905 - [FEATURE]: Add support for CSI Spec 1.6 #996 - [FEATURE]: Dell CSI to Dell CSM Operator Migration Process Fixed Issues #1014 - [BUG]: Missing error check for os.Stat call during volume publish #1110 - [BUG]: Multi Controller defect - sidecars timeout #1103 - [BUG]: CSM Operator doesn&amp;rsquo;t apply fSGroupPolicy value to CSIDriver Object Known Issues Issue Workaround Topology-related node labels are not removed automatically.</description>
     </item>
-    
   </channel>
 </rss>

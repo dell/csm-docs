@@ -1,91 +1,11 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Dell Technologies – Interactive Tutorials</title>
+    <title>Interactive Tutorials on </title>
     <link>https://dell.github.io/csm-docs/v1/interactive-tutorials/</link>
-    <description>Recent content in Interactive Tutorials on Dell Technologies</description>
+    <description>Recent content in Interactive Tutorials on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    
-	  <atom:link href="https://dell.github.io/csm-docs/v1/interactive-tutorials/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-      
-        
-      
-    
-    
-    <item>
-      <title>V1: Getting Started with Dell Container Storage Modules (CSM)</title>
-      <link>https://dell.github.io/csm-docs/v1/interactive-tutorials/csm-quickstart/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://dell.github.io/csm-docs/v1/interactive-tutorials/csm-quickstart/</guid>
-      <description>
-        
-        
-        &lt;p&gt;Learn the basics of Dell Container Storage Modules by using:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;CSI for PowerFlex&lt;/li&gt;
-&lt;li&gt;CSM Authentication&lt;/li&gt;
-&lt;li&gt;CSM Resiliency&lt;/li&gt;
-&lt;li&gt;CSM Observability&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div style=&#34;position: relative;
-  overflow: hidden;
-  width: 100%;
-  padding-top: 56.25%;&#34;&gt;
-  /* 16:9 Aspect Ratio (divide 9 by 16 = 0.5625) */
-&lt;iframe sandbox=&#34;allow-forms allow-modals allow-popups allow-same-origin allow-scripts&#34; src=&#34;https://play.instruqt.com/embed/dell/tracks/csm-quickstart?token=em_hdpeUhrpwfrkPUoo&#34; style=&#34;position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  width: 100%;
-  height: 100%;&#34;&gt;&lt;/iframe&gt;
-&lt;/div&gt;
-&lt;blockquote&gt;
-&lt;p&gt;NOTE: It takes about 15 minutes for the lab to be ready to use.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-      </description>
-    </item>
-    
-    <item>
-      <title>V1: How to install the Dell Container Storage Modules (CSM) Operator</title>
-      <link>https://dell.github.io/csm-docs/v1/interactive-tutorials/csm-operator/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://dell.github.io/csm-docs/v1/interactive-tutorials/csm-operator/</guid>
-      <description>
-        
-        
-        &lt;p&gt;This track demonstrates how to:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Download and install the CSM Operator.&lt;/li&gt;
-&lt;li&gt;Enable CSI for PowerFlex using the CSM Operator.&lt;/li&gt;
-&lt;li&gt;Use of CSI for Dell PowerFlex.&lt;/li&gt;
-&lt;li&gt;Enable the Resiliency module using the CSM Operator.&lt;/li&gt;
-&lt;li&gt;Use Resiliency once it is enabled.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div style=&#34;position: relative;
-  overflow: hidden;
-  width: 100%;
-  padding-top: 56.25%;&#34;&gt;
-  /* 16:9 Aspect Ratio (divide 9 by 16 = 0.5625) */
-&lt;iframe sandbox=&#34;allow-forms allow-modals allow-popups allow-same-origin allow-scripts&#34; src=&#34;https://play.instruqt.com/embed/dell/tracks/csm-operator-install?token=em_Ixs1AkmgJF6u8TMh&#34; style=&#34;position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  width: 100%;
-  height: 100%;&#34;&gt;&lt;/iframe&gt;
-&lt;/div&gt;
-&lt;blockquote&gt;
-&lt;p&gt;NOTE: It takes about 15 minutes for the lab to be ready to use.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-      </description>
-    </item>
-    
+    <atom:link href="https://dell.github.io/csm-docs/v1/interactive-tutorials/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>

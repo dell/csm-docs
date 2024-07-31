@@ -1,917 +1,100 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Dell Technologies – Replication</title>
+    <title>Replication on </title>
     <link>https://dell.github.io/csm-docs/v2/replication/</link>
-    <description>Recent content in Replication on Dell Technologies</description>
+    <description>Recent content in Replication on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    
-	  <atom:link href="https://dell.github.io/csm-docs/v2/replication/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-      
-        
-      
-    
-    
+    <atom:link href="https://dell.github.io/csm-docs/v2/replication/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>V2: Deployment</title>
-      <link>https://dell.github.io/csm-docs/v2/replication/deployment/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://dell.github.io/csm-docs/v2/replication/deployment/</guid>
-      <description>
-        
-        
-        
-      </description>
-    </item>
-    
-    <item>
-      <title>V2: Architecture</title>
-      <link>https://dell.github.io/csm-docs/v2/replication/architecture/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://dell.github.io/csm-docs/v2/replication/architecture/</guid>
-      <description>
-        
-        
-        &lt;h2 id=&#34;replication-design-and-architecture&#34;&gt;Replication design and architecture&lt;/h2&gt;
-&lt;p&gt;&lt;img src=&#34;../arch.png&#34; alt=&#34;arch&#34;&gt;&lt;/p&gt;
-&lt;p&gt;Container Storage Modules (CSM) for Replication project consists of the following components:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;DellCSIReplicationGroup&lt;/code&gt;, a Kubernetes &lt;a href=&#34;https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/&#34;&gt;Custom Resource&lt;/a&gt;.&lt;/li&gt;
-&lt;li&gt;CSM Replication controller which replicates the resources across (or within) Kubernetes clusters.&lt;/li&gt;
-&lt;li&gt;CSM Replication sidecar container which is part of each CSI driver controller pod.&lt;/li&gt;
-&lt;li&gt;repctl - Multi cluster Kubernetes client for managing replication related objects.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;dellcsireplicationgroup&#34;&gt;DellCSIReplicationGroup&lt;/h3&gt;
-&lt;p&gt;&lt;code&gt;DellCSIReplicationGroup&lt;/code&gt; (RG) is a cluster scoped Custom Resource that represents a protection group on the backend storage array.
-It is used to group volumes with the same replication related properties together.
-&lt;code&gt;DellCSIReplicationGroup&lt;/code&gt;&amp;rsquo;s spec contains an &lt;em&gt;action&lt;/em&gt; field which can be used to perform replication related operations on the backing protection groups on the storage arrays.
-This includes operations like &lt;em&gt;Failover&lt;/em&gt;, &lt;em&gt;Reprotect&lt;/em&gt;, &lt;em&gt;Suspend&lt;/em&gt;, &lt;em&gt;Synchronize&lt;/em&gt;, etc.
-Any replication related operation is always carried out on all the volumes present in the group.&lt;/p&gt;
-&lt;h4 id=&#34;specification&#34;&gt;Specification&lt;/h4&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;kind&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;DellCSIReplicationGroup&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;apiVersion&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;replication.storage.dell.com/v1&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;metadata&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;rg-e6be24c0-145d-4b62-8674-639282ebdd13&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;spec&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;driverName&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;driver.dellemc.com&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Name of the CSI driver (same as provisioner name in StorageClass)&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;action&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Name of the replication action to be performed on the protection group&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;protectionGroupAttributes&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;localAttributeKey&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;value&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;protectionGroupId&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;protection-group-id&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Identifier of the backing protection group on the Storage Array&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;remoteClusterId&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;tgtClusterID&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# A unique identifier for the remote Kubernetes Cluster&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;remoteProtectionGroupAttributes&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;remoteAttributeKey&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;value&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;remoteProtectionGroupId&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;csi-rep-sg-test-5-ASYNC&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Identifier for the protection group on the remote Storage Array&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;status&#34;&gt;Status&lt;/h4&gt;
-&lt;p&gt;The status sub resource of &lt;code&gt;DellCSIReplicationGroup&lt;/code&gt; contains information about the state of replication &amp;amp; any actions which
-have been performed on the object.&lt;/p&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;Field&lt;/th&gt;
-&lt;th&gt;Description&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;state&lt;/td&gt;
-&lt;td&gt;State of the Custom Resource&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;replicationLinkState&lt;/td&gt;
-&lt;td&gt;State of the replication on the storage arrays&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;lastAction&lt;/td&gt;
-&lt;td&gt;Result of the last performed action&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;conditions&lt;/td&gt;
-&lt;td&gt;List of recent conditions the CR instance has gone through&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;status&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;conditions&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;- &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;condition&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Action REPROTECT_REMOTE succeeded&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;time&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;2021-08-11T12:22:05Z&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;- &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;condition&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Replication Link State:IsSource changed from (true) to (false)&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;time&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;2021-08-11T12:18:50Z&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;- &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;condition&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Action FAILOVER_REMOTE succeeded&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;time&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;2021-08-11T12:18:50Z&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;lastAction&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;condition&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Action REPROTECT_REMOTE succeeded&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;time&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;2021-08-11T12:22:05Z&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;replicationLinkState&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;isSource&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;false&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;lastSuccessfulUpdate&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;2021-08-11T17:18:12Z&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;state&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Synchronized&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;state&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Ready&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Here is a diagram representing how the &lt;em&gt;state&lt;/em&gt; of the CustomResource changes based on actions:
-&lt;img src=&#34;../state.png&#34; alt=&#34;state&#34;&gt;&lt;/p&gt;
-&lt;h3 id=&#34;csm-replication-sidecar&#34;&gt;CSM Replication Sidecar&lt;/h3&gt;
-&lt;p&gt;&lt;img src=&#34;../sidecar.png&#34; alt=&#34;sidecar&#34;&gt;&lt;/p&gt;
-&lt;p&gt;CSM Replication sidecar is deployed as sidecar container in &lt;em&gt;each&lt;/em&gt; CSI driver&amp;rsquo;s controller pod. This container is similar to Kubernetes CSI Sidecar
-&lt;a href=&#34;https://kubernetes-csi.github.io/docs/sidecar-containers.html&#34;&gt;containers&lt;/a&gt; and runs a Controller Manager
-which manages the following controllers:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;PersistentVolume(PV) Controller&lt;/li&gt;
-&lt;li&gt;PersistentVolumeClaim(PVC) Controller&lt;/li&gt;
-&lt;li&gt;DellCSIReplicationGroup(RG) Controller&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;The PV &amp;amp; PVC controllers watch for PV/PVC creation events and use &lt;code&gt;dell-csi-extensions&lt;/code&gt; APIs to communicate with the
-CSI Driver controller plugin to discover/create replication enabled volumes and protection groups on the backend storage array.
-The PersistentVolume controller then uses these details to create DellCSIReplicationGroup objects in the cluster.
-These controllers are also responsible for associating the PV &amp;amp; PVC objects with DellCSIReplicationGroup objects. This association is
-established by applying annotations &amp;amp; labels on the PV &amp;amp; PVC objects.&lt;/p&gt;
-&lt;p&gt;The RG controller manages DellCSIReplicationGroup instances and processes any change requests.
-It is primarily responsible for the following:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Perform &lt;em&gt;actions&lt;/em&gt; on the protection groups&lt;/li&gt;
-&lt;li&gt;Monitor status of replication&lt;/li&gt;
-&lt;li&gt;Updates to the status sub resource&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;csm-replication-controller&#34;&gt;CSM Replication Controller&lt;/h3&gt;
-&lt;p&gt;&lt;img src=&#34;../common.png&#34; alt=&#34;common&#34;&gt;&lt;/p&gt;
-&lt;p&gt;CSM Replication Controller is a Kubernetes application deployed independently of CSI drivers and is responsible for
-the communication between Kubernetes clusters. &lt;em&gt;One&lt;/em&gt; CSM Replication Controller manages replication operations for &lt;em&gt;all&lt;/em&gt; CSI driver installations on the Kubernetes cluster.&lt;/p&gt;
-&lt;p&gt;The details about the clusters it needs to connect to are provided in the form of a ConfigMap with references to secrets
-containing the details(KubeConfig/ServiceAccount tokens) required to connect to the respective clusters.&lt;/p&gt;
-&lt;p&gt;It consists of Controller Manager which manages the following controllers:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;PersistentVolume(PV) Controller&lt;/li&gt;
-&lt;li&gt;PersistentVolumeClaim(PVC) Controller&lt;/li&gt;
-&lt;li&gt;DellCSIReplicationGroup(RG) Controller&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;The PV controller is responsible for creating PV objects (representing the replicated volumes on the backend storage array) in the remote
-Kubernetes cluster.
-This controller also enables deletion of the remote PV object, if enabled through the storage class&amp;rsquo; &lt;code&gt;RemotePVRetentionPolicy&lt;/code&gt;, by propagating the deletion request across clusters.&lt;/p&gt;
-&lt;p&gt;Similarly, the RG controller is responsible for creating RG objects in the remote Kubernetes cluster. These RG objects represent the
-remote protection groups on the backend storage array. This controller can also propagate the deletion request of RG objects across clusters, if enabled through the storage class&amp;rsquo; &lt;code&gt;RemoteRGRetentionPolicy&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;Both the PV &amp;amp; RG objects in the remote cluster have extra metadata associated with them in form of annotations &amp;amp; labels. This metadata includes
-information about the respective objects in the source cluster.&lt;/p&gt;
-&lt;p&gt;The PVC objects are never replicated across the clusters. Instead, the remote PV objects have annotations related to the
-source PVC objects. This information can be easily used to create the PVCs whenever required using &lt;code&gt;repctl&lt;/code&gt; or &lt;code&gt;kubectl&lt;/code&gt;.&lt;/p&gt;
-&lt;h3 id=&#34;supported-cluster-topologies&#34;&gt;Supported Cluster Topologies&lt;/h3&gt;
-&lt;p&gt;Click &lt;a href=&#34;../cluster-topologies&#34;&gt;here&lt;/a&gt; for details for the various types of supported cluster topologies&lt;/p&gt;
-
-      </description>
-    </item>
-    
-    <item>
-      <title>V2: Cluster Topologies</title>
+      <title>Cluster Topologies</title>
       <link>https://dell.github.io/csm-docs/v2/replication/cluster-topologies/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>https://dell.github.io/csm-docs/v2/replication/cluster-topologies/</guid>
-      <description>
-        
-        
-        &lt;h2 id=&#34;replication-cluster-topologies&#34;&gt;Replication Cluster Topologies&lt;/h2&gt;
-&lt;p&gt;Container Storage Modules (CSM) for Replication project supports the replication of volumes within a single Kubernetes cluster or between two different
-Kubernetes clusters. The replication controller can support multiple clusters at once, but a single volume can be replicated to a maximum of two clusters.&lt;/p&gt;
-&lt;p&gt;Each cluster should be assigned the unique identifier &lt;code&gt;clusterId&lt;/code&gt;. The rules for naming are as follows:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;must be 63 characters or fewer (cannot be empty)&lt;/li&gt;
-&lt;li&gt;must begin and end with an alphanumeric character ([a-z, 0-9, A-Z])&lt;/li&gt;
-&lt;li&gt;could contain dashes (-), underscores (_), dots (.), and alphanumerics between&lt;/li&gt;
-&lt;li&gt;must be unique across clusters&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;single-cluster-replication&#34;&gt;Single Cluster Replication&lt;/h3&gt;
-&lt;h4 id=&#34;cluster-configuration&#34;&gt;Cluster Configuration&lt;/h4&gt;
-&lt;p&gt;When configuring replication within a single cluster, you need to create a ConfigMap with at least the &lt;code&gt;clusterId&lt;/code&gt;
-field configured to point to the current cluster:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;apiVersion&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;v1&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;data&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;config.yaml&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;    clusterId: cluster-A
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;    targets: []&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;kind&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;ConfigMap&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;metadata&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;dell-replication-controller-config&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;namespace&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;dell-replication-controller&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Note that the &lt;code&gt;targets&lt;/code&gt; parameter is left empty since we don&amp;rsquo;t require any target clusters to work within a single cluster.
-This also means that you don&amp;rsquo;t need to create any Secrets that contain connection information to such clusters, since in this use case, we
-are limited to a single cluster.&lt;/p&gt;
-&lt;p&gt;You can find more info about configs and secrets for cluster communication in &lt;a href=&#34;../deployment/configmap-secrets/&#34;&gt;configmaps-secrets&lt;/a&gt;.&lt;/p&gt;
-&lt;h4 id=&#34;storage-class-configuration&#34;&gt;Storage Class Configuration&lt;/h4&gt;
-&lt;p&gt;To create volumes that would be replicated within a single cluster, you need to create a special StorageClass.
-This StorageClass should contain the usual replication parameter &lt;code&gt;replication.storage.dell.com/remoteClusterID&lt;/code&gt;, and it should
-be set to &lt;code&gt;self&lt;/code&gt; to indicate that we want to replicate the volume inside the current cluster.&lt;/p&gt;
-&lt;p&gt;Also, you would need to create another storage class in the same cluster that would serve as a &lt;code&gt;target&lt;/code&gt; storage class. This means that all replicated volumes would be derived from it. Its &lt;code&gt;replication.storage.dell.com/remoteClusterID&lt;/code&gt; parameter should be also set to &lt;code&gt;self&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;You can find out more about replication StorageClasses and replication specific parameters in &lt;a href=&#34;../deployment/storageclasses&#34;&gt;storageclasses&lt;/a&gt;.&lt;/p&gt;
-&lt;h4 id=&#34;replicated-resources&#34;&gt;Replicated Resources&lt;/h4&gt;
-&lt;p&gt;When creating PersistentVolumeClaims using StorageClass for a single cluster replication, replicated resources (PersistentVolumes,
-ReplicationGroups) would be created in the same cluster with the &lt;code&gt;replicated-&lt;/code&gt; prefix added to them. For example:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl get pv 
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;NAME                           CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS      STORAGECLASS                 AGE
-csivol-06d51bfcc5              3Gi        RWO            Retain           Bound       powerstore-replication       23s
-replicated-csivol-06d51bfcc5   3Gi        RWO            Retain           Available   powerstore-replication-tgt   23s
-&lt;/code&gt;&lt;/pre&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl get rg
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;NAME                                                 AGE   STATE   LINK STATE     LAST LINKSTATE UPDATE
-replicated-rg-240721b0-12fb-4151-8dd8-94794ae2493e   34s   Ready   SYNCHRONIZED   2021-08-03T11:23:18Z
-rg-240721b0-12fb-4151-8dd8-94794ae2493e              34s   Ready   SYNCHRONIZED   2021-08-03T11:22:18Z
-&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;multiple-cluster-replication&#34;&gt;Multiple Cluster Replication&lt;/h3&gt;
-&lt;h4 id=&#34;cluster-configuration-1&#34;&gt;Cluster Configuration&lt;/h4&gt;
-&lt;p&gt;Similar to a single cluster scenario, you need to create ConfigMap, but this time you need to provide at least one target
-cluster. You can provide as many as you like, but be mindful that a single volume can be replicated to only one of them.&lt;/p&gt;
-&lt;p&gt;For example:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;apiVersion&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;v1&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;data&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;config.yaml&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;    clusterId: cluster-A
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;    targets: 
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;      - clusterId: cluster-B
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;        address: 192.168.111.21
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;        secretRef: secretClusterB&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;kind&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;ConfigMap&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;metadata&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;dell-replication-controller-config&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;namespace&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;dell-replication-controller&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Note that target cluster information contains a field called &lt;code&gt;secretRef&lt;/code&gt;. This field points to a secret available in the current cluster that contains connection information of &lt;code&gt;cluster-B&lt;/code&gt; in the form of a kubeconfig file.&lt;/p&gt;
-&lt;p&gt;You can find more information about how to create such secrets in &lt;a href=&#34;../deployment/configmap-secrets/#communication-between-clusters&#34;&gt;configmaps-secrets&lt;/a&gt;.&lt;/p&gt;
-&lt;h4 id=&#34;storage-class-configuration-1&#34;&gt;Storage Class Configuration&lt;/h4&gt;
-&lt;p&gt;To create replicated volumes in the multi-cluster configuration you still need to have a special storage class.
-Replication parameter &lt;code&gt;replication.storage.dell.com/remoteClusterID&lt;/code&gt; should be set to the cluster-id of whatever cluster you
-want to replicate your volumes.&lt;/p&gt;
-&lt;p&gt;For multi-cluster replication, we can choose one of the target cluster ids we specified in
-ConfigMap. In our example replication parameter, the target cluster id should be equal to &lt;code&gt;cluster-B&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;You can find more information about other replication parameters available in storage classes &lt;a href=&#34;../deployment/storageclasses/#common-parameters&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
-&lt;h4 id=&#34;replicated-resources-1&#34;&gt;Replicated Resources&lt;/h4&gt;
-&lt;p&gt;When creating PersistentVolumeClaims using StorageClass for a multi-cluster replication, replicated resources would be
-created in both &lt;code&gt;source&lt;/code&gt; and &lt;code&gt;target&lt;/code&gt; clusters under the same names. For example:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;[CLUSTER-A]&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl get pv
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;NAME                           CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS      STORAGECLASS                 AGE
-csivol-06d51bfcc5              3Gi        RWO            Retain           Bound       powerstore-replication       23s
-&lt;/code&gt;&lt;/pre&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl get rg
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;NAME                                      AGE   STATE   LINK STATE     LAST LINKSTATE UPDATE
-rg-240721b0-12fb-4151-8dd8-94794ae2493e   34s   Ready   SYNCHRONIZED   2021-08-03T11:22:18Z
-&lt;/code&gt;&lt;/pre&gt;&lt;blockquote&gt;
-&lt;p&gt;[CLUSTER-B]&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl get pv
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;NAME                           CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS          STORAGECLASS                 AGE
-csivol-06d51bfcc5              3Gi        RWO            Retain           Available       powerstore-replication       18s
-&lt;/code&gt;&lt;/pre&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl get rg
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;NAME                                      AGE   STATE   LINK STATE     LAST LINKSTATE UPDATE
-rg-240721b0-12fb-4151-8dd8-94794ae2493e   30s   Ready   SYNCHRONIZED   2021-08-03T11:22:18Z
-&lt;/code&gt;&lt;/pre&gt;
-      </description>
+      <description>Replication Cluster Topologies Container Storage Modules (CSM) for Replication project supports the replication of volumes within a single Kubernetes cluster or between two different Kubernetes clusters. The replication controller can support multiple clusters at once, but a single volume can be replicated to a maximum of two clusters.
+Each cluster should be assigned the unique identifier clusterId. The rules for naming are as follows:
+must be 63 characters or fewer (cannot be empty) must begin and end with an alphanumeric character ([a-z, 0-9, A-Z]) could contain dashes (-), underscores (_), dots (.</description>
     </item>
-    
     <item>
-      <title>V2: Disaster Recovery</title>
+      <title>Disaster Recovery</title>
       <link>https://dell.github.io/csm-docs/v2/replication/disaster-recovery/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>https://dell.github.io/csm-docs/v2/replication/disaster-recovery/</guid>
-      <description>
-        
-        
-        &lt;h2 id=&#34;disaster-recovery-workflows&#34;&gt;Disaster Recovery Workflows&lt;/h2&gt;
-&lt;p&gt;Once the &lt;code&gt;DellCSIReplicationGroup&lt;/code&gt; &amp;amp; &lt;code&gt;PersistentVolume&lt;/code&gt; objects have been replicated across clusters (or within the same cluster), users can exercise the general Disaster Recovery workflows.&lt;/p&gt;
-&lt;h3 id=&#34;planned-migration-to-the-target-clusterarray&#34;&gt;Planned Migration to the target cluster/array&lt;/h3&gt;
-&lt;p&gt;This scenario is the typical choice when you want to try your disaster recovery plan or you need to switch activities from one site to another:&lt;/p&gt;
-&lt;p&gt;a. Execute &amp;ldquo;failover&amp;rdquo; action on selected ReplicationGroup using the cluster name&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt; ./repctl --rg rg-id failover --target target-cluster-name
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;b. Execute &amp;ldquo;reprotect&amp;rdquo; action on selected ReplicationGroup which will resume the replication from new &amp;ldquo;source&amp;rdquo;&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt; ./repctl --rg rg-id reprotect --at new-source-cluster-name
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;../state_changes1.png&#34; alt=&#34;state_changes1&#34;&gt;&lt;/p&gt;
-&lt;h3 id=&#34;unplanned-migration-to-the-target-clusterarray&#34;&gt;Unplanned Migration to the target cluster/array&lt;/h3&gt;
-&lt;p&gt;This scenario is the typical choice when a site goes down:&lt;/p&gt;
-&lt;p&gt;a. Execute &amp;ldquo;failover&amp;rdquo; action on selected ReplicationGroup using the cluster name&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt; ./repctl --rg rg-id failover --target target-cluster-name --unplanned 
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;b. Execute &amp;ldquo;swap&amp;rdquo; action on selected ReplicationGroup which would swap personalities of R1 and R2 (only applicable for PowerMax driver)&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt; ./repctl --rg rg-id swap --at target-cluster-name
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;
-&lt;p&gt;&lt;em&gt;&lt;strong&gt;Note&lt;/strong&gt;&lt;/em&gt;: Unplanned migration usually happens when the original &amp;ldquo;source&amp;rdquo; cluster is unavailable. The following action makes sense when the cluster is back.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;c. Execute &amp;ldquo;reprotect&amp;rdquo; action on selected ReplicationGroup which will resume the replication.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt; ./repctl --rg rg-id reprotect --at new-source-cluster-name
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;../state_changes2.png&#34; alt=&#34;state_changes2&#34;&gt;&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;em&gt;&lt;strong&gt;NOTE&lt;/strong&gt;&lt;/em&gt;: When users do Failover and Failback, the tests pods on the source cluster may go &amp;ldquo;CrashLoopOff&amp;rdquo; state since it will try to remount the same volume which is already mounted. To get around this problem, bring down the number of replicas to 0 and then after that is done, bring it up to 1.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-      </description>
+      <description>Disaster Recovery Workflows Once the DellCSIReplicationGroup &amp;amp; PersistentVolume objects have been replicated across clusters (or within the same cluster), users can exercise the general Disaster Recovery workflows.
+Planned Migration to the target cluster/array This scenario is the typical choice when you want to try your disaster recovery plan or you need to switch activities from one site to another:
+a. Execute &amp;ldquo;failover&amp;rdquo; action on selected ReplicationGroup using the cluster name</description>
     </item>
-    
     <item>
-      <title>V2: High Availability</title>
+      <title>High Availability</title>
       <link>https://dell.github.io/csm-docs/v2/replication/high-availability/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>https://dell.github.io/csm-docs/v2/replication/high-availability/</guid>
-      <description>
-        
-        
-        &lt;p&gt;One of the goals of high availability is to eliminate single points of failure in a storage system. In Kubernetes, this can mean that a single PV represents multiple read/write enabled volumes on different arrays, located at reasonable distances with both the volumes in sync with each other. If one of the volumes goes down, there will still be another volume available for read and write. This kind of high availability can be achieved by using SRDF Metro replication mode, supported only by PowerMax arrays.&lt;/p&gt;
-&lt;h2 id=&#34;srdf-metro-architecture&#34;&gt;SRDF Metro Architecture&lt;/h2&gt;
-&lt;p&gt;&lt;img src=&#34;../metro.png&#34; alt=&#34;metro architecture diagram&#34;&gt;&lt;/p&gt;
-&lt;p&gt;In SRDF metro configurations:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;R2 devices are Read/Write accessible to application hosts.&lt;/li&gt;
-&lt;li&gt;Application host can write to both the R1 and R2 sides of the device pair.&lt;/li&gt;
-&lt;li&gt;R2 devices assume the same external device identity(geometry, device WWN) as the R1 devices.
-All the above characteristic makes SRDF metro best suited for the scenarios in which high availability of data is desired.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;With respect to Kubernetes, the SRDF metro mode works in single cluster scenarios. In the metro, both the arrays—&lt;a href=&#34;../deployment/powermax/#on-storage-array&#34;&gt;arrays with SRDF metro link setup between them&lt;/a&gt;—involved in the replication are managed by the same &lt;code&gt;csi-powermax&lt;/code&gt; driver. The replication is triggered by creating a volume using a &lt;code&gt;StorageClass&lt;/code&gt; with metro-related parameters.
-The driver on receiving the metro-related parameters in the &lt;code&gt;CreateVolume&lt;/code&gt; call creates a metro replicated volume and the details about both the volumes are returned in the volume context to the Kubernetes cluster. So, the &lt;code&gt;PV&lt;/code&gt; created in the process represents a pair of metro replicated volumes. When a &lt;code&gt;PV&lt;/code&gt;, representing a pair of metro replicated volumes, is claimed by a pod, the host treats each of the volumes represented by the single &lt;code&gt;PV&lt;/code&gt; as a separate data path. The switching between the paths, to read and write the data, is managed by the multipath driver. The switching happens automatically, as configured by the user—in round-robin fashion or otherwise—or it can happen if one of the paths goes down. For details on Linux multipath driver setup, &lt;a href=&#34;../../csidriver/installation/helm/powermax/#linux-multipathing-requirements&#34;&gt;click here&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;The creation of volumes in SRDF metro mode doesn&amp;rsquo;t involve the replication sidecar or the common controller, nor does it cause the creation of any replication related custom resources; it just needs a &lt;code&gt;csi-powermax&lt;/code&gt; driver that implements the &lt;code&gt;CreateVolume&lt;/code&gt; gRPC endpoint with SRDF metro capability for it to work.&lt;/p&gt;
-&lt;h3 id=&#34;usage&#34;&gt;Usage&lt;/h3&gt;
-&lt;p&gt;The metro replicated volumes are created just like the normal volumes, but the &lt;code&gt;StorageClass&lt;/code&gt; contains some
-extra parameters related to metro replication. A &lt;code&gt;StorageClass&lt;/code&gt; to create metro replicated volumes may look as follows:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;kind&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;StorageClass&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;apiVersion&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;storage.k8s.io/v1&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;metadata&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;storage-class-metro&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;provisioner&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;driver.dellemc.com&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;parameters&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;SRP&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;SRP_1&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;SYMID&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;000000000001&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;ServiceLevel&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;Bronze&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;replication.storage.dell.com/IsReplicationEnabled&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;true&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;replication.storage.dell.com/RdfGroup&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;7&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Optional for Auto SRDF group &lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;replication.storage.dell.com/RdfMode&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;METRO&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;replication.storage.dell.com/RemoteRDFGroup&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;7&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Optional for Auto SRDF group&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;replication.storage.dell.com/RemoteSYMID&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;000000000002&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;replication.storage.dell.com/RemoteServiceLevel&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;Bronze&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;reclaimPolicy&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Delete&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;volumeBindingMode&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Immediate&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;
-&lt;p&gt;&lt;em&gt;&lt;strong&gt;NOTE&lt;/strong&gt;&lt;/em&gt;: Different namespaces can share the same RDF group for creating volumes.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h3 id=&#34;snapshots-on-srdf-metro-volumes&#34;&gt;Snapshots on SRDF Metro volumes&lt;/h3&gt;
-&lt;p&gt;A snapshot can be created on either of the volumes in the metro volume pair depending on the parameters in the &lt;code&gt;VolumeSnapshotClass&lt;/code&gt;.
-The snapshots are by default created on the volumes on the R1 side of the SRDF metro pair, but if a Symmetrix ID is specified in the &lt;code&gt;VolumeSnapshotClass&lt;/code&gt; parameters, the driver creates the snapshot on the specified array; the specified array can either be the R1 or the R2 array. A &lt;code&gt;VolumeSnapshotClass&lt;/code&gt; with symmetrix ID specified in parameters may look as follows:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;apiVersion&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;snapshot.storage.k8s.io/v1&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;kind&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;VolumeSnapshotClass&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;metadata&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;sample-snapclass&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;driver&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;driver.dellemc.com&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;deletionPolicy&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Delete&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;parameters&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;SYMID&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;000000000001&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-      </description>
+      <description>One of the goals of high availability is to eliminate single points of failure in a storage system. In Kubernetes, this can mean that a single PV represents multiple read/write enabled volumes on different arrays, located at reasonable distances with both the volumes in sync with each other. If one of the volumes goes down, there will still be another volume available for read and write. This kind of high availability can be achieved by using SRDF Metro replication mode, supported only by PowerMax arrays.</description>
     </item>
-    
     <item>
-      <title>V2: Migration</title>
-      <link>https://dell.github.io/csm-docs/v2/replication/migration/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://dell.github.io/csm-docs/v2/replication/migration/</guid>
-      <description>
-        
-        
-        
-      </description>
-    </item>
-    
-    <item>
-      <title>V2: Monitoring</title>
+      <title>Monitoring</title>
       <link>https://dell.github.io/csm-docs/v2/replication/monitoring/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>https://dell.github.io/csm-docs/v2/replication/monitoring/</guid>
-      <description>
-        
-        
-        &lt;p&gt;The dell-csm-replicator supports monitoring of &lt;code&gt;DellCSIReplicationGroup&lt;/code&gt; Custom Resources (CRs).&lt;/p&gt;
-&lt;p&gt;Each RG is polled at a pre-defined interval and for each RG, a gRPC call is made to the driver which returns the status of
-the protection group on the array.&lt;/p&gt;
-&lt;p&gt;If an RG doesn&amp;rsquo;t have any PVs associated with it, the driver will not receive any monitoring request for that RG.&lt;/p&gt;
-&lt;p&gt;This status can be obtained from the RG using a standard &lt;code&gt;kubectl get&lt;/code&gt; call on the resource name:&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;NAME                                                 AGE     STATE   LINK STATE     LAST LINKSTATE UPDATE
-replicated-rg-240721b0-12fb-4151-8dd8-94794ae2493e   51d     Ready   SUSPENDED      2021-09-10T10:48:09Z
-&lt;/code&gt;&lt;/pre&gt;
-      </description>
+      <description>The dell-csm-replicator supports monitoring of DellCSIReplicationGroup Custom Resources (CRs).
+Each RG is polled at a pre-defined interval and for each RG, a gRPC call is made to the driver which returns the status of the protection group on the array.
+If an RG doesn&amp;rsquo;t have any PVs associated with it, the driver will not receive any monitoring request for that RG.
+This status can be obtained from the RG using a standard kubectl get call on the resource name:</description>
     </item>
-    
     <item>
-      <title>V2: Replication Actions</title>
+      <title>Replication Actions</title>
       <link>https://dell.github.io/csm-docs/v2/replication/replication-actions/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>https://dell.github.io/csm-docs/v2/replication/replication-actions/</guid>
-      <description>
-        
-        
-        &lt;p&gt;You can exercise native replication control operations from Dell storage arrays by performing &amp;ldquo;Actions&amp;rdquo; on the replicated group of volumes using the &lt;code&gt;DellCSIReplicationGroup&lt;/code&gt; (RG) object.&lt;/p&gt;
-&lt;p&gt;You can patch the &lt;code&gt;DellCSIReplicationGroup&lt;/code&gt; Custom Resource (CR) and set the action field in the spec to one of the allowed values (refer to tables in this document).&lt;/p&gt;
-&lt;p&gt;When you set the action field in the Custom Resource object, the following happens:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;State of the RG CR is set to &lt;code&gt;action_in_progress&lt;/code&gt;. For e.g. if you set the action field to SYNC, then the state will change to SYNC_IN_PROGRESS, action field will reset to empty&lt;/li&gt;
-&lt;li&gt;dell-csi-replicator sidecar issues the command to the CSI driver to perform the appropriate action&lt;/li&gt;
-&lt;li&gt;Once the CSI driver has completed the operation, State of the RG CR goes back to Ready&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;While the action is in progress, you shouldn&amp;rsquo;t update the action field. Any attempt to change the action field will be rejected and it will be reset to empty.
-There are certain pre-requisites that have to be fulfilled before any action can be done on the RG CR. For example, you can&amp;rsquo;t perform a Reprotect without doing a Failover first. There are some &amp;ldquo;Workflows&amp;rdquo; defined in &lt;a href=&#34;../disaster-recovery&#34;&gt;Disaster Recovery&lt;/a&gt; which provide a sequence of operations for some common use-cases. An important exception to these rules is the action UNPLANNED_FAILOVER, which can be run at any time.&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;em&gt;&lt;strong&gt;NOTE&lt;/strong&gt;&lt;/em&gt;: Throughout this document, we are going to refer to &amp;ldquo;Site A&amp;rdquo; as the original source site &amp;amp; &amp;ldquo;Site B&amp;rdquo; as the original target site.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h3 id=&#34;site-specific-actions&#34;&gt;Site Specific Actions&lt;/h3&gt;
-&lt;p&gt;These actions can be run at any site, but they have some site-specific context included.&lt;/p&gt;
-&lt;p&gt;Any action with the &lt;strong&gt;LOCAL&lt;/strong&gt; suffix means, do this action for the local site. Any action with the &lt;strong&gt;REMOTE&lt;/strong&gt; suffix means do this action for the remote site.&lt;/p&gt;
-&lt;p&gt;For example:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;If the CR at &lt;code&gt;Site A&lt;/code&gt; is patched with action FAILOVER_REMOTE, it means that the driver will attempt to &lt;code&gt;Fail Over&lt;/code&gt; to &lt;strong&gt;Site B&lt;/strong&gt; which is the remote site.&lt;/li&gt;
-&lt;li&gt;If the CR at &lt;code&gt;Site B&lt;/code&gt; is patched with action FAILOVER_LOCAL, it means that the driver will attempt to &lt;code&gt;Fail Over&lt;/code&gt; to &lt;strong&gt;Site B&lt;/strong&gt; which is the local site.&lt;/li&gt;
-&lt;li&gt;If the CR at &lt;code&gt;Site B&lt;/code&gt; is patched with REPROTECT_LOCAL, it means that the driver will &lt;code&gt;Re-protect&lt;/code&gt; the volumes at &lt;strong&gt;Site B&lt;/strong&gt; which is the local site.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;The following table lists details of what actions should be used in different Disaster Recovery workflows &amp;amp; the equivalent operation done on the storage array:&lt;/p&gt;
-
-
-
-
-
-&lt;table class=&#34;table table-striped table-bordered table-sm&#34;&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;Workflow&lt;/th&gt;
-&lt;th&gt;Actions&lt;/th&gt;
-&lt;th&gt;PowerMax&lt;/th&gt;
-&lt;th&gt;PowerStore&lt;/th&gt;
-&lt;th&gt;PowerScale&lt;/th&gt;
-&lt;th&gt;PowerFlex&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;Planned Migration&lt;/td&gt;
-&lt;td&gt;FAILOVER_LOCAL&lt;br&gt;FAILOVER_REMOTE&lt;/td&gt;
-&lt;td&gt;symrdf failover -swap&lt;/td&gt;
-&lt;td&gt;FAILOVER (no REPROTECT after FAILOVER)&lt;/td&gt;
-&lt;td&gt;allow_writes on target, disable local policy&lt;/td&gt;
-&lt;td&gt;FAILOVER (no REPROTECT after FAILOVER)&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Reprotect&lt;/td&gt;
-&lt;td&gt;REPROTECT_LOCAL&lt;br&gt;REPROTECT_REMOTE&lt;/td&gt;
-&lt;td&gt;symrdf resume/est&lt;/td&gt;
-&lt;td&gt;REPROTECT&lt;/td&gt;
-&lt;td&gt;Delete policy on source, create policy on target&lt;/td&gt;
-&lt;td&gt;REPROTECT&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Unplanned Migration&lt;/td&gt;
-&lt;td&gt;UNPLANNED_FAILOVER_LOCAL&lt;br&gt;UNPLANNED_FAILOVER_REMOTE&lt;/td&gt;
-&lt;td&gt;symrdf failover -force&lt;/td&gt;
-&lt;td&gt;FAILOVER (at target site)&lt;/td&gt;
-&lt;td&gt;allow_writes on target&lt;/td&gt;
-&lt;td&gt;FAILOVER (at target site)&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-
-
-&lt;h3 id=&#34;maintenance-actions&#34;&gt;Maintenance Actions&lt;/h3&gt;
-&lt;p&gt;These actions can be run at any site and are used to change the replication link state for maintenance activities.
-The following table lists the supported maintenance actions and the equivalent operation done on the storage arrays:&lt;/p&gt;
-
-
-
-
-
-&lt;table class=&#34;table table-striped table-bordered table-sm&#34;&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;Action&lt;/th&gt;
-&lt;th&gt;Description&lt;/th&gt;
-&lt;th&gt;PowerMax&lt;/th&gt;
-&lt;th&gt;PowerStore&lt;/th&gt;
-&lt;th&gt;PowerScale&lt;/th&gt;
-&lt;th&gt;PowerFlex&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;SUSPEND&lt;/td&gt;
-&lt;td&gt;Temporarily suspend &lt;br&gt; replication&lt;/td&gt;
-&lt;td&gt;symrdf suspend&lt;/td&gt;
-&lt;td&gt;PAUSE&lt;/td&gt;
-&lt;td&gt;disable local policy&lt;/td&gt;
-&lt;td&gt;PAUSE&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;RESUME&lt;/td&gt;
-&lt;td&gt;Resume replication&lt;/td&gt;
-&lt;td&gt;symrdf resume&lt;/td&gt;
-&lt;td&gt;RESUME&lt;/td&gt;
-&lt;td&gt;enable local policy&lt;/td&gt;
-&lt;td&gt;RESUME&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;SYNC&lt;/td&gt;
-&lt;td&gt;Synchronize all changes &lt;br&gt; from source to target&lt;/td&gt;
-&lt;td&gt;symrdf establish&lt;/td&gt;
-&lt;td&gt;SYNCHRONIZE NOW&lt;/td&gt;
-&lt;td&gt;start syncIQ job&lt;/td&gt;
-&lt;td&gt;SYNC NOW&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-
-
-&lt;h3 id=&#34;how-to-perform-actions&#34;&gt;How to perform actions&lt;/h3&gt;
-&lt;p&gt;We strongly recommend using &lt;code&gt;repctl&lt;/code&gt; to perform any actions on &lt;code&gt;DellCSIReplicationGroup&lt;/code&gt; objects. You can find detailed steps &lt;a href=&#34;../tools/#executing-actions&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;If you wish to use &lt;code&gt;kubectl&lt;/code&gt; to perform actions, then use kubectl edit/patch operations and set the &lt;code&gt;action&lt;/code&gt; field in the Custom Resource.
-While performing site-specific actions, please consult each driver&amp;rsquo;s documentation to get an exhaustive list of all the supported actions.&lt;/p&gt;
-&lt;p&gt;For a brief guide on using actions for various DR workflows, please refer to this &lt;a href=&#34;../disaster-recovery&#34;&gt;document&lt;/a&gt;.&lt;/p&gt;
-&lt;h3 id=&#34;deleting-replication-groups&#34;&gt;Deleting Replication Groups&lt;/h3&gt;
-&lt;p&gt;To delete a replication group from a cluster, the group must be empty. This
-means that all associated replication pairs must have been deleted/removed.&lt;/p&gt;
-&lt;p&gt;This command will delete the empty replication group from the cluster and the
-associated replication group from the backend array.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  kubectl delete rg &amp;lt;rg-id&amp;gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-      </description>
+      <description>You can exercise native replication control operations from Dell storage arrays by performing &amp;ldquo;Actions&amp;rdquo; on the replicated group of volumes using the DellCSIReplicationGroup (RG) object.
+You can patch the DellCSIReplicationGroup Custom Resource (CR) and set the action field in the spec to one of the allowed values (refer to tables in this document).
+When you set the action field in the Custom Resource object, the following happens:
+State of the RG CR is set to action_in_progress.</description>
     </item>
-    
     <item>
-      <title>V2: Volume Expansion</title>
+      <title>Volume Expansion</title>
       <link>https://dell.github.io/csm-docs/v2/replication/volume_expansion/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>https://dell.github.io/csm-docs/v2/replication/volume_expansion/</guid>
-      <description>
-        
-        
-        &lt;p&gt;Starting in v2.4.0, the CSI PowerMax driver supports the expansion of Replicated Persistent Volumes (PVs). This expansion is done online, which is when the PVC is attached to any node.&lt;/p&gt;
-&lt;h2 id=&#34;prerequisites&#34;&gt;Prerequisites&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;To use this feature, enable resizer in values.yaml:&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;resizer&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;enabled&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;true&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
-&lt;li&gt;To use this feature, the storage class that is used to create the PVC must have the attribute allowVolumeExpansion set to &lt;code&gt;true&lt;/code&gt;.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;basic-usage&#34;&gt;Basic Usage&lt;/h2&gt;
-&lt;p&gt;To resize a PVC, edit the existing PVC spec and set spec.resources.requests.storage to the intended size. For example, if you have a PVC &lt;code&gt;pmax-pvc-demo&lt;/code&gt; of size 5 Gi, then you can resize it to 10 Gi by updating the PVC:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;kind&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;PersistentVolumeClaim&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;apiVersion&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;v1&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;metadata&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;pmax-pvc-demo&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;namespace&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;test&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;spec&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;accessModes&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;- &lt;span style=&#34;color:#000&#34;&gt;ReadWriteOnce&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;volumeMode&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Filesystem&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;resources&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;requests&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;storage&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;10Gi&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;#Updated size from 5Gi to 10Gi&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;storageClassName&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;powermax-expand-sc&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Update remote PVC with expanded size:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;
-&lt;p&gt;Update the remote PVC size with the same size as on local PVC.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;After sync with remote CSI driver, volume size will be updated to show new size.&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;em&gt;&lt;strong&gt;NOTE&lt;/strong&gt;&lt;/em&gt;: The Kubernetes Volume Expansion feature can only be used to increase the size of the volume, it cannot be used to shrink a volume.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-      </description>
+      <description>Starting in v2.4.0, the CSI PowerMax driver supports the expansion of Replicated Persistent Volumes (PVs). This expansion is done online, which is when the PVC is attached to any node.
+Prerequisites To use this feature, enable resizer in values.yaml: resizer: enabled: true To use this feature, the storage class that is used to create the PVC must have the attribute allowVolumeExpansion set to true. Basic Usage To resize a PVC, edit the existing PVC spec and set spec.</description>
     </item>
-    
     <item>
-      <title>V2: Tools</title>
+      <title>Tools</title>
       <link>https://dell.github.io/csm-docs/v2/replication/tools/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>https://dell.github.io/csm-docs/v2/replication/tools/</guid>
-      <description>
-        
-        
-        &lt;h1 id=&#34;repctl&#34;&gt;repctl&lt;/h1&gt;
-&lt;p&gt;&lt;code&gt;repctl&lt;/code&gt; is a command-line client for configuring replication
-and managing replicated resources between multiple Kubernetes clusters.&lt;/p&gt;
-&lt;h2 id=&#34;usage&#34;&gt;Usage&lt;/h2&gt;
-&lt;h3 id=&#34;managing-clusters&#34;&gt;Managing Clusters&lt;/h3&gt;
-&lt;p&gt;To begin managing replication with &lt;code&gt;repctl&lt;/code&gt; you need to add your Kubernetes
-clusters, you can do that using &lt;code&gt;cluster add&lt;/code&gt; command:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;./repctl cluster add -f &amp;lt;config-file&amp;gt; -n &amp;lt;name&amp;gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;You can view clusters that are currently being managed by &lt;code&gt;repctl&lt;/code&gt;
-by running &lt;code&gt;cluster get&lt;/code&gt; command:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;./repctl cluster get
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Or, alternatively, using &lt;code&gt;get cluster&lt;/code&gt; command:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;./repctl get cluster
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Also, you can inject information about all of your current clusters as
-config maps into the same clusters, so it can be used by &lt;code&gt;dell-csi-replicator&lt;/code&gt;:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;./repctl cluster inject
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;NOTE:&lt;/strong&gt; Please ensure that CA certificate is present in kubeconfig, as repctl &lt;code&gt;--use-sa&lt;/code&gt; flag requires it for proper operation.&lt;/p&gt;
-&lt;p&gt;You can also generate kubeconfigs from existing replication service accounts and inject them in config maps by providing &lt;code&gt;--use-sa&lt;/code&gt; flag:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;./repctl cluster inject --use-sa
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;querying-resources&#34;&gt;Querying Resources&lt;/h3&gt;
-&lt;p&gt;After adding clusters you want to manage with &lt;code&gt;repctl&lt;/code&gt; you can query
-resources from multiple clusters at once using &lt;code&gt;get&lt;/code&gt; command.&lt;/p&gt;
-&lt;p&gt;For example, this command will list all storage classes in all clusters
-that currently are being managed by &lt;code&gt;repctl&lt;/code&gt;:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;./repctl get storageclasses --all
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;If you want to query some particular clusters you can do that by specifying with the
-&lt;code&gt;clusters&lt;/code&gt; flag:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;./repctl get pv --clusters cluster-1,cluster-3
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;All other different flags for querying resources you can check using
-included into the tool help flag &lt;code&gt;-h&lt;/code&gt;.&lt;/p&gt;
-&lt;h3 id=&#34;creating-resources&#34;&gt;Creating Resources&lt;/h3&gt;
-&lt;h4 id=&#34;generic&#34;&gt;Generic&lt;/h4&gt;
-&lt;p&gt;Generic &lt;code&gt;create&lt;/code&gt; command allows you to apply provided config file into
-multiple clusters at once:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;/repctl create -f &amp;lt;path-to-file&amp;gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;persistentvolumeclaims&#34;&gt;PersistentVolumeClaims&lt;/h4&gt;
-&lt;p&gt;You can use &lt;code&gt;repctl&lt;/code&gt; to create PVCs from Replication Group&amp;rsquo;s PVs
-on the target cluster:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;./repctl create pvc --rg &amp;lt;rg-name&amp;gt; -t &amp;lt;target-namespace&amp;gt; --dry-run&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#204a87&#34;&gt;false&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;
-&lt;p&gt;By default, &amp;lsquo;create pvc&amp;rsquo; will do a &amp;lsquo;dry-run&amp;rsquo; while creating PVCs.
-If you don&amp;rsquo;t encounter any issues in the dry-run, then you can
-re-run the command by turning off the dry-run flag to false.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h4 id=&#34;storage-classes&#34;&gt;Storage Classes&lt;/h4&gt;
-&lt;p&gt;&lt;code&gt;repctl&lt;/code&gt; can create special &lt;code&gt;replication enabled&lt;/code&gt; storage classes from
-provided config, you can find example configs in &lt;code&gt;examples&lt;/code&gt; folder. The command would look similar to below:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;./repctl create sc --from-config &amp;lt;config-file&amp;gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;`&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;single-cluster-replication&#34;&gt;Single Cluster Replication&lt;/h3&gt;
-&lt;p&gt;&lt;code&gt;repctl&lt;/code&gt; supports working with replication within a single Kubernetes cluster.&lt;/p&gt;
-&lt;p&gt;Just add cluster you want to use with &lt;code&gt;cluster add&lt;/code&gt; command, and you can list, filter, and create resources.&lt;/p&gt;
-&lt;p&gt;Volumes and ReplicationGroups created as &amp;ldquo;target&amp;rdquo; resources would be prefixed with &lt;code&gt;replicated-&lt;/code&gt;
-so you can easily differentiate them.&lt;/p&gt;
-&lt;p&gt;You can also differentiate between single cluster replication configured StorageClasses and ReplicationGroups and multi-cluster ones
-by checking &lt;code&gt;remoteClusterID&lt;/code&gt; field, for a single cluster the field would be set to &lt;code&gt;self&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;To create replication enabled storage classes for single cluster replication using &lt;code&gt;create sc&lt;/code&gt; command,
-be sure to set both &lt;code&gt;sourceClusterID&lt;/code&gt; and &lt;code&gt;targetClusterID&lt;/code&gt; to the same &lt;code&gt;clusterID&lt;/code&gt; and continue as usual with executing the command.
-The name of the StorageClass resource that is created as the &amp;ldquo;target&amp;rdquo; will be appended with &lt;code&gt;-tgt&lt;/code&gt;.&lt;/p&gt;
-&lt;h3 id=&#34;executing-actions&#34;&gt;Executing Actions&lt;/h3&gt;
-&lt;p&gt;&lt;code&gt;repctl&lt;/code&gt; can be used to execute various replication actions on ReplicationGroups.&lt;/p&gt;
-&lt;h4 id=&#34;failover&#34;&gt;Failover&lt;/h4&gt;
-&lt;p&gt;This command will perform a planned &lt;code&gt;failover&lt;/code&gt; to a cluster or an RG.&lt;/p&gt;
-&lt;p&gt;When working with multiple clusters, you can perform failover by specifying the target &lt;em&gt;cluster ID&lt;/em&gt;. To do that, use &lt;code&gt;--target &amp;lt;targetClusterID&amp;gt;&lt;/code&gt; parameter:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;./repctl --rg &amp;lt;rg-id&amp;gt; failover --target &amp;lt;tgt-cluster-id&amp;gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;When working with replication within a single cluster, you can perform failover by specifying the target &lt;em&gt;replication group ID&lt;/em&gt;. To do that, use &lt;code&gt;--target &amp;lt;rg-id&amp;gt;&lt;/code&gt; parameter:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;./repctl --rg &amp;lt;rg-id&amp;gt; failover --target &amp;lt;tgt-rg-id&amp;gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;In both scenarios, &lt;code&gt;repctl&lt;/code&gt; will patch the CR at the source site with action &lt;strong&gt;FAILOVER_REMOTE&lt;/strong&gt;.&lt;/p&gt;
-&lt;p&gt;You can also provide &lt;code&gt;--unplanned&lt;/code&gt; parameter, then &lt;code&gt;repctl&lt;/code&gt; will perform an unplanned failover to a given cluster or an RG. Instead of &lt;strong&gt;FAILOVER_REMOTE&lt;/strong&gt; on the source cluster&amp;rsquo;s CR, &lt;code&gt;repctl&lt;/code&gt; will patch CR at target cluster with action &lt;strong&gt;UNPLANNED_FAILOVER_LOCAL&lt;/strong&gt;.&lt;/p&gt;
-&lt;h4 id=&#34;reprotect&#34;&gt;Reprotect&lt;/h4&gt;
-&lt;p&gt;This command will perform a &lt;code&gt;reprotect&lt;/code&gt; at the specified cluster or the RG.&lt;/p&gt;
-&lt;p&gt;When working with multiple clusters, you can perform reprotect by specifying the &lt;em&gt;cluster ID&lt;/em&gt;. To do that, use &lt;code&gt;--at &amp;lt;clusterID&amp;gt;&lt;/code&gt; parameter:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;./repctl --rg &amp;lt;rg-id&amp;gt; reprotect --at &amp;lt;tgt-cluster-id&amp;gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;When working with replication within a single cluster, you can perform reprotect by specifying the &lt;em&gt;replication group ID&lt;/em&gt;. To do that, use &lt;code&gt;--rg &amp;lt;rg-id&amp;gt;&lt;/code&gt; parameter:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;./repctl --rg &amp;lt;rg-id&amp;gt; reprotect 
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;In both scenarios &lt;code&gt;repctl&lt;/code&gt; will patch the CR at the source site with action &lt;strong&gt;REPROTECT_LOCAL&lt;/strong&gt;.&lt;/p&gt;
-&lt;h4 id=&#34;failback&#34;&gt;Failback&lt;/h4&gt;
-&lt;p&gt;This command will perform a planned &lt;code&gt;failback&lt;/code&gt; to a cluster or an RG.&lt;/p&gt;
-&lt;p&gt;When working with multiple clusters, you can perform failback by specifying the &lt;em&gt;cluster ID&lt;/em&gt;. To do that, use &lt;code&gt;--target &amp;lt;clusterID&amp;gt;&lt;/code&gt; parameter:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;./repctl --rg &amp;lt;rg-id&amp;gt; failback --target &amp;lt;tgt-cluster-id&amp;gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;When working with replication within a single cluster, you can perform failback by specifying the &lt;em&gt;replication group ID&lt;/em&gt;. To do that, use &lt;code&gt;--target &amp;lt;rg-id&amp;gt;&lt;/code&gt; parameter:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;./repctl --rg &amp;lt;rg-id&amp;gt; failback --target &amp;lt;tgt-rg-id&amp;gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;In both scenarios, &lt;code&gt;repctl&lt;/code&gt; will patch the CR at the source site with action &lt;strong&gt;FAILBACK_LOCAL&lt;/strong&gt;.&lt;/p&gt;
-&lt;p&gt;You can also provide &lt;code&gt;--discard&lt;/code&gt; parameter, then &lt;code&gt;repctl&lt;/code&gt; will perform a failback but discard any writes at target, instead of &lt;strong&gt;FAILBACK_LOCAL&lt;/strong&gt; &lt;code&gt;repctl&lt;/code&gt; will patch CR at target cluster with action &lt;strong&gt;ACTION_FAILBACK_DISCARD_CHANGES_LOCAL&lt;/strong&gt;.&lt;/p&gt;
-&lt;h4 id=&#34;swap&#34;&gt;Swap&lt;/h4&gt;
-&lt;p&gt;This command will perform a &lt;code&gt;swap&lt;/code&gt; at a specified cluster or an RG.&lt;/p&gt;
-&lt;p&gt;When working with multiple clusters, you can perform swap by specifying the &lt;em&gt;cluster ID&lt;/em&gt;. To do that, use &lt;code&gt;--at &amp;lt;clusterID&amp;gt;&lt;/code&gt; parameter:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;./repctl --rg &amp;lt;rg-id&amp;gt; swap --at &amp;lt;tgt-cluster-id&amp;gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;When working with replication within a single cluster, you can perform swap by specifying the &lt;em&gt;replication group ID&lt;/em&gt;. To do that, use &lt;code&gt;--rg &amp;lt;rg-id&amp;gt;&lt;/code&gt; parameter:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;./repctl --rg &amp;lt;rg-id&amp;gt; swap
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;code&gt;repctl&lt;/code&gt; will patch CR at the source cluster with action &lt;code&gt;SWAP_LOCAL&lt;/code&gt;.&lt;/p&gt;
-&lt;h4 id=&#34;wait-for-completion&#34;&gt;Wait For Completion&lt;/h4&gt;
-&lt;p&gt;When executing actions you can provide &lt;code&gt;--wait&lt;/code&gt; argument to make &lt;code&gt;repctl&lt;/code&gt; wait for completion of specified action.&lt;/p&gt;
-&lt;p&gt;For example when executing &lt;code&gt;failover&lt;/code&gt;:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;./repctl --rg &amp;lt;rg-id&amp;gt; failover --target &amp;lt;tgt-cluster-id&amp;gt; --wait
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;maintenance-actions&#34;&gt;Maintenance Actions&lt;/h4&gt;
-&lt;p&gt;You can also use &lt;code&gt;exec&lt;/code&gt; command to execute maintenance actions such as &lt;code&gt;suspend&lt;/code&gt;, &lt;code&gt;resume&lt;/code&gt;, and &lt;code&gt;sync&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;For single or multi-cluster config:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;./repctl --rg &amp;lt;rg-id&amp;gt; &lt;span style=&#34;color:#204a87&#34;&gt;exec&lt;/span&gt; -a &amp;lt;ACTION&amp;gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Where &lt;code&gt;&amp;lt;ACTION&amp;gt;&lt;/code&gt; can be one of the following:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;suspend&lt;/code&gt; will suspend replication, changes will no longer be synced between replication sites.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;resume&lt;/code&gt; will resume replication, canceling the effect of &lt;code&gt;suspend&lt;/code&gt; action.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;sync&lt;/code&gt; will force synchronization of change between replication sites.&lt;/li&gt;
-&lt;/ul&gt;
-
-      </description>
+      <description>repctlrepctl is a command-line client for configuring replication and managing replicated resources between multiple Kubernetes clusters.
+Usage Managing Clusters To begin managing replication with repctl you need to add your Kubernetes clusters, you can do that using cluster add command:
+./repctl cluster add -f &amp;lt;config-file&amp;gt; -n &amp;lt;name&amp;gt; You can view clusters that are currently being managed by repctl by running cluster get command:
+./repctl cluster get Or, alternatively, using get cluster command:</description>
     </item>
-    
     <item>
-      <title>V2: Troubleshooting</title>
+      <title>Troubleshooting</title>
       <link>https://dell.github.io/csm-docs/v2/replication/troubleshooting/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>https://dell.github.io/csm-docs/v2/replication/troubleshooting/</guid>
-      <description>
-        
-        
-        &lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;Symptoms&lt;/th&gt;
-&lt;th&gt;Prevention, Resolution or Workaround&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;Persistent volumes don&amp;rsquo;t get created on the target cluster.&lt;/td&gt;
-&lt;td&gt;Run &lt;code&gt;kubectl describe&lt;/code&gt; on one of the pods of replication controller and see if event says &lt;code&gt;Config update won&#39;t be applied because of invalid configmap/secrets. Please fix the invalid configuration&lt;/code&gt;. If it does, then ensure you correctly populated replication ConfigMap. You can check the current status by running &lt;code&gt;kubectl describe cm -n dell-replication-controller dell-replication-controller-config&lt;/code&gt;. If ConfigMap is empty, please edit it yourself or use &lt;code&gt;repctl cluster inject&lt;/code&gt; command.&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Persistent volumes don&amp;rsquo;t get created on the target cluster. You don&amp;rsquo;t see any events on the replication-controller pod.&lt;/td&gt;
-&lt;td&gt;Check logs of replication controller by running &lt;code&gt;kubectl logs -n dell-replication-controller dell-replication-controller-manager-&amp;lt;generated-symbols&amp;gt;&lt;/code&gt;. If you see &lt;code&gt;clusterId - &amp;lt;clusterID&amp;gt; not found&lt;/code&gt; errors then be sure to check if you specified the same clusterIDs in both your ConfigMap and replication enabled StorageClass.&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;You apply replication action by manually editing ReplicationGroup resource field &lt;code&gt;spec.action&lt;/code&gt; and don&amp;rsquo;t see any change of ReplicationGroup state after a while.&lt;/td&gt;
-&lt;td&gt;Check events of the replication-controller pod, if it says &lt;code&gt;Cannot proceed with action &amp;lt;your-action&amp;gt;. [unsupported action]&lt;/code&gt; then check spelling of your action and consult the &lt;a href=&#34;../replication-actions&#34;&gt;Replication Actions&lt;/a&gt; page. Alternatively, you can use &lt;code&gt;repctl&lt;/code&gt; instead of manually editing ReplicationGroup resources.&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;You execute failover action using &lt;code&gt;repctl failover&lt;/code&gt; command and see &lt;code&gt;failover: error executing failover to source site&lt;/code&gt;.&lt;/td&gt;
-&lt;td&gt;This means you tried to failover to a cluster that is already marked source. If you still want to execute failover for RG, just choose another cluster.&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;You&amp;rsquo;ve created PersistentVolumeClaim using replication enabled StorageClass but don&amp;rsquo;t see any RGs created in the source cluster.&lt;/td&gt;
-&lt;td&gt;Check annotations of created PersistentVolumeClaim. If it doesn&amp;rsquo;t have &lt;code&gt;annotations&lt;/code&gt; that start with &lt;code&gt;replication.storage.dell.com&lt;/code&gt; then please wait for a couple of minutes for them to be added and RG to be created.&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;When installing common replication controller using helm you see an error that states &lt;code&gt;invalid ownership metadata&lt;/code&gt; and &lt;code&gt;missing key &amp;quot;app.kubernetes.io/managed-by&amp;quot;: must be set to &amp;quot;Helm&amp;quot;&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;This means that you haven&amp;rsquo;t fully deleted the previous release, you can fix it by either deleting entire manifest by using &lt;code&gt;kubectl delete -f deploy/controller.yaml&lt;/code&gt; or manually deleting conflicting resources (ClusterRoles, ClusterRoleBinding, etc.)&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;PV and/or PVCs are not being created at the source/target cluster. If you check the controller&amp;rsquo;s logs you can see &lt;code&gt;no such host&lt;/code&gt; errors&lt;/td&gt;
-&lt;td&gt;Make sure cluster-1&amp;rsquo;s API is pingable from cluster-2 and vice versa. If one of your clusters is OpenShift located in a private network and needs records in /etc/hosts, &lt;code&gt;exec&lt;/code&gt; into controller pod and modify &lt;code&gt;/etc/hosts&lt;/code&gt; manually.&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;After upgrading to Replication v1.4.0, if &lt;code&gt;kubectl get rg&lt;/code&gt; returns an error &lt;code&gt;Unable to list &amp;quot;replication.storage.dell.com/v1alpha1, Resource=dellcsireplicationgroups&amp;quot;&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;This means &lt;code&gt;kubectl&lt;/code&gt; still doesn&amp;rsquo;t recognize the new version of CRD &lt;code&gt;dellcsireplicationgroups.replication.storage.dell.com&lt;/code&gt; after upgrade. Running the command &lt;code&gt;kubectl get DellCSIReplicationGroup.v1.replication.storage.dell.com/&amp;lt;rg-id&amp;gt; -o yaml&lt;/code&gt; will resolve the issue.&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-
-      </description>
+      <description>Symptoms Prevention, Resolution or Workaround Persistent volumes don&amp;rsquo;t get created on the target cluster. Run kubectl describe on one of the pods of replication controller and see if event says Config update won&#39;t be applied because of invalid configmap/secrets. Please fix the invalid configuration. If it does, then ensure you correctly populated replication ConfigMap. You can check the current status by running kubectl describe cm -n dell-replication-controller dell-replication-controller-config. If ConfigMap is empty, please edit it yourself or use repctl cluster inject command.</description>
     </item>
-    
     <item>
-      <title>V2: Release notes</title>
-      <link>https://dell.github.io/csm-docs/v2/replication/release/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://dell.github.io/csm-docs/v2/replication/release/</guid>
-      <description>
-        
-        
-        &lt;h2 id=&#34;release-notes---csm-replication-171&#34;&gt;Release Notes - CSM Replication 1.7.1&lt;/h2&gt;
-&lt;h3 id=&#34;new-featureschanges&#34;&gt;New Features/Changes&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/947&#34;&gt;#947 - [FEATURE]: Support for Kubernetes 1.28&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1066&#34;&gt;#1066 - [FEATURE]: Support for Openshift 4.14&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/996&#34;&gt;#996 - [FEATURE]: Dell CSI to Dell CSM Operator Migration Process&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1031&#34;&gt;#1031 - [FEATURE]: Update to the latest UBI Micro image for CSM&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1062&#34;&gt;#1062 - [FEATURE]: CSM PowerMax: Support PowerMax v10.1 &lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;fixed-issues&#34;&gt;Fixed Issues&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/988&#34;&gt;#988 - [BUG]: CSM Operator fails to install CSM Replication on the remote cluster&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1002&#34;&gt;#1002 - [BUG]: CSM Replication - secret file requirement for both sites not documented &lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;known-issues&#34;&gt;Known Issues&lt;/h3&gt;
-
-      </description>
-    </item>
-    
-    <item>
-      <title>V2: Upgrade</title>
+      <title>Upgrade</title>
       <link>https://dell.github.io/csm-docs/v2/replication/upgrade/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>https://dell.github.io/csm-docs/v2/replication/upgrade/</guid>
-      <description>
-        
-        
-        &lt;p&gt;CSM Replication module consists of two components:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;CSM Replication sidecar (installed along with the driver)&lt;/li&gt;
-&lt;li&gt;CSM Replication controller&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Those two components should be upgraded separately. When upgrading them ensure that you use the same versions for both sidecar and
-controller, because different versions could be incompatible with each other.&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;em&gt;&lt;strong&gt;Note&lt;/strong&gt;&lt;/em&gt;: While upgrading the module via helm, the &lt;code&gt;replicas&lt;/code&gt; variable in &lt;code&gt;myvalues.yaml&lt;/code&gt; can be at most one less than the number of worker nodes.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h2 id=&#34;updating-csm-replication-sidecar&#34;&gt;Updating CSM Replication sidecar&lt;/h2&gt;
-&lt;p&gt;To upgrade the CSM Replication sidecar that is installed along with the driver, the following steps are required.&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;em&gt;&lt;strong&gt;Note&lt;/strong&gt;&lt;/em&gt;: These steps refer to the values file and &lt;code&gt;csi-install.sh&lt;/code&gt; script that was used during the initial installation of the Dell CSI driver.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;&lt;strong&gt;Steps&lt;/strong&gt;&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;Update the &lt;code&gt;controller.replication.image&lt;/code&gt; value in the values files to reference the new CSM Replication sidecar image.&lt;/li&gt;
-&lt;li&gt;Run the csi-install script with the option &lt;code&gt;--upgrade&lt;/code&gt; by running: &lt;br&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#204a87&#34;&gt;cd&lt;/span&gt; ../dell-csi-helm-installer &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; ./csi-install.sh --namespace &amp;lt;your-namespace&amp;gt; --values ./myvalues.yaml --upgrade
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
-&lt;li&gt;Run the same command on the second Kubernetes cluster if you use multi-cluster replication topology&lt;/li&gt;
-&lt;/ol&gt;
-&lt;blockquote&gt;
-&lt;p&gt;For more information on upgrading the CSI driver, please visit the &lt;a href=&#34;../../csidriver/upgradation&#34;&gt;CSI driver upgrade page&lt;/a&gt;.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h3 id=&#34;powerscale&#34;&gt;PowerScale&lt;/h3&gt;
-&lt;p&gt;On PowerScale systems, an additional step is needed when upgrading to CSM Replication v1.4.0 or later. Because the SyncIQ policy created on the target-side storage array is no longer used, it must be deleted for any existing &lt;code&gt;DellCSIReplicationGroup&lt;/code&gt; objects after performing the upgrade to the CSM Replication sidecar and PowerScale CSI driver. These steps should be performed before the &lt;code&gt;DellCSIReplicationGroup&lt;/code&gt; objects are used with the new version of the CSI driver. Until this step is performed, existing &lt;code&gt;DellCSIReplicationGroup&lt;/code&gt; objects will display an UNKNOWN link state.&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;Log in to the target PowerScale array.&lt;/li&gt;
-&lt;li&gt;Navigate to the &lt;code&gt;Data Protection &amp;gt; SyncIQ&lt;/code&gt; page and select the &lt;code&gt;Policies&lt;/code&gt; tab.&lt;/li&gt;
-&lt;li&gt;Delete disabled, target-side SyncIQ policies that are used for CSM Replication. Such policies will be distinguished by their names, of the format &lt;code&gt;&amp;lt;prefix&amp;gt;-&amp;lt;kubernetes namespace&amp;gt;-&amp;lt;IP of replication destination&amp;gt;-&amp;lt;RPO duration&amp;gt;&lt;/code&gt;.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h2 id=&#34;updating-csm-replication-controller&#34;&gt;Updating CSM Replication controller&lt;/h2&gt;
-&lt;p&gt;Make sure the appropriate release branch is available on the machine performing the upgrade by running:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;git clone -b v1.7.1 https://github.com/dell/csm-replication.git
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;upgrading-with-helm&#34;&gt;Upgrading with Helm&lt;/h3&gt;
-&lt;p&gt;This option will only work if you have previously installed replication via Helm chart, available since version 1.1. If you used simple manifest or &lt;code&gt;repctl&lt;/code&gt; please use &lt;a href=&#34;#upgrading-with-repctl&#34;&gt;upgrading with repctl&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Steps&lt;/strong&gt;&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;
-&lt;p&gt;Update the &lt;code&gt;image&lt;/code&gt; value in the values files to reference the new CSM Replication controller image or use a new version of the csm-replication Helm chart.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Run the install script with the option &lt;code&gt;--upgrade&lt;/code&gt; by running:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#204a87&#34;&gt;cd&lt;/span&gt; ./scripts &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; ./install.sh --values ./myvalues.yaml --upgrade
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Run the same command on the second Kubernetes cluster if you use multi-cluster replication topology.&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;em&gt;&lt;strong&gt;Note&lt;/strong&gt;&lt;/em&gt;: Upgrade won&amp;rsquo;t override currently existing ConfigMap, even if you change templated values in myvalues.yaml file. If you want to change the logLevel - edit ConfigMap from within the cluster using
-&lt;code&gt;bash  kubectl edit cm -n dell-replication-controller dell-replication-controller-config   &lt;/code&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h3 id=&#34;upgrading-with-repctl&#34;&gt;Upgrading with repctl&lt;/h3&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;em&gt;&lt;strong&gt;Note&lt;/strong&gt;&lt;/em&gt;: These steps assume that you already have &lt;code&gt;repctl&lt;/code&gt; configured to use correct clusters, if you don&amp;rsquo;t know how to do that please refer to &lt;a href=&#34;../deployment/install-repctl&#34;&gt;installing with repctl&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;&lt;strong&gt;Steps&lt;/strong&gt;&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;
-&lt;p&gt;Find a new version of deployment manifest that can be found in &lt;code&gt;deploy/controller.yaml&lt;/code&gt;, with newer &lt;code&gt;image&lt;/code&gt; pointing to the version of CSM Replication controller you want to upgrade to.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Apply said manifest using the usual &lt;code&gt;repctl create&lt;/code&gt; command like so:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;./repctl create -f ../deploy/controller.yaml
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;The output should have this line &lt;code&gt;Successfully updated existing deployment: dell-replication-controller-manager&lt;/code&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Check if everything is OK by querying your Kubernetes clusters using &lt;code&gt;kubectl&lt;/code&gt; using a &lt;code&gt;kubectl get&lt;/code&gt;:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl get pods -n dell-replication-controller&lt;span style=&#34;color:#4e9a06&#34;&gt;`&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Your pods should be &lt;code&gt;READY&lt;/code&gt; and &lt;code&gt;RUNNING&lt;/code&gt;.&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h3 id=&#34;replication-crd-version-update&#34;&gt;Replication CRD version update&lt;/h3&gt;
-&lt;p&gt;CRD &lt;code&gt;dellcsireplicationgroups.replication.storage.dell.com&lt;/code&gt; has been updated to version &lt;code&gt;v1&lt;/code&gt; in CSM Replication v1.4.0. To facilitate the continued use of existing &lt;code&gt;DellCSIReplicationGroup&lt;/code&gt; CR objects after upgrading to CSM Replication v1.4.0 or later, an &lt;code&gt;init container&lt;/code&gt; will be deployed during upgrade. The &lt;code&gt;init container&lt;/code&gt; updates the existing CRs with necessary steps for their continued use.&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;em&gt;&lt;strong&gt;Note&lt;/strong&gt;&lt;/em&gt;: Do not update the CRD as part of upgrade. An &lt;code&gt;init container&lt;/code&gt; included in the replication controller pod takes care of updating existing CRD and CR versions.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;Starting from CSM Replication v1.6.0, the &lt;code&gt;init container&lt;/code&gt; has been removed. Therefore, when upgrading from versions older than v1.4.0 to v1.6.0 or any later versions, it is mandatory to perform an intermediate upgrade to either v1.4.0 or v1.5.0 before proceeding with any further upgrades.&lt;/p&gt;
-
-      </description>
+      <description>CSM Replication module consists of two components:
+CSM Replication sidecar (installed along with the driver) CSM Replication controller Those two components should be upgraded separately. When upgrading them ensure that you use the same versions for both sidecar and controller, because different versions could be incompatible with each other.
+Note: While upgrading the module via helm, the replicas variable in myvalues.yaml can be at most one less than the number of worker nodes.</description>
     </item>
-    
     <item>
-      <title>V2: Uninstall</title>
+      <title>Uninstall</title>
       <link>https://dell.github.io/csm-docs/v2/replication/uninstall/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>https://dell.github.io/csm-docs/v2/replication/uninstall/</guid>
-      <description>
-        
-        
-        &lt;p&gt;This section outlines the uninstallation steps for Container Storage Modules (CSM) for Replication.&lt;/p&gt;
-&lt;h2 id=&#34;uninstalling-replication-controller&#34;&gt;Uninstalling replication controller&lt;/h2&gt;
-&lt;p&gt;To uninstall the replication controller, you can use the script &lt;code&gt;uninstall.sh&lt;/code&gt; located in the &lt;code&gt;scripts&lt;/code&gt; folder:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;./uninstall.sh 
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;This script will automatically detect how the current version was installed (repctl or Helm) and use the correct method to delete it.&lt;/p&gt;
-&lt;p&gt;You can also manually uninstall the replication controller using a method that depends on how you installed it.&lt;/p&gt;
-&lt;p&gt;If replication controller was installed using &lt;code&gt;helm&lt;/code&gt;, use this command:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;helm delete -n dell-replication-controller replication
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;If you used &lt;code&gt;controller.yaml&lt;/code&gt; manifest with either &lt;code&gt;kubectl&lt;/code&gt; or &lt;code&gt;repctl&lt;/code&gt;, use this:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl delete -f deploy/controller.yaml
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;To delete the replication group CRD, you can run the command:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl delete crd dellcsireplicationgroups.replication.storage.dell.com
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;All replication groups should be deleted before deleting the replication group CRD.&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;em&gt;&lt;strong&gt;NOTE&lt;/strong&gt;&lt;/em&gt;: Be sure to run the chosen command on all clusters where you want to uninstall the replication controller/CRD.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h2 id=&#34;uninstalling-the-replication-sidecar&#34;&gt;Uninstalling the replication sidecar&lt;/h2&gt;
-&lt;p&gt;To uninstall the replication sidecar, you need to uninstall the CSI Driver. Please view the &lt;a href=&#34;../../csidriver/uninstall&#34;&gt;uninstall&lt;/a&gt; page for the driver itself.&lt;/p&gt;
-
-      </description>
+      <description>This section outlines the uninstallation steps for Container Storage Modules (CSM) for Replication.
+Uninstalling replication controller To uninstall the replication controller, you can use the script uninstall.sh located in the scripts folder:
+./uninstall.sh This script will automatically detect how the current version was installed (repctl or Helm) and use the correct method to delete it.
+You can also manually uninstall the replication controller using a method that depends on how you installed it.</description>
     </item>
-    
   </channel>
 </rss>

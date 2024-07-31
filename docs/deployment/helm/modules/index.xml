@@ -1,57 +1,11 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Dell Technologies – CSM Modules</title>
+    <title>CSM Modules on </title>
     <link>https://dell.github.io/csm-docs/docs/deployment/helm/modules/</link>
-    <description>Recent content in CSM Modules on Dell Technologies</description>
+    <description>Recent content in CSM Modules on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    
-	  <atom:link href="https://dell.github.io/csm-docs/docs/deployment/helm/modules/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-      
-        
-      
-    
-    
-    <item>
-      <title>Docs: Installation</title>
-      <link>https://dell.github.io/csm-docs/docs/deployment/helm/modules/installation/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://dell.github.io/csm-docs/docs/deployment/helm/modules/installation/</guid>
-      <description>
-        
-        
-        
-      </description>
-    </item>
-    
-    <item>
-      <title>Docs: Uninstallation</title>
-      <link>https://dell.github.io/csm-docs/docs/deployment/helm/modules/uninstall/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://dell.github.io/csm-docs/docs/deployment/helm/modules/uninstall/</guid>
-      <description>
-        
-        
-        
-      </description>
-    </item>
-    
-    <item>
-      <title>Docs: Upgrade</title>
-      <link>https://dell.github.io/csm-docs/docs/deployment/helm/modules/upgrade/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://dell.github.io/csm-docs/docs/deployment/helm/modules/upgrade/</guid>
-      <description>
-        
-        
-        
-      </description>
-    </item>
-    
+    <atom:link href="https://dell.github.io/csm-docs/docs/deployment/helm/modules/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>
