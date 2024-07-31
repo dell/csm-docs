@@ -1,306 +1,48 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Dell Technologies – Upgrade</title>
+    <title>Upgrade on </title>
     <link>https://dell.github.io/csm-docs/v1/deployment/helm/modules/upgrade/</link>
-    <description>Recent content in Upgrade on Dell Technologies</description>
+    <description>Recent content in Upgrade on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    
-	  <atom:link href="https://dell.github.io/csm-docs/v1/deployment/helm/modules/upgrade/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-      
-        
-      
-    
-    
+    <atom:link href="https://dell.github.io/csm-docs/v1/deployment/helm/modules/upgrade/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>V1: Authorization</title>
+      <title>Authorization</title>
       <link>https://dell.github.io/csm-docs/v1/deployment/helm/modules/upgrade/authorization/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>https://dell.github.io/csm-docs/v1/deployment/helm/modules/upgrade/authorization/</guid>
-      <description>
-        
-        
-        &lt;p&gt;This section outlines the upgrade steps for Container Storage Modules (CSM) for Authorization.  The upgrade of CSM for Authorization is handled in 2 parts:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Helm Chart Upgrade&lt;/li&gt;
-&lt;li&gt;Upgrading the Dell CSI drivers with CSM for Authorization enabled&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;helm-chart-upgrade&#34;&gt;Helm Chart Upgrade&lt;/h2&gt;
-&lt;ol&gt;
-&lt;li&gt;
-&lt;p&gt;To upgrade an existing Helm installation of CSM for Authorization to the latest release, download the latest Helm charts.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;helm repo update
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Check if the latest Helm chart version is available:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;helm search repo dell
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;NAME                            CHART VERSION   APP VERSION     DESCRIPTION
-dell/csm-authorization          1.10.0          1.10.0          CSM for Authorization is part of the [Container...
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Upgrade to the latest CSM for Authorization release:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;helm upgrade --version &lt;span style=&#34;color:#000&#34;&gt;$latest_chart_version&lt;/span&gt; -f myvalues.yaml authorization dell/csm-authorization -n authorization
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h2 id=&#34;upgrading-dell-csi-drivers-with-csm-for-authorization-enabled&#34;&gt;Upgrading Dell CSI Driver(s) with CSM for Authorization enabled&lt;/h2&gt;
-&lt;p&gt;Given a setup where the CSM for Authorization proxy server is already upgraded to the latest version, follow the upgrade instructions for the applicable CSI Driver(s) to upgrade the driver and the CSM for Authorization sidecar&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;../../../drivers/upgrade/powerflex/&#34;&gt;Upgrade PowerFlex CSI driver&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;../../../drivers/upgrade/powermax/&#34;&gt;Upgrade PowerMax CSI driver&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;../../../drivers/upgrade/isilon/&#34;&gt;Upgrade PowerScale CSI driver&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-      </description>
+      <description>This section outlines the upgrade steps for Container Storage Modules (CSM) for Authorization. The upgrade of CSM for Authorization is handled in 2 parts:
+Helm Chart Upgrade Upgrading the Dell CSI drivers with CSM for Authorization enabled Helm Chart Upgrade To upgrade an existing Helm installation of CSM for Authorization to the latest release, download the latest Helm charts.
+helm repo update Check if the latest Helm chart version is available:</description>
     </item>
-    
     <item>
-      <title>V1: Observability</title>
+      <title>Observability</title>
       <link>https://dell.github.io/csm-docs/v1/deployment/helm/modules/upgrade/observability/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>https://dell.github.io/csm-docs/v1/deployment/helm/modules/upgrade/observability/</guid>
-      <description>
-        
-        
-        &lt;p&gt;This section outlines the upgrade steps for Container Storage Modules (CSM) for Observability. CSM for Observability upgrade can be achieved in one of two ways:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Helm Chart Upgrade&lt;/li&gt;
-&lt;li&gt;Online Installer Upgrade&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;helm-chart-upgrade&#34;&gt;Helm Chart Upgrade&lt;/h2&gt;
-&lt;p&gt;CSM for Observability Helm upgrade supports &lt;a href=&#34;../../installation/observability/deployment&#34;&gt;Helm&lt;/a&gt;, &lt;a href=&#34;../../installation/observability/installer/&#34;&gt;Online Installer&lt;/a&gt;, and &lt;a href=&#34;../../../../offline/modules&#34;&gt;Offline Installer&lt;/a&gt; deployments.&lt;/p&gt;
-&lt;p&gt;To upgrade an existing Helm installation of CSM for Observability to the latest release, download the latest Helm charts.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;helm repo update
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Check if the latest Helm chart version is available:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;helm search repo dell
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;NAME                            CHART VERSION   APP VERSION     DESCRIPTION
-dell/karavi-observability       1.8.0           1.8.0           CSM for Observability is part of the [Container...
-&lt;/code&gt;&lt;/pre&gt;&lt;blockquote&gt;
-&lt;p&gt;Note: If using cert-manager CustomResourceDefinitions older than v1.5.3, delete the old CRDs and install v1.5.3 of the CRDs prior to upgrade. See &lt;a href=&#34;../../installation/observability/deployment#prerequisites&#34;&gt;Prerequisites&lt;/a&gt; for location of CRDs.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;Upgrade to the latest CSM for Observability release:&lt;/p&gt;
-&lt;p&gt;Upgrade Helm and Online Installer deployments:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;helm upgrade --version &lt;span style=&#34;color:#000&#34;&gt;$latest_chart_version&lt;/span&gt; --values values.yaml karavi-observability dell/karavi-observability -n &lt;span style=&#34;color:#000&#34;&gt;$namespace&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Upgrade Offline Installer deployment:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;helm upgrade --version &lt;span style=&#34;color:#000&#34;&gt;$latest_chart_version&lt;/span&gt; karavi-observability dell/karavi-observability -n &lt;span style=&#34;color:#000&#34;&gt;$namespace&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;The &lt;a href=&#34;../../installation/observability/deployment#configuration&#34;&gt;configuration&lt;/a&gt; section lists all the parameters that can be configured using the &lt;code&gt;values.yaml&lt;/code&gt; file.&lt;/p&gt;
-&lt;h2 id=&#34;online-installer-upgrade&#34;&gt;Online Installer Upgrade&lt;/h2&gt;
-&lt;p&gt;CSM for Observability online installer upgrade can be used if the initial deployment was performed using the &lt;a href=&#34;../../installation/observability/installer&#34;&gt;Online Installer&lt;/a&gt; or &lt;a href=&#34;../../installation/observability/deployment&#34;&gt;Helm&lt;/a&gt;.&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;
-&lt;p&gt;Change to the installer directory:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#204a87&#34;&gt;cd&lt;/span&gt; karavi-observability/installer
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Update &lt;code&gt;values.yaml&lt;/code&gt; file as needed. Configuration options are outlined in the &lt;a href=&#34;../../installation/observability/deployment#configuration&#34;&gt;Helm chart deployment section&lt;/a&gt;.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Execute the &lt;code&gt;./karavi-observability-install.sh&lt;/code&gt; script:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;./karavi-observability-install.sh upgrade --namespace &lt;span style=&#34;color:#000&#34;&gt;$namespace&lt;/span&gt; --values myvalues.yaml --version &lt;span style=&#34;color:#000&#34;&gt;$latest_chart_version&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;---------------------------------------------------------------------------------
-&amp;gt;  Upgrading Karavi Observability in namespace karavi on 1.27
----------------------------------------------------------------------------------
-|
-|- Karavi Observability is installed. Upgrade can continue          Success
-|
-|- Verifying Kubernetes versions
-  |
-  |--&amp;gt; Verifying minimum Kubernetes version                         Success
-  |
-  |--&amp;gt; Verifying maximum Kubernetes version                         Success
-|
-|- Verifying helm version                                           Success
-|
-|- Upgrading CertManager CRDs                                       Success
-|
-|- Updating helm repositories                                       Success
-|
-|- Upgrading Karavi Observability helm chart                        Success
-|
-|- Waiting for pods in namespace karavi to be ready                 Success
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h2 id=&#34;offline-installer-upgrade&#34;&gt;Offline Installer Upgrade&lt;/h2&gt;
-&lt;p&gt;Assuming that you have already installed the Karavi Observability Helm Chart by offline installer and meet its installation requirement.
-These instructions can be followed when a Helm chart was installed and will be upgraded in an environment that does not have an Internet connection and will be unable to download the Helm chart and related Docker images.&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;
-&lt;p&gt;Build the Offline Bundle
-Follow &lt;a href=&#34;../../../../offline/modules&#34;&gt;Offline Karavi Observability Helm Chart Installer&lt;/a&gt; to build the latest bundle.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Unpack the Offline Bundle
-Follow &lt;a href=&#34;../../../../offline/modules&#34;&gt;Offline Karavi Observability Helm Chart Installer&lt;/a&gt;, copy and unpack the Offline Bundle to another Linux system, and push Docker images to the internal Docker registry.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Perform Helm upgrade&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;
-&lt;p&gt;Change directory to &lt;code&gt;helm&lt;/code&gt; which contains the updated Helm chart directory:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#204a87&#34;&gt;cd&lt;/span&gt; helm
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Install necessary cert-manager CustomResourceDefinitions provided.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl apply --validate&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#204a87&#34;&gt;false&lt;/span&gt; -f cert-manager.crds.yaml
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;(Optional) Enable Karavi Observability for PowerFlex/PowerScale to use an existing instance of Karavi Authorization for accessing the REST API for the given storage systems.
-&lt;strong&gt;Note&lt;/strong&gt;: Assuming that if the Karavi Observability&amp;rsquo;s Authorization has been enabled in the phase of &lt;a href=&#34;../../../../offline/modules&#34;&gt;Offline Karavi Observability Helm Chart Installer&lt;/a&gt;, the Authorization Secrets/Configmap have been copied to the Karavi Observability namespace.
-A sample configuration values.yaml file is located &lt;a href=&#34;https://github.com/dell/helm-charts/blob/main/charts/karavi-observability/values.yaml&#34;&gt;here&lt;/a&gt;.
-In your own configuration values.yaml, you need to enable PowerFlex/PowerScale Authorization, and provide the location of the sidecar-proxy Docker image and URL of the Karavi Authorization proxyHost address.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;After the images have been made available and the Helm chart configuration is updated, follow the instructions within the Helm chart&amp;rsquo;s repository to complete the installation.
-&lt;strong&gt;Note&lt;/strong&gt;: Assuming that Your Secrets from CSI Drivers have been copied to the Karavi Observability namespace during the steps of &lt;a href=&#34;../../../../offline/modules&#34;&gt;Offline Karavi Observability Helm Chart Installer&lt;/a&gt;
-Optionally, you could provide your own &lt;a href=&#34;../../installation/observability/#configuration&#34;&gt;configurations&lt;/a&gt;. A sample values.yaml file is located &lt;a href=&#34;https://github.com/dell/helm-charts/blob/main/charts/karavi-observability/values.yaml&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  helm upgrade -n install-namespace app-name karavi-observability
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  NAME: app-name
-  LAST DEPLOYED: Wed Aug 17 14:44:04 2022
-  NAMESPACE: install-namespace
-  STATUS: deployed
-  REVISION: 1
-  TEST SUITE: None
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-
-      </description>
+      <description>This section outlines the upgrade steps for Container Storage Modules (CSM) for Observability. CSM for Observability upgrade can be achieved in one of two ways:
+Helm Chart Upgrade Online Installer Upgrade Helm Chart Upgrade CSM for Observability Helm upgrade supports Helm, Online Installer, and Offline Installer deployments.
+To upgrade an existing Helm installation of CSM for Observability to the latest release, download the latest Helm charts.
+helm repo update Check if the latest Helm chart version is available:</description>
     </item>
-    
     <item>
-      <title>V1: Resiliency</title>
+      <title>Resiliency</title>
       <link>https://dell.github.io/csm-docs/v1/deployment/helm/modules/upgrade/resiliency/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>https://dell.github.io/csm-docs/v1/deployment/helm/modules/upgrade/resiliency/</guid>
-      <description>
-        
-        
-        &lt;p&gt;CSM for Resiliency can be upgraded as part of the Dell CSI driver upgrade process. The drivers can be upgraded either by a &lt;em&gt;helm chart&lt;/em&gt; or by the &lt;em&gt;Dell CSM Operator&lt;/em&gt;. Currently, only &lt;em&gt;Helm chart&lt;/em&gt; upgrade is supported for CSM for Resiliency.&lt;/p&gt;
-&lt;p&gt;For information on the PowerFlex CSI driver upgrade process, see &lt;a href=&#34;../../../drivers/upgrade/powerflex&#34;&gt;PowerFlex CSI Driver&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;For information on the Unity XT CSI driver upgrade process, see &lt;a href=&#34;../../../drivers/upgrade/unity&#34;&gt;Unity XT CSI Driver&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;For information on the PowerScale CSI driver upgrade process, see &lt;a href=&#34;../../../drivers/upgrade/isilon&#34;&gt;PowerScale CSI Driver&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;For information on the PowerStore CSI driver upgrade process, see &lt;a href=&#34;../../../drivers/upgrade/powerstore&#34;&gt;PowerStore CSI Driver&lt;/a&gt;.&lt;/p&gt;
-&lt;h2 id=&#34;helm-chart-upgrade&#34;&gt;Helm Chart Upgrade&lt;/h2&gt;
-&lt;p&gt;To upgrade CSM for Resiliency with the driver, the following steps are required.&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Note: These steps refer to the values file and &lt;code&gt;csi-install.sh&lt;/code&gt; script that were used during initial installation of the Dell CSI driver.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;&lt;strong&gt;Steps&lt;/strong&gt;&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;Update the podmon.image value in the values files to reference the new podmon image.&lt;/li&gt;
-&lt;li&gt;Run the csi-install script with the option &amp;ndash;upgrade by running:&lt;/li&gt;
-&lt;/ol&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#204a87&#34;&gt;cd&lt;/span&gt; ../dell-csi-helm-installer &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; ./csi-install.sh --namespace vxflexos --values ./myvalues.yaml --upgrade
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-      </description>
+      <description>CSM for Resiliency can be upgraded as part of the Dell CSI driver upgrade process. The drivers can be upgraded either by a helm chart or by the Dell CSM Operator. Currently, only Helm chart upgrade is supported for CSM for Resiliency.
+For information on the PowerFlex CSI driver upgrade process, see PowerFlex CSI Driver.
+For information on the Unity XT CSI driver upgrade process, see Unity XT CSI Driver.</description>
     </item>
-    
     <item>
-      <title>V1: Replication</title>
+      <title>Replication</title>
       <link>https://dell.github.io/csm-docs/v1/deployment/helm/modules/upgrade/replication/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>https://dell.github.io/csm-docs/v1/deployment/helm/modules/upgrade/replication/</guid>
-      <description>
-        
-        
-        &lt;p&gt;CSM Replication module consists of two components:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;CSM Replication sidecar (installed along with the driver)&lt;/li&gt;
-&lt;li&gt;CSM Replication controller&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Those two components should be upgraded separately. When upgrading them ensure that you use the same versions for both sidecar and
-controller, because different versions could be incompatible with each other.&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;em&gt;&lt;strong&gt;Note&lt;/strong&gt;&lt;/em&gt;: While upgrading the module via helm, the &lt;code&gt;replicas&lt;/code&gt; variable in &lt;code&gt;myvalues.yaml&lt;/code&gt; can be at most one less than the number of worker nodes.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h2 id=&#34;updating-csm-replication-sidecar&#34;&gt;Updating CSM Replication sidecar&lt;/h2&gt;
-&lt;p&gt;To upgrade the CSM Replication sidecar that is installed along with the driver, the following steps are required.&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;em&gt;&lt;strong&gt;Note&lt;/strong&gt;&lt;/em&gt;: These steps refer to the values file and &lt;code&gt;csi-install.sh&lt;/code&gt; script that was used during the initial installation of the Dell CSI driver.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;&lt;strong&gt;Steps&lt;/strong&gt;&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;Update the &lt;code&gt;controller.replication.image&lt;/code&gt; value in the values files to reference the new CSM Replication sidecar image.&lt;/li&gt;
-&lt;li&gt;Run the csi-install script with the option &lt;code&gt;--upgrade&lt;/code&gt; by running: &lt;br&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#204a87&#34;&gt;cd&lt;/span&gt; ../dell-csi-helm-installer &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; ./csi-install.sh --namespace &amp;lt;your-namespace&amp;gt; --values ./myvalues.yaml --upgrade
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
-&lt;li&gt;Run the same command on the second Kubernetes cluster if you use multi-cluster replication topology&lt;/li&gt;
-&lt;/ol&gt;
-&lt;blockquote&gt;
-&lt;p&gt;For more information on upgrading the CSI driver, please visit the &lt;a href=&#34;../../../drivers/upgrade&#34;&gt;CSI driver upgrade page&lt;/a&gt;.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h3 id=&#34;powerscale&#34;&gt;PowerScale&lt;/h3&gt;
-&lt;p&gt;On PowerScale systems, an additional step is needed when upgrading to CSM Replication v1.4.0 or later. Because the SyncIQ policy created on the target-side storage array is no longer used, it must be deleted for any existing &lt;code&gt;DellCSIReplicationGroup&lt;/code&gt; objects after performing the upgrade to the CSM Replication sidecar and PowerScale CSI driver. These steps should be performed before the &lt;code&gt;DellCSIReplicationGroup&lt;/code&gt; objects are used with the new version of the CSI driver. Until this step is performed, existing &lt;code&gt;DellCSIReplicationGroup&lt;/code&gt; objects will display an UNKNOWN link state.&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;Log in to the target PowerScale array.&lt;/li&gt;
-&lt;li&gt;Navigate to the &lt;code&gt;Data Protection &amp;gt; SyncIQ&lt;/code&gt; page and select the &lt;code&gt;Policies&lt;/code&gt; tab.&lt;/li&gt;
-&lt;li&gt;Delete disabled, target-side SyncIQ policies that are used for CSM Replication. Such policies will be distinguished by their names, of the format &lt;code&gt;&amp;lt;prefix&amp;gt;-&amp;lt;kubernetes namespace&amp;gt;-&amp;lt;IP of replication destination&amp;gt;-&amp;lt;RPO duration&amp;gt;&lt;/code&gt;.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h2 id=&#34;updating-csm-replication-controller&#34;&gt;Updating CSM Replication controller&lt;/h2&gt;
-&lt;p&gt;Make sure the appropriate release branch is available on the machine performing the upgrade by running:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;git clone -b v1.8.0 https://github.com/dell/csm-replication.git
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;upgrading-with-helm&#34;&gt;Upgrading with Helm&lt;/h3&gt;
-&lt;p&gt;This option will only work if you have previously installed replication via Helm chart, available since version 1.1. If you used simple manifest or &lt;code&gt;repctl&lt;/code&gt; please use &lt;a href=&#34;#upgrading-with-repctl&#34;&gt;upgrading with repctl&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Steps&lt;/strong&gt;&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;
-&lt;p&gt;Update the &lt;code&gt;image&lt;/code&gt; value in the values files to reference the new CSM Replication controller image or use a new version of the csm-replication Helm chart.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Run the install script with the option &lt;code&gt;--upgrade&lt;/code&gt; by running:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#204a87&#34;&gt;cd&lt;/span&gt; ./scripts &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; ./install.sh --values ./myvalues.yaml --upgrade
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Run the same command on the second Kubernetes cluster if you use multi-cluster replication topology.&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;em&gt;&lt;strong&gt;Note&lt;/strong&gt;&lt;/em&gt;: Upgrade won&amp;rsquo;t override currently existing ConfigMap, even if you change templated values in myvalues.yaml file. If you want to change the logLevel - edit ConfigMap from within the cluster using
-&lt;code&gt;bash  kubectl edit cm -n dell-replication-controller dell-replication-controller-config   &lt;/code&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h3 id=&#34;upgrading-with-repctl&#34;&gt;Upgrading with repctl&lt;/h3&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;em&gt;&lt;strong&gt;Note&lt;/strong&gt;&lt;/em&gt;: These steps assume that you already have &lt;code&gt;repctl&lt;/code&gt; configured to use correct clusters, if you don&amp;rsquo;t know how to do that please refer to &lt;a href=&#34;../../installation/replication/install-repctl&#34;&gt;installing with repctl&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;&lt;strong&gt;Steps&lt;/strong&gt;&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;
-&lt;p&gt;Find a new version of deployment manifest that can be found in &lt;code&gt;deploy/controller.yaml&lt;/code&gt;, with newer &lt;code&gt;image&lt;/code&gt; pointing to the version of CSM Replication controller you want to upgrade to.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Apply said manifest using the usual &lt;code&gt;repctl create&lt;/code&gt; command like so:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;./repctl create -f ../deploy/controller.yaml
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;The output should have this line &lt;code&gt;Successfully updated existing deployment: dell-replication-controller-manager&lt;/code&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Check if everything is OK by querying your Kubernetes clusters using &lt;code&gt;kubectl&lt;/code&gt; using a &lt;code&gt;kubectl get&lt;/code&gt;:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl get pods -n dell-replication-controller&lt;span style=&#34;color:#4e9a06&#34;&gt;`&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Your pods should be &lt;code&gt;READY&lt;/code&gt; and &lt;code&gt;RUNNING&lt;/code&gt;.&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h3 id=&#34;replication-crd-version-update&#34;&gt;Replication CRD version update&lt;/h3&gt;
-&lt;p&gt;CRD &lt;code&gt;dellcsireplicationgroups.replication.storage.dell.com&lt;/code&gt; has been updated to version &lt;code&gt;v1&lt;/code&gt; in CSM Replication v1.4.0. To facilitate the continued use of existing &lt;code&gt;DellCSIReplicationGroup&lt;/code&gt; CR objects after upgrading to CSM Replication v1.4.0 or later, an &lt;code&gt;init container&lt;/code&gt; will be deployed during upgrade. The &lt;code&gt;init container&lt;/code&gt; updates the existing CRs with necessary steps for their continued use.&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;em&gt;&lt;strong&gt;Note&lt;/strong&gt;&lt;/em&gt;: Do not update the CRD as part of upgrade. An &lt;code&gt;init container&lt;/code&gt; included in the replication controller pod takes care of updating existing CRD and CR versions.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;Starting from CSM Replication v1.6.0, the &lt;code&gt;init container&lt;/code&gt; has been removed. Therefore, when upgrading from versions older than v1.4.0 to v1.6.0 or any later versions, it is mandatory to perform an intermediate upgrade to either v1.4.0 or v1.5.0 before proceeding with any further upgrades.&lt;/p&gt;
-
-      </description>
+      <description>CSM Replication module consists of two components:
+CSM Replication sidecar (installed along with the driver) CSM Replication controller Those two components should be upgraded separately. When upgrading them ensure that you use the same versions for both sidecar and controller, because different versions could be incompatible with each other.
+Note: While upgrading the module via helm, the replicas variable in myvalues.yaml can be at most one less than the number of worker nodes.</description>
     </item>
-    
   </channel>
 </rss>

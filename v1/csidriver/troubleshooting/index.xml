@@ -1,449 +1,47 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Dell Technologies – Troubleshooting</title>
+    <title>Troubleshooting on </title>
     <link>https://dell.github.io/csm-docs/v1/csidriver/troubleshooting/</link>
-    <description>Recent content in Troubleshooting on Dell Technologies</description>
+    <description>Recent content in Troubleshooting on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    
-	  <atom:link href="https://dell.github.io/csm-docs/v1/csidriver/troubleshooting/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-      
-        
-      
-    
-    
+    <atom:link href="https://dell.github.io/csm-docs/v1/csidriver/troubleshooting/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>V1: PowerFlex</title>
+      <title>PowerFlex</title>
       <link>https://dell.github.io/csm-docs/v1/csidriver/troubleshooting/powerflex/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>https://dell.github.io/csm-docs/v1/csidriver/troubleshooting/powerflex/</guid>
-      <description>
-        
-        
-        &lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;Symptoms&lt;/th&gt;
-&lt;th&gt;Prevention, Resolution or Workaround&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;The installation fails with the following error message: &lt;br /&gt;&lt;code&gt;Node xxx does not have the SDC installed&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Install the PowerFlex SDC on listed nodes. The SDC must be installed on all the nodes that need to pull an image of the driver.&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;When you run the command &lt;code&gt;kubectl describe pods vxflexos-controller-* –n vxflexos&lt;/code&gt;, the system indicates that the driver image could not be loaded.&lt;/td&gt;
-&lt;td&gt;- If on Kubernetes, edit the &lt;code&gt;daemon.json&lt;/code&gt; file found in the registry location and add &lt;br /&gt;&lt;code&gt;{ &amp;quot;insecure-registries&amp;quot; :[ &amp;quot;hostname.cloudapp.net:5000&amp;quot; ] }&lt;/code&gt;&lt;br /&gt;- If on OpenShift, run the command &lt;code&gt;oc edit image.config.openshift.io/cluster&lt;/code&gt; and add registries to yaml file that is displayed when you run the command.&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;The &lt;code&gt;kubectl logs -n vxflexos vxflexos-controller-* driver&lt;/code&gt; logs show that the driver is not authenticated.&lt;/td&gt;
-&lt;td&gt;Check the username, password, and the gateway IP address for the PowerFlex system.&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;The &lt;code&gt;kubectl logs vxflexos-controller-* -n vxflexos driver&lt;/code&gt; logs show that the system ID is incorrect.&lt;/td&gt;
-&lt;td&gt;Use the &lt;code&gt;get_vxflexos_info.sh&lt;/code&gt; to find the correct system ID.&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;The &lt;code&gt;kubectl logs vxflexos-controller-* -n vxflexos driver&lt;/code&gt; logs show that the system ID is incorrect.&lt;/td&gt;
-&lt;td&gt;Use the &lt;code&gt;get_vxflexos_info.sh&lt;/code&gt; to find the correct system ID. Add the system ID to &lt;code&gt;myvalues.yaml&lt;/code&gt; script.&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;CreateVolume error System &lt;Name&gt; is not configured in the driver&lt;/td&gt;
-&lt;td&gt;Powerflex name if used for systemID in StorageClass ensure same name is also used in array config systemID&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Defcontext mount option seems to be ignored, volumes still are not being labeled correctly.&lt;/td&gt;
-&lt;td&gt;Ensure SElinux is enabled on a worker node, and ensure your container run time manager is properly configured to be utilized with SElinux.&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Mount options that interact with SElinux are not working (like defcontext).&lt;/td&gt;
-&lt;td&gt;Check that your container orchestrator is properly configured to work with SElinux.&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Installation of the driver on Kubernetes v1.25/v1.26/v1.27 fails with the following error: &lt;br /&gt;&lt;code&gt;Error: unable to build kubernetes objects from release manifest: unable to recognize &amp;quot;&amp;quot;: no matches for kind &amp;quot;VolumeSnapshotClass&amp;quot; in version &amp;quot;snapshot.storage.k8s.io/v1&amp;quot;&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Kubernetes v1.23/v1.24/v1.25 requires v1 version of snapshot CRDs to be created in cluster, see the &lt;a href=&#34;../../../deployment/helm/drivers/installation/powerflex/#optional-volume-snapshot-requirements&#34;&gt;Volume Snapshot Requirements&lt;/a&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;The &lt;code&gt;kubectl logs -n vxflexos vxflexos-controller-* driver&lt;/code&gt; logs show &lt;code&gt;x509: certificate signed by unknown authority&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;A self assigned certificate is used for PowerFlex array. See &lt;a href=&#34;../../../deployment/helm/drivers/installation/powerflex/#certificate-validation-for-powerflex-gateway-rest-api-calls&#34;&gt;certificate validation for PowerFlex Gateway&lt;/a&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;When you run the command &lt;code&gt;kubectl apply -f snapclass-v1.yaml&lt;/code&gt;, you get the error &lt;code&gt;error: unable to recognize &amp;quot;snapclass-v1.yaml&amp;quot;: no matches for kind &amp;quot;VolumeSnapshotClass&amp;quot; in version &amp;quot;snapshot.storage.k8s.io/v1&amp;quot;&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Check to make sure that the v1 snapshotter CRDs are installed, and not the v1beta1 CRDs, which are no longer supported.&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;The controller pod is stuck and producing errors such as&amp;quot; &lt;code&gt;Failed to watch *v1.VolumeSnapshotContent: failed to list *v1.VolumeSnapshotContent: the server could not find the requested resource (get volumesnapshotcontents.snapshot.storage.k8s.io)&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Make sure that v1 snapshotter CRDs and v1 snapclass are installed, and not v1beta1, which is no longer supported.&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Driver install or upgrade fails because of an incompatible Kubernetes version, even though the version seems to be within the range of compatibility. For example: &lt;code&gt;Error: UPGRADE FAILED: chart requires kubeVersion: &amp;gt;= 1.21.0 &amp;lt;= 1.28.0 which is incompatible with Kubernetes V1.21.11-mirantis-1&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;If you are using an extended Kubernetes version, see the helm Chart at &lt;code&gt;helm/csi-vxflexos/Chart.yaml&lt;/code&gt; and use the alternate &lt;code&gt;kubeVersion&lt;/code&gt; check that is provided in the comments. Note: this is not meant to be used to enable the use of pre-release alpha and beta versions, which is not supported.&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Volume metrics are missing&lt;/td&gt;
-&lt;td&gt;Enable &lt;a href=&#34;../../features/powerflex#volume-health-monitoring&#34;&gt;Volume Health Monitoring&lt;/a&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;When a node goes down, the block volumes attached to the node cannot be attached to another node&lt;/td&gt;
-&lt;td&gt;This is a known issue and has been reported at &lt;a href=&#34;https://github.com/kubernetes-csi/external-attacher/issues/215&#34;&gt;https://github.com/kubernetes-csi/external-attacher/issues/215&lt;/a&gt;. Workaround: &lt;br /&gt; 1. Force delete the pod running on the node that went down &lt;br /&gt; 2. Delete the volumeattachment to the node that went down. &lt;br /&gt; Now the volume can be attached to the new node.&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;CSI-PowerFlex volumes cannot mount; are being recognized as multipath devices&lt;/td&gt;
-&lt;td&gt;CSI-PowerFlex does not support multipath; to fix: &lt;br/&gt; 1. Remove any multipath mapping involving a powerflex volume with &lt;code&gt;multipath -f &amp;lt;powerflex volume&amp;gt;&lt;/code&gt; &lt;br/&gt; 2. Blacklist CSI-PowerFlex volumes in multipath config file&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;When attempting a driver upgrade, you see: &lt;code&gt;spec.fsGroupPolicy: Invalid value: &amp;quot;xxx&amp;quot;: field is immutable&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;You cannot upgrade between drivers with different fsGroupPolicies. See &lt;a href=&#34;../../../deployment/helm/drivers/upgrade/powerflex&#34;&gt;upgrade documentation&lt;/a&gt; for more details&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;When accessing ROX mode PVC in OpenShift where the worker nodes are non-root user, you see: &lt;code&gt;Permission denied&lt;/code&gt; while accesing the PVC mount location from the pod.&lt;/td&gt;
-&lt;td&gt;Set the &lt;code&gt;securityContext&lt;/code&gt; for ROX mode PVC pod as below, as it defines privileges for the pods or containers.&lt;br/&gt;&lt;br/&gt;securityContext:&lt;br/&gt;       runAsUser: 0&lt;br/&gt;       runAsGroup: 0&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;After installing version v2.6.0 of the driver using the default &lt;code&gt;powerflexSdc&lt;/code&gt; image, sdc:3.6.0.6, the vxflexos-node pods are in an &lt;code&gt;Init:CrashLoopBackOff&lt;/code&gt; state. This issue can happen on hosts that require the SDC to be installed manually. Automatic SDC is only supported on Red Hat CoreOS (RHCOS), RHEL 7.9, RHEL 8.4, RHEL 8.6.&lt;/td&gt;
-&lt;td&gt;The SDC is already installed. Change the &lt;code&gt;images.powerflexSdc&lt;/code&gt; value to an empty value in the &lt;a href=&#34;https://github.com/dell/csi-powerflex/blob/72b27acee7553006cc09df97f85405f58478d2e4/helm/csi-vxflexos/values.yaml#L13&#34;&gt;values&lt;/a&gt; and re-install.&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;After installing version v2.8.0 of the driver using the default &lt;code&gt;powerflexSdc&lt;/code&gt; image, sdc:3.6.1, the vxflexos-node pods are in an &lt;code&gt;Init:CrashLoopBackOff&lt;/code&gt; state. This issue can happen on hosts that require the SDC to be installed manually. Automatic SDC is only supported on Red Hat CoreOS (RHCOS), RHEL 7.9, RHEL 8.4, RHEL 8.6.&lt;/td&gt;
-&lt;td&gt;The SDC is already installed. Change the &lt;code&gt;images.powerflexSdc&lt;/code&gt; value to an empty value in the &lt;a href=&#34;https://github.com/dell/csi-powerflex/blob/72b27acee7553006cc09df97f85405f58478d2e4/helm/csi-vxflexos/values.yaml#L13&#34;&gt;values&lt;/a&gt; and re-install.&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;In version v2.6.0, the driver is crashing because the External Health Monitor sidecar crashes when a persistent volume is not found.&lt;/td&gt;
-&lt;td&gt;This is a known issue reported at &lt;a href=&#34;https://github.com/kubernetes-csi/external-health-monitor/issues/100&#34;&gt;kubernetes-csi/external-health-monitor#100&lt;/a&gt;.&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;In version v2.6.0, when a cluster node goes down, the block volumes attached to the node cannot be attached to another node.&lt;/td&gt;
-&lt;td&gt;This is a known issue reported at &lt;a href=&#34;https://github.com/kubernetes-csi/external-attacher/issues/215&#34;&gt;kubernetes-csi/external-attacher#215&lt;/a&gt;. Workaround: &lt;br/&gt; 1. Force delete the pod running on the node that went down. &lt;br/&gt; 2. Delete the pod&amp;rsquo;s persistent volume attachment on the node that went down. Now the volume can be attached to the new node.&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;A CSI ephemeral pod may not get created in OpenShift 4.13 and fail with the error &lt;code&gt;&amp;quot;error when creating pod: the pod uses an inline volume provided by CSIDriver csi-vxflexos.dellemc.com, and the namespace has a pod security enforcement level that is lower than privileged.&amp;quot;&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;This issue occurs because OpenShift 4.13 introduced the CSI Volume Admission plugin to restrict the use of a CSI driver capable of provisioning CSI ephemeral volumes during pod admission. Therefore, an additional label &lt;code&gt;security.openshift.io/csi-ephemeral-volume-profile&lt;/code&gt; in &lt;a href=&#34;https://github.com/dell/helm-charts/blob/csi-vxflexos-2.8.0/charts/csi-vxflexos/templates/csidriver.yaml&#34;&gt;csidriver.yaml&lt;/a&gt; file with the required security profile value should be provided. Follow &lt;a href=&#34;https://docs.openshift.com/container-platform/4.13/storage/container_storage_interface/ephemeral-storage-csi-inline.html&#34;&gt;OpenShift 4.13 documentation for CSI Ephemeral Volumes&lt;/a&gt; for more information.&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Standby controller pod is in crashloopbackoff state&lt;/td&gt;
-&lt;td&gt;Scale down the replica count of the controller pod&amp;rsquo;s deployment to 1 using &lt;code&gt;kubectl scale deployment &amp;lt;deployment_name&amp;gt; --replicas=1 -n &amp;lt;driver_namespace&amp;gt;&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;blockquote&gt;
-&lt;/blockquote&gt;
-
-      </description>
+      <description>Symptoms Prevention, Resolution or Workaround The installation fails with the following error message: Node xxx does not have the SDC installed Install the PowerFlex SDC on listed nodes. The SDC must be installed on all the nodes that need to pull an image of the driver. When you run the command kubectl describe pods vxflexos-controller-* –n vxflexos, the system indicates that the driver image could not be loaded. - If on Kubernetes, edit the daemon.</description>
     </item>
-    
     <item>
-      <title>V1: PowerMax</title>
+      <title>PowerMax</title>
       <link>https://dell.github.io/csm-docs/v1/csidriver/troubleshooting/powermax/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>https://dell.github.io/csm-docs/v1/csidriver/troubleshooting/powermax/</guid>
-      <description>
-        
-        
-        &lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;Symptoms&lt;/th&gt;
-&lt;th&gt;Prevention, Resolution or Workaround&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;kubectl describe pod powermax-controller-&amp;lt;xyz&amp;gt; –n &amp;lt;namespace&amp;gt;&lt;/code&gt; indicates that the driver image could not be loaded&lt;/td&gt;
-&lt;td&gt;You may need to put an insecure-registries entry in &lt;code&gt;/etc/docker/daemon.json&lt;/code&gt; or log in to the docker registry&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;kubectl logs powermax-controller-&amp;lt;xyz&amp;gt; –n &amp;lt;namespace&amp;gt; driver&lt;/code&gt; logs show that the driver cannot authenticate&lt;/td&gt;
-&lt;td&gt;Check your secret’s username and password&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;kubectl logs powermax-controller-&amp;lt;xyz&amp;gt; –n &amp;lt;namespace&amp;gt; driver&lt;/code&gt; logs show that the driver failed to connect to the U4P because it could not verify the certificates&lt;/td&gt;
-&lt;td&gt;Check the powermax-certs secret and ensure it is not empty or it has the valid certificates&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Driver install or upgrade fails because of an incompatible Kubernetes version, even though the version seems to be within the range of compatibility. For example: Error: UPGRADE FAILED: chart requires kubeVersion: &amp;gt;= 1.23.0 &amp;lt; 1.27.0 which is incompatible with Kubernetes V1.23.11-mirantis-1&lt;/td&gt;
-&lt;td&gt;If you are using an extended Kubernetes version, please see the &lt;a href=&#34;https://github.com/dell/helm-charts/blob/main/charts/csi-powermax/Chart.yaml&#34;&gt;helm Chart&lt;/a&gt; and use the alternate kubeVersion check that is provided in the comments. Please note that this is not meant to be used to enable the use of pre-release alpha and beta versions, which are not supported.&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;When a node goes down, the block volumes attached to the node cannot be attached to another node&lt;/td&gt;
-&lt;td&gt;1. Force delete the pod running on the node that went down &lt;br /&gt; 2. Delete the volumeattachment to the node that went down. &lt;br /&gt; Now the volume can be attached to the new node.&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;When attempting a driver upgrade, you see: &lt;code&gt;spec.fsGroupPolicy: Invalid value: &amp;quot;xxx&amp;quot;: field is immutable&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;You cannot upgrade between drivers with different fsGroupPolicies. See &lt;a href=&#34;../../../deployment/helm/drivers/upgrade/powermax&#34;&gt;upgrade documentation&lt;/a&gt; for more details&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Ater the migration group is in “migrated” state but unable to move to “commit ready” state because the new paths are not being discovered on the cluster nodes.&lt;/td&gt;
-&lt;td&gt;Run the following commands manually on the cluster nodes &lt;code&gt;rescan-scsi-bus.sh  -i&lt;/code&gt;  &lt;code&gt;rescan-scsi-bus.sh  -a&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;Failed to fetch details for array: 000000000000. [Unauthorized]&lt;/code&gt;&amp;quot;&lt;/td&gt;
-&lt;td&gt;Please make sure that correct encrypted username and password in secret files are used, also ensure whether the RBAC is enabled for the user&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;Error looking up volume for idempotence check: Not Found&lt;/code&gt; or &lt;code&gt;Get Volume step fails for: (000000000000) symID with error (Invalid Response from API)&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Make sure that Unisphere endpoint doesn&amp;rsquo;t end with front slash&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;FailedPrecondition desc = no topology keys could be generate&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Make sure that FC or iSCSI connectivity to the arrays are proper&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;CreateHost failed with error &lt;code&gt;initiator is already part of different host.&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Update modifyHostName to true in values.yaml Or Remove the initiator from existing host &lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;kubectl logs powermax-controller-&amp;lt;xyz&amp;gt; –n &amp;lt;namespace&amp;gt;&lt;/code&gt; driver logs says connection refused and the reverseproxy logs says &amp;ldquo;Failed to setup server.(secrets &amp;quot;secret-name&amp;quot; not found)&amp;rdquo;&lt;/td&gt;
-&lt;td&gt;Make sure the given secret &lt;secret-name&gt; exist on the cluster &lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;nodestage is failing with error &lt;code&gt;Error invalid IQN Target iqn.EMC.0648.SE1F&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;1. Update initiator name to full default name , ex: iqn.1993-08.org.debian:01:e9afae962192 &lt;br&gt; 2.Ensure that the iSCSI initiators are available on all the nodes where the driver node plugin will be installed and it should be full default name.&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Volume mount is failing on few OS(ex:VMware Virtual Platform) during node publish with error &lt;code&gt;wrong fs type, bad option, bad superblock&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;1. Check the multipath configuration(if enabled) 2. Edit Vm Advanced settings-&amp;gt;hardware and add the param &lt;code&gt;disk.enableUUID=true&lt;/code&gt; and reboot the node&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Standby controller pod is in crashloopbackoff state&lt;/td&gt;
-&lt;td&gt;Scale down the replica count of the controller pod&amp;rsquo;s deployment to 1 using &lt;code&gt;kubectl scale deployment &amp;lt;deployment_name&amp;gt; --replicas=1 -n &amp;lt;driver_namespace&amp;gt;&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-
-      </description>
+      <description>Symptoms Prevention, Resolution or Workaround kubectl describe pod powermax-controller-&amp;lt;xyz&amp;gt; –n &amp;lt;namespace&amp;gt; indicates that the driver image could not be loaded You may need to put an insecure-registries entry in /etc/docker/daemon.json or log in to the docker registry kubectl logs powermax-controller-&amp;lt;xyz&amp;gt; –n &amp;lt;namespace&amp;gt; driver logs show that the driver cannot authenticate Check your secret’s username and password kubectl logs powermax-controller-&amp;lt;xyz&amp;gt; –n &amp;lt;namespace&amp;gt; driver logs show that the driver failed to connect to the U4P because it could not verify the certificates Check the powermax-certs secret and ensure it is not empty or it has the valid certificates Driver install or upgrade fails because of an incompatible Kubernetes version, even though the version seems to be within the range of compatibility.</description>
     </item>
-    
     <item>
-      <title>V1: PowerScale</title>
+      <title>PowerScale</title>
       <link>https://dell.github.io/csm-docs/v1/csidriver/troubleshooting/powerscale/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>https://dell.github.io/csm-docs/v1/csidriver/troubleshooting/powerscale/</guid>
-      <description>
-        
-        
-        &lt;p&gt;Here are some installation failures that might be encountered and how to mitigate them.&lt;/p&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;Symptoms&lt;/th&gt;
-&lt;th&gt;Prevention, Resolution or Workaround&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;The &lt;code&gt;kubectl logs isilon-controller-0 -n isilon -c driver&lt;/code&gt; logs shows the driver &lt;strong&gt;cannot authenticate&lt;/strong&gt;&lt;/td&gt;
-&lt;td&gt;Check your secret&amp;rsquo;s username and password for corresponding cluster&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;The &lt;code&gt;kubectl logs isilon-controller-0 -n isilon -c driver&lt;/code&gt; logs shows the driver failed to connect to the Isilon because it &lt;strong&gt;couldn&amp;rsquo;t verify the certificates&lt;/strong&gt;&lt;/td&gt;
-&lt;td&gt;Check the isilon-certs-&lt;n&gt; secret and ensure it is not empty and it has the valid certificates. Set &lt;code&gt;isiInsecure: &amp;quot;true&amp;quot;&lt;/code&gt; for insecure connection. SSL validation is recommended in the production environment.&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;The &lt;code&gt;kubectl logs isilon-controller-0 -n isilon -c driver&lt;/code&gt; logs shows the driver error: &lt;strong&gt;create volume failed, Access denied. create directory as requested&lt;/strong&gt;&lt;/td&gt;
-&lt;td&gt;This situation can happen when the user who created the base path is different from the user configured for the driver. Make sure the user used to deploy CSI-Driver must have enough rights on the base path (i.e. isiPath) to perform all operations.&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Volume/filesystem is allowed to mount by any host in the network, though that host is not a part of the export of that particular volume under /ifs directory&lt;/td&gt;
-&lt;td&gt;&amp;ldquo;Dell PowerScale: OneFS NFS Design Considerations and Best Practices&amp;rdquo;: &lt;br&gt; There is a default shared directory (ifs) of OneFS, which lets clients running Windows, UNIX, Linux, or Mac OS X access the same directories and files. It is recommended to disable the ifs shared directory in a production environment and create dedicated NFS exports and SMB shares for your workload.&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Creating snapshot fails if the parameter IsiPath in volume snapshot class and related storage class is not the same. The driver uses the incorrect IsiPath parameter and tries to locate the source volume due to the inconsistency.&lt;/td&gt;
-&lt;td&gt;Ensure IsiPath in VolumeSnapshotClass yaml and related storageClass yaml are the same.&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;While deleting a volume, if there are files or folders created on the volume that are owned by different users. If the Isilon credentials used are for a nonprivileged Isilon user, the delete volume action fails. It is due to the limitation in Linux permission control.&lt;/td&gt;
-&lt;td&gt;To perform the delete volume action, the user account must be assigned a role that has the privilege ISI_PRIV_IFS_RESTORE. The user account must have the following set of privileges to ensure that all the CSI Isilon driver capabilities work properly:&lt;br&gt; * ISI_PRIV_LOGIN_PAPI&lt;br&gt; * ISI_PRIV_NFS&lt;br&gt; * ISI_PRIV_QUOTA&lt;br&gt; * ISI_PRIV_SNAPSHOT&lt;br&gt; * ISI_PRIV_IFS_RESTORE&lt;br&gt; * ISI_PRIV_NS_IFS_ACCESS&lt;br&gt; * ISI_PRIV_STATISTICS&lt;br&gt; In some cases, ISI_PRIV_BACKUP is also required, for example, when files owned by other users have mode bits set to 700.&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;If the hostname is mapped to loopback IP in /etc/hosts file, and pods are created using 1.3.0.1 release, after upgrade to driver version 1.4.0 or later there is a possibility of &amp;ldquo;localhost&amp;rdquo; as a stale entry in export&lt;/td&gt;
-&lt;td&gt;Recommended setup: User should not map a hostname to loopback IP in /etc/hosts file&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Driver node pod is in &amp;ldquo;CrashLoopBackOff&amp;rdquo; as &amp;ldquo;Node ID&amp;rdquo; generated is not with proper FQDN.&lt;/td&gt;
-&lt;td&gt;This might be due to &amp;ldquo;dnsPolicy&amp;rdquo; implemented on the driver node pod which may differ with different networks. &lt;br&gt;&lt;br&gt; This parameter is configurable in both helm and Operator installer and the user can try with different &amp;ldquo;dnsPolicy&amp;rdquo; according to the environment.&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;The &lt;code&gt;kubectl logs isilon-controller-0 -n isilon -c driver&lt;/code&gt; logs shows the driver &lt;strong&gt;Authentication failed. Trying to re-authenticate&lt;/strong&gt; when using Session-based authentication&lt;/td&gt;
-&lt;td&gt;The issue has been resolved from OneFS 9.3 onwards, for OneFS versions prior to 9.3 for session-based authentication either smart connect can be created against a single node of Isilon or CSI Driver can be installed/pointed to a particular node of the Isilon else basic authentication can be used by setting isiAuthType in &lt;code&gt;values.yaml&lt;/code&gt; to 0&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;When an attempt is made to create more than one ReadOnly PVC from the same volume snapshot, the second and subsequent requests result in PVCs in state &lt;code&gt;Pending&lt;/code&gt;, with a warning &lt;code&gt;another RO volume from this snapshot is already present&lt;/code&gt;. This is because the driver allows only one RO volume from a specific snapshot at any point in time. This is to allow faster creation(within a few seconds) of a RO PVC from a volume snapshot irrespective of the size of the volume snapshot.&lt;/td&gt;
-&lt;td&gt;Wait for the deletion of the first RO PVC created from the same volume snapshot.&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Driver install or upgrade fails because of an incompatible Kubernetes version, even though the version seems to be within the range of compatibility. For example: Error: UPGRADE FAILED: chart requires kubeVersion: &amp;gt;= 1.22.0 &amp;lt; 1.25.0 which is incompatible with Kubernetes V1.22.11-mirantis-1&lt;/td&gt;
-&lt;td&gt;If you are using an extended Kubernetes version, please see the &lt;a href=&#34;https://github.com/dell/helm-charts/blob/main/charts/csi-isilon/Chart.yaml&#34;&gt;helm Chart&lt;/a&gt; and use the alternate kubeVersion check that is provided in the comments. Please note that this is not meant to be used to enable the use of pre-release alpha and beta versions, which is not supported.&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Standby controller pod is in crashloopbackoff state&lt;/td&gt;
-&lt;td&gt;Scale down the replica count of the controller pod&amp;rsquo;s deployment to 1 using &lt;code&gt;kubectl scale deployment &amp;lt;deployment_name&amp;gt; --replicas=1 -n &amp;lt;driver_namespace&amp;gt;&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Driver install fails because of the incompatible helm values file specified in &lt;code&gt;dell-csi-helm-installer&lt;/code&gt; - expected: v2.9.x, found: v2.8.0.&lt;/td&gt;
-&lt;td&gt;Change driver version in each file in &lt;code&gt;dell/csi-powerscale/dell-csi-helm-installer&lt;/code&gt; from 2.8.0 to 2.9.x&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;fsGroupPolicy may not work as expected without root privileges for NFS only &lt;a href=&#34;https://github.com/kubernetes/examples/issues/260&#34;&gt;https://github.com/kubernetes/examples/issues/260&lt;/a&gt;&lt;/td&gt;
-&lt;td&gt;To get the desired behavior set “RootClientEnabled” = “true” in the storage class parameter&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-
-      </description>
+      <description>Here are some installation failures that might be encountered and how to mitigate them.
+Symptoms Prevention, Resolution or Workaround The kubectl logs isilon-controller-0 -n isilon -c driver logs shows the driver cannot authenticate Check your secret&amp;rsquo;s username and password for corresponding cluster The kubectl logs isilon-controller-0 -n isilon -c driver logs shows the driver failed to connect to the Isilon because it couldn&amp;rsquo;t verify the certificates Check the isilon-certs- secret and ensure it is not empty and it has the valid certificates.</description>
     </item>
-    
     <item>
-      <title>V1: PowerStore</title>
+      <title>PowerStore</title>
       <link>https://dell.github.io/csm-docs/v1/csidriver/troubleshooting/powerstore/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>https://dell.github.io/csm-docs/v1/csidriver/troubleshooting/powerstore/</guid>
-      <description>
-        
-        
-        &lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;Symptoms&lt;/th&gt;
-&lt;th&gt;Prevention, Resolution or Workaround&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;When you run the command &lt;code&gt;kubectl describe pods powerstore-controller-&amp;lt;suffix&amp;gt; –n csi-powerstore&lt;/code&gt;, the system indicates that the driver image could not be loaded.&lt;/td&gt;
-&lt;td&gt;- If on Kubernetes, edit the daemon.json file found in the registry location and add &lt;code&gt;{ &amp;quot;insecure-registries&amp;quot; :[ &amp;quot;hostname.cloudapp.net:5000&amp;quot; ] }&lt;/code&gt; &lt;br&gt; - If on OpenShift, run the command &lt;code&gt;oc edit image.config.openshift.io/cluster&lt;/code&gt; and add registries to yaml file that is displayed when you run the command.&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;The &lt;code&gt;kubectl logs -n csi-powerstore powerstore-node-&amp;lt;suffix&amp;gt;&lt;/code&gt; driver logs show that the driver can&amp;rsquo;t connect to PowerStore API.&lt;/td&gt;
-&lt;td&gt;Check if you&amp;rsquo;ve created a secret with correct credentials&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Installation of the driver on Kubernetes supported versions fails with the following error: &lt;br /&gt;&lt;code&gt;Error: unable to build kubernetes objects from release manifest: unable to recognize &amp;quot;&amp;quot;: no matches for kind &amp;quot;VolumeSnapshotClass&amp;quot; in version &amp;quot;snapshot.storage.k8s.io/v1&amp;quot;&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Kubernetes v1.21/v1.22/v1.23 requires v1 version of snapshot CRDs to be created in cluster, see the &lt;a href=&#34;../../../deployment/helm/drivers/installation/powerstore/#optional-volume-snapshot-requirements&#34;&gt;Volume Snapshot Requirements&lt;/a&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;If PVC is not getting created and getting the following error in PVC description: &lt;br /&gt;&lt;code&gt;failed to provision volume with StorageClass &amp;quot;powerstore-iscsi&amp;quot;: rpc error: code = Internal desc = : Unknown error:&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Check if you&amp;rsquo;ve created a secret with correct credentials&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;If the NVMeFC pod is not getting created and the host looses the ssh connection, causing the driver pods to go to error state&lt;/td&gt;
-&lt;td&gt;remove the nvme_tcp module from the host incase of NVMeFC connection&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;When a node goes down, the block volumes attached to the node cannot be attached to another node&lt;/td&gt;
-&lt;td&gt;1. Force delete the pod running on the node that went down &lt;br /&gt; 2. Delete the volumeattachment to the node that went down. &lt;br /&gt; Now the volume can be attached to the new node.&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;If the pod creation for NVMe takes time when the connections between the host and the array are more than 2 and considerable volumes are mounted on the host&lt;/td&gt;
-&lt;td&gt;Reduce the number of connections between the host and the array to 2.&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Driver install or upgrade fails because of an incompatible Kubernetes version, even though the version seems to be within the range of compatibility. For example: Error: UPGRADE FAILED: chart requires kubeVersion: &amp;gt;= 1.22.0 &amp;lt; 1.25.0 which is incompatible with Kubernetes V1.22.11-mirantis-1&lt;/td&gt;
-&lt;td&gt;If you are using an extended Kubernetes version, please see the &lt;a href=&#34;https://github.com/dell/helm-charts/blob/main/charts/csi-powerstore/Chart.yaml&#34;&gt;helm Chart&lt;/a&gt; and use the alternate kubeVersion check that is provided in the comments. Please note that this is not meant to be used to enable the use of pre-release alpha and beta versions, which is not supported.&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;If two separate networks are configured for ISCSI and NVMeTCP, the driver may encounter difficulty identifying the second network (e.g., NVMeTCP).&lt;/td&gt;
-&lt;td&gt;This is a known issue, and the workaround involves creating a single network on the array to serve both ISCSI and NVMeTCP purposes.&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Unable to provision PVC&amp;rsquo;s via driver&lt;/td&gt;
-&lt;td&gt;Ensure that the NAS name matches the one provided on the array side.&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Unable to install or upgrade the driver&lt;/td&gt;
-&lt;td&gt;Ensure  that the firewall is configured to grant adequate permissions for downloading images from the registry.&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Faulty paths in the multipath&lt;/td&gt;
-&lt;td&gt;Ensure that the configuration of the multipath is correct and connectivity to the underlying hardware is intact.&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Unable to install or upgrade the driver due to minimum Kubernetes version or Openshift version&lt;/td&gt;
-&lt;td&gt;Currently CSM only supports n, n-1, n-2 version of Kubernetes and Openshift, if you still wanted to continue with existing version update the &lt;code&gt;verify.sh&lt;/code&gt; to continue.&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Volumes are not getting deleted on the array when PV&amp;rsquo;s are deleted&lt;/td&gt;
-&lt;td&gt;Ensure &lt;code&gt;persistentVolumeReclaimPolicy&lt;/code&gt; is set to Delete.&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;fsGroupPolicy may not work as expected without root privileges for NFS only &lt;a href=&#34;https://github.com/kubernetes/examples/issues/260&#34;&gt;https://github.com/kubernetes/examples/issues/260&lt;/a&gt;&lt;/td&gt;
-&lt;td&gt;To get the desired behavior set “RootClientEnabled” = “true” in the storage class parameter&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-
-      </description>
+      <description>Symptoms Prevention, Resolution or Workaround When you run the command kubectl describe pods powerstore-controller-&amp;lt;suffix&amp;gt; –n csi-powerstore, the system indicates that the driver image could not be loaded. - If on Kubernetes, edit the daemon.json file found in the registry location and add { &amp;quot;insecure-registries&amp;quot; :[ &amp;quot;hostname.cloudapp.net:5000&amp;quot; ] } - If on OpenShift, run the command oc edit image.config.openshift.io/cluster and add registries to yaml file that is displayed when you run the command.</description>
     </item>
-    
     <item>
-      <title>V1: Unity XT</title>
+      <title>Unity XT</title>
       <link>https://dell.github.io/csm-docs/v1/csidriver/troubleshooting/unity/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>https://dell.github.io/csm-docs/v1/csidriver/troubleshooting/unity/</guid>
-      <description>
-        
-        
-        &lt;hr&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;Symptoms&lt;/th&gt;
-&lt;th&gt;Prevention, Resolution or Workaround&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;When you run the command &lt;code&gt;kubectl describe pods unity-controller-&amp;lt;suffix&amp;gt; –n unity&lt;/code&gt;, the system indicates that the driver image could not be loaded.&lt;/td&gt;
-&lt;td&gt;You may need to put an insecure-registries entry in &lt;code&gt;/etc/docker/daemon.json&lt;/code&gt; or login to the docker registry&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;The &lt;code&gt;kubectl logs -n unity unity-node-&amp;lt;suffix&amp;gt;&lt;/code&gt; driver logs show that the driver can&amp;rsquo;t connect to Unity XT - Authentication failure.&lt;/td&gt;
-&lt;td&gt;Check if you have created a secret with correct credentials&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;fsGroup&lt;/code&gt; specified in pod spec is not reflected in files or directories at mounted path of volume.&lt;/td&gt;
-&lt;td&gt;fsType of PVC must be set for fsGroup to work. fsType can be specified while creating a storage class. For NFS protocol, fsType can be specified as &lt;code&gt;nfs&lt;/code&gt;. fsGroup doesn&amp;rsquo;t work for ephemeral inline volumes.&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Dynamic array detection will not work in Topology based environment&lt;/td&gt;
-&lt;td&gt;Whenever a new array is added or removed, then the driver controller and node pod should be restarted with command &lt;strong&gt;kubectl get pods -n unity &amp;ndash;no-headers=true | awk &amp;lsquo;/unity-/{print $1}&amp;rsquo;| xargs kubectl delete -n unity pod&lt;/strong&gt; when &lt;strong&gt;topology-based storage classes are used&lt;/strong&gt;. For dynamic array addition without topology, the driver will detect the newly added or removed arrays automatically&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;If source PVC is deleted when cloned PVC exists, then source PVC will be deleted in the cluster but on array, it will still be present and marked for deletion.&lt;/td&gt;
-&lt;td&gt;All the cloned PVC should be deleted in order to delete the source PVC from the array.&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;PVC creation fails on a fresh cluster with &lt;strong&gt;iSCSI&lt;/strong&gt; and &lt;strong&gt;NFS&lt;/strong&gt; protocols alone enabled with error &lt;strong&gt;failed to provision volume with StorageClass &amp;ldquo;unity-iscsi&amp;rdquo;: error generating accessibility requirements: no available topology found&lt;/strong&gt;.&lt;/td&gt;
-&lt;td&gt;This is because iSCSI initiator login takes longer than the node pod startup time. This can be overcome by bouncing the node pods in the cluster using the below command the driver pods with &lt;strong&gt;kubectl get pods -n unity &amp;ndash;no-headers=true | awk &amp;lsquo;/unity-/{print $1}&amp;rsquo;| xargs kubectl delete -n unity pod&lt;/strong&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Driver install or upgrade fails because of an incompatible Kubernetes version, even though the version seems to be within the range of compatibility. For example: &lt;code&gt;Error: UPGRADE FAILED: chart requires kubeVersion: &amp;gt;= 1.24.0 &amp;lt; 1.29.0 which is incompatible with Kubernetes 1.24.6-mirantis-1&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;If you are using an extended Kubernetes version, see the helm Chart at &lt;code&gt;helm/csi-unity/Chart.yaml&lt;/code&gt; and use the alternate &lt;code&gt;kubeVersion&lt;/code&gt; check that is provided in the comments. &lt;em&gt;Note&lt;/em&gt; that this is not meant to be used to enable the use of pre-release alpha and beta versions, which is not supported.&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;When a node goes down, the block volumes attached to the node cannot be attached to another node&lt;/td&gt;
-&lt;td&gt;1. Force delete the pod running on the node that went down &lt;br /&gt; 2. Delete the VolumeAttachment to the node that went down. &lt;br /&gt; Now the volume can be attached to the new node.&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Standby controller pod is in crashloopbackoff state&lt;/td&gt;
-&lt;td&gt;Scale down the replica count of the controller pod&amp;rsquo;s deployment to 1 using &lt;code&gt;kubectl scale deployment &amp;lt;deployment_name&amp;gt; --replicas=1 -n &amp;lt;driver_namespace&amp;gt;&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;fsGroupPolicy may not work as expected without root privileges for NFS only &lt;a href=&#34;https://github.com/kubernetes/examples/issues/260&#34;&gt;https://github.com/kubernetes/examples/issues/260&lt;/a&gt;&lt;/td&gt;
-&lt;td&gt;To get the desired behavior set “RootClientEnabled” = “true” in the storage class parameter&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-
-      </description>
+      <description>Symptoms Prevention, Resolution or Workaround When you run the command kubectl describe pods unity-controller-&amp;lt;suffix&amp;gt; –n unity, the system indicates that the driver image could not be loaded. You may need to put an insecure-registries entry in /etc/docker/daemon.json or login to the docker registry The kubectl logs -n unity unity-node-&amp;lt;suffix&amp;gt; driver logs show that the driver can&amp;rsquo;t connect to Unity XT - Authentication failure. Check if you have created a secret with correct credentials fsGroup specified in pod spec is not reflected in files or directories at mounted path of volume.</description>
     </item>
-    
   </channel>
 </rss>

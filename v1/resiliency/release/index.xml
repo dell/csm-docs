@@ -1,18 +1,11 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Dell Technologies – Release notes</title>
+    <title>Release notes on </title>
     <link>https://dell.github.io/csm-docs/v1/resiliency/release/</link>
-    <description>Recent content in Release notes on Dell Technologies</description>
+    <description>Recent content in Release notes on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    
-	  <atom:link href="https://dell.github.io/csm-docs/v1/resiliency/release/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-      
-        
-      
-    
-    
+    <atom:link href="https://dell.github.io/csm-docs/v1/resiliency/release/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>

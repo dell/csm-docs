@@ -1,46 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Dell Technologies – Uninstallation</title>
+    <title>Uninstallation on </title>
     <link>https://dell.github.io/csm-docs/v1/deployment/rpm/modules/uninstall/</link>
-    <description>Recent content in Uninstallation on Dell Technologies</description>
+    <description>Recent content in Uninstallation on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    
-	  <atom:link href="https://dell.github.io/csm-docs/v1/deployment/rpm/modules/uninstall/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-      
-        
-      
-    
-    
+    <atom:link href="https://dell.github.io/csm-docs/v1/deployment/rpm/modules/uninstall/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>V1: Authorization</title>
+      <title>Authorization</title>
       <link>https://dell.github.io/csm-docs/v1/deployment/rpm/modules/uninstall/authorization/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>https://dell.github.io/csm-docs/v1/deployment/rpm/modules/uninstall/authorization/</guid>
-      <description>
-        
-        
-        
-
-&lt;div class=&#34;pageinfo pageinfo-primary&#34;&gt;
-&lt;p&gt;The CSM Authorization RPM will be deprecated in a future release. It is highly recommended that you use CSM Authorization Helm deployment or CSM Operator going forward.&lt;/p&gt;
-
-&lt;/div&gt;
-
-&lt;p&gt;This section outlines the uninstallation steps for Container Storage Modules (CSM) for Authorization.&lt;/p&gt;
-&lt;h2 id=&#34;uninstalling-the-rpm&#34;&gt;Uninstalling the RPM&lt;/h2&gt;
-&lt;p&gt;To uninstall the rpm package on the system, you must first uninstall the K3s SELinux package if SELinux is enabled. To uninstall the K3s SELinux package, run:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;rpm -e k3s-selinux
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;To uninstall the CSM Authorization rpm package on the system, run:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;rpm -e &amp;lt;rpm_file_name&amp;gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;uninstalling-the-sidecar-proxy-in-the-csi-driver&#34;&gt;Uninstalling the sidecar-proxy in the CSI Driver&lt;/h2&gt;
-&lt;p&gt;To uninstall the sidecar-proxy in the CSI Driver, &lt;a href=&#34;../../../../helm/drivers/uninstall&#34;&gt;uninstall&lt;/a&gt; the driver and &lt;a href=&#34;../../../../helm/drivers/installation&#34;&gt;reinstall&lt;/a&gt; the driver using the original configuration secret.&lt;/p&gt;
-
-      </description>
+      <description>The CSM Authorization RPM will be deprecated in a future release. It is highly recommended that you use CSM Authorization Helm deployment or CSM Operator going forward.
+This section outlines the uninstallation steps for Container Storage Modules (CSM) for Authorization.
+Uninstalling the RPM To uninstall the rpm package on the system, you must first uninstall the K3s SELinux package if SELinux is enabled. To uninstall the K3s SELinux package, run:</description>
     </item>
-    
   </channel>
 </rss>

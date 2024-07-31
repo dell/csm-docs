@@ -1,99 +1,11 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Dell Technologies – CSI Drivers</title>
+    <title>CSI Drivers on </title>
     <link>https://dell.github.io/csm-docs/docs/deployment/helm/drivers/</link>
-    <description>Recent content in CSI Drivers on Dell Technologies</description>
+    <description>Recent content in CSI Drivers on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    
-	  <atom:link href="https://dell.github.io/csm-docs/docs/deployment/helm/drivers/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-      
-        
-      
-    
-    
-    <item>
-      <title>Docs: Installation</title>
-      <link>https://dell.github.io/csm-docs/docs/deployment/helm/drivers/installation/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://dell.github.io/csm-docs/docs/deployment/helm/drivers/installation/</guid>
-      <description>
-        
-        
-        &lt;p&gt;This section provides the details and instructions on how to install the CSI Driver components using the provided Helm charts and in the case of the CSI drivers, the Dell CSI Helm Installer.&lt;/p&gt;
-&lt;h2 id=&#34;dependencies&#34;&gt;Dependencies&lt;/h2&gt;
-&lt;p&gt;Installing any of the CSI Driver components using Helm requires a few utilities to be installed on the system running the installation.&lt;/p&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;Dependency&lt;/th&gt;
-&lt;th&gt;Usage&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;kubectl&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Kubectl is used to validate that the Kubernetes system meets the requirements of the driver.&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;helm&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Helm v3 is used as the deployment tool for Charts. Go &lt;a href=&#34;https://helm.sh/docs/intro/install/&#34;&gt;here&lt;/a&gt; to install Helm 3.&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;sshpass&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;sshpass is used to check certain pre-requisites in worker nodes (in chosen drivers).&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; To use these tools, a valid &lt;code&gt;KUBECONFIG&lt;/code&gt; is required. Ensure that either a valid configuration is in the default location, or, that the &lt;code&gt;KUBECONFIG&lt;/code&gt; environment variable points to a valid configuration before using these tools.&lt;/p&gt;
-
-      </description>
-    </item>
-    
-    <item>
-      <title>Docs: Uninstallation</title>
-      <link>https://dell.github.io/csm-docs/docs/deployment/helm/drivers/uninstall/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://dell.github.io/csm-docs/docs/deployment/helm/drivers/uninstall/</guid>
-      <description>
-        
-        
-        &lt;h2 id=&#34;uninstall-a-csi-driver-installed-via-helm&#34;&gt;Uninstall a CSI driver installed via Helm&lt;/h2&gt;
-&lt;p&gt;To uninstall a driver, the &lt;code&gt;csi-uninstall.sh&lt;/code&gt; script provides a handy wrapper around the &lt;code&gt;helm&lt;/code&gt; utility. The only required argument for uninstallation is the namespace name. For example, to uninstall the driver:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;./csi-uninstall.sh --namespace &amp;lt;driver-namespace&amp;gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;For usage information:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;./csi-uninstall.sh -h
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;Help for ./csi-uninstall.sh
-
-Usage: ./csi-uninstall.sh options...
-Options:
-  Required
-  --namespace[=]&amp;lt;namespace&amp;gt;  Kubernetes namespace to uninstall the CSI driver from
-  Optional
-  --release[=]&amp;lt;helm release&amp;gt; Name to register with helm, default value will match the driver name
-  -h                         Help
-&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;uninstall-a-csi-driver-installed-via-dell-csm-operator&#34;&gt;Uninstall a CSI driver installed via Dell CSM Operator&lt;/h2&gt;
-&lt;p&gt;For uninstalling any CSI drivers deployed by the Dell CSM Operator, refer to instructions &lt;a href=&#34;../../../../deployment/csmoperator/drivers/#uninstall-csi-driver&#34;&gt;here&lt;/a&gt;&lt;/p&gt;
-
-      </description>
-    </item>
-    
-    <item>
-      <title>Docs: Upgrade</title>
-      <link>https://dell.github.io/csm-docs/docs/deployment/helm/drivers/upgrade/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://dell.github.io/csm-docs/docs/deployment/helm/drivers/upgrade/</guid>
-      <description>
-        
-        
-        
-      </description>
-    </item>
-    
+    <atom:link href="https://dell.github.io/csm-docs/docs/deployment/helm/drivers/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>

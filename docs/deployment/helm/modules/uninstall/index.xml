@@ -1,185 +1,73 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Dell Technologies – Uninstallation</title>
+    <title>Uninstallation on </title>
     <link>https://dell.github.io/csm-docs/docs/deployment/helm/modules/uninstall/</link>
-    <description>Recent content in Uninstallation on Dell Technologies</description>
+    <description>Recent content in Uninstallation on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    
-	  <atom:link href="https://dell.github.io/csm-docs/docs/deployment/helm/modules/uninstall/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-      
-        
-      
-    
-    
+    <atom:link href="https://dell.github.io/csm-docs/docs/deployment/helm/modules/uninstall/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Docs: Application mobility</title>
+      <title>Application mobility</title>
       <link>https://dell.github.io/csm-docs/docs/deployment/helm/modules/uninstall/applicationmobility/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>https://dell.github.io/csm-docs/docs/deployment/helm/modules/uninstall/applicationmobility/</guid>
-      <description>
-        
-        
-        &lt;p&gt;This section outlines the uninstallation steps for Application Mobility.&lt;/p&gt;
-&lt;h2 id=&#34;uninstall-the-application-mobility-helm-chart&#34;&gt;Uninstall the Application Mobility Helm Chart&lt;/h2&gt;
-&lt;p&gt;This command removes all the Kubernetes components associated with the chart.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;helm delete &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;APPLICATION_MOBILITY_NAME&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt; --namespace &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;APPLICATION_MOBILITY_NAMESPACE&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-      </description>
+      <description>This section outlines the uninstallation steps for Application Mobility.
+Uninstall the Application Mobility Helm Chart This command removes all the Kubernetes components associated with the chart.
+helm delete [APPLICATION_MOBILITY_NAME] --namespace [APPLICATION_MOBILITY_NAMESPACE] </description>
     </item>
-    
     <item>
-      <title>Docs: Authorization</title>
+      <title>Authorization</title>
       <link>https://dell.github.io/csm-docs/docs/deployment/helm/modules/uninstall/authorization/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>https://dell.github.io/csm-docs/docs/deployment/helm/modules/uninstall/authorization/</guid>
-      <description>
-        
-        
-        &lt;p&gt;This section outlines the uninstallation steps for Container Storage Modules (CSM) for Authorization.&lt;/p&gt;
-&lt;h2 id=&#34;uninstall-the-csm-for-authorization-helm-chart&#34;&gt;Uninstall the CSM for Authorization Helm Chart&lt;/h2&gt;
-&lt;p&gt;The command below removes all the Kubernetes components associated with the chart.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;helm uninstall authorization --namespace authorization
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;You may also want to delete the karavi-config-secret secret.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl delete secret karavi-config-secret -n authorization
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;uninstalling-the-sidecar-proxy-in-the-csi-driver&#34;&gt;Uninstalling the sidecar-proxy in the CSI Driver&lt;/h2&gt;
-&lt;p&gt;To uninstall the sidecar-proxy in the CSI Driver, &lt;a href=&#34;../../../drivers/uninstall&#34;&gt;uninstall&lt;/a&gt; the driver and &lt;a href=&#34;../../../drivers/installation&#34;&gt;reinstall&lt;/a&gt; the driver using the original configuration secret.&lt;/p&gt;
-
-      </description>
+      <description>This section outlines the uninstallation steps for Container Storage Modules (CSM) for Authorization.
+Uninstall the CSM for Authorization Helm Chart The command below removes all the Kubernetes components associated with the chart.
+helm uninstall authorization --namespace authorization You may also want to delete the karavi-config-secret secret.
+kubectl delete secret karavi-config-secret -n authorization Uninstalling the sidecar-proxy in the CSI Driver To uninstall the sidecar-proxy in the CSI Driver, uninstall the driver and reinstall the driver using the original configuration secret.</description>
     </item>
-    
     <item>
-      <title>Docs: Encryption</title>
+      <title>Encryption</title>
       <link>https://dell.github.io/csm-docs/docs/deployment/helm/modules/uninstall/encryption/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>https://dell.github.io/csm-docs/docs/deployment/helm/modules/uninstall/encryption/</guid>
-      <description>
-        
-        
-        &lt;h2 id=&#34;cleanup-kubernetes-worker-hosts&#34;&gt;Cleanup Kubernetes Worker Hosts&lt;/h2&gt;
-&lt;p&gt;Login to each worker host and perform these steps:&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Remove directory &lt;em&gt;/root/.driver-sec&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;This directory was created when a CSI driver with Encryption first ran on the host.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Remove entry from &lt;em&gt;/root/.ssh/authorized_keys&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;This is an entry added when a CSI driver with Encryption first ran on the host.
-It ends with &lt;code&gt;driver-sec&lt;/code&gt;, similarly to:&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDGvSWmTL7NORRDPAvtbMbvoHUBLnen9bRtJePbGk1boJ4XK39Qdvo2zFHZ/6t2+dSL7xKo2kcxX3ovj3RyOPuqNCob
-5CLYyuIqduooy+eSP8S1i0FbiDHvH/52yHglnGkBb8g8fmoMolYGW7k35mKOEItKlXruP5/hpP0rBDfBfrxe/K4aHicxv6GylP+uTSBjdj7bZrdgRAIlmDyIdvU4oU6L
-K9PDW5rufArlrZHaToHXLMbXbqswD08rgFt3tLiXjj2GgvU8ifWYYAeuijMp+hwwE0dYv45EgUNTlXUa7x2STFZrVn8MFkLKjtZ60Qjbb4JoijRpBQ5XEUkW9UoeGbV2
-s+lCpZ2bMkmdda/0UC1ckvyrLkD0yQotb8gafizdX+WrQRE+iqUv/NQ2mrSEHtLgvuvgZ3myFU5chRv498YxglYZsAZUdCQI2hQt+7smjYMaM0V200UT741U9lIlYxza
-ocI5t+n01dWeVOCSOH/Q3uXxHKnFvWVZh7m6583R9LfdGfwshsnx4CNz22kp69hzwBPxehR+U/VXkDUWnoQgI8NSPc0fFyU58yLHnl91XT9alz8qrkFK7oggKy5RRX7c
-VQrpjsCPCu3fpVjvvwfspVOftbn/sNgY1J3lz0pdgvJ3yQs6pa+DODQyin5Rt//19rIGifPxi/Hk/k49Vw== driver-sec
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;It can be removed with &lt;code&gt;sed -i &#39;/^ssh-rsa .* driver-sec$/d&#39; /root/.ssh/authorized_keys&lt;/code&gt;.&lt;/p&gt;
-&lt;h2 id=&#34;remove-kubernetes-resources&#34;&gt;Remove Kubernetes Resources&lt;/h2&gt;
-&lt;p&gt;Remove &lt;a href=&#34;../../installation/encryption#secrets-and-config-maps&#34;&gt;the resources&lt;/a&gt; created in Kubernetes cluster for Encryption.&lt;/p&gt;
-&lt;h2 id=&#34;remove-vault-server-configuration&#34;&gt;Remove Vault Server Configuration&lt;/h2&gt;
-&lt;p&gt;Remove &lt;a href=&#34;../../installation/encryption/vault#minimum-server-configuration&#34;&gt;the configuration&lt;/a&gt; created in the Vault server for Encryption.&lt;/p&gt;
-&lt;h2 id=&#34;remove-rekey-controller&#34;&gt;Remove Rekey Controller&lt;/h2&gt;
-&lt;p&gt;Remove &lt;a href=&#34;../../installation/encryption/rekey#rekey-controller-installation&#34;&gt;the resources&lt;/a&gt; created during the installation of the Rekey Controller.&lt;/p&gt;
-
-      </description>
+      <description>Cleanup Kubernetes Worker Hosts Login to each worker host and perform these steps:
+Remove directory /root/.driver-sec
+This directory was created when a CSI driver with Encryption first ran on the host.
+Remove entry from /root/.ssh/authorized_keys
+This is an entry added when a CSI driver with Encryption first ran on the host. It ends with driver-sec, similarly to:
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDGvSWmTL7NORRDPAvtbMbvoHUBLnen9bRtJePbGk1boJ4XK39Qdvo2zFHZ/6t2+dSL7xKo2kcxX3ovj3RyOPuqNCob 5CLYyuIqduooy+eSP8S1i0FbiDHvH/52yHglnGkBb8g8fmoMolYGW7k35mKOEItKlXruP5/hpP0rBDfBfrxe/K4aHicxv6GylP+uTSBjdj7bZrdgRAIlmDyIdvU4oU6L K9PDW5rufArlrZHaToHXLMbXbqswD08rgFt3tLiXjj2GgvU8ifWYYAeuijMp+hwwE0dYv45EgUNTlXUa7x2STFZrVn8MFkLKjtZ60Qjbb4JoijRpBQ5XEUkW9UoeGbV2 s+lCpZ2bMkmdda/0UC1ckvyrLkD0yQotb8gafizdX+WrQRE+iqUv/NQ2mrSEHtLgvuvgZ3myFU5chRv498YxglYZsAZUdCQI2hQt+7smjYMaM0V200UT741U9lIlYxza ocI5t+n01dWeVOCSOH/Q3uXxHKnFvWVZh7m6583R9LfdGfwshsnx4CNz22kp69hzwBPxehR+U/VXkDUWnoQgI8NSPc0fFyU58yLHnl91XT9alz8qrkFK7oggKy5RRX7c VQrpjsCPCu3fpVjvvwfspVOftbn/sNgY1J3lz0pdgvJ3yQs6pa+DODQyin5Rt//19rIGifPxi/Hk/k49Vw== driver-sec It can be removed with sed -i &#39;/^ssh-rsa .</description>
     </item>
-    
     <item>
-      <title>Docs: Resiliency</title>
+      <title>Resiliency</title>
       <link>https://dell.github.io/csm-docs/docs/deployment/helm/modules/uninstall/resiliency/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>https://dell.github.io/csm-docs/docs/deployment/helm/modules/uninstall/resiliency/</guid>
-      <description>
-        
-        
-        &lt;p&gt;This section outlines the uninstallation steps for Container Storage Modules (CSM) for Resiliency.&lt;/p&gt;
-&lt;h2 id=&#34;uninstalling-the-sidecar-in-the-csi-driver&#34;&gt;Uninstalling the sidecar in the CSI Driver&lt;/h2&gt;
-&lt;p&gt;To uninstall the sidecar in the CSI Driver, the following steps are required.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Steps&lt;/strong&gt;&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;NOTE: If you do not wish to uninstall the driver, please follow the steps below for Resiliency uninstallation through driver upgrade.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;ol&gt;
-&lt;li&gt;Uninstall the driver
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;../../../drivers/uninstall/#uninstall-a-csi-driver-installed-via-helm&#34;&gt;Helm&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;../../../../csmoperator/drivers/#uninstall-csi-driver&#34;&gt;Operator&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;Reinstall the driver with the &lt;code&gt;podmon&lt;/code&gt; feature disabled
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;../../../drivers/installation/&#34;&gt;Helm&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;../../../../csmoperator/drivers/#installing-csi-driver-via-operator&#34;&gt;Operator&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h3 id=&#34;uninstallation-through-driver-upgrade&#34;&gt;Uninstallation through driver upgrade&lt;/h3&gt;
-&lt;ol&gt;
-&lt;li&gt;Disable the &lt;code&gt;podmon&lt;/code&gt; feature in your values file&lt;/li&gt;
-&lt;li&gt;Upgrade the driver
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;../../../drivers/upgrade/&#34;&gt;Helm&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;../../../../csmoperator/drivers/#update-csi-drivers&#34;&gt;Operator&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-
-      </description>
+      <description>This section outlines the uninstallation steps for Container Storage Modules (CSM) for Resiliency.
+Uninstalling the sidecar in the CSI Driver To uninstall the sidecar in the CSI Driver, the following steps are required.
+Steps
+NOTE: If you do not wish to uninstall the driver, please follow the steps below for Resiliency uninstallation through driver upgrade.
+Uninstall the driver Helm Operator Reinstall the driver with the podmon feature disabled Helm Operator Uninstallation through driver upgrade Disable the podmon feature in your values file Upgrade the driver Helm Operator </description>
     </item>
-    
     <item>
-      <title>Docs: Observability</title>
+      <title>Observability</title>
       <link>https://dell.github.io/csm-docs/docs/deployment/helm/modules/uninstall/observability/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>https://dell.github.io/csm-docs/docs/deployment/helm/modules/uninstall/observability/</guid>
-      <description>
-        
-        
-        &lt;p&gt;This section outlines the uninstallation steps for Container Storage Modules (CSM) for Observability.&lt;/p&gt;
-&lt;h2 id=&#34;uninstall-the-csm-for-observability-helm-chart&#34;&gt;Uninstall the CSM for Observability Helm Chart&lt;/h2&gt;
-&lt;p&gt;The command below removes all the Kubernetes components associated with the chart.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-console&#34; data-lang=&#34;console&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;helm delete karavi-observability --namespace [CSM_NAMESPACE]
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;You may also want to uninstall the CRDs created for cert-manager.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-console&#34; data-lang=&#34;console&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a40000&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a40000&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;kubectl delete -f https://github.com/jetstack/cert-manager/releases/download/v1.10.0/cert-manager.crds.yaml
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-      </description>
+      <description>This section outlines the uninstallation steps for Container Storage Modules (CSM) for Observability.
+Uninstall the CSM for Observability Helm Chart The command below removes all the Kubernetes components associated with the chart.
+helm delete karavi-observability --namespace [CSM_NAMESPACE] You may also want to uninstall the CRDs created for cert-manager.
+kubectl delete -f https://github.com/jetstack/cert-manager/releases/download/v1.10.0/cert-manager.crds.yaml </description>
     </item>
-    
     <item>
-      <title>Docs: Replication</title>
+      <title>Replication</title>
       <link>https://dell.github.io/csm-docs/docs/deployment/helm/modules/uninstall/replication/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>https://dell.github.io/csm-docs/docs/deployment/helm/modules/uninstall/replication/</guid>
-      <description>
-        
-        
-        &lt;p&gt;This section outlines the uninstallation steps for Container Storage Modules (CSM) for Replication.&lt;/p&gt;
-&lt;h2 id=&#34;uninstalling-replication-controller&#34;&gt;Uninstalling replication controller&lt;/h2&gt;
-&lt;p&gt;To uninstall the replication controller, you can use the script &lt;code&gt;uninstall.sh&lt;/code&gt; located in the &lt;code&gt;scripts&lt;/code&gt; folder:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;./uninstall.sh 
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;This script will automatically detect how the current version was installed (repctl or Helm) and use the correct method to delete it.&lt;/p&gt;
-&lt;p&gt;You can also manually uninstall the replication controller using a method that depends on how you installed it.&lt;/p&gt;
-&lt;p&gt;If replication controller was installed using &lt;code&gt;helm&lt;/code&gt;, use this command:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;helm delete -n dell-replication-controller replication
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;If you used &lt;code&gt;controller.yaml&lt;/code&gt; manifest with either &lt;code&gt;kubectl&lt;/code&gt; or &lt;code&gt;repctl&lt;/code&gt;, use this:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl delete -f deploy/controller.yaml
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;To delete the replication group CRD, you can run the command:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl delete crd dellcsireplicationgroups.replication.storage.dell.com
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;All replication groups should be deleted before deleting the replication group CRD.&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;em&gt;&lt;strong&gt;NOTE&lt;/strong&gt;&lt;/em&gt;: Be sure to run the chosen command on all clusters where you want to uninstall the replication controller/CRD.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h2 id=&#34;uninstalling-the-replication-sidecar&#34;&gt;Uninstalling the replication sidecar&lt;/h2&gt;
-&lt;p&gt;To uninstall the replication sidecar, you need to uninstall the CSI Driver. Please view the &lt;a href=&#34;../../../drivers/uninstall&#34;&gt;uninstall&lt;/a&gt; page for the driver itself.&lt;/p&gt;
-
-      </description>
+      <description>This section outlines the uninstallation steps for Container Storage Modules (CSM) for Replication.
+Uninstalling replication controller To uninstall the replication controller, you can use the script uninstall.sh located in the scripts folder:
+./uninstall.sh This script will automatically detect how the current version was installed (repctl or Helm) and use the correct method to delete it.
+You can also manually uninstall the replication controller using a method that depends on how you installed it.</description>
     </item>
-    
   </channel>
 </rss>
