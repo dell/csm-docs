@@ -60,15 +60,15 @@ Container Storage Modules (CSM) does not officially support specific operating s
 | [CSM Authorization - v2.0 Tech Preview](../authorization/)    | No       | Yes       | No       | No         | No         |
 | [CSM Observability](../observability/)                        | Yes      | Yes       | No       | Yes        | Yes        |
 | [CSM Replication](../replication/)                            | Yes      | Yes       | No       | Yes        | Yes        |
-| [CSM Resiliency](../resiliency/)                              | No       | Yes       | Yes      | Yes        | Yes        |
+| [CSM Resiliency](../resiliency/)                              | Yes       | Yes       | Yes      | Yes        | Yes        |
 | [CSM Encryption](../secure/encryption/)                       | No       | No        | No       | Yes        | No         |
-| [CSM Application Mobility](../applicationmobility/)           | Yes      | Yes       | Yes      | Yes        | Yes        |
+| [CSM Application Mobility](../applicationmobility/)           | Yes      | No       | No      | No        | No        |
 | [Volume Group Snapshot](../snapshots/volume-group-snapshots/) | No       | Yes       | No       | No         | Yes        |
 
 {{</table>}}
 
 > Notes:
-> * Encryption and Application Mobility are available as a Technical Preview only and are not officially supported.
+> * Encryption is available as a Technical Preview only and is not officially supported.
 > * Authorization v2.0 is available as a Technical Preview only on PowerFlex.
 
 ## CSM Operator compatibility matrix
