@@ -200,7 +200,7 @@ The first step before you can start provisioning object storage, is to create a 
 
 The following example shows how to create a `BucketClass`:
 
-```sh
+```bash
 cat <<EOF | kubectl create --filename -
 apiVersion: objectstorage.k8s.io/v1alpha1
 kind: BucketClass
@@ -221,7 +221,7 @@ _Greenfield Provisioning_ means creating a new bucket from scratch, without any 
 
 The following example shows how to create a `BucketClaim` for greenfield provisioning.
 
-```sh
+```bash
 cat <<EOF | kubectl create --namespace=my-namespace --filename -
 apiVersion: objectstorage.k8s.io/v1alpha1
 kind: BucketClaim
@@ -241,7 +241,7 @@ _Brownfield Provisioning_ means using an existing bucket, that can already conta
 
 The following example shows how to create `Bucket` and `BucketClaim` for brownfield provisioning.
 
-```sh
+```bash
 cat <<EOF | kubectl create --namespace=my-namespace --filename -
 apiVersion: objectstorage.k8s.io/v1alpha1
 kind: Bucket
@@ -275,7 +275,7 @@ There are a few crucial details regarding bucket deletion. The first one is `del
 
 The following example shows how to delete a `BucketClaim`.
 
-```sh
+```bash
 kubectl --namespace=my-namespace delete bucketclaim my-bucketclaim
 ```
 
@@ -289,7 +289,7 @@ The first step before you start granting access to the object storage for your a
 
 The following example shows how to create a `BucketAccessClass`:
 
-```sh
+```bash
 cat <<EOF | kubectl create --filename -
 apiVersion: objectstorage.k8s.io/v1alpha1
 kind: BucketAccessClass
@@ -314,7 +314,7 @@ The underlying workflow for granting access to the object storage primitive is:
 
 The following example shows how to grant an access using `BucketAccess` resource:
 
-```sh
+```bash
 cat <<EOF | kubectl create --namespace=my-namespace --filename -
 apiVersion: objectstorage.k8s.io/v1alpha1
 kind: BucketAccess
@@ -341,7 +341,7 @@ When resource of `BucketAccess` kind is removed from Kubernetes it triggers the 
 
 The following example shows how to revoke a `BucketAccess`:
 
-```sh
+```bash
 kubectl --namespace=my-namespace delete bucketaccess my-bucketaccess
 ```
 

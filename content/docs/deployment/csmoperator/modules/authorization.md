@@ -142,54 +142,67 @@ This section outlines the upgrade steps for Container Storage Modules (CSM) for 
 2) Upgrading CSI Driver, Authorization sidecar with Authorization module enabled
 
 
-## Upgrading the Authorization Proxy Server
+### Upgrading the Authorization Proxy Server
 
-  1. Modifying the existing Authorization Proxy Server installation directly via `kubectl edit`
+  1.  Modifying the existing Authorization Proxy Server installation directly via `kubectl edit`
   
-    kubectl get csm -n <module-namespace>
+      ```bash
+      kubectl get csm -n <module-namespace>
+      ```
 
-    For example - If the Authorization Proxy Server is installed in authorization namespace then run this command to get the object name
+      For example - If the Authorization Proxy Server is installed in authorization namespace then run this command to get the object name
 
-    $ kubectl get csm -n authorization
+      ```bash
+      kubectl get csm -n authorization
+      ```
 
-    use the object name in `kubectl edit` command.
+      use the object name in `kubectl edit` command.
 
-    kubectl edit csm <object-name> -n <module-namespace>
+      ```bash
+      kubectl edit csm <object-name> -n <module-namespace>
+      ```
 
-    For example - If the object name is authorization then use the name as authorization and if the namespace is authorization, then run this command to edit the object
+      For example - If the object name is authorization then use the name as authorization and if the namespace is authorization, then run this command to edit the object
 
-    kubectl edit csm authorization -n authorization
+      ```bash
+      kubectl edit csm authorization -n authorization
+      ```
 
-  2. Modify the installation
+  2.  Modify the installation
 
-    2.1 Update the CSM Authorization Proxy Server configVersion  
-    2.2 Update the images for proxyService, tenantService, roleService and storageService
+      - Update the CSM Authorization Proxy Server configVersion  
+      - Update the images for proxyService, tenantService, roleService and storageService
 
 
-## Upgrading CSI Driver, Authorization sidecar with Authorization module enabled
+### Upgrading CSI Driver, Authorization sidecar with Authorization module enabled
 
-  1. Modifying the existing driver and module installation directly via `kubectl edit`
+  1.  Modifying the existing driver and module installation directly via `kubectl edit`
 
-    kubectl get <driver-object> -n <driver-namespace>
+      ```bash
+      kubectl get csm -n <driver-namespace>
+      ```
 
-    For example - If the CSI PowerFlex driver is installed in vxflexos namepace then run this command to get the object name
+      For example - If the CSI PowerFlex driver is installed in vxflexos namepace then run this command to get the object name
 
-    kubectl get csm -n vxflexos
+      ```bash
+      kubectl get csm -n vxflexos
+      ```
+      use the object name in `kubectl edit` command.
 
-    use the object name in `kubectl edit` command.
+      ```bash
+      kubectl edit csm <object-name> -n <driver-namespace>
+      ```
+      For example - If the object name is vxflexos then use the name as vxflexos and if the driver is installed in vxflexos namespace, then run this command to edit the object
 
-    kubectl edit csm <driver-object>/<object-name> -n <driver-namespace>
+      ```bash
+      kubectl edit csm vxflexos -n vxflexos
+      ```
 
-    For example - If the object name is vxflexos then use the name as vxflexos and if the driver is installed in vxflexos namespace, then run this command to edit the object
+  2.  Modify the installation
 
-    kubectl edit csm vxflexos -n vxflexos
+      - Update the driver config version and image tag
+      - Update the Authorization config version and karavi-authorization-proxy image.
 
-  2. Modify the installation
-
-    2.1 Update the driver config version and image tag
-    2.2 Update the Authorization config version and karavi-authorization-proxy image.
-
->NOTE:
-
-- In Authorization module upgrade, only `n-1` to `n` upgrade is supported, e.g. if the current observability version is `v1.8.x`, it can be upgraded to `1.9.x`.
+>__Note__: 
+> - In Authorization module upgrade, only `n-1` to `n` upgrade is supported, e.g. if the current observability version is `v1.8.x`, it can be upgraded to `1.9.x`.
 
