@@ -18,10 +18,15 @@ mv repctl-linux-amd64 repctl
 chmod +x repctl
 ```
 
-Alternately, if you want to build the binary yourself, you can follow these steps:
+Then clone the repository with:
 ```shell
 git clone -b v1.9.0 https://github.com/dell/csm-replication.git
-cd csm-replication/repctl
+cd csm-replication
+```
+
+Alternately, if you want to build the binary yourself, you can follow these steps:
+```shell
+cd ./repctl
 make build
 ```
 
@@ -33,14 +38,13 @@ You can start using Container Storage Modules (CSM) for Replication with help fr
 1. Prepare admin Kubernetes clusters configs
 2. Add admin configs as clusters to `repctl`:
       ```shell
-
       ./repctl cluster add -f "/root/.kube/config-1","/root/.kube/config-2" -n "cluster-1","cluster-2"
       ```
    > **_NOTE:_**  If using a single Kubernetes cluster in a stretched configuration there will be only one cluster.
 3. Install replication controller and CRDs:
       ```shell
-      ./repctl create -f ../deploy/replicationcrds.all.yaml
-      ./repctl create -f ../deploy/controller.yaml
+      ./repctl create -f ./deploy/replicationcrds.all.yaml
+      ./repctl create -f ./deploy/controller.yaml
       ```
    > **_NOTE:_**  The controller will report that configmap is invalid. This is expected behavior.
    > The message should disappear once you inject the kubeconfigs (next step).
