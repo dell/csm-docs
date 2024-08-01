@@ -38,12 +38,12 @@ The dell-csm-replicator supports 'sync deletion' of replicated PV resources i.e 
 The decision to whether or not sync delete the corresponding PV depends on a Storage Class parameter which can be configured by the user: 
 
 ```yaml
-replication.storage.dell.com/remotePVRetentionPolicy: 'delete' | 'retain'
+replication.storage.dell.com/remotePVRetentionPolicy: 'Delete' | 'Retain'
 ```
 
-If the remotePVRetentionPolicy is set to 'delete', the corresponding PV would be deleted.
+If the remotePVRetentionPolicy is set to 'Delete', the corresponding PV would be deleted.
 
-If the remotePVRetentionPolicy is set to 'retain', the corresponding PV would be retained. This is not applicable for file system replication.
+If the remotePVRetentionPolicy is set to 'Retain', the PVC will be deleted but corresponding PV would be retained and available for use. This is not applicable for file system replication.
 
 By default, if the remotePVRetentionPolicy is not specified in the Storage Class, replicated PV resources are retained.
 
@@ -54,12 +54,12 @@ The dell-csm-replicator supports 'sync deletion' of RG (DellCSIReplicationGroup)
 The decision to whether or not sync delete the corresponding RG depends on a Storage Class parameter which can be configured by the user. 
 
 ```yaml
-replication.storage.dell.com/remoteRGRetentionPolicy: 'delete' | 'retain'
+replication.storage.dell.com/remoteRGRetentionPolicy: 'Delete' | 'Retain'
 ```
 
-If the remoteRGRetentionPolicy is set to 'delete', the corresponding RG would be deleted.
+If the remoteRGRetentionPolicy is set to 'Delete', the corresponding RG would be deleted.
 
-If the remoteRGRetentionPolicy is set to 'retain', the corresponding RG would be retained. 
+If the remoteRGRetentionPolicy is set to 'Retain', the corresponding RG would be retained.
 
 By default, if the remoteRGRetentionPolicy is not specified in the Storage Class, replicated RG resources are retained.
 

@@ -57,7 +57,7 @@ You can start using Container Storage Modules (CSM) for Replication with help fr
           ```shell
           ./repctl cluster inject
           ```
-5. Modify `csm-replication/repctl/examples/<storage>_example_values.yaml` config with replication information:
+5. Modify `csm-replication/repctl/examples/<storage>_example_values.yaml` config with replication information (variable definitions are documented in [Storage Classes](storageclasses))
    > **_NOTE:_**  `clusterID` should match names you gave to clusters in step 2
 6. Create replication storage classes using config:
       ```shell
