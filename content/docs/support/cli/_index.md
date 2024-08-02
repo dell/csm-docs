@@ -963,7 +963,7 @@ Gets PowerFlex volume infomation for a given tenant on a local cluster. The name
 dellctl volume get --proxy <proxy.dell.com> --namespace vxflexos
 ```
 ```
-# dellctl volume get --proxy <proxy.dell.com/proxy/volumes> --namespace vxflexos
+# dellctl volume get --proxy <proxy.dell.com> --namespace vxflexos
 
 NAME             VOLUME ID          SIZE       POOL     SYSTEM ID          PV NAME          PV STATUS   STORAGE CLASS   PVC NAME       NAMESPACE
 k8s-e7c8b39112   a69bf18e00000008   8.000000   mypool   636468e3638c840f   k8s-e7c8b39112   Released    vxflexos        demo-claim10   default
