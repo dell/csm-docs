@@ -95,7 +95,7 @@ Given a setup where Kubernetes, a storage system, and the CSM for Authorization 
 
     - Update the `SKIP_CERTIFICATE_VALIDATION` environment value to `true` or `false` depending on if you want to disable or enable certificate validation of the CSM Authorization Proxy Server.
 
-    - Do not update the `configVersion`. You will notice in the example that it is set to v1.11.0, this ensures that checks on version support do not prevent deployment of the v2.0.0-alpha authorization tech preview.
+    - Do not update the `configVersion`. You will notice in the example that it is set to v1.12.0, this ensures that checks on version support do not prevent deployment of the v2.0.0-alpha authorization tech preview.
 
     Example: 
 
@@ -106,12 +106,12 @@ Given a setup where Kubernetes, a storage system, and the CSM for Authorization 
         # enabled: Always set to true
         enabled: true
         forceRemoveModule: true
-        configVersion: v2.10.0
+        configVersion: v2.11.0
         components:
         - name: csipowermax-reverseproxy
         # image: Define the container images used for the reverse proxy
         # Default value: None
-          image: dellemc/csipowermax-reverseproxy:v2.10.0
+          image: dellemc/csipowermax-reverseproxy:v2.11.0
           envs:
           # "tlsSecret" defines the TLS secret that is created with certificate
           # and its associated key
@@ -133,7 +133,7 @@ Given a setup where Kubernetes, a storage system, and the CSM for Authorization 
       - name: authorization
         # enable: Enable/Disable csm-authorization
         enabled: true
-        configVersion: v1.11.0
+        configVersion: v1.12.0
         components:
         - name: karavi-authorization-proxy
           image: dellemc/csm-authorization-sidecar:v2.0.0-alpha
