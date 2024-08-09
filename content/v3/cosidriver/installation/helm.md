@@ -65,7 +65,7 @@ Installing any of the CSI Driver components using Helm requires a few utilities 
 
 6. Install the driver by running the following command (assuming that the current working directory is _charts_ and _my-cosi-settings.yaml_ is also present in _charts_ directory).
 
-```sh
+```bash
 helm install dell-cosi ./cosi --namespace=dell-cosi --values ./my-cosi-values.yaml --set-file configuration.data=./my-cosi-configuration.yaml
 ```
 

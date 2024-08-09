@@ -63,26 +63,26 @@ The Observability module installed by the Dell CSM Operator can be updated like 
 
 - Modifying the existing driver and module installation directly via `kubectl edit`
 
-  ```sh
+  ```bash
   kubectl get <driver-object> -n <driver-namespace>
   ```
 
   For example - If the CSI PowerScale driver is installed then run this command to get the object name
 
-  ```sh
+  ```bash
   # Replace driver-namespace with the namespace where the CSI PowerScale driver is installed
   $ kubectl get csm -n <driver-namespace>
   ```
 
   use the object name in `kubectl edit` command.
 
-  ```sh
+  ```bash
   kubectl edit csm <driver-object>/<object-name> -n <driver-namespace>
   ```
 
   For example - If the object name is isilon then use the name as isilon
 
-  ```sh
+  ```bash
   # Replace object-name with the isilon
   kubectl edit csm isilon -n <driver-namespace>
   ```
