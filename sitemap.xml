@@ -54,16 +54,16 @@
     <lastmod>2024-07-30T01:25:59+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/docs/deployment/csminstallationwizard/</loc>
-    <lastmod>2024-07-30T01:25:59+05:30</lastmod>
+    <lastmod>2024-08-09T16:57:01+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/v1/deployment/csminstallationwizard/</loc>
-    <lastmod>2024-07-30T01:25:59+05:30</lastmod>
+    <lastmod>2024-08-09T16:57:01+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/v2/deployment/csminstallationwizard/</loc>
-    <lastmod>2024-07-30T01:25:59+05:30</lastmod>
+    <lastmod>2024-08-09T16:57:01+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/v3/deployment/csminstallationwizard/</loc>
-    <lastmod>2024-07-30T01:25:59+05:30</lastmod>
+    <lastmod>2024-08-09T16:57:01+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/docs/deployment/helm/modules/</loc>
     <lastmod>2024-04-08T15:49:08-04:00</lastmod>
@@ -204,16 +204,16 @@
     <lastmod>2024-07-30T01:25:59+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/docs/cosidriver/features/objectscale/</loc>
-    <lastmod>2024-07-29T17:28:06+05:30</lastmod>
+    <lastmod>2024-08-09T16:57:01+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/v1/cosidriver/features/objectscale/</loc>
-    <lastmod>2024-07-30T01:25:59+05:30</lastmod>
+    <lastmod>2024-08-09T16:57:01+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/v2/cosidriver/features/objectscale/</loc>
-    <lastmod>2024-07-30T01:25:59+05:30</lastmod>
+    <lastmod>2024-08-09T16:57:01+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/v3/cosidriver/features/objectscale/</loc>
-    <lastmod>2024-07-30T01:25:59+05:30</lastmod>
+    <lastmod>2024-08-09T16:57:01+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/docs/csidriver/features/powerflex/</loc>
     <lastmod>2024-07-30T01:25:59+05:30</lastmod>
@@ -360,10 +360,10 @@
     <lastmod>2022-09-21T18:28:15+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/v1/prerequisites/</loc>
-    <lastmod>2024-07-30T01:25:59+05:30</lastmod>
+    <lastmod>2024-08-09T16:57:01+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/docs/prerequisites/</loc>
-    <lastmod>2024-08-02T13:28:51-03:00</lastmod>
+    <lastmod>2024-08-09T16:57:01+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/docs/resiliency/release/</loc>
     <lastmod>2024-07-30T01:25:59+05:30</lastmod>
@@ -657,19 +657,19 @@
     <lastmod>2023-03-27T17:14:31+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/docs/cosidriver/installation/helm/</loc>
-    <lastmod>2023-12-13T23:10:42+05:30</lastmod>
+    <lastmod>2024-08-09T16:57:01+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/v1/cosidriver/installation/helm/</loc>
-    <lastmod>2024-03-21T02:39:59+05:30</lastmod>
+    <lastmod>2024-08-09T16:57:01+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/v2/cosidriver/installation/helm/</loc>
-    <lastmod>2024-07-30T01:25:59+05:30</lastmod>
+    <lastmod>2024-08-09T16:57:01+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/v2/csidriver/installation/helm/</loc>
     <lastmod>2022-03-23T08:15:39-04:00</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/v3/cosidriver/installation/helm/</loc>
-    <lastmod>2024-07-30T01:25:59+05:30</lastmod>
+    <lastmod>2024-08-09T16:57:01+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/v3/csidriver/installation/helm/</loc>
     <lastmod>2022-03-23T08:15:39-04:00</lastmod>
@@ -741,10 +741,10 @@
     <lastmod>2024-07-30T01:25:59+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/v2/csidriver/</loc>
-    <lastmod>2024-07-30T01:25:59+05:30</lastmod>
+    <lastmod>2024-08-09T16:57:01+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/v3/csidriver/</loc>
-    <lastmod>2024-07-30T01:25:59+05:30</lastmod>
+    <lastmod>2024-08-09T16:57:01+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/v2/observability/deployment/</loc>
     <lastmod>2024-07-30T01:25:59+05:30</lastmod>
@@ -1596,7 +1596,7 @@
     <lastmod>2024-07-31T10:29:18+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/docs/deployment/csmoperator/modules/authorization/</loc>
-    <lastmod>2024-07-30T01:25:59+05:30</lastmod>
+    <lastmod>2024-08-09T16:57:01+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/docs/deployment/helm/modules/installation/authorization/</loc>
     <lastmod>2024-07-30T01:25:59+05:30</lastmod>
@@ -1686,7 +1686,7 @@
     <lastmod>2022-03-23T08:15:39-04:00</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/docs/deployment/csmoperator/modules/observability/</loc>
-    <lastmod>2024-07-30T01:25:59+05:30</lastmod>
+    <lastmod>2024-08-09T16:57:01+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/v1/deployment/csmoperator/modules/observability/</loc>
     <lastmod>2024-07-30T01:25:59+05:30</lastmod>
@@ -1743,7 +1743,7 @@
     <lastmod>2024-07-30T01:25:59+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/docs/csidriver/release/powerflex/</loc>
-    <lastmod>2024-07-30T01:25:59+05:30</lastmod>
+    <lastmod>2024-08-09T16:57:01+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/docs/csidriver/test/powerflex/</loc>
     <lastmod>2024-03-21T02:39:59+05:30</lastmod>
@@ -1755,13 +1755,13 @@
     <lastmod>2024-07-30T01:25:59+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/docs/deployment/helm/drivers/installation/powerflex/</loc>
-    <lastmod>2024-07-30T01:25:59+05:30</lastmod>
+    <lastmod>2024-08-12T15:52:07+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/v1/authorization/configuration/powerflex/</loc>
     <lastmod>2024-07-30T01:25:59+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/v1/csidriver/release/powerflex/</loc>
-    <lastmod>2024-07-30T01:25:59+05:30</lastmod>
+    <lastmod>2024-08-09T16:57:01+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/v1/csidriver/test/powerflex/</loc>
     <lastmod>2024-07-30T01:25:59+05:30</lastmod>
@@ -1785,7 +1785,7 @@
     <lastmod>2024-03-21T02:39:59+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/v2/csidriver/release/powerflex/</loc>
-    <lastmod>2024-07-30T01:25:59+05:30</lastmod>
+    <lastmod>2024-08-09T16:57:01+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/v2/csidriver/troubleshooting/powerflex/</loc>
     <lastmod>2024-07-30T01:25:59+05:30</lastmod>
@@ -1899,7 +1899,7 @@
     <lastmod>2024-03-21T02:39:59+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/docs/csidriver/troubleshooting/powerscale/</loc>
-    <lastmod>2024-04-11T10:20:11-03:00</lastmod>
+    <lastmod>2024-08-09T16:57:01+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/docs/deployment/csmoperator/drivers/powerscale/</loc>
     <lastmod>2024-07-30T01:25:59+05:30</lastmod>

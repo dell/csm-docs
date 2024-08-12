@@ -17,12 +17,12 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/docs/deployment/csmoperator/modules/observability/" /><meta property="article:section" content="docs" />
 
-<meta property="article:modified_time" content="2024-07-30T01:25:59+05:30" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2024-08-09T16:57:01+05:30" /><meta property="og:site_name" content="Dell Technologies" />
 
 <meta itemprop="name" content="Observability">
 <meta itemprop="description" content="Installing Observability via Dell CSM Operator
 ">
-<meta itemprop="dateModified" content="2024-07-30T01:25:59+05:30" />
+<meta itemprop="dateModified" content="2024-08-09T16:57:01+05:30" />
 <meta itemprop="wordCount" content="559">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Observability"/>
@@ -75,7 +75,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.5526767f33935d0d91f6a5a531e64518.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.fd3f9060c2416f9b17b52cb4caebda14.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -99,7 +99,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.5526767f33935d0d91f6a5a531e64518.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.fd3f9060c2416f9b17b52cb4caebda14.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -752,14 +752,14 @@ Upgrade Observability <a class="header-link"  href="#upgrade-observability" styl
 <ul>
 <li>
 <p>Modifying the existing driver and module installation directly via <code>kubectl edit</code></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>kubectl get &lt;driver-object&gt; -n &lt;driver-namespace&gt;
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl get &lt;driver-object&gt; -n &lt;driver-namespace&gt;
 </span></span></code></pre></div><p>For example - If the CSI PowerScale driver is installed then run this command to get the object name</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"># Replace driver-namespace with the namespace where the CSI PowerScale driver is installed</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"># Replace driver-namespace with the namespace where the CSI PowerScale driver is installed</span>
 </span></span><span style="display:flex;"><span>$ kubectl get csm -n &lt;driver-namespace&gt;
 </span></span></code></pre></div><p>use the object name in <code>kubectl edit</code> command.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>kubectl edit csm &lt;driver-object&gt;/&lt;object-name&gt; -n &lt;driver-namespace&gt;
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl edit csm &lt;driver-object&gt;/&lt;object-name&gt; -n &lt;driver-namespace&gt;
 </span></span></code></pre></div><p>For example - If the object name is isilon then use the name as isilon</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"># Replace object-name with the isilon</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"># Replace object-name with the isilon</span>
 </span></span><span style="display:flex;"><span>kubectl edit csm isilon -n &lt;driver-namespace&gt;
 </span></span></code></pre></div></li>
 <li>

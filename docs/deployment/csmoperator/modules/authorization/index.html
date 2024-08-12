@@ -17,13 +17,13 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/docs/deployment/csmoperator/modules/authorization/" /><meta property="article:section" content="docs" />
 
-<meta property="article:modified_time" content="2024-07-30T01:25:59+05:30" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2024-08-09T16:57:01+05:30" /><meta property="og:site_name" content="Dell Technologies" />
 
 <meta itemprop="name" content="Authorization">
 <meta itemprop="description" content="Installing Authorization via Dell CSM Operator
 ">
-<meta itemprop="dateModified" content="2024-07-30T01:25:59+05:30" />
-<meta itemprop="wordCount" content="1035">
+<meta itemprop="dateModified" content="2024-08-09T16:57:01+05:30" />
+<meta itemprop="wordCount" content="1014">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Authorization"/>
 <meta name="twitter:description" content="Installing Authorization via Dell CSM Operator
@@ -75,7 +75,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.5526767f33935d0d91f6a5a531e64518.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.fd3f9060c2416f9b17b52cb4caebda14.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -99,7 +99,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.5526767f33935d0d91f6a5a531e64518.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.fd3f9060c2416f9b17b52cb4caebda14.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -649,11 +649,14 @@
         <li><a href="#install-karavictl">Install Karavictl</a></li>
         <li><a href="#configure-the-csm-authorization-proxy-server">Configure the CSM Authorization Proxy Server</a></li>
         <li><a href="#configure-a-dell-csi-driver-with-csm-authorization">Configure a Dell CSI Driver with CSM Authorization</a></li>
-        <li><a href="#upgrade-csm-authorization">Upgrade CSM Authorization</a></li>
       </ul>
     </li>
-    <li><a href="#upgrading-the-authorization-proxy-server">Upgrading the Authorization Proxy Server</a></li>
-    <li><a href="#upgrading-csi-driver-authorization-sidecar-with-authorization-module-enabled">Upgrading CSI Driver, Authorization sidecar with Authorization module enabled</a></li>
+    <li><a href="#upgrade-csm-authorization">Upgrade CSM Authorization</a>
+      <ul>
+        <li><a href="#upgrading-the-authorization-proxy-server">Upgrading the Authorization Proxy Server</a></li>
+        <li><a href="#upgrading-csi-driver-authorization-sidecar-with-authorization-module-enabled">Upgrading CSI Driver, Authorization sidecar with Authorization module enabled</a></li>
+      </ul>
+    </li>
   </ul>
 </nav>
       </div>
@@ -927,97 +930,73 @@ Configure a Dell CSI Driver with CSM Authorization <a class="header-link"  href=
             </svg>
         </a></h3><p><strong>Authorization v1.x GA</strong></p>
 <p>Follow the instructions available in CSM Authorization for <a href="../../../helm/modules/installation/authorization/#configuring-a-dell-csi-driver-with-csm-for-authorization">Configuring a Dell CSI Driver with CSM for Authorization</a>.</p>
-<h3 id="upgrade-csm-authorization">
+<h2 id="upgrade-csm-authorization">
 Upgrade CSM Authorization <a class="header-link"  href="#upgrade-csm-authorization" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
             <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
                 <path d="M0 0h24v24H0z" fill="none"/>
                 <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
             </svg>
-        </a></h3><p>This section outlines the upgrade steps for Container Storage Modules (CSM) for Authorization. The upgrade of CSM for Authorization is handled in 2 parts:</p>
+        </a></h2><p>This section outlines the upgrade steps for Container Storage Modules (CSM) for Authorization. The upgrade of CSM for Authorization is handled in 2 parts:</p>
 <ol>
 <li>Upgrading the Authorization proxy server</li>
 <li>Upgrading CSI Driver, Authorization sidecar with Authorization module enabled</li>
 </ol>
-<h2 id="upgrading-the-authorization-proxy-server">
+<h3 id="upgrading-the-authorization-proxy-server">
 Upgrading the Authorization Proxy Server <a class="header-link"  href="#upgrading-the-authorization-proxy-server" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
             <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
                 <path d="M0 0h24v24H0z" fill="none"/>
                 <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
             </svg>
-        </a></h2><ol>
-<li>Modifying the existing Authorization Proxy Server installation directly via <code>kubectl edit</code></li>
+        </a></h3><ol>
+<li>
+<p>Modifying the existing Authorization Proxy Server installation directly via <code>kubectl edit</code></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl get csm -n &lt;module-namespace&gt;
+</span></span></code></pre></div><p>For example - If the Authorization Proxy Server is installed in authorization namespace then run this command to get the object name</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl get csm -n authorization
+</span></span></code></pre></div><p>use the object name in <code>kubectl edit</code> command.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl edit csm &lt;object-name&gt; -n &lt;module-namespace&gt;
+</span></span></code></pre></div><p>For example - If the object name is authorization then use the name as authorization and if the namespace is authorization, then run this command to edit the object</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl edit csm authorization -n authorization
+</span></span></code></pre></div></li>
+<li>
+<p>Modify the installation</p>
+<ul>
+<li>Update the CSM Authorization Proxy Server configVersion</li>
+<li>Update the images for proxyService, tenantService, roleService and storageService</li>
+</ul>
+</li>
 </ol>
-<pre><code>```sh
-kubectl get csm -n &lt;module-namespace&gt;
-```
-
-For example - If the Authorization Proxy Server is installed in authorization namespace then run this command to get the object name
-
-```sh
-$ kubectl get csm -n authorization
-```
-
-use the object name in `kubectl edit` command.
-
-```sh
-kubectl edit csm &lt;object-name&gt; -n &lt;module-namespace&gt;
-```
-
-For example - If the object name is authorization then use the name as authorization and if the namespace is authorization, then run this command to edit the object
-
-```sh
-kubectl edit csm authorization -n authorization
-```
-</code></pre>
-<ol start="2">
-<li>Modify the installation</li>
-</ol>
-<pre><code>- Update the CSM Authorization Proxy Server configVersion  
-- Update the images for proxyService, tenantService, roleService and storageService
-</code></pre>
-<h2 id="upgrading-csi-driver-authorization-sidecar-with-authorization-module-enabled">
+<h3 id="upgrading-csi-driver-authorization-sidecar-with-authorization-module-enabled">
 Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a class="header-link"  href="#upgrading-csi-driver-authorization-sidecar-with-authorization-module-enabled" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
             <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
                 <path d="M0 0h24v24H0z" fill="none"/>
                 <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
             </svg>
-        </a></h2><ol>
-<li>Modifying the existing driver and module installation directly via <code>kubectl edit</code></li>
+        </a></h3><ol>
+<li>
+<p>Modifying the existing driver and module installation directly via <code>kubectl edit</code></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl get csm -n &lt;driver-namespace&gt;
+</span></span></code></pre></div><p>For example - If the CSI PowerFlex driver is installed in vxflexos namepace then run this command to get the object name</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl get csm -n vxflexos
+</span></span></code></pre></div><p>use the object name in <code>kubectl edit</code> command.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl edit csm &lt;object-name&gt; -n &lt;driver-namespace&gt;
+</span></span></code></pre></div><p>For example - If the object name is vxflexos then use the name as vxflexos and if the driver is installed in vxflexos namespace, then run this command to edit the object</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl edit csm vxflexos -n vxflexos
+</span></span></code></pre></div></li>
+<li>
+<p>Modify the installation</p>
+<ul>
+<li>Update the driver config version and image tag</li>
+<li>Update the Authorization config version and karavi-authorization-proxy image.</li>
+</ul>
+</li>
 </ol>
-<pre><code>```sh
-kubectl get &lt;driver-object&gt; -n &lt;driver-namespace&gt;
-```
-
-For example - If the CSI PowerFlex driver is installed in vxflexos namepace then run this command to get the object name
-
-```sh
-kubectl get csm -n vxflexos
-```
-
-use the object name in `kubectl edit` command.
-
-```sh
-kubectl edit csm &lt;driver-object&gt;/&lt;object-name&gt; -n &lt;driver-namespace&gt;
-```
-
-For example - If the object name is vxflexos then use the name as vxflexos and if the driver is installed in vxflexos namespace, then run this command to edit the object
-
-```sh
-kubectl edit csm vxflexos -n vxflexos
-```
-</code></pre>
-<ol start="2">
-<li>Modify the installation</li>
-</ol>
-<pre><code>- Update the driver config version and image tag
-- Update the Authorization config version and karavi-authorization-proxy image.
-</code></pre>
 <blockquote>
-<p>NOTE:</p>
-</blockquote>
+<p><strong>Note</strong>:</p>
 <ul>
 <li>In Authorization module upgrade, only <code>n-1</code> to <code>n</code> upgrade is supported, e.g. if the current observability version is <code>v1.8.x</code>, it can be upgraded to <code>1.9.x</code>.</li>
 </ul>
+</blockquote>
 
 	<style>
   .feedback--answer {
