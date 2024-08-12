@@ -95,7 +95,7 @@ Note that the namespace can be any user-defined name that follows the convention
     | mdm       | mdm defines the MDM(s) that SDC should register with on start. This should be a list of MDM IP addresses or hostnames separated by comma. | true     | -       |
     | nasName       | nasName defines what NAS should be used for NFS volumes. NFS volumes are supported on arrays version >=4.0.x | false     | ""       |
 
-    Example: `samples/secret.yaml`
+Example: `samples/secret.yaml`
 
 ```yaml
 - username: "admin"
