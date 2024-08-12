@@ -15,12 +15,12 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/docs/csidriver/release/powerflex/" /><meta property="article:section" content="docs" />
 
-<meta property="article:modified_time" content="2024-07-30T01:25:59+05:30" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2024-08-09T16:57:01+05:30" /><meta property="og:site_name" content="Dell Technologies" />
 
 <meta itemprop="name" content="PowerFlex">
 <meta itemprop="description" content="Release notes for PowerFlex CSI driver">
-<meta itemprop="dateModified" content="2024-07-30T01:25:59+05:30" />
-<meta itemprop="wordCount" content="805">
+<meta itemprop="dateModified" content="2024-08-09T16:57:01+05:30" />
+<meta itemprop="wordCount" content="723">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="PowerFlex"/>
 <meta name="twitter:description" content="Release notes for PowerFlex CSI driver"/>
@@ -71,7 +71,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.5526767f33935d0d91f6a5a531e64518.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.fd3f9060c2416f9b17b52cb4caebda14.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -95,7 +95,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.5526767f33935d0d91f6a5a531e64518.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.fd3f9060c2416f9b17b52cb4caebda14.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -750,16 +750,8 @@ Known Issues <a class="header-link"  href="#known-issues" style=" display: inlin
 <td>It is advised not to have any pending pods or PVCs once the volume limit per node is exhausted on a CSI Driver. There is an open issue reported with kubenetes at <a href="https://github.com/kubernetes/kubernetes/issues/95911">https://github.com/kubernetes/kubernetes/issues/95911</a> with the same behavior.</td>
 </tr>
 <tr>
-<td>The PowerFlex Dockerfile is incorrectly labeling the version as 2.7.0 for the 2.8.0 version.</td>
-<td>Describe the driver pod using <code>kubectl describe pod $podname -n vxflexos</code> to ensure v2.8.0 is installed.</td>
-</tr>
-<tr>
 <td>Resource quotas may not work properly with the CSI PowerFlex driver. PowerFlex is only able to assign storage in 8Gi chunks, so if a create volume call is made with a size not divisible by 8Gi, CSI-PowerFlex will round up to the next 8Gi boundary when it provisions storage &ndash; however, the resource quota will not record this size but rather the original size in the create request. This means that, for example, if a 10Gi resource quota is set, and a user provisions 10 1Gi PVCs, 80Gi of storage will actually be allocated, which is well over the amount specified in the resource quota.</td>
 <td>For now, users should only provision volumes in 8Gi-divisible chunks if they want to use resource quotas.</td>
-</tr>
-<tr>
-<td>Helm install of CSM for PowerFlex v1.10.0 is failing due to a duplicate <code>mountPath: /host_opt_emc_path</code> being added to volumeMounts charts/csi-vxflexos/templates/node.yaml. Error message is <code>Error: INSTALLATION FAILED: 1 error occurred: DaemonSet.apps &quot;vxflexos-node&quot; is invalid: spec.template.spec.initContainers[0].volumeMounts[4].mountPath: Invalid value: &quot;/host_opt_emc_path&quot;: must be unique</code></td>
-<td>The issue can be resolved by removing the duplicate entry in <a href="https://github.com/dell/helm-charts/blob/main/charts/csi-vxflexos/templates/node.yaml">https://github.com/dell/helm-charts/blob/main/charts/csi-vxflexos/templates/node.yaml</a></td>
 </tr>
 </tbody>
 </table>

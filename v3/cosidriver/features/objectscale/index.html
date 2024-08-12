@@ -15,11 +15,11 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/v3/cosidriver/features/objectscale/" /><meta property="article:section" content="v3" />
 
-<meta property="article:modified_time" content="2024-07-30T01:25:59+05:30" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2024-08-09T16:57:01+05:30" /><meta property="og:site_name" content="Dell Technologies" />
 
 <meta itemprop="name" content="ObjectScale">
 <meta itemprop="description" content="Code features for ObjectScale COSI Driver">
-<meta itemprop="dateModified" content="2024-07-30T01:25:59+05:30" />
+<meta itemprop="dateModified" content="2024-08-09T16:57:01+05:30" />
 <meta itemprop="wordCount" content="1768">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="ObjectScale"/>
@@ -71,7 +71,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.5526767f33935d0d91f6a5a531e64518.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.fd3f9060c2416f9b17b52cb4caebda14.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -95,7 +95,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.5526767f33935d0d91f6a5a531e64518.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.fd3f9060c2416f9b17b52cb4caebda14.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -993,7 +993,7 @@ Kubernetes Administrator Steps <a class="header-link"  href="#kubernetes-adminis
             </svg>
         </a></h3><p>The first step before you can start provisioning object storage, is to create a <code>BucketClass</code>. The <code>BucketClass</code> is an object that defines the provisioning and management characteristics of <code>Bucket</code> resources. It acts as an abstraction layer between users (such as applications or pods) and the underlying object storage infrastructure. <code>BucketClass</code> allows you to dynamically provision and manage <code>Buckets</code> in a consistent and automated manner.</p>
 <p>The following example shows how to create a <code>BucketClass</code>:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>cat <span style="color:#4e9a06">&lt;&lt;EOF | kubectl create --filename -
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cat <span style="color:#4e9a06">&lt;&lt;EOF | kubectl create --filename -
 </span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">apiVersion: objectstorage.k8s.io/v1alpha1
 </span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">kind: BucketClass
 </span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">metadata:
@@ -1017,7 +1017,7 @@ Greenfield Provisioning <a class="header-link"  href="#greenfield-provisioning" 
             </svg>
         </a></h4><p><em>Greenfield Provisioning</em> means creating a new bucket from scratch, without any existing data.</p>
 <p>The following example shows how to create a <code>BucketClaim</code> for greenfield provisioning.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>cat <span style="color:#4e9a06">&lt;&lt;EOF | kubectl create --namespace=my-namespace --filename -
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cat <span style="color:#4e9a06">&lt;&lt;EOF | kubectl create --namespace=my-namespace --filename -
 </span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">apiVersion: objectstorage.k8s.io/v1alpha1
 </span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">kind: BucketClaim
 </span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">metadata:
@@ -1037,7 +1037,7 @@ Brownfield Provisioning <a class="header-link"  href="#brownfield-provisioning" 
             </svg>
         </a></h4><p><em>Brownfield Provisioning</em> means using an existing bucket, that can already contain the data. This differs slightly from <em>Greenfield Provisioning</em>, as we need to create both <code>Bucket</code> and <code>BucketClaim</code> manually.</p>
 <p>The following example shows how to create <code>Bucket</code> and <code>BucketClaim</code> for brownfield provisioning.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>cat <span style="color:#4e9a06">&lt;&lt;EOF | kubectl create --namespace=my-namespace --filename -
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cat <span style="color:#4e9a06">&lt;&lt;EOF | kubectl create --namespace=my-namespace --filename -
 </span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">apiVersion: objectstorage.k8s.io/v1alpha1
 </span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">kind: Bucket
 </span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">metadata:
@@ -1071,7 +1071,7 @@ Deleting Buckets <a class="header-link"  href="#deleting-buckets" style=" displa
             </svg>
         </a></h2><p>There are a few crucial details regarding bucket deletion. The first one is <code>deletionPolicy</code> which is used to specify how COSI should handle deletion of a bucket. It is found in <code>BucketClass</code> resource and can be set to <code>Delete</code> and <code>Retain</code>. The second crucial detail is <code>emptyBucket</code> field in the <a href="../../installation/configuration_file">Helm Chart configuration</a>.</p>
 <p>The following example shows how to delete a <code>BucketClaim</code>.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>kubectl --namespace<span style="color:#ce5c00;font-weight:bold">=</span>my-namespace delete bucketclaim my-bucketclaim
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl --namespace<span style="color:#ce5c00;font-weight:bold">=</span>my-namespace delete bucketclaim my-bucketclaim
 </span></span></code></pre></div><blockquote>
 <p>ℹ️ <strong>NOTE:</strong> remember to replace <em>my-namespace</em> and <em>my-bucketclaim</em> with actual values.</p>
 </blockquote>
@@ -1089,7 +1089,7 @@ Kubernetes Administrator Steps <a class="header-link"  href="#kubernetes-adminis
             </svg>
         </a></h3><p>The first step before you start granting access to the object storage for your application, is to create a <code>BucketAccessClass</code>. The <code>BucketAccessClass</code> is an object that defines the access management characteristics of <code>Bucket</code> resources. It acts as an abstraction layer between users (such as applications or pods) and the underlying object storage infrastructure. <code>BucketAccessClass</code> allows you to dynamically grant access to <code>Buckets</code> in a consistent and automated manner.</p>
 <p>The following example shows how to create a <code>BucketAccessClass</code>:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>cat <span style="color:#4e9a06">&lt;&lt;EOF | kubectl create --filename -
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cat <span style="color:#4e9a06">&lt;&lt;EOF | kubectl create --filename -
 </span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">apiVersion: objectstorage.k8s.io/v1alpha1
 </span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">kind: BucketAccessClass
 </span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">metadata:
@@ -1115,7 +1115,7 @@ End-user Steps <a class="header-link"  href="#end-user-steps-1" style=" display:
 <li>access key for the user is added to ObjectScale.</li>
 </ul>
 <p>The following example shows how to grant an access using <code>BucketAccess</code> resource:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>cat <span style="color:#4e9a06">&lt;&lt;EOF | kubectl create --namespace=my-namespace --filename -
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cat <span style="color:#4e9a06">&lt;&lt;EOF | kubectl create --namespace=my-namespace --filename -
 </span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">apiVersion: objectstorage.k8s.io/v1alpha1
 </span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">kind: BucketAccess
 </span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">metadata:
@@ -1143,7 +1143,7 @@ When resource of <code>BucketAccess</code> kind is removed from Kubernetes it tr
 <li>user is removed from ObjectScale.</li>
 </ul>
 <p>The following example shows how to revoke a <code>BucketAccess</code>:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>kubectl --namespace<span style="color:#ce5c00;font-weight:bold">=</span>my-namespace delete bucketaccess my-bucketaccess
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl --namespace<span style="color:#ce5c00;font-weight:bold">=</span>my-namespace delete bucketaccess my-bucketaccess
 </span></span></code></pre></div><blockquote>
 <p>ℹ️ <strong>NOTE:</strong> remember to replace <em>my-namespace</em> and <em>my-bucketaccess</em> with actual values.</p>
 </blockquote>
