@@ -6,13 +6,15 @@ Description: >
   CSI Volumes Encryption
 ---
 
-**NOTE:**  Encryption is not supported for CSM 1.9.x release. Please refer to the [release notes](./release/) for more details.
+**NOTE:**  Encryption is not supported for CSM 1.10.x release. Please refer to the [release notes](./release/) for more details.
 
 Encryption provides the capability to encrypt user data residing on volumes created by Dell CSI Drivers.
 
+
+
 > **NOTE:** This tech-preview release is not intended for use in production environment.
 
-> **NOTE:** Encryption requires a time-based license to create new encrypted volumes. Request a [trial license](../../license) prior to deployment.
+> **NOTE:** Encryption requires a time-based license to create new encrypted volumes. Request a [trial license](../../support/license) prior to deployment.
 > 
 > After the license expiration, existing encrypted volume can still be unlocked and used, but no new encrypted volumes can be created.
 
@@ -35,7 +37,7 @@ This provisioner belongs to the storage driver and does not depend on the Encryp
 
 **Provisioner for encrypted volumes**
 
-This provisioner belongs to Encryption and registers with the name [`encryption.pluginName`](deployment/#helm-chart-values) when Encryption is enabled. Use a storage class with this provisioner to create encrypted volumes.
+This provisioner belongs to Encryption and registers with the name [`encryption.pluginName`](../../deployment/helm/modules/installation/encryption/#helm-chart-values) when Encryption is enabled. Use a storage class with this provisioner to create encrypted volumes.
 
 ## Capabilities
 
@@ -116,7 +118,7 @@ Please refer to the Hashicorp Vault documentation regarding recommended deployme
 > **CAUTION:** Destroyed Vault storage back-end or the encryption key stored in it, will make it impossible to unlock the volume encrypted with Encryption. 
 Access to the data will be lost for ever.
 
-Refer to [Vault Configuration section](vault) for minimal configuration steps required to support Encryption and other configuration considerations.
+Refer to [Vault Configuration section](../../deployment/helm/modules/installation/encryption/vault) for minimal configuration steps required to support Encryption and other configuration considerations.
 
 ## Key Rotation (rekey)
 This preview of Encryption includes the ability to change the KEK (Key Encryption Key) of an encrypted volume, an operation commonly known as Shallow Rekey, or 

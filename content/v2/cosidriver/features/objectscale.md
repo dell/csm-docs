@@ -45,7 +45,9 @@ metadata:
 spec:
   driverName: cosi.dellemc.com
   bucketClassName: my-bucket-class
-  bucketClaim: my-bucket-claim
+  bucketClaim:
+    name: "my-bucket-claim"
+    namespace: "default"
   deletionPolicy: Delete
   protocols:
     - S3
