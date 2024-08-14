@@ -43,7 +43,7 @@ CSM is made up of multiple components including modules (enterprise capabilities
 {{% cardpane %}}
 {{< card header="[**Application Mobility**](applicationmobility/)"
           footer="Supports all platforms">}}
-  Container Storage Modules for Application Mobility provide Kubernetes administrators the ability to clone their stateful application workloads and application data to other clusters, either on-premise or in the cloud.
+  Container Storage Modules for Application Mobility provide Kubernetes administrators the ability to clone their stateful application workloads and application data to other clusters in the cloud.
   [...Learn more](applicationmobility/)
   {{< /card >}}
    {{< card header="[**Encryption**](secure/encryption)"
@@ -54,8 +54,8 @@ CSM is made up of multiple components including modules (enterprise capabilities
 {{% /cardpane %}}
 {{% cardpane %}}
    {{< card header="[License](support/license/)"
-          footer="Required for [Application Mobility](applicationmobility/) & [Encryption](secure/encryption/)">}}
-  The tech-preview releases of Application Mobility and Encryption require a license.
+          footer="Required for [Encryption](secure/encryption/)">}}
+  The tech-preview releases of Encryption require a license.
   Request a license using the [Container Storage Modules License Request](https://app.smartsheet.com/b/form/5e46fad643874d56b1f9cf4c9f3071fb) by providing the requested details.
    [...Learn more](support/license/)
   {{< /card >}}

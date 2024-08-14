@@ -6,9 +6,13 @@ Description: >
   Application Mobility
 ---
 
+{{% pageinfo color="primary" %}}
+Application Mobility is available with [APEX Navigator for Kubernetes](https://www.dell.com/en-ca/dt/apex/storage/public-cloud/navigator.htm#kubernetes) for US-based customers
+{{% /pageinfo %}}
+
 >> NOTE: This tech-preview release is not intended for use in production environment.
 
->> NOTE: Application Mobility requires a time-based license. See [Deployment](./deployment) for instructions.
+>> NOTE: Application Mobility requires a time-based license. See [Deployment](../deployment/helm/modules/installation/applicationmobility/) for instructions.
 
 Container Storage Modules for Application Mobility provide Kubernetes administrators the ability to clone their stateful application workloads and application data to other clusters, either on-premise or in the cloud.
 
@@ -27,12 +31,4 @@ After a backup has been created, it can be restored on the same Kubernetes clust
 | Data Mover | Description |
 |-|-|
 | Restic           | Persistent Volume data will be stored in the provided object store bucket |
-{{</table>}}
-
-## Supported Container Orchestrator Platforms
-{{<table "table table-striped table-bordered table-sm">}}
-| COP/OS | Supported Versions |
-|-|-|
-| Kubernetes           |    1.26, 1.27. 1.28 |
-| Red Hat OpenShift    |    4.13, 4.14       |
 {{</table>}}
