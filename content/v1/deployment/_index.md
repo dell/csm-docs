@@ -19,7 +19,7 @@ The Container Storage Modules and the required CSI Drivers can each be deployed 
 
 
 {{% cardpane %}}
-  {{< card header="[Dell CSI Drivers Installation via Helm](../csidriver/installation/helm)"
+  {{< card header="[Dell CSI Drivers Installation via Helm](helm/drivers)"
           footer="Installs [PowerStore](helm/drivers/installation/powerstore/) [PowerMax](helm/drivers/installation/powermax/) [PowerScale](helm/drivers/installation/isilon/) [PowerFlex](helm/drivers/installation/powerflex/) [Unity XT](helm/drivers/installation/unity/)">}}
    Dell CSI Helm installer installs the CSI Driver components using the provided Helm charts.
    [...More on installation instructions](helm/drivers/installation/)
@@ -60,11 +60,6 @@ The Container Storage Modules and the required CSI Drivers can each be deployed 
   {{< /card >}}
 {{% /cardpane %}}
 {{% cardpane %}}
-  {{< card header="[Dell Container Storage Module for Application Mobility](helm/modules/installation/applicationmobility)"
-          footer="Installs Application Mobility Module">}}
-  Application mobility module can be installed via helm charts. This is a tech preview release and it requires a license for installation.
-  [...More on installation instructions](helm/modules/installation/applicationmobility)
-  {{< /card >}}
   {{< card header="[Dell Container Storage Module for Encryption](helm/modules/installation/encryption)"
           footer="Installs Encryption Module">}}
   Encryption can be optionally installed via the PowerScale CSI driver Helm chart.

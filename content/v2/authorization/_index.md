@@ -29,37 +29,11 @@ The following diagram shows a high-level overview of CSM for Authorization with 
 
 **NOTE:** PowerScale OneFS implements its own form of Role-Based Access Control (RBAC). CSM for Authorization does not enforce any role-based restrictions for PowerScale. To configure RBAC for PowerScale, refer to the PowerScale OneFS [documentation](https://www.dell.com/support/home/en-us/product-support/product/isilon-onefs/docs).
 
-## Supported Operating Systems/Container Orchestrator Platforms
-{{<table "table table-striped table-bordered table-sm">}}
-| COP/OS | Supported Versions |
-|-|-|
-| Kubernetes    | 1.26, 1.27, 1.28 |
-{{</table>}}
-
-## Supported Storage Platforms
-
-{{<table "table table-striped table-bordered table-sm">}}
-|               | PowerMax         | PowerFlex | PowerScale |
-|---------------|:----------------:|:-------------------:|:----------------:|
-| Storage Array |PowerMax 2500/8500 PowerMaxOS 10 (6079) , PowerMaxOS 10.0.1 (6079) , PowerMaxOS 10.1 (6079)<br> PowerMax 2000/8000 - 5978.711.xxx, 5978.479.xxx,<br> Unisphere 10.0, 10.0.1, 10.1|    3.6.x, 4.0.x, 4.5    | OneFS 9.5.0.x (x >= 5) |
-{{</table>}}
-
-## Supported CSI Drivers
-
-CSM for Authorization supports the following CSI drivers and versions.
-{{<table "table table-striped table-bordered table-sm">}}
-| Storage Array | CSI Driver | Supported Versions |
-| ------------- | ---------- | ------------------ |
-| CSI Driver for Dell PowerFlex | [csi-powerflex](https://github.com/dell/csi-powerflex) | v2.0 + |
-| CSI Driver for Dell PowerMax | [csi-powermax](https://github.com/dell/csi-powermax) | v2.0 + |
-| CSI Driver for Dell PowerScale | [csi-powerscale](https://github.com/dell/csi-powerscale) | v2.0 + |
-{{</table>}}
+## Authorization Components Support Matrix
+CSM for Authorization consists of 2 components - The authorization sidecar, bundled with the driver, communicates with the Authorization proxy server to validate access to Storage platforms. The authorization sidecar is backward compatible with older Authorization proxy server versions. However, it is highly recommended to have the Authorization proxy server and sidecar installed from the same release of CSM.
 
 **NOTE:** If the deployed CSI driver has a number of controller pods equal to the number of schedulable nodes in your cluster, CSM for Authorization may not be able to inject properly into the driver's controller pod.
 To resolve this, please refer to our [troubleshooting guide](./troubleshooting) on the topic.
-
-## Authorization Components Support Matrix
-CSM for Authorization consists of 2 components - The authorization sidecar, bundled with the driver, communicates with the Authorization proxy server to validate access to Storage platforms. The authorization sidecar is backward compatible with older Authorization proxy server versions. However, it is highly recommended to have the Authorization proxy server and sidecar installed from the same release of CSM.
 
 ## Roles and Responsibilities
 

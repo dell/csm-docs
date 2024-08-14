@@ -112,7 +112,7 @@ function setValues(csmMapValues, CONSTANTS_PARAM) {
 	replicationEnabled = DriverValues.replication;
 
 	DriverValues.storageArrayId = $("#storage-array-id").val() || "0000000000";
-	DriverValues.storageArrayEndpointUrl = $("#storage-array-endpoint-url").val() || "https://primary-1.unisphe.re:8443";
+	DriverValues.storageArrayEndpointUrl = $("#storage-array-endpoint-url").val() || 'https://primary-1.unisphe.re:8443';
 	DriverValues.storageArrayBackupEndpointUrl = $("#storage-array-backup-endpoint-url").val() || '""';
 	DriverValues.manageArrayId = $("#manage-array-id").val() || '""';
 	DriverValues.manageArrayEndpointUrl = $("#manage-array-endpoint-url").val() || '""';

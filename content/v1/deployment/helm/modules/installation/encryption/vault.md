@@ -239,6 +239,6 @@ With the default server settings, role level values control TTL in this way:
 `token_ttl=30m` - sets the default client token TTL to 30 minutes. 30 minutes are counted from the login time and from any following token renewal. 
 The client token will only be able to renew 3 times before reaching it total allowed TTL of 2 hours.
 
-Existing role values can be changed using `vault write auth/approle/role/dea-role token_ttl=30m token_explicit_max_ttl=2h`.
+Existing role values can be changed using `vault write auth/kubernetes/role/csm-authorization token_ttl=30m token_explicit_max_ttl=2h`.
 
 > Selecting too short TTL values will result in excessive overhead in Encryption to remain authenticated to the Vault server.

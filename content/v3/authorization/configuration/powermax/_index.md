@@ -65,7 +65,7 @@ Create the karavi-authorization-config secret using this command:
 
     - Update `authorization.enabled` to `true`.
     
-    - Update `authorization.sidecarProxyImage` to the image of the CSM Authorization sidecar. In most cases, you can leave the default value.
+    - Update `images.authorization` to the image of the CSM Authorization sidecar. In most cases, you can leave the default value.
 
     - Update `authorization.proxyHost` to the hostname of the CSM Authorization Proxy Server.
     
@@ -85,8 +85,8 @@ Create the karavi-authorization-config secret using this command:
       enabled: true
 
       # sidecarProxyImage: the container image used for the csm-authorization-sidecar.
-      # Default value: dellemc/csm-authorization-sidecar:v1.8.0
-      sidecarProxyImage: dellemc/csm-authorization-sidecar:v1.8.0
+      # Default value: dellemc/csm-authorization-sidecar:v1.9.0
+      sidecarProxyImage: dellemc/csm-authorization-sidecar:v1.9.0
 
       # proxyHost: hostname of the csm-authorization server
       # Default value: None
@@ -98,6 +98,42 @@ Create the karavi-authorization-config secret using this command:
       #   "false" - TLS certificate will be verified 
       # Default value: "true" 
       skipCertificateValidation: true
+    ```
+
+    **Operator**
+
+    Refer to the [Install Driver](../../../deployment/csmoperator/drivers/powermax/#install-driver) section to edit the parameters in the Custom Resource to enable CSM Authorization.
+
+    Under `modules`, enable the module named `authorization`:
+
+    - Update the `enabled` field to `true.`
+
+    - Update the `image` to the image of the CSM Authorization sidecar. In most cases, you can leave the default value.
+
+    - Update the `PROXY_HOST` environment value to the hostname of the CSM Authorization Proxy Server.
+
+    - Update the `SKIP_CERTIFICATE_VALIDATION` environment value to `true` or `false` depending on if you want to disable or enable certificate validation of the CSM Authorization Proxy Server.
+
+    Example: 
+
+    ```yaml
+    modules:
+      # Authorization: enable csm-authorization for RBAC
+      - name: authorization
+        # enable: Enable/Disable csm-authorization
+        enabled: true
+        configVersion: v1.9.0
+        components:
+        - name: karavi-authorization-proxy
+          image: dellemc/csm-authorization-sidecar:v1.9.0
+          envs:
+            # proxyHost: hostname of the csm-authorization server
+            - name: "PROXY_HOST"
+              value: "csm-authorization.com"
+          
+            # skipCertificateValidation: Enable/Disable certificate validation of the csm-authorization server       
+            - name: "SKIP_CERTIFICATE_VALIDATION"
+              value: "true"
     ```
 
 5. Install the Dell CSI PowerMax driver following the appropriate documenation for your installation method.

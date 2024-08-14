@@ -31,7 +31,7 @@ There are three methods of installing `cert-csi`.
 1. Download the latest release of the cert-csi zip file.
 
 ```bash
-wget https://github.com/dell/cert-csi/releases/download/v1.4.1/cert-csi-linux-amd64
+wget https://github.com/dell/cert-csi/releases/download/v1.5.0/cert-csi-linux-amd64
 ```
 
 2. Set the execute permission before running it.
@@ -58,17 +58,16 @@ mv ./cert-csi-linux-amd64 ~/.local/bin/cert-csi
 ### Pull The Container Image
 
    {{< tabpane name="pulling-cert-csi-image" lang="bash">}}
-   {{<tab header="Docker">}}
+   {{<tab header="Docker" >}}
+      docker pull dellemc/cert-csi:v1.5.0
 
-      docker pull dellemc/cert-csi:v1.4.1
+   {{</tab >}}
+   {{<tab header="Podman" >}}
 
-   {{</tab>}}
-   {{<tab header="Podman">}}
+      podman pull dellemc/cert-csi:v1.5.0
 
-      podman pull dellemc/cert-csi:v1.4.1
-      
-   {{</tab>}}
-   {{< /tabpane>}}
+   {{</tab >}}
+   {{< /tabpane >}}
 
 ### Building Locally
 #### Prerequisites
@@ -79,7 +78,7 @@ mv ./cert-csi-linux-amd64 ~/.local/bin/cert-csi
 1. Clone the repository
 
 ```bash
-git clone -b "v1.4.1" https://github.com/dell/cert-csi.git && cd cert-csi
+git clone -b "v1.5.0" https://github.com/dell/cert-csi.git && cd cert-csi
 ```
 
 2. Build cert-csi
@@ -110,20 +109,14 @@ make install-ms
 ## Running Cert-CSI
 
 {{< tabpane name="running-cert-csi" lang="bash">}}
-{{<tab header="Executable"  >}}
-
+{{<tab header="Executable" >}}
    cert-csi --help
-
 {{</tab >}}
 {{<tab header="Docker" >}}
-
-   docker run --rm -it -v ~/.kube/config:/root/.kube/config dellemc/cert-csi:v1.4.1 --help
-
+   docker run --rm -it -v ~/.kube/config:/root/.kube/config dellemc/cert-csi:v1.5.0 --help
 {{</tab >}}
 {{<tab header="Podman" >}}
-
-   podman run --rm -it -v ~/.kube/config:/root/.kube/config dellemc/cert-csi:v1.4.1 --help
-
+   podman run --rm -it -v ~/.kube/config:/root/.kube/config dellemc/cert-csi:v1.5.0 --help
 
 {{</tab >}}
 {{< /tabpane >}}
@@ -212,9 +205,9 @@ storageClasses:
       driverNamespace: powerstore
       pollInterval: 2m
 
+
    {{</tab >}}
    {{<tab header="CSI PowerScale" >}}
-
 
 storageClasses:
   - name: isilon
@@ -234,7 +227,6 @@ storageClasses:
         IsiPath: "/ifs/data/sample"
         IsiVolumePathPermissions: "0777"
         AzServiceIP: "192.168.2.1"
-
 
    {{</tab >}}
    {{<tab header="CSI PowerMax" >}}
@@ -261,9 +253,7 @@ storageClasses:
       driverNamespace: powerstore
       pollInterval: 2m
 
-
    {{</tab >}}
-
    {{<tab header="CSI PowerStore" >}}
 
 storageClasses:
@@ -300,7 +290,6 @@ storageClasses:
     capacityTracking:
       driverNamespace: powerstore
       pollInterval: 2m
-
 
    {{</tab >}}
    {{<tab header="CSI Unity" >}}
@@ -383,14 +372,10 @@ If you are using the container image, the `cert-config` file must be mounted int
 
 {{< tabpane name="running-container-certify" lang="bash">}}
 {{<tab header="Docker" >}}
-
-   docker run --rm -it -v ~/.kube/config:/root/.kube/config -v /home/user/example-certify-config.yaml:/example-certify-config.yaml dellemc/cert-csi:v1.4.1 certify --cert-config /example-certify-config.yaml --vsc <volume-snapshot-class>
+   docker run --rm -it -v ~/.kube/config:/root/.kube/config -v /home/user/example-certify-config.yaml:/example-certify-config.yaml dellemc/cert-csi:v1.5.0 certify --cert-config /example-certify-config.yaml --vsc <volume-snapshot-class>
 {{</tab >}}
 {{<tab header="Podman" >}}
-
-   podman run --rm -it -v ~/.kube/config:/root/.kube/config -v /home/user/example-certify-config.yaml:/example-certify-config.yaml dellemc/cert-csi:v1.4.1 certify --cert-config /example-certify-config.yaml --vsc <volume-snapshot-class>
-
-
+   podman run --rm -it -v ~/.kube/config:/root/.kube/config -v /home/user/example-certify-config.yaml:/example-certify-config.yaml dellemc/cert-csi:v1.5.0 certify --cert-config /example-certify-config.yaml --vsc <volume-snapshot-class>
 {{</tab >}}
 {{< /tabpane >}}
 
@@ -580,10 +565,10 @@ If you are using the container image, the `attr` file must be mounted into the c
 
 {{< tabpane name="running-container-ephemeral-volume" lang="bash">}}
 {{<tab header="Docker" >}}
-   docker run --rm -it -v ~/.kube/config:/root/.kube/config -v /home/user/ephemeral-config.properties:/ephemeral-config.properties dellemc/cert-csi:v1.4.1 test ephemeral-volume --driver <driver-name> --attr /ephemeral-config.properties
+   docker run --rm -it -v ~/.kube/config:/root/.kube/config -v /home/user/ephemeral-config.properties:/ephemeral-config.properties dellemc/cert-csi:v1.5.0 test ephemeral-volume --driver <driver-name> --attr /ephemeral-config.properties
 {{</tab >}}
 {{<tab header="Podman" >}}
-   podman run --rm -it -v ~/.kube/config:/root/.kube/config -v /home/user/ephemeral-config.properties:/ephemeral-config.properties dellemc/cert-csi:v1.4.1 test ephemeral-volume --driver <driver-name> --attr /ephemeral-config.properties
+   podman run --rm -it -v ~/.kube/config:/root/.kube/config -v /home/user/ephemeral-config.properties:/ephemeral-config.properties dellemc/cert-csi:v1.5.0 test ephemeral-volume --driver <driver-name> --attr /ephemeral-config.properties
 
 {{</tab >}}
 {{< /tabpane >}}
@@ -592,40 +577,40 @@ Sample ephemeral-config.properties (key/value pair)
    {{< tabpane name="volume-attributes-examples" lang="yaml">}}
    {{<tab header="CSI PowerFlex" >}}
 
-   volumeName: "my-ephemeral-vol"
-   size: "10Gi"
-   storagepool: "sample"
-   systemID: "sample"
+   volumeName=my-ephemeral-vol
+   size=10Gi
+   storagepool=sample
+   systemID=sample
 
    {{</tab >}}
    {{<tab header="CSI PowerScale" >}}
 
-   size: "10Gi"
-   ClusterName: "sample"
-   AccessZone: "sample"
-   IsiPath: "/ifs/data/sample"
-   IsiVolumePathPermissions: "0777"
-   AzServiceIP: "192.168.2.1"
+   size=10Gi
+   ClusterName=sample
+   AccessZone=sample
+   IsiPath=/ifs/data/sample
+   IsiVolumePathPermissions=0777
+   AzServiceIP=192.168.2.1
 
    {{</tab >}}
    {{<tab header="CSI PowerStore" >}}
 
-   size: "10Gi"
-   arrayID: "sample"
-   nasName: "sample"
-   nfsAcls: "0777"
+   size=10Gi
+   arrayID=sample
+   nasName=sample
+   nfsAcls=0777
 
    {{</tab >}}
    {{<tab header="CSI Unity" >}}
 
-   size: "10Gi"
-   arrayID: "sample"
-   protocol: iSCSI
-   thinProvisioned: "true"
-   isDataReductionEnabled: "false"
-   tieringPolicy: "1"
-   storagePool: pool_2
-   nasName: "sample"
+   size=10Gi
+   arrayId=sample
+   protocol=iSCSI
+   thinProvisioned=true
+   isDataReductionEnabled=false
+   tieringPolicy=1
+   storagePool=pool_2
+   nasName=sample
 
    {{</tab >}}
    {{< /tabpane >}}

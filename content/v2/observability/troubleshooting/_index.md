@@ -112,7 +112,7 @@ A workaround on most browsers is to accept the `karavi-topology` certificate by 
 
   <details>
    <summary>Deploy certificate with new Grafana instance</summary>
- Please follow the steps in <a href="../deployment#grafana-deployment">Sample Grafana Deployment</a> but attach the certificate to your `grafana-values.yaml` before deploying. The file should look like:
+ Please follow the steps in <a href="../../deployment/helm/modules/installation/observability#grafana-deployment">Sample Grafana Deployment</a> but attach the certificate to your `grafana-values.yaml` before deploying. The file should look like:
 
 ```yaml
 # grafana-values.yaml 
@@ -222,7 +222,7 @@ More information for viewing logs can be found [here](../#viewing-logs).
 
 ### How can I create a ServiceMonitor object for Prometheus if I'm using Rancher monitoring stack?
 
-The ServiceMonitor allows us to define how a set of services should be monitored by Prometheus. Please see our [prometheus](../deployment#prometheus) documentation for creating a ServiceMonitor. 
+The ServiceMonitor allows us to define how a set of services should be monitored by Prometheus. Please see our [prometheus](../../deployment/helm/modules/installation/observability#prometheus) documentation for creating a ServiceMonitor. 
 
 ### How can I debug and troubleshoot issues with Kubernetes?
 
@@ -232,7 +232,7 @@ The ServiceMonitor allows us to define how a set of services should be monitored
 
 ### How can I troubleshoot latency problems with CSM for Observability?
 
-CSM for Observability is instrumented to report trace data to [Zipkin](https://zipkin.io/).  Please see [Tracing](../deployment/#tracing) for more information on enabling tracing for CSM for Observability.
+CSM for Observability is instrumented to report trace data to [Zipkin](https://zipkin.io/).  Please see [Tracing](../../deployment/helm/modules/installation/observability#tracing) for more information on enabling tracing for CSM for Observability.
 
 ### Why does the Observability installation timeout with pods stuck in 'ContainerCreating'/'CrashLoopBackOff'/'Error' stage?
 
