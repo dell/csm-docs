@@ -10,8 +10,6 @@ tags:
 
 >> NOTE: This tech-preview release is not intended for use in production environment.
 
->> NOTE: Only supported on PowerFlex.
-
 The following diagram shows a high-level overview of CSM for Authorization with a `tenant-app` that is using a CSI driver to perform storage operations through the CSM for Authorization `proxy-server` to access the a Dell storage system. All requests from the CSI driver will contain the token for the given tenant that was granted by the Storage Administrator.
 
 ![Alt text](image.png)
@@ -22,11 +20,11 @@ This is the introduction to a Stateless Architecture for Authorization. The crea
 {{<table "table table-striped table-bordered table-sm">}}
 | Feature                                                                                                                        | PowerFlex | PowerMax | PowerScale |
 | -----------------------------------------------------------------------------------------------------------------------------  | --------- | -------- | ---------- |
-| Ability to set storage quota limits to ensure k8s tenants are not overconsuming storage                                        | Yes       | No       | No         |
-| Ability to create access control policies to ensure k8s tenant clusters are not accessing storage that does not belong to them | Yes       | No       | No         |
-| Ability to shield storage credentials from Kubernetes administrators by storing them in vault                                  | Yes       | No       | No         |
-| Ability to create snapshots from owned volumes that consume the storage quota                                                  | Yes       | No       | No         |
-| Ability to periodically query storage array to keep quota consumption in sync                                                  | Yes       | No       | No         |
+| Ability to set storage quota limits to ensure k8s tenants are not overconsuming storage                                        | Yes       | Yes      | No         |
+| Ability to create access control policies to ensure k8s tenant clusters are not accessing storage that does not belong to them | Yes       | Yes      | No         |
+| Ability to shield storage credentials from Kubernetes administrators by storing them in vault                                  | Yes       | Yes      | No         |
+| Ability to create snapshots from owned volumes that consume the storage quota                                                  | Yes       | Yes      | No         |
+| Ability to periodically query storage array to keep quota consumption in sync                                                  | Yes       | Yes      | No         |
 {{</table>}}
 
 ### Snapshot Support
@@ -75,4 +73,4 @@ For more information on the configuration of the above, see the configuration of
 
 Tenants of CSM for Authorization can use the token provided by the Storage Administrators in their storage requests.
 
-For more information on how to use the token and configuration, see configuration for the [PowerFlex driver](../v2.0-tech-preview/configuration/powerflex).
+For more information on how to use the token and configuration, see configuration for the [PowerFlex driver](../v2.0-tech-preview/configuration/powerflex) or the [PowerMax driver](../v2.0-tech-preview/configuration/powermax).

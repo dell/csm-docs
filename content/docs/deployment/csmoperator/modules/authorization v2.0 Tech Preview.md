@@ -138,7 +138,9 @@ Follow the instructions available in CSM Authorization for [Configuring the CSM 
 
 ### Configure a Dell CSI Driver with CSM Authorization
 
-Follow the instructions available in CSM Authorization for [Configuring PowerFlex with Authorization](../../../../authorization/v2.0-tech-preview/configuration/powerflex).
+Follow the instructions available in CSM Authorization for 
+- [Configuring PowerFlex with Authorization](../../../../authorization/v2.0-tech-preview/configuration/powerflex).
+- [Configuring PowerMax with Authorization](../../../../authorization/v2.0-tech-preview/configuration/powermax).
 
 ## Vault Server Installation
 
