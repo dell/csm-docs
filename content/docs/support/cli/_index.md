@@ -958,8 +958,6 @@ Gets the drivers volume information from the authorization proxy for a given ten
 
 Gets the drivers volume information for a given tenant on a local cluster. The namespace is the namespace where tenant secret is created.
 
->Note: This was output was generated using Authorization Proxy version 1.5.1. Please ensure you are using version 1.5.1 or greater.
-
 ```bash
 dellctl volume get --proxy <proxy.dell.com> --namespace <namespace>
 ```
