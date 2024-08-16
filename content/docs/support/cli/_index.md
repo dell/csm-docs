@@ -31,7 +31,8 @@ This document outlines all dellctl commands, their intended use, options that ca
 | [dellctl encryption rekey](#dellctl-encryption-rekey) | Rekey an encrypted volume |
 | [dellctl encryption rekey-status](#dellctl-encryption-rekey-status) | Get status of an encryption rekey operation |
 | [dellctl images](#dellctl-images) | List the container images needed by csi driver |
-| [dellctl volume get](#dellctl-volume-get) | Gets PowerFlex volume infomation for a given tenant on a local cluster |
+| [dellctl volume get](#dellctl-volume-get) | Gets driver volume information for a given tenant on a local cluster |
+| [dellctl snapshot get](#dellctl-snapshot-get) | Gets driver snapshot information for a given tenant on a local cluster |
 | [dellctl admin token](#dellctl-admin-token) | Generate an administrator token for administrating CSM Authorization v2 |
 | [dellctl generate token](#dellctl-generate-token) | Generate a tenant token for configuring a Dell CSI Driver with CSM Authorization v2 |
 
@@ -939,7 +940,7 @@ dellemc/csm-authorization-sidecar:v1.7.0        k8s1.27,k8s1.26,k8s1.25         
 
 ### dellctl volume get
 
-Gets PowerFlex volume infomation for a given tenant on a local cluster
+Gets the drivers volume information from the authorization proxy for a given tenant on a local cluster
 
 ##### Aliases
   get, ls, list
@@ -955,22 +956,51 @@ Gets PowerFlex volume infomation for a given tenant on a local cluster
 
 ##### Output
 
-Gets PowerFlex volume infomation for a given tenant on a local cluster. The namespace is the namespace where tenant secret is created. 
-
->Note: This was output was generated using Authorization Proxy version 1.5.1. Please ensure you are using version 1.5.1 or greater.
+Gets the drivers volume information for a given tenant on a local cluster. The namespace is the namespace where tenant secret is created.
 
 ```bash
-dellctl volume get --proxy <proxy.dell.com> --namespace vxflexos
+dellctl volume get --proxy <proxy.dell.com> --namespace <namespace>
 ```
 ```
 # dellctl volume get --proxy <proxy.dell.com> --namespace vxflexos
+NAME                 VOLUME ID          SIZE       POOL    SYSTEM ID          PV NAME          PV STATUS   STORAGE CLASS   PVC NAME                NAMESPACE            SNAPSHOT COUNT
+tn1-k8s-82b35df793   c6c98e30000000d3   8.000000   pool1   636468e3638c840f                                                                                             0
+tn1-k8s-e0e7958ee0   c6cf35ba000001a3   8.000000   pool1   636468e3638c840f   k8s-e0e7958ee0   Bound       vxflexos        pvol-vxflexos           default              2
+tn1-k8s-bc83d4c626   c6cf35c1000001a1   8.000000   pool1   636468e3638c840f   k8s-bc83d4c626   Bound       vxflexos        vol-create-test-xbgnr   snap-test-057de678   3
+```
 
-NAME             VOLUME ID          SIZE       POOL     SYSTEM ID          PV NAME          PV STATUS   STORAGE CLASS   PVC NAME       NAMESPACE
-k8s-e7c8b39112   a69bf18e00000008   8.000000   mypool   636468e3638c840f   k8s-e7c8b39112   Released    vxflexos        demo-claim10   default
-k8s-e6e2b46103   a69bf18f00000009   8.000000   mypool   636468e3638c840f   k8s-e6e2b46103   Bound       vxflexos        demo-claim11   default
-k8s-b1abb817d3   a69bf19000000001   8.000000   mypool   636468e3638c840f   k8s-b1abb817d3   Bound       vxflexos        demo-claim13   default
-k8s-28e4184f41   c6b2280d0000009a   8.000000   mypool   636468e3638c840f   k8s-28e4184f41   Available   local-storage  
-k8s-7296621062   a69b554f00000004   8.000000   mypool   636468e3638c840f
+### dellctl snapshot get
+
+Gets the drivers snapshot information from the authorization proxy for a given tenant on a local cluster
+
+##### Aliases
+  get, ls, list
+
+##### Flags
+
+```
+  -h, --help                            help for get
+      --insecure optionalBool[=true]    provide flag to skip certificate validation
+      --namespace string                namespace of the secret for the given tenant
+      --proxy string                    auth proxy endpoint to use
+```
+
+##### Output
+
+Get the drivers snapshot information for a given tenant on a local cluster. The namespace is the namespace where the tenant secret is created.
+
+```bash
+dellctl snapshot get --proxy <proxy.dell.com> --namespace <namespace>
+```
+```
+# dellctl snapshot get --proxy <proxy.dell.com> --namespace vxflexos
+NAME                              SNAPSHOT ID        SIZE       POOL    SYSTEM ID          ACCESS MODE   SOURCE VOLUME ID
+tn1-sn-8e51dfa6-6f64-4cac-a776-   c6cf35c4000001aa   8.000000   pool1   636468e3638c840f   ReadWrite     c6cf35c1000001a1
+tn1-sn-27ff7d0c-b60d-4f5d-be2e-   c6cf35c2000001a2   8.000000   pool1   636468e3638c840f   ReadWrite     c6cf35c1000001a1
+tn1-sn-85e32ce4-379b-4a9e-948b-   c6cf35c3000001a9   8.000000   pool1   636468e3638c840f   ReadWrite     c6cf35c1000001a1
+tn1-sn-59c272f4-babd-4e24-951a-   c6cf35bb000001a4   8.000000   pool1   636468e3638c840f   ReadWrite     c6cf35ba000001a3
+tn1-sn-2d1580a4-60ec-4082-8234-   c6cf35bc000001a6   8.000000   pool1   636468e3638c840f   ReadWrite     c6cf35ba000001a3
+
 ```
 
 ### dellctl admin token
