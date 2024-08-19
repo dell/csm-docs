@@ -1,6 +1,6 @@
 ---
-title: "Interactive Tutorials"
-linkTitle: "Interactive Tutorials"
+#title: "Interactive Tutorials"
+#linkTitle: "Interactive Tutorials"
 no_list: true
 description: Try CSM and more with interactive labs
 weight: 2
@@ -14,7 +14,6 @@ Our interactive tutorials provide step-by-step guidance on how to use our CSM pr
   If you are new to Dell CSM, start here and use the different modules interactively.
   {{< /card >}}
 {{% /cardpane %}}
-
 
 {{% cardpane %}}
   {{< card header="[**CSM Operator**](csm-operator/)">}}
