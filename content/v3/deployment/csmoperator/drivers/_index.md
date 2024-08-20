@@ -58,7 +58,7 @@ The CSI Drivers and CSM Modules installed by the Dell CSM Operator can be update
 1. If you are trying to upgrade the CSI driver from an older version, make sure to modify the _configVersion_ field if required.
    ```yaml
       driver:
-        configVersion: v2.8.0
+        configVersion: v2.9.1
    ```
 2. Do not try to update the operator by modifying the original `CustomResource` manifest file and running the `kubectl apply -f` command. As part of the driver installation, the Operator sets some annotations on the `CustomResource` object which are further utilized in some workflows (like detecting upgrade of drivers). If you run the `kubectl apply -f` command to update the driver, these annotations are overwritten and this may lead to failures.
 

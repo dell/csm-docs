@@ -4,11 +4,6 @@ linktitle: ObjectScale
 weight: 1
 Description: Code features for ObjectScale COSI Driver
 ---
-
-> **Notational Conventions**
->
-> The keywords "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and "OPTIONAL" are to be interpreted as described in [RFC 2119](http://tools.ietf.org/html/rfc2119) (Bradner, S., "Key words for use in RFCs to Indicate Requirement Levels", BCP 14, RFC 2119, March 1997).
-
 Fields are specified by their path. Consider the following examples:
 
 1. Field specified by the following path `spec.authenticationType=IAM` is reflected in their resources YAML as the following:
@@ -203,7 +198,7 @@ The first step before you can start provisioning object storage, is to create a 
 
 The following example shows how to create a `BucketClass`:
 
-```sh
+```bash
 cat <<EOF | kubectl create --filename -
 apiVersion: objectstorage.k8s.io/v1alpha1
 kind: BucketClass
@@ -224,7 +219,7 @@ _Greenfield Provisioning_ means creating a new bucket from scratch, without any 
 
 The following example shows how to create a `BucketClaim` for greenfield provisioning.
 
-```sh
+```bash
 cat <<EOF | kubectl create --namespace=my-namespace --filename -
 apiVersion: objectstorage.k8s.io/v1alpha1
 kind: BucketClaim
@@ -244,7 +239,7 @@ _Brownfield Provisioning_ means using an existing bucket, that can already conta
 
 The following example shows how to create `Bucket` and `BucketClaim` for brownfield provisioning.
 
-```sh
+```bash
 cat <<EOF | kubectl create --namespace=my-namespace --filename -
 apiVersion: objectstorage.k8s.io/v1alpha1
 kind: Bucket
@@ -278,7 +273,7 @@ There are a few crucial details regarding bucket deletion. The first one is `del
 
 The following example shows how to delete a `BucketClaim`.
 
-```sh
+```bash
 kubectl --namespace=my-namespace delete bucketclaim my-bucketclaim
 ```
 
@@ -292,7 +287,7 @@ The first step before you start granting access to the object storage for your a
 
 The following example shows how to create a `BucketAccessClass`:
 
-```sh
+```bash
 cat <<EOF | kubectl create --filename -
 apiVersion: objectstorage.k8s.io/v1alpha1
 kind: BucketAccessClass
@@ -317,7 +312,7 @@ The underlying workflow for granting access to the object storage primitive is:
 
 The following example shows how to grant an access using `BucketAccess` resource:
 
-```sh
+```bash
 cat <<EOF | kubectl create --namespace=my-namespace --filename -
 apiVersion: objectstorage.k8s.io/v1alpha1
 kind: BucketAccess
@@ -344,7 +339,7 @@ When resource of `BucketAccess` kind is removed from Kubernetes it triggers the 
 
 The following example shows how to revoke a `BucketAccess`:
 
-```sh
+```bash
 kubectl --namespace=my-namespace delete bucketaccess my-bucketaccess
 ```
 

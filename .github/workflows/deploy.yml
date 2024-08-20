@@ -1,54 +1,54 @@
 name: Build w/ Hugo & deploy to GitHub Pages
 
 on:
-  push:
-    branches:
-      - main
-  workflow_dispatch:
+ push:
+   branches:
+     - release-1.11.0
+ workflow_dispatch:
   
 jobs:
-  deploy:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@main
-        with:
-          submodules: recursive  # Fetch Hugo themes
-          fetch-depth: 0    # Fetch all history for .GitInfo and .Lastmod
+ deploy:
+   runs-on: ubuntu-latest
+   steps:
+     - uses: actions/checkout@main
+       with:
+         submodules: recursive  # Fetch Hugo themes
+         fetch-depth: 0    # Fetch all history for .GitInfo and .Lastmod
 
-      - name: Setup Hugo
-        uses: peaceiris/actions-hugo@v2
-        with:
-          hugo-version: '0.120.3'
-          extended: true
+     - name: Setup Hugo
+       uses: peaceiris/actions-hugo@v2
+       with:
+         hugo-version: '0.120.3'
+         extended: true
           
-      - name: Setup Go
-        uses: actions/setup-go@v2
-        with:
-          go-version: '1.18.0'
+     - name: Setup Go
+       uses: actions/setup-go@v2
+       with:
+         go-version: '1.18.0'
 
-      - name: Setup Node
-        uses: actions/setup-node@v3
-        with:
-          node-version: '16'
+     - name: Setup Node
+       uses: actions/setup-node@v3
+       with:
+         node-version: '16'
 
-      - name: Cache dependencies
-        uses: actions/cache@v3
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
-      - run: npm ci
+     - name: Cache dependencies
+       uses: actions/cache@v3
+       with:
+         path: ~/.npm
+         key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+         restore-keys: |
+           ${{ runner.os }}-node-
+     - run: npm ci
 
-      - name: Build
-        run: |
-         npm install -D --save autoprefixer
-         npm install -D --save postcss-cli
-         npm install -D --save postcss
-         hugo
-      - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          #deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./public
+     - name: Build
+       run: |
+        npm install -D --save autoprefixer
+        npm install -D --save postcss-cli
+        npm install -D --save postcss
+        hugo
+     - name: Deploy
+       uses: peaceiris/actions-gh-pages@v3
+       with:
+         #deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
+         github_token: ${{ secrets.GITHUB_TOKEN }}
+         publish_dir: ./public

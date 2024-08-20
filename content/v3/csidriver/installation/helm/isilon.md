@@ -5,19 +5,6 @@ description: >
 ---
 The CSI Driver for Dell PowerScale can be deployed by using the provided Helm v3 charts and installation scripts on both Kubernetes and OpenShift platforms. For more detailed information on the installation scripts, review the script [documentation](https://github.com/dell/csi-powerscale/tree/master/dell-csi-helm-installer).
 
-The controller section of the Helm chart installs the following components in a _Deployment_ in the specified namespace:
-
-- CSI Driver for PowerScale
-- Kubernetes External Provisioner, which provisions the volumes
-- Kubernetes External Attacher, which attaches the volumes to the containers
-- Kubernetes External Snapshotter, which provides snapshot support
-- Kubernetes External Resizer, which resizes the volume
-
-The node section of the Helm chart installs the following component in a _DaemonSet_ in the specified namespace:
-
-- CSI Driver for PowerScale
-- Kubernetes Node Registrar, which handles the driver registration
-
 ## Prerequisites
 
 The following are requirements to be met before installing the CSI Driver for Dell PowerScale:
@@ -107,20 +94,20 @@ CRDs should be configured during replication prepare stage with repctl as descri
 
 **Steps**
 
-1. Run `git clone -b v2.8.0 https://github.com/dell/csi-powerscale.git` to clone the git repository.
+1. Run `git clone -b v2.9.1 https://github.com/dell/csi-powerscale.git` to clone the git repository.
 2. Ensure that you have created the namespace where you want to install the driver. You can run `kubectl create namespace isilon` to create a new one. The use of "isilon"  as the namespace is just an example. You can choose any name for the namespace.
 3. Collect information from the PowerScale Systems like IP address, IsiPath, username, and password. Make a note of the value for these parameters as they must be entered in the *secret.yaml*.
 
    **Note**: The 'clusterName' serves as a logical, unique identifier for the array that should remain unchanged once it is included in the volume handle. Altering this identifier is not advisable, as it would result in the failure of all operations associated with the volume that was created earlier.
 
-4. Download `wget -O my-isilon-settings.yaml https://raw.githubusercontent.com/dell/helm-charts/csi-isilon-2.8.0/charts/csi-isilon/values.yaml` into `cd ../dell-csi-helm-installer` to customize settings for installation.
+4. Download `wget -O my-isilon-settings.yaml https://raw.githubusercontent.com/dell/helm-charts/csi-isilon-2.9.1/charts/csi-isilon/values.yaml` into `cd ../dell-csi-helm-installer` to customize settings for installation.
 5. Edit *my-isilon-settings.yaml* to set the following parameters for your installation:
    The following table lists the primary configurable parameters of the PowerScale driver Helm chart and their default values. More detailed information can be
-   found in the  [`values.yaml`](https://github.com/dell/helm-charts/blob/csi-isilon-2.8.0/charts/csi-isilon/values.yaml) file in this repository.
+   found in the  [`values.yaml`](https://github.com/dell/helm-charts/blob/csi-isilon-2.9.1/charts/csi-isilon/values.yaml) file in this repository.
 
    | Parameter | Description | Required | Default |
    | --------- | ----------- | -------- |-------- |  
-   | driverRepository | Set to give the repository containing the driver image (used as part of the image name). | Yes | dellemc |
+   | images | List all the images used by the CSI driver and CSM. If you use a private repository, change the registries accordingly. | Yes | "" |
    | logLevel | CSI driver log level | No | "debug" |
    | certSecretCount | Defines the number of certificate secrets, which the user is going to create for SSL authentication. (isilon-cert-0..isilon-cert-(n-1)); Minimum value should be 1.| Yes | 1 |
    | [allowedNetworks](../../../features/powerscale/#support-custom-networks-for-nfs-io-traffic) | Defines the list of networks that can be used for NFS I/O traffic, CIDR format must be used. | No | [ ] |
@@ -155,7 +142,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
    | ***PLATFORM ATTRIBUTES*** | | | |   
    | endpointPort | Define the HTTPs port number of the PowerScale OneFS API server. If authorization is enabled, endpointPort should be the HTTPS localhost port that the authorization sidecar will listen on. This value acts as a default value for endpointPort, if not specified for a cluster config in secret. | No | 8080 |
    | skipCertificateValidation | Specify whether the PowerScale OneFS API server's certificate chain and hostname must be verified. This value acts as a default value for skipCertificateValidation, if not specified for a cluster config in secret. | No | true |
-   | isiAuthType | Indicates the authentication method to be used. If set to 1 then it follows as session-based authentication else basic authentication | No | 0 |
+   | isiAuthType | Indicates the authentication method to be used. If set to 1 then it follows as session-based authentication else basic authentication. If authorization.enabled=true, this value must be set to 1. | No | 0 |
    | isiAccessZone | Define the name of the access zone a volume can be created in. If storageclass is missing with AccessZone parameter, then value of isiAccessZone is used for the same. | No | System |
    | enableQuota | Indicates whether the provisioner should attempt to set (later unset) quota on a newly provisioned volume. This requires SmartQuotas to be enabled.| No | true |   
    | isiPath | Define the base path for the volumes to be created on PowerScale cluster. This value acts as a default value for isiPath, if not specified for a cluster config in secret| No | /ifs/data/csi |
@@ -163,25 +150,21 @@ CRDs should be configured during replication prepare stage with repctl as descri
    | noProbeOnStart | Define whether the controller/node plugin should probe all the PowerScale clusters during driver initialization | No | false |
    | autoProbe | Specify if automatically probe the PowerScale cluster if not done already during CSI calls | No | true |
    | **authorization** | [Authorization](../../../../authorization/deployment) is an optional feature to apply credential shielding of the backend PowerScale. | - | - |
-   | enabled                  | A boolean that enables/disables authorization feature. |  No      |   false   |
-   | sidecarProxyImage | Image for csm-authorization-sidecar. | No | " " |
+   | enabled                  | A boolean that enables/disables authorization feature. If enabled, isiAuthType must be set to 1. |  No      |   false   |
    | proxyHost | Hostname of the csm-authorization server. | No | Empty |
    | skipCertificateValidation | A boolean that enables/disables certificate validation of the csm-authorization proxy server. | No | true |
    | **podmon**               | [Podmon](../../../../resiliency/deployment) is an optional feature to enable application pods to be resilient to node failure.  |  -        |  -       |
    | enabled                  | A boolean that enables/disables podmon feature. |  No      |   false   |
-   | image | image for podmon. | No | " " |
    | **encryption** | [Encryption](../../../../secure/encryption/deployment) is an optional feature to apply encryption to CSI volumes. | - | - |
    | enabled        | A boolean that enables/disables Encryption feature. | No | false |
-   | image | Encryption driver image name. | No | "dellemc/csm-encryption:v0.3.0" |
 
    *NOTE:*
 
    - ControllerCount parameter value must not exceed the number of nodes in the Kubernetes cluster. Otherwise, some of the controller pods remain in a "Pending" state till new nodes are available for scheduling. The installer exits with a WARNING on the same.
    - Whenever the *certSecretCount* parameter changes in *my-isilon-setting.yaml* user needs to reinstall the driver.
    - In order to enable authorization, there should be an authorization proxy server already installed.
-   - If you are using a custom image, check the *version* and *driverRepository* fields in *my-isilon-setting.yaml* to make sure that they are pointing to the correct image repository and driver version. These two fields are spliced together to form the image name, as shown here: <driverRepository>/csi-isilon:<version>
-
-6. Edit following parameters in samples/secret/secret.yaml file and update/add connection/authentication information for one or more PowerScale clusters.
+   - If you are using custom images, update each attributes under the *images* field in *my-isilon-setting.yaml* to make sure that they are pointing to the correct image repository and version.
+6. Edit following parameters in samples/secret/secret.yaml file and update/add connection/authentication information for one or more PowerScale clusters. If replication feature is enabled, ensure the secret includes all the PowerScale clusters involved in replication.
 
    | Parameter | Description | Required | Default |
    | --------- | ----------- | -------- |-------- |
@@ -211,6 +194,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
    | ISI_PRIV_NS_IFS_ACCESS | Read Only  |
    | ISI_PRIV_IFS_BACKUP    | Read Only  |
    | ISI_PRIV_SYNCIQ        | Read Write |
+   | ISI_PRIV_STATISTICS    | Read Only  |
 
 Create isilon-creds secret using the following command:
   <br/> `kubectl create secret generic isilon-creds -n isilon --from-file=config=secret.yaml`
@@ -229,7 +213,7 @@ Create isilon-creds secret using the following command:
 
 8.  Install the driver using `csi-install.sh` bash script and default yaml by running
     ```bash
-    cd dell-csi-helm-installer && wget -O my-isilon-settings.yaml https://raw.githubusercontent.com/dell/helm-charts/csi-isilon-2.8.0/charts/csi-isilon/values.yaml &&
+    cd dell-csi-helm-installer && wget -O my-isilon-settings.yaml https://raw.githubusercontent.com/dell/helm-charts/csi-isilon-2.9.1/charts/csi-isilon/values.yaml &&
     ./csi-install.sh --namespace isilon --values my-isilon-settings.yaml --helm-charts-version <version>
     ```
 

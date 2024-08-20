@@ -478,7 +478,7 @@ Prerequisites
 
 ## Volume Health Monitoring
 CSI Driver for Unity XT supports volume health monitoring. Alpha feature gate `CSIVolumeHealth` needs to be enabled for the node side monitoring to take effect. For more information, please refer to the [Kubernetes GitHub repository](https://github.com/kubernetes-csi/external-health-monitor/blob/master/README.md).
-
+ 
 This feature:
 1. Reports on the condition of the underlying volumes via events when a volume condition is abnormal. We can watch the events on the describe of pvc 
     ```bash
@@ -496,7 +496,7 @@ CSI for Unity XT driver version 2.8.0 and above supports Storage Capacity Tracki
 This feature helps the scheduler to make more informed choices about where to schedule pods which depends on unbound volumes with late binding (aka "wait for first consumer"). Pods will be scheduled on a node (satisfying the topology constraints) only if the requested capacity is available on the storage array.
 If such a node is not available, the pods stay in Pending state. This means pods are not scheduled.
 
-Without storage capacity tracking, pods get scheduled on a node satisfying the topology constraints. If the required capacity is not available, volume attachment to the pods fails, and pods remain in ContainerCreating state. Storage capacity tracking eliminates unnecessary scheduling of pods when there is insufficient capacity.
+Without storage capacity tracking, pods get scheduled on a node satisfying the topology constraints. If the required capacity is not available, volume attachment to the pods fails, and pods remain in ContainerCreating state. Storage capacity tracking eliminates unnecessary scheduling of pods when there is insufficient capacity. Moreover, storage capacity tracking returns `MaximumVolumeSize` parameter, which may be used as an input to the volume creation. 
 
 The attribute `storageCapacity.enabled` in `values.yaml` can be used to enable/disable the feature during driver installation using helm. This is by default set to true. To configure how often driver checks for changed capacity set `storageCapacity.pollInterval` attribute. In case of driver installed via operator, this interval can be configured in the sample file provided [here.](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_unity_v280.yaml) by editing the `--capacity-poll-interval` argument present in the provisioner sidecar.
 

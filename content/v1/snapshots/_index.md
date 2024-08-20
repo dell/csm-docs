@@ -44,7 +44,7 @@ snapshot:
 ```
 
 #### Volume Snapshot CRD's
-The Kubernetes Volume Snapshot CRDs can be obtained and installed from the external-snapshotter project on Github. For installation, use [v7.0.x](https://github.com/kubernetes-csi/external-snapshotter/tree/v7.0.1/client/config/crd)
+The Kubernetes Volume Snapshot CRDs can be obtained and installed from the external-snapshotter project on Github. For installation, use [v8.0.x](https://github.com/kubernetes-csi/external-snapshotter/tree/v8.0.1/client/config/crd)
 
 #### Volume Snapshot Controller
 The CSI external-snapshotter sidecar is split into two controllers to support Volume snapshots.
@@ -52,7 +52,7 @@ The CSI external-snapshotter sidecar is split into two controllers to support Vo
 - A common snapshot controller
 - A CSI external-snapshotter sidecar
 
-The common snapshot controller must be installed only once in the cluster, irrespective of the number of CSI drivers installed in the cluster. On OpenShift clusters 4.4 and later, the common snapshot-controller is pre-installed. In the clusters where it is not present, it can be installed using `kubectl` and the manifests are available here: [v7.0.x](https://github.com/kubernetes-csi/external-snapshotter/tree/v7.0.1/deploy/kubernetes/snapshot-controller)
+The common snapshot controller must be installed only once in the cluster, irrespective of the number of CSI drivers installed in the cluster. On OpenShift clusters 4.4 and later, the common snapshot-controller is pre-installed. In the clusters where it is not present, it can be installed using `kubectl` and the manifests are available here: [v8.0.x](https://github.com/kubernetes-csi/external-snapshotter/tree/v8.0.1/deploy/kubernetes/snapshot-controller)
 
 *NOTE:*
 - The manifests available on GitHub install the snapshotter image: 
@@ -65,12 +65,12 @@ You can install CRDs and the default snapshot controller by running the followin
 ```bash
 git clone https://github.com/kubernetes-csi/external-snapshotter/
 cd ./external-snapshotter
-git checkout release-6.2
+git checkout v8.0.1
 kubectl kustomize client/config/crd | kubectl create -f -
 kubectl -n kube-system kustomize deploy/kubernetes/snapshot-controller | kubectl create -f -
 ```
 
 *NOTE:*
-- It is recommended to use the 6.2.x version of snapshotter/snapshot-controller.
+- It is recommended to use the 8.0.x version of snapshotter/snapshot-controller.
 - The CSI external-snapshotter sidecar is still installed along with the driver and does not involve any extra configuration.
 
