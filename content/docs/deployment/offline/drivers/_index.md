@@ -106,6 +106,34 @@ The script will then perform the following steps:
   - Modify the Helm charts or Operator configuration to refer to the newly tagged/pushed images
 
 
+An example of preparing the bundle for installation for Helm install of a specific driver:
+```bash
+tar xvfz csi-isilon-bundle-2.11.0.tar.gz
+```
+```
+csi-isilon-bundle-2.11.0/
+csi-isilon-bundle-2.11.0/helm-charts/
+csi-isilon-bundle-2.11.0/helm-charts/charts/
+csi-isilon-bundle-2.11.0/helm-charts/charts/csi-isilon/
+csi-isilon-bundle-2.11.0/helm-charts/charts/csi-isilon/Chart.yaml
+csi-isilon-bundle-2.11.0/helm-charts/charts/csi-isilon/values.yaml
+csi-isilon-bundle-2.11.0/helm-charts/charts/csi-isilon/templates/
+csi-isilon-bundle-2.11.0/helm-charts/charts/csi-isilon/templates/sec-rolebinding.yaml
+csi-isilon-bundle-2.11.0/helm-charts/charts/csi-isilon/templates/node.yaml
+csi-isilon-bundle-2.11.0/helm-charts/charts/csi-isilon/templates/_helpers.tpl
+csi-isilon-bundle-2.11.0/helm-charts/charts/csi-isilon/templates/validation.yaml
+...
+...
+csi-isilon-bundle-2.11.0/README.md
+csi-isilon-bundle-2.11.0/LICENSE
+```
+```bash
+cd csi-isilon-bundle-2.11.0
+```
+```bash
+bash dell-csi-helm-installer/csi-offline-bundle.sh -p -r localregistry:5000/dell/csi/
+```
+
 An example of preparing the bundle for installation for the Dell CSM Operator:
 ```bash
 tar xvfz dell-csm-operator-bundle.tar.gz
