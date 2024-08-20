@@ -49,10 +49,14 @@ To perform an offline installation of a driver or the Operator, the following st
 
 This needs to be performed on a Linux system with access to the Internet as a git repo will need to be cloned, and container images pulled from public registries.
 
-To build an offline bundle, the following steps are needed:
-1. Perform a `git clone` of the desired repository. For a helm-based install, the specific driver repo should be cloned. For an Operator based deployment, the Dell CSM Operator repo should be cloned
+To build an offline bundle for Helm installs, the following steps are needed:
+1. Perform a `git clone` of the specific driver repo.
 2. Run the `csi-offline-bundle.sh` script with an argument of `-c` in order to create an offline bundle
   - For Helm installs, the `csi-offline-bundle.sh` script will be found in the `dell-csi-helm-installer` directory
+
+To build an offline bundle for Operator installs, the following steps are needed:
+1. Perform a `git clone` of the Dell CSM Operator repo.
+2. Run the `csi-offline-bundle.sh` script with an argument of `-c` in order to create an offline bundle
   - For Operator installs, the `csm-offline-bundle.sh` script will be found in the `scripts` directory
 
 The script will perform the following steps:
@@ -62,6 +66,17 @@ The script will perform the following steps:
   - Build a `tar.gz` file containing the images as well as files required to installer the driver and/or Operator
 
 The resulting offline bundle file can be copied to another machine, if necessary, to gain access to the desired image registry.
+
+The following is an example of how to build an offline bundle for Helm install of a specific driver:
+```bash
+git clone -b <version tag> https://github.com/dell/csi-powerscale.git
+```
+```bash
+cd csi-powerscale
+```
+```bash
+bash dell-csi-helm-installer/csi-offline-bundle.sh -c
+```
 
 The following is an example of how to build an offline bundle for the Dell CSM Operator:
 ```bash
