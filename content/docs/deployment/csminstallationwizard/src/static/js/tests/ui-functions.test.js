@@ -561,8 +561,8 @@ describe("GIVEN resetTaint function", () => {
 describe("GIVEN displayModules function", () => {
 	const testHtml = `
 		<select id="csm-version">
-			<option value="1.7.0" selected>CSM 1.7.0</option>
-			<option value="1.6.0">CSM 1.6.0</option>
+			<option value="1.10.0" selected>CSM 1.10.0</option>
+			<option value="1.9.0">CSM 1.9.0</option>
 		</select>
 		<input type="text" id="driver-namespace">
 		<div class="vgsnapshot" style="display:none"></div>
@@ -722,7 +722,7 @@ describe("GIVEN displayCommands function", () => {
 			<input id="array" value="powerstore">
 			<input id="installation-type" value="helm">
 			<input type="text" id="driver-namespace" value="csi-powerstore">
-			<input type="text" id="csm-version" value="1.8.0">
+			<input type="text" id="csm-version" value="1.12.0">
             <div id="command-text-area" style="display:none">
                 <div id="command-title"></div>
                 <span id="command-note" style="display:none"></span>
@@ -737,7 +737,7 @@ describe("GIVEN displayCommands function", () => {
 		expect($("#command-title").text()).toEqual("Run the following commands to install");
 		expect($("#command-note").text()).toEqual("Ensure that the namespaces and secrets are created before installing the helm chart");
 		expect($("#command1").text()).toEqual("helm repo add dell https://dell.github.io/helm-charts");
-		expect($("#command2").text()).toEqual("helm install powerstore dell/container-storage-modules -n csi-powerstore --version 1.1.0 -f values.yaml");
+		expect($("#command2").text()).toEqual("helm install powerstore dell/container-storage-modules -n csi-powerstore --version 1.5.0 -f values.yaml");
 	});
 
 	test("SHOULD show expected commands: Installation Type: Operator", () => {
@@ -745,7 +745,7 @@ describe("GIVEN displayCommands function", () => {
 			<input id="array" value="powerstore">
 			<input id="installation-type" value="operator">
 			<input type="text" id="driver-namespace" value="csi-powerstore">
-			<input type="text" id="csm-version" value="1.7.0">
+			<input type="text" id="csm-version" value="1.9.0">
             <div id="command-text-area" style="display:none">
                 <div id="command-title"></div>
 				<span id="csm-operator-note" style="display:none"></span>
@@ -772,7 +772,7 @@ describe("SHOULD Disable/Enable Generate YAML button based on validation of inpu
 			<input id="array" value="">
 			<input id="installation-type" value="helm">
 			<input id="image-repository" value="dell">
-			<input id="csm-version" value="csm-1.6.0">
+			<input id="csm-version" value="csm-1.9.0">
 			<input type="number" id="controller-count" value="1">
 			<input type="text" id="driver-namespace" value="csm-driver">
         `;
@@ -786,7 +786,7 @@ describe("SHOULD Disable/Enable Generate YAML button based on validation of inpu
 			<input id="array" value="powerstore">
 			<input id="installation-type" value="helm">
 			<input id="image-repository" value="dellemc">
-			<input id="csm-version" value="csm-1.6.0">
+			<input id="csm-version" value="csm-1.9.0">
 			<input type="number" id="controller-count" value="1">
 			<input type="text" id="driver-namespace" value="">
         `;
@@ -801,7 +801,7 @@ describe("SHOULD Disable/Enable Generate YAML button based on validation of inpu
 			<input id="array" value="powerstore">
 			<input id="installation-type" value="helm">
 			<input id="image-repository" value="dell">
-			<input id="csm-version" value="csm-1.6.0">
+			<input id="csm-version" value="csm-1.9.0">
 			<input type="text" id="driver-namespace" value="csi-powerstore">
         `;
 
@@ -814,7 +814,7 @@ describe("SHOULD Disable/Enable Generate YAML button based on validation of inpu
 			<input id="array" value="powerstore">
 			<input id="installation-type" value="helm">
 			<input id="image-repository" value="dell">
-			<input id="csm-version" value="csm-1.6.0">
+			<input id="csm-version" value="csm-1.9.0">
 			<input type="number" id="controller-count" value="1">
 			<input type="text" id="driver-namespace" value="csi-powerstore">
         `;
