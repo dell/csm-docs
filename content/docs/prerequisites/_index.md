@@ -11,10 +11,10 @@ weight: 1
 | Platform      | Version          | OS Dependencies          |
 |---------------|:----------------:|:------------------------:|
 | PowerMax    | PowerMax 2500/8500 PowerMaxOS 10 (6079)<br>PowerMaxOS 10.0.1 (6079)<br>PowerMaxOS 10.1 (6079)<br>PowerMax 2000/8000 - 5978.711.711, 5978.714.714<br>5978.479.479<br>Unisphere 10.0,10.0.1,10.1 | iscsi-initiator-utils<br>multipathd or powerpath<br>nvme-cli<br>nfs-utils |
-| PowerFlex | 4.0.x, 4.5.x, 4.6.x | [SDC](https://www.dell.com/support/home/en-us/product-support/product/scaleio/drivers)|
+| PowerFlex | 3.6.x, 4.5.x, 4.6.x | [SDC](https://www.dell.com/support/home/en-us/product-support/product/scaleio/drivers)|
 | Unity XT | 5.2.x, 5.3.0, 5.4.x  | iscsi-initiator-utils<br>multipathd<br>nfs-utils |
 | PowerScale | OneFS 9.4, 9.5.0.x (x >= 5), 9.7 | nfs-utils |
-| PowerStore  | 3.0, 3.2, 3.5 | iscsi-initiator-utils<br>multipathd<br>nvme-cli<br>nfs-utils |
+| PowerStore  | 3.0, 3.2, 3.5, 3.6 | iscsi-initiator-utils<br>multipathd<br>nvme-cli<br>nfs-utils |
 | ObjectScale | 1.2.x | - |
 {{</table>}}
 
@@ -56,19 +56,19 @@ Container Storage Modules (CSM) does not officially support specific operating s
 {{<table "table table-striped table-bordered table-sm">}}
 | CSM Module                                                    | PowerMax | PowerFlex | Unity XT | PowerScale | PowerStore |
 |---------------------------------------------------------------|:--------:|:---------:|:--------:|:----------:|:----------:|
-| [CSM Authorization - v1.x GA](../authorization/)              | Yes      | Yes       | Yes      | Yes        | No         |
+| [CSM Authorization - v1.x GA](../authorization/)              | Yes      | Yes       | No       | Yes        | No         |
 | [CSM Authorization - v2.0 Tech Preview](../authorization/)    | No       | Yes       | No       | No         | No         |
 | [CSM Observability](../observability/)                        | Yes      | Yes       | No       | Yes        | Yes        |
 | [CSM Replication](../replication/)                            | Yes      | Yes       | No       | Yes        | Yes        |
-| [CSM Resiliency](../resiliency/)                              | No       | Yes       | Yes      | Yes        | Yes        |
+| [CSM Resiliency](../resiliency/)                              | Yes       | Yes       | Yes      | Yes        | Yes        |
 | [CSM Encryption](../secure/encryption/)                       | No       | No        | No       | Yes        | No         |
-| [CSM Application Mobility](../applicationmobility/)           | Yes      | Yes       | Yes      | Yes        | Yes        |
+| [CSM Application Mobility](../applicationmobility/)           | Yes      | No       | No      | No        | No        |
 | [Volume Group Snapshot](../snapshots/volume-group-snapshots/) | No       | Yes       | No       | No         | Yes        |
 
 {{</table>}}
 
 > Notes:
-> * Encryption and Application Mobility are available as a Technical Preview only and are not officially supported.
+> * Encryption is available as a Technical Preview only and is not officially supported.
 > * Authorization v2.0 is available as a Technical Preview only on PowerFlex.
 
 ## CSM Operator compatibility matrix
