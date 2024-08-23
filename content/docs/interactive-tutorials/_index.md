@@ -1,6 +1,6 @@
 ---
-title: "Interactive Tutorials"
-linkTitle: "Interactive Tutorials"
+#title: "Interactive Tutorials"
+#linkTitle: "Interactive Tutorials"
 no_list: true
 description: Try CSM and more with interactive labs
 weight: 2
