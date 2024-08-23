@@ -45,7 +45,7 @@ const CONSTANTS = {
 	CSM_HELM_V193: "1.2.1",
 	CSM_HELM_V1102: "1.3.2",
 	CSM_HELM_V1110: "1.4.0",
-  CSM_HELM_V1120: "1.5.0",
+        CSM_HELM_V1120: "1.5.0",
 	HELM_TAINTS: `
     - key: "$KEY"
       operator: "Exists"
