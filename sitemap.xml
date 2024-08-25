@@ -425,6 +425,9 @@
     <loc>https://dell.github.io/csm-docs/v3/csidriver/upgradation/drivers/unity/</loc>
     <lastmod>2024-07-30T01:25:59+05:30</lastmod>
   </url><url>
+    <loc>https://dell.github.io/csm-docs/docs/interactive-tutorials/</loc>
+    <lastmod>2024-08-25T08:32:38+02:00</lastmod>
+  </url><url>
     <loc>https://dell.github.io/csm-docs/docs/deployment/helm/modules/uninstall/applicationmobility/</loc>
     <lastmod>2024-03-21T02:39:59+05:30</lastmod>
   </url><url>
@@ -553,9 +556,6 @@
   </url><url>
     <loc>https://dell.github.io/csm-docs/v3/replication/deployment/installation/</loc>
     <lastmod>2024-03-21T02:39:59+05:30</lastmod>
-  </url><url>
-    <loc>https://dell.github.io/csm-docs/docs/interactive-tutorials/</loc>
-    <lastmod>2024-07-31T10:29:18+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/v1/interactive-tutorials/</loc>
     <lastmod>2024-07-30T01:25:59+05:30</lastmod>
