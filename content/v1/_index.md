@@ -30,7 +30,7 @@ CSM is made up of multiple components including modules (enterprise capabilities
 {{% /cardpane %}}
 {{% cardpane %}}
 {{< card header="[**Resiliency**](resiliency/)"
-          footer="Supports [PowerFlex](csidriver/features/powerflex/) [PowerScale](csidriver/features/powerscale/) [Unity](csidriver/features/unity/) [PowerStore](csidriver/features/powerstore/) [PowerFlex](csidriver/features/powerflex/)">}}
+          footer="Supports [PowerFlex](csidriver/features/powerflex/) [PowerScale](csidriver/features/powerscale/) [Unity](csidriver/features/unity/) [PowerStore](csidriver/features/powerstore/) [PowerMax](csidriver/features/powermax/)">}}
   CSM for Resiliency is designed to make Kubernetes Applications, including those that utilize persistent storage, more resilient to various failures.
 [...Learn more](resiliency/)
   {{< /card >}}
