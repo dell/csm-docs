@@ -30,7 +30,7 @@ CSM is made up of multiple components including modules (enterprise capabilities
 {{% /cardpane %}}
 {{% cardpane %}}
 {{< card header="[**Resiliency**](resiliency/)"
-          footer="Supports [PowerFlex](csidriver/features/powerflex/) [PowerScale](csidriver/features/powerscale/) [Unity](csidriver/features/unity/) [PowerStore](csidriver/features/powerstore/)">}}
+          footer="Supports [PowerFlex](csidriver/features/powerflex/) [PowerScale](csidriver/features/powerscale/) [Unity](csidriver/features/unity/) [PowerStore](csidriver/features/powerstore/) [PowerFlex](csidriver/features/powerflex/)">}}
   CSM for Resiliency is designed to make Kubernetes Applications, including those that utilize persistent storage, more resilient to various failures.
 [...Learn more](resiliency/)
   {{< /card >}}
@@ -42,7 +42,7 @@ CSM is made up of multiple components including modules (enterprise capabilities
 {{% /cardpane %}}
 {{% cardpane %}}
 {{< card header="[**Application Mobility**](applicationmobility/)"
-          footer="Supports all platforms">}}
+          footer="Supports [PowerFlex](csidriver/features/powerflex/) via Apex Navigator for Kubernetes">}}
   Container Storage Modules for Application Mobility provide Kubernetes administrators the ability to clone their stateful application workloads and application data to other clusters in the cloud.
   [...Learn more](applicationmobility/)
   {{< /card >}}
