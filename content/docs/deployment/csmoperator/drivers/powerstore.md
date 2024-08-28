@@ -20,31 +20,27 @@ kubectl get csm --all-namespaces
 
 
 ### Prerequisites
+Depending of the protocol you use, refer to the following sections to configure the requirements for the CSI Driver.
 
-#### Fibre Channel requirements
+> **NOTE:** with RedHat Openshift all the software pre-requisites are already installed.
 
-Dell PowerStore supports Fibre Channel communication. If you use the Fibre Channel protocol, ensure that the
-following requirement is met before you install the CSI Driver for Dell PowerStore:
-- Zoning of the Host Bus Adapters (HBAs) to the Fibre Channel port must be done.
-
-
-#### Set up the iSCSI Initiator
-The CSI Driver for Dell PowerStore v1.4 and higher supports iSCSI connectivity.
-
+{{< tabpane name="protocol-prereqs" text=true >}}
+{{% tab header="Fiber Channel" %}}
+The zoning of the Host Bus Adapters (HBAs) to the Fibre Channel port must be done, **before** installing the CSI Driver, if you use the Fibre Channel protocol.
+{{% /tab %}}
+{{% tab header="iSCSI" %}}
 If you use the iSCSI protocol, set up the iSCSI initiators as follows:
 - Ensure that the iSCSI initiators are available on both Controller and Worker nodes.
 - Kubernetes nodes must have access (network connectivity) to an iSCSI port on the Dell PowerStore array that
-has IP interfaces. Manually create IP routes for each node that connects to the Dell PowerStore.
+has IP interfaces.
 - All Kubernetes nodes must have the _iscsi-initiator-utils_ package for CentOS/RHEL or _open-iscsi_ package for Ubuntu installed, and the _iscsid_ service must be enabled and running.
 To do this, run the `systemctl enable --now iscsid` command.
 - Ensure that the unique initiator name is set in _/etc/iscsi/initiatorname.iscsi_.
 
 For information about configuring iSCSI, see _Dell PowerStore documentation_ on Dell Support.
-
-
-#### Set up the NVMe Initiator
-
-If you want to use the protocol, set up the NVMe initiators as follows:
+{{% /tab %}}
+{{% tab header="NVMe" %}}
+Set up the NVMe initiators as follows:
 - The driver requires NVMe management command-line interface (nvme-cli) to use configure, edit, view or start the NVMe client and target. The nvme-cli utility provides a command-line and interactive shell option. The NVMe CLI tool is installed in the host using the below command.
 ```bash
 sudo apt install nvme-cli
@@ -63,6 +59,8 @@ modprobe nvme_tcp
 
 *NOTE:*
 - Do not load the nvme_tcp module for NVMeFC
+{{% /tab %}}
+{{< /tabpane >}}
 
 #### Linux multipathing requirements
 Dell PowerStore supports Linux multipathing. Configure Linux multipathing before installing the CSI Driver for Dell
