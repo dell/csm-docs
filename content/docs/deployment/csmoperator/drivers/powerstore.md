@@ -81,7 +81,8 @@ If you are installing a CSI Driver which requires the installation of the Linux 
 
 To enable multipathd on RedHat CoreOS nodes you need to prepare a working configuration encoded in base64.
 
-```bash echo 'defaults {
+```bash
+echo 'defaults {
 user_friendly_names yes
 find_multipaths yes
 }
@@ -138,12 +139,13 @@ replication:
 The CRDs for replication can be obtained and installed from the csm-replication project on Github. Use `csm-replication/deploy/replicationcrds.all.yaml` located in csm-replication git repo for the installation.
 
 CRDs should be configured during replication prepare stage with repctl as described in [install-repctl](../../../helm/modules/installation/replication/install-repctl)
-### Namespace and PowerStore API Access Configuration
+### Namespace and API Access Configuration
+> **NOTE:** Sample files are provided for the configuration, `StorageClass`, etc. [here](https://github.com/dell/csi-powerstore/tree/main/samples).
 
 1. Create namespace.
    Execute `kubectl create namespace powerstore` to create the powerstore namespace (if not already present). Note that the namespace can be any user-defined name, in this example, we assume that the namespace is 'powerstore'.
 
-2. Create a file called `config.yaml` that has Powerstore array connection details with the following content
+2. Create a file called `secret.yaml` or pick a [sample](https://github.com/dell/csi-powerstore/tree/main/samples/secret.yaml) that has Powerstore array connection details: 
    ```yaml
    arrays:
       - endpoint: "https://10.0.0.1/api/rest"     # full URL path to the PowerStore API
@@ -163,26 +165,12 @@ CRDs should be configured during replication prepare stage with repctl as descri
    If replication feature is enabled, ensure the secret includes all the PowerStore arrays involved in replication.
 
    #### User Privileges
-   The username specified in `config.yaml` must be from the authentication providers of PowerStore. The user must have the correct user role to perform the actions. The minimum requirement is **Storage Operator**.
+   The username specified in `secret.yaml` must be from the authentication providers of PowerStore. The user must have the correct user role to perform the actions. The minimum requirement is **Storage Operator**.
 
 3. Create Kubernetes secret:
 
-   Create a file called `secret.yaml` in same folder as `config.yaml` with following content
-   ```yaml
-   apiVersion: v1
-   kind: Secret
-   metadata:
-      name: powerstore-config
-      namespace: powerstore
-   type: Opaque
-   data:
-      config: CONFIG_YAML
-   ```
-
-   Combine both files and create Kubernetes secret by running the following command:
    ```bash
-
-   sed "s/CONFIG_YAML/`cat config.yaml | base64 -w0`/g" secret.yaml | kubectl apply -f -
+   kubectl create secret generic -n powerstore powerstore-config --from-file=config=secret.yaml
    ```
 
 ### Install Driver
@@ -222,8 +210,6 @@ CRDs should be configured during replication prepare stage with repctl as descri
 
 5.  [Verify the CSI Driver installation](../#verifying-the-driver-installation)
 
-6. Refer https://github.com/dell/csi-powerstore/tree/main/samples for the sample files.
-
-**Note** :
-   1. "Kubelet config dir path" is not yet configurable in case of Operator based driver installation.
-   2. Snapshotter and resizer sidecars are not optional. They are defaults with Driver installation.
+> **NOTE:**
+>   1. "Kubelet config dir path" is not yet configurable in case of Operator based driver installation.
+>   2. Snapshotter and resizer sidecars are not optional. They are defaults with Driver installation.
