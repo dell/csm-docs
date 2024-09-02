@@ -7,7 +7,9 @@ description: Release notes for Unity XT CSI driver
 
 
 
-
+{{% pageinfo color="primary" %}}
+The OpenShift Virtualization Suite is not qualified on Unity.
+{{% /pageinfo %}}
 
 
 
