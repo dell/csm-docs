@@ -178,7 +178,7 @@ storageClasses:
     snapshot: true
     RWX: false
     ephemeral:
-      driver: csi-powerstore.dellemc.com
+      driver: csi-vxflexos.dellemc.com
       fstype: ext4
       volumeAttributes:
         volumeName: "my-ephemeral-vol"
@@ -192,7 +192,7 @@ storageClasses:
     clone: true
     snapshot: true
     RWX: true
-    RWOP: true
+    RWOP: false
     ephemeral:
       driver: csi-vxflexos.dellemc.com
       fstype: "nfs"
@@ -202,7 +202,7 @@ storageClasses:
         storagepool: "sample"
         systemID: "sample"
     capacityTracking:
-      driverNamespace: powerstore
+      driverNamespace: vxflexos
       pollInterval: 2m
 
 
@@ -216,7 +216,7 @@ storageClasses:
     expansion: true
     clone: true
     snapshot: true
-    RWX: false
+    RWX: true
     ephemeral:
       driver: csi-isilon.dellemc.com
       fstype: nfs
@@ -239,18 +239,18 @@ storageClasses:
     clone: true
     snapshot: true
     capacityTracking:
-      driverNamespace: powerstore
+      driverNamespace: powermax
       pollInterval: 2m
   - name: powermax-nfs
     minSize: 5Gi
     rawBlock: false
     expansion: true
-    clone: true
-    snapshot: true
+    clone: false
+    snapshot: false
     RWX: true
-    RWOP: true
+    RWOP: false
     capacityTracking:
-      driverNamespace: powerstore
+      driverNamespace: powermax
       pollInterval: 2m
 
    {{</tab >}}
@@ -278,7 +278,7 @@ storageClasses:
     clone: true
     snapshot: true
     RWX: true
-    RWOP: true
+    RWOP: false
     ephemeral:
       driver: csi-powerstore.dellemc.com
       fstype: "nfs"
@@ -299,7 +299,7 @@ storageClasses:
     minSize: 3Gi
     rawBlock: true
     expansion: true
-    clone: false
+    clone: true
     snapshot: true
     RWX: false
     ephemeral:
@@ -308,16 +308,16 @@ storageClasses:
       volumeAttributes:
         arrayId: "array-id"
         storagePool: pool-name
-        protocol: NFS
+        protocol: iSCSI
         size: 5Gi
   - name: unity-nfs
     minSize: 3Gi
     rawBlock: false
     expansion: true
-    clone: false
+    clone: true
     snapshot: true
     RWX: true
-    RWOP: true
+    RWOP: false
     ephemeral:
       driver: csi-unity.dellemc.com
       fstype: "nfs"
