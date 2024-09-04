@@ -19,7 +19,7 @@ csi-powerstore:
     # CSM sidecars
     replication: dellemc/dell-csi-replicator:v1.9.0
     vgsnapshotter: dellemc/csi-volumegroup-snapshotter:v1.6.0
-    podmon: dellemc/podmon:v1.10.0
+    podmon: dellemc/podmon:v1.11.0
     metadataretriever: dellemc/csi-metadata-retriever:v1.8.0
   ## Controller ATTRIBUTES
   controller:
@@ -258,7 +258,7 @@ csi-vxflexos:
     approveSDC:
       enabled: $APPROVE_SDC_ENABLED
     tolerations: $NODE_TOLERATIONS
-    # Uncomment if CSM for Resiliency and CSI Driver pods monitor is enabled 
+    # Uncomment if CSM for Resiliency and CSI Driver pods monitor is enabled
     # - key: "offline.vxflexos.storage.dell.com"
     #   operator: "Exists"
     #   effect: "NoSchedule"
@@ -328,7 +328,7 @@ csi-isilon:
     healthmonitor: registry.k8s.io/sig-storage/csi-external-health-monitor-controller:v0.12.1
     # CSM sidecars
     replication: dellemc/dell-csi-replicator:v1.9.0
-    podmon: dellemc/podmon:v1.10.0
+    podmon: dellemc/podmon:v1.11.0
     authorization: dellemc/csm-authorization-sidecar:v1.11.0
     metadataretriever: dellemc/csi-metadata-retriever:v1.8.0
     encryption: dellemc/csm-encryption:v0.6.0
@@ -437,7 +437,7 @@ csi-unity:
     registrar: registry.k8s.io/sig-storage/csi-node-driver-registrar:v2.10.1
     healthmonitor: registry.k8s.io/sig-storage/csi-external-health-monitor-controller:v0.12.1
     # CSM sidecars
-    podmon: dellemc/podmon:v1.10.0
+    podmon: dellemc/podmon:v1.11.0
   certSecretCount: $CERT_SECRET_COUNT
   allowedNetworks:
   fsGroupPolicy: $FSGROUP_POLICY
@@ -456,7 +456,7 @@ csi-unity:
   node:
     healthMonitor:
       enabled: $HEALTH_MONITOR_ENABLED
-    nodeSelector: $NODE_POD_NODE_SELECTOR 
+    nodeSelector: $NODE_POD_NODE_SELECTOR
     tolerations: $NODE_TOLERATIONS
     #  - key: "node.kubernetes.io/memory-pressure"
     #    operator: "Exists"
@@ -467,7 +467,7 @@ csi-unity:
     #  - key: "node.kubernetes.io/network-unavailable"
     #    operator: "Exists"
     #    effect: "NoExecute"
-    # Uncomment if CSM for Resiliency and CSI Driver pods monitor are enabled 
+    # Uncomment if CSM for Resiliency and CSI Driver pods monitor are enabled
     #  - key: "offline.vxflexos.storage.dell.com"
     #    operator: "Exists"
     #    effect: "NoSchedule"
