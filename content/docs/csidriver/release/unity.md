@@ -7,9 +7,7 @@ description: Release notes for Unity XT CSI driver
 
 
 
-{{% pageinfo color="primary" %}}
-The OpenShift Virtualization platform support is not available for Unity.
-{{% /pageinfo %}}
+
 
 
 
