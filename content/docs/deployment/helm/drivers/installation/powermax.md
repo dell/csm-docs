@@ -147,7 +147,7 @@ no_path_retry 10
 
 If you are installing a CSI Driver which requires the installation of the Linux native Multipath software - _multipathd_, please follow the below instructions
 
-> NOTE: to enable e multipathd on RedHat CoreOS you can refer to sample `MachineConfig` given [here](../../../csmoperator/drivers/powermax/#machineconfig).
+> NOTE: to enable multipathd on RedHat CoreOS you can refer to sample `MachineConfig` given [here](../../../csmoperator/drivers/powermax/#machineconfig).
 
 Finally, you have to restart the service by providing the command
 `sudo systemctl restart multipathd`
