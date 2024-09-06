@@ -79,7 +79,8 @@ If you are installing a CSI Driver which requires the installation of the Linux 
 
 To enable multipathd on RedHat CoreOS nodes you need to prepare a working configuration encoded in base64.
 
-```bash echo 'defaults {
+```bash
+echo 'defaults {
 user_friendly_names yes
 find_multipaths yes
 }

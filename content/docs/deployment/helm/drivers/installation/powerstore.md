@@ -32,17 +32,20 @@ Install Helm 3.x on the master node before you install the CSI Driver for Dell P
   ```bash
   curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
   ```
-### Fibre Channel requirements
 
+### Storage Protocol requirements
+Depending of the protocol you use, refer to the following sections to configure the requirements for the CSI Driver.
+
+{{< tabpane name="protocol-prereqs" text=true >}}
+{{% tab header="Fiber Channel" %}}
 Dell PowerStore supports Fibre Channel communication. If you use the Fibre Channel protocol, ensure that the
 following requirement is met before you install the CSI Driver for Dell PowerStore:
 - Zoning of the Host Bus Adapters (HBAs) to the Fibre Channel port must be done.
 
+{{% /tab %}}
+{{% tab header="iSCSI" %}}
 
-### Set up the iSCSI Initiator
-The CSI Driver for Dell PowerStore v1.4 and higher supports iSCSI connectivity.
-
-If you use the iSCSI protocol, set up the iSCSI initiators as follows:
+Set up the iSCSI initiators as follows:
 - Ensure that the iSCSI initiators are available on both Controller and Worker nodes.
 - Kubernetes nodes must have access (network connectivity) to an iSCSI port on the Dell PowerStore array that
 has IP interfaces. Manually create IP routes for each node that connects to the Dell PowerStore.
@@ -52,10 +55,10 @@ To do this, run the `systemctl enable --now iscsid` command.
 
 For information about configuring iSCSI, see _Dell PowerStore documentation_ on Dell Support.
 
+{{% /tab %}}
+{{% tab header="NVMe" %}}
 
-### Set up the NVMe Initiator
-
-If you want to use the protocol, set up the NVMe initiators as follows:
+Set up the NVMe initiators as follows:
 - The driver requires NVMe management command-line interface (nvme-cli) to use configure, edit, view or start the NVMe client and target. The nvme-cli utility provides a command-line and interactive shell option. The NVMe CLI tool is installed in the host using the below command.
 ```bash
 sudo apt install nvme-cli
@@ -75,6 +78,9 @@ modprobe nvme_tcp
 *NOTE:*
 - Do not load the nvme_tcp module for NVMeFC
 
+{{% /tab %}}
+{{< /tabpane >}}
+
 ### Linux multipathing requirements
 Dell PowerStore supports Linux multipathing. Configure Linux multipathing before installing the CSI Driver for Dell
 PowerStore.
@@ -86,46 +92,9 @@ Set up Linux multipathing as follows:
 - Enable `user_friendly_names` and `find_multipaths` in the `multipath.conf` file.
 - Ensure that the multipath command for `multipath.conf` is available on all Kubernetes nodes.
 
-#### multipathd `MachineConfig`
+> NOTE: to enable e multipathd on RedHat CoreOS you can refer to sample `MachineConfig` given [here](../../../csmoperator/drivers/powerstore/#multipathd-machineconfig).
 
-If you are installing a CSI Driver which requires the installation of the Linux native Multipath software - _multipathd_, please follow the below instructions
-
-To enable multipathd on RedHat CoreOS nodes you need to prepare a working configuration encoded in base64.
-
-```bash echo 'defaults {
-user_friendly_names yes
-find_multipaths yes
-}
-blacklist {
-}' | base64 -w0
-```
-
-Use the base64 encoded string output in the following `MachineConfig` yaml file (under source section)
-```yaml
-apiVersion: machineconfiguration.openshift.io/v1
-kind: MachineConfig
-metadata:
-  name: workers-multipath-conf-default
-  labels:
-    machineconfiguration.openshift.io/role: worker
-spec:
-  config:
-    ignition:
-      version: 3.2.0
-    storage:
-      files:
-      - contents:
-          source: data:text/plain;charset=utf-8;base64,ZGVmYXVsdHMgewp1c2VyX2ZyaWVuZGx5X25hbWVzIHllcwpmaW5kX211bHRpcGF0aHMgeWVzCn0KCmJsYWNrbGlzdCB7Cn0K
-          verification: {}
-        filesystem: root
-        mode: 400
-        path: /etc/multipath.conf
-```
-After deploying this`MachineConfig` object, CoreOS will start multipath service automatically.
-Alternatively, you can check the status of the multipath service by entering the following command in each worker nodes.
-`sudo multipath -ll`
-
-If the above command is not successful, ensure that the /etc/multipath.conf file is present and configured properly. Once the file has been configured correctly, enable the multipath service by running the following command:
+Once the file has been configured correctly, enable the multipath service by running the following command:
 `sudo /sbin/mpathconf –-enable --with_multipathd y`
 
 Finally, you have to restart the service by providing the command
