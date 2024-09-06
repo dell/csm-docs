@@ -55,14 +55,19 @@ Install Helm 3 on the master node before you install CSI Driver for Dell PowerMa
    ``` 
 
 
-### Fibre Channel Requirements
+### Storage Protocol Requirements
+Depending of the protocol you use, refer to the following sections to configure the requirements for the CSI Driver.
+
+{{< tabpane name="protocol-prereqs" text=true >}}
+{{% tab header="Fiber Channel" %}}
 
 CSI Driver for Dell PowerMax supports Fibre Channel communication. Ensure that the following requirements are met before you install CSI Driver:
 - Zoning of the Host Bus Adapters (HBAs) to the Fibre Channel port director must be completed.
 - Ensure that the HBA WWNs (initiators) appear on the list of initiators that are logged into the array.
 - If the number of volumes that will be published to nodes is high, then configure the maximum number of LUNs for your HBAs on each node. See the appropriate HBA document to configure the maximum number of LUNs.
 
-### iSCSI Requirements
+{{% /tab %}}
+{{% tab header="iSCSI" %}}
 
 The CSI Driver for Dell PowerMax supports iSCSI connectivity. These requirements are applicable for the nodes that use iSCSI initiator to connect to the PowerMax arrays.
 
@@ -75,14 +80,17 @@ Set up the iSCSI initiators as follows:
 
 For more information about configuring iSCSI, see [Dell Host Connectivity guide](https://www.delltechnologies.com/asset/zh-tw/products/storage/technical-support/docu5128.pdf).
 
-### NFS requirements
+{{% /tab %}}
+{{% tab header="NFS" %}}
 
 CSI Driver for Dell PowerMax supports NFS communication. Ensure that the following requirements are met before you install CSI Driver:
 - Configure the NFS network. Please refer [here](https://dl.dell.com/content/manual57826791-dell-powermax-file-protocol-guide.pdf?language=en-us&ps=true) for more details.
 - PowerMax Embedded Management guest to access Unisphere for PowerMax.
 - Create the NAS server. Please refer [here](https://dl.dell.com/content/manual55638050-dell-powermax-file-quick-start-guide.pdf?language=en-us&ps=true) for more details.
 
-### NVMeTCP requirements
+{{% /tab %}}
+{{% tab header="NVMe" %}}
+
 If you want to use the protocol, set up the NVMe initiators as follows:
 - Setup on Array <br>
 Once the NVMe endpoint is created on the array, follow the following step to update endpoint name to adhere with CSI driver.
@@ -103,7 +111,8 @@ modprobe nvme_tcp
 - The NVMe modules may not be available after a node reboot. Loading the modules at startup is recommended.
 - Generate and update the _/etc/nvme/hostnqn_ with hostNQN details.
 
-### Auto RDM for vSphere over FC requirements
+{{% /tab %}}
+{{% tab header="Auto RDM for vSphere over FC" %}}
 
 The CSI Driver for Dell PowerMax supports auto RDM for vSphere over FC. These requirements are applicable for the clusters deployed on ESX/ESXi using virtualized environement.
 
@@ -127,6 +136,8 @@ Create the secret by running the below command,
 ```bash
 kubectl create -f samples/secret/vcenter-secret.yaml
 ```
+{{% /tab %}}
+{{< /tabpane >}}
 
 ### Certificate validation for Unisphere REST API calls
 
@@ -174,47 +185,10 @@ features "1 queue_if_no_path"
 path_selector "round-robin 0"
 no_path_retry 10
 ```
-#### multipathd `MachineConfig`
 
 If you are installing a CSI Driver which requires the installation of the Linux native Multipath software - _multipathd_, please follow the below instructions
 
-To enable multipathd on RedHat CoreOS nodes you need to prepare a working configuration encoded in base64.
-
-```bash echo 'defaults {
-user_friendly_names yes
-find_multipaths yes
-}
-blacklist {
-}' | base64 -w0
-```
-
-Use the base64 encoded string output in the following `MachineConfig` yaml file (under source section)
-```yaml
-apiVersion: machineconfiguration.openshift.io/v1
-kind: MachineConfig
-metadata:
-  name: workers-multipath-conf-default
-  labels:
-    machineconfiguration.openshift.io/role: worker
-spec:
-  config:
-    ignition:
-      version: 3.2.0
-    storage:
-      files:
-      - contents:
-          source: data:text/plain;charset=utf-8;base64,ZGVmYXVsdHMgewp1c2VyX2ZyaWVuZGx5X25hbWVzIHllcwpmaW5kX211bHRpcGF0aHMgeWVzCn0KCmJsYWNrbGlzdCB7Cn0K
-          verification: {}
-        filesystem: root
-        mode: 400
-        path: /etc/multipath.conf
-```
-After deploying this`MachineConfig` object, CoreOS will start multipath service automatically.
-Alternatively, you can check the status of the multipath service by entering the following command in each worker nodes.
-`sudo multipath -ll`
-
-If the above command is not successful, ensure that the /etc/multipath.conf file is present and configured properly. Once the file has been configured correctly, enable the multipath service by running the following command:
-`sudo /sbin/mpathconf –-enable --with_multipathd y`
+> NOTE: to enable e multipathd on RedHat CoreOS you can refer to sample `MachineConfig` given [here](../../../csmoperator/drivers/powermax/#machineconfig).
 
 Finally, you have to restart the service by providing the command
 `sudo systemctl restart multipathd`
