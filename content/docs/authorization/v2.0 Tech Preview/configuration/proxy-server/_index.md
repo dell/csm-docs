@@ -47,12 +47,25 @@ Afterwards, the storage administrator can configure Authorization with the follo
 
 ### Configuring Storage
 
-The storage types supported are `powerflex` and `powermax`. During the creation of a storage system and role, the storage type must be one of the supported types.
+The storage types supported are `powerflex`, `powermax`, and `powerscale`. During the creation of a storage system and role, the storage type must be one of the supported types.
 
-A `storage` entity in CSM Authorization consists of the storage type (`powerflex` or `powermax`), the system ID, the API endpoint, and the vault credentials path. For example, to create PowerFlex storage:
+A `storage` entity in CSM Authorization consists of the storage type (`powerflex`, `powermax` or `powerscale`), the system ID, the API endpoint, and the vault credentials path. Edit these parameters in the manifest:
+
+   | Parameter | Description | Required | Default |
+   | --------- | ----------- | -------- |-------- |
+   | type | The type of the stoage array. | Yes | - |
+   | endpoint | HTTPS REST API endpoint of the backend storage array. | Yes | - |
+   | systemID | System ID of the backend storage array. | Yes | - |
+   | vault.identifier | The credential manager identifier to be used. | Yes | - |
+   | vault.kvEngine | The way that credentials for the storage array are stored. | Yes | secret |
+   | vault.path | The location within the store that the credentials for the array are stored. | Yes | - |
+   | skipCertificateValidation | A boolean that enables/disables certificate validation of the backend storage array. | No | true |
+   | pollInterval | PollInterval is the polling frequency to test the storage connectivity. | No | 30s |
+
+For example, to create PowerFlex storage:
 
 ```yaml
-apiVersion: csm-authorization.storage.dell.com/v1alpha1
+apiVersion: csm-authorization.storage.dell.com/v1
 kind: Storage
 metadata:
   name: powerflex
@@ -60,22 +73,33 @@ spec:
   type: powerflex
   endpoint: https://10.0.0.1
   systemID: 1000000000000000
-  credentialStore: vault
-  credentialPath: storage/powerflex
+  vault:
+    identifier: vault0
+    kvEngine: secret
+    path: csm-authorization/powerflex/1000000000000000
   skipCertificateValidation: true
   pollInterval: 30s
 ```
 
->__Note__:
-> - The `credentialStore` is the way that credentials for the storage array are stored.
-> - The `credentialPath` is the location within the store that the credentials for the array are stored.
+>__Note__: 
+> - The `systemID` can vary from storage type to storage type. Please contact the storage administrator for more details on how to obtain it.
 
 ### Configuring Roles
 
-A `role` consists of a name, the storage array to use, and the quota limit for the storage pool to be used. For example, to create a role named `role1` using the PowerFlex storage created above with a quota limit of 128GB in storage pool `myStoragePool`:
+A `role` consists of a name, the storage array to use, and the quota limit for the storage pool to be used. Edit these parameters in the manifest:
+
+   | Parameter | Description | Required | Default |
+   | --------- | ----------- | -------- |-------- |
+   | name | The name of the role that will be used to bind with the tenant. | Yes | - |
+   | quota | The amount of allocated space for the specified role. | Yes | - |
+   | systemID | System ID of the backend storage array. | Yes | - |
+   | systemType | The type of the stoage array. | Yes | - |
+   | pool | The storage pool name. | Yes | - |
+
+For example, to create a role named `role1` using the PowerFlex storage created above with a quota limit of 128iB in storage pool `myStoragePool`:
 
 ```yaml
-apiVersion: csm-authorization.storage.dell.com/v1alpha1
+apiVersion: csm-authorization.storage.dell.com/v1
 kind: CSMRole
 metadata:
   labels:
@@ -86,19 +110,27 @@ metadata:
     app.kubernetes.io/created-by: csm-authorization
   name: role1
 spec:
-  quota: 128GB
+  quota: 128GiB
   systemID: 1000000000000000
   systemType: powerflex
   pool: myStoragePool
 ```
 
 >__Note__: 
-> - The `name` is the name of the role that will be used to bind with the tenant.
-> - The `quota` is the amount of allocated space for the specified role.
+> - The `quota` must be set with iB (TiB/GiB etc). Example: 10 TiB or 512 GiB. If it is not, the quota enforcement will be inaccurate
 
 ### Configuring Tenants
 
-A `tenant` is a Kubernetes cluster that a role will be bound to. For example, to create a tenant named `csmtenant-sample`:
+A `tenant` is a Kubernetes cluster that a role will be bound to. Edit these parameters in the manifest:
+
+   | Parameter | Description | Required | Default |
+   | --------- | ----------- | -------- |-------- |
+   | roles | A comma seperate list of roles that the tenant can be associated with. | Yes | - |
+   | approveSdc | ApproveSdc is used to enable an SDC to access the MDM while the SDC is in restricted access mode. | Yes | false |
+   | revoke | Revoke is a boolean to indicate whether tenant is revoked. Set to `true` to revoke the tenant but keep it in CSM Auth. | Yes | false |
+   | volumePrefix | The prefix that all volumes and snapshots will contain to show association with the tenant. It should not exceed 3 characters. | Yes | - |
+
+For example, to create a tenant named `csmtenant-sample`:
 
 ```yaml
 apiVersion: csm-authorization.storage.dell.com/v1alpha1
@@ -115,16 +147,9 @@ spec:
   roles: role1
   approveSdc: false
   revoke: false
-  # This prefix is added for each new volume provisioned by the tenant. 
-  # It should not exceed 3 characters. Example: tn1
   volumePrefix: tn1
 
 ```
-
->__Note__: 
-> - The `roles` are a comma seperate list of roles that the tenant can be associated with.
-> - The `volumePrefix` is the prefix that all volumes and snapshots will contain to show association with the tenant.
-> - By creating a tenant, it will automatically bind with the roles for usage.
 
 ### Generate a Token
 
