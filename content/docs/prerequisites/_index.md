@@ -38,6 +38,7 @@ weight: 1
 > Notes:
 > * Any orchestrator platform or version that's not mentioned here must be self-certified using [Cert-CSI](../support/cert-csi/) in order to be supported.  Although not mandatory, we recommend users to use orchestrator platforms and versions that have not met their end of life.
 > * CSM Authorization Server v1 is not supported on Red Hat OpenShift. However, it is supported to install CSM Authorization Server v1 on standard Kubernetes and a Dell CSI Drvier enabled with CSM Authorization on Red Hat OpenShift. CSM Authorization Server v2 is supported on Red Hat OpenShift.
+> * The OpenShift Virtualization platform support is not available for Unity.
 
 ## Tested Host Operating Systems
 
@@ -89,7 +90,7 @@ The table below lists the driver and modules versions installable with the CSM O
 | CSI PowerMax       | 2.11.0  | ✔ 1.11.0          | ✔ 1.9.0        | ✔ 1.9.0           | ✔ 1.10.0      |
 | CSI PowerMax       | 2.10.1  | ✔ 1.10.1          | ✔ 1.8.1        | ✔ 1.8.1           | ❌            |
 | CSI PowerMax       | 2.9.1   | ✔ 1.9.1           | ✔ 1.7.1        | ✔ 1.7.0           | ❌            |
+| CSI Unity XT       | 2.12.0  | ❌                | ❌             | ❌                | ❌            |
 | CSI Unity XT       | 2.11.0  | ❌                | ❌             | ❌                | ❌            |
 | CSI Unity XT       | 2.10.1  | ❌                | ❌             | ❌                | ❌            |
-| CSI Unity XT       | 2.9.1   | ❌                | ❌             | ❌                | ❌            |
 {{</table>}}

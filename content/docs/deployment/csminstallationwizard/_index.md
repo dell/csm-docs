@@ -29,10 +29,10 @@ The [Dell Container Storage Modules Installation Wizard](./src/index.html) is a 
 | CSI PowerScale     | 2.10.1    |✔️      |✔️        |
 | CSI PowerScale     | 2.9.1     |✔️      |✔️        | 
 | CSI PowerScale     | 2.8.0     |✔️      |✔️        | 
+| CSI Unity XT       | 2.12.0    |✔️      |❌        |
 | CSI Unity XT       | 2.11.0    |✔️      |❌        |
-| CSI Unity XT       | 2.10.1    |✔️      |❌        |
+| CSI Unity XT       | 2.10.1    |✔️      |❌        | 
 | CSI Unity XT       | 2.9.1     |✔️      |❌        | 
-| CSI Unity XT       | 2.8.0     |✔️      |❌        | 
 
 >NOTE: The Installation Wizard currently does not support operator-based manifest file generation for Unity XT and PowerFlex drivers.
 
