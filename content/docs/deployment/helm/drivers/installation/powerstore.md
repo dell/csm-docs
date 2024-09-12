@@ -92,7 +92,7 @@ Set up Linux multipathing as follows:
 - Enable `user_friendly_names` and `find_multipaths` in the `multipath.conf` file.
 - Ensure that the multipath command for `multipath.conf` is available on all Kubernetes nodes.
 
-> NOTE: to enable e multipathd on RedHat CoreOS you can refer to sample `MachineConfig` given [here](../../../csmoperator/drivers/powerstore/#multipathd-machineconfig).
+> NOTE: To enable multipathd on RedHat CoreOS, you can refer to sample `MachineConfig` given [here](../../../../csmoperator/drivers/powerstore/#multipathd-machineconfig).
 
 Once the file has been configured correctly, enable the multipath service by running the following command:
 `sudo /sbin/mpathconf –-enable --with_multipathd y`
