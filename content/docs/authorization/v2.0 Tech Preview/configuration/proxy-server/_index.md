@@ -133,7 +133,7 @@ A `tenant` is a Kubernetes cluster that a role will be bound to. Edit these para
 For example, to create a tenant named `csmtenant-sample`:
 
 ```yaml
-apiVersion: csm-authorization.storage.dell.com/v1alpha1
+apiVersion: csm-authorization.storage.dell.com/v1
 kind: CSMTenant
 metadata:
   labels:
