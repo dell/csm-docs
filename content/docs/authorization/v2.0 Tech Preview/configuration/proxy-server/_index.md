@@ -56,8 +56,8 @@ A `storage` entity in CSM Authorization consists of the storage type (`powerflex
    | type | The type of the stoage array. | Yes | - |
    | endpoint | HTTPS REST API endpoint of the backend storage array. | Yes | - |
    | systemID | System ID of the backend storage array. | Yes | - |
-   | vault.identifier | The credential manager identifier to be used. | Yes | - |
-   | vault.kvEngine | The way that credentials for the storage array are stored. | Yes | secret |
+   | vault.identifier | The identifier of the Vault to be used that was configured in the Authorization CR. | Yes | - |
+   | vault.kvEngine | The path to the KV secrets engine. | Yes | secret |
    | vault.path | The location within the store that the credentials for the array are stored. | Yes | - |
    | skipCertificateValidation | A boolean that enables/disables certificate validation of the backend storage array. | No | true |
    | pollInterval | PollInterval is the polling frequency to test the storage connectivity. | No | 30s |
