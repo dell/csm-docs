@@ -192,6 +192,8 @@ Use the below command to replace or update the secret:
 | healthMonitor.enabled | Enable/Disable health monitor of CSI volumes- volume usage, volume condition | No | false |
 | nodeSelector | Defines what nodes would be selected for pods of node daemonset. Leave as blank to use all nodes. | Yes | " " |
 | tolerations | Defines tolerations that would be applied to node daemonset. Leave as blank to install node driver only on worker nodes. | Yes | " " |
+| **sdc** | This section allows the configuration of the SDC installation. | - | - |
+| enabled | A boolean that enables/disables installation of the SDC. | No | true |
 | **renameSDC** | This section allows the rename operation for SDC. | - | - |
 | enabled | A boolean that enable/disable rename SDC feature. | No | false |
 | prefix | Defines a string for the prefix of the SDC. | No | " " |
