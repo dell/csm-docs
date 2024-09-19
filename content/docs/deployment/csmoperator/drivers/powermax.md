@@ -318,8 +318,8 @@ Create a secret named powermax-certs in the namespace where the CSI PowerMax dri
         namespace: powermax
       data:
         powermax-array-config.yaml: |
-          X_CSI_POWERMAX_PORTGROUPS: pg1"
-          X_CSI_TRANSPORT_PROTOCOL: "ISCSI" # Defaults to auto
+          X_CSI_POWERMAX_PORTGROUPS: "" # Portgroup is required in case of iSCSI only
+          X_CSI_TRANSPORT_PROTOCOL: "" # Defaults to empty
           X_CSI_POWERMAX_ENDPOINT: "https://10.0.0.0:8443"
           X_CSI_MANAGED_ARRAYS: "000000000000,000000000000,"
    ```
