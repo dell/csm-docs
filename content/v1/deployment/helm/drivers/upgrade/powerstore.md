@@ -7,10 +7,6 @@ weight: 1
 Description: Upgrade PowerStore CSI driver
 ---
 
-{{% pageinfo color="primary" %}}
-An issue impacting usage of the NVMe protocol has been identified in the PowerStore CSI Driver version v2.11.0. The problem prevents mounts of NVMe volumes across all orchestration platforms. Users are advised to use an alternate block protocol (e.g. iSCSI, FC) or delay upgrading to the v2.11.0 version of the PowerStore driver until an updated driver has been published.
-{{% /pageinfo %}}
-
 You can upgrade the CSI Driver for Dell PowerStore using Helm.
 
 ## Update Driver from v2.9.0 to v2.10.1 using Helm
