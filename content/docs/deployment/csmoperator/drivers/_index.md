@@ -38,6 +38,11 @@ Once the driver `Custom Resource (CR)` is created, you can verify the installati
 
 
 ### Update CSI Drivers
+
+{{% pageinfo color="primary" %}}
+An issue impacting usage of the NVMe protocol has been identified in the PowerStore CSI Driver version v2.11.0. The problem prevents mounts of NVMe volumes across all orchestration platforms. Users are advised to use an alternate block protocol (e.g. iSCSI, FC) or delay upgrading to the v2.11.0 version of the PowerStore driver until an updated driver has been published.
+{{% /pageinfo %}}
+
 The CSI Drivers and CSM Modules installed by the Dell CSM Operator can be updated like any Kubernetes resource. This can be achieved in various ways which include:
 
 * Modifying the installation directly via `kubectl edit`
