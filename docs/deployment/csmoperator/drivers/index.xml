@@ -39,9 +39,8 @@ Listing installed drivers with the ContainerStorageModule CRD User can query for
       <link>https://dell.github.io/csm-docs/docs/deployment/csmoperator/drivers/powerstore/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://dell.github.io/csm-docs/docs/deployment/csmoperator/drivers/powerstore/</guid>
-      <description>Installing CSI Driver for PowerStore via Dell CSM Operator The CSI Driver for Dell PowerStore can be installed via the Dell CSM Operator. To deploy the Operator, follow the instructions available here.
-Note that the deployment of the driver using the operator does not use any Helm charts and the installation and configuration parameters will be slightly different from the one specified via the Helm installer.
-Check existing ContainerStorageModule CRD User can query for all Dell CSI drivers using the following command:</description>
+      <description>An issue impacting usage of the NVMe protocol has been identified in the PowerStore CSI Driver version v2.11.0. The problem prevents mounts of NVMe volumes across all orchestration platforms. Users are advised to use an alternate block protocol (e.g. iSCSI, FC) or delay upgrading to the v2.11.0 version of the PowerStore driver until an updated driver has been published.
+Installing CSI Driver for PowerStore via Dell CSM Operator The CSI Driver for Dell PowerStore can be installed via the Dell CSM Operator.</description>
     </item>
     <item>
       <title>Unity XT</title>
