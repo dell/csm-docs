@@ -15,12 +15,12 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/docs/csidriver/release/powerstore/" /><meta property="article:section" content="docs" />
 
-<meta property="article:modified_time" content="2024-07-30T01:25:59+05:30" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2024-09-20T15:39:00-04:00" /><meta property="og:site_name" content="Dell Technologies" />
 
 <meta itemprop="name" content="PowerStore">
 <meta itemprop="description" content="Release notes for PowerStore CSI driver">
-<meta itemprop="dateModified" content="2024-07-30T01:25:59+05:30" />
-<meta itemprop="wordCount" content="805">
+<meta itemprop="dateModified" content="2024-09-20T15:39:00-04:00" />
+<meta itemprop="wordCount" content="844">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="PowerStore"/>
 <meta name="twitter:description" content="Release notes for PowerStore CSI driver"/>
@@ -71,7 +71,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.e5674b2507be307f4466a47cd12aef57.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.d2170dfe6cd2d41b36e34ccac479c79e.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -95,7 +95,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.e5674b2507be307f4466a47cd12aef57.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.d2170dfe6cd2d41b36e34ccac479c79e.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -722,6 +722,10 @@ Known Issues <a class="header-link"  href="#known-issues" style=" display: inlin
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>Mount of block devices using the NVMe protocols fail. <br><a href="https://github.com/dell/csm/issues/1469">https://github.com/dell/csm/issues/1469</a></td>
+<td>Use an alternate block protocol (iSCSI, FC) or delay upgrading to the v2.11.0 version of the PowerStore driver and wait for an update of the driver to be published.</td>
+</tr>
 <tr>
 <td>Delete namespace that has PVCs and pods created with the driver. The External health monitor sidecar crashes as a result of this operation</td>
 <td>Deleting the namespace deletes the PVCs first and then removes the pods in the namespace. This brings a condition where pods exist without their PVCs and causes the external-health-monitor sidecar to crash. This is a known issue and has been reported at <a href="https://github.com/kubernetes-csi/external-health-monitor/issues/100">https://github.com/kubernetes-csi/external-health-monitor/issues/100</a> <br></td>

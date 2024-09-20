@@ -17,13 +17,13 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/docs/deployment/csmoperator/drivers/powerstore/" /><meta property="article:section" content="docs" />
 
-<meta property="article:modified_time" content="2024-07-30T01:25:59+05:30" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2024-09-20T15:39:00-04:00" /><meta property="og:site_name" content="Dell Technologies" />
 
 <meta itemprop="name" content="PowerStore">
 <meta itemprop="description" content="Installing Dell CSI Driver for PowerStore via Dell CSM Operator
 ">
-<meta itemprop="dateModified" content="2024-07-30T01:25:59+05:30" />
-<meta itemprop="wordCount" content="1455">
+<meta itemprop="dateModified" content="2024-09-20T15:39:00-04:00" />
+<meta itemprop="wordCount" content="1514">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="PowerStore"/>
 <meta name="twitter:description" content="Installing Dell CSI Driver for PowerStore via Dell CSM Operator
@@ -75,7 +75,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.e5674b2507be307f4466a47cd12aef57.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.d2170dfe6cd2d41b36e34ccac479c79e.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -99,7 +99,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.e5674b2507be307f4466a47cd12aef57.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.d2170dfe6cd2d41b36e34ccac479c79e.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -681,7 +681,14 @@
 	<header class="article-meta">
 		
 </header>
-	<h2 id="installing-csi-driver-for-powerstore-via-dell-csm-operator">
+	
+
+<div class="pageinfo pageinfo-primary">
+<p>An issue impacting usage of the NVMe protocol has been identified in the PowerStore CSI Driver version v2.11.0. The problem prevents mounts of NVMe volumes across all orchestration platforms. Users are advised to use an alternate block protocol (e.g. iSCSI, FC) or delay upgrading to the v2.11.0 version of the PowerStore driver until an updated driver has been published.</p>
+
+</div>
+
+<h2 id="installing-csi-driver-for-powerstore-via-dell-csm-operator">
 Installing CSI Driver for PowerStore via Dell CSM Operator <a class="header-link"  href="#installing-csi-driver-for-powerstore-via-dell-csm-operator" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
             <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
                 <path d="M0 0h24v24H0z" fill="none"/>

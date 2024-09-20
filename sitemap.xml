@@ -36,7 +36,7 @@
     <lastmod>2024-07-30T01:25:59+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/docs/deployment/csmoperator/drivers/</loc>
-    <lastmod>2024-03-21T02:39:59+05:30</lastmod>
+    <lastmod>2024-09-20T15:39:00-04:00</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/docs/deployment/helm/drivers/</loc>
     <lastmod>2024-03-21T02:39:59+05:30</lastmod>
@@ -327,7 +327,7 @@
     <lastmod>2024-07-01T15:16:31+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/docs/deployment/helm/drivers/upgrade/powerstore/</loc>
-    <lastmod>2024-07-30T01:25:59+05:30</lastmod>
+    <lastmod>2024-09-20T15:39:00-04:00</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/v1/csidriver/features/powerstore/</loc>
     <lastmod>2024-07-30T01:25:59+05:30</lastmod>
@@ -1965,7 +1965,7 @@
     <lastmod>2024-03-21T02:39:59+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/docs/csidriver/release/powerstore/</loc>
-    <lastmod>2024-07-30T01:25:59+05:30</lastmod>
+    <lastmod>2024-09-20T15:39:00-04:00</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/docs/csidriver/test/powerstore/</loc>
     <lastmod>2024-03-21T02:39:59+05:30</lastmod>
@@ -1974,10 +1974,10 @@
     <lastmod>2024-04-11T10:20:11-03:00</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/docs/deployment/csmoperator/drivers/powerstore/</loc>
-    <lastmod>2024-07-30T01:25:59+05:30</lastmod>
+    <lastmod>2024-09-20T15:39:00-04:00</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/docs/deployment/helm/drivers/installation/powerstore/</loc>
-    <lastmod>2024-07-30T01:25:59+05:30</lastmod>
+    <lastmod>2024-09-20T15:39:00-04:00</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/v1/csidriver/release/powerstore/</loc>
     <lastmod>2024-07-30T01:25:59+05:30</lastmod>
