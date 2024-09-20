@@ -4,6 +4,10 @@ description: >
   Installing CSI Driver for PowerStore via Helm
 ---
 
+{{% pageinfo color="primary" %}}
+An issue impacting usage of the NVMe protocol has been identified in the PowerStore CSI Driver version v2.11.0. The problem prevents mounts of NVMe volumes across all orchestration platforms. Users are advised to use an alternate block protocol (e.g. iSCSI, FC) or delay upgrading to the v2.11.0 version of the PowerStore driver until an updated driver has been published.
+{{% /pageinfo %}}
+
 The CSI Driver for Dell PowerStore can be deployed by using the provided Helm v3 charts and installation scripts on both Kubernetes and OpenShift platforms. For more detailed information on the installation scripts, review the script [documentation](https://github.com/dell/csi-powerstore/tree/master/dell-csi-helm-installer).
 
 ## Prerequisites
