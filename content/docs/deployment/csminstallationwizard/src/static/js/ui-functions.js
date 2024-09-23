@@ -213,6 +213,7 @@ function onNodeSelectorChange(nodeSelectorNoteValue, csmMapValue) {
 	}
 }
 
+
 function onRenameSDCChange(driverName, CONSTANTS_PARAM) {
 	if ($("#rename-sdc").prop('checked') === true) {
 		if (driverName === CONSTANTS_PARAM.POWERFLEX){
@@ -347,6 +348,7 @@ function displayModules(installationType, driverName, CONSTANTS_PARAM) {
 	$(".replication-operator-clusterid").hide();
 	$(".replication-helm-arrayid").hide();
 	$(".replication-helm-unisphere").hide();
+	$(".enable-sdc").hide();
 	$(".rename-sdc-feature").hide();
 	$(".approve-sdc").hide();
 	$(".nfs-feature").hide();
@@ -442,6 +444,7 @@ function displayModules(installationType, driverName, CONSTANTS_PARAM) {
 			$(".cert-secret-count-wrapper").show();
 			$("div#snap-prefix").hide();
 			$(".storage-capacity").show();
+			$(".enable-sdc").show();
 			$(".rename-sdc-feature").show();
 			$(".approve-sdc").show();
 			if (document.getElementById("csm-version").value === "1.8.0") {

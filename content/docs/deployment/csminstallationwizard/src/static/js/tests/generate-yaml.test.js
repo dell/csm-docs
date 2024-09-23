@@ -78,7 +78,7 @@ describe("GIVEN setValues function", () => {
 	test("SHOULD return expected DriverValues for Helm", () => {
 		document.body.innerHTML = `
             <select id="csm-version">
-                <option value="1.7.0">CSM 1.7</option>
+                <option value="1.12.0">CSM 1.12</option>
             </select>
             <select id="installation-type">
                 <option value="helm" selected>Helm</option>
@@ -117,6 +117,7 @@ describe("GIVEN setValues function", () => {
             <input type="text" id="manage-array-id">
             <input type="text" id="manage-array-endpoint-url">
             <input type="checkbox" id="topology">
+			<input type="checkbox" id="enable-sdc">
 			<input type="checkbox" id="rename-sdc">
 			<input type="text" id="sdc-prefix" value="">
 			<input type="checkbox" id="approve-sdc">
@@ -124,8 +125,8 @@ describe("GIVEN setValues function", () => {
         `;
 
 		const expected = {
-			csmVersion: '1.7.0',
-			driverVersion: 'v2.7.0',
+			csmVersion: '1.12.0',
+			driverVersion: 'v2.12.0',
 			imageRepository: 'dellemc',
 			monitor: false,
 			certSecretCount: '1',
@@ -190,6 +191,7 @@ describe("GIVEN setValues function", () => {
 			observabilityOperatorTopology: false,
 			topologyEnabled: false,
 			transportProtocol: "",
+                        sdcEnabled: false,
 			renameSDC: false,
 			sdcPrefix: "",
 			approveSDC: false,
@@ -396,7 +398,7 @@ describe("GIVEN createYamlString function", () => {
     ########################
     csi-powerstore:
       enabled: $POWERSTORE_ENABLED
-      version: v2.6.0
+      version: v2.12.0
       images:
         driverRepository: $IMAGE_REPOSITORY
       ## Controller ATTRIBUTES
@@ -511,7 +513,7 @@ describe("GIVEN createYamlString function", () => {
     ########################
     csi-vxflexos:
       enabled: $POWERFLEX_ENABLED
-      version: v2.6.0
+      version: v2.12.0
       images:
         driverRepository: $IMAGE_REPOSITORY
         powerflexSdc: dellemc/sdc:3.6.0.6
@@ -531,6 +533,8 @@ describe("GIVEN createYamlString function", () => {
       node:
         healthMonitor:
           enabled: $HEALTH_MONITOR_ENABLED
+        sdc:
+          enabled: $SDC_ENABLED
         nodeSelector: $NODE_POD_NODE_SELECTOR
         renameSDC:
 		  enabled: $RENAME_SDC_ENABLED
@@ -574,7 +578,7 @@ describe("GIVEN createYamlString function", () => {
     ########################
     csi-unity:
       enabled: $UNITY_ENABLED
-      version: v2.6.0
+      version: v2.12.0
       images:
         driverRepository: $IMAGE_REPOSITORY
       certSecretCount: 1
@@ -662,8 +666,8 @@ describe("GIVEN createYamlString function", () => {
   `;
 
 	const testObject = {
-		csmVersion: "1.6.0",
-		driverVersion: "v2.6.0",
+		csmVersion: "1.12.0",
+		driverVersion: "v2.12.0",
 		imageRepository: "dellemc",
 		maxVolumesPerNode: "0",
 		controllerCount: "1",
@@ -701,6 +705,7 @@ describe("GIVEN createYamlString function", () => {
 		vSphereVCenterHost: "00.000.000.00",
 		vSphereVCenterCredSecret: "vcenter-creds",
 		migration: false,
+                sdcEnabled: false,
 		renameSDC: false,
 		sdcPrefix: "sdc-test",
 		approveSDC: false
@@ -712,7 +717,7 @@ describe("GIVEN createYamlString function", () => {
     ########################
     csi-powerstore:
       enabled: true
-      version: v2.6.0
+      version: v2.12.0
       images:
         driverRepository: dellemc
       ## Controller ATTRIBUTES
@@ -827,7 +832,7 @@ describe("GIVEN createYamlString function", () => {
     ########################
     csi-vxflexos:
       enabled: false
-      version: v2.6.0
+      version: v2.12.0
       images:
         driverRepository: dellemc
         powerflexSdc: dellemc/sdc:3.6.0.6
@@ -848,6 +853,8 @@ describe("GIVEN createYamlString function", () => {
         healthMonitor:
           enabled: false
         nodeSelector: false
+        sdc:
+          enabled: $SDC_ENABLED
         renameSDC:
 		  enabled: false
 		  sdcPrefix: sdc-test
@@ -890,7 +897,7 @@ describe("GIVEN createYamlString function", () => {
     ########################
     csi-unity:
       enabled: false
-      version: v2.6.0
+      version: v2.12.0
       images:
         driverRepository: dellemc
       certSecretCount: 1
@@ -986,7 +993,7 @@ describe("GIVEN createYamlString function", () => {
     ########################
     csi-powerstore:
       enabled: false
-      version: v2.6.0
+      version: v2.12.0
       images:
         driverRepository: dellemc
       ## Controller ATTRIBUTES
@@ -1101,7 +1108,7 @@ describe("GIVEN createYamlString function", () => {
     ########################
     csi-vxflexos:
       enabled: true
-      version: v2.6.0
+      version: v2.12.0
       images:
         driverRepository: dellemc
         powerflexSdc: dellemc/sdc:3.6.0.6
@@ -1122,6 +1129,8 @@ describe("GIVEN createYamlString function", () => {
         healthMonitor:
           enabled: false
         nodeSelector: false
+        sdc:
+          enabled: false
         renameSDC:
 		  enabled: false
 		  sdcPrefix: sdc-test
@@ -1164,7 +1173,7 @@ describe("GIVEN createYamlString function", () => {
     ########################
     csi-unity:
       enabled: false
-      version: v2.6.0
+      version: v2.12.0
       images:
         driverRepository: dellemc
       certSecretCount: 1
@@ -1261,7 +1270,7 @@ describe("GIVEN createYamlString function", () => {
     ########################
     csi-powerstore:
       enabled: false
-      version: v2.6.0
+      version: v2.12.0
       images:
         driverRepository: dellemc
       ## Controller ATTRIBUTES
@@ -1376,7 +1385,7 @@ describe("GIVEN createYamlString function", () => {
     ########################
     csi-vxflexos:
       enabled: false
-      version: v2.6.0
+      version: v2.12.0
       images:
         driverRepository: dellemc
         powerflexSdc: dellemc/sdc:3.6.0.6
@@ -1397,6 +1406,8 @@ describe("GIVEN createYamlString function", () => {
         healthMonitor:
           enabled: false
         nodeSelector: false
+        sdc:
+	 enaled: false
         renameSDC:
 		  enabled: false
 		  sdcPrefix: sdc-test
@@ -1439,7 +1450,7 @@ describe("GIVEN createYamlString function", () => {
     ########################
     csi-unity:
       enabled: false
-      version: v2.6.0
+      version: v2.12.0
       images:
         driverRepository: dellemc
       certSecretCount: 1
@@ -1538,7 +1549,7 @@ describe("GIVEN createYamlString function", () => {
     ########################
     csi-powerstore:
       enabled: false
-      version: v2.6.0
+      version: v2.12.0
       images:
         driverRepository: dellemc
       ## Controller ATTRIBUTES
@@ -1653,7 +1664,7 @@ describe("GIVEN createYamlString function", () => {
     ########################
     csi-vxflexos:
       enabled: false
-      version: v2.6.0
+      version: v2.12.0
       images:
         driverRepository: dellemc
         powerflexSdc: dellemc/sdc:3.6.0.6
@@ -1674,6 +1685,8 @@ describe("GIVEN createYamlString function", () => {
         healthMonitor:
           enabled: false
         nodeSelector: false
+        sdc:
+          enabled: false
         renameSDC:
 		  enabled: false
 		  sdcPrefix: sdc-test
@@ -1716,7 +1729,7 @@ describe("GIVEN createYamlString function", () => {
     ########################
     csi-unity:
       enabled: false
-      version: v2.6.0
+      version: v2.12.0
       images:
         driverRepository: dellemc
       certSecretCount: 1
@@ -1814,7 +1827,7 @@ describe("GIVEN createYamlString function", () => {
     ########################
     csi-powerstore:
       enabled: false
-      version: v2.6.0
+      version: v2.12.0
       images:
         driverRepository: dellemc
       ## Controller ATTRIBUTES
@@ -1929,7 +1942,7 @@ describe("GIVEN createYamlString function", () => {
     ########################
     csi-vxflexos:
       enabled: false
-      version: v2.6.0
+      version: v2.12.0
       images:
         driverRepository: dellemc
         powerflexSdc: dellemc/sdc:3.6.0.6
@@ -1950,6 +1963,8 @@ describe("GIVEN createYamlString function", () => {
         healthMonitor:
           enabled: false
         nodeSelector: false
+        sdc:
+          enabled: false
         renameSDC:
 		  enabled: false
 		  sdcPrefix: sdc-test
@@ -1992,7 +2007,7 @@ describe("GIVEN createYamlString function", () => {
     ########################
     csi-unity:
       enabled: true
-      version: v2.6.0
+      version: v2.12.0
       images:
         driverRepository: dellemc
       certSecretCount: 1
