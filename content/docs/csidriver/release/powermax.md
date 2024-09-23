@@ -26,6 +26,7 @@ description: Release notes for PowerMax CSI driver
 
 ### Fixed Issues
 
+- [#1469 - [BUG]: Mounts using NVMe on PowerStore fails in v2.11 of the driver](https://github.com/dell/csm/issues/1469)
 - [#1209 - [BUG]: Doc hyper links in driver Readme is broken](https://github.com/dell/csm/issues/1209)
 - [#1218 - [BUG]: Add the helm-charts-version parameter to the install command for all drivers in csm-docs](https://github.com/dell/csm/issues/1218)
 - [#1238 - [BUG]: Missing mountPropagation param for Powermax node template in CSM-Operator](https://github.com/dell/csm/issues/1238)
