@@ -64,14 +64,14 @@ const CONSTANTS = {
 };
 
 const testCSMMap = new Map([
-	["csmVersion", "1.7.0"],
+	["csmVersion", "1.12.0"],
 	["imageRepository", "dellemc"],
 	["maxVolumesPerNode", "0"],
 	["controllerCount", "1"],
 	["volNamePrefix", "csivol"],
 	["snapNamePrefix", "csi-snap"],
 	["nodeSelectorLabel", "node-role.kubernetes.io/control-plane:"],
-	["driverVersion", "v2.7.0"],
+	["driverVersion", "v2.12.0"],
 ]);
 
 describe("GIVEN setValues function", () => {
@@ -205,7 +205,7 @@ describe("GIVEN setValues function", () => {
 	test("SHOULD return expected DriverValues for Operator", () => {
 		document.body.innerHTML = `
             <select id="csm-version">
-                <option value="1.7.0">CSM 1.7</option>
+                <option value="1.12.0">CSM 1.12</option>
             </select>
             <select id="installation-type">
                 <option value="operator" selected>Operator</option>
@@ -244,6 +244,7 @@ describe("GIVEN setValues function", () => {
             <input type="text" id="manage-array-endpoint-url">
             <input type="checkbox" id="topology">
             <input type="checkbox" id="leader-election">
+	    <input type="checkbox" id="enable-sdc">
 			<input type="checkbox" id="rename-sdc">
 			<input type="text" id="sdc-prefix" value="">
 			<input type="checkbox" id="approve-sdc">
@@ -251,8 +252,8 @@ describe("GIVEN setValues function", () => {
         `;
 
 		const expected = {
-			csmVersion: '1.7.0',
-			driverVersion: 'v2.7.0',
+			csmVersion: '1.12.0',
+			driverVersion: 'v2.12.0',
 			imageRepository: 'dellemc',
 			monitor: false,
 			certSecretCount: '1',
@@ -317,6 +318,7 @@ describe("GIVEN setValues function", () => {
 			observabilityOperatorTopology: false,
 			topologyEnabled: false,
 			transportProtocol: "",
+			sdcEnabled: false,
 			renameSDC: false,
 			sdcPrefix: "",
 			approveSDC: false,
@@ -852,9 +854,9 @@ describe("GIVEN createYamlString function", () => {
       node:
         healthMonitor:
           enabled: false
-        nodeSelector: false
         sdc:
-          enabled: $SDC_ENABLED
+          enabled: false
+        nodeSelector: false
         renameSDC:
 		  enabled: false
 		  sdcPrefix: sdc-test
@@ -1128,9 +1130,9 @@ describe("GIVEN createYamlString function", () => {
       node:
         healthMonitor:
           enabled: false
-        nodeSelector: false
         sdc:
           enabled: false
+        nodeSelector: false
         renameSDC:
 		  enabled: false
 		  sdcPrefix: sdc-test
@@ -1405,9 +1407,9 @@ describe("GIVEN createYamlString function", () => {
       node:
         healthMonitor:
           enabled: false
-        nodeSelector: false
         sdc:
-	 enaled: false
+          enabled: false
+        nodeSelector: false
         renameSDC:
 		  enabled: false
 		  sdcPrefix: sdc-test
@@ -1684,9 +1686,9 @@ describe("GIVEN createYamlString function", () => {
       node:
         healthMonitor:
           enabled: false
-        nodeSelector: false
         sdc:
           enabled: false
+        nodeSelector: false
         renameSDC:
 		  enabled: false
 		  sdcPrefix: sdc-test
@@ -1962,9 +1964,9 @@ describe("GIVEN createYamlString function", () => {
       node:
         healthMonitor:
           enabled: false
-        nodeSelector: false
         sdc:
           enabled: false
+        nodeSelector: false
         renameSDC:
 		  enabled: false
 		  sdcPrefix: sdc-test
