@@ -4,10 +4,6 @@ description: >
   Installing CSI Driver for PowerStore via Helm
 ---
 
-{{% pageinfo color="primary" %}}
-An issue impacting usage of the NVMe protocol has been identified in the PowerStore CSI Driver version v2.11.0. The problem prevents mounts of NVMe volumes across all orchestration platforms. Users are advised to use an alternate block protocol (e.g. iSCSI, FC) or delay upgrading to the v2.11.0 version of the PowerStore driver until an updated driver has been published.
-{{% /pageinfo %}}
-
 The CSI Driver for Dell PowerStore can be deployed by using the provided Helm v3 charts and installation scripts on both Kubernetes and OpenShift platforms. For more detailed information on the installation scripts, review the script [documentation](https://github.com/dell/csi-powerstore/tree/master/dell-csi-helm-installer).
 
 ## Prerequisites
@@ -187,7 +183,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
 ## Install the Driver
 
 **Steps**
-1. Run `git clone -b v2.11.0 https://github.com/dell/csi-powerstore.git` to clone the git repository.
+1. Run `git clone -b v2.11.1 https://github.com/dell/csi-powerstore.git` to clone the git repository.
 2. Ensure that you have created namespace where you want to install the driver. You can run `kubectl create namespace csi-powerstore` to create a new one. "csi-powerstore" is just an example. You can choose any name for the namespace.
    But make sure to align to the same namespace during the whole installation.
 3. Edit `samples/secret/secret.yaml` file and configure connection information for your PowerStore arrays changing following parameters:
@@ -214,7 +210,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
     > If you do not specify `arrayID` parameter in the storage class then the array that was specified as the default would be used for provisioning volumes.
 6. Download the default values.yaml file 
    ```bash
-   cd dell-csi-helm-installer && wget -O my-powerstore-settings.yaml https://github.com/dell/helm-charts/raw/csi-powerstore-2.11.0/charts/csi-powerstore/values.yaml
+   cd dell-csi-helm-installer && wget -O my-powerstore-settings.yaml https://github.com/dell/helm-charts/raw/csi-powerstore-2.11.1/charts/csi-powerstore/values.yaml
    ```
 7. Edit the newly created values file and provide values for the following parameters `vi my-powerstore-settings.yaml`:
 
