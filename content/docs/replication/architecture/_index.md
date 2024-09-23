@@ -103,7 +103,7 @@ It is primarily responsible for the following:
 ![common](../common.png)
 
 CSM Replication Controller is a Kubernetes application deployed independently of CSI drivers and is responsible for
-the communication between Kubernetes clusters. _One_ CSM Replication Controller manages replication operations for _all_ CSI driver installations on the Kubernetes cluster. 
+the communication between Kubernetes clusters.
 
 The details about the clusters it needs to connect to are provided in the form of a ConfigMap with references to secrets
 containing the details(KubeConfig/ServiceAccount tokens) required to connect to the respective clusters.
