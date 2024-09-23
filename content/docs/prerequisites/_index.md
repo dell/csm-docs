@@ -86,7 +86,7 @@ The table below lists the driver and modules versions installable with the CSM O
 | CSI PowerStore     | 2.11.1  | ❌                | ❌             | ❌                | ✔ 1.10.0      |
 | CSI PowerStore     | 2.10.1  | ❌                | ❌             | ❌                | ✔ 1.9.1       |
 | CSI PowerStore     | 2.9.1   | ❌                | ❌             | ❌                | ✔ 1.8.1       |
-| CSI PowerMax       | 2.11.1  | ✔ 1.11.0          | ✔ 1.9.0        | ✔ 1.9.0           | ✔ 1.10.0      |
+| CSI PowerMax       | 2.11.0  | ✔ 1.11.0          | ✔ 1.9.0        | ✔ 1.9.0           | ✔ 1.10.0      |
 | CSI PowerMax       | 2.10.1  | ✔ 1.10.1          | ✔ 1.8.1        | ✔ 1.8.1           | ❌            |
 | CSI PowerMax       | 2.9.1   | ✔ 1.9.1           | ✔ 1.7.1        | ✔ 1.7.0           | ❌            |
 | CSI Unity XT       | 2.11.0  | ❌                | ❌             | ❌                | ❌            |
