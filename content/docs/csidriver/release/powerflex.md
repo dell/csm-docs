@@ -32,6 +32,7 @@ description: Release notes for PowerFlex CSI driver
 - [#1355 - [BUG]: Indentation of secret.yaml mentioned on the csm-doc portal for powerflex driver is incorrect.](https://github.com/dell/csm/issues/1355)
 - [#1364 - [BUG]: mkfsFormatOption not working for powerflex](https://github.com/dell/csm/issues/1364)
 - [#1366 - [BUG]:  Support Minimum 3GB Volume Size for NFS in CSI-PowerFlex](https://github.com/dell/csm/issues/1366)
+- [#1482 - [BUG]: sdc 4.5.2.1 fails to load when deployed on OCP 4.16.x using csm-operator](https://github.com/dell/csm/issues/1482)
 
 ### Known Issues
 
