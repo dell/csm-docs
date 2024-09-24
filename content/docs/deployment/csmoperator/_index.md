@@ -25,7 +25,7 @@ The table below lists the driver and modules versions installable with the CSM O
 | CSI PowerMax       | 2.11.0  | ✔ 1.11.0          | ✔ 1.9.0        | ✔ 1.9.0           | ✔ 1.10.0      |
 | CSI PowerMax       | 2.10.1  | ✔ 1.10.1          | ✔ 1.8.1        | ✔ 1.8.1           | ❌            |
 | CSI PowerMax       | 2.9.1   | ✔ 1.9.1           | ✔ 1.7.1        | ✔ 1.7.0           | ❌            |
-| CSI Unity XT       | 2.11.0  | ❌                | ❌             | ❌                | ❌            |
+| CSI Unity XT       | 2.11.1  | ❌                | ❌             | ❌                | ❌            |
 | CSI Unity XT       | 2.10.1  | ❌                | ❌             | ❌                | ❌            |
 | CSI Unity XT       | 2.9.1   | ❌                | ❌             | ❌                | ❌            |
 
@@ -187,7 +187,7 @@ Here is the output of a request to build an offline bundle for the Dell CSM Oper
    dellemc/csipowermax-reverseproxy:v2.10.0
    dellemc/csi-powermax:v2.11.0
    dellemc/csi-powerstore:v2.11.1
-   dellemc/csi-unity:v2.11.0
+   dellemc/csi-unity:v2.11.1
    dellemc/csi-vxflexos:v2.11.0
    dellemc/csm-authorization-sidecar:v1.11.0
    dellemc/csm-metrics-powerflex:v1.9.0
