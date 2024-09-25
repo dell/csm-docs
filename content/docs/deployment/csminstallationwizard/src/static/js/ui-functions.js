@@ -84,6 +84,7 @@ function onArrayChange() {
 		onResiliencyChange(podmonNote);
 		onSnapshotChange(snapshotNote, driver, CONSTANTS);
 		onCertManagerChange(certmanagerNote);
+		onApproveSdcChange(approveSdcNote);
 		onTopologyChange(topologyNote);
 		onVSphereChange();
 		onReplicationChange(replicationNote);
@@ -155,6 +156,16 @@ function onCertManagerChange(certmanagerNoteValue) {
 		$('div#certmanager-note-wrapper').hide();	
 	}
 }
+
+function onApproveSdcChange(approveSdcNoteValue) {
+	if ($("#approve-sdc").prop('checked') === false) {
+		$('div#approvesdc-note-wrapper').show();
+		$("#approvesdc-note").html(approveSdcNoteValue);
+	} else {
+		$('div#approvesdc-note-wrapper').hide();	
+	}
+}
+
 
 function onTopologyChange(topologyNoteValue) {
 	if ($("#topology").prop('checked') === true) {
@@ -555,6 +566,7 @@ if (typeof exports !== 'undefined') {
 		onOperatorResiliencyChange,
 		onSnapshotChange,
 		onCertManagerChange,
+                onApproveSdcChange,
 		onTopologyChange,
 		onReplicationChange,
 		onVSphereChange,
