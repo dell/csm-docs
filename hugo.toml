@@ -210,3 +210,4 @@ algolia_docsearch = false
     disable = false
 
 ignoreFiles = ['^content/docs/deployment/csminstallationwizard/src/index\.html$']
+

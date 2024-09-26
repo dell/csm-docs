@@ -11,7 +11,7 @@
 
     > h1 {
         font-weight: $font-weight-bold;
-        margin-bottom: 1rem;
+        margin-bottom: 1rem; 
     }
 
     > h2 {
@@ -75,8 +75,10 @@
 
     .lead {
         margin-bottom: 1.5rem;
-    }
-}
+    }  
+   
+} 
+
 
 .td-title {
     margin-top: 1rem;
@@ -85,6 +87,7 @@
     @include media-breakpoint-up(sm) {
         font-size: 3rem;
     }
-}
+} 
+
 
 

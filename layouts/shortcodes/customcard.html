@@ -1,0 +1,51 @@
+{{ $path := .Get "path" }}
+{{ $folders := slice }}
+{{ $folderCount := 0 }}
+
+{{ if (fileExists $path) }}
+  {{ $folders = readDir $path }}
+  {{ $folderCount = len (where $folders "IsDir" true) }}
+{{ end }}
+
+<style>
+  .card-hover:hover {
+      transform: scale(1.05);
+      transition: transform 0.3s;
+      border:2px solid rgb(0, 153, 255); 
+  }
+  .card-icon {
+      font-size: 2rem;
+      color: #007bff;
+  }
+  .card-link {
+      text-decoration: none;
+      color: inherit;
+  }
+  .card-link:hover {
+      text-decoration: none;
+  }
+  .card-image {
+      width: 2rem;
+      height: 2rem;
+  }
+</style>
+
+<a href="{{ .Get "link" }}" class="card-link">
+  <div class="card card-hover shadow-sm p-3 bg-white rounded">
+      <div class="row no-gutters align-items-center">
+          <div class="col-md-2 text-center">
+              {{ if .Get "image" }}
+                <img src="{{ .Get "image" }}" alt="{{ .Get "title" }}" class="card-image img-fluid">
+              {{ else }}
+                <i class="card-icon {{ .Get "icon" }}"></i>
+              {{ end }}
+          </div>
+          <div class="col-md-10">
+              <div class="card-body">
+                  <h5 class="card-title">{{ .Get "title" }}</h5>
+                  <p class="card-text">Number of items: {{ $folderCount }}</p>
+              </div>
+          </div>
+      </div>
+  </div>
+</a>
