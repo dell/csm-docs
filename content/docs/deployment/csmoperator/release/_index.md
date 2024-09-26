@@ -6,7 +6,7 @@ Description: >
   Release notes for Dell Container Storage Modules Operator
 ---
 
-## Release Notes - Container Storage Modules Operator v1.6.0
+## Release Notes - Container Storage Modules Operator v1.6.1
 
 
 
@@ -28,6 +28,7 @@ Description: >
 
 ### Fixed Issues
 
+- [#1482 - [BUG]: SDC 4.5.2.1 fails to load when deployed on OCP 4.16.x using csm-operator](https://github.com/dell/csm/issues/1482)
 - [#1200 - [BUG]: CrashLoopBackOff and OOMKilled issue in pod : Dell CSM Operator Manager POD](https://github.com/dell/csm/issues/1200)
 - [#1205 - [BUG]: Operator doesn't support non-authorization namespace](https://github.com/dell/csm/issues/1205)
 - [#1220 - [BUG]: Issue while Configuring Authorization module with Powermax CSI Driver using Operator](https://github.com/dell/csm/issues/1220)

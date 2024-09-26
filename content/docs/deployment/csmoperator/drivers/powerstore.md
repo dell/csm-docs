@@ -5,10 +5,6 @@ description: >
   Installing Dell CSI Driver for PowerStore via Dell CSM Operator
 ---
 
-{{% pageinfo color="primary" %}}
-An issue impacting usage of the NVMe protocol has been identified in the PowerStore CSI Driver version v2.11.0. The problem prevents mounts of NVMe volumes across all orchestration platforms. Users are advised to use an alternate block protocol (e.g. iSCSI, FC) or delay upgrading to the v2.11.0 version of the PowerStore driver until an updated driver has been published.
-{{% /pageinfo %}}
-
 ## Installing CSI Driver for PowerStore via Dell CSM Operator
 
 The CSI Driver for Dell PowerStore can be installed via the Dell CSM Operator.

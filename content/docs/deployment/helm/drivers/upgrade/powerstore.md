@@ -7,18 +7,14 @@ weight: 1
 Description: Upgrade PowerStore CSI driver
 ---
 
-{{% pageinfo color="primary" %}}
-An issue impacting usage of the NVMe protocol has been identified in the PowerStore CSI Driver version v2.11.0. The problem prevents mounts of NVMe volumes across all orchestration platforms. Users are advised to use an alternate block protocol (e.g. iSCSI, FC) or delay upgrading to the v2.11.0 version of the PowerStore driver until an updated driver has been published.
-{{% /pageinfo %}}
-
 You can upgrade the CSI Driver for Dell PowerStore using Helm.
 
-## Update Driver from v2.10.1 to v2.11.0 using Helm
+## Update Driver from v2.10.1 to v2.11.1 using Helm
 
 Note: While upgrading the driver via helm, controllerCount variable in myvalues.yaml can be at most one less than the number of worker nodes.
 
 **Steps**
-1. Run `git clone -b v2.11.0 https://github.com/dell/csi-powerstore.git` to clone the git repository and get the driver.
+1. Run `git clone -b v2.11.1 https://github.com/dell/csi-powerstore.git` to clone the git repository and get the driver.
 2. Edit `samples/secret/secret.yaml` file and configure connection information for your PowerStore arrays changing the following parameters:
     - *endpoint*: defines the full URL path to the PowerStore API.
     - *globalID*: specifies what storage cluster the driver should use  
@@ -42,7 +38,7 @@ Note: While upgrading the driver via helm, controllerCount variable in myvalues.
     
     kubectl create secret generic powerstore-config -n csi-powerstore --from-file=config=secret.yaml
     ```
-5. Download the default values.yaml file `cd dell-csi-helm-installer && wget -O my-powerstore-settings.yaml https://github.com/dell/helm-charts/raw/csi-powerstore-2.11.0/charts/csi-powerstore/values.yaml` and update parameters as per the requirement.
+5. Download the default values.yaml file `cd dell-csi-helm-installer && wget -O my-powerstore-settings.yaml https://github.com/dell/helm-charts/raw/csi-powerstore-2.11.1/charts/csi-powerstore/values.yaml` and update parameters as per the requirement.
 6. Run the `csi-install` script with the option _\-\-upgrade_ by running: 
      ```bash
 

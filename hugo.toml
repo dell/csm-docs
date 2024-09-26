@@ -174,7 +174,7 @@ algolia_docsearch = false
 #	icon = "fa fa-envelope"
 #        desc = "Discuss development issues around the project"
 [[params.versions]]
-  version = "Current(v1.11.0)"
+  version = "Current(v1.11.1)"
   url = "https://dell.github.io/csm-docs/docs/"
 
 [[params.versions]]
