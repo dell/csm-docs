@@ -90,7 +90,7 @@ version = "0.0"
 url_latest_version = "https://example.com"
 
 # Repository configuration (URLs for in-page links to opening issues and suggesting changes)
-github_repo = ""
+github_repo = "https://github.com/dell/csm"
 # An optional link to a related project repo. For example, the sibling repository where your product code lives.
 #github_project_repo = "https://github.com/google/docsy"
 
@@ -130,7 +130,7 @@ showLightDarkModeMenu = true
 enable = true
 # The responses that the user sees after clicking "yes" (the page was helpful) or "no" (the page was not helpful).
 yes = 'Thank you for your feedback!'
-no = 'Sorry to hear that. Please <a href="https://github.com/dell/csm/issues/new/choose">tell us how we can improve</a>.'
+no = 'Sorry to hear that. Please <a href="https://github.com/kubeflow/website/issues/new?title=[area/csm-docs]+{{.File.Path}}">tell us how we can improve</a>.'
 
 # Adds a reading time to the top of each doc.
 # If you want this feature, but occasionally need to remove the Reading time from a single page, 
