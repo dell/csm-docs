@@ -7,6 +7,9 @@
   {{ $folderCount = len (where $folders "IsDir" true) }}
 {{ end }}
 
+
+  
+
 <style>
   .card-hover:hover {
       transform: scale(1.05);
@@ -27,6 +30,13 @@
   .card-image {
       width: 2rem;
       height: 2rem;
+  } 
+  .card-title{
+    font-weight:bold;
+  } 
+  .card-text{
+    font-size:12px; 
+    color:rgb(136, 134, 134);
   }
 </style>
 
@@ -43,7 +53,7 @@
           <div class="col-md-10">
               <div class="card-body">
                   <h5 class="card-title">{{ .Get "title" }}</h5>
-                  <p class="card-text">Number of items: {{ $folderCount }}</p>
+                  <p class="card-text">Items: {{ $folderCount }}</p>
               </div>
           </div>
       </div>

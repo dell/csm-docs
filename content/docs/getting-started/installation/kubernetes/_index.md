@@ -14,23 +14,23 @@ Using Kubernetes to install and manage Dell CSI drivers involves deploying the D
 <div class="container mt-5">
     <div class="row">
       <div class="col-md-6 mb-4">
-    {{< customcard  path="content/docs/setup/installation/kubernetes/powermax" link="./powermax" icon="fas fa-star" title="PowerMax" >}}
+    {{< customcard  path="content/docs/getting-started/installation/kubernetes/powermax" link="./powermax" icon="fas fa-star" title="PowerMax" >}}
       </div>
       <div class="col-md-6 mb-4">
-       {{< customcard path="content/docs/setup/installation/powerscale" link="./powerscale" icon="fas fa-search" title="PowerScale" >}}
+       {{< customcard path="content/docs/getting-started/installation/powerscale" link="./powerscale" icon="fas fa-search" title="PowerScale" >}}
        </div>
     </div>
        <div class="row">
       <div class="col-md-6 mb-4">
-      {{< customcard path="content/docs/setup/installation/kubernetes/powerstore" link="./powerstore" icon="fas fa-cloud" title="PowerStore">}}
+      {{< customcard path="content/docs/getting-started/installation/kubernetes/powerstore" link="./powerstore" icon="fas fa-cloud" title="PowerStore">}}
       </div>
       <div class="col-md-6 mb-4">
-        {{< customcard path="content/docs/setup/installation/kubernetes/powerstore" link="./powerflex" icon="fas fa-pencil" title="PowerFlex">}} 
+        {{< customcard path="content/docs/getting-started/installation/kubernetes/powerstore" link="./powerflex" icon="fas fa-pencil" title="PowerFlex">}} 
         </div>
     </div> 
     <div class="row">
       <div class="col-md-6 mb-4">
-          {{< customcard path="content/docs/setup/installation/kubernetes/powerstore" link="./unityxt" icon="fas fa-lock" title="Unity XT">}}
+          {{< customcard path="content/docs/getting-started/installation/kubernetes/powerstore" link="./unityxt" icon="fas fa-lock" title="Unity XT">}}
         </div>  
       </div>
 </div>

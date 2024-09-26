@@ -1,4 +1,4 @@
-<div class="td-content">
+<div class="td-content" >
 	<h1>{{ .Title }}</h1>
 	{{ with .Params.description }}<div class="lead">{{ . | markdownify }}</div>{{ end }}
 	<header class="article-meta">
@@ -7,12 +7,9 @@
 			{{ partial "reading-time.html" . -}}
 		{{ end -}}
 	</header>
-	{{ .Content }}
+	{{ .Content }} 
+	<div>
 	{{ partial "feedback.html" . -}}
-	{{ if (.Site.Config.Services.Disqus.Shortname) -}}
-		<br />
-		{{- partial "disqus-comment.html" . -}}
-	{{ end -}}
-	{{ partial "page-meta-lastmod.html" . }}
+	</div>
 </div>
 {{/**/ -}}
