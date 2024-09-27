@@ -13,15 +13,15 @@ Dell PowerMax is a high-performance, enterprise-class storage solution designed 
 <div class="container mt-5">
     <div class="row">
       <div class="col-md-6 mb-4">
-    {{< customcard  path="content/docs/setup/installation/kubernetes/powermax/csmoperator" link="./csmoperator" icon="fas fa-star" title="CSM Operator" >}}
+    {{< customcard  path="content/docs/setup/installation/kubernetes/powermax/csmoperator" link="./csmoperator" icon="fas fa-star" image="" title="CSM Operator" >}}
       </div>
       <div class="col-md-6 mb-4">
-       {{< customcard path="content/docs/setup/installation/kubernetes/powermax/csmoperator" link="./helm" icon="fas fa-search" title="Helm" >}}
+       {{< customcard path="content/docs/setup/installation/kubernetes/powermax/csmoperator" link="./helm" icon="fas fa-search" image="https://raw.githubusercontent.com/helm/helm/release-2.16/docs/logos/helm_logo_transparent.png" title="Helm" >}}
        </div>
     </div>
        <div class="row">
       <div class="col-md-6 mb-4">
-      {{< customcard path="content/docs/setup/installation/kubernetes/powermax/csmoperator" link="./offline" icon="fas fa-cloud" title="Offline">}}
+      {{< customcard path="content/docs/setup/installation/kubernetes/powermax/csmoperator" link="./offline" icon="fas fa-cloud" image="https://creazilla-store.fra1.digitaloceanspaces.com/icons/3509300/offline-logo-icon-md.png" title="Offline">}}
       </div>
     </div> 
     

@@ -24,15 +24,15 @@ Before you begin, make sure you have the following:
     {{< customcard path="content/docs/getting-started/installation/kubernetes" link="./kubernetes" icon="fas fa-star" title="Kubernetes" image="https://cdn2.iconfinder.com/data/icons/mixd/512/20_kubernetes-1024.png">}}
       </div>
       <div class="col-md-6 mb-4">
-       {{< customcard  path="content/docs/getting-started/installation/openshift" link="./open-shift" icon="fas fa-search" title="Open-shift" image="https://th.bing.com/th/id/OIP.at1jNtvleacyjFhRJu7NKwHaHa?rs=1&pid=ImgDetMain" >}}
+       {{< customcard  path="content/docs/getting-started/installation/openshift" link="./openshift" icon="fas fa-search" title="Open Shift" image="https://th.bing.com/th/id/OIP.at1jNtvleacyjFhRJu7NKwHaHa?rs=1&pid=ImgDetMain" >}}
        </div>
     </div>
        <div class="row">
       <div class="col-md-6 mb-4">
-      {{< customcard path="content/docs/getting-started/installation/rke" link="./rke" icon="fas fa-cloud" title="RKE" image="https://th.bing.com/th/id/OIP.7hs2P_Rym3HXaNniq4A5xAAAAA?rs=1&pid=ImgDetMain" >}}
+      {{< customcard path="content/docs/getting-started/installation/rancherkubernetesengine" link="./rancherkubernetesengine" icon="fas fa-cloud" title="Rancher Kubernetes Engine" image="https://th.bing.com/th/id/OIP.7hs2P_Rym3HXaNniq4A5xAAAAA?rs=1&pid=ImgDetMain" >}}
       </div>
       <div class="col-md-6 mb-4">
-        {{< customcard path="content/docs/getting-started/installation/mke" link="./mke" icon="fas fa-pencil" title="MKE" image="https://www.conoa.se/wp-content/uploads/2021/04/mirantis-kubernetes-engine-icon-medium.png">}} 
+        {{< customcard path="content/docs/getting-started/installation/mirantiskubernetesengine" link="./mirantiskubernetesengine" icon="fas fa-pencil" title="Mirantis Kubernetes Engine" image="https://www.conoa.se/wp-content/uploads/2021/04/mirantis-kubernetes-engine-icon-medium.png">}} 
         </div>
     </div> 
     <div class="row">

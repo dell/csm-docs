@@ -9,28 +9,29 @@ Kubernetes provides a powerful platform for managing containerized applications,
 
 The Dell CSI drivers allow Kubernetes to manage storage resources dynamically, providing features such as persistent volume provisioning, snapshotting, and cloning. These drivers are designed to work with Dell’s storage systems, including PowerScale, PowerFlex, and XtremIO, among others.
 
-Using Kubernetes to install and manage Dell CSI drivers involves deploying the Dell Container Storage Modules (CSM) Operator. This operator simplifies the installation and management of CSI drivers by leveraging Kubernetes Custom Resource Definitions (CRDs) and controllers. The CSM Operator ensures that the CSI drivers are correctly configured and maintained, providing a robust and reliable storage solution for your Kubernetes clusters12.
+Using Kubernetes to install and manage Dell CSI drivers involves deploying the Dell Container Storage Modules (CSM) Operator. This operator simplifies the installation and management of CSI drivers by leveraging Kubernetes Custom Resource Definitions (CRDs) and controllers. The CSM Operator ensures that the CSI drivers are correctly configured and maintained, providing a robust and reliable storage solution for your Kubernetes clusters12. 
+
 
 <div class="container mt-5">
     <div class="row">
       <div class="col-md-6 mb-4">
-    {{< customcard  path="content/docs/getting-started/installation/kubernetes/powermax" link="./powermax" icon="fas fa-star" title="PowerMax" >}}
+    {{< customcard  path="content/docs/getting-started/installation/kubernetes/powermax" link="./powermax" icon="fas fa-star"  image="https://www.bsi.uk.com/media/catalog/product/cache/1/image/960x720/17f82f742ffe127f42dca9de82fb58b1/d/e/dell-emc-powermax2000.jpg" title="PowerMax" largeImage="true">}}
       </div>
       <div class="col-md-6 mb-4">
-       {{< customcard path="content/docs/getting-started/installation/powerscale" link="./powerscale" icon="fas fa-search" title="PowerScale" >}}
+       {{< customcard path="content/docs/getting-started/installation/kubernetes/powerscale" link="./powerscale" icon="fas fa-search"  image="https://th.bing.com/th/id/OIP.foQUHYrctqNNtl3Mu63s1gHaCI?rs=1&pid=ImgDetMain"  title="PowerScale" largeImage="true" >}}
        </div>
     </div>
        <div class="row">
       <div class="col-md-6 mb-4">
-      {{< customcard path="content/docs/getting-started/installation/kubernetes/powerstore" link="./powerstore" icon="fas fa-cloud" title="PowerStore">}}
+      {{< customcard path="content/docs/getting-started/installation/kubernetes/powerstore" link="./powerstore" icon="fas fa-cloud"  image="https://serverbazar.in/wp-content/uploads/2022/04/dell-emc-powerstore-ps1000t-storage.jpg" title="PowerStore" largeImage="true" >}}
       </div>
       <div class="col-md-6 mb-4">
-        {{< customcard path="content/docs/getting-started/installation/kubernetes/powerstore" link="./powerflex" icon="fas fa-pencil" title="PowerFlex">}} 
+        {{< customcard path="content/docs/getting-started/installation/kubernetes/powerflex" link="./powerflex" icon="fas fa-pencil"  image="https://th.bing.com/th/id/OIP.MWLm8KDyv9vjUv8ZjALU7wHaBV?rs=1&pid=ImgDetMain" title="PowerFlex" largeImage="true" >}} 
         </div>
     </div> 
     <div class="row">
       <div class="col-md-6 mb-4">
-          {{< customcard path="content/docs/getting-started/installation/kubernetes/powerstore" link="./unityxt" icon="fas fa-lock" title="Unity XT">}}
+          {{< customcard path="content/docs/getting-started/installation/kubernetes/unityxt" link="./unityxt" icon="fas fa-lock"  image="https://th.bing.com/th/id/OIP.C2HB6tMy-YVXXjX2k3oOYwHaBh?rs=1&pid=ImgDetMain" title="Unity XT" largeImage="true" >}}
         </div>  
       </div>
 </div>

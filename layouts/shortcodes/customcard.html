@@ -7,9 +7,6 @@
   {{ $folderCount = len (where $folders "IsDir" true) }}
 {{ end }}
 
-
-  
-
 <style>
   .card-hover:hover {
       transform: scale(1.05);
@@ -28,29 +25,33 @@
       text-decoration: none;
   }
   .card-image {
-      width: 2rem;
+      width: 2.5rem;
       height: 2rem;
-  } 
-  .card-title{
-    font-weight:bold;
-  } 
-  .card-text{
-    font-size:12px; 
-    color:rgb(136, 134, 134);
+  }
+  .card-image-large {
+      width: 5rem;
+      height: 5rem;
+  }
+  .card-title {
+      font-weight: bold;
+  }
+  .card-text {
+      font-size: 12px; 
+      color: rgb(136, 134, 134);
   }
 </style>
 
 <a href="{{ .Get "link" }}" class="card-link">
   <div class="card card-hover shadow-sm p-3 bg-white rounded">
       <div class="row no-gutters align-items-center">
-          <div class="col-md-2 text-center">
+          <div class="{{ if .Get "largeImage" }}col-md-4{{ else }}col-md-2{{ end }} text-center">
               {{ if .Get "image" }}
-                <img src="{{ .Get "image" }}" alt="{{ .Get "title" }}" class="card-image img-fluid">
+                <img src="{{ .Get "image" }}" alt="{{ .Get "title" }}" class="card-image {{ if .Get "largeImage" }}card-image-large{{ end }} img-fluid">
               {{ else }}
                 <i class="card-icon {{ .Get "icon" }}"></i>
               {{ end }}
           </div>
-          <div class="col-md-10">
+          <div class="col-md-{{ if .Get "largeImage" }}8{{ else }}10{{ end }}">
               <div class="card-body">
                   <h5 class="card-title">{{ .Get "title" }}</h5>
                   <p class="card-text">Items: {{ $folderCount }}</p>
