@@ -576,7 +576,7 @@ if (typeof exports !== 'undefined') {
 		onSnapshotChange,
 		onCertManagerChange,
                 onApproveSdcChange,
-		 onEnableSdcChange
+		 onEnableSdcChange,
 		onTopologyChange,
 		onReplicationChange,
 		onVSphereChange,
