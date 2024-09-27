@@ -85,7 +85,6 @@ function onArrayChange() {
 		onSnapshotChange(snapshotNote, driver, CONSTANTS);
 		onCertManagerChange(certmanagerNote);
 		onApproveSdcChange(approveSdcNote);
-                onEnableSdcChange();
 		onTopologyChange(topologyNote);
 		onVSphereChange();
 		onReplicationChange(replicationNote);
@@ -166,14 +165,6 @@ function onApproveSdcChange(approveSdcNoteValue) {
 		$('div#approvesdc-note-wrapper').hide();	
 	}
 }
-
-function onEnableSdcChange() {
-	if ($("#enable-sdc").prop('checked') === true) {
-		$('div#enablesdc-note-wrapper-helm').hide();
-	} else {
-		$('div#enablesdc-note-wrapper-helm').show();
-}
-
 
 
 function onTopologyChange(topologyNoteValue) {
@@ -576,7 +567,6 @@ if (typeof exports !== 'undefined') {
 		onSnapshotChange,
 		onCertManagerChange,
                 onApproveSdcChange,
-		 onEnableSdcChange,
 		onTopologyChange,
 		onReplicationChange,
 		onVSphereChange,
