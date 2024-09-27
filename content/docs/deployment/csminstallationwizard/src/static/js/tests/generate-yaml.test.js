@@ -191,7 +191,7 @@ describe("GIVEN setValues function", () => {
 			observabilityOperatorTopology: false,
 			topologyEnabled: false,
 			transportProtocol: "",
-                        sdcEnabled: false,
+			sdcEnabled: false,
 			renameSDC: false,
 			sdcPrefix: "",
 			approveSDC: false,
@@ -667,7 +667,7 @@ describe("GIVEN createYamlString function", () => {
       enabled: $CERT_MANAGER_ENABLED
   `;
 
-	const testObject_sdc = {
+	const testObjectSdc = {
 		csmVersion: "1.12.0",
 		driverVersion: "v2.12.0",
 		imageRepository: "dellemc",
@@ -707,7 +707,7 @@ describe("GIVEN createYamlString function", () => {
 		vSphereVCenterHost: "00.000.000.00",
 		vSphereVCenterCredSecret: "vcenter-creds",
 		migration: false,
-                sdcEnabled: true,
+		sdcEnabled: true,
 		renameSDC: false,
 		sdcPrefix: "sdc-test",
 		approveSDC: false
@@ -986,7 +986,7 @@ describe("GIVEN createYamlString function", () => {
       enabled: false
   `;
 
-		const received = createYamlString(testYAML, testObject_sdc, "powerflex", CONSTANTS);
+		const received = createYamlString(testYAML, testObjectSdc, "powerflex", CONSTANTS);
 		expect(received).toEqual(expected);
 	});
 
@@ -1305,7 +1305,7 @@ describe("GIVEN createYamlString function", () => {
 		vSphereVCenterHost: "00.000.000.00",
 		vSphereVCenterCredSecret: "vcenter-creds",
 		migration: false,
-                sdcEnabled: false,
+		sdcEnabled: false,
 		renameSDC: false,
 		sdcPrefix: "sdc-test",
 		approveSDC: false
