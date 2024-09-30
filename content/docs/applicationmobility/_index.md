@@ -6,8 +6,8 @@ Description: >
   Application Mobility
 ---
 
-{{% pageinfo color="primary" %}}
-Application Mobility is available with [APEX Navigator for Kubernetes](https://www.dell.com/en-ca/dt/apex/storage/public-cloud/navigator.htm#kubernetes)
+{{% pageinfo color="danger" %}}
+<span style="color:red">Application Mobility is available with [APEX Navigator for Kubernetes](https://www.dell.com/en-ca/dt/apex/storage/public-cloud/navigator.htm#kubernetes)</span>
 {{% /pageinfo %}}
 
 Container Storage Modules for Application Mobility provide Kubernetes administrators the ability to clone their stateful application workloads and application data to other clusters, either on-premise or in the cloud.

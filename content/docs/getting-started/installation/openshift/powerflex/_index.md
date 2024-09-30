@@ -6,18 +6,9 @@ description: PowerFlex Installation
 weight: 4
 ---
 <div class="container mt-5">
-    <div class="row">
-      <div class="col-md-6 mb-4">
-    {{< customcard  path="content/docs/setup/installation/kubernetes/powermax/csmoperator" link="./csmoperator" icon="fas fa-star" image="" title="CSM Operator" >}}
-      </div>
-      <div class="col-md-6 mb-4">
-       {{< customcard path="content/docs/setup/installation/kubernetes/powermax/csmoperator" link="./helm" icon="fas fa-search" image="https://raw.githubusercontent.com/helm/helm/release-2.16/docs/logos/helm_logo_transparent.png" title="Helm" >}}
-       </div>
+  <div class="row">
+    <div class="col-md-6 mb-4">
+      {{< customcard  path="content/docs/setup/installation/kubernetes/powermax/csmoperator" link="./csmoperator" icon="fas fa-star" image="" title="CSM Operator" >}}
     </div>
-       <div class="row">
-      <div class="col-md-6 mb-4">
-      {{< customcard path="content/docs/setup/installation/kubernetes/powermax/csmoperator" link="./offline" icon="fas fa-cloud" image="https://creazilla-store.fra1.digitaloceanspaces.com/icons/3509300/offline-logo-icon-md.png" title="Offline">}}
-      </div>
-    </div> 
-    
+  </div>    
 </div>
