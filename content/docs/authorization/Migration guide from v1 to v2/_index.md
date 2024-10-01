@@ -1,12 +1,12 @@
 ---
 title: Authorization - v2 Migration guide
-linktitle: Migration guide from v1 to v2
+linktitle: Migration Guide From v1 to v2
 weight: 1
 description: >
-  CSM for Authorization v1 to v2 Migration guide
+  CSM for Authorization v1 to v2 Migration Guide
 ---
 
-CSM for Authorization v2 has significant architectural changes that prevent a user from upgradng CSM for Authorization v1 to CSM for Authorization v2. This page provides a reference guide for migrating v1 to v2.
+CSM for Authorization v2 has significant architectural changes that prevent a user from upgradng CSM for Authorization v1 to CSM for Authorization v2. This page provides a reference guide for migrating v1 to v2 using Powerflex as an example.
 
 **Before migration please note following points**
   - CSM for Authorization v2 calculates the actual usage of capacity provisioned by syncing with the array.
@@ -14,9 +14,24 @@ CSM for Authorization v2 has significant architectural changes that prevent a us
   - Volumes without the **Volume Prefix** will not be accounted for in usage capacity calculation as ownership of the volume is unknown without the volume prefix.
   - User should rename all volumes that are needed to be accounted for with the **Volume Prefix** before migration to v2.
 
+## Prerequisites
+### On the storage array, rename the volumes owned by each tenant with a tenant prefix
+Use `dellctl` to list the volumes owned by the tenant. 
+```
+# dellctl volume get --proxy <csm-authorization-proxy-address> --namespace <driver-namespace>
+NAME             VOLUME ID          SIZE       POOL    SYSTEM ID          PV NAME          PV STATUS   STORAGE CLASS   PVC NAME                NAMESPACE            SNAPSHOT COUNT
+k8s-4cfa97ba5d   c6cfdfe000000229   8.000000   pool1   3000000000011111   k8s-4cfa97ba5d   Bound       vxflexos        vol-create-test-vndq8   test                 0
+k8s-519bb230c5   c6cfdfe20000022b   8.000000   pool1   3000000000011111   k8s-519bb230c5   Bound       vxflexos        vol-create-test-wc45j   test                 0
+k8s-ecc8381e08   c6cfdfe300000231   8.000000   pool1   3000000000011111   k8s-ecc8381e08   Bound       vxflexos        vol-create-test-r8ptv   test                 0
+k8s-cc47d7a61e   c6cfdfe10000022a   8.000000   pool1   3000000000011111   k8s-cc47d7a61e   Bound       vxflexos        vol-create-test-k8szc   test                 0
+k8s-76914ae62b   c6cfdfdf00000223   8.000000   pool1   3000000000011111   k8s-76914ae62b   Bound       vxflexos        vol-create-test-8sbtl   test                 0
+```
+
+On the storage array, rename each volume with your chosen tenant prefix. For example, if you've chosen the prefix `tn1`, volume `k8s-4cfa97ba5d` should be renamed to `tn1-k8s-4cfa97ba5d`.
+
 ## Storage Systems
 
-In CSM for Authorization v1 setup, list the storage to get all the storages configured in the environment.
+In CSM for Authorization v1 setup, list the storage to get all the storage systems configured in the environment.
 Example:
 
 ```
@@ -35,12 +50,11 @@ karavictl storage list --admin-token admintoken.yaml --addr csm-authorization.ho
   }
 }
 ```
-In CSM for Authorization v2 Storage are created using custom resources. For each Storage in a v1 environment, create using the CRD, example:
+In CSM for Authorization v2, storage is created using custom resources. For each Storage in a v1 environment, create using the CR, example:
 
 ```
 kubectl create -f controller/config/samples/csm-authorization_v1_storage.yaml
 ```
-Content of csm-authorization_v1_storage.yaml
 ```yaml
 apiVersion: csm-authorization.storage.dell.com/v1
 kind: Storage
@@ -98,28 +112,30 @@ karavictl role list --admin-token admintoken.yaml --addr csm-authorization.host.
   ]
 }
 ```
-For each role in v1 setup, create roles using csmrole custom resources.
-Example
+In CSM for Authorization v2, roles are created using custom resources. For each role in a v1 environment, create using the CR, example:
 ```
 kubectl create -f controller/config/samples/csm-authorization_v1_csmrole.yaml
 ```
-csm-authorization_v1_csmrole.yaml file for **CSIGold** role in v1 setup will look like following example file:
 ```yaml
 apiVersion: csm-authorization.storage.dell.com/v1
 kind: CSMRole
 metadata:
-  labels:
-    app.kubernetes.io/name: role
-    app.kubernetes.io/instance: role-sample
-    app.kubernetes.io/part-of: csm-authorization
-    app.kubernetes.io/managed-by: kustomize
-    app.kubernetes.io/created-by: csm-authorization
   name: CSIGold
+spec:
+  quota: 3200GiB
+  systemID: 3000000000011111
+  systemType: powerflex
+  pool: pool1
+---
+apiVersion: csm-authorization.storage.dell.com/v1
+kind: CSMRole
+metadata:
+  name: CSISilver
 spec:
   quota: 1600GiB
   systemID: 3000000000011111
   systemType: powerflex
-  pool: mypool
+  pool: pool2
 ```
 
 ## Tenant
@@ -145,12 +161,11 @@ karavictl tenant get --name Alice --admin-token admintoken.yaml --addr csm-autho
 ```
 {
   "name": "Alice"
-  "roles": "role-1,role-2"
+  "roles": "CSIGold,CSISilver"
+  "approvesdc": true
 }
 ```
-For each Tenant in a v1 environment, create a new CSMTenant using the Tenant CRD. Role binding will be handled automatically.
-
-Example:
+In CSM for Authorization v2, tenants are created using custom resources. The `spec.volumePrefix` field must be the prefix used in the prerequisite step of renaming the storage array volumes. For each tenant in a v1 environment, create using the CR, example:
 ```
 kubectl create -f controller/config/samples/csm-authorization_v1_csmtenant.yaml
 ```
@@ -159,17 +174,11 @@ csm-authorization_v1_csmtenant.yaml file will look like following example:
 apiVersion: csm-authorization.storage.dell.com/v1
 kind: CSMTenant
 metadata:
-  labels:
-    app.kubernetes.io/name: csmtenant
-    app.kubernetes.io/instance: csmtenant-sample
-    app.kubernetes.io/part-of: csm-authorization
-    app.kubernetes.io/managed-by: kustomize
-    app.kubernetes.io/created-by: csm-authorization
   name: Alice
 spec:
   # Roles defines a comma separated list of Roles for this tenant
-  roles: role-1,role-2
-  approveSdc: false
+  roles: CSIGold,CSISilver
+  approveSdc: true
   revoke: false
   volumePrefix: tn1
 ```
