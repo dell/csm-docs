@@ -84,6 +84,7 @@ function onArrayChange() {
 		onResiliencyChange(podmonNote);
 		onSnapshotChange(snapshotNote, driver, CONSTANTS);
 		onCertManagerChange(certmanagerNote);
+		onApproveSdcChange(approveSdcNote);
 		onTopologyChange(topologyNote);
 		onVSphereChange();
 		onReplicationChange(replicationNote);
@@ -156,6 +157,16 @@ function onCertManagerChange(certmanagerNoteValue) {
 	}
 }
 
+function onApproveSdcChange(approveSdcNoteValue) {
+	if ($("#approve-sdc").prop('checked') === false) {
+		$('div#approvesdc-note-wrapper').show();
+		$("#approvesdc-note").html(approveSdcNoteValue);
+	} else {
+		$('div#approvesdc-note-wrapper').hide();	
+	}
+}
+
+
 function onTopologyChange(topologyNoteValue) {
 	if ($("#topology").prop('checked') === true) {
 		$('div#topology-note-wrapper').show();
@@ -212,6 +223,7 @@ function onNodeSelectorChange(nodeSelectorNoteValue, csmMapValue) {
 		$(".node-sel-attributes").hide();
 	}
 }
+
 
 function onRenameSDCChange(driverName, CONSTANTS_PARAM) {
 	if ($("#rename-sdc").prop('checked') === true) {
@@ -347,6 +359,7 @@ function displayModules(installationType, driverName, CONSTANTS_PARAM) {
 	$(".replication-operator-clusterid").hide();
 	$(".replication-helm-arrayid").hide();
 	$(".replication-helm-unisphere").hide();
+	$(".enable-sdc").hide();
 	$(".rename-sdc-feature").hide();
 	$(".approve-sdc").hide();
 	$(".nfs-feature").hide();
@@ -442,6 +455,7 @@ function displayModules(installationType, driverName, CONSTANTS_PARAM) {
 			$(".cert-secret-count-wrapper").show();
 			$("div#snap-prefix").hide();
 			$(".storage-capacity").show();
+			$(".enable-sdc").show();
 			$(".rename-sdc-feature").show();
 			$(".approve-sdc").show();
 			if (document.getElementById("csm-version").value === "1.8.0") {
@@ -552,6 +566,7 @@ if (typeof exports !== 'undefined') {
 		onOperatorResiliencyChange,
 		onSnapshotChange,
 		onCertManagerChange,
+		onApproveSdcChange,
 		onTopologyChange,
 		onReplicationChange,
 		onVSphereChange,
