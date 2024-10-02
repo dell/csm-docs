@@ -49,7 +49,7 @@
         <div class="dropdown">
   <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Releases</a>
   <ul class="dropdown-menu">
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.11.0)</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.11.1)</a></li>
     <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.10.2</a></li>
     <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.9.4</a></li>
     <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">v1.8.0</a></li>
@@ -67,7 +67,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.d2170dfe6cd2d41b36e34ccac479c79e.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.67867d671fdeeaf81a80c1c38335b519.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -91,7 +91,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.d2170dfe6cd2d41b36e34ccac479c79e.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.67867d671fdeeaf81a80c1c38335b519.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -755,7 +755,7 @@ Supported CSM Components <a class="header-link"  href="#supported-csm-components
 </tr>
 <tr>
 <td>CSI PowerStore</td>
-<td>2.11.0</td>
+<td>2.11.1</td>
 <td>❌</td>
 <td>❌</td>
 <td>❌</td>
@@ -803,7 +803,7 @@ Supported CSM Components <a class="header-link"  href="#supported-csm-components
 </tr>
 <tr>
 <td>CSI Unity XT</td>
-<td>2.11.0</td>
+<td>2.11.1</td>
 <td>❌</td>
 <td>❌</td>
 <td>❌</td>
@@ -880,7 +880,7 @@ Manual Installation on a cluster without OLM <a class="header-link"  href="#manu
 <li>Install volume snapshot CRDs. For detailed snapshot setup procedure, <a href="../../snapshots/#volume-snapshot-feature">click here</a>.</li>
 <li>Clone and checkout the required csm-operator version using</li>
 </ol>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git clone -b v1.6.0 https://github.com/dell/csm-operator.git
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git clone -b v1.6.1 https://github.com/dell/csm-operator.git
 </span></span></code></pre></div><ol start="3">
 <li><code>cd csm-operator</code></li>
 <li><em>(Optional)</em> If using a local Docker image, edit the <code>deploy/operator.yaml</code> file and set the image name for the CSM Operator Deployment.</li>
@@ -1013,7 +1013,7 @@ Building an offline bundle <a class="header-link"  href="#building-an-offline-bu
 <ol>
 <li>Clone and checkout the required csm-operator version using</li>
 </ol>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git clone -b v1.6.0 https://github.com/dell/csm-operator.git
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git clone -b v1.6.1 https://github.com/dell/csm-operator.git
 </span></span></code></pre></div><ol start="2">
 <li><code>cd csm-operator</code></li>
 <li>Run the <code>csm-offline-bundle.sh</code> script which will be found in the <code>scripts</code> directory with an argument of <code>-c</code> in order to create an offline bundle</li>
@@ -1038,8 +1038,8 @@ Building an offline bundle <a class="header-link"  href="#building-an-offline-bu
    dellemc/csi-metadata-retriever:v1.8.0
    dellemc/csipowermax-reverseproxy:v2.10.0
    dellemc/csi-powermax:v2.11.0
-   dellemc/csi-powerstore:v2.11.0
-   dellemc/csi-unity:v2.11.0
+   dellemc/csi-powerstore:v2.11.1
+   dellemc/csi-unity:v2.11.1
    dellemc/csi-vxflexos:v2.11.0
    dellemc/csm-authorization-sidecar:v1.11.0
    dellemc/csm-metrics-powerflex:v1.9.0
@@ -1048,7 +1048,7 @@ Building an offline bundle <a class="header-link"  href="#building-an-offline-bu
    dellemc/dell-csi-replicator:v1.9.0
    dellemc/dell-replication-controller:v1.9.0
    dellemc/sdc:4.5.1
-   docker.io/dellemc/dell-csm-operator:v1.6.0
+   docker.io/dellemc/dell-csm-operator:v1.6.1
    gcr.io/kubebuilder/kube-rbac-proxy:v0.8.0
    nginxinc/nginx-unprivileged:1.20
    otel/opentelemetry-collector:0.42.0
@@ -1227,7 +1227,7 @@ Using Installation Script <a class="header-link"  href="#using-installation-scri
         </a></h4><ol>
 <li>Clone and checkout the required csm-operator version using</li>
 </ol>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git clone -b v1.6.0 https://github.com/dell/csm-operator.git
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git clone -b v1.6.1 https://github.com/dell/csm-operator.git
 </span></span></code></pre></div><ol start="2">
 <li><code>cd csm-operator</code></li>
 <li>Execute <code>bash scripts/install.sh --upgrade</code>  . This command will install the latest version of the operator.</li>

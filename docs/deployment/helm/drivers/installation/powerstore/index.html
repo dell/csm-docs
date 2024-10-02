@@ -17,13 +17,13 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/docs/deployment/helm/drivers/installation/powerstore/" /><meta property="article:section" content="docs" />
 
-<meta property="article:modified_time" content="2024-09-20T15:39:00-04:00" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2024-09-26T14:14:48+05:30" /><meta property="og:site_name" content="Dell Technologies" />
 
 <meta itemprop="name" content="PowerStore">
 <meta itemprop="description" content="Installing CSI Driver for PowerStore via Helm
 ">
-<meta itemprop="dateModified" content="2024-09-20T15:39:00-04:00" />
-<meta itemprop="wordCount" content="2831">
+<meta itemprop="dateModified" content="2024-09-26T14:14:48+05:30" />
+<meta itemprop="wordCount" content="2772">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="PowerStore"/>
 <meta name="twitter:description" content="Installing CSI Driver for PowerStore via Helm
@@ -57,7 +57,7 @@
         <div class="dropdown">
   <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Releases</a>
   <ul class="dropdown-menu">
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.11.0)</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.11.1)</a></li>
     <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.10.2</a></li>
     <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.9.4</a></li>
     <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">v1.8.0</a></li>
@@ -75,7 +75,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.d2170dfe6cd2d41b36e34ccac479c79e.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.67867d671fdeeaf81a80c1c38335b519.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -99,7 +99,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.d2170dfe6cd2d41b36e34ccac479c79e.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.67867d671fdeeaf81a80c1c38335b519.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -704,14 +704,7 @@
 	<header class="article-meta">
 		
 </header>
-	
-
-<div class="pageinfo pageinfo-primary">
-<p>An issue impacting usage of the NVMe protocol has been identified in the PowerStore CSI Driver version v2.11.0. The problem prevents mounts of NVMe volumes across all orchestration platforms. Users are advised to use an alternate block protocol (e.g. iSCSI, FC) or delay upgrading to the v2.11.0 version of the PowerStore driver until an updated driver has been published.</p>
-
-</div>
-
-<p>The CSI Driver for Dell PowerStore can be deployed by using the provided Helm v3 charts and installation scripts on both Kubernetes and OpenShift platforms. For more detailed information on the installation scripts, review the script <a href="https://github.com/dell/csi-powerstore/tree/master/dell-csi-helm-installer">documentation</a>.</p>
+	<p>The CSI Driver for Dell PowerStore can be deployed by using the provided Helm v3 charts and installation scripts on both Kubernetes and OpenShift platforms. For more detailed information on the installation scripts, review the script <a href="https://github.com/dell/csi-powerstore/tree/master/dell-csi-helm-installer">documentation</a>.</p>
 <h2 id="prerequisites">
 Prerequisites <a class="header-link"  href="#prerequisites" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
             <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
@@ -929,7 +922,7 @@ Install the Driver <a class="header-link"  href="#install-the-driver" style=" di
         </a></h2><p><strong>Steps</strong></p>
 <ol>
 <li>
-<p>Run <code>git clone -b v2.11.0 https://github.com/dell/csi-powerstore.git</code> to clone the git repository.</p>
+<p>Run <code>git clone -b v2.11.1 https://github.com/dell/csi-powerstore.git</code> to clone the git repository.</p>
 </li>
 <li>
 <p>Ensure that you have created namespace where you want to install the driver. You can run <code>kubectl create namespace csi-powerstore</code> to create a new one. &ldquo;csi-powerstore&rdquo; is just an example. You can choose any name for the namespace.
@@ -969,7 +962,7 @@ User Privileges <a class="header-link"  href="#user-privileges" style=" display:
 </li>
 <li>
 <p>Download the default values.yaml file</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#204a87">cd</span> dell-csi-helm-installer <span style="color:#ce5c00;font-weight:bold">&amp;&amp;</span> wget -O my-powerstore-settings.yaml https://github.com/dell/helm-charts/raw/csi-powerstore-2.11.0/charts/csi-powerstore/values.yaml
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#204a87">cd</span> dell-csi-helm-installer <span style="color:#ce5c00;font-weight:bold">&amp;&amp;</span> wget -O my-powerstore-settings.yaml https://github.com/dell/helm-charts/raw/csi-powerstore-2.11.1/charts/csi-powerstore/values.yaml
 </span></span></code></pre></div></li>
 <li>
 <p>Edit the newly created values file and provide values for the following parameters <code>vi my-powerstore-settings.yaml</code>:</p>

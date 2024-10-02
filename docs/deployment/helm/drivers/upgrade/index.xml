@@ -42,8 +42,11 @@ Download the default values.</description>
       <link>https://dell.github.io/csm-docs/docs/deployment/helm/drivers/upgrade/powerstore/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://dell.github.io/csm-docs/docs/deployment/helm/drivers/upgrade/powerstore/</guid>
-      <description>An issue impacting usage of the NVMe protocol has been identified in the PowerStore CSI Driver version v2.11.0. The problem prevents mounts of NVMe volumes across all orchestration platforms. Users are advised to use an alternate block protocol (e.g. iSCSI, FC) or delay upgrading to the v2.11.0 version of the PowerStore driver until an updated driver has been published.
-You can upgrade the CSI Driver for Dell PowerStore using Helm.</description>
+      <description>You can upgrade the CSI Driver for Dell PowerStore using Helm.
+Update Driver from v2.10.1 to v2.11.1 using Helm Note: While upgrading the driver via helm, controllerCount variable in myvalues.yaml can be at most one less than the number of worker nodes.
+Steps
+Run git clone -b v2.11.1 https://github.com/dell/csi-powerstore.git to clone the git repository and get the driver.
+Edit samples/secret/secret.yaml file and configure connection information for your PowerStore arrays changing the following parameters:</description>
     </item>
     <item>
       <title>Unity XT</title>

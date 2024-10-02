@@ -15,12 +15,12 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/docs/csidriver/release/powerstore/" /><meta property="article:section" content="docs" />
 
-<meta property="article:modified_time" content="2024-09-20T15:39:00-04:00" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2024-10-02T14:34:27-04:00" /><meta property="og:site_name" content="Dell Technologies" />
 
 <meta itemprop="name" content="PowerStore">
 <meta itemprop="description" content="Release notes for PowerStore CSI driver">
-<meta itemprop="dateModified" content="2024-09-20T15:39:00-04:00" />
-<meta itemprop="wordCount" content="844">
+<meta itemprop="dateModified" content="2024-10-02T14:34:27-04:00" />
+<meta itemprop="wordCount" content="819">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="PowerStore"/>
 <meta name="twitter:description" content="Release notes for PowerStore CSI driver"/>
@@ -53,7 +53,7 @@
         <div class="dropdown">
   <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Releases</a>
   <ul class="dropdown-menu">
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.11.0)</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.11.1)</a></li>
     <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.10.2</a></li>
     <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.9.4</a></li>
     <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">v1.8.0</a></li>
@@ -71,7 +71,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.d2170dfe6cd2d41b36e34ccac479c79e.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.67867d671fdeeaf81a80c1c38335b519.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -95,7 +95,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.d2170dfe6cd2d41b36e34ccac479c79e.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.67867d671fdeeaf81a80c1c38335b519.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -637,7 +637,7 @@
             <div class="td-toc">
         <nav id="TableOfContents">
   <ul>
-    <li><a href="#release-notes---csi-powerstore-v2110">Release Notes - CSI PowerStore v2.11.0</a>
+    <li><a href="#release-notes---csi-powerstore-v2111">Release Notes - CSI PowerStore v2.11.1</a>
       <ul>
         <li><a href="#new-featureschanges">New Features/Changes</a></li>
         <li><a href="#fixed-issues">Fixed Issues</a></li>
@@ -675,8 +675,8 @@
 	<header class="article-meta">
 		
 </header>
-	<h2 id="release-notes---csi-powerstore-v2110">
-Release Notes - CSI PowerStore v2.11.0 <a class="header-link"  href="#release-notes---csi-powerstore-v2110" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
+	<h2 id="release-notes---csi-powerstore-v2111">
+Release Notes - CSI PowerStore v2.11.1 <a class="header-link"  href="#release-notes---csi-powerstore-v2111" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
             <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
                 <path d="M0 0h24v24H0z" fill="none"/>
                 <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
@@ -698,6 +698,7 @@ Fixed Issues <a class="header-link"  href="#fixed-issues" style=" display: inlin
                 <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
             </svg>
         </a></h3><ul>
+<li><a href="https://github.com/dell/csm/issues/1469">#1469 - [BUG]: Mounts using NVMe on PowerStore fails in v2.11 of the driver</a></li>
 <li><a href="https://github.com/dell/csm/issues/1188">#1188 - [BUG]: Controller Pod keeps restarting due to &ldquo;Lost connection to CSI driver&rdquo; error</a></li>
 <li><a href="https://github.com/dell/csm/issues/1209">#1209 - [BUG]: Doc hyper links in driver Readme is broken</a></li>
 <li><a href="https://github.com/dell/csm/issues/1216">#1216 - [BUG]: Incorrect Error message in Resiliency Podmon in controllerCleanupPod() func</a></li>
@@ -723,10 +724,6 @@ Known Issues <a class="header-link"  href="#known-issues" style=" display: inlin
 </thead>
 <tbody>
 <tr>
-<td>Mount of block devices using the NVMe protocols fail. <br><a href="https://github.com/dell/csm/issues/1469">https://github.com/dell/csm/issues/1469</a></td>
-<td>Use an alternate block protocol (iSCSI, FC) or delay upgrading to the v2.11.0 version of the PowerStore driver and wait for an update of the driver to be published.</td>
-</tr>
-<tr>
 <td>Delete namespace that has PVCs and pods created with the driver. The External health monitor sidecar crashes as a result of this operation</td>
 <td>Deleting the namespace deletes the PVCs first and then removes the pods in the namespace. This brings a condition where pods exist without their PVCs and causes the external-health-monitor sidecar to crash. This is a known issue and has been reported at <a href="https://github.com/kubernetes-csi/external-health-monitor/issues/100">https://github.com/kubernetes-csi/external-health-monitor/issues/100</a> <br></td>
 </tr>
@@ -735,7 +732,7 @@ Known Issues <a class="header-link"  href="#known-issues" style=" display: inlin
 <td>To get the desired behavior set &ldquo;allowRoot: &ldquo;true&rdquo; in the storage class parameter</td>
 </tr>
 <tr>
-<td>If the NVMeFC pod is not getting created and the host looses the ssh connection, causing the driver pods to go to error state</td>
+<td>If the NVMeFC pod is not getting created and the host loses the ssh connection, causing the driver pods to go to error state</td>
 <td>remove the nvme_tcp module from the host incase of NVMeFC connection</td>
 </tr>
 <tr>
