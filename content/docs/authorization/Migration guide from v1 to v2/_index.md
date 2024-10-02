@@ -45,24 +45,23 @@ Content of csm-authorization_v1_storage.yaml
 apiVersion: csm-authorization.storage.dell.com/v1
 kind: Storage
 metadata:
-name: powerflex
+  name: powerflex
 spec:
-# Type of the storage system. Example: powerflex, powermax, powerscale
-type: powerflex
-endpoint: https://1.1.1.1
-# System ID of the backend storage array
-systemID: 3000000000011111
-# Vault is the credential manager for storage arrays
-vault:
-identifier: vault0
-kvEngine: secret
-path: csm-authorization/powerflex/1a99aa999999aa9a
-# SkipCertificateValidation is the flag to skip certificate validation
-skipCertificateValidation: true
-# PollInterval is the polling frequency to test the storage connectivity
-pollInterval: 30s
+  # Type of the storage system. Example: powerflex, powermax, powerscale
+  type: powerflex
+  endpoint: https://1.1.1.1
+  # System ID of the backend storage array
+  systemID: 3000000000011111
+  # Vault is the credential manager for storage arrays
+  vault:
+    identifier: vault0
+    kvEngine: secret
+    path: csm-authorization/powerflex/3000000000011111
+  # SkipCertificateValidation is the flag to skip certificate validation
+  skipCertificateValidation: true
+  # PollInterval is the polling frequency to test the storage connectivity
+  pollInterval: 30s
 ```
-
 
 ## Role and Role Binding
 
@@ -109,28 +108,25 @@ csm-authorization_v1_csmrole.yaml file for **CSIGold** role in v1 setup will loo
 apiVersion: csm-authorization.storage.dell.com/v1
 kind: CSMRole
 metadata:
-labels:
-app.kubernetes.io/name: role
-app.kubernetes.io/instance: role-sample
-app.kubernetes.io/part-of: csm-authorization
-app.kubernetes.io/managed-by: kustomize
-app.kubernetes.io/created-by: csm-authorization
-name: CSIGold
+  labels:
+    app.kubernetes.io/name: role
+    app.kubernetes.io/instance: role-sample
+    app.kubernetes.io/part-of: csm-authorization
+    app.kubernetes.io/managed-by: kustomize
+    app.kubernetes.io/created-by: csm-authorization
+  name: CSIGold
 spec:
-# The quota must be set with iB (TiB/GiB etc) / Ex. 10 TiB or 512 GiB
-# If it is not, the quota enforcement will be inaccurate
-quota: 1600GiB
-# System ID of the backend storage array
-systemID: 3000000000011111
-# The type of the stoage array. Example: powerflex, powermax, powerscale
-systemType: powerflex
-pool: mypool
+  quota: 1600GiB
+  systemID: 3000000000011111
+  systemType: powerflex
+  pool: mypool
 ```
 All corresponding v1 setup roles should be created in v2 setup too. In v2 user don't have to bind the role, this will be taken care during CRD reconciliation.
 
 ## Tenant
+
 List all the tenants in v1 setup and all those tenants should be created in v2 setup.
-List tenants in v1 setup example:
+List tenants in v1 setup, example:
 ```
 karavictl tenant list --admin-token admintoken.yaml --addr csm-authorization.host.com
 ```
@@ -153,7 +149,8 @@ karavictl tenant get --name Alice --admin-token admintoken.yaml --addr csm-autho
   "roles": "role-1,role-2"
 }
 ```
-For each Tenant in a v1 environment, create a new CSMTenant using the Tenant CRD Role binding will be handled automatically.
+For each Tenant in a v1 environment, create a new CSMTenant using the Tenant CRD. Role binding will be handled automatically.
+
 Example:
 ```
 kubectl create -f controller/config/samples/csm-authorization_v1_csmtenant.yaml
@@ -163,17 +160,17 @@ csm-authorization_v1_csmtenant.yaml file will look like following example:
 apiVersion: csm-authorization.storage.dell.com/v1
 kind: CSMTenant
 metadata:
-labels:
-app.kubernetes.io/name: csmtenant
-app.kubernetes.io/instance: csmtenant-sample
-app.kubernetes.io/part-of: csm-authorization
-app.kubernetes.io/managed-by: kustomize
-app.kubernetes.io/created-by: csm-authorization
-name: Alice
+  labels:
+    app.kubernetes.io/name: csmtenant
+    app.kubernetes.io/instance: csmtenant-sample
+    app.kubernetes.io/part-of: csm-authorization
+    app.kubernetes.io/managed-by: kustomize
+    app.kubernetes.io/created-by: csm-authorization
+  name: Alice
 spec:
-# Roles defines a comma separated list of Roles for this tenant
-roles: role-1,role-2
-approveSdc: false
-revoke: false
-volumePrefix: tn1
+  # Roles defines a comma separated list of Roles for this tenant
+  roles: role-1,role-2
+  approveSdc: false
+  revoke: false
+  volumePrefix: tn1
 ```
