@@ -15,12 +15,12 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/docs/csidriver/release/powerflex/" /><meta property="article:section" content="docs" />
 
-<meta property="article:modified_time" content="2024-08-09T16:57:01+05:30" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2024-10-02T14:34:27-04:00" /><meta property="og:site_name" content="Dell Technologies" />
 
 <meta itemprop="name" content="PowerFlex">
 <meta itemprop="description" content="Release notes for PowerFlex CSI driver">
-<meta itemprop="dateModified" content="2024-08-09T16:57:01+05:30" />
-<meta itemprop="wordCount" content="723">
+<meta itemprop="dateModified" content="2024-10-02T14:34:27-04:00" />
+<meta itemprop="wordCount" content="758">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="PowerFlex"/>
 <meta name="twitter:description" content="Release notes for PowerFlex CSI driver"/>
@@ -53,7 +53,7 @@
         <div class="dropdown">
   <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Releases</a>
   <ul class="dropdown-menu">
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.11.0)</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.11.1)</a></li>
     <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.10.2</a></li>
     <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.9.4</a></li>
     <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">v1.8.0</a></li>
@@ -71,7 +71,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.d2170dfe6cd2d41b36e34ccac479c79e.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.67867d671fdeeaf81a80c1c38335b519.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -95,7 +95,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.d2170dfe6cd2d41b36e34ccac479c79e.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.67867d671fdeeaf81a80c1c38335b519.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -710,6 +710,8 @@ Fixed Issues <a class="header-link"  href="#fixed-issues" style=" display: inlin
 <li><a href="https://github.com/dell/csm/issues/1355">#1355 - [BUG]: Indentation of secret.yaml mentioned on the csm-doc portal for powerflex driver is incorrect.</a></li>
 <li><a href="https://github.com/dell/csm/issues/1364">#1364 - [BUG]: mkfsFormatOption not working for powerflex</a></li>
 <li><a href="https://github.com/dell/csm/issues/1366">#1366 - [BUG]:  Support Minimum 3GB Volume Size for NFS in CSI-PowerFlex</a></li>
+<li><a href="https://github.com/dell/csm/issues/1482">#1482 - [BUG]: SDC 4.5.2.1 fails to load when deployed on OCP 4.16.x using csm-operator</a>
+<br><strong>Note</strong>: To get the latest 4.5.2.1 SDC image, <code>ImagePullPolicy</code> for the <code>dellemc/sdc:4.5.2.1</code> image will have to be set to <code>Always</code>.</li>
 </ul>
 <h3 id="known-issues">
 Known Issues <a class="header-link"  href="#known-issues" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">

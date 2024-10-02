@@ -577,8 +577,11 @@ kubectl create -f tests/simple/simple.yaml After executing this command 3 PVC an
       <link>https://dell.github.io/csm-docs/docs/deployment/helm/drivers/upgrade/powerstore/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://dell.github.io/csm-docs/docs/deployment/helm/drivers/upgrade/powerstore/</guid>
-      <description>An issue impacting usage of the NVMe protocol has been identified in the PowerStore CSI Driver version v2.11.0. The problem prevents mounts of NVMe volumes across all orchestration platforms. Users are advised to use an alternate block protocol (e.g. iSCSI, FC) or delay upgrading to the v2.11.0 version of the PowerStore driver until an updated driver has been published.
-You can upgrade the CSI Driver for Dell PowerStore using Helm.</description>
+      <description>You can upgrade the CSI Driver for Dell PowerStore using Helm.
+Update Driver from v2.10.1 to v2.11.1 using Helm Note: While upgrading the driver via helm, controllerCount variable in myvalues.yaml can be at most one less than the number of worker nodes.
+Steps
+Run git clone -b v2.11.1 https://github.com/dell/csi-powerstore.git to clone the git repository and get the driver.
+Edit samples/secret/secret.yaml file and configure connection information for your PowerStore arrays changing the following parameters:</description>
     </item>
     <item>
       <title>PowerStore</title>
@@ -3060,7 +3063,7 @@ Listing installed drivers with the ContainerStorageModule CRD User can query for
       <link>https://dell.github.io/csm-docs/docs/csidriver/release/powerstore/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://dell.github.io/csm-docs/docs/csidriver/release/powerstore/</guid>
-      <description>Release Notes - CSI PowerStore v2.11.0 New Features/Changes #1359 - [FEATURE]: Add Support for OpenShift Container Platform (OCP) 4.16 #1400 - [FEATURE]: Support for Kubernetes 1.30 Fixed Issues #1188 - [BUG]: Controller Pod keeps restarting due to &amp;ldquo;Lost connection to CSI driver&amp;rdquo; error #1209 - [BUG]: Doc hyper links in driver Readme is broken #1216 - [BUG]: Incorrect Error message in Resiliency Podmon in controllerCleanupPod() func #1218 - [BUG]: Add the helm-charts-version parameter to the install command for all drivers in csm-docs #1239 - [BUG]: Changes in new release of google.</description>
+      <description>Release Notes - CSI PowerStore v2.11.1 New Features/Changes #1359 - [FEATURE]: Add Support for OpenShift Container Platform (OCP) 4.16 #1400 - [FEATURE]: Support for Kubernetes 1.30 Fixed Issues #1469 - [BUG]: Mounts using NVMe on PowerStore fails in v2.11 of the driver #1188 - [BUG]: Controller Pod keeps restarting due to &amp;ldquo;Lost connection to CSI driver&amp;rdquo; error #1209 - [BUG]: Doc hyper links in driver Readme is broken #1216 - [BUG]: Incorrect Error message in Resiliency Podmon in controllerCleanupPod() func #1218 - [BUG]: Add the helm-charts-version parameter to the install command for all drivers in csm-docs #1239 - [BUG]: Changes in new release of google.</description>
     </item>
     <item>
       <title>Test PowerStore CSI Driver</title>
@@ -3084,16 +3087,18 @@ To run this test, run the kubectl command from the root directory of the reposit
       <link>https://dell.github.io/csm-docs/docs/deployment/csmoperator/drivers/powerstore/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://dell.github.io/csm-docs/docs/deployment/csmoperator/drivers/powerstore/</guid>
-      <description>An issue impacting usage of the NVMe protocol has been identified in the PowerStore CSI Driver version v2.11.0. The problem prevents mounts of NVMe volumes across all orchestration platforms. Users are advised to use an alternate block protocol (e.g. iSCSI, FC) or delay upgrading to the v2.11.0 version of the PowerStore driver until an updated driver has been published.
-Installing CSI Driver for PowerStore via Dell CSM Operator The CSI Driver for Dell PowerStore can be installed via the Dell CSM Operator.</description>
+      <description>Installing CSI Driver for PowerStore via Dell CSM Operator The CSI Driver for Dell PowerStore can be installed via the Dell CSM Operator. To deploy the Operator, follow the instructions available here.
+Note that the deployment of the driver using the operator does not use any Helm charts and the installation and configuration parameters will be slightly different from the one specified via the Helm installer.
+Check existing ContainerStorageModule CRD User can query for all Dell CSI drivers using the following command:</description>
     </item>
     <item>
       <title>PowerStore</title>
       <link>https://dell.github.io/csm-docs/docs/deployment/helm/drivers/installation/powerstore/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://dell.github.io/csm-docs/docs/deployment/helm/drivers/installation/powerstore/</guid>
-      <description>An issue impacting usage of the NVMe protocol has been identified in the PowerStore CSI Driver version v2.11.0. The problem prevents mounts of NVMe volumes across all orchestration platforms. Users are advised to use an alternate block protocol (e.g. iSCSI, FC) or delay upgrading to the v2.11.0 version of the PowerStore driver until an updated driver has been published.
-The CSI Driver for Dell PowerStore can be deployed by using the provided Helm v3 charts and installation scripts on both Kubernetes and OpenShift platforms.</description>
+      <description>The CSI Driver for Dell PowerStore can be deployed by using the provided Helm v3 charts and installation scripts on both Kubernetes and OpenShift platforms. For more detailed information on the installation scripts, review the script documentation.
+Prerequisites The following are requirements to be met before installing the CSI Driver for Dell PowerStore:
+Install Kubernetes or OpenShift (see supported versions) Install Helm 3.x If you plan to use either the Fibre Channel or iSCSI or NVMe/TCP or NVMe/FC protocol, refer to either Fibre Channel requirements or Set up the iSCSI Initiator or Set up the NVMe Initiator sections below.</description>
     </item>
     <item>
       <title>PowerStore</title>
@@ -3319,7 +3324,7 @@ RKE Examples </description>
       <link>https://dell.github.io/csm-docs/docs/csidriver/release/unity/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://dell.github.io/csm-docs/docs/csidriver/release/unity/</guid>
-      <description>Release Notes - CSI Unity XT v2.11.0 New Features/Changes #1359 - [FEATURE]: Add Support for OpenShift Container Platform (OCP) 4.16 #1400 - [FEATURE]: Support for Kubernetes 1.30 #1399 - [FEATURE]: Unity 5.4 Support Fixed Issues #1198 - [BUG]: Topology-related node labels are not added automatically #1206 - [BUG]: Snapshot ingestion procedure for CSI Unity Driver misising #1209 - [BUG]: Doc hyper links in driver Readme is broken #1218 - [BUG]: Add the helm-charts-version parameter to the install command for all drivers in csm-docs #1222 - [BUG]: Cannot configure export IP for CSI-Unity #1239 - [BUG]: Changes in new release of google.</description>
+      <description>Release Notes - CSI Unity XT v2.11.1 New Features/Changes #1359 - [FEATURE]: Add Support for OpenShift Container Platform (OCP) 4.16 #1400 - [FEATURE]: Support for Kubernetes 1.30 #1399 - [FEATURE]: Unity 5.4 Support #1415 - [FEATURE]: Unity consistency update to reduce the number of authentication API calls Fixed Issues #1198 - [BUG]: Topology-related node labels are not added automatically #1206 - [BUG]: Snapshot ingestion procedure for CSI Unity Driver misising #1209 - [BUG]: Doc hyper links in driver Readme is broken #1218 - [BUG]: Add the helm-charts-version parameter to the install command for all drivers in csm-docs #1222 - [BUG]: Cannot configure export IP for CSI-Unity #1239 - [BUG]: Changes in new release of google.</description>
     </item>
     <item>
       <title>Test Unity XT CSI Driver</title>
