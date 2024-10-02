@@ -6,6 +6,11 @@ description: PowerFlex Installation
 weight: 4
 ---
 <div class="container mt-5">
+     <div class="row">
+      <div class="col-md-6 mb-4">
+      {{< customcard  link="./prerequisite" icon="fas fa-cloud" image="https://image.pngaaa.com/912/5104912-middle.png" title="Prerequisite">}}
+      </div>
+    </div> 
     <div class="row">
       <div class="col-md-6 mb-4">
     {{< customcard  path="content/docs/setup/installation/kubernetes/powerflex/csmoperator" link="./csmoperator" icon="fas fa-star" image="" title="CSM Operator" >}}

@@ -10,7 +10,12 @@ weight: 1
 
 Dell PowerMax is a high-performance, enterprise-class storage solution designed to meet the demanding needs of modern data centers. It is renowned for its exceptional speed, scalability, and reliability, making it ideal for mission-critical applications and workloads.
 
-<div class="container mt-5">
+<div class="container mt-5"> 
+    <div class="row">
+      <div class="col-md-6 mb-4">
+      {{< customcard  link="./prerequisite" icon="fas fa-cloud" image="https://image.pngaaa.com/912/5104912-middle.png" title="Prerequisite">}}
+      </div>
+    </div>
     <div class="row">
       <div class="col-md-6 mb-4">
     {{< customcard  path="content/docs/setup/installation/kubernetes/powermax/csmoperator" link="./csmoperator" icon="fas fa-star" title="CSM Operator" >}}
