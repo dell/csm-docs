@@ -33,6 +33,7 @@ description: Release notes for PowerFlex CSI driver
 - [#1364 - [BUG]: mkfsFormatOption not working for powerflex](https://github.com/dell/csm/issues/1364)
 - [#1366 - [BUG]:  Support Minimum 3GB Volume Size for NFS in CSI-PowerFlex](https://github.com/dell/csm/issues/1366)
 - [#1482 - [BUG]: SDC 4.5.2.1 fails to load when deployed on OCP 4.16.x using csm-operator](https://github.com/dell/csm/issues/1482)
+<br>**Note**: To get the latest 4.5.2.1 SDC image, `ImagePullPolicy` for the `dellemc/sdc:4.5.2.1` image will have to be set to `Always`.
 
 ### Known Issues
 
