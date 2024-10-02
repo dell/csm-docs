@@ -21,19 +21,20 @@ Description: >
 
 ### New Features/Changes
 
-- [#1359 - [FEATURE]: Add Support for OpenShift Container Platform (OCP) 4.16 ](https://github.com/dell/csm/issues/1359)
 - [#1277 - [FEATURE]: Add Authorization upgrade is supported in CSM Operator](https://github.com/dell/csm/issues/1277)
+- [#1359 - [FEATURE]: Add Support for OpenShift Container Platform (OCP) 4.16 ](https://github.com/dell/csm/issues/1359)
 - [#1396 - [FEATURE]: DCM and DN client upgrade is supported in CSM operator ](https://github.com/dell/csm/issues/1396)
 - [#1397 - [FEATURE]: Observability upgrade is supported in CSM Operator](https://github.com/dell/csm/issues/1397)
 
 ### Fixed Issues
 
-- [#1482 - [BUG]: SDC 4.5.2.1 fails to load when deployed on OCP 4.16.x using csm-operator](https://github.com/dell/csm/issues/1482)
 - [#1200 - [BUG]: CrashLoopBackOff and OOMKilled issue in pod : Dell CSM Operator Manager POD](https://github.com/dell/csm/issues/1200)
 - [#1205 - [BUG]: Operator doesn't support non-authorization namespace](https://github.com/dell/csm/issues/1205)
 - [#1220 - [BUG]: Issue while Configuring Authorization module with Powermax CSI Driver using Operator](https://github.com/dell/csm/issues/1220)
 - [#1238 - [BUG]: Missing mountPropagation param for Powermax node template in CSM-Operator](https://github.com/dell/csm/issues/1238)
 - [#1291 - [BUG]: Fix linter errors in csm-operator](https://github.com/dell/csm/issues/1291)
+- [#1482 - [BUG]: SDC 4.5.2.1 fails to load when deployed on OCP 4.16.x using csm-operator](https://github.com/dell/csm/issues/1482)
+<br>**Note**: To get the latest 4.5.2.1 SDC image, `ImagePullPolicy` for the `dellemc/sdc:4.5.2.1` image will have to be set to `Always`.
 
 ### Known Issues
 | Issue | Workaround |
