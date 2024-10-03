@@ -6,18 +6,18 @@ description: >
   CSM for Authorization v1 to v2 Migration guide
 ---
 
-CSM for Authorization v2 has significant architectural changes that prevent a user from upgradng CSM for Authorization v1 to CSM for Authorization v2. This page provide a reference guide for migating v1 deployment to v2.
+CSM for Authorization v2 has significant architectural changes that prevent a user from upgradng CSM for Authorization v1 to CSM for Authorization v2. This page provides a reference guide for migrating v1 to v2.
 
 **Before migration please note following points**
-  - CSM for Authorization v2 calculates the actual usage of capacity provisioned by syncing with array.
-  - Volumes belonging to a tenant are identified using **Volume Prefix** configured in tenant CR.
-  - Volumes without **Volume Prefix** will not be accounted in usage capacity calculation as ownership of volume is unknown without the volume prefix.
-  - User should rename all volumes that are needed to be accounted with **Volume Prefix** before migration to v2.
+  - CSM for Authorization v2 calculates the actual usage of capacity provisioned by syncing with the array.
+  - Volumes belonging to a tenant are identified using the **Volume Prefix** configured in csmtenant custom resource.
+  - Volumes without the **Volume Prefix** will not be accounted for in usage capacity calculation as ownership of the volume is unknown without the volume prefix.
+  - User should rename all volumes that are needed to be accounted for with the **Volume Prefix** before migration to v2.
 
 ## Storage Systems
 
 In CSM for Authorization v1 setup, list the storage to get all the storages configured in the environment.
-Example: :
+Example:
 
 ```
 karavictl storage list --admin-token admintoken.yaml --addr csm-authorization.host.com
@@ -35,7 +35,7 @@ karavictl storage list --admin-token admintoken.yaml --addr csm-authorization.ho
   }
 }
 ```
-In CSM for Authorization v2 Storage are created using CRDs. For each Storage in a v1 environment, create using the CRD, example:
+In CSM for Authorization v2 Storage are created using custom resources. For each Storage in a v1 environment, create using the CRD, example:
 
 ```
 kubectl create -f controller/config/samples/csm-authorization_v1_storage.yaml
@@ -65,7 +65,7 @@ spec:
 
 ## Role and Role Binding
 
-In CSM for Authorization v2, role creation is simpler. User will not be required to bind the role, only thing user needs to do is create roles that they needed.
+In CSM for Authorization v2, role creation is simpler. User will not be required to bind the role, only thing user needs to do is create roles that are needed.
 
 List all the roles that are created in CSM for Authorization v1 setup.
 Example:
@@ -98,7 +98,7 @@ karavictl role list --admin-token admintoken.yaml --addr csm-authorization.host.
   ]
 }
 ```
-For each role in v1 setup, create roles using csmrole CRD.
+For each role in v1 setup, create roles using csmrole custom resources.
 Example
 ```
 kubectl create -f controller/config/samples/csm-authorization_v1_csmrole.yaml
@@ -121,7 +121,6 @@ spec:
   systemType: powerflex
   pool: mypool
 ```
-All corresponding v1 setup roles should be created in v2 setup too. In v2 user don't have to bind the role, this will be taken care during CRD reconciliation.
 
 ## Tenant
 
