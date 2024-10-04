@@ -12,7 +12,7 @@ CSM for Authorization v2 has significant architectural changes that prevent a us
   - CSM for Authorization v2 calculates the actual usage of capacity provisioned by syncing with the array.
   - Volumes belonging to a tenant are identified using the **Volume Prefix** configured in csmtenant custom resource.
   - Volumes without the **Volume Prefix** will not be accounted for in usage capacity calculation as ownership of the volume is unknown without the volume prefix.
-  - User should rename all volumes that are needed to be accounted for with the **Volume Prefix** before migration to v2. See the [Prerequisites](#prerequisites)
+  - User should rename all volumes that are needed to be accounted for with the **Volume Prefix** before migration to v2. See the [Prerequisites](#prerequisites).
 
 ## Prerequisites
 ### On the storage array, rename the volumes owned by each tenant with a tenant prefix.
