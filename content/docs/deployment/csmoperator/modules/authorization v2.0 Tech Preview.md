@@ -18,9 +18,9 @@ To deploy the Operator, follow the instructions available [here](../../#installa
 
 1. [Install Vault or configure an existing Vault](#vault-server-installation).
 
-2. Execute `kubectl create namespace authorization` to create the authorization namespace (if not already present). Note that the namespace can be any user-defined name, in this example, we assume that the namespace is 'authorization'. 
+2. Execute `kubectl create namespace authorization` to create the authorization namespace (if not already present). Note that the namespace can be any user-defined name, in this example, we assume that the namespace is 'authorization'.
 
-3. Install cert-manager CRDs 
+3. Install cert-manager CRDs
     ```bash
     kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v1.11.0/cert-manager.crds.yaml
     ```
@@ -39,7 +39,7 @@ To deploy the Operator, follow the instructions available [here](../../#installa
     ```
 
     After editing the file, run this command to create a secret called `karavi-config-secret`:
-    
+
     ```bash
 
     kubectl create secret generic karavi-config-secret -n authorization --from-file=config.yaml=samples/authorization/config.yaml
@@ -48,12 +48,12 @@ To deploy the Operator, follow the instructions available [here](../../#installa
     Use this command to replace or update the secret:
 
     ```bash
-    
+
     kubectl create secret generic karavi-config-secret -n authorization --from-file=config.yaml=samples/authorization/config.yaml -o yaml --dry-run=client | kubectl replace -f -
     ```
 
 
->__Note__:  
+>__Note__:
 > - If you are installing CSM Authorization in a different namespace than `authorization`, edit the `namespace` field in this file to your namespace.
 
 
@@ -98,9 +98,9 @@ To deploy the Operator, follow the instructions available [here](../../#installa
    | privateKey | The base64-encoded private key for the certificate/private-key pair to connect to Vault. Leave empty to use self-signed certificate. | No | - |
    | certificateAuthority | The base64-encoded certificate authority for validating the Vault server. | No | - |
 
->__Note__:  
+>__Note__:
 > - If you are installing CSM Authorization in a different namespace than `authorization`, edit the `namespace` fields in this file to your namespace.
-> - If you specify `storageclass`, the storage class must NOT be provisioned by the Dell CSI Driver to be configured with this installation of CSM Authorization. 
+> - If you specify `storageclass`, the storage class must NOT be provisioned by the Dell CSI Driver to be configured with this installation of CSM Authorization.
 
 **Optional:**
 To enable reporting of trace data with [Zipkin](https://zipkin.io/), use the `csm-config-params` configMap in the sample CR or dynamically by editing the configMap.
@@ -114,11 +114,11 @@ To enable reporting of trace data with [Zipkin](https://zipkin.io/), use the `cs
 4. Execute this command to create the Authorization CR:
 
     ```bash
-    
+
     kubectl create -f <SAMPLE FILE>
     ```
 
-  >__Note__:  
+  >__Note__:
   > - This command will deploy the Authorization Proxy Server in the namespace specified in the input YAML file.
 
 ### Verify Installation of the CSM Authorization Proxy Server
@@ -138,7 +138,7 @@ Follow the instructions available in CSM Authorization for [Configuring the CSM 
 
 ### Configure a Dell CSI Driver with CSM Authorization
 
-Follow the instructions available in CSM Authorization for 
+Follow the instructions available in CSM Authorization for
 - [Configuring PowerFlex with Authorization](../../../../authorization/v2.0-tech-preview/configuration/powerflex).
 - [Configuring PowerMax with Authorization](../../../../authorization/v2.0-tech-preview/configuration/powermax).
 
@@ -148,7 +148,7 @@ If there is already a Vault server available, skip to [Minimum Server Configurat
 
 If there is no Vault server available to use with CSM Authorization, it can be installed in many ways following [Hashicorp Vault documentation](https://www.vaultproject.io/docs).
 
-For testing environment, however, a simple deployment suggested in this section may suffice. 
+For testing environment, however, a simple deployment suggested in this section may suffice.
 It creates a standalone server with in-memory (non-persistent) storage, running in a Docker container.
 
 > **NOTE**: With in-memory storage, the data in Vault is permanently destroyed upon the server's termination.
@@ -175,8 +175,8 @@ openssl req -newkey rsa:2048 -nodes \
 
 Create server certificate signed by the CA:
 
-> Replace `<external IP>` with an IP address by which CSM Authorization can reach the Vault server. 
-This may be the address of the Docker host where the Vault server will be running. 
+> Replace `<external IP>` with an IP address by which CSM Authorization can reach the Vault server.
+This may be the address of the Docker host where the Vault server will be running.
 
 ```shell
 cat > cert.ext <<EOF
@@ -219,7 +219,6 @@ openssl req -newkey rsa:2048 -nodes \
 ```
 
 Create client certificate signed by the CA:
-// todo check ip?
 ```shell
 cat > cert.ext <<EOF
 authorityKeyIdentifier=keyid,issuer
@@ -286,15 +285,15 @@ docker run --rm -d \
 
 ## Minimum Server Configuration
 
-> **NOTE:** this configuration is a bare minimum to support CSM Authorization and is not intended for use in production environment. 
+> **NOTE:** this configuration is a bare minimum to support CSM Authorization and is not intended for use in production environment.
 Refer to the [Hashicorp Vault documentation](https://www.vaultproject.io/docs) for recommended configuration options.
 
 > If a [test instance of Vault](#vault-server-installation) is used, the `vault` commands below can be executed in the Vault server container shell.
 > To enter the shell, run `docker exec -it vault-server sh`. After completing the configuration process, exit the shell by typing `exit`.
 >
-> Alternatively, you can [download the vault binary](https://www.vaultproject.io/downloads) and run it anywhere. 
+> Alternatively, you can [download the vault binary](https://www.vaultproject.io/downloads) and run it anywhere.
 > It will require two environment variables to communicate with the Vault server:
-> - `VAULT_ADDR` - URL similar to `http://127.0.0.1:8200`. You may need to change the address in the URL to the address of 
+> - `VAULT_ADDR` - URL similar to `http://127.0.0.1:8200`. You may need to change the address in the URL to the address of
 the Docker host where the server is running.
 > - `VAULT_TOKEN` - Authentication token, e.g. the root token `DemoRootToken` used in the [test instance of Vault](#vault-server-installation).
 
@@ -362,7 +361,7 @@ With the default server settings, role level values control TTL in this way:
 
 `token_explicit_max_ttl=2h` - limits the client token TTL to 2 hours since it was originally issues as a result of login. This is a hard limit.
 
-`token_ttl=30m` - sets the default client token TTL to 30 minutes. 30 minutes are counted from the login time and from any following token renewal. 
+`token_ttl=30m` - sets the default client token TTL to 30 minutes. 30 minutes are counted from the login time and from any following token renewal.
 The client token will only be able to renew 3 times before reaching it total allowed TTL of 2 hours.
 
 Existing role values can be changed using `vault write auth/kubernetes/role/csm-authorization token_ttl=30m token_explicit_max_ttl=2h`.
