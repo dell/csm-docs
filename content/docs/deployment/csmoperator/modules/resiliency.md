@@ -9,10 +9,10 @@ The CSM Resiliency module for supported Dell CSI Drivers can be installed via th
 
 ## Prerequisite
 
-When utilizing CSM for Resiliency module, it is crucial to note that it will solely act upon pods that have been assigned a designated label. This label must have both a key and a value that match what has been set in the resiliency module configuration. Upon startup, CSM for Resiliency generates a log message that displays the label key and value being used to monitor pods.:
+When utilizing CSM for Resiliency module, it is crucial to note that it will solely act upon pods that have been assigned a designated label. This label must have both a key and a value that match what has been set in the resiliency module configuration. Upon startup, CSM for Resiliency generates a log message that displays the label key and value being used to monitor pods. This label must be applied the Statefulset that you want to be monitored by CSM for Resiliency.
 
  ```yaml
- labelSelector: {map[podmon.dellemc.com/driver:csi-vxflexos]
+ labelSelector: {map[podmon.dellemc.com/driver:csi-vxflexos]}
  ```
  The above message indicates the key is: podmon.dellemc.com/driver and the label value is csi-vxflexos. To search for the pods that would be monitored, try this:
  ```bash
@@ -26,14 +26,10 @@ Similarly, labels for for csi-powerscale, csi-unity, csi-powerstore and csi-powe
  podmon.dellemc.com/driver:csi-powermax
 ```
 
-```
-NAMESPACE   NAME           READY   STATUS    RESTARTS   AGE
-pmtu1       podmontest-0   1/1     Running   0          3m7s
-pmtu2       podmontest-0   1/1     Running   0          3m8s
-pmtu3       podmontest-0   1/1     Running   0          3m6s
- ```
-
  User must follow all the prerequisites of the respective drivers before enabling this module.
+
+### Storage Array Upgrades
+To avoid application pods getting stuck in a Pending state, CSM for Resiliency should be disabled for storage array upgrades; even if the storage array upgrade is advertised as non-distruptive. If the container orchestrator platform nodes lose connectivity with the array, which is more likely during an upgrade, then Resiliency will delete the application pods on the affected nodes and attempt to move them to a healthy node. If all of the nodes are affected, then the application pods will be stuck in a Pending state.
 
 ## How to enable this module
 
