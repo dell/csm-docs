@@ -14,6 +14,8 @@ The following diagram shows a high-level overview of CSM for Authorization with 
 
 ![Alt text](image.png)
 
+>> NOTE: Proxy cluster in above picture is a Kubernetes cluster must be owned by the storage administrator.
+
 This is the introduction to a Stateless Architecture for Authorization. The creation of storage, roles, and tenants is done through Custom Resources (CRs) which are tracked and contained within CSM Authorization. The underlying communication is consistent with the previous architecture which makes the creation of volumes and snapshots seamless.
 
 ## CSM for Authorization Capabilities
