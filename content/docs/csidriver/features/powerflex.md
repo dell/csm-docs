@@ -385,7 +385,9 @@ The CSI PowerFlex driver version 1.3 and later support the automatic deployment 
   Refer to https://hub.docker.com/r/dellemc/sdc for supported OS versions.
 - There is no automated uninstallation of the SDC kernel module. Follow PowerFlex SDC documentation to manually uninstall the SDC driver from the node. 
 
-Starting from CSM 1.12.0, automatic deployment of the SDC can be disabled. If you have a Powerflex 4.x and NAS functionality enabled, SDC deployment is not necessary. By default, deployment of SDC will be enabled but to disable it, set the `sdc` field to `false`.
+From CSM 1.12.0, you can disable automatic SDC deployment.
+
+By default, SDC deployment is enabled. If you do not want to deploy `sdc` with PowerFlex, it can be disabled by setting the `sdc.enabled` field to `false`.
 
 ```
 node:
@@ -939,8 +941,9 @@ This means that we allow for NFS Export created by driver to be consumed by addr
 
 Starting from CSM 1.12.0, the CSI PowerFlex driver supports configuring NFS independent of SDC. This separation is helpful in scenarios where an SDC is not available in the cluster or additional network interfaces do not need to be deployed.
 
-To enable this feature you need to disable the automatic `sdc` deployment from the values file and provide the interface names mapping for each of the nodes that are being used.
+To disable SDC deployment, update the values file and provide the interface names mapping for each of the nodes that are being used.
 
+**Helm**
 ```
 node:
   ...
@@ -950,8 +953,20 @@ node:
   ...
 
 interfaceNames:
-  # worker1: interface1
-  # worker2: interface2
+  # worker-1-jxsjoueeewabc.domain: "ens192"
+  # worker-2-jxsjoueeewabc.domain: "ens192"
+```
+
+**Operator**
+```
+common:
+...
+  - name: INTERFACE_NAMES: 'worker-1-jxsjoueeewabc.domain: "ens192", worker-2-jxsjoueeewabc.domain: "ens192"'
+...
+node:
+...
+  - name: X_CSI_SDC_ENABLED
+    value: "false"
 ```
 
 ## Storage Capacity Tracking
