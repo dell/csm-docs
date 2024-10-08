@@ -1,7 +1,7 @@
 ---
 title: "Prerequisites and Support Matrix"
 linkTitle: "Prerequisites and Support Matrix"
-description: Prerequisites and Support Matrix for CSM 
+description: Prerequisites and Support Matrix for CSM
 weight: 1
 ---
 
@@ -48,7 +48,7 @@ Container Storage Modules (CSM) does not officially support specific operating s
 - SLES 15SP5
 - Ubuntu 22.04
 
-> Notes: 
+> Notes:
 > * The host operating system/version being used must align with what each Dell Storage platform supports. Please visit [E-Lab Navigator](https://elabnavigator.dell.com/eln/modernHomeSSM) for specific Dell Storage platform host operating system level support matrices.
 > * Any operating system or version that's not mentioned here must be self-certified using [Cert-CSI](../support/cert-csi/) in order to be supported. Although not mandatory, we recommend users to use operating systems and versions that have not met their end of life.
 
@@ -61,16 +61,15 @@ Container Storage Modules (CSM) does not officially support specific operating s
 | [CSM Authorization - v2.0 ](../authorization/)                | Yes       | Yes       | No       | Yes        | No         |
 | [CSM Observability](../observability/)                        | Yes      | Yes       | No       | Yes        | Yes        |
 | [CSM Replication](../replication/)                            | Yes      | Yes       | No       | Yes        | Yes        |
-| [CSM Resiliency](../resiliency/)                              | Yes       | Yes       | Yes      | Yes        | Yes        |
+| [CSM Resiliency](../resiliency/)                              | Yes      | Yes       | Yes      | Yes        | Yes        |
 | [CSM Encryption](../secure/encryption/)                       | No       | No        | No       | Yes        | No         |
-| [CSM Application Mobility](../applicationmobility/)           | Yes      | No       | No      | No        | No        |
+| [CSM Application Mobility](../applicationmobility/)           | Yes      | No        | No       | No         | No         |
 | [Volume Group Snapshot](../snapshots/volume-group-snapshots/) | No       | Yes       | No       | No         | Yes        |
 
 {{</table>}}
 
 > Notes:
 > * Encryption is available as a Technical Preview only and is not officially supported.
-> * Authorization v2.0 is available as a Technical Preview only on PowerFlex.
 
 ## CSM Operator compatibility matrix
 
