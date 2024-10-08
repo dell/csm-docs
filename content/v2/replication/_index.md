@@ -53,6 +53,7 @@ the objects still exist in pairs.
 * Replication with METRO mode does not need Replicator sidecar and common controller.
 * Different namespaces cannot share the same RDF group for creating volumes with ASYNC mode for PowerMax.
 * Same RDF group cannot be shared across different replication modes for PowerMax.
+* Replication support for multiple drivers installed on same Kubernetes cluster.
 
 ### QuickStart
 

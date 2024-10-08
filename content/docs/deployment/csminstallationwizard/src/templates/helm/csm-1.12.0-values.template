@@ -252,6 +252,8 @@ csi-vxflexos:
     healthMonitor:
       enabled: $HEALTH_MONITOR_ENABLED
     nodeSelector: $NODE_POD_NODE_SELECTOR
+    sdc:
+      enabled: $SDC_ENABLED
     renameSDC:
       enabled: $RENAME_SDC_ENABLED
       sdcPrefix: $SDC_PREFIX
