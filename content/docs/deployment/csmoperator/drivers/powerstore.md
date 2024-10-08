@@ -224,6 +224,21 @@ CRDs should be configured during replication prepare stage with repctl as descri
 
 6. Refer https://github.com/dell/csi-powerstore/tree/main/samples for the sample files.
 
+### Install Driver using Minimal CR(Custom Resource)
+
+1. Follow all the [prerequisites](#prerequisite) above
+
+2. Create a CR (Custom Resource) for PowerStore using the minimal sample files provided
+   [here](https://github.com/dell/csm-operator/tree/main/samples/minimal-samples). This file can be modified to use custom parameters if needed.
+
+3.  Execute this command to create PowerStore custom resource:
+    ```bash
+    kubectl create -f <input_sample_file.yaml>
+    ```
+    This command will deploy the CSI-PowerStore driver in the namespace specified in the input YAML file.
+
+4.  [Verify the CSI Driver installation](../#verifying-the-driver-installation)
+
 **Note** :
    1. "Kubelet config dir path" is not yet configurable in case of Operator based driver installation.
    2. Snapshotter and resizer sidecars are not optional. They are defaults with Driver installation.

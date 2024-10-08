@@ -168,3 +168,18 @@ For detailed PowerFlex installation procedure, see the [Dell PowerFlex Deploymen
 
 **Note** :
    1. Snapshotter and resizer sidecars are installed by default.
+
+### Install Driver using Minimal CR(Custom Resource)
+
+1. Follow all the [prerequisites](#prerequisite) above
+
+2. Create a CR (Custom Resource) for PowerFlex using the minimal sample files provided
+   [here](https://github.com/dell/csm-operator/tree/main/samples/minimal-samples). This file can be modified to use custom parameters if needed.
+
+3.  Execute this command to create PowerFlex custom resource:
+    ```bash
+    kubectl create -f <input_sample_file.yaml>
+    ```
+    This command will deploy the CSI-PowerFlex driver in the namespace specified in the input YAML file.
+
+4.  [Verify the CSI Driver installation](../#verifying-the-driver-installation)
