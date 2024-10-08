@@ -21,26 +21,26 @@ Before you begin, make sure you have the following:
 <div class="container mt-5">
     <div class="row">
       <div class="col-md-6 mb-4">
-    {{< customcard path="content/docs/getting-started/installation/kubernetes" link="./kubernetes" icon="fas fa-star" title="Kubernetes" image="https://cdn2.iconfinder.com/data/icons/mixd/512/20_kubernetes-1024.png">}}
+    {{< customcard path="content/docs/getting-started/installation/kubernetes" link="./kubernetes" icon="fas fa-star" title="Kubernetes" image="../../../icons/save-disk.svg">}}
       </div>
       <div class="col-md-6 mb-4">
-       {{< customcard  path="content/docs/getting-started/installation/openshift" link="./openshift" icon="fas fa-search" title="Open Shift" image="https://th.bing.com/th/id/OIP.at1jNtvleacyjFhRJu7NKwHaHa?rs=1&pid=ImgDetMain" >}}
+       {{< customcard  path="content/docs/getting-started/installation/openshift" link="./openshift" icon="fas fa-search" title="Open Shift" image="../../../icons/save-disk.svg">}}
        </div>
     </div>
        <div class="row">
       <div class="col-md-6 mb-4">
-      {{< customcard path="content/docs/getting-started/installation/rancherkubernetesengine" link="./rancherkubernetesengine" icon="fas fa-cloud" title="Rancher Kubernetes Engine" image="https://th.bing.com/th/id/OIP.7hs2P_Rym3HXaNniq4A5xAAAAA?rs=1&pid=ImgDetMain" >}}
+      {{< customcard path="content/docs/getting-started/installation/rancherkubernetesengine" link="./rancherkubernetesengine" icon="fas fa-cloud" title="Rancher Kubernetes Engine" image="../../../icons/save-disk.svg" >}}
       </div>
       <div class="col-md-6 mb-4">
-        {{< customcard path="content/docs/getting-started/installation/mirantiskubernetesengine" link="./mirantiskubernetesengine" icon="fas fa-pencil" title="Mirantis Kubernetes Engine" image="https://www.conoa.se/wp-content/uploads/2021/04/mirantis-kubernetes-engine-icon-medium.png">}} 
+        {{< customcard path="content/docs/getting-started/installation/mirantiskubernetesengine" link="./mirantiskubernetesengine" icon="fas fa-pencil" title="Mirantis Kubernetes Engine "image="../../../icons/save-disk.svg" >}} 
         </div>
     </div> 
     <div class="row">
       <div class="col-md-6 mb-4">
-          {{< customcard path="content/docs/getting-started/installation/googleanthos" link="./googleanthos" icon="fas fa-lock" title="Google Anthos" image="https://www.redapt.com/hs-fs/hubfs/_icons/Anthos-Logomark.png?width=240&name=Anthos-Logomark.png">}}
+          {{< customcard path="content/docs/getting-started/installation/googleanthos" link="./googleanthos" icon="fas fa-lock" title="Google Anthos" image="../../../icons/save-disk.svg">}}
         </div>  
          <div class="col-md-6 mb-4">
-          {{< customcard path="content/docs/getting-started/installation/vmwaretanzu" link="./vmwaretanzu" icon="fas fa-key" title="VMware Tanzu" image="https://avatars.githubusercontent.com/u/54452117?s=280&v=4">}}
+          {{< customcard path="content/docs/getting-started/installation/vmwaretanzu" link="./vmwaretanzu" icon="fas fa-key" title="VMware Tanzu" image="../../../icons/save-disk.svg">}}
         </div> 
       </div>
 </div>
