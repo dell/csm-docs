@@ -9,9 +9,7 @@ description: >
 The CSM Authorization karavictl CLI is no longer actively maintained or supported. It will be deprecated in a future release.
 {{% /pageinfo %}}
 
->> NOTE: Authorization v2.0 Tech Preview is not supported through Helm.
-
-CSM Authorization can be installed by using the provided Helm v3 charts on Kubernetes platforms. 
+CSM Authorization can be installed by using the provided Helm v3 charts on Kubernetes platforms.
 
 The following CSM Authorization components are installed in the specified namespace:
 - proxy-service, which forwards requests from the CSI Driver to the backend storage array
@@ -35,16 +33,16 @@ The following third-party components are optionally installed in the specified n
    kubectl create namespace authorization
    ```
 
-2. Add the Dell Helm Charts repo 
+2. Add the Dell Helm Charts repo
    ```bash
      helm repo add dell https://dell.github.io/helm-charts
    ```
 
 3. Prepare `samples/csm-authorization/config.yaml` which contains the JWT signing secret. The following table lists the configuration parameters.
 
-    | Parameter | Description                                                  | Required | Default |
-    | --------- | ------------------------------------------------------------ | -------- | ------- |
-    | web.jwtsigningsecret  | String used to sign JSON Web Tokens                       | true     | secret       |.
+    | Parameter            | Description                         | Required | Default |
+    | -------------------- | ----------------------------------- | -------- | ------- |
+    | web.jwtsigningsecret | String used to sign JSON Web Tokens | true     | secret  | . |
 
     Example:
 
@@ -54,7 +52,7 @@ The following third-party components are optionally installed in the specified n
     ```
 
     After editing the file, run the following command to create a secret called `karavi-config-secret`:
-    
+
     ```bash
 
     kubectl create secret generic karavi-config-secret -n authorization --from-file=config.yaml=samples/csm-authorization/config.yaml
@@ -63,43 +61,43 @@ The following third-party components are optionally installed in the specified n
     Use the following command to replace or update the secret:
 
     ```bash
-    
+
     kubectl create secret generic karavi-config-secret -n authorization --from-file=config.yaml=samples/csm-authorization/config.yaml -o yaml --dry-run=client | kubectl replace -f -
     ```
-   
+
 4. Copy the default values.yaml file `cp charts/csm-authorization/values.yaml myvalues.yaml`
 
 5. Look over all the fields in `myvalues.yaml` and fill in/adjust any as needed.
 
-| Parameter                | Description                                                                                                                                                                                                                                                                                                                                                                                                    | Required | Default |
-| ------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ------- |
-| **ingress-nginx**           | This section configures the enablement of the NGINX Ingress Controller.              | -        | -       |
-| enabled | Enable/Disable deployment of the NGINX Ingress Controller. Set to false if you already have an Ingress Controller installed. | No | true |
-| **cert-manager**           | This section configures the enablement of cert-manager.              | -        | -       |
-| enabled | Enable/Disable deployment of cert-manager. Set to false if you already have cert-manager installed. | No | true |
-| **authorization**           | This section configures the CSM-Authorization components.              | -        | -       |
-| authorization.images.proxyService | The image to use for the proxy-service. | Yes | dellemc/csm-authorization-proxy:nightly |
-| authorization.images.tenantService | The image to use for the tenant-service. | Yes | dellemc/csm-authorization-tenant:nightly |
-| authorization.images.roleService | The image to use for the role-service. | Yes | dellemc/csm-authorization-proxy:nightly |
-| authorization.images.storageService | The image to use for the storage-service. | Yes | dellemc/csm-authorization-storage:nightly |
-| authorization.images.opa | The image to use for Open Policy Agent. | Yes | openpolicyagent/opa |
-| authorization.images.opaKubeMgmt | The image to use for Open Policy Agent kube-mgmt. | Yes | openpolicyagent/kube-mgmt:0.11 |
-| authorization.hostname | The hostname to configure the self-signed certificate (if applicable) and the proxy Ingress. | Yes | csm-authorization.com |
-| authorization.logLevel | CSM Authorization log level. Allowed values: “error”, “warn”/“warning”, “info”, “debug”. | Yes | debug |
-| authorization.zipkin.collectoruri | The URI of the Zipkin instance to export traces. | No | - |
-| authorization.zipkin.probability | The ratio of traces to export. | No | - |
-| authorization.proxyServerIngress.ingressClassName | The ingressClassName of the proxy-service Ingress. | Yes | - |
-| authorization.proxyServerIngress.hosts | Additional host rules to be applied to the proxy-service Ingress.  | No | - |
-| authorization.proxyServerIngress.annotations | Additional annotations for the proxy-service Ingress. | No | - |
-| authorization.roleServiceIngress.ingressClassName | The ingressClassName of the role-service Ingress. | Yes | - |
-| authorization.roleServiceIngress.hosts | Additional host rules to be applied to the role-service Ingress.  | No | - |
-| authorization.roleServiceIngress.annotations | Additional annotations for the role-service Ingress. | No | - |
-| **redis**           | This section configures Redis.              | -        | -       |
-| redis.images.redis | The image to use for Redis. | Yes | redis:6.0.8-alpine |
-| redis.images.commander | The image to use for Redis Commander. | Yes | rediscommander/redis-commander:latest |
-| redis.storageClass | The storage class for Redis to use for persistence. If not supplied, a locally provisioned volume is used. | No | - |
+| Parameter                                         | Description                                                                                                                  | Required | Default                                   |
+| ------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- | -------- | ----------------------------------------- |
+| **ingress-nginx**                                 | This section configures the enablement of the NGINX Ingress Controller.                                                      | -        | -                                         |
+| enabled                                           | Enable/Disable deployment of the NGINX Ingress Controller. Set to false if you already have an Ingress Controller installed. | No       | true                                      |
+| **cert-manager**                                  | This section configures the enablement of cert-manager.                                                                      | -        | -                                         |
+| enabled                                           | Enable/Disable deployment of cert-manager. Set to false if you already have cert-manager installed.                          | No       | true                                      |
+| **authorization**                                 | This section configures the CSM-Authorization components.                                                                    | -        | -                                         |
+| authorization.images.proxyService                 | The image to use for the proxy-service.                                                                                      | Yes      | dellemc/csm-authorization-proxy:nightly   |
+| authorization.images.tenantService                | The image to use for the tenant-service.                                                                                     | Yes      | dellemc/csm-authorization-tenant:nightly  |
+| authorization.images.roleService                  | The image to use for the role-service.                                                                                       | Yes      | dellemc/csm-authorization-proxy:nightly   |
+| authorization.images.storageService               | The image to use for the storage-service.                                                                                    | Yes      | dellemc/csm-authorization-storage:nightly |
+| authorization.images.opa                          | The image to use for Open Policy Agent.                                                                                      | Yes      | openpolicyagent/opa                       |
+| authorization.images.opaKubeMgmt                  | The image to use for Open Policy Agent be-mgmt.                                                                            | Yes      | openpolicyagent/kube-mgmt:8.5.8            |
+| authorization.hostname                            | The hostname to configure the self-signed certificate (if applicable) and the proxy Ingress.                                 | Yes      | csm-authorization.com                     |
+| authorization.logLevel                            | CSM Authorization log level. Allowed values: “error”, “warn”/“warning”, “info”, “debug”.                                     | Yes      | debug                                     |
+| authorization.zipkin.collectoruri                 | The URI of the Zipkin instance to export traces.                                                                             | No       | -                                         |
+| authorization.zipkin.probability                  | The ratio of traces to export.                                                                                               | No       | -                                         |
+| authorization.proxyServerIngress.ingressClassName | The ingressClassName of the proxy-service Ingress.                                                                           | Yes      | -                                         |
+| authorization.proxyServerIngress.hosts            | Additional host rules to be applied to the proxy-service Ingress.                                                            | No       | -                                         |
+| authorization.proxyServerIngress.annotations      | Additional annotations for the proxy-service Ingress.                                                                        | No       | -                                         |
+| authorization.roleServiceIngress.ingressClassName | The ingressClassName of the role-service Ingress.                                                                            | Yes      | -                                         |
+| authorization.roleServiceIngress.hosts            | Additional host rules to be applied to the role-service Ingress.                                                             | No       | -                                         |
+| authorization.roleServiceIngress.annotations      | Additional annotations for the role-service Ingress.                                                                         | No       | -                                         |
+| **redis**                                         | This section configures Redis.                                                                                               | -        | -                                         |
+| redis.images.redis                                | The image to use for Redis.                                                                                                  | Yes      | redis:7.4.0-alpine                        |
+| redis.images.commander                            | The image to use for Redis Commander.                                                                                        | Yes      | rediscommander/redis-commander:latest     |
+| redis.storageClass                                | The storage class for Redis to use for persistence. If not supplied, a locally provisioned volume is used.                   | No       | -                                         |
 
->__Note__:  
+>__Note__:
 > - If you specify `redis.storageClass`, the storage class must NOT be provisioned by the Dell CSI Driver to be configured with this installation of CSM Authorization.
 
 6. Install the driver using `helm`:
@@ -144,7 +142,7 @@ mv ./karavictl ~/.local/bin/karavictl
 # and then append (or prepend) ~/.local/bin to $PATH
 ```
 
-Karavictl commands and intended use can be found [here](../../../../../authorization/v1.x-ga/cli/). 
+Karavictl commands and intended use can be found [here](../../../../../authorization/v1.x-ga/cli/).
 
 ## Configuring the CSM Authorization Proxy Server
 
@@ -196,11 +194,11 @@ Please continue following the configuration steps for a specific CSI Driver [her
 
 CSM for Authorization has a subset of configuration parameters that can be updated dynamically:
 
-| Parameter | Type | Default | Description |
-| --------- | ---- | ------- | ----------- |
-| web.jwtsigningsecret | String | "secret" |The secret used to sign JWT tokens | 
+| Parameter            | Type   | Default  | Description                        |
+| -------------------- | ------ | -------- | ---------------------------------- |
+| web.jwtsigningsecret | String | "secret" | The secret used to sign JWT tokens |
 
-Updating configuration parameters can be done by editing the `karavi-config-secret`. The secret can be queried using k3s and kubectl like so: 
+Updating configuration parameters can be done by editing the `karavi-config-secret`. The secret can be queried using k3s and kubectl like so:
 
 ```bash
 kubectl -n authorization get secret/karavi-config-secret

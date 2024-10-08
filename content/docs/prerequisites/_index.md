@@ -1,7 +1,7 @@
 ---
 title: "Prerequisites and Support Matrix"
 linkTitle: "Prerequisites and Support Matrix"
-description: Prerequisites and Support Matrix for CSM 
+description: Prerequisites and Support Matrix for CSM
 weight: 1
 ---
 
@@ -48,7 +48,7 @@ Container Storage Modules (CSM) does not officially support specific operating s
 - SLES 15SP5
 - Ubuntu 22.04
 
-> Notes: 
+> Notes:
 > * The host operating system/version being used must align with what each Dell Storage platform supports. Please visit [E-Lab Navigator](https://elabnavigator.dell.com/eln/modernHomeSSM) for specific Dell Storage platform host operating system level support matrices.
 > * Any operating system or version that's not mentioned here must be self-certified using [Cert-CSI](../support/cert-csi/) in order to be supported. Although not mandatory, we recommend users to use operating systems and versions that have not met their end of life.
 
@@ -58,19 +58,18 @@ Container Storage Modules (CSM) does not officially support specific operating s
 | CSM Module                                                    | PowerMax | PowerFlex | Unity XT | PowerScale | PowerStore |
 |---------------------------------------------------------------|:--------:|:---------:|:--------:|:----------:|:----------:|
 | [CSM Authorization - v1.x GA](../authorization/)              | Yes      | Yes       | No       | Yes        | No         |
-| [CSM Authorization - v2.0 Tech Preview](../authorization/)    | No       | Yes       | No       | No         | No         |
+| [CSM Authorization - v2.0 Tech Preview](../authorization/)    | Yes      | Yes       | No       | Yes        | No         |
 | [CSM Observability](../observability/)                        | Yes      | Yes       | No       | Yes        | Yes        |
 | [CSM Replication](../replication/)                            | Yes      | Yes       | No       | Yes        | Yes        |
-| [CSM Resiliency](../resiliency/)                              | Yes       | Yes       | Yes      | Yes        | Yes        |
+| [CSM Resiliency](../resiliency/)                              | Yes      | Yes       | Yes      | Yes        | Yes        |
 | [CSM Encryption](../secure/encryption/)                       | No       | No        | No       | Yes        | No         |
-| [CSM Application Mobility](../applicationmobility/)           | Yes      | No       | No      | No        | No        |
+| [CSM Application Mobility](../applicationmobility/)           | Yes      | No        | No       | No         | No         |
 | [Volume Group Snapshot](../snapshots/volume-group-snapshots/) | No       | Yes       | No       | No         | Yes        |
 
 {{</table>}}
 
 > Notes:
 > * Encryption is available as a Technical Preview only and is not officially supported.
-> * Authorization v2.0 is available as a Technical Preview only on PowerFlex.
 
 ## CSM Operator compatibility matrix
 
@@ -78,16 +77,16 @@ The table below lists the driver and modules versions installable with the CSM O
 {{<table "table table-striped table-bordered table-sm">}}
 | CSI Driver         | Version | CSM Authorization | CSM Replication | CSM Observability | CSM Resiliency |
 | ------------------ |---------|-------------------|-----------------|-------------------|----------------|
-| CSI PowerScale     | 2.11.0  | ✔ 1.11.0          | ✔ 1.9.0        | ✔ 1.9.0           | ✔ 1.10.0      |
+| CSI PowerScale     | 2.11.0  | ✔ 1.11.0, 2.0.0   | ✔ 1.9.0        | ✔ 1.9.0           | ✔ 1.10.0      |
 | CSI PowerScale     | 2.10.1  | ✔ 1.10.1          | ✔ 1.8.1        | ✔ 1.8.1           | ✔ 1.9.1       |
 | CSI PowerScale     | 2.9.1   | ✔ 1.9.1           | ✔ 1.7.1        | ✔ 1.7.0           | ✔ 1.8.1       |
-| CSI PowerFlex      | 2.12.0  | ✔ 1.12.0          | ✔ 1.10.0       | ✔ 1.10.0          | ✔ 1.11.0      |
+| CSI PowerFlex      | 2.12.0  | ✔ 1.12.0, 2.0.0   | ✔ 1.10.0       | ✔ 1.10.0          | ✔ 1.11.0      |
 | CSI PowerFlex      | 2.11.0  | ✔ 1.11.0          | ✔ 1.9.0        | ✔ 1.9.0           | ✔ 1.10.0      |
 | CSI PowerFlex      | 2.10.1  | ✔ 1.10.1          | ✔ 1.8.1        | ✔ 1.8.1           | ✔ 1.9.1       |
 | CSI PowerStore     | 2.11.0  | ❌                | ❌             | ❌                | ✔ 1.10.0      |
 | CSI PowerStore     | 2.10.1  | ❌                | ❌             | ❌                | ✔ 1.9.1       |
 | CSI PowerStore     | 2.9.1   | ❌                | ❌             | ❌                | ✔ 1.8.1       |
-| CSI PowerMax       | 2.11.0  | ✔ 1.11.0          | ✔ 1.9.0        | ✔ 1.9.0           | ✔ 1.10.0      |
+| CSI PowerMax       | 2.11.0  | ✔ 1.11.0, 2.0.0   | ✔ 1.9.0        | ✔ 1.9.0           | ✔ 1.10.0      |
 | CSI PowerMax       | 2.10.1  | ✔ 1.10.1          | ✔ 1.8.1        | ✔ 1.8.1           | ❌            |
 | CSI PowerMax       | 2.9.1   | ✔ 1.9.1           | ✔ 1.7.1        | ✔ 1.7.0           | ❌            |
 | CSI Unity XT       | 2.12.0  | ❌                | ❌             | ❌                | ❌            |
