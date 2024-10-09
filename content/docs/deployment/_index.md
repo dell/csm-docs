@@ -41,16 +41,16 @@ The Container Storage Modules and the required CSI Drivers can each be deployed 
   CSM for Observability can be deployed either via Helm/CSM operator/CSM for Observability Installer/CSM for Observability Offline Installer
   [...More on installation instructions](helm/modules/installation/observability/)
   {{< /card >}}
-   {{< card header="[Dell Container Storage Module for Authorization](helm/modules/installation/authorization/)"
+   {{< card header="[Dell Container Storage Module for Authorization](helm/modules/installation/authorization-v2.0/)"
           footer="Installs Authorization Module">}}
-  CSM Authorization can be installed by using the provided Helm v3 charts on Kubernetes platforms or CSM operator. 
-  [...More on installation instructions](helm/modules/installation/authorization/)
+  CSM Authorization can be installed by using the provided Helm v3 charts on Kubernetes platforms or CSM operator.
+  [...More on installation instructions](helm/modules/installation/authorization-v2.0/)
   {{< /card >}}
 {{% /cardpane %}}
 {{% cardpane %}}
   {{< card header="[Dell Container Storage Module for Resiliency](helm/modules/installation/resiliency)"
           footer="Installs Resiliency Module">}}
-  CSI drivers that support Helm chart installation allow CSM for Resiliency to be _optionally_ installed by variables in the chart. It can be updated via _podmon_ block specified in the _values.yaml_. It can be installed via CSM operator as well. 
+  CSI drivers that support Helm chart installation allow CSM for Resiliency to be _optionally_ installed by variables in the chart. It can be updated via _podmon_ block specified in the _values.yaml_. It can be installed via CSM operator as well.
   [...More on installation instructions](helm/modules/installation/resiliency)
   {{< /card >}}
    {{< card header="[Dell Container Storage Module for Replication](helm/modules/installation/replication)"
