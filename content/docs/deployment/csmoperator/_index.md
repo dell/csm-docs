@@ -200,12 +200,12 @@ Here is the output of a request to build an offline bundle for the Dell CSM Oper
    gcr.io/kubebuilder/kube-rbac-proxy:v0.8.0
    nginxinc/nginx-unprivileged:1.20
    otel/opentelemetry-collector:0.42.0
-   registry.k8s.io/sig-storage/csi-attacher:v4.6.1
-   registry.k8s.io/sig-storage/csi-external-health-monitor-controller:v0.12.1
-   registry.k8s.io/sig-storage/csi-node-driver-registrar:v2.10.1
-   registry.k8s.io/sig-storage/csi-provisioner:v5.0.1
-   registry.k8s.io/sig-storage/csi-resizer:v1.11.1
-   registry.k8s.io/sig-storage/csi-snapshotter:v8.0.1
+   registry.k8s.io/sig-storage/csi-attacher:v4.7.0
+   registry.k8s.io/sig-storage/csi-external-health-monitor-controller:v0.13.0
+   registry.k8s.io/sig-storage/csi-node-driver-registrar:v2.12.0
+   registry.k8s.io/sig-storage/csi-provisioner:v5.1.0
+   registry.k8s.io/sig-storage/csi-resizer:v1.12.0
+   registry.k8s.io/sig-storage/csi-snapshotter:v8.1.0
 
 * Copying necessary files
 
@@ -286,8 +286,8 @@ Loaded image: docker.io/dellemc/csi-powerstore:v2.12.0
 Loaded image: docker.io/dellemc/csi-isilon:v2.12.0
 ...
 ...
-Loaded image: registry.k8s.io/sig-storage/csi-resizer:v1.11.1
-Loaded image: registry.k8s.io/sig-storage/csi-snapshotter:v8.0.1
+Loaded image: registry.k8s.io/sig-storage/csi-resizer:v1.12.0
+Loaded image: registry.k8s.io/sig-storage/csi-snapshotter:v8.1.0
 
 * Tagging and pushing images
 
@@ -295,8 +295,8 @@ Loaded image: registry.k8s.io/sig-storage/csi-snapshotter:v8.0.1
    dellemc/csi-metadata-retriever:v1.9.0 -> localregistry:5000/dell-csm-operator/csi-metadata-retriever:v1.9.0
    ...
    ...
-   registry.k8s.io/sig-storage/csi-resizer:v1.11.1 -> localregistry:5000/dell-csm-operator/csi-resizer:v1.11.1
-   registry.k8s.io/sig-storage/csi-snapshotter:v8.0.1 -> localregistry:5000/dell-csm-operator/csi-snapshotter:v8.0.1
+   registry.k8s.io/sig-storage/csi-resizer:v1.12.0 -> localregistry:5000/dell-csm-operator/csi-resizer:v1.12.0
+   registry.k8s.io/sig-storage/csi-snapshotter:v8.1.0 -> localregistry:5000/dell-csm-operator/csi-snapshotter:v8.1.0
 
 * Preparing files within /root/dell-csm-operator-bundle
 
@@ -304,8 +304,8 @@ Loaded image: registry.k8s.io/sig-storage/csi-snapshotter:v8.0.1
    changing: dellemc/csi-metadata-retriever:v1.9.0 -> localregistry:5000/dell-csm-operator/csi-metadata-retriever:v1.9.0
    ...
    ...
-   changing: registry.k8s.io/sig-storage/csi-resizer:v1.11.1 -> localregistry:5000/dell-csm-operator/csi-resizer:v1.11.1
-   changing: registry.k8s.io/sig-storage/csi-snapshotter:v8.0.1 -> localregistry:5000/dell-csm-operator/csi-snapshotter:v8.0.1
+   changing: registry.k8s.io/sig-storage/csi-resizer:v1.12.0 -> localregistry:5000/dell-csm-operator/csi-resizer:v1.12.0
+   changing: registry.k8s.io/sig-storage/csi-snapshotter:v8.1.0 -> localregistry:5000/dell-csm-operator/csi-snapshotter:v8.1.0
 
 * Complete
 ```
