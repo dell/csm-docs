@@ -41,9 +41,9 @@ The following third-party components are optionally installed in the specified n
 
 4. Prepare `samples/csm-authorization/config.yaml` which contains the JWT signing secret. The following table lists the configuration parameters.
 
-    | Parameter | Description                                                  | Required | Default |
-    | --------- | ------------------------------------------------------------ | -------- | ------- |
-    | web.jwtsigningsecret  | String used to sign JSON Web Tokens                       | true     | secret       |.
+    | Parameter            | Description                         | Required | Default |
+    | -------------------- | ----------------------------------- | -------- | ------- |
+    | web.jwtsigningsecret | String used to sign JSON Web Tokens | true     | secret  | . |
 
     Example:
 
@@ -73,7 +73,7 @@ The following third-party components are optionally installed in the specified n
 | Parameter                           | Description                                                                                                                          | Required | Default                                   |
 | ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ | -------- | ----------------------------------------- |
 | openshift                           | Enable/Disable deployment of the OpenShift Ingress Operator. Set to false if you have an Ingress Controller installed.               | No       | true                                      |
-| **nginx**                   | This section configures the enablement of the NGINX Ingress Controller.                                                              | -        | -                                         |
+| **nginx**                           | This section configures the enablement of the NGINX Ingress Controller.                                                              | -        | -                                         |
 | enabled                             | Enable/Disable deployment of the NGINX Ingress Controller. Set to false if you have an Ingress Controller installed.                 | No       | true                                      |
 | **cert-manager**                    | This section configures the enablement of cert-manager.                                                                              | -        | -                                         |
 | enabled                             | Enable/Disable deployment of cert-manager. Set to false if you already have cert-manager installed.                                  | No       | true                                      |
@@ -82,28 +82,28 @@ The following third-party components are optionally installed in the specified n
 | images.tenantService                | The image to use for the tenant-service.                                                                                             | Yes      | dellemc/csm-authorization-tenant:nightly  |
 | images.roleService                  | The image to use for the role-service.                                                                                               | Yes      | dellemc/csm-authorization-proxy:nightly   |
 | images.storageService               | The image to use for the storage-service.                                                                                            | Yes      | dellemc/csm-authorization-storage:nightly |
-| authorization.images.authorizationController      | The image to use for the controller. | Yes | dellemc/csm-authorization-controller |
+| images.authorizationController      | The image to use for the controller.                                                                                                 | Yes      | dellemc/csm-authorization-controller      |
 | images.opa                          | The image to use for Open Policy Agent.                                                                                              | Yes      | openpolicyagent/opa                       |
 | images.opaKubeMgmt                  | The image to use for Open Policy Agent kube-mgmt.                                                                                    | Yes      | openpolicyagent/kube-mgmt:8.5.8           |
 | hostname                            | The hostname to configure the self-signed certificate (if applicable) and the proxy Ingress.                                         | Yes      | csm-authorization.com                     |
 | logLevel                            | CSM Authorization log level. Allowed values: “error”, “warn”/“warning”, “info”, “debug”.                                             | Yes      | debug                                     |
+| concurrentPowerFlexRequests         | Number of concurrent requests to PowerFlex. Used with dellctl to list tenant volumes.                                                | Yes      | 10                                        |
+| concurrentPowerScaleRequests        | Number of concurrent requests to PowerScale. Used with dellctl to list tenant volumes.                                               | Yes      | 10                                        |
 | zipkin.collectoruri                 | The URI of the Zipkin instance to export traces.                                                                                     | No       | -                                         |
 | zipkin.probability                  | The ratio of traces to export.                                                                                                       | No       | -                                         |
 | proxyServerIngress.ingressClassName | The ingressClassName of the proxy-service Ingress.                                                                                   | Yes      | -                                         |
 | proxyServerIngress.hosts            | Additional host rules to be applied to the proxy-service Ingress.                                                                    | No       | -                                         |
 | proxyServerIngress.annotations      | Additional annotations for the proxy-service Ingress.                                                                                | No       | -                                         |
-| roleServiceIngress.ingressClassName | The ingressClassName of the role-service Ingress.                                                                                    | Yes      | -                                         |
-| roleServiceIngress.hosts            | Additional host rules to be applied to the role-service Ingress.                                                                     | No       | -                                         |
-| roleServiceIngress.annotations      | Additional annotations for the role-service Ingress.                                                                                 | No       | -                                         |
+| storageCapacityPollInterval         | Interval the storage-service uses to poll the backend array for tenant capacity.                                                     | Yes      | 5m                                        |
 | **redis**                           | This section configures Redis.                                                                                                       | -        | -                                         |
-| redisName                           | The prefix of the redis pods. The number of pods is determined by the number of replicas.                                            | Yes      | redis-csm                                 |
+| name                                | The prefix of the redis pods. The number of pods is determined by the number of replicas.                                            | Yes      | redis-csm                                 |
 | sentinel                            | The prefix of the redis sentinel pods. The number of pods is determined by the number of replicas.                                   | Yes      | sentinel                                  |
 | redisCommander                      | The prefix of the redis commander pod.                                                                                               | Yes      | rediscommander                            |
 | replicas                            | The number of replicas for the sentinel and redis pods.                                                                              | Yes      | 5                                         |
 | images.redis                        | The image to use for Redis.                                                                                                          | Yes      | redis:7.4.0-alpine                        |
 | images.commander                    | The image to use for Redis Commander.                                                                                                | Yes      | rediscommander/redis-commander:latest     |
 | **vault**                           | This section configures the vault components.                                                                                        | -        | -                                         |
-| identifier                          | A name that is used to identify a vault instance.                                                                                    | Yes      | -ault0                                    |
+| identifier                          | A name that is used to identify a vault instance.                                                                                    | Yes      | vault0                                    |
 | address                             | The address where vault is hosted with the credentials to the array (`https://10.0.0.1:<port>`).                                     | Yes      | -                                         |
 | role                                | The configured authentication role in vault.                                                                                         | Yes      | csm-authorization                         |
 | skipCertificateValidation           | A boolean that enables/disables certificate validation to vault.                                                                     | Yes      | true                                      |
@@ -112,7 +112,7 @@ The following third-party components are optionally installed in the specified n
 | certificateAuthority                | The base64-encoded certificate authority for validating the Vault server.                                                            | No       | -                                         |
 
 
-7. Install the driver using `helm`:
+1. Install the driver using `helm`:
 
 To install CSM Authorization with the service Ingresses using your own certificate, run:
 
@@ -130,27 +130,27 @@ helm -n authorization install authorization -f myvalues.yaml charts/csm-authoriz
 
 ## Install Dellctl
 
-Follow the instructions for [Installing dellctl](../../../../support/cli/#installation-instructions).
+Follow the instructions for [Installing dellctl](../../../../../support/cli/#installation-instructions).
 
 ## Configuring the CSM Authorization Proxy Server
 
-Follow the instructions available in CSM Authorization for [Configuring the CSM Authorization Proxy Server](../../../../authorization/v2.x-ga/configuration/proxy-server/).
+Follow the instructions available in CSM Authorization for [Configuring the CSM Authorization Proxy Server](../../../../../authorization/v2.x-ga/configuration/proxy-server/).
 
 
 ## Configuring a Dell CSI Driver with CSM for Authorization
 
 Follow the instructions available in CSM Authorization for
-- [Configuring PowerFlex with Authorization](../../../../authorization/v2.x-ga/configuration/powerflex).
-- [Configuring PowerMax with Authorization](../../../../authorization/v2.x-ga/configuration/powermax).
-- [Configuring PowerScale with Authorization](../../../../authorization/v2.x-ga/configuration/powermax).
+- [Configuring PowerFlex with Authorization](../../../../../authorization/v2.x-ga/configuration/powerflex).
+- [Configuring PowerMax with Authorization](../../../../../authorization/v2.x-ga/configuration/powermax).
+- [Configuring PowerScale with Authorization](../../../../../authorization/v2.x-ga/configuration/powermax).
 
 ## Updating CSM for Authorization Proxy Server Configuration
 
 CSM for Authorization has a subset of configuration parameters that can be updated dynamically:
 
-| Parameter | Type | Default | Description |
-| --------- | ---- | ------- | ----------- |
-| web.jwtsigningsecret | String | "secret" |The secret used to sign JWT tokens |
+| Parameter            | Type   | Default  | Description                        |
+| -------------------- | ------ | -------- | ---------------------------------- |
+| web.jwtsigningsecret | String | "secret" | The secret used to sign JWT tokens |
 
 Updating configuration parameters can be done by editing the `karavi-config-secret`. The secret can be queried using k3s and kubectl like so:
 
