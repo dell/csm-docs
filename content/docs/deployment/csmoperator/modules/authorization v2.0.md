@@ -78,8 +78,6 @@ To deploy the Operator, follow the instructions available [here](../../#installa
    | proxyServerIngress.ingressClassName | The ingressClassName of the proxy-service Ingress. | Yes | nginx |
    | proxyServerIngress.hosts | Additional host rules to be applied to the proxy-service Ingress. | No | - |
    | proxyServerIngress.annotations | Additional annotations for the proxy-service Ingress. | No | - |
-   | **redis** | This section configures the Redis components. | - | - |
-   | storageclass | The storage class for Redis to use for persistence. If not supplied, a locally provisioned volume is used. | No | - |
 
     **Additional v2.0 Parameters:**
    | Parameter | Description | Required | Default |

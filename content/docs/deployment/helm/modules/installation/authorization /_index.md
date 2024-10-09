@@ -81,17 +81,15 @@ The following third-party components are optionally installed in the specified n
 | authorization.images.roleService                  | The image to use for the role-service.                                                                                       | Yes      | dellemc/csm-authorization-proxy:nightly   |
 | authorization.images.storageService               | The image to use for the storage-service.                                                                                    | Yes      | dellemc/csm-authorization-storage:nightly |
 | authorization.images.opa                          | The image to use for Open Policy Agent.                                                                                      | Yes      | openpolicyagent/opa                       |
-| authorization.images.opaKubeMgmt                  | The image to use for Open Policy Agent be-mgmt.                                                                            | Yes      | openpolicyagent/kube-mgmt:8.5.8            |
+| authorization.images.opaKubeMgmt                  | The image to use for Open Policy Agent be-mgmt.                                                                              | Yes      | openpolicyagent/kube-mgmt:8.5.8           |
 | authorization.hostname                            | The hostname to configure the self-signed certificate (if applicable) and the proxy Ingress.                                 | Yes      | csm-authorization.com                     |
 | authorization.logLevel                            | CSM Authorization log level. Allowed values: “error”, “warn”/“warning”, “info”, “debug”.                                     | Yes      | debug                                     |
+| concurrentPowerFlexRequests                       | Number of concurrent requests to PowerFlex. Used with dellctl to list tenant volumes.                                        | Yes      | 10                                        |
 | authorization.zipkin.collectoruri                 | The URI of the Zipkin instance to export traces.                                                                             | No       | -                                         |
 | authorization.zipkin.probability                  | The ratio of traces to export.                                                                                               | No       | -                                         |
 | authorization.proxyServerIngress.ingressClassName | The ingressClassName of the proxy-service Ingress.                                                                           | Yes      | -                                         |
 | authorization.proxyServerIngress.hosts            | Additional host rules to be applied to the proxy-service Ingress.                                                            | No       | -                                         |
 | authorization.proxyServerIngress.annotations      | Additional annotations for the proxy-service Ingress.                                                                        | No       | -                                         |
-| authorization.roleServiceIngress.ingressClassName | The ingressClassName of the role-service Ingress.                                                                            | Yes      | -                                         |
-| authorization.roleServiceIngress.hosts            | Additional host rules to be applied to the role-service Ingress.                                                             | No       | -                                         |
-| authorization.roleServiceIngress.annotations      | Additional annotations for the role-service Ingress.                                                                         | No       | -                                         |
 | **redis**                                         | This section configures Redis.                                                                                               | -        | -                                         |
 | redis.images.redis                                | The image to use for Redis.                                                                                                  | Yes      | redis:7.4.0-alpine                        |
 | redis.images.commander                            | The image to use for Redis Commander.                                                                                        | Yes      | rediscommander/redis-commander:latest     |
@@ -100,7 +98,7 @@ The following third-party components are optionally installed in the specified n
 >__Note__:
 > - If you specify `redis.storageClass`, the storage class must NOT be provisioned by the Dell CSI Driver to be configured with this installation of CSM Authorization.
 
-6. Install the driver using `helm`:
+1. Install the driver using `helm`:
 
 To install CSM Authorization with the service Ingresses using your own certificate, run:
 
