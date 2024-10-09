@@ -1,9 +1,9 @@
 ---
-title: Authorization - v2.x GA
-linktitle: v2.x GA
+title: Authorization - v2.x
+linktitle: v2.x
 weight: 4
 Description: >
-  Dell Technologies (Dell) Container Storage Modules (CSM) for Authorization v2.x GA.
+  Dell Technologies (Dell) Container Storage Modules (CSM) for Authorization v2.x.
 tags:
  - csm-authorization
 ---
@@ -65,10 +65,10 @@ Storage Administrators perform the following:
 - Tenant Management (create, get, delete)
 - Token Management (create, revoke)
 
-For more information on the configuration of the above, see the configuration of the [Proxy Server](../v2.x-ga/configuration/proxy-server/#configuring-storage).
+For more information on the configuration of the above, see the configuration of the [Proxy Server](../v2.x/configuration/proxy-server/#configuring-storage).
 
 ### Tenant Administrators
 
 Tenants of CSM for Authorization can use the token provided by the Storage Administrators in their storage requests.
 
-For more information on how to use the token and configuration, see configuration for the [PowerFlex driver](../v2.x-ga/configuration/powerflex), [PowerMax driver](../v2.x-ga/configuration/powermax), or the [PowerScale driver](../v2.x-ga/configuration/powerscale).
+For more information on how to use the token and configuration, see configuration for the [PowerFlex driver](../v2.x/configuration/powerflex), [PowerMax driver](../v2.x/configuration/powermax), or the [PowerScale driver](../v2.x/configuration/powerscale).

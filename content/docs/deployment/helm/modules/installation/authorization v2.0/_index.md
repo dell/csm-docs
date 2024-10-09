@@ -134,15 +134,15 @@ Follow the instructions for [Installing dellctl](../../../../../support/cli/#ins
 
 ## Configuring the CSM Authorization Proxy Server
 
-Follow the instructions available in CSM Authorization for [Configuring the CSM Authorization Proxy Server](../../../../../authorization/v2.x-ga/configuration/proxy-server/).
+Follow the instructions available in CSM Authorization for [Configuring the CSM Authorization Proxy Server](../../../../../authorization/v2.x/configuration/proxy-server/).
 
 
 ## Configuring a Dell CSI Driver with CSM for Authorization
 
 Follow the instructions available in CSM Authorization for
-- [Configuring PowerFlex with Authorization](../../../../../authorization/v2.x-ga/configuration/powerflex).
-- [Configuring PowerMax with Authorization](../../../../../authorization/v2.x-ga/configuration/powermax).
-- [Configuring PowerScale with Authorization](../../../../../authorization/v2.x-ga/configuration/powermax).
+- [Configuring PowerFlex with Authorization](../../../../../authorization/v2.x/configuration/powerflex).
+- [Configuring PowerMax with Authorization](../../../../../authorization/v2.x/configuration/powermax).
+- [Configuring PowerScale with Authorization](../../../../../authorization/v2.x/configuration/powermax).
 
 ## Updating CSM for Authorization Proxy Server Configuration
 
