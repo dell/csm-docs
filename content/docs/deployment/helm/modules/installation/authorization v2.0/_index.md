@@ -1,6 +1,6 @@
 ---
 title: Authorization v2.0
-linktitle: Authorization v2.0
+linktitle: "Authorization v2.0"
 description: >
   Dell Technologies (Dell) Container Storage Modules (CSM) for Authorization v2.0 Helm deployment
 ---
