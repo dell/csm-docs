@@ -16,9 +16,9 @@ To deploy the Operator, follow the instructions available [here](../../#installa
 
 ### Prerequisite
 
-1. Execute `kubectl create namespace authorization` to create the authorization namespace (if not already present). Note that the namespace can be any user-defined name, in this example, we assume that the namespace is 'authorization'. 
+1. Execute `kubectl create namespace authorization` to create the authorization namespace (if not already present). Note that the namespace can be any user-defined name, in this example, we assume that the namespace is 'authorization'.
 
-2. Install cert-manager CRDs 
+2. Install cert-manager CRDs
     ```bash
     kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v1.11.0/cert-manager.crds.yaml
     ```
@@ -37,7 +37,7 @@ To deploy the Operator, follow the instructions available [here](../../#installa
     ```
 
     After editing the file, run this command to create a secret called `karavi-config-secret`:
-    
+
     ```bash
 
     kubectl create secret generic karavi-config-secret -n authorization --from-file=config.yaml=samples/authorization/config.yaml
@@ -46,7 +46,7 @@ To deploy the Operator, follow the instructions available [here](../../#installa
     Use this command to replace or update the secret:
 
     ```bash
-    
+
     kubectl create secret generic karavi-config-secret -n authorization --from-file=config.yaml=samples/authorization/config.yaml -o yaml --dry-run=client | kubectl replace -f -
     ```
 
@@ -59,7 +59,7 @@ To deploy the Operator, follow the instructions available [here](../../#installa
     kubectl create -f samples/authorization/karavi-storage-secret.yaml
     ```
 
->__Note__:  
+>__Note__:
 > - If you are installing CSM Authorization in a different namespace than `authorization`, edit the `namespace` field in this file to your namespace.
 
 ### Install CSM Authorization Proxy Server
@@ -88,9 +88,9 @@ To deploy the Operator, follow the instructions available [here](../../#installa
    | storageclass | The storage class for Redis to use for persistence. If not supplied, a locally provisioned volume is used. | No | - |
 
 
->__Note__:  
+>__Note__:
 > - If you are installing CSM Authorization in a different namespace than `authorization`, edit the `namespace` fields in this file to your namespace.
-> - If you specify `storageclass`, the storage class must NOT be provisioned by the Dell CSI Driver to be configured with this installation of CSM Authorization. 
+> - If you specify `storageclass`, the storage class must NOT be provisioned by the Dell CSI Driver to be configured with this installation of CSM Authorization.
 
 **Optional:**
 To enable reporting of trace data with [Zipkin](https://zipkin.io/), use the `csm-config-params` configMap in the sample CR or dynamically by editing the configMap.
@@ -104,11 +104,11 @@ To enable reporting of trace data with [Zipkin](https://zipkin.io/), use the `cs
 4. Execute this command to create the Authorization CR:
 
     ```bash
-    
+
     kubectl create -f <SAMPLE FILE>
     ```
 
-  >__Note__:  
+  >__Note__:
   > - This command will deploy the Authorization Proxy Server in the namespace specified in the input YAML file.
 
 ### Verify Installation of the CSM Authorization Proxy Server
@@ -124,14 +124,14 @@ Follow the instructions available in CSM Authorization for [Installing karavictl
 
 ### Configure the CSM Authorization Proxy Server
 
-**Authorization v1.x GA**
+**Authorization v1.x**
 
 Follow the instructions available in CSM Authorization for [Configuring the CSM Authorization Proxy Server](../../../helm/modules/installation/authorization/#configuring-the-csm-authorization-proxy-server).
 
 
 ### Configure a Dell CSI Driver with CSM Authorization
 
-**Authorization v1.x GA**
+**Authorization v1.x**
 
 Follow the instructions available in CSM Authorization for [Configuring a Dell CSI Driver with CSM for Authorization](../../../helm/modules/installation/authorization/#configuring-a-dell-csi-driver-with-csm-for-authorization).
 
@@ -145,7 +145,7 @@ This section outlines the upgrade steps for Container Storage Modules (CSM) for 
 ### Upgrading the Authorization Proxy Server
 
   1.  Modifying the existing Authorization Proxy Server installation directly via `kubectl edit`
-  
+
       ```bash
       kubectl get csm -n <module-namespace>
       ```
@@ -170,7 +170,7 @@ This section outlines the upgrade steps for Container Storage Modules (CSM) for 
 
   2.  Modify the installation
 
-      - Update the CSM Authorization Proxy Server configVersion  
+      - Update the CSM Authorization Proxy Server configVersion
       - Update the images for proxyService, tenantService, roleService and storageService
 
 
@@ -203,6 +203,5 @@ This section outlines the upgrade steps for Container Storage Modules (CSM) for 
       - Update the driver config version and image tag
       - Update the Authorization config version and karavi-authorization-proxy image.
 
->__Note__: 
+>__Note__:
 > - In Authorization module upgrade, only `n-1` to `n` upgrade is supported, e.g. if the current observability version is `v1.8.x`, it can be upgraded to `1.9.x`.
-
