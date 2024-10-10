@@ -57,6 +57,11 @@ The CSM Observability module for supported Dell CSI Drivers can be installed via
 
 - Once you have prepared the sample file(s) (one per driver being installed), deploy by running `kubectl apply -f <SAMPLE FILE>` on the sample file.
 
+## How to enable this module using minimal CR
+
+Alternatively, you can use the minimal sample files provided
+  [here](https://github.com/dell/csm-operator/tree/main/samples/minimal-samples).
+
 ## Upgrade Observability
 
 The Observability module installed by the Dell CSM Operator can be updated like any Kubernetes resource.
