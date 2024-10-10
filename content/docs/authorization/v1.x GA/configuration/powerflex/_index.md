@@ -170,7 +170,7 @@ Given a setup where Kubernetes, a storage system, and the CSM for Authorization 
               value: "true"
     ```
 
-    ## How to enable this module using Operator minimal CR
+    How to enable this module using minimal CR
 
     Alternatively, you can use the minimal sample files provided
       [here](https://github.com/dell/csm-operator/tree/main/samples/minimal-samples).

@@ -166,7 +166,7 @@ Create the karavi-authorization-config secret using this command:
               value: "true"
     ```
 
-    ## How to enable this module using Operator minimal CR
+    How to enable this module using minimal CR
 
     Alternatively, you can use the minimal sample files provided
       [here](https://github.com/dell/csm-operator/tree/main/samples/minimal-samples).

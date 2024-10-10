@@ -176,7 +176,7 @@ kubectl -n isilon create secret generic karavi-authorization-config --from-file=
               value: "true"
     ```
 
-    ## How to enable this module using Operator minimal CR
+    How to enable this module using minimal CR
 
     Alternatively, you can use the minimal sample files provided
       [here](https://github.com/dell/csm-operator/tree/main/samples/minimal-samples).
