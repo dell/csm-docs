@@ -166,10 +166,8 @@ Create the karavi-authorization-config secret using this command:
               value: "true"
     ```
 
-    How to enable this module using minimal CR
-
     Alternatively, you can use the minimal sample files provided
-      [here](https://github.com/dell/csm-operator/tree/main/samples/minimal-samples).
+    [here](https://github.com/dell/csm-operator/tree/main/samples/minimal-samples) and install the module using default values
 
 5. Install the Dell CSI PowerMax driver following the appropriate documenation for your installation method.
 

@@ -298,7 +298,15 @@ Create a secret named powermax-certs in the namespace where the CSI PowerMax dri
     kubectl create configmap powermax-reverseproxy-config --from-file config.yaml -n powermax
     ```
 
-4. Create a CR (Custom Resource) for PowerMax using the sample files provided [here](https://github.com/dell/csm-operator/tree/master/samples). This file can be modified to use custom parameters if needed.
+4. Create a CR (Custom Resource) for PowerMax using the sample files provided
+  a. Install the PowerMax driver using default configuration using
+  the sample file provided
+   [here](https://github.com/dell/csm-operator/tree/main/samples/minimal-samples). This file can be modified to use custom parameters if needed.
+
+  b. Install the PowerMax driver using default configuration using
+  the sample file provided
+   [here](https://github.com/dell/csm-operator/tree/main/samples).
+
 5. Users should configure the parameters in CR. The following table lists the primary configurable parameters of the PowerMax driver and their default values:
 
    | Parameter                                       | Description                                                                                                                                                                                                                                                              | Required | Default                        |
@@ -332,89 +340,6 @@ Create a secret named powermax-certs in the namespace where the CSI PowerMax dri
 6. Execute the following command to create the PowerMax custom resource:`kubectl create -f <input_sample_file.yaml>`. The above command will deploy the CSI-PowerMax driver.
 7. The mandatory module CSI PowerMax Reverseproxy will be installed automatically with the same command.
 8. Refer https://github.com/dell/csi-powermax/tree/main/samples for the sample files.
-
-### Install Driver using Minimal CR(Custom Resource)
-
-1. Create namespace:
-   Run `kubectl create namespace <driver-namespace>` using the desired name to create the namespace.
-2. Create PowerMax credentials:
-   Create a file called powermax-creds.yaml with the following content:
-     ```yaml
-        apiVersion: v1
-        kind: Secret
-        metadata:
-          name: powermax-creds
-            # Replace driver-namespace with the namespace where driver is being deployed
-          namespace: <driver-namespace>
-        type: Opaque
-        data:
-          # set username to the base64 encoded username
-          username: <base64 username>
-          # set password to the base64 encoded password
-          password: <base64 password>
-          # Uncomment the following key if you wish to use ISCSI CHAP authentication (v1.3.0 onwards)
-          # chapsecret: <base64 CHAP secret>
-     ```
-   Replace the values for the username and password parameters. These values can be obtained using base64 encoding as described in the following example:
-   ```BASH
-   echo -n "myusername" | base64
-   echo -n "mypassword" | base64
-   # If mychapsecret is the ISCSI CHAP secret
-   echo -n "mychapsecret" | base64
-
-   ```
-   Run the `kubectl create -f powermax-creds.yaml` command to create the secret.
-3. Create a configmap using sample [here](https://github.com/dell/csm-operator/tree/master/samples/csireverseproxy). Fill in the appropriate values for driver configuration.
-   Example: config.yaml
-   ```yaml
-   mode: StandAlone # Mode for the reverseproxy, should not be changed
-   port: 2222 # Port on which reverseproxy will listen
-   logLevel: debug
-   logFormat: text
-   standAloneConfig:
-     storageArrays:
-        - storageArrayId: "000000000001" # arrayID
-          primaryURL: https://primary-1.unisphe.re:8443 # primary unisphere for arrayID
-          backupURL: https://backup-1.unisphe.re:8443   # backup unisphere for arrayID
-          proxyCredentialSecrets:
-            - proxy-secret-11 # credential secret for primary unisphere, e.g., powermax-creds
-            - proxy-secret-12 # credential secret for backup unisphere, e.g., powermax-creds
-        - storageArrayId: "000000000002"
-          primaryURL: https://primary-2.unisphe.re:8443
-          backupURL: https://backup-2.unisphe.re:8443
-          proxyCredentialSecrets:
-           - proxy-secret-21
-           - proxy-secret-22
-     managementServers:
-       - url: https://primary-1.unisphe.re:8443 # primary unisphere endpoint
-         arrayCredentialSecret: primary-1-secret # primary credential secret e.g., powermax-creds
-         skipCertificateValidation: true
-       - url: https://backup-1.unisphe.re:8443 # backup unisphere endpoint
-         arrayCredentialSecret: backup-1-secret # backup credential secret e.g., powermax-creds
-         skipCertificateValidation: false # value false, to verify unisphere certificate and provide certSecret
-         certSecret: primary-certs # unisphere verification certificate
-       - url: https://primary-2.unisphe.re:8443
-         arrayCredentialSecret: primary-2-secret
-         skipCertificateValidation: true
-       - url: https://backup-2.unisphe.re:8443
-         arrayCredentialSecret: backup-2-secret
-         skipCertificateValidation: false
-         certSecret: primary-certs
-   ```
-   After editing the file, run this command to create a secret called `powermax-reverseproxy-config`. If you are using a different namespace/secret name, just substitute those into the command.
-    ```bash
-    kubectl create configmap powermax-reverseproxy-config --from-file config.yaml -n powermax
-
-4. Create a CR (Custom Resource) for PowerMax using the minimal sample files provided
-   [here](https://github.com/dell/csm-operator/tree/main/samples/minimal-samples). This file can be modified to use custom parameters if needed.
-
-5.  Execute this command to create PowerMax custom resource:
-    ```bash
-    kubectl create -f <input_sample_file.yaml>
-    ```
-    This command will deploy the CSI-PowerMax driver in the namespace specified in the input YAML file.
-
-6.  [Verify the CSI Driver installation](../#verifying-the-driver-installation)
 
 ## Other features to enable
 ### Dynamic Logging Configuration

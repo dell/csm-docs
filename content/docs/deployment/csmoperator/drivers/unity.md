@@ -50,7 +50,13 @@ kubectl get csm --all-namespaces
 1. Follow all the [prerequisites](#prerequisite) above
 
 2. Create a CR (Custom Resource) for Unity XT using the sample files provided
-   [here](https://github.com/dell/csm-operator/tree/master/samples). This file can be modified to use custom parameters if needed.
+  a. Install the Unity driver using default configuration using
+  the sample file provided
+   [here](https://github.com/dell/csm-operator/tree/main/samples/minimal-samples). This file can be modified to use custom parameters if needed.
+
+  b. Install the Unity driver using default configuration using
+  the sample file provided
+   [here](https://github.com/dell/csm-operator/tree/main/samples).
 
 3. Users should configure the parameters in CR. The following table lists the primary configurable parameters of the Unity XT driver and their default values:
 
@@ -88,21 +94,6 @@ kubectl get csm --all-namespaces
 5.  [Verify the CSI Driver installation](../#verifying-the-driver-installation)
 
 6. Refer https://github.com/dell/csi-unity/tree/main/samples for the sample files.
-
-### Install Driver using Minimal CR(Custom Resource)
-
-1. Follow all the [prerequisites](#prerequisite) above
-
-2. Create a CR (Custom Resource) for Unity XT using the minimal sample files provided
-   [here](https://github.com/dell/csm-operator/tree/main/samples/minimal-samples). This file can be modified to use custom parameters if needed.
-
-3.  Execute this command to create Unity custom resource:
-    ```bash
-    kubectl create -f <input_sample_file.yaml>
-    ```
-    This command will deploy the CSI-Unity driver in the namespace specified in the input YAML file.
-
-4.  [Verify the CSI Driver installation](../#verifying-the-driver-installation)
 
 **Note** :
    1. "Kubelet config dir path" is not yet configurable in case of Operator based driver installation.

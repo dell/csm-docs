@@ -122,7 +122,13 @@ kubectl get csm --all-namespaces
 1. Follow all the [prerequisites](#prerequisite) above
 
 2. Create a CR (Custom Resource) for PowerScale using the sample files provided
-   [here](https://github.com/dell/csm-operator/tree/master/samples). This file can be modified to use custom parameters if needed.
+  a. Install the PowerScale driver using default configuration using
+  the sample file provided
+   [here](https://github.com/dell/csm-operator/tree/main/samples/minimal-samples). This file can be modified to use custom parameters if needed.
+
+  b. Install the PowerScale driver using default configuration using
+  the sample file provided
+   [here](https://github.com/dell/csm-operator/tree/main/samples).
 
 3. Users should configure the parameters in CR. The following table lists the primary configurable parameters of the PowerScale driver and their default values:
 
@@ -159,21 +165,6 @@ kubectl get csm --all-namespaces
 6. [Verify the CSI Driver installation](../#verifying-the-driver-installation)
 
 7. Refer https://github.com/dell/csi-powerscale/tree/main/samples for the sample files.
-
-### Install Driver using Minimal CR(Custom Resource)
-
-1. Follow all the [prerequisites](#prerequisite) above
-
-2. Create a CR (Custom Resource) for PowerScale using the minimal sample files provided
-   [here](https://github.com/dell/csm-operator/tree/main/samples/minimal-samples). This file can be modified to use custom parameters if needed.
-
-3.  Execute this command to create PowerScale custom resource:
-    ```bash
-    kubectl create -f <input_sample_file.yaml>
-    ```
-    This command will deploy the CSI-PowerScale driver in the namespace specified in the input YAML file.
-
-4.  [Verify the CSI Driver installation](../#verifying-the-driver-installation)
 
 **Note** :
 
