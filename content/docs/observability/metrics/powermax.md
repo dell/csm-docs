@@ -9,8 +9,9 @@ description: >
 This section outlines the metrics collected by the Container Storage Modules (CSM) Observability module for PowerMax. The [Grafana reference dashboards](https://github.com/dell/karavi-observability/blob/main/grafana/dashboards/powermax) for PowerMax metrics can be uploaded to your Grafana instance.
 
 ## Prerequisites
--  Unisphere user credentials must have PERF_MONITOR permissions.
--  Ensure time synchronization for Kubernetes cluster and PowerMax Unisphere by using Network Time Protocol (NTP).
+
+- Unisphere user credentials must have PERF_MONITOR permissions.
+- Ensure time synchronization for Kubernetes cluster and PowerMax Unisphere by using Network Time Protocol (NTP).
 
 ## I/O Performance Metrics
 
