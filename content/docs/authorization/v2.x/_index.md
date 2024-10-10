@@ -1,14 +1,12 @@
 ---
-title: Authorization - v2.0 Tech Preview
-linktitle: v2.0 Tech Preview
+title: Authorization - v2.x
+linktitle: v2.x
 weight: 4
 Description: >
-  Dell Technologies (Dell) Container Storage Modules (CSM) for Authorization v2.0 Tech Preview.
+  Dell Technologies (Dell) Container Storage Modules (CSM) for Authorization v2.x.
 tags:
  - csm-authorization
 ---
-
->> NOTE: This tech-preview release is not intended for use in production environment.
 
 The following diagram shows a high-level overview of CSM for Authorization with a `tenant-app` that is using a CSI driver to perform storage operations through the CSM for Authorization `proxy-server` to access the a Dell storage system. All requests from the CSI driver will contain the token for the given tenant that was granted by the Storage Administrator.
 
@@ -67,10 +65,10 @@ Storage Administrators perform the following:
 - Tenant Management (create, get, delete)
 - Token Management (create, revoke)
 
-For more information on the configuration of the above, see the configuration of the [Proxy Server](../v2.0-tech-preview/configuration/proxy-server/#configuring-storage).
+For more information on the configuration of the above, see the configuration of the [Proxy Server](../v2.x/configuration/proxy-server/#configuring-storage).
 
 ### Tenant Administrators
 
 Tenants of CSM for Authorization can use the token provided by the Storage Administrators in their storage requests.
 
-For more information on how to use the token and configuration, see configuration for the [PowerFlex driver](../v2.0-tech-preview/configuration/powerflex) or the [PowerMax driver](../v2.0-tech-preview/configuration/powermax).
+For more information on how to use the token and configuration, see configuration for the [PowerFlex driver](../v2.x/configuration/powerflex), [PowerMax driver](../v2.x/configuration/powermax), or the [PowerScale driver](../v2.x/configuration/powerscale).
