@@ -50,13 +50,13 @@ kubectl get csm --all-namespaces
 1. Follow all the [prerequisites](#prerequisite) above
 
 2. Create a CR (Custom Resource) for Unity XT using the sample files provided
-  a. Install the Unity driver using default configuration using
-  the sample file provided
+
+    a. Install the Unity driver using default configuration using
+    the sample file provided
    [here](https://github.com/dell/csm-operator/tree/main/samples/minimal-samples). This file can be modified to use custom parameters if needed.
 
-  b. Install the Unity driver using default configuration using
-  the sample file provided
-   [here](https://github.com/dell/csm-operator/tree/main/samples).
+    b. Install the Unity driver using the detailed configuration using the sample file provided
+    [here](https://github.com/dell/csm-operator/tree/main/samples).
 
 3. Users should configure the parameters in CR. The following table lists the primary configurable parameters of the Unity XT driver and their default values:
 

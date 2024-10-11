@@ -299,13 +299,13 @@ Create a secret named powermax-certs in the namespace where the CSI PowerMax dri
     ```
 
 4. Create a CR (Custom Resource) for PowerMax using the sample files provided
-  a. Install the PowerMax driver using default configuration using
-  the sample file provided
+
+    a. Install the PowerMax driver using default configuration using
+    the sample file provided
    [here](https://github.com/dell/csm-operator/tree/main/samples/minimal-samples). This file can be modified to use custom parameters if needed.
 
-  b. Install the PowerMax driver using default configuration using
-  the sample file provided
-   [here](https://github.com/dell/csm-operator/tree/main/samples).
+    b. Install the PowerMax driver using the detailed configuration using the sample file provided
+    [here](https://github.com/dell/csm-operator/tree/main/samples).
 
 5. Users should configure the parameters in CR. The following table lists the primary configurable parameters of the PowerMax driver and their default values:
 
