@@ -7,7 +7,7 @@ Description: >
   Release notes for Dell Container Storage Modules Operator
 ---
 
-## Release Notes - Container Storage Modules Operator v1.6.0
+## Operator v1.6.0
 
 
 

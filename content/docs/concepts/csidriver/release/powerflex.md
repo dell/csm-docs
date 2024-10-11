@@ -4,7 +4,7 @@ toc_hide: true
 description: Release notes for PowerFlex CSI driver
 ---
 
-## Release Notes - CSI PowerFlex v2.12.0
+## PowerFlex v2.12.0
 
 
 

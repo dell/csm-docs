@@ -2,7 +2,7 @@
 title: "Release Notes"
 linkTitle: "Release Notes"
 no_list: true
-weight: 1
+weight: 10
 Description: >
   Dell Container Storage Modules (CSM) release notes
 ---

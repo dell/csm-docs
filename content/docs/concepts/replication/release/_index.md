@@ -7,7 +7,7 @@ Description: >
   Dell Container Storage Modules (CSM) release notes for replication
 ---
 
-## Release Notes - CSM Replication 1.9.0
+## Replication 1.9.0
 
 
 

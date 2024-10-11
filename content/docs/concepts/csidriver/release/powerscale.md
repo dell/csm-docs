@@ -5,7 +5,7 @@ description: Release notes for PowerScale CSI driver
 ---
 
 
-## Release Notes - CSI Driver for PowerScale v2.11.0
+##  PowerScale v2.11.0
 
 
 

@@ -4,7 +4,7 @@ toc_hide: true
 description: Release notes for Unity XT CSI driver
 ---
 
-## Release Notes - CSI Unity XT v2.12.0
+##  Unity XT v2.12.0
 
 
 

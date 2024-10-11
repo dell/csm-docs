@@ -11,7 +11,7 @@ weight: 3
 Uninstalling the Dell CSM Driver is a simple process that allows you to remove the driver from your system if it is no longer needed or if you are troubleshooting an issue. This section outlines the steps to safely and completely uninstall the driver, ensuring that all related components are removed from your system. This helps maintain system performance and prevents potential conflicts with other software.
 
 
-<div class="container mt-5">
+<div class="container mt-5 ps-0" style="margin-left:0px;">
     <div class="row">
       <div class="col-md-6 mb-4">
     {{< customcard path="content/docs/getting-started/uninstallation/kubernetes" link="./kubernetes" icon="fas fa-star" title="Kubernetes" image="../../../icons/save-disk.svg">}}

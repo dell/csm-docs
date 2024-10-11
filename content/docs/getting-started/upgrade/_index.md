@@ -12,7 +12,7 @@ Upgrading the Dell CSM Driver ensures that you have the latest features, improve
 
 
 
-<div class="container mt-5">
+<div class="container mt-5 ps-0" style="margin-left:0px;">
     <div class="row">
       <div class="col-md-6 mb-4">
     {{< customcard path="content/docs/getting-started/upgrade/kubernetes" link="./kubernetes" icon="fas fa-star" title="Kubernetes" image="../../../icons/save-disk.svg">}}

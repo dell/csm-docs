@@ -9,13 +9,6 @@ weight: 1
  
 The installation process for the Dell CSM Driver is straightforward and user-friendly. This section will guide you through each step to ensure a smooth setup.
 
-### Prerequisites
-
-Before you begin, make sure you have the following:
-
-- Administrative privileges on your computer.
-- A stable internet connection to download the driver.
-- Sufficient disk space for the installation.
 
 
 <div class="container mt-5" style=" margin-left:0px" >

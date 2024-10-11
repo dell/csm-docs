@@ -7,7 +7,7 @@ Description: >
   Dell Container Storage Modules (CSM) release notes for observability
 ---
 
-## Release Notes - CSM Observability 1.9.0
+## Observability 1.9.0
 
 
 

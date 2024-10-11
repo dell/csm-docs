@@ -1,6 +1,7 @@
 ---
 title: Authorization - v2 Migration guide
 linktitle: Migration Guide From v1 to v2
+toc_hide: true
 weight: 1
 description: >
   CSM for Authorization v1 to v2 Migration Guide

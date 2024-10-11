@@ -10,7 +10,7 @@ weight: 1
 
 Dell PowerMax is a high-performance, enterprise-class storage solution designed to meet the demanding needs of modern data centers. It is renowned for its exceptional speed, scalability, and reliability, making it ideal for mission-critical applications and workloads.
 
-<div class="container mt-5"> 
+<div class="container mt-5 ps-0" style="margin-left:0px;"> 
     <div class="row">
       <div class="col-md-6 mb-4">
       {{< customcard  link="./prerequisite" icon="fas fa-cloud" image="../../../../../icons/doc-reports.svg" title="Prerequisite">}} 

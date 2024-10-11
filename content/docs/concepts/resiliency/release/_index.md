@@ -7,7 +7,7 @@ Description: >
   Dell Container Storage Modules (CSM) release notes for resiliency
 ---
 
-## Release Notes - CSM Resiliency 1.10.0
+## Resiliency 1.10.0
 
 
 

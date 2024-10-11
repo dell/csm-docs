@@ -9,10 +9,11 @@ weight: 2
 <hr>
 
 <br> 
-Welcome to the Dell CSM Driver Getting Started" documentation. This section provides detailed instructions on how to install, uninstall, and upgrade the Dell CSM Driver.
+
+Welcome to the Dell CSM Driver Getting Started documentation. This section provides detailed instructions on how to install, uninstall, and upgrade the Dell CSM Driver.
 
 
-<div class="container mt-5">
+<div class="container mt-5 ps-0" style="margin-left:0px;">
     <div class="row">
       <div class="col-md-6 mb-4">
       {{< customcard path="content/docs/getting-started/installation" link="./installation" icon="fas fa-star" title="Installation" image="save-disk.svg" >}} 
