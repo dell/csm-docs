@@ -1,5 +1,6 @@
 ---
 title: Unity XT
+toc_hide: true
 description: Release notes for Unity XT CSI driver
 ---
 

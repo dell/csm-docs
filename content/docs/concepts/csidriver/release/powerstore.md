@@ -1,5 +1,6 @@
 ---
 title: PowerStore
+toc_hide: true
 description: Release notes for PowerStore CSI driver
 ---
 

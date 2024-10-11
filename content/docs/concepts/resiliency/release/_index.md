@@ -1,5 +1,6 @@
 ---
 title: "Release notes"
+toc_hide: true
 linkTitle: "Release notes"
 weight: 1
 Description: >

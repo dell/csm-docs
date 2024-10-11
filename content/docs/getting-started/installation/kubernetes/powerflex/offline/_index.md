@@ -3,5 +3,5 @@ title: "Offline"
 linkTitle: "Offline"
 no_list: true
 description: Offline Installation
-weight: 4
+weight: 3
 ---

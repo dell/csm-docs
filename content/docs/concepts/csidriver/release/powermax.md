@@ -1,5 +1,6 @@
 ---
 title: PowerMax
+toc_hide: true
 description: Release notes for PowerMax CSI driver
 ---
 

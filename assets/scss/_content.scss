@@ -6,7 +6,8 @@
     order: 1;
 
     p, li, td {
-        font-weight: $font-weight-body-text;
+        font-weight: $font-weight-body-text; 
+        font-size:1.2rem; 
     }
 
     > h1 {
@@ -89,5 +90,9 @@
     }
 } 
 
+
+.td-section{
+    
+}
 
 

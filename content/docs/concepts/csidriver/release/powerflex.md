@@ -1,5 +1,6 @@
 ---
 title: PowerFlex
+toc_hide: true
 description: Release notes for PowerFlex CSI driver
 ---
 

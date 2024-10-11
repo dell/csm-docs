@@ -5,8 +5,8 @@ no_list: true
 description: Installation
 weight: 1
 ---
-
-<hr> 
+<hr>
+ 
 The installation process for the Dell CSM Driver is straightforward and user-friendly. This section will guide you through each step to ensure a smooth setup.
 
 ### Prerequisites
@@ -18,7 +18,7 @@ Before you begin, make sure you have the following:
 - Sufficient disk space for the installation.
 
 
-<div class="container mt-5">
+<div class="container mt-5" style=" margin-left:0px" >
     <div class="row">
       <div class="col-md-6 mb-4">
     {{< customcard path="content/docs/getting-started/installation/kubernetes" link="./kubernetes" icon="fas fa-star" title="Kubernetes" image="../../../icons/save-disk.svg">}}

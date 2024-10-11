@@ -1,6 +1,12 @@
-<style>
+<style>  
+    .feedback-container{
+      border:1px solid rgb(211, 209, 209); 
+      padding:20px;
+      margin-top:20px;
+    }
     .feedback--answer {
-      display: inline-block;
+      display: inline-block; 
+      border-radius: 20px;
     }
     .feedback--answer-no {
       margin-left: 1em;
@@ -11,21 +17,28 @@
     }
     .feedback--response__visible {
       display: block;
-    }
+    } 
+
   </style>
-  <div class="d-print-none">
-    <h2 class="feedback--title">Feedback</h2>
-    <p class="feedback--question">Was this page helpful?</p>
-    <button class="btn btn-primary mb-4 feedback--answer feedback--answer-yes">Yes</button>
-    <button class="btn btn-primary mb-4 feedback--answer feedback--answer-no">No</button>
-    <p class="feedback--response feedback--response-yes">
-      Thank you for your feedback! 
-    </p>
-    <p class="feedback--response feedback--response-no">
-        Sorry to hear that. Please <a href="https://github.com/dell/csm/issues/new?title=[area/csm-docs]+{{.File.Path}}">tell us how we can improve</a>
-    </p> 
+
+<div class="d-print-none">
+  <div class="container" style="margin-left:0;">
+    <div class="row">
+      <div class="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-4 feedback-container">
+        <h2 class="feedback--title">Feedback</h2>
+        <p class="feedback--question">Was this page helpful?</p>
+        <button class="btn btn-primary mb-4 feedback--answer feedback--answer-yes px-4">Yes</button>
+        <button class="btn btn-primary mb-4 feedback--answer feedback--answer-no px-4 ">No</button>
+        <p class="feedback--response feedback--response-yes">
+          Thank you for your feedback!
+        </p>
+        <p class="feedback--response feedback--response-no">
+          Sorry to hear that. Please <a href="https://github.com/dell/csm/issues/new?title=[area/csm-docs]+{{.File.Path}}">tell us how we can improve</a>
+        </p>
+      </div>
+    </div>
   </div>
-  
+</div>
 
   
   <script>

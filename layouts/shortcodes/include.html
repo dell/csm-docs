@@ -1,5 +1,5 @@
 {{ $file := .Get 0 }}
 {{ $content := readFile $file }}
 {{ $content = replaceRE "^---([\\s\\S]+?)---" "" $content }}
-{{ $content | markdownify }}
+<div class="td-content">{{ $content | markdownify }}</div>
 

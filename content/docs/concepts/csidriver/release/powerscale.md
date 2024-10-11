@@ -1,5 +1,6 @@
 ---
 title: PowerScale
+toc_hide: true
 description: Release notes for PowerScale CSI driver
 ---
 

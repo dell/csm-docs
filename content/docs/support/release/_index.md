@@ -1,78 +1,28 @@
 ---
-title: "Release notes"
-linkTitle: "Release notes"
+title: "Release Notes"
+linkTitle: "Release Notes"
+no_list: true
 weight: 1
 Description: >
   Dell Container Storage Modules (CSM) release notes
 ---
 
-Release notes for Container Storage Modules:
+## CSM Release and Support Lifecycle:
 
-[CSI Drivers](../../concepts/csidriver/release)
+Dell CSM Release and Support Lifecycle document helps Dell CSM deployers to better plan deployments and encourage timely upgrades that pull in the latest functionality and fixes.
 
-[CSM for Authorization](../../concepts/authorization/v1.x-ga/release)
+As part of CSM Release and Lifecycle Management, we follow the below policies
 
-[CSM for Observability](../../concepts/observability/release)
+* Every Dell CSM release is under full support for 12 months. Please refer to the matrix for the GA and EOL dates of the supported CSM versions.
 
-[CSM for Replication](../../concepts/replication/release)
+* If you are running a version of CSM that’s more than 12 months old, you must upgrade to a newer CSM version or submit your cert-csi test results to us to be covered Dell support.
 
-[CSM for Resiliency](../../concepts/resiliency/release)
-
-[CSM for Encryption](../../secure/concepts/encryption/release)
-
-[CSM for Application Mobility](../../concepts/applicationmobility/release)
-
-[CSM Operator](../../concepts/deployment/csmoperator/release)
-
-[CSM Installation Wizard](../../concepts/deployment/csminstallationwizard/release)
-
-{{< accordion title="CSI Drivers" id="csi-drivers-1" >}}
-{{< tabpane text=true right=false >}}
-  {{% tab header="Powermax" lang="en" %}}
-  {{< include "content/docs/concepts/csidriver/release/powermax.md" >}}
-  {{% /tab %}}
-  {{% tab header="Powerflex" lang="en" %}}
-  {{< include "content/docs/concepts/csidriver/release/powerflex.md" >}}
-  {{% /tab %}} 
-  {{% tab header="Powerscale" lang="en" %}}
-  {{< include "content/docs/concepts/csidriver/release/powerscale.md" >}}
-  {{% /tab %}}  
-  {{% tab header="Powerstore" lang="en" %}}
-  {{< include "content/docs/concepts/csidriver/release/powerstore.md" >}}
-  {{% /tab %}}
-  {{% tab header="Unity XT" lang="en" %}}
-  {{< include "content/docs/concepts/csidriver/release/unity.md" >}}
-  {{% /tab %}}
-{{< /tabpane >}}
-{{< /accordion >}}
-
-
-{{< accordion title="CSI Drivers" id="csi-drivers-2" >}}
-<style> 
-.tab-pane{
- 
-}
-</style>
-<ul class="nav nav-tabs" id="myTab" role="tablist">
-    <li class="nav-item" role="presentation">
-      <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Home</button>
-    </li>
-    <li class="nav-item" role="presentation">
-      <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Profile</button>
-    </li>
-    <li class="nav-item" role="presentation">
-      <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact-tab-pane" type="button" role="tab" aria-controls="contact-tab-pane" aria-selected="false">Contact</button>
-    </li>
-    <li class="nav-item" role="presentation">
-      <button class="nav-link" id="disabled-tab" data-bs-toggle="tab" data-bs-target="#disabled-tab-pane" type="button" role="tab" aria-controls="disabled-tab-pane" aria-selected="false" disabled>Disabled</button>
-    </li>
-  </ul>
-  <div class="tab-content" id="myTabContent">
-    <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">  {{< include "content/docs/concepts/csidriver/release/powermax.md" >}}
-</div>
-    <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">...</div>
-    <div class="tab-pane fade" id="contact-tab-pane" role="tabpanel" aria-labelledby="contact-tab" tabindex="0">...</div>
-    <div class="tab-pane fade" id="disabled-tab-pane" role="tabpanel" aria-labelledby="disabled-tab" tabindex="0">...</div>
-  </div>
-
-{{< /accordion >}}
+<br>
+{{<table "table table-striped table-bordered table-sm">}}
+| CSM Version  | GA Date  | End of Life Date |
+|--------------|:--------:|:----------------:|
+| 1.10         |03/27/2024|03/31/2025        |
+| 1.9          |12/31/2023|12/31/2024        |
+| 1.8          |09/30/2023|09/30/2024        | 
+| 1.7          |06/30/2023|06/30/2024        | 
+{{</table>}}

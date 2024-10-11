@@ -1,3 +1,4 @@
+
 {{ $id := .Get "id" }}
 <div class="accordion" id="accordion-{{ $id }}">
   <div class="accordion-item">
@@ -8,7 +9,9 @@
     </h2>
     <div id="collapse-{{ $id }}" class="accordion-collapse collapse show" aria-labelledby="heading-{{ $id }}" data-bs-parent="#accordion-{{ $id }}">
       <div class="accordion-body">
-        {{ .Inner }}
+        <div>
+          {{ .Inner }}
+        </div>
       </div>
     </div>
   </div>

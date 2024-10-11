@@ -7,9 +7,102 @@ menu:
   main:
     weight: 20
 no_list: true  
----
+--- 
+<!-- 
+<style>
+@keyframes flowColors {
+    0% {
+        background: linear-gradient(135deg, rgba(0, 123, 255, 0.4), rgba(0, 191, 255, 0.4), rgba(0, 255, 150, 0.4));
+    }
+    20% {
+        background: linear-gradient(135deg, rgba(0, 191, 255, 0.4), rgba(0, 255, 150, 0.4), rgba(0, 255, 0, 0.4));
+    }
+    40% {
+        background: linear-gradient(135deg, rgba(0, 255, 150, 0.4), rgba(0, 255, 0, 0.4), rgba(255, 255, 0, 0.4));
+    }
+    60% {
+        background: linear-gradient(135deg, rgba(255, 255, 0, 0.4), rgba(255, 165, 0, 0.4), rgba(255, 0, 150, 0.4));
+    }
+    80% {
+        background: linear-gradient(135deg, rgba(255, 0, 150, 0.4), rgba(0, 150, 255, 0.4), rgba(0, 0, 255, 0.4));
+    }
+    100% {
+        background: linear-gradient(135deg, rgba(0, 123, 255, 0.4), rgba(0, 191, 255, 0.4), rgba(0, 255, 150, 0.4));
+    }
+}
 
-{{% pageinfo color="primary" %}}
+.emphasis-text {
+    animation: flowColors 12s ease infinite; /* Continuous flowing color animation */
+    border: 2px solid #007BFF; /* Solid border */
+    color: #007BFF; /* Text color */
+    padding: 0.4em 0.6em; /* Padding around text */
+    border-radius: 5px; /* Rounded corners */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Soft shadow */
+    font-weight: bold; /* Bold text */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition effect */
+}
+
+.emphasis-text:hover {
+    transform: scale(1.02); /* Slightly enlarge on hover */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Increased shadow on hover */
+}
+</style> 
+
+<style>
+  .emphasis-text {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #ffffff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    animation: fadeIn 2s ease-in-out, colorShift 5s infinite alternate, glow 1.5s infinite;
+    transition: transform 0.3s ease-in-out;
+    padding: 20px;
+    border: 2px solid #ff6f61;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #ff9a8b, #ff6f61);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  .emphasis-text:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes colorShift {
+    0% {
+      background: linear-gradient(135deg, #ff9a8b, #ff6f61);
+    }
+    100% {
+      background: linear-gradient(135deg, #ff6f61, #ff9a8b);
+    }
+  }
+
+  @keyframes glow {
+    0% {
+      box-shadow: 0 0 5px #ff6f61;
+    }
+    50% {
+      box-shadow: 0 0 20px #ff6f61;
+    }
+    100% {
+      box-shadow: 0 0 5px #ff6f61;
+    }
+  }
+ 
+</style>
+
+-->
+
+{{% pageinfo color="primary" %}} 
 The CSM Authorization RPM will be deprecated in a future release. It is highly recommended that you use CSM Authorization Helm deployment or CSM Operator going forward.
 {{% /pageinfo %}}
 
