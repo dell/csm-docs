@@ -16,12 +16,12 @@ The following are requirements to be met before installing the CSI Driver for De
 
 > For NVMe support the preferred multipath solution is NVMe native multipathing. The [Dell Host Connectivity Guide](https://elabnavigator.dell.com/vault/pdf/Linux.pdf?key=1725374107988) describes the details of each configuration option.
 
-> If you want to use preconfigured iSCSI/FC hosts be sure to check that they are not part of any host group.
+> If you want to use pre-configured iSCSI/FC hosts be sure to check that they are not part of any host group.
 
 - Linux native multipathing requirements
 - Mount propagation is enabled on container runtime that is being used
 - If using Snapshot feature, satisfy all Volume Snapshot requirements
-- Nonsecure registries are defined in Docker or other container runtimes, for CSI drivers that are hosted in a non-secure location
+- Insecure registries are defined in Docker or other container runtimes, for CSI drivers that are hosted in a non-secure location
 - You can access your cluster with kubectl and helm
 - Ensure that your nodes support mounting NFS volumes if using NFS
 
@@ -70,15 +70,15 @@ The following requirements must be fulfilled in order to successfully use the NV
 sudo dnf -y install nvme-cli
 ```
 
-- Support for NVMe requires native NVMe multipathing to be configured on each worker node in the cluster. Please refer to the [Dell Host Connectivity Guide](https://elabnavigator.dell.com/vault/pdf/Linux.pdf?key=1725374107988) for more details on NVMe connectivity requirements. To determine if the worker nodes are confgiured for native NVMe multipathing run the following command on each worker node:
+- Support for NVMe requires native NVMe multipathing to be configured on each worker node in the cluster. Please refer to the [Dell Host Connectivity Guide](https://elabnavigator.dell.com/vault/pdf/Linux.pdf?key=1725374107988) for more details on NVMe connectivity requirements. To determine if the worker nodes are configured for native NVMe multipathing run the following command on each worker node:
 
 ```bash
 cat /sys/module/nvme_core/parameters/multipath
 ```
 
- >If the result of the command displays Y then NVMe native multipathing is enabled in the kernel. If the output is N then native NVMe multipating is disabled. Consult the [Dell Host Connectivity Guide](https://elabnavigator.dell.com/vault/pdf/Linux.pdf?key=1725374107988) for Linux to enable native NVMe multipathing.
+ >If the result of the command displays Y then NVMe native multipathing is enabled in the kernel. If the output is N then native NVMe multipathing is disabled. Consult the [Dell Host Connectivity Guide](https://elabnavigator.dell.com/vault/pdf/Linux.pdf?key=1725374107988) for Linux to enable native NVMe multipathing.
 
-- The default NVMeTCP native multipathing policy is "numa". The preferred IO policy for NVMe devices used for PowerStore is round-robin. You can use udev rules to enable the round robin policy on all worker nodes. To view the IO policy you can use the followig command:
+- The default NVMeTCP native multipathing policy is "numa". The preferred IO policy for NVMe devices used for PowerStore is round-robin. You can use udev rules to enable the round robin policy on all worker nodes. To view the IO policy you can use the following command:
 
 ```bash
 nvme list-subsys
@@ -124,7 +124,7 @@ spec:
 
 **Configure the control loss timeout**
 
-To reduce the impact of PowerStore non disruptive software upgrades you must set the control loss timeout. This can be done using udev rules on each worker node. More information can be found in the [Dell Host Connectivity Guide](https://elabnavigator.dell.com/vault/pdf/Linux.pdf?key=1725374107988). The configre the control loss timeout place a config file in /etc/udev/rules.d with the name 72-nvmf-ctrl_loss_tmo.rules with the following contents:
+To reduce the impact of PowerStore non disruptive software upgrades you must set the control loss timeout. This can be done using udev rules on each worker node. More information can be found in the [Dell Host Connectivity Guide](https://elabnavigator.dell.com/vault/pdf/Linux.pdf?key=1725374107988). The configure the control loss timeout place a config file in /etc/udev/rules.d with the name 72-nvmf-ctrl_loss_tmo.rules with the following contents:
 
 ```text
 ACTION=="add|change", SUBSYSTEM=="nvme", KERNEL=="nvme*", ATTR{ctrl_loss_tmo}="-1"
