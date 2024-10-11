@@ -6,7 +6,7 @@ weight: 20
 menu:
   main:
     weight: 20
-no_list: true  
+
 --- 
 <!-- 
 <style>
@@ -100,7 +100,7 @@ no_list: true
  
 </style>
 
--->
+
 
 {{% pageinfo color="primary" %}} 
 The CSM Authorization RPM will be deprecated in a future release. It is highly recommended that you use CSM Authorization Helm deployment or CSM Operator going forward.
@@ -169,3 +169,4 @@ CSM is made up of multiple components including modules (enterprise capabilities
   </div>
 </div>
 {{% /cardpane %}}
+-->
