@@ -15,7 +15,7 @@ Given a setup where Kubernetes, a storage system, and the CSM for Authorization 
     kubectl apply -f /tmp/token.yaml -n isilon
     ```
 
-   This takes the assumption that Powerflex will be installed in the `isilon` namespace.
+   This takes the assumption that PowerScale will be installed in the `isilon` namespace.
 
 2. Edit these parameters in `samples/secret/karavi-authorization-config.json` file in [CSI PowerScale](https://github.com/dell/csi-powerscale/tree/main/samples/secret) driver and update/add connection information for one or more backend storage arrays. In an instance where multiple CSI drivers are configured on the same Kubernetes cluster, the port range in the *endpoint* parameter must be different for each driver.
 
@@ -55,32 +55,6 @@ kubectl -n isilon create secret generic karavi-authorization-config --from-file=
 
 4. Prepare the driver configuration secret, applicable to your driver installation method, to communicate with the CSM Authorization sidecar.
 
-    **Helm**
-
-    Refer to the [Install the Driver](../../../../deployment/helm/drivers/installation/isilon/#install-the-driver) section to edit the parameters to prepare the `samples/secret/secret.yaml` file to configure the driver to communicate with the CSM Authorization sidecar.
-
-    - Update `endpoint` to match the localhost endpoint in `samples/secret/karavi-authorization-config.json`.
-
-    - Update `mountEndpoint` to the PowerScale OneFS API server. For example, 10.0.0.1.
-
-    - Update `skipCertificateValidation` to `true`.
-
-    - The `username` and `password` can be any value since they will be ignored.
-
-    Example:
-
-    ```yaml
-    isilonClusters:
-      - clusterName: "cluster1"
-        username: "ignored"
-        password: "ignored"
-        isDefault: true
-        endpoint: localhost
-        endpointPort: 9400
-        mountEndpoint: 10.0.0.1
-        skipCertificateValidation: true
-    ```
-
     **Operator**
 
     Refer to the [Prerequisite](../../../../deployment/csmoperator/drivers/powerscale/#prerequisite) section to prepare the `secret.yaml` file to configure the driver to communicate with the CSM Authorization sidecar.
@@ -107,40 +81,33 @@ kubectl -n isilon create secret generic karavi-authorization-config --from-file=
         skipCertificateValidation: true
     ```
 
-5. Enable CSM Authorization in the driver installation applicable to your installation method.
-
     **Helm**
 
-    Refer to the [Install the Driver](../../../../deployment/helm/drivers/installation/isilon/#install-the-driver) section to edit the parameters in `my-isilon-settings.yaml` file to enable CSM Authorization.
+    Refer to the [Install the Driver](../../../../deployment/helm/drivers/installation/isilon/#install-the-driver) section to edit the parameters to prepare the `samples/secret/secret.yaml` file to configure the driver to communicate with the CSM Authorization sidecar.
 
-    - Update `authorization.enabled` to `true`.
+    - Update `endpoint` to match the localhost endpoint in `samples/secret/karavi-authorization-config.json`.
 
-    - Update `images.authorization` to the image of the CSM Authorization sidecar. In most cases, you can leave the default value.
+    - Update `mountEndpoint` to the PowerScale OneFS API server. For example, 10.0.0.1.
 
-    - Update `authorization.proxyHost` to the hostname of the CSM Authorization Proxy Server. `csm-authorization.com` is a placeholder for the proxyHost. See the administrator of CSM for Authorization for the correct value.
+    - Update `skipCertificateValidation` to `true`.
 
-    - Update `authorization.skipCertificateValidation` to `true` or `false` depending on if you want to disable or enable certificate validation of the CSM Authorization Proxy Server.
+    - The `username` and `password` can be any value since they will be ignored.
 
-   Example:
+    Example:
 
     ```yaml
-    authorization:
-      enabled: true
-
-      # sidecarProxyImage: the container image used for the csm-authorization-sidecar.
-      sidecarProxyImage: dellemc/csm-authorization-sidecar:v2.0.0
-
-      # proxyHost: hostname of the csm-authorization server
-      # Default value: None
-      proxyHost: csm-authorization.com
-
-      # skipCertificateValidation: certificate validation of the csm-authorization server
-      # Allowed Values:
-      #   "true" - TLS certificate verification will be skipped
-      #   "false" - TLS certificate will be verified
-      # Default value: "true"
-      skipCertificateValidation: true
+    isilonClusters:
+      - clusterName: "cluster1"
+        username: "ignored"
+        password: "ignored"
+        isDefault: true
+        endpoint: localhost
+        endpointPort: 9400
+        mountEndpoint: 10.0.0.1
+        skipCertificateValidation: true
     ```
+
+5. Enable CSM Authorization in the driver installation applicable to your installation method.
 
     **Operator**
 
@@ -178,6 +145,37 @@ kubectl -n isilon create secret generic karavi-authorization-config --from-file=
               value: "true"
     ```
 
-6. Install the Dell CSI PowerScale driver following the appropriate documenation for your installation method.
+    **Helm**
 
-7. (Optional) Install [dellctl](../../../../support/cli/#installation-instructions) to perform Kubernetes administrator commands for additional capabilities (e.g., list volumes). Please refer to the [dellctl documentation page](../../../../support/cli) for the installation steps and command list.
+    Refer to the [Install the Driver](../../../../deployment/helm/drivers/installation/isilon/#install-the-driver) section to edit the parameters in `my-isilon-settings.yaml` file to enable CSM Authorization.
+
+    - Update `authorization.enabled` to `true`.
+
+    - Update `images.authorization` to the image of the CSM Authorization sidecar. In most cases, you can leave the default value.
+
+    - Update `authorization.proxyHost` to the hostname of the CSM Authorization Proxy Server. `csm-authorization.com` is a placeholder for the proxyHost. See the administrator of CSM for Authorization for the correct value.
+
+    - Update `authorization.skipCertificateValidation` to `true` or `false` depending on if you want to disable or enable certificate validation of the CSM Authorization Proxy Server.
+
+   Example:
+
+    ```yaml
+    authorization:
+      enabled: true
+
+      # sidecarProxyImage: the container image used for the csm-authorization-sidecar.
+      sidecarProxyImage: dellemc/csm-authorization-sidecar:v2.0.0
+
+      # proxyHost: hostname of the csm-authorization server
+      # Default value: None
+      proxyHost: csm-authorization.com
+
+      # skipCertificateValidation: certificate validation of the csm-authorization server
+      # Allowed Values:
+      #   "true" - TLS certificate verification will be skipped
+      #   "false" - TLS certificate will be verified
+      # Default value: "true"
+      skipCertificateValidation: true
+    ```
+
+6. Install the Dell CSI PowerScale driver following the appropriate documenation for your installation method.
