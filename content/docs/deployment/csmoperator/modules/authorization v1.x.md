@@ -120,20 +120,20 @@ Once the Authorization CR is created, you can verify the installation as mention
 
 ### Install Karavictl
 
-Follow the instructions available in CSM Authorization for [Installing karavictl](../../../helm/modules/installation/authorization/#install-karavictl).
+Follow the instructions available in CSM Authorization for [Installing karavictl](../../../helm/modules/installation/authorization-v1.x/#install-karavictl).
 
 ### Configure the CSM Authorization Proxy Server
 
 **Authorization v1.x**
 
-Follow the instructions available in CSM Authorization for [Configuring the CSM Authorization Proxy Server](../../../helm/modules/installation/authorization/#configuring-the-csm-authorization-proxy-server).
+Follow the instructions available in CSM Authorization for [Configuring the CSM Authorization Proxy Server](../../../../docs/authorization/v1.x/configuration/proxy-server/).
 
 
 ### Configure a Dell CSI Driver with CSM Authorization
 
 **Authorization v1.x**
 
-Follow the instructions available in CSM Authorization for [Configuring a Dell CSI Driver with CSM for Authorization](../../../helm/modules/installation/authorization/#configuring-a-dell-csi-driver-with-csm-for-authorization).
+Follow the instructions available in CSM Authorization for [Configuring a Dell CSI Driver with CSM for Authorization](../../../../docs/authorization/v1.x/configuration/).
 
 ## Upgrade CSM Authorization
 
