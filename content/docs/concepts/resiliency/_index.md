@@ -189,6 +189,9 @@ Similarly, the label selector for csi-powerscale, csi-unity, csi-powerstore and 
 
  3. As noted previously in the Limitations and Exclusions section, CSM for Resiliency has not yet been verified to work with ReadWriteMany or ReadOnlyMany volumes. Also, it has not been verified to work with pod controllers other than StatefulSet.
 
+ ### Storage Array Upgrades
+To avoid application pods getting stuck in a Pending state, CSM for Resiliency should be disabled for storage array upgrades; even if the storage array upgrade is advertised as non-distruptive. If the container orchestrator platform nodes lose connectivity with the array, which is more likely during an upgrade, then Resiliency will delete the application pods on the affected nodes and attempt to move them to a healthy node. If all of the nodes are affected, then the application pods will be stuck in a Pending state.
+
 ## Recovering From Failures
 
 Normally CSM for Resiliency should be able to move pods that have been impacted by Node Failures to a healthy node. After the failed nodes have come back online, CSM for Resiliency cleans them up (especially any potential zombie pods) and then automatically removes the CSM for Resiliency node taint that prevents pods from being scheduled to the failed node(s). There are a few cases where this cannot be fully automated and operator intervention is required, including:
