@@ -17,7 +17,7 @@ The installation process for the Dell CSM Driver is straightforward and user-fri
     {{< customcard path="content/docs/getting-started/installation/kubernetes" link="./kubernetes" icon="fas fa-star" title="Kubernetes" image="../../../icons/save-disk.svg">}}
       </div>
       <div class="col-md-6 mb-4">
-       {{< customcard  path="content/docs/getting-started/installation/openshift" link="./openshift" icon="fas fa-search" title="Open Shift" image="../../../icons/save-disk.svg">}}
+       {{< customcard  path="content/docs/getting-started/installation/openshift" link="./openshift" icon="fas fa-search" title="OpenShift" image="../../../icons/save-disk.svg">}}
        </div>
     </div>
        <div class="row">

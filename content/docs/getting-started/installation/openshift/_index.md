@@ -1,8 +1,8 @@
 ---
-title: "Open Shift"
-linkTitle: "Open Shift"
+title: "OpenShift"
+linkTitle: "OpenShift"
 no_list: true
-description: Open-shift Installation
+description: OpenShift Installation
 weight: 2
 ---
 
