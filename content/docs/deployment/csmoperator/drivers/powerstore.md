@@ -23,7 +23,7 @@ kubectl get csm --all-namespaces
 ### Prerequisites
 
 The following are requirements to be met before installing the CSI Driver for Dell PowerStore:
-- A Kubernetes or OpenShift cluster (see [supported versions](../../../../../csidriver/#features-and-capabilities))
+- A Kubernetes or OpenShift cluster (see [supported versions](../../../../csidriver/#features-and-capabilities))
 - If you plan to use either the Fibre Channel, iSCSI, NVMe/TCP, or NVMe/FC protocols, refer to either _Fibre Channel requirements_ or _Set up the iSCSI Initiator_ or _Set up the NVMe Initiator_ sections below. You can use NFS volumes without FC, iSCSI, NVMe/TCP, or NVMe/FC configurations.
 > You can use either the Fibre Channel (FC), iSCSI, NVMe/TCP, or NVMe/FC protocol, but you do not need all four to be enabled.
 
