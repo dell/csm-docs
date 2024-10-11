@@ -19,23 +19,21 @@ Given a setup where Kubernetes, a storage system, and the CSM for Authorization 
 
 2. Edit these parameters in `samples/secret/karavi-authorization-config.json` file in [CSI PowerScale](https://github.com/dell/csi-powerscale/tree/main/samples/secret) driver and update/add connection information for one or more backend storage arrays. In an instance where multiple CSI drivers are configured on the same Kubernetes cluster, the port range in the *endpoint* parameter must be different for each driver.
 
-  | Parameter | Description | Required | Default |
-   | --------- | ----------- | -------- |-------- |
-   | username | Username for connecting to the backend storage array. This parameter is ignored. | No | - |
-   | password | Password for connecting to to the backend storage array. This parameter is ignored. | No | - |
-   | intendedEndpoint | HTTPS REST API endpoint of the backend storage array. | Yes | - |
-   | endpoint | HTTPS localhost endpoint that the authorization sidecar will listen on. | Yes | https://localhost:9400 |
-   | systemID | Cluster name of the backend storage array. | Yes | " " |
-   | skipCertificateValidation  | A boolean that enables/disables certificate validation of the backend storage array. This parameter is not used. | No | true |
-   | isDefault | A boolean that indicates if the array is the default array. This parameter is not used. | No | default value from values.yaml |
+  | Parameter                 | Description                                                                                                      | Required | Default                        |
+  | ------------------------- | ---------------------------------------------------------------------------------------------------------------- | -------- | ------------------------------ |
+  | username                  | Username for connecting to the backend storage array. This parameter is ignored.                                 | No       | -                              |
+  | password                  | Password for connecting to to the backend storage array. This parameter is ignored.                              | No       | -                              |
+  | intendedEndpoint          | HTTPS REST API endpoint of the backend storage array.                                                            | Yes      | -                              |
+  | endpoint                  | HTTPS localhost endpoint that the authorization sidecar will listen on.                                          | Yes      | https://localhost:9400         |
+  | systemID                  | Cluster name of the backend storage array.                                                                       | Yes      | " "                            |
+  | skipCertificateValidation | A boolean that enables/disables certificate validation of the backend storage array. This parameter is not used. | No       | true                           |
+  | isDefault                 | A boolean that indicates if the array is the default array. This parameter is not used.                          | No       | default value from values.yaml |
 
+  Create the karavi-authorization-config secret using this command:
 
-Create the karavi-authorization-config secret using this command:
-
-```bash
-
-kubectl -n isilon create secret generic karavi-authorization-config --from-file=config=samples/secret/karavi-authorization-config.json -o yaml --dry-run=client | kubectl apply -f -
-```
+  ```bash
+  kubectl -n isilon create secret generic karavi-authorization-config --from-file=config=samples/secret/karavi-authorization-config.json -o yaml --dry-run=client | kubectl apply -f -
+  ```
 
 3. Create the proxy-server-root-certificate secret.
 
@@ -123,7 +121,7 @@ kubectl -n isilon create secret generic karavi-authorization-config --from-file=
 
     - Update the `SKIP_CERTIFICATE_VALIDATION` environment value to `true` or `false` depending on if you want to disable or enable certificate validation of the CSM Authorization Proxy Server.
 
-    - Do not update the `configVersion`. You will notice in the example that it is set to v1.12.0, this ensures that checks on version support do not prevent deployment of the v2.0.0 version of authorization.
+    - Do not update the `configVersion`. You will notice in the example that it is set to v1.12.0, this ensures that Operator checks on version support do not prevent deployment of the v2.0.0 version of authorization.
 
     ```yaml
     modules:

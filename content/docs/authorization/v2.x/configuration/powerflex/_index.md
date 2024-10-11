@@ -115,7 +115,7 @@ Given a setup where Kubernetes, a storage system, and the CSM for Authorization 
 
     - Update the `SKIP_CERTIFICATE_VALIDATION` environment value to `true` or `false` depending on if you want to disable or enable certificate validation of the CSM Authorization Proxy Server.
 
-    - Do not update the `configVersion`. You will notice in the example that it is set to v1.12.0, this ensures that checks on version support do not prevent deployment of the v2.0.0 version of authorization.
+    - Do not update the `configVersion`. You will notice in the example that it is set to v1.12.0, this ensures that Operator checks on version support do not prevent deployment of the v2.0.0 version of authorization.
 
     Example:
 

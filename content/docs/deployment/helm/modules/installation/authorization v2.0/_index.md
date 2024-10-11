@@ -134,7 +134,7 @@ Follow the instructions for [Installing dellctl](../../../../../support/cli/#ins
 
 ## Configuring the CSM Authorization Proxy Server
 
-Follow the instructions available in CSM Authorization for [Configuring the CSM Authorization Proxy Server](../../../../../authorization/v2.x/configuration/proxy-server/).
+Follow the instructions available in CSM Authorization for [Configuring the CSM Authorization Proxy Server](../../../../../authorization/v2.x/configuration/).
 
 
 ## Configuring a Dell CSI Driver with CSM for Authorization
