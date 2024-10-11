@@ -109,7 +109,7 @@ To enable reporting of trace data with [Zipkin](https://zipkin.io/), use the `cs
   ZIPKIN_PROBABILITY: "1.0"
   ```
 
-1. Execute this command to create the Authorization CR:
+4. Execute this command to create the Authorization CR:
 
     ```bash
 

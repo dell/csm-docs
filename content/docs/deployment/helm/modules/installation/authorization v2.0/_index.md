@@ -5,10 +5,6 @@ description: >
   Dell Technologies (Dell) Container Storage Modules (CSM) for Authorization v2.0 Helm deployment
 ---
 
-{{% pageinfo color="primary" %}}
-The CSM Authorization karavictl CLI is no longer actively maintained or supported. It will be deprecated in a future release.
-{{% /pageinfo %}}
-
 CSM Authorization can be installed by using the provided Helm v3 charts on Kubernetes platforms.
 
 The following CSM Authorization components are installed in the specified namespace:
@@ -112,7 +108,7 @@ The following third-party components are optionally installed in the specified n
 | certificateAuthority                | The base64-encoded certificate authority for validating the Vault server.                                                            | No       | -                                         |
 
 
-1. Install the driver using `helm`:
+7. Install the driver using `helm`:
 
 To install CSM Authorization with the service Ingresses using your own certificate, run:
 
@@ -130,12 +126,13 @@ helm -n authorization install authorization -f myvalues.yaml charts/csm-authoriz
 
 ## Install Dellctl
 
+>__Note__: Karavictl will not work with Authorization v2.x. Please use dellctl instead.
+
 Follow the instructions for [Installing dellctl](../../../../../support/cli/#installation-instructions).
 
 ## Configuring the CSM Authorization Proxy Server
 
 Follow the instructions available in CSM Authorization for [Configuring the CSM Authorization Proxy Server](../../../../../authorization/v2.x/configuration/).
-
 
 ## Configuring a Dell CSI Driver with CSM for Authorization
 
