@@ -5,10 +5,6 @@ description: >
   Installing Authorization v2.0 via Dell CSM Operator
 ---
 
-{{% pageinfo color="primary" %}}
-The CSM Authorization karavictl CLI is no longer actively maintained or supported. It will be deprecated in CSM 2.0.
-{{% /pageinfo %}}
-
 ## Install CSM Authorization via Dell CSM Operator
 
 The CSM Authorization module for supported Dell CSI Drivers can be installed via the Dell CSM Operator.
@@ -127,6 +123,8 @@ Once the Authorization CR is created, you can verify the installation as mention
   ```
 
 ### Install dellctl
+
+>__Note__: Karavictl will not work with Authorization v2.x. Please use dellctl instead.
 
 Follow the instructions for [Installing dellctl](../../../../support/cli/#installation-instructions).
 

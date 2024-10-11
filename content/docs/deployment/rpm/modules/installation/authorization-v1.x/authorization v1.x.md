@@ -1,6 +1,6 @@
 ---
 title: Authorization v1.x
-linktitle: Authorization v1.x
+linktitle: "Authorization v1.x"
 description: >
   Dell Technologies (Dell) Container Storage Modules (CSM) for Authorization RPM deployment
 ---

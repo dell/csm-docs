@@ -1,6 +1,6 @@
 ---
-title: Authorization
-linkTitle: "Authorization"
+title: Authorization v1.x
+linkTitle: "Authorization v1.x"
 description: >
   Installing Authorization via Dell CSM Operator
 ---
