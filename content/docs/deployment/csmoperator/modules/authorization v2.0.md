@@ -1,13 +1,9 @@
 ---
-title: Authorization v2.0 Tech Preview
-linkTitle: "Authorization v2.0 Tech Preview"
+title: Authorization v2.0
+linkTitle: "Authorization v2.0"
 description: >
-  Installing Authorization v2.0 Tech Preview via Dell CSM Operator
+  Installing Authorization v2.0 via Dell CSM Operator
 ---
-
-{{% pageinfo color="primary" %}}
-The CSM Authorization karavictl CLI is no longer actively maintained or supported. It will be deprecated in CSM 2.0.
-{{% /pageinfo %}}
 
 ## Install CSM Authorization via Dell CSM Operator
 
@@ -61,7 +57,7 @@ To deploy the Operator, follow the instructions available [here](../../#installa
 
 1. Follow all the [prerequisites](#prerequisite).
 
-2. Create a CR (Custom Resource) for Authorization from a [sample manifest](https://github.com/dell/csm-operator/blob/main/samples/authorization/csm_authorization_proxy_server_v200-alpha.yaml). This file can be modified to use custom parameters if needed.
+2. Create a CR (Custom Resource) for Authorization from a [sample manifest](https://github.com/dell/csm-operator/blob/main/samples/authorization/csm_authorization_proxy_server_v200.yaml). This file can be modified to use custom parameters if needed.
 
 3. Users should configure the parameters in the CR. This table lists the primary configurable parameters of the Authorization Proxy Server and their default values:
 
@@ -78,10 +74,8 @@ To deploy the Operator, follow the instructions available [here](../../#installa
    | proxyServerIngress.ingressClassName | The ingressClassName of the proxy-service Ingress. | Yes | nginx |
    | proxyServerIngress.hosts | Additional host rules to be applied to the proxy-service Ingress. | No | - |
    | proxyServerIngress.annotations | Additional annotations for the proxy-service Ingress. | No | - |
-   | **redis** | This section configures the Redis components. | - | - |
-   | storageclass | The storage class for Redis to use for persistence. If not supplied, a locally provisioned volume is used. | No | - |
 
-    **Additional v2.0 Technical Preview Parameters:**
+    **Additional v2.0 Parameters:**
    | Parameter | Description | Required | Default |
    | --------- | ----------- | -------- |-------- |
    | **redis** | This section configures the Redis components. | - | - |
@@ -130,17 +124,20 @@ Once the Authorization CR is created, you can verify the installation as mention
 
 ### Install dellctl
 
+>__Note__: Karavictl will not work with Authorization v2.x. Please use dellctl instead.
+
 Follow the instructions for [Installing dellctl](../../../../support/cli/#installation-instructions).
 
 ### Configure the CSM Authorization Proxy Server
 
-Follow the instructions available in CSM Authorization for [Configuring the CSM Authorization Proxy Server](../../../../authorization/v2.0-tech-preview/configuration/proxy-server/).
+Follow the instructions available in CSM Authorization for [Configuring the CSM Authorization Proxy Server](../../../../authorization/v2.x/configuration/).
 
 ### Configure a Dell CSI Driver with CSM Authorization
 
 Follow the instructions available in CSM Authorization for
-- [Configuring PowerFlex with Authorization](../../../../authorization/v2.0-tech-preview/configuration/powerflex).
-- [Configuring PowerMax with Authorization](../../../../authorization/v2.0-tech-preview/configuration/powermax).
+- [Configuring PowerFlex with Authorization](../../../../authorization/v2.x/configuration/powerflex).
+- [Configuring PowerMax with Authorization](../../../../authorization/v2.x/configuration/powermax).
+- [Configuring PowerScale with Authorization](../../../../authorization/v2.x/configuration/powermax).
 
 ## Vault Server Installation
 
