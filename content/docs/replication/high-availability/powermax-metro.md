@@ -8,7 +8,7 @@ description: >
 
 ## SRDF Metro Architecture
 
-![metro architecture diagram](../metro.png)
+![metro architecture diagram](../../metro.png)
 
 In SRDF metro configurations:
 * R2 devices are Read/Write accessible to application hosts.
@@ -16,8 +16,8 @@ In SRDF metro configurations:
 * R2 devices assume the same external device identity(geometry, device WWN) as the R1 devices.
   All the above characteristic makes SRDF metro best suited for the scenarios in which high availability of data is desired.
 
-With respect to Kubernetes, the SRDF metro mode works in single cluster scenarios. In the metro, both the arrays—[arrays with SRDF metro link setup between them](../../deployment/helm/modules/installation/replication/powermax/#on-storage-array)—involved in the replication are managed by the same `csi-powermax` driver. The replication is triggered by creating a volume using a `StorageClass` with metro-related parameters.
-The driver on receiving the metro-related parameters in the `CreateVolume` call creates a metro replicated volume and the details about both the volumes are returned in the volume context to the Kubernetes cluster. So, the `PV` created in the process represents a pair of metro replicated volumes. When a `PV`, representing a pair of metro replicated volumes, is claimed by a pod, the host treats each of the volumes represented by the single `PV` as a separate data path. The switching between the paths, to read and write the data, is managed by the multipath driver. The switching happens automatically, as configured by the user—in round-robin fashion or otherwise—or it can happen if one of the paths goes down. For details on Linux multipath driver setup, [click here](../../deployment/helm/drivers/installation/powermax#linux-multipathing-requirements).
+With respect to Kubernetes, the SRDF metro mode works in single cluster scenarios. In the metro, both the arrays—[arrays with SRDF metro link setup between them](../../../deployment/helm/modules/installation/replication/powermax/#on-storage-array)—involved in the replication are managed by the same `csi-powermax` driver. The replication is triggered by creating a volume using a `StorageClass` with metro-related parameters.
+The driver on receiving the metro-related parameters in the `CreateVolume` call creates a metro replicated volume and the details about both the volumes are returned in the volume context to the Kubernetes cluster. So, the `PV` created in the process represents a pair of metro replicated volumes. When a `PV`, representing a pair of metro replicated volumes, is claimed by a pod, the host treats each of the volumes represented by the single `PV` as a separate data path. The switching between the paths, to read and write the data, is managed by the multipath driver. The switching happens automatically, as configured by the user—in round-robin fashion or otherwise—or it can happen if one of the paths goes down. For details on Linux multipath driver setup, [click here](../../../deployment/helm/drivers/installation/powermax#linux-multipathing-requirements).
 
 The creation of volumes in SRDF metro mode doesn't involve the replication sidecar or the common controller, nor does it cause the creation of any replication related custom resources. It just needs the `csi-powermax` driver that implements the `CreateVolume` gRPC endpoint with SRDF metro capability for it to work.
 
