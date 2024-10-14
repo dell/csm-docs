@@ -304,7 +304,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
    But make sure to align to the same namespace during the whole installation.
 3. Edit `samples/secret/secret.yaml` file and configure connection information for your PowerStore arrays changing following parameters:
     - *endpoint*: defines the full URL path to the PowerStore API.
-    - *globalID*: specifies what storage cluster the driver should use
+    - *globalID*: specifies what storage cluster the driver should use.
     - *username*, *password*: defines credentials for connecting to array.
     - *skipCertificateValidation*: defines if we should use insecure connection or not.
     - *isDefault*: defines if we should treat the current array as a default.
