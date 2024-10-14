@@ -49,7 +49,7 @@ kubectl get csm --all-namespaces
 
 1. Follow all the [prerequisites](#prerequisite) above
 
-2. Create a CR (Custom Resource) for Unity XT using the sample files provided
+2. Create a CR (Custom Resource) for Unity using the sample files provided
 
     a. Install the Unity driver using default configuration using
     the sample file provided
