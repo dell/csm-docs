@@ -317,7 +317,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
 
 ### Install Driver
 
-1. Follow all the [prerequisites](#prerequisite) above
+1. Follow all the [prerequisites](#prerequisites) above
 
 2. Create a CR (Custom Resource) for PowerStore using the sample files provided
    [here](https://github.com/dell/csm-operator/tree/master/samples). This file can be modified to use custom parameters if needed.
