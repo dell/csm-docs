@@ -77,3 +77,6 @@ To enable this module, user should choose the sample file for the respective dri
             - "--driver-config-params=/powerstore-config-params/driver-config-params.yaml"
             - "--driverPath=csi-powerstore.dellemc.com"
 ```
+## How to enable this module using minimal CR
+
+To enable this module, user should choose the minimal sample file for the respective driver for specific version. By default, the module is disabled but this can be enabled by setting the enabled flag to `true` in the minimal sample file.
