@@ -3,7 +3,11 @@
     (not .Site.Params.ui.navbar_translucent_over_cover_disable)
 -}}
 {{ $baseURL := urls.Parse $.Site.Params.Baseurl -}}
-
+<style>  
+.navbar-brand{
+  margin-right:0px; 
+}
+</style>
 <nav class="td-navbar js-navbar-scroll
             {{- if $cover }} td-navbar-cover {{- end }}" data-bs-theme="dark">
 <div class="container-fluid flex-column flex-md-row">
@@ -22,6 +26,9 @@
     </span>
     {{- /**/ -}}
   </a>
+  <span class="navbar-brand__beta ms-2">
+    <span class="badge bg-warning text-dark">Beta</span>
+  </span>
   <div class="td-navbar-nav-scroll ms-md-auto" id="main_navbar">
     <ul class="navbar-nav">
       {{ $p := . -}}
