@@ -29,10 +29,12 @@ jobs:
             ${{ runner.os }}-node-
       - run: npm ci
       - name: Build
+        # Removes the public folder before building so deleted files are not being served.
         run: |
          npm install -D --save autoprefixer
          npm install -D --save postcss-cli
          npm install -D --save postcss
+         rm -rf ./public/
          hugo server --bind 127.0.0.1 &
       - name: Wait for Hugo server
         run: curl --head -X GET --retry 5 --retry-connrefused --retry-delay 10 http://127.0.0.1:1313/csm-docs/
