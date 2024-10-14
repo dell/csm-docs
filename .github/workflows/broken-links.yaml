@@ -35,10 +35,9 @@ jobs:
          npm install -D --save postcss-cli
          npm install -D --save postcss
 
-         ls
-         rm -rf /home/runner/work/csm-docs/csm-docs/public
-         rm -rf ./public/
          hugo mod clean --all -b http://127.0.0.1:1313/
+         hugo server --bind 127.0.0.1
+         rm -rf /home/runner/work/csm-docs/csm-docs/public
          hugo server --bind 127.0.0.1 &
       - name: Wait for Hugo server
         run: curl --head -X GET --retry 5 --retry-connrefused --retry-delay 10 http://127.0.0.1:1313/csm-docs/
