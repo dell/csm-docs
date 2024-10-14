@@ -297,9 +297,35 @@ Create a secret named powermax-certs in the namespace where the CSI PowerMax dri
     ```bash
     kubectl create configmap powermax-reverseproxy-config --from-file config.yaml -n powermax
     ```
+4. Create a configmap using below sample file. Fill in the appropriate values for driver configuration. Example: X_CSI_TRANSPORT_PROTOCOL:"ISCSI" 
+   ```yaml  
+      # Copyright © 2024 Dell Inc. or its subsidiaries. All Rights Reserved.
+      #
+      # Licensed under the Apache License, Version 2.0 (the "License");
+      # you may not use this file except in compliance with the License.
+      # You may obtain a copy of the License at
+      #      http://www.apache.org/licenses/LICENSE-2.0
+      # Unless required by applicable law or agreed to in writing, software
+      # distributed under the License is distributed on an "AS IS" BASIS,
+      # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+      # See the License for the specific language governing permissions and
+      # limitations under the License.
+      # To create this configmap use: kubectl create -f powermax-array-config.yaml
+      apiVersion: v1
+      kind: ConfigMap
+      metadata:
+        name: powermax-array-config
+        namespace: powermax
+      data:
+        powermax-array-config.yaml: |
+          X_CSI_POWERMAX_PORTGROUPS: "" # Portgroup is required in case of iSCSI only
+          X_CSI_TRANSPORT_PROTOCOL: "" # Defaults to empty
+          X_CSI_POWERMAX_ENDPOINT: "https://10.0.0.0:8443"
+          X_CSI_MANAGED_ARRAYS: "000000000000,000000000000,"
+   ```
 
-4. Create a CR (Custom Resource) for PowerMax using the sample files provided [here](https://github.com/dell/csm-operator/tree/master/samples). This file can be modified to use custom parameters if needed.
-5. Users should configure the parameters in CR. The following table lists the primary configurable parameters of the PowerMax driver and their default values:
+5. Create a CR (Custom Resource) for PowerMax using the sample files provided [here](https://github.com/dell/csm-operator/tree/master/samples). This file can be modified to use custom parameters if needed.
+6. Users should configure the parameters in CR. The following table lists the primary configurable parameters of the PowerMax driver and their default values:
 
    | Parameter                                       | Description                                                                                                                                                                                                                                                              | Required | Default                        |
    |-------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------|--------------------------------|
@@ -329,9 +355,9 @@ Create a secret named powermax-certs in the namespace where the CSI PowerMax dri
    | X_CSI_REVPROXY_PORT                             | Port number where reverseproxy will listen as defined in config map                                                                                                                                                                                                      | Yes      | "2222"                         |
    | X_CSI_CONFIG_MAP_NAME                           | Name of config map as created for CSI PowerMax                                                                                                                                                                                                                           | Yes      | "powermax-reverseproxy-config" |
 
-6. Execute the following command to create the PowerMax custom resource:`kubectl create -f <input_sample_file.yaml>`. The above command will deploy the CSI-PowerMax driver.
-7. The mandatory module CSI PowerMax Reverseproxy will be installed automatically with the same command.
-8. Refer https://github.com/dell/csi-powermax/tree/main/samples for the sample files.
+7. Execute the following command to create the PowerMax custom resource:`kubectl create -f <input_sample_file.yaml>`. The above command will deploy the CSI-PowerMax driver.
+8. The mandatory module CSI PowerMax Reverseproxy will be installed automatically with the same command.
+9. Refer https://github.com/dell/csi-powermax/tree/main/samples for the sample files.
 
 ## Other features to enable
 ### Dynamic Logging Configuration
