@@ -60,7 +60,13 @@ Given a setup where Kubernetes, a storage system, and the CSM for Authorization 
 
     Leave `username` and `password` with the default values as they will be ignored.
 
-5. Prepare the reverse proxy configmap using sample [here](https://github.com/dell/csm-operator/blob/main/samples/csireverseproxy/config.yaml). Fill in the appropriate values for driver configuration.
+    **Helm**
+
+    Refer to the [Install the Driver](../../../../deployment/helm/drivers/installation/powermax/#install-the-driver) section where you edit `samples/secret/secret.yaml` with the credentials of the PowerMax.
+
+    Leave `username` and `password` with the default values as they will be ignored.
+
+5. **Operator Only**: Prepare the reverse proxy configmap using sample [here](https://github.com/dell/csm-operator/blob/main/samples/csireverseproxy/config.yaml). Fill in the appropriate values for driver configuration.
    Example: config.yaml
    ```yaml
     mode: StandAlone # Mode for the reverseproxy, should not be changed
@@ -80,6 +86,8 @@ Given a setup where Kubernetes, a storage system, and the CSM for Authorization 
    ```
 
 6. Enable CSM Authorization in the driver installation applicable to your installation method.
+  Alternatively, you can use the minimal sample files provided
+  [here](https://github.com/dell/csm-operator/tree/main/samples/minimal-samples) and install the module using default values
 
     **Operator**
 
@@ -147,7 +155,54 @@ Given a setup where Kubernetes, a storage system, and the CSM for Authorization 
               value: "true"
     ```
 
-Alternatively, you can use the minimal sample files provided
-  [here](https://github.com/dell/csm-operator/tree/main/samples/minimal-samples) and install the module using default values
+    **Helm**
 
-6. Install the Dell CSI PowerMax driver following the appropriate documenation for your installation method.
+    Refer to the [Install the Driver](../../../../deployment/helm/drivers/installation/powermax/#install-the-driver) section to edit the parameters in `my-powermax-settings.yaml` file to configure the driver to communicate with the CSM Authorization sidecar.
+
+    - Update `global.storageArrays.endpoint` to match the localhost endpoint in `samples/secret/karavi-authorization-config.json`.
+
+    - Update `global.managementServers.endpoint` to match the localhost endpoint in `samples/secret/karavi-authorization-config.json`.
+
+    - Update `authorization.enabled` to `true`.
+
+    - Update `images.authorization` to the image of the CSM Authorization sidecar. In most cases, you can leave the default value.
+
+    - Update `authorization.proxyHost` to the hostname of the CSM Authorization Proxy Server. `csm-authorization.com` is a placeholder for the proxyHost. See the administrator of CSM for Authorization for the correct value.
+
+    - Update `authorization.skipCertificateValidation` to `true` or `false` depending on if you want to disable or enable certificate validation of the CSM Authorization Proxy Server.
+
+    - Update `csireverseproxy.deployAsSidecar` to `true`.
+
+    Example:
+
+    ```yaml
+    global:
+      storageArrays:
+        - storageArrayId: "123456789"
+          endpoint: https://localhost:9400
+      managementServers:
+        - endpoint: https://localhost:9400
+    csireverseproxy:
+      # Set enabled to true if you want to deploy csireverseproxy as sidecar
+      # Allowed values:
+      #   "true"  - CSI reverse proxy will be deployed as a sidecar
+      #   "false" - CSI reverse proxy will be deployed along with driver
+      # Default value: "true"
+      deployAsSidecar: true
+    authorization:
+      enabled: true
+      # sidecarProxyImage: the container image used for the csm-authorization-sidecar.
+      # Default value: dellemc/csm-authorization-sidecar:v2.0.0
+      sidecarProxyImage: dellemc/csm-authorization-sidecar:v2.0.0
+      # proxyHost: hostname of the csm-authorization server
+      # Default value: None
+      proxyHost: csm-authorization.com
+      # skipCertificateValidation: certificate validation of the csm-authorization server
+      # Allowed Values:
+      #   "true" - TLS certificate verification will be skipped
+      #   "false" - TLS certificate will be verified
+      # Default value: "true"
+      skipCertificateValidation: true
+    ```
+
+7. Install the Dell CSI PowerMax driver following the appropriate documenation for your installation method.
