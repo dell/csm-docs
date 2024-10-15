@@ -29,7 +29,8 @@ kubectl delete -f tests/simple/simple.yaml
 You can use existent volumes from PowerStore array as Persistent Volumes in your Kubernetes, perform the following steps:
 
 1. Open your volume in PowerStore Management UI, and take a note of volume-id. The volume link must look similar to `https://<powerstore.api.ip>/#/storage/volumes/0055558c-5ae1-4ed1-b421-6f5a9475c19f/capacity`, where the `volume-id` is `0055558c-5ae1-4ed1-b421-6f5a9475c19f`.
-2. Create PersistentVolume and use this volume-id in volumeHandle in format <volume-id/globalID/protocol> in the manifest. Modify other parameters according to your needs.
+2. Create PersistentVolume and use this volume-id in volumeHandle in format `<volume-id/globalID/protocol>` in the manifest. In case of Metro volume, the volumeHandle should be in the format `<volume-id/globalID/protocol:remote-volume-id/remote-globalID>`. Modify other parameters according to your needs.
+
 ```yaml
 apiVersion: v1
 kind: PersistentVolume
@@ -759,3 +760,7 @@ Without storage capacity tracking, pods get scheduled on a node satisfying the t
 The attribute `storageCapacity.enabled` in `my-powerstore-settings.yaml` can be used to enabled/disabled the feature during driver installation .
 To configure how often driver checks for changed capacity set `storageCapacity.pollInterval` attribute. In case of driver installed via operator, this interval can be configured in the sample files provided [here](https://github.com/dell/csm-operator/tree/main/samples) by editing the `capacity-poll-interval` argument present in the `provisioner` sidecar.
 
+## Metro support
+The CSI PowerStore driver supports the provisioning of Metro volumes. The process and details of how to provision and use Metro volumes can be found [here](../../../replication/high-availability).
+
+Please note that the Metro feature does not require the deployment of the replicator sidecar or the replication controller.
