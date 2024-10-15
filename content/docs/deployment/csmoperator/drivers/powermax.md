@@ -10,6 +10,12 @@ To deploy the Operator, follow the instructions available [here](../../#installa
 
 Note that the deployment of the driver using the operator does not use any Helm charts and the installation and configuration parameters will be slightly different from the one specified via the Helm installer.
 
+## Listing installed drivers with the ContainerStorageModule CRD
+User can query for all Dell CSI drivers using this command:
+```bash
+kubectl get csm --all-namespaces
+```
+
 ## Prerequisites
 The CSI Driver for Dell PowerMax can create PVC with different storage protocols access :
 * direct Fiber Channel
@@ -20,21 +26,20 @@ The CSI Driver for Dell PowerMax can create PVC with different storage protocols
 In most cases, you will use one protocol only; therefore you should comply with the according prerequisites and not the others.
 
 
-### Listing installed drivers with the ContainerStorageModule CRD
-User can query for all Dell CSI drivers using this command:
-```bash
-kubectl get csm --all-namespaces
-```
+Depending of the protocol you use, refer to the following sections to configure the requirements for the CSI Driver.
 
+> **NOTE:** with RedHat Openshift all the software pre-requisites are already installed.
 
-### Fibre Channel Requirements
+{{< tabpane name="protocol-prereqs" text=true >}}
+{{% tab header="Fiber Channel" %}}
 
 CSI Driver for Dell PowerMax supports Fibre Channel communication. Ensure that the following requirements are met before you install CSI Driver:
 - Zoning of the Host Bus Adapters (HBAs) to the Fibre Channel port director must be completed.
 - Ensure that the HBA WWNs (initiators) appear on the list of initiators that are logged into the array.
 - If the number of volumes that will be published to nodes is high, then configure the maximum number of LUNs for your HBAs on each node. See the appropriate HBA document to configure the maximum number of LUNs.
+{{% /tab %}}
+{{% tab header="NVMe" %}}
 
-### NVMeTCP requirements
 If you want to use the protocol, set up the NVMe initiators as follows:
 - Setup on Array <br>
 Once the NVMe endpoint is created on the array, follow the following step to update endpoint name to adhere with CSI driver.
@@ -54,8 +59,8 @@ modprobe nvme_tcp
 ```
 - The NVMe modules may not be available after a node reboot. Loading the modules at startup is recommended.
 - Generate and update the _/etc/nvme/hostnqn_ with hostNQN details.
-
-### iSCSI Requirements
+{{% /tab %}}
+{{% tab header="iSCSI" %}}
 
 The CSI Driver for Dell PowerMax supports iSCSI connectivity. These requirements are applicable for the nodes that use iSCSI initiator to connect to the PowerMax arrays.
 
@@ -68,9 +73,38 @@ Set up the iSCSI initiators as follows:
 
 For more information about configuring iSCSI, see [Dell Host Connectivity guide](https://www.delltechnologies.com/asset/zh-tw/products/storage/technical-support/docu5128.pdf).
 
-##### iscsi-daemon `MachineConfig`
-To configure iSCSI in Red Hat OpenShift clusters, you can create a `MachineConfig` object using the console or `oc` to ensure that the iSCSI daemon starts on all the Red Hat CoreOS nodes. Here is an example of a `MachineConfig` object:
+{{% /tab %}}
+{{% tab header="NFS" %}}
+CSI Driver for Dell PowerMax supports NFS communication. Ensure that the following requirements are met before you install CSI Driver:
+- Configure the NFS network. Please refer [here](https://dl.dell.com/content/manual57826791-dell-powermax-file-protocol-guide.pdf?language=en-us&ps=true) for more details.
+- PowerMax Embedded Management guest to access Unisphere for PowerMax.
+- Create the NAS server. Please refer [here](https://dl.dell.com/content/manual55638050-dell-powermax-file-quick-start-guide.pdf?language=en-us&ps=true) for more details.
 
+{{% /tab %}}
+{{% tab header="Auto RDM for vSphere over FC" %}}
+
+The CSI Driver for Dell PowerMax supports auto RDM for vSphere over FC. These requirements are applicable for the clusters deployed on ESX/ESXi using virtualized environement.
+
+Set up the environment as follows:
+
+- Requires VMware vCenter management software to manage all ESX/ESXis where the cluster is hosted.
+
+- Add all FC array ports zoned to the ESX/ESXis to a port group where the cluster is hosted .
+
+- Add initiators from all ESX/ESXis to a host(initiator group)/host group(cascaded initiator group) where the cluster is hosted.
+- Create a secret which contains vCenter privileges. Follow the steps [here](#support-for-auto-rdm-for-vsphere-over-fc) to create the same.
+
+
+{{% /tab %}}
+{{< /tabpane >}}
+
+### `MachineConfig`
+To configure services in Red Hat OpenShift clusters, you can create a `MachineConfig` object
+using the console or `oc` to ensure that the daemons start automatically on all the Red Hat CoreOS nodes.
+Here are examples of `MachineConfig` objects:
+
+{{< tabpane name="machineconfig" text=true >}}
+{{% tab header="iscsid" %}}
 ```yaml
 apiVersion: machineconfiguration.openshift.io/v1
 kind: MachineConfig
@@ -87,12 +121,11 @@ spec:
       - name: "iscsid.service"
         enabled: true
 ```
-Once the `MachineConfig` object has been deployed, CoreOS will ensure that `iscsid.service` starts automatically.
 
-Alternatively, you can check the status of the iSCSI service by entering the following command on each worker node in the cluster:
+You can check the status of the iSCSI service by entering the following command for each worker node in the cluster:
 
 ```bash
-sudo systemctl status iscsid
+oc debug node/[node-name] -- chroot /host systemctl status iscsid
 ```
 
 The service should be up and running (i.e. should be active state).
@@ -103,40 +136,13 @@ If the `iscsid.service` is not running, then perform the following steps on each
 3. Ensure that iscsid service is running - Enable ```sudo systemctl enable iscsid``` & restart ```sudo systemctl restart iscsid``` iscsid if necessary.
 Note: If your worker nodes are running Red Hat CoreOS, make sure that automatic ISCSI login at boot is configured. Please contact RedHat for more details.
 
-### NFS requirements
-
-CSI Driver for Dell PowerMax supports NFS communication. Ensure that the following requirements are met before you install CSI Driver:
-- Configure the NFS network. Please refer [here](https://dl.dell.com/content/manual57826791-dell-powermax-file-protocol-guide.pdf?language=en-us&ps=true) for more details.
-- PowerMax Embedded Management guest to access Unisphere for PowerMax.
-- Create the NAS server. Please refer [here](https://dl.dell.com/content/manual55638050-dell-powermax-file-quick-start-guide.pdf?language=en-us&ps=true) for more details.
-
-### Linux multipathing requirements
-
-CSI Driver for Dell PowerMax supports Linux multipathing. Configure Linux multipathing before installing the CSI Driver.
-
-Set up Linux multipathing as follows:
-
-- All the nodes must have the _Device Mapper Multipathing_ package installed.
-  *NOTE:* When this package is installed it creates a multipath configuration file which is located at `/etc/multipath.conf`. Please ensure that this file always exists.
-- Enable multipathing using `mpathconf --enable --with_multipathd y`
-- Enable `user_friendly_names` and `find_multipaths` in the `multipath.conf` file.
-
-As a best practice, use these options to help the operating system and the mulitpathing software detect path changes efficiently:
-```text
-path_grouping_policy multibus
-path_checker tur
-features "1 queue_if_no_path"
-path_selector "round-robin 0"
-no_path_retry 10
-```
-
-#### multipathd `MachineConfig`
-
-If you are installing a CSI Driver which requires the installation of the Linux native Multipath software - _multipathd_, please follow the below instructions
+{{% /tab %}}
+{{% tab header="multipathd" %}}
 
 To enable multipathd on RedHat CoreOS nodes you need to prepare a working configuration encoded in base64.
 
-```bash echo 'defaults {
+```bash
+echo 'defaults {
 user_friendly_names yes
 find_multipaths yes
 }
@@ -165,9 +171,13 @@ spec:
         mode: 400
         path: /etc/multipath.conf
 ```
+
 After deploying this`MachineConfig` object, CoreOS will start multipath service automatically.
-Alternatively, you can check the status of the multipath service by entering the following command in each worker nodes.
-`sudo multipath -ll`
+You can check the status of the multipath service by entering the following command in each worker nodes.
+
+```bash
+oc debug node/[node-name] -- chroot /host multipath -ll
+```
 
 If the above command is not successful, ensure that the /etc/multipath.conf file is present and configured properly. Once the file has been configured correctly, enable the multipath service by running the following command:
 `sudo /sbin/mpathconf –-enable --with_multipathd y`
@@ -176,11 +186,35 @@ Finally, you have to restart the service by providing the command
 `sudo systemctl restart multipathd`
 
 For additional information refer to official documentation of the multipath configuration.
+{{% /tab %}}
+{{< /tabpane >}}
 
 
-#### PowerPath for Linux requirements
 
-CSI Driver for Dell PowerMax supports PowerPath for Linux. Configure Linux PowerPath before installing the CSI Driver.
+### Multipathing requirements
+
+CSI Driver for Dell PowerMax supports Linux multipathing PowerPath. Configure multipathing before installing the CSI Driver.
+
+
+{{< tabpane name="multipathing" text=true >}}
+{{% tab header="multipathd" %}}
+Set up Linux multipathing as follows:
+
+- All the nodes must have the _Device Mapper Multipathing_ package installed.
+  *NOTE:* When this package is installed it creates a multipath configuration file which is located at `/etc/multipath.conf`. Please ensure that this file always exists.
+- Enable multipathing using `mpathconf --enable --with_multipathd y`
+- Enable `user_friendly_names` and `find_multipaths` in the `multipath.conf` file.
+
+As a best practice, use these options to help the operating system and the mulitpathing software detect path changes efficiently:
+```text
+path_grouping_policy multibus
+path_checker tur
+features "1 queue_if_no_path"
+path_selector "round-robin 0"
+no_path_retry 10
+```
+{{% /tab %}}
+{{% tab header="PowerPath" %}}
 
 Follow this procedure to set up PowerPath for Linux:
 
@@ -189,20 +223,9 @@ Follow this procedure to set up PowerPath for Linux:
 - Start the PowerPath service using `systemctl start PowerPath`
 
 >Note: Do not install Dell PowerPath if multi-path software is already installed, as they cannot co-exist with native multi-path software.
+{{% /tab %}}
+{{< /tabpane >}}
 
-
-### Auto RDM for vSphere over FC requirements
-
-The CSI Driver for Dell PowerMax supports auto RDM for vSphere over FC. These requirements are applicable for the clusters deployed on ESX/ESXi using virtualized environement.
-
-Set up the environment as follows:
-
-- Requires VMware vCenter management software to manage all ESX/ESXis where the cluster is hosted.
-
-- Add all FC array ports zoned to the ESX/ESXis to a port group where the cluster is hosted .
-
-- Add initiators from all ESX/ESXis to a host(initiator group)/host group(cascaded initiator group) where the cluster is hosted.
-- Create a secret which contains vCenter privileges. Follow the steps [here](#support-for-auto-rdm-for-vsphere-over-fc) to create the same.
 
 ### CSI PowerMax ReverseProxy
 
