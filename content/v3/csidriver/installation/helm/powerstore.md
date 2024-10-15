@@ -1,7 +1,7 @@
 ---
 title: PowerStore
 description: >
-  Installing CSI Driver for PowerStore via Helm
+  Installing Dell CSI Driver for PowerStore via Helm
 ---
 
 The CSI Driver for Dell PowerStore can be deployed by using the provided Helm v3 charts and installation scripts on both Kubernetes and OpenShift platforms. For more detailed information on the installation scripts, review the script [documentation](https://github.com/dell/csi-powerstore/tree/master/dell-csi-helm-installer).
@@ -9,18 +9,21 @@ The CSI Driver for Dell PowerStore can be deployed by using the provided Helm v3
 ## Prerequisites
 
 The following are requirements to be met before installing the CSI Driver for Dell PowerStore:
-- Install Kubernetes or OpenShift (see [supported versions](../../../../csidriver/#features-and-capabilities))
+- A Kubernetes or OpenShift cluster (see [supported versions](../../../../csidriver/#features-and-capabilities))
 - Install Helm 3.x
-- If you plan to use either the Fibre Channel or iSCSI or NVMe/TCP or NVMe/FC protocol, refer to either _Fibre Channel requirements_ or _Set up the iSCSI Initiator_ or _Set up the NVMe Initiator_ sections below. You can use NFS volumes without FC or iSCSI or NVMe/TCP or NVMe/FC configuration.
-> You can use either the Fibre Channel or iSCSI or NVMe/TCP or NVMe/FC protocol, but you do not need all the four.
+- If you plan to use either the Fibre Channel, iSCSI, NVMe/TCP, or NVMe/FC protocols, refer to either _Fibre Channel requirements_ or _Set up the iSCSI Initiator_ or _Set up the NVMe Initiator_ sections below. You can use NFS volumes without FC, iSCSI, NVMe/TCP, or NVMe/FC configurations.
+> You can use either the Fibre Channel (FC), iSCSI, NVMe/TCP, or NVMe/FC protocol, but you do not need all four to be enabled.
 
-> If you want to use preconfigured iSCSI/FC hosts be sure to check that they are not part of any host group
+> For NVMe support the preferred multipath solution is NVMe native multipathing. The [Dell Host Connectivity Guide](https://elabnavigator.dell.com/vault/pdf/Linux.pdf?key=1725374107988) describes the details of each configuration option.
+
+> If you want to use pre-configured iSCSI/FC hosts be sure to check that they are not part of any host group.
+
 - Linux native multipathing requirements
 - Mount propagation is enabled on container runtime that is being used
 - If using Snapshot feature, satisfy all Volume Snapshot requirements
-- Nonsecure registries are defined in Docker or other container runtimes, for CSI drivers that are hosted in a non-secure location.
-- You can access your cluster with kubectl and helm.
-- Ensure that your nodes support mounting NFS volumes. 
+- Insecure registries are defined in Docker or other container runtimes, for CSI drivers that are hosted in a non-secure location
+- You can access your cluster with kubectl and helm
+- Ensure that your nodes support mounting NFS volumes if using NFS
 
 ### Install Helm 3.x
 
@@ -29,22 +32,26 @@ Install Helm 3.x on the master node before you install the CSI Driver for Dell P
 **Steps**
 
   Run the command to install Helm 3.x.
+
   ```bash
   curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
   ```
+
 ### Fibre Channel requirements
 
-Dell PowerStore supports Fibre Channel communication. If you use the Fibre Channel protocol, ensure that the
+Dell PowerStore supports Fibre Channel connectivity. If you use the Fibre Channel protocol, ensure that the
 following requirement is met before you install the CSI Driver for Dell PowerStore:
+
 - Zoning of the Host Bus Adapters (HBAs) to the Fibre Channel port must be done.
 
-
 ### Set up the iSCSI Initiator
+
 The CSI Driver for Dell PowerStore v1.4 and higher supports iSCSI connectivity.
 
 If you use the iSCSI protocol, set up the iSCSI initiators as follows:
+
 - Ensure that the iSCSI initiators are available on both Controller and Worker nodes.
-- Kubernetes nodes must have access (network connectivity) to an iSCSI port on the Dell PowerStore array that
+- Kubernetes nodes must have network connectivity to an iSCSI port on the Dell PowerStore array that
 has IP interfaces. Manually create IP routes for each node that connects to the Dell PowerStore.
 - All Kubernetes nodes must have the _iscsi-initiator-utils_ package for CentOS/RHEL or _open-iscsi_ package for Ubuntu installed, and the _iscsid_ service must be enabled and running.
 To do this, run the `systemctl enable --now iscsid` command.
@@ -52,16 +59,110 @@ To do this, run the `systemctl enable --now iscsid` command.
 
 For information about configuring iSCSI, see _Dell PowerStore documentation_ on Dell Support.
 
-
 ### Set up the NVMe Initiator
 
-If you want to use the protocol, set up the NVMe initiators as follows:
-- The driver requires NVMe management command-line interface (nvme-cli) to use configure, edit, view or start the NVMe client and target. The nvme-cli utility provides a command-line and interactive shell option. The NVMe CLI tool is installed in the host using the below command.
+The following requirements must be fulfilled in order to successfully use the NVMe protocols with the CSI PowerStore driver:
+
+- All OpenShift or Kubernetes nodes connecting to Dell storage arrays must use unique NQNs.
+- The driver requires the NVMe command-line interface (nvme-cli) to manage the NVMe client and target. The nvme-cli utility provides a command-line and interactive shell option. The NVMe CLI tool is installed in the host using the below command on RPM oriented Linux distributions.
+
 ```bash
-sudo apt install nvme-cli
+sudo dnf -y install nvme-cli
+```
+
+- Support for NVMe requires native NVMe multipathing to be configured on each worker node in the cluster. Please refer to the [Dell Host Connectivity Guide](https://elabnavigator.dell.com/vault/pdf/Linux.pdf?key=1725374107988) for more details on NVMe connectivity requirements. To determine if the worker nodes are configured for native NVMe multipathing run the following command on each worker node:
+
+```bash
+cat /sys/module/nvme_core/parameters/multipath
+```
+
+ >If the result of the command displays Y then NVMe native multipathing is enabled in the kernel. If the output is N then native NVMe multipathing is disabled. Consult the [Dell Host Connectivity Guide](https://elabnavigator.dell.com/vault/pdf/Linux.pdf?key=1725374107988) for Linux to enable native NVMe multipathing.
+
+- The default NVMeTCP native multipathing policy is "numa". The preferred IO policy for NVMe devices used for PowerStore is round-robin. You can use udev rules to enable the round robin policy on all worker nodes. To view the IO policy you can use the following command:
+
+```bash
+nvme list-subsys
+```
+
+**Configure the IO policy**
+
+To change the IO policy to round-robin you can add a udev rule on each worker node. Place a config file in /etc/udev/rules.d with the name 71-nvme-io-policy.rules with the following contents:
+
+```text
+ACTION=="add|change", SUBSYSTEM=="nvme-subsystem", ATTR{iopolicy}="round-robin"
+```
+
+In order to change the rules on a running kernel you can run the following commands:
+
+```bash
+/sbin/udevadm control --reload-rules
+/sbin/udevadm trigger --type=devices --action=change
+```
+
+On OCP clusters you can add a MachineConfig to enable this rule on all worker nodes:
+
+```yaml
+apiVersion: machineconfiguration.openshift.io/v1
+kind: MachineConfig
+metadata:
+  name: 99-workers-multipath-round-robin
+  labels:
+    machineconfiguration.openshift.io/role: worker
+spec:
+  config:
+    ignition:
+      version: 3.2.0
+    storage:
+      files:
+      - contents:
+          source: data:text/plain;charset=utf-8;base64,QUNUSU9OPT0iYWRkfGNoYW5nZSIsIFNVQlNZU1RFTT09Im52bWUtc3Vic3lzdGVtIiwgQVRUUntpb3BvbGljeX09InJvdW5kLXJvYmluIg==
+          verification: {}
+        filesystem: root
+        mode: 420
+        path: /etc/udev/rules.d/71-nvme-io-policy.rules
+```
+
+**Configure the control loss timeout**
+
+To reduce the impact of PowerStore non disruptive software upgrades you must set the control loss timeout. This can be done using udev rules on each worker node. More information can be found in the [Dell Host Connectivity Guide](https://elabnavigator.dell.com/vault/pdf/Linux.pdf?key=1725374107988). The configure the control loss timeout place a config file in /etc/udev/rules.d with the name 72-nvmf-ctrl_loss_tmo.rules with the following contents:
+
+```text
+ACTION=="add|change", SUBSYSTEM=="nvme", KERNEL=="nvme*", ATTR{ctrl_loss_tmo}="-1"
+```
+In order to change the rules on a running kernel you can run the following commands:
+
+```bash
+/sbin/udevadm control --reload-rules
+/sbin/udevadm trigger --type=devices --action=change
+```
+
+On OCP clusters you can add a MachineConfig to enable this rule on all worker nodes:
+
+```yaml
+apiVersion: machineconfiguration.openshift.io/v1
+kind: MachineConfig
+metadata:
+  name: 99-nvmf-ctrl-loss-tmo
+  labels:
+    machineconfiguration.openshift.io/role: worker
+spec:
+  config:
+    ignition:
+      version: 3.2.0
+    storage:
+      files:
+      - contents:
+          source: data:text/plain;charset=utf-8;base64,QUNUSU9OPT0iYWRkfGNoYW5nZSIsIFNVQlNZU1RFTT09Im52bWUiLCBLRVJORUw9PSJudm1lKiIsIEFUVFJ7Y3RybF9sb3NzX3Rtb309Ii0xIgo=
+          verification: {}
+        filesystem: root
+        mode: 420
+        path: /etc/udev/rules.d/72-nvmf-ctrl_loss_tmo.rules
 ```
 
 **Requirements for NVMeTCP**
+
+> Starting with OCP 4.14 NVMe/TCP is enabled by default on RCOS nodes.
+
 - Modules including the nvme, nvme_core, nvme_fabrics, and nvme_tcp are required for using NVMe over Fabrics using TCP. Load the NVMe and NVMe-OF Modules using the below commands:
 ```bash
 modprobe nvme
@@ -76,7 +177,10 @@ modprobe nvme_tcp
 - Do not load the nvme_tcp module for NVMeFC
 
 ### Linux multipathing requirements
-Dell PowerStore supports Linux multipathing. Configure Linux multipathing before installing the CSI Driver for Dell
+
+> For NVMe connectivity native NVMe multipathing is used. The following sections apply only for iSCSI and Fiber Channel connectivity.
+
+Dell PowerStore supports Linux multipathing and NVMe native multipathing. Configure Linux multipathing before installing the CSI Driver for Dell
 PowerStore.
 
 Set up Linux multipathing as follows:
@@ -86,21 +190,38 @@ Set up Linux multipathing as follows:
 - Enable `user_friendly_names` and `find_multipaths` in the `multipath.conf` file.
 - Ensure that the multipath command for `multipath.conf` is available on all Kubernetes nodes.
 
-#### multipathd `MachineConfig`
+The following is a sample multipath.conf file:
 
-If you are installing a CSI Driver which requires the installation of the Linux native Multipath software - _multipathd_, please follow the below instructions
+```text
+defaults {
+  user_friendly_names yes
+  find_multipaths yes
+}
+  blacklist {
+}
+```
 
-To enable multipathd on RedHat CoreOS nodes you need to prepare a working configuration encoded in base64.
+If the above command is not successful, ensure that the /etc/multipath.conf file is present and configured properly. Once the file has been configured correctly, enable the multipath service by running the following command:
+`sudo systemctl enable multipathd`
 
-```bash echo 'defaults {
+Finally, you have to restart the service by providing the command
+`sudo systemctl restart multipathd`
+
+On OCP clusters you can add a MachineConfig to configure multipathing on the worker nodes.
+
+You will need to first base64 encode the multipath.conf and add it to the MachineConfig definition.
+
+```bash
+echo 'defaults {
 user_friendly_names yes
 find_multipaths yes
 }
-blacklist {
+  blacklist {
 }' | base64 -w0
 ```
 
 Use the base64 encoded string output in the following `MachineConfig` yaml file (under source section)
+
 ```yaml
 apiVersion: machineconfiguration.openshift.io/v1
 kind: MachineConfig
@@ -121,17 +242,12 @@ spec:
         mode: 400
         path: /etc/multipath.conf
 ```
-After deploying this`MachineConfig` object, CoreOS will start multipath service automatically.
+
+After deploying this`MachineConfig` object, CoreOS will start the multipath service automatically.
 Alternatively, you can check the status of the multipath service by entering the following command in each worker nodes.
 `sudo multipath -ll`
 
-If the above command is not successful, ensure that the /etc/multipath.conf file is present and configured properly. Once the file has been configured correctly, enable the multipath service by running the following command:
-`sudo /sbin/mpathconf –-enable --with_multipathd y`
-
-Finally, you have to restart the service by providing the command
-`sudo systemctl restart multipathd`
-
-For additional information refer to official documentation of the multipath configuration.
+For additional information refer to the [Dell Host Connectivity Guide](https://elabnavigator.dell.com/vault/pdf/Linux.pdf?key=1725374107988).
 
 ### (Optional) Volume Snapshot Requirements
   For detailed snapshot setup procedure, [click here.](../../../../snapshots/#optional-volume-snapshot-requirements)
@@ -188,7 +304,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
    But make sure to align to the same namespace during the whole installation.
 3. Edit `samples/secret/secret.yaml` file and configure connection information for your PowerStore arrays changing following parameters:
     - *endpoint*: defines the full URL path to the PowerStore API.
-    - *globalID*: specifies what storage cluster the driver should use  
+    - *globalID*: specifies what storage cluster the driver should use
     - *username*, *password*: defines credentials for connecting to array.
     - *skipCertificateValidation*: defines if we should use insecure connection or not.
     - *isDefault*: defines if we should treat the current array as a default.
@@ -196,19 +312,19 @@ CRDs should be configured during replication prepare stage with repctl as descri
     - *nasName*: defines what NAS should be used for NFS volumes.
 	- *nfsAcls* (Optional): defines permissions - POSIX mode bits or NFSv4 ACLs, to be set on NFS target mount directory.
 	             NFSv4 ACls are supported for NFSv4 shares on NFSv4 enabled NAS servers only. POSIX ACLs are not supported and only POSIX mode bits are supported for NFSv3 shares.
-    
+
     Add more blocks similar to above for each PowerStore array if necessary. If replication feature is enabled, ensure the secret includes all the PowerStore arrays involved in replication.
     ### User Privileges
     The username specified in `secret.yaml` must be from the authentication providers of PowerStore. The user must have the correct user role to perform the actions. The minimum requirement is **Storage Operator**.
 
-4. Create the secret by running 
+4. Create the secret by running
    ```bash
    kubectl create secret generic powerstore-config -n csi-powerstore --from-file=config=secret.yaml
    ```
 5. Create storage classes using ones from `samples/storageclass` folder as an example and apply them to the Kubernetes cluster by running `kubectl create -f <path_to_storageclass_file>`
-   
+
     > If you do not specify `arrayID` parameter in the storage class then the array that was specified as the default would be used for provisioning volumes.
-6. Download the default values.yaml file 
+6. Download the default values.yaml file
    ```bash
    cd dell-csi-helm-installer && wget -O my-powerstore-settings.yaml https://github.com/dell/helm-charts/raw/csi-powerstore-2.9.1/charts/csi-powerstore/values.yaml
    ```
@@ -247,20 +363,20 @@ CRDs should be configured during replication prepare stage with repctl as descri
 | storageCapacity.pollInterval | Configure how often the driver checks for changed capacity | No | 5m
 | podmon.enabled | Allows to enable/disable [Resiliency](../../../../resiliency/deployment#powerstore-specific-recommendations) feature | No | false
 
-8. Install the driver using `csi-install.sh` bash script by running 
+8. Install the driver using `csi-install.sh` bash script by running
    ```bash
    ./csi-install.sh --namespace csi-powerstore --values ./my-powerstore-settings.yaml --helm-charts-version <version>
-   ``` 
-   - After that the driver should be installed, you can check the condition of driver pods by running `kubectl get all -n csi-powerstore` 
+   ```
+   - After that the driver should be installed, you can check the condition of driver pods by running `kubectl get all -n csi-powerstore`
 
-*NOTE:* 
+*NOTE:*
 - The parameter `--helm-charts-version` is optional and if you do not specify the flag, by default the `csi-install.sh` script will clone the version of the helm chart that is specified in the driver's [csi-install.sh](https://github.com/dell/csi-powerstore/blob/main/dell-csi-helm-installer/csi-install.sh#L13) file. If you wish to install the driver using a different version of the helm chart, you need to include this flag. Also, remember to delete the `helm-charts` repository present in the `csi-powerstore` directory if it was cloned before.
 - For detailed instructions on how to run the install scripts, refer to the readme document in the dell-csi-helm-installer folder.
 - By default, the driver scans available SCSI adapters and tries to register them with the storage array under the SCSI hostname using `node.nodeNamePrefix` and the ID read from the file pointed to by `node.nodeIDPath`. If an adapter is already registered with the storage under a different hostname, the adapter is not used by the driver.
-- A hostname the driver uses for registration of adapters is in the form `<nodeNamePrefix>-<nodeID>-<nodeIP>`. By default, these are csi-node and the machine ID read from the file `/etc/machine-id`. 
+- A hostname the driver uses for registration of adapters is in the form `<nodeNamePrefix>-<nodeID>-<nodeIP>`. By default, these are csi-node and the machine ID read from the file `/etc/machine-id`.
 - To customize the hostname, for example if you want to make them more user friendly, adjust nodeIDPath and nodeNamePrefix accordingly. For example, you can set `nodeNamePrefix` to `k8s` and `nodeIDPath` to `/etc/hostname` to produce names such as `k8s-worker1-192.168.1.2`.
-- (Optional) Enable additional Mount Options - A user is able to specify additional mount options as needed for the driver. 
-   - Mount options are specified in storageclass yaml under _mountOptions_. 
+- (Optional) Enable additional Mount Options - A user is able to specify additional mount options as needed for the driver.
+   - Mount options are specified in storageclass yaml under _mountOptions_.
    - *WARNING*: Before utilizing mount options, you must first be fully aware of the potential impact and understand your environment's requirements for the specified option.
 
 ## Storage Classes
@@ -277,14 +393,14 @@ Upgrading from an older version of the driver: The storage classes will be delet
 
 There are samples storage class yaml files available under `samples/storageclass`.  These can be copied and modified as needed.
 
-1. Edit the sample storage class yaml file and update following parameters: 
+1. Edit the sample storage class yaml file and update following parameters:
 - *arrayID*: specifies what storage cluster the driver should use, if not specified driver will use storage cluster specified as `default` in `samples/secret/secret.yaml`
 - *csi.storage.k8s.io/fstype*: specifies what filesystem type driver should use, possible variants `ext3`, `ext4`, `xfs`, `nfs`, if not specified driver will use `ext4` by default.
 - *nfsAcls* (Optional): defines permissions - POSIX mode bits or NFSv4 ACLs, to be set on NFS target mount directory.
 - *allowedTopologies* (Optional): If you want you can also add topology constraints.
     ```yaml
     allowedTopologies:
-      - matchLabelExpressions: 
+      - matchLabelExpressions:
           - key: csi-powerstore.dellemc.com/12.34.56.78-iscsi
       # replace "-iscsi" with "-fc", "-nvmetcp" or "-nvmefc" or "-nfs" at the end to use FC, NVMeTCP, NVMeFC or NFS enabled hosts
       # replace "12.34.56.78" with PowerStore endpoint IP
@@ -303,7 +419,7 @@ There are samples storage class yaml files available under `samples/storageclass
 
 Starting CSI PowerStore v1.4.0, `dell-csi-helm-installer` will not create any Volume Snapshot Class during the driver installation. There is a sample Volume Snapshot Class manifest present in the _samples/volumesnapshotclass_ folder. Please use this sample to create a new Volume Snapshot Class to create Volume Snapshots.
 
-## Dynamically update the powerstore secrets 
+## Dynamically update the powerstore secrets
 
 Users can dynamically add delete array information from secret. Whenever an update happens the driver updates the “Host” information in an array. User can update secret using the following command:
 ```bash
@@ -311,10 +427,10 @@ kubectl create secret generic powerstore-config -n csi-powerstore --from-file=co
 ```
 ## Dynamic Logging Configuration
 
-This feature is introduced in CSI Driver for PowerStore version 2.0.0. 
+This feature is introduced in CSI Driver for PowerStore version 2.0.0.
 
 ### Helm based installation
-As part of driver installation, a ConfigMap with the name `powerstore-config-params` is created, which contains attributes `CSI_LOG_LEVEL` which specifies the current log level of CSI driver and `CSI_LOG_FORMAT` which specifies the current log format of CSI driver. 
+As part of driver installation, a ConfigMap with the name `powerstore-config-params` is created, which contains attributes `CSI_LOG_LEVEL` which specifies the current log level of CSI driver and `CSI_LOG_FORMAT` which specifies the current log format of CSI driver.
 
 Users can set the default log level by specifying log level to `logLevel` and log format to `logFormat` attribute in `my-powerstore-settings.yaml` during driver installation.
 
@@ -324,4 +440,4 @@ cd dell-csi-helm-installer
 ./csi-install.sh --namespace csi-powerstore --values ./my-powerstore-settings.yaml --upgrade
 ```
 
-Note: here `my-powerstore-settings.yaml` is a `values.yaml` file which user has used for driver installation.  
+Note: here `my-powerstore-settings.yaml` is a `values.yaml` file which user has used for driver installation.

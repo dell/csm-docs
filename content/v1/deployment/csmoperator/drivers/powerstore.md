@@ -13,27 +13,47 @@ To deploy the Operator, follow the instructions available [here](../../#installa
 Note that the deployment of the driver using the operator does not use any Helm charts and the installation and configuration parameters will be slightly different from the one specified via the Helm installer.
 
 ### Check existing ContainerStorageModule CRD
+
 User can query for all Dell CSI drivers using the following command:
+
 ```bash
 kubectl get csm --all-namespaces
 ```
 
-
 ### Prerequisites
+
+The following are requirements to be met before installing the CSI Driver for Dell PowerStore:
+- A Kubernetes or OpenShift cluster (see [supported versions](../../../../csidriver/#features-and-capabilities))
+- If you plan to use either the Fibre Channel, iSCSI, NVMe/TCP, or NVMe/FC protocols, refer to either _Fibre Channel requirements_ or _Set up the iSCSI Initiator_ or _Set up the NVMe Initiator_ sections below. You can use NFS volumes without FC, iSCSI, NVMe/TCP, or NVMe/FC configurations.
+> You can use either the Fibre Channel (FC), iSCSI, NVMe/TCP, or NVMe/FC protocol, but you do not need all four to be enabled.
+
+> For NVMe support the preferred multipath solution is NVMe native multipathing. The [Dell Host Connectivity Guide](https://elabnavigator.dell.com/vault/pdf/Linux.pdf?key=1725374107988) describes the details of each configuration option.
+
+> If you want to use pre-configured iSCSI/FC hosts be sure to check that they are not part of any host group.
+
+- Linux native multipathing requirements
+- Mount propagation is enabled on container runtime that is being used
+- If using Snapshot feature, satisfy all Volume Snapshot requirements
+- Insecure registries are defined in Docker or other container runtimes, for CSI drivers that are hosted in a non-secure location.
+- Ensure that your nodes support mounting NFS volumes if using NFS
+
 
 #### Fibre Channel requirements
 
 Dell PowerStore supports Fibre Channel communication. If you use the Fibre Channel protocol, ensure that the
 following requirement is met before you install the CSI Driver for Dell PowerStore:
+
 - Zoning of the Host Bus Adapters (HBAs) to the Fibre Channel port must be done.
 
-
 #### Set up the iSCSI Initiator
+
 The CSI Driver for Dell PowerStore v1.4 and higher supports iSCSI connectivity.
 
 If you use the iSCSI protocol, set up the iSCSI initiators as follows:
+
 - Ensure that the iSCSI initiators are available on both Controller and Worker nodes.
-- Kubernetes nodes must have access (network connectivity) to an iSCSI port on the Dell PowerStore array that
+
+- Kubernetes nodes must have network connectivity to an iSCSI port on the Dell PowerStore array that
 has IP interfaces. Manually create IP routes for each node that connects to the Dell PowerStore.
 - All Kubernetes nodes must have the _iscsi-initiator-utils_ package for CentOS/RHEL or _open-iscsi_ package for Ubuntu installed, and the _iscsid_ service must be enabled and running.
 To do this, run the `systemctl enable --now iscsid` command.
@@ -42,15 +62,110 @@ To do this, run the `systemctl enable --now iscsid` command.
 For information about configuring iSCSI, see _Dell PowerStore documentation_ on Dell Support.
 
 
-#### Set up the NVMe Initiator
+### Set up the NVMe Initiator
 
-If you want to use the protocol, set up the NVMe initiators as follows:
-- The driver requires NVMe management command-line interface (nvme-cli) to use configure, edit, view or start the NVMe client and target. The nvme-cli utility provides a command-line and interactive shell option. The NVMe CLI tool is installed in the host using the below command.
+The following requirements must be fulfilled in order to successfully use the NVMe protocols with the CSI PowerStore driver:
+
+- All OpenShift or Kubernetes nodes connecting to Dell storage arrays must use unique NQNs.
+- The driver requires the NVMe command-line interface (nvme-cli) to manage the NVMe client and target. The nvme-cli utility provides a command-line and interactive shell option. The NVMe CLI tool is installed in the host using the below command on RPM oriented Linux distributions.
+
 ```bash
-sudo apt install nvme-cli
+sudo dnf -y install nvme-cli
+```
+
+- Support for NVMe requires native NVMe multipathing to be configured on each worker node in the cluster. Please refer to the [Dell Host Connectivity Guide](https://elabnavigator.dell.com/vault/pdf/Linux.pdf?key=1725374107988) for more details on NVMe connectivity requirements. To determine if the worker nodes are configured for native NVMe multipathing run the following command on each worker node:
+
+```bash
+cat /sys/module/nvme_core/parameters/multipath
+```
+
+ >If the result of the command displays Y then NVMe native multipathing is enabled in the kernel. If the output is N then native NVMe multipating is disabled. Consult the [Dell Host Connectivity Guide](https://elabnavigator.dell.com/vault/pdf/Linux.pdf?key=1725374107988) for Linux to enable native NVMe multipathing.
+
+- The default NVMeTCP native multipathing policy is "numa". The preferred IO policy for NVMe devices used for PowerStore is round-robin. You can use udev rules to enable the round robin policy on all worker nodes. To view the IO policy you can use the following command:
+
+```bash
+nvme list-subsys
+```
+
+**Configure the IO policy**
+
+To change the IO policy to round-robin you can add a udev rule on each worker node. Place a config file in /etc/udev/rules.d with the name 71-nvme-io-policy.rules with the following contents:
+
+```text
+ACTION=="add|change", SUBSYSTEM=="nvme-subsystem", ATTR{iopolicy}="round-robin"
+```
+
+In order to change the rules on a running kernel you can run the following commands:
+
+```bash
+/sbin/udevadm control --reload-rules
+/sbin/udevadm trigger --type=devices --action=change
+```
+
+On OCP clusters you can add a MachineConfig to enable this rule on all worker nodes:
+
+```yaml
+apiVersion: machineconfiguration.openshift.io/v1
+kind: MachineConfig
+metadata:
+  name: 99-workers-multipath-round-robin
+  labels:
+    machineconfiguration.openshift.io/role: worker
+spec:
+  config:
+    ignition:
+      version: 3.2.0
+    storage:
+      files:
+      - contents:
+          source: data:text/plain;charset=utf-8;base64,QUNUSU9OPT0iYWRkfGNoYW5nZSIsIFNVQlNZU1RFTT09Im52bWUtc3Vic3lzdGVtIiwgQVRUUntpb3BvbGljeX09InJvdW5kLXJvYmluIg==
+          verification: {}
+        filesystem: root
+        mode: 420
+        path: /etc/udev/rules.d/71-nvme-io-policy.rules
+```
+
+**Configure the control loss timeout**
+
+To reduce the impact of PowerStore non disruptive software upgrades you must set the control loss timeout. This can be done using udev rules on each worker node. More information can be found in the [Dell Host Connectivity Guide](https://elabnavigator.dell.com/vault/pdf/Linux.pdf?key=1725374107988). The configure the control loss timeout place a config file in /etc/udev/rules.d with the name 72-nvmf-ctrl_loss_tmo.rules with the following contents:
+
+```text
+ACTION=="add|change", SUBSYSTEM=="nvme", KERNEL=="nvme*", ATTR{ctrl_loss_tmo}="-1"
+```
+In order to change the rules on a running kernel you can run the following commands:
+
+```bash
+/sbin/udevadm control --reload-rules
+/sbin/udevadm trigger --type=devices --action=change
+```
+
+On OCP clusters you can add a MachineConfig to enable this rule on all worker nodes:
+
+```yaml
+apiVersion: machineconfiguration.openshift.io/v1
+kind: MachineConfig
+metadata:
+  name: 99-nvmf-ctrl-loss-tmo
+  labels:
+    machineconfiguration.openshift.io/role: worker
+spec:
+  config:
+    ignition:
+      version: 3.2.0
+    storage:
+      files:
+      - contents:
+          source: data:text/plain;charset=utf-8;base64,QUNUSU9OPT0iYWRkfGNoYW5nZSIsIFNVQlNZU1RFTT09Im52bWUiLCBLRVJORUw9PSJudm1lKiIsIEFUVFJ7Y3RybF9sb3NzX3Rtb309Ii0xIgo=
+          verification: {}
+        filesystem: root
+        mode: 420
+        path: /etc/udev/rules.d/72-nvmf-ctrl_loss_tmo.rules
 ```
 
 **Requirements for NVMeTCP**
+
+> Starting with OCP 4.14 NVMe/TCP is enabled by default on RCOS nodes.
+
 - Modules including the nvme, nvme_core, nvme_fabrics, and nvme_tcp are required for using NVMe over Fabrics using TCP. Load the NVMe and NVMe-OF Modules using the below commands:
 ```bash
 modprobe nvme
@@ -64,8 +179,11 @@ modprobe nvme_tcp
 *NOTE:*
 - Do not load the nvme_tcp module for NVMeFC
 
-#### Linux multipathing requirements
-Dell PowerStore supports Linux multipathing. Configure Linux multipathing before installing the CSI Driver for Dell
+### Linux multipathing requirements
+
+> For NVMe connectivity native NVMe multipathing is used. The following sections apply only for iSCSI and Fiber Channel connectivity.
+
+Dell PowerStore supports Linux multipathing and NVMe native multipathing. Configure Linux multipathing before installing the CSI Driver for Dell
 PowerStore.
 
 Set up Linux multipathing as follows:
@@ -75,21 +193,38 @@ Set up Linux multipathing as follows:
 - Enable `user_friendly_names` and `find_multipaths` in the `multipath.conf` file.
 - Ensure that the multipath command for `multipath.conf` is available on all Kubernetes nodes.
 
-##### multipathd `MachineConfig`
+The following is a sample multipath.conf file:
 
-If you are installing a CSI Driver which requires the installation of the Linux native Multipath software - _multipathd_, please follow the below instructions
+```text
+defaults {
+  user_friendly_names yes
+  find_multipaths yes
+}
+  blacklist {
+}
+```
 
-To enable multipathd on RedHat CoreOS nodes you need to prepare a working configuration encoded in base64.
+If the above command is not successful, ensure that the /etc/multipath.conf file is present and configured properly. Once the file has been configured correctly, enable the multipath service by running the following command:
+`sudo systemctl enable multipathd`
 
-```bash echo 'defaults {
+Finally, you have to restart the service by providing the command
+`sudo systemctl restart multipathd`
+
+On OCP clusters you can add a MachineConfig to configure multipathing on the worker nodes.
+
+You will need to first base64 encode the multipath.conf and add it to the MachineConfig definition.
+
+```bash
+echo 'defaults {
 user_friendly_names yes
 find_multipaths yes
 }
-blacklist {
+  blacklist {
 }' | base64 -w0
 ```
 
 Use the base64 encoded string output in the following `MachineConfig` yaml file (under source section)
+
 ```yaml
 apiVersion: machineconfiguration.openshift.io/v1
 kind: MachineConfig
@@ -110,17 +245,12 @@ spec:
         mode: 400
         path: /etc/multipath.conf
 ```
-After deploying this`MachineConfig` object, CoreOS will start multipath service automatically.
+
+After deploying this`MachineConfig` object, CoreOS will start the multipath service automatically.
 Alternatively, you can check the status of the multipath service by entering the following command in each worker nodes.
 `sudo multipath -ll`
 
-If the above command is not successful, ensure that the /etc/multipath.conf file is present and configured properly. Once the file has been configured correctly, enable the multipath service by running the following command:
-`sudo /sbin/mpathconf –-enable --with_multipathd y`
-
-Finally, you have to restart the service by providing the command
-`sudo systemctl restart multipathd`
-
-For additional information refer to official documentation of the multipath configuration.
+For additional information refer to the [Dell Host Connectivity Guide](https://elabnavigator.dell.com/vault/pdf/Linux.pdf?key=1725374107988).
 
 #### (Optional) Volume Snapshot Requirements
   For detailed snapshot setup procedure, [click here.](../../../../snapshots/#optional-volume-snapshot-requirements)
@@ -187,7 +317,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
 
 ### Install Driver
 
-1. Follow all the [prerequisites](#prerequisite) above
+1. Follow all the [prerequisites](#prerequisites) above
 
 2. Create a CR (Custom Resource) for PowerStore using the sample files provided
    [here](https://github.com/dell/csm-operator/tree/master/samples). This file can be modified to use custom parameters if needed.
