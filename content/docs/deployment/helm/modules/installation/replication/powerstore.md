@@ -108,7 +108,7 @@ parameters:
 Let's go through each parameter and what it means:
 * `replication.storage.dell.com/isReplicationEnabled` if set to `true` will mark this storage class as replication enabled,
   just leave it as `true`.
-* `replication.storage.dell.com/mode` points to the replication mode you want to use. It should be one out of "ASYNC", "SYNC" and "METRO". The default value is 'ASYNC'. If mode is set to 'METRO', driver does not need `remoteStorageClassName` and `remoteClusterID` parameters as it supports METRO with single cluster configuration.
+* `replication.storage.dell.com/mode` points to the replication mode you want to use. It should be one out of "ASYNC", "SYNC" and "METRO". The default value is 'ASYNC'. If mode is set to 'METRO', the driver does not need `remoteStorageClassName` and `remoteClusterID` parameters as it supports METRO with single cluster configuration.
 
 > _**NOTE**_: Metro mode doesn't involve the replication sidecar or the common replication controller, nor does it cause the creation of any replication related custom resources. It just needs the `csi-powerstore` driver.
 
