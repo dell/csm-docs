@@ -117,7 +117,7 @@ Let's go through each parameter and what it means:
 * `replication.storage.dell.com/remoteSystem` is the name of the remote system as seen from the current PowerStore instance.
 * `replication.storage.dell.com/rpo` is an acceptable amount of data, which is measured in units of time,
   that may be lost due to a failure. For 'SYNC' mode, RPO will be set to zero by default and not required to be specified. This parameter is not applicable for Metro mode.
-* `replication.storage.dell.com/ignoreNamespaces`, if set to `true` PowerStore driver, it will ignore in what namespace volumes are created and put every volume created using this storage class into a single volume group. This parameter is not applicable for Metro mode.
+* `replication.storage.dell.com/ignoreNamespaces`, if set to `true` the PowerStore driver will ignore the namespace in which the persistent volume claim resides and put every volume created using this storage class into a single volume group. This parameter is not applicable for Metro mode.
 * `replication.storage.dell.com/volumeGroupPrefix` represents what string would be appended to the volume group name to differentiate them. It is important to not use the same prefix for different kubernetes clusters, otherwise any action on a replication group in one kubernetes cluster will impact the other. This parameter is not applicable for Metro mode.
   
 > _**NOTE**_: To configure the VolumeGroupPrefix, the name format of \'\<volumeGroupPrefix\>-\<namespace\>-\<Cluster Name\>-\<rpo\>' cannot be more than 63 characters.
