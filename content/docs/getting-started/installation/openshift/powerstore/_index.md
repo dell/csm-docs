@@ -5,24 +5,19 @@ no_list: true
 description: Powerstore Installation
 weight: 3
 ---
-<div class="container mt-5">
+<div class="container mt-5"> 
      <div class="row">
       <div class="col-md-6 mb-4">
-      {{< customcard  link="./prerequisite" icon="fas fa-cloud" image="https://image.pngaaa.com/912/5104912-middle.png" title="Prerequisite">}}
+      {{< customcard  link="./prerequisite" icon="fas fa-cloud" image="../../../../../icons/doc-reports.svg" title="Prerequisite">}}
       </div>
     </div> 
     <div class="row">
       <div class="col-md-6 mb-4">
-    {{< customcard  path="content/docs/setup/installation/kubernetes/powermax/csmoperator" link="./csmoperator" icon="fas fa-star" image="" title="CSM Operator" >}}
-      </div>
-      <div class="col-md-6 mb-4">
-       {{< customcard path="content/docs/setup/installation/kubernetes/powermax/csmoperator" link="./helm" icon="fas fa-search" image="https://raw.githubusercontent.com/helm/helm/release-2.16/docs/logos/helm_logo_transparent.png" title="Helm" >}}
-       </div>
+      {{< customcard   link="./csmoperator" icon="fas fa-star" image="../../../../../icons/doc-reports.svg" title="CSM Operator" >}}
     </div>
-       <div class="row">
       <div class="col-md-6 mb-4">
-      {{< customcard path="content/docs/setup/installation/kubernetes/powermax/csmoperator" link="./offline" icon="fas fa-cloud" image="https://creazilla-store.fra1.digitaloceanspaces.com/icons/3509300/offline-logo-icon-md.png" title="Offline">}}
-      </div>
-    </div> 
+      {{< customcard   link="./offline" icon="fas fa-star" image="../../../../../icons/doc-reports.svg" title="Offline" >}}
+    </div>
+    </div>
     
 </div>

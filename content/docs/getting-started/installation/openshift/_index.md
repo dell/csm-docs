@@ -21,7 +21,7 @@ weight: 2
       {{< customcard path="content/docs/getting-started/installation/openshift/powerstore" link="./powerstore" icon="fas fa-cloud" image="../../../../icons/save-disk.svg"  title="PowerStore" >}}
       </div>
       <div class="col-md-6 mb-4">
-        {{< customcard path="content/docs/getting-started/installation/openshift/powerflex" link="./powerflex" icon="fas fa-pencil" image="../../../../icons/save-disk.svg" title="PowerFlex" largeImage="true" >}} 
+        {{< customcard path="content/docs/getting-started/installation/openshift/powerflex" link="./powerflex" icon="fas fa-pencil" image="../../../../icons/save-disk.svg" title="PowerFlex"  >}} 
         </div>
     </div> 
     <div class="row">
