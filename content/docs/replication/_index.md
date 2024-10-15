@@ -23,7 +23,7 @@ CSM for Replication provides the following capabilities:
 | Asynchronous block volume replication                                                                                               |   yes    |    yes     |    n/a     |    yes    |  no   |
 | Synchronous file volume replication                                                                                                 |   no     |     no     |     no     |    no     |  no   |
 | Synchronous block volume replication                                                                                                |   yes    |     no     |    n/a     |    no     |  no   |
-| Active-Active (Metro) block volume replication                                                                                      |   yes    |     no     |    n/a     |    no     |  no   |
+| Active-Active (Metro) block volume replication                                                                                      |   yes    |     yes    |    n/a     |    no     |  no   |
 | Active-Active (Metro) file volume replication                                                                                       |   no     |     no     |     no     |    no     |  no   |
 | Create `PersistentVolume` objects in the cluster representing the replicated volume                                                 |   yes    |    yes     |    yes     |    yes    |  no   |
 | Create `DellCSIReplicationGroup` objects in the cluster                                                                             |   yes    |    yes     |    yes     |    yes    |  no   |
@@ -50,7 +50,7 @@ the objects still exist in pairs.
 * Stop applications before the planned/unplanned migration.
 * Start applications after the migration.
 * Replicate `PersistentVolumeClaim` objects within/across clusters.
-* Replication with METRO mode does not need Replicator sidecar and common controller.
+* Replication with METRO mode does not need replicator sidecar and common replication controller.
 * Different namespaces cannot share the same RDF group for creating volumes with ASYNC mode for PowerMax.
 * Same RDF group cannot be shared across different replication modes for PowerMax.
 * Replication support for multiple drivers installed on same Kubernetes cluster.
