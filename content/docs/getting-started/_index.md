@@ -3,14 +3,14 @@ title: "Getting Started"
 hide_feedback: false
 linkTitle: "Getting Started"
 no_list: true
-description: getting-started" 
+description: How to get started with Container Storage Module
 weight: 2
 ---
 <hr>
 
 <br> 
 
-Welcome to the Dell CSM Driver Getting Started documentation. This section provides detailed instructions on how to install, uninstall, and upgrade the Dell CSM Driver.
+Welcome to the Dell Container Storage Module Getting Started documentation. This section provides detailed instructions on how to install, uninstall, and upgrade the Dell CSM Driver.
 
 
 <div class="container mt-5 ps-0" style="margin-left:0px;">
