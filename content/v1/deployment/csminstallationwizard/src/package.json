@@ -1,5 +1,5 @@
 {
-	"name": "csm-installation-wizard",
+	"name": "@dell/csm-installation-wizard",
 	"version": "1.0.0",
 	"description": "",
 	"scripts": {
