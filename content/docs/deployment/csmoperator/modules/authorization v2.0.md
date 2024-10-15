@@ -382,3 +382,11 @@ The command below removes all the Kubernetes components associated with the inst
 ```bash
 kubectl delete csm/authorization --namespace authorization
 ```
+
+### Uninstalling the CSM Authorization sidecar in the CSI Driver
+
+To uninstall the sidecar in the CSI Driver, [update the driver](../drivers/#update-csi-drivers) CSM object to disable the authorization component.
+
+```bash
+kubectl edit csm/[driver-CR-name] --namespace [driver-namespace]
+```
