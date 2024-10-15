@@ -1,12 +1,22 @@
 ---
-title: Authorization
-linktitle: Authorization 
+title: Authorization v2.0
+linktitle: "Authorization v2.0"
 weight: 2
 description: >
   Dell Technologies (Dell) Container Storage Modules (CSM) for Authorization Uninstallation
 ---
 
-This section outlines the uninstallation steps for Container Storage Modules (CSM) for Authorization. 
+This section outlines the uninstallation steps for Container Storage Modules (CSM) for Authorization v2.
+
+## Delete all Authorization Custom Resources(CRs)
+
+The commands below will delete a Tenant, Role, and Storage system. All CRs must be deleted before Authorization is uninstalled.
+
+```bash
+kubectl delete csmtenant [csmtenant-name] --namespace authorization
+kubectl delete csmrole [csmrole-name] --namespace authorization
+kubectl delete storage [storage-name] --namespace authorization
+```
 
 ## Uninstall the CSM for Authorization Helm Chart
 
