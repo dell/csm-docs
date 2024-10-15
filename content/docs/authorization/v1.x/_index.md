@@ -1,10 +1,10 @@
 ---
-title: Authorization - v1.x GA
-linktitle: v1.x GA
+title: Authorization - v1.x
+linktitle: v1.x
 weight: 4
 Description: >
-  Dell Technologies (Dell) Container Storage Modules (CSM) for Authorization v1.x GA.
-tags: 
+  Dell Technologies (Dell) Container Storage Modules (CSM) for Authorization v1.x.
+tags:
  - csm-authorization
 ---
 

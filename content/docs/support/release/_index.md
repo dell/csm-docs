@@ -10,7 +10,9 @@ Release notes for Container Storage Modules:
 
 [CSI Drivers](../../csidriver/release)
 
-[CSM for Authorization](../../authorization/v1.x-ga/release)
+[CSM for Authorization v1.x](../../authorization/v1.x/release)
+
+[CSM for Authorization v2.x](../../authorization/v2.x/release)
 
 [CSM for Observability](../../observability/release)
 

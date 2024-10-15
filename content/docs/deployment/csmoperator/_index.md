@@ -52,7 +52,7 @@ The installation process involves the creation of a `Subscription` object either
 
 ### Certified vs Community
 
-Dell CSM Operator is distributed as both `Certified` & `Community` editions. 
+Dell CSM Operator is distributed as both `Certified` & `Community` editions.
 
 Both editions have the same codebase and are supported by Dell Technologies, the only differences are:
 
@@ -392,7 +392,7 @@ The following notes explain some of the general items to take care of.
 
 * Refer [Upgrade Obsevability Module](./modules/observability/#upgrade-observability) to upgrade the Observability Module via Operator
 
-* Refer [Upgrade Authorization Module](./modules/authorization/#upgrade-csm-authorization) to upgrade the Authorization Module via Operator
+* Refer [Upgrade Authorization Module](./modules/authorization-v1.x/#upgrade-csm-authorization) to upgrade the Authorization Module via Operator
 
 ## Custom Resource Definitions
 
