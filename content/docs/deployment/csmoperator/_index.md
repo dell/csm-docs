@@ -11,23 +11,23 @@ The Dell Container Storage Modules Operator is a Kubernetes Operator, which can 
 
 The table below lists the driver and modules versions installable with the CSM Operator:
 
-| CSI Driver         | Version | CSM Authorization | CSM Replication | CSM Observability | CSM Resiliency |
-| ------------------ |---------|-------------------|-----------------|-------------------|----------------|
-| CSI PowerScale     | 2.11.0  | ✔ 1.11.0          | ✔ 1.9.0        | ✔ 1.9.0           | ✔ 1.10.0      |
-| CSI PowerScale     | 2.10.1  | ✔ 1.10.1          | ✔ 1.8.1        | ✔ 1.8.1           | ✔ 1.9.1       |
-| CSI PowerScale     | 2.9.1   | ✔ 1.9.1           | ✔ 1.7.1        | ✔ 1.7.0           | ✔ 1.8.1       |
-| CSI PowerFlex      | 2.12.0  | ✔ 1.12.0          | ✔ 1.10.0       | ✔ 1.10.0          | ✔ 1.11.0      |
-| CSI PowerFlex      | 2.11.0  | ✔ 1.11.0          | ✔ 1.9.0        | ✔ 1.9.0           | ✔ 1.10.0      |
-| CSI PowerFlex      | 2.10.1  | ✔ 1.10.1          | ✔ 1.8.1        | ✔ 1.8.1           | ✔ 1.9.1       |
-| CSI PowerStore     | 2.11.0  | ❌                | ❌             | ❌                | ✔ 1.10.0      |
-| CSI PowerStore     | 2.10.1  | ❌                | ❌             | ❌                | ✔ 1.9.1       |
-| CSI PowerStore     | 2.9.1   | ❌                | ❌             | ❌                | ✔ 1.8.1       |
-| CSI PowerMax       | 2.11.0  | ✔ 1.11.0          | ✔ 1.9.0        | ✔ 1.9.0           | ✔ 1.10.0      |
-| CSI PowerMax       | 2.10.1  | ✔ 1.10.1          | ✔ 1.8.1        | ✔ 1.8.1           | ❌            |
-| CSI PowerMax       | 2.9.1   | ✔ 1.9.1           | ✔ 1.7.1        | ✔ 1.7.0           | ❌            |
-| CSI Unity XT       | 2.12.0  | ❌                | ❌             | ❌                | ❌            |
-| CSI Unity XT       | 2.11.0  | ❌                | ❌             | ❌                | ❌            |
-| CSI Unity XT       | 2.10.1  | ❌                | ❌             | ❌                | ❌            |
+| CSI Driver         | Version | CSM Authorization 1.x.x , 2.x.x | CSM Replication | CSM Observability | CSM Resiliency |
+| ------------------ |---------|---------------------------------|-----------------|-------------------|----------------|
+| CSI PowerScale     | 2.12.0  | ✔ 1.12.0  , 2.0.0              | ✔ 1.10.0       | ✔ 1.10.0          | ✔ 1.11.0      |
+| CSI PowerScale     | 2.11.0  | ✔ 1.11.0  , ❌             | ✔ 1.9.0        | ✔ 1.9.0           | ✔ 1.10.0      |
+| CSI PowerScale     | 2.10.1  | ✔ 1.10.1  , ❌             | ✔ 1.8.1        | ✔ 1.8.1           | ✔ 1.9.1       |
+| CSI PowerFlex      | 2.12.0  | ✔ 1.12.0  , 2.0.0           | ✔ 1.10.0       | ✔ 1.10.0          | ✔ 1.11.0      |
+| CSI PowerFlex      | 2.11.0  | ✔ 1.11.0  , ❌             | ✔ 1.9.0        | ✔ 1.9.0           | ✔ 1.10.0      |
+| CSI PowerFlex      | 2.10.1  | ✔ 1.10.1  , ❌             | ✔ 1.8.1        | ✔ 1.8.1           | ✔ 1.9.1       |
+| CSI PowerStore     | 2.12.0  | ❌ , ❌                    | ❌             | ❌                | ✔ 1.11.0      |
+| CSI PowerStore     | 2.11.1  | ❌ , ❌                    | ❌             | ❌                | ✔ 1.10.0      |
+| CSI PowerStore     | 2.10.1  | ❌ , ❌                    | ❌             | ❌                | ✔ 1.9.1       |
+| CSI PowerMax       | 2.12.0  | ✔ 1.12.0  , 2.0.0           | ✔ 1.10.0       | ✔ 1.10.0          | ✔ 1.11.0      |
+| CSI PowerMax       | 2.11.0  | ✔ 1.11.0  , ❌             | ✔ 1.9.0        | ✔ 1.9.0           | ✔ 1.10.0      |
+| CSI PowerMax       | 2.10.1  | ✔ 1.10.1  , ❌             | ✔ 1.8.1        | ✔ 1.8.1           | ❌            |
+| CSI Unity XT       | 2.12.0  | ❌ , ❌                    | ❌             | ❌                | ❌            |
+| CSI Unity XT       | 2.11.1  | ❌ , ❌                    | ❌             | ❌                | ❌            |
+| CSI Unity XT       | 2.10.1  | ❌ , ❌                    | ❌             | ❌                | ❌            |
 
 These CR will be used for new deployment or upgrade. In most case, it is recommended to use the latest available version.
 
@@ -67,7 +67,7 @@ Both editions have the same codebase and are supported by Dell Technologies, the
 1. Install volume snapshot CRDs. For detailed snapshot setup procedure, [click here](../../snapshots/#volume-snapshot-feature).
 2. Clone and checkout the required csm-operator version using
 ```bash
-git clone -b v1.6.0 https://github.com/dell/csm-operator.git
+git clone -b v1.7.0 https://github.com/dell/csm-operator.git
 ```
 3. `cd csm-operator`
 4. _(Optional)_ If using a local Docker image, edit the `deploy/operator.yaml` file and set the image name for the CSM Operator Deployment.
@@ -158,7 +158,7 @@ This needs to be performed on a Linux system with access to the Internet as a gi
 To build an offline bundle, the following steps are needed:
 1. Clone and checkout the required csm-operator version using
 ```bash
-git clone -b v1.6.0 https://github.com/dell/csm-operator.git
+git clone -b v1.7.0 https://github.com/dell/csm-operator.git
 ```
 2. `cd csm-operator`
 3. Run the `csm-offline-bundle.sh` script which will be found in the `scripts` directory with an argument of `-c` in order to create an offline bundle
@@ -182,30 +182,30 @@ Here is the output of a request to build an offline bundle for the Dell CSM Oper
 
 * Pulling and saving container images
 
-   dellemc/csi-isilon:v2.11.0
-   dellemc/csi-metadata-retriever:v1.8.0
-   dellemc/csipowermax-reverseproxy:v2.10.0
-   dellemc/csi-powermax:v2.11.0
-   dellemc/csi-powerstore:v2.11.0
+   dellemc/csi-isilon:v2.12.0
+   dellemc/csi-metadata-retriever:v1.9.0
+   dellemc/csipowermax-reverseproxy:v2.11.0
+   dellemc/csi-powermax:v2.12.0
+   dellemc/csi-powerstore:v2.12.0
    dellemc/csi-unity:v2.12.0
    dellemc/csi-vxflexos:v2.12.0
-   dellemc/csm-authorization-sidecar:v1.11.0
-   dellemc/csm-metrics-powerflex:v1.9.0
-   dellemc/csm-metrics-powerscale:v1.6.0
-   dellemc/csm-topology:v1.9.0
-   dellemc/dell-csi-replicator:v1.9.0
-   dellemc/dell-replication-controller:v1.9.0
-   dellemc/sdc:4.5.1
-   docker.io/dellemc/dell-csm-operator:v1.6.0
+   dellemc/csm-authorization-sidecar:v1.12.0
+   dellemc/csm-metrics-powerflex:v1.10.0
+   dellemc/csm-metrics-powerscale:v1.7.0
+   dellemc/csm-topology:v1.10.0
+   dellemc/dell-csi-replicator:v1.10.0
+   dellemc/dell-replication-controller:v1.10.0
+   dellemc/sdc:4.5.2.1
+   docker.io/dellemc/dell-csm-operator:v1.7.0
    gcr.io/kubebuilder/kube-rbac-proxy:v0.8.0
    nginxinc/nginx-unprivileged:1.20
    otel/opentelemetry-collector:0.42.0
-   registry.k8s.io/sig-storage/csi-attacher:v4.6.1
-   registry.k8s.io/sig-storage/csi-external-health-monitor-controller:v0.11.0
-   registry.k8s.io/sig-storage/csi-node-driver-registrar:v2.10.1
-   registry.k8s.io/sig-storage/csi-provisioner:v5.0.1
-   registry.k8s.io/sig-storage/csi-resizer:v1.11.1
-   registry.k8s.io/sig-storage/csi-snapshotter:v8.0.1
+   registry.k8s.io/sig-storage/csi-attacher:v4.7.0
+   registry.k8s.io/sig-storage/csi-external-health-monitor-controller:v0.13.0
+   registry.k8s.io/sig-storage/csi-node-driver-registrar:v2.12.0
+   registry.k8s.io/sig-storage/csi-provisioner:v5.1.0
+   registry.k8s.io/sig-storage/csi-resizer:v1.12.0
+   registry.k8s.io/sig-storage/csi-snapshotter:v8.1.0
 
 * Copying necessary files
 
@@ -282,30 +282,30 @@ Preparing a offline bundle for installation
 
 * Loading docker images
 
-Loaded image: docker.io/dellemc/csi-powerstore:v2.11.0
-Loaded image: docker.io/dellemc/csi-isilon:v2.11.0
+Loaded image: docker.io/dellemc/csi-powerstore:v2.12.0
+Loaded image: docker.io/dellemc/csi-isilon:v2.12.0
 ...
 ...
-Loaded image: registry.k8s.io/sig-storage/csi-resizer:v1.11.1
-Loaded image: registry.k8s.io/sig-storage/csi-snapshotter:v8.0.1
+Loaded image: registry.k8s.io/sig-storage/csi-resizer:v1.12.0
+Loaded image: registry.k8s.io/sig-storage/csi-snapshotter:v8.1.0
 
 * Tagging and pushing images
 
-   dellemc/csi-isilon:v2.11.0 -> localregistry:5000/dell-csm-operator/csi-isilon:v2.11.0
-   dellemc/csi-metadata-retriever:v1.8.0 -> localregistry:5000/dell-csm-operator/csi-metadata-retriever:v1.8.0
+   dellemc/csi-isilon:v2.12.0 -> localregistry:5000/dell-csm-operator/csi-isilon:v2.12.0
+   dellemc/csi-metadata-retriever:v1.9.0 -> localregistry:5000/dell-csm-operator/csi-metadata-retriever:v1.9.0
    ...
    ...
-   registry.k8s.io/sig-storage/csi-resizer:v1.11.1 -> localregistry:5000/dell-csm-operator/csi-resizer:v1.11.1
-   registry.k8s.io/sig-storage/csi-snapshotter:v8.0.1 -> localregistry:5000/dell-csm-operator/csi-snapshotter:v8.0.1
+   registry.k8s.io/sig-storage/csi-resizer:v1.12.0 -> localregistry:5000/dell-csm-operator/csi-resizer:v1.12.0
+   registry.k8s.io/sig-storage/csi-snapshotter:v8.1.0 -> localregistry:5000/dell-csm-operator/csi-snapshotter:v8.1.0
 
 * Preparing files within /root/dell-csm-operator-bundle
 
-   changing: dellemc/csi-isilon:v2.11.0 -> localregistry:5000/dell-csm-operator/csi-isilon:v2.11.0
-   changing: dellemc/csi-metadata-retriever:v1.8.0 -> localregistry:5000/dell-csm-operator/csi-metadata-retriever:v1.8.0
+   changing: dellemc/csi-isilon:v2.12.0 -> localregistry:5000/dell-csm-operator/csi-isilon:v2.12.0
+   changing: dellemc/csi-metadata-retriever:v1.9.0 -> localregistry:5000/dell-csm-operator/csi-metadata-retriever:v1.9.0
    ...
    ...
-   changing: registry.k8s.io/sig-storage/csi-resizer:v1.11.1 -> localregistry:5000/dell-csm-operator/csi-resizer:v1.11.1
-   changing: registry.k8s.io/sig-storage/csi-snapshotter:v8.0.1 -> localregistry:5000/dell-csm-operator/csi-snapshotter:v8.0.1
+   changing: registry.k8s.io/sig-storage/csi-resizer:v1.12.0 -> localregistry:5000/dell-csm-operator/csi-resizer:v1.12.0
+   changing: registry.k8s.io/sig-storage/csi-snapshotter:v8.1.0 -> localregistry:5000/dell-csm-operator/csi-snapshotter:v8.1.0
 
 * Complete
 ```
@@ -350,7 +350,7 @@ The `Update approval` (**`InstallPlan`** in OLM terms) strategy plays a role whi
 
 1. Clone and checkout the required csm-operator version using
 ```bash
-git clone -b v1.6.0 https://github.com/dell/csm-operator.git
+git clone -b v1.7.0 https://github.com/dell/csm-operator.git
 ```
 2. `cd csm-operator`
 3. Execute `bash scripts/install.sh --upgrade`  . This command will install the latest version of the operator.
@@ -385,7 +385,7 @@ The following notes explain some of the general items to take care of.
 1. If you are trying to upgrade the CSI driver from an older version, make sure to modify the _configVersion_ field.
    ```yaml
       driver:
-        configVersion: v2.11.0
+        configVersion: v2.12.0
    ```
 
 ### Upgrade Modules using Dell CSM Operator
