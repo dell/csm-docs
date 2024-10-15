@@ -41,7 +41,7 @@ Listing installed drivers with the ContainerStorageModule CRD User can query for
       <guid>https://dell.github.io/csm-docs/v2/deployment/csmoperator/drivers/powerstore/</guid>
       <description>Installing CSI Driver for PowerStore via Dell CSM Operator The CSI Driver for Dell PowerStore can be installed via the Dell CSM Operator. To deploy the Operator, follow the instructions available here.
 Note that the deployment of the driver using the operator does not use any Helm charts and the installation and configuration parameters will be slightly different from the one specified via the Helm installer.
-Listing installed drivers with the ContainerStorageModule CRD User can query for all Dell CSI drivers using the following command:</description>
+Check existing ContainerStorageModule CRD User can query for all Dell CSI drivers using the following command:</description>
     </item>
     <item>
       <title>Unity XT</title>

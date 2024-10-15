@@ -41,7 +41,7 @@ Install Kubernetes or OpenShift (see supported versions) Install Helm 3 Mount pr
       <guid>https://dell.github.io/csm-docs/docs/deployment/helm/drivers/installation/powerstore/</guid>
       <description>The CSI Driver for Dell PowerStore can be deployed by using the provided Helm v3 charts and installation scripts on both Kubernetes and OpenShift platforms. For more detailed information on the installation scripts, review the script documentation.
 Prerequisites The following are requirements to be met before installing the CSI Driver for Dell PowerStore:
-Install Kubernetes or OpenShift (see supported versions) Install Helm 3.x If you plan to use either the Fibre Channel or iSCSI or NVMe/TCP or NVMe/FC protocol, refer to either Fibre Channel requirements or Set up the iSCSI Initiator or Set up the NVMe Initiator sections below.</description>
+A Kubernetes or OpenShift cluster (see supported versions) Install Helm 3.x If you plan to use either the Fibre Channel, iSCSI, NVMe/TCP, or NVMe/FC protocols, refer to either Fibre Channel requirements or Set up the iSCSI Initiator or Set up the NVMe Initiator sections below.</description>
     </item>
     <item>
       <title>Unity XT</title>

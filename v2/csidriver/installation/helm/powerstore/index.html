@@ -9,24 +9,24 @@
 <link rel="icon" type="image/png" href="/csm-docs/favicons/favicon-16x16.png" sizes="16x16">
 <link rel="icon" type="image/png" href="/csm-docs/favicons/favicon-32x32.png" sizes="32x32">
 <title>PowerStore | </title>
-<meta name="description" content="Installing CSI Driver for PowerStore via Helm
+<meta name="description" content="Installing Dell CSI Driver for PowerStore via Helm
 ">
 <meta property="og:title" content="PowerStore" />
-<meta property="og:description" content="Installing CSI Driver for PowerStore via Helm
+<meta property="og:description" content="Installing Dell CSI Driver for PowerStore via Helm
 " />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/v2/csidriver/installation/helm/powerstore/" /><meta property="article:section" content="v2" />
 
-<meta property="article:modified_time" content="2024-07-30T01:25:59+05:30" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2024-10-15T12:43:43-04:00" /><meta property="og:site_name" content="Dell Technologies" />
 
 <meta itemprop="name" content="PowerStore">
-<meta itemprop="description" content="Installing CSI Driver for PowerStore via Helm
+<meta itemprop="description" content="Installing Dell CSI Driver for PowerStore via Helm
 ">
-<meta itemprop="dateModified" content="2024-07-30T01:25:59+05:30" />
-<meta itemprop="wordCount" content="2772">
+<meta itemprop="dateModified" content="2024-10-15T12:43:43-04:00" />
+<meta itemprop="wordCount" content="3242">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="PowerStore"/>
-<meta name="twitter:description" content="Installing CSI Driver for PowerStore via Helm
+<meta name="twitter:description" content="Installing Dell CSI Driver for PowerStore via Helm
 "/>
 <link rel="preload" href="/csm-docs/scss/main.min.42d8340a915bc864ad5d15da721297c0e3c58c179b9ff8ae56d219635987f3d2.css" as="style"><link href="/csm-docs/scss/main.min.42d8340a915bc864ad5d15da721297c0e3c58c179b9ff8ae56d219635987f3d2.css" rel="stylesheet">
 <script
@@ -75,7 +75,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.67867d671fdeeaf81a80c1c38335b519.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.0b4dea47b7c3f9cebc22a23eabeed2ce.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -99,7 +99,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.67867d671fdeeaf81a80c1c38335b519.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.0b4dea47b7c3f9cebc22a23eabeed2ce.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -639,7 +639,7 @@
             
 <div class="td-content">
 	<h1>PowerStore</h1>
-	<div class="lead">Installing CSI Driver for PowerStore via Helm</div>
+	<div class="lead">Installing Dell CSI Driver for PowerStore via Helm</div>
 	<header class="article-meta">
 		
 </header>
@@ -652,23 +652,26 @@ Prerequisites <a class="header-link"  href="#prerequisites" style=" display: inl
             </svg>
         </a></h2><p>The following are requirements to be met before installing the CSI Driver for Dell PowerStore:</p>
 <ul>
-<li>Install Kubernetes or OpenShift (see <a href="../../../../csidriver/#features-and-capabilities">supported versions</a>)</li>
+<li>A Kubernetes or OpenShift cluster (see <a href="../../../../csidriver/#features-and-capabilities">supported versions</a>)</li>
 <li>Install Helm 3.x</li>
-<li>If you plan to use either the Fibre Channel or iSCSI or NVMe/TCP or NVMe/FC protocol, refer to either <em>Fibre Channel requirements</em> or <em>Set up the iSCSI Initiator</em> or <em>Set up the NVMe Initiator</em> sections below. You can use NFS volumes without FC or iSCSI or NVMe/TCP or NVMe/FC configuration.</li>
+<li>If you plan to use either the Fibre Channel, iSCSI, NVMe/TCP, or NVMe/FC protocols, refer to either <em>Fibre Channel requirements</em> or <em>Set up the iSCSI Initiator</em> or <em>Set up the NVMe Initiator</em> sections below. You can use NFS volumes without FC, iSCSI, NVMe/TCP, or NVMe/FC configurations.</li>
 </ul>
 <blockquote>
-<p>You can use either the Fibre Channel or iSCSI or NVMe/TCP or NVMe/FC protocol, but you do not need all the four.</p>
+<p>You can use either the Fibre Channel (FC), iSCSI, NVMe/TCP, or NVMe/FC protocol, but you do not need all four to be enabled.</p>
 </blockquote>
 <blockquote>
-<p>If you want to use preconfigured iSCSI/FC hosts be sure to check that they are not part of any host group</p>
+<p>For NVMe support the preferred multipath solution is NVMe native multipathing. The <a href="https://elabnavigator.dell.com/vault/pdf/Linux.pdf?key=1725374107988">Dell Host Connectivity Guide</a> describes the details of each configuration option.</p>
+</blockquote>
+<blockquote>
+<p>If you want to use pre-configured iSCSI/FC hosts be sure to check that they are not part of any host group.</p>
 </blockquote>
 <ul>
 <li>Linux native multipathing requirements</li>
 <li>Mount propagation is enabled on container runtime that is being used</li>
 <li>If using Snapshot feature, satisfy all Volume Snapshot requirements</li>
-<li>Nonsecure registries are defined in Docker or other container runtimes, for CSI drivers that are hosted in a non-secure location.</li>
-<li>You can access your cluster with kubectl and helm.</li>
-<li>Ensure that your nodes support mounting NFS volumes.</li>
+<li>Insecure registries are defined in Docker or other container runtimes, for CSI drivers that are hosted in a non-secure location</li>
+<li>You can access your cluster with kubectl and helm</li>
+<li>Ensure that your nodes support mounting NFS volumes if using NFS</li>
 </ul>
 <h3 id="install-helm-3x">
 Install Helm 3.x <a class="header-link"  href="#install-helm-3x" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
@@ -686,7 +689,7 @@ Fibre Channel requirements <a class="header-link"  href="#fibre-channel-requirem
                 <path d="M0 0h24v24H0z" fill="none"/>
                 <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
             </svg>
-        </a></h3><p>Dell PowerStore supports Fibre Channel communication. If you use the Fibre Channel protocol, ensure that the
+        </a></h3><p>Dell PowerStore supports Fibre Channel connectivity. If you use the Fibre Channel protocol, ensure that the
 following requirement is met before you install the CSI Driver for Dell PowerStore:</p>
 <ul>
 <li>Zoning of the Host Bus Adapters (HBAs) to the Fibre Channel port must be done.</li>
@@ -701,7 +704,7 @@ Set up the iSCSI Initiator <a class="header-link"  href="#set-up-the-iscsi-initi
 <p>If you use the iSCSI protocol, set up the iSCSI initiators as follows:</p>
 <ul>
 <li>Ensure that the iSCSI initiators are available on both Controller and Worker nodes.</li>
-<li>Kubernetes nodes must have access (network connectivity) to an iSCSI port on the Dell PowerStore array that
+<li>Kubernetes nodes must have network connectivity to an iSCSI port on the Dell PowerStore array that
 has IP interfaces. Manually create IP routes for each node that connects to the Dell PowerStore.</li>
 <li>All Kubernetes nodes must have the <em>iscsi-initiator-utils</em> package for CentOS/RHEL or <em>open-iscsi</em> package for Ubuntu installed, and the <em>iscsid</em> service must be enabled and running.
 To do this, run the <code>systemctl enable --now iscsid</code> command.</li>
@@ -714,12 +717,77 @@ Set up the NVMe Initiator <a class="header-link"  href="#set-up-the-nvme-initiat
                 <path d="M0 0h24v24H0z" fill="none"/>
                 <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
             </svg>
-        </a></h3><p>If you want to use the protocol, set up the NVMe initiators as follows:</p>
+        </a></h3><p>The following requirements must be fulfilled in order to successfully use the NVMe protocols with the CSI PowerStore driver:</p>
 <ul>
-<li>The driver requires NVMe management command-line interface (nvme-cli) to use configure, edit, view or start the NVMe client and target. The nvme-cli utility provides a command-line and interactive shell option. The NVMe CLI tool is installed in the host using the below command.</li>
+<li>All OpenShift or Kubernetes nodes connecting to Dell storage arrays must use unique NQNs.</li>
+<li>The driver requires the NVMe command-line interface (nvme-cli) to manage the NVMe client and target. The nvme-cli utility provides a command-line and interactive shell option. The NVMe CLI tool is installed in the host using the below command on RPM oriented Linux distributions.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo apt install nvme-cli
-</span></span></code></pre></div><p><strong>Requirements for NVMeTCP</strong></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo dnf -y install nvme-cli
+</span></span></code></pre></div><ul>
+<li>Support for NVMe requires native NVMe multipathing to be configured on each worker node in the cluster. Please refer to the <a href="https://elabnavigator.dell.com/vault/pdf/Linux.pdf?key=1725374107988">Dell Host Connectivity Guide</a> for more details on NVMe connectivity requirements. To determine if the worker nodes are configured for native NVMe multipathing run the following command on each worker node:</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cat /sys/module/nvme_core/parameters/multipath
+</span></span></code></pre></div><blockquote>
+<p>If the result of the command displays Y then NVMe native multipathing is enabled in the kernel. If the output is N then native NVMe multipathing is disabled. Consult the <a href="https://elabnavigator.dell.com/vault/pdf/Linux.pdf?key=1725374107988">Dell Host Connectivity Guide</a> for Linux to enable native NVMe multipathing.</p>
+</blockquote>
+<ul>
+<li>The default NVMeTCP native multipathing policy is &ldquo;numa&rdquo;. The preferred IO policy for NVMe devices used for PowerStore is round-robin. You can use udev rules to enable the round robin policy on all worker nodes. To view the IO policy you can use the following command:</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>nvme list-subsys
+</span></span></code></pre></div><p><strong>Configure the IO policy</strong></p>
+<p>To change the IO policy to round-robin you can add a udev rule on each worker node. Place a config file in /etc/udev/rules.d with the name 71-nvme-io-policy.rules with the following contents:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>ACTION==&#34;add|change&#34;, SUBSYSTEM==&#34;nvme-subsystem&#34;, ATTR{iopolicy}=&#34;round-robin&#34;
+</span></span></code></pre></div><p>In order to change the rules on a running kernel you can run the following commands:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>/sbin/udevadm control --reload-rules
+</span></span><span style="display:flex;"><span>/sbin/udevadm trigger --type<span style="color:#ce5c00;font-weight:bold">=</span>devices --action<span style="color:#ce5c00;font-weight:bold">=</span>change
+</span></span></code></pre></div><p>On OCP clusters you can add a MachineConfig to enable this rule on all worker nodes:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">apiVersion</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">machineconfiguration.openshift.io/v1</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">kind</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">MachineConfig</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">metadata</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#0000cf;font-weight:bold">99</span>-<span style="color:#000">workers-multipath-round-robin</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">labels</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">machineconfiguration.openshift.io/role</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">worker</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">spec</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">config</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">ignition</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">version</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#0000cf;font-weight:bold">3.2.0</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">storage</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">files</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span>- <span style="color:#204a87;font-weight:bold">contents</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">          </span><span style="color:#204a87;font-weight:bold">source</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">data:text/plain;charset=utf-8;base64,QUNUSU9OPT0iYWRkfGNoYW5nZSIsIFNVQlNZU1RFTT09Im52bWUtc3Vic3lzdGVtIiwgQVRUUntpb3BvbGljeX09InJvdW5kLXJvYmluIg==</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">          </span><span style="color:#204a87;font-weight:bold">verification</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>{}<span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">filesystem</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">root</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">mode</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#0000cf;font-weight:bold">420</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">path</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">/etc/udev/rules.d/71-nvme-io-policy.rules</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span></code></pre></div><p><strong>Configure the control loss timeout</strong></p>
+<p>To reduce the impact of PowerStore non disruptive software upgrades you must set the control loss timeout. This can be done using udev rules on each worker node. More information can be found in the <a href="https://elabnavigator.dell.com/vault/pdf/Linux.pdf?key=1725374107988">Dell Host Connectivity Guide</a>. The configure the control loss timeout place a config file in /etc/udev/rules.d with the name 72-nvmf-ctrl_loss_tmo.rules with the following contents:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>ACTION==&#34;add|change&#34;, SUBSYSTEM==&#34;nvme&#34;, KERNEL==&#34;nvme*&#34;, ATTR{ctrl_loss_tmo}=&#34;-1&#34;
+</span></span></code></pre></div><p>In order to change the rules on a running kernel you can run the following commands:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>/sbin/udevadm control --reload-rules
+</span></span><span style="display:flex;"><span>/sbin/udevadm trigger --type<span style="color:#ce5c00;font-weight:bold">=</span>devices --action<span style="color:#ce5c00;font-weight:bold">=</span>change
+</span></span></code></pre></div><p>On OCP clusters you can add a MachineConfig to enable this rule on all worker nodes:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">apiVersion</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">machineconfiguration.openshift.io/v1</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">kind</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">MachineConfig</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">metadata</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#0000cf;font-weight:bold">99</span>-<span style="color:#000">nvmf-ctrl-loss-tmo</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">labels</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">machineconfiguration.openshift.io/role</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">worker</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">spec</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">config</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">ignition</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">version</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#0000cf;font-weight:bold">3.2.0</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">storage</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">files</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span>- <span style="color:#204a87;font-weight:bold">contents</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">          </span><span style="color:#204a87;font-weight:bold">source</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">data:text/plain;charset=utf-8;base64,QUNUSU9OPT0iYWRkfGNoYW5nZSIsIFNVQlNZU1RFTT09Im52bWUiLCBLRVJORUw9PSJudm1lKiIsIEFUVFJ7Y3RybF9sb3NzX3Rtb309Ii0xIgo=</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">          </span><span style="color:#204a87;font-weight:bold">verification</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>{}<span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">filesystem</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">root</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">mode</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#0000cf;font-weight:bold">420</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">path</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">/etc/udev/rules.d/72-nvmf-ctrl_loss_tmo.rules</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span></code></pre></div><p><strong>Requirements for NVMeTCP</strong></p>
+<blockquote>
+<p>Starting with OCP 4.14 NVMe/TCP is enabled by default on RCOS nodes.</p>
+</blockquote>
 <ul>
 <li>Modules including the nvme, nvme_core, nvme_fabrics, and nvme_tcp are required for using NVMe over Fabrics using TCP. Load the NVMe and NVMe-OF Modules using the below commands:</li>
 </ul>
@@ -742,7 +810,10 @@ Linux multipathing requirements <a class="header-link"  href="#linux-multipathin
                 <path d="M0 0h24v24H0z" fill="none"/>
                 <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
             </svg>
-        </a></h3><p>Dell PowerStore supports Linux multipathing. Configure Linux multipathing before installing the CSI Driver for Dell
+        </a></h3><blockquote>
+<p>For NVMe connectivity native NVMe multipathing is used. The following sections apply only for iSCSI and Fiber Channel connectivity.</p>
+</blockquote>
+<p>Dell PowerStore supports Linux multipathing and NVMe native multipathing. Configure Linux multipathing before installing the CSI Driver for Dell
 PowerStore.</p>
 <p>Set up Linux multipathing as follows:</p>
 <ul>
@@ -756,19 +827,25 @@ PowerStore.</p>
 <li>Enable <code>user_friendly_names</code> and <code>find_multipaths</code> in the <code>multipath.conf</code> file.</li>
 <li>Ensure that the multipath command for <code>multipath.conf</code> is available on all Kubernetes nodes.</li>
 </ul>
-<h4 id="multipathd-machineconfig">
-multipathd <code>MachineConfig</code> <a class="header-link"  href="#multipathd-machineconfig" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
-            <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-                <path d="M0 0h24v24H0z" fill="none"/>
-                <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
-            </svg>
-        </a></h4><p>If you are installing a CSI Driver which requires the installation of the Linux native Multipath software - <em>multipathd</em>, please follow the below instructions</p>
-<p>To enable multipathd on RedHat CoreOS nodes you need to prepare a working configuration encoded in base64.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>user_friendly_names yes
-</span></span><span style="display:flex;"><span>find_multipaths yes
-</span></span><span style="display:flex;"><span><span style="color:#ce5c00;font-weight:bold">}</span>
-</span></span><span style="display:flex;"><span>blacklist <span style="color:#ce5c00;font-weight:bold">{</span>
-</span></span><span style="display:flex;"><span><span style="color:#ce5c00;font-weight:bold">}</span><span style="color:#a40000">&#39;</span> <span style="color:#000;font-weight:bold">|</span> base64 -w0
+<p>The following is a sample multipath.conf file:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>defaults {
+</span></span><span style="display:flex;"><span>  user_friendly_names yes
+</span></span><span style="display:flex;"><span>  find_multipaths yes
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>  blacklist {
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>If the above command is not successful, ensure that the /etc/multipath.conf file is present and configured properly. Once the file has been configured correctly, enable the multipath service by running the following command:
+<code>sudo systemctl enable multipathd</code></p>
+<p>Finally, you have to restart the service by providing the command
+<code>sudo systemctl restart multipathd</code></p>
+<p>On OCP clusters you can add a MachineConfig to configure multipathing on the worker nodes.</p>
+<p>You will need to first base64 encode the multipath.conf and add it to the MachineConfig definition.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#204a87">echo</span> <span style="color:#4e9a06">&#39;defaults {
+</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">user_friendly_names yes
+</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">find_multipaths yes
+</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">}
+</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">  blacklist {
+</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">}&#39;</span> <span style="color:#000;font-weight:bold">|</span> base64 -w0
 </span></span></code></pre></div><p>Use the base64 encoded string output in the following <code>MachineConfig</code> yaml file (under source section)</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">apiVersion</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">machineconfiguration.openshift.io/v1</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">kind</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">MachineConfig</span><span style="color:#f8f8f8;text-decoration:underline">
@@ -788,14 +865,10 @@ multipathd <code>MachineConfig</code> <a class="header-link"  href="#multipathd-
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">filesystem</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">root</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">mode</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#0000cf;font-weight:bold">400</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">path</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">/etc/multipath.conf</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span></code></pre></div><p>After deploying this<code>MachineConfig</code> object, CoreOS will start multipath service automatically.
+</span></span></span></code></pre></div><p>After deploying this<code>MachineConfig</code> object, CoreOS will start the multipath service automatically.
 Alternatively, you can check the status of the multipath service by entering the following command in each worker nodes.
 <code>sudo multipath -ll</code></p>
-<p>If the above command is not successful, ensure that the /etc/multipath.conf file is present and configured properly. Once the file has been configured correctly, enable the multipath service by running the following command:
-<code>sudo /sbin/mpathconf –-enable --with_multipathd y</code></p>
-<p>Finally, you have to restart the service by providing the command
-<code>sudo systemctl restart multipathd</code></p>
-<p>For additional information refer to official documentation of the multipath configuration.</p>
+<p>For additional information refer to the <a href="https://elabnavigator.dell.com/vault/pdf/Linux.pdf?key=1725374107988">Dell Host Connectivity Guide</a>.</p>
 <h3 id="optional-volume-snapshot-requirements">
 (Optional) Volume Snapshot Requirements <a class="header-link"  href="#optional-volume-snapshot-requirements" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
             <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
@@ -1149,7 +1222,7 @@ What happens to my existing storage classes? <a class="header-link"  href="#what
 <li><em>nfsAcls</em> (Optional): defines permissions - POSIX mode bits or NFSv4 ACLs, to be set on NFS target mount directory.</li>
 <li><em>allowedTopologies</em> (Optional): If you want you can also add topology constraints.
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">allowedTopologies</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span>- <span style="color:#204a87;font-weight:bold">matchLabelExpressions</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> 
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span>- <span style="color:#204a87;font-weight:bold">matchLabelExpressions</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span>- <span style="color:#204a87;font-weight:bold">key</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">csi-powerstore.dellemc.com/12.34.56.78-iscsi</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#8f5902;font-style:italic"># replace &#34;-iscsi&#34; with &#34;-fc&#34;, &#34;-nvmetcp&#34; or &#34;-nvmefc&#34; or &#34;-nfs&#34; at the end to use FC, NVMeTCP, NVMeFC or NFS enabled hosts</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#8f5902;font-style:italic"># replace &#34;12.34.56.78&#34; with PowerStore endpoint IP</span><span style="color:#f8f8f8;text-decoration:underline">
