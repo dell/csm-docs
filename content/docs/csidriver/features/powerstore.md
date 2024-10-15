@@ -760,3 +760,7 @@ Without storage capacity tracking, pods get scheduled on a node satisfying the t
 The attribute `storageCapacity.enabled` in `my-powerstore-settings.yaml` can be used to enabled/disabled the feature during driver installation .
 To configure how often driver checks for changed capacity set `storageCapacity.pollInterval` attribute. In case of driver installed via operator, this interval can be configured in the sample files provided [here](https://github.com/dell/csm-operator/tree/main/samples) by editing the `capacity-poll-interval` argument present in the `provisioner` sidecar.
 
+## Metro support
+The CSI PowerStore driver supports the provisioning of Metro volumes. The process and details of how to provision and use Metro volumes can be found [here](../../../replication/high-availability).
+
+Please note that the Metro feature does not require the deployment of the replicator sidecar or the replication controller.
