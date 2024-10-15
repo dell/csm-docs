@@ -32,7 +32,7 @@ CSM for Replication provides the following capabilities:
 | Provides a command line utility - [repctl](tools) for configuring & managing replication related resources across multiple clusters |   yes    |    yes     |    yes     |    yes    |  no   |
 {{</table>}}
 
-> _**NOTE**_: To create replication with multiple volumes using powerstore array, user need to pause and resume the replication session. Please refer the troubleshoot section for more details
+> _**NOTE**_: To add or delete volumes in the existing SYNC Replication Group in PowerStore, the user needs to pause and then resume the replication group. For more details, please refer to the troubleshooting section.
 
 ## Details
 
