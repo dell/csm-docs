@@ -17,11 +17,11 @@ This is the introduction to a Stateless Architecture for Authorization. The crea
 ## CSM for Authorization Capabilities
 {{<table "table table-striped table-bordered table-sm">}}
 | Feature                                                                                                                        | PowerFlex | PowerMax | PowerScale |
-| -----------------------------------------------------------------------------------------------------------------------------  | --------- | -------- | ---------- |
+| ------------------------------------------------------------------------------------------------------------------------------ | --------- | -------- | ---------- |
 | Ability to set storage quota limits to ensure k8s tenants are not overconsuming storage                                        | Yes       | Yes      | No         |
 | Ability to create access control policies to ensure k8s tenant clusters are not accessing storage that does not belong to them | Yes       | Yes      | No         |
-| Ability to shield storage credentials from Kubernetes administrators by storing them in vault                                  | Yes       | Yes      | No         |
-| Ability to create snapshots from owned volumes that consume the storage quota                                                  | Yes       | Yes      | No         |
+| Ability to shield storage credentials from Kubernetes administrators by storing them in vault                                  | Yes       | Yes      | Yes        |
+| Ability to create snapshots from owned volumes that consume the storage quota                                                  | Yes       | Yes      | Yes        |
 | Ability to periodically query storage array to keep quota consumption in sync                                                  | Yes       | Yes      | No         |
 {{</table>}}
 

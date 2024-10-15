@@ -362,3 +362,23 @@ With the default server settings, role level values control TTL in this way:
 The client token will only be able to renew 3 times before reaching it total allowed TTL of 2 hours.
 
 Existing role values can be changed using `vault write auth/kubernetes/role/csm-authorization token_ttl=30m token_explicit_max_ttl=2h`.
+
+## Uninstall CSM Authorization
+
+### Delete all Authorization Custom Resources(CRs)
+
+The commands below will delete a Tenant, Role, and Storage system. All CRs must be deleted before Authorization is uninstalled.
+
+```bash
+kubectl delete csmtenant [csmtenant-name] --namespace authorization
+kubectl delete csmrole [csmrole-name] --namespace authorization
+kubectl delete storage [storage-name] --namespace authorization
+```
+
+### Uninstall the CSM Authorization Proxy Server
+
+The command below removes all the Kubernetes components associated with the install.
+
+```bash
+kubectl delete csm/authorization --namespace authorization
+```
