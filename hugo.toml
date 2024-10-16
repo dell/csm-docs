@@ -197,7 +197,12 @@ algolia_docsearch = false
 [[menu.main]]
     name = "GitHub"
     weight = 50
-    url = "https://github.com/dell/csm"
+    url = "https://github.com/dell/csm" 
+[[menu.main]]
+    name = "Blog" 
+    weight = 60  
+    url="https://infohub.delltechnologies.com/en-us/t/blogs-99/"
+    
 
 [module]
   # uncomment line below for temporary local development of module
