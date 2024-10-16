@@ -19,20 +19,18 @@ Description: >
 
 
 
+
 ### New Features/Changes
 
-- [#1359 - [FEATURE]: Add Support for OpenShift Container Platform (OCP) 4.16 ](https://github.com/dell/csm/issues/1359)
-- [#1277 - [FEATURE]: Add Authorization upgrade is supported in CSM Operator](https://github.com/dell/csm/issues/1277)
-- [#1396 - [FEATURE]: DCM and DN client upgrade is supported in CSM operator ](https://github.com/dell/csm/issues/1396)
-- [#1397 - [FEATURE]: Observability upgrade is supported in CSM Operator](https://github.com/dell/csm/issues/1397)
+- [#1449 - [FEATURE]: Simplify the CSM Operator deployment](https://github.com/dell/csm/issues/1449)
+- [#1484 - [FEATURE]: Remove ACC Support](https://github.com/dell/csm/issues/1484)
 
 ### Fixed Issues
 
-- [#1200 - [BUG]: CrashLoopBackOff and OOMKilled issue in pod : Dell CSM Operator Manager POD](https://github.com/dell/csm/issues/1200)
-- [#1205 - [BUG]: Operator doesn't support non-authorization namespace](https://github.com/dell/csm/issues/1205)
-- [#1220 - [BUG]: Issue while Configuring Authorization module with Powermax CSI Driver using Operator](https://github.com/dell/csm/issues/1220)
-- [#1238 - [BUG]: Missing mountPropagation param for Powermax node template in CSM-Operator](https://github.com/dell/csm/issues/1238)
-- [#1291 - [BUG]: Fix linter errors in csm-operator](https://github.com/dell/csm/issues/1291)
+- [#1475 - [BUG]: CSM Operator - Changes to csiDriverSpec does not reflect in CSM state or csidrivers.storage.k8s.io object](https://github.com/dell/csm/issues/1475)
+- [#1510 - [BUG]: Missing Node tolerations for resiliency module](https://github.com/dell/csm/issues/1510)
+- [#1427 - [BUG]: CSM Operator e2e tests: Error in test 3](https://github.com/dell/csm/issues/1427)
+- [#1507 - [BUG]: CSM Operator E2E tests are not passing](https://github.com/dell/csm/issues/1507)
 
 ### Known Issues
 | Issue | Workaround |
