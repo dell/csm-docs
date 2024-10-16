@@ -1,6 +1,6 @@
 ---
 title: PowerMax
-linktitle: PowerMax 
+linktitle: PowerMax
 description: >
   Installing CSI Driver for PowerMax via Helm
 ---
@@ -21,7 +21,7 @@ The following requirements must be met before installing CSI Driver for Dell Pow
 - Mount propagation is enabled on container runtime that is being used
 - Linux multipathing requirements
 - If using Snapshot feature, satisfy all Volume Snapshot requirements
-- If enabling CSM for Authorization, please refer to the [Authorization deployment steps](../../../../../deployment/helm/modules/installation/authorization/) first
+- If enabling CSM for Authorization, please refer to the [Authorization deployment steps](../../../../../deployment/helm/modules/installation/authorization-v2.0/) first
 - If using Powerpath , install the PowerPath for Linux requirements
 
 ### Prerequisite for CSI Reverse Proxy
@@ -52,7 +52,7 @@ Install Helm 3 on the master node before you install CSI Driver for Dell PowerMa
   Run the command to install Helm 3.
    ```bash
    curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
-   ``` 
+   ```
 
 
 ### Fibre Channel Requirements
@@ -86,7 +86,7 @@ CSI Driver for Dell PowerMax supports NFS communication. Ensure that the followi
 If you want to use the protocol, set up the NVMe initiators as follows:
 - Setup on Array <br>
 Once the NVMe endpoint is created on the array, follow the following step to update endpoint name to adhere with CSI driver.
-  - Perform a  ```nvme discover --transport=tcp --traddr=<InterfaceAdd> --trsvcid=4420```. <InterfaceAdd> is the placeholder for actual IP address of NVMe Endpoint. 
+  - Perform a  ```nvme discover --transport=tcp --traddr=<InterfaceAdd> --trsvcid=4420```. <InterfaceAdd> is the placeholder for actual IP address of NVMe Endpoint.
   - Fetch the _subnqn_, for e.g.,  _nqn.1988-11.com.dell:PowerMax_2500:00:000120001100_, this will be used as the subnqn holder while updating NVMe endpoint name.
   - Update the NVMe endpoint name as ```<subnqn>:<dir><port>>```. Here is an example how it should look, _nqn.1988-11.com.dell:PowerMax_2500:00:000120001100:OR1C000_
 - Setup on Host
@@ -107,7 +107,7 @@ modprobe nvme_tcp
 
 The CSI Driver for Dell PowerMax supports auto RDM for vSphere over FC. These requirements are applicable for the clusters deployed on ESX/ESXi using virtualized environement.
 
-Set up the environment as follows: 
+Set up the environment as follows:
 
 - Requires VMware vCenter management software to manage all ESX/ESXis where the cluster is hosted.
 
@@ -123,7 +123,7 @@ Set up the environment as follows:
     ```
   where *myusername* and *mypassword* are credentials for a user with vCenter privileges.
 
-Create the secret by running the below command, 
+Create the secret by running the below command,
 ```bash
 kubectl create -f samples/secret/vcenter-secret.yaml
 ```
@@ -137,14 +137,14 @@ The CSI driver exposes an install parameter `skipCertificateValidation` which de
 If the `skipCertificateValidation` parameter is set to _false_ and a previous installation attempt created an empty secret, then this secret must be deleted and re-created using the CA certs.
 
 If the Unisphere certificate is self-signed or if you are using an embedded Unisphere, then perform the following steps:
-1. To fetch the certificate, run 
+1. To fetch the certificate, run
    ```bash
    openssl s_client -showcerts -connect [Unisphere IP]:8443 </dev/null 2> /dev/null | openssl x509 -outform PEM > ca_cert.pem
    ```
 
    *NOTE*: The IP address varies for each user.
 
-2. To create the secret, run 
+2. To create the secret, run
    ```bash
    kubectl create secret generic powermax-certs --from-file=ca_cert.pem -n powermax
    ```
@@ -161,7 +161,7 @@ CSI Driver for Dell PowerMax supports Linux multipathing. Configure Linux multip
 
 Set up Linux multipathing as follows:
 
-- All the nodes must have the _Device Mapper Multipathing_ package installed.  
+- All the nodes must have the _Device Mapper Multipathing_ package installed.
   *NOTE:* When this package is installed it creates a multipath configuration file which is located at `/etc/multipath.conf`. Please ensure that this file always exists.
 - Enable multipathing using `mpathconf --enable --with_multipathd y`
 - Enable `user_friendly_names` and `find_multipaths` in the `multipath.conf` file.
@@ -229,11 +229,11 @@ CSI Driver for Dell PowerMax supports PowerPath for Linux. Configure Linux Power
 Set up the PowerPath for Linux as follows:
 
 - All the nodes must have the PowerPath package installed . Download the PowerPath archive for the environment from [Dell Online Support](https://www.dell.com/support/home/en-in/product-support/product/powerpath-for-linux/drivers).
-- `Untar` the PowerPath archive, Copy the RPM package into a temporary folder and Install PowerPath using 
+- `Untar` the PowerPath archive, Copy the RPM package into a temporary folder and Install PowerPath using
    ```bash
     rpm -ivh DellEMCPower.LINUX-<version>-<build>.<platform>.x86_64.rpm
    ```
-- Start the PowerPath service using 
+- Start the PowerPath service using
   ```bash
    systemctl start PowerPath
   ```
@@ -261,7 +261,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
 **Steps**
 
 1. Run `git clone -b v2.11.0 https://github.com/dell/csi-powermax.git` to clone the git repository. This will include the Helm charts and dell-csi-helm-installer scripts.
-2. Ensure that you have created a namespace where you want to install the driver. You can run `kubectl create namespace powermax` to create a new one 
+2. Ensure that you have created a namespace where you want to install the driver. You can run `kubectl create namespace powermax` to create a new one
 3. Edit the `samples/secret/secret.yaml` file,to point to the correct namespace, and replace the values for the username and password parameters.
     These values can be obtained using base64 encoding as described in the following example:
     ```bash
@@ -269,16 +269,16 @@ CRDs should be configured during replication prepare stage with repctl as descri
     echo -n "mypassword" | base64
     ```
    where *myusername* and *mypassword* are credentials for a user with PowerMax privileges.
-4. Create the secret by running 
+4. Create the secret by running
     ```bash
     kubectl create -f samples/secret/secret.yaml
     ```
-5. Download the default values.yaml file 
+5. Download the default values.yaml file
     ```bash
     cd dell-csi-helm-installer && wget -O my-powermax-settings.yaml https://github.com/dell/helm-charts/raw/csi-powermax-2.11.0/charts/csi-powermax/values.yaml
     ```
 6. Ensure the unisphere have 10.0 REST endpoint support by clicking on Unisphere -> Help (?) -> About in Unisphere for PowerMax GUI.
-7. Edit the newly created file and provide values for the following parameters 
+7. Edit the newly created file and provide values for the following parameters
     ```bash
     vi my-powermax-settings.yaml
     ```
@@ -300,7 +300,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
 | maxActiveRead | This refers to the maximum concurrent READ request handled by the reverse proxy.                                                                                                                                                                                                                                                                                                | No | 5 |
 | maxActiveWrite | This refers to the maximum concurrent WRITE request handled by the reverse proxy.                                                                                                                                                                                                                                                                                               | No | 4 |
 | maxOutStandingRead | This refers to maximum queued READ request when reverse proxy receives more than _maxActiveRead_ requests.                                                                                                                                                                                                                                                                      | No | 50 |
-| maxOutStandingWrite| This refers to maximum queued WRITE request when reverse proxy receives more than _maxActiveWrite_ requests.                                                                                                                                                                                                                                                                    | No | 50 | 
+| maxOutStandingWrite| This refers to maximum queued WRITE request when reverse proxy receives more than _maxActiveWrite_ requests.                                                                                                                                                                                                                                                                    | No | 50 |
 | kubeletConfigDir | Specify kubelet config dir path                                                                                                                                                                                                                                                                                                                                                 | Yes | /var/lib/kubelet |
 | imagePullPolicy | The default pull policy is IfNotPresent which causes the Kubelet to skip pulling an image if it already exists.                                                                                                                                                                                                                                                                 | Yes | IfNotPresent |
 | clusterPrefix | Prefix that is used during the creation of various masking-related entities (Storage Groups, Masking Views, Hosts, and Volume Identifiers) on the array. The value that you specify here must be unique. Ensure that no other CSI PowerMax driver is managing the same arrays that are configured with the same prefix. The maximum length for this prefix is three characters. | Yes  | "ABC" |
@@ -316,7 +316,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
 | powerMaxDebug | Enables low level and http traffic logging between the CSI driver and Unisphere. Don't enable this unless asked to do so by the support team.                                                                                                                                                                                                                                   | No | false |
 | enableCHAP | Determine if the driver is going to configure SCSI node databases on the nodes with the CHAP credentials. If enabled, the CHAP secret must be provided in the credentials secret and set to the key "chapsecret"                                                                                                                                                                | No | false |
 | fsGroupPolicy | Defines which FS Group policy mode to be used, Supported modes `None, File and ReadWriteOnceWithFSType`                                                                                                                                                                                                                                                                         | No | "ReadWriteOnceWithFSType" |
-| version | Current version of the driver. Don't modify this value as this value will be used by the install script.                                                                                                                                                                                                                                                                        | Yes | v2.10.0 | 
+| version | Current version of the driver. Don't modify this value as this value will be used by the install script.                                                                                                                                                                                                                                                                        | Yes | v2.10.0 |
 | images | List all the images used by the CSI driver and CSM. If you use a private repository, change the registries accordingly.                                                                                                                                                                                                                                                         | Yes | "" || driverRepository | Defines the registry of the container image used for the driver. | Yes | dellemc |
 | maxPowerMaxVolumesPerNode | Specifies the maximum number of volume that can be created on a node.                                                                                                                                                                                                                                                                                                           | Yes| 0 |
 | **controller** | Allows configuration of the controller-specific parameters.                                                                                                                                                                                                                                                                                                                     | - | - |
@@ -342,7 +342,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
 | selfSignedCert | Set selfSignedCert to use a self-signed certificate                                                                                                                                                                                                                                                                                                                             | No | true |
 | certificateFile | certificateFile has tls.key content in encoded format                                                                                                                                                                                                                                                                                                                           | No | tls.crt.encoded64 |
 | privateKeyFile | privateKeyFile has tls.key content in encoded format                                                                                                                                                                                                                                                                                                                            | No | tls.key.encoded64 |
-| **authorization** | [Authorization](../../../../../deployment/helm/modules/installation/authorization/) is an optional feature to apply credential shielding of the backend PowerMax.                                                                                                                                                                                                               | - | - |
+| **authorization** | [Authorization](../../../../../deployment/helm/modules/installation/authorization-v2.0/) is an optional feature to apply credential shielding of the backend PowerMax.                                                                                                                                                                                                               | - | - |
 | enabled                  | A boolean that enables/disables authorization feature.                                                                                                                                                                                                                                                                                                                          |  No      |   false   |
 | proxyHost | Hostname of the csm-authorization server.                                                                                                                                                                                                                                                                                                                                       | No | Empty |
 | skipCertificateValidation | A boolean that enables/disables certificate validation of the csm-authorization proxy server.                                                                                                                                                                                                                                                                                   | No | true |
@@ -366,21 +366,21 @@ CRDs should be configured during replication prepare stage with repctl as descri
 | vCenterCredSecret                  | Secret name for the vCenter credentials.                                                                                                                                                                                                                                                                                                                                        |  Yes      |   ""   |
 
 
-8. Install the driver using `csi-install.sh` bash script by running 
+8. Install the driver using `csi-install.sh` bash script by running
     ```bash
     cd ../dell-csi-helm-installer && ./csi-install.sh --namespace powermax --values ./my-powermax-settings.yaml --helm-charts-version <version>
     ```
-9. Or you can also install the driver using standalone helm chart using the command 
+9. Or you can also install the driver using standalone helm chart using the command
    ```bash
    helm install --values  my-powermax-settings.yaml --namespace powermax powermax ./csi-powermax
    ```
 
-*Note:* 
+*Note:*
 - The parameter `--helm-charts-version` is optional and if you do not specify the flag, by default the `csi-install.sh` script will clone the version of the helm chart that is specified in the driver's [csi-install.sh](https://github.com/dell/csi-powermax/blob/main/dell-csi-helm-installer/csi-install.sh#L52) file. If you wish to install the driver using a different version of the helm chart, you need to include this flag. Also, remember to delete the `helm-charts` repository present in the `csi-powermax` directory if it was cloned before.
 - For detailed instructions on how to run the install scripts, see the readme document in the dell-csi-helm-installer folder.
 - There are a set of samples provided [here](#sample-values-file) to help you configure the driver with reverse proxy
 - This script also runs the verify.sh script in the same directory. You will be prompted to enter the credentials for each of the Kubernetes nodes. The `verify.sh` script needs the credentials to check if the iSCSI initiators have been configured on all nodes. You can also skip the verification step by specifying the `--skip-verify-node` option
-- In order to enable authorization, there should be an authorization proxy server already installed. 
+- In order to enable authorization, there should be an authorization proxy server already installed.
 - PowerMax Array username must have role as `StorageAdmin` to be able to perform CRUD operations.
 - If the user is using complex K8s version like “v1.24.3-mirantis-1”, use this kubeVersion check in [helm Chart](https://github.com/dell/helm-charts/blob/main/charts/csi-powermax/Chart.yaml) file. kubeVersion: “>= 1.24.0-0 < 1.29.0-0”.
 - User should provide all boolean values with double-quotes. This applies only for values.yaml. Example: “true”/“false”.
