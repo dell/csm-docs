@@ -22,7 +22,7 @@ CSM for Replication provides the following capabilities:
 | Asynchronous file volume replication                                                                                                |   no     |     no     |    yes     |    no     |  no   |
 | Asynchronous block volume replication                                                                                               |   yes    |    yes     |    n/a     |    yes    |  no   |
 | Synchronous file volume replication                                                                                                 |   no     |     no     |     no     |    no     |  no   |
-| Synchronous block volume replication                                                                                                |   yes    |     no     |    n/a     |    no     |  no   |
+| Synchronous block volume replication                                                                                                |   yes    |     yes    |    n/a     |    no     |  no   |
 | Active-Active (Metro) block volume replication                                                                                      |   yes    |     yes    |    n/a     |    no     |  no   |
 | Active-Active (Metro) file volume replication                                                                                       |   no     |     no     |     no     |    no     |  no   |
 | Create `PersistentVolume` objects in the cluster representing the replicated volume                                                 |   yes    |    yes     |    yes     |    yes    |  no   |
@@ -31,6 +31,8 @@ CSM for Replication provides the following capabilities:
 | Online Volume Expansion for replicated volumes                                                                                      |   yes    |     no     |     no     |    yes    |  no   |
 | Provides a command line utility - [repctl](tools) for configuring & managing replication related resources across multiple clusters |   yes    |    yes     |    yes     |    yes    |  no   |
 {{</table>}}
+
+> _**NOTE**_: To add or delete volumes to the existing SYNC Replication Group in PowerStore, the user needs to pause and then resume the replication group. For more details, please refer to the troubleshooting section.
 
 ## Details
 
