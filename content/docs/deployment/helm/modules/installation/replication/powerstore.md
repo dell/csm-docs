@@ -219,6 +219,12 @@ On your source cluster, create a PersistentVolumeClaim using one of the replicat
 The CSI PowerStore driver will create a volume on the array, add it to a VolumeGroup and configure replication
 using the parameters provided in the replication enabled Storage Class.
 
+>**NOTE**:  
+    To add or remove volumes in an existing SYNC Replication Group in PowerStore, first pause the replication group, add or delete the volume, and then resume the replication group.<br>
+    Use the following commands:<br>
+    > - Pause the replication group:  `repctl --rg <rg-id> exec -a suspend` 
+    > - Resume the replication group:   `repctl --rg <rg-id> exec -a resume`  
+
 ### Supported Replication Actions
 The CSI PowerStore driver supports the following list of replication actions:
 - FAILOVER_REMOTE
