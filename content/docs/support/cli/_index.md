@@ -28,8 +28,6 @@ This document outlines all dellctl commands, their intended use, options that ca
 | [dellctl schedule create for-backup](#dellctl-schedule-create-for-backup) | Create a schedule for application backups |
 | [dellctl schedule delete](#dellctl-schedule-delete) | Delete schedules |
 | [dellctl schedule get](#dellctl-schedule-get) | Get schedules |
-| [dellctl encryption rekey](#dellctl-encryption-rekey) | Rekey an encrypted volume |
-| [dellctl encryption rekey-status](#dellctl-encryption-rekey-status) | Get status of an encryption rekey operation |
 | [dellctl images](#dellctl-images) | List the container images needed by csi driver |
 | [dellctl volume get](#dellctl-volume-get) | Gets driver volume information for a given tenant on a local cluster |
 | [dellctl snapshot get](#dellctl-snapshot-get) | Gets driver snapshot information for a given tenant on a local cluster |
@@ -811,58 +809,17 @@ NAME          STATUS    CREATED                         PAUSED   SCHEDULE    LAS
 schedule1     Enabled   2022-11-04 08:33:35 +0000 UTC   false    @every 1h   NA
 ```
 
-### dellctl encryption rekey
 
-Encryption rekey with a name for the rekey object and volume name of an encrypted volume
-
-##### Flags
-
-```
-      --cluster-id string   Id of the cluster managed by dellctl
-  -h, --help                help for get
-```
+---
 
 
-##### Output
-
-
-```bash
-dellctl encryption rekey myrekey k8s-5d2cc565d4
-```
-```
- INFO rekey request "myrekey" submitted successfully for persistent volume "k8s-5d2cc565d4".
- INFO Run 'dellctl encryption rekey-status myrekey' for more details.
-```
-
-
-### dellctl encryption rekey-status
-
-Encryption rekey status with name of the rekey object
-
-##### Flags
-
-```
-      --cluster-id string   Id of the cluster managed by dellctl
-  -h, --help                help for get
-```
-
-
-##### Output
-
-
-```bash
-dellctl encryption rekey-status myrekey
-```
-```
- INFO Status of rekey request myrekey = completed
-```
 
 ### dellctl images
 
 List the container images needed by csm components
 
 **NOTE.**: 
-# Supported CSM Components
+#### Supported CSM Components
 [csi-vxflexos,csi-isilon,csi-powerstore,csi-unity,csi-powermax,csm-authorization]
 
 
@@ -938,6 +895,11 @@ dellemc/csm-authorization-sidecar:v1.7.0        k8s1.27,k8s1.26,k8s1.25         
                                                                                 ingress-nginx/kube-webhook-certgen:v20220916-gd32f8c343
 ```
 
+
+---
+
+
+
 ### dellctl volume get
 
 Gets the drivers volume information from the authorization proxy for a given tenant on a local cluster
@@ -968,6 +930,11 @@ tn1-k8s-82b35df793   c6c98e30000000d3   8.000000   pool1   636468e3638c840f     
 tn1-k8s-e0e7958ee0   c6cf35ba000001a3   8.000000   pool1   636468e3638c840f   k8s-e0e7958ee0   Bound       vxflexos        pvol-vxflexos           default              2
 tn1-k8s-bc83d4c626   c6cf35c1000001a1   8.000000   pool1   636468e3638c840f   k8s-bc83d4c626   Bound       vxflexos        vol-create-test-xbgnr   snap-test-057de678   3
 ```
+
+
+---
+
+
 
 ### dellctl snapshot get
 
@@ -1003,6 +970,11 @@ tn1-sn-2d1580a4-60ec-4082-8234-   c6cf35bc000001a6   8.000000   pool1   636468e3
 
 ```
 
+
+---
+
+
+
 ### dellctl admin token
 
 Generate an administrator token for administrating CSM Authorization v2
@@ -1030,6 +1002,11 @@ dellctl admin token -n <administrator-name> --jwt-signing-secret <signing-secret
   "Refresh": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJjc20iLCJleHAiOjE3MjMzMDE0NTcsImdyb3VwIjoiYWRtaW4iLCJpc3MiOiJjb20uZGVsbC5jc20iLCJyb2xlcyI6IiIsInN1YiI6ImNzbS1hZG1pbiJ9.MJ9ajrB-nLEQKdAA-H8n78kS9QiX1yW_-m7K4Tmu7Mg"
 }
 ```
+
+
+---
+
+
 
 ### dellctl generate token
 
