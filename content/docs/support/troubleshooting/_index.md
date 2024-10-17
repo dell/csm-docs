@@ -10,7 +10,9 @@ Troubleshooting links for Container Storage Modules:
 
 [CSI Drivers](../../concepts/csidriver/troubleshooting)
 
-[Authorization](../../concepts/authorization/v1.x-ga/troubleshooting)
+[Authorization v1.x](../../concepts/authorization/v1.x/troubleshooting)
+
+[Authorization v2.x](../../concepts/authorization/v2.x/troubleshooting)
 
 [Observability](../../concepts/observability/troubleshooting)
 

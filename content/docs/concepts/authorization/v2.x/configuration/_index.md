@@ -1,9 +1,11 @@
 ---
-title: Proxy Server
-linktitle: Proxy Server
-description: >
-  Configuring the CSM for Authorization Proxy Server
+title: Configuration
+linktitle: Configuration
+weight: 2
+description: Configure CSM Authorization Proxy Server
 ---
+
+This section provides the details and instructions on how to configure CSM Authorization.
 
 ## Configuring the CSM for Authorization Proxy Server
 
@@ -51,16 +53,16 @@ The storage types supported are `powerflex`, `powermax`, and `powerscale`. Durin
 
 A `storage` entity in CSM Authorization consists of the storage type (`powerflex`, `powermax` or `powerscale`), the system ID, the API endpoint, and the vault credentials path. Edit these parameters in the manifest:
 
-   | Parameter | Description | Required | Default |
-   | --------- | ----------- | -------- |-------- |
-   | type | The type of the stoage array. | Yes | - |
-   | endpoint | HTTPS REST API endpoint of the backend storage array. | Yes | - |
-   | systemID | System ID of the backend storage array. | Yes | - |
-   | vault.identifier | The identifier of the Vault to be used that was configured in the Authorization CR. | Yes | - |
-   | vault.kvEngine | The path to the KV secrets engine. | Yes | secret |
-   | vault.path | The location within the store that the credentials for the array are stored. | Yes | - |
-   | skipCertificateValidation | A boolean that enables/disables certificate validation of the backend storage array. | No | true |
-   | pollInterval | PollInterval is the polling frequency to test the storage connectivity. | No | 30s |
+   | Parameter                 | Description                                                                          | Required | Default |
+   | ------------------------- | ------------------------------------------------------------------------------------ | -------- | ------- |
+   | type                      | The type of the stoage array.                                                        | Yes      | -       |
+   | endpoint                  | HTTPS REST API endpoint of the backend storage array.                                | Yes      | -       |
+   | systemID                  | System ID of the backend storage array.                                              | Yes      | -       |
+   | vault.identifier          | The identifier of the Vault to be used that was configured in the Authorization CR.  | Yes      | -       |
+   | vault.kvEngine            | The path to the KV secrets engine.                                                   | Yes      | secret  |
+   | vault.path                | The location within the store that the credentials for the array are stored.         | Yes      | -       |
+   | skipCertificateValidation | A boolean that enables/disables certificate validation of the backend storage array. | No       | true    |
+   | pollInterval              | PollInterval is the polling frequency to test the storage connectivity.              | No       | 30s     |
 
 For example, to create PowerFlex storage:
 
@@ -81,20 +83,20 @@ spec:
   pollInterval: 30s
 ```
 
->__Note__: 
+>__Note__:
 > - The `systemID` can vary from storage type to storage type. Please contact the storage administrator for more details on how to obtain it.
 
 ### Configuring Roles
 
 A `role` consists of a name, the storage array to use, and the quota limit for the storage pool to be used. Edit these parameters in the manifest:
 
-   | Parameter | Description | Required | Default |
-   | --------- | ----------- | -------- |-------- |
-   | name | The name of the role that will be used to bind with the tenant. | Yes | - |
-   | quota | The amount of allocated space for the specified role. | Yes | - |
-   | systemID | System ID of the backend storage array. | Yes | - |
-   | systemType | The type of the stoage array. | Yes | - |
-   | pool | The storage pool name. | Yes | - |
+   | Parameter  | Description                                                     | Required | Default |
+   | ---------- | --------------------------------------------------------------- | -------- | ------- |
+   | name       | The name of the role that will be used to bind with the tenant. | Yes      | -       |
+   | quota      | The amount of allocated space for the specified role.           | Yes      | -       |
+   | systemID   | System ID of the backend storage array.                         | Yes      | -       |
+   | systemType | The type of the stoage array.                                   | Yes      | -       |
+   | pool       | The storage pool name.                                          | Yes      | -       |
 
 For example, to create a role named `role1` using the PowerFlex storage created above with a quota limit of 128iB in storage pool `myStoragePool`:
 
@@ -116,19 +118,19 @@ spec:
   pool: myStoragePool
 ```
 
->__Note__: 
+>__Note__:
 > - The `quota` must be set with iB (TiB/GiB etc). Example: 10 TiB or 512 GiB. If it is not, the quota enforcement will be inaccurate
 
 ### Configuring Tenants
 
 A `tenant` is a Kubernetes cluster that a role will be bound to. Edit these parameters in the manifest:
 
-   | Parameter | Description | Required | Default |
-   | --------- | ----------- | -------- |-------- |
-   | roles | A comma seperate list of roles that the tenant can be associated with. | Yes | - |
-   | approveSdc | ApproveSdc is used to enable an SDC to access the MDM while the SDC is in restricted access mode. | Yes | false |
-   | revoke | Revoke is a boolean to indicate whether tenant is revoked. Set to `true` to revoke the tenant but keep it in CSM Auth. | Yes | false |
-   | volumePrefix | The prefix that all volumes and snapshots will contain to show association with the tenant. It should not exceed 3 characters. | Yes | - |
+   | Parameter    | Description                                                                                                                    | Required | Default |
+   | ------------ | ------------------------------------------------------------------------------------------------------------------------------ | -------- | ------- |
+   | roles        | A comma seperate list of roles that the tenant can be associated with.                                                         | Yes      | -       |
+   | approveSdc   | ApproveSdc is used to enable an SDC to access the MDM while the SDC is in restricted access mode.                              | Yes      | false   |
+   | revoke       | Revoke is a boolean to indicate whether tenant is revoked. Set to `true` to revoke the tenant but keep it in CSM Auth.         | Yes      | false   |
+   | volumePrefix | The prefix that all volumes and snapshots will contain to show association with the tenant. It should not exceed 3 characters. | Yes      | -       |
 
 For example, to create a tenant named `csmtenant-sample`:
 
@@ -187,7 +189,7 @@ type: Opaque
 
 This secret must be applied in the driver namespace.
 
->__Note__: 
+>__Note__:
 > - The `insecure` flag specifies to skip certificate validation when connecting to the Authorization proxy-server.
 > - The `addr` flag is the address of the Authorization proxy-server.
 > - The `tenant` flag specifies which tenant to generate the token for.

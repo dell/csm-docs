@@ -8,14 +8,14 @@ weight: 1
 ## Supported Storage Platforms
 
 {{<table "table table-striped table-bordered table-sm">}}
-| Platform      | Version          | OS Dependencies          |
-|---------------|:----------------:|:------------------------:|
-| PowerMax    | PowerMax 2500/8500 PowerMaxOS 10 (6079)<br>PowerMaxOS 10.0.1 (6079)<br>PowerMaxOS 10.1 (6079)<br>PowerMax 2000/8000 - 5978.711.711, 5978.714.714<br>5978.479.479<br>Unisphere 10.0,10.0.1,10.1 | iscsi-initiator-utils<br>multipathd or powerpath<br>nvme-cli<br>nfs-utils |
-| PowerFlex | 3.6.x, 4.5.x, 4.6.x | [SDC](https://www.dell.com/support/home/en-us/product-support/product/scaleio/drivers)|
-| Unity XT | 5.2.x, 5.3.0, 5.4.x  | iscsi-initiator-utils<br>multipathd<br>nfs-utils |
-| PowerScale | OneFS 9.4, 9.5.0.x (x >= 5), 9.7 | nfs-utils |
-| PowerStore  | 3.0, 3.2, 3.5, 3.6 | iscsi-initiator-utils<br>multipathd<br>nvme-cli<br>nfs-utils |
-| ObjectScale | 1.2.x | - |
+| Platform    |                                                                                            Version                                                                                             |                                    OS Dependencies                                     |
+| ----------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------: |
+| PowerMax    | PowerMax 2500/8500 PowerMaxOS 10 (6079)<br>PowerMaxOS 10.0.1 (6079)<br>PowerMaxOS 10.1 (6079)<br>PowerMax 2000/8000 - 5978.711.711, 5978.714.714<br>5978.479.479<br>Unisphere 10.0,10.0.1,10.1 |       iscsi-initiator-utils<br>multipathd or powerpath<br>nvme-cli<br>nfs-utils        |
+| PowerFlex   |                                                                                      3.6.x, 4.5.x, 4.6.x                                                                                       | [SDC](https://www.dell.com/support/home/en-us/product-support/product/scaleio/drivers) |
+| Unity XT    |                                                                                      5.2.x, 5.3.0, 5.4.x                                                                                       |                    iscsi-initiator-utils<br>multipathd<br>nfs-utils                    |
+| PowerScale  |                                                                                OneFS 9.4, 9.5.0.x (x >= 5), 9.7                                                                                |                                       nfs-utils                                        |
+| PowerStore  |                                                                                       3.0, 3.2, 3.5, 3.6                                                                                       |              iscsi-initiator-utils<br>multipathd<br>nvme-cli<br>nfs-utils              |
+| ObjectScale |                                                                                             1.2.x                                                                                              |                                           -                                            |
 {{</table>}}
 
 > Notes:
@@ -27,8 +27,8 @@ weight: 1
 {{<table "table table-striped table-bordered table-sm">}}
 | Platform                   | Version          |
 |----------------------------|:----------------:|
-| Kubernetes                 | 1.28, 1.29, 1.30 |
-| Red Hat OpenShift          | 4.15, 4.16       |
+| Kubernetes                 | 1.29, 1.30, 1.31 |
+| Red Hat OpenShift          | 4.16, 4.17       |
 | Mirantis Kubernetes Engine | 3.7.x            |
 | Google Anthos              | 1.15             |
 | Rancher Kubernetes Engine  | 1.4.x            |
@@ -48,49 +48,48 @@ Container Storage Modules (CSM) does not officially support specific operating s
 - SLES 15SP5
 - Ubuntu 22.04
 
-> Notes: 
+> Notes:
 > * The host operating system/version being used must align with what each Dell Storage platform supports. Please visit [E-Lab Navigator](https://elabnavigator.dell.com/eln/modernHomeSSM) for specific Dell Storage platform host operating system level support matrices.
 > * Any operating system or version that's not mentioned here must be self-certified using [Cert-CSI](../support/cert-csi/) in order to be supported. Although not mandatory, we recommend users to use operating systems and versions that have not met their end of life.
 
 ## Supported Container Storage Modules
 
 {{<table "table table-striped table-bordered table-sm">}}
-| Container Storage Modules                                 | PowerMax | PowerFlex | Unity XT | PowerScale | PowerStore |
-|-----------------------------------------------------------|:--------:|:---------:|:--------:|:----------:|:----------:|
-| [Authorization - v1.x GA](../authorization/)              | Yes      | Yes       | No       | Yes        | No         |
-| [Authorization - v2.0 Tech Preview](../authorization/)    | No       | Yes       | No       | No         | No         |
-| [Observability](../observability/)                        | Yes      | Yes       | No       | Yes        | Yes        |
-| [Replication](../replication/)                            | Yes      | Yes       | No       | Yes        | Yes        |
-| [Resiliency](../resiliency/)                              | Yes      | Yes       | Yes      | Yes        | Yes        |
-| [Encryption](../secure/encryption/)                       | No       | No        | No       | Yes        | No         |
-| [Application Mobility](../applicationmobility/)           | Yes      | No        | No       | No         | No         |
-| [Volume Group Snapshot](../snapshots/volume-group-snapshots/) | No       | Yes       | No       | No         | Yes    |
+| CSM Module                                                    | PowerMax | PowerFlex | Unity XT | PowerScale | PowerStore |
+| ------------------------------------------------------------- | :------: | :-------: | :------: | :--------: | :--------: |
+| [ Authorization - v1.x](../authorization/)                 |   Yes    |    Yes    |    No    |    Yes     |     No     |
+| [ Authorization - v2.x](../authorization/)                 |   Yes    |    Yes    |    No    |    Yes     |     No     |
+| [ Observability](../observability/)                        |   Yes    |    Yes    |    No    |    Yes     |    Yes     |
+| [ Replication](../replication/)                            |   Yes    |    Yes    |    No    |    Yes     |    Yes     |
+| [ Resiliency](../resiliency/)                              |   Yes    |    Yes    |   Yes    |    Yes     |    Yes     |
+| [ Encryption](../secure/encryption/)                       |    No    |    No     |    No    |    Yes     |     No     |
+| [ Application Mobility](../applicationmobility/)           |   Yes    |    No     |    No    |     No     |     No     |
+| [Volume Group Snapshot](../snapshots/volume-group-snapshots/) |    No    |    Yes    |    No    |     No     |    Yes     |
 
 {{</table>}}
 
 > Notes:
 > * Encryption is available as a Technical Preview only and is not officially supported.
-> * Authorization v2.0 is available as a Technical Preview only on PowerFlex.
 
 ## Container Storage Module Operator compatibility matrix
 
 The table below lists the driver and modules versions installable with the Container Storage Modules Operator:
 {{<table "table table-striped table-bordered table-sm">}}
-| CSI Driver         | Version | Authorization     | Replication     | Observability     | Resiliency     |
-| ------------------ |---------|-------------------|-----------------|-------------------|----------------|
-|  PowerScale     | 2.11.0  | ✔ 1.11.0          | ✔ 1.9.0        | ✔ 1.9.0           | ✔ 1.10.0      |
-|  PowerScale     | 2.10.1  | ✔ 1.10.1          | ✔ 1.8.1        | ✔ 1.8.1           | ✔ 1.9.1       |
-|  PowerScale     | 2.9.1   | ✔ 1.9.1           | ✔ 1.7.1        | ✔ 1.7.0           | ✔ 1.8.1       |
-|  PowerFlex      | 2.12.0  | ✔ 1.12.0          | ✔ 1.10.0       | ✔ 1.10.0          | ✔ 1.11.0      |
-|  PowerFlex      | 2.11.0  | ✔ 1.11.0          | ✔ 1.9.0        | ✔ 1.9.0           | ✔ 1.10.0      |
-|  PowerFlex      | 2.10.1  | ✔ 1.10.1          | ✔ 1.8.1        | ✔ 1.8.1           | ✔ 1.9.1       |
-|  PowerStore     | 2.11.0  | ❌                | ❌             | ❌                | ✔ 1.10.0      |
-|  PowerStore     | 2.10.1  | ❌                | ❌             | ❌                | ✔ 1.9.1       |
-|  PowerStore     | 2.9.1   | ❌                | ❌             | ❌                | ✔ 1.8.1       |
-|  PowerMax       | 2.11.0  | ✔ 1.11.0          | ✔ 1.9.0        | ✔ 1.9.0           | ✔ 1.10.0      |
-|  PowerMax       | 2.10.1  | ✔ 1.10.1          | ✔ 1.8.1        | ✔ 1.8.1           | ❌            |
-|  PowerMax       | 2.9.1   | ✔ 1.9.1           | ✔ 1.7.1        | ✔ 1.7.0           | ❌            |
-|  Unity XT       | 2.12.0  | ❌                | ❌             | ❌                | ❌            |
-|  Unity XT       | 2.11.0  | ❌                | ❌             | ❌                | ❌            |
-|  Unity XT       | 2.10.1  | ❌                | ❌             | ❌                | ❌            |
+| CSI Driver         | Version | CSM Authorization 1.x.x , 2.x.x | CSM Replication | CSM Observability | CSM Resiliency |
+| ------------------ |---------|---------------------------------|-----------------|-------------------|----------------|
+|  PowerScale     | 2.12.0  | ✔ 1.12.0  , 2.0.0              | ✔ 1.10.0       | ✔ 1.10.0          | ✔ 1.11.0      |
+|  PowerScale     | 2.11.0  | ✔ 1.11.0  , ❌             | ✔ 1.9.0        | ✔ 1.9.0           | ✔ 1.10.0      |
+|  PowerScale     | 2.10.1  | ✔ 1.10.1  , ❌             | ✔ 1.8.1        | ✔ 1.8.1           | ✔ 1.9.1       |
+|  PowerFlex      | 2.12.0  | ✔ 1.12.0  , 2.0.0           | ✔ 1.10.0       | ✔ 1.10.0          | ✔ 1.11.0      |
+|  PowerFlex      | 2.11.0  | ✔ 1.11.0  , ❌             | ✔ 1.9.0        | ✔ 1.9.0           | ✔ 1.10.0      |
+|  PowerFlex      | 2.10.1  | ✔ 1.10.1  , ❌             | ✔ 1.8.1        | ✔ 1.8.1           | ✔ 1.9.1       |
+|  PowerStore     | 2.12.0  | ❌ , ❌                    | ❌             | ❌                | ✔ 1.11.0      |
+|  PowerStore     | 2.11.1  | ❌ , ❌                    | ❌             | ❌                | ✔ 1.10.0      |
+|  PowerStore     | 2.10.1  | ❌ , ❌                    | ❌             | ❌                | ✔ 1.9.1       |
+|  PowerMax       | 2.12.0  | ✔ 1.12.0  , 2.0.0           | ✔ 1.10.0       | ✔ 1.10.0          | ✔ 1.11.0      |
+|  PowerMax       | 2.11.0  | ✔ 1.11.0  , ❌             | ✔ 1.9.0        | ✔ 1.9.0           | ✔ 1.10.0      |
+|  PowerMax       | 2.10.1  | ✔ 1.10.1  , ❌             | ✔ 1.8.1        | ✔ 1.8.1           | ❌            |
+|  Unity XT       | 2.12.0  | ❌ , ❌                    | ❌             | ❌                | ❌            |
+|  Unity XT       | 2.11.1  | ❌ , ❌                    | ❌             | ❌                | ❌            |
+|  Unity XT       | 2.10.1  | ❌ , ❌                    | ❌             | ❌                | ❌            |
 {{</table>}}
