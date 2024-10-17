@@ -6,11 +6,33 @@ linkTitle = "Dell Technologies"
 .td-card-group{
   max-width:100% !important;
 } 
+.video-container {
+    position: relative;
+    padding-bottom: 30%; /* Adjust this value to change the aspect ratio */
+    height: 0;
+    overflow: hidden;
+    max-width: 55%; /* Adjust this value to change the width */
+    background: #000;
+    margin: 0 auto; /* Center the video */
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
 </style>
-{{< blocks/cover title="Welcome to Dell Technologies Container Storage Modules documentation!" image_anchor="top" height="min" color="primary" >}}
+
+
+{{< blocks/cover title="Container Storage Modules documentation" image_anchor="top" height="min" color="primary" >}}
 <div class="mx-auto">
         <a class="btn btn-lg btn-primary me-3 mb-4" href="/csm-docs/docs/">
-                Learn More <i class="fas fa-arrow-alt-circle-right ms-2"></i>
+                Getting Started <i class="fas fa-arrow-alt-circle-right ms-2"></i>
+        </a> 
+        <a class="btn btn-lg btn-primary me-3 mb-4" href="/csm-docs/docs/support/contributionguidelines/">
+            Contribute <i class="fas fa-pencil ms-2"></i>
         </a>
 </div>
 {{< /blocks/cover >}}
@@ -69,7 +91,16 @@ linkTitle = "Dell Technologies"
                 </div>
             </div> 
 
+            <div class="row"> 
+                <div class="col-12 justify-content-center" > 
+                
+                    <div class="video-container">
+                    <iframe  src="https://www.youtube.com/embed/OBlb25Kw20Q?list=PL2nlzNk2-VMHsKVguetbetbmxd4eMfc_X" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div> 
+               
+
+                </div>
+            </div>
+
         </div>
 </div>
-
-
