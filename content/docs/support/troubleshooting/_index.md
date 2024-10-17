@@ -20,6 +20,4 @@ Troubleshooting links for Container Storage Modules:
 
 [CSM for Resiliency](../../resiliency/troubleshooting)
 
-[CSM for Encryption](../../secure/encryption/troubleshooting)
-
 [CSM Operator](../../deployment/csmoperator/troubleshooting)
