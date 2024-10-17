@@ -10,14 +10,14 @@ Troubleshooting links for Container Storage Modules:
 
 [CSI Drivers](../../concepts/csidriver/troubleshooting)
 
-[CSM for Authorization](../../concepts/authorization/v1.x-ga/troubleshooting)
+[Authorization](../../concepts/authorization/v1.x-ga/troubleshooting)
 
-[CSM for Observability](../../concepts/observability/troubleshooting)
+[Observability](../../concepts/observability/troubleshooting)
 
-[CSM for Replication](../../concepts/replication/troubleshooting)
+[Replication](../../concepts/replication/troubleshooting)
 
-[CSM for Resiliency](../../concepts/resiliency/troubleshooting)
+[Resiliency](../../concepts/resiliency/troubleshooting)
 
-[CSM for Encryption](../../concepts/secure/encryption/troubleshooting)
+[Encryption](../../concepts/secure/encryption/troubleshooting)
 
-[CSM Operator](../../concepts/deployment/csmoperator/troubleshooting)
+[Operator](../../concepts/deployment/csmoperator/troubleshooting)

@@ -18,7 +18,7 @@ When deprecating a CLI command, a warning message must be displayed each time th
 
 ### Deprecating an API, Feature, or Behavior
 
-CSM features must function after their announced deprecation for no less than two releases. This includes when the releases become Generally Available (GA), including both major or minor release versions. 
+Container Storage Modules features must function after their announced deprecation for no less than two releases. This includes when the releases become Generally Available (GA), including both major or minor release versions. 
 
 ### Tech Previews
 
@@ -26,6 +26,6 @@ Features released as tech preview are not supported and therefore are not intend
 
 ### Required Deprecation Notice
 
-CSM documentation for the release in which the deprecation is being announced must include deprecation details along with the release in which the item(s) being deprecated will be removed.
+Container Storage Modules documentation for the release in which the deprecation is being announced must include deprecation details along with the release in which the item(s) being deprecated will be removed.
 
 In addition, the changelog and release notes for the release in which the deprecation is being announced must contain a section titled "Important Deprecation Information".  In this section, the deprecation details must be provided along with the release in which the item(s) being deprecated will be removed.
