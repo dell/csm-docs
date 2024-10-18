@@ -17,7 +17,6 @@ The following are requirements to be met before installing the CSI Driver for De
 - If enabling CSM for Authorization, please refer to the [Authorization deployment steps](../../../../../deployment/helm/modules/installation/authorization-v2.0/) first
 - If enabling CSM for Replication, please refer to the [Replication deployment steps](../../../../../deployment/helm/modules/installation/replication/) first
 - If enabling CSM for Resiliency, please refer to the [Resiliency deployment steps](../../../../../deployment/helm/modules/installation/resiliency/) first
-- If enabling Encryption, please refer to the [Encryption deployment steps](../../../../../deployment/helm/modules/installation/encryption/) first
 
 ### Install Helm 3.0
 
@@ -155,8 +154,6 @@ CRDs should be configured during replication prepare stage with repctl as descri
    | skipCertificateValidation | A boolean that enables/disables certificate validation of the csm-authorization proxy server. | No | true |
    | **podmon**               | [Podmon](../../../../../deployment/helm/modules/installation/resiliency/) is an optional feature to enable application pods to be resilient to node failure.  |  -        |  -       |
    | enabled                  | A boolean that enables/disables podmon feature. |  No      |   false   |
-   | **encryption** | [Encryption](.../../../../../modules/installation/encryption/) is an optional feature to apply encryption to CSI volumes. | - | - |
-   | enabled        | A boolean that enables/disables Encryption feature. | No | false |
 
    *NOTE:*
 

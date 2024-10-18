@@ -59,10 +59,3 @@ The Container Storage Modules and the required CSI Drivers can each be deployed 
    [...More on installation instructions](helm/modules/installation/replication)
   {{< /card >}}
 {{% /cardpane %}}
-{{% cardpane %}}
-  {{< card header="[Dell Container Storage Module for Encryption](helm/modules/installation/encryption)"
-          footer="Installs Encryption Module">}}
-  Encryption can be optionally installed via the PowerScale CSI driver Helm chart.
-   [...More on installation instructions](helm/modules/installation/encryption)
-  {{< /card >}}
-{{% /cardpane %}}
