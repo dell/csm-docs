@@ -40,7 +40,7 @@ Dell CSM Operator can be installed manually or via Operator Hub.
 Once installed you will be able to deploy [drivers](drivers) and [modules](modules) from the Operator.
 
 ### OpenShift Installation via Operator Hub
->NOTE: You cannot update the resource requests and limits when you are deploying operator using Operator Hub
+>NOTE: You can update the resource requests and limits when you are deploying operator using Operator Hub
 
 `dell-csm-operator` can be installed via Operator Hub on upstream Kubernetes clusters & Red Hat OpenShift Clusters.
 
