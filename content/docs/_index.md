@@ -13,7 +13,7 @@ no_list: true
 The CSM Authorization RPM will be deprecated in a future release. It is highly recommended that you use CSM Authorization Helm deployment or CSM Operator going forward.
 {{% /pageinfo %}}
 
-The Dell Technologies (Dell) Container Storage Modules (CSM) enables simple and consistent integration and automation experiences, extending enterprise storage capabilities to Kubernetes for cloud-native stateful applications. It reduces management complexity so developers can independently consume enterprise storage with ease and automate daily operations such as provisioning, snapshotting, replication, observability, authorization, application mobility, encryption, and resiliency.
+The Dell Technologies (Dell) Container Storage Modules (CSM) enables simple and consistent integration and automation experiences, extending enterprise storage capabilities to Kubernetes for cloud-native stateful applications. It reduces management complexity so developers can independently consume enterprise storage with ease and automate daily operations such as provisioning, snapshotting, replication, observability, authorization, application mobility and resiliency.
 
 <img src="csm_hexagon.png" alt="CSM Hex Diagram" width="500"/>
 
@@ -50,18 +50,5 @@ CSM is made up of multiple components including modules (enterprise capabilities
           footer="Supports [PowerFlex](csidriver/features/powerflex/) via Apex Navigator for Kubernetes">}}
   Container Storage Modules for Application Mobility provide Kubernetes administrators the ability to clone their stateful application workloads and application data to other clusters in the cloud.
   [...Learn more](applicationmobility/)
-  {{< /card >}}
-   {{< card header="[**Encryption**](secure/encryption)"
-          footer="Supports PowerScale">}}
-  Encryption provides the capability to encrypt user data residing on volumes created by Dell CSI Drivers.
-   [...Learn more](secure/encryption/)
-  {{< /card >}}
-{{% /cardpane %}}
-{{% cardpane %}}
-   {{< card header="[License](support/license/)"
-          footer="Required for [Encryption](secure/encryption/)">}}
-  The tech-preview releases of Encryption require a license.
-  Request a license using the [Container Storage Modules License Request](https://app.smartsheet.com/b/form/5e46fad643874d56b1f9cf4c9f3071fb) by providing the requested details.
-   [...Learn more](support/license/)
   {{< /card >}}
 {{% /cardpane %}}
