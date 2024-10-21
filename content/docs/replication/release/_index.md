@@ -19,14 +19,14 @@ Description: >
 
 
 
+
 ### New Features/Changes
 
-- [#1359 - [FEATURE]: Add Support for OpenShift Container Platform (OCP) 4.16 ](https://github.com/dell/csm/issues/1359)
-- [#1400 - [FEATURE]: Support for Kubernetes 1.30](https://github.com/dell/csm/issues/1400)
+- [#1443 - [FEATURE]: PowerStore Sync / Metro for Block - CSM Replication](https://github.com/dell/csm/issues/1443)
+- [#1472 - [FEATURE]: Support for Kubernetes 1.31](https://github.com/dell/csm/issues/1472)
+- [#1473 - [FEATURE]: Add Support for OpenShift Container Platform (OCP) 4.17](https://github.com/dell/csm/issues/1473)
 
 ### Fixed Issues
 
-- [#1330 - [BUG]: CSM Replication repctl not supporting static build on OpenSUSE](https://github.com/dell/csm/issues/1330)
-- [#1385 - [BUG]: Enable static build of repctl](https://github.com/dell/csm/issues/1385)
-
+There are no issues fixed in this release.
 ### Known Issues
