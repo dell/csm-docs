@@ -20,7 +20,7 @@ Please submit your test results for our review [here](https://github.com/dell/cs
 There are three methods of installing `cert-csi`.
 
 1. [Download the executable from the latest GitHub release](#download-release-linux).
-2. [Pull the container image from DockerHub](#pull-the-container-image).
+2. [Pull the container image from quay.io](#pull-the-container-image).
 3. [Build the exectuable or container image locally](#building-locally).
 
 > The exectuable from the GitHub Release only supports Linux. For non-Linux users, you must build the `cert-csi` executable [locally](#building-locally).
@@ -59,12 +59,12 @@ mv ./cert-csi-linux-amd64 ~/.local/bin/cert-csi
 
    {{< tabpane name="pulling-cert-csi-image" lang="bash">}}
    {{<tab header="Docker" >}}
-      docker pull dellemc/cert-csi:v1.5.0
+      docker pull quay.io/dell/container-storage-modules/cert-csi:v1.6.0
 
    {{</tab >}}
    {{<tab header="Podman" >}}
 
-      podman pull dellemc/cert-csi:v1.5.0
+      podman pull quay.io/dell/container-storage-modules/cert-csi:v1.6.0
 
    {{</tab >}}
    {{< /tabpane >}}
@@ -113,10 +113,10 @@ make install-ms
    cert-csi --help
 {{</tab >}}
 {{<tab header="Docker" >}}
-   docker run --rm -it -v ~/.kube/config:/root/.kube/config dellemc/cert-csi:v1.5.0 --help
+   docker run --rm -it -v ~/.kube/config:/root/.kube/config quay.io/dell/container-storage-modules/cert-csi:v1.6.0 --help
 {{</tab >}}
 {{<tab header="Podman" >}}
-   podman run --rm -it -v ~/.kube/config:/root/.kube/config dellemc/cert-csi:v1.5.0 --help
+   podman run --rm -it -v ~/.kube/config:/root/.kube/config quay.io/dell/container-storage-modules/cert-csi:v1.6.0 --help
 
 {{</tab >}}
 {{< /tabpane >}}
@@ -372,10 +372,10 @@ If you are using the container image, the `cert-config` file must be mounted int
 
 {{< tabpane name="running-container-certify" lang="bash">}}
 {{<tab header="Docker" >}}
-   docker run --rm -it -v ~/.kube/config:/root/.kube/config -v /home/user/example-certify-config.yaml:/example-certify-config.yaml dellemc/cert-csi:v1.5.0 certify --cert-config /example-certify-config.yaml --vsc <volume-snapshot-class>
+   docker run --rm -it -v ~/.kube/config:/root/.kube/config -v /home/user/example-certify-config.yaml:/example-certify-config.yaml quay.io/dell/container-storage-modules/cert-csi:v1.6.0 certify --cert-config /example-certify-config.yaml --vsc <volume-snapshot-class>
 {{</tab >}}
 {{<tab header="Podman" >}}
-   podman run --rm -it -v ~/.kube/config:/root/.kube/config -v /home/user/example-certify-config.yaml:/example-certify-config.yaml dellemc/cert-csi:v1.5.0 certify --cert-config /example-certify-config.yaml --vsc <volume-snapshot-class>
+   podman run --rm -it -v ~/.kube/config:/root/.kube/config -v /home/user/example-certify-config.yaml:/example-certify-config.yaml quay.io/dell/container-storage-modules/cert-csi:v1.6.0 certify --cert-config /example-certify-config.yaml --vsc <volume-snapshot-class>
 {{</tab >}}
 {{< /tabpane >}}
 
@@ -565,10 +565,10 @@ If you are using the container image, the `attr` file must be mounted into the c
 
 {{< tabpane name="running-container-ephemeral-volume" lang="bash">}}
 {{<tab header="Docker" >}}
-   docker run --rm -it -v ~/.kube/config:/root/.kube/config -v /home/user/ephemeral-config.properties:/ephemeral-config.properties dellemc/cert-csi:v1.5.0 test ephemeral-volume --driver <driver-name> --attr /ephemeral-config.properties
+   docker run --rm -it -v ~/.kube/config:/root/.kube/config -v /home/user/ephemeral-config.properties:/ephemeral-config.properties quay.io/dell/container-storage-modules/cert-csi:v1.6.0 test ephemeral-volume --driver <driver-name> --attr /ephemeral-config.properties
 {{</tab >}}
 {{<tab header="Podman" >}}
-   podman run --rm -it -v ~/.kube/config:/root/.kube/config -v /home/user/ephemeral-config.properties:/ephemeral-config.properties dellemc/cert-csi:v1.5.0 test ephemeral-volume --driver <driver-name> --attr /ephemeral-config.properties
+   podman run --rm -it -v ~/.kube/config:/root/.kube/config -v /home/user/ephemeral-config.properties:/ephemeral-config.properties quay.io/dell/container-storage-modules/cert-csi:v1.6.0 test ephemeral-volume --driver <driver-name> --attr /ephemeral-config.properties
 
 {{</tab >}}
 {{< /tabpane >}}
