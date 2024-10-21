@@ -57,19 +57,16 @@ Container Storage Modules (CSM) does not officially support specific operating s
 {{<table "table table-striped table-bordered table-sm">}}
 | CSM Module                                                    | PowerMax | PowerFlex | Unity XT | PowerScale | PowerStore |
 | ------------------------------------------------------------- | :------: | :-------: | :------: | :--------: | :--------: |
-| [ Authorization - v1.x](../authorization/)                 |   Yes    |    Yes    |    No    |    Yes     |     No     |
-| [ Authorization - v2.x](../authorization/)                 |   Yes    |    Yes    |    No    |    Yes     |     No     |
-| [ Observability](../observability/)                        |   Yes    |    Yes    |    No    |    Yes     |    Yes     |
-| [ Replication](../replication/)                            |   Yes    |    Yes    |    No    |    Yes     |    Yes     |
-| [ Resiliency](../resiliency/)                              |   Yes    |    Yes    |   Yes    |    Yes     |    Yes     |
-| [ Encryption](../secure/encryption/)                       |    No    |    No     |    No    |    Yes     |     No     |
-| [ Application Mobility](../applicationmobility/)           |   Yes    |    No     |    No    |     No     |     No     |
+| [Authorization - v1.x](../authorization/)                 |   Yes    |    Yes    |    No    |    Yes     |     No     |
+| [Authorization - v2.x](../authorization/)                 |   Yes    |    Yes    |    No    |    Yes     |     No     |
+| [Observability](../observability/)                        |   Yes    |    Yes    |    No    |    Yes     |    Yes     |
+| [Replication](../replication/)                            |   Yes    |    Yes    |    No    |    Yes     |    Yes     |
+| [Resiliency](../resiliency/)                              |   Yes    |    Yes    |   Yes    |    Yes     |    Yes     |
+| [Application Mobility](../applicationmobility/)           |   Yes    |    No     |    No    |     No     |     No     |
 | [Volume Group Snapshot](../snapshots/volume-group-snapshots/) |    No    |    Yes    |    No    |     No     |    Yes     |
 
 {{</table>}}
 
-> Notes:
-> * Encryption is available as a Technical Preview only and is not officially supported.
 
 ## Container Storage Module Operator compatibility matrix
 
