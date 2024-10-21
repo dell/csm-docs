@@ -1,6 +1,6 @@
 ---
-title: Authorization
-linktitle: Authorization
+title: Authorization v1.x
+linktitle: "Authorization v1.x"
 description: >
   Dell Technologies (Dell) Container Storage Modules (CSM) for Authorization RPM deployment
 ---
@@ -41,7 +41,7 @@ The container-selinux RPMs for CentOS/RedHat 7 and 8 can be downloaded from [htt
 
 ## Deploying the CSM Authorization Proxy Server
 
-The first part of deploying CSM for Authorization is installing the proxy server.  This activity and the administration of the proxy server will be owned by the storage administrator. 
+The first part of deploying CSM for Authorization is installing the proxy server.  This activity and the administration of the proxy server will be owned by the storage administrator.
 
 The CSM for Authorization proxy server is installed using a shell script after extracting from a tar archive.
 
@@ -49,7 +49,7 @@ If CSM for Authorization is being installed on a system where SELinux is enabled
 
 ### Shell Script Installer
 
-The easiest way to obtain the tar archive with the shell script installer is directly from the [GitHub repository's releases](https://github.com/dell/karavi-authorization/releases) section.  
+The easiest way to obtain the tar archive with the shell script installer is directly from the [GitHub repository's releases](https://github.com/dell/karavi-authorization/releases) section.
 
 Alternatively, the tar archive can be built from source by cloning the [GitHub repository](https://github.com/dell/karavi-authorization) and using the following Makefile targets to build the installer:
 
@@ -64,7 +64,7 @@ A Storage Administrator can execute the shell script, install_karavi_auth.sh as 
 
 ### Installing the RPM
 
-1. Before installing the rpm, some network and security configuration inputs need to be provided in json format. The json file should be created in the location `$HOME/.karavi/config.json` having the following contents: 
+1. Before installing the rpm, some network and security configuration inputs need to be provided in json format. The json file should be created in the location `$HOME/.karavi/config.json` having the following contents:
 
     ```json
     {
@@ -123,19 +123,19 @@ A Storage Administrator can execute the shell script, install_karavi_auth.sh as 
 
 5. After installation, application data will be stored on the system under `/var/lib/rancher/k3s/storage/`.
 
-If errors occur during installation, review the [Troubleshooting](../../../../../../authorization/v1.x-ga/troubleshooting) section.
+If errors occur during installation, review the [Troubleshooting](../../../../../../authorization/v1.x/troubleshooting) section.
 
 ## Configuring the CSM for Authorization Proxy Server
 
 The first part of CSM for Authorization deployment is to configure the proxy server. This is controlled by the Storage Administrator.
 
-Please follow the steps outlined in the [proxy server](../../../../../../authorization/v1.x-ga/configuration/proxy-server) configuration.
+Please follow the steps outlined in the [proxy server](../../../../../../authorization/v1.x/configuration/proxy-server) configuration.
 
 ## Configuring a Dell CSI Driver with CSM for Authorization
 
 The second part of CSM for Authorization deployment is to configure one or more of the [supported](../../../../../../prerequisites/#supported-csm-modules) CSI drivers. This is controlled by the Kubernetes tenant administrator.
 
-Please follow the steps outlined in [PowerFlex](../../../../../../authorization/v1.x-ga/configuration/powerflex), [PowerMax](../../../../../../authorization/v1.x-ga/configuration/powermax), or [PowerScale](../../../../../../authorization/v1.x-ga/configuration/powerscale) to configure the CSI Driver to work with the Authorization sidecar.
+Please follow the steps outlined in [PowerFlex](../../../../../../authorization/v1.x/configuration/powerflex), [PowerMax](../../../../../../authorization/v1.x/configuration/powermax), or [PowerScale](../../../../../../authorization/v1.x/configuration/powerscale) to configure the CSI Driver to work with the Authorization sidecar.
 
 ## Updating CSM for Authorization Proxy Server Configuration
 
@@ -145,7 +145,7 @@ CSM for Authorization has a subset of configuration parameters that can be updat
 | -------------------- | ------ | -------- | ---------------------------------- |
 | web.jwtsigningsecret | String | "secret" | The secret used to sign JWT tokens |
 
-Updating configuration parameters can be done by editing the `karavi-config-secret` on the CSM for the Authorization Server. The secret can be queried using k3s and kubectl like so: 
+Updating configuration parameters can be done by editing the `karavi-config-secret` on the CSM for the Authorization Server. The secret can be queried using k3s and kubectl like so:
 
 ```bash
 k3s kubectl -n karavi get secret/karavi-config-secret
