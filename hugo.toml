@@ -195,13 +195,16 @@ algolia_docsearch = false
   url = "https://dell.github.io/csm-docs/v3"  
 
 [[menu.main]]
-    name = "GitHub"
+    name = "Github"
     weight = 50
     url = "https://github.com/dell/csm" 
+    pre = "<i class='fa-brands fa-github'></i>"
 [[menu.main]]
     name = "Blog" 
     weight = 60  
-    url="https://infohub.delltechnologies.com/en-us/t/blogs-99/"
+    url="https://infohub.delltechnologies.com/en-us/t/blogs-99/" 
+    pre = "<i class='fa-solid fa-square-rss'></i>"
+
     
 
 [module]
