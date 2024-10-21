@@ -429,14 +429,17 @@ There are samples storage class yaml files available under `samples/storageclass
 
 ## Volume Snapshot Class
 
-Starting CSI PowerStore v1.4.0, `dell-csi-helm-installer` will not create any Volume Snapshot Class during the driver installation. There is a sample Volume Snapshot Class manifest present in the _samples/volumesnapshotclass_ folder. Please use this sample to create a new Volume Snapshot Class to create Volume Snapshots.
+Starting with CSI PowerStore v1.4.0, `dell-csi-helm-installer` will not create any Volume Snapshot Class during the driver installation. There is a sample Volume Snapshot Class manifest present in the _samples/volumesnapshotclass_ folder. Please use this sample to create a new Volume Snapshot Class to create Volume Snapshots.
 
 ## Dynamically update the powerstore secrets
 
-Users can dynamically add delete array information from secret. Whenever an update happens the driver updates the “Host” information in an array. User can update secret using the following command:
+Users can dynamically modify array information within the secret. Whenever an update happens the driver updates the “Host” information in an array. User can update the secret using the following commands:
 ```bash
 kubectl create secret generic powerstore-config -n csi-powerstore --from-file=config=secret.yaml -o yaml --dry-run=client | kubectl replace -f -
+kubectl rollout restart daemonset -n csi-powerstore
 ```
+>Note: The driver's node pods must be restarted to apply any changes made to the secret. This is achieved using the `kubectl rollout restart` command above.
+
 ## Dynamic Logging Configuration
 
 This feature is introduced in CSI Driver for PowerStore version 2.0.0.
