@@ -27,11 +27,11 @@ csi-powerstore:
     replication: 
       image: dellemc/dell-csi-replicator:v1.10.0
     vgsnapshotter: 
-      image: dellemc/csi-volumegroup-snapshotter:v1.6.0
+      image: dellemc/csi-volumegroup-snapshotter:v1.7.0
     podmon: 
       image: dellemc/podmon:v1.11.0
     metadataretriever: 
-      image: dellemc/csi-metadata-retriever:v1.8.0
+      image: dellemc/csi-metadata-retriever:v1.9.0
   ## Controller ATTRIBUTES
   controller:
     controllerCount: $CONTROLLER_COUNT
@@ -131,7 +131,7 @@ csi-powermax:
     driver: 
       image: dellemc/csi-powermax:v2.12.0
     csireverseproxy: 
-      image: dellemc/csipowermax-reverseproxy:v2.10.0
+      image: dellemc/csipowermax-reverseproxy:v2.11.0
     # CSI sidecars
     attacher: 
       image: registry.k8s.io/sig-storage/csi-attacher:v4.7.0
@@ -149,7 +149,7 @@ csi-powermax:
     replication: 
       image: dellemc/dell-csi-replicator:v1.10.0
     authorization: 
-      image: dellemc/csm-authorization-sidecar:v1.11.0
+      image: dellemc/csm-authorization-sidecar:v1.12.0
     migration: 
       image: dellemc/dell-csi-migrator:v1.5.0
     podmon:
@@ -268,11 +268,11 @@ csi-vxflexos:
     replication: 
       image: dellemc/dell-csi-replicator:v1.10.0
     vgsnapshotter: 
-      image: dellemc/csi-volumegroup-snapshotter:v1.6.0
+      image: dellemc/csi-volumegroup-snapshotter:v1.7.0
     podmon: 
       image: dellemc/podmon:v1.11.0
     authorization: 
-      image: dellemc/csm-authorization-sidecar:v1.11.0
+      image: dellemc/csm-authorization-sidecar:v1.12.0
   certSecretCount: $CERT_SECRET_COUNT
   controller:
     replication:
@@ -380,9 +380,9 @@ csi-isilon:
     podmon: 
       image: dellemc/podmon:v1.11.0
     authorization: 
-      image: dellemc/csm-authorization-sidecar:v1.11.0
+      image: dellemc/csm-authorization-sidecar:v1.12.0
     metadataretriever: 
-      image: dellemc/csi-metadata-retriever:v1.8.0
+      image: dellemc/csi-metadata-retriever:v1.9.0
 
   certSecretCount: $CERT_SECRET_COUNT
   allowedNetworks: []
