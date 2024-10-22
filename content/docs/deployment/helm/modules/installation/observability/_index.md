@@ -187,6 +187,11 @@ Below are the steps to deploy a new Grafana instance into your Kubernetes cluste
 
     ```yaml
     # grafana-values.yaml 
+    image:
+      repository: grafana/grafana
+      tag: 10.4.3
+      sha: ""
+      pullPolicy: IfNotPresent
     service:
       type: NodePort
 
