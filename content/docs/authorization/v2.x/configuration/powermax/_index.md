@@ -114,12 +114,12 @@ Given a setup where Kubernetes, a storage system, and the CSM for Authorization 
         # enabled: Always set to true
         enabled: true
         forceRemoveModule: true
-        configVersion: v2.11.0
+        configVersion: v2.12.0
         components:
         - name: csipowermax-reverseproxy
         # image: Define the container images used for the reverse proxy
         # Default value: None
-          image: dellemc/csipowermax-reverseproxy:v2.11.0
+          image: quay.io/dell/container-storage-modules/csipowermax-reverseproxy:v2.12.0
           envs:
           # "tlsSecret" defines the TLS secret that is created with certificate
           # and its associated key
@@ -144,7 +144,7 @@ Given a setup where Kubernetes, a storage system, and the CSM for Authorization 
         configVersion: v1.12.0
         components:
         - name: karavi-authorization-proxy
-          image: dellemc/csm-authorization-sidecar:v2.0.0
+          image: quay.io/dell/container-storage-modules/csm-authorization-sidecar:v2.0.0
           envs:
             # proxyHost: hostname of the csm-authorization server
             - name: "PROXY_HOST"
@@ -192,8 +192,8 @@ Given a setup where Kubernetes, a storage system, and the CSM for Authorization 
     authorization:
       enabled: true
       # sidecarProxyImage: the container image used for the csm-authorization-sidecar.
-      # Default value: dellemc/csm-authorization-sidecar:v2.0.0
-      sidecarProxyImage: dellemc/csm-authorization-sidecar:v2.0.0
+      # Default value: quay.io/dell/container-storage-modules/csm-authorization-sidecar:v2.0.0
+      sidecarProxyImage: quay.io/dell/container-storage-modules/csm-authorization-sidecar:v2.0.0
       # proxyHost: hostname of the csm-authorization server
       # Default value: None
       proxyHost: csm-authorization.com

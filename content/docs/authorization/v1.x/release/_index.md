@@ -6,7 +6,7 @@ Description: >
   Dell Container Storage Modules (CSM) release notes for authorization
 ---
 
-## Release Notes - CSM Authorization 1.11.0
+## Release Notes - CSM Authorization 1.12.0
 
 
 

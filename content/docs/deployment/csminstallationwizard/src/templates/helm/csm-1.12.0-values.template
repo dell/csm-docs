@@ -31,7 +31,7 @@ csi-powerstore:
     podmon: 
       image: dellemc/podmon:v1.11.0
     metadataretriever: 
-      image: dellemc/csi-metadata-retriever:v1.8.0
+      image: dellemc/csi-metadata-retriever:v1.9.0
   ## Controller ATTRIBUTES
   controller:
     controllerCount: $CONTROLLER_COUNT
@@ -382,7 +382,7 @@ csi-isilon:
     authorization: 
       image: dellemc/csm-authorization-sidecar:v1.12.0
     metadataretriever: 
-      image: dellemc/csi-metadata-retriever:v1.8.0
+      image: dellemc/csi-metadata-retriever:v1.9.0
 
   certSecretCount: $CERT_SECRET_COUNT
   allowedNetworks: []
