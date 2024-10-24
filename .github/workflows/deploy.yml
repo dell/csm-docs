@@ -5,7 +5,7 @@ on:
    branches:
      - release-1.11.0
  workflow_dispatch:
-  
+
 jobs:
  deploy:
    runs-on: ubuntu-latest
@@ -20,11 +20,11 @@ jobs:
        with:
          hugo-version: '0.134.1'
          extended: true
-          
+
      - name: Setup Go
        uses: actions/setup-go@v2
        with:
-         go-version: "1.23"
+         go-version: "1.22"
 
      - name: Setup Node
        uses: actions/setup-node@v3
