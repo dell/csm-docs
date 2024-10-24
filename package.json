@@ -1,5 +1,5 @@
 {
-  "name": "csm-docs",
+  "name": "@dell/csm-docs",
   "version": "0.10.0",
   "description": "Welcome to Dell Technologies Container Storage Modules documentation!",
   "repository": {
