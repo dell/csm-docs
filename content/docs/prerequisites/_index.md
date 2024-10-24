@@ -62,9 +62,7 @@ Container Storage Modules (CSM) does not officially support specific operating s
 | [CSM Observability](../observability/)                        |   Yes    |    Yes    |    No    |    Yes     |    Yes     |
 | [CSM Replication](../replication/)                            |   Yes    |    Yes    |    No    |    Yes     |    Yes     |
 | [CSM Resiliency](../resiliency/)                              |   Yes    |    Yes    |   Yes    |    Yes     |    Yes     |
-| [CSM Application Mobility](../applicationmobility/)           |   Yes    |    No     |    No    |     No     |     No     |
 | [Volume Group Snapshot](../snapshots/volume-group-snapshots/) |    No    |    Yes    |    No    |     No     |    Yes     |
-
 {{</table>}}
 
 ## CSM Operator compatibility matrix
