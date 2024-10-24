@@ -6,7 +6,7 @@ Description: >
   Release Notes
 ---
 {{% pageinfo color="primary" %}}
-Application Mobility is available with [APEX Navigator for Kubernetes](https://www.dell.com/en-ca/dt/apex/storage/public-cloud/navigator.htm#kubernetes)
+We are pleased to announce that Application Mobility will be available with Container Storage Modules starting early next year (2025).
 {{% /pageinfo %}}
 
 ## Release Notes - CSM Application Mobility v1.1.0
