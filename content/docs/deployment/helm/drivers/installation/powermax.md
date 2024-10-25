@@ -396,7 +396,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
     ```bash
     cd ../dell-csi-helm-installer && ./csi-install.sh --namespace powermax --values ./my-powermax-settings.yaml --helm-charts-version <version>
     ```
-10. Or you can also install the driver using standalone helm chart using the command
+   Or you can also install the driver using standalone helm chart using the command
    ```bash
    helm install --values  my-powermax-settings.yaml --namespace powermax powermax ./csi-powermax
    ```
