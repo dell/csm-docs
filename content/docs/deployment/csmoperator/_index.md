@@ -197,7 +197,7 @@ Here is the output of a request to build an offline bundle for the Dell CSM Oper
    quay.io/dell/container-storage-modules/dell-replication-controller:v1.10.0
    dellemc/sdc:4.5.2.1
    quay.io/dell/container-storage-modules/dell-csm-operator:v1.7.0
-   gcr.io/kubebuilder/kube-rbac-proxy:v0.8.0
+   registry.redhat.io/openshift4/ose-kube-rbac-proxy-rhel9:v4.16.0-202409051837.p0.g8ea2c99.assembly.stream.el9
    nginxinc/nginx-unprivileged:1.20
    otel/opentelemetry-collector:0.42.0
    registry.k8s.io/sig-storage/csi-attacher:v4.7.0
