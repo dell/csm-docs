@@ -10,6 +10,8 @@ no_list: true
 ---
 
 {{% pageinfo color="primary" %}}
+DELL CSM Volume Group Snapshotter will be deprecated in CSM 1.14 (May 2025) and will no longer be supported.
+
 The CSM Authorization RPM will be deprecated in a future release. It is highly recommended that you use CSM Authorization Helm deployment or CSM Operator going forward.
 {{% /pageinfo %}}
 

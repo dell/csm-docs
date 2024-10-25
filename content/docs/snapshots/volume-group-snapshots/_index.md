@@ -5,6 +5,10 @@ weight: 8
 Description: >
   Volume Group Snapshot module of Dell CSI drivers
 ---
+
+{{% pageinfo color="primary" %}} DELL CSM Volume Group Snapshotter will be deprecated in CSM 1.14 (May 2025) and will no longer be supported. 
+{{% /pageinfo %}}
+
 ## Volume Group Snapshot Feature
 The Dell CSM Volume Group Snapshotter is an operator which extends Kubernetes API to support crash-consistent snapshots of groups of volumes.
 Volume Group Snapshot supports PowerFlex and PowerStore driver.
