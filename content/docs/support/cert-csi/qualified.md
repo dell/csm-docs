@@ -11,7 +11,12 @@ description: Community Qualified Configurations
 | [Ticket 1177](https://github.com/dell/csm/issues/1177) | Ubuntu OS 22.04 | Amazon EKS (K8s 1.29) | PowerFlex | SCINI  | CSI v2.9.2 |
 | [Ticket 1361](https://github.com/dell/csm/issues/1361) | RHCOS 4.12 | OpenShift 4.12 | PowerStore | iSCSI| CSI v2.8.0 |
 | [Ticket 1362](https://github.com/dell/csm/issues/1362) | RHCOS 4.12 | OpenShift 4.12 | PowerScale | NFS  | CSI v2.8.0 |
+| [Ticket 1390](https://github.com/dell/csm/issues/1390) | RHCOS 4.15 | OpenShift 4.15 | PowerStore | NVMeTCP  | CSI v2.10.1 |
 | [Ticket 1441](https://github.com/dell/csm/issues/1441) <br>[Ticket 1462](https://github.com/dell/csm/issues/1462) | Ubuntu 20.04.x | MKE 3.6.13 | PowerScale, <br>PowerFlex | iSCSI  | CSI v2.11.0 |
 | [Ticket 1442](https://github.com/dell/csm/issues/1442) | RHCOS 4.14.92 | OKE 4.14.31 | PowerScale | iSCSI| CSI v2.11.0 |
 | [Ticket 1456](https://github.com/dell/csm/issues/1456) | RHCOS 4.14.92 | OKE 4.14.31 | PowerFlex | iSCSI| CSI v2.11.0 |
+| [Ticket 1479](https://github.com/dell/csm/issues/1479) | Ubuntu 18.04.x | OpenShift 4.17 | PowerFlex | iSCSI| CSI v2.11.0 |
+| [Ticket 1500](https://github.com/dell/csm/issues/1500) <br> [Ticket 1501](https://github.com/dell/csm/issues/1501) |  RHCOS 4.14 | OpenShift 4.14.x | PowerStore | iSCSI| X,2.10.1 |
+| [Ticket 1513](https://github.com/dell/csm/issues/1513) | RHCOS 4.14 | OpenShift 4.14 | PowerScale | NFS | x |
+| [Ticket 1516](https://github.com/dell/csm/issues/1516) | Ubuntu 20.04.x | MKE - 3.6.13 | PowerFlex | iSCSI | CSI V2.11.0 |
 {{</table>}}
