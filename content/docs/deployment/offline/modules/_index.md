@@ -110,7 +110,7 @@ To perform an offline installation of a Helm chart, the following steps should b
     *
     * Loading, tagging, and pushing Docker images to registry <my-registry>:5000/
 
-      quay.io/dell/container-storage-modules/csm-topology:v1.6.0 -> <my-registry>:5000/csm-topology:v1.10.0
+      quay.io/dell/container-storage-modules/csm-topology:v1.10.0 -> <my-registry>:5000/csm-topology:v1.10.0
       quay.io/dell/container-storage-modules/csm-metrics-powerflex:v1.10.0 -> <my-registry>:5000/csm-metrics-powerflex:v1.10.0
       quay.io/dell/container-storage-modules/csm-metrics-powerstore:v1.10.0 -> <my-registry>:5000/csm-metrics-powerstore:v1.10.0
       quay.io/dell/container-storage-modules/csm-metrics-powerscale:v1.7.0 -> <my-registry>:5000/csm-metrics-powerscale:v1.7.0
