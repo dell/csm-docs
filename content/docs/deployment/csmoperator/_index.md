@@ -153,7 +153,7 @@ To perform an offline installation, the following steps should be performed:
 >NOTE: It is recommended to use the same build tool for packing and unpacking of images (either docker or podman).
 
 #### Building an offline bundle
->NOTE: Please login to `registry.redhat.io` registry using Redhat credentials before you proceed with offline bundle creation.
+>NOTE: Login to `registry.redhat.io` registry using Redhat credentials before you proceed with offline bundle creation.
 
 This needs to be performed on a Linux system with access to the Internet as a git repo will need to be cloned, and container images pulled from public registries.
 
