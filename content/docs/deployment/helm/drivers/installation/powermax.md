@@ -273,12 +273,38 @@ CRDs should be configured during replication prepare stage with repctl as descri
     ```bash
     kubectl create -f samples/secret/secret.yaml
     ```
-5. Download the default values.yaml file
+5. Create a configmap using below sample file. Fill in the appropriate values for driver configuration. Example: X_CSI_TRANSPORT_PROTOCOL:"ISCSI" 
+   ```yaml  
+      # Copyright © 2024 Dell Inc. or its subsidiaries. All Rights Reserved.
+      #
+      # Licensed under the Apache License, Version 2.0 (the "License");
+      # you may not use this file except in compliance with the License.
+      # You may obtain a copy of the License at
+      #      http://www.apache.org/licenses/LICENSE-2.0
+      # Unless required by applicable law or agreed to in writing, software
+      # distributed under the License is distributed on an "AS IS" BASIS,
+      # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+      # See the License for the specific language governing permissions and
+      # limitations under the License.
+      # To create this configmap use: kubectl create -f powermax-array-config.yaml
+      apiVersion: v1
+      kind: ConfigMap
+      metadata:
+        name: powermax-array-config
+        namespace: powermax
+      data:
+        powermax-array-config.yaml: |
+          X_CSI_POWERMAX_PORTGROUPS: "" # Portgroup is required in case of iSCSI only
+          X_CSI_TRANSPORT_PROTOCOL: "" # Defaults to empty
+          X_CSI_POWERMAX_ENDPOINT: "https://10.0.0.0:8443"
+          X_CSI_MANAGED_ARRAYS: "000000000000,000000000000,"
+   ```
+6. Download the default values.yaml file
     ```bash
     cd dell-csi-helm-installer && wget -O my-powermax-settings.yaml https://github.com/dell/helm-charts/raw/csi-powermax-2.12.0/charts/csi-powermax/values.yaml
     ```
-6. Ensure the unisphere have 10.0 REST endpoint support by clicking on Unisphere -> Help (?) -> About in Unisphere for PowerMax GUI.
-7. Edit the newly created file and provide values for the following parameters
+7. Ensure the unisphere have 10.0 REST endpoint support by clicking on Unisphere -> Help (?) -> About in Unisphere for PowerMax GUI.
+8. Edit the newly created file and provide values for the following parameters
     ```bash
     vi my-powermax-settings.yaml
     ```
@@ -366,11 +392,11 @@ CRDs should be configured during replication prepare stage with repctl as descri
 | vCenterCredSecret                  | Secret name for the vCenter credentials.                                                                                                                                                                                                                                                                                                                                        |  Yes      |   ""   |
 
 
-8. Install the driver using `csi-install.sh` bash script by running
+9. Install the driver using `csi-install.sh` bash script by running
     ```bash
     cd ../dell-csi-helm-installer && ./csi-install.sh --namespace powermax --values ./my-powermax-settings.yaml --helm-charts-version <version>
     ```
-9. Or you can also install the driver using standalone helm chart using the command
+10. Or you can also install the driver using standalone helm chart using the command
    ```bash
    helm install --values  my-powermax-settings.yaml --namespace powermax powermax ./csi-powermax
    ```
