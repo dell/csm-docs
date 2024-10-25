@@ -12,6 +12,7 @@ The Dell CSI drivers allow Kubernetes to manage storage resources dynamically, p
 Using Kubernetes to install and manage Dell CSI drivers involves deploying the Dell Container Storage Modules (CSM) Operator. This operator simplifies the installation and management of CSI drivers by leveraging Kubernetes Custom Resource Definitions (CRDs) and controllers. The CSM Operator ensures that the CSI drivers are correctly configured and maintained, providing a robust and reliable storage solution for your Kubernetes clusters12. 
 
 
+
 <div class="container mt-5 ps-0" style="margin-left:0px;">
     <div class="row">
       <div class="col-md-6 mb-4">

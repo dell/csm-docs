@@ -15,7 +15,7 @@ weight: 4
     <br> 
     <div class="row">
       <div class="col-md-6 mb-4">
-    {{< customcard   link="./csmoperator" image="../../../../../icons/doc-reports.svg"  title="CSM Operator" >}}
+    {{< customcard   link="./csmoperator" image="../../../../../icons/doc-reports.svg"  title="Operator" >}}
       </div>
       <div class="col-md-6 mb-4">
        {{< customcard  link="./helm" icon="fas fa-search" image="../../../../../icons/doc-reports.svg" title="Helm" >}}
