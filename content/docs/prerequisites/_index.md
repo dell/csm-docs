@@ -30,15 +30,16 @@ weight: 1
 | Kubernetes                 | 1.29, 1.30, 1.31 |
 | Red Hat OpenShift          | 4.16, 4.17       |
 | Mirantis Kubernetes Engine | 3.7.x            |
-| Google Anthos              | 1.15             |
-| Rancher Kubernetes Engine  | 1.4.x            |
-| VMware Tanzu               | 7.0              |
 {{</table>}}
 
 > Notes:
 > * Any orchestrator platform or version that's not mentioned here must be self-certified using [Cert-CSI](../support/cert-csi/) in order to be supported.  Although not mandatory, we recommend users to use orchestrator platforms and versions that have not met their end of life.
 > * CSM Authorization Server v1 is not supported on Red Hat OpenShift. However, it is supported to install CSM Authorization Server v1 on standard Kubernetes and a Dell CSI Drvier enabled with CSM Authorization on Red Hat OpenShift. CSM Authorization Server v2 is supported on Red Hat OpenShift.
-> * The OpenShift Virtualization platform support is not available for Unity.
+
+## OpenShift Virtualization
+
+OpenShift Virtualization 4.17 <b> supports [storage profile](https://github.com/kiagnose/kubevirt-storage-checkup) operations only </b> for the following storage systems:</br>
+PowerFlex, PowerMax, PowerStore, PowerScale.
 
 ## Tested Host Operating Systems
 
