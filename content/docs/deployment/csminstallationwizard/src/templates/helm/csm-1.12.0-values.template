@@ -31,7 +31,7 @@ csi-powerstore:
     podmon: 
       image: quay.io/dell/container-storage-modules/podmon:v1.11.0
     metadataretriever: 
-      image: quay.io/dell/container-storage-modules/csi-metadata-retriever:v1.8.0
+      image: quay.io/dell/container-storage-modules/csi-metadata-retriever:v1.9.0
   ## Controller ATTRIBUTES
   controller:
     controllerCount: $CONTROLLER_COUNT
@@ -382,7 +382,7 @@ csi-isilon:
     authorization: 
       image: quay.io/dell/container-storage-modules/csm-authorization-sidecar:v1.12.0
     metadataretriever: 
-      image: quay.io/dell/container-storage-modules/csi-metadata-retriever:v1.8.0
+      image: quay.io/dell/container-storage-modules/csi-metadata-retriever:v1.9.0
 
   certSecretCount: $CERT_SECRET_COUNT
   allowedNetworks: []
