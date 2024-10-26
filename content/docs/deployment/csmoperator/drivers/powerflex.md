@@ -1,8 +1,8 @@
 ---
 title: PowerFlex
-linkTitle: "PowerFlex"
+linkTitle: PowerFlex
 description: >
-  Installing Dell CSI Driver for PowerFlex via Dell CSM Operator
+  Installing the CSI Driver for Dell PowerFlex via Dell CSM Operator
 ---
 
 The CSI Driver for Dell PowerFlex can be installed via the Dell CSM Operator.

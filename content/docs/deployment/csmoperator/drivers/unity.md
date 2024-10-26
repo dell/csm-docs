@@ -1,8 +1,8 @@
 ---
 title: Unity XT
-linkTitle: "Unity XT"
+linkTitle: Unity XT
 description: >
-  Installing Dell CSI Driver for Unity XT via Dell CSM Operator
+  Installing the CSI Driver for Dell Unity XT via Dell CSM Operator
 ---
 
 The CSI Driver for Dell Unity XT can be installed via the Dell CSM Operator.

@@ -1,8 +1,8 @@
 ---
 title: PowerMax
-linkTitle: "PowerMax"
+linkTitle: PowerMax
 description: >
-  Installing Dell CSI Driver for PowerMax via Dell CSM Operator
+  Installing the CSI Driver for Dell PowerMax via Dell CSM Operator
 ---
 
 The CSI Driver for Dell PowerMax can be installed via the Dell CSM Operator.
@@ -20,16 +20,33 @@ kubectl get csm --all-namespaces
 
 ## Prerequisites
 
-The following are requirements to be met before installing the CSI Driver for Dell PowerMax:
+The following requirements must be met before installing the CSI Driver for Dell PowerMax:
 
 - A Kubernetes or OpenShift cluster (see [supported versions](../../../../csidriver/#features-and-capabilities)).
+- If enabling CSM for Authorization, please refer to the Authorization deployment steps first
 - Refer to the sections below for protocol specific requirements.
+- For NVMe support the preferred multipath solution is NVMe native multipathing. The [Dell Host Connectivity Guide](https://elabnavigator.dell.com/vault/pdf/Linux.pdf) describes the details of each configuration option.
 - Linux multipathing requirements (described later).
+- PowerPath for Linux requirements (described later).
 - Mount propagation is enabled on the container runtime that is being used.
 - If using Snapshot feature, satisfy all Volume Snapshot requirements.
 - Insecure registries are defined in Docker or other container runtimes for CSI drivers that are hosted in a non-secure location.
 - Ensure that your nodes support mounting NFS volumes if using NFS.
-- For NVMe support the preferred multipath solution is NVMe native multipathing. The [Dell Host Connectivity Guide](https://elabnavigator.dell.com/vault/pdf/Linux.pdf) describes the details of each configuration option.
+- Auto RDM for vSphere over FC requirements
+
+### CSI PowerMax Reverse Proxy
+
+The CSI PowerMax Reverse Proxy is a component that will be installed with the CSI PowerMax driver. For more details on this feature, see the related [documentation](../../../../csidriver/features/powermax/#csi-powermax-reverse-proxy).
+
+Create a TLS secret that holds an SSL certificate and a private key. This is required by the reverse proxy server.
+Use a tool such as `openssl` to generate this secret using the example below:
+
+```bash
+openssl genrsa -out tls.key 2048
+openssl req -new -x509 -sha256 -key tls.key -out tls.crt -days 3650
+kubectl create secret -n <namespace> tls revproxy-certs --cert=tls.crt --key=tls.key
+kubectl create secret -n <namespace> tls csirevproxy-tls-secret --cert=tls.crt --key=tls.key
+```
 
 ### Fibre Channel Requirements
 
@@ -258,7 +275,7 @@ Refer to the [Dell Host Connectivity Guide](https://elabnavigator.dell.com/vault
 
 ### PowerPath for Linux requirements
 
-CSI Driver for Dell PowerMax supports PowerPath for Linux. Configure Linux PowerPath before installing the CSI Driver.
+The CSI Driver for Dell PowerMax supports PowerPath for Linux. Configure Linux PowerPath before installing the CSI Driver.
 
 Follow this procedure to set up PowerPath for Linux:
 
@@ -267,7 +284,6 @@ Follow this procedure to set up PowerPath for Linux:
 - Start the PowerPath service using `systemctl start PowerPath`
 
 >Note: Do not install Dell PowerPath if multi-path software is already installed, as they cannot co-exist with native multi-path software.
-
 
 ### Auto RDM for vSphere over FC requirements
 
@@ -281,21 +297,6 @@ Set up the environment as follows:
 
 - Add initiators from all ESX/ESXis to a host(initiator group)/host group(cascaded initiator group) where the cluster is hosted.
 - Create a secret which contains vCenter privileges. Follow the steps [here](#support-for-auto-rdm-for-vsphere-over-fc) to create the same.
-
-### CSI PowerMax ReverseProxy
-
-CSI PowerMax ReverseProxy is a component that will be installed with the CSI PowerMax driver. For more details on this feature, see the related [documentation](https://dell.github.io/csm-docs/docs/csidriver/features/powermax/#csi-powermax-reverse-proxy).
-
-#### Pre-requisites
-Create a TLS secret that holds an SSL certificate and a private key. This is required by the reverse proxy server.
-Use a tool such as `openssl` to generate this secret using the example below:
-
-```bash
-openssl genrsa -out tls.key 2048
-openssl req -new -x509 -sha256 -key tls.key -out tls.crt -days 3650
-kubectl create secret -n <namespace> tls revproxy-certs --cert=tls.crt --key=tls.key
-kubectl create secret -n <namespace> tls csirevproxy-tls-secret --cert=tls.crt --key=tls.key
-```
 
 ## Installation
 

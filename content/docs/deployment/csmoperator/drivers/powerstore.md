@@ -1,8 +1,8 @@
 ---
 title: PowerStore
-linkTitle: "PowerStore"
+linkTitle: PowerStore
 description: >
-  Installing Dell CSI Driver for PowerStore via Dell CSM Operator
+  Installing the CSI Driver for Dell PowerStore via Dell CSM Operator
 ---
 
 The CSI Driver for Dell PowerStore can be installed via the Dell CSM Operator.
@@ -18,9 +18,9 @@ To query for all Dell CSI drivers installed with the ContainerStorageModule CRD 
 kubectl get csm --all-namespaces
 ```
 
-### Prerequisites
+## Prerequisites
 
-The following are requirements to be met before installing the CSI Driver for Dell PowerStore:
+The following requirements must be met before installing the CSI Driver for Dell PowerStore:
 
 - A Kubernetes or OpenShift cluster (see [supported versions](../../../../csidriver/#features-and-capabilities)).
 - Refer to the sections below for protocol specific requirements.
@@ -188,8 +188,7 @@ modprobe nvme_tcp
 **Requirements for NVMeFC**
 - NVMeFC Zoning of the Host Bus Adapters (HBAs) to the Fibre Channel port must be done.
 
-*NOTE:*
-- Do not load the nvme_tcp module for NVMeFC
+> Do not load the nvme_tcp module for NVMeFC
 
 ### Linux multipathing requirements
 
@@ -261,7 +260,7 @@ Alternatively, you can check the status of the multipath service by running the 
 Refer to the [Dell Host Connectivity Guide](https://elabnavigator.dell.com/vault/pdf/Linux.pdf) for more information.
 
 ### Volume Snapshot Requirements (Optional)
-  For detailed snapshot setup procedure, [click here.](../../../../snapshots/#optional-volume-snapshot-requirements)
+For detailed snapshot setup procedure, [click here.](../../../../snapshots/#optional-volume-snapshot-requirements)
 
 ### Replication Requirements (Optional)
 
