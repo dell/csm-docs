@@ -359,36 +359,34 @@ git clone -b v1.7.0 https://github.com/dell/csm-operator.git
 
 >NOTE: Dell CSM Operator would install to the 'dell-csm-operator' namespace by default.
 
-### Upgrade driver using Dell CSM Operator:
+### Upgrading Drivers with Dell CSM Operator
+You can update CSI Drivers installed by the Dell CSM Operator like any Kubernetes resource:
 
-The CSI Drivers installed by the Dell CSM Operator can be updated like any Kubernetes resource.
-* Modifying the installation directly via `kubectl edit`
-    ```
-    $ kubectl get <driver-object> -n <driver-namespace>
-    ```
-    For example - If the CSI PowerStore driver is installed then run this command to get the object name
-    ```
-    # Replace driver-namespace with the namespace where the CSI PowerStore driver is installed
-    $ kubectl get csm -n <driver-namespace>
-    ```
-    use the object name in `kubectl edit` command.
-    ```
-    $ kubectl edit csm <driver-object>/<object-name> -n <driver-namespace>
-    ```
-    For example - If the object name is powerstore then use the name as powerstore
-    ```
-    # Replace object-name with the powerstore
-    $ kubectl edit csm powerstore -n <driver-namespace>
-    ```
-    and modify the installation. The usual fields to edit are the version of drivers, sidecars and the environment variables.
-The following notes explain some of the general items to take care of.
+1. </b>Modify Installation via kubectl edit:</b></br>
 
->NOTE:
-1. If you are trying to upgrade the CSI driver from an older version, make sure to modify the _configVersion_ field.
-   ```yaml
-      driver:
-        configVersion: v2.12.0
-   ```
+```bash
+kubectl get <driver-object> -n <driver-namespace>
+```
+2. Replace `<driver-namespace>` with the appropriate namespace. For example, to get the CSI PowerStore driver object: </br>
+```bash
+kubectl get csm -n <driver-namespace>
+```
+Use the object name in the kubectl edit command: </br>
+
+```bash
+kubectl edit csm <driver-object>/<object-name> -n <driver-namespace>
+```
+For example, if the object name is powerstore:</br>
+
+```bash
+kubectl edit csm powerstore -n <driver-namespace>
+```
+
+Modify the installation as needed, typically updating driver versions, sidecars, and environment variables.
+
+3. Refer how to [upgrade](https://infohub.delltechnologies.com/en-us/p/best-practices-for-deployment-and-life-cycle-management-of-dell-csm-modules-1/#:~:text=Upgrades%20with%20Operator) guide if you have more questions </br>
+
+> Note: Starting with CSM 1.12, use images from [quay.io](https://quay.io/organization/dell). From CSM 1.14 (May 2025), editing the CSM object will fail if using images from [Docker Hub](https://hub.docker.com/r/dellemc/).
 
 ### Upgrade Modules using Dell CSM Operator
 
