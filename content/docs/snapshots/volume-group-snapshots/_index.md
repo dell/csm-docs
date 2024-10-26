@@ -5,6 +5,10 @@ weight: 8
 Description: >
   Volume Group Snapshot module of Dell CSI drivers
 ---
+
+{{% pageinfo color="primary" %}} Dell CSM Volume Group Snapshotter will be deprecated in CSM 1.14 (May 2025) and will no longer be supported. 
+{{% /pageinfo %}}
+
 ## Volume Group Snapshot Feature
 The Dell CSM Volume Group Snapshotter is an operator which extends Kubernetes API to support crash-consistent snapshots of groups of volumes.
 Volume Group Snapshot supports PowerFlex and PowerStore driver.
@@ -57,7 +61,7 @@ vgsnapshotter:
     
 To deploy CSM Volume Group Snapshotter with the driver, these changes are required:
 1. Enable CSM Volume Group Snapshotter by changing the vgsnapshotter.enabled boolean to true. 
-2. In the vgsnapshotter.image field, put the location of the image you created, or link to the one already built (such as the one on DockerHub, `dellemc/csi-volumegroup-snapshotter:v1.3.0`).
+2. In the vgsnapshotter.image field, put the location of the image you created, or link to the one already built (such as the one on quay.io, `quay.io/dell/container-storage-modules/csi-volumegroup-snapshotter:v1.7.0`).
 3. Install/upgrade the driver normally. You should now have VGS successfully deployed with the driver!
 
 

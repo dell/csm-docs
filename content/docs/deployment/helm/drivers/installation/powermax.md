@@ -73,7 +73,7 @@ Set up the iSCSI initiators as follows:
 - Ensure that the iSCSI initiators on the nodes are not a part of any existing Host (Initiator Group) on the Dell PowerMax array.
 - The CSI Driver needs the port group names containing the required iSCSI director ports. These port groups must be set up on each Dell PowerMax array. All the port group names supplied to the driver must exist on each Dell PowerMax with the same name.
 
-For more information about configuring iSCSI, see [Dell Host Connectivity guide](https://www.delltechnologies.com/asset/zh-tw/products/storage/technical-support/docu5128.pdf).
+For more information about configuring iSCSI, see [Dell Host Connectivity guide](https://elabnavigator.dell.com/vault/pdf/Linux.pdf?key=1725374107988).
 
 ### NFS requirements
 
@@ -260,7 +260,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
 
 **Steps**
 
-1. Run `git clone -b v2.11.0 https://github.com/dell/csi-powermax.git` to clone the git repository. This will include the Helm charts and dell-csi-helm-installer scripts.
+1. Run `git clone -b v2.12.0 https://github.com/dell/csi-powermax.git` to clone the git repository. This will include the Helm charts and dell-csi-helm-installer scripts.
 2. Ensure that you have created a namespace where you want to install the driver. You can run `kubectl create namespace powermax` to create a new one
 3. Edit the `samples/secret/secret.yaml` file,to point to the correct namespace, and replace the values for the username and password parameters.
     These values can be obtained using base64 encoding as described in the following example:
@@ -275,7 +275,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
     ```
 5. Download the default values.yaml file
     ```bash
-    cd dell-csi-helm-installer && wget -O my-powermax-settings.yaml https://github.com/dell/helm-charts/raw/csi-powermax-2.11.0/charts/csi-powermax/values.yaml
+    cd dell-csi-helm-installer && wget -O my-powermax-settings.yaml https://github.com/dell/helm-charts/raw/csi-powermax-2.12.0/charts/csi-powermax/values.yaml
     ```
 6. Ensure the unisphere have 10.0 REST endpoint support by clicking on Unisphere -> Help (?) -> About in Unisphere for PowerMax GUI.
 7. Edit the newly created file and provide values for the following parameters
