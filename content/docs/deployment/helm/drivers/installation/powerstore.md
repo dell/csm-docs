@@ -18,7 +18,7 @@ The following requirements must be met before installing the CSI Driver for Dell
 - Linux multipathing requirements (described later).
 - Mount propagation is enabled on the container runtime that is being used.
 - If using Snapshot feature, satisfy all Volume Snapshot requirements.
-- Insecure registries are defined in Docker or other container runtimes for CSI drivers that are hosted in a non-secure location.
+- Insecure registries are defined in Docker or other container runtime for CSI drivers that are hosted in a non-secure location.
 - Ensure that your nodes support mounting NFS volumes if using NFS.
 - For NVMe support the preferred multipath solution is NVMe native multipathing. The [Dell Host Connectivity Guide](https://elabnavigator.dell.com/vault/pdf/Linux.pdf) describes the details of each configuration option.
 
@@ -71,7 +71,7 @@ Once the `MachineConfig` object has been deployed, CoreOS will ensure that the `
 - Ensure that the iSCSI initiators are available on all the nodes where the driver node plugin will be installed.
 - Ensure that the unique initiator name is set in _/etc/iscsi/initiatorname.iscsi_.
 - Kubernetes nodes must have network connectivity to an iSCSI port on the Dell PowerStore array that
-has IP interfaces. Manually create IP routes for each node that connects to the Dell PowerStore.
+has IP interfaces.
 - Ensure that the iSCSI initiators on the nodes are not a part of any existing Host or Host Group on the Dell PowerStore arrays. The driver will create host entries for the iSCSI initiators which adheres to the naming conventions required by the driver.
 
 Refer to the [Dell Host Connectivity Guide](https://elabnavigator.dell.com/vault/pdf/Linux.pdf) for more information.
@@ -216,7 +216,7 @@ defaults {
 }
 ```
 
-On some distributions the multipathd service for changes to the configuration and dynamically reconfigures itself. If you need to manually trigger a relord you can run the folllowing command:
+On some distributions the multipathd service for changes to the configuration and dynamically reconfigures itself. If you need to manually trigger a reload you can run the following command:
 `sudo systemctl reload multipathd`
 
 On OCP clusters you can add a MachineConfig to configure multipathing on the worker nodes.

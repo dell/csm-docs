@@ -96,7 +96,7 @@ Once the `MachineConfig` object has been deployed, CoreOS will ensure that the `
 
 Refer to the [Dell Host Connectivity Guide](https://elabnavigator.dell.com/vault/pdf/Linux.pdf) for more information.
 
-### NVMe requirements
+### NVMe Requirements
 
 The following requirements must be fulfilled in order to successfully use the NVMe/TCP protocol with the CSI PowerMax driver:
 
@@ -110,7 +110,7 @@ modprobe nvme_tcp
 > Starting with OCP 4.14 NVMe/TCP is enabled by default on RCOS nodes.
 
 
-**Cluster Requirments**
+**Cluster requirments**
 
 - All OpenShift or Kubernetes nodes connecting to Dell storage arrays must use unique host NQNs.
 - The driver requires the NVMe command-line interface (nvme-cli) to manage the NVMe clients and targets. The NVMe CLI tool is installed in the host using the following command on RPM oriented Linux distributions.
@@ -171,7 +171,7 @@ spec:
         path: /etc/udev/rules.d/71-nvme-io-policy.rules
 ```
 
-**Array Requirements**
+**Array requirements**
 
 Once the NVMe endpoint is created on the array, follow the following steps to update the endpoint name to adhere to the CSI driver requirements.
 
@@ -179,20 +179,20 @@ Once the NVMe endpoint is created on the array, follow the following steps to up
    - Fetch the _subnqn_, for e.g.,  _nqn.1988-11.com.dell:PowerMax_2500:00:000120001100_, this will be used as the subnqn holder while updating NVMe endpoint name.
    - Update the NVMe endpoint name as ```<subnqn>:<dir><port>>```. Here is an example how it should look, _nqn.1988-11.com.dell:PowerMax_2500:00:000120001100:OR1C000_
 
-### NFS requirements
+### NFS Requirements
 
 CSI Driver for Dell PowerMax supports NFS communication. Ensure that the following requirements are met before you install CSI Driver:
 - Configure the NFS network. Please refer [here](https://dl.dell.com/content/manual57826791-dell-powermax-file-protocol-guide.pdf?language=en-us&ps=true) for more details.
 - PowerMax Embedded Management guest to access Unisphere for PowerMax.
 - Create the NAS server. Please refer [here](https://dl.dell.com/content/manual55638050-dell-powermax-file-quick-start-guide.pdf?language=en-us&ps=true) for more details.
 
-### Linux multipathing requirements
+### Linux Multipathing Requirements
 
 Dell PowerMax supports Linux multipathing (DM-MPIO) and NVMe native multipathing. Configure Linux multipathing before installing the CSI Driver.
 
 > For NVMe connectivity native NVMe multipathing is used. The following sections apply only for iSCSI and Fiber Channel connectivity.
 
-Configiure Linux multipathing as follows:
+Configure Linux multipathing as follows:
 - Ensure that all nodes have the _Device Mapper Multipathing_ package installed.
   You can install it by running `dnf install device-mapper-multipath` or `apt install multipath-tools` based on your Linux distribution.
 - Ensure that the multipath command `mpathconf` is available on all Kubernetes nodes.
@@ -224,7 +224,7 @@ defaults {
 }
 ```
 
-On some distributions the multipathd service for changes to the configuration and dynamically reconfigures itself. If you need to manually trigger a relord you can run the folllowing command:
+On some distributions the multipathd service for changes to the configuration and dynamically reconfigures itself. If you need to manually trigger a reload you can run the following command:
 `sudo systemctl reload multipathd`
 
 To enable multipathd on RedHat CoreOS nodes you need to prepare a working configuration encoded in base64. For example you can run the following command to encode the above multipath.config file.
@@ -243,7 +243,7 @@ echo 'defaults {
 }' | base64 -w0
 ```
 
-The output of the above comamnd follows:
+The output of the above command follows:
 ```text
 ZGVmYXVsdHMgewogIHVzZXJfZnJpZW5kbHlfbmFtZXMgeWVzCiAgZmluZF9tdWx0aXBhdGhzIHllcwogIHBhdGhfZ3JvdXBpbmdfcG9saWN5IG11bHRpYnVzCiAgcGF0aF9jaGVja2VyIHR1cgogIGZlYXR1cmVzICIxIHF1ZXVlX2lmX25vX3BhdGgiCiAgcGF0aF9zZWxlY3RvciAicm91bmQtcm9iaW4gMCIKICBub19wYXRoX3JldHJ5IDEwCn0KICBibGFja2xpc3Qgewp9Cg==
 ```
@@ -292,7 +292,7 @@ Follow this procedure to set up PowerPath for Linux:
 ### Volume Snapshot Requirements (Optional)
   For detailed snapshot setup procedure, [click here.](../../../../../snapshots/#optional-volume-snapshot-requirements)
 
-### Replication feature Requirements (Optional)
+### Replication Requirements (Optional)
 
 Applicable only if you decided to enable the Replication feature in `my-powermax-settings.yaml`
 

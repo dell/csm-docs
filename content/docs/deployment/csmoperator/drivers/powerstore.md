@@ -27,12 +27,12 @@ The following requirements must be met before installing the CSI Driver for Dell
 - If you want to use pre-configured iSCSI/FC hosts be sure to check that they are not part of any host group.
 - Linux multipathing requirements (described later).
 - Mount propagation is enabled on the container runtime that is being used.
-- If using Snapshot feature, satisfy all Volume Snapshot requirements.
-- Insecure registries are defined in Docker or other container runtimes for CSI drivers that are hosted in a non-secure location.
+- If using the Snapshot feature, satisfy all Volume Snapshot requirements.
+- Insecure registries are defined in Docker or other container runtime for CSI drivers that are hosted in a non-secure location.
 - Ensure that your nodes support mounting NFS volumes if using NFS.
 - For NVMe support the preferred multipath solution is NVMe native multipathing. The [Dell Host Connectivity Guide](https://elabnavigator.dell.com/vault/pdf/Linux.pdf) describes the details of each configuration option.
 
-### Fibre Channel requirements
+### Fibre Channel Requirements
 
 The following requirements must be fulfilled in order to successfully use the Fiber Channel protocol with the CSI PowerStore driver:
 
@@ -69,7 +69,7 @@ Once the `MachineConfig` object has been deployed, CoreOS will ensure that the `
 - Ensure that the iSCSI initiators are available on all the nodes where the driver node plugin will be installed.
 - Ensure that the unique initiator name is set in _/etc/iscsi/initiatorname.iscsi_.
 - Kubernetes nodes must have network connectivity to an iSCSI port on the Dell PowerStore array that
-has IP interfaces. Manually create IP routes for each node that connects to the Dell PowerStore.
+has IP interfaces.
 - Ensure that the iSCSI initiators on the nodes are not a part of any existing Host or Host Group on the Dell PowerStore arrays. The driver will create host entries for the iSCSI initiators which adheres to the naming conventions required by the driver.
 
 Refer to the [Dell Host Connectivity Guide](https://elabnavigator.dell.com/vault/pdf/Linux.pdf) for more information.
@@ -190,7 +190,7 @@ modprobe nvme_tcp
 
 > Do not load the nvme_tcp module for NVMeFC
 
-### Linux multipathing requirements
+### Linux Multipathing Requirements
 
 Dell PowerStore supports Linux multipathing (DM-MPIO) and NVMe native multipathing. Configure Linux multipathing before installing the CSI Driver.
 
@@ -214,7 +214,7 @@ defaults {
 }
 ```
 
-On some distributions the multipathd service for changes to the configuration and dynamically reconfigures itself. If you need to manually trigger a relord you can run the folllowing command:
+On some distributions the multipathd service for changes to the configuration and dynamically reconfigures itself. If you need to manually trigger a reload you can run the following command:
 `sudo systemctl reload multipathd`
 
 On OCP clusters you can add a MachineConfig to configure multipathing on the worker nodes.
@@ -270,7 +270,7 @@ Applicable only if you decided to enable the Replication feature in `sample.yaml
 replication:
   enabled: true
 ```
-#### Replication CRD's
+#### Replication CRDs
 
 The CRDs for replication can be obtained and installed from the csm-replication project on Github. Use `csm-replication/deploy/replicationcrds.all.yaml` located in csm-replication git repo for the installation.
 
