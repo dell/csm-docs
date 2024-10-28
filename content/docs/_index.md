@@ -10,10 +10,11 @@ no_list: true
 ---
 
 {{% pageinfo color="primary" %}}
-1. The CSM Authorization RPM will be deprecated in a future release. It is highly recommended that you use CSM Authorization Helm deployment or CSM Operator going forward.</br></br>
+1. The CSM Authorization RPM will be deprecated in a future release. It is highly recommended that you use CSM Authorization Helm deployment or CSM Operator going forward.
 
-2. <span><span/>{{< message text="1" >}}
+3. Dell CSM Volume Group Snapshotter  will be deprecated in CSM 1.14 (May 2025) and will no longer be supported.
 
+3. <span><span/>{{< message text="1" >}}
 {{% /pageinfo %}}
 
 

@@ -1,8 +1,8 @@
 ---
 title: PowerScale
-linkTitle: "PowerScale"
+linkTitle: PowerScale
 description: >
-  Installing Dell CSI Driver for PowerScale via Dell CSM Operator
+  Installing the CSI Driver for Dell PowerScale via Dell CSM Operator
 ---
 {{% pageinfo color="primary" %}}
 {{< message text="1" >}}
@@ -14,9 +14,9 @@ To deploy the Operator, follow the instructions available [here](../../#installa
 
 Note that the deployment of the driver using the operator does not use any Helm charts and the installation and configuration parameters will be slightly different from the one specified via the Helm installer.
 
-### Listing installed drivers with the ContainerStorageModule CRD
+### Listing installed drivers
 
-User can query for all Dell CSI drivers using the following command:
+To query for all Dell CSI drivers installed with the ContainerStorageModule CRD use the following command:
 
 ```bash
 kubectl get csm --all-namespaces

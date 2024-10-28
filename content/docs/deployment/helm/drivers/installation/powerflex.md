@@ -1,8 +1,8 @@
 ---
 title: PowerFlex
-linktitle: PowerFlex
+linkTitle: PowerFlex
 description: >
-  Installing the CSI Driver for PowerFlex via Helm
+  Installing the CSI Driver for Dell PowerFlex via Helm
 ---
 {{% pageinfo color="primary" %}}
 {{< message text="1" >}}

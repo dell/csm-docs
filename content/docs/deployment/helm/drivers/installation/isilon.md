@@ -1,7 +1,8 @@
 ---
 title: PowerScale
+linkTitle: PowerScale
 description: >
-  Installing CSI Driver for PowerScale via Helm
+  Installing the CSI Driver for Dell PowerScale via Helm
 ---
 {{% pageinfo color="primary" %}}
 {{< message text="1" >}}

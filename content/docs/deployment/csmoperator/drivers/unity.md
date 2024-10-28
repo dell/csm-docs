@@ -1,8 +1,8 @@
 ---
 title: Unity XT
-linkTitle: "Unity XT"
+linkTitle: Unity XT
 description: >
-  Installing Dell CSI Driver for Unity XT via Dell CSM Operator
+  Installing the CSI Driver for Dell Unity XT via Dell CSM Operator
 ---
 {{% pageinfo color="primary" %}}
 {{< message text="1" >}}
@@ -14,14 +14,15 @@ To deploy the Operator, follow the instructions available [here](../../#installa
 
 Note that the deployment of the driver using the operator does not use any Helm charts and the installation and configuration parameters will be slightly different from the one specified via the Helm installer.
 
-### Listing installed drivers with the ContainerStorageModule CRD
-User can query for all Dell CSI drivers using the following command:
+### Listing installed drivers
+
+To query for all Dell CSI drivers installed with the ContainerStorageModule CRD use the following command:
+
 ```bash
 kubectl get csm --all-namespaces
 ```
 
-
-### Prerequisite
+### Prerequisites
 
 1. Create namespace.
    Execute `kubectl create namespace unity` to create the unity namespace (if not already present). Note that the namespace can be any user-defined name, in this example, we assume that the namespace is 'unity'.
