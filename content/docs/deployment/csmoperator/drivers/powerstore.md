@@ -10,7 +10,7 @@ To deploy the Operator, follow the instructions available [here](../../#installa
 
 Note that the deployment of the driver using the operator does not use any Helm charts and the installation and configuration parameters will be slightly different from the one specified via the Helm installer.
 
-### Listing installed drivers
+## Listing installed drivers
 
 To query for all Dell CSI drivers installed with the ContainerStorageModule CRD use the following command:
 
@@ -322,7 +322,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
    sed "s/CONFIG_YAML/`cat config.yaml | base64 -w0`/g" secret.yaml | kubectl apply -f -
    ```
 
-### Install Driver
+## Install Driver
 
 1. Follow all the [prerequisites](#prerequisites) above
 
