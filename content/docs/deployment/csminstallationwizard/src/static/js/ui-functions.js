@@ -482,14 +482,14 @@ function displayModules(installationType, driverName, CONSTANTS_PARAM) {
 
 // Function to compare two version strings
 function isVersionGreaterOrEqualTo(currentVersion, targetVersion) {
-    const currentParts = currentVersion.split('.').map(Number);
-    const targetParts = targetVersion.split('.').map(Number);
+	const currentParts = currentVersion.split('.').map(Number);
+	const targetParts = targetVersion.split('.').map(Number);
 
-    for (let i = 0; i < targetParts.length; i++) {
-        if (currentParts[i] > targetParts[i]) return true;
-        if (currentParts[i] < targetParts[i]) return false;
-    }
-    return true;
+	for (let i = 0; i < targetParts.length; i++) {
+		if (currentParts[i] > targetParts[i]) return true;
+		if (currentParts[i] < targetParts[i]) return false;
+	}
+	return true;
 }
 
 function displayCommands(releaseNameValue, commandTitleValue, commandNoteValue, commandNoteOperatorValue, csmOperatorNoteValue, command1Value, command2Value, command3Value, CONSTANTS) {
