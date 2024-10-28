@@ -416,7 +416,7 @@ function displayModules(installationType, driverName, CONSTANTS_PARAM) {
 			$(".cluster-prefix").show();
 			$(".port-groups").show();
 			// Check the CSM version and show the resiliency module if version is greater than 1.11.0
-			if (isVersionGreaterThan(document.getElementById("csm-version").value, "1.11.0")) {
+			if (isVersionGreaterOrEqualTo(document.getElementById("csm-version").value, "1.11.0")) {
 				$(".resiliency").show();
 			}
 			$(".migration").show();
@@ -436,7 +436,7 @@ function displayModules(installationType, driverName, CONSTANTS_PARAM) {
 				$(".observability").hide();
 				$(".resiliency").hide();
 				// Check the CSM version and show the resiliency module if version is greater than 1.11.0
-				if (isVersionGreaterThan(document.getElementById("csm-version").value, "1.11.0")) {
+				if (isVersionGreaterOrEqualTo(document.getElementById("csm-version").value, "1.11.0")) {
 					$(".resiliency-operator").show();
 				}
 				$(".replication-operator-clusterid").hide();
@@ -481,7 +481,7 @@ function displayModules(installationType, driverName, CONSTANTS_PARAM) {
 }
 
 // Function to compare two version strings
-function isVersionGreaterThan(currentVersion, targetVersion) {
+function isVersionGreaterOrEqualTo(currentVersion, targetVersion) {
     const currentParts = currentVersion.split('.').map(Number);
     const targetParts = targetVersion.split('.').map(Number);
 
