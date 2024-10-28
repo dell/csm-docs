@@ -126,6 +126,7 @@ The `csm-offline-bundle.sh` script can be used to create a package usable for of
 Multiple Linux-based systems may be required to create and process an offline bundle for use.
 * One Linux-based system, with Internet access, will be used to create the bundle. This involves the user cloning a git repository hosted on github.com and then invoking a script that utilizes `docker` or `podman` to pull and save container images to file.
 * One Linux-based system, with access to an image registry, to invoke a script that uses `docker` or `podman` to restore container images from file and push them to a registry
+* RedHat credentials to pull `openshift4/ose-kube-rbac-proxy-rhel9` image from `registry.redhat.io` (This registry does not support unauthenticated access)
 
 If one Linux system has both Internet access and access to an internal registry, that system can be used for both steps.
 
@@ -152,6 +153,7 @@ To perform an offline installation, the following steps should be performed:
 >NOTE: It is recommended to use the same build tool for packing and unpacking of images (either docker or podman).
 
 #### Building an offline bundle
+>NOTE: Login to the `registry.redhat.io` registry using RedHat credentials before you proceed with offline bundle creation.
 
 This needs to be performed on a Linux system with access to the Internet as a git repo will need to be cloned, and container images pulled from public registries.
 
