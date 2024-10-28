@@ -7,7 +7,9 @@ tags:
 weight: 1
 Description: Upgrade PowerMax CSI driver
 ---
-
+{{% pageinfo color="primary" %}}
+{{< message text="2" >}}
+{{% /pageinfo %}}
 You can upgrade CSI Driver for Dell PowerMax using Helm or Dell CSM Operator.
 
 **Note:** CSI Driver for PowerMax v2.4.0 requires 10.0 REST endpoint support of Unisphere.

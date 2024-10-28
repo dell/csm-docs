@@ -5,6 +5,9 @@ weight: 2
 description: >
   Installation of CSM for Replication
 ---
+{{% pageinfo color="primary" %}}
+{{< message text="1" >}}
+{{% /pageinfo %}}
 
 The installation process consists of two steps:
 

@@ -5,6 +5,10 @@ description: >
   Dell Technologies (Dell) Container Storage Modules (CSM) for Authorization v2.0 Helm deployment
 ---
 
+{{% pageinfo color="primary" %}}
+{{< message text="1" >}}
+{{% /pageinfo %}}
+
 CSM Authorization can be installed by using the provided Helm v3 charts on Kubernetes platforms.
 
 The following CSM Authorization components are installed in the specified namespace:
