@@ -371,3 +371,16 @@ CRDs should be configured during replication prepare stage with repctl as descri
 **Note** :
    1. "Kubelet config dir path" is not yet configurable in case of Operator based driver installation.
    2. Snapshotter and resizer sidecars are not optional. They are defaults with Driver installation.
+
+## Dynamic secret change detection
+
+CSI PowerStore supports the ability to dynamically modify array information within the secret, allowing users to update
+<u>_credentials_</u> for the PowerStore arrays, in-flight, without restarting the driver.
+> Note: Updates to the secret that include adding a new array, or modifying the endpoint, globalID, or blockProtocol parameters
+> require the driver to be restarted to properly pick up and process the changes.
+
+To do so, change the configuration file `config.yaml` and apply the update using the following command:
+```bash
+
+sed "s/CONFIG_YAML/`cat config.yaml | base64 -w0`/g" secret.yaml | kubectl apply -f -
+```

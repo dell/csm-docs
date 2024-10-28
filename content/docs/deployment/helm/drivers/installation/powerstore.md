@@ -433,12 +433,15 @@ Starting with CSI PowerStore v1.4.0, `dell-csi-helm-installer` will not create a
 
 ## Dynamically update the powerstore secrets
 
-Users can dynamically modify array information within the secret. Whenever an update happens the driver updates the “Host” information in an array. User can update the secret using the following commands:
+CSI PowerStore supports the ability to dynamically modify array information within the secret, allowing users to update
+<u>_credentials_</u> for the PowerStore arrays, in-flight, without restarting the driver.
+> Note: Updates to the secret that include adding a new array, or modifying the endpoint, globalID, or blockProtocol parameters
+> require the driver to be restarted to properly pick up and process the changes.
+
+User can update the secret using the following commands:
 ```bash
 kubectl create secret generic powerstore-config -n csi-powerstore --from-file=config=secret.yaml -o yaml --dry-run=client | kubectl replace -f -
-kubectl rollout restart daemonset -n csi-powerstore
 ```
->Note: The driver's node pods must be restarted to apply any changes made to the secret. This is achieved using the `kubectl rollout restart` command above.
 
 ## Dynamic Logging Configuration
 
