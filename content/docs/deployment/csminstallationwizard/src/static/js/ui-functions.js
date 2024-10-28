@@ -423,7 +423,7 @@ function displayModules(installationType, driverName, CONSTANTS_PARAM) {
 				$(".observability").hide();
 				$(".resiliency").hide();
 				// Check the CSM version and show the resiliency module if version is greater than 1.11.0
-				if (isVersionGreaterThan(document.getElementById("csm-version").value, "1.11.0")) {
+				if (isVersionGreaterOrEqualTo(document.getElementById("csm-version").value, "1.11.0")) {
 					$(".resiliency-operator").show();
 				}
 				$(".replication-operator-clusterid").hide();
