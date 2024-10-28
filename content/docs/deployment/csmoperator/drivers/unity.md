@@ -7,8 +7,6 @@ description: >
 {{% pageinfo color="primary" %}}
 {{< message text="1" >}}
 {{% /pageinfo %}}
-## Installing CSI Driver for Unity XT via Dell CSM Operator
-
 The CSI Driver for Dell Unity XT can be installed via the Dell CSM Operator.
 To deploy the Operator, follow the instructions available [here](../../#installation).
 
