@@ -415,8 +415,8 @@ function displayModules(installationType, driverName, CONSTANTS_PARAM) {
 			$(".storageArrays").show();
 			$(".cluster-prefix").show();
 			$(".port-groups").show();
-			$(".resiliency").hide();
-			if (document.getElementById("csm-version").value === "1.11.0") {
+			// Check the CSM version and show the resiliency module if version is greater than 1.11.0
+			if (isVersionGreaterOrEqualTo(document.getElementById("csm-version").value, "1.11.0")) {
 				$(".resiliency").show();
 			}
 			$(".migration").show();
@@ -435,7 +435,8 @@ function displayModules(installationType, driverName, CONSTANTS_PARAM) {
 				$(".observability-operator").show();
 				$(".observability").hide();
 				$(".resiliency").hide();
-				if (document.getElementById("csm-version").value === "1.11.0") {
+				// Check the CSM version and show the resiliency module if version is greater than 1.11.0
+				if (isVersionGreaterOrEqualTo(document.getElementById("csm-version").value, "1.11.0")) {
 					$(".resiliency-operator").show();
 				}
 				$(".replication-operator-clusterid").hide();
@@ -477,6 +478,18 @@ function displayModules(installationType, driverName, CONSTANTS_PARAM) {
 			document.getElementById("driver-namespace").value = CONSTANTS_PARAM.UNITY_NAMESPACE;
 			break;
 	}
+}
+
+// Function to compare two version strings
+function isVersionGreaterOrEqualTo(currentVersion, targetVersion) {
+	const currentParts = currentVersion.split('.').map(Number);
+	const targetParts = targetVersion.split('.').map(Number);
+
+	for (let i = 0; i < targetParts.length; i++) {
+		if (currentParts[i] > targetParts[i]) return true;
+		if (currentParts[i] < targetParts[i]) return false;
+	}
+	return true;
 }
 
 function displayCommands(releaseNameValue, commandTitleValue, commandNoteValue, commandNoteOperatorValue, csmOperatorNoteValue, command1Value, command2Value, command3Value, CONSTANTS) {
