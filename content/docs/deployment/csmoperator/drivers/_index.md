@@ -4,7 +4,9 @@ linkTitle: "CSI Drivers"
 description: Installation of Dell CSI Drivers using Dell CSM Operator
 weight: 1
 ---
-
+{{% pageinfo color="primary" %}}
+{{< message text="1" >}}
+{{% /pageinfo %}}
 ## (Optional) Volume Snapshot Requirements
 
 On Upstream Kubernetes clusters, ensure that to install

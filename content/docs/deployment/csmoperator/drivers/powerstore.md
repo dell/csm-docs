@@ -4,7 +4,9 @@ linkTitle: "PowerStore"
 description: >
   Installing Dell CSI Driver for PowerStore via Dell CSM Operator
 ---
-
+{{% pageinfo color="primary" %}}
+{{< message text="1" >}}
+{{% /pageinfo %}}
 ## Installing CSI Driver for PowerStore via Dell CSM Operator
 
 The CSI Driver for Dell PowerStore can be installed via the Dell CSM Operator.
