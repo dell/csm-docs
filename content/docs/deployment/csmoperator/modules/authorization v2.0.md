@@ -4,7 +4,9 @@ linkTitle: "Authorization v2.0"
 description: >
   Installing Authorization v2.0 via Dell CSM Operator
 ---
-
+{{% pageinfo color="primary" %}}
+{{< message text="1" >}}
+{{% /pageinfo %}}
 ## Install CSM Authorization via Dell CSM Operator
 
 The CSM Authorization module for supported Dell CSI Drivers can be installed via the Dell CSM Operator.

@@ -5,7 +5,6 @@ weight: 1
 description: >
   CSM for Authorization v1 to v2 Migration Guide
 ---
-
 CSM for Authorization v2 has significant architectural changes that prevent a user from upgradng CSM for Authorization v1 to CSM for Authorization v2. This page provides a reference guide for migrating v1 to v2 using Powerflex as an example.
 
 **Before migration please note following points**

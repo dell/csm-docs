@@ -5,7 +5,9 @@ weight: 3
 description: >
   Dell Container Storage Modules (CSM) for Observability Offline Installer
 ---
-
+{{% pageinfo color="primary" %}}
+{{< message text="3" >}}
+{{% /pageinfo %}}
 The following instructions can be followed when a Helm chart will be installed in an environment that does not have an Internet connection and will be unable to download the Helm chart and related Docker images.
 
 ## Prerequisites

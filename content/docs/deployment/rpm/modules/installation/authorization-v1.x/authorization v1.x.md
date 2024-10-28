@@ -6,7 +6,10 @@ description: >
 ---
 
 {{% pageinfo color="primary" %}}
-The CSM Authorization RPM will be deprecated in a future release. It is highly recommended that you use CSM Authorization Helm deployment or CSM Operator going forward.
+1. The CSM Authorization RPM will be deprecated in a future release. It is highly recommended that you use CSM    Authorization Helm deployment or CSM Operator going forward.
+
+2. <span></span>{{< message text="1" >}}
+
 {{% /pageinfo %}}
 
 This section outlines the deployment steps for Container Storage Modules (CSM) for Authorization.  The deployment of CSM for Authorization is handled in 2 parts:

@@ -4,6 +4,9 @@ linktitle: Installation using script
 weight: 4
 description: Installation of CSM for Replication using script (Helm chart)
 ---
+{{% pageinfo color="primary" %}}
+{{< message text="1" >}}
+{{% /pageinfo %}}
 
 ## Install Replication Walkthrough
 > **_NOTE:_**  These steps should be repeated on all Kubernetes clusters where you want to configure replication.

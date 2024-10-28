@@ -4,6 +4,9 @@ linktitle: Installation using repctl
 weight: 4
 description: Installation of CSM for Replication using repctl
 ---
+{{% pageinfo color="primary" %}}
+{{< message text="1" >}}
+{{% /pageinfo %}}
 
 ## Install Replication Walkthrough
 > **_NOTE:_**  These steps should not be used when installing using Dell CSM Operator.

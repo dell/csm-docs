@@ -5,7 +5,9 @@ weight: 5
 Description: >
   Release notes for Dell Container Storage Modules Operator
 ---
-
+{{% pageinfo color="primary" %}}
+{{< message text="1" >}}
+{{% /pageinfo %}}
 ## Release Notes - Container Storage Modules Operator v1.6.0
 
 

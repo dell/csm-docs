@@ -5,6 +5,9 @@ weight: 3
 description: >
   Dell Container Storage Modules (CSM) for Observability Helm deployment
 ---
+{{% pageinfo color="primary" %}}
+{{< message text="1" >}}
+{{% /pageinfo %}}
 
 The Container Storage Modules (CSM) for Observability Helm chart bootstraps an Observability deployment on a Kubernetes cluster using the Helm package manager.
 

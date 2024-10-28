@@ -5,7 +5,9 @@ weight: 9
 description: >
    Upgrade guide
 ---
-
+{{% pageinfo color="primary" %}}
+{{< message text="2" >}}
+{{% /pageinfo %}}
 CSM Replication module consists of two components: 
 * CSM Replication sidecar (installed along with the driver) 
 * CSM Replication controller

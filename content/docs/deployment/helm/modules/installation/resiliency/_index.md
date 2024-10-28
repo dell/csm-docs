@@ -5,7 +5,9 @@ weight: 3
 description: >
   Dell Container Storage Modules (CSM) for Resiliency installation
 ---
-
+{{% pageinfo color="primary" %}}
+{{< message text="1" >}}
+{{% /pageinfo %}}
 CSM for Resiliency is installed as part of the Dell CSI driver installation.
 
 For information on the PowerFlex CSI driver, see [PowerFlex CSI Driver](https://github.com/dell/csi-powerflex).

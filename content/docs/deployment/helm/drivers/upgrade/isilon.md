@@ -6,6 +6,10 @@ tags:
 weight: 1
 Description: Upgrade PowerScale CSI driver
 ---
+{{% pageinfo color="primary" %}}
+{{< message text="2" >}}
+{{% /pageinfo %}}
+
 You can upgrade the CSI Driver for Dell PowerScale using Helm or Dell CSM Operator.
 
 ## Upgrade Driver from version 2.10.1 to 2.11.0 using Helm
