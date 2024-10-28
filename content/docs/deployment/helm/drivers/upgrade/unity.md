@@ -6,7 +6,9 @@ tags:
 weight: 1
 Description: Upgrade Unity XT CSI driver
 ---
-
+{{% pageinfo color="primary" %}}
+{{< message text="2" >}}
+{{% /pageinfo %}}
 You can upgrade the CSI Driver for Dell Unity XT using Helm or Dell CSM Operator.
 
 **Note:**

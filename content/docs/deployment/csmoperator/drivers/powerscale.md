@@ -4,7 +4,9 @@ linkTitle: PowerScale
 description: >
   Installing the CSI Driver for Dell PowerScale via Dell CSM Operator
 ---
-
+{{% pageinfo color="primary" %}}
+{{< message text="1" >}}
+{{% /pageinfo %}}
 The CSI Driver for Dell PowerScale can be installed via the Dell CSM Operator.
 To deploy the Operator, follow the instructions available [here](../../#installation).
 
