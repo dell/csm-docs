@@ -4,7 +4,9 @@ linktitle: Configuration
 weight: 2
 description: Configure CSM Authorization Proxy Server
 ---
-
+{{% pageinfo color="primary" %}}
+{{< message text="1" >}}
+{{% /pageinfo %}}
 This section provides the details and instructions on how to configure CSM Authorization.
 
 ## Configuring the CSM for Authorization Proxy Server
