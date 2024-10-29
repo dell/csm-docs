@@ -4,7 +4,9 @@ linktitle: PowerMax
 description: >
   Enabling CSM Authorization for PowerMax CSI Driver
 ---
-
+{{% pageinfo color="primary" %}}
+{{< message text="1" >}}
+{{% /pageinfo %}}
 ## Configuring PowerMax CSI Driver with CSM for Authorization
 
 Given a setup where Kubernetes, a storage system, and the CSM for Authorization Proxy Server are deployed, follow these steps to configure the CSI Drivers to work with the Authorization sidecar:

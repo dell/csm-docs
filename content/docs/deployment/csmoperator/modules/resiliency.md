@@ -4,6 +4,9 @@ linkTitle: "Resiliency"
 description: >
   Installing Resiliency via Dell CSM Operator
 ---
+{{% pageinfo color="primary" %}}
+{{< message text="1" >}}
+{{% /pageinfo %}}
 
 The CSM Resiliency module for supported Dell CSI Drivers can be installed via the Dell CSM Operator. Dell CSM Operator will deploy CSM Resiliency sidecar.
 
