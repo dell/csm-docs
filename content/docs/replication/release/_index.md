@@ -5,19 +5,7 @@ weight: 9
 Description: >
   Dell Container Storage Modules (CSM) release notes for replication
 ---
-
 ## Release Notes - CSM Replication 1.10.0
-
-
-
-
-
-
-
-
-
-
-
 
 ### New Features/Changes
 
@@ -32,4 +20,4 @@ Description: >
 ### Known Issues
 | Symptoms | Prevention, Resolution or Workaround |
 | --- | --- | 
-| When running CSI-PowerMax with Replication in a multi-cluster configuration, the driver on the target cluster fails and the following error is seen in logs: `error="CSI reverseproxy service host or port not found, CSI reverseproxy not installed properly"` | The reverseproxy service needs to be created manually on the target cluster. Follow [the instructions here](../../../deployment/csmoperator/modules/replication) to create it.|
+| When running CSI-PowerMax with Replication in a multi-cluster configuration, the driver on the target cluster fails and the following error is seen in logs: `error="CSI reverseproxy service host or port not found, CSI reverseproxy not installed properly"` | The reverseproxy service needs to be created manually on the target cluster. Follow [the instructions here](../../../joos/csmoperator/modules/replication) to create it.|
