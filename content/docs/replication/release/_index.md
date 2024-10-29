@@ -20,4 +20,4 @@ Description: >
 ### Known Issues
 | Symptoms | Prevention, Resolution or Workaround |
 | --- | --- | 
-| When running CSI-PowerMax with Replication in a multi-cluster configuration, the driver on the target cluster fails and the following error is seen in logs: `error="CSI reverseproxy service host or port not found, CSI reverseproxy not installed properly"` | The reverseproxy service needs to be created manually on the target cluster. Follow [the instructions here](../../../../deployment/csmoperator/modules/joos) to create it.|
+| When running CSI-PowerMax with Replication in a multi-cluster configuration, the driver on the target cluster fails and the following error is seen in logs: `error="CSI reverseproxy service host or port not found, CSI reverseproxy not installed properly"` | The reverseproxy service needs to be created manually on the target cluster. Follow [the instructions here](../../deployment/csmoperator/modules/replication) to create it.|
