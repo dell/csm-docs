@@ -4,6 +4,9 @@ linktitle: Helm
 description: >
   Dell Technologies (Dell) Container Storage Modules (CSM) for Authorization Helm backup and restore
 ---
+{{% pageinfo color="primary" %}}
+{{< message text="5" >}}
+{{% /pageinfo %}}
 
 ## Roles
 
