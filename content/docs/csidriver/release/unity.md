@@ -18,6 +18,7 @@ description: Release notes for Unity XT CSI driver
 - [#1359 - [FEATURE]: Add Support for OpenShift Container Platform (OCP) 4.16 ](https://github.com/dell/csm/issues/1359)
 - [#1400 - [FEATURE]: Support for Kubernetes 1.30](https://github.com/dell/csm/issues/1400)
 - [#1399 - [FEATURE]: Unity 5.4 Support](https://github.com/dell/csm/issues/1399)
+- [#1415 - [FEATURE]: Unity consistency update to reduce the number of authentication API calls](https://github.com/dell/csm/issues/1415)
 
 ### Fixed Issues
 
