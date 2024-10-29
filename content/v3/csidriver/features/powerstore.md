@@ -533,18 +533,21 @@ kubectl create -f storageclass.yaml
 
 After that, you can use `powerstore-1` storage class to create volumes on the first array and `powerstore-2` storage class to create volumes on the second array. 
 
-## Dynamic secret change detection 
+## Dynamic secret change detection
 
-CSI PowerStore driver version 1.3.0 and later supports the ability to detect changes to array configuration Kubernetes secret. This essentially means that you can change credentials for your PowerStore arrays in-flight (without restarting the driver). 
+CSI PowerStore supports the ability to dynamically modify array information within the secret, allowing users to update
+<u>_credentials_</u> for the PowerStore arrays, in-flight, without restarting the driver.
+> Note: Updates to the secret that include adding a new array, or modifying the endpoint, globalID, or blockProtocol parameters
+> require the driver to be restarted to properly pick up and process the changes.
 
-To do so just change your configuration file `config.yaml` and apply it again using the following command:
+To do so, change the configuration file `config.yaml` and apply the update using the following command:
 ```bash
 
 sed "s/CONFIG_YAML/`cat config.yaml | base64 -w0`/g" secret.yaml | kubectl apply -f -
 ```
 
-After Kubernetes remounts secret to driver containers (this usually takes around one minute), a driver must detect the change and start using this new configuration information. 
-
+After Kubernetes remounts the secret to the driver containers (this usually takes around one minute), the driver will detect the change and start using
+the new configuration information.
 
 ## Configuring custom access to NFS exports
 

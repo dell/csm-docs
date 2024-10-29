@@ -1,0 +1,11 @@
+{{ if eq (.Get "text") "1" }} 
+  Starting with CSM 1.12, all deployments will use images from <a href="https://quay.io/organization/dell">quay.io</a> by default. New release images will be available on <a href="https://hub.docker.com/r/dellemc/">Docker Hub</a> until CSM 1.14 (May 2025), and existing releases will remain on Docker Hub.
+{{ else if eq (.Get "text") "2" }}
+  Starting with CSM 1.12, all deployments will need to use images from <a href="https://quay.io/organization/dell">quay.io</a>. Please note that from CSM 1.14 (May 2025), upgrading with helm will fail if it attempts to use images from <a href="https://hub.docker.com/r/dellemc/">Docker Hub</a>.
+{{ else if eq (.Get "text") "3" }}
+  Starting with CSM 1.12, all deployments will use images from <a href="https://quay.io/organization/dell">quay.io</a> by default. New release images will be available on <a href="https://hub.docker.com/r/dellemc/">Docker Hub</a> until CSM 1.14 (May 2025), and existing releases will remain on Docker Hub.
+{{ else if eq (.Get "text") "4" }}
+Starting with CSM 1.12, all deployments will need to use images from <a href="https://quay.io/organization/dell">quay.io</a> . Please note that from CSM 1.14 (May 2025), upgrading will fail if it attempts to use images from <a href="https://hub.docker.com/r/dellemc/">Docker Hub</a>.
+{{ else }}
+  <p>Default text if no valid parameter is passed.</p>
+{{ end }}

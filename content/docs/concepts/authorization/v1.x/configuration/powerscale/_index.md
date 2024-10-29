@@ -127,8 +127,8 @@ kubectl -n isilon create secret generic karavi-authorization-config --from-file=
       enabled: true
 
       # sidecarProxyImage: the container image used for the csm-authorization-sidecar.
-      # Default value: dellemc/csm-authorization-sidecar:v1.12.0
-      sidecarProxyImage: dellemc/csm-authorization-sidecar:v1.12.0
+      # Default value: quay.io/dell/container-storage-modules/csm-authorization-sidecar:v1.12.0
+      sidecarProxyImage: quay.io/dell/container-storage-modules/csm-authorization-sidecar:v1.12.0
 
       # proxyHost: hostname of the csm-authorization server
       # Default value: None
@@ -165,7 +165,7 @@ kubectl -n isilon create secret generic karavi-authorization-config --from-file=
         configVersion: v1.12.0
         components:
         - name: karavi-authorization-proxy
-          image: dellemc/csm-authorization-sidecar:v1.12.0
+          image: quay.io/dell/container-storage-modules/csm-authorization-sidecar:v1.12.0
           envs:
             # proxyHost: hostname of the csm-authorization server
             - name: "PROXY_HOST"

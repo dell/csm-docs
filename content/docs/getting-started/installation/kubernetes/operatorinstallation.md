@@ -1,11 +1,41 @@
 ---
-title: "Operator installation "
-linkTitle: "Operator Installation"
-weight: 1 
-toc_hide: true
-Description: >
+title: "CSM Operator"
+linkTitle: "CSM Operator"
+description: Container Storage Modules Operator
+weight: 2
+---
+{{% pageinfo color="primary" %}}
+{{< message text="1" >}}
+{{% /pageinfo %}}
+The Dell Container Storage Modules Operator is a Kubernetes Operator, which can be used to install and manage the CSI Drivers and CSM Modules provided by Dell for various storage platforms. This operator is available as a community operator for upstream Kubernetes and can be deployed using OperatorHub.io. The operator can be installed using OLM (Operator Lifecycle Manager) or manually.
 
----  
+## Supported CSM Components
+
+The table below lists the driver and modules versions installable with the CSM Operator:
+
+| CSI Driver         | Version | CSM Authorization 1.x.x , 2.x.x | CSM Replication | CSM Observability | CSM Resiliency |
+| ------------------ |---------|---------------------------------|-----------------|-------------------|----------------|
+| CSI PowerScale     | 2.12.0  | ✔ 1.12.0  , 2.0.0              | ✔ 1.10.0       | ✔ 1.10.0          | ✔ 1.11.0      |
+| CSI PowerScale     | 2.11.0  | ✔ 1.11.0  , ❌             | ✔ 1.9.0        | ✔ 1.9.0           | ✔ 1.10.0      |
+| CSI PowerScale     | 2.10.1  | ✔ 1.10.1  , ❌             | ✔ 1.8.1        | ✔ 1.8.1           | ✔ 1.9.1       |
+| CSI PowerFlex      | 2.12.0  | ✔ 1.12.0  , 2.0.0           | ✔ 1.10.0       | ✔ 1.10.0          | ✔ 1.11.0      |
+| CSI PowerFlex      | 2.11.0  | ✔ 1.11.0  , ❌             | ✔ 1.9.0        | ✔ 1.9.0           | ✔ 1.10.0      |
+| CSI PowerFlex      | 2.10.1  | ✔ 1.10.1  , ❌             | ✔ 1.8.1        | ✔ 1.8.1           | ✔ 1.9.1       |
+| CSI PowerStore     | 2.12.0  | ❌ , ❌                    | ❌             | ❌                | ✔ 1.11.0      |
+| CSI PowerStore     | 2.11.1  | ❌ , ❌                    | ❌             | ❌                | ✔ 1.10.0      |
+| CSI PowerStore     | 2.10.1  | ❌ , ❌                    | ❌             | ❌                | ✔ 1.9.1       |
+| CSI PowerMax       | 2.12.0  | ✔ 1.12.0  , 2.0.0           | ✔ 1.10.0       | ✔ 1.10.0          | ✔ 1.11.0      |
+| CSI PowerMax       | 2.11.0  | ✔ 1.11.0  , ❌             | ✔ 1.9.0        | ✔ 1.9.0           | ✔ 1.10.0      |
+| CSI PowerMax       | 2.10.1  | ✔ 1.10.1  , ❌             | ✔ 1.8.1        | ✔ 1.8.1           | ❌            |
+| CSI Unity XT       | 2.12.0  | ❌ , ❌                    | ❌             | ❌                | ❌            |
+| CSI Unity XT       | 2.11.1  | ❌ , ❌                    | ❌             | ❌                | ❌            |
+| CSI Unity XT       | 2.10.1  | ❌ , ❌                    | ❌             | ❌                | ❌            |
+
+These CR will be used for new deployment or upgrade. In most case, it is recommended to use the latest available version.
+
+The full compatibility matrix of CSI/CSM versions for the CSM Operator is available [here](../../prerequisites/#csm-operator-compatibility-matrix)
+
+## Installation
 
 Before installing the driver, you need to install the operator. You can find the installation instructions here.
 <!--
@@ -100,6 +130,7 @@ The `csm-offline-bundle.sh` script can be used to create a package usable for of
 Multiple Linux-based systems may be required to create and process an offline bundle for use.
 * One Linux-based system, with Internet access, will be used to create the bundle. This involves the user cloning a git repository hosted on github.com and then invoking a script that utilizes `docker` or `podman` to pull and save container images to file.
 * One Linux-based system, with access to an image registry, to invoke a script that uses `docker` or `podman` to restore container images from file and push them to a registry
+* RedHat credentials to pull `openshift4/ose-kube-rbac-proxy-rhel9` image from `registry.redhat.io` (This registry does not support unauthenticated access)
 
 If one Linux system has both Internet access and access to an internal registry, that system can be used for both steps.
 
@@ -126,6 +157,7 @@ To perform an offline installation, the following steps should be performed:
 >NOTE: It is recommended to use the same build tool for packing and unpacking of images (either docker or podman).
 
 #### Building an offline bundle
+>NOTE: Login to the `registry.redhat.io` registry using RedHat credentials before you proceed with offline bundle creation.
 
 This needs to be performed on a Linux system with access to the Internet as a git repo will need to be cloned, and container images pulled from public registries.
 
@@ -156,22 +188,22 @@ Here is the output of a request to build an offline bundle for the Dell CSM Oper
 
 * Pulling and saving container images
 
-   dellemc/csi-isilon:v2.12.0
-   dellemc/csi-metadata-retriever:v1.9.0
-   dellemc/csipowermax-reverseproxy:v2.11.0
-   dellemc/csi-powermax:v2.12.0
-   dellemc/csi-powerstore:v2.12.0
-   dellemc/csi-unity:v2.12.0
-   dellemc/csi-vxflexos:v2.12.0
-   dellemc/csm-authorization-sidecar:v1.12.0
-   dellemc/csm-metrics-powerflex:v1.10.0
-   dellemc/csm-metrics-powerscale:v1.7.0
-   dellemc/csm-topology:v1.10.0
-   dellemc/dell-csi-replicator:v1.10.0
-   dellemc/dell-replication-controller:v1.10.0
+   quay.io/dell/container-storage-modules/csi-isilon:v2.12.0
+   quay.io/dell/container-storage-modules/csi-metadata-retriever:v1.9.0
+   quay.io/dell/container-storage-modules/csipowermax-reverseproxy:v2.11.0
+   quay.io/dell/container-storage-modules/csi-powermax:v2.12.0
+   quay.io/dell/container-storage-modules/csi-powerstore:v2.12.0
+   quay.io/dell/container-storage-modules/csi-unity:v2.12.0
+   quay.io/dell/container-storage-modules/csi-vxflexos:v2.12.0
+   quay.io/dell/container-storage-modules/csm-authorization-sidecar:v1.12.0
+   quay.io/dell/container-storage-modules/csm-metrics-powerflex:v1.10.0
+   quay.io/dell/container-storage-modules/csm-metrics-powerscale:v1.7.0
+   quay.io/dell/container-storage-modules/csm-topology:v1.10.0
+   quay.io/dell/container-storage-modules/dell-csi-replicator:v1.10.0
+   quay.io/dell/container-storage-modules/dell-replication-controller:v1.10.0
    dellemc/sdc:4.5.2.1
-   docker.io/dellemc/dell-csm-operator:v1.7.0
-   gcr.io/kubebuilder/kube-rbac-proxy:v0.8.0
+   quay.io/dell/container-storage-modules/dell-csm-operator:v1.7.0
+   registry.redhat.io/openshift4/ose-kube-rbac-proxy-rhel9:v4.16.0-202409051837.p0.g8ea2c99.assembly.stream.el9
    nginxinc/nginx-unprivileged:1.20
    otel/opentelemetry-collector:0.42.0
    registry.k8s.io/sig-storage/csi-attacher:v4.7.0
@@ -254,10 +286,10 @@ Here is the output for preparing the bundle for installation (`localregistry:500
 ```
 Preparing a offline bundle for installation
 
-* Loading docker images
+* Loading quay.io images
 
-Loaded image: docker.io/dellemc/csi-powerstore:v2.12.0
-Loaded image: docker.io/dellemc/csi-isilon:v2.12.0
+Loaded image: quay.io/dell/container-storage-modules/csi-powerstore:v2.12.0
+Loaded image: quay.io/dell/container-storage-modules/csi-isilon:v2.12.0
 ...
 ...
 Loaded image: registry.k8s.io/sig-storage/csi-resizer:v1.12.0
@@ -265,8 +297,8 @@ Loaded image: registry.k8s.io/sig-storage/csi-snapshotter:v8.1.0
 
 * Tagging and pushing images
 
-   dellemc/csi-isilon:v2.12.0 -> localregistry:5000/dell-csm-operator/csi-isilon:v2.12.0
-   dellemc/csi-metadata-retriever:v1.9.0 -> localregistry:5000/dell-csm-operator/csi-metadata-retriever:v1.9.0
+   quay.io/dell/container-storage-modules/csi-isilon:v2.12.0 -> localregistry:5000/dell-csm-operator/csi-isilon:v2.12.0
+   quay.io/dell/container-storage-modules/csi-metadata-retriever:v1.9.0 -> localregistry:5000/dell-csm-operator/csi-metadata-retriever:v1.9.0
    ...
    ...
    registry.k8s.io/sig-storage/csi-resizer:v1.12.0 -> localregistry:5000/dell-csm-operator/csi-resizer:v1.12.0
@@ -274,8 +306,8 @@ Loaded image: registry.k8s.io/sig-storage/csi-snapshotter:v8.1.0
 
 * Preparing files within /root/dell-csm-operator-bundle
 
-   changing: dellemc/csi-isilon:v2.12.0 -> localregistry:5000/dell-csm-operator/csi-isilon:v2.12.0
-   changing: dellemc/csi-metadata-retriever:v1.9.0 -> localregistry:5000/dell-csm-operator/csi-metadata-retriever:v1.9.0
+   changing: quay.io/dell/container-storage-modules/csi-isilon:v2.12.0 -> localregistry:5000/dell-csm-operator/csi-isilon:v2.12.0
+   changing: quay.io/dell/container-storage-modules/csi-metadata-retriever:v1.9.0 -> localregistry:5000/dell-csm-operator/csi-metadata-retriever:v1.9.0
    ...
    ...
    changing: registry.k8s.io/sig-storage/csi-resizer:v1.12.0 -> localregistry:5000/dell-csm-operator/csi-resizer:v1.12.0
@@ -291,4 +323,122 @@ Now that the required images are available and the Operator configuration update
 bash scripts/install.sh
 ```
 >NOTE: Dell CSM Operator would install to the 'dell-csm-operator' namespace by default.
---> 
+
+## Uninstall
+
+### Operator uninstallation on a cluster without OLM
+
+To uninstall a CSM operator, run `bash scripts/uninstall.sh`. This will uninstall the operator in `dell-csm-operator` namespace.
+
+{{< imgproc uninstall.jpg Resize "2500x" >}}{{< /imgproc >}}
+
+## Upgrade
+
+### Dell CSM Operator
+
+Dell CSM Operator can be upgraded in 2 ways:
+
+1. Using Operator Lifecycle Manager (OLM)
+
+2. Using script (for non-OLM based installation)
+
+#### Using OLM
+
+The upgrade of the Dell CSM Operator is done via Operator Lifecycle Manager.
+
+The `Update approval` (**`InstallPlan`** in OLM terms) strategy plays a role while upgrading dell-csm-operator on OpenShift. This option can be set during installation of dell-csm-operator on OpenShift via the console and can be either set to `Manual` or `Automatic`.
+- If the **`Update approval`** is set to `Automatic`, OpenShift automatically detects whenever the latest version of dell-csm-operator is available in the **`Operator hub`**, and upgrades it to the latest available version.
+- If the upgrade policy is set to `Manual`, OpenShift notifies of an available upgrade. This notification can be viewed by the user in the **`Installed Operators`** section of the OpenShift console. Clicking on the hyperlink to `Approve` the installation would trigger the dell-csm-operator upgrade process.
+
+>NOTE: The recommended version of OLM for Upstream Kubernetes is **`v0.25.0`**.
+
+#### Using Installation Script
+
+1. Clone and checkout the required csm-operator version using
+```bash
+git clone -b v1.7.0 https://github.com/dell/csm-operator.git
+```
+2. `cd csm-operator`
+3. Execute `bash scripts/install.sh --upgrade`  . This command will install the latest version of the operator.
+
+>NOTE: Dell CSM Operator would install to the 'dell-csm-operator' namespace by default.
+
+### Upgrading Drivers with Dell CSM Operator
+You can update CSI Drivers installed by the Dell CSM Operator like any Kubernetes resource:
+
+1. </b>Modify Installation via kubectl edit:</b></br>
+
+```bash
+kubectl get <driver-object> -n <driver-namespace>
+```
+2. Replace `<driver-namespace>` with the appropriate namespace. For example, to get the CSI PowerStore driver object: </br>
+```bash
+kubectl get csm -n <driver-namespace>
+```
+Use the object name in the kubectl edit command: </br>
+
+```bash
+kubectl edit csm <driver-object>/<object-name> -n <driver-namespace>
+```
+For example, if the object name is powerstore:</br>
+
+```bash
+kubectl edit csm powerstore -n <driver-namespace>
+```
+
+Modify the installation as needed, typically updating driver versions, sidecars, and environment variables.
+
+3. Refer how to [upgrade](https://infohub.delltechnologies.com/en-us/p/best-practices-for-deployment-and-life-cycle-management-of-dell-csm-modules-1/#:~:text=Upgrades%20with%20Operator) guide if you have more questions </br>
+
+> Note: Starting with CSM 1.12, use images from [quay.io](https://quay.io/organization/dell). From CSM 1.14 (May 2025), editing the CSM object will fail if using images from [Docker Hub](https://hub.docker.com/r/dellemc/).
+
+### Upgrade Modules using Dell CSM Operator
+
+* Refer [Upgrade Obsevability Module](./modules/observability/#upgrade-observability) to upgrade the Observability Module via Operator
+
+* Refer [Upgrade Authorization Module](./modules/authorization-v1.x/#upgrade-csm-authorization) to upgrade the Authorization Module via Operator
+
+## Custom Resource Definitions
+
+As part of the Dell CSM Operator installation, a CRD representing configuration for the CSI Driver and CSM Modules is also installed.
+`containerstoragemodule` CRD is installed in API Group `storage.dell.com`.
+
+Drivers and modules can be installed by creating a `customResource`.
+
+### Custom Resource Specification
+
+Each CSI Driver and CSM Module installation is represented by a Custom Resource.
+
+The specification for the Custom Resource is the same for all the drivers.Below is a list of all the mandatory and optional fields in the Custom Resource specification
+
+#### Mandatory fields
+
+**configVersion** - Configuration version - refer [here](#supported-csi-drivers) for appropriate config version.
+
+**replicas**  - Number of replicas for controller plugin - must be set to 1 for all drivers.
+
+**dnsPolicy** - Determines the dnsPolicy for the node daemonset. Accepted values are `Default`, `ClusterFirst`, `ClusterFirstWithHostNet`, `None`.
+
+**common** - This field is mandatory and is used to specify common properties for both controller and the node plugin.
+
+* image - driver container image
+* imagePullPolicy - Image Pull Policy of the driver image
+* envs - List of environment variables and their values
+
+#### Optional fields
+
+**controller** - List of environment variables and values which are applicable only for controller.
+
+**node** - List of environment variables and values which are applicable only for node.
+
+**sideCars** - Specification for CSI sidecar containers.
+
+**tlsCertSecret** - Name of the TLS cert secret for use by the driver. If not specified, a secret *-certs must exist in the namespace as driver.
+
+**tolerations** - List of tolerations which should be applied to the driver StatefulSet/Deployment and DaemonSet. It should be set separately in the controller and node sections if you want separate set of tolerations for them.
+
+**nodeSelector** - Used to specify node selectors for the driver StatefulSet/Deployment and DaemonSet.
+
+>NOTE: The `image` field should point to the correct image tag for version of the driver you are installing.
+
+>NOTE: The CSM Operator 1.6 is pre-requisite for onboarding brownfield clusters with Apex Navigator For Kubernetes. When the Dell connectivity client is installed, a role and rolebinding will be established in the namespace containing CSM objects, and these will be removed when the client is uninstalled. If the client is already present in the cluster and CSM is deployed or deleted, the roles and rolebindings will be correspondingly created or removed during CSM reconciliation. This process ensures that the client can access the secrets in the namespace.

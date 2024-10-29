@@ -4,7 +4,7 @@ toc_hide: true
 description: Release notes for PowerStore CSI driver
 ---
 
-##  PowerStore v2.11.0
+## Release Notes - CSI PowerStore v2.12.0
 
 
 

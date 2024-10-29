@@ -4,7 +4,9 @@ linktitle: PowerScale
 description: >
   Enabling CSM Authorization for PowerScale CSI Driver
 ---
-
+{{% pageinfo color="primary" %}}
+{{< message text="1" >}}
+{{% /pageinfo %}}
 ## Configuring PowerScale CSI Driver with CSM for Authorization
 
 Given a setup where Kubernetes, a storage system, and the CSM for Authorization Proxy Server are deployed, follow these steps to configure the CSI Drivers to work with the Authorization sidecar:
@@ -132,7 +134,7 @@ Given a setup where Kubernetes, a storage system, and the CSM for Authorization 
         configVersion: v1.12.0
         components:
         - name: karavi-authorization-proxy
-          image: dellemc/csm-authorization-sidecar:v2.0.0
+          image: quay.io/dell/container-storage-modules/csm-authorization-sidecar:v2.0.0
           envs:
             # proxyHost: hostname of the csm-authorization server
             - name: "PROXY_HOST"
@@ -162,7 +164,7 @@ Given a setup where Kubernetes, a storage system, and the CSM for Authorization 
       enabled: true
 
       # sidecarProxyImage: the container image used for the csm-authorization-sidecar.
-      sidecarProxyImage: dellemc/csm-authorization-sidecar:v2.0.0
+      sidecarProxyImage: quay.io/dell/container-storage-modules/csm-authorization-sidecar:v2.0.0
 
       # proxyHost: hostname of the csm-authorization server
       # Default value: None
