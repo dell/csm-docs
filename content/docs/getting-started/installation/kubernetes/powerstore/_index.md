@@ -1,5 +1,5 @@
 ---
-title: "Powerstore"
+title: "PowerStore"
 linkTitle: "Powerstore"
 no_list: true
 description: Powerstore Installation

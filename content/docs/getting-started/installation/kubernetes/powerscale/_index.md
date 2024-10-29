@@ -1,9 +1,9 @@
 ---
-title: "Power Scale"
-linkTitle: "Power Scale"
+title: "PowerScale"
+linkTitle: "PowerScale"
 no_list: true
 description: Power Scale Installation
-weight: 2
+weight: 4
 ---
 
 <div class="container mt-5"> 

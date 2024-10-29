@@ -3,7 +3,7 @@ title: "Operator"
 linkTitle: "Operator"
 no_list: true
 description: Operator Installation
-weight: 1
+weight: 2
 ---
 
 <hr> 

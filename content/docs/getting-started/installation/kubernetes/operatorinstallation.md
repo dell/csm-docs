@@ -8,7 +8,7 @@ Description: >
 ---  
 
 Before installing the driver, you need to install the operator. You can find the installation instructions here.
-
+<!--
 Dell CSM Operator can be installed manually or via Operator Hub.
 
 Once installed you will be able to deploy [drivers](drivers) and [modules](modules) from the Operator.
@@ -34,7 +34,7 @@ Both editions have the same codebase and are supported by Dell Technologies, the
 * The `Certified` version is often released couple of days/weeks after the `Community` version.
 * The `Certified` version is specific to Openshift and can only be installed on specific Openshift versions where it is certified.
 * The `Community` can be installed on any Kubernetes distributions.
-
+-->
 ### Manual Installation on a cluster without OLM
 >NOTE: You can update the resource requests and limits when you are deploying operator using manual installation without OLM
 
@@ -90,7 +90,7 @@ kubectl get pods -n dell-csm-operator
 <img src="./../install_pods.jpg"> </img>
 
 
-
+<!--
 ### Offline Bundle Installation on a cluster without OLM
 
 The `csm-offline-bundle.sh` script can be used to create a package usable for offline installation of Dell CSI Drivers via CSM Operator
@@ -291,3 +291,4 @@ Now that the required images are available and the Operator configuration update
 bash scripts/install.sh
 ```
 >NOTE: Dell CSM Operator would install to the 'dell-csm-operator' namespace by default.
+--> 

@@ -92,7 +92,7 @@ modprobe nvme_tcp
 ```
 - The NVMe modules may not be available after a node reboot. Loading the modules at startup is recommended.
 - Generate and update the _/etc/nvme/hostnqn_ with hostNQN details.
-{{% /tab %}}
+{{% /tab %}} 
 {{< /tabpane >}}
 
 
@@ -148,8 +148,9 @@ If the Unisphere certificate is self-signed or if you are using an embedded Unis
 
 There are no restrictions to how many ports can be present in the iSCSI port groups provided to the driver.
 
-The same applies to Fibre Channel where there are no restrictions on the number of FA directors a host HBA can be zoned to. See the best practices for host connectivity to Dell PowerMax to ensure that you have multiple paths to your data volumes.
-
+The same applies to Fibre Channel where there are no restrictions on the number of FA directors a host HBA can be zoned to. See the best practices for host connectivity to Dell PowerMax to ensure that you have multiple paths to your data volumes. 
+{{< tabpane text=true lang="en">}}
+{{% tab header="Multipath"%}}
 ### Linux multipathing requirements
 
 CSI Driver for Dell PowerMax supports Linux multipathing. Configure Linux multipathing before installing the CSI Driver.
@@ -214,9 +215,9 @@ If the above command is not successful, ensure that the /etc/multipath.conf file
 Finally, you have to restart the service by providing the command
 `sudo systemctl restart multipathd`
 
-For additional information refer to official documentation of the multipath configuration.
-
-
+For additional information refer to official documentation of the multipath configuration. 
+{{%/tab%}} 
+{{%tab header="Powerpath"%}} 
 ### PowerPath for Linux requirements
 
 CSI Driver for Dell PowerMax supports PowerPath for Linux. Configure Linux PowerPath before installing the CSI Driver.
@@ -233,6 +234,8 @@ Set up the PowerPath for Linux as follows:
    systemctl start PowerPath
   ```
 >Note: Do not install Dell PowerPath if multi-path software is already installed, as they cannot co-exist with native multi-path software.
+{{%/tab%}}
+{{</tabpane>}}
 
 ### (Optional) Volume Snapshot Requirements
   For detailed snapshot setup procedure, [click here.](../../../../../snapshots/#optional-volume-snapshot-requirements)

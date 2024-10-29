@@ -3,7 +3,7 @@ title: "CSM Operator"
 linkTitle: "CSM Operator"
 no_list: true
 description: CSM Operator Installation
-weight: 1
+weight: 2
 ---
 
 <hr> 

@@ -1,5 +1,5 @@
 ---
-title: "Powermax"
+title: "PowerMax"
 linkTitle: "Powermax"
 no_list: true
 description: Powermax Installation
