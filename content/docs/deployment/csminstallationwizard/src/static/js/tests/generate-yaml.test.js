@@ -411,10 +411,10 @@ describe("GIVEN createYamlString function", () => {
         nodeSelector: $CONTROLLER_POD_NODE_SELECTOR
         replication:
           enabled: $REPLICATION_ENABLED
-          image: dellemc/dell-csi-replicator:v1.4.0
+          image: quay.io/dell/container-storage-modules/dell-csi-replicator:v1.4.0
         vgsnapshot:
           enabled: $VG_SNAPSHOT_ENABLED
-          image: dellemc/csi-volumegroup-snapshotter:v1.2.0
+          image: quay.io/dell/container-storage-modules/csi-volumegroup-snapshotter:v1.2.0
         snapshot:
           enabled: $SNAPSHOT_ENABLED
         resizer:
@@ -454,7 +454,7 @@ describe("GIVEN createYamlString function", () => {
         enabled: $STORAGE_CAPACITY_ENABLED
       podmon:
         enabled: $RESILIENCY_ENABLED
-        image: dellemc/podmon:v1.5.0
+        image: quay.io/dell/container-storage-modules/podmon:v1.5.0
       maxPowerstoreVolumesPerNode: $MAX_VOLUMES_PER_NODE
 
     ## K8S/PowerMax ATTRIBUTES
@@ -490,18 +490,18 @@ describe("GIVEN createYamlString function", () => {
           enabled: $HEALTH_MONITOR_ENABLED
         nodeSelector: $NODE_POD_NODE_SELECTOR
       csireverseproxy:
-        image: dellemc/csipowermax-reverseproxy:v2.5.0
+        image: quay.io/dell/container-storage-modules/csipowermax-reverseproxy:v2.5.0
         deployAsSidecar: true
       replication:
         enabled: $REPLICATION_ENABLED
-        image: dellemc/dell-csi-replicator:v1.4.0
+        image: quay.io/dell/container-storage-modules/dell-csi-replicator:v1.4.0
       migration:
         enabled: $MIGRATION_ENABLED
-        image: dellemc/dell-csi-migrator:v1.1.0
-        nodeRescanSidecarImage: dellemc/dell-csi-node-rescanner:v1.0.0
+        image: quay.io/dell/container-storage-modules/dell-csi-migrator:v1.1.0
+        nodeRescanSidecarImage: quay.io/dell/container-storage-modules/dell-csi-node-rescanner:v1.0.0
       authorization:
         enabled: $AUTHORIZATION_ENABLED
-        sidecarProxyImage: dellemc/csm-authorization-sidecar:v1.6.0
+        sidecarProxyImage: quay.io/dell/container-storage-modules/csm-authorization-sidecar:v1.6.0
         proxyHost: $AUTHORIZATION_PROXY_HOST
         skipCertificateValidation:  $AUTHORIZATION_SKIP_CERTIFICATE_VALIDATION
       vSphere:
@@ -523,7 +523,7 @@ describe("GIVEN createYamlString function", () => {
       controller:
         replication:
           enabled: $REPLICATION_ENABLED
-          image: dellemc/dell-csi-replicator:v1.4.0
+          image: quay.io/dell/container-storage-modules/dell-csi-replicator:v1.4.0
         healthMonitor:
           enabled: $HEALTH_MONITOR_ENABLED
         controllerCount: $CONTROLLER_COUNT
@@ -567,13 +567,13 @@ describe("GIVEN createYamlString function", () => {
         enabled: $MONITOR_ENABLED
       vgsnapshotter:
         enabled: $VG_SNAPSHOT_ENABLED
-        image: dellemc/csi-volumegroup-snapshotter:v1.2.0
+        image: quay.io/dell/container-storage-modules/csi-volumegroup-snapshotter:v1.2.0
       podmon:
         enabled: $RESILIENCY_ENABLED
-        image: dellemc/podmon:v1.5.0
+        image: quay.io/dell/container-storage-modules/podmon:v1.5.0
       authorization:
         enabled: $AUTHORIZATION_ENABLED
-        sidecarProxyImage: dellemc/csm-authorization-sidecar:v1.6.0
+        sidecarProxyImage: quay.io/dell/container-storage-modules/csm-authorization-sidecar:v1.6.0
         proxyHost: $AUTHORIZATION_PROXY_HOST
 
     ## CSI Unity
@@ -639,7 +639,7 @@ describe("GIVEN createYamlString function", () => {
         #    effect: "NoSchedule"
       podmon:
         enabled: $RESILIENCY_ENABLED
-        image: dellemc/podmon:v1.5.0
+        image: quay.io/dell/container-storage-modules/podmon:v1.5.0
 
     ## K8S/Replication Module ATTRIBUTES
     ##########################################
@@ -689,9 +689,9 @@ describe("GIVEN createYamlString function", () => {
 		observabilityMetrics: true,
 		authorization: false,
 		authorizationSkipCertValidation: true,
-		vgsnapshotImage: "dellemc/csi-volumegroup-snapshotter:v1.2.0",
-		replicationImage: "dellemc/dell-csi-replicator:v1.4.0",
-		authorizationImage: "dellemc/csm-authorization-sidecar:v1.6.0",
+		vgsnapshotImage: "quay.io/dell/container-storage-modules/csi-volumegroup-snapshotter:v1.2.0",
+		replicationImage: "quay.io/dell/container-storage-modules/dell-csi-replicator:v1.4.0",
+		authorizationImage: "quay.io/dell/container-storage-modules/csm-authorization-sidecar:v1.6.0",
 		certManagerEnabled: false,
 		authorizationProxyHost: '',
 		monitor: false,
@@ -730,10 +730,10 @@ describe("GIVEN createYamlString function", () => {
         nodeSelector: false
         replication:
           enabled: false
-          image: dellemc/dell-csi-replicator:v1.4.0
+          image: quay.io/dell/container-storage-modules/dell-csi-replicator:v1.4.0
         vgsnapshot:
           enabled: false
-          image: dellemc/csi-volumegroup-snapshotter:v1.2.0
+          image: quay.io/dell/container-storage-modules/csi-volumegroup-snapshotter:v1.2.0
         snapshot:
           enabled: true
         resizer:
@@ -773,7 +773,7 @@ describe("GIVEN createYamlString function", () => {
         enabled: false
       podmon:
         enabled: false
-        image: dellemc/podmon:v1.5.0
+        image: quay.io/dell/container-storage-modules/podmon:v1.5.0
       maxPowerstoreVolumesPerNode: 0
 
     ## K8S/PowerMax ATTRIBUTES
@@ -809,18 +809,18 @@ describe("GIVEN createYamlString function", () => {
           enabled: false
         nodeSelector: false
       csireverseproxy:
-        image: dellemc/csipowermax-reverseproxy:v2.5.0
+        image: quay.io/dell/container-storage-modules/csipowermax-reverseproxy:v2.5.0
         deployAsSidecar: true
       replication:
         enabled: false
-        image: dellemc/dell-csi-replicator:v1.4.0
+        image: quay.io/dell/container-storage-modules/dell-csi-replicator:v1.4.0
       migration:
         enabled: false
-        image: dellemc/dell-csi-migrator:v1.1.0
-        nodeRescanSidecarImage: dellemc/dell-csi-node-rescanner:v1.0.0
+        image: quay.io/dell/container-storage-modules/dell-csi-migrator:v1.1.0
+        nodeRescanSidecarImage: quay.io/dell/container-storage-modules/dell-csi-node-rescanner:v1.0.0
       authorization:
         enabled: false
-        sidecarProxyImage: dellemc/csm-authorization-sidecar:v1.6.0
+        sidecarProxyImage: quay.io/dell/container-storage-modules/csm-authorization-sidecar:v1.6.0
         proxyHost: 
         skipCertificateValidation:  true
       vSphere:
@@ -842,7 +842,7 @@ describe("GIVEN createYamlString function", () => {
       controller:
         replication:
           enabled: false
-          image: dellemc/dell-csi-replicator:v1.4.0
+          image: quay.io/dell/container-storage-modules/dell-csi-replicator:v1.4.0
         healthMonitor:
           enabled: false
         controllerCount: 1
@@ -886,13 +886,13 @@ describe("GIVEN createYamlString function", () => {
         enabled: false
       vgsnapshotter:
         enabled: false
-        image: dellemc/csi-volumegroup-snapshotter:v1.2.0
+        image: quay.io/dell/container-storage-modules/csi-volumegroup-snapshotter:v1.2.0
       podmon:
         enabled: false
-        image: dellemc/podmon:v1.5.0
+        image: quay.io/dell/container-storage-modules/podmon:v1.5.0
       authorization:
         enabled: false
-        sidecarProxyImage: dellemc/csm-authorization-sidecar:v1.6.0
+        sidecarProxyImage: quay.io/dell/container-storage-modules/csm-authorization-sidecar:v1.6.0
         proxyHost: 
 
     ## CSI Unity
@@ -958,7 +958,7 @@ describe("GIVEN createYamlString function", () => {
         #    effect: "NoSchedule"
       podmon:
         enabled: false
-        image: dellemc/podmon:v1.5.0
+        image: quay.io/dell/container-storage-modules/podmon:v1.5.0
 
     ## K8S/Replication Module ATTRIBUTES
     ##########################################
@@ -1009,10 +1009,10 @@ describe("GIVEN createYamlString function", () => {
         nodeSelector: $CONTROLLER_POD_NODE_SELECTOR
         replication:
           enabled: $REPLICATION_ENABLED
-          image: dellemc/dell-csi-replicator:v1.4.0
+          image: quay.io/dell/container-storage-modules/dell-csi-replicator:v1.4.0
         vgsnapshot:
           enabled: $VG_SNAPSHOT_ENABLED
-          image: dellemc/csi-volumegroup-snapshotter:v1.2.0
+          image: quay.io/dell/container-storage-modules/csi-volumegroup-snapshotter:v1.2.0
         snapshot:
           enabled: $SNAPSHOT_ENABLED
         resizer:
@@ -1052,7 +1052,7 @@ describe("GIVEN createYamlString function", () => {
         enabled: $STORAGE_CAPACITY_ENABLED
       podmon:
         enabled: $RESILIENCY_ENABLED
-        image: dellemc/podmon:v1.5.0
+        image: quay.io/dell/container-storage-modules/podmon:v1.5.0
       maxPowerstoreVolumesPerNode: $MAX_VOLUMES_PER_NODE
 
     ## K8S/PowerMax ATTRIBUTES
@@ -1088,18 +1088,18 @@ describe("GIVEN createYamlString function", () => {
           enabled: $HEALTH_MONITOR_ENABLED
         nodeSelector: $NODE_POD_NODE_SELECTOR
       csireverseproxy:
-        image: dellemc/csipowermax-reverseproxy:v2.5.0
+        image: quay.io/dell/container-storage-modules/csipowermax-reverseproxy:v2.5.0
         deployAsSidecar: true
       replication:
         enabled: $REPLICATION_ENABLED
-        image: dellemc/dell-csi-replicator:v1.4.0
+        image: quay.io/dell/container-storage-modules/dell-csi-replicator:v1.4.0
       migration:
         enabled: $MIGRATION_ENABLED
-        image: dellemc/dell-csi-migrator:v1.1.0
-        nodeRescanSidecarImage: dellemc/dell-csi-node-rescanner:v1.0.0
+        image: quay.io/dell/container-storage-modules/dell-csi-migrator:v1.1.0
+        nodeRescanSidecarImage: quay.io/dell/container-storage-modules/dell-csi-node-rescanner:v1.0.0
       authorization:
         enabled: $AUTHORIZATION_ENABLED
-        sidecarProxyImage: dellemc/csm-authorization-sidecar:v1.6.0
+        sidecarProxyImage: quay.io/dell/container-storage-modules/csm-authorization-sidecar:v1.6.0
         proxyHost: $AUTHORIZATION_PROXY_HOST
         skipCertificateValidation:  $AUTHORIZATION_SKIP_CERTIFICATE_VALIDATION
       vSphere:
@@ -1121,7 +1121,7 @@ describe("GIVEN createYamlString function", () => {
       controller:
         replication:
           enabled: $REPLICATION_ENABLED
-          image: dellemc/dell-csi-replicator:v1.4.0
+          image: quay.io/dell/container-storage-modules/dell-csi-replicator:v1.4.0
         healthMonitor:
           enabled: $HEALTH_MONITOR_ENABLED
         controllerCount: $CONTROLLER_COUNT
@@ -1165,13 +1165,13 @@ describe("GIVEN createYamlString function", () => {
         enabled: $MONITOR_ENABLED
       vgsnapshotter:
         enabled: $VG_SNAPSHOT_ENABLED
-        image: dellemc/csi-volumegroup-snapshotter:v1.2.0
+        image: quay.io/dell/container-storage-modules/csi-volumegroup-snapshotter:v1.2.0
       podmon:
         enabled: $RESILIENCY_ENABLED
-        image: dellemc/podmon:v1.5.0
+        image: quay.io/dell/container-storage-modules/podmon:v1.5.0
       authorization:
         enabled: $AUTHORIZATION_ENABLED
-        sidecarProxyImage: dellemc/csm-authorization-sidecar:v1.6.0
+        sidecarProxyImage: quay.io/dell/container-storage-modules/csm-authorization-sidecar:v1.6.0
         proxyHost: $AUTHORIZATION_PROXY_HOST
 
     ## CSI Unity
@@ -1237,7 +1237,7 @@ describe("GIVEN createYamlString function", () => {
         #    effect: "NoSchedule"
       podmon:
         enabled: $RESILIENCY_ENABLED
-        image: dellemc/podmon:v1.5.0
+        image: quay.io/dell/container-storage-modules/podmon:v1.5.0
 
     ## K8S/Replication Module ATTRIBUTES
     ##########################################
@@ -1287,9 +1287,9 @@ describe("GIVEN createYamlString function", () => {
 		observabilityMetrics: true,
 		authorization: false,
 		authorizationSkipCertValidation: true,
-		vgsnapshotImage: "dellemc/csi-volumegroup-snapshotter:v1.2.0",
-		replicationImage: "dellemc/dell-csi-replicator:v1.4.0",
-		authorizationImage: "dellemc/csm-authorization-sidecar:v1.6.0",
+		vgsnapshotImage: "quay.io/dell/container-storage-modules/csi-volumegroup-snapshotter:v1.2.0",
+		replicationImage: "quay.io/dell/container-storage-modules/dell-csi-replicator:v1.4.0",
+		authorizationImage: "quay.io/dell/container-storage-modules/csm-authorization-sidecar:v1.6.0",
 		certManagerEnabled: false,
 		authorizationProxyHost: '',
 		monitor: false,
@@ -1328,10 +1328,10 @@ describe("GIVEN createYamlString function", () => {
         nodeSelector: false
         replication:
           enabled: false
-          image: dellemc/dell-csi-replicator:v1.4.0
+          image: quay.io/dell/container-storage-modules/dell-csi-replicator:v1.4.0
         vgsnapshot:
           enabled: false
-          image: dellemc/csi-volumegroup-snapshotter:v1.2.0
+          image: quay.io/dell/container-storage-modules/csi-volumegroup-snapshotter:v1.2.0
         snapshot:
           enabled: true
         resizer:
@@ -1371,7 +1371,7 @@ describe("GIVEN createYamlString function", () => {
         enabled: false
       podmon:
         enabled: false
-        image: dellemc/podmon:v1.5.0
+        image: quay.io/dell/container-storage-modules/podmon:v1.5.0
       maxPowerstoreVolumesPerNode: 0
 
     ## K8S/PowerMax ATTRIBUTES
@@ -1407,18 +1407,18 @@ describe("GIVEN createYamlString function", () => {
           enabled: false
         nodeSelector: false
       csireverseproxy:
-        image: dellemc/csipowermax-reverseproxy:v2.5.0
+        image: quay.io/dell/container-storage-modules/csipowermax-reverseproxy:v2.5.0
         deployAsSidecar: true
       replication:
         enabled: false
-        image: dellemc/dell-csi-replicator:v1.4.0
+        image: quay.io/dell/container-storage-modules/dell-csi-replicator:v1.4.0
       migration:
         enabled: false
-        image: dellemc/dell-csi-migrator:v1.1.0
-        nodeRescanSidecarImage: dellemc/dell-csi-node-rescanner:v1.0.0
+        image: quay.io/dell/container-storage-modules/dell-csi-migrator:v1.1.0
+        nodeRescanSidecarImage: quay.io/dell/container-storage-modules/dell-csi-node-rescanner:v1.0.0
       authorization:
         enabled: false
-        sidecarProxyImage: dellemc/csm-authorization-sidecar:v1.6.0
+        sidecarProxyImage: quay.io/dell/container-storage-modules/csm-authorization-sidecar:v1.6.0
         proxyHost: 
         skipCertificateValidation:  true
       vSphere:
@@ -1440,7 +1440,7 @@ describe("GIVEN createYamlString function", () => {
       controller:
         replication:
           enabled: false
-          image: dellemc/dell-csi-replicator:v1.4.0
+          image: quay.io/dell/container-storage-modules/dell-csi-replicator:v1.4.0
         healthMonitor:
           enabled: false
         controllerCount: 1
@@ -1484,13 +1484,13 @@ describe("GIVEN createYamlString function", () => {
         enabled: false
       vgsnapshotter:
         enabled: false
-        image: dellemc/csi-volumegroup-snapshotter:v1.2.0
+        image: quay.io/dell/container-storage-modules/csi-volumegroup-snapshotter:v1.2.0
       podmon:
         enabled: false
-        image: dellemc/podmon:v1.5.0
+        image: quay.io/dell/container-storage-modules/podmon:v1.5.0
       authorization:
         enabled: false
-        sidecarProxyImage: dellemc/csm-authorization-sidecar:v1.6.0
+        sidecarProxyImage: quay.io/dell/container-storage-modules/csm-authorization-sidecar:v1.6.0
         proxyHost: 
 
     ## CSI Unity
@@ -1556,7 +1556,7 @@ describe("GIVEN createYamlString function", () => {
         #    effect: "NoSchedule"
       podmon:
         enabled: false
-        image: dellemc/podmon:v1.5.0
+        image: quay.io/dell/container-storage-modules/podmon:v1.5.0
 
     ## K8S/Replication Module ATTRIBUTES
     ##########################################
@@ -1604,10 +1604,10 @@ describe("GIVEN createYamlString function", () => {
         nodeSelector: false
         replication:
           enabled: false
-          image: dellemc/dell-csi-replicator:v1.4.0
+          image: quay.io/dell/container-storage-modules/dell-csi-replicator:v1.4.0
         vgsnapshot:
           enabled: false
-          image: dellemc/csi-volumegroup-snapshotter:v1.2.0
+          image: quay.io/dell/container-storage-modules/csi-volumegroup-snapshotter:v1.2.0
         snapshot:
           enabled: true
         resizer:
@@ -1647,7 +1647,7 @@ describe("GIVEN createYamlString function", () => {
         enabled: false
       podmon:
         enabled: false
-        image: dellemc/podmon:v1.5.0
+        image: quay.io/dell/container-storage-modules/podmon:v1.5.0
       maxPowerstoreVolumesPerNode: 0
 
     ## K8S/PowerMax ATTRIBUTES
@@ -1683,18 +1683,18 @@ describe("GIVEN createYamlString function", () => {
           enabled: false
         nodeSelector: false
       csireverseproxy:
-        image: dellemc/csipowermax-reverseproxy:v2.5.0
+        image: quay.io/dell/container-storage-modules/csipowermax-reverseproxy:v2.5.0
         deployAsSidecar: true
       replication:
         enabled: false
-        image: dellemc/dell-csi-replicator:v1.4.0
+        image: quay.io/dell/container-storage-modules/dell-csi-replicator:v1.4.0
       migration:
         enabled: false
-        image: dellemc/dell-csi-migrator:v1.1.0
-        nodeRescanSidecarImage: dellemc/dell-csi-node-rescanner:v1.0.0
+        image: quay.io/dell/container-storage-modules/dell-csi-migrator:v1.1.0
+        nodeRescanSidecarImage: quay.io/dell/container-storage-modules/dell-csi-node-rescanner:v1.0.0
       authorization:
         enabled: false
-        sidecarProxyImage: dellemc/csm-authorization-sidecar:v1.6.0
+        sidecarProxyImage: quay.io/dell/container-storage-modules/csm-authorization-sidecar:v1.6.0
         proxyHost: 
         skipCertificateValidation:  true
       vSphere:
@@ -1716,7 +1716,7 @@ describe("GIVEN createYamlString function", () => {
       controller:
         replication:
           enabled: false
-          image: dellemc/dell-csi-replicator:v1.4.0
+          image: quay.io/dell/container-storage-modules/dell-csi-replicator:v1.4.0
         healthMonitor:
           enabled: false
         controllerCount: 1
@@ -1760,13 +1760,13 @@ describe("GIVEN createYamlString function", () => {
         enabled: false
       vgsnapshotter:
         enabled: false
-        image: dellemc/csi-volumegroup-snapshotter:v1.2.0
+        image: quay.io/dell/container-storage-modules/csi-volumegroup-snapshotter:v1.2.0
       podmon:
         enabled: false
-        image: dellemc/podmon:v1.5.0
+        image: quay.io/dell/container-storage-modules/podmon:v1.5.0
       authorization:
         enabled: false
-        sidecarProxyImage: dellemc/csm-authorization-sidecar:v1.6.0
+        sidecarProxyImage: quay.io/dell/container-storage-modules/csm-authorization-sidecar:v1.6.0
         proxyHost: 
 
     ## CSI Unity
@@ -1832,7 +1832,7 @@ describe("GIVEN createYamlString function", () => {
         #    effect: "NoSchedule"
       podmon:
         enabled: false
-        image: dellemc/podmon:v1.5.0
+        image: quay.io/dell/container-storage-modules/podmon:v1.5.0
 
     ## K8S/Replication Module ATTRIBUTES
     ##########################################
@@ -1881,10 +1881,10 @@ describe("GIVEN createYamlString function", () => {
         nodeSelector: false
         replication:
           enabled: false
-          image: dellemc/dell-csi-replicator:v1.4.0
+          image: quay.io/dell/container-storage-modules/dell-csi-replicator:v1.4.0
         vgsnapshot:
           enabled: false
-          image: dellemc/csi-volumegroup-snapshotter:v1.2.0
+          image: quay.io/dell/container-storage-modules/csi-volumegroup-snapshotter:v1.2.0
         snapshot:
           enabled: true
         resizer:
@@ -1924,7 +1924,7 @@ describe("GIVEN createYamlString function", () => {
         enabled: false
       podmon:
         enabled: false
-        image: dellemc/podmon:v1.5.0
+        image: quay.io/dell/container-storage-modules/podmon:v1.5.0
       maxPowerstoreVolumesPerNode: 0
 
     ## K8S/PowerMax ATTRIBUTES
@@ -1960,18 +1960,18 @@ describe("GIVEN createYamlString function", () => {
           enabled: false
         nodeSelector: false
       csireverseproxy:
-        image: dellemc/csipowermax-reverseproxy:v2.5.0
+        image: quay.io/dell/container-storage-modules/csipowermax-reverseproxy:v2.5.0
         deployAsSidecar: true
       replication:
         enabled: false
-        image: dellemc/dell-csi-replicator:v1.4.0
+        image: quay.io/dell/container-storage-modules/dell-csi-replicator:v1.4.0
       migration:
         enabled: false
-        image: dellemc/dell-csi-migrator:v1.1.0
-        nodeRescanSidecarImage: dellemc/dell-csi-node-rescanner:v1.0.0
+        image: quay.io/dell/container-storage-modules/dell-csi-migrator:v1.1.0
+        nodeRescanSidecarImage: quay.io/dell/container-storage-modules/dell-csi-node-rescanner:v1.0.0
       authorization:
         enabled: false
-        sidecarProxyImage: dellemc/csm-authorization-sidecar:v1.6.0
+        sidecarProxyImage: quay.io/dell/container-storage-modules/csm-authorization-sidecar:v1.6.0
         proxyHost: 
         skipCertificateValidation:  true
       vSphere:
@@ -1993,7 +1993,7 @@ describe("GIVEN createYamlString function", () => {
       controller:
         replication:
           enabled: false
-          image: dellemc/dell-csi-replicator:v1.4.0
+          image: quay.io/dell/container-storage-modules/dell-csi-replicator:v1.4.0
         healthMonitor:
           enabled: false
         controllerCount: 1
@@ -2037,13 +2037,13 @@ describe("GIVEN createYamlString function", () => {
         enabled: false
       vgsnapshotter:
         enabled: false
-        image: dellemc/csi-volumegroup-snapshotter:v1.2.0
+        image: quay.io/dell/container-storage-modules/csi-volumegroup-snapshotter:v1.2.0
       podmon:
         enabled: false
-        image: dellemc/podmon:v1.5.0
+        image: quay.io/dell/container-storage-modules/podmon:v1.5.0
       authorization:
         enabled: false
-        sidecarProxyImage: dellemc/csm-authorization-sidecar:v1.6.0
+        sidecarProxyImage: quay.io/dell/container-storage-modules/csm-authorization-sidecar:v1.6.0
         proxyHost: 
 
     ## CSI Unity
@@ -2109,7 +2109,7 @@ describe("GIVEN createYamlString function", () => {
         #    effect: "NoSchedule"
       podmon:
         enabled: false
-        image: dellemc/podmon:v1.5.0
+        image: quay.io/dell/container-storage-modules/podmon:v1.5.0
 
     ## K8S/Replication Module ATTRIBUTES
     ##########################################
@@ -2160,10 +2160,10 @@ describe("GIVEN createYamlString function", () => {
         nodeSelector: false
         replication:
           enabled: false
-          image: dellemc/dell-csi-replicator:v1.4.0
+          image: quay.io/dell/container-storage-modules/dell-csi-replicator:v1.4.0
         vgsnapshot:
           enabled: false
-          image: dellemc/csi-volumegroup-snapshotter:v1.2.0
+          image: quay.io/dell/container-storage-modules/csi-volumegroup-snapshotter:v1.2.0
         snapshot:
           enabled: true
         resizer:
@@ -2203,7 +2203,7 @@ describe("GIVEN createYamlString function", () => {
         enabled: false
       podmon:
         enabled: false
-        image: dellemc/podmon:v1.5.0
+        image: quay.io/dell/container-storage-modules/podmon:v1.5.0
       maxPowerstoreVolumesPerNode: 0
 
     ## K8S/PowerMax ATTRIBUTES
@@ -2239,18 +2239,18 @@ describe("GIVEN createYamlString function", () => {
           enabled: false
         nodeSelector: false
       csireverseproxy:
-        image: dellemc/csipowermax-reverseproxy:v2.5.0
+        image: quay.io/dell/container-storage-modules/csipowermax-reverseproxy:v2.5.0
         deployAsSidecar: true
       replication:
         enabled: false
-        image: dellemc/dell-csi-replicator:v1.4.0
+        image: quay.io/dell/container-storage-modules/dell-csi-replicator:v1.4.0
       migration:
         enabled: false
-        image: dellemc/dell-csi-migrator:v1.1.0
-        nodeRescanSidecarImage: dellemc/dell-csi-node-rescanner:v1.0.0
+        image: quay.io/dell/container-storage-modules/dell-csi-migrator:v1.1.0
+        nodeRescanSidecarImage: quay.io/dell/container-storage-modules/dell-csi-node-rescanner:v1.0.0
       authorization:
         enabled: false
-        sidecarProxyImage: dellemc/csm-authorization-sidecar:v1.6.0
+        sidecarProxyImage: quay.io/dell/container-storage-modules/csm-authorization-sidecar:v1.6.0
         proxyHost: 
         skipCertificateValidation:  true
       vSphere:
@@ -2272,7 +2272,7 @@ describe("GIVEN createYamlString function", () => {
       controller:
         replication:
           enabled: false
-          image: dellemc/dell-csi-replicator:v1.4.0
+          image: quay.io/dell/container-storage-modules/dell-csi-replicator:v1.4.0
         healthMonitor:
           enabled: false
         controllerCount: 1
@@ -2316,13 +2316,13 @@ describe("GIVEN createYamlString function", () => {
         enabled: false
       vgsnapshotter:
         enabled: false
-        image: dellemc/csi-volumegroup-snapshotter:v1.2.0
+        image: quay.io/dell/container-storage-modules/csi-volumegroup-snapshotter:v1.2.0
       podmon:
         enabled: false
-        image: dellemc/podmon:v1.5.0
+        image: quay.io/dell/container-storage-modules/podmon:v1.5.0
       authorization:
         enabled: false
-        sidecarProxyImage: dellemc/csm-authorization-sidecar:v1.6.0
+        sidecarProxyImage: quay.io/dell/container-storage-modules/csm-authorization-sidecar:v1.6.0
         proxyHost: 
 
     ## CSI Unity
@@ -2388,7 +2388,7 @@ describe("GIVEN createYamlString function", () => {
         #    effect: "NoSchedule"
       podmon:
         enabled: false
-        image: dellemc/podmon:v1.5.0
+        image: quay.io/dell/container-storage-modules/podmon:v1.5.0
 
     ## K8S/Replication Module ATTRIBUTES
     ##########################################
@@ -2438,10 +2438,10 @@ describe("GIVEN createYamlString function", () => {
         nodeSelector: false
         replication:
           enabled: false
-          image: dellemc/dell-csi-replicator:v1.4.0
+          image: quay.io/dell/container-storage-modules/dell-csi-replicator:v1.4.0
         vgsnapshot:
           enabled: false
-          image: dellemc/csi-volumegroup-snapshotter:v1.2.0
+          image: quay.io/dell/container-storage-modules/csi-volumegroup-snapshotter:v1.2.0
         snapshot:
           enabled: true
         resizer:
@@ -2481,7 +2481,7 @@ describe("GIVEN createYamlString function", () => {
         enabled: false
       podmon:
         enabled: false
-        image: dellemc/podmon:v1.5.0
+        image: quay.io/dell/container-storage-modules/podmon:v1.5.0
       maxPowerstoreVolumesPerNode: 0
 
     ## K8S/PowerMax ATTRIBUTES
@@ -2517,18 +2517,18 @@ describe("GIVEN createYamlString function", () => {
           enabled: false
         nodeSelector: false
       csireverseproxy:
-        image: dellemc/csipowermax-reverseproxy:v2.5.0
+        image: quay.io/dell/container-storage-modules/csipowermax-reverseproxy:v2.5.0
         deployAsSidecar: true
       replication:
         enabled: false
-        image: dellemc/dell-csi-replicator:v1.4.0
+        image: quay.io/dell/container-storage-modules/dell-csi-replicator:v1.4.0
       migration:
         enabled: false
-        image: dellemc/dell-csi-migrator:v1.1.0
-        nodeRescanSidecarImage: dellemc/dell-csi-node-rescanner:v1.0.0
+        image: quay.io/dell/container-storage-modules/dell-csi-migrator:v1.1.0
+        nodeRescanSidecarImage: quay.io/dell/container-storage-modules/dell-csi-node-rescanner:v1.0.0
       authorization:
         enabled: false
-        sidecarProxyImage: dellemc/csm-authorization-sidecar:v1.6.0
+        sidecarProxyImage: quay.io/dell/container-storage-modules/csm-authorization-sidecar:v1.6.0
         proxyHost: 
         skipCertificateValidation:  true
       vSphere:
@@ -2550,7 +2550,7 @@ describe("GIVEN createYamlString function", () => {
       controller:
         replication:
           enabled: false
-          image: dellemc/dell-csi-replicator:v1.4.0
+          image: quay.io/dell/container-storage-modules/dell-csi-replicator:v1.4.0
         healthMonitor:
           enabled: false
         controllerCount: 1
@@ -2594,13 +2594,13 @@ describe("GIVEN createYamlString function", () => {
         enabled: false
       vgsnapshotter:
         enabled: false
-        image: dellemc/csi-volumegroup-snapshotter:v1.2.0
+        image: quay.io/dell/container-storage-modules/csi-volumegroup-snapshotter:v1.2.0
       podmon:
         enabled: false
-        image: dellemc/podmon:v1.5.0
+        image: quay.io/dell/container-storage-modules/podmon:v1.5.0
       authorization:
         enabled: false
-        sidecarProxyImage: dellemc/csm-authorization-sidecar:v1.6.0
+        sidecarProxyImage: quay.io/dell/container-storage-modules/csm-authorization-sidecar:v1.6.0
         proxyHost: 
 
     ## CSI Unity
@@ -2666,7 +2666,7 @@ describe("GIVEN createYamlString function", () => {
         #    effect: "NoSchedule"
       podmon:
         enabled: false
-        image: dellemc/podmon:v1.5.0
+        image: quay.io/dell/container-storage-modules/podmon:v1.5.0
 
     ## K8S/Replication Module ATTRIBUTES
     ##########################################
