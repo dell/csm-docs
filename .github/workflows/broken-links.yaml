@@ -50,5 +50,4 @@ jobs:
         run: |
           wc -l broken_links
           cat broken_links
-          tail -n 1000 spider.log
           wc -l broken_links | grep -Fxq "0 broken_links"
