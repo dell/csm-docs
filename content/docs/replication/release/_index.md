@@ -30,4 +30,6 @@ Description: >
 - [#1385 - [BUG]: Enable static build of repctl](https://github.com/dell/csm/issues/1385)
 
 ### Known Issues
-| When running CSI-PowerMax with Replication in a multi-cluster configuration, the driver on the target cluster fails and the following error is seen in logs: `error="CSI reverseproxy service host or port not found, CSI reverseproxy not installed properly"` | The reverseproxy service needs to be created manually on the target cluster. Follow [the instructions here](../../deployment/csmoperator/modules/replication.md) here to create it. |  
+| Symptoms | Prevention, Resolution or Workaround |
+| --- | --- | 
+| When running CSI-PowerMax with Replication in a multi-cluster configuration, the driver on the target cluster fails and the following error is seen in logs: `error="CSI reverseproxy service host or port not found, CSI reverseproxy not installed properly"` | The reverseproxy service needs to be created manually on the target cluster. Follow [the instructions here](../../deployment/csmoperator/modules/replication.md#configuration-steps) to create it.|
