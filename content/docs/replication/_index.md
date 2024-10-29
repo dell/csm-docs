@@ -32,9 +32,9 @@ CSM for Replication provides the following capabilities:
 | Provides a command line utility - [repctl](tools) for configuring & managing replication related resources across multiple clusters |   yes    |    yes     |    yes     |    yes    |  no   |
 {{</table>}}
 
-> _**NOTE**_: To add or delete volumes to the existing SYNC Replication Group in PowerStore, the user needs to pause and then resume the replication group. For more details, please refer to the troubleshooting section.
+> _**NOTE**_: To add or delete PV s on an existing SYNC Replication Group in PowerStore, the user needs to pause, perform the operation and then resume the replication group. For more details, please refer to the troubleshooting section.
 
-> _**NOTE**_: To delete last volume of the existing SYNC Replication Group in PowerStore, the user needs to first unassign the replication policy from the existing SYNC Replication Group. For more details, please refer to the troubleshooting section.
+> _**NOTE**_: To delete the last PV from a SYNC Replication Group in PowerStore, the user needs to first unassign the protection policy from the corresponding volume group on the PowerStore Manager UI. For more details, please refer to the troubleshooting section.
 
 ## Details
 
