@@ -40,7 +40,6 @@ jobs:
         continue-on-error: true
         run: |
           wget --verbose --spider -o spider.log -e robots=off -rp http://127.0.0.1:1313/csm-docs/
-          cat spider.log
       - name: Getting output
         continue-on-error: true
         run: |
@@ -51,4 +50,5 @@ jobs:
         run: |
           wc -l broken_links
           cat broken_links
+          cat spider.log
           wc -l broken_links | grep -Fxq "0 broken_links"
