@@ -11,7 +11,7 @@ Description: Upgrade PowerStore CSI driver
 {{% /pageinfo %}}
 You can upgrade the CSI Driver for Dell PowerStore using Helm.
 
-## Update Driver from v2.11.0 to v2.12.0 using Helm
+## Update Driver from v2.11.1 to v2.12.0 using Helm
 
 Note: While upgrading the driver via helm, controllerCount variable in myvalues.yaml can be at most one less than the number of worker nodes.
 

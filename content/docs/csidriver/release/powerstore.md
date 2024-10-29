@@ -20,6 +20,7 @@ description: Release notes for PowerStore CSI driver
 
 ### Fixed Issues
 
+- [#1469 - [BUG]: Mounts using NVMe on PowerStore fails in v2.11 of the driver](https://github.com/dell/csm/issues/1469)
 - [#1188 - [BUG]: Controller Pod keeps restarting due to "Lost connection to CSI driver" error](https://github.com/dell/csm/issues/1188)
 - [#1209 - [BUG]: Doc hyper links in driver Readme is broken](https://github.com/dell/csm/issues/1209)
 - [#1216 - [BUG]: Incorrect Error message in Resiliency Podmon in controllerCleanupPod() func](https://github.com/dell/csm/issues/1216)

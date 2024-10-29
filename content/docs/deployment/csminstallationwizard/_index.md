@@ -16,7 +16,7 @@ The [Dell Container Storage Modules Installation Wizard](./src/index.html) is a 
 
 | CSI Driver         | Version   | Helm   | Operator  |
 | ------------------ | --------- | ------ | --------- |
-| CSI PowerStore     | 2.11.0    |✔️      |✔️        |
+| CSI PowerStore     | 2.11.1    |✔️      |✔️        |
 | CSI PowerStore     | 2.10.1    |✔️      |✔️        |
 | CSI PowerStore     | 2.9.1     |✔️      |✔️        |
 | CSI PowerStore     | 2.8.0     |✔️      |✔️        |
