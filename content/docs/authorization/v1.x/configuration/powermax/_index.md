@@ -142,7 +142,7 @@ Create the karavi-authorization-config secret using this command:
         # enabled: Always set to true
         enabled: true
         forceRemoveModule: true
-        configVersion: v2.12.0
+        configVersion: v2.11.0
         components:
           - name: csipowermax-reverseproxy
             envs:
