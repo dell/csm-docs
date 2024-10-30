@@ -116,12 +116,12 @@ Given a setup where Kubernetes, a storage system, and the CSM for Authorization 
         # enabled: Always set to true
         enabled: true
         forceRemoveModule: true
-        configVersion: v2.12.0
+        configVersion: v2.11.0
         components:
         - name: csipowermax-reverseproxy
         # image: Define the container images used for the reverse proxy
         # Default value: None
-          image: quay.io/dell/container-storage-modules/csipowermax-reverseproxy:v2.12.0
+          image: quay.io/dell/container-storage-modules/csipowermax-reverseproxy:v2.11.0
           envs:
           # "tlsSecret" defines the TLS secret that is created with certificate
           # and its associated key
