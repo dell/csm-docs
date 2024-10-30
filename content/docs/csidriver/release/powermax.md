@@ -16,25 +16,24 @@ description: Release notes for PowerMax CSI driver
 
 
 
-
 ### New Features/Changes
 
-- [#1410 - [FEATURE]: Adding support for PowerMax Magnolia](https://github.com/dell/csm/issues/1410)
-- [#1472 - [FEATURE]: Support for Kubernetes 1.31](https://github.com/dell/csm/issues/1472)
-- [#1473 - [FEATURE]: Add Support for OpenShift Container Platform (OCP) 4.17](https://github.com/dell/csm/issues/1473)
-- [#1508 - [FEATURE]:  Add Support for KubeVirt](https://github.com/dell/csm/issues/1508)
+- [#1308 - [FEATURE]: NVMe TCP support for PowerMax ](https://github.com/dell/csm/issues/1308)
+- [#1359 - [FEATURE]: Add Support for OpenShift Container Platform (OCP) 4.16 ](https://github.com/dell/csm/issues/1359)
+- [#1400 - [FEATURE]: Support for Kubernetes 1.30](https://github.com/dell/csm/issues/1400)
+- [#1082 - [FEATURE]: CSM Resiliency support for PowerMax](https://github.com/dell/csm/issues/1082)
+- [#1397 - [FEATURE]: Observability upgrade is supported in CSM Operator](https://github.com/dell/csm/issues/1397)
 
 ### Fixed Issues
 
-- [#1418 - [BUG]: csi-powermax crashed when attempting to unmount volume from node](https://github.com/dell/csm/issues/1418)
-- [#1425 - [BUG]: Incorrect Volume Creation Due to Idempotency in CreateVolume](https://github.com/dell/csm/issues/1425)
-- [#1447 - [BUG]: Gobrick does not clean wwids from /etc/multipath/wwids after removing multipath devices ](https://github.com/dell/csm/issues/1447)
-- [#1448 - [BUG]: CSM-operator build fails from disk space issue](https://github.com/dell/csm/issues/1448)
-- [#1453 - [BUG]: Improve Documentation - Multipath configuration for FC and FC-NVMe attached arrays ](https://github.com/dell/csm/issues/1453)
-- [#1499 - [BUG]: Fix Gosec error in service.go](https://github.com/dell/csm/issues/1499)
-- [#1534 - [BUG]: CSI PowerStore unable to resize NVMe block PVC, even though volume on the array get's resized](https://github.com/dell/csm/issues/1534)
-- [#1416 - [BUG]:  Dell CSM Installation Issues](https://github.com/dell/csm/issues/1416)
-- [#1519 - [BUG]: Powermax Intergration test failing](https://github.com/dell/csm/issues/1519)
+- [#1209 - [BUG]: Doc hyper links in driver Readme is broken](https://github.com/dell/csm/issues/1209)
+- [#1218 - [BUG]: Add the helm-charts-version parameter to the install command for all drivers in csm-docs](https://github.com/dell/csm/issues/1218)
+- [#1238 - [BUG]: Missing mountPropagation param for Powermax node template in CSM-Operator](https://github.com/dell/csm/issues/1238)
+- [#1239 - [BUG]: Changes in new release of google.golang.org/protobuf is causing compilation issues](https://github.com/dell/csm/issues/1239)
+- [#1305 - [BUG]: Create volume even if the size is smaller than possible](https://github.com/dell/csm/issues/1305)
+- [#1346 - [BUG]: Parsing an NVME response fails for list-subsys](https://github.com/dell/csm/issues/1346)
+- [#1370 - [BUG]: API command to check filesystem is taking 20s + causing ControllerUnPublish to take 20+secs ](https://github.com/dell/csm/issues/1370)
+- [#1372 - [BUG]: Make files in repositories build invalid images](https://github.com/dell/csm/issues/1372)
 
 ### Known Issues
 
