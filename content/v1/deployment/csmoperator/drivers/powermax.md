@@ -18,6 +18,10 @@ The CSI Driver for Dell PowerMax can create PVC with different storage protocols
 * NVMeTCP
 * Fiber Channel via VMware Raw Device Mapping
 In most cases, you will use one protocol only; therefore you should comply with the according prerequisites and not the others.
+* If enabling CSM Replication, both source and target storage systems must be locally managed by Unisphere.
+  * _Example_: When using two Unisphere instances, the first Unisphere instance should be configured with the source storage system as locally
+  managed and target storage system as remotely managed. The second Unisphere configuration should mirror the first — locally managing the target storage system and
+  remotely managing the source storage system.
 
 
 ### Listing installed drivers with the ContainerStorageModule CRD
