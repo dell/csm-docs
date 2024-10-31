@@ -17,12 +17,12 @@
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="docs">
-    <meta property="article:modified_time" content="2024-10-28T15:46:04-04:00">
+    <meta property="article:modified_time" content="2024-10-31T14:47:14-05:00">
 
   <meta itemprop="name" content="PowerMax">
   <meta itemprop="description" content="Installing the CSI Driver for Dell PowerMax via Dell CSM Operator">
-  <meta itemprop="dateModified" content="2024-10-28T15:46:04-04:00">
-  <meta itemprop="wordCount" content="3856">
+  <meta itemprop="dateModified" content="2024-10-31T14:47:14-05:00">
+  <meta itemprop="wordCount" content="3922">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="PowerMax">
   <meta name="twitter:description" content="Installing the CSI Driver for Dell PowerMax via Dell CSM Operator">
@@ -125,7 +125,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.539e9ca4910a29a2f7a0f8a69a3c9688.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.03953f35e52e00f7cd8184242f06abb6.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -149,7 +149,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.539e9ca4910a29a2f7a0f8a69a3c9688.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.03953f35e52e00f7cd8184242f06abb6.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -767,6 +767,13 @@ Prerequisites <a class="header-link"  href="#prerequisites" style=" display: inl
 <ul>
 <li>A Kubernetes or OpenShift cluster (see <a href="../../../../csidriver/#features-and-capabilities">supported versions</a>).</li>
 <li>If enabling CSM for Authorization, please refer to the Authorization deployment steps first</li>
+<li>If enabling CSM Replication, both source and target storage systems must be locally managed by Unisphere.
+<ul>
+<li><em>Example</em>: When using two Unisphere instances, the first Unisphere instance should be configured with the source storage system as locally
+managed and target storage system as remotely managed. The second Unisphere configuration should mirror the first — locally managing the target storage system and
+remotely managing the source storage system.</li>
+</ul>
+</li>
 <li>Refer to the sections below for protocol specific requirements.</li>
 <li>For NVMe support the preferred multipath solution is NVMe native multipathing. The <a href="https://elabnavigator.dell.com/vault/pdf/Linux.pdf">Dell Host Connectivity Guide</a> describes the details of each configuration option.</li>
 <li>Linux multipathing requirements (described later).</li>
