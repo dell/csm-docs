@@ -17,6 +17,7 @@ description: Release notes for PowerMax CSI driver
 
 
 
+
 ### New Features/Changes
 
 - [#1410 - [FEATURE]: Adding support for PowerMax Magnolia](https://github.com/dell/csm/issues/1410)
@@ -26,15 +27,15 @@ description: Release notes for PowerMax CSI driver
 
 ### Fixed Issues
 
+- [#1416 - [BUG]:  Dell CSM Installation Issues](https://github.com/dell/csm/issues/1416)
 - [#1418 - [BUG]: csi-powermax crashed when attempting to unmount volume from node](https://github.com/dell/csm/issues/1418)
 - [#1425 - [BUG]: Incorrect Volume Creation Due to Idempotency in CreateVolume](https://github.com/dell/csm/issues/1425)
 - [#1447 - [BUG]: Gobrick does not clean wwids from /etc/multipath/wwids after removing multipath devices ](https://github.com/dell/csm/issues/1447)
 - [#1448 - [BUG]: CSM-operator build fails from disk space issue](https://github.com/dell/csm/issues/1448)
 - [#1453 - [BUG]: Improve Documentation - Multipath configuration for FC and FC-NVMe attached arrays ](https://github.com/dell/csm/issues/1453)
 - [#1499 - [BUG]: Fix Gosec error in service.go](https://github.com/dell/csm/issues/1499)
-- [#1534 - [BUG]: CSI PowerStore unable to resize NVMe block PVC, even though volume on the array get's resized](https://github.com/dell/csm/issues/1534)
-- [#1416 - [BUG]:  Dell CSM Installation Issues](https://github.com/dell/csm/issues/1416)
 - [#1519 - [BUG]: Powermax Intergration test failing](https://github.com/dell/csm/issues/1519)
+- [#1534 - [BUG]: CSI PowerStore unable to resize NVMe block PVC, even though volume on the array get's resized](https://github.com/dell/csm/issues/1534)
 
 ### Known Issues
 
