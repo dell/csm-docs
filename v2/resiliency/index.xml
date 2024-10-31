@@ -4,7 +4,7 @@
     <title>Resiliency on </title>
     <link>https://dell.github.io/csm-docs/v2/resiliency/</link>
     <description>Recent content in Resiliency on </description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>en</language>
     <atom:link href="https://dell.github.io/csm-docs/v2/resiliency/index.xml" rel="self" type="application/rss+xml" />
     <item>
@@ -12,40 +12,21 @@
       <link>https://dell.github.io/csm-docs/v2/resiliency/design/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://dell.github.io/csm-docs/v2/resiliency/design/</guid>
-      <description>This section covers CSM for Resiliency&amp;rsquo;s design. The detail is sufficient that you should be able to understand what CSM for Resiliency is designed to do in various situations and how it works. CSM for Resiliency is deployed as a sidecar named podmon with a CSI driver in both the controller pods and node pods. These are referred to as controller-podmon and node-podmon respectively.
-Generally controller-podmon and the driver controller pods are deployed using a Deployment.</description>
-    </item>
-    <item>
-      <title>Uninstallation</title>
-      <link>https://dell.github.io/csm-docs/v2/resiliency/uninstallation/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://dell.github.io/csm-docs/v2/resiliency/uninstallation/</guid>
-      <description>This section outlines the uninstallation steps for Container Storage Modules (CSM) for Resiliency.
-Uninstalling the sidecar in the CSI Driver To uninstall the sidecar in the CSI Driver, uninstall the driver and reinstall the driver with the podmon feature disabled.</description>
+      <description>&lt;p&gt;This section covers CSM for Resiliency&amp;rsquo;s design.  The detail is sufficient that you should be able to understand what CSM for Resiliency is designed to do in various situations and how it works. CSM for Resiliency is deployed as a sidecar named &lt;em&gt;podmon&lt;/em&gt; with a CSI driver in both the controller pods and node pods. These are referred to as controller-podmon and node-podmon respectively.&lt;/p&gt;&#xA;&lt;p&gt;Generally controller-podmon and the driver controller pods are deployed using a Deployment.&#xA;The Deployments support one or multiple replicas for High Availability and use a standard K8S leader election protocol so that only one controller&#xA;is active at a time (as does the driver and all the controller sidecars.)&#xA;The controller deployment also supports a Node Selector that allows the controllers to be placed on K8S Manager (non Worker) nodes.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Use Cases</title>
       <link>https://dell.github.io/csm-docs/v2/resiliency/usecases/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://dell.github.io/csm-docs/v2/resiliency/usecases/</guid>
-      <description>CSM for Resiliency is primarily designed to detect pod failures due to some kind of node failure or node communication failure. The diagram below shows the hardware environment that is assumed in the design.
-A Kubernetes Control Plane is assumed to exist that provides the K8S API service used by CSM for Resiliency. There is an arbitrary number of worker nodes (two are shown in the diagram) that are connected to the Control Plane through a K8S Control Plane IP Network.</description>
-    </item>
-    <item>
-      <title>Upgrade</title>
-      <link>https://dell.github.io/csm-docs/v2/resiliency/upgrade/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://dell.github.io/csm-docs/v2/resiliency/upgrade/</guid>
-      <description>CSM for Resiliency can be upgraded as part of the Dell CSI driver upgrade process. The drivers can be upgraded either by a helm chart or by the Dell CSM Operator. Currently, only Helm chart upgrade is supported for CSM for Resiliency.
-For information on the PowerFlex CSI driver upgrade process, see PowerFlex CSI Driver.
-For information on the Unity XT CSI driver upgrade process, see Unity XT CSI Driver.</description>
+      <description>&lt;p&gt;CSM for Resiliency is primarily designed to detect pod failures due to some kind of node failure or node communication failure. The diagram below shows the hardware environment that is assumed in the design.&lt;/p&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;CSM for Resiliency Hardware Model&#34; src=&#34;../resiliency_model.jpg&#34;&gt;&lt;/p&gt;&#xA;&lt;p&gt;A Kubernetes Control Plane is assumed to exist that provides the K8S API service used by CSM for Resiliency. There is an arbitrary number of worker nodes (two are shown in the diagram) that&#xA;are connected to the Control Plane through a K8S Control Plane IP Network.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Troubleshooting</title>
       <link>https://dell.github.io/csm-docs/v2/resiliency/troubleshooting/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://dell.github.io/csm-docs/v2/resiliency/troubleshooting/</guid>
-      <description>Some tools have been provided in the tools directory that will help you understand the system&amp;rsquo;s state and facilitate troubleshooting. If you experience a problem with CSM for Resiliency it is important you provide us with as much information as possible so that we can diagnose the issue and improve CSM for Resiliency. Some tools have been provided in the tools directory that will help you understand the system&amp;rsquo;s state and facilitate sending us the logs and other information needed to diagnose a problem.</description>
+      <description>&lt;p&gt;Some tools have been provided in the &lt;a href=&#34;https://github.com/dell/karavi-resiliency/blob/main/tools&#34;&gt;tools&lt;/a&gt; directory that will help you understand the system&amp;rsquo;s state and facilitate troubleshooting.&#xA;If you experience a problem with CSM for Resiliency it is important you provide us with as much information as possible so that we can diagnose the issue and improve CSM for Resiliency. Some tools have been provided in the &lt;a href=&#34;https://github.com/dell/karavi-resiliency/blob/main/tools&#34;&gt;tools&lt;/a&gt; directory that will help you understand the system&amp;rsquo;s state and facilitate sending us the logs and other information needed to diagnose a problem.&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

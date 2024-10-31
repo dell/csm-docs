@@ -4,7 +4,7 @@
     <title>Upgrade on </title>
     <link>https://dell.github.io/csm-docs/docs/deployment/helm/modules/upgrade/</link>
     <description>Recent content in Upgrade on </description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>en</language>
     <atom:link href="https://dell.github.io/csm-docs/docs/deployment/helm/modules/upgrade/index.xml" rel="self" type="application/rss+xml" />
     <item>
@@ -12,37 +12,28 @@
       <link>https://dell.github.io/csm-docs/docs/deployment/helm/modules/upgrade/authorization/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://dell.github.io/csm-docs/docs/deployment/helm/modules/upgrade/authorization/</guid>
-      <description>This section outlines the upgrade steps for Container Storage Modules (CSM) for Authorization. The upgrade of CSM for Authorization is handled in 2 parts:
-Helm Chart Upgrade Upgrading the Dell CSI drivers with CSM for Authorization enabled Helm Chart Upgrade To upgrade an existing Helm installation of CSM for Authorization to the latest release, download the latest Helm charts.
-helm repo update Check if the latest Helm chart version is available:</description>
+      <description>&lt;p&gt;&#xA;&#xA;&lt;div class=&#34;pageinfo pageinfo-primary&#34;&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;span&gt;&lt;/span&gt;&#xA;Starting with CSM 1.12, all deployments will need to use images from &lt;a href=&#34;https://quay.io/organization/dell&#34;&gt;quay.io&lt;/a&gt;. Please note that from CSM 1.14 (May 2025), upgrading with helm will fail if it attempts to use images from &lt;a href=&#34;https://hub.docker.com/r/dellemc/&#34;&gt;Docker Hub&lt;/a&gt;.&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;span&gt;&lt;/span&gt;&#xA;Deprecation Notice Pre-Wire:  Starting with CSM 1.13, Authorization v1.x will be deprecated and will be officially discontinued by CSM 1.15 in September 2025. Please switch to Authorization v2.0 before then to avoid any issues. Migration steps are available &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/docs/authorization/migration-guide-from-v1-to-v2/&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Observability</title>
       <link>https://dell.github.io/csm-docs/docs/deployment/helm/modules/upgrade/observability/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://dell.github.io/csm-docs/docs/deployment/helm/modules/upgrade/observability/</guid>
-      <description>This section outlines the upgrade steps for Container Storage Modules (CSM) for Observability. CSM for Observability upgrade can be achieved in one of two ways:
-Helm Chart Upgrade Online Installer Upgrade Helm Chart Upgrade CSM for Observability Helm upgrade supports Helm, Online Installer, and Offline Installer deployments.
-To upgrade an existing Helm installation of CSM for Observability to the latest release, download the latest Helm charts.
-helm repo update Check if the latest Helm chart version is available:</description>
+      <description>&lt;p&gt;&#xA;&#xA;&lt;div class=&#34;pageinfo pageinfo-primary&#34;&gt;&#xA;&lt;p&gt;Starting with CSM 1.12, all deployments will need to use images from &lt;a href=&#34;https://quay.io/organization/dell&#34;&gt;quay.io&lt;/a&gt;. Please note that from CSM 1.14 (May 2025), upgrading with helm will fail if it attempts to use images from &lt;a href=&#34;https://hub.docker.com/r/dellemc/&#34;&gt;Docker Hub&lt;/a&gt;.&lt;/p&gt;&#xA;&#xA;&lt;/div&gt;&#xA;&#xA;This section outlines the upgrade steps for Container Storage Modules (CSM) for Observability. CSM for Observability upgrade can be achieved in one of two ways:&lt;/p&gt;</description>
     </item>
     <item>
       <title>Resiliency</title>
       <link>https://dell.github.io/csm-docs/docs/deployment/helm/modules/upgrade/resiliency/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://dell.github.io/csm-docs/docs/deployment/helm/modules/upgrade/resiliency/</guid>
-      <description>CSM for Resiliency can be upgraded as part of the Dell CSI driver upgrade process. The drivers can be upgraded either by a helm chart or by the Dell CSM Operator. Currently, only Helm chart upgrade is supported for CSM for Resiliency.
-For information on the PowerFlex CSI driver upgrade process, see PowerFlex CSI Driver.
-For information on the Unity XT CSI driver upgrade process, see Unity XT CSI Driver.</description>
+      <description>&lt;p&gt;&#xA;&#xA;&lt;div class=&#34;pageinfo pageinfo-primary&#34;&gt;&#xA;&lt;p&gt;Starting with CSM 1.12, all deployments will need to use images from &lt;a href=&#34;https://quay.io/organization/dell&#34;&gt;quay.io&lt;/a&gt;. Please note that from CSM 1.14 (May 2025), upgrading with helm will fail if it attempts to use images from &lt;a href=&#34;https://hub.docker.com/r/dellemc/&#34;&gt;Docker Hub&lt;/a&gt;.&lt;/p&gt;&#xA;&#xA;&lt;/div&gt;&#xA;&#xA;CSM for Resiliency can be upgraded as part of the Dell CSI driver upgrade process. The drivers can be upgraded either by a &lt;em&gt;helm chart&lt;/em&gt; or by the &lt;em&gt;Dell CSM Operator&lt;/em&gt;. Currently, only &lt;em&gt;Helm chart&lt;/em&gt; upgrade is supported for CSM for Resiliency.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Replication</title>
       <link>https://dell.github.io/csm-docs/docs/deployment/helm/modules/upgrade/replication/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://dell.github.io/csm-docs/docs/deployment/helm/modules/upgrade/replication/</guid>
-      <description>CSM Replication module consists of two components:
-CSM Replication sidecar (installed along with the driver) CSM Replication controller Those two components should be upgraded separately. When upgrading them ensure that you use the same versions for both sidecar and controller, because different versions could be incompatible with each other.
-Note: While upgrading the module via helm, the replicas variable in myvalues.yaml can be at most one less than the number of worker nodes.</description>
+      <description>&lt;p&gt;&#xA;&#xA;&lt;div class=&#34;pageinfo pageinfo-primary&#34;&gt;&#xA;&lt;p&gt;Starting with CSM 1.12, all deployments will need to use images from &lt;a href=&#34;https://quay.io/organization/dell&#34;&gt;quay.io&lt;/a&gt;. Please note that from CSM 1.14 (May 2025), upgrading with helm will fail if it attempts to use images from &lt;a href=&#34;https://hub.docker.com/r/dellemc/&#34;&gt;Docker Hub&lt;/a&gt;.&lt;/p&gt;&#xA;&#xA;&lt;/div&gt;&#xA;&#xA;CSM Replication module consists of two components:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;CSM Replication sidecar (installed along with the driver)&lt;/li&gt;&#xA;&lt;li&gt;CSM Replication controller&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;Those two components should be upgraded separately. When upgrading them ensure that you use the same versions for both sidecar and&#xA;controller, because different versions could be incompatible with each other.&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

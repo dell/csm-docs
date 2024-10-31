@@ -9,26 +9,25 @@
 <link rel="icon" type="image/png" href="/csm-docs/favicons/favicon-16x16.png" sizes="16x16">
 <link rel="icon" type="image/png" href="/csm-docs/favicons/favicon-32x32.png" sizes="32x32">
 <title>PowerMax | </title>
-<meta name="description" content="Installing Dell CSI Driver for PowerMax via Dell CSM Operator
-">
-<meta property="og:title" content="PowerMax" />
-<meta property="og:description" content="Installing Dell CSI Driver for PowerMax via Dell CSM Operator
-" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://dell.github.io/csm-docs/v1/deployment/csmoperator/drivers/powermax/" /><meta property="article:section" content="v1" />
+<meta name="description" content="Installing Dell CSI Driver for PowerMax via Dell CSM Operator">
+<meta property="og:url" content="https://dell.github.io/csm-docs/v1/deployment/csmoperator/drivers/powermax/">
+  <meta property="og:site_name" content="Dell Technologies">
+  <meta property="og:title" content="PowerMax">
+  <meta property="og:description" content="Installing Dell CSI Driver for PowerMax via Dell CSM Operator">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="v1">
+    <meta property="article:modified_time" content="2024-10-25T11:45:57-04:00">
 
-<meta property="article:modified_time" content="2024-07-30T01:25:59+05:30" /><meta property="og:site_name" content="Dell Technologies" />
-
-<meta itemprop="name" content="PowerMax">
-<meta itemprop="description" content="Installing Dell CSI Driver for PowerMax via Dell CSM Operator
-">
-<meta itemprop="dateModified" content="2024-07-30T01:25:59+05:30" />
-<meta itemprop="wordCount" content="3057">
-<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="PowerMax"/>
-<meta name="twitter:description" content="Installing Dell CSI Driver for PowerMax via Dell CSM Operator
-"/>
-<link rel="preload" href="/csm-docs/scss/main.min.42d8340a915bc864ad5d15da721297c0e3c58c179b9ff8ae56d219635987f3d2.css" as="style"><link href="/csm-docs/scss/main.min.42d8340a915bc864ad5d15da721297c0e3c58c179b9ff8ae56d219635987f3d2.css" rel="stylesheet">
+  <meta itemprop="name" content="PowerMax">
+  <meta itemprop="description" content="Installing Dell CSI Driver for PowerMax via Dell CSM Operator">
+  <meta itemprop="dateModified" content="2024-10-25T11:45:57-04:00">
+  <meta itemprop="wordCount" content="3275">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="PowerMax">
+  <meta name="twitter:description" content="Installing Dell CSI Driver for PowerMax via Dell CSM Operator">
+<link rel="preload" href="/csm-docs/scss/main.min.c1b9d9da997c468756a5165a298685a703e1f9c4d6fb91aecfa7c7d02edab9a7.css" as="style" integrity="sha256-wbnZ2pl8RodWpRZaKYaFpwPh&#43;cTW&#43;5Guz6fH0C7auac=" crossorigin="anonymous">
+<link href="/csm-docs/scss/main.min.c1b9d9da997c468756a5165a298685a703e1f9c4d6fb91aecfa7c7d02edab9a7.css" rel="stylesheet" integrity="sha256-wbnZ2pl8RodWpRZaKYaFpwPh&#43;cTW&#43;5Guz6fH0C7auac=" crossorigin="anonymous">
 <script
   src="https://code.jquery.com/jquery-3.7.1.min.js"
   integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
@@ -57,12 +56,63 @@
         <div class="dropdown">
   <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Releases</a>
   <ul class="dropdown-menu">
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.11.1)</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.10.2</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.9.4</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">v1.8.0</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.12.0)</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.11.1</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.10.2</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">v1.9.4</a></li>
     </ul>
 </div></li>
+      <li class="td-light-dark-menu nav-item dropdown">
+        <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
+  <symbol id="check2" viewBox="0 0 16 16">
+    <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+  </symbol>
+  <symbol id="circle-half" viewBox="0 0 16 16">
+    <path d="M8 15A7 7 0 1 0 8 1v14zm0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16z"/>
+  </symbol>
+  <symbol id="moon-stars-fill" viewBox="0 0 16 16">
+    <path d="M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278z"/>
+    <path d="M10.794 3.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387a1.734 1.734 0 0 0-1.097 1.097l-.387 1.162a.217.217 0 0 1-.412 0l-.387-1.162A1.734 1.734 0 0 0 9.31 6.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387a1.734 1.734 0 0 0 1.097-1.097l.387-1.162zM13.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.156 1.156 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.156 1.156 0 0 0-.732-.732l-.774-.258a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732L13.863.1z"/>
+  </symbol>
+  <symbol id="sun-fill" viewBox="0 0 16 16">
+    <path d="M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"/>
+  </symbol>
+</svg>
+
+<button class="btn btn-link nav-link dropdown-toggle d-flex align-items-center"
+        id="bd-theme"
+        type="button"
+        aria-expanded="false"
+        data-bs-toggle="dropdown"
+        data-bs-display="static"
+        aria-label="Toggle theme (auto)">
+  <svg class="bi my-1 theme-icon-active"><use href="#circle-half"></use></svg>
+</button>
+<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="bd-theme-text">
+  <li>
+    <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="light" aria-pressed="false">
+      <svg class="bi me-2 opacity-50"><use href="#sun-fill"></use></svg>
+      Light
+      <svg class="bi ms-auto d-none"><use href="#check2"></use></svg>
+    </button>
+  </li>
+  <li>
+    <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark" aria-pressed="false">
+      <svg class="bi me-2 opacity-50"><use href="#moon-stars-fill"></use></svg>
+      Dark
+      <svg class="bi ms-auto d-none"><use href="#check2"></use></svg>
+    </button>
+  </li>
+  <li>
+    <button type="button" class="dropdown-item d-flex align-items-center active" data-bs-theme-value="auto" aria-pressed="true">
+      <svg class="bi me-2 opacity-50"><use href="#circle-half"></use></svg>
+      Auto
+      <svg class="bi ms-auto d-none"><use href="#check2"></use></svg>
+    </button>
+  </li>
+</ul>
+
+      </li>
       </ul>
   </div>
   <div class="d-none d-lg-block">
@@ -75,7 +125,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.57c6703100f29ccd282d2f2d5e140ea6.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.539e9ca4910a29a2f7a0f8a69a3c9688.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -99,7 +149,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.57c6703100f29ccd282d2f2d5e140ea6.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.539e9ca4910a29a2f7a0f8a69a3c9688.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -113,7 +163,7 @@
   <a href="/csm-docs/v1/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section tree-root" id="m-csm-docsv1"><span class="">Documentation</span></a>
   <ul class="ul-1">
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsv1prerequisites-li">
-  <a href="/csm-docs/v1/prerequisites/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv1prerequisites"><span class="">Prerequisites</span></a>
+  <a href="/csm-docs/v1/prerequisites/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv1prerequisites"><span class="">Prerequisites and Support Matrix</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id="m-csm-docsv1deployment-li">
   <a href="/csm-docs/v1/deployment/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv1deployment"><span class="">Deployment</span></a>
   <ul class="ul-2 foldable">
@@ -122,6 +172,8 @@
   <ul class="ul-3 foldable">
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1deploymentcsminstallationwizardrelease-li">
   <a href="/csm-docs/v1/deployment/csminstallationwizard/release/" title="Release Notes" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv1deploymentcsminstallationwizardrelease"><span class="">Release notes</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1deploymentcsminstallationwizardsrc-li">
+  <a href="/csm-docs/v1/deployment/csminstallationwizard/src/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv1deploymentcsminstallationwizardsrc"><span class=""></span></a>
 </li>
   </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id="m-csm-docsv1deploymentcsmoperator-li">
@@ -147,6 +199,8 @@
   <ul class="ul-4 foldable">
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1deploymentcsmoperatormodulesauthorization-li">
   <a href="/csm-docs/v1/deployment/csmoperator/modules/authorization/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv1deploymentcsmoperatormodulesauthorization"><span class="">Authorization</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1deploymentcsmoperatormodulesauthorization-v20-tech-preview-li">
+  <a href="/csm-docs/v1/deployment/csmoperator/modules/authorization-v2.0-tech-preview/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv1deploymentcsmoperatormodulesauthorization-v20-tech-preview"><span class="">Authorization v2.0 Tech Preview</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1deploymentcsmoperatormodulesobservability-li">
   <a href="/csm-docs/v1/deployment/csmoperator/modules/observability/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv1deploymentcsmoperatormodulesobservability"><span class="">Observability</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1deploymentcsmoperatormodulesreplication-li">
@@ -209,9 +263,7 @@
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv1deploymenthelmmodulesinstallation-li">
   <a href="/csm-docs/v1/deployment/helm/modules/installation/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv1deploymenthelmmodulesinstallation"><span class="">Installation</span></a>
   <ul class="ul-5 foldable">
-    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1deploymenthelmmodulesinstallationapplicationmobility-li">
-  <a href="/csm-docs/v1/deployment/helm/modules/installation/applicationmobility/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv1deploymenthelmmodulesinstallationapplicationmobility"><span class="">Application Mobility</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv1deploymenthelmmodulesinstallationencryption-li">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv1deploymenthelmmodulesinstallationencryption-li">
   <a href="/csm-docs/v1/deployment/helm/modules/installation/encryption/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv1deploymenthelmmodulesinstallationencryption"><span class="">Encryption</span></a>
   <ul class="ul-6 foldable">
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1deploymenthelmmodulesinstallationencryptionvault-li">
@@ -442,36 +494,55 @@
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-csm-docsv1authorization-li">
   <a href="/csm-docs/v1/authorization/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv1authorization"><span class="">Authorization</span></a>
   <ul class="ul-2 foldable">
-    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1authorizationdesign-li">
-  <a href="/csm-docs/v1/authorization/design/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv1authorizationdesign"><span class="">Design</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv1authorizationbackup-and-restore-li">
-  <a href="/csm-docs/v1/authorization/backup-and-restore/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv1authorizationbackup-and-restore"><span class="">Backup and Restore</span></a>
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv1authorizationv1x-ga-li">
+  <a href="/csm-docs/v1/authorization/v1.x-ga/" title="Authorization - v1.x GA" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv1authorizationv1x-ga"><span class="">v1.x GA</span></a>
   <ul class="ul-3 foldable">
-    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1authorizationbackup-and-restorehelm-li">
-  <a href="/csm-docs/v1/authorization/backup-and-restore/helm/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv1authorizationbackup-and-restorehelm"><span class="">Helm</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1authorizationbackup-and-restorerpm-li">
-  <a href="/csm-docs/v1/authorization/backup-and-restore/rpm/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv1authorizationbackup-and-restorerpm"><span class="">RPM</span></a>
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1authorizationv1x-gadesign-li">
+  <a href="/csm-docs/v1/authorization/v1.x-ga/design/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv1authorizationv1x-gadesign"><span class="">Design</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv1authorizationv1x-gabackup-and-restore-li">
+  <a href="/csm-docs/v1/authorization/v1.x-ga/backup-and-restore/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv1authorizationv1x-gabackup-and-restore"><span class="">Backup and Restore</span></a>
+  <ul class="ul-4 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1authorizationv1x-gabackup-and-restorehelm-li">
+  <a href="/csm-docs/v1/authorization/v1.x-ga/backup-and-restore/helm/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv1authorizationv1x-gabackup-and-restorehelm"><span class="">Helm</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1authorizationv1x-gabackup-and-restorerpm-li">
+  <a href="/csm-docs/v1/authorization/v1.x-ga/backup-and-restore/rpm/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv1authorizationv1x-gabackup-and-restorerpm"><span class="">RPM</span></a>
 </li>
   </ul>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv1authorizationconfiguration-li">
-  <a href="/csm-docs/v1/authorization/configuration/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv1authorizationconfiguration"><span class="">Configuration</span></a>
-  <ul class="ul-3 foldable">
-    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1authorizationconfigurationpowerflex-li">
-  <a href="/csm-docs/v1/authorization/configuration/powerflex/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv1authorizationconfigurationpowerflex"><span class="">PowerFlex</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1authorizationconfigurationpowermax-li">
-  <a href="/csm-docs/v1/authorization/configuration/powermax/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv1authorizationconfigurationpowermax"><span class="">PowerMax</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1authorizationconfigurationpowerscale-li">
-  <a href="/csm-docs/v1/authorization/configuration/powerscale/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv1authorizationconfigurationpowerscale"><span class="">PowerScale</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1authorizationconfigurationproxy-server-li">
-  <a href="/csm-docs/v1/authorization/configuration/proxy-server/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv1authorizationconfigurationproxy-server"><span class="">Proxy Server</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv1authorizationv1x-gaconfiguration-li">
+  <a href="/csm-docs/v1/authorization/v1.x-ga/configuration/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv1authorizationv1x-gaconfiguration"><span class="">Configuration</span></a>
+  <ul class="ul-4 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1authorizationv1x-gaconfigurationpowerflex-li">
+  <a href="/csm-docs/v1/authorization/v1.x-ga/configuration/powerflex/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv1authorizationv1x-gaconfigurationpowerflex"><span class="">PowerFlex</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1authorizationv1x-gaconfigurationpowermax-li">
+  <a href="/csm-docs/v1/authorization/v1.x-ga/configuration/powermax/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv1authorizationv1x-gaconfigurationpowermax"><span class="">PowerMax</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1authorizationv1x-gaconfigurationpowerscale-li">
+  <a href="/csm-docs/v1/authorization/v1.x-ga/configuration/powerscale/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv1authorizationv1x-gaconfigurationpowerscale"><span class="">PowerScale</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1authorizationv1x-gaconfigurationproxy-server-li">
+  <a href="/csm-docs/v1/authorization/v1.x-ga/configuration/proxy-server/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv1authorizationv1x-gaconfigurationproxy-server"><span class="">Proxy Server</span></a>
 </li>
   </ul>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1authorizationcli-li">
-  <a href="/csm-docs/v1/authorization/cli/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv1authorizationcli"><span class="">CLI</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1authorizationtroubleshooting-li">
-  <a href="/csm-docs/v1/authorization/troubleshooting/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv1authorizationtroubleshooting"><span class="">Troubleshooting</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1authorizationrelease-li">
-  <a href="/csm-docs/v1/authorization/release/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv1authorizationrelease"><span class="">Release notes</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1authorizationv1x-gacli-li">
+  <a href="/csm-docs/v1/authorization/v1.x-ga/cli/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv1authorizationv1x-gacli"><span class="">CLI</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1authorizationv1x-gatroubleshooting-li">
+  <a href="/csm-docs/v1/authorization/v1.x-ga/troubleshooting/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv1authorizationv1x-gatroubleshooting"><span class="">Troubleshooting</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1authorizationv1x-garelease-li">
+  <a href="/csm-docs/v1/authorization/v1.x-ga/release/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv1authorizationv1x-garelease"><span class="">Release notes</span></a>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv1authorizationv20-tech-preview-li">
+  <a href="/csm-docs/v1/authorization/v2.0-tech-preview/" title="Authorization - v2.0 Tech Preview" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv1authorizationv20-tech-preview"><span class="">v2.0 Tech Preview</span></a>
+  <ul class="ul-3 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv1authorizationv20-tech-previewconfiguration-li">
+  <a href="/csm-docs/v1/authorization/v2.0-tech-preview/configuration/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv1authorizationv20-tech-previewconfiguration"><span class="">Configuration</span></a>
+  <ul class="ul-4 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1authorizationv20-tech-previewconfigurationpowerflex-li">
+  <a href="/csm-docs/v1/authorization/v2.0-tech-preview/configuration/powerflex/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv1authorizationv20-tech-previewconfigurationpowerflex"><span class="">PowerFlex</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1authorizationv20-tech-previewconfigurationproxy-server-li">
+  <a href="/csm-docs/v1/authorization/v2.0-tech-preview/configuration/proxy-server/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv1authorizationv20-tech-previewconfigurationproxy-server"><span class="">Proxy Server</span></a>
+</li>
+  </ul>
+</li>
+  </ul>
 </li>
   </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-csm-docsv1observability-li">
@@ -562,8 +633,6 @@
   <ul class="ul-2 foldable">
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1applicationmobilityuse_cases-li">
   <a href="/csm-docs/v1/applicationmobility/use_cases/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv1applicationmobilityuse_cases"><span class="">Use Cases</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1applicationmobilitytroubleshooting-li">
-  <a href="/csm-docs/v1/applicationmobility/troubleshooting/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv1applicationmobilitytroubleshooting"><span class="">Troubleshooting</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1applicationmobilityrelease-li">
   <a href="/csm-docs/v1/applicationmobility/release/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv1applicationmobilityrelease"><span class="">Release Notes</span></a>
 </li>
@@ -628,6 +697,7 @@
       <ul>
         <li><a href="#listing-installed-drivers-with-the-containerstoragemodule-crd">Listing installed drivers with the ContainerStorageModule CRD</a></li>
         <li><a href="#fibre-channel-requirements">Fibre Channel Requirements</a></li>
+        <li><a href="#nvmetcp-requirements">NVMeTCP requirements</a></li>
         <li><a href="#iscsi-requirements">iSCSI Requirements</a></li>
         <li><a href="#nfs-requirements">NFS requirements</a></li>
         <li><a href="#linux-multipathing-requirements">Linux multipathing requirements</a></li>
@@ -682,7 +752,7 @@
 		
 </header>
 	<p>The CSI Driver for Dell PowerMax can be installed via the Dell CSM Operator.
-To deploy the Operator, follow the instructions available <a href="../../#installation">here</a>.</p>
+To deploy the Operator, follow the instructions available <a href="/csm-docs/v1/deployment/#installation">here</a>.</p>
 <p>Note that the deployment of the driver using the operator does not use any Helm charts and the installation and configuration parameters will be slightly different from the one specified via the Helm installer.</p>
 <h2 id="prerequisites">
 Prerequisites <a class="header-link"  href="#prerequisites" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
@@ -695,6 +765,7 @@ Prerequisites <a class="header-link"  href="#prerequisites" style=" display: inl
 <li>direct Fiber Channel</li>
 <li>direct iSCSI</li>
 <li>NFS</li>
+<li>NVMeTCP</li>
 <li>Fiber Channel via VMware Raw Device Mapping
 In most cases, you will use one protocol only; therefore you should comply with the according prerequisites and not the others.</li>
 </ul>
@@ -718,6 +789,39 @@ Fibre Channel Requirements <a class="header-link"  href="#fibre-channel-requirem
 <li>Ensure that the HBA WWNs (initiators) appear on the list of initiators that are logged into the array.</li>
 <li>If the number of volumes that will be published to nodes is high, then configure the maximum number of LUNs for your HBAs on each node. See the appropriate HBA document to configure the maximum number of LUNs.</li>
 </ul>
+<h3 id="nvmetcp-requirements">
+NVMeTCP requirements <a class="header-link"  href="#nvmetcp-requirements" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
+            <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 0h24v24H0z" fill="none"/>
+                <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
+            </svg>
+        </a></h3><p>If you want to use the protocol, set up the NVMe initiators as follows:</p>
+<ul>
+<li>Setup on Array <br>
+Once the NVMe endpoint is created on the array, follow the following step to update endpoint name to adhere with CSI driver.
+<ul>
+<li>Perform a  <code>nvme discover --transport=tcp --traddr=&lt;InterfaceAdd&gt; --trsvcid=4420</code>. <InterfaceAdd> is the placeholder for actual IP address of NVMe Endpoint.</li>
+<li>Fetch the <em>subnqn</em>, for e.g.,  <em>nqn.1988-11.com.dell:PowerMax_2500:00:000120001100</em>, this will be used as the subnqn holder while updating NVMe endpoint name.</li>
+<li>Update the NVMe endpoint name as <code>&lt;subnqn&gt;:&lt;dir&gt;&lt;port&gt;&gt;</code>. Here is an example how it should look, <em>nqn.1988-11.com.dell:PowerMax_2500:00:000120001100:OR1C000</em></li>
+</ul>
+</li>
+<li>Setup on Host
+<ul>
+<li>The driver requires NVMe management command-line interface (nvme-cli) to use configure, edit, view or start the NVMe client and target. The nvme-cli utility provides a command-line and interactive shell option. The NVMe CLI tool is installed in the host using the below command.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo apt install nvme-cli
+</span></span></code></pre></div><p><strong>Requirements for NVMeTCP</strong></p>
+<ul>
+<li>Modules including the nvme, nvme_core, nvme_fabrics, and nvme_tcp are required for using NVMe over Fabrics using TCP. Load the NVMe and NVMe-OF Modules using the below commands:</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>modprobe nvme
+</span></span><span style="display:flex;"><span>modprobe nvme_tcp
+</span></span></code></pre></div><ul>
+<li>The NVMe modules may not be available after a node reboot. Loading the modules at startup is recommended.</li>
+<li>Generate and update the <em>/etc/nvme/hostnqn</em> with hostNQN details.</li>
+</ul>
 <h3 id="iscsi-requirements">
 iSCSI Requirements <a class="header-link"  href="#iscsi-requirements" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
             <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
@@ -733,7 +837,7 @@ iSCSI Requirements <a class="header-link"  href="#iscsi-requirements" style=" di
 <li>Ensure that the iSCSI initiators on the nodes are not a part of any existing Host (Initiator Group) on the Dell PowerMax array.</li>
 <li>The CSI Driver needs the port group names containing the required iSCSI director ports. These port groups must be set up on each Dell PowerMax array. All the port group names supplied to the driver must exist on each Dell PowerMax with the same name.</li>
 </ul>
-<p>For more information about configuring iSCSI, see <a href="https://www.delltechnologies.com/asset/zh-tw/products/storage/technical-support/docu5128.pdf">Dell Host Connectivity guide</a>.</p>
+<p>For more information about configuring iSCSI, see <a href="https://elabnavigator.dell.com/vault/pdf/Linux.pdf?key=1725374107988">Dell Host Connectivity guide</a>.</p>
 <h5 id="iscsi-daemon-machineconfig">
 iscsi-daemon <code>MachineConfig</code></h5><p>To configure iSCSI in Red Hat OpenShift clusters, you can create a <code>MachineConfig</code> object using the console or <code>oc</code> to ensure that the iSCSI daemon starts on all the Red Hat CoreOS nodes. Here is an example of a <code>MachineConfig</code> object:</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">apiVersion</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">machineconfiguration.openshift.io/v1</span><span style="color:#f8f8f8;text-decoration:underline">
@@ -769,9 +873,9 @@ NFS requirements <a class="header-link"  href="#nfs-requirements" style=" displa
             </svg>
         </a></h3><p>CSI Driver for Dell PowerMax supports NFS communication. Ensure that the following requirements are met before you install CSI Driver:</p>
 <ul>
-<li>Configure the NFS network. Please refer <a href="https://dl.dell.com/content/manual57826791-dell-powermax-file-protocol-guide.pdf?language=en-us&amp;ps=true">here</a> for more details.</li>
+<li>Configure the NFS network. Please refer <a href="https://dl.dell.com/content/manual57826791-dell-powermax-file-protocol-guide.pdf?language=en-us&ps=true">here</a> for more details.</li>
 <li>PowerMax Embedded Management guest to access Unisphere for PowerMax.</li>
-<li>Create the NAS server. Please refer <a href="https://dl.dell.com/content/manual55638050-dell-powermax-file-quick-start-guide.pdf?language=en-us&amp;ps=true">here</a> for more details.</li>
+<li>Create the NAS server. Please refer <a href="https://dl.dell.com/content/manual55638050-dell-powermax-file-quick-start-guide.pdf?language=en-us&ps=true">here</a> for more details.</li>
 </ul>
 <h3 id="linux-multipathing-requirements">
 Linux multipathing requirements <a class="header-link"  href="#linux-multipathing-requirements" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
@@ -868,7 +972,7 @@ Auto RDM for vSphere over FC requirements <a class="header-link"  href="#auto-rd
 <p>Add initiators from all ESX/ESXis to a host(initiator group)/host group(cascaded initiator group) where the cluster is hosted.</p>
 </li>
 <li>
-<p>Create a secret which contains vCenter privileges. Follow the steps <a href="#support-for-auto-rdm-for-vsphere-over-fc">here</a> to create the same.</p>
+<p>Create a secret which contains vCenter privileges. Follow the steps <a href="/csm-docs/v1/deployment/csmoperator/drivers/powermax/#support-for-auto-rdm-for-vsphere-over-fc">here</a> to create the same.</p>
 </li>
 </ul>
 <h3 id="csi-powermax-reverseproxy">
@@ -983,166 +1087,166 @@ Example: config.yaml</p>
 <li>
 <p>Users should configure the parameters in CR. The following table lists the primary configurable parameters of the PowerMax driver and their default values:</p>
 <table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-<th>Required</th>
-<th>Default</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>dnsPolicy</td>
-<td>Determines the DNS Policy of the Node service</td>
-<td>Yes</td>
-<td>ClusterFirstWithHostNet</td>
-</tr>
-<tr>
-<td>replicas</td>
-<td>Controls the number of controller Pods you deploy. If controller Pods are greater than the number of available nodes, excess Pods will become stuck in pending. The default is 2 which allows for Controller high availability.</td>
-<td>Yes</td>
-<td>2</td>
-</tr>
-<tr>
-<td>fsGroupPolicy</td>
-<td>Defines which FS Group policy mode to be used, Supported modes <code>None, File and ReadWriteOnceWithFSType</code></td>
-<td>No</td>
-<td>&ldquo;ReadWriteOnceWithFSType&rdquo;</td>
-</tr>
-<tr>
-<td><em><strong>Common parameters for node and controller</strong></em></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>X_CSI_K8S_CLUSTER_PREFIX</td>
-<td>Define a prefix that is appended to all resources created in the array; unique per K8s/CSI deployment; max length - 3 characters</td>
-<td>Yes</td>
-<td>XYZ</td>
-</tr>
-<tr>
-<td>X_CSI_POWERMAX_ENDPOINT</td>
-<td>IP address of the Unisphere for PowerMax</td>
-<td>Yes</td>
-<td>https://0.0.0.0:8443</td>
-</tr>
-<tr>
-<td>X_CSI_TRANSPORT_PROTOCOL</td>
-<td>Choose which transport protocol to use (ISCSI, FC, auto or None)</td>
-<td>Yes</td>
-<td>auto</td>
-</tr>
-<tr>
-<td>X_CSI_POWERMAX_PORTGROUPS</td>
-<td>List of comma-separated port groups (ISCSI only). Example: &ldquo;PortGroup1,PortGroup2&rdquo;</td>
-<td>No</td>
-<td>-</td>
-</tr>
-<tr>
-<td>X_CSI_MANAGED_ARRAYS</td>
-<td>List of comma-separated array ID(s) which will be managed by the driver</td>
-<td>Yes</td>
-<td>-</td>
-</tr>
-<tr>
-<td>X_CSI_POWERMAX_PROXY_SERVICE_NAME</td>
-<td>Name of CSI PowerMax ReverseProxy service.</td>
-<td>Yes</td>
-<td>csipowermax-reverseproxy</td>
-</tr>
-<tr>
-<td>X_CSI_IG_MODIFY_HOSTNAME</td>
-<td>Change any existing host names. When nodenametemplate is set, it changes the name to the specified format else it uses driver default host name format.</td>
-<td>No</td>
-<td>false</td>
-</tr>
-<tr>
-<td>X_CSI_IG_NODENAME_TEMPLATE</td>
-<td>Provide a template for the CSI driver to use while creating the Host/IG on the array for the nodes in the cluster. It is of the format a-b-c-%foo%-xyz where foo will be replaced by host name of each node in the cluster.</td>
-<td>No</td>
-<td>-</td>
-</tr>
-<tr>
-<td>X_CSI_POWERMAX_DRIVER_NAME</td>
-<td>Set custom CSI driver name. For more details on this feature see the related <a href="../../../../csidriver/features/powermax/#custom-driver-name">documentation</a></td>
-<td>No</td>
-<td>-</td>
-</tr>
-<tr>
-<td>X_CSI_HEALTH_MONITOR_ENABLED</td>
-<td>Enable/Disable health monitor of CSI volumes from Controller and Node plugin. Provides details of volume status, usage and volume condition. As a prerequisite, external-health-monitor sidecar section should be uncommented in samples which would install the sidecar</td>
-<td>No</td>
-<td>false</td>
-</tr>
-<tr>
-<td>X_CSI_VSPHERE_ENABLED</td>
-<td>Enable VMware virtualized environment support via RDM</td>
-<td>No</td>
-<td>false</td>
-</tr>
-<tr>
-<td>X_CSI_VSPHERE_PORTGROUP</td>
-<td>Existing portGroup that driver will use for vSphere</td>
-<td>Yes</td>
-<td>&quot;&quot;</td>
-</tr>
-<tr>
-<td>X_CSI_VSPHERE_HOSTNAME</td>
-<td>Existing host(initiator group)/host group(cascaded initiator group) that driver will use for vSphere</td>
-<td>Yes</td>
-<td>&quot;&quot;</td>
-</tr>
-<tr>
-<td>X_CSI_VCenter_HOST</td>
-<td>URL/endpoint of the vCenter where all the ESX are present</td>
-<td>Yes</td>
-<td>&quot;&quot;</td>
-</tr>
-<tr>
-<td><em><strong>Node parameters</strong></em></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>X_CSI_POWERMAX_ISCSI_ENABLE_CHAP</td>
-<td>Enable ISCSI CHAP authentication. For more details on this feature see the related <a href="../../../../csidriver/features/powermax/#iscsi-chap">documentation</a></td>
-<td>No</td>
-<td>false</td>
-</tr>
-<tr>
-<td>X_CSI_TOPOLOGY_CONTROL_ENABLED</td>
-<td>Enable/Disabe topology control. It filters out arrays, associated transport protocol available to each node and creates topology keys based on any such user input.</td>
-<td>No</td>
-<td>false</td>
-</tr>
-<tr>
-<td><em><strong>CSI Reverseproxy Module</strong></em></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>X_CSI_REVPROXY_TLS_SECRET</td>
-<td>Name of TLS secret defined in config map</td>
-<td>Yes</td>
-<td>&ldquo;csirevproxy-tls-secret&rdquo;</td>
-</tr>
-<tr>
-<td>X_CSI_REVPROXY_PORT</td>
-<td>Port number where reverseproxy will listen as defined in config map</td>
-<td>Yes</td>
-<td>&ldquo;2222&rdquo;</td>
-</tr>
-<tr>
-<td>X_CSI_CONFIG_MAP_NAME</td>
-<td>Name of config map as created for CSI PowerMax</td>
-<td>Yes</td>
-<td>&ldquo;powermax-reverseproxy-config&rdquo;</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th style="text-align: left">Parameter</th>
+          <th style="text-align: left">Description</th>
+          <th style="text-align: left">Required</th>
+          <th style="text-align: left">Default</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: left">dnsPolicy</td>
+          <td style="text-align: left">Determines the DNS Policy of the Node service</td>
+          <td style="text-align: left">Yes</td>
+          <td style="text-align: left">ClusterFirstWithHostNet</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">replicas</td>
+          <td style="text-align: left">Controls the number of controller Pods you deploy. If controller Pods are greater than the number of available nodes, excess Pods will become stuck in pending. The default is 2 which allows for Controller high availability.</td>
+          <td style="text-align: left">Yes</td>
+          <td style="text-align: left">2</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">fsGroupPolicy</td>
+          <td style="text-align: left">Defines which FS Group policy mode to be used, Supported modes <code>None, File and ReadWriteOnceWithFSType</code>. In OCP &lt;= 4.16 and K8s &lt;= 1.29, fsGroupPolicy is an immutable field.</td>
+          <td style="text-align: left">No</td>
+          <td style="text-align: left">&ldquo;ReadWriteOnceWithFSType&rdquo;</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><em><strong>Common parameters for node and controller</strong></em></td>
+          <td style="text-align: left"></td>
+          <td style="text-align: left"></td>
+          <td style="text-align: left"></td>
+      </tr>
+      <tr>
+          <td style="text-align: left">X_CSI_K8S_CLUSTER_PREFIX</td>
+          <td style="text-align: left">Define a prefix that is appended to all resources created in the array; unique per K8s/CSI deployment; max length - 3 characters</td>
+          <td style="text-align: left">Yes</td>
+          <td style="text-align: left">XYZ</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">X_CSI_POWERMAX_ENDPOINT</td>
+          <td style="text-align: left">IP address of the Unisphere for PowerMax</td>
+          <td style="text-align: left">Yes</td>
+          <td style="text-align: left">https://0.0.0.0:8443</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">X_CSI_TRANSPORT_PROTOCOL</td>
+          <td style="text-align: left">Choose which transport protocol to use (ISCSI, FC, NVMETCP, auto or None)</td>
+          <td style="text-align: left">Yes</td>
+          <td style="text-align: left">auto</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">X_CSI_POWERMAX_PORTGROUPS</td>
+          <td style="text-align: left">List of comma-separated port groups (ISCSI only). Example: &ldquo;PortGroup1,PortGroup2&rdquo;</td>
+          <td style="text-align: left">No</td>
+          <td style="text-align: left">-</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">X_CSI_MANAGED_ARRAYS</td>
+          <td style="text-align: left">List of comma-separated array ID(s) which will be managed by the driver</td>
+          <td style="text-align: left">Yes</td>
+          <td style="text-align: left">-</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">X_CSI_POWERMAX_PROXY_SERVICE_NAME</td>
+          <td style="text-align: left">Name of CSI PowerMax ReverseProxy service.</td>
+          <td style="text-align: left">Yes</td>
+          <td style="text-align: left">csipowermax-reverseproxy</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">X_CSI_IG_MODIFY_HOSTNAME</td>
+          <td style="text-align: left">Change any existing host names. When nodenametemplate is set, it changes the name to the specified format else it uses driver default host name format.</td>
+          <td style="text-align: left">No</td>
+          <td style="text-align: left">false</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">X_CSI_IG_NODENAME_TEMPLATE</td>
+          <td style="text-align: left">Provide a template for the CSI driver to use while creating the Host/IG on the array for the nodes in the cluster. It is of the format a-b-c-%foo%-xyz where foo will be replaced by host name of each node in the cluster.</td>
+          <td style="text-align: left">No</td>
+          <td style="text-align: left">-</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">X_CSI_POWERMAX_DRIVER_NAME</td>
+          <td style="text-align: left">Set custom CSI driver name. For more details on this feature see the related <a href="../../../../csidriver/features/powermax/#custom-driver-name">documentation</a></td>
+          <td style="text-align: left">No</td>
+          <td style="text-align: left">-</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">X_CSI_HEALTH_MONITOR_ENABLED</td>
+          <td style="text-align: left">Enable/Disable health monitor of CSI volumes from Controller and Node plugin. Provides details of volume status, usage and volume condition. As a prerequisite, external-health-monitor sidecar section should be uncommented in samples which would install the sidecar</td>
+          <td style="text-align: left">No</td>
+          <td style="text-align: left">false</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">X_CSI_VSPHERE_ENABLED</td>
+          <td style="text-align: left">Enable VMware virtualized environment support via RDM</td>
+          <td style="text-align: left">No</td>
+          <td style="text-align: left">false</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">X_CSI_VSPHERE_PORTGROUP</td>
+          <td style="text-align: left">Existing portGroup that driver will use for vSphere</td>
+          <td style="text-align: left">Yes</td>
+          <td style="text-align: left">&quot;&quot;</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">X_CSI_VSPHERE_HOSTNAME</td>
+          <td style="text-align: left">Existing host(initiator group)/host group(cascaded initiator group) that driver will use for vSphere</td>
+          <td style="text-align: left">Yes</td>
+          <td style="text-align: left">&quot;&quot;</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">X_CSI_VCenter_HOST</td>
+          <td style="text-align: left">URL/endpoint of the vCenter where all the ESX are present</td>
+          <td style="text-align: left">Yes</td>
+          <td style="text-align: left">&quot;&quot;</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><em><strong>Node parameters</strong></em></td>
+          <td style="text-align: left"></td>
+          <td style="text-align: left"></td>
+          <td style="text-align: left"></td>
+      </tr>
+      <tr>
+          <td style="text-align: left">X_CSI_POWERMAX_ISCSI_ENABLE_CHAP</td>
+          <td style="text-align: left">Enable ISCSI CHAP authentication. For more details on this feature see the related <a href="../../../../csidriver/features/powermax/#iscsi-chap">documentation</a></td>
+          <td style="text-align: left">No</td>
+          <td style="text-align: left">false</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">X_CSI_TOPOLOGY_CONTROL_ENABLED</td>
+          <td style="text-align: left">Enable/Disabe topology control. It filters out arrays, associated transport protocol available to each node and creates topology keys based on any such user input.</td>
+          <td style="text-align: left">No</td>
+          <td style="text-align: left">false</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><em><strong>CSI Reverseproxy Module</strong></em></td>
+          <td style="text-align: left"></td>
+          <td style="text-align: left"></td>
+          <td style="text-align: left"></td>
+      </tr>
+      <tr>
+          <td style="text-align: left">X_CSI_REVPROXY_TLS_SECRET</td>
+          <td style="text-align: left">Name of TLS secret defined in config map</td>
+          <td style="text-align: left">Yes</td>
+          <td style="text-align: left">&ldquo;csirevproxy-tls-secret&rdquo;</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">X_CSI_REVPROXY_PORT</td>
+          <td style="text-align: left">Port number where reverseproxy will listen as defined in config map</td>
+          <td style="text-align: left">Yes</td>
+          <td style="text-align: left">&ldquo;2222&rdquo;</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">X_CSI_CONFIG_MAP_NAME</td>
+          <td style="text-align: left">Name of config map as created for CSI PowerMax</td>
+          <td style="text-align: left">Yes</td>
+          <td style="text-align: left">&ldquo;powermax-reverseproxy-config&rdquo;</td>
+      </tr>
+  </tbody>
 </table>
 </li>
 <li>
@@ -1245,42 +1349,42 @@ Example:</p>
 </span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">                rules:
 </span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">                  - &#34;*:*&#34;</span><span style="color:#f8f8f8;text-decoration:underline">            
 </span></span></span></code></pre></div><table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>allowedConnections</td>
-<td>List of node, array and protocol info for user allowed configuration</td>
-</tr>
-<tr>
-<td>allowedConnections.nodeName</td>
-<td>Name of the node on which user wants to apply given rules</td>
-</tr>
-<tr>
-<td>allowedConnections.rules</td>
-<td>List of StorageArrayID:TransportProtocol pair</td>
-</tr>
-<tr>
-<td>deniedConnections</td>
-<td>List of node, array and protocol info for user denied configuration</td>
-</tr>
-<tr>
-<td>deniedConnections.nodeName</td>
-<td>Name of the node on which user wants to apply given rules</td>
-</tr>
-<tr>
-<td>deniedConnections.rules</td>
-<td>List of StorageArrayID:TransportProtocol pair</td>
-</tr>
-<tr>
-<td><br></td>
-<td></td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th style="text-align: left">Parameter</th>
+          <th style="text-align: left">Description</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: left">allowedConnections</td>
+          <td style="text-align: left">List of node, array and protocol info for user allowed configuration</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">allowedConnections.nodeName</td>
+          <td style="text-align: left">Name of the node on which user wants to apply given rules</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">allowedConnections.rules</td>
+          <td style="text-align: left">List of StorageArrayID:TransportProtocol pair</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">deniedConnections</td>
+          <td style="text-align: left">List of node, array and protocol info for user denied configuration</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">deniedConnections.nodeName</td>
+          <td style="text-align: left">Name of the node on which user wants to apply given rules</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">deniedConnections.rules</td>
+          <td style="text-align: left">List of StorageArrayID:TransportProtocol pair</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><br></td>
+          <td style="text-align: left"></td>
+      </tr>
+  </tbody>
 </table>
 </li>
 <li>
@@ -1447,7 +1551,7 @@ Example:</p>
 </footer>
 
     </div>
-    <script src="/csm-docs/js/main.min.c418a2a9515ff54cddb20b007eb9411293e20d962d55eeef727e1f1ca8c7ddc9.js" integrity="sha256-xBiiqVFf9UzdsgsAfrlBEpPiDZYtVe7vcn4fHKjH3ck=" crossorigin="anonymous"></script>
+    <script src="/csm-docs/js/main.min.f72d00502781aaf278a14088eb2356b1ba2a05ad698a0c43fe86314d74ceab56.js" integrity="sha256-9y0AUCeBqvJ4oUCI6yNWsboqBa1pigxD/oYxTXTOq1Y=" crossorigin="anonymous"></script>
 <script src='/csm-docs/js/prism.js'></script>
 <script src='/csm-docs/js/tabpane-persist.js'></script>
 

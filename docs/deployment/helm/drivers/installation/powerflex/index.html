@@ -9,26 +9,25 @@
 <link rel="icon" type="image/png" href="/csm-docs/favicons/favicon-16x16.png" sizes="16x16">
 <link rel="icon" type="image/png" href="/csm-docs/favicons/favicon-32x32.png" sizes="32x32">
 <title>PowerFlex | </title>
-<meta name="description" content="Installing the CSI Driver for PowerFlex via Helm
-">
-<meta property="og:title" content="PowerFlex" />
-<meta property="og:description" content="Installing the CSI Driver for PowerFlex via Helm
-" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://dell.github.io/csm-docs/docs/deployment/helm/drivers/installation/powerflex/" /><meta property="article:section" content="docs" />
+<meta name="description" content="Installing the CSI Driver for Dell PowerFlex via Helm">
+<meta property="og:url" content="https://dell.github.io/csm-docs/docs/deployment/helm/drivers/installation/powerflex/">
+  <meta property="og:site_name" content="Dell Technologies">
+  <meta property="og:title" content="PowerFlex">
+  <meta property="og:description" content="Installing the CSI Driver for Dell PowerFlex via Helm">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="docs">
+    <meta property="article:modified_time" content="2024-10-28T15:46:04-04:00">
 
-<meta property="article:modified_time" content="2024-08-12T15:52:07+05:30" /><meta property="og:site_name" content="Dell Technologies" />
-
-<meta itemprop="name" content="PowerFlex">
-<meta itemprop="description" content="Installing the CSI Driver for PowerFlex via Helm
-">
-<meta itemprop="dateModified" content="2024-08-12T15:52:07+05:30" />
-<meta itemprop="wordCount" content="3370">
-<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="PowerFlex"/>
-<meta name="twitter:description" content="Installing the CSI Driver for PowerFlex via Helm
-"/>
-<link rel="preload" href="/csm-docs/scss/main.min.42d8340a915bc864ad5d15da721297c0e3c58c179b9ff8ae56d219635987f3d2.css" as="style"><link href="/csm-docs/scss/main.min.42d8340a915bc864ad5d15da721297c0e3c58c179b9ff8ae56d219635987f3d2.css" rel="stylesheet">
+  <meta itemprop="name" content="PowerFlex">
+  <meta itemprop="description" content="Installing the CSI Driver for Dell PowerFlex via Helm">
+  <meta itemprop="dateModified" content="2024-10-28T15:46:04-04:00">
+  <meta itemprop="wordCount" content="3447">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="PowerFlex">
+  <meta name="twitter:description" content="Installing the CSI Driver for Dell PowerFlex via Helm">
+<link rel="preload" href="/csm-docs/scss/main.min.c1b9d9da997c468756a5165a298685a703e1f9c4d6fb91aecfa7c7d02edab9a7.css" as="style" integrity="sha256-wbnZ2pl8RodWpRZaKYaFpwPh&#43;cTW&#43;5Guz6fH0C7auac=" crossorigin="anonymous">
+<link href="/csm-docs/scss/main.min.c1b9d9da997c468756a5165a298685a703e1f9c4d6fb91aecfa7c7d02edab9a7.css" rel="stylesheet" integrity="sha256-wbnZ2pl8RodWpRZaKYaFpwPh&#43;cTW&#43;5Guz6fH0C7auac=" crossorigin="anonymous">
 <script
   src="https://code.jquery.com/jquery-3.7.1.min.js"
   integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
@@ -57,12 +56,63 @@
         <div class="dropdown">
   <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Releases</a>
   <ul class="dropdown-menu">
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.11.1)</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.10.2</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.9.4</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">v1.8.0</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.12.0)</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.11.1</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.10.2</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">v1.9.4</a></li>
     </ul>
 </div></li>
+      <li class="td-light-dark-menu nav-item dropdown">
+        <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
+  <symbol id="check2" viewBox="0 0 16 16">
+    <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+  </symbol>
+  <symbol id="circle-half" viewBox="0 0 16 16">
+    <path d="M8 15A7 7 0 1 0 8 1v14zm0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16z"/>
+  </symbol>
+  <symbol id="moon-stars-fill" viewBox="0 0 16 16">
+    <path d="M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278z"/>
+    <path d="M10.794 3.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387a1.734 1.734 0 0 0-1.097 1.097l-.387 1.162a.217.217 0 0 1-.412 0l-.387-1.162A1.734 1.734 0 0 0 9.31 6.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387a1.734 1.734 0 0 0 1.097-1.097l.387-1.162zM13.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.156 1.156 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.156 1.156 0 0 0-.732-.732l-.774-.258a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732L13.863.1z"/>
+  </symbol>
+  <symbol id="sun-fill" viewBox="0 0 16 16">
+    <path d="M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"/>
+  </symbol>
+</svg>
+
+<button class="btn btn-link nav-link dropdown-toggle d-flex align-items-center"
+        id="bd-theme"
+        type="button"
+        aria-expanded="false"
+        data-bs-toggle="dropdown"
+        data-bs-display="static"
+        aria-label="Toggle theme (auto)">
+  <svg class="bi my-1 theme-icon-active"><use href="#circle-half"></use></svg>
+</button>
+<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="bd-theme-text">
+  <li>
+    <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="light" aria-pressed="false">
+      <svg class="bi me-2 opacity-50"><use href="#sun-fill"></use></svg>
+      Light
+      <svg class="bi ms-auto d-none"><use href="#check2"></use></svg>
+    </button>
+  </li>
+  <li>
+    <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark" aria-pressed="false">
+      <svg class="bi me-2 opacity-50"><use href="#moon-stars-fill"></use></svg>
+      Dark
+      <svg class="bi ms-auto d-none"><use href="#check2"></use></svg>
+    </button>
+  </li>
+  <li>
+    <button type="button" class="dropdown-item d-flex align-items-center active" data-bs-theme-value="auto" aria-pressed="true">
+      <svg class="bi me-2 opacity-50"><use href="#circle-half"></use></svg>
+      Auto
+      <svg class="bi ms-auto d-none"><use href="#check2"></use></svg>
+    </button>
+  </li>
+</ul>
+
+      </li>
       </ul>
   </div>
   <div class="d-none d-lg-block">
@@ -75,7 +125,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.57c6703100f29ccd282d2f2d5e140ea6.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.539e9ca4910a29a2f7a0f8a69a3c9688.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -99,7 +149,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.57c6703100f29ccd282d2f2d5e140ea6.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.539e9ca4910a29a2f7a0f8a69a3c9688.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -114,15 +164,6 @@
   <ul class="ul-1">
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsdocsprerequisites-li">
   <a href="/csm-docs/docs/prerequisites/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsprerequisites"><span class="">Prerequisites and Support Matrix</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-csm-docsdocsinteractive-tutorials-li">
-  <a href="/csm-docs/docs/interactive-tutorials/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsinteractive-tutorials"><span class=""></span></a>
-  <ul class="ul-2 foldable">
-    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsinteractive-tutorialscsm-quickstart-li">
-  <a href="/csm-docs/docs/interactive-tutorials/csm-quickstart/" title="Getting Started with Dell Container Storage Modules (CSM)" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsinteractive-tutorialscsm-quickstart"><span class="">CSM Quickstart</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsinteractive-tutorialscsm-operator-li">
-  <a href="/csm-docs/docs/interactive-tutorials/csm-operator/" title="How to install the Dell Container Storage Modules (CSM) Operator" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsinteractive-tutorialscsm-operator"><span class="">CSM Operator</span></a>
-</li>
-  </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id="m-csm-docsdocsdeployment-li">
   <a href="/csm-docs/docs/deployment/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsdeployment"><span class="">Deployment</span></a>
   <ul class="ul-2 foldable">
@@ -131,6 +172,8 @@
   <ul class="ul-3 foldable">
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymentcsminstallationwizardrelease-li">
   <a href="/csm-docs/docs/deployment/csminstallationwizard/release/" title="Release Notes" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsdeploymentcsminstallationwizardrelease"><span class="">Release notes</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymentcsminstallationwizardsrc-li">
+  <a href="/csm-docs/docs/deployment/csminstallationwizard/src/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsdeploymentcsminstallationwizardsrc"><span class=""></span></a>
 </li>
   </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-csm-docsdocsdeploymentcsmoperator-li">
@@ -154,10 +197,10 @@
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsdocsdeploymentcsmoperatormodules-li">
   <a href="/csm-docs/docs/deployment/csmoperator/modules/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsdeploymentcsmoperatormodules"><span class="">CSM Modules</span></a>
   <ul class="ul-4 foldable">
-    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymentcsmoperatormodulesauthorization-li">
-  <a href="/csm-docs/docs/deployment/csmoperator/modules/authorization/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsdeploymentcsmoperatormodulesauthorization"><span class="">Authorization</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymentcsmoperatormodulesauthorization-v20-tech-preview-li">
-  <a href="/csm-docs/docs/deployment/csmoperator/modules/authorization-v2.0-tech-preview/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsdeploymentcsmoperatormodulesauthorization-v20-tech-preview"><span class="">Authorization v2.0 Tech Preview</span></a>
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymentcsmoperatormodulesauthorization-v1x-li">
+  <a href="/csm-docs/docs/deployment/csmoperator/modules/authorization-v1.x/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsdeploymentcsmoperatormodulesauthorization-v1x"><span class="">Authorization v1.x</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymentcsmoperatormodulesauthorization-v20-li">
+  <a href="/csm-docs/docs/deployment/csmoperator/modules/authorization-v2.0/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsdeploymentcsmoperatormodulesauthorization-v20"><span class="">Authorization v2.0</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymentcsmoperatormodulesobservability-li">
   <a href="/csm-docs/docs/deployment/csmoperator/modules/observability/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsdeploymentcsmoperatormodulesobservability"><span class="">Observability</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymentcsmoperatormodulesreplication-li">
@@ -220,16 +263,7 @@
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsdocsdeploymenthelmmodulesinstallation-li">
   <a href="/csm-docs/docs/deployment/helm/modules/installation/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsdeploymenthelmmodulesinstallation"><span class="">Installation</span></a>
   <ul class="ul-5 foldable">
-    <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsdocsdeploymenthelmmodulesinstallationencryption-li">
-  <a href="/csm-docs/docs/deployment/helm/modules/installation/encryption/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsdeploymenthelmmodulesinstallationencryption"><span class="">Encryption</span></a>
-  <ul class="ul-6 foldable">
-    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymenthelmmodulesinstallationencryptionvault-li">
-  <a href="/csm-docs/docs/deployment/helm/modules/installation/encryption/vault/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsdeploymenthelmmodulesinstallationencryptionvault"><span class="">Vault Configuration</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymenthelmmodulesinstallationencryptionrekey-li">
-  <a href="/csm-docs/docs/deployment/helm/modules/installation/encryption/rekey/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsdeploymenthelmmodulesinstallationencryptionrekey"><span class="">Rekey Configuration</span></a>
-</li>
-  </ul>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsdocsdeploymenthelmmodulesinstallationreplication-li">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsdocsdeploymenthelmmodulesinstallationreplication-li">
   <a href="/csm-docs/docs/deployment/helm/modules/installation/replication/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsdeploymenthelmmodulesinstallationreplication"><span class="">Replication</span></a>
   <ul class="ul-6 foldable">
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymenthelmmodulesinstallationreplicationinstallation-li">
@@ -263,8 +297,10 @@
   </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymenthelmmodulesinstallationresiliency-li">
   <a href="/csm-docs/docs/deployment/helm/modules/installation/resiliency/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsdeploymenthelmmodulesinstallationresiliency"><span class="">Resiliency</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymenthelmmodulesinstallationauthorization-li">
-  <a href="/csm-docs/docs/deployment/helm/modules/installation/authorization/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsdeploymenthelmmodulesinstallationauthorization"><span class="">Authorization</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymenthelmmodulesinstallationauthorization-v1x-li">
+  <a href="/csm-docs/docs/deployment/helm/modules/installation/authorization-v1.x/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsdeploymenthelmmodulesinstallationauthorization-v1x"><span class="">Authorization v1.x</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymenthelmmodulesinstallationauthorization-v20-li">
+  <a href="/csm-docs/docs/deployment/helm/modules/installation/authorization-v2.0/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsdeploymenthelmmodulesinstallationauthorization-v20"><span class="">Authorization v2.0</span></a>
 </li>
   </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsdocsdeploymenthelmmodulesuninstall-li">
@@ -272,10 +308,10 @@
   <ul class="ul-5 foldable">
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymenthelmmodulesuninstallapplicationmobility-li">
   <a href="/csm-docs/docs/deployment/helm/modules/uninstall/applicationmobility/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsdeploymenthelmmodulesuninstallapplicationmobility"><span class="">Application mobility</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymenthelmmodulesuninstallauthorization-li">
-  <a href="/csm-docs/docs/deployment/helm/modules/uninstall/authorization/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsdeploymenthelmmodulesuninstallauthorization"><span class="">Authorization</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymenthelmmodulesuninstallencryption-li">
-  <a href="/csm-docs/docs/deployment/helm/modules/uninstall/encryption/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsdeploymenthelmmodulesuninstallencryption"><span class="">Encryption</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymenthelmmodulesuninstallauthorization-v1x-li">
+  <a href="/csm-docs/docs/deployment/helm/modules/uninstall/authorization-v1.x/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsdeploymenthelmmodulesuninstallauthorization-v1x"><span class="">Authorization v1.x</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymenthelmmodulesuninstallauthorization-v20-li">
+  <a href="/csm-docs/docs/deployment/helm/modules/uninstall/authorization-v2.0/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsdeploymenthelmmodulesuninstallauthorization-v20"><span class="">Authorization v2.0</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymenthelmmodulesuninstallresiliency-li">
   <a href="/csm-docs/docs/deployment/helm/modules/uninstall/resiliency/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsdeploymenthelmmodulesuninstallresiliency"><span class="">Resiliency</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymenthelmmodulesuninstallobservability-li">
@@ -321,8 +357,8 @@
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsdocsdeploymentrpmmodulesinstallation-li">
   <a href="/csm-docs/docs/deployment/rpm/modules/installation/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsdeploymentrpmmodulesinstallation"><span class="">Installation</span></a>
   <ul class="ul-5 foldable">
-    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymentrpmmodulesinstallationauthorizationauthorization-li">
-  <a href="/csm-docs/docs/deployment/rpm/modules/installation/authorization/authorization/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsdeploymentrpmmodulesinstallationauthorizationauthorization"><span class="">Authorization</span></a>
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymentrpmmodulesinstallationauthorization-v1xauthorization-v1x-li">
+  <a href="/csm-docs/docs/deployment/rpm/modules/installation/authorization-v1.x/authorization-v1.x/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsdeploymentrpmmodulesinstallationauthorization-v1xauthorization-v1x"><span class="">Authorization v1.x</span></a>
 </li>
   </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsdocsdeploymentrpmmodulesuninstall-li">
@@ -442,53 +478,61 @@
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-csm-docsdocsauthorization-li">
   <a href="/csm-docs/docs/authorization/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsauthorization"><span class="">Authorization</span></a>
   <ul class="ul-2 foldable">
-    <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsdocsauthorizationv1x-ga-li">
-  <a href="/csm-docs/docs/authorization/v1.x-ga/" title="Authorization - v1.x GA" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsauthorizationv1x-ga"><span class="">v1.x GA</span></a>
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsauthorizationmigration-guide-from-v1-to-v2-li">
+  <a href="/csm-docs/docs/authorization/migration-guide-from-v1-to-v2/" title="Authorization - v2 Migration guide" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsauthorizationmigration-guide-from-v1-to-v2"><span class="">Migration Guide From v1 to v2</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsdocsauthorizationv1x-li">
+  <a href="/csm-docs/docs/authorization/v1.x/" title="Authorization - v1.x" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsauthorizationv1x"><span class="">v1.x</span></a>
   <ul class="ul-3 foldable">
-    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsauthorizationv1x-gadesign-li">
-  <a href="/csm-docs/docs/authorization/v1.x-ga/design/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsauthorizationv1x-gadesign"><span class="">Design</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsdocsauthorizationv1x-gabackup-and-restore-li">
-  <a href="/csm-docs/docs/authorization/v1.x-ga/backup-and-restore/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsauthorizationv1x-gabackup-and-restore"><span class="">Backup and Restore</span></a>
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsauthorizationv1xdesign-li">
+  <a href="/csm-docs/docs/authorization/v1.x/design/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsauthorizationv1xdesign"><span class="">Design</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsdocsauthorizationv1xbackup-and-restore-li">
+  <a href="/csm-docs/docs/authorization/v1.x/backup-and-restore/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsauthorizationv1xbackup-and-restore"><span class="">Backup and Restore</span></a>
   <ul class="ul-4 foldable">
-    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsauthorizationv1x-gabackup-and-restorehelm-li">
-  <a href="/csm-docs/docs/authorization/v1.x-ga/backup-and-restore/helm/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsauthorizationv1x-gabackup-and-restorehelm"><span class="">Helm</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsauthorizationv1x-gabackup-and-restorerpm-li">
-  <a href="/csm-docs/docs/authorization/v1.x-ga/backup-and-restore/rpm/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsauthorizationv1x-gabackup-and-restorerpm"><span class="">RPM</span></a>
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsauthorizationv1xbackup-and-restorehelm-li">
+  <a href="/csm-docs/docs/authorization/v1.x/backup-and-restore/helm/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsauthorizationv1xbackup-and-restorehelm"><span class="">Helm</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsauthorizationv1xbackup-and-restorerpm-li">
+  <a href="/csm-docs/docs/authorization/v1.x/backup-and-restore/rpm/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsauthorizationv1xbackup-and-restorerpm"><span class="">RPM</span></a>
 </li>
   </ul>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsdocsauthorizationv1x-gaconfiguration-li">
-  <a href="/csm-docs/docs/authorization/v1.x-ga/configuration/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsauthorizationv1x-gaconfiguration"><span class="">Configuration</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsdocsauthorizationv1xconfiguration-li">
+  <a href="/csm-docs/docs/authorization/v1.x/configuration/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsauthorizationv1xconfiguration"><span class="">Configuration</span></a>
   <ul class="ul-4 foldable">
-    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsauthorizationv1x-gaconfigurationpowerflex-li">
-  <a href="/csm-docs/docs/authorization/v1.x-ga/configuration/powerflex/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsauthorizationv1x-gaconfigurationpowerflex"><span class="">PowerFlex</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsauthorizationv1x-gaconfigurationpowermax-li">
-  <a href="/csm-docs/docs/authorization/v1.x-ga/configuration/powermax/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsauthorizationv1x-gaconfigurationpowermax"><span class="">PowerMax</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsauthorizationv1x-gaconfigurationpowerscale-li">
-  <a href="/csm-docs/docs/authorization/v1.x-ga/configuration/powerscale/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsauthorizationv1x-gaconfigurationpowerscale"><span class="">PowerScale</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsauthorizationv1x-gaconfigurationproxy-server-li">
-  <a href="/csm-docs/docs/authorization/v1.x-ga/configuration/proxy-server/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsauthorizationv1x-gaconfigurationproxy-server"><span class="">Proxy Server</span></a>
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsauthorizationv1xconfigurationpowerflex-li">
+  <a href="/csm-docs/docs/authorization/v1.x/configuration/powerflex/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsauthorizationv1xconfigurationpowerflex"><span class="">PowerFlex</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsauthorizationv1xconfigurationpowermax-li">
+  <a href="/csm-docs/docs/authorization/v1.x/configuration/powermax/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsauthorizationv1xconfigurationpowermax"><span class="">PowerMax</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsauthorizationv1xconfigurationpowerscale-li">
+  <a href="/csm-docs/docs/authorization/v1.x/configuration/powerscale/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsauthorizationv1xconfigurationpowerscale"><span class="">PowerScale</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsauthorizationv1xconfigurationproxy-server-li">
+  <a href="/csm-docs/docs/authorization/v1.x/configuration/proxy-server/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsauthorizationv1xconfigurationproxy-server"><span class="">Proxy Server</span></a>
 </li>
   </ul>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsauthorizationv1x-gacli-li">
-  <a href="/csm-docs/docs/authorization/v1.x-ga/cli/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsauthorizationv1x-gacli"><span class="">CLI</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsauthorizationv1x-gatroubleshooting-li">
-  <a href="/csm-docs/docs/authorization/v1.x-ga/troubleshooting/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsauthorizationv1x-gatroubleshooting"><span class="">Troubleshooting</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsauthorizationv1x-garelease-li">
-  <a href="/csm-docs/docs/authorization/v1.x-ga/release/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsauthorizationv1x-garelease"><span class="">Release notes</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsauthorizationv1xcli-li">
+  <a href="/csm-docs/docs/authorization/v1.x/cli/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsauthorizationv1xcli"><span class="">CLI</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsauthorizationv1xtroubleshooting-li">
+  <a href="/csm-docs/docs/authorization/v1.x/troubleshooting/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsauthorizationv1xtroubleshooting"><span class="">Troubleshooting</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsauthorizationv1xrelease-li">
+  <a href="/csm-docs/docs/authorization/v1.x/release/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsauthorizationv1xrelease"><span class="">Release notes</span></a>
 </li>
   </ul>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsdocsauthorizationv20-tech-preview-li">
-  <a href="/csm-docs/docs/authorization/v2.0-tech-preview/" title="Authorization - v2.0 Tech Preview" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsauthorizationv20-tech-preview"><span class="">v2.0 Tech Preview</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsdocsauthorizationv2x-li">
+  <a href="/csm-docs/docs/authorization/v2.x/" title="Authorization - v2.x" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsauthorizationv2x"><span class="">v2.x</span></a>
   <ul class="ul-3 foldable">
-    <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsdocsauthorizationv20-tech-previewconfiguration-li">
-  <a href="/csm-docs/docs/authorization/v2.0-tech-preview/configuration/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsauthorizationv20-tech-previewconfiguration"><span class="">Configuration</span></a>
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsdocsauthorizationv2xconfiguration-li">
+  <a href="/csm-docs/docs/authorization/v2.x/configuration/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsauthorizationv2xconfiguration"><span class="">Configuration</span></a>
   <ul class="ul-4 foldable">
-    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsauthorizationv20-tech-previewconfigurationpowerflex-li">
-  <a href="/csm-docs/docs/authorization/v2.0-tech-preview/configuration/powerflex/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsauthorizationv20-tech-previewconfigurationpowerflex"><span class="">PowerFlex</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsauthorizationv20-tech-previewconfigurationproxy-server-li">
-  <a href="/csm-docs/docs/authorization/v2.0-tech-preview/configuration/proxy-server/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsauthorizationv20-tech-previewconfigurationproxy-server"><span class="">Proxy Server</span></a>
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsauthorizationv2xconfigurationpowerflex-li">
+  <a href="/csm-docs/docs/authorization/v2.x/configuration/powerflex/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsauthorizationv2xconfigurationpowerflex"><span class="">PowerFlex</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsauthorizationv2xconfigurationpowermax-li">
+  <a href="/csm-docs/docs/authorization/v2.x/configuration/powermax/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsauthorizationv2xconfigurationpowermax"><span class="">PowerMax</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsauthorizationv2xconfigurationpowerscale-li">
+  <a href="/csm-docs/docs/authorization/v2.x/configuration/powerscale/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsauthorizationv2xconfigurationpowerscale"><span class="">PowerScale</span></a>
 </li>
   </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsauthorizationv2xtroubleshooting-li">
+  <a href="/csm-docs/docs/authorization/v2.x/troubleshooting/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsauthorizationv2xtroubleshooting"><span class="">Troubleshooting</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsauthorizationv2xrelease-li">
+  <a href="/csm-docs/docs/authorization/v2.x/release/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsauthorizationv2xrelease"><span class="">Release notes</span></a>
 </li>
   </ul>
 </li>
@@ -531,8 +575,15 @@
   <a href="/csm-docs/docs/replication/cluster-topologies/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsreplicationcluster-topologies"><span class="">Cluster Topologies</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsreplicationdisaster-recovery-li">
   <a href="/csm-docs/docs/replication/disaster-recovery/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsreplicationdisaster-recovery"><span class="">Disaster Recovery</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsreplicationhigh-availability-li">
-  <a href="/csm-docs/docs/replication/high-availability/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsreplicationhigh-availability"><span class="">High Availability</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsdocsreplicationhigh-availability-li">
+  <a href="/csm-docs/docs/replication/high-availability/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsreplicationhigh-availability"><span class="">High Availability</span></a>
+  <ul class="ul-3 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsreplicationhigh-availabilitypowermax-metro-li">
+  <a href="/csm-docs/docs/replication/high-availability/powermax-metro/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsreplicationhigh-availabilitypowermax-metro"><span class="">PowerMax Metro</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsreplicationhigh-availabilitypowerstore-metro-li">
+  <a href="/csm-docs/docs/replication/high-availability/powerstore-metro/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsreplicationhigh-availabilitypowerstore-metro"><span class="">PowerStore Metro</span></a>
+</li>
+  </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsdocsreplicationmigration-li">
   <a href="/csm-docs/docs/replication/migration/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsreplicationmigration"><span class="">Migration</span></a>
   <ul class="ul-3 foldable">
@@ -585,20 +636,6 @@
   <a href="/csm-docs/docs/applicationmobility/release/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsapplicationmobilityrelease"><span class="">Release Notes</span></a>
 </li>
   </ul>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-csm-docsdocssecure-li">
-  <a href="/csm-docs/docs/secure/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocssecure"><span class="">Secure</span></a>
-  <ul class="ul-2 foldable">
-    <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsdocssecureencryption-li">
-  <a href="/csm-docs/docs/secure/encryption/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocssecureencryption"><span class="">Encryption</span></a>
-  <ul class="ul-3 foldable">
-    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocssecureencryptionrelease-li">
-  <a href="/csm-docs/docs/secure/encryption/release/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocssecureencryptionrelease"><span class="">Release Notes</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocssecureencryptiontroubleshooting-li">
-  <a href="/csm-docs/docs/secure/encryption/troubleshooting/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocssecureencryptiontroubleshooting"><span class="">Troubleshooting</span></a>
-</li>
-  </ul>
-</li>
-  </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-csm-docsdocssupport-li">
   <a href="/csm-docs/docs/support/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocssupport"><span class="">Support</span></a>
   <ul class="ul-2 foldable">
@@ -619,8 +656,6 @@
   <a href="/csm-docs/docs/support/deprecationpolicy/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocssupportdeprecationpolicy"><span class="">Deprecation Policy</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocssupportcontributionguidelines-li">
   <a href="/csm-docs/docs/support/contributionguidelines/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocssupportcontributionguidelines"><span class="">Contribution Guidelines</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocssupportlicense-li">
-  <a href="/csm-docs/docs/support/license/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocssupportlicense"><span class="">License</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocssupportlearn-li">
   <a href="/csm-docs/docs/support/learn/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocssupportlearn"><span class="">Learn more about CSM</span></a>
 </li>
@@ -687,11 +722,18 @@
             
 <div class="td-content">
 	<h1>PowerFlex</h1>
-	<div class="lead">Installing the CSI Driver for PowerFlex via Helm</div>
+	<div class="lead">Installing the CSI Driver for Dell PowerFlex via Helm</div>
 	<header class="article-meta">
 		
 </header>
-	<p>The CSI Driver for Dell PowerFlex can be deployed by using the provided Helm v3 charts and installation scripts on both Kubernetes and OpenShift platforms. For more detailed information on the installation scripts, review the script <a href="https://github.com/dell/csi-powerflex/tree/master/dell-csi-helm-installer">documentation</a>.</p>
+	
+
+<div class="pageinfo pageinfo-primary">
+<p>Starting with CSM 1.12, all deployments will use images from <a href="https://quay.io/organization/dell">quay.io</a> by default. New release images will be available on <a href="https://hub.docker.com/r/dellemc/">Docker Hub</a> until CSM 1.14 (May 2025), and existing releases will remain on Docker Hub.</p>
+
+</div>
+
+<p>The CSI Driver for Dell PowerFlex can be deployed by using the provided Helm v3 charts and installation scripts on both Kubernetes and OpenShift platforms. For more detailed information on the installation scripts, review the script <a href="https://github.com/dell/csi-powerflex/tree/master/dell-csi-helm-installer">documentation</a>.</p>
 <h2 id="prerequisites">
 Prerequisites <a class="header-link"  href="#prerequisites" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
             <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
@@ -707,7 +749,7 @@ Prerequisites <a class="header-link"  href="#prerequisites" style=" display: inl
 <li>Install PowerFlex Storage Data Client</li>
 <li>If using Snapshot feature, satisfy all Volume Snapshot requirements</li>
 <li>A user must exist on the array with a role <em>&gt;= FrontEndConfigure</em></li>
-<li>If enabling CSM for Authorization, please refer to the <a href="../../../../../deployment/helm/modules/installation/authorization/">Authorization deployment steps</a> first</li>
+<li>If enabling CSM for Authorization, please refer to the <a href="../../../../../deployment/helm/modules/installation/authorization-v2.0/">Authorization deployment steps</a> first</li>
 <li>If multipath is configured, ensure CSI-PowerFlex volumes are blacklisted by multipathd. See <a href="../../../../../csidriver/troubleshooting/powerflex">troubleshooting section</a> for details</li>
 <li>Secure boot is not supported; ensure that secure boot is disabled in the BIOS.</li>
 </ul>
@@ -727,7 +769,7 @@ Enable Zero Padding on PowerFlex <a class="header-link"  href="#enable-zero-padd
                 <path d="M0 0h24v24H0z" fill="none"/>
                 <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
             </svg>
-        </a></h3><p>Verify that zero padding is enabled on the PowerFlex storage pools that will be used. Use PowerFlex GUI or the PowerFlex CLI to check this setting. For more information to configure this setting, see <a href="https://www.dell.com/support/manuals/en-us/scaleio/pfx_powerflex_config_customize_3.6.x/enable-or-disable-zero-padding-policy?guid=guid-d32bdff7-3014-4894-8e1e-2a31a86d343a&amp;lang=en-us">Dell PowerFlex documentation</a>.</p>
+        </a></h3><p>Verify that zero padding is enabled on the PowerFlex storage pools that will be used. Use PowerFlex GUI or the PowerFlex CLI to check this setting. For more information to configure this setting, see <a href="https://www.dell.com/support/manuals/en-us/scaleio/pfx_powerflex_config_customize_3.6.x/enable-or-disable-zero-padding-policy?guid=guid-d32bdff7-3014-4894-8e1e-2a31a86d343a&lang=en-us">Dell PowerFlex documentation</a>.</p>
 <h3 id="install-powerflex-storage-data-client">
 Install PowerFlex Storage Data Client <a class="header-link"  href="#install-powerflex-storage-data-client" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
             <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
@@ -735,7 +777,7 @@ Install PowerFlex Storage Data Client <a class="header-link"  href="#install-pow
                 <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
             </svg>
         </a></h3><p>The CSI Driver for PowerFlex requires you to have installed the PowerFlex Storage Data Client (SDC) on all Kubernetes nodes which run the node portion of the CSI driver.
-SDC could be installed automatically by CSI driver install on Kubernetes nodes with OS platform which support automatic SDC deployment; for Red Hat CoreOS (RHCOS) and RHEL. On Kubernetes nodes with OS version not supported by automatic install, you must perform the Manual SDC Deployment steps <a href="#manual-sdc-deployment">below</a>.
+SDC could be installed automatically by CSI driver install on Kubernetes nodes with OS platform which support automatic SDC deployment; for Red Hat CoreOS (RHCOS) and RHEL. On Kubernetes nodes with OS version not supported by automatic install, you must perform the Manual SDC Deployment steps <a href="/csm-docs/docs/deployment/helm/drivers/installation/powerflex/#manual-sdc-deployment">below</a>.
 Refer to <a href="https://hub.docker.com/r/dellemc/sdc">https://hub.docker.com/r/dellemc/sdc</a> for supported OS versions.
 Please visit <a href="https://elabnavigator.dell.com/eln/modernHomeSSM">E-Lab Navigator</a> for specific Dell Storage platform host operating system level support matrices.</p>
 <p><em>NOTE:</em> To install CSI driver for Powerflex with automated SDC deployment, you need below two packages on worker nodes.</p>
@@ -790,7 +832,7 @@ Install the Driver <a class="header-link"  href="#install-the-driver" style=" di
         </a></h2><p><strong>Steps</strong></p>
 <ol>
 <li>
-<p>Run <code>git clone -b v2.11.0 https://github.com/dell/csi-powerflex.git</code> to clone the git repository.</p>
+<p>Run <code>git clone -b v2.12.0 https://github.com/dell/csi-powerflex.git</code> to clone the git repository.</p>
 </li>
 <li>
 <p>A namespace for the driver is expected prior to running the command below. If one is not created already, you can run <code>kubectl create namespace vxflexos</code> to create a new one.
@@ -802,80 +844,80 @@ Note that the namespace can be any user-defined name that follows the convention
 <li>
 <p>Prepare <code>samples/secret.yaml</code> for driver configuration. The following table lists driver configuration parameters for multiple storage arrays.</p>
 <table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-<th>Required</th>
-<th>Default</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>username</td>
-<td>Username for accessing PowerFlex system. If authorization is enabled, username will be ignored.</td>
-<td>true</td>
-<td>-</td>
-</tr>
-<tr>
-<td>password</td>
-<td>Password for accessing PowerFlex system. If authorization is enabled, password will be ignored.</td>
-<td>true</td>
-<td>-</td>
-</tr>
-<tr>
-<td>systemID</td>
-<td>PowerFlex system name or ID.</td>
-<td>true</td>
-<td>-</td>
-</tr>
-<tr>
-<td>allSystemNames</td>
-<td>List of previous names of powerflex array if used for PV create</td>
-<td>false</td>
-<td>-</td>
-</tr>
-<tr>
-<td>endpoint</td>
-<td>REST API gateway HTTPS endpoint/PowerFlex Manager public IP for PowerFlex system. If authorization is enabled, endpoint should be the HTTPS localhost endpoint that the authorization sidecar will listen on</td>
-<td>true</td>
-<td>-</td>
-</tr>
-<tr>
-<td>skipCertificateValidation</td>
-<td>Determines if the driver is going to validate certs while connecting to PowerFlex REST API interface.</td>
-<td>true</td>
-<td>true</td>
-</tr>
-<tr>
-<td>isDefault</td>
-<td>An array having isDefault=true is for backward compatibility. This parameter should occur once in the list.</td>
-<td>false</td>
-<td>false</td>
-</tr>
-<tr>
-<td>mdm</td>
-<td>mdm defines the MDM(s) that SDC should register with on start. This should be a list of MDM IP addresses or hostnames separated by comma.</td>
-<td>true</td>
-<td>-</td>
-</tr>
-<tr>
-<td>nasName</td>
-<td>nasName defines what NAS should be used for NFS volumes. NFS volumes are supported on arrays version &gt;=4.0.x</td>
-<td>false</td>
-<td>&quot;&quot;</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th style="text-align: left">Parameter</th>
+          <th style="text-align: left">Description</th>
+          <th style="text-align: left">Required</th>
+          <th style="text-align: left">Default</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: left">username</td>
+          <td style="text-align: left">Username for accessing PowerFlex system. If authorization is enabled, username will be ignored.</td>
+          <td style="text-align: left">true</td>
+          <td style="text-align: left">-</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">password</td>
+          <td style="text-align: left">Password for accessing PowerFlex system. If authorization is enabled, password will be ignored.</td>
+          <td style="text-align: left">true</td>
+          <td style="text-align: left">-</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">systemID</td>
+          <td style="text-align: left">PowerFlex system name or ID.</td>
+          <td style="text-align: left">true</td>
+          <td style="text-align: left">-</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">allSystemNames</td>
+          <td style="text-align: left">List of previous names of powerflex array if used for PV create</td>
+          <td style="text-align: left">false</td>
+          <td style="text-align: left">-</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">endpoint</td>
+          <td style="text-align: left">REST API gateway HTTPS endpoint/PowerFlex Manager public IP for PowerFlex system. If authorization is enabled, endpoint should be the HTTPS localhost endpoint that the authorization sidecar will listen on</td>
+          <td style="text-align: left">true</td>
+          <td style="text-align: left">-</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">skipCertificateValidation</td>
+          <td style="text-align: left">Determines if the driver is going to validate certs while connecting to PowerFlex REST API interface.</td>
+          <td style="text-align: left">true</td>
+          <td style="text-align: left">true</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">isDefault</td>
+          <td style="text-align: left">An array having isDefault=true is for backward compatibility. This parameter should occur once in the list.</td>
+          <td style="text-align: left">false</td>
+          <td style="text-align: left">false</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">mdm</td>
+          <td style="text-align: left">mdm defines the MDM(s) that SDC should register with on start. This should be a list of MDM IP addresses or hostnames separated by comma.</td>
+          <td style="text-align: left">true</td>
+          <td style="text-align: left">-</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">nasName</td>
+          <td style="text-align: left">nasName defines what NAS should be used for NFS volumes. NFS volumes are supported on arrays version &gt;=4.0.x</td>
+          <td style="text-align: left">false</td>
+          <td style="text-align: left">&quot;&quot;</td>
+      </tr>
+  </tbody>
 </table>
+<p>Example: <code>samples/secret.yaml</code></p>
 </li>
 </ol>
-<p>Example: <code>samples/secret.yaml</code></p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span>- <span style="color:#204a87;font-weight:bold">username</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;admin&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">password</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;Password123&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">systemID</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;2b11bb111111bb1b&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">endpoint</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;https://127.0.0.2&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">skipCertificateValidation</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span><span style="color:#f8f8f8;text-decoration:underline"> 
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">isDefault</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span><span style="color:#f8f8f8;text-decoration:underline"> 
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">skipCertificateValidation</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">isDefault</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">mdm</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;10.0.0.3,10.0.0.4&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span></code></pre></div><p>Example: <code>samples/secret.yaml</code> for PowerFlex storage system v4.0.x</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span>- <span style="color:#204a87;font-weight:bold">username</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;admin&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
@@ -888,7 +930,7 @@ Note that the namespace can be any user-defined name that follows the convention
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">nasName </span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;nasServer&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span></code></pre></div><p><em>NOTE: To use multiple arrays, copy and paste section above for each array. Make sure isDefault is set to true for only one array.</em></p>
 <p>If replication feature is enabled, ensure the secret includes all the PowerFlex arrays involved in replication.</p>
-<p>After editing the file, run the below command to create a secret called <code>vxflexos-config</code>. This assumes <code>vxflexos</code> is release name, but it can be modified during <a href="../#install-the-driver">install</a>:</p>
+<p>After editing the file, run the below command to create a secret called <code>vxflexos-config</code>. This assumes <code>vxflexos</code> is release name, but it can be modified during <a href="/csm-docs/docs/deployment/helm/drivers/#install-the-driver">install</a>:</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>kubectl create secret generic vxflexos-config -n vxflexos --from-file<span style="color:#ce5c00;font-weight:bold">=</span><span style="color:#000">config</span><span style="color:#ce5c00;font-weight:bold">=</span>samples/secret.yaml
 </span></span></code></pre></div><p>Use the below command to replace or update the secret:</p>
@@ -917,7 +959,7 @@ kubeVersion: &ldquo;&gt;= 1.21.0-0 &lt; 1.29.0-0&rdquo;</li>
 </li>
 <li>
 <p>Download the default values.yaml file</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#204a87">cd</span> dell-csi-helm-installer <span style="color:#ce5c00;font-weight:bold">&amp;&amp;</span> wget -O myvalues.yaml https://github.com/dell/helm-charts/raw/csi-vxflexos-2.11.0/charts/csi-vxflexos/values.yaml
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#204a87">cd</span> dell-csi-helm-installer <span style="color:#ce5c00;font-weight:bold">&amp;&amp;</span> wget -O myvalues.yaml https://github.com/dell/helm-charts/raw/csi-vxflexos-2.12.0/charts/csi-vxflexos/values.yaml
 </span></span></code></pre></div></li>
 <li>
 <p>If you are using custom images, check the fields under <code>images</code> in <code>my-vxflexos-settings.yaml</code> to make sure that they are pointing to the correct image repository.</p>
@@ -927,310 +969,328 @@ kubeVersion: &ldquo;&gt;= 1.21.0-0 &lt; 1.29.0-0&rdquo;</li>
 </li>
 </ol>
 <table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-<th>Required</th>
-<th>Default</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>version</td>
-<td>Set to verify the values file version matches driver version and used to pull the image as part of the image name.</td>
-<td>Yes</td>
-<td>2.11.0</td>
-</tr>
-<tr>
-<td>images</td>
-<td>List all the images used by the CSI driver and CSM. If you use a private repository, change the registries accordingly.</td>
-<td>Yes</td>
-<td>&quot;&quot;</td>
-</tr>
-<tr>
-<td>images.powerflexSdc</td>
-<td>Set to give the location of the SDC image used if automatic SDC deployment is being utilized.</td>
-<td>Yes</td>
-<td>dellemc/sdc:4.5.2.1</td>
-</tr>
-<tr>
-<td>certSecretCount</td>
-<td>Represents the number of certificate secrets, which the user is going to create for SSL authentication.</td>
-<td>No</td>
-<td>0</td>
-</tr>
-<tr>
-<td>logLevel</td>
-<td>CSI driver log level. Allowed values: &ldquo;error&rdquo;, &ldquo;warn&rdquo;/&ldquo;warning&rdquo;, &ldquo;info&rdquo;, &ldquo;debug&rdquo;.</td>
-<td>Yes</td>
-<td>&ldquo;debug&rdquo;</td>
-</tr>
-<tr>
-<td>logFormat</td>
-<td>CSI driver log format. Allowed values: &ldquo;TEXT&rdquo; or &ldquo;JSON&rdquo;.</td>
-<td>Yes</td>
-<td>&ldquo;TEXT&rdquo;</td>
-</tr>
-<tr>
-<td>kubeletConfigDir</td>
-<td>kubelet config directory path. Ensure that the secret.yaml file is present at this path.</td>
-<td>Yes</td>
-<td>/var/lib/kubelet</td>
-</tr>
-<tr>
-<td>defaultFsType</td>
-<td>Used to set the default FS type which will be used for mount volumes if FsType is not specified in the storage class. Allowed values: ext4, xfs.</td>
-<td>Yes</td>
-<td>ext4</td>
-</tr>
-<tr>
-<td>fsGroupPolicy</td>
-<td>Defines which FS Group policy mode to be used. Supported modes are<code>None, File, and ReadWriteOnceWithFSType.</code></td>
-<td>No</td>
-<td>&ldquo;ReadWriteOnceWithFSType&rdquo;</td>
-</tr>
-<tr>
-<td>imagePullPolicy</td>
-<td>Policy to determine if the image should be pulled prior to starting the container. Allowed values: Always, IfNotPresent, Never.</td>
-<td>Yes</td>
-<td>IfNotPresent</td>
-</tr>
-<tr>
-<td>enablesnapshotcgdelete</td>
-<td>A boolean that, when enabled, will delete all snapshots in a consistency group everytime a snap in the group is deleted.</td>
-<td>Yes</td>
-<td>false</td>
-</tr>
-<tr>
-<td>enablelistvolumesnapshot</td>
-<td>A boolean that, when enabled, will allow list volume operation to include snapshots (since creating a volume from a snap actually results in a new snap). It is recommend this be false unless instructed otherwise.</td>
-<td>Yes</td>
-<td>false</td>
-</tr>
-<tr>
-<td>allowRWOMultiPodAccess</td>
-<td>Setting allowRWOMultiPodAccess to &ldquo;true&rdquo; will allow multiple pods on the same node to access the same RWO volume. This behavior conflicts with the CSI specification version 1.3. NodePublishVolume description that requires an error to be returned in this case. However, some other CSI drivers support this behavior and some customers desire this behavior. Customers use this option at their own risk.</td>
-<td>Yes</td>
-<td>false</td>
-</tr>
-<tr>
-<td>enableQuota</td>
-<td>A boolean that, when enabled, will set quota limit for a newly provisioned NFS volume.</td>
-<td>No</td>
-<td>false</td>
-</tr>
-<tr>
-<td>externalAccess</td>
-<td>Defines additional entries for hostAccess of NFS volumes, single IP address and subnet are valid entries</td>
-<td>No</td>
-<td>&quot; &quot;</td>
-</tr>
-<tr>
-<td><strong>controller</strong></td>
-<td>This section allows the configuration of controller-specific parameters. To maximize the number of available nodes for controller pods, see this section. For more details on the new controller pod configurations, see the <a href="../../../../../csidriver/features/powerflex#controller-ha">Features section</a> for Powerflex specifics.</td>
-<td>-</td>
-<td>-</td>
-</tr>
-<tr>
-<td>volumeNamePrefix</td>
-<td>Set so that volumes created by the driver have a default prefix. If one PowerFlex/VxFlex OS system is servicing several different Kubernetes installations or users, these prefixes help you distinguish them.</td>
-<td>Yes</td>
-<td>&ldquo;k8s&rdquo;</td>
-</tr>
-<tr>
-<td>controllerCount</td>
-<td>Set to deploy multiple controller instances. If the controller count is greater than the number of available nodes, excess pods remain in a pending state. It should be greater than 0. You can increase the number of available nodes by configuring the &ldquo;controller&rdquo; section in your values.yaml. For more details on the new controller pod configurations, see the <a href="../../../../../csidriver/features/powerflex#controller-ha">Features section</a> for Powerflex specifics.</td>
-<td>Yes</td>
-<td>2</td>
-</tr>
-<tr>
-<td>snapshot.enabled</td>
-<td>A boolean that enable/disable volume snapshot feature.</td>
-<td>No</td>
-<td>true</td>
-</tr>
-<tr>
-<td>resizer.enabled</td>
-<td>A boolean that enable/disable volume expansion feature.</td>
-<td>No</td>
-<td>true</td>
-</tr>
-<tr>
-<td>nodeSelector</td>
-<td>Defines what nodes would be selected for pods of controller deployment. Leave as blank to use all nodes. Uncomment this section to deploy on master nodes exclusively.</td>
-<td>Yes</td>
-<td>&quot; &quot;</td>
-</tr>
-<tr>
-<td>tolerations</td>
-<td>Defines tolerations that would be applied to controller deployment. Leave as blank to install the controller on worker nodes only. If deploying on master nodes is desired, uncomment out this section.</td>
-<td>Yes</td>
-<td>&quot; &quot;</td>
-</tr>
-<tr>
-<td><strong>healthMonitor</strong></td>
-<td>This section configures the optional deployment of the external health monitor sidecar, for controller side volume health monitoring.</td>
-<td>-</td>
-<td>-</td>
-</tr>
-<tr>
-<td>enabled</td>
-<td>Enable/Disable deployment of external health monitor sidecar.</td>
-<td>No</td>
-<td>false</td>
-</tr>
-<tr>
-<td>interval</td>
-<td>Interval of monitoring volume health condition. Allowed values: Number followed by unit (s,m,h)</td>
-<td>No</td>
-<td>60s</td>
-</tr>
-<tr>
-<td><strong>node</strong></td>
-<td>This section allows the configuration of node-specific parameters.</td>
-<td>-</td>
-<td>-</td>
-</tr>
-<tr>
-<td>healthMonitor.enabled</td>
-<td>Enable/Disable health monitor of CSI volumes- volume usage, volume condition</td>
-<td>No</td>
-<td>false</td>
-</tr>
-<tr>
-<td>nodeSelector</td>
-<td>Defines what nodes would be selected for pods of node daemonset. Leave as blank to use all nodes.</td>
-<td>Yes</td>
-<td>&quot; &quot;</td>
-</tr>
-<tr>
-<td>tolerations</td>
-<td>Defines tolerations that would be applied to node daemonset. Leave as blank to install node driver only on worker nodes.</td>
-<td>Yes</td>
-<td>&quot; &quot;</td>
-</tr>
-<tr>
-<td><strong>renameSDC</strong></td>
-<td>This section allows the rename operation for SDC.</td>
-<td>-</td>
-<td>-</td>
-</tr>
-<tr>
-<td>enabled</td>
-<td>A boolean that enable/disable rename SDC feature.</td>
-<td>No</td>
-<td>false</td>
-</tr>
-<tr>
-<td>prefix</td>
-<td>Defines a string for the prefix of the SDC.</td>
-<td>No</td>
-<td>&quot; &quot;</td>
-</tr>
-<tr>
-<td>approveSDC.enabled</td>
-<td>A boolean that enable/disable SDC approval feature.</td>
-<td>No</td>
-<td>false</td>
-</tr>
-<tr>
-<td><strong>storageCapacity</strong></td>
-<td>Enable/Disable storage capacity tracking</td>
-<td>-</td>
-<td>-</td>
-</tr>
-<tr>
-<td>enabled</td>
-<td>A boolean that enables/disables storage capacity tracking feature.</td>
-<td>Yes</td>
-<td>true</td>
-</tr>
-<tr>
-<td>pollInterval</td>
-<td>Configure how often the driver checks for changed capacity</td>
-<td>No</td>
-<td>5m</td>
-</tr>
-<tr>
-<td><strong>monitor</strong></td>
-<td>This section allows the configuration of the SDC monitoring pod.</td>
-<td>-</td>
-<td>-</td>
-</tr>
-<tr>
-<td>enabled</td>
-<td>Set to enable the usage of the monitoring pod.</td>
-<td>Yes</td>
-<td>false</td>
-</tr>
-<tr>
-<td>hostNetwork</td>
-<td>Set whether the monitor pod should run on the host network or not.</td>
-<td>Yes</td>
-<td>true</td>
-</tr>
-<tr>
-<td>hostPID</td>
-<td>Set whether the monitor pod should run in the host namespace or not.</td>
-<td>Yes</td>
-<td>true</td>
-</tr>
-<tr>
-<td><strong>vgsnapshotter</strong></td>
-<td>This section allows the configuration of the volume group snapshotter(vgsnapshotter) pod.</td>
-<td>-</td>
-<td>-</td>
-</tr>
-<tr>
-<td>enabled</td>
-<td>A boolean that enable/disable vg snapshotter feature.</td>
-<td>No</td>
-<td>false</td>
-</tr>
-<tr>
-<td>image</td>
-<td>Image for vg snapshotter.</td>
-<td>No</td>
-<td>&quot; &quot;</td>
-</tr>
-<tr>
-<td><strong>podmon</strong></td>
-<td><a href="../../../../../deployment/helm/modules/installation/resiliency/">Podmon</a> is an optional feature to enable application pods to be resilient to node failure.</td>
-<td>-</td>
-<td>-</td>
-</tr>
-<tr>
-<td>enabled</td>
-<td>A boolean that enables/disables podmon feature.</td>
-<td>No</td>
-<td>false</td>
-</tr>
-<tr>
-<td><strong>authorization</strong></td>
-<td><a href="../../../../../deployment/helm/modules/installation/authorization/">Authorization</a> is an optional feature to apply credential shielding of the backend PowerFlex.</td>
-<td>-</td>
-<td>-</td>
-</tr>
-<tr>
-<td>enabled</td>
-<td>A boolean that enables/disables authorization feature.</td>
-<td>No</td>
-<td>false</td>
-</tr>
-<tr>
-<td>proxyHost</td>
-<td>Hostname of the csm-authorization server.</td>
-<td>No</td>
-<td>Empty</td>
-</tr>
-<tr>
-<td>skipCertificateValidation</td>
-<td>A boolean that enables/disables certificate validation of the csm-authorization proxy server.</td>
-<td>No</td>
-<td>true</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th style="text-align: left">Parameter</th>
+          <th style="text-align: left">Description</th>
+          <th style="text-align: left">Required</th>
+          <th style="text-align: left">Default</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: left">version</td>
+          <td style="text-align: left">Set to verify the values file version matches driver version and used to pull the image as part of the image name.</td>
+          <td style="text-align: left">Yes</td>
+          <td style="text-align: left">2.12.0</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">images</td>
+          <td style="text-align: left">List all the images used by the CSI driver and CSM. If you use a private repository, change the registries accordingly.</td>
+          <td style="text-align: left">Yes</td>
+          <td style="text-align: left">&quot;&quot;</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">images.powerflexSdc</td>
+          <td style="text-align: left">Set to give the location of the SDC image used if automatic SDC deployment is being utilized.</td>
+          <td style="text-align: left">Yes</td>
+          <td style="text-align: left">dellemc/sdc:4.5.2.1</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">certSecretCount</td>
+          <td style="text-align: left">Represents the number of certificate secrets, which the user is going to create for SSL authentication.</td>
+          <td style="text-align: left">No</td>
+          <td style="text-align: left">0</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">logLevel</td>
+          <td style="text-align: left">CSI driver log level. Allowed values: &ldquo;error&rdquo;, &ldquo;warn&rdquo;/&ldquo;warning&rdquo;, &ldquo;info&rdquo;, &ldquo;debug&rdquo;.</td>
+          <td style="text-align: left">Yes</td>
+          <td style="text-align: left">&ldquo;debug&rdquo;</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">logFormat</td>
+          <td style="text-align: left">CSI driver log format. Allowed values: &ldquo;TEXT&rdquo; or &ldquo;JSON&rdquo;.</td>
+          <td style="text-align: left">Yes</td>
+          <td style="text-align: left">&ldquo;TEXT&rdquo;</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">kubeletConfigDir</td>
+          <td style="text-align: left">kubelet config directory path. Ensure that the secret.yaml file is present at this path.</td>
+          <td style="text-align: left">Yes</td>
+          <td style="text-align: left">/var/lib/kubelet</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">defaultFsType</td>
+          <td style="text-align: left">Used to set the default FS type which will be used for mount volumes if FsType is not specified in the storage class. Allowed values: ext4, xfs.</td>
+          <td style="text-align: left">Yes</td>
+          <td style="text-align: left">ext4</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">fsGroupPolicy</td>
+          <td style="text-align: left">Defines which FS Group policy mode to be used. Supported modes are<code>None, File, and ReadWriteOnceWithFSType.</code></td>
+          <td style="text-align: left">No</td>
+          <td style="text-align: left">&ldquo;ReadWriteOnceWithFSType&rdquo;</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">imagePullPolicy</td>
+          <td style="text-align: left">Policy to determine if the image should be pulled prior to starting the container. Allowed values: Always, IfNotPresent, Never.</td>
+          <td style="text-align: left">Yes</td>
+          <td style="text-align: left">IfNotPresent</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">enablesnapshotcgdelete</td>
+          <td style="text-align: left">A boolean that, when enabled, will delete all snapshots in a consistency group everytime a snap in the group is deleted.</td>
+          <td style="text-align: left">Yes</td>
+          <td style="text-align: left">false</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">enablelistvolumesnapshot</td>
+          <td style="text-align: left">A boolean that, when enabled, will allow list volume operation to include snapshots (since creating a volume from a snap actually results in a new snap). It is recommend this be false unless instructed otherwise.</td>
+          <td style="text-align: left">Yes</td>
+          <td style="text-align: left">false</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">allowRWOMultiPodAccess</td>
+          <td style="text-align: left">Setting allowRWOMultiPodAccess to &ldquo;true&rdquo; will allow multiple pods on the same node to access the same RWO volume. This behavior conflicts with the CSI specification version 1.3. NodePublishVolume description that requires an error to be returned in this case. However, some other CSI drivers support this behavior and some customers desire this behavior. Customers use this option at their own risk.</td>
+          <td style="text-align: left">Yes</td>
+          <td style="text-align: left">false</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">enableQuota</td>
+          <td style="text-align: left">A boolean that, when enabled, will set quota limit for a newly provisioned NFS volume.</td>
+          <td style="text-align: left">No</td>
+          <td style="text-align: left">false</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">externalAccess</td>
+          <td style="text-align: left">Defines additional entries for hostAccess of NFS volumes, single IP address and subnet are valid entries</td>
+          <td style="text-align: left">No</td>
+          <td style="text-align: left">&quot; &quot;</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><strong>controller</strong></td>
+          <td style="text-align: left">This section allows the configuration of controller-specific parameters. To maximize the number of available nodes for controller pods, see this section. For more details on the new controller pod configurations, see the <a href="../../../../../csidriver/features/powerflex#controller-ha">Features section</a> for Powerflex specifics.</td>
+          <td style="text-align: left">-</td>
+          <td style="text-align: left">-</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">volumeNamePrefix</td>
+          <td style="text-align: left">Set so that volumes created by the driver have a default prefix. If one PowerFlex/VxFlex OS system is servicing several different Kubernetes installations or users, these prefixes help you distinguish them.</td>
+          <td style="text-align: left">Yes</td>
+          <td style="text-align: left">&ldquo;k8s&rdquo;</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">controllerCount</td>
+          <td style="text-align: left">Set to deploy multiple controller instances. If the controller count is greater than the number of available nodes, excess pods remain in a pending state. It should be greater than 0. You can increase the number of available nodes by configuring the &ldquo;controller&rdquo; section in your values.yaml. For more details on the new controller pod configurations, see the <a href="../../../../../csidriver/features/powerflex#controller-ha">Features section</a> for Powerflex specifics.</td>
+          <td style="text-align: left">Yes</td>
+          <td style="text-align: left">2</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">snapshot.enabled</td>
+          <td style="text-align: left">A boolean that enable/disable volume snapshot feature.</td>
+          <td style="text-align: left">No</td>
+          <td style="text-align: left">true</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">resizer.enabled</td>
+          <td style="text-align: left">A boolean that enable/disable volume expansion feature.</td>
+          <td style="text-align: left">No</td>
+          <td style="text-align: left">true</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">nodeSelector</td>
+          <td style="text-align: left">Defines what nodes would be selected for pods of controller deployment. Leave as blank to use all nodes. Uncomment this section to deploy on master nodes exclusively.</td>
+          <td style="text-align: left">Yes</td>
+          <td style="text-align: left">&quot; &quot;</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">tolerations</td>
+          <td style="text-align: left">Defines tolerations that would be applied to controller deployment. Leave as blank to install the controller on worker nodes only. If deploying on master nodes is desired, uncomment out this section.</td>
+          <td style="text-align: left">Yes</td>
+          <td style="text-align: left">&quot; &quot;</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><strong>healthMonitor</strong></td>
+          <td style="text-align: left">This section configures the optional deployment of the external health monitor sidecar, for controller side volume health monitoring.</td>
+          <td style="text-align: left">-</td>
+          <td style="text-align: left">-</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">enabled</td>
+          <td style="text-align: left">Enable/Disable deployment of external health monitor sidecar.</td>
+          <td style="text-align: left">No</td>
+          <td style="text-align: left">false</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">interval</td>
+          <td style="text-align: left">Interval of monitoring volume health condition. Allowed values: Number followed by unit (s,m,h)</td>
+          <td style="text-align: left">No</td>
+          <td style="text-align: left">60s</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><strong>node</strong></td>
+          <td style="text-align: left">This section allows the configuration of node-specific parameters.</td>
+          <td style="text-align: left">-</td>
+          <td style="text-align: left">-</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">healthMonitor.enabled</td>
+          <td style="text-align: left">Enable/Disable health monitor of CSI volumes- volume usage, volume condition</td>
+          <td style="text-align: left">No</td>
+          <td style="text-align: left">false</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">nodeSelector</td>
+          <td style="text-align: left">Defines what nodes would be selected for pods of node daemonset. Leave as blank to use all nodes.</td>
+          <td style="text-align: left">Yes</td>
+          <td style="text-align: left">&quot; &quot;</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">tolerations</td>
+          <td style="text-align: left">Defines tolerations that would be applied to node daemonset. Leave as blank to install node driver only on worker nodes.</td>
+          <td style="text-align: left">Yes</td>
+          <td style="text-align: left">&quot; &quot;</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><strong>sdc</strong></td>
+          <td style="text-align: left">This section allows the configuration of the SDC installation.</td>
+          <td style="text-align: left">-</td>
+          <td style="text-align: left">-</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">enabled</td>
+          <td style="text-align: left">A boolean that enables/disables installation of the SDC.</td>
+          <td style="text-align: left">No</td>
+          <td style="text-align: left">true</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><strong>renameSDC</strong></td>
+          <td style="text-align: left">This section allows the rename operation for SDC.</td>
+          <td style="text-align: left">-</td>
+          <td style="text-align: left">-</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">enabled</td>
+          <td style="text-align: left">A boolean that enable/disable rename SDC feature.</td>
+          <td style="text-align: left">No</td>
+          <td style="text-align: left">false</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">prefix</td>
+          <td style="text-align: left">Defines a string for the prefix of the SDC.</td>
+          <td style="text-align: left">No</td>
+          <td style="text-align: left">&quot; &quot;</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">approveSDC.enabled</td>
+          <td style="text-align: left">A boolean that enable/disable SDC approval feature.</td>
+          <td style="text-align: left">No</td>
+          <td style="text-align: left">false</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><strong>storageCapacity</strong></td>
+          <td style="text-align: left">Enable/Disable storage capacity tracking</td>
+          <td style="text-align: left">-</td>
+          <td style="text-align: left">-</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">enabled</td>
+          <td style="text-align: left">A boolean that enables/disables storage capacity tracking feature.</td>
+          <td style="text-align: left">Yes</td>
+          <td style="text-align: left">true</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">pollInterval</td>
+          <td style="text-align: left">Configure how often the driver checks for changed capacity</td>
+          <td style="text-align: left">No</td>
+          <td style="text-align: left">5m</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><strong>monitor</strong></td>
+          <td style="text-align: left">This section allows the configuration of the SDC monitoring pod.</td>
+          <td style="text-align: left">-</td>
+          <td style="text-align: left">-</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">enabled</td>
+          <td style="text-align: left">Set to enable the usage of the monitoring pod.</td>
+          <td style="text-align: left">Yes</td>
+          <td style="text-align: left">false</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">hostNetwork</td>
+          <td style="text-align: left">Set whether the monitor pod should run on the host network or not.</td>
+          <td style="text-align: left">Yes</td>
+          <td style="text-align: left">true</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">hostPID</td>
+          <td style="text-align: left">Set whether the monitor pod should run in the host namespace or not.</td>
+          <td style="text-align: left">Yes</td>
+          <td style="text-align: left">true</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><strong>vgsnapshotter</strong></td>
+          <td style="text-align: left">This section allows the configuration of the volume group snapshotter(vgsnapshotter) pod.</td>
+          <td style="text-align: left">-</td>
+          <td style="text-align: left">-</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">enabled</td>
+          <td style="text-align: left">A boolean that enable/disable vg snapshotter feature.</td>
+          <td style="text-align: left">No</td>
+          <td style="text-align: left">false</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">image</td>
+          <td style="text-align: left">Image for vg snapshotter.</td>
+          <td style="text-align: left">No</td>
+          <td style="text-align: left">&quot; &quot;</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><strong>podmon</strong></td>
+          <td style="text-align: left"><a href="../../../../../deployment/helm/modules/installation/resiliency/">Podmon</a> is an optional feature to enable application pods to be resilient to node failure.</td>
+          <td style="text-align: left">-</td>
+          <td style="text-align: left">-</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">enabled</td>
+          <td style="text-align: left">A boolean that enables/disables podmon feature.</td>
+          <td style="text-align: left">No</td>
+          <td style="text-align: left">false</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><strong>authorization</strong></td>
+          <td style="text-align: left"><a href="../../../../../deployment/helm/modules/installation/authorization-v2.0/">Authorization</a> is an optional feature to apply credential shielding of the backend PowerFlex.</td>
+          <td style="text-align: left">-</td>
+          <td style="text-align: left">-</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">enabled</td>
+          <td style="text-align: left">A boolean that enables/disables authorization feature.</td>
+          <td style="text-align: left">No</td>
+          <td style="text-align: left">false</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">proxyHost</td>
+          <td style="text-align: left">Hostname of the csm-authorization server.</td>
+          <td style="text-align: left">No</td>
+          <td style="text-align: left">Empty</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">skipCertificateValidation</td>
+          <td style="text-align: left">A boolean that enables/disables certificate validation of the csm-authorization proxy server.</td>
+          <td style="text-align: left">No</td>
+          <td style="text-align: left">true</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><strong>interfaceNames</strong></td>
+          <td style="text-align: left">A mapping of node names to interface names. Only necessary when SDC is disabled (see above).</td>
+          <td style="text-align: left">No</td>
+          <td style="text-align: left">&quot;&quot;</td>
+      </tr>
+  </tbody>
 </table>
 <ol start="10">
 <li>Install the driver using <code>csi-install.sh</code> bash script by running <code>cd dell-csi-helm-installer &amp;&amp; ./csi-install.sh --namespace vxflexos --values myvalues.yaml --helm-charts-version &lt;version&gt;</code>. You may modify the release name with the <code>--release</code> arg. If arg is not provided, release will be named <code>vxflexos</code> by default.
@@ -1341,7 +1401,7 @@ There are samples storage class yaml files available under <code>samples/storage
 <li>If you uninstall the driver and reinstall it, you can still face errors if any update in the <code>myvalues.yaml</code> file leads to an update of the storage class(es):</li>
 </ul>
 <pre tabindex="0"><code>    Error: cannot patch &#34;&lt;sc-name&gt;&#34; with kind StorageClass: StorageClass.storage.k8s.io &#34;&lt;sc-name&gt;&#34; is invalid: parameters: Forbidden: updates to parameters are forbidden
-</code></pre><p>In case you want to make such updates, ensure to delete the existing storage classes using the <code>kubectl delete storageclass</code> command.<br>
+</code></pre><p>In case you want to make such updates, ensure to delete the existing storage classes using the <code>kubectl delete storageclass</code> command.
 Deleting a storage class has no impact on a running Pod with mounted PVCs. You cannot provision new PVCs until at least one storage class is newly created.</p>
 <h2 id="volume-snapshot-class">
 Volume Snapshot Class <a class="header-link"  href="#volume-snapshot-class" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
@@ -1448,7 +1508,7 @@ Volume Snapshot Class <a class="header-link"  href="#volume-snapshot-class" styl
 
 	  
     </div>
-    <script src="/csm-docs/js/main.min.c418a2a9515ff54cddb20b007eb9411293e20d962d55eeef727e1f1ca8c7ddc9.js" integrity="sha256-xBiiqVFf9UzdsgsAfrlBEpPiDZYtVe7vcn4fHKjH3ck=" crossorigin="anonymous"></script>
+    <script src="/csm-docs/js/main.min.f72d00502781aaf278a14088eb2356b1ba2a05ad698a0c43fe86314d74ceab56.js" integrity="sha256-9y0AUCeBqvJ4oUCI6yNWsboqBa1pigxD/oYxTXTOq1Y=" crossorigin="anonymous"></script>
 <script src='/csm-docs/js/prism.js'></script>
 <script src='/csm-docs/js/tabpane-persist.js'></script>
 

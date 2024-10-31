@@ -11,16 +11,22 @@
 <link rel="icon" type="image/png" href="/csm-docs/favicons/favicon-32x32.png" sizes="32x32">
 <title>CSI Drivers | </title>
 <meta name="description" content="About Dell Technologies (Dell) CSI Drivers">
-<meta property="og:title" content="CSI Drivers" />
-<meta property="og:description" content="About Dell Technologies (Dell) CSI Drivers" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://dell.github.io/csm-docs/v3/csidriver/" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="og:url" content="https://dell.github.io/csm-docs/v3/csidriver/">
+  <meta property="og:site_name" content="Dell Technologies">
+  <meta property="og:title" content="CSI Drivers">
+  <meta property="og:description" content="About Dell Technologies (Dell) CSI Drivers">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="website">
 
-<meta itemprop="name" content="CSI Drivers">
-<meta itemprop="description" content="About Dell Technologies (Dell) CSI Drivers"><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="CSI Drivers"/>
-<meta name="twitter:description" content="About Dell Technologies (Dell) CSI Drivers"/>
-<link rel="preload" href="/csm-docs/scss/main.min.42d8340a915bc864ad5d15da721297c0e3c58c179b9ff8ae56d219635987f3d2.css" as="style"><link href="/csm-docs/scss/main.min.42d8340a915bc864ad5d15da721297c0e3c58c179b9ff8ae56d219635987f3d2.css" rel="stylesheet">
+  <meta itemprop="name" content="CSI Drivers">
+  <meta itemprop="description" content="About Dell Technologies (Dell) CSI Drivers">
+  <meta itemprop="dateModified" content="2024-10-25T11:45:57-04:00">
+  <meta itemprop="wordCount" content="592">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="CSI Drivers">
+  <meta name="twitter:description" content="About Dell Technologies (Dell) CSI Drivers">
+<link rel="preload" href="/csm-docs/scss/main.min.c1b9d9da997c468756a5165a298685a703e1f9c4d6fb91aecfa7c7d02edab9a7.css" as="style" integrity="sha256-wbnZ2pl8RodWpRZaKYaFpwPh&#43;cTW&#43;5Guz6fH0C7auac=" crossorigin="anonymous">
+<link href="/csm-docs/scss/main.min.c1b9d9da997c468756a5165a298685a703e1f9c4d6fb91aecfa7c7d02edab9a7.css" rel="stylesheet" integrity="sha256-wbnZ2pl8RodWpRZaKYaFpwPh&#43;cTW&#43;5Guz6fH0C7auac=" crossorigin="anonymous">
 <script
   src="https://code.jquery.com/jquery-3.7.1.min.js"
   integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
@@ -49,12 +55,63 @@
         <div class="dropdown">
   <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Releases</a>
   <ul class="dropdown-menu">
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.11.1)</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.10.2</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.9.4</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">v1.8.0</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.12.0)</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.11.1</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.10.2</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">v1.9.4</a></li>
     </ul>
 </div></li>
+      <li class="td-light-dark-menu nav-item dropdown">
+        <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
+  <symbol id="check2" viewBox="0 0 16 16">
+    <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+  </symbol>
+  <symbol id="circle-half" viewBox="0 0 16 16">
+    <path d="M8 15A7 7 0 1 0 8 1v14zm0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16z"/>
+  </symbol>
+  <symbol id="moon-stars-fill" viewBox="0 0 16 16">
+    <path d="M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278z"/>
+    <path d="M10.794 3.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387a1.734 1.734 0 0 0-1.097 1.097l-.387 1.162a.217.217 0 0 1-.412 0l-.387-1.162A1.734 1.734 0 0 0 9.31 6.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387a1.734 1.734 0 0 0 1.097-1.097l.387-1.162zM13.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.156 1.156 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.156 1.156 0 0 0-.732-.732l-.774-.258a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732L13.863.1z"/>
+  </symbol>
+  <symbol id="sun-fill" viewBox="0 0 16 16">
+    <path d="M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"/>
+  </symbol>
+</svg>
+
+<button class="btn btn-link nav-link dropdown-toggle d-flex align-items-center"
+        id="bd-theme"
+        type="button"
+        aria-expanded="false"
+        data-bs-toggle="dropdown"
+        data-bs-display="static"
+        aria-label="Toggle theme (auto)">
+  <svg class="bi my-1 theme-icon-active"><use href="#circle-half"></use></svg>
+</button>
+<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="bd-theme-text">
+  <li>
+    <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="light" aria-pressed="false">
+      <svg class="bi me-2 opacity-50"><use href="#sun-fill"></use></svg>
+      Light
+      <svg class="bi ms-auto d-none"><use href="#check2"></use></svg>
+    </button>
+  </li>
+  <li>
+    <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark" aria-pressed="false">
+      <svg class="bi me-2 opacity-50"><use href="#moon-stars-fill"></use></svg>
+      Dark
+      <svg class="bi ms-auto d-none"><use href="#check2"></use></svg>
+    </button>
+  </li>
+  <li>
+    <button type="button" class="dropdown-item d-flex align-items-center active" data-bs-theme-value="auto" aria-pressed="true">
+      <svg class="bi me-2 opacity-50"><use href="#circle-half"></use></svg>
+      Auto
+      <svg class="bi ms-auto d-none"><use href="#check2"></use></svg>
+    </button>
+  </li>
+</ul>
+
+      </li>
       </ul>
   </div>
   <div class="d-none d-lg-block">
@@ -67,7 +124,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.57c6703100f29ccd282d2f2d5e140ea6.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.539e9ca4910a29a2f7a0f8a69a3c9688.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -91,7 +148,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.57c6703100f29ccd282d2f2d5e140ea6.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.539e9ca4910a29a2f7a0f8a69a3c9688.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -112,6 +169,8 @@
   <ul class="ul-3 foldable">
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3deploymentcsminstallationwizardrelease-li">
   <a href="/csm-docs/v3/deployment/csminstallationwizard/release/" title="Release Notes" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3deploymentcsminstallationwizardrelease"><span class="">Release notes</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3deploymentcsminstallationwizardsrc-li">
+  <a href="/csm-docs/v3/deployment/csminstallationwizard/src/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3deploymentcsminstallationwizardsrc"><span class=""></span></a>
 </li>
   </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv3deploymentcsmoperator-li">
@@ -158,7 +217,9 @@
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-csm-docsv3cosidriver-li">
   <a href="/csm-docs/v3/cosidriver/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3cosidriver"><span class="">COSI Driver</span></a>
   <ul class="ul-2 foldable">
-    <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv3cosidriverfeatures-li">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3cosidriveruninstallation-li">
+  <a href="/csm-docs/v3/cosidriver/uninstallation/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3cosidriveruninstallation"><span class="">Uninstallation</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv3cosidriverfeatures-li">
   <a href="/csm-docs/v3/cosidriver/features/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3cosidriverfeatures"><span class="">Features</span></a>
   <ul class="ul-3 foldable">
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3cosidriverfeaturesobjectscale-li">
@@ -174,6 +235,12 @@
   <a href="/csm-docs/v3/cosidriver/installation/helm/" title="COSI Driver installation using Helm" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3cosidriverinstallationhelm"><span class="">Using Helm</span></a>
 </li>
   </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3cosidrivertroubleshooting-li">
+  <a href="/csm-docs/v3/cosidriver/troubleshooting/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3cosidrivertroubleshooting"><span class="">Troubleshooting</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3cosidriverupgrade-li">
+  <a href="/csm-docs/v3/cosidriver/upgrade/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3cosidriverupgrade"><span class="">Upgrade</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3cosidriverrelease-li">
+  <a href="/csm-docs/v3/cosidriver/release/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3cosidriverrelease"><span class="">Release Notes</span></a>
 </li>
   </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id="m-csm-docsv3csidriver-li">
@@ -202,16 +269,6 @@
   <ul class="ul-4 foldable">
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3csidriverinstallationoperatoroperator_migration-li">
   <a href="/csm-docs/v3/csidriver/installation/operator/operator_migration/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3csidriverinstallationoperatoroperator_migration"><span class="">CSI to CSM Operator Migration</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3csidriverinstallationoperatorpowerflex-li">
-  <a href="/csm-docs/v3/csidriver/installation/operator/powerflex/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3csidriverinstallationoperatorpowerflex"><span class="">PowerFlex</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3csidriverinstallationoperatorpowermax-li">
-  <a href="/csm-docs/v3/csidriver/installation/operator/powermax/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3csidriverinstallationoperatorpowermax"><span class="">PowerMax</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3csidriverinstallationoperatorisilon-li">
-  <a href="/csm-docs/v3/csidriver/installation/operator/isilon/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3csidriverinstallationoperatorisilon"><span class="">PowerScale</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3csidriverinstallationoperatorpowerstore-li">
-  <a href="/csm-docs/v3/csidriver/installation/operator/powerstore/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3csidriverinstallationoperatorpowerstore"><span class="">PowerStore</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3csidriverinstallationoperatorunity-li">
-  <a href="/csm-docs/v3/csidriver/installation/operator/unity/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3csidriverinstallationoperatorunity"><span class="">Unity XT</span></a>
 </li>
   </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3csidriverinstallationoffline-li">
@@ -240,9 +297,7 @@
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-csm-docsv3csidriverupgradation-li">
   <a href="/csm-docs/v3/csidriver/upgradation/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3csidriverupgradation"><span class="">Upgrade</span></a>
   <ul class="ul-3 foldable">
-    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3csidriverupgradationdriversoperator-li">
-  <a href="/csm-docs/v3/csidriver/upgradation/drivers/operator/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3csidriverupgradationdriversoperator"><span class="">Dell CSI Operator</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3csidriverupgradationdriverspowerflex-li">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3csidriverupgradationdriverspowerflex-li">
   <a href="/csm-docs/v3/csidriver/upgradation/drivers/powerflex/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3csidriverupgradationdriverspowerflex"><span class="">PowerFlex</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3csidriverupgradationdriverspowermax-li">
   <a href="/csm-docs/v3/csidriver/upgradation/drivers/powermax/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3csidriverupgradationdriverspowermax"><span class="">PowerMax</span></a>
@@ -274,9 +329,7 @@
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-csm-docsv3csidrivertroubleshooting-li">
   <a href="/csm-docs/v3/csidriver/troubleshooting/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3csidrivertroubleshooting"><span class="">Troubleshooting</span></a>
   <ul class="ul-3 foldable">
-    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3csidrivertroubleshootingoperator-li">
-  <a href="/csm-docs/v3/csidriver/troubleshooting/operator/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3csidrivertroubleshootingoperator"><span class="">Dell CSI Operator</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3csidrivertroubleshootingpowerflex-li">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3csidrivertroubleshootingpowerflex-li">
   <a href="/csm-docs/v3/csidriver/troubleshooting/powerflex/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3csidrivertroubleshootingpowerflex"><span class="">PowerFlex</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3csidrivertroubleshootingpowermax-li">
   <a href="/csm-docs/v3/csidriver/troubleshooting/powermax/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3csidrivertroubleshootingpowermax"><span class="">PowerMax</span></a>
@@ -291,9 +344,7 @@
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-csm-docsv3csidriverrelease-li">
   <a href="/csm-docs/v3/csidriver/release/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3csidriverrelease"><span class="">Release Notes</span></a>
   <ul class="ul-3 foldable">
-    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3csidriverreleaseoperator-li">
-  <a href="/csm-docs/v3/csidriver/release/operator/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3csidriverreleaseoperator"><span class="">Operator</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3csidriverreleasepowerflex-li">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3csidriverreleasepowerflex-li">
   <a href="/csm-docs/v3/csidriver/release/powerflex/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3csidriverreleasepowerflex"><span class="">PowerFlex</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3csidriverreleasepowermax-li">
   <a href="/csm-docs/v3/csidriver/release/powermax/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3csidriverreleasepowermax"><span class="">PowerMax</span></a>
@@ -303,21 +354,6 @@
   <a href="/csm-docs/v3/csidriver/release/powerstore/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3csidriverreleasepowerstore"><span class="">PowerStore</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3csidriverreleaseunity-li">
   <a href="/csm-docs/v3/csidriver/release/unity/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3csidriverreleaseunity"><span class="">Unity XT</span></a>
-</li>
-  </ul>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-csm-docsv3csidriverpartners-li">
-  <a href="/csm-docs/v3/csidriver/partners/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3csidriverpartners"><span class="">Our Ecosystem Partners</span></a>
-  <ul class="ul-3 foldable">
-    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3csidriverpartnersoperator-li">
-  <a href="/csm-docs/v3/csidriver/partners/operator/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3csidriverpartnersoperator"><span class="">OperatorHub.io</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3csidriverpartnersredhat-li">
-  <a href="/csm-docs/v3/csidriver/partners/redhat/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3csidriverpartnersredhat"><span class="">Red Hat OpenShift</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3csidriverpartnersdocker-li">
-  <a href="/csm-docs/v3/csidriver/partners/docker/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3csidriverpartnersdocker"><span class="">MKE</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3csidriverpartnersrancher-li">
-  <a href="/csm-docs/v3/csidriver/partners/rancher/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3csidriverpartnersrancher"><span class="">RKE</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3csidriverpartnerstanzu-li">
-  <a href="/csm-docs/v3/csidriver/partners/tanzu/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3csidriverpartnerstanzu"><span class="">VMware Tanzu</span></a>
 </li>
   </ul>
 </li>
@@ -399,6 +435,8 @@
   <a href="/csm-docs/v3/observability/deployment/online/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3observabilitydeploymentonline"><span class="">Installer</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3observabilitydeploymentoffline-li">
   <a href="/csm-docs/v3/observability/deployment/offline/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3observabilitydeploymentoffline"><span class="">Offline Installer</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3observabilitydeploymentoperator-li">
+  <a href="/csm-docs/v3/observability/deployment/operator/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3observabilitydeploymentoperator"><span class="">Operator</span></a>
 </li>
   </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3observabilityuninstall-li">
@@ -435,6 +473,8 @@
   <a href="/csm-docs/v3/replication/deployment/powerscale/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3replicationdeploymentpowerscale"><span class="">PowerScale</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3replicationdeploymentpowerstore-li">
   <a href="/csm-docs/v3/replication/deployment/powerstore/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3replicationdeploymentpowerstore"><span class="">PowerStore</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3replicationdeploymentinstall-operator-li">
+  <a href="/csm-docs/v3/replication/deployment/install-operator/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3replicationdeploymentinstall-operator"><span class="">Installation using Operator</span></a>
 </li>
   </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv3replicationarchitecture-li">
@@ -480,7 +520,16 @@
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-csm-docsv3resiliency-li">
   <a href="/csm-docs/v3/resiliency/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3resiliency"><span class="">Resiliency</span></a>
   <ul class="ul-2 foldable">
-    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3resiliencydesign-li">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv3resiliencydeployment-li">
+  <a href="/csm-docs/v3/resiliency/deployment/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3resiliencydeployment"><span class="">Deployment</span></a>
+  <ul class="ul-3 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3resiliencydeploymenthelm-li">
+  <a href="/csm-docs/v3/resiliency/deployment/helm/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3resiliencydeploymenthelm"><span class="">Helm</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3resiliencydeploymentoperator-li">
+  <a href="/csm-docs/v3/resiliency/deployment/operator/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3resiliencydeploymentoperator"><span class="">Operator</span></a>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3resiliencydesign-li">
   <a href="/csm-docs/v3/resiliency/design/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3resiliencydesign"><span class="">Design</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3resiliencyrelease-li">
   <a href="/csm-docs/v3/resiliency/release/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3resiliencyrelease"><span class="">Release notes</span></a>
@@ -488,8 +537,6 @@
   <a href="/csm-docs/v3/resiliency/uninstallation/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3resiliencyuninstallation"><span class="">Uninstallation</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3resiliencyusecases-li">
   <a href="/csm-docs/v3/resiliency/usecases/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3resiliencyusecases"><span class="">Use Cases</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3resiliencydeployment-li">
-  <a href="/csm-docs/v3/resiliency/deployment/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3resiliencydeployment"><span class="">Deployment</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3resiliencyupgrade-li">
   <a href="/csm-docs/v3/resiliency/upgrade/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3resiliencyupgrade"><span class="">Upgrade</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3resiliencytroubleshooting-li">
@@ -588,10 +635,11 @@
   <ul>
     <li><a href="#features-and-capabilities">Features and capabilities</a>
       <ul>
-        <li><a href="#supported-operating-systemscontainer-orchestrator-platforms">Supported Operating Systems/Container Orchestrator Platforms</a></li>
+        <li><a href="#supported-container-orchestrator-platforms">Supported Container Orchestrator Platforms</a></li>
         <li><a href="#csi-driver-capabilities">CSI Driver Capabilities</a></li>
         <li><a href="#supported-storage-platforms">Supported Storage Platforms</a></li>
         <li><a href="#backend-storage-details">Backend Storage Details</a></li>
+        <li><a href="#community-qualified-platforms">Community Qualified Platforms</a></li>
       </ul>
     </li>
   </ul>
@@ -622,16 +670,16 @@
 
 		
 	</header>
-	<p>The CSI Drivers by Dell implement an interface between <a href="https://kubernetes-csi.github.io/docs/">CSI</a> (CSI spec v1.5) enabled Container Orchestrator (CO) and Dell Storage Arrays. It is a plug-in that is installed into Kubernetes to provide persistent storage using the Dell storage system.</p>
-<p><img src="Architecture_Diagram.png" alt="CSI Architecture"></p>
+	<p>The CSI Drivers by Dell implement an interface between <a href="https://kubernetes-csi.github.io/docs/">CSI</a> (CSI spec v1.6) enabled Container Orchestrator (CO) and Dell Storage Arrays. It is a plug-in that is installed into Kubernetes to provide persistent storage using the Dell storage system.</p>
+<p><img alt="CSI Architecture" src="/csm-docs/v3/csidriver/Architecture_Diagram.png"></p>
 <h2 id="features-and-capabilities">
 Features and capabilities <a class="header-link"  href="#features-and-capabilities" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
             <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
                 <path d="M0 0h24v24H0z" fill="none"/>
                 <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
             </svg>
-        </a></h2><h3 id="supported-operating-systemscontainer-orchestrator-platforms">
-Supported Operating Systems/Container Orchestrator Platforms <a class="header-link"  href="#supported-operating-systemscontainer-orchestrator-platforms" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
+        </a></h2><h3 id="supported-container-orchestrator-platforms">
+Supported Container Orchestrator Platforms <a class="header-link"  href="#supported-container-orchestrator-platforms" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
             <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
                 <path d="M0 0h24v24H0z" fill="none"/>
                 <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
@@ -642,117 +690,92 @@ Supported Operating Systems/Container Orchestrator Platforms <a class="header-li
 
 
 <table class="table table-striped table-bordered table-sm">
-<thead>
-<tr>
-<th></th>
-<th style="text-align:center">PowerMax</th>
-<th style="text-align:center">PowerFlex</th>
-<th style="text-align:center">Unity XT</th>
-<th style="text-align:center">PowerScale</th>
-<th style="text-align:center">PowerStore</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Kubernetes</td>
-<td style="text-align:center">1.25, 1.26, 1.27</td>
-<td style="text-align:center">1.25, 1.26, 1.27</td>
-<td style="text-align:center">1.25, 1.26, 1.27</td>
-<td style="text-align:center">1.25, 1.26, 1.27</td>
-<td style="text-align:center">1.25, 1.26, 1.27</td>
-</tr>
-<tr>
-<td>RHEL</td>
-<td style="text-align:center">7.x,8.x</td>
-<td style="text-align:center">7.x,8.x</td>
-<td style="text-align:center">7.x,8.x</td>
-<td style="text-align:center">7.x,8.x</td>
-<td style="text-align:center">7.x,8.x</td>
-</tr>
-<tr>
-<td>Ubuntu</td>
-<td style="text-align:center">20.04</td>
-<td style="text-align:center">20.04</td>
-<td style="text-align:center">20.04</td>
-<td style="text-align:center">20.04, 22.04</td>
-<td style="text-align:center">20.04</td>
-</tr>
-<tr>
-<td>CentOS</td>
-<td style="text-align:center">7.8, 7.9</td>
-<td style="text-align:center">7.8, 7.9</td>
-<td style="text-align:center">7.9</td>
-<td style="text-align:center">7.8, 7.9</td>
-<td style="text-align:center">7.8, 7.9</td>
-</tr>
-<tr>
-<td>SLES</td>
-<td style="text-align:center">15SP4</td>
-<td style="text-align:center">15SP4</td>
-<td style="text-align:center">15SP4</td>
-<td style="text-align:center">15SP4</td>
-<td style="text-align:center">15SP4</td>
-</tr>
-<tr>
-<td>Red Hat OpenShift</td>
-<td style="text-align:center">4.12, 4.12 EUS, 4.13</td>
-<td style="text-align:center">4.12, 4.12 EUS, 4.13</td>
-<td style="text-align:center">4.12, 4.12 EUS, 4.13</td>
-<td style="text-align:center">4.12, 4.12 EUS, 4.13</td>
-<td style="text-align:center">4.12, 4.13, 4.13 EUS</td>
-</tr>
-<tr>
-<td>Mirantis Kubernetes Engine</td>
-<td style="text-align:center">3.6.x</td>
-<td style="text-align:center">3.6.x</td>
-<td style="text-align:center">3.6.x</td>
-<td style="text-align:center">3.5.x, 3.6.x</td>
-<td style="text-align:center">3.6.x</td>
-</tr>
-<tr>
-<td>Google Anthos</td>
-<td style="text-align:center">1.15</td>
-<td style="text-align:center">1.15</td>
-<td style="text-align:center">no</td>
-<td style="text-align:center">1.15</td>
-<td style="text-align:center">1.15</td>
-</tr>
-<tr>
-<td>VMware Tanzu</td>
-<td style="text-align:center">no</td>
-<td style="text-align:center">no</td>
-<td style="text-align:center">NFS</td>
-<td style="text-align:center">NFS</td>
-<td style="text-align:center">NFS,iSCSI</td>
-</tr>
-<tr>
-<td>Rancher Kubernetes Engine</td>
-<td style="text-align:center">1.4.1</td>
-<td style="text-align:center">1.4.7</td>
-<td style="text-align:center">1.4.8</td>
-<td style="text-align:center">1.4.7</td>
-<td style="text-align:center">1.4.5</td>
-</tr>
-<tr>
-<td>Amazon Elastic Kubernetes Service<br> Anywhere</td>
-<td style="text-align:center">yes</td>
-<td style="text-align:center">yes</td>
-<td style="text-align:center">yes</td>
-<td style="text-align:center">yes</td>
-<td style="text-align:center">yes</td>
-</tr>
-<tr>
-<td>Kubernetes K3s Engine on Debian OS</td>
-<td style="text-align:center">no</td>
-<td style="text-align:center">no</td>
-<td style="text-align:center">1.26, 1.27</td>
-<td style="text-align:center">no</td>
-<td style="text-align:center">no</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th style="text-align: left"></th>
+          <th style="text-align: center">PowerMax</th>
+          <th style="text-align: center">PowerFlex</th>
+          <th style="text-align: center">Unity XT</th>
+          <th style="text-align: center">PowerScale</th>
+          <th style="text-align: center">PowerStore</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: left">Kubernetes</td>
+          <td style="text-align: center">1.26, 1.27, 1.28</td>
+          <td style="text-align: center">1.26, 1.27, 1.28</td>
+          <td style="text-align: center">1.26, 1.27, 1.28</td>
+          <td style="text-align: center">1.26, 1.27, 1.28</td>
+          <td style="text-align: center">1.26, 1.27, 1.28</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">Red Hat OpenShift</td>
+          <td style="text-align: center">4.13, 4.14</td>
+          <td style="text-align: center">4.13, 4.14</td>
+          <td style="text-align: center">4.13, 4.14</td>
+          <td style="text-align: center">4.13, 4.14</td>
+          <td style="text-align: center">4.13, 4.14</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">Mirantis Kubernetes Engine</td>
+          <td style="text-align: center">3.6.x</td>
+          <td style="text-align: center">3.6.x</td>
+          <td style="text-align: center">3.6.x</td>
+          <td style="text-align: center">3.5.x, 3.6.x</td>
+          <td style="text-align: center">3.6.x</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">Google Anthos</td>
+          <td style="text-align: center">1.15</td>
+          <td style="text-align: center">1.15</td>
+          <td style="text-align: center">no</td>
+          <td style="text-align: center">1.15</td>
+          <td style="text-align: center">1.15</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">VMware Tanzu</td>
+          <td style="text-align: center">no</td>
+          <td style="text-align: center">no</td>
+          <td style="text-align: center">NFS</td>
+          <td style="text-align: center">NFS</td>
+          <td style="text-align: center">NFS,iSCSI</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">Rancher Kubernetes Engine</td>
+          <td style="text-align: center">1.4.x</td>
+          <td style="text-align: center">1.4.x</td>
+          <td style="text-align: center">1.4.x</td>
+          <td style="text-align: center">1.4.x</td>
+          <td style="text-align: center">1.4.x</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">Amazon Elastic Kubernetes Service<br> Anywhere</td>
+          <td style="text-align: center">yes</td>
+          <td style="text-align: center">yes</td>
+          <td style="text-align: center">yes</td>
+          <td style="text-align: center">yes</td>
+          <td style="text-align: center">yes</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">OS dependencies</td>
+          <td style="text-align: center">iscsi-initiator-utils<br>multipathd or powerpath<br>nvme-cli<br>nfs-utils</td>
+          <td style="text-align: center"><a href="https://www.dell.com/support/home/en-us/product-support/product/scaleio/drivers">SDC</a></td>
+          <td style="text-align: center">iscsi-initiator-utils<br>multipathd<br>nfs-utils</td>
+          <td style="text-align: center">nfs-utils</td>
+          <td style="text-align: center">iscsi-initiator-utils<br>multipathd<br>nvme-cli<br>nfs-utils</td>
+      </tr>
+  </tbody>
 </table>
 
 
+<blockquote>
+<p>Notes:</p>
+<ul>
+<li>The required OS dependencies are only for the protocol needed (e.g. if NVMe isn&rsquo;t the storage access protocol then nvme-cli is not required).</li>
+<li>The host operating system/version being used must align with what each Dell Storage platform supports. Please visit <a href="https://elabnavigator.dell.com/eln/modernHomeSSM">E-Lab Navigator</a> for specific Dell Storage platform host operating system level support matrices.</li>
+</ul>
+</blockquote>
 <h3 id="csi-driver-capabilities">
 CSI Driver Capabilities <a class="header-link"  href="#csi-driver-capabilities" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
             <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
@@ -765,154 +788,154 @@ CSI Driver Capabilities <a class="header-link"  href="#csi-driver-capabilities" 
 
 
 <table class="table table-striped table-bordered table-sm">
-<thead>
-<tr>
-<th>Features</th>
-<th style="text-align:center">PowerMax</th>
-<th style="text-align:center">PowerFlex</th>
-<th style="text-align:center">Unity XT</th>
-<th style="text-align:center">PowerScale</th>
-<th style="text-align:center">PowerStore</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>CSI Driver version</td>
-<td style="text-align:center">2.8.0</td>
-<td style="text-align:center">2.8.0</td>
-<td style="text-align:center">2.8.0</td>
-<td style="text-align:center">2.8.0</td>
-<td style="text-align:center">2.8.0</td>
-</tr>
-<tr>
-<td>Static Provisioning</td>
-<td style="text-align:center">yes</td>
-<td style="text-align:center">yes</td>
-<td style="text-align:center">yes</td>
-<td style="text-align:center">yes</td>
-<td style="text-align:center">yes</td>
-</tr>
-<tr>
-<td>Dynamic Provisioning</td>
-<td style="text-align:center">yes</td>
-<td style="text-align:center">yes</td>
-<td style="text-align:center">yes</td>
-<td style="text-align:center">yes</td>
-<td style="text-align:center">yes</td>
-</tr>
-<tr>
-<td>Expand Persistent Volume</td>
-<td style="text-align:center">yes</td>
-<td style="text-align:center">yes</td>
-<td style="text-align:center">yes</td>
-<td style="text-align:center">yes</td>
-<td style="text-align:center">yes</td>
-</tr>
-<tr>
-<td>Create VolumeSnapshot</td>
-<td style="text-align:center">yes</td>
-<td style="text-align:center">yes</td>
-<td style="text-align:center">yes</td>
-<td style="text-align:center">yes</td>
-<td style="text-align:center">yes</td>
-</tr>
-<tr>
-<td>Create Volume from Snapshot</td>
-<td style="text-align:center">yes</td>
-<td style="text-align:center">yes</td>
-<td style="text-align:center">yes</td>
-<td style="text-align:center">yes</td>
-<td style="text-align:center">yes</td>
-</tr>
-<tr>
-<td>Delete Snapshot</td>
-<td style="text-align:center">yes</td>
-<td style="text-align:center">yes</td>
-<td style="text-align:center">yes</td>
-<td style="text-align:center">yes</td>
-<td style="text-align:center">yes</td>
-</tr>
-<tr>
-<td><a href="https://kubernetes.io/docs/concepts/storage/persistent-volumes/#access-modes">Access Mode</a> for <a href="https://kubernetes.io/docs/concepts/storage/persistent-volumes/#volume-mode">volumeMode: Filesystem</a></td>
-<td style="text-align:center">RWO, RWOP<br><br>ROX, RWX <strong>with NFS ONLY</strong></td>
-<td style="text-align:center">RWO, ROX, RWOP<br><br>RWX  <strong>with NFS ONLY</strong></td>
-<td style="text-align:center">RWO, ROX, RWOP<br><br>RWX  <strong>with NFS ONLY</strong></td>
-<td style="text-align:center">RWO, RWX, ROX, RWOP</td>
-<td style="text-align:center">RWO, RWOP<br><br>ROX, RWX <strong>with NFS ONLY</strong></td>
-</tr>
-<tr>
-<td>Access Mode for <code>volumeMode: Block</code></td>
-<td style="text-align:center">RWO, RWX, ROX, RWOP</td>
-<td style="text-align:center">RWO, RWX, ROX, RWOP</td>
-<td style="text-align:center">RWO, RWX</td>
-<td style="text-align:center">Not Supported</td>
-<td style="text-align:center">RWO, RWX, ROX, RWOP</td>
-</tr>
-<tr>
-<td>CSI Volume Cloning</td>
-<td style="text-align:center">yes</td>
-<td style="text-align:center">yes</td>
-<td style="text-align:center">yes</td>
-<td style="text-align:center">yes</td>
-<td style="text-align:center">yes</td>
-</tr>
-<tr>
-<td>CSI Raw Block Volume</td>
-<td style="text-align:center">yes</td>
-<td style="text-align:center">yes</td>
-<td style="text-align:center">yes</td>
-<td style="text-align:center">no</td>
-<td style="text-align:center">yes</td>
-</tr>
-<tr>
-<td>CSI Ephemeral Volume</td>
-<td style="text-align:center">no</td>
-<td style="text-align:center">yes</td>
-<td style="text-align:center">yes</td>
-<td style="text-align:center">yes</td>
-<td style="text-align:center">yes</td>
-</tr>
-<tr>
-<td>Topology</td>
-<td style="text-align:center">yes</td>
-<td style="text-align:center">yes</td>
-<td style="text-align:center">yes</td>
-<td style="text-align:center">yes</td>
-<td style="text-align:center">yes</td>
-</tr>
-<tr>
-<td>Multi-array</td>
-<td style="text-align:center">yes</td>
-<td style="text-align:center">yes</td>
-<td style="text-align:center">yes</td>
-<td style="text-align:center">yes</td>
-<td style="text-align:center">yes</td>
-</tr>
-<tr>
-<td>Volume Health Monitoring</td>
-<td style="text-align:center">yes</td>
-<td style="text-align:center">yes</td>
-<td style="text-align:center">yes</td>
-<td style="text-align:center">yes</td>
-<td style="text-align:center">yes</td>
-</tr>
-<tr>
-<td>Storage Capacity Tracking</td>
-<td style="text-align:center">yes</td>
-<td style="text-align:center">yes</td>
-<td style="text-align:center">yes</td>
-<td style="text-align:center">yes</td>
-<td style="text-align:center">yes</td>
-</tr>
-<tr>
-<td>Volume Limit</td>
-<td style="text-align:center">yes</td>
-<td style="text-align:center">yes</td>
-<td style="text-align:center">yes</td>
-<td style="text-align:center">yes</td>
-<td style="text-align:center">yes</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th style="text-align: left">Features</th>
+          <th style="text-align: center">PowerMax</th>
+          <th style="text-align: center">PowerFlex</th>
+          <th style="text-align: center">Unity XT</th>
+          <th style="text-align: center">PowerScale</th>
+          <th style="text-align: center">PowerStore</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: left">CSI Driver version</td>
+          <td style="text-align: center">2.9.1</td>
+          <td style="text-align: center">2.9.2</td>
+          <td style="text-align: center">2.9.1</td>
+          <td style="text-align: center">2.9.1</td>
+          <td style="text-align: center">2.9.1</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">Static Provisioning</td>
+          <td style="text-align: center">yes</td>
+          <td style="text-align: center">yes</td>
+          <td style="text-align: center">yes</td>
+          <td style="text-align: center">yes</td>
+          <td style="text-align: center">yes</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">Dynamic Provisioning</td>
+          <td style="text-align: center">yes</td>
+          <td style="text-align: center">yes</td>
+          <td style="text-align: center">yes</td>
+          <td style="text-align: center">yes</td>
+          <td style="text-align: center">yes</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">Expand Persistent Volume</td>
+          <td style="text-align: center">yes</td>
+          <td style="text-align: center">yes</td>
+          <td style="text-align: center">yes</td>
+          <td style="text-align: center">yes</td>
+          <td style="text-align: center">yes</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">Create VolumeSnapshot</td>
+          <td style="text-align: center">yes for LUN<br>no for NFS</td>
+          <td style="text-align: center">yes</td>
+          <td style="text-align: center">yes</td>
+          <td style="text-align: center">yes</td>
+          <td style="text-align: center">yes</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">Create Volume from Snapshot</td>
+          <td style="text-align: center">yes for LUN<br>no for NFS</td>
+          <td style="text-align: center">yes</td>
+          <td style="text-align: center">yes</td>
+          <td style="text-align: center">yes</td>
+          <td style="text-align: center">yes</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">Delete Snapshot</td>
+          <td style="text-align: center">yes for LUN<br>no for NFS</td>
+          <td style="text-align: center">yes</td>
+          <td style="text-align: center">yes</td>
+          <td style="text-align: center">yes</td>
+          <td style="text-align: center">yes</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><a href="https://kubernetes.io/docs/concepts/storage/persistent-volumes/#access-modes">Access Mode</a> for <a href="https://kubernetes.io/docs/concepts/storage/persistent-volumes/#volume-mode">volumeMode: Filesystem</a></td>
+          <td style="text-align: center">RWO, RWOP<br><br>ROX, RWX <strong>with NFS ONLY</strong></td>
+          <td style="text-align: center">RWO, ROX, RWOP<br><br>RWX  <strong>with NFS ONLY</strong></td>
+          <td style="text-align: center">RWO, ROX, RWOP<br><br>RWX  <strong>with NFS ONLY</strong></td>
+          <td style="text-align: center">RWO, RWX, ROX, RWOP</td>
+          <td style="text-align: center">RWO, RWOP<br><br>ROX, RWX <strong>with NFS ONLY</strong></td>
+      </tr>
+      <tr>
+          <td style="text-align: left">Access Mode for <code>volumeMode: Block</code></td>
+          <td style="text-align: center">RWX, ROX, RWOP</td>
+          <td style="text-align: center">RWX, ROX, RWOP</td>
+          <td style="text-align: center">RWO, RWX</td>
+          <td style="text-align: center">Not Supported</td>
+          <td style="text-align: center">RWO, RWX, ROX, RWOP</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">CSI Volume Cloning</td>
+          <td style="text-align: center">yes for LUN<br>no for NFS</td>
+          <td style="text-align: center">yes for LUN<br>no for NFS</td>
+          <td style="text-align: center">yes</td>
+          <td style="text-align: center">yes</td>
+          <td style="text-align: center">yes</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">CSI Raw Block Volume</td>
+          <td style="text-align: center">yes</td>
+          <td style="text-align: center">yes</td>
+          <td style="text-align: center">yes</td>
+          <td style="text-align: center">no</td>
+          <td style="text-align: center">yes</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">CSI Ephemeral Volume</td>
+          <td style="text-align: center">no</td>
+          <td style="text-align: center">yes</td>
+          <td style="text-align: center">yes</td>
+          <td style="text-align: center">yes</td>
+          <td style="text-align: center">yes</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">Topology</td>
+          <td style="text-align: center">yes</td>
+          <td style="text-align: center">yes</td>
+          <td style="text-align: center">yes</td>
+          <td style="text-align: center">yes</td>
+          <td style="text-align: center">yes</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">Multi-array</td>
+          <td style="text-align: center">yes</td>
+          <td style="text-align: center">yes</td>
+          <td style="text-align: center">yes</td>
+          <td style="text-align: center">yes</td>
+          <td style="text-align: center">yes</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">Volume Health Monitoring</td>
+          <td style="text-align: center">yes</td>
+          <td style="text-align: center">yes</td>
+          <td style="text-align: center">yes</td>
+          <td style="text-align: center">yes</td>
+          <td style="text-align: center">yes</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">Storage Capacity Tracking</td>
+          <td style="text-align: center">yes</td>
+          <td style="text-align: center">yes</td>
+          <td style="text-align: center">yes</td>
+          <td style="text-align: center">yes</td>
+          <td style="text-align: center">yes</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">Volume Limit</td>
+          <td style="text-align: center">yes</td>
+          <td style="text-align: center">yes</td>
+          <td style="text-align: center">yes</td>
+          <td style="text-align: center">yes</td>
+          <td style="text-align: center">yes</td>
+      </tr>
+  </tbody>
 </table>
 
 
@@ -928,36 +951,29 @@ Supported Storage Platforms <a class="header-link"  href="#supported-storage-pla
 
 
 <table class="table table-striped table-bordered table-sm">
-<thead>
-<tr>
-<th></th>
-<th style="text-align:center">PowerMax</th>
-<th style="text-align:center">PowerFlex</th>
-<th style="text-align:center">Unity XT</th>
-<th style="text-align:center">PowerScale</th>
-<th style="text-align:center">PowerStore</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Storage Array</td>
-<td style="text-align:center">PowerMax 2500/8500 PowerMaxOS 10 (6079) , PowerMaxOS 10.0.1 (6079) <br> PowerMax 2000/8000 - 5978.711.xxx, 5978.479.xxx <br>Unisphere 10.0,10.0.1</td>
-<td style="text-align:center">3.5.x, 3.6.x, 4.5</td>
-<td style="text-align:center">5.2.x, 5.3.0</td>
-<td style="text-align:center">OneFS 9.2, 9.3, 9.4, 9.5.0.5, 9.5.0.6</td>
-<td style="text-align:center">2.0.x, 2.1.x, 3.0, 3.2, 3.5</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th style="text-align: left"></th>
+          <th style="text-align: center">PowerMax</th>
+          <th style="text-align: center">PowerFlex</th>
+          <th style="text-align: center">Unity XT</th>
+          <th style="text-align: center">PowerScale</th>
+          <th style="text-align: center">PowerStore</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: left">Storage Array</td>
+          <td style="text-align: center">PowerMax 2500/8500 PowerMaxOS 10 (6079) , PowerMaxOS 10.0.1 (6079) , PowerMaxOS 10.1 (6079)<br> PowerMax 2000/8000 - 5978.711.xxx, 5978.479.xxx <br>Unisphere 10.0,10.0.1,10.1</td>
+          <td style="text-align: center">3.6.x, 4.5.x</td>
+          <td style="text-align: center">5.2.x, 5.3.x</td>
+          <td style="text-align: center">OneFS 9.3, 9.4, 9.5.0.x (x &gt;= 5)</td>
+          <td style="text-align: center">3.0, 3.2, 3.5</td>
+      </tr>
+  </tbody>
 </table>
 
 
-<blockquote>
-<p>Note: To connect to a PowerFlex 4.5 array, the SDC image will need to be changed to dellemc/sdc:4.5.</p>
-<ul>
-<li>If using helm to install, you will need to make this change in your values.yaml file. See <a href="https://dell.github.io/csm-docs/docs/deployment/helm/drivers/installation/powerflex/">helm install documentation</a> for details.</li>
-<li>If using CSM-Operator to install, you will need to make this change in your samples file. See <a href="https://dell.github.io/csm-docs/docs/deployment/csmoperator/drivers/powerflex/">operator install documentation</a> for details.</li>
-</ul>
-</blockquote>
 <h3 id="backend-storage-details">
 Backend Storage Details <a class="header-link"  href="#backend-storage-details" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
             <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
@@ -970,98 +986,133 @@ Backend Storage Details <a class="header-link"  href="#backend-storage-details" 
 
 
 <table class="table table-striped table-bordered table-sm">
-<thead>
-<tr>
-<th>Features</th>
-<th style="text-align:center">PowerMax</th>
-<th style="text-align:center">PowerFlex</th>
-<th style="text-align:center">Unity XT</th>
-<th style="text-align:center">PowerScale</th>
-<th style="text-align:center">PowerStore</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Fibre Channel</td>
-<td style="text-align:center">yes</td>
-<td style="text-align:center">N/A</td>
-<td style="text-align:center">yes</td>
-<td style="text-align:center">N/A</td>
-<td style="text-align:center">yes</td>
-</tr>
-<tr>
-<td>iSCSI</td>
-<td style="text-align:center">yes</td>
-<td style="text-align:center">N/A</td>
-<td style="text-align:center">yes</td>
-<td style="text-align:center">N/A</td>
-<td style="text-align:center">yes</td>
-</tr>
-<tr>
-<td>NVMeTCP</td>
-<td style="text-align:center">N/A</td>
-<td style="text-align:center">N/A</td>
-<td style="text-align:center">N/A</td>
-<td style="text-align:center">N/A</td>
-<td style="text-align:center">yes</td>
-</tr>
-<tr>
-<td>NVMeFC</td>
-<td style="text-align:center">N/A</td>
-<td style="text-align:center">N/A</td>
-<td style="text-align:center">N/A</td>
-<td style="text-align:center">N/A</td>
-<td style="text-align:center">yes</td>
-</tr>
-<tr>
-<td>NFS</td>
-<td style="text-align:center">yes - SDNAS only (not eNAS)</td>
-<td style="text-align:center">yes</td>
-<td style="text-align:center">yes</td>
-<td style="text-align:center">yes</td>
-<td style="text-align:center">yes</td>
-</tr>
-<tr>
-<td>Other</td>
-<td style="text-align:center">N/A</td>
-<td style="text-align:center">ScaleIO protocol</td>
-<td style="text-align:center">N/A</td>
-<td style="text-align:center">N/A</td>
-<td style="text-align:center">N/A</td>
-</tr>
-<tr>
-<td>Supported FS</td>
-<td style="text-align:center">ext4 / xfs / NFS</td>
-<td style="text-align:center">ext4 / xfs / NFS</td>
-<td style="text-align:center">ext4 / xfs / NFS</td>
-<td style="text-align:center">NFS</td>
-<td style="text-align:center">ext3 / ext4 / xfs / NFS</td>
-</tr>
-<tr>
-<td>Thin / Thick provisioning</td>
-<td style="text-align:center">Thin</td>
-<td style="text-align:center">Thin</td>
-<td style="text-align:center">Thin/Thick</td>
-<td style="text-align:center">N/A</td>
-<td style="text-align:center">Thin</td>
-</tr>
-<tr>
-<td>Platform-specific configurable settings</td>
-<td style="text-align:center">Service Level selection<br>iSCSI CHAP</td>
-<td style="text-align:center">-</td>
-<td style="text-align:center">Host IO Limit<br>Tiering Policy<br>NFS Host IO size<br>Snapshot Retention duration</td>
-<td style="text-align:center">Access Zone<br>NFS version (3 or 4);Configurable Export IPs</td>
-<td style="text-align:center">iSCSI CHAP</td>
-</tr>
-<tr>
-<td>Auto RDM(vSphere)</td>
-<td style="text-align:center">Yes(over FC)</td>
-<td style="text-align:center">N/A</td>
-<td style="text-align:center">N/A</td>
-<td style="text-align:center">N/A</td>
-<td style="text-align:center">N/A</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th style="text-align: left">Features</th>
+          <th style="text-align: center">PowerMax</th>
+          <th style="text-align: center">PowerFlex</th>
+          <th style="text-align: center">Unity XT</th>
+          <th style="text-align: center">PowerScale</th>
+          <th style="text-align: center">PowerStore</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: left">Fibre Channel</td>
+          <td style="text-align: center">yes</td>
+          <td style="text-align: center">N/A</td>
+          <td style="text-align: center">yes</td>
+          <td style="text-align: center">N/A</td>
+          <td style="text-align: center">yes</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">iSCSI</td>
+          <td style="text-align: center">yes</td>
+          <td style="text-align: center">N/A</td>
+          <td style="text-align: center">yes</td>
+          <td style="text-align: center">N/A</td>
+          <td style="text-align: center">yes</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">NVMeTCP</td>
+          <td style="text-align: center">N/A</td>
+          <td style="text-align: center">N/A</td>
+          <td style="text-align: center">N/A</td>
+          <td style="text-align: center">N/A</td>
+          <td style="text-align: center">yes</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">NVMeFC</td>
+          <td style="text-align: center">N/A</td>
+          <td style="text-align: center">N/A</td>
+          <td style="text-align: center">N/A</td>
+          <td style="text-align: center">N/A</td>
+          <td style="text-align: center">yes</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">NFS</td>
+          <td style="text-align: center">yes - SDNAS only (not eNAS)</td>
+          <td style="text-align: center">yes</td>
+          <td style="text-align: center">yes</td>
+          <td style="text-align: center">yes</td>
+          <td style="text-align: center">yes</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">Other</td>
+          <td style="text-align: center">N/A</td>
+          <td style="text-align: center">ScaleIO protocol</td>
+          <td style="text-align: center">N/A</td>
+          <td style="text-align: center">N/A</td>
+          <td style="text-align: center">N/A</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">Supported FS</td>
+          <td style="text-align: center">ext4 / xfs / NFS</td>
+          <td style="text-align: center">ext4 / xfs / NFS</td>
+          <td style="text-align: center">ext4 / xfs / NFS</td>
+          <td style="text-align: center">NFS</td>
+          <td style="text-align: center">ext3 / ext4 / xfs / NFS</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">Thin / Thick provisioning</td>
+          <td style="text-align: center">Thin</td>
+          <td style="text-align: center">Thin</td>
+          <td style="text-align: center">Thin/Thick</td>
+          <td style="text-align: center">N/A</td>
+          <td style="text-align: center">Thin</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">Platform-specific configurable settings</td>
+          <td style="text-align: center">Service Level selection<br>iSCSI CHAP</td>
+          <td style="text-align: center">-</td>
+          <td style="text-align: center">Host IO Limit<br>Tiering Policy<br>NFS Host IO size<br>Snapshot Retention duration</td>
+          <td style="text-align: center">Access Zone<br>NFS version (3 or 4);Configurable Export IPs</td>
+          <td style="text-align: center">iSCSI CHAP</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">Auto RDM(vSphere)</td>
+          <td style="text-align: center">Yes(over FC)</td>
+          <td style="text-align: center">N/A</td>
+          <td style="text-align: center">N/A</td>
+          <td style="text-align: center">N/A</td>
+          <td style="text-align: center">N/A</td>
+      </tr>
+  </tbody>
+</table>
+
+
+<h3 id="community-qualified-platforms">
+Community Qualified Platforms <a class="header-link"  href="#community-qualified-platforms" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
+            <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 0h24v24H0z" fill="none"/>
+                <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
+            </svg>
+        </a></h3>
+
+
+
+
+<table class="table table-striped table-bordered table-sm">
+  <thead>
+      <tr>
+          <th style="text-align: left">cert-csi results</th>
+          <th style="text-align: center">OS</th>
+          <th style="text-align: center">CO</th>
+          <th style="text-align: center">Storage Platform</th>
+          <th style="text-align: center">Protocol</th>
+          <th style="text-align: center">CSM</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: left"><a href="https://github.com/dell/csm/issues/1079">Ticket 1079</a></td>
+          <td style="text-align: center">Debian 10</td>
+          <td style="text-align: center">K3s v1.24.7+k3s1</td>
+          <td style="text-align: center">Unity VSA 5.3.1.0.5.008</td>
+          <td style="text-align: center">iSCSI</td>
+          <td style="text-align: center">CSI v1.8.0</td>
+      </tr>
+  </tbody>
 </table>
 
 
@@ -1106,12 +1157,6 @@ Backend Storage Details <a class="header-link"  href="#backend-storage-details" 
                 </h5>
                 <p>Release Notes for all the CSI Drivers and deployment</p>
             </div>
-        <div class="entry">
-                <h5>
-                    <a href="/csm-docs/v3/csidriver/partners/">Our Ecosystem Partners</a>
-                </h5>
-                <p>Our Ecosystem Partners</p>
-            </div>
         </div>
 
 	
@@ -1154,7 +1199,7 @@ Backend Storage Details <a class="header-link"  href="#backend-storage-details" 
 </footer>
 
     </div>
-    <script src="/csm-docs/js/main.min.c418a2a9515ff54cddb20b007eb9411293e20d962d55eeef727e1f1ca8c7ddc9.js" integrity="sha256-xBiiqVFf9UzdsgsAfrlBEpPiDZYtVe7vcn4fHKjH3ck=" crossorigin="anonymous"></script>
+    <script src="/csm-docs/js/main.min.f72d00502781aaf278a14088eb2356b1ba2a05ad698a0c43fe86314d74ceab56.js" integrity="sha256-9y0AUCeBqvJ4oUCI6yNWsboqBa1pigxD/oYxTXTOq1Y=" crossorigin="anonymous"></script>
 <script src='/csm-docs/js/prism.js'></script>
 <script src='/csm-docs/js/tabpane-persist.js'></script>
 
