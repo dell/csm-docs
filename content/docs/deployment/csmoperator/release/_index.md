@@ -22,6 +22,7 @@ Description: >
 
 
 
+
 ### New Features/Changes
 
 - [#1449 - [FEATURE]: Simplify the CSM Operator deployment](https://github.com/dell/csm/issues/1449)
