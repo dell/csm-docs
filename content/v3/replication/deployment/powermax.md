@@ -15,6 +15,12 @@ CSI driver for Dell PowerMax supports necessary extension calls from `dell-csi-e
 ### Before Installation
 
 #### On Storage Array
+
+For CSM Replication, both source and target storage systems must be locally managed by Unisphere. 
+> _Example_: When using two Unisphere instances, the first Unisphere instance should be configured with the source storage system as locally
+managed and target storage system as remotely managed. The second Unisphere configuration should mirror the first — locally managing the target storage system and
+remotely managing the source storage system.
+
 Configure SRDF connection between multiple PowerMax instances. Follow instructions by PowerMax storage for creating the SRDF Groups between a set of arrays.
 
 You can ensure that you configured remote arrays by navigating to the `Data Protection` tab and choosing `SRDF Groups` on the managing Unisphere of your array. You should see a list of remote systems with the SRDF Group number that is configured and the Online field set to a green tick.
