@@ -4,58 +4,15 @@
     <title>Encryption on </title>
     <link>https://dell.github.io/csm-docs/v2/secure/encryption/</link>
     <description>Recent content in Encryption on </description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>en</language>
     <atom:link href="https://dell.github.io/csm-docs/v2/secure/encryption/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Deployment</title>
-      <link>https://dell.github.io/csm-docs/v2/secure/encryption/deployment/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://dell.github.io/csm-docs/v2/secure/encryption/deployment/</guid>
-      <description>Encryption for Dell Container Storage Modules is enabled via the Dell CSI driver installation. The drivers can be installed either by a Helm chart or by the Dell CSM Operator. In the tech preview release, Encryption can only be enabled via Helm chart installation.
-Except for additional Encryption related configuration outlined on this page, the rest of the deployment process is described in the correspondent CSI driver documentation.
-Vault Server Hashicorp Vault must be pre-configured to support Encryption.</description>
-    </item>
-    <item>
-      <title>Uninstallation</title>
-      <link>https://dell.github.io/csm-docs/v2/secure/encryption/uninstallation/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://dell.github.io/csm-docs/v2/secure/encryption/uninstallation/</guid>
-      <description>Cleanup Kubernetes Worker Hosts Login to each worker host and perform these steps:
-Remove directory /root/.driver-sec
-This directory was created when a CSI driver with Encryption first ran on the host.
-Remove entry from /root/.ssh/authorized_keys
-This is an entry added when a CSI driver with Encryption first ran on the host. It ends with driver-sec, similarly to:
-ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDGvSWmTL7NORRDPAvtbMbvoHUBLnen9bRtJePbGk1boJ4XK39Qdvo2zFHZ/6t2+dSL7xKo2kcxX3ovj3RyOPuqNCob 5CLYyuIqduooy+eSP8S1i0FbiDHvH/52yHglnGkBb8g8fmoMolYGW7k35mKOEItKlXruP5/hpP0rBDfBfrxe/K4aHicxv6GylP+uTSBjdj7bZrdgRAIlmDyIdvU4oU6L K9PDW5rufArlrZHaToHXLMbXbqswD08rgFt3tLiXjj2GgvU8ifWYYAeuijMp+hwwE0dYv45EgUNTlXUa7x2STFZrVn8MFkLKjtZ60Qjbb4JoijRpBQ5XEUkW9UoeGbV2 s+lCpZ2bMkmdda/0UC1ckvyrLkD0yQotb8gafizdX+WrQRE+iqUv/NQ2mrSEHtLgvuvgZ3myFU5chRv498YxglYZsAZUdCQI2hQt+7smjYMaM0V200UT741U9lIlYxza ocI5t+n01dWeVOCSOH/Q3uXxHKnFvWVZh7m6583R9LfdGfwshsnx4CNz22kp69hzwBPxehR+U/VXkDUWnoQgI8NSPc0fFyU58yLHnl91XT9alz8qrkFK7oggKy5RRX7c VQrpjsCPCu3fpVjvvwfspVOftbn/sNgY1J3lz0pdgvJ3yQs6pa+DODQyin5Rt//19rIGifPxi/Hk/k49Vw== driver-sec It can be removed with sed -i &#39;/^ssh-rsa .</description>
-    </item>
-    <item>
-      <title>Vault Configuration</title>
-      <link>https://dell.github.io/csm-docs/v2/secure/encryption/vault/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://dell.github.io/csm-docs/v2/secure/encryption/vault/</guid>
-      <description>Vault Server Installation If there is already a Vault server available, skip to Minimum Server Configuration.
-If there is no Vault server available to use with Encryption, it can be installed in many ways following Hashicorp Vault documentation.
-For testing environment, however, a simple deployment suggested in this section may suffice. It creates a standalone server with in-memory (non-persistent) storage, running in a Docker container.
-NOTE: With in-memory storage, the encryption keys are permanently destroyed upon the server termination.</description>
-    </item>
-    <item>
-      <title>Rekey Configuration</title>
-      <link>https://dell.github.io/csm-docs/v2/secure/encryption/rekey/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://dell.github.io/csm-docs/v2/secure/encryption/rekey/</guid>
-      <description>Rekey Controller Installation The CSM Encryption Rekey CRD Controller is an optional component that, if installed, allows encrypted volumes rekeying in a Kubernetes cluster. The Rekey Controller can be installed via the Dell Helm charts repository.
-Dell Helm charts can be added with the command helm repo add dell https://dell.github.io/helm-charts.
-Kubeconfig Secret A secret with kubeconfig must be created with the name cluster-kube-config. Here is an example:
-kubectl create secret generic cluster-kube-config --from-file=config=/root/.</description>
-    </item>
     <item>
       <title>Troubleshooting</title>
       <link>https://dell.github.io/csm-docs/v2/secure/encryption/troubleshooting/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://dell.github.io/csm-docs/v2/secure/encryption/troubleshooting/</guid>
-      <description>Logs and Events The first and in most cases sufficient step in troubleshooting issues with a CSI driver that has Encryption enabled is exploring logs of the Encryption driver and related Kubernetes components. These are some useful log sources:
-CSI Driver Containers Logs The driver creates several controller and node pods. They can be listed with kubectl -n &amp;lt;driver namespace&amp;gt; get pods. The output will look similar to:
-NAME READY STATUS RESTARTS AGE isi-controller-84f697c874-2j6d4 10/10 Running 0 16h isi-node-4gtwf 4/4 Running 0 16h isi-node-lnzws 4/4 Running 0 16h List containers in pod isi-node-4gtwf with kubectl -n &amp;lt;driver namespace&amp;gt; logs isi-node-4gtwf.</description>
+      <description>&lt;h2 id=&#34;logs-and-events&#34;&gt;&#xA;Logs and Events &lt;a class=&#34;header-link&#34;  href=&#34;#logs-and-events&#34; style=&#34; display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; &#34; onmouseover=&#34;this.style.opacity=1;&#34; onmouseout=&#34;this.style.opacity=0;&#34;&gt;&#xA;            &lt;svg fill=&#34;currentColor&#34; height=&#34;24&#34; viewBox=&#34;0 0 24 24&#34; width=&#34;24&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34;&gt;&#xA;                &lt;path d=&#34;M0 0h24v24H0z&#34; fill=&#34;none&#34;/&gt;&#xA;                &lt;path d=&#34;M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z&#34;/&gt;&#xA;            &lt;/svg&gt;&#xA;        &lt;/a&gt;&lt;/h2&gt;&lt;p&gt;The first and in most cases sufficient step in troubleshooting issues with a CSI driver that has Encryption enabled&#xA;is exploring logs of the Encryption driver and related Kubernetes components. These are some useful log sources:&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

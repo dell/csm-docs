@@ -4,7 +4,7 @@
     <title>CSI Driver installation using Dell CSI Operator on </title>
     <link>https://dell.github.io/csm-docs/v3/csidriver/installation/operator/</link>
     <description>Recent content in CSI Driver installation using Dell CSI Operator on </description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>en</language>
     <atom:link href="https://dell.github.io/csm-docs/v3/csidriver/installation/operator/index.xml" rel="self" type="application/rss+xml" />
     <item>
@@ -12,50 +12,7 @@
       <link>https://dell.github.io/csm-docs/v3/csidriver/installation/operator/operator_migration/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://dell.github.io/csm-docs/v3/csidriver/installation/operator/operator_migration/</guid>
-      <description>Migration Steps Save the CR yaml file of the current CSI driver to preserve the settings. Use the following commands in your cluster to get the CR: kubectl -n &amp;lt;namespace&amp;gt; get &amp;lt;CRD_kind&amp;gt; kubectl -n &amp;lt;namespace&amp;gt; get &amp;lt;CRD_kind&amp;gt;/&amp;lt;CR_name&amp;gt; -o yaml Example for CSI Unity:
-kubectl -n openshift-operators get CSIUnity kubectl -n openshift-operators get CSIUnity/test-unity -o yaml Map and update the settings from the CR in step 1 to the relevant CSM Operator CR As the yaml content may differ, ensure the values held in the step 1 CR backup are present in the new CR before installing the new driver.</description>
-    </item>
-    <item>
-      <title>PowerFlex</title>
-      <link>https://dell.github.io/csm-docs/v3/csidriver/installation/operator/powerflex/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://dell.github.io/csm-docs/v3/csidriver/installation/operator/powerflex/</guid>
-      <description>The Dell CSI Operator is no longer actively maintained or supported. Dell CSI Operator has been replaced with Dell CSM Operator. If you are currently using Dell CSI Operator, refer to the operator migration documentation to migrate from Dell CSI Operator to Dell CSM Operator. CSM 1.7.1 is applicable to helm based installations of PowerFlex driver.
-Installing CSI Driver for PowerFlex via Operator The CSI Driver for Dell PowerFlex can be installed via the Dell CSI Operator.</description>
-    </item>
-    <item>
-      <title>PowerMax</title>
-      <link>https://dell.github.io/csm-docs/v3/csidriver/installation/operator/powermax/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://dell.github.io/csm-docs/v3/csidriver/installation/operator/powermax/</guid>
-      <description>The Dell CSI Operator is no longer actively maintained or supported. Dell CSI Operator has been replaced with Dell CSM Operator. If you are currently using Dell CSI Operator, refer to the operator migration documentation to migrate from Dell CSI Operator to Dell CSM Operator.
-Linked Proxy mode for CSI reverse proxy is no longer actively maintained or supported. It will be deprecated in CSM 1.9. It is highly recommended that you use stand alone mode going forward.</description>
-    </item>
-    <item>
-      <title>PowerScale</title>
-      <link>https://dell.github.io/csm-docs/v3/csidriver/installation/operator/isilon/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://dell.github.io/csm-docs/v3/csidriver/installation/operator/isilon/</guid>
-      <description>The Dell CSI Operator is no longer actively maintained or supported. Dell CSI Operator has been replaced with Dell CSM Operator. If you are currently using Dell CSI Operator, refer to the operator migration documentation to migrate from Dell CSI Operator to Dell CSM Operator.
-Installing CSI Driver for PowerScale via Operator The CSI Driver for Dell PowerScale can be installed via the Dell CSI Operator.
-To deploy the Operator, follow the instructions available here.</description>
-    </item>
-    <item>
-      <title>PowerStore</title>
-      <link>https://dell.github.io/csm-docs/v3/csidriver/installation/operator/powerstore/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://dell.github.io/csm-docs/v3/csidriver/installation/operator/powerstore/</guid>
-      <description>The Dell CSI Operator is no longer actively maintained or supported. Dell CSI Operator has been replaced with Dell CSM Operator. If you are currently using Dell CSI Operator, refer to the operator migration documentation to migrate from Dell CSI Operator to Dell CSM Operator.
-Installing CSI Driver for PowerStore via Operator The CSI Driver for Dell PowerStore can be installed via the Dell CSI Operator.
-To deploy the Operator, follow the instructions available here.</description>
-    </item>
-    <item>
-      <title>Unity XT</title>
-      <link>https://dell.github.io/csm-docs/v3/csidriver/installation/operator/unity/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://dell.github.io/csm-docs/v3/csidriver/installation/operator/unity/</guid>
-      <description>The Dell CSI Operator is no longer actively maintained or supported. Dell CSI Operator has been replaced with Dell CSM Operator. If you are currently using Dell CSI Operator, refer to the operator migration documentation to migrate from Dell CSI Operator to Dell CSM Operator.
-CSI Driver for Unity XT Pre-requisites Create secret to store Unity XT credentials Create a namespace called unity (it can be any user-defined name; But commands in this section assumes that the namespace is unity) Prepare the secret.</description>
+      <description>&lt;h2 id=&#34;migration-steps&#34;&gt;&#xA;Migration Steps &lt;a class=&#34;header-link&#34;  href=&#34;#migration-steps&#34; style=&#34; display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; &#34; onmouseover=&#34;this.style.opacity=1;&#34; onmouseout=&#34;this.style.opacity=0;&#34;&gt;&#xA;            &lt;svg fill=&#34;currentColor&#34; height=&#34;24&#34; viewBox=&#34;0 0 24 24&#34; width=&#34;24&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34;&gt;&#xA;                &lt;path d=&#34;M0 0h24v24H0z&#34; fill=&#34;none&#34;/&gt;&#xA;                &lt;path d=&#34;M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z&#34;/&gt;&#xA;            &lt;/svg&gt;&#xA;        &lt;/a&gt;&lt;/h2&gt;&lt;ol&gt;&#xA;&lt;li&gt;Save the CR yaml file of the current CSI driver to preserve the settings. Use the following commands in your cluster to get the CR:&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;    kubectl -n &amp;lt;namespace&amp;gt; get &amp;lt;CRD_kind&amp;gt;&#xA;    kubectl -n &amp;lt;namespace&amp;gt; get &amp;lt;CRD_kind&amp;gt;/&amp;lt;CR_name&amp;gt; -o yaml&#xA;&lt;/code&gt;&lt;/pr</description>
     </item>
   </channel>
 </rss>

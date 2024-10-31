@@ -4,54 +4,43 @@
     <title>CSM Modules on </title>
     <link>https://dell.github.io/csm-docs/docs/deployment/csmoperator/modules/</link>
     <description>Recent content in CSM Modules on </description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>en</language>
     <atom:link href="https://dell.github.io/csm-docs/docs/deployment/csmoperator/modules/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Authorization</title>
-      <link>https://dell.github.io/csm-docs/docs/deployment/csmoperator/modules/authorization/</link>
+      <title>Authorization v1.x</title>
+      <link>https://dell.github.io/csm-docs/docs/deployment/csmoperator/modules/authorization-v1.x/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://dell.github.io/csm-docs/docs/deployment/csmoperator/modules/authorization/</guid>
-      <description>The CSM Authorization karavictl CLI is no longer actively maintained or supported. It will be deprecated in CSM 2.0.
-Install CSM Authorization via Dell CSM Operator The CSM Authorization module for supported Dell CSI Drivers can be installed via the Dell CSM Operator. To deploy the Operator, follow the instructions available here.
-Prerequisite Execute kubectl create namespace authorization to create the authorization namespace (if not already present). Note that the namespace can be any user-defined name, in this example, we assume that the namespace is &amp;lsquo;authorization&amp;rsquo;.</description>
+      <guid>https://dell.github.io/csm-docs/docs/deployment/csmoperator/modules/authorization-v1.x/</guid>
+      <description>&lt;div class=&#34;pageinfo pageinfo-primary&#34;&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;span&gt;&lt;/span&gt;&#xA;Starting with CSM 1.12, all deployments will use images from &lt;a href=&#34;https://quay.io/organization/dell&#34;&gt;quay.io&lt;/a&gt; by default. New release images will be available on &lt;a href=&#34;https://hub.docker.com/r/dellemc/&#34;&gt;Docker Hub&lt;/a&gt; until CSM 1.14 (May 2025), and existing releases will remain on Docker Hub.&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;span&gt;&lt;span/&gt;&#xA;Deprecation Notice Pre-Wire:  Starting with CSM 1.13, Authorization v1.x will be deprecated and will be officially discontinued by CSM 1.15 in September 2025. Please switch to Authorization v2.0 before then to avoid any issues. Migration steps are available &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/docs/authorization/migration-guide-from-v1-to-v2/&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;</description>
     </item>
     <item>
-      <title>Authorization v2.0 Tech Preview</title>
-      <link>https://dell.github.io/csm-docs/docs/deployment/csmoperator/modules/authorization-v2.0-tech-preview/</link>
+      <title>Authorization v2.0</title>
+      <link>https://dell.github.io/csm-docs/docs/deployment/csmoperator/modules/authorization-v2.0/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://dell.github.io/csm-docs/docs/deployment/csmoperator/modules/authorization-v2.0-tech-preview/</guid>
-      <description>The CSM Authorization karavictl CLI is no longer actively maintained or supported. It will be deprecated in CSM 2.0.
-Install CSM Authorization via Dell CSM Operator The CSM Authorization module for supported Dell CSI Drivers can be installed via the Dell CSM Operator. To deploy the Operator, follow the instructions available here.
-Prerequisite Install Vault or configure an existing Vault.
-Execute kubectl create namespace authorization to create the authorization namespace (if not already present).</description>
+      <guid>https://dell.github.io/csm-docs/docs/deployment/csmoperator/modules/authorization-v2.0/</guid>
+      <description>&lt;div class=&#34;pageinfo pageinfo-primary&#34;&gt;&#xA;&lt;p&gt;Starting with CSM 1.12, all deployments will use images from &lt;a href=&#34;https://quay.io/organization/dell&#34;&gt;quay.io&lt;/a&gt; by default. New release images will be available on &lt;a href=&#34;https://hub.docker.com/r/dellemc/&#34;&gt;Docker Hub&lt;/a&gt; until CSM 1.14 (May 2025), and existing releases will remain on Docker Hub.&lt;/p&gt;&#xA;&#xA;&lt;/div&gt;&#xA;&#xA;&lt;h2 id=&#34;install-csm-authorization-via-dell-csm-operator&#34;&gt;&#xA;Install CSM Authorization via Dell CSM Operator &lt;a class=&#34;header-link&#34;  href=&#34;#install-csm-authorization-via-dell-csm-operator&#34; style=&#34; display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; &#34; onmouseover=&#34;this.style.opacity=1;&#34; onmouseout=&#34;this.style.opacity=0;&#34;&gt;&#xA;            &lt;svg fill=&#34;currentColor&#34; height=&#34;24&#34; viewBox=&#34;0 0 24 24&#34; width=&#34;24&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34;&gt;&#xA;                &lt;path d=&#34;M0 0h24v24H0z&#34; fill=&#34;none&#34;/&gt;&#xA;                &lt;path d=&#34;M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z&#34;/&gt;&#xA;            &lt;/svg&gt;&#xA;        &lt;/a&gt;&lt;/h2&gt;&lt;p&gt;The CSM Authorization module for supported Dell CSI Drivers can be installed via the Dell CSM Operator.&#xA;To deploy the Operator, follow the instructions available &lt;a href=&#34;https://dell.github.io/csm-docs/csm-docs/docs/deployment/#installation&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Observability</title>
       <link>https://dell.github.io/csm-docs/docs/deployment/csmoperator/modules/observability/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://dell.github.io/csm-docs/docs/deployment/csmoperator/modules/observability/</guid>
-      <description>The CSM Observability module for supported Dell CSI Drivers can be installed via the Dell CSM Operator. Dell CSM Operator will deploy CSM Observability, including topology service, Otel collector, and metrics services.
-Prerequisites Create a namespace karavi
-kubectl create namespace karavi Enable Observability module and components in sample manifests. If cert-manager has already been installed, don&amp;rsquo;t enable it.
-To use Observablity with CSM Authorization, the Authorization Proxy Server should be installed and configured first.</description>
+      <description>&lt;div class=&#34;pageinfo pageinfo-primary&#34;&gt;&#xA;&lt;p&gt;Starting with CSM 1.12, all deployments will use images from &lt;a href=&#34;https://quay.io/organization/dell&#34;&gt;quay.io&lt;/a&gt; by default. New release images will be available on &lt;a href=&#34;https://hub.docker.com/r/dellemc/&#34;&gt;Docker Hub&lt;/a&gt; until CSM 1.14 (May 2025), and existing releases will remain on Docker Hub.&lt;/p&gt;&#xA;&#xA;&lt;/div&gt;&#xA;&#xA;&lt;p&gt;The CSM Observability module for supported Dell CSI Drivers can be installed via the Dell CSM Operator. Dell CSM Operator will deploy CSM Observability, including topology service, Otel collector, and metrics services.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Replication</title>
       <link>https://dell.github.io/csm-docs/docs/deployment/csmoperator/modules/replication/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://dell.github.io/csm-docs/docs/deployment/csmoperator/modules/replication/</guid>
-      <description>The CSM Replication module for supported Dell CSI Drivers can be installed via the Dell CSM Operator. Dell CSM Operator will deploy the CSM Replication sidecar and the CSM Replication Controller Manager.
-Prerequisites To configure Replication prior to installation via CSM Operator, you need:
-a source cluster which is the main cluster a target cluster which will serve as the disaster recovery cluster NOTE: If using a single Kubernetes cluster in a stretched configuration, there will be only one cluster.</description>
+      <description>&lt;div class=&#34;pageinfo pageinfo-primary&#34;&gt;&#xA;&lt;p&gt;Starting with CSM 1.12, all deployments will use images from &lt;a href=&#34;https://quay.io/organization/dell&#34;&gt;quay.io&lt;/a&gt; by default. New release images will be available on &lt;a href=&#34;https://hub.docker.com/r/dellemc/&#34;&gt;Docker Hub&lt;/a&gt; until CSM 1.14 (May 2025), and existing releases will remain on Docker Hub.&lt;/p&gt;&#xA;&#xA;&lt;/div&gt;&#xA;&#xA;&lt;p&gt;The CSM Replication module for supported Dell CSI Drivers can be installed via the Dell CSM Operator. Dell CSM Operator will deploy the CSM Replication sidecar and the CSM Replication Controller Manager.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Resiliency</title>
       <link>https://dell.github.io/csm-docs/docs/deployment/csmoperator/modules/resiliency/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://dell.github.io/csm-docs/docs/deployment/csmoperator/modules/resiliency/</guid>
-      <description>The CSM Resiliency module for supported Dell CSI Drivers can be installed via the Dell CSM Operator. Dell CSM Operator will deploy CSM Resiliency sidecar.
-Prerequisite When utilizing CSM for Resiliency module, it is crucial to note that it will solely act upon pods that have been assigned a designated label. This label must have both a key and a value that match what has been set in the resiliency module configuration.</description>
+      <description>&lt;div class=&#34;pageinfo pageinfo-primary&#34;&gt;&#xA;&lt;p&gt;Starting with CSM 1.12, all deployments will use images from &lt;a href=&#34;https://quay.io/organization/dell&#34;&gt;quay.io&lt;/a&gt; by default. New release images will be available on &lt;a href=&#34;https://hub.docker.com/r/dellemc/&#34;&gt;Docker Hub&lt;/a&gt; until CSM 1.14 (May 2025), and existing releases will remain on Docker Hub.&lt;/p&gt;&#xA;&#xA;&lt;/div&gt;&#xA;&#xA;&lt;p&gt;The CSM Resiliency module for supported Dell CSI Drivers can be installed via the Dell CSM Operator. Dell CSM Operator will deploy CSM Resiliency sidecar.&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

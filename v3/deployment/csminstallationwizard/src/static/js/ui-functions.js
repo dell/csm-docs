@@ -223,8 +223,10 @@ function onRenameSDCChange(driverName, CONSTANTS_PARAM) {
 	}
 }
 
+
 const onCSMVersionChange = () => {
-	document.getElementById("csm-version").value !== ""? loadTemplate(document.getElementById("array").value, document.getElementById("installation-type").value, document.getElementById("csm-version").value) : null;
+	csmVersion = document.getElementById("csm-version").value;
+	csmVersion !== ""? loadTemplate(document.getElementById("array").value, document.getElementById("installation-type").value, document.getElementById("csm-version").value) : null;
 	displayModules(installationType, driver, CONSTANTS);
 	onObservabilityChange();
 	onObservabilityOperatorChange();
@@ -369,7 +371,6 @@ function displayModules(installationType, driverName, CONSTANTS_PARAM) {
 				$(".vgsnapshot").hide();
 				$(".resizer").hide();
 				$(".snapshot-feature").hide();
-				$(".vol-name-prefix").hide();
 				$(".fsGroupPolicy").show();
 				document.getElementById("label-value").value = CONSTANTS_PARAM.POWERSTORE_LABEL_VALUE;
 			}
@@ -392,7 +393,6 @@ function displayModules(installationType, driverName, CONSTANTS_PARAM) {
 				$(".cert-manager").hide();
 				$(".resizer").hide();
 				$(".snapshot-feature").hide();
-				$(".vol-name-prefix").hide();
 				document.getElementById("label-value").value = CONSTANTS_PARAM.POWERSCALE_LABEL_VALUE;
 			}
 			break;
@@ -423,7 +423,6 @@ function displayModules(installationType, driverName, CONSTANTS_PARAM) {
 				$(".storageArrays").hide();
 				$(".managedArrays").show();
 				$(".snapshot-feature").hide();
-				$(".vol-name-prefix").hide();
 				$(".transport-protocol").show();
 				$(".resizer").hide();
 				document.getElementById("label-value").value = CONSTANTS_PARAM.POWERMAX_LABEL_VALUE;
@@ -470,8 +469,11 @@ function displayCommands(releaseNameValue, commandTitleValue, commandNoteValue, 
 		case "1.8.0":
 			helmChartVersion = CONSTANTS.CSM_HELM_V180;
 			break;
+		case "1.9.3":
+			helmChartVersion = CONSTANTS.CSM_HELM_V193;
+			break;
 		default:
-			helmChartVersion = CONSTANTS.CSM_HELM_V180;
+			helmChartVersion = CONSTANTS.CSM_HELM_V193;
 			break;
 	}
 	$("#command-text-area").show();
@@ -524,7 +526,6 @@ function onPageLoad() {
 	hideFields();
 	loadDefaultValues();
 	$("#command-text-area").hide();
-
 	onArrayChange();
 	onCopyButtonClick();
 	downloadFileHandler();

@@ -10,21 +10,23 @@
 <link rel="icon" type="image/png" href="/csm-docs/favicons/favicon-16x16.png" sizes="16x16">
 <link rel="icon" type="image/png" href="/csm-docs/favicons/favicon-32x32.png" sizes="32x32">
 <title>PowerMax | </title>
-<meta name="description" content="Enabling CSM Authorization for PowerMax CSI Driver
-">
-<meta property="og:title" content="PowerMax" />
-<meta property="og:description" content="Enabling CSM Authorization for PowerMax CSI Driver
-" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://dell.github.io/csm-docs/v3/authorization/configuration/powermax/" /><meta property="og:site_name" content="Dell Technologies" />
+<meta name="description" content="Enabling CSM Authorization for PowerMax CSI Driver">
+<meta property="og:url" content="https://dell.github.io/csm-docs/v3/authorization/configuration/powermax/">
+  <meta property="og:site_name" content="Dell Technologies">
+  <meta property="og:title" content="PowerMax">
+  <meta property="og:description" content="Enabling CSM Authorization for PowerMax CSI Driver">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="website">
 
-<meta itemprop="name" content="PowerMax">
-<meta itemprop="description" content="Enabling CSM Authorization for PowerMax CSI Driver
-"><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="PowerMax"/>
-<meta name="twitter:description" content="Enabling CSM Authorization for PowerMax CSI Driver
-"/>
-<link rel="preload" href="/csm-docs/scss/main.min.42d8340a915bc864ad5d15da721297c0e3c58c179b9ff8ae56d219635987f3d2.css" as="style"><link href="/csm-docs/scss/main.min.42d8340a915bc864ad5d15da721297c0e3c58c179b9ff8ae56d219635987f3d2.css" rel="stylesheet">
+  <meta itemprop="name" content="PowerMax">
+  <meta itemprop="description" content="Enabling CSM Authorization for PowerMax CSI Driver">
+  <meta itemprop="dateModified" content="2024-08-14T15:59:46+05:30">
+  <meta itemprop="wordCount" content="733">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="PowerMax">
+  <meta name="twitter:description" content="Enabling CSM Authorization for PowerMax CSI Driver">
+<link rel="preload" href="/csm-docs/scss/main.min.c1b9d9da997c468756a5165a298685a703e1f9c4d6fb91aecfa7c7d02edab9a7.css" as="style" integrity="sha256-wbnZ2pl8RodWpRZaKYaFpwPh&#43;cTW&#43;5Guz6fH0C7auac=" crossorigin="anonymous">
+<link href="/csm-docs/scss/main.min.c1b9d9da997c468756a5165a298685a703e1f9c4d6fb91aecfa7c7d02edab9a7.css" rel="stylesheet" integrity="sha256-wbnZ2pl8RodWpRZaKYaFpwPh&#43;cTW&#43;5Guz6fH0C7auac=" crossorigin="anonymous">
 <script
   src="https://code.jquery.com/jquery-3.7.1.min.js"
   integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
@@ -53,12 +55,63 @@
         <div class="dropdown">
   <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Releases</a>
   <ul class="dropdown-menu">
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.11.1)</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.10.2</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.9.4</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">v1.8.0</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.12.0)</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.11.1</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.10.2</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">v1.9.4</a></li>
     </ul>
 </div></li>
+      <li class="td-light-dark-menu nav-item dropdown">
+        <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
+  <symbol id="check2" viewBox="0 0 16 16">
+    <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+  </symbol>
+  <symbol id="circle-half" viewBox="0 0 16 16">
+    <path d="M8 15A7 7 0 1 0 8 1v14zm0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16z"/>
+  </symbol>
+  <symbol id="moon-stars-fill" viewBox="0 0 16 16">
+    <path d="M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278z"/>
+    <path d="M10.794 3.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387a1.734 1.734 0 0 0-1.097 1.097l-.387 1.162a.217.217 0 0 1-.412 0l-.387-1.162A1.734 1.734 0 0 0 9.31 6.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387a1.734 1.734 0 0 0 1.097-1.097l.387-1.162zM13.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.156 1.156 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.156 1.156 0 0 0-.732-.732l-.774-.258a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732L13.863.1z"/>
+  </symbol>
+  <symbol id="sun-fill" viewBox="0 0 16 16">
+    <path d="M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"/>
+  </symbol>
+</svg>
+
+<button class="btn btn-link nav-link dropdown-toggle d-flex align-items-center"
+        id="bd-theme"
+        type="button"
+        aria-expanded="false"
+        data-bs-toggle="dropdown"
+        data-bs-display="static"
+        aria-label="Toggle theme (auto)">
+  <svg class="bi my-1 theme-icon-active"><use href="#circle-half"></use></svg>
+</button>
+<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="bd-theme-text">
+  <li>
+    <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="light" aria-pressed="false">
+      <svg class="bi me-2 opacity-50"><use href="#sun-fill"></use></svg>
+      Light
+      <svg class="bi ms-auto d-none"><use href="#check2"></use></svg>
+    </button>
+  </li>
+  <li>
+    <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark" aria-pressed="false">
+      <svg class="bi me-2 opacity-50"><use href="#moon-stars-fill"></use></svg>
+      Dark
+      <svg class="bi ms-auto d-none"><use href="#check2"></use></svg>
+    </button>
+  </li>
+  <li>
+    <button type="button" class="dropdown-item d-flex align-items-center active" data-bs-theme-value="auto" aria-pressed="true">
+      <svg class="bi me-2 opacity-50"><use href="#circle-half"></use></svg>
+      Auto
+      <svg class="bi ms-auto d-none"><use href="#check2"></use></svg>
+    </button>
+  </li>
+</ul>
+
+      </li>
       </ul>
   </div>
   <div class="d-none d-lg-block">
@@ -71,7 +124,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.57c6703100f29ccd282d2f2d5e140ea6.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.539e9ca4910a29a2f7a0f8a69a3c9688.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -95,7 +148,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.57c6703100f29ccd282d2f2d5e140ea6.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.539e9ca4910a29a2f7a0f8a69a3c9688.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -116,6 +169,8 @@
   <ul class="ul-3 foldable">
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3deploymentcsminstallationwizardrelease-li">
   <a href="/csm-docs/v3/deployment/csminstallationwizard/release/" title="Release Notes" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3deploymentcsminstallationwizardrelease"><span class="">Release notes</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3deploymentcsminstallationwizardsrc-li">
+  <a href="/csm-docs/v3/deployment/csminstallationwizard/src/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3deploymentcsminstallationwizardsrc"><span class=""></span></a>
 </li>
   </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv3deploymentcsmoperator-li">
@@ -162,7 +217,9 @@
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-csm-docsv3cosidriver-li">
   <a href="/csm-docs/v3/cosidriver/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3cosidriver"><span class="">COSI Driver</span></a>
   <ul class="ul-2 foldable">
-    <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv3cosidriverfeatures-li">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3cosidriveruninstallation-li">
+  <a href="/csm-docs/v3/cosidriver/uninstallation/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3cosidriveruninstallation"><span class="">Uninstallation</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv3cosidriverfeatures-li">
   <a href="/csm-docs/v3/cosidriver/features/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3cosidriverfeatures"><span class="">Features</span></a>
   <ul class="ul-3 foldable">
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3cosidriverfeaturesobjectscale-li">
@@ -178,6 +235,12 @@
   <a href="/csm-docs/v3/cosidriver/installation/helm/" title="COSI Driver installation using Helm" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3cosidriverinstallationhelm"><span class="">Using Helm</span></a>
 </li>
   </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3cosidrivertroubleshooting-li">
+  <a href="/csm-docs/v3/cosidriver/troubleshooting/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3cosidrivertroubleshooting"><span class="">Troubleshooting</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3cosidriverupgrade-li">
+  <a href="/csm-docs/v3/cosidriver/upgrade/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3cosidriverupgrade"><span class="">Upgrade</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3cosidriverrelease-li">
+  <a href="/csm-docs/v3/cosidriver/release/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3cosidriverrelease"><span class="">Release Notes</span></a>
 </li>
   </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-csm-docsv3csidriver-li">
@@ -206,16 +269,6 @@
   <ul class="ul-4 foldable">
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3csidriverinstallationoperatoroperator_migration-li">
   <a href="/csm-docs/v3/csidriver/installation/operator/operator_migration/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3csidriverinstallationoperatoroperator_migration"><span class="">CSI to CSM Operator Migration</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3csidriverinstallationoperatorpowerflex-li">
-  <a href="/csm-docs/v3/csidriver/installation/operator/powerflex/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3csidriverinstallationoperatorpowerflex"><span class="">PowerFlex</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3csidriverinstallationoperatorpowermax-li">
-  <a href="/csm-docs/v3/csidriver/installation/operator/powermax/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3csidriverinstallationoperatorpowermax"><span class="">PowerMax</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3csidriverinstallationoperatorisilon-li">
-  <a href="/csm-docs/v3/csidriver/installation/operator/isilon/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3csidriverinstallationoperatorisilon"><span class="">PowerScale</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3csidriverinstallationoperatorpowerstore-li">
-  <a href="/csm-docs/v3/csidriver/installation/operator/powerstore/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3csidriverinstallationoperatorpowerstore"><span class="">PowerStore</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3csidriverinstallationoperatorunity-li">
-  <a href="/csm-docs/v3/csidriver/installation/operator/unity/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3csidriverinstallationoperatorunity"><span class="">Unity XT</span></a>
 </li>
   </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3csidriverinstallationoffline-li">
@@ -244,9 +297,7 @@
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv3csidriverupgradation-li">
   <a href="/csm-docs/v3/csidriver/upgradation/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3csidriverupgradation"><span class="">Upgrade</span></a>
   <ul class="ul-3 foldable">
-    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3csidriverupgradationdriversoperator-li">
-  <a href="/csm-docs/v3/csidriver/upgradation/drivers/operator/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3csidriverupgradationdriversoperator"><span class="">Dell CSI Operator</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3csidriverupgradationdriverspowerflex-li">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3csidriverupgradationdriverspowerflex-li">
   <a href="/csm-docs/v3/csidriver/upgradation/drivers/powerflex/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3csidriverupgradationdriverspowerflex"><span class="">PowerFlex</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3csidriverupgradationdriverspowermax-li">
   <a href="/csm-docs/v3/csidriver/upgradation/drivers/powermax/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3csidriverupgradationdriverspowermax"><span class="">PowerMax</span></a>
@@ -278,9 +329,7 @@
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv3csidrivertroubleshooting-li">
   <a href="/csm-docs/v3/csidriver/troubleshooting/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3csidrivertroubleshooting"><span class="">Troubleshooting</span></a>
   <ul class="ul-3 foldable">
-    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3csidrivertroubleshootingoperator-li">
-  <a href="/csm-docs/v3/csidriver/troubleshooting/operator/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3csidrivertroubleshootingoperator"><span class="">Dell CSI Operator</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3csidrivertroubleshootingpowerflex-li">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3csidrivertroubleshootingpowerflex-li">
   <a href="/csm-docs/v3/csidriver/troubleshooting/powerflex/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3csidrivertroubleshootingpowerflex"><span class="">PowerFlex</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3csidrivertroubleshootingpowermax-li">
   <a href="/csm-docs/v3/csidriver/troubleshooting/powermax/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3csidrivertroubleshootingpowermax"><span class="">PowerMax</span></a>
@@ -295,9 +344,7 @@
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv3csidriverrelease-li">
   <a href="/csm-docs/v3/csidriver/release/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3csidriverrelease"><span class="">Release Notes</span></a>
   <ul class="ul-3 foldable">
-    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3csidriverreleaseoperator-li">
-  <a href="/csm-docs/v3/csidriver/release/operator/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3csidriverreleaseoperator"><span class="">Operator</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3csidriverreleasepowerflex-li">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3csidriverreleasepowerflex-li">
   <a href="/csm-docs/v3/csidriver/release/powerflex/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3csidriverreleasepowerflex"><span class="">PowerFlex</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3csidriverreleasepowermax-li">
   <a href="/csm-docs/v3/csidriver/release/powermax/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3csidriverreleasepowermax"><span class="">PowerMax</span></a>
@@ -307,21 +354,6 @@
   <a href="/csm-docs/v3/csidriver/release/powerstore/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3csidriverreleasepowerstore"><span class="">PowerStore</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3csidriverreleaseunity-li">
   <a href="/csm-docs/v3/csidriver/release/unity/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3csidriverreleaseunity"><span class="">Unity XT</span></a>
-</li>
-  </ul>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv3csidriverpartners-li">
-  <a href="/csm-docs/v3/csidriver/partners/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3csidriverpartners"><span class="">Our Ecosystem Partners</span></a>
-  <ul class="ul-3 foldable">
-    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3csidriverpartnersoperator-li">
-  <a href="/csm-docs/v3/csidriver/partners/operator/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3csidriverpartnersoperator"><span class="">OperatorHub.io</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3csidriverpartnersredhat-li">
-  <a href="/csm-docs/v3/csidriver/partners/redhat/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3csidriverpartnersredhat"><span class="">Red Hat OpenShift</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3csidriverpartnersdocker-li">
-  <a href="/csm-docs/v3/csidriver/partners/docker/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3csidriverpartnersdocker"><span class="">MKE</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3csidriverpartnersrancher-li">
-  <a href="/csm-docs/v3/csidriver/partners/rancher/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3csidriverpartnersrancher"><span class="">RKE</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3csidriverpartnerstanzu-li">
-  <a href="/csm-docs/v3/csidriver/partners/tanzu/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3csidriverpartnerstanzu"><span class="">VMware Tanzu</span></a>
 </li>
   </ul>
 </li>
@@ -403,6 +435,8 @@
   <a href="/csm-docs/v3/observability/deployment/online/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3observabilitydeploymentonline"><span class="">Installer</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3observabilitydeploymentoffline-li">
   <a href="/csm-docs/v3/observability/deployment/offline/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3observabilitydeploymentoffline"><span class="">Offline Installer</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3observabilitydeploymentoperator-li">
+  <a href="/csm-docs/v3/observability/deployment/operator/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3observabilitydeploymentoperator"><span class="">Operator</span></a>
 </li>
   </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3observabilityuninstall-li">
@@ -439,6 +473,8 @@
   <a href="/csm-docs/v3/replication/deployment/powerscale/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3replicationdeploymentpowerscale"><span class="">PowerScale</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3replicationdeploymentpowerstore-li">
   <a href="/csm-docs/v3/replication/deployment/powerstore/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3replicationdeploymentpowerstore"><span class="">PowerStore</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3replicationdeploymentinstall-operator-li">
+  <a href="/csm-docs/v3/replication/deployment/install-operator/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3replicationdeploymentinstall-operator"><span class="">Installation using Operator</span></a>
 </li>
   </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv3replicationarchitecture-li">
@@ -484,7 +520,16 @@
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-csm-docsv3resiliency-li">
   <a href="/csm-docs/v3/resiliency/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3resiliency"><span class="">Resiliency</span></a>
   <ul class="ul-2 foldable">
-    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3resiliencydesign-li">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv3resiliencydeployment-li">
+  <a href="/csm-docs/v3/resiliency/deployment/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3resiliencydeployment"><span class="">Deployment</span></a>
+  <ul class="ul-3 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3resiliencydeploymenthelm-li">
+  <a href="/csm-docs/v3/resiliency/deployment/helm/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3resiliencydeploymenthelm"><span class="">Helm</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3resiliencydeploymentoperator-li">
+  <a href="/csm-docs/v3/resiliency/deployment/operator/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3resiliencydeploymentoperator"><span class="">Operator</span></a>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3resiliencydesign-li">
   <a href="/csm-docs/v3/resiliency/design/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3resiliencydesign"><span class="">Design</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3resiliencyrelease-li">
   <a href="/csm-docs/v3/resiliency/release/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3resiliencyrelease"><span class="">Release notes</span></a>
@@ -492,8 +537,6 @@
   <a href="/csm-docs/v3/resiliency/uninstallation/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3resiliencyuninstallation"><span class="">Uninstallation</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3resiliencyusecases-li">
   <a href="/csm-docs/v3/resiliency/usecases/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3resiliencyusecases"><span class="">Use Cases</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3resiliencydeployment-li">
-  <a href="/csm-docs/v3/resiliency/deployment/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3resiliencydeployment"><span class="">Deployment</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3resiliencyupgrade-li">
   <a href="/csm-docs/v3/resiliency/upgrade/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3resiliencyupgrade"><span class="">Upgrade</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3resiliencytroubleshooting-li">
@@ -632,7 +675,7 @@ Configuring PowerMax CSI Driver with CSM for Authorization <a class="header-link
         </a></h2><p>Given a setup where Kubernetes, a storage system, and the CSM for Authorization Proxy Server are deployed, follow these steps to configure the CSI Drivers to work with the Authorization sidecar:</p>
 <ol>
 <li>
-<p>Apply the secret containing the tenant token data into the driver namespace. It&rsquo;s assumed that the Kubernetes administrator has the token secret manifest, generated by your storage administrator via <a href="../proxy-server/#generate-a-token">Generate a Token</a>, saved in <code>/tmp/token.yaml</code>.</p>
+<p>Apply the secret containing the tenant token data into the driver namespace. It&rsquo;s assumed that the Kubernetes administrator has the token secret manifest, generated by your storage administrator via <a href="/csm-docs/v3/authorization/configuration/proxy-server/#generate-a-token">Generate a Token</a>, saved in <code>/tmp/token.yaml</code>.</p>
 <p>#It is assumed that array type powermax has the namespace &ldquo;powermax&rdquo;.</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span><span style="color:#000;font-style:italic">   kubectl apply -f /tmp/token.yaml -n powermax
 </span></span></span></code></pre></div></li>
@@ -641,58 +684,58 @@ Configuring PowerMax CSI Driver with CSM for Authorization <a class="header-link
 </li>
 </ol>
 <table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-<th>Required</th>
-<th>Default</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>username</td>
-<td>Username for connecting to the backend storage array. This parameter is ignored.</td>
-<td>No</td>
-<td>-</td>
-</tr>
-<tr>
-<td>password</td>
-<td>Password for connecting to to the backend storage array. This parameter is ignored.</td>
-<td>No</td>
-<td>-</td>
-</tr>
-<tr>
-<td>intendedEndpoint</td>
-<td>HTTPS REST API endpoint of the backend storage array.</td>
-<td>Yes</td>
-<td>-</td>
-</tr>
-<tr>
-<td>endpoint</td>
-<td>HTTPS localhost endpoint that the authorization sidecar will listen on.</td>
-<td>Yes</td>
-<td>https://localhost:9400</td>
-</tr>
-<tr>
-<td>systemID</td>
-<td>System ID of the backend storage array.</td>
-<td>Yes</td>
-<td>&quot; &quot;</td>
-</tr>
-<tr>
-<td>skipCertificateValidation</td>
-<td>A boolean that enables/disables certificate validation of the backend storage array. This parameter is not used.</td>
-<td>No</td>
-<td>true</td>
-</tr>
-<tr>
-<td>isDefault</td>
-<td>A boolean that indicates if the array is the default array. This parameter is not used.</td>
-<td>No</td>
-<td>default value from values.yaml</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th style="text-align: left">Parameter</th>
+          <th style="text-align: left">Description</th>
+          <th style="text-align: left">Required</th>
+          <th style="text-align: left">Default</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: left">username</td>
+          <td style="text-align: left">Username for connecting to the backend storage array. This parameter is ignored.</td>
+          <td style="text-align: left">No</td>
+          <td style="text-align: left">-</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">password</td>
+          <td style="text-align: left">Password for connecting to to the backend storage array. This parameter is ignored.</td>
+          <td style="text-align: left">No</td>
+          <td style="text-align: left">-</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">intendedEndpoint</td>
+          <td style="text-align: left">HTTPS REST API endpoint of the backend storage array.</td>
+          <td style="text-align: left">Yes</td>
+          <td style="text-align: left">-</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">endpoint</td>
+          <td style="text-align: left">HTTPS localhost endpoint that the authorization sidecar will listen on.</td>
+          <td style="text-align: left">Yes</td>
+          <td style="text-align: left">https://localhost:9400</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">systemID</td>
+          <td style="text-align: left">System ID of the backend storage array.</td>
+          <td style="text-align: left">Yes</td>
+          <td style="text-align: left">&quot; &quot;</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">skipCertificateValidation</td>
+          <td style="text-align: left">A boolean that enables/disables certificate validation of the backend storage array. This parameter is not used.</td>
+          <td style="text-align: left">No</td>
+          <td style="text-align: left">true</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">isDefault</td>
+          <td style="text-align: left">A boolean that indicates if the array is the default array. This parameter is not used.</td>
+          <td style="text-align: left">No</td>
+          <td style="text-align: left">default value from values.yaml</td>
+      </tr>
+  </tbody>
 </table>
 <p>Create the karavi-authorization-config secret using this command:</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>
@@ -710,8 +753,8 @@ Configuring PowerMax CSI Driver with CSM for Authorization <a class="header-link
 <li>
 <p>Enable CSM Authorization in the driver installation applicable to your installation method.</p>
 <p><strong>Helm</strong></p>
-<p>In <a href="../../../csidriver/installation/helm/powermax/#install-the-driver">Install the Driver</a> where you edit <code>samples/secret/secret.yaml</code> with the credentials of the PowerMax, you can leave these with the default values as they will be ignored.</p>
-<p>Refer to the <a href="../../../csidriver/installation/helm/powermax/#install-the-driver">Install the Driver</a> section to edit the parameters in <code>my-powermax-settings.yaml</code> file to configure the driver to communicate with the CSM Authorization sidecar.</p>
+<p>In <a href="/csm-docs/v3/csidriver/installation/helm/powermax/#install-the-driver">Install the Driver</a> where you edit <code>samples/secret/secret.yaml</code> with the credentials of the PowerMax, you can leave these with the default values as they will be ignored.</p>
+<p>Refer to the <a href="/csm-docs/v3/csidriver/installation/helm/powermax/#install-the-driver">Install the Driver</a> section to edit the parameters in <code>my-powermax-settings.yaml</code> file to configure the driver to communicate with the CSM Authorization sidecar.</p>
 <ul>
 <li>
 <p>Update <code>global.storageArrays.endpoint</code> to match the localhost endpoint in <code>samples/secret/karavi-authorization-config.json</code>.</p>
@@ -723,7 +766,7 @@ Configuring PowerMax CSI Driver with CSM for Authorization <a class="header-link
 <p>Update <code>authorization.enabled</code> to <code>true</code>.</p>
 </li>
 <li>
-<p>Update <code>authorization.sidecarProxyImage</code> to the image of the CSM Authorization sidecar. In most cases, you can leave the default value.</p>
+<p>Update <code>images.authorization</code> to the image of the CSM Authorization sidecar. In most cases, you can leave the default value.</p>
 </li>
 <li>
 <p>Update <code>authorization.proxyHost</code> to the hostname of the CSM Authorization Proxy Server.</p>
@@ -744,8 +787,8 @@ Configuring PowerMax CSI Driver with CSM for Authorization <a class="header-link
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">enabled</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#8f5902;font-style:italic"># sidecarProxyImage: the container image used for the csm-authorization-sidecar.</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#8f5902;font-style:italic"># Default value: dellemc/csm-authorization-sidecar:v1.8.0</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">sidecarProxyImage</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">dellemc/csm-authorization-sidecar:v1.8.0</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#8f5902;font-style:italic"># Default value: dellemc/csm-authorization-sidecar:v1.9.0</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">sidecarProxyImage</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">dellemc/csm-authorization-sidecar:v1.9.0</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#8f5902;font-style:italic"># proxyHost: hostname of the csm-authorization server</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#8f5902;font-style:italic"># Default value: None</span><span style="color:#f8f8f8;text-decoration:underline">
@@ -757,12 +800,47 @@ Configuring PowerMax CSI Driver with CSM for Authorization <a class="header-link
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#8f5902;font-style:italic">#   &#34;false&#34; - TLS certificate will be verified </span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#8f5902;font-style:italic"># Default value: &#34;true&#34; </span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">skipCertificateValidation</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span></code></pre></div><p><strong>Operator</strong></p>
+<p>Refer to the <a href="/csm-docs/v3/deployment/csmoperator/drivers/powermax/#install-driver">Install Driver</a> section to edit the parameters in the Custom Resource to enable CSM Authorization.</p>
+<p>Under <code>modules</code>, enable the module named <code>authorization</code>:</p>
+<ul>
+<li>
+<p>Update the <code>enabled</code> field to <code>true.</code></p>
+</li>
+<li>
+<p>Update the <code>image</code> to the image of the CSM Authorization sidecar. In most cases, you can leave the default value.</p>
+</li>
+<li>
+<p>Update the <code>PROXY_HOST</code> environment value to the hostname of the CSM Authorization Proxy Server.</p>
+</li>
+<li>
+<p>Update the <code>SKIP_CERTIFICATE_VALIDATION</code> environment value to <code>true</code> or <code>false</code> depending on if you want to disable or enable certificate validation of the CSM Authorization Proxy Server.</p>
+</li>
+</ul>
+<p>Example:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">modules</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#8f5902;font-style:italic"># Authorization: enable csm-authorization for RBAC</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span>- <span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">authorization</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#8f5902;font-style:italic"># enable: Enable/Disable csm-authorization</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">enabled</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">configVersion</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">v1.9.0</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">components</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span>- <span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">karavi-authorization-proxy</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">image</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">dellemc/csm-authorization-sidecar:v1.9.0</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">envs</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#8f5902;font-style:italic"># proxyHost: hostname of the csm-authorization server</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">        </span>- <span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;PROXY_HOST&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">          </span><span style="color:#204a87;font-weight:bold">value</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;csm-authorization.com&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#8f5902;font-style:italic"># skipCertificateValidation: Enable/Disable certificate validation of the csm-authorization server       </span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">        </span>- <span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;SKIP_CERTIFICATE_VALIDATION&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">          </span><span style="color:#204a87;font-weight:bold">value</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;true&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span></code></pre></div></li>
 <li>
 <p>Install the Dell CSI PowerMax driver following the appropriate documenation for your installation method.</p>
 </li>
 <li>
-<p>(Optional) Install <a href="../../../references/cli">dellctl</a> to perform Kubernetes administrator commands for additional capabilities (e.g., list volumes). Please refer to the <a href="../../../references/cli">dellctl documentation page</a> for the installation steps and command list.</p>
+<p>(Optional) Install <a href="/csm-docs/v3/references/cli/">dellctl</a> to perform Kubernetes administrator commands for additional capabilities (e.g., list volumes). Please refer to the <a href="/csm-docs/v3/references/cli/">dellctl documentation page</a> for the installation steps and command list.</p>
 </li>
 </ol>
 
@@ -811,7 +889,7 @@ Configuring PowerMax CSI Driver with CSM for Authorization <a class="header-link
 </footer>
 
     </div>
-    <script src="/csm-docs/js/main.min.c418a2a9515ff54cddb20b007eb9411293e20d962d55eeef727e1f1ca8c7ddc9.js" integrity="sha256-xBiiqVFf9UzdsgsAfrlBEpPiDZYtVe7vcn4fHKjH3ck=" crossorigin="anonymous"></script>
+    <script src="/csm-docs/js/main.min.f72d00502781aaf278a14088eb2356b1ba2a05ad698a0c43fe86314d74ceab56.js" integrity="sha256-9y0AUCeBqvJ4oUCI6yNWsboqBa1pigxD/oYxTXTOq1Y=" crossorigin="anonymous"></script>
 <script src='/csm-docs/js/prism.js'></script>
 <script src='/csm-docs/js/tabpane-persist.js'></script>
 

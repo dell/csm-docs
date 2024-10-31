@@ -4,74 +4,50 @@
     <title>Upgrade on </title>
     <link>https://dell.github.io/csm-docs/v3/csidriver/upgradation/</link>
     <description>Recent content in Upgrade on </description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>en</language>
     <atom:link href="https://dell.github.io/csm-docs/v3/csidriver/upgradation/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Dell CSI Operator</title>
-      <link>https://dell.github.io/csm-docs/v3/csidriver/upgradation/drivers/operator/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://dell.github.io/csm-docs/v3/csidriver/upgradation/drivers/operator/</guid>
-      <description>The Dell CSI Operator is no longer actively maintained or supported. It will be deprecated in CSM 1.9. It is highly recommended that you use CSM Operator going forward.
-To upgrade Dell CSI Operator, perform the following steps. Dell CSI Operator can be upgraded based on the supported platforms in one of the 2 ways:
-Using script (for non-OLM based installation) Using Operator Lifecycle Manager (OLM) Using Installation Script Clone and checkout the required dell-csi-operator version using git clone -b v1.</description>
-    </item>
     <item>
       <title>PowerFlex</title>
       <link>https://dell.github.io/csm-docs/v3/csidriver/upgradation/drivers/powerflex/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://dell.github.io/csm-docs/v3/csidriver/upgradation/drivers/powerflex/</guid>
-      <description>You can upgrade the CSI Driver for Dell PowerFlex using Helm or Dell CSI Operator.
-Update Driver from v2.7.1 to v2.8 using Helm Steps
-Run git clone -b v2.8.0 https://github.com/dell/csi-powerflex.git to clone the git repository and get the v2.8.0 driver. You need to create secret.yaml with the configuration of your system. Check this section in installation documentation: Install the Driver Update myvalues file as needed. Run the csi-install script with the option --upgrade by running: cd .</description>
+      <description>&lt;p&gt;You can upgrade the CSI Driver for Dell PowerFlex using Helm or Dell CSM Operator.&lt;/p&gt;&#xA;&lt;h2 id=&#34;update-driver-from-v280-to-v292-using-helm&#34;&gt;&#xA;Update Driver from v2.8.0 to v2.9.2 using Helm &lt;a class=&#34;header-link&#34;  href=&#34;#update-driver-from-v280-to-v292-using-helm&#34; style=&#34; display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; &#34; onmouseover=&#34;this.style.opacity=1;&#34; onmouseout=&#34;this.style.opacity=0;&#34;&gt;&#xA;            &lt;svg fill=&#34;currentColor&#34; height=&#34;24&#34; viewBox=&#34;0 0 24 24&#34; width=&#34;24&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34;&gt;&#xA;                &lt;path d=&#34;M0 0h24v24H0z&#34; fill=&#34;none&#34;/&gt;&#xA;                &lt;path d=&#34;M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z&#34;/&gt;&#xA;            &lt;/svg&gt;&#xA;        &lt;/a&gt;&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;Steps&lt;/strong&gt;&lt;/p&gt;</description>
     </item>
     <item>
       <title>PowerMax</title>
       <link>https://dell.github.io/csm-docs/v3/csidriver/upgradation/drivers/powermax/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://dell.github.io/csm-docs/v3/csidriver/upgradation/drivers/powermax/</guid>
-      <description>You can upgrade CSI Driver for Dell PowerMax using Helm or Dell CSI Operator.
-Note: CSI Driver for PowerMax v2.4.0 requires 10.0 REST endpoint support of Unisphere.
-Updating the CSI Driver to use 10.0 Unisphere Upgrade the Unisphere to have 10.0 endpoint support.Please find the instructions here. Update the my-powermax-settings.yaml to have endpoint with 10.0 support. Update Driver from v2.7 to v2.8 using Helm Steps
-Run git clone -b v2.8.0 https://github.</description>
+      <description>&lt;p&gt;You can upgrade CSI Driver for Dell PowerMax using Helm or Dell CSM Operator.&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; CSI Driver for PowerMax v2.4.0 requires 10.0 REST endpoint support of Unisphere.&lt;/p&gt;&#xA;&lt;h3 id=&#34;updating-the-csi-driver-to-use-100-unisphere&#34;&gt;&#xA;Updating the CSI Driver to use 10.0 Unisphere &lt;a class=&#34;header-link&#34;  href=&#34;#updating-the-csi-driver-to-use-100-unisphere&#34; style=&#34; display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; &#34; onmouseover=&#34;this.style.opacity=1;&#34; onmouseout=&#34;this.style.opacity=0;&#34;&gt;&#xA;            &lt;svg fill=&#34;currentColor&#34; height=&#34;24&#34; viewBox=&#34;0 0 24 24&#34; width=&#34;24&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34;&gt;&#xA;                &lt;path d=&#34;M0 0h24v24H0z&#34; fill=&#34;none&#34;/&gt;&#xA;                &lt;path d=&#34;M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z&#34;/&gt;&#xA;            &lt;/svg&gt;&#xA;        &lt;/a&gt;&lt;/h3&gt;&lt;ol&gt;&#xA;&lt;li&gt;Upgrade the Unisphere to have 10.0 endpoint support.Please find the instructions &lt;a href=&#34;https://dl.dell.com/content/manual34878027-dell-unisphere-for-powermax-10-0-0-installation-guide.pdf?language=en-us&amp;ps=true&#34;&gt;here.&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;Update the &lt;code&gt;my-powermax-settings.yaml&lt;/code&gt; to have endpoint with 10.0 support.&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;h2 id=&#34;update-driver-from-v28-to-v291-using-helm&#34;&gt;&#xA;Update Driver from v2.8 to v2.9.1 using Helm &lt;a class=&#34;header-link&#34;  href=&#34;#update-driver-from-v28-to-v291-using-helm&#34; style=&#34; display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; &#34; onmouseover=&#34;this.style.opacity=1;&#34; onmouseout=&#34;this.style.opacity=0;&#34;&gt;&#xA;            &lt;svg fill=&#34;currentColor&#34; height=&#34;24&#34; viewBox=&#34;0 0 24 24&#34; width=&#34;24&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34;&gt;&#xA;                &lt;path d=&#34;M0 0h24v24H0z&#34; fill=&#34;none&#34;/&gt;&#xA;                &lt;path d=&#34;M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z&#34;/&gt;&#xA;            &lt;/svg&gt;&#xA;        &lt;/a&gt;&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;Steps&lt;/strong&gt;&lt;/p&gt;</description>
     </item>
     <item>
       <title>PowerScale</title>
       <link>https://dell.github.io/csm-docs/v3/csidriver/upgradation/drivers/isilon/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://dell.github.io/csm-docs/v3/csidriver/upgradation/drivers/isilon/</guid>
-      <description>You can upgrade the CSI Driver for Dell PowerScale using Helm or Dell CSI Operator.
-Upgrade Driver from version 2.7.0 to 2.8.0 using Helm Note: While upgrading the driver via helm, controllerCount variable in myvalues.yaml can be at most one less than the number of worker nodes.
-Steps Clone the repository using git clone -b v2.8.0 https://github.com/dell/csi-powerscale.git
-Change to directory dell-csi-helm-installer to install the Dell PowerScale cd dell-csi-helm-installer
-Download the default values.</description>
+      <description>&lt;p&gt;You can upgrade the CSI Driver for Dell PowerScale using Helm or Dell CSI Operator.&lt;/p&gt;&#xA;&lt;h2 id=&#34;upgrade-driver-from-version-270-to-280-using-helm&#34;&gt;&#xA;Upgrade Driver from version 2.7.0 to 2.8.0 using Helm &lt;a class=&#34;header-link&#34;  href=&#34;#upgrade-driver-from-version-270-to-280-using-helm&#34; style=&#34; display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; &#34; onmouseover=&#34;this.style.opacity=1;&#34; onmouseout=&#34;this.style.opacity=0;&#34;&gt;&#xA;            &lt;svg fill=&#34;currentColor&#34; height=&#34;24&#34; viewBox=&#34;0 0 24 24&#34; width=&#34;24&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34;&gt;&#xA;                &lt;path d=&#34;M0 0h24v24H0z&#34; fill=&#34;none&#34;/&gt;&#xA;                &lt;path d=&#34;M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z&#34;/&gt;&#xA;            &lt;/svg&gt;&#xA;        &lt;/a&gt;&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; While upgrading the driver via helm, controllerCount variable in myvalues.yaml can be at most one less than the number of worker nodes.&lt;/p&gt;</description>
     </item>
     <item>
       <title>PowerStore</title>
       <link>https://dell.github.io/csm-docs/v3/csidriver/upgradation/drivers/powerstore/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://dell.github.io/csm-docs/v3/csidriver/upgradation/drivers/powerstore/</guid>
-      <description>You can upgrade the CSI Driver for Dell PowerStore using Helm.
-Update Driver from v2.7 to v2.8 using Helm Note: While upgrading the driver via helm, controllerCount variable in myvalues.yaml can be at most one less than the number of worker nodes.
-Steps
-Run git clone -b v2.8.0 https://github.com/dell/csi-powerstore.git to clone the git repository and get the driver.
-Edit samples/secret/secret.yaml file and configure connection information for your PowerStore arrays changing the following parameters:</description>
+      <description>&lt;p&gt;You can upgrade the CSI Driver for Dell PowerStore using Helm.&lt;/p&gt;&#xA;&lt;h2 id=&#34;update-driver-from-v280-to-v291-using-helm&#34;&gt;&#xA;Update Driver from v2.8.0 to v2.9.1 using Helm &lt;a class=&#34;header-link&#34;  href=&#34;#update-driver-from-v280-to-v291-using-helm&#34; style=&#34; display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; &#34; onmouseover=&#34;this.style.opacity=1;&#34; onmouseout=&#34;this.style.opacity=0;&#34;&gt;&#xA;            &lt;svg fill=&#34;currentColor&#34; height=&#34;24&#34; viewBox=&#34;0 0 24 24&#34; width=&#34;24&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34;&gt;&#xA;                &lt;path d=&#34;M0 0h24v24H0z&#34; fill=&#34;none&#34;/&gt;&#xA;                &lt;path d=&#34;M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z&#34;/&gt;&#xA;            &lt;/svg&gt;&#xA;        &lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Note: While upgrading the driver via helm, controllerCount variable in myvalues.yaml can be at most one less than the number of worker nodes.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Unity XT</title>
       <link>https://dell.github.io/csm-docs/v3/csidriver/upgradation/drivers/unity/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://dell.github.io/csm-docs/v3/csidriver/upgradation/drivers/unity/</guid>
-      <description>You can upgrade the CSI Driver for Dell Unity XT using Helm or Dell CSI Operator.
-Note:
-User has to re-create existing custom-storage classes (if any) according to the latest format. User has to create Volumesnapshotclass after upgrade for taking Snapshots. Secret.yaml files can be updated according to Multiarray normalization parameters only after upgrading the driver. Using Helm Note: While upgrading the driver via helm, controllerCount variable in myvalues.yaml can be at most one less than the number of worker nodes.</description>
+      <description>&lt;p&gt;You can upgrade the CSI Driver for Dell Unity XT using Helm or Dell CSI Operator.&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;User has to re-create existing custom-storage classes (if any) according to the latest format.&lt;/li&gt;&#xA;&lt;li&gt;User has to create Volumesnapshotclass after upgrade for taking Snapshots.&lt;/li&gt;&#xA;&lt;li&gt;Secret.yaml files can be updated according to Multiarray normalization parameters only after upgrading the driver.&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;h3 id=&#34;using-helm&#34;&gt;&#xA;Using Helm &lt;a class=&#34;header-link&#34;  href=&#34;#using-helm&#34; style=&#34; display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; &#34; onmouseover=&#34;this.style.opacity=1;&#34; onmouseout=&#34;this.style.opacity=0;&#34;&gt;&#xA;            &lt;svg fill=&#34;currentColor&#34; height=&#34;24&#34; viewBox=&#34;0 0 24 24&#34; width=&#34;24&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34;&gt;&#xA;                &lt;path d=&#34;M0 0h24v24H0z&#34; fill=&#34;none&#34;/&gt;&#xA;                &lt;path d=&#34;M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z&#34;/&gt;&#xA;            &lt;/svg&gt;&#xA;        &lt;/a&gt;&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; While upgrading the driver via helm, controllerCount variable in myvalues.yaml can be at most one less than the number of worker nodes.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Offline Upgrade of Dell CSI Storage Providers</title>
       <link>https://dell.github.io/csm-docs/v3/csidriver/upgradation/drivers/offline/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://dell.github.io/csm-docs/v3/csidriver/upgradation/drivers/offline/</guid>
-      <description> To perform offline upgrade of the driver, please create an offline bundle as mentioned here. Once the bundle is created, please unpack the bundle by following the steps mentioned here. Please use the driver specific upgrade steps to upgrade. </description>
+      <description>&lt;ol&gt;&#xA;&lt;li&gt;To perform offline upgrade of the driver, please create an offline bundle as mentioned &lt;a href=&#34;./../../../installation/offline#building-an-offline-bundle&#34;&gt;here&lt;/a&gt;.&lt;/li&gt;&#xA;&lt;li&gt;Once the bundle is created, please unpack the bundle by following the steps mentioned &lt;a href=&#34;./../../../installation/offline#unpacking-the-offline-bundle-and-preparing-for-installation&#34;&gt;here&lt;/a&gt;.&lt;/li&gt;&#xA;&lt;li&gt;Please use the driver specific upgrade steps to upgrade.&lt;/li&gt;&#xA;&lt;/ol&gt;</description>
     </item>
   </channel>
 </rss>
