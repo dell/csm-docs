@@ -26,6 +26,10 @@ The following requirements must be met before installing the CSI Driver for Dell
 
 - A Kubernetes or OpenShift cluster (see [supported versions](../../../../csidriver/#features-and-capabilities)).
 - If enabling CSM for Authorization, please refer to the Authorization deployment steps first
+- If enabling CSM Replication, both source and target storage systems must be locally managed by Unisphere.
+  - _Example_: When using two Unisphere instances, the first Unisphere instance should be configured with the source storage system as locally
+  managed and target storage system as remotely managed. The second Unisphere configuration should mirror the first — locally managing the target storage system and
+  remotely managing the source storage system.
 - Refer to the sections below for protocol specific requirements.
 - For NVMe support the preferred multipath solution is NVMe native multipathing. The [Dell Host Connectivity Guide](https://elabnavigator.dell.com/vault/pdf/Linux.pdf) describes the details of each configuration option.
 - Linux multipathing requirements (described later).
