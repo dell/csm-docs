@@ -21,6 +21,10 @@ The following requirements must be met before installing CSI Driver for Dell Pow
 - Linux multipathing requirements
 - If using Snapshot feature, satisfy all Volume Snapshot requirements
 - If enabling CSM for Authorization, please refer to the [Authorization deployment steps](../../../../../deployment/helm/modules/installation/authorization/) first
+- If enabling CSM Replication, both source and target storage systems must be locally managed by Unisphere.
+  - _Example_: When using two Unisphere instances, the first Unisphere instance should be configured with the source storage system as locally
+  managed and target storage system as remotely managed. The second Unisphere configuration should mirror the first — locally managing the target storage system and
+  remotely managing the source storage system.
 - If using Powerpath , install the PowerPath for Linux requirements
 
 ### Prerequisite for CSI Reverse Proxy
