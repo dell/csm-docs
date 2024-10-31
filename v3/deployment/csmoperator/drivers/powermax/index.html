@@ -17,12 +17,12 @@
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="v3">
-    <meta property="article:modified_time" content="2024-10-25T11:45:57-04:00">
+    <meta property="article:modified_time" content="2024-10-31T14:47:14-05:00">
 
   <meta itemprop="name" content="PowerMax">
   <meta itemprop="description" content="Installing Dell CSI Driver for PowerMax via Dell CSM Operator">
-  <meta itemprop="dateModified" content="2024-10-25T11:45:57-04:00">
-  <meta itemprop="wordCount" content="3051">
+  <meta itemprop="dateModified" content="2024-10-31T14:47:14-05:00">
+  <meta itemprop="wordCount" content="3117">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="PowerMax">
   <meta name="twitter:description" content="Installing Dell CSI Driver for PowerMax via Dell CSM Operator">
@@ -125,7 +125,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.539e9ca4910a29a2f7a0f8a69a3c9688.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.03953f35e52e00f7cd8184242f06abb6.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -149,7 +149,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.539e9ca4910a29a2f7a0f8a69a3c9688.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.03953f35e52e00f7cd8184242f06abb6.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -707,6 +707,13 @@ Prerequisites <a class="header-link"  href="#prerequisites" style=" display: inl
 <li>NFS</li>
 <li>Fiber Channel via VMware Raw Device Mapping
 In most cases, you will use one protocol only; therefore you should comply with the according prerequisites and not the others.</li>
+<li>If enabling CSM Replication, both source and target storage systems must be locally managed by Unisphere.
+<ul>
+<li><em>Example</em>: When using two Unisphere instances, the first Unisphere instance should be configured with the source storage system as locally
+managed and target storage system as remotely managed. The second Unisphere configuration should mirror the first — locally managing the target storage system and
+remotely managing the source storage system.</li>
+</ul>
+</li>
 </ul>
 <h3 id="listing-installed-drivers-with-the-containerstoragemodule-crd">
 Listing installed drivers with the ContainerStorageModule CRD <a class="header-link"  href="#listing-installed-drivers-with-the-containerstoragemodule-crd" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
