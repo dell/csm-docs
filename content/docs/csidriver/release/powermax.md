@@ -18,6 +18,7 @@ description: Release notes for PowerMax CSI driver
 
 
 
+
 ### New Features/Changes
 
 - [#1410 - [FEATURE]: Adding support for PowerMax Magnolia](https://github.com/dell/csm/issues/1410)
