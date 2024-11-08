@@ -10,11 +10,11 @@ weight: 1
 {{<table "table table-striped table-bordered table-sm">}}
 | Platform    |                                                                                            Version                                                                                             |                                    OS Dependencies                                     |
 | ----------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------: |
-| PowerMax    | PowerMax 2500/8500 PowerMaxOS 10 (6079)<br>PowerMaxOS 10.0.1 (6079)<br>PowerMaxOS 10.1 (6079)<br>PowerMax 2000/8000 - 5978.711.711, 5978.714.714<br>5978.479.479<br>Unisphere 10.0,10.0.1,10.1 |       iscsi-initiator-utils<br>multipathd or powerpath<br>nvme-cli<br>nfs-utils        |
+| PowerMax    | PowerMax 2500/8500 PowerMaxOS 10 (6079)<br>PowerMaxOS 10.0.1 (6079)<br>PowerMaxOS 10.1 (6079)<br> PowerMaxOS 10.2 (6079)<br>PowerMax 2000/8000 - 5978.711.711, 5978.714.714<br>5978.479.479<br>Unisphere 10.0,10.0.1,10.1,10.2 |       iscsi-initiator-utils<br>multipathd or powerpath<br>nvme-cli<br>nfs-utils        |
 | PowerFlex   |                                                                                      3.6.x, 4.5.x, 4.6.x                                                                                       | [SDC](https://www.dell.com/support/home/en-us/product-support/product/scaleio/drivers) |
 | Unity XT    |                                                                                      5.2.x, 5.3.x, 5.4.x                                                                                       |                    iscsi-initiator-utils<br>multipathd<br>nfs-utils                    |
-| PowerScale  |                                                                                OneFS 9.4, 9.5.0.x (x >= 5), 9.7                                                                                |                                       nfs-utils                                        |
-| PowerStore  |                                                                                       3.0, 3.2, 3.5, 3.6                                                                                       |              iscsi-initiator-utils<br>multipathd<br>nvme-cli<br>nfs-utils              |
+| PowerScale  |                                                                                OneFS 9.4, 9.5.0.x (x >= 5), 9.7, 9.8, 9.9                                                                                |                                       nfs-utils                                        |
+| PowerStore  |                                                                                       3.5, 3.6, 4.0                                                                                       |              iscsi-initiator-utils<br>multipathd<br>nvme-cli<br>nfs-utils              |
 | ObjectScale |                                                                                             1.2.x                                                                                              |                                           -                                            |
 {{</table>}}
 
@@ -30,15 +30,16 @@ weight: 1
 | Kubernetes                 | 1.29, 1.30, 1.31 |
 | Red Hat OpenShift          | 4.16, 4.17       |
 | Mirantis Kubernetes Engine | 3.7.x            |
-| Google Anthos              | 1.15             |
-| Rancher Kubernetes Engine  | 1.4.x            |
-| VMware Tanzu               | 7.0              |
 {{</table>}}
 
 > Notes:
 > * Any orchestrator platform or version that's not mentioned here must be self-certified using [Cert-CSI](../support/cert-csi/) in order to be supported.  Although not mandatory, we recommend users to use orchestrator platforms and versions that have not met their end of life.
 > * CSM Authorization Server v1 is not supported on Red Hat OpenShift. However, it is supported to install CSM Authorization Server v1 on standard Kubernetes and a Dell CSI Drvier enabled with CSM Authorization on Red Hat OpenShift. CSM Authorization Server v2 is supported on Red Hat OpenShift.
-> * The OpenShift Virtualization platform support is not available for Unity.
+
+## OpenShift Virtualization
+
+OpenShift Virtualization 4.17 <b> supports [storage profile](https://github.com/kiagnose/kubevirt-storage-checkup) operations only </b> for the following storage systems:</br>
+PowerFlex, PowerMax, PowerStore, PowerScale.
 
 ## Tested Host Operating Systems
 

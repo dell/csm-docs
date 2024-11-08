@@ -17,6 +17,10 @@ The CSI Driver for Dell PowerMax can create PVC with different storage protocols
 * NFS
 * Fiber Channel via VMware Raw Device Mapping
 In most cases, you will use one protocol only; therefore you should comply with the according prerequisites and not the others.
+* If enabling CSM Replication, both source and target storage systems must be locally managed by Unisphere.
+  * _Example_: When using two Unisphere instances, the first Unisphere instance should be configured with the source storage system as locally
+  managed and target storage system as remotely managed. The second Unisphere configuration should mirror the first — locally managing the target storage system and
+  remotely managing the source storage system.
 
 
 ### Listing installed drivers with the ContainerStorageModule CRD
@@ -44,7 +48,7 @@ Set up the iSCSI initiators as follows:
 - Ensure that the iSCSI initiators on the nodes are not a part of any existing Host (Initiator Group) on the Dell PowerMax array.
 - The CSI Driver needs the port group names containing the required iSCSI director ports. These port groups must be set up on each Dell PowerMax array. All the port group names supplied to the driver must exist on each Dell PowerMax with the same name.
 
-For more information about configuring iSCSI, see [Dell Host Connectivity guide](https://www.delltechnologies.com/asset/zh-tw/products/storage/technical-support/docu5128.pdf).
+For more information about configuring iSCSI, see [Dell Host Connectivity guide](https://elabnavigator.dell.com/vault/pdf/Linux.pdf?key=1725374107988).
 
 ##### iscsi-daemon `MachineConfig`
 To configure iSCSI in Red Hat OpenShift clusters, you can create a `MachineConfig` object using the console or `oc` to ensure that the iSCSI daemon starts on all the Red Hat CoreOS nodes. Here is an example of a `MachineConfig` object:

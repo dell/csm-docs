@@ -5,6 +5,10 @@ weight: 7
 description: >
   Enabling Replication feature for CSI PowerStore
 ---
+{{% pageinfo color="primary" %}}
+{{< message text="1" >}}
+{{% /pageinfo %}}
+
 ## Enabling Replication In CSI PowerStore
 
 Container Storage Modules (CSM) Replication sidecar is a helper container that is installed alongside a CSI driver to facilitate replication functionality. Such CSI drivers must implement `dell-csi-extensions` calls.

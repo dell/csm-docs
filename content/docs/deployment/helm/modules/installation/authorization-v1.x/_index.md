@@ -4,9 +4,10 @@ linktitle: "Authorization v1.x"
 description: >
   Dell Technologies (Dell) Container Storage Modules (CSM) for Authorization Helm deployment
 ---
-
 {{% pageinfo color="primary" %}}
-The CSM Authorization karavictl CLI is no longer actively maintained or supported. It will be deprecated in a future release.
+1. <span><span/>{{< message text="1" >}}
+
+2. <span><span/>{{< message text="5" >}}
 {{% /pageinfo %}}
 
 CSM Authorization can be installed by using the provided Helm v3 charts on Kubernetes platforms.
@@ -76,10 +77,10 @@ The following third-party components are optionally installed in the specified n
 | **cert-manager**                                  | This section configures the enablement of cert-manager.                                                                      | -        | -                                         |
 | enabled                                           | Enable/Disable deployment of cert-manager. Set to false if you already have cert-manager installed.                          | No       | true                                      |
 | **authorization**                                 | This section configures the CSM-Authorization components.                                                                    | -        | -                                         |
-| authorization.images.proxyService                 | The image to use for the proxy-service.                                                                                      | Yes      | dellemc/csm-authorization-proxy:nightly   |
-| authorization.images.tenantService                | The image to use for the tenant-service.                                                                                     | Yes      | dellemc/csm-authorization-tenant:nightly  |
-| authorization.images.roleService                  | The image to use for the role-service.                                                                                       | Yes      | dellemc/csm-authorization-proxy:nightly   |
-| authorization.images.storageService               | The image to use for the storage-service.                                                                                    | Yes      | dellemc/csm-authorization-storage:nightly |
+| authorization.images.proxyService                 | The image to use for the proxy-service.                                                                                      | Yes      | quay.io/dell/container-storage-modules/csm-authorization-proxy:nightly   |
+| authorization.images.tenantService                | The image to use for the tenant-service.                                                                                     | Yes      | quay.io/dell/container-storage-modules/csm-authorization-tenant:nightly  |
+| authorization.images.roleService                  | The image to use for the role-service.                                                                                       | Yes      | quay.io/dell/container-storage-modules/csm-authorization-proxy:nightly   |
+| authorization.images.storageService               | The image to use for the storage-service.                                                                                    | Yes      | quay.io/dell/container-storage-modules/csm-authorization-storage:nightly |
 | authorization.images.opa                          | The image to use for Open Policy Agent.                                                                                      | Yes      | openpolicyagent/opa                       |
 | authorization.images.opaKubeMgmt                  | The image to use for Open Policy Agent be-mgmt.                                                                              | Yes      | openpolicyagent/kube-mgmt:8.5.8           |
 | authorization.hostname                            | The hostname to configure the self-signed certificate (if applicable) and the proxy Ingress.                                 | Yes      | csm-authorization.com                     |

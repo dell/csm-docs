@@ -5,7 +5,11 @@ weight: 3
 description: >
   Dell Technologies (Dell) Container Storage Modules (CSM) for Authorization Upgrade
 ---
+{{% pageinfo color="primary" %}}
+1. <span></span>{{< message text="2" >}}
 
+2. <span></span>{{< message text="5" >}}
+{{% /pageinfo %}}
 This section outlines the upgrade steps for Container Storage Modules (CSM) for Authorization.  The upgrade of CSM for Authorization is handled in 2 parts:
 - Helm Chart Upgrade
 - Upgrading the Dell CSI drivers with CSM for Authorization enabled

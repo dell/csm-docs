@@ -4,6 +4,9 @@ linkTitle: "CSM Installation Wizard"
 description: Container Storage Modules Installation Wizard
 weight: 1
 ---
+{{% pageinfo color="primary" %}}
+{{< message text="1" >}}
+{{% /pageinfo %}}
 
 The [Dell Container Storage Modules Installation Wizard](./src/index.html) is a webpage that generates a manifest file for installing Dell CSI Drivers and its supported CSM Modules, based on input from the user. It generates a single manifest file to install both Dell CSI Drivers and its supported CSM Modules, thereby eliminating the need to download individual Helm charts for drivers and modules. The user can enable or disable the necessary modules through the UI, and a manifest file is generated accordingly without manually editing the helm charts.
 
@@ -13,22 +16,22 @@ The [Dell Container Storage Modules Installation Wizard](./src/index.html) is a 
 
 | CSI Driver         | Version   | Helm   | Operator  |
 | ------------------ | --------- | ------ | --------- |
-| CSI PowerStore     | 2.11.0    |✔️      |✔️        |
+| CSI PowerStore     | 2.12.0    |✔️      |✔️        |
+| CSI PowerStore     | 2.11.1    |✔️      |✔️        |
 | CSI PowerStore     | 2.10.1    |✔️      |✔️        |
 | CSI PowerStore     | 2.9.1     |✔️      |✔️        |
-| CSI PowerStore     | 2.8.0     |✔️      |✔️        |
+| CSI PowerMax       | 2.12.0    |✔️      |✔️        |
 | CSI PowerMax       | 2.11.0    |✔️      |✔️        |
 | CSI PowerMax       | 2.10.1    |✔️      |✔️        |
 | CSI PowerMax       | 2.9.1     |✔️      |✔️        |
-| CSI PowerMax       | 2.8.0     |✔️      |✔️        |
 | CSI PowerFlex      | 2.12.0    |✔️      |❌        |
 | CSI PowerFlex      | 2.11.0    |✔️      |❌        |
 | CSI PowerFlex      | 2.10.1    |✔️      |❌        |
 | CSI PowerFlex      | 2.9.1     |✔️      |❌        |
+| CSI PowerScale     | 2.12.0    |✔️      |✔️        |
 | CSI PowerScale     | 2.11.0    |✔️      |✔️        |
 | CSI PowerScale     | 2.10.1    |✔️      |✔️        |
 | CSI PowerScale     | 2.9.1     |✔️      |✔️        |
-| CSI PowerScale     | 2.8.0     |✔️      |✔️        |
 | CSI Unity XT       | 2.12.0    |✔️      |❌        |
 | CSI Unity XT       | 2.11.0    |✔️      |❌        |
 | CSI Unity XT       | 2.10.1    |✔️      |❌        |

@@ -10,8 +10,14 @@ no_list: true
 ---
 
 {{% pageinfo color="primary" %}}
-The CSM Authorization RPM will be deprecated in a future release. It is highly recommended that you use CSM Authorization Helm deployment or CSM Operator going forward.
+1. Dell CSM Volume Group Snapshotter will be deprecated in CSM 1.14 (May 2025) and will no longer be supported.
+
+2. <span><span/>{{< message text="1" >}}
+
+3. <span><span/>{{< message text="5" >}}
 {{% /pageinfo %}}
+
+
 
 The Dell Technologies (Dell) Container Storage Modules (CSM) enables simple and consistent integration and automation experiences, extending enterprise storage capabilities to Kubernetes for cloud-native stateful applications. It reduces management complexity so developers can independently consume enterprise storage with ease and automate daily operations such as provisioning, snapshotting, replication, observability, authorization, application mobility and resiliency.
 
@@ -46,8 +52,7 @@ CSM is made up of multiple components including modules (enterprise capabilities
   {{< /card >}}
 {{% /cardpane %}}
 {{% cardpane %}}
-{{< card header="[**Application Mobility**](applicationmobility/)"
-          footer="Supports [PowerFlex](csidriver/features/powerflex/) via Apex Navigator for Kubernetes">}}
+{{< card header="[**Application Mobility**](applicationmobility/)">}}
   Container Storage Modules for Application Mobility provide Kubernetes administrators the ability to clone their stateful application workloads and application data to other clusters in the cloud.
   [...Learn more](applicationmobility/)
   {{< /card >}}

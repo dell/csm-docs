@@ -22,6 +22,10 @@ The following requirements must be met before installing CSI Driver for Dell Pow
 - Linux multipathing requirements
 - If using Snapshot feature, satisfy all Volume Snapshot requirements
 - If enabling CSM for Authorization, please refer to the [Authorization deployment steps](../../../../../deployment/helm/modules/installation/authorization/) first
+- If enabling CSM Replication, both source and target storage systems must be locally managed by Unisphere.
+  - _Example_: When using two Unisphere instances, the first Unisphere instance should be configured with the source storage system as locally
+  managed and target storage system as remotely managed. The second Unisphere configuration should mirror the first — locally managing the target storage system and
+  remotely managing the source storage system.
 - If using Powerpath , install the PowerPath for Linux requirements
 
 ### Prerequisite for CSI Reverse Proxy
@@ -73,7 +77,7 @@ Set up the iSCSI initiators as follows:
 - Ensure that the iSCSI initiators on the nodes are not a part of any existing Host (Initiator Group) on the Dell PowerMax array.
 - The CSI Driver needs the port group names containing the required iSCSI director ports. These port groups must be set up on each Dell PowerMax array. All the port group names supplied to the driver must exist on each Dell PowerMax with the same name.
 
-For more information about configuring iSCSI, see [Dell Host Connectivity guide](https://www.delltechnologies.com/asset/zh-tw/products/storage/technical-support/docu5128.pdf).
+For more information about configuring iSCSI, see [Dell Host Connectivity guide](https://elabnavigator.dell.com/vault/pdf/Linux.pdf?key=1725374107988).
 
 ### NFS requirements
 

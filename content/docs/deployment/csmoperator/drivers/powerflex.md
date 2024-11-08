@@ -1,19 +1,21 @@
 ---
 title: PowerFlex
-linkTitle: "PowerFlex"
+linkTitle: PowerFlex
 description: >
-  Installing Dell CSI Driver for PowerFlex via Dell CSM Operator
+  Installing the CSI Driver for Dell PowerFlex via Dell CSM Operator
 ---
-
-## Installing CSI Driver for PowerFlex via Dell CSM Operator
-
+{{% pageinfo color="primary" %}}
+{{< message text="1" >}}
+{{% /pageinfo %}}
 The CSI Driver for Dell PowerFlex can be installed via the Dell CSM Operator.
 To deploy the Operator, follow the instructions available [here](../../#installation).
 
 Note that the deployment of the driver using the operator does not use any Helm charts and the installation and configuration parameters will be slightly different from the one specified via the Helm installer.
 
-### Listing installed drivers with the ContainerStorageModule CRD
-User can query for all Dell CSI drivers using this command:
+### Listing installed drivers
+
+To query for all Dell CSI drivers installed with the ContainerStorageModule CRD use the following command:
+
 ```bash
 kubectl get csm --all-namespaces
 ```

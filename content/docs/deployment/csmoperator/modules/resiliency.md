@@ -4,6 +4,9 @@ linkTitle: "Resiliency"
 description: >
   Installing Resiliency via Dell CSM Operator
 ---
+{{% pageinfo color="primary" %}}
+{{< message text="1" >}}
+{{% /pageinfo %}}
 
 The CSM Resiliency module for supported Dell CSI Drivers can be installed via the Dell CSM Operator. Dell CSM Operator will deploy CSM Resiliency sidecar.
 
@@ -44,7 +47,7 @@ To enable this module, user should choose the sample file for the respective dri
       #   false: disable Resiliency feature(do not deploy podmon sidecar)
       # Default value: false
       enabled: true
-      configVersion: v1.10.0
+      configVersion: v1.11.0
       components:
         - name: podmon-controller
           args:
