@@ -21,11 +21,12 @@ Description: >
 
 
 
+
 ### New Features/Changes
 
+- [#1443 - [FEATURE]: PowerStore Sync / Metro for Block - CSM Replication](https://github.com/dell/csm/issues/1443)
 - [#1472 - [FEATURE]: Support for Kubernetes 1.31](https://github.com/dell/csm/issues/1472)
 - [#1473 - [FEATURE]: Add Support for OpenShift Container Platform (OCP) 4.17](https://github.com/dell/csm/issues/1473)
-- [#1443 - [FEATURE]: PowerStore Sync / Metro for Block - CSM Replication](https://github.com/dell/csm/issues/1443)
 
 ### Fixed Issues
 
