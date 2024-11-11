@@ -166,7 +166,7 @@ storageClasses:
       volumeAttributes: # volume attrs for EphemeralVolumeSuite.
         attr1: # volume attr for EphemeralVolumeSuite
         attr2: # volume attr for EphemeralVolumeSuite
-    capacityTracking:
+    capacityTracking: # capacityTracking test requires the storage class to have volume binding mode as 'WaitForFirstConsumer'
       driverNamespace: # namepsace where driver is installed
       pollInterval:    # duration to poll capacity (e.g., 2m)  
 ```
@@ -234,7 +234,9 @@ storageClasses:
         IsiPath: "/ifs/data/sample"
         IsiVolumePathPermissions: "0777"
         AzServiceIP: "192.168.2.1"
-
+    capacityTracking:
+      driverNamespace: isilon
+      pollInterval: 2m
 
    {{</tab >}}
    {{<tab header="CSI PowerMax" >}}
