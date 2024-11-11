@@ -1,0 +1,3 @@
+{{- $content := .Get "content/docs/getting-started/helmmodules/authorizationv1.x.md" -}}
+{{- $mdContent := readFile $content | markdownify -}}
+{{ $mdContent }}

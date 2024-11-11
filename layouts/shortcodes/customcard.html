@@ -46,8 +46,8 @@
     }
 </style>
 
-<a href="{{ .Get "link" }}" class="card-link">
-  <div class="card card-hover shadow-sm p-3 bg-white rounded">
+<a href="{{ if .Get "link1" }}{{ .Get "link1"}}{{ else }}{{ .Get "link"}}{{ end }}" class="card-link">
+<div class="card card-hover shadow-sm p-3 bg-white rounded">
     <div class="row no-gutters align-items-center">
       <div class="{{ if .Get "largeImage" }}col-md-4{{ else }}col-md-2{{ end }} text-center">
         {{ if .Get "image" }}

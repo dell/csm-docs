@@ -1,7 +1,8 @@
 ---
 title: "CSM Operator"
 linkTitle: "CSM Operator"
-description: Container Storage Modules Operator
+description: Container Storage Modules Operator 
+toc_hide: true
 weight: 2
 ---
 {{% pageinfo color="primary" %}}
@@ -330,7 +331,6 @@ bash scripts/install.sh
 
 To uninstall a CSM operator, run `bash scripts/uninstall.sh`. This will uninstall the operator in `dell-csm-operator` namespace.
 
-{{< imgproc uninstall.jpg Resize "2500x" >}}{{< /imgproc >}}
 
 ## Upgrade
 
