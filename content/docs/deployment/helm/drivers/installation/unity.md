@@ -45,11 +45,9 @@ following requirement is met before you install the CSI Driver for Dell Unity XT
 The CSI Driver for Dell Unity XT supports iSCSI connectivity.
 
 If you use the iSCSI protocol, set up the iSCSI initiators as follows:
-- Ensure that the iSCSI initiators are available on both Controller and Worker nodes.
-- Kubernetes nodes must have access (network connectivity) to an iSCSI port on the Dell Unity XT array that
-  has IP interfaces. Manually create IP routes for each node that connects to the Dell Unity XT.
-- All Kubernetes nodes must have the _iscsi-initiator-utils_ package for CentOS/RHEL or _open-iscsi_ package for Ubuntu installed, and the _iscsid_ service must be enabled and running.
-  To do this, run the `systemctl enable --now iscsid` command.
+- Ensure that each Kubernetes worker node has network connectivity to an iSCSI port on the Dell Unity XT array, allowing access via IP interfaces. Manually create the necessary IP routes.
+- Ensure that the necessary iSCSI initiator utilities are installed on each Kubernetes worker node. This typically includes the _iscsi-initiator-utils_ package for RHEL or _open-iscsi_ package for Ubuntu.
+- Enable and start the _iscsid_ service on each Kubernetes worker node. This service is responsible for managing the iSCSI initiator. You can enable the service by running the following command on all worker nodes: `systemctl enable --now iscsid`
 - Ensure that the unique initiator name is set in _/etc/iscsi/initiatorname.iscsi_.
 
 For more information about configuring iSCSI, see [Dell Host Connectivity guide](https://www.delltechnologies.com/asset/en-us/products/storage/technical-support/docu5128.pdf).
@@ -60,7 +58,7 @@ Unity XT.
 
 Set up Linux multipathing as follows:
 - Ensure that all nodes have the _Device Mapper Multipathing_ package installed.
-> You can install it by running `yum install device-mapper-multipath` on CentOS or `apt install multipath-tools` on Ubuntu. This package should create a multipath configuration file located in `/etc/multipath.conf`.
+> You can install it by running `yum install device-mapper-multipath` on RHEL or `apt install multipath-tools` on Ubuntu. This package should create a multipath configuration file located in `/etc/multipath.conf`.
 - Enable multipathing using the `mpathconf --enable --with_multipathd y` command.
 - Enable `user_friendly_names` and `find_multipaths` in the `multipath.conf` file.
 - Ensure that the multipath command for `multipath.conf` is available on all Kubernetes nodes.
