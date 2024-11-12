@@ -61,7 +61,7 @@ For detailed PowerFlex installation procedure, see the [Dell PowerFlex Deploymen
 1. Download the PowerFlex SDC from [Dell Online support](https://www.dell.com/support). The filename is EMC-ScaleIO-sdc-*.rpm, where * is the SDC name corresponding to the PowerFlex installation version.
 2. Export the shell variable _MDM_IP_ in a comma-separated list using `export MDM_IP=xx.xxx.xx.xx,xx.xxx.xx.xx`, where xxx represents the actual IP address in your environment. This list contains the IP addresses of the MDMs.
 3. Install the SDC per the _Dell PowerFlex Deployment Guide_:
-    - For Red Hat Enterprise Linux and CentOS, run `rpm -iv ./EMC-ScaleIO-sdc-*.x86_64.rpm`, where * is the SDC name corresponding to the PowerFlex installation version.
+    - For Red Hat Enterprise Linux, run `rpm -iv ./EMC-ScaleIO-sdc-*.x86_64.rpm`, where * is the SDC name corresponding to the PowerFlex installation version.
 4. To add more MDM_IP for multi-array support, run `/opt/emc/scaleio/sdc/bin/drv_cfg --add_mdm --ip 10.xx.xx.xx.xx,10.xx.xx.xx`
 
 #### Installation Wizard prerequisite, secret update:
@@ -96,7 +96,7 @@ Note that the namespace can be any user-defined name that follows the convention
     | skipCertificateValidation  | Determines if the driver is going to validate certs while connecting to PowerFlex REST API interface. | true     | true    |
     | isDefault | An array having isDefault=true is for backward compatibility. This parameter should occur once in the list. | false    | false   |
     | mdm       | mdm defines the MDM(s) that SDC should register with on start. This should be a list of MDM IP addresses or hostnames separated by comma. | true     | -       |
-    | nasName       | nasName defines what NAS should be used for NFS volumes. NFS volumes are supported on arrays version >=4.0.x | false     | ""       |
+    | nasName       | nasName defines what NAS should be used for NFS volumes. NFS volumes are supported on arrays version >=4.0.x | true     | ""       |
 
     Example: `samples/secret.yaml`
 

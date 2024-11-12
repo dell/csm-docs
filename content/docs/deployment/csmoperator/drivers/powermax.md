@@ -50,7 +50,6 @@ Use a tool such as `openssl` to generate this secret using the example below:
 ```bash
 openssl genrsa -out tls.key 2048
 openssl req -new -x509 -sha256 -key tls.key -out tls.crt -days 3650
-kubectl create secret -n <namespace> tls revproxy-certs --cert=tls.crt --key=tls.key
 kubectl create secret -n <namespace> tls csirevproxy-tls-secret --cert=tls.crt --key=tls.key
 ```
 
@@ -66,8 +65,9 @@ The following requirements must be fulfilled in order to successfully use the Fi
 
 The following requirements must be fulfilled in order to successfully use the iSCSI protocol with the CSI PowerMax driver.
 
-- All Kubernetes nodes must have the _iscsi-initiator-utils_ package installed. On Debian based distributions the package name is  _open-iscsi_.
-- The _iscsid_ service must be enabled and running. You can enable the service by running the following command on all worker nodes: `systemctl enable --now iscsid`
+- Ensure that the necessary iSCSI initiator utilities are installed on each Kubernetes worker node. This typically includes the _iscsi-initiator-utils_ package for RHEL or _open-iscsi_ package for Ubuntu.
+- Enable and start the _iscsid_ service on each Kubernetes worker node. This service is responsible for managing the iSCSI initiator. You can enable the service by running the following command on all worker nodes: `systemctl enable --now iscsid`
+- Ensure that the unique initiator name is set in _/etc/iscsi/initiatorname.iscsi_.
 - To configure iSCSI in Red Hat OpenShift clusters, you can create a `MachineConfig` object using the console or `oc` to ensure that the iSCSI daemon starts on all the Red Hat CoreOS nodes. Here is an example of a `MachineConfig` object:
 
 ```yaml
