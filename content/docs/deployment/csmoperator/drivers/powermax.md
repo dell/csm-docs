@@ -353,14 +353,14 @@ Create a secret named powermax-certs in the namespace where the CSI PowerMax dri
           primaryURL: https://primary-1.unisphe.re:8443 # primary unisphere for arrayID
           backupURL: https://backup-1.unisphe.re:8443   # backup unisphere for arrayID
           proxyCredentialSecrets:
-            - proxy-secret-11 # credential secret for primary unisphere, e.g., powermax-creds
-            - proxy-secret-12 # credential secret for backup unisphere, e.g., powermax-creds
+            - primary-1-secret # credential secret for primary unisphere, e.g., powermax-creds
+            - backup-1-secret # credential secret for backup unisphere, e.g., powermax-creds
         - storageArrayId: "000000000002"
           primaryURL: https://primary-2.unisphe.re:8443
           backupURL: https://backup-2.unisphe.re:8443
           proxyCredentialSecrets:
-           - proxy-secret-21
-           - proxy-secret-22
+           - primary-2-secret
+           - backup-2-secret
      managementServers:
        - url: https://primary-1.unisphe.re:8443 # primary unisphere endpoint
          arrayCredentialSecret: primary-1-secret # primary credential secret e.g., powermax-creds
