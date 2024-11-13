@@ -381,7 +381,7 @@ Create a secret named powermax-certs in the namespace where the CSI PowerMax dri
     ```bash
     kubectl create configmap powermax-reverseproxy-config --from-file config.yaml -n powermax
     ```
-4. Create a configmap using below sample file. Fill in the appropriate values for driver configuration. Example: X_CSI_TRANSPORT_PROTOCOL:"ISCSI"
+4. Create a configmap using the sample file [here](https://github.com/dell/csi-powermax/blob/main/samples/configmap/powermax-array-config.yaml). Fill in the appropriate values for driver configuration.
    ```yaml
       # Copyright © 2024 Dell Inc. or its subsidiaries. All Rights Reserved.
       #
@@ -409,7 +409,7 @@ Create a secret named powermax-certs in the namespace where the CSI PowerMax dri
           # IP address of the Unisphere for PowerMax (Required), Defaults to https://0.0.0.0:8443
           X_CSI_POWERMAX_ENDPOINT: "https://10.0.0.0:8443" 
           # List of comma-separated array ID(s) which will be managed by the driver (Required)
-          X_CSI_MANAGED_ARRAYS: "000000000000,000000000000," 
+          X_CSI_MANAGED_ARRAYS: "000000000000,000000000000,"
    ```
 
 4. Create a CR (Custom Resource) for PowerMax using the sample files provided
