@@ -353,27 +353,27 @@ Create a secret named powermax-certs in the namespace where the CSI PowerMax dri
           primaryURL: https://primary-1.unisphe.re:8443 # primary unisphere for arrayID
           backupURL: https://backup-1.unisphe.re:8443   # backup unisphere for arrayID
           proxyCredentialSecrets:
-            - proxy-secret-11 # credential secret for primary unisphere, e.g., powermax-creds
-            - proxy-secret-12 # credential secret for backup unisphere, e.g., powermax-creds
+            - primary-unisphere-secret-1 # credential secret for primary unisphere, e.g., powermax-creds
+            - backup-unisphere-secret-1 # credential secret for backup unisphere, e.g., powermax-creds
         - storageArrayId: "000000000002"
           primaryURL: https://primary-2.unisphe.re:8443
           backupURL: https://backup-2.unisphe.re:8443
           proxyCredentialSecrets:
-           - proxy-secret-21
-           - proxy-secret-22
+           - primary-unisphere-secret-2
+           - backup-unisphere-secret-2
      managementServers:
        - url: https://primary-1.unisphe.re:8443 # primary unisphere endpoint
-         arrayCredentialSecret: primary-1-secret # primary credential secret e.g., powermax-creds
+         arrayCredentialSecret: primary-unisphere-secret-1 # primary credential secret e.g., powermax-creds
          skipCertificateValidation: true
        - url: https://backup-1.unisphe.re:8443 # backup unisphere endpoint
-         arrayCredentialSecret: backup-1-secret # backup credential secret e.g., powermax-creds
+         arrayCredentialSecret: backup-unisphere-secret-1 # backup credential secret e.g., powermax-creds
          skipCertificateValidation: false # value false, to verify unisphere certificate and provide certSecret
          certSecret: primary-certs # unisphere verification certificate
        - url: https://primary-2.unisphe.re:8443
-         arrayCredentialSecret: primary-2-secret
+         arrayCredentialSecret: primary-unisphere-secret-2
          skipCertificateValidation: true
        - url: https://backup-2.unisphe.re:8443
-         arrayCredentialSecret: backup-2-secret
+         arrayCredentialSecret: backup-unisphere-secret-2
          skipCertificateValidation: false
          certSecret: primary-certs
    ```

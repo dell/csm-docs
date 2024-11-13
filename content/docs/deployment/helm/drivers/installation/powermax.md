@@ -351,7 +351,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
 | backupEndpoint | This refers to the URL of the backup Unisphere server managing _storageArrayId_, if Reverse Proxy is installed in _StandAlone_ mode. If authorization is enabled, backupEndpoint should be the HTTPS localhost endpoint that the authorization sidecar will listen on                                                                                                           | Yes | https://backup-1.unisphe.re:8443 |
 | managementServers | This section refers to the list of configurations for Unisphere servers managing powermax arrays.                                                                                                                                                                                                                                                                               | - | - |
 | endpoint | This refers to the URL of the Unisphere server. If authorization is enabled, endpoint should be the HTTPS localhost endpoint that the authorization sidecar will listen on                                                                                                                                                                                                      | Yes | https://primary-1.unisphe.re:8443 |
-| credentialsSecret| This refers to the user credentials for _endpoint_                                                                                                                                                                                                                                                                                                                              | Yes| primary-1-secret|
+| credentialsSecret| This refers to the user credentials for _endpoint_                                                                                                                                                                                                                                                                                                                              | Yes| primary-unisphere-secret-1|
 | skipCertificateValidation | This parameter should be set to false if you want to do client-side TLS verification of Unisphere for PowerMax SSL certificates.                                                                                                                                                                                                                                                | No | "True"       |
 | certSecret    | The name of the secret in the same namespace containing the CA certificates of the Unisphere server                                                                                                                                                                                                                                                                             | Yes, if skipCertificateValidation is set to false | Empty|
 | limits | This refers to various limits for Reverse Proxy                                                                                                                                                                                                                                                                                                                                 | No | - |
@@ -472,7 +472,7 @@ global:
       backupEndpoint: https://backup-2.unisphe.re:8443
   managementServers:
     - endpoint: https://primary-1.unisphe.re:8443
-      credentialsSecret: primary-1-secret
+      credentialsSecret: primary-unisphere-secret-1
       skipCertificateValidation: false
       certSecret: primary-cert
       limits:
@@ -481,13 +481,13 @@ global:
         maxOutStandingRead: 50
         maxOutStandingWrite: 50
     - endpoint: https://backup-1.unisphe.re:8443
-      credentialsSecret: backup-1-secret
+      credentialsSecret: backup-unisphere-secret-1
       skipCertificateValidation: true
     - endpoint: https://primary-2.unisphe.re:8443
-      credentialsSecret: primary-2-secret
+      credentialsSecret: primary-unisphere-secret-2
       skipCertificateValidation: true
     - endpoint: https://backup-2.unisphe.re:8443
-      credentialsSecret: backup-2-secret
+      credentialsSecret: backup-unisphere-secret-2
       skipCertificateValidation: true
 
 # "csireverseproxy" refers to the subchart csireverseproxy
