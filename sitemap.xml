@@ -225,7 +225,7 @@
     <lastmod>2024-08-14T15:59:46+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/v3/csidriver/features/powerflex/</loc>
-    <lastmod>2024-08-14T15:59:46+05:30</lastmod>
+    <lastmod>2024-11-14T17:07:37+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/v3/csidriver/upgradation/drivers/powerflex/</loc>
     <lastmod>2024-08-14T15:59:46+05:30</lastmod>
@@ -297,7 +297,7 @@
     <lastmod>2024-08-14T15:59:46+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/v3/csidriver/features/powerscale/</loc>
-    <lastmod>2024-08-14T15:59:46+05:30</lastmod>
+    <lastmod>2024-11-14T17:07:37+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/v3/csidriver/upgradation/drivers/isilon/</loc>
     <lastmod>2024-07-30T01:25:59+05:30</lastmod>
@@ -426,7 +426,7 @@
     <lastmod>2024-08-14T15:59:46+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/v3/csidriver/features/unity/</loc>
-    <lastmod>2024-08-14T15:59:46+05:30</lastmod>
+    <lastmod>2024-11-14T17:07:37+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/v3/csidriver/upgradation/drivers/unity/</loc>
     <lastmod>2024-07-30T01:25:59+05:30</lastmod>
@@ -549,7 +549,7 @@
     <lastmod>2024-08-14T15:59:46+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/v2/deployment/</loc>
-    <lastmod>2024-08-14T15:59:46+05:30</lastmod>
+    <lastmod>2024-11-14T17:07:37+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/v3/authorization/deployment/</loc>
     <lastmod>2024-07-30T01:25:59+05:30</lastmod>
@@ -627,7 +627,7 @@
     <lastmod>2024-08-14T15:59:46+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/v3/authorization/deployment/rpm/</loc>
-    <lastmod>2024-07-30T01:25:59+05:30</lastmod>
+    <lastmod>2024-11-14T17:07:37+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/docs/support/troubleshooting/</loc>
     <lastmod>2024-10-18T10:00:59-04:00</lastmod>
@@ -1629,7 +1629,7 @@
     <lastmod>2024-08-14T15:59:46+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/v1/deployment/rpm/modules/installation/authorization/authorization/</loc>
-    <lastmod>2024-08-14T15:59:46+05:30</lastmod>
+    <lastmod>2024-11-14T17:07:37+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/v2/deployment/csmoperator/modules/authorization/</loc>
     <lastmod>2024-08-14T15:59:46+05:30</lastmod>
@@ -1638,10 +1638,10 @@
     <lastmod>2024-08-14T15:59:46+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/v2/deployment/rpm/modules/installation/authorization/authorization/</loc>
-    <lastmod>2024-08-14T15:59:46+05:30</lastmod>
+    <lastmod>2024-11-14T17:07:37+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/v3/deployment/csmoperator/modules/authorization/</loc>
-    <lastmod>2024-08-14T15:59:46+05:30</lastmod>
+    <lastmod>2024-11-14T17:07:37+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/docs/deployment/csmoperator/modules/authorization-v1.x/</loc>
     <lastmod>2024-10-29T12:11:18-04:00</lastmod>
@@ -1650,7 +1650,7 @@
     <lastmod>2024-10-29T12:11:18-04:00</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/docs/deployment/rpm/modules/installation/authorization-v1.x/authorization-v1.x/</loc>
-    <lastmod>2024-10-29T12:11:18-04:00</lastmod>
+    <lastmod>2024-11-14T17:07:37+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/docs/deployment/csmoperator/modules/authorization-v2.0/</loc>
     <lastmod>2024-10-28T15:46:04-04:00</lastmod>
@@ -1683,7 +1683,7 @@
     <lastmod>2024-08-14T15:59:46+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/v3/csidriver/installation/operator/operator_migration/</loc>
-    <lastmod>2024-08-14T15:59:46+05:30</lastmod>
+    <lastmod>2024-11-14T17:07:37+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/</loc>
     <lastmod>2024-07-31T10:29:18+05:30</lastmod>
@@ -1836,7 +1836,7 @@
     <lastmod>2024-08-14T15:59:46+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/v3/deployment/csmoperator/drivers/powerflex/</loc>
-    <lastmod>2024-08-14T15:59:46+05:30</lastmod>
+    <lastmod>2024-11-14T17:07:37+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/docs/authorization/v1.x/configuration/powermax/</loc>
     <lastmod>2024-10-30T11:43:18-04:00</lastmod>
@@ -1857,7 +1857,7 @@
     <lastmod>2024-10-31T14:47:14-05:00</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/docs/deployment/helm/drivers/installation/powermax/</loc>
-    <lastmod>2024-10-31T14:47:14-05:00</lastmod>
+    <lastmod>2024-11-14T17:07:37+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/v1/authorization/v1.x-ga/configuration/powermax/</loc>
     <lastmod>2024-08-14T15:59:46+05:30</lastmod>
@@ -1875,7 +1875,7 @@
     <lastmod>2024-10-31T14:47:14-05:00</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/v1/deployment/helm/drivers/installation/powermax/</loc>
-    <lastmod>2024-10-31T14:47:14-05:00</lastmod>
+    <lastmod>2024-11-14T17:07:37+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/v2/authorization/configuration/powermax/</loc>
     <lastmod>2024-08-14T15:59:46+05:30</lastmod>
@@ -1893,13 +1893,13 @@
     <lastmod>2024-10-31T14:47:14-05:00</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/v2/deployment/helm/drivers/installation/powermax/</loc>
-    <lastmod>2024-10-31T14:47:14-05:00</lastmod>
+    <lastmod>2024-11-14T17:07:37+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/v3/authorization/configuration/powermax/</loc>
     <lastmod>2024-08-14T15:59:46+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/v3/csidriver/installation/helm/powermax/</loc>
-    <lastmod>2024-10-25T11:45:57-04:00</lastmod>
+    <lastmod>2024-11-14T17:07:37+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/v3/csidriver/installation/test/powermax/</loc>
     <lastmod>2024-03-21T02:39:59+05:30</lastmod>
