@@ -19,7 +19,7 @@ The Container Storage Modules and the required CSI Drivers can each be deployed 
 
 
 {{% cardpane %}}
-  {{< card header="[Dell CSI Drivers Installation via Helm](../csidriver/installation/helm)"
+  {{< card header="[Dell CSI Drivers Installation via Helm](helm/drivers/installation/)"
           footer="Installs [PowerStore](helm/drivers/installation/powerstore/) [PowerMax](helm/drivers/installation/powermax/) [PowerScale](helm/drivers/installation/isilon/) [PowerFlex](helm/drivers/installation/powerflex/) [Unity XT](helm/drivers/installation/unity/)">}}
    Dell CSI Helm installer installs the CSI Driver components using the provided Helm charts.
    [...More on installation instructions](helm/drivers/installation/)
