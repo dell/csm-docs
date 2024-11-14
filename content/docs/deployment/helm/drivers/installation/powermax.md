@@ -71,8 +71,9 @@ The following requirements must be fulfilled in order to successfully use the Fi
 
 The following requirements must be fulfilled in order to successfully use the iSCSI protocol with the CSI PowerMax driver.
 
-- All Kubernetes nodes must have the _iscsi-initiator-utils_ package installed. On Debian based distributions the package name is  _open-iscsi_.
-- The _iscsid_ service must be enabled and running. You can enable the service by running the following command on all worker nodes: `systemctl enable --now iscsid`
+- Ensure that the necessary iSCSI initiator utilities are installed on each Kubernetes worker node. This typically includes the _iscsi-initiator-utils_ package for RHEL or _open-iscsi_ package for Ubuntu.
+- Enable and start the _iscsid_ service on each Kubernetes worker node. This service is responsible for managing the iSCSI initiator. You can enable the service by running the following command on all worker nodes: `systemctl enable --now iscsid`
+- Ensure that the unique initiator name is set in _/etc/iscsi/initiatorname.iscsi_.
 - To configure iSCSI in Red Hat OpenShift clusters, you can create a `MachineConfig` object using the console or `oc` to ensure that the iSCSI daemon starts on all the Red Hat CoreOS nodes. Here is an example of a `MachineConfig` object:
 
 ```yaml
@@ -350,7 +351,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
 | backupEndpoint | This refers to the URL of the backup Unisphere server managing _storageArrayId_, if Reverse Proxy is installed in _StandAlone_ mode. If authorization is enabled, backupEndpoint should be the HTTPS localhost endpoint that the authorization sidecar will listen on                                                                                                           | Yes | https\://backup-1.unisphe.re:8443 |
 | managementServers | This section refers to the list of configurations for Unisphere servers managing powermax arrays.                                                                                                                                                                                                                                                                               | - | - |
 | endpoint | This refers to the URL of the Unisphere server. If authorization is enabled, endpoint should be the HTTPS localhost endpoint that the authorization sidecar will listen on                                                                                                                                                                                                      | Yes | https\://primary-1.unisphe.re:8443 |
-| credentialsSecret| This refers to the user credentials for _endpoint_                                                                                                                                                                                                                                                                                                                              | Yes| primary-1-secret|
+| credentialsSecret| This refers to the user credentials for _endpoint_                                                                                                                                                                                                                                                                                                                              | Yes| primary-unisphere-secret-1|
 | skipCertificateValidation | This parameter should be set to false if you want to do client-side TLS verification of Unisphere for PowerMax SSL certificates.                                                                                                                                                                                                                                                | No | "True"       |
 | certSecret    | The name of the secret in the same namespace containing the CA certificates of the Unisphere server                                                                                                                                                                                                                                                                             | Yes, if skipCertificateValidation is set to false | Empty|
 | limits | This refers to various limits for Reverse Proxy                                                                                                                                                                                                                                                                                                                                 | No | - |
@@ -471,7 +472,7 @@ global:
       backupEndpoint: https://backup-2.unisphe.re:8443
   managementServers:
     - endpoint: https://primary-1.unisphe.re:8443
-      credentialsSecret: primary-1-secret
+      credentialsSecret: primary-unisphere-secret-1
       skipCertificateValidation: false
       certSecret: primary-cert
       limits:
@@ -480,13 +481,13 @@ global:
         maxOutStandingRead: 50
         maxOutStandingWrite: 50
     - endpoint: https://backup-1.unisphe.re:8443
-      credentialsSecret: backup-1-secret
+      credentialsSecret: backup-unisphere-secret-1
       skipCertificateValidation: true
     - endpoint: https://primary-2.unisphe.re:8443
-      credentialsSecret: primary-2-secret
+      credentialsSecret: primary-unisphere-secret-2
       skipCertificateValidation: true
     - endpoint: https://backup-2.unisphe.re:8443
-      credentialsSecret: backup-2-secret
+      credentialsSecret: backup-unisphere-secret-2
       skipCertificateValidation: true
 
 # "csireverseproxy" refers to the subchart csireverseproxy
