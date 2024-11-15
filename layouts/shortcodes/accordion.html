@@ -1,16 +1,18 @@
-
-{{ $id := .Get "id" }}
-<div class="accordion" id="accordion-{{ $id }}">
-  <div class="accordion-item">
-    <h2 class="accordion-header" id="heading-{{ $id }}">
-      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-{{ $id }}" aria-expanded="true" aria-controls="collapse-{{ $id }}">
-        {{ .Get "title" }}
-      </button>
-    </h2>
-    <div id="collapse-{{ $id }}" class="accordion-collapse collapse show" aria-labelledby="heading-{{ $id }}" data-bs-parent="#accordion-{{ $id }}">
-      <div class="accordion-body">
-        <div>
-          {{ .Inner }}
+<div class="mycontent">
+  <div class="accordion" id="accordion{{ .Get "id" }}">
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="heading{{ .Get "id" }}">
+        <button class="accordion-button collapsed" style="border:1px solid #d2dcdb;" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ .Get "id" }}" aria-expanded="false" aria-controls="collapse{{ .Get "id" }}">
+          <h5>{{ .Get "title" }}</h5>
+        </button>
+      </h2>
+      <div id="collapse{{ .Get "id" }}" class="accordion-collapse collapse" aria-labelledby="heading{{ .Get "id" }}" data-bs-parent="#accordion{{ .Get "id" }}">
+        <div class="accordion-body">
+          {{ if eq (or (.Get "markdown") "false") "true" }}
+            {{ .Inner | markdownify }}
+          {{ else }}
+            {{ .Inner }}
+          {{ end }}
         </div>
       </div>
     </div>

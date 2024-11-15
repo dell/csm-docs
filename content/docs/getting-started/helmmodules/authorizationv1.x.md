@@ -7,7 +7,7 @@ description: >
 {{% pageinfo color="primary" %}}
 1. <span><span/>{{< message text="1" >}}
 
-2. <span><span/>{{< message text="5" >}}
+2. <span><span/>{{< message text="4" >}}
 {{% /pageinfo %}}
 
 CSM Authorization can be installed by using the provided Helm v3 charts on Kubernetes platforms.

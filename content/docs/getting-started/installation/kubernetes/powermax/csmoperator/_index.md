@@ -434,7 +434,7 @@ where *myusername* and *mypassword* are credentials for a user with vCenter priv
         contentContainer.innerHTML = `<div class="release">${contentMap[contentId]}<div>`;
       });
     });
-    */
+    
     // Function to clear content when accordion collapses
     const accordions = document.querySelectorAll('.accordion-collapse');
     
@@ -452,6 +452,7 @@ where *myusername* and *mypassword* are credentials for a user with vCenter priv
       });
     });
   });
+  */
 </script> 
 
 <br> 
