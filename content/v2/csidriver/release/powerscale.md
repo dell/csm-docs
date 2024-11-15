@@ -4,7 +4,8 @@ description: Release notes for PowerScale CSI driver
 ---
 
 
-## Release Notes - CSI Driver for PowerScale v2.10.1
+## Release Notes - CSI Driver for PowerScale v2.11.0
+
 
 
 
@@ -15,17 +16,21 @@ description: Release notes for PowerScale CSI driver
 
 ### New Features/Changes
 
-- [#1284 - [FEATURE]: Support for Openshift 4.15](https://github.com/dell/csm/issues/1284)
-- [#1285 - [FEATURE]: Remove checks in code for non-supported installs of CSM](https://github.com/dell/csm/issues/1285)
-- [#926 - [FEATURE]: Fixing the linting, formatting and vetting issues](https://github.com/dell/csm/issues/926)
+- [#1359 - [FEATURE]: Add Support for OpenShift Container Platform (OCP) 4.16 ](https://github.com/dell/csm/issues/1359)
+- [#1400 - [FEATURE]: Support for Kubernetes 1.30](https://github.com/dell/csm/issues/1400)
+- [#1397 - [FEATURE]: Observability upgrade is supported in CSM Operator](https://github.com/dell/csm/issues/1397)
+- [#1398 - [FEATURE]: PowerScale  OneFS 9.7 support ](https://github.com/dell/csm/issues/1398)
 
 ### Fixed Issues
 
-- [#1081 - [BUG]: CSM driver repositories reference CSI Operator](https://github.com/dell/csm/issues/1081)
-- [#1104 - [BUG]: The csm-isilon-controller keeps getting panic and is restarting ](https://github.com/dell/csm/issues/1104)
-- [#1134 - [BUG]: PowerScale : Driver failing to re-authenticate if session cookies are expired ](https://github.com/dell/csm/issues/1134)
-- [#1140 - [BUG]: Cert-csi tests are not reporting the passed testcases in K8S E2E tests ](https://github.com/dell/csm/issues/1140)
-- [#1174 - [BUG]: Kubelet Configuration Directory setting should not have a comment about default value being None](https://github.com/dell/csm/issues/1174)
+- [#1203 - [BUG]: OCP min/max version support](https://github.com/dell/csm/issues/1203)
+- [#1209 - [BUG]: Doc hyper links in driver Readme is broken](https://github.com/dell/csm/issues/1209)
+- [#1215 - [BUG]: Discrepancy in their secret](https://github.com/dell/csm/issues/1215)
+- [#1218 - [BUG]: Add the helm-charts-version parameter to the install command for all drivers in csm-docs](https://github.com/dell/csm/issues/1218)
+- [#1239 - [BUG]: Changes in new release of google.golang.org/protobuf is causing compilation issues](https://github.com/dell/csm/issues/1239)
+- [#1270 - [BUG]: Missing entries for Resiliency in installation wizard template](https://github.com/dell/csm/issues/1270)
+- [#1316 - [BUG]: PowerScale CSI - Creating PVC from csi snapshot is failing](https://github.com/dell/csm/issues/1316)
+- [#1322 - [BUG]: PowerScale CSM:  Updating the fsGroupPolicy in the csm is not updating the csidriver](https://github.com/dell/csm/issues/1322)
 
 ### Known Issues
 

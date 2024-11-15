@@ -13,14 +13,14 @@ Any orchestrator platform, operating system or version that is not mentioned in 
 
 You may qualify your environment for Dell CSI Drivers by executing the [Run All Test Suites](#run-all-test-suites) workflow.
 
-Please submit your test results for our review [here](https://github.com/dell/csm/issues/new?assignees=&labels=type%2Fqualification&projects=&template=community_qualification.yml&title=%5BQualification%5D%3A+). If the results are a success, the orchestrator platform and version will be published under Community Qualified Configurations. 
+Please submit your test results for our review [here](https://github.com/dell/csm/issues/new?assignees=&labels=type%2Fqualification&projects=&template=community_qualification.yml&title=%5BQualification%5D%3A+). If the results are a success, the orchestrator platform and version will be published under Community Qualified Configurations.
 
 ## Installation
 
 There are three methods of installing `cert-csi`.
 
 1. [Download the executable from the latest GitHub release](#download-release-linux).
-2. [Pull the container image from DockerHub](#pull-the-container-image).
+2. [Pull the container image from quay.io](#pull-the-container-image).
 3. [Build the exectuable or container image locally](#building-locally).
 
 > The exectuable from the GitHub Release only supports Linux. For non-Linux users, you must build the `cert-csi` executable [locally](#building-locally).
@@ -28,11 +28,7 @@ There are three methods of installing `cert-csi`.
 ### Download Release (Linux)
 > NOTE: Please ensure you delete any previously downloaded Cert-CSI binaries, as each release uses the same name (`cert-csi-linux-amd64`). After installing the latest version, run the `cert-csi -v` command to verify the installed version.
 
-1. Download the latest release of the cert-csi zip file.
-
-```bash
-wget https://github.com/dell/cert-csi/releases/download/v1.5.0/cert-csi-linux-amd64
-```
+1. Download `cert-csi` from [here](https://github.com/dell/cert-csi/releases/latest/download/cert-csi-linux-amd64)
 
 2. Set the execute permission before running it.
 
@@ -59,12 +55,12 @@ mv ./cert-csi-linux-amd64 ~/.local/bin/cert-csi
 
    {{< tabpane name="pulling-cert-csi-image" lang="bash">}}
    {{<tab header="Docker" >}}
-      docker pull dellemc/cert-csi:v1.5.0
+      docker pull quay.io/dell/container-storage-modules/cert-csi:v1.6.0
 
    {{</tab >}}
    {{<tab header="Podman" >}}
 
-      podman pull dellemc/cert-csi:v1.5.0
+      podman pull quay.io/dell/container-storage-modules/cert-csi:v1.6.0
 
    {{</tab >}}
    {{< /tabpane >}}
@@ -78,7 +74,7 @@ mv ./cert-csi-linux-amd64 ~/.local/bin/cert-csi
 1. Clone the repository
 
 ```bash
-git clone -b "v1.5.0" https://github.com/dell/cert-csi.git && cd cert-csi
+git clone -b "v1.6.0" https://github.com/dell/cert-csi.git && cd cert-csi
 ```
 
 2. Build cert-csi
@@ -113,10 +109,10 @@ make install-ms
    cert-csi --help
 {{</tab >}}
 {{<tab header="Docker" >}}
-   docker run --rm -it -v ~/.kube/config:/root/.kube/config dellemc/cert-csi:v1.5.0 --help
+   docker run --rm -it -v ~/.kube/config:/root/.kube/config quay.io/dell/container-storage-modules/cert-csi:v1.6.0 --help
 {{</tab >}}
 {{<tab header="Podman" >}}
-   podman run --rm -it -v ~/.kube/config:/root/.kube/config dellemc/cert-csi:v1.5.0 --help
+   podman run --rm -it -v ~/.kube/config:/root/.kube/config quay.io/dell/container-storage-modules/cert-csi:v1.6.0 --help
 
 {{</tab >}}
 {{< /tabpane >}}
@@ -132,11 +128,11 @@ make install-ms
 
 ## Run All Test Suites
 
-You can use cert-csi to launch a test run against multiple storage classes to check if the driver adheres to advertised capabilities. 
+You can use cert-csi to launch a test run against multiple storage classes to check if the driver adheres to advertised capabilities.
 
 #### Preparing Config
 
-To run the test suites you need to provide `.yaml` config with storage classes and their capabilities. You can use `example-certify-config.yaml` as an example. 
+To run the test suites you need to provide `.yaml` config with storage classes and their capabilities. You can use `example-certify-config.yaml` as an example.
 
 Template:
 ```yaml
@@ -159,9 +155,9 @@ storageClasses:
       volumeAttributes: # volume attrs for EphemeralVolumeSuite.
         attr1: # volume attr for EphemeralVolumeSuite
         attr2: # volume attr for EphemeralVolumeSuite
-    capacityTracking: # capacityTracking test requires the storage class to have volume binding mode as 'WaitForFirstConsumer'
+    capacityTracking:
       driverNamespace: # namepsace where driver is installed
-      pollInterval:    # duration to poll capacity (e.g., 2m)  
+      pollInterval:    # duration to poll capacity (e.g., 2m)
 ```
 
 Driver specific examples:
@@ -178,7 +174,7 @@ storageClasses:
     snapshot: true
     RWX: false
     ephemeral:
-      driver: csi-powerstore.dellemc.com
+      driver: csi-vxflexos.dellemc.com
       fstype: ext4
       volumeAttributes:
         volumeName: "my-ephemeral-vol"
@@ -192,7 +188,7 @@ storageClasses:
     clone: true
     snapshot: true
     RWX: true
-    RWOP: true
+    RWOP: false
     ephemeral:
       driver: csi-vxflexos.dellemc.com
       fstype: "nfs"
@@ -202,7 +198,7 @@ storageClasses:
         storagepool: "sample"
         systemID: "sample"
     capacityTracking:
-      driverNamespace: powerstore
+      driverNamespace: vxflexos
       pollInterval: 2m
 
 
@@ -216,7 +212,7 @@ storageClasses:
     expansion: true
     clone: true
     snapshot: true
-    RWX: false
+    RWX: true
     ephemeral:
       driver: csi-isilon.dellemc.com
       fstype: nfs
@@ -227,9 +223,7 @@ storageClasses:
         IsiPath: "/ifs/data/sample"
         IsiVolumePathPermissions: "0777"
         AzServiceIP: "192.168.2.1"
-    capacityTracking:
-      driverNamespace: isilon
-      pollInterval: 2m
+
    {{</tab >}}
    {{<tab header="CSI PowerMax" >}}
 
@@ -241,18 +235,18 @@ storageClasses:
     clone: true
     snapshot: true
     capacityTracking:
-      driverNamespace: powerstore
+      driverNamespace: powermax
       pollInterval: 2m
   - name: powermax-nfs
     minSize: 5Gi
     rawBlock: false
     expansion: true
-    clone: true
-    snapshot: true
+    clone: false
+    snapshot: false
     RWX: true
-    RWOP: true
+    RWOP: false
     capacityTracking:
-      driverNamespace: powerstore
+      driverNamespace: powermax
       pollInterval: 2m
 
    {{</tab >}}
@@ -280,7 +274,7 @@ storageClasses:
     clone: true
     snapshot: true
     RWX: true
-    RWOP: true
+    RWOP: false
     ephemeral:
       driver: csi-powerstore.dellemc.com
       fstype: "nfs"
@@ -301,7 +295,7 @@ storageClasses:
     minSize: 3Gi
     rawBlock: true
     expansion: true
-    clone: false
+    clone: true
     snapshot: true
     RWX: false
     ephemeral:
@@ -310,16 +304,16 @@ storageClasses:
       volumeAttributes:
         arrayId: "array-id"
         storagePool: pool-name
-        protocol: NFS
+        protocol: iSCSI
         size: 5Gi
   - name: unity-nfs
     minSize: 3Gi
     rawBlock: false
     expansion: true
-    clone: false
+    clone: true
     snapshot: true
     RWX: true
-    RWOP: true
+    RWOP: false
     ephemeral:
       driver: csi-unity.dellemc.com
       fstype: "nfs"
@@ -374,10 +368,10 @@ If you are using the container image, the `cert-config` file must be mounted int
 
 {{< tabpane name="running-container-certify" lang="bash">}}
 {{<tab header="Docker" >}}
-   docker run --rm -it -v ~/.kube/config:/root/.kube/config -v /home/user/example-certify-config.yaml:/example-certify-config.yaml dellemc/cert-csi:v1.5.0 certify --cert-config /example-certify-config.yaml --vsc <volume-snapshot-class>
+   docker run --rm -it -v ~/.kube/config:/root/.kube/config -v /home/user/example-certify-config.yaml:/example-certify-config.yaml quay.io/dell/container-storage-modules/cert-csi:v1.6.0 certify --cert-config /example-certify-config.yaml --vsc <volume-snapshot-class>
 {{</tab >}}
 {{<tab header="Podman" >}}
-   podman run --rm -it -v ~/.kube/config:/root/.kube/config -v /home/user/example-certify-config.yaml:/example-certify-config.yaml dellemc/cert-csi:v1.5.0 certify --cert-config /example-certify-config.yaml --vsc <volume-snapshot-class>
+   podman run --rm -it -v ~/.kube/config:/root/.kube/config -v /home/user/example-certify-config.yaml:/example-certify-config.yaml quay.io/dell/container-storage-modules/cert-csi:v1.6.0 certify --cert-config /example-certify-config.yaml --vsc <volume-snapshot-class>
 {{</tab >}}
 {{< /tabpane >}}
 
@@ -427,7 +421,7 @@ Run `cert-csi test scaling -h` for more options.
 11. Verifies the checksum of the data.
 
 ```bash
-cert-csi test snap --sc <storage class> --vsc <volume snapshot class> 
+cert-csi test snap --sc <storage class> --vsc <volume snapshot class>
 ```
 
 Run `cert-csi test snap -h` for more options.
@@ -476,7 +470,7 @@ Run `cert-csi test multi-attach-vol -h` for more options.
 10. Verifies the replication group name on ersistent Volume Claims.
 
 ```bash
-cert-csi test replication --sc <storage class> --vsc <snapshot class> 
+cert-csi test replication --sc <storage class> --vsc <snapshot class>
 ```
 
 Run `cert-csi test replication -h` for more options.
@@ -519,7 +513,7 @@ Run `cert-csi test expansion -h` for more options.
 2. Creates Persistent Volume Claim.
 3. If the specified storage class binding mode is not `WaitForFirstConsumer`, waits for Persistent Volume Claim to be bound to Persistent Volumes.
 4. Creates Pod to consume the Persistent Volume Claim.
-5. Writes data to the volume. 
+5. Writes data to the volume.
 5. Creates a Volume Snapshot from the Persistent Volume Claim.
 6. Waits for the Volume Snapshot to be Ready.
 7. Create a Persistent Volume Claim with raw block volume mode from the Volume Snapshot.
@@ -567,10 +561,10 @@ If you are using the container image, the `attr` file must be mounted into the c
 
 {{< tabpane name="running-container-ephemeral-volume" lang="bash">}}
 {{<tab header="Docker" >}}
-   docker run --rm -it -v ~/.kube/config:/root/.kube/config -v /home/user/ephemeral-config.properties:/ephemeral-config.properties dellemc/cert-csi:v1.5.0 test ephemeral-volume --driver <driver-name> --attr /ephemeral-config.properties
+   docker run --rm -it -v ~/.kube/config:/root/.kube/config -v /home/user/ephemeral-config.properties:/ephemeral-config.properties quay.io/dell/container-storage-modules/cert-csi:v1.6.0 test ephemeral-volume --driver <driver-name> --attr /ephemeral-config.properties
 {{</tab >}}
 {{<tab header="Podman" >}}
-   podman run --rm -it -v ~/.kube/config:/root/.kube/config -v /home/user/ephemeral-config.properties:/ephemeral-config.properties dellemc/cert-csi:v1.5.0 test ephemeral-volume --driver <driver-name> --attr /ephemeral-config.properties
+   podman run --rm -it -v ~/.kube/config:/root/.kube/config -v /home/user/ephemeral-config.properties:/ephemeral-config.properties quay.io/dell/container-storage-modules/cert-csi:v1.6.0 test ephemeral-volume --driver <driver-name> --attr /ephemeral-config.properties
 
 {{</tab >}}
 {{< /tabpane >}}
@@ -659,7 +653,7 @@ To use this feature, run cert-csi with the option `--image-config /path/to/confi
 ## Kubernetes End-To-End Tests
 All Kubernetes end to end tests require that you provide the driver config based on the storage class you want to test and the version of the kubernetes you want to test against. These are the mandatory parameters that you can provide in command like..
 ```bash
- --driver-config <path of driver config file> and --version "v1.25.0" 
+ --driver-config <path of driver config file> and --version "v1.25.0"
  ```
 
 ### Running kubernetes end-to-end tests
@@ -689,7 +683,7 @@ cert-csi k8s-e2e --config <kube config> --driver-config <path to driver config> 
    ./cert-csi k8s-e2e --config "/root/.kube/config" --driver-config "/root/e2e_config/config-iscsi.yaml" --focus "External.Storage.*"  --timeout "2h" --version "v1.25.0" --focus-file "capacity.go"
    ```
 
-### Interacting with DB 
+### Interacting with DB
 
 #### Generating report from runs without running tests
 
@@ -728,7 +722,7 @@ Options:
 To generate report from multiple databases, run the command:
 ```bash
 cert-csi report --tr <db-path>:<test-run-name> --tr ... --tabular --xml
-Supported report types: 
+Supported report types:
 --xml
 --tabular
 ```
@@ -757,7 +751,7 @@ Commands:
 
 To run tests with driver resource usage metrics enabled, run the command:
 ```bash
-cert-csi test <test suite> --sc <storage class> <...> --ns <driver namespace> 
+cert-csi test <test suite> --sc <storage class> <...> --ns <driver namespace>
 ```
 
 #### Running custom hooks from program

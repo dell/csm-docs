@@ -5,6 +5,9 @@ weight: 2
 description: >
   Installation of CSM for Replication
 ---
+{{% pageinfo color="primary" %}}
+{{< message text="1" >}}
+{{% /pageinfo %}}
 
 The installation process consists of two steps:
 
@@ -28,6 +31,18 @@ Please follow the steps [here](../install-repctl) to install & configure Dell Re
 
 #### Using the installation script
 Please follow the steps [here](../install-script) to install & configure Dell Replication Controller using script.
+
+#### _(Optional)_ FQDN Setup
+If CSM Replication is being deployed using two clusters in an environment where the DNS is not configured, and the cluster API endpoints are FQDNs, it is necessary to add the `<FQDN>:<IP>` mapping in the /etc/hosts file in order to resolve queries to the remote API server.
+This change will need to be made to the /etc/hosts file on:
+- The environment that is performing the installation/management (wherever `repctl` or the install script is used).
+- Both dell-replication-controller-manager deployments.
+    - To update the dell-replication-controller-manager deployment, execute the command below, replacing the fields for the remote cluster's FQDN and IP. Make sure to update the deployment on both the primary and disaster recovery clusters.
+
+      ```bash
+      kubectl patch deployment -n dell-replication-controller dell-replication-controller-manager \
+      -p '{"spec":{"template":{"spec":{"hostAliases":[{"hostnames":["<remote-FQDN>"],"ip":"<remote-IP>"}]}}}}'
+      ```
 
 ### Install CSI driver
 The following CSI drivers support replication:
