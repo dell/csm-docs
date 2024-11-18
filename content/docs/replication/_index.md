@@ -36,6 +36,8 @@ CSM for Replication provides the following capabilities:
 
 > _**NOTE**_: To delete the last PV from a SYNC Replication Group in PowerStore, the user needs to first unassign the protection policy from the corresponding volume group on the PowerStore Manager UI. For more details, please refer to the troubleshooting section.
 
+> _**NOTE**_: Snapshot for SyncIQ replicated volumes is not supported by the CSI-PowerScale driver.
+
 ## Details
 
 As on the storage arrays, all replication related Kubernetes entities are required/created in pairs -
