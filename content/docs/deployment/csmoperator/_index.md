@@ -376,7 +376,7 @@ kubectl get csm -n <driver-namespace>
 Use the object name in the kubectl edit command: </br>
 
 ```bash
-kubectl edit csm <driver-object>/<object-name> -n <driver-namespace>
+kubectl edit csm <object-name> -n <driver-namespace>
 ```
 For example, if the object name is powerstore:</br>
 
