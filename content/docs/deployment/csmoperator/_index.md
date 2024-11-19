@@ -364,19 +364,19 @@ git clone -b v1.7.0 https://github.com/dell/csm-operator.git
 ### Upgrading Drivers with Dell CSM Operator
 You can update CSI Drivers installed by the Dell CSM Operator like any Kubernetes resource:
 
-1. </b>Modify Installation via kubectl edit:</b></br>
+1. </b>Get the driver-object details using kubectl command:</b></br>
 
 ```bash
 kubectl get <driver-object> -n <driver-namespace>
 ```
-2. Replace `<driver-namespace>` with the appropriate namespace. For example, to get the CSI PowerStore driver object: </br>
+2. Replace `<driver-namespace>` with the appropriate namespace:</br>
 ```bash
 kubectl get csm -n <driver-namespace>
 ```
 Use the object name in the kubectl edit command: </br>
 
 ```bash
-kubectl edit csm <driver-object>/<object-name> -n <driver-namespace>
+kubectl edit csm <object-name> -n <driver-namespace>
 ```
 For example, if the object name is powerstore:</br>
 
