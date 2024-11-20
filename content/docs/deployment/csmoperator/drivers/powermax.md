@@ -343,11 +343,10 @@ Create a secret named powermax-certs in the namespace where the CSI PowerMax dri
 3. Create a configmap using sample [here](https://github.com/dell/csm-operator/tree/master/samples/csireverseproxy). Fill in the appropriate values for driver configuration.
    Example: config.yaml
    ```yaml
-   mode: StandAlone # Mode for the reverseproxy, should not be changed
    port: 2222 # Port on which reverseproxy will listen
    logLevel: debug
    logFormat: text
-   standAloneConfig:
+   config:
      storageArrays:
         - storageArrayId: "000000000001" # arrayID
           primaryURL: https://primary-1.unisphe.re:8443 # primary unisphere for arrayID

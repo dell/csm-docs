@@ -71,11 +71,10 @@ Given a setup where Kubernetes, a storage system, and the CSM for Authorization 
 5. **Operator Only**: Prepare the reverse proxy configmap using sample [here](https://github.com/dell/csm-operator/blob/main/samples/csireverseproxy/config.yaml). Fill in the appropriate values for driver configuration.
    Example: config.yaml
    ```yaml
-    mode: StandAlone # Mode for the reverseproxy, should not be changed
     port: 2222
     logLevel: debug
     logFormat: text
-    standAloneConfig:
+    config:
     storageArrays:
         - storageArrayId: "000000000001" # arrayID
         primaryURL: "https://localhost:9400" # primary unisphere for arrayID
