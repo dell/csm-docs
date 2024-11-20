@@ -1,20 +1,18 @@
 
 ---
-title: "Container Storage Modules"
-linkTitle: "Container Storage Modules"
-weight: 20
-menu:
-  main:
-    weight: 20
-no_list: true
+title: "Documentation"
+linkTitle: "Documentation"
 ---
 
 {{% pageinfo color="primary" %}}
-1. Dell CSM Volume Group Snapshotter will be deprecated in CSM 1.14 (May 2025) and will no longer be supported.
 
-2. <span><span/>{{< message text="1" >}}
+1. <span><span/>{{< message text="6" >}}
 
-3. <span><span/>{{< message text="5" >}}
+2. <span><span/>{{< message text="7" >}}
+
+3. <span><span/>{{< message text="1" >}}
+
+4. <span><span/>{{< message text="5" >}}
 {{% /pageinfo %}}
 
 

@@ -4,8 +4,10 @@ linkTitle: "Documentation"
 ---
 
 {{% pageinfo color="primary" %}}
-This document version is no longer actively maintained. The site that you are currently viewing is an archived snapshot. For up-to-date documentation, see the [latest version](/csm-docs/)
-The CSM Authorization RPM will be deprecated in a future release. It is highly recommended that you use CSM Authorization Helm deployment or CSM Operator going forward.
+
+1. <span><span/>{{< message text="6" >}}
+
+2. <span><span/>{{< message text="5" >}}
 {{% /pageinfo %}}
 
 The Dell Technologies (Dell) Container Storage Modules (CSM) enables simple and consistent integration and automation experiences, extending enterprise storage capabilities to Kubernetes for cloud-native stateful applications. It reduces management complexity so developers can independently consume enterprise storage with ease and automate daily operations such as provisioning, snapshotting, replication, observability, authorization, application mobility, encryption, and resiliency.
