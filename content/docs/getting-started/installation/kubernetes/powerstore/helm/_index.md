@@ -19,6 +19,7 @@ Install Helm 3.x on the master node before you install the CSI Driver for Dell P
 {{< accordion id="One" title="CSM Installation Wizard" >}}
             {{<include  "content/docs/getting-started/installation/kubernetes/installationwizardhelm.md" >}}
 {{< /accordion >}}
+
 <br>
 
 {{< accordion id="Two" title="CSI Driver" markdown="true" >}}  

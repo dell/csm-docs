@@ -9,13 +9,114 @@ weight: 2
 ## Installing the Operator
 To deploy the Operator, follow the instructions available [here](../../operatorinstallation.md).
 
-{{< accordion id="One" title="CSM Installation Wizard" >}}
-  {{< include "content/docs/getting-started/installation/kubernetes/installationwizardoperator.md" >}}
-{{< /accordion >}}
-<br>
-
 {{< accordion id="Two" title="CSI Driver" markdown="true" >}}  
 
+### Prerequisites
+- If multipath is configured, ensure CSI-PowerFlex volumes are blacklisted by multipathd. See [troubleshooting section](../../../../csidriver/troubleshooting/powerflex) for details.
+
+>NOTE: This step can be skipped with OpenShift.
+
+#### SDC Deployment for Operator
+- This feature deploys the sdc kernel modules on all nodes with the help of an init container.
+- Powerflex can be deployed with or without SDC. SDC deployment can be enabled and disabled by setting `X_CSI_SDC_ENABLED` value in CR file. By default, driver is deployed with SDC enabled.
+- For non-supported versions of the OS also do the manual SDC deployment steps given below. Refer to https://hub.docker.com/r/dellemc/sdc for supported versions.
+- **Note:** When the driver is created, MDM value for initContainers in driver CR is set by the operator from mdm attributes in the driver configuration file,
+  config.yaml. An example of config.yaml is below in this document. Do not set MDM value for initContainers in the driver CR file manually.
+  - Optionally, enable sdc monitor by setting the enable flag for the sdc-monitor to true. Please note:
+    - **If using sidecar**, you will need to edit the value fields under the HOST_PID and MDM fields by filling the empty quotes with host PID and the MDM IPs.
+    - **If not using sidecar**, leave the enabled field set to false.
+##### Example CR:  [samples/storage_csm_powerflex_v2120.yaml](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powerflex_v2120.yaml)
+```yaml
+    sideCars:
+    # sdc-monitor is disabled by default, due to high CPU usage
+      - name: sdc-monitor
+        enabled: false
+        image: dellemc/sdc:4.5
+        envs:
+        - name: HOST_PID
+          value: "1"
+        - name: MDM
+          value: "10.xx.xx.xx,10.xx.xx.xx" #provide the same MDM value from secret
+```
+
+#### Manual SDC Deployment
+
+For detailed PowerFlex installation procedure, see the [Dell PowerFlex Deployment Guide](https://docs.delltechnologies.com/bundle/VXF_DEPLOY/page/GUID-DD20489C-42D9-42C6-9795-E4694688CC75.html). Install the PowerFlex SDC using this procedure:
+
+**Steps**
+
+1. Download the PowerFlex SDC from [Dell Online support](https://www.dell.com/support). The filename is EMC-ScaleIO-sdc-*.rpm, where * is the SDC name corresponding to the PowerFlex installation version.
+2. Export the shell variable _MDM_IP_ in a comma-separated list using `export MDM_IP=xx.xxx.xx.xx,xx.xxx.xx.xx`, where xxx represents the actual IP address in your environment. This list contains the IP addresses of the MDMs.
+3. Install the SDC per the _Dell PowerFlex Deployment Guide_:
+    - For environments using RPM, run `rpm -iv ./EMC-ScaleIO-sdc-*.x86_64.rpm`, where * is the SDC name corresponding to the PowerFlex installation version.
+4. To add more MDM_IP for multi-array support, run `/opt/emc/scaleio/sdc/bin/drv_cfg --add_mdm --ip 10.xx.xx.xx.xx,10.xx.xx.xx`1. Create namespace.
+   Execute `kubectl create namespace vxflexos` to create the `vxflexos` namespace (if not already present). Note that the namespace can be any user-defined name, in this example, we assume that the namespace is 'vxflexos'
+
+>NOTE: This step can be skipped with OpenShift CoreOS nodes.
+
+#### Create Secret
+1. Create namespace:
+   Execute `kubectl create namespace vxflexos` to create the `vxflexos` namespace (if not already present). Note that the namespace can be any user-defined name, in this example, we assume that the namespace is 'vxflexos'
+2. Prepare the secret.yaml for driver configuration.
+
+    Example: secret.yaml
+
+    ```yaml
+      # Username for accessing PowerFlex system.
+      # If authorization is enabled, username will be ignored.
+    - username: "admin"
+      # Password for accessing PowerFlex system.
+      # If authorization is enabled, password will be ignored.
+      password: "password"
+      # System name/ID of PowerFlex system.
+      systemID: "1a99aa999999aa9a"
+      # Previous names used in secret of PowerFlex system.
+      allSystemNames: "pflex-1,pflex-2"
+      # REST API gateway HTTPS endpoint for PowerFlex system.
+      # If authorization is enabled, endpoint should be the HTTPS localhost endpoint that
+      # the authorization sidecar will listen on
+      endpoint: "https://127.0.0.1"
+      # Determines if the driver is going to validate certs while connecting to PowerFlex REST API interface.
+      # Allowed values: true or false
+      # Default value: true
+      skipCertificateValidation: true
+      # indicates if this array is the default array
+      # needed for backwards compatibility
+      # only one array is allowed to have this set to true
+      # Default value: false
+      isDefault: true
+      # defines the MDM(s) that SDC should register with on start.
+      # Allowed values:  a list of IP addresses or hostnames separated by comma.
+      # Default value: none
+      mdm: "10.0.0.1,10.0.0.2"
+      # NFS is only supported on PowerFlex storage system 4.0.x
+      # nasName: name of NAS server used for NFS volumes
+      # nasName value must be specified in secret for performing NFS (file) operations.
+      # Allowed Values: string
+      # Default Value: "none"
+      nasName: "nas-server"
+    - username: "admin"
+      password: "Password123"
+      systemID: "2b11bb111111bb1b"
+      endpoint: "https://127.0.0.2"
+      skipCertificateValidation: true
+      mdm: "10.0.0.3,10.0.0.4"
+    ```
+
+    If replication feature is enabled, ensure the secret includes all the PowerFlex arrays involved in replication.
+
+    After editing the file, run this command to create a secret called `vxflexos-config`.
+    ```bash
+
+    kubectl create secret generic vxflexos-config -n vxflexos --from-file=config=secret.yaml
+    ```
+
+    Use this command to replace or update the secret:
+
+    ```bash
+
+    kubectl create secret generic vxflexos-config -n vxflexos --from-file=config=secret.yaml -o yaml --dry-run=client | kubectl replace -f -
+    ```
 ### Install Driver
 
 1. Follow all the [prerequisites](#prerequisite) above
@@ -68,9 +169,17 @@ To deploy the Operator, follow the instructions available [here](../../operatori
 **Note** :
    1. Snapshotter and resizer sidecars are installed by default.
 {{< /accordion >}}  
-<br>
-{{< accordion id="Three" title="CSM Modules" >}}
 
+<br>
+
+{{< accordion id="Three" title="CSM Modules">}}
+<br>  
+
+{{< markdownify >}}
+The driver and modules versions installable with the CSM Operator [Click Here](../../../../../supportmatrix/#container-storage-module-operator-compatibility-matrix)
+{{< /markdownify >}}
+
+<br> 
 <div class="container mt-5 ps-0" style="margin-left:0px;">
     <div class="row">
       <div class="col-md-6 mb-4">

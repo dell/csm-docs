@@ -6,11 +6,6 @@ description: Unity XT
 weight: 5
 ---
 <div class="container mt-5"> 
-    <div class="row">
-      <div class="col-md-6 mb-4">
-      {{< customcard  link="./prerequisite" icon="fas fa-cloud" image="../../../../../icons/doc-reports.svg" title="Prerequisite">}} 
-      </div>
-    </div>
     <br> 
     <div class="row">
       <div class="col-md-6 mb-4">

@@ -90,3 +90,44 @@ The table below lists the driver and modules versions installable with the Conta
 |  Unity XT       | 2.11.1  | ❌ , ❌                    | ❌             | ❌                | ❌            |
 |  Unity XT       | 2.10.1  | ❌ , ❌                    | ❌             | ❌                | ❌            |
 {{</table>}}
+## Container Storage Modules Installation Wizard Compatibility Matrix 
+The [Dell Container Storage Modules Installation Wizard](./src/index.html) is a webpage that generates a manifest file for installing Dell CSI Drivers and its supported CSM Modules, based on input from the user. It generates a single manifest file to install both Dell CSI Drivers and its supported CSM Modules, thereby eliminating the need to download individual Helm charts for drivers and modules. The user can enable or disable the necessary modules through the UI, and a manifest file is generated accordingly without manually editing the helm charts.
+
+>NOTE: The CSM Installation Wizard supports Helm and Operator based manifest file generation.
+
+## Supported Dell CSI Drivers
+
+{{<table "table table-striped table-bordered table-sm">}}
+| CSI Driver         | Version   | Helm   | Operator  |
+| ------------------ | --------- | ------ | --------- |
+| CSI PowerStore     | 2.12.0    |✔️      |✔️        |
+| CSI PowerStore     | 2.11.1    |✔️      |✔️        |
+| CSI PowerStore     | 2.10.1    |✔️      |✔️        |
+| CSI PowerStore     | 2.9.1     |✔️      |✔️        |
+| CSI PowerMax       | 2.12.0    |✔️      |✔️        |
+| CSI PowerMax       | 2.11.0    |✔️      |✔️        |
+| CSI PowerMax       | 2.10.1    |✔️      |✔️        |
+| CSI PowerMax       | 2.9.1     |✔️      |✔️        |
+| CSI PowerFlex      | 2.12.0    |✔️      |❌        |
+| CSI PowerFlex      | 2.11.0    |✔️      |❌        |
+| CSI PowerFlex      | 2.10.1    |✔️      |❌        |
+| CSI PowerFlex      | 2.9.1     |✔️      |❌        |
+| CSI PowerScale     | 2.12.0    |✔️      |✔️        |
+| CSI PowerScale     | 2.11.0    |✔️      |✔️        |
+| CSI PowerScale     | 2.10.1    |✔️      |✔️        |
+| CSI PowerScale     | 2.9.1     |✔️      |✔️        |
+| CSI Unity XT       | 2.12.0    |✔️      |❌        |
+| CSI Unity XT       | 2.11.0    |✔️      |❌        |
+| CSI Unity XT       | 2.10.1    |✔️      |❌        |
+| CSI Unity XT       | 2.9.1     |✔️      |❌        |
+{{</table>}}
+
+>NOTE: The Installation Wizard currently does not support operator-based manifest file generation for Unity XT and PowerFlex drivers.
+
+## Supported Dell CSM Modules
+
+| CSM Modules          | Version   |
+| ---------------------| --------- |
+| CSM Observability    | 1.7.0+     |
+| CSM Replication      | 1.7.0+     |
+| CSM Resiliency       | 1.7.0+     |

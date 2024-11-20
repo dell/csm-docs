@@ -14,6 +14,7 @@ To deploy the Operator, follow the instructions available [here](../../operatori
 {{< accordion id="One" title="CSM Installation Wizard" >}}
   {{< include "content/docs/getting-started/installation/kubernetes/installationwizardoperator.md" >}}
 {{< /accordion >}}
+
 <br>
 
 {{< accordion id="Two" title="CSI Driver" markdown="true" >}}  
@@ -80,9 +81,19 @@ To do so, change the configuration file `config.yaml` and apply the update using
 
 sed "s/CONFIG_YAML/`cat config.yaml | base64 -w0`/g" secret.yaml | kubectl apply -f -
 ```
-{{< /accordion >}}  
+{{< /accordion >}}   
+
 <br>
+
 {{< accordion id="Three" title="CSM Modules" >}}
+
+<br>  
+
+{{< markdownify >}}
+The driver and modules versions installable with the CSM Operator [Click Here](../../../../../supportmatrix/#container-storage-module-operator-compatibility-matrix)
+{{< /markdownify >}}
+
+<br> 
 <div class="container mt-5 ps-0" style="margin-left:0px;">
     <div class="row">
       <div class="col-md-6 mb-4">

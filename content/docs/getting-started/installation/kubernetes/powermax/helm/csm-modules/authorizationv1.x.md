@@ -12,6 +12,7 @@ description: >
 
 
 <script> 
+
 document.addEventListener("DOMContentLoaded", function() {
   const content = document.querySelector(".td-content"); // Adjust the selector based on your theme
   const tocContainer = document.getElementById("TableOfContent");
@@ -22,7 +23,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
   const tocList = document.createElement("ul");
 
-  headings.forEach(heading => {
+  headings.forEach((heading, index) => {
+    if (index === headings.length - 1) return; // Skip the last heading
+
     const id = heading.id || heading.textContent.trim().toLowerCase().replace(/\s+/g, "-");
     heading.id = id;
 
@@ -37,5 +40,4 @@ document.addEventListener("DOMContentLoaded", function() {
 
   tocContainer.appendChild(tocList);
 });
-
 </script> 

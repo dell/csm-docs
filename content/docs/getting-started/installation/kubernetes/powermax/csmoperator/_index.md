@@ -371,7 +371,13 @@ where *myusername* and *mypassword* are credentials for a user with vCenter priv
     </h2>
     <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
       <div class="accordion-body">
-        
+ <br>  
+
+{{< markdownify >}}
+The driver and modules versions installable with the CSM Operator [Click Here](../../../../../supportmatrix/#container-storage-module-operator-compatibility-matrix)
+{{< /markdownify >}}
+
+<br>        
 
 <div class="container mt-5 ps-0" style="margin-left:0px;">
     <div class="row">

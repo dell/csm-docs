@@ -24,6 +24,90 @@ Install Helm 3.0 on the master node before you install the CSI Driver for Dell P
 
 {{< accordion id="Two" title="CSI Driver" markdown="true" >}}  
 
+## Prerequisites
+
+The following are requirements to be met before installing the CSI Driver for Dell PowerScale:
+
+- Install Kubernetes or OpenShift (see [supported versions](../../../../../csidriver/#features-and-capabilities))
+- Install Helm 3
+- Mount propagation is enabled on container runtime that is being used
+- `nfs-utils` package must be installed on nodes that will mount volumes
+- If using Snapshot feature, satisfy all Volume Snapshot requirements
+- If enabling CSM for Authorization, please refer to the [Authorization deployment steps](../../../../../deployment/helm/modules/installation/authorization-v2.0/) first
+- If enabling CSM for Replication, please refer to the [Replication deployment steps](../../../../../deployment/helm/modules/installation/replication/) first
+- If enabling CSM for Resiliency, please refer to the [Resiliency deployment steps](../../../../../deployment/helm/modules/installation/resiliency/) first
+
+### Install Helm 3.0
+
+Install Helm 3.0 on the master node before you install the CSI Driver for Dell PowerScale.
+
+**Steps**
+
+  Run the command to install Helm 3.0.
+
+  ```bash
+  curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
+  ```
+
+### (Optional) Volume Snapshot Requirements
+
+  For detailed snapshot setup procedure, [click here.](../../../../../snapshots/#optional-volume-snapshot-requirements)
+
+### (Optional) Volume Health Monitoring
+
+Volume Health Monitoring feature is optional and by default this feature is disabled for drivers when installed via helm.
+
+If enabled capacity metrics (used & free capacity, used & free inodes) for PowerScale PV will be expose in Kubernetes metrics API.
+
+To enable this feature, add the below block to the driver manifest before installing the driver. This ensures to install external
+health monitor sidecar. To get the volume health state value under controller should be set to true as seen below. To get the
+volume stats value under node should be set to true.
+
+```yaml
+controller:
+  healthMonitor:
+    # enabled: Enable/Disable health monitor of CSI volumes
+    # Allowed values:
+    #   true: enable checking of health condition of CSI volumes
+    #   false: disable checking of health condition of CSI volumes
+    # Default value: None
+    enabled: false
+    # interval: Interval of monitoring volume health condition
+    # Allowed values: Number followed by unit (s,m,h)
+    # Examples: 60s, 5m, 1h
+    # Default value: 60s
+    interval: 60s
+node:
+  healthMonitor:
+    # enabled: Enable/Disable health monitor of CSI volumes- volume usage, volume condition
+    # Allowed values:
+    #   true: enable checking of health condition of CSI volumes
+    #   false: disable checking of health condition of CSI volumes
+    # Default value: None
+    enabled: false
+```
+
+*NOTE*: To enable this feature to existing driver OR enable this feature while upgrading the driver versions,
+follow either of the way.
+
+1. Reinstall of Driver
+2. Upgrade the driver smoothly with "--upgrade" option
+
+### (Optional) Replication feature Requirements
+
+Applicable only if you decided to enable the Replication feature in `values.yaml`
+
+```yaml
+replication:
+  enabled: true
+```
+
+#### Replication CRD's
+
+The CRDs for replication can be obtained and installed from the csm-replication project on Github. Use `csm-replication/deploy/replicationcrds.all.yaml` located in the csm-replication git repo for the installation.
+
+CRDs should be configured during replication prepare stage with repctl as described in [install-repctl](../../../../helm/modules/installation/replication/install-repctl)
+
 ## Install the Driver
 
 **Steps**

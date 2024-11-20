@@ -15,6 +15,31 @@ To deploy the Operator, follow the instructions available [here](../../operatori
 
 {{< accordion id="Two" title="CSI Driver" markdown="true" >}}  
 
+### Prerequisites
+
+1. Create namespace.
+   Execute `kubectl create namespace unity` to create the unity namespace (if not already present). Note that the namespace can be any user-defined name, in this example, we assume that the namespace is 'unity'.
+
+2. Create a file called `secret.yaml` that has Unity XT array connection details with the following content
+   ```yaml
+      storageArrayList:
+      - arrayId: "APM00******1"                 # unique array id of the Unisphere array
+        username: "user"                        # username for connecting to API
+        password: "password"                    # password for connecting to API
+        endpoint: "https://10.1.1.1/"           # full URL path to the Unity XT API
+        skipCertificateValidation: true         # indicates if client side validation of (management)server's certificate can be skipped
+        isDefault: true                         # treat current array as a default (would be used by storage classes without arrayID parameter)
+   ```
+   Change the parameters with relevant values for your Unity XT array.
+   Add more blocks similar to above for each Unity XT array if necessary.
+
+3. Use the following command to create a new secret unity-creds from `secret.yaml` file.
+
+    `kubectl create secret generic unity-creds -n unity --from-file=config=secret.yaml`
+
+   Use the following command to replace or update the secret:
+
+    `kubectl create secret generic unity-creds -n unity --from-file=config=secret.yaml -o yaml --dry-run | kubectl replace -f -`
 ### Install Driver
 
 1. Follow all the [prerequisites](#prerequisite) above

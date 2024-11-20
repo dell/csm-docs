@@ -13,4 +13,68 @@
     {{ end -}}
   {{ end -}}
 {{ end -}} --> 
+<div class="td-toc">
+  <nav id="TableOfContents"></nav>
+</div>
 
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  const content = document.querySelector(".td-content"); // Adjust the selector based on your theme
+  const tocContainer = document.getElementById("TableOfContents");
+  if (!content || !tocContainer) return;
+
+  const headings = content.querySelectorAll("h2, h3");
+  if (headings.length === 0) return;
+
+  const tocList = document.createElement("ul");
+
+  headings.forEach((heading, index) => {
+    if (index === headings.length - 1 || heading.classList.contains("accordion-header")) return; // Skip the last heading
+
+    const id = heading.id || heading.textContent.trim().toLowerCase().replace(/\s+/g, "-");
+    heading.id = id;
+
+    const tocItem = document.createElement("li");
+    const tocLink = document.createElement("a");
+    tocLink.href = `#${id}`;
+    tocLink.textContent = heading.textContent;
+
+    tocItem.appendChild(tocLink);
+    tocList.appendChild(tocItem);
+  });
+
+  tocContainer.appendChild(tocList);
+
+  // Hide TOC items inside collapsed accordions initially
+  const accordionBodies = document.querySelectorAll('.accordion-collapse');
+  accordionBodies.forEach(body => {
+    if (!body.classList.contains('show')) {
+      const headingsInAccordion = body.querySelectorAll('h2, h3');
+      headingsInAccordion.forEach(heading => {
+        const tocLink = tocContainer.querySelector(`a[href="#${heading.id}"]`);
+        if (tocLink) {
+          tocLink.parentElement.style.display = 'none';
+        }
+      });
+    }
+  });
+
+  // Add event listeners to accordion buttons
+  const accordionButtons = document.querySelectorAll('.accordion-button');
+  accordionButtons.forEach(button => {
+    button.addEventListener('click', function() {
+      const targetId = this.getAttribute('data-bs-target');
+      const target = document.querySelector(targetId);
+      const isExpanded = this.getAttribute('aria-expanded') === 'true';
+
+      const headingsInAccordion = target.querySelectorAll('h2, h3');
+      headingsInAccordion.forEach(heading => {
+        const tocLink = tocContainer.querySelector(`a[href="#${heading.id}"]`);
+        if (tocLink) {
+          tocLink.parentElement.style.display = isExpanded ? 'list-item' : 'none';
+        }
+      });
+    });
+  });
+});
+</script>
