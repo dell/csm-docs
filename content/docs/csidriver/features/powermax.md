@@ -279,7 +279,7 @@ Starting from v2.7.0 , the secrets for proxy will be created automatically using
 For this , we need to install cert-manager using below command which manages the certs and secrets  .
 
 ```bash
-kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.11.0/cert-manager.yaml
+kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.16.1/cert-manager.yaml
 ```
 Here is an example showing how to generate a private key and use that to sign an SSL certificate using the openssl tool:
 
