@@ -4,8 +4,10 @@ linkTitle: "Documentation"
 ---
 
 {{% pageinfo color="primary" %}}
-This document version is no longer actively maintained. The site that you are currently viewing is an archived snapshot. For up-to-date documentation, see the [latest version](/csm-docs/)
-The CSM Authorization RPM will be deprecated in a future release. It is highly recommended that you use CSM Authorization Helm deployment or CSM Operator going forward.
+
+1. <span><span/>{{< message text="6" >}}
+
+2. <span><span/>{{< message text="5" >}}
 {{% /pageinfo %}}
 
 The Dell Technologies (Dell) Container Storage Modules (CSM) enables simple and consistent integration and automation experiences, extending enterprise storage capabilities to Kubernetes for cloud-native stateful applications. It reduces management complexity so developers can independently consume enterprise storage with ease and automate daily operations such as provisioning, snapshotting, replication, observability, authorization, application mobility, encryption, and resiliency.
@@ -30,7 +32,7 @@ CSM is made up of multiple components including modules (enterprise capabilities
 {{% /cardpane %}}
 {{% cardpane %}}
 {{< card header="[**Resiliency**](resiliency/)"
-          footer="Supports [PowerFlex](csidriver/features/powerflex/) [PowerScale](csidriver/features/powerscale/) [Unity](csidriver/features/unity/) [PowerStore](csidriver/features/powerstore/)">}}
+          footer="Supports [PowerFlex](csidriver/features/powerflex/) [PowerScale](csidriver/features/powerscale/) [Unity](csidriver/features/unity/) [PowerStore](csidriver/features/powerstore/) [PowerMax](csidriver/features/powermax/)">}}
   CSM for Resiliency is designed to make Kubernetes Applications, including those that utilize persistent storage, more resilient to various failures.
 [...Learn more](resiliency/)
   {{< /card >}}
@@ -42,8 +44,8 @@ CSM is made up of multiple components including modules (enterprise capabilities
 {{% /cardpane %}}
 {{% cardpane %}}
 {{< card header="[**Application Mobility**](applicationmobility/)"
-          footer="Supports all platforms">}}
-  Container Storage Modules for Application Mobility provide Kubernetes administrators the ability to clone their stateful application workloads and application data to other clusters, either on-premise or in the cloud.
+          footer="Supports [PowerFlex](csidriver/features/powerflex/) via Apex Navigator for Kubernetes">}}
+  Container Storage Modules for Application Mobility provide Kubernetes administrators the ability to clone their stateful application workloads and application data to other clusters in the cloud.
   [...Learn more](applicationmobility/)
   {{< /card >}}
    {{< card header="[**Encryption**](secure/encryption)"
@@ -54,8 +56,8 @@ CSM is made up of multiple components including modules (enterprise capabilities
 {{% /cardpane %}}
 {{% cardpane %}}
    {{< card header="[License](support/license/)"
-          footer="Required for [Application Mobility](applicationmobility/) & [Encryption](secure/encryption/)">}}
-  The tech-preview releases of Application Mobility and Encryption require a license.
+          footer="Required for [Encryption](secure/encryption/)">}}
+  The tech-preview releases of Encryption require a license.
   Request a license using the [Container Storage Modules License Request](https://app.smartsheet.com/b/form/5e46fad643874d56b1f9cf4c9f3071fb) by providing the requested details.
    [...Learn more](support/license/)
   {{< /card >}}
