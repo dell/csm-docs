@@ -100,7 +100,7 @@ kubectl get csm --all-namespaces
    The driver will continue to use previous values in case of an error found in the YAML file.
 
 3. Create isilon-certs-n secret.
-      Please refer [this section](../../../../csidriver/installation/helm/isilon/#certificate-validation-for-onefs-rest-api-calls) for creating cert-secrets.
+      Please refer [this section](../../../../deployment/helm/drivers/installation/isilon/#certificate-validation-for-onefs-rest-api-calls) for creating cert-secrets.
 
       If certificate validation is skipped, empty secret must be created. To create an empty secret. Ex: empty-secret.yaml
 
@@ -156,6 +156,8 @@ kubectl get csm --all-namespaces
     This command will deploy the CSI-PowerScale driver in the namespace specified in the input YAML file.
 
 6. [Verify the CSI Driver installation](../#verifying-the-driver-installation)
+
+7. Refer https://github.com/dell/csi-powerscale/tree/main/samples for the sample files.
 
 **Note** :
 

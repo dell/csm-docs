@@ -11,6 +11,7 @@ weight: 3
   - [How can I view detailed logs for the CSM Operator?](#how-can-i-view-detailed-logs-for-the-csm-operator)
   - [My Dell CSI Driver install failed. How do I fix it?](#my-dell-csi-driver-install-failed-how-do-i-fix-it)
   - [My CSM Replication install fails to validate replication prechecks with 'no such host'.](#my-csm-replication-install-fails-to-validate-replication-prechecks-with-no-such-host)
+  - [How to update resource limits for CSM Operator when it is deployed using Operator hub](#how-to-update-resource-limits-for-csm-operator-when-it-is-deployed-using-operator-hub)
 
 ### Can CSM Operator manage existing drivers installed using Helm charts or the Dell CSI Operator?
 The Dell CSM Operator is unable to manage any existing driver installed using Helm charts or the Dell CSI Operator. If you already have installed one of the Dell CSI driver in your cluster and  want to use the CSM operator based deployment, uninstall the driver and then redeploy the driver via Dell CSM Operator
@@ -78,3 +79,14 @@ To update the dell-replication-controller-manager deployment, execute the comman
 kubectl patch deployment -n dell-replication-controller dell-replication-controller-manager \
 -p '{"spec":{"template":{"spec":{"hostAliases":[{"hostnames":["<remote-FQDN>"],"ip":"<remote-IP>"}]}}}}'
 ```
+
+### How to update resource limits for CSM Operator when it is deployed using Operator Hub
+In certain environments where users have deployed CSM Operator using Operator hub, they have encountered issues related to CSM Operator pods reporting 'OOM Killed'. This issue is attributed to the default resource requests and limits configured in the CSM Operator, which fail to meet the resource requirements of the user environments. In this case users can update the resource limits from Openshift web console by following the steps below:
+
+* Login into OpenShift web console
+* Navigate to 'Operators' section in the left pane and expand it and click on 'Installed Operators'
+* Select the 'Dell Container Storage Modules' operator
+* Click on the 'YAML' tab under the operator and you will see ClusterServiceVersion(CSV) file opened in an YAML editor
+* Update the resource limits in the opened YAML under the section 'spec.install.spec.deployments.spec.template.spec.containers.resources'
+* Save the CSV and your changes should be applied
+

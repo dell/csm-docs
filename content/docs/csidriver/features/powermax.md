@@ -7,8 +7,7 @@ Description: Code features for PowerMax Driver
 
 ## Multi Unisphere Support 
 
-Starting with v1.7, the CSI PowerMax driver can communicate with multiple Unisphere for PowerMax servers to manage multiple PowerMax arrays.
-In order to use this feature, you must install CSI PowerMax ReverseProxy in `StandAlone` mode with the driver. For more details on how
+Starting with v1.7, the CSI PowerMax driver can communicate with multiple Unisphere for PowerMax servers to manage multiple PowerMax arrays.For more details on how
 to configure the driver and ReverseProxy, see the relevant section [here](../../../deployment/helm/drivers/installation/powermax#sample-values-file)
 
 ## Volume Snapshot Feature

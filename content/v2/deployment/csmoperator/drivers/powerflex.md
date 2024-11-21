@@ -23,18 +23,18 @@ kubectl get csm --all-namespaces
 
 >NOTE: This step can be skipped with OpenShift.
 
-#### SDC Deployment for Operator 
+#### SDC Deployment for Operator
 - This feature deploys the sdc kernel modules on all nodes with the help of an init container.
 - For non-supported versions of the OS also do the manual SDC deployment steps given below. Refer to https://hub.docker.com/r/dellemc/sdc for supported versions.
-- **Note:** When the driver is created, MDM value for initContainers in driver CR is set by the operator from mdm attributes in the driver configuration file, 
+- **Note:** When the driver is created, MDM value for initContainers in driver CR is set by the operator from mdm attributes in the driver configuration file,
   config.yaml. An example of config.yaml is below in this document. Do not set MDM value for initContainers in the driver CR file manually.
-  - Optionally, enable sdc monitor by setting the enable flag for the sdc-monitor to true. Please note: 
-    - **If using sidecar**, you will need to edit the value fields under the HOST_PID and MDM fields by filling the empty quotes with host PID and the MDM IPs. 
+  - Optionally, enable sdc monitor by setting the enable flag for the sdc-monitor to true. Please note:
+    - **If using sidecar**, you will need to edit the value fields under the HOST_PID and MDM fields by filling the empty quotes with host PID and the MDM IPs.
     - **If not using sidecar**, leave the enabled field set to false.
-##### Example CR:  [samples/storage_csm_powerflex_v2101.yaml](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powerflex_v2101.yaml)
+##### Example CR:  [samples/storage_csm_powerflex_v2110.yaml](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powerflex_v2110.yaml)
 ```yaml
     sideCars:
-    # sdc-monitor is disabled by default, due to high CPU usage 
+    # sdc-monitor is disabled by default, due to high CPU usage
       - name: sdc-monitor
         enabled: false
         image: dellemc/sdc:4.5
@@ -43,11 +43,11 @@ kubectl get csm --all-namespaces
           value: "1"
         - name: MDM
           value: "10.xx.xx.xx,10.xx.xx.xx" #provide the same MDM value from secret
-```  
+```
 
 #### Manual SDC Deployment
 
-For detailed PowerFlex installation procedure, see the _Dell PowerFlex Deployment Guide_. Install the PowerFlex SDC using this procedure:
+For detailed PowerFlex installation procedure, see the [Dell PowerFlex Deployment Guide](https://docs.delltechnologies.com/bundle/VXF_DEPLOY/page/GUID-DD20489C-42D9-42C6-9795-E4694688CC75.html). Install the PowerFlex SDC using this procedure:
 
 **Steps**
 
@@ -61,7 +61,7 @@ For detailed PowerFlex installation procedure, see the _Dell PowerFlex Deploymen
 >NOTE: This step can be skipped with OpenShift CoreOS nodes.
 
 #### Create Secret
-1. Create namespace: 
+1. Create namespace:
    Execute `kubectl create namespace vxflexos` to create the `vxflexos` namespace (if not already present). Note that the namespace can be any user-defined name, in this example, we assume that the namespace is 'vxflexos'
 2. Prepare the secret.yaml for driver configuration.
 
@@ -74,26 +74,26 @@ For detailed PowerFlex installation procedure, see the _Dell PowerFlex Deploymen
       # Password for accessing PowerFlex system.
       # If authorization is enabled, password will be ignored.
       password: "password"
-      # System name/ID of PowerFlex system.	
+      # System name/ID of PowerFlex system.
       systemID: "1a99aa999999aa9a"
       # Previous names used in secret of PowerFlex system.
       allSystemNames: "pflex-1,pflex-2"
       # REST API gateway HTTPS endpoint for PowerFlex system.
-      # If authorization is enabled, endpoint should be the HTTPS localhost endpoint that 
+      # If authorization is enabled, endpoint should be the HTTPS localhost endpoint that
       # the authorization sidecar will listen on
       endpoint: "https://127.0.0.1"
       # Determines if the driver is going to validate certs while connecting to PowerFlex REST API interface.
       # Allowed values: true or false
       # Default value: true
-      skipCertificateValidation: true 
+      skipCertificateValidation: true
       # indicates if this array is the default array
       # needed for backwards compatibility
-      # only one array is allowed to have this set to true 
+      # only one array is allowed to have this set to true
       # Default value: false
       isDefault: true
       # defines the MDM(s) that SDC should register with on start.
       # Allowed values:  a list of IP addresses or hostnames separated by comma.
-      # Default value: none 
+      # Default value: none
       mdm: "10.0.0.1,10.0.0.2"
       # NFS is only supported on PowerFlex storage system 4.0.x
       # nasName: name of NAS server used for NFS volumes
@@ -105,30 +105,30 @@ For detailed PowerFlex installation procedure, see the _Dell PowerFlex Deploymen
       password: "Password123"
       systemID: "2b11bb111111bb1b"
       endpoint: "https://127.0.0.2"
-      skipCertificateValidation: true 
+      skipCertificateValidation: true
       mdm: "10.0.0.3,10.0.0.4"
     ```
 
     If replication feature is enabled, ensure the secret includes all the PowerFlex arrays involved in replication.
 
-    After editing the file, run this command to create a secret called `vxflexos-config`. If you are using a different namespace/secret name, just substitute those into the command.
+    After editing the file, run this command to create a secret called `vxflexos-config`.
     ```bash
-    
+
     kubectl create secret generic vxflexos-config -n vxflexos --from-file=config=secret.yaml
     ```
 
     Use this command to replace or update the secret:
 
     ```bash
-    
+
     kubectl create secret generic vxflexos-config -n vxflexos --from-file=config=secret.yaml -o yaml --dry-run=client | kubectl replace -f -
     ```
 
 ### Install Driver
 
 1. Follow all the [prerequisites](#prerequisite) above
-   
-2. Create a CR (Custom Resource) for PowerFlex using the sample files provided 
+
+2. Create a CR (Custom Resource) for PowerFlex using the sample files provided
    [here](https://github.com/dell/csm-operator/tree/master/samples). This file can be modified to use custom parameters if needed.
 
 3. Users should configure the parameters in CR. The following table lists the primary configurable parameters of the PowerFlex driver and their default values:
@@ -136,7 +136,7 @@ For detailed PowerFlex installation procedure, see the _Dell PowerFlex Deploymen
    | Parameter | Description | Required | Default |
    | --------- | ----------- | -------- |-------- |
    | dnsPolicy | Determines the DNS Policy of the Node service | Yes | ClusterFirstWithHostNet |
-   | fsGroupPolicy | Defines which FS Group policy mode to be used, Supported modes `None, File and ReadWriteOnceWithFSType` | No | "ReadWriteOnceWithFSType" |
+   | fsGroupPolicy | Defines which FS Group policy mode to be used, Supported modes `None, File and ReadWriteOnceWithFSType`. In OCP <= 4.16 and K8s <= 1.29, fsGroupPolicy is an immutable field. | No | "ReadWriteOnceWithFSType" |
    | replicas | Controls the number of controller pods you deploy. If the number of controller pods is greater than the number of available nodes, excess pods will become stay in a pending state. Defaults are 2 which allows for Controller high availability. | Yes | 2 |
    | storageCapacity.enabled | Enable/Disable storage capacity tracking | No | true |
    | storageCapacity.pollInterval | Configure how often the driver checks for changed capacity | No | 5m |
@@ -158,12 +158,12 @@ For detailed PowerFlex installation procedure, see the _Dell PowerFlex Deploymen
 4.  Execute this command to create PowerFlex custom resource:
     ```bash
     kubectl create -f <input_sample_file.yaml>
-    ``` 
+    ```
     This command will deploy the CSI-PowerFlex driver in the namespace specified in the input YAML file.
 
 5.  [Verify the CSI Driver installation](../#verifying-the-driver-installation)
 
 6.  Refer https://github.com/dell/csi-powerflex/tree/main/samples for the sample files.
-    
-**Note** : 
+
+**Note** :
    1. Snapshotter and resizer sidecars are installed by default.

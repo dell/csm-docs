@@ -5,7 +5,9 @@ weight: 1
 Description: >
   Installation of CSI Drivers using Helm 
 ---
-
+{{% pageinfo color="primary" %}}
+{{< message text="1" >}}
+{{% /pageinfo %}}
 This section provides the details and instructions on how to install the CSI Driver components using the provided Helm charts and in the case of the CSI drivers, the Dell CSI Helm Installer.
 ## Dependencies
 
