@@ -20,8 +20,8 @@
 
   <meta itemprop="name" content="CSM Operator">
   <meta itemprop="description" content="Container Storage Modules Operator">
-  <meta itemprop="dateModified" content="2024-10-28T15:46:04-04:00">
-  <meta itemprop="wordCount" content="2586">
+  <meta itemprop="dateModified" content="2024-11-21T11:16:26-04:00">
+  <meta itemprop="wordCount" content="2499">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="CSM Operator">
   <meta name="twitter:description" content="Container Storage Modules Operator">
@@ -124,7 +124,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.4152457e122e0c34afe95758c4161263.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.532f0fcc4b911c498575f3cbcc0339a8.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -148,7 +148,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.4152457e122e0c34afe95758c4161263.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.532f0fcc4b911c498575f3cbcc0339a8.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -1374,9 +1374,6 @@ Optional fields <a class="header-link"  href="#optional-fields" style=" display:
 <p><strong>nodeSelector</strong> - Used to specify node selectors for the driver StatefulSet/Deployment and DaemonSet.</p>
 <blockquote>
 <p>NOTE: The <code>image</code> field should point to the correct image tag for version of the driver you are installing.</p>
-</blockquote>
-<blockquote>
-<p>NOTE: The CSM Operator 1.6 is pre-requisite for onboarding brownfield clusters with Apex Navigator For Kubernetes. When the Dell connectivity client is installed, a role and rolebinding will be established in the namespace containing CSM objects, and these will be removed when the client is uninstalled. If the client is already present in the cluster and CSM is deployed or deleted, the roles and rolebindings will be correspondingly created or removed during CSM reconciliation. This process ensures that the client can access the secrets in the namespace.</p>
 </blockquote>
 
         <div class="section-index">
