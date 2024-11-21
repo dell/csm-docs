@@ -38,9 +38,7 @@ yum install -y container-selinux
 
 ### Dark Sites
 
-For environments where `yum` will not work, obtain the supported version of container-selinux for your OS version and install it.
-
-The container-selinux RPMs for CentOS/RedHat 7 and 8 can be downloaded from [https://centos.pkgs.org/7/centos-extras-x86_64/](https://centos.pkgs.org/7/centos-extras-x86_64/) and [https://centos.pkgs.org/8-stream/centos-appstream-x86_64/](https://centos.pkgs.org/8-stream/centos-appstream-x86_64/), respectively.
+For environments where the package manager `yum` is not available, ensure that you install a supported version of `container-selinux` package that is suitable for your Linux distribution.
 
 ## Deploying the CSM Authorization Proxy Server
 
