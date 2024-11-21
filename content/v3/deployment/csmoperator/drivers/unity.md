@@ -85,6 +85,8 @@ kubectl get csm --all-namespaces
       ```
 
 5.  [Verify the CSI Driver installation](../#verifying-the-driver-installation)
+
+6. Refer https://github.com/dell/csi-unity/tree/main/samples for the sample files.
     
 **Note** : 
    1. "Kubelet config dir path" is not yet configurable in case of Operator based driver installation.

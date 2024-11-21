@@ -4,8 +4,10 @@ linkTitle: "Documentation"
 ---
 
 {{% pageinfo color="primary" %}}
-This document version is no longer actively maintained. The site that you are currently viewing is an archived snapshot. For up-to-date documentation, see the [latest version](/csm-docs/)
-The CSM Authorization RPM will be deprecated in a future release. It is highly recommended that you use CSM Authorization Helm deployment or CSM Operator going forward.
+
+1. <span><span/>{{< message text="6" >}}
+
+2. <span><span/>{{< message text="5" >}}
 {{% /pageinfo %}}
 
 The Dell Technologies (Dell) Container Storage Modules (CSM) enables simple and consistent integration and automation experiences, extending enterprise storage capabilities to Kubernetes for cloud-native stateful applications. It reduces management complexity so developers can independently consume enterprise storage with ease and automate daily operations such as provisioning, snapshotting, replication, observability, authorization, application mobility, encryption, and resiliency.
@@ -53,10 +55,10 @@ CSM is made up of multiple components including modules (enterprise capabilities
   {{< /card >}}
 {{% /cardpane %}}
 {{% cardpane %}}
-   {{< card header="[License](license/)"
+   {{< card header="[License](support/license/)"
           footer="Required for [Application Mobility](applicationmobility/) & [Encryption](secure/encryption/)">}}
   The tech-preview releases of Application Mobility and Encryption require a license.
   Request a license using the [Container Storage Modules License Request](https://app.smartsheet.com/b/form/5e46fad643874d56b1f9cf4c9f3071fb) by providing the requested details.
-   [...Learn more](license/)
+   [...Learn more](support/license/)
   {{< /card >}}
 {{% /cardpane %}}

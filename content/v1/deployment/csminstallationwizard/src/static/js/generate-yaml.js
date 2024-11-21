@@ -126,6 +126,7 @@ function setValues(csmMapValues, CONSTANTS_PARAM) {
 	DriverValues.vSphereVCenterHost = $("#vSphere-vCenter-host").val();
 	DriverValues.vSphereVCenterCredSecret = $("#vSphere-vCenter-cred-secret").val();
 	DriverValues.renameSDC = $("#rename-sdc").prop('checked') ? true : false;
+	DriverValues.sdcEnabled = $("#enable-sdc").prop('checked') ? true : false;
 	DriverValues.sdcPrefix = $("#sdc-prefix").val();
 	DriverValues.approveSDC = $("#approve-sdc").prop('checked') ? true : false;
 	DriverValues.enableQuota = $("#enable-quota").prop('checked') ? true : false;
@@ -186,6 +187,7 @@ function createYamlString(yamlTpl, yamlTplValues, driverParam, CONSTANTS_PARAM) 
 	yamlTpl = yamlTpl.replaceAll("$NODE_TOLERATIONS", yamlTplValues.nodeTolerations);
 	yamlTpl = yamlTpl.replaceAll("$TARGET_ARRAY_ID", yamlTplValues.targetArrayID);
 	yamlTpl = yamlTpl.replaceAll("$TARGET_UNISPHERE", yamlTplValues.targetUnisphere);
+	yamlTpl = yamlTpl.replaceAll("$SDC_ENABLED", yamlTplValues.sdcEnabled);
 	yamlTpl = yamlTpl.replaceAll("$RENAME_SDC_ENABLED", yamlTplValues.renameSDC);
 	yamlTpl = yamlTpl.replaceAll("$SDC_PREFIX", yamlTplValues.sdcPrefix);
 	yamlTpl = yamlTpl.replaceAll("$APPROVE_SDC_ENABLED", yamlTplValues.approveSDC);

@@ -9,7 +9,15 @@ Welcome to Dell CSM's interactive tutorials section! Try the different modules w
 
 Our interactive tutorials provide step-by-step guidance on how to use our CSM products in the context of PowerFlex Software-Defined-Storage.
 
-<iframe width="1140" height="640" sandbox="allow-forms allow-modals allow-popups allow-same-origin allow-scripts" src="https://play.instruqt.com/embed/dell/tracks/csm-quickstart?token=em_hdpeUhrpwfrkPUoo" style="border: 0;"></iframe>
+{{< cardpane >}}
+  {{< card header="[**CSM Quickstart**](csm-quickstart/)">}}
+  If you are new to Dell CSM, start here and use the different modules interactively.
+  {{< /card >}}
+{{< /cardpane >}}
 
 
-> NOTE: It takes about 15 minutes for the lab to be ready to use.
+{{< cardpane >}}
+  {{< card header="[**CSM Operator**](csm-operator/)">}}
+  In this tutorial, you will learn how to install and use the CSM Operator.
+  {{< /card >}}
+{{< /cardpane >}}

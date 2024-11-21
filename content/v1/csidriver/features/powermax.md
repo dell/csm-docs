@@ -621,7 +621,10 @@ Without storage capacity tracking, pods get scheduled on a node satisfying the t
 
 Storage capacity can be tracked by setting the attribute `storageCapacity.enabled` to true in values.yaml (set to true by default) during driver installation. To configure how often driver checks for changed capacity, set the `storageCapacity.pollInterval` attribute (set to 5m by default). In case of driver installed via operator, this interval can be configured in the sample file provided [here.](https://github.com/dell/csm-operator/blob/main/samples) by editing the `--capacity-poll-interval` argument present in the provisioner sidecar.
 
+## Metro support
+The CSI PowerMax driver supports the provisioning of Metro volumes. The process and details of how to provision and use Metro volumes can be found [here](../../../replication/high-availability).
 
+Please note that the Metro feature does not require the deployment of the replicator sidecar or the replication controller.
 
 ## Volume Limits
 
