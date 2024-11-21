@@ -7,8 +7,7 @@ Description: Code features for PowerMax Driver
 
 ## Multi Unisphere Support 
 
-Starting with v1.7, the CSI PowerMax driver can communicate with multiple Unisphere for PowerMax servers to manage multiple PowerMax arrays.
-In order to use this feature, you must install CSI PowerMax ReverseProxy in `StandAlone` mode with the driver. For more details on how
+Starting with v1.7, the CSI PowerMax driver can communicate with multiple Unisphere for PowerMax servers to manage multiple PowerMax arrays.For more details on how
 to configure the driver and ReverseProxy, see the relevant section [here](../../../deployment/helm/drivers/installation/powermax#sample-values-file)
 
 ## Volume Snapshot Feature
@@ -280,7 +279,7 @@ Starting from v2.7.0 , the secrets for proxy will be created automatically using
 For this , we need to install cert-manager using below command which manages the certs and secrets  .
 
 ```bash
-kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.11.0/cert-manager.yaml
+kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.16.1/cert-manager.yaml
 ```
 Here is an example showing how to generate a private key and use that to sign an SSL certificate using the openssl tool:
 

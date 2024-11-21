@@ -3,7 +3,9 @@ title: Unity XT
 description: Release notes for Unity XT CSI driver
 ---
 
-## Release Notes - CSI Unity XT v2.11.0
+## Release Notes - CSI Unity XT v2.12.0
+
+
 
 
 
@@ -15,20 +17,13 @@ description: Release notes for Unity XT CSI driver
 
 ### New Features/Changes
 
-- [#1359 - [FEATURE]: Add Support for OpenShift Container Platform (OCP) 4.16 ](https://github.com/dell/csm/issues/1359)
-- [#1400 - [FEATURE]: Support for Kubernetes 1.30](https://github.com/dell/csm/issues/1400)
-- [#1399 - [FEATURE]: Unity 5.4 Support](https://github.com/dell/csm/issues/1399)
+- [#1472 - [FEATURE]: Support for Kubernetes 1.31](https://github.com/dell/csm/issues/1472)
+- [#1473 - [FEATURE]: Add Support for OpenShift Container Platform (OCP) 4.17](https://github.com/dell/csm/issues/1473)
 
 ### Fixed Issues
 
-- [#1198 - [BUG]: Topology-related node labels are not added automatically](https://github.com/dell/csm/issues/1198)
-- [#1206 - [BUG]: Snapshot ingestion procedure for CSI Unity Driver misising ](https://github.com/dell/csm/issues/1206)
-- [#1209 - [BUG]: Doc hyper links in driver Readme is broken](https://github.com/dell/csm/issues/1209)
-- [#1218 - [BUG]: Add the helm-charts-version parameter to the install command for all drivers in csm-docs](https://github.com/dell/csm/issues/1218)
-- [#1222 - [BUG]: Cannot configure export IP for CSI-Unity ](https://github.com/dell/csm/issues/1222)
-- [#1239 - [BUG]: Changes in new release of google.golang.org/protobuf is causing compilation issues](https://github.com/dell/csm/issues/1239)
-- [#1270 - [BUG]: Missing entries for Resiliency in installation wizard template](https://github.com/dell/csm/issues/1270)
-- [#1279 - [BUG]: unable to install the UNITY driver in NAT Env](https://github.com/dell/csm/issues/1279)
+- [#1447 - [BUG]: Gobrick does not clean wwids from /etc/multipath/wwids after removing multipath devices ](https://github.com/dell/csm/issues/1447)
+- [#1448 - [BUG]: CSM-operator build fails from disk space issue](https://github.com/dell/csm/issues/1448)
 
 ### Known Issues
 
