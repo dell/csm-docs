@@ -10,7 +10,7 @@ tags:
 
 The following diagram shows a high-level overview of CSM for Authorization with a `tenant-app` that is using a CSI driver to perform storage operations through the CSM for Authorization `proxy-server` to access the a Dell storage system. All requests from the CSI driver will contain the token for the given tenant that was granted by the Storage Administrator.
 
-![CSM for Authorization](./karavi-authorization-example.png "CSM for Authorization")
+![CSM for Authorization](../../../../images/authorization/v1.x/karavi-authorization-example.png "CSM for Authorization")
 
 ## CSM for Authorization Capabilities
 {{<table "table table-striped table-bordered table-sm">}}
@@ -59,4 +59,4 @@ Tenants of CSM for Authorization can use the token provided by the Storage Admin
 4) Tenant Admin inputs the Token into their Kubernetes cluster as a Secret.
 5) Tenant Admin updates CSI driver with CSM Authorization sidecar module.
 
-![CSM for Authorization Workflow](./design2.png "CSM for Authorization Workflow")
+![CSM for Authorization Workflow](../../../../images/authorization/v1.x/design2.png "CSM for Authorization Workflow")

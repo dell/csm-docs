@@ -8,7 +8,7 @@ description: >
 
 ## SRDF Metro Architecture
 
-![metro architecture diagram](../../powermax-metro.png)
+![metro architecture diagram](../../../../../images/replication/powermax-metro.png)
 
 In SRDF metro configurations:
 * R2 devices are Read/Write accessible to application hosts.
