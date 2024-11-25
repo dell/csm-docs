@@ -31,8 +31,8 @@ CSM for Observability can be deployed to either direct storage system requests d
 
 ### Default Deployment of CSM for Observability
 
-![Default Deployment](../obs_architecture1.png)
+![Default Deployment](../../../images/observability/obs_architecture1.png)
 
 ### Deployment of CSM for Observability with CSM for Authorization
 
-![CSM for Observability with CSM for Authorization](../obs_architecture2.png)
+![CSM for Observability with CSM for Authorization](../../../images/observability/obs_architecture2.png)

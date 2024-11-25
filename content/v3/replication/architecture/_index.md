@@ -7,7 +7,7 @@ description: >
 ---
 
 ## Replication design and architecture
-![arch](../arch.png)
+![arch](../../../images/replication/arch.png)
 
 Container Storage Modules (CSM) for Replication project consists of the following components:
 
@@ -73,11 +73,11 @@ status:
 ```
 
 Here is a diagram representing how the _state_ of the CustomResource changes based on actions:
-![state](../state.png)
+![state](../../../images/replication/state.png)
 
 
 ### CSM Replication Sidecar
-![sidecar](../sidecar.png)
+![sidecar](../../../images/replication/sidecar.png)
 
 CSM Replication sidecar is deployed as sidecar container in _each_ CSI driver's controller pod. This container is similar to Kubernetes CSI Sidecar
 [containers](https://kubernetes-csi.github.io/docs/sidecar-containers.html) and runs a Controller Manager
@@ -100,7 +100,7 @@ It is primarily responsible for the following:
 * Updates to the status sub resource
 
 ### CSM Replication Controller
-![common](../common.png)
+![common](../../../images/replication/common.png)
 
 CSM Replication Controller is a Kubernetes application deployed independently of CSI drivers and is responsible for
 the communication between Kubernetes clusters.

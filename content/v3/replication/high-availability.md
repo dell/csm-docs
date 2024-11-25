@@ -9,7 +9,7 @@ One of the goals of high availability is to eliminate single points of failure i
 
 ## SRDF Metro Architecture
 
-![metro architecture diagram](../metro.png)
+![metro architecture diagram](../../../images/replication/metro.png)
 
 In SRDF metro configurations:
 * R2 devices are Read/Write accessible to application hosts.

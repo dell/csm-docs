@@ -22,7 +22,7 @@ b. Execute "reprotect" action on selected ReplicationGroup which will resume the
    ```bash
     ./repctl --rg rg-id reprotect --at new-source-cluster-name
    ```
-![state_changes1](../state_changes1.png)
+![state_changes1](../../../images/replication/state_changes1.png)
 
 ### Unplanned Migration to the target cluster/array
 This scenario is the typical choice when a site goes down: 
@@ -41,7 +41,7 @@ c. Execute "reprotect" action on selected ReplicationGroup which will resume the
    ```bash    
     ./repctl --rg rg-id reprotect --at new-source-cluster-name
    ```        
-![state_changes2](../state_changes2.png) 
+![state_changes2](../../../images/replication/state_changes2.png) 
       
 
 > _**NOTE**_: When users do Failover and Failback, the tests pods on the source cluster may go "CrashLoopOff" state since it will try to remount the same volume which is already mounted. To get around this problem, bring down the number of replicas to 0 and then after that is done, bring it up to 1.

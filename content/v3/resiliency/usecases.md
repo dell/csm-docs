@@ -8,7 +8,7 @@ description: >
 
 CSM for Resiliency is primarily designed to detect pod failures due to some kind of node failure or node communication failure. The diagram below shows the hardware environment that is assumed in the design.
 
-![CSM for Resiliency Hardware Model](../resiliency_model.jpg)
+![CSM for Resiliency Hardware Model](../../../images/resiliency/resiliency_model.jpg)
 
 A Kubernetes Control Plane is assumed to exist that provides the K8S API service used by CSM for Resiliency. There is an arbitrary number of worker nodes (two are shown in the diagram) that 
 are connected to the Control Plane through a K8S Control Plane IP Network.
