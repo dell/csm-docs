@@ -36,7 +36,7 @@ After the VolumeSnapshot has been successfully created by the CSI driver, a Volu
 
 ### (Optional) Volume Snapshot Requirements
 
-Applicable only if you decide to enable the snapshot feature in `values.yaml`.
+Applicable only if you decide to enable the snapshot feature in `values.yaml` via helm.
 
 ```yaml
 snapshot:
