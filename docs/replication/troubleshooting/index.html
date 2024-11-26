@@ -17,12 +17,12 @@
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="docs">
-    <meta property="article:modified_time" content="2024-10-29T20:34:05-04:00">
+    <meta property="article:modified_time" content="2024-11-26T16:33:33+05:30">
 
   <meta itemprop="name" content="Troubleshooting">
   <meta itemprop="description" content="Troubleshooting guide">
-  <meta itemprop="dateModified" content="2024-10-29T20:34:05-04:00">
-  <meta itemprop="wordCount" content="665">
+  <meta itemprop="dateModified" content="2024-11-26T16:33:33+05:30">
+  <meta itemprop="wordCount" content="723">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Troubleshooting">
   <meta name="twitter:description" content="Troubleshooting guide">
@@ -125,7 +125,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.f10d9e97ae6f44cc7408934a4c7c37b0.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.697856bbd78c8f71cd2f7547375e72ca.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -149,7 +149,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.f10d9e97ae6f44cc7408934a4c7c37b0.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.697856bbd78c8f71cd2f7547375e72ca.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -749,6 +749,10 @@
       <tr>
           <td style="text-align: left">When running CSI-PowerMax with Replication in a multi-cluster configuration, the driver on the target cluster fails and the following error is seen in logs: <code>error=&quot;CSI reverseproxy service host or port not found, CSI reverseproxy not installed properly&quot;</code></td>
           <td style="text-align: left">The reverseproxy service needs to be created manually on the target cluster. Follow <a href="../../deployment/csmoperator/modules/replication#configuration-steps">the instructions here</a> to create it.</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">When getting the following error for CSi-Powerscale with Replication with encryption enabled: <code>SyncIQ policy failed to establish an encrypted connection</code>, the Replication groups and PVC&rsquo;s won&rsquo;t be created at target cluster.</td>
+          <td style="text-align: left">The <code>encryption required</code> flag in the SyncIQ settings was set to &ldquo;yes&rdquo; by default in OneFS 9.0+. To rectify this error, please follow the following article: <a href="https://www.dell.com/support/kbdoc/en-us/000215174/isilon-synciq-9-0-all-policies-fail-when-source-or-target-cluster-is-on-onefs-9-0-with-no-node-on-source-cluster-was-able-to-connect-to-target-cluster">https://www.dell.com/support/kbdoc/en-us/000215174/isilon-synciq-9-0-all-policies-fail-when-source-or-target-cluster-is-on-onefs-9-0-with-no-node-on-source-cluster-was-able-to-connect-to-target-cluster</a></td>
       </tr>
   </tbody>
 </table>
