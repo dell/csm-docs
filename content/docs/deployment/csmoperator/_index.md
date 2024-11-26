@@ -350,6 +350,8 @@ The `Update approval` (**`InstallPlan`** in OLM terms) strategy plays a role whi
 
 >NOTE: The recommended version of OLM for Upstream Kubernetes is **`v0.25.0`**.
 
+>NOTE: The recommended Update Approval is **`Manual`** to prevent the inatsllation of non-qualified versions of operator.
+
 #### Using Installation Script
 
 1. Clone and checkout the required csm-operator version using
