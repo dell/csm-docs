@@ -26,7 +26,8 @@ The installation process involves the creation of a `Subscription` object either
 * _Automatic_ - If you want the operator to be automatically installed or upgraded (once an upgrade is available).
 * _Manual_ - If you want a cluster administrator to manually review and approve the `InstallPlan` for installation/upgrades.
 
-![OpenShit Operator Hub CSM install](operator_hub_install.gif)
+![OpenShit Operator Hub CSM install](../../../images/deployment/operator_hub_install.gif)
+
 
 ### Certified vs Community
 Dell CSM Operator is distributed as both `Certified` & `Community` editions. 
@@ -65,7 +66,7 @@ git clone -b v1.5.1 https://github.com/dell/csm-operator.git
 
 >NOTE: Dell CSM Operator will be installed in the `dell-csm-operator` namespace.
 
-{{< imgproc install.JPG Resize "2500x" >}}{{< /imgproc >}}
+<img src="../../../images/deployment/install.jpg" width="2500px"  style="border: 2px solid #ccc; padding: 10px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
 
 6. Run the command to validate the installation.
 ```bash
@@ -73,7 +74,7 @@ kubectl get pods -n dell-csm-operator
 ```
  If installed successfully, you should be able to see the operator pod in the `dell-csm-operator` namespace.
 
-{{< imgproc install_pods.jpg Resize "2500x" >}}{{< /imgproc >}}
+<img src="../../../images/deployment/install_pods.jpg" width="2500px"  style="border: 2px solid #ccc; padding: 10px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
 
 ### Offline Bundle Installation on a cluster without OLM
 The `csm-offline-bundle.sh` script can be used to create a package usable for offline installation of Dell CSI Drivers via CSM Operator
@@ -286,7 +287,7 @@ bash scripts/install.sh
 ### Operator uninstallation on a cluster without OLM
 To uninstall a CSM operator, run `bash scripts/uninstall.sh`. This will uninstall the operator in `dell-csm-operator` namespace.
 
-{{< imgproc uninstall.jpg Resize "2500x" >}}{{< /imgproc >}}
+<img src="../../../images/deployment/uninstall.JPG" width="2500px"  style="border: 2px solid #ccc; padding: 10px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
 
 ## Upgrade
 ### Dell CSM Operator
