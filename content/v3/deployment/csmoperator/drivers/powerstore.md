@@ -267,7 +267,7 @@ replication:
 
 The CRDs for replication can be obtained and installed from the csm-replication project on Github. Use `csm-replication/deploy/replicationcrds.all.yaml` located in csm-replication git repo for the installation.
 
-CRDs should be configured during replication prepare stage with repctl as described in [install-repctl](../../../../replication/deployment/install-repctl)
+CRDs should be configured during replication prepare stage with repctl as described in [install-repctl](../../../helm/modules/installation/replication/install-repctl)
 ### Namespace and PowerStore API Access Configuration
 
 1. Create namespace.

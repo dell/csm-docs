@@ -3,7 +3,7 @@ title: PowerMax
 description: Release notes for PowerMax CSI driver
 ---
 
-## Release Notes - CSI PowerMax v2.10.1
+## Release Notes - CSI PowerMax v2.11.0
 
 >Note: Auto SRDF group creation is currently not supported in PowerMaxOS 10.1 (6079) Arrays.
 
@@ -15,19 +15,25 @@ description: Release notes for PowerMax CSI driver
 
 
 
+
 ### New Features/Changes
 
-- [#1284 - [FEATURE]: Support for Openshift 4.15](https://github.com/dell/csm/issues/1284)
-- [#1285 - [FEATURE]: Remove checks in code for non-supported installs of CSM](https://github.com/dell/csm/issues/1285)
-- [#926 - [FEATURE]: Fixing the linting, formatting and vetting issues](https://github.com/dell/csm/issues/926)
+- [#1308 - [FEATURE]: NVMe TCP support for PowerMax ](https://github.com/dell/csm/issues/1308)
+- [#1359 - [FEATURE]: Add Support for OpenShift Container Platform (OCP) 4.16 ](https://github.com/dell/csm/issues/1359)
+- [#1400 - [FEATURE]: Support for Kubernetes 1.30](https://github.com/dell/csm/issues/1400)
+- [#1082 - [FEATURE]: CSM Resiliency support for PowerMax](https://github.com/dell/csm/issues/1082)
+- [#1397 - [FEATURE]: Observability upgrade is supported in CSM Operator](https://github.com/dell/csm/issues/1397)
 
 ### Fixed Issues
 
-- [#1081 - [BUG]: CSM driver repositories reference CSI Operator](https://github.com/dell/csm/issues/1081)
-- [#1115 - [BUG]: CSI Powermax: Driver fails to restore snapshot to Metro Volumes](https://github.com/dell/csm/issues/1115)
-- [#1140 - [BUG]: Cert-csi tests are not reporting the passed testcases in K8S E2E tests ](https://github.com/dell/csm/issues/1140)
-- [#1174 - [BUG]: Kubelet Configuration Directory setting should not have a comment about default value being None](https://github.com/dell/csm/issues/1174)
-- [#1175 - [BUG]: PowerMax : Metro: Failed to find Remote Symm WWN](https://github.com/dell/csm/issues/1175)
+- [#1209 - [BUG]: Doc hyper links in driver Readme is broken](https://github.com/dell/csm/issues/1209)
+- [#1218 - [BUG]: Add the helm-charts-version parameter to the install command for all drivers in csm-docs](https://github.com/dell/csm/issues/1218)
+- [#1238 - [BUG]: Missing mountPropagation param for Powermax node template in CSM-Operator](https://github.com/dell/csm/issues/1238)
+- [#1239 - [BUG]: Changes in new release of google.golang.org/protobuf is causing compilation issues](https://github.com/dell/csm/issues/1239)
+- [#1305 - [BUG]: Create volume even if the size is smaller than possible](https://github.com/dell/csm/issues/1305)
+- [#1346 - [BUG]: Parsing an NVME response fails for list-subsys](https://github.com/dell/csm/issues/1346)
+- [#1370 - [BUG]: API command to check filesystem is taking 20s + causing ControllerUnPublish to take 20+secs ](https://github.com/dell/csm/issues/1370)
+- [#1372 - [BUG]: Make files in repositories build invalid images](https://github.com/dell/csm/issues/1372)
 
 ### Known Issues
 

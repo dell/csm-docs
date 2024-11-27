@@ -14,7 +14,7 @@ Description: >
 
 Metrics data is collected and pushed to the [OpenTelemetry Collector](https://github.com/open-telemetry/opentelemetry-collector), so it can be processed, and exported in a format consumable by Prometheus. SSL certificates for TLS between nodes are handled by [cert-manager](https://github.com/jetstack/cert-manager).
 
-CSM for Observability is composed of several services, each residing in its own GitHub repository, that can be installed following one of the four deployments we support [here](deployment). Contributions can be made to this repository or any of the CSM for Observability repositories listed below.
+CSM for Observability is composed of several services, each residing in its own GitHub repository, that can be installed following one of the four deployments we support [here](../deployment/helm/modules/installation/observability/). Contributions can be made to this repository or any of the CSM for Observability repositories listed below.
 
 {{<table "table table-striped table-bordered table-sm">}}
 | Name | Repository | Description |
@@ -43,36 +43,6 @@ CSM for Observability provides the following capabilities:
 | Grafana Dashboards for displaying metrics and topology data | yes |  yes | no | yes | yes |
 {{</table>}}
 
-## Supported Operating Systems/Container Orchestrator Platforms
-
-{{<table "table table-striped table-bordered table-sm">}}
-| COP/OS | Supported Versions |
-|-|-|
-| Kubernetes    | 1.26, 1.27, 1.28 |
-| Red Hat OpenShift | 4.13, 4.14 |
-| Rancher Kubernetes Engine | yes |
-{{</table>}}
-
-## Supported Storage Platforms
-
-{{<table "table table-striped table-bordered table-sm">}}
-|               | PowerFlex | PowerStore | PowerScale | PowerMax |
-|---------------|:-------------------:|:----------------:|:----------------:|:----------------:|
-| Storage Array | 3.6.x, 4.0.x, 4.5 | 3.0, 3.2, 3.5 | OneFS 9.3, 9.4, 9.5.0.x (x >= 5) | PowerMax 2000/8000 <br> PowerMax 2500/8500 PowerMaxOS 10 (6079) , PowerMaxOS 10.0.1 (6079) ,  PowerMaxOS 10.1 (6079) <br> PowerMax 2000/8000 - 5978.711.xxx, 5978.479.xxx <br> Unisphere 10.0, 10.0.1, 10.1 |
-{{</table>}}
-
-## Supported CSI Drivers
-
-CSM for Observability supports the following CSI drivers and versions.
-{{<table "table table-striped table-bordered table-sm">}}
-| Storage Array | CSI Driver | Supported Versions |
-| ------------- | ---------- | ------------------ |
-| CSI Driver for Dell PowerFlex | [csi-powerflex](https://github.com/dell/csi-powerflex) | v2.0 + |
-| CSI Driver for Dell PowerStore | [csi-powerstore](https://github.com/dell/csi-powerstore) | v2.0 + |
-| CSI Driver for Dell PowerScale | [csi-powerscale](https://github.com/dell/csi-powerscale) | v2.0 + |
-| CSI Driver for Dell PowerMax | [csi-powermax](https://github.com/dell/csi-powermax) | v2.5 + |
-{{</table>}}
-
 ## Topology Data
 
 CSM for Observability provides Kubernetes administrators with the topology data related to containerized storage. This topology data is visualized using Grafana:
@@ -94,7 +64,7 @@ CSM for Observability provides Kubernetes administrators with the topology data 
 
 ## TLS Encryption
 
-CSM for Observability deployment relies on [cert-manager](https://github.com/jetstack/cert-manager) to manage SSL certificates that are used to encrypt communication between various components. When [deploying CSM for Observability](./deployment), cert-manager is installed and configured automatically.  The cert-manager components listed below will be installed alongside CSM for Observability.
+CSM for Observability deployment relies on [cert-manager](https://github.com/jetstack/cert-manager) to manage SSL certificates that are used to encrypt communication between various components. When [deploying CSM for Observability](../deployment/helm/modules/installation/observability), cert-manager is installed and configured automatically.  The cert-manager components listed below will be installed alongside CSM for Observability.
 
 {{<table "table table-striped table-bordered table-sm">}}
 | Component |

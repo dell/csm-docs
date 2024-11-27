@@ -5,7 +5,7 @@ weight: 6
 description: Release Notes for COSI Driver
 ---
 
-## Release Notes - COSI Driver v0.2.1
+## Release Notes - COSI Driver v0.3.0
 
 
 

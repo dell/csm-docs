@@ -3,7 +3,7 @@ title: PowerMax
 description: Release notes for PowerMax CSI driver
 ---
 
-## Release Notes - CSI PowerMax v2.9.1
+## Release Notes - CSI PowerMax v2.10.1
 
 >Note: Auto SRDF group creation is currently not supported in PowerMaxOS 10.1 (6079) Arrays.
 
@@ -12,27 +12,22 @@ description: Release notes for PowerMax CSI driver
 >Note: File Replication for PowerMax is currently not supported 
 
 
+
+
+
 ### New Features/Changes
 
-- [#947 - [FEATURE]: Support for Kubernetes 1.28](https://github.com/dell/csm/issues/947)
-- [#1066 - [FEATURE]: Support for Openshift 4.14](https://github.com/dell/csm/issues/1066)
-- [#851 - [FEATURE]: Helm Chart Enhancement - Container Images Configurable in values.yaml](https://github.com/dell/csm/issues/851)
-- [#905 - [FEATURE]: Add support for CSI Spec 1.6](https://github.com/dell/csm/issues/905)
-- [#991 - [FEATURE]:Remove linked proxy mode for PowerMax](https://github.com/dell/csm/issues/991)
-- [#996 - [FEATURE]: Dell CSI to Dell CSM Operator Migration Process](https://github.com/dell/csm/issues/996)
-- [#1062 - [FEATURE]: CSM PowerMax: Support PowerMax v10.1 ](https://github.com/dell/csm/issues/1062)
+- [#1284 - [FEATURE]: Support for Openshift 4.15](https://github.com/dell/csm/issues/1284)
+- [#1285 - [FEATURE]: Remove checks in code for non-supported installs of CSM](https://github.com/dell/csm/issues/1285)
+- [#926 - [FEATURE]: Fixing the linting, formatting and vetting issues](https://github.com/dell/csm/issues/926)
 
 ### Fixed Issues
 
-- [#983 - [BUG]: storageCapacity can be set in unsupported CSI Powermax with CSM Operator](https://github.com/dell/csm/issues/983)
-- [#1014 - [BUG]: Missing error check for os.Stat call during volume publish](https://github.com/dell/csm/issues/1014)
-- [#1037 - [BUG]: Document instructions update: Either Multi-Path or the Power-Path software should be enabled for PowerMax ](https://github.com/dell/csm/issues/1037)
-- [#1051 - [BUG]: make docker command is failing with error ](https://github.com/dell/csm/issues/1051)
-- [#1053 - [BUG]: make gosec is erroring out - Repos PowerMax,PowerStore,PowerScale (gosec is installed)](https://github.com/dell/csm/issues/1053)
-- [#1056 - [BUG]: Missing runtime dependencies reference in PowerMax README file.](https://github.com/dell/csm/issues/1056)
-- [#1061 - [BUG]: Golint is not installing with go get command](https://github.com/dell/csm/issues/1061)
-- [#1110 - [BUG]: Multi Controller defect - sidecars timeout](https://github.com/dell/csm/issues/1110)
-- [#1103 - [BUG]: CSM Operator doesn't apply fSGroupPolicy value to CSIDriver Object](https://github.com/dell/csm/issues/1103)
+- [#1081 - [BUG]: CSM driver repositories reference CSI Operator](https://github.com/dell/csm/issues/1081)
+- [#1115 - [BUG]: CSI Powermax: Driver fails to restore snapshot to Metro Volumes](https://github.com/dell/csm/issues/1115)
+- [#1140 - [BUG]: Cert-csi tests are not reporting the passed testcases in K8S E2E tests ](https://github.com/dell/csm/issues/1140)
+- [#1174 - [BUG]: Kubelet Configuration Directory setting should not have a comment about default value being None](https://github.com/dell/csm/issues/1174)
+- [#1175 - [BUG]: PowerMax : Metro: Failed to find Remote Symm WWN](https://github.com/dell/csm/issues/1175)
 
 ### Known Issues
 
@@ -46,4 +41,4 @@ description: Release notes for PowerMax CSI driver
 | When the driver is installed using CSM Operator , few times, pods created using block volume are getting stuck in containercreating/terminating state or devices are not available inside the pod. | Update the daemonset with parameter `mountPropagation: "Bidirectional"` for volumedevices-path under volumeMounts section.|
 ### Note:
 
-- Support for Kubernetes alpha features like Volume Health Monitoring and RWOP (ReadWriteOncePod) access mode will not be available in Openshift environment as Openshift doesn't support enabling of alpha features for Production Grade clusters.
+- Support for Kubernetes alpha features like Volume Health Monitoring will not be available in Openshift environment as Openshift doesn't support enabling of alpha features for Production Grade clusters.

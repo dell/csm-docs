@@ -1,20 +1,20 @@
 ---
 title: PowerScale
-linkTitle: "PowerScale"
+linkTitle: PowerScale
 description: >
-  Installing Dell CSI Driver for PowerScale via Dell CSM Operator
+  Installing the CSI Driver for Dell PowerScale via Dell CSM Operator
 ---
-
-## Installing CSI Driver for PowerScale via Dell CSM Operator
-
+{{% pageinfo color="primary" %}}
+{{< message text="1" >}}
+{{% /pageinfo %}}
 The CSI Driver for Dell PowerScale can be installed via the Dell CSM Operator.
 To deploy the Operator, follow the instructions available [here](../../#installation).
 
 Note that the deployment of the driver using the operator does not use any Helm charts and the installation and configuration parameters will be slightly different from the one specified via the Helm installer.
 
-### Listing installed drivers with the ContainerStorageModule CRD
+### Listing installed drivers
 
-User can query for all Dell CSI drivers using the following command:
+To query for all Dell CSI drivers installed with the ContainerStorageModule CRD use the following command:
 
 ```bash
 kubectl get csm --all-namespaces
@@ -122,7 +122,13 @@ kubectl get csm --all-namespaces
 1. Follow all the [prerequisites](#prerequisite) above
 
 2. Create a CR (Custom Resource) for PowerScale using the sample files provided
-   [here](https://github.com/dell/csm-operator/tree/master/samples). This file can be modified to use custom parameters if needed.
+
+    a. Install the PowerScale driver using default configuration using
+    the sample file provided
+   [here](https://github.com/dell/csm-operator/tree/main/samples/minimal-samples). This file can be modified to use custom parameters if needed.
+
+    b. Install the PowerScale driver using the detailed configuration using the sample file provided
+    [here](https://github.com/dell/csm-operator/tree/main/samples).
 
 3. Users should configure the parameters in CR. The following table lists the primary configurable parameters of the PowerScale driver and their default values:
 

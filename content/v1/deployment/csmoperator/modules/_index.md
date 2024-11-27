@@ -4,7 +4,9 @@ linkTitle: "CSM Modules"
 description: Installation of Dell CSM Modules using Dell CSM Operator
 weight: 2
 ---
-
+{{% pageinfo color="primary" %}}
+{{< message text="1" >}}
+{{% /pageinfo %}}
 The CSM Operator can optionally enable modules that are supported by the specific Dell CSI driver. By default, the modules are disabled but they can be enabled by setting any pre-requisite configuration options for the given module and setting the enabled flag to true  in the custom resource.
 The steps include:
 

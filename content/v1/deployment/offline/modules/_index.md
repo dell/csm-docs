@@ -5,7 +5,9 @@ weight: 3
 description: >
   Dell Container Storage Modules (CSM) for Observability Offline Installer
 ---
-
+{{% pageinfo color="primary" %}}
+{{< message text="3" >}}
+{{% /pageinfo %}}
 The following instructions can be followed when a Helm chart will be installed in an environment that does not have an Internet connection and will be unable to download the Helm chart and related Docker images.
 
 ## Prerequisites
@@ -75,11 +77,11 @@ To perform an offline installation of a Helm chart, the following steps should b
     *
     * Downloading and saving Docker images
 
-      dellemc/csm-topology:v1.6.0
-      dellemc/csm-metrics-powerflex:v1.6.0
-      dellemc/csm-metrics-powerstore:v1.6.0
-      dellemc/csm-metrics-powerscale:v1.3.0
-      dellemc/csm-metrics-powermax:v1.1.0
+      quay.io/dell/container-storage-modules/csm-topology:v1.10.0
+      quay.io/dell/container-storage-modules/csm-metrics-powerflex:v1.10.0
+      quay.io/dell/container-storage-modules/csm-metrics-powerstore:v1.10.0
+      quay.io/dell/container-storage-modules/csm-metrics-powerscale:v1.7.0
+      quay.io/dell/container-storage-modules/csm-metrics-powermax:v1.5.0
       otel/opentelemetry-collector:0.42.0
       nginxinc/nginx-unprivileged:1.20
 
@@ -110,11 +112,11 @@ To perform an offline installation of a Helm chart, the following steps should b
     *
     * Loading, tagging, and pushing Docker images to registry <my-registry>:5000/
 
-      dellemc/csm-topology:v1.6.0 -> <my-registry>:5000/csm-topology:v1.6.0
-      dellemc/csm-metrics-powerflex:v1.6.0 -> <my-registry>:5000/csm-metrics-powerflex:v1.6.0
-      dellemc/csm-metrics-powerstore:v1.6.0 -> <my-registry>:5000/csm-metrics-powerstore:v1.6.0
-      dellemc/csm-metrics-powerscale:v1.3.0 -> <my-registry>:5000/csm-metrics-powerscale:v1.3.0
-      dellemc/csm-metrics-powermax:v1.1.0 -> <my-registry>:5000/csm-metrics-powermax:v1.1.0
+      quay.io/dell/container-storage-modules/csm-topology:v1.10.0 -> <my-registry>:5000/csm-topology:v1.10.0
+      quay.io/dell/container-storage-modules/csm-metrics-powerflex:v1.10.0 -> <my-registry>:5000/csm-metrics-powerflex:v1.10.0
+      quay.io/dell/container-storage-modules/csm-metrics-powerstore:v1.10.0 -> <my-registry>:5000/csm-metrics-powerstore:v1.10.0
+      quay.io/dell/container-storage-modules/csm-metrics-powerscale:v1.7.0 -> <my-registry>:5000/csm-metrics-powerscale:v1.7.0
+      quay.io/dell/container-storage-modules/csm-metrics-powermax:v1.5.0 -> <my-registry>:5000/csm-metrics-powermax:v1.5.0
       otel/opentelemetry-collector:0.42.0 -> <my-registry>:5000/opentelemetry-collector:0.42.0
       nginxinc/nginx-unprivileged:1.20 -> <my-registry>:5000/nginx-unprivileged:1.20
     ```
@@ -148,7 +150,7 @@ To perform an offline installation of a Helm chart, the following steps should b
     kubectl get secret [VXFLEXOS-CONFIG] -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/name: [VXFLEXOS-CONFIG]/name: vxflexos-config/' | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -
     ```
 
-    If [CSM for Authorization is enabled](../../../deployment/helm/modules/installation/authorization#configuring-a-dell-csi-driver-with-csm-for-authorization) for CSI PowerFlex, perform these steps:
+    If [CSM for Authorization is enabled](../../../deployment/helm/modules/installation/authorization-v2.0/#configuring-a-dell-csi-driver-with-csm-for-authorization) for CSI PowerFlex, perform these steps:
 
     ```bash
 
@@ -191,7 +193,7 @@ To perform an offline installation of a Helm chart, the following steps should b
     kubectl get secret [ISILON-CREDS] -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/name: [ISILON-CREDS]/name: isilon-creds/' | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -
     ```
 
-    If [CSM for Authorization is enabled](../../../deployment/helm/modules/installation/authorization#configuring-a-dell-csi-driver-with-csm-for-authorization) for CSI PowerScale, perform these steps:
+    If [CSM for Authorization is enabled](../../../deployment/helm/modules/installation/authorization-v2.0/#configuring-a-dell-csi-driver-with-csm-for-authorization) for CSI PowerScale, perform these steps:
 
     ```bash
 
@@ -242,7 +244,7 @@ To perform an offline installation of a Helm chart, the following steps should b
     done
     ```
 
-    If [CSM for Authorization is enabled](../../../deployment/helm/modules/installation/authorization#configuring-a-dell-csi-driver-with-csm-for-authorization) for CSI PowerMax, perform these steps:
+    If [CSM for Authorization is enabled](../../../deployment/helm/modules/installation/authorization-v2.0/#configuring-a-dell-csi-driver-with-csm-for-authorization) for CSI PowerMax, perform these steps:
 
     ```bash
 

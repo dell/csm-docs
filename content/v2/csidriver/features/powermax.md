@@ -399,6 +399,8 @@ After a successful installation of the driver, if a node Pod is running successf
 `csi-powermax.dellemc.com/\<array-id\>.fc`
 * If the worker node has ISCSI connectivity to the PowerMax array -
 `csi-powermax.dellemc.com/\<array-id\>.iscsi`
+* If the worker node has NVMeTCP connectivity to the PowerMax array -
+`csi-powermax.dellemc.com/\<array-id\>.nvmetcp`
 
 The values for all these keys are always set to the name of the provisioner which is usually `csi-powermax.dellemc.com`.
 
@@ -575,7 +577,7 @@ CSI Driver for Dell PowerMax 2.5.0 and above supports auto RDM for vSphere over 
 
 This feature supports volume provisioning on Kubernetes clusters running on vSphere (VMware hypervisor) via RDM mechanism. This feature enables the users to use PMAX CSI drivers with VMs on vSphere Hypervisor with the same feature and functionality as there with bare metal servers when they have only FC ports in PMAX storage.
 
-It will be supported only on new/freshly installed clusters where the cluster is exclusively deployed in a virtualized vSphere environment. Having hybrid topologies like ISCSI or FC (in pass-through) is not supported.  
+It will be supported only on new/freshly installed clusters where the cluster is exclusively deployed in a virtualized vSphere environment. Having hybrid topologies like iSCSI, NVMeTCP or FC (in pass-through) is not supported.  
 
 To use this feature
 - Set `vSphere.enabled` to true.
@@ -636,3 +638,13 @@ This feature is also supported for limiting the volume provisioning on Kubernete
 >**NOTE:** <br>The default value of `maxPowerMaxVolumesPerNode` is 0. <br>If `maxPowerMaxVolumesPerNode` is set to zero, then CO shall decide how many volumes of this type can be published by the controller to the node.<br><br>The volume limit specified to `maxPowerMaxVolumesPerNode` attribute is applicable to all the nodes in the cluster for which node label `max-powermax-volumes-per-node` is not set.
 <br>Supported maximum number of RDM Volumes per VM is 60 as per the limitations. <br>If the value is set both by node label and values.yaml file then node label value will get the precedence and user has to remove the node label in order to reflect the values.yaml value. 
 
+## NVMe/TCP Support
+
+The CSI Driver for Dell PowerMax supports NVMeTCP from v2.11.0. To enable NVMe/TCP provisioning, blockProtocol in settings file should be specified as NVMETCP.
+
+**Limitations**<br>
+These are the CSM modules not supported with NVMeTCP protocol:
+- CSM Authorization
+- CSM Observability
+- CSM Application Mobility
+- Metro Replication

@@ -40,6 +40,295 @@ To deploy the Operator, follow the instructions available [here](../../operatori
       <div class="accordion-body">
 
 
+To query for all Dell CSI drivers installed with the ContainerStorageModule CRD use the following command:
+
+```bash
+kubectl get csm --all-namespaces
+```
+
+## Prerequisites
+
+The following requirements must be met before installing the CSI Driver for Dell PowerMax:
+
+- A Kubernetes or OpenShift cluster (see [supported versions](../../../../csidriver/#features-and-capabilities)).
+- If enabling CSM for Authorization, please refer to the Authorization deployment steps first
+- If enabling CSM Replication, both source and target storage systems must be locally managed by Unisphere.
+  - _Example_: When using two Unisphere instances, the first Unisphere instance should be configured with the source storage system as locally
+  managed and target storage system as remotely managed. The second Unisphere configuration should mirror the first — locally managing the target storage system and
+  remotely managing the source storage system.
+- Refer to the sections below for protocol specific requirements.
+- For NVMe support the preferred multipath solution is NVMe native multipathing. The [Dell Host Connectivity Guide](https://elabnavigator.dell.com/vault/pdf/Linux.pdf) describes the details of each configuration option.
+- Linux multipathing requirements (described later).
+- PowerPath for Linux requirements (described later).
+- Mount propagation is enabled on the container runtime that is being used.
+- If using Snapshot feature, satisfy all Volume Snapshot requirements.
+- Insecure registries are defined in Docker or other container runtime for CSI drivers that are hosted in a non-secure location.
+- Ensure that your nodes support mounting NFS volumes if using NFS.
+- Auto RDM for vSphere over FC requirements
+
+### CSI PowerMax Reverse Proxy
+
+The CSI PowerMax Reverse Proxy is a component that will be installed with the CSI PowerMax driver. For more details on this feature, see the related [documentation](../../../../csidriver/features/powermax/#csi-powermax-reverse-proxy).
+
+Create a TLS secret that holds an SSL certificate and a private key. This is required by the reverse proxy server.
+Use a tool such as `openssl` to generate this secret using the example below:
+
+```bash
+openssl genrsa -out tls.key 2048
+openssl req -new -x509 -sha256 -key tls.key -out tls.crt -days 3650
+kubectl create secret -n <namespace> tls csirevproxy-tls-secret --cert=tls.crt --key=tls.key
+```
+
+### Fibre Channel Requirements
+
+The following requirements must be fulfilled in order to successfully use the Fiber Channel protocol with the CSI PowerMax driver:
+
+- Zoning of the Host Bus Adapters (HBAs) to the Fibre Channel port director must be completed.
+- Ensure that the HBA WWNs (initiators) appear on the list of initiators that are logged into the array.
+- If the number of volumes that will be published to nodes is high, then configure the maximum number of LUNs for your HBAs on each node. See the appropriate HBA document to configure the maximum number of LUNs.
+
+### iSCSI Requirements
+
+The following requirements must be fulfilled in order to successfully use the iSCSI protocol with the CSI PowerMax driver.
+
+- Ensure that the necessary iSCSI initiator utilities are installed on each Kubernetes worker node. This typically includes the _iscsi-initiator-utils_ package for RHEL or _open-iscsi_ package for Ubuntu.
+- Enable and start the _iscsid_ service on each Kubernetes worker node. This service is responsible for managing the iSCSI initiator. You can enable the service by running the following command on all worker nodes: `systemctl enable --now iscsid`
+- Ensure that the unique initiator name is set in _/etc/iscsi/initiatorname.iscsi_.
+- To configure iSCSI in Red Hat OpenShift clusters, you can create a `MachineConfig` object using the console or `oc` to ensure that the iSCSI daemon starts on all the Red Hat CoreOS nodes. Here is an example of a `MachineConfig` object:
+
+```yaml
+apiVersion: machineconfiguration.openshift.io/v1
+kind: MachineConfig
+metadata:
+  name: 99-iscsid
+  labels:
+    machineconfiguration.openshift.io/role: worker
+spec:
+  config:
+    ignition:
+      version: 3.2.0
+    systemd:
+      units:
+      - name: "iscsid.service"
+        enabled: true
+```
+
+Once the `MachineConfig` object has been deployed, CoreOS will ensure that the `iscsid.service` starts automatically. You can check the status of the iSCSI service by entering the following command on each worker node in the cluster: `sudo systemctl status iscsid`.
+
+- Ensure that the iSCSI initiators are available on all the nodes where the driver node plugin will be installed.
+- Ensure that the unique initiator name is set in _/etc/iscsi/initiatorname.iscsi_.
+- If your worker nodes are running Red Hat CoreOS, make sure that automatic iSCSI login at boot is configured. Please contact RedHat for more details.
+- Kubernetes nodes must have network connectivity to an iSCSI director on the Dell PowerMax array that has IP interfaces. Manually create IP routes for each node that connects to the Dell PowerMax if required.
+- Ensure that the iSCSI initiators on the nodes are not a part of any existing Host (Initiator Group) on the Dell PowerMax array.
+- The CSI Driver needs the port group name containing the required iSCSI director ports. These port groups must be set up on each Dell PowerMax array. All the port group names supplied to the driver must exist on each Dell PowerMax with the same name.
+
+Refer to the [Dell Host Connectivity Guide](https://elabnavigator.dell.com/vault/pdf/Linux.pdf) for more information.
+
+### NVMe Requirements
+
+The following requirements must be fulfilled in order to successfully use the NVMe/TCP protocols with the CSI PowerMax driver:
+
+- Modules including the nvme, nvme_core, nvme_fabrics, and nvme_tcp are required for using NVMe over Fabrics using TCP. Load the NVMe and NVMe-OF Modules using the below commands:
+```bash
+modprobe nvme
+modprobe nvme_tcp
+```
+- The NVMe modules may not be available after a node reboot. Loading the modules at startup is recommended.
+
+> Starting with OCP 4.14 NVMe/TCP is enabled by default on RCOS nodes.
+
+
+**Cluster requirments**
+
+- All OpenShift or Kubernetes nodes connecting to Dell storage arrays must use unique host NQNs.
+- The driver requires the NVMe command-line interface (nvme-cli) to manage the NVMe clients and targets. The NVMe CLI tool is installed in the host using the following command on RPM oriented Linux distributions.
+
+```bash
+sudo dnf -y install nvme-cli
+```
+
+- Support for NVMe requires native NVMe multipathing to be configured on each worker node in the cluster. Please refer to the [Dell Host Connectivity Guide](https://elabnavigator.dell.com/vault/pdf/Linux.pdf) for more details on NVMe multipathing requirements. To determine if the worker nodes are configured for native NVMe multipathing run the following command on each worker node:
+
+```bash
+cat /sys/module/nvme_core/parameters/multipath
+```
+
+ >If the result of the command displays Y then NVMe native multipathing is enabled in the kernel. If the output is N then native NVMe multipating is disabled. Consult the [Dell Host Connectivity Guide](https://elabnavigator.dell.com/vault/pdf/Linux.pdf) for Linux to enable native NVMe multipathing.
+
+**Configure the IO policy**
+
+- The default NVMeTCP native multipathing policy is "numa". The preferred IO policy for NVMe devices used for PowerMax is round-robin. You can use udev rules to enable the round robin policy on all worker nodes. To view the IO policy you can use the following command:
+
+```bash
+nvme list-subsys
+```
+
+To change the IO policy to round-robin you can add a udev rule on each worker node. Place a config file in /etc/udev/rules.d with the name 71-nvme-io-policy.rules with the following contents:
+
+```text
+ACTION=="add|change", SUBSYSTEM=="nvme-subsystem", ATTR{iopolicy}="round-robin"
+```
+
+In order to change the rules on a running kernel you can run the following commands:
+
+```bash
+/sbin/udevadm control --reload-rules
+/sbin/udevadm trigger --type=devices --action=change
+```
+
+On OCP clusters you can add a MachineConfig to enable this rule on all worker nodes:
+
+```yaml
+apiVersion: machineconfiguration.openshift.io/v1
+kind: MachineConfig
+metadata:
+  name: 99-workers-multipath-round-robin
+  labels:
+    machineconfiguration.openshift.io/role: worker
+spec:
+  config:
+    ignition:
+      version: 3.2.0
+    storage:
+      files:
+      - contents:
+          source: data:text/plain;charset=utf-8;base64,QUNUSU9OPT0iYWRkfGNoYW5nZSIsIFNVQlNZU1RFTT09Im52bWUtc3Vic3lzdGVtIiwgQVRUUntpb3BvbGljeX09InJvdW5kLXJvYmluIg==
+          verification: {}
+        filesystem: root
+        mode: 420
+        path: /etc/udev/rules.d/71-nvme-io-policy.rules
+```
+
+**Array requirements**
+
+Once the NVMe endpoint is created on the array, follow the following steps to update the endpoint name to adhere to the CSI driver requirements.
+
+   - Run  ```nvme discover --transport=tcp --traddr=<InterfaceAdd> --trsvcid=4420```. <InterfaceAdd> is the placeholder for actual IP address of NVMe Endpoint.
+   - Fetch the _subnqn_, for e.g.,  _nqn.1988-11.com.dell:PowerMax_2500:00:000120001100_, this will be used as the subnqn holder while updating NVMe endpoint name.
+   - Update the NVMe endpoint name as ```<subnqn>:<dir><port>>```. Here is an example how it should look, _nqn.1988-11.com.dell:PowerMax_2500:00:000120001100:OR1C000_
+
+### NFS Requirements
+
+CSI Driver for Dell PowerMax supports NFS communication. Ensure that the following requirements are met before you install CSI Driver:
+- Configure the NFS network. Please refer [here](https://dl.dell.com/content/manual57826791-dell-powermax-file-protocol-guide.pdf?language=en-us&ps=true) for more details.
+- PowerMax Embedded Management guest to access Unisphere for PowerMax.
+- Create the NAS server. Please refer [here](https://dl.dell.com/content/manual55638050-dell-powermax-file-quick-start-guide.pdf?language=en-us&ps=true) for more details.
+
+### Linux Multipathing Requirements
+
+Dell PowerMax supports Linux multipathing (DM-MPIO) and NVMe native multipathing. Configure Linux multipathing before installing the CSI Driver.
+
+> For NVMe connectivity native NVMe multipathing is used. The following sections apply only for iSCSI and Fiber Channel connectivity.
+
+Configure Linux multipathing as follows:
+- Ensure that all nodes have the _Device Mapper Multipathing_ package installed.
+  You can install it by running `dnf install device-mapper-multipath` or `apt install multipath-tools` based on your Linux distribution.
+- Ensure that the multipath command `mpathconf` is available on all Kubernetes nodes.
+- Enable multipathing using the `mpathconf --enable --with_multipathd y` command.  A default configuration file, `/etc/multipath.conf` is created.
+- Enable `user_friendly_names` and `find_multipaths` in the `multipath.conf` file.
+- As a best practice, use these options to help the operating system and the mulitpathing software detect path changes efficiently:
+
+```text
+path_grouping_policy multibus
+path_checker tur
+features "1 queue_if_no_path"
+path_selector "round-robin 0"
+no_path_retry 10
+```
+
+The following is a sample multipath.conf file. You may have to adjust these values based on your environment.
+
+```text
+defaults {
+  user_friendly_names yes
+  find_multipaths yes
+  path_grouping_policy multibus
+  path_checker tur
+  features "1 queue_if_no_path"
+  path_selector "round-robin 0"
+  no_path_retry 10
+}
+  blacklist {
+}
+```
+
+On some distributions the multipathd service for changes to the configuration and dynamically reconfigures itself. If you need to manually trigger a reload you can run the following command:
+`sudo systemctl reload multipathd`
+
+To enable multipathd on RedHat CoreOS nodes you need to prepare a working configuration encoded in base64. For example you can run the following command to encode the above multipath.config file.
+
+```text
+echo 'defaults {
+  user_friendly_names yes
+  find_multipaths yes
+  path_grouping_policy multibus
+  path_checker tur
+  features "1 queue_if_no_path"
+  path_selector "round-robin 0"
+  no_path_retry 10
+}
+  blacklist {
+}' | base64 -w0
+```
+
+The output of the above command follows:
+```text
+ZGVmYXVsdHMgewogIHVzZXJfZnJpZW5kbHlfbmFtZXMgeWVzCiAgZmluZF9tdWx0aXBhdGhzIHllcwogIHBhdGhfZ3JvdXBpbmdfcG9saWN5IG11bHRpYnVzCiAgcGF0aF9jaGVja2VyIHR1cgogIGZlYXR1cmVzICIxIHF1ZXVlX2lmX25vX3BhdGgiCiAgcGF0aF9zZWxlY3RvciAicm91bmQtcm9iaW4gMCIKICBub19wYXRoX3JldHJ5IDEwCn0KICBibGFja2xpc3Qgewp9Cg==
+```
+
+Use the base64 encoded string output in the following `MachineConfig` yaml file (under source section)
+
+```yaml
+apiVersion: machineconfiguration.openshift.io/v1
+kind: MachineConfig
+metadata:
+  name: workers-multipath-conf-default
+  labels:
+    machineconfiguration.openshift.io/role: worker
+spec:
+  config:
+    ignition:
+      version: 3.2.0
+    storage:
+      files:
+      - contents:
+          source: data:text/plain;charset=utf-8;base64,ZGVmYXVsdHMgewogIHVzZXJfZnJpZW5kbHlfbmFtZXMgeWVzCiAgZmluZF9tdWx0aXBhdGhzIHllcwogIHBhdGhfZ3JvdXBpbmdfcG9saWN5IG11bHRpYnVzCiAgcGF0aF9jaGVja2VyIHR1cgogIGZlYXR1cmVzICIxIHF1ZXVlX2lmX25vX3BhdGgiCiAgcGF0aF9zZWxlY3RvciAicm91bmQtcm9iaW4gMCIKICBub19wYXRoX3JldHJ5IDEwCn0KICBibGFja2xpc3Qgewp9Cg==
+          verification: {}
+        filesystem: root
+        mode: 400
+        path: /etc/multipath.conf
+```
+
+After deploying this`MachineConfig` object, CoreOS will start the multipath service automatically.
+Alternatively, you can check the status of the multipath service by running the following command on each worker node.
+`sudo multipath -ll`
+
+Refer to the [Dell Host Connectivity Guide](https://elabnavigator.dell.com/vault/pdf/Linux.pdf) for more information.
+
+### PowerPath for Linux requirements
+
+The CSI Driver for Dell PowerMax supports PowerPath for Linux. Configure Linux PowerPath before installing the CSI Driver.
+
+Follow this procedure to set up PowerPath for Linux:
+
+- All the nodes must have the PowerPath package installed . Download the PowerPath archive for the environment from [Dell Online Support](https://www.dell.com/support/home/en-in/product-support/product/powerpath-for-linux/drivers).
+- `Untar` the PowerPath archive, Copy the RPM package into a temporary folder and Install PowerPath using `rpm -ivh DellEMCPower.LINUX-<version>-<build>.<platform>.x86_64.rpm`
+- Start the PowerPath service using `systemctl start PowerPath`
+
+>Note: Do not install Dell PowerPath if multi-path software is already installed, as they cannot co-exist with native multi-path software.
+
+### Auto RDM for vSphere over FC requirements
+
+The CSI Driver for Dell PowerMax supports auto RDM for vSphere over FC. These requirements are applicable for the clusters deployed on ESX/ESXi using virtualized environement.
+
+Set up the environment as follows:
+
+- Requires VMware vCenter management software to manage all ESX/ESXis where the cluster is hosted.
+
+- Add all FC array ports zoned to the ESX/ESXis to a port group where the cluster is hosted .
+
+- Add initiators from all ESX/ESXis to a host(initiator group)/host group(cascaded initiator group) where the cluster is hosted.
+- Create a secret which contains vCenter privileges. Follow the steps [here](#support-for-auto-rdm-for-vsphere-over-fc) to create the same.
 
 ## Installation
 
@@ -80,37 +369,36 @@ Create a secret named powermax-certs in the namespace where the CSI PowerMax dri
 3. Create a configmap using sample [here](https://github.com/dell/csm-operator/tree/master/samples/csireverseproxy). Fill in the appropriate values for driver configuration.
    Example: config.yaml
    ```yaml
-   mode: StandAlone # Mode for the reverseproxy, should not be changed
    port: 2222 # Port on which reverseproxy will listen
    logLevel: debug
    logFormat: text
-   standAloneConfig:
+   config:
      storageArrays:
         - storageArrayId: "000000000001" # arrayID
           primaryURL: https://primary-1.unisphe.re:8443 # primary unisphere for arrayID
           backupURL: https://backup-1.unisphe.re:8443   # backup unisphere for arrayID
           proxyCredentialSecrets:
-            - proxy-secret-11 # credential secret for primary unisphere, e.g., powermax-creds
-            - proxy-secret-12 # credential secret for backup unisphere, e.g., powermax-creds
+            - primary-unisphere-secret-1 # credential secret for primary unisphere, e.g., powermax-creds
+            - backup-unisphere-secret-1 # credential secret for backup unisphere, e.g., powermax-creds
         - storageArrayId: "000000000002"
           primaryURL: https://primary-2.unisphe.re:8443
           backupURL: https://backup-2.unisphe.re:8443
           proxyCredentialSecrets:
-           - proxy-secret-21
-           - proxy-secret-22
+           - primary-unisphere-secret-2
+           - backup-unisphere-secret-2
      managementServers:
        - url: https://primary-1.unisphe.re:8443 # primary unisphere endpoint
-         arrayCredentialSecret: primary-1-secret # primary credential secret e.g., powermax-creds
+         arrayCredentialSecret: primary-unisphere-secret-1 # primary credential secret e.g., powermax-creds
          skipCertificateValidation: true
        - url: https://backup-1.unisphe.re:8443 # backup unisphere endpoint
-         arrayCredentialSecret: backup-1-secret # backup credential secret e.g., powermax-creds
+         arrayCredentialSecret: backup-unisphere-secret-1 # backup credential secret e.g., powermax-creds
          skipCertificateValidation: false # value false, to verify unisphere certificate and provide certSecret
          certSecret: primary-certs # unisphere verification certificate
        - url: https://primary-2.unisphe.re:8443
-         arrayCredentialSecret: primary-2-secret
+         arrayCredentialSecret: primary-unisphere-secret-2
          skipCertificateValidation: true
        - url: https://backup-2.unisphe.re:8443
-         arrayCredentialSecret: backup-2-secret
+         arrayCredentialSecret: backup-unisphere-secret-2
          skipCertificateValidation: false
          certSecret: primary-certs
    ```
@@ -118,7 +406,7 @@ Create a secret named powermax-certs in the namespace where the CSI PowerMax dri
     ```bash
     kubectl create configmap powermax-reverseproxy-config --from-file config.yaml -n powermax
     ```
-4. Create a configmap using below sample file. Fill in the appropriate values for driver configuration. Example: X_CSI_TRANSPORT_PROTOCOL:"ISCSI"
+4. Create a configmap using the sample file [here](https://github.com/dell/csi-powermax/blob/main/samples/configmap/powermax-array-config.yaml). Fill in the appropriate values for driver configuration.
    ```yaml
       # Copyright © 2024 Dell Inc. or its subsidiaries. All Rights Reserved.
       #
@@ -139,9 +427,13 @@ Create a secret named powermax-certs in the namespace where the CSI PowerMax dri
         namespace: powermax
       data:
         powermax-array-config.yaml: |
-          X_CSI_POWERMAX_PORTGROUPS: "" # Portgroup is required in case of iSCSI only
-          X_CSI_TRANSPORT_PROTOCOL: "" # Defaults to empty
-          X_CSI_POWERMAX_ENDPOINT: "https://10.0.0.0:8443"
+          # List of comma-separated port groups (ISCSI only). Example: PortGroup1, portGroup2 Required for iSCSI only
+          X_CSI_POWERMAX_PORTGROUPS: ""
+          # Choose which transport protocol to use (ISCSI, FC, NVMETCP, auto or None) defaults to auto if nothing is specified
+          X_CSI_TRANSPORT_PROTOCOL: ""
+          # IP address of the Unisphere for PowerMax (Required), Defaults to https://0.0.0.0:8443
+          X_CSI_POWERMAX_ENDPOINT: "https://10.0.0.0:8443" 
+          # List of comma-separated array ID(s) which will be managed by the driver (Required)
           X_CSI_MANAGED_ARRAYS: "000000000000,000000000000,"
    ```
 
@@ -163,10 +455,6 @@ Create a secret named powermax-certs in the namespace where the CSI PowerMax dri
    | fsGroupPolicy                                   | Defines which FS Group policy mode to be used, Supported modes `None, File and ReadWriteOnceWithFSType`. In OCP <= 4.16 and K8s <= 1.29, fsGroupPolicy is an immutable field.                                                                                                                                                                  | No       | "ReadWriteOnceWithFSType"      |
    | ***Common parameters for node and controller*** |                                                                                                                                                                                                                                                                          |          |                                |
    | X_CSI_K8S_CLUSTER_PREFIX                        | Define a prefix that is appended to all resources created in the array; unique per K8s/CSI deployment; max length - 3 characters                                                                                                                                         | Yes      | XYZ                            |
-   | X_CSI_POWERMAX_ENDPOINT                         | IP address of the Unisphere for PowerMax                                                                                                                                                                                                                                 | Yes      | https://0.0.0.0:8443           |
-   | X_CSI_TRANSPORT_PROTOCOL                        | Choose which transport protocol to use (ISCSI, FC, NVMETCP, auto or None)	                                                                                                                                                                                                        | Yes      | auto                           |
-   | X_CSI_POWERMAX_PORTGROUPS                       | List of comma-separated port groups (ISCSI only). Example: "PortGroup1,PortGroup2"                                                                                                                                                                                       | No       | -                              |
-   | X_CSI_MANAGED_ARRAYS                            | List of comma-separated array ID(s) which will be managed by the driver                                                                                                                                                                                                  | Yes      | -                              |
    | X_CSI_POWERMAX_PROXY_SERVICE_NAME               | Name of CSI PowerMax ReverseProxy service.                                                                                                                                                                                                                               | Yes      | csipowermax-reverseproxy       |
    | X_CSI_IG_MODIFY_HOSTNAME                        | Change any existing host names. When nodenametemplate is set, it changes the name to the specified format else it uses driver default host name format.                                                                                                                  | No       | false                          |
    | X_CSI_IG_NODENAME_TEMPLATE                      | Provide a template for the CSI driver to use while creating the Host/IG on the array for the nodes in the cluster. It is of the format a-b-c-%foo%-xyz where foo will be replaced by host name of each node in the cluster.                                              | No       | -                              |

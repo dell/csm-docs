@@ -4,27 +4,28 @@ description: Release notes for PowerScale CSI driver
 ---
 
 
-## Release Notes - CSI Driver for PowerScale v2.9.1
+## Release Notes - CSI Driver for PowerScale v2.10.1
+
+
+
+
+
+
+
 
 ### New Features/Changes
 
-- [#947 - [FEATURE]: Support for Kubernetes 1.28](https://github.com/dell/csm/issues/947)
-- [#1066 - [FEATURE]: Support for Openshift 4.14](https://github.com/dell/csm/issues/1066)
-- [#851 - [FEATURE]: Helm Chart Enhancement - Container Images Configurable in values.yaml](https://github.com/dell/csm/issues/851)
-- [#905 - [FEATURE]: Add support for CSI Spec 1.6](https://github.com/dell/csm/issues/905)
-- [#996 - [FEATURE]: Dell CSI to Dell CSM Operator Migration Process](https://github.com/dell/csm/issues/996)
+- [#1284 - [FEATURE]: Support for Openshift 4.15](https://github.com/dell/csm/issues/1284)
+- [#1285 - [FEATURE]: Remove checks in code for non-supported installs of CSM](https://github.com/dell/csm/issues/1285)
+- [#926 - [FEATURE]: Fixing the linting, formatting and vetting issues](https://github.com/dell/csm/issues/926)
 
 ### Fixed Issues
 
-- [#771 - [BUG]: Gopowerscale unit test fails](https://github.com/dell/csm/issues/771)
-- [#990 - [BUG]: X_CSI_AUTH_TYPE cannot be set in CSM Operator](https://github.com/dell/csm/issues/990)
-- [#999 - [BUG]: Volume health fails because it looks to a wrong path](https://github.com/dell/csm/issues/999)
-- [#1014 - [BUG]: Missing error check for os.Stat call during volume publish](https://github.com/dell/csm/issues/1014)
-- [#1046 - [BUG]:Is cert-csi expansion expected to successfully run with enableQuota: false on PowerScale?](https://github.com/dell/csm/issues/1046)
-- [#1053 - [BUG]: make gosec is erroring out - Repos PowerMax,PowerStore,PowerScale (gosec is installed)](https://github.com/dell/csm/issues/1053)
-- [#1061 - [BUG]: Golint is not installing with go get command](https://github.com/dell/csm/issues/1061)
-- [#1110 - [BUG]: Multi Controller defect - sidecars timeout](https://github.com/dell/csm/issues/1110)
-- [#1103 - [BUG]: CSM Operator doesn't apply fSGroupPolicy value to CSIDriver Object](https://github.com/dell/csm/issues/1103)
+- [#1081 - [BUG]: CSM driver repositories reference CSI Operator](https://github.com/dell/csm/issues/1081)
+- [#1104 - [BUG]: The csm-isilon-controller keeps getting panic and is restarting ](https://github.com/dell/csm/issues/1104)
+- [#1134 - [BUG]: PowerScale : Driver failing to re-authenticate if session cookies are expired ](https://github.com/dell/csm/issues/1134)
+- [#1140 - [BUG]: Cert-csi tests are not reporting the passed testcases in K8S E2E tests ](https://github.com/dell/csm/issues/1140)
+- [#1174 - [BUG]: Kubelet Configuration Directory setting should not have a comment about default value being None](https://github.com/dell/csm/issues/1174)
 
 ### Known Issues
 
@@ -41,4 +42,4 @@ description: Release notes for PowerScale CSI driver
 
 ### Note
 
-- Support for Kubernetes alpha features like Volume Health Monitoring and RWOP (ReadWriteOncePod) access mode will not be available in Openshift environment as Openshift doesn't support enabling of alpha features for Production Grade clusters.
+- Support for Kubernetes alpha features like Volume Health Monitoring will not be available in Openshift environment as Openshift doesn't support enabling of alpha features for Production Grade clusters.

@@ -51,13 +51,21 @@ Create the karavi-authorization-config secret using this command:
       kubectl -n powermax create secret generic proxy-server-root-certificate --from-file=rootCertificate.pem=/path/to/rootCA -o yaml --dry-run=client | kubectl apply -f -
       ```
 
-4. Enable CSM Authorization in the driver installation applicable to your installation method.
+4. Prepare the driver configuration secret, applicable to your driver installation method, to communicate with the CSM Authorization sidecar.
 
     **Helm**
 
-    In [Install the Driver](../../../csidriver/installation/helm/powermax/#install-the-driver) where you edit `samples/secret/secret.yaml` with the credentials of the PowerMax, you can leave these with the default values as they will be ignored.
+    Refer to the [Install the Driver](../../../deployment/helm/drivers/installation/powermax/#install-the-driver) section where you edit `samples/secret/secret.yaml` with the credentials of the PowerMax. Leave `username` and `password` with the default values as they will be ignored.
 
-    Refer to the [Install the Driver](../../../csidriver/installation/helm/powermax/#install-the-driver) section to edit the parameters in `my-powermax-settings.yaml` file to configure the driver to communicate with the CSM Authorization sidecar.
+    **Operator**
+
+    Refer to the [Install the Driver](../../../deployment/csmoperator/drivers/powermax/#install-driver) section to prepare `powermax-creds.yaml`. Leave `username` and `password` with the default values as they will be ignored.
+
+5. Enable CSM Authorization in the driver installation applicable to your installation method.
+
+    **Helm**
+
+    Refer to the [Install the Driver](../../../deployment/helm/drivers/installation/powermax/#install-the-driver) section to edit the parameters in `my-powermax-settings.yaml` file to configure the driver to communicate with the CSM Authorization sidecar.
 
     - Update `global.storageArrays.endpoint` to match the localhost endpoint in `samples/secret/karavi-authorization-config.json`.
 
@@ -67,7 +75,7 @@ Create the karavi-authorization-config secret using this command:
     
     - Update `images.authorization` to the image of the CSM Authorization sidecar. In most cases, you can leave the default value.
 
-    - Update `authorization.proxyHost` to the hostname of the CSM Authorization Proxy Server.
+    - Update `authorization.proxyHost` to the hostname of the CSM Authorization Proxy Server. `csm-authorization.com` is a placeholder for the proxyHost. See the administrator of CSM for Authorization for the correct value.
     
     - Update `authorization.skipCertificateValidation` to `true` or `false` depending on if you want to disable or enable certificate validation of the CSM Authorization Proxy Server.
 
@@ -85,8 +93,8 @@ Create the karavi-authorization-config secret using this command:
       enabled: true
 
       # sidecarProxyImage: the container image used for the csm-authorization-sidecar.
-      # Default value: dellemc/csm-authorization-sidecar:v1.9.0
-      sidecarProxyImage: dellemc/csm-authorization-sidecar:v1.9.0
+      # Default value: dellemc/csm-authorization-sidecar:v1.10.0
+      sidecarProxyImage: dellemc/csm-authorization-sidecar:v1.10.0
 
       # proxyHost: hostname of the csm-authorization server
       # Default value: None
@@ -110,7 +118,7 @@ Create the karavi-authorization-config secret using this command:
 
     - Update the `image` to the image of the CSM Authorization sidecar. In most cases, you can leave the default value.
 
-    - Update the `PROXY_HOST` environment value to the hostname of the CSM Authorization Proxy Server.
+    - Update the `PROXY_HOST` environment value to the hostname of the CSM Authorization Proxy Server. `csm-authorization.com` is a placeholder for the proxyHost. See the administrator of CSM for Authorization for the correct value.
 
     - Update the `SKIP_CERTIFICATE_VALIDATION` environment value to `true` or `false` depending on if you want to disable or enable certificate validation of the CSM Authorization Proxy Server.
 
@@ -122,10 +130,10 @@ Create the karavi-authorization-config secret using this command:
       - name: authorization
         # enable: Enable/Disable csm-authorization
         enabled: true
-        configVersion: v1.9.0
+        configVersion: v1.10.0
         components:
         - name: karavi-authorization-proxy
-          image: dellemc/csm-authorization-sidecar:v1.9.0
+          image: dellemc/csm-authorization-sidecar:v1.10.0
           envs:
             # proxyHost: hostname of the csm-authorization server
             - name: "PROXY_HOST"
@@ -138,4 +146,4 @@ Create the karavi-authorization-config secret using this command:
 
 5. Install the Dell CSI PowerMax driver following the appropriate documenation for your installation method.
 
-6. (Optional) Install [dellctl](../../../references/cli) to perform Kubernetes administrator commands for additional capabilities (e.g., list volumes). Please refer to the [dellctl documentation page](../../../references/cli) for the installation steps and command list.
+6. (Optional) Install [dellctl](../../../support/cli/#installation-instructions) to perform Kubernetes administrator commands for additional capabilities (e.g., list volumes). Please refer to the [dellctl documentation page](../../../support/cli) for the installation steps and command list.

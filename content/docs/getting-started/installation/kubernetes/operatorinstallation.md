@@ -352,6 +352,8 @@ The `Update approval` (**`InstallPlan`** in OLM terms) strategy plays a role whi
 
 >NOTE: The recommended version of OLM for Upstream Kubernetes is **`v0.25.0`**.
 
+>NOTE: The recommended Update Approval is **`Manual`** to prevent the inatsllation of non-qualified versions of operator.
+
 #### Using Installation Script
 
 1. Clone and checkout the required csm-operator version using
@@ -366,19 +368,19 @@ git clone -b v1.7.0 https://github.com/dell/csm-operator.git
 ### Upgrading Drivers with Dell CSM Operator
 You can update CSI Drivers installed by the Dell CSM Operator like any Kubernetes resource:
 
-1. </b>Modify Installation via kubectl edit:</b></br>
+1. </b>Get the driver-object details using kubectl command:</b></br>
 
 ```bash
 kubectl get <driver-object> -n <driver-namespace>
 ```
-2. Replace `<driver-namespace>` with the appropriate namespace. For example, to get the CSI PowerStore driver object: </br>
+2. Replace `<driver-namespace>` with the appropriate namespace:</br>
 ```bash
 kubectl get csm -n <driver-namespace>
 ```
 Use the object name in the kubectl edit command: </br>
 
 ```bash
-kubectl edit csm <driver-object>/<object-name> -n <driver-namespace>
+kubectl edit csm <object-name> -n <driver-namespace>
 ```
 For example, if the object name is powerstore:</br>
 
@@ -440,5 +442,3 @@ The specification for the Custom Resource is the same for all the drivers.Below 
 **nodeSelector** - Used to specify node selectors for the driver StatefulSet/Deployment and DaemonSet.
 
 >NOTE: The `image` field should point to the correct image tag for version of the driver you are installing.
-
->NOTE: The CSM Operator 1.6 is pre-requisite for onboarding brownfield clusters with Apex Navigator For Kubernetes. When the Dell connectivity client is installed, a role and rolebinding will be established in the namespace containing CSM objects, and these will be removed when the client is uninstalled. If the client is already present in the cluster and CSM is deployed or deleted, the roles and rolebindings will be correspondingly created or removed during CSM reconciliation. This process ensures that the client can access the secrets in the namespace.
