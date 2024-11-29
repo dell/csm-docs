@@ -23,6 +23,7 @@ Install Helm 3.x on the master node before you install the CSI Driver for Dell P
 <br>
 
 {{< accordion id="Two" title="CSI Driver" markdown="true" >}}  
+
 ## Install the Driver
 
 **Steps**

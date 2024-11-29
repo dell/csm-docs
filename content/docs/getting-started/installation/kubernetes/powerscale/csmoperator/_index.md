@@ -15,7 +15,6 @@ To deploy the Operator, follow the instructions available [here](../../operatori
 <br>
 
 {{< accordion id="Two" title="CSI Driver" markdown="true" >}}  
-
 ### Prerequisite
 
 1. Create namespace.

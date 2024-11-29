@@ -28,7 +28,18 @@
   </a>
   <span class="navbar-brand__beta ms-2">
     <span class="badge text-dark" style="background-color:#fff">Beta</span>
-  </span>
+  </span> 
+
+  <ul class="navbar-nav ms-2">
+      {{ if .Site.Params.versions -}} 
+    <li class="nav-item dropdown d-none d-lg-block">
+      {{ partial "navbar-version-selector.html" . -}}
+    </li>
+    {{ end -}}
+  </ul>
+
+
+
   <div class="td-navbar-nav-scroll ms-md-auto" id="main_navbar">
     <ul class="navbar-nav">
       {{ $p := . -}}
@@ -54,11 +65,13 @@
         </a>
       </li>
       {{ end -}}
+      <!--
       {{ if .Site.Params.versions -}}
       <li class="nav-item dropdown d-none d-lg-block">
         {{ partial "navbar-version-selector.html" . -}}
       </li>
-      {{ end -}}
+      {{ end -}} 
+    --> 
       {{ if (gt (len .Site.Home.Translations) 0) -}}
       <li class="nav-item dropdown d-none d-lg-block">
         {{ partial "navbar-lang-selector.html" . -}}

@@ -117,6 +117,7 @@ For detailed PowerFlex installation procedure, see the [Dell PowerFlex Deploymen
 
     kubectl create secret generic vxflexos-config -n vxflexos --from-file=config=secret.yaml -o yaml --dry-run=client | kubectl replace -f -
     ```
+
 ### Install Driver
 
 1. Follow all the [prerequisites](#prerequisite) above

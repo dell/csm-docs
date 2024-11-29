@@ -40,6 +40,7 @@ To deploy the Operator, follow the instructions available [here](../../operatori
    Use the following command to replace or update the secret:
 
     `kubectl create secret generic unity-creds -n unity --from-file=config=secret.yaml -o yaml --dry-run | kubectl replace -f -`
+
 ### Install Driver
 
 1. Follow all the [prerequisites](#prerequisite) above
@@ -93,5 +94,4 @@ To deploy the Operator, follow the instructions available [here](../../operatori
 **Note** :
    1. "Kubelet config dir path" is not yet configurable in case of Operator based driver installation.
    2. Snapshotter and resizer sidecars are not optional. They are defaults with Driver installation.
-
 {{< /accordion >}}  

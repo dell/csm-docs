@@ -38,10 +38,10 @@ The Dell Container Storage Modules Installation Wizard is a webpage that helps y
 
     On your terminal, run each of the commands below:
 
-```terminal
-helm repo add dell https://dell.github.io/helm-charts 
-helm repo update
-```
+    ```terminal
+    helm repo add dell https://dell.github.io/helm-charts
+    helm repo update
+    ```
 
 2. Copy the downloaded `values.yaml` file.
 
@@ -71,4 +71,4 @@ helm repo update
     ```terminal
     helm install <release-name> dell/container-storage-modules -n <namespace> --version <container-storage-module chart-version> -f <values.yaml location>
     Example: helm install powerstore dell/container-storage-modules -n csi-powerstore --version 1.4.0 -f values.yaml
-    ```
+    ``` 

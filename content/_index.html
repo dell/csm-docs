@@ -43,7 +43,7 @@ linkTitle = "Dell Technologies"
     object-fit: cover; /* Ensure image fits within card */ 
   }
   .img-fluid{
-    width:90%; 
+    width:50%; 
     height:auto;  
   }
   /* Card title */
@@ -130,7 +130,7 @@ linkTitle = "Dell Technologies"
 
   /* Adjust hexagon image */
   .img-fluid {
-    width:100%; /* Increase hexagon image size */
+    width:50%; /* Increase hexagon image size */
     height: auto; /* Maintain aspect ratio */
   } 
 
@@ -142,7 +142,7 @@ linkTitle = "Dell Technologies"
 
 {{< blocks/cover title="Container Storage Modules Documentation" image_anchor="top" height="min" color="primary" >}}
 <div class="mx-auto">
-        <a class="btn btn-lg btn-primary me-3 mb-4" href="/csm-docs/docs/">
+        <a class="btn btn-lg btn-primary me-3 mb-4" href="/csm-docs/docs/getting-started">
                 Getting Started <i class="fas fa-arrow-alt-circle-right ms-2"></i>
         </a> 
         <a class="btn btn-lg btn-primary me-3 mb-4" href="/csm-docs/docs/support/contributionguidelines/">
@@ -152,22 +152,18 @@ linkTitle = "Dell Technologies"
 {{< /blocks/cover >}} 
 
 
-
-
-
-<div id="overview" class="text-center py-5" style="background-color:rgb(247, 253, 255);"> 
+<div id="overview" class="text-center py-5" > 
         <div class="container" > 
 
           <h3 class="section-head mb-4">What is Container Storage Modules?</h3>
           <p class="lead">
-            The Dell Technologies (Dell) Container Storage Modules (CSM) enables simple and consistent integration 
-            and automation experiences, extending enterprise storage capabilities to Kubernetes for cloud-native 
-            stateful applications. It reduces management complexity so developers can independently consume 
+            CSM builds on top of the Container Storage Interface (CSI) foundation to deliver robust and powerful enterprise storage capabilities for Kubernetes clusters. CSM features software modules for storage management that go beyond CSI functionality, exposing enterprise storage features to Kubernetes users. 
+            All of Dell's primary storage options (including PowerStore, PowerScale, PowerFlex, PowerMax and Unity XT) can leverage specific modules within our portfolioIt reduces management complexity so developers can independently consume 
             enterprise storage with ease and automate daily operations such as provisioning, authorization, replication, 
             snapshotting, resiliency, observability and application mobility.
           </p>
            
-            <img src="./images/csm_image.png" alt="CSM Hex Diagram" class="img-fluid my-4" />    
+            <img src="./images/csm_hexagon.png" alt="CSM Hex Diagram" class="img-fluid my-4" />    
 
 
 

@@ -21,7 +21,6 @@ Install Helm 3.0 on the master node before you install the CSI Driver for Dell P
             {{<include  "content/docs/getting-started/installation/kubernetes/installationwizardhelm.md" >}}
 {{< /accordion >}}
 <br>
-
 {{< accordion id="Two" title="CSI Driver" markdown="true" >}}  
 
 ## Prerequisites
@@ -36,18 +35,6 @@ The following are requirements to be met before installing the CSI Driver for De
 - If enabling CSM for Authorization, please refer to the [Authorization deployment steps](../../../../../deployment/helm/modules/installation/authorization-v2.0/) first
 - If enabling CSM for Replication, please refer to the [Replication deployment steps](../../../../../deployment/helm/modules/installation/replication/) first
 - If enabling CSM for Resiliency, please refer to the [Resiliency deployment steps](../../../../../deployment/helm/modules/installation/resiliency/) first
-
-### Install Helm 3.0
-
-Install Helm 3.0 on the master node before you install the CSI Driver for Dell PowerScale.
-
-**Steps**
-
-  Run the command to install Helm 3.0.
-
-  ```bash
-  curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
-  ```
 
 ### (Optional) Volume Snapshot Requirements
 
@@ -370,13 +357,10 @@ level=error clusterName=powerscale runid=10 msg="mount failed: exit status 32
 mounting arguments: -t nfs -o rw XX.XX.XX.XX:/ifs/data/csi/k8s-ac7b91962d /var/lib/kubelet/pods/9f72096a-a7dc-4517-906c-20697f9d7375/volumes/kubernetes.io~csi/k8s-ac7b91962d/mount
 output: mount.nfs: access denied by server while mounting XX.XX.XX.XX:/ifs/data/csi/k8s-ac7b91962d
 ```
-
 {{< /accordion >}}  
 
-<br>
 
-{{< accordion id="Three" title="CSM Modules" >}}
-       
+{{< accordion id="Three" title="CSM Modules" >}}       
 
 <div class="container mt-5 ps-0" style="margin-left:0px;">
     <div class="row">
