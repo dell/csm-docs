@@ -4,6 +4,8 @@ linkTitle: "Prerequisite"
 weight: 1
 Description: >
 --- 
+## Prerequisites
+
 The following requirements must be met before installing the CSI Driver for Dell PowerStore:
 
 - A Kubernetes or OpenShift cluster (see [supported versions](../../../../../csidriver/#features-and-capabilities))
@@ -17,19 +19,9 @@ The following requirements must be met before installing the CSI Driver for Dell
 - Ensure that your nodes support mounting NFS volumes if using NFS.
 - For NVMe support the preferred multipath solution is NVMe native multipathing. The [Dell Host Connectivity Guide](https://elabnavigator.dell.com/vault/pdf/Linux.pdf) describes the details of each configuration option.
 
-### Install Helm 3.x
+{{< tabpane text=true lang="en" >}}
+{{% tab header="Fibre Channel" lang="en" %}}
 
-Install Helm 3.x on the master node before you install the CSI Driver for Dell PowerStore.
-
-**Steps**
-
-  Run the command to install Helm 3.x.
-
-  ```bash
-  curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
-  ```
-{{< tabpane text=true lang="en">}}
-{{% tab header="Fibre Channel" lang="en" %}} 
 ### Fibre Channel requirements
 
 The following requirements must be fulfilled in order to successfully use the Fiber Channel protocol with the CSI PowerStore driver:
@@ -37,7 +29,8 @@ The following requirements must be fulfilled in order to successfully use the Fi
 - Zoning of the Host Bus Adapters (HBAs) to the Fibre Channel ports on the PowerStore arrays must be done.
 - If the number of volumes that will be published to nodes is high, then configure the maximum number of LUNs for your HBAs on each node. See the appropriate HBA document to configure the maximum number of LUNs.
 {{% /tab %}}
-{{% tab header="iSCSI" %}}
+
+{{% tab header="iSCSI" lang="en" %}}
 ### iSCSI Requirements
 
 The following requirements must be fulfilled in order to successfully use the iSCSI protocol with the CSI PowerStore driver:
@@ -64,6 +57,7 @@ spec:
         enabled: true
 ```
 
+
 Once the `MachineConfig` object has been deployed, CoreOS will ensure that the `iscsid.service` starts automatically. You can check the status of the iSCSI service by entering the following command on each worker node in the cluster: `sudo systemctl status iscsid`.
 
 - Ensure that the iSCSI initiators are available on all the nodes where the driver node plugin will be installed.
@@ -74,7 +68,9 @@ has IP interfaces.
 
 Refer to the [Dell Host Connectivity Guide](https://elabnavigator.dell.com/vault/pdf/Linux.pdf) for more information.
 {{% /tab %}}
-{{% tab header = "NVMeTCP"%}} 
+
+{{% tab header="NVMe" lang="en" %}}
+
 ### NVMe Requirements
 
 The following requirements must be fulfilled in order to successfully use the NVMe protocols with the CSI PowerStore driver:
@@ -190,8 +186,9 @@ modprobe nvme_tcp
 - NVMeFC Zoning of the Host Bus Adapters (HBAs) to the Fibre Channel port must be done.
 
 > Do not load the nvme_tcp module for NVMeFC
-{{% /tab %}} 
-{{< /tabpane >}}
+{{% /tab %}}
+{{< /tabpane >}}   
+
 ### Linux multipathing requirements
 
 Dell PowerStore supports Linux multipathing (DM-MPIO) and NVMe native multipathing. Configure Linux multipathing before installing the CSI Driver.
@@ -264,7 +261,7 @@ Refer to the [Dell Host Connectivity Guide](https://elabnavigator.dell.com/vault
 ### Volume Snapshot Requirements (Optional)
 For detailed snapshot setup procedure, [click here.](../../../../../snapshots/#optional-volume-snapshot-requirements)
 
-### Volume Health Monitoring
+### Volume Health Monitoring (For helm)
 
 Volume Health Monitoring feature is optional and by default this feature is disabled for drivers when installed via helm.
 To enable this feature, add the below block to the driver manifest before installing the driver. This ensures to install external

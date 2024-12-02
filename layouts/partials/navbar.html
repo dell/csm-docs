@@ -10,7 +10,8 @@
 </style>
 <nav class="td-navbar js-navbar-scroll
             {{- if $cover }} td-navbar-cover {{- end }}" data-bs-theme="dark">
-<div class="container-fluid flex-column flex-md-row">
+<div class="container-fluid flex-column flex-md-row" >  
+  <div class="container d-flex ms-0 ps-0 " > 
   <a class="navbar-brand" href="{{ .Site.Home.RelPermalink }}">
     {{- /**/ -}}
     <span class="navbar-brand__logo navbar-logo">
@@ -26,18 +27,22 @@
     </span>
     {{- /**/ -}}
   </a>
-  <span class="navbar-brand__beta ms-2">
-    <span class="badge text-dark" style="background-color:#fff">Beta</span>
-  </span> 
 
-  <ul class="navbar-nav ms-2">
-      {{ if .Site.Params.versions -}} 
-    <li class="nav-item dropdown d-none d-lg-block">
-      {{ partial "navbar-version-selector.html" . -}}
+
+  <ul class="navbar-nav ms-2" > 
+    <li class="nav-item "  >
+        <span class="badge text-dark " style="background-color:#fff; margin-top:10px;">Beta</span>
     </li>
-    {{ end -}}
-  </ul>
-
+    <li class="nav-item" >
+      <a class="nav-link active" href="/csm-docs/docs/"><i class="fa-solid fa-book"></i> <span>Container Storage Modules</span> </a>
+    </li> 
+    {{ if .Site.Params.versions -}} 
+    <li class="nav-item dropdown d-none d-lg-block" >
+      {{ partial "navbar-version-selector.html" . -}} 
+    </li>
+    {{ end -}} 
+  </ul> 
+  </div>
 
 
   <div class="td-navbar-nav-scroll ms-md-auto" id="main_navbar">

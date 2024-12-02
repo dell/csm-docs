@@ -1,6 +1,7 @@
 ---
 title: Operator
-linkTitle: Operator
+linkTitle: Operator 
+no_list: true
 description: >
   Installing the CSI Driver for Dell PowerMax via Dell CSM Operator
 ---

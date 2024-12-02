@@ -22,19 +22,8 @@ Uninstalling the Dell CSM Driver is a simple process that allows you to remove t
     </div>
        <div class="row">
       <div class="col-md-6 mb-4">
-      {{< customcard path="content/docs/getting-started/uninstallation/rancherkubernetesengine" link="./rancherkubernetesengine" icon="fas fa-cloud" title="Rancher Kubernetes Engine" image="../../../icons/save-disk.svg" >}}
-      </div>
-      <div class="col-md-6 mb-4">
         {{< customcard path="content/docs/getting-started/uninstallation/mirantiskubernetesengine" link="./mirantiskubernetesengine" icon="fas fa-pencil" title="Mirantis Kubernetes Engine" image="../../../icons/save-disk.svg">}} 
         </div>
     </div> 
-    <div class="row">
-      <div class="col-md-6 mb-4">
-          {{< customcard path="content/docs/getting-started/uninstallation/googleanthos" link="./googleanthos" icon="fas fa-lock" title="Google Anthos" image="../../../icons/save-disk.svg">}}
-        </div>  
-         <div class="col-md-6 mb-4">
-          {{< customcard path="content/docs/getting-started/uninstallation/vmwaretanzu" link="./vmwaretanzu" icon="fas fa-key" title="VMware Tanzu" image="../../../icons/save-disk.svg">}}
-        </div> 
-      </div>
 </div>
 

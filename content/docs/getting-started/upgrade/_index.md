@@ -23,18 +23,9 @@ Upgrading the Dell CSM Driver ensures that you have the latest features, improve
     </div>
        <div class="row">
       <div class="col-md-6 mb-4">
-      {{< customcard path="content/docs/getting-started/upgrade/rancherkubernetesengine" link="./rancherkubernetesengine" icon="fas fa-cloud" title="Rancher Kubernetes Engine" image="../../../icons/save-disk.svg">}}
-      </div>
-      <div class="col-md-6 mb-4">
         {{< customcard path="content/docs/getting-started/upgrade/mirantiskubernetesengine" link="./mirantiskubernetesengine" icon="fas fa-pencil" title="Mirantis Kubernetes Engine" image="../../../icons/save-disk.svg">}} 
         </div>
     </div> 
-    <div class="row">
-      <div class="col-md-6 mb-4">
-          {{< customcard path="content/docs/getting-started/upgrade/googleanthos" link="./googleanthos" icon="fas fa-lock" title="Google Anthos" image="../../../icons/save-disk.svg">}}
-        </div>  
-         <div class="col-md-6 mb-4">
-          {{< customcard path="content/docs/getting-started/upgrade/vmwaretanzu" link="./vmwaretanzu" icon="fas fa-key" title="VMware Tanzu" image="../../../icons/save-disk.svg">}}
-        </div> 
-      </div>
-</div>
+</div> 
+
+

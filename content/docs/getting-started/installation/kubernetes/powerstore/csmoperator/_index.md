@@ -19,6 +19,53 @@ To deploy the Operator, follow the instructions available [here](../../operatori
 
 {{< accordion id="Two" title="CSI Driver" markdown="true" >}}  
 
+### Namespace and PowerStore API Access Configuration
+
+1. Create namespace.
+   Execute `kubectl create namespace powerstore` to create the powerstore namespace (if not already present). Note that the namespace can be any user-defined name, in this example, we assume that the namespace is 'powerstore'.
+
+2. Create a file called `config.yaml` that has Powerstore array connection details with the following content
+   ```yaml
+   arrays:
+      - endpoint: "https://10.0.0.1/api/rest"     # full URL path to the PowerStore API
+        globalID: "unique"                        # unique id of the PowerStore array
+        username: "user"                          # username for connecting to API
+        password: "password"                      # password for connecting to API
+        skipCertificateValidation: true           # indicates if client side validation of (management)server's certificate can be skipped
+        isDefault: true                           # treat current array as a default (would be used by storage classes without arrayID parameter)
+        blockProtocol: "auto"                     # what SCSI transport protocol use on node side (FC, ISCSI, NVMeTCP, NVMeFC, None, or auto)
+        nasName: "nas-server"                     # what NAS should be used for NFS volumes
+        nfsAcls: "0777"                           # (Optional) defines permissions - POSIX mode bits or NFSv4 ACLs, to be set on NFS target mount directory.
+                                                  # NFSv4 ACls are supported for NFSv4 shares on NFSv4 enabled NAS servers only. POSIX ACLs are not supported and only POSIX mode bits are supported for NFSv3 shares.
+   ```
+   Change the parameters with relevant values for your PowerStore array.
+   Add more blocks similar to above for each PowerStore array if necessary.
+
+   If replication feature is enabled, ensure the secret includes all the PowerStore arrays involved in replication.
+
+   #### User Privileges
+   The username specified in `config.yaml` must be from the authentication providers of PowerStore. The user must have the correct user role to perform the actions. The minimum requirement is **Storage Operator**.
+
+3. Create Kubernetes secret:
+
+   Create a file called `secret.yaml` in same folder as `config.yaml` with following content
+   ```yaml
+   apiVersion: v1
+   kind: Secret
+   metadata:
+      name: powerstore-config
+      namespace: powerstore
+   type: Opaque
+   data:
+      config: CONFIG_YAML
+   ```
+
+   Combine both files and create Kubernetes secret by running the following command:
+   ```bash
+
+   sed "s/CONFIG_YAML/`cat config.yaml | base64 -w0`/g" secret.yaml | kubectl apply -f -
+   ```
+
 ## Install Driver
 
 1. Follow all the [prerequisites](#prerequisites) above
