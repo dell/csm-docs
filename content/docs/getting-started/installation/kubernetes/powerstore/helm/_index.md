@@ -183,14 +183,6 @@ Note: here `my-powerstore-settings.yaml` is a `values.yaml` file which user has 
        
 
 <div class="container mt-5 ps-0" style="margin-left:0px;">
-    <div class="row">
-      <div class="col-md-6 mb-4">
-    {{< customcard link1="./csm-modules/authorizationv1.x"  image="../../../../../../icons/doc-reports.svg" title="Authorization v1.x" >}}
-      </div>
-      <div class="col-md-6 mb-4">
-       {{< customcard link1="./csm-modules/authorizationv2.0"  image="../../../../../../icons/doc-reports.svg" title="Authorization v2.0"  >}}
-       </div>
-    </div>
        <div class="row">
       <div class="col-md-6 mb-4">
       {{< customcard  link1="./csm-modules/observability"   image="../../../../../../icons/doc-reports.svg" title="Observability"  >}}

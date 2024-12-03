@@ -1,6 +1,6 @@
 ---
 title: "PowerMax"
-linkTitle: "Powermax"
+linkTitle: "PowerMax"
 no_list: true
 description: Powermax Installation
 weight: 1
@@ -29,6 +29,15 @@ Dell PowerMax is a high-performance, enterprise-class storage solution designed 
       <div class="col-md-6 mb-4">
       {{< customcard  link="./offline" icon="fas fa-cloud" image="../../../../../icons/doc-reports.svg" title="Offline">}}
       </div>
-    </div> 
-    
+    </div>  
+    <br> 
+     <div class="row">
+      <div class="col-md-6 mb-4">
+    {{< customcard   link="./../operator_migration" image="../../../../../icons/doc-reports.svg"  title="CSI to CSM Operator Migration" >}}
+      </div>
+      <div class="col-md-6 mb-4">
+       {{< customcard  link="./troubleshooting" icon="fas fa-search" image="../../../../../icons/doc-reports.svg" title="Troubleshooting" >}}
+       </div>
+    </div>
+
 </div>

@@ -1,6 +1,6 @@
 ---
-title: "Powerstore"
-linkTitle: "Powerstore"
+title: "PowerStore"
+linkTitle: "PowerStore"
 no_list: true
 description: Powerstore Installation
 weight: 3

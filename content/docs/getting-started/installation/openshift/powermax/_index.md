@@ -1,6 +1,6 @@
 ---
-title: "Powermax"
-linkTitle: "Powermax"
+title: "PowerMax"
+linkTitle: "PowerMax"
 no_list: true
 description: Powermax Installation
 weight: 1
