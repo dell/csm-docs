@@ -15,16 +15,16 @@ The table below lists the driver and modules versions installable with the CSM O
 
 | CSI Driver         | Version | CSM Authorization 1.x.x , 2.x.x | CSM Replication | CSM Observability | CSM Resiliency |
 | ------------------ |---------|---------------------------------|-----------------|-------------------|----------------|
-| CSI PowerScale     | 2.13.0  | ✔ 1.12.0 , 2.0.0                | ✔ 1.10.0       | ✔ 1.10.0          | ✔ 1.11.0      |
+| CSI PowerScale     | 2.13.0  | ✔ 1.13.0 , 2.0.0                | ✔ 1.11.0       | ✔ 1.11.0          | ✔ 1.12.0      |
 | CSI PowerScale     | 2.12.0  | ✔ 1.12.0 , 2.0.0                | ✔ 1.10.0       | ✔ 1.10.0          | ✔ 1.11.0      |
 | CSI PowerScale     | 2.11.0  | ✔ 1.11.0 , ❌                  | ✔ 1.9.0        | ✔ 1.9.0           | ✔ 1.10.0      |
-| CSI PowerFlex      | 2.13.0  | ✔ 1.12.0 , 2.0.0                | ✔ 1.10.0       | ✔ 1.10.0          | ✔ 1.11.0      |
+| CSI PowerFlex      | 2.13.0  | ✔ 1.13.0 , 2.0.0                | ✔ 1.11.0       | ✔ 1.11.0          | ✔ 1.12.0      |
 | CSI PowerFlex      | 2.12.0  | ✔ 1.12.0 , 2.0.0                | ✔ 1.10.0       | ✔ 1.10.0          | ✔ 1.11.0      |
 | CSI PowerFlex      | 2.11.0  | ✔ 1.11.0 , ❌                  | ✔ 1.9.0        | ✔ 1.9.0           | ✔ 1.10.0      |
-| CSI PowerStore     | 2.13.0  | ❌ , ❌                        | ❌             | ❌                | ✔ 1.11.0      |
+| CSI PowerStore     | 2.13.0  | ❌ , ❌                        | ❌             | ❌                | ✔ 1.12.0      |
 | CSI PowerStore     | 2.12.0  | ❌ , ❌                        | ❌             | ❌                | ✔ 1.11.0      |
 | CSI PowerStore     | 2.11.1  | ❌ , ❌                        | ❌             | ❌                | ✔ 1.10.0      |
-| CSI PowerMax       | 2.13.0  | ✔ 1.12.0 , 2.0.0               | ✔ 1.10.0       | ✔ 1.10.0          | ✔ 1.11.0      |
+| CSI PowerMax       | 2.13.0  | ✔ 1.13.0 , 2.0.0               | ✔ 1.11.0       | ✔ 1.11.0          | ✔ 1.12.0      |
 | CSI PowerMax       | 2.12.0  | ✔ 1.12.0 , 2.0.0               | ✔ 1.10.0       | ✔ 1.10.0          | ✔ 1.11.0      |
 | CSI PowerMax       | 2.11.0  | ✔ 1.11.0 , ❌                  | ✔ 1.9.0        | ✔ 1.9.0           | ✔ 1.10.0      |
 | CSI Unity XT       | 2.13.0  | ❌ , ❌                        | ❌             | ❌                | ❌            |
@@ -48,6 +48,7 @@ Once installed you will be able to deploy [drivers](drivers) and [modules](modul
 `dell-csm-operator` can be installed via Operator Hub on upstream Kubernetes clusters & Red Hat OpenShift Clusters.
 
 The installation process involves the creation of a `Subscription` object either via the _OperatorHub_ UI or using `kubectl/oc`. While creating the `Subscription` you can set the Approval strategy for the `InstallPlan` for the operator to:
+
 * _Automatic_ - If you want the operator to be automatically installed or upgraded (once an upgrade is available).
 * _Manual_ - If you want a cluster administrator to manually review and approve the `InstallPlan` for installation/upgrades.
 
@@ -116,7 +117,7 @@ git clone -b v1.8.0 https://github.com/dell/csm-operator.git
 ```bash
 kubectl get pods -n dell-csm-operator
 ```
- If installed successfully, you should be able to see the operator pod in the `dell-csm-operator` namespace.
+If installed successfully, you should be able to see the operator pod in the `dell-csm-operator` namespace.
 
 {{< imgproc install_pods.jpg Resize "2500x" >}}{{< /imgproc >}}
 
@@ -192,19 +193,19 @@ Here is the output of a request to build an offline bundle for the Dell CSM Oper
 * Pulling and saving container images
 
    quay.io/dell/container-storage-modules/csi-isilon:v2.13.0
-   quay.io/dell/container-storage-modules/csi-metadata-retriever:v1.9.0
-   quay.io/dell/container-storage-modules/csipowermax-reverseproxy:v2.11.0
+   quay.io/dell/container-storage-modules/csi-metadata-retriever:v1.10.0
+   quay.io/dell/container-storage-modules/csipowermax-reverseproxy:v2.12.0
    quay.io/dell/container-storage-modules/csi-powermax:v2.13.0
    quay.io/dell/container-storage-modules/csi-powerstore:v2.13.0
    quay.io/dell/container-storage-modules/csi-unity:v2.13.0
    quay.io/dell/container-storage-modules/csi-vxflexos:v2.13.0
-   quay.io/dell/container-storage-modules/csm-authorization-sidecar:v1.12.0
-   quay.io/dell/container-storage-modules/csm-metrics-powerflex:v1.10.0
-   quay.io/dell/container-storage-modules/csm-metrics-powerscale:v1.7.0
-   quay.io/dell/container-storage-modules/csm-topology:v1.10.0
-   quay.io/dell/container-storage-modules/dell-csi-replicator:v1.10.0
-   quay.io/dell/container-storage-modules/dell-replication-controller:v1.10.0
-   dellemc/sdc:4.5.2.1
+   quay.io/dell/container-storage-modules/csm-authorization-sidecar:v1.13.0
+   quay.io/dell/container-storage-modules/csm-metrics-powerflex:v1.11.0
+   quay.io/dell/container-storage-modules/csm-metrics-powerscale:v1.8.0
+   quay.io/dell/container-storage-modules/csm-topology:v1.11.0
+   quay.io/dell/container-storage-modules/dell-csi-replicator:v1.11.0
+   quay.io/dell/container-storage-modules/dell-replication-controller:v1.11.0
+   quay.io/dell/storage/powerflex/sdc:4.5.2.1
    quay.io/dell/container-storage-modules/dell-csm-operator:v1.8.0
    registry.redhat.io/openshift4/ose-kube-rbac-proxy-rhel9:v4.16.0-202409051837.p0.g8ea2c99.assembly.stream.el9
    nginxinc/nginx-unprivileged:1.27
@@ -304,7 +305,7 @@ Loaded image: registry.k8s.io/sig-storage/csi-snapshotter:v8.1.0
 * Tagging and pushing images
 
    quay.io/dell/container-storage-modules/csi-isilon:v2.13.0 -> localregistry:5000/dell-csm-operator/csi-isilon:v2.13.0
-   quay.io/dell/container-storage-modules/csi-metadata-retriever:v1.9.0 -> localregistry:5000/dell-csm-operator/csi-metadata-retriever:v1.9.0
+   quay.io/dell/container-storage-modules/csi-metadata-retriever:v1.10.0 -> localregistry:5000/dell-csm-operator/csi-metadata-retriever:v1.10.0
    ...
    ...
    registry.k8s.io/sig-storage/csi-resizer:v1.12.0 -> localregistry:5000/dell-csm-operator/csi-resizer:v1.12.0
@@ -313,7 +314,7 @@ Loaded image: registry.k8s.io/sig-storage/csi-snapshotter:v8.1.0
 * Preparing files within /root/dell-csm-operator-bundle
 
    changing: quay.io/dell/container-storage-modules/csi-isilon:v2.13.0 -> localregistry:5000/dell-csm-operator/csi-isilon:v2.13.0
-   changing: quay.io/dell/container-storage-modules/csi-metadata-retriever:v1.9.0 -> localregistry:5000/dell-csm-operator/csi-metadata-retriever:v1.9.0
+   changing: quay.io/dell/container-storage-modules/csi-metadata-retriever:v1.10.0 -> localregistry:5000/dell-csm-operator/csi-metadata-retriever:v1.10.0
    ...
    ...
    changing: registry.k8s.io/sig-storage/csi-resizer:v1.12.0 -> localregistry:5000/dell-csm-operator/csi-resizer:v1.12.0
@@ -384,15 +385,18 @@ You can update CSI Drivers installed by the Dell CSM Operator like any Kubernete
 ```bash
 kubectl get <driver-object> -n <driver-namespace>
 ```
+
 2. Replace `<driver-namespace>` with the appropriate namespace:</br>
 ```bash
 kubectl get csm -n <driver-namespace>
 ```
+
 Use the object name in the kubectl edit command: </br>
 
 ```bash
 kubectl edit csm <object-name> -n <driver-namespace>
 ```
+
 For example, if the object name is powerstore:</br>
 
 ```bash

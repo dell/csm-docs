@@ -41,7 +41,7 @@ kubectl get csm --all-namespaces
     # sdc-monitor is disabled by default, due to high CPU usage
       - name: sdc-monitor
         enabled: false
-        image: dellemc/sdc:4.5.2.1
+        image: quay.io/dell/storage/powerflex/sdc:4.5.2.1
         envs:
         - name: HOST_PID
           value: "1"

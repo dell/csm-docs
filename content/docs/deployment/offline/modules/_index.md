@@ -77,11 +77,11 @@ To perform an offline installation of a Helm chart, the following steps should b
     *
     * Downloading and saving Docker images
 
-      quay.io/dell/container-storage-modules/csm-topology:v1.10.0
-      quay.io/dell/container-storage-modules/csm-metrics-powerflex:v1.10.0
-      quay.io/dell/container-storage-modules/csm-metrics-powerstore:v1.10.0
-      quay.io/dell/container-storage-modules/csm-metrics-powerscale:v1.7.0
-      quay.io/dell/container-storage-modules/csm-metrics-powermax:v1.5.0
+      quay.io/dell/container-storage-modules/csm-topology:v1.11.0
+      quay.io/dell/container-storage-modules/csm-metrics-powerflex:v1.11.0
+      quay.io/dell/container-storage-modules/csm-metrics-powerstore:v1.11.0
+      quay.io/dell/container-storage-modules/csm-metrics-powerscale:v1.8.0
+      quay.io/dell/container-storage-modules/csm-metrics-powermax:v1.6.0
       otel/opentelemetry-collector:0.42.0
       nginxinc/nginx-unprivileged:1.27
 
@@ -108,15 +108,16 @@ To perform an offline installation of a Helm chart, the following steps should b
     ```bash
     ./offline-installer.sh -p <my-registry>:5000
     ```
-    ```
+
+    ```bash
     *
     * Loading, tagging, and pushing Docker images to registry <my-registry>:5000/
 
-      quay.io/dell/container-storage-modules/csm-topology:v1.10.0 -> <my-registry>:5000/csm-topology:v1.10.0
-      quay.io/dell/container-storage-modules/csm-metrics-powerflex:v1.10.0 -> <my-registry>:5000/csm-metrics-powerflex:v1.10.0
-      quay.io/dell/container-storage-modules/csm-metrics-powerstore:v1.10.0 -> <my-registry>:5000/csm-metrics-powerstore:v1.10.0
-      quay.io/dell/container-storage-modules/csm-metrics-powerscale:v1.7.0 -> <my-registry>:5000/csm-metrics-powerscale:v1.7.0
-      quay.io/dell/container-storage-modules/csm-metrics-powermax:v1.5.0 -> <my-registry>:5000/csm-metrics-powermax:v1.5.0
+      quay.io/dell/container-storage-modules/csm-topology:v1.11.0 -> <my-registry>:5000/csm-topology:v1.11.0
+      quay.io/dell/container-storage-modules/csm-metrics-powerflex:v1.11.0 -> <my-registry>:5000/csm-metrics-powerflex:v1.11.0
+      quay.io/dell/container-storage-modules/csm-metrics-powerstore:v1.11.0 -> <my-registry>:5000/csm-metrics-powerstore:v1.11.0
+      quay.io/dell/container-storage-modules/csm-metrics-powerscale:v1.8.0 -> <my-registry>:5000/csm-metrics-powerscale:v1.8.0
+      quay.io/dell/container-storage-modules/csm-metrics-powermax:v1.6.0 -> <my-registry>:5000/csm-metrics-powermax:v1.6.0
       otel/opentelemetry-collector:0.42.0 -> <my-registry>:5000/opentelemetry-collector:0.42.0
       nginxinc/nginx-unprivileged:1.27 -> <my-registry>:5000/nginx-unprivileged:1.27
     ```

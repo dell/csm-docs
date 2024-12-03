@@ -216,7 +216,7 @@ Create isilon-creds secret using the following command:
 
 8. Install the driver using `csi-install.sh` bash script and default yaml by running
     ```bash
-    cd dell-csi-helm-installer && wget -O my-isilon-settings.yaml https://raw.githubusercontent.com/dell/helm-charts/csi-isilon-2.10.0/charts/csi-isilon/values.yaml &&
+    cd dell-csi-helm-installer && wget -O my-isilon-settings.yaml https://raw.githubusercontent.com/dell/helm-charts/csi-isilon-2.13.0/charts/csi-isilon/values.yaml &&
     ./csi-install.sh --namespace isilon --values  my-isilon-settings.yaml --helm-charts-version <version>
     ```
 
