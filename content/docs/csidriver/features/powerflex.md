@@ -383,13 +383,13 @@ The CSI PowerFlex driver version 1.3 and later support the automatic deployment 
 - Optionally, if the SDC monitor is enabled, another container is started and runs as the monitor. Follow PowerFlex SDC documentation to get monitor metrics.
 - On nodes that do not support automatic SDC deployment by SDC init container, manual installation steps must be followed. The SDC init container skips installing and you can see this mentioned in the logs by running kubectl logs on the node for SDC.
   Refer to https://hub.docker.com/r/dellemc/sdc for supported OS versions.
-- There is no automated uninstallation of the SDC kernel module. Follow PowerFlex SDC documentation to manually uninstall the SDC driver from the node. 
+- There is no automated uninstallation of the SDC kernel module. Follow PowerFlex SDC documentation to manually uninstall the SDC driver from the node.
 
 From CSM 1.12.0, you can disable automatic SDC deployment.
 
 By default, SDC deployment is enabled. If you do not want to deploy `sdc` with PowerFlex, it can be disabled by setting the `sdc.enabled` field to `false`.
 
-```
+```yaml
 node:
   ...
   sdc:

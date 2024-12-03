@@ -15,21 +15,21 @@ The table below lists the driver and modules versions installable with the CSM O
 
 | CSI Driver         | Version | CSM Authorization 1.x.x , 2.x.x | CSM Replication | CSM Observability | CSM Resiliency |
 | ------------------ |---------|---------------------------------|-----------------|-------------------|----------------|
-| CSI PowerScale     | 2.12.0  | ✔ 1.12.0  , 2.0.0              | ✔ 1.10.0       | ✔ 1.10.0          | ✔ 1.11.0      |
-| CSI PowerScale     | 2.11.0  | ✔ 1.11.0  , ❌             | ✔ 1.9.0        | ✔ 1.9.0           | ✔ 1.10.0      |
-| CSI PowerScale     | 2.10.1  | ✔ 1.10.1  , ❌             | ✔ 1.8.1        | ✔ 1.8.1           | ✔ 1.9.1       |
-| CSI PowerFlex      | 2.12.0  | ✔ 1.12.0  , 2.0.0           | ✔ 1.10.0       | ✔ 1.10.0          | ✔ 1.11.0      |
-| CSI PowerFlex      | 2.11.0  | ✔ 1.11.0  , ❌             | ✔ 1.9.0        | ✔ 1.9.0           | ✔ 1.10.0      |
-| CSI PowerFlex      | 2.10.1  | ✔ 1.10.1  , ❌             | ✔ 1.8.1        | ✔ 1.8.1           | ✔ 1.9.1       |
-| CSI PowerStore     | 2.12.0  | ❌ , ❌                    | ❌             | ❌                | ✔ 1.11.0      |
-| CSI PowerStore     | 2.11.1  | ❌ , ❌                    | ❌             | ❌                | ✔ 1.10.0      |
-| CSI PowerStore     | 2.10.1  | ❌ , ❌                    | ❌             | ❌                | ✔ 1.9.1       |
-| CSI PowerMax       | 2.12.0  | ✔ 1.12.0  , 2.0.0           | ✔ 1.10.0       | ✔ 1.10.0          | ✔ 1.11.0      |
-| CSI PowerMax       | 2.11.0  | ✔ 1.11.0  , ❌             | ✔ 1.9.0        | ✔ 1.9.0           | ✔ 1.10.0      |
-| CSI PowerMax       | 2.10.1  | ✔ 1.10.1  , ❌             | ✔ 1.8.1        | ✔ 1.8.1           | ❌            |
-| CSI Unity XT       | 2.12.0  | ❌ , ❌                    | ❌             | ❌                | ❌            |
-| CSI Unity XT       | 2.11.1  | ❌ , ❌                    | ❌             | ❌                | ❌            |
-| CSI Unity XT       | 2.10.1  | ❌ , ❌                    | ❌             | ❌                | ❌            |
+| CSI PowerScale     | 2.13.0  | ✔ 1.12.0 , 2.0.0                | ✔ 1.10.0       | ✔ 1.10.0          | ✔ 1.11.0      |
+| CSI PowerScale     | 2.12.0  | ✔ 1.12.0 , 2.0.0                | ✔ 1.10.0       | ✔ 1.10.0          | ✔ 1.11.0      |
+| CSI PowerScale     | 2.11.0  | ✔ 1.11.0 , ❌                  | ✔ 1.9.0        | ✔ 1.9.0           | ✔ 1.10.0      |
+| CSI PowerFlex      | 2.13.0  | ✔ 1.12.0 , 2.0.0                | ✔ 1.10.0       | ✔ 1.10.0          | ✔ 1.11.0      |
+| CSI PowerFlex      | 2.12.0  | ✔ 1.12.0 , 2.0.0                | ✔ 1.10.0       | ✔ 1.10.0          | ✔ 1.11.0      |
+| CSI PowerFlex      | 2.11.0  | ✔ 1.11.0 , ❌                  | ✔ 1.9.0        | ✔ 1.9.0           | ✔ 1.10.0      |
+| CSI PowerStore     | 2.13.0  | ❌ , ❌                        | ❌             | ❌                | ✔ 1.11.0      |
+| CSI PowerStore     | 2.12.0  | ❌ , ❌                        | ❌             | ❌                | ✔ 1.11.0      |
+| CSI PowerStore     | 2.11.1  | ❌ , ❌                        | ❌             | ❌                | ✔ 1.10.0      |
+| CSI PowerMax       | 2.13.0  | ✔ 1.12.0 , 2.0.0               | ✔ 1.10.0       | ✔ 1.10.0          | ✔ 1.11.0      |
+| CSI PowerMax       | 2.12.0  | ✔ 1.12.0 , 2.0.0               | ✔ 1.10.0       | ✔ 1.10.0          | ✔ 1.11.0      |
+| CSI PowerMax       | 2.11.0  | ✔ 1.11.0 , ❌                  | ✔ 1.9.0        | ✔ 1.9.0           | ✔ 1.10.0      |
+| CSI Unity XT       | 2.13.0  | ❌ , ❌                        | ❌             | ❌                | ❌            |
+| CSI Unity XT       | 2.12.0  | ❌ , ❌                        | ❌             | ❌                | ❌            |
+| CSI Unity XT       | 2.11.1  | ❌ , ❌                        | ❌             | ❌                | ❌            |
 
 These CR will be used for new deployment or upgrade. In most case, it is recommended to use the latest available version.
 
@@ -42,6 +42,7 @@ Dell CSM Operator can be installed manually or via Operator Hub.
 Once installed you will be able to deploy [drivers](drivers) and [modules](modules) from the Operator.
 
 ### OpenShift Installation via Operator Hub
+
 >NOTE: You can update the resource requests and limits when you are deploying operator using Operator Hub
 
 `dell-csm-operator` can be installed via Operator Hub on upstream Kubernetes clusters & Red Hat OpenShift Clusters.
@@ -64,6 +65,7 @@ Both editions have the same codebase and are supported by Dell Technologies, the
 * The `Community` can be installed on any Kubernetes distributions.
 
 ### Manual Installation on a cluster without OLM
+
 >NOTE: You can update the resource requests and limits when you are deploying operator using manual installation without OLM
 
 1. Install volume snapshot CRDs. For detailed snapshot setup procedure, [click here](../../snapshots/#volume-snapshot-feature).
@@ -107,7 +109,6 @@ git clone -b v1.7.0 https://github.com/dell/csm-operator.git
      * Uninstall the operator following the steps [here](https://dell.github.io/csm-docs/v3/deployment/csmoperator/#uninstall)
 
      * Update the resource configuration as mentioned in step 5 and install the operator using the step 7 above
-
 
 {{< imgproc install.JPG Resize "2500x" >}}{{< /imgproc >}}
 
@@ -155,6 +156,7 @@ To perform an offline installation, the following steps should be performed:
 >NOTE: It is recommended to use the same build tool for packing and unpacking of images (either docker or podman).
 
 #### Building an offline bundle
+
 >NOTE: Login to the `registry.redhat.io` registry using RedHat credentials before you proceed with offline bundle creation.
 
 This needs to be performed on a Linux system with access to the Internet as a git repo will need to be cloned, and container images pulled from public registries.
@@ -171,6 +173,7 @@ bash scripts/csm-offline-bundle.sh -c
 ```
 
 The script will perform the following steps:
+
   - Determine required images by parsing CSM Operator configuration files
   - Perform an image `pull` of each image required
   - Save all required images to a file by running `docker save` or `podman save`
@@ -178,7 +181,7 @@ The script will perform the following steps:
 
 Here is the output of a request to build an offline bundle for the Dell CSM Operator:
 
-```
+```bash
 * Building image manifest file
 
    Processing file /root/csm-operator/operatorconfig/driverconfig/common/default.yaml
@@ -186,13 +189,13 @@ Here is the output of a request to build an offline bundle for the Dell CSM Oper
 
 * Pulling and saving container images
 
-   quay.io/dell/container-storage-modules/csi-isilon:v2.12.0
+   quay.io/dell/container-storage-modules/csi-isilon:v2.13.0
    quay.io/dell/container-storage-modules/csi-metadata-retriever:v1.9.0
    quay.io/dell/container-storage-modules/csipowermax-reverseproxy:v2.11.0
-   quay.io/dell/container-storage-modules/csi-powermax:v2.12.0
-   quay.io/dell/container-storage-modules/csi-powerstore:v2.12.0
-   quay.io/dell/container-storage-modules/csi-unity:v2.12.0
-   quay.io/dell/container-storage-modules/csi-vxflexos:v2.12.0
+   quay.io/dell/container-storage-modules/csi-powermax:v2.13.0
+   quay.io/dell/container-storage-modules/csi-powerstore:v2.13.0
+   quay.io/dell/container-storage-modules/csi-unity:v2.13.0
+   quay.io/dell/container-storage-modules/csi-vxflexos:v2.13.0
    quay.io/dell/container-storage-modules/csm-authorization-sidecar:v1.12.0
    quay.io/dell/container-storage-modules/csm-metrics-powerflex:v1.10.0
    quay.io/dell/container-storage-modules/csm-metrics-powerscale:v1.7.0
@@ -281,13 +284,13 @@ The script will then perform the following steps:
 
 Here is the output for preparing the bundle for installation (`localregistry:5000` refers to an image registry accessible to Kubernetes/OpenShift. `dell-csm-operator` refers to the folder created within the registry.):
 
-```
+```bash
 Preparing a offline bundle for installation
 
 * Loading quay.io images
 
-Loaded image: quay.io/dell/container-storage-modules/csi-powerstore:v2.12.0
-Loaded image: quay.io/dell/container-storage-modules/csi-isilon:v2.12.0
+Loaded image: quay.io/dell/container-storage-modules/csi-powerstore:v2.13.0
+Loaded image: quay.io/dell/container-storage-modules/csi-isilon:v2.13.0
 ...
 ...
 Loaded image: registry.k8s.io/sig-storage/csi-resizer:v1.12.0
@@ -295,7 +298,7 @@ Loaded image: registry.k8s.io/sig-storage/csi-snapshotter:v8.1.0
 
 * Tagging and pushing images
 
-   quay.io/dell/container-storage-modules/csi-isilon:v2.12.0 -> localregistry:5000/dell-csm-operator/csi-isilon:v2.12.0
+   quay.io/dell/container-storage-modules/csi-isilon:v2.13.0 -> localregistry:5000/dell-csm-operator/csi-isilon:v2.13.0
    quay.io/dell/container-storage-modules/csi-metadata-retriever:v1.9.0 -> localregistry:5000/dell-csm-operator/csi-metadata-retriever:v1.9.0
    ...
    ...
@@ -304,7 +307,7 @@ Loaded image: registry.k8s.io/sig-storage/csi-snapshotter:v8.1.0
 
 * Preparing files within /root/dell-csm-operator-bundle
 
-   changing: quay.io/dell/container-storage-modules/csi-isilon:v2.12.0 -> localregistry:5000/dell-csm-operator/csi-isilon:v2.12.0
+   changing: quay.io/dell/container-storage-modules/csi-isilon:v2.13.0 -> localregistry:5000/dell-csm-operator/csi-isilon:v2.13.0
    changing: quay.io/dell/container-storage-modules/csi-metadata-retriever:v1.9.0 -> localregistry:5000/dell-csm-operator/csi-metadata-retriever:v1.9.0
    ...
    ...
@@ -317,9 +320,11 @@ Loaded image: registry.k8s.io/sig-storage/csi-snapshotter:v8.1.0
 #### Perform Operator installation
 
 Now that the required images are available and the Operator configuration updated, you can proceed to install the operator by executing `install.sh` script.
+
 ```bash
 bash scripts/install.sh
 ```
+
 >NOTE: Dell CSM Operator would install to the 'dell-csm-operator' namespace by default.
 
 ## Uninstall

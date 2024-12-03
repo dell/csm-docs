@@ -16,26 +16,26 @@ The [Dell Container Storage Modules Installation Wizard](./src/index.html) is a 
 
 | CSI Driver         | Version   | Helm   | Operator  |
 | ------------------ | --------- | ------ | --------- |
+| CSI PowerStore     | 2.13.0    |✔️      |✔️        |
 | CSI PowerStore     | 2.12.0    |✔️      |✔️        |
 | CSI PowerStore     | 2.11.1    |✔️      |✔️        |
 | CSI PowerStore     | 2.10.1    |✔️      |✔️        |
-| CSI PowerStore     | 2.9.1     |✔️      |✔️        |
+| CSI PowerMax       | 2.13.0    |✔️      |✔️        |
 | CSI PowerMax       | 2.12.0    |✔️      |✔️        |
 | CSI PowerMax       | 2.11.0    |✔️      |✔️        |
 | CSI PowerMax       | 2.10.1    |✔️      |✔️        |
-| CSI PowerMax       | 2.9.1     |✔️      |✔️        |
+| CSI PowerFlex      | 2.13.0    |✔️      |❌        |
 | CSI PowerFlex      | 2.12.0    |✔️      |❌        |
 | CSI PowerFlex      | 2.11.0    |✔️      |❌        |
 | CSI PowerFlex      | 2.10.1    |✔️      |❌        |
-| CSI PowerFlex      | 2.9.1     |✔️      |❌        |
+| CSI PowerScale     | 2.13.0    |✔️      |✔️        |
 | CSI PowerScale     | 2.12.0    |✔️      |✔️        |
 | CSI PowerScale     | 2.11.0    |✔️      |✔️        |
 | CSI PowerScale     | 2.10.1    |✔️      |✔️        |
-| CSI PowerScale     | 2.9.1     |✔️      |✔️        |
+| CSI Unity XT       | 2.13.0    |✔️      |❌        |
 | CSI Unity XT       | 2.12.0    |✔️      |❌        |
 | CSI Unity XT       | 2.11.0    |✔️      |❌        |
 | CSI Unity XT       | 2.10.1    |✔️      |❌        |
-| CSI Unity XT       | 2.9.1     |✔️      |❌        |
 
 >NOTE: The Installation Wizard currently does not support operator-based manifest file generation for Unity XT and PowerFlex drivers.
 
@@ -59,9 +59,9 @@ The [Dell Container Storage Modules Installation Wizard](./src/index.html) is a 
 8. If needed, select `Install Controller Pods on Control Plane` and/or `Install Node Pods on Control Plane`.
 9. Enter the `Namespace`. The default value is `csi-<array>`.
 10. Click on `Generate YAML`.
-13. A manifest file, `values.yaml` will be generated and downloaded.
-14. A section `Run the following commands to install` will be displayed.
-15. Run the commands displayed to install Dell CSI Driver and Modules using the generated manifest file.
+11. A manifest file, `values.yaml` will be generated and downloaded.
+12. A section `Run the following commands to install` will be displayed.
+13. Run the commands displayed to install Dell CSI Driver and Modules using the generated manifest file.
 
 ## Installation Using Helm Chart
 
