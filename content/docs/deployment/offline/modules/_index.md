@@ -83,7 +83,7 @@ To perform an offline installation of a Helm chart, the following steps should b
       quay.io/dell/container-storage-modules/csm-metrics-powerscale:v1.7.0
       quay.io/dell/container-storage-modules/csm-metrics-powermax:v1.5.0
       otel/opentelemetry-collector:0.42.0
-      nginxinc/nginx-unprivileged:1.20
+      nginxinc/nginx-unprivileged:1.27
 
     *
     * Compressing offline-karavi-observability-bundle.tar.gz
@@ -118,7 +118,7 @@ To perform an offline installation of a Helm chart, the following steps should b
       quay.io/dell/container-storage-modules/csm-metrics-powerscale:v1.7.0 -> <my-registry>:5000/csm-metrics-powerscale:v1.7.0
       quay.io/dell/container-storage-modules/csm-metrics-powermax:v1.5.0 -> <my-registry>:5000/csm-metrics-powermax:v1.5.0
       otel/opentelemetry-collector:0.42.0 -> <my-registry>:5000/opentelemetry-collector:0.42.0
-      nginxinc/nginx-unprivileged:1.20 -> <my-registry>:5000/nginx-unprivileged:1.20
+      nginxinc/nginx-unprivileged:1.27 -> <my-registry>:5000/nginx-unprivileged:1.27
     ```
 
 ### Perform Helm installation
@@ -273,7 +273,6 @@ To perform an offline installation of a Helm chart, the following steps should b
     - If CSM for Authorization is enabled for CSI PowerMax, the `karaviMetricsPowerMax.authorization` parameters must be properly configured.
 
     ```bash
-
     helm install -n install-namespace app-name karavi-observability
 
     NAME: app-name
@@ -282,5 +281,4 @@ To perform an offline installation of a Helm chart, the following steps should b
     STATUS: deployed
     REVISION: 1
     TEST SUITE: None
-
     ```

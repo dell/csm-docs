@@ -118,7 +118,7 @@ The [Dell Container Storage Modules Installation Wizard](./src/index.html) is a 
 
 2. Look over all the fields in the generated `values.yaml` and fill in/adjust any as needed.
 
->NOTE: The CSM Installation Wizard generates `values.yaml` with the minimal inputs required to install the CSM. To configure additional parameters in values.yaml, you can follow the steps outlined in [PowerStore](../csmoperator/drivers/powerstore), [PowerMax](../csmoperator/drivers/powermax), [PowerScale](../csmoperator/drivers/powerscale), [Resiliency](../csmoperator/modules/resiliency).
+    >NOTE: The CSM Installation Wizard generates `values.yaml` with the minimal inputs required to install the CSM. To configure additional parameters in values.yaml, you can follow the steps outlined in [PowerStore](../csmoperator/drivers/powerstore), [PowerMax](../csmoperator/drivers/powermax), [PowerScale](../csmoperator/drivers/powerscale), [Resiliency](../csmoperator/modules/resiliency).
 
 3. If Observability is checked in the wizard, refer to [Observability](../csmoperator/modules/observability) to export metrics to Prometheus and load the Grafana dashboards.
 
