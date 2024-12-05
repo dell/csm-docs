@@ -23,12 +23,13 @@ Description: >
 
 
 
+
 ### New Features/Changes
 
 - [#1449 - [FEATURE]: Simplify the CSM Operator deployment](https://github.com/dell/csm/issues/1449)
 - [#1473 - [FEATURE]: Add Support for OpenShift Container Platform (OCP) 4.17](https://github.com/dell/csm/issues/1473)
-- [#1508 - [FEATURE]:  Add Support for KubeVirt](https://github.com/dell/csm/issues/1508)
 - [#1484 - [FEATURE]: Remove ACC Support](https://github.com/dell/csm/issues/1484)
+- [#1508 - [FEATURE]:  Add Support for KubeVirt](https://github.com/dell/csm/issues/1508)
 
 ### Fixed Issues
 
