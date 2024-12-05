@@ -60,7 +60,7 @@ To configure Replication perform the following steps:
     ```shell
     ./repctl cluster inject
     ```
-    > **_NOTE:_**  Service account's configuration for each cluster can be injected individually to each of the added clusters, use the following command:
+    > **_NOTE:_**  To inject the service account's configuration for each cluster individually, use the following command:
     ```shell
       ./repctl cluster inject --custom-configs $HOME/.repctl/clusters/<config-name>
       Example: ./repctl cluster inject --custom-configs "/root/.repctl/clusters/config-1"
