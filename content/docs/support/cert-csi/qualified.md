@@ -17,6 +17,7 @@ description: Community Qualified Configurations
 | [Ticket 1456](https://github.com/dell/csm/issues/1456) | RHCOS 4.14.92 | OKE 4.14.31 | PowerFlex | NFS| CSI v2.11.0 |
 | [Ticket 1479](https://github.com/dell/csm/issues/1479) | Ubuntu 18.04.x | OpenShift 4.17 | PowerFlex | iSCSI| CSI v2.11.0 |
 | [Ticket 1500](https://github.com/dell/csm/issues/1500) <br> [Ticket 1501](https://github.com/dell/csm/issues/1501) |  RHCOS 4.14 | OpenShift 4.14.x | PowerStore | iSCSI| CSI 2.10.1 |
+ [Ticket 1513](https://github.com/dell/csm/issues/1513) | RHCOS 4.14 | OpenShift 4.14 | PowerScale | NFS | CSI v2.6.1 |
 | [Ticket 1516](https://github.com/dell/csm/issues/1516) | Ubuntu 20.04.x | MKE - 3.6.13 | PowerFlex | iSCSI | CSI v2.11.0 |
 | [Ticket 1590](https://github.com/dell/csm/issues/1590) | RHCOS 4.14 | OpenShift 4.14 | Unity 680F 5.4.0.0.5.094 | NFS | CSI v2.12.0 |
 | [Ticket 1622](https://github.com/dell/csm/issues/1622) | Ubuntu 20.04.6 LTS | MKE - 3.6.13 | PowerScale v9.5.0.8 | NFS | CSI v2.12.0 |
