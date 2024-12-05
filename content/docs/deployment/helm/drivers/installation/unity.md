@@ -30,6 +30,7 @@ Install Helm 3.0 on the master node before you install the CSI Driver for Dell U
 **Steps**
 
 Run the command to install Helm 3.0.
+
 ```bash
 curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
 ```
@@ -40,8 +41,8 @@ Dell Unity XT supports Fibre Channel communication. If you use the Fibre Channel
 following requirement is met before you install the CSI Driver for Dell Unity XT:
 - Zoning of the Host Bus Adapters (HBAs) to the Fibre Channel port must be done.
 
-
 ### Set up the iSCSI Initiator
+
 The CSI Driver for Dell Unity XT supports iSCSI connectivity.
 
 If you use the iSCSI protocol, set up the iSCSI initiators as follows:
@@ -53,6 +54,7 @@ If you use the iSCSI protocol, set up the iSCSI initiators as follows:
 For more information about configuring iSCSI, see [Dell Host Connectivity guide](https://www.delltechnologies.com/asset/en-us/products/storage/technical-support/docu5128.pdf).
 
 ### Linux multipathing requirements
+
 Dell Unity XT supports Linux multipathing. Configure Linux multipathing before installing the CSI Driver for Dell
 Unity XT.
 
@@ -64,6 +66,7 @@ Set up Linux multipathing as follows:
 - Ensure that the multipath command for `multipath.conf` is available on all Kubernetes nodes.
 
 As a best practice, use the following options to help the operating system and the mulitpathing software detect path changes efficiently:
+
 ```text
 path_grouping_policy multibus
 path_checker tur
@@ -80,12 +83,10 @@ Install CSI Driver for Unity XT using this procedure.
 
  * As a pre-requisite for running this procedure, you must have the downloaded files, including the Helm chart from the source [git repository](https://github.com/dell/csi-unity) with the command
    ```bash
-   git clone -b v2.12.0 https://github.com/dell/csi-unity.git
+   git clone -b v2.13.0 https://github.com/dell/csi-unity.git
    ```
  * In the top-level dell-csi-helm-installer directory, there should be two scripts, `csi-install.sh` and `csi-uninstall.sh`.
  * Ensure _unity_ namespace exists in Kubernetes cluster. Use the `kubectl create namespace unity` command to create the namespace if the namespace is not present.
-
-
 
 Procedure
 
@@ -100,12 +101,12 @@ Procedure
 2. Get the required values.yaml using the command below:
 
 ```bash
-cd dell-csi-helm-installer && wget -O my-unity-settings.yaml https://github.com/dell/helm-charts/raw/csi-unity-2.12.0/charts/csi-unity/values.yaml
+cd dell-csi-helm-installer && wget -O my-unity-settings.yaml https://github.com/dell/helm-charts/raw/csi-unity-2.13.0/charts/csi-unity/values.yaml
 ```
 
 3. Edit `values.yaml` to set the following parameters for your installation:
 
-    The following table lists the primary configurable parameters of the Unity XT driver chart and their default values. More detailed information can be found in the [`values.yaml`](https://github.com/dell/helm-charts/blob/csi-unity-2.12.0/charts/csi-unity/values.yaml) file in this repository.
+    The following table lists the primary configurable parameters of the Unity XT driver chart and their default values. More detailed information can be found in the [`values.yaml`](https://github.com/dell/helm-charts/blob/csi-unity-2.13.0/charts/csi-unity/values.yaml) file in this repository.
 
     | Parameter | Description | Required | Default |
     | --------- | ----------- | -------- |-------- |
@@ -138,7 +139,6 @@ cd dell-csi-helm-installer && wget -O my-unity-settings.yaml https://github.com/
     | healthMonitor.enabled | Enable/Disable health monitor of CSI volumes- volume usage, volume condition | No | false |
     | nodeSelector | Define node selection constraints for pods of node deployment | No | |
     | tolerations | Define tolerations for the node deployment, if required | No | |
-
 
     **Note**:
 
@@ -245,7 +245,6 @@ cd dell-csi-helm-installer && wget -O my-unity-settings.yaml https://github.com/
 
 6. If you want to leverage snapshotting feature, the pre-requisite is to install external-snapshotter. Installation of external-snapshotter is required only for Kubernetes and is available by default with OpenShift installations. [Click here](../../../../../snapshots/#optional-volume-snapshot-requirements) to follow the procedure to install external-snapshotter.
 
-
 7. Run the command to proceed with the installation using bash script.
    ```bash
    ./csi-install.sh --namespace unity --values ./myvalues.yaml --helm-charts-version <version>
@@ -332,8 +331,7 @@ cd dell-csi-helm-installer && wget -O my-unity-settings.yaml https://github.com/
 
    **Syntax**:
    ```bash
-
-   git clone -b csi-unity-2.12.0 https://github.com/dell/helm-charts
+   git clone -b csi-unity-2.13.0 https://github.com/dell/helm-charts
 
    helm install <release-name> dell/container-storage-modules -n <namespace> --version <container-storage-module chart-version> -f <values.yaml location>
 
@@ -414,36 +412,38 @@ There are samples storage class yaml files available under `csi-unity/samples/st
 8. Edit `storageclass.kubernetes.io/is-default-class` to true if you want to set it as default, otherwise false.
 9. Save the file and create it by using `kubectl create -f unity-<ARRAY_ID>-fc.yaml` or `kubectl create -f unity-<ARRAY_ID>-iscsi.yaml` or `kubectl create -f unity-<ARRAY_ID>-nfs.yaml`
 
-
 **Note**:
 - At least one storage class is required for one array.
 - If you uninstall the driver and reinstall it, you can still face errors if any update in the `values.yaml` file leads to an update of the storage class(es):
 
-```
+```bash
     Error: cannot patch "<sc-name>" with kind StorageClass: StorageClass.storage.k8s.io "<sc-name>" is invalid: parameters: Forbidden: updates to parameters are forbidden
 ```
 
 In case you want to make such updates, ensure to delete the existing storage classes using the `kubectl delete storageclass` command.
 Deleting a storage class has no impact on a running Pod with mounted PVCs. You cannot provision new PVCs until at least one storage class is newly created.
 
-
 ## Dynamically update the unity-creds secrets
 
 Users can dynamically add delete array information from secret. Whenever an update happens the driver updates the "Host" information in an array.
 User can update secret using the following command:
+
 ```bash
 kubectl create secret generic unity-creds -n unity --from-file=config=secret.yaml -o yaml --dry-run=client | kubectl replace -f -
 ```
+
 **Note**: Updating unity-certs-x secrets is a manual process, unlike unity-creds. Users have to re-install the driver in case of updating/adding the SSL certificates or changing the certSecretCount parameter.
 
 ## Dynamic Logging Configuration
 
 ### Helm based installation
+
 As part of driver installation, a ConfigMap with the name `unity-config-params` is created, which contains an attribute `CSI_LOG_LEVEL` which specifies the current log level of CSI driver.
 
 Users can set the default log level by specifying log level to `logLevel` attribute in values.yaml during driver installation.
 
 To change the log level dynamically to a different value user can edit the same values.yaml, and run the following command
+
 ```bash
 cd dell-csi-helm-installer
 ./csi-install.sh --namespace unity --values ./myvalues.yaml --upgrade

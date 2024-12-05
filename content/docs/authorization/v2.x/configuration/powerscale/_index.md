@@ -7,6 +7,7 @@ description: >
 {{% pageinfo color="primary" %}}
 {{< message text="1" >}}
 {{% /pageinfo %}}
+
 ## Configuring PowerScale CSI Driver with CSM for Authorization
 
 Given a setup where Kubernetes, a storage system, and the CSM for Authorization Proxy Server are deployed, follow these steps to configure the CSI Drivers to work with the Authorization sidecar:
@@ -123,7 +124,7 @@ Given a setup where Kubernetes, a storage system, and the CSM for Authorization 
 
     - Update the `SKIP_CERTIFICATE_VALIDATION` environment value to `true` or `false` depending on if you want to disable or enable certificate validation of the CSM Authorization Proxy Server.
 
-    - Do not update the `configVersion`. You will notice in the example that it is set to v1.12.0, this ensures that Operator checks on version support do not prevent deployment of the v2.0.0 version of authorization.
+    - Do not update the `configVersion`. You will notice in the example that it is set to v1.13.0, this ensures that Operator checks on version support do not prevent deployment of the v2.0.0 version of authorization.
 
     ```yaml
     modules:
@@ -131,7 +132,7 @@ Given a setup where Kubernetes, a storage system, and the CSM for Authorization 
       - name: authorization
         # enable: Enable/Disable csm-authorization
         enabled: true
-        configVersion: v1.12.0
+        configVersion: v1.13.0
         components:
         - name: karavi-authorization-proxy
           image: quay.io/dell/container-storage-modules/csm-authorization-sidecar:v2.0.0
