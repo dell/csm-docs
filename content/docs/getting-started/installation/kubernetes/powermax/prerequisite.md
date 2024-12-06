@@ -186,6 +186,21 @@ CSI Driver for Dell PowerMax supports NFS communication. Ensure that the followi
 - PowerMax Embedded Management guest to access Unisphere for PowerMax.
 - Create the NAS server. Please refer [here](https://dl.dell.com/content/manual55638050-dell-powermax-file-quick-start-guide.pdf?language=en-us&ps=true) for more details.
 {{% /tab %}}
+{{% tab header="Auto RDM" lang="en" %}} 
+
+### Auto RDM for vSphere over FC requirements
+
+The CSI Driver for Dell PowerMax supports auto RDM for vSphere over FC. These requirements are applicable for the clusters deployed on ESX/ESXi using virtualized environement.
+
+Set up the environment as follows:
+
+- Requires VMware vCenter management software to manage all ESX/ESXis where the cluster is hosted.
+
+- Add all FC array ports zoned to the ESX/ESXis to a port group where the cluster is hosted .
+
+- Add initiators from all ESX/ESXis to a host(initiator group)/host group(cascaded initiator group) where the cluster is hosted.
+- Create a secret which contains vCenter privileges. Follow the steps [here](#support-for-auto-rdm-for-vsphere-over-fc) to create the same. 
+{{% /tab %}}
 {{< /tabpane >}}   
 
 {{< tabpane text=true lang="en" >}}
@@ -298,21 +313,7 @@ Follow this procedure to set up PowerPath for Linux:
 >Note: Do not install Dell PowerPath if multi-path software is already installed, as they cannot co-exist with native multi-path software. 
 {{% /tab %}}
 
-{{% tab header="Auto RDM" lang="en" %}} 
 
-### Auto RDM for vSphere over FC requirements
-
-The CSI Driver for Dell PowerMax supports auto RDM for vSphere over FC. These requirements are applicable for the clusters deployed on ESX/ESXi using virtualized environement.
-
-Set up the environment as follows:
-
-- Requires VMware vCenter management software to manage all ESX/ESXis where the cluster is hosted.
-
-- Add all FC array ports zoned to the ESX/ESXis to a port group where the cluster is hosted .
-
-- Add initiators from all ESX/ESXis to a host(initiator group)/host group(cascaded initiator group) where the cluster is hosted.
-- Create a secret which contains vCenter privileges. Follow the steps [here](#support-for-auto-rdm-for-vsphere-over-fc) to create the same. 
-{{% /tab %}}
 
 {{< /tabpane >}}   
 

@@ -2,6 +2,7 @@
 title: "Support Matrix"
 linkTitle: "Support Matrix"
 description: Support Matrix for Container Storage Modules
+no_list: true
 weight: 1
 ---
 
@@ -19,8 +20,10 @@ weight: 1
 {{</table>}}
 
 > Notes:
-> * The required OS dependencies are only for the protocol needed (e.g. if NVMe isn't the storage access protocol then nvme-cli is not required)..
-> * It is important to note that any operations performed outside of the CSM and Kubernetes ecosystem, such as modifying storage configurations directly using GUI or CLI tools provided by the storage array, may not be supported or automatically picked up by the CSM. As a result, metadata and state information within Kubernetes, including Persistent Volume (PV) metadata, may not reflect changes made outside of the driver. For consistent and accurate management of storage resources, it is recommended to perform all operations through the CSM and Kubernetes API. If external modifications are necessary, corresponding updates should be manually synchronized with the Kubernetes cluster to ensure accurate metadata and functionality.
+> - Only install OS dependencies for the protocols you use (e.g., skip `nvme-cli` if NVMe isn't used).
+> - Always use the CSM and Kubernetes API for storage operations.
+> - Changes made outside these tools (like using storage array GUIs or CLIs) won't be automatically reflected in Kubernetes including Persistent Volume (PV) metadata, leading to inaccurate metadata and state information.
+> - If you must make external changes, manually update the Kubernetes cluster to keep everything in sync
 
 ## Supported Container Orchestrator Platforms
 
@@ -56,7 +59,7 @@ Container Storage Modules (CSM) does not officially support specific operating s
 ## Supported Container Storage Modules
 
 {{<table "table table-striped table-bordered table-sm">}}
-| CSM Module                                                    | PowerMax | PowerFlex | Unity XT | PowerScale | PowerStore |
+| Container Storage Module                                                    | PowerMax | PowerFlex | Unity XT | PowerScale | PowerStore |
 | ------------------------------------------------------------- | :------: | :-------: | :------: | :--------: | :--------: |
 | [Authorization - v1.x](../authorization/)                 |   Yes    |    Yes    |    No    |    Yes     |     No     |
 | [Authorization - v2.x](../authorization/)                 |   Yes    |    Yes    |    No    |    Yes     |     No     |
@@ -68,29 +71,47 @@ Container Storage Modules (CSM) does not officially support specific operating s
 {{</table>}}
 
 
-## Container Storage Modules Installation Wizard Compatibility Matrix 
-The [Dell Container Storage Modules Installation Wizard](./src/index.html) is a webpage that generates a manifest file for installing Dell CSI Drivers and its supported CSM Modules, based on input from the user. It generates a single manifest file to install both Dell CSI Drivers and its supported CSM Modules, thereby eliminating the need to download individual Helm charts for drivers and modules. The user can enable or disable the necessary modules through the UI, and a manifest file is generated accordingly without manually editing the helm charts.
 
->NOTE: The CSM Installation Wizard supports Helm and Operator based manifest file generation.
+## OpenShift Compatibility with Operator  
 
-## Supported Dell CSI Drivers
+{{<table "table table-striped table-bordered table-sm">}}
+|  OpenShift Version        | Operator Version        | CSM version |
+| ------------| ------------------------| ----------- |
+|  4.12       | 1.2.0, 1.3.0               |1.7.1, 1.8.0           |
+|  4.13       | 1.3.0, 1.4.4, 1.5.1        |1.8.0, 1.9.4, 1.10.2      |
+|  4.14       | 1.4.4, 1.5.1, 1.6.1, 1.7.0 |1.9.4, 1.10.2, 1.11.1, 1.12|
+|  4.15       | 1.5.1, 1.6.1, 1.7.0        |1.10.2, 1.11.1, 1.12    |
+|  4.16       | 1.6.1, 1.7.0               |1.11.1, 1.12         | 
+|  4.17       | 1.6.1, 1.7.0               |1.11.1, 1.12         |
+|  4.18       | Not supported yet          |                  |
+{{</table>}}
+
+
+
+
+
+## Installation Wizard Compatibility Matrix 
+
+
+### Supported CSI Drivers
 
 {{<table "table table-striped table-bordered table-sm">}}
 | CSI Driver         | Version   | Helm   | Operator  |
 | ------------------ | --------- | ------ | --------- |
-| CSI PowerStore     | 2.12.0    |✔️      |✔️        |
-| CSI PowerMax       | 2.12.0    |✔️      |✔️        |
-| CSI PowerFlex      | 2.12.0    |✔️      |❌        |
-| CSI PowerScale     | 2.12.0    |✔️      |✔️        |
-| CSI Unity XT       | 2.12.0    |✔️      |❌        |
+|  PowerStore     | 2.12.0    |✔️      |✔️        |
+|  PowerMax       | 2.12.0    |✔️      |✔️        |
+|  PowerFlex      | 2.12.0    |✔️      |❌        |
+|  PowerScale     | 2.12.0    |✔️      |✔️        |
+|  Unity XT       | 2.12.0    |✔️      |❌        |
 {{</table>}}
 
->NOTE: The Installation Wizard currently does not support operator-based manifest file generation for Unity XT and PowerFlex drivers.
 
-## Supported Dell CSM Modules
+### Supported Container Storage Modules
 
-| CSM Modules          | Version   |
-| ---------------------| --------- |
-| CSM Observability    | 1.7.0+     |
-| CSM Replication      | 1.7.0+     |
-| CSM Resiliency       | 1.7.0+     |
+| Container Storage Modules      | Version   |
+| -----------------| --------- |
+| Observability    | 1.7.0+    |
+| Replication      | 1.7.0+    |
+| Resiliency       | 1.7.0+    | 
+
+

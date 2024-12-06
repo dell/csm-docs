@@ -7,8 +7,6 @@ weight: 1
 ---
 <hr>
  
-The installation process for the Dell CSM Driver is straightforward and user-friendly. This section will guide you through each step to ensure a smooth setup.
-
 
 
 <div class="container mt-5" style=" margin-left:0px" >

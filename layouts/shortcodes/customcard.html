@@ -12,7 +12,7 @@
     .card-hover:hover {
         transform: scale(1.05);
         transition: transform 0.3s;
-        border: 2px solid rgb(0, 153, 255); 
+        border: 0.5px solid rgb(0, 153, 255); 
     }
     .card-icon {
         font-size: 2rem;
@@ -27,7 +27,7 @@
     }
     .card-image {
         width: 2rem;
-        height: 2rem!important; 
+        height: 2rem!important
         
     }
     .card-image-large {
@@ -42,8 +42,10 @@
         color: rgb(136, 134, 134);
     }
     .card{
-      margin-left:0px;
-    }
+      margin-left:0px; 
+      background-color:var(--td-pre-bg) !important;
+    } 
+
 </style>
 
 <a href="{{ if .Get "link1" }}{{ .Get "link1"}}{{ else }}{{ .Get "link"}}{{ end }}" class="card-link">

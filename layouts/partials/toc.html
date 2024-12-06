@@ -23,33 +23,42 @@ document.addEventListener("DOMContentLoaded", function() {
   const tocContainer = document.getElementById("TableOfContents");
   if (!content || !tocContainer) return;
 
-  const headings = content.querySelectorAll("h2, h3");
-  if (headings.length === 0) return;
+  const createTOC = () => {
+    tocContainer.innerHTML = ''; // Clear existing TOC
+    const headings = content.querySelectorAll("h2, h3,h4");
+    if (headings.length === 0) return;
 
-  const tocList = document.createElement("ul");
+    const tocList = document.createElement("ul");
 
-  headings.forEach((heading, index) => {
-    if (index === headings.length - 1 || heading.classList.contains("accordion-header")) return; // Skip the last heading
+    headings.forEach((heading, index) => {
+      if (index === headings.length - 1 || heading.classList.contains("accordion-header")) return;
 
-    const id = heading.id || heading.textContent.trim().toLowerCase().replace(/\s+/g, "-");
-    heading.id = id;
+      let id = heading.id || heading.textContent.trim().toLowerCase().replace(/\s+/g, "-");
+      let uniqueId = id;
+      let counter = 1;
+      while (document.getElementById(uniqueId)) {
+        uniqueId = `${id}-${counter}`;
+        counter++;
+      }
+      heading.id = uniqueId;
 
-    const tocItem = document.createElement("li");
-    const tocLink = document.createElement("a");
-    tocLink.href = `#${id}`;
-    tocLink.textContent = heading.textContent;
+      const tocItem = document.createElement("li");
+      tocItem.classList.add(heading.tagName.toLowerCase() === "h2" ? "toc-h2" : "toc-h3");
 
-    tocItem.appendChild(tocLink);
-    tocList.appendChild(tocItem);
-  });
+      const tocLink = document.createElement("a");
+      tocLink.href = `#${uniqueId}`;
+      tocLink.textContent = heading.textContent;
 
-  tocContainer.appendChild(tocList);
-
-  // Hide TOC items inside collapsed accordions initially
-  const accordionBodies = document.querySelectorAll('.accordion-collapse');
+      tocItem.appendChild(tocLink);
+      tocList.appendChild(tocItem);
+    });
+     
+    tocContainer.appendChild(tocList);
+   
+    const accordionBodies = document.querySelectorAll('.accordion-collapse');
   accordionBodies.forEach(body => {
     if (!body.classList.contains('show')) {
-      const headingsInAccordion = body.querySelectorAll('h2, h3');
+      const headingsInAccordion = body.querySelectorAll('h2, h3,h4');
       headingsInAccordion.forEach(heading => {
         const tocLink = tocContainer.querySelector(`a[href="#${heading.id}"]`);
         if (tocLink) {
@@ -59,15 +68,15 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   });
 
-  // Add event listeners to accordion buttons
-  const accordionButtons = document.querySelectorAll('.accordion-button');
+    // Add event listeners to accordion buttons
+    const accordionButtons = document.querySelectorAll('.accordion-button');
   accordionButtons.forEach(button => {
     button.addEventListener('click', function() {
       const targetId = this.getAttribute('data-bs-target');
       const target = document.querySelector(targetId);
       const isExpanded = this.getAttribute('aria-expanded') === 'true';
 
-      const headingsInAccordion = target.querySelectorAll('h2, h3');
+      const headingsInAccordion = target.querySelectorAll('h2, h3,h4');
       headingsInAccordion.forEach(heading => {
         const tocLink = tocContainer.querySelector(`a[href="#${heading.id}"]`);
         if (tocLink) {
@@ -76,5 +85,40 @@ document.addEventListener("DOMContentLoaded", function() {
       });
     });
   });
+
+  };
+
+  createTOC(); // Generate TOC initially
+
+  // Use MutationObserver to watch for DOM changes
+  const observer = new MutationObserver(() => {
+    createTOC(); // Regenerate TOC on DOM changes
+  });
+
+  observer.observe(content, { childList: true, subtree: true });
 });
 </script>
+
+<style>
+/* Styles for the Table of Contents */
+.td-toc ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.td-toc ul li {
+  margin: 5px 0;
+}
+
+.td-toc ul li.toc-h2 {
+  font-weight: bold;
+  font-size: 1.1em; /* Make h2 slightly larger */
+}
+
+.td-toc ul li.toc-h3 {
+  margin-left: 20px; /* Indent h3 to show hierarchy */
+  font-weight: normal;
+  font-size: 1em;
+}
+</style>

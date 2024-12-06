@@ -3,7 +3,7 @@ title: "Support"
 linkTitle: "Support"
 weight: 13
 Description: >
-  Dell Container Storage Modules support
+  Container Storage Modules support
 ---
 ### Where can I get support ?
 For all your support needs or to follow the latest ongoing discussions and updates, join our Slack group. Click [Here](http://del.ly/Slack_request) to request your invite.

@@ -4,7 +4,7 @@ linkTitle: "Release Notes"
 no_list: true
 weight: 10
 Description: >
-  Dell Container Storage Modules  release notes
+  Container Storage Modules  release notes
 ---
 
 ## Container Storage Modules Release and Support Lifecycle:
