@@ -4,23 +4,34 @@
 ##########################################
 csi-powerstore:
   enabled: $POWERSTORE_ENABLED
-  version: v2.10.1
+  version: v2.13.0
   images:
     # "driver" defines the container image, used for the driver container.
-    driver: dellemc/csi-powerstore:v2.10.1
+    driver: 
+      image: quay.io/dell/container-storage-modules/csi-powerstore:v2.13.0
     # CSI sidecars
-    attacher: registry.k8s.io/sig-storage/csi-attacher:v4.5.0
-    provisioner: registry.k8s.io/sig-storage/csi-provisioner:v4.0.0
-    snapshotter: registry.k8s.io/sig-storage/csi-snapshotter:v7.0.1
-    resizer: registry.k8s.io/sig-storage/csi-resizer:v1.10.0
-    registrar: registry.k8s.io/sig-storage/csi-node-driver-registrar:v2.10.0
-    healthmonitor: registry.k8s.io/sig-storage/csi-external-health-monitor-controller:v0.11.0
+    attacher: 
+      image: registry.k8s.io/sig-storage/csi-attacher:v4.7.0
+    provisioner: 
+      image: registry.k8s.io/sig-storage/csi-provisioner:v5.1.0
+    snapshotter: 
+      image: registry.k8s.io/sig-storage/csi-snapshotter:v8.1.0
+    resizer: 
+      image: registry.k8s.io/sig-storage/csi-resizer:v1.12.0
+    registrar: 
+      image: registry.k8s.io/sig-storage/csi-node-driver-registrar:v2.12.0
+    healthmonitor: 
+      image: registry.k8s.io/sig-storage/csi-external-health-monitor-controller:v0.13.0
 
     # CSM sidecars
-    replication: dellemc/dell-csi-replicator:v1.8.0
-    vgsnapshotter: dellemc/csi-volumegroup-snapshotter:v1.4.0
-    podmon: dellemc/podmon:v1.9.0
-    metadataretriever: dellemc/csi-metadata-retriever:v1.6.0
+    replication: 
+      image: quay.io/dell/container-storage-modules/dell-csi-replicator:v1.11.0
+    vgsnapshotter: 
+      image: quay.io/dell/container-storage-modules/csi-volumegroup-snapshotter:v1.8.0
+    podmon: 
+      image: quay.io/dell/container-storage-modules/podmon:v1.12.0
+    metadataretriever: 
+      image: quay.io/dell/container-storage-modules/csi-metadata-retriever:v1.10.0
   ## Controller ATTRIBUTES
   controller:
     controllerCount: $CONTROLLER_COUNT
@@ -114,27 +125,44 @@ csi-powermax:
     managementServers:
       - endpoint: $POWERMAX_MANAGEMENT_SERVERS_ENDPOINT_URL
       - endpoint: $TARGET_UNISPHERE
-  version: v2.10.1
+  version: v2.13.0
   images:
     # "driver" defines the container image, used for the driver container.
-    driver: dellemc/csi-powermax:v2.10.1
-    csireverseproxy: dellemc/csipowermax-reverseproxy:v2.9.0
+    driver: 
+      image: quay.io/dell/container-storage-modules/csi-powermax:v2.13.0
+    csireverseproxy: 
+      image: quay.io/dell/container-storage-modules/csipowermax-reverseproxy:v2.12.0
     # CSI sidecars
-    attacher: registry.k8s.io/sig-storage/csi-attacher:v4.5.0
-    provisioner: registry.k8s.io/sig-storage/csi-provisioner:v4.0.0
-    snapshotter: registry.k8s.io/sig-storage/csi-snapshotter:v7.0.1
-    resizer: registry.k8s.io/sig-storage/csi-resizer:v1.10.0
-    registrar: registry.k8s.io/sig-storage/csi-node-driver-registrar:v2.10.0
-    healthmonitor: registry.k8s.io/sig-storage/csi-external-health-monitor-controller:v0.11.0
+    attacher: 
+      image: registry.k8s.io/sig-storage/csi-attacher:v4.7.0
+    provisioner: 
+      image: registry.k8s.io/sig-storage/csi-provisioner:v5.1.0
+    snapshotter: 
+      image: registry.k8s.io/sig-storage/csi-snapshotter:v8.1.0
+    resizer: 
+      image: registry.k8s.io/sig-storage/csi-resizer:v1.12.0
+    registrar: 
+      image: registry.k8s.io/sig-storage/csi-node-driver-registrar:v2.12.0
+    healthmonitor: 
+      image: registry.k8s.io/sig-storage/csi-external-health-monitor-controller:v0.13.0
     # CSM sidecars
-    replication: dellemc/dell-csi-replicator:v1.8.0
-    authorization: dellemc/csm-authorization-sidecar:v1.10.0
-    migration: dellemc/dell-csi-migrator:v1.3.0
-    noderescan: dellemc/dell-csi-node-rescanner:v1.2.0
+    replication: 
+      image: quay.io/dell/container-storage-modules/dell-csi-replicator:v1.11.0
+    authorization: 
+      image: quay.io/dell/container-storage-modules/csm-authorization-sidecar:v1.13.0
+    migration: 
+      image: quay.io/dell/container-storage-modules/dell-csi-migrator:v1.5.0
+    podmon:
+      image: quay.io/dell/container-storage-modules/podmon:v1.12.0
+    # Node rescan sidecar does a rescan on nodes for identifying new paths
+    # Default value: quay.io/dell/container-storage-modules/dell-csi-node-rescanner:v1.4.0
+    noderescan:
+      image: quay.io/dell/container-storage-modules/dell-csi-node-rescanner:v1.4.0
   clusterPrefix: $POWERMAX_CLUSTER_PREFIX
   portGroups: "$POWERMAX_PORT_GROUPS"
   fsGroupPolicy: "$FSGROUP_POLICY"
   maxPowerMaxVolumesPerNode: $MAX_VOLUMES_PER_NODE
+  podmonAPIPort: 8083
   enableCHAP: $ISCSI_CHAP_ENABLED
   transportProtocol: "$NODE_TRANSPORT_PROTOCOL"
   storageCapacity:
@@ -171,6 +199,31 @@ csi-powermax:
     deployAsSidecar: true
   replication:
     enabled: $REPLICATION_ENABLED
+  podmon:
+    enabled: $RESILIENCY_ENABLED
+    controller:
+    args:
+      - "--csisock=unix:/var/run/csi/csi.sock"
+      - "--labelvalue=csi-powermax"
+      - "--arrayConnectivityPollRate=60"
+      - "--driverPath=csi-powermax.dellemc.com"
+      - "--mode=controller"
+      - "--skipArrayConnectionValidation=false"
+      - "--driver-config-params=/powermax-config-params/driver-config-params.yaml"
+      - "--driverPodLabelValue=dell-storage"
+      - "--ignoreVolumelessPods=false"
+
+  node:
+    args:
+      - "--csisock=unix:/var/lib/kubelet/plugins/powermax.emc.dell.com/csi_sock"
+      - "--labelvalue=csi-powermax"
+      - "--arrayConnectivityPollRate=60"
+      - "--driverPath=csi-powermax.dellemc.com"
+      - "--mode=node"
+      - "--leaderelection=false"
+      - "--driver-config-params=/powermax-config-params/driver-config-params.yaml"
+      - "--driverPodLabelValue=dell-storage"
+      - "--ignoreVolumelessPods=false"
   migration:
     enabled: $MIGRATION_ENABLED
   authorization:
@@ -190,24 +243,36 @@ csi-powermax:
 ##########################################
 csi-vxflexos:
   enabled: $POWERFLEX_ENABLED
-  version: v2.10.1
+  version: v2.13.0
   images:
     # "driver" defines the container image, used for the driver container.
-    driver: dellemc/csi-vxflexos:v2.10.1
+    driver: 
+      image: quay.io/dell/container-storage-modules/csi-vxflexos:v2.13.0
     # "powerflexSdc" defines the SDC image for init container.
-    powerflexSdc: dellemc/sdc:4.5
+    powerflexSdc: 
+      image: dellemc/sdc:4.5.2.1
     # CSI sidecars
-    attacher: registry.k8s.io/sig-storage/csi-attacher:v4.5.0
-    provisioner: registry.k8s.io/sig-storage/csi-provisioner:v4.0.0
-    snapshotter: registry.k8s.io/sig-storage/csi-snapshotter:v7.0.1
-    resizer: registry.k8s.io/sig-storage/csi-resizer:v1.10.0
-    registrar: registry.k8s.io/sig-storage/csi-node-driver-registrar:v2.10.0
-    healthmonitor: registry.k8s.io/sig-storage/csi-external-health-monitor-controller:v0.11.0
+    attacher: 
+      image: registry.k8s.io/sig-storage/csi-attacher:v4.7.0
+    provisioner: 
+      image: registry.k8s.io/sig-storage/csi-provisioner:v5.1.0
+    snapshotter: 
+      image: registry.k8s.io/sig-storage/csi-snapshotter:v8.1.0
+    resizer: 
+      image: registry.k8s.io/sig-storage/csi-resizer:v1.12.0
+    registrar: 
+      image: registry.k8s.io/sig-storage/csi-node-driver-registrar:v2.12.0
+    healthmonitor: 
+      image: registry.k8s.io/sig-storage/csi-external-health-monitor-controller:v0.13.0
     # CSM sidecars
-    replication: dellemc/dell-csi-replicator:v1.8.0
-    vgsnapshotter: dellemc/csi-volumegroup-snapshotter:v1.4.0
-    podmon: dellemc/podmon:v1.9.0
-    authorization: dellemc/csm-authorization-sidecar:v1.10.0
+    replication: 
+      image: quay.io/dell/container-storage-modules/dell-csi-replicator:v1.11.0
+    vgsnapshotter: 
+      image: quay.io/dell/container-storage-modules/csi-volumegroup-snapshotter:v1.8.0
+    podmon: 
+      image: quay.io/dell/container-storage-modules/podmon:v1.12.0
+    authorization: 
+      image: quay.io/dell/container-storage-modules/csm-authorization-sidecar:v1.13.0
   certSecretCount: $CERT_SECRET_COUNT
   controller:
     replication:
@@ -226,13 +291,15 @@ csi-vxflexos:
     healthMonitor:
       enabled: $HEALTH_MONITOR_ENABLED
     nodeSelector: $NODE_POD_NODE_SELECTOR
+    sdc:
+      enabled: $SDC_ENABLED
     renameSDC:
       enabled: $RENAME_SDC_ENABLED
       sdcPrefix: $SDC_PREFIX
     approveSDC:
       enabled: $APPROVE_SDC_ENABLED
     tolerations: $NODE_TOLERATIONS
-    # Uncomment if CSM for Resiliency and CSI Driver pods monitor is enabled 
+    # Uncomment if CSM for Resiliency and CSI Driver pods monitor is enabled
     # - key: "offline.vxflexos.storage.dell.com"
     #   operator: "Exists"
     #   effect: "NoSchedule"
@@ -289,24 +356,33 @@ csi-vxflexos:
 ##########################################
 csi-isilon:
   enabled: $POWERSCALE_ENABLED
-  version: "v2.10.1"
+  version: "v2.13.0"
   images:
     # "driver" defines the container image, used for the driver container.
-    driver: dellemc/csi-isilon:v2.10.1
+    driver: 
+      image: quay.io/dell/container-storage-modules/csi-isilon:v2.13.0
     # CSI sidecars
-    attacher: registry.k8s.io/sig-storage/csi-attacher:v4.5.0
-    provisioner: registry.k8s.io/sig-storage/csi-provisioner:v4.0.0
-    snapshotter: registry.k8s.io/sig-storage/csi-snapshotter:v7.0.1
-    resizer: registry.k8s.io/sig-storage/csi-resizer:v1.10.0
-    registrar: registry.k8s.io/sig-storage/csi-node-driver-registrar:v2.10.0
-    healthmonitor: registry.k8s.io/sig-storage/csi-external-health-monitor-controller:v0.11.0
+    attacher: 
+      image: registry.k8s.io/sig-storage/csi-attacher:v4.7.0
+    provisioner: 
+      image: registry.k8s.io/sig-storage/csi-provisioner:v5.1.0
+    snapshotter: 
+      image: registry.k8s.io/sig-storage/csi-snapshotter:v8.1.0
+    resizer: 
+      image: registry.k8s.io/sig-storage/csi-resizer:v1.12.0
+    registrar: 
+      image: registry.k8s.io/sig-storage/csi-node-driver-registrar:v2.12.0
+    healthmonitor: 
+      image: registry.k8s.io/sig-storage/csi-external-health-monitor-controller:v0.13.0
     # CSM sidecars
-    replication: dellemc/dell-csi-replicator:v1.8.0
-    podmon: dellemc/podmon:v1.9.0
-    authorization: dellemc/csm-authorization-sidecar:v1.10.0
-    metadataretriever: dellemc/csi-metadata-retriever:v1.4.0
-    encryption: dellemc/csm-encryption:v0.3.0
-
+    replication: 
+      image: quay.io/dell/container-storage-modules/dell-csi-replicator:v1.11.0
+    podmon: 
+      image: quay.io/dell/container-storage-modules/podmon:v1.12.0
+    authorization: 
+      image: quay.io/dell/container-storage-modules/csm-authorization-sidecar:v1.13.0
+    metadataretriever: 
+      image: quay.io/dell/container-storage-modules/csi-metadata-retriever:v1.10.0
   certSecretCount: $CERT_SECRET_COUNT
   allowedNetworks: []
   verbose: 1
@@ -381,6 +457,7 @@ csi-isilon:
         - "--driver-config-params=/csi-isilon-config-params/driver-config-params.yaml"
         - "--driverPodLabelValue=dell-storage"
         - "--ignoreVolumelessPods=false"
+
     node:
       args:
         - "--csisock=unix:/var/lib/kubelet/plugins/csi-isilon/csi_sock"
@@ -392,27 +469,35 @@ csi-isilon:
         - "--driver-config-params=/csi-isilon-config-params/driver-config-params.yaml"
         - "--driverPodLabelValue=dell-storage"
         - "--ignoreVolumelessPods=false"
-
   podmonAPIPort: 8083
 
 ## K8S/CSI-Unity ATTRIBUTES
 ##########################################
 csi-unity:
   enabled: $UNITY_ENABLED
-  version: v2.10.1
+  version: v2.13.0
   images:
     # "driver" defines the container image, used for the driver container.
-    driver: dellemc/csi-unity:v2.10.1
+    driver:
+      image: quay.io/dell/container-storage-modules/csi-unity:v2.13.0
     # CSI sidecars
-    attacher: registry.k8s.io/sig-storage/csi-attacher:v4.5.0
-    provisioner: registry.k8s.io/sig-storage/csi-provisioner:v4.0.0
-    snapshotter: registry.k8s.io/sig-storage/csi-snapshotter:v7.0.1
-    resizer: registry.k8s.io/sig-storage/csi-resizer:v1.10.0
-    registrar: registry.k8s.io/sig-storage/csi-node-driver-registrar:v2.10.0
-    healthmonitor: registry.k8s.io/sig-storage/csi-external-health-monitor-controller:v0.11.0
+    attacher: 
+      image: registry.k8s.io/sig-storage/csi-attacher:v4.7.0
+    provisioner: 
+      image: registry.k8s.io/sig-storage/csi-provisioner:v5.1.0
+    snapshotter: 
+      image: registry.k8s.io/sig-storage/csi-snapshotter:v8.1.0
+    resizer: 
+      image: registry.k8s.io/sig-storage/csi-resizer:v1.12.0
+    registrar: 
+      image: registry.k8s.io/sig-storage/csi-node-driver-registrar:v2.12.0
+    healthmonitor: 
+      image: registry.k8s.io/sig-storage/csi-external-health-monitor-controller:v0.13.0
     # CSM sidecars
-    podmon: dellemc/podmon:v1.9.0
+    podmon: 
+      image: quay.io/dell/container-storage-modules/podmon:v1.12.0
   certSecretCount: $CERT_SECRET_COUNT
+  allowedNetworks:
   fsGroupPolicy: $FSGROUP_POLICY
   controller:
     controllerCount: $CONTROLLER_COUNT
@@ -429,7 +514,7 @@ csi-unity:
   node:
     healthMonitor:
       enabled: $HEALTH_MONITOR_ENABLED
-    nodeSelector: $NODE_POD_NODE_SELECTOR 
+    nodeSelector: $NODE_POD_NODE_SELECTOR
     tolerations: $NODE_TOLERATIONS
     #  - key: "node.kubernetes.io/memory-pressure"
     #    operator: "Exists"
@@ -440,7 +525,7 @@ csi-unity:
     #  - key: "node.kubernetes.io/network-unavailable"
     #    operator: "Exists"
     #    effect: "NoExecute"
-    # Uncomment if CSM for Resiliency and CSI Driver pods monitor are enabled 
+    # Uncomment if CSM for Resiliency and CSI Driver pods monitor are enabled
     #  - key: "offline.vxflexos.storage.dell.com"
     #    operator: "Exists"
     #    effect: "NoSchedule"
