@@ -41,12 +41,13 @@ The full compatibility matrix of CSI/CSM versions for the CSM Operator is availa
 Before installing the driver, you need to install the operator. You can find the installation instructions here.
 
 ### Manual Installation on a cluster without OLM
+
 >NOTE: You can update the resource requests and limits when you are deploying operator using manual installation without OLM
 
 1. Install volume snapshot CRDs. For detailed snapshot setup procedure, [click here](../../snapshots/#volume-snapshot-feature).
 2. Clone and checkout the required csm-operator version using
 ```bash
-git clone -b v1.7.0 https://github.com/dell/csm-operator.git
+git clone -b v1.8.0 https://github.com/dell/csm-operator.git
 ```
 3. `cd csm-operator`
 4. _(Optional)_ If using a local Docker image, edit the `deploy/operator.yaml` file and set the image name for the CSM Operator Deployment.

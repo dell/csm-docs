@@ -9,14 +9,14 @@ weight: 1
 ## Supported Storage Platforms
 
 {{<table "table table-striped table-bordered table-sm">}}
-| Platform    |                                                                                            Version                                                                                             |                                    OS Dependencies                                     |
-| ----------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------: |
-| PowerMax    | PowerMax 2500/8500 PowerMaxOS 10 (6079)<br>PowerMaxOS 10.0.1 (6079)<br>PowerMaxOS 10.1 (6079)<br> PowerMaxOS 10.2 (6079)<br>PowerMax 2000/8000 - 5978.711.711, 5978.714.714<br>5978.479.479<br>Unisphere 10.0,10.0.1,10.1,10.2 |       iscsi-initiator-utils<br>multipathd or powerpath<br>nvme-cli<br>nfs-utils        |
-| PowerFlex   |                                                                                      3.6.x, 4.5.x, 4.6.x                                                                                       | [SDC](https://www.dell.com/support/home/en-us/product-support/product/scaleio/drivers) |
-| Unity XT    |                                                                                      5.2.x, 5.3.x, 5.4.x                                                                                       |                    iscsi-initiator-utils<br>multipathd<br>nfs-utils                    |
-| PowerScale  |                                                                                OneFS 9.4, 9.5.0.x (x >= 5), 9.7, 9.8, 9.9                                                                                |                                       nfs-utils                                        |
-| PowerStore  |                                                                                       3.5, 3.6, 4.0                                                                                       |              iscsi-initiator-utils<br>multipathd<br>nvme-cli<br>nfs-utils              |
-| ObjectScale |                                                                                             1.2.x                                                                                              |                                           -                                            |
+| Platform | Version | OS Dependencies |
+| -------- | :-----: | :-------------: |
+| PowerMax | PowerMax 2500/8500 PowerMaxOS 10 (6079)<br>PowerMaxOS 10.0.1 (6079)<br>PowerMaxOS 10.1 (6079)<br> PowerMaxOS 10.2 (6079)<br>PowerMax 2000/8000 - 5978.711.711, 5978.714.714<br>5978.479.479<br>Unisphere 10.0,10.0.1,10.1,10.2 | iscsi-initiator-utils<br>multipathd or powerpath<br>nvme-cli<br>nfs-utils |
+| PowerFlex   | 3.6.x, 4.5.x, 4.6.x | [SDC](https://www.dell.com/support/home/en-us/product-support/product/scaleio/drivers) |
+| Unity XT    | 5.2.x, 5.3.x, 5.4.x | iscsi-initiator-utils<br>multipathd<br>nfs-utils |
+| PowerScale  | OneFS 9.4, 9.5.0.x (x >= 5), 9.7, 9.8, 9.9, 9.10 | nfs-utils |
+| PowerStore  |  3.5, 3.6, 4.0, 4.1 | iscsi-initiator-utils<br>multipathd<br>nvme-cli<br>nfs-utils |
+| ObjectScale |  1.2.x | - |
 {{</table>}}
 
 > Notes:
@@ -30,13 +30,13 @@ weight: 1
 {{<table "table table-striped table-bordered table-sm">}}
 | Platform                   | Version          |
 |----------------------------|:----------------:|
-| Kubernetes                 | 1.29, 1.30, 1.31 |
-| Red Hat OpenShift          | 4.16, 4.17       |
+| Kubernetes                 | 1.30, 1.31, 1.32 |
+| Red Hat OpenShift          | 4.17, 4.18       |
 | Mirantis Kubernetes Engine | 3.7.x            |
 {{</table>}}
 
 > Notes:
-> * Any orchestrator platform or version that's not mentioned here must be self-certified using [Cert-CSI](../support/cert-csi/) in order to be supported.  Although not mandatory, we recommend users to use orchestrator platforms and versions that have not met their end of life.
+> * Any orchestrator platform or version that's not mentioned here must be self-certified using [Cert-CSI](../support/cert-csi/) in order to be supported. Although not mandatory, we recommend users to use orchestrator platforms and versions that have not met their end of life.
 > * CSM Authorization Server v1 is not supported on Red Hat OpenShift. However, it is supported to install CSM Authorization Server v1 on standard Kubernetes and a Dell CSI Drvier enabled with CSM Authorization on Red Hat OpenShift. CSM Authorization Server v2 is supported on Red Hat OpenShift.
 
 ## OpenShift Virtualization
@@ -47,12 +47,14 @@ PowerFlex, PowerMax, PowerStore, PowerScale.
 ## Tested Host Operating Systems
 
 Container Storage Modules (CSM) does not officially support specific operating systems.  However, the following operating systems are known to work:
-- RedHat CoreOS (RHCOS) versions as supported by OpenShift Container Platform
-- RHEL 8+
-- SLES 15SP5
-- Ubuntu 22.04
+
+* RedHat CoreOS (RHCOS) versions as supported by OpenShift Container Platform
+* RHEL 8+
+* SLES 15SP5
+* Ubuntu 22.04
 
 > Notes:
+
 > * The host operating system/version being used must align with what each Dell Storage platform supports. Please visit [E-Lab Navigator](https://elabnavigator.dell.com/eln/modernHomeSSM) for specific Dell Storage platform host operating system level support matrices.
 > * Any operating system or version that's not mentioned here must be self-certified using [Cert-CSI](../support/cert-csi/) in order to be supported. Although not mandatory, we recommend users to use operating systems and versions that have not met their end of life.
 
@@ -98,11 +100,11 @@ Container Storage Modules (CSM) does not officially support specific operating s
 {{<table "table table-striped table-bordered table-sm">}}
 | CSI Driver         | Version   | Helm   | Operator  |
 | ------------------ | --------- | ------ | --------- |
-|  PowerStore     | 2.12.0    |✔️      |✔️        |
-|  PowerMax       | 2.12.0    |✔️      |✔️        |
-|  PowerFlex      | 2.12.0    |✔️      |❌        |
-|  PowerScale     | 2.12.0    |✔️      |✔️        |
-|  Unity XT       | 2.12.0    |✔️      |❌        |
+|  PowerStore     | 2.13.0    |✔️      |✔️        |
+|  PowerMax       | 2.13.0    |✔️      |✔️        |
+|  PowerFlex      | 2.13.0    |✔️      |❌        |
+|  PowerScale     | 2.13.0    |✔️      |✔️        |
+|  Unity XT       | 2.13.0    |✔️      |❌        |
 {{</table>}}
 
 
@@ -110,8 +112,8 @@ Container Storage Modules (CSM) does not officially support specific operating s
 
 | Container Storage Modules      | Version   |
 | -----------------| --------- |
-| Observability    | 1.7.0+    |
-| Replication      | 1.7.0+    |
-| Resiliency       | 1.7.0+    | 
+| Observability    | 1.8.0+    |
+| Replication      | 1.8.0+    |
+| Resiliency       | 1.8.0+    | 
 
 

@@ -16,15 +16,14 @@ Before you install CSI Driver for Unity XT, verify the requirements that are men
 * To use NFS protocol, NFS utility packages needs to be installed
 * Mount propagation is enabled on container runtime that is being used
 
-
 ### Fibre Channel requirements
 
 Dell Unity XT supports Fibre Channel communication. If you use the Fibre Channel protocol, ensure that the
 following requirement is met before you install the CSI Driver for Dell Unity XT:
 - Zoning of the Host Bus Adapters (HBAs) to the Fibre Channel port must be done.
 
-
 ### Set up the iSCSI Initiator
+
 The CSI Driver for Dell Unity XT supports iSCSI connectivity.
 
 If you use the iSCSI protocol, set up the iSCSI initiators as follows:
@@ -36,6 +35,7 @@ If you use the iSCSI protocol, set up the iSCSI initiators as follows:
 For more information about configuring iSCSI, see [Dell Host Connectivity guide](https://www.delltechnologies.com/asset/en-us/products/storage/technical-support/docu5128.pdf).
 
 ### Linux multipathing requirements
+
 Dell Unity XT supports Linux multipathing. Configure Linux multipathing before installing the CSI Driver for Dell
 Unity XT.
 
@@ -47,6 +47,7 @@ Set up Linux multipathing as follows:
 - Ensure that the multipath command for `multipath.conf` is available on all Kubernetes nodes.
 
 As a best practice, use the following options to help the operating system and the mulitpathing software detect path changes efficiently:
+
 ```text
 path_grouping_policy multibus
 path_checker tur
