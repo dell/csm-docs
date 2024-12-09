@@ -15,7 +15,7 @@ The installation process consists of two steps:
 2. Install CSI driver after enabling replication
 
 ### Before you begin
-Please read this [document](../configmap-secrets) before proceeding with the installation. It provides detailed steps on how to set up communication between multiple
+Please read this [document](./configmap-secrets) before proceeding with the installation. It provides detailed steps on how to set up communication between multiple
 clusters which will be required during or after the installation.
 
 ### Install CSM Replication Controller
@@ -27,10 +27,10 @@ We recommend using repctl for the installation, as it simplifies the installatio
 for future use during management operations.
 
 #### Using repctl
-Please follow the steps [here](../install-repctl) to install & configure Dell Replication Controller using repctl.
+Please follow the steps [here](./install-repctl) to install & configure Dell Replication Controller using repctl.
 
 #### Using the installation script
-Please follow the steps [here](../install-script) to install & configure Dell Replication Controller using script.
+Please follow the steps [here](./install-script) to install & configure Dell Replication Controller using script.
 
 #### _(Optional)_ FQDN Setup
 If CSM Replication is being deployed using two clusters in an environment where the DNS is not configured, and the cluster API endpoints are FQDNs, it is necessary to add the `<FQDN>:<IP>` mapping in the /etc/hosts file in order to resolve queries to the remote API server.
