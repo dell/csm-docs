@@ -150,7 +150,7 @@ For detailed PowerFlex installation procedure, see the [Dell PowerFlex Deploymen
    | --------- | ----------- | -------- |-------- |
    | namespace | Specifies namespace where the driver will be installed | Yes | "vxflexos" |
    | dnsPolicy | Determines the DNS Policy of the Node service | Yes | ClusterFirstWithHostNet |
-   | fsGroupPolicy | Defines which FS Group policy mode to be used, Supported modes `None, File and ReadWriteOnceWithFSType`. In OCP <= 4.16 and K8s <= 1.29, fsGroupPolicy is an immutable field. | No | "ReadWriteOnceWithFSType" |
+   | fsGroupPolicy | Defines which FS Group policy mode to be used, Supported modes `None, File and ReadWriteOnceWithFSType`. In OCP <= 4.16 and K8s <= 1.29, fsGroupPolicy is an immutable field. | No | "File" |
    | replicas | Controls the number of controller pods you deploy. If the number of controller pods is greater than the number of available nodes, excess pods will become stay in a pending state. | Yes | 1 |
    | storageCapacity.enabled | Enable/Disable storage capacity tracking | No | true |
    | storageCapacity.pollInterval | Configure how often the driver checks for changed capacity | No | 5m |
