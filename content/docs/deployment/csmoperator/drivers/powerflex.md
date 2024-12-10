@@ -21,6 +21,7 @@ kubectl get csm --all-namespaces
 ```
 
 ### Prerequisites
+
 - If multipath is configured, ensure CSI-PowerFlex volumes are blacklisted by multipathd. See [troubleshooting section](../../../../csidriver/troubleshooting/powerflex) for details.
 
 >NOTE: This step can be skipped with OpenShift.
@@ -35,7 +36,9 @@ kubectl get csm --all-namespaces
   - Optionally, enable sdc monitor by setting the enable flag for the sdc-monitor to true. Please note:
     - **If using sidecar**, you will need to edit the value fields under the HOST_PID and MDM fields by filling the empty quotes with host PID and the MDM IPs.
     - **If not using sidecar**, leave the enabled field set to false.
+
 ##### Example CR: [samples/storage_csm_powerflex_v2130.yaml](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powerflex_v2130.yaml)
+
 ```yaml
     sideCars:
     # sdc-monitor is disabled by default, due to high CPU usage
@@ -145,9 +148,10 @@ For detailed PowerFlex installation procedure, see the [Dell PowerFlex Deploymen
 
    | Parameter | Description | Required | Default |
    | --------- | ----------- | -------- |-------- |
+   | namespace | Specifies namespace where the driver will be installed | Yes | "vxflexos" |
    | dnsPolicy | Determines the DNS Policy of the Node service | Yes | ClusterFirstWithHostNet |
    | fsGroupPolicy | Defines which FS Group policy mode to be used, Supported modes `None, File and ReadWriteOnceWithFSType`. In OCP <= 4.16 and K8s <= 1.29, fsGroupPolicy is an immutable field. | No | "ReadWriteOnceWithFSType" |
-   | replicas | Controls the number of controller pods you deploy. If the number of controller pods is greater than the number of available nodes, excess pods will become stay in a pending state. Defaults are 2 which allows for Controller high availability. | Yes | 2 |
+   | replicas | Controls the number of controller pods you deploy. If the number of controller pods is greater than the number of available nodes, excess pods will become stay in a pending state. | Yes | 1 |
    | storageCapacity.enabled | Enable/Disable storage capacity tracking | No | true |
    | storageCapacity.pollInterval | Configure how often the driver checks for changed capacity | No | 5m |
    | enableQuota | a boolean that, when enabled, will set quota limit for a newly provisioned NFS volume | No | none |
@@ -166,6 +170,9 @@ For detailed PowerFlex installation procedure, see the [Dell PowerFlex Deploymen
    | X_CSI_APPROVE_SDC_ENABLED | Enable this to to approve restricted SDC by GUID during setup | Yes | false |
    | X_CSI_HEALTH_MONITOR_ENABLED | Enable/Disable health monitor of CSI volumes from Node plugin - volume condition | No | false |
    | X_CSI_SDC_ENABLED | Enable/Disable installation of the SDC. | Yes | true |
+   | ***Sidecar parameters*** |
+   | volume-name-prefix | The volume-name-prefix will be used by provisioner sidecar as a prefix for all the volumes created  | Yes | k8s |
+   | monitor-interval | The monitor-interval will be used by external-health-monitor as an interval for health checks  | Yes | 60s |
 
 4. Execute this command to create PowerFlex custom resource:
     ```bash

@@ -355,8 +355,11 @@ CRDs should be configured during replication prepare stage with repctl as descri
 | X_CSI_NFS_ACLS | Defines permissions - POSIX mode bits or NFSv4 ACLs, to be set on NFS target mount directory. | No | "0777" |
 | ***Node parameters*** |
 | X_CSI_POWERSTORE_ENABLE_CHAP | Set to true if you want to enable iSCSI CHAP feature | No | false |
+| ***Sidecar parameters*** |
+| volume-name-prefix | The volume-name-prefix will be used by provisioner sidecar as a prefix for all the volumes created  | Yes | csivol |
+| monitor-interval | The monitor-interval will be used by external-health-monitor as an interval for health checks  | Yes | 60s |
 
-4.  Execute the following command to create PowerStore custom resource:
+4. Execute the following command to create PowerStore custom resource:
    ```bash
    kubectl create -f <input_sample_file.yaml>
    ```
@@ -367,7 +370,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
       kubectl get all -n <driver-namespace>
       ```
 
-5.  [Verify the CSI Driver installation](../#verifying-the-driver-installation)
+5. [Verify the CSI Driver installation](../#verifying-the-driver-installation)
 
 6. Refer https://github.com/dell/csi-powerstore/tree/main/samples for the sample files.
 
@@ -383,7 +386,7 @@ CSI PowerStore supports the ability to dynamically modify array information with
 > require the driver to be restarted to properly pick up and process the changes.
 
 To do so, change the configuration file `config.yaml` and apply the update using the following command:
-```bash
 
+```bash
 sed "s/CONFIG_YAML/`cat config.yaml | base64 -w0`/g" secret.yaml | kubectl apply -f -
 ```
