@@ -60,6 +60,11 @@ To configure Replication perform the following steps:
     ```shell
     ./repctl cluster inject
     ```
+    > **_NOTE:_**  To inject the service account's configuration for each cluster individually, use the following command:
+    ```shell
+      ./repctl cluster inject --custom-configs $HOME/.repctl/clusters/<config-name>
+      Example: ./repctl cluster inject --custom-configs "/root/.repctl/clusters/config-1"
+    ```
 4. Customize the `examples/<storage>_example_values.yaml` sample config. Set the values for sourceClusterID and targetClusterID to the same names used in step 1. For a stretched cluster set both fields to `self`:
 
 5. Create the replication storage classes using the modified configuration from step 4:
