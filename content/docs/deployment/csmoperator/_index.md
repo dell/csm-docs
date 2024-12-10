@@ -105,12 +105,6 @@ git clone -b v1.8.0 https://github.com/dell/csm-operator.git
 
 >NOTE: Dell CSM Operator will be installed in the `dell-csm-operator` namespace.
 
->NOTE: If you want to update the resource requests and limits configuration after the operator is installed. Follow the steps below:
-
-     * Uninstall the operator following the steps [here](https://dell.github.io/csm-docs/v3/deployment/csmoperator/#uninstall)
-
-     * Update the resource configuration as mentioned in step 5 and install the operator using the step 7 above
-
 {{< imgproc install.JPG Resize "2500x" >}}{{< /imgproc >}}
 
 8. Run the command to validate the installation.

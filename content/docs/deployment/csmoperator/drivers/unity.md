@@ -80,8 +80,11 @@ kubectl get csm --all-namespaces
 | ***Node parameters*** |
 | X_CSI_HEALTH_MONITOR_ENABLED | Enable/Disable health monitor of CSI volumes from Controller plugin - volume condition | No | false |
 | X_CSI_ALLOWED_NETWORKS | Custom networks for Unity export. List of networks that can be used for NFS I/O traffic, CIDR format should be used "ip/prefix, ip/prefix" | No | empty |
+| ***Sidecar parameters*** |
+| volume-name-prefix | The volume-name-prefix will be used by provisioner sidecar as a prefix for all the volumes created  | Yes | csivol |
+| monitor-interval | The monitor-interval will be used by external-health-monitor as an interval for health checks  | Yes | 60s |
 
-4.  Execute the following command to create Unity XT custom resource:
+4. Execute the following command to create Unity XT custom resource:
    ```bash
    kubectl create -f <input_sample_file.yaml>
    ```
@@ -92,7 +95,7 @@ kubectl get csm --all-namespaces
       kubectl get all -n <driver-namespace>
       ```
 
-5.  [Verify the CSI Driver installation](../#verifying-the-driver-installation)
+5. [Verify the CSI Driver installation](../#verifying-the-driver-installation)
 
 6. Refer https://github.com/dell/csi-unity/tree/main/samples for the sample files.
 
