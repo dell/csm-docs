@@ -5,19 +5,28 @@ no_list: true
 description: Unity XT 
 weight: 5
 ---
-<div class="container mt-5">
+<div class="container mt-5"> 
     <div class="row">
       <div class="col-md-6 mb-4">
-    {{< customcard  path="content/docs/setup/installation/kubernetes/powermax/csmoperator" link="./csmoperator" icon="fas fa-star" image="" title="CSM Operator" >}}
+    {{< customcard   link="./prerequisite" image="../../../../../icons/doc-reports.svg"  title="Prerequisite" >}}
+      </div>
+    </div>
+    <br> 
+    <div class="row">
+      <div class="col-md-6 mb-4">
+    {{< customcard   link="./csmoperator" image="../../../../../icons/doc-reports.svg"  title="Operator" >}}
+      </div>
+            <div class="col-md-6 mb-4">
+      {{< customcard link="./offline" icon="fas fa-cloud" image="../../../../../icons/doc-reports.svg" title="Offline">}}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6 mb-4">
+    {{< customcard   link="./../../operator_migration" image="../../../../../icons/doc-reports.svg"  title="CSI to CSM Operator Migration" >}}
       </div>
       <div class="col-md-6 mb-4">
-       {{< customcard path="content/docs/setup/installation/kubernetes/powermax/csmoperator" link="./helm" icon="fas fa-search" image="https://raw.githubusercontent.com/helm/helm/release-2.16/docs/logos/helm_logo_transparent.png" title="Helm" >}}
+       {{< customcard  link="./troubleshooting" icon="fas fa-search" image="../../../../../icons/doc-reports.svg" title="Troubleshooting" >}}
        </div>
     </div>
-       <div class="row">
-      <div class="col-md-6 mb-4">
-      {{< customcard path="content/docs/setup/installation/kubernetes/powermax/csmoperator" link="./offline" icon="fas fa-cloud" image="https://creazilla-store.fra1.digitaloceanspaces.com/icons/3509300/offline-logo-icon-md.png" title="Offline">}}
-      </div>
-    </div> 
-    
+
 </div>

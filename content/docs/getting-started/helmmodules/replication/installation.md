@@ -45,13 +45,8 @@ This change will need to be made to the /etc/hosts file on:
       ```
 
 ### Install CSI driver
-The following CSI drivers support replication:
-1. CSI driver for PowerMax
-2. CSI driver for PowerStore
-3. CSI driver for PowerScale
-4. CSI driver for PowerFlex
 
-Please follow the steps outlined in [PowerMax](../powermax), [PowerStore](../powerstore), [PowerScale](../powerscale), or [PowerFlex](../powerflex) pages during the driver installation.
+Please follow the steps outlined in [CSI Driver](./csi-driver) page during the driver installation.
 
 >Note: Please ensure that replication CRDs are installed in the clusters where you are installing the CSI drivers. These CRDs are generally installed as part of the CSM Replication controller installation process.
 

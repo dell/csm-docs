@@ -11,7 +11,11 @@ description: >
 {{<include "content/docs/getting-started/helmmodules/observability/_index.md">}}
 --> 
 {{< accordion id="One" title="Helm" markdown="true" >}} 
-{{<include "content/docs/getting-started/helmmodules/observability/deployment.md">}}
+{{<include "content/docs/getting-started/helmmodules/observability/deployment/installation.md">}} 
+
+{{<include "content/docs/getting-started/helmmodules/observability/deployment/driver/powermax.md">}} 
+
+{{<include "content/docs/getting-started/helmmodules/observability/deployment/configuration/configuration.md">}} 
 {{< /accordion >}}
 <br> 
 {{< accordion id="Two" title="Installer" markdown="true" >}} 

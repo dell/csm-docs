@@ -2,6 +2,7 @@
 title: CSI to CSM Operator Migration
 description: >
   Migrating from CSI Operator to CSM Operator
+toc_hide: true
 ---
 
 ## Migration Steps

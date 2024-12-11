@@ -23,7 +23,7 @@ weight: 4
     </div> 
     <div class="row">
       <div class="col-md-6 mb-4">
-    {{< customcard   link="./../operator_migration" image="../../../../../icons/doc-reports.svg"  title="CSI to CSM Operator Migration" >}}
+    {{< customcard   link="./../../operator_migration" image="../../../../../icons/doc-reports.svg"  title="CSI to CSM Operator Migration" >}}
       </div>
       <div class="col-md-6 mb-4">
        {{< customcard  link="./troubleshooting" icon="fas fa-search" image="../../../../../icons/doc-reports.svg" title="Troubleshooting" >}}

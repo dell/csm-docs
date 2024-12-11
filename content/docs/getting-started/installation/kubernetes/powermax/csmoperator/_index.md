@@ -11,35 +11,13 @@ description: >
 
 ## Installing the Operator
 To deploy the Operator, follow the instructions available [here](../../operatorinstallation.md).
-<div class="mycontent">
-<div class="accordion" id="accordionExample">
-  <div class="accordion-item">
-    <h2 class="accordion-header" id="headingThree">
-      <button class="accordion-button collapsed" style="border:1px solid #d2dcdb;" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-        <h5>CSM Installation Wizard</h5>
-      </button>
-    </h2>
-    <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
-      <div class="accordion-body">
-            {{<include  "content/docs/getting-started/installation/kubernetes/installationwizardoperator.md" >}}
-  </div>
-    </div>
-  </div>
-</div>
-</br> 
 
+{{< accordion id="One" title="CSM Installation Wizard" markdown="true" >}}  
+{{<include  "content/docs/getting-started/installation/kubernetes/installationwizardoperator.md" >}}
+{{< /accordion >}}
 
-<div class="mycontent">
-<div class="accordion" id="accordionExample">
-  <div class="accordion-item">
-    <h2 class="accordion-header" id="headingTwo">
-      <button class="accordion-button collapsed" style="border:1px solid #d2dcdb;" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-        <h5>CSI Driver</h5>
-      </button>
-    </h2>
-    <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-      <div class="accordion-body">
-
+<br>
+{{< accordion id="Two" title="CSI Driver" markdown="true" >}}  
 
 ### Install Driver
 
@@ -344,28 +322,13 @@ where *myusername* and *mypassword* are credentials for a user with vCenter priv
   ```
 >Note: Name of the secret should always be `vcenter-creds`.
 
-
-
-  </div>
-  </div>
-  </div>
-</div>
-
+{{< /accordion >}}
 
 
 <br>
 
+{{< accordion id="Three" title="CSM Modules"  >}}  
 
-<div class="mycontent">
-<div class="accordion" id="accordionExample">
-  <div class="accordion-item">
-    <h2 class="accordion-header" id="headingTwo">
-      <button class="accordion-button collapsed" style="border:1px solid #d2dcdb;" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-        <h5>CSM Modules</h5>
-      </button>
-    </h2>
-    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-      <div class="accordion-body">
  <br>  
 
 {{< markdownify >}}
@@ -398,64 +361,4 @@ The driver and modules versions installable with the CSM Operator [Click Here](.
       </div>
 </div>
 
-  </div>
-  </div>
-  </div>
-</div>
-
-<!-- Single Divs for Dynamic Tab Content, Initially Empty -->
-
-<div id="tabContentContainer2" class="tab-content-container"></div> 
-</div>
-
-
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    // Content mapping for both accordions 
-    /*
-    const contentMap = {
-      authorization1: `{{< include "content/docs/getting-started/operatormodules/authorization v1.x.md" >}}`, 
-      authorization2: `{{< include "content/docs/getting-started/operatormodules/authorization v2.0.md" >}}`,
-      observability: `{{< include "content/docs/getting-started/operatormodules/observability.md" >}}`,
-      replication: `{{< include "content/docs/getting-started/operatormodules/replication.md" >}}`,
-      resiliency: `{{< include "content/docs/getting-started/operatormodules/resiliency.md" >}}`,
-    
-    };
-
-    // Event listeners for all tab buttons
-    const tabButtons = document.querySelectorAll('.nav-link');
-
-    tabButtons.forEach(button => {
-      button.addEventListener('click', function() {
-        const contentId = this.getAttribute('data-content');
-        const containerId = this.parentElement.parentElement.getAttribute('data-container');
-        const contentContainer = document.getElementById(containerId);
-        
-        // Load the respective content into the correct container
-        contentContainer.innerHTML = `<div class="release">${contentMap[contentId]}<div>`;
-      });
-    });
-    
-    // Function to clear content when accordion collapses
-    const accordions = document.querySelectorAll('.accordion-collapse');
-    
-    accordions.forEach(accordion => {
-      accordion.addEventListener('hide.bs.collapse', function () {
-        const navTabs = this.querySelector('.nav-tabs');
-        
-        if (navTabs) {
-          const containerId = navTabs.getAttribute('data-container');
-          
-          if (containerId) {
-            document.getElementById(containerId).innerHTML = ''; // Clear content when accordion collapses
-          }
-        }
-      });
-    });
-  });
-  */
-</script> 
-
-<br> 
-<br> 
-
+{{< /accordion >}}

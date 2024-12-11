@@ -4,6 +4,7 @@ linkTitle: "CSM Operator"
 no_list: true
 description: CSM Operator Installation
 weight: 2
+toc_hide: true 
 ---
 ## Installing the Operator
 To deploy the Operator, follow the instructions available [here](../../operatorinstallation.md).

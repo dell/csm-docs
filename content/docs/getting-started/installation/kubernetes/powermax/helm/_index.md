@@ -16,34 +16,14 @@ Install Helm 3 on the master node before you install CSI Driver for Dell PowerMa
    ```bash
    curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash 
    ```
-<div class="mycontent">
-<div class="accordion" id="accordionExample">
-  <div class="accordion-item">
-    <h2 class="accordion-header" id="headingThree">
-      <button class="accordion-button collapsed" style="border:1px solid #d2dcdb;" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-        <h5>CSM Installation Wizard</h5>
-      </button>
-    </h2>
-    <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
-      <div class="accordion-body">
-            {{<include  "content/docs/getting-started/installation/kubernetes/installationwizardhelm.md" >}}
-  </div>
-    </div>
-  </div>
-</div>
+{{< accordion id="One" title="CSM Installation Wizard" markdown="true" >}}  
+{{<include  "content/docs/getting-started/installation/kubernetes/installationwizardhelm.md" >}}
+{{< /accordion >}}
 
 <br>
 
-<div class="mycontent">
-<div class="accordion" id="accordionExample">
-  <div class="accordion-item">
-    <h2 class="accordion-header" id="headingTwo">
-      <button class="accordion-button collapsed" style="border:1px solid #d2dcdb;" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-        <h5>CSI Driver</h5>
-      </button>
-    </h2>
-    <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-      <div class="accordion-body">
+{{< accordion id="Two" title="CSI Driver" markdown="true" >}}  
+
       
 ## Installation
 
@@ -235,25 +215,13 @@ csireverseproxy:
 
 >Note: If the credential secret is missing from any management server details, the installer will try to use the defaultCredentialsSecret
 
-
-  </div>
-  </div>
-  </div>
-</div> 
+{{< /accordion >}}
 
 
 <br> 
-<div class="mycontent">
-<div class="accordion" id="accordionExample">
-  <div class="accordion-item">
-    <h2 class="accordion-header" id="headingTwo">
-      <button class="accordion-button collapsed" style="border:1px solid #d2dcdb;" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-        <h5>CSM Modules</h5>
-      </button>
-    </h2>
-    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-      <div class="accordion-body">
-        
+
+{{< accordion id="Three" title="CSM Modules">}}  
+
 
 <div class="container mt-5 ps-0" style="margin-left:0px;">
     <div class="row">
@@ -279,55 +247,5 @@ csireverseproxy:
       </div>
 </div>
 
-  </div>
-  </div>
-  </div>
-</div>
-<br>
+{{< /accordion >}}
 
-
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    // Content mapping for both accordions 
-    /*
-    const contentMap = {
-      authorization1: `{{< include "content/docs/getting-started/operatormodules/authorization v1.x.md" >}}`, 
-      authorization2: `{{< include "content/docs/getting-started/operatormodules/authorization v2.0.md" >}}`,
-      observability: `{{< include "content/docs/getting-started/operatormodules/observability.md" >}}`,
-      replication: `{{< include "content/docs/getting-started/operatormodules/replication.md" >}}`,
-      resiliency: `{{< include "content/docs/getting-started/operatormodules/resiliency.md" >}}`,
-    
-    };
-
-    // Event listeners for all tab buttons
-    const tabButtons = document.querySelectorAll('.nav-link');
-
-    tabButtons.forEach(button => {
-      button.addEventListener('click', function() {
-        const contentId = this.getAttribute('data-content');
-        const containerId = this.parentElement.parentElement.getAttribute('data-container');
-        const contentContainer = document.getElementById(containerId);
-        
-        // Load the respective content into the correct container
-        contentContainer.innerHTML = `<div class="release">${contentMap[contentId]}<div>`;
-      });
-    });
-    */
-    // Function to clear content when accordion collapses
-    const accordions = document.querySelectorAll('.accordion-collapse');
-    
-    accordions.forEach(accordion => {
-      accordion.addEventListener('hide.bs.collapse', function () {
-        const navTabs = this.querySelector('.nav-tabs');
-        
-        if (navTabs) {
-          const containerId = navTabs.getAttribute('data-container');
-          
-          if (containerId) {
-            document.getElementById(containerId).innerHTML = ''; // Clear content when accordion collapses
-          }
-        }
-      });
-    });
-  });
-</script> 
