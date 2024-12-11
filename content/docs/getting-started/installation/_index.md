@@ -9,20 +9,14 @@ weight: 1
  
 
 
-<div class="container mt-5" style=" margin-left:0px" >
-    <div class="row">
-      <div class="col-md-6 mb-4">
+{{< cardcontainer >}}
+
     {{< customcard path="content/docs/getting-started/installation/kubernetes" link="./kubernetes" icon="fas fa-star" title="Kubernetes" image="../../../icons/save-disk.svg">}}
-      </div>
-      <div class="col-md-6 mb-4">
-       {{< customcard  path="content/docs/getting-started/installation/openshift" link="./openshift" icon="fas fa-search" title="OpenShift" image="../../../icons/save-disk.svg">}}
-       </div>
-    </div>
-       <div class="row">
-      <div class="col-md-6 mb-4">
-        {{< customcard path="content/docs/getting-started/installation/mirantiskubernetesengine" link="./mirantiskubernetesengine" icon="fas fa-pencil" title="Mirantis Kubernetes Engine "image="../../../icons/save-disk.svg" >}} 
-        </div>
-    </div> 
-</div>
+
+    {{< customcard  path="content/docs/getting-started/installation/openshift" link="./openshift" icon="fas fa-search" title="OpenShift" image="../../../icons/save-disk.svg">}}
+
+    {{< customcard path="content/docs/getting-started/installation/mirantiskubernetesengine" link="./mirantiskubernetesengine" icon="fas fa-pencil" title="Mirantis Kubernetes Engine "image="../../../icons/save-disk.svg" >}} 
+
+{{< /cardcontainer >}}
 
 

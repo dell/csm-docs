@@ -8,6 +8,43 @@
 {{ end }} 
 {{end}}
 
+{{ $imagePaths := dict 
+  "1" (dict 
+      "path" "/csm-docs/icons/card-icons/save-disk.svg" 
+      "comment" "Save Disk Icon"
+  ) 
+  "2" (dict 
+      "path" "/csm-docs/icons/card-icons/doc-reports.svg" 
+      "comment" "doc-reports"
+  ) 
+  "3" (dict 
+      "path" "/csm-docs/icons/card-icons/storage-array-icon.png" 
+      "comment" "Storage Array icons"
+  ) 
+  "4" (dict 
+      "path" "/csm-docs/icons/card-icons/prerequisite-icon.png" 
+      "comment" "Prerequisite icons"
+  )  
+  "5" (dict 
+  "path" "/csm-docs/icons/card-icons/kubernetes-icon.png" 
+  "comment" "Kubernetes icon"
+   ) 
+   "6" (dict 
+   "path" "/csm-docs/icons/card-icons/deployment-icon-operator-helm-offline.png" 
+   "comment" "deployment icon"
+    ) 
+    "7" (dict 
+   "path" "/csm-docs/icons/card-icons/containerorchestrators-icon.png" 
+   "comment" "Container Orchestrators icon"
+    )
+}}
+
+
+{{ $imageNumber := .Get "imageNumber" | default "1" }}
+{{ $imageData := index $imagePaths $imageNumber }}
+{{ $image := $imageData.path }}
+{{ $comment := $imageData.comment }}
+
 <style>
     .card-hover:hover {
         transform: scale(1.05);
@@ -30,10 +67,6 @@
         height: 2rem!important
         
     }
-    .card-image-large {
-        width: 5rem;
-        height: 5rem;
-    }
     .card-title {
         font-weight: bold;
     }
@@ -47,25 +80,23 @@
     } 
 
 </style>
-
-<a href="{{ if .Get "link1" }}{{ .Get "link1"}}{{ else }}{{ .Get "link"}}{{ end }}" class="card-link">
-<div class="card card-hover shadow-sm p-3 bg-white rounded">
-    <div class="row no-gutters align-items-center">
-      <div class="{{ if .Get "largeImage" }}col-md-4{{ else }}col-md-2{{ end }} text-center">
-        {{ if .Get "image" }}
-          <img src="{{ .Get "image" }}" alt="{{ .Get "title" }}" class="card-image {{ if .Get "largeImage" }}card-image-large{{ end }} img-fluid">
-        {{ else }}
-          <i class="card-icon {{ .Get "icon" }}"></i>
-        {{ end }}
-      </div>
-      <div class="col-md-{{ if .Get "largeImage" }}8{{ else }}10{{ end }}">
-        <div class="card-body">
-          <h5 class="card-title">{{ .Get "title" }}</h5>
-          {{ if $path }}
-            <p class="card-text">Items: {{ $folderCount }}</p>
-          {{ end }}
+<div class="col-md-6 mb-4">
+  <a href="{{ if .Get "link1" }}{{ .Get "link1"}}{{ else }}{{ .Get "link"}}{{ end }}" class="card-link">
+    <div class="card card-hover shadow-sm p-3 bg-white rounded">
+      <div class="row no-gutters align-items-center">
+        <div class="col-md-2 text-center">
+            <img src="{{ $image }}" alt="{{ .Get "title" }}" class="card-image img-fluid">
+        </div>
+        <div class="col-md-10">
+          <div class="card-body">
+            <h5 class="card-title">{{ .Get "title" }}</h5>
+            {{ if $path }}
+              <p class="card-text">Items: {{ $folderCount }}</p>
+            {{ end }}
+          </div>
         </div>
       </div>
     </div>
+  </a>
   </div>
-</a>
+
