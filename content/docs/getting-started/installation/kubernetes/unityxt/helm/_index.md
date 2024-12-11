@@ -405,13 +405,10 @@ Note: myvalues.yaml is a values.yaml file which user has used for driver install
 
 {{< accordion id="Three" title="CSM Modules" >}}
        
+{{< cardcontainer >}}
 
-<div class="container mt-5 ps-0" style="margin-left:0px;">
-    <div class="row">
-      <div class="col-md-6 mb-4">
-          {{< customcard link1="./csm-modules/resiliency"   image="../../../../../../icons/doc-reports.svg" title="Resiliency"  >}}
-        </div>  
-      </div>
-</div>
+    {{< customcard link1="./csm-modules/resiliency"   image="1" title="Resiliency"  >}}
+
+{{< /cardcontainer >}}
 
 {{< /accordion >}}  

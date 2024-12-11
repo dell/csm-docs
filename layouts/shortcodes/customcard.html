@@ -29,19 +29,31 @@
   "path" "/csm-docs/icons/card-icons/kubernetes-icon.png" 
   "comment" "Kubernetes icon"
    ) 
+
    "6" (dict 
    "path" "/csm-docs/icons/card-icons/deployment-icon-operator-helm-offline.png" 
    "comment" "deployment icon"
     ) 
+
     "7" (dict 
    "path" "/csm-docs/icons/card-icons/containerorchestrators-icon.png" 
    "comment" "Container Orchestrators icon"
+    )
+
+    "8" (dict 
+    "path" "/csm-docs/icons/card-icons/troubleshooting-icon.png" 
+    "comment" "Troubleshooting" 
     )
 }}
 
 
 {{ $imageNumber := .Get "imageNumber" | default "1" }}
 {{ $imageData := index $imagePaths $imageNumber }}
+
+{{ if not $imageData }}
+  {{ $imageData = index $imagePaths "1" }}
+{{ end }}
+
 {{ $image := $imageData.path }}
 {{ $comment := $imageData.comment }}
 
@@ -91,7 +103,7 @@
           <div class="card-body">
             <h5 class="card-title">{{ .Get "title" }}</h5>
             {{ if $path }}
-              <p class="card-text">Items: {{ $folderCount }}</p>
+              <p class="card-text"></p>{{ $folderCount }} Items</p>
             {{ end }}
           </div>
         </div>

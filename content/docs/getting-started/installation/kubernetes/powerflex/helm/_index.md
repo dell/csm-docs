@@ -348,28 +348,17 @@ Starting CSI PowerFlex v1.5, `dell-csi-helm-installer` will not create any Volum
 {{< accordion id="Three" title="CSM Modules" >}}
        
 
-<div class="container mt-5 ps-0" style="margin-left:0px;">
-    <div class="row">
-      <div class="col-md-6 mb-4">
-    {{< customcard link1="./csm-modules/authorizationv1.x"  image="../../../../../../icons/doc-reports.svg" title="Authorization v1.x" >}}
-      </div>
-      <div class="col-md-6 mb-4">
-       {{< customcard link1="./csm-modules/authorizationv2.0"  image="../../../../../../icons/doc-reports.svg" title="Authorization v2.0"  >}}
-       </div>
-    </div>
-       <div class="row">
-      <div class="col-md-6 mb-4">
-      {{< customcard  link1="./csm-modules/observability"   image="../../../../../../icons/doc-reports.svg" title="Observability"  >}}
-      </div>
-      <div class="col-md-6 mb-4">
-        {{< customcard  link1="./csm-modules/replication"  image="../../../../../../icons/doc-reports.svg" title="Replication"  >}} 
-        </div>
-    </div> 
-    <div class="row">
-      <div class="col-md-6 mb-4">
-          {{< customcard link1="./csm-modules/resiliency"   image="../../../../../../icons/doc-reports.svg" title="Resiliency"  >}}
-        </div>  
-      </div>
-</div>
+{{< cardcontainer >}}
+    {{< customcard link1="./csm-modules/authorizationv1.x"  image="1" title="Authorization v1.x" >}}
+
+    {{< customcard link1="./csm-modules/authorizationv2.0"   image="1" title="Authorization v2.0"  >}}
+
+    {{< customcard  link1="./csm-modules/observability"   image="1" title="Observability"  >}}
+
+    {{< customcard  link1="./csm-modules/replication"  image="1" title="Replication"  >}} 
+
+    {{< customcard link1="./csm-modules/resiliency"   image="1" title="Resiliency"  >}}
+
+{{< /cardcontainer >}}
 
 {{< /accordion >}}  

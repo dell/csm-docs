@@ -14,10 +14,10 @@ Welcome to the Container Storage Module Getting Started documentation. This sect
 
 {{< cardcontainer >}}
 
-      {{< customcard path="content/docs/getting-started/installation" link="./installation"  title="Installation" imageNumber="7" >}} 
+      {{< customcard path="content/docs/getting-started/installation"  link="./installation"  title="Installation" imageNumber="1" >}} 
 
-     {{< customcard path="content/docs/getting-started/upgrade" link="./upgrade" title="Upgrade" image="../../icons/save-disk.svg">}}
+      {{< customcard path="content/docs/getting-started/upgrade"       link="./upgrade"       title="Upgrade"      imageNumber="1">}}
 
-      {{< customcard path="content/docs/getting-started/uninstallation" link="./uninstallation" title="Uninstallation"  image="../../icons/save-disk.svg">}}
-      
+      {{< customcard path="content/docs/getting-started/uninstallation" link="./uninstallation" title="Uninstallation"  imageNumber="1">}}
+
 {{< /cardcontainer >}}

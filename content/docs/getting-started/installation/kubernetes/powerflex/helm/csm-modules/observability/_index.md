@@ -26,11 +26,8 @@ description: >
 
 
 
-<div class="container mt-5 ps-0" style="margin-left:0px;"> 
-    <div class="row">
-      <div class="col-md-6 mb-4">
-      {{< customcard  link="./postinstallation"  image="../../../../../../../../icons/doc-reports.svg" title="Post Installation">}} 
-      </div>
-    </div>
-    <br> 
-</div>
+{{< cardcontainer >}}
+
+      {{< customcard  link="./postinstallation"   title="Post Installation">}} 
+
+{{< /cardcontainer >}}

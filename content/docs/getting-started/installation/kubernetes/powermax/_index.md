@@ -13,24 +13,24 @@ Dell PowerMax is a high-performance, enterprise-class storage solution designed 
 
 {{< cardcontainer >}}
 
-    {{< customcard  link="./prerequisite" icon="fas fa-cloud" image="../../../../../icons/doc-reports.svg" title="Prerequisite">}} 
+    {{< customcard  link="./prerequisite"  imageNumber="4" title="Prerequisite">}} 
 
 {{< /cardcontainer >}}
 
 {{< cardcontainer >}}
 
-    {{< customcard   link="./csmoperator" image="../../../../../icons/doc-reports.svg"  title="Operator" >}}
+       {{< customcard  link="./csmoperator" imageNumber="6"  title="Operator" >}}
 
-    {{< customcard  link="./helm" icon="fas fa-search" image="../../../../../icons/doc-reports.svg" title="Helm" >}}
+       {{< customcard  link="./helm" imageNumber="6" title="Helm" >}}
 
-    {{< customcard  link="./offline" icon="fas fa-cloud" image="../../../../../icons/doc-reports.svg" title="Offline">}}
+       {{< customcard  link="./offline"  imageNumber="6" title="Offline">}}
 
 {{< /cardcontainer >}}
 
 {{< cardcontainer >}}
 
-    {{< customcard  link="./../../operator_migration" image="../../../../../icons/doc-reports.svg"  title="CSI to CSM Operator Migration" >}}
-   
-    {{< customcard  link="./troubleshooting" icon="fas fa-search" image="../../../../../icons/doc-reports.svg" title="Troubleshooting" >}}
+    {{< customcard   link="./../../operator_migration" imageNumber="1"  title="CSI to CSM Operator Migration" >}}
+
+    {{< customcard  link="./troubleshooting"  imageNumber="8" title="Troubleshooting" >}} 
 
 {{< /cardcontainer >}}

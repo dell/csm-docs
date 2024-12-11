@@ -17,21 +17,15 @@ weight: 5
 <br>
 {{< accordion id="Three" title="CSM Module" >}}  
 
-<div class="container mt-5 ps-0" style="margin-left:0px;">
-       <div class="row">
-      <div class="col-md-6 mb-4">
-      {{< customcard  link1="../../../../../concepts/observability/troubleshooting"   image="../../../../../../icons/doc-reports.svg" title="Observability"  >}}
-      </div>
-      <div class="col-md-6 mb-4">
-        {{< customcard  link1="../../../../../concepts/replication/troubleshooting"  image="../../../../../../icons/doc-reports.svg" title="Replication"  >}} 
-        </div>
-    </div> 
-    <div class="row">
-      <div class="col-md-6 mb-4">
-          {{< customcard link1="../../../../../concepts/resiliency/troubleshooting"   image="../../../../../../icons/doc-reports.svg" title="Resiliency"  >}}
-        </div>  
-      </div>
-</div>
+{{< cardcontainer >}}
+
+      {{< customcard  link="../../../../../concepts/observability/troubleshooting"   imageNumber="1" title="Observability"  >}}
+
+      {{< customcard  link="../../../../../concepts/replication/troubleshooting"  imageNumber="1" title="Replication"  >}} 
+
+      {{< customcard  link="../../../../../concepts/resiliency/troubleshooting"   imageNumber="1" title="Resiliency"  >}}
+
+{{< /cardcontainer >}}
 
 
 {{< /accordion >}}

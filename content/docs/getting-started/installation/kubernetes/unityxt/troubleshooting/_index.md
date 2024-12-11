@@ -15,13 +15,13 @@ weight: 5
 <br>
 {{< accordion id="Three" title="CSM Module" >}}  
 
-<div class="container mt-5 ps-0" style="margin-left:0px;">
-    <div class="row">
-      <div class="col-md-6 mb-4">
-          {{< customcard link1="../../../../../concepts/resiliency/troubleshooting"   image="../../../../../../icons/doc-reports.svg" title="Resiliency"  >}}
-        </div>  
-      </div>
-</div>
+
+{{< cardcontainer >}}
+
+      {{< customcard  link="../../../../../concepts/resiliency/troubleshooting"   imageNumber="1" title="Resiliency"  >}}
+
+{{< /cardcontainer >}}
+
 
 
 {{< /accordion >}}

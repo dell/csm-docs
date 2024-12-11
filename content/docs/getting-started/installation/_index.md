@@ -11,11 +11,11 @@ weight: 1
 
 {{< cardcontainer >}}
 
-    {{< customcard path="content/docs/getting-started/installation/kubernetes" link="./kubernetes" icon="fas fa-star" title="Kubernetes" image="../../../icons/save-disk.svg">}}
+    {{< customcard path="content/docs/getting-started/installation/kubernetes" link="./kubernetes" title="Kubernetes" imageNumber="5">}}
 
-    {{< customcard  path="content/docs/getting-started/installation/openshift" link="./openshift" icon="fas fa-search" title="OpenShift" image="../../../icons/save-disk.svg">}}
+    {{< customcard  path="content/docs/getting-started/installation/openshift" link="./openshift"  title="OpenShift" imageNumber="7">}}
 
-    {{< customcard path="content/docs/getting-started/installation/mirantiskubernetesengine" link="./mirantiskubernetesengine" icon="fas fa-pencil" title="Mirantis Kubernetes Engine "image="../../../icons/save-disk.svg" >}} 
+    {{< customcard path="content/docs/getting-started/installation/mirantiskubernetesengine" link="./mirantiskubernetesengine"  title="Mirantis Kubernetes Engine" imageNumber="7" >}} 
 
 {{< /cardcontainer >}}
 
