@@ -2,7 +2,7 @@
 title: PowerScale
 linktitle: PowerScale
 description: >
-  Enabling CSM Authorization for PowerScale CSI Driver
+  Enabling Container Storage Module Authorization for PowerScale CSI Driver
 ---
 {{% pageinfo color="primary" %}}
 {{< message text="1" >}}
@@ -53,11 +53,11 @@ Given a setup where Kubernetes, a storage system, and the CSM for Authorization 
       kubectl -n isilon create secret generic proxy-server-root-certificate --from-file=rootCertificate.pem=/path/to/rootCA -o yaml --dry-run=client | kubectl apply -f -
       ```
 
-4. Prepare the driver configuration secret, applicable to your driver installation method, to communicate with the CSM Authorization sidecar.
+4. Prepare the driver configuration secret, applicable to your driver installation method, to communicate with the Authorization sidecar.
 
     **Operator**
 
-    Refer to the [Prerequisite](../../../../deployment/csmoperator/drivers/powerscale/#prerequisite) section to prepare the `secret.yaml` file to configure the driver to communicate with the CSM Authorization sidecar.
+    Refer to the [Prerequisite](../../../../deployment/csmoperator/drivers/powerscale/#prerequisite) section to prepare the `secret.yaml` file to configure the driver to communicate with the Authorization sidecar.
 
     - Update `endpoint` to match the localhost endpoint in `samples/secret/karavi-authorization-config.json`.
 
@@ -107,21 +107,21 @@ Given a setup where Kubernetes, a storage system, and the CSM for Authorization 
         skipCertificateValidation: true
     ```
 
-5. Enable CSM Authorization in the driver installation applicable to your installation method.
+5. Enable Authorization in the driver installation applicable to your installation method.
 
     **Operator**
 
-    Refer to the [Install Driver](../../../../deployment/csmoperator/drivers/powerscale/#install-driver) section to edit the parameters in the Custom Resource to enable CSM Authorization.
+    Refer to the [Install Driver](../../../../deployment/csmoperator/drivers/powerscale/#install-driver) section to edit the parameters in the Custom Resource to enable Authorization.
 
     Under `modules`, enable the module named `authorization`:
 
     - Update the `enabled` field to `true.`
 
-    - Update the `image` to the image of the CSM Authorization sidecar. In most cases, you can leave the default value.
+    - Update the `image` to the image of the Authorization sidecar. In most cases, you can leave the default value.
 
-    - Update the `PROXY_HOST` environment value to the hostname of the CSM Authorization Proxy Server. `csm-authorization.com` is a placeholder for the proxyHost. See the administrator of CSM for Authorization for the correct value.
+    - Update the `PROXY_HOST` environment value to the hostname of the Authorization Proxy Server. `csm-authorization.com` is a placeholder for the proxyHost. See the administrator of CSM for Authorization for the correct value.
 
-    - Update the `SKIP_CERTIFICATE_VALIDATION` environment value to `true` or `false` depending on if you want to disable or enable certificate validation of the CSM Authorization Proxy Server.
+    - Update the `SKIP_CERTIFICATE_VALIDATION` environment value to `true` or `false` depending on if you want to disable or enable certificate validation of the Authorization Proxy Server.
 
     - Do not update the `configVersion`. You will notice in the example that it is set to v1.12.0, this ensures that Operator checks on version support do not prevent deployment of the v2.0.0 version of authorization.
 
@@ -147,15 +147,15 @@ Given a setup where Kubernetes, a storage system, and the CSM for Authorization 
 
     **Helm**
 
-    Refer to the [Install the Driver](../../../../deployment/helm/drivers/installation/isilon/#install-the-driver) section to edit the parameters in `my-isilon-settings.yaml` file to enable CSM Authorization.
+    Refer to the [Install the Driver](../../../../deployment/helm/drivers/installation/isilon/#install-the-driver) section to edit the parameters in `my-isilon-settings.yaml` file to enable Authorization.
 
     - Update `authorization.enabled` to `true`.
 
-    - Update `images.authorization` to the image of the CSM Authorization sidecar. In most cases, you can leave the default value.
+    - Update `images.authorization` to the image of the Authorization sidecar. In most cases, you can leave the default value.
 
-    - Update `authorization.proxyHost` to the hostname of the CSM Authorization Proxy Server. `csm-authorization.com` is a placeholder for the proxyHost. See the administrator of CSM for Authorization for the correct value.
+    - Update `authorization.proxyHost` to the hostname of the Authorization Proxy Server. `csm-authorization.com` is a placeholder for the proxyHost. See the administrator of CSM for Authorization for the correct value.
 
-    - Update `authorization.skipCertificateValidation` to `true` or `false` depending on if you want to disable or enable certificate validation of the CSM Authorization Proxy Server.
+    - Update `authorization.skipCertificateValidation` to `true` or `false` depending on if you want to disable or enable certificate validation of the Authorization Proxy Server.
 
    Example:
 
@@ -178,4 +178,4 @@ Given a setup where Kubernetes, a storage system, and the CSM for Authorization 
       skipCertificateValidation: true
     ```
 
-6. Install the Dell CSI PowerScale driver following the appropriate documenation for your installation method.
+6. Install the Dell CSI PowerScale driver following the appropriate documentation for your installation method.

@@ -7,7 +7,7 @@ weight: 2
 ---
 ### Install Helm 3.x
 
-Install Helm 3.x on the master node before you install the CSI Driver for Dell PowerStore.
+Install Helm 3.x on the master node before you install the CSI Driver for PowerStore.
 
 **Steps**
 
@@ -109,7 +109,7 @@ Install Helm 3.x on the master node before you install the CSI Driver for Dell P
 
 ## Storage Classes
 
-The CSI driver for Dell PowerStore version 1.3 and later, `dell-csi-helm-installer` does not create any storage classes as part of the driver installation. A wide set of annotated storage class manifests have been provided in the `samples/storageclass` folder. Use these samples to create new storage classes to provision storage.
+The CSI driver for PowerStore version 1.3 and later, `dell-csi-helm-installer` does not create any storage classes as part of the driver installation. A wide set of annotated storage class manifests have been provided in the `samples/storageclass` folder. Use these samples to create new storage classes to provision storage.
 
 ### What happens to my existing storage classes?
 
@@ -151,7 +151,7 @@ Starting with CSI PowerStore v1.4.0, `dell-csi-helm-installer` will not create a
 
 CSI PowerStore supports the ability to dynamically modify array information within the secret, allowing users to update
 <u>_credentials_</u> for the PowerStore arrays, in-flight, without restarting the driver.
-> Note: Updates to the secret that include adding a new array, or modifying the endpoint, globalID, or blockProtocol parameters
+> ℹ️ **NOTE:**: Updates to the secret that include adding a new array, or modifying the endpoint, globalID, or blockProtocol parameters
 > require the driver to be restarted to properly pick up and process the changes.
 
 User can update the secret using the following commands:

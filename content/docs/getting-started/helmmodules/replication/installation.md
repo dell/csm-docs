@@ -3,7 +3,7 @@ title: Installation
 linktitle: Installation
 weight: 2
 description: >
-  Installation of CSM for Replication
+  Installation of Container Storage Module for Replication
 ---
 {{% pageinfo color="primary" %}}
 {{< message text="1" >}}
@@ -18,8 +18,8 @@ The installation process consists of two steps:
 Please read this [document](./configmap-secrets) before proceeding with the installation. It provides detailed steps on how to set up communication between multiple
 clusters which will be required during or after the installation.
 
-### Install CSM Replication Controller
-You can use one of the following methods to install CSM Replication Controller:
+### Install Container Storage Module Replication Controller
+You can use one of the following methods to install Container Storage Module Replication Controller:
 * Using repctl
 * Installation script (Helm chart)
 
@@ -33,7 +33,7 @@ Please follow the steps [here](./install-repctl) to install & configure Dell Rep
 Please follow the steps [here](./install-script) to install & configure Dell Replication Controller using script.
 
 #### _(Optional)_ FQDN Setup
-If CSM Replication is being deployed using two clusters in an environment where the DNS is not configured, and the cluster API endpoints are FQDNs, it is necessary to add the `<FQDN>:<IP>` mapping in the /etc/hosts file in order to resolve queries to the remote API server.
+If Container Storage Module Replication is being deployed using two clusters in an environment where the DNS is not configured, and the cluster API endpoints are FQDNs, it is necessary to add the `<FQDN>:<IP>` mapping in the /etc/hosts file in order to resolve queries to the remote API server.
 This change will need to be made to the /etc/hosts file on:
 - The environment that is performing the installation/management (wherever `repctl` or the install script is used).
 - Both dell-replication-controller-manager deployments.
@@ -48,17 +48,17 @@ This change will need to be made to the /etc/hosts file on:
 
 Please follow the steps outlined in [CSI Driver](./csi-driver) page during the driver installation.
 
->Note: Please ensure that replication CRDs are installed in the clusters where you are installing the CSI drivers. These CRDs are generally installed as part of the CSM Replication controller installation process.
+>Note: Please ensure that replication CRDs are installed in the clusters where you are installing the CSI drivers. These CRDs are generally installed as part of the Container Storage Module Replication controller installation process.
 
 ### Dynamic Log Level Change
-CSM Replication Controller can dynamically change its logs' verbosity level.
+Container Storage Module Replication Controller can dynamically change its logs' verbosity level.
 To set log level in runtime, you need to edit the controllers ConfigMap:
 ```shell
   
 kubectl edit cm dell-replication-controller-config -n dell-replication-controller
 ```
 And set the *CSI_LOG_LEVEL* field to the level of your choosing.
-CSM Replication controller supports following log levels:
+Container Storage Module Replication controller supports following log levels:
 - "PANIC"
 - "FATAL"
 - "ERROR"

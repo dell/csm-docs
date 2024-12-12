@@ -127,7 +127,7 @@ When challenged, the host initiator transmits a CHAP credential and CHAP secret 
 
 ## Custom Driver Name
 
-Starting from version 1.3.0 of the driver, a custom name can be assigned to the driver at the time of installation. This enables installation of the CSI driver in a different namespace and installation of multiple CSI drivers for Dell PowerMax in the same Kubernetes/OpenShift cluster.
+Starting from version 1.3.0 of the driver, a custom name can be assigned to the driver at the time of installation. This enables installation of the CSI driver in a different namespace and installation of multiple CSI drivers for PowerMax in the same Kubernetes/OpenShift cluster.
 
 To use this feature, set the following values under `customDriverName` in `my-powermax-settings.yaml`.
 - Value: Set this to the custom name of the driver.
@@ -295,9 +295,9 @@ In the `my-powermax-settings.yaml` file, the csireverseproxy section can be used
 
 The new Helm chart is configured as a sub chart for the CSI PowerMax helm chart. The install script automatically installs the CSI PowerMax Reverse Proxy and configures the CSI PowerMax driver to use this service.
 
-### Using Dell CSM Operator
+### Using Container Storage Module Operator
 
-For complete installation instructions for the CSI PowerMax driver and the CSI PowerMax Reverse Proxy, see the [Dell CSM Operator documentation](../../../deployment/csmoperator/drivers/powermax/) for PowerMax.
+For complete installation instructions for the CSI PowerMax driver and the CSI PowerMax Reverse Proxy, see the [Container Storage Module Operator documentation](../../../deployment/csmoperator/drivers/powermax/) for PowerMax.
 
 ## User-friendly hostnames
 
@@ -321,12 +321,12 @@ controllerCount: 2
 > *NOTE:* The default value for controllerCount is 2. We recommend not changing this unless it is really necessary.
 > Also, if the controller count is greater than the number of available nodes (where the Pods can be scheduled), some controller Pods will remain in the Pending state  
    
-If you are using the Dell CSM Operator, the value to adjust is: 
+If you are using the Container Storage Module Operator, the value to adjust is: 
 ```yaml
 replicas: 2  
 ```
 
-For more details about configuring Controller HA using the Dell CSM Operator, see the [Dell CSM Operator documentation](../../../deployment/csmoperator/#custom-resource-specification).
+For more details about configuring Controller HA using the Container Storage Module Operator, see the [Container Storage Module Operator documentation](../../../deployment/csmoperator/#custom-resource-specification).
 
 ## NodeSelectors and Tolerations
 
@@ -547,7 +547,7 @@ kubectl edit configmap -n powermax powermax-config-params
 
 ## Volume Health Monitoring
 
-CSI Driver for Dell PowerMax 2.2.0 and above supports volume health monitoring. Alpha feature gate `CSIVolumeHealth` needs to be enabled for the node side monitoring to take effect. For more information, please refer to the [Kubernetes GitHub repository](https://github.com/kubernetes-csi/external-health-monitor/blob/master/README.md). To use this feature, set controller.healthMonitor.enabled and node.healthMonitor.enabled to true. To change the monitor interval, set controller.healthMonitor.interval parameter.
+CSI Driver for PowerMax 2.2.0 and above supports volume health monitoring. Alpha feature gate `CSIVolumeHealth` needs to be enabled for the node side monitoring to take effect. For more information, please refer to the [Kubernetes GitHub repository](https://github.com/kubernetes-csi/external-health-monitor/blob/master/README.md). To use this feature, set controller.healthMonitor.enabled and node.healthMonitor.enabled to true. To change the monitor interval, set controller.healthMonitor.interval parameter.
 
 ## Single Pod Access Mode for PersistentVolumes- ReadWriteOncePod 
 
@@ -573,7 +573,7 @@ To migrate existing PersistentVolumes to use `ReadWriteOncePod`, please follow t
   
 ## Support for auto RDM for vSphere over FC
   
-CSI Driver for Dell PowerMax 2.5.0 and above supports auto RDM for vSphere over FC.
+CSI Driver for PowerMax 2.5.0 and above supports auto RDM for vSphere over FC.
 
 This feature supports volume provisioning on Kubernetes clusters running on vSphere (VMware hypervisor) via RDM mechanism. This feature enables the users to use PMAX CSI drivers with VMs on vSphere Hypervisor with the same feature and functionality as there with bare metal servers when they have only FC ports in PMAX storage.
 
@@ -628,7 +628,7 @@ Please note that the Metro feature does not require the deployment of the replic
 
 ## Volume Limits
 
-The CSI Driver for Dell PowerMax allows users to specify the maximum number of PowerMax volumes that can be created on a node.
+The CSI Driver for PowerMax allows users to specify the maximum number of PowerMax volumes that can be created on a node.
 
 The user can set the volume limit for a node by creating a node label `max-powermax-volumes-per-node` and specifying the volume limit for that node.
 <br/> `kubectl label node <node_name> max-powermax-volumes-per-node=<volume_limit>`
@@ -647,7 +647,7 @@ The CSI Driver for Dell PowerMax supports NVMeTCP from v2.11.0. To enable NVMe/T
 
 **Limitations**<br>
 These are the CSM modules not supported with NVMeTCP protocol:
-- CSM Authorization
-- CSM Observability
-- CSM Application Mobility
+- Container Storage Module Authorization
+- Container Storage Module Observability
+- Container Storage Module Application Mobility
 - Metro Replication

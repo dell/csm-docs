@@ -3,13 +3,13 @@ title: Installer
 linktitle: Installer
 weight: 3
 description: >
-  Dell Container Storage Modules (CSM) for Observability Installer
+  Container Storage Modules (CSM) for Observability Installer
 ---
 {{% pageinfo color="primary" %}}
 {{< message text="1" >}}
 {{% /pageinfo %}}
 <!--
-Copyright (c) 2020-2023 Dell Inc., or its subsidiaries. All Rights Reserved.
+Copyright (c) 2020-2024 Dell Inc., or its subsidiaries. All Rights Reserved.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -19,21 +19,17 @@ You may obtain a copy of the License at
 -->
 
 The Container Storage Modules (CSM) for Observability installer bootstraps Helm to create a more simplified and robust deployment option that does the following:
-- Verifies CSM for Observability is not yet installed
-- Verifies the Kubernetes/Openshift versions are supported
-- Verifies the Helm version is supported
-- Adds the Dell Helm chart repository
-- Refreshes the Helm chart repositories to download any recent changes
-- Creates the CSM namespace (if not already created)
-- Copies the secrets from the CSI driver namespaces into the CSM namespace (if not already copied)
-- Installs the CertManager CRDs (if not already installed)
-- Installs the CSM for Observability Helm chart
-- Waits for the CSM for Observability pods to become ready
+- Checking if Container Storage Modules for Observability is installed
+- Verifying Kubernetes/OpenShift and Helm versions
+- Adding and refreshing the Dell Helm chart repository
+- Creating the CSM namespace and copying secrets
+- Installing CertManager CRDs and the Container Storage Modules Helm chart
+- Waiting for CSM pods to be ready
 
-If the Authorization module is enabled for the CSI drivers installed in the same Kubernetes cluster, the installer will perform the current steps to enable CSM for Observability to use the same Authorization instance:
+If the Authorization module is enabled for the CSI drivers installed in the same Kubernetes cluster, the installer will perform the current steps to enable Container Storage Modules Observability to use the same Authorization instance:
 - Verifies the `karavictl` binary is available.
 - Verifies the appropriate Secrets and ConfigMap exist in the CSI driver namespace.
-- Updates the CSM for Observability deployment to use the existing Authorization instance if not already enabled during the initial installation of CSM for Observability.
+- Updates the Container Storage Modules Observability deployment to use the existing Authorization instance if not already enabled during the initial installation of Container Storage Modules Observability.
 
 ## Prerequisites
 
@@ -42,18 +38,18 @@ If the Authorization module is enabled for the CSI drivers installed in the same
 
 ## Online Installer
 
-Follow the instructions below to install CSM for Observability in an environment that has an Internet connection and is capable of downloading the required Helm chart and Docker images.
+Follow the instructions below to install Container Storage Module Observability in an environment that has an Internet connection and is capable of downloading the required Helm chart and Docker images.
 The installer expects CSI drivers are using the default secret and configmap names.
 
 ### Dependencies
 
-A Linux-based system, with Internet access, will be used to execute the script to install CSM for Observability into a Kubernetes/Openshift environment that also has Internet access.
+A Linux-based system, with Internet access, will be used to execute the script to install Container Storage Modules Observability into a Kubernetes/Openshift environment that also has Internet access.
 
 | Dependency            | Usage |
 | --------------------- | ----- |
 | `kubectl`   | `kubectl` will be used to verify the Kubernetes/OpenShift environment|
-| `helm`   | `helm` will be used to install the CSM for Observability helm chart|
-| `jq`     | `jq` will be used to parse the CSM for Authorization configuration file during installation|
+| `helm`   | `helm` will be used to install the Container Storage Module Observability helm chart|
+| `jq`     | `jq` will be used to parse the CContainer Storage Module Authorization configuration file during installation|
 
 
 ### Installer Usage
@@ -84,11 +80,11 @@ Options:
   --help                                                      Help
 ```
 
-__Note:__ CSM for Authorization currently does not support the Observability module for PowerStore. Therefore setting `enable-authorization` is not supported in this case.
+__Note:__ Container Storage Module for Authorization currently does not support the Observability module for PowerStore. Therefore setting `enable-authorization` is not supported in this case.
 
 ### Executing the Installer
 
-To perform an online installation of CSM for Observability, the following steps should be performed:
+To perform an online installation of Container Storage Module Observability, the following steps should be performed:
 
 1. Clone the GitHub repository:
     ```bash
@@ -101,15 +97,15 @@ To perform an online installation of CSM for Observability, the following steps 
     ```
 
 3. Execute the installation script.
-    The following example will install CSM for Observability into the CSM namespace.
+    The following example will install Container Storage Module Observability into the CSM namespace.
 
     A sample values.yaml file is located [here](https://github.com/dell/helm-charts/blob/main/charts/karavi-observability/values.yaml). This can be copied into a file named `myvalues.yaml` and modified accordingly for the installer command below. Configuration options are outlined in the [Helm chart deployment section](../deployment#configuration).
 
     __Note:__
-    - The default `values.yaml` is configured to deploy the CSM for Observability Topology service on install.
-    - If CSM for Authorization is enabled for CSI PowerFlex, the `karaviMetricsPowerflex.authorization` parameters must be properly configured in `myvalues.yaml` for CSM Observability.
-    - If CSM for Authorization is enabled for CSI PowerScale, the `karaviMetricsPowerscale.authorization` parameters must be properly configured in `myvalues.yaml` for CSM Observability.
-    - If CSM for Authorization is enabled for CSI PowerMax, the `karaviMetricsPowerMax.authorization` parameters must be properly configured in `myvalues.yaml` for CSM Observability.
+ - The default `values.yaml` deploys the CSM for Observability Topology service.
+ - For CSI PowerFlex with Authorization, configure `karaviMetricsPowerflex.authorization` in `myvalues.yaml`.
+ - For CSI PowerScale with Authorization, configure `karaviMetricsPowerscale.authorization` in `myvalues.yaml`.
+ - For CSI PowerMax with Authorization, configure `karaviMetricsPowerMax.authorization` in `myvalues.yaml`
 
     ```bash
 

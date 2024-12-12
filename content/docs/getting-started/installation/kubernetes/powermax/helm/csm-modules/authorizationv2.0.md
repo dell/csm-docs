@@ -3,7 +3,7 @@ title: Authorization v2.0
 linktitle: "Authorization v2.0" 
 weight: 2
 description: >
-  Dell Technologies (Dell) Container Storage Modules (CSM) for Authorization v2.0 Operator deployment
+  Container Storage Modules (CSM) for Authorization v2.0 Operator deployment
 ---
 
 {{<include "content/docs/getting-started/helmmodules/authorizationv2.0.md">}}

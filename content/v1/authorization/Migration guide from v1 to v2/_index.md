@@ -3,13 +3,13 @@ title: Authorization - v2 Migration guide
 linktitle: Migration Guide From v1 to v2
 weight: 1
 description: >
-  CSM for Authorization v1 to v2 Migration Guide
+  Container Storage Module for Authorization v1 to v2 Migration Guide
 ---
-CSM for Authorization v2 has significant architectural changes that prevent a user from upgradng CSM for Authorization v1 to CSM for Authorization v2. This page provides a reference guide for migrating v1 to v2 using Powerflex as an example.
+Container Storage Module for Authorization v2 has significant architectural changes that prevent a user from upgrading Authorization v1 to Authorization v2. This page provides a reference guide for migrating v1 to v2 using Powerflex as an example.
 
 **Before migration please note following points**
   - CSM for Authorization v2 calculates the actual usage of capacity provisioned by syncing with the array.
-  - Volumes belonging to a tenant are identified using the **Volume Prefix** configured in csmtenant custom resource.
+  - Volumes belonging to a tenant are identified using the **Volume Prefix** configured in csm tenant custom resource.
   - Volumes without the **Volume Prefix** will not be accounted for in usage capacity calculation as ownership of the volume is unknown without the volume prefix.
   - User should rename all volumes that are needed to be accounted for with the **Volume Prefix** before migration to v2. See the [Prerequisites](#prerequisites).
 
@@ -30,7 +30,7 @@ On the storage array, rename each volume with your chosen tenant prefix. For exa
 
 ## Storage Systems
 
-In CSM for Authorization v1 setup, list the storage to get all the storage systems configured in the environment.
+In Authorization v1 setup, list the storage to get all the storage systems configured in the environment.
 Example:
 
 ```
@@ -78,9 +78,9 @@ spec:
 
 ## Role and Role Binding
 
-In CSM for Authorization v2, role creation is simpler. User will not be required to bind the role, only thing user needs to do is create roles that are needed.
+In Authorization v2, role creation is simpler. User will not be required to bind the role, only thing user needs to do is create roles that are needed.
 
-List all the roles that are created in CSM for Authorization v1 setup.
+List all the roles that are created in Authorization v1 setup.
 Example:
 ```
 karavictl role list --admin-token admintoken.yaml --addr csm-authorization.host.com

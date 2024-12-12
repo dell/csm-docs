@@ -30,7 +30,7 @@ You can find all the created resources in `unity` namespace.
 
 ## Support for SLES 15
 
-The CSI Driver for Dell Unity XT requires these of packages installed on all worker nodes that run on SLES 15.
+The CSI Driver for Unity XT requires these of packages installed on all worker nodes that run on SLES 15.
 
 - open-iscsi **open-iscsi is required in order to make use of iSCSI protocol for provisioning**
 - nfs-utils **nfs-utils is required in order to make use of NFS protocol for provisioning**

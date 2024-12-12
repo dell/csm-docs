@@ -7,7 +7,7 @@ weight: 2
 ---
 ### Install Helm 3.0
 
-Install Helm 3.0 on the master node before you install the CSI Driver for Dell PowerScale.
+Install Helm 3.0 on the master node before you install the CSI Driver for PowerScale.
 
 **Steps**
 
@@ -25,7 +25,7 @@ Install Helm 3.0 on the master node before you install the CSI Driver for Dell P
 
 ## Prerequisites
 
-The following are requirements to be met before installing the CSI Driver for Dell PowerScale:
+The following are requirements to be met before installing the CSI Driver for PowerScale:
 
 - Install Kubernetes or OpenShift (see [supported versions](../../../../../csidriver/#features-and-capabilities))
 - Install Helm 3
@@ -209,7 +209,7 @@ Create isilon-creds secret using the following command:
    - For the key isiIP/endpoint, the user can give either IP address or FQDN. Also, the user can prefix 'https' (For example, https://192.168.1.1) with the value.
    - The *isilon-creds* secret has a *mountEndpoint* parameter which should only be updated and used when [Authorization](../../../../../authorization) is enabled.
 
-7. Install OneFS CA certificates by following the instructions from the next section, if you want to validate OneFS API server's certificates. If not, create an empty secret using the following command and an empty secret must be created for the successful installation of CSI Driver for Dell PowerScale.
+7. Install OneFS CA certificates by following the instructions from the next section, if you want to validate OneFS API server's certificates. If not, create an empty secret using the following command and an empty secret must be created for the successful installation of CSI Driver for PowerScale.
     ```bash
     kubectl create -f empty-secret.yaml
     ```
@@ -258,7 +258,7 @@ kubectl create secret generic isilon-certs-0 -n isilon --from-file=cert-0=ca_cer
 
 ### Dynamic update of array details via secret.yaml
 
-CSI Driver for Dell PowerScale now provides supports for Multi cluster. Now users can link the single CSI Driver to multiple OneFS Clusters by updating *secret.yaml*. Users can now update the isilon-creds secret by editing the *secret.yaml* and executing the following command
+CSI Driver for PowerScale now provides supports for Multi cluster. Now users can link the single CSI Driver to multiple OneFS Clusters by updating *secret.yaml*. Users can now update the isilon-creds secret by editing the *secret.yaml* and executing the following command
 
 ```bash
 kubectl create secret generic isilon-creds -n isilon --from-file=config=secret.yaml -o yaml --dry-run=client | kubectl replace -f -
@@ -268,7 +268,7 @@ kubectl create secret generic isilon-creds -n isilon --from-file=config=secret.y
 
 ## Storage Classes
 
-The CSI driver for Dell PowerScale version 1.5 and later, `dell-csi-helm-installer` does not create any storage classes as part of the driver installation. A sample storage class manifest is available at `samples/storageclass/isilon.yaml`. Use this sample manifest to create a storageclass to provision storage; uncomment/ update the manifest as per the requirements.
+The CSI driver for PowerScale version 1.5 and later, `dell-csi-helm-installer` does not create any storage classes as part of the driver installation. A sample storage class manifest is available at `samples/storageclass/isilon.yaml`. Use this sample manifest to create a storageclass to provision storage; uncomment/ update the manifest as per the requirements.
 
 ### What happens to my existing storage classes?
 
@@ -359,20 +359,12 @@ output: mount.nfs: access denied by server while mounting XX.XX.XX.XX:/ifs/data/
 ```
 {{< /accordion >}}  
 
-
-{{< accordion id="Three" title="CSM Modules" >}} 
-      
+{{< accordion id="Three" title="CSM Modules" >}}
 {{< cardcontainer >}}
-    {{< customcard link1="./csm-modules/authorizationv1.x"  image="1" title="Authorization v1.x" >}}
-
-    {{< customcard link1="./csm-modules/authorizationv2.0"   image="1" title="Authorization v2.0"  >}}
-
-    {{< customcard  link1="./csm-modules/observability"   image="1" title="Observability"  >}}
-
-    {{< customcard  link1="./csm-modules/replication"  image="1" title="Replication"  >}} 
-
-    {{< customcard link1="./csm-modules/resiliency"   image="1" title="Resiliency"  >}}
-
+  {{< customcard link1="./csm-modules/authorizationv1.x" image="1" title="Authorization v1.x" >}}
+  {{< customcard link1="./csm-modules/authorizationv2.0" image="1" title="Authorization v2.0" >}}
+  {{< customcard  link1="./csm-modules/observability" image="1" title="Observability"  >}}
+  {{< customcard  link1="./csm-modules/replication" image="1" title="Replication"  >}}
+  {{< customcard link1="./csm-modules/resiliency" image="1" title="Resiliency"  >}}
 {{< /cardcontainer >}}
-
-{{< /accordion >}}  
+{{< /accordion >}}

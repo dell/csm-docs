@@ -3,10 +3,10 @@ title: "Resiliency"
 linkTitle: "Resiliency"
 weight: 6
 Description: >
-  Dell Container Storage Modules (CSM) for Resiliency
+  Container Storage Modules (CSM) for Resiliency
 ---
 
-[Container Storage Modules](https://github.com/dell/csm) (CSM) for Resiliency is part of the  open-source suite of Kubernetes storage enablers for Dell products.
+[Container Storage Modules](https://github.com/dell/csm) for Resiliency is part of the  open-source suite of Kubernetes storage enablers for Dell products.
 
 User applications can have problems if you want their Pods to be resilient to node failure. This is especially true of those deployed with StatefulSets that use PersistentVolumeClaims. Kubernetes guarantees that there will never be two copies of the same StatefulSet Pod running at the same time and accessing storage. Therefore, it does not clean up StatefulSet Pods if the node executing them fails.
  
@@ -14,19 +14,19 @@ For the complete discussion and rationale, you can read the [pod-safety design p
 
 For more background on the forced deletion of Pods in a StatefulSet, please visit [Force Delete StatefulSet Pods](https://kubernetes.io/docs/tasks/run-application/force-delete-stateful-set-pod/#:~:text=In%20normal%20operation%20of%20a,1%20are%20alive%20and%20ready).
 
-CSM for Resiliency and [Non graceful node shutdown](https://github.com/kubernetes/enhancements/tree/master/keps/sig-storage/2268-non-graceful-shutdown) are mutually exclusive. One shall use either CSM for Resiliency or Non graceful node shutdown feature provided by Kubernetes.
+Container Storage Module for Resiliency and [Non graceful node shutdown](https://github.com/kubernetes/enhancements/tree/master/keps/sig-storage/2268-non-graceful-shutdown) are mutually exclusive. One shall use either Resiliency or Non graceful node shutdown feature provided by Kubernetes.
 
-## CSM for Resiliency High-Level Description
+## Container Storage Module for Resiliency High-Level Description
 
-CSM for Resiliency is designed to make Kubernetes Applications, including those that utilize persistent storage, more resilient to various failures. The first component of the Resiliency module is a pod monitor that is specifically designed to protect stateful applications from various failures. It is not a standalone application, but rather is deployed as a _sidecar_ to CSI (Container Storage Interface) drivers, in both the driver's controller pods and the driver's node pods. Deploying CSM for Resiliency as a sidecar allows it to make direct requests to the driver through the Unix domain socket that Kubernetes sidecars use to make CSI requests.
+Resiliency is designed to make Kubernetes Applications, including those that utilize persistent storage, more resilient to various failures. The first component of the Resiliency module is a pod monitor that is specifically designed to protect stateful applications from various failures. It is not a standalone application, but rather is deployed as a _sidecar_ to CSI (Container Storage Interface) drivers, in both the driver's controller pods and the driver's node pods. Deploying Container Storage ModuleResiliency as a sidecar allows it to make direct requests to the driver through the Unix domain socket that Kubernetes sidecars use to make CSI requests.
 
-Some of the methods CSM for Resiliency invokes in the driver are standard CSI methods, such as NodeUnpublishVolume, NodeUnstageVolume, and ControllerUnpublishVolume. CSM for Resiliency also uses proprietary calls that are not part of the standard CSI specification. Currently, there is only one, ValidateVolumeHostConnectivity that returns information on whether a host is connected to the storage system and/or whether any I/O activity has happened in the recent past from a list of specified volumes. This allows CSM for Resiliency to make more accurate determinations about the state of the system and its persistent volumes. CSM for Resiliency is designed to adhere to pod affinity settings of pods.
+Some of the methods Resiliency invokes in the driver are standard CSI methods, such as NodeUnpublishVolume, NodeUnstageVolume, and ControllerUnpublishVolume. Resiliency also uses proprietary calls that are not part of the standard CSI specification. Currently, there is only one, ValidateVolumeHostConnectivity that returns information on whether a host is connected to the storage system and/or whether any I/O activity has happened in the recent past from a list of specified volumes. This allows for Resiliency to make more accurate determinations about the state of the system and its persistent volumes. Resiliency is designed to adhere to pod affinity settings of pods.
 
-Accordingly, CSM for Resiliency is adapted to and qualified with each CSI driver it is to be used with. Different storage systems have different nuances and characteristics that CSM for Resiliency must take into account.
+Accordingly,Resiliency is adapted to and qualified with each CSI driver it is to be used with. Different storage systems have different nuances and characteristics for Resiliency must take into account.
 
-## CSM for Resiliency Capabilities
+## Container Storage Module for Resiliency Capabilities
 
-CSM for Resiliency provides the following capabilities:
+Container Storage Module for Resiliency provides the following capabilities:
 
 {{<table "table table-striped table-bordered table-sm">}}
 | Capability                              | PowerScale | Unity XT | PowerStore | PowerFlex | PowerMax |
@@ -55,20 +55,20 @@ CSM for Resiliency provides the following capabilities:
 
 ## Supported CSI Drivers
 
-CSM for Resiliency supports the following CSI drivers and versions.
+Container Storage Module for Resiliency supports the following CSI drivers and versions.
 {{<table "table table-striped table-bordered table-sm">}}
 | Storage Array                     | CSI Driver   | Supported Versions |
 | --------------------------------- | :----------: | :----------------: |
-| CSI Driver for Dell PowerFlex | [csi-powerflex](https://github.com/dell/csi-powerflex) | v2.0.0 + |
-| CSI Driver for Dell Unity XT  | [csi-unity](https://github.com/dell/csi-unity)         | v2.0.0 + |
-| CSI Driver for Dell PowerScale  | [csi-powerscale](https://github.com/dell/csi-powerscale) | v2.3.0 + |
-| CSI Driver for Dell PowerStore  | [csi-powerstore](https://github.com/dell/csi-powerstore) | v2.6.0 + |
-| CSI Driver for Dell PowerMax | [csi-powermax](https://github.com/dell/csi-powermax) | v2.11.0 + |
+| CSI Driver for PowerFlex | [csi-powerflex](https://github.com/dell/csi-powerflex) | v2.0.0 + |
+| CSI Driver for Unity XT  | [csi-unity](https://github.com/dell/csi-unity)         | v2.0.0 + |
+| CSI Driver for PowerScale  | [csi-powerscale](https://github.com/dell/csi-powerscale) | v2.3.0 + |
+| CSI Driver for PowerStore  | [csi-powerstore](https://github.com/dell/csi-powerstore) | v2.6.0 + |
+| CSI Driver for PowerMax | [csi-powermax](https://github.com/dell/csi-powermax) | v2.11.0 + |
 {{</table>}}
 
 ### PowerFlex Support
 
-PowerFlex is a highly scalable array that is very well suited to Kubernetes deployments. The CSM for Resiliency support for PowerFlex leverages these PowerFlex features:
+PowerFlex is a highly scalable array that is very well suited to Kubernetes deployments. The Container Storage Module for Resiliency support for PowerFlex leverages these PowerFlex features:
 
 * Very quick detection of Array I/O Network Connectivity status changes (generally takes 1-2 seconds for the array to detect changes)
 * A robust mechanism if Nodes are doing I/O to volumes (sampled over a 5-second period).
@@ -77,9 +77,9 @@ PowerFlex is a highly scalable array that is very well suited to Kubernetes depl
 
 ### Unity XT Support
 
-Dell Unity XT is targeted for midsized deployments, remote or branch offices, and cost-sensitive mixed workloads. Unity XT systems are designed to deliver the best value in the market. They support all-Flash, and are available in purpose-built (all Flash or hybrid Flash), converged deployment options (through VxBlock), and software-defined virtual edition.
+Unity XT is targeted for mid sized deployments, remote or branch offices, and cost-sensitive mixed workloads. Unity XT systems are designed to deliver the best value in the market. They support all-Flash, and are available in purpose-built (all Flash or hybrid Flash), converged deployment options (through VxBlock), and software-defined virtual edition.
 
-* Unity XT (purpose-built): A modern midrange storage solution, engineered from the groundup to meet market demands for Flash, affordability and incredible simplicity. The Unity XT Family is available in 12 All Flash models and 12 Hybrid models.
+* Unity XT (purpose-built): A modern midrange storage solution, engineered from the ground up to meet market demands for Flash, affordability and incredible simplicity. The Unity XT Family is available in 12 All Flash models and 12 Hybrid models.
 * VxBlock (converged): Unity XT storage options are also available in Dell VxBlock System 1000.
 * UnityVSA (virtual): The Unity XT Virtual Storage Appliance (VSA) allows the advanced unified storage and data management features of the Unity XT family to be easily deployed on VMware ESXi servers. This allows for a ‘software defined’ approach. UnityVSA is available in two editions:
   * Community Edition is a free downloadable 4 TB solution recommended for nonproduction use.
@@ -89,7 +89,7 @@ All three deployment options, Unity XT, UnityVSA, and Unity-based VxBlock, enjoy
 
 ### PowerScale Support
 
-PowerScale is a highly scalable NFS array that is very well suited to Kubernetes deployments. The CSM for Resiliency support for PowerScale leverages the following PowerScale features:
+PowerScale is a highly scalable NFS array that is very well suited to Kubernetes deployments. The Container Storage Module for Resiliency support for PowerScale leverages the following PowerScale features:
 
 * Detection of Array I/O Network Connectivity status changes.
 * A robust mechanism to detect if Nodes are actively doing I/O to volumes.
@@ -97,7 +97,7 @@ PowerScale is a highly scalable NFS array that is very well suited to Kubernetes
 
 ### PowerStore Support
 
-PowerStore is a highly scalable array that is very well suited to Kubernetes deployments. The CSM for Resiliency support for PowerStore leverages the following PowerStore features:
+PowerStore is a highly scalable array that is very well suited to Kubernetes deployments. The Container Storage Module for Resiliency support for PowerStore leverages the following PowerStore features:
 
 * Detection of Array I/O Network Connectivity status changes.
 * A robust mechanism to detect if Nodes are actively doing I/O to volumes.
@@ -105,7 +105,7 @@ PowerStore is a highly scalable array that is very well suited to Kubernetes dep
 
 ### PowerMax Support
 
-PowerMax is the highest performing block storage array  that is very well suited to Kubernetes deployments. The CSM for Resiliency support for PowerMax leverages the following PowerMax features:
+PowerMax is the highest performing block storage array  that is very well suited to Kubernetes deployments. The Container Storage Module for Resiliency support for PowerMax leverages the following PowerMax features:
 
 * Detection of Array I/O Network Connectivity status changes.
 * A robust mechanism to detect if Nodes are actively doing I/O to volumes.
@@ -113,7 +113,7 @@ PowerMax is the highest performing block storage array  that is very well suited
 
 ## Limitations and Exclusions
 
-This file contains information on Limitations and Exclusions that users should be aware of. Additionally, there are driver specific limitations and exclusions that may be called out in the [Deploying CSM for Resiliency](../deployment/helm/modules/installation/resiliency/) page.
+This file contains information on Limitations and Exclusions that users should be aware of. Additionally, there are driver specific limitations and exclusions that may be called out in the [Deploying Container Storage Module for Resiliency](../deployment/helm/modules/installation/resiliency/) page.
 
 ### Supported and Tested Operating Modes
 
@@ -136,11 +136,11 @@ The following provisioning types are supported and have been tested:
 
 * ReadWriteMany volumes. This may have issues if a node has multiple pods accessing the same volumes. In any case once pod cleanup fences the volumes on a node, they will no longer be available to any pods using those volumes on that node. We will endeavor to support this in the future.
 
-* Multiple instances of the same driver type (for example two CSI driver for Dell PowerFlex deployments.)
+* Multiple instances of the same driver type (for example two CSI driver for PowerFlex deployments.)
 
 * PowerFlex with Resiliency is not supported for NFS protocol.
 
-## Deploying and Managing Applications Protected by CSM for Resiliency
+## Deploying and Managing Applications Protected by Container Storage Module for Resiliency
 
  The first thing to remember about _CSM for Resiliency_ is that it only takes action on pods configured with the designated label. Both the key and the value have to match what is in the podmon helm configuration. CSM for Resiliency emits a log message at startup with the label key and value it is using to monitor pods:
 
@@ -158,7 +158,7 @@ pmtu2       podmontest-0   1/1     Running   0          3m8s
 pmtu3       podmontest-0   1/1     Running   0          3m6s
  ```
 
- If CSM for Resiliency detects a problem with a pod caused by a node or other failure that it can initiate remediation for, it will add an event to that pod's events:
+ If Container Storage Module for Resiliency detects a problem with a pod caused by a node or other failure that it can initiate remediation for, it will add an event to that pod's events:
  ```bash
  kubectl get events -n pmtu1
  ```
@@ -168,7 +168,7 @@ pmtu3       podmontest-0   1/1     Running   0          3m6s
 ...
  ```
 
- CSM for Resiliency may also generate events if it is unable to clean up a pod for some reason. For example, it may not clean up a pod because the pod is still doing I/O to the array.
+ Container Storage Module for Resiliency may also generate events if it is unable to clean up a pod for some reason. For example, it may not clean up a pod because the pod is still doing I/O to the array.
 
 Similarly, the label selector for csi-powerscale, csi-unity, csi-powerstore and csi-powermax would be as shown respectively.
  ```yaml
@@ -179,24 +179,24 @@ Similarly, the label selector for csi-powerscale, csi-unity, csi-powerstore and 
  ```
 
  #### Important
- Before putting an application into production that relies on CSM for Resiliency monitoring, it is important to do a few test failovers first. To do this take the node that is running the pod offline for at least 2-3 minutes. Verify that there is an event message similar to the one above is logged, and that the pod recovers and restarts normally with no loss of data. (Note that if the node is running many CSM for Resiliency protected pods, the node may need to be down longer for CSM for Resiliency to have time to evacuate all the protected pods.)
+ Before putting an application into production that relies on Container Storage Module for Resiliency monitoring, it is important to do a few test failovers first. To do this take the node that is running the pod offline for at least 2-3 minutes. Verify that there is an event message similar to the one above is logged, and that the pod recovers and restarts normally with no loss of data. (Note that if the node is running many Container Storage Module for Resiliency protected pods, the node may need to be down longer for Container Storage Module for Resiliency to have time to evacuate all the protected pods.)
 
  ### Application Recommendations
 
- 1. It is recommended that pods that will be monitored by CSM for Resiliency be configured to exit if they receive any I/O errors. That should help achieve the recovery as quickly as possible.
+ 1. It is recommended that pods that will be monitored by Container Storage Module for Resiliency be configured to exit if they receive any I/O errors. That should help achieve the recovery as quickly as possible.
 
- 2. CSM for Resiliency does not directly monitor application health. However, if standard Kubernetes health checks are configured, that may help reduce pod recovery time in the event of node failure, as CSM for Resiliency should receive an event that the application is Not Ready. Note that a Not Ready pod is not sufficient to trigger CSM for Resiliency action unless there is also some condition indicating a Node failure or problem, such as the Node is tainted, or the array has lost connectivity to the node.
+ 2. Container Storage Module for Resiliency does not directly monitor application health. However, if standard Kubernetes health checks are configured, that may help reduce pod recovery time in the event of node failure, as Container Storage Module for Resiliency should receive an event that the application is Not Ready. Note that a Not Ready pod is not sufficient to trigger Container Storage Module for Resiliency action unless there is also some condition indicating a Node failure or problem, such as the Node is tainted, or the array has lost connectivity to the node.
 
- 3. As noted previously in the Limitations and Exclusions section, CSM for Resiliency has not yet been verified to work with ReadWriteMany or ReadOnlyMany volumes. Also, it has not been verified to work with pod controllers other than StatefulSet.
+ 3. As noted previously in the Limitations and Exclusions section, Container Storage Module for Resiliency has not yet been verified to work with ReadWriteMany or ReadOnlyMany volumes. Also, it has not been verified to work with pod controllers other than StatefulSet.
 
  ### Storage Array Upgrades
-To avoid application pods getting stuck in a Pending state, CSM for Resiliency should be disabled for storage array upgrades; even if the storage array upgrade is advertised as non-distruptive. If the container orchestrator platform nodes lose connectivity with the array, which is more likely during an upgrade, then Resiliency will delete the application pods on the affected nodes and attempt to move them to a healthy node. If all of the nodes are affected, then the application pods will be stuck in a Pending state.
+To avoid application pods getting stuck in a Pending state, Container Storage Module for Resiliency should be disabled for storage array upgrades; even if the storage array upgrade is advertised as non-distruptive. If the container orchestrator platform nodes lose connectivity with the array, which is more likely during an upgrade, then Resiliency will delete the application pods on the affected nodes and attempt to move them to a healthy node. If all of the nodes are affected, then the application pods will be stuck in a Pending state.
 
 ## Recovering From Failures
 
-Normally CSM for Resiliency should be able to move pods that have been impacted by Node Failures to a healthy node. After the failed nodes have come back online, CSM for Resiliency cleans them up (especially any potential zombie pods) and then automatically removes the CSM for Resiliency node taint that prevents pods from being scheduled to the failed node(s). There are a few cases where this cannot be fully automated and operator intervention is required, including:
+Normally Container Storage Module for Resiliency should be able to move pods that have been impacted by Node Failures to a healthy node. After the failed nodes have come back online, Container Storage Module for Resiliency cleans them up (especially any potential zombie pods) and then automatically removes the Container Storage Module for Resiliency node taint that prevents pods from being scheduled to the failed node(s). There are a few cases where this cannot be fully automated and operator intervention is required, including:
 
-1. CSM for Resiliency expects that when a node failure occurs, all CSM for Resiliency labeled pods are evacuated and rescheduled on other nodes. This process may not complete however if the node comes back online before CSM for Resiliency has had time to evacuate all the labeled pods. The remaining pods may not restart correctly, going to "Error" or "CrashLoopBackoff". We are considering some possible remediation for this condition but have not implemented them yet.
+1. Container Storage Module for Resiliency expects that when a node failure occurs, all Container Storage Module for Resiliency labeled pods are evacuated and rescheduled on other nodes. This process may not complete however if the node comes back online before Container Storage Module for Resiliency has had time to evacuate all the labeled pods. The remaining pods may not restart correctly, going to "Error" or "CrashLoopBackoff". We are considering some possible remediation for this condition but have not implemented them yet.
 
     If this happens, try deleting the pod with "kubectl delete pod ...". In our experience this normally will cause the pod to be restarted and transition to the "Running" state.
 
@@ -207,13 +207,13 @@ Normally CSM for Resiliency should be able to move pods that have been impacted 
     ```yaml
     pods skipped for cleanup because still present: <pod-list>
     ```
-    If this happens, __DO NOT__ manually remove the CSM for Resiliency node taint. Doing so could possibly cause data corruption if volumes were not cleaned up, and a pod using those volumes was subsequently scheduled to that node.
+    If this happens, __DO NOT__ manually remove the Container Storage Module for Resiliency node taint. Doing so could possibly cause data corruption if volumes were not cleaned up, and a pod using those volumes was subsequently scheduled to that node.
 
     The correct course of action in this case is to reboot the failed node(s) that have not removed their taints in a reasonable time (5-10 minutes after the node is online again.) The operator can delay executing this reboot until it is convenient, but new pods will not be scheduled to it in the interim. This reboot will cancel any potential zombie pods. After the reboot, node-podmon should automatically remove the node taint after a short time.
 
 ## Testing Methodology and Results
 
-A three tier testing methodology is used for CSM for Resiliency:
+A three tier testing methodology is used for Container Storage Module for Resiliency:
 
 1. Unit testing with high coverage (>90% statement) tests the program logic and is especially used to test the error paths by injecting faults.
 2. An integration test describes test scenarios in Gherkin that sets up specific testing scenarios executed against a Kubernetes test cluster. The tests use ranges for many of the parameters to add an element of "chaos testing".

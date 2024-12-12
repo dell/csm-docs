@@ -12,17 +12,16 @@ Container Storage Modules (CSM) for Replication Controller requires access to re
 2. Using ServiceAccount token
 
 You need to create secrets (using either of the two methods) in each cluster involved in replication and provide their references in `ConfigMap` objects which are used to configure
-the respective CSM Replication Controllers.
+the respective Container Storage Module Replication Controllers.
 
 >Important: Direct network visibility between clusters required for CSM-Replication to work.
 > Cluster-1's API URL has to be pingable from cluster-2 pods and vice versa. If private networks are used and/or DNS is not set up properly - you may need to modify `/etc/hosts` file from within controller's pod.
 > This can be achieved by using helm installation method. Refer to this [link.](../installation/#using-the-installation-script)
 
-
 >Note: If you are using a single stretched cluster, then you can skip all the following steps
 
 ### Inject configuration using repctl
-This is the simplest way to configure CSM Replication Controller.
+This is the simplest way to configure Container Storage Module Replication Controller.
 `repctl` simplifies the complex configuration process greatly by enabling creation of secrets and updating their references in multiple clusters.
 
 #### Recommended method
@@ -94,12 +93,10 @@ Continuing from our earlier example with Cluster A & Cluster B:
     ```
 3. Create a ClusterRoleBinding in _Cluster B_ for the user:
    ```shell
-
    kubectl create clusterrolebinding <name> --clusterrole=dell-replication-manager-role --user=<user-name>
    ```
 4. Create a secret in _Cluster A_ using the kubeconfig file for this user:
    ```shell
-
    kubectl create secret generic <secret-name> --from-file=data=<kubeconfig_file_user> --namespace dell-replication-controller
    ```
 

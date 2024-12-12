@@ -2,7 +2,7 @@
 title: RPM
 linktitle: RPM 
 description: >
-  Dell Technologies (Dell) Container Storage Modules (CSM) for Authorization RPM backup and restore
+ Container Storage Modules (CSM) for Authorization RPM backup and restore
 ---
 
 {{% pageinfo color="primary" %}}

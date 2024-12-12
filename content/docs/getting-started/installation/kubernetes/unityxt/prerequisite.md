@@ -18,16 +18,16 @@ Before you install CSI Driver for Unity XT, verify the requirements that are men
 
 ### Fibre Channel requirements
 
-Dell Unity XT supports Fibre Channel communication. If you use the Fibre Channel protocol, ensure that the
-following requirement is met before you install the CSI Driver for Dell Unity XT:
+Unity XT supports Fibre Channel communication. If you use the Fibre Channel protocol, ensure that the
+following requirement is met before you install the CSI Driver for Unity XT:
 - Zoning of the Host Bus Adapters (HBAs) to the Fibre Channel port must be done.
 
 ### Set up the iSCSI Initiator
 
-The CSI Driver for Dell Unity XT supports iSCSI connectivity.
+The CSI Driver for Unity XT supports iSCSI connectivity.
 
 If you use the iSCSI protocol, set up the iSCSI initiators as follows:
-- Ensure that each Kubernetes worker node has network connectivity to an iSCSI port on the Dell Unity XT array, allowing access via IP interfaces. Manually create the necessary IP routes.
+- Ensure that each Kubernetes worker node has network connectivity to an iSCSI port on the Unity XT array, allowing access via IP interfaces. Manually create the necessary IP routes.
 - Ensure that the necessary iSCSI initiator utilities are installed on each Kubernetes worker node. This typically includes the _iscsi-initiator-utils_ package for RHEL or _open-iscsi_ package for Ubuntu.
 - Enable and start the _iscsid_ service on each Kubernetes worker node. This service is responsible for managing the iSCSI initiator. You can enable the service by running the following command on all worker nodes: `systemctl enable --now iscsid`
 - Ensure that the unique initiator name is set in _/etc/iscsi/initiatorname.iscsi_.
@@ -36,8 +36,7 @@ For more information about configuring iSCSI, see [Dell Host Connectivity guide
 
 ### Linux multipathing requirements
 
-Dell Unity XT supports Linux multipathing. Configure Linux multipathing before installing the CSI Driver for Dell
-Unity XT.
+Unity XT supports Linux multipathing. Configure Linux multipathing before installing the CSI Driver for Unity XT.
 
 Set up Linux multipathing as follows:
 - Ensure that all nodes have the _Device Mapper Multipathing_ package installed.

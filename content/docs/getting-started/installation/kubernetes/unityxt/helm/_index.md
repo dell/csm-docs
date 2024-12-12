@@ -7,7 +7,7 @@ weight: 3
 --- 
 ### Install Helm 3.0
 
-Install Helm 3.0 on the master node before you install the CSI Driver for Dell Unity XT.
+Install Helm 3.0 on the master node before you install the CSI Driver for Unity XT.
 
 **Steps**
 

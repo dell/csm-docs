@@ -7,7 +7,7 @@ weight: 3
 ---
 ### Install Helm 3.x
 
-Install Helm 3.x on the master node before you install the CSI Driver for Dell PowerFlex.
+Install Helm 3.x on the master node before you install the CSI Driver for PowerFlex.
 
 **Steps**
 
@@ -16,16 +16,16 @@ Install Helm 3.x on the master node before you install the CSI Driver for Dell P
   ```bash
   curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
   ```
-{{< accordion id="One" title="CSM Installation Wizard" >}}
+{{< accordion id="One" title="Installation Wizard" >}}
             {{<include  "content/docs/getting-started/installation/kubernetes/installationwizardhelm.md" >}}
-{{< /accordion >}} 
+{{< /accordion >}}
 
 <br>
 
 {{< accordion id="Two" title="CSI Driver" markdown="true" >}}  
 ## Prerequisites
 
-The following are requirements that must be met before installing the CSI Driver for Dell PowerFlex:
+The following are requirements that must be met before installing the CSI Driver for PowerFlex:
 
 - Install Kubernetes or OpenShift (see [supported versions](../../../../../csidriver/#features-and-capabilities))
 - Install Helm 3.x
@@ -40,7 +40,7 @@ The following are requirements that must be met before installing the CSI Driver
 
 ### Install Helm 3.x
 
-Install Helm 3.x on the master node before you install the CSI Driver for Dell PowerFlex.
+Install Helm 3.x on the master node before you install the CSI Driver for PowerFlex.
 
 **Steps**
 
@@ -50,7 +50,7 @@ Install Helm 3.x on the master node before you install the CSI Driver for Dell P
   ```
 ### Enable Zero Padding on PowerFlex
 
-Verify that zero padding is enabled on the PowerFlex storage pools that will be used. Use PowerFlex GUI or the PowerFlex CLI to check this setting. For more information to configure this setting, see [Dell PowerFlex documentation](https://www.dell.com/support/manuals/en-us/scaleio/pfx_powerflex_config_customize_3.6.x/enable-or-disable-zero-padding-policy?guid=guid-d32bdff7-3014-4894-8e1e-2a31a86d343a&lang=en-us).
+Verify that zero padding is enabled on the PowerFlex storage pools that will be used. Use PowerFlex GUI or the PowerFlex CLI to check this setting. For more information to configure this setting, see [PowerFlex documentation](https://www.dell.com/support/manuals/en-us/scaleio/pfx_powerflex_config_customize_3.6.x/enable-or-disable-zero-padding-policy?guid=guid-d32bdff7-3014-4894-8e1e-2a31a86d343a&lang=en-us).
 
 ### Install PowerFlex Storage Data Client
 
@@ -67,7 +67,7 @@ Please visit [E-Lab Navigator](https://elabnavigator.dell.com/eln/modernHomeSSM)
 
 #### Manual SDC Deployment
 
-For detailed PowerFlex installation procedure, see the [Dell PowerFlex Deployment Guide](https://docs.delltechnologies.com/bundle/VXF_DEPLOY/page/GUID-DD20489C-42D9-42C6-9795-E4694688CC75.html). Install the PowerFlex SDC as follows:
+For detailed PowerFlex installation procedure, see the [PowerFlex Deployment Guide](https://docs.delltechnologies.com/bundle/VXF_DEPLOY/page/GUID-DD20489C-42D9-42C6-9795-E4694688CC75.html). Install the PowerFlex SDC as follows:
 
 **Steps**
 
@@ -140,14 +140,12 @@ If replication feature is enabled, ensure the secret includes all the PowerFlex 
 After editing the file, run the below command to create a secret called `vxflexos-config`. This assumes `vxflexos` is release name, but it can be modified during [install](../#install-the-driver):
 
   ```bash
-
   kubectl create secret generic vxflexos-config -n vxflexos --from-file=config=samples/secret.yaml
   ```
 
 Use the below command to replace or update the secret:
 
   ```bash
-
   kubectl create secret generic vxflexos-config -n vxflexos --from-file=config=samples/secret.yaml -o yaml --dry-run=client | kubectl replace -f -
   ```
 

@@ -3,10 +3,10 @@ title: PowerStore Metrics
 linktitle: PowerStore Metrics
 weight: 1
 description: >
-  Dell Container Storage Modules (CSM) for Observability PowerStore Metrics
+  Container Storage Modules (CSM) for Observability PowerStore Metrics
 ---
 
-This section outlines the metrics collected by the Container Storage Modules (CSM) Observability module for PowerStore. The [Grafana reference dashboards](https://github.com/dell/karavi-observability/blob/main/grafana/dashboards/powerstore) for PowerStore metrics can be uploaded to your Grafana instance.
+This section outlines the metrics collected by the Container Storage Modules Observability module for PowerStore. The [Grafana reference dashboards](https://github.com/dell/karavi-observability/blob/main/grafana/dashboards/powerstore) for PowerStore metrics can be uploaded to your Grafana instance.
 
 ## I/O Performance Metrics
 
@@ -14,7 +14,7 @@ Storage system I/O performance metrics (IOPS, bandwidth, latency) are available 
 
 To disable these metrics, set the ```karaviMetricsPowerstore.volumeMetricsEnabled``` field to false in helm/values.yaml.
 
-The following I/O performance metrics are available from the OpenTelemetry collector endpoint. Please see the [CSM for Observability](../../) for more information on deploying and configuring the OpenTelemetry collector.
+The following I/O performance metrics are available from the OpenTelemetry collector endpoint. Please see the [Container Storage Module for Observability](../../) for more information on deploying and configuring the OpenTelemetry collector.
 
 | Metric | Description |
 | - | - |
@@ -41,7 +41,7 @@ Provides visibility into the total, used, and available capacity for a storage c
 
 To disable these metrics, set the ```enable_powerstore_metrics``` field to false in helm/values.yaml.
 
-The following storage capacity metrics are available from the OpenTelemetry collector endpoint. Please see the [CSM for Observability](../../) for more information on deploying and configuring the OpenTelemetry collector.
+The following storage capacity metrics are available from the OpenTelemetry collector endpoint. Please see the [Container Storage Module for Observability](../../) for more information on deploying and configuring the OpenTelemetry collector.
 
 | Metric | Description |
 | - | - |

@@ -27,7 +27,7 @@ There are three methods of installing `cert-csi`.
 
 ### Download Release (Linux)
 
-> NOTE: Please ensure you delete any previously downloaded Cert-CSI binaries, as each release uses the same name (`cert-csi-linux-amd64`). After installing the latest version, run the `cert-csi -v` command to verify the installed version.
+> ℹ️ **NOTE:**: Please ensure you delete any previously downloaded Cert-CSI binaries, as each release uses the same name (`cert-csi-linux-amd64`). After installing the latest version, run the `cert-csi -v` command to verify the installed version.
 
 1. Download `cert-csi` from [here](https://github.com/dell/cert-csi/releases/latest/download/cert-csi-linux-amd64)
 
@@ -127,7 +127,7 @@ make install-ms
 > Database (SQLite) file for test suites is `<storage-class-name>.db` in the working directory of cert-csi.\
 > Database (SQLite) file for functional test suites is `cert-csi-functional.db` in the working directory of cert-csi.
 
-> NOTE: If using the container image, these files will be inside the container. If you are interested in these files, it is recommended to use the exectuable.
+> ℹ️ **NOTE:**: If using the container image, these files will be inside the container. If you are interested in these files, it is recommended to use the exectuable.
 
 ## Run All Test Suites
 
@@ -351,9 +351,9 @@ storageClasses:
 12. If `storageClasses.vgs` is `true`, executes the [Volume Group Snapshot]() suite.
 13. If `storageClasses.capacityTracking` exists, exeuctes the [Storage Class Capacity Tracking](#storage-capacity-tracking) suite.
 
-> NOTE: For testing/debugging purposes, it can be useful to use the `--no-cleanup` so resources do not get deleted.
+> ℹ️ **NOTE:**: For testing/debugging purposes, it can be useful to use the `--no-cleanup` so resources do not get deleted.
 
-> NOTE: If you are using CSI PowerScale with [SmartQuotas](../../csidriver/features/powerscale/#usage-of-smartquotas-to-limit-storage-consumption) disabled, the `Volume Expansion` suite is expected to timeout due to the way PowerScale provisions storage. Set `storageClasses.expansion` to `false` to skip this suite.
+> ℹ️ **NOTE:**: If you are using CSI PowerScale with [SmartQuotas](../../csidriver/features/powerscale/#usage-of-smartquotas-to-limit-storage-consumption) disabled, the `Volume Expansion` suite is expected to timeout due to the way PowerScale provisions storage. Set `storageClasses.expansion` to `false` to skip this suite.
 
 ```bash
 cert-csi certify --cert-config <path-to-config> --vsc <volume-snapshot-class>
@@ -382,7 +382,7 @@ If you are using the container image, the `cert-config` file must be mounted int
 
 ## Running Individual Test Suites
 
-> NOTE: For testing/debugging purposes, it can useful to use the `--no-cleanup` flag so resources do not get deleted.
+> ℹ️ **NOTE:**: For testing/debugging purposes, it can useful to use the `--no-cleanup` flag so resources do not get deleted.
 
 #### Volume I/O
 1. Creates the namespace `volumeio-test-*` where resources will be created.
@@ -439,7 +439,7 @@ Run `cert-csi test snap -h` for more options.
 5. Creates Volume Group Snapshot.
 6. Waits for Volume Group Snapshot state to be COMPLETE.
 
-> Note: Volume Group Snapshots are only supported by CSI PowerFlex and CSI PowerStore.
+> ℹ️ **NOTE:**: Volume Group Snapshots are only supported by CSI PowerFlex and CSI PowerStore.
 
 #### Multi-Attach Volume
 1. Creates the namespace `mas-test-*` where resources will be created.
@@ -544,7 +544,7 @@ cert-csi test volumehealthmetrics --sc <storage-class> --driver-ns <driver-names
 
 Run `cert-csi test volumehealthmetrics -h` for more options.
 
-> Note: Make sure to enable healthMonitor for the driver's controller and node pods before running this suite. It is recommended to use a smaller interval time for this sidecar.
+> ℹ️ **NOTE:**: Make sure to enable healthMonitor for the driver's controller and node pods before running this suite. It is recommended to use a smaller interval time for this sidecar.
 
 #### Ephemeral Volumes
 1. Creates namespace `functional-test` where resources will be created.

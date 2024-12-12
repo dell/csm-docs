@@ -3,12 +3,12 @@ title: Observability
 linktitle: Observability
 weight: 3
 description: >
-  Dell Technologies (Dell) Container Storage Modules (CSM) for Observability Helm deployment
+  Container Storage Modules (CSM) for Observability Helm deployment
 ---
 
 ## Post Installation Dependencies
 
-The following third-party components are required in the same Kubernetes cluster where CSM for Observability has been deployed:
+The following third-party components are required in the same Kubernetes cluster where Container Storage Module Observability has been deployed:
 
 * [Prometheus](#prometheus)
 * [Grafana](#grafana)
@@ -16,11 +16,11 @@ The following third-party components are required in the same Kubernetes cluster
 
 There are various ways to deploy these components. We recommend following the Helm deployments according to the specifications defined below. 
 
-**Tip**: CSM for Observability must be deployed first. Once the module has been deployed, you can proceed to deploying/configuring Prometheus and Grafana.
+**Tip**: Container Storage Module Observability must be deployed first. Once the module has been deployed, you can proceed to deploying/configuring Prometheus and Grafana.
 
 ### Prometheus
 
-The Prometheus service should be running on the same Kubernetes cluster as the CSM for Observability services. As part of the CSM for Observability deployment, the OpenTelemetry Collector gets deployed. CSM for Observability pushes metrics to the OpenTelemetry Collector where the metrics are consumed by Prometheus. Prometheus must be configured to scrape the metrics data from the OpenTelemetry Collector.
+Prometheus and Container Storage Module Observability services run on the same Kubernetes cluster, with Container Storage Module sending metrics to the OpenTelemetry Collector, which Prometheus then scrapes for data.
 
 | Supported Version | Image                   | Helm Chart                                                   |
 | ----------------- | ----------------------- | ------------------------------------------------------------ |
@@ -28,9 +28,9 @@ The Prometheus service should be running on the same Kubernetes cluster as the C
 
 **Note**: It is the user's responsibility to provide persistent storage for Prometheus if they want to preserve historical data.
 
-#### Prometheus Helm Deployment 
+#### Prometheus Helm Deployment
 
-Here is a sample minimal configuration for Prometheus. Please note that the configuration below uses insecure skip verify. If you wish to properly configure TLS, you will need to provide a ca_file in the Prometheus configuration. The certificate provided as part of the CSM for Observability deployment should be signed by this same CA. For more information about Prometheus configuration, see [Prometheus configuration](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#configuration).
+Here’s a minimal Prometheus configuration using insecure skip verify; for proper TLS, add a ca_file signed by the same CA as the Container Storage Module Observability certificate. More details about Prometheus configuration, see [Prometheus configuration](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#configuration).
 
 1. Create a values file named `prometheus-values.yaml`.
 
@@ -111,13 +111,13 @@ Here is a sample minimal configuration for Prometheus. Please note that the conf
 
 ### Grafana
 
-The Grafana dashboards require Grafana to be deployed in the same Kubernetes cluster as CSM for Observability.  Below are the configuration details required to properly set up Grafana to work with CSM for Observability.
+The Grafana dashboards require Grafana to be deployed in the same Kubernetes cluster as Container Storage Module Observability.  Below are the configuration details required to properly set up Grafana to work with Container Storage Module Observability.
 
 | Supported Version | Helm Chart                                                |
 | ----------------- | --------------------------------------------------------- |
 | 10.x      | [Grafana Helm chart](https://github.com/grafana/helm-charts/tree/main/charts/grafana) |
 
-**Note:** Starting from Grafana version 10.x, deprecation warnings related to the Angular plugins will be displayed in the Grafana user interface. This does not affect the functionality of the dashboards. Currently, Grafana version 11.x is not supported. 
+**Note:** From Grafana 10.x, deprecation warnings for Angular plugins will appear in the UI, but dashboards still work. **Grafana 11.x isn’t supported yet**
 
 Grafana must be configured with the following data sources/plugins:
 
@@ -142,16 +142,15 @@ Settings for the Grafana SimpleJson data source:
 | Setting             | Value                             |
 | ------------------- | --------------------------------- |
 | Name                | Karavi-Topology |
-| URL                 | Access CSM for Observability Topology service at https://karavi-topology.*namespace*.svc.cluster.local:8443 |
+| URL                 | Access Container Storage Module Observability Topology service at https://karavi-topology.*namespace*.svc.cluster.local:8443 |
 | Skip TLS Verify     | Enabled (If not using CA certificate) |
 | With CA Cert        | Enabled (If using CA certificate) |
-
 
 #### Grafana Helm Deployment
 
 Below are the steps to deploy a new Grafana instance into your Kubernetes cluster:
 
-1. Create a ConfigMap. 
+1. Create a ConfigMap.
 
     When using a network that requires a decryption certificate, the Grafana server MUST be configured with the necessary certificate. If no certificate is required, skip to step 2.
     * Create a Config file named `grafana-configmap.yaml` The file should look like this:
@@ -270,7 +269,7 @@ Below are the steps to deploy a new Grafana instance into your Kubernetes cluste
 - [Grafana Labs Operator Deployment](https://grafana.com/docs/grafana-cloud/kubernetes/prometheus/prometheus_operator/)
 - [Rancher Monitoring and Alerting Deployment](https://rancher.com/docs/rancher/v2.6/en/monitoring-alerting/)
 
-## Importing CSM for Observability Dashboards
+## Importing Container Storage Module for Observability Dashboards
 
 Once Grafana is properly configured, you can import the pre-built observability dashboards. Log into Grafana and click the + icon in the side menu. Then click Import. From here you can upload the JSON files or paste the JSON text directly into the text area.  Below are the locations of the dashboards that can be imported:
 
@@ -291,7 +290,7 @@ Once Grafana is properly configured, you can import the pre-built observability 
 
 ## Dynamic Configuration
 
-Some parameters can be configured/updated during runtime without restarting the CSM for Observability services. These parameters will be stored in ConfigMaps that can be updated on the Kubernetes cluster. This will automatically change the settings on the services.  
+Some parameters can be configured/updated during runtime without restarting the Container Storage Module for Observability services. These parameters will be stored in ConfigMaps that can be updated on the Kubernetes cluster. This will automatically change the settings on the services.  
 
 | ConfigMap                           | Observability Service     | Parameters                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
 |-------------------------------------|---------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -309,7 +308,7 @@ kubectl edit configmap [CONFIG_MAP_NAME] -n [CSM_NAMESPACE]
 
 ## Tracing
 
-CSM for Observability is instrumented to report trace data to [Zipkin](https://zipkin.io/). This helps gather timing data needed to troubleshoot latency problems with CSM for Observability. Follow the instructions below to enable the reporting of trace data:
+Container Storage Module Observability is instrumented to report trace data to [Zipkin](https://zipkin.io/). This helps gather timing data needed to troubleshoot latency problems with Container Storage Module Observability. Follow the instructions below to enable the reporting of trace data:
 
 1. Deploy a Zipkin instance in the CSM namespace and expose the service as NodePort for external access.
 
@@ -365,7 +364,7 @@ CSM for Observability is instrumented to report trace data to [Zipkin](https://z
         app.kubernetes.io/instance: zipkin-instance
     ```
 
-2. Add the Zipkin URI to the CSM for Observability ConfigMaps. Based on the manifest above, Zipkin will be running on port 9411.
+2. Add the Zipkin URI to the Container Storage Module Observability ConfigMaps. Based on the manifest above, Zipkin will be running on port 9411.
 
     __Note__: Zipkin tracing is currently not supported for the collection of PowerFlex metrics. 
 
@@ -388,168 +387,148 @@ CSM for Observability is instrumented to report trace data to [Zipkin](https://z
 
 ## Updating Storage System Credentials
 
-If the storage system credentials have been updated in the relevant CSI Driver, CSM for Observability must be updated with those new credentials as follows:
+If storage system credentials are updated in the CSI Driver, update Container Storage Module Observability with the new credentials
 
-### When CSM for Observability uses the Authorization module
+### When Container Storage Module for Observability uses the Authorization module
 
-In this case, all storage system requests made by CSM for Observability will be routed through the Authorization module. The following must be performed:
+All storage system requests by Container Storage Module Observability will go through the Authorization module. Perform the following steps:
 
 #### Update the Authorization Module Token
 
-##### CSI Driver for Dell PowerFlex
+##### CSI Driver for PowerFlex
 
 1. Delete the current `proxy-authz-tokens` Secret from the CSM namespace.
     ```console
-
     kubectl delete secret proxy-authz-tokens -n [CSM_NAMESPACE]
     ```
 
 2. Copy the `proxy-authz-tokens` Secret from the CSI Driver for Dell PowerFlex to the CSM namespace.
     ```console
-
     kubectl get secret proxy-authz-tokens -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -
     ```
 
-##### CSI Driver for Dell PowerScale
+##### CSI Driver for PowerScale
 
 1. Delete the current `isilon-proxy-authz-tokens` Secret from the CSM namespace.
     ```console
-
     kubectl delete secret isilon-proxy-authz-tokens -n [CSM_NAMESPACE] 
     ```
 
-2. Copy the `isilon-proxy-authz-tokens` Secret from the CSI Driver for Dell PowerScale namespace to the CSM namespace.
+2. Copy the `isilon-proxy-authz-tokens` Secret from the CSI Driver for PowerScale namespace to the CSM namespace.
     ```console
-
     kubectl get secret proxy-authz-tokens -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/'| sed 's/name: proxy-authz-tokens/name: isilon-proxy-authz-tokens/' | kubectl create -f
     ```
 
-##### CSI Driver for Dell PowerMax
+##### CSI Driver for PowerMax
 
 1. Delete the current `powermax-proxy-authz-tokens` Secret from the CSM namespace.
     ```console
-
     kubectl delete secret powermax-proxy-authz-tokens -n [CSM_NAMESPACE] 
     ```
 
-2. Copy the `powermax-proxy-authz-tokens` Secret from the CSI Driver for Dell PowerMax namespace to the CSM namespace. 
+2. Copy the `powermax-proxy-authz-tokens` Secret from the CSI Driver for PowerMax namespace to the CSM namespace. 
     ```console
-
     kubectl get secret proxy-authz-tokens -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/'| sed 's/name: proxy-authz-tokens/name: powermax-proxy-authz-tokens/' | kubectl create -f
     ```
    
 #### Update Storage Systems
-If the list of storage systems managed by a Dell CSI Driver have changed, the following steps can be performed to update CSM for Observability to reference the updated systems:
+If the list of storage systems managed by a Dell CSI Driver have changed, the following steps can be performed to update Container Storage Module Observability to reference the updated systems:
 
-##### CSI Driver for Dell PowerFlex
+##### CSI Driver for PowerFlex
 
 1. Delete the current `karavi-authorization-config` Secret from the CSM namespace.
     ```console
-
     kubectl delete secret karavi-authorization-config -n [CSM_NAMESPACE]
     ```
 
-2. Copy the `karavi-authorization-config` Secret from the CSI Driver for Dell PowerFlex namespace to CSM for Observability namespace.
+2. Copy the `karavi-authorization-config` Secret from the CSI Driver for PowerFlex namespace to Container Storage Module Observability namespace.
     ```console
-
     kubectl get secret karavi-authorization-config -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -
     ```
 
-##### CSI Driver for Dell PowerScale
+##### CSI Driver for PowerScale
 
 1. Delete the current `isilon-karavi-authorization-config` Secret from the CSM namespace.
     ```console
-
     kubectl delete secret isilon-karavi-authorization-config -n [CSM_NAMESPACE]
     ```
 
-2. Copy the `isilon-karavi-authorization-config` Secret from the CSI Driver for Dell PowerScale namespace to CSM for Observability namespace.
+2. Copy the `isilon-karavi-authorization-config` Secret from the CSI Driver for PowerScale namespace to Container Storage Module Observability namespace.
     ```console
-
     kubectl get secret karavi-authorization-config -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | sed 's/name: karavi-authorization-config/name: isilon-karavi-authorization-config/' | kubectl create -f
     ```
 
-##### CSI Driver for Dell PowerMax
+##### CSI Driver for PowerMax
 
 1. Delete the current `powermax-karavi-authorization-config` secret from the CSM namespace.
    ```console
-
    kubectl delete secret powermax-karavi-authorization-config -n [CSM_NAMESPACE]
    ```
 
-2. Copy `powermax-karavi-authorization-config` secret from the CSI Driver for Dell PowerMax to the CSM namespace.
+2. Copy `powermax-karavi-authorization-config` secret from the CSI Driver for PowerMax to the CSM namespace.
    ```console
-
    kubectl get secret karavi-authorization-config proxy-server-root-certificate -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | sed 's/name: karavi-authorization-config/name: powermax-karavi-authorization-config/' | kubectl create -f - 
    ```
 
-### When CSM for Observability does not use the Authorization module
+### When Container Storage Module for Observability does not use the Authorization module
 
-In this case all storage system requests made by CSM for Observability will not be routed through the Authorization module. The following must be performed:
+In this case all storage system requests made by Container Storage Module Observability will not be routed through the Authorization module. The following must be performed:
 
-#### CSI Driver for Dell PowerFlex
+#### CSI Driver for PowerFlex
 
 1. Delete the current `vxflexos-config` Secret from the CSM namespace.
     ```console
     kubectl delete secret vxflexos-config -n [CSM_NAMESPACE]
     ```
 
-2. Copy the `vxflexos-config` Secret from the CSI Driver for Dell PowerFlex namespace to the CSM namespace.
+2. Copy the `vxflexos-config` Secret from the CSI Driver for PowerFlex namespace to the CSM namespace.
     ```console
-
     kubectl get secret vxflexos-config -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -
     ```
 
    If the CSI driver secret name is not the default `vxflexos-config`, please use the following command to copy secret:
     ```console
-
     kubectl get secret [VXFLEXOS-CONFIG] -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/name: [VXFLEXOS-CONFIG]/name: vxflexos-config/' | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -
     ```
 
-#### CSI Driver for Dell PowerStore
+#### CSI Driver for PowerStore
 
 1. Delete the current `powerstore-config` Secret from the CSM namespace.
     ```console
-
     kubectl delete secret powerstore-config -n [CSM_NAMESPACE]
     ```
 
-2. Copy the `powerstore-config` Secret from the CSI Driver for Dell PowerStore namespace to the CSM namespace.
+2. Copy the `powerstore-config` Secret from the CSI Driver for PowerStore namespace to the CSM namespace.
     ```console
-
     kubectl get secret powerstore-config -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -
     ```
 
    If the CSI driver secret name is not the default `powerstore-config`, please use the following command to copy secret:
     ```console
-
     kubectl get secret [POWERSTORE-CONFIG] -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/name: [POWERSTORE-CONFIG]/name: powerstore-config/' | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -
     ```
 
-#### CSI Driver for Dell PowerScale
+#### CSI Driver for PowerScale
 
 1. Delete the current `isilon-creds` Secret from the CSM namespace.
     ```console
     kubectl delete secret isilon-creds -n [CSM_NAMESPACE]
     ```
 
-2. Copy the `isilon-creds` Secret from the CSI Driver for Dell PowerScale namespace to the CSM namespace.
+2. Copy the `isilon-creds` Secret from the CSI Driver for PowerScale namespace to the CSM namespace.
     ```console
-
     kubectl get secret isilon-creds -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -
     ```
 
     If the CSI driver secret name is not the default `isilon-creds`, please use the following command to copy secret:  
     ```console
-
     kubectl get secret [ISILON-CREDS] -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/name: [ISILON-CREDS]/name: isilon-creds/' | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -
     ```
 
-#### CSI Driver for Dell PowerMax
+#### CSI Driver for PowerMax
 
 1. Delete the secrets in `powermax-reverseproxy-config` configmap from the CSM namespace. 
    ```console
-
    for secret in $(kubectl get configmap powermax-reverseproxy-config -n [CSM_NAMESPACE] -o jsonpath="{.data.config\.yaml}" | grep arrayCredentialSecret | awk 'BEGIN{FS=":"}{print $2}' | uniq)
    do
       kubectl delete secret $secret -n [CSM_NAMESPACE]
@@ -558,27 +537,23 @@ In this case all storage system requests made by CSM for Observability will not 
 
 2. Delete the current `powermax-reverseproxy-config` configmap from the CSM namespace.
    ```console
-
    kubectl delete configmap powermax-reverseproxy-config -n [CSM_NAMESPACE] 
    ```
 
-3. Copy the configmap `powermax-reverseproxy-config` from the CSI Driver for Dell PowerMax namespace to the CSM namespace.  
+3. Copy the configmap `powermax-reverseproxy-config` from the CSI Driver for PowerMax namespace to the CSM namespace.  
    
    ```console
-
    kubectl get configmap powermax-reverseproxy-config -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -
    ```
 
    If the CSI driver configmap name is not the default `powermax-reverseproxy-config`, please use the following command to copy configmap:
 
    ```console
-
    kubectl get configmap [POWERMAX-REVERSEPROXY-CONFIG] -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/name: [POWERMAX-REVERSEPROXY-CONFIG]/name: powermax-reverseproxy-config/' | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -
    ```
 
 4. Copy the secrets in `powermax-reverseproxy-config` from the CSI Driver for Dell PowerMax namespace to the CSM namespace.  
     ```console
-
     for secret in $(kubectl get configmap powermax-reverseproxy-config -n [CSI_DRIVER_NAMESPACE] -o jsonpath="{.data.config\.yaml}" | grep arrayCredentialSecret | awk 'BEGIN{FS=":"}{print $2}' | uniq)
     do
        kubectl get secret $secret -n [CSI_DRIVER_NAMESPACE] -o yaml | sed "s/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/" | kubectl create -f -
@@ -587,7 +562,6 @@ In this case all storage system requests made by CSM for Observability will not 
 
     If the CSI driver configmap name is not the default `powermax-reverseproxy-config`, please use the following command to copy secrets:
     ```console
-
     for secret in $(kubectl get configmap [POWERMAX-REVERSEPROXY-CONFIG] -n [CSI_DRIVER_NAMESPACE] -o jsonpath="{.data.config\.yaml}" | grep arrayCredentialSecret | awk 'BEGIN{FS=":"}{print $2}' | uniq)
     do
        kubectl get secret $secret -n [CSI_DRIVER_NAMESPACE] -o yaml | sed "s/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/" | kubectl create -f -

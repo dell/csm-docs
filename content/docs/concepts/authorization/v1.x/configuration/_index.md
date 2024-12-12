@@ -5,4 +5,4 @@ weight: 2
 description: Configure CSM Authorization
 ---
 
-This section provides the details and instructions on how to configure CSM Authorization.
+This section provides the details and instructions on how to configure Container Storage Module Authorization.

@@ -9,4 +9,4 @@ tags:
  - csm-authorization
 ---
 
-Backup and Restore information for CSM Authorization can be found in this section.
+Backup and Restore information for Container Storage Module Authorization can be found in this section.

@@ -289,7 +289,7 @@ allowedTopologies:
 
 For additional information, see the [Kubernetes Topology documentation](https://kubernetes-csi.github.io/docs/topology.html).
 
-> *NOTE*: In the manifest file of the Dell CSM operator, topology can be enabled by specifying the system name or _systemid_ in the allowed topologies field. _Volumebindingmode_ is also set to _WaitForFirstConsumer_ by default.
+> *NOTE*: In the manifest file of the Container Storage Module operator, topology can be enabled by specifying the system name or _systemid_ in the allowed topologies field. _Volumebindingmode_ is also set to _WaitForFirstConsumer_ by default.
 
 ## Controller HA
 
@@ -303,7 +303,7 @@ in your values file to the desired number of controller pods. By default, the dr
 
 > *NOTE:* If the controller count is greater than the number of available nodes, excess controller pods will be stuck in a pending state.
 
-If you are using the Dell CSM Operator, the value to adjust is:
+If you are using the Container Storage Module Operator, the value to adjust is:
 
 ```yaml
 replicas: 1  
@@ -388,7 +388,7 @@ controller:
 
 > *NOTE:* Tolerations/selectors work the same way for node pods.
 
-For configuring Controller HA on the Dell CSM Operator, please refer to the [Dell CSM Operator documentation](../../../deployment/csmoperator/#custom-resource-specification).  
+For configuring Controller HA on the Container Storage Module Operator, please refer to the [Container Storage Module Operator documentation](../../../deployment/csmoperator/#custom-resource-specification).  
 
 ## SDC Deployment
 
@@ -400,7 +400,7 @@ The CSI PowerFlex driver version 1.3 and later support the automatic deployment 
   Refer to https://hub.docker.com/r/dellemc/sdc for supported OS versions.
 - There is no automated uninstallation of the SDC kernel module. Follow PowerFlex SDC documentation to manually uninstall the SDC driver from the node.
 
-From CSM 1.12.0, you can disable automatic SDC deployment.
+From Container Storage Module **1.12.0**, you can disable automatic SDC deployment.
 
 By default, SDC deployment is enabled. If you do not want to deploy `sdc` with PowerFlex, it can be disabled by setting the `sdc.enabled` field to `false`.
 
@@ -471,7 +471,6 @@ Here we specify that we want the CSI driver to manage two arrays: one with an IP
 To use this config we need to create a Kubernetes secret from it. To do so, run the following command:
 
 ```bash
-
 kubectl create secret generic vxflexos-config -n vxflexos --from-file=config=secret.yaml
 ```
 
@@ -573,8 +572,7 @@ When creating ephemeral volumes, it is important to specify the following within
 To use existing volumes from PowerFlex array as Peristent volumes in your Kubernetes environment, perform these steps:
 1. Log into one of the MDMs of the PowerFlex cluster.
 2. Execute these commands to retrieve the `systemID` and `volumeID`.
-    1. ```bash
-    
+    1. ```bash    
         scli --mdm_ip <IPs, comma separated> --login --username <username> --password <password>
        ```
     - **Output:** `Logged in. User role is SuperUser. System ID is <systemID>`
@@ -750,7 +748,7 @@ Based on these two keys, there are certain scenarios on which the driver is goin
 * If enabled and prefix given then set the prefix+worker_node_name for SDC name.
 * If enabled and prefix not given then set worker_node_name for SDC name.
 
-> NOTE: name of the SDC cannot be more than 31 characters, hence the prefix given and the worker node hostname name taken should be such that the total length does not exceed 31 character limit. 
+> ℹ️ **NOTE:** : name of the SDC cannot be more than 31 characters, hence the prefix given and the worker node hostname name taken should be such that the total length does not exceed 31 character limit. 
 
 ## Pre-approving SDC by GUID
 
@@ -774,7 +772,7 @@ node:
     # Default value: false
     enabled: false
 ```
-> NOTE: Currently, the CSI-PowerFlex driver only supports GUID for the restricted SDC mode.
+> ℹ️ **NOTE:** : Currently, the CSI-PowerFlex driver only supports GUID for the restricted SDC mode.
 
 If SDC approval is denied, then provisioning of the volume will not be attempted and an appropriate error message is reported in the logs/events so the user is informed.
 
@@ -792,8 +790,8 @@ The user can also set the volume limit for all the nodes in the cluster by speci
 ## NFS volume support
 Starting with version 2.8, the CSI driver for PowerFlex will support NFS volumes for PowerFlex storage systems version 4.0.x.
 
-> NOTE:
-> Starting from CSM 1.11.0, the CSI-PowerFlex driver will automatically round up NFS volume sizes to a minimum of 3GB if a smaller size is requested. This change prevents backend errors and ensures compatibility.
+> ℹ️ **NOTE:** :
+> Starting from Container Storage Module 1.11.0, the CSI-PowerFlex driver will automatically round up NFS volume sizes to a minimum of 3GB if a smaller size is requested. This change prevents backend errors and ensures compatibility.
 
 CSI driver will support following operations for NFS volumes:
 
@@ -807,7 +805,7 @@ To enable the support of NFS volumes operations from CSI driver, there are a few
 * `nasName`: defines the NAS server name that should be used for NFS volumes.
 * `enableQuota`: when enabled will set quota limit for a newly provisioned NFS volume.
 
-> NOTE:
+> ℹ️ **NOTE:** :
 > * `nasName`
 >   * nasName is a mandatory parameter and has to be provided in secret yaml, else it will be an error state and will be captured in driver logs.
 >   * nasName can be given at storage class level as well.
@@ -905,7 +903,7 @@ If enableQuota feature is set, user can also set other tree quota parameters suc
 * `softLimit`: soft limit set to quota. Specified as a percentage w.r.t. PVC size.
 * `gracePeriod`: grace period of quota, must be mentioned along with softLimit, in seconds. Soft Limit can be exceeded until the grace period.
 
-> NOTE:
+> ℹ️ **NOTE:** :
 > * `hardLimit` is set to same size as that of PVC size.
 > *  When a volume with quota enabled is expanded then the hardLimit and softLimit are also recalculated by driver w.r.t. to the new PVC size.
 > * `sofLimit` cannot be set to unlimited value (0), otherwise it will become greater than hardLimit (PVC size).
@@ -954,7 +952,7 @@ This means that we allow for NFS Export created by driver to be consumed by addr
 
 ## Configuring NFS independent of SDC
 
-Starting from CSM 1.12.0, the CSI PowerFlex driver supports configuring NFS independent of SDC. This separation is helpful in scenarios where an SDC is not available in the cluster or additional network interfaces do not need to be deployed.
+Starting from Container Storage Module 1.12.0, the CSI PowerFlex driver supports configuring NFS independent of SDC. This separation is helpful in scenarios where an SDC is not available in the cluster or additional network interfaces do not need to be deployed.
 
 To disable SDC deployment, update the values file and provide the interface names mapping for each of the nodes that are being used.
 

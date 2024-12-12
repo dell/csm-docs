@@ -3,7 +3,7 @@ title: Operator
 linkTitle: Operator 
 no_list: true
 description: >
-  Installing the CSI Driver for Dell PowerMax via Dell CSM Operator
+  Installing the CSI Driver for PowerMax via Container Storage Module Operator
 ---
 {{% pageinfo color="primary" %}}
 {{< message text="1" >}}
@@ -12,7 +12,7 @@ description: >
 ## Installing the Operator
 To deploy the Operator, follow the instructions available [here](../../operatorinstallation.md).
 
-{{< accordion id="One" title="CSM Installation Wizard" markdown="true" >}}  
+{{< accordion id="One" title="Installation Wizard" markdown="true" >}}  
 {{<include  "content/docs/getting-started/installation/kubernetes/installationwizardoperator.md" >}}
 {{< /accordion >}}
 
@@ -140,7 +140,7 @@ To deploy the Operator, follow the instructions available [here](../../operatori
    | ***Common parameters for node and controller*** |                                                                                                                                                                                                                                                                          |          |                                |
    | X_CSI_K8S_CLUSTER_PREFIX                        | Define a prefix that is appended to all resources created in the array; unique per K8s/CSI deployment; max length - 3 characters                                                                                                                                         | Yes      | XYZ                            |
    | X_CSI_POWERMAX_PROXY_SERVICE_NAME               | Name of CSI PowerMax ReverseProxy service.                                                                                                                                                                                                                               | Yes      | csipowermax-reverseproxy       |
-   | X_CSI_IG_MODIFY_HOSTNAME                        | Change any existing host names. When nodenametemplate is set, it changes the name to the specified format else it uses driver default host name format.                                                                                                                  | No       | false                          |
+   | X_CSI_IG_MODIFY_HOSTNAME                        | Change any existing host names. When node name template is set, it changes the name to the specified format else it uses driver default host name format.                                                                                                                  | No       | false                          |
    | X_CSI_IG_NODENAME_TEMPLATE                      | Provide a template for the CSI driver to use while creating the Host/IG on the array for the nodes in the cluster. It is of the format a-b-c-%foo%-xyz where foo will be replaced by host name of each node in the cluster.                                              | No       | -                              |
    | X_CSI_POWERMAX_DRIVER_NAME                      | Set custom CSI driver name. For more details on this feature see the related [documentation](../../../../csidriver/features/powermax/#custom-driver-name)                                                                                                                             | No       | -                              |
    | X_CSI_HEALTH_MONITOR_ENABLED                    | Enable/Disable health monitor of CSI volumes from Controller and Node plugin. Provides details of volume status, usage and volume condition. As a prerequisite, external-health-monitor sidecar section should be uncommented in samples which would install the sidecar | No       | false                          |
@@ -150,7 +150,7 @@ To deploy the Operator, follow the instructions available [here](../../operatori
    | X_CSI_VCenter_HOST                              | URL/endpoint of the vCenter where all the ESX are present                                                                                                                                                                                                                | Yes      | ""                             |
    | ***Node parameters***                           |                                                                                                                                                                                                                                                                          |          |                                |
    | X_CSI_POWERMAX_ISCSI_ENABLE_CHAP                | Enable ISCSI CHAP authentication. For more details on this feature see the related [documentation](../../../../csidriver/features/powermax/#iscsi-chap)                                                                                                                               | No       | false                          |
-   | X_CSI_TOPOLOGY_CONTROL_ENABLED                  | Enable/Disabe topology control. It filters out arrays, associated transport protocol available to each node and creates topology keys based on any such user input.                                                                                                      | No       | false                          |
+   | X_CSI_TOPOLOGY_CONTROL_ENABLED                  | Enable/Disable topology control. It filters out arrays, associated transport protocol available to each node and creates topology keys based on any such user input.                                                                                                      | No       | false                          |
    | ***CSI Reverseproxy Module***                   |                                                                                                                                                                                                                                                                          |          |                                |
    | X_CSI_REVPROXY_TLS_SECRET                       | Name of TLS secret defined in config map                                                                                                                                                                                                                                 | Yes      | "csirevproxy-tls-secret"       |
    | X_CSI_REVPROXY_PORT                             | Port number where reverseproxy will listen as defined in config map                                                                                                                                                                                                      | Yes      | "2222"                         |
@@ -327,12 +327,12 @@ where *myusername* and *mypassword* are credentials for a user with vCenter priv
 
 <br>
 
-{{< accordion id="Three" title="CSM Modules"  >}}  
+{{< accordion id="Three" title="Container Storage Module ="  >}}  
 
  <br>  
 
 {{< markdownify >}}
-The driver and modules versions installable with the CSM Operator [Click Here](../../../../../supportmatrix/#container-storage-module-operator-compatibility-matrix)
+The driver and modules versions installable with the Container Storage Modul Operator [Click Here](../../../../../supportmatrix/#container-storage-module-operator-compatibility-matrix)
 {{< /markdownify >}}
 
 <br>        

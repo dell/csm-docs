@@ -3,7 +3,7 @@ title: CLI
 linktitle: CLI 
 weight: 4
 description: >
-  Dell Technologies (Dell) Container Storage Modules (CSM) for Authorization CLI
+ Container Storage Modules (CSM) for Authorization CLI
 ---
 
 {{% pageinfo color="primary" %}}

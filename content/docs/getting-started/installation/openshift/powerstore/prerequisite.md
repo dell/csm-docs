@@ -6,7 +6,7 @@ Description: >
 --- 
 ## Prerequisites
 
-The following requirements must be met before installing the CSI Driver for Dell PowerStore:
+The following requirements must be met before installing the CSI Driver for PowerStore:
 
 - A Kubernetes or OpenShift cluster (see [supported versions](../../../../../csidriver/#features-and-capabilities))
 - Install Helm 3.x
@@ -62,9 +62,9 @@ Once the `MachineConfig` object has been deployed, CoreOS will ensure that the `
 
 - Ensure that the iSCSI initiators are available on all the nodes where the driver node plugin will be installed.
 - Ensure that the unique initiator name is set in _/etc/iscsi/initiatorname.iscsi_.
-- Kubernetes nodes must have network connectivity to an iSCSI port on the Dell PowerStore array that
+- Kubernetes nodes must have network connectivity to an iSCSI port on the PowerStore array that
 has IP interfaces.
-- Ensure that the iSCSI initiators on the nodes are not a part of any existing Host or Host Group on the Dell PowerStore arrays. The driver will create host entries for the iSCSI initiators which adheres to the naming conventions required by the driver.
+- Ensure that the iSCSI initiators on the nodes are not a part of any existing Host or Host Group on the PowerStore arrays. The driver will create host entries for the iSCSI initiators which adheres to the naming conventions required by the driver.
 
 Refer to the [Dell Host Connectivity Guide](https://elabnavigator.dell.com/vault/pdf/Linux.pdf) for more information.
 {{% /tab %}}
@@ -191,7 +191,7 @@ modprobe nvme_tcp
 
 ### Linux multipathing requirements
 
-Dell PowerStore supports Linux multipathing (DM-MPIO) and NVMe native multipathing. Configure Linux multipathing before installing the CSI Driver.
+PowerStore supports Linux multipathing (DM-MPIO) and NVMe native multipathing. Configure Linux multipathing before installing the CSI Driver.
 
 > For NVMe connectivity native NVMe multipathing is used. The following sections apply only for iSCSI and Fiber Channel connectivity.
 

@@ -8,7 +8,7 @@ Description: >
 
 ## Prerequisites
 
-The following requirements must be met before installing the CSI Driver for Dell PowerMax:
+The following requirements must be met before installing the CSI Driver for PowerMax:
 
 - A Kubernetes or OpenShift cluster (see [supported versions](../../../../csidriver/#features-and-capabilities)).
 - If enabling CSM for Authorization, please refer to the Authorization deployment steps first

@@ -36,7 +36,7 @@ make build
 
 > **_NOTE:_**  The repctl commands only have to be run from one Kubernetes cluster. Repctl does the appropriate configuration on both clusters, when installing replication with it.
 
-You can start using Container Storage Modules (CSM) for Replication with help from `repctl` using these simple steps:
+You can start using Container Storage Modules for Replication with help from `repctl` using these simple steps:
 
 1. Prepare admin Kubernetes clusters configs
 2. Add admin configs as clusters to `repctl`:
@@ -75,4 +75,4 @@ You can start using Container Storage Modules (CSM) for Replication with help fr
       ./repctl create pvc --rg <rg-name> -t <target-namespace> --dry-run=false
       ```
 
-> Note: all `repctl` output is saved in a `repctl.log` file in the current working directory and can be attached to any installation troubleshooting requests.
+> ℹ️ **NOTE:**: all `repctl` output is saved in a `repctl.log` file in the current working directory and can be attached to any installation troubleshooting requests.

@@ -4,10 +4,10 @@ toc_hide: true
 linkTitle: "Release notes"
 weight: 5
 Description: >
-  Dell Container Storage Modules (CSM) release notes for observability
+  Container Storage Modules (CSM) release notes for observability
 ---
 
-## Release Notes - CSM Observability 1.10.0
+## Release Notes - Container Storage Module Observability 1.10.0
 
 
 

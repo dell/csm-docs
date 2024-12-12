@@ -2,10 +2,10 @@
 title: Proxy Server
 linktitle: Proxy Server
 description: >
-  Configuring the CSM for Authorization Proxy Server
+  Configuring the Container Storage Module for Authorization Proxy Server
 ---
 
-## Configuring the CSM for Authorization Proxy Server
+## Configuring the Container Storage Module for Authorization Proxy Server
 
 The storage administrator must first configure Authorization with the following via `karavictl`:
 - Karavictl admin token
@@ -36,8 +36,7 @@ In clusters where there is no integrated LoadBalancer, the `EXTERNAL-IP` field i
 
 An admin token is required for executing `karavictl` commands, with the exception of `admin token` and `cluster-info`. For example, to generate an admin token and redirect the output to a file:
 
-```bash
-
+```
 $ karavictl admin token --name admin --access-token-expiration 30s --refresh-token-expiration 120m > admintoken.yaml
 $ Enter JWT Signing Secret:
 $ cat admintoken.yaml
@@ -45,19 +44,16 @@ $ cat admintoken.yaml
   "Access": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJjc20iLCJleHAiOjE2ODIzNDg0MzEsImdyb3VwIjoiYWRtaW4iLCJpc3MiOiJjb20uZGVsbC5jc20iLCJyb2xlcyI6IiIsInN1YiI6ImNzbS1hZG1pbiJ9.OxTL48c1VLKSY6oVnYw_jmQ7XHX4UEfwIRkfLQh9beA",
   "Refresh": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJjc20iLCJleHAiOjE2ODQ5NDAzNzEsImdyb3VwIjoiYWRtaW4iLCJpc3MiOiJjb20uZGVsbC5jc20iLCJyb2xlcyI6IiIsInN1YiI6ImNzbS1hZG1pbiJ9._ELmuc2qprZPeuW22wISiw0pvuM6rhyabDOybakqs68"
 }
-
 ```
 Alternatively, the JWT signing secret can be specified with the CLI.
 
 ```bash
-
 $ karavictl admin token --name admin  --jwt-signing-secret supersecret --access-token-expiration 30s --refresh-token-expiration 120m > admintoken.yaml
 $ cat admintoken.yaml
 {
   "Access": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJjc20iLCJleHAiOjE2ODIzNDg2MTEsImdyb3VwIjoiYWRtaW4iLCJpc3MiOiJjb20uZGVsbC5jc20iLCJyb2xlcyI6IiIsInN1YiI6ImNzbS1hZG1pbiJ9.C6c9DrlOE95_soFm0YEyzs08ye2TL_koYsp4qJFEglI",
   "Refresh": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJjc20iLCJleHAiOjE2ODIzNTU3ODEsImdyb3VwIjoiYWRtaW4iLCJpc3MiOiJjb20uZGVsbC5jc20iLCJyb2xlcyI6IiIsInN1YiI6ImNzbS1hZG1pbiJ9.XMcOVIuJ56JhuJrfGqQ_DUqXDyHLxrOrkvQJUxAOst4"
 }
-
 ```
 
 >__Note__:
@@ -65,7 +61,7 @@ $ cat admintoken.yaml
 
 ### Configuring Storage
 
-A `storage` entity in CSM Authorization consists of the storage type (PowerFlex, PowerMax, PowerScale), the system ID, the API endpoint, and the credentials. For example, to create PowerFlex storage:
+A `storage` entity in Container Storage Module Authorization consists of the storage type (PowerFlex, PowerMax, PowerScale), the system ID, the API endpoint, and the credentials. For example, to create PowerFlex storage:
 
 #### RPM Deployment
 ```bash
