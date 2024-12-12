@@ -36,23 +36,6 @@ Container Storage Module for Resiliency provides the following capabilities:
 | Revoke PV access from failed nodes      | yes         | yes   | yes         | yes       | yes       |
 {{</table>}}
 
-## Supported Operating Systems/Container Orchestrator Platforms
-
-{{<table "table table-striped table-bordered table-sm">}}
-| COP/OS            | Supported Versions |
-| ----------------- | :----------------: |
-| Kubernetes        | 1.30, 1.31, 1.32   |
-| Red Hat OpenShift |     4.17, 4.18     |
-{{</table>}}
-
-## Supported Storage Platforms
-
-{{<table "table table-striped table-bordered table-sm">}}
-|               | PowerFlex    | Unity XT                          | PowerScale                              | PowerStore                    | PowerMax |
-| ------------- | :----------: | :-------------------------------: | :-------------------------------------: | :---------------------------: | :---------------------------: |
-| Storage Array | 3.6.x, 4.5.x, 4.6.x | 5.2.x, 5.3.x, 5.4.x | OneFS 9.4, 9.5.0.x (x >= 5), 9.7, 9.8, 9.9 | 3.5, 3.6, 4.0 | 2500/8500 PowerMax OS 10 (6079), Unisphere 10.x |
-{{</table>}}
-
 ## Supported CSI Drivers
 
 Container Storage Module for Resiliency supports the following CSI drivers and versions.

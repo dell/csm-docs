@@ -19,11 +19,11 @@ weight: 1
 | ObjectScale |  1.2.x | - |
 {{</table>}}
 
-> Notes:
-> - Only install OS dependencies for the protocols you use (e.g., skip `nvme-cli` if NVMe isn't used).
-> - Always use the CSM and Kubernetes API for storage operations.
-> - Changes made outside these tools (like using storage array GUIs or CLIs) won't be automatically reflected in Kubernetes including Persistent Volume (PV) metadata, leading to inaccurate metadata and state information.
-> - If you must make external changes, manually update the Kubernetes cluster to keep everything in sync
+**Notes:**
+- Install only the OS dependencies for the protocols you use (e.g., skip `nvme-cli` if NVMe isn’t used).
+- Always use the CSM and Kubernetes API for storage operations.
+- Changes made outside these tools (like using storage array GUIs or CLIs) won’t be reflected in Kubernetes, leading to inaccurate metadata and state information.
+- If you make external changes, manually update the Kubernetes cluster to keep everything in sync.
 
 ## Supported Container Orchestrator Platforms
 
@@ -35,9 +35,10 @@ weight: 1
 | Mirantis Kubernetes Engine | 3.7.x            |
 {{</table>}}
 
-> Notes:
-> * Any orchestrator platform or version that's not mentioned here must be self-certified using [Cert-CSI](../support/cert-csi/) in order to be supported. Although not mandatory, we recommend users to use orchestrator platforms and versions that have not met their end of life.
-> * CSM Authorization Server v1 is not supported on Red Hat OpenShift. However, it is supported to install CSM Authorization Server v1 on standard Kubernetes and a Dell CSI Drvier enabled with CSM Authorization on Red Hat OpenShift. CSM Authorization Server v2 is supported on Red Hat OpenShift.
+**Notes:** 
+- Self-certify unsupported orchestrator platforms/versions using [Cert-CSI](../support/cert-csi/). Use platforms that haven't reached end of life.
+- CSM Authorization Server v1 is not supported on Red Hat OpenShift. It can be installed on standard Kubernetes and used with a Dell CSI Driver enabled with CSM Authorization on Red Hat OpenShift.
+- CSM Authorization Server v2 is supported on Red Hat OpenShift.
 
 ## OpenShift Virtualization
 
@@ -46,20 +47,18 @@ PowerFlex, PowerMax, PowerStore, PowerScale.
 
 ## Tested Host Operating Systems
 
-Container Storage Modules (CSM) does not officially support specific operating systems.  However, the following operating systems are known to work:
+Container storage module doesn't officially support specific operating systems, but the following are known to work:
 
-* RedHat CoreOS (RHCOS) versions as supported by OpenShift Container Platform
-* RHEL 8+
-* SLES 15SP5
-* Ubuntu 22.04
+- RedHat CoreOS (RHCOS) as supported by OpenShift Container Platform
+- RHEL 8+
+- SLES 15SP5
+- Ubuntu 22.04
 
-> Notes:
-
-> * The host operating system/version being used must align with what each Dell Storage platform supports. Please visit [E-Lab Navigator](https://elabnavigator.dell.com/eln/modernHomeSSM) for specific Dell Storage platform host operating system level support matrices.
-> * Any operating system or version that's not mentioned here must be self-certified using [Cert-CSI](../support/cert-csi/) in order to be supported. Although not mandatory, we recommend users to use operating systems and versions that have not met their end of life.
+**Notes:**
+- Ensure the host OS/version aligns with Dell Storage platform support. Check [E-Lab Navigator](https://elabnavigator.dell.com/eln/modernHomeSSM) for details.
+- OS versions not listed must be self-certified using [Cert-CSI](../support/cert-csi/). It's recommended to use OS versions that haven't reached end of life.
 
 ## Supported Container Storage Modules
-
 {{<table "table table-striped table-bordered table-sm">}}
 | Container Storage Module                                                    | PowerMax | PowerFlex | Unity XT | PowerScale | PowerStore |
 | ------------------------------------------------------------- | :------: | :-------: | :------: | :--------: | :--------: |
@@ -72,22 +71,35 @@ Container Storage Modules (CSM) does not officially support specific operating s
 | [Volume Group Snapshot](../snapshots/volume-group-snapshots/) |    No    |    Yes    |    No    |     No     |    Yes     |
 {{</table>}}
 
+## Operator compatibility matrix
 
-
+The table below lists the driver and modules installable with the Operator
+{{<table "table table-striped table-bordered table-sm">}}
+| CSI Driver         | Version |  Authorization 1.x.x , 2.x.x | Replication | Observability | Resiliency |
+| ------------------ |---------|---------------------------------|-----------------|-------------------|----------------|
+| PowerScale     | 2.12.0  | ✔  , ✔                         | ✔              | ✔                 | ✔       |
+| PowerFlex      | 2.12.0  | ✔  , ✔                         | ✔              | ✔                 | ✔       |
+| PowerStore     | 2.12.0  | ❌ , ❌                        | ❌             | ❌                | ✔       |
+| PowerMax       | 2.12.0  | ✔   , ✔                        | ✔              | ✔                 | ✔       |
+| Unity XT       | 2.12.0  | ❌ , ❌                        | ❌             | ❌                | ❌      |
+{{</table>}}
 ## OpenShift Compatibility with Operator  
 
 {{<table "table table-striped table-bordered table-sm">}}
 |  OpenShift Version        | Operator Version        | CSM version |
-| ------------| ------------------------| ----------- |
+| ------------| ------------------| ----------- |
 |  4.12       | 1.2.0, 1.3.0               |1.7.1, 1.8.0           |
 |  4.13       | 1.3.0, 1.4.4, 1.5.1        |1.8.0, 1.9.4, 1.10.2      |
 |  4.14       | 1.4.4, 1.5.1, 1.6.1, 1.7.0 |1.9.4, 1.10.2, 1.11.1, 1.12|
 |  4.15       | 1.5.1, 1.6.1, 1.7.0        |1.10.2, 1.11.1, 1.12    |
 |  4.16       | 1.6.1, 1.7.0               |1.11.1, 1.12         | 
 |  4.17       | 1.6.1, 1.7.0               |1.11.1, 1.12         |
-|  4.18       | Not supported yet          |                  |
+|  4.18       | 1.6.1, 1.7.0, 1.8.0        | 1.11.1, 1.12, 1.13.0 |
 {{</table>}}
+**Note:** 
+- Operator version 1.2.0 corresponds to CSM version 1.7.1, and operator version 1.3.0 corresponds to CSM version 1.8.0
 
+This mapping applies to all corresponding versions listed in the table.
 
 
 
@@ -110,10 +122,8 @@ Container Storage Modules (CSM) does not officially support specific operating s
 
 ### Supported Container Storage Modules
 
-| Container Storage Modules      | Version   |
+| Container Storage Modules | Version |
 | -----------------| --------- |
 | Observability    | 1.8.0+    |
 | Replication      | 1.8.0+    |
-| Resiliency       | 1.8.0+    | 
-
-
+| Resiliency       | 1.8.0+    |

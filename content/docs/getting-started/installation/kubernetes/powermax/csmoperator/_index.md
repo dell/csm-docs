@@ -327,7 +327,7 @@ where *myusername* and *mypassword* are credentials for a user with vCenter priv
 
 <br>
 
-{{< accordion id="Three" title="Container Storage Module ="  >}}  
+{{< accordion id="Three" title="Container Storage Module"  >}}  
 
  <br>  
 

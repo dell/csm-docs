@@ -50,7 +50,6 @@ The Container Storage Modules Installation Wizard is a webpage that helps you cr
 6. Install the Operator.
 
     On your terminal, run this command:
-
-    ```terminal
-    kubectl create -f values.yaml
-    ```
+```bash
+kubectl create -f values.yaml
+```

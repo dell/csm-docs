@@ -691,19 +691,18 @@ nfsAcls: "A::OWNER@:rwatTnNcCy,A::GROUP@:rxtncy,A::EVERYONE@:rxtncy,A::user@doma
 
 ## NVMe Support
 
-**NVMeTCP Support**
-CSI Driver for Powerstore 2.2.0 and above supports NVMe/TCP provisioning. To enable NVMe/TCP provisioning, blockProtocol on secret should be specified as `NVMeTCP`.
->Note: NVMe/TCP is not supported on RHEL 7.x versions and CoreOS.
->NVMe/TCP is supported with Powerstore 2.1 and above.
+#### NVMeTCP Support
+- Supported from CSI Driver for PowerStore 2.2.0 and above.
+- Enable by setting `blockProtocol` to `NVMeTCP` in the secret.
+- Not supported on RHEL 7.x and CoreOS.
 
-**NVMeFC Support**
-CSI Driver for Powerstore 2.3.0 and above supports NVMe/FC provisioning. To enable NVMe/FC provisioning, blockProtocol on secret should be specified as `NVMeFC`.
->NVMe/FC is supported with Powerstore 3.0 and above.
+#### NVMeFC Support
+- Supported from CSI Driver for PowerStore 2.3.0 and above.
+- Enable by setting `blockProtocol` to `NVMeFC` in the secret.
+- Supported with PowerStore 3.0 and above.
 
->NVMe-FC feature is supported with Helm.
-
->Note:
->   In case blockProtocol is specified as `auto`, the driver will be able to find the initiators on the host and choose the protocol accordingly. If the host has multiple protocols enabled, then NVMeFC gets the highest priority followed by NVMeTCP, followed by FC and then iSCSI.
+**Note**:
+- If `blockProtocol` is set to `auto`, the driver will choose the protocol based on host initiators. Priority: NVMeFC > NVMeTCP > FC > iSCSI.
 
 ## Volume group snapshot Support
 

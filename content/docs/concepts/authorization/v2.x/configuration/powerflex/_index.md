@@ -2,12 +2,12 @@
 title: PowerFlex
 linktitle: PowerFlex
 description: >
-  Enabling Container Storage Modules Authorization for PowerFlex CSI Driver
+  Enabling Container Storage Module Authorization for PowerFlex CSI Driver
 ---
 {{% pageinfo color="primary" %}}
 {{< message text="1" >}}
 {{% /pageinfo %}}
-## Configuring PowerFlex CSI Driver with Container Storage Modules for Authorization
+## Configuring PowerFlex CSI Driver with Container Storage Module for Authorization
 
 Given a setup where Kubernetes, a storage system, and the Authorization Proxy Server are deployed, follow these steps to configure the CSI Drivers to work with the Authorization sidecar:
 
@@ -51,7 +51,7 @@ Given a setup where Kubernetes, a storage system, and the Authorization Proxy Se
       kubectl -n vxflexos create secret generic proxy-server-root-certificate --from-file=rootCertificate.pem=/path/to/rootCA -o yaml --dry-run=client | kubectl apply -f -
       ```
 
-4. Prepare the driver configuration secret, applicable to your driver installation method, to communicate with the Container Storage Modules Authorization sidecar.
+4. Prepare the driver configuration secret, applicable to your driver installation method, to communicate with the Container Storage Module Authorization sidecar.
 
     **Operator**
 
@@ -97,7 +97,7 @@ Given a setup where Kubernetes, a storage system, and the Authorization Proxy Se
       mdm: "10.0.0.3,10.0.0.4"
     ```
 
-5. Enable Container Storage Modules Authorization in the driver installation applicable to your installation method.
+5. Enable Container Storage Module Authorization in the driver installation applicable to your installation method.
   Alternatively, you can use the minimal sample files provided [here](https://github.com/dell/csm-operator/tree/main/samples/minimal-samples) and install the module using default value.
 
     **Operator**

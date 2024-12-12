@@ -2,7 +2,7 @@
 title: Authorization v1.x
 linktitle: "Authorization v1.x"
 description: >
-  Container Storage Modules (CSM) for Authorization Helm deployment
+  Container Storage Module (CSM) for Authorization Helm deployment
 ---
 {{% pageinfo color="primary" %}}
 1. <span><span/>{{< message text="1" >}}

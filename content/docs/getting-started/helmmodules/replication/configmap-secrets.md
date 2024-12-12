@@ -7,7 +7,7 @@ description: >
 ---
 
 ##  Communication between clusters
-Container Storage Modules (CSM) for Replication Controller requires access to remote clusters for replicating various objects. There are two ways to set up this communication:
+Container Storage Module (CSM) for Replication Controller requires access to remote clusters for replicating various objects. There are two ways to set up this communication:
 1. Using Normal Kubernetes users
 2. Using ServiceAccount token
 
