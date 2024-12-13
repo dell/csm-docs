@@ -3,7 +3,7 @@ title: "Mirantis Kubernetes Engine"
 linkTitle: "Mirantis Kubernetes Engine"
 no_list: true
 description: Kubernetes Upgrade
-weight: 2
+weight: 3
 ---
 
 {{< cardcontainer >}}
