@@ -1,0 +1,36 @@
+---
+title: "PowerMax"
+linkTitle: "PowerMax"
+no_list: true
+description: Powermax Installation
+weight: 1
+--- 
+
+<br>
+
+Dell PowerMax is a high-performance, enterprise-class storage solution designed to meet the demanding needs of modern data centers. It is renowned for its exceptional speed, scalability, and reliability, making it ideal for mission-critical applications and workloads.
+
+
+{{< cardcontainer >}}
+
+    {{< customcard  link="./prerequisite"  imageNumber="4" title="Prerequisite">}} 
+
+{{< /cardcontainer >}}
+
+{{< cardcontainer >}}
+
+       {{< customcard  link="./csmoperator" imageNumber="6"  title="Operator" >}}
+
+       {{< customcard  link="./helm" imageNumber="6" title="Helm" >}}
+
+       {{< customcard  link="./offline"  imageNumber="6" title="Offline">}}
+
+{{< /cardcontainer >}}
+
+{{< cardcontainer >}}
+
+    {{< customcard   link="./../../operator_migration" imageNumber="1"  title="CSI to CSM Operator Migration" >}}
+
+    {{< customcard  link="./troubleshooting"  imageNumber="8" title="Troubleshooting" >}} 
+
+{{< /cardcontainer >}}

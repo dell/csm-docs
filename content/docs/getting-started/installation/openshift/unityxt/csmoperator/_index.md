@@ -6,12 +6,7 @@ description: CSM Operator Installation
 weight: 1
 ---
 ## Installing the Operator
-To deploy the Operator, follow the instructions available [here](../../operatorinstallation.md).
-
-{{< accordion id="One" title="CSM Installation Wizard" >}}
-  {{< include "content/docs/getting-started/installation/kubernetes/installationwizardoperator.md" >}}
-{{< /accordion >}}
-<br>
+To deploy the Operator, follow the instructions available [here](../../../operatorinstallation1.md).
 
 {{< accordion id="Two" title="CSI Driver" markdown="true" >}}  
 

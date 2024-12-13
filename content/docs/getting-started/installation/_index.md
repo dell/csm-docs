@@ -15,7 +15,7 @@ weight: 1
 
     {{< customcard  path="content/docs/getting-started/installation/openshift" link="./openshift"  title="OpenShift" imageNumber="7">}}
 
-    {{< customcard path="content/docs/getting-started/installation/mirantiskubernetesengine" link="./mirantiskubernetesengine"  title="Mirantis Kubernetes Engine" imageNumber="7" >}} 
+    {{< customcard path="content/docs/getting-started/installation/mirantis" link="./mirantis"  title="Mirantis Kubernetes Engine" imageNumber="7" >}} 
 
 {{< /cardcontainer >}}
 

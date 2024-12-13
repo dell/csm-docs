@@ -7,10 +7,10 @@ weight: 2
 ---
 
 ## Installing the Operator
-To deploy the Operator, follow the instructions available [here](../../operatorinstallation.md).
+To deploy the Operator, follow the instructions available [here](../../../operatorinstallation1.md).
 
 {{< accordion id="One" title="CSM Installation Wizard" >}}
-  {{< include "content/docs/getting-started/installation/kubernetes/installationwizardoperator.md" >}}
+  {{< include "content/docs/getting-started/installation/installationwizardoperator.md" >}}
 {{< /accordion >}}
 <br>
 

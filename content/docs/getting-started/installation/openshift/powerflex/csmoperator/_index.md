@@ -7,7 +7,7 @@ weight: 2
 ---
 
 ## Installing the Operator
-To deploy the Operator, follow the instructions available [here](../../operatorinstallation.md).
+To deploy the Operator, follow the instructions available [here](../../../operatorinstallation1.md).
 
 {{< accordion id="Two" title="CSI Driver" markdown="true" >}}  
 
