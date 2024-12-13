@@ -831,6 +831,16 @@ enableQuota: false
 ...
 ```
 
+## Volume Size and Rounding Rules
+For NFS File Shares, the minimum supported volume size is 3 Gi. If request size is smaller than 3 Gi, the volume will be automatically provisioned as 3 Gi.
+
+For Block Volumes, the minimum supported size is 8 Gi. Any size request below 8 Gi will result in a volume of 8 Gi being created. Additionally, if the requested size is not a multiple of 8, the system will round it up to the next multiple of 8 when provisioning the volume.
+
+For example:  
+A requested size of 9 Gi or 8.1 Gi will result in a 16 Gi volume being created on the backend array.
+Similarly, a size of 20 Gi will be rounded up to 24 Gi.
+This behavior ensures that the allocated volume sizes comply with the backend array's alignment requirements.
+
 ## Usage of Quotas to Limit Storage Consumption for NFS volumes
 Starting with version 2.8, the CSI driver for PowerFlex will support enabling tree quotas for limiting capacity for NFS volumes. To use the quota feature user can specify the boolean value `enableQuota` in values.yaml.
 
