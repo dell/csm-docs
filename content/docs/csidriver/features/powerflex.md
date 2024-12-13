@@ -1004,8 +1004,8 @@ Without storage capacity tracking, pods get scheduled on a node satisfying the t
 
 The attribute `storageCapacity.enabled` in `values.yaml` can be used to enable/disable the feature during driver installation using helm. This is by default set to true. To configure how often the driver checks for changed capacity set `storageCapacity.pollInterval` attribute. In case of driver installed via operator, this interval can be configured in the sample file provided [here](https://github.com/dell/csm-operator/blob/main/samples/) by editing the `--capacity-poll-interval` argument present in the provisioner sidecar.
 
-## Multi Availability Zones
-CSI-PowerFlex driver version 2.13.0 and above supports Multi Availability Zones for Block. NFS is not supported at this time.
+## Multiple Availability Zones
+PowerFlex CSI driver version 2.13.0 and above supports multiple Availability Zones for Block. NFS is not supported at this time.
 
 This feature supports the use a StorageClass that is not associated with any specific PowerFlex system or storage pool. Each cluster node must be labeled with a zone and each PowerFlex system must be assigned to a single zone. When a Pod is scheduled on a node, the volume will be provisioned on the PowerFlex system associated with the cluster node's zone.
 
@@ -1013,7 +1013,7 @@ Requirements:
 - Every cluster worker node must be labeled with a zone label.
 - Every PowerFlex system in the driver Secret must be assigned to their own zone.
 - The StorageClass does not contain any reference to the storage system id or storage pool.
-- Use the CSM Operator to install the PowerFlex CSI driver. The CSM Operator will detect if Multi Availability Zones are enabled in the driver Secret and ensure the correct MDMs are configured on each worker node during the SDC installation. Currently, helm chart deployment does not support Multi Availability Zones.
+- Use the CSM Operator to install the PowerFlex CSI driver. The CSM Operator will detect if multiple Availability Zones are enabled in the driver Secret and ensure the correct MDMs are configured on each worker node during the SDC installation. Currently, helm chart deployment does not support multiple Availability Zones.
 
 The example manifests below illustrate how to configure two PowerFlex systems, with each system assigned to its own zone. Zone labels can have any custom key, but it must be consistent across the StorageClass, Secret, and Node labels.
 
@@ -1028,7 +1028,7 @@ kubectl label nodes worker-4 topology.kubernetes.io/zone=zone2
 ```
 
 #### StorageClass
-For Multi Availability Zones support, the StorageClass does not require details about the PowerFlex system. Optionally, the `allowedTopologies` can be used to specify topology labels used when provisioning volumes with this StorageClass.
+For multiple Availability Zones support, the StorageClass does not require details about the PowerFlex system. Optionally, the `allowedTopologies` can be used to specify topology labels used when provisioning volumes with this StorageClass.
 
 > Note: The StorageClass must use `volumeBindingMode: WaitForFirstConsumer`. Using `volumeBindingMode: Immediate` will not guarantee that the volume is provisioned in the same zone as the scheduled Pod.
 
