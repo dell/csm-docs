@@ -93,6 +93,12 @@ linkTitle = "Dell Technologies"
   width:75%; 
 } 
 
+.pinfo {
+     text-align: left;
+}
+
+
+
 @media (min-width: 1500px) {
   .section-head {
     font-size: 2.5rem; /* Increase heading size */
@@ -151,19 +157,22 @@ linkTitle = "Dell Technologies"
 </div>
 {{< /blocks/cover >}} 
 
-
 <div id="overview" class="text-center py-5" > 
         <div class="container" > 
           <p class="lead">
-          {{% pageinfo color="primary" %}}
+
         
-          1. {{< message text="7" >}}
-          
-          2. {{< message text="1" >}}
-          
-          3. {{< message text="5" >}}
-          {{% /pageinfo %}}
-        </p>
+        <div class="pinfo pageinfo pageinfo-primary">
+          <ol>
+            <li>{{< message text="7" >}}</li> 
+            <br>
+            <li>{{< message text="1" >}}</li> 
+            <br>
+            <li>{{< message text="5" >}}</li>
+         </ol>   
+        </div>
+
+          </p> 
           <h3 class="section-head mb-4">What is Container Storage Modules?</h3>
           <p class="lead">
             Container Storage Module enhances the Container Storage Interface (CSI) to provide advanced enterprise storage features for Kubernetes clusters. It includes software modules that extend beyond CSI, offering enterprise storage capabilities to Kubernetes users. Dell’s primary storage options (PowerStore, PowerScale, PowerFlex, PowerMax, and Unity XT) can use these modules to simplify management. This allows developers to easily access and automate tasks like Authorization, Replication, Snapshotting, Resiliency, Observability, and Application Mobility.

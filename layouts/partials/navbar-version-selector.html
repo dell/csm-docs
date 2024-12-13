@@ -5,8 +5,8 @@
 } 
 
 </style>
-<div class="dropdown" style="margin-top:3px;">
-  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+<div class="dropdown" style="margin-top:3px; color:#fff">
+  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:#fff">
     {{ $currentURL := .Page.Permalink | default .Site.BaseURL }}
     {{ $currentVersion := "" }}
     
@@ -26,7 +26,7 @@
   </a>
   <ul class="dropdown-menu">
     {{ range .Site.Params.versions -}}
-      <li><a class="dropdown-item" href="{{ .url }}">{{ .version }}</a></li>
+      <li><a class="dropdown-item" href="{{ .url }}" >{{ .version }}</a></li>
     {{ end -}}
   </ul> 
 

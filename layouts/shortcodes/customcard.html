@@ -92,22 +92,26 @@
     }
     .card{
       margin-left:0px; 
-      background-color:var(--td-pre-bg) !important;
-    } 
+      background-color:var(--td-pre-bg) !important;  
+      padding: 0px;
+    }  
+    .no-top-margin{
+      padding-top:10px;
+    }
 
 </style>
 <div class="col-md-6 mb-4">
   <a href="{{ if .Get "link1" }}{{ .Get "link1"}}{{ else }}{{ .Get "link"}}{{ end }}" class="card-link">
     <div class="card card-hover shadow-sm p-3 bg-white rounded">
       <div class="row no-gutters align-items-center">
-        <div class="col-md-2 text-center">
+        <div class="col-2 text-center">
             <img src="{{ $image }}" alt="{{ .Get "title" }}" class="card-image img-fluid">
         </div>
-        <div class="col-md-10">
-          <div class="card-body">
-            <h5 class="card-title">{{ .Get "title" }}</h5>
+        <div class="col-10">
+          <div class="card-body {{if $path}}no-top-margin{{end}}" >
+            <h5 class="card-title" style="margin-top:2px">{{ .Get "title" }}</h5>
             {{ if $path }}
-              <p class="card-text"></p>{{ $folderCount }} Items</p>
+              <p class="card-text" >{{ $folderCount }} Items</p>
             {{ end }}
           </div>
         </div>
