@@ -3,7 +3,7 @@ title: Operator
 linkTitle: Operator 
 no_list: true
 description: >
-  Installing the CSI Driver for Dell PowerMax via Dell CSM Operator
+  Installing the CSI Driver for PowerMax via Container Storage Module Operator
 ---
 {{% pageinfo color="primary" %}}
 {{< message text="1" >}}

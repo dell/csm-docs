@@ -8,8 +8,7 @@ weight: 1
 
 <br>
 
-Dell PowerMax is a high-performance, enterprise-class storage solution designed to meet the demanding needs of modern data centers. It is renowned for its exceptional speed, scalability, and reliability, making it ideal for mission-critical applications and workloads.
-
+PowerMax is a high-performance, enterprise-class storage solution designed to meet the demanding needs of modern data centers. It is renowned for its exceptional speed, scalability, and reliability, making it ideal for mission-critical applications and workloads.
 
 {{< cardcontainer >}}
 
@@ -29,8 +28,8 @@ Dell PowerMax is a high-performance, enterprise-class storage solution designed 
 
 {{< cardcontainer >}}
 
-    {{< customcard   link="./../../operator_migration" imageNumber="1"  title="CSI to CSM Operator Migration" >}}
-
     {{< customcard  link="./troubleshooting"  imageNumber="8" title="Troubleshooting" >}} 
+    {{< customcard   link="./../../operator_migration" imageNumber="9"  title="CSI to CSM Operator Migration" >}}
 
 {{< /cardcontainer >}}
+

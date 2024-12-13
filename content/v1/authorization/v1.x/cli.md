@@ -3,7 +3,7 @@ title: CLI
 linktitle: CLI 
 weight: 4
 description: >
-  Dell Technologies (Dell) Container Storage Modules (CSM) for Authorization CLI
+ Container Storage Modules (CSM) for Authorization CLI
 ---
 
 {{% pageinfo color="primary" %}}
@@ -17,7 +17,7 @@ If you feel that something is unclear or missing in this document, please open u
 
 | Command | Description |
 | - | - |
-| [karavictl](#karavictl) | karavictl is used to interact with CSM Authorization Server |
+| [karavictl](#karavictl) | karavictl is used to interact with Authorization Server |
 | [karavictl admin token](#karavictl-admin-token) | Generate admin tokens |
 | [karavictl cluster-info](#karavictl-cluster-info) | Display the state of resources within the cluster |
 | [karavictl generate](#karavictl-generate) | Generate resources for use with CSM |
@@ -50,7 +50,7 @@ If you feel that something is unclear or missing in this document, please open u
 
 ### karavictl
 
-karavictl is used to interact with CSM Authorization Server
+karavictl is used to interact with Authorization Server
 
 ##### Synopsis
 
@@ -94,7 +94,7 @@ Generate admin tokens
 
 ##### Synopsis
 
-Generate admin token for use with CSM Authorization commands.
+Generate admin token for use with Authorization commands.
 The tokens output in YAML format, which can be saved in a file.
 
 ```bash
@@ -917,7 +917,7 @@ karavictl tenant get [flags]
 ##### Optional Flags
 ```
   -h, --help       Help for delete
-      --insecure   Skip certificate validation of the CSM Authorization Proxy Server
+      --insecure   Skip certificate validation of the  Authorization Proxy Server
 ```
 
 ##### Output
@@ -999,14 +999,14 @@ karavictl tenant revoke [flags]
 ```
   -n, --name          Tenant name
   -f, --admin-token   Path to admin token file
-      --addr          Address of the CSM Authorization Proxy Server
+      --addr          Address of the Authorization Proxy Server
 ```
 
 ##### Optional Flags
 ```
   -c, --cancel     Cancel a previous tenant revocation
   -h, --help       Help for delete
-      --insecure   Skip certificate validation of the CSM Authorization Proxy Server
+      --insecure   Skip certificate validation of the Authorization Proxy Server
 ```
 
 ##### Output

@@ -8,33 +8,12 @@ weight: 2
 {{% pageinfo color="primary" %}}
 {{< message text="1" >}}
 {{% /pageinfo %}}
-The Dell Container Storage Modules Operator is a Kubernetes Operator, which can be used to install and manage the CSI Drivers and CSM Modules provided by Dell for various storage platforms. This operator is available as a community operator for upstream Kubernetes and can be deployed using OperatorHub.io. The operator can be installed using OLM (Operator Lifecycle Manager) or manually.
+The Container Storage Modules Operator is a Kubernetes Operator, which can be used to install and manage the CSI Drivers and Container Storage Modules provided for various Dell storage platforms. This operator is available as a community operator for upstream Kubernetes and can be deployed using OperatorHub.io. The operator can be installed using OLM (Operator Lifecycle Manager) or manually.
 
 ## Supported CSM Components
-
-The table below lists the driver and modules versions installable with the CSM Operator:
-
-| CSI Driver         | Version | CSM Authorization 1.x.x , 2.x.x | CSM Replication | CSM Observability | CSM Resiliency |
-| ------------------ |---------|---------------------------------|-----------------|-------------------|----------------|
-| CSI PowerScale     | 2.12.0  | ✔ 1.12.0  , 2.0.0              | ✔ 1.10.0       | ✔ 1.10.0          | ✔ 1.11.0      |
-| CSI PowerScale     | 2.11.0  | ✔ 1.11.0  , ❌             | ✔ 1.9.0        | ✔ 1.9.0           | ✔ 1.10.0      |
-| CSI PowerScale     | 2.10.1  | ✔ 1.10.1  , ❌             | ✔ 1.8.1        | ✔ 1.8.1           | ✔ 1.9.1       |
-| CSI PowerFlex      | 2.12.0  | ✔ 1.12.0  , 2.0.0           | ✔ 1.10.0       | ✔ 1.10.0          | ✔ 1.11.0      |
-| CSI PowerFlex      | 2.11.0  | ✔ 1.11.0  , ❌             | ✔ 1.9.0        | ✔ 1.9.0           | ✔ 1.10.0      |
-| CSI PowerFlex      | 2.10.1  | ✔ 1.10.1  , ❌             | ✔ 1.8.1        | ✔ 1.8.1           | ✔ 1.9.1       |
-| CSI PowerStore     | 2.12.0  | ❌ , ❌                    | ❌             | ❌                | ✔ 1.11.0      |
-| CSI PowerStore     | 2.11.1  | ❌ , ❌                    | ❌             | ❌                | ✔ 1.10.0      |
-| CSI PowerStore     | 2.10.1  | ❌ , ❌                    | ❌             | ❌                | ✔ 1.9.1       |
-| CSI PowerMax       | 2.12.0  | ✔ 1.12.0  , 2.0.0           | ✔ 1.10.0       | ✔ 1.10.0          | ✔ 1.11.0      |
-| CSI PowerMax       | 2.11.0  | ✔ 1.11.0  , ❌             | ✔ 1.9.0        | ✔ 1.9.0           | ✔ 1.10.0      |
-| CSI PowerMax       | 2.10.1  | ✔ 1.10.1  , ❌             | ✔ 1.8.1        | ✔ 1.8.1           | ❌            |
-| CSI Unity XT       | 2.12.0  | ❌ , ❌                    | ❌             | ❌                | ❌            |
-| CSI Unity XT       | 2.11.1  | ❌ , ❌                    | ❌             | ❌                | ❌            |
-| CSI Unity XT       | 2.10.1  | ❌ , ❌                    | ❌             | ❌                | ❌            |
+For the supported version [here](../../../supportmatrix/#operator-compatibility-matrix-1).
 
 These CR will be used for new deployment or upgrade. In most case, it is recommended to use the latest available version.
-
-The full compatibility matrix of CSI/CSM versions for the CSM Operator is available [here](../../prerequisites/#csm-operator-compatibility-matrix)
 
 ## Installation
 
@@ -56,41 +35,41 @@ The installation process involves the creation of a `Subscription` object either
 --> 
 >NOTE: You can update the resource requests and limits when you are deploying operator using Operator Hub
 
-1. From your OpenShift UI, select **OperatorHub** in the left pane. 
+1. From your OpenShift UI, select **OperatorHub** in the left pane.
 
-2. On the **OperatorHub** page, search for “container storage module” and select the **container storage module** card: 
+2. On the **OperatorHub page**, search for `container storage module` and select its card.
 
-   <img src="./../../../../../images/deployment/operator/operatorhub_page.png" > 
+   <img src="./../../../../../images/deployment/operator/operatorhub_page.png" ><br> 
 
-3. Select the **appropriate** operator version and click on **install**.
+3. Choose the right operator `version` and click Install.
 
-   <img src="./../../../../../images/deployment/operator/operator_version.png" style="border:1px solid black">  
+   <img src="./../../../../../images/deployment/operator/operator_version.png" style="border:1px solid black"> <br> 
 
-   **Contained storage module** Operator begins to install and takes you to the **Install Operator** page.  
+   Its starts installing the `container storage module` operator and directs you to the **Install Operator** page.
 
-   On this page: 
-    * Select the **A specific namespace on the cluster** option for **Installation mode**. 
-    * Choose the **Create Project** option from the **Installed Namespace** dropdown. 
+   In the **Installation mode** section:
+   - Select `A specific namespace on the cluster`.
+   - Click **Create Project** from the `Installed Namespace` dropdown.
 
-4. In the **Create Project window**, provide the name dell-csm-operator and click **Create** to create a namespace called **“dell-csm-operator”**. 
+4. In the **Create Project** window, name it `dell-csm-operator`, enter the `display name` and `description`, then click **Create** to create the namespace `dell-csm-operator`.
 
-   <img src="./../../../../../images/deployment/operator/create_project.png"> 
+   <img src="./../../../../../images/deployment/operator/create_project.png"> </br>
 
-   * To install an operator, you need to create a Subscription object. You can do this using either the OperatorHub UI or kubectl/oc commands. During this process, you can set the Approval strategy for the InstallPlan 
+   To install an operator, you need to create a Subscription object. You can do this using either the OperatorHub UI or kubectl/oc commands. During this process, you can set the Approval strategy for the InstallPlan 
 
-   * **Automatic** - If you want the operator to be automatically installed or upgraded (once an upgrade is available). 
+   * **Automatic** - If you want the operator to be automatically installed or upgraded (once an upgrade is available).
 
    * **Manual** - If you want a cluster administrator to manually review and approve the InstallPlan for installation/upgrades.  
 
-   <img src="./../../../../../images/deployment/operator/install_operator.png" style="border:1px solid black">  
+   <img src="./../../../../../images/deployment/operator/install_operator.png" style="border:1px solid black"> </br> 
 
-5. Click **Install** to deploy container storage module Operator in the dell-csm-operator namespace.  
+5. Click **Install** to deploy `container storage module Operator` in the `dell-csm-operator` namespace.  
 
-   <img src="./../../../../../images/deployment/operator/installing_operator.png" >
+   <img src="./../../../../../images/deployment/operator/installing_operator.png" > </br>
 
-   <img src="./../../../../../images/deployment/operator/installing_operator1.png" style="border:1px solid black">   
+   <img src="./../../../../../images/deployment/operator/installing_operator1.png" style="border:1px solid black"></br>
 
-6. Once the operator is installed it will be displayed under the **“Installed Operators”**. 
+6. Once the operator is installed it will be displayed under the **Installed Operators**.
    
    <img src="./../../../../../images/deployment/operator/installed_operator.png" style="border: 1px solid black">
 
@@ -100,7 +79,7 @@ The installation process involves the creation of a `Subscription` object either
 
 ### Certified vs Community
 
-Dell CSM Operator is distributed as both `Certified` & `Community` editions.
+Container Storage Module Operator is distributed as both `Certified` & `Community` editions.
 
 Both editions have the same codebase and are supported by Dell Technologies, the only differences are:
 

@@ -42,7 +42,7 @@ To deploy the Operator, follow the instructions available [here](../../../operat
 
 #### Manual SDC Deployment
 
-For detailed PowerFlex installation procedure, see the [Dell PowerFlex Deployment Guide](https://docs.delltechnologies.com/bundle/VXF_DEPLOY/page/GUID-DD20489C-42D9-42C6-9795-E4694688CC75.html). Install the PowerFlex SDC using this procedure:
+For detailed PowerFlex installation procedure, see the [PowerFlex Deployment Guide](https://docs.delltechnologies.com/bundle/VXF_DEPLOY/page/GUID-DD20489C-42D9-42C6-9795-E4694688CC75.html). Install the PowerFlex SDC using this procedure:
 
 **Steps**
 

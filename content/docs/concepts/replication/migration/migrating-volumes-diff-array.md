@@ -82,7 +82,7 @@ After enabling the migration module the user can continue to install the CSI dri
 
 ## PowerMax Support 
 
-CSM for PowerMax supports the following migrations: 
+ PowerMax supports the following migrations: 
 
 - From a VMAX3 array to VMAX All Flash, or PowerMax array.  
 

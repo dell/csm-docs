@@ -3,7 +3,7 @@ title: Design
 linktitle: Design
 weight: 1
 description: >
-  Dell Technologies (Dell) Container Storage Modules (CSM) for Authorization design
+ Container Storage Modules (CSM) for Authorization design
 ---
 Container Storage Modules (CSM) for Authorization is designed as a service mesh solution and consists of many internal components that work together in concert to achieve its overall functionality.
 
@@ -65,8 +65,7 @@ methods supported by the Storage Array itself, e.g. Basic authentication over TL
 
 ### Sidecar Proxy
 
-The CSM for Authorization Sidecar Proxy is deployed as a sidecar in the CSI Driver's Pod. It acts as a proxy and forwards all requests to a
-CSM Authorization Server.
+The Authorization Sidecar Proxy is deployed as a sidecar in the CSI Driver's Pod. It acts as a proxy and forwards all requests to a Authorization Server.
 
 The [CSI Driver section](#csi-driver) noted the limitation of a CSI Driver using Storage Array supported authentication methods only. By nature of being a proxy, the CSM for Authorization
 Sidecar Proxy is able to override the Authorization HTTP header for outbound requests to use Bearer tokens. Such tokens are managed by CSM for Authorization as will

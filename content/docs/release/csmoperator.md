@@ -4,7 +4,7 @@ linkTitle: "Release notes"
 toc_hide: true
 weight: 5
 Description: >
-  Release notes for Dell Container Storage Modules Operator
+  Release notes for Container Storage Modules Operator
 ---
 {{% pageinfo color="primary" %}}
 {{< message text="1" >}}

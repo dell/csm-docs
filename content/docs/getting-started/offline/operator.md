@@ -191,5 +191,5 @@ Now that the required images are available and the Operator configuration update
 bash scripts/install.sh
 ```
 
->NOTE: Dell CSM Operator would install to the 'dell-csm-operator' namespace by default.
+>NOTE: Container Storage Module Operator would install to the 'dell-csm-operator' namespace by default.
 

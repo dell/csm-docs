@@ -192,7 +192,7 @@ parameters:
     csi.storage.k8s.io/fstype: xfs
 ```
 
-> Note: Volume expansion of Metro volume pairs requires that the Metro link be suspended prior to extending the volume. The Metro volume link can be restored after the volume has been resized.
+> ℹ️ **NOTE:**: Volume expansion of Metro volume pairs requires that the Metro link be suspended prior to extending the volume. The Metro volume link can be restored after the volume has been resized.
 
 To resize a PVC, edit the existing PVC spec and set spec.resources.requests.storage to the intended size. For example, if you have a PVC pstore-pvc-demo of size 3Gi, then you can resize it to 30Gi by updating the PVC.
 
@@ -540,7 +540,7 @@ After that, you can use `powerstore-1` storage class to create volumes on the fi
 
 CSI PowerStore supports the ability to dynamically modify array information within the secret, allowing users to update
 <u>_credentials_</u> for the PowerStore arrays, in-flight, without restarting the driver.
-> Note: Updates to the secret that include adding a new array, or modifying the endpoint, globalID, or blockProtocol parameters
+> ℹ️ **NOTE:**: Updates to the secret that include adding a new array, or modifying the endpoint, globalID, or blockProtocol parameters
 > require the driver to be restarted to properly pick up and process the changes.
 
 To do so, change the configuration file `config.yaml` and apply the update using the following command:
@@ -578,7 +578,7 @@ It has to be specified in `config.yaml` and in Storage Classes.
 The change provides backward compatibility with previously created PVs.
 However, to provision new volumes, make sure to delete old Storage Classes and create new ones with `arrayID` instead of `arrayIP` specified.
 
-> NOTE: It is recommended to migrate the PVs to new identifiers before changing management IPs of storage systems. The recommended way to do it is to clone the existing volume and delete the old one. The cloned volume will automatically switch to using globalID instead of management IP.
+> ℹ️ **NOTE:**: It is recommended to migrate the PVs to new identifiers before changing management IPs of storage systems. The recommended way to do it is to clone the existing volume and delete the old one. The cloned volume will automatically switch to using globalID instead of management IP.
 
 ## Root squashing
 
@@ -629,14 +629,14 @@ kubectl edit configmap -n csi-powerstore powerstore-config-params
 
 ## NAT Support
 
-CSI Driver for Dell Powerstore is supported in the NAT environment for NFS protocol.
+CSI Driver for Powerstore is supported in the NAT environment for NFS protocol.
 
 The user will be able to install the driver and able to create pods.
 
 
 ## PV/PVC Metrics
 
-CSI Driver for Dell Powerstore 2.1.0 and above supports volume health monitoring. Alpha feature gate `CSIVolumeHealth` needs to be enabled for the node side monitoring to take effect. For more information, please refer to the [Kubernetes GitHub repository](https://github.com/kubernetes-csi/external-health-monitor/blob/master/README.md). To use this feature, set controller.healthMonitor.enabled and node.healthMonitor.enabled to true. To change the monitor interval, set controller.healthMonitor.interval parameter.
+CSI Driver for Powerstore 2.1.0 and above supports volume health monitoring. Alpha feature gate `CSIVolumeHealth` needs to be enabled for the node side monitoring to take effect. For more information, please refer to the [Kubernetes GitHub repository](https://github.com/kubernetes-csi/external-health-monitor/blob/master/README.md). To use this feature, set controller.healthMonitor.enabled and node.healthMonitor.enabled to true. To change the monitor interval, set controller.healthMonitor.interval parameter.
 
 
 ## Single Pod Access Mode for PersistentVolumes- ReadWriteOncePod
@@ -692,12 +692,12 @@ nfsAcls: "A::OWNER@:rwatTnNcCy,A::GROUP@:rxtncy,A::EVERYONE@:rxtncy,A::user@doma
 ## NVMe Support
 
 **NVMeTCP Support**
-CSI Driver for Dell Powerstore 2.2.0 and above supports NVMe/TCP provisioning. To enable NVMe/TCP provisioning, blockProtocol on secret should be specified as `NVMeTCP`.
+CSI Driver for Powerstore 2.2.0 and above supports NVMe/TCP provisioning. To enable NVMe/TCP provisioning, blockProtocol on secret should be specified as `NVMeTCP`.
 >Note: NVMe/TCP is not supported on RHEL 7.x versions and CoreOS.
 >NVMe/TCP is supported with Powerstore 2.1 and above.
 
 **NVMeFC Support**
-CSI Driver for Dell Powerstore 2.3.0 and above supports NVMe/FC provisioning. To enable NVMe/FC provisioning, blockProtocol on secret should be specified as `NVMeFC`.
+CSI Driver for Powerstore 2.3.0 and above supports NVMe/FC provisioning. To enable NVMe/FC provisioning, blockProtocol on secret should be specified as `NVMeFC`.
 >NVMe/FC is supported with Powerstore 3.0 and above.
 
 >NVMe-FC feature is supported with Helm.
@@ -707,7 +707,7 @@ CSI Driver for Dell Powerstore 2.3.0 and above supports NVMe/FC provisioning. To
 
 ## Volume group snapshot Support
 
-CSI Driver for Dell Powerstore 2.3.0 and above supports creating volume groups and take snapshot of them by making use of CRD (Custom Resource Definition). More information can be found here: [Volume Group Snapshotter](../../../snapshots/volume-group-snapshots/).
+CSI Driver for Powerstore 2.3.0 and above supports creating volume groups and take snapshot of them by making use of CRD (Custom Resource Definition). More information can be found here: [Volume Group Snapshotter](../../../snapshots/volume-group-snapshots/).
 
 ## Configurable Volume Attributes (Optional)
 

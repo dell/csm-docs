@@ -18,8 +18,7 @@ weight: 4
 
 {{< cardcontainer >}}
 
-    {{< customcard   link="./../../operator_migration" imageNumber="1"  title="CSI to CSM Operator Migration" >}}
-
-    {{< customcard  link="./troubleshooting"  imageNumber="8" title="Troubleshooting" >}} 
+    {{< customcard  link="./troubleshooting"  imageNumber="8" title="Troubleshooting" >}}
+        {{< customcard   link="./../../operator_migration" imageNumber="9"  title="CSI to CSM Operator Migration" >}}
 
 {{< /cardcontainer >}}

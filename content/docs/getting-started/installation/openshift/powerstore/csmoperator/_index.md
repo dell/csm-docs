@@ -2,7 +2,7 @@
 title: Operator
 linkTitle: Operator
 description: >
-  Installing the CSI Driver for Dell PowerStore via Dell CSM Operator 
+  Installing the CSI Driver for PowerStore via Container Storage Module Operator 
 no_list: true
 ---
 {{% pageinfo color="primary" %}}
@@ -121,7 +121,7 @@ To deploy the Operator, follow the instructions available [here](../../../operat
 
 CSI PowerStore supports the ability to dynamically modify array information within the secret, allowing users to update
 <u>_credentials_</u> for the PowerStore arrays, in-flight, without restarting the driver.
-> Note: Updates to the secret that include adding a new array, or modifying the endpoint, globalID, or blockProtocol parameters
+> ℹ️ **NOTE:**: Updates to the secret that include adding a new array, or modifying the endpoint, globalID, or blockProtocol parameters
 > require the driver to be restarted to properly pick up and process the changes.
 
 To do so, change the configuration file `config.yaml` and apply the update using the following command:

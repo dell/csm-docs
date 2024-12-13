@@ -1,21 +1,21 @@
 ---
-title: "CSM Installation Wizard Operator"
-linkTitle: "CSM Installation Wizard Operator"
+title: "Installation Wizard Operator"
+linkTitle: "Installation Wizard Operator"
 description: Container Storage Modules Installation Wizard
 weight: 1 
 toc_hide: true
 ---
 <br>
 
-Dell CSM Installation Wizard Support Matrix [Click Here](../../../../../supportmatrix/#supported-dell-csi-drivers)
+CSM Installation Wizard Support Matrix [Click Here](../../../../../supportmatrix/#supported-dell-csi-drivers)
 
 <br>
 
-The Dell Container Storage Modules Installation Wizard is a webpage that helps you create a manifest file to install Dell CSI Drivers and CSM Modules. Users can enable or disable modules through the UI, and it generates a single manifest file, eliminating the need to download individual Helm charts for drivers and modules.
+The Container Storage Modules Installation Wizard is a webpage that helps you create a manifest file to install Dell CSI Drivers and CSM Modules. Users can enable or disable modules through the UI, and it generates a single manifest file, eliminating the need to download individual Helm charts for drivers and modules.
 
 ## Generate Manifest File
 
-1. Open the [CSM Installation Wizard](./src/index.html).
+1. Open the [Installation Wizard](./src/index.html).
 2. Select the `Installation Type` as `Helm`/`Operator`.
 3. Select the `Array`.
 4. Enter the `Image Repository`. The default value is `dellemc`.
@@ -50,7 +50,6 @@ The Dell Container Storage Modules Installation Wizard is a webpage that helps y
 6. Install the Operator.
 
     On your terminal, run this command:
-
-    ```terminal
-    kubectl create -f values.yaml
-    ```
+```bash
+kubectl create -f values.yaml
+```

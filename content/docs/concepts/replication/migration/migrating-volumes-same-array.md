@@ -55,7 +55,7 @@ Newly created PV (`test-pv-to-powermax-replication` in our example) is available
 
 ## Namespace Considerations For Replication
 
-Replication Groups in CSM Replication can be made namespaced, meaning that one SC will generate one Replication Group per namespace. This is also important when migrating volumes from/to replcation storage class.
+Replication Groups in Container Storage Module Replication can be made namespaced, meaning that one SC will generate one Replication Group per namespace. This is also important when migrating volumes from/to replcation storage class.
 
 "When just setting one annotation migration.storage.dell.com/migrate-to migrated volume is assumed to be used in same namespace as original PV and it’s PVC. In the case of being migrated to replication enabled storage class will be inserted in namespaced Replication Group inside PVC namespace."
 
@@ -69,20 +69,18 @@ You can migrate your PVs without disrupting workflows if you use StatefulSet wit
 Instruction (you can also use `repctl` for convenience):
 
 1. Find every PV for your StatefulSet and patch it with `migration.storage.dell.com/migrate-to` annotation that points to new storage class:
-    ```shell
 
+    ```shell
     kubectl patch pv <pv-name> -p '{"metadata": {"annotations":{"migration.storage.dell.com/migrate-to":"powermax-replication"}}}'
     ```
 
 2. Ensure you have a copy of StatefulSet manifest somewhere ready, we will need it later. If you don't have it, you can get it from cluster:
     ```shell
-
     kubectl get sts <sts-name> -n <ns-name> -o yaml > sts-manifest.yaml
     ```
 
 3. To not disrupt any workflows, we will need to delete StatefulSet without deleting any pods, to do so you can use the `--cascade` flag:
-    ```shell
-    
+    ```shell    
     kubectl delete sts <sts-name> -n <ns-name> --cascade=orphan
     ```
 

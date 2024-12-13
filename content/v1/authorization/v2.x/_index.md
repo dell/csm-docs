@@ -3,7 +3,7 @@ title: Authorization - v2.x
 linktitle: v2.x
 weight: 4
 Description: >
-  Dell Technologies (Dell) Container Storage Modules (CSM) for Authorization v2.x.
+  Container Storage Modules (CSM) for Authorization v2.x.
 tags:
  - csm-authorization
 ---
@@ -12,7 +12,7 @@ The following diagram shows a high-level overview of CSM for Authorization with 
 
 ![Alt text](image.png)
 
-This is the introduction to a Stateless Architecture for Authorization. The creation of storage, roles, and tenants is done through Custom Resources (CRs) which are tracked and contained within CSM Authorization. The underlying communication is consistent with the previous architecture which makes the creation of volumes and snapshots seamless.
+This is the introduction to a Stateless Architecture for Authorization. The creation of storage, roles, and tenants is done through Custom Resources (CRs) which are tracked and contained within Authorization. The underlying communication is consistent with the previous architecture which makes the creation of volumes and snapshots seamless.
 
 ## CSM for Authorization Capabilities
 {{<table "table table-striped table-bordered table-sm">}}
@@ -40,7 +40,7 @@ spec:
     persistentVolumeClaimName: vol1
 ```
 
-This will take a snapshot of the `persistent volume claim` named `vol1`. CSM Authorization will verify ownership with Redis to ensure that the tenant who is attempting to create the snapshot owns the `vol1` volume. If the tenant does own the volume, authorization will proceed to check to see if the snapshot fits within the allotted quota and add a record if it does.
+This will take a snapshot of the `persistent volume claim` named `vol1`. Authorization will verify ownership with Redis to ensure that the tenant who is attempting to create the snapshot owns the `vol1` volume. If the tenant does own the volume, authorization will proceed to check to see if the snapshot fits within the allotted quota and add a record if it does.
 
 ### Backend Storage Polling
 
@@ -52,7 +52,7 @@ Lastly, if there is any deletion on the backend storage array of a volume or sna
 
 ## Roles and Responsibilities
 
-The Stateless CSM Authorization contains the following roles:
+The Stateless Authorization contains the following roles:
 - Storage Administrators
 - Kubernetes Tenant Administrators
 

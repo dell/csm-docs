@@ -3,7 +3,7 @@ title: Authorization v1.x
 linktitle: "Authorization v1.x"
 weight: 1
 description: >
-  Dell Technologies (Dell) Container Storage Modules (CSM) for Authorization Operator deployment
+  DContainer Storage Modules (CSM) for Authorization Operator deployment
 ---  
 
 <div id="TableOfContent" style="border:2px solid red"></div>

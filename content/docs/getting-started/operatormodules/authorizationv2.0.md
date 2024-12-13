@@ -2,14 +2,14 @@
 title: Authorization v2.0
 linkTitle: "Authorization v2.0"
 description: >
-  Installing Authorization v2.0 via Dell CSM Operator
+  Installing Authorization v2.0 via Container Storage Module Operator
 ---
 {{% pageinfo color="primary" %}}
 {{< message text="1" >}}
 {{% /pageinfo %}}
-## Install CSM Authorization via Dell CSM Operator
+## Install Container Storage Module Authorization via Container Storage Module Operator
 
-The CSM Authorization module for supported Dell CSI Drivers can be installed via the Dell CSM Operator.
+The Container Storage Module Authorization module for supported Dell CSI Drivers can be installed via the Container Storage Module Operator.
 To deploy the Operator, follow the instructions available [here](../../#installation).
 
 ### Prerequisite
@@ -52,10 +52,10 @@ To deploy the Operator, follow the instructions available [here](../../#installa
 
 
 >__Note__:
-> - If you are installing CSM Authorization in a different namespace than `authorization`, edit the `namespace` field in this file to your namespace.
+> - If you are installing Authorization in a different namespace than `authorization`, edit the `namespace` field in this file to your namespace.
 
 
-### Install CSM Authorization Proxy Server
+### Install Container Storage Module Authorization Proxy Server
 
 1. Follow all the [prerequisites](#prerequisite).
 
@@ -95,8 +95,8 @@ To deploy the Operator, follow the instructions available [here](../../#installa
    | certificateAuthority | The base64-encoded certificate authority for validating the Vault server. | No | - |
 
 >__Note__:
-> - If you are installing CSM Authorization in a different namespace than `authorization`, edit the `namespace` fields in this file to your namespace.
-> - If you specify `storageclass`, the storage class must NOT be provisioned by the Dell CSI Driver to be configured with this installation of CSM Authorization.
+> - If you are installing Authorization in a different namespace than `authorization`, edit the `namespace` fields in this file to your namespace.
+> - If you specify `storageclass`, the storage class must NOT be provisioned by the Dell CSI Driver to be configured with this installation of Authorization.
 
 **Optional:**
 To enable reporting of trace data with [Zipkin](https://zipkin.io/), use the `csm-config-params` configMap in the sample CR or dynamically by editing the configMap.
@@ -117,7 +117,7 @@ To enable reporting of trace data with [Zipkin](https://zipkin.io/), use the `cs
   >__Note__:
   > - This command will deploy the Authorization Proxy Server in the namespace specified in the input YAML file.
 
-### Verify Installation of the CSM Authorization Proxy Server
+### Verify Installation of the Container Storage Module Authorization Proxy Server
 Once the Authorization CR is created, you can verify the installation as mentioned below:
 
   ```bash
@@ -130,13 +130,13 @@ Once the Authorization CR is created, you can verify the installation as mention
 
 Follow the instructions for [Installing dellctl](../../../../support/cli/#installation-instructions).
 
-### Configure the CSM Authorization Proxy Server
+### Configure the Container Storage Module Authorization Proxy Server
 
-Follow the instructions available in CSM Authorization for [Configuring the CSM Authorization Proxy Server](../../../../authorization/v2.x/configuration/).
+Follow the instructions available in Authorization for [Configuring the Authorization Proxy Server](../../../../authorization/v2.x/configuration/).
 
-### Configure a Dell CSI Driver with CSM Authorization
+### Configure a Dell CSI Driver with Container Storage Module Authorization
 
-Follow the instructions available in CSM Authorization for
+Follow the instructions available in Authorization for
 - [Configuring PowerFlex with Authorization](../../../../authorization/v2.x/configuration/powerflex).
 - [Configuring PowerMax with Authorization](../../../../authorization/v2.x/configuration/powermax).
 - [Configuring PowerScale with Authorization](../../../../authorization/v2.x/configuration/powermax).
@@ -145,7 +145,7 @@ Follow the instructions available in CSM Authorization for
 
 If there is already a Vault server available, skip to [Minimum Server Configuration](#minimum-server-configuration).
 
-If there is no Vault server available to use with CSM Authorization, it can be installed in many ways following [Hashicorp Vault documentation](https://www.vaultproject.io/docs).
+If there is no Vault server available to use with Authorization, it can be installed in many ways following [Hashicorp Vault documentation](https://www.vaultproject.io/docs).
 
 For testing environment, however, a simple deployment suggested in this section may suffice.
 It creates a standalone server with in-memory (non-persistent) storage, running in a Docker container.
@@ -174,7 +174,7 @@ openssl req -newkey rsa:2048 -nodes \
 
 Create server certificate signed by the CA:
 
-> Replace `<external IP>` with an IP address by which CSM Authorization can reach the Vault server.
+> Replace `<external IP>` with an IP address by which Authorization can reach the Vault server.
 This may be the address of the Docker host where the Vault server will be running.
 
 ```shell
@@ -284,7 +284,7 @@ docker run --rm -d \
 
 ## Minimum Server Configuration
 
-> **NOTE:** this configuration is a bare minimum to support CSM Authorization and is not intended for use in production environment.
+> **NOTE:** this configuration is a bare minimum to support Authorization and is not intended for use in production environment.
 Refer to the [Hashicorp Vault documentation](https://www.vaultproject.io/docs) for recommended configuration options.
 
 > If a [test instance of Vault](#vault-server-installation) is used, the `vault` commands below can be executed in the Vault server container shell.
@@ -341,7 +341,7 @@ vault write auth/kubernetes/role/csm-authorization \
 
 The role needs to be:
 - bound to the `storage-service` service account
-- bound to the namespace where CSM Authorization will be deployed
+- bound to the namespace where Authorization will be deployed
 - reference the policy that has read access to the storage credentials.
 
 ### Write a secret
@@ -365,7 +365,7 @@ The client token will only be able to renew 3 times before reaching it total all
 
 Existing role values can be changed using `vault write auth/kubernetes/role/csm-authorization token_ttl=30m token_explicit_max_ttl=2h`.
 
-## Uninstall CSM Authorization
+## Uninstall Container Storage Module Authorization
 
 ### Delete all Authorization Custom Resources(CRs)
 
@@ -385,9 +385,9 @@ The command below removes all the Kubernetes components associated with the inst
 kubectl delete csm/authorization --namespace authorization
 ```
 
-### Uninstalling the CSM Authorization sidecar in the CSI Driver
+### Uninstalling the Container Storage Module Authorization sidecar in the CSI Driver
 
-To uninstall the sidecar in the CSI Driver, [update the driver](../drivers/#update-csi-drivers) CSM object to disable the authorization component.
+To uninstall the sidecar in the CSI Driver, [update the driver](../drivers/#update-csi-drivers) Container Storage Module object to disable the authorization component.
 
 ```bash
 kubectl edit csm/[driver-CR-name] --namespace [driver-namespace]

@@ -2,16 +2,16 @@
 title: Authorization v2.0
 linktitle: "Authorization v2.0"
 description: >
-  Dell Technologies (Dell) Container Storage Modules (CSM) for Authorization v2.0 Helm deployment
+ Container Storage Modules (CSM) for Authorization v2.0 Helm deployment
 ---
 
 {{% pageinfo color="primary" %}}
 {{< message text="1" >}}
 {{% /pageinfo %}}
 
-CSM Authorization can be installed by using the provided Helm v3 charts on Kubernetes platforms.
+Authorization can be installed by using the provided Helm v3 charts on Kubernetes platforms.
 
-The following CSM Authorization components are installed in the specified namespace:
+The following Authorization components are installed in the specified namespace:
 - proxy-service, which forwards requests from the CSI Driver to the backend storage array
 - tenant-service, which configures tenants, role bindings, and generates JSON Web Tokens
 - role-service, which configures roles for tenants to be bound to
@@ -22,14 +22,14 @@ The following third-party components are installed in the specified namespace:
 - redis-commander, a web management tool for Redis
 
 The following third-party components are optionally installed in the specified namespace:
-- cert-manager, which optionally provides a self-signed certificate to configure the CSM Authorization Ingresses
-- nginx-ingress-controller, which fulfills the CSM Authorization Ingresses
+- cert-manager, which optionally provides a self-signed certificate to configure the Authorization Ingresses
+- nginx-ingress-controller, which fulfills the Authorization Ingresses
 
-## Install CSM Authorization
+## Install Container Storage Module Authorization
 
 **Steps**
 1. [Install Vault or configure an existing Vault](../../../../csmoperator/modules/authorization-v2.0#vault-server-installation).
-2. Create a namespace where you want to install CSM Authorization.
+2. Create a namespace where you want to install Authorization.
    ```bash
    kubectl create namespace authorization
    ```
@@ -77,7 +77,7 @@ The following third-party components are optionally installed in the specified n
 | enabled                             | Enable/Disable deployment of the NGINX Ingress Controller. Set to false if you have an Ingress Controller installed.                 | No       | true                                      |
 | **cert-manager**                    | This section configures the enablement of cert-manager.                                                                              | -        | -                                         |
 | enabled                             | Enable/Disable deployment of cert-manager. Set to false if you already have cert-manager installed.                                  | No       | true                                      |
-| **authorization**                   | This section configures the CSM-Authorization components.                                                                            | -        | -                                         |
+| **authorization**                   | This section configures the Authorization components.                                                                                 | -        | -                                         |
 | images.proxyService                 | The image to use for the proxy-service.                                                                                              | Yes      | quay.io/dell/container-storage-modules/csm-authorization-proxy:nightly   |
 | images.tenantService                | The image to use for the tenant-service.                                                                                             | Yes      | quay.io/dell/container-storage-modules/csm-authorization-tenant:nightly  |
 | images.roleService                  | The image to use for the role-service.                                                                                               | Yes      | quay.io/dell/container-storage-modules/csm-authorization-proxy:nightly   |
@@ -86,7 +86,7 @@ The following third-party components are optionally installed in the specified n
 | images.opa                          | The image to use for Open Policy Agent.                                                                                              | Yes      | openpolicyagent/opa                       |
 | images.opaKubeMgmt                  | The image to use for Open Policy Agent kube-mgmt.                                                                                    | Yes      | openpolicyagent/kube-mgmt:8.5.8           |
 | hostname                            | The hostname to configure the self-signed certificate (if applicable) and the proxy Ingress.                                         | Yes      | csm-authorization.com                     |
-| logLevel                            | CSM Authorization log level. Allowed values: “error”, “warn”/“warning”, “info”, “debug”.                                             | Yes      | debug                                     |
+| logLevel                            | Authorization log level. Allowed values: “error”, “warn”/“warning”, “info”, “debug”.                                                 | Yes      | debug                                     |
 | concurrentPowerFlexRequests         | Number of concurrent requests to PowerFlex. Used with dellctl to list tenant volumes.                                                | Yes      | 10                                        |
 | concurrentPowerScaleRequests        | Number of concurrent requests to PowerScale. Used with dellctl to list tenant volumes.                                               | Yes      | 10                                        |
 | zipkin.collectoruri                 | The URI of the Zipkin instance to export traces.                                                                                     | No       | -                                         |
@@ -114,7 +114,7 @@ The following third-party components are optionally installed in the specified n
 
 7. Install the driver using `helm`:
 
-To install CSM Authorization with the service Ingresses using your own certificate, run:
+To install Authorization with the service Ingresses using your own certificate, run:
 
 ```bash
 helm -n authorization install authorization -f myvalues.yaml charts/csm-authorization-v2.0 \
@@ -122,7 +122,7 @@ helm -n authorization install authorization -f myvalues.yaml charts/csm-authoriz
 --set-file authorization.privateKey=<location-of-private-key-file>
 ```
 
-To install CSM Authorization with the service Ingresses using a self-signed certificate generated via cert-manager, run:
+To install Authorization with the service Ingresses using a self-signed certificate generated via cert-manager, run:
 
 ```bash
 helm -n authorization install authorization -f myvalues.yaml charts/csm-authorization-v2.0
@@ -134,20 +134,20 @@ helm -n authorization install authorization -f myvalues.yaml charts/csm-authoriz
 
 Follow the instructions for [Installing dellctl](../../../../../support/cli/#installation-instructions).
 
-## Configuring the CSM Authorization Proxy Server
+## Configuring the Authorization Proxy Server
 
-Follow the instructions available in CSM Authorization for [Configuring the CSM Authorization Proxy Server](../../../../../authorization/v2.x/configuration/).
+Follow the instructions available in Authorization for [Configuring the Authorization Proxy Server](../../../../../authorization/v2.x/configuration/).
 
-## Configuring a Dell CSI Driver with CSM for Authorization
+## Configuring a Dell CSI Driver with Container Storage Module for Authorization
 
-Follow the instructions available in CSM Authorization for
+Follow the instructions available in Authorization for
 - [Configuring PowerFlex with Authorization](../../../../../authorization/v2.x/configuration/powerflex).
 - [Configuring PowerMax with Authorization](../../../../../authorization/v2.x/configuration/powermax).
 - [Configuring PowerScale with Authorization](../../../../../authorization/v2.x/configuration/powerscale).
 
-## Updating CSM for Authorization Proxy Server Configuration
+## Updating Container Storage Module for Authorization Proxy Server Configuration
 
-CSM for Authorization has a subset of configuration parameters that can be updated dynamically:
+Authorization has a subset of configuration parameters that can be updated dynamically:
 
 | Parameter            | Type   | Default  | Description                        |
 | -------------------- | ------ | -------- | ---------------------------------- |
@@ -178,13 +178,13 @@ Copy the new, encoded data and edit the `karavi-config-secret` with the new data
 kubectl -n karavi edit secret/karavi-config-secret
 ```
 
-Replace the data in `config.yaml` under the `data` field with your new, encoded data. Save the changes and CSM Authorization will read the changed secret.
+Replace the data in `config.yaml` under the `data` field with your new, encoded data. Save the changes and Authorization will read the changed secret.
 
 >__Note__: If you are updating the signing secret, the tenants need to be updated with new tokens via the `dellctl generate token` command.
 
 ## CSM for Authorization Proxy Server Dynamic Configuration Settings
 
-Some settings are not stored in the `karavi-config-secret` but in the csm-config-params ConfigMap, such as LOG_LEVEL and LOG_FORMAT. To update the CSM Authorization logging settings during runtime, run the below command, make your changes, and save the updated configMap data.
+Some settings are not stored in the `karavi-config-secret` but in the csm-config-params ConfigMap, such as LOG_LEVEL and LOG_FORMAT. To update the Authorization logging settings during runtime, run the below command, make your changes, and save the updated configMap data.
 
 ```bash
 kubectl -n authorization edit configmap/csm-config-params

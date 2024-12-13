@@ -8,7 +8,7 @@ weight: 3
 
 ### Install Helm 3
 
-Install Helm 3 on the master node before you install CSI Driver for Dell PowerMax.
+Install Helm 3 on the master node before you install CSI Driver for PowerMax.
 
 **Steps**
 

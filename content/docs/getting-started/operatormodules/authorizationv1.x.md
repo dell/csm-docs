@@ -2,7 +2,7 @@
 title: Authorization v1.x
 linkTitle: "Authorization v1.x"
 description: >
-  Installing Authorization via Dell CSM Operator
+  Installing Authorization via Container Storage Module Operator
 ---
 
 {{% pageinfo color="primary" %}}
@@ -11,9 +11,9 @@ description: >
 2. <span><span/>{{< message text="5" >}}
 {{% /pageinfo %}}
 
-## Install CSM Authorization via Dell CSM Operator
+## Install CSM Authorization via Container Storage Module Operator
 
-The CSM Authorization module for supported Dell CSI Drivers can be installed via the Dell CSM Operator.
+The CSM Authorization module for supported Dell CSI Drivers can be installed via the Container Storage Module Operator.
 To deploy the Operator, follow the instructions available [here](../../#installation).
 
 ### Prerequisite
@@ -122,24 +122,24 @@ Once the Authorization CR is created, you can verify the installation as mention
 
 ### Install Karavictl
 
-Follow the instructions available in CSM Authorization for [Installing karavictl](../../../helm/modules/installation/authorization-v1.x/#install-karavictl).
+Follow the instructions available in Authorization for [Installing karavictl](../../../helm/modules/installation/authorization-v1.x/#install-karavictl).
 
-### Configure the CSM Authorization Proxy Server
-
-**Authorization v1.x**
-
-Follow the instructions available in CSM Authorization for [Configuring the CSM Authorization Proxy Server](../../../../authorization/v1.x/configuration/proxy-server/).
-
-
-### Configure a Dell CSI Driver with CSM Authorization
+### Configure the Container Storage Module Authorization Proxy Server
 
 **Authorization v1.x**
 
-Follow the instructions available in CSM Authorization for [Configuring a Dell CSI Driver with CSM for Authorization](../../../../authorization/v1.x/configuration/).
+Follow the instructions available in Authorization for [Configuring the Container Storage Module Authorization Proxy Server](../../../../authorization/v1.x/configuration/proxy-server/).
 
-## Upgrade CSM Authorization
 
-This section outlines the upgrade steps for Container Storage Modules (CSM) for Authorization. The upgrade of CSM for Authorization is handled in 2 parts:
+### Configure a Dell CSI Driver with Container Storage Module Authorization
+
+**Authorization v1.x**
+
+Follow the instructions available in Authorization for [Configuring a CSI Driver with Container Storage Module for Authorization](../../../../authorization/v1.x/configuration/).
+
+## Upgrade Container Storage Module Authorization
+
+This section outlines the upgrade steps for Container Storage Modules (CSM) for Authorization. The upgrade of Authorization is handled in 2 parts:
 1) Upgrading the Authorization proxy server
 2) Upgrading CSI Driver, Authorization sidecar with Authorization module enabled
 

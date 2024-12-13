@@ -735,7 +735,7 @@ Based on these two keys, there are certain scenarios on which the driver is goin
 * If enabled and prefix given then set the prefix+worker_node_name for SDC name.
 * If enabled and prefix not given then set worker_node_name for SDC name.
 
-> NOTE: name of the SDC cannot be more than 31 characters, hence the prefix given and the worker node hostname name taken should be such that the total length does not exceed 31 character limit. 
+> ℹ️ **NOTE:**: name of the SDC cannot be more than 31 characters, hence the prefix given and the worker node hostname name taken should be such that the total length does not exceed 31 character limit. 
 
 ## Pre-approving SDC by GUID
 
@@ -759,7 +759,7 @@ node:
     # Default value: false
     enabled: false
 ```
-> NOTE: Currently, the CSI-PowerFlex driver only supports GUID for the restricted SDC mode.
+> ℹ️ **NOTE:**: Currently, the CSI-PowerFlex driver only supports GUID for the restricted SDC mode.
 
 If SDC approval is denied, then provisioning of the volume will not be attempted and an appropriate error message is reported in the logs/events so the user is informed.
 
@@ -777,7 +777,7 @@ The user can also set the volume limit for all the nodes in the cluster by speci
 ## NFS volume support
 Starting with version 2.8, the CSI driver for PowerFlex will support NFS volumes for PowerFlex storage systems version 4.0.x.
 
-> NOTE: 
+> ℹ️ **NOTE:**: 
 > Starting from CSM 1.11.0, the CSI-PowerFlex driver will automatically round up NFS volume sizes to a minimum of 3GB if a smaller size is requested. This change prevents backend errors and ensures compatibility.
 
 CSI driver will support following operations for NFS volumes:
@@ -792,7 +792,7 @@ To enable the support of NFS volumes operations from CSI driver, there are a few
 * `nasName`: defines the NAS server name that should be used for NFS volumes.
 * `enableQuota`: when enabled will set quota limit for a newly provisioned NFS volume.
 
-> NOTE:
+> ℹ️ **NOTE:**:
 > * `nasName`
 >   * nasName is a mandatory parameter and has to be provided in secret yaml, else it will be an error state and will be captured in driver logs.
 >   * nasName can be given at storage class level as well.
@@ -890,7 +890,7 @@ If enableQuota feature is set, user can also set other tree quota parameters suc
 * `softLimit`: soft limit set to quota. Specified as a percentage w.r.t. PVC size.
 * `gracePeriod`: grace period of quota, must be mentioned along with softLimit, in seconds. Soft Limit can be exceeded until the grace period.
 
-> NOTE:
+> ℹ️ **NOTE:**:
 > * `hardLimit` is set to same size as that of PVC size.
 > *  When a volume with quota enabled is expanded then the hardLimit and softLimit are also recalculated by driver w.r.t. to the new PVC size.
 > * `sofLimit` cannot be set to unlimited value (0), otherwise it will become greater than hardLimit (PVC size).

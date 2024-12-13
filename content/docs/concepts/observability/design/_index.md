@@ -3,10 +3,10 @@ title: Design
 linktitle: Design
 weight: 1
 description: >
-  CSM for Observability Design
+  Container Storage Module for Observability Design
 ---
 
-The solution takes the approach that each storage system that Container Storage Modules (CSM) for Observability supports will have their own metrics deployments in the Kubernetes cluster.
+The solution takes the approach that each storage system that Container Storage Modules for Observability supports will have their own metrics deployments in the Kubernetes cluster.
 
 - Metrics Deployment: Queries the Kubernetes API to gather information about storage resources and then queries the storage system's REST API to gather specific metrics. These metrics are then exported to the [OTEL collector](https://github.com/open-telemetry/opentelemetry-collector).
 - Each supported storage system will have their own Deployment for metrics. They will each follow a similar pattern of querying the Kubernetes and StorageSystem APIs to gather information about storage resources (ex: volumes, storage pools, etc) and their metrics. Metrics will be exported directly to the OTEL collector.
@@ -15,11 +15,11 @@ A single topology deployment will query the Kubernetes API to gather mapping inf
 
 ## Required Components
 
-The following prerequisites must be deployed into the namespace where CSM for Observability is located to support the storage system metrics and topology deployments:
+The following prerequisites must be deployed into the namespace where Container Storage Module for Observability is located to support the storage system metrics and topology deployments:
 
 - Prometheus for scraping the metrics from the OTEL collector.
 - Grafana for visualizing the metrics from Prometheus and Topology services using custom dashboards.
-- CSM for Observability will use secrets to get details about the storage systems used by the CSI drivers. These secrets should be copied from the namespaces where the drivers are deployed. 
+- Container Storage Module for Observability will use secrets to get details about the storage systems used by the CSI drivers. These secrets should be copied from the namespaces where the drivers are deployed. 
   - CSI PowerFlex driver uses the 'vxflexos-config' secret. 
   - CSI PowerStore driver uses the 'powerstore-config' secret. 
   - CSI PowerScale driver uses the 'isilon-creds' secret.
@@ -27,12 +27,12 @@ The following prerequisites must be deployed into the namespace where CSM for Ob
 
 ## Deployment Architectures
 
-CSM for Observability can be deployed to either direct storage system requests directly to the storage system or through the [CSM for Authorization](../../authorization) proxy.  The CSI driver must be configured to route storage system requests through the CSM for Authorization proxy in order for CSM for Observability to do the same.
+Container Storage Module for Observability can be deployed to either direct storage system requests directly to the storage system or through the [Container Storage Module for Authorization](../../authorization) proxy.  The CSI driver must be configured to route storage system requests through the Container Storage Module for Authorization proxy in order for Container Storage Module for Observability to do the same.
 
-### Default Deployment of CSM for Observability
+### Default Deployment of Container Storage Module for Observability
 
 ![Default Deployment](../../../../images/observability/obs_architecture1.png)
 
-### Deployment of CSM for Observability with CSM for Authorization
+### Deployment of Container Storage Module for Observability with Container Storage Module for Authorization
 
-![CSM for Observability with CSM for Authorization](../../../../images/observability/obs_architecture2.png)
+![Container Storage Module for Observability with Container Storage Module for Authorization](../../../../images/observability/obs_architecture2.png)

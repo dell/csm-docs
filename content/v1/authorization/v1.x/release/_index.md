@@ -3,10 +3,10 @@ title: "Release notes"
 linkTitle: "Release notes"
 weight: 6
 Description: >
-  Dell Container Storage Modules (CSM) release notes for authorization
+  Container Storage Modules (CSM) release notes for authorization
 ---
 
-## Release Notes - CSM Authorization 1.12.0
+## Release Notes - Container Storage Module Authorization 1.12.0
 
 {{% pageinfo color="primary" %}}
 {{< message text="5" >}}

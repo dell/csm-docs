@@ -301,13 +301,13 @@ controllerCount: 2
 
 >**NOTE:** The default value for controllerCount is 2. It is recommended to not change this unless really required. Also, if the controller count is greater than the number of available nodes (where the pods can be scheduled), some controller pods will remain in a Pending state.
 
-If you are using the Dell CSM Operator, the value to adjust is: 
+If you are using the Container Storage Module Operator, the value to adjust is: 
 
 ```yaml
 replicas: 2  
 ```
 
-For more details about configuring Controller HA using the Dell CSM Operator, see the [Dell CSM Operator documentation](../../../deployment/csmoperator/#custom-resource-specification).
+For more details about configuring Controller HA using the Container Storage Module Operator, see the [Container Storage Module Operator documentation](../../../deployment/csmoperator/#custom-resource-specification).
 
 ## CSI Ephemeral Inline Volume
 
@@ -437,7 +437,7 @@ For a cluster with multiple network interfaces and if a user wants to segregate 
 
 ## Volume Limit
 
-The CSI Driver for Dell PowerScale allows users to specify the maximum number of PowerScale volumes that can be used in a node.
+The CSI Driver for PowerScale allows users to specify the maximum number of PowerScale volumes that can be used in a node.
 
 The user can set the volume limit for a node by creating a node label `max-isilon-volumes-per-node` and specifying the volume limit for that node.
 <br/> `kubectl label node <node_name> max-isilon-volumes-per-node=<volume_limit>`
@@ -615,7 +615,7 @@ kubectl edit configmap -n isilon isilon-config-params
 
 ## NAT Support
 
-CSI Driver for Dell PowerScale is supported in the NAT environment.
+CSI Driver for PowerScale is supported in the NAT environment.
 
 ## Configurable permissions for volume directory
 
@@ -652,7 +652,7 @@ Other ways of configuring powerscale volume permissions remain the same as helm-
 
 ## PV/PVC Metrics
 
-CSI Driver for Dell PowerScale 2.1.0 and above supports volume health monitoring. This allows Kubernetes to report on the condition, status and usage of the underlying volumes.
+CSI Driver for PowerScale 2.1.0 and above supports volume health monitoring. This allows Kubernetes to report on the condition, status and usage of the underlying volumes.
 For example, if a volume were to be deleted from the array, or unmounted outside of Kubernetes, Kubernetes will now report these abnormal conditions as events.
 
 ### This feature can be enabled

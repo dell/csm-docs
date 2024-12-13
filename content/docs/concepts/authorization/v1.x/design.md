@@ -3,13 +3,13 @@ title: Design
 linktitle: Design
 weight: 1
 description: >
-  Dell Technologies (Dell) Container Storage Modules (CSM) for Authorization design
+ Container Storage Modules (CSM) for Authorization design
 ---
-Container Storage Modules (CSM) for Authorization is designed as a service mesh solution and consists of many internal components that work together in concert to achieve its overall functionality.
+Container Storage Modules for Authorization is designed as a service mesh solution and consists of many internal components that work together in concert to achieve its overall functionality.
 
 This document provides an overview of the major components, including how they fit together and pointers to implementation details.
 
-If you are a developer who is new to CSM for Authorization and want to build a mental map of how it works, you're in the right place.
+If you are a developer who is new to Authorization and want to build a mental map of how it works, you're in the right place.
 
 ## Terminology
 
@@ -56,7 +56,7 @@ The mechanism for managing this storage would utilize a CSI Driver.
 ### CSI Driver
 
 A CSI Driver supports the Container Service Interface (CSI) specification. Dell provides customers with CSI Drivers for its various storage arrays.
-CSM for Authorization intends to support a majority, if not all, of these drivers.
+Authorization intends to support a majority, if not all, of these drivers.
 
 A CSI Driver will typically be configured to communicate directly to its intended storage array and as such will be limited in using only the authentication
 methods supported by the Storage Array itself, e.g. Basic authentication over TLS.
@@ -65,43 +65,43 @@ methods supported by the Storage Array itself, e.g. Basic authentication over TL
 
 ### Sidecar Proxy
 
-The CSM for Authorization Sidecar Proxy is deployed as a sidecar in the CSI Driver's Pod. It acts as a proxy and forwards all requests to a
-CSM Authorization Server.
+The Container Storage Module for Authorization Sidecar Proxy is deployed as a sidecar in the CSI Driver's Pod. It acts as a proxy and forwards all requests to a
+Container Storage Module Authorization Server.
 
-The [CSI Driver section](#csi-driver) noted the limitation of a CSI Driver using Storage Array supported authentication methods only. By nature of being a proxy, the CSM for Authorization
-Sidecar Proxy is able to override the Authorization HTTP header for outbound requests to use Bearer tokens. Such tokens are managed by CSM for Authorization as will
+The [CSI Driver section](#csi-driver) noted the limitation of a CSI Driver using Storage Array supported authentication methods only. By nature of being a proxy, the Authorization
+Sidecar Proxy is able to override the Authorization HTTP header for outbound requests to use Bearer tokens. Such tokens are managed by  Authorization as will
 be described later in this document.
 
-### CSM for Authorization Server
+### Container Storage Module for Authorization Server
 
-The CSM for Authorization Server is, at its core, a Layer 7 proxy for intercepting traffic between a CSI Driver and a Storage Array.
+The Authorization Server is, at its core, a Layer 7 proxy for intercepting traffic between a CSI Driver and a Storage Array.
 
-Inbound requests are expected to originate from the CSM for Authorization Sidecar Proxy, for the following reasons:
+Inbound requests are expected to originate from the Container Storage Module for Authorization Sidecar Proxy, for the following reasons:
 
-* Processing a set of agreed upon HTTP headers (added by the CSM for Authorization Sidecar Proxy) to assist in routing traffic to the intended Storage Array.
+* Processing a set of agreed upon HTTP headers (added by the Authorization Sidecar Proxy) to assist in routing traffic to the intended Storage Array.
 * Inspection of CSM-specific Authorization Bearer tokens.
 
-### CSM for Authorization CLI
+### Container Storage Module for Authorization CLI
 
-The [*karavictl*](../cli) CLI (Command Line Interface) application allows Storage Admins to manage and interact with a running CSM for Authorization Server.
+The [*karavictl*](../cli) CLI (Command Line Interface) application allows Storage Admins to manage and interact with a running Container Storage Module for Authorization Server.
 
 ### Storage Array
 
-A Storage Array is typically considered to be one of the various Dell storage offerings, e.g. Dell PowerFlex which is supported by CSM for Authorization
+A Storage Array is typically considered to be one of the various Dell storage offerings, e.g. Dell PowerFlex which is supported by Container Storage Module for Authorization
 today.  Support for more Storage Arrays will come in the future.
 
 ## How it Works
 
-CSM for Authorization intends to override the existing authorization methods between a CSI Driver and its Storage Array. This may be desirable for several reasons, if:
+Authorization intends to override the existing authorization methods between a CSI Driver and its Storage Array. This may be desirable for several reasons, if:
 
 * The CSI Driver requires privileged login credentials (e.g. "root") in order to function.
 * The Storage Array does not natively support the concept of RBAC and/or multi-tenancy.
 
-This section of of the document describes how CSM for Authorization provides a solution to these problems.
+This section of of the document describes how Authorization provides a solution to these problems.
 
 ### Bearer Tokens
 
-CSM for Authorization overrides any existing authorization mechanism between a CSI Driver and its corresponding Storage Array with the use of JSON Web Tokens (JWTs). The CSI Driver and Storage Array will not be aware of this taking place.
+Authorization overrides any existing authorization mechanism between a CSI Driver and its corresponding Storage Array with the use of JSON Web Tokens (JWTs). The CSI Driver and Storage Array will not be aware of this taking place.
 
 In the context of [RFC-6749](https://tools.ietf.org/html/rfc6749#section-1.5) there are two such JWTs that are used:
 
@@ -131,8 +131,8 @@ Both tokens are signed using a server-side secret preventing the risk of tamperi
 The refresh approach is beneficial for the following reasons:
 
 * Accidental exposure of an access token poses a lesser security concern, given the set expiration time is short (e.g. 30 seconds).
-* The CSM for Authorization Server can fully trust the access token without having to perform a database check on each request (doing so would nullify the benefits of using tokens in the first place).
-* The CSM for Authorization Server can defer Tenant checks at refresh time only, e.g. do not allow refresh if the Tenant's access has been revoked by a Storage Admin. There may be a short time window in between revocation and enforcement, depending on the access token's expiration time.
+* Authorization Server can fully trust the access token without having to perform a database check on each request (doing so would nullify the benefits of using tokens in the first place).
+* Authorization Server can defer Tenant checks at refresh time only, e.g. do not allow refresh if the Tenant's access has been revoked by a Storage Admin. There may be a short time window in between revocation and enforcement, depending on the access token's expiration time.
 
 The following diagram shows the access and refresh tokens in play and how a valid access token is required for a request to be proxied to the intended Storage Array.
 
@@ -157,15 +157,15 @@ The following diagram shows the access and refresh tokens in play and how a vali
 
 * A) CSI Driver makes a request to the Storage Array:
   * request is intercepted by the Sidecar Proxy to add the access token.
-  * The CSM for Authorization Server deems the access token valid.
-  * The CSM for Authorization Server permits the request to be proxied to the intended Storage Array.
+  * The Authorization Server deems the access token valid.
+  * The Authorization Server permits the request to be proxied to the intended Storage Array.
 * B) Storage Array response is sent back as expected.
 * C) CSI Driver makes a request to the Storage Array:
   * request is intercepted by the Sidecar Proxy to add the access token.
-  * The CSM for Authorization Server deems the access token is invalid; it has since expired.
-* D) The CSM for Authorization Server responds with HTTP 401 Unauthorized.
+  * The Authorization Server deems the access token is invalid; it has since expired.
+* D) The  Authorization Server responds with HTTP 401 Unauthorized.
 * E) Sidecar Proxy requests a new access token by passing both refresh token and expired token.
-* F) The CSM for Authorization Server processes the request:
+* F) The Authorization Server processes the request:
   * is the refresh token valid?
   * is the access token expired?
   * has the Tenant had access revoked?
@@ -208,7 +208,7 @@ This role says _Allow Tenants with the Developer role access to the bronze pool 
 
 ### Policy
 
-CSM for Authorization leverages the [Open Policy Agent](https://www.openpolicyagent.org/) to use a policy-as-code approach to policy management. It stores a collection of policy files written in Rego language.  Each policy file defines a set of policy rules that form the basis of a policy decision. A policy decision is made by processing the inputs provided. For CSM for Authorization, the inputs are:
+Authorization leverages the [Open Policy Agent](https://www.openpolicyagent.org/) to use a policy-as-code approach to policy management. It stores a collection of policy files written in Rego language.  Each policy file defines a set of policy rules that form the basis of a policy decision. A policy decision is made by processing the inputs provided. For Authorization, the inputs are:
 
 * The set of roles defined by the Storage Admin.
 * The claims section of a validated JWT.
@@ -235,7 +235,7 @@ Given these inputs, many decisions can be made to answer questions like "Can Ten
 
 ### Quota & Volume Ownership
 
-Policy decisions based on the current request and set of roles alone are not enough.  CSM for Authorization must maintain a cache of volumes approved for creation and deletion in order to know if a Tenant has already consumed their quota on a given storage pool.
+Policy decisions based on the current request and set of roles alone are not enough.  Authorization must maintain a cache of volumes approved for creation and deletion in order to know if a Tenant has already consumed their quota on a given storage pool.
 
 A Redis database is used to store this volume data and their relationship with a Tenant, Storage Array and Pool. The use of composite keys provide fast, constant time look up of volumes, e.g. `quota:powerflex:542a2d5f5122210f:bronze:Tenant-1:data` is a Redis hash with volume data as its values.
 
@@ -245,11 +245,11 @@ This section documents the pieces of code that are general in nature and shared 
 
 ### Logging
 
-CSM for Authorization uses the [Logrus](https://github.com/sirupsen/logrus) package when logging messages.
+Authorization uses the [Logrus](https://github.com/sirupsen/logrus) package when logging messages.
 
 ## Observability
 
-Both the CSM for Authorization Server and Sidecar Proxy are long-running processes, so it's important to understand what's going on inside. We use OpenTelemetry (otel) to help with that.
+Both the  Authorization Server and Sidecar Proxy are long-running processes, so it's important to understand what's going on inside. We use OpenTelemetry (otel) to help with that.
 
 The following otel exporters are used:
 

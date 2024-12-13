@@ -8,7 +8,7 @@ Description: >
 
 ## Replication Cluster Topologies
 
-Container Storage Modules (CSM) for Replication project supports the replication of volumes within a single Kubernetes cluster or between two different
+Container Storage Modules for Replication project supports the replication of volumes within a single Kubernetes cluster or between two different
 Kubernetes clusters. The replication controller can support multiple clusters at once, but a single volume can be replicated to a maximum of two clusters.
 
 Each cluster should be assigned the unique identifier `clusterId`. The rules for naming are as follows:

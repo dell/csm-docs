@@ -4,7 +4,7 @@ linktitle: Observability
 no_list: true 
 weight: 3
 description: >
-  Dell Technologies (Dell) Container Storage Modules (CSM) for Observability Helm deployment
+ Container Storage Modules (CSM) for Observability Helm deployment
 --- 
 <!--
 <br>
@@ -22,9 +22,7 @@ description: >
 <br> 
 {{< accordion id="Two" title="Installer" markdown="true" >}} 
 {{<include "content/docs/getting-started/helmmodules/observability/installer.md">}}
-{{< /accordion >}} 
-
-
+{{< /accordion >}}
 
 {{< cardcontainer >}}
 

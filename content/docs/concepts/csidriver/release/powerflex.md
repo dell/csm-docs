@@ -8,14 +8,6 @@ description: Release notes for PowerFlex CSI driver
 
 
 
-
-
-
-
-
-
-
-
 ### New Features/Changes
 
 - [#1472 - [FEATURE]: Support for Kubernetes 1.31](https://github.com/dell/csm/issues/1472)
