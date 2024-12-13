@@ -75,13 +75,13 @@ Container storage module doesn't officially support specific operating systems, 
 
 The table below lists the driver and modules installable with the Operator
 {{<table "table table-striped table-bordered table-sm">}}
-| CSI Driver         | Version |  Authorization 1.x.x , 2.x.x | Replication | Observability | Resiliency |
-| ------------------ |---------|---------------------------------|-----------------|-------------------|----------------|
-| PowerScale     | 2.12.0  | ✔  , ✔                         | ✔              | ✔                 | ✔       |
-| PowerFlex      | 2.12.0  | ✔  , ✔                         | ✔              | ✔                 | ✔       |
-| PowerStore     | 2.12.0  | ❌ , ❌                        | ❌             | ❌                | ✔       |
-| PowerMax       | 2.12.0  | ✔   , ✔                        | ✔              | ✔                 | ✔       |
-| Unity XT       | 2.12.0  | ❌ , ❌                        | ❌             | ❌                | ❌      |
+| CSI Driver         |  Authorization 1.x.x , 2.x.x | Replication | Observability | Resiliency |
+| ------------------ |---------------------------------|-----------------|-------------------|----------------|
+| PowerScale     |  ✔  , ✔                         | ✔              | ✔                 | ✔       |
+| PowerFlex      |✔  , ✔                         | ✔              | ✔                 | ✔       |
+| PowerStore     |  ❌ , ❌                        | ❌             | ❌                | ✔       |
+| PowerMax       |  ✔   , ✔                        | ✔              | ✔                 | ✔       |
+| Unity XT       |  ❌ , ❌                        | ❌             | ❌                | ❌      |
 {{</table>}}
 ## OpenShift Compatibility with Operator  
 
@@ -110,13 +110,13 @@ This mapping applies to all corresponding versions listed in the table.
 ### Supported CSI Drivers
 
 {{<table "table table-striped table-bordered table-sm">}}
-| CSI Driver         | Version   | Helm   | Operator  |
-| ------------------ | --------- | ------ | --------- |
-|  PowerStore     | 2.13.0    |✔️      |✔️        |
-|  PowerMax       | 2.13.0    |✔️      |✔️        |
-|  PowerFlex      | 2.13.0    |✔️      |❌        |
-|  PowerScale     | 2.13.0    |✔️      |✔️        |
-|  Unity XT       | 2.13.0    |✔️      |❌        |
+| CSI Driver         |     Helm   | Operator  |
+| ------------------ |  ------ | --------- |
+|  PowerStore     | ✔️      |✔️        |
+|  PowerMax       | ✔️      |✔️        |
+|  PowerFlex      | ✔️      |❌        |
+|  PowerScale     | ✔️      |✔️        |
+|  Unity XT       | ✔️      |❌        |
 {{</table>}}
 
 
