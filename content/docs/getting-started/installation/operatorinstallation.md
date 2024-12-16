@@ -60,12 +60,6 @@ git clone -b v1.8.0 https://github.com/dell/csm-operator.git
 
 >NOTE: CSM Operator will be installed in the `dell-csm-operator` namespace.
 
->NOTE: If you want to update the resource requests and limits configuration after the operator is installed. Follow the steps below:
-
-     * Uninstall the operator following the steps [here](https://dell.github.io/csm-docs/v3/deployment/csmoperator/#uninstall)
-
-     * Update the resource configuration as mentioned in step 5 and install the operator using the step 7 above
-
 <img src="/csm-docs/images/deployment/install.jpg" width="2500px"  style="border: 2px solid #ccc; padding: 10px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
 
 8. Run the command to validate the installation.
