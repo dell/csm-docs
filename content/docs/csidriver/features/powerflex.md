@@ -1012,8 +1012,10 @@ This feature supports the use of a StorageClass that is not associated with any 
 Requirements:
 - Every cluster worker node must be labeled with a zone label.
 - Every PowerFlex system in the driver Secret must be assigned to their own zone.
-- The StorageClass does not contain any reference to the storage system id or storage pool.
-- Use the CSM Operator to install the PowerFlex CSI driver. The CSM Operator will detect if multiple Availability Zones are enabled in the driver Secret and ensure the correct MDMs are configured on each worker node during the SDC installation. Currently, helm chart deployment does not support multiple Availability Zones.
+- The StorageClass does not contain any reference to the SystemID or storagepool.
+- Use the CSM Operator to install the PowerFlex CSI driver. The CSM Operator will detect if multiple Availability Zones are enabled in the driver Secret and ensure the correct MDMs are configured on each worker node during the SDC installation.
+
+> Note: Helm deployment currently doesn’t support multiple Availability Zones.
 
 The example manifests below illustrate how to configure two PowerFlex systems, with each system assigned to its own zone. Zone labels can have any custom key, but it must be consistent across the StorageClass, Secret, and Node labels.
 
@@ -1030,7 +1032,7 @@ kubectl label nodes worker-4 topology.kubernetes.io/zone=zone2
 #### StorageClass
 For multiple Availability Zones support, the StorageClass does not require details about the PowerFlex system. Optionally, the `allowedTopologies` can be used to specify topology labels used when provisioning volumes with this StorageClass.
 
-> Note: The StorageClass must use `volumeBindingMode: WaitForFirstConsumer`. Using `volumeBindingMode: Immediate` will not guarantee that the volume is provisioned in the same zone as the scheduled Pod.
+> Note: The StorageClass must use `volumeBindingMode: WaitForFirstConsumer`. Using `volumeBindingMode: Immediate` **will not guarantee** that the volume is provisioned in the same zone as the scheduled Pod.
 
 ```yaml
 apiVersion: storage.k8s.io/v1
