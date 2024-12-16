@@ -1,12 +1,27 @@
 {{ $path := .Get "path" }}
-{{ $folders := slice }}
 {{ $folderCount := 0 }}
-{{if .Get "path" }}
-{{ if (fileExists $path) }}
-  {{ $folders = readDir $path }}
-  {{ $folderCount = len (where $folders "IsDir" true) }}
-{{ end }} 
-{{end}}
+{{ if $path }}
+  {{ if (fileExists $path) }}
+    {{ $allEntries := readDir $path }}
+    {{ range $entry := $allEntries }}
+      {{ if $entry.IsDir }}
+        {{ $indexPath := printf "%s/%s/_index.md" $path $entry.Name }}
+        {{ $shouldCount := true }}
+        {{ if (fileExists $indexPath) }}
+          {{ $content := readFile $indexPath }}
+          {{ if (findRE `(?m)^\s*toc_hide\s*:\s*true\s*$` $content) }}
+            {{ $shouldCount = false }}
+          {{ end }}
+        {{ end }}
+        {{ if $shouldCount }}
+          {{ $folderCount = add $folderCount 1 }}
+        {{ end }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+
+
 
 {{ $imagePaths := dict 
   "1" (dict 
