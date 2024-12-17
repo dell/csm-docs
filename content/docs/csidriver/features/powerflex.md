@@ -1003,3 +1003,86 @@ If such a node is not available, the pods stay in Pending state. This means pods
 Without storage capacity tracking, pods get scheduled on a node satisfying the topology constraints. If the required capacity is not available, volume attachment to the pods fails, and pods remain in ContainerCreating state. Storage capacity tracking eliminates unnecessary scheduling of pods when there is insufficient capacity.
 
 The attribute `storageCapacity.enabled` in `values.yaml` can be used to enable/disable the feature during driver installation using helm. This is by default set to true. To configure how often the driver checks for changed capacity set `storageCapacity.pollInterval` attribute. In case of driver installed via operator, this interval can be configured in the sample file provided [here](https://github.com/dell/csm-operator/blob/main/samples/) by editing the `--capacity-poll-interval` argument present in the provisioner sidecar.
+
+## Multiple Availability Zones
+PowerFlex CSI driver version 2.13.0 and above supports multiple Availability Zones for Block. NFS is not supported at this time.
+
+This feature supports the use of a StorageClass that is not associated with any specific PowerFlex system or storage pool. Each cluster node must be labeled with a zone and each PowerFlex system must be assigned to a single zone. When a Pod is scheduled on a node, the volume will be provisioned on the PowerFlex system associated with the cluster node's zone.
+
+Requirements:
+- Every cluster worker node must be labeled with a zone label.
+- Every PowerFlex system in the driver Secret must be assigned to their own zone.
+- The StorageClass does not contain any reference to the SystemID or storagepool.
+- Use the CSM Operator to install the PowerFlex CSI driver. The CSM Operator will detect if multiple Availability Zones are enabled in the driver Secret and ensure the correct MDMs are configured on each worker node during the SDC installation.
+
+> Note: Helm deployment currently doesn’t support multiple Availability Zones.
+
+The example manifests below illustrate how to configure two PowerFlex systems, with each system assigned to its own zone. Zone labels can have any custom key, but it must be consistent across the StorageClass, Secret, and Node labels.
+
+#### Labeling Worker Nodes
+```
+# Label each worker node in the cluster
+kubectl label nodes worker-1 topology.kubernetes.io/zone=zone1
+kubectl label nodes worker-2 topology.kubernetes.io/zone=zone1
+...
+kubectl label nodes worker-3 topology.kubernetes.io/zone=zone2
+kubectl label nodes worker-4 topology.kubernetes.io/zone=zone2
+```
+
+#### StorageClass
+For multiple Availability Zones support, the StorageClass does not require details about the PowerFlex system. Optionally, the `allowedTopologies` can be used to specify topology labels used when provisioning volumes with this StorageClass.
+
+> Note: The StorageClass must use `volumeBindingMode: WaitForFirstConsumer`. Using `volumeBindingMode: Immediate` **will not guarantee** that the volume is provisioned in the same zone as the scheduled Pod.
+
+```yaml
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+allowVolumeExpansion: true
+allowedTopologies:
+- matchLabelExpressions:
+  - key: topology.kubernetes.io/zone
+    values:
+    - zone1
+    - zone2
+metadata:
+  name: powerflex-multiaz
+parameters:
+  csi.storage.k8s.io/fstype: ext4
+provisioner: csi-vxflexos.dellemc.com
+reclaimPolicy: Delete
+volumeBindingMode: WaitForFirstConsumer
+```
+
+#### Secret
+The Secret specifies the zone associated with each PowerFlex system along with additional details such as the protection domain and storage pool name.
+
+```yaml
+- username: "user"
+  password: "password"
+  systemID: "2000000000000001"
+  endpoint: "https://10.0.0.1"
+  skipCertificateValidation: true
+  isDefault: true
+  mdm: "10.0.0.2,10.0.0.3"
+  zone:
+    name: "zone1"
+    labelKey: "kubernetes.topology.io/zone"
+    protectionDomains:
+      - name: "domain1"
+        pools:
+          - "pool1"
+- username: "user"
+  password: "password"
+  systemID: "2000000000000002"
+  endpoint: "https://10.0.0.4"
+  skipCertificateValidation: true
+  isDefault: true
+  mdm: "10.0.0.5,10.0.0.6"
+  zone:
+    name: "zone2"
+    labelKey: "kubernetes.topology.io/zone"
+    protectionDomains:
+      - name: "domain2"
+        pools:
+          - "pool2"
+```
