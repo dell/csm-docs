@@ -26,5 +26,11 @@ To Upgrade the Operator, follow the instructions available [here](../../../opera
 
 
 {{< /cardcontainer >}}
+
+
+{{< markdownify >}}
+To Upgrade Replication, Resiliency  refer  [here.](https://infohub.delltechnologies.com/en-us/p/best-practices-for-deployment-and-life-cycle-management-of-dell-csm-modules-1/#:~:text=Upgrades%20with%20Operator) 
+{{</ markdownify >}}
+
 {{< /accordion >}}
 

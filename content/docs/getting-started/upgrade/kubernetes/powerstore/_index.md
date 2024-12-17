@@ -12,4 +12,5 @@ weight: 3
 
        {{< customcard  link="./offline"  imageNumber="6" title="Offline">}}
 
-{{< /cardcontainer >}}
+{{< /cardcontainer >}} 
+

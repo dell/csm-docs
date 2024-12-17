@@ -2,6 +2,12 @@
 title: "PowerFlex"
 linkTitle: "PowerFlex"
 no_list: true
-description: PowerFlex Installation
 weight: 4
 ---
+
+{{< cardcontainer >}}
+
+       {{< customcard  link="./operator" imageNumber="6"  title="Operator" >}}
+
+
+{{< /cardcontainer >}}
