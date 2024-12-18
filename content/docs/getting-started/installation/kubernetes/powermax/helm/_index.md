@@ -23,7 +23,8 @@ Install Helm 3 on the master node before you install CSI Driver for PowerMax.
 <br>
 
 {{< accordion id="Two" title="CSI Driver" markdown="true" >}}  
-
+### Volume Snapshot Requirements (Optional)
+  For detailed snapshot setup procedure, [click here.](../../../../../snapshots/#optional-volume-snapshot-requirements)
       
 ## Installation
 

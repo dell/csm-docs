@@ -6,9 +6,7 @@ Description: >
 
 --- 
 
-## Prerequisites
-
-The following requirements must be met before installing the CSI Driver for Dell PowerMax:
+The following requirements must be met before installing the CSI Driver for PowerMax:
 
 - A Kubernetes or OpenShift cluster (see [supported versions](../../../../csidriver/#features-and-capabilities)).
 - If enabling CSM for Authorization, please refer to the Authorization deployment steps first
@@ -200,6 +198,67 @@ Set up the environment as follows:
 
 - Add initiators from all ESX/ESXis to a host(initiator group)/host group(cascaded initiator group) where the cluster is hosted.
 - Create a secret which contains vCenter privileges. Follow the steps [here](#support-for-auto-rdm-for-vsphere-over-fc) to create the same. 
+
+### Support for auto RDM for vSphere over FC
+
+This feature is introduced in CSI Driver for PowerMax version 2.5.0.
+
+Support for auto RDM for vSphere over FC feature is optional and by default this feature is disabled for drivers when installed via CSM operator.
+
+1. To enable this feature, set  `X_CSI_VSPHERE_ENABLED` to `true` in the driver manifest under controller and node section.
+
+   ```yaml
+   # VMware/vSphere virtualization support
+           # set X_CSI_VSPHERE_ENABLED to true, if you to enable VMware virtualized environment support via RDM
+           # Allowed values:
+           #   "true" - vSphere volumes are enabled
+           #   "false" - vSphere volumes are disabled
+           # Default value: "false"
+           - name: "X_CSI_VSPHERE_ENABLED"
+             value: "false"
+           # X_CSI_VSPHERE_PORTGROUP: An existing portGroup that driver will use for vSphere
+           # recommended format: csi-x-VC-PG, x can be anything of user choice
+           # Allowed value: valid existing port group on the array
+           # Default value: "" <empty>
+           - name: "X_CSI_VSPHERE_PORTGROUP"
+             value: ""
+           # X_CSI_VSPHERE_HOSTNAME: An existing host(initiator group)/ host group(cascaded intiator group) that driver will use for vSphere
+           # this host/host group should contain initiators from all the ESXs/ESXi host where the cluster is deployed
+           # recommended format: csi-x-VC-HN, x can be anything of user choice
+           # Allowed value: valid existing host(initiator group)/ host group(cascaded intiator group) on the array
+           # Default value: "" <empty>
+           - name: "X_CSI_VSPHERE_HOSTNAME"
+             value: ""
+   ```
+2. Edit the `Secret` file vcenter-creds [here](https://github.com/dell/csi-powermax/blob/main/samples/secret/vcenter-secret.yaml) with required values.
+Example:
+   ```yaml
+   apiVersion: v1
+   kind: Secret
+   metadata:
+     name: vcenter-creds
+     # Set driver namespace
+     namespace: powermax
+   type: Opaque
+   data:
+     # set username to the base64 encoded username
+     username: YWRtaW4=
+     # set password to the base64 encoded password
+     password: YWRtaW4=
+   ```
+These values can be obtained using base64 encoding as described in the following example:
+```bash
+echo -n "myusername" | base64
+echo -n "mypassword" | base64
+```
+where *myusername* and *mypassword* are credentials for a user with vCenter privileges.
+3.
+4. Run following command to create the configmap
+  ```bash
+  kubectl create -f vcenter-secret.yaml
+  ```
+>Note: Name of the secret should always be `vcenter-creds`.
+
 {{% /tab %}}
 {{< /tabpane >}}   
 
@@ -317,10 +376,8 @@ Follow this procedure to set up PowerPath for Linux:
 
 {{< /tabpane >}}   
 
-### Volume Snapshot Requirements (Optional for Helm)
-  For detailed snapshot setup procedure, [click here.](../../../../../snapshots/#optional-volume-snapshot-requirements)
 
-### Replication Requirements (Optional for Helm)
+### Replication Requirements (Optional)
 
 Applicable only if you decided to enable the Replication feature in `my-powermax-settings.yaml`
 

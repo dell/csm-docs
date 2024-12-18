@@ -270,65 +270,6 @@ X_CSI_TOPOLOGY_CONTROL_ENABLED provides a way to filter topology keys on a node 
   ```
  >Note: Name of the configmap should always be `node-topology-config`.
 
-### Support for auto RDM for vSphere over FC
-
-This feature is introduced in CSI Driver for PowerMax version 2.5.0.
-
-Support for auto RDM for vSphere over FC feature is optional and by default this feature is disabled for drivers when installed via CSM operator.
-
-1. To enable this feature, set  `X_CSI_VSPHERE_ENABLED` to `true` in the driver manifest under controller and node section.
-
-   ```yaml
-   # VMware/vSphere virtualization support
-           # set X_CSI_VSPHERE_ENABLED to true, if you to enable VMware virtualized environment support via RDM
-           # Allowed values:
-           #   "true" - vSphere volumes are enabled
-           #   "false" - vSphere volumes are disabled
-           # Default value: "false"
-           - name: "X_CSI_VSPHERE_ENABLED"
-             value: "false"
-           # X_CSI_VSPHERE_PORTGROUP: An existing portGroup that driver will use for vSphere
-           # recommended format: csi-x-VC-PG, x can be anything of user choice
-           # Allowed value: valid existing port group on the array
-           # Default value: "" <empty>
-           - name: "X_CSI_VSPHERE_PORTGROUP"
-             value: ""
-           # X_CSI_VSPHERE_HOSTNAME: An existing host(initiator group)/ host group(cascaded intiator group) that driver will use for vSphere
-           # this host/host group should contain initiators from all the ESXs/ESXi host where the cluster is deployed
-           # recommended format: csi-x-VC-HN, x can be anything of user choice
-           # Allowed value: valid existing host(initiator group)/ host group(cascaded intiator group) on the array
-           # Default value: "" <empty>
-           - name: "X_CSI_VSPHERE_HOSTNAME"
-             value: ""
-   ```
-2. Edit the `Secret` file vcenter-creds [here](https://github.com/dell/csi-powermax/blob/main/samples/secret/vcenter-secret.yaml) with required values.
-Example:
-   ```yaml
-   apiVersion: v1
-   kind: Secret
-   metadata:
-     name: vcenter-creds
-     # Set driver namespace
-     namespace: powermax
-   type: Opaque
-   data:
-     # set username to the base64 encoded username
-     username: YWRtaW4=
-     # set password to the base64 encoded password
-     password: YWRtaW4=
-   ```
-These values can be obtained using base64 encoding as described in the following example:
-```bash
-echo -n "myusername" | base64
-echo -n "mypassword" | base64
-```
-where *myusername* and *mypassword* are credentials for a user with vCenter privileges.
-3.
-4. Run following command to create the configmap
-  ```bash
-  kubectl create -f vcenter-secret.yaml
-  ```
->Note: Name of the secret should always be `vcenter-creds`.
 
 {{< /accordion >}}
 

@@ -191,7 +191,7 @@ modprobe nvme_tcp
 
 ### Linux multipathing requirements
 
-Dell PowerStore supports Linux multipathing (DM-MPIO) and NVMe native multipathing. Configure Linux multipathing before installing the CSI Driver.
+PowerStore supports Linux multipathing (DM-MPIO) and NVMe native multipathing. Configure Linux multipathing before installing the CSI Driver.
 
 > For NVMe connectivity native NVMe multipathing is used. The following sections apply only for iSCSI and Fiber Channel connectivity.
 
@@ -258,39 +258,6 @@ Alternatively, you can check the status of the multipath service by running the 
 
 Refer to the [Dell Host Connectivity Guide](https://elabnavigator.dell.com/vault/pdf/Linux.pdf) for more information.
 
-### Volume Snapshot Requirements (Optional)
-For detailed snapshot setup procedure, [click here.](../../../../../snapshots/#optional-volume-snapshot-requirements)
-
-### Volume Health Monitoring (For helm)
-
-Volume Health Monitoring feature is optional and by default this feature is disabled for drivers when installed via helm.
-To enable this feature, add the below block to the driver manifest before installing the driver. This ensures to install external
-health monitor sidecar. To get the volume health state value under controller should be set to true as seen below. To get the
-volume stats value under node should be set to true.
-   ```yaml
-    controller:
-      healthMonitor:
-        # enabled: Enable/Disable health monitor of CSI volumes
-        # Allowed values:
-        #   true: enable checking of health condition of CSI volumes
-        #   false: disable checking of health condition of CSI volumes
-        # Default value: None
-        enabled: false
-        # interval: Interval of monitoring volume health condition
-        # Allowed values: Number followed by unit (s,m,h)
-        # Examples: 60s, 5m, 1h
-        # Default value: 60s
-        interval: 60s
-
-    node:
-      healthMonitor:
-        # enabled: Enable/Disable health monitor of CSI volumes- volume usage, volume condition
-        # Allowed values:
-        #   true: enable checking of health condition of CSI volumes
-        #   false: disable checking of health condition of CSI volumes
-        # Default value: None
-        enabled: false
-   ```
 ### Replication feature Requirements (Optional)
 
 Applicable only if you decided to enable the Replication feature in `values.yaml`
