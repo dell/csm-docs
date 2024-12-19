@@ -3,7 +3,7 @@ title: "Offline"
 linkTitle: "Offline"
 no_list: true
 description: Offline Installation
-weight: 3
+weight: 4
 ---
 
 {{<include  "content/docs/getting-started/installation/offline/dependencies.md" >}}

@@ -284,17 +284,18 @@ where *myusername* and *mypassword* are credentials for a user with vCenter priv
 
 2. Configuration steps: 
 
-    - Ensure that all nodes have the _Device Mapper Multipathing_ package installed.
-      You can install it by running `dnf install device-mapper-multipath` or `apt install multipath-tools` based on your Linux distribution.
-    - Ensure that the multipath command `mpathconf` is available on all Kubernetes nodes.
-    - Enable multipathing using the `mpathconf --enable --with_multipathd y` command.  A default configuration file, `/etc/multipath.conf` is created.
-    - Enable `user_friendly_names` and `find_multipaths` in the `multipath.conf` file.
+   - Install the Device Mapper Multipathing package on all nodes:
+        -  `dnf install device-mapper-multipath`
+        -   `apt install multipath-tools`
+   - Ensure the `mpathconf` command is available on all Kubernetes nodes.
+   - Enable multipathing: `mpathconf --enable --with_multipathd y`
+   - Edit `/etc/multipath.conf` to enable `user_friendly_names` and `find_multipaths`.
     
 <br>
 
 3. Best Practices 
 
-   As a best practice, use these options to help the operating system and the mulitpathing software detect path changes efficiently:
+    Use these options in multipath.conf for efficient path detection:
 
     ```text
     path_grouping_policy multibus
@@ -379,7 +380,6 @@ Refer to the [Dell Host Connectivity Guide](https://elabnavigator.dell.com/vault
 
 {{< /markdownify >}}
 {{< /tab >}}
-
 {{% tab header="PowerPath" lang="en" %}} 
 
 ### PowerPath for Linux requirements

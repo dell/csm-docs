@@ -1,6 +1,6 @@
 ---
 title: "How to install the Dell Container Storage Modules (CSM) Operator"
-linkTitle: "CSM Operator"
+linktitle: "Operator"
 no_list: true
 description: Learn how to install Dell Container Storage Modules Operator and enable the Resiliency module.
 weight: 2

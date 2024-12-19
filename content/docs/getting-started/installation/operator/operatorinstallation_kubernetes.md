@@ -1,6 +1,6 @@
 ---
-title: "CSM Operator"
-linkTitle: "CSM Operator"
+title: "Operator"
+linktitle: "Operator"
 description: Container Storage Module Operator
 toc_hide: true 
 weight: 2

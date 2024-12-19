@@ -1,6 +1,6 @@
 ---
-title: "CSM Operator"
-linkTitle: "CSM Operator"
+title: "Operator"
+linktitle: "Operator"
 no_list: true
 description: CSM Operator Installation
 weight: 2

@@ -1,9 +1,9 @@
 ---
-title: "CSM Operator"
-linkTitle: "CSM Operator"
+title: "Operator"
+linktitle: "Operator"
 no_list: true
 description: CSM Operator Installation
-weight: 1
+weight: 2
 ---
 ## Installing the Operator
 To deploy the Operator, follow the instructions available [here](../../../operatorinstallation1.md).

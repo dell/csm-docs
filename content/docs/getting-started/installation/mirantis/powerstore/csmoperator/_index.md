@@ -2,7 +2,8 @@
 title: Operator
 linkTitle: Operator
 description: >
-  Installing the CSI Driver for Dell PowerStore via Dell CSM Operator
+  Installing the CSI Driver for Dell PowerStore via Dell CSM Operator 
+weight: 2
 ---
 {{% pageinfo color="primary" %}}
 {{< message text="1" >}}

@@ -263,30 +263,48 @@ where *myusername* and *mypassword* are credentials for a user with vCenter priv
 {{< /tabpane >}}   
 
 {{< tabpane text=true lang="en" >}}
-{{% tab header="Linux Multipathing" lang="en" %}}
+{{< tab header="Linux Multipathing" lang="en" >}}
+{{< markdownify >}}
+
 
 ### Linux Multipathing Requirements
 
-Dell PowerMax supports Linux multipathing (DM-MPIO) and NVMe native multipathing. Configure Linux multipathing before installing the CSI Driver.
+ Configure Linux multipathing before installing the CSI Driver.
+1. Supported Multipathing 
+    - Dell PowerMax supports Linux multipathing (DM-MPIO) and NVMe native multipathing.  
+    - Configure Linux multipathing before installing the CSI Driver.
 
-> For NVMe connectivity native NVMe multipathing is used. The following sections apply only for iSCSI and Fiber Channel connectivity.
 
-Configure Linux multipathing as follows:
-- Ensure that all nodes have the _Device Mapper Multipathing_ package installed.
-  You can install it by running `dnf install device-mapper-multipath` or `apt install multipath-tools` based on your Linux distribution.
-- Ensure that the multipath command `mpathconf` is available on all Kubernetes nodes.
-- Enable multipathing using the `mpathconf --enable --with_multipathd y` command.  A default configuration file, `/etc/multipath.conf` is created.
-- Enable `user_friendly_names` and `find_multipaths` in the `multipath.conf` file.
-- As a best practice, use these options to help the operating system and the mulitpathing software detect path changes efficiently:
+{{< /markdownify >}}
 
-```text
-path_grouping_policy multibus
-path_checker tur
-features "1 queue_if_no_path"
-path_selector "round-robin 0"
-no_path_retry 10
-```
 
+{{< collapse id="1" title="NVMe" >}}For NVMe connectivity native NVMe multipathing is used.{{< /collapse >}}
+<br>
+{{< collapse id="2" title="FC/iSCSI" >}}
+
+2. Configuration steps: 
+
+   - Install the Device Mapper Multipathing package on all nodes:
+        -  `dnf install device-mapper-multipath`
+        -   `apt install multipath-tools`
+   - Ensure the `mpathconf` command is available on all Kubernetes nodes.
+   - Enable multipathing: `mpathconf --enable --with_multipathd y`
+   - Edit `/etc/multipath.conf` to enable `user_friendly_names` and `find_multipaths`.
+    
+<br>
+
+3. Best Practices 
+
+    Use these options in multipath.conf for efficient path detection:
+
+    ```text
+    path_grouping_policy multibus
+    path_checker tur
+    features "1 queue_if_no_path"
+    path_selector "round-robin 0"
+    no_path_retry 10
+    ```
+<br>
 The following is a sample multipath.conf file. You may have to adjust these values based on your environment.
 
 ```text
@@ -333,13 +351,13 @@ Use the base64 encoded string output in the following `MachineConfig` yaml file 
 apiVersion: machineconfiguration.openshift.io/v1
 kind: MachineConfig
 metadata:
-  name: workers-multipath-conf-default
+  name: 99-workers-multipath-conf-default
   labels:
     machineconfiguration.openshift.io/role: worker
 spec:
   config:
     ignition:
-      version: 3.2.0
+      version: 3.4.0
     storage:
       files:
       - contents:
@@ -355,7 +373,13 @@ Alternatively, you can check the status of the multipath service by running the 
 `sudo multipath -ll`
 
 Refer to the [Dell Host Connectivity Guide](https://elabnavigator.dell.com/vault/pdf/Linux.pdf) for more information.
-{{% /tab %}}
+
+{{< /collapse >}}
+
+{{< markdownify >}}
+
+{{< /markdownify >}}
+{{< /tab >}}
 
 {{% tab header="PowerPath" lang="en" %}} 
 

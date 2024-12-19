@@ -1,6 +1,6 @@
 ---
-title: "CSM Operator"
-linkTitle: "CSM Operator"
+title: "Operator"
+linktitle: "Operator"
 description: Container Storage Modules Operator
 weight: 2
 ---

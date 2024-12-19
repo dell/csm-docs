@@ -1,6 +1,7 @@
 ---
 title: Operator
 linkTitle: Operator 
+weight: 2
 no_list: true
 description: >
   Installing the CSI Driver for PowerMax via Container Storage Module Operator

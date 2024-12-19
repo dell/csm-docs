@@ -3,7 +3,8 @@ title: Operator
 linkTitle: Operator
 description: >
   Installing the CSI Driver for PowerStore via Container Storage Module Operator 
-no_list: true
+no_list: true 
+weight: 2
 ---
 {{% pageinfo color="primary" %}}
 {{< message text="1" >}}

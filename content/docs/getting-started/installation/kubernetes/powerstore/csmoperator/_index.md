@@ -1,6 +1,7 @@
 ---
 title: Operator
 linkTitle: Operator
+weight: 2
 description: >
   Installing the CSI Driver for PowerStore via CSM Operator
 no_list: true

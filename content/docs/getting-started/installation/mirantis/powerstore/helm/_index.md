@@ -3,7 +3,7 @@ title: "Helm"
 linkTitle: "Helm"
 no_list: true
 description: Helm Installation
-weight: 2
+weight: 3
 ---
 ### Install Helm 3.x
 
@@ -23,7 +23,39 @@ Install Helm 3.x on the master node before you install the CSI Driver for Dell P
 <br>
 
 {{< accordion id="Two" title="CSI Driver" markdown="true" >}}  
+### Volume Snapshot Requirements (Optional)
+For detailed snapshot setup procedure, [click here.](../../../../../snapshots/#optional-volume-snapshot-requirements)
 
+### Volume Health Monitoring (Optional)
+
+Volume Health Monitoring feature is optional and by default this feature is disabled for drivers when installed via helm.
+To enable this feature, add the below block to the driver manifest before installing the driver. This ensures to install external
+health monitor sidecar. To get the volume health state value under controller should be set to true as seen below. To get the
+volume stats value under node should be set to true.
+   ```yaml
+    controller:
+      healthMonitor:
+        # enabled: Enable/Disable health monitor of CSI volumes
+        # Allowed values:
+        #   true: enable checking of health condition of CSI volumes
+        #   false: disable checking of health condition of CSI volumes
+        # Default value: None
+        enabled: false
+        # interval: Interval of monitoring volume health condition
+        # Allowed values: Number followed by unit (s,m,h)
+        # Examples: 60s, 5m, 1h
+        # Default value: 60s
+        interval: 60s
+
+    node:
+      healthMonitor:
+        # enabled: Enable/Disable health monitor of CSI volumes- volume usage, volume condition
+        # Allowed values:
+        #   true: enable checking of health condition of CSI volumes
+        #   false: disable checking of health condition of CSI volumes
+        # Default value: None
+        enabled: false
+   ```
 ## Install the Driver
 
 **Steps**
