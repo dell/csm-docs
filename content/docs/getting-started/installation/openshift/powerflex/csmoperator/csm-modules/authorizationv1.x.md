@@ -6,4 +6,4 @@ description: >
   Container Storage Modules (CSM) for Authorization Operator deployment
 --- 
 
-{{<include "content/docs/getting-started/operatormodules/authorizationv1.x.md">}}
+{{<include "content/docs/getting-started/installation/operator/modules/authorizationv1.x.md">}}

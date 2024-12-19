@@ -8,10 +8,10 @@ description: >
 --- 
 
 {{< accordion id="One" title="Installation" markdown="true" >}}  
-{{<include "content/docs/getting-started/helmmodules/replication/installation.md">}}
+{{<include "content/docs/getting-started/installation/helm/modules/replication/installation.md">}}
 {{< /accordion >}}
 <br> 
 {{< accordion id="Two" title="Storage Class" markdown="true" >}} 
-{{<include "content/docs/getting-started/helmmodules/replication/configmap-secrets.md">}}
+{{<include "content/docs/getting-started/installation/helm/modules/replication/configmap-secrets.md">}}
 {{< /accordion >}} 
 

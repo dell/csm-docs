@@ -10,7 +10,7 @@ weight: 2
 To deploy the Operator, follow the instructions available [here](../../../operatorinstallation1.md).
 
 {{< accordion id="One" title="CSM Installation Wizard" >}}
-  {{< include "content/docs/getting-started/installation/installationwizardoperator.md" >}}
+  {{< include "content/docs/getting-started/installation/installationwizard/operator.md" >}}
 {{< /accordion >}}
 <br>
 

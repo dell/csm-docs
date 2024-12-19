@@ -6,5 +6,5 @@ description: >
   Dell Technologies (Dell) Container Storage Modules (CSM) for Authorization Operator deployment
 ---  
 
-{{<include "content/docs/getting-started/helmmodules/authorizationv1.x.md">}}
+{{<include "content/docs/getting-started/installation/helm/modules/authorizationv1.x.md">}}
 

@@ -17,6 +17,6 @@ weight: 2
 {{< cardcontainer >}}
 
     {{< customcard  link="./troubleshooting"  imageNumber="8" title="Troubleshooting" >}} 
-    {{< customcard   link="./../../operator_migration" imageNumber="9"  title="CSI to CSM Operator Migration" >}} 
+    {{< customcard   link="./../../operatormigration" imageNumber="9"  title="CSI to CSM Operator Migration" >}} 
 
 {{< /cardcontainer >}}

@@ -8,7 +8,7 @@ description: >
 
 <div id="TableOfContent" style="border:2px solid red"></div>
 
-{{<include "content/docs/getting-started/helmmodules/authorizationv1.x.md">}}
+{{<include "content/docs/getting-started/installation/helm/modules/authorizationv1.x.md">}}
 
 
 <script> 

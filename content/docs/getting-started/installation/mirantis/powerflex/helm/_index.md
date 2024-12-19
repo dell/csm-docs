@@ -17,7 +17,7 @@ Install Helm 3.x on the master node before you install the CSI Driver for Dell P
   curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
   ```
 {{< accordion id="One" title="CSM Installation Wizard" >}}
-            {{<include  "content/docs/getting-started/installation/installationwizardhelm.md" >}}
+            {{<include  "content/docs/getting-started/installation/installationwizard/helm.md" >}}
 {{< /accordion >}} 
 
 <br>

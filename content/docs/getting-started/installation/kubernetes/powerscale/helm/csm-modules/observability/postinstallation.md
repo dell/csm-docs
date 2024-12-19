@@ -6,4 +6,4 @@ weight: 3
 description: >
 --- 
 
-{{<include "content/docs/getting-started/helmmodules/observability/_index.md">}}
+{{<include "content/docs/getting-started/installation/helm/modules/observability/_index.md">}}

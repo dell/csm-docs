@@ -8,7 +8,7 @@ weight: 5
 
 
 {{< accordion id="One" title="Operator" markdown="true" >}}  
-{{<include "content/docs/getting-started/troubleshooting/csmoperator/_index.md">}} 
+{{<include "content/docs/getting-started/installation/troubleshooting/csmoperator/_index.md">}} 
 {{< /accordion >}}
 <br>
 {{< accordion id="Two" title="CSI Driver" markdown="true" >}}  

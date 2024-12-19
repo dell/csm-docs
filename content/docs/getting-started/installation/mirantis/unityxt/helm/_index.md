@@ -17,7 +17,7 @@ Run the command to install Helm 3.0.
 curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
 ```
 {{< accordion id="One" title="CSM Installation Wizard" >}}
-            {{<include  "content/docs/getting-started/installation/installationwizardhelm.md" >}}
+            {{<include  "content/docs/getting-started/installation/installationwizard/helm.md" >}}
 {{< /accordion >}}
 <br>
 

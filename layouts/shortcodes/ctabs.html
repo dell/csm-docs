@@ -1,0 +1,43 @@
+<style>
+    .ctabs {
+        display: flex;
+        cursor: pointer;
+    }
+    
+    .ctab-button {
+        padding: 10px 20px;
+        border: 1px solid #ccc;
+        background-color: #f1f1f1;
+        margin-right: 5px;
+    }
+    
+    .ctab-content {
+        padding: 20px;
+        border: 1px solid #ccc;
+        margin-top: 10px;
+        width:100%;
+    }
+    </style>
+    
+    <div class="ctabs">
+        <button class="ctab-button" onclick="showCtab('ctab1')">Ctab 1</button>
+        <button class="ctab-button" onclick="showCtab('ctab2')">Ctab 2</button>
+        <button class="ctab-button" onclick="showCtab('ctab3')">Ctab 3</button>
+    </div>
+    <div id="ctab1" class="ctab-content">Content for Ctab 1</div>
+    <div id="ctab2" class="ctab-content" style="display:none;">Content for Ctab 2</div>
+    <div id="ctab3" class="ctab-content" style="display:none;">Content for Ctab 3</div>
+    
+    <script>
+    function showCtab(ctabId) {
+        // Hide all ctab content
+        var ctabs = document.getElementsByClassName('ctab-content');
+        for (var i = 0; i < ctabs.length; i++) {
+            ctabs[i].style.display = 'none';
+        }
+    
+        // Show the selected ctab content
+        document.getElementById(ctabId).style.display = 'block';
+    }
+    </script>
+    

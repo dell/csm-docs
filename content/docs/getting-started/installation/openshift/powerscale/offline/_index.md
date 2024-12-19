@@ -6,10 +6,10 @@ description: Offline Installation
 weight: 2
 ---
 
-{{<include  "content/docs/getting-started/offline/dependencies.md" >}}
+{{<include  "content/docs/getting-started/installation/offline/dependencies.md" >}}
 <br>
 {{< accordion id="One" title="Operator" markdown="true" >}} 
-{{<include  "content/docs/getting-started/offline/operator.md" >}}
+{{<include  "content/docs/getting-started/installation/offline/operator.md" >}}
 
 {{< /accordion >}}
 <br> 
