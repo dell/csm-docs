@@ -20,7 +20,6 @@ Upgrading the Dell CSM Driver ensures that you have the latest features, improve
 
     {{< customcard  path="content/docs/getting-started/upgrade/openshift" link="./openshift"  title="OpenShift" imageNumber="7">}}
 
-    {{< customcard path="content/docs/getting-started/upgrade/mirantis" link="./mirantis"  title="Mirantis Kubernetes Engine" imageNumber="7" >}} 
 
 {{< /cardcontainer >}}
 

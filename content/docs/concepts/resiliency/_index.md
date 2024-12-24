@@ -1,6 +1,7 @@
 ---
 title: "Resiliency"
 linkTitle: "Resiliency"
+no_list: true 
 weight: 6
 Description: >
   Container Storage Modules (CSM) for Resiliency

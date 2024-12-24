@@ -57,27 +57,6 @@ The following requirements must be fulfilled in order to successfully use the iS
 - Ensure that the necessary iSCSI initiator utilities are installed on each Kubernetes worker node. This typically includes the _iscsi-initiator-utils_ package for RHEL or _open-iscsi_ package for Ubuntu.
 - Enable and start the _iscsid_ service on each Kubernetes worker node. This service is responsible for managing the iSCSI initiator. You can enable the service by running the following command on all worker nodes: `systemctl enable --now iscsid`
 - Ensure that the unique initiator name is set in _/etc/iscsi/initiatorname.iscsi_.
-- To configure iSCSI in Red Hat OpenShift clusters, you can create a `MachineConfig` object using the console or `oc` to ensure that the iSCSI daemon starts on all the Red Hat CoreOS nodes. Here is an example of a `MachineConfig` object:
-
-```yaml
-apiVersion: machineconfiguration.openshift.io/v1
-kind: MachineConfig
-metadata:
-  name: 99-iscsid
-  labels:
-    machineconfiguration.openshift.io/role: worker
-spec:
-  config:
-    ignition:
-      version: 3.2.0
-    systemd:
-      units:
-      - name: "iscsid.service"
-        enabled: true
-```
-
-Once the `MachineConfig` object has been deployed, CoreOS will ensure that the `iscsid.service` starts automatically. You can check the status of the iSCSI service by entering the following command on each worker node in the cluster: `sudo systemctl status iscsid`.
-
 - Ensure that the iSCSI initiators are available on all the nodes where the driver node plugin will be installed.
 - Ensure that the unique initiator name is set in _/etc/iscsi/initiatorname.iscsi_.
 - If your worker nodes are running Red Hat CoreOS, make sure that automatic iSCSI login at boot is configured. Please contact RedHat for more details.
@@ -155,7 +134,7 @@ metadata:
 spec:
   config:
     ignition:
-      version: 3.2.0
+      version: 3.4.0
     storage:
       files:
       - contents:
@@ -262,6 +241,8 @@ where *myusername* and *mypassword* are credentials for a user with vCenter priv
 {{% /tab %}}
 {{< /tabpane >}}   
 
+Choose your multipathing software between Multipath & PowerPath
+
 {{< tabpane text=true lang="en" >}}
 {{< tab header="Linux Multipathing" lang="en" >}}
 {{< markdownify >}}
@@ -270,9 +251,10 @@ where *myusername* and *mypassword* are credentials for a user with vCenter priv
 ### Linux Multipathing Requirements
 
  Configure Linux multipathing before installing the CSI Driver.
-1. Supported Multipathing 
-    - Dell PowerMax supports Linux multipathing (DM-MPIO) and NVMe native multipathing.  
-    - Configure Linux multipathing before installing the CSI Driver.
+
+ **Supported Multipathing.** 
+  - Dell PowerMax supports Linux multipathing (DM-MPIO) and NVMe native multipathing.  
+  - Configure Linux multipathing before installing the CSI Driver.
 
 
 {{< /markdownify >}}
@@ -282,7 +264,7 @@ where *myusername* and *mypassword* are credentials for a user with vCenter priv
 <br>
 {{< collapse id="2" title="FC/iSCSI" >}}
 
-2. Configuration steps: 
+1. Configuration steps: 
 
    - Install the Device Mapper Multipathing package on all nodes:
         -  `dnf install device-mapper-multipath`
@@ -293,7 +275,7 @@ where *myusername* and *mypassword* are credentials for a user with vCenter priv
     
 <br>
 
-3. Best Practices 
+2. Best Practices 
 
     Use these options in multipath.conf for efficient path detection:
 

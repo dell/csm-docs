@@ -17,7 +17,6 @@ Uninstalling the Dell CSM Driver is a simple process that allows you to remove t
 
     {{< customcard  path="content/docs/getting-started/uninstallation/openshift" link="./openshift"  title="OpenShift" imageNumber="7">}}
 
-    {{< customcard path="content/docs/getting-started/uninstallation/mirantis" link="./mirantis"  title="Mirantis Kubernetes Engine" imageNumber="7" >}} 
 
 {{< /cardcontainer >}}
 

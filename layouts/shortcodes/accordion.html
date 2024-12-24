@@ -17,4 +17,30 @@
       </div>
     </div>
   </div>
-</div>
+</div> 
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  // Check if there's a hash in the URL
+  var hash = window.location.hash;
+  if (hash) {
+    // Find the element with the ID matching the hash
+    var targetElement = document.querySelector(hash);
+    if (targetElement) {
+      // Find the closest accordion collapse element
+      var collapseElement = targetElement.closest('.accordion-collapse');
+      if (collapseElement) {
+        // Find the corresponding accordion button
+        var accordionButton = document.querySelector('button[data-bs-target="#' + collapseElement.id + '"]');
+        if (accordionButton) {
+          // Open the accordion item
+          collapseElement.classList.add('show');
+          accordionButton.classList.remove('collapsed');
+          accordionButton.setAttribute('aria-expanded', 'true');
+        }
+      }
+    }
+  }
+});
+</script>
+

@@ -36,28 +36,6 @@ The following requirements must be fulfilled in order to successfully use the iS
 - Ensure that the necessary iSCSI initiator utilities are installed on each Kubernetes worker node. This typically includes the _iscsi-initiator-utils_ package for RHEL or _open-iscsi_ package for Ubuntu.
 - Enable and start the _iscsid_ service on each Kubernetes worker node. This service is responsible for managing the iSCSI initiator. You can enable the service by running the following command on all worker nodes: `systemctl enable --now iscsid`
 - Ensure that the unique initiator name is set in _/etc/iscsi/initiatorname.iscsi_.
-- To configure iSCSI in Red Hat OpenShift clusters, you can create a `MachineConfig` object using the console or `oc` to ensure that the iSCSI daemon starts on all the Red Hat CoreOS nodes. Here is an example of a `MachineConfig` object:
-
-```yaml
-apiVersion: machineconfiguration.openshift.io/v1
-kind: MachineConfig
-metadata:
-  name: 99-iscsid
-  labels:
-    machineconfiguration.openshift.io/role: worker
-spec:
-  config:
-    ignition:
-      version: 3.2.0
-    systemd:
-      units:
-      - name: "iscsid.service"
-        enabled: true
-```
-
-
-Once the `MachineConfig` object has been deployed, CoreOS will ensure that the `iscsid.service` starts automatically. You can check the status of the iSCSI service by entering the following command on each worker node in the cluster: `sudo systemctl status iscsid`.
-
 - Ensure that the iSCSI initiators are available on all the nodes where the driver node plugin will be installed.
 - Ensure that the unique initiator name is set in _/etc/iscsi/initiatorname.iscsi_.
 - Kubernetes nodes must have network connectivity to an iSCSI port on the PowerStore array that
@@ -121,7 +99,7 @@ metadata:
 spec:
   config:
     ignition:
-      version: 3.2.0
+      version: 3.4.0
     storage:
       files:
       - contents:
@@ -158,7 +136,7 @@ metadata:
 spec:
   config:
     ignition:
-      version: 3.2.0
+      version: 3.4.0
     storage:
       files:
       - contents:
@@ -233,13 +211,13 @@ Use the base64 encoded string output in the following `MachineConfig` yaml file 
 apiVersion: machineconfiguration.openshift.io/v1
 kind: MachineConfig
 metadata:
-  name: workers-multipath-conf-default
+  name: 99-workers-multipath-conf-default
   labels:
     machineconfiguration.openshift.io/role: worker
 spec:
   config:
     ignition:
-      version: 3.2.0
+      version: 3.4.0
     storage:
       files:
       - contents:

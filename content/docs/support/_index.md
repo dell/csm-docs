@@ -1,7 +1,8 @@
 ---
 title: "Support"
 linkTitle: "Support"
-weight: 13
+weight: 13 
+no_list: true 
 Description: >
   Container Storage Modules support
 ---

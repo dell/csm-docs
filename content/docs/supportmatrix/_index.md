@@ -37,7 +37,7 @@ weight: 1
 {{</table>}}
 
 **Notes:** 
-- Self-certify unsupported orchestrator platforms/versions using [Cert-CSI](../support/cert-csi/). Use platforms that haven't reached end of life.
+- Self-certify unsupported orchestrator platforms/versions using [Cert-CSI](../tooling/cert-csi/). Use platforms that haven't reached end of life. 
 - CSM Authorization Server v1 is not supported on Red Hat OpenShift. It can be installed on standard Kubernetes and used with a Dell CSI Driver enabled with CSM Authorization on Red Hat OpenShift.
 - CSM Authorization Server v2 is supported on Red Hat OpenShift.
 
@@ -57,19 +57,19 @@ Container storage module doesn't officially support specific operating systems, 
 
 **Notes:**
 - Ensure the host OS/version aligns with Dell Storage platform support. Check [E-Lab Navigator](https://elabnavigator.dell.com/eln/modernHomeSSM) for details.
-- OS versions not listed must be self-certified using [Cert-CSI](../support/cert-csi/). It's recommended to use OS versions that haven't reached end of life.
+- OS versions not listed must be self-certified using [Cert-CSI](../tooling/cert-csi/). It's recommended to use OS versions that haven't reached end of life.
 
 ## Supported Container Storage Modules
 {{<table "table table-striped table-bordered table-sm">}}
 | Container Storage Module                                                    | PowerMax | PowerFlex | Unity XT | PowerScale | PowerStore |
 | ------------------------------------------------------------- | :------: | :-------: | :------: | :--------: | :--------: |
-| [Authorization - v1.x](../authorization/)                 |   Yes    |    Yes    |    No    |    Yes     |     No     |
-| [Authorization - v2.x](../authorization/)                 |   Yes    |    Yes    |    No    |    Yes     |     No     |
-| [Observability](../observability/)                        |   Yes    |    Yes    |    No    |    Yes     |    Yes     |
-| [Replication](../replication/)                            |   Yes    |    Yes    |    No    |    Yes     |    Yes     |
-| [Resiliency](../resiliency/)                              |   Yes    |    Yes    |   Yes    |    Yes     |    Yes     |
-| [Application Mobility](../applicationmobility/)           |   Yes    |    No     |    No    |     No     |     No     |
-| [Volume Group Snapshot](../snapshots/volume-group-snapshots/) |    No    |    Yes    |    No    |     No     |    Yes     |
+| [Authorization - v1.x](../concepts/authorization/)                 |   Yes    |    Yes    |    No    |    Yes     |     No     |
+| [Authorization - v2.x](../concepts/authorization/)                 |   Yes    |    Yes    |    No    |    Yes     |     No     |
+| [Observability](../concepts/observability/)                        |   Yes    |    Yes    |    No    |    Yes     |    Yes     |
+| [Replication](../concepts/replication/)                            |   Yes    |    Yes    |    No    |    Yes     |    Yes     |
+| [Resiliency](../concepts/resiliency/)                              |   Yes    |    Yes    |   Yes    |    Yes     |    Yes     |
+| [Application Mobility](../concepts/applicationmobility/)           |   Yes    |    No     |    No    |     No     |     No     |
+| [Volume Group Snapshot](../concepts/snapshots/volume-group-snapshots/) |    No    |    Yes    |    No    |     No     |    Yes     |
 {{</table>}}
 
 ## Operator compatibility matrix

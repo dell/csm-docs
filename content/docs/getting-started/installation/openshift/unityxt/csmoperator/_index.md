@@ -6,7 +6,7 @@ description: CSM Operator Installation
 weight: 2
 ---
 ## Installing the Operator
-To deploy the Operator, follow the instructions available [here](../../../operatorinstallation1.md).
+To deploy the Operator, follow the instructions available [here](../../../operator/operatorinstallation_openshift.md).
 
 {{< accordion id="Two" title="CSI Driver" markdown="true" >}}  
 
@@ -82,9 +82,17 @@ To deploy the Operator, follow the instructions available [here](../../../operat
       kubectl get all -n <driver-namespace>
       ```
 
-5.  [Verify the CSI Driver installation](../#verifying-the-driver-installation)
+5.  Once the driver `Custom Resource (CR)` is created, you can verify the installation as mentioned below
 
-6. Refer https://github.com/dell/csi-unity/tree/main/samples for the sample files.
+    * Check if ContainerStorageModule CR is created successfully using the command below:
+        ```bash
+        kubectl get csm/<name-of-custom-resource> -n <driver-namespace> -o yaml
+        ```
+    * Check the status of the CR to verify if the driver installation is in the `Succeeded` state. If the status is not `Succeeded`, see the [Troubleshooting guide](../troubleshooting/#my-dell-csi-driver-install-failed-how-do-i-fix-it) for more information.
+
+6. 
+6. - Refer for Volume Snapshot - https://github.com/dell/csi-unity/tree/main/samples/volumesnapshotclass 
+   - Refer for Storage Class - https://github.com/dell/csi-unity/tree/main/samples/storageclass
 
 **Note** :
    1. "Kubelet config dir path" is not yet configurable in case of Operator based driver installation.

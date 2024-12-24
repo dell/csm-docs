@@ -2,6 +2,7 @@
 title: "COSI Driver"
 linkTitle: "COSI Driver"
 description: About Dell Technologies (Dell) COSI Driver 
+no_list: true 
 weight: 3
 ---
 

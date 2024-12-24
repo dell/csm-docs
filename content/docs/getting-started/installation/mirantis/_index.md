@@ -3,7 +3,8 @@ title: "Mirantis Kubernetes Engine"
 linkTitle: "Mirantis Kubernetes Engine"
 no_list: true
 description: Mirantis Kubernetes Engine Installation
-weight: 3
+weight: 3 
+toc_hide: true 
 ---
 Kubernetes provides a powerful platform for managing containerized applications, and it extends its capabilities to storage management through the use of Container Storage Interface (CSI) drivers. 
 

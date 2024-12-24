@@ -6,12 +6,13 @@ Description: >
 weight: 3
 ---
 
-  - [Can Container Storage Module Operator manage existing drivers installed using Helm charts or the CSI Operator?](#can-csm-operator-manage-existing-drivers-installed-using-helm-charts-or-the-dell-csi-operator)
-  - [Why do some of the Custom Resource fields show up as invalid or unsupported in the OperatorHub GUI?](#why-do-some-of-the-custom-resource-fields-show-up-as-invalid-or-unsupported-in-the-operatorhub-gui)
-  - [How can I view detailed logs for the Container Storage Module SM Operator?](#how-can-i-view-detailed-logs-for-the-csm-operator)
-  - [My Dell CSI Driver install failed. How do I fix it?](#my-dell-csi-driver-install-failed-how-do-i-fix-it)
-  - [My CSContainer Storage ModuleM Replication install fails to validate replication prechecks with 'no such host'.](#my-csm-replication-install-fails-to-validate-replication-prechecks-with-no-such-host)
-  - [How to update resource limits for Container Storage Module Operator when it is deployed using Operator hub](#how-to-update-resource-limits-for-csm-operator-when-it-is-deployed-using-operator-hub)
+
+  - <a href="#can-container-storage-module-operator-manage-existing-drivers-installed-using-helm-charts-or-the-csi-operator">Can Container Storage Module Operator manage existing drivers    installed using Helm charts or the CSI Operator?</a> 
+  - <a href="#why-do-some-of-the-custom-resource-fields-show-up-as-invalid-or-unsupported-in-the-operatorhub-gui">Why do some of the Custom Resource fields show up as invalid or unsupported in the OperatorHub GUI?</a> 
+  - <a href="#how-can-i-view-detailed-logs-for-the-container-storage-module-operator">How can I view detailed logs for the Container Storage Module SM Operator?</a> 
+  - <a href="#my-dell-csi-driver-install-failed-how-do-i-fix-it">My Dell CSI Driver install failed. How do I fix it?</a>
+  - <a href="#my-csm-replication-install-fails-to-validate-replication-prechecks-with-no-such-host">My CSContainer Storage ModuleM Replication install fails to validate replication prechecks with 'no such host'.</a> 
+  - <a href="#how-to-update-resource-limits-for-csm-operator-when-it-is-deployed-using-operator-hub">How to update resource limits for Container Storage Module Operator when it is deployed using Operator hub</a>
 
 ### Can Container Storage Module Operator manage existing drivers installed using Helm charts or the CSI Operator?
 The Container Storage Module Operator is unable to manage any existing driver installed using Helm charts or the CSI Operator. If you already have installed one of the Dell CSI driver in your cluster and  want to use the CSM operator based deployment, uninstall the driver and then redeploy the driver via Container Storage ModuleM Operator
@@ -89,3 +90,4 @@ In certain environments where users have deployed CSM Operator using Operator hu
 * Click on the `YAML` tab under the operator and you will see `ClusterServiceVersion(CSV)` file opened in an YAML editor
 * Update the resource limits in the opened YAML under the section `spec.install.spec.deployments.spec.template.spec.containers.resources`
 * Save the CSV and your changes should be applied
+

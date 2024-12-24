@@ -1,6 +1,7 @@
 ---
 title: "Observability"
 linkTitle: "Observability"
+no_list: true 
 weight: 5
 Description: >
   Container Storage Modules (CSM) for Observability

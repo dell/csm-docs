@@ -69,7 +69,7 @@ metadata:
 spec:
   config:
     ignition:
-      version: 3.2.0
+      version: 3.4.0
     systemd:
       units:
       - name: "iscsid.service"
@@ -155,7 +155,7 @@ metadata:
 spec:
   config:
     ignition:
-      version: 3.2.0
+      version: 3.4.0
     storage:
       files:
       - contents:

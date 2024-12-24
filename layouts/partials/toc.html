@@ -26,21 +26,25 @@ document.addEventListener("DOMContentLoaded", function() {
   const createTOC = () => {
     tocContainer.innerHTML = ''; // Clear existing TOC
     const headings = content.querySelectorAll("h2, h3,h4");
+    console.log(headings)
+
     if (headings.length === 0) return;
 
     const tocList = document.createElement("ul");
 
     headings.forEach((heading, index) => {
       if (index === headings.length - 1 || heading.classList.contains("accordion-header")) return;
-
+      
       let id = heading.id || heading.textContent.trim().toLowerCase().replace(/\s+/g, "-");
       let uniqueId = id;
+      /*
       let counter = 1;
       while (document.getElementById(uniqueId)) {
         uniqueId = `${id}-${counter}`;
         counter++;
       }
       heading.id = uniqueId;
+      */ 
 
       const tocItem = document.createElement("li");
       tocItem.classList.add(heading.tagName.toLowerCase() === "h2" ? "toc-h2" : "toc-h3");
@@ -53,7 +57,7 @@ document.addEventListener("DOMContentLoaded", function() {
       tocList.appendChild(tocItem);
     });
      
-    tocContainer.appendChild(tocList);
+    tocContainer.appendChild(tocList); 
    
     const accordionBodies = document.querySelectorAll('.accordion-collapse');
   accordionBodies.forEach(body => {

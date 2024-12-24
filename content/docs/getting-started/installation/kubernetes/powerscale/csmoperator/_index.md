@@ -7,7 +7,7 @@ weight: 2
 ---
 
 ## Installing the Operator
-To deploy the Operator, follow the instructions available [here](../../../operatorinstallation.md).
+To deploy the Operator, follow the instructions available [here](../../../operator/operatorinstallation_kubernetes.md).
 
 {{< accordion id="One" title="CSM Installation Wizard" >}}
   {{< include "content/docs/getting-started/installation/installationwizard/operator.md" >}}
@@ -157,9 +157,16 @@ To deploy the Operator, follow the instructions available [here](../../../operat
 
     This command will deploy the CSI-PowerScale driver in the namespace specified in the input YAML file.
 
-6. [Verify the CSI Driver installation](../#verifying-the-driver-installation)
+6. Once the driver `Custom Resource (CR)` is created, you can verify the installation as mentioned below
 
-7. Refer https://github.com/dell/csi-powerscale/tree/main/samples for the sample files.
+    * Check if ContainerStorageModule CR is created successfully using the command below:
+        ```bash
+        kubectl get csm/<name-of-custom-resource> -n <driver-namespace> -o yaml
+        ```
+    * Check the status of the CR to verify if the driver installation is in the `Succeeded` state. If the status is not `Succeeded`, see the [Troubleshooting guide](../troubleshooting/#my-dell-csi-driver-install-failed-how-do-i-fix-it) for more information.
+
+7. - Refer for Volume Snapshot - https://github.com/dell/csi-powerscale/tree/main/samples/volumesnapshotclass 
+   - Refer for Storage Class - https://github.com/dell/csi-powerscale/tree/main/samples/storageclass
 
 **Note** :
 

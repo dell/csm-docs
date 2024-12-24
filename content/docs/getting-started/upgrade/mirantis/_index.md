@@ -3,6 +3,7 @@ title: "Mirantis Kubernetes Engine"
 linkTitle: "Mirantis Kubernetes Engine"
 no_list: true
 description: Kubernetes Upgrade
+toc_hide: true 
 weight: 3
 ---
 

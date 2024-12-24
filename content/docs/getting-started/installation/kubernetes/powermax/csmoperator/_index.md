@@ -11,7 +11,7 @@ description: >
 {{% /pageinfo %}}
 
 ## Installing the Operator
-To deploy the Operator, follow the instructions available [here](../../../operatorinstallation.md).
+To deploy the Operator, follow the instructions available [here](../../../operator/operatorinstallation_kubernetes.md).
 
 {{< accordion id="One" title="Installation Wizard" markdown="true" >}}  
 {{<include  "content/docs/getting-started/installation/installationwizard/operator.md" >}}
@@ -158,8 +158,16 @@ To deploy the Operator, follow the instructions available [here](../../../operat
    | X_CSI_CONFIG_MAP_NAME                           | Name of config map as created for CSI PowerMax                                                                                                                                                                                                                           | Yes      | "powermax-reverseproxy-config" |
 
 7. Execute the following command to create the PowerMax custom resource:`kubectl create -f <input_sample_file.yaml>`. The above command will deploy the CSI-PowerMax driver.
-8. The mandatory module CSI PowerMax Reverseproxy will be installed automatically with the same command.
-9. Refer https://github.com/dell/csi-powermax/tree/main/samples for the sample files.
+8. The mandatory module CSI PowerMax Reverseproxy will be installed automatically with the same command. 
+9. Once the driver `Custom Resource (CR)` is created, you can verify the installation as mentioned below
+
+    * Check if ContainerStorageModule CR is created successfully using the command below:
+        ```bash
+        kubectl get csm/<name-of-custom-resource> -n <driver-namespace> -o yaml
+        ```
+    * Check the status of the CR to verify if the driver installation is in the `Succeeded` state. If the status is not `Succeeded`, see the [Troubleshooting guide](../troubleshooting/#my-dell-csi-driver-install-failed-how-do-i-fix-it) for more information.
+10. - Refer for Volume Snapshot - https://github.com/dell/csi-powermax/tree/main/samples/volumesnapshotclass 
+    - Refer for Storage Class - https://github.com/dell/csi-powermax/tree/main/samples/storageclass
 
 ## Other features to enable
 ### Dynamic Logging Configuration
