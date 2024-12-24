@@ -55,53 +55,55 @@ cd dell-csi-helm-installer && wget -O my-unity-settings.yaml https://github.com/
 3. Edit `values.yaml` to set the following parameters for your installation:
 
     The following table lists the primary configurable parameters of the Unity XT driver chart and their default values. More detailed information can be found in the [`values.yaml`](https://github.com/dell/helm-charts/blob/csi-unity-2.13.0/charts/csi-unity/values.yaml) file in this repository.
+  {{< collapse id="1" title="Parameters">}}
+  | Parameter | Description | Required | Default |
+  | --------- | ----------- | -------- |-------- |
+  | images | List all the images used by the CSI driver and CSM. If you use a private repository, change the registries accordingly. | Yes | "" |
+  | logLevel | LogLevel is used to set the logging level of the driver | No | info |
+  | allowRWOMultiPodAccess | Flag to enable multiple pods to use the same PVC on the same node with RWO access mode. | No | false |
+  | kubeletConfigDir | Specify kubelet config dir path | Yes | /var/lib/kubelet |
+  | syncNodeInfoInterval | Time interval to add node info to the array. Default 15 minutes. The minimum value should be 1 minute. | No | 15 |
+  | maxUnityVolumesPerNode | Maximum number of volumes that controller can publish to the node. | No | 0 |
+  | certSecretCount | Represents the number of certificate secrets, which the user is going to create for SSL authentication. (unity-cert-0..unity-cert-n). The minimum value should be 1. | No | 1 |
+  | [allowedNetworks](../../../../../csidriver/features/unity/#support-custom-networks-for-nfs-io-traffic) | Defines the list of networks that can be used for NFS I/O traffic, CIDR format must be used. | No | empty |
+  | imagePullPolicy |  The default pull policy is IfNotPresent which causes the Kubelet to skip pulling an image if it already exists. | Yes | IfNotPresent |
+  | podmon.enabled | service to monitor failing jobs and notify | No | false |
+  | tenantName | Tenant name added while adding host entry to the array | No |  |
+  | fsGroupPolicy | Defines which FS Group policy mode to be used, Supported modes `None, File and ReadWriteOnceWithFSType` | No | "ReadWriteOnceWithFSType" |
+  | storageCapacity.enabled | Enable/Disable storage capacity tracking | No | true |
+  | storageCapacity.pollInterval | Configure how often the driver checks for changed capacity | No | 5m |
+  | **controller** | Allows configuration of the controller-specific parameters.| - | - |
+  | controllerCount | Defines the number of csi-unity controller pods to deploy to the Kubernetes release| Yes | 2 |
+  | volumeNamePrefix | Defines a string prefix for the names of PersistentVolumes created | Yes | "k8s" |
+  | snapshot.enabled | Enable/Disable volume snapshot feature | Yes | true |
+  | snapshot.snapNamePrefix | Defines a string prefix for the names of the Snapshots created | Yes | "snapshot" |
+  | resizer.enabled | Enable/Disable volume expansion feature | Yes | true |
+  | nodeSelector | Define node selection constraints for pods of controller deployment | No | |
+  | tolerations | Define tolerations for the controller deployment, if required | No | |
+  | healthMonitor.enabled | Enable/Disable deployment of external health monitor sidecar for controller side volume health monitoring. | No | false |
+  | healthMonitor.interval | Interval of monitoring volume health condition. Allowed values: Number followed by unit (s,m,h) | No | 60s |
+  | ***node*** | Allows configuration of the node-specific parameters.| - | - |
+  | dnsPolicy | Define the DNS Policy of the Node service | Yes | ClusterFirstWithHostNet |
+  | healthMonitor.enabled | Enable/Disable health monitor of CSI volumes- volume usage, volume condition | No | false |
+  | nodeSelector | Define node selection constraints for pods of node deployment | No | |
+  | tolerations | Define tolerations for the node deployment, if required | No | |
 
-    | Parameter | Description | Required | Default |
-    | --------- | ----------- | -------- |-------- |
-    | images | List all the images used by the CSI driver and CSM. If you use a private repository, change the registries accordingly. | Yes | "" |
-    | logLevel | LogLevel is used to set the logging level of the driver | No | info |
-    | allowRWOMultiPodAccess | Flag to enable multiple pods to use the same PVC on the same node with RWO access mode. | No | false |
-    | kubeletConfigDir | Specify kubelet config dir path | Yes | /var/lib/kubelet |
-    | syncNodeInfoInterval | Time interval to add node info to the array. Default 15 minutes. The minimum value should be 1 minute. | No | 15 |
-    | maxUnityVolumesPerNode | Maximum number of volumes that controller can publish to the node. | No | 0 |
-    | certSecretCount | Represents the number of certificate secrets, which the user is going to create for SSL authentication. (unity-cert-0..unity-cert-n). The minimum value should be 1. | No | 1 |
-    | [allowedNetworks](../../../../../csidriver/features/unity/#support-custom-networks-for-nfs-io-traffic) | Defines the list of networks that can be used for NFS I/O traffic, CIDR format must be used. | No | empty |
-    | imagePullPolicy |  The default pull policy is IfNotPresent which causes the Kubelet to skip pulling an image if it already exists. | Yes | IfNotPresent |
-    | podmon.enabled | service to monitor failing jobs and notify | No | false |
-    | tenantName | Tenant name added while adding host entry to the array | No |  |
-    | fsGroupPolicy | Defines which FS Group policy mode to be used, Supported modes `None, File and ReadWriteOnceWithFSType` | No | "ReadWriteOnceWithFSType" |
-    | storageCapacity.enabled | Enable/Disable storage capacity tracking | No | true |
-    | storageCapacity.pollInterval | Configure how often the driver checks for changed capacity | No | 5m |
-    | **controller** | Allows configuration of the controller-specific parameters.| - | - |
-    | controllerCount | Defines the number of csi-unity controller pods to deploy to the Kubernetes release| Yes | 2 |
-    | volumeNamePrefix | Defines a string prefix for the names of PersistentVolumes created | Yes | "k8s" |
-    | snapshot.enabled | Enable/Disable volume snapshot feature | Yes | true |
-    | snapshot.snapNamePrefix | Defines a string prefix for the names of the Snapshots created | Yes | "snapshot" |
-    | resizer.enabled | Enable/Disable volume expansion feature | Yes | true |
-    | nodeSelector | Define node selection constraints for pods of controller deployment | No | |
-    | tolerations | Define tolerations for the controller deployment, if required | No | |
-    | healthMonitor.enabled | Enable/Disable deployment of external health monitor sidecar for controller side volume health monitoring. | No | false |
-    | healthMonitor.interval | Interval of monitoring volume health condition. Allowed values: Number followed by unit (s,m,h) | No | 60s |
-    | ***node*** | Allows configuration of the node-specific parameters.| - | - |
-    | dnsPolicy | Define the DNS Policy of the Node service | Yes | ClusterFirstWithHostNet |
-    | healthMonitor.enabled | Enable/Disable health monitor of CSI volumes- volume usage, volume condition | No | false |
-    | nodeSelector | Define node selection constraints for pods of node deployment | No | |
-    | tolerations | Define tolerations for the node deployment, if required | No | |
+  **Note**:
 
-    **Note**:
+  * User should provide all boolean values with double-quotes. This applies only for `myvalues.yaml`. Example: "true"/"false"
 
-      * User should provide all boolean values with double-quotes. This applies only for `myvalues.yaml`. Example: "true"/"false"
+  * controllerCount parameter value should be <= number of nodes in the kubernetes cluster else install script fails.
 
-      * controllerCount parameter value should be <= number of nodes in the kubernetes cluster else install script fails.
+  * User can a create separate _StorageClass_ (with topology-related keys) by referring to existing default storage classes.
 
-      * User can a create separate _StorageClass_ (with topology-related keys) by referring to existing default storage classes.
+  * Host IO Limit must have a minimum bandwidth of 1 MBPS to discover the volumes on node successfully.
 
-      * Host IO Limit must have a minimum bandwidth of 1 MBPS to discover the volumes on node successfully.
+  * User must not change the value of allowRWOMultiPodAccess to true unless intended to use the feature and is aware of the consequences. Enabling multiple pods to access the same PVC with RWO access mode on the same node might cause data to be overwritten and therefore leading to data loss in some cases.
+    {{< /collapse >}}
 
-      * User must not change the value of allowRWOMultiPodAccess to true unless intended to use the feature and is aware of the consequences. Enabling multiple pods to access the same PVC with RWO access mode on the same node might cause data to be overwritten and therefore leading to data loss in some cases.
+Example *myvalues.yaml*
 
-   Example *myvalues.yaml*
-    ```yaml
+  ```yaml
     logLevel: "info"
     imagePullPolicy: Always
     certSecretCount: 1
@@ -118,78 +120,81 @@ cd dell-csi-helm-installer && wget -O my-unity-settings.yaml https://github.com/
     syncNodeInfoInterval: 5
     maxUnityVolumesPerNode: 0
     fsGroupPolicy: ReadWriteOneFSType
-    ```
+  ```
 
 4. For certificate validation of Unisphere REST API calls refer [here](#certificate-validation-for-unisphere-rest-api-calls). Otherwise, create an empty secret with file `csi-unity/samples/secret/emptysecret.yaml` file by running the `kubectl create -f csi-unity/samples/secret/emptysecret.yaml` command.
 
 5. Prepare the `secret.yaml`  for driver configuration.
     The following table lists driver configuration parameters for multiple storage arrays.
+    {{< collapse id="2" title="Parameters">}}
 
-    | Parameter                 | Description                                    | Required | Default |
-    | ------------------------- | ---------------------------------------------- | -------- |-------- |
-    | storageArrayList.username | Username for accessing Unity XT system         | Yes     | -       |
-    | storageArrayList.password | Password for accessing Unity XT system         | Yes     | -       |
-    | storageArrayList.endpoint | REST API gateway HTTPS endpoint Unity XT system| Yes     | -       |
-    | storageArrayList.arrayId  | ArrayID for Unity XT system                    | Yes     | -       |
-    | storageArrayList.skipCertificateValidation | "skipCertificateValidation " determines if the driver is going to validate unisphere certs while connecting to the Unisphere REST API interface. If it is set to false, then a secret unity-certs has to be created with an X.509 certificate of CA which signed the Unisphere certificate. | Yes | true |
-    | storageArrayList.isDefault| An array having isDefault=true or isDefault=true will be considered as the default array when arrayId is not specified in the storage class. This parameter should occur only once in the list. | Yes | - |
-
-
-    Example: secret.yaml
-    ```yaml
-      storageArrayList:
-      - arrayId: "APM00******1"
-        username: "user"
-        password: "password"
-        endpoint: "https://10.1.1.1/"
-        skipCertificateValidation: true
-        isDefault: true
-
-      - arrayId: "APM00******2"
-        username: "user"
-        password: "password"
-        endpoint: "https://10.1.1.2/"
-        skipCertificateValidation: true
-        isDefault: false
-    ```
-
-	Use the following command to create a new secret unity-creds from `secret.yaml` file.
-
-    ```bash
-    kubectl create secret generic unity-creds -n unity --from-file=config=secret.yaml
-    ```
-
-    Use the following command to replace or update the secret:
-
-    ```bash
-    kubectl create secret generic unity-creds -n unity --from-file=config=secret.yaml -o yaml --dry-run | kubectl replace -f -
-    ```
-
-    **Note**: The user needs to validate the yaml syntax and array-related key/values while replacing the unity-creds secret.
-    The driver will continue to use previous values in case of an error found in the yaml file.
+| Parameter                 | Description                                    | Required | Default |
+| ------------------------- | ---------------------------------------------- | -------- |-------- |
+| storageArrayList.username | Username for accessing Unity XT system         | Yes     | -       |
+| storageArrayList.password | Password for accessing Unity XT system         | Yes     | -       |
+| storageArrayList.endpoint | REST API gateway HTTPS endpoint Unity XT system| Yes     | -       |
+| storageArrayList.arrayId  | ArrayID for Unity XT system                    | Yes     | -       |
+| storageArrayList.skipCertificateValidation | "skipCertificateValidation " determines if the driver is going to validate unisphere certs while connecting to the Unisphere REST API interface. If it is set to false, then a secret unity-certs has to be created with an X.509 certificate of CA which signed the Unisphere certificate. | Yes | true |
+| storageArrayList.isDefault| An array having isDefault=true or isDefault=true will be considered as the default array when arrayId is not specified in the storage class. This parameter should occur only once in the list. | Yes | - |
+   {{< /collapse >}}
 
 
-	Alternatively, users can configure and use `secret.yaml` for driver configuration. The parameters remain the same as in the above table and below is a sample of `secret.yaml`. Samples of  `secret.yaml` is available in the directory `csi-unity/samples/secret/ `.
 
-	Example: secret.yaml
-	  ```yaml
-    storageArrayList:
-    - arrayId: "APM00******1"
-      username: "user"
-      password: "password"
-      endpoint: "https://10.1.1.1/"
-      skipCertificateValidation: true
-      isDefault: true
+  Example: `secret.yaml`
+  ```yaml
+  storageArrayList:
+  - arrayId: "APM00******1"
+  username: "user"
+  password: "password"
+  endpoint: "https://10.1.1.1/"
+  skipCertificateValidation: true
+  isDefault: true
 
-    - arrayId: "APM00******2"
-      username: "user"
-      password: "password"
-      endpoint: "https://10.1.1.2/"
-      skipCertificateValidation: true
-      isDefault: false
-    ```
+  - arrayId: "APM00******2"
+  username: "user"
+  password: "password"
+  endpoint: "https://10.1.1.2/"
+  skipCertificateValidation: true
+  isDefault: false
+  ```
 
-    **Note:** Parameters "allowRWOMultiPodAccess" and "syncNodeInfoInterval" have been enabled for configuration in values.yaml and this helps users to dynamically change these values without the need for driver re-installation.
+Use the following command to create a new secret unity-creds from `secret.yaml` file.
+
+  ```bash
+  kubectl create secret generic unity-creds -n unity --from-file=config=secret.yaml
+  ```
+
+  Use the following command to replace or update the secret:
+
+  ```bash
+  kubectl create secret generic unity-creds -n unity --from-file=config=secret.yaml -o yaml --dry-run | kubectl replace -f -
+  ```
+
+  **Note**: The user needs to validate the yaml syntax and array-related key/values while replacing the unity-creds secret.
+  The driver will continue to use previous values in case of an error found in the yaml file.
+
+
+Alternatively, users can configure and use `secret.yaml` for driver configuration. The parameters remain the same as in the above table and below is a sample of `secret.yaml`. Samples of  `secret.yaml` is available in the directory `csi-unity/samples/secret/ `.
+
+Example: secret.yaml
+  ```yaml
+  storageArrayList:
+  - arrayId: "APM00******1"
+    username: "user"
+    password: "password"
+    endpoint: "https://10.1.1.1/"
+    skipCertificateValidation: true
+    isDefault: true
+
+  - arrayId: "APM00******2"
+    username: "user"
+    password: "password"
+    endpoint: "https://10.1.1.2/"
+    skipCertificateValidation: true
+    isDefault: false
+  ```
+
+  **Note:** Parameters "allowRWOMultiPodAccess" and "syncNodeInfoInterval" have been enabled for configuration in values.yaml and this helps users to dynamically change these values without the need for driver re-installation.
 
 6. If you want to leverage snapshotting feature, the pre-requisite is to install external-snapshotter. Installation of external-snapshotter is required only for Kubernetes and is available by default with OpenShift installations. [Click here](../../../../../snapshots/#optional-volume-snapshot-requirements) to follow the procedure to install external-snapshotter.
 

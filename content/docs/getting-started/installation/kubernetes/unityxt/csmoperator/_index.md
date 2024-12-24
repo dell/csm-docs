@@ -52,6 +52,8 @@ To deploy the Operator, follow the instructions available [here](../../../operat
 
 3. Users should configure the parameters in CR. The following table lists the primary configurable parameters of the Unity XT driver and their default values:
 
+{{< collapse id="1" title="Parameters">}}
+
 | Parameter | Description | Required | Default |
 | --------- | ----------- | -------- |-------- |
 | replicas | Controls the number of controller pods you deploy. If the number of controller pods is greater than the number of available nodes, the excess pods will be in pending state until new nodes are available for scheduling. Default is 2 which allows for Controller high availability. | Yes | 2 |
@@ -74,6 +76,8 @@ To deploy the Operator, follow the instructions available [here](../../../operat
 | ***Sidecar parameters*** |
 | volume-name-prefix | The volume-name-prefix will be used by provisioner sidecar as a prefix for all the volumes created  | Yes | csivol |
 | monitor-interval | The monitor-interval will be used by external-health-monitor as an interval for health checks  | Yes | 60s |
+
+{{< /collapse >}}
 
 4. Execute the following command to create Unity XT custom resource:
    ```bash

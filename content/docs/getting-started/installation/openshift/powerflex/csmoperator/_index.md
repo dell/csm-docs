@@ -117,7 +117,7 @@ To deploy the Operator, follow the instructions available [here](../../../operat
     b. **Detailed Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powerflex_v2130.yaml) for detailed settings.
 
 3. Users should configure the parameters in CR. The following table lists the primary configurable parameters of the PowerFlex driver and their default values:
-
+{{< collapse id="1" title="Parameters">}}
    | Parameter | Description | Required | Default |
    | --------- | ----------- | -------- |-------- |
    | dnsPolicy | Determines the DNS Policy of the Node service | Yes | ClusterFirstWithHostNet |
@@ -141,6 +141,7 @@ To deploy the Operator, follow the instructions available [here](../../../operat
    | X_CSI_APPROVE_SDC_ENABLED | Enable this to to approve restricted SDC by GUID during setup | Yes | false |
    | X_CSI_HEALTH_MONITOR_ENABLED | Enable/Disable health monitor of CSI volumes from Node plugin - volume condition | No | false |
    | X_CSI_SDC_ENABLED | Enable/Disable installation of the SDC. | Yes | true |
+{{< /collapse >}}
 
 4. Execute this command to create PowerFlex custom resource:
     ```bash
@@ -157,6 +158,7 @@ To deploy the Operator, follow the instructions available [here](../../../operat
     * Check the status of the CR to verify if the driver installation is in the `Succeeded` state. If the status is not `Succeeded`, see the [Troubleshooting guide](../troubleshooting/#my-dell-csi-driver-install-failed-how-do-i-fix-it) for more information.
     
 6. Refer [Volume Snapshot Class](https://github.com/dell/csi-powerflex/tree/main/samples/volumesnapshotclass) and [Storage Class](https://github.com/dell/csi-powerflex/tree/main/samples/storageclass) for the sample files. 
+
 **Note** :
    1. Snapshotter and resizer sidecars are installed by default.
 {{< /accordion >}}  

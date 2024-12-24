@@ -73,7 +73,7 @@ To deploy the Operator, follow the instructions available [here](../../../operat
     b. **Detailed Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powerstore_v2130.yaml) for detailed settings.
 
 3. Users should configure the parameters in CR. The following table lists the primary configurable parameters of the PowerStore driver and their default values:
-
+{{< collapse id="1" title="Parameters">}}
   | Parameter | Description | Required | Default |
 | --------- | ----------- | -------- |-------- |
 | replicas | Controls the number of controller pods you deploy. If the number of controller pods is greater than the number of available nodes, the excess pods will be in pending state until new nodes are available for scheduling. Default is 2 which allows for Controller high availability. | Yes | 2 |
@@ -88,7 +88,7 @@ To deploy the Operator, follow the instructions available [here](../../../operat
 | X_CSI_NFS_ACLS | Defines permissions - POSIX mode bits or NFSv4 ACLs, to be set on NFS target mount directory. | No | "0777" |
 | ***Node parameters*** |
 | X_CSI_POWERSTORE_ENABLE_CHAP | Set to true if you want to enable iSCSI CHAP feature | No | false |
-
+{{< /collapse >}}
 4.  Execute the following command to create PowerStore custom resource:
    ```bash
    kubectl create -f <input_sample_file.yaml>

@@ -91,7 +91,7 @@ volume stats value under node should be set to true.
    cd dell-csi-helm-installer && wget -O my-powerstore-settings.yaml https://github.com/dell/helm-charts/raw/csi-powerstore-2.13.0/charts/csi-powerstore/values.yaml
    ```
 7. Edit the newly created values file and provide values for the following parameters `vi my-powerstore-settings.yaml`:
-
+{{< collapse id="1" title="Parameters">}}
 | Parameter | Description | Required | Default |
 |-----------|-------------|----------|---------|
 | images | List all the images used by the CSI driver and CSM. If you use a private repository, change the registries accordingly. | Yes | "" |
@@ -124,7 +124,7 @@ volume stats value under node should be set to true.
 | storageCapacity.enabled | Allows to enable/disable storage capacity tracking feature | No | true
 | storageCapacity.pollInterval | Configure how often the driver checks for changed capacity | No | 5m
 | podmon.enabled | Allows to enable/disable [Resiliency](../../../../../deployment/helm/modules/installation/resiliency#powerstore-specific-recommendations) feature | No | false
-
+{{< /collapse >}}
 8. Install the driver using `csi-install.sh` bash script by running
    ```bash
    ./csi-install.sh --namespace csi-powerstore --values ./my-powerstore-settings.yaml --helm-charts-version <version>

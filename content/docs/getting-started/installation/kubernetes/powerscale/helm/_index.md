@@ -109,7 +109,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
 5. Edit *my-isilon-settings.yaml* to set the following parameters for your installation:
    The following table lists the primary configurable parameters of the PowerScale driver Helm chart and their default values. More detailed information can be
    found in the  [`values.yaml`](https://github.com/dell/helm-charts/blob/csi-isilon-2.13.0/charts/csi-isilon/values.yaml) file in this repository.
-
+   {{< collapse id="2" title="Parameters">}}
    | Parameter | Description | Required | Default |
    | --------- | ----------- | -------- |-------- |
    | images | List all the images used by the CSI driver and CSM. If you use a private repository, change the registries accordingly. | Yes | "" |
@@ -160,15 +160,16 @@ CRDs should be configured during replication prepare stage with repctl as descri
    | skipCertificateValidation | A boolean that enables/disables certificate validation of the csm-authorization proxy server. | No | true |
    | **podmon**               | [Podmon](../../../../../deployment/helm/modules/installation/resiliency/) is an optional feature to enable application pods to be resilient to node failure.  |  -        |  -       |
    | enabled                  | A boolean that enables/disables podmon feature. |  No      |   false   |
-
+    
    *NOTE:*
 
    - ControllerCount parameter value must not exceed the number of nodes in the Kubernetes cluster. Otherwise, some of the controller pods remain in a "Pending" state till new nodes are available for scheduling. The installer exits with a WARNING on the same.
    - Whenever the *certSecretCount* parameter changes in *my-isilon-setting.yaml* user needs to reinstall the driver.
    - In order to enable authorization, there should be an authorization proxy server already installed.
-   - If you are using custom images, update each attributes under the *images* field in *my-isilon-setting.yaml* to make sure that they are pointing to the correct image repository and version.
+   - If you are using custom images, update each attributes under the *images* field in *my-isilon-setting.yaml* to make sure that they are pointing to the correct image repository and version. 
+   {{< /collapse >}}
 6. Edit following parameters in samples/secret/secret.yaml file and update/add connection/authentication information for one or more PowerScale clusters. If replication feature is enabled, ensure the secret includes all the PowerScale clusters involved in replication.
-
+{{< collapse id="3" title="Parameters">}}
    | Parameter | Description | Required | Default |
    | --------- | ----------- | -------- |-------- |
    | clusterName | Logical name of PoweScale cluster against which volume CRUD operations are performed through this secret. | Yes | - |
@@ -182,6 +183,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
    | endpointPort | Specify the HTTPs port number of the PowerScale OneFS API server | No | default value from values.yaml |
    | isiPath | The base path for the volumes to be created on PowerScale cluster. Note: IsiPath parameter in storageclass, if present will override this attribute. | No | default value from values.yaml |
    | mountEndpoint | Endpoint of the PowerScale OneFS API server, for example, 10.0.0.1. This must be specified if [CSM-Authorization](https://github.com/dell/karavi-authorization) is enabled. | No | - |
+{{< /collapse >}} 
 
 ### User privileges
 

@@ -125,7 +125,7 @@ To deploy the Operator, follow the instructions available [here](../../../operat
     b. **Detailed Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powerscale_v2130.yaml) for detailed settings.
 
 3. Users should configure the parameters in CR. The following table lists the primary configurable parameters of the PowerScale driver and their default values:
-
+{{< collapse id="1" title="Parameters">}}
    | Parameter | Description | Required | Default |
    | --------- | ----------- | -------- |-------- |
    | namespace | Specifies namespace where the driver will be installed | Yes | "isilon" |
@@ -152,6 +152,7 @@ To deploy the Operator, follow the instructions available [here](../../../operat
    | ***Sidecar parameters*** |
    | volume-name-prefix | The volume-name-prefix will be used by provisioner sidecar as a prefix for all the volumes created  | Yes | k8s |
    | monitor-interval | The monitor-interval will be used by external-health-monitor as an interval for health checks  | Yes | 60s |
+{{< /collapse >}}
 
 5. Execute the following command to create PowerScale custom resource:
 

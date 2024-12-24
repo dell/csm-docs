@@ -125,7 +125,7 @@ To deploy the Operator, follow the instructions available [here](../../../operat
     b. **Detailed Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powerscale_v2130.yaml) for detailed settings.
 
 3. Users should configure the parameters in CR. The following table lists the primary configurable parameters of the PowerScale driver and their default values:
-
+   {{< collapse id="1" title="Parameters">}}
    | Parameter | Description | Required | Default |
    | --------- | ----------- | -------- |-------- |
    | dnsPolicy | Determines the DNS Policy of the Node service | Yes | ClusterFirstWithHostNet |
@@ -147,7 +147,7 @@ To deploy the Operator, follow the instructions available [here](../../../operat
    | ***Node parameters*** |
    | X_CSI_MAX_VOLUMES_PER_NODE | Specify the default value for the maximum number of volumes that the controller can publish to the node | Yes | 0 |
    | X_CSI_MODE   | Driver starting mode  | No | node |
-
+   {{< /collapse >}}
 5. Execute the following command to create PowerScale custom resource:
 
     ```bash

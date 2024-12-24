@@ -135,7 +135,7 @@ For detailed PowerFlex installation procedure, see the [Dell PowerFlex Deploymen
     b. **Detailed Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powerflex_v2130.yaml) for detailed settings.
 
 3. Users should configure the parameters in CR. The following table lists the primary configurable parameters of the PowerFlex driver and their default values:
-
+{{< collapse id="1" title="Parameters">}}
    | Parameter | Description | Required | Default |
    | --------- | ----------- | -------- |-------- |
    | namespace | Specifies namespace where the driver will be installed | Yes | "vxflexos" |
@@ -163,7 +163,7 @@ For detailed PowerFlex installation procedure, see the [Dell PowerFlex Deploymen
    | ***Sidecar parameters*** |
    | volume-name-prefix | The volume-name-prefix will be used by provisioner sidecar as a prefix for all the volumes created  | Yes | k8s |
    | monitor-interval | The monitor-interval will be used by external-health-monitor as an interval for health checks  | Yes | 60s |
-
+{{< /collapse >}}
 4. Execute this command to create PowerFlex custom resource:
     ```bash
     kubectl create -f <input_sample_file.yaml>

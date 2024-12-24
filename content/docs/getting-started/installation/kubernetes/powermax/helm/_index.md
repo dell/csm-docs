@@ -51,7 +51,8 @@ Install Helm 3 on the master node before you install CSI Driver for PowerMax.
 7. Edit the newly created file and provide values for the following parameters
     ```bash
     vi my-powermax-settings.yaml
-    ```
+    ``` 
+{{< collapse id="1" title="Parameters">}}
 | Parameter | Description                                                                                                                                                                                                                                                                                                                                                                     | Required   | Default  |
 |-----------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|----------|
 | **global**| This section refers to configuration options for both CSI PowerMax Driver and Reverse Proxy                                                                                                                                                                                                                                                                                     | - | - |
@@ -133,7 +134,7 @@ Install Helm 3 on the master node before you install CSI Driver for PowerMax.
 | fcHostGroup                  | Existing host(initiator group)/hostgroup(cascaded initiator group) that driver will use for vSphere.                                                                                                                                                                                                                                                                            |  Yes      |   ""   |
 | vCenterHost                  | URL/endpoint of the vCenter where all the ESX are present                                                                                                                                                                                                                                                                                                                       |  Yes      |   ""   |
 | vCenterCredSecret                  | Secret name for the vCenter credentials.                                                                                                                                                                                                                                                                                                                                        |  Yes      |   ""   |
-
+{{< /collapse >}}
 
 
 8. Install the driver using `csi-install.sh` bash script by running

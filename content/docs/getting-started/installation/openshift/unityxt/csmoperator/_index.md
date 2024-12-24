@@ -49,7 +49,7 @@ To deploy the Operator, follow the instructions available [here](../../../operat
     b. **Detailed Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_unity_v2130.yaml) for detailed settings.
 
 3. Users should configure the parameters in CR. The following table lists the primary configurable parameters of the Unity XT driver and their default values:
-
+{{< collapse id="1" title="Parameters">}}
 | Parameter | Description | Required | Default |
 | --------- | ----------- | -------- |-------- |
 | replicas | Controls the number of controller pods you deploy. If the number of controller pods is greater than the number of available nodes, the excess pods will be in pending state until new nodes are available for scheduling. Default is 2 which allows for Controller high availability. | Yes | 2 |
@@ -69,6 +69,7 @@ To deploy the Operator, follow the instructions available [here](../../../operat
 | ***Node parameters*** |
 | X_CSI_HEALTH_MONITOR_ENABLED | Enable/Disable health monitor of CSI volumes from Controller plugin - volume condition | No | false |
 | X_CSI_ALLOWED_NETWORKS | Custom networks for Unity export. List of networks that can be used for NFS I/O traffic, CIDR format should be used "ip/prefix, ip/prefix" | No | empty |
+{{< /collapse >}}
 
 4.  Execute the following command to create Unity XT custom resource:
    ```bash
