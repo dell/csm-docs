@@ -40,21 +40,6 @@ To deploy the Operator, follow the instructions available [here](../../../operat
           value: "10.xx.xx.xx,10.xx.xx.xx" #provide the same MDM value from secret
 ```
 
-#### Manual SDC Deployment
-
-For detailed PowerFlex installation procedure, see the [PowerFlex Deployment Guide](https://docs.delltechnologies.com/bundle/VXF_DEPLOY/page/GUID-DD20489C-42D9-42C6-9795-E4694688CC75.html). Install the PowerFlex SDC using this procedure:
-
-**Steps**
-
-1. Download the PowerFlex SDC from [Dell Online support](https://www.dell.com/support). The filename is EMC-ScaleIO-sdc-*.rpm, where * is the SDC name corresponding to the PowerFlex installation version.
-2. Export the shell variable _MDM_IP_ in a comma-separated list using `export MDM_IP=xx.xxx.xx.xx,xx.xxx.xx.xx`, where xxx represents the actual IP address in your environment. This list contains the IP addresses of the MDMs.
-3. Install the SDC per the _Dell PowerFlex Deployment Guide_:
-    - For environments using RPM, run `rpm -iv ./EMC-ScaleIO-sdc-*.x86_64.rpm`, where * is the SDC name corresponding to the PowerFlex installation version.
-4. To add more MDM_IP for multi-array support, run `/opt/emc/scaleio/sdc/bin/drv_cfg --add_mdm --ip 10.xx.xx.xx.xx,10.xx.xx.xx`1. Create namespace.
-   Execute `kubectl create namespace vxflexos` to create the `vxflexos` namespace (if not already present). Note that the namespace can be any user-defined name, in this example, we assume that the namespace is 'vxflexos'
-
->NOTE: This step can be skipped with OpenShift CoreOS nodes.
-
 #### Create Secret
 
 1. Create namespace:
@@ -125,12 +110,11 @@ For detailed PowerFlex installation procedure, see the [PowerFlex Deployment Gui
 
 2. Create a CR (Custom Resource) for PowerFlex using the sample files provided
 
-    a. Install the PowerFlex driver using default configuration using
-    the sample file provided
-   [here](https://github.com/dell/csm-operator/tree/main/samples/minimal-samples). This file can be modified to use custom parameters if needed.
+    a. **Default Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/main/samples/minimal-samples/powerflex_v2130.yaml) for default settings. Modify if needed.
 
-    b. Install the PowerFlex driver using the detailed configuration using the sample file provided
-    [here](https://github.com/dell/csm-operator/tree/main/samples).
+    [OR]                                                
+
+    b. **Detailed Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powerflex_v2130.yaml) for detailed settings.
 
 3. Users should configure the parameters in CR. The following table lists the primary configurable parameters of the PowerFlex driver and their default values:
 
@@ -172,9 +156,7 @@ For detailed PowerFlex installation procedure, see the [PowerFlex Deployment Gui
         ```
     * Check the status of the CR to verify if the driver installation is in the `Succeeded` state. If the status is not `Succeeded`, see the [Troubleshooting guide](../troubleshooting/#my-dell-csi-driver-install-failed-how-do-i-fix-it) for more information.
     
-6. - Refer for Volume Snapshot - https://github.com/dell/csi-powerflex/tree/main/samples/volumesnapshotclass 
-   - Refer for Storage Class - https://github.com/dell/csi-powerflex/tree/main/samples/storageclass
-
+6. Refer [Volume Snapshot Class](https://github.com/dell/csi-powerflex/tree/main/samples/volumesnapshotclass) and [Storage Class](https://github.com/dell/csi-powerflex/tree/main/samples/storageclass) for the sample files. 
 **Note** :
    1. Snapshotter and resizer sidecars are installed by default.
 {{< /accordion >}}  

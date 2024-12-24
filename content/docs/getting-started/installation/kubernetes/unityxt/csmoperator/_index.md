@@ -42,14 +42,13 @@ To deploy the Operator, follow the instructions available [here](../../../operat
 
 1. Follow all the [prerequisites](#prerequisite) above
 
-2. Create a CR (Custom Resource) for Unity XT using the sample files provided
+2. Create a CR (Custom Resource) for PowerFlex using the sample files provided
 
-    a. Install the Unity driver using default configuration using
-    the sample file provided
-   [here](https://github.com/dell/csm-operator/tree/main/samples/minimal-samples). This file can be modified to use custom parameters if needed.
+    a. **Default Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/main/samples/minimal-samples/unity_v2130.yaml) for default settings. Modify if needed.
 
-    b. Install the Unity driver using the detailed configuration using the sample file provided
-    [here](https://github.com/dell/csm-operator/tree/main/samples).
+    [OR]                                                
+
+    b. **Detailed Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_unity_v2130.yaml) for detailed settings.
 
 3. Users should configure the parameters in CR. The following table lists the primary configurable parameters of the Unity XT driver and their default values:
 
@@ -95,8 +94,7 @@ To deploy the Operator, follow the instructions available [here](../../../operat
         ```
     * Check the status of the CR to verify if the driver installation is in the `Succeeded` state. If the status is not `Succeeded`, see the [Troubleshooting guide](../troubleshooting/#my-dell-csi-driver-install-failed-how-do-i-fix-it) for more information.
 
-6. - Refer for Volume Snapshot - https://github.com/dell/csi-unity/tree/main/samples/volumesnapshotclass 
-   - Refer for Storage Class - https://github.com/dell/csi-unity/tree/main/samples/storageclass
+6. Refer [Volume Snapshot Class](https://github.com/dell/csi-unity/tree/main/samples/volumesnapshotclass) and [Storage Class](https://github.com/dell/csi-unity/tree/main/samples/storageclass) for the sample files. 
 
 **Note** :
    1. "Kubelet config dir path" is not yet configurable in case of Operator based driver installation.
