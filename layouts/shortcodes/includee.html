@@ -1,3 +1,8 @@
-{{ $file := .Get 0 }}
+{{ $file := .Get "file" }}
+{{ $suffix := .Get "suffix" | default "" }}
 {{ $content := readFile $file }}
-{{ $content | markdownify }}
+{{ $content = replaceRE "^---([\\s\\S]+?)---" "" $content }}
+{{ $htmlContent := $content | markdownify }}
+{{ $htmlContent = replaceRE "(<h[1-6] id=\")([^\"]+)(\")" (printf "$1$2-%s$3" $suffix) $htmlContent }}
+{{ $htmlContent = replaceRE "(<a[^>]*class=\"header-link\"[^>]*href=\"#)([^\"]+)(\")" (printf "$1$2-%s$3" $suffix) $htmlContent }}
+<div class="td-content">{{ $htmlContent | safeHTML }}</div>
