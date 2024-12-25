@@ -185,6 +185,8 @@ CSI Driver for Dell PowerMax supports NFS communication. Ensure that the followi
 {{% /tab %}}
 {{< /tabpane >}}   
 
+Choose your multipathing software between [Multipath](#linux-multipathing-requirements) & [PowerPath](#powerpath-for-linux-requirements)
+
 {{< tabpane text=true lang="en" >}}
 {{< tab header="Linux Multipathing" lang="en" >}}
 {{< markdownify >}}
@@ -209,7 +211,6 @@ CSI Driver for Dell PowerMax supports NFS communication. Ensure that the followi
 
    - Install the Device Mapper Multipathing package on all nodes:
         -  `dnf install device-mapper-multipath`
-        -   `apt install multipath-tools`
    - Ensure the `mpathconf` command is available on all Kubernetes nodes.
    - Enable multipathing: `mpathconf --enable --with_multipathd y`
    - Edit `/etc/multipath.conf` to enable `user_friendly_names` and `find_multipaths`.

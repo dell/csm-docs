@@ -241,7 +241,7 @@ where *myusername* and *mypassword* are credentials for a user with vCenter priv
 {{% /tab %}}
 {{< /tabpane >}}   
 
-Choose your multipathing software between Multipath & PowerPath
+Choose your multipathing software between [Multipath](#linux-multipathing-requirements) & [PowerPath](#powerpath-for-linux-requirements)
 
 {{< tabpane text=true lang="en" >}}
 {{< tab header="Linux Multipathing" lang="en" >}}

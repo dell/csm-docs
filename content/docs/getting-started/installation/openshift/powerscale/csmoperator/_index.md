@@ -17,10 +17,16 @@ To deploy the Operator, follow the instructions available [here](../../../operat
 {{< accordion id="Two" title="CSI Driver" markdown="true" >}}  
 ### Prerequisite
 
-1. Create namespace.
-   Execute `kubectl create namespace isilon` to create the isilon namespace (if not already present). Note that the namespace can be any user-defined name, in this example, we assume that the namespace is 'isilon'.
+1. **Create namespace:**
 
-2. Create *isilon-creds* secret by creating a yaml file called secret.yaml with the following content:
+   ```bash 
+      kubectl create namespace isilon
+   ```
+   This command creates a namespace called `isilon`. You can replace `isilon` with any name you prefer.
+
+2. **Create or Use Sample `secret.yaml` File.** 
+
+   Create a file called `secret.yaml` or pick a [sample](https://github.com/dell/csi-powerscale/blob/main/samples/secret/secret.yaml) that has Powerscale array connection details: 
 
      ```yaml
       isilonClusters:
@@ -79,6 +85,8 @@ To deploy the Operator, follow the instructions available [here](../../../operat
 
    If replication feature is enabled, ensure the secret includes all the PowerScale clusters involved in replication.
 
+3. **Create Kubernetes secret:**
+   
    After creating the secret.yaml, the following command can be used to create the secret,
 
    ```bash
@@ -94,7 +102,8 @@ To deploy the Operator, follow the instructions available [here](../../../operat
    **Note**: The user needs to validate the YAML syntax and array related key/values while replacing the isilon-creds secret.
    The driver will continue to use previous values in case of an error found in the YAML file.
 
-3. Create isilon-certs-n secret.
+4. **Create isilon-certs-n secret.**
+
       Please refer [this section](../../../../deployment/helm/drivers/installation/isilon/#certificate-validation-for-onefs-rest-api-calls) for creating cert-secrets.
 
       If certificate validation is skipped, empty secret must be created. To create an empty secret. Ex: empty-secret.yaml

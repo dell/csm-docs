@@ -14,10 +14,16 @@ To deploy the Operator, follow the instructions available [here](../../../operat
 
 ### Prerequisites
 
-1. Create namespace.
-   Execute `kubectl create namespace unity` to create the unity namespace (if not already present). Note that the namespace can be any user-defined name, in this example, we assume that the namespace is 'unity'.
+1. **Create namespace:**
 
-2. Create a file called `secret.yaml` that has Unity XT array connection details with the following content
+   ```bash 
+      kubectl create namespace unity
+   ```
+   This command creates a namespace called `unity`. You can replace `unity` with any name you prefer.
+
+2. **Create or Use Sample `secret.yaml` File.** 
+
+   Create a file called `secret.yaml` or pick a [sample]https://github.com/dell/csi-unity/blob/main/samples/secret/secret.yaml) that has Unity array connection details: 
    ```yaml
       storageArrayList:
       - arrayId: "APM00******1"                 # unique array id of the Unisphere array
@@ -30,7 +36,9 @@ To deploy the Operator, follow the instructions available [here](../../../operat
    Change the parameters with relevant values for your Unity XT array.
    Add more blocks similar to above for each Unity XT array if necessary.
 
-3. Use the following command to create a new secret unity-creds from `secret.yaml` file.
+3. **Create Kubernetes secret:**
+
+   Use the following command to create a new secret unity-creds from `secret.yaml` file.
 
     `kubectl create secret generic unity-creds -n unity --from-file=config=secret.yaml`
 

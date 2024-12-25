@@ -23,10 +23,16 @@ To deploy the Operator, follow the instructions available [here](../../../operat
 
 ### Namespace and PowerStore API Access Configuration
 
-1. Create namespace.
-   Execute `kubectl create namespace powerstore` to create the powerstore namespace (if not already present). Note that the namespace can be any user-defined name, in this example, we assume that the namespace is 'powerstore'.
+1. **Create Namespace.**    
+   ```bash 
+      kubectl create namespace powerstore
+   ```
+   This command creates a namespace called `powerstore`. You can replace `powerstore` with any name you prefer.
 
-2. Create a file called `config.yaml` that has Powerstore array connection details with the following content
+2. **Create or Use Sample `secret.yaml` File.** 
+   
+   Create a file called `secret.yaml` or pick a [sample](https://github.com/dell/csi-powerstore/blob/main/samples/secret/secret.yaml) that has Powerstore array connection details: 
+
    ```yaml
    arrays:
       - endpoint: "https://10.0.0.1/api/rest"     # full URL path to the PowerStore API
@@ -46,26 +52,12 @@ To deploy the Operator, follow the instructions available [here](../../../operat
    If replication feature is enabled, ensure the secret includes all the PowerStore arrays involved in replication.
 
    #### User Privileges
-   The username specified in `config.yaml` must be from the authentication providers of PowerStore. The user must have the correct user role to perform the actions. The minimum requirement is **Storage Operator**.
+   The username specified in `secret.yaml` must be from the authentication providers of PowerStore. The user must have the correct user role to perform the actions. The minimum requirement is **Storage Operator**.
 
-3. Create Kubernetes secret:
+3. **Create Kubernetes secret:**
 
-   Create a file called `secret.yaml` in same folder as `config.yaml` with following content
-   ```yaml
-   apiVersion: v1
-   kind: Secret
-   metadata:
-      name: powerstore-config
-      namespace: powerstore
-   type: Opaque
-   data:
-      config: CONFIG_YAML
-   ```
-
-   Combine both files and create Kubernetes secret by running the following command:
-   ```bash
-
-   sed "s/CONFIG_YAML/`cat config.yaml | base64 -w0`/g" secret.yaml | kubectl apply -f -
+    ```bash
+   kubectl create secret generic -n powerstore powerstore-config --from-file=config=secret.yaml
    ```
 
 ## Install Driver
@@ -131,10 +123,10 @@ CSI PowerStore supports the ability to dynamically modify array information with
 > ℹ️ **NOTE:**: Updates to the secret that include adding a new array, or modifying the endpoint, globalID, or blockProtocol parameters
 > require the driver to be restarted to properly pick up and process the changes.
 
-To do so, change the configuration file `config.yaml` and apply the update using the following command:
+To do so, change the configuration file `secret.yaml` and apply the update using the following command:
 ```bash
 
-sed "s/CONFIG_YAML/`cat config.yaml | base64 -w0`/g" secret.yaml | kubectl apply -f -
+sed "s/CONFIG_YAML/`cat secret.yaml | base64 -w0`/g" secret.yaml | kubectl apply -f -
 ```
 {{< /accordion >}}   
 

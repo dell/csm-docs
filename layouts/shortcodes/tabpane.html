@@ -172,4 +172,45 @@
     </div>
 
   {{- end }}
-</div>
+</div> 
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    function activateTabFromHash(hash) {
+      if (!hash) return;
+  
+      // Find the element with the matching ID
+      var targetElement = document.querySelector(hash);
+      if (!targetElement) return;
+  
+      // Locate the closest tab-pane that contains the target
+      var tabPaneElement = targetElement.closest('.tab-pane');
+      if (!tabPaneElement) return;
+  
+      // Get the tab-pane ID
+      var tabPaneId = tabPaneElement.id;
+  
+      // Find the corresponding tab button
+      var tabButton = document.querySelector(
+        'button[data-bs-target="#' + tabPaneId + '"]'
+      );
+      if (!tabButton) return;
+  
+      // Activate the tab using Bootstrap's Tab API
+      var tabInstance = new bootstrap.Tab(tabButton);
+      tabInstance.show();
+  
+      // Scroll to the target element
+      targetElement.scrollIntoView({ behavior: "smooth" });
+    }
+  
+    // Activate tab based on initial hash in URL
+    activateTabFromHash(window.location.hash);
+  
+    // Add event listener for hashchange to handle clicks on in-page links
+    window.addEventListener("hashchange", function () {
+      activateTabFromHash(window.location.hash);
+    });
+  });
+  </script>
+  

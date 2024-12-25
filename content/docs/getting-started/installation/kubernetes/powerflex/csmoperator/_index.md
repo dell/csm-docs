@@ -15,18 +15,25 @@ To deploy the Operator, follow the instructions available [here](../../../operat
 
 - If multipath is configured, ensure CSI-PowerFlex volumes are blacklisted by multipathd. See [troubleshooting section](../../../../csidriver/troubleshooting/powerflex) for details.
 
->NOTE: This step can be skipped with OpenShift.
 
-#### SDC Deployment for Operator
+#### SDC Deployment for Operator 
 
-- This feature deploys the sdc kernel modules on all nodes with the help of an init container.
-- Powerflex can be deployed with or without SDC. SDC deployment can be enabled and disabled by setting `X_CSI_SDC_ENABLED` value in CR file. By default, driver is deployed with SDC enabled.
-- For non-supported versions of the OS also do the manual SDC deployment steps given below. Refer to https://hub.docker.com/r/dellemc/sdc for supported versions.
-- **Note:** When the driver is created, MDM value for initContainers in driver CR is set by the operator from mdm attributes in the driver configuration file,
-  config.yaml. An example of config.yaml is below in this document. Do not set MDM value for initContainers in the driver CR file manually.
-  - Optionally, enable sdc monitor by setting the enable flag for the sdc-monitor to true. Please note:
-    - **If using sidecar**, you will need to edit the value fields under the HOST_PID and MDM fields by filling the empty quotes with host PID and the MDM IPs.
-    - **If not using sidecar**, leave the enabled field set to false.
+- **Overview:**
+This feature deploys the SDC kernel modules on all nodes using an init container. PowerFlex can be deployed with or without SDC.
+
+- **Enable/Disable SDC:**
+Set the `X_CSI_SDC_ENABLED` value in the CR file. By default, SDC is enabled.
+
+-  **Manual Deployment:**
+For unsupported OS versions, follow the manual SDC deployment steps. Refer to https://hub.docker.com/r/dellemc/sdc for supported versions.
+
+- **MDM Value:**
+The operator sets the MDM value for initContainers in the driver CR from the `mdm` attributes in `config.yaml`. Do not set this manually.
+
+-  **SDC Monitor:**
+Enable the SDC monitor by setting the `enable` flag to `true`.
+   - **With Sidecar**: Edit the `HOST_PID` and `MDM` fields with the host PID and MDM IPs.
+   - **Without Sidecar**: Leave the `enabled` field set to `false`.
 
 ##### Example CR: [samples/storage_csm_powerflex_v2130.yaml](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powerflex_v2130.yaml)
 
@@ -49,20 +56,38 @@ For detailed PowerFlex installation procedure, see the [Dell PowerFlex Deploymen
 
 **Steps**
 
-1. Download the PowerFlex SDC from [Dell Online support](https://www.dell.com/support). The filename is EMC-ScaleIO-sdc-*.rpm, where * is the SDC name corresponding to the PowerFlex installation version.
-2. Export the shell variable _MDM_IP_ in a comma-separated list using `export MDM_IP=xx.xxx.xx.xx,xx.xxx.xx.xx`, where xxx represents the actual IP address in your environment. This list contains the IP addresses of the MDMs.
-3. Install the SDC per the _Dell PowerFlex Deployment Guide_:
-    - For environments using RPM, run `rpm -iv ./EMC-ScaleIO-sdc-*.x86_64.rpm`, where * is the SDC name corresponding to the PowerFlex installation version.
-4. To add more MDM_IP for multi-array support, run `/opt/emc/scaleio/sdc/bin/drv_cfg --add_mdm --ip 10.xx.xx.xx.xx,10.xx.xx.xx`1. Create namespace.
-   Execute `kubectl create namespace vxflexos` to create the `vxflexos` namespace (if not already present). Note that the namespace can be any user-defined name, in this example, we assume that the namespace is 'vxflexos'
+1. **Download SDC:** 
+Download the PowerFlex SDC from [Dell Online support](https://www.dell.com/support). The filename is EMC-ScaleIO-sdc-*.rpm, where * is the SDC name corresponding to the PowerFlex installation version.
+2. **Set MDM IPs:** 
+  Export the MDM IPs as a comma-separated list: 
+    ```bash
+     export MDM_IP=xx.xxx.xx.xx,xx.xxx.xx.xx
+    ``` 
+   where xxx represents the actual IP address in your environment. 
 
->NOTE: This step can be skipped with OpenShift CoreOS nodes.
+3. **Install SDC:**   
+Install the SDC per the _Dell PowerFlex Deployment Guide_: 
+
+    - For RPM environments, run:
+     ```bash
+     rpm -iv ./EMC-ScaleIO-sdc-*.x86_64.rpm 
+     ``` 
+     Replace * with the SDC name corresponding to the PowerFlex version. 
+
+4. **Add MDM IPs for Multi-Array support:** 
+run `/opt/emc/scaleio/sdc/bin/drv_cfg --add_mdm --ip 10.xx.xx.xx.xx,10.xx.xx.xx`.
 
 #### Create Secret
 
-1. Create namespace:
-   Execute `kubectl create namespace vxflexos` to create the `vxflexos` namespace (if not already present). Note that the namespace can be any user-defined name, in this example, we assume that the namespace is 'vxflexos'
-2. Prepare the secret.yaml for driver configuration.
+1. **Create namespace:**
+
+   ```bash 
+      kubectl create namespace vxflexos
+   ```
+   This command creates a namespace called `vxflexos`. You can replace `vxflexos` with any name you prefer.
+2. **Create or Use Sample `secret.yaml` File.** 
+   
+   Create a file called `secret.yaml` or pick a [sample](https://github.com/dell/csi-powerflex/blob/main/samples/secret.yaml) that has Powerflex array connection details: 
 
     Example: secret.yaml
 
@@ -107,8 +132,9 @@ For detailed PowerFlex installation procedure, see the [Dell PowerFlex Deploymen
       skipCertificateValidation: true
       mdm: "10.0.0.3,10.0.0.4"
     ```
-
     If replication feature is enabled, ensure the secret includes all the PowerFlex arrays involved in replication.
+
+3. **Create Kubernetes secret:**
 
     After editing the file, run this command to create a secret called `vxflexos-config`.
 

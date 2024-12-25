@@ -6,9 +6,6 @@ no_list: true
 weight: 1
 --- 
 
-{{< dropdown title="Click to Show Content" >}}
-This is the hidden content that will be shown when the button is clicked.
-{{< /dropdown >}}
 ## Supported Storage Platforms
 
 {{<table "table table-striped table-bordered table-sm">}}

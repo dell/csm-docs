@@ -5,14 +5,9 @@ no_list: true
 description: Upgrade
 weight: 2
 ---
-
-
-<hr> 
-Upgrading the Dell CSM Driver ensures that you have the latest features, improvements, and security updates. This section provides an overview of the upgrade process, which is designed to be seamless and efficient. By following the upgrade instructions, you can enhance the performance and compatibility of your system with minimal disruption.
-
-
-
-
+<hr>
+ 
+> Note: The steps for Kubernetes and Mirantis Kubernetes Engine (MKE) are the same. You can follow them for installation, upgrade, and uninstallation.
 
 {{< cardcontainer >}}
 

@@ -12,20 +12,28 @@ To deploy the Operator, follow the instructions available [here](../../../operat
 {{< accordion id="Two" title="CSI Driver" markdown="true" >}}  
 
 ### Prerequisites
-- If multipath is configured, ensure CSI-PowerFlex volumes are blacklisted by multipathd. See [troubleshooting section](../../../../csidriver/troubleshooting/powerflex) for details.
 
->NOTE: This step can be skipped with OpenShift.
 
 #### SDC Deployment for Operator
 
-- This feature deploys the sdc kernel modules on all nodes with the help of an init container.
-- Powerflex can be deployed with or without SDC. SDC deployment can be enabled and disabled by setting `X_CSI_SDC_ENABLED` value in CR file. By default, driver is deployed with SDC enabled.
-- For non-supported versions of the OS also do the manual SDC deployment steps given below. Refer to https://hub.docker.com/r/dellemc/sdc for supported versions.
-- **Note:** When the driver is created, MDM value for initContainers in driver CR is set by the operator from mdm attributes in the driver configuration file,
-  config.yaml. An example of config.yaml is below in this document. Do not set MDM value for initContainers in the driver CR file manually.
-  - Optionally, enable sdc monitor by setting the enable flag for the sdc-monitor to true. Please note:
-    - **If using sidecar**, you will need to edit the value fields under the HOST_PID and MDM fields by filling the empty quotes with host PID and the MDM IPs.
-    - **If not using sidecar**, leave the enabled field set to false.
+
+- **Overview:**
+This feature deploys the SDC kernel modules on all nodes using an init container. PowerFlex can be deployed with or without SDC.
+
+- **Enable/Disable SDC:**
+Set the `X_CSI_SDC_ENABLED` value in the CR file. By default, SDC is enabled.
+
+-  **Manual Deployment:**
+For unsupported OS versions, follow the manual SDC deployment steps. Refer to https://hub.docker.com/r/dellemc/sdc for supported versions.
+
+- **MDM Value:**
+The operator sets the MDM value for initContainers in the driver CR from the `mdm` attributes in `config.yaml`. Do not set this manually.
+
+-  **SDC Monitor:**
+Enable the SDC monitor by setting the `enable` flag to `true`.
+   - **With Sidecar**: Edit the `HOST_PID` and `MDM` fields with the host PID and MDM IPs.
+   - **Without Sidecar**: Leave the `enabled` field set to `false`.
+
 ##### Example CR: [samples/storage_csm_powerflex_v2130.yaml](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powerflex_v2130.yaml)
 ```yaml
     sideCars:
@@ -41,10 +49,15 @@ To deploy the Operator, follow the instructions available [here](../../../operat
 ```
 
 #### Create Secret
+1. **Create namespace:**
 
-1. Create namespace:
-   Execute `kubectl create namespace vxflexos` to create the `vxflexos` namespace (if not already present). Note that the namespace can be any user-defined name, in this example, we assume that the namespace is 'vxflexos'
-2. Prepare the secret.yaml for driver configuration.
+   ```bash 
+      kubectl create namespace vxflexos
+   ```
+   This command creates a namespace called `vxflexos`. You can replace `vxflexos` with any name you prefer.
+2. **Create or Use Sample `secret.yaml` File.** 
+   
+   Create a file called `secret.yaml` or pick a [sample](https://github.com/dell/csi-powerflex/blob/main/samples/secret.yaml) that has Powerflex array connection details: 
 
     Example: secret.yaml
 
@@ -89,8 +102,9 @@ To deploy the Operator, follow the instructions available [here](../../../operat
       skipCertificateValidation: true
       mdm: "10.0.0.3,10.0.0.4"
     ```
-
     If replication feature is enabled, ensure the secret includes all the PowerFlex arrays involved in replication.
+
+3. **Create Kubernetes secret:**
 
     After editing the file, run this command to create a secret called `vxflexos-config`.
 
