@@ -2,7 +2,7 @@
 title: "PowerFlex"
 linkTitle: "PowerFlex"
 no_list: true
-weight: 4
+weight: 3
 ---
 
 {{< cardcontainer >}}

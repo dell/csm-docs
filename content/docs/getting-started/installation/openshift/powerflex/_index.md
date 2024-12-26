@@ -3,7 +3,7 @@ title: "PowerFlex"
 linkTitle: "PowerFlex"
 no_list: true
 description: PowerFlex Installation
-weight: 4
+weight: 3
 ---
 
 {{< cardcontainer >}}

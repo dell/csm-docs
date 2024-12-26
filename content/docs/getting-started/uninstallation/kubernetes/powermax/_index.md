@@ -2,7 +2,7 @@
 title: "PowerMax"
 linkTitle: "PowerMax"
 no_list: true
-weight: 1
+weight: 2
 --- 
 
 <br>

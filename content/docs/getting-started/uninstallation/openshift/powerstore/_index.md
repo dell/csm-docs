@@ -2,7 +2,7 @@
 title: "PowerStore"
 linkTitle: "PowerStore"
 no_list: true
-weight: 3
+weight: 1
 ---
 {{< cardcontainer >}}
 
