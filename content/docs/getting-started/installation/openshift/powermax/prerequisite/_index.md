@@ -22,7 +22,6 @@ The following requirements must be met before installing the CSI Driver for Powe
 - If using Snapshot feature, satisfy all Volume Snapshot requirements.
 - Insecure registries are defined in Docker or other container runtime for CSI drivers that are hosted in a non-secure location.
 - Ensure that your nodes support mounting NFS volumes if using NFS.
-- Auto RDM for vSphere over FC requirements
 
 ### CSI PowerMax Reverse Proxy
 

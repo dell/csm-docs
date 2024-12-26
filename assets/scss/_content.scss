@@ -41,7 +41,8 @@
         border-collapse: collapse;
         border-spacing: 0;
         border:1px solid #000000;
-        width: 100%
+
+        width: auto !important;
     }
 
     th{

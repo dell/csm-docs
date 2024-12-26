@@ -23,7 +23,7 @@ To deploy the Operator, follow the instructions available [here](../../../operat
 
 2. **Create or Use Sample `secret.yaml` File.** 
 
-   Create a file called `secret.yaml` or pick a [sample]https://github.com/dell/csi-unity/blob/main/samples/secret/secret.yaml) that has Unity array connection details: 
+   Create a file called `secret.yaml` or pick a [sample](https://github.com/dell/csi-unity/blob/main/samples/secret/secret.yaml) that has Unity array connection details: 
    ```yaml
       storageArrayList:
       - arrayId: "APM00******1"                 # unique array id of the Unisphere array

@@ -22,10 +22,12 @@ To deploy the Operator, follow the instructions available [here](../../../operat
 
 ### Install Driver
 
-1. Create namespace:
+1. **Create namespace:** 
+
    Run `kubectl create namespace <driver-namespace>` using the desired name to create the namespace.
-2. Create PowerMax credentials:
-   Create a file called powermax-creds.yaml with the following content:
+2. **Create PowerMax credentials:**
+
+   Create a file called powermax-creds.yaml or pick a [sample](https://github.com/dell/csi-powermax/blob/main/samples/secret/secret.yaml) that has Powermax array connection details :
      ```yaml
         apiVersion: v1
         kind: Secret
@@ -51,47 +53,51 @@ To deploy the Operator, follow the instructions available [here](../../../operat
 
    ```
    Run the `kubectl create -f powermax-creds.yaml` command to create the secret.
-3. Create a configmap using sample [here](https://github.com/dell/csm-operator/tree/master/samples/csireverseproxy). Fill in the appropriate values for driver configuration.
-   Example: config.yaml
-   ```yaml
-   port: 2222 # Port on which reverseproxy will listen
-   logLevel: debug
-   logFormat: text
-   config:
-     storageArrays:
-        - storageArrayId: "000000000001" # arrayID
-          primaryURL: https://primary-1.unisphe.re:8443 # primary unisphere for arrayID
-          backupURL: https://backup-1.unisphe.re:8443   # backup unisphere for arrayID
-          proxyCredentialSecrets:
-            - primary-unisphere-secret-1 # credential secret for primary unisphere, e.g., powermax-creds
-            - backup-unisphere-secret-1 # credential secret for backup unisphere, e.g., powermax-creds
-        - storageArrayId: "000000000002"
-          primaryURL: https://primary-2.unisphe.re:8443
-          backupURL: https://backup-2.unisphe.re:8443
-          proxyCredentialSecrets:
-           - primary-unisphere-secret-2
-           - backup-unisphere-secret-2
-     managementServers:
-       - url: https://primary-1.unisphe.re:8443 # primary unisphere endpoint
-         arrayCredentialSecret: primary-unisphere-secret-1 # primary credential secret e.g., powermax-creds
-         skipCertificateValidation: true
-       - url: https://backup-1.unisphe.re:8443 # backup unisphere endpoint
-         arrayCredentialSecret: backup-unisphere-secret-1 # backup credential secret e.g., powermax-creds
-         skipCertificateValidation: false # value false, to verify unisphere certificate and provide certSecret
-         certSecret: primary-certs # unisphere verification certificate
-       - url: https://primary-2.unisphe.re:8443
-         arrayCredentialSecret: primary-unisphere-secret-2
-         skipCertificateValidation: true
-       - url: https://backup-2.unisphe.re:8443
-         arrayCredentialSecret: backup-unisphere-secret-2
-         skipCertificateValidation: false
-         certSecret: primary-certs
-   ```
-   After editing the file, run this command to create a secret called `powermax-reverseproxy-config`. If you are using a different namespace/secret name, just substitute those into the command.
-    ```bash
-    kubectl create configmap powermax-reverseproxy-config --from-file config.yaml -n powermax
+
+3. **Create Reverseproxy Configmap:** 
+
+    Create a configmap using sample [here](https://github.com/dell/csm-operator/tree/master/samples/csireverseproxy/config.yaml). Fill in the appropriate values for driver configuration.
+    Example: config.yaml
+    ```yaml
+    port: 2222 # Port on which reverseproxy will listen
+    logLevel: debug
+    logFormat: text
+    config:
+      storageArrays:
+          - storageArrayId: "000000000001" # arrayID
+            primaryURL: https://primary-1.unisphe.re:8443 # primary unisphere for arrayID
+            backupURL: https://backup-1.unisphe.re:8443   # backup unisphere for arrayID
+            proxyCredentialSecrets:
+              - primary-unisphere-secret-1 # credential secret for primary unisphere, e.g., powermax-creds
+              - backup-unisphere-secret-1 # credential secret for backup unisphere, e.g., powermax-creds
+          - storageArrayId: "000000000002"
+            primaryURL: https://primary-2.unisphe.re:8443
+            backupURL: https://backup-2.unisphe.re:8443
+            proxyCredentialSecrets:
+            - primary-unisphere-secret-2
+            - backup-unisphere-secret-2
+      managementServers:
+        - url: https://primary-1.unisphe.re:8443 # primary unisphere endpoint
+          arrayCredentialSecret: primary-unisphere-secret-1 # primary credential secret e.g., powermax-creds
+          skipCertificateValidation: true
+        - url: https://backup-1.unisphe.re:8443 # backup unisphere endpoint
+          arrayCredentialSecret: backup-unisphere-secret-1 # backup credential secret e.g., powermax-creds
+          skipCertificateValidation: false # value false, to verify unisphere certificate and provide certSecret
+          certSecret: primary-certs # unisphere verification certificate
+        - url: https://primary-2.unisphe.re:8443
+          arrayCredentialSecret: primary-unisphere-secret-2
+          skipCertificateValidation: true
+        - url: https://backup-2.unisphe.re:8443
+          arrayCredentialSecret: backup-unisphere-secret-2
+          skipCertificateValidation: false
+          certSecret: primary-certs
     ```
-4. Create a configmap using the sample file [here](https://github.com/dell/csi-powermax/blob/main/samples/configmap/powermax-array-config.yaml). Fill in the appropriate values for driver configuration.
+    After editing the file, run this command to create a secret called `powermax-reverseproxy-config`. If you are using a different namespace/secret name, just substitute those into the command.
+      ```bash
+      kubectl create configmap powermax-reverseproxy-config --from-file config.yaml -n powermax
+      ```
+4. **Create Powermax Array Configmap:**  
+  Create a configmap using the sample file [here](https://github.com/dell/csi-powermax/blob/main/samples/configmap/powermax-array-config.yaml). Fill in the appropriate values for driver configuration.
    ```yaml
       # Copyright © 2024 Dell Inc. or its subsidiaries. All Rights Reserved.
       #
@@ -122,7 +128,7 @@ To deploy the Operator, follow the instructions available [here](../../../operat
           X_CSI_MANAGED_ARRAYS: "000000000000,000000000000,"
    ```
 
-4. Create a CR (Custom Resource) for PowerFlex using the sample files provided
+5. Create a CR (Custom Resource) for PowerFlex using the sample files provided
 
     a. **Default Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/main/samples/minimal-samples/powermax_v2130.yaml) for default settings. Modify if needed.
 
@@ -130,7 +136,7 @@ To deploy the Operator, follow the instructions available [here](../../../operat
 
     b. **Detailed Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powermax_v2130.yaml) for detailed settings.
 
-5. Users should configure the parameters in CR. The following table lists the primary configurable parameters of the PowerMax driver and their default values:
+6. Users should configure the parameters in CR. The following table lists the primary configurable parameters of the PowerMax driver and their default values:
 {{< collapse id="1" title="Parameters">}}
    | Parameter                                       | Description                                                                                                                                                                                                                                                              | Required | Default                        |
    |-------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------|--------------------------------|
