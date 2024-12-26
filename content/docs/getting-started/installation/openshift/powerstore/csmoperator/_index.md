@@ -62,9 +62,7 @@ To deploy the Operator, follow the instructions available [here](../../../operat
 
 ## Install Driver
 
-1. Follow all the [prerequisites](#prerequisites) above
-
-2. Create a CR (Custom Resource) for PowerFlex using the sample files provided
+1. Create a CR (Custom Resource) for PowerFlex using the sample files provided
 
     a. **Default Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/main/samples/minimal-samples/powerstore_v2130.yaml) for default settings. Modify if needed.
 
@@ -72,7 +70,7 @@ To deploy the Operator, follow the instructions available [here](../../../operat
 
     b. **Detailed Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powerstore_v2130.yaml) for detailed settings.
 
-3. Users should configure the parameters in CR. The following table lists the primary configurable parameters of the PowerStore driver and their default values:
+2. Users should configure the parameters in CR. The following table lists the primary configurable parameters of the PowerStore driver and their default values:
 {{< collapse id="1" title="Parameters">}}
 
   | Parameter | Description | Required | Default |
@@ -91,7 +89,7 @@ To deploy the Operator, follow the instructions available [here](../../../operat
 | X_CSI_POWERSTORE_ENABLE_CHAP | Set to true if you want to enable iSCSI CHAP feature | No | false |
 {{< /collapse >}}
 
-4.  Execute the following command to create PowerStore custom resource:
+3.  Execute the following command to create PowerStore custom resource:
    ```bash
    kubectl create -f <input_sample_file.yaml>
    ```
@@ -102,7 +100,7 @@ To deploy the Operator, follow the instructions available [here](../../../operat
       kubectl get all -n <driver-namespace>
       ```
 
-5.  Once the driver `Custom Resource (CR)` is created, you can verify the installation as mentioned below
+4.  Once the driver `Custom Resource (CR)` is created, you can verify the installation as mentioned below
 
     * Check if ContainerStorageModule CR is created successfully using the command below:
         ```bash
@@ -110,7 +108,7 @@ To deploy the Operator, follow the instructions available [here](../../../operat
         ```
     * Check the status of the CR to verify if the driver installation is in the `Succeeded` state. If the status is not `Succeeded`, see the [Troubleshooting guide](../troubleshooting/#my-dell-csi-driver-install-failed-how-do-i-fix-it) for more information.
 
-6. Refer [Volume Snapshot Class](https://github.com/dell/csi-powerstore/tree/main/samples/volumesnapshotclass) and [Storage Class](https://github.com/dell/csi-powerstore/tree/main/samples/storageclass) for the sample files. 
+5. Refer [Volume Snapshot Class](https://github.com/dell/csi-powerstore/tree/main/samples/volumesnapshotclass) and [Storage Class](https://github.com/dell/csi-powerstore/tree/main/samples/storageclass) for the sample files. 
 
 **Note** :
    1. "Kubelet config dir path" is not yet configurable in case of Operator based driver installation.

@@ -89,50 +89,52 @@ run `/opt/emc/scaleio/sdc/bin/drv_cfg --add_mdm --ip 10.xx.xx.xx.xx,10.xx.xx.xx`
    
    Create a file called `secret.yaml` or pick a [sample](https://github.com/dell/csi-powerflex/blob/main/samples/secret.yaml) that has Powerflex array connection details: 
 
-    Example: secret.yaml
+   {{< collapse id="2" title="secret.yaml" card="false">}} 
 
-    ```yaml
-      # Username for accessing PowerFlex system.
-      # If authorization is enabled, username will be ignored.
-    - username: "admin"
-      # Password for accessing PowerFlex system.
-      # If authorization is enabled, password will be ignored.
-      password: "password"
-      # System name/ID of PowerFlex system.
-      systemID: "1a99aa999999aa9a"
-      # Previous names used in secret of PowerFlex system.
-      allSystemNames: "pflex-1,pflex-2"
-      # REST API gateway HTTPS endpoint for PowerFlex system.
-      # If authorization is enabled, endpoint should be the HTTPS localhost endpoint that
-      # the authorization sidecar will listen on
-      endpoint: "https://127.0.0.1"
-      # Determines if the driver is going to validate certs while connecting to PowerFlex REST API interface.
-      # Allowed values: true or false
-      # Default value: true
-      skipCertificateValidation: true
-      # indicates if this array is the default array
-      # needed for backwards compatibility
-      # only one array is allowed to have this set to true
-      # Default value: false
-      isDefault: true
-      # defines the MDM(s) that SDC should register with on start.
-      # Allowed values:  a list of IP addresses or hostnames separated by comma.
-      # Default value: none
-      mdm: "10.0.0.1,10.0.0.2"
-      # NFS is only supported on PowerFlex storage system 4.0.x
-      # nasName: name of NAS server used for NFS volumes
-      # nasName value must be specified in secret for performing NFS (file) operations.
-      # Allowed Values: string
-      # Default Value: "none"
-      nasName: "nas-server"
-    - username: "admin"
-      password: "Password123"
-      systemID: "2b11bb111111bb1b"
-      endpoint: "https://127.0.0.2"
-      skipCertificateValidation: true
-      mdm: "10.0.0.3,10.0.0.4"
-    ```
-    If replication feature is enabled, ensure the secret includes all the PowerFlex arrays involved in replication.
+  ```yaml
+    # Username for accessing PowerFlex system.
+    # If authorization is enabled, username will be ignored.
+  - username: "admin"
+    # Password for accessing PowerFlex system.
+    # If authorization is enabled, password will be ignored.
+    password: "password"
+    # System name/ID of PowerFlex system.
+    systemID: "1a99aa999999aa9a"
+    # Previous names used in secret of PowerFlex system.
+    allSystemNames: "pflex-1,pflex-2"
+    # REST API gateway HTTPS endpoint for PowerFlex system.
+    # If authorization is enabled, endpoint should be the HTTPS localhost endpoint that
+    # the authorization sidecar will listen on
+    endpoint: "https://127.0.0.1"
+    # Determines if the driver is going to validate certs while connecting to PowerFlex REST API interface.
+    # Allowed values: true or false
+    # Default value: true
+    skipCertificateValidation: true
+    # indicates if this array is the default array
+    # needed for backwards compatibility
+    # only one array is allowed to have this set to true
+    # Default value: false
+    isDefault: true
+    # defines the MDM(s) that SDC should register with on start.
+    # Allowed values:  a list of IP addresses or hostnames separated by comma.
+    # Default value: none
+    mdm: "10.0.0.1,10.0.0.2"
+    # NFS is only supported on PowerFlex storage system 4.0.x
+    # nasName: name of NAS server used for NFS volumes
+    # nasName value must be specified in secret for performing NFS (file) operations.
+    # Allowed Values: string
+    # Default Value: "none"
+    nasName: "nas-server"
+  - username: "admin"
+    password: "Password123"
+    systemID: "2b11bb111111bb1b"
+    endpoint: "https://127.0.0.2"
+    skipCertificateValidation: true
+    mdm: "10.0.0.3,10.0.0.4"
+  ``` 
+    {{< /collapse >}} 
+
+  If replication feature is enabled, ensure the secret includes all the PowerFlex arrays involved in replication.
 
 3. **Create Kubernetes secret:**
 
@@ -150,9 +152,7 @@ run `/opt/emc/scaleio/sdc/bin/drv_cfg --add_mdm --ip 10.xx.xx.xx.xx,10.xx.xx.xx`
 
 ### Install Driver
 
-1. Follow all the [prerequisites](#prerequisites) above
-
-2. Create a CR (Custom Resource) for PowerFlex using the sample files provided
+1. Create a CR (Custom Resource) for PowerFlex using the sample files provided
 
     a. **Default Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/main/samples/minimal-samples/powerflex_v2130.yaml) for default settings. Modify if needed.
 
@@ -160,7 +160,7 @@ run `/opt/emc/scaleio/sdc/bin/drv_cfg --add_mdm --ip 10.xx.xx.xx.xx,10.xx.xx.xx`
 
     b. **Detailed Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powerflex_v2130.yaml) for detailed settings.
 
-3. Users should configure the parameters in CR. The following table lists the primary configurable parameters of the PowerFlex driver and their default values:
+2. Users should configure the parameters in CR. The following table lists the primary configurable parameters of the PowerFlex driver and their default values:
 {{< collapse id="1" title="Parameters">}}
    | Parameter | Description | Required | Default |
    | --------- | ----------- | -------- |-------- |
@@ -190,13 +190,13 @@ run `/opt/emc/scaleio/sdc/bin/drv_cfg --add_mdm --ip 10.xx.xx.xx.xx,10.xx.xx.xx`
    | volume-name-prefix | The volume-name-prefix will be used by provisioner sidecar as a prefix for all the volumes created  | Yes | k8s |
    | monitor-interval | The monitor-interval will be used by external-health-monitor as an interval for health checks  | Yes | 60s |
 {{< /collapse >}}
-4. Execute this command to create PowerFlex custom resource:
+3. Execute this command to create PowerFlex custom resource:
     ```bash
     kubectl create -f <input_sample_file.yaml>
     ```
     This command will deploy the CSI-PowerFlex driver in the namespace specified in the input YAML file.
 
-5. Once the driver `Custom Resource (CR)` is created, you can verify the installation as mentioned below
+4. Once the driver `Custom Resource (CR)` is created, you can verify the installation as mentioned below
 
     * Check if ContainerStorageModule CR is created successfully using the command below:
         ```bash
@@ -204,7 +204,7 @@ run `/opt/emc/scaleio/sdc/bin/drv_cfg --add_mdm --ip 10.xx.xx.xx.xx,10.xx.xx.xx`
         ```
     * Check the status of the CR to verify if the driver installation is in the `Succeeded` state. If the status is not `Succeeded`, see the [Troubleshooting guide](../troubleshooting/#my-dell-csi-driver-install-failed-how-do-i-fix-it) for more information.
 
-6. Refer [Volume Snapshot Class](https://github.com/dell/csi-powerflex/tree/main/samples/volumesnapshotclass) and [Storage Class](https://github.com/dell/csi-powerflex/tree/main/samples/storageclass) for the sample files. 
+5. Refer [Volume Snapshot Class](https://github.com/dell/csi-powerflex/tree/main/samples/volumesnapshotclass) and [Storage Class](https://github.com/dell/csi-powerflex/tree/main/samples/storageclass) for the sample files. 
 
 **Note** :
    1. Snapshotter and resizer sidecars are installed by default.

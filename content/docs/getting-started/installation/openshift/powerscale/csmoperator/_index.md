@@ -27,59 +27,60 @@ To deploy the Operator, follow the instructions available [here](../../../operat
 2. **Create or Use Sample `secret.yaml` File.** 
 
    Create a file called `secret.yaml` or pick a [sample](https://github.com/dell/csi-powerscale/blob/main/samples/secret/secret.yaml) that has Powerscale array connection details: 
+   {{< collapse id="2" title="secret.yaml" card="false">}} 
+   ```yaml
+   isilonClusters:
+      # logical name of PowerScale Cluster
+      - clusterName: "cluster1"
 
-     ```yaml
-      isilonClusters:
-         # logical name of PowerScale Cluster
-         - clusterName: "cluster1"
+         # username for connecting to PowerScale OneFS API server
+         # Default value: None
+         username: "user"
 
-           # username for connecting to PowerScale OneFS API server
-           # Default value: None
-           username: "user"
+         # password for connecting to PowerScale OneFS API server
+         password: "password"
 
-           # password for connecting to PowerScale OneFS API server
-           password: "password"
+         # HTTPS endpoint of the PowerScale OneFS API server
+         # Default value: None
+         # Examples: "1.2.3.4", "https://1.2.3.4", "https://abc.myonefs.com"
+         endpoint: "1.2.3.4"
 
-           # HTTPS endpoint of the PowerScale OneFS API server
-           # Default value: None
-           # Examples: "1.2.3.4", "https://1.2.3.4", "https://abc.myonefs.com"
-           endpoint: "1.2.3.4"
+         # Is this a default cluster (would be used by storage classes without ClusterName parameter)
+         # Allowed values:
+         #   true: mark this cluster config as default
+         #   false: mark this cluster config as not default
+         # Default value: false
+         isDefault: true
 
-           # Is this a default cluster (would be used by storage classes without ClusterName parameter)
-           # Allowed values:
-           #   true: mark this cluster config as default
-           #   false: mark this cluster config as not default
-           # Default value: false
-           isDefault: true
+         # Specify whether the PowerScale OneFS API server's certificate chain and host name should be verified.
+         # Allowed values:
+         #   true: skip OneFS API server's certificate verification
+         #   false: verify OneFS API server's certificates
+         # Default value: default value specified in values.yaml
+         # skipCertificateValidation: true
 
-           # Specify whether the PowerScale OneFS API server's certificate chain and host name should be verified.
-           # Allowed values:
-           #   true: skip OneFS API server's certificate verification
-           #   false: verify OneFS API server's certificates
-           # Default value: default value specified in values.yaml
-           # skipCertificateValidation: true
+         # The base path for the volumes to be created on PowerScale cluster
+         # This will be used if a storage class does not have the IsiPath parameter specified.
+         # Ensure that this path exists on PowerScale cluster.
+         # Allowed values: unix absolute path
+         # Default value: default value specified in values.yaml
+         # Examples: "/ifs/data/csi", "/ifs/engineering"
+         # isiPath: "/ifs/data/csi"
 
-           # The base path for the volumes to be created on PowerScale cluster
-           # This will be used if a storage class does not have the IsiPath parameter specified.
-           # Ensure that this path exists on PowerScale cluster.
-           # Allowed values: unix absolute path
-           # Default value: default value specified in values.yaml
-           # Examples: "/ifs/data/csi", "/ifs/engineering"
-           # isiPath: "/ifs/data/csi"
+         # The permissions for isi volume directory path
+         # This will be used if a storage class does not have the IsiVolumePathPermissions parameter specified.
+         # Allowed values: valid octal mode number
+         # Default value: "0777"
+         # Examples: "0777", "777", "0755"
+         # isiVolumePathPermissions: "0777"
 
-           # The permissions for isi volume directory path
-           # This will be used if a storage class does not have the IsiVolumePathPermissions parameter specified.
-           # Allowed values: valid octal mode number
-           # Default value: "0777"
-           # Examples: "0777", "777", "0755"
-           # isiVolumePathPermissions: "0777"
-
-         - clusterName: "cluster2"
-           username: "user"
-           password: "password"
-           endpoint: "1.2.3.4"
-           endpointPort: "8080"
-      ```
+      - clusterName: "cluster2"
+         username: "user"
+         password: "password"
+         endpoint: "1.2.3.4"
+         endpointPort: "8080"
+   ```
+   {{< /collapse >}} 
 
    Replace the values for the given keys as per your environment.
 
@@ -123,9 +124,7 @@ To deploy the Operator, follow the instructions available [here](../../../operat
 
 ### Install Driver
 
-1. Follow all the [prerequisites](#prerequisite) above
-
-2. Create a CR (Custom Resource) for PowerFlex using the sample files provided
+1. Create a CR (Custom Resource) for PowerFlex using the sample files provided
 
     a. **Default Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/main/samples/minimal-samples/powerscale_v2130.yaml) for default settings. Modify if needed.
 
@@ -133,7 +132,7 @@ To deploy the Operator, follow the instructions available [here](../../../operat
 
     b. **Detailed Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powerscale_v2130.yaml) for detailed settings.
 
-3. Users should configure the parameters in CR. The following table lists the primary configurable parameters of the PowerScale driver and their default values:
+2. Users should configure the parameters in CR. The following table lists the primary configurable parameters of the PowerScale driver and their default values:
 {{< collapse id="1" title="Parameters">}}
    | Parameter | Description | Required | Default |
    | --------- | ----------- | -------- |-------- |
@@ -163,7 +162,7 @@ To deploy the Operator, follow the instructions available [here](../../../operat
    | monitor-interval | The monitor-interval will be used by external-health-monitor as an interval for health checks  | Yes | 60s |
 {{< /collapse >}}
 
-5. Execute the following command to create PowerScale custom resource:
+3. Execute the following command to create PowerScale custom resource:
 
     ```bash
     kubectl create -f <input_sample_file.yaml>
@@ -171,7 +170,7 @@ To deploy the Operator, follow the instructions available [here](../../../operat
 
     This command will deploy the CSI-PowerScale driver in the namespace specified in the input YAML file.
 
-6. Once the driver `Custom Resource (CR)` is created, you can verify the installation as mentioned below
+4. Once the driver `Custom Resource (CR)` is created, you can verify the installation as mentioned below
 
     * Check if ContainerStorageModule CR is created successfully using the command below:
         ```bash
@@ -179,7 +178,7 @@ To deploy the Operator, follow the instructions available [here](../../../operat
         ```
     * Check the status of the CR to verify if the driver installation is in the `Succeeded` state. If the status is not `Succeeded`, see the [Troubleshooting guide](../troubleshooting/#my-dell-csi-driver-install-failed-how-do-i-fix-it) for more information.
 
-7. Refer [Volume Snapshot Class](https://github.com/dell/csi-powerscale/tree/main/samples/volumesnapshotclass) and [Storage Class](https://github.com/dell/csi-powerscale/tree/main/samples/storageclass) for the sample files. 
+5. Refer [Volume Snapshot Class](https://github.com/dell/csi-powerscale/tree/main/samples/volumesnapshotclass) and [Storage Class](https://github.com/dell/csi-powerscale/tree/main/samples/storageclass) for the sample files. 
 
 **Note** :
 
