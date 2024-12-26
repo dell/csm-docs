@@ -36,6 +36,8 @@ To upgrade the CSM Replication sidecar that is installed along with the driver, 
 
 >For more information on upgrading the CSI driver, please visit the [CSI driver upgrade page](../../../drivers/upgrade).
 
+{{< hide id="1">}}
+
 ### PowerScale
 
 On PowerScale systems, an additional step is needed when upgrading to CSM Replication v1.4.0 or later. Because the SyncIQ policy created on the target-side storage array is no longer used, it must be deleted for any existing `DellCSIReplicationGroup` objects after performing the upgrade to the CSM Replication sidecar and PowerScale CSI driver. These steps should be performed before the `DellCSIReplicationGroup` objects are used with the new version of the CSI driver. Until this step is performed, existing `DellCSIReplicationGroup` objects will display an UNKNOWN link state.
@@ -44,6 +46,10 @@ On PowerScale systems, an additional step is needed when upgrading to CSM Replic
 2. Navigate to the `Data Protection > SyncIQ` page and select the `Policies` tab.
 3. Delete disabled, target-side SyncIQ policies that are used for CSM Replication. Such policies will be distinguished by their names, of the format `<prefix>-<kubernetes namespace>-<IP of replication destination>-<RPO duration>`.
 
+{{< /hide >}} 
+
+{{< hide id="2">}}
+
 ## Updating CSM Replication controller
 
 Make sure the appropriate release branch is available on the machine performing the upgrade by running:
@@ -51,7 +57,9 @@ Make sure the appropriate release branch is available on the machine performing 
 ```bash
 git clone -b v1.11.0 https://github.com/dell/csm-replication.git
 ```
+{{< /hide >}} 
 
+{{< hide id="3">}}
 ### Upgrading with Helm
 
 This option will only work if you have previously installed replication via Helm chart, available since version 1.1. If you used simple manifest or `repctl` please use [upgrading with repctl](#upgrading-with-repctl)
@@ -72,6 +80,7 @@ This option will only work if you have previously installed replication via Helm
       ```bash
       kubectl edit cm -n dell-replication-controller dell-replication-controller-config  
       ```
+{{< /hide >}} 
 
 ### Upgrading with repctl
 

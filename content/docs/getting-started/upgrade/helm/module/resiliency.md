@@ -10,14 +10,6 @@ description: >
 {{% /pageinfo %}}
 CSM for Resiliency can be upgraded as part of the Dell CSI driver upgrade process. The drivers can be upgraded either by a _helm chart_ or by the _Dell CSM Operator_. Currently, only _Helm chart_ upgrade is supported for CSM for Resiliency.
 
-For information on the PowerFlex CSI driver upgrade process, see [PowerFlex CSI Driver](../../../drivers/upgrade/powerflex).
-
-For information on the Unity XT CSI driver upgrade process, see [Unity XT CSI Driver](../../../drivers/upgrade/unity).
-
-For information on the PowerScale CSI driver upgrade process, see [PowerScale CSI Driver](../../../drivers/upgrade/isilon).
-
-For information on the PowerStore CSI driver upgrade process, see [PowerStore CSI Driver](../../../drivers/upgrade/powerstore).
-
 ## Helm Chart Upgrade
 
 To upgrade CSM for Resiliency with the driver, the following steps are required. 

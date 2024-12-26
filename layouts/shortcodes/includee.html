@@ -1,7 +1,15 @@
 {{ $file := .Get "file" }}
 {{ $suffix := .Get "suffix" | default "" }}
+{{ $hideIds := .Get "hideIds" | default "" }} <!-- IDs to hide, passed as a comma-separated string -->
+{{ $hideIdList := split $hideIds "," }} <!-- Split the string into an array -->
 {{ $content := readFile $file }}
-{{ $content = replaceRE "^---([\\s\\S]+?)---" "" $content }}
+{{ $content = replaceRE "^---([\\s\\S]+?)---" "" $content }} <!-- Remove front matter -->
+<!-- Dynamically add the `hide` parameter based on IDs -->
+{{ range $hideIdList }}
+  {{ $id := . }}
+  {{ $content = replaceRE (printf "\\{\\{<\\s*hide\\s+id=\"%s\"\\s*>\\}\\}" $id) (printf "{{< hide id=\"%s\" hide=\"true\" >}}" $id) $content }}
+{{ end }}
+{{ $content = replaceRE "\\{\\{<\\s*hide\\s+id=\"[^\"]+\"\\s*>\\}\\}" "{{< hide id=\"$1\" hide=\"false\" >}}" $content }} <!-- Default all other hide shortcodes to false -->
 {{ $htmlContent := $content | markdownify }}
 {{ $htmlContent = replaceRE "(<h[1-6] id=\")([^\"]+)(\")" (printf "$1$2-%s$3" $suffix) $htmlContent }}
 {{ $htmlContent = replaceRE "(<a[^>]*class=\"header-link\"[^>]*href=\"#)([^\"]+)(\")" (printf "$1$2-%s$3" $suffix) $htmlContent }}

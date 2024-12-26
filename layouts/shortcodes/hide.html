@@ -1,0 +1,16 @@
+{{- $hide := .Get "hide" | default "false" -}}
+{{- $id := .Get "id" -}}
+{{- if eq $hide "true" -}}
+<style>
+.hidden-content {
+  display: none;
+}
+</style>
+<div id="{{ $id }}" class="hidden-content">
+  {{ .Inner | markdownify }}
+</div>
+{{- else -}}
+<div id="{{ $id }}" class="visible-content">
+  {{ .Inner | markdownify }}
+</div>
+{{- end -}}
