@@ -24,4 +24,6 @@ Welcome to the Container Storage Module Getting Started documentation. This sect
 
       {{< customcard path="content/docs/getting-started/uninstallation" link="./uninstallation" title="Uninstallation"  imageNumber="6">}}
 
-{{< /cardcontainer >}}
+{{< /cardcontainer >}} 
+
+>Note: The steps for Kubernetes and Mirantis Kubernetes Engine (MKE) are the same. You can follow them for installation, upgrade, and uninstallation.
