@@ -128,14 +128,14 @@ Follow the instructions available in Authorization for [Installing karavictl](..
 
 **Authorization v1.x**
 
-Follow the instructions available in Authorization for [Configuring the Container Storage Module Authorization Proxy Server](../../../../authorization/v1.x/configuration/proxy-server/).
+Follow the instructions available in Authorization for [Configuring the Container Storage Module Authorization Proxy Server](../../../../../../../concepts/authorization/v1.x/configuration/proxy-server/).
 
 
 ### Configure a Dell CSI Driver with Container Storage Module Authorization
 
 **Authorization v1.x**
 
-Follow the instructions available in Authorization for [Configuring a CSI Driver with Container Storage Module for Authorization](../../../../authorization/v1.x/configuration/).
+Follow the instructions available in Authorization for [Configuring a CSI Driver with Container Storage Module for Authorization](../../../../../../../concepts/authorization/v1.x/configuration/).
 
 ## Upgrade Container Storage Module Authorization
 

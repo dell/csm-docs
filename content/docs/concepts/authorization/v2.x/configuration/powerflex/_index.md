@@ -55,7 +55,7 @@ Given a setup where Kubernetes, a storage system, and the Authorization Proxy Se
 
     **Operator**
 
-    Refer to the [Create Secret](../../../../deployment/csmoperator/drivers/powerflex/#create-secret) section to prepare `secret.yaml` to configure the driver to communicate with the Authorization sidecar.
+    Refer to the [Create Secret](../../../../../getting-started/installation/kubernetes/powerflex/csmoperator/#create-secret) section to prepare `secret.yaml` to configure the driver to communicate with the Authorization sidecar.
 
     - Update `endpoint` to match the localhost endpoint in `samples/secret/karavi-authorization-config.json`.
 
@@ -77,7 +77,7 @@ Given a setup where Kubernetes, a storage system, and the Authorization Proxy Se
 
     **Helm**
 
-    Refer to the [Install the Driver](../../../../deployment/helm/drivers/installation/powerflex/#install-the-driver) section to edit the parameters in `samples/config.yaml` to configure the driver to communicate with Authorization sidecar.
+    Refer to the [Install the Driver](../../../../../getting-started/installation/kubernetes/powerflex/helm/#install-the-driver) section to edit the parameters in `samples/config.yaml` to configure the driver to communicate with Authorization sidecar.
 
     - Update `endpoint` to match the localhost endpoint in `samples/secret/karavi-authorization-config.json`.
 
@@ -102,7 +102,7 @@ Given a setup where Kubernetes, a storage system, and the Authorization Proxy Se
 
     **Operator**
 
-    Refer to the [Install Driver](../../../../deployment/csmoperator/drivers/powerflex/#install-driver) section to edit the parameters in the Custom Resource to enable Authorization.
+    Refer to the [Install Driver](../../../../../getting-started/installation/kubernetes/powerflex/csmoperator/#install-driver) section to edit the parameters in the Custom Resource to enable Authorization.
 
     Under `modules`, enable the module named `authorization`:
 
@@ -140,7 +140,7 @@ Given a setup where Kubernetes, a storage system, and the Authorization Proxy Se
 
     **Helm**
 
-    Refer to the [Install the Driver](../../../../deployment/helm/drivers/installation/powerflex/#install-the-driver) section to edit the parameters in `myvalues.yaml` to enable Authorization.
+    Refer to the [Install the Driver](../../../../../getting-started/installation/kubernetes/powerflex/helm/#install-the-driver) section to edit the parameters in `myvalues.yaml` to enable Authorization.
 
     - Update `authorization.enabled` to `true`.
 

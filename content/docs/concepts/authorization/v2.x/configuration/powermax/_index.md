@@ -56,13 +56,13 @@ Given a setup where Kubernetes, a storage system, and the Container Storage Modu
 
     **Operator**
 
-    Refer to the [Install Driver](../../../../deployment/csmoperator/drivers/powermax/#install-driver) section to prepare `powermax-creds.yaml` to configure the driver to communicate with Authorization sidecar.
+    Refer to the [Install Driver](../../../../../getting-started/installation/kubernetes/powermax/csmoperator/#install-driver) section to prepare `powermax-creds.yaml` to configure the driver to communicate with Authorization sidecar.
 
     Leave `username` and `password` with the default values as they will be ignored.
 
     **Helm**
 
-    Refer to the [Install the Driver](../../../../deployment/helm/drivers/installation/powermax/#install-the-driver) section where you edit `samples/secret/secret.yaml` with the credentials of the PowerMax.
+    Refer to the [Install the Driver](../../../../../getting-started/installation/kubernetes/powermax/helm/#installation) section where you edit `samples/secret/secret.yaml` with the credentials of the PowerMax.
 
     Leave `username` and `password` with the default values as they will be ignored.
 
@@ -90,7 +90,7 @@ Given a setup where Kubernetes, a storage system, and the Container Storage Modu
 
     **Operator**
 
-    Refer to the [Install Driver](../../../../deployment/csmoperator/drivers/powermax/#install-driver) section to edit the parameters in the Custom Resource to enable Authorization.
+    Refer to the [Install Driver](../../../../../getting-started/installation/kubernetes/powermax/csmoperator/#install-driver) section to edit the parameters in the Custom Resource to enable Authorization.
 
     Under `modules`, enable the module named `authorization`:
 
@@ -156,7 +156,7 @@ Given a setup where Kubernetes, a storage system, and the Container Storage Modu
 
     **Helm**
 
-    Refer to the [Install the Driver](../../../../deployment/helm/drivers/installation/powermax/#install-the-driver) section to edit the parameters in `my-powermax-settings.yaml` file to configure the driver to communicate with Authorization sidecar.
+    Refer to the [Install the Driver](../../../../../getting-started/installation/kubernetes/powermax/helm/#installation) section to edit the parameters in `my-powermax-settings.yaml` file to configure the driver to communicate with Authorization sidecar.
 
     - Update `global.storageArrays.endpoint` to match the localhost endpoint in `samples/secret/karavi-authorization-config.json`.
 

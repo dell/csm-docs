@@ -13,7 +13,7 @@ To deploy the Operator, follow the instructions available [here](../../../operat
 
 ### Prerequisites
 
-- If multipath is configured, ensure CSI-PowerFlex volumes are blacklisted by multipathd. See [troubleshooting section](../../../../csidriver/troubleshooting/powerflex) for details.
+- If multipath is configured, ensure CSI-PowerFlex volumes are blacklisted by multipathd. See [troubleshooting section](../../../../../concepts//csidriver/troubleshooting/powerflex) for details.
 
 
 #### SDC Deployment for Operator 

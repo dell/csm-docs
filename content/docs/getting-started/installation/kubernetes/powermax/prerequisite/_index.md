@@ -8,7 +8,7 @@ Description: >
 
 The following requirements must be met before installing the CSI Driver for PowerMax:
 
-- A Kubernetes or OpenShift cluster (see [supported versions](../../../../csidriver/#features-and-capabilities)).
+- A Kubernetes or OpenShift cluster (see [supported versions](../../../../../concepts/csidriver/#features-and-capabilities)).
 - If enabling CSM for Authorization, please refer to the Authorization deployment steps first
 - If enabling CSM Replication, both source and target storage systems must be locally managed by Unisphere.
   - _Example_: When using two Unisphere instances, the first Unisphere instance should be configured with the source storage system as locally
@@ -26,7 +26,7 @@ The following requirements must be met before installing the CSI Driver for Powe
 
 ### CSI PowerMax Reverse Proxy
 
-The CSI PowerMax Reverse Proxy is a component that will be installed with the CSI PowerMax driver. For more details on this feature, see the related [documentation](../../../../csidriver/features/powermax/#csi-powermax-reverse-proxy).
+The CSI PowerMax Reverse Proxy is a component that will be installed with the CSI PowerMax driver. For more details on this feature, see the related [documentation](../../../../../concepts/csidriver/features/powermax/#csi-powermax-reverse-proxy).
 
 Create a TLS secret that holds an SSL certificate and a private key. This is required by the reverse proxy server.
 Use a tool such as `openssl` to generate this secret using the example below:

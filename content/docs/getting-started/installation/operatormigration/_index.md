@@ -35,4 +35,4 @@ toc_hide: true
 
 ## Testing
 
-To test that the new installation is working, please follow the steps outlined [here](../../../csidriver/test) for your specific driver.
+To test that the new installation is working, please follow the steps outlined [here](../../../concepts/csidriver/test) for your specific driver.

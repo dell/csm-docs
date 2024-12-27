@@ -52,7 +52,7 @@ kubectl -n isilon create secret generic karavi-authorization-config --from-file=
 
     **Helm**
 
-    Refer to the [Install the Driver](../../../../deployment/helm/drivers/installation/isilon/#install-the-driver) section to edit the parameters to prepare the `samples/secret/secret.yaml` file to configure the driver to communicate with the Authorization sidecar.
+    Refer to the [Install the Driver](../../../../../getting-started/installation/kubernetes/powerscale/helm/#install-driver) section to edit the parameters to prepare the `samples/secret/secret.yaml` file to configure the driver to communicate with the Authorization sidecar.
 
     - Update `endpoint` to match the localhost endpoint in `samples/secret/karavi-authorization-config.json`.
 
@@ -78,7 +78,7 @@ kubectl -n isilon create secret generic karavi-authorization-config --from-file=
 
     **Operator**
 
-    Refer to the [Prerequisite](../../../../deployment/csmoperator/drivers/powerscale/#prerequisite) section to prepare the `secret.yaml` file to configure the driver to communicate with the Authorization sidecar.
+    Refer to the [Prerequisite](../../../../../getting-started/installation/kubernetes/powerscale/csmoperator/#prerequisite) section to prepare the `secret.yaml` file to configure the driver to communicate with the Authorization sidecar.
 
     - Update `endpoint` to match the localhost endpoint in `samples/secret/karavi-authorization-config.json`.
 
@@ -106,7 +106,7 @@ kubectl -n isilon create secret generic karavi-authorization-config --from-file=
 
     **Helm**
 
-    Refer to the [Install the Driver](../../../../deployment/helm/drivers/installation/isilon/#install-the-driver) section to edit the parameters in `my-isilon-settings.yaml` file to enable Authorization.
+    Refer to the [Install the Driver](../../../../../getting-started/installation/kubernetes/powerscale/helm/#install-driver) section to edit the parameters in `my-isilon-settings.yaml` file to enable Authorization.
 
     - Update `authorization.enabled` to `true`.
 
@@ -140,7 +140,7 @@ kubectl -n isilon create secret generic karavi-authorization-config --from-file=
 
     **Operator**
 
-    Refer to the [Install Driver](../../../../deployment/csmoperator/drivers/powerscale/#install-driver) section to edit the parameters in the Custom Resource to enable Authorization.
+    Refer to the [Install Driver](../../../../../getting-started/installation/kubernetes/powerscale/csmoperator/#install-driver) section to edit the parameters in the Custom Resource to enable Authorization.
 
     Under `modules`, enable the module named `authorization`:
 

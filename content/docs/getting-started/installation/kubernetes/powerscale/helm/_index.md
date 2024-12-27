@@ -27,7 +27,7 @@ Install Helm 3.0 on the master node before you install the CSI Driver for PowerS
 
 The following are requirements to be met before installing the CSI Driver for PowerScale:
 
-- Install Kubernetes or OpenShift (see [supported versions](../../../../../csidriver/#features-and-capabilities))
+- Install Kubernetes or OpenShift (see [supported versions](../../../../../concepts/csidriver/#features-and-capabilities))
 - Install Helm 3
 - Mount propagation is enabled on container runtime that is being used
 - `nfs-utils` package must be installed on nodes that will mount volumes
@@ -115,7 +115,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
    | images | List all the images used by the CSI driver and CSM. If you use a private repository, change the registries accordingly. | Yes | "" |
    | logLevel | CSI driver log level | No | "debug" |
    | certSecretCount | Defines the number of certificate secrets, which the user is going to create for SSL authentication. (isilon-cert-0..isilon-cert-(n-1)); Minimum value should be 1.| Yes | 1 |
-   | [allowedNetworks](../../../../../csidriver/features/powerscale/#support-custom-networks-for-nfs-io-traffic) | Defines the list of networks that can be used for NFS I/O traffic, CIDR format must be used. | No | [ ] |
+   | [allowedNetworks](../../../../../concepts/csidriver/features/powerscale/#support-custom-networks-for-nfs-io-traffic) | Defines the list of networks that can be used for NFS I/O traffic, CIDR format must be used. | No | [ ] |
    | maxIsilonVolumesPerNode | Defines the default value for a maximum number of volumes that the controller can publish to the node. If the value is zero CO SHALL decide how many volumes of this type can be published by the controller to the node. This limit is applicable to all the nodes in the cluster for which node label 'max-isilon-volumes-per-node' is not set. | Yes | 0 |
    | imagePullPolicy | Defines the policy to determine if the image should be pulled prior to starting the container | Yes | IfNotPresent |
    | verbose | Indicates what content of the OneFS REST API message should be logged in debug level logs | Yes | 1 |

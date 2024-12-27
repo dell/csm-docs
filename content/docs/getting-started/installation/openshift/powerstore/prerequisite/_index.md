@@ -8,7 +8,7 @@ Description: >
 
 The following requirements must be met before installing the CSI Driver for PowerStore:
 
-- A Kubernetes or OpenShift cluster (see [supported versions](../../../../../csidriver/#features-and-capabilities))
+- A Kubernetes or OpenShift cluster (see [supported versions](../../../../../concepts/csidriver/#features-and-capabilities))
 - Refer to the sections below for protocol specific requirements.
 - If you want to use pre-configured iSCSI/FC hosts be sure to check that they are not part of any host group.
 - Linux multipathing requirements (described later).
@@ -278,4 +278,4 @@ replication:
 
 The CRDs for replication can be obtained and installed from the csm-replication project on Github. Use `csm-replication/deploy/replicationcrds.all.yaml` located in csm-replication git repo for the installation.
 
-CRDs should be configured during replication prepare stage with repctl as described in [install-repctl](../../../../../deployment/helm/modules/installation/replication/install-repctl)
+CRDs should be configured during replication prepare stage with repctl as described in [install-repctl](../../../../../getting-started/installation/kubernetes/powerstore/helm/csm-modules/replication/install-repctl/)

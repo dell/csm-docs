@@ -20,4 +20,4 @@ Troubleshooting links for Container Storage Modules:
 
 [Resiliency](../../concepts/resiliency/troubleshooting)
 
-[Operator](../../concepts/deployment/csmoperator/troubleshooting)
+[Operator](../../concepts/csmoperator/troubleshooting)

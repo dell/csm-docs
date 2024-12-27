@@ -353,7 +353,7 @@ storageClasses:
 
 > ℹ️ **NOTE:**: For testing/debugging purposes, it can be useful to use the `--no-cleanup` so resources do not get deleted.
 
-> ℹ️ **NOTE:**: If you are using CSI PowerScale with [SmartQuotas](../../csidriver/features/powerscale/#usage-of-smartquotas-to-limit-storage-consumption) disabled, the `Volume Expansion` suite is expected to timeout due to the way PowerScale provisions storage. Set `storageClasses.expansion` to `false` to skip this suite.
+> ℹ️ **NOTE:**: If you are using CSI PowerScale with [SmartQuotas](../../concepts/csidriver/features/powerscale/#usage-of-smartquotas-to-limit-storage-consumption) disabled, the `Volume Expansion` suite is expected to timeout due to the way PowerScale provisions storage. Set `storageClasses.expansion` to `false` to skip this suite.
 
 ```bash
 cert-csi certify --cert-config <path-to-config> --vsc <volume-snapshot-class>
@@ -505,7 +505,7 @@ Run `cert-csi test clone-volume -h` for more options.
 
 > Raw block volumes cannot be verified since there is no filesystem.
 
-> If you are using CSI PowerScale with [SmartQuotas](../../csidriver/features/powerscale/#usage-of-smartquotas-to-limit-storage-consumption) disabled, the `Volume Expansion` suite is expected to timeout due to the way PowerScale provisions storage.
+> If you are using CSI PowerScale with [SmartQuotas](../../concepts/csidriver/features/powerscale/#usage-of-smartquotas-to-limit-storage-consumption) disabled, the `Volume Expansion` suite is expected to timeout due to the way PowerScale provisions storage.
 
 ```bash
 cert-csi test expansion --sc <storage class>

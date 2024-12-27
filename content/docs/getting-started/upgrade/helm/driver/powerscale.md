@@ -36,10 +36,3 @@ You can upgrade the CSI Driver for Dell PowerScale using Helm or Dell CSM Operat
 
 *NOTE:*
 - The parameter `--helm-charts-version` is optional and if you do not specify the flag, by default the `csi-install.sh` script will clone the version of the helm chart that is specified in the driver's [csi-install.sh](https://github.com/dell/csi-powerscale/blob/main/dell-csi-helm-installer/csi-install.sh#L16) file. If you wish to install the driver using a different version of the helm chart, you need to include this flag. Also, remember to delete the `helm-charts` repository present in the `csi-powerscale` directory if it was cloned before.
-
-## Upgrade using Dell CSM Operator
-
-**Note:** Upgrading the Operator does not upgrade the CSI Driver.
-
-1. Please upgrade the Dell CSM Operator by following [here](../../../../../deployment/csmoperator/#upgrade)
-2. Once the operator is upgraded, to upgrade the driver, refer [here](../../../../../deployment/csmoperator/#upgrade-driver-using-dell-csm-operator)
