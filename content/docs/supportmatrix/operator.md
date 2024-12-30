@@ -1,11 +1,10 @@
 ---
 title: "CSM Operator Compatibility Matrix"
 linkTitle: "CSM Operator Compatibility Matrix"
-description: Support Matrix for Container Storage Modules
 weight: 1 
 toc_hide: true
 ---  
-## Container Storage Module Operator compatibility matrix
+
 
 The table below lists the driver and modules versions installable with the Container Storage Modules Operator:
 {{<table "table table-striped table-bordered table-sm">}}

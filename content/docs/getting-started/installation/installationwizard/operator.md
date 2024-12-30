@@ -39,13 +39,13 @@ The Container Storage Modules Installation Wizard is a webpage that helps you cr
 
 2. Look over all the fields in the generated `values.yaml` and fill in/adjust any as needed.
 
->NOTE: The CSM Installation Wizard generates `values.yaml` with the minimal inputs required to install the CSM. To configure additional parameters in values.yaml, you can follow the steps outlined in [PowerStore](../csmoperator/drivers/powerstore), [PowerMax](../csmoperator/drivers/powermax), [PowerScale](../csmoperator/drivers/powerscale), [Resiliency](../csmoperator/modules/resiliency).
+>NOTE: The CSM Installation Wizard generates `values.yaml` with the minimal inputs required to install the CSM. To configure additional parameters in values.yaml, you can follow the steps outlined in [PowerStore](../../powerstore/csmoperator), [PowerMax](../../powermax/csmoperator), [PowerScale](../../powerscale/csmoperator), [Resiliency](docs/getting-started/installation/operator/modules/resiliency).
 
-3. If Observability is checked in the wizard, refer to [Observability](../csmoperator/modules/observability) to export metrics to Prometheus and load the Grafana dashboards.
+3. If Observability is checked in the wizard, refer to [Observability](docs/getting-started/installation/operator/modules/observability) to export metrics to Prometheus and load the Grafana dashboards.
 
-4. If Authorization is checked in the wizard, only the sidecar is enabled. Refer to [Authorization](../csmoperator/modules/authorization-v2.0) to install and configure the CSM Authorization Proxy Server.
+4. If Authorization is checked in the wizard, only the sidecar is enabled. Refer to [Authorization](docs/getting-started/installation/operator/modules/authorizationv2.0) to install and configure the CSM Authorization Proxy Server.
 
-5. If Replication is checked in the wizard, refer to [Replication](../csmoperator/modules/replication) for the necessary prerequisites required for this module.
+5. If Replication is checked in the wizard, refer to [Replication](docs/getting-started/installation/operator/modules/replication) for the necessary prerequisites required for this module.
 
 6. Install the Operator.
 

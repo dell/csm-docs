@@ -12,7 +12,7 @@ The Container Storage Module Operator is a Kubernetes Operator, which can be use
 
 ## Supported CSM Components
 
-For the supported version [here](../../../supportmatrix/#operator-compatibility-matrix-1).
+For the supported version [here](../../../supportmatrix/operator).
 
 These CR will be used for new deployment or upgrade. In most case, it is recommended to use the latest available version.
 
@@ -24,7 +24,7 @@ Before installing the driver, you need to install the operator. You can find the
 
 >NOTE: You can update the resource requests and limits when you are deploying operator using manual installation without OLM
 
-1. Install volume snapshot CRDs. For detailed snapshot setup procedure, [click here](../../snapshots/#volume-snapshot-feature).
+1. Install volume snapshot CRDs. For detailed snapshot setup procedure, [click here](docs/concepts/snapshots/#volume-snapshot-feature).
 2. Clone and checkout the required csm-operator version using
 ```bash
 git clone -b v1.8.0 https://github.com/dell/csm-operator.git

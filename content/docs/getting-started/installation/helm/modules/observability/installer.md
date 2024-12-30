@@ -99,7 +99,7 @@ To perform an online installation of Container Storage Module Observability, the
 3. Execute the installation script.
     The following example will install Container Storage Module Observability into the CSM namespace.
 
-    A sample values.yaml file is located [here](https://github.com/dell/helm-charts/blob/main/charts/karavi-observability/values.yaml). This can be copied into a file named `myvalues.yaml` and modified accordingly for the installer command below. Configuration options are outlined in the [Helm chart deployment section](../deployment#configuration).
+    A sample values.yaml file is located [here](https://github.com/dell/helm-charts/blob/main/charts/karavi-observability/values.yaml). This can be copied into a file named `myvalues.yaml` and modified accordingly for the installer command below. Configuration options are outlined in the [Helm chart deployment section](../observability#configuration).
 
     __Note:__
  - The default `values.yaml` deploys the CSM for Observability Topology service.

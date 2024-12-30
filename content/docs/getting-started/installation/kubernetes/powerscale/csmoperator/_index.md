@@ -109,7 +109,7 @@ To deploy the Operator, follow the instructions available [here](../../../operat
 
 4. **Create isilon-certs-n secret.**
 
-      Please refer [this section](../../../../deployment/helm/drivers/installation/isilon/#certificate-validation-for-onefs-rest-api-calls) for creating cert-secrets.
+      Please refer [this section](../helm#certificate-validation-for-onefs-rest-api-calls) for creating cert-secrets.
 
       If certificate validation is skipped, empty secret must be created. To create an empty secret. Ex: empty-secret.yaml
 

@@ -128,7 +128,7 @@ Once the Authorization CR is created, you can verify the installation as mention
 
 >__Note__: Karavictl will not work with Authorization v2.x. Please use dellctl instead.
 
-Follow the instructions for [Installing dellctl](../../../../support/cli/#installation-instructions).
+Follow the instructions for [Installing dellctl](docs/tooling/cli/#installation-instructions).
 
 ### Configure the Container Storage Module Authorization Proxy Server
 
@@ -387,7 +387,7 @@ kubectl delete csm/authorization --namespace authorization
 
 ### Uninstalling the Container Storage Module Authorization sidecar in the CSI Driver
 
-To uninstall the sidecar in the CSI Driver, [update the driver](../drivers/#update-csi-drivers) Container Storage Module object to disable the authorization component.
+To uninstall the sidecar in the CSI Driver, [update the driver](docs/getting-started/uninstallation/operator/driver) Container Storage Module object to disable the authorization component.
 
 ```bash
 kubectl edit csm/[driver-CR-name] --namespace [driver-namespace]

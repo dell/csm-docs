@@ -89,7 +89,7 @@ bash scripts/csm-offline-bundle.sh -p -r localregistry:5000/dell-csm-operator/
 
 ### Perform either a Helm installation or Operator installation
 
-Now that the required images are available and the Helm Charts/Operator configuration updated, you can proceed by following the usual installation procedure as documented either via [Helm](../../../deployment/helm/drivers/installation) or [Operator](../../../deployment/csmoperator/#installation).
+Now that the required images are available and the Helm Charts/Operator configuration updated, you can proceed by following the usual installation procedure as documented.
 
 *NOTES:* 
 1. Offline bundle installation is only supported with manual installs i.e. without using Operator Lifecycle Manager.

@@ -12,6 +12,7 @@ description: >
 {{< /accordion >}}
 <br> 
 {{< accordion id="Two" title="Storage Class" markdown="true" >}} 
-{{<include "content/docs/getting-started/installation/helm/modules/replication/configmap-secrets.md">}}
+{{<include "content/docs/getting-started/installation/helm/modules/replication/storageclasses.md">}} 
+
 {{< /accordion >}} 
 

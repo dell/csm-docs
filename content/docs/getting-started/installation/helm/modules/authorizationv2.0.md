@@ -28,7 +28,7 @@ The following third-party components are optionally installed in the specified n
 ## Install Container Storage Module Authorization
 
 **Steps**
-1. [Install Vault or configure an existing Vault](../../../../csmoperator/modules/authorization-v2.0#vault-server-installation).
+1. [Install Vault or configure an existing Vault](docs/getting-started/installation/operator/modules/authorizationv2.0#vault-server-installation).
 2. Create a namespace where you want to install Authorization.
    ```bash
    kubectl create namespace authorization
@@ -132,7 +132,7 @@ helm -n authorization install authorization -f myvalues.yaml charts/csm-authoriz
 
 >__Note__: Karavictl will not work with Authorization v2.x. Please use dellctl instead.
 
-Follow the instructions for [Installing dellctl](../../../../../support/cli/#installation-instructions).
+Follow the instructions for [Installing dellctl](docs/tooling/cli/#installation-instructions).
 
 ## Configuring the Authorization Proxy Server
 

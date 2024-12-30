@@ -34,7 +34,7 @@
        done
        ```
 
-       If [Container Storage Module for Authorization is enabled](../../authorization-v2.0/#configuring-a-dell-csi-driver-with-csm-for-authorization) for CSI PowerMax, perform these steps:
+       If [Container Storage Module for Authorization is enabled](docs/getting-started/installation/helm/modules/authorizationv2.0#configuring-a-dell-csi-driver-with-container-storage-module-for-authorization) for CSI PowerMax, perform these steps:
 
     3. Copy the driver configuration parameters ConfigMap from the CSI PowerMax namespace into the Container Storage Module Observability namespace:
 
