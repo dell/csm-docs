@@ -11,17 +11,21 @@ description: >
 {{<include "content/docs/getting-started/installation/helm/modules/observability/_index.md">}}
 --> 
 {{< accordion id="One" title="Helm" markdown="true" >}} 
-{{<include "content/docs/getting-started/installation/helm/modules/observability/deployment/installation.md">}} 
+{{<includee file="content/docs/getting-started/installation/helm/modules/observability/deployment/installation.md" suffix="1">}} 
 
-{{<include "content/docs/getting-started/installation/helm/modules/observability/deployment/driver/powerflex.md">}} 
+{{<includee file="content/docs/getting-started/installation/helm/modules/observability/deployment/driver/powerflex.md" suffix="2">}} 
 
-{{<include "content/docs/getting-started/installation/helm/modules/observability/deployment/configuration/configuration.md">}} 
+{{<includee file="content/docs/getting-started/installation/helm/modules/observability/deployment/configuration/configuration.md" suffix="3">}} 
 
 
 {{< /accordion >}}
 <br> 
 {{< accordion id="Two" title="Installer" markdown="true" >}} 
-{{<include "content/docs/getting-started/installation/helm/modules/observability/installer.md">}}
+{{<includee file="content/docs/getting-started/installation/helm/modules/observability/installer.md" suffix="4">}}
+{{< /accordion >}} 
+<br> 
+{{< accordion id="Three" title="Offline" markdown="true" >}} 
+{{<includee file="content/docs/getting-started/installation/offline/observability.md" hideIds="2,3,4" suffix="5" Var="powerflex">}}
 {{< /accordion >}}
 
 {{< cardcontainer >}}
