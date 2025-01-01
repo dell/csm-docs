@@ -1,5 +1,5 @@
 ---
-title: Replication with
+title: Replication with KubeVirt
 linktitle: Replication with KubeVirt
 weight: 6
 description: >
