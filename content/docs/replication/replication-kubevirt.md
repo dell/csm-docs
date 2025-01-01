@@ -26,13 +26,65 @@ Persistent Volumes (PVs) created via virtualized workloads (VMs).
   storage class as the default, update the annotation as follows:
 
   ```
-  kubectl patch storageclass <replication-storageclass> -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'
+  kubectl patch storageclass replication-storageclass -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'
   ```
 
 - Deploy a VM on the source cluster to provision a Persistent Volume (PV) using
   a data volume template or a Persistent Volume Claim (PVC). The PV created on
   the source will be replicated to the target cluster, as there is an active
   replication session between the two clusters.
+
+- sample _create-vm.yaml_ manifest:
+
+```
+apiVersion: kubevirt.io/v1
+kind: VirtualMachine
+metadata:
+  labels:
+    kubevirt.io/vm: vm-alpine-rwo
+  name: source-vm
+spec:
+  running: true
+  template:
+    metadata:
+      labels:
+        kubevirt.io/vm: vm-alpine-rwo
+    spec:
+      domain:
+        devices:
+          disks:
+            - disk:
+                bus: virtio
+              name: datavolumedisk1
+          interfaces:
+            - masquerade: {}
+              name: default
+        resources:
+          requests:
+            memory: 1Gi
+      terminationGracePeriodSeconds: 0
+      networks:
+        - name: default
+          pod: {}
+      volumes:
+        - dataVolume:
+            name: alpine-rwo-dv
+          name: datavolumedisk1
+  dataVolumeTemplates:
+    - metadata:
+        name: alpine-rwo-dv
+      spec:
+        storage:
+          accessModes:
+            - ReadWriteOnce
+          resources:
+            requests:
+              storage: 8Gi
+          storageClassName: replication-storageclass
+        source:
+          registry:
+            url: docker://quay.io/kubevirt/alpine-container-disk-demo:v0.42.1
+```
 
 - On the target cluster, the replica Persistent Volume (PV) can be accessed by
   binding it to a replica Persistent Volume Claim (PVC). Deploy a replica VM on
@@ -41,7 +93,7 @@ Persistent Volumes (PVs) created via virtualized workloads (VMs).
 ## Access replicated Persistent Volume (PV) on target cluster
 
 - Login to the VM using the
-  [virtctl](https://kubevirt.io/user-guide/user_workloads/virtctl_client_tool/)
+  _[virtctl](https://kubevirt.io/user-guide/user_workloads/virtctl_client_tool/)_
   binary:
 
   ```
