@@ -6,7 +6,7 @@ weight: 9
 Description: >
   Container Storage Modules (CSM) release notes for replication
 ---
-## Release Notes - Container Storage Module Replication 1.10.0
+## Container Storage Module Replication 1.10.0
 
 
 ### New Features/Changes

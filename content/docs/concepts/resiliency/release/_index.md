@@ -7,7 +7,7 @@ Description: >
   Container Storage Modules (CSM) release notes for resiliency
 ---
 
-## Release Notes - Container Storage Module Resiliency 1.11.0
+## Container Storage Module Resiliency 1.11.0
 
 
 

@@ -4,13 +4,13 @@ toc_hide: true
 description: Release notes for PowerMax CSI driver
 ---
 
-## Release Notes - CSI PowerMax v2.12.0
+## CSI PowerMax v2.12.0
 
 > ℹ️ **NOTE:** Auto SRDF group creation is currently not supported in PowerMaxOS 10.1 (6079) Arrays.
 
-{{% alert color="warning" %}}
+{{< alert color="warning" >}}
   Starting from CSI v2.4.0, only Unisphere 10.0 REST endpoints are supported. It is mandatory to update Unisphere to 10.0. Please find the instructions [here](https://dl.dell.com/content/manual34878027-dell-unisphere-for-powermax-10-0-0-installation-guide.pdf?language=en-us&ps=true).
-  {{% /alert %}}
+{{< /alert >}}
 
 > ℹ️ **NOTE:**  File Replication for PowerMax is currently not supported
 

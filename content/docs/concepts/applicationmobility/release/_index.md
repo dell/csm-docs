@@ -10,7 +10,7 @@ Description: >
 We are pleased to announce that Application Mobility will be available with Container Storage Modules starting early next year (2025).
 {{% /pageinfo %}}
 
-## Release Notes - Container Storage Module Application Mobility v1.2.0
+## Container Storage Module Application Mobility v1.2.0
 
 
 ### New Features/Changes

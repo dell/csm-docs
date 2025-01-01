@@ -6,7 +6,7 @@ Description: >
   Container Storage Modules (CSM) release notes for authorization
 ---
 
-## Release Notes - Container Storage Module Authorization 2.0.0
+## Container Storage Module Authorization 2.0.0
 
 ### New Features/Changes
 

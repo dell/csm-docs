@@ -9,20 +9,7 @@ Description: >
 {{% pageinfo color="primary" %}}
 {{< message text="1" >}}
 {{% /pageinfo %}}
-## Release Notes - Container Storage Modules Operator v1.6.1
-
-
-
-
-
-
-
-
-
-
-
-
-
+## Container Storage Modules Operator v1.6.1
 
 ### New Features/Changes
 
