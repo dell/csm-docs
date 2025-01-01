@@ -1,6 +1,6 @@
 ---
-title: "Offline  Installation"
-linkTitle: "Offline  Installation"
+title: "Offline "
+linkTitle: "Offline "
 no_list: true
 description: Offline  Installation 
 toc_hide: true
