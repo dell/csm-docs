@@ -1,6 +1,7 @@
 ---
 title: "Authorization"
 linkTitle: "Authorization"
+no_list: true 
 weight: 4
 Description: >
   Container Storage Module (CSM) for Authorization

@@ -1,7 +1,8 @@
 ---
 title: Authorization - v1.x
 linktitle: v1.x
-weight: 4
+weight: 4 
+no_list: true
 Description: >
   Container Storage Module (CSM) for Authorization v1.x.
 tags:

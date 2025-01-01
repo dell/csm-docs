@@ -8,7 +8,7 @@ Description: Code features for PowerMax Driver
 ## Multi Unisphere Support
 
 Starting with v1.7, the CSI PowerMax driver can communicate with multiple Unisphere for PowerMax servers to manage multiple PowerMax arrays.For more details on how
-to configure the driver and ReverseProxy, see the relevant section [here](../../../deployment/helm/drivers/installation/powermax#sample-values-file)
+to configure the driver and ReverseProxy, see the relevant section [here](../../../../docs/getting-started/installation/kubernetes/powermax/helm#sample-values-file)
 
 ## Volume Snapshot Feature
 
@@ -307,7 +307,7 @@ The new Helm chart is configured as a sub chart for the CSI PowerMax helm chart.
 
 ### Using Container Storage Module Operator
 
-For complete installation instructions for the CSI PowerMax driver and the CSI PowerMax Reverse Proxy, see the [Container Storage Module Operator documentation](../../../deployment/csmoperator/drivers/powermax/) for PowerMax.
+For complete installation instructions for the CSI PowerMax driver and the CSI PowerMax Reverse Proxy, see the [Container Storage Module Operator documentation](../../../../getting-started/installation/kubernetes/powermax/csmoperator/) for PowerMax.
 
 ## User-friendly hostnames
 
@@ -339,7 +339,7 @@ If you are using the Container Storage Module Operator, the value to adjust is:
 replicas: 2  
 ```
 
-For more details about configuring Controller HA using the Container Storage Module Operator, see the [Container Storage Module Operator documentation](../../../deployment/csmoperator/#custom-resource-specification).
+For more details about configuring Controller HA using the Container Storage Module Operator, see the [Container Storage Module Operator documentation](../../../getting-started/installation/operator/#custom-resource-definitions).
 
 ## NodeSelectors and Tolerations
 
@@ -606,7 +606,7 @@ It will be supported only on new/freshly installed clusters where the cluster is
 To use this feature
 
 - Set `vSphere.enabled` to true.
-- Create a secret which contains vCenter privileges. Follow the steps [here](../../../deployment/helm/drivers/installation/powermax#auto-rdm-for-vsphere-over-fc-requirements) to create it. Update `vCenterCredSecret` with the secret name created.
+- Create a secret which contains vCenter privileges. Follow the steps [here](../../../../getting-started/installation/kubernetes/powermax/prerequisite#auto-rdm-for-vsphere-over-fc-requirements) to create it. Update `vCenterCredSecret` with the secret name created.
   
 ```yaml
  VMware/vSphere virtualization support

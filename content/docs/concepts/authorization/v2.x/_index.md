@@ -2,6 +2,7 @@
 title: Authorization - v2.x
 linktitle: v2.x
 weight: 4
+no_list: true 
 Description: >
   Container Storage Module (CSM) for Authorization v2.x.
 tags:

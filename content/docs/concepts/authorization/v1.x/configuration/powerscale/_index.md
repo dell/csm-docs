@@ -177,4 +177,4 @@ kubectl -n isilon create secret generic karavi-authorization-config --from-file=
 
 6. Install the CSI PowerScale driver following the appropriate documenation for your installation method.
 
-7. (Optional) Install [dellctl](../../../../support/cli/#installation-instructions) to perform Kubernetes administrator commands for additional capabilities (e.g., list volumes). Please refer to the [dellctl documentation page](../../../../support/cli) for the installation steps and command list.
+7. (Optional) Install [dellctl](../../../../../tooling/cli/#installation-instructions) to perform Kubernetes administrator commands for additional capabilities (e.g., list volumes). Please refer to the [dellctl documentation page](../../../../../tooling/cli) for the installation steps and command list.

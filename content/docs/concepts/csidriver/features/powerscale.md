@@ -307,8 +307,7 @@ If you are using the Container Storage Module Operator, the value to adjust is:
 replicas: 2  
 ```
 
-For more details about configuring Controller HA using the Container Storage Module Operator, see the [Container Storage Module Operator documentation](../../../deployment/csmoperator/#custom-resource-specification).
-
+For more details about configuring Controller HA using the Container Storage Module Operator, see the [Container Storage Module Operator documentation](../../../getting-started/installation/operator/#custom-resource-definitions).
 ## CSI Ephemeral Inline Volume
 
 The CSI PowerScale driver version 1.4.0 and later supports CSI ephemeral inline volumes.

@@ -37,4 +37,4 @@ All replication groups should be deleted before deleting the replication group C
 
 ## Uninstalling the replication sidecar
 
-To uninstall the replication sidecar, you need to uninstall the CSI Driver. Please view the [uninstall](../../../drivers/uninstall) page for the driver itself.
+To uninstall the replication sidecar, you need to uninstall the CSI Driver. Please view the [uninstall](../../../helm/#uninstall-a-csi-driver-installed-via-helm) page for the driver itself.

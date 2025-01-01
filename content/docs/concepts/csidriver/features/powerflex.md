@@ -388,7 +388,7 @@ controller:
 
 > *NOTE:* Tolerations/selectors work the same way for node pods.
 
-For configuring Controller HA on the Container Storage Module Operator, please refer to the [Container Storage Module Operator documentation](../../../deployment/csmoperator/#custom-resource-specification).  
+For configuring Controller HA on the Container Storage Module Operator, please refer to the [Container Storage Module Operator documentation](../../../getting-started/installation/operator/#custom-resource-definitions).  
 
 ## SDC Deployment
 

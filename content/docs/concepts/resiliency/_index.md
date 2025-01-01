@@ -97,7 +97,7 @@ PowerMax is the highest performing block storage array  that is very well suited
 
 ## Limitations and Exclusions
 
-This file contains information on Limitations and Exclusions that users should be aware of. Additionally, there are driver specific limitations and exclusions that may be called out in the [Deploying Container Storage Module for Resiliency](../deployment/helm/modules/installation/resiliency/) page.
+This file contains information on Limitations and Exclusions that users should be aware of. Additionally, there are driver specific limitations and exclusions that may be called out in the [Deploying Container Storage Module for Resiliency](../../getting-started/installation/kubernetes/powermax/helm/csm-modules/resiliency/) page.
 
 ### Supported and Tested Operating Modes
 

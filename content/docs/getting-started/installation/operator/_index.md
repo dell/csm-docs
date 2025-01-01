@@ -32,4 +32,47 @@ Once the driver `Custom Resource (CR)` is created, you can verify the installati
     ```bash
     kubectl get csm/<name-of-custom-resource> -n <driver-namespace> -o yaml
     ```
-* Check the status of the CR to verify if the driver installation is in the `Succeeded` state. If the status is not `Succeeded`, see the [Troubleshooting guide](docs/getting-started/installation/troubleshooting/csmoperator/#my-dell-csi-driver-install-failed-how-do-i-fix-it) for more information.
+* Check the status of the CR to verify if the driver installation is in the `Succeeded` state. If the status is not `Succeeded`, see the [Troubleshooting guide](docs/getting-started/installation/troubleshooting/csmoperator/#my-dell-csi-driver-install-failed-how-do-i-fix-it) for more information. 
+
+## Custom Resource Definitions
+
+As part of the Dell CSM Operator installation, a CRD representing configuration for the CSI Driver and CSM Modules is also installed.
+`containerstoragemodule` CRD is installed in API Group `storage.dell.com`.
+
+Drivers and modules can be installed by creating a `customResource`.
+
+### Custom Resource Specification
+
+Each CSI Driver and CSM Module installation is represented by a Custom Resource.
+
+The specification for the Custom Resource is the same for all the drivers.Below is a list of all the mandatory and optional fields in the Custom Resource specification
+
+#### Mandatory fields
+
+**configVersion** - Configuration version - refer [here](#supported-csm-components) for appropriate config version.
+
+**replicas**  - Number of replicas for controller plugin - must be set to 1 for all drivers.
+
+**dnsPolicy** - Determines the dnsPolicy for the node daemonset. Accepted values are `Default`, `ClusterFirst`, `ClusterFirstWithHostNet`, `None`.
+
+**common** - This field is mandatory and is used to specify common properties for both controller and the node plugin.
+
+* image - driver container image
+* imagePullPolicy - Image Pull Policy of the driver image
+* envs - List of environment variables and their values
+
+#### Optional fields
+
+**controller** - List of environment variables and values which are applicable only for controller.
+
+**node** - List of environment variables and values which are applicable only for node.
+
+**sideCars** - Specification for CSI sidecar containers.
+
+**tlsCertSecret** - Name of the TLS cert secret for use by the driver. If not specified, a secret *-certs must exist in the namespace as driver.
+
+**tolerations** - List of tolerations which should be applied to the driver StatefulSet/Deployment and DaemonSet. It should be set separately in the controller and node sections if you want separate set of tolerations for them.
+
+**nodeSelector** - Used to specify node selectors for the driver StatefulSet/Deployment and DaemonSet.
+
+>NOTE: The `image` field should point to the correct image tag for version of the driver you are installing.

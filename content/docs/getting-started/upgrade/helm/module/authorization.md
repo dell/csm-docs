@@ -44,6 +44,5 @@ This section outlines the upgrade steps for Container Storage Modules (CSM) for 
 
 Given a setup where the CSM for Authorization proxy server is already upgraded to the latest version, follow the upgrade instructions for the applicable CSI Driver(s) to upgrade the driver and the CSM for Authorization sidecar
 
-- [Upgrade PowerFlex CSI driver](../../../drivers/upgrade/powerflex/)
-- [Upgrade PowerMax CSI driver](../../../drivers/upgrade/powermax/)
-- [Upgrade PowerScale CSI driver](../../../drivers/upgrade/isilon/)
+- [Upgrade CSI driver](../../../helm)
+
