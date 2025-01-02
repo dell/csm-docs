@@ -1,19 +1,21 @@
 ---
 title: PowerFlex
-linkTitle: "PowerFlex"
+linkTitle: PowerFlex
 description: >
-  Installing Dell CSI Driver for PowerFlex via Dell CSM Operator
+  Installing the CSI Driver for Dell PowerFlex via Dell CSM Operator
 ---
-
-## Installing CSI Driver for PowerFlex via Dell CSM Operator
-
+{{% pageinfo color="primary" %}}
+{{< message text="1" >}}
+{{% /pageinfo %}}
 The CSI Driver for Dell PowerFlex can be installed via the Dell CSM Operator.
 To deploy the Operator, follow the instructions available [here](../../#installation).
 
 Note that the deployment of the driver using the operator does not use any Helm charts and the installation and configuration parameters will be slightly different from the one specified via the Helm installer.
 
-### Listing installed drivers with the ContainerStorageModule CRD
-User can query for all Dell CSI drivers using this command:
+### Listing installed drivers
+
+To query for all Dell CSI drivers installed with the ContainerStorageModule CRD use the following command:
+
 ```bash
 kubectl get csm --all-namespaces
 ```
@@ -25,13 +27,14 @@ kubectl get csm --all-namespaces
 
 #### SDC Deployment for Operator
 - This feature deploys the sdc kernel modules on all nodes with the help of an init container.
+- Powerflex can be deployed with or without SDC. SDC deployment can be enabled and disabled by setting `X_CSI_SDC_ENABLED` value in CR file. By default, driver is deployed with SDC enabled.
 - For non-supported versions of the OS also do the manual SDC deployment steps given below. Refer to https://hub.docker.com/r/dellemc/sdc for supported versions.
 - **Note:** When the driver is created, MDM value for initContainers in driver CR is set by the operator from mdm attributes in the driver configuration file,
   config.yaml. An example of config.yaml is below in this document. Do not set MDM value for initContainers in the driver CR file manually.
   - Optionally, enable sdc monitor by setting the enable flag for the sdc-monitor to true. Please note:
     - **If using sidecar**, you will need to edit the value fields under the HOST_PID and MDM fields by filling the empty quotes with host PID and the MDM IPs.
     - **If not using sidecar**, leave the enabled field set to false.
-##### Example CR:  [samples/storage_csm_powerflex_v2110.yaml](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powerflex_v2110.yaml)
+##### Example CR:  [samples/storage_csm_powerflex_v2120.yaml](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powerflex_v2120.yaml)
 ```yaml
     sideCars:
     # sdc-monitor is disabled by default, due to high CPU usage
@@ -129,15 +132,22 @@ For detailed PowerFlex installation procedure, see the [Dell PowerFlex Deploymen
 1. Follow all the [prerequisites](#prerequisite) above
 
 2. Create a CR (Custom Resource) for PowerFlex using the sample files provided
-   [here](https://github.com/dell/csm-operator/tree/master/samples). This file can be modified to use custom parameters if needed.
+
+    a. Install the PowerFlex driver using default configuration using
+    the sample file provided
+   [here](https://github.com/dell/csm-operator/tree/main/samples/minimal-samples). This file can be modified to use custom parameters if needed.
+
+    b. Install the PowerFlex driver using the detailed configuration using the sample file provided
+    [here](https://github.com/dell/csm-operator/tree/main/samples).
 
 3. Users should configure the parameters in CR. The following table lists the primary configurable parameters of the PowerFlex driver and their default values:
 
    | Parameter | Description | Required | Default |
    | --------- | ----------- | -------- |-------- |
+   | namespace | Specifies namespace where the driver will be installed | Yes | "vxflexos" |
    | dnsPolicy | Determines the DNS Policy of the Node service | Yes | ClusterFirstWithHostNet |
-   | fsGroupPolicy | Defines which FS Group policy mode to be used, Supported modes `None, File and ReadWriteOnceWithFSType`. In OCP <= 4.16 and K8s <= 1.29, fsGroupPolicy is an immutable field. | No | "ReadWriteOnceWithFSType" |
-   | replicas | Controls the number of controller pods you deploy. If the number of controller pods is greater than the number of available nodes, excess pods will become stay in a pending state. Defaults are 2 which allows for Controller high availability. | Yes | 2 |
+   | fsGroupPolicy | Defines which FS Group policy mode to be used, Supported modes `None, File and ReadWriteOnceWithFSType`. In OCP <= 4.16 and K8s <= 1.29, fsGroupPolicy is an immutable field. | No | "File" |
+   | replicas | Controls the number of controller pods you deploy. If the number of controller pods is greater than the number of available nodes, excess pods will become stay in a pending state. | Yes | 1 |
    | storageCapacity.enabled | Enable/Disable storage capacity tracking | No | true |
    | storageCapacity.pollInterval | Configure how often the driver checks for changed capacity | No | 5m |
    | enableQuota | a boolean that, when enabled, will set quota limit for a newly provisioned NFS volume | No | none |
@@ -147,6 +157,7 @@ For detailed PowerFlex installation procedure, see the [Dell PowerFlex Deploymen
    | X_CSI_VXFLEXOS_ENABLESNAPSHOTCGDELETE | Enable this to automatically delete all snapshots in a consistency group when a snap in the group is deleted | No | false |
    | X_CSI_DEBUG | To enable debug mode | No | true |
    | X_CSI_ALLOW_RWO_MULTI_POD_ACCESS | Setting allowRWOMultiPodAccess to "true" will allow multiple pods on the same node to access the same RWO volume. This behavior conflicts with the CSI specification version 1.3. NodePublishVolume description that requires an error to be returned in this case. However, some other CSI drivers support this behavior and some customers desire this behavior. Customers use this option at their own risk. | No | false |
+   | INTERFACE_NAMES | A mapping of node names to interface names. Only necessary when SDC is disabled. | No | none |
    | ***Controller parameters*** |
    | X_CSI_POWERFLEX_EXTERNAL_ACCESS | allows specifying additional entries for hostAccess of NFS volumes. Both single IP address and subnet are valid entries | No | empty |
    | X_CSI_HEALTH_MONITOR_ENABLED | Enable/Disable health monitor of CSI volumes from Controller plugin - volume condition | No | false |
@@ -154,6 +165,10 @@ For detailed PowerFlex installation procedure, see the [Dell PowerFlex Deploymen
    | X_CSI_RENAME_SDC_ENABLED | Enable this to rename the SDC with the given prefix. The new name will be ("prefix" + "worker_node_hostname") and it should not exceed 31 chars. | Yes | false |
    | X_CSI_APPROVE_SDC_ENABLED | Enable this to to approve restricted SDC by GUID during setup | Yes | false |
    | X_CSI_HEALTH_MONITOR_ENABLED | Enable/Disable health monitor of CSI volumes from Node plugin - volume condition | No | false |
+   | X_CSI_SDC_ENABLED | Enable/Disable installation of the SDC. | Yes | true |
+   | ***Sidecar parameters*** |
+   | volume-name-prefix | The volume-name-prefix will be used by provisioner sidecar as a prefix for all the volumes created  | Yes | k8s |
+   | monitor-interval | The monitor-interval will be used by external-health-monitor as an interval for health checks  | Yes | 60s |
 
 4.  Execute this command to create PowerFlex custom resource:
     ```bash

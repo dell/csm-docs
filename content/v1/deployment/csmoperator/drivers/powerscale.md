@@ -1,20 +1,20 @@
 ---
 title: PowerScale
-linkTitle: "PowerScale"
+linkTitle: PowerScale
 description: >
-  Installing Dell CSI Driver for PowerScale via Dell CSM Operator
+  Installing the CSI Driver for Dell PowerScale via Dell CSM Operator
 ---
-
-## Installing CSI Driver for PowerScale via Dell CSM Operator
-
+{{% pageinfo color="primary" %}}
+{{< message text="1" >}}
+{{% /pageinfo %}}
 The CSI Driver for Dell PowerScale can be installed via the Dell CSM Operator.
 To deploy the Operator, follow the instructions available [here](../../#installation).
 
 Note that the deployment of the driver using the operator does not use any Helm charts and the installation and configuration parameters will be slightly different from the one specified via the Helm installer.
 
-### Listing installed drivers with the ContainerStorageModule CRD
+### Listing installed drivers
 
-User can query for all Dell CSI drivers using the following command:
+To query for all Dell CSI drivers installed with the ContainerStorageModule CRD use the following command:
 
 ```bash
 kubectl get csm --all-namespaces
@@ -122,12 +122,20 @@ kubectl get csm --all-namespaces
 1. Follow all the [prerequisites](#prerequisite) above
 
 2. Create a CR (Custom Resource) for PowerScale using the sample files provided
-   [here](https://github.com/dell/csm-operator/tree/master/samples). This file can be modified to use custom parameters if needed.
+
+    a. Install the PowerScale driver using default configuration using
+    the sample file provided
+   [here](https://github.com/dell/csm-operator/tree/main/samples/minimal-samples). This file can be modified to use custom parameters if needed.
+
+    b. Install the PowerScale driver using the detailed configuration using the sample file provided
+    [here](https://github.com/dell/csm-operator/tree/main/samples).
 
 3. Users should configure the parameters in CR. The following table lists the primary configurable parameters of the PowerScale driver and their default values:
 
    | Parameter | Description | Required | Default |
    | --------- | ----------- | -------- |-------- |
+   | namespace | Specifies namespace where the driver will be installed | Yes | "isilon" |
+   | replicas | Controls the number of controller pods you deploy. If the number of controller pods is greater than the number of available nodes, the excess pods will be in pending state until new nodes are available for scheduling. Default is 2 which allows for Controller high availability. | Yes | 2 |
    | dnsPolicy | Determines the DNS Policy of the Node service | Yes | ClusterFirstWithHostNet |
    | fsGroupPolicy | Defines which FS Group policy mode to be used, Supported modes `None, File and ReadWriteOnceWithFSType`. In OCP <= 4.16 and K8s <= 1.29, fsGroupPolicy is an immutable field. | No | "ReadWriteOnceWithFSType" |
    | storageCapacity | Enable/Disable storage capacity tracking feature | No | false |
@@ -147,6 +155,9 @@ kubectl get csm --all-namespaces
    | ***Node parameters*** |
    | X_CSI_MAX_VOLUMES_PER_NODE | Specify the default value for the maximum number of volumes that the controller can publish to the node | Yes | 0 |
    | X_CSI_MODE   | Driver starting mode  | No | node |
+   | ***Sidecar parameters*** |
+   | volume-name-prefix | The volume-name-prefix will be used by provisioner sidecar as a prefix for all the volumes created  | Yes | k8s |
+   | monitor-interval | The monitor-interval will be used by external-health-monitor as an interval for health checks  | Yes | 60s |
 
 5. Execute the following command to create PowerScale custom resource:
 

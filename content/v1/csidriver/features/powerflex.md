@@ -385,6 +385,18 @@ The CSI PowerFlex driver version 1.3 and later support the automatic deployment 
   Refer to https://hub.docker.com/r/dellemc/sdc for supported OS versions.
 - There is no automated uninstallation of the SDC kernel module. Follow PowerFlex SDC documentation to manually uninstall the SDC driver from the node. 
 
+From CSM 1.12.0, you can disable automatic SDC deployment.
+
+By default, SDC deployment is enabled. If you do not want to deploy `sdc` with PowerFlex, it can be disabled by setting the `sdc.enabled` field to `false`.
+
+```
+node:
+  ...
+  sdc:
+    # enabled: Enable/Disable SDC
+    enabled: true
+```
+
 ## Multiarray Support
 
 The CSI PowerFlex driver version 1.4 added support for managing multiple PowerFlex arrays from the single driver instance. This feature is enabled by default and integrated to even single instance installations.
@@ -834,6 +846,16 @@ enableQuota: false
 ...
 ```
 
+## Volume Size and Rounding Rules
+For NFS File Shares, the minimum supported volume size is 3 Gi. If request size is smaller than 3 Gi, the volume will be automatically provisioned as 3 Gi.
+
+For Block Volumes, the minimum supported size is 8 Gi. Any size request below 8 Gi will result in a volume of 8 Gi being created. Additionally, if the requested size is not a multiple of 8, the system will round it up to the next multiple of 8 when provisioning the volume.
+
+For example:  
+A requested size of 9 Gi or 8.1 Gi will result in a 16 Gi volume being created on the backend array.
+Similarly, a size of 20 Gi will be rounded up to 24 Gi.
+This behavior ensures that the allocated volume sizes comply with the backend array's alignment requirements.
+
 ## Usage of Quotas to Limit Storage Consumption for NFS volumes
 Starting with version 2.8, the CSI driver for PowerFlex will support enabling tree quotas for limiting capacity for NFS volumes. To use the quota feature user can specify the boolean value `enableQuota` in values.yaml.
 
@@ -924,6 +946,38 @@ externalAccess: "10.0.0.0/24"
 ```
 
 This means that we allow for NFS Export created by driver to be consumed by address range `10.0.0.0-10.0.0.255`.
+
+## Configuring NFS independent of SDC
+
+Starting from CSM 1.12.0, the CSI PowerFlex driver supports configuring NFS independent of SDC. This separation is helpful in scenarios where an SDC is not available in the cluster or additional network interfaces do not need to be deployed.
+
+To disable SDC deployment, update the values file and provide the interface names mapping for each of the nodes that are being used.
+
+**Helm**
+```
+node:
+  ...
+  sdc:
+    # enabled: Enable/Disable SDC
+    enabled: false
+  ...
+
+interfaceNames:
+  # worker-1-jxsjoueeewabc.domain: "ens192"
+  # worker-2-jxsjoueeewabc.domain: "ens192"
+```
+
+**Operator**
+```
+common:
+...
+  - name: INTERFACE_NAMES: 'worker-1-jxsjoueeewabc.domain: "ens192", worker-2-jxsjoueeewabc.domain: "ens192"'
+...
+node:
+...
+  - name: X_CSI_SDC_ENABLED
+    value: "false"
+```
 
 ## Storage Capacity Tracking
 CSI-PowerFlex driver version 2.8.0 and above supports Storage Capacity Tracking.

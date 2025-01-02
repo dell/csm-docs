@@ -26,6 +26,7 @@ There are three methods of installing `cert-csi`.
 > The exectuable from the GitHub Release only supports Linux. For non-Linux users, you must build the `cert-csi` executable [locally](#building-locally).
 
 ### Download Release (Linux)
+
 > NOTE: Please ensure you delete any previously downloaded Cert-CSI binaries, as each release uses the same name (`cert-csi-linux-amd64`). After installing the latest version, run the `cert-csi -v` command to verify the installed version.
 
 1. Download `cert-csi` from [here](https://github.com/dell/cert-csi/releases/latest/download/cert-csi-linux-amd64)
@@ -66,7 +67,9 @@ mv ./cert-csi-linux-amd64 ~/.local/bin/cert-csi
    {{< /tabpane >}}
 
 ### Building Locally
+
 #### Prerequisites
+
 - [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
 - [Go](https://go.dev/doc/install) (If buidling the executable)
 - Podman or Docker (If building the container image)
@@ -155,7 +158,7 @@ storageClasses:
       volumeAttributes: # volume attrs for EphemeralVolumeSuite.
         attr1: # volume attr for EphemeralVolumeSuite
         attr2: # volume attr for EphemeralVolumeSuite
-    capacityTracking:
+    capacityTracking: # capacityTracking test requires the storage class to have volume binding mode as 'WaitForFirstConsumer'
       driverNamespace: # namepsace where driver is installed
       pollInterval:    # duration to poll capacity (e.g., 2m)
 ```
@@ -223,7 +226,9 @@ storageClasses:
         IsiPath: "/ifs/data/sample"
         IsiVolumePathPermissions: "0777"
         AzServiceIP: "192.168.2.1"
-
+    capacityTracking:
+      driverNamespace: isilon
+      pollInterval: 2m
    {{</tab >}}
    {{<tab header="CSI PowerMax" >}}
 

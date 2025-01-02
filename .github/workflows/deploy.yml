@@ -3,7 +3,7 @@ name: Build w/ Hugo & deploy to GitHub Pages
 on:
  push:
    branches:
-     - release-1.11.0
+     - release-1.12.0
  workflow_dispatch:
 
 jobs:
@@ -18,13 +18,13 @@ jobs:
      - name: Setup Hugo
        uses: peaceiris/actions-hugo@v2
        with:
-         hugo-version: '0.134.1'
+         hugo-version: "1.23"
          extended: true
 
      - name: Setup Go
        uses: actions/setup-go@v2
        with:
-         go-version: "1.22"
+         go-version: "1.23"
 
      - name: Setup Node
        uses: actions/setup-node@v3

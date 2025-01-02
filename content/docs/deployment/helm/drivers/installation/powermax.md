@@ -71,8 +71,9 @@ The following requirements must be fulfilled in order to successfully use the Fi
 
 The following requirements must be fulfilled in order to successfully use the iSCSI protocol with the CSI PowerMax driver.
 
-- All Kubernetes nodes must have the _iscsi-initiator-utils_ package installed. On Debian based distributions the package name is  _open-iscsi_.
-- The _iscsid_ service must be enabled and running. You can enable the service by running the following command on all worker nodes: `systemctl enable --now iscsid`
+- Ensure that the necessary iSCSI initiator utilities are installed on each Kubernetes worker node. This typically includes the _iscsi-initiator-utils_ package for RHEL or _open-iscsi_ package for Ubuntu.
+- Enable and start the _iscsid_ service on each Kubernetes worker node. This service is responsible for managing the iSCSI initiator. You can enable the service by running the following command on all worker nodes: `systemctl enable --now iscsid`
+- Ensure that the unique initiator name is set in _/etc/iscsi/initiatorname.iscsi_.
 - To configure iSCSI in Red Hat OpenShift clusters, you can create a `MachineConfig` object using the console or `oc` to ensure that the iSCSI daemon starts on all the Red Hat CoreOS nodes. Here is an example of a `MachineConfig` object:
 
 ```yaml
@@ -317,7 +318,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
 
 **Steps**
 
-1. Run `git clone -b v2.12.0 https://github.com/dell/csi-powermax.git` to clone the git repository. This will include the Helm charts and dell-csi-helm-installer scripts.
+1. Run `git clone -b v2.13.0 https://github.com/dell/csi-powermax.git` to clone the git repository. This will include the Helm charts and dell-csi-helm-installer scripts.
 2. Ensure that you have created a namespace where you want to install the driver. You can run `kubectl create namespace powermax` to create a new one
 3. Edit the `samples/secret/secret.yaml` file,to point to the correct namespace, and replace the values for the username and password parameters.
     These values can be obtained using base64 encoding as described in the following example:
@@ -332,7 +333,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
     ```
 5. Download the default values.yaml file
     ```bash
-    cd dell-csi-helm-installer && wget -O my-powermax-settings.yaml https://github.com/dell/helm-charts/raw/csi-powermax-2.12.0/charts/csi-powermax/values.yaml
+    cd dell-csi-helm-installer && wget -O my-powermax-settings.yaml https://github.com/dell/helm-charts/raw/csi-powermax-2.13.0/charts/csi-powermax/values.yaml
     ```
 6. Ensure the unisphere have 10.0 REST endpoint support by clicking on Unisphere -> Help (?) -> About in Unisphere for PowerMax GUI.
 7. Edit the newly created file and provide values for the following parameters
@@ -343,14 +344,14 @@ CRDs should be configured during replication prepare stage with repctl as descri
 | Parameter | Description                                                                                                                                                                                                                                                                                                                                                                     | Required   | Default  |
 |-----------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|----------|
 | **global**| This section refers to configuration options for both CSI PowerMax Driver and Reverse Proxy                                                                                                                                                                                                                                                                                     | - | - |
-|defaultCredentialsSecret| This secret name refers to:<br> 1 The proxy credentials if the driver is installed with proxy in StandAlone mode.<br>2. The default Unisphere credentials if credentialsSecret is not specified for a management server.                                                                                                                                                        | Yes | powermax-creds |
-| storageArrays| This section refers to the list of arrays managed by the driver and Reverse Proxy in StandAlone mode.                                                                                                                                                                                                                                                                           | - | - |
+|defaultCredentialsSecret| This secret name refers to:<br> 1 The proxy credentials if the driver is installed with proxy.<br>2. The default Unisphere credentials if credentialsSecret is not specified for a management server.                                                                                                                                                        | Yes | powermax-creds |
+| storageArrays| This section refers to the list of arrays managed by the driver and Reverse Proxy.                                                                                                                                                                                                                                                                           | - | - |
 | storageArrayId | This refers to PowerMax Symmetrix ID.                                                                                                                                                                                                                                                                                                                                           | Yes | 000000000001|
-| endpoint | This refers to the URL of the Unisphere server managing _storageArrayId_. If authorization is enabled, endpoint should be the HTTPS localhost endpoint that the authorization sidecar will listen on                                                                                                                                                                            | Yes if Reverse Proxy mode is _StandAlone_ | https://primary-1.unisphe.re:8443 |
-| backupEndpoint | This refers to the URL of the backup Unisphere server managing _storageArrayId_, if Reverse Proxy is installed in _StandAlone_ mode. If authorization is enabled, backupEndpoint should be the HTTPS localhost endpoint that the authorization sidecar will listen on                                                                                                           | Yes | https://backup-1.unisphe.re:8443 |
+| endpoint | This refers to the URL of the Unisphere server managing _storageArrayId_. If authorization is enabled, endpoint should be the HTTPS localhost endpoint that the authorization sidecar will listen on                                                                                                                                                                            | Yes | https\://primary-1.unisphe.re:8443 |
+| backupEndpoint | This refers to the URL of the backup Unisphere server managing _storageArrayId_, if Reverse Proxy is installed. If authorization is enabled, backupEndpoint should be the HTTPS localhost endpoint that the authorization sidecar will listen on                                                                                                           | Yes | https\://backup-1.unisphe.re:8443 |
 | managementServers | This section refers to the list of configurations for Unisphere servers managing powermax arrays.                                                                                                                                                                                                                                                                               | - | - |
-| endpoint | This refers to the URL of the Unisphere server. If authorization is enabled, endpoint should be the HTTPS localhost endpoint that the authorization sidecar will listen on                                                                                                                                                                                                      | Yes | https://primary-1.unisphe.re:8443 |
-| credentialsSecret| This refers to the user credentials for _endpoint_                                                                                                                                                                                                                                                                                                                              | Yes| primary-1-secret|
+| endpoint | This refers to the URL of the Unisphere server. If authorization is enabled, endpoint should be the HTTPS localhost endpoint that the authorization sidecar will listen on                                                                                                                                                                                                      | Yes | https\://primary-1.unisphe.re:8443 |
+| credentialsSecret| This refers to the user credentials for _endpoint_                                                                                                                                                                                                                                                                                                                              | Yes| primary-unisphere-secret-1|
 | skipCertificateValidation | This parameter should be set to false if you want to do client-side TLS verification of Unisphere for PowerMax SSL certificates.                                                                                                                                                                                                                                                | No | "True"       |
 | certSecret    | The name of the secret in the same namespace containing the CA certificates of the Unisphere server                                                                                                                                                                                                                                                                             | Yes, if skipCertificateValidation is set to false | Empty|
 | limits | This refers to various limits for Reverse Proxy                                                                                                                                                                                                                                                                                                                                 | No | - |
@@ -453,9 +454,11 @@ A wide set of annotated storage class manifests has been provided in the `sample
 Starting with CSI PowerMax v1.7.0, `dell-csi-helm-installer` will not create any Volume Snapshot Class during the driver installation. There is a sample Volume Snapshot Class manifest present in the _samples/volumesnapshotclass_ folder. Please use this sample to create a new Volume Snapshot Class to create Volume Snapshots.
 
 ## Sample values file
-The following sections have useful snippets from `values.yaml` file which provides more information on how to configure the CSI PowerMax driver along with CSI PowerMax ReverseProxy in StandAlone mode.
 
-### CSI PowerMax driver with Proxy in StandAlone mode
+The following sections have useful snippets from `values.yaml` file which provides more information on how to configure the CSI PowerMax driver along with CSI PowerMax ReverseProxy.
+
+### CSI PowerMax driver with Proxy
+
 This is the most advanced configuration which provides you with the capability to connect to Multiple Unisphere servers.
 You can specify primary and backup Unisphere servers for each storage array. If you have different credentials for your Unisphere servers, you can also specify different credential secrets.
 
@@ -471,7 +474,7 @@ global:
       backupEndpoint: https://backup-2.unisphe.re:8443
   managementServers:
     - endpoint: https://primary-1.unisphe.re:8443
-      credentialsSecret: primary-1-secret
+      credentialsSecret: primary-unisphere-secret-1
       skipCertificateValidation: false
       certSecret: primary-cert
       limits:
@@ -480,13 +483,13 @@ global:
         maxOutStandingRead: 50
         maxOutStandingWrite: 50
     - endpoint: https://backup-1.unisphe.re:8443
-      credentialsSecret: backup-1-secret
+      credentialsSecret: backup-unisphere-secret-1
       skipCertificateValidation: true
     - endpoint: https://primary-2.unisphe.re:8443
-      credentialsSecret: primary-2-secret
+      credentialsSecret: primary-unisphere-secret-2
       skipCertificateValidation: true
     - endpoint: https://backup-2.unisphe.re:8443
-      credentialsSecret: backup-2-secret
+      credentialsSecret: backup-unisphere-secret-2
       skipCertificateValidation: true
 
 # "csireverseproxy" refers to the subchart csireverseproxy
@@ -494,7 +497,6 @@ csireverseproxy:
   tlsSecret: csirevproxy-tls-secret
   deployAsSidecar: true
   port: 2222
-  mode: StandAlone
 ```
 
 >Note: If the credential secret is missing from any management server details, the installer will try to use the defaultCredentialsSecret

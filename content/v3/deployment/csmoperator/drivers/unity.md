@@ -58,7 +58,7 @@ kubectl get csm --all-namespaces
 | --------- | ----------- | -------- |-------- |
 | replicas | Controls the number of controller pods you deploy. If the number of controller pods is greater than the number of available nodes, the excess pods will be in pending state until new nodes are available for scheduling. Default is 2 which allows for Controller high availability. | Yes | 2 |
 | namespace | Specifies namespace where the driver will be installed | Yes | "unity" |
-| fsGroupPolicy | Defines which FS Group policy mode to be used. Supported modes `None, File and ReadWriteOnceWithFSType` | No |"ReadWriteOnceWithFSType"|
+| fsGroupPolicy | Defines which FS Group policy mode to be used. Supported modes `None, File and ReadWriteOnceWithFSType`. In OCP <= 4.16 and K8s <= 1.29, fsGroupPolicy is an immutable field. | No |"ReadWriteOnceWithFSType"|
 | storageCapacity.enabled | Enable/Disable storage capacity tracking | No | true |
 | storageCapacity.pollInterval | Configure how often the driver checks for changed capacity | No | 5m |
 | ***Common parameters for node and controller*** |
@@ -72,6 +72,10 @@ kubectl get csm --all-namespaces
 | X_CSI_HEALTH_MONITOR_ENABLED | Enable/Disable health monitor of CSI volumes from Controller plugin - volume condition | No | false |
 | ***Node parameters*** |
 | X_CSI_HEALTH_MONITOR_ENABLED | Enable/Disable health monitor of CSI volumes from Controller plugin - volume condition | No | false |
+| X_CSI_ALLOWED_NETWORKS | Custom networks for Unity export. List of networks that can be used for NFS I/O traffic, CIDR format should be used "ip/prefix, ip/prefix" | No | empty |
+| ***Sidecar parameters*** |
+| volume-name-prefix | The volume-name-prefix will be used by provisioner sidecar as a prefix for all the volumes created  | Yes | csivol |
+| monitor-interval | The monitor-interval will be used by external-health-monitor as an interval for health checks  | Yes | 60s |
 
 4.  Execute the following command to create Unity XT custom resource:
    ```bash
@@ -85,6 +89,8 @@ kubectl get csm --all-namespaces
       ```
 
 5.  [Verify the CSI Driver installation](../#verifying-the-driver-installation)
+
+6. Refer https://github.com/dell/csi-unity/tree/main/samples for the sample files.
     
 **Note** : 
    1. "Kubelet config dir path" is not yet configurable in case of Operator based driver installation.

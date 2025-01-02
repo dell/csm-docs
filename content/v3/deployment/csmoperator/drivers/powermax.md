@@ -197,14 +197,13 @@ Use a tool such as `openssl` to generate this secret using the example below:
 ```bash
 openssl genrsa -out tls.key 2048
 openssl req -new -x509 -sha256 -key tls.key -out tls.crt -days 3650
-kubectl create secret -n <namespace> tls revproxy-certs --cert=tls.crt --key=tls.key
 kubectl create secret -n <namespace> tls csirevproxy-tls-secret --cert=tls.crt --key=tls.key
 ```
 
 ## Installation
 
 ### (Optional) Create secret for client-side TLS verification
-Create a secret named powermax-certs in the namespace where the CSI PowerMax driver will be installed. This is an optional step and is only required if you are setting the env variable X_CSI_POWERMAX_SKIP_CERTIFICATE_VALIDATION to false. See the detailed documentation on how to create this secret [here](../../../../csidriver/installation/helm/powermax#certificate-validation-for-unisphere-rest-api-calls).
+Create a secret named powermax-certs in the namespace where the CSI PowerMax driver will be installed. This is an optional step and is only required if you are setting the env variable X_CSI_POWERMAX_SKIP_CERTIFICATE_VALIDATION to false. See the detailed documentation on how to create this secret [here](../../../helm/drivers/installation/powermax#certificate-validation-for-unisphere-rest-api-calls).
 
 
 ### Install Driver
@@ -283,15 +282,16 @@ Create a secret named powermax-certs in the namespace where the CSI PowerMax dri
 4. Create a CR (Custom Resource) for PowerMax using the sample files provided [here](https://github.com/dell/csm-operator/tree/master/samples). This file can be modified to use custom parameters if needed.
 5. Users should configure the parameters in CR. The following table lists the primary configurable parameters of the PowerMax driver and their default values:
 
-   | Parameter                                       | Description                                                                                                                                                                                                                                                              | Required | Default                        |
-   |-------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------|--------------------------------|
-   | dnsPolicy                                       | Determines the DNS Policy of the Node service                                                                                                                                                                                                                            | Yes      | ClusterFirstWithHostNet        |
-   | replicas                                        | Controls the number of controller Pods you deploy. If controller Pods are greater than the number of available nodes, excess Pods will become stuck in pending. The default is 2 which allows for Controller high availability.                                          | Yes      | 2                              |
-   | fsGroupPolicy                                   | Defines which FS Group policy mode to be used, Supported modes `None, File and ReadWriteOnceWithFSType`                                                                                                                                                                  | No       | "ReadWriteOnceWithFSType"      |
+   | Parameter | Description | Required | Default |
+   |-----------|-------------|----------|---------|
+   | namespace | Specifies namespace where the driver will be installed | Yes | "powermax" |
+   | dnsPolicy | Determines the DNS Policy of the Node service | Yes | ClusterFirstWithHostNet |
+   | replicas  | Controls the number of controller Pods you deploy. If controller Pods are greater than the number of available nodes, excess Pods will become stuck in pending. The default is 2 which allows for Controller high availability.                                          | Yes      | 2                              |
+   | fsGroupPolicy                                   | Defines which FS Group policy mode to be used, Supported modes `None, File and ReadWriteOnceWithFSType`. In OCP <= 4.16 and K8s <= 1.29, fsGroupPolicy is an immutable field.                                                                                                                                                                  | No       | "ReadWriteOnceWithFSType"      |
    | ***Common parameters for node and controller*** |                                                                                                                                                                                                                                                                          |          |                                |
    | X_CSI_K8S_CLUSTER_PREFIX                        | Define a prefix that is appended to all resources created in the array; unique per K8s/CSI deployment; max length - 3 characters                                                                                                                                         | Yes      | XYZ                            |
    | X_CSI_POWERMAX_ENDPOINT                         | IP address of the Unisphere for PowerMax                                                                                                                                                                                                                                 | Yes      | https://0.0.0.0:8443           |
-   | X_CSI_TRANSPORT_PROTOCOL                        | Choose which transport protocol to use (ISCSI, FC, auto or None)	                                                                                                                                                                                                        | Yes      | auto                           |
+   | X_CSI_TRANSPORT_PROTOCOL                        | Choose which transport protocol to use (ISCSI, FC, auto)	                                                                                                                                                                                                        | Yes      | auto                           |
    | X_CSI_POWERMAX_PORTGROUPS                       | List of comma-separated port groups (ISCSI only). Example: "PortGroup1,PortGroup2"                                                                                                                                                                                       | No       | -                              |
    | X_CSI_MANAGED_ARRAYS                            | List of comma-separated array ID(s) which will be managed by the driver                                                                                                                                                                                                  | Yes      | -                              |
    | X_CSI_POWERMAX_PROXY_SERVICE_NAME               | Name of CSI PowerMax ReverseProxy service.                                                                                                                                                                                                                               | Yes      | csipowermax-reverseproxy       |
@@ -310,9 +310,13 @@ Create a secret named powermax-certs in the namespace where the CSI PowerMax dri
    | X_CSI_REVPROXY_TLS_SECRET                       | Name of TLS secret defined in config map                                                                                                                                                                                                                                 | Yes      | "csirevproxy-tls-secret"       |
    | X_CSI_REVPROXY_PORT                             | Port number where reverseproxy will listen as defined in config map                                                                                                                                                                                                      | Yes      | "2222"                         |
    | X_CSI_CONFIG_MAP_NAME                           | Name of config map as created for CSI PowerMax                                                                                                                                                                                                                           | Yes      | "powermax-reverseproxy-config" |
+   | ***Sidecar parameters*** |
+   | volume-name-prefix | The volume-name-prefix will be used by provisioner sidecar as a prefix for all the volumes created  | Yes | pmax |
+   | monitor-interval | The monitor-interval will be used by external-health-monitor as an interval for health checks  | Yes | 60s |
 
 6. Execute the following command to create the PowerMax custom resource:`kubectl create -f <input_sample_file.yaml>`. The above command will deploy the CSI-PowerMax driver.
 7. The mandatory module CSI PowerMax Reverseproxy will be installed automatically with the same command.
+8. Refer https://github.com/dell/csi-powermax/tree/main/samples for the sample files.
 
 ## Other features to enable
 ### Dynamic Logging Configuration

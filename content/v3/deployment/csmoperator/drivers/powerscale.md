@@ -100,7 +100,7 @@ kubectl get csm --all-namespaces
    The driver will continue to use previous values in case of an error found in the YAML file.
 
 3. Create isilon-certs-n secret.
-      Please refer [this section](../../../../csidriver/installation/helm/isilon/#certificate-validation-for-onefs-rest-api-calls) for creating cert-secrets.
+      Please refer [this section](../../../../deployment/helm/drivers/installation/isilon/#certificate-validation-for-onefs-rest-api-calls) for creating cert-secrets.
 
       If certificate validation is skipped, empty secret must be created. To create an empty secret. Ex: empty-secret.yaml
 
@@ -128,7 +128,10 @@ kubectl get csm --all-namespaces
 
    | Parameter | Description | Required | Default |
    | --------- | ----------- | -------- |-------- |
+   | namespace | Specifies namespace where the driver will be installed | Yes | "isilon" |
+   | replicas | Controls the number of controller pods you deploy. If the number of controller pods is greater than the number of available nodes, the excess pods will be in pending state until new nodes are available for scheduling. Default is 2 which allows for Controller high availability. | Yes | 2 |
    | dnsPolicy | Determines the DNS Policy of the Node service | Yes | ClusterFirstWithHostNet |
+   | fsGroupPolicy | Defines which FS Group policy mode to be used, Supported modes `None, File and ReadWriteOnceWithFSType`. In OCP <= 4.16 and K8s <= 1.29, fsGroupPolicy is an immutable field. | No | "ReadWriteOnceWithFSType" |
    | storageCapacity | Enable/Disable storage capacity tracking feature | No | false |
    | ***Common parameters for node and controller*** |
    | CSI_ENDPOINT | The UNIX socket address for handling gRPC calls | No | /var/run/csi/csi.sock |
@@ -146,6 +149,9 @@ kubectl get csm --all-namespaces
    | ***Node parameters*** |
    | X_CSI_MAX_VOLUMES_PER_NODE | Specify the default value for the maximum number of volumes that the controller can publish to the node | Yes | 0 |
    | X_CSI_MODE   | Driver starting mode  | No | node |
+   | ***Sidecar parameters*** |
+   | volume-name-prefix | The volume-name-prefix will be used by provisioner sidecar as a prefix for all the volumes created  | Yes | k8s |
+   | monitor-interval | The monitor-interval will be used by external-health-monitor as an interval for health checks  | Yes | 60s |
 
 5. Execute the following command to create PowerScale custom resource:
 
@@ -156,6 +162,8 @@ kubectl get csm --all-namespaces
     This command will deploy the CSI-PowerScale driver in the namespace specified in the input YAML file.
 
 6. [Verify the CSI Driver installation](../#verifying-the-driver-installation)
+
+7. Refer https://github.com/dell/csi-powerscale/tree/main/samples for the sample files.
 
 **Note** :
 

@@ -21,7 +21,7 @@ You can use existing volumes from the PowerScale array as Persistent Volumes in 
 
 1. Open your volume in One FS, and take a note of volume-id.
 2. Create PersistentVolume and use this volume-id as a volumeHandle in the manifest. Modify other parameters according to your needs.
-3. In the following example, the PowerScale cluster accessZone is assumed as 'System', storage class as 'isilon', cluster name as 'pscale-cluster' and volume's internal name as 'isilonvol'. The volume-handle should be in the format of `<volume_name>=_=_=<export_id>=_=_=<access_zone_name>=_=_=<cluster_name_from_secret>`
+3. In the following example, the PowerScale cluster accessZone is assumed as 'System', storage class as 'isilon', cluster name as 'pscale-cluster' and volume's internal name as 'isilonvol'. The volume-handle should be in the format of `<volume_name>=_=_=<export_id>=_=_=<access_zone_name>=_=_=<cluster_name>`
 4. If Quotas are enabled in the driver, it is required to add the Quota ID to the description of the NFS export in this format:
    `CSI_QUOTA_ID:sC-kAAEAAAAAAAAAAAAAQEpVAAAAAAAA`
 5. Quota ID can be identified by querying the PowerScale system.
@@ -455,7 +455,7 @@ If such a node is not available, the pods stay in Pending state. This means pods
 
 Without storage capacity tracking, pods get scheduled on a node satisfying the topology constraints. If the required capacity is not available, volume attachment to the pods fails, and pods remain in ContainerCreating state. Storage capacity tracking eliminates unnecessary scheduling of pods when there is insufficient capacity. 
 
-The attribute `storageCapacity.enabled` in `values.yaml` can be used to enable/disable the feature during driver installation using helm. This is by default set to true. To configure how often driver checks for changed capacity set `storageCapacity.pollInterval` attribute. In case of driver installed via operator, this interval can be configured in the sample file provided [here.](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powerscale_v280.yaml) by editing the `--capacity-poll-interval` argument present in the provisioner sidecar.
+The attribute `storageCapacity.enabled` in `values.yaml` can be used to enable/disable the feature during driver installation using helm. This is by default set to true. To configure how often driver checks for changed capacity set `storageCapacity.pollInterval` attribute. In case of driver installed via operator, this interval can be configured in the sample file provided [here.](https://github.com/dell/csm-operator/blob/main/samples/) by editing the `--capacity-poll-interval` argument present in the provisioner sidecar.
 
 ## Node selector in helm template
 
@@ -661,15 +661,11 @@ For example, if a volume were to be deleted from the array, or unmounted outside
 2. For controller plugin, by setting attribute `controller.healthMonitor.enabled` to `true` in `values.yaml` file. Also health monitoring interval can be changed through attribute `controller.healthMonitor.interval` in `values.yaml` file.
 3. For node plugin, by setting attribute `node.healthMonitor.enabled` to `true` in `values.yaml` file.
 
-## Single Pod Access Mode for PersistentVolumes- ReadWriteOncePod (ALPHA FEATURE)
+## Single Pod Access Mode for PersistentVolumes- ReadWriteOncePod 
 
 Use `ReadWriteOncePod(RWOP)` access mode if you want to ensure that only one pod across the whole cluster can read that PVC or write to it. This is supported for CSI Driver for PowerScale 2.1.0+ and Kubernetes version 1.22+.
 
-To use this feature, enable the ReadWriteOncePod feature gate for kube-apiserver, kube-scheduler, and kubelet, by setting command line arguments:
-`--feature-gates="...,ReadWriteOncePod=true"`
-
 ### Creating a PersistentVolumeClaim
-
 ```yaml
 kind: PersistentVolumeClaim
 apiVersion: v1
@@ -685,4 +681,4 @@ spec:
 
 When this feature is enabled, the existing `ReadWriteOnce(RWO)` access mode restricts volume access to a single node and allows multiple pods on the same node to read from and write to the same volume.
 
-To migrate existing PersistentVolumes to use `ReadWriteOncePod`, please follow the instruction from [here](https://kubernetes.io/blog/2021/09/13/read-write-once-pod-access-mode-alpha/#migrating-existing-persistentvolumes).
+To migrate existing PersistentVolumes to use `ReadWriteOncePod`, please follow the instruction from [here](https://kubernetes.io/docs/tasks/administer-cluster/change-pv-access-mode-readwriteoncepod/).

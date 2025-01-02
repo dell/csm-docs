@@ -32,25 +32,6 @@ CSM for Replication provides the following capabilities:
 | Provides a command line utility - [repctl](tools) for configuring & managing replication related resources across multiple clusters |   yes    |    yes     |    yes     |    yes    |  no   |
 {{</table>}}
 
-## Supported Operating Systems/Container Orchestrator Platforms
-
-{{<table "table table-striped table-bordered table-sm">}}
-| COP/OS            | PowerMax         | PowerStore       | PowerScale       | PowerFlex        |
-| ----------------- | ---------------- | ---------------- | ---------------- | ---------------- |
-| Kubernetes        | 1.26, 1.27, 1.28 | 1.26, 1.27, 1.28 | 1.26, 1.27, 1.28 | 1.26, 1.27, 1.28 |
-| Red Hat OpenShift | 4.13, 4.14       | 4.13, 4.14       | 4.13, 4.14       | 4.13, 4.14       |
-{{</table>}}
-
-## Supported Storage Platforms
-
-{{<table "table table-striped table-bordered table-sm">}}
-|               |                                                 PowerMax                                                 |                  PowerStore                  |               PowerScale                     | PowerFlex |
-| ------------- | :------------------------------------------------------------------------------------------------------: | :------------------------------------------: | :------------------------------------------: | :-------: |
-| Storage Array | PowerMax 2500/8500 PowerMaxOS 10 (6079) , PowerMaxOS 10.0.1 (6079) , PowerMaxOS 10.1 (6079)<br> PowerMax 2000/8000 - 5978.711.xxx, 5978.479.xxx <br> Unisphere 10.0,10.0.1,10.1 | 3.0, 3.2, 3.5 | OneFS 9.3, 9.4, 9.5.0.x (x >= 5) | 3.6.x, 4.0.x, 4.5 |
-{{</table>}}
-
->Note: File Replication for PowerMax is currently not supported 
-
 ## Details
 
 As on the storage arrays, all replication related Kubernetes entities are required/created in pairs -

@@ -45,8 +45,9 @@ The following requirements must be fulfilled in order to successfully use the Fi
 
 The following requirements must be fulfilled in order to successfully use the iSCSI protocol with the CSI PowerStore driver:
 
-- All Kubernetes nodes must have the _iscsi-initiator-utils_ package installed. On Debian based distributions the package name is  _open-iscsi_.
-- The _iscsid_ service must be enabled and running. You can enable the service by running the following command on all worker nodes: `systemctl enable --now iscsid`
+- Ensure that the necessary iSCSI initiator utilities are installed on each Kubernetes worker node. This typically includes the _iscsi-initiator-utils_ package for RHEL or _open-iscsi_ package for Ubuntu.
+- Enable and start the _iscsid_ service on each Kubernetes worker node. This service is responsible for managing the iSCSI initiator. You can enable the service by running the following command on all worker nodes: `systemctl enable --now iscsid`
+- Ensure that the unique initiator name is set in _/etc/iscsi/initiatorname.iscsi_.
 - To configure iSCSI in Red Hat OpenShift clusters, you can create a `MachineConfig` object using the console or `oc` to ensure that the iSCSI daemon starts on all the Red Hat CoreOS nodes. Here is an example of a `MachineConfig` object:
 
 ```yaml
@@ -354,8 +355,11 @@ CRDs should be configured during replication prepare stage with repctl as descri
 | X_CSI_NFS_ACLS | Defines permissions - POSIX mode bits or NFSv4 ACLs, to be set on NFS target mount directory. | No | "0777" |
 | ***Node parameters*** |
 | X_CSI_POWERSTORE_ENABLE_CHAP | Set to true if you want to enable iSCSI CHAP feature | No | false |
+| ***Sidecar parameters*** |
+| volume-name-prefix | The volume-name-prefix will be used by provisioner sidecar as a prefix for all the volumes created  | Yes | csivol |
+| monitor-interval | The monitor-interval will be used by external-health-monitor as an interval for health checks  | Yes | 60s |
 
-4.  Execute the following command to create PowerStore custom resource:
+4. Execute the following command to create PowerStore custom resource:
    ```bash
    kubectl create -f <input_sample_file.yaml>
    ```
@@ -366,7 +370,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
       kubectl get all -n <driver-namespace>
       ```
 
-5.  [Verify the CSI Driver installation](../#verifying-the-driver-installation)
+5. [Verify the CSI Driver installation](../#verifying-the-driver-installation)
 
 6. Refer https://github.com/dell/csi-powerstore/tree/main/samples for the sample files.
 
@@ -382,7 +386,7 @@ CSI PowerStore supports the ability to dynamically modify array information with
 > require the driver to be restarted to properly pick up and process the changes.
 
 To do so, change the configuration file `config.yaml` and apply the update using the following command:
-```bash
 
+```bash
 sed "s/CONFIG_YAML/`cat config.yaml | base64 -w0`/g" secret.yaml | kubectl apply -f -
 ```

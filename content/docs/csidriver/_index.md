@@ -16,7 +16,7 @@ The CSI Drivers by Dell implement an interface between [CSI](https://kubernetes-
 {{<table "table table-striped table-bordered table-sm">}}
 | Features                 | PowerMax | PowerFlex | Unity XT  | PowerScale | PowerStore |
 |--------------------------|:--------:|:---------:|:---------:|:----------:|:----------:|
-| CSI Driver version       | 2.12.0   | 2.12.0    | 2.12.0    | 2.12.0     | 2.12.0     |
+| CSI Driver version       | 2.13.0   | 2.13.0    | 2.13.0    | 2.13.0     | 2.13.0     |
 | Static Provisioning      | yes      | yes       | yes       | yes        | yes        |
 | Dynamic Provisioning     | yes      | yes       | yes       | yes        | yes        |
 | Expand Persistent Volume | yes      | yes       | yes       | yes        | yes        |
@@ -50,4 +50,3 @@ The CSI Drivers by Dell implement an interface between [CSI](https://kubernetes-
 | Platform-specific configurable settings | Service Level selection<br>iSCSI CHAP | - | Host IO Limit<br>Tiering Policy<br>NFS Host IO size<br>Snapshot Retention duration | Access Zone<br>NFS version (3 or 4);Configurable Export IPs | iSCSI CHAP |
 | Auto RDM(vSphere)  | Yes(over FC) | N/A               | N/A              | N/A              | N/A              |
 {{</table>}}
-

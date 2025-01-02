@@ -831,6 +831,16 @@ enableQuota: false
 ...
 ```
 
+## Volume Size and Rounding Rules
+For NFS File Shares, the minimum supported volume size is 3 Gi. If request size is smaller than 3 Gi, the volume will be automatically provisioned as 3 Gi.
+
+For Block Volumes, the minimum supported size is 8 Gi. Any size request below 8 Gi will result in a volume of 8 Gi being created. Additionally, if the requested size is not a multiple of 8, the system will round it up to the next multiple of 8 when provisioning the volume.
+
+For example:  
+A requested size of 9 Gi or 8.1 Gi will result in a 16 Gi volume being created on the backend array.
+Similarly, a size of 20 Gi will be rounded up to 24 Gi.
+This behavior ensures that the allocated volume sizes comply with the backend array's alignment requirements.
+
 ## Usage of Quotas to Limit Storage Consumption for NFS volumes
 Starting with version 2.8, the CSI driver for PowerFlex will support enabling tree quotas for limiting capacity for NFS volumes. To use the quota feature user can specify the boolean value `enableQuota` in values.yaml.
 
@@ -930,4 +940,4 @@ If such a node is not available, the pods stay in Pending state. This means pods
 
 Without storage capacity tracking, pods get scheduled on a node satisfying the topology constraints. If the required capacity is not available, volume attachment to the pods fails, and pods remain in ContainerCreating state. Storage capacity tracking eliminates unnecessary scheduling of pods when there is insufficient capacity.
 
-The attribute `storageCapacity.enabled` in `values.yaml` can be used to enable/disable the feature during driver installation using helm. This is by default set to true. To configure how often the driver checks for changed capacity set `storageCapacity.pollInterval` attribute. In case of driver installed via operator, this interval can be configured in the sample file provided [here](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powerflex_v280.yaml) by editing the `--capacity-poll-interval` argument present in the provisioner sidecar.
+The attribute `storageCapacity.enabled` in `values.yaml` can be used to enable/disable the feature during driver installation using helm. This is by default set to true. To configure how often the driver checks for changed capacity set `storageCapacity.pollInterval` attribute. In case of driver installed via operator, this interval can be configured in the sample file provided [here](https://github.com/dell/csm-operator/blob/main/samples/) by editing the `--capacity-poll-interval` argument present in the provisioner sidecar.

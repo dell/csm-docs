@@ -22,7 +22,7 @@ This change will need to be made to the /etc/hosts file on:
     - Both dell-replication-controller-manager deployments (covered in [Configuration Steps](#configuration-steps) below).
 
     Update the ClusterServiceVersion before continuing. Execute the command below, replacing the fields for the remote cluster's FQDN and IP.
-    ```bash 
+    ```bash
     kubectl patch clusterserviceversions.operators.coreos.com -n <operator-namespace> dell-csm-operator-certified.v1.3.0 \
     --type=json -p='[{"op": "add", "path": "/spec/install/spec/deployments/0/spec/template/spec/hostAliases", "value": [{"ip":"<remote-IP>","hostnames":["<remote-FQDN>"]}]}]'
     ```
@@ -31,14 +31,14 @@ This change will need to be made to the /etc/hosts file on:
 The [csm-replication](https://github.com/dell/csm-replication.git) GitHub repository is cloned to your source cluster as part of the installation. On your source cluster run the following to clone and build the repctl tool:
 
 ```bash
-git clone -b v1.7.0 https://github.com/dell/csm-replication.git
+git clone -b v1.8.0 https://github.com/dell/csm-replication.git
 cd csm-replication/repctl
 make build
 ```
 
 Alternately, you can download a pre-built repctl binary from our [Releases](https://github.com/dell/csm-replication/releases) page.
 ```shell
-wget https://github.com/dell/csm-replication/releases/download/v1.7.0/repctl-linux-amd64
+wget https://github.com/dell/csm-replication/releases/download/v1.8.0/repctl-linux-amd64
 mv repctl-linux-amd64 repctl
 chmod +x repctl
 ```
@@ -59,6 +59,11 @@ To configure Replication perform the following steps:
 3. Inject the service account's configuration into the clusters.
     ```shell
     ./repctl cluster inject
+    ```
+    > **_NOTE:_**  To inject the service account's configuration for each cluster individually, use the following command:
+    ```shell
+      ./repctl cluster inject --custom-configs $HOME/.repctl/clusters/<config-name>
+      Example: ./repctl cluster inject --custom-configs "/root/.repctl/clusters/config-1"
     ```
 4. Customize the `examples/<storage>_example_values.yaml` sample config. Set the values for sourceClusterID and targetClusterID to the same names used in step 1. For a stretched cluster set both fields to `self`:
 

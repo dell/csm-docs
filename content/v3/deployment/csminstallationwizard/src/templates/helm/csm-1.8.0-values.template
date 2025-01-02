@@ -88,6 +88,7 @@ csi-powerstore:
         - "--ignoreVolumelessPods=false"
 
   maxPowerstoreVolumesPerNode: $MAX_VOLUMES_PER_NODE
+  podmonAPIPort: 8083
 
 ## K8S/CSI-PowerMax ATTRIBUTES
 ##########################################
