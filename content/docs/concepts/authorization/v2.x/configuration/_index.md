@@ -3,6 +3,7 @@ title: Configuration
 linktitle: Configuration
 weight: 2
 description: Configure Container Storage Module Authorization Proxy Server
+no_list: true 
 ---
 {{% pageinfo color="primary" %}}
 {{< message text="1" >}}

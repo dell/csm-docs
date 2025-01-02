@@ -188,6 +188,12 @@ To deploy the Operator, follow the instructions available [here](../../../operat
 {{< /accordion >}}  
 <br>
 {{< accordion id="Three" title="CSM Modules" >}}
+<br>
+{{< markdownify >}}
+The driver and modules versions installable with the Container Storage Module Operator [Click Here](../../../../../supportmatrix/#operator-compatibility-matrix)
+{{< /markdownify >}}
+
+<br>   
 
 {{< cardcontainer >}}
     {{< customcard link1="./csm-modules/authorizationv1.x"  image="1" title="Authorization v1.x" >}}

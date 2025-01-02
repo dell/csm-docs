@@ -7,7 +7,7 @@ toc_hide: true
 ---
 <br>
 
-CSM Installation Wizard Support Matrix [Click Here](../../../../../supportmatrix/#supported-dell-csi-drivers)
+CSM Installation Wizard Support Matrix [Click Here](../../../../../supportmatrix/#installation-wizard-compatibility-matrix)
 
 <br>
 

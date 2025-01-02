@@ -191,7 +191,7 @@ cd dell-csi-helm-installer && wget -O my-unity-settings.yaml https://github.com/
 
     **Note:** Parameters "allowRWOMultiPodAccess" and "syncNodeInfoInterval" have been enabled for configuration in values.yaml and this helps users to dynamically change these values without the need for driver re-installation.
 
-6. If you want to leverage snapshotting feature, the pre-requisite is to install external-snapshotter. Installation of external-snapshotter is required only for Kubernetes and is available by default with OpenShift installations. [Click here](../../../../../snapshots/#optional-volume-snapshot-requirements) to follow the procedure to install external-snapshotter.
+6. If you want to leverage snapshotting feature, the pre-requisite is to install external-snapshotter. Installation of external-snapshotter is required only for Kubernetes and is available by default with OpenShift installations. [Click here](../../../../../snapshots/#helm-optional-volume-snapshot-requirements) to follow the procedure to install external-snapshotter.
 
 7. Run the command to proceed with the installation using bash script.
    ```bash

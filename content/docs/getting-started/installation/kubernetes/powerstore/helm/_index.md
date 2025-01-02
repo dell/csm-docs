@@ -25,7 +25,7 @@ Install Helm 3.x on the master node before you install the CSI Driver for PowerS
 {{< accordion id="Two" title="CSI Driver" markdown="true" >}}  
 
 ### Volume Snapshot Requirements (Optional)
-For detailed snapshot setup procedure, [click here.](docs/concepts/snapshots/#optional-volume-snapshot-requirements)
+For detailed snapshot setup procedure, [click here.](docs/concepts/snapshots/#helm-optional-volume-snapshot-requirements)
 
 ### Volume Health Monitoring (Optional)
 

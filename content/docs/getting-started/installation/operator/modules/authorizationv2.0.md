@@ -9,12 +9,10 @@ description: >
 {{% /pageinfo %}}
 ## Install Container Storage Module Authorization via Container Storage Module Operator
 
-The Container Storage Module Authorization module for supported Dell CSI Drivers can be installed via the Container Storage Module Operator.
-To deploy the Operator, follow the instructions available [here](../../#installation).
 
 ### Prerequisite
 
-1. [Install Vault or configure an existing Vault](#vault-server-installation).
+1. [Install Vault or configure an existing Vault](../authorizationv2.0/#vault-server-installation).
 
 2. Execute `kubectl create namespace authorization` to create the authorization namespace (if not already present). Note that the namespace can be any user-defined name, in this example, we assume that the namespace is 'authorization'.
 
@@ -57,12 +55,13 @@ To deploy the Operator, follow the instructions available [here](../../#installa
 
 ### Install Container Storage Module Authorization Proxy Server
 
-1. Follow all the [prerequisites](#prerequisite).
 
-2. Create a CR (Custom Resource) for Authorization from a [sample manifest](https://github.com/dell/csm-operator/blob/main/samples/authorization/csm_authorization_proxy_server_v200.yaml). This file can be modified to use custom parameters if needed.
 
-3. Users should configure the parameters in the CR. This table lists the primary configurable parameters of the Authorization Proxy Server and their default values:
+1. Create a CR (Custom Resource) for Authorization from a [sample manifest](https://github.com/dell/csm-operator/blob/main/samples/authorization/csm_authorization_proxy_server_v200.yaml). This file can be modified to use custom parameters if needed.
 
+2. Users should configure the parameters in the CR. This table lists the primary configurable parameters of the Authorization Proxy Server and their default values:
+
+{{< collapse title="Parameters" id="1">}}
    | Parameter | Description | Required | Default |
    | --------- | ----------- | -------- |-------- |
    | **nginx** | This section configures the enablement of the NGINX Ingress Controller. | - | - |
@@ -76,8 +75,9 @@ To deploy the Operator, follow the instructions available [here](../../#installa
    | proxyServerIngress.ingressClassName | The ingressClassName of the proxy-service Ingress. | Yes | nginx |
    | proxyServerIngress.hosts | Additional host rules to be applied to the proxy-service Ingress. | No | - |
    | proxyServerIngress.annotations | Additional annotations for the proxy-service Ingress. | No | - |
-
-    **Additional v2.0 Parameters:**
+{{< /collapse >}} 
+{{< collapse title="Additional v2.0 Parameters" >}}
+**Additional v2.0 Parameters:**
    | Parameter | Description | Required | Default |
    | --------- | ----------- | -------- |-------- |
    | **redis** | This section configures the Redis components. | - | - |
@@ -93,6 +93,7 @@ To deploy the Operator, follow the instructions available [here](../../#installa
    | certificate | The base64-encoded certificate for the certificate/private-key pair to connect to Vault. Leave empty to use self-signed certificate. | No | - |
    | privateKey | The base64-encoded private key for the certificate/private-key pair to connect to Vault. Leave empty to use self-signed certificate. | No | - |
    | certificateAuthority | The base64-encoded certificate authority for validating the Vault server. | No | - |
+{{< /collapse >}}
 
 >__Note__:
 > - If you are installing Authorization in a different namespace than `authorization`, edit the `namespace` fields in this file to your namespace.
@@ -107,7 +108,7 @@ To enable reporting of trace data with [Zipkin](https://zipkin.io/), use the `cs
   ZIPKIN_PROBABILITY: "1.0"
   ```
 
-4. Execute this command to create the Authorization CR:
+3. Execute this command to create the Authorization CR:
 
     ```bash
 
@@ -364,31 +365,3 @@ With the default server settings, role level values control TTL in this way:
 The client token will only be able to renew 3 times before reaching it total allowed TTL of 2 hours.
 
 Existing role values can be changed using `vault write auth/kubernetes/role/csm-authorization token_ttl=30m token_explicit_max_ttl=2h`.
-
-## Uninstall Container Storage Module Authorization
-
-### Delete all Authorization Custom Resources(CRs)
-
-The commands below will delete a Tenant, Role, and Storage system. All CRs must be deleted before Authorization is uninstalled.
-
-```bash
-kubectl delete csmtenant [csmtenant-name] --namespace authorization
-kubectl delete csmrole [csmrole-name] --namespace authorization
-kubectl delete storage [storage-name] --namespace authorization
-```
-
-### Uninstall the CSM Authorization Proxy Server
-
-The command below removes all the Kubernetes components associated with the install.
-
-```bash
-kubectl delete csm/authorization --namespace authorization
-```
-
-### Uninstalling the Container Storage Module Authorization sidecar in the CSI Driver
-
-To uninstall the sidecar in the CSI Driver, [update the driver](docs/getting-started/uninstallation/operator/driver) Container Storage Module object to disable the authorization component.
-
-```bash
-kubectl edit csm/[driver-CR-name] --namespace [driver-namespace]
-```

@@ -9,7 +9,7 @@ On Upstream Kubernetes clusters, ensure that to install
 * VolumeSnapshot CRDs - Install v1 VolumeSnapshot CRDs
 * External Volume Snapshot Controller
 
-For detailed snapshot setup procedure, [click here.](docs/concepts/snapshots/#optional-volume-snapshot-requirements)
+For detailed snapshot setup procedure, [click here.](docs/concepts/snapshots/#helm-optional-volume-snapshot-requirements)
 
 >NOTE: This step can be skipped with OpenShift.
 

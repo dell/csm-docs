@@ -7,7 +7,7 @@ toc_hide: true
 ---  
 <br>
 
-Installation Wizard Support Matrix [Click Here](../../../../../supportmatrix/#supported-dell-csi-drivers)
+Installation Wizard Support Matrix [Click Here](../../../../../supportmatrix/#installation-wizard-compatibility-matrix)
 <br> 
 <br>
 The Container Storage Modules Installation Wizard is a webpage that helps you create a manifest file to install Dell CSI Drivers and CSM Modules. Users can enable or disable modules through the UI, and it generates a single manifest file, eliminating the need to download individual Helm charts for drivers and modules.

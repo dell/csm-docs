@@ -99,17 +99,6 @@ To deploy the Operator, follow the instructions available [here](../../../operat
 4. **Create Powermax Array Configmap:**  
   Create a configmap using the sample file [here](https://github.com/dell/csi-powermax/blob/main/samples/configmap/powermax-array-config.yaml). Fill in the appropriate values for driver configuration.
    ```yaml
-      # Copyright © 2024 Dell Inc. or its subsidiaries. All Rights Reserved.
-      #
-      # Licensed under the Apache License, Version 2.0 (the "License");
-      # you may not use this file except in compliance with the License.
-      # You may obtain a copy of the License at
-      #      http://www.apache.org/licenses/LICENSE-2.0
-      # Unless required by applicable law or agreed to in writing, software
-      # distributed under the License is distributed on an "AS IS" BASIS,
-      # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-      # See the License for the specific language governing permissions and
-      # limitations under the License.
       # To create this configmap use: kubectl create -f powermax-array-config.yaml
       apiVersion: v1
       kind: ConfigMap
@@ -261,6 +250,7 @@ X_CSI_TOPOLOGY_CONTROL_ENABLED provides a way to filter topology keys on a node 
                      - "*:*"
 
      ```
+   {{< collapse id="2" title="Parameters">}}
    | Parameter | Description  |
    |-----------|--------------|
    | allowedConnections | List of node, array and protocol info for user allowed configuration |
@@ -268,7 +258,9 @@ X_CSI_TOPOLOGY_CONTROL_ENABLED provides a way to filter topology keys on a node 
    | allowedConnections.rules | List of StorageArrayID:TransportProtocol pair |
    | deniedConnections | List of node, array and protocol info for user denied configuration |
    | deniedConnections.nodeName | Name of the node on which user wants to apply given rules  |
-   | deniedConnections.rules | List of StorageArrayID:TransportProtocol pair |
+   | deniedConnections.rules | List of StorageArrayID:TransportProtocol pair | 
+   {{< /collapse >}}
+
 <br>
 
 3. Run following command to create the configmap
@@ -285,6 +277,10 @@ X_CSI_TOPOLOGY_CONTROL_ENABLED provides a way to filter topology keys on a node 
 {{< accordion id="Three" title="CSM Modules"  >}}  
 
  <br>  
+ {{< markdownify >}}
+The driver and modules versions installable with the Container Storage Module Operator [Click Here](../../../../../supportmatrix/#operator-compatibility-matrix)
+{{< /markdownify >}}
+<br>   
 
 {{< cardcontainer >}}
     {{< customcard link1="./csm-modules/authorizationv1.x"  image="1" title="Authorization v1.x" >}}

@@ -131,7 +131,11 @@ sed "s/CONFIG_YAML/`cat secret.yaml | base64 -w0`/g" secret.yaml | kubectl apply
 <br>
 
 {{< accordion id="Three" title="CSM Modules" >}}
+{{< markdownify >}}
+The driver and modules versions installable with the Container Storage Module Operator [Click Here](../../../../../supportmatrix/#operator-compatibility-matrix)
+{{< /markdownify >}}
 
+<br>   
 
 {{< cardcontainer >}}
 

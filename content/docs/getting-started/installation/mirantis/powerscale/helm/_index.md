@@ -38,7 +38,7 @@ The following are requirements to be met before installing the CSI Driver for De
 
 ### (Optional) Volume Snapshot Requirements
 
-  For detailed snapshot setup procedure, [click here.](../../../../../snapshots/#optional-volume-snapshot-requirements)
+  For detailed snapshot setup procedure, [click here.](../../../../../snapshots/#helm-optional-volume-snapshot-requirements)
 
 ### (Optional) Volume Health Monitoring
 

@@ -5,4 +5,4 @@ weight: 3
 description: >
 --- 
 
-{{<includee  file="content/docs/getting-started/upgrade/helm/module/observability.md" Var="powerflex">}}
+{{<includee  file="content/docs/getting-started/upgrade/helm/module/observability.md" Var="powerflex">}} 

@@ -41,7 +41,15 @@ To avoid application pods getting stuck in a Pending state, Container Storage Mo
 
 ## How to enable this module
 
-To enable this module, user should choose the sample file for the respective driver for specific version. By default, the module is disabled but this can be enabled by setting the enabled flag to `true` in the sample file.
+<!--To enable this module, user should choose the sample file for the respective driver for specific version. By default, the module is disabled but this can be enabled by setting the enabled flag to `true` in the sample file.
+--> 
+Resiliency can be enabled by following sample file 
+
+a. **Default Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_{{Var}}_v2130.yaml) for default settings.
+
+[OR]
+
+b. **Detailed Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/main/samples/minimal-samples/{{Var}}_v2130.yaml) for detailed settings.
 
 ```yaml
   modules:

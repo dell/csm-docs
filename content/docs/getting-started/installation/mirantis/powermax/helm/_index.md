@@ -25,7 +25,7 @@ Install Helm 3 on the master node before you install CSI Driver for Dell PowerMa
 {{< accordion id="Two" title="CSI Driver" markdown="true" >}}  
 
 ### Volume Snapshot Requirements (Optional)
-  For detailed snapshot setup procedure, [click here.](../../../../../snapshots/#optional-volume-snapshot-requirements) 
+  For detailed snapshot setup procedure, [click here.](../../../../../snapshots/#helm-optional-volume-snapshot-requirements) 
 
 ## Installation
 

@@ -13,8 +13,7 @@ description: >
 
 ## Install CSM Authorization via Container Storage Module Operator
 
-The CSM Authorization module for supported Dell CSI Drivers can be installed via the Container Storage Module Operator.
-To deploy the Operator, follow the instructions available [here](../../#installation).
+
 
 ### Prerequisite
 
@@ -66,12 +65,11 @@ To deploy the Operator, follow the instructions available [here](../../#installa
 
 ### Install CSM Authorization Proxy Server
 
-1. Follow all the [prerequisites](#prerequisite).
 
-2. Create a CR (Custom Resource) for Authorization from a [sample manifest](https://github.com/dell/csm-operator/blob/main/samples/authorization/csm_authorization_proxy_server_v1110.yaml). This file can be modified to use custom parameters if needed.
+1. Create a CR (Custom Resource) for Authorization from a [sample manifest](https://github.com/dell/csm-operator/blob/main/samples/authorization/csm_authorization_proxy_server_v1110.yaml). This file can be modified to use custom parameters if needed.
 
-3. Users should configure the parameters in the CR. This table lists the primary configurable parameters of the Authorization Proxy Server and their default values:
-
+2. Users should configure the parameters in the CR. This table lists the primary configurable parameters of the Authorization Proxy Server and their default values:
+{{< collapse title="Parameters" id="1">}}
    | Parameter | Description | Required | Default |
    | --------- | ----------- | -------- |-------- |
    | openshift | For OpenShift Container Platform only: Enable/Disable use of the OpenShift Ingress Controller. Set to false if you already have an Ingress Controller installed. | No | False |
@@ -88,7 +86,7 @@ To deploy the Operator, follow the instructions available [here](../../#installa
    | proxyServerIngress.annotations | Additional annotations for the proxy-service Ingress. | No | - |
    | **redis** | This section configures the Redis components. | - | - |
    | storageclass | The storage class for Redis to use for persistence. If not supplied, a locally provisioned volume is used. | No | - |
-
+{{< /collapse >}}
 
 >__Note__:
 > - If you are installing CSM Authorization in a different namespace than `authorization`, edit the `namespace` fields in this file to your namespace.
@@ -103,7 +101,7 @@ To enable reporting of trace data with [Zipkin](https://zipkin.io/), use the `cs
   ZIPKIN_PROBABILITY: "1.0"
   ```
 
-4. Execute this command to create the Authorization CR:
+3. Execute this command to create the Authorization CR:
 
     ```bash
 
@@ -136,74 +134,3 @@ Follow the instructions available in Authorization for [Configuring the Containe
 **Authorization v1.x**
 
 Follow the instructions available in Authorization for [Configuring a CSI Driver with Container Storage Module for Authorization](../../../../../../../concepts/authorization/v1.x/configuration/).
-
-## Upgrade Container Storage Module Authorization
-
-This section outlines the upgrade steps for Container Storage Modules (CSM) for Authorization. The upgrade of Authorization is handled in 2 parts:
-1) Upgrading the Authorization proxy server
-2) Upgrading CSI Driver, Authorization sidecar with Authorization module enabled
-
-
-### Upgrading the Authorization Proxy Server
-
-  1.  Modifying the existing Authorization Proxy Server installation directly via `kubectl edit`
-
-      ```bash
-      kubectl get csm -n <module-namespace>
-      ```
-
-      For example - If the Authorization Proxy Server is installed in authorization namespace then run this command to get the object name
-
-      ```bash
-      kubectl get csm -n authorization
-      ```
-
-      use the object name in `kubectl edit` command.
-
-      ```bash
-      kubectl edit csm <object-name> -n <module-namespace>
-      ```
-
-      For example - If the object name is authorization then use the name as authorization and if the namespace is authorization, then run this command to edit the object
-
-      ```bash
-      kubectl edit csm authorization -n authorization
-      ```
-
-  2.  Modify the installation
-
-      - Update the CSM Authorization Proxy Server configVersion
-      - Update the images for proxyService, tenantService, roleService and storageService
-
-
-### Upgrading CSI Driver, Authorization sidecar with Authorization module enabled
-
-  1.  Modifying the existing driver and module installation directly via `kubectl edit`
-
-      ```bash
-      kubectl get csm -n <driver-namespace>
-      ```
-
-      For example - If the CSI PowerFlex driver is installed in vxflexos namepace then run this command to get the object name
-
-      ```bash
-      kubectl get csm -n vxflexos
-      ```
-      use the object name in `kubectl edit` command.
-
-      ```bash
-      kubectl edit csm <object-name> -n <driver-namespace>
-      ```
-      For example - If the object name is vxflexos then use the name as vxflexos and if the driver is installed in vxflexos namespace, then run this command to edit the object
-
-      ```bash
-      kubectl edit csm vxflexos -n vxflexos
-      ```
-
-  2.  Modify the installation
-
-      - Update the driver config version and image tag
-      - Update the Authorization config version and karavi-authorization-proxy image.
-
->__Note__:
-> - In Authorization module upgrade, only `n-1` to `n` upgrade is supported, e.g. if the current authorization version is `v1.8.x`, it can be upgraded to `1.9.x`.

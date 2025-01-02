@@ -36,7 +36,7 @@ After the VolumeSnapshot has been successfully created by the CSI driver, a Volu
 
 >Note: VolumeSnapshots can be listed using the command `kubectl get volumesnapshot -n <namespace>`
 
-### (Optional) Volume Snapshot Requirements
+### (Helm Optional) Volume Snapshot Requirements
 
 Applicable only if you decide to enable the snapshot feature in `values.yaml` via helm.
 

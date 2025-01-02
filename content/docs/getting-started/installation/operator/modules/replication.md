@@ -22,7 +22,7 @@ FQDNs, it is necessary to add the `<FQDN>:<IP>` mapping in the /etc/hosts file i
 This change will need to be made to the /etc/hosts file on:
     - The bastion node(s) (or wherever `repctl` is used).
     - Either the Container Storage Module Operator Deployment or ClusterServiceVersion custom resource if using an Operator Lifecycle Manager (such as with an OperatorHub install).
-    - Both dell-replication-controller-manager deployments (covered in [Configuration Steps](#configuration-steps) below).
+    - Both dell-replication-controller-manager deployments covered in [Configuration Steps](../replication/#configuration-steps) below.
 
     Update the ClusterServiceVersion before continuing. Execute the command below, replacing the fields for the remote cluster's FQDN and IP.
     ```bash 
@@ -77,9 +77,9 @@ To configure Replication perform the following steps:
     ```shell
     ./repctl create sc --from-config ./examples/<storage>_example_values.yaml
     ```
-6. On the target cluster, configure the [prerequisites](../../operator/#pre-requisites-for-installation-of-the-csi-drivers) for deploying the driver via Dell CSM Operator.
+6. On the target cluster, configure the [prerequisites](../../../csmoperator/#install-driver) for deploying the driver via Dell CSM Operator.
 
-7. Install the CSI driver for your chosen storage platform on the source cluster according to the instructions for [installing the drivers using CSM Operator](../../../csmoperator/drivers/#installing-csi-driver-via-operator).
+7. Install the CSI driver for your chosen storage platform on the source cluster according to the instructions for [installing the drivers using CSM Operator](../../../csmoperator/#install-driver).
 
 8. _(Optional)_ If CSM Replication is deployed using two clusters in an environment where the DNS is not configured, it is necessary to update the dell-replication-controller-manager Kubernetes deployment to map the API endpoint FQDN to an IP address by adding the `hostAliases` field and associated FQDN:IP mappings.
 
