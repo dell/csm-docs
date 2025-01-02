@@ -15,11 +15,12 @@ description: Release notes for PowerFlex CSI driver
 
 
 
+
 ### New Features/Changes
 
+- [#663 - [FEATURE]: Enable/disable automatic SDC deployment along with driver installation.](https://github.com/dell/csm/issues/663)
 - [#1472 - [FEATURE]: Support for Kubernetes 1.31](https://github.com/dell/csm/issues/1472)
 - [#1508 - [FEATURE]:  Add Support for KubeVirt](https://github.com/dell/csm/issues/1508)
-- [#663 - [FEATURE]: Enable/disable automatic SDC deployment along with driver installation.](https://github.com/dell/csm/issues/663)
 
 ### Fixed Issues
 

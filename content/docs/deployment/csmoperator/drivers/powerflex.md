@@ -21,11 +21,13 @@ kubectl get csm --all-namespaces
 ```
 
 ### Prerequisites
+
 - If multipath is configured, ensure CSI-PowerFlex volumes are blacklisted by multipathd. See [troubleshooting section](../../../../csidriver/troubleshooting/powerflex) for details.
 
 >NOTE: This step can be skipped with OpenShift.
 
 #### SDC Deployment for Operator
+
 - This feature deploys the sdc kernel modules on all nodes with the help of an init container.
 - Powerflex can be deployed with or without SDC. SDC deployment can be enabled and disabled by setting `X_CSI_SDC_ENABLED` value in CR file. By default, driver is deployed with SDC enabled.
 - For non-supported versions of the OS also do the manual SDC deployment steps given below. Refer to https://hub.docker.com/r/dellemc/sdc for supported versions.
@@ -34,13 +36,15 @@ kubectl get csm --all-namespaces
   - Optionally, enable sdc monitor by setting the enable flag for the sdc-monitor to true. Please note:
     - **If using sidecar**, you will need to edit the value fields under the HOST_PID and MDM fields by filling the empty quotes with host PID and the MDM IPs.
     - **If not using sidecar**, leave the enabled field set to false.
-##### Example CR:  [samples/storage_csm_powerflex_v2120.yaml](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powerflex_v2120.yaml)
+
+##### Example CR: [samples/storage_csm_powerflex_v2130.yaml](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powerflex_v2130.yaml)
+
 ```yaml
     sideCars:
     # sdc-monitor is disabled by default, due to high CPU usage
       - name: sdc-monitor
         enabled: false
-        image: dellemc/sdc:4.5
+        image: quay.io/dell/storage/powerflex/sdc:4.5.2.1
         envs:
         - name: HOST_PID
           value: "1"
@@ -64,6 +68,7 @@ For detailed PowerFlex installation procedure, see the [Dell PowerFlex Deploymen
 >NOTE: This step can be skipped with OpenShift CoreOS nodes.
 
 #### Create Secret
+
 1. Create namespace:
    Execute `kubectl create namespace vxflexos` to create the `vxflexos` namespace (if not already present). Note that the namespace can be any user-defined name, in this example, we assume that the namespace is 'vxflexos'
 2. Prepare the secret.yaml for driver configuration.
@@ -115,21 +120,20 @@ For detailed PowerFlex installation procedure, see the [Dell PowerFlex Deploymen
     If replication feature is enabled, ensure the secret includes all the PowerFlex arrays involved in replication.
 
     After editing the file, run this command to create a secret called `vxflexos-config`.
-    ```bash
 
+    ```bash
     kubectl create secret generic vxflexos-config -n vxflexos --from-file=config=secret.yaml
     ```
 
     Use this command to replace or update the secret:
 
     ```bash
-
     kubectl create secret generic vxflexos-config -n vxflexos --from-file=config=secret.yaml -o yaml --dry-run=client | kubectl replace -f -
     ```
 
 ### Install Driver
 
-1. Follow all the [prerequisites](#prerequisite) above
+1. Follow all the [prerequisites](#prerequisites) above
 
 2. Create a CR (Custom Resource) for PowerFlex using the sample files provided
 
@@ -144,9 +148,10 @@ For detailed PowerFlex installation procedure, see the [Dell PowerFlex Deploymen
 
    | Parameter | Description | Required | Default |
    | --------- | ----------- | -------- |-------- |
+   | namespace | Specifies namespace where the driver will be installed | Yes | "vxflexos" |
    | dnsPolicy | Determines the DNS Policy of the Node service | Yes | ClusterFirstWithHostNet |
-   | fsGroupPolicy | Defines which FS Group policy mode to be used, Supported modes `None, File and ReadWriteOnceWithFSType`. In OCP <= 4.16 and K8s <= 1.29, fsGroupPolicy is an immutable field. | No | "ReadWriteOnceWithFSType" |
-   | replicas | Controls the number of controller pods you deploy. If the number of controller pods is greater than the number of available nodes, excess pods will become stay in a pending state. Defaults are 2 which allows for Controller high availability. | Yes | 2 |
+   | fsGroupPolicy | Defines which FS Group policy mode to be used, Supported modes `None, File and ReadWriteOnceWithFSType`. In OCP <= 4.16 and K8s <= 1.29, fsGroupPolicy is an immutable field. | No | "File" |
+   | replicas | Controls the number of controller pods you deploy. If the number of controller pods is greater than the number of available nodes, excess pods will become stay in a pending state. | Yes | 1 |
    | storageCapacity.enabled | Enable/Disable storage capacity tracking | No | true |
    | storageCapacity.pollInterval | Configure how often the driver checks for changed capacity | No | 5m |
    | enableQuota | a boolean that, when enabled, will set quota limit for a newly provisioned NFS volume | No | none |
@@ -165,16 +170,20 @@ For detailed PowerFlex installation procedure, see the [Dell PowerFlex Deploymen
    | X_CSI_APPROVE_SDC_ENABLED | Enable this to to approve restricted SDC by GUID during setup | Yes | false |
    | X_CSI_HEALTH_MONITOR_ENABLED | Enable/Disable health monitor of CSI volumes from Node plugin - volume condition | No | false |
    | X_CSI_SDC_ENABLED | Enable/Disable installation of the SDC. | Yes | true |
+   | ***Sidecar parameters*** |
+   | volume-name-prefix | The volume-name-prefix will be used by provisioner sidecar as a prefix for all the volumes created  | Yes | k8s |
+   | monitor-interval | The monitor-interval will be used by external-health-monitor as an interval for health checks  | Yes | 60s |
 
-4.  Execute this command to create PowerFlex custom resource:
+4. Execute this command to create PowerFlex custom resource:
     ```bash
     kubectl create -f <input_sample_file.yaml>
     ```
     This command will deploy the CSI-PowerFlex driver in the namespace specified in the input YAML file.
 
-5.  [Verify the CSI Driver installation](../#verifying-the-driver-installation)
+5. [Verify the CSI Driver installation](../#verifying-the-driver-installation)
 
-6.  Refer https://github.com/dell/csi-powerflex/tree/main/samples for the sample files.
+6. Refer https://github.com/dell/csi-powerflex/tree/main/samples for the sample files.
 
 **Note** :
-   1. Snapshotter and resizer sidecars are installed by default.
+
+  1. Snapshotter and resizer sidecars are installed by default.
