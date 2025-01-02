@@ -34,7 +34,7 @@ NAME                            CHART VERSION   APP VERSION     DESCRIPTION
 dell/karavi-observability       1.11.0          1.11.0          CSM for Observability is part of the [Container...
 ```
 
->Note: If using cert-manager CustomResourceDefinitions older than v1.5.3, delete the old CRDs and install v1.5.3 of the CRDs prior to upgrade. See [Prerequisites](docs/getting-started/installation/kubernetes/{{Var}}/helm/csm-modules/observability/#prerequisites) for location of CRDs.
+>Note: If using cert-manager CustomResourceDefinitions older than v1.5.3, delete the old CRDs and install v1.5.3 of the CRDs prior to upgrade. See [Prerequisites](docs/getting-started/installation/kubernetes/{{Var}}/helm/csm-modules/observability/#prerequisites-1) for location of CRDs.
 
 Upgrade to the latest CSM for Observability release:
 
@@ -50,7 +50,7 @@ Upgrade Offline Installer deployment:
 helm upgrade --version $latest_chart_version karavi-observability dell/karavi-observability -n $namespace
 ```
 
-The [configuration](docs/getting-started/installation/kubernetes/{{Var}}/helm/csm-modules/observability/#configuration) section lists all the parameters that can be configured using the `values.yaml` file.
+The [configuration](docs/getting-started/installation/kubernetes/{{Var}}/helm/csm-modules/observability/#configuration-3) section lists all the parameters that can be configured using the `values.yaml` file.
 
 ## Online Installer Upgrade
 
@@ -62,7 +62,7 @@ CSM for Observability online installer upgrade can be used if the initial deploy
     cd karavi-observability/installer
     ```
 
-2. Update `values.yaml` file as needed. Configuration options are outlined in the [Helm chart deployment section](docs/getting-started/installation/kubernetes/{{Var}}/helm/csm-modules/observability/#configuration).
+2. Update `values.yaml` file as needed. Configuration options are outlined in the [Helm chart deployment section](docs/getting-started/installation/kubernetes/{{Var}}/helm/csm-modules/observability/#configuration-3).
 
 3. Execute the `./karavi-observability-install.sh` script:
 
@@ -125,7 +125,7 @@ These instructions can be followed when a Helm chart was installed and will be u
 
    4. After the images have been made available and the Helm chart configuration is updated, follow the instructions within the Helm chart's repository to complete the installation.
       **Note**: Assuming that Your Secrets from CSI Drivers have been copied to the Karavi Observability namespace during the steps of [Offline Karavi Observability Helm Chart Installer](docs/getting-started/installation/kubernetes/{{Var}}/helm/csm-modules/observability/#prerequisites-5)
-      Optionally, you could provide your own [configurations](docs/getting-started/installation/kubernetes/{{Var}}/helm/csm-modules/observability/#configuration). A sample values.yaml file is located [here](https://github.com/dell/helm-charts/blob/main/charts/karavi-observability/values.yaml).
+      Optionally, you could provide your own [configurations](docs/getting-started/installation/kubernetes/{{Var}}/helm/csm-modules/observability/#configuration-3). A sample values.yaml file is located [here](https://github.com/dell/helm-charts/blob/main/charts/karavi-observability/values.yaml).
 
       ```bash
         helm upgrade -n install-namespace app-name karavi-observability
