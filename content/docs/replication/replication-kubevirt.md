@@ -18,7 +18,7 @@ Persistent Volumes (PVs) created via virtualized workloads (VMs).
 ## KubeVirt support with Replication
 
 - Install the OpenShift Virtualization operator from the RedHat UI on both the
-  source and target clusters with OCP v4.18 and above.
+  source and target clusters with OCP v4.17 and above.
 - The Replication modes supported are: SYNC and ASYNC.
 
 - Make sure the driver is installed with the
