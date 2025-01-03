@@ -21,8 +21,9 @@ Persistent Volumes (PVs) created via virtualized workloads (VMs).
   source and target clusters with OCP v4.18 and above.
 - The Replication modes supported are: SYNC and ASYNC.
 
-- Make sure the driver is installed with the Replication Module enabled and a
-  default storage class configured for replication. To set the replication
+- Make sure the driver is installed with the
+  [Replication Module enabled](https://dell.github.io/csm-docs/docs/deployment/csmoperator/modules/replication/)
+  and a default storage class configured for replication. To set the replication
   storage class as the default, update the annotation as follows:
 
   ```
@@ -34,57 +35,9 @@ Persistent Volumes (PVs) created via virtualized workloads (VMs).
   the source will be replicated to the target cluster, as there is an active
   replication session between the two clusters.
 
-- sample _create-vm.yaml_ manifest:
-
-```
-apiVersion: kubevirt.io/v1
-kind: VirtualMachine
-metadata:
-  labels:
-    kubevirt.io/vm: vm-alpine-rwo
-  name: source-vm
-spec:
-  running: true
-  template:
-    metadata:
-      labels:
-        kubevirt.io/vm: vm-alpine-rwo
-    spec:
-      domain:
-        devices:
-          disks:
-            - disk:
-                bus: virtio
-              name: datavolumedisk1
-          interfaces:
-            - masquerade: {}
-              name: default
-        resources:
-          requests:
-            memory: 1Gi
-      terminationGracePeriodSeconds: 0
-      networks:
-        - name: default
-          pod: {}
-      volumes:
-        - dataVolume:
-            name: alpine-rwo-dv
-          name: datavolumedisk1
-  dataVolumeTemplates:
-    - metadata:
-        name: alpine-rwo-dv
-      spec:
-        storage:
-          accessModes:
-            - ReadWriteOnce
-          resources:
-            requests:
-              storage: 8Gi
-          storageClassName: replication-storageclass
-        source:
-          registry:
-            url: docker://quay.io/kubevirt/alpine-container-disk-demo:v0.42.1
-```
+- Refer this documentation
+  (https://docs.openshift.com/rosa/virt/virtual_machines/creating_vms_rh/virt-creating-vms-from-cli.html)
+  for creating virtual machines from the command line.
 
 - On the target cluster, the replica Persistent Volume (PV) can be accessed by
   binding it to a replica Persistent Volume Claim (PVC). Deploy a replica VM on
