@@ -17,7 +17,7 @@ Install Helm 3.x on the master node before you install the CSI Driver for PowerS
   curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
   ```
 {{< accordion id="One" title="CSM Installation Wizard" >}}
-            {{<include  "content/docs/getting-started/installation/installationwizard/helm.md" >}}
+    {{<includee  file="content/docs/getting-started/installation/installationwizard/helm.md" hideIds="2,4">}}
 {{< /accordion >}}
 
 <br>
@@ -58,7 +58,7 @@ volume stats value under node should be set to true.
         enabled: false
    ```
 
-## Install the Driver
+## Install Driver
 
 **Steps**
 1. Run `git clone -b v2.13.0 https://github.com/dell/csi-powerstore.git` to clone the git repository.

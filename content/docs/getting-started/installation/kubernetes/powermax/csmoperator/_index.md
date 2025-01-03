@@ -14,7 +14,7 @@ description: >
 To deploy the Operator, follow the instructions available [here](../../../operator/operatorinstallation_kubernetes.md).
 
 {{< accordion id="One" title="Installation Wizard" markdown="true" >}}  
-{{<include  "content/docs/getting-started/installation/installationwizard/operator.md" >}}
+{{<includee  file="content/docs/getting-started/installation/installationwizard/operator.md" >}}
 {{< /accordion >}}
 
 <br>

@@ -51,7 +51,7 @@ Create the karavi-authorization-config secret using this command:
 
     **Helm**
 
-    Refer to the [Install the Driver](../../../../../getting-started/installation/kubernetes/powermax/helm/#installation) section where you edit `samples/secret/secret.yaml` with the credentials of the PowerMax. Leave `username` and `password` with the default values as they will be ignored.
+    Refer to the [Install the Driver](../../../../../getting-started/installation/kubernetes/powermax/helm/#install-driver) section where you edit `samples/secret/secret.yaml` with the credentials of the PowerMax. Leave `username` and `password` with the default values as they will be ignored.
 
     **Operator**
 
@@ -61,7 +61,7 @@ Create the karavi-authorization-config secret using this command:
 
     **Helm**
 
-    Refer to the [Install the Driver](../../../../../getting-started/installation/kubernetes/powermax/helm/#installation) section to edit the parameters in `my-powermax-settings.yaml` file to configure the driver to communicate with the Authorization sidecar.
+    Refer to the [Install the Driver](../../../../../getting-started/installation/kubernetes/powermax/helm/#install-driver) section to edit the parameters in `my-powermax-settings.yaml` file to configure the driver to communicate with the Authorization sidecar.
 
     - Update `global.storageArrays.endpoint` to match the localhost endpoint in `samples/secret/karavi-authorization-config.json`.
 

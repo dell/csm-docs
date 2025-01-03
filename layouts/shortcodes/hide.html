@@ -1,4 +1,5 @@
 {{- $hide := .Get "hide" | default "false" -}}
+{{- $inline := .Get "inline" | default "false" -}}
 {{- $id := .Get "id" -}}
 {{- if eq $hide "true" -}}
 <style>
@@ -6,11 +7,19 @@
   display: none;
 }
 </style>
-<div id="{{ $id }}" class="hidden-content">
+<span id="{{ $id }}" class="hidden-content">
   {{ .Inner | markdownify }}
-</div>
+</span>
 {{- else -}}
-<div id="{{ $id }}" class="visible-content">
+<style>
+.visible-content {
+  display: block;
+}
+.inline-content {
+  display: inline;
+}
+</style>
+<span id="{{ $id }}" class="{{ if eq $inline "true" }}inline-content{{ else }}visible-content{{ end }}">
   {{ .Inner | markdownify }}
-</div>
+</span>
 {{- end -}}

@@ -15,17 +15,17 @@ description: >
 
 {{<includee file="content/docs/getting-started/installation/helm/modules/observability/deployment/driver/powerflex.md" suffix="2">}} 
 
-{{<includee file="content/docs/getting-started/installation/helm/modules/observability/deployment/configuration/configuration.md" suffix="3">}} 
+{{<includee file="content/docs/getting-started/installation/helm/modules/observability/deployment/configuration/configuration.md" hideIds="2,3,5,6,7" suffix="3">}} 
 
 
 {{< /accordion >}}
 <br> 
 {{< accordion id="Two" title="Installer" markdown="true" >}} 
-{{<includee file="content/docs/getting-started/installation/helm/modules/observability/installer.md" suffix="4">}}
+{{<includee file="content/docs/getting-started/installation/helm/modules/observability/installer.md" suffix="4" hideIds="2,3" >}}
 {{< /accordion >}} 
 <br> 
 {{< accordion id="Three" title="Offline" markdown="true" >}} 
-{{<includee file="content/docs/getting-started/installation/offline/observability.md" hideIds="2,3,4" suffix="5" Var="powerflex">}}
+{{<includee file="content/docs/getting-started/installation/offline/observability.md" hideIds="2,3,4,6,7" suffix="5" Var="powerflex">}}
 {{< /accordion >}}
 
 {{< cardcontainer >}}

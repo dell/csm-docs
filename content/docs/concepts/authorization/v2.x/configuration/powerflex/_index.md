@@ -77,7 +77,7 @@ Given a setup where Kubernetes, a storage system, and the Authorization Proxy Se
 
     **Helm**
 
-    Refer to the [Install the Driver](../../../../../getting-started/installation/kubernetes/powerflex/helm/#install-the-driver) section to edit the parameters in `samples/config.yaml` to configure the driver to communicate with Authorization sidecar.
+    Refer to the [Install the Driver](../../../../../getting-started/installation/kubernetes/powerflex/helm/#install-driver) section to edit the parameters in `samples/config.yaml` to configure the driver to communicate with Authorization sidecar.
 
     - Update `endpoint` to match the localhost endpoint in `samples/secret/karavi-authorization-config.json`.
 
@@ -140,7 +140,7 @@ Given a setup where Kubernetes, a storage system, and the Authorization Proxy Se
 
     **Helm**
 
-    Refer to the [Install the Driver](../../../../../getting-started/installation/kubernetes/powerflex/helm/#install-the-driver) section to edit the parameters in `myvalues.yaml` to enable Authorization.
+    Refer to the [Install the Driver](../../../../../getting-started/installation/kubernetes/powerflex/helm/#install-driver) section to edit the parameters in `myvalues.yaml` to enable Authorization.
 
     - Update `authorization.enabled` to `true`.
 

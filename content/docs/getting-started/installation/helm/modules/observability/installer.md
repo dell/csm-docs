@@ -18,7 +18,9 @@ You may obtain a copy of the License at
     http://www.apache.org/licenses/LICENSE-2.0
 -->
 
-The Container Storage Modules (CSM) for Observability installer bootstraps Helm to create a more simplified and robust deployment option that does the following:
+## CSM for Observability Installer 
+
+**The installer bootstraps Helm for a simplified and robust deployment by:**
 - Checking if Container Storage Modules for Observability is installed
 - Verifying Kubernetes/OpenShift and Helm versions
 - Adding and refreshing the Dell Helm chart repository
@@ -26,10 +28,10 @@ The Container Storage Modules (CSM) for Observability installer bootstraps Helm 
 - Installing CertManager CRDs and the Container Storage Modules Helm chart
 - Waiting for CSM pods to be ready
 
-If the Authorization module is enabled for the CSI drivers installed in the same Kubernetes cluster, the installer will perform the current steps to enable Container Storage Modules Observability to use the same Authorization instance:
+**If Authorization is enabled for CSI drivers in the same Kubernetes cluster:**
 - Verifies the `karavictl` binary is available.
 - Verifies the appropriate Secrets and ConfigMap exist in the CSI driver namespace.
-- Updates the Container Storage Modules Observability deployment to use the existing Authorization instance if not already enabled during the initial installation of Container Storage Modules Observability.
+- Updates the CSM Observability deployment to use the existing Authorization instance if not already enabled.
 
 ## Prerequisites
 
@@ -56,29 +58,6 @@ A Linux-based system, with Internet access, will be used to execute the script t
 ```bash
 ./karavi-observability-install.sh --help
 ```
-```
-Help for ./karavi-observability-install.sh
-
-Usage: ./karavi-observability-install.sh mode options...
-Mode:
-  install                                                     Installs Karavi Observability and enables Karavi Authorization if already installed
-  enable-authorization                                        Updates existing installation of Karavi Observability with Karavi Authorization
-  upgrade                                                     Upgrades existing installation of Karavi Observability to the latest release
-Options:
-  Required
-  --namespace[=]<namespace>                                   Namespace where Karavi Observability will be installed
-  Optional
-  --csi-powerflex-namespace[=]<csi powerflex namespace>       Namespace where CSI PowerFlex is installed, default is 'vxflexos'
-  --csi-powerstore-namespace[=]<csi powerstore namespace>     Namespace where CSI PowerStore is installed, default is 'csi-powerstore'
-  --csi-powerscale-namespace[=]<csi powerscale namespace>     Namespace where CSI PowerScale is installed, default is 'isilon'
-  --csi-powermax-namespace[=]<csi powermax namespace>         Namespace where CSI PowerMax is installed, default is 'powermax'
-  --set-file                                                  Set values from files used during helm installation (can be specified multiple times)
-  --skip-verify                                               Skip verification of the environment
-  --values[=]<values.yaml>                                    Values file, which defines configuration values
-  --verbose                                                   Display verbose logging
-  --version[=]<helm chart version>                            Helm chart version to install, default value will be latest
-  --help                                                      Help
-```
 
 __Note:__ Container Storage Module for Authorization currently does not support the Observability module for PowerStore. Therefore setting `enable-authorization` is not supported in this case.
 
@@ -102,10 +81,11 @@ To perform an online installation of Container Storage Module Observability, the
     A sample values.yaml file is located [here](https://github.com/dell/helm-charts/blob/main/charts/karavi-observability/values.yaml). This can be copied into a file named `myvalues.yaml` and modified accordingly for the installer command below. Configuration options are outlined in the [Helm chart deployment section](../observability#configuration).
 
     __Note:__
- - The default `values.yaml` deploys the CSM for Observability Topology service.
- - For CSI PowerFlex with Authorization, configure `karaviMetricsPowerflex.authorization` in `myvalues.yaml`.
- - For CSI PowerScale with Authorization, configure `karaviMetricsPowerscale.authorization` in `myvalues.yaml`.
- - For CSI PowerMax with Authorization, configure `karaviMetricsPowerMax.authorization` in `myvalues.yaml`
+
+ {{< hide id="0" >}}- The default `values.yaml` deploys the CSM for Observability Topology service.{{< /hide >}}
+ {{< hide id="1" >}}- For CSI PowerFlex with Authorization, configure `karaviMetricsPowerflex.authorization` in `myvalues.yaml`.{{< /hide >}}
+ {{< hide id="2" >}}- For CSI PowerScale with Authorization, configure `karaviMetricsPowerscale.authorization` in `myvalues.yaml`.{{< /hide >}}
+ {{< hide id="3" >}}- For CSI PowerMax with Authorization, configure `karaviMetricsPowerMax.authorization` in `myvalues.yaml` {{< /hide >}}
 
     ```bash
 

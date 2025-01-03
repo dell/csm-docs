@@ -7,10 +7,10 @@
    A default values.yaml file is located [here](https://github.com/dell/helm-charts/blob/main/charts/karavi-observability/values.yaml) that can be used for installation. This can be copied into a file named `myvalues.yaml` and either used as is or modified accordingly.
 
    __Note:__
-   - The default `values.yaml` deploys the CSM for Observability Topology service.
-   - For CSI PowerFlex with Authorization, configure `karaviMetricsPowerflex.authorization` in `myvalues.yaml`.
-   - For CSI PowerScale with Authorization, configure `karaviMetricsPowerscale.authorization` in `myvalues.yaml`.
-   - For CSI PowerMax with Authorization, configure `karaviMetricsPowerMax.authorization` in `myvalues.yaml`
+{{< hide id="0">}}- The default `values.yaml` deploys the CSM for Observability Topology service.{{< /hide >}}
+{{< hide id="1">}}- For CSI PowerFlex with Authorization, configure `karaviMetricsPowerflex.authorization` in `myvalues.yaml`.{{< /hide >}}
+{{< hide id="2">}}- For CSI PowerScale with Authorization, configure `karaviMetricsPowerscale.authorization` in `myvalues.yaml`.{{< /hide >}}
+{{< hide id="3">}}- For CSI PowerMax with Authorization, configure `karaviMetricsPowerMax.authorization` in `myvalues.yaml`{{< /hide >}}
 
    ```console
 
@@ -34,6 +34,8 @@
 
 The following table lists the configurable parameters of the Container Storage Module for Observability Helm chart and their default values.
 
+**Topology:** 
+
 | Parameter | Description | Default |
 | - | - | - |
 | `karaviTopology.image` | Location of the csm-topology Container image | `quay.io/dell/container-storage-modules/csm-topology:v1.10.0` |
@@ -43,10 +45,25 @@ The following table lists the configurable parameters of the Container Storage M
 | `karaviTopology.certificateFile` | Optional valid CA public certificate file that will be used to deploy the Topology service. Must use domain name 'karavi-topology'. | |
 | `karaviTopology.privateKeyFile` | Optional public certificate's associated private key file that will be used to deploy the Topology service. Must use domain name 'karavi-topology'. | |
 | `karaviTopology.logLevel` | Output logs that are at or above the given log level severity (Valid values: TRACE, DEBUG, INFO, WARN, ERROR, FATAL, PANIC) | `INFO` |
-| `karaviTopology.logFormat` | Output logs in the specified format (Valid values: text, json) | `text` |
+| `karaviTopology.logFormat` | Output logs in the specified format (Valid values: text, json) | `text` | 
+
+<br>
+
+**Otel:**
+
+| Parameter | Description | Default |
+| - | - | - |
 | `otelCollector.certificateFile` | Optional valid CA public certificate file that will be used to deploy the OpenTelemetry Collector. Must use domain name 'otel-collector'. | |
 | `otelCollector.privateKeyFile` | Optional public certificate's associated private key file that will be used to deploy the OpenTelemetry Collector. Must use domain name 'otel-collector'. |  |
 | `otelCollector.service.type` | Kubernetes service type | `ClusterIP` |
+
+<br> 
+
+{{< hide id="4" >}}
+**Metrics:** 
+
+| Parameter | Description | Default |
+| - | - | - |
 | `karaviMetricsPowerflex.image` |  CSM Metrics for PowerFlex Service image | `quay.io/dell/container-storage-modules/csm-metrics-powerflex:v1.10.0` |
 | `karaviMetricsPowerflex.enabled` | Enable CSM Metrics for PowerFlex service | `true` |
 | `karaviMetricsPowerflex.collectorAddr` | Metrics Collector accessible from the Kubernetes cluster | `otel-collector:55680`  |
@@ -64,7 +81,14 @@ The following table lists the configurable parameters of the Container Storage M
 | `karaviMetricsPowerflex.endpoint` | Endpoint for pod leader election | `karavi-metrics-powerflex` |
 | `karaviMetricsPowerflex.service.type` | Kubernetes service type | `ClusterIP` |
 | `karaviMetricsPowerflex.logLevel` | Output logs that are at or above the given log level severity (Valid values: TRACE, DEBUG, INFO, WARN, ERROR, FATAL, PANIC) | `INFO`|
-| `karaviMetricsPowerflex.logFormat` | Output logs in the specified format (Valid values: text, json) | `text`|
+| `karaviMetricsPowerflex.logFormat` | Output logs in the specified format (Valid values: text, json) | `text`| 
+{{< /hide >}}
+
+{{< hide id="5" >}}
+**Metrics:** 
+
+| Parameter | Description | Default |
+| - | - | - |
 | `karaviMetricsPowerstore.image` |  CSM Metrics for PowerStore Service image | `quay.io/dell/container-storage-modules/csm-metrics-powerstore:v1.10.0`|
 | `karaviMetricsPowerstore.enabled` | Enable CSM Metrics for PowerStore service | `true` |
 | `karaviMetricsPowerstore.collectorAddr` | Metrics Collector accessible from the Kubernetes cluster | `otel-collector:55680` |
@@ -78,7 +102,15 @@ The following table lists the configurable parameters of the Container Storage M
 | `karaviMetricsPowerstore.logFormat` | Output logs in the specified format (Valid values: text, json) | `text` |
 | `karaviMetricsPowerstore.zipkin.uri` | URI of a Zipkin instance where tracing data can be forwarded | |
 | `karaviMetricsPowerstore.zipkin.serviceName` | Service name used for Zipkin tracing data | `metrics-powerstore`|
-| `karaviMetricsPowerstore.zipkin.probability` | Percentage of trace information to send to Zipkin (Valid range: 0.0 to 1.0) | `0` |
+| `karaviMetricsPowerstore.zipkin.probability` | Percentage of trace information to send to Zipkin (Valid range: 0.0 to 1.0) | `0` | 
+{{< /hide >}}
+
+{{< hide id="6">}} 
+
+**Metrics:** 
+
+| Parameter | Description | Default |
+| - | - | - |
 | `karaviMetricsPowerscale.image` |  CSM Metrics for PowerScale Service image | `quay.io/dell/container-storage-modules/csm-metrics-powerscale:v1.7.0`|
 | `karaviMetricsPowerscale.enabled` | Enable CSM Metrics for PowerScale service | `true` |
 | `karaviMetricsPowerscale.collectorAddr` | Metrics Collector accessible from the Kubernetes cluster | `otel-collector:55680` |
@@ -96,9 +128,17 @@ The following table lists the configurable parameters of the Container Storage M
 | `karaviMetricsPowerscale.isiClientOptions.isiSkipCertificateValidation` | Skip OneFS API server's certificates | `true` |
 | `karaviMetricsPowerscale.isiClientOptions.isiAuthType` | 0 to enable session-based Authentication; 1 to enables basic Authentication | `1` |
 | `karaviMetricsPowerscale.isiClientOptions.isiLogVerbose` | Decide High/Medium/Low content of the OneFS REST API message | `0` |
-| `karaviMetricsPowerscale.authorization.enabled` | [Authorization](docs/getting-started/installation/helm/modules/authorizationv2.0) is an optional feature to apply credential shielding of the backend PowerScale. | `false` |
+| `karaviMetricsPowerscale.authorization.enabled` | [Authorization](docs/getting-started/installation/helm/modules/authorizationv2.0) is an optional feature to apply credential shielding of the backend PowerScale. | `false` | 
 | `karaviMetricsPowerscale.authorization.proxyHost` | Hostname of the csm-authorization server. |  |
-| `karaviMetricsPowerscale.authorization.skipCertificateValidation` | A boolean that enables/disables certificate validation of the csm-authorization server. |  |
+| `karaviMetricsPowerscale.authorization.skipCertificateValidation` | A boolean that enables/disables certificate validation of the csm-authorization server. |  | 
+{{< /hide >}} 
+
+{{< hide id="7">}}
+
+**Metrics:** 
+
+| Parameter | Description | Default |
+| - | - | - |
 | `karaviMetricsPowerMax.capacityMetricsEnabled` | Enable PowerMax capacity metric Collection | `true` |
 | `karaviMetricsPowerMax.performanceMetricsEnabled` | Enable PowerMax performance metric Collection | `true` |
 | `karaviMetricsPowerMax.capacityPollFrequencySeconds` | The polling frequency (in seconds) to gather capacity metrics | `20` |
@@ -107,3 +147,4 @@ The following table lists the configurable parameters of the Container Storage M
 | `karaviMetricsPowerMax.authorization.enabled` | [Authorization](docs/getting-started/installation/helm/modules/authorizationv2.0) is an optional feature to apply credential shielding of the backend PowerMax. | `false` |
 | `karaviMetricsPowerMax.authorization.proxyHost` | Hostname of the csm-authorization server. |  |
 | `karaviMetricsPowerMax.authorization.skipCertificateValidation` | A boolean that enables/disables certificate validation of the csm-authorization server. |  |
+{{< /hide >}}

@@ -186,6 +186,7 @@ If the CSI driver secret name is not the default `powerstore-config`, please use
 kubectl get secret [POWERSTORE-CONFIG] -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/name: [POWERSTORE-CONFIG]/name: powerstore-config/' | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -
 ```
     {{< /hide >}}
+
     {{< hide id="3">}}
 __CSI Driver for PowerScale:__
 ```bash
@@ -276,10 +277,10 @@ kubectl get secret karavi-authorization-config proxy-server-root-certificate pro
 
     **Note:**
     - Optionally, you could provide your own configurations. A sample values.yaml file is located [here](https://github.com/dell/helm-charts/blob/main/charts/karavi-observability/values.yaml).
-    - The default `values.yaml` is configured to deploy the CSM for Observability Topology service on install.
-    - If CSM for Authorization is enabled for CSI PowerFlex, the `karaviMetricsPowerflex.authorization` parameters must be properly configured.
-    - If CSM for Authorization is enabled for CSI PowerScale, the `karaviMetricsPowerscale.authorization` parameters must be properly configured.
-    - If CSM for Authorization is enabled for CSI PowerMax, the `karaviMetricsPowerMax.authorization` parameters must be properly configured.
+  {{< hide id="0" >}}- The default `values.yaml` is configured to deploy the CSM for Observability Topology service on install.{{< /hide >}}
+  {{< hide id="5" >}}- If CSM for Authorization is enabled for CSI PowerFlex, the `karaviMetricsPowerflex.authorization` parameters must be properly configured.{{< /hide >}}
+  {{< hide id="6" >}}- If CSM for Authorization is enabled for CSI PowerScale, the `karaviMetricsPowerscale.authorization` parameters must be properly configured.{{< /hide >}}
+  {{< hide id="7" >}}- If CSM for Authorization is enabled for CSI PowerMax, the `karaviMetricsPowerMax.authorization` parameters must be properly configured.{{< /hide >}} 
 
     ```bash
     helm install -n install-namespace app-name karavi-observability

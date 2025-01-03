@@ -17,7 +17,7 @@ Install Helm 3 on the master node before you install CSI Driver for PowerMax.
    curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash 
    ```
 {{< accordion id="One" title="CSM Installation Wizard" markdown="true" >}}  
-{{<include  "content/docs/getting-started/installation/installationwizard/helm.md" >}}
+{{<includee  file="content/docs/getting-started/installation/installationwizard/helm.md" hideIds="2">}}
 {{< /accordion >}}
 
 <br>
@@ -26,7 +26,7 @@ Install Helm 3 on the master node before you install CSI Driver for PowerMax.
 ### Volume Snapshot Requirements (Optional)
   For detailed snapshot setup procedure, [click here.](docs/concepts/snapshots/#helm-optional-volume-snapshot-requirements)
       
-## Installation
+## Install Driver
 
 **Steps**
 

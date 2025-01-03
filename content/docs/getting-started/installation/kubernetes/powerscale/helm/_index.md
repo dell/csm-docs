@@ -18,7 +18,7 @@ Install Helm 3.0 on the master node before you install the CSI Driver for PowerS
   ```
 
 {{< accordion id="One" title="CSM Installation Wizard" >}}
-            {{<include  "content/docs/getting-started/installation/installationwizard/helm.md" >}}
+            {{<includee  file="content/docs/getting-started/installation/installationwizard/helm.md" hideIds="2">}}
 {{< /accordion >}}
 <br>
 {{< accordion id="Two" title="CSI Driver" markdown="true" >}}  
@@ -95,7 +95,7 @@ The CRDs for replication can be obtained and installed from the csm-replication 
 
 CRDs should be configured during replication prepare stage with repctl as described in [install-repctl](../../../../helm/modules/installation/replication/install-repctl)
 
-## Install the Driver
+## Install Driver
 
 **Steps**
 
