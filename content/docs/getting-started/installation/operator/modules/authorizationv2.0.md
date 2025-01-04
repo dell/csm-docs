@@ -138,9 +138,12 @@ Follow the instructions available in Authorization for [Configuring the Authoriz
 ### Configure a Dell CSI Driver with Container Storage Module Authorization
 
 Follow the instructions available in Authorization for
-- [Configuring PowerFlex with Authorization](../../../../../../../concepts/authorization/v2.x/configuration/powerflex).
-- [Configuring PowerMax with Authorization](../../../../../../../concepts/authorization/v2.x/configuration/powermax).
-- [Configuring PowerScale with Authorization](../../../../../../../concepts/authorization/v2.x/configuration/powermax).
+
+{{< hide id="1" >}}- [Configuring PowerFlex with Authorization](../../../../../../../concepts/authorization/v2.x/configuration/powerflex).{{< /hide >}}
+
+{{< hide id="2" >}}- [Configuring PowerMax with Authorization](../../../../../../../concepts/authorization/v2.x/configuration/powermax).{{< /hide >}}
+
+{{< hide id="3" >}}- [Configuring PowerScale with Authorization](../../../../../../../concepts/authorization/v2.x/configuration/powermax).{{< /hide >}}
 
 ## Vault Server Installation
 

@@ -11,7 +11,7 @@ weight: 2
 The Container Storage Modules Operator is a Kubernetes Operator, which can be used to install and manage the CSI Drivers and Container Storage Modules provided for various Dell storage platforms. This operator is available as a community operator for upstream Kubernetes and can be deployed using OperatorHub.io. The operator can be installed using OLM (Operator Lifecycle Manager) or manually.
 
 ## Supported CSM Components
-For the supported version [here](../../../supportmatrix/#operator-compatibility-matrix-1).
+For the supported version [here](../../../supportmatrix/#operator-compatibility-matrix).
 
 These CR will be used for new deployment or upgrade. In most case, it is recommended to use the latest available version.
 

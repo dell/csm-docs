@@ -15,29 +15,14 @@ The Container Storage Module Operator installs the Resiliency module for support
 When using the Container Storage Module for Resiliency module, it only acts on pods with a specific label matching the configuration. At startup, it logs the label key and value. Apply this label to the StatefulSet you want monitored
 
  ```yaml
- labelSelector: {map[podmon.dellemc.com/driver:csi-vxflexos]}
+ labelSelector: {map[podmon.dellemc.com/driver:csi-{{labels}}]}
  ```
 
  The above message indicates the key is: podmon.dellemc.com/driver and the label value is csi-vxflexos. To search for the pods that would be monitored, try this:
 
  ```bash
- kubectl get pods -A -l podmon.dellemc.com/driver=csi-vxflexos
+ kubectl get pods -A -l podmon.dellemc.com/driver=csi-{{labels}}
  ```
-
-Similarly, labels for for csi-powerscale, csi-unity, csi-powerstore and csi-powermax would be as:
-
- ```bash
- podmon.dellemc.com/driver:csi-isilon
-```
- ```bash
- podmon.dellemc.com/driver:csi-unity
-```
- ```bash
-  podmon.dellemc.com/driver:csi-powerstore
-```
- ```bash
- podmon.dellemc.com/driver:csi-powermax
-```
 
  User must follow all the prerequisites of the respective drivers before enabling this module.
 
@@ -51,11 +36,11 @@ To avoid application pods getting stuck in a Pending state, Container Storage Mo
 --> 
 Resiliency can be enabled by following sample file 
 
-a. **Minimal Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/main/samples/minimal-samples/{{Var}}_v2130.yam) for default settings.
+a. **Minimal Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/main/samples/minimal-samples/{{Var}}_v2130.yaml) for default settings.
 
 ```yaml
   - name: resiliency
-      enabled: false
+      enabled: true
 ```
 
 [OR]

@@ -12,7 +12,8 @@
       </style>
     {{ end -}}
   {{ end -}}
-{{ end -}} --> 
+{{ end -}} -->  
+
 <div class="td-toc">
   <nav id="TableOfContents"></nav>
 </div>
@@ -32,7 +33,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
     const tocList = document.createElement("ul");
 
-    headings.forEach((heading, index) => {
+    headings.forEach((heading, index) => { 
+      if (heading.closest(".hidden-content")) return;
+
       if (index === headings.length - 1 || heading.classList.contains("accordion-header")) return;
       
       let id = heading.id || heading.textContent.trim().toLowerCase().replace(/\s+/g, "-");

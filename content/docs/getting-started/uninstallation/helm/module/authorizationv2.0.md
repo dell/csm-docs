@@ -28,4 +28,4 @@ kubectl delete secret karavi-config-secret -n authorization
 
 ## Uninstalling the sidecar-proxy in the CSI Driver
 
-To uninstall the sidecar-proxy in the CSI Driver, [uninstall](../../../helm/#uninstall-a-csi-driver-installed-via-helm) the driver and [reinstall](../../../../../../installation/kubernetes)the driver using the original configuration secret.
+To uninstall the sidecar-proxy in the CSI Driver, [uninstall](../../../helm/#uninstall-a-csi-driver-installed-via-helm) the driver and [reinstall](../../../../../../installation/kubernetes/{{Var}}/helm/#install-driver)the driver using the original configuration secret.

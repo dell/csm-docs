@@ -10,10 +10,10 @@ weight: 4
 
 To perform an offline installation :
 
-1. **Build an offline bundle** 
-2. **Unpack the offline bundle** and prepare for installation.
-3. **Install the operator** using the unpacked files.
-4. **Install the driver** using the unpacked files.
+1. [**Build an offline bundle**](../offline#building-an-offline-bundle-1)
+2. [**Unpack the offline bundle**](../offline#unpacking-the-offline-bundle-and-preparing-for-installation-1) and prepare for installation.
+3. [**Install operator**](../offline#install-operator-1) using the unpacked files.
+4. [**Install Container Storage Module**](../offline#install-container-storage-module-1) using the unpacked files.
 
 >NOTE: Use the same tool (docker or podman) for packing and unpacking images.
 
@@ -190,14 +190,14 @@ This step needs to be performed on a Linux system with access to an image regist
    ```
 {{< /collapse >}}
 
-#### **Install the Operator:**
+#### **Install Operator:**
 
    - Run the `install.sh` script to install the operator: 
 
       ```bash
       bash scripts/install.sh
       ```
-#### **Install the CSM** 
+#### **Install Container Storage Module** 
 
 **Prepare for Installation:** Ensure required images are available and Operator configuration is updated.
 

@@ -8,8 +8,7 @@ weight: 3
 {{<include  "content/docs/getting-started/installation/offline/dependencies.md" >}}
 <br>
 {{< accordion id="One" title="Operator" markdown="true" >}} 
-{{<include  "content/docs/getting-started/installation/offline/operator.md" >}}
-
+{{<includee  file="content/docs/getting-started/installation/offline/operator.md" suffix="1">}}
 {{< /accordion >}}
 <br> 
 <strong>Github Repo </strong>[Unity XT](https://github.com/dell/csi-unity)

@@ -189,15 +189,15 @@ modprobe nvme_tcp
 
 ### Linux Multipathing Requirements
 
-1. Supported Multipathing 
-    - Dell PowerStore supports Linux multipathing (DM-MPIO) and NVMe native multipathing.  
-    - Configure Linux multipathing before installing the CSI Driver.
+  Supported Multipathing
+  - Dell PowerStore supports Linux multipathing (DM-MPIO) and NVMe native multipathing.  
+  - Configure Linux multipathing before installing the CSI Driver.
 
-{{< collapse id="1" title="NVMe" >}}For NVMe connectivity native NVMe multipathing is used.{{< /collapse >}}
+{{< collapse id="1" title="NVMe" >}}For NVMe connectivity native NVMe multipathing is used. Refer [Dell Technologies Host Connectivity](https://elabnavigator.dell.com/vault/pdf/Linux.pdf#page=209) Linux Guide for more details.{{< /collapse >}}
 
 {{< collapse id="2" title="FC/iSCSI" >}}
 
-2. Configuration steps: 
+1. Configuration steps: 
 
    - Install the Device Mapper Multipathing package on all nodes:
         -  `dnf install device-mapper-multipath`
@@ -208,7 +208,7 @@ modprobe nvme_tcp
     
 <br>
 
-The following is a sample multipath.conf file:
+The following is a **simple** sample multipath.conf file. For a detailed sample, refer [Dell Technologies Host Connectivity](https://elabnavigator.dell.com/vault/pdf/Linux.pdf#page=202) Linux Guide for more details.
 
 ```text
 defaults {

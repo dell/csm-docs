@@ -12,7 +12,7 @@ The Container Storage Module Operator is a Kubernetes Operator, which can be use
 
 ## Supported CSM Components
 
-For the supported version [here](../../../supportmatrix/operator).
+For the supported version [here](../../../supportmatrix/#operator-compatibility-matrix).
 
 These CR will be used for new deployment or upgrade. In most case, it is recommended to use the latest available version.
 

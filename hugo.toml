@@ -133,7 +133,7 @@ showLightDarkModeMenu = true
 enable = true
 # The responses that the user sees after clicking "yes" (the page was helpful) or "no" (the page was not helpful).
 yes = 'Thank you for your feedback!'
-no = 'Sorry to hear that. Please <a href="https://github.com/kubeflow/website/issues/new?title=[area/csm-docs]+{{.File.Path}}">tell us how we can improve</a>.'
+no = 'Sorry to hear that. Please <a href="https://github.com/dell/csm/issues/new?&labels=type%2Ffeedback%2Cneeds-triage%2Carea%2Fcsm-docs&title=%5Bcsm-docs%5D%20-%20+{{.File.Path}}">tell us how we can improve</a>.'
 
 # Adds a reading time to the top of each doc.
 # If you want this feature, but occasionally need to remove the Reading time from a single page, 
@@ -195,13 +195,18 @@ algolia_docsearch = false
   url = "http://10.247.96.33:1313/csm-docs/v3"
 
 [[menu.main]]
-    name = "Github"
-    weight = 50
+    name = ""
+    weight = 40
     url = "https://github.com/dell/csm" 
-    pre = "<i class='fa-brands fa-github'></i>"
+    pre = "<i class='fa-brands fa-github'></i>" 
+[[menu.main]]
+    name = " "
+    weight = 60
+    url = "https://github.com/" 
+    pre = "<i class='fa-regular fa-bullhorn'></i>"
 [[menu.main]]
     name = "Blog" 
-    weight = 60  
+    weight = 70  
     url="https://infohub.delltechnologies.com/en-us/t/blogs-99/" 
     pre = "<i class='fa-solid fa-square-rss'></i>"
 

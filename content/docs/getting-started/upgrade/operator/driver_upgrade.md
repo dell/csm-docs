@@ -39,3 +39,19 @@ Modify the installation as needed, typically updating driver versions, sidecars,
 {{< alert title="Warning" color="warning" >}}
 Starting with CSM 1.12, use images from [quay.io](https://quay.io/organization/dell). From CSM 1.14 (May 2025), editing the CSM object will fail if using images from [Docker Hub](https://hub.docker.com/r/dellemc/).
 {{< /alert >}}
+
+#### Supported modifications
+
+* Changing environment variable values for driver
+* Updating the image of the driver
+* Upgrading the driver version
+
+**NOTES:**
+1. If you are trying to upgrade the CSI driver from an older version, make sure to modify the _configVersion_ field if required.
+   ```yaml
+      driver:
+        configVersion: v2.13.0
+   ```
+{{< alert title="Warning" color="warning" >}}
+Don’t update the original CustomResource manifest file with `kubectl apply -f`. It can overwrite important annotations and cause failures.
+{{< /alert >}}

@@ -14,7 +14,7 @@ The Dell Container Storage Modules Operator is a Kubernetes Operator, which can 
 
 These CR will be used for new deployment or upgrade. In most case, it is recommended to use the latest available version.
 
-The full compatibility matrix of CSI/CSM versions for the CSM Operator is available [here](../../../supportmatrix/operator)
+The full compatibility matrix of CSI/CSM versions for the CSM Operator is available [here](../../../supportmatrix/#operator-compatibility-matrix)
 
 ## Installation
 

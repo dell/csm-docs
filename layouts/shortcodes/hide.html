@@ -1,13 +1,14 @@
 {{- $hide := .Get "hide" | default "false" -}}
 {{- $inline := .Get "inline" | default "false" -}}
 {{- $id := .Get "id" -}}
+{{- $customClass := .Get "class" | default "" -}}
 {{- if eq $hide "true" -}}
 <style>
 .hidden-content {
   display: none;
 }
 </style>
-<span id="{{ $id }}" class="hidden-content">
+<span id="{{ $id }}" class="hidden-content {{ $customClass }}">
   {{ .Inner | markdownify }}
 </span>
 {{- else -}}
@@ -19,7 +20,7 @@
   display: inline;
 }
 </style>
-<span id="{{ $id }}" class="{{ if eq $inline "true" }}inline-content{{ else }}visible-content{{ end }}">
+<span id="{{ $id }}" class="{{ if eq $inline "true" }}inline-content{{ else }}visible-content{{ end }} {{ $customClass }}">
   {{ .Inner | markdownify }}
 </span>
 {{- end -}}

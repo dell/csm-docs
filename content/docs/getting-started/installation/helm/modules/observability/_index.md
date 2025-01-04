@@ -273,32 +273,78 @@ Below are the steps to deploy a new Grafana instance into your Kubernetes cluste
 
 Once Grafana is properly configured, you can import the pre-built observability dashboards. Log into Grafana and click the + icon in the side menu. Then click Import. From here you can upload the JSON files or paste the JSON text directly into the text area.  Below are the locations of the dashboards that can be imported:
 
+{{< hide class="1" >}} 
 | Dashboard                                                                                                                                                                      | Description                                                                                                                                                            |
 |--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | [PowerFlex: I/O Performance by Kubernetes Node](https://github.com/dell/karavi-observability/blob/main/grafana/dashboards/powerflex/sdc_io_metrics.json)                       | Provides visibility into the I/O performance metrics (IOPS, bandwidth, latency) by Kubernetes node                                                                     |
 | [PowerFlex: I/O Performance by Provisioned Volume](https://github.com/dell/karavi-observability/blob/main/grafana/dashboards/powerflex/volume_io_metrics.json)                 | Provides visibility into the I/O performance metrics (IOPS, bandwidth, latency) by volume                                                                              |
-| [PowerFlex: Storage Pool Consumption By CSI Driver](https://github.com/dell/karavi-observability/blob/main/grafana/dashboards/powerflex/storage_consumption.json)              | Provides visibility into the total, used and available capacity for a storage class and associated underlying storage construct                                        |
+| [PowerFlex: Storage Pool Consumption By CSI Driver](https://github.com/dell/karavi-observability/blob/main/grafana/dashboards/powerflex/storage_consumption.json)              | Provides visibility into the total, used and available capacity for a storage class and associated underlying storage construct                                        |  
+| [CSI Driver Provisioned Volume Topology](https://github.com/dell/karavi-observability/blob/main/grafana/dashboards/topology/topology.json)                                     | Provides visibility into Dell CSI (Container Storage Interface) driver provisioned volume characteristics in Kubernetes correlated with volumes on the storage system. |
+{{< /hide >}}  
+
+
+{{< hide class="2" >}} 
+| Dashboard                                                                                                                                                                      | Description                                                                                                                                                            |
+|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | [PowerStore: I/O Performance by Provisioned Volume](https://github.com/dell/karavi-observability/blob/main/grafana/dashboards/powerstore/volume_io_metrics.json)               | Provides visibility into the I/O performance metrics (IOPS, bandwidth, latency) by volume                                                                              |
 | [PowerStore: I/O Performance by File System](https://github.com/dell/karavi-observability/blob/main/grafana/dashboards/powerstore/filesystem_io_metrics.json)                  | Provides visibility into the I/O performance metrics (IOPS, bandwidth, latency) by filesystem                                                                          |
-| [PowerStore: Array and Storage Class Consumption By CSI Driver](https://github.com/dell/karavi-observability/blob/main/grafana/dashboards/powerstore/storage_consumption.json) | Provides visibility into the total, used and available capacity for a storage class and associated underlying storage construct                                        |
+| [PowerStore: Array and Storage Class Consumption By CSI Driver](https://github.com/dell/karavi-observability/blob/main/grafana/dashboards/powerstore/storage_consumption.json) | Provides visibility into the total, used and available capacity for a storage class and associated underlying storage construct                                        |  
+| [CSI Driver Provisioned Volume Topology](https://github.com/dell/karavi-observability/blob/main/grafana/dashboards/topology/topology.json)                                     | Provides visibility into Dell CSI (Container Storage Interface) driver provisioned volume characteristics in Kubernetes correlated with volumes on the storage system. |
+{{< /hide >}} 
+
+{{< hide class="3" >}}
+| Dashboard                                                                                                                                                                      | Description                                                                                                                                                            |
+|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | [PowerScale: I/O Performance by Cluster](https://github.com/dell/karavi-observability/blob/main/grafana/dashboards/powerscale/cluster_io_metrics.json)                         | Provides visibility into the I/O performance metrics (IOPS, bandwidth) by cluster                                                                                      |
 | [PowerScale: Capacity by Cluster](https://github.com/dell/karavi-observability/blob/main/grafana/dashboards/powerscale/cluster_capacity.json)                                  | Provides visibility into the total, used, available capacity and directory quota capacity by cluster                                                                   |
-| [PowerScale: Capacity by Quota](https://github.com/dell/karavi-observability/blob/main/grafana/dashboards/powerscale/volume_capacity.json)                                     | Provides visibility into the subscribed, remaining capacity and usage by quota                                                                                         |
+| [PowerScale: Capacity by Quota](https://github.com/dell/karavi-observability/blob/main/grafana/dashboards/powerscale/volume_capacity.json)                                     | Provides visibility into the subscribed, remaining capacity and usage by quota                                                                                         |  
+| [CSI Driver Provisioned Volume Topology](https://github.com/dell/karavi-observability/blob/main/grafana/dashboards/topology/topology.json)                                     | Provides visibility into Dell CSI (Container Storage Interface) driver provisioned volume characteristics in Kubernetes correlated with volumes on the storage system. | 
+{{< /hide >}} 
+
+{{< hide class="4" >}} 
+| Dashboard                                                                                                                                                                      | Description                                                                                                                                                            |
+|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | [PowerMax: PowerMax Capacity](https://github.com/dell/karavi-observability/blob/main/grafana/dashboards/powermax/storage_consumption.json)                                    | Provides visibility into the subscribed, used, available capacity for a storage class and associated underlying storage construct                                      | 
-| [PowerMax: PowerMax Performance](https://github.com/dell/karavi-observability/blob/main/grafana/dashboards/powermax/performance.json)                                         | Provides visibility into the I/O performance metrics (IOPS, bandwidth) by storage group and volume                                                                     |
-| [CSI Driver Provisioned Volume Topology](https://github.com/dell/karavi-observability/blob/main/grafana/dashboards/topology/topology.json)                                     | Provides visibility into Dell CSI (Container Storage Interface) driver provisioned volume characteristics in Kubernetes correlated with volumes on the storage system. |
+| [PowerMax: PowerMax Performance](https://github.com/dell/karavi-observability/blob/main/grafana/dashboards/powermax/performance.json)                                         | Provides visibility into the I/O performance metrics (IOPS, bandwidth) by storage group and volume                                                                     |  
+| [CSI Driver Provisioned Volume Topology](https://github.com/dell/karavi-observability/blob/main/grafana/dashboards/topology/topology.json)                                     | Provides visibility into Dell CSI (Container Storage Interface) driver provisioned volume characteristics in Kubernetes correlated with volumes on the storage system. | 
+{{< /hide >}} 
+
+
 
 ## Dynamic Configuration
 
 Some parameters can be configured/updated during runtime without restarting the Container Storage Module for Observability services. These parameters will be stored in ConfigMaps that can be updated on the Kubernetes cluster. This will automatically change the settings on the services.  
 
+{{< hide class="1" >}}
 | ConfigMap                           | Observability Service     | Parameters                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
 |-------------------------------------|---------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| karavi-metrics-powerflex-configmap  | karavi-metrics-powerflex  | <ul><li>COLLECTOR_ADDR</li><li>PROVISIONER_NAMES</li><li>POWERFLEX_SDC_METRICS_ENABLED</li><li>POWERFLEX_SDC_IO_POLL_FREQUENCY</li><li>POWERFLEX_VOLUME_IO_POLL_FREQUENCY</li><li>POWERFLEX_VOLUME_METRICS_ENABLED</li><li>POWERFLEX_STORAGE_POOL_METRICS_ENABLED</li><li>POWERFLEX_STORAGE_POOL_POLL_FREQUENCY</li><li>POWERFLEX_MAX_CONCURRENT_QUERIES</li><li>LOG_LEVEL</li><li>LOG_FORMAT</li></ul>                                                                                                                      |
-| karavi-metrics-powerstore-configmap | karavi-metrics-powerstore | <ul><li>COLLECTOR_ADDR</li><li>PROVISIONER_NAMES</li><li>POWERSTORE_VOLUME_METRICS_ENABLED</li><li>POWERSTORE_VOLUME_IO_POLL_FREQUENCY</li><li>POWERSTORE_SPACE_POLL_FREQUENCY</li><li>POWERSTORE_ARRAY_POLL_FREQUENCY</li><li>POWERSTORE_FILE_SYSTEM_POLL_FREQUENCY</li><li>POWERSTORE_MAX_CONCURRENT_QUERIES</li><li>LOG_LEVEL</li><li>LOG_FORMAT</li><li>ZIPKIN_URI</li><li>ZIPKIN_SERVICE_NAME</li><li>ZIPKIN_PROBABILITY</li></ul>                                                                                      |
-| karavi-metrics-powerscale-configmap | karavi-metrics-powerscale | <ul><li>COLLECTOR_ADDR</li> <li>PROVISIONER_NAMES</li> <li>POWERSCALE_MAX_CONCURRENT_QUERIES</li> <li>POWERSCALE_CAPACITY_METRICS_ENABLED</li> <li>POWERSCALE_PERFORMANCE_METRICS_ENABLED</li> <li>POWERSCALE_CLUSTER_CAPACITY_POLL_FREQUENCY</li> <li>POWERSCALE_CLUSTER_PERFORMANCE_POLL_FREQUENCY</li> <li>POWERSCALE_QUOTA_CAPACITY_POLL_FREQUENCY</li> <li>POWERSCALE_ISICLIENT_INSECURE</li> <li>POWERSCALE_ISICLIENT_AUTH_TYPE</li> <li>POWERSCALE_ISICLIENT_VERBOSE</li> <li>LOG_LEVEL</li> <li>LOG_FORMAT</li></ul> |
-| karavi-metrics-powermax-configmap   | karavi-metrics-powermax   | <ul><li>COLLECTOR_ADDR</li> <li>PROVISIONER_NAMES</li> <li>POWERMAX_MAX_CONCURRENT_QUERIES</li> <li>POWERMAX_CAPACITY_METRICS_ENABLED</li> <li>POWERMAX_PERFORMANCE_METRICS_ENABLED</li> <li>POWERMAX_CAPACITY_POLL_FREQUENCY</li> <li>POWERMAX_PERFORMANCE_POLL_FREQUENCY</li> <li>LOG_LEVEL</li> <li>LOG_FORMAT</li></ul>                                                                                                                                                                                                  |
+| karavi-metrics-powerflex-configmap  | karavi-metrics-powerflex  | <ul><li>COLLECTOR_ADDR</li><li>PROVISIONER_NAMES</li><li>POWERFLEX_SDC_METRICS_ENABLED</li><li>POWERFLEX_SDC_IO_POLL_FREQUENCY</li><li>POWERFLEX_VOLUME_IO_POLL_FREQUENCY</li><li>POWERFLEX_VOLUME_METRICS_ENABLED</li><li>POWERFLEX_STORAGE_POOL_METRICS_ENABLED</li><li>POWERFLEX_STORAGE_POOL_POLL_FREQUENCY</li><li>POWERFLEX_MAX_CONCURRENT_QUERIES</li><li>LOG_LEVEL</li><li>LOG_FORMAT</li></ul>                                                                                                                      |  
 | karavi-topology-configmap           | karavi-topology           | <ul><li>PROVISIONER_NAMES</li><li>LOG_LEVEL</li><li>LOG_FORMAT</li><li>ZIPKIN_URI</li><li>ZIPKIN_SERVICE_NAME</li><li>ZIPKIN_PROBABILITY</li></ul>                                                                                                                                                                                                                                                                                                                                                                           |
+
+{{< /hide >}}  
+
+{{< hide class="2" >}} 
+| ConfigMap                           | Observability Service     | Parameters                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+|-------------------------------------|---------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| karavi-metrics-powerstore-configmap | karavi-metrics-powerstore | <ul><li>COLLECTOR_ADDR</li><li>PROVISIONER_NAMES</li><li>POWERSTORE_VOLUME_METRICS_ENABLED</li><li>POWERSTORE_VOLUME_IO_POLL_FREQUENCY</li><li>POWERSTORE_SPACE_POLL_FREQUENCY</li><li>POWERSTORE_ARRAY_POLL_FREQUENCY</li><li>POWERSTORE_FILE_SYSTEM_POLL_FREQUENCY</li><li>POWERSTORE_MAX_CONCURRENT_QUERIES</li><li>LOG_LEVEL</li><li>LOG_FORMAT</li><li>ZIPKIN_URI</li><li>ZIPKIN_SERVICE_NAME</li><li>ZIPKIN_PROBABILITY</li></ul>                                                                                      | 
+| karavi-topology-configmap           | karavi-topology           | <ul><li>PROVISIONER_NAMES</li><li>LOG_LEVEL</li><li>LOG_FORMAT</li><li>ZIPKIN_URI</li><li>ZIPKIN_SERVICE_NAME</li><li>ZIPKIN_PROBABILITY</li></ul>                                                                                                                                                                                                                                                                                                                                                                           | 
+{{< /hide >}}
+
+{{< hide class="3" >}}
+| ConfigMap                           | Observability Service     | Parameters                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+|-------------------------------------|---------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| karavi-metrics-powerscale-configmap | karavi-metrics-powerscale | <ul><li>COLLECTOR_ADDR</li> <li>PROVISIONER_NAMES</li> <li>POWERSCALE_MAX_CONCURRENT_QUERIES</li> <li>POWERSCALE_CAPACITY_METRICS_ENABLED</li> <li>POWERSCALE_PERFORMANCE_METRICS_ENABLED</li> <li>POWERSCALE_CLUSTER_CAPACITY_POLL_FREQUENCY</li> <li>POWERSCALE_CLUSTER_PERFORMANCE_POLL_FREQUENCY</li> <li>POWERSCALE_QUOTA_CAPACITY_POLL_FREQUENCY</li> <li>POWERSCALE_ISICLIENT_INSECURE</li> <li>POWERSCALE_ISICLIENT_AUTH_TYPE</li> <li>POWERSCALE_ISICLIENT_VERBOSE</li> <li>LOG_LEVEL</li> <li>LOG_FORMAT</li></ul> |  
+| karavi-topology-configmap           | karavi-topology           | <ul><li>PROVISIONER_NAMES</li><li>LOG_LEVEL</li><li>LOG_FORMAT</li><li>ZIPKIN_URI</li><li>ZIPKIN_SERVICE_NAME</li><li>ZIPKIN_PROBABILITY</li></ul>     
+{{< /hide >}} 
+
+{{< hide class="4" >}} 
+| ConfigMap                           | Observability Service     | Parameters                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+|-------------------------------------|---------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| karavi-metrics-powermax-configmap   | karavi-metrics-powermax   | <ul><li>COLLECTOR_ADDR</li> <li>PROVISIONER_NAMES</li> <li>POWERMAX_MAX_CONCURRENT_QUERIES</li> <li>POWERMAX_CAPACITY_METRICS_ENABLED</li> <li>POWERMAX_PERFORMANCE_METRICS_ENABLED</li> <li>POWERMAX_CAPACITY_POLL_FREQUENCY</li> <li>POWERMAX_PERFORMANCE_POLL_FREQUENCY</li> <li>LOG_LEVEL</li> <li>LOG_FORMAT</li></ul>     |                                                                                                      
+| karavi-topology-configmap           | karavi-topology           | <ul><li>PROVISIONER_NAMES</li><li>LOG_LEVEL</li><li>LOG_FORMAT</li><li>ZIPKIN_URI</li><li>ZIPKIN_SERVICE_NAME</li><li>ZIPKIN_PROBABILITY</li></ul>                                                                                                                                                                                                                                                                                                                                                      | 
+{{< /hide >}} 
+
+
 
 To update any of these settings, run the following command on the Kubernetes cluster then save the updated ConfigMap data.
 
@@ -366,7 +412,7 @@ Container Storage Module Observability is instrumented to report trace data to [
 
 2. Add the Zipkin URI to the Container Storage Module Observability ConfigMaps. Based on the manifest above, Zipkin will be running on port 9411.
 
-    __Note__: Zipkin tracing is currently not supported for the collection of PowerFlex metrics. 
+  {{< hide class="1" >}}  __Note__: Zipkin tracing is currently not supported for the collection of PowerFlex metrics. {{< /hide >}}
 
     Update the ConfigMaps from the [table above](#dynamic-configuration). Here is an example updating the karavi-topology-configmap based on the deployment manifest above.
    
@@ -394,7 +440,7 @@ If storage system credentials are updated in the CSI Driver, update Container St
 All storage system requests by Container Storage Module Observability will go through the Authorization module. Perform the following steps:
 
 #### Update the Authorization Module Token
-
+{{< hide class="1" >}}
 ##### CSI Driver for PowerFlex
 
 1. Delete the current `proxy-authz-tokens` Secret from the CSM namespace.
@@ -406,7 +452,9 @@ All storage system requests by Container Storage Module Observability will go th
     ```console
     kubectl get secret proxy-authz-tokens -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -
     ```
+{{< /hide >}} 
 
+{{< hide class="3" >}}
 ##### CSI Driver for PowerScale
 
 1. Delete the current `isilon-proxy-authz-tokens` Secret from the CSM namespace.
@@ -418,7 +466,9 @@ All storage system requests by Container Storage Module Observability will go th
     ```console
     kubectl get secret proxy-authz-tokens -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/'| sed 's/name: proxy-authz-tokens/name: isilon-proxy-authz-tokens/' | kubectl create -f
     ```
+{{< /hide >}} 
 
+{{< hide class="4" >}}
 ##### CSI Driver for PowerMax
 
 1. Delete the current `powermax-proxy-authz-tokens` Secret from the CSM namespace.
@@ -430,10 +480,11 @@ All storage system requests by Container Storage Module Observability will go th
     ```console
     kubectl get secret proxy-authz-tokens -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/'| sed 's/name: proxy-authz-tokens/name: powermax-proxy-authz-tokens/' | kubectl create -f
     ```
-   
+{{< /hide >}}
 #### Update Storage Systems
 If the list of storage systems managed by a Dell CSI Driver have changed, the following steps can be performed to update Container Storage Module Observability to reference the updated systems:
 
+{{< hide class="1">}}
 ##### CSI Driver for PowerFlex
 
 1. Delete the current `karavi-authorization-config` Secret from the CSM namespace.
@@ -445,7 +496,9 @@ If the list of storage systems managed by a Dell CSI Driver have changed, the fo
     ```console
     kubectl get secret karavi-authorization-config -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -
     ```
+{{< /hide >}} 
 
+{{< hide class="3">}}
 ##### CSI Driver for PowerScale
 
 1. Delete the current `isilon-karavi-authorization-config` Secret from the CSM namespace.
@@ -457,7 +510,9 @@ If the list of storage systems managed by a Dell CSI Driver have changed, the fo
     ```console
     kubectl get secret karavi-authorization-config -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | sed 's/name: karavi-authorization-config/name: isilon-karavi-authorization-config/' | kubectl create -f
     ```
+{{< /hide >}} 
 
+{{< hide class="4">}}
 ##### CSI Driver for PowerMax
 
 1. Delete the current `powermax-karavi-authorization-config` secret from the CSM namespace.
@@ -469,11 +524,13 @@ If the list of storage systems managed by a Dell CSI Driver have changed, the fo
    ```console
    kubectl get secret karavi-authorization-config proxy-server-root-certificate -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | sed 's/name: karavi-authorization-config/name: powermax-karavi-authorization-config/' | kubectl create -f - 
    ```
+{{< /hide >}} 
 
 ### When Container Storage Module for Observability does not use the Authorization module
 
 In this case all storage system requests made by Container Storage Module Observability will not be routed through the Authorization module. The following must be performed:
 
+{{< hide class="1">}}
 #### CSI Driver for PowerFlex
 
 1. Delete the current `vxflexos-config` Secret from the CSM namespace.
@@ -490,7 +547,9 @@ In this case all storage system requests made by Container Storage Module Observ
     ```console
     kubectl get secret [VXFLEXOS-CONFIG] -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/name: [VXFLEXOS-CONFIG]/name: vxflexos-config/' | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -
     ```
+{{< /hide >}} 
 
+{{< hide  class="2" >}}
 #### CSI Driver for PowerStore
 
 1. Delete the current `powerstore-config` Secret from the CSM namespace.
@@ -507,7 +566,9 @@ In this case all storage system requests made by Container Storage Module Observ
     ```console
     kubectl get secret [POWERSTORE-CONFIG] -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/name: [POWERSTORE-CONFIG]/name: powerstore-config/' | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -
     ```
+{{< /hide >}} 
 
+{{< hide  class="3">}}
 #### CSI Driver for PowerScale
 
 1. Delete the current `isilon-creds` Secret from the CSM namespace.
@@ -524,7 +585,9 @@ In this case all storage system requests made by Container Storage Module Observ
     ```console
     kubectl get secret [ISILON-CREDS] -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/name: [ISILON-CREDS]/name: isilon-creds/' | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -
     ```
+{{< /hide >}} 
 
+{{< hide class="4">}}
 #### CSI Driver for PowerMax
 
 1. Delete the secrets in `powermax-reverseproxy-config` configmap from the CSM namespace. 
@@ -567,3 +630,4 @@ In this case all storage system requests made by Container Storage Module Observ
        kubectl get secret $secret -n [CSI_DRIVER_NAMESPACE] -o yaml | sed "s/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/" | kubectl create -f -
     done
     ```
+{{< /hide >}}

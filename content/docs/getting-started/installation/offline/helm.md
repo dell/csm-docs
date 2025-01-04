@@ -10,9 +10,9 @@ weight: 4
 
 To perform an offline installation :
 
-1. **Build an offline bundle** 
-2. **Unpack the offline bundle** and prepare for installation.
-3. **Install the driver** using the unpacked files.
+1. [**Build an offline bundle**](../offline#building-an-offline-bundle-2) 
+2. [**Unpack the offline bundle**](../offline#unpacking-the-offline-bundle-and-preparing-for-installation-2) and prepare for installation.
+3. [**Install Container Storage Module**](../offline#install-container-storage-module-2) using the unpacked files.
 
 >NOTE: Use the same tool (docker or podman) for packing and unpacking images.
 
@@ -163,7 +163,8 @@ cd csi-<driver>-bundle-2.12.0/dell-csi-helm-installer
    - Push the newly tagged images to the registry
    - Modify the Helm charts to refer to the newly tagged/pushed images
 
-#### **Install the CSM**
+#### **Install Container Storage Module**
 
-**Prepare for Installation:**  Ensure required images are available and Helm Charts configuration is updated.
+**Prepare for Installation:**  Ensure required images are available and Helm Charts configuration is updated. 
+
 **Follow Installation Procedure:** Proceed with the usual installation steps as documented for [Helm](docs/getting-started/installation/helm).

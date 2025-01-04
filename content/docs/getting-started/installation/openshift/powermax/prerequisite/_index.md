@@ -194,7 +194,7 @@ Choose your multipathing software between [Multipath](#linux-multipathing-requir
 ### Linux Multipathing Requirements
 
  Configure Linux multipathing before installing the CSI Driver.
-1. Supported Multipathing 
+ Supported Multipathing 
     - Dell PowerMax supports Linux multipathing (DM-MPIO) and NVMe native multipathing.  
     - Configure Linux multipathing before installing the CSI Driver.
 
@@ -202,11 +202,11 @@ Choose your multipathing software between [Multipath](#linux-multipathing-requir
 {{< /markdownify >}}
 
 
-{{< collapse id="1" title="NVMe" >}}For NVMe connectivity native NVMe multipathing is used.{{< /collapse >}}
+{{< collapse id="1" title="NVMe" >}} For NVMe connectivity native NVMe multipathing is used. Refer [Dell Technologies Host Connectivity](https://elabnavigator.dell.com/vault/pdf/Linux.pdf#page=209) Linux Guide for more details.{{< /collapse >}}
 <br>
 {{< collapse id="2" title="FC/iSCSI" >}}
 
-2. Configuration steps: 
+1. Configuration steps: 
 
    - Install the Device Mapper Multipathing package on all nodes:
         -  `dnf install device-mapper-multipath`
@@ -216,7 +216,7 @@ Choose your multipathing software between [Multipath](#linux-multipathing-requir
     
 <br>
 
-3. Best Practices 
+2. Best Practices 
 
     Use these options in multipath.conf for efficient path detection:
 
