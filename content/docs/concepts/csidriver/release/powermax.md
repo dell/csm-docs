@@ -21,6 +21,7 @@ Starting from CSI v2.4.0, only Unisphere 10.0 REST endpoints are supported. It i
 
 
 
+
 ### New Features/Changes
 
 - [#1410 - [FEATURE]: Adding support for PowerMax Magnolia](https://github.com/dell/csm/issues/1410)

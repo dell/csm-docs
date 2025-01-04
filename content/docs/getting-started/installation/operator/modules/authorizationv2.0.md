@@ -143,7 +143,7 @@ Follow the instructions available in Authorization for
 
 {{< hide id="2" >}}- [Configuring PowerMax with Authorization](../../../../../../../concepts/authorization/v2.x/configuration/powermax).{{< /hide >}}
 
-{{< hide id="3" >}}- [Configuring PowerScale with Authorization](../../../../../../../concepts/authorization/v2.x/configuration/powermax).{{< /hide >}}
+{{< hide id="3" >}}- [Configuring PowerScale with Authorization](../../../../../../../concepts/authorization/v2.x/configuration/powerscale).{{< /hide >}}
 
 ## Vault Server Installation
 
