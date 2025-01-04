@@ -17,11 +17,50 @@ The Container Storage Module Observability module for supported Dell CSI Drivers
   ```bash
   kubectl create namespace karavi
   ```
-
-- Enable Observability module and components in [sample manifests](https://github.com/dell/csm-operator/tree/main/samples). If cert-manager has already been installed, don't enable it. 
 - Enable Observability module using the below configuration 
 
-  a. **Default Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/main/samples/minimal-samples/{{Var}}_v2130.yaml) for default settings.  If cert-manager has already been installed, don’t enable it.
+  a. **Default Configuration:** 
+
+  ```yaml
+      - name: observability
+      enabled: false
+      components:
+        - name: topology
+          enabled: true
+        - name: otel-collector
+          enabled: true
+        - name: cert-manager
+          enabled: false
+        - name: metrics-powerflex
+          enabled: true
+  ```
+    ```yaml
+      - name: observability
+      enabled: false
+      components:
+        - name: topology
+          enabled: true
+        - name: otel-collector
+          enabled: true
+        - name: cert-manager
+          enabled: false
+        - name: metrics-powermax
+          enabled: true
+  ```
+  ```yaml
+      - name: observability
+      enabled: false
+      components:
+        - name: topology
+          enabled: true
+        - name: otel-collector
+          enabled: true
+        - name: cert-manager
+          enabled: false
+        - name: metrics-powerscale
+          enabled: true
+  ```
+  Use the [sample file](https://github.com/dell/csm-operator/blob/main/samples/minimal-samples/{{Var}}_v2130.yaml) for default settings.  If cert-manager has already been installed, don’t enable it.
 
     [OR]                                                
 
@@ -31,30 +70,16 @@ The Container Storage Module Observability module for supported Dell CSI Drivers
 - Observability will deploy with self-signed certificates by default. If you want to have custom certificates created instead, please generate certificates and private keys, encode them in base64, and insert them into the sample file as shown below for whichever components you are enabling:
 
 ```yaml
-    # observability: allows to configure observability
     - name: observability
 ...
       components:
         - name: topology
 ...
-          # certificate: base64-encoded certificate for cert/private-key pair -- add cert here to use custom certificates
-          #  for self-signed certs, leave empty string
-          # Allowed values: string
           certificate: "<INSERT BASE64-ENCODED TOPOLOGY CERTIFICATE HERE>"
-          # privateKey: base64-encoded private key for cert/private-key pair -- add private key here to use custom certificates
-          #  for self-signed certs, leave empty string
-          # Allowed values: string
           privateKey: "<INSERT BASE64-ENCODED TOPOLOGY PRIVATE KEY HERE>"
 ...
-        - name: otel-collector
-...
-          # certificate: base64-encoded certificate for cert/private-key pair -- add cert here to use custom certificates
-          #  for self-signed certs, leave empty string
-          # Allowed values: string
+        - name: otel-collector...
           certificate: "<INSERT BASE64-ENCODED OTEL-COLLECTOR CERTIFICATE HERE>"
-          # privateKey: base64-encoded private key for cert/private-key pair -- add private key here to use custom certificates
-          #  for self-signed certs, leave empty string
-          # Allowed values: string
           privateKey: "<INSERT BASE64-ENCODED OTEL-COLLECTOR PRIVATE KEY HERE>"
 ...
 ```

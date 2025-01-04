@@ -8,90 +8,162 @@ weight: 4
 
 ## Workflow
 
-To perform an offline installation of a driver or the Operator, the following steps should be performed:
-1. Build an offline bundle
-2. Unpacking the offline bundle created in Step 1 and preparing for installation
-3. Perform either a Helm installation or Operator installation using the files obtained after unpacking in Step 2 
+To perform an offline installation :
 
-**NOTE:** It is recommended to use the same build tool for packing and unpacking of images (either docker or podman).
+1. **Build an offline bundle** 
+2. **Unpack the offline bundle** and prepare for installation.
+3. **Install the driver** using the unpacked files.
 
-### Building an offline bundle
+>NOTE: Use the same tool (docker or podman) for packing and unpacking images.
+
+#### **Building an offline bundle**
 >NOTE: Login to the `registry.redhat.io` registry using RedHat credentials before you proceed with offline bundle creation.
 
-This needs to be performed on a Linux system with access to the Internet as a git repo will need to be cloned, and container images pulled from public registries.
-
-To build an offline bundle, the following steps are needed:
-1. Perform a `git clone` of the desired repository. For a helm-based install, the specific driver repo should be cloned. For an Operator based deployment, the Dell CSM Operator repo should be cloned
-2. Run the `csi-offline-bundle.sh` script with an argument of `-c` in order to create an offline bundle
-  - For Helm installs, the `csi-offline-bundle.sh` script will be found in the `dell-csi-helm-installer` directory
-  - For Operator installs, the `csm-offline-bundle.sh` script will be found in the `scripts` directory
-
-The script will perform the following steps:
-  - Determine required images by parsing either the driver Helm charts (if run from a cloned CSI Driver git repository) or the Dell CSM Operator configuration files (if run from a clone of the Dell CSM Operator repository)
-  - Perform an image `pull` of each image required
-  - Save all required images to a file by running `docker save` or `podman save`
-  - Build a `tar.gz` file containing the images as well as files required to installer the driver and/or Operator
-
-The resulting offline bundle file can be copied to another machine, if necessary, to gain access to the desired image registry.
-
-The following is an example of how to build an offline bundle for the Dell CSM Operator:
+- On a Linux system with Internet access, clone the desired repository:
+  - For Helm installs, clone the specific driver repo.
+- Run the `csi-offline-bundle.sh` script with the `-c` option to create the bundle: 
 ```bash
-git clone -b <version tag> https://github.com/dell/csm-operator.git
+git clone -b <version tag> https://github.com/dell/csi-<driver>.git
+cd csi-<driver>/dell-csi-helm-installer
+bash csi-offline-bundle.sh -c
+``` 
+{{< collapse id="1" title="Output">}}
+```bash 
+*
+* Building image manifest file
+
+   Processing files in /root/csi-<driver>/helm-charts/charts/csi-<driver>
+
+*
+* Pulling and saving container images
+
+   quay.io/dell/container-storage-modules/csi-metadata-retriever:v1.9.0
+   quay.io/dell/container-storage-modules/csi-powerstore:v2.12.0
+   quay.io/dell/container-storage-modules/csi-volumegroup-snapshotter:v1.7.0
+   quay.io/dell/container-storage-modules/dell-csi-replicator:v1.10.0
+   quay.io/dell/container-storage-modules/podmon:v1.11.0
+   registry.k8s.io/sig-storage/csi-attacher:v4.7.0
+   registry.k8s.io/sig-storage/csi-external-health-monitor-controller:v0.13.0
+   registry.k8s.io/sig-storage/csi-node-driver-registrar:v2.12.0
+   registry.k8s.io/sig-storage/csi-provisioner:v5.1.0
+   registry.k8s.io/sig-storage/csi-resizer:v1.12.0
+   registry.k8s.io/sig-storage/csi-snapshotter:v8.1.0
+
+*
+* Copying necessary files
+
+ /root/csi-<driver>/helm-charts/charts/csi-powerstore
+ /root/csi-<driver>/dell-csi-helm-installer
+ /root/csi-<driver>/README.md
+ /root/csi-<driver>/LICENSE
+
+*
+* Compressing release
+
+csi-<driver>-bundle-2.12.0/
+csi-<driver>-bundle-2.12.0/helm-charts/
+csi-<driver>-bundle-2.12.0/helm-charts/charts/
+csi-<driver>-bundle-2.12.0/helm-charts/charts/csi-<driver>/
+csi-<driver>-bundle-2.12.0/helm-charts/charts/csi-<driver>/Chart.yaml
+csi-<driver>-bundle-2.12.0/helm-charts/charts/csi-<driver>/values.yaml
+csi-<driver>-bundle-2.12.0/helm-charts/charts/csi-<driver>/templates/
+csi-<driver>-bundle-2.12.0/helm-charts/charts/csi-<driver>/templates/node.yaml
+csi-<driver>-bundle-2.12.0/helm-charts/charts/csi-<driver>/templates/_helpers.tpl
+csi-<driver>-bundle-2.12.0/helm-charts/charts/csi-<driver>/templates/csidriver.yaml
+csi-<driver>-bundle-2.12.0/helm-charts/charts/csi-<driver>/templates/driver-config-params.yaml
+csi-<driver>-bundle-2.12.0/helm-charts/charts/csi-<driver>/templates/controller.yaml
+csi-<driver>-bundle-2.12.0/LICENSE
+csi-<driver>-bundle-2.12.0/README.md
+csi-<driver>-bundle-2.12.0/dell-csi-helm-installer/
+csi-<driver>-bundle-2.12.0/dell-csi-helm-installer/common.sh
+csi-<driver>-bundle-2.12.0/dell-csi-helm-installer/verify-csi-powerstore.sh
+csi-<driver>-bundle-2.12.0/dell-csi-helm-installer/images.tar/
+csi-<driver>-bundle-2.12.0/dell-csi-helm-installer/images.tar/registry.k8s.io-sig-storage-csi-resizer-v1.12.0.tar
+csi-<driver>-bundle-2.12.0/dell-csi-helm-installer/images.tar/quay.io-dell-container-storage-modules-csi-metadata-retriever-v1.9.0.tar
+csi-<driver>-bundle-2.12.0/dell-csi-helm-installer/images.tar/registry.k8s.io-sig-storage-csi-attacher-v4.7.0.tar
+csi-<driver>-bundle-2.12.0/dell-csi-helm-installer/images.tar/quay.io-dell-container-storage-modules-csi-powerstore-v2.12.0.tar
+csi-<driver>-bundle-2.12.0/dell-csi-helm-installer/images.tar/registry.k8s.io-sig-storage-csi-snapshotter-v8.1.0.tar
+csi-<driver>-bundle-2.12.0/dell-csi-helm-installer/images.tar/quay.io-dell-container-storage-modules-dell-csi-replicator-v1.10.0.tar
+csi-<driver>-bundle-2.12.0/dell-csi-helm-installer/images.tar/quay.io-dell-container-storage-modules-podmon-v1.11.0.tar
+csi-<driver>-bundle-2.12.0/dell-csi-helm-installer/images.tar/registry.k8s.io-sig-storage-csi-external-health-monitor-controller-v0.13.0.tar
+csi-<driver>-bundle-2.12.0/dell-csi-helm-installer/images.tar/registry.k8s.io-sig-storage-csi-node-driver-registrar-v2.12.0.tar
+csi-<driver>-bundle-2.12.0/dell-csi-helm-installer/images.tar/quay.io-dell-container-storage-modules-csi-volumegroup-snapshotter-v1.7.0.tar
+csi-<driver>-bundle-2.12.0/dell-csi-helm-installer/images.tar/registry.k8s.io-sig-storage-csi-provisioner-v5.1.0.tar
+csi-<driver>-bundle-2.12.0/dell-csi-helm-installer/csi-offline-bundle.md
+csi-<driver>-bundle-2.12.0/dell-csi-helm-installer/.gitignore
+csi-<driver>-bundle-2.12.0/dell-csi-helm-installer/README.md
+csi-<driver>-bundle-2.12.0/dell-csi-helm-installer/csi-install.sh
+csi-<driver>-bundle-2.12.0/dell-csi-helm-installer/images.manifest
+csi-<driver>-bundle-2.12.0/dell-csi-helm-installer/verify.sh
+csi-<driver>-bundle-2.12.0/dell-csi-helm-installer/csi-uninstall.sh
+csi-<driver>-bundle-2.12.0/dell-csi-helm-installer/csi-offline-bundle.sh
+
+*
+* Complete
+
+Offline bundle file is: ~/csi-<driver>/csi-<driver>-bundle-2.12.0.tar.gz
 ```
+{{< /collapse >}}
+
+#### **Unpacking the offline bundle and preparing for installation**
+
+1. On a Linux system with registry access, copy the bundle file.
+2.  Expand the bundle file: `tar xvfz csi-<driver>-bundle-2.12.0.tar.gz`
+{{< collapse id="2" title="Output">}}   
+
 ```bash
-cd csm-operator
+  csi-<driver>-bundle-2.12.0/
+  csi-<driver>-bundle-2.12.0/helm-charts/
+  csi-<driver>-bundle-2.12.0/helm-charts/charts/
+  csi-<driver>-bundle-2.12.0/helm-charts/charts/csi-<driver>/
+  csi-<driver>-bundle-2.12.0/helm-charts/charts/csi-<driver>/Chart.yaml
+  csi-<driver>-bundle-2.12.0/helm-charts/charts/csi-<driver>/values.yaml
+  csi-<driver>-bundle-2.12.0/helm-charts/charts/csi-<driver>/templates/
+  csi-<driver>-bundle-2.12.0/helm-charts/charts/csi-<driver>/templates/node.yaml
+  csi-<driver>-bundle-2.12.0/helm-charts/charts/csi-<driver>/templates/_helpers.tpl
+  csi-<driver>-bundle-2.12.0/helm-charts/charts/csi-<driver>/templates/csidriver.yaml
+  csi-<driver>-bundle-2.12.0/helm-charts/charts/csi-<driver>/templates/driver-config-params.yaml
+  csi-<driver>-bundle-2.12.0/helm-charts/charts/csi-<driver>/templates/controller.yaml
+  csi-<driver>-bundle-2.12.0/LICENSE
+  csi-<driver>-bundle-2.12.0/README.md
+  csi-<driver>-bundle-2.12.0/dell-csi-helm-installer/
+  csi-<driver>-bundle-2.12.0/dell-csi-helm-installer/common.sh
+  csi-<driver>-bundle-2.12.0/dell-csi-helm-installer/verify-csi-<driver>.sh
+  csi-<driver>-bundle-2.12.0/dell-csi-helm-installer/images.tar/
+  csi-<driver>-bundle-2.12.0/dell-csi-helm-installer/images.tar/registry.k8s.io-sig-storage-csi-resizer-v1.12.0.tar
+  csi-<driver>-bundle-2.12.0/dell-csi-helm-installer/images.tar/quay.io-dell-container-storage-modules-csi-metadata-retriever-v1.9.0.tar
+  csi-<driver>-bundle-2.12.0/dell-csi-helm-installer/images.tar/registry.k8s.io-sig-storage-csi-attacher-v4.7.0.tar
+  csi-<driver>-bundle-2.12.0/dell-csi-helm-installer/images.tar/quay.io-dell-container-storage-modules-csi-<driver>-v2.12.0.tar
+  csi-<driver>-bundle-2.12.0/dell-csi-helm-installer/images.tar/registry.k8s.io-sig-storage-csi-snapshotter-v8.1.0.tar
+  csi-<driver>-bundle-2.12.0/dell-csi-helm-installer/images.tar/quay.io-dell-container-storage-modules-dell-csi-replicator-v1.10.0.tar
+  csi-<driver>-bundle-2.12.0/dell-csi-helm-installer/images.tar/quay.io-dell-container-storage-modules-podmon-v1.11.0.tar
+  csi-<driver>-bundle-2.12.0/dell-csi-helm-installer/images.tar/registry.k8s.io-sig-storage-csi-external-health-monitor-controller-v0.13.0.tar
+  csi-<driver>-bundle-2.12.0/dell-csi-helm-installer/images.tar/registry.k8s.io-sig-storage-csi-node-driver-registrar-v2.12.0.tar
+  csi-<driver>-bundle-2.12.0/dell-csi-helm-installer/images.tar/quay.io-dell-container-storage-modules-csi-volumegroup-snapshotter-v1.7.0.tar
+  csi-<driver>-bundle-2.12.0/dell-csi-helm-installer/images.tar/registry.k8s.io-sig-storage-csi-provisioner-v5.1.0.tar
+  csi-<driver>-bundle-2.12.0/dell-csi-helm-installer/csi-offline-bundle.md
+  csi-<driver>-bundle-2.12.0/dell-csi-helm-installer/.gitignore
+  csi-<driver>-bundle-2.12.0/dell-csi-helm-installer/README.md
+  csi-<driver>-bundle-2.12.0/dell-csi-helm-installer/csi-install.sh
+  csi-<driver>-bundle-2.12.0/dell-csi-helm-installer/images.manifest
+  csi-<driver>-bundle-2.12.0/dell-csi-helm-installer/verify.sh
+  csi-<driver>-bundle-2.12.0/dell-csi-helm-installer/csi-uninstall.sh
+  csi-<driver>-bundle-2.12.0/dell-csi-helm-installer/csi-offline-bundle.sh 
 ```
-```bash
-bash scripts/csm-offline-bundle.sh -c
-```
-
-### Unpacking the offline bundle and preparing for installation
-
-This needs to be performed on a Linux system with access to an image registry that will host container images. If the registry requires `login`, that should be done before proceeding.
-
-To prepare for the driver or Operator installation, the following steps need to be performed:
-1. Copy the offline bundle file created from the previous step to a system with access to an image registry available to your Kubernetes/OpenShift cluster
-2. Expand the bundle file by running `tar xvfz <filename>`
-3. Run the `csi-offline-bundle.sh` script and supply the `-p` option as well as the path to the internal registry with the `-r` option
-    - For Operator installs, the `csm-offline-bundle.sh` script will be found in the `scripts` directory
-
-The script will then perform the following steps:
-  - Load the required container images into the local system
-  - Tag the images according to the user-supplied registry information
-  - Push the newly tagged images to the registry
-  - Modify the Helm charts or Operator configuration to refer to the newly tagged/pushed images
-
-
-An example of preparing the bundle for installation for the Dell CSM Operator:
-```bash
-tar xvfz dell-csm-operator-bundle.tar.gz
-```
-```
-dell-csm-operator-bundle/
-dell-csm-operator-bundle/deploy/
-dell-csm-operator-bundle/deploy/operator.yaml
-dell-csm-operator-bundle/deploy/crds/
-dell-csm-operator-bundle/deploy/crds/storage.dell.com_containerstoragemodules.yaml
-dell-csm-operator-bundle/deploy/olm/
-dell-csm-operator-bundle/deploy/olm/operator_community.yaml
-...
-...
-dell-csm-operator-bundle/README.md
-dell-csm-operator-bundle/LICENSE
-```
-```bash
-cd dell-csm-operator-bundle
-```
-```bash
-bash scripts/csm-offline-bundle.sh -p -r localregistry:5000/dell-csm-operator/
+{{< /collapse >}}
+3. Run the `csi-offline-bundle.sh` script with the `-p` option and specify the registry path with the `-r` option:
+```bash  
+cd csi-<driver>-bundle-2.12.0/dell-csi-helm-installer 
+./csi-offline-bundle.sh -p -r localregistry:5000/dell-csi-<driver>
 ```
 
+ * The script will then perform the following steps:
+   - Load the required container images into the local system
+   - Tag the images according to the user-supplied registry information
+   - Push the newly tagged images to the registry
+   - Modify the Helm charts to refer to the newly tagged/pushed images
 
-### Perform either a Helm installation or Operator installation
+#### **Install the CSM**
 
-Now that the required images are available and the Helm Charts/Operator configuration updated, you can proceed by following the usual installation procedure as documented.
-
-*NOTES:* 
-1. Offline bundle installation is only supported with manual installs i.e. without using Operator Lifecycle Manager.
-2. Installation should be done using the files that are obtained after unpacking the offline bundle (dell-csm-operator-bundle.tar.gz) as the image tags in the manifests are modified to point to the internal registry. 
-3. Offline bundle installs operator in `default` namespace via install.sh script. Make sure that the current context in kubeconfig file has the namespace set to `default`.
+**Prepare for Installation:**  Ensure required images are available and Helm Charts configuration is updated.
+**Follow Installation Procedure:** Proceed with the usual installation steps as documented for [Helm](docs/getting-started/installation/helm).

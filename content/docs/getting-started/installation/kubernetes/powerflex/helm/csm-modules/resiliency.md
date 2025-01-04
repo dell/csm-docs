@@ -6,6 +6,6 @@ description: >
   Dell Container Storage Modules (CSM) for Resiliency installation
 --- 
 
-{{<include "content/docs/getting-started/installation/helm/modules/resiliency/installation.md">}}
-{{<include "content/docs/getting-started/installation/helm/modules/resiliency/powerflex.md">}}
-{{<include "content/docs/getting-started/installation/helm/modules/resiliency/dynamicparameters.md">}}
+{{<includee file="content/docs/getting-started/installation/helm/modules/resiliency/installation.md" hideIds="2,3,4,5">}}
+{{<includee file="content/docs/getting-started/installation/helm/modules/resiliency/powerflex.md">}}
+{{<includee file="content/docs/getting-started/installation/helm/modules/resiliency/dynamicparameters.md">}}

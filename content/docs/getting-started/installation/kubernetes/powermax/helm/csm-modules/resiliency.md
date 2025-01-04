@@ -7,6 +7,6 @@ description: >
 --- 
 
 
-{{<include "content/docs/getting-started/installation/helm/modules/resiliency/installation.md">}}
-{{<include "content/docs/getting-started/installation/helm/modules/resiliency/powermax.md">}}
-{{<include "content/docs/getting-started/installation/helm/modules/resiliency/dynamicparameters.md">}}
+{{<includee file="content/docs/getting-started/installation/helm/modules/resiliency/installation.md" hideIds="1,2,3,4">}}
+{{<includee file="content/docs/getting-started/installation/helm/modules/resiliency/powermax.md">}}
+{{<includee file="content/docs/getting-started/installation/helm/modules/resiliency/dynamicparameters.md">}}

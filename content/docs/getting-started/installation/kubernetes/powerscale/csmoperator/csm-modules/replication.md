@@ -6,4 +6,4 @@ description: >
   Installation of CSM for Replication
 --- 
 
-{{<include "content/docs/getting-started/installation/operator/modules/replication.md">}}
+{{<includee file="content/docs/getting-started/installation/operator/modules/replication.md" hideIds="1">}}

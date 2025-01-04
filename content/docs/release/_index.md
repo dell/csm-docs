@@ -9,13 +9,12 @@ Description: >
 
 ## Container Storage Modules Release and Support Lifecycle:
 
-Container Storage Module Release and Support Lifecycle document helps CSM developers to better plan deployments and encourage timely upgrades that pull in the latest functionality and fixes.
+Container Storage Modules Release and Support Lifecycle
+The Container Storage Module Release and Support Lifecycle document helps CSM developers plan deployments and encourage timely upgrades for the latest functionality and fixes.
 
-As part of Container Storage Modules Release and Lifecycle Management, we follow the below policies
-
-* Every Container Storage Modules release is under full support for 12 months. Please refer to the matrix for the GA and EOL dates of the supported Container Storage Modules versions.
-
-* If you are running a version of Container Storage Modules that’s more than 12 months old, you must upgrade to a newer Container Storage Modules version or submit your cert-csi test results to us to be covered Dell support.
+**Policies:**
+- Each release is fully supported for 12 months. Refer to the matrix for GA and EOL dates of supported versions.
+- If running a version older than 12 months, upgrade to a newer version or submit cert-csi test results to Dell support.
 
 <br>
 {{<table "table table-striped table-bordered table-sm">}}

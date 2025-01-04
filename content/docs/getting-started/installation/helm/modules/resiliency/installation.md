@@ -6,40 +6,38 @@
 {{% /pageinfo %}}
 CSM for Resiliency is installed as part of the Dell CSI driver installation.
 
-For information on the PowerFlex CSI driver, see [PowerFlex CSI Driver](https://github.com/dell/csi-powerflex).
+{{< hide id="1" >}}For information on the PowerFlex CSI driver, see [PowerFlex CSI Driver](https://github.com/dell/csi-powerflex).{{< /hide >}} 
 
-For information on the Unity XT CSI driver, see [Unity XT CSI Driver](https://github.com/dell/csi-unity).
+{{< hide id="2" >}}For information on the Unity XT CSI driver, see [Unity XT CSI Driver](https://github.com/dell/csi-unity).{{< /hide >}} 
 
-For information on the PowerScale CSI driver, see [PowerScale CSI Driver](https://github.com/dell/csi-powerscale).
+{{< hide id="3" >}}For information on the PowerScale CSI driver, see [PowerScale CSI Driver](https://github.com/dell/csi-powerscale).{{< /hide >}}
 
-For information on the PowerStore CSI driver, see [PowerStore CSI Driver](https://github.com/dell/csi-powerstore).
+{{< hide id="4" >}}For information on the PowerStore CSI driver, see [PowerStore CSI Driver](https://github.com/dell/csi-powerstore).{{< /hide >}} 
 
-For information on the PowerStore CSI driver, see [PowerMax CSI Driver](https://github.com/dell/csi-powermax).
+{{< hide id="5" >}}For information on the PowerStore CSI driver, see [PowerMax CSI Driver](https://github.com/dell/csi-powermax). {{< /hide >}}
 
 ## Prerequisite
 
-When utilizing CSM for Resiliency module, it is crucial to note that it will solely act upon pods that have been assigned a designated label. This label must have both a key and a value that match what has been set in the resiliency module configuration. Upon startup, CSM for Resiliency generates a log message that displays the label key and value being used to monitor pods. This label must be applied the Statefulset that you want to be monitored by CSM for Resiliency.
+- The CSM for Resiliency module only acts on pods with a specific label. 
+- This label must match the key and value set in the module’s configuration.
+- On startup, CSM for Resiliency logs the label key and value it uses to monitor pods. 
+- Apply this label to the Statefulset you want monitored by CSM for Resiliency.
 
  ```yaml
- labelSelector: {map[podmon.dellemc.com/driver:csi-vxflexos]}
+ labelSelector: {map[podmon.dellemc.com/driver:csi-<driver>]}
  ```
- The above message indicates the key is: podmon.dellemc.com/driver and the label value is csi-vxflexos. To search for the pods that would be monitored, try this:
+ The above message indicates the key is: podmon.dellemc.com/driver and the label value is `csi-<driver>`. To search for the pods that would be monitored, try this:
  ```bash
- kubectl get pods -A -l podmon.dellemc.com/driver=csi-vxflexos
+ kubectl get pods -A -l podmon.dellemc.com/driver=csi-<driver>
 ```
-Similarly, labels for for csi-powerscale, csi-unity, csi-powerstore and csi-powermax would be as:
- ```bash
- podmon.dellemc.com/driver:csi-isilon
- podmon.dellemc.com/driver:csi-unity
- podmon.dellemc.com/driver:csi-powerstore
- podmon.dellemc.com/driver:csi-powermax
-```
+>Note: `<driver>` should be replaced with respective driver name 
 
  User must follow all the prerequisites of the respective drivers before enabling this module.
 
 ### Storage Array Upgrades
-To avoid application pods getting stuck in a Pending state, CSM for Resiliency should be disabled for storage array upgrades; even if the storage array upgrade is advertised as non-distruptive. If the container orchestrator platform nodes lose connectivity with the array, which is more likely during an upgrade, then Resiliency will delete the application pods on the affected nodes and attempt to move them to a healthy node. If all of the nodes are affected, then the application pods will be stuck in a Pending state.
-
+- Disable CSM for Resiliency during storage array upgrades to prevent application pods from getting stuck in a Pending state, even if the upgrade is advertised as non-disruptive.
+- If nodes lose connectivity with the array, Resiliency will delete the pods on affected nodes and attempt to move them to a healthy node.
+- If all nodes are affected, the pods will be stuck in a Pending state.
 Configure all the helm chart parameters described below before installing the drivers.
 
 ## Helm Chart Installation
@@ -53,32 +51,34 @@ podmon:
   controller:
     args:
       - "--csisock=unix:/var/run/csi/csi.sock"
-      - "--labelvalue=csi-vxflexos"
+      - "--labelvalue=csi-<driver>"
       - "--mode=controller"
       - "--skipArrayConnectionValidation=false"
-      - "--driver-config-params=/vxflexos-config-params/driver-config-params.yaml"
+      - "--driver-config-params=/<driver>-config-params/driver-config-params.yaml"
       - "--driverPodLabelValue=dell-storage"
       - "--ignoreVolumelessPods=false"
   node:
     args:
-      - "--csisock=unix:/var/lib/kubelet/plugins/vxflexos.emc.dell.com/csi_sock"
-      - "--labelvalue=csi-vxflexos"
+      - "--csisock=unix:/var/lib/kubelet/plugins/<driver>.emc.dell.com/csi_sock"
+      - "--labelvalue=csi-<driver>"
       - "--mode=node"
       - "--leaderelection=false"
-      - "--driver-config-params=/vxflexos-config-params/driver-config-params.yaml"
+      - "--driver-config-params=/<driver>-config-params/driver-config-params.yaml"
       - "--driverPodLabelValue=dell-storage"
       - "--ignoreVolumelessPods=false"
 
 ```
+>Note: `<driver>` should be replaced with respective driver name 
 
-To install CSM for Resiliency with the driver, the following changes are required:
-1. Enable CSM for Resiliency by changing the podmon.enabled boolean to true. This will enable both controller-podmon and node-podmon.
+
+To install CSM for Resiliency with the driver:
+1. Enable CSM for Resiliency by setting `podmon.enabled` to `true` (enables both controller-podmon and node-podmon).
 2. If you need to change the registry, specify the podmon image to be used in `images.podmon`
-3. Specify arguments to controller-podmon in the podmon.controller.args block. See "Podmon Arguments" below. Note that some arguments are required. Note that the arguments supplied to controller-podmon are different from those supplied to node-podmon.
-4. Specify arguments to node-podmon in the podmon.node.args block. See "Podmon Arguments" below. Note that some arguments are required. Note that the arguments supplied to controller-podmon are different from those supplied to node-podmon.
+3. Provide arguments for controller-podmon in `podmon.controller.args` (some arguments are required and differ from node-podmon). See “Podmon Arguments” below.
+4. Provide arguments for node-podmon in `podmon.node.args` (some arguments are required and differ from controller-podmon). See “Podmon Arguments” below.
 
 ## Podmon Arguments
-  
+{{< collapse id="1" title="Arguments">}}
 | Argument | Required | Description | Applicability |
 |-|-|-|-|
 | enabled | Required | Boolean "true" enables CSM for Resiliency installation with the driver in a helm installation. | top level |
@@ -92,3 +92,5 @@ To install CSM for Resiliency with the driver, the following changes are require
 | arrayConnectivityConnectionLossThreshold | Optional | Gives the number of failed connection polls that will be deemed to indicate array connectivity loss. Should not be set to less than 3. See the specific section for each array type for additional guidance. | controller |
 | driver-config-params | Required | String that set the path to a file containing configuration parameter(for instance, Log levels) for a driver.  | controller & node |
 | ignoreVolumelessPods | Optional | Boolean value that if set to true will enable CSM for Resiliency to ignore pods without persistent volume attached to the pod. | controller & node |
+{{< /collapse >}}
+<br>

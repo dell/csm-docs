@@ -12,6 +12,8 @@ Installation Wizard Support Matrix [Click Here](../../../../../supportmatrix/#in
 <br>
 The Container Storage Modules Installation Wizard is a webpage that helps you create a manifest file to install Dell CSI Drivers and CSM Modules. Users can enable or disable modules through the UI, and it generates a single manifest file, eliminating the need to download individual Helm charts for drivers and modules.
 
+>Note:Ensure Helm 3.x, namespace, and secrets are set up before installing the Helm chart.
+
 ## Generate Manifest File
 
 1. Open the [CSM Installation Wizard](/csm-docs/docs/getting-started/installation/installationwizard/src/index.html).

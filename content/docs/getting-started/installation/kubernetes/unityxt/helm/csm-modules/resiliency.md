@@ -7,6 +7,6 @@ description: >
 --- 
 
 
-{{<include "content/docs/getting-started/installation/helm/modules/resiliency/installation.md">}}
-{{<include "content/docs/getting-started/installation/helm/modules/resiliency/unity.md">}}
-{{<include "content/docs/getting-started/installation/helm/modules/resiliency/dynamicparameters.md">}}
+{{<includee file="content/docs/getting-started/installation/helm/modules/resiliency/installation.md" hideIds="1,3,4,5">}}
+{{<includee file="content/docs/getting-started/installation/helm/modules/resiliency/unity.md">}}
+{{<includee file="content/docs/getting-started/installation/helm/modules/resiliency/dynamicparameters.md">}}

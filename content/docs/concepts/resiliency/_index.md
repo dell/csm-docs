@@ -30,7 +30,7 @@ Accordingly,Resiliency is adapted to and qualified with each CSI driver it is to
 Container Storage Module for Resiliency provides the following capabilities:
 
 {{<table "table table-striped table-bordered table-sm">}}
-| Capability                              | PowerScale | Unity XT | PowerStore | PowerFlex | PowerMax |
+| Capability                              | PowerStore | PowerMax | PowerFlex | PowerScale | UnityXT |
 | --------------------------------------- | :--------: | :------: | :--------: | :-------: | :------: |
 | Detect pod failures when: Node failure, K8S Control Plane Network failure, K8S Control Plane failure, Array I/O Network failure | yes  | yes | yes | yes | yes |
 | Cleanup pod artifacts from failed nodes | yes         | yes   | yes         | yes       | yes       |
@@ -41,59 +41,44 @@ Container Storage Module for Resiliency provides the following capabilities:
 
 Container Storage Module for Resiliency supports the following CSI drivers and versions.
 {{<table "table table-striped table-bordered table-sm">}}
-| Storage Array                     | CSI Driver   | Supported Versions |
-| --------------------------------- | :----------: | :----------------: |
-| CSI Driver for PowerFlex | [csi-powerflex](https://github.com/dell/csi-powerflex) | v2.0.0 + |
-| CSI Driver for Unity XT  | [csi-unity](https://github.com/dell/csi-unity)         | v2.0.0 + |
-| CSI Driver for PowerScale  | [csi-powerscale](https://github.com/dell/csi-powerscale) | v2.3.0 + |
-| CSI Driver for PowerStore  | [csi-powerstore](https://github.com/dell/csi-powerstore) | v2.6.0 + |
-| CSI Driver for PowerMax | [csi-powermax](https://github.com/dell/csi-powermax) | v2.11.0 + |
+| Storage Array                     |  Supported Versions |
+| --------------------------------- | :----------------: |
+| CSI Driver for PowerFlex  |  v2.0.0 +|
+| CSI Driver for Unity XT   | v2.0.0 + |
+| CSI Driver for PowerScale | v2.3.0 + |
+| CSI Driver for PowerStore | v2.6.0 + |
+| CSI Driver for PowerMax   | v2.11.0 +|
 {{</table>}}
 
-### PowerFlex Support
-
-PowerFlex is a highly scalable array that is very well suited to Kubernetes deployments. The Container Storage Module for Resiliency support for PowerFlex leverages these PowerFlex features:
-
-* Very quick detection of Array I/O Network Connectivity status changes (generally takes 1-2 seconds for the array to detect changes)
-* A robust mechanism if Nodes are doing I/O to volumes (sampled over a 5-second period).
-* Low latency REST API supports fast CSI provisioning and de-provisioning operations.
-* A proprietary network protocol provided by the SDC component that can run over the same IP interface as the K8S control plane or over a separate IP interface for Array I/O.
-
-### Unity XT Support
-
-Unity XT is targeted for mid sized deployments, remote or branch offices, and cost-sensitive mixed workloads. Unity XT systems are designed to deliver the best value in the market. They support all-Flash, and are available in purpose-built (all Flash or hybrid Flash), converged deployment options (through VxBlock), and software-defined virtual edition.
-
-* Unity XT (purpose-built): A modern midrange storage solution, engineered from the ground up to meet market demands for Flash, affordability and incredible simplicity. The Unity XT Family is available in 12 All Flash models and 12 Hybrid models.
-* VxBlock (converged): Unity XT storage options are also available in Dell VxBlock System 1000.
-* UnityVSA (virtual): The Unity XT Virtual Storage Appliance (VSA) allows the advanced unified storage and data management features of the Unity XT family to be easily deployed on VMware ESXi servers. This allows for a ‘software defined’ approach. UnityVSA is available in two editions:
-  * Community Edition is a free downloadable 4 TB solution recommended for nonproduction use.
-  * Professional Edition is a licensed subscription-based offering available at capacity levels of 10 TB, 25 TB, and 50 TB. The subscription includes access to online support resources, EMC Secure Remote Services (ESRS), and on-call software- and systems-related support.
-
+## PowerFlex Support
+PowerFlex is highly scalable and well-suited for Kubernetes deployments. The Container Storage Module for Resiliency leverages these features:
+- Quick detection of Array I/O Network Connectivity status changes (1-2 seconds).
+- Robust mechanism to detect if Nodes are doing I/O to volumes (sampled over 5 seconds).
+- Low latency REST API for fast CSI provisioning and de-provisioning.
+- Proprietary network protocol via the SDC component, which can run over the same or separate IP interface as the K8S control plane.
+ 
+## Unity XT Support
+Unity XT is ideal for mid-sized deployments, remote/branch offices, and cost-sensitive mixed workloads. It supports all-Flash and is available in:
+- **Purpose-built**: 12 All Flash models and 12 Hybrid models.
+- **Converged (VxBlock)**: Available in Dell VxBlock System 1000.
+- **Virtual (UnityVSA)**: Deployable on VMware ESXi servers, available in:
+  - **Community Edition**: Free 4 TB solution for non-production use.
+  - **Professional Edition**: Subscription-based, available in 10 TB, 25 TB, and 50 TB, with support and ESRS.
+ 
 All three deployment options, Unity XT, UnityVSA, and Unity-based VxBlock, enjoy one architecture, one interface with consistent features and rich data services.
-
-### PowerScale Support
-
-PowerScale is a highly scalable NFS array that is very well suited to Kubernetes deployments. The Container Storage Module for Resiliency support for PowerScale leverages the following PowerScale features:
-
-* Detection of Array I/O Network Connectivity status changes.
-* A robust mechanism to detect if Nodes are actively doing I/O to volumes.
-* Low latency REST API supports fast CSI provisioning and de-provisioning operations.
-
-### PowerStore Support
-
-PowerStore is a highly scalable array that is very well suited to Kubernetes deployments. The Container Storage Module for Resiliency support for PowerStore leverages the following PowerStore features:
-
-* Detection of Array I/O Network Connectivity status changes.
-* A robust mechanism to detect if Nodes are actively doing I/O to volumes.
-* Low latency REST API supports fast CSI provisioning and de-provisioning operations.
-
-### PowerMax Support
-
-PowerMax is the highest performing block storage array  that is very well suited to Kubernetes deployments. The Container Storage Module for Resiliency support for PowerMax leverages the following PowerMax features:
-
-* Detection of Array I/O Network Connectivity status changes.
-* A robust mechanism to detect if Nodes are actively doing I/O to volumes.
-* Low latency REST API supports fast CSI provisioning and de-provisioning operations.
+ 
+## Support for PowerScale, PowerStore, and PowerMax
+These arrays provide robust and scalable solutions for Kubernetes deployments, ensuring high performance, reliability, and ease of management.
+ 
+### Array Highlights:
+- **PowerScale**: Highly scalable NFS array, ideal for large-scale file storage needs.
+- **PowerStore**: Versatile and scalable, suitable for a wide range of workloads with advanced data services.
+- **PowerMax**: The highest performing block storage array, delivering exceptional performance for critical applications.
+ 
+### Key Features:
+- **Detection of Array I/O Network Connectivity Status Changes**: All three arrays quickly detect changes in network connectivity, ensuring minimal disruption to operations.
+- **Robust Mechanism to Detect Node I/O Activity**: They all have mechanisms to detect if nodes are performing I/O to volumes, sampled over a short period.
+- **Low Latency REST API**: Each array offers a low latency REST API, facilitating fast CSI provisioning and de-provisioning.
 
 ## Limitations and Exclusions
 

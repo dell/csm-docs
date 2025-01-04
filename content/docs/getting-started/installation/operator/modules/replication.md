@@ -88,6 +88,7 @@ To configure Replication perform the following steps:
     kubectl patch deployment -n dell-replication-controller dell-replication-controller-manager \
     -p '{"spec":{"template":{"spec":{"hostAliases":[{"hostnames":["<remote-FQDN>"],"ip":"<remote-IP>"}]}}}}'
     ```
+{{< hide id="1" >}}    
 9. **If installing replication via operator with the PowerMax driver on two clusters:** you will need to create a Kubernetes service for the reverseproxy on the target cluster. Insert values from your deployment into this service.yaml file and then create it on the target cluster using `kubectl create -f service.yaml`.
     ```
     apiVersion: v1
@@ -104,3 +105,4 @@ To configure Replication perform the following steps:
         app: <INSERT DRIVER DEPLOYMENT NAME>-controller
       type: ClusterIP
       ```
+{{< /hide >}}

@@ -6,22 +6,23 @@ Description: >
   Application Mobility
 ---
 
-{{% pageinfo color="danger" %}}
-<span style="color:red">Application Mobility is available with [APEX Navigator for Kubernetes](https://www.dell.com/en-ca/dt/apex/storage/public-cloud/navigator.htm#kubernetes)</span>
+{{% pageinfo color="primary" %}}
+{{< message text="8" >}} 
 {{% /pageinfo %}}
 
 Container Storage Module for Application Mobility provide Kubernetes administrators the ability to clone their stateful application workloads and application data to other clusters, either on-premise or in the cloud.
-
-Application Mobility uses [Velero](https://velero.io) and its integration of [Restic](https://restic.net) to copy both application metadata and data to object storage. When a backup is requested, Application Mobility uses these options to determine how the application data is backed up:
-- If [Volume Group Snapshots](../snapshots/volume-group-snapshots/) are enabled on the CSI driver backing the application's Persistent Volumes, crash consistent snapshots of all volumes are used for the backup.
-- If [Volume Snapshots](../snapshots/) are enabled on the Kubernetes cluster and supported by the CSI driver, individual snapshots are used for each Persistent Volume used by the application.
-- If no snapshot options are enabled, default to using full copies of each Persistent Volume used by the application.
-
-After a backup has been created, it can be restored on the same Kubernetes cluster or any other cluster(s) if this criteria is met:
+ 
+Application Mobility uses object storage to copy application metadata and data. When a backup is requested, it uses these options:
+ 
+- **[Volume Group Snapshots](../snapshots/volume-group-snapshots/)** : If enabled, crash consistent snapshots of all volumes are used.
+- **[Volume Snapshots](../snapshots/)** : If enabled and supported by the CSI driver, individual snapshots are used for each Persistent Volume.
+- **Full Copies**: If no snapshot options are enabled, full copies of each Persistent Volume are used.
+ 
+After a backup is created, it can be restored on the same or any other cluster(s) if:
+ 
 - Application Mobility is installed on the target cluster(s).
 - The target cluster(s) has access to the object store bucket. For example, if backing up and restoring an application from an on-premise Kubernetes cluster to AWS EKS, an S3 bucket can be used if both the on-premise and EKS cluster have access to it.
-- Storage Class is defined on the target cluster(s) to support creating the required Persistent Volumes used by the application.
-
+- Storage Class is defined on the target cluster(s) to support creating the required Persistent Volumes.
 ## Supported Data Movers
 {{<table "table table-striped table-bordered table-sm">}}
 | Data Mover | Description |

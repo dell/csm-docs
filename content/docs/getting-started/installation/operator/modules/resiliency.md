@@ -28,8 +28,14 @@ Similarly, labels for for csi-powerscale, csi-unity, csi-powerstore and csi-powe
 
  ```bash
  podmon.dellemc.com/driver:csi-isilon
+```
+ ```bash
  podmon.dellemc.com/driver:csi-unity
- podmon.dellemc.com/driver:csi-powerstore
+```
+ ```bash
+  podmon.dellemc.com/driver:csi-powerstore
+```
+ ```bash
  podmon.dellemc.com/driver:csi-powermax
 ```
 
@@ -45,55 +51,13 @@ To avoid application pods getting stuck in a Pending state, Container Storage Mo
 --> 
 Resiliency can be enabled by following sample file 
 
-a. **Default Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_{{Var}}_v2130.yaml) for default settings.
+a. **Minimal Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/main/samples/minimal-samples/{{Var}}_v2130.yam) for default settings.
+
+```yaml
+  - name: resiliency
+      enabled: false
+```
 
 [OR]
 
-b. **Detailed Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/main/samples/minimal-samples/{{Var}}_v2130.yaml) for detailed settings.
-
-```yaml
-  modules:
-    - name: resiliency
-      # enabled: Enable/Disable Resiliency feature
-      # Allowed values:
-      #   true: enable Resiliency feature(deploy podmon sidecar)
-      #   false: disable Resiliency feature(do not deploy podmon sidecar)
-      # Default value: false
-      enabled: true
-      configVersion: v1.12.0
-      components:
-        - name: podmon-controller
-          args:
-            - "--labelvalue=csi-powerstore"
-            - "--arrayConnectivityPollRate=60"
-            - "--skipArrayConnectionValidation=false"
-            - "--driverPodLabelValue=dell-storage"
-            - "--ignoreVolumelessPods=false"
-            # Below 4 args should not be modified.
-            - "--csisock=unix:/var/run/csi/csi.sock"
-            - "--mode=controller"
-            - "--driver-config-params=/powerstore-config-params/driver-config-params.yaml"
-            - "--driverPath=csi-powerstore.dellemc.com"
-        - name: podmon-node
-          envs:
-            # podmonAPIPort: Defines the port to be used within the kubernetes cluster
-            # Allowed values: Any valid and free port (string)
-            # Default value: 8083
-            - name: "X_CSI_PODMON_API_PORT"
-              value: "8083"
-          args:
-            - "--labelvalue=csi-powerstore"
-            - "--arrayConnectivityPollRate=60"
-            - "--leaderelection=false"
-            - "--driverPodLabelValue=dell-storage"
-            - "--ignoreVolumelessPods=false"
-            # Below 4 args should not be modified.
-            - "--csisock=unix:/var/lib/kubelet/plugins/csi-powerstore.dellemc.com/csi_sock"
-            - "--mode=node"
-            - "--driver-config-params=/powerstore-config-params/driver-config-params.yaml"
-            - "--driverPath=csi-powerstore.dellemc.com"
-```
-
-## How to enable this module using minimal CR
-
-To enable this module, user should choose the minimal sample file for the respective driver for specific version. By default, the module is disabled but this can be enabled by setting the enabled flag to `true` in the minimal sample file.
+b. **Detailed Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_{{Var}}_v2130.yaml) for detailed settings.

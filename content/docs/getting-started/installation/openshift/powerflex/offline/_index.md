@@ -10,7 +10,6 @@ weight: 3
 <br>
 {{< accordion id="One" title="Operator" markdown="true" >}} 
 {{<include  "content/docs/getting-started/installation/offline/operator.md" >}}
-
 {{< /accordion >}}
 <br> 
 

@@ -74,9 +74,33 @@ The installation process involves the creation of a `Subscription` object either
    
    <img src="/csm-docs/images/deployment/operator/installed_operator.png" style="border: 1px solid black">
 
+>Note
 
+- If your environment has more than 1000 Pods, the Container Storage Module Operator may need more resources. You can adjust the default CPU and memory settings in deploy/operator.yaml and config/manager/manager.yaml. For more details on setting resource requests and limits, refer to the [documentation](https://sdk.operatorframework.io/docs/best-practices/managing-resources/). The current default values are listed below
 
-
+    ```yaml
+        resources:
+          limits:
+            cpu: 200m
+            memory: 512Mi
+          requests:
+            cpu: 100m
+            memory: 192Mi
+    ```
+- If using **CSM Replication** with two clusters and no DNS, edit `deploy/operator.yaml` to add `hostAliases` with `<FQDN>:<IP>` mappings under `spec.template.spec` to resolve remote API endpoints. More details on host aliases are available in the [documentation](https://kubernetes.io/docs/tasks/network/customize-hosts-file-for-pods/).
+    ```yaml
+    apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      name: dell-csm-operator-controller-manager
+    spec:
+      template:
+        spec:
+          hostAliases:
+          - hostnames:
+            - "remote.FQDN"
+            ip: "255.255.255.1"
+   ```
 
 ### Certified vs Community
 
