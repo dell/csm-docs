@@ -33,7 +33,7 @@ To deploy the Operator, follow the instructions available [here](../../../operat
 
 2. **Create `config` file:** 
    
-   Create a file called `config.yaml` or pick a [sample](https://github.com/dell/csi-powerstore/blob/main/samples/secret/secret.yaml) that has Powerstore array connection details: 
+   a. Create a file called `config.yaml` or pick a [sample](https://github.com/dell/csi-powerstore/blob/main/samples/secret/secret.yaml) that has Powerstore array connection details: 
 
    ```yaml
    arrays:
@@ -66,10 +66,11 @@ To deploy the Operator, follow the instructions available [here](../../../operat
    ```
 
 3. **Install Driver** 
-  i. Create a CR (Custom Resource) for PowerStore using the sample files provided
 
-    a. **Default Configuration:** 
-      ```yaml
+   i. **Create a CR (Custom Resource)** for PowerStore using the sample files provided
+
+   a. **Minimal Configuration:** 
+   ```yaml
    apiVersion: storage.dell.com/v1
    kind: ContainerStorageModule
    metadata:

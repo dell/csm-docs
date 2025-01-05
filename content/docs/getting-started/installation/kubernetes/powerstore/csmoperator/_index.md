@@ -54,17 +54,19 @@ To deploy the Operator, follow the instructions available [here](../../../operat
 
    The username in `secret.yaml` must be from PowerStore’s authentication providers and have at least the **Storage Operator** role.
 
-   b. After editing the file, run this command to create a `secret.yaml` called `powerstore-config`.
+   b. After editing the file, **run this command to create a `secret.yaml`** called `powerstore-config`.
 
    ```bash
    kubectl create secret generic -n powerstore powerstore-config --from-file=config=secret.yaml
    ```
 
 3. **Install Driver** 
-  i. Create a CR (Custom Resource) for PowerStore using the sample files provided
 
-    a. **Default Configuration:** 
-      ```yaml
+   i. **Create a CR (Custom Resource)** for PowerStore using the sample files provided
+
+   a. **Minimal Configuration:** 
+
+   ```yaml
    apiVersion: storage.dell.com/v1
    kind: ContainerStorageModule
    metadata:
