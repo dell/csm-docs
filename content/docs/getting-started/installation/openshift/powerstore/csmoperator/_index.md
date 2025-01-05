@@ -21,56 +21,73 @@ To deploy the Operator, follow the instructions available [here](../../../operat
 
 {{< accordion id="Two" title="CSI Driver" markdown="true" >}}  
 
-### Namespace and PowerStore API Access Configuration
+### CSI Driver Installation
+</br>
 
-1. **Create Namespace.**    
+1. **Create project:**
+
    ```bash 
-      kubectl create namespace powerstore
+      oc new-project powerstore
    ```
-   This command creates a namespace called `powerstore`. You can replace `powerstore` with any name you prefer.
+   This command creates a project called `powerstore`. You can replace `powerstore` with any name you prefer.
 
-2. **Create or Use Sample `secret.yaml` File.** 
+2. **Create `config` file:** 
    
-   Create a file called `secret.yaml` or pick a [sample](https://github.com/dell/csi-powerstore/blob/main/samples/secret/secret.yaml) that has Powerstore array connection details: 
+   Create a file called `config.yaml` or pick a [sample](https://github.com/dell/csi-powerstore/blob/main/samples/secret/secret.yaml) that has Powerstore array connection details: 
 
    ```yaml
    arrays:
-      - endpoint: "https://10.0.0.1/api/rest"     # full URL path to the PowerStore API
-        globalID: "unique"                        # unique id of the PowerStore array
-        username: "user"                          # username for connecting to API
-        password: "password"                      # password for connecting to API
-        skipCertificateValidation: true           # indicates if client side validation of (management)server's certificate can be skipped
-        isDefault: true                           # treat current array as a default (would be used by storage classes without arrayID parameter)
-        blockProtocol: "auto"                     # what SCSI transport protocol use on node side (FC, ISCSI, NVMeTCP, NVMeFC, None, or auto)
-        nasName: "nas-server"                     # what NAS should be used for NFS volumes
-        nfsAcls: "0777"                           # (Optional) defines permissions - POSIX mode bits or NFSv4 ACLs, to be set on NFS target mount directory.
-                                                  # NFSv4 ACls are supported for NFSv4 shares on NFSv4 enabled NAS servers only. POSIX ACLs are not supported and only POSIX mode bits are supported for NFSv3 shares.
+    - endpoint: "https://11.0.0.1/api/rest"
+        globalID: "unique"
+        username: "user"
+        password: "password"
+        skipCertificateValidation: true
+        blockProtocol: "FC"
    ```
-   Change the parameters with relevant values for your PowerStore array.
-   Add more blocks similar to above for each PowerStore array if necessary.
+      - **Update Parameters:** Replace placeholders with actual values for your PowerStore array.
+      - **Add Blocks:** If you have multiple PowerStore arrays, add similar blocks for each one.
+      - **Replication:** If replication is enabled, make sure the `config.yaml` includes all involved PowerStore arrays.
+  </br>
+  </br>
 
-   If replication feature is enabled, ensure the secret includes all the PowerStore arrays involved in replication.
+   **User Privileges**
 
-   #### User Privileges
-   The username specified in `secret.yaml` must be from the authentication providers of PowerStore. The user must have the correct user role to perform the actions. The minimum requirement is **Storage Operator**.
+   The username in `config.yaml` must be from PowerStore’s authentication providers and have at least the **Storage Operator** role.
 
-3. **Create Kubernetes secret:**
+   b. After editing the file, **run this command to create a config** called `powerstore-config`.
 
-    ```bash
-   kubectl create secret generic -n powerstore powerstore-config --from-file=config=secret.yaml
+   ```bash
+    oc create secret generic powerstore-config --from-file=config=config.yaml -n powerstore --dry-run=client -oyaml > secret-config.yaml
+   ```
+      Use this command to **replace or update** the config:
+
+   ```bash
+     oc create secret generic powerstore-config -n powerstore --from-file=config=config.yaml -o yaml --dry-run=client | oc replace -f -
    ```
 
-## Install Driver
+3. **Install Driver** 
+  i. Create a CR (Custom Resource) for PowerStore using the sample files provided
 
-1. Create a CR (Custom Resource) for PowerFlex using the sample files provided
-
-    a. **Default Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/main/samples/minimal-samples/powerstore_v2130.yaml) for default settings. Modify if needed.
+    a. **Default Configuration:** 
+      ```yaml
+   apiVersion: storage.dell.com/v1
+   kind: ContainerStorageModule
+   metadata:
+   name: powerstore
+   namespace: powerstore
+   spec:
+   driver:
+      csiDriverType: "powerstore"
+      configVersion: v2.13.0
+      forceRemoveDriver: true
+   ```
+     [sample file](https://github.com/dell/csm-operator/blob/main/samples/minimal-samples/powerstore_v2130.yaml) for default settings. Modify if needed.
 
     [OR]                                                
 
-    b. **Detailed Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powerstore_v2130.yaml) for detailed settings.
+    b. **Detailed Configuration:**  [sample file](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powerstore_v2130.yaml) for detailed settings.
 
-2. Users should configure the parameters in CR. The following table lists the primary configurable parameters of the PowerStore driver and their default values:
+ - Users should configure the parameters in CR. The following table lists the primary configurable parameters of the PowerStore driver and their default values:
 {{< collapse id="1" title="Parameters">}}
 
   | Parameter | Description | Required | Default |
@@ -89,43 +106,65 @@ To deploy the Operator, follow the instructions available [here](../../../operat
 | X_CSI_POWERSTORE_ENABLE_CHAP | Set to true if you want to enable iSCSI CHAP feature | No | false |
 {{< /collapse >}}
 
-3.  Execute the following command to create PowerStore custom resource:
+   ii. **Create PowerStore custom resource**:
+
    ```bash
-   kubectl create -f <input_sample_file.yaml>
+    oc create -f <input_sample_file.yaml>
    ```
    This command will deploy the CSI PowerStore driver in the namespace specified in the input YAML file.
 
-   - Next, the driver should be installed, you can check the condition of driver pods by running
-      ```bash
-      kubectl get all -n <driver-namespace>
-      ```
+ 4. **Verify the installation** as mentioned below
+ 
+     * Check if ContainerStorageModule CR is created successfully using the command below:
+         ```bash
+         oc get csm/powerstore -n powerstore
+         ```
+     * Check the status of the CR to verify if the driver installation is in the `Succeed` state. If the status is not `Succeed`, see the [Troubleshooting guide](../troubleshooting/#my-dell-csi-driver-install-failed-how-do-i-fix-it) for more information.
+ 
+    </br>
+ 
+ 5. **Create Storage Class** 
+ 
+    ```yaml 
+    apiVersion: storage.k8s.io/v1
+    kind: StorageClass
+    metadata:
+    name: "powerstore-ext4"
+    provisioner: "csi-powerstore.dellemc.com"
+    parameters:
+    csi.storage.k8s.io/fstype: "ext4"
+    reclaimPolicy: Delete
+    allowVolumeExpansion: true
+    volumeBindingMode: Immediate
+    ````  
+Refer [Storage Class](https://github.com/dell/csi-powerstore/tree/main/samples/storageclass) for different sample files. 
 
-4.  Once the driver `Custom Resource (CR)` is created, you can verify the installation as mentioned below
+   **Run this command to create** a storage class
 
-    * Check if ContainerStorageModule CR is created successfully using the command below:
-        ```bash
-        kubectl get csm/<name-of-custom-resource> -n <driver-namespace> -o yaml
-        ```
-    * Check the status of the CR to verify if the driver installation is in the `Succeeded` state. If the status is not `Succeeded`, see the [Troubleshooting guide](../troubleshooting/#my-dell-csi-driver-install-failed-how-do-i-fix-it) for more information.
+   ```bash
+     oc create -f < storage-class.yaml >
+   ```
 
-5. Refer [Volume Snapshot Class](https://github.com/dell/csi-powerstore/tree/main/samples/volumesnapshotclass) and [Storage Class](https://github.com/dell/csi-powerstore/tree/main/samples/storageclass) for the sample files. 
+ 6. **Create Volume Snapshot Class** 
+    ```yaml 
+    apiVersion: snapshot.storage.k8s.io/v1
+    kind: VolumeSnapshotClass
+    metadata:
+    name: powerstore-snapshot
+    driver: "csi-powerstore.dellemc.com" 
+    deletionPolicy: Delete
+    ````
+Refer [Volume Snapshot Class](https://github.com/dell/csi-powerstore/tree/main/samples/volumesnapshotclass) for the sample files.
 
-**Note** :
-   1. "Kubelet config dir path" is not yet configurable in case of Operator based driver installation.
-   2. Snapshotter and resizer sidecars are not optional. They are defaults with Driver installation.
+   **Run this command to create** a volume snapshot class
+   ```bash
+      oc create -f < volume-snapshot-class.yaml >
+   ```
+ 
+ **Note** :
+   -  "Kubelet config dir path" is not yet configurable in case of Operator based driver installation.
+   - Snapshotter and resizer sidecars are not optional. They are defaults with Driver installation.
 
-## Dynamic secret change detection
-
-CSI PowerStore supports the ability to dynamically modify array information within the secret, allowing users to update
-<u>_credentials_</u> for the PowerStore arrays, in-flight, without restarting the driver.
-> ℹ️ **NOTE:**: Updates to the secret that include adding a new array, or modifying the endpoint, globalID, or blockProtocol parameters
-> require the driver to be restarted to properly pick up and process the changes.
-
-To do so, change the configuration file `secret.yaml` and apply the update using the following command:
-```bash
-
-sed "s/CONFIG_YAML/`cat secret.yaml | base64 -w0`/g" secret.yaml | kubectl apply -f -
-```
 {{< /accordion >}}   
 
 <br>

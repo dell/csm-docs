@@ -12,6 +12,7 @@ To deploy the Operator, follow the instructions available [here](../../../operat
 {{< accordion id="Two" title="CSI Driver" markdown="true" >}}  
 
 ### CSI Driver Installation
+</br>
 
 1. **Create project:**
 
@@ -32,17 +33,22 @@ To deploy the Operator, follow the instructions available [here](../../../operat
       skipCertificateValidation: true
       mdm: "10.0.0.3,10.0.0.4"
     ```
-   If replication feature is enabled, ensure the secret includes all the PowerFlex arrays involved in replication.
+      - **Update Parameters:** Replace placeholders with actual values for your Powerflex array.
+      - **Add Blocks:** If you have multiple Powerflex arrays, add similar blocks for each one.
+      - **Replication:** If replication is enabled, make sure the `config.yaml` includes all involved Powerflex arrays.
 
-    b. After editing the file, run this command to create a secret called `vxflexos-config`.
+    <br>
+    <br>
+
+    b. After editing the file, **run this command to create a config** called `powerflex-config`.
 
    ```bash
     oc create secret generic powerflex-config --from-file=config=config.yaml -n powerflex --dry-run=client -oyaml > secret-config.yaml
    ```
-   Use this command to replace or update the secret:
+   Use this command to **replace or update** the config:
 
    ```bash
-     oc create secret generic vxflexos-config -n vxflexos --from-file=config=secret.yaml -o yaml --dry-run=client | oc replace -f -
+     oc create secret generic powerflex-config -n powerflex --from-file=config=config.yaml -o yaml --dry-run=client | oc replace -f -
    ```
 
 3. **Install driver:**
@@ -55,7 +61,7 @@ To deploy the Operator, follow the instructions available [here](../../../operat
     kind: ContainerStorageModule
     metadata:
       name: vxflexos
-      namespace: vxflexos
+      namespace: powerflex
     spec:
       driver:
         csiDriverType: "powerflex"
@@ -108,9 +114,7 @@ To deploy the Operator, follow the instructions available [here](../../../operat
      ```bash
       oc get csm/powerflex -n powerflex
      ```
-    * Check the status of the CR to verify if the driver installation is in the `Succeeded` state. If the status is not `Succeeded`, see the [Troubleshooting guide](../troubleshooting/#my-dell-csi-driver-install-failed-how-do-i-fix-it) for more information.
-<br>
-<br>
+    * Check the status of the CR to verify if the driver installation is in the `Succeed` state. If the status is not `Succeed`, see the [Troubleshooting guide](../troubleshooting/#my-dell-csi-driver-install-failed-how-do-i-fix-it) for more information.
 
 5. **Create Storage class:** 
    ```yaml
@@ -134,7 +138,17 @@ To deploy the Operator, follow the instructions available [here](../../../operat
             values:
               - csi-vxflexos.dellemc.com
    ```
-     Refer [Storage Class](https://github.com/dell/csi-powerflex/tree/main/samples/storageclass) for different sample files.
+
+ - **Update Parameters:** Replace placeholders with actual values for your powerflex array.
+   
+   Refer [Storage Class](https://github.com/dell/csi-powerflex/tree/main/samples/storageclass) for different sample files.
+    
+    **Run this command to create** a storage class
+    
+   ```bash
+     oc create -f < storage-class.yaml >
+   ```
+   
 
 6. **Create Volume Snapshot Class:** 
     ```yaml
@@ -144,7 +158,13 @@ To deploy the Operator, follow the instructions available [here](../../../operat
         name: vxflexos-snapclass
       deletionPolicy: Delete 
       ```
-   Refer [Volume Snapshot Class](https://github.com/dell/csi-powerflex/tree/main/samples/volumesnapshotclass) sample file.
+     Refer [Volume Snapshot Class](https://github.com/dell/csi-powerflex/tree/main/samples/volumesnapshotclass/) sample file.
+
+    **Run this command to create** a volume snapshot class
+
+   ```bash
+    oc create -f < volume-snapshot-class.yaml >
+   ```
 
 **Note** :
    - Snapshotter and resizer sidecars are installed by default.
@@ -161,15 +181,15 @@ The driver and modules versions installable with the Container Storage Module Op
 <br>   
 
 {{< cardcontainer >}}
-    {{< customcard link1="./csm-modules/authorizationv1.x"  image="1" title="Authorization v1.x" >}}
+    {{< customcard link1="./csm-modules/authorizationv1.x"  image="6" title="Authorization v1.x" >}}
 
-    {{< customcard link1="./csm-modules/authorizationv2.0"   image="1" title="Authorization v2.0"  >}}
+    {{< customcard link1="./csm-modules/authorizationv2.0"   image="6" title="Authorization v2.0"  >}}
 
-    {{< customcard  link1="./csm-modules/observability"   image="1" title="Observability"  >}}
+    {{< customcard  link1="./csm-modules/observability"   image="6" title="Observability"  >}}
 
-    {{< customcard  link1="./csm-modules/replication"  image="1" title="Replication"  >}} 
+    {{< customcard  link1="./csm-modules/replication"  image="6" title="Replication"  >}} 
 
-    {{< customcard link1="./csm-modules/resiliency"   image="1" title="Resiliency"  >}}
+    {{< customcard link1="./csm-modules/resiliency"   image="6" title="Resiliency"  >}}
 
 {{< /cardcontainer >}}
 

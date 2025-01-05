@@ -16,7 +16,7 @@ To deploy the Operator, follow the instructions available [here](../../../operat
 - If multipath is configured, ensure CSI-PowerFlex volumes are blacklisted by multipathd. See [troubleshooting section](../../../../../concepts//csidriver/troubleshooting/powerflex) for details.
 
 
-#### SDC Deployment for Operator 
+##### **SDC Deployment for Operator**
 
 - **Overview:**
 This feature deploys the SDC kernel modules on all nodes using an init container. PowerFlex can be deployed with or without SDC.
@@ -35,7 +35,7 @@ Enable the SDC monitor by setting the `enable` flag to `true`.
    - **With Sidecar**: Edit the `HOST_PID` and `MDM` fields with the host PID and MDM IPs.
    - **Without Sidecar**: Leave the `enabled` field set to `false`.
 
-##### Example CR: [samples/storage_csm_powerflex_v2130.yaml](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powerflex_v2130.yaml)
+   Example CR: [samples/storage_csm_powerflex_v2130.yaml](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powerflex_v2130.yaml)
 
 ```yaml
     sideCars:
@@ -50,7 +50,7 @@ Enable the SDC monitor by setting the `enable` flag to `true`.
           value: "10.xx.xx.xx,10.xx.xx.xx" #provide the same MDM value from secret
 ```
 
-#### Manual SDC Deployment
+##### **Manual SDC Deployment**
 
 For detailed PowerFlex installation procedure, see the [Dell PowerFlex Deployment Guide](https://docs.delltechnologies.com/bundle/VXF_DEPLOY/page/GUID-DD20489C-42D9-42C6-9795-E4694688CC75.html). Install the PowerFlex SDC using this procedure:
 
@@ -77,90 +77,68 @@ Install the SDC per the _Dell PowerFlex Deployment Guide_:
 4. **Add MDM IPs for Multi-Array support:** 
 run `/opt/emc/scaleio/sdc/bin/drv_cfg --add_mdm --ip 10.xx.xx.xx.xx,10.xx.xx.xx`.
 
-#### Create Secret
+
+### CSI Driver Installation
+<br>
 
 1. **Create namespace:**
 
    ```bash 
-      kubectl create namespace vxflexos
+      kubectl create namespace powerflex
    ```
-   This command creates a namespace called `vxflexos`. You can replace `vxflexos` with any name you prefer.
-2. **Create or Use Sample `secret.yaml` File.** 
+   This command creates a namespace called `powerflex`. You can replace `powerflex` with any name you prefer.
+
+2. **Create `secret.yaml`.** 
    
-   Create a file called `secret.yaml` or pick a [sample](https://github.com/dell/csi-powerflex/blob/main/samples/secret.yaml) that has Powerflex array connection details: 
+   a. Create a file called `secret.yaml` or pick a [sample](https://github.com/dell/csi-powerflex/blob/main/samples/secret.yaml) that has Powerflex array connection details: 
 
-   {{< collapse id="2" title="secret.yaml" card="false">}} 
-
-  ```yaml
-    # Username for accessing PowerFlex system.
-    # If authorization is enabled, username will be ignored.
-  - username: "admin"
-    # Password for accessing PowerFlex system.
-    # If authorization is enabled, password will be ignored.
-    password: "password"
-    # System name/ID of PowerFlex system.
-    systemID: "1a99aa999999aa9a"
-    # Previous names used in secret of PowerFlex system.
-    allSystemNames: "pflex-1,pflex-2"
-    # REST API gateway HTTPS endpoint for PowerFlex system.
-    # If authorization is enabled, endpoint should be the HTTPS localhost endpoint that
-    # the authorization sidecar will listen on
-    endpoint: "https://127.0.0.1"
-    # Determines if the driver is going to validate certs while connecting to PowerFlex REST API interface.
-    # Allowed values: true or false
-    # Default value: true
-    skipCertificateValidation: true
-    # indicates if this array is the default array
-    # needed for backwards compatibility
-    # only one array is allowed to have this set to true
-    # Default value: false
-    isDefault: true
-    # defines the MDM(s) that SDC should register with on start.
-    # Allowed values:  a list of IP addresses or hostnames separated by comma.
-    # Default value: none
-    mdm: "10.0.0.1,10.0.0.2"
-    # NFS is only supported on PowerFlex storage system 4.0.x
-    # nasName: name of NAS server used for NFS volumes
-    # nasName value must be specified in secret for performing NFS (file) operations.
-    # Allowed Values: string
-    # Default Value: "none"
-    nasName: "nas-server"
-  - username: "admin"
-    password: "Password123"
-    systemID: "2b11bb111111bb1b"
-    endpoint: "https://127.0.0.2"
-    skipCertificateValidation: true
-    mdm: "10.0.0.3,10.0.0.4"
-  ``` 
-    {{< /collapse >}} 
-
-  If replication feature is enabled, ensure the secret includes all the PowerFlex arrays involved in replication.
-
-3. **Create Kubernetes secret:**
-
-    After editing the file, run this command to create a secret called `vxflexos-config`.
+   ```yaml
+    - username: "admin"
+      password: "password"
+      systemID: "2b11bb111111bb1b"
+      endpoint: "https://127.0.0.2"
+      skipCertificateValidation: true
+      mdm: "10.0.0.3,10.0.0.4"
+   ```
+      - **Update Parameters:** Replace placeholders with actual values for your Powerflex array.
+      - **Add Blocks:** If you have multiple Powerflex arrays, add similar blocks for each one.
+      - **Replication:** If replication is enabled, make sure the `secret.yaml` includes all involved Powerflex arrays.
+   <br>   
+   b. After editing the file, **run this command to create a secret** called `powerflex-config`.
 
     ```bash
-    kubectl create secret generic vxflexos-config -n vxflexos --from-file=config=secret.yaml
+      kubectl create secret generic powerflex-config -n powerflex --from-file=config=secret.yaml
     ```
-
-    Use this command to replace or update the secret:
+     Use this command to **replace or update** the secret:
 
     ```bash
-    kubectl create secret generic vxflexos-config -n vxflexos --from-file=config=secret.yaml -o yaml --dry-run=client | kubectl replace -f -
+      kubectl create secret generic powerflex-config -n powerflex --from-file=config=secret.yaml -o yaml --dry-run=client | kubectl replace -f -
     ```
 
-### Install Driver
+3. **Install driver:**
 
-1. Create a CR (Custom Resource) for PowerFlex using the sample files provided
+   i. **Create a CR (Custom Resource)** for PowerFlex using the sample files provided
 
-    a. **Default Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/main/samples/minimal-samples/powerflex_v2130.yaml) for default settings. Modify if needed.
+      a. **Minimal Configuration:** 
+    ```yaml
+    apiVersion: storage.dell.com/v1
+    kind: ContainerStorageModule
+    metadata:
+      name: vxflexos
+      namespace: powerflex
+    spec:
+      driver:
+        csiDriverType: "powerflex"
+        configVersion: v2.13.0
+        forceRemoveDriver: true
+    ```   
+     Refer the [sample file](https://github.com/dell/csm-operator/blob/main/samples/minimal-samples/powerflex_v2130.yaml). Modify if needed.
 
     [OR]                                                
 
     b. **Detailed Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powerflex_v2130.yaml) for detailed settings.
 
-2. Users should configure the parameters in CR. The following table lists the primary configurable parameters of the PowerFlex driver and their default values:
+- Users should configure the parameters in CR. The following table lists the primary configurable parameters of the PowerFlex driver and their default values:
 {{< collapse id="1" title="Parameters">}}
    | Parameter | Description | Required | Default |
    | --------- | ----------- | -------- |-------- |
@@ -190,24 +168,74 @@ run `/opt/emc/scaleio/sdc/bin/drv_cfg --add_mdm --ip 10.xx.xx.xx.xx,10.xx.xx.xx`
    | volume-name-prefix | The volume-name-prefix will be used by provisioner sidecar as a prefix for all the volumes created  | Yes | k8s |
    | monitor-interval | The monitor-interval will be used by external-health-monitor as an interval for health checks  | Yes | 60s |
 {{< /collapse >}}
-3. Execute this command to create PowerFlex custom resource:
-    ```bash
-    kubectl create -f <input_sample_file.yaml>
-    ```
-    This command will deploy the CSI-PowerFlex driver in the namespace specified in the input YAML file.
 
-4. Once the driver `Custom Resource (CR)` is created, you can verify the installation as mentioned below
+  ii . **Run this command to create** a PowerFlex custom resource:
+
+   ```bash
+     kubectl create -f <input_sample_file.yaml>
+   ```
+
+   This command will deploy the CSI-PowerFlex driver in the namespace specified in the input YAML file.
+
+4. **Verify the installation:**
 
     * Check if ContainerStorageModule CR is created successfully using the command below:
         ```bash
-        kubectl get csm/<name-of-custom-resource> -n <driver-namespace> -o yaml
+        kubectl get csm/powerflex -n powerflex
         ```
-    * Check the status of the CR to verify if the driver installation is in the `Succeeded` state. If the status is not `Succeeded`, see the [Troubleshooting guide](../troubleshooting/#my-dell-csi-driver-install-failed-how-do-i-fix-it) for more information.
+    * Check the status of the CR to verify if the driver installation is in the `Succeed` state. If the status is not `Succeed`, see the [Troubleshooting guide](../troubleshooting/#my-dell-csi-driver-install-failed-how-do-i-fix-it) for more information.
 
-5. Refer [Volume Snapshot Class](https://github.com/dell/csi-powerflex/tree/main/samples/volumesnapshotclass) and [Storage Class](https://github.com/dell/csi-powerflex/tree/main/samples/storageclass) for the sample files. 
+ <br>
+
+5. **Create Storage class:** 
+   ```yaml
+    apiVersion: storage.k8s.io/v1
+    kind: StorageClass
+    metadata:
+      name: vxflexos
+      annotations:
+        storageclass.kubernetes.io/is-default-class: "true"
+    provisioner: csi-vxflexos.dellemc.com
+    reclaimPolicy: Delete
+    allowVolumeExpansion: true
+    parameters:
+      storagepool: <STORAGE_POOL>
+      systemID: <SYSTEM_ID>
+      csi.storage.k8s.io/fstype: ext4
+    volumeBindingMode: WaitForFirstConsumer
+    allowedTopologies:
+      - matchLabelExpressions:
+          - key: csi-vxflexos.dellemc.com/<SYSTEM_ID>
+            values:
+              - csi-vxflexos.dellemc.com
+   ```
+     Refer [Storage Class](https://github.com/dell/csi-powerflex/tree/main/samples/storageclass) for different sample files.
+    
+    **Run this command to create** a storage class
+    
+   ```bash
+     kubectl create -f < storage-class.yaml >
+   ```
+
+6. **Create Volume Snapshot Class:** 
+    ```yaml
+      apiVersion: snapshot.storage.k8s.io/v1
+      kind: VolumeSnapshotClass
+      metadata:
+        name: vxflexos-snapclass
+      deletionPolicy: Delete 
+      ```
+      Refer [Volume Snapshot Class](https://github.com/dell/csi-powerflex/tree/main/samples/volumesnapshotclass/) sample file.
+
+     **Run this command to create** a volume snapshot class
+
+   ```bash
+    kubectl create -f < volume-snapshot-class.yaml >
+   ```
 
 **Note** :
-   1. Snapshotter and resizer sidecars are installed by default.
+   - Snapshotter and resizer sidecars are installed by default.
+
 {{< /accordion >}}  
 
 <br>
@@ -222,15 +250,15 @@ The driver and modules versions installable with the Container Storage Module Op
 <br>   
 
 {{< cardcontainer >}}
-    {{< customcard link1="./csm-modules/authorizationv1.x"  image="1" title="Authorization v1.x" >}}
+    {{< customcard link1="./csm-modules/authorizationv1.x"  image="6" title="Authorization v1.x" >}}
 
-    {{< customcard link1="./csm-modules/authorizationv2.0"   image="1" title="Authorization v2.0"  >}}
+    {{< customcard link1="./csm-modules/authorizationv2.0"   image="6" title="Authorization v2.0"  >}}
 
-    {{< customcard  link1="./csm-modules/observability"   image="1" title="Observability"  >}}
+    {{< customcard  link1="./csm-modules/observability"   image="6" title="Observability"  >}}
 
-    {{< customcard  link1="./csm-modules/replication"  image="1" title="Replication"  >}} 
+    {{< customcard  link1="./csm-modules/replication"  image="6" title="Replication"  >}} 
 
-    {{< customcard link1="./csm-modules/resiliency"   image="1" title="Resiliency"  >}}
+    {{< customcard link1="./csm-modules/resiliency"   image="6" title="Resiliency"  >}}
 
 {{< /cardcontainer >}}
 {{< /accordion >}}  
