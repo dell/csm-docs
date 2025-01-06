@@ -85,6 +85,37 @@ Refer to the [Dell Host Connectivity Guide](https://elabnavigator.dell.com/vault
 The following requirements must be fulfilled in order to successfully use the NVMe protocols with the CSI PowerStore driver:
 
 - All OpenShift or Kubernetes nodes connecting to Dell storage arrays must use unique host NQNs.
+
+> The OpenShift deployment process for RHCOS will set the same host NQN for all nodes. The host NQN is stored in the file /etc/nvme/hostnqn. One possible solution to ensure unique host NQNs is to add the following machine config to your OCP cluster:
+
+```yaml
+apiVersion: machineconfiguration.openshift.io/v1
+kind: MachineConfig
+metadata:
+  labels:
+    machineconfiguration.openshift.io/role: worker
+  name: 99-worker-custom-nvme-hostnqn
+spec:
+  config:
+    ignition:
+      version: 3.2.0
+    systemd:
+      units:
+        - contents: |
+            [Unit]
+            Description=Custom CoreOS Generate NVMe Hostnqn
+
+            [Service]
+            Type=oneshot
+            ExecStart=/usr/bin/sh -c '/usr/sbin/nvme gen-hostnqn > /etc/nvme/hostnqn'
+            RemainAfterExit=yes
+
+            [Install]
+            WantedBy=multi-user.target
+          enabled: true
+          name: custom-coreos-generate-nvme-hostnqn.service
+```
+
 - The driver requires the NVMe command-line interface (nvme-cli) to manage the NVMe clients and targets. The NVMe CLI tool is installed in the host using the following command on RPM oriented Linux distributions.
 
 ```bash
