@@ -1056,13 +1056,14 @@ volumeBindingMode: WaitForFirstConsumer
 #### Secret
 The Secret specifies the zone associated with each PowerFlex system along with additional details such as the protection domain and storage pool name.
 
+> Note: The protection domain name is required if storage pool names are not unique across protection domains.
+
 ```yaml
 - username: "user"
   password: "password"
   systemID: "2000000000000001"
   endpoint: "https://10.0.0.1"
   skipCertificateValidation: true
-  isDefault: true
   mdm: "10.0.0.2,10.0.0.3"
   zone:
     name: "zone1"
@@ -1071,12 +1072,12 @@ The Secret specifies the zone associated with each PowerFlex system along with a
       - name: "domain1"
         pools:
           - "pool1"
+
 - username: "user"
   password: "password"
   systemID: "2000000000000002"
   endpoint: "https://10.0.0.4"
   skipCertificateValidation: true
-  isDefault: true
   mdm: "10.0.0.5,10.0.0.6"
   zone:
     name: "zone2"
