@@ -111,7 +111,8 @@ Note that the namespace can be any user-defined name that follows the convention
 | mdm       | mdm defines the MDM(s) that SDC should register with on start. This should be a list of MDM IP addresses or hostnames separated by comma. | true     | -       |
 | nasName       | nasName defines what NAS should be used for NFS volumes. NFS volumes are supported on arrays version >=4.0.x | true     | ""       |
 {{< /collapse >}}
-                                                
+
+<ul>                                                
   Example: `samples/secret.yaml`
 
 ```yaml
@@ -141,14 +142,12 @@ If replication feature is enabled, ensure the secret includes all the PowerFlex 
 After editing the file, run the below command to create a secret called `vxflexos-config`. This assumes `vxflexos` is release name, but it can be modified during [install](../#install-the-driver):
 
   ```bash
-
   kubectl create secret generic vxflexos-config -n vxflexos --from-file=config=samples/secret.yaml
   ```
 
 Use the below command to replace or update the secret:
 
   ```bash
-
   kubectl create secret generic vxflexos-config -n vxflexos --from-file=config=samples/secret.yaml -o yaml --dry-run=client | kubectl replace -f -
   ```
 
@@ -163,6 +162,7 @@ Use the below command to replace or update the secret:
 - If the user is using complex K8s version like "v1.21.3-mirantis-1", use this kubeVersion check in helm/csi-unity/Chart.yaml file.
            kubeVersion: ">= 1.21.0-0 < 1.29.0-0"
 
+</ul> 
 
 5. Default logging options are set during Helm install. To see possible configuration options, see the [Dynamic Logging Configuration](../../../../../concepts/csidriver/features/powerflex#dynamic-logging-configuration) section in Features.
 
@@ -273,27 +273,23 @@ If the gateway certificate is self-signed or if you are using an embedded gatewa
 1. To fetch the certificate, run the following command.
 
    ```bash
-
    openssl s_client -showcerts -connect <Gateway IP:Port> </dev/null 2>/dev/null | openssl x509 -outform PEM > ca_cert_0.pem
    ```
 
    Example:
    ```bash
-
    openssl s_client -showcerts -connect 1.1.1.1:443 </dev/null 2>/dev/null | openssl x509 -outform PEM > ca_cert_0.pem
    ```
 
 2. Run the following command to create the cert secret with index '0':
 
    ```bash
-
    kubectl create secret generic vxflexos-certs-0 --from-file=cert-0=ca_cert_0.pem -n vxflexos
    ```
 
    Use the following command to replace the secret:
 
    ```bash
-
    kubectl create secret generic vxflexos-certs-0 -n vxflexos --from-file=cert-0=ca_cert_0.pem -o yaml --dry-run | kubectl replace -f -
    ```
 
@@ -332,7 +328,7 @@ There are samples storage class yaml files available under `samples/storageclass
 - If you uninstall the driver and reinstall it, you can still face errors if any update in the `myvalues.yaml` file leads to an update of the storage class(es):
 
 ```
-    Error: cannot patch "<sc-name>" with kind StorageClass: StorageClass.storage.k8s.io "<sc-name>" is invalid: parameters: Forbidden: updates to parameters are forbidden
+Error: cannot patch "<sc-name>" with kind StorageClass: StorageClass.storage.k8s.io "<sc-name>" is invalid: parameters: Forbidden: updates to parameters are forbidden
 ```
 
 In case you want to make such updates, ensure to delete the existing storage classes using the `kubectl delete storageclass` command.

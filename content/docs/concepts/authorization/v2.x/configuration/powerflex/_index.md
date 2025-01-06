@@ -19,8 +19,9 @@ Given a setup where Kubernetes, a storage system, and the Authorization Proxy Se
 
    This takes the assumption that Powerflex will be installed in the `vxflexos` namespace.
 
-2. Edit these parameters in `samples/secret/karavi-authorization-config.json` file in the [CSI PowerFlex](https://github.com/dell/csi-powerflex/tree/main/samples) driver and update/add connection information for one or more backend storage arrays. In an instance where multiple CSI drivers are configured on the same Kubernetes cluster, the port range in the *endpoint* parameter must be different for each driver.
+2. Edit these parameters in `samples/secret/karavi-authorization-config.json` file in the [CSI PowerFlex](https://github.com/dell/csi-powerflex/tree/main/samples/secret/karavi-authorization-config.json) driver and update/add connection information for one or more backend storage arrays. In an instance where multiple CSI drivers are configured on the same Kubernetes cluster, the port range in the *endpoint* parameter must be different for each driver. 
 
+{{< collapse id="1" title="Parameters">}}
    | Parameter                 | Description                                                                                                      | Required | Default                        |
    | ------------------------- | ---------------------------------------------------------------------------------------------------------------- | -------- | ------------------------------ |
    | username                  | Username for connecting to the backend storage array. This parameter is ignored.                                 | No       | -                              |
@@ -30,12 +31,15 @@ Given a setup where Kubernetes, a storage system, and the Authorization Proxy Se
    | systemID                  | System ID of the backend storage array.                                                                          | Yes      | " "                            |
    | skipCertificateValidation | A boolean that enables/disables certificate validation of the backend storage array. This parameter is not used. | No       | true                           |
    | isDefault                 | A boolean that indicates if the array is the default array. This parameter is not used.                          | No       | default value from values.yaml |
+{{< /collapse >}}
+<ul style="list-style-type: none;">
+<li>Create the karavi-authorization-config secret using this command:
 
-    Create the karavi-authorization-config secret using this command:
-
-    ```bash
+  ```bash
     kubectl -n vxflexos create secret generic karavi-authorization-config --from-file=config=samples/secret/karavi-authorization-config.json -o yaml --dry-run=client | kubectl apply -f -
-    ```
+  ``` 
+</li>
+</ul>
 
 3. Create the proxy-server-root-certificate secret.
 
@@ -98,7 +102,7 @@ Given a setup where Kubernetes, a storage system, and the Authorization Proxy Se
     ```
 
 5. Enable Container Storage Module Authorization in the driver installation applicable to your installation method.
-  Alternatively, you can use the minimal sample files provided [here](https://github.com/dell/csm-operator/tree/main/samples/minimal-samples) and install the module using default value.
+  Alternatively, you can use the minimal sample files provided [here](https://github.com/dell/csm-operator/tree/main/samples/minimal-samples/powerflex_v2130.yaml) and install the module using default value.
 
     **Operator**
 

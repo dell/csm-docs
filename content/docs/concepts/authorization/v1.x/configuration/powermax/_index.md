@@ -16,7 +16,7 @@ Given a setup where Kubernetes, a storage system, and the Authorization Proxy Se
       kubectl apply -f /tmp/token.yaml -n powermax
    ```
 
-2. Edit these parameters in `samples/secret/karavi-authorization-config.json` file in [CSI PowerMax](https://github.com/dell/csi-powermax/tree/main/samples/secret) driver and update/add connection information for one or more backend storage arrays. In an instance where multiple CSI drivers are configured on the same Kubernetes cluster, the port range in the *endpoint* parameter must be different for each driver.
+2. Edit these parameters in `samples/secret/karavi-authorization-config.json` file in [CSI PowerMax](https://github.com/dell/csi-powermax/tree/main/samples/secret/karavi-authorization-config.json) driver and update/add connection information for one or more backend storage arrays. In an instance where multiple CSI drivers are configured on the same Kubernetes cluster, the port range in the *endpoint* parameter must be different for each driver.
 
   | Parameter | Description | Required | Default |
    | --------- | ----------- | -------- |-------- |
@@ -163,7 +163,7 @@ Create the karavi-authorization-config secret using this command:
     ```
 
     Alternatively, you can use the minimal sample files provided
-    [here](https://github.com/dell/csm-operator/tree/main/samples/minimal-samples) and install the module using default values
+    [here](https://github.com/dell/csm-operator/tree/main/samples/minimal-samples/powermax_v2130.yaml) and install the module using default values
 
 5. Install the CSI PowerMax driver following the appropriate documentation for your installation method.
 

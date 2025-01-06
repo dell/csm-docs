@@ -101,12 +101,15 @@ To deploy the Operator, follow the instructions available [here](../../../operat
   | X_CSI_SDC_ENABLED | Enable/Disable installation of the SDC. | Yes | true |
   {{< /collapse >}}
 
-  ii. **Run this command to create** a PowerFlex custom resource:
+<ul>
 
-   ```bash
-    oc create -f <input_sample_file.yaml>
-  ```
-  This command will deploy the CSI-PowerFlex driver in the namespace specified in the input YAML file.
+ii. **Run this command to create** a PowerFlex custom resource:
+
+  ```bash
+  oc create -f <input_sample_file.yaml>
+```
+This command will deploy the CSI-PowerFlex driver in the namespace specified in the input YAML file.
+</ul>
 
 4. **Verify the installation:**
 

@@ -3,7 +3,8 @@ title: Troubleshooting
 linktitle: Troubleshooting
 weight: 8
 description: >
-   Troubleshooting guide
+   Troubleshooting guide 
+toc_hide: true
 ---
 
 | Symptoms | Prevention, Resolution or Workaround |

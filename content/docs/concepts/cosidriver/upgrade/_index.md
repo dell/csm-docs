@@ -2,7 +2,7 @@
 title: Upgrade
 linktitle: Upgrade
 description: Upgrading COSI Driver
-weight: 5
+weight: 2
 ---
 
 ## Update Driver from v0.1.0 to v0.1.1 using Helm

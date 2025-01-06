@@ -45,7 +45,7 @@ To verify you have everything in order you can execute the following commands:
   installation, your `targets:` parameter should be populated by list of target clusters IDs.
 
 
-If you don't have something installed or something is out-of-place, please refer to installation instructions [here](../installation).
+If you don't have something installed or something is out-of-place, please refer to installation instructions [here](../../replication).
 
 ### Installing Driver With Replication Module
 

@@ -2,6 +2,7 @@
 title: "Troubleshooting"
 linkTitle: "Troubleshooting"
 weight: 5
+toc_hide: true
 Description: >
   Troubleshooting guide
 ---

@@ -1,6 +1,7 @@
 ---
 title: CLI
-linktitle: CLI 
+linktitle: CLI  
+toc_hide: true
 weight: 4
 description: >
  Container Storage Module (CSM) for Authorization CLI

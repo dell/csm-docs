@@ -20,7 +20,7 @@ Given a setup where Kubernetes, a storage system, and the Container Storage Modu
 
    This takes the assumption that PowerMax will be installed in the `powermax` namespace.
 
-2. Edit these parameters in `samples/secret/karavi-authorization-config.json` file in the [CSI PowerMax](https://github.com/dell/csi-powermax/tree/main/samples) driver and update/add connection information for one or more backend storage arrays. In an instance where multiple CSI drivers are configured on the same Kubernetes cluster, the port range in the *endpoint* parameter must be different for each driver.
+2. Edit these parameters in `samples/secret/karavi-authorization-config.json` file in the [CSI PowerMax](https://github.com/dell/csi-powermax/tree/main/samples/secret/karavi-authorization-config.json) driver and update/add connection information for one or more backend storage arrays. In an instance where multiple CSI drivers are configured on the same Kubernetes cluster, the port range in the *endpoint* parameter must be different for each driver.
 
    | Parameter | Description | Required | Default |
    | --------- | ----------- | -------- |-------- |
@@ -86,7 +86,7 @@ Given a setup where Kubernetes, a storage system, and the Container Storage Modu
 
 6. Enable Container Storage Modules Authorization in the driver installation applicable to your installation method.
   Alternatively, you can use the minimal sample files provided
-  [here](https://github.com/dell/csm-operator/tree/main/samples/minimal-samples) and install the module using default values
+  [here](https://github.com/dell/csm-operator/tree/main/samples/minimal-samples/powermax_v2130.yaml) and install the module using default values
 
     **Operator**
 

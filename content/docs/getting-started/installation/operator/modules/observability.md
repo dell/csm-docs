@@ -20,7 +20,8 @@ The Container Storage Module Observability module for supported Dell CSI Drivers
 - Enable Observability module using the below configuration 
 
   a. **Default Configuration:** 
-
+  
+  {{< hide id="1" inline="true">}}
   ```yaml
       - name: observability
       enabled: false
@@ -33,8 +34,11 @@ The Container Storage Module Observability module for supported Dell CSI Drivers
           enabled: false
         - name: metrics-powerflex
           enabled: true
-  ```
-    ```yaml
+  ``` 
+  {{< /hide >}} 
+
+  {{< hide id="2" inline="true">}}
+  ```yaml
       - name: observability
       enabled: false
       components:
@@ -46,7 +50,10 @@ The Container Storage Module Observability module for supported Dell CSI Drivers
           enabled: false
         - name: metrics-powermax
           enabled: true
-  ```
+  ``` 
+  {{< /hide >}} 
+
+  {{< hide id="3" inline="true">}}
   ```yaml
       - name: observability
       enabled: false
@@ -59,7 +66,9 @@ The Container Storage Module Observability module for supported Dell CSI Drivers
           enabled: false
         - name: metrics-powerscale
           enabled: true
-  ```
+  ``` 
+  {{< /hide >}} 
+
   Use the [sample file](https://github.com/dell/csm-operator/blob/main/samples/minimal-samples/{{Var}}_v2130.yaml) for default settings.  If cert-manager has already been installed, don’t enable it.
 
     [OR]                                                

@@ -2,7 +2,8 @@
 title: Troubleshooting
 linktitle: Troubleshooting
 description: Troubleshooting COSI Driver
-weight: 5
+weight: 5 
+toc_hide: true
 ---
 
 ## Troubleshooting COSI Driver with logs

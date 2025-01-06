@@ -48,7 +48,7 @@ Run the following commands to verify that everything is installed correctly:
 
 
 If you don't have something installed or something is out-of-place, please refer
-to installation instructions [here](../installation).
+to installation instructions [here](../../replication).
 
 ### Installing Driver With Replication Module
 

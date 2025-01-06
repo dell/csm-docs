@@ -4,6 +4,7 @@ linktitle: Architecture
 weight: 2
 description: >
   High level architecture for Container Storage Module for Replication
+no_list: true
 ---
 
 ## Replication design and architecture

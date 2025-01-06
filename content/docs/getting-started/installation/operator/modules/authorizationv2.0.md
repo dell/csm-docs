@@ -37,14 +37,12 @@ description: >
     After editing the file, run this command to create a secret called `karavi-config-secret`:
 
     ```bash
-
     kubectl create secret generic karavi-config-secret -n authorization --from-file=config.yaml=samples/authorization/config.yaml
     ```
 
     Use this command to replace or update the secret:
 
     ```bash
-
     kubectl create secret generic karavi-config-secret -n authorization --from-file=config.yaml=samples/authorization/config.yaml -o yaml --dry-run=client | kubectl replace -f -
     ```
 
@@ -111,7 +109,6 @@ To enable reporting of trace data with [Zipkin](https://zipkin.io/), use the `cs
 3. Execute this command to create the Authorization CR:
 
     ```bash
-
     kubectl create -f <SAMPLE FILE>
     ```
 

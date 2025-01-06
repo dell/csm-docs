@@ -3,6 +3,7 @@ title: "Release Notes"
 linkTitle: "Release Notes"
 weight: 6
 description: Release Notes for COSI Driver
+toc_hide: true
 ---
 
 ## Release Notes - COSI Driver v0.3.0

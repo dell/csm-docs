@@ -1,8 +1,8 @@
 ---
-title: Authorization - v2 Migration guide
-linktitle: Migration Guide From v1 to v2
-toc_hide: true
-weight: 1
+title: "Authorization - v2 Migration guide"
+linktitle: "Migration Guide From v1 to v2"
+no_list: true
+weight: 4
 description: >
   Container Storage Module for Authorization v1 to v2 Migration Guide
 ---
@@ -12,11 +12,11 @@ Container Storage Module for Authorization v2 has significant architectural chan
   - Container Storage Module for Authorization v2 calculates the actual usage of capacity provisioned by syncing with the array.
   - Volumes belonging to a tenant are identified using the **Volume Prefix** configured in csmtenant custom resource.
   - Volumes without the **Volume Prefix** will not be accounted for in usage capacity calculation as ownership of the volume is unknown without the volume prefix.
-  - User should rename all volumes that are needed to be accounted for with the **Volume Prefix** before migration to v2. See the [Prerequisites](#prerequisites).
+  - User should rename all volumes that are needed to be accounted for with the **Volume Prefix** before migration to v2. See the [Prerequisites](../Migration%20guide%20from%20v1%20to%20v2/#prerequisites).
 
 ## Prerequisites
 ### On the storage array, rename the volumes owned by each tenant with a tenant prefix.
-Use [dellctl](../../support/cli/) to list the volumes owned by the tenant. 
+Use [dellctl](../../../tooling/cli/) to list the volumes owned by the tenant. 
 ```
 # dellctl volume get --proxy <csm-authorization-proxy-address> --namespace <driver-namespace>
 NAME             VOLUME ID          SIZE       POOL    SYSTEM ID          PV NAME          PV STATUS   STORAGE CLASS   PVC NAME                NAMESPACE            SNAPSHOT COUNT

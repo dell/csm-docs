@@ -1,7 +1,8 @@
 ---
 title: "Release notes"
 linkTitle: "Release notes"
-weight: 6
+weight: 6 
+toc_hide: true
 Description: >
   Container Storage Modules (CSM) release notes for authorization
 ---

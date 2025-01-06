@@ -1,6 +1,7 @@
 ---
 title: "Troubleshooting"
-linkTitle: "Troubleshooting"
+linkTitle: "Troubleshooting" 
+toc_hide: true
 weight: 4
 Description: >
   Troubleshooting guide

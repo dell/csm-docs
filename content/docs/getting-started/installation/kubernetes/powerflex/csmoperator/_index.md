@@ -168,14 +168,15 @@ run `/opt/emc/scaleio/sdc/bin/drv_cfg --add_mdm --ip 10.xx.xx.xx.xx,10.xx.xx.xx`
    | volume-name-prefix | The volume-name-prefix will be used by provisioner sidecar as a prefix for all the volumes created  | Yes | k8s |
    | monitor-interval | The monitor-interval will be used by external-health-monitor as an interval for health checks  | Yes | 60s |
 {{< /collapse >}}
+<ul>
+ii . **Run this command to create** a PowerFlex custom resource:
 
-  ii . **Run this command to create** a PowerFlex custom resource:
-
-   ```bash
-     kubectl create -f <input_sample_file.yaml>
-   ```
+```bash
+  kubectl create -f <input_sample_file.yaml>
+```
 
    This command will deploy the CSI-PowerFlex driver in the namespace specified in the input YAML file.
+</ul> 
 
 4. **Verify the installation:**
 

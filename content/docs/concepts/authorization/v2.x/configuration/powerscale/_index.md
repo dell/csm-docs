@@ -20,7 +20,7 @@ Given a setup where Kubernetes, a storage system, and the Container Storage Modu
 
    This takes the assumption that PowerScale will be installed in the `isilon` namespace.
 
-2. Edit these parameters in `samples/secret/karavi-authorization-config.json` file in [CSI PowerScale](https://github.com/dell/csi-powerscale/tree/main/samples/secret) driver and update/add connection information for one or more backend storage arrays. In an instance where multiple CSI drivers are configured on the same Kubernetes cluster, the port range in the *endpoint* parameter must be different for each driver.
+2. Edit these parameters in `samples/secret/karavi-authorization-config.json` file in [CSI PowerScale](https://github.com/dell/csi-powerscale/tree/main/samples/secret/karavi-authorization-config.json) driver and update/add connection information for one or more backend storage arrays. In an instance where multiple CSI drivers are configured on the same Kubernetes cluster, the port range in the *endpoint* parameter must be different for each driver.
 
   | Parameter                 | Description                                                                                                      | Required | Default                        |
   | ------------------------- | ---------------------------------------------------------------------------------------------------------------- | -------- | ------------------------------ |
@@ -82,7 +82,7 @@ Given a setup where Kubernetes, a storage system, and the Container Storage Modu
 
     **Helm**
 
-    Refer to the [Install the Driver](../../../../getting-started/installation/kubernetes/powerscale/helm/#install-driver) section to edit the parameters to prepare the `samples/secret/secret.yaml` file to configure the driver to communicate with Authorization sidecar.
+    Refer to the [Install the Driver](../../../../../getting-started/installation/kubernetes/powerscale/helm/#install-driver) section to edit the parameters to prepare the `samples/secret/secret.yaml` file to configure the driver to communicate with Authorization sidecar.
 
     - Update `endpoint` to match the localhost endpoint in `samples/secret/karavi-authorization-config.json`.
 

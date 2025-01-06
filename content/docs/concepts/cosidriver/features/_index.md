@@ -2,7 +2,8 @@
 title: "Features"
 linkTitle: "Features" 
 weight: 4
-description: Description of COSI Driver features
+description: Description of COSI Driver features 
+no_list: true
 ---
 
 ## ObjectScale

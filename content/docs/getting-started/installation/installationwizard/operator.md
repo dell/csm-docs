@@ -25,9 +25,9 @@ The Container Storage Modules Installation Wizard is a webpage that helps you cr
 8. If needed, select `Install Controller Pods on Control Plane` and/or `Install Node Pods on Control Plane`.
 9. Enter the `Namespace`. The default value is `csi-<array>`.
 10. Click on `Generate YAML`.
-13. A manifest file, `values.yaml` will be generated and downloaded.
-14. A section `Run the following commands to install` will be displayed.
-15. Run the commands displayed to install Dell CSI Driver and Modules using the generated manifest file.
+11. A manifest file, `values.yaml` will be generated and downloaded.
+12. A section `Run the following commands to install` will be displayed.
+13. Run the commands displayed to install Dell CSI Driver and Modules using the generated manifest file.
 
 ## Installation Using Operator
 
@@ -44,15 +44,19 @@ The Container Storage Modules Installation Wizard is a webpage that helps you cr
 {{< hide id="1" >}}
 - If Observability is checked in the wizard, refer to [Observability](../csmoperator/csm-modules/observability) to export metrics to Prometheus and load the Grafana dashboards. 
 {{< /hide >}}
+
 {{< hide id="2" >}}
 - If Authorization is checked in the wizard, only the sidecar is enabled. Refer to [Authorization](../csmoperator/csm-modules/authorizationv2.0) to install and configure the CSM Authorization Proxy Server. 
 {{< /hide >}}
+
 {{< hide id="3">}}
 - If Replication is checked in the wizard, refer to [Replication](../csmoperator/csm-modules/replication) for the necessary prerequisites required for this module.
 {{< /hide >}}
+
 - Install the Operator.
 
-    On your terminal, run this command:
+On your terminal, run this command:
+
 ```bash
-kubectl create -f values.yaml
+    kubectl create -f values.yaml
 ```

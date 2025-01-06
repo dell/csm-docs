@@ -348,7 +348,7 @@ storageClasses:
 9. If `storageClasses.volumeHealth` is `true`, executes the [Volume Health Metrics](#volume-health-metrics) suite.
 10. If `storageClasses.rwop` is `true`, executes the [Multi-Attach Volume](#multi-attach-volume) suite with the volume access mode `ReadWriteOncePod`.
 11. If `storageClasses.ephemeral` exists, executes the [Ephemeral Volumes](#ephemeral-volumes) suite.
-12. If `storageClasses.vgs` is `true`, executes the [Volume Group Snapshot]() suite.
+12. If `storageClasses.vgs` is `true`, executes the [Volume Group Snapshot](#volume-group-snapshots) suite.
 13. If `storageClasses.capacityTracking` exists, exeuctes the [Storage Class Capacity Tracking](#storage-capacity-tracking) suite.
 
 > ℹ️ **NOTE:**: For testing/debugging purposes, it can be useful to use the `--no-cleanup` so resources do not get deleted.
@@ -675,8 +675,8 @@ cert-csi k8s-e2e --config <kube config> --driver-config <path to driver config> 
 - Cert-CSI logs will be present in the execution directory `info.log` , `error.log`
 
 ### Test config files format
-- #### [driver-config](https://github.com/dell/cert-csi/blob/main/pkg/utils/testdata/config-nfs.yaml)
-- #### [ignore-tests](https://github.com/dell/cert-csi/blob/main/pkg/utils/ignore.yaml)
+- [driver-config](https://github.com/dell/cert-csi/blob/main/pkg/utils/testdata/config-nfs.yaml)
+- [ignore-tests](https://github.com/dell/cert-csi/blob/main/pkg/utils/ignore.yaml)
 
 ### Example Commands
 -  ```bash

@@ -14,7 +14,7 @@ weight: 2
 To deploy the Operator, follow the instructions available [here](../../../operator/operatorinstallation_openshift.md).
 
 {{< accordion id="One" title="CSM Installation Wizard" >}}
-  {{< include "content/docs/getting-started/installation/installationwizard/operator.md" >}}
+  {{< includee file="content/docs/getting-started/installation/installationwizard/operator.md" hideIds="1,2,3" >}}
 {{< /accordion >}}
 
 <br>

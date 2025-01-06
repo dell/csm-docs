@@ -26,18 +26,64 @@ Use the object name in the kubectl edit command: </br>
 kubectl edit csm <object-name> -n <driver-namespace>
 ```
 
+{{< hide id="1">}}
+
 For example, if the object name is powerstore:</br>
 
 ```bash
-kubectl edit csm powerstore -n <driver-namespace>
+kubectl edit csm powerstore -n powerstore
+``` 
+
+{{< /hide >}} 
+
+{{< hide id="2" >}}
+
+For example, if the object name is powerscale:</br>
+
+```bash
+kubectl edit csm isilon -n isilon
 ```
+
+{{< /hide >}} 
+
+{{< hide id="3" >}}
+
+For example, if the object name is powerflex:</br>
+
+```bash
+kubectl edit csm powerflex -n powerflex
+```
+
+{{< /hide >}} 
+
+{{< hide id="4" >}}
+
+
+For example, if the object name is powermax:</br>
+
+```bash
+kubectl edit csm powermax -n powermax
+``` 
+
+{{< /hide >}}
+
+{{< hide id="5" >}}
+
+
+For example, if the object name is unityXT:</br>
+
+```bash
+kubectl edit csm unity -n unity
+``` 
+
+{{< /hide >}}
 
 Modify the installation as needed, typically updating driver versions, sidecars, and environment variables.
 
 3. Refer how to [upgrade](https://infohub.delltechnologies.com/en-us/p/best-practices-for-deployment-and-life-cycle-management-of-dell-csm-modules-1/#:~:text=Upgrades%20with%20Operator) guide if you have more questions </br>
 
 {{< alert title="Warning" color="warning" >}}
-Starting with CSM 1.12, use images from [quay.io](https://quay.io/organization/dell). From CSM 1.14 (May 2025), editing the CSM object will fail if using images from [Docker Hub](https://hub.docker.com/r/dellemc/).
+ <span><span/>{{< message text="4" >}}
 {{< /alert >}}
 
 #### Supported modifications

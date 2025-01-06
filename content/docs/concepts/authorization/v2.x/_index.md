@@ -66,7 +66,7 @@ Storage Administrators perform the following:
 - Tenant Management (create, get, delete)
 - Token Management (create, revoke)
 
-For more information on the configuration of the above, see the configuration of the [Proxy Server](../v2.x/configuration/#configuring-storage).
+For more information on the configuration of the above, see the configuration of the [Proxy Server](../v2.x/configuration/#configuring-the-container-storage-module-for-authorization-proxy-server).
 
 ### Tenant Administrators
 

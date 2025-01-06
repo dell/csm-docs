@@ -2,7 +2,21 @@
 title: Configuration
 linktitle: Configuration
 weight: 2
-description: Configure CSM Authorization
+description: Configure CSM Authorization 
+no_list: true 
 ---
 
-This section provides the details and instructions on how to configure Container Storage Module Authorization.
+This section provides the details and instructions on how to configure Container Storage Module Authorization. 
+
+
+{{< cardcontainer >}} 
+
+      {{< customcard link="./powerflex" imageNumber="3" title="PowerFlex"  >}} 
+
+    {{< customcard   link="./powermax"  imageNumber="3" title="PowerMax" >}} 
+
+    {{< customcard  link="./powerscale"  imageNumber="3" title="PowerScale"  >}}
+
+    {{< customcard link="./proxy-server"   imageNumber="3" title="Proxy Server"  >}}
+
+{{< /cardcontainer >}}

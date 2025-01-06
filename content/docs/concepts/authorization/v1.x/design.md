@@ -83,7 +83,7 @@ Inbound requests are expected to originate from the Container Storage Module for
 
 ### Container Storage Module for Authorization CLI
 
-The [*karavictl*](../cli) CLI (Command Line Interface) application allows Storage Admins to manage and interact with a running Container Storage Module for Authorization Server.
+The [*karavictl*](../../../tooling/cli) CLI (Command Line Interface) application allows Storage Admins to manage and interact with a running Container Storage Module for Authorization Server.
 
 ### Storage Array
 

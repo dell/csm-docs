@@ -19,7 +19,7 @@
 <!-- Dynamically add the `hide` parameter based on IDs -->
 {{ range $hideIdList }}
   {{ $id := . }}
-  {{ $content = replaceRE (printf "\\{\\{<\\s*hide\\s+id=\"%s\"\\s*>\\}\\}" $id) (printf "{{< hide id=\"%s\" hide=\"true\" >}}" $id) $content }}
+  {{ $content = replaceRE (printf "\\{\\{<\\s*hide\\s+id=\"%s\"(\\s+inline=\"true\")?\\s*>\\}\\}" $id) (printf "{{< hide id=\"%s\" hide=\"true\" >}}" $id) $content }}
 {{ end }}
 
 <!-- Dynamically add the `hide` parameter based on Classes -->

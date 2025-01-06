@@ -16,7 +16,9 @@ Given a setup where Kubernetes, a storage system, and the Container Storage Modu
     kubectl apply -f /tmp/token.yaml -n vxflexos
    ```
 
-2. Edit these parameters in `samples/secret/karavi-authorization-config.json` file in the [CSI PowerFlex](https://github.com/dell/csi-powerflex/tree/main/samples) driver and update/add connection information for one or more backend storage arrays. In an instance where multiple CSI drivers are configured on the same Kubernetes cluster, the port range in the *endpoint* parameter must be different for each driver.
+2. Edit these parameters in `samples/secret/karavi-authorization-config.json` file in the [CSI PowerFlex](https://github.com/dell/csi-powerflex/tree/main/samples/secret/karavi-authorization-config.json) driver and update/add connection information for one or more backend storage arrays. In an instance where multiple CSI drivers are configured on the same Kubernetes cluster, the port range in the *endpoint* parameter must be different for each driver.
+
+{{< collapse id="1" title="Parameters">}}
 
    | Parameter | Description | Required | Default |
    | --------- | ----------- | -------- |-------- |
@@ -27,13 +29,16 @@ Given a setup where Kubernetes, a storage system, and the Container Storage Modu
    | systemID | System ID of the backend storage array. | Yes | " " |
    | skipCertificateValidation  | A boolean that enables/disables certificate validation of the backend storage array. This parameter is not used. | No | true |
    | isDefault | A boolean that indicates if the array is the default array. This parameter is not used. | No | default value from values.yaml |
+{{< /collapse >}}
+<ul style="list-style-type: none;">
+<li>   Create the karavi-authorization-config secret using this command:
 
-    Create the karavi-authorization-config secret using this command:
-
-    ```bash
+```bash
     
-    kubectl -n vxflexos create secret generic karavi-authorization-config --from-file=config=samples/secret/karavi-authorization-config.json -o yaml --dry-run=client | kubectl apply -f -
-    ```
+kubectl -n vxflexos create secret generic karavi-authorization-config --from-file=config=samples/secret/karavi-authorization-config.json -o yaml --dry-run=client | kubectl apply -f -
+```
+</li>
+</ul>
 
 3. Create the proxy-server-root-certificate secret.
 
@@ -170,7 +175,7 @@ Given a setup where Kubernetes, a storage system, and the Container Storage Modu
     ```
 
     Alternatively, you can use the minimal sample files provided
-    [here](https://github.com/dell/csm-operator/tree/main/samples/minimal-samples) and install the module using default values
+    [here](https://github.com/dell/csm-operator/tree/main/samples/minimal-samples/powerflex_v2130.yaml) and install the module using default values
 
 6. Install the CSI PowerFlex driver following the appropriate documenation for your installation method.
 
