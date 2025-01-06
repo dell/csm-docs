@@ -35,9 +35,9 @@ Persistent Volumes (PVs) created via virtualized workloads (VMs).
   the source will be replicated to the target cluster, as there is an active
   replication session between the two clusters.
 
-- Refer this documentation
+- Refer this document
   (https://docs.openshift.com/rosa/virt/virtual_machines/creating_vms_rh/virt-creating-vms-from-cli.html)
-  for creating virtual machines from the command line.
+  for creating virtual machine from the command line.
 
 - On the target cluster, the replica Persistent Volume (PV) can be accessed by
   binding it to a replica Persistent Volume Claim (PVC). Deploy a replica VM on
