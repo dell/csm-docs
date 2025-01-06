@@ -1067,7 +1067,7 @@ The Secret specifies the zone associated with each PowerFlex system along with a
   mdm: "10.0.0.2,10.0.0.3"
   zone:
     name: "zone1"
-    labelKey: "kubernetes.topology.io/zone"
+    labelKey: "topology.kubernetes.io/zone"
     protectionDomains:
       - name: "domain1"
         pools:
@@ -1081,7 +1081,7 @@ The Secret specifies the zone associated with each PowerFlex system along with a
   mdm: "10.0.0.5,10.0.0.6"
   zone:
     name: "zone2"
-    labelKey: "kubernetes.topology.io/zone"
+    labelKey: "topology.kubernetes.io/zone"
     protectionDomains:
       - name: "domain2"
         pools:
