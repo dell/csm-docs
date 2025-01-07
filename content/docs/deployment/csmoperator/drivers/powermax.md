@@ -113,9 +113,9 @@ modprobe nvme_tcp
 
 **Cluster requirments**
 
-- All OpenShift or Kubernetes nodes connecting to Dell storage arrays must use unique host NQNs.
+- All OpenShift or Kubernetes nodes connecting to Dell storage arrays must use unique host NVMe Qualified Names (NQNs).
 
-> The OpenShift deployment process for RHCOS will set the same host NQN for all nodes. The host NQN is stored in the file /etc/nvme/hostnqn. One possible solution to ensure unique host NQNs is to add the following machine config to your OCP cluster:
+> The OpenShift deployment process for CoreOS will set the same host NQN for all nodes. The host NQN is stored in the file /etc/nvme/hostnqn. One possible solution to ensure unique host NQNs is to add the following machine config to your OCP cluster:
 
 ```yaml
 apiVersion: machineconfiguration.openshift.io/v1
