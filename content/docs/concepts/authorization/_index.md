@@ -29,6 +29,6 @@ Currently, we have two versions of Authorization, **v1.x** and **v2.x**. **v2.x 
 
     {{< customcard   link="./v2.x"  title="v2.x" >}} 
 
-    {{< customcard  link="./migration-guide-from-v1-to-v2"  title="Migration"  >}} 
+    {{< customcard  link="./migration-guide-from-v1-to-v2"  title="Migration from v1 to v2"  >}} 
 
 {{< /cardcontainer >}}

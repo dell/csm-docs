@@ -34,7 +34,6 @@ Given a setup where Kubernetes, a storage system, and the Container Storage Modu
 <li>   Create the karavi-authorization-config secret using this command:
 
 ```bash
-    
 kubectl -n vxflexos create secret generic karavi-authorization-config --from-file=config=samples/secret/karavi-authorization-config.json -o yaml --dry-run=client | kubectl apply -f -
 ```
 </li>
@@ -45,14 +44,12 @@ kubectl -n vxflexos create secret generic karavi-authorization-config --from-fil
     If running in *insecure* mode, create the secret with empty data:
 
       ```bash
-      
       kubectl -n vxflexos create secret generic proxy-server-root-certificate --from-literal=rootCertificate.pem= -o yaml --dry-run=client | kubectl apply -f -
       ```
 
     Otherwise, create the proxy-server-root-certificate secret with the appropriate file:
 
       ```bash
-      
       kubectl -n vxflexos create secret generic proxy-server-root-certificate --from-file=rootCertificate.pem=/path/to/rootCA -o yaml --dry-run=client | kubectl apply -f -
       ```
 

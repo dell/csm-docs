@@ -28,8 +28,15 @@ In the case of a single stretched cluster, it should be always set to `self`.
 This should contain the name of the storage class on the remote cluster which is used to create the remote `PersistentVolume`.
 >**_NOTE_**: You still need to create a pair of storage classes even while using a single stretched cluster.
 
+{{< hide id="1" hide="true">}}
 ### Driver specific parameters
-Please refer to the driver specific sections for [CSI Driver](./csi-driver/#creating-storage-classes) for a detailed list of parameters.
+Please refer to the driver specific sections for [CSI Driver](./csi-driver/#creating-storage-classes) for a detailed list of parameters. 
+{{< /hide >}} 
+
+{{< hide id="2" >}}
+### Driver specific parameters
+Please refer to the driver specific sections for [PowerMax](../powermax/#creating-storage-classes), [PowerFlex](../powerflex/#creating-storage-classes), [PowerStore](../powerstore/#creating-storage-classes), [PowerScale](../powerscale/#creating-storage-classes) for a detailed list of parameters.
+{{< /hide >}}
 
 ### PV sync Deletion
 

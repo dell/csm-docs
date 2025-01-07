@@ -11,7 +11,7 @@ weight: 1
 To Upgrade the Operator, follow the instructions available [here](../../../operator/upgrade.md).
 
 {{< accordion id="Two" title="CSI Driver" markdown="true" >}}  
-{{<includee file="content/docs/getting-started/upgrade/operator/driver_upgrade.md" hideIds="1,2,3,5">}}
+{{<includee file="content/docs/getting-started/upgrade/operator/driver_upgrade.md" hideClasses="1,2,3,5">}}
 {{< /accordion >}}
 
 <br>

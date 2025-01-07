@@ -17,6 +17,12 @@ This section provides the details and instructions on how to configure Container
 
     {{< customcard  link="./powerscale"  imageNumber="3" title="PowerScale"  >}}
 
-    {{< customcard link="./proxy-server"   imageNumber="3" title="Proxy Server"  >}}
+
+{{< /cardcontainer >}}
+
+
+{{< cardcontainer >}} 
+
+    {{< customcard link="./proxy-server"    title="Proxy Server"  >}}
 
 {{< /cardcontainer >}}

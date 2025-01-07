@@ -23,7 +23,7 @@ The Container Storage Module Observability module for supported Dell CSI Drivers
   
   {{< hide id="1" inline="true">}}
   ```yaml
-      - name: observability
+   - name: observability
       enabled: false
       components:
         - name: topology
@@ -39,7 +39,7 @@ The Container Storage Module Observability module for supported Dell CSI Drivers
 
   {{< hide id="2" inline="true">}}
   ```yaml
-      - name: observability
+    - name: observability
       enabled: false
       components:
         - name: topology
@@ -55,7 +55,7 @@ The Container Storage Module Observability module for supported Dell CSI Drivers
 
   {{< hide id="3" inline="true">}}
   ```yaml
-      - name: observability
+    - name: observability
       enabled: false
       components:
         - name: topology

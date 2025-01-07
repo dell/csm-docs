@@ -16,6 +16,9 @@
 {{ $content = replace $content "{{labels}}" $labels }}
 
 
+{{ $content = replaceRE "\\{\\{<\\s*hide\\s+id=\"([^\"]+)\"\\s+hide=\"true\"\\s*>\\}\\}" (printf "{{< hide id=\"$1\" >}}") $content }}
+
+
 <!-- Dynamically add the `hide` parameter based on IDs -->
 {{ range $hideIdList }}
   {{ $id := . }}

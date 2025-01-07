@@ -9,74 +9,70 @@ weight: 2
 
 You can update CSI Drivers installed by the Dell CSM Operator like any Kubernetes resource:
 
-1. </b>Get the driver-object details using kubectl command:</b></br>
 
+1. </b>Get the driver-object details using kubectl command:</b></br> 
+
+{{< hide class="1" >}}
 ```bash
-kubectl get <driver-object> -n <driver-namespace>
+kubectl get csm -n powerstore
 ```
+{{< /hide >}} 
 
-2. Replace `<driver-namespace>` with the appropriate namespace:</br>
+{{< hide class="2" >}}
 ```bash
-kubectl get csm -n <driver-namespace>
-```
+kubectl get csm -n isilon 
+``` 
+{{< /hide  >}} 
 
-Use the object name in the kubectl edit command: </br>
-
+{{< hide class="3" >}}
 ```bash
-kubectl edit csm <object-name> -n <driver-namespace>
+kubectl get csm -n vxflexos
+``` 
+{{< /hide >}} 
+
+{{< hide class="4" >}}
+```bash
+kubectl get csm -n powermax
+``` 
+{{< /hide >}} 
+
+{{< hide class="5" >}}
+```bash
+kubectl get csm -n unity
 ```
+{{< /hide >}} 
 
-{{< hide id="1">}}
+2. Use the object name in the kubectl edit command: </br>
 
-For example, if the object name is powerstore:</br>
-
+{{< hide class="1">}}
 ```bash
 kubectl edit csm powerstore -n powerstore
 ``` 
+{{< /hide >}}  
 
-{{< /hide >}} 
-
-{{< hide id="2" >}}
-
-For example, if the object name is powerscale:</br>
-
+{{< hide class="2" >}}
 ```bash
 kubectl edit csm isilon -n isilon
 ```
-
 {{< /hide >}} 
 
-{{< hide id="3" >}}
-
-For example, if the object name is powerflex:</br>
-
+{{< hide class="3" >}}
 ```bash
-kubectl edit csm powerflex -n powerflex
+kubectl edit csm vxflexos -n vxflexos
 ```
-
 {{< /hide >}} 
 
-{{< hide id="4" >}}
-
-
-For example, if the object name is powermax:</br>
-
+{{< hide class="4" >}}
 ```bash
 kubectl edit csm powermax -n powermax
-``` 
+```
+{{< /hide >}}  
 
-{{< /hide >}}
-
-{{< hide id="5" >}}
-
-
-For example, if the object name is unityXT:</br>
-
+{{< hide class="5" >}}
 ```bash
 kubectl edit csm unity -n unity
-``` 
-
-{{< /hide >}}
+```
+{{< /hide >}} 
 
 Modify the installation as needed, typically updating driver versions, sidecars, and environment variables.
 
