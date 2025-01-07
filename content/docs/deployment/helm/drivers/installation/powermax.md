@@ -45,9 +45,32 @@ kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/
 
 The following example shows how to generate a private key and how to use that key to sign an SSL certificate using the openssl tool:
 
+Create the Configuration file(openssl.cnf) which includes the subjectAltName:
+```bash
+[ req ]
+default_bits       = 2048
+distinguished_name = req_distinguished_name
+req_extensions     = req_ext
+prompt             = no
+
+[ req_distinguished_name ]
+C  = XX
+L  = Default City
+O  = Default Company Ltd
+
+[ req_ext ]
+subjectAltName = @alt_names
+
+[ alt_names ]
+DNS.1 = hostname of the cluster where reverseproxy is running
+IP.1 = "0.0.0.0"
+```
+
+Generate the CSR and Self-Signed Certificate:
 ```bash
 openssl genrsa -out tls.key 2048
-openssl req -new -x509 -sha256 -key tls.key -out tls.crt -days 3650
+openssl req -new -key tls.key -out tls.csr -config openssl.cnf
+openssl x509 -req -in tls.csr -signkey tls.key -out tls.crt -days 3650 -extensions v3_req -extfile openssl.cnf
 ```
 
 ### Install Helm 3
