@@ -54,7 +54,7 @@ The following table lists the supported maintenance actions and the equivalent o
 {{</table>}}
 
 ### How to perform actions
-We strongly recommend using `repctl` to perform any actions on `DellCSIReplicationGroup` objects. You can find detailed steps [here](../tools/#executing-actions).
+We strongly recommend using `repctl` to perform any actions on `DellCSIReplicationGroup` objects. You can find detailed steps [here](../../../tooling/repctl/#executing-actions).
 
 If you wish to use `kubectl` to perform actions, then use kubectl edit/patch operations and set the `action` field in the Custom Resource.
 While performing site-specific actions, please consult each driver's documentation to get an exhaustive list of all the supported actions.

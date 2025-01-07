@@ -1,16 +1,14 @@
 ---
-title: Tools
-linktitle: Tools
+title: Repctl
+linktitle: Repctl
 weight: 7
 description: >
-  repctl tool for Replication feature in detail 
-toc_hide: true
+  repctl tool for Replication feature in detail
 ---
-# repctl
+
 
 `repctl` is a command-line client for configuring replication 
 and managing replicated resources between multiple Kubernetes clusters.
-
 
 ## Usage
 

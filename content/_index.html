@@ -267,7 +267,13 @@ linkTitle = "Dell Technologies"
                 <div class="col-12 justify-content-center mt-5" > 
                 
                     <div class="video-container">
-                    <iframe  src="./videos/dell_csm_explainer_video.mp4" frameborder="0" allow="accelerometer;encrypted-media; gyroscope; picture-in-picture" allowfullscreen ></iframe>
+                      <video id="video" src="./videos/dell_csm_explainer_video.mp4" controls 
+                      allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" 
+                      style="width: 100%; height: auto;" 
+                      frameborder="0" 
+                      allowfullscreen>
+                   Your browser does not support the video tag.
+               </video>
                     </div> 
                
 
@@ -276,3 +282,18 @@ linkTitle = "Dell Technologies"
 
         </div>
 </div>
+
+<script>
+  function pauseVideo() {
+      var video = document.getElementById('video');
+      if (video) {
+          video.pause(); // Ensure the video is paused
+      }
+  }
+
+  // Pause the video on DOM content loaded
+  document.addEventListener('DOMContentLoaded', pauseVideo);
+
+  // Pause the video when the page is shown (includes back navigation)
+  window.addEventListener('pageshow', pauseVideo);
+</script>
