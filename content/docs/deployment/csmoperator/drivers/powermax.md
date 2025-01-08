@@ -113,7 +113,38 @@ modprobe nvme_tcp
 
 **Cluster requirments**
 
-- All OpenShift or Kubernetes nodes connecting to Dell storage arrays must use unique host NQNs.
+- All OpenShift or Kubernetes nodes connecting to Dell storage arrays must use unique host NVMe Qualified Names (NQNs).
+
+> The OpenShift deployment process for CoreOS will set the same host NQN for all nodes. The host NQN is stored in the file /etc/nvme/hostnqn. One possible solution to ensure unique host NQNs is to add the following machine config to your OCP cluster:
+
+```yaml
+apiVersion: machineconfiguration.openshift.io/v1
+kind: MachineConfig
+metadata:
+  labels:
+    machineconfiguration.openshift.io/role: worker
+  name: 99-worker-custom-nvme-hostnqn
+spec:
+  config:
+    ignition:
+      version: 3.4.0
+    systemd:
+      units:
+        - contents: |
+            [Unit]
+            Description=Custom CoreOS Generate NVMe Hostnqn
+
+            [Service]
+            Type=oneshot
+            ExecStart=/usr/bin/sh -c '/usr/sbin/nvme gen-hostnqn > /etc/nvme/hostnqn'
+            RemainAfterExit=yes
+
+            [Install]
+            WantedBy=multi-user.target
+          enabled: true
+          name: custom-coreos-generate-nvme-hostnqn.service
+```
+
 - The driver requires the NVMe command-line interface (nvme-cli) to manage the NVMe clients and targets. The NVMe CLI tool is installed in the host using the following command on RPM oriented Linux distributions.
 
 ```bash
@@ -408,7 +439,7 @@ Create a secret named powermax-certs in the namespace where the CSI PowerMax dri
           # Choose which transport protocol to use (ISCSI, FC, NVMETCP, auto) defaults to auto if nothing is specified
           X_CSI_TRANSPORT_PROTOCOL: ""
           # IP address of the Unisphere for PowerMax (Required), Defaults to https://0.0.0.0:8443
-          X_CSI_POWERMAX_ENDPOINT: "https://10.0.0.0:8443" 
+          X_CSI_POWERMAX_ENDPOINT: "https://10.0.0.0:8443"
           # List of comma-separated array ID(s) which will be managed by the driver (Required)
           X_CSI_MANAGED_ARRAYS: "000000000000,000000000000,"
    ```
