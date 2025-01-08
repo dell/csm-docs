@@ -45,11 +45,33 @@ The following requirements must be met before installing the CSI Driver for Dell
 The CSI PowerMax Reverse Proxy is a component that will be installed with the CSI PowerMax driver. For more details on this feature, see the related [documentation](../../../../csidriver/features/powermax/#csi-powermax-reverse-proxy).
 
 Create a TLS secret that holds an SSL certificate and a private key. This is required by the reverse proxy server.
+
+Create the Configuration file (openssl.cnf) which includes the subjectAltName:
+```bash
+[ req ]
+default_bits       = 2048
+distinguished_name = req_distinguished_name
+req_extensions     = req_ext
+prompt             = no
+
+[ req_distinguished_name ]
+C  = XX
+L  = Default City
+O  = Default Company Ltd
+
+[ req_ext ]
+subjectAltName = @alt_names
+
+[ alt_names ]
+DNS.1 = "csipowermax-reverseproxy"
+IP.1 = "0.0.0.0"
+```
 Use a tool such as `openssl` to generate this secret using the example below:
 
 ```bash
 openssl genrsa -out tls.key 2048
-openssl req -new -x509 -sha256 -key tls.key -out tls.crt -days 3650
+openssl req -new -key tls.key -out tls.csr -config openssl.cnf
+openssl x509 -req -in tls.csr -signkey tls.key -out tls.crt -days 3650 -extensions v3_req -extfile openssl.cnf
 kubectl create secret -n <namespace> tls csirevproxy-tls-secret --cert=tls.crt --key=tls.key
 ```
 
