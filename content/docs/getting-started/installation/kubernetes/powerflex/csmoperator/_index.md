@@ -138,7 +138,8 @@ run `/opt/emc/scaleio/sdc/bin/drv_cfg --add_mdm --ip 10.xx.xx.xx.xx,10.xx.xx.xx`
 
     b. **Detailed Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powerflex_v2130.yaml) for detailed settings.
 
-- Users should configure the parameters in CR. The following table lists the primary configurable parameters of the PowerFlex driver and their default values:
+- Users should configure the parameters in CR. The following table lists the primary configurable parameters of the PowerFlex driver and their default values: 
+<ul>
 {{< collapse id="1" title="Parameters">}}
    | Parameter | Description | Required | Default |
    | --------- | ----------- | -------- |-------- |
@@ -168,7 +169,7 @@ run `/opt/emc/scaleio/sdc/bin/drv_cfg --add_mdm --ip 10.xx.xx.xx.xx,10.xx.xx.xx`
    | volume-name-prefix | The volume-name-prefix will be used by provisioner sidecar as a prefix for all the volumes created  | Yes | k8s |
    | monitor-interval | The monitor-interval will be used by external-health-monitor as an interval for health checks  | Yes | 60s |
 {{< /collapse >}}
-<ul>
+
 ii . **Run this command to create** a PowerFlex custom resource:
 
 ```bash

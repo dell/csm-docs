@@ -26,7 +26,7 @@ To deploy the Operator, follow the instructions available [here](../../../operat
    ```
    This command creates a namespace called `isilon`. You can replace `isilon` with any name you prefer.
 
-2. **Create `secret` file:**.** 
+2. **Create `secret` file:**.
 
    a. Create a file called `secret.yaml` or pick a [sample](https://github.com/dell/csi-powerscale/blob/main/samples/secret/secret.yaml) that has Powerscale array connection details: 
       ```yaml
@@ -101,6 +101,7 @@ To deploy the Operator, follow the instructions available [here](../../../operat
     b. **Detailed Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powerscale_v2130.yaml) for detailed settings.
 
  -  Users should configure the parameters in CR. The following table lists the primary configurable parameters of the PowerScale driver and their default values:
+   <ul>
    {{< collapse id="1" title="Parameters">}}
    | Parameter | Description | Required | Default |
    | --------- | ----------- | -------- |-------- |
@@ -123,14 +124,17 @@ To deploy the Operator, follow the instructions available [here](../../../operat
    | ***Node parameters*** |
    | X_CSI_MAX_VOLUMES_PER_NODE | Specify the default value for the maximum number of volumes that the controller can publish to the node | Yes | 0 |
    | X_CSI_MODE   | Driver starting mode  | No | node |
-   {{< /collapse >}}
+   {{< /collapse >}} 
+
 
 ii. **Create PowerScale custom resource**:
 
    ```bash
    kubectl create -f <input_sample_file.yaml>
    ```
-   This command will deploy the PowerScale driver in the namespace specified in the input YAML file.
+   This command will deploy the PowerScale driver in the namespace specified in the input YAML file. 
+
+   </ul>
 
 5. **Verify the installation** as mentioned below
 
@@ -158,7 +162,7 @@ ii. **Create PowerScale custom resource**:
       RootClientEnabled: "false" 
    volumeBindingMode: Immediate
     ````  
-Refer [Storage Class](https://github.com/dell/csi-powerscale/tree/main/samples/storageclass) for different sample files. 
+   Refer [Storage Class](https://github.com/dell/csi-powerscale/tree/main/samples/storageclass) for different sample files. 
 
    **Run this command to create** a storage class
 
@@ -177,12 +181,13 @@ Refer [Storage Class](https://github.com/dell/csi-powerscale/tree/main/samples/s
       parameters:
          IsiPath: /ifs/data/csi
     ````
-Refer [Volume Snapshot Class](https://github.com/dell/csi-powerscale/blob/main/samples/volumesnapshotclass/) for the sample files.
 
-   **Run this command to create** a volume snapshot class
-   ```bash
-      kubectl create -f < volume-snapshot-class.yaml >
-   ```
+     Refer [Volume Snapshot Class](https://github.com/dell/csi-powerscale/blob/main/samples/volumesnapshotclass/) for the sample files.
+
+     **Run this command to create** a volume snapshot class
+     ```bash
+       kubectl create -f < volume-snapshot-class.yaml >
+     ```
 
 **Note** :
 

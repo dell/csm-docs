@@ -108,7 +108,9 @@ CRDs should be configured during replication prepare stage with repctl as descri
 4. Download `wget -O my-isilon-settings.yaml https://raw.githubusercontent.com/dell/helm-charts/csi-isilon-2.13.0/charts/csi-isilon/values.yaml` into `cd ../dell-csi-helm-installer` to customize settings for installation.
 5. Edit *my-isilon-settings.yaml* to set the following parameters for your installation:
    The following table lists the primary configurable parameters of the PowerScale driver Helm chart and their default values. More detailed information can be
-   found in the  [`values.yaml`](https://github.com/dell/helm-charts/blob/csi-isilon-2.13.0/charts/csi-isilon/values.yaml) file in this repository.
+   found in the  [`values.yaml`](https://github.com/dell/helm-charts/blob/csi-isilon-2.13.0/charts/csi-isilon/values.yaml) file in this repository.  
+
+  <ul>
    {{< collapse id="2" title="Parameters">}}
    | Parameter | Description | Required | Default |
    | --------- | ----------- | -------- |-------- |
@@ -167,8 +169,12 @@ CRDs should be configured during replication prepare stage with repctl as descri
    - Whenever the *certSecretCount* parameter changes in *my-isilon-setting.yaml* user needs to reinstall the driver.
    - In order to enable authorization, there should be an authorization proxy server already installed.
    - If you are using custom images, update each attributes under the *images* field in *my-isilon-setting.yaml* to make sure that they are pointing to the correct image repository and version. 
-   {{< /collapse >}}
-6. Edit following parameters in samples/secret/secret.yaml file and update/add connection/authentication information for one or more PowerScale clusters. If replication feature is enabled, ensure the secret includes all the PowerScale clusters involved in replication.
+   {{< /collapse >}} 
+   </ul>
+
+6. Edit following parameters in samples/secret/secret.yaml file and update/add connection/authentication information for one or more PowerScale clusters. If replication feature is enabled, ensure the secret includes all the PowerScale clusters involved in replication. 
+
+<ul>
 {{< collapse id="3" title="Parameters">}}
    | Parameter | Description | Required | Default |
    | --------- | ----------- | -------- |-------- |
@@ -210,6 +216,7 @@ Create isilon-creds secret using the following command:
    - The user has to validate the yaml syntax and array-related key/values while replacing or appending the isilon-creds secret. The driver will continue to use previous values in case of an error found in the yaml file.
    - For the key isiIP/endpoint, the user can give either IP address or FQDN. Also, the user can prefix 'https' (For example, https://192.168.1.1) with the value.
    - The *isilon-creds* secret has a *mountEndpoint* parameter which should only be updated and used when [Authorization](../../../../../authorization) is enabled.
+</ul>
 
 7. Install OneFS CA certificates by following the instructions from the next section, if you want to validate OneFS API server's certificates. If not, create an empty secret using the following command and an empty secret must be created for the successful installation of CSI Driver for PowerScale.
     ```bash

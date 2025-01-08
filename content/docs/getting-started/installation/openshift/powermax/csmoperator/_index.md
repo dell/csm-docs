@@ -126,6 +126,8 @@ To deploy the Operator, follow the instructions available [here](../../../operat
     b. **Detailed Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powermax_v2130.yaml) for detailed settings.
 
 6. Users should configure the parameters in CR. The following table lists the primary configurable parameters of the PowerMax driver and their default values:
+
+<ul>
 {{< collapse id="1" title="Parameters">}}
    | Parameter                                       | Description                                                                                                                                                                                                                                                              | Required | Default                        |
    |-------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------|--------------------------------|
@@ -151,6 +153,7 @@ To deploy the Operator, follow the instructions available [here](../../../operat
    | X_CSI_REVPROXY_PORT                             | Port number where reverseproxy will listen as defined in config map                                                                                                                                                                                                      | Yes      | "2222"                         |
    | X_CSI_CONFIG_MAP_NAME                           | Name of config map as created for CSI PowerMax                                                                                                                                                                                                                           | Yes      | "powermax-reverseproxy-config" |
 {{< /collapse >}}
+</ul>
 
 7. Execute the following command to create the PowerMax custom resource:`kubectl create -f <input_sample_file.yaml>`. The above command will deploy the CSI-PowerMax driver.
 8. The mandatory module CSI PowerMax Reverseproxy will be installed automatically with the same command. 
@@ -250,6 +253,7 @@ X_CSI_TOPOLOGY_CONTROL_ENABLED provides a way to filter topology keys on a node 
                      - "*:*"
 
      ```
+  <ul>
    {{< collapse id="2" title="Parameters">}}
    | Parameter | Description  |
    |-----------|--------------|
@@ -260,7 +264,7 @@ X_CSI_TOPOLOGY_CONTROL_ENABLED provides a way to filter topology keys on a node 
    | deniedConnections.nodeName | Name of the node on which user wants to apply given rules  |
    | deniedConnections.rules | List of StorageArrayID:TransportProtocol pair | 
    {{< /collapse >}}
-
+  </ul>
 <br>
 
 3. Run following command to create the configmap

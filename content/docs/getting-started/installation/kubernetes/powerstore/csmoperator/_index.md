@@ -84,7 +84,9 @@ To deploy the Operator, follow the instructions available [here](../../../operat
 
     b. **Detailed Configuration:**  [sample file](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powerstore_v2130.yaml) for detailed settings.
 
-  - Users should configure the parameters in CR. The following table lists the primary configurable parameters of the PowerStore driver and their default values:
+   - Users should configure the parameters in CR. The following table lists the primary configurable parameters of the PowerStore driver and their default values: 
+   
+<ul>
 {{< collapse id="1" title="Parameters">}}
   | Parameter | Description | Required | Default |
 | --------- | ----------- | -------- |-------- |
@@ -102,6 +104,7 @@ To deploy the Operator, follow the instructions available [here](../../../operat
 | X_CSI_POWERSTORE_ENABLE_CHAP | Set to true if you want to enable iSCSI CHAP feature | No | false |
 {{< /collapse >}}
 
+
    ii. **Create PowerStore custom resource**:
 
    ```bash
@@ -113,6 +116,7 @@ To deploy the Operator, follow the instructions available [here](../../../operat
       ```bash
       kubectl get all -n powerstore
       ```
+</ul> 
 
 4. **Verify the installation** as mentioned below
 
@@ -138,7 +142,8 @@ To deploy the Operator, follow the instructions available [here](../../../operat
    allowVolumeExpansion: true
    volumeBindingMode: Immediate
    ````
-Refer [Storage Class](https://github.com/dell/csi-powerstore/tree/main/samples/storageclass) for different sample files. 
+   
+   Refer [Storage Class](https://github.com/dell/csi-powerstore/tree/main/samples/storageclass) for different sample files. 
 
    **Run this command to create** a storage class
 
@@ -155,7 +160,7 @@ Refer [Storage Class](https://github.com/dell/csi-powerstore/tree/main/samples/s
    driver: "csi-powerstore.dellemc.com" 
    deletionPolicy: Delete
    ````
-Refer [Volume Snapshot Class](https://github.com/dell/csi-powerstore/tree/main/samples/volumesnapshotclass) for the sample files.
+   Refer [Volume Snapshot Class](https://github.com/dell/csi-powerstore/tree/main/samples/volumesnapshotclass) for the sample files.
 
    **Run this command to create** a volume snapshot class
    ```bash

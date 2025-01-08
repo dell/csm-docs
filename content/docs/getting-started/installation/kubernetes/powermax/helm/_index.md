@@ -51,7 +51,8 @@ Install Helm 3 on the master node before you install CSI Driver for PowerMax.
 7. Edit the newly created file and provide values for the following parameters
     ```bash
     vi my-powermax-settings.yaml
-    ``` 
+    ```  
+<ul>
 {{< collapse id="1" title="Parameters">}}
 | Parameter | Description                                                                                                                                                                                                                                                                                                                                                                     | Required   | Default  |
 |-----------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|----------|
@@ -135,7 +136,7 @@ Install Helm 3 on the master node before you install CSI Driver for PowerMax.
 | vCenterHost                  | URL/endpoint of the vCenter where all the ESX are present                                                                                                                                                                                                                                                                                                                       |  Yes      |   ""   |
 | vCenterCredSecret                  | Secret name for the vCenter credentials.                                                                                                                                                                                                                                                                                                                                        |  Yes      |   ""   |
 {{< /collapse >}}
-
+</ul>
 
 8. Install the driver using `csi-install.sh` bash script by running
     ```bash

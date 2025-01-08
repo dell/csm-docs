@@ -43,6 +43,7 @@ The script will :
 
 Here is the output of a request to build an offline bundle for the Dell CSM Operator:
 
+
 {{< collapse id="1" title="Output">}}
 
 ```bash
@@ -105,7 +106,7 @@ dell-csm-operator-bundle/LICENSE
 
 Offline bundle file is: /root/csm-operator/dell-csm-operator-bundle.tar.gz
 ```
-{{< /collapse >}}
+{{< /collapse >}} 
 
 The resulting offline bundle file can be copied to another machine, if necessary, to gain access to the desired image registry.
 
@@ -120,7 +121,7 @@ This step needs to be performed on a Linux system with access to an image regist
     tar xvfz dell-csm-operator-bundle.tar.gz
     ```
    Here is the output of untar
-
+<ul>
 {{< collapse id="2" title="Output">}}
 
    ```bash
@@ -137,6 +138,7 @@ This step needs to be performed on a Linux system with access to an image regist
    dell-csm-operator-bundle/LICENSE
    ```
 {{< /collapse >}}
+</ul> 
 
 3. **Prepare for Installation:** Run the `csm-offline-bundle.sh` script with the `-p` option and specify the internal registry path with the `-r` option:
       ```bash
@@ -153,42 +155,44 @@ This step needs to be performed on a Linux system with access to an image regist
       - Update the Operator configuration to use the new images.
 
       Here is the output for preparing the bundle for installation (`localregistry:5000` refers to an image registry accessible to Kubernetes/OpenShift. `dell-csm-operator` refers to the folder created within the registry.):
-      
+<ul>
 {{< collapse id="3" title="Output">}}
 
-      ```bash
-      Preparing a offline bundle for installation
+```bash
+Preparing a offline bundle for installation
 
-      * Loading quay.io images
+* Loading quay.io images
 
-      Loaded image: quay.io/dell/container-storage-modules/csi-powerstore:v2.13.0
-      Loaded image: quay.io/dell/container-storage-modules/csi-isilon:v2.13.0
-      ...
-      ...
-      Loaded image: registry.k8s.io/sig-storage/csi-resizer:v1.12.0
-      Loaded image: registry.k8s.io/sig-storage/csi-snapshotter:v8.1.0
+Loaded image: quay.io/dell/container-storage-modules/csi-powerstore:v2.13.0
+Loaded image: quay.io/dell/container-storage-modules/csi-isilon:v2.13.0
+...
+...
+Loaded image: registry.k8s.io/sig-storage/csi-resizer:v1.12.0
+Loaded image: registry.k8s.io/sig-storage/csi-snapshotter:v8.1.0
 
-      * Tagging and pushing images
+* Tagging and pushing images
 
-         quay.io/dell/container-storage-modules/csi-isilon:v2.13.0 -> localregistry:5000/dell-csm-operator/csi-isilon:v2.13.0
-         quay.io/dell/container-storage-modules/csi-metadata-retriever:v1.10.0 -> localregistry:5000/dell-csm-operator/csi-metadata-retriever:v1.10.0
-         ...
-         ...
-         registry.k8s.io/sig-storage/csi-resizer:v1.12.0 -> localregistry:5000/dell-csm-operator/csi-resizer:v1.12.0
-         registry.k8s.io/sig-storage/csi-snapshotter:v8.1.0 -> localregistry:5000/dell-csm-operator/csi-snapshotter:v8.1.0
+   quay.io/dell/container-storage-modules/csi-isilon:v2.13.0 -> localregistry:5000/dell-csm-operator/csi-isilon:v2.13.0
+   quay.io/dell/container-storage-modules/csi-metadata-retriever:v1.10.0 -> localregistry:5000/dell-csm-operator/csi-metadata-retriever:v1.10.0
+   ...
+   ...
+   registry.k8s.io/sig-storage/csi-resizer:v1.12.0 -> localregistry:5000/dell-csm-operator/csi-resizer:v1.12.0
+   registry.k8s.io/sig-storage/csi-snapshotter:v8.1.0 -> localregistry:5000/dell-csm-operator/csi-snapshotter:v8.1.0
 
-      * Preparing files within /root/dell-csm-operator-bundle
+* Preparing files within /root/dell-csm-operator-bundle
 
-         changing: quay.io/dell/container-storage-modules/csi-isilon:v2.13.0 -> localregistry:5000/dell-csm-operator/csi-isilon:v2.13.0
-         changing: quay.io/dell/container-storage-modules/csi-metadata-retriever:v1.10.0 -> localregistry:5000/dell-csm-operator/csi-metadata-retriever:v1.10.0
-         ...
-         ...
-         changing: registry.k8s.io/sig-storage/csi-resizer:v1.12.0 -> localregistry:5000/dell-csm-operator/csi-resizer:v1.12.0
-         changing: registry.k8s.io/sig-storage/csi-snapshotter:v8.1.0 -> localregistry:5000/dell-csm-operator/csi-snapshotter:v8.1.0
+   changing: quay.io/dell/container-storage-modules/csi-isilon:v2.13.0 -> localregistry:5000/dell-csm-operator/csi-isilon:v2.13.0
+   changing: quay.io/dell/container-storage-modules/csi-metadata-retriever:v1.10.0 -> localregistry:5000/dell-csm-operator/csi-metadata-retriever:v1.10.0
+   ...
+   ...
+   changing: registry.k8s.io/sig-storage/csi-resizer:v1.12.0 -> localregistry:5000/dell-csm-operator/csi-resizer:v1.12.0
+   changing: registry.k8s.io/sig-storage/csi-snapshotter:v8.1.0 -> localregistry:5000/dell-csm-operator/csi-snapshotter:v8.1.0
 
-      * Complete
-   ```
+* Complete
+```
 {{< /collapse >}}
+
+</ul>
 
 #### **Install Operator:**
 

@@ -46,7 +46,11 @@ This change will need to be made to the /etc/hosts file on:
 
 ### Install CSI driver
 
-Please follow the steps outlined in [CSI Driver](./csi-driver) page during the driver installation.
+{{< hide class="1" hide="true" >}}Please follow the steps outlined in [CSI Driver](./csi-driver) page during the driver installation.{{< /hide >}} 
+
+{{< hide class="2" >}}Please follow the steps outlined in [PowerFlex](../powerflex), [PowerMax](../powermax), [PowerScale](../powerscale), [PowerStore](../powerstore) page during the driver installation.{{< /hide >}} 
+
+
 
 >Note: Please ensure that replication CRDs are installed in the clusters where you are installing the CSI drivers. These CRDs are generally installed as part of the Container Storage Module Replication controller installation process.
 

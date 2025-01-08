@@ -16,7 +16,7 @@ the respective Container Storage Module Replication Controllers.
 
 >Important: Direct network visibility between clusters required for CSM-Replication to work.
 > Cluster-1's API URL has to be pingable from cluster-2 pods and vice versa. If private networks are used and/or DNS is not set up properly - you may need to modify `/etc/hosts` file from within controller's pod.
-> This can be achieved by using helm installation method. Refer to this [link.](../../replication#using-the-installation-script)
+> This can be achieved by using helm installation method. Refer to this {{< hide class="1" hide="true" inline="true" >}}[link.](../../replication#using-the-installation-script){{< /hide >}} {{< hide class="2" inline="true" >}}[link.](../installation#using-the-installation-script){{< /hide >}}
 
 >Note: If you are using a single stretched cluster, then you can skip all the following steps
 
@@ -41,7 +41,7 @@ Run the following command:
 repctl cluster inject
 ```
 
->Note: For a detailed walkthrough of the simplified installation process using `repctl`, please refer this [link](../../replication#using-repctl)
+>Note: For a detailed walkthrough of the simplified installation process using `repctl`, please refer this{{< hide class="1" hide="true" inline="true" >}} [link](../../replication#using-repctl){{< /hide >}}{{< hide class="2" inline="true" >}}[link.](../installation#using-repctl){{< /hide >}}
 
 ### Understanding the Config file
 If you are setting up replication between two clusters (ex: Cluster A & Cluster B), a suitable configuration file (deploy/config.yaml) should look like this:

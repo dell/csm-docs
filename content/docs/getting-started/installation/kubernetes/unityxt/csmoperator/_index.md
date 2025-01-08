@@ -58,6 +58,7 @@ To deploy the Operator, follow the instructions available [here](../../../operat
 
 2. Users should configure the parameters in CR. The following table lists the primary configurable parameters of the Unity XT driver and their default values:
 
+<ul>
 {{< collapse id="1" title="Parameters">}}
 
 | Parameter | Description | Required | Default |
@@ -84,6 +85,7 @@ To deploy the Operator, follow the instructions available [here](../../../operat
 | monitor-interval | The monitor-interval will be used by external-health-monitor as an interval for health checks  | Yes | 60s |
 
 {{< /collapse >}}
+</ul> 
 
 3. Execute the following command to create Unity XT custom resource:
    ```bash

@@ -20,27 +20,47 @@
 </div> 
 
 <script>
-document.addEventListener("DOMContentLoaded", function() {
-  // Check if there's a hash in the URL
-  var hash = window.location.hash;
-  if (hash) {
-    // Find the element with the ID matching the hash
-    var targetElement = document.querySelector(hash);
-    if (targetElement) {
-      // Find the closest accordion collapse element
-      var collapseElement = targetElement.closest('.accordion-collapse');
-      if (collapseElement) {
-        // Find the corresponding accordion button
-        var accordionButton = document.querySelector('button[data-bs-target="#' + collapseElement.id + '"]');
-        if (accordionButton) {
-          // Open the accordion item
-          collapseElement.classList.add('show');
-          accordionButton.classList.remove('collapsed');
-          accordionButton.setAttribute('aria-expanded', 'true');
+  document.addEventListener("DOMContentLoaded", function() {
+    // Check if there's a hash in the URL
+    var hash = window.location.hash;
+    if (hash) {
+      var targetElement = document.querySelector(hash);
+      if (targetElement) {
+        var collapseElement = targetElement.closest('.accordion-collapse');
+        if (collapseElement) {
+          var accordionButton = document.querySelector('button[data-bs-target="#' + collapseElement.id + '"]');
+          if (accordionButton) {
+            collapseElement.classList.add('show');
+            accordionButton.classList.remove('collapsed');
+            accordionButton.setAttribute('aria-expanded', 'true');
+          }
         }
       }
     }
-  }
-});
-</script>
+  
+    // Restore accordion state from sessionStorage
+    var accordionState = JSON.parse(sessionStorage.getItem('accordionState') || '{}');
+    for (var id in accordionState) {
+      var collapseElement = document.getElementById(id);
+      if (collapseElement && accordionState[id] === 'open') {
+        var accordionButton = document.querySelector('button[data-bs-target="#' + id + '"]');
+        collapseElement.classList.add('show');
+        accordionButton.classList.remove('collapsed');
+        accordionButton.setAttribute('aria-expanded', 'true');
+      }
+    }
+  });
+  
+  // Save accordion state before the page unloads
+  window.addEventListener('beforeunload', function() {
+    var accordions = document.querySelectorAll('.accordion-collapse');
+    var accordionState = {};
+    accordions.forEach(function(collapseElement) {
+      var isExpanded = collapseElement.classList.contains('show');
+      accordionState[collapseElement.id] = isExpanded ? 'open' : 'closed';
+    });
+    sessionStorage.setItem('accordionState', JSON.stringify(accordionState));
+  });
+  </script>
+  
 

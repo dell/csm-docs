@@ -68,6 +68,10 @@ The following third-party components are optionally installed in the specified n
 
 5. Look over all the fields in `myvalues.yaml` and fill in/adjust any as needed.
 
+<ul>
+
+{{< collapse id="1" title="Parameter">}}
+
 | Parameter                                         | Description                                                                                                                  | Required | Default                                   |
 | ------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- | -------- | ----------------------------------------- |
 | **ingress-nginx**                                 | This section configures the enablement of the NGINX Ingress Controller.                                                      | -        | -                                         |
@@ -93,6 +97,9 @@ The following third-party components are optionally installed in the specified n
 | redis.images.redis                                | The image to use for Redis.                                                                                                  | Yes      | redis:7.4.0-alpine                        |
 | redis.images.commander                            | The image to use for Redis Commander.                                                                                        | Yes      | rediscommander/redis-commander:latest     |
 | redis.storageClass                                | The storage class for Redis to use for persistence. If not supplied, a locally provisioned volume is used.                   | No       | -                                         |
+
+{{< /collapse >}}
+</ul>
 
 >__Note__:
 > - If you specify `redis.storageClass`, the storage class must NOT be provisioned by the Dell CSI Driver to be configured with this installation of Authorization.

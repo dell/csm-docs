@@ -8,7 +8,7 @@ description: >
 --- 
 
 {{< accordion id="One" title="Installation" markdown="true" >}}  
-{{<include "content/docs/getting-started/installation/helm/modules/replication/installation.md">}}
+{{<includee file="content/docs/getting-started/installation/helm/modules/replication/installation.md" hideClasses="2">}}
 {{< /accordion >}}
 <br> 
 {{< accordion id="Two" title="Storage Class" markdown="true" >}} 

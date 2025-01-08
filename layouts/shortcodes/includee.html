@@ -16,7 +16,11 @@
 {{ $content = replace $content "{{labels}}" $labels }}
 
 
-{{ $content = replaceRE "\\{\\{<\\s*hide\\s+id=\"([^\"]+)\"\\s+hide=\"true\"\\s*>\\}\\}" (printf "{{< hide id=\"$1\" >}}") $content }}
+<!-- Replace for ID -->
+{{ $content = replaceRE "\\{\\{<\\s*hide\\s+(id=\"[^\"]+\")\\s+hide=\"true\"\\s*(inline=\"true\")?\\s*>\\}\\}" "{{< hide $1 $2 >}}" $content }}
+
+<!-- Replace for Class -->
+{{ $content = replaceRE "\\{\\{<\\s*hide\\s+(class=\"[^\"]+\")\\s+hide=\"true\"\\s*(inline=\"true\")?\\s*>\\}\\}" "{{< hide $1 $2 >}}" $content }}
 
 
 <!-- Dynamically add the `hide` parameter based on IDs -->
@@ -28,7 +32,7 @@
 <!-- Dynamically add the `hide` parameter based on Classes -->
 {{ range $hideClassList }}
   {{ $class := . }}
-  {{ $content = replaceRE (printf "\\{\\{<\\s*hide\\s+class=\"%s\"\\s*>\\}\\}" $class) (printf "{{< hide class=\"%s\" hide=\"true\" >}}" $class) $content }}
+  {{ $content = replaceRE (printf "\\{\\{<\\s*hide\\s+class=\"%s\"(\\s+inline=\"true\")?\\s*>\\}\\}" $class) (printf "{{< hide class=\"%s\" hide=\"true\" >}}" $class) $content }}
 {{ end }}
 
 <!-- Default all other hide shortcodes to false -->

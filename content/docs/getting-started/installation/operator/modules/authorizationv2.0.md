@@ -59,6 +59,7 @@ description: >
 
 2. Users should configure the parameters in the CR. This table lists the primary configurable parameters of the Authorization Proxy Server and their default values:
 
+<ul>
 {{< collapse title="Parameters" id="1">}}
    | Parameter | Description | Required | Default |
    | --------- | ----------- | -------- |-------- |
@@ -93,6 +94,7 @@ description: >
    | certificateAuthority | The base64-encoded certificate authority for validating the Vault server. | No | - |
 {{< /collapse >}}
 
+
 >__Note__:
 > - If you are installing Authorization in a different namespace than `authorization`, edit the `namespace` fields in this file to your namespace.
 > - If you specify `storageclass`, the storage class must NOT be provisioned by the Dell CSI Driver to be configured with this installation of Authorization.
@@ -105,6 +107,8 @@ To enable reporting of trace data with [Zipkin](https://zipkin.io/), use the `cs
   ZIPKIN_URI: "http://ZIPKIN_ADDRESS:9411/api/v2/spans"
   ZIPKIN_PROBABILITY: "1.0"
   ```
+
+</ul>
 
 3. Execute this command to create the Authorization CR:
 

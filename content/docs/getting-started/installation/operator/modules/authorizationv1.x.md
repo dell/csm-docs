@@ -66,6 +66,7 @@ description: >
 1. Create a CR (Custom Resource) for Authorization from a [sample manifest](https://github.com/dell/csm-operator/blob/main/samples/authorization/csm_authorization_proxy_server_v1110.yaml). This file can be modified to use custom parameters if needed.
 
 2. Users should configure the parameters in the CR. This table lists the primary configurable parameters of the Authorization Proxy Server and their default values:
+<ul>
 {{< collapse title="Parameters" id="1">}}
    | Parameter | Description | Required | Default |
    | --------- | ----------- | -------- |-------- |
@@ -97,6 +98,7 @@ To enable reporting of trace data with [Zipkin](https://zipkin.io/), use the `cs
   ZIPKIN_URI: "http://ZIPKIN_ADDRESS:9411/api/v2/spans"
   ZIPKIN_PROBABILITY: "1.0"
   ```
+</ul> 
 
 3. Execute this command to create the Authorization CR:
 

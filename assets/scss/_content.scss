@@ -79,7 +79,15 @@
     .lead {
         margin-bottom: 1.5rem;
     }  
-   
+    
+    .highlight {
+        margin-top: 0.2rem;
+    }   
+
+    p + div.highlight, p + div.code-toolbar {
+        margin-top: -0.5rem;
+    }
+
 } 
 
 

@@ -98,6 +98,7 @@ Note that the namespace can be any user-defined name that follows the convention
 3. Collect information from the PowerFlex SDC by executing the `get_vxflexos_info.sh` script located in the `scripts` directory. This script shows the _VxFlex OS system ID_ and _MDM IP_ addresses. Make a note of the values for these parameters as they must be entered into `samples/secret.yaml`.
 
 4. Prepare `samples/secret.yaml` for driver configuration. The following table lists driver configuration parameters for multiple storage arrays.
+<ul>
 {{< collapse id="1" title="Parameters">}}
 | Parameter | Description                                                  | Required | Default |
 | --------- | ------------------------------------------------------------ | -------- | ------- |
@@ -112,7 +113,7 @@ Note that the namespace can be any user-defined name that follows the convention
 | nasName       | nasName defines what NAS should be used for NFS volumes. NFS volumes are supported on arrays version >=4.0.x | true     | ""       |
 {{< /collapse >}}
 
-<ul>                                                
+                                            
   Example: `samples/secret.yaml`
 
 ```yaml
@@ -176,7 +177,8 @@ Use the below command to replace or update the secret:
 
 8. If you are using custom images, check the fields under `images` in `my-vxflexos-settings.yaml` to make sure that they are pointing to the correct image repository.
 
-9. Look over all the other fields `myvalues.yaml` and fill in/adjust any as needed. All the fields are described here:
+9. Look over all the other fields `myvalues.yaml` and fill in/adjust any as needed. All the fields are described here: 
+<ul>
 {{< collapse id="2" title="Parameters">}}
 | Parameter                | Description                                                                                                                                                                                                                                                                                                                                                                                                    | Required | Default |
 | ------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ------- |
@@ -233,6 +235,7 @@ Use the below command to replace or update the secret:
 | skipCertificateValidation | A boolean that enables/disables certificate validation of the csm-authorization proxy server. | No | true |
 | **interfaceNames** | A mapping of node names to interface names. Only necessary when SDC is disabled (see above).  | No | "" |
 {{< /collapse >}}
+</ul> 
 
 10. Install the driver using `csi-install.sh` bash script by running `cd dell-csi-helm-installer && ./csi-install.sh --namespace vxflexos --values myvalues.yaml --helm-charts-version <version>`. You may modify the release name with the `--release` arg. If arg is not provided, release will be named `vxflexos` by default.
 Alternatively, to do a helm install solely with Helm charts (without shell scripts), refer to `helm/README.md`.

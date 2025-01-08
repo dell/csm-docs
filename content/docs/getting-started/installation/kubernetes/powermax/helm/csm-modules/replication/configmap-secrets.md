@@ -6,4 +6,4 @@ description: >
   Configuration  
 toc_hide: true
 ---
-{{<include "content/docs/getting-started/installation/helm/modules/replication/configmap-secrets.md" >}}
+{{<includee file="content/docs/getting-started/installation/helm/modules/replication/configmap-secrets.md" hideClasses="2">}}

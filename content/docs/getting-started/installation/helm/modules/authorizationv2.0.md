@@ -70,6 +70,10 @@ The following third-party components are optionally installed in the specified n
 
 6. Look over all the fields in `myvalues.yaml` and fill in/adjust any as needed.
 
+<ul>
+
+{{< collapse id="1" title="Parameter" >}} 
+
 | Parameter                           | Description                                                                                                                          | Required | Default                                   |
 | ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ | -------- | ----------------------------------------- |
 | openshift                           | Enable/Disable deployment of the OpenShift Ingress Operator. Set to false if you have an Ingress Controller installed.               | No       | true                                      |
@@ -111,6 +115,8 @@ The following third-party components are optionally installed in the specified n
 | clientKey                           | The base64-encoded private key for the certificate/private-key pair to connect to Vault. Leave empty to use self-signed certificate. | No       | -                                         |
 | certificateAuthority                | The base64-encoded certificate authority for validating the Vault server.                                                            | No       | -                                         |
 
+{{< /collapse >}} 
+</ul>
 
 7. Install the driver using `helm`:
 
@@ -142,8 +148,10 @@ Follow the instructions available in Authorization for [Configuring the Authoriz
 
 Follow the instructions available in Authorization for
 
-{{< hide id="1" >}}- [Configuring PowerFlex with Authorization](../../../../../../../concepts/authorization/v2.x/configuration/powerflex).{{< /hide >}}
+{{< hide id="1" >}} - [Configuring PowerFlex with Authorization](../../../../../../../concepts/authorization/v2.x/configuration/powerflex). {{< /hide >}}
+
 {{< hide id="2" >}}- [Configuring PowerMax with Authorization](../../../../../../../concepts/authorization/v2.x/configuration/powermax).{{< /hide >}} 
+
 {{< hide id="3" >}}- [Configuring PowerScale with Authorization](../../../../../../../concepts/authorization/v2.x/configuration/powerscale).{{< /hide >}}
 
 ## Updating Container Storage Module for Authorization Proxy Server Configuration

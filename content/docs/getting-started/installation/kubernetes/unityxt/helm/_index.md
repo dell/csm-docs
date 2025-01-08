@@ -54,7 +54,8 @@ cd dell-csi-helm-installer && wget -O my-unity-settings.yaml https://github.com/
 
 3. Edit `values.yaml` to set the following parameters for your installation:
 
-    The following table lists the primary configurable parameters of the Unity XT driver chart and their default values. More detailed information can be found in the [`values.yaml`](https://github.com/dell/helm-charts/blob/csi-unity-2.13.0/charts/csi-unity/values.yaml) file in this repository.
+    The following table lists the primary configurable parameters of the Unity XT driver chart and their default values. More detailed information can be found in the [`values.yaml`](https://github.com/dell/helm-charts/blob/csi-unity-2.13.0/charts/csi-unity/values.yaml) file in this repository. 
+<ul>
   {{< collapse id="1" title="Parameters">}}
   | Parameter | Description | Required | Default |
   | --------- | ----------- | -------- |-------- |
@@ -121,11 +122,13 @@ Example *myvalues.yaml*
     maxUnityVolumesPerNode: 0
     fsGroupPolicy: ReadWriteOneFSType
   ```
+</ul>
 
 4. For certificate validation of Unisphere REST API calls refer [here](#certificate-validation-for-unisphere-rest-api-calls). Otherwise, create an empty secret with file `csi-unity/samples/secret/emptysecret.yaml` file by running the `kubectl create -f csi-unity/samples/secret/emptysecret.yaml` command.
 
 5. Prepare the `secret.yaml`  for driver configuration.
     The following table lists driver configuration parameters for multiple storage arrays.
+<ul>    
     {{< collapse id="2" title="Parameters">}}
 
 | Parameter                 | Description                                    | Required | Default |
@@ -195,6 +198,7 @@ Example: secret.yaml
   ```
 
   **Note:** Parameters "allowRWOMultiPodAccess" and "syncNodeInfoInterval" have been enabled for configuration in values.yaml and this helps users to dynamically change these values without the need for driver re-installation.
+</ul>
 
 6. If you want to leverage snapshotting feature, the pre-requisite is to install external-snapshotter. Installation of external-snapshotter is required only for Kubernetes and is available by default with OpenShift installations. [Click here](docs/concepts/snapshots/#helm-optional-volume-snapshot-requirements) to follow the procedure to install external-snapshotter.
 
