@@ -311,7 +311,7 @@ Use the base64 encoded string output in the following `MachineConfig` yaml file 
 apiVersion: machineconfiguration.openshift.io/v1
 kind: MachineConfig
 metadata:
-  name: workers-multipath-conf-default
+  name: 99-workers-multipath-conf-default
   labels:
     machineconfiguration.openshift.io/role: worker
 spec:
