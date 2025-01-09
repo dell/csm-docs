@@ -6,9 +6,15 @@ description: CSM Operator Installation
 weight: 2
 ---
 ## Installing the Operator
+
+<br>
+
 To deploy the Operator, follow the instructions available [here](../../../operator/operatorinstallation_openshift.md).
 
+<br>
+
 {{< accordion id="Two" title="CSI Driver" markdown="true" >}}  
+<br>
 
 ### CSI Driver Installation
 </br>
@@ -144,7 +150,7 @@ Check if ContainerStorageModule CR is created successfully:
 oc get csm unity -n unity
 
 NAME        CREATIONTIME   CSIDRIVERTYPE   CONFIGVERSION   STATE
-unity    3h             unity       v2.12.0         Succeeded      
+unity       3h             unity           v2.12.0         Succeeded      
 ```
 
 Check the status of the CR to verify if the driver installation is in the `Succeeded` state. If the status is not `Succeeded`, see the [Troubleshooting guide](../troubleshooting/#my-dell-csi-driver-install-failed-how-do-i-fix-it) for more information.
@@ -159,7 +165,7 @@ Check the status of the CR to verify if the driver installation is in the `Succe
     Use this command to create the **Storage Class**: 
 
     ```bash
-    oc create -f sc-unity.yaml
+    oc apply -f sc-unity.yaml
     ```
 
     Example: 
@@ -196,7 +202,7 @@ Check the status of the CR to verify if the driver installation is in the `Succe
     oc get storageclass unity
   
     NAME                    PROVISIONER                    RECLAIMPOLICY   VOLUMEBINDINGMODE   ALLOWVOLUMEEXPANSION   AGE
-    unity (default)      csi-unity.dellemc.com       Delete          Immediate           true                   3h8m
+    unity (default)         csi-unity.dellemc.com          Delete          Immediate           true                   3h8m
     ``` 
 
     </br>
@@ -209,7 +215,7 @@ Check the status of the CR to verify if the driver installation is in the `Succe
 
 
     ```bash
-    oc create -f vsclass-unity.yaml
+    oc apply -f vsclass-unity.yaml
     ```
 
     Example:
@@ -230,194 +236,263 @@ Check the status of the CR to verify if the driver installation is in the `Succe
     oc get volumesnapshotclass
     
     NAME                      DRIVER                              DELETIONPOLICY   AGE
-    unity-snapclass        csi-unity.dellemc.com            Delete           3h9m
+    unity-snapclass           csi-unity.dellemc.com               Delete           3h9m
     ``` 
    </br>
 
-### PVC and Pod Creation
 
- </br>
-
-1. ##### **Create Persistent Volume Claim:**
+### Configurations
+<br>
 
 
-    <br>
-    
-    Use this command to create the **Persistent Volume Claim**: 
-
-    ```bash
-    oc create -f pvc-unity.yaml
-    ```
-
-    Example:
-    ```yaml
-    cat << EOF > pvc-unity.yaml
-    apiVersion: v1
-    kind: PersistentVolumeClaim
-    metadata:
-      name: pvc-unity
-      namespace: default
-    spec:
-      accessModes:
-      - ReadWriteOnce
-      resources:
-        requests:
-          storage: 8Gi
-      storageClassName: unity
-    EOF
-    ```
+{{< collapse id="2" title="Persistent Volume Claim and Pod" card="false" >}} 
   
-    Verify Persistent Volume Claim is created: 
+  <br> 
+  <ol>
+  <li>
 
-    ```terminal
-    oc get pvc -n unity
- 
+  ##### **Create Persistent Volume Claim**
 
-    ```
+  <br>
 
-     </br>
+  Use this command to create the **Persistent Volume Claim**:
 
-2.  ##### **Create Pod which uses Persistent Volume Claim with storage class:**  
+  ```bash
+  oc apply -f pvc-unity.yaml
+  ```
 
-    <br>
-    
-    Use this command to create the **Pod**: 
+  Example:
+  ```yaml
+  cat << EOF > pvc-unity.yaml
+  apiVersion: v1
+  kind: PersistentVolumeClaim
+  metadata:
+    name: pvc-unity
+    namespace: default
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    resources:
+      requests:
+        storage: 8Gi
+    storageClassName: unity
+  EOF
+  ```
+
+  Verify Persistent Volume Claim is created:
 
 
-    ```bash
-    oc create -f pod-unity.yaml
-    ```
 
-    Example: 
-    ```yaml
-    cat << 'EOF' > pod-unity.yaml
-    apiVersion: v1
-    kind: Pod
-    metadata:
-      name: pod-unity
-      namespace: default
-    spec:
-      containers:
-      - name: ubi
-        image: registry.access.redhat.com/ubi9/ubi
-        command: [ "bash", "-c" ]
-        args: [ "while true; do touch /data/file-$(date +%s); sleep 20; done;" ]
-        volumeMounts:
-        - name: data
-          mountPath: /data
-      volumes:
+  ```terminal
+  oc get pvc -n default
+
+  NAME                           STATUS   VOLUME             CAPACITY   ACCESS MODES   STORAGECLASS   VOLUMEATTRIBUTESCLASS   AGE
+  pvc-unity                      Bound    ocp08-9f103c4fc6   8Gi        RWO            unity          <unset>                 4s
+  ``` 
+  <br>
+  <br>
+  </li>
+  <li>
+  
+  ##### **Create Pod which uses Persistent Volume Claim with storage class**
+
+  <br>
+
+  Use this command to create the **Pod**:
+
+
+  ```bash
+  oc apply -f pod-unity.yaml
+  ```
+
+  Example: 
+  ```yaml
+  cat << 'EOF' > pod-unity.yaml
+  apiVersion: v1
+  kind: Pod
+  metadata:
+    name: pod-unity
+    namespace: default
+  spec:
+    containers:
+    - name: ubi
+      image: registry.access.redhat.com/ubi9/ubi
+      command: [ "bash", "-c" ]
+      args: [ "while true; do touch /data/file-$(date +%s); sleep 20; done;" ]
+      volumeMounts:
       - name: data
-        persistentVolumeClaim:
-          claimName: pvc-unity
-    EOF
-    ```
+        mountPath: /data
+    volumes:
+    - name: data
+      persistentVolumeClaim:
+        claimName: pvc-unity
+  EOF
+  ```
 
-    Verify pod is created:
+  Verify pod is created:
 
-    ```terminal
-    oc get pod -n default
+  ```terminal
+  oc get pod -n default
 
-    NAME                                        READY   STATUS    RESTARTS   AGE
-    pod-unity                               1/1     Running   0          109s
-    
-    ``` 
+  NAME                                        READY   STATUS    RESTARTS   AGE
+  pod-unity                                   1/1     Running   0          109s
+  ``` 
+  <br>  
+  <br> 
+  </li>
+  <li>
 
+  ##### **Delete Persistance Volume Claim**
+  
+  </br>
 
+  Use this command to  **Delete Persistance Volume Claim**:
 
+  ```bash
+  oc delete pvc pvc-unity-restore -n default
+  ```
 
-### Prerequisites
+  Verify restore pvc is deleted:
 
-1. **Create namespace:**
+  ```terminal
+  oc get pvc -n default
 
-   ```bash 
-      kubectl create namespace unity
-   ```
-   This command creates a namespace called `unity`. You can replace `unity` with any name you prefer.
-
-2. **Create or Use Sample `secret.yaml` File.** 
-
-   Create a file called `secret.yaml` or pick a [sample]https://github.com/dell/csi-unity/blob/main/samples/secret/secret.yaml) that has Unity array connection details: 
-   ```yaml
-      storageArrayList:
-      - arrayId: "APM00******1"                 # unique array id of the Unisphere array
-        username: "user"                        # username for connecting to API
-        password: "password"                    # password for connecting to API
-        endpoint: "https://10.1.1.1/"           # full URL path to the Unity XT API
-        skipCertificateValidation: true         # indicates if client side validation of (management)server's certificate can be skipped
-        isDefault: true                         # treat current array as a default (would be used by storage classes without arrayID parameter)
-   ```
-   Change the parameters with relevant values for your Unity XT array.
-   Add more blocks similar to above for each Unity XT array if necessary.
-
-3. **Create Kubernetes secret:**
-
-   Use the following command to create a new secret unity-creds from `secret.yaml` file.
-
-    `kubectl create secret generic unity-creds -n unity --from-file=config=secret.yaml`
-
-   Use the following command to replace or update the secret:
-
-    `kubectl create secret generic unity-creds -n unity --from-file=config=secret.yaml -o yaml --dry-run | kubectl replace -f -`
-
-### Install Driver
+  NAME                    STATUS   VOLUME             CAPACITY   ACCESS MODES   STORAGECLASS   VOLUMEATTRIBUTESCLASS   AGE
+  pvc-unity            Bound       ocp08-095f7d3c52   8Gi        RWO            unity          <unset>                 7m34s
+  ```
+  </br> 
+  </li>
+  </ol>
 
 
-1. Create a CR (Custom Resource) for unity using the sample files provided
-
-    a. **Default Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/main/samples/minimal-samples/unity_v2130.yaml) for default settings. Modify if needed.
-
-    [OR]                                                
-
-    b. **Detailed Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_unity_v2130.yaml) for detailed settings.
-
-2. Users should configure the parameters in CR. The following table lists the primary configurable parameters of the Unity XT driver and their default values:
-
-<ul>
-{{< collapse id="1" title="Parameters">}}
-| Parameter | Description | Required | Default |
-| --------- | ----------- | -------- |-------- |
-| replicas | Controls the number of controller pods you deploy. If the number of controller pods is greater than the number of available nodes, the excess pods will be in pending state until new nodes are available for scheduling. Default is 2 which allows for Controller high availability. | Yes | 2 |
-| namespace | Specifies namespace where the driver will be installed | Yes | "unity" |
-| fsGroupPolicy | Defines which FS Group policy mode to be used. Supported modes `None, File and ReadWriteOnceWithFSType`. In OCP <= 4.16 and K8s <= 1.29, fsGroupPolicy is an immutable field. | No |"ReadWriteOnceWithFSType"|
-| storageCapacity.enabled | Enable/Disable storage capacity tracking | No | true |
-| storageCapacity.pollInterval | Configure how often the driver checks for changed capacity | No | 5m |
-| ***Common parameters for node and controller*** |
-| X_CSI_UNITY_ALLOW_MULTI_POD_ACCESS | To enable sharing of volumes across multiple pods within the same node in RWO access mode | No | false |
-| X_CSI_UNITY_SYNC_NODEINFO_INTERVAL | Time interval to add node info to array. Default 15 minutes. Minimum value should be 1 | No | 15 |
-| CSI_LOG_LEVEL | Sets the logging level of the driver | true | info |
-| TENANT_NAME | Tenant name added while adding host entry to the array | No |  |
-| CERT_SECRET_COUNT | Represents the number of certificate secrets, which the user is going to create for SSL authentication. (unity-cert-0..unity-cert-n). The minimum value should be 1. | false | 1 |
-| X_CSI_UNITY_SKIP_CERTIFICATE_VALIDATION | Specifies if the driver is going to validate unisphere certs while connecting to the Unisphere REST API interface.If it is set to false, then a secret unity-certs has to be created with an X.509 certificate of CA which signed the Unisphere certificate | No | true |
-| ***Controller parameters*** |
-| X_CSI_HEALTH_MONITOR_ENABLED | Enable/Disable health monitor of CSI volumes from Controller plugin - volume condition | No | false |
-| ***Node parameters*** |
-| X_CSI_HEALTH_MONITOR_ENABLED | Enable/Disable health monitor of CSI volumes from Controller plugin - volume condition | No | false |
-| X_CSI_ALLOWED_NETWORKS | Custom networks for Unity export. List of networks that can be used for NFS I/O traffic, CIDR format should be used "ip/prefix, ip/prefix" | No | empty |
 {{< /collapse >}}
-</ul>
 
-3.  Execute the following command to create Unity XT custom resource:
-   ```bash
-   kubectl create -f <input_sample_file.yaml>
-   ```
-   This command will deploy the CSI Unity XT driver in the namespace specified in the input YAML file.
 
-   - Next, the driver should be installed, you can check the condition of driver pods by running
-      ```bash
-      kubectl get all -n <driver-namespace>
-      ```
+{{< collapse id="4" title="Volume Snapshot" card="false" >}} 
+<br> 
+<ol>
+<li>
 
-4.  Once the driver `Custom Resource (CR)` is created, you can verify the installation as mentioned below
+##### **Create Volume Snapshot**  
 
-    * Check if ContainerStorageModule CR is created successfully using the command below:
-        ```bash
-        kubectl get csm/<name-of-custom-resource> -n <driver-namespace> -o yaml
-        ```
-    * Check the status of the CR to verify if the driver installation is in the `Succeeded` state. If the status is not `Succeeded`, see the [Troubleshooting guide](../troubleshooting/#my-dell-csi-driver-install-failed-how-do-i-fix-it) for more information.
+<br>
 
-5. Refer [Volume Snapshot Class](https://github.com/dell/csi-unity/tree/main/samples/volumesnapshotclass) and [Storage Class](https://github.com/dell/csi-unity/tree/main/samples/storageclass) for the sample files. 
+Use this command to create the **Volume Snapshot**:
 
-**Note** :
-   1. "Kubelet config dir path" is not yet configurable in case of Operator based driver installation.
-   2. Snapshotter and resizer sidecars are not optional. They are defaults with Driver installation.
+
+```bash
+oc apply -f vs-unity.yaml
+```
+
+Example:
+```yaml
+cat << 'EOF' > vs-unity.yaml
+apiVersion: snapshot.storage.k8s.io/v1
+kind: VolumeSnapshot
+metadata:
+  name: vs-unity'
+  namespace: default
+spec:
+  volumeSnapshotClassName: vsclass-unity
+  source:
+    persistentVolumeClaimName: pvc-unity
+EOF
+```
+
+Verify Volume Snapshot is created:
+
+```terminal
+oc get volumesnapshot -n default
+
+NAME           READYTOUSE   SOURCEPVC       SOURCESNAPSHOTCONTENT   RESTORESIZE   SNAPSHOTCLASS      SNAPSHOTCONTENT                                    CREATIONTIME   AGE
+vs-unity       true         pvc-unity                               8Gi           vsclass-unity      snapcontent-80e99281-0d96-4275-b4aa-50301d110bd4   2m57s          12s
+``` 
+
+</br>
+
+Verify Volume Snapshot content is created:
+
+```terminal
+oc get volumesnapshotcontent
+
+NAME                                               READYTOUSE   RESTORESIZE   DELETIONPOLICY   DRIVER                     VOLUMESNAPSHOTCLASS   VOLUMESNAPSHOT   VOLUMESNAPSHOTNAMESPACE   AGE
+snapcontent-80e99281-0d96-4275-b4aa-50301d110bd4   true         8589934592    Delete           csi-unity.dellemc.com      vsclass-unity         vs-unity         default                   23s
+```  
+<br>
+<br> 
+</li>
+<li>
+
+##### **Restore Snapshot** 
+
+</br>
+
+Use this command to  **Restore Snapshot**:
+
+```bash
+oc apply -f pvc-unity.yaml
+```
+
+Example:
+
+```yaml
+cat << 'EOF' > pvc-unity-restore.yaml  
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pvc-unity-restore
+  namespace: default
+spec:
+  storageClassName: unity
+  dataSource:
+    name: vs-unity
+    kind: VolumeSnapshot
+    apiGroup: snapshot.storage.k8s.io
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 8Gi
+  EOF
+``` 
+
+Verify restore pvc is created:
+
+```terminal
+oc get pvc -n default
+
+NAME                    STATUS   VOLUME             CAPACITY   ACCESS MODES   STORAGECLASS   VOLUMEATTRIBUTESCLASS   AGE
+pvc-unity            Bound    ocp08-095f7d3c52   8Gi        RWO            unity      <unset>                 7m34s
+pvc-unity-restore    Bound    ocp08-19874e9042   8Gi        RWO            unity      <unset>                 4s
+```
+</br> 
+<br>
+</li>
+<li>
+
+##### **Delete Volume Snapshot**
+</br>
+
+Use this command to  **Delete Volume Snapshot**:
+
+```bash
+oc delete vs vs-unity -n default
+```
+
+Verify  Volume Snapshot is deleted:
+
+```terminal
+oc get vs -n default
+
+NAME                    STATUS   VOLUME             CAPACITY   ACCESS MODES   STORAGECLASS   VOLUMEATTRIBUTESCLASS   AGE
+``` 
+</li>
+</ol>
+
+
+
+
+{{< /collapse >}} 
+
+
 {{< /accordion >}}  

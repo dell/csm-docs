@@ -6,12 +6,20 @@ description: CSM Operator Installation
 weight: 2
 ---
 
-## Installing the Operator
+### Installing the Operator
+
+</br>
+
 To deploy the Operator, follow the instructions available [here](../../../operator/operatorinstallation_openshift.md).
 
-{{< accordion id="Two" title="CSI Driver" markdown="true" >}}  
+</br>
+
+{{< accordion id="Two" title="CSI Driver" markdown="true" >}}
+
+</br>
 
 ### CSI Driver Installation
+
 </br>
 
 1. ##### **Create project:**
@@ -83,14 +91,14 @@ To deploy the Operator, follow the instructions available [here](../../../operat
     Use this command to create the **ContainerStorageModule Custom Resource**:
 
     ```bash
-    oc create -f csm-powerflex.yaml
+    oc create -f csm-vxflexos.yaml
     ```
 
     Example:
     <div style="margin-bottom:-1.8rem">
 
     ```yaml
-    cat << EOF > csm-powerflex.yaml
+    cat << EOF > csm-vxflexos.yaml
     apiVersion: storage.dell.com/v1
     kind: ContainerStorageModule
     metadata:
@@ -105,9 +113,10 @@ To deploy the Operator, follow the instructions available [here](../../../operat
     </div>
     
     **Detailed Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powerflex_v2130.yaml) for detailed settings.
-
+   
+   </br>
     To set the parameters in CR. The table shows the main settings of the PowerFlex driver and their defaults.
-<ul>
+  <ul>
 {{< collapse id="1" title="Parameters">}}
 | Parameter | Description | Required | Default |
 | --------- | ----------- | -------- |-------- |
@@ -142,29 +151,30 @@ Check if ContainerStorageModule CR is created successfully:
 oc get csm vxflexos -n vxflexos
 
 NAME        CREATIONTIME   CSIDRIVERTYPE   CONFIGVERSION   STATE
-vxflexos    3h             powerflex       v2.12.0         Succeeded      
+vxflexos    3h             powerflex       v2.12.0         Succeeded
 ```
 
 Check the status of the CR to verify if the driver installation is in the `Succeeded` state. If the status is not `Succeeded`, see the [Troubleshooting guide](../troubleshooting/#my-dell-csi-driver-install-failed-how-do-i-fix-it) for more information.
+
 </ul>
 
 <br> 
 
-4. ##### **Create Storage class:** 
+4. ##### **Create Storage class:**
     
     <br>
 
-    Use this command to create the **Storage Class**: 
+    Use this command to create the **Storage Class**:
 
     ```bash
-    oc create -f sc-powerflex.yaml
+    oc apply -f sc-vxflexos.yaml
     ```
 
     Example: 
     <div style="margin-bottom:-1.8rem">
     
     ```yaml
-    cat << EOF > sc-powerflex.yaml
+    cat << EOF > sc-vxflexos.yaml
     apiVersion: storage.k8s.io/v1
     kind: StorageClass
     metadata:
@@ -183,9 +193,11 @@ Check the status of the CR to verify if the driver installation is in the `Succe
     ```
     </div>
 
-     Replace placeholders with actual values for your powerflex array and various storage class sample refer [here](https://github.com/dell/csi-powerflex/tree/main/samples/storageclass) 
-      
-    Verify Storage Class is created: 
+     Replace placeholders with actual values for your powerflex array and various storage class sample refer [here](https://github.com/dell/csi-powerflex/tree/main/samples/storageclass)
+
+    </br>
+
+    Verify Storage Class is created:
 
     ```terminal
     oc get storageclass vxflexos
@@ -196,230 +208,275 @@ Check the status of the CR to verify if the driver installation is in the `Succe
 
     </br>
 
-5. ##### **Create Volume Snapshot Class:** 
+5. ##### **Create Volume Snapshot Class:**
 
     <br>
     
-    Use this command to create the **Volume Snapshot**: 
+    Use this command to create the **Volume Snapshot Class**:
 
 
     ```bash
-    oc create -f vsclass-powerflex.yaml
+    oc apply -f vsclass-vxflexos.yaml
     ```
 
     Example:
     ```yaml
-    cat << EOF > vsclass-powerflex.yaml
+    cat << EOF > vsclass-vxflexos.yaml
     apiVersion: snapshot.storage.k8s.io/v1
     kind: VolumeSnapshotClass
     metadata:
-      name: powerflex
+      name: vsclass-vxflexos
     driver: csi-vxflexos.dellemc.com
     deletionPolicy: Delete
     EOF 
     ```
 
-    Verify Volume Snapshot Class is created: 
+    Verify Volume Snapshot Class is created:
 
     ```terminal
-    oc get volumesnapshot
+    oc get volumesnapshotclass
 
-    NAME           READYTOUSE   SOURCEPVC       SOURCESNAPSHOTCONTENT   RESTORESIZE   SNAPSHOTCLASS   SNAPSHOTCONTENT                                    CREATIONTIME   AGE
-    vs-powerflex   true         pvc-powerflex                           8Gi           powerflex       snapcontent-80e99281-0d96-4275-b4aa-50301d110bd4   2m57s          12s
+    NAME                 DRIVER                     DELETIONPOLICY   AGE
+    vsclass-vxflexos     csi-vxflexos.dellemc.com   Delete           3h9m
     ``` 
    </br>
 
-### PVC and Pod Creation
-
- </br>
-
-1. ##### **Create Persistent Volume Claim:**
+### Configurations
+<br>
 
 
-    <br>
-    
-    Use this command to create the **Persistent Volume Claim**: 
-
-    ```bash
-    oc create -f pvc-powerflex.yaml
-    ```
-
-    Example:
-    ```yaml
-    cat << EOF > pvc-powerflex.yaml
-    apiVersion: v1
-    kind: PersistentVolumeClaim
-    metadata:
-      name: pvc-powerflex
-      namespace: default
-    spec:
-      accessModes:
-      - ReadWriteOnce
-      resources:
-        requests:
-          storage: 8Gi
-      storageClassName: vxflexos
-    EOF
-    ```
+{{< collapse id="2" title="Persistent Volume Claim and Pod" card="false" >}} 
   
-    Verify Persistent Volume Claim is created: 
+  <br> 
 
-    ```terminal
-    NAME                           STATUS   VOLUME             CAPACITY   ACCESS MODES   STORAGECLASS   VOLUMEATTRIBUTESCLASS   AGE
-    pvc-powerflex                  Bound    ocp08-9f103c4fc6   8Gi        RWO            vxflexos      <unset>                 4s
-    ```
+  ##### **Create Persistent Volume Claim**
 
-     </br>
+  <br>
 
-2.  ##### **Create Pod which uses Persistent Volume Claim with storage class:**  
+  Use this command to create the **Persistent Volume Claim**:
 
-    <br>
-    
-    Use this command to create the **Pod**: 
+  ```bash
+  oc apply -f pvc-vxflexos.yaml
+  ```
+
+  Example:
+  ```yaml
+  cat << EOF > pvc-vxflexos.yaml
+  apiVersion: v1
+  kind: PersistentVolumeClaim
+  metadata:
+    name: pvc-vxflexos
+    namespace: default
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    resources:
+      requests:
+        storage: 8Gi
+    storageClassName: vxflexos
+  EOF
+  ```
+
+  Verify Persistent Volume Claim is created:
 
 
-    ```bash
-    oc create -f pod-powerflex.yaml
-    ```
 
-    Example: 
-    ```yaml
-    cat << 'EOF' > pod-powerflex.yaml
-    apiVersion: v1
-    kind: Pod
-    metadata:
-      name: pod-powerflex
-      namespace: default
-    spec:
-      containers:
-      - name: ubi
-        image: registry.access.redhat.com/ubi9/ubi
-        command: [ "bash", "-c" ]
-        args: [ "while true; do touch /data/file-$(date +%s); sleep 20; done;" ]
-        volumeMounts:
-        - name: data
-          mountPath: /data
-      volumes:
+  ```terminal
+  oc get pvc -n default
+
+  NAME                           STATUS   VOLUME             CAPACITY   ACCESS MODES   STORAGECLASS   VOLUMEATTRIBUTESCLASS   AGE
+  pvc-vxflexos                   Bound    ocp08-9f103c4fc6   8Gi        RWO            vxflexos       <unset>                 4s
+  ``` 
+  <br>
+  <br> 
+  
+  ##### **Create Pod which uses Persistent Volume Claim with storage class**
+
+  <br>
+
+  Use this command to create the **Pod**:
+
+
+  ```bash
+  oc apply -f pod-vxflexos.yaml
+  ```
+
+  Example: 
+  ```yaml
+  cat << 'EOF' > pod-vxflexos.yaml
+  apiVersion: v1
+  kind: Pod
+  metadata:
+    name: pod-vxflexos
+    namespace: default
+  spec:
+    containers:
+    - name: ubi
+      image: registry.access.redhat.com/ubi9/ubi
+      command: [ "bash", "-c" ]
+      args: [ "while true; do touch /data/file-$(date +%s); sleep 20; done;" ]
+      volumeMounts:
       - name: data
-        persistentVolumeClaim:
-          claimName: pvc-powerflex
-    EOF
-    ```
+        mountPath: /data
+    volumes:
+    - name: data
+      persistentVolumeClaim:
+        claimName: pvc-vxflexos
+  EOF
+  ```
 
-    Verify pod is created:
+  Verify pod is created:
 
-    ```terminal
-    oc get pod -n default
+  ```terminal
+  oc get pod -n default
 
-    NAME                                        READY   STATUS    RESTARTS   AGE
-    pod-powerflex                               1/1     Running   0          109s    
-    ``` 
-   <br> 
+  NAME                                        READY   STATUS    RESTARTS   AGE
+  pod-vxflexos                                1/1     Running   0          109s
+  ``` 
+  <br>  
+  <br> 
 
-3.  ##### **Create Volume snapshot with Persistent Volume Claim :**  
-
-    <br>
-    
-    Use this command to create the **Volume Snapshot**: 
-
-
-    ```bash
-    oc create -f vs-powerflex.yaml 
-    ```
-
-    Example: 
-    ```yaml
-    cat << 'EOF' > vs-powerflex.yaml 
-    apiVersion: snapshot.storage.k8s.io/v1
-    kind: VolumeSnapshot
-    metadata:
-      name: vs-powerflex
-      namespace: default
-    spec:
-      volumeSnapshotClassName: vxflexos-snapclass
-      source:
-        persistentVolumeClaimName: pvc-powerflex
-    EOF
-    ```
-
-    Verify Volume Snapshot is created:
-
-    ```terminal
-    oc get volumesnapshot
-
-    NAME           READYTOUSE   SOURCEPVC       SOURCESNAPSHOTCONTENT   RESTORESIZE   SNAPSHOTCLASS   SNAPSHOTCONTENT                                    CREATIONTIME   AGE
-    vs-powerflex   true         pvc-powerflex                           8Gi           powerflex       snapcontent-80e99281-0d96-4275-b4aa-50301d110bd4   2m57s          12s  
-    ``` 
-   <br>
-
-4. ##### **Create Volume Content with Persistent Volume Claim :**  
-
-    <br>
-    
-    Use this command to create the **Volume Snapshot**: 
-
-    ```bash
-    oc create -f vs-powerflex.yaml 
-    ```
-
-    Example: 
-
-    ```yaml
-    cat << 'EOF' > vs-powerflex.yaml 
-    apiVersion: snapshot.storage.k8s.io/v1
-    kind: VolumeSnapshot
-    metadata:
-      name: vs-powerflex
-      namespace: default
-    spec:
-      volumeSnapshotClassName: vxflexos-snapclass
-      source:
-        persistentVolumeClaimName: pvc-powerflex
-    EOF
-    ```
-
-    Verify Volume Snapshot content is created:
-
-    ```terminal
-    oc get volumesnapshotcontent
-
-    NAME                                               READYTOUSE   RESTORESIZE   DELETIONPOLICY   DRIVER                     VOLUMESNAPSHOTCLASS   VOLUMESNAPSHOT   VOLUMESNAPSHOTNAMESPACE   AGE
-    snapcontent-80e99281-0d96-4275-b4aa-50301d110bd4   true         8589934592    Delete           csi-vxflexos.dellemc.com   powerflex             vs-powerflex     default                   23s 
-    ```
-    <br> 
+  ##### **Delete Persistance Volume Claim**
   
-    Example: 
+  </br>
 
-    ```yaml
-    cat << 'EOF' > pvc-powerflex-restore.yaml  
-    apiVersion: v1
-    kind: PersistentVolumeClaim
-    metadata:
-      name: pvc-powerflex-restore
-      namespace: default
-    spec:
-      storageClassName: powerflex
-      dataSource:
-        name: vs-powerflex
-        kind: VolumeSnapshot
-        apiGroup: snapshot.storage.k8s.io
-      accessModes:
-        - ReadWriteOnce
-      resources:
-        requests:
-          storage: 8Gi
-      EOF
-    ``` 
+  Use this command to  **Delete Persistance Volume Claim**:
 
-    Verify restore pvc is created:
+  ```bash
+  oc delete pvc pvc-vxflexos-restore -n default
+  ```
 
-    ```terminal
-    oc get pvc
+  Verify restore pvc is deleted:
 
-    NAME                    STATUS   VOLUME             CAPACITY   ACCESS MODES   STORAGECLASS   VOLUMEATTRIBUTESCLASS   AGE
-    pvc-powerflex           Bound    ocp08-095f7d3c52   8Gi        RWO            powerflex      <unset>                 7m34s
-      pvc-powerflex-restore   Bound    ocp08-19874e9042   8Gi        RWO            powerflex      <unset>                 4s
-    ```
+  ```terminal
+  oc get pvc -n default
+
+  NAME                    STATUS   VOLUME             CAPACITY   ACCESS MODES   STORAGECLASS   VOLUMEATTRIBUTESCLASS   AGE
+  pvc-vxflexos            Bound    ocp08-095f7d3c52   8Gi        RWO            vxflexos      <unset>                 7m34s
+  ```
+  </br> 
+
+
+{{< /collapse >}}
+
+
+{{< collapse id="4" title="Volume Snapshot" card="false" >}} 
+<br> 
+
+##### **Create Volume Snapshot**  
+
+<br>
+
+Use this command to create the **Volume Snapshot**:
+
+
+```bash
+oc apply -f vs-vxflexos.yaml
+```
+
+Example:
+```yaml
+cat << 'EOF' > vs-vxflexos.yaml
+apiVersion: snapshot.storage.k8s.io/v1
+kind: VolumeSnapshot
+metadata:
+  name: vs-vxflexos'
+  namespace: default
+spec:
+  volumeSnapshotClassName: vsclass-vxflexos
+  source:
+    persistentVolumeClaimName: pvc-vxflexos
+EOF
+```
+
+Verify Volume Snapshot is created:
+
+```terminal
+oc get volumesnapshot -n default
+
+NAME           READYTOUSE   SOURCEPVC       SOURCESNAPSHOTCONTENT   RESTORESIZE   SNAPSHOTCLASS      SNAPSHOTCONTENT                                    CREATIONTIME   AGE
+vs-vxflexos    true         pvc-vxflexos                            8Gi           vsclass-vxflexos   snapcontent-80e99281-0d96-4275-b4aa-50301d110bd4   2m57s          12s
+``` 
+
+</br>
+
+Verify Volume Snapshot content is created:
+
+```terminal
+oc get volumesnapshotcontent
+
+NAME                                               READYTOUSE   RESTORESIZE   DELETIONPOLICY   DRIVER                     VOLUMESNAPSHOTCLASS   VOLUMESNAPSHOT   VOLUMESNAPSHOTNAMESPACE   AGE
+snapcontent-80e99281-0d96-4275-b4aa-50301d110bd4   true         8589934592    Delete           csi-vxflexos.dellemc.com   vsclass-vxflexos      vs-vxflexos      default                   23s
+```  
+<br>
+<br> 
+
+##### **Restore Snapshot** 
+
+</br>
+
+Use this command to  **Restore Snapshot**:
+
+```bash
+oc apply -f pvc-vxflexos.yaml
+```
+
+Example:
+
+```yaml
+cat << 'EOF' > pvc-vxflexos-restore.yaml  
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pvc-vxflexos-restore
+  namespace: default
+spec:
+  storageClassName: vxflexos
+  dataSource:
+    name: vs-vxflexos
+    kind: VolumeSnapshot
+    apiGroup: snapshot.storage.k8s.io
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 8Gi
+  EOF
+``` 
+
+Verify restore pvc is created:
+
+```terminal
+oc get pvc -n default
+
+NAME                    STATUS   VOLUME             CAPACITY   ACCESS MODES   STORAGECLASS   VOLUMEATTRIBUTESCLASS   AGE
+pvc-vxflexos            Bound    ocp08-095f7d3c52   8Gi        RWO            vxflexos      <unset>                 7m34s
+pvc-vxflexos-restore    Bound    ocp08-19874e9042   8Gi        RWO            vxflexos      <unset>                 4s
+```
+</br> 
+
+##### **Delete Volume Snapshot**
+</br>
+
+Use this command to  **Delete Volume Snapshot**:
+
+```bash
+oc delete vs vs-vxflexos -n default
+```
+
+Verify  Volume Snapshot is deleted:
+
+```terminal
+oc get vs -n default
+
+NAME                    STATUS   VOLUME             CAPACITY   ACCESS MODES   STORAGECLASS   VOLUMEATTRIBUTESCLASS   AGE
+```
+
+
+
+
+{{< /collapse >}} 
+
 
 {{< /accordion >}}  
 

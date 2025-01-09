@@ -46,10 +46,13 @@
     }
 
     th{
-        border:1px solid #000000;
+        border:1px solid #000000;  
+        padding:10px;
+        text-align: center;
     }
     td{
-        border:1px solid #000000;
+        border:1px solid #000000; 
+        padding: 12px;
     }
 
     > blockquote {
@@ -86,8 +89,14 @@
 
     p + div.highlight, p + div.code-toolbar {
         margin-top: -0.5rem;
-    }
+    } 
 
+    .language-terminal + p {
+        margin-top: 20px; /* Adjust the value as needed */
+    }
+    p .language-terminal {
+        padding-left: 0;
+    }
 } 
 
 

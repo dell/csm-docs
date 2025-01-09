@@ -29,6 +29,9 @@
       padding: 8px;
 
   }
+  .card-box{
+    border: 0.5px solid rgb(163, 161, 161)
+  }
 </style>
 
 <div class="collapse-toggle">
@@ -36,7 +39,7 @@
       <i class="collapse-arrow fas fa-angle-right"></i>
       <strong class="collapse-text">{{ .Get "title" }}</strong>
   </div>
-  <div class="collapse-content {{ if eq (.Get "card" | default "true") "true" }}card card-body{{ end }}" style="display: none;">
+  <div class="collapse-content {{ if eq (.Get "card" | default "false") "true" }}card-box{{ end }}" style="display: none;">
       {{ .Inner | markdownify }}
   </div>
 </div>
