@@ -275,7 +275,7 @@ Check the status of the CR to verify if the driver installation is in the `Succe
 <br>
 
 
-{{< collapse id="2" title="Persistent Volume Claim and Pod" card="false" >}} 
+{{< collapse id="2" title="Persistent Volume Claim" card="false" >}} 
 <ol>  
 
   <br> 

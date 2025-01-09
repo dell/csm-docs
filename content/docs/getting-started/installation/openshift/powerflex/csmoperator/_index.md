@@ -245,9 +245,11 @@ Check the status of the CR to verify if the driver installation is in the `Succe
 <br>
 
 
-{{< collapse id="2" title="Persistent Volume Claim and Pod" card="false" >}} 
+{{< collapse id="2" title="Persistent Volume Claim " card="false" >}} 
   
   <br> 
+  <ol> 
+  <li> 
 
   ##### **Create Persistent Volume Claim**
 
@@ -289,7 +291,9 @@ Check the status of the CR to verify if the driver installation is in the `Succe
   ``` 
   <br>
   <br> 
-  
+  </li>
+  <li>
+
   ##### **Create Pod which uses Persistent Volume Claim with storage class**
 
   <br>
@@ -335,6 +339,8 @@ Check the status of the CR to verify if the driver installation is in the `Succe
   ``` 
   <br>  
   <br> 
+  </li>
+  <li>
 
   ##### **Delete Persistance Volume Claim**
   
@@ -355,13 +361,17 @@ Check the status of the CR to verify if the driver installation is in the `Succe
   pvc-vxflexos            Bound    ocp08-095f7d3c52   8Gi        RWO            vxflexos      <unset>                 7m34s
   ```
   </br> 
-
+</li> 
+</ol>
 
 {{< /collapse >}}
 
 
 {{< collapse id="4" title="Volume Snapshot" card="false" >}} 
 <br> 
+
+<ol> 
+<li>
 
 ##### **Create Volume Snapshot**  
 
@@ -410,6 +420,8 @@ snapcontent-80e99281-0d96-4275-b4aa-50301d110bd4   true         8589934592    De
 ```  
 <br>
 <br> 
+</li>
+<li>
 
 ##### **Restore Snapshot** 
 
@@ -454,6 +466,8 @@ pvc-vxflexos            Bound    ocp08-095f7d3c52   8Gi        RWO            vx
 pvc-vxflexos-restore    Bound    ocp08-19874e9042   8Gi        RWO            vxflexos      <unset>                 4s
 ```
 </br> 
+</li>
+<li>
 
 ##### **Delete Volume Snapshot**
 </br>
@@ -471,7 +485,8 @@ oc get vs -n default
 
 NAME                    STATUS   VOLUME             CAPACITY   ACCESS MODES   STORAGECLASS   VOLUMEATTRIBUTESCLASS   AGE
 ```
-
+</li>
+</ol>
 
 
 

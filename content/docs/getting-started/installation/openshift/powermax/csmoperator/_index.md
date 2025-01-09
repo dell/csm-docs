@@ -11,7 +11,12 @@ description: >
 {{% /pageinfo %}}
 
 ## Installing the Operator
-To deploy the Operator, follow the instructions available [here](../../../operator/operatorinstallation_openshift.md).
+
+<br>
+
+To deploy the Operator, follow the instructions available [here](../../../operator/operatorinstallation_openshift.md). 
+
+<br>
 
 {{< accordion id="One" title="CSM Installation Wizard" markdown="true" >}}  
 {{<include  "content/docs/getting-started/installation/installationwizard/operator.md" >}}

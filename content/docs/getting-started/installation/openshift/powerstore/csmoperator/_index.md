@@ -15,6 +15,7 @@ weight: 2
 <br>
 
 To deploy the Operator, follow the instructions available [here](../../../operator/operatorinstallation_openshift.md).
+
 <br> 
 
 {{< accordion id="One" title="CSM Installation Wizard" >}}
@@ -247,7 +248,7 @@ Check the status of the CR to verify if the driver installation is in the `Succe
 <br>
 
 
-{{< collapse id="2" title="Persistent Volume Claim and Pod" card="false" >}} 
+{{< collapse id="2" title="Persistent Volume Claim" card="false" >}} 
   
   <br> 
   <ol>
