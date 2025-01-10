@@ -6,4 +6,4 @@ description: >
   Container Storage Modules (CSM) for Resiliency installation
 --- 
 
-{{<includee file="content/docs/getting-started/installation/operator/modules/resiliency.md" Var="powerflex" labels="vxflexos">}}
+{{<includee file="content/docs/getting-started/installation/operator/modules/resiliency.md" Var="powerstore" labels="powerstore">}}
