@@ -40,7 +40,7 @@ reclaimPolicy: Delete
 volumeBindingMode: Immediate
 ```
 
-> _**NOTE**_: Metro support for hosts with Linux operating systems was added from [PowerStoreOS 4.0](https://infohub.delltechnologies.com/en-us/l/dell-powerstore-metro-volume-1/introduction-4503/).
+> _**NOTE**_: Metro support for hosts with Linux operating systems was added from [PowerStoreOS 4.0](https://infohub.delltechnologies.com/en-us/l/dell-powerstore-metro-volume-1/introduction-4503/).</br>
 > _**NOTE**_: Metro at volume group is not supported by the PowerStore driver.
 
 When a Metro `PV` is created, the volumeHandle will have the format `<volumeID/globalID/protocol:remote-volumeID/remote-globalID>`.
