@@ -1,21 +1,52 @@
 ---
-title: "Operator"
+title: "Installation"
 linktitle: "Operator"
 no_list: true
 description: CSM Operator Installation
 weight: 2
 ---
 
-### Installing the Operator
+{{< markdownify >}}
+Supported driver and module versions offered by the Container Storage Module Operator [here](../../../../../supportmatrix/#operator-compatibility-matrix)
+{{< /markdownify >}}
 
-</br>
-
-To deploy the Operator, follow the instructions available [here](../../../operator/operatorinstallation_openshift.md).
-
-</br>
+<br>
+<br>
 
 {{< accordion id="Two" title="CSI Driver" markdown="true" >}}
 
+</br>
+
+### Operator Installation
+
+</br>
+ 
+1. On the OpenShift console, navigate to **OperatorHub** and use the keyword filter to search for **Dell Container Storage Modules.** 
+
+2. Click **Dell Container Storage Modules** tile 
+
+3. Keep all default settings and click **Install**.
+
+</br>
+<ol>
+
+Verify that the operator is deployed 
+```terminal 
+oc get operators
+
+NAME                                                          AGE
+dell-csm-operator-certified.openshift-operators               2d21h
+```  
+
+```terminal
+oc get pod -n openshift-operators
+
+NAME                                                       READY   STATUS       RESTARTS      AGE
+dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      21 (19h ago)  2d21h
+``` 
+
+
+</ol>
 </br>
 
 ### CSI Driver Installation
@@ -254,7 +285,6 @@ Check the status of the CR to verify if the driver installation is in the `Succe
   ##### **Create Persistent Volume Claim**
 
   <br>
-
   Use this command to create the **Persistent Volume Claim**:
 
   ```bash
@@ -282,14 +312,12 @@ Check the status of the CR to verify if the driver installation is in the `Succe
   Verify Persistent Volume Claim is created:
 
 
-
   ```terminal
   oc get pvc -n default
 
   NAME                           STATUS   VOLUME             CAPACITY   ACCESS MODES   STORAGECLASS   VOLUMEATTRIBUTESCLASS   AGE
   pvc-vxflexos                   Bound    ocp08-9f103c4fc6   8Gi        RWO            vxflexos       <unset>                 4s
   ``` 
-  <br>
   <br> 
   </li>
   <li>
@@ -297,7 +325,7 @@ Check the status of the CR to verify if the driver installation is in the `Succe
   ##### **Create Pod which uses Persistent Volume Claim with storage class**
 
   <br>
-
+  
   Use this command to create the **Pod**:
 
 
@@ -337,7 +365,6 @@ Check the status of the CR to verify if the driver installation is in the `Succe
   NAME                                        READY   STATUS    RESTARTS   AGE
   pod-vxflexos                                1/1     Running   0          109s
   ``` 
-  <br>  
   <br> 
   </li>
   <li>
@@ -390,7 +417,7 @@ cat << 'EOF' > vs-vxflexos.yaml
 apiVersion: snapshot.storage.k8s.io/v1
 kind: VolumeSnapshot
 metadata:
-  name: vs-vxflexos'
+  name: vs-vxflexos
   namespace: default
 spec:
   volumeSnapshotClassName: vsclass-vxflexos
@@ -418,7 +445,6 @@ oc get volumesnapshotcontent
 NAME                                               READYTOUSE   RESTORESIZE   DELETIONPOLICY   DRIVER                     VOLUMESNAPSHOTCLASS   VOLUMESNAPSHOT   VOLUMESNAPSHOTNAMESPACE   AGE
 snapcontent-80e99281-0d96-4275-b4aa-50301d110bd4   true         8589934592    Delete           csi-vxflexos.dellemc.com   vsclass-vxflexos      vs-vxflexos      default                   23s
 ```  
-<br>
 <br> 
 </li>
 <li>
@@ -498,11 +524,6 @@ NAME                    STATUS   VOLUME             CAPACITY   ACCESS MODES   ST
 <br>
 
 {{< accordion id="Three" title="CSM Modules">}}
-<br>  
-{{< markdownify >}}
-The driver and modules versions installable with the Container Storage Module Operator [Click Here](../../../../../supportmatrix/#operator-compatibility-matrix)
-{{< /markdownify >}}
-<br>   
 
 {{< cardcontainer >}}
     {{< customcard link1="./csm-modules/authorizationv1.x"  image="6" title="Authorization v1.x" >}}

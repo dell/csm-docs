@@ -94,7 +94,6 @@ Here’s a minimal Prometheus configuration using insecure skip verify; for prop
     On your terminal, run each of the commands below:
 
     ```terminal
-
     helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
     helm repo add stable https://charts.helm.sh/stable
     helm repo update
@@ -105,7 +104,6 @@ Here’s a minimal Prometheus configuration using insecure skip verify; for prop
     On your terminal, run the command below:
 
     ```terminal
-
     helm install prometheus prometheus-community/prometheus -n [CSM_NAMESPACE] -f prometheus-values.yaml
     ```
 

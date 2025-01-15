@@ -6,7 +6,7 @@ description: CSM Operator Installation
 weight: 2
 ---
 
-## Installing the Operator
+## Operator Installation
 To deploy the Operator, follow the instructions available [here](../../../operator/operatorinstallation_kubernetes.md).
 
 {{< accordion id="Two" title="CSI Driver" markdown="true" >}}  

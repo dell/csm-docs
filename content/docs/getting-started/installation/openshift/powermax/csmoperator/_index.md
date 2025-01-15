@@ -1,5 +1,5 @@
 ---
-title: Operator
+title: Installation
 linkTitle: Operator 
 no_list: true
 weight: 2
@@ -10,12 +10,11 @@ description: >
 {{< message text="1" >}}
 {{% /pageinfo %}}
 
-## Installing the Operator
+{{< markdownify >}}
+Supported driver and module versions offered by the Container Storage Module Operator [here](../../../../../supportmatrix/#operator-compatibility-matrix)
+{{< /markdownify >}}
 
 <br>
-
-To deploy the Operator, follow the instructions available [here](../../../operator/operatorinstallation_openshift.md). 
-
 <br>
 
 {{< accordion id="One" title="CSM Installation Wizard" markdown="true" >}}  
@@ -23,7 +22,30 @@ To deploy the Operator, follow the instructions available [here](../../../operat
 {{< /accordion >}}
 
 <br>
-{{< accordion id="Two" title="CSI Driver" markdown="true" >}}  
+{{< accordion id="Two" title="CSI Driver" markdown="true" >}}   
+
+
+</br>
+
+### Operator Installation
+
+</br>
+ 
+Go to [`OperatorHub`](https://operatorhub.io/) and use the keyword filter to search for <span style="user-select: all;">`Dell Container`</span>. Click on the result
+
+Keep all default settings and click **Install**.
+
+</br>
+
+Verify that the operator **Pods** are in a Running state
+```terminal 
+oc get pods -A  | grep dell-csm-operator
+
+NAME                                                       READY   STATUS       RESTARTS    AGE
+dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      0           4m
+``` 
+
+</br>
 
 ### Install Driver
 
@@ -285,10 +307,6 @@ X_CSI_TOPOLOGY_CONTROL_ENABLED provides a way to filter topology keys on a node 
 
 {{< accordion id="Three" title="CSM Modules"  >}}  
 
- <br>  
- {{< markdownify >}}
-The driver and modules versions installable with the Container Storage Module Operator [Click Here](../../../../../supportmatrix/#operator-compatibility-matrix)
-{{< /markdownify >}}
 <br>   
 
 {{< cardcontainer >}}

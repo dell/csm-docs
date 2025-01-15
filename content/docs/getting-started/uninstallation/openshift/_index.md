@@ -1,6 +1,6 @@
 ---
 title: "Open Shift"
-linkTitle: "Open Shift"
+linkTitle: "OpenShift"
 no_list: true
 description: Open-shift Uninstallation
 weight: 2

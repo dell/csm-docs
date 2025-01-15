@@ -6,4 +6,4 @@ description: >
   Container Storage Modules (CSM) for Observability Operator deployment
 --- 
 
-{{<includee file="content/docs/getting-started/installation/operator/modules/observability.md" Var="powerflex" hideIds="2,3">}}
+{{<includee file="content/docs/getting-started/installation/operator/modules/observability.md" Var="powerflex" labels="powerflex">}}

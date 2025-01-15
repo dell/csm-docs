@@ -1,5 +1,5 @@
 ---
-title: Operator
+title: Installation
 linkTitle: Operator
 description: >
   Installing the CSI Driver for PowerStore via Container Storage Module Operator 
@@ -10,13 +10,13 @@ weight: 2
 {{< message text="1" >}}
 {{% /pageinfo %}}
 
-## Installing the Operator 
+
+{{< markdownify >}}
+Supported driver and module versions offered by the Container Storage Module Operator [here](../../../../../supportmatrix/#operator-compatibility-matrix)
+{{< /markdownify >}}
 
 <br>
-
-To deploy the Operator, follow the instructions available [here](../../../operator/operatorinstallation_openshift.md).
-
-<br> 
+<br>
 
 {{< accordion id="One" title="CSM Installation Wizard" >}}
   {{< includee file="content/docs/getting-started/installation/installationwizard/operator.md" hideIds="1,2,3" >}}
@@ -24,8 +24,29 @@ To deploy the Operator, follow the instructions available [here](../../../operat
 
 <br>
 
-{{< accordion id="Two" title="CSI Driver" markdown="true" >}} 
-<br> 
+{{< accordion id="Two" title="CSI Driver" markdown="true" >}}  
+
+</br>
+
+### Operator Installation
+
+</br>
+ 
+Go to [`OperatorHub`](https://operatorhub.io/) and use the keyword filter to search for <span style="user-select: all;">`Dell Container`</span>. Click on the result
+
+Keep all default settings and click **Install**.
+
+</br>
+
+Verify that the operator **Pods** are in a Running state
+```terminal 
+oc get pods -A  | grep dell-csm-operator
+
+NAME                                                       READY   STATUS       RESTARTS    AGE
+dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      0           4m
+``` 
+</br>
+
 
 ### CSI Driver Installation
 </br>
@@ -292,7 +313,7 @@ Check the status of the CR to verify if the driver installation is in the `Succe
   NAME                           STATUS   VOLUME             CAPACITY   ACCESS MODES   STORAGECLASS   VOLUMEATTRIBUTESCLASS   AGE
   pvc-powerstore                 Bound  ocp08-9f103c4fc6     8Gi        RWO            powerstore       <unset>               4s
   ``` 
-  <br>
+
   <br> 
   </li>
   
@@ -341,7 +362,7 @@ Check the status of the CR to verify if the driver installation is in the `Succe
   NAME                                        READY   STATUS    RESTARTS   AGE
   pod-powerstore                              1/1     Running   0          109s
   ``` 
-  <br>  
+
   <br>  
   </li>
   <li>
@@ -422,7 +443,7 @@ oc get volumesnapshotcontent
 NAME                                               READYTOUSE   RESTORESIZE   DELETIONPOLICY   DRIVER                       VOLUMESNAPSHOTCLASS     VOLUMESNAPSHOT   VOLUMESNAPSHOTNAMESPACE   AGE
 snapcontent-80e99281-0d96-4275-b4aa-50301d110bd4   true         8589934592    Delete           csi-powerstore.dellemc.com   vsclass-powerstore      vs-powerstore      default                   23s
 ```  
-<br>
+
 <br>  
 </li>
 <li>
@@ -469,7 +490,7 @@ NAME                    STATUS   VOLUME             CAPACITY   ACCESS MODES   ST
 pvc-powerstore          Bound    ocp08-095f7d3c52   8Gi        RWO            powerstore     <unset>                 7m34s
 pvc-powerstore-restore  Bound    ocp08-19874e9042   8Gi        RWO            powerstore     <unset>                 4s
 ```
-</br> 
+
 <br> 
 </li> 
 <li>
@@ -502,9 +523,6 @@ NAME                    STATUS   VOLUME             CAPACITY   ACCESS MODES   ST
 <br>
 
 {{< accordion id="Three" title="CSM Modules" >}}
-{{< markdownify >}}
-The driver and modules versions installable with the Container Storage Module Operator [Click Here](../../../../../supportmatrix/#operator-compatibility-matrix)
-{{< /markdownify >}}
 
 <br>   
 

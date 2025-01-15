@@ -10,7 +10,7 @@ no_list: true
 {{< message text="1" >}}
 {{% /pageinfo %}}
 
-## Installing the Operator
+## Operator Installation
 To deploy the Operator, follow the instructions available [here](../../../operator/operatorinstallation_kubernetes.md).
 
 {{< accordion id="One" title="CSM Installation Wizard" >}}
