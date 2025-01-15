@@ -19,7 +19,7 @@ Supported driver and module versions offered by the Container Storage Module Ope
 <br>
 
 {{< accordion id="One" title="CSM Installation Wizard" >}}
-  {{< includee file="content/docs/getting-started/installation/installationwizard/operator.md" hideIds="1,2,3" >}}
+  {{< include file="content/docs/getting-started/installation/installationwizard/operator.md" hideIds="1,2,3" >}}
 {{< /accordion >}}
 
 <br>

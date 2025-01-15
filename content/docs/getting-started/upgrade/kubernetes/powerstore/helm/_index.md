@@ -6,7 +6,7 @@ description:
 weight: 2
 ---
 {{< accordion id="Two" title="CSI Driver" markdown="true" >}}  
-{{<include  "content/docs/getting-started/upgrade/helm/driver/powerstore.md" >}}
+{{<include  file="content/docs/getting-started/upgrade/helm/driver/powerstore.md" >}}
 {{< /accordion >}}
 
 <br>

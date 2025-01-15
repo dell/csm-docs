@@ -4,4 +4,4 @@ linktitle: Authorization v1.x
 weight: 3
 description: >
 ---
-{{<includee  file="content/docs/getting-started/uninstallation/helm/module/authorizationv1.x.md" Var="powerscale" >}}
+{{<include  file="content/docs/getting-started/uninstallation/helm/module/authorizationv1.x.md" Var="powerscale" >}}

@@ -18,7 +18,7 @@ Install Helm 3.0 on the master node before you install the CSI Driver for PowerS
   ```
 
 {{< accordion id="One" title="CSM Installation Wizard" >}}
-            {{<includee  file="content/docs/getting-started/installation/installationwizard/helm.md" hideIds="2">}}
+            {{<include  file="content/docs/getting-started/installation/installationwizard/helm.md" hideIds="2">}}
 {{< /accordion >}}
 <br>
 {{< accordion id="Two" title="CSI Driver" markdown="true" >}}  

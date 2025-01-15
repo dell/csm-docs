@@ -4,4 +4,4 @@ linktitle: Observability
 weight: 3
 description: >
 --- 
-{{<includee  file="content/docs/getting-started/upgrade/helm/module/observability.md" Var="powerstore" hideIds="2" >}}
+{{<include  file="content/docs/getting-started/upgrade/helm/module/observability.md" Var="powerstore" hideIds="2" >}}

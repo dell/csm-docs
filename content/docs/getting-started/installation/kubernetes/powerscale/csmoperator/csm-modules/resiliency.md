@@ -6,5 +6,5 @@ description: >
   Container Storage Modules (CSM) for Resiliency installation
 --- 
 
-{{<includee file="content/docs/getting-started/installation/operator/modules/resiliency.md" Var="powerscale" labels="isilon">}}
+{{<include file="content/docs/getting-started/installation/operator/modules/resiliency.md" Var="powerscale" labels="isilon">}}
 

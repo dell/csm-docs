@@ -5,4 +5,4 @@ no_list: true
 description: Offline
 weight: 3
 --- 
-{{<include  "content/docs/getting-started/upgrade/offline/_index.md" >}}
+{{<include  file="content/docs/getting-started/upgrade/offline/_index.md" >}}

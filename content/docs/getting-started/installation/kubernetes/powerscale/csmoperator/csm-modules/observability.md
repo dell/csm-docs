@@ -6,4 +6,4 @@ description: >
   Container Storage Modules (CSM) for Observability Operator deployment
 --- 
 
-{{<includee file="content/docs/getting-started/installation/operator/modules/observability.md" Var="powerscale" labels="powerscale">}}
+{{<include file="content/docs/getting-started/installation/operator/modules/observability.md" Var="powerscale" labels="powerscale">}}

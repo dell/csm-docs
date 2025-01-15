@@ -5,5 +5,5 @@ weight: 3
 description: >
 
 --- 
-{{<includee  file="content/docs/getting-started/uninstallation/helm/module/resiliency.md" Var="powerscale" values="isilon">}}
+{{<include  file="content/docs/getting-started/uninstallation/helm/module/resiliency.md" Var="powerscale" values="isilon">}}
 

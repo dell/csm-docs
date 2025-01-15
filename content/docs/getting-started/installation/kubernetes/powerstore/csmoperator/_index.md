@@ -14,7 +14,7 @@ no_list: true
 To deploy the Operator, follow the instructions available [here](../../../operator/operatorinstallation_kubernetes.md).
 
 {{< accordion id="One" title="CSM Installation Wizard" >}}
-  {{< includee file="content/docs/getting-started/installation/installationwizard/operator.md" hideIds="1,2,3" >}}
+  {{< include file="content/docs/getting-started/installation/installationwizard/operator.md" hideIds="1,2,3" >}}
 {{< /accordion >}}
 
 <br>

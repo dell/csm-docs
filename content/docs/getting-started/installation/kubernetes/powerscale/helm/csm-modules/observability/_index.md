@@ -6,24 +6,21 @@ weight: 3
 description: >
   Container Storage Modules (CSM) for Observability Helm deployment
 --- 
-<!--
-<br>
-{{<include "content/docs/getting-started/installation/helm/modules/observability/_index.md">}}
---> 
+
 {{< accordion id="One" title="Helm" markdown="true" >}} 
-{{<includee file="content/docs/getting-started/installation/helm/modules/observability/deployment/installation.md" suffix="1">}} 
+{{<include file="content/docs/getting-started/installation/helm/modules/observability/deployment/installation.md" suffix="1">}} 
 
-{{<includee file="content/docs/getting-started/installation/helm/modules/observability/deployment/driver/powerscale.md" suffix="2">}} 
+{{<include file="content/docs/getting-started/installation/helm/modules/observability/deployment/driver/powerscale.md" suffix="2">}} 
 
-{{<includee file="content/docs/getting-started/installation/helm/modules/observability/deployment/configuration/configuration.md" suffix="3" hideIds="1,3,4,5,7">}} 
+{{<include file="content/docs/getting-started/installation/helm/modules/observability/deployment/configuration/configuration.md" suffix="3" hideIds="1,3,4,5,7">}} 
 {{< /accordion >}}
 <br> 
 {{< accordion id="Two" title="Installer" markdown="true" >}} 
-{{<includee file="content/docs/getting-started/installation/helm/modules/observability/installer.md" suffix="4" hideIds="1,3">}}
+{{<include file="content/docs/getting-started/installation/helm/modules/observability/installer.md" suffix="4" hideIds="1,3">}}
 {{< /accordion >}} 
 
 {{< accordion id="Three" title="Offline" markdown="true" >}} 
-{{<includee file="content/docs/getting-started/installation/offline/observability.md" hideIds="1,2,4,5,7" suffix="5" Var="powerscale">}}
+{{<include file="content/docs/getting-started/installation/offline/observability.md" hideIds="1,2,4,5,7" suffix="5" Var="powerscale">}}
 {{< /accordion >}}
 
 

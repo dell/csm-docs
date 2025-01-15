@@ -4,4 +4,4 @@ linktitle: Replication
 weight: 9
 
 --- 
-{{< includee  file="content/docs/getting-started/upgrade/helm/module/replication.md"  >}}
+{{< include  file="content/docs/getting-started/upgrade/helm/module/replication.md"  >}}

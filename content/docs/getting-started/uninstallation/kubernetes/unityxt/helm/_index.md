@@ -6,7 +6,7 @@ description: Helm Installation
 weight: 2
 ---
 {{< accordion id="Two" title="CSI Driver" markdown="true" >}}  
-{{<include  "content/docs/getting-started/uninstallation/helm/driver/driver.md" >}}
+{{<include  file="content/docs/getting-started/uninstallation/helm/driver/driver.md" >}}
 {{< /accordion >}} 
 <br>
 {{< accordion id="Three" title="CSM Modules"  >}}   

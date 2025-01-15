@@ -4,4 +4,4 @@ linktitle: Observability
 weight: 3
 description: >
 --- 
-{{<include  "content/docs/getting-started/uninstallation/helm/module/observability.md" >}}
+{{<include  file="content/docs/getting-started/uninstallation/helm/module/observability.md" >}}

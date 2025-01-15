@@ -5,5 +5,5 @@ weight: 3
 description: >
 
 --- 
-{{<includee  file="content/docs/getting-started/uninstallation/helm/module/resiliency.md" Var="powerflex" values="vxflexos">}}
+{{<include  file="content/docs/getting-started/uninstallation/helm/module/resiliency.md" Var="powerflex" values="vxflexos">}}
 
