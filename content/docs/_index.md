@@ -9,6 +9,10 @@ menu:
 no_list: true
 ---
 
+{{% pageinfo color="info" %}}
+<span><span/>{{< message text="9" >}}
+{{% /pageinfo %}}
+
 {{% pageinfo color="primary" %}}
 1. <span><span/>{{< message text="8" >}}
 
