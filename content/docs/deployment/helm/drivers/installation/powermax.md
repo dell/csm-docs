@@ -377,8 +377,14 @@ CRDs should be configured during replication prepare stage with repctl as descri
 
 **Steps**
 
-1. Run `git clone -b v2.14.0 https://github.com/dell/csi-powermax.git` to clone the git repository. This will include the Helm charts and dell-csi-helm-installer scripts.
-2. Create a namespace in which the driver will be installed. Run `kubectl create namespace powermax` to create a new one.
+1. Clone the csi-powermax repository, using the latest release branch. This will include the Helm charts and dell-csi-helm-installer scripts.
+    ```bash
+    git clone -b v2.14.0 https://github.com/dell/csi-powermax.git
+    ```
+2. Create a namespace in which the driver will be installed.
+    ```bash
+    kubectl create namespace powermax
+    ```
 3. Edit the `samples/secret/secret.yaml` file, referencing the details below, to provide the necessary information for connecting the driver to the desired Unisphere instances.
 
     - *storageArrays*: A list of storage arrays and their associated details.
@@ -408,11 +414,11 @@ CRDs should be configured during replication prepare stage with repctl as descri
         password: Password123
         skipCertificateValidation: false
     ```
-4. Create the secret by running
+4. Create the powermax-reverseproxy-secret Secret.
     ```bash
     kubectl create secret generic powermax-reverseproxy-secret --namespace powermax --from-file=config=samples/secret/secret.yaml
     ```
-5. Download the default values.yaml file
+5. Download the default values.yaml file.
     ```bash
     cd dell-csi-helm-installer && wget -O my-powermax-settings.yaml https://github.com/dell/helm-charts/raw/csi-powermax-2.14.0/charts/csi-powermax/values.yaml
     ```
