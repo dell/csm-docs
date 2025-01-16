@@ -379,17 +379,17 @@ CRDs should be configured during replication prepare stage with repctl as descri
 
 1. Run `git clone -b v2.14.0 https://github.com/dell/csi-powermax.git` to clone the git repository. This will include the Helm charts and dell-csi-helm-installer scripts.
 2. Create a namespace in which the driver will be installed. Run `kubectl create namespace powermax` to create a new one.
-3. Edit the `samples/secret/secret.yaml` file to point to the correct namespace, and replace the values for the username and password parameters.
+3. Edit the `samples/secret/secret.yaml` file, referencing the details below, to provide the necessary information for connecting the driver to the desired Unisphere instances.
 
-  - *storageArrays*: A list of storage arrays and their associated details.
-    - *storageArrayId*: A unique PowerMax Symmetrix ID.
-    - *primaryEndpoint*: The URL of the Unisphere server managing this storage array.
-    - *backupEndpoint*: The URL of the backup Unisphere server managing this storage array; utilized if the primary server is unreachable.
-  - *managementServers*: A list of Unisphere management server endpoints and resources used to make connections with those servers.
-    - *endpoint*: The URL of the Unisphere server (primary or backup). This should match one of the URLs listed under `storageArrays`.
-    - *username*: The username to be used when connecting to the `endpoint`.
-    - *password*: The password to be used when connecting to the `endpoint`.
-    - *skipCertificateValidation*: Set to `false` to perform client-side TLS certificate verification for the Unisphere instance, `true` to skip verification.
+    - *storageArrays*: A list of storage arrays and their associated details.
+      - *storageArrayId*: A unique PowerMax Symmetrix ID.
+      - *primaryEndpoint*: The URL of the Unisphere server managing this storage array.
+      - *backupEndpoint*: The URL of the backup Unisphere server managing this storage array; utilized if the primary server is unreachable.
+    - *managementServers*: A list of Unisphere management server endpoints and resources used to make connections with those servers.
+      - *endpoint*: The URL of the Unisphere server (primary or backup). This should match one of the URLs listed under `storageArrays`.
+      - *username*: The username to be used when connecting to the `endpoint`.
+      - *password*: The password to be used when connecting to the `endpoint`.
+      - *skipCertificateValidation*: Set to `false` to perform client-side TLS certificate verification for the Unisphere instance, `true` to skip verification.
 
     Example: `samples/secret/secret.yaml`
 
