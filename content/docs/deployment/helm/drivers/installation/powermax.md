@@ -16,6 +16,7 @@ The following requirements must be met before installing the CSI Driver for Dell
 
 - A Kubernetes or OpenShift cluster (see [supported versions](../../../../../csidriver/#features-and-capabilities))
 - Helm 3
+- A PowerMax system managed by a Unisphere instance with software version 10.0 or later.
 - If enabling CSM for Authorization, please refer to the [Authorization deployment steps](../../../../../deployment/helm/modules/installation/authorization-v2.0/) first
 - If enabling CSM Replication, both source and target storage systems must be locally managed by Unisphere.
   - _Example_: When using two Unisphere instances, the first Unisphere instance should be configured with the source storage system as locally
@@ -422,8 +423,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
     ```bash
     cd dell-csi-helm-installer && wget -O my-powermax-settings.yaml https://github.com/dell/helm-charts/raw/csi-powermax-2.14.0/charts/csi-powermax/values.yaml
     ```
-6. Confirm REST API support for the Unisphere server by checking it is version 10.0, or later. From the Unisphere for PowerMax GUI, click Help (?) -> About.
-7. Edit the newly created file and provide values for the following parameters
+6. Edit the newly created file and provide values for the following parameters
     ```bash
     vi my-powermax-settings.yaml
     ```
