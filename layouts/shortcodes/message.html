@@ -12,6 +12,8 @@ Starting with CSM 1.13, Authorization v1.x will be deprecated and will be offici
 This document version is no longer actively maintained. The site that you are currently viewing is an archived snapshot. For up-to-date documentation, see the [latest version](/csm-docs/)
 {{ else if eq (.Get "text") "7" }}
 Dell CSM Volume Group Snapshotter will be deprecated in CSM 1.14 (May 2025) and will no longer be supported
+{{ else if eq (.Get "text") "8" }}
+ANNOUNCEMENT: Support for CSM via Slack will be deprecated on 5/31/2025 aligning to the CSM 1.14 release. All existing Slack channels will be archived from that date onward. For questions and support, please reach out by creating a <a href="https://github.com/dell/csm/issues/">GitHub  issue</a>  for community support and/or the <a href="https://github.com/dell/csm/issues/">Dell Support</a> Portal if you have a valid support contract. For more details, please see our  <a href=" https://dell.github.io/csm-docs/v1/support/"> Dell Support page</a>. 
 {{ else }}
   <p>Default text if no valid parameter is passed.</p>
 {{ end }}
