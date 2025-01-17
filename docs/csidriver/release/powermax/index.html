@@ -17,12 +17,12 @@
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="docs">
-    <meta property="article:modified_time" content="2025-01-02T09:07:07-05:00">
+    <meta property="article:modified_time" content="2025-01-17T10:35:06-05:00">
 
   <meta itemprop="name" content="PowerMax">
   <meta itemprop="description" content="Release notes for PowerMax CSI driver">
-  <meta itemprop="dateModified" content="2025-01-02T09:07:07-05:00">
-  <meta itemprop="wordCount" content="569">
+  <meta itemprop="dateModified" content="2025-01-17T10:35:06-05:00">
+  <meta itemprop="wordCount" content="649">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="PowerMax">
   <meta name="twitter:description" content="Release notes for PowerMax CSI driver">
@@ -125,7 +125,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.30cbd121c9a04dbae82fa0989eaa7269.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.f92c64970093c6ebdb086cfdab6b81e4.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -149,7 +149,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.30cbd121c9a04dbae82fa0989eaa7269.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.f92c64970093c6ebdb086cfdab6b81e4.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -676,7 +676,7 @@
             <div class="td-toc">
         <nav id="TableOfContents">
   <ul>
-    <li><a href="#release-notes---csi-powermax-v2120">Release Notes - CSI PowerMax v2.12.0</a>
+    <li><a href="#release-notes---csi-powermax-v2130">Release Notes - CSI PowerMax v2.13.0</a>
       <ul>
         <li><a href="#new-featureschanges">New Features/Changes</a></li>
         <li><a href="#fixed-issues">Fixed Issues</a></li>
@@ -714,8 +714,8 @@
 	<header class="article-meta">
 		
 </header>
-	<h2 id="release-notes---csi-powermax-v2120">
-Release Notes - CSI PowerMax v2.12.0 <a class="header-link"  href="#release-notes---csi-powermax-v2120" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
+	<h2 id="release-notes---csi-powermax-v2130">
+Release Notes - CSI PowerMax v2.13.0 <a class="header-link"  href="#release-notes---csi-powermax-v2130" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
             <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
                 <path d="M0 0h24v24H0z" fill="none"/>
                 <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
@@ -736,10 +736,8 @@ New Features/Changes <a class="header-link"  href="#new-featureschanges" style="
                 <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
             </svg>
         </a></h3><ul>
-<li><a href="https://github.com/dell/csm/issues/1410">#1410 - [FEATURE]: Adding support for PowerMax Magnolia</a></li>
-<li><a href="https://github.com/dell/csm/issues/1472">#1472 - [FEATURE]: Support for Kubernetes 1.31</a></li>
-<li><a href="https://github.com/dell/csm/issues/1473">#1473 - [FEATURE]: Add Support for OpenShift Container Platform (OCP) 4.17</a></li>
-<li><a href="https://github.com/dell/csm/issues/1508">#1508 - [FEATURE]:  Add Support for KubeVirt</a></li>
+<li><a href="https://github.com/dell/csm/issues/1560">#1560 - [FEATURE]: CSM support for OpenShift 4.18</a></li>
+<li><a href="https://github.com/dell/csm/issues/1561">#1561 - [FEATURE]: Added support for Kubernetes 1.32 </a></li>
 </ul>
 <h3 id="fixed-issues">
 Fixed Issues <a class="header-link"  href="#fixed-issues" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
@@ -748,15 +746,21 @@ Fixed Issues <a class="header-link"  href="#fixed-issues" style=" display: inlin
                 <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
             </svg>
         </a></h3><ul>
-<li><a href="https://github.com/dell/csm/issues/1416">#1416 - [BUG]:  Dell CSM Installation Issues</a></li>
-<li><a href="https://github.com/dell/csm/issues/1418">#1418 - [BUG]: csi-powermax crashed when attempting to unmount volume from node</a></li>
-<li><a href="https://github.com/dell/csm/issues/1425">#1425 - [BUG]: Incorrect Volume Creation Due to Idempotency in CreateVolume</a></li>
-<li><a href="https://github.com/dell/csm/issues/1447">#1447 - [BUG]: Gobrick does not clean wwids from /etc/multipath/wwids after removing multipath devices </a></li>
-<li><a href="https://github.com/dell/csm/issues/1448">#1448 - [BUG]: CSM-operator build fails from disk space issue</a></li>
-<li><a href="https://github.com/dell/csm/issues/1453">#1453 - [BUG]: Improve Documentation - Multipath configuration for FC and FC-NVMe attached arrays </a></li>
-<li><a href="https://github.com/dell/csm/issues/1499">#1499 - [BUG]: Fix Gosec error in service.go</a></li>
-<li><a href="https://github.com/dell/csm/issues/1519">#1519 - [BUG]: Powermax Intergration test failing</a></li>
-<li><a href="https://github.com/dell/csm/issues/1534">#1534 - [BUG]: CSI PowerStore unable to resize NVMe block PVC, even though volume on the array get&rsquo;s resized</a></li>
+<li><a href="https://github.com/dell/csm/issues/1549">#1549 - [BUG]: The NVMeCommand constant needs to use full path</a></li>
+<li><a href="https://github.com/dell/csm/issues/1566">#1566 - [BUG]: Inconsistent naming convention of secret is misleading in Installation of PowerMax </a></li>
+<li><a href="https://github.com/dell/csm/issues/1568">#1568 - [BUG]: Examples provided in the secrets of install driver for the Primary Unisphere and Back up Unisphere is lacking clarity in ConfigMap</a></li>
+<li><a href="https://github.com/dell/csm/issues/1569">#1569 - [BUG]: Unused variable &ldquo;X_CSI_POWERMAX_ENDPOINT&rdquo; resulting in driver not to start in PowerMax</a></li>
+<li><a href="https://github.com/dell/csm/issues/1570">#1570 - [BUG]: Stale entries in CSM operator samples and helm-charts for PowerMax </a></li>
+<li><a href="https://github.com/dell/csm/issues/1571">#1571 - [BUG]: SubjectAltName needs to be updated in the tls.crt </a></li>
+<li><a href="https://github.com/dell/csm/issues/1584">#1584 - [BUG]: Driver should not be expecting a secret which is not used at all for PowerMax when authorization is enabled </a></li>
+<li><a href="https://github.com/dell/csm/issues/1589">#1589 - [BUG]: Automation for reverseproxy tls secret and  powermax-array-config does not present in E2E</a></li>
+<li><a href="https://github.com/dell/csm/issues/1593">#1593 - [BUG]: Update the cert-manager version in Powermax Prerequisite</a></li>
+<li><a href="https://github.com/dell/csm/issues/1638">#1638 - [BUG]: CSM Docs Multiple fixes for CSI-Powermax installation</a></li>
+<li><a href="https://github.com/dell/csm/issues/1644">#1644 - [BUG]: Cannot create PowerMax clones</a></li>
+<li><a href="https://github.com/dell/csm/issues/1650">#1650 - [BUG]: PowerMax - X_CSI_IG_MODIFY_HOSTNAME fails to rename a host with same name in different case</a></li>
+<li><a href="https://github.com/dell/csm/issues/1663">#1663 - [BUG]: Pod filesystem not resized while volume gets successfully expanded</a></li>
+<li><a href="https://github.com/dell/csm/issues/1667">#1667 - [BUG]: Labels versions and maintainer update for CSM images </a></li>
+<li><a href="https://github.com/dell/csm/issues/1634">#1634 - [BUG]: CSM PowerMax wrong error message</a></li>
 </ul>
 <h3 id="known-issues">
 Known Issues <a class="header-link"  href="#known-issues" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
@@ -782,7 +786,7 @@ Known Issues <a class="header-link"  href="#known-issues" style=" display: inlin
       </tr>
       <tr>
           <td>If the volume limit is exhausted and there are pending pods and PVCs due to <code>exceed max volume count</code>, the pending PVCs will be bound to PVs and the pending pods will be scheduled to nodes when the driver pods are restarted.</td>
-          <td>It is advised not to have any pending pods or PVCs once the volume limit per node is exhausted on a CSI Driver. There is an open issue reported with kubenetes at <a href="https://github.com/kubernetes/kubernetes/issues/95911">https://github.com/kubernetes/kubernetes/issues/95911</a> with the same behavior.</td>
+          <td>It is advised not to have any pending pods or PVCs once the volume limit per node is exhausted on a CSI Driver. There is an open issue reported with kubernetes at <a href="https://github.com/kubernetes/kubernetes/issues/95911">https://github.com/kubernetes/kubernetes/issues/95911</a> with the same behavior.</td>
       </tr>
       <tr>
           <td>Automatic SRDF group creation is failing with &ldquo;Unable to get Remote Port on SAN for Auto SRDF&rdquo; for PowerMaxOS 10.1 arrays</td>
