@@ -17,12 +17,12 @@
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="docs">
-    <meta property="article:modified_time" content="2024-10-15T13:11:48-05:00">
+    <meta property="article:modified_time" content="2024-12-05T12:02:53+05:30">
 
   <meta itemprop="name" content="PowerMax">
   <meta itemprop="description" content="Code features for PowerMax Driver">
-  <meta itemprop="dateModified" content="2024-10-15T13:11:48-05:00">
-  <meta itemprop="wordCount" content="4444">
+  <meta itemprop="dateModified" content="2024-12-05T12:02:53+05:30">
+  <meta itemprop="wordCount" content="4425">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="PowerMax">
   <meta name="twitter:description" content="Code features for PowerMax Driver">
@@ -56,10 +56,10 @@
         <div class="dropdown">
   <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Releases</a>
   <ul class="dropdown-menu">
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.12.0)</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.11.1</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.10.2</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">v1.9.4</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.13.0)</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.12.0</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.11.1</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">v1.10.2</a></li>
     </ul>
 </div></li>
       <li class="td-light-dark-menu nav-item dropdown">
@@ -125,7 +125,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.5b43d3acf6640adab15d0e301eb69f8e.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.30cbd121c9a04dbae82fa0989eaa7269.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -149,7 +149,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.5b43d3acf6640adab15d0e301eb69f8e.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.30cbd121c9a04dbae82fa0989eaa7269.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -771,8 +771,7 @@ Multi Unisphere Support <a class="header-link"  href="#multi-unisphere-support" 
                 <path d="M0 0h24v24H0z" fill="none"/>
                 <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
             </svg>
-        </a></h2><p>Starting with v1.7, the CSI PowerMax driver can communicate with multiple Unisphere for PowerMax servers to manage multiple PowerMax arrays.
-In order to use this feature, you must install CSI PowerMax ReverseProxy in <code>StandAlone</code> mode with the driver. For more details on how
+        </a></h2><p>Starting with v1.7, the CSI PowerMax driver can communicate with multiple Unisphere for PowerMax servers to manage multiple PowerMax arrays.For more details on how
 to configure the driver and ReverseProxy, see the relevant section <a href="../../../deployment/helm/drivers/installation/powermax#sample-values-file">here</a></p>
 <h2 id="volume-snapshot-feature">
 Volume Snapshot Feature <a class="header-link"  href="#volume-snapshot-feature" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
@@ -877,8 +876,7 @@ To enable CHAP authentication:</p>
 </ol>
 <p>The driver uses the provided chapsecret to configure the iSCSI node database on each node with iSCSI access.</p>
 <p>When the driver is installed and all the node plug-ins have initialized successfully, the storage administrator must enable CHAP authentication using the following Solutions Enabler (SYMCLI) commands:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>symaccess -sid &lt;symid&gt; -iscsi &lt;host iqn&gt; <span style="color:#204a87">set</span> chap -cred &lt;host IQN&gt; -secret &lt;CHAP secret&gt;
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>symaccess -sid &lt;symid&gt; -iscsi &lt;host iqn&gt; <span style="color:#204a87">set</span> chap -cred &lt;host IQN&gt; -secret &lt;CHAP secret&gt;
 </span></span></code></pre></div><p>Where <code>host IQN</code> is the name of the iSCSI initiator of a host IQN, and <code>CHAP secret</code> is the chapsecret that is used at the time of the installation of the driver.</p>
 <p><em>NOTE</em>: The host IQN is also used as the username when setting up the CHAP credentials.</p>
 <h3 id="chap-support-for-powermax">
@@ -1043,7 +1041,7 @@ Prerequisite <a class="header-link"  href="#prerequisite" style=" display: inlin
 <p>The certificate and key are provided to the proxy via a Kubernetes TLS secret (in the same namespace). The SSL certificate must be an X.509 certificate encoded in PEM format. The certificates can be obtained via a Certificate Authority or can be self-signed and generated by a tool such as openssl.</p>
 <p>Starting from v2.7.0 , the secrets for proxy will be created automatically using the below tls.key and tls.cert contents provided in values.yaml file.
 For this , we need to install cert-manager using below command which manages the certs and secrets  .</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.11.0/cert-manager.yaml
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.16.1/cert-manager.yaml
 </span></span></code></pre></div><p>Here is an example showing how to generate a private key and use that to sign an SSL certificate using the openssl tool:</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>openssl genrsa -out tls.key <span style="color:#0000cf;font-weight:bold">2048</span>
 </span></span><span style="display:flex;"><span>openssl req -new -x509 -sha256 -key tls.key -out tls.crt -days <span style="color:#0000cf;font-weight:bold">3650</span>
@@ -1228,34 +1226,34 @@ Custom Topology keys <a class="header-link"  href="#custom-topology-keys" style=
 <table>
   <thead>
       <tr>
-          <th style="text-align: left">Parameter</th>
-          <th style="text-align: left">Description</th>
+          <th>Parameter</th>
+          <th>Description</th>
       </tr>
   </thead>
   <tbody>
       <tr>
-          <td style="text-align: left">allowedConnections</td>
-          <td style="text-align: left">List of node, array and protocol info for user allowed configuration</td>
+          <td>allowedConnections</td>
+          <td>List of node, array and protocol info for user allowed configuration</td>
       </tr>
       <tr>
-          <td style="text-align: left">allowedConnections.nodeName</td>
-          <td style="text-align: left">Name of the node on which user wants to apply given rules</td>
+          <td>allowedConnections.nodeName</td>
+          <td>Name of the node on which user wants to apply given rules</td>
       </tr>
       <tr>
-          <td style="text-align: left">allowedConnections.rules</td>
-          <td style="text-align: left">List of StorageArrayID:TransportProtocol pair</td>
+          <td>allowedConnections.rules</td>
+          <td>List of StorageArrayID:TransportProtocol pair</td>
       </tr>
       <tr>
-          <td style="text-align: left">deniedConnections</td>
-          <td style="text-align: left">List of node, array and protocol info for user denied configuration</td>
+          <td>deniedConnections</td>
+          <td>List of node, array and protocol info for user denied configuration</td>
       </tr>
       <tr>
-          <td style="text-align: left">deniedConnections.nodeName</td>
-          <td style="text-align: left">Name of the node on which user wants to apply given rules</td>
+          <td>deniedConnections.nodeName</td>
+          <td>Name of the node on which user wants to apply given rules</td>
       </tr>
       <tr>
-          <td style="text-align: left">deniedConnections.rules</td>
-          <td style="text-align: left">List of StorageArrayID:TransportProtocol pair</td>
+          <td>deniedConnections.rules</td>
+          <td>List of StorageArrayID:TransportProtocol pair</td>
       </tr>
   </tbody>
 </table>
@@ -1327,7 +1325,7 @@ Helm based installation <a class="header-link"  href="#helm-based-installation" 
             </svg>
         </a></h3><p>As part of driver installation, a ConfigMap with the name <code>powermax-config-params</code> is created, which contains an attribute <code>CSI_LOG_LEVEL</code> which specifies the current log level of CSI driver.</p>
 <p>Users can set the default log level by specifying log level to <code>logLevel</code> attribute in my-powermax-settings.yaml during driver installation.</p>
-<p>To change the log level dynamically to a different value, the user can edit the same my-powermax-settings.yaml, and run the following command</p>
+<p>To change the log level dynamically to a different value, the user can edit the same my-powermax-settings.yaml, and run the following command:</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#204a87">cd</span> dell-csi-helm-installer
 </span></span><span style="display:flex;"><span>./csi-install.sh --namespace powermax --values ./my-powermax-settings.yaml --upgrade
 </span></span></code></pre></div><p>Note: my-powermax-settings.yaml is a values.yaml file which the user has used for driver installation.</p>
@@ -1452,8 +1450,8 @@ NVMe/TCP Support <a class="header-link"  href="#nvmetcp-support" style=" display
                 <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
             </svg>
         </a></h2><p>The CSI Driver for Dell PowerMax supports NVMeTCP from v2.11.0. To enable NVMe/TCP provisioning, blockProtocol in settings file should be specified as NVMETCP.</p>
-<p><strong>Limitations</strong><br>
-These are the CSM modules not supported with NVMeTCP protocol:</p>
+<p><strong>Limitations</strong></p>
+<p>These are the CSM modules not supported with NVMeTCP protocol:</p>
 <ul>
 <li>CSM Authorization</li>
 <li>CSM Observability</li>
@@ -1549,7 +1547,7 @@ These are the CSM modules not supported with NVMeTCP protocol:</p>
 
       </div><div class="td-footer__center col-12 col-sm-4 py-2 order-sm-2">
         <span class="td-footer__copyright">&copy;
-    2024
+    2025
     <span class="td-footer__authors">The Dell Technologies</span></span><span class="td-footer__all_rights_reserved">All Rights Reserved</span><span class="ms-2"><a href="https://www.dell.com/learn/us/en/uscorp1/policies-privacy" target="_blank" rel="noopener">Privacy Policy</a></span>
       </div>
     </div>

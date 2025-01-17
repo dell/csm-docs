@@ -17,11 +17,11 @@
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="docs">
-    <meta property="article:modified_time" content="2024-10-28T15:46:04-04:00">
+    <meta property="article:modified_time" content="2024-12-05T12:02:53+05:30">
 
   <meta itemprop="name" content="Helm">
   <meta itemprop="description" content="Dell Container Storage Modules (CSM) for Observability Helm deployment">
-  <meta itemprop="dateModified" content="2024-10-28T15:46:04-04:00">
+  <meta itemprop="dateModified" content="2024-12-05T12:02:53+05:30">
   <meta itemprop="wordCount" content="1998">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Helm">
@@ -56,10 +56,10 @@
         <div class="dropdown">
   <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Releases</a>
   <ul class="dropdown-menu">
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.12.0)</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.11.1</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.10.2</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">v1.9.4</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.13.0)</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.12.0</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.11.1</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">v1.10.2</a></li>
     </ul>
 </div></li>
       <li class="td-light-dark-menu nav-item dropdown">
@@ -125,7 +125,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.5b43d3acf6640adab15d0e301eb69f8e.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.30cbd121c9a04dbae82fa0989eaa7269.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -149,7 +149,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.5b43d3acf6640adab15d0e301eb69f8e.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.30cbd121c9a04dbae82fa0989eaa7269.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -919,366 +919,366 @@ Configuration <a class="header-link"  href="#configuration" style=" display: inl
 <table>
   <thead>
       <tr>
-          <th style="text-align: left">Parameter</th>
-          <th style="text-align: left">Description</th>
-          <th style="text-align: left">Default</th>
+          <th>Parameter</th>
+          <th>Description</th>
+          <th>Default</th>
       </tr>
   </thead>
   <tbody>
       <tr>
-          <td style="text-align: left"><code>karaviTopology.image</code></td>
-          <td style="text-align: left">Location of the csm-topology Container image</td>
-          <td style="text-align: left"><code>quay.io/dell/container-storage-modules/csm-topology:v1.10.0</code></td>
+          <td><code>karaviTopology.image</code></td>
+          <td>Location of the csm-topology Container image</td>
+          <td><code>quay.io/dell/container-storage-modules/csm-topology:v1.11.0</code></td>
       </tr>
       <tr>
-          <td style="text-align: left"><code>karaviTopology.enabled</code></td>
-          <td style="text-align: left">Enable the CSM for Observability Topology service</td>
-          <td style="text-align: left"><code>true</code></td>
+          <td><code>karaviTopology.enabled</code></td>
+          <td>Enable the CSM for Observability Topology service</td>
+          <td><code>true</code></td>
       </tr>
       <tr>
-          <td style="text-align: left"><code>karaviTopology.provisionerNames</code></td>
-          <td style="text-align: left">Provisioner Names used to filter the Persistent Volumes created on the Kubernetes cluster (must be a comma-separated list)</td>
-          <td style="text-align: left"><code> csi-vxflexos.dellemc.com</code></td>
+          <td><code>karaviTopology.provisionerNames</code></td>
+          <td>Provisioner Names used to filter the Persistent Volumes created on the Kubernetes cluster (must be a comma-separated list)</td>
+          <td><code>csi-vxflexos.dellemc.com</code></td>
       </tr>
       <tr>
-          <td style="text-align: left"><code>karaviTopology.service.type</code></td>
-          <td style="text-align: left">Kubernetes service type</td>
-          <td style="text-align: left"><code>ClusterIP</code></td>
+          <td><code>karaviTopology.service.type</code></td>
+          <td>Kubernetes service type</td>
+          <td><code>ClusterIP</code></td>
       </tr>
       <tr>
-          <td style="text-align: left"><code>karaviTopology.certificateFile</code></td>
-          <td style="text-align: left">Optional valid CA public certificate file that will be used to deploy the Topology service. Must use domain name &lsquo;karavi-topology&rsquo;.</td>
-          <td style="text-align: left"></td>
+          <td><code>karaviTopology.certificateFile</code></td>
+          <td>Optional valid CA public certificate file that will be used to deploy the Topology service. Must use domain name &lsquo;karavi-topology&rsquo;.</td>
+          <td></td>
       </tr>
       <tr>
-          <td style="text-align: left"><code>karaviTopology.privateKeyFile</code></td>
-          <td style="text-align: left">Optional public certificate&rsquo;s associated private key file that will be used to deploy the Topology service. Must use domain name &lsquo;karavi-topology&rsquo;.</td>
-          <td style="text-align: left"></td>
+          <td><code>karaviTopology.privateKeyFile</code></td>
+          <td>Optional public certificate&rsquo;s associated private key file that will be used to deploy the Topology service. Must use domain name &lsquo;karavi-topology&rsquo;.</td>
+          <td></td>
       </tr>
       <tr>
-          <td style="text-align: left"><code>karaviTopology.logLevel</code></td>
-          <td style="text-align: left">Output logs that are at or above the given log level severity (Valid values: TRACE, DEBUG, INFO, WARN, ERROR, FATAL, PANIC)</td>
-          <td style="text-align: left"><code>INFO</code></td>
+          <td><code>karaviTopology.logLevel</code></td>
+          <td>Output logs that are at or above the given log level severity (Valid values: TRACE, DEBUG, INFO, WARN, ERROR, FATAL, PANIC)</td>
+          <td><code>INFO</code></td>
       </tr>
       <tr>
-          <td style="text-align: left"><code>karaviTopology.logFormat</code></td>
-          <td style="text-align: left">Output logs in the specified format (Valid values: text, json)</td>
-          <td style="text-align: left"><code>text</code></td>
+          <td><code>karaviTopology.logFormat</code></td>
+          <td>Output logs in the specified format (Valid values: text, json)</td>
+          <td><code>text</code></td>
       </tr>
       <tr>
-          <td style="text-align: left"><code>otelCollector.certificateFile</code></td>
-          <td style="text-align: left">Optional valid CA public certificate file that will be used to deploy the OpenTelemetry Collector. Must use domain name &lsquo;otel-collector&rsquo;.</td>
-          <td style="text-align: left"></td>
+          <td><code>otelCollector.certificateFile</code></td>
+          <td>Optional valid CA public certificate file that will be used to deploy the OpenTelemetry Collector. Must use domain name &lsquo;otel-collector&rsquo;.</td>
+          <td></td>
       </tr>
       <tr>
-          <td style="text-align: left"><code>otelCollector.privateKeyFile</code></td>
-          <td style="text-align: left">Optional public certificate&rsquo;s associated private key file that will be used to deploy the OpenTelemetry Collector. Must use domain name &lsquo;otel-collector&rsquo;.</td>
-          <td style="text-align: left"></td>
+          <td><code>otelCollector.privateKeyFile</code></td>
+          <td>Optional public certificate&rsquo;s associated private key file that will be used to deploy the OpenTelemetry Collector. Must use domain name &lsquo;otel-collector&rsquo;.</td>
+          <td></td>
       </tr>
       <tr>
-          <td style="text-align: left"><code>otelCollector.service.type</code></td>
-          <td style="text-align: left">Kubernetes service type</td>
-          <td style="text-align: left"><code>ClusterIP</code></td>
+          <td><code>otelCollector.service.type</code></td>
+          <td>Kubernetes service type</td>
+          <td><code>ClusterIP</code></td>
       </tr>
       <tr>
-          <td style="text-align: left"><code>karaviMetricsPowerflex.image</code></td>
-          <td style="text-align: left">CSM Metrics for PowerFlex Service image</td>
-          <td style="text-align: left"><code>quay.io/dell/container-storage-modules/csm-metrics-powerflex:v1.10.0</code></td>
+          <td><code>karaviMetricsPowerflex.image</code></td>
+          <td>CSM Metrics for PowerFlex Service image</td>
+          <td><code>quay.io/dell/container-storage-modules/csm-metrics-powerflex:v1.11.0</code></td>
       </tr>
       <tr>
-          <td style="text-align: left"><code>karaviMetricsPowerflex.enabled</code></td>
-          <td style="text-align: left">Enable CSM Metrics for PowerFlex service</td>
-          <td style="text-align: left"><code>true</code></td>
+          <td><code>karaviMetricsPowerflex.enabled</code></td>
+          <td>Enable CSM Metrics for PowerFlex service</td>
+          <td><code>true</code></td>
       </tr>
       <tr>
-          <td style="text-align: left"><code>karaviMetricsPowerflex.collectorAddr</code></td>
-          <td style="text-align: left">Metrics Collector accessible from the Kubernetes cluster</td>
-          <td style="text-align: left"><code>otel-collector:55680</code></td>
+          <td><code>karaviMetricsPowerflex.collectorAddr</code></td>
+          <td>Metrics Collector accessible from the Kubernetes cluster</td>
+          <td><code>otel-collector:55680</code></td>
       </tr>
       <tr>
-          <td style="text-align: left"><code>karaviMetricsPowerflex.provisionerNames</code></td>
-          <td style="text-align: left">Provisioner Names used to filter for determining PowerFlex SDC nodes( Must be a Comma-separated list)</td>
-          <td style="text-align: left"><code> csi-vxflexos.dellemc.com</code></td>
+          <td><code>karaviMetricsPowerflex.provisionerNames</code></td>
+          <td>Provisioner Names used to filter for determining PowerFlex SDC nodes( Must be a Comma-separated list)</td>
+          <td><code> csi-vxflexos.dellemc.com</code></td>
       </tr>
       <tr>
-          <td style="text-align: left"><code>karaviMetricsPowerflex.sdcPollFrequencySeconds</code></td>
-          <td style="text-align: left">The polling frequency (in seconds) to gather SDC metrics</td>
-          <td style="text-align: left"><code>10</code></td>
+          <td><code>karaviMetricsPowerflex.sdcPollFrequencySeconds</code></td>
+          <td>The polling frequency (in seconds) to gather SDC metrics</td>
+          <td><code>10</code></td>
       </tr>
       <tr>
-          <td style="text-align: left"><code>karaviMetricsPowerflex.volumePollFrequencySeconds</code></td>
-          <td style="text-align: left">The polling frequency (in seconds) to gather volume metrics</td>
-          <td style="text-align: left"><code>10</code></td>
+          <td><code>karaviMetricsPowerflex.volumePollFrequencySeconds</code></td>
+          <td>The polling frequency (in seconds) to gather volume metrics</td>
+          <td><code>10</code></td>
       </tr>
       <tr>
-          <td style="text-align: left"><code>karaviMetricsPowerflex.storageClassPoolPollFrequencySeconds</code></td>
-          <td style="text-align: left">The polling frequency (in seconds) to gather storage class/pool metrics</td>
-          <td style="text-align: left"><code>10</code></td>
+          <td><code>karaviMetricsPowerflex.storageClassPoolPollFrequencySeconds</code></td>
+          <td>The polling frequency (in seconds) to gather storage class/pool metrics</td>
+          <td><code>10</code></td>
       </tr>
       <tr>
-          <td style="text-align: left"><code>karaviMetricsPowerflex.concurrentPowerflexQueries</code></td>
-          <td style="text-align: left">The number of simultaneous metrics queries to make to Powerflex(MUST be less than 10; otherwise, several request errors from Powerflex will ensue.</td>
-          <td style="text-align: left"><code>10</code></td>
+          <td><code>karaviMetricsPowerflex.concurrentPowerflexQueries</code></td>
+          <td>The number of simultaneous metrics queries to make to Powerflex(MUST be less than 10; otherwise, several request errors from Powerflex will ensue.</td>
+          <td><code>10</code></td>
       </tr>
       <tr>
-          <td style="text-align: left"><code>karaviMetricsPowerflex.authorization.enabled</code></td>
-          <td style="text-align: left"><a href="../../authorization-v2.0">Authorization</a> is an optional feature to apply credential shielding of the backend PowerFlex.</td>
-          <td style="text-align: left"><code>false</code></td>
+          <td><code>karaviMetricsPowerflex.authorization.enabled</code></td>
+          <td><a href="../../authorization-v2.0">Authorization</a> is an optional feature to apply credential shielding of the backend PowerFlex.</td>
+          <td><code>false</code></td>
       </tr>
       <tr>
-          <td style="text-align: left"><code>karaviMetricsPowerflex.authorization.proxyHost</code></td>
-          <td style="text-align: left">Hostname of the csm-authorization server.</td>
-          <td style="text-align: left"></td>
+          <td><code>karaviMetricsPowerflex.authorization.proxyHost</code></td>
+          <td>Hostname of the csm-authorization server.</td>
+          <td></td>
       </tr>
       <tr>
-          <td style="text-align: left"><code>karaviMetricsPowerflex.authorization.skipCertificateValidation</code></td>
-          <td style="text-align: left">A boolean that enables/disables certificate validation of the csm-authorization server.</td>
-          <td style="text-align: left"></td>
+          <td><code>karaviMetricsPowerflex.authorization.skipCertificateValidation</code></td>
+          <td>A boolean that enables/disables certificate validation of the csm-authorization server.</td>
+          <td></td>
       </tr>
       <tr>
-          <td style="text-align: left"><code>karaviMetricsPowerflex.sdcMetricsEnabled</code></td>
-          <td style="text-align: left">Enable PowerFlex SDC Metrics Collection</td>
-          <td style="text-align: left"><code>true</code></td>
+          <td><code>karaviMetricsPowerflex.sdcMetricsEnabled</code></td>
+          <td>Enable PowerFlex SDC Metrics Collection</td>
+          <td><code>true</code></td>
       </tr>
       <tr>
-          <td style="text-align: left"><code>karaviMetricsPowerflex.volumeMetricsEnabled</code></td>
-          <td style="text-align: left">Enable PowerFlex Volume Metrics Collection</td>
-          <td style="text-align: left"><code>true</code></td>
+          <td><code>karaviMetricsPowerflex.volumeMetricsEnabled</code></td>
+          <td>Enable PowerFlex Volume Metrics Collection</td>
+          <td><code>true</code></td>
       </tr>
       <tr>
-          <td style="text-align: left"><code>karaviMetricsPowerflex.storageClassPoolMetricsEnabled</code></td>
-          <td style="text-align: left">Enable PowerFlex  Storage Class/Pool Metrics Collection</td>
-          <td style="text-align: left"><code>true</code></td>
+          <td><code>karaviMetricsPowerflex.storageClassPoolMetricsEnabled</code></td>
+          <td>Enable PowerFlex  Storage Class/Pool Metrics Collection</td>
+          <td><code>true</code></td>
       </tr>
       <tr>
-          <td style="text-align: left"><code>karaviMetricsPowerflex.endpoint</code></td>
-          <td style="text-align: left">Endpoint for pod leader election</td>
-          <td style="text-align: left"><code>karavi-metrics-powerflex</code></td>
+          <td><code>karaviMetricsPowerflex.endpoint</code></td>
+          <td>Endpoint for pod leader election</td>
+          <td><code>karavi-metrics-powerflex</code></td>
       </tr>
       <tr>
-          <td style="text-align: left"><code>karaviMetricsPowerflex.service.type</code></td>
-          <td style="text-align: left">Kubernetes service type</td>
-          <td style="text-align: left"><code>ClusterIP</code></td>
+          <td><code>karaviMetricsPowerflex.service.type</code></td>
+          <td>Kubernetes service type</td>
+          <td><code>ClusterIP</code></td>
       </tr>
       <tr>
-          <td style="text-align: left"><code>karaviMetricsPowerflex.logLevel</code></td>
-          <td style="text-align: left">Output logs that are at or above the given log level severity (Valid values: TRACE, DEBUG, INFO, WARN, ERROR, FATAL, PANIC)</td>
-          <td style="text-align: left"><code>INFO</code></td>
+          <td><code>karaviMetricsPowerflex.logLevel</code></td>
+          <td>Output logs that are at or above the given log level severity (Valid values: TRACE, DEBUG, INFO, WARN, ERROR, FATAL, PANIC)</td>
+          <td><code>INFO</code></td>
       </tr>
       <tr>
-          <td style="text-align: left"><code>karaviMetricsPowerflex.logFormat</code></td>
-          <td style="text-align: left">Output logs in the specified format (Valid values: text, json)</td>
-          <td style="text-align: left"><code>text</code></td>
+          <td><code>karaviMetricsPowerflex.logFormat</code></td>
+          <td>Output logs in the specified format (Valid values: text, json)</td>
+          <td><code>text</code></td>
       </tr>
       <tr>
-          <td style="text-align: left"><code>karaviMetricsPowerstore.image</code></td>
-          <td style="text-align: left">CSM Metrics for PowerStore Service image</td>
-          <td style="text-align: left"><code>quay.io/dell/container-storage-modules/csm-metrics-powerstore:v1.10.0</code></td>
+          <td><code>karaviMetricsPowerstore.image</code></td>
+          <td>CSM Metrics for PowerStore Service image</td>
+          <td><code>quay.io/dell/container-storage-modules/csm-metrics-powerstore:v1.11.0</code></td>
       </tr>
       <tr>
-          <td style="text-align: left"><code>karaviMetricsPowerstore.enabled</code></td>
-          <td style="text-align: left">Enable CSM Metrics for PowerStore service</td>
-          <td style="text-align: left"><code>true</code></td>
+          <td><code>karaviMetricsPowerstore.enabled</code></td>
+          <td>Enable CSM Metrics for PowerStore service</td>
+          <td><code>true</code></td>
       </tr>
       <tr>
-          <td style="text-align: left"><code>karaviMetricsPowerstore.collectorAddr</code></td>
-          <td style="text-align: left">Metrics Collector accessible from the Kubernetes cluster</td>
-          <td style="text-align: left"><code>otel-collector:55680</code></td>
+          <td><code>karaviMetricsPowerstore.collectorAddr</code></td>
+          <td>Metrics Collector accessible from the Kubernetes cluster</td>
+          <td><code>otel-collector:55680</code></td>
       </tr>
       <tr>
-          <td style="text-align: left"><code>karaviMetricsPowerstore.provisionerNames</code></td>
-          <td style="text-align: left">Provisioner Names used to filter for determining PowerStore volumes (must be a Comma-separated list)</td>
-          <td style="text-align: left"><code>csi-powerstore.dellemc.com</code></td>
+          <td><code>karaviMetricsPowerstore.provisionerNames</code></td>
+          <td>Provisioner Names used to filter for determining PowerStore volumes (must be a Comma-separated list)</td>
+          <td><code>csi-powerstore.dellemc.com</code></td>
       </tr>
       <tr>
-          <td style="text-align: left"><code>karaviMetricsPowerstore.volumePollFrequencySeconds</code></td>
-          <td style="text-align: left">The polling frequency (in seconds) to gather volume metrics</td>
-          <td style="text-align: left"><code>10</code></td>
+          <td><code>karaviMetricsPowerstore.volumePollFrequencySeconds</code></td>
+          <td>The polling frequency (in seconds) to gather volume metrics</td>
+          <td><code>10</code></td>
       </tr>
       <tr>
-          <td style="text-align: left"><code>karaviMetricsPowerstore.concurrentPowerstoreQueries</code></td>
-          <td style="text-align: left">The number of simultaneous metrics queries to make to PowerStore (must be less than 10; otherwise, several request errors from PowerStore will ensue.)</td>
-          <td style="text-align: left"><code>10</code></td>
+          <td><code>karaviMetricsPowerstore.concurrentPowerstoreQueries</code></td>
+          <td>The number of simultaneous metrics queries to make to PowerStore (must be less than 10; otherwise, several request errors from PowerStore will ensue.)</td>
+          <td><code>10</code></td>
       </tr>
       <tr>
-          <td style="text-align: left"><code>karaviMetricsPowerstore.volumeMetricsEnabled</code></td>
-          <td style="text-align: left">Enable PowerStore Volume Metrics Collection</td>
-          <td style="text-align: left"><code>true</code></td>
+          <td><code>karaviMetricsPowerstore.volumeMetricsEnabled</code></td>
+          <td>Enable PowerStore Volume Metrics Collection</td>
+          <td><code>true</code></td>
       </tr>
       <tr>
-          <td style="text-align: left"><code>karaviMetricsPowerstore.endpoint</code></td>
-          <td style="text-align: left">Endpoint for pod leader election</td>
-          <td style="text-align: left"><code>karavi-metrics-powerstore</code></td>
+          <td><code>karaviMetricsPowerstore.endpoint</code></td>
+          <td>Endpoint for pod leader election</td>
+          <td><code>karavi-metrics-powerstore</code></td>
       </tr>
       <tr>
-          <td style="text-align: left"><code>karaviMetricsPowerstore.service.type</code></td>
-          <td style="text-align: left">Kubernetes service type</td>
-          <td style="text-align: left"><code>ClusterIP</code></td>
+          <td><code>karaviMetricsPowerstore.service.type</code></td>
+          <td>Kubernetes service type</td>
+          <td><code>ClusterIP</code></td>
       </tr>
       <tr>
-          <td style="text-align: left"><code>karaviMetricsPowerstore.logLevel</code></td>
-          <td style="text-align: left">Output logs that are at or above the given log level severity (Valid values: TRACE, DEBUG, INFO, WARN, ERROR, FATAL, PANIC)</td>
-          <td style="text-align: left"><code>INFO</code></td>
+          <td><code>karaviMetricsPowerstore.logLevel</code></td>
+          <td>Output logs that are at or above the given log level severity (Valid values: TRACE, DEBUG, INFO, WARN, ERROR, FATAL, PANIC)</td>
+          <td><code>INFO</code></td>
       </tr>
       <tr>
-          <td style="text-align: left"><code>karaviMetricsPowerstore.logFormat</code></td>
-          <td style="text-align: left">Output logs in the specified format (Valid values: text, json)</td>
-          <td style="text-align: left"><code>text</code></td>
+          <td><code>karaviMetricsPowerstore.logFormat</code></td>
+          <td>Output logs in the specified format (Valid values: text, json)</td>
+          <td><code>text</code></td>
       </tr>
       <tr>
-          <td style="text-align: left"><code>karaviMetricsPowerstore.zipkin.uri</code></td>
-          <td style="text-align: left">URI of a Zipkin instance where tracing data can be forwarded</td>
-          <td style="text-align: left"></td>
+          <td><code>karaviMetricsPowerstore.zipkin.uri</code></td>
+          <td>URI of a Zipkin instance where tracing data can be forwarded</td>
+          <td></td>
       </tr>
       <tr>
-          <td style="text-align: left"><code>karaviMetricsPowerstore.zipkin.serviceName</code></td>
-          <td style="text-align: left">Service name used for Zipkin tracing data</td>
-          <td style="text-align: left"><code>metrics-powerstore</code></td>
+          <td><code>karaviMetricsPowerstore.zipkin.serviceName</code></td>
+          <td>Service name used for Zipkin tracing data</td>
+          <td><code>metrics-powerstore</code></td>
       </tr>
       <tr>
-          <td style="text-align: left"><code>karaviMetricsPowerstore.zipkin.probability</code></td>
-          <td style="text-align: left">Percentage of trace information to send to Zipkin (Valid range: 0.0 to 1.0)</td>
-          <td style="text-align: left"><code>0</code></td>
+          <td><code>karaviMetricsPowerstore.zipkin.probability</code></td>
+          <td>Percentage of trace information to send to Zipkin (Valid range: 0.0 to 1.0)</td>
+          <td><code>0</code></td>
       </tr>
       <tr>
-          <td style="text-align: left"><code>karaviMetricsPowerscale.image</code></td>
-          <td style="text-align: left">CSM Metrics for PowerScale Service image</td>
-          <td style="text-align: left"><code>quay.io/dell/container-storage-modules/csm-metrics-powerscale:v1.7.0</code></td>
+          <td><code>karaviMetricsPowerscale.image</code></td>
+          <td>CSM Metrics for PowerScale Service image</td>
+          <td><code>quay.io/dell/container-storage-modules/csm-metrics-powerscale:v1.8.0</code></td>
       </tr>
       <tr>
-          <td style="text-align: left"><code>karaviMetricsPowerscale.enabled</code></td>
-          <td style="text-align: left">Enable CSM Metrics for PowerScale service</td>
-          <td style="text-align: left"><code>true</code></td>
+          <td><code>karaviMetricsPowerscale.enabled</code></td>
+          <td>Enable CSM Metrics for PowerScale service</td>
+          <td><code>true</code></td>
       </tr>
       <tr>
-          <td style="text-align: left"><code>karaviMetricsPowerscale.collectorAddr</code></td>
-          <td style="text-align: left">Metrics Collector accessible from the Kubernetes cluster</td>
-          <td style="text-align: left"><code>otel-collector:55680</code></td>
+          <td><code>karaviMetricsPowerscale.collectorAddr</code></td>
+          <td>Metrics Collector accessible from the Kubernetes cluster</td>
+          <td><code>otel-collector:55680</code></td>
       </tr>
       <tr>
-          <td style="text-align: left"><code>karaviMetricsPowerscale.provisionerNames</code></td>
-          <td style="text-align: left">Provisioner Names used to filter for determining PowerScale volumes (must be a Comma-separated list)</td>
-          <td style="text-align: left"><code>csi-isilon.dellemc.com</code></td>
+          <td><code>karaviMetricsPowerscale.provisionerNames</code></td>
+          <td>Provisioner Names used to filter for determining PowerScale volumes (must be a Comma-separated list)</td>
+          <td><code>csi-isilon.dellemc.com</code></td>
       </tr>
       <tr>
-          <td style="text-align: left"><code>karaviMetricsPowerscale.capacityMetricsEnabled</code></td>
-          <td style="text-align: left">Enable PowerScale capacity metric Collection</td>
-          <td style="text-align: left"><code>true</code></td>
+          <td><code>karaviMetricsPowerscale.capacityMetricsEnabled</code></td>
+          <td>Enable PowerScale capacity metric Collection</td>
+          <td><code>true</code></td>
       </tr>
       <tr>
-          <td style="text-align: left"><code>karaviMetricsPowerscale.performanceMetricsEnabled</code></td>
-          <td style="text-align: left">Enable PowerScale performance metric Collection</td>
-          <td style="text-align: left"><code>true</code></td>
+          <td><code>karaviMetricsPowerscale.performanceMetricsEnabled</code></td>
+          <td>Enable PowerScale performance metric Collection</td>
+          <td><code>true</code></td>
       </tr>
       <tr>
-          <td style="text-align: left"><code>karaviMetricsPowerscale.clusterCapacityPollFrequencySeconds</code></td>
-          <td style="text-align: left">The polling frequency (in seconds) to gather cluster capacity metrics</td>
-          <td style="text-align: left"><code>30</code></td>
+          <td><code>karaviMetricsPowerscale.clusterCapacityPollFrequencySeconds</code></td>
+          <td>The polling frequency (in seconds) to gather cluster capacity metrics</td>
+          <td><code>30</code></td>
       </tr>
       <tr>
-          <td style="text-align: left"><code>karaviMetricsPowerscale.clusterPerformancePollFrequencySeconds</code></td>
-          <td style="text-align: left">The polling frequency (in seconds) to gather cluster performance metrics</td>
-          <td style="text-align: left"><code>20</code></td>
+          <td><code>karaviMetricsPowerscale.clusterPerformancePollFrequencySeconds</code></td>
+          <td>The polling frequency (in seconds) to gather cluster performance metrics</td>
+          <td><code>20</code></td>
       </tr>
       <tr>
-          <td style="text-align: left"><code>karaviMetricsPowerscale.quotaCapacityPollFrequencySeconds</code></td>
-          <td style="text-align: left">The polling frequency (in seconds) to gather volume capacity metrics</td>
-          <td style="text-align: left"><code>30</code></td>
+          <td><code>karaviMetricsPowerscale.quotaCapacityPollFrequencySeconds</code></td>
+          <td>The polling frequency (in seconds) to gather volume capacity metrics</td>
+          <td><code>30</code></td>
       </tr>
       <tr>
-          <td style="text-align: left"><code>karaviMetricsPowerscale.concurrentPowerscaleQueries</code></td>
-          <td style="text-align: left">The number of simultaneous metrics queries to make to PowerScale(MUST be less than 10; otherwise, several request errors from PowerScale will ensue.)</td>
-          <td style="text-align: left"><code>10</code></td>
+          <td><code>karaviMetricsPowerscale.concurrentPowerscaleQueries</code></td>
+          <td>The number of simultaneous metrics queries to make to PowerScale(MUST be less than 10; otherwise, several request errors from PowerScale will ensue.)</td>
+          <td><code>10</code></td>
       </tr>
       <tr>
-          <td style="text-align: left"><code>karaviMetricsPowerscale.endpoint</code></td>
-          <td style="text-align: left">Endpoint for pod leader election</td>
-          <td style="text-align: left"><code>karavi-metrics-powerscale</code></td>
+          <td><code>karaviMetricsPowerscale.endpoint</code></td>
+          <td>Endpoint for pod leader election</td>
+          <td><code>karavi-metrics-powerscale</code></td>
       </tr>
       <tr>
-          <td style="text-align: left"><code>karaviMetricsPowerscale.service.type</code></td>
-          <td style="text-align: left">Kubernetes service type</td>
-          <td style="text-align: left"><code>ClusterIP</code></td>
+          <td><code>karaviMetricsPowerscale.service.type</code></td>
+          <td>Kubernetes service type</td>
+          <td><code>ClusterIP</code></td>
       </tr>
       <tr>
-          <td style="text-align: left"><code>karaviMetricsPowerscale.logLevel</code></td>
-          <td style="text-align: left">Output logs that are at or above the given log level severity (Valid values: TRACE, DEBUG, INFO, WARN, ERROR, FATAL, PANIC)</td>
-          <td style="text-align: left"><code>INFO</code></td>
+          <td><code>karaviMetricsPowerscale.logLevel</code></td>
+          <td>Output logs that are at or above the given log level severity (Valid values: TRACE, DEBUG, INFO, WARN, ERROR, FATAL, PANIC)</td>
+          <td><code>INFO</code></td>
       </tr>
       <tr>
-          <td style="text-align: left"><code>karaviMetricsPowerscale.logFormat</code></td>
-          <td style="text-align: left">Output logs in the specified format (Valid values: text, json)</td>
-          <td style="text-align: left"><code>text</code></td>
+          <td><code>karaviMetricsPowerscale.logFormat</code></td>
+          <td>Output logs in the specified format (Valid values: text, json)</td>
+          <td><code>text</code></td>
       </tr>
       <tr>
-          <td style="text-align: left"><code>karaviMetricsPowerscale.isiClientOptions.isiSkipCertificateValidation</code></td>
-          <td style="text-align: left">Skip OneFS API server&rsquo;s certificates</td>
-          <td style="text-align: left"><code>true</code></td>
+          <td><code>karaviMetricsPowerscale.isiClientOptions.isiSkipCertificateValidation</code></td>
+          <td>Skip OneFS API server&rsquo;s certificates</td>
+          <td><code>true</code></td>
       </tr>
       <tr>
-          <td style="text-align: left"><code>karaviMetricsPowerscale.isiClientOptions.isiAuthType</code></td>
-          <td style="text-align: left">0 to enable session-based Authentication; 1 to enables basic Authentication</td>
-          <td style="text-align: left"><code>1</code></td>
+          <td><code>karaviMetricsPowerscale.isiClientOptions.isiAuthType</code></td>
+          <td>0 to enable session-based Authentication; 1 to enables basic Authentication</td>
+          <td><code>1</code></td>
       </tr>
       <tr>
-          <td style="text-align: left"><code>karaviMetricsPowerscale.isiClientOptions.isiLogVerbose</code></td>
-          <td style="text-align: left">Decide High/Medium/Low content of the OneFS REST API message</td>
-          <td style="text-align: left"><code>0</code></td>
+          <td><code>karaviMetricsPowerscale.isiClientOptions.isiLogVerbose</code></td>
+          <td>Decide High/Medium/Low content of the OneFS REST API message</td>
+          <td><code>0</code></td>
       </tr>
       <tr>
-          <td style="text-align: left"><code>karaviMetricsPowerscale.authorization.enabled</code></td>
-          <td style="text-align: left"><a href="../../authorization-v2.0">Authorization</a> is an optional feature to apply credential shielding of the backend PowerScale.</td>
-          <td style="text-align: left"><code>false</code></td>
+          <td><code>karaviMetricsPowerscale.authorization.enabled</code></td>
+          <td><a href="../../authorization-v2.0">Authorization</a> is an optional feature to apply credential shielding of the backend PowerScale.</td>
+          <td><code>false</code></td>
       </tr>
       <tr>
-          <td style="text-align: left"><code>karaviMetricsPowerscale.authorization.proxyHost</code></td>
-          <td style="text-align: left">Hostname of the csm-authorization server.</td>
-          <td style="text-align: left"></td>
+          <td><code>karaviMetricsPowerscale.authorization.proxyHost</code></td>
+          <td>Hostname of the csm-authorization server.</td>
+          <td></td>
       </tr>
       <tr>
-          <td style="text-align: left"><code>karaviMetricsPowerscale.authorization.skipCertificateValidation</code></td>
-          <td style="text-align: left">A boolean that enables/disables certificate validation of the csm-authorization server.</td>
-          <td style="text-align: left"></td>
+          <td><code>karaviMetricsPowerscale.authorization.skipCertificateValidation</code></td>
+          <td>A boolean that enables/disables certificate validation of the csm-authorization server.</td>
+          <td></td>
       </tr>
       <tr>
-          <td style="text-align: left"><code>karaviMetricsPowerMax.capacityMetricsEnabled</code></td>
-          <td style="text-align: left">Enable PowerMax capacity metric Collection</td>
-          <td style="text-align: left"><code>true</code></td>
+          <td><code>karaviMetricsPowerMax.capacityMetricsEnabled</code></td>
+          <td>Enable PowerMax capacity metric Collection</td>
+          <td><code>true</code></td>
       </tr>
       <tr>
-          <td style="text-align: left"><code>karaviMetricsPowerMax.performanceMetricsEnabled</code></td>
-          <td style="text-align: left">Enable PowerMax performance metric Collection</td>
-          <td style="text-align: left"><code>true</code></td>
+          <td><code>karaviMetricsPowerMax.performanceMetricsEnabled</code></td>
+          <td>Enable PowerMax performance metric Collection</td>
+          <td><code>true</code></td>
       </tr>
       <tr>
-          <td style="text-align: left"><code>karaviMetricsPowerMax.capacityPollFrequencySeconds</code></td>
-          <td style="text-align: left">The polling frequency (in seconds) to gather capacity metrics</td>
-          <td style="text-align: left"><code>20</code></td>
+          <td><code>karaviMetricsPowerMax.capacityPollFrequencySeconds</code></td>
+          <td>The polling frequency (in seconds) to gather capacity metrics</td>
+          <td><code>20</code></td>
       </tr>
       <tr>
-          <td style="text-align: left"><code>karaviMetricsPowerMax.performancePollFrequencySeconds</code></td>
-          <td style="text-align: left">The polling frequency (in seconds) to gather performance metrics</td>
-          <td style="text-align: left"><code>20</code></td>
+          <td><code>karaviMetricsPowerMax.performancePollFrequencySeconds</code></td>
+          <td>The polling frequency (in seconds) to gather performance metrics</td>
+          <td><code>20</code></td>
       </tr>
       <tr>
-          <td style="text-align: left"><code>karaviMetricsPowerMax.concurrentPowerMaxQueries</code></td>
-          <td style="text-align: left">The number of simultaneous metrics queries to make to PowerMax (MUST be less than 10; otherwise, several request errors from PowerMax will ensue.)</td>
-          <td style="text-align: left"><code>10</code></td>
+          <td><code>karaviMetricsPowerMax.concurrentPowerMaxQueries</code></td>
+          <td>The number of simultaneous metrics queries to make to PowerMax (MUST be less than 10; otherwise, several request errors from PowerMax will ensue.)</td>
+          <td><code>10</code></td>
       </tr>
       <tr>
-          <td style="text-align: left"><code>karaviMetricsPowerMax.authorization.enabled</code></td>
-          <td style="text-align: left"><a href="../../authorization-v2.0">Authorization</a> is an optional feature to apply credential shielding of the backend PowerMax.</td>
-          <td style="text-align: left"><code>false</code></td>
+          <td><code>karaviMetricsPowerMax.authorization.enabled</code></td>
+          <td><a href="../../authorization-v2.0">Authorization</a> is an optional feature to apply credential shielding of the backend PowerMax.</td>
+          <td><code>false</code></td>
       </tr>
       <tr>
-          <td style="text-align: left"><code>karaviMetricsPowerMax.authorization.proxyHost</code></td>
-          <td style="text-align: left">Hostname of the csm-authorization server.</td>
-          <td style="text-align: left"></td>
+          <td><code>karaviMetricsPowerMax.authorization.proxyHost</code></td>
+          <td>Hostname of the csm-authorization server.</td>
+          <td></td>
       </tr>
       <tr>
-          <td style="text-align: left"><code>karaviMetricsPowerMax.authorization.skipCertificateValidation</code></td>
-          <td style="text-align: left">A boolean that enables/disables certificate validation of the csm-authorization server.</td>
-          <td style="text-align: left"></td>
+          <td><code>karaviMetricsPowerMax.authorization.skipCertificateValidation</code></td>
+          <td>A boolean that enables/disables certificate validation of the csm-authorization server.</td>
+          <td></td>
       </tr>
   </tbody>
 </table>
@@ -1371,7 +1371,7 @@ Configuration <a class="header-link"  href="#configuration" style=" display: inl
 
       </div><div class="td-footer__center col-12 col-sm-4 py-2 order-sm-2">
         <span class="td-footer__copyright">&copy;
-    2024
+    2025
     <span class="td-footer__authors">The Dell Technologies</span></span><span class="td-footer__all_rights_reserved">All Rights Reserved</span><span class="ms-2"><a href="https://www.dell.com/learn/us/en/uscorp1/policies-privacy" target="_blank" rel="noopener">Privacy Policy</a></span>
       </div>
     </div>

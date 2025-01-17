@@ -20,7 +20,7 @@
 
   <meta itemprop="name" content="Offline Installer for Observability">
   <meta itemprop="description" content="Dell Container Storage Modules (CSM) for Observability Offline Installer">
-  <meta itemprop="dateModified" content="2024-10-28T15:46:04-04:00">
+  <meta itemprop="dateModified" content="2024-12-05T12:02:53+05:30">
   <meta itemprop="wordCount" content="1342">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Offline Installer for Observability">
@@ -55,10 +55,10 @@
         <div class="dropdown">
   <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Releases</a>
   <ul class="dropdown-menu">
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.12.0)</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.11.1</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.10.2</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">v1.9.4</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.13.0)</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.12.0</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.11.1</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">v1.10.2</a></li>
     </ul>
 </div></li>
       <li class="td-light-dark-menu nav-item dropdown">
@@ -124,7 +124,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.5b43d3acf6640adab15d0e301eb69f8e.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.30cbd121c9a04dbae82fa0989eaa7269.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -148,7 +148,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.5b43d3acf6640adab15d0e301eb69f8e.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.30cbd121c9a04dbae82fa0989eaa7269.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -746,14 +746,14 @@ Dependencies <a class="header-link"  href="#dependencies" style=" display: inlin
 <table>
   <thead>
       <tr>
-          <th style="text-align: left">Dependency</th>
-          <th style="text-align: left">Usage</th>
+          <th>Dependency</th>
+          <th>Usage</th>
       </tr>
   </thead>
   <tbody>
       <tr>
-          <td style="text-align: left"><code>docker</code></td>
-          <td style="text-align: left"><code>docker</code> will be used to pull images from public image registries, tag them, and push them to a private registry.<br>Required on both the system building the offline bundle as well as the system preparing for installation. <br>Tested version is <code>docker</code> 18.09+</td>
+          <td><code>docker</code></td>
+          <td><code>docker</code> will be used to pull images from public image registries, tag them, and push them to a private registry.<br>Required on both the system building the offline bundle as well as the system preparing for installation. <br>Tested version is <code>docker</code> 18.09+</td>
       </tr>
   </tbody>
 </table>
@@ -802,13 +802,13 @@ Build the Offline Bundle <a class="header-link"  href="#build-the-offline-bundle
 *
 * Downloading and saving Docker images
 
-  quay.io/dell/container-storage-modules/csm-topology:v1.10.0
-  quay.io/dell/container-storage-modules/csm-metrics-powerflex:v1.10.0
-  quay.io/dell/container-storage-modules/csm-metrics-powerstore:v1.10.0
-  quay.io/dell/container-storage-modules/csm-metrics-powerscale:v1.7.0
-  quay.io/dell/container-storage-modules/csm-metrics-powermax:v1.5.0
+  quay.io/dell/container-storage-modules/csm-topology:v1.11.0
+  quay.io/dell/container-storage-modules/csm-metrics-powerflex:v1.11.0
+  quay.io/dell/container-storage-modules/csm-metrics-powerstore:v1.11.0
+  quay.io/dell/container-storage-modules/csm-metrics-powerscale:v1.8.0
+  quay.io/dell/container-storage-modules/csm-metrics-powermax:v1.6.0
   otel/opentelemetry-collector:0.42.0
-  nginxinc/nginx-unprivileged:1.20
+  nginxinc/nginx-unprivileged:1.27
 
 *
 * Compressing offline-karavi-observability-bundle.tar.gz
@@ -832,17 +832,17 @@ Unpack the Offline Bundle <a class="header-link"  href="#unpack-the-offline-bund
 <li>
 <p>Prepare the bundle by providing the internal Docker registry URL. Below is a sample output that may be different on your machine.</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>./offline-installer.sh -p &lt;my-registry&gt;:5000
-</span></span></code></pre></div><pre tabindex="0"><code>*
-* Loading, tagging, and pushing Docker images to registry &lt;my-registry&gt;:5000/
-
-  quay.io/dell/container-storage-modules/csm-topology:v1.10.0 -&gt; &lt;my-registry&gt;:5000/csm-topology:v1.10.0
-  quay.io/dell/container-storage-modules/csm-metrics-powerflex:v1.10.0 -&gt; &lt;my-registry&gt;:5000/csm-metrics-powerflex:v1.10.0
-  quay.io/dell/container-storage-modules/csm-metrics-powerstore:v1.10.0 -&gt; &lt;my-registry&gt;:5000/csm-metrics-powerstore:v1.10.0
-  quay.io/dell/container-storage-modules/csm-metrics-powerscale:v1.7.0 -&gt; &lt;my-registry&gt;:5000/csm-metrics-powerscale:v1.7.0
-  quay.io/dell/container-storage-modules/csm-metrics-powermax:v1.5.0 -&gt; &lt;my-registry&gt;:5000/csm-metrics-powermax:v1.5.0
-  otel/opentelemetry-collector:0.42.0 -&gt; &lt;my-registry&gt;:5000/opentelemetry-collector:0.42.0
-  nginxinc/nginx-unprivileged:1.20 -&gt; &lt;my-registry&gt;:5000/nginx-unprivileged:1.20
-</code></pre></li>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>*
+</span></span><span style="display:flex;"><span>* Loading, tagging, and pushing Docker images to registry &lt;my-registry&gt;:5000/
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  quay.io/dell/container-storage-modules/csm-topology:v1.11.0 -&gt; &lt;my-registry&gt;:5000/csm-topology:v1.11.0
+</span></span><span style="display:flex;"><span>  quay.io/dell/container-storage-modules/csm-metrics-powerflex:v1.11.0 -&gt; &lt;my-registry&gt;:5000/csm-metrics-powerflex:v1.11.0
+</span></span><span style="display:flex;"><span>  quay.io/dell/container-storage-modules/csm-metrics-powerstore:v1.11.0 -&gt; &lt;my-registry&gt;:5000/csm-metrics-powerstore:v1.11.0
+</span></span><span style="display:flex;"><span>  quay.io/dell/container-storage-modules/csm-metrics-powerscale:v1.8.0 -&gt; &lt;my-registry&gt;:5000/csm-metrics-powerscale:v1.8.0
+</span></span><span style="display:flex;"><span>  quay.io/dell/container-storage-modules/csm-metrics-powermax:v1.6.0 -&gt; &lt;my-registry&gt;:5000/csm-metrics-powermax:v1.6.0
+</span></span><span style="display:flex;"><span>  otel/opentelemetry-collector:0.42.0 -&gt; &lt;my-registry&gt;:5000/opentelemetry-collector:0.42.0
+</span></span><span style="display:flex;"><span>  nginxinc/nginx-unprivileged:1.27 -&gt; &lt;my-registry&gt;:5000/nginx-unprivileged:1.27
+</span></span></code></pre></div></li>
 </ol>
 <h3 id="perform-helm-installation">
 Perform Helm installation <a class="header-link"  href="#perform-helm-installation" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
@@ -934,8 +934,7 @@ Perform Helm installation <a class="header-link"  href="#perform-helm-installati
 <li>If CSM for Authorization is enabled for CSI PowerScale, the <code>karaviMetricsPowerscale.authorization</code> parameters must be properly configured.</li>
 <li>If CSM for Authorization is enabled for CSI PowerMax, the <code>karaviMetricsPowerMax.authorization</code> parameters must be properly configured.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>helm install -n install-namespace app-name karavi-observability
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>helm install -n install-namespace app-name karavi-observability
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>NAME: app-name
 </span></span><span style="display:flex;"><span>LAST DEPLOYED: Fri Nov  <span style="color:#0000cf;font-weight:bold">6</span> 08:48:13 <span style="color:#0000cf;font-weight:bold">2020</span>
@@ -985,7 +984,7 @@ Perform Helm installation <a class="header-link"  href="#perform-helm-installati
 
       </div><div class="td-footer__center col-12 col-sm-4 py-2 order-sm-2">
         <span class="td-footer__copyright">&copy;
-    2024
+    2025
     <span class="td-footer__authors">The Dell Technologies</span></span><span class="td-footer__all_rights_reserved">All Rights Reserved</span><span class="ms-2"><a href="https://www.dell.com/learn/us/en/uscorp1/policies-privacy" target="_blank" rel="noopener">Privacy Policy</a></span>
       </div>
     </div>

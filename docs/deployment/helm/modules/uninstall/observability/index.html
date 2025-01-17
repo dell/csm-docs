@@ -17,11 +17,11 @@
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="docs">
-    <meta property="article:modified_time" content="2024-03-21T02:39:59+05:30">
+    <meta property="article:modified_time" content="2024-12-05T12:02:53+05:30">
 
   <meta itemprop="name" content="Observability">
   <meta itemprop="description" content="Dell Container Storage Modules (CSM) for Observability Uninstallation">
-  <meta itemprop="dateModified" content="2024-03-21T02:39:59+05:30">
+  <meta itemprop="dateModified" content="2024-12-05T12:02:53+05:30">
   <meta itemprop="wordCount" content="52">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Observability">
@@ -56,10 +56,10 @@
         <div class="dropdown">
   <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Releases</a>
   <ul class="dropdown-menu">
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.12.0)</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.11.1</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.10.2</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">v1.9.4</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.13.0)</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.12.0</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.11.1</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">v1.10.2</a></li>
     </ul>
 </div></li>
       <li class="td-light-dark-menu nav-item dropdown">
@@ -125,7 +125,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.5b43d3acf6640adab15d0e301eb69f8e.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.30cbd121c9a04dbae82fa0989eaa7269.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -149,7 +149,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.5b43d3acf6640adab15d0e301eb69f8e.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.30cbd121c9a04dbae82fa0989eaa7269.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -721,8 +721,7 @@ Uninstall the CSM for Observability Helm Chart <a class="header-link"  href="#un
         </a></h2><p>The command below removes all the Kubernetes components associated with the chart.</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span><span style="color:#000;font-style:italic">helm delete karavi-observability --namespace [CSM_NAMESPACE]
 </span></span></span></code></pre></div><p>You may also want to uninstall the CRDs created for cert-manager.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span><span style="color:#a40000">
-</span></span></span><span style="display:flex;"><span><span style="color:#a40000"></span><span style="color:#000;font-style:italic">kubectl delete -f https://github.com/jetstack/cert-manager/releases/download/v1.10.0/cert-manager.crds.yaml
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span><span style="color:#000;font-style:italic">kubectl delete -f https://github.com/jetstack/cert-manager/releases/download/v1.10.0/cert-manager.crds.yaml
 </span></span></span></code></pre></div>
 	<style>
   .feedback--answer {
@@ -812,7 +811,7 @@ Uninstall the CSM for Observability Helm Chart <a class="header-link"  href="#un
 
       </div><div class="td-footer__center col-12 col-sm-4 py-2 order-sm-2">
         <span class="td-footer__copyright">&copy;
-    2024
+    2025
     <span class="td-footer__authors">The Dell Technologies</span></span><span class="td-footer__all_rights_reserved">All Rights Reserved</span><span class="ms-2"><a href="https://www.dell.com/learn/us/en/uscorp1/policies-privacy" target="_blank" rel="noopener">Privacy Policy</a></span>
       </div>
     </div>

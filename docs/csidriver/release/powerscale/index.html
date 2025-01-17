@@ -17,11 +17,11 @@
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="docs">
-    <meta property="article:modified_time" content="2024-10-31T11:14:54-04:00">
+    <meta property="article:modified_time" content="2025-01-02T09:07:07-05:00">
 
   <meta itemprop="name" content="PowerScale">
   <meta itemprop="description" content="Release notes for PowerScale CSI driver">
-  <meta itemprop="dateModified" content="2024-10-31T11:14:54-04:00">
+  <meta itemprop="dateModified" content="2025-01-02T09:07:07-05:00">
   <meta itemprop="wordCount" content="521">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="PowerScale">
@@ -56,10 +56,10 @@
         <div class="dropdown">
   <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Releases</a>
   <ul class="dropdown-menu">
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.12.0)</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.11.1</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.10.2</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">v1.9.4</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.13.0)</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.12.0</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.11.1</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">v1.10.2</a></li>
     </ul>
 </div></li>
       <li class="td-light-dark-menu nav-item dropdown">
@@ -125,7 +125,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.5b43d3acf6640adab15d0e301eb69f8e.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.30cbd121c9a04dbae82fa0989eaa7269.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -149,7 +149,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.5b43d3acf6640adab15d0e301eb69f8e.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.30cbd121c9a04dbae82fa0989eaa7269.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -752,42 +752,42 @@ Known Issues <a class="header-link"  href="#known-issues" style=" display: inlin
         </a></h3><table>
   <thead>
       <tr>
-          <th style="text-align: left">Issue</th>
-          <th style="text-align: left">Resolution or workaround, if known</th>
+          <th>Issue</th>
+          <th>Resolution or workaround, if known</th>
       </tr>
   </thead>
   <tbody>
       <tr>
-          <td style="text-align: left">Storage capacity tracking does not return <code>MaximumVolumeSize</code> parameter. PowerScale is purely NFS based meaning it has no actual volumes. Therefore <code>MaximumVolumeSize</code> cannot be implemented if there is no volume creation.</td>
-          <td style="text-align: left">CSI PowerScale 2.9.1 is compliant with CSI 1.6 specification since the field <code>MaximumVolumeSize</code> is optional.</td>
+          <td>Storage capacity tracking does not return <code>MaximumVolumeSize</code> parameter. PowerScale is purely NFS based meaning it has no actual volumes. Therefore <code>MaximumVolumeSize</code> cannot be implemented if there is no volume creation.</td>
+          <td>CSI PowerScale 2.9.1 is compliant with CSI 1.6 specification since the field <code>MaximumVolumeSize</code> is optional.</td>
       </tr>
       <tr>
-          <td style="text-align: left">If the length of the nodeID exceeds 128 characters, the driver fails to update the CSINode object and installation fails. This is due to a limitation set by CSI spec which doesn&rsquo;t allow nodeID to be greater than 128 characters.</td>
-          <td style="text-align: left">The CSI PowerScale driver uses the hostname for building the nodeID which is set in the CSINode resource object, hence we recommend not having very long hostnames in order to avoid this issue. This current limitation of 128 characters is likely to be relaxed in future Kubernetes versions as per this issue in the community: <a href="https://github.com/kubernetes-sigs/gcp-compute-persistent-disk-csi-driver/issues/581">https://github.com/kubernetes-sigs/gcp-compute-persistent-disk-csi-driver/issues/581</a> <br><br> <strong>Note:</strong> In kubernetes 1.22 this limit has been relaxed to 192 characters.</td>
+          <td>If the length of the nodeID exceeds 128 characters, the driver fails to update the CSINode object and installation fails. This is due to a limitation set by CSI spec which doesn&rsquo;t allow nodeID to be greater than 128 characters.</td>
+          <td>The CSI PowerScale driver uses the hostname for building the nodeID which is set in the CSINode resource object, hence we recommend not having very long hostnames in order to avoid this issue. This current limitation of 128 characters is likely to be relaxed in future Kubernetes versions as per this issue in the community: <a href="https://github.com/kubernetes-sigs/gcp-compute-persistent-disk-csi-driver/issues/581">https://github.com/kubernetes-sigs/gcp-compute-persistent-disk-csi-driver/issues/581</a> <br><br> <strong>Note:</strong> In kubernetes 1.22 this limit has been relaxed to 192 characters.</td>
       </tr>
       <tr>
-          <td style="text-align: left">If some older NFS exports /terminated worker nodes still in NFS export client list, CSI driver tries to add a new worker node it fails (For RWX volume).</td>
-          <td style="text-align: left">User need to manually clean the export client list from old entries to make successful addition of new worker nodes.</td>
+          <td>If some older NFS exports /terminated worker nodes still in NFS export client list, CSI driver tries to add a new worker node it fails (For RWX volume).</td>
+          <td>User need to manually clean the export client list from old entries to make successful addition of new worker nodes.</td>
       </tr>
       <tr>
-          <td style="text-align: left">Delete namespace that has PVCs and pods created with the driver. The External health monitor sidecar crashes as a result of this operation.</td>
-          <td style="text-align: left">Deleting the namespace deletes the PVCs first and then removes the pods in the namespace. This brings a condition where pods exist without their PVCs and causes the external-health-monitor sidecar to crash. This is a known issue and has been reported at <a href="https://github.com/kubernetes-csi/external-health-monitor/issues/100">https://github.com/kubernetes-csi/external-health-monitor/issues/100</a></td>
+          <td>Delete namespace that has PVCs and pods created with the driver. The External health monitor sidecar crashes as a result of this operation.</td>
+          <td>Deleting the namespace deletes the PVCs first and then removes the pods in the namespace. This brings a condition where pods exist without their PVCs and causes the external-health-monitor sidecar to crash. This is a known issue and has been reported at <a href="https://github.com/kubernetes-csi/external-health-monitor/issues/100">https://github.com/kubernetes-csi/external-health-monitor/issues/100</a></td>
       </tr>
       <tr>
-          <td style="text-align: left">fsGroupPolicy may not work as expected without root privileges for NFS only<br/><a href="https://github.com/kubernetes/examples/issues/260">https://github.com/kubernetes/examples/issues/260</a></td>
-          <td style="text-align: left">To get the desired behavior set &ldquo;RootClientEnabled&rdquo; = &ldquo;true&rdquo; in the storage class parameter</td>
+          <td>fsGroupPolicy may not work as expected without root privileges for NFS only<br/><a href="https://github.com/kubernetes/examples/issues/260">https://github.com/kubernetes/examples/issues/260</a></td>
+          <td>To get the desired behavior set &ldquo;RootClientEnabled&rdquo; = &ldquo;true&rdquo; in the storage class parameter</td>
       </tr>
       <tr>
-          <td style="text-align: left">Driver logs shows &ldquo;VendorVersion=2.3.0+dirty&rdquo;</td>
-          <td style="text-align: left">Update the driver to csi-powerscale 2.4.0</td>
+          <td>Driver logs shows &ldquo;VendorVersion=2.3.0+dirty&rdquo;</td>
+          <td>Update the driver to csi-powerscale 2.4.0</td>
       </tr>
       <tr>
-          <td style="text-align: left">PowerScale 9.5.0, Driver installation fails with session based auth, &ldquo;HTTP/1.1 401 Unauthorized&rdquo;</td>
-          <td style="text-align: left">Fix is available in PowerScale &gt;= 9.5.0.4</td>
+          <td>PowerScale 9.5.0, Driver installation fails with session based auth, &ldquo;HTTP/1.1 401 Unauthorized&rdquo;</td>
+          <td>Fix is available in PowerScale &gt;= 9.5.0.4</td>
       </tr>
       <tr>
-          <td style="text-align: left">If the volume limit is exhausted and there are pending pods and PVCs due to <code>exceed max volume count</code>, the pending PVCs will be bound to PVs and the pending pods will be scheduled to nodes when the driver pods are restarted.</td>
-          <td style="text-align: left">It is advised not to have any pending pods or PVCs once the volume limit per node is exhausted on a CSI Driver. There is an open issue reported with kubenetes at <a href="https://github.com/kubernetes/kubernetes/issues/95911">https://github.com/kubernetes/kubernetes/issues/95911</a> with the same behavior.</td>
+          <td>If the volume limit is exhausted and there are pending pods and PVCs due to <code>exceed max volume count</code>, the pending PVCs will be bound to PVs and the pending pods will be scheduled to nodes when the driver pods are restarted.</td>
+          <td>It is advised not to have any pending pods or PVCs once the volume limit per node is exhausted on a CSI Driver. There is an open issue reported with kubenetes at <a href="https://github.com/kubernetes/kubernetes/issues/95911">https://github.com/kubernetes/kubernetes/issues/95911</a> with the same behavior.</td>
       </tr>
   </tbody>
 </table>
@@ -889,7 +889,7 @@ Note <a class="header-link"  href="#note" style=" display: inline-block; opacity
 
       </div><div class="td-footer__center col-12 col-sm-4 py-2 order-sm-2">
         <span class="td-footer__copyright">&copy;
-    2024
+    2025
     <span class="td-footer__authors">The Dell Technologies</span></span><span class="td-footer__all_rights_reserved">All Rights Reserved</span><span class="ms-2"><a href="https://www.dell.com/learn/us/en/uscorp1/policies-privacy" target="_blank" rel="noopener">Privacy Policy</a></span>
       </div>
     </div>

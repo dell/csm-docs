@@ -17,11 +17,11 @@
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="docs">
-    <meta property="article:modified_time" content="2024-10-28T15:46:04-04:00">
+    <meta property="article:modified_time" content="2025-01-02T09:51:22-06:00">
 
   <meta itemprop="name" content="Authorization v2.0">
   <meta itemprop="description" content="Installing Authorization v2.0 via Dell CSM Operator">
-  <meta itemprop="dateModified" content="2024-10-28T15:46:04-04:00">
+  <meta itemprop="dateModified" content="2025-01-02T09:51:22-06:00">
   <meta itemprop="wordCount" content="1783">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Authorization v2.0">
@@ -56,10 +56,10 @@
         <div class="dropdown">
   <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Releases</a>
   <ul class="dropdown-menu">
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.12.0)</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.11.1</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.10.2</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">v1.9.4</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.13.0)</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.12.0</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.11.1</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">v1.10.2</a></li>
     </ul>
 </div></li>
       <li class="td-light-dark-menu nav-item dropdown">
@@ -125,7 +125,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.5b43d3acf6640adab15d0e301eb69f8e.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.30cbd121c9a04dbae82fa0989eaa7269.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -149,7 +149,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.5b43d3acf6640adab15d0e301eb69f8e.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.30cbd121c9a04dbae82fa0989eaa7269.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -780,18 +780,18 @@ Prerequisite <a class="header-link"  href="#prerequisite" style=" display: inlin
 <table>
   <thead>
       <tr>
-          <th style="text-align: left">Parameter</th>
-          <th style="text-align: left">Description</th>
-          <th style="text-align: left">Required</th>
-          <th style="text-align: left">Default</th>
+          <th>Parameter</th>
+          <th>Description</th>
+          <th>Required</th>
+          <th>Default</th>
       </tr>
   </thead>
   <tbody>
       <tr>
-          <td style="text-align: left">web.jwtsigningsecret</td>
-          <td style="text-align: left">String used to sign JSON Web Tokens</td>
-          <td style="text-align: left">true</td>
-          <td style="text-align: left">secret</td>
+          <td>web.jwtsigningsecret</td>
+          <td>String used to sign JSON Web Tokens</td>
+          <td>true</td>
+          <td>secret</td>
       </tr>
   </tbody>
 </table>
@@ -830,78 +830,78 @@ Install CSM Authorization Proxy Server <a class="header-link"  href="#install-cs
 <table>
   <thead>
       <tr>
-          <th style="text-align: left">Parameter</th>
-          <th style="text-align: left">Description</th>
-          <th style="text-align: left">Required</th>
-          <th style="text-align: left">Default</th>
+          <th>Parameter</th>
+          <th>Description</th>
+          <th>Required</th>
+          <th>Default</th>
       </tr>
   </thead>
   <tbody>
       <tr>
-          <td style="text-align: left"><strong>nginx</strong></td>
-          <td style="text-align: left">This section configures the enablement of the NGINX Ingress Controller.</td>
-          <td style="text-align: left">-</td>
-          <td style="text-align: left">-</td>
+          <td><strong>nginx</strong></td>
+          <td>This section configures the enablement of the NGINX Ingress Controller.</td>
+          <td>-</td>
+          <td>-</td>
       </tr>
       <tr>
-          <td style="text-align: left">enabled</td>
-          <td style="text-align: left">For Kubernetes Container Platform only: Enable/Disable deployment of the NGINX Ingress Controller. Set to false if you already have an Ingress Controller installed.</td>
-          <td style="text-align: left">No</td>
-          <td style="text-align: left">true</td>
+          <td>enabled</td>
+          <td>For Kubernetes Container Platform only: Enable/Disable deployment of the NGINX Ingress Controller. Set to false if you already have an Ingress Controller installed.</td>
+          <td>No</td>
+          <td>true</td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>cert-manager</strong></td>
-          <td style="text-align: left">This section configures the enablement of cert-manager.</td>
-          <td style="text-align: left">-</td>
-          <td style="text-align: left">-</td>
+          <td><strong>cert-manager</strong></td>
+          <td>This section configures the enablement of cert-manager.</td>
+          <td>-</td>
+          <td>-</td>
       </tr>
       <tr>
-          <td style="text-align: left">enabled</td>
-          <td style="text-align: left">Enable/Disable deployment of cert-manager. Set to false if you already have cert-manager installed.</td>
-          <td style="text-align: left">No</td>
-          <td style="text-align: left">true</td>
+          <td>enabled</td>
+          <td>Enable/Disable deployment of cert-manager. Set to false if you already have cert-manager installed.</td>
+          <td>No</td>
+          <td>true</td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>authorization</strong></td>
-          <td style="text-align: left">This section configures the CSM-Authorization components.</td>
-          <td style="text-align: left">-</td>
-          <td style="text-align: left">-</td>
+          <td><strong>authorization</strong></td>
+          <td>This section configures the CSM-Authorization components.</td>
+          <td>-</td>
+          <td>-</td>
       </tr>
       <tr>
-          <td style="text-align: left">certificate</td>
-          <td style="text-align: left">The base64-encoded certificate for the certificate/private-key to configure the proxy-service Ingress. Leave empty to use self-signed certificate.</td>
-          <td style="text-align: left">No</td>
-          <td style="text-align: left">-</td>
+          <td>certificate</td>
+          <td>The base64-encoded certificate for the certificate/private-key to configure the proxy-service Ingress. Leave empty to use self-signed certificate.</td>
+          <td>No</td>
+          <td>-</td>
       </tr>
       <tr>
-          <td style="text-align: left">privateKey</td>
-          <td style="text-align: left">The base64-encoded private key for the certificate/private-key to configure the proxy-service Ingress. Leave empty to use self-signed certificate.</td>
-          <td style="text-align: left">No</td>
-          <td style="text-align: left">-</td>
+          <td>privateKey</td>
+          <td>The base64-encoded private key for the certificate/private-key to configure the proxy-service Ingress. Leave empty to use self-signed certificate.</td>
+          <td>No</td>
+          <td>-</td>
       </tr>
       <tr>
-          <td style="text-align: left">hostname</td>
-          <td style="text-align: left">The hostname to configure the self-signed certificate (if applicable), and the proxy service Ingress.</td>
-          <td style="text-align: left">No</td>
-          <td style="text-align: left">csm-authorization.com</td>
+          <td>hostname</td>
+          <td>The hostname to configure the self-signed certificate (if applicable), and the proxy service Ingress.</td>
+          <td>No</td>
+          <td>csm-authorization.com</td>
       </tr>
       <tr>
-          <td style="text-align: left">proxyServerIngress.ingressClassName</td>
-          <td style="text-align: left">The ingressClassName of the proxy-service Ingress.</td>
-          <td style="text-align: left">Yes</td>
-          <td style="text-align: left">nginx</td>
+          <td>proxyServerIngress.ingressClassName</td>
+          <td>The ingressClassName of the proxy-service Ingress.</td>
+          <td>Yes</td>
+          <td>nginx</td>
       </tr>
       <tr>
-          <td style="text-align: left">proxyServerIngress.hosts</td>
-          <td style="text-align: left">Additional host rules to be applied to the proxy-service Ingress.</td>
-          <td style="text-align: left">No</td>
-          <td style="text-align: left">-</td>
+          <td>proxyServerIngress.hosts</td>
+          <td>Additional host rules to be applied to the proxy-service Ingress.</td>
+          <td>No</td>
+          <td>-</td>
       </tr>
       <tr>
-          <td style="text-align: left">proxyServerIngress.annotations</td>
-          <td style="text-align: left">Additional annotations for the proxy-service Ingress.</td>
-          <td style="text-align: left">No</td>
-          <td style="text-align: left">-</td>
+          <td>proxyServerIngress.annotations</td>
+          <td>Additional annotations for the proxy-service Ingress.</td>
+          <td>No</td>
+          <td>-</td>
       </tr>
   </tbody>
 </table>
@@ -909,90 +909,90 @@ Install CSM Authorization Proxy Server <a class="header-link"  href="#install-cs
 <table>
   <thead>
       <tr>
-          <th style="text-align: left">Parameter</th>
-          <th style="text-align: left">Description</th>
-          <th style="text-align: left">Required</th>
-          <th style="text-align: left">Default</th>
+          <th>Parameter</th>
+          <th>Description</th>
+          <th>Required</th>
+          <th>Default</th>
       </tr>
   </thead>
   <tbody>
       <tr>
-          <td style="text-align: left"><strong>redis</strong></td>
-          <td style="text-align: left">This section configures the Redis components.</td>
-          <td style="text-align: left">-</td>
-          <td style="text-align: left">-</td>
+          <td><strong>redis</strong></td>
+          <td>This section configures the Redis components.</td>
+          <td>-</td>
+          <td>-</td>
       </tr>
       <tr>
-          <td style="text-align: left">redisName</td>
-          <td style="text-align: left">The prefix of the redis pods. The number of pods is determined by the number of replicas.</td>
-          <td style="text-align: left">Yes</td>
-          <td style="text-align: left">redis-csm</td>
+          <td>redisName</td>
+          <td>The prefix of the redis pods. The number of pods is determined by the number of replicas.</td>
+          <td>Yes</td>
+          <td>redis-csm</td>
       </tr>
       <tr>
-          <td style="text-align: left">redisCommander</td>
-          <td style="text-align: left">The prefix of the redis commander pod.</td>
-          <td style="text-align: left">Yes</td>
-          <td style="text-align: left">rediscommander</td>
+          <td>redisCommander</td>
+          <td>The prefix of the redis commander pod.</td>
+          <td>Yes</td>
+          <td>rediscommander</td>
       </tr>
       <tr>
-          <td style="text-align: left">sentinel</td>
-          <td style="text-align: left">The prefix of the redis sentinel pods. The number of pods is determined by the number of replicas.</td>
-          <td style="text-align: left">Yes</td>
-          <td style="text-align: left">sentinel</td>
+          <td>sentinel</td>
+          <td>The prefix of the redis sentinel pods. The number of pods is determined by the number of replicas.</td>
+          <td>Yes</td>
+          <td>sentinel</td>
       </tr>
       <tr>
-          <td style="text-align: left">redisReplicas</td>
-          <td style="text-align: left">The number of replicas for the sentinel and redis pods.</td>
-          <td style="text-align: left">Yes</td>
-          <td style="text-align: left">5</td>
+          <td>redisReplicas</td>
+          <td>The number of replicas for the sentinel and redis pods.</td>
+          <td>Yes</td>
+          <td>5</td>
       </tr>
       <tr>
-          <td style="text-align: left">storageclass</td>
-          <td style="text-align: left">The storage class for Redis to use for persistence. If not supplied, a locally provisioned volume is used.</td>
-          <td style="text-align: left">No</td>
-          <td style="text-align: left">-</td>
+          <td>storageclass</td>
+          <td>The storage class for Redis to use for persistence. If not supplied, a locally provisioned volume is used.</td>
+          <td>No</td>
+          <td>-</td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>vault</strong></td>
-          <td style="text-align: left">This section configures the vault components.</td>
-          <td style="text-align: left">-</td>
-          <td style="text-align: left">-</td>
+          <td><strong>vault</strong></td>
+          <td>This section configures the vault components.</td>
+          <td>-</td>
+          <td>-</td>
       </tr>
       <tr>
-          <td style="text-align: left">vaultAddress</td>
-          <td style="text-align: left">The address where vault is hosted with the credentials to the array (<code>https://10.0.0.1:&lt;port&gt;</code>).</td>
-          <td style="text-align: left">Yes</td>
-          <td style="text-align: left">-</td>
+          <td>vaultAddress</td>
+          <td>The address where vault is hosted with the credentials to the array (<code>https://10.0.0.1:&lt;port&gt;</code>).</td>
+          <td>Yes</td>
+          <td>-</td>
       </tr>
       <tr>
-          <td style="text-align: left">vaultRole</td>
-          <td style="text-align: left">The configured authentication role in vault.</td>
-          <td style="text-align: left">Yes</td>
-          <td style="text-align: left">csm-authorization</td>
+          <td>vaultRole</td>
+          <td>The configured authentication role in vault.</td>
+          <td>Yes</td>
+          <td>csm-authorization</td>
       </tr>
       <tr>
-          <td style="text-align: left">kvEnginePath</td>
-          <td style="text-align: left">The vault path where the credentials are stored.</td>
-          <td style="text-align: left">Yes</td>
-          <td style="text-align: left">secret</td>
+          <td>kvEnginePath</td>
+          <td>The vault path where the credentials are stored.</td>
+          <td>Yes</td>
+          <td>secret</td>
       </tr>
       <tr>
-          <td style="text-align: left">certificate</td>
-          <td style="text-align: left">The base64-encoded certificate for the certificate/private-key pair to connect to Vault. Leave empty to use self-signed certificate.</td>
-          <td style="text-align: left">No</td>
-          <td style="text-align: left">-</td>
+          <td>certificate</td>
+          <td>The base64-encoded certificate for the certificate/private-key pair to connect to Vault. Leave empty to use self-signed certificate.</td>
+          <td>No</td>
+          <td>-</td>
       </tr>
       <tr>
-          <td style="text-align: left">privateKey</td>
-          <td style="text-align: left">The base64-encoded private key for the certificate/private-key pair to connect to Vault. Leave empty to use self-signed certificate.</td>
-          <td style="text-align: left">No</td>
-          <td style="text-align: left">-</td>
+          <td>privateKey</td>
+          <td>The base64-encoded private key for the certificate/private-key pair to connect to Vault. Leave empty to use self-signed certificate.</td>
+          <td>No</td>
+          <td>-</td>
       </tr>
       <tr>
-          <td style="text-align: left">certificateAuthority</td>
-          <td style="text-align: left">The base64-encoded certificate authority for validating the Vault server.</td>
-          <td style="text-align: left">No</td>
-          <td style="text-align: left">-</td>
+          <td>certificateAuthority</td>
+          <td>The base64-encoded certificate authority for validating the Vault server.</td>
+          <td>No</td>
+          <td>-</td>
       </tr>
   </tbody>
 </table>
@@ -1058,7 +1058,7 @@ Configure a Dell CSI Driver with CSM Authorization <a class="header-link"  href=
 <ul>
 <li><a href="../../../../authorization/v2.x/configuration/powerflex">Configuring PowerFlex with Authorization</a>.</li>
 <li><a href="../../../../authorization/v2.x/configuration/powermax">Configuring PowerMax with Authorization</a>.</li>
-<li><a href="../../../../authorization/v2.x/configuration/powermax">Configuring PowerScale with Authorization</a>.</li>
+<li><a href="../../../../authorization/v2.x/configuration/powerscale">Configuring PowerScale with Authorization</a>.</li>
 </ul>
 <h2 id="vault-server-installation">
 Vault Server Installation <a class="header-link"  href="#vault-server-installation" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
@@ -1404,7 +1404,7 @@ Uninstalling the CSM Authorization sidecar in the CSI Driver <a class="header-li
 
       </div><div class="td-footer__center col-12 col-sm-4 py-2 order-sm-2">
         <span class="td-footer__copyright">&copy;
-    2024
+    2025
     <span class="td-footer__authors">The Dell Technologies</span></span><span class="td-footer__all_rights_reserved">All Rights Reserved</span><span class="ms-2"><a href="https://www.dell.com/learn/us/en/uscorp1/policies-privacy" target="_blank" rel="noopener">Privacy Policy</a></span>
       </div>
     </div>

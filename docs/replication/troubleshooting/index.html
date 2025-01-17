@@ -17,11 +17,11 @@
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="docs">
-    <meta property="article:modified_time" content="2024-11-26T16:33:33+05:30">
+    <meta property="article:modified_time" content="2024-12-05T12:02:53+05:30">
 
   <meta itemprop="name" content="Troubleshooting">
   <meta itemprop="description" content="Troubleshooting guide">
-  <meta itemprop="dateModified" content="2024-11-26T16:33:33+05:30">
+  <meta itemprop="dateModified" content="2024-12-05T12:02:53+05:30">
   <meta itemprop="wordCount" content="723">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Troubleshooting">
@@ -56,10 +56,10 @@
         <div class="dropdown">
   <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Releases</a>
   <ul class="dropdown-menu">
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.12.0)</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.11.1</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.10.2</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">v1.9.4</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.13.0)</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.12.0</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.11.1</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">v1.10.2</a></li>
     </ul>
 </div></li>
       <li class="td-light-dark-menu nav-item dropdown">
@@ -125,7 +125,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.5b43d3acf6640adab15d0e301eb69f8e.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.30cbd121c9a04dbae82fa0989eaa7269.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -149,7 +149,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.5b43d3acf6640adab15d0e301eb69f8e.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.30cbd121c9a04dbae82fa0989eaa7269.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -701,58 +701,58 @@
 	<table>
   <thead>
       <tr>
-          <th style="text-align: left">Symptoms</th>
-          <th style="text-align: left">Prevention, Resolution or Workaround</th>
+          <th>Symptoms</th>
+          <th>Prevention, Resolution or Workaround</th>
       </tr>
   </thead>
   <tbody>
       <tr>
-          <td style="text-align: left">Persistent volumes don&rsquo;t get created on the target cluster.</td>
-          <td style="text-align: left">Run <code>kubectl describe</code> on one of the pods of replication controller and see if event says <code>Config update won't be applied because of invalid configmap/secrets. Please fix the invalid configuration</code>. If it does, then ensure you correctly populated replication ConfigMap. You can check the current status by running <code>kubectl describe cm -n dell-replication-controller dell-replication-controller-config</code>. If ConfigMap is empty, please edit it yourself or use <code>repctl cluster inject</code> command.</td>
+          <td>Persistent volumes don&rsquo;t get created on the target cluster.</td>
+          <td>Run <code>kubectl describe</code> on one of the pods of replication controller and see if event says <code>Config update won't be applied because of invalid configmap/secrets. Please fix the invalid configuration</code>. If it does, then ensure you correctly populated replication ConfigMap. You can check the current status by running <code>kubectl describe cm -n dell-replication-controller dell-replication-controller-config</code>. If ConfigMap is empty, please edit it yourself or use <code>repctl cluster inject</code> command.</td>
       </tr>
       <tr>
-          <td style="text-align: left">Persistent volumes don&rsquo;t get created on the target cluster. You don&rsquo;t see any events on the replication-controller pod.</td>
-          <td style="text-align: left">Check logs of replication controller by running <code>kubectl logs -n dell-replication-controller dell-replication-controller-manager-&lt;generated-symbols&gt;</code>. If you see <code>clusterId - &lt;clusterID&gt; not found</code> errors then be sure to check if you specified the same clusterIDs in both your ConfigMap and replication enabled StorageClass.</td>
+          <td>Persistent volumes don&rsquo;t get created on the target cluster. You don&rsquo;t see any events on the replication-controller pod.</td>
+          <td>Check logs of replication controller by running <code>kubectl logs -n dell-replication-controller dell-replication-controller-manager-&lt;generated-symbols&gt;</code>. If you see <code>clusterId - &lt;clusterID&gt; not found</code> errors then be sure to check if you specified the same clusterIDs in both your ConfigMap and replication enabled StorageClass.</td>
       </tr>
       <tr>
-          <td style="text-align: left">You apply replication action by manually editing ReplicationGroup resource field <code>spec.action</code> and don&rsquo;t see any change of ReplicationGroup state after a while.</td>
-          <td style="text-align: left">Check events of the replication-controller pod, if it says <code>Cannot proceed with action &lt;your-action&gt;. [unsupported action]</code> then check spelling of your action and consult the <a href="../replication-actions">Replication Actions</a> page. Alternatively, you can use <code>repctl</code> instead of manually editing ReplicationGroup resources.</td>
+          <td>You apply replication action by manually editing ReplicationGroup resource field <code>spec.action</code> and don&rsquo;t see any change of ReplicationGroup state after a while.</td>
+          <td>Check events of the replication-controller pod, if it says <code>Cannot proceed with action &lt;your-action&gt;. [unsupported action]</code> then check spelling of your action and consult the <a href="../replication-actions">Replication Actions</a> page. Alternatively, you can use <code>repctl</code> instead of manually editing ReplicationGroup resources.</td>
       </tr>
       <tr>
-          <td style="text-align: left">You execute failover action using <code>repctl failover</code> command and see <code>failover: error executing failover to source site</code>.</td>
-          <td style="text-align: left">This means you tried to failover to a cluster that is already marked source. If you still want to execute failover for RG, just choose another cluster.</td>
+          <td>You execute failover action using <code>repctl failover</code> command and see <code>failover: error executing failover to source site</code>.</td>
+          <td>This means you tried to failover to a cluster that is already marked source. If you still want to execute failover for RG, just choose another cluster.</td>
       </tr>
       <tr>
-          <td style="text-align: left">You&rsquo;ve created PersistentVolumeClaim using replication enabled StorageClass but don&rsquo;t see any RGs created in the source cluster.</td>
-          <td style="text-align: left">Check annotations of created PersistentVolumeClaim. If it doesn&rsquo;t have <code>annotations</code> that start with <code>replication.storage.dell.com</code> then please wait for a couple of minutes for them to be added and RG to be created.</td>
+          <td>You&rsquo;ve created PersistentVolumeClaim using replication enabled StorageClass but don&rsquo;t see any RGs created in the source cluster.</td>
+          <td>Check annotations of created PersistentVolumeClaim. If it doesn&rsquo;t have <code>annotations</code> that start with <code>replication.storage.dell.com</code> then please wait for a couple of minutes for them to be added and RG to be created.</td>
       </tr>
       <tr>
-          <td style="text-align: left">When installing common replication controller using helm you see an error that states <code>invalid ownership metadata</code> and <code>missing key &quot;app.kubernetes.io/managed-by&quot;: must be set to &quot;Helm&quot;</code></td>
-          <td style="text-align: left">This means that you haven&rsquo;t fully deleted the previous release, you can fix it by either deleting entire manifest by using <code>kubectl delete -f deploy/controller.yaml</code> or manually deleting conflicting resources (ClusterRoles, ClusterRoleBinding, etc.)</td>
+          <td>When installing common replication controller using helm you see an error that states <code>invalid ownership metadata</code> and <code>missing key &quot;app.kubernetes.io/managed-by&quot;: must be set to &quot;Helm&quot;</code></td>
+          <td>This means that you haven&rsquo;t fully deleted the previous release, you can fix it by either deleting entire manifest by using <code>kubectl delete -f deploy/controller.yaml</code> or manually deleting conflicting resources (ClusterRoles, ClusterRoleBinding, etc.)</td>
       </tr>
       <tr>
-          <td style="text-align: left">PV and/or PVCs are not being created at the source/target cluster. If you check the controller&rsquo;s logs you can see <code>no such host</code> errors</td>
-          <td style="text-align: left">Make sure cluster-1&rsquo;s API is pingable from cluster-2 and vice versa. If one of your clusters is OpenShift located in a private network and needs records in /etc/hosts, <code>exec</code> into controller pod and modify <code>/etc/hosts</code> manually.</td>
+          <td>PV and/or PVCs are not being created at the source/target cluster. If you check the controller&rsquo;s logs you can see <code>no such host</code> errors</td>
+          <td>Make sure cluster-1&rsquo;s API is pingable from cluster-2 and vice versa. If one of your clusters is OpenShift located in a private network and needs records in /etc/hosts, <code>exec</code> into controller pod and modify <code>/etc/hosts</code> manually.</td>
       </tr>
       <tr>
-          <td style="text-align: left">After upgrading to Replication v1.4.0, if <code>kubectl get rg</code> returns an error <code>Unable to list &quot;replication.storage.dell.com/v1alpha1, Resource=dellcsireplicationgroups&quot;</code></td>
-          <td style="text-align: left">This means <code>kubectl</code> still doesn&rsquo;t recognize the new version of CRD <code>dellcsireplicationgroups.replication.storage.dell.com</code> after upgrade. Running the command <code>kubectl get DellCSIReplicationGroup.v1.replication.storage.dell.com/&lt;rg-id&gt; -o yaml</code> will resolve the issue.</td>
+          <td>After upgrading to Replication v1.4.0, if <code>kubectl get rg</code> returns an error <code>Unable to list &quot;replication.storage.dell.com/v1alpha1, Resource=dellcsireplicationgroups&quot;</code></td>
+          <td>This means <code>kubectl</code> still doesn&rsquo;t recognize the new version of CRD <code>dellcsireplicationgroups.replication.storage.dell.com</code> after upgrade. Running the command <code>kubectl get DellCSIReplicationGroup.v1.replication.storage.dell.com/&lt;rg-id&gt; -o yaml</code> will resolve the issue.</td>
       </tr>
       <tr>
-          <td style="text-align: left">To add or delete PV s in the existing SYNC Replication Group in PowerStore, you may encounter the error <code>The operation is restricted as sync replication session for resource &lt;Replication Group Name&gt; is not paused</code></td>
-          <td style="text-align: left">To resolve this, you need to pause the replication group, add the PV, and then resume the replication group (RG). The commands for the pause and resume operations are: <code>repctl --rg &lt;rg-id&gt; exec -a suspend</code>  <code>repctl --rg &lt;rg-id&gt; exec -a resume</code></td>
+          <td>To add or delete PV s in the existing SYNC Replication Group in PowerStore, you may encounter the error <code>The operation is restricted as sync replication session for resource &lt;Replication Group Name&gt; is not paused</code></td>
+          <td>To resolve this, you need to pause the replication group, add the PV, and then resume the replication group (RG). The commands for the pause and resume operations are: <code>repctl --rg &lt;rg-id&gt; exec -a suspend</code>  <code>repctl --rg &lt;rg-id&gt; exec -a resume</code></td>
       </tr>
       <tr>
-          <td style="text-align: left">To delete the last volume from the existing SYNC Replication Group in Powerstore, you may encounter the error &lsquo;failed to remove volume from volume group: The operation cannot be completed on metro or replicated volume group because volume group will become empty after last members are removed&rsquo;</td>
-          <td style="text-align: left">To resolve this, unassign the protection policy from the corresponding volume group on the PowerStore Manager UI. After that, you can successfully delete the last volume in that SYNC Replication Group.</td>
+          <td>To delete the last volume from the existing SYNC Replication Group in Powerstore, you may encounter the error &lsquo;failed to remove volume from volume group: The operation cannot be completed on metro or replicated volume group because volume group will become empty after last members are removed&rsquo;</td>
+          <td>To resolve this, unassign the protection policy from the corresponding volume group on the PowerStore Manager UI. After that, you can successfully delete the last volume in that SYNC Replication Group.</td>
       </tr>
       <tr>
-          <td style="text-align: left">When running CSI-PowerMax with Replication in a multi-cluster configuration, the driver on the target cluster fails and the following error is seen in logs: <code>error=&quot;CSI reverseproxy service host or port not found, CSI reverseproxy not installed properly&quot;</code></td>
-          <td style="text-align: left">The reverseproxy service needs to be created manually on the target cluster. Follow <a href="../../deployment/csmoperator/modules/replication#configuration-steps">the instructions here</a> to create it.</td>
+          <td>When running CSI-PowerMax with Replication in a multi-cluster configuration, the driver on the target cluster fails and the following error is seen in logs: <code>error=&quot;CSI reverseproxy service host or port not found, CSI reverseproxy not installed properly&quot;</code></td>
+          <td>The reverseproxy service needs to be created manually on the target cluster. Follow <a href="../../deployment/csmoperator/modules/replication#configuration-steps">the instructions here</a> to create it.</td>
       </tr>
       <tr>
-          <td style="text-align: left">When getting the following error for CSi-Powerscale with Replication with encryption enabled: <code>SyncIQ policy failed to establish an encrypted connection</code>, the Replication groups and PVC&rsquo;s won&rsquo;t be created at target cluster.</td>
-          <td style="text-align: left">The <code>encryption required</code> flag in the SyncIQ settings was set to &ldquo;yes&rdquo; by default in OneFS 9.0+. To rectify this error, please follow the following article: <a href="https://www.dell.com/support/kbdoc/en-us/000215174/isilon-synciq-9-0-all-policies-fail-when-source-or-target-cluster-is-on-onefs-9-0-with-no-node-on-source-cluster-was-able-to-connect-to-target-cluster">https://www.dell.com/support/kbdoc/en-us/000215174/isilon-synciq-9-0-all-policies-fail-when-source-or-target-cluster-is-on-onefs-9-0-with-no-node-on-source-cluster-was-able-to-connect-to-target-cluster</a></td>
+          <td>When getting the following error for CSI-Powerscale with Replication with encryption enabled: <code>SyncIQ policy failed to establish an encrypted connection</code>, the Replication groups and PVC&rsquo;s won&rsquo;t be created at target cluster.</td>
+          <td>The <code>encryption required</code> flag in the SyncIQ settings was set to &ldquo;yes&rdquo; by default in OneFS 9.0+. To rectify this error, please follow the following article: <a href="https://www.dell.com/support/kbdoc/en-us/000215174/isilon-synciq-9-0-all-policies-fail-when-source-or-target-cluster-is-on-onefs-9-0-with-no-node-on-source-cluster-was-able-to-connect-to-target-cluster">https://www.dell.com/support/kbdoc/en-us/000215174/isilon-synciq-9-0-all-policies-fail-when-source-or-target-cluster-is-on-onefs-9-0-with-no-node-on-source-cluster-was-able-to-connect-to-target-cluster</a></td>
       </tr>
   </tbody>
 </table>
@@ -845,7 +845,7 @@
 
       </div><div class="td-footer__center col-12 col-sm-4 py-2 order-sm-2">
         <span class="td-footer__copyright">&copy;
-    2024
+    2025
     <span class="td-footer__authors">The Dell Technologies</span></span><span class="td-footer__all_rights_reserved">All Rights Reserved</span><span class="ms-2"><a href="https://www.dell.com/learn/us/en/uscorp1/policies-privacy" target="_blank" rel="noopener">Privacy Policy</a></span>
       </div>
     </div>

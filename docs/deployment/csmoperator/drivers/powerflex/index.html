@@ -17,12 +17,12 @@
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="docs">
-    <meta property="article:modified_time" content="2024-10-28T15:46:04-04:00">
+    <meta property="article:modified_time" content="2024-12-10T18:09:33+05:30">
 
   <meta itemprop="name" content="PowerFlex">
   <meta itemprop="description" content="Installing the CSI Driver for Dell PowerFlex via Dell CSM Operator">
-  <meta itemprop="dateModified" content="2024-10-28T15:46:04-04:00">
-  <meta itemprop="wordCount" content="1399">
+  <meta itemprop="dateModified" content="2024-12-10T18:09:33+05:30">
+  <meta itemprop="wordCount" content="1438">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="PowerFlex">
   <meta name="twitter:description" content="Installing the CSI Driver for Dell PowerFlex via Dell CSM Operator">
@@ -56,10 +56,10 @@
         <div class="dropdown">
   <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Releases</a>
   <ul class="dropdown-menu">
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.12.0)</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.11.1</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.10.2</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">v1.9.4</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.13.0)</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.12.0</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.11.1</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">v1.10.2</a></li>
     </ul>
 </div></li>
       <li class="td-light-dark-menu nav-item dropdown">
@@ -125,7 +125,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.5b43d3acf6640adab15d0e301eb69f8e.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.30cbd121c9a04dbae82fa0989eaa7269.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -149,7 +149,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.5b43d3acf6640adab15d0e301eb69f8e.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.30cbd121c9a04dbae82fa0989eaa7269.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -767,12 +767,12 @@ config.yaml. An example of config.yaml is below in this document. Do not set MDM
 </ul>
 </li>
 </ul>
-<h5 id="example-cr--samplesstorage_csm_powerflex_v2120yamlhttpsgithubcomdellcsm-operatorblobmainsamplesstorage_csm_powerflex_v2120yaml">
-Example CR:  <a href="https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powerflex_v2120.yaml">samples/storage_csm_powerflex_v2120.yaml</a></h5><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">sideCars</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+<h5 id="example-cr-samplesstorage_csm_powerflex_v2130yamlhttpsgithubcomdellcsm-operatorblobmainsamplesstorage_csm_powerflex_v2130yaml">
+Example CR: <a href="https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powerflex_v2130.yaml">samples/storage_csm_powerflex_v2130.yaml</a></h5><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">sideCars</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#8f5902;font-style:italic"># sdc-monitor is disabled by default, due to high CPU usage</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span>- <span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">sdc-monitor</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">enabled</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">false</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">image</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">dellemc/sdc:4.5</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">image</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">quay.io/dell/storage/powerflex/sdc:4.5.2.1</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">envs</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">        </span>- <span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">HOST_PID</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">          </span><span style="color:#204a87;font-weight:bold">value</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;1&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
@@ -855,11 +855,9 @@ Execute <code>kubectl create namespace vxflexos</code> to create the <code>vxfle
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">mdm</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;10.0.0.3,10.0.0.4&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span></code></pre></div><p>If replication feature is enabled, ensure the secret includes all the PowerFlex arrays involved in replication.</p>
 <p>After editing the file, run this command to create a secret called <code>vxflexos-config</code>.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>kubectl create secret generic vxflexos-config -n vxflexos --from-file<span style="color:#ce5c00;font-weight:bold">=</span><span style="color:#000">config</span><span style="color:#ce5c00;font-weight:bold">=</span>secret.yaml
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl create secret generic vxflexos-config -n vxflexos --from-file<span style="color:#ce5c00;font-weight:bold">=</span><span style="color:#000">config</span><span style="color:#ce5c00;font-weight:bold">=</span>secret.yaml
 </span></span></code></pre></div><p>Use this command to replace or update the secret:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>kubectl create secret generic vxflexos-config -n vxflexos --from-file<span style="color:#ce5c00;font-weight:bold">=</span><span style="color:#000">config</span><span style="color:#ce5c00;font-weight:bold">=</span>secret.yaml -o yaml --dry-run<span style="color:#ce5c00;font-weight:bold">=</span>client <span style="color:#000;font-weight:bold">|</span> kubectl replace -f -
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl create secret generic vxflexos-config -n vxflexos --from-file<span style="color:#ce5c00;font-weight:bold">=</span><span style="color:#000">config</span><span style="color:#ce5c00;font-weight:bold">=</span>secret.yaml -o yaml --dry-run<span style="color:#ce5c00;font-weight:bold">=</span>client <span style="color:#000;font-weight:bold">|</span> kubectl replace -f -
 </span></span></code></pre></div></li>
 </ol>
 <h3 id="install-driver">
@@ -870,7 +868,7 @@ Install Driver <a class="header-link"  href="#install-driver" style=" display: i
             </svg>
         </a></h3><ol>
 <li>
-<p>Follow all the <a href="/csm-docs/docs/deployment/csmoperator/drivers/powerflex/#prerequisite">prerequisites</a> above</p>
+<p>Follow all the <a href="/csm-docs/docs/deployment/csmoperator/drivers/powerflex/#prerequisites">prerequisites</a> above</p>
 </li>
 <li>
 <p>Create a CR (Custom Resource) for PowerFlex using the sample files provided</p>
@@ -885,138 +883,162 @@ the sample file provided
 <table>
   <thead>
       <tr>
-          <th style="text-align: left">Parameter</th>
-          <th style="text-align: left">Description</th>
-          <th style="text-align: left">Required</th>
-          <th style="text-align: left">Default</th>
+          <th>Parameter</th>
+          <th>Description</th>
+          <th>Required</th>
+          <th>Default</th>
       </tr>
   </thead>
   <tbody>
       <tr>
-          <td style="text-align: left">dnsPolicy</td>
-          <td style="text-align: left">Determines the DNS Policy of the Node service</td>
-          <td style="text-align: left">Yes</td>
-          <td style="text-align: left">ClusterFirstWithHostNet</td>
+          <td>namespace</td>
+          <td>Specifies namespace where the driver will be installed</td>
+          <td>Yes</td>
+          <td>&ldquo;vxflexos&rdquo;</td>
       </tr>
       <tr>
-          <td style="text-align: left">fsGroupPolicy</td>
-          <td style="text-align: left">Defines which FS Group policy mode to be used, Supported modes <code>None, File and ReadWriteOnceWithFSType</code>. In OCP &lt;= 4.16 and K8s &lt;= 1.29, fsGroupPolicy is an immutable field.</td>
-          <td style="text-align: left">No</td>
-          <td style="text-align: left">&ldquo;ReadWriteOnceWithFSType&rdquo;</td>
+          <td>dnsPolicy</td>
+          <td>Determines the DNS Policy of the Node service</td>
+          <td>Yes</td>
+          <td>ClusterFirstWithHostNet</td>
       </tr>
       <tr>
-          <td style="text-align: left">replicas</td>
-          <td style="text-align: left">Controls the number of controller pods you deploy. If the number of controller pods is greater than the number of available nodes, excess pods will become stay in a pending state. Defaults are 2 which allows for Controller high availability.</td>
-          <td style="text-align: left">Yes</td>
-          <td style="text-align: left">2</td>
+          <td>fsGroupPolicy</td>
+          <td>Defines which FS Group policy mode to be used, Supported modes <code>None, File and ReadWriteOnceWithFSType</code>. In OCP &lt;= 4.16 and K8s &lt;= 1.29, fsGroupPolicy is an immutable field.</td>
+          <td>No</td>
+          <td>&ldquo;File&rdquo;</td>
       </tr>
       <tr>
-          <td style="text-align: left">storageCapacity.enabled</td>
-          <td style="text-align: left">Enable/Disable storage capacity tracking</td>
-          <td style="text-align: left">No</td>
-          <td style="text-align: left">true</td>
+          <td>replicas</td>
+          <td>Controls the number of controller pods you deploy. If the number of controller pods is greater than the number of available nodes, excess pods will become stay in a pending state.</td>
+          <td>Yes</td>
+          <td>1</td>
       </tr>
       <tr>
-          <td style="text-align: left">storageCapacity.pollInterval</td>
-          <td style="text-align: left">Configure how often the driver checks for changed capacity</td>
-          <td style="text-align: left">No</td>
-          <td style="text-align: left">5m</td>
+          <td>storageCapacity.enabled</td>
+          <td>Enable/Disable storage capacity tracking</td>
+          <td>No</td>
+          <td>true</td>
       </tr>
       <tr>
-          <td style="text-align: left">enableQuota</td>
-          <td style="text-align: left">a boolean that, when enabled, will set quota limit for a newly provisioned NFS volume</td>
-          <td style="text-align: left">No</td>
-          <td style="text-align: left">none</td>
+          <td>storageCapacity.pollInterval</td>
+          <td>Configure how often the driver checks for changed capacity</td>
+          <td>No</td>
+          <td>5m</td>
       </tr>
       <tr>
-          <td style="text-align: left">maxVxflexosVolumesPerNode</td>
-          <td style="text-align: left">Specify default value for maximum number of volumes that controller can publish to the node.If value is zero CO SHALL decide how many volumes of this type can be published by the controller to the node</td>
-          <td style="text-align: left">Yes</td>
-          <td style="text-align: left">0</td>
+          <td>enableQuota</td>
+          <td>a boolean that, when enabled, will set quota limit for a newly provisioned NFS volume</td>
+          <td>No</td>
+          <td>none</td>
       </tr>
       <tr>
-          <td style="text-align: left"><em><strong>Common parameters for node and controller</strong></em></td>
-          <td style="text-align: left"></td>
-          <td style="text-align: left"></td>
-          <td style="text-align: left"></td>
+          <td>maxVxflexosVolumesPerNode</td>
+          <td>Specify default value for maximum number of volumes that controller can publish to the node.If value is zero CO SHALL decide how many volumes of this type can be published by the controller to the node</td>
+          <td>Yes</td>
+          <td>0</td>
       </tr>
       <tr>
-          <td style="text-align: left">X_CSI_VXFLEXOS_ENABLELISTVOLUMESNAPSHOT</td>
-          <td style="text-align: left">Enable list volume operation to include snapshots (since creating a volume from a snap actually results in a new snap)</td>
-          <td style="text-align: left">No</td>
-          <td style="text-align: left">false</td>
+          <td><em><strong>Common parameters for node and controller</strong></em></td>
+          <td></td>
+          <td></td>
+          <td></td>
       </tr>
       <tr>
-          <td style="text-align: left">X_CSI_VXFLEXOS_ENABLESNAPSHOTCGDELETE</td>
-          <td style="text-align: left">Enable this to automatically delete all snapshots in a consistency group when a snap in the group is deleted</td>
-          <td style="text-align: left">No</td>
-          <td style="text-align: left">false</td>
+          <td>X_CSI_VXFLEXOS_ENABLELISTVOLUMESNAPSHOT</td>
+          <td>Enable list volume operation to include snapshots (since creating a volume from a snap actually results in a new snap)</td>
+          <td>No</td>
+          <td>false</td>
       </tr>
       <tr>
-          <td style="text-align: left">X_CSI_DEBUG</td>
-          <td style="text-align: left">To enable debug mode</td>
-          <td style="text-align: left">No</td>
-          <td style="text-align: left">true</td>
+          <td>X_CSI_VXFLEXOS_ENABLESNAPSHOTCGDELETE</td>
+          <td>Enable this to automatically delete all snapshots in a consistency group when a snap in the group is deleted</td>
+          <td>No</td>
+          <td>false</td>
       </tr>
       <tr>
-          <td style="text-align: left">X_CSI_ALLOW_RWO_MULTI_POD_ACCESS</td>
-          <td style="text-align: left">Setting allowRWOMultiPodAccess to &ldquo;true&rdquo; will allow multiple pods on the same node to access the same RWO volume. This behavior conflicts with the CSI specification version 1.3. NodePublishVolume description that requires an error to be returned in this case. However, some other CSI drivers support this behavior and some customers desire this behavior. Customers use this option at their own risk.</td>
-          <td style="text-align: left">No</td>
-          <td style="text-align: left">false</td>
+          <td>X_CSI_DEBUG</td>
+          <td>To enable debug mode</td>
+          <td>No</td>
+          <td>true</td>
       </tr>
       <tr>
-          <td style="text-align: left">INTERFACE_NAMES</td>
-          <td style="text-align: left">A mapping of node names to interface names. Only necessary when SDC is disabled.</td>
-          <td style="text-align: left">No</td>
-          <td style="text-align: left">none</td>
+          <td>X_CSI_ALLOW_RWO_MULTI_POD_ACCESS</td>
+          <td>Setting allowRWOMultiPodAccess to &ldquo;true&rdquo; will allow multiple pods on the same node to access the same RWO volume. This behavior conflicts with the CSI specification version 1.3. NodePublishVolume description that requires an error to be returned in this case. However, some other CSI drivers support this behavior and some customers desire this behavior. Customers use this option at their own risk.</td>
+          <td>No</td>
+          <td>false</td>
       </tr>
       <tr>
-          <td style="text-align: left"><em><strong>Controller parameters</strong></em></td>
-          <td style="text-align: left"></td>
-          <td style="text-align: left"></td>
-          <td style="text-align: left"></td>
+          <td>INTERFACE_NAMES</td>
+          <td>A mapping of node names to interface names. Only necessary when SDC is disabled.</td>
+          <td>No</td>
+          <td>none</td>
       </tr>
       <tr>
-          <td style="text-align: left">X_CSI_POWERFLEX_EXTERNAL_ACCESS</td>
-          <td style="text-align: left">allows specifying additional entries for hostAccess of NFS volumes. Both single IP address and subnet are valid entries</td>
-          <td style="text-align: left">No</td>
-          <td style="text-align: left">empty</td>
+          <td><em><strong>Controller parameters</strong></em></td>
+          <td></td>
+          <td></td>
+          <td></td>
       </tr>
       <tr>
-          <td style="text-align: left">X_CSI_HEALTH_MONITOR_ENABLED</td>
-          <td style="text-align: left">Enable/Disable health monitor of CSI volumes from Controller plugin - volume condition</td>
-          <td style="text-align: left">No</td>
-          <td style="text-align: left">false</td>
+          <td>X_CSI_POWERFLEX_EXTERNAL_ACCESS</td>
+          <td>allows specifying additional entries for hostAccess of NFS volumes. Both single IP address and subnet are valid entries</td>
+          <td>No</td>
+          <td>empty</td>
       </tr>
       <tr>
-          <td style="text-align: left"><em><strong>Node parameters</strong></em></td>
-          <td style="text-align: left"></td>
-          <td style="text-align: left"></td>
-          <td style="text-align: left"></td>
+          <td>X_CSI_HEALTH_MONITOR_ENABLED</td>
+          <td>Enable/Disable health monitor of CSI volumes from Controller plugin - volume condition</td>
+          <td>No</td>
+          <td>false</td>
       </tr>
       <tr>
-          <td style="text-align: left">X_CSI_RENAME_SDC_ENABLED</td>
-          <td style="text-align: left">Enable this to rename the SDC with the given prefix. The new name will be (&ldquo;prefix&rdquo; + &ldquo;worker_node_hostname&rdquo;) and it should not exceed 31 chars.</td>
-          <td style="text-align: left">Yes</td>
-          <td style="text-align: left">false</td>
+          <td><em><strong>Node parameters</strong></em></td>
+          <td></td>
+          <td></td>
+          <td></td>
       </tr>
       <tr>
-          <td style="text-align: left">X_CSI_APPROVE_SDC_ENABLED</td>
-          <td style="text-align: left">Enable this to to approve restricted SDC by GUID during setup</td>
-          <td style="text-align: left">Yes</td>
-          <td style="text-align: left">false</td>
+          <td>X_CSI_RENAME_SDC_ENABLED</td>
+          <td>Enable this to rename the SDC with the given prefix. The new name will be (&ldquo;prefix&rdquo; + &ldquo;worker_node_hostname&rdquo;) and it should not exceed 31 chars.</td>
+          <td>Yes</td>
+          <td>false</td>
       </tr>
       <tr>
-          <td style="text-align: left">X_CSI_HEALTH_MONITOR_ENABLED</td>
-          <td style="text-align: left">Enable/Disable health monitor of CSI volumes from Node plugin - volume condition</td>
-          <td style="text-align: left">No</td>
-          <td style="text-align: left">false</td>
+          <td>X_CSI_APPROVE_SDC_ENABLED</td>
+          <td>Enable this to to approve restricted SDC by GUID during setup</td>
+          <td>Yes</td>
+          <td>false</td>
       </tr>
       <tr>
-          <td style="text-align: left">X_CSI_SDC_ENABLED</td>
-          <td style="text-align: left">Enable/Disable installation of the SDC.</td>
-          <td style="text-align: left">Yes</td>
-          <td style="text-align: left">true</td>
+          <td>X_CSI_HEALTH_MONITOR_ENABLED</td>
+          <td>Enable/Disable health monitor of CSI volumes from Node plugin - volume condition</td>
+          <td>No</td>
+          <td>false</td>
+      </tr>
+      <tr>
+          <td>X_CSI_SDC_ENABLED</td>
+          <td>Enable/Disable installation of the SDC.</td>
+          <td>Yes</td>
+          <td>true</td>
+      </tr>
+      <tr>
+          <td><em><strong>Sidecar parameters</strong></em></td>
+          <td></td>
+          <td></td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>volume-name-prefix</td>
+          <td>The volume-name-prefix will be used by provisioner sidecar as a prefix for all the volumes created</td>
+          <td>Yes</td>
+          <td>k8s</td>
+      </tr>
+      <tr>
+          <td>monitor-interval</td>
+          <td>The monitor-interval will be used by external-health-monitor as an interval for health checks</td>
+          <td>Yes</td>
+          <td>60s</td>
       </tr>
   </tbody>
 </table>
@@ -1126,7 +1148,7 @@ the sample file provided
 
       </div><div class="td-footer__center col-12 col-sm-4 py-2 order-sm-2">
         <span class="td-footer__copyright">&copy;
-    2024
+    2025
     <span class="td-footer__authors">The Dell Technologies</span></span><span class="td-footer__all_rights_reserved">All Rights Reserved</span><span class="ms-2"><a href="https://www.dell.com/learn/us/en/uscorp1/policies-privacy" target="_blank" rel="noopener">Privacy Policy</a></span>
       </div>
     </div>

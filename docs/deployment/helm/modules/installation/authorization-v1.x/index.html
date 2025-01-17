@@ -21,7 +21,7 @@
   <meta itemprop="name" content="Authorization v1.x">
   <meta itemprop="description" content="Dell Technologies (Dell) Container Storage Modules (CSM) for Authorization Helm deployment">
   <meta itemprop="dateModified" content="2024-10-29T12:11:18-04:00">
-  <meta itemprop="wordCount" content="1384">
+  <meta itemprop="wordCount" content="1381">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Authorization v1.x">
   <meta name="twitter:description" content="Dell Technologies (Dell) Container Storage Modules (CSM) for Authorization Helm deployment">
@@ -55,10 +55,10 @@
         <div class="dropdown">
   <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Releases</a>
   <ul class="dropdown-menu">
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.12.0)</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.11.1</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.10.2</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">v1.9.4</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.13.0)</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.12.0</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.11.1</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">v1.10.2</a></li>
     </ul>
 </div></li>
       <li class="td-light-dark-menu nav-item dropdown">
@@ -124,7 +124,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.5b43d3acf6640adab15d0e301eb69f8e.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.30cbd121c9a04dbae82fa0989eaa7269.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -148,7 +148,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.5b43d3acf6640adab15d0e301eb69f8e.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.30cbd121c9a04dbae82fa0989eaa7269.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -723,7 +723,7 @@ Starting with CSM 1.12, all deployments will use images from <a href="https://qu
 </li>
 <li>
 <p><span><span/>
-Deprecation Notice Pre-Wire:  Starting with CSM 1.13, Authorization v1.x will be deprecated and will be officially discontinued by CSM 1.15 in September 2025. Please switch to Authorization v2.0 before then to avoid any issues. Migration steps are available <a href="/csm-docs/docs/authorization/migration-guide-from-v1-to-v2/">here</a>.</p>
+Starting with CSM 1.13, Authorization v1.x will be deprecated and will be officially discontinued by CSM 1.15 in September 2025. Please switch to Authorization v2.0 before then to avoid any issues. Migration steps are available <a href="/csm-docs/docs/authorization/migration-guide-from-v1-to-v2/">here</a>.</p>
 </li>
 </ol>
 
@@ -768,18 +768,18 @@ Install CSM Authorization <a class="header-link"  href="#install-csm-authorizati
 <table>
   <thead>
       <tr>
-          <th style="text-align: left">Parameter</th>
-          <th style="text-align: left">Description</th>
-          <th style="text-align: left">Required</th>
-          <th style="text-align: left">Default</th>
+          <th>Parameter</th>
+          <th>Description</th>
+          <th>Required</th>
+          <th>Default</th>
       </tr>
   </thead>
   <tbody>
       <tr>
-          <td style="text-align: left">web.jwtsigningsecret</td>
-          <td style="text-align: left">String used to sign JSON Web Tokens</td>
-          <td style="text-align: left">true</td>
-          <td style="text-align: left">secret</td>
+          <td>web.jwtsigningsecret</td>
+          <td>String used to sign JSON Web Tokens</td>
+          <td>true</td>
+          <td>secret</td>
       </tr>
   </tbody>
 </table>
@@ -803,150 +803,150 @@ Install CSM Authorization <a class="header-link"  href="#install-csm-authorizati
 <table>
   <thead>
       <tr>
-          <th style="text-align: left">Parameter</th>
-          <th style="text-align: left">Description</th>
-          <th style="text-align: left">Required</th>
-          <th style="text-align: left">Default</th>
+          <th>Parameter</th>
+          <th>Description</th>
+          <th>Required</th>
+          <th>Default</th>
       </tr>
   </thead>
   <tbody>
       <tr>
-          <td style="text-align: left"><strong>ingress-nginx</strong></td>
-          <td style="text-align: left">This section configures the enablement of the NGINX Ingress Controller.</td>
-          <td style="text-align: left">-</td>
-          <td style="text-align: left">-</td>
+          <td><strong>ingress-nginx</strong></td>
+          <td>This section configures the enablement of the NGINX Ingress Controller.</td>
+          <td>-</td>
+          <td>-</td>
       </tr>
       <tr>
-          <td style="text-align: left">enabled</td>
-          <td style="text-align: left">Enable/Disable deployment of the NGINX Ingress Controller. Set to false if you already have an Ingress Controller installed.</td>
-          <td style="text-align: left">No</td>
-          <td style="text-align: left">true</td>
+          <td>enabled</td>
+          <td>Enable/Disable deployment of the NGINX Ingress Controller. Set to false if you already have an Ingress Controller installed.</td>
+          <td>No</td>
+          <td>true</td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>cert-manager</strong></td>
-          <td style="text-align: left">This section configures the enablement of cert-manager.</td>
-          <td style="text-align: left">-</td>
-          <td style="text-align: left">-</td>
+          <td><strong>cert-manager</strong></td>
+          <td>This section configures the enablement of cert-manager.</td>
+          <td>-</td>
+          <td>-</td>
       </tr>
       <tr>
-          <td style="text-align: left">enabled</td>
-          <td style="text-align: left">Enable/Disable deployment of cert-manager. Set to false if you already have cert-manager installed.</td>
-          <td style="text-align: left">No</td>
-          <td style="text-align: left">true</td>
+          <td>enabled</td>
+          <td>Enable/Disable deployment of cert-manager. Set to false if you already have cert-manager installed.</td>
+          <td>No</td>
+          <td>true</td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>authorization</strong></td>
-          <td style="text-align: left">This section configures the CSM-Authorization components.</td>
-          <td style="text-align: left">-</td>
-          <td style="text-align: left">-</td>
+          <td><strong>authorization</strong></td>
+          <td>This section configures the CSM-Authorization components.</td>
+          <td>-</td>
+          <td>-</td>
       </tr>
       <tr>
-          <td style="text-align: left">authorization.images.proxyService</td>
-          <td style="text-align: left">The image to use for the proxy-service.</td>
-          <td style="text-align: left">Yes</td>
-          <td style="text-align: left">quay.io/dell/container-storage-modules/csm-authorization-proxy:nightly</td>
+          <td>authorization.images.proxyService</td>
+          <td>The image to use for the proxy-service.</td>
+          <td>Yes</td>
+          <td>quay.io/dell/container-storage-modules/csm-authorization-proxy:nightly</td>
       </tr>
       <tr>
-          <td style="text-align: left">authorization.images.tenantService</td>
-          <td style="text-align: left">The image to use for the tenant-service.</td>
-          <td style="text-align: left">Yes</td>
-          <td style="text-align: left">quay.io/dell/container-storage-modules/csm-authorization-tenant:nightly</td>
+          <td>authorization.images.tenantService</td>
+          <td>The image to use for the tenant-service.</td>
+          <td>Yes</td>
+          <td>quay.io/dell/container-storage-modules/csm-authorization-tenant:nightly</td>
       </tr>
       <tr>
-          <td style="text-align: left">authorization.images.roleService</td>
-          <td style="text-align: left">The image to use for the role-service.</td>
-          <td style="text-align: left">Yes</td>
-          <td style="text-align: left">quay.io/dell/container-storage-modules/csm-authorization-proxy:nightly</td>
+          <td>authorization.images.roleService</td>
+          <td>The image to use for the role-service.</td>
+          <td>Yes</td>
+          <td>quay.io/dell/container-storage-modules/csm-authorization-proxy:nightly</td>
       </tr>
       <tr>
-          <td style="text-align: left">authorization.images.storageService</td>
-          <td style="text-align: left">The image to use for the storage-service.</td>
-          <td style="text-align: left">Yes</td>
-          <td style="text-align: left">quay.io/dell/container-storage-modules/csm-authorization-storage:nightly</td>
+          <td>authorization.images.storageService</td>
+          <td>The image to use for the storage-service.</td>
+          <td>Yes</td>
+          <td>quay.io/dell/container-storage-modules/csm-authorization-storage:nightly</td>
       </tr>
       <tr>
-          <td style="text-align: left">authorization.images.opa</td>
-          <td style="text-align: left">The image to use for Open Policy Agent.</td>
-          <td style="text-align: left">Yes</td>
-          <td style="text-align: left">openpolicyagent/opa</td>
+          <td>authorization.images.opa</td>
+          <td>The image to use for Open Policy Agent.</td>
+          <td>Yes</td>
+          <td>openpolicyagent/opa</td>
       </tr>
       <tr>
-          <td style="text-align: left">authorization.images.opaKubeMgmt</td>
-          <td style="text-align: left">The image to use for Open Policy Agent be-mgmt.</td>
-          <td style="text-align: left">Yes</td>
-          <td style="text-align: left">openpolicyagent/kube-mgmt:8.5.8</td>
+          <td>authorization.images.opaKubeMgmt</td>
+          <td>The image to use for Open Policy Agent be-mgmt.</td>
+          <td>Yes</td>
+          <td>openpolicyagent/kube-mgmt:8.5.8</td>
       </tr>
       <tr>
-          <td style="text-align: left">authorization.hostname</td>
-          <td style="text-align: left">The hostname to configure the self-signed certificate (if applicable) and the proxy Ingress.</td>
-          <td style="text-align: left">Yes</td>
-          <td style="text-align: left">csm-authorization.com</td>
+          <td>authorization.hostname</td>
+          <td>The hostname to configure the self-signed certificate (if applicable) and the proxy Ingress.</td>
+          <td>Yes</td>
+          <td>csm-authorization.com</td>
       </tr>
       <tr>
-          <td style="text-align: left">authorization.logLevel</td>
-          <td style="text-align: left">CSM Authorization log level. Allowed values: “error”, “warn”/“warning”, “info”, “debug”.</td>
-          <td style="text-align: left">Yes</td>
-          <td style="text-align: left">debug</td>
+          <td>authorization.logLevel</td>
+          <td>CSM Authorization log level. Allowed values: “error”, “warn”/“warning”, “info”, “debug”.</td>
+          <td>Yes</td>
+          <td>debug</td>
       </tr>
       <tr>
-          <td style="text-align: left">concurrentPowerFlexRequests</td>
-          <td style="text-align: left">Number of concurrent requests to PowerFlex. Used with dellctl to list tenant volumes.</td>
-          <td style="text-align: left">Yes</td>
-          <td style="text-align: left">10</td>
+          <td>concurrentPowerFlexRequests</td>
+          <td>Number of concurrent requests to PowerFlex. Used with dellctl to list tenant volumes.</td>
+          <td>Yes</td>
+          <td>10</td>
       </tr>
       <tr>
-          <td style="text-align: left">authorization.zipkin.collectoruri</td>
-          <td style="text-align: left">The URI of the Zipkin instance to export traces.</td>
-          <td style="text-align: left">No</td>
-          <td style="text-align: left">-</td>
+          <td>authorization.zipkin.collectoruri</td>
+          <td>The URI of the Zipkin instance to export traces.</td>
+          <td>No</td>
+          <td>-</td>
       </tr>
       <tr>
-          <td style="text-align: left">authorization.zipkin.probability</td>
-          <td style="text-align: left">The ratio of traces to export.</td>
-          <td style="text-align: left">No</td>
-          <td style="text-align: left">-</td>
+          <td>authorization.zipkin.probability</td>
+          <td>The ratio of traces to export.</td>
+          <td>No</td>
+          <td>-</td>
       </tr>
       <tr>
-          <td style="text-align: left">authorization.proxyServerIngress.ingressClassName</td>
-          <td style="text-align: left">The ingressClassName of the proxy-service Ingress.</td>
-          <td style="text-align: left">Yes</td>
-          <td style="text-align: left">-</td>
+          <td>authorization.proxyServerIngress.ingressClassName</td>
+          <td>The ingressClassName of the proxy-service Ingress.</td>
+          <td>Yes</td>
+          <td>-</td>
       </tr>
       <tr>
-          <td style="text-align: left">authorization.proxyServerIngress.hosts</td>
-          <td style="text-align: left">Additional host rules to be applied to the proxy-service Ingress.</td>
-          <td style="text-align: left">No</td>
-          <td style="text-align: left">-</td>
+          <td>authorization.proxyServerIngress.hosts</td>
+          <td>Additional host rules to be applied to the proxy-service Ingress.</td>
+          <td>No</td>
+          <td>-</td>
       </tr>
       <tr>
-          <td style="text-align: left">authorization.proxyServerIngress.annotations</td>
-          <td style="text-align: left">Additional annotations for the proxy-service Ingress.</td>
-          <td style="text-align: left">No</td>
-          <td style="text-align: left">-</td>
+          <td>authorization.proxyServerIngress.annotations</td>
+          <td>Additional annotations for the proxy-service Ingress.</td>
+          <td>No</td>
+          <td>-</td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>redis</strong></td>
-          <td style="text-align: left">This section configures Redis.</td>
-          <td style="text-align: left">-</td>
-          <td style="text-align: left">-</td>
+          <td><strong>redis</strong></td>
+          <td>This section configures Redis.</td>
+          <td>-</td>
+          <td>-</td>
       </tr>
       <tr>
-          <td style="text-align: left">redis.images.redis</td>
-          <td style="text-align: left">The image to use for Redis.</td>
-          <td style="text-align: left">Yes</td>
-          <td style="text-align: left">redis:7.4.0-alpine</td>
+          <td>redis.images.redis</td>
+          <td>The image to use for Redis.</td>
+          <td>Yes</td>
+          <td>redis:7.4.0-alpine</td>
       </tr>
       <tr>
-          <td style="text-align: left">redis.images.commander</td>
-          <td style="text-align: left">The image to use for Redis Commander.</td>
-          <td style="text-align: left">Yes</td>
-          <td style="text-align: left">rediscommander/redis-commander:latest</td>
+          <td>redis.images.commander</td>
+          <td>The image to use for Redis Commander.</td>
+          <td>Yes</td>
+          <td>rediscommander/redis-commander:latest</td>
       </tr>
       <tr>
-          <td style="text-align: left">redis.storageClass</td>
-          <td style="text-align: left">The storage class for Redis to use for persistence. If not supplied, a locally provisioned volume is used.</td>
-          <td style="text-align: left">No</td>
-          <td style="text-align: left">-</td>
+          <td>redis.storageClass</td>
+          <td>The storage class for Redis to use for persistence. If not supplied, a locally provisioned volume is used.</td>
+          <td>No</td>
+          <td>-</td>
       </tr>
   </tbody>
 </table>
@@ -1033,18 +1033,18 @@ Updating CSM for Authorization Proxy Server Configuration <a class="header-link"
 <table>
   <thead>
       <tr>
-          <th style="text-align: left">Parameter</th>
-          <th style="text-align: left">Type</th>
-          <th style="text-align: left">Default</th>
-          <th style="text-align: left">Description</th>
+          <th>Parameter</th>
+          <th>Type</th>
+          <th>Default</th>
+          <th>Description</th>
       </tr>
   </thead>
   <tbody>
       <tr>
-          <td style="text-align: left">web.jwtsigningsecret</td>
-          <td style="text-align: left">String</td>
-          <td style="text-align: left">&ldquo;secret&rdquo;</td>
-          <td style="text-align: left">The secret used to sign JWT tokens</td>
+          <td>web.jwtsigningsecret</td>
+          <td>String</td>
+          <td>&ldquo;secret&rdquo;</td>
+          <td>The secret used to sign JWT tokens</td>
       </tr>
   </tbody>
 </table>
@@ -1113,7 +1113,7 @@ CSM for Authorization Proxy Server Dynamic Configuration Settings <a class="head
 
       </div><div class="td-footer__center col-12 col-sm-4 py-2 order-sm-2">
         <span class="td-footer__copyright">&copy;
-    2024
+    2025
     <span class="td-footer__authors">The Dell Technologies</span></span><span class="td-footer__all_rights_reserved">All Rights Reserved</span><span class="ms-2"><a href="https://www.dell.com/learn/us/en/uscorp1/policies-privacy" target="_blank" rel="noopener">Privacy Policy</a></span>
       </div>
     </div>

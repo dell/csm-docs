@@ -17,12 +17,12 @@
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="docs">
-    <meta property="article:modified_time" content="2024-10-29T20:34:05-04:00">
+    <meta property="article:modified_time" content="2025-01-09T14:58:16-05:00">
 
   <meta itemprop="name" content="PowerMax">
   <meta itemprop="description" content="Troubleshooting PowerMax Driver">
-  <meta itemprop="dateModified" content="2024-10-29T20:34:05-04:00">
-  <meta itemprop="wordCount" content="617">
+  <meta itemprop="dateModified" content="2025-01-09T14:58:16-05:00">
+  <meta itemprop="wordCount" content="697">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="PowerMax">
   <meta name="twitter:description" content="Troubleshooting PowerMax Driver">
@@ -56,10 +56,10 @@
         <div class="dropdown">
   <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Releases</a>
   <ul class="dropdown-menu">
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.12.0)</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.11.1</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.10.2</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">v1.9.4</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.13.0)</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.12.0</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.11.1</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">v1.10.2</a></li>
     </ul>
 </div></li>
       <li class="td-light-dark-menu nav-item dropdown">
@@ -125,7 +125,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.5b43d3acf6640adab15d0e301eb69f8e.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.30cbd121c9a04dbae82fa0989eaa7269.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -149,7 +149,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.5b43d3acf6640adab15d0e301eb69f8e.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.30cbd121c9a04dbae82fa0989eaa7269.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -703,74 +703,78 @@
 	<table>
   <thead>
       <tr>
-          <th style="text-align: left">Symptoms</th>
-          <th style="text-align: left">Prevention, Resolution or Workaround</th>
+          <th>Symptoms</th>
+          <th>Prevention, Resolution or Workaround</th>
       </tr>
   </thead>
   <tbody>
       <tr>
-          <td style="text-align: left"><code>kubectl describe pod powermax-controller-&lt;xyz&gt; –n &lt;namespace&gt;</code> indicates that the driver image could not be loaded</td>
-          <td style="text-align: left">You may need to put an insecure-registries entry in <code>/etc/docker/daemon.json</code> or log in to the docker registry</td>
+          <td><code>kubectl describe pod powermax-controller-&lt;xyz&gt; –n &lt;namespace&gt;</code> indicates that the driver image could not be loaded</td>
+          <td>You may need to put an insecure-registries entry in <code>/etc/docker/daemon.json</code> or log in to the docker registry</td>
       </tr>
       <tr>
-          <td style="text-align: left"><code>kubectl logs powermax-controller-&lt;xyz&gt; –n &lt;namespace&gt; driver</code> logs show that the driver cannot authenticate</td>
-          <td style="text-align: left">Check your secret’s username and password</td>
+          <td><code>kubectl logs powermax-controller-&lt;xyz&gt; –n &lt;namespace&gt; driver</code> logs show that the driver cannot authenticate</td>
+          <td>Check your secret’s username and password</td>
       </tr>
       <tr>
-          <td style="text-align: left"><code>kubectl logs powermax-controller-&lt;xyz&gt; –n &lt;namespace&gt; driver</code> logs show that the driver failed to connect to the U4P because it could not verify the certificates</td>
-          <td style="text-align: left">Check the powermax-certs secret and ensure it is not empty or it has the valid certificates</td>
+          <td><code>kubectl logs powermax-controller-&lt;xyz&gt; –n &lt;namespace&gt; driver</code> logs show that the driver failed to connect to the U4P because it could not verify the certificates</td>
+          <td>Check the powermax-certs secret and ensure it is not empty or it has the valid certificates</td>
       </tr>
       <tr>
-          <td style="text-align: left">Driver install or upgrade fails because of an incompatible Kubernetes version, even though the version seems to be within the range of compatibility. For example: Error: UPGRADE FAILED: chart requires kubeVersion: &gt;= 1.23.0 &lt; 1.27.0 which is incompatible with Kubernetes V1.23.11-mirantis-1</td>
-          <td style="text-align: left">If you are using an extended Kubernetes version, please see the <a href="https://github.com/dell/helm-charts/blob/main/charts/csi-powermax/Chart.yaml">helm Chart</a> and use the alternate kubeVersion check that is provided in the comments. Please note that this is not meant to be used to enable the use of pre-release alpha and beta versions, which are not supported.</td>
+          <td>Driver install or upgrade fails because of an incompatible Kubernetes version, even though the version seems to be within the range of compatibility. For example: Error: UPGRADE FAILED: chart requires kubeVersion: &gt;= 1.23.0 &lt; 1.27.0 which is incompatible with Kubernetes V1.23.11-mirantis-1</td>
+          <td>If you are using an extended Kubernetes version, please see the <a href="https://github.com/dell/helm-charts/blob/main/charts/csi-powermax/Chart.yaml">helm Chart</a> and use the alternate kubeVersion check that is provided in the comments. Please note that this is not meant to be used to enable the use of pre-release alpha and beta versions, which are not supported.</td>
       </tr>
       <tr>
-          <td style="text-align: left">When a node goes down, the block volumes attached to the node cannot be attached to another node</td>
-          <td style="text-align: left">1. Force delete the pod running on the node that went down <br /> 2. Delete the volumeattachment to the node that went down. <br /> Now the volume can be attached to the new node.</td>
+          <td>When a node goes down, the block volumes attached to the node cannot be attached to another node</td>
+          <td>1. Force delete the pod running on the node that went down <br /> 2. Delete the volumeattachment to the node that went down. <br /> Now the volume can be attached to the new node.</td>
       </tr>
       <tr>
-          <td style="text-align: left">When attempting a driver upgrade, you see: <code>spec.fsGroupPolicy: Invalid value: &quot;xxx&quot;: field is immutable</code></td>
-          <td style="text-align: left">You cannot upgrade between drivers with different fsGroupPolicies. See <a href="../../../deployment/helm/drivers/upgrade/powermax">upgrade documentation</a> for more details</td>
+          <td>When attempting a driver upgrade, you see: <code>spec.fsGroupPolicy: Invalid value: &quot;xxx&quot;: field is immutable</code></td>
+          <td>You cannot upgrade between drivers with different fsGroupPolicies. See <a href="../../../deployment/helm/drivers/upgrade/powermax">upgrade documentation</a> for more details</td>
       </tr>
       <tr>
-          <td style="text-align: left">Ater the migration group is in “migrated” state but unable to move to “commit ready” state because the new paths are not being discovered on the cluster nodes.</td>
-          <td style="text-align: left">Run the following commands manually on the cluster nodes <code>rescan-scsi-bus.sh  -i</code>  <code>rescan-scsi-bus.sh  -a</code></td>
+          <td>Ater the migration group is in “migrated” state but unable to move to “commit ready” state because the new paths are not being discovered on the cluster nodes.</td>
+          <td>Run the following commands manually on the cluster nodes <code>rescan-scsi-bus.sh  -i</code>  <code>rescan-scsi-bus.sh  -a</code></td>
       </tr>
       <tr>
-          <td style="text-align: left"><code>Failed to fetch details for array: 000000000000. [Unauthorized]</code>&quot;</td>
-          <td style="text-align: left">Please make sure that correct encrypted username and password in secret files are used, also ensure whether the RBAC is enabled for the user</td>
+          <td><code>Failed to fetch details for array: 000000000000. [Unauthorized]</code>&quot;</td>
+          <td>Please make sure that correct encrypted username and password in secret files are used, also ensure whether the RBAC is enabled for the user</td>
       </tr>
       <tr>
-          <td style="text-align: left"><code>Error looking up volume for idempotence check: Not Found</code> or <code>Get Volume step fails for: (000000000000) symID with error (Invalid Response from API)</code></td>
-          <td style="text-align: left">Make sure that Unisphere endpoint doesn&rsquo;t end with front slash</td>
+          <td><code>Error looking up volume for idempotence check: Not Found</code> or <code>Get Volume step fails for: (000000000000) symID with error (Invalid Response from API)</code></td>
+          <td>Make sure that Unisphere endpoint doesn&rsquo;t end with front slash</td>
       </tr>
       <tr>
-          <td style="text-align: left"><code>FailedPrecondition desc = no topology keys could be generate</code></td>
-          <td style="text-align: left">Make sure that FC or iSCSI connectivity to the arrays are proper</td>
+          <td><code>FailedPrecondition desc = no topology keys could be generate</code></td>
+          <td>Make sure that FC or iSCSI connectivity to the arrays are proper</td>
       </tr>
       <tr>
-          <td style="text-align: left">CreateHost failed with error <code>initiator is already part of different host.</code></td>
-          <td style="text-align: left">Update modifyHostName to true in values.yaml Or Remove the initiator from existing host </td>
+          <td>CreateHost failed with error <code>initiator is already part of different host.</code></td>
+          <td>Update modifyHostName to true in values.yaml Or Remove the initiator from existing host </td>
       </tr>
       <tr>
-          <td style="text-align: left"><code>kubectl logs powermax-controller-&lt;xyz&gt; –n &lt;namespace&gt;</code> driver logs says connection refused and the reverseproxy logs says &ldquo;Failed to setup server.(secrets &quot;secret-name&quot; not found)&rdquo;</td>
-          <td style="text-align: left">Make sure the given secret <secret-name> exist on the cluster </td>
+          <td><code>kubectl logs powermax-controller-&lt;xyz&gt; –n &lt;namespace&gt;</code> driver logs says connection refused and the reverseproxy logs says &ldquo;Failed to setup server.(secrets &quot;secret-name&quot; not found)&rdquo;</td>
+          <td>Make sure the given secret <secret-name> exist on the cluster </td>
       </tr>
       <tr>
-          <td style="text-align: left">nodestage is failing with error <code>Error invalid IQN Target iqn.EMC.0648.SE1F</code></td>
-          <td style="text-align: left">1. Update initiator name to full default name , ex: iqn.1993-08.org.debian:01:e9afae962192 <br> 2.Ensure that the iSCSI initiators are available on all the nodes where the driver node plugin will be installed and it should be full default name.</td>
+          <td>nodestage is failing with error <code>Error invalid IQN Target iqn.EMC.0648.SE1F</code></td>
+          <td>1. Update initiator name to full default name , ex: iqn.1993-08.org.debian:01:e9afae962192 <br> 2.Ensure that the iSCSI initiators are available on all the nodes where the driver node plugin will be installed and it should be full default name.</td>
       </tr>
       <tr>
-          <td style="text-align: left">Volume mount is failing on few OS(ex:VMware Virtual Platform) during node publish with error <code>wrong fs type, bad option, bad superblock</code></td>
-          <td style="text-align: left">1. Check the multipath configuration(if enabled) 2. Edit Vm Advanced settings-&gt;hardware and add the param <code>disk.enableUUID=true</code> and reboot the node</td>
+          <td>Volume mount is failing on few OS(ex:VMware Virtual Platform) during node publish with error <code>wrong fs type, bad option, bad superblock</code></td>
+          <td>1. Check the multipath configuration(if enabled) 2. Edit Vm Advanced settings-&gt;hardware and add the param <code>disk.enableUUID=true</code> and reboot the node</td>
       </tr>
       <tr>
-          <td style="text-align: left">Standby controller pod is in crashloopbackoff state</td>
-          <td style="text-align: left">Scale down the replica count of the controller pod&rsquo;s deployment to 1 using <code>kubectl scale deployment &lt;deployment_name&gt; --replicas=1 -n &lt;driver_namespace&gt;</code></td>
+          <td>Standby controller pod is in crashloopbackoff state</td>
+          <td>Scale down the replica count of the controller pod&rsquo;s deployment to 1 using <code>kubectl scale deployment &lt;deployment_name&gt; --replicas=1 -n &lt;driver_namespace&gt;</code></td>
       </tr>
       <tr>
-          <td style="text-align: left">When running CSI-PowerMax with Replication in a multi-cluster configuration, the driver on the target cluster fails and the following error is seen in logs: <code>error=&quot;CSI reverseproxy service host or port not found, CSI reverseproxy not installed properly&quot;</code></td>
-          <td style="text-align: left">The reverseproxy service needs to be created manually on the target cluster. Follow <a href="../../../deployment/csmoperator/modules/replication#configuration-steps">the instructions here</a> to create it.</td>
+          <td>When running CSI-PowerMax with Replication in a multi-cluster configuration, the driver on the target cluster fails and the following error is seen in logs: <code>error=&quot;CSI reverseproxy service host or port not found, CSI reverseproxy not installed properly&quot;</code></td>
+          <td>The reverseproxy service needs to be created manually on the target cluster. Follow <a href="../../../deployment/csmoperator/modules/replication#configuration-steps">the instructions here</a> to create it.</td>
+      </tr>
+      <tr>
+          <td>PVC creation is failing with error <code>A problem occurred modifying the storage group resource: Failed to create batch task(s): The maximum allowed devices for a storage group has been exceeded</code>. This is because of a hardware limit of 4k devices in a storage group.</td>
+          <td>Create a separate Storage Class with a new unique <code>ApplicationPrefix</code> parameter (such as <code>ApplicationPrefix: OCPX</code>) or add a new unique <code>StorageGroup</code> parameter (such as <code>StorageGroup: &quot;custom_SG_1&quot;</code>) to place the provisioned volumes in a new Storage Group.</td>
       </tr>
   </tbody>
 </table>
@@ -863,7 +867,7 @@
 
       </div><div class="td-footer__center col-12 col-sm-4 py-2 order-sm-2">
         <span class="td-footer__copyright">&copy;
-    2024
+    2025
     <span class="td-footer__authors">The Dell Technologies</span></span><span class="td-footer__all_rights_reserved">All Rights Reserved</span><span class="ms-2"><a href="https://www.dell.com/learn/us/en/uscorp1/policies-privacy" target="_blank" rel="noopener">Privacy Policy</a></span>
       </div>
     </div>

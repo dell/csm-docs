@@ -17,11 +17,11 @@
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="docs">
-    <meta property="article:modified_time" content="2024-10-28T15:46:04-04:00">
+    <meta property="article:modified_time" content="2024-12-05T12:02:53+05:30">
 
   <meta itemprop="name" content="Installation using script">
   <meta itemprop="description" content="Installation of CSM for Replication using script (Helm chart)">
-  <meta itemprop="dateModified" content="2024-10-28T15:46:04-04:00">
+  <meta itemprop="dateModified" content="2024-12-05T12:02:53+05:30">
   <meta itemprop="wordCount" content="232">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Installation using script">
@@ -56,10 +56,10 @@
         <div class="dropdown">
   <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Releases</a>
   <ul class="dropdown-menu">
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.12.0)</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.11.1</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.10.2</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">v1.9.4</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.13.0)</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.12.0</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.11.1</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">v1.10.2</a></li>
     </ul>
 </div></li>
       <li class="td-light-dark-menu nav-item dropdown">
@@ -125,7 +125,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.5b43d3acf6640adab15d0e301eb69f8e.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.30cbd121c9a04dbae82fa0989eaa7269.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -149,7 +149,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.5b43d3acf6640adab15d0e301eb69f8e.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.30cbd121c9a04dbae82fa0989eaa7269.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -729,11 +729,11 @@ Install Replication Walkthrough <a class="header-link"  href="#install-replicati
         </a></h2><blockquote>
 <p><strong><em>NOTE:</em></strong>  These steps should be repeated on all Kubernetes clusters where you want to configure replication.</p>
 </blockquote>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>git clone -b v1.10.0 https://github.com/dell/csm-replication.git
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>git clone -b v1.11.0 https://github.com/dell/csm-replication.git
 </span></span><span style="display:flex;"><span><span style="color:#204a87">cd</span> csm-replication
 </span></span><span style="display:flex;"><span>kubectl create ns dell-replication-controller
 </span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"># Download and modify the default values.yaml file if you wish to customize your deployment in any way</span>
-</span></span><span style="display:flex;"><span>wget -O myvalues.yaml https://raw.githubusercontent.com/dell/helm-charts/csm-replication-1.10.0/charts/csm-replication/values.yaml
+</span></span><span style="display:flex;"><span>wget -O myvalues.yaml https://raw.githubusercontent.com/dell/helm-charts/csm-replication-1.11.0/charts/csm-replication/values.yaml
 </span></span><span style="display:flex;"><span>bash scripts/install.sh --values ./myvalues.yaml
 </span></span></code></pre></div><blockquote>
 <p>Note: Current installation method allows you to specify custom <code>&lt;FQDN&gt;:&lt;IP&gt;</code> entries to be appended to controller&rsquo;s <code>/etc/hosts</code> file. It can be useful if controller is being deployed in private environment where DNS is not set up properly, but kubernetes clusters use FQDN as API server&rsquo;s address.
@@ -846,7 +846,7 @@ The feature can be enabled by modifying <code>values.yaml</code>.</p>
 
       </div><div class="td-footer__center col-12 col-sm-4 py-2 order-sm-2">
         <span class="td-footer__copyright">&copy;
-    2024
+    2025
     <span class="td-footer__authors">The Dell Technologies</span></span><span class="td-footer__all_rights_reserved">All Rights Reserved</span><span class="ms-2"><a href="https://www.dell.com/learn/us/en/uscorp1/policies-privacy" target="_blank" rel="noopener">Privacy Policy</a></span>
       </div>
     </div>

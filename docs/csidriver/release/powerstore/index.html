@@ -17,11 +17,11 @@
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="docs">
-    <meta property="article:modified_time" content="2024-10-31T11:14:54-04:00">
+    <meta property="article:modified_time" content="2025-01-02T09:07:07-05:00">
 
   <meta itemprop="name" content="PowerStore">
   <meta itemprop="description" content="Release notes for PowerStore CSI driver">
-  <meta itemprop="dateModified" content="2024-10-31T11:14:54-04:00">
+  <meta itemprop="dateModified" content="2025-01-02T09:07:07-05:00">
   <meta itemprop="wordCount" content="788">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="PowerStore">
@@ -56,10 +56,10 @@
         <div class="dropdown">
   <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Releases</a>
   <ul class="dropdown-menu">
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.12.0)</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.11.1</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.10.2</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">v1.9.4</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.13.0)</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.12.0</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.11.1</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">v1.10.2</a></li>
     </ul>
 </div></li>
       <li class="td-light-dark-menu nav-item dropdown">
@@ -125,7 +125,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.5b43d3acf6640adab15d0e301eb69f8e.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.30cbd121c9a04dbae82fa0989eaa7269.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -149,7 +149,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.5b43d3acf6640adab15d0e301eb69f8e.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.30cbd121c9a04dbae82fa0989eaa7269.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -727,10 +727,10 @@ New Features/Changes <a class="header-link"  href="#new-featureschanges" style="
                 <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
             </svg>
         </a></h3><ul>
+<li><a href="https://github.com/dell/csm/issues/1443">#1443 - [FEATURE]: PowerStore Sync / Metro for Block - CSM Replication</a></li>
 <li><a href="https://github.com/dell/csm/issues/1472">#1472 - [FEATURE]: Support for Kubernetes 1.31</a></li>
 <li><a href="https://github.com/dell/csm/issues/1473">#1473 - [FEATURE]: Add Support for OpenShift Container Platform (OCP) 4.17</a></li>
 <li><a href="https://github.com/dell/csm/issues/1508">#1508 - [FEATURE]:  Add Support for KubeVirt</a></li>
-<li><a href="https://github.com/dell/csm/issues/1443">#1443 - [FEATURE]: PowerStore Sync / Metro for Block - CSM Replication</a></li>
 </ul>
 <h3 id="fixed-issues">
 Fixed Issues <a class="header-link"  href="#fixed-issues" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
@@ -755,50 +755,50 @@ Known Issues <a class="header-link"  href="#known-issues" style=" display: inlin
         </a></h3><table>
   <thead>
       <tr>
-          <th style="text-align: left">Issue</th>
-          <th style="text-align: left">Resolution or workaround, if known</th>
+          <th>Issue</th>
+          <th>Resolution or workaround, if known</th>
       </tr>
   </thead>
   <tbody>
       <tr>
-          <td style="text-align: left">Delete namespace that has PVCs and pods created with the driver. The External health monitor sidecar crashes as a result of this operation</td>
-          <td style="text-align: left">Deleting the namespace deletes the PVCs first and then removes the pods in the namespace. This brings a condition where pods exist without their PVCs and causes the external-health-monitor sidecar to crash. This is a known issue and has been reported at <a href="https://github.com/kubernetes-csi/external-health-monitor/issues/100">https://github.com/kubernetes-csi/external-health-monitor/issues/100</a> <br></td>
+          <td>Delete namespace that has PVCs and pods created with the driver. The External health monitor sidecar crashes as a result of this operation</td>
+          <td>Deleting the namespace deletes the PVCs first and then removes the pods in the namespace. This brings a condition where pods exist without their PVCs and causes the external-health-monitor sidecar to crash. This is a known issue and has been reported at <a href="https://github.com/kubernetes-csi/external-health-monitor/issues/100">https://github.com/kubernetes-csi/external-health-monitor/issues/100</a> <br></td>
       </tr>
       <tr>
-          <td style="text-align: left">fsGroupPolicy may not work as expected without root privileges for NFS only<br/><a href="https://github.com/kubernetes/examples/issues/260">https://github.com/kubernetes/examples/issues/260</a></td>
-          <td style="text-align: left">To get the desired behavior set &ldquo;allowRoot: &ldquo;true&rdquo; in the storage class parameter</td>
+          <td>fsGroupPolicy may not work as expected without root privileges for NFS only<br/><a href="https://github.com/kubernetes/examples/issues/260">https://github.com/kubernetes/examples/issues/260</a></td>
+          <td>To get the desired behavior set &ldquo;allowRoot: &ldquo;true&rdquo; in the storage class parameter</td>
       </tr>
       <tr>
-          <td style="text-align: left">If the NVMeFC pod is not getting created and the host looses the ssh connection, causing the driver pods to go to error state</td>
-          <td style="text-align: left">remove the nvme_tcp module from the host incase of NVMeFC connection</td>
+          <td>If the NVMeFC pod is not getting created and the host looses the ssh connection, causing the driver pods to go to error state</td>
+          <td>remove the nvme_tcp module from the host incase of NVMeFC connection</td>
       </tr>
       <tr>
-          <td style="text-align: left">When a node goes down, the block volumes attached to the node cannot be attached to another node</td>
-          <td style="text-align: left">This is a known issue and has been reported at <a href="https://github.com/kubernetes-csi/external-attacher/issues/215">https://github.com/kubernetes-csi/external-attacher/issues/215</a>. Workaround: <br /> 1. Force delete the pod running on the node that went down <br /> 2. Delete the volumeattachment to the node that went down. <br /> Now the volume can be attached to the new node.</td>
+          <td>When a node goes down, the block volumes attached to the node cannot be attached to another node</td>
+          <td>This is a known issue and has been reported at <a href="https://github.com/kubernetes-csi/external-attacher/issues/215">https://github.com/kubernetes-csi/external-attacher/issues/215</a>. Workaround: <br /> 1. Force delete the pod running on the node that went down <br /> 2. Delete the volumeattachment to the node that went down. <br /> Now the volume can be attached to the new node.</td>
       </tr>
       <tr>
-          <td style="text-align: left">When driver node pods enter CrashLoopBackOff and PVC remains in pending state with one of the following events:<br /> 1. failed to provision volume with StorageClass <code>&lt;storage-class-name&gt;</code>: error generating accessibility requirements: no available topology found <br /> 2. waiting for a volume to be created, either by external provisioner &ldquo;csi-powerstore.dellemc.com&rdquo; or manually created by system administrator.</td>
-          <td style="text-align: left">Check whether all array details present in the secret file are valid and remove any invalid entries if present. <br/>Redeploy the driver.</td>
+          <td>When driver node pods enter CrashLoopBackOff and PVC remains in pending state with one of the following events:<br /> 1. failed to provision volume with StorageClass <code>&lt;storage-class-name&gt;</code>: error generating accessibility requirements: no available topology found <br /> 2. waiting for a volume to be created, either by external provisioner &ldquo;csi-powerstore.dellemc.com&rdquo; or manually created by system administrator.</td>
+          <td>Check whether all array details present in the secret file are valid and remove any invalid entries if present. <br/>Redeploy the driver.</td>
       </tr>
       <tr>
-          <td style="text-align: left">If an ephemeral pod is not being created in OpenShift 4.13 and is failing with the error &ldquo;error when creating pod: the pod uses an inline volume provided by CSIDriver csi-powerstore.dellemc.com, and the namespace has a pod security enforcement level that is lower than privileged.&rdquo;</td>
-          <td style="text-align: left">This issue occurs because OpenShift 4.13 introduced the CSI Volume Admission plugin to restrict the use of a CSI driver capable of provisioning CSI ephemeral volumes during pod admission <a href="https://docs.openshift.com/container-platform/4.13/storage/container_storage_interface/ephemeral-storage-csi-inline.html">https://docs.openshift.com/container-platform/4.13/storage/container_storage_interface/ephemeral-storage-csi-inline.html</a> . Therefore, an additional label &ldquo;security.openshift.io/csi-ephemeral-volume-profile&rdquo; needs to be added to the CSIDriver object to support inline ephemeral volumes.</td>
+          <td>If an ephemeral pod is not being created in OpenShift 4.13 and is failing with the error &ldquo;error when creating pod: the pod uses an inline volume provided by CSIDriver csi-powerstore.dellemc.com, and the namespace has a pod security enforcement level that is lower than privileged.&rdquo;</td>
+          <td>This issue occurs because OpenShift 4.13 introduced the CSI Volume Admission plugin to restrict the use of a CSI driver capable of provisioning CSI ephemeral volumes during pod admission <a href="https://docs.openshift.com/container-platform/4.13/storage/container_storage_interface/ephemeral-storage-csi-inline.html">https://docs.openshift.com/container-platform/4.13/storage/container_storage_interface/ephemeral-storage-csi-inline.html</a> . Therefore, an additional label &ldquo;security.openshift.io/csi-ephemeral-volume-profile&rdquo; needs to be added to the CSIDriver object to support inline ephemeral volumes.</td>
       </tr>
       <tr>
-          <td style="text-align: left">In OpenShift 4.13, the root user is not allowed to perform write operations on NFS shares, when root squashing is enabled.</td>
-          <td style="text-align: left">The workaround for this issue is to disable root squashing by setting allowRoot: &ldquo;true&rdquo; in the NFS storage class.</td>
+          <td>In OpenShift 4.13, the root user is not allowed to perform write operations on NFS shares, when root squashing is enabled.</td>
+          <td>The workaround for this issue is to disable root squashing by setting allowRoot: &ldquo;true&rdquo; in the NFS storage class.</td>
       </tr>
       <tr>
-          <td style="text-align: left">If the volume limit is exhausted and there are pending pods and PVCs due to <code>exceed max volume count</code>, the pending PVCs will be bound to PVs, and the pending pods will be scheduled to nodes when the driver pods are restarted.</td>
-          <td style="text-align: left">It is advised not to have any pending pods or PVCs once the volume limit per node is exhausted on a CSI Driver. There is an open issue reported with Kubenetes at <a href="https://github.com/kubernetes/kubernetes/issues/95911">https://github.com/kubernetes/kubernetes/issues/95911</a> with the same behavior.</td>
+          <td>If the volume limit is exhausted and there are pending pods and PVCs due to <code>exceed max volume count</code>, the pending PVCs will be bound to PVs, and the pending pods will be scheduled to nodes when the driver pods are restarted.</td>
+          <td>It is advised not to have any pending pods or PVCs once the volume limit per node is exhausted on a CSI Driver. There is an open issue reported with Kubenetes at <a href="https://github.com/kubernetes/kubernetes/issues/95911">https://github.com/kubernetes/kubernetes/issues/95911</a> with the same behavior.</td>
       </tr>
       <tr>
-          <td style="text-align: left">If two separate networks are configured for ISCSI and NVMeTCP, the driver may encounter difficulty identifying the second network (e.g., NVMeTCP).</td>
-          <td style="text-align: left">This is a known issue, and the workaround involves creating a single network on the array to serve both ISCSI and NVMeTCP purposes.</td>
+          <td>If two separate networks are configured for ISCSI and NVMeTCP, the driver may encounter difficulty identifying the second network (e.g., NVMeTCP).</td>
+          <td>This is a known issue, and the workaround involves creating a single network on the array to serve both ISCSI and NVMeTCP purposes.</td>
       </tr>
       <tr>
-          <td style="text-align: left">When a PV/PVC is deleted in Kubernetes, it will trigger the deletion of the underlying volume and snapshot on the array as a default behaviour. This can result in a situation where the VolumeSnapshot and VolumeSnapshotContent will still show &ldquo;readyToUse: true&rdquo;, but leaves them unusable because it is no longer backed by underlying storage snapshot. This will not allow the creation of a PVC from snapshot and this could also lead to a data loss situations.</td>
-          <td style="text-align: left">This is a known issue, and the workaround is use of <strong>retain</strong> policy on the various PV, VolumeSnapshot and VolumeSnapshotContent that you wish to use for cloning.</td>
+          <td>When a PV/PVC is deleted in Kubernetes, it will trigger the deletion of the underlying volume and snapshot on the array as a default behaviour. This can result in a situation where the VolumeSnapshot and VolumeSnapshotContent will still show &ldquo;readyToUse: true&rdquo;, but leaves them unusable because it is no longer backed by underlying storage snapshot. This will not allow the creation of a PVC from snapshot and this could also lead to a data loss situations.</td>
+          <td>This is a known issue, and the workaround is use of <strong>retain</strong> policy on the various PV, VolumeSnapshot and VolumeSnapshotContent that you wish to use for cloning.</td>
       </tr>
   </tbody>
 </table>
@@ -900,7 +900,7 @@ Note: <a class="header-link"  href="#note" style=" display: inline-block; opacit
 
       </div><div class="td-footer__center col-12 col-sm-4 py-2 order-sm-2">
         <span class="td-footer__copyright">&copy;
-    2024
+    2025
     <span class="td-footer__authors">The Dell Technologies</span></span><span class="td-footer__all_rights_reserved">All Rights Reserved</span><span class="ms-2"><a href="https://www.dell.com/learn/us/en/uscorp1/policies-privacy" target="_blank" rel="noopener">Privacy Policy</a></span>
       </div>
     </div>

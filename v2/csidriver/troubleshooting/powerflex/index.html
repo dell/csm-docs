@@ -17,12 +17,12 @@
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="v2">
-    <meta property="article:modified_time" content="2024-08-14T15:59:46+05:30">
+    <meta property="article:modified_time" content="2024-11-20T19:40:41-05:00">
 
   <meta itemprop="name" content="PowerFlex">
   <meta itemprop="description" content="Troubleshooting PowerFlex Driver">
-  <meta itemprop="dateModified" content="2024-08-14T15:59:46+05:30">
-  <meta itemprop="wordCount" content="1095">
+  <meta itemprop="dateModified" content="2024-11-20T19:40:41-05:00">
+  <meta itemprop="wordCount" content="1201">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="PowerFlex">
   <meta name="twitter:description" content="Troubleshooting PowerFlex Driver">
@@ -56,10 +56,10 @@
         <div class="dropdown">
   <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Releases</a>
   <ul class="dropdown-menu">
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.12.0)</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.11.1</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.10.2</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">v1.9.4</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.13.0)</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.12.0</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.11.1</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">v1.10.2</a></li>
     </ul>
 </div></li>
       <li class="td-light-dark-menu nav-item dropdown">
@@ -125,7 +125,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.5b43d3acf6640adab15d0e301eb69f8e.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.30cbd121c9a04dbae82fa0989eaa7269.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -149,7 +149,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.5b43d3acf6640adab15d0e301eb69f8e.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.30cbd121c9a04dbae82fa0989eaa7269.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -163,7 +163,7 @@
   <a href="/csm-docs/v2/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section tree-root" id="m-csm-docsv2"><span class="">Documentation</span></a>
   <ul class="ul-1">
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsv2prerequisites-li">
-  <a href="/csm-docs/v2/prerequisites/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv2prerequisites"><span class="">Prerequisites</span></a>
+  <a href="/csm-docs/v2/prerequisites/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv2prerequisites"><span class="">Prerequisites and Support Matrix</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-csm-docsv2deployment-li">
   <a href="/csm-docs/v2/deployment/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv2deployment"><span class="">Deployment</span></a>
   <ul class="ul-2 foldable">
@@ -199,6 +199,8 @@
   <ul class="ul-4 foldable">
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2deploymentcsmoperatormodulesauthorization-li">
   <a href="/csm-docs/v2/deployment/csmoperator/modules/authorization/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2deploymentcsmoperatormodulesauthorization"><span class="">Authorization</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2deploymentcsmoperatormodulesauthorization-v20-tech-preview-li">
+  <a href="/csm-docs/v2/deployment/csmoperator/modules/authorization-v2.0-tech-preview/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2deploymentcsmoperatormodulesauthorization-v20-tech-preview"><span class="">Authorization v2.0 Tech Preview</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2deploymentcsmoperatormodulesobservability-li">
   <a href="/csm-docs/v2/deployment/csmoperator/modules/observability/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2deploymentcsmoperatormodulesobservability"><span class="">Observability</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2deploymentcsmoperatormodulesreplication-li">
@@ -261,9 +263,7 @@
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv2deploymenthelmmodulesinstallation-li">
   <a href="/csm-docs/v2/deployment/helm/modules/installation/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv2deploymenthelmmodulesinstallation"><span class="">Installation</span></a>
   <ul class="ul-5 foldable">
-    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2deploymenthelmmodulesinstallationapplicationmobility-li">
-  <a href="/csm-docs/v2/deployment/helm/modules/installation/applicationmobility/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv2deploymenthelmmodulesinstallationapplicationmobility"><span class="">Application Mobility</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv2deploymenthelmmodulesinstallationencryption-li">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv2deploymenthelmmodulesinstallationencryption-li">
   <a href="/csm-docs/v2/deployment/helm/modules/installation/encryption/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv2deploymenthelmmodulesinstallationencryption"><span class="">Encryption</span></a>
   <ul class="ul-6 foldable">
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2deploymenthelmmodulesinstallationencryptionvault-li">
@@ -494,36 +494,55 @@
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-csm-docsv2authorization-li">
   <a href="/csm-docs/v2/authorization/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv2authorization"><span class="">Authorization</span></a>
   <ul class="ul-2 foldable">
-    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2authorizationdesign-li">
-  <a href="/csm-docs/v2/authorization/design/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2authorizationdesign"><span class="">Design</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv2authorizationbackup-and-restore-li">
-  <a href="/csm-docs/v2/authorization/backup-and-restore/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv2authorizationbackup-and-restore"><span class="">Backup and Restore</span></a>
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv2authorizationv1x-ga-li">
+  <a href="/csm-docs/v2/authorization/v1.x-ga/" title="Authorization - v1.x GA" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv2authorizationv1x-ga"><span class="">v1.x GA</span></a>
   <ul class="ul-3 foldable">
-    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2authorizationbackup-and-restorehelm-li">
-  <a href="/csm-docs/v2/authorization/backup-and-restore/helm/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv2authorizationbackup-and-restorehelm"><span class="">Helm</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2authorizationbackup-and-restorerpm-li">
-  <a href="/csm-docs/v2/authorization/backup-and-restore/rpm/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv2authorizationbackup-and-restorerpm"><span class="">RPM</span></a>
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2authorizationv1x-gadesign-li">
+  <a href="/csm-docs/v2/authorization/v1.x-ga/design/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2authorizationv1x-gadesign"><span class="">Design</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv2authorizationv1x-gabackup-and-restore-li">
+  <a href="/csm-docs/v2/authorization/v1.x-ga/backup-and-restore/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv2authorizationv1x-gabackup-and-restore"><span class="">Backup and Restore</span></a>
+  <ul class="ul-4 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2authorizationv1x-gabackup-and-restorehelm-li">
+  <a href="/csm-docs/v2/authorization/v1.x-ga/backup-and-restore/helm/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv2authorizationv1x-gabackup-and-restorehelm"><span class="">Helm</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2authorizationv1x-gabackup-and-restorerpm-li">
+  <a href="/csm-docs/v2/authorization/v1.x-ga/backup-and-restore/rpm/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv2authorizationv1x-gabackup-and-restorerpm"><span class="">RPM</span></a>
 </li>
   </ul>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv2authorizationconfiguration-li">
-  <a href="/csm-docs/v2/authorization/configuration/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv2authorizationconfiguration"><span class="">Configuration</span></a>
-  <ul class="ul-3 foldable">
-    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2authorizationconfigurationpowerflex-li">
-  <a href="/csm-docs/v2/authorization/configuration/powerflex/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv2authorizationconfigurationpowerflex"><span class="">PowerFlex</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2authorizationconfigurationpowermax-li">
-  <a href="/csm-docs/v2/authorization/configuration/powermax/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv2authorizationconfigurationpowermax"><span class="">PowerMax</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2authorizationconfigurationpowerscale-li">
-  <a href="/csm-docs/v2/authorization/configuration/powerscale/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv2authorizationconfigurationpowerscale"><span class="">PowerScale</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2authorizationconfigurationproxy-server-li">
-  <a href="/csm-docs/v2/authorization/configuration/proxy-server/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv2authorizationconfigurationproxy-server"><span class="">Proxy Server</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv2authorizationv1x-gaconfiguration-li">
+  <a href="/csm-docs/v2/authorization/v1.x-ga/configuration/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv2authorizationv1x-gaconfiguration"><span class="">Configuration</span></a>
+  <ul class="ul-4 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2authorizationv1x-gaconfigurationpowerflex-li">
+  <a href="/csm-docs/v2/authorization/v1.x-ga/configuration/powerflex/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv2authorizationv1x-gaconfigurationpowerflex"><span class="">PowerFlex</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2authorizationv1x-gaconfigurationpowermax-li">
+  <a href="/csm-docs/v2/authorization/v1.x-ga/configuration/powermax/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv2authorizationv1x-gaconfigurationpowermax"><span class="">PowerMax</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2authorizationv1x-gaconfigurationpowerscale-li">
+  <a href="/csm-docs/v2/authorization/v1.x-ga/configuration/powerscale/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv2authorizationv1x-gaconfigurationpowerscale"><span class="">PowerScale</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2authorizationv1x-gaconfigurationproxy-server-li">
+  <a href="/csm-docs/v2/authorization/v1.x-ga/configuration/proxy-server/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv2authorizationv1x-gaconfigurationproxy-server"><span class="">Proxy Server</span></a>
 </li>
   </ul>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2authorizationcli-li">
-  <a href="/csm-docs/v2/authorization/cli/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2authorizationcli"><span class="">CLI</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2authorizationtroubleshooting-li">
-  <a href="/csm-docs/v2/authorization/troubleshooting/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2authorizationtroubleshooting"><span class="">Troubleshooting</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2authorizationrelease-li">
-  <a href="/csm-docs/v2/authorization/release/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv2authorizationrelease"><span class="">Release notes</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2authorizationv1x-gacli-li">
+  <a href="/csm-docs/v2/authorization/v1.x-ga/cli/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2authorizationv1x-gacli"><span class="">CLI</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2authorizationv1x-gatroubleshooting-li">
+  <a href="/csm-docs/v2/authorization/v1.x-ga/troubleshooting/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2authorizationv1x-gatroubleshooting"><span class="">Troubleshooting</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2authorizationv1x-garelease-li">
+  <a href="/csm-docs/v2/authorization/v1.x-ga/release/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv2authorizationv1x-garelease"><span class="">Release notes</span></a>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv2authorizationv20-tech-preview-li">
+  <a href="/csm-docs/v2/authorization/v2.0-tech-preview/" title="Authorization - v2.0 Tech Preview" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv2authorizationv20-tech-preview"><span class="">v2.0 Tech Preview</span></a>
+  <ul class="ul-3 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv2authorizationv20-tech-previewconfiguration-li">
+  <a href="/csm-docs/v2/authorization/v2.0-tech-preview/configuration/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv2authorizationv20-tech-previewconfiguration"><span class="">Configuration</span></a>
+  <ul class="ul-4 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2authorizationv20-tech-previewconfigurationpowerflex-li">
+  <a href="/csm-docs/v2/authorization/v2.0-tech-preview/configuration/powerflex/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv2authorizationv20-tech-previewconfigurationpowerflex"><span class="">PowerFlex</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2authorizationv20-tech-previewconfigurationproxy-server-li">
+  <a href="/csm-docs/v2/authorization/v2.0-tech-preview/configuration/proxy-server/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv2authorizationv20-tech-previewconfigurationproxy-server"><span class="">Proxy Server</span></a>
+</li>
+  </ul>
+</li>
+  </ul>
 </li>
   </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-csm-docsv2observability-li">
@@ -614,8 +633,6 @@
   <ul class="ul-2 foldable">
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2applicationmobilityuse_cases-li">
   <a href="/csm-docs/v2/applicationmobility/use_cases/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2applicationmobilityuse_cases"><span class="">Use Cases</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2applicationmobilitytroubleshooting-li">
-  <a href="/csm-docs/v2/applicationmobility/troubleshooting/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2applicationmobilitytroubleshooting"><span class="">Troubleshooting</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2applicationmobilityrelease-li">
   <a href="/csm-docs/v2/applicationmobility/release/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv2applicationmobilityrelease"><span class="">Release Notes</span></a>
 </li>
@@ -703,106 +720,114 @@
 	<table>
   <thead>
       <tr>
-          <th style="text-align: left">Symptoms</th>
-          <th style="text-align: left">Prevention, Resolution or Workaround</th>
+          <th>Symptoms</th>
+          <th>Prevention, Resolution or Workaround</th>
       </tr>
   </thead>
   <tbody>
       <tr>
-          <td style="text-align: left">The installation fails with the following error message: <br /><code>Node xxx does not have the SDC installed</code></td>
-          <td style="text-align: left">Install the PowerFlex SDC on listed nodes. The SDC must be installed on all the nodes that need to pull an image of the driver.</td>
+          <td>After installation vxflexos-node pods are in an <code>Init:CrashLoopBackOff</code> state in OpenShift 4.16 with error message: <code>Back-off restarting failed container sdc in pod vxflexos-node</code> on non-supported kernel versions.</td>
+          <td>Use SDC version 4.5.2.1 in OpenShift 4.16.</td>
       </tr>
       <tr>
-          <td style="text-align: left">When you run the command <code>kubectl describe pods vxflexos-controller-* –n vxflexos</code>, the system indicates that the driver image could not be loaded.</td>
-          <td style="text-align: left">- If on Kubernetes, edit the <code>daemon.json</code> file found in the registry location and add <br /><code>{ &quot;insecure-registries&quot; :[ &quot;hostname.cloudapp.net:5000&quot; ] }</code><br />- If on OpenShift, run the command <code>oc edit image.config.openshift.io/cluster</code> and add registries to yaml file that is displayed when you run the command.</td>
+          <td>The installation fails with the following error message: <br /><code>Node xxx does not have the SDC installed</code></td>
+          <td>Install the PowerFlex SDC on listed nodes. The SDC must be installed on all the nodes that need to pull an image of the driver.</td>
       </tr>
       <tr>
-          <td style="text-align: left">The <code>kubectl logs -n vxflexos vxflexos-controller-* driver</code> logs show that the driver is not authenticated.</td>
-          <td style="text-align: left">Check the username, password, and the gateway IP address for the PowerFlex system.</td>
+          <td>When you run the command <code>kubectl describe pods vxflexos-controller-* –n vxflexos</code>, the system indicates that the driver image could not be loaded.</td>
+          <td>- If on Kubernetes, edit the <code>daemon.json</code> file found in the registry location and add <br /><code>{ &quot;insecure-registries&quot; :[ &quot;hostname.cloudapp.net:5000&quot; ] }</code><br />- If on OpenShift, run the command <code>oc edit image.config.openshift.io/cluster</code> and add registries to yaml file that is displayed when you run the command.</td>
       </tr>
       <tr>
-          <td style="text-align: left">The <code>kubectl logs vxflexos-controller-* -n vxflexos driver</code> logs show that the system ID is incorrect.</td>
-          <td style="text-align: left">Use the <code>get_vxflexos_info.sh</code> to find the correct system ID.</td>
+          <td>The <code>kubectl logs -n vxflexos vxflexos-controller-* driver</code> logs show that the driver is not authenticated.</td>
+          <td>Check the username, password, and the gateway IP address for the PowerFlex system.</td>
       </tr>
       <tr>
-          <td style="text-align: left">The <code>kubectl logs vxflexos-controller-* -n vxflexos driver</code> logs show that the system ID is incorrect.</td>
-          <td style="text-align: left">Use the <code>get_vxflexos_info.sh</code> to find the correct system ID. Add the system ID to <code>myvalues.yaml</code> script.</td>
+          <td>The <code>kubectl logs vxflexos-controller-* -n vxflexos driver</code> logs show that the system ID is incorrect.</td>
+          <td>Use the <code>get_vxflexos_info.sh</code> to find the correct system ID.</td>
       </tr>
       <tr>
-          <td style="text-align: left">CreateVolume error System <Name> is not configured in the driver</td>
-          <td style="text-align: left">Powerflex name if used for systemID in StorageClass ensure same name is also used in array config systemID</td>
+          <td>The <code>kubectl logs vxflexos-controller-* -n vxflexos driver</code> logs show that the system ID is incorrect.</td>
+          <td>Use the <code>get_vxflexos_info.sh</code> to find the correct system ID. Add the system ID to <code>myvalues.yaml</code> script.</td>
       </tr>
       <tr>
-          <td style="text-align: left">Defcontext mount option seems to be ignored, volumes still are not being labeled correctly.</td>
-          <td style="text-align: left">Ensure SElinux is enabled on a worker node, and ensure your container run time manager is properly configured to be utilized with SElinux.</td>
+          <td>CreateVolume error System <Name> is not configured in the driver</td>
+          <td>Powerflex name if used for systemID in StorageClass ensure same name is also used in array config systemID</td>
       </tr>
       <tr>
-          <td style="text-align: left">Mount options that interact with SElinux are not working (like defcontext).</td>
-          <td style="text-align: left">Check that your container orchestrator is properly configured to work with SElinux.</td>
+          <td>Defcontext mount option seems to be ignored, volumes still are not being labeled correctly.</td>
+          <td>Ensure SElinux is enabled on a worker node, and ensure your container run time manager is properly configured to be utilized with SElinux.</td>
       </tr>
       <tr>
-          <td style="text-align: left">Installation of the driver on Kubernetes v1.25/v1.26/v1.27 fails with the following error: <br /><code>Error: unable to build kubernetes objects from release manifest: unable to recognize &quot;&quot;: no matches for kind &quot;VolumeSnapshotClass&quot; in version &quot;snapshot.storage.k8s.io/v1&quot;</code></td>
-          <td style="text-align: left">Kubernetes v1.23/v1.24/v1.25 requires v1 version of snapshot CRDs to be created in cluster, see the <a href="../../../deployment/helm/drivers/installation/powerflex/#optional-volume-snapshot-requirements">Volume Snapshot Requirements</a></td>
+          <td>Mount options that interact with SElinux are not working (like defcontext).</td>
+          <td>Check that your container orchestrator is properly configured to work with SElinux.</td>
       </tr>
       <tr>
-          <td style="text-align: left">The <code>kubectl logs -n vxflexos vxflexos-controller-* driver</code> logs show <code>x509: certificate signed by unknown authority</code></td>
-          <td style="text-align: left">A self assigned certificate is used for PowerFlex array. See <a href="../../../deployment/helm/drivers/installation/powerflex/#certificate-validation-for-powerflex-gateway-rest-api-calls">certificate validation for PowerFlex Gateway</a></td>
+          <td>Installation of the driver on Kubernetes v1.25/v1.26/v1.27 fails with the following error: <br /><code>Error: unable to build kubernetes objects from release manifest: unable to recognize &quot;&quot;: no matches for kind &quot;VolumeSnapshotClass&quot; in version &quot;snapshot.storage.k8s.io/v1&quot;</code></td>
+          <td>Kubernetes v1.23/v1.24/v1.25 requires v1 version of snapshot CRDs to be created in cluster, see the <a href="../../../deployment/helm/drivers/installation/powerflex/#optional-volume-snapshot-requirements">Volume Snapshot Requirements</a></td>
       </tr>
       <tr>
-          <td style="text-align: left">When you run the command <code>kubectl apply -f snapclass-v1.yaml</code>, you get the error <code>error: unable to recognize &quot;snapclass-v1.yaml&quot;: no matches for kind &quot;VolumeSnapshotClass&quot; in version &quot;snapshot.storage.k8s.io/v1&quot;</code></td>
-          <td style="text-align: left">Check to make sure that the v1 snapshotter CRDs are installed, and not the v1beta1 CRDs, which are no longer supported.</td>
+          <td>The <code>kubectl logs -n vxflexos vxflexos-controller-* driver</code> logs show <code>x509: certificate signed by unknown authority</code></td>
+          <td>A self assigned certificate is used for PowerFlex array. See <a href="../../../deployment/helm/drivers/installation/powerflex/#certificate-validation-for-powerflex-gateway-rest-api-calls">certificate validation for PowerFlex Gateway</a></td>
       </tr>
       <tr>
-          <td style="text-align: left">The controller pod is stuck and producing errors such as&quot; <code>Failed to watch *v1.VolumeSnapshotContent: failed to list *v1.VolumeSnapshotContent: the server could not find the requested resource (get volumesnapshotcontents.snapshot.storage.k8s.io)</code></td>
-          <td style="text-align: left">Make sure that v1 snapshotter CRDs and v1 snapclass are installed, and not v1beta1, which is no longer supported.</td>
+          <td>When you run the command <code>kubectl apply -f snapclass-v1.yaml</code>, you get the error <code>error: unable to recognize &quot;snapclass-v1.yaml&quot;: no matches for kind &quot;VolumeSnapshotClass&quot; in version &quot;snapshot.storage.k8s.io/v1&quot;</code></td>
+          <td>Check to make sure that the v1 snapshotter CRDs are installed, and not the v1beta1 CRDs, which are no longer supported.</td>
       </tr>
       <tr>
-          <td style="text-align: left">Driver install or upgrade fails because of an incompatible Kubernetes version, even though the version seems to be within the range of compatibility. For example: <code>Error: UPGRADE FAILED: chart requires kubeVersion: &gt;= 1.21.0 &lt;= 1.28.0 which is incompatible with Kubernetes V1.21.11-mirantis-1</code></td>
-          <td style="text-align: left">If you are using an extended Kubernetes version, see the helm Chart at <code>helm/csi-vxflexos/Chart.yaml</code> and use the alternate <code>kubeVersion</code> check that is provided in the comments. Note: this is not meant to be used to enable the use of pre-release alpha and beta versions, which is not supported.</td>
+          <td>The controller pod is stuck and producing errors such as&quot; <code>Failed to watch *v1.VolumeSnapshotContent: failed to list *v1.VolumeSnapshotContent: the server could not find the requested resource (get volumesnapshotcontents.snapshot.storage.k8s.io)</code></td>
+          <td>Make sure that v1 snapshotter CRDs and v1 snapclass are installed, and not v1beta1, which is no longer supported.</td>
       </tr>
       <tr>
-          <td style="text-align: left">Volume metrics are missing</td>
-          <td style="text-align: left">Enable <a href="../../features/powerflex#volume-health-monitoring">Volume Health Monitoring</a></td>
+          <td>Driver install or upgrade fails because of an incompatible Kubernetes version, even though the version seems to be within the range of compatibility. For example: <code>Error: UPGRADE FAILED: chart requires kubeVersion: &gt;= 1.21.0 &lt;= 1.28.0 which is incompatible with Kubernetes V1.21.11-mirantis-1</code></td>
+          <td>If you are using an extended Kubernetes version, see the helm Chart at <code>helm/csi-vxflexos/Chart.yaml</code> and use the alternate <code>kubeVersion</code> check that is provided in the comments. Note: this is not meant to be used to enable the use of pre-release alpha and beta versions, which is not supported.</td>
       </tr>
       <tr>
-          <td style="text-align: left">When a node goes down, the block volumes attached to the node cannot be attached to another node</td>
-          <td style="text-align: left">This is a known issue and has been reported at <a href="https://github.com/kubernetes-csi/external-attacher/issues/215">https://github.com/kubernetes-csi/external-attacher/issues/215</a>. Workaround: <br /> 1. Force delete the pod running on the node that went down <br /> 2. Delete the volumeattachment to the node that went down. <br /> Now the volume can be attached to the new node.</td>
+          <td>Volume metrics are missing</td>
+          <td>Enable <a href="../../features/powerflex#volume-health-monitoring">Volume Health Monitoring</a></td>
       </tr>
       <tr>
-          <td style="text-align: left">CSI-PowerFlex volumes cannot mount; are being recognized as multipath devices</td>
-          <td style="text-align: left">CSI-PowerFlex does not support multipath; to fix: <br/> 1. Remove any multipath mapping involving a powerflex volume with <code>multipath -f &lt;powerflex volume&gt;</code> <br/> 2. Blacklist CSI-PowerFlex volumes in multipath config file</td>
+          <td>When a node goes down, the block volumes attached to the node cannot be attached to another node</td>
+          <td>This is a known issue and has been reported at <a href="https://github.com/kubernetes-csi/external-attacher/issues/215">https://github.com/kubernetes-csi/external-attacher/issues/215</a>. Workaround: <br /> 1. Force delete the pod running on the node that went down <br /> 2. Delete the volumeattachment to the node that went down. <br /> Now the volume can be attached to the new node.</td>
       </tr>
       <tr>
-          <td style="text-align: left">When attempting a driver upgrade, you see: <code>spec.fsGroupPolicy: Invalid value: &quot;xxx&quot;: field is immutable</code></td>
-          <td style="text-align: left">You cannot upgrade between drivers with different fsGroupPolicies. See <a href="../../../deployment/helm/drivers/upgrade/powerflex">upgrade documentation</a> for more details</td>
+          <td>CSI-PowerFlex volumes cannot mount; are being recognized as multipath devices</td>
+          <td>CSI-PowerFlex does not support multipath; to fix: <br/> 1. Remove any multipath mapping involving a powerflex volume with <code>multipath -f &lt;powerflex volume&gt;</code> <br/> 2. Blacklist CSI-PowerFlex volumes in multipath config file</td>
       </tr>
       <tr>
-          <td style="text-align: left">When accessing ROX mode PVC in OpenShift where the worker nodes are non-root user, you see: <code>Permission denied</code> while accesing the PVC mount location from the pod.</td>
-          <td style="text-align: left">Set the <code>securityContext</code> for ROX mode PVC pod as below, as it defines privileges for the pods or containers.<br/><br/>securityContext:<br/>       runAsUser: 0<br/>       runAsGroup: 0</td>
+          <td>When attempting a driver upgrade, you see: <code>spec.fsGroupPolicy: Invalid value: &quot;xxx&quot;: field is immutable</code></td>
+          <td>You cannot upgrade between drivers with different fsGroupPolicies. See <a href="../../../deployment/helm/drivers/upgrade/powerflex">upgrade documentation</a> for more details</td>
       </tr>
       <tr>
-          <td style="text-align: left">After installing version v2.6.0 of the driver using the default <code>powerflexSdc</code> image, sdc:3.6.0.6, the vxflexos-node pods are in an <code>Init:CrashLoopBackOff</code> state. This issue can happen on hosts that require the SDC to be installed manually. Automatic SDC is only supported on Red Hat CoreOS (RHCOS), RHEL 7.9, RHEL 8.4, RHEL 8.6.</td>
-          <td style="text-align: left">The SDC is already installed. Change the <code>images.powerflexSdc</code> value to an empty value in the <a href="https://github.com/dell/csi-powerflex/blob/72b27acee7553006cc09df97f85405f58478d2e4/helm/csi-vxflexos/values.yaml#L13">values</a> and re-install.</td>
+          <td>When accessing ROX mode PVC in OpenShift where the worker nodes are non-root user, you see: <code>Permission denied</code> while accesing the PVC mount location from the pod.</td>
+          <td>Set the <code>securityContext</code> for ROX mode PVC pod as below, as it defines privileges for the pods or containers.<br/><br/>securityContext:<br/>       runAsUser: 0<br/>       runAsGroup: 0</td>
       </tr>
       <tr>
-          <td style="text-align: left">After installing version v2.8.0 of the driver using the default <code>powerflexSdc</code> image, sdc:3.6.1, the vxflexos-node pods are in an <code>Init:CrashLoopBackOff</code> state. This issue can happen on hosts that require the SDC to be installed manually. Automatic SDC is only supported on Red Hat CoreOS (RHCOS), RHEL 7.9, RHEL 8.4, RHEL 8.6.</td>
-          <td style="text-align: left">The SDC is already installed. Change the <code>images.powerflexSdc</code> value to an empty value in the <a href="https://github.com/dell/csi-powerflex/blob/72b27acee7553006cc09df97f85405f58478d2e4/helm/csi-vxflexos/values.yaml#L13">values</a> and re-install.</td>
+          <td>After installing version v2.6.0 of the driver using the default <code>powerflexSdc</code> image, sdc:3.6.0.6, the vxflexos-node pods are in an <code>Init:CrashLoopBackOff</code> state. This issue can happen on hosts that require the SDC to be installed manually. Automatic SDC is only supported on Red Hat CoreOS (RHCOS), RHEL 7.9, RHEL 8.4, RHEL 8.6.</td>
+          <td>The SDC is already installed. Change the <code>images.powerflexSdc</code> value to an empty value in the <a href="https://github.com/dell/csi-powerflex/blob/72b27acee7553006cc09df97f85405f58478d2e4/helm/csi-vxflexos/values.yaml#L13">values</a> and re-install.</td>
       </tr>
       <tr>
-          <td style="text-align: left">In version v2.6.0, the driver is crashing because the External Health Monitor sidecar crashes when a persistent volume is not found.</td>
-          <td style="text-align: left">This is a known issue reported at <a href="https://github.com/kubernetes-csi/external-health-monitor/issues/100">kubernetes-csi/external-health-monitor#100</a>.</td>
+          <td>After installing version v2.8.0 of the driver using the default <code>powerflexSdc</code> image, sdc:3.6.1, the vxflexos-node pods are in an <code>Init:CrashLoopBackOff</code> state. This issue can happen on hosts that require the SDC to be installed manually. Automatic SDC is only supported on Red Hat CoreOS (RHCOS), RHEL 7.9, RHEL 8.4, RHEL 8.6.</td>
+          <td>The SDC is already installed. Change the <code>images.powerflexSdc</code> value to an empty value in the <a href="https://github.com/dell/csi-powerflex/blob/72b27acee7553006cc09df97f85405f58478d2e4/helm/csi-vxflexos/values.yaml#L13">values</a> and re-install.</td>
       </tr>
       <tr>
-          <td style="text-align: left">In version v2.6.0, when a cluster node goes down, the block volumes attached to the node cannot be attached to another node.</td>
-          <td style="text-align: left">This is a known issue reported at <a href="https://github.com/kubernetes-csi/external-attacher/issues/215">kubernetes-csi/external-attacher#215</a>. Workaround: <br/> 1. Force delete the pod running on the node that went down. <br/> 2. Delete the pod&rsquo;s persistent volume attachment on the node that went down. Now the volume can be attached to the new node.</td>
+          <td>In version v2.6.0, the driver is crashing because the External Health Monitor sidecar crashes when a persistent volume is not found.</td>
+          <td>This is a known issue reported at <a href="https://github.com/kubernetes-csi/external-health-monitor/issues/100">kubernetes-csi/external-health-monitor#100</a>.</td>
       </tr>
       <tr>
-          <td style="text-align: left">A CSI ephemeral pod may not get created in OpenShift 4.13 and fail with the error <code>&quot;error when creating pod: the pod uses an inline volume provided by CSIDriver csi-vxflexos.dellemc.com, and the namespace has a pod security enforcement level that is lower than privileged.&quot;</code></td>
-          <td style="text-align: left">This issue occurs because OpenShift 4.13 introduced the CSI Volume Admission plugin to restrict the use of a CSI driver capable of provisioning CSI ephemeral volumes during pod admission. Therefore, an additional label <code>security.openshift.io/csi-ephemeral-volume-profile</code> in <a href="https://github.com/dell/helm-charts/blob/csi-vxflexos-2.8.0/charts/csi-vxflexos/templates/csidriver.yaml">csidriver.yaml</a> file with the required security profile value should be provided. Follow <a href="https://docs.openshift.com/container-platform/4.13/storage/container_storage_interface/ephemeral-storage-csi-inline.html">OpenShift 4.13 documentation for CSI Ephemeral Volumes</a> for more information.</td>
+          <td>In version v2.6.0, when a cluster node goes down, the block volumes attached to the node cannot be attached to another node.</td>
+          <td>This is a known issue reported at <a href="https://github.com/kubernetes-csi/external-attacher/issues/215">kubernetes-csi/external-attacher#215</a>. Workaround: <br/> 1. Force delete the pod running on the node that went down. <br/> 2. Delete the pod&rsquo;s persistent volume attachment on the node that went down. Now the volume can be attached to the new node.</td>
       </tr>
       <tr>
-          <td style="text-align: left">Standby controller pod is in crashloopbackoff state</td>
-          <td style="text-align: left">Scale down the replica count of the controller pod&rsquo;s deployment to 1 using <code>kubectl scale deployment &lt;deployment_name&gt; --replicas=1 -n &lt;driver_namespace&gt;</code></td>
+          <td>A CSI ephemeral pod may not get created in OpenShift 4.13 and fail with the error <code>&quot;error when creating pod: the pod uses an inline volume provided by CSIDriver csi-vxflexos.dellemc.com, and the namespace has a pod security enforcement level that is lower than privileged.&quot;</code></td>
+          <td>This issue occurs because OpenShift 4.13 introduced the CSI Volume Admission plugin to restrict the use of a CSI driver capable of provisioning CSI ephemeral volumes during pod admission. Therefore, an additional label <code>security.openshift.io/csi-ephemeral-volume-profile</code> in <a href="https://github.com/dell/helm-charts/blob/csi-vxflexos-2.8.0/charts/csi-vxflexos/templates/csidriver.yaml">csidriver.yaml</a> file with the required security profile value should be provided. Follow <a href="https://docs.openshift.com/container-platform/4.13/storage/container_storage_interface/ephemeral-storage-csi-inline.html">OpenShift 4.13 documentation for CSI Ephemeral Volumes</a> for more information.</td>
+      </tr>
+      <tr>
+          <td>Standby controller pod is in crashloopbackoff state</td>
+          <td>Scale down the replica count of the controller pod&rsquo;s deployment to 1 using <code>kubectl scale deployment &lt;deployment_name&gt; --replicas=1 -n &lt;driver_namespace&gt;</code></td>
+      </tr>
+      <tr>
+          <td>CSM object <code>vxflexos</code> is in falied state and CSI-Powerflex driver is not in running state</td>
+          <td>Verify the secret name: <code>kubectl get secret -n &lt;namespace_name&gt;</code> it should be in <code>&lt;CR-name&gt;-config</code> format. 1. Retrieve the existing secret: <code>kubectl get secret old-secret-name -n &lt;namespace_name&gt; -o yaml &gt; secret.yaml</code> <br> 2. Edit the secret.yaml file: Change metadata.name to <CR-name>-Config <br> 3. Apply the new secret: <code>kubectl apply -f secret.yaml</code> <br> 4. Delete the old secret: kubectl delete secret old-secret-name</td>
       </tr>
   </tbody>
 </table>
@@ -896,7 +921,7 @@
 
       </div><div class="td-footer__center col-12 col-sm-4 py-2 order-sm-2">
         <span class="td-footer__copyright">&copy;
-    2024
+    2025
     <span class="td-footer__authors">The Dell Technologies</span></span><span class="td-footer__all_rights_reserved">All Rights Reserved</span><span class="ms-2"><a href="https://www.dell.com/learn/us/en/uscorp1/policies-privacy" target="_blank" rel="noopener">Privacy Policy</a></span>
       </div>
     </div>

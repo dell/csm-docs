@@ -17,12 +17,12 @@
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="docs">
-    <meta property="article:modified_time" content="2024-10-28T15:46:04-04:00">
+    <meta property="article:modified_time" content="2024-12-05T12:02:53+05:30">
 
   <meta itemprop="name" content="PowerFlex">
   <meta itemprop="description" content="Installing the CSI Driver for Dell PowerFlex via Helm">
-  <meta itemprop="dateModified" content="2024-10-28T15:46:04-04:00">
-  <meta itemprop="wordCount" content="3447">
+  <meta itemprop="dateModified" content="2024-12-05T12:02:53+05:30">
+  <meta itemprop="wordCount" content="3445">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="PowerFlex">
   <meta name="twitter:description" content="Installing the CSI Driver for Dell PowerFlex via Helm">
@@ -56,10 +56,10 @@
         <div class="dropdown">
   <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Releases</a>
   <ul class="dropdown-menu">
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.12.0)</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.11.1</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.10.2</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">v1.9.4</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.13.0)</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.12.0</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.11.1</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">v1.10.2</a></li>
     </ul>
 </div></li>
       <li class="td-light-dark-menu nav-item dropdown">
@@ -125,7 +125,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.5b43d3acf6640adab15d0e301eb69f8e.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.30cbd121c9a04dbae82fa0989eaa7269.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -149,7 +149,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.5b43d3acf6640adab15d0e301eb69f8e.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.30cbd121c9a04dbae82fa0989eaa7269.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -769,7 +769,7 @@ Enable Zero Padding on PowerFlex <a class="header-link"  href="#enable-zero-padd
                 <path d="M0 0h24v24H0z" fill="none"/>
                 <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
             </svg>
-        </a></h3><p>Verify that zero padding is enabled on the PowerFlex storage pools that will be used. Use PowerFlex GUI or the PowerFlex CLI to check this setting. For more information to configure this setting, see <a href="https://www.dell.com/support/manuals/en-us/scaleio/pfx_powerflex_config_customize_3.6.x/enable-or-disable-zero-padding-policy?guid=guid-d32bdff7-3014-4894-8e1e-2a31a86d343a&lang=en-us">Dell PowerFlex documentation</a>.</p>
+        </a></h3><p>Verify that zero padding is enabled on the PowerFlex storage pools that will be used. Use PowerFlex GUI or the PowerFlex CLI to check this setting. For more information to configure this setting, see <a href="https://www.dell.com/support/manuals/en-us/scaleio/pfx_powerflex_config_customize_3.6.x/enable-or-disable-zero-padding-policy?guid=guid-d32bdff7-3014-4894-8e1e-2a31a86d343a&amp;lang=en-us">Dell PowerFlex documentation</a>.</p>
 <h3 id="install-powerflex-storage-data-client">
 Install PowerFlex Storage Data Client <a class="header-link"  href="#install-powerflex-storage-data-client" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
             <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
@@ -799,7 +799,7 @@ Manual SDC Deployment <a class="header-link"  href="#manual-sdc-deployment" styl
 <li>Export the shell variable <em>MDM_IP</em> in a comma-separated list using <code>export MDM_IP=xx.xxx.xx.xx,xx.xxx.xx.xx</code>, where xxx represents the actual IP address in your environment. This list contains the IP addresses of the MDMs.</li>
 <li>Install the SDC per the <em>Dell PowerFlex Deployment Guide</em>:
 <ul>
-<li>For Red Hat Enterprise Linux and CentOS, run <code>rpm -iv ./EMC-ScaleIO-sdc-*.x86_64.rpm</code>, where * is the SDC name corresponding to the PowerFlex installation version.</li>
+<li>For Red Hat Enterprise Linux, run <code>rpm -iv ./EMC-ScaleIO-sdc-*.x86_64.rpm</code>, where * is the SDC name corresponding to the PowerFlex installation version.</li>
 </ul>
 </li>
 <li>To add more MDM_IP for multi-array support, run <code>/opt/emc/scaleio/sdc/bin/drv_cfg --add_mdm --ip 10.xx.xx.xx.xx,10.xx.xx.xx</code></li>
@@ -832,7 +832,7 @@ Install the Driver <a class="header-link"  href="#install-the-driver" style=" di
         </a></h2><p><strong>Steps</strong></p>
 <ol>
 <li>
-<p>Run <code>git clone -b v2.12.0 https://github.com/dell/csi-powerflex.git</code> to clone the git repository.</p>
+<p>Run <code>git clone -b v2.13.0 https://github.com/dell/csi-powerflex.git</code> to clone the git repository.</p>
 </li>
 <li>
 <p>A namespace for the driver is expected prior to running the command below. If one is not created already, you can run <code>kubectl create namespace vxflexos</code> to create a new one.
@@ -846,66 +846,66 @@ Note that the namespace can be any user-defined name that follows the convention
 <table>
   <thead>
       <tr>
-          <th style="text-align: left">Parameter</th>
-          <th style="text-align: left">Description</th>
-          <th style="text-align: left">Required</th>
-          <th style="text-align: left">Default</th>
+          <th>Parameter</th>
+          <th>Description</th>
+          <th>Required</th>
+          <th>Default</th>
       </tr>
   </thead>
   <tbody>
       <tr>
-          <td style="text-align: left">username</td>
-          <td style="text-align: left">Username for accessing PowerFlex system. If authorization is enabled, username will be ignored.</td>
-          <td style="text-align: left">true</td>
-          <td style="text-align: left">-</td>
+          <td>username</td>
+          <td>Username for accessing PowerFlex system. If authorization is enabled, username will be ignored.</td>
+          <td>true</td>
+          <td>-</td>
       </tr>
       <tr>
-          <td style="text-align: left">password</td>
-          <td style="text-align: left">Password for accessing PowerFlex system. If authorization is enabled, password will be ignored.</td>
-          <td style="text-align: left">true</td>
-          <td style="text-align: left">-</td>
+          <td>password</td>
+          <td>Password for accessing PowerFlex system. If authorization is enabled, password will be ignored.</td>
+          <td>true</td>
+          <td>-</td>
       </tr>
       <tr>
-          <td style="text-align: left">systemID</td>
-          <td style="text-align: left">PowerFlex system name or ID.</td>
-          <td style="text-align: left">true</td>
-          <td style="text-align: left">-</td>
+          <td>systemID</td>
+          <td>PowerFlex system name or ID.</td>
+          <td>true</td>
+          <td>-</td>
       </tr>
       <tr>
-          <td style="text-align: left">allSystemNames</td>
-          <td style="text-align: left">List of previous names of powerflex array if used for PV create</td>
-          <td style="text-align: left">false</td>
-          <td style="text-align: left">-</td>
+          <td>allSystemNames</td>
+          <td>List of previous names of powerflex array if used for PV create</td>
+          <td>false</td>
+          <td>-</td>
       </tr>
       <tr>
-          <td style="text-align: left">endpoint</td>
-          <td style="text-align: left">REST API gateway HTTPS endpoint/PowerFlex Manager public IP for PowerFlex system. If authorization is enabled, endpoint should be the HTTPS localhost endpoint that the authorization sidecar will listen on</td>
-          <td style="text-align: left">true</td>
-          <td style="text-align: left">-</td>
+          <td>endpoint</td>
+          <td>REST API gateway HTTPS endpoint/PowerFlex Manager public IP for PowerFlex system. If authorization is enabled, endpoint should be the HTTPS localhost endpoint that the authorization sidecar will listen on</td>
+          <td>true</td>
+          <td>-</td>
       </tr>
       <tr>
-          <td style="text-align: left">skipCertificateValidation</td>
-          <td style="text-align: left">Determines if the driver is going to validate certs while connecting to PowerFlex REST API interface.</td>
-          <td style="text-align: left">true</td>
-          <td style="text-align: left">true</td>
+          <td>skipCertificateValidation</td>
+          <td>Determines if the driver is going to validate certs while connecting to PowerFlex REST API interface.</td>
+          <td>true</td>
+          <td>true</td>
       </tr>
       <tr>
-          <td style="text-align: left">isDefault</td>
-          <td style="text-align: left">An array having isDefault=true is for backward compatibility. This parameter should occur once in the list.</td>
-          <td style="text-align: left">false</td>
-          <td style="text-align: left">false</td>
+          <td>isDefault</td>
+          <td>An array having isDefault=true is for backward compatibility. This parameter should occur once in the list.</td>
+          <td>false</td>
+          <td>false</td>
       </tr>
       <tr>
-          <td style="text-align: left">mdm</td>
-          <td style="text-align: left">mdm defines the MDM(s) that SDC should register with on start. This should be a list of MDM IP addresses or hostnames separated by comma.</td>
-          <td style="text-align: left">true</td>
-          <td style="text-align: left">-</td>
+          <td>mdm</td>
+          <td>mdm defines the MDM(s) that SDC should register with on start. This should be a list of MDM IP addresses or hostnames separated by comma.</td>
+          <td>true</td>
+          <td>-</td>
       </tr>
       <tr>
-          <td style="text-align: left">nasName</td>
-          <td style="text-align: left">nasName defines what NAS should be used for NFS volumes. NFS volumes are supported on arrays version &gt;=4.0.x</td>
-          <td style="text-align: left">false</td>
-          <td style="text-align: left">&quot;&quot;</td>
+          <td>nasName</td>
+          <td>nasName defines what NAS should be used for NFS volumes. NFS volumes are supported on arrays version &gt;=4.0.x</td>
+          <td>true</td>
+          <td>&quot;&quot;</td>
       </tr>
   </tbody>
 </table>
@@ -959,7 +959,7 @@ kubeVersion: &ldquo;&gt;= 1.21.0-0 &lt; 1.29.0-0&rdquo;</li>
 </li>
 <li>
 <p>Download the default values.yaml file</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#204a87">cd</span> dell-csi-helm-installer <span style="color:#ce5c00;font-weight:bold">&amp;&amp;</span> wget -O myvalues.yaml https://github.com/dell/helm-charts/raw/csi-vxflexos-2.12.0/charts/csi-vxflexos/values.yaml
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#204a87">cd</span> dell-csi-helm-installer <span style="color:#ce5c00;font-weight:bold">&amp;&amp;</span> wget -O myvalues.yaml https://github.com/dell/helm-charts/raw/csi-vxflexos-2.13.0/charts/csi-vxflexos/values.yaml
 </span></span></code></pre></div></li>
 <li>
 <p>If you are using custom images, check the fields under <code>images</code> in <code>my-vxflexos-settings.yaml</code> to make sure that they are pointing to the correct image repository.</p>
@@ -971,324 +971,324 @@ kubeVersion: &ldquo;&gt;= 1.21.0-0 &lt; 1.29.0-0&rdquo;</li>
 <table>
   <thead>
       <tr>
-          <th style="text-align: left">Parameter</th>
-          <th style="text-align: left">Description</th>
-          <th style="text-align: left">Required</th>
-          <th style="text-align: left">Default</th>
+          <th>Parameter</th>
+          <th>Description</th>
+          <th>Required</th>
+          <th>Default</th>
       </tr>
   </thead>
   <tbody>
       <tr>
-          <td style="text-align: left">version</td>
-          <td style="text-align: left">Set to verify the values file version matches driver version and used to pull the image as part of the image name.</td>
-          <td style="text-align: left">Yes</td>
-          <td style="text-align: left">2.12.0</td>
+          <td>version</td>
+          <td>Set to verify the values file version matches driver version and used to pull the image as part of the image name.</td>
+          <td>Yes</td>
+          <td>2.13.0</td>
       </tr>
       <tr>
-          <td style="text-align: left">images</td>
-          <td style="text-align: left">List all the images used by the CSI driver and CSM. If you use a private repository, change the registries accordingly.</td>
-          <td style="text-align: left">Yes</td>
-          <td style="text-align: left">&quot;&quot;</td>
+          <td>images</td>
+          <td>List all the images used by the CSI driver and CSM. If you use a private repository, change the registries accordingly.</td>
+          <td>Yes</td>
+          <td>&quot;&quot;</td>
       </tr>
       <tr>
-          <td style="text-align: left">images.powerflexSdc</td>
-          <td style="text-align: left">Set to give the location of the SDC image used if automatic SDC deployment is being utilized.</td>
-          <td style="text-align: left">Yes</td>
-          <td style="text-align: left">dellemc/sdc:4.5.2.1</td>
+          <td>images.powerflexSdc</td>
+          <td>Set to give the location of the SDC image used if automatic SDC deployment is being utilized.</td>
+          <td>Yes</td>
+          <td>quay.io/dell/storage/powerflex/sdc:4.5.2.1</td>
       </tr>
       <tr>
-          <td style="text-align: left">certSecretCount</td>
-          <td style="text-align: left">Represents the number of certificate secrets, which the user is going to create for SSL authentication.</td>
-          <td style="text-align: left">No</td>
-          <td style="text-align: left">0</td>
+          <td>certSecretCount</td>
+          <td>Represents the number of certificate secrets, which the user is going to create for SSL authentication.</td>
+          <td>No</td>
+          <td>0</td>
       </tr>
       <tr>
-          <td style="text-align: left">logLevel</td>
-          <td style="text-align: left">CSI driver log level. Allowed values: &ldquo;error&rdquo;, &ldquo;warn&rdquo;/&ldquo;warning&rdquo;, &ldquo;info&rdquo;, &ldquo;debug&rdquo;.</td>
-          <td style="text-align: left">Yes</td>
-          <td style="text-align: left">&ldquo;debug&rdquo;</td>
+          <td>logLevel</td>
+          <td>CSI driver log level. Allowed values: &ldquo;error&rdquo;, &ldquo;warn&rdquo;/&ldquo;warning&rdquo;, &ldquo;info&rdquo;, &ldquo;debug&rdquo;.</td>
+          <td>Yes</td>
+          <td>&ldquo;debug&rdquo;</td>
       </tr>
       <tr>
-          <td style="text-align: left">logFormat</td>
-          <td style="text-align: left">CSI driver log format. Allowed values: &ldquo;TEXT&rdquo; or &ldquo;JSON&rdquo;.</td>
-          <td style="text-align: left">Yes</td>
-          <td style="text-align: left">&ldquo;TEXT&rdquo;</td>
+          <td>logFormat</td>
+          <td>CSI driver log format. Allowed values: &ldquo;TEXT&rdquo; or &ldquo;JSON&rdquo;.</td>
+          <td>Yes</td>
+          <td>&ldquo;TEXT&rdquo;</td>
       </tr>
       <tr>
-          <td style="text-align: left">kubeletConfigDir</td>
-          <td style="text-align: left">kubelet config directory path. Ensure that the secret.yaml file is present at this path.</td>
-          <td style="text-align: left">Yes</td>
-          <td style="text-align: left">/var/lib/kubelet</td>
+          <td>kubeletConfigDir</td>
+          <td>kubelet config directory path. Ensure that the secret.yaml file is present at this path.</td>
+          <td>Yes</td>
+          <td>/var/lib/kubelet</td>
       </tr>
       <tr>
-          <td style="text-align: left">defaultFsType</td>
-          <td style="text-align: left">Used to set the default FS type which will be used for mount volumes if FsType is not specified in the storage class. Allowed values: ext4, xfs.</td>
-          <td style="text-align: left">Yes</td>
-          <td style="text-align: left">ext4</td>
+          <td>defaultFsType</td>
+          <td>Used to set the default FS type which will be used for mount volumes if FsType is not specified in the storage class. Allowed values: ext4, xfs.</td>
+          <td>Yes</td>
+          <td>ext4</td>
       </tr>
       <tr>
-          <td style="text-align: left">fsGroupPolicy</td>
-          <td style="text-align: left">Defines which FS Group policy mode to be used. Supported modes are<code>None, File, and ReadWriteOnceWithFSType.</code></td>
-          <td style="text-align: left">No</td>
-          <td style="text-align: left">&ldquo;ReadWriteOnceWithFSType&rdquo;</td>
+          <td>fsGroupPolicy</td>
+          <td>Defines which FS Group policy mode to be used. Supported modes are<code>None, File, and ReadWriteOnceWithFSType.</code></td>
+          <td>No</td>
+          <td>&ldquo;ReadWriteOnceWithFSType&rdquo;</td>
       </tr>
       <tr>
-          <td style="text-align: left">imagePullPolicy</td>
-          <td style="text-align: left">Policy to determine if the image should be pulled prior to starting the container. Allowed values: Always, IfNotPresent, Never.</td>
-          <td style="text-align: left">Yes</td>
-          <td style="text-align: left">IfNotPresent</td>
+          <td>imagePullPolicy</td>
+          <td>Policy to determine if the image should be pulled prior to starting the container. Allowed values: Always, IfNotPresent, Never.</td>
+          <td>Yes</td>
+          <td>IfNotPresent</td>
       </tr>
       <tr>
-          <td style="text-align: left">enablesnapshotcgdelete</td>
-          <td style="text-align: left">A boolean that, when enabled, will delete all snapshots in a consistency group everytime a snap in the group is deleted.</td>
-          <td style="text-align: left">Yes</td>
-          <td style="text-align: left">false</td>
+          <td>enablesnapshotcgdelete</td>
+          <td>A boolean that, when enabled, will delete all snapshots in a consistency group everytime a snap in the group is deleted.</td>
+          <td>Yes</td>
+          <td>false</td>
       </tr>
       <tr>
-          <td style="text-align: left">enablelistvolumesnapshot</td>
-          <td style="text-align: left">A boolean that, when enabled, will allow list volume operation to include snapshots (since creating a volume from a snap actually results in a new snap). It is recommend this be false unless instructed otherwise.</td>
-          <td style="text-align: left">Yes</td>
-          <td style="text-align: left">false</td>
+          <td>enablelistvolumesnapshot</td>
+          <td>A boolean that, when enabled, will allow list volume operation to include snapshots (since creating a volume from a snap actually results in a new snap). It is recommend this be false unless instructed otherwise.</td>
+          <td>Yes</td>
+          <td>false</td>
       </tr>
       <tr>
-          <td style="text-align: left">allowRWOMultiPodAccess</td>
-          <td style="text-align: left">Setting allowRWOMultiPodAccess to &ldquo;true&rdquo; will allow multiple pods on the same node to access the same RWO volume. This behavior conflicts with the CSI specification version 1.3. NodePublishVolume description that requires an error to be returned in this case. However, some other CSI drivers support this behavior and some customers desire this behavior. Customers use this option at their own risk.</td>
-          <td style="text-align: left">Yes</td>
-          <td style="text-align: left">false</td>
+          <td>allowRWOMultiPodAccess</td>
+          <td>Setting allowRWOMultiPodAccess to &ldquo;true&rdquo; will allow multiple pods on the same node to access the same RWO volume. This behavior conflicts with the CSI specification version 1.3. NodePublishVolume description that requires an error to be returned in this case. However, some other CSI drivers support this behavior and some customers desire this behavior. Customers use this option at their own risk.</td>
+          <td>Yes</td>
+          <td>false</td>
       </tr>
       <tr>
-          <td style="text-align: left">enableQuota</td>
-          <td style="text-align: left">A boolean that, when enabled, will set quota limit for a newly provisioned NFS volume.</td>
-          <td style="text-align: left">No</td>
-          <td style="text-align: left">false</td>
+          <td>enableQuota</td>
+          <td>A boolean that, when enabled, will set quota limit for a newly provisioned NFS volume.</td>
+          <td>No</td>
+          <td>false</td>
       </tr>
       <tr>
-          <td style="text-align: left">externalAccess</td>
-          <td style="text-align: left">Defines additional entries for hostAccess of NFS volumes, single IP address and subnet are valid entries</td>
-          <td style="text-align: left">No</td>
-          <td style="text-align: left">&quot; &quot;</td>
+          <td>externalAccess</td>
+          <td>Defines additional entries for hostAccess of NFS volumes, single IP address and subnet are valid entries</td>
+          <td>No</td>
+          <td>&quot; &quot;</td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>controller</strong></td>
-          <td style="text-align: left">This section allows the configuration of controller-specific parameters. To maximize the number of available nodes for controller pods, see this section. For more details on the new controller pod configurations, see the <a href="../../../../../csidriver/features/powerflex#controller-ha">Features section</a> for Powerflex specifics.</td>
-          <td style="text-align: left">-</td>
-          <td style="text-align: left">-</td>
+          <td><strong>controller</strong></td>
+          <td>This section allows the configuration of controller-specific parameters. To maximize the number of available nodes for controller pods, see this section. For more details on the new controller pod configurations, see the <a href="../../../../../csidriver/features/powerflex#controller-ha">Features section</a> for Powerflex specifics.</td>
+          <td>-</td>
+          <td>-</td>
       </tr>
       <tr>
-          <td style="text-align: left">volumeNamePrefix</td>
-          <td style="text-align: left">Set so that volumes created by the driver have a default prefix. If one PowerFlex/VxFlex OS system is servicing several different Kubernetes installations or users, these prefixes help you distinguish them.</td>
-          <td style="text-align: left">Yes</td>
-          <td style="text-align: left">&ldquo;k8s&rdquo;</td>
+          <td>volumeNamePrefix</td>
+          <td>Set so that volumes created by the driver have a default prefix. If one PowerFlex/VxFlex OS system is servicing several different Kubernetes installations or users, these prefixes help you distinguish them.</td>
+          <td>Yes</td>
+          <td>&ldquo;k8s&rdquo;</td>
       </tr>
       <tr>
-          <td style="text-align: left">controllerCount</td>
-          <td style="text-align: left">Set to deploy multiple controller instances. If the controller count is greater than the number of available nodes, excess pods remain in a pending state. It should be greater than 0. You can increase the number of available nodes by configuring the &ldquo;controller&rdquo; section in your values.yaml. For more details on the new controller pod configurations, see the <a href="../../../../../csidriver/features/powerflex#controller-ha">Features section</a> for Powerflex specifics.</td>
-          <td style="text-align: left">Yes</td>
-          <td style="text-align: left">2</td>
+          <td>controllerCount</td>
+          <td>Set to deploy multiple controller instances. If the controller count is greater than the number of available nodes, excess pods remain in a pending state. It should be greater than 0. You can increase the number of available nodes by configuring the &ldquo;controller&rdquo; section in your values.yaml. For more details on the new controller pod configurations, see the <a href="../../../../../csidriver/features/powerflex#controller-ha">Features section</a> for Powerflex specifics.</td>
+          <td>Yes</td>
+          <td>2</td>
       </tr>
       <tr>
-          <td style="text-align: left">snapshot.enabled</td>
-          <td style="text-align: left">A boolean that enable/disable volume snapshot feature.</td>
-          <td style="text-align: left">No</td>
-          <td style="text-align: left">true</td>
+          <td>snapshot.enabled</td>
+          <td>A boolean that enable/disable volume snapshot feature.</td>
+          <td>No</td>
+          <td>true</td>
       </tr>
       <tr>
-          <td style="text-align: left">resizer.enabled</td>
-          <td style="text-align: left">A boolean that enable/disable volume expansion feature.</td>
-          <td style="text-align: left">No</td>
-          <td style="text-align: left">true</td>
+          <td>resizer.enabled</td>
+          <td>A boolean that enable/disable volume expansion feature.</td>
+          <td>No</td>
+          <td>true</td>
       </tr>
       <tr>
-          <td style="text-align: left">nodeSelector</td>
-          <td style="text-align: left">Defines what nodes would be selected for pods of controller deployment. Leave as blank to use all nodes. Uncomment this section to deploy on master nodes exclusively.</td>
-          <td style="text-align: left">Yes</td>
-          <td style="text-align: left">&quot; &quot;</td>
+          <td>nodeSelector</td>
+          <td>Defines what nodes would be selected for pods of controller deployment. Leave as blank to use all nodes. Uncomment this section to deploy on master nodes exclusively.</td>
+          <td>Yes</td>
+          <td>&quot; &quot;</td>
       </tr>
       <tr>
-          <td style="text-align: left">tolerations</td>
-          <td style="text-align: left">Defines tolerations that would be applied to controller deployment. Leave as blank to install the controller on worker nodes only. If deploying on master nodes is desired, uncomment out this section.</td>
-          <td style="text-align: left">Yes</td>
-          <td style="text-align: left">&quot; &quot;</td>
+          <td>tolerations</td>
+          <td>Defines tolerations that would be applied to controller deployment. Leave as blank to install the controller on worker nodes only. If deploying on master nodes is desired, uncomment out this section.</td>
+          <td>Yes</td>
+          <td>&quot; &quot;</td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>healthMonitor</strong></td>
-          <td style="text-align: left">This section configures the optional deployment of the external health monitor sidecar, for controller side volume health monitoring.</td>
-          <td style="text-align: left">-</td>
-          <td style="text-align: left">-</td>
+          <td><strong>healthMonitor</strong></td>
+          <td>This section configures the optional deployment of the external health monitor sidecar, for controller side volume health monitoring.</td>
+          <td>-</td>
+          <td>-</td>
       </tr>
       <tr>
-          <td style="text-align: left">enabled</td>
-          <td style="text-align: left">Enable/Disable deployment of external health monitor sidecar.</td>
-          <td style="text-align: left">No</td>
-          <td style="text-align: left">false</td>
+          <td>enabled</td>
+          <td>Enable/Disable deployment of external health monitor sidecar.</td>
+          <td>No</td>
+          <td>false</td>
       </tr>
       <tr>
-          <td style="text-align: left">interval</td>
-          <td style="text-align: left">Interval of monitoring volume health condition. Allowed values: Number followed by unit (s,m,h)</td>
-          <td style="text-align: left">No</td>
-          <td style="text-align: left">60s</td>
+          <td>interval</td>
+          <td>Interval of monitoring volume health condition. Allowed values: Number followed by unit (s,m,h)</td>
+          <td>No</td>
+          <td>60s</td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>node</strong></td>
-          <td style="text-align: left">This section allows the configuration of node-specific parameters.</td>
-          <td style="text-align: left">-</td>
-          <td style="text-align: left">-</td>
+          <td><strong>node</strong></td>
+          <td>This section allows the configuration of node-specific parameters.</td>
+          <td>-</td>
+          <td>-</td>
       </tr>
       <tr>
-          <td style="text-align: left">healthMonitor.enabled</td>
-          <td style="text-align: left">Enable/Disable health monitor of CSI volumes- volume usage, volume condition</td>
-          <td style="text-align: left">No</td>
-          <td style="text-align: left">false</td>
+          <td>healthMonitor.enabled</td>
+          <td>Enable/Disable health monitor of CSI volumes- volume usage, volume condition</td>
+          <td>No</td>
+          <td>false</td>
       </tr>
       <tr>
-          <td style="text-align: left">nodeSelector</td>
-          <td style="text-align: left">Defines what nodes would be selected for pods of node daemonset. Leave as blank to use all nodes.</td>
-          <td style="text-align: left">Yes</td>
-          <td style="text-align: left">&quot; &quot;</td>
+          <td>nodeSelector</td>
+          <td>Defines what nodes would be selected for pods of node daemonset. Leave as blank to use all nodes.</td>
+          <td>Yes</td>
+          <td>&quot; &quot;</td>
       </tr>
       <tr>
-          <td style="text-align: left">tolerations</td>
-          <td style="text-align: left">Defines tolerations that would be applied to node daemonset. Leave as blank to install node driver only on worker nodes.</td>
-          <td style="text-align: left">Yes</td>
-          <td style="text-align: left">&quot; &quot;</td>
+          <td>tolerations</td>
+          <td>Defines tolerations that would be applied to node daemonset. Leave as blank to install node driver only on worker nodes.</td>
+          <td>Yes</td>
+          <td>&quot; &quot;</td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>sdc</strong></td>
-          <td style="text-align: left">This section allows the configuration of the SDC installation.</td>
-          <td style="text-align: left">-</td>
-          <td style="text-align: left">-</td>
+          <td><strong>sdc</strong></td>
+          <td>This section allows the configuration of the SDC installation.</td>
+          <td>-</td>
+          <td>-</td>
       </tr>
       <tr>
-          <td style="text-align: left">enabled</td>
-          <td style="text-align: left">A boolean that enables/disables installation of the SDC.</td>
-          <td style="text-align: left">No</td>
-          <td style="text-align: left">true</td>
+          <td>enabled</td>
+          <td>A boolean that enables/disables installation of the SDC.</td>
+          <td>No</td>
+          <td>true</td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>renameSDC</strong></td>
-          <td style="text-align: left">This section allows the rename operation for SDC.</td>
-          <td style="text-align: left">-</td>
-          <td style="text-align: left">-</td>
+          <td><strong>renameSDC</strong></td>
+          <td>This section allows the rename operation for SDC.</td>
+          <td>-</td>
+          <td>-</td>
       </tr>
       <tr>
-          <td style="text-align: left">enabled</td>
-          <td style="text-align: left">A boolean that enable/disable rename SDC feature.</td>
-          <td style="text-align: left">No</td>
-          <td style="text-align: left">false</td>
+          <td>enabled</td>
+          <td>A boolean that enable/disable rename SDC feature.</td>
+          <td>No</td>
+          <td>false</td>
       </tr>
       <tr>
-          <td style="text-align: left">prefix</td>
-          <td style="text-align: left">Defines a string for the prefix of the SDC.</td>
-          <td style="text-align: left">No</td>
-          <td style="text-align: left">&quot; &quot;</td>
+          <td>prefix</td>
+          <td>Defines a string for the prefix of the SDC.</td>
+          <td>No</td>
+          <td>&quot; &quot;</td>
       </tr>
       <tr>
-          <td style="text-align: left">approveSDC.enabled</td>
-          <td style="text-align: left">A boolean that enable/disable SDC approval feature.</td>
-          <td style="text-align: left">No</td>
-          <td style="text-align: left">false</td>
+          <td>approveSDC.enabled</td>
+          <td>A boolean that enable/disable SDC approval feature.</td>
+          <td>No</td>
+          <td>false</td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>storageCapacity</strong></td>
-          <td style="text-align: left">Enable/Disable storage capacity tracking</td>
-          <td style="text-align: left">-</td>
-          <td style="text-align: left">-</td>
+          <td><strong>storageCapacity</strong></td>
+          <td>Enable/Disable storage capacity tracking</td>
+          <td>-</td>
+          <td>-</td>
       </tr>
       <tr>
-          <td style="text-align: left">enabled</td>
-          <td style="text-align: left">A boolean that enables/disables storage capacity tracking feature.</td>
-          <td style="text-align: left">Yes</td>
-          <td style="text-align: left">true</td>
+          <td>enabled</td>
+          <td>A boolean that enables/disables storage capacity tracking feature.</td>
+          <td>Yes</td>
+          <td>true</td>
       </tr>
       <tr>
-          <td style="text-align: left">pollInterval</td>
-          <td style="text-align: left">Configure how often the driver checks for changed capacity</td>
-          <td style="text-align: left">No</td>
-          <td style="text-align: left">5m</td>
+          <td>pollInterval</td>
+          <td>Configure how often the driver checks for changed capacity</td>
+          <td>No</td>
+          <td>5m</td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>monitor</strong></td>
-          <td style="text-align: left">This section allows the configuration of the SDC monitoring pod.</td>
-          <td style="text-align: left">-</td>
-          <td style="text-align: left">-</td>
+          <td><strong>monitor</strong></td>
+          <td>This section allows the configuration of the SDC monitoring pod.</td>
+          <td>-</td>
+          <td>-</td>
       </tr>
       <tr>
-          <td style="text-align: left">enabled</td>
-          <td style="text-align: left">Set to enable the usage of the monitoring pod.</td>
-          <td style="text-align: left">Yes</td>
-          <td style="text-align: left">false</td>
+          <td>enabled</td>
+          <td>Set to enable the usage of the monitoring pod.</td>
+          <td>Yes</td>
+          <td>false</td>
       </tr>
       <tr>
-          <td style="text-align: left">hostNetwork</td>
-          <td style="text-align: left">Set whether the monitor pod should run on the host network or not.</td>
-          <td style="text-align: left">Yes</td>
-          <td style="text-align: left">true</td>
+          <td>hostNetwork</td>
+          <td>Set whether the monitor pod should run on the host network or not.</td>
+          <td>Yes</td>
+          <td>true</td>
       </tr>
       <tr>
-          <td style="text-align: left">hostPID</td>
-          <td style="text-align: left">Set whether the monitor pod should run in the host namespace or not.</td>
-          <td style="text-align: left">Yes</td>
-          <td style="text-align: left">true</td>
+          <td>hostPID</td>
+          <td>Set whether the monitor pod should run in the host namespace or not.</td>
+          <td>Yes</td>
+          <td>true</td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>vgsnapshotter</strong></td>
-          <td style="text-align: left">This section allows the configuration of the volume group snapshotter(vgsnapshotter) pod.</td>
-          <td style="text-align: left">-</td>
-          <td style="text-align: left">-</td>
+          <td><strong>vgsnapshotter</strong></td>
+          <td>This section allows the configuration of the volume group snapshotter(vgsnapshotter) pod.</td>
+          <td>-</td>
+          <td>-</td>
       </tr>
       <tr>
-          <td style="text-align: left">enabled</td>
-          <td style="text-align: left">A boolean that enable/disable vg snapshotter feature.</td>
-          <td style="text-align: left">No</td>
-          <td style="text-align: left">false</td>
+          <td>enabled</td>
+          <td>A boolean that enable/disable vg snapshotter feature.</td>
+          <td>No</td>
+          <td>false</td>
       </tr>
       <tr>
-          <td style="text-align: left">image</td>
-          <td style="text-align: left">Image for vg snapshotter.</td>
-          <td style="text-align: left">No</td>
-          <td style="text-align: left">&quot; &quot;</td>
+          <td>image</td>
+          <td>Image for vg snapshotter.</td>
+          <td>No</td>
+          <td>&quot; &quot;</td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>podmon</strong></td>
-          <td style="text-align: left"><a href="../../../../../deployment/helm/modules/installation/resiliency/">Podmon</a> is an optional feature to enable application pods to be resilient to node failure.</td>
-          <td style="text-align: left">-</td>
-          <td style="text-align: left">-</td>
+          <td><strong>podmon</strong></td>
+          <td><a href="../../../../../deployment/helm/modules/installation/resiliency/">Podmon</a> is an optional feature to enable application pods to be resilient to node failure.</td>
+          <td>-</td>
+          <td>-</td>
       </tr>
       <tr>
-          <td style="text-align: left">enabled</td>
-          <td style="text-align: left">A boolean that enables/disables podmon feature.</td>
-          <td style="text-align: left">No</td>
-          <td style="text-align: left">false</td>
+          <td>enabled</td>
+          <td>A boolean that enables/disables podmon feature.</td>
+          <td>No</td>
+          <td>false</td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>authorization</strong></td>
-          <td style="text-align: left"><a href="../../../../../deployment/helm/modules/installation/authorization-v2.0/">Authorization</a> is an optional feature to apply credential shielding of the backend PowerFlex.</td>
-          <td style="text-align: left">-</td>
-          <td style="text-align: left">-</td>
+          <td><strong>authorization</strong></td>
+          <td><a href="../../../../../deployment/helm/modules/installation/authorization-v2.0/">Authorization</a> is an optional feature to apply credential shielding of the backend PowerFlex.</td>
+          <td>-</td>
+          <td>-</td>
       </tr>
       <tr>
-          <td style="text-align: left">enabled</td>
-          <td style="text-align: left">A boolean that enables/disables authorization feature.</td>
-          <td style="text-align: left">No</td>
-          <td style="text-align: left">false</td>
+          <td>enabled</td>
+          <td>A boolean that enables/disables authorization feature.</td>
+          <td>No</td>
+          <td>false</td>
       </tr>
       <tr>
-          <td style="text-align: left">proxyHost</td>
-          <td style="text-align: left">Hostname of the csm-authorization server.</td>
-          <td style="text-align: left">No</td>
-          <td style="text-align: left">Empty</td>
+          <td>proxyHost</td>
+          <td>Hostname of the csm-authorization server.</td>
+          <td>No</td>
+          <td>Empty</td>
       </tr>
       <tr>
-          <td style="text-align: left">skipCertificateValidation</td>
-          <td style="text-align: left">A boolean that enables/disables certificate validation of the csm-authorization proxy server.</td>
-          <td style="text-align: left">No</td>
-          <td style="text-align: left">true</td>
+          <td>skipCertificateValidation</td>
+          <td>A boolean that enables/disables certificate validation of the csm-authorization proxy server.</td>
+          <td>No</td>
+          <td>true</td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>interfaceNames</strong></td>
-          <td style="text-align: left">A mapping of node names to interface names. Only necessary when SDC is disabled (see above).</td>
-          <td style="text-align: left">No</td>
-          <td style="text-align: left">&quot;&quot;</td>
+          <td><strong>interfaceNames</strong></td>
+          <td>A mapping of node names to interface names. Only necessary when SDC is disabled (see above).</td>
+          <td>No</td>
+          <td>&quot;&quot;</td>
       </tr>
   </tbody>
 </table>
@@ -1499,7 +1499,7 @@ Volume Snapshot Class <a class="header-link"  href="#volume-snapshot-class" styl
 
       </div><div class="td-footer__center col-12 col-sm-4 py-2 order-sm-2">
         <span class="td-footer__copyright">&copy;
-    2024
+    2025
     <span class="td-footer__authors">The Dell Technologies</span></span><span class="td-footer__all_rights_reserved">All Rights Reserved</span><span class="ms-2"><a href="https://www.dell.com/learn/us/en/uscorp1/policies-privacy" target="_blank" rel="noopener">Privacy Policy</a></span>
       </div>
     </div>

@@ -17,11 +17,11 @@
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="docs">
-    <meta property="article:modified_time" content="2024-10-31T11:14:54-04:00">
+    <meta property="article:modified_time" content="2025-01-02T09:07:07-05:00">
 
   <meta itemprop="name" content="Unity XT">
   <meta itemprop="description" content="Release notes for Unity XT CSI driver">
-  <meta itemprop="dateModified" content="2024-10-31T11:14:54-04:00">
+  <meta itemprop="dateModified" content="2025-01-02T09:07:07-05:00">
   <meta itemprop="wordCount" content="646">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Unity XT">
@@ -56,10 +56,10 @@
         <div class="dropdown">
   <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Releases</a>
   <ul class="dropdown-menu">
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.12.0)</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.11.1</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.10.2</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">v1.9.4</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.13.0)</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.12.0</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.11.1</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">v1.10.2</a></li>
     </ul>
 </div></li>
       <li class="td-light-dark-menu nav-item dropdown">
@@ -125,7 +125,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.5b43d3acf6640adab15d0e301eb69f8e.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.30cbd121c9a04dbae82fa0989eaa7269.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -149,7 +149,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.5b43d3acf6640adab15d0e301eb69f8e.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.30cbd121c9a04dbae82fa0989eaa7269.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -749,46 +749,46 @@ Known Issues <a class="header-link"  href="#known-issues" style=" display: inlin
         </a></h3><table>
   <thead>
       <tr>
-          <th style="text-align: left">Issue</th>
-          <th style="text-align: left">Workaround</th>
+          <th>Issue</th>
+          <th>Workaround</th>
       </tr>
   </thead>
   <tbody>
       <tr>
-          <td style="text-align: left">Nodes not getting registered on Unity XT.</td>
-          <td style="text-align: left">Creating wrapper around <code>hostname</code> command inside the node pod&rsquo;s driver container, that fails when <code>-I</code> flag is used. This will triggrer fallback behaviour in driver and should fix the issue.</td>
+          <td>Nodes not getting registered on Unity XT.</td>
+          <td>Creating wrapper around <code>hostname</code> command inside the node pod&rsquo;s driver container, that fails when <code>-I</code> flag is used. This will triggrer fallback behaviour in driver and should fix the issue.</td>
       </tr>
       <tr>
-          <td style="text-align: left">Topology-related node labels are not removed automatically.</td>
-          <td style="text-align: left">Currently, when the driver is uninstalled, topology-related node labels are not getting removed automatically. There is an open issue in the Kubernetes to fix this. Until the fix is released, remove the labels manually after the driver un-installation using command <strong>kubectl label node &lt;node_name&gt; <label1>- <label2>- &hellip;</strong> Example: <strong>kubectl label node <hostname> csi-unity.dellemc.com/array123-iscsi-</strong> Note: there must be - at the end of each label to remove it.</td>
+          <td>Topology-related node labels are not removed automatically.</td>
+          <td>Currently, when the driver is uninstalled, topology-related node labels are not getting removed automatically. There is an open issue in the Kubernetes to fix this. Until the fix is released, remove the labels manually after the driver un-installation using command <strong>kubectl label node &lt;node_name&gt; <label1>- <label2>- &hellip;</strong> Example: <strong>kubectl label node <hostname> csi-unity.dellemc.com/array123-iscsi-</strong> Note: there must be - at the end of each label to remove it.</td>
       </tr>
       <tr>
-          <td style="text-align: left">NFS Clone - Resize of the snapshot is not supported by Unity XT Platform, however, the user should never try to resize the cloned NFS volume.</td>
-          <td style="text-align: left">Currently, when the driver takes a clone of NFS volume, it succeeds but if the user tries to resize the NFS volumesnapshot, the driver will throw an error.</td>
+          <td>NFS Clone - Resize of the snapshot is not supported by Unity XT Platform, however, the user should never try to resize the cloned NFS volume.</td>
+          <td>Currently, when the driver takes a clone of NFS volume, it succeeds but if the user tries to resize the NFS volumesnapshot, the driver will throw an error.</td>
       </tr>
       <tr>
-          <td style="text-align: left">Delete namespace that has PVCs and pods created with the driver. The External health monitor sidecar crashes as a result of this operation.</td>
-          <td style="text-align: left">Deleting the namespace deletes the PVCs first and then removes the pods in the namespace. This brings a condition where pods exist without their PVCs and causes the external-health-monitor sidecar to crash. This is a known issue and has been reported at <a href="https://github.com/kubernetes-csi/external-health-monitor/issues/100">https://github.com/kubernetes-csi/external-health-monitor/issues/100</a></td>
+          <td>Delete namespace that has PVCs and pods created with the driver. The External health monitor sidecar crashes as a result of this operation.</td>
+          <td>Deleting the namespace deletes the PVCs first and then removes the pods in the namespace. This brings a condition where pods exist without their PVCs and causes the external-health-monitor sidecar to crash. This is a known issue and has been reported at <a href="https://github.com/kubernetes-csi/external-health-monitor/issues/100">https://github.com/kubernetes-csi/external-health-monitor/issues/100</a></td>
       </tr>
       <tr>
-          <td style="text-align: left">When a node goes down, the block volumes attached to the node cannot be attached to another node</td>
-          <td style="text-align: left">This is a known issue and has been reported at <a href="https://github.com/kubernetes-csi/external-attacher/issues/215">https://github.com/kubernetes-csi/external-attacher/issues/215</a>. Workaround: <br /> 1. Force delete the pod running on the node that went down <br /> 2. Delete the VolumeAttachment to the node that went down. <br /> Now the volume can be attached to the new node.</td>
+          <td>When a node goes down, the block volumes attached to the node cannot be attached to another node</td>
+          <td>This is a known issue and has been reported at <a href="https://github.com/kubernetes-csi/external-attacher/issues/215">https://github.com/kubernetes-csi/external-attacher/issues/215</a>. Workaround: <br /> 1. Force delete the pod running on the node that went down <br /> 2. Delete the VolumeAttachment to the node that went down. <br /> Now the volume can be attached to the new node.</td>
       </tr>
       <tr>
-          <td style="text-align: left">A CSI ephemeral pod may not get created in OpenShift 4.13 and fail with the error <code>&quot;error when creating pod: the pod uses an inline volume provided by CSIDriver csi-unity.dellemc.com, and the namespace has a pod security enforcement level that is lower than privileged.&quot;</code></td>
-          <td style="text-align: left">This issue occurs because OpenShift 4.13 introduced the CSI Volume Admission plugin to restrict the use of a CSI driver capable of provisioning CSI ephemeral volumes during pod admission. Therefore, an additional label <code>security.openshift.io/csi-ephemeral-volume-profile</code> in <a href="https://github.com/dell/helm-charts/blob/csi-unity-2.8.0/charts/csi-unity/templates/csidriver.yaml">csidriver.yaml</a> file with the required security profile value should be provided. Follow <a href="https://docs.openshift.com/container-platform/4.13/storage/container_storage_interface/ephemeral-storage-csi-inline.html">OpenShift 4.13 documentation for CSI Ephemeral Volumes</a> for more information.</td>
+          <td>A CSI ephemeral pod may not get created in OpenShift 4.13 and fail with the error <code>&quot;error when creating pod: the pod uses an inline volume provided by CSIDriver csi-unity.dellemc.com, and the namespace has a pod security enforcement level that is lower than privileged.&quot;</code></td>
+          <td>This issue occurs because OpenShift 4.13 introduced the CSI Volume Admission plugin to restrict the use of a CSI driver capable of provisioning CSI ephemeral volumes during pod admission. Therefore, an additional label <code>security.openshift.io/csi-ephemeral-volume-profile</code> in <a href="https://github.com/dell/helm-charts/blob/csi-unity-2.8.0/charts/csi-unity/templates/csidriver.yaml">csidriver.yaml</a> file with the required security profile value should be provided. Follow <a href="https://docs.openshift.com/container-platform/4.13/storage/container_storage_interface/ephemeral-storage-csi-inline.html">OpenShift 4.13 documentation for CSI Ephemeral Volumes</a> for more information.</td>
       </tr>
       <tr>
-          <td style="text-align: left">If the volume limit is exhausted and there are pending pods and PVCs due to <code>exceed max volume count</code>, the pending PVCs will be bound to PVs and the pending pods will be scheduled to nodes when the driver pods are restarted.</td>
-          <td style="text-align: left">It is advised not to have any pending pods or PVCs once the volume limit per node is exhausted on a CSI Driver. There is an open issue reported with Kubernetes at <a href="https://github.com/kubernetes/kubernetes/issues/95911">https://github.com/kubernetes/kubernetes/issues/95911</a> with the same behavior.</td>
+          <td>If the volume limit is exhausted and there are pending pods and PVCs due to <code>exceed max volume count</code>, the pending PVCs will be bound to PVs and the pending pods will be scheduled to nodes when the driver pods are restarted.</td>
+          <td>It is advised not to have any pending pods or PVCs once the volume limit per node is exhausted on a CSI Driver. There is an open issue reported with Kubernetes at <a href="https://github.com/kubernetes/kubernetes/issues/95911">https://github.com/kubernetes/kubernetes/issues/95911</a> with the same behavior.</td>
       </tr>
       <tr>
-          <td style="text-align: left">fsGroupPolicy may not work as expected without root privileges for NFS only <a href="https://github.com/kubernetes/examples/issues/260">https://github.com/kubernetes/examples/issues/260</a></td>
-          <td style="text-align: left">To get the desired behavior set “RootClientEnabled” = “true” in the storage class parameter</td>
+          <td>fsGroupPolicy may not work as expected without root privileges for NFS only <a href="https://github.com/kubernetes/examples/issues/260">https://github.com/kubernetes/examples/issues/260</a></td>
+          <td>To get the desired behavior set “RootClientEnabled” = “true” in the storage class parameter</td>
       </tr>
       <tr>
-          <td style="text-align: left">Controller publish is taking too long to complete/ Health monitoring is causing Unity array to panic by opening multiple sessions/ There are error messages in the log <code>context deadline exceeded</code>, when health monitoring is enabled</td>
-          <td style="text-align: left">Disable volume health monitoring on the node and keep it only at the controller level. Refer <a href="https://dell.github.io/csm-docs/docs/csidriver/features/unity/#volume-health-monitoring">here</a> for more information about enabling/disabling volume health monitoring</td>
+          <td>Controller publish is taking too long to complete/ Health monitoring is causing Unity array to panic by opening multiple sessions/ There are error messages in the log <code>context deadline exceeded</code>, when health monitoring is enabled</td>
+          <td>Disable volume health monitoring on the node and keep it only at the controller level. Refer <a href="https://dell.github.io/csm-docs/docs/csidriver/features/unity/#volume-health-monitoring">here</a> for more information about enabling/disabling volume health monitoring</td>
       </tr>
   </tbody>
 </table>
@@ -890,7 +890,7 @@ Note: <a class="header-link"  href="#note" style=" display: inline-block; opacit
 
       </div><div class="td-footer__center col-12 col-sm-4 py-2 order-sm-2">
         <span class="td-footer__copyright">&copy;
-    2024
+    2025
     <span class="td-footer__authors">The Dell Technologies</span></span><span class="td-footer__all_rights_reserved">All Rights Reserved</span><span class="ms-2"><a href="https://www.dell.com/learn/us/en/uscorp1/policies-privacy" target="_blank" rel="noopener">Privacy Policy</a></span>
       </div>
     </div>
