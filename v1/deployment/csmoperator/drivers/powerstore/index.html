@@ -9,23 +9,23 @@
 <link rel="icon" type="image/png" href="/csm-docs/favicons/favicon-16x16.png" sizes="16x16">
 <link rel="icon" type="image/png" href="/csm-docs/favicons/favicon-32x32.png" sizes="32x32">
 <title>PowerStore | </title>
-<meta name="description" content="Installing Dell CSI Driver for PowerStore via Dell CSM Operator">
+<meta name="description" content="Installing the CSI Driver for Dell PowerStore via Dell CSM Operator">
 <meta property="og:url" content="https://dell.github.io/csm-docs/v1/deployment/csmoperator/drivers/powerstore/">
   <meta property="og:site_name" content="Dell Technologies">
   <meta property="og:title" content="PowerStore">
-  <meta property="og:description" content="Installing Dell CSI Driver for PowerStore via Dell CSM Operator">
+  <meta property="og:description" content="Installing the CSI Driver for Dell PowerStore via Dell CSM Operator">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="v1">
-    <meta property="article:modified_time" content="2024-10-28T18:40:36-04:00">
+    <meta property="article:modified_time" content="2024-12-10T18:09:33+05:30">
 
   <meta itemprop="name" content="PowerStore">
-  <meta itemprop="description" content="Installing Dell CSI Driver for PowerStore via Dell CSM Operator">
-  <meta itemprop="dateModified" content="2024-10-28T18:40:36-04:00">
-  <meta itemprop="wordCount" content="2185">
+  <meta itemprop="description" content="Installing the CSI Driver for Dell PowerStore via Dell CSM Operator">
+  <meta itemprop="dateModified" content="2024-12-10T18:09:33+05:30">
+  <meta itemprop="wordCount" content="2354">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="PowerStore">
-  <meta name="twitter:description" content="Installing Dell CSI Driver for PowerStore via Dell CSM Operator">
+  <meta name="twitter:description" content="Installing the CSI Driver for Dell PowerStore via Dell CSM Operator">
 <link rel="preload" href="/csm-docs/scss/main.min.c1b9d9da997c468756a5165a298685a703e1f9c4d6fb91aecfa7c7d02edab9a7.css" as="style" integrity="sha256-wbnZ2pl8RodWpRZaKYaFpwPh&#43;cTW&#43;5Guz6fH0C7auac=" crossorigin="anonymous">
 <link href="/csm-docs/scss/main.min.c1b9d9da997c468756a5165a298685a703e1f9c4d6fb91aecfa7c7d02edab9a7.css" rel="stylesheet" integrity="sha256-wbnZ2pl8RodWpRZaKYaFpwPh&#43;cTW&#43;5Guz6fH0C7auac=" crossorigin="anonymous">
 <script
@@ -56,10 +56,10 @@
         <div class="dropdown">
   <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Releases</a>
   <ul class="dropdown-menu">
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.12.0)</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.11.1</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.10.2</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">v1.9.4</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.13.0)</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.12.0</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.11.1</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">v1.10.2</a></li>
     </ul>
 </div></li>
       <li class="td-light-dark-menu nav-item dropdown">
@@ -125,7 +125,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.5b43d3acf6640adab15d0e301eb69f8e.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.30cbd121c9a04dbae82fa0989eaa7269.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -149,7 +149,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.5b43d3acf6640adab15d0e301eb69f8e.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.30cbd121c9a04dbae82fa0989eaa7269.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -197,10 +197,10 @@
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-csm-docsv1deploymentcsmoperatormodules-li">
   <a href="/csm-docs/v1/deployment/csmoperator/modules/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv1deploymentcsmoperatormodules"><span class="">CSM Modules</span></a>
   <ul class="ul-4 foldable">
-    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1deploymentcsmoperatormodulesauthorization-li">
-  <a href="/csm-docs/v1/deployment/csmoperator/modules/authorization/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv1deploymentcsmoperatormodulesauthorization"><span class="">Authorization</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1deploymentcsmoperatormodulesauthorization-v20-tech-preview-li">
-  <a href="/csm-docs/v1/deployment/csmoperator/modules/authorization-v2.0-tech-preview/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv1deploymentcsmoperatormodulesauthorization-v20-tech-preview"><span class="">Authorization v2.0 Tech Preview</span></a>
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1deploymentcsmoperatormodulesauthorization-v1x-li">
+  <a href="/csm-docs/v1/deployment/csmoperator/modules/authorization-v1.x/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv1deploymentcsmoperatormodulesauthorization-v1x"><span class="">Authorization v1.x</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1deploymentcsmoperatormodulesauthorization-v20-li">
+  <a href="/csm-docs/v1/deployment/csmoperator/modules/authorization-v2.0/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv1deploymentcsmoperatormodulesauthorization-v20"><span class="">Authorization v2.0</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1deploymentcsmoperatormodulesobservability-li">
   <a href="/csm-docs/v1/deployment/csmoperator/modules/observability/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv1deploymentcsmoperatormodulesobservability"><span class="">Observability</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1deploymentcsmoperatormodulesreplication-li">
@@ -263,16 +263,7 @@
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv1deploymenthelmmodulesinstallation-li">
   <a href="/csm-docs/v1/deployment/helm/modules/installation/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv1deploymenthelmmodulesinstallation"><span class="">Installation</span></a>
   <ul class="ul-5 foldable">
-    <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv1deploymenthelmmodulesinstallationencryption-li">
-  <a href="/csm-docs/v1/deployment/helm/modules/installation/encryption/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv1deploymenthelmmodulesinstallationencryption"><span class="">Encryption</span></a>
-  <ul class="ul-6 foldable">
-    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1deploymenthelmmodulesinstallationencryptionvault-li">
-  <a href="/csm-docs/v1/deployment/helm/modules/installation/encryption/vault/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv1deploymenthelmmodulesinstallationencryptionvault"><span class="">Vault Configuration</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1deploymenthelmmodulesinstallationencryptionrekey-li">
-  <a href="/csm-docs/v1/deployment/helm/modules/installation/encryption/rekey/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv1deploymenthelmmodulesinstallationencryptionrekey"><span class="">Rekey Configuration</span></a>
-</li>
-  </ul>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv1deploymenthelmmodulesinstallationreplication-li">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv1deploymenthelmmodulesinstallationreplication-li">
   <a href="/csm-docs/v1/deployment/helm/modules/installation/replication/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv1deploymenthelmmodulesinstallationreplication"><span class="">Replication</span></a>
   <ul class="ul-6 foldable">
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1deploymenthelmmodulesinstallationreplicationinstallation-li">
@@ -306,8 +297,10 @@
   </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1deploymenthelmmodulesinstallationresiliency-li">
   <a href="/csm-docs/v1/deployment/helm/modules/installation/resiliency/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv1deploymenthelmmodulesinstallationresiliency"><span class="">Resiliency</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1deploymenthelmmodulesinstallationauthorization-li">
-  <a href="/csm-docs/v1/deployment/helm/modules/installation/authorization/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv1deploymenthelmmodulesinstallationauthorization"><span class="">Authorization</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1deploymenthelmmodulesinstallationauthorization-v1x-li">
+  <a href="/csm-docs/v1/deployment/helm/modules/installation/authorization-v1.x/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv1deploymenthelmmodulesinstallationauthorization-v1x"><span class="">Authorization v1.x</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1deploymenthelmmodulesinstallationauthorization-v20-li">
+  <a href="/csm-docs/v1/deployment/helm/modules/installation/authorization-v2.0/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv1deploymenthelmmodulesinstallationauthorization-v20"><span class="">Authorization v2.0</span></a>
 </li>
   </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv1deploymenthelmmodulesuninstall-li">
@@ -315,10 +308,10 @@
   <ul class="ul-5 foldable">
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1deploymenthelmmodulesuninstallapplicationmobility-li">
   <a href="/csm-docs/v1/deployment/helm/modules/uninstall/applicationmobility/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv1deploymenthelmmodulesuninstallapplicationmobility"><span class="">Application mobility</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1deploymenthelmmodulesuninstallauthorization-li">
-  <a href="/csm-docs/v1/deployment/helm/modules/uninstall/authorization/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv1deploymenthelmmodulesuninstallauthorization"><span class="">Authorization</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1deploymenthelmmodulesuninstallencryption-li">
-  <a href="/csm-docs/v1/deployment/helm/modules/uninstall/encryption/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv1deploymenthelmmodulesuninstallencryption"><span class="">Encryption</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1deploymenthelmmodulesuninstallauthorization-v1x-li">
+  <a href="/csm-docs/v1/deployment/helm/modules/uninstall/authorization-v1.x/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv1deploymenthelmmodulesuninstallauthorization-v1x"><span class="">Authorization v1.x</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1deploymenthelmmodulesuninstallauthorization-v20-li">
+  <a href="/csm-docs/v1/deployment/helm/modules/uninstall/authorization-v2.0/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv1deploymenthelmmodulesuninstallauthorization-v20"><span class="">Authorization v2.0</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1deploymenthelmmodulesuninstallresiliency-li">
   <a href="/csm-docs/v1/deployment/helm/modules/uninstall/resiliency/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv1deploymenthelmmodulesuninstallresiliency"><span class="">Resiliency</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1deploymenthelmmodulesuninstallobservability-li">
@@ -364,8 +357,8 @@
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv1deploymentrpmmodulesinstallation-li">
   <a href="/csm-docs/v1/deployment/rpm/modules/installation/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv1deploymentrpmmodulesinstallation"><span class="">Installation</span></a>
   <ul class="ul-5 foldable">
-    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1deploymentrpmmodulesinstallationauthorizationauthorization-li">
-  <a href="/csm-docs/v1/deployment/rpm/modules/installation/authorization/authorization/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv1deploymentrpmmodulesinstallationauthorizationauthorization"><span class="">Authorization</span></a>
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1deploymentrpmmodulesinstallationauthorization-v1xauthorization-v1x-li">
+  <a href="/csm-docs/v1/deployment/rpm/modules/installation/authorization-v1.x/authorization-v1.x/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv1deploymentrpmmodulesinstallationauthorization-v1xauthorization-v1x"><span class="">Authorization v1.x</span></a>
 </li>
   </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv1deploymentrpmmodulesuninstall-li">
@@ -386,15 +379,6 @@
   </ul>
 </li>
   </ul>
-</li>
-  </ul>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-csm-docsv1interactive-tutorials-li">
-  <a href="/csm-docs/v1/interactive-tutorials/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv1interactive-tutorials"><span class="">Interactive Tutorials</span></a>
-  <ul class="ul-2 foldable">
-    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1interactive-tutorialscsm-quickstart-li">
-  <a href="/csm-docs/v1/interactive-tutorials/csm-quickstart/" title="Getting Started with Dell Container Storage Modules (CSM)" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv1interactive-tutorialscsm-quickstart"><span class="">CSM Quickstart</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1interactive-tutorialscsm-operator-li">
-  <a href="/csm-docs/v1/interactive-tutorials/csm-operator/" title="How to install the Dell Container Storage Modules (CSM) Operator" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv1interactive-tutorialscsm-operator"><span class="">CSM Operator</span></a>
 </li>
   </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-csm-docsv1cosidriver-li">
@@ -494,53 +478,61 @@
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-csm-docsv1authorization-li">
   <a href="/csm-docs/v1/authorization/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv1authorization"><span class="">Authorization</span></a>
   <ul class="ul-2 foldable">
-    <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv1authorizationv1x-ga-li">
-  <a href="/csm-docs/v1/authorization/v1.x-ga/" title="Authorization - v1.x GA" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv1authorizationv1x-ga"><span class="">v1.x GA</span></a>
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1authorizationmigration-guide-from-v1-to-v2-li">
+  <a href="/csm-docs/v1/authorization/migration-guide-from-v1-to-v2/" title="Authorization - v2 Migration guide" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv1authorizationmigration-guide-from-v1-to-v2"><span class="">Migration Guide From v1 to v2</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv1authorizationv1x-li">
+  <a href="/csm-docs/v1/authorization/v1.x/" title="Authorization - v1.x" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv1authorizationv1x"><span class="">v1.x</span></a>
   <ul class="ul-3 foldable">
-    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1authorizationv1x-gadesign-li">
-  <a href="/csm-docs/v1/authorization/v1.x-ga/design/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv1authorizationv1x-gadesign"><span class="">Design</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv1authorizationv1x-gabackup-and-restore-li">
-  <a href="/csm-docs/v1/authorization/v1.x-ga/backup-and-restore/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv1authorizationv1x-gabackup-and-restore"><span class="">Backup and Restore</span></a>
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1authorizationv1xdesign-li">
+  <a href="/csm-docs/v1/authorization/v1.x/design/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv1authorizationv1xdesign"><span class="">Design</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv1authorizationv1xbackup-and-restore-li">
+  <a href="/csm-docs/v1/authorization/v1.x/backup-and-restore/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv1authorizationv1xbackup-and-restore"><span class="">Backup and Restore</span></a>
   <ul class="ul-4 foldable">
-    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1authorizationv1x-gabackup-and-restorehelm-li">
-  <a href="/csm-docs/v1/authorization/v1.x-ga/backup-and-restore/helm/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv1authorizationv1x-gabackup-and-restorehelm"><span class="">Helm</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1authorizationv1x-gabackup-and-restorerpm-li">
-  <a href="/csm-docs/v1/authorization/v1.x-ga/backup-and-restore/rpm/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv1authorizationv1x-gabackup-and-restorerpm"><span class="">RPM</span></a>
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1authorizationv1xbackup-and-restorehelm-li">
+  <a href="/csm-docs/v1/authorization/v1.x/backup-and-restore/helm/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv1authorizationv1xbackup-and-restorehelm"><span class="">Helm</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1authorizationv1xbackup-and-restorerpm-li">
+  <a href="/csm-docs/v1/authorization/v1.x/backup-and-restore/rpm/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv1authorizationv1xbackup-and-restorerpm"><span class="">RPM</span></a>
 </li>
   </ul>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv1authorizationv1x-gaconfiguration-li">
-  <a href="/csm-docs/v1/authorization/v1.x-ga/configuration/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv1authorizationv1x-gaconfiguration"><span class="">Configuration</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv1authorizationv1xconfiguration-li">
+  <a href="/csm-docs/v1/authorization/v1.x/configuration/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv1authorizationv1xconfiguration"><span class="">Configuration</span></a>
   <ul class="ul-4 foldable">
-    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1authorizationv1x-gaconfigurationpowerflex-li">
-  <a href="/csm-docs/v1/authorization/v1.x-ga/configuration/powerflex/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv1authorizationv1x-gaconfigurationpowerflex"><span class="">PowerFlex</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1authorizationv1x-gaconfigurationpowermax-li">
-  <a href="/csm-docs/v1/authorization/v1.x-ga/configuration/powermax/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv1authorizationv1x-gaconfigurationpowermax"><span class="">PowerMax</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1authorizationv1x-gaconfigurationpowerscale-li">
-  <a href="/csm-docs/v1/authorization/v1.x-ga/configuration/powerscale/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv1authorizationv1x-gaconfigurationpowerscale"><span class="">PowerScale</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1authorizationv1x-gaconfigurationproxy-server-li">
-  <a href="/csm-docs/v1/authorization/v1.x-ga/configuration/proxy-server/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv1authorizationv1x-gaconfigurationproxy-server"><span class="">Proxy Server</span></a>
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1authorizationv1xconfigurationpowerflex-li">
+  <a href="/csm-docs/v1/authorization/v1.x/configuration/powerflex/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv1authorizationv1xconfigurationpowerflex"><span class="">PowerFlex</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1authorizationv1xconfigurationpowermax-li">
+  <a href="/csm-docs/v1/authorization/v1.x/configuration/powermax/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv1authorizationv1xconfigurationpowermax"><span class="">PowerMax</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1authorizationv1xconfigurationpowerscale-li">
+  <a href="/csm-docs/v1/authorization/v1.x/configuration/powerscale/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv1authorizationv1xconfigurationpowerscale"><span class="">PowerScale</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1authorizationv1xconfigurationproxy-server-li">
+  <a href="/csm-docs/v1/authorization/v1.x/configuration/proxy-server/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv1authorizationv1xconfigurationproxy-server"><span class="">Proxy Server</span></a>
 </li>
   </ul>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1authorizationv1x-gacli-li">
-  <a href="/csm-docs/v1/authorization/v1.x-ga/cli/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv1authorizationv1x-gacli"><span class="">CLI</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1authorizationv1x-gatroubleshooting-li">
-  <a href="/csm-docs/v1/authorization/v1.x-ga/troubleshooting/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv1authorizationv1x-gatroubleshooting"><span class="">Troubleshooting</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1authorizationv1x-garelease-li">
-  <a href="/csm-docs/v1/authorization/v1.x-ga/release/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv1authorizationv1x-garelease"><span class="">Release notes</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1authorizationv1xcli-li">
+  <a href="/csm-docs/v1/authorization/v1.x/cli/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv1authorizationv1xcli"><span class="">CLI</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1authorizationv1xtroubleshooting-li">
+  <a href="/csm-docs/v1/authorization/v1.x/troubleshooting/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv1authorizationv1xtroubleshooting"><span class="">Troubleshooting</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1authorizationv1xrelease-li">
+  <a href="/csm-docs/v1/authorization/v1.x/release/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv1authorizationv1xrelease"><span class="">Release notes</span></a>
 </li>
   </ul>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv1authorizationv20-tech-preview-li">
-  <a href="/csm-docs/v1/authorization/v2.0-tech-preview/" title="Authorization - v2.0 Tech Preview" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv1authorizationv20-tech-preview"><span class="">v2.0 Tech Preview</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv1authorizationv2x-li">
+  <a href="/csm-docs/v1/authorization/v2.x/" title="Authorization - v2.x" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv1authorizationv2x"><span class="">v2.x</span></a>
   <ul class="ul-3 foldable">
-    <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv1authorizationv20-tech-previewconfiguration-li">
-  <a href="/csm-docs/v1/authorization/v2.0-tech-preview/configuration/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv1authorizationv20-tech-previewconfiguration"><span class="">Configuration</span></a>
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv1authorizationv2xconfiguration-li">
+  <a href="/csm-docs/v1/authorization/v2.x/configuration/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv1authorizationv2xconfiguration"><span class="">Configuration</span></a>
   <ul class="ul-4 foldable">
-    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1authorizationv20-tech-previewconfigurationpowerflex-li">
-  <a href="/csm-docs/v1/authorization/v2.0-tech-preview/configuration/powerflex/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv1authorizationv20-tech-previewconfigurationpowerflex"><span class="">PowerFlex</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1authorizationv20-tech-previewconfigurationproxy-server-li">
-  <a href="/csm-docs/v1/authorization/v2.0-tech-preview/configuration/proxy-server/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv1authorizationv20-tech-previewconfigurationproxy-server"><span class="">Proxy Server</span></a>
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1authorizationv2xconfigurationpowerflex-li">
+  <a href="/csm-docs/v1/authorization/v2.x/configuration/powerflex/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv1authorizationv2xconfigurationpowerflex"><span class="">PowerFlex</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1authorizationv2xconfigurationpowermax-li">
+  <a href="/csm-docs/v1/authorization/v2.x/configuration/powermax/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv1authorizationv2xconfigurationpowermax"><span class="">PowerMax</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1authorizationv2xconfigurationpowerscale-li">
+  <a href="/csm-docs/v1/authorization/v2.x/configuration/powerscale/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv1authorizationv2xconfigurationpowerscale"><span class="">PowerScale</span></a>
 </li>
   </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1authorizationv2xtroubleshooting-li">
+  <a href="/csm-docs/v1/authorization/v2.x/troubleshooting/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv1authorizationv2xtroubleshooting"><span class="">Troubleshooting</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1authorizationv2xrelease-li">
+  <a href="/csm-docs/v1/authorization/v2.x/release/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv1authorizationv2xrelease"><span class="">Release notes</span></a>
 </li>
   </ul>
 </li>
@@ -583,8 +575,15 @@
   <a href="/csm-docs/v1/replication/cluster-topologies/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv1replicationcluster-topologies"><span class="">Cluster Topologies</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1replicationdisaster-recovery-li">
   <a href="/csm-docs/v1/replication/disaster-recovery/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv1replicationdisaster-recovery"><span class="">Disaster Recovery</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1replicationhigh-availability-li">
-  <a href="/csm-docs/v1/replication/high-availability/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv1replicationhigh-availability"><span class="">High Availability</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv1replicationhigh-availability-li">
+  <a href="/csm-docs/v1/replication/high-availability/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv1replicationhigh-availability"><span class="">High Availability</span></a>
+  <ul class="ul-3 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1replicationhigh-availabilitypowermax-metro-li">
+  <a href="/csm-docs/v1/replication/high-availability/powermax-metro/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv1replicationhigh-availabilitypowermax-metro"><span class="">PowerMax Metro</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1replicationhigh-availabilitypowerstore-metro-li">
+  <a href="/csm-docs/v1/replication/high-availability/powerstore-metro/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv1replicationhigh-availabilitypowerstore-metro"><span class="">PowerStore Metro</span></a>
+</li>
+  </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv1replicationmigration-li">
   <a href="/csm-docs/v1/replication/migration/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv1replicationmigration"><span class="">Migration</span></a>
   <ul class="ul-3 foldable">
@@ -637,20 +636,6 @@
   <a href="/csm-docs/v1/applicationmobility/release/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv1applicationmobilityrelease"><span class="">Release Notes</span></a>
 </li>
   </ul>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-csm-docsv1secure-li">
-  <a href="/csm-docs/v1/secure/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv1secure"><span class="">Secure</span></a>
-  <ul class="ul-2 foldable">
-    <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv1secureencryption-li">
-  <a href="/csm-docs/v1/secure/encryption/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv1secureencryption"><span class="">Encryption</span></a>
-  <ul class="ul-3 foldable">
-    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1secureencryptionrelease-li">
-  <a href="/csm-docs/v1/secure/encryption/release/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv1secureencryptionrelease"><span class="">Release Notes</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1secureencryptiontroubleshooting-li">
-  <a href="/csm-docs/v1/secure/encryption/troubleshooting/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv1secureencryptiontroubleshooting"><span class="">Troubleshooting</span></a>
-</li>
-  </ul>
-</li>
-  </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-csm-docsv1support-li">
   <a href="/csm-docs/v1/support/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv1support"><span class="">Support</span></a>
   <ul class="ul-2 foldable">
@@ -671,8 +656,6 @@
   <a href="/csm-docs/v1/support/deprecationpolicy/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv1supportdeprecationpolicy"><span class="">Deprecation Policy</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1supportcontributionguidelines-li">
   <a href="/csm-docs/v1/support/contributionguidelines/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv1supportcontributionguidelines"><span class="">Contribution Guidelines</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1supportlicense-li">
-  <a href="/csm-docs/v1/support/license/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv1supportlicense"><span class="">License</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1supportlearn-li">
   <a href="/csm-docs/v1/support/learn/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv1supportlearn"><span class="">Learn more about CSM</span></a>
 </li>
@@ -693,16 +676,19 @@
             <div class="td-toc">
         <nav id="TableOfContents">
   <ul>
-    <li><a href="#installing-csi-driver-for-powerstore-via-dell-csm-operator">Installing CSI Driver for PowerStore via Dell CSM Operator</a>
+    <li><a href="#listing-installed-drivers">Listing installed drivers</a></li>
+    <li><a href="#prerequisites">Prerequisites</a>
       <ul>
-        <li><a href="#check-existing-containerstoragemodule-crd">Check existing ContainerStorageModule CRD</a></li>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#set-up-the-nvme-initiator">Set up the NVMe Initiator</a></li>
-        <li><a href="#linux-multipathing-requirements">Linux multipathing requirements</a></li>
+        <li><a href="#fibre-channel-requirements">Fibre Channel Requirements</a></li>
+        <li><a href="#iscsi-requirements">iSCSI Requirements</a></li>
+        <li><a href="#nvme-requirements">NVMe Requirements</a></li>
+        <li><a href="#linux-multipathing-requirements">Linux Multipathing Requirements</a></li>
+        <li><a href="#volume-snapshot-requirements-optional">Volume Snapshot Requirements (Optional)</a></li>
+        <li><a href="#replication-requirements-optional">Replication Requirements (Optional)</a></li>
         <li><a href="#namespace-and-powerstore-api-access-configuration">Namespace and PowerStore API Access Configuration</a></li>
-        <li><a href="#install-driver">Install Driver</a></li>
       </ul>
     </li>
+    <li><a href="#install-driver">Install Driver</a></li>
     <li><a href="#dynamic-secret-change-detection">Dynamic secret change detection</a></li>
   </ul>
 </nav>
@@ -732,115 +718,117 @@
             
 <div class="td-content">
 	<h1>PowerStore</h1>
-	<div class="lead">Installing Dell CSI Driver for PowerStore via Dell CSM Operator</div>
+	<div class="lead">Installing the CSI Driver for Dell PowerStore via Dell CSM Operator</div>
 	<header class="article-meta">
 		
 </header>
-	<h2 id="installing-csi-driver-for-powerstore-via-dell-csm-operator">
-Installing CSI Driver for PowerStore via Dell CSM Operator <a class="header-link"  href="#installing-csi-driver-for-powerstore-via-dell-csm-operator" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
-            <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-                <path d="M0 0h24v24H0z" fill="none"/>
-                <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
-            </svg>
-        </a></h2><p>The CSI Driver for Dell PowerStore can be installed via the Dell CSM Operator.
+	<p>
+
+<div class="pageinfo pageinfo-primary">
+<p>Starting with CSM 1.12, all deployments will use images from <a href="https://quay.io/organization/dell">quay.io</a> by default. New release images will be available on <a href="https://hub.docker.com/r/dellemc/">Docker Hub</a> until CSM 1.14 (May 2025), and existing releases will remain on Docker Hub.</p>
+
+</div>
+
+The CSI Driver for Dell PowerStore can be installed via the Dell CSM Operator.
 To deploy the Operator, follow the instructions available <a href="/csm-docs/v1/deployment/#installation">here</a>.</p>
 <p>Note that the deployment of the driver using the operator does not use any Helm charts and the installation and configuration parameters will be slightly different from the one specified via the Helm installer.</p>
-<h3 id="check-existing-containerstoragemodule-crd">
-Check existing ContainerStorageModule CRD <a class="header-link"  href="#check-existing-containerstoragemodule-crd" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
+<h2 id="listing-installed-drivers">
+Listing installed drivers <a class="header-link"  href="#listing-installed-drivers" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
             <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
                 <path d="M0 0h24v24H0z" fill="none"/>
                 <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
             </svg>
-        </a></h3><p>User can query for all Dell CSI drivers using the following command:</p>
+        </a></h2><p>To query for all Dell CSI drivers installed with the ContainerStorageModule CRD use the following command:</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl get csm --all-namespaces
-</span></span></code></pre></div><h3 id="prerequisites">
+</span></span></code></pre></div><h2 id="prerequisites">
 Prerequisites <a class="header-link"  href="#prerequisites" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
             <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
                 <path d="M0 0h24v24H0z" fill="none"/>
                 <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
             </svg>
-        </a></h3><p>The following are requirements to be met before installing the CSI Driver for Dell PowerStore:</p>
+        </a></h2><p>The following requirements must be met before installing the CSI Driver for Dell PowerStore:</p>
 <ul>
-<li>A Kubernetes or OpenShift cluster (see <a href="../../../../csidriver/#features-and-capabilities">supported versions</a>)</li>
-<li>If you plan to use either the Fibre Channel, iSCSI, NVMe/TCP, or NVMe/FC protocols, refer to either <em>Fibre Channel requirements</em> or <em>Set up the iSCSI Initiator</em> or <em>Set up the NVMe Initiator</em> sections below. You can use NFS volumes without FC, iSCSI, NVMe/TCP, or NVMe/FC configurations.</li>
+<li>A Kubernetes or OpenShift cluster (see <a href="../../../../csidriver/#features-and-capabilities">supported versions</a>).</li>
+<li>Refer to the sections below for protocol specific requirements.</li>
+<li>If you want to use pre-configured iSCSI/FC hosts be sure to check that they are not part of any host group.</li>
+<li>Linux multipathing requirements (described later).</li>
+<li>Mount propagation is enabled on the container runtime that is being used.</li>
+<li>If using the Snapshot feature, satisfy all Volume Snapshot requirements.</li>
+<li>Insecure registries are defined in Docker or other container runtime for CSI drivers that are hosted in a non-secure location.</li>
+<li>Ensure that your nodes support mounting NFS volumes if using NFS.</li>
+<li>For NVMe support the preferred multipath solution is NVMe native multipathing. The <a href="https://elabnavigator.dell.com/vault/pdf/Linux.pdf">Dell Host Connectivity Guide</a> describes the details of each configuration option.</li>
 </ul>
-<blockquote>
-<p>You can use either the Fibre Channel (FC), iSCSI, NVMe/TCP, or NVMe/FC protocol, but you do not need all four to be enabled.</p>
-</blockquote>
-<blockquote>
-<p>For NVMe support the preferred multipath solution is NVMe native multipathing. The <a href="https://elabnavigator.dell.com/vault/pdf/Linux.pdf?key=1725374107988">Dell Host Connectivity Guide</a> describes the details of each configuration option.</p>
-</blockquote>
-<blockquote>
-<p>If you want to use pre-configured iSCSI/FC hosts be sure to check that they are not part of any host group.</p>
-</blockquote>
-<ul>
-<li>Linux native multipathing requirements</li>
-<li>Mount propagation is enabled on container runtime that is being used</li>
-<li>If using Snapshot feature, satisfy all Volume Snapshot requirements</li>
-<li>Insecure registries are defined in Docker or other container runtimes, for CSI drivers that are hosted in a non-secure location.</li>
-<li>Ensure that your nodes support mounting NFS volumes if using NFS</li>
-</ul>
-<h4 id="fibre-channel-requirements">
-Fibre Channel requirements <a class="header-link"  href="#fibre-channel-requirements" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
+<h3 id="fibre-channel-requirements">
+Fibre Channel Requirements <a class="header-link"  href="#fibre-channel-requirements" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
             <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
                 <path d="M0 0h24v24H0z" fill="none"/>
                 <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
             </svg>
-        </a></h4><p>Dell PowerStore supports Fibre Channel communication. If you use the Fibre Channel protocol, ensure that the
-following requirement is met before you install the CSI Driver for Dell PowerStore:</p>
+        </a></h3><p>The following requirements must be fulfilled in order to successfully use the Fiber Channel protocol with the CSI PowerStore driver:</p>
 <ul>
-<li>Zoning of the Host Bus Adapters (HBAs) to the Fibre Channel port must be done.</li>
+<li>Zoning of the Host Bus Adapters (HBAs) to the Fibre Channel ports on the PowerStore arrays must be done.</li>
+<li>If the number of volumes that will be published to nodes is high, then configure the maximum number of LUNs for your HBAs on each node. See the appropriate HBA document to configure the maximum number of LUNs.</li>
 </ul>
-<h4 id="set-up-the-iscsi-initiator">
-Set up the iSCSI Initiator <a class="header-link"  href="#set-up-the-iscsi-initiator" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
+<h3 id="iscsi-requirements">
+iSCSI Requirements <a class="header-link"  href="#iscsi-requirements" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
             <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
                 <path d="M0 0h24v24H0z" fill="none"/>
                 <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
             </svg>
-        </a></h4><p>The CSI Driver for Dell PowerStore v1.4 and higher supports iSCSI connectivity.</p>
-<p>If you use the iSCSI protocol, set up the iSCSI initiators as follows:</p>
+        </a></h3><p>The following requirements must be fulfilled in order to successfully use the iSCSI protocol with the CSI PowerStore driver:</p>
 <ul>
-<li>
-<p>Ensure that the iSCSI initiators are available on both Controller and Worker nodes.</p>
-</li>
-<li>
-<p>Kubernetes nodes must have network connectivity to an iSCSI port on the Dell PowerStore array that
-has IP interfaces. Manually create IP routes for each node that connects to the Dell PowerStore.</p>
-</li>
-<li>
-<p>All Kubernetes nodes must have the <em>iscsi-initiator-utils</em> package for CentOS/RHEL or <em>open-iscsi</em> package for Ubuntu installed, and the <em>iscsid</em> service must be enabled and running.
-To do this, run the <code>systemctl enable --now iscsid</code> command.</p>
-</li>
-<li>
-<p>Ensure that the unique initiator name is set in <em>/etc/iscsi/initiatorname.iscsi</em>.</p>
-</li>
+<li>All Kubernetes nodes must have the <em>iscsi-initiator-utils</em> package installed. On Debian based distributions the package name is  <em>open-iscsi</em>.</li>
+<li>The <em>iscsid</em> service must be enabled and running. You can enable the service by running the following command on all worker nodes: <code>systemctl enable --now iscsid</code></li>
+<li>To configure iSCSI in Red Hat OpenShift clusters, you can create a <code>MachineConfig</code> object using the console or <code>oc</code> to ensure that the iSCSI daemon starts on all the Red Hat CoreOS nodes. Here is an example of a <code>MachineConfig</code> object:</li>
 </ul>
-<p>For information about configuring iSCSI, see <em>Dell PowerStore documentation</em> on Dell Support.</p>
-<h3 id="set-up-the-nvme-initiator">
-Set up the NVMe Initiator <a class="header-link"  href="#set-up-the-nvme-initiator" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">apiVersion</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">machineconfiguration.openshift.io/v1</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">kind</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">MachineConfig</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">metadata</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#0000cf;font-weight:bold">99</span>-<span style="color:#000">iscsid</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">labels</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">machineconfiguration.openshift.io/role</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">worker</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">spec</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">config</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">ignition</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">version</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#0000cf;font-weight:bold">3.2.0</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">systemd</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">units</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span>- <span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;iscsid.service&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">enabled</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span></code></pre></div><p>Once the <code>MachineConfig</code> object has been deployed, CoreOS will ensure that the <code>iscsid.service</code> starts automatically. You can check the status of the iSCSI service by entering the following command on each worker node in the cluster: <code>sudo systemctl status iscsid</code>.</p>
+<ul>
+<li>Ensure that the iSCSI initiators are available on all the nodes where the driver node plugin will be installed.</li>
+<li>Ensure that the unique initiator name is set in <em>/etc/iscsi/initiatorname.iscsi</em>.</li>
+<li>Kubernetes nodes must have network connectivity to an iSCSI port on the Dell PowerStore array that
+has IP interfaces.</li>
+<li>Ensure that the iSCSI initiators on the nodes are not a part of any existing Host or Host Group on the Dell PowerStore arrays. The driver will create host entries for the iSCSI initiators which adheres to the naming conventions required by the driver.</li>
+</ul>
+<p>Refer to the <a href="https://elabnavigator.dell.com/vault/pdf/Linux.pdf">Dell Host Connectivity Guide</a> for more information.</p>
+<h3 id="nvme-requirements">
+NVMe Requirements <a class="header-link"  href="#nvme-requirements" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
             <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
                 <path d="M0 0h24v24H0z" fill="none"/>
                 <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
             </svg>
         </a></h3><p>The following requirements must be fulfilled in order to successfully use the NVMe protocols with the CSI PowerStore driver:</p>
 <ul>
-<li>All OpenShift or Kubernetes nodes connecting to Dell storage arrays must use unique NQNs.</li>
-<li>The driver requires the NVMe command-line interface (nvme-cli) to manage the NVMe client and target. The nvme-cli utility provides a command-line and interactive shell option. The NVMe CLI tool is installed in the host using the below command on RPM oriented Linux distributions.</li>
+<li>All OpenShift or Kubernetes nodes connecting to Dell storage arrays must use unique host NQNs.</li>
+<li>The driver requires the NVMe command-line interface (nvme-cli) to manage the NVMe clients and targets. The NVMe CLI tool is installed in the host using the following command on RPM oriented Linux distributions.</li>
 </ul>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo dnf -y install nvme-cli
 </span></span></code></pre></div><ul>
-<li>Support for NVMe requires native NVMe multipathing to be configured on each worker node in the cluster. Please refer to the <a href="https://elabnavigator.dell.com/vault/pdf/Linux.pdf?key=1725374107988">Dell Host Connectivity Guide</a> for more details on NVMe connectivity requirements. To determine if the worker nodes are configured for native NVMe multipathing run the following command on each worker node:</li>
+<li>Support for NVMe requires native NVMe multipathing to be configured on each worker node in the cluster. Please refer to the <a href="https://elabnavigator.dell.com/vault/pdf/Linux.pdf">Dell Host Connectivity Guide</a> for more details on NVMe multipathing requirements. To determine if the worker nodes are configured for native NVMe multipathing run the following command on each worker node:</li>
 </ul>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cat /sys/module/nvme_core/parameters/multipath
 </span></span></code></pre></div><blockquote>
-<p>If the result of the command displays Y then NVMe native multipathing is enabled in the kernel. If the output is N then native NVMe multipating is disabled. Consult the <a href="https://elabnavigator.dell.com/vault/pdf/Linux.pdf?key=1725374107988">Dell Host Connectivity Guide</a> for Linux to enable native NVMe multipathing.</p>
+<p>If the result of the command displays Y then NVMe native multipathing is enabled in the kernel. If the output is N then native NVMe multipating is disabled. Consult the <a href="https://elabnavigator.dell.com/vault/pdf/Linux.pdf">Dell Host Connectivity Guide</a> for Linux to enable native NVMe multipathing.</p>
 </blockquote>
+<p><strong>Configure the IO policy</strong></p>
 <ul>
 <li>The default NVMeTCP native multipathing policy is &ldquo;numa&rdquo;. The preferred IO policy for NVMe devices used for PowerStore is round-robin. You can use udev rules to enable the round robin policy on all worker nodes. To view the IO policy you can use the following command:</li>
 </ul>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>nvme list-subsys
-</span></span></code></pre></div><p><strong>Configure the IO policy</strong></p>
-<p>To change the IO policy to round-robin you can add a udev rule on each worker node. Place a config file in /etc/udev/rules.d with the name 71-nvme-io-policy.rules with the following contents:</p>
+</span></span></code></pre></div><p>To change the IO policy to round-robin you can add a udev rule on each worker node. Place a config file in /etc/udev/rules.d with the name 71-nvme-io-policy.rules with the following contents:</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>ACTION==&#34;add|change&#34;, SUBSYSTEM==&#34;nvme-subsystem&#34;, ATTR{iopolicy}=&#34;round-robin&#34;
 </span></span></code></pre></div><p>In order to change the rules on a running kernel you can run the following commands:</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>/sbin/udevadm control --reload-rules
@@ -865,7 +853,7 @@ Set up the NVMe Initiator <a class="header-link"  href="#set-up-the-nvme-initiat
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">mode</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#0000cf;font-weight:bold">420</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">path</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">/etc/udev/rules.d/71-nvme-io-policy.rules</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span></code></pre></div><p><strong>Configure the control loss timeout</strong></p>
-<p>To reduce the impact of PowerStore non disruptive software upgrades you must set the control loss timeout. This can be done using udev rules on each worker node. More information can be found in the <a href="https://elabnavigator.dell.com/vault/pdf/Linux.pdf?key=1725374107988">Dell Host Connectivity Guide</a>. To configure the control loss timeout place a config file in /etc/udev/rules.d with the name 72-nvmf-ctrl_loss_tmo.rules with the following contents:</p>
+<p>To reduce the impact of PowerStore non disruptive software upgrades you must set the control loss timeout. This can be done using udev rules on each worker node. More information can be found in the <a href="https://elabnavigator.dell.com/vault/pdf/Linux.pdf">Dell Host Connectivity Guide</a>. To configure the control loss timeout place a config file in /etc/udev/rules.d with the name 72-nvmf-ctrl_loss_tmo.rules with the following contents:</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>ACTION==&#34;add|change&#34;, SUBSYSTEM==&#34;nvme&#34;, KERNEL==&#34;nvme*&#34;, ATTR{ctrl_loss_tmo}=&#34;-1&#34;
 </span></span></code></pre></div><p>In order to change the rules on a running kernel you can run the following commands:</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>/sbin/udevadm control --reload-rules
@@ -905,32 +893,26 @@ Set up the NVMe Initiator <a class="header-link"  href="#set-up-the-nvme-initiat
 <ul>
 <li>NVMeFC Zoning of the Host Bus Adapters (HBAs) to the Fibre Channel port must be done.</li>
 </ul>
-<p><em>NOTE:</em></p>
-<ul>
-<li>Do not load the nvme_tcp module for NVMeFC</li>
-</ul>
+<blockquote>
+<p>Do not load the nvme_tcp module for NVMeFC</p>
+</blockquote>
 <h3 id="linux-multipathing-requirements">
-Linux multipathing requirements <a class="header-link"  href="#linux-multipathing-requirements" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
+Linux Multipathing Requirements <a class="header-link"  href="#linux-multipathing-requirements" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
             <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
                 <path d="M0 0h24v24H0z" fill="none"/>
                 <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
             </svg>
-        </a></h3><blockquote>
+        </a></h3><p>Dell PowerStore supports Linux multipathing (DM-MPIO) and NVMe native multipathing. Configure Linux multipathing before installing the CSI Driver.</p>
+<blockquote>
 <p>For NVMe connectivity native NVMe multipathing is used. The following sections apply only for iSCSI and Fiber Channel connectivity.</p>
 </blockquote>
-<p>Dell PowerStore supports Linux multipathing and NVMe native multipathing. Configure Linux multipathing before installing the CSI Driver for Dell
-PowerStore.</p>
-<p>Set up Linux multipathing as follows:</p>
+<p>Configure Linux multipathing as follows:</p>
 <ul>
-<li>Ensure that all nodes have the <em>Device Mapper Multipathing</em> package installed.</li>
-</ul>
-<blockquote>
-<p>You can install it by running <code>yum install device-mapper-multipath</code> on CentOS or <code>apt install multipath-tools</code> on Ubuntu. This package should create a multipath configuration file located in <code>/etc/multipath.conf</code>.</p>
-</blockquote>
-<ul>
-<li>Enable multipathing using the <code>mpathconf --enable --with_multipathd y</code> command.</li>
+<li>Ensure that all nodes have the <em>Device Mapper Multipathing</em> package installed.
+You can install it by running <code>dnf install device-mapper-multipath</code> or <code>apt install multipath-tools</code> based on your Linux distribution.</li>
+<li>Enable multipathing using the <code>mpathconf --enable --with_multipathd y</code> command.  A default configuration file, <code>/etc/multipath.conf</code> is created.</li>
 <li>Enable <code>user_friendly_names</code> and <code>find_multipaths</code> in the <code>multipath.conf</code> file.</li>
-<li>Ensure that the multipath command for <code>multipath.conf</code> is available on all Kubernetes nodes.</li>
+<li>Ensure that the <code>multipath</code> command for <code>multipath.conf</code> is available on all Kubernetes nodes.</li>
 </ul>
 <p>The following is a sample multipath.conf file:</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>defaults {
@@ -939,10 +921,8 @@ PowerStore.</p>
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>  blacklist {
 </span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>If the above command is not successful, ensure that the /etc/multipath.conf file is present and configured properly. Once the file has been configured correctly, enable the multipath service by running the following command:
-<code>sudo systemctl enable multipathd</code></p>
-<p>Finally, you have to restart the service by providing the command
-<code>sudo systemctl restart multipathd</code></p>
+</span></span></code></pre></div><p>On some distributions the multipathd service for changes to the configuration and dynamically reconfigures itself. If you need to manually trigger a reload you can run the following command:
+<code>sudo systemctl reload multipathd</code></p>
 <p>On OCP clusters you can add a MachineConfig to configure multipathing on the worker nodes.</p>
 <p>You will need to first base64 encode the multipath.conf and add it to the MachineConfig definition.</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#204a87">echo</span> <span style="color:#4e9a06">&#39;defaults {
@@ -971,27 +951,32 @@ PowerStore.</p>
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">mode</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#0000cf;font-weight:bold">400</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">path</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">/etc/multipath.conf</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span></code></pre></div><p>After deploying this<code>MachineConfig</code> object, CoreOS will start the multipath service automatically.
-Alternatively, you can check the status of the multipath service by entering the following command in each worker nodes.
+Alternatively, you can check the status of the multipath service by running the following command on each worker node.
 <code>sudo multipath -ll</code></p>
-<p>For additional information refer to the <a href="https://elabnavigator.dell.com/vault/pdf/Linux.pdf?key=1725374107988">Dell Host Connectivity Guide</a>.</p>
-<h4 id="optional-volume-snapshot-requirements">
-(Optional) Volume Snapshot Requirements <a class="header-link"  href="#optional-volume-snapshot-requirements" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
+<p>Refer to the <a href="https://elabnavigator.dell.com/vault/pdf/Linux.pdf">Dell Host Connectivity Guide</a> for more information.</p>
+<h3 id="volume-snapshot-requirements-optional">
+Volume Snapshot Requirements (Optional) <a class="header-link"  href="#volume-snapshot-requirements-optional" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
             <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
                 <path d="M0 0h24v24H0z" fill="none"/>
                 <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
             </svg>
-        </a></h4><p>For detailed snapshot setup procedure, <a href="../../../../snapshots/#optional-volume-snapshot-requirements">click here.</a></p>
-<h4 id="optional-replication-feature-requirements">
-(Optional) Replication feature Requirements <a class="header-link"  href="#optional-replication-feature-requirements" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
+        </a></h3><p>For detailed snapshot setup procedure, <a href="../../../../snapshots/#optional-volume-snapshot-requirements">click here.</a></p>
+<h3 id="replication-requirements-optional">
+Replication Requirements (Optional) <a class="header-link"  href="#replication-requirements-optional" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
             <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
                 <path d="M0 0h24v24H0z" fill="none"/>
                 <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
             </svg>
-        </a></h4><p>Applicable only if you decided to enable the Replication feature in <code>sample.yaml</code></p>
+        </a></h3><p>Applicable only if you decided to enable the Replication feature in <code>sample.yaml</code></p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">replication</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">enabled</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span></code></pre></div><h5 id="replication-crds">
-Replication CRD&rsquo;s</h5><p>The CRDs for replication can be obtained and installed from the csm-replication project on Github. Use <code>csm-replication/deploy/replicationcrds.all.yaml</code> located in csm-replication git repo for the installation.</p>
+</span></span></span></code></pre></div><h4 id="replication-crds">
+Replication CRDs <a class="header-link"  href="#replication-crds" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
+            <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 0h24v24H0z" fill="none"/>
+                <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
+            </svg>
+        </a></h4><p>The CRDs for replication can be obtained and installed from the csm-replication project on Github. Use <code>csm-replication/deploy/replicationcrds.all.yaml</code> located in csm-replication git repo for the installation.</p>
 <p>CRDs should be configured during replication prepare stage with repctl as described in <a href="../../../helm/modules/installation/replication/install-repctl">install-repctl</a></p>
 <h3 id="namespace-and-powerstore-api-access-configuration">
 Namespace and PowerStore API Access Configuration <a class="header-link"  href="#namespace-and-powerstore-api-access-configuration" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
@@ -1044,19 +1029,24 @@ User Privileges <a class="header-link"  href="#user-privileges" style=" display:
 </span></span><span style="display:flex;"><span>sed <span style="color:#4e9a06">&#34;s/CONFIG_YAML/`cat config.yaml | base64 -w0`/g&#34;</span> secret.yaml <span style="color:#000;font-weight:bold">|</span> kubectl apply -f -
 </span></span></code></pre></div></li>
 </ol>
-<h3 id="install-driver">
+<h2 id="install-driver">
 Install Driver <a class="header-link"  href="#install-driver" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
             <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
                 <path d="M0 0h24v24H0z" fill="none"/>
                 <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
             </svg>
-        </a></h3><ol>
+        </a></h2><ol>
 <li>
 <p>Follow all the <a href="/csm-docs/v1/deployment/csmoperator/drivers/powerstore/#prerequisites">prerequisites</a> above</p>
 </li>
 <li>
-<p>Create a CR (Custom Resource) for PowerStore using the sample files provided
-<a href="https://github.com/dell/csm-operator/tree/master/samples">here</a>. This file can be modified to use custom parameters if needed.</p>
+<p>Create a CR (Custom Resource) for PowerStore using the sample files provided</p>
+<p>a. Install the PowerStore driver using default configuration using
+the sample file provided
+<a href="https://github.com/dell/csm-operator/tree/main/samples/minimal-samples">here</a>. This file can be modified to use custom parameters if needed.</p>
+<p>b. Install the PowerStore driver using the detailed configuration using
+the sample file provided
+<a href="https://github.com/dell/csm-operator/tree/main/samples">here</a>.</p>
 </li>
 <li>
 <p>Users should configure the parameters in CR. The following table lists the primary configurable parameters of the PowerStore driver and their default values:</p>
@@ -1065,84 +1055,102 @@ Install Driver <a class="header-link"  href="#install-driver" style=" display: i
 <table>
   <thead>
       <tr>
-          <th style="text-align: left">Parameter</th>
-          <th style="text-align: left">Description</th>
-          <th style="text-align: left">Required</th>
-          <th style="text-align: left">Default</th>
+          <th>Parameter</th>
+          <th>Description</th>
+          <th>Required</th>
+          <th>Default</th>
       </tr>
   </thead>
   <tbody>
       <tr>
-          <td style="text-align: left">replicas</td>
-          <td style="text-align: left">Controls the number of controller pods you deploy. If the number of controller pods is greater than the number of available nodes, the excess pods will be in pending state until new nodes are available for scheduling. Default is 2 which allows for Controller high availability.</td>
-          <td style="text-align: left">Yes</td>
-          <td style="text-align: left">2</td>
+          <td>replicas</td>
+          <td>Controls the number of controller pods you deploy. If the number of controller pods is greater than the number of available nodes, the excess pods will be in pending state until new nodes are available for scheduling. Default is 2 which allows for Controller high availability.</td>
+          <td>Yes</td>
+          <td>2</td>
       </tr>
       <tr>
-          <td style="text-align: left">namespace</td>
-          <td style="text-align: left">Specifies namespace where the driver will be installed</td>
-          <td style="text-align: left">Yes</td>
-          <td style="text-align: left">&ldquo;powerstore&rdquo;</td>
+          <td>namespace</td>
+          <td>Specifies namespace where the driver will be installed</td>
+          <td>Yes</td>
+          <td>&ldquo;powerstore&rdquo;</td>
       </tr>
       <tr>
-          <td style="text-align: left">fsGroupPolicy</td>
-          <td style="text-align: left">Defines which FS Group policy mode to be used. Supported modes <code>None, File and ReadWriteOnceWithFSType</code>. In OCP &lt;= 4.16 and K8s &lt;= 1.29, fsGroupPolicy is an immutable field.</td>
-          <td style="text-align: left">No</td>
-          <td style="text-align: left">&ldquo;ReadWriteOnceWithFSType&rdquo;</td>
+          <td>fsGroupPolicy</td>
+          <td>Defines which FS Group policy mode to be used. Supported modes <code>None, File and ReadWriteOnceWithFSType</code>. In OCP &lt;= 4.16 and K8s &lt;= 1.29, fsGroupPolicy is an immutable field.</td>
+          <td>No</td>
+          <td>&ldquo;ReadWriteOnceWithFSType&rdquo;</td>
       </tr>
       <tr>
-          <td style="text-align: left">storageCapacity</td>
-          <td style="text-align: left">Enable/Disable storage capacity tracking feature</td>
-          <td style="text-align: left">No</td>
-          <td style="text-align: left">false</td>
+          <td>storageCapacity</td>
+          <td>Enable/Disable storage capacity tracking feature</td>
+          <td>No</td>
+          <td>false</td>
       </tr>
       <tr>
-          <td style="text-align: left"><em><strong>Common parameters for node and controller</strong></em></td>
-          <td style="text-align: left"></td>
-          <td style="text-align: left"></td>
-          <td style="text-align: left"></td>
+          <td><em><strong>Common parameters for node and controller</strong></em></td>
+          <td></td>
+          <td></td>
+          <td></td>
       </tr>
       <tr>
-          <td style="text-align: left">X_CSI_POWERSTORE_NODE_NAME_PREFIX</td>
-          <td style="text-align: left">Prefix to add to each node registered by the CSI driver</td>
-          <td style="text-align: left">Yes</td>
-          <td style="text-align: left">&ldquo;csi-node&rdquo;</td>
+          <td>X_CSI_POWERSTORE_NODE_NAME_PREFIX</td>
+          <td>Prefix to add to each node registered by the CSI driver</td>
+          <td>Yes</td>
+          <td>&ldquo;csi-node&rdquo;</td>
       </tr>
       <tr>
-          <td style="text-align: left">X_CSI_FC_PORTS_FILTER_FILE_PATH</td>
-          <td style="text-align: left">To set path to the file which provides a list of WWPN which should be used by the driver for FC connection on this node</td>
-          <td style="text-align: left">No</td>
-          <td style="text-align: left">&ldquo;/etc/fc-ports-filter&rdquo;</td>
+          <td>X_CSI_FC_PORTS_FILTER_FILE_PATH</td>
+          <td>To set path to the file which provides a list of WWPN which should be used by the driver for FC connection on this node</td>
+          <td>No</td>
+          <td>&ldquo;/etc/fc-ports-filter&rdquo;</td>
       </tr>
       <tr>
-          <td style="text-align: left"><em><strong>Controller parameters</strong></em></td>
-          <td style="text-align: left"></td>
-          <td style="text-align: left"></td>
-          <td style="text-align: left"></td>
+          <td><em><strong>Controller parameters</strong></em></td>
+          <td></td>
+          <td></td>
+          <td></td>
       </tr>
       <tr>
-          <td style="text-align: left">X_CSI_POWERSTORE_EXTERNAL_ACCESS</td>
-          <td style="text-align: left">allows specifying additional entries for hostAccess of NFS volumes. Both single IP address and subnet are valid entries</td>
-          <td style="text-align: left">No</td>
-          <td style="text-align: left">empty</td>
+          <td>X_CSI_POWERSTORE_EXTERNAL_ACCESS</td>
+          <td>allows specifying additional entries for hostAccess of NFS volumes. Both single IP address and subnet are valid entries</td>
+          <td>No</td>
+          <td>empty</td>
       </tr>
       <tr>
-          <td style="text-align: left">X_CSI_NFS_ACLS</td>
-          <td style="text-align: left">Defines permissions - POSIX mode bits or NFSv4 ACLs, to be set on NFS target mount directory.</td>
-          <td style="text-align: left">No</td>
-          <td style="text-align: left">&ldquo;0777&rdquo;</td>
+          <td>X_CSI_NFS_ACLS</td>
+          <td>Defines permissions - POSIX mode bits or NFSv4 ACLs, to be set on NFS target mount directory.</td>
+          <td>No</td>
+          <td>&ldquo;0777&rdquo;</td>
       </tr>
       <tr>
-          <td style="text-align: left"><em><strong>Node parameters</strong></em></td>
-          <td style="text-align: left"></td>
-          <td style="text-align: left"></td>
-          <td style="text-align: left"></td>
+          <td><em><strong>Node parameters</strong></em></td>
+          <td></td>
+          <td></td>
+          <td></td>
       </tr>
       <tr>
-          <td style="text-align: left">X_CSI_POWERSTORE_ENABLE_CHAP</td>
-          <td style="text-align: left">Set to true if you want to enable iSCSI CHAP feature</td>
-          <td style="text-align: left">No</td>
-          <td style="text-align: left">false</td>
+          <td>X_CSI_POWERSTORE_ENABLE_CHAP</td>
+          <td>Set to true if you want to enable iSCSI CHAP feature</td>
+          <td>No</td>
+          <td>false</td>
+      </tr>
+      <tr>
+          <td><em><strong>Sidecar parameters</strong></em></td>
+          <td></td>
+          <td></td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>volume-name-prefix</td>
+          <td>The volume-name-prefix will be used by provisioner sidecar as a prefix for all the volumes created</td>
+          <td>Yes</td>
+          <td>csivol</td>
+      </tr>
+      <tr>
+          <td>monitor-interval</td>
+          <td>The monitor-interval will be used by external-health-monitor as an interval for health checks</td>
+          <td>Yes</td>
+          <td>60s</td>
       </tr>
   </tbody>
 </table>
@@ -1272,7 +1280,7 @@ require the driver to be restarted to properly pick up and process the changes.<
 
       </div><div class="td-footer__center col-12 col-sm-4 py-2 order-sm-2">
         <span class="td-footer__copyright">&copy;
-    2024
+    2025
     <span class="td-footer__authors">The Dell Technologies</span></span><span class="td-footer__all_rights_reserved">All Rights Reserved</span><span class="ms-2"><a href="https://www.dell.com/learn/us/en/uscorp1/policies-privacy" target="_blank" rel="noopener">Privacy Policy</a></span>
       </div>
     </div>

@@ -55,10 +55,10 @@
         <div class="dropdown">
   <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Releases</a>
   <ul class="dropdown-menu">
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.12.0)</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.11.1</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.10.2</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">v1.9.4</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.13.0)</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.12.0</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.11.1</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">v1.10.2</a></li>
     </ul>
 </div></li>
       <li class="td-light-dark-menu nav-item dropdown">
@@ -124,7 +124,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.5b43d3acf6640adab15d0e301eb69f8e.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.30cbd121c9a04dbae82fa0989eaa7269.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -148,7 +148,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.5b43d3acf6640adab15d0e301eb69f8e.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.30cbd121c9a04dbae82fa0989eaa7269.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -761,60 +761,60 @@ Configuring Storage <a class="header-link"  href="#configuring-storage" style=" 
 <table>
   <thead>
       <tr>
-          <th style="text-align: left">Parameter</th>
-          <th style="text-align: left">Description</th>
-          <th style="text-align: left">Required</th>
-          <th style="text-align: left">Default</th>
+          <th>Parameter</th>
+          <th>Description</th>
+          <th>Required</th>
+          <th>Default</th>
       </tr>
   </thead>
   <tbody>
       <tr>
-          <td style="text-align: left">type</td>
-          <td style="text-align: left">The type of the stoage array.</td>
-          <td style="text-align: left">Yes</td>
-          <td style="text-align: left">-</td>
+          <td>type</td>
+          <td>The type of the stoage array.</td>
+          <td>Yes</td>
+          <td>-</td>
       </tr>
       <tr>
-          <td style="text-align: left">endpoint</td>
-          <td style="text-align: left">HTTPS REST API endpoint of the backend storage array.</td>
-          <td style="text-align: left">Yes</td>
-          <td style="text-align: left">-</td>
+          <td>endpoint</td>
+          <td>HTTPS REST API endpoint of the backend storage array.</td>
+          <td>Yes</td>
+          <td>-</td>
       </tr>
       <tr>
-          <td style="text-align: left">systemID</td>
-          <td style="text-align: left">System ID of the backend storage array.</td>
-          <td style="text-align: left">Yes</td>
-          <td style="text-align: left">-</td>
+          <td>systemID</td>
+          <td>System ID of the backend storage array.</td>
+          <td>Yes</td>
+          <td>-</td>
       </tr>
       <tr>
-          <td style="text-align: left">vault.identifier</td>
-          <td style="text-align: left">The identifier of the Vault to be used that was configured in the Authorization CR.</td>
-          <td style="text-align: left">Yes</td>
-          <td style="text-align: left">-</td>
+          <td>vault.identifier</td>
+          <td>The identifier of the Vault to be used that was configured in the Authorization CR.</td>
+          <td>Yes</td>
+          <td>-</td>
       </tr>
       <tr>
-          <td style="text-align: left">vault.kvEngine</td>
-          <td style="text-align: left">The path to the KV secrets engine.</td>
-          <td style="text-align: left">Yes</td>
-          <td style="text-align: left">secret</td>
+          <td>vault.kvEngine</td>
+          <td>The path to the KV secrets engine.</td>
+          <td>Yes</td>
+          <td>secret</td>
       </tr>
       <tr>
-          <td style="text-align: left">vault.path</td>
-          <td style="text-align: left">The location within the store that the credentials for the array are stored.</td>
-          <td style="text-align: left">Yes</td>
-          <td style="text-align: left">-</td>
+          <td>vault.path</td>
+          <td>The location within the store that the credentials for the array are stored.</td>
+          <td>Yes</td>
+          <td>-</td>
       </tr>
       <tr>
-          <td style="text-align: left">skipCertificateValidation</td>
-          <td style="text-align: left">A boolean that enables/disables certificate validation of the backend storage array.</td>
-          <td style="text-align: left">No</td>
-          <td style="text-align: left">true</td>
+          <td>skipCertificateValidation</td>
+          <td>A boolean that enables/disables certificate validation of the backend storage array.</td>
+          <td>No</td>
+          <td>true</td>
       </tr>
       <tr>
-          <td style="text-align: left">pollInterval</td>
-          <td style="text-align: left">PollInterval is the polling frequency to test the storage connectivity.</td>
-          <td style="text-align: left">No</td>
-          <td style="text-align: left">30s</td>
+          <td>pollInterval</td>
+          <td>PollInterval is the polling frequency to test the storage connectivity.</td>
+          <td>No</td>
+          <td>30s</td>
       </tr>
   </tbody>
 </table>
@@ -849,42 +849,42 @@ Configuring Roles <a class="header-link"  href="#configuring-roles" style=" disp
 <table>
   <thead>
       <tr>
-          <th style="text-align: left">Parameter</th>
-          <th style="text-align: left">Description</th>
-          <th style="text-align: left">Required</th>
-          <th style="text-align: left">Default</th>
+          <th>Parameter</th>
+          <th>Description</th>
+          <th>Required</th>
+          <th>Default</th>
       </tr>
   </thead>
   <tbody>
       <tr>
-          <td style="text-align: left">name</td>
-          <td style="text-align: left">The name of the role that will be used to bind with the tenant.</td>
-          <td style="text-align: left">Yes</td>
-          <td style="text-align: left">-</td>
+          <td>name</td>
+          <td>The name of the role that will be used to bind with the tenant.</td>
+          <td>Yes</td>
+          <td>-</td>
       </tr>
       <tr>
-          <td style="text-align: left">quota</td>
-          <td style="text-align: left">The amount of allocated space for the specified role.</td>
-          <td style="text-align: left">Yes</td>
-          <td style="text-align: left">-</td>
+          <td>quota</td>
+          <td>The amount of allocated space for the specified role.</td>
+          <td>Yes</td>
+          <td>-</td>
       </tr>
       <tr>
-          <td style="text-align: left">systemID</td>
-          <td style="text-align: left">System ID of the backend storage array.</td>
-          <td style="text-align: left">Yes</td>
-          <td style="text-align: left">-</td>
+          <td>systemID</td>
+          <td>System ID of the backend storage array.</td>
+          <td>Yes</td>
+          <td>-</td>
       </tr>
       <tr>
-          <td style="text-align: left">systemType</td>
-          <td style="text-align: left">The type of the stoage array.</td>
-          <td style="text-align: left">Yes</td>
-          <td style="text-align: left">-</td>
+          <td>systemType</td>
+          <td>The type of the stoage array.</td>
+          <td>Yes</td>
+          <td>-</td>
       </tr>
       <tr>
-          <td style="text-align: left">pool</td>
-          <td style="text-align: left">The storage pool name.</td>
-          <td style="text-align: left">Yes</td>
-          <td style="text-align: left">-</td>
+          <td>pool</td>
+          <td>The storage pool name.</td>
+          <td>Yes</td>
+          <td>-</td>
       </tr>
   </tbody>
 </table>
@@ -920,36 +920,36 @@ Configuring Tenants <a class="header-link"  href="#configuring-tenants" style=" 
 <table>
   <thead>
       <tr>
-          <th style="text-align: left">Parameter</th>
-          <th style="text-align: left">Description</th>
-          <th style="text-align: left">Required</th>
-          <th style="text-align: left">Default</th>
+          <th>Parameter</th>
+          <th>Description</th>
+          <th>Required</th>
+          <th>Default</th>
       </tr>
   </thead>
   <tbody>
       <tr>
-          <td style="text-align: left">roles</td>
-          <td style="text-align: left">A comma seperate list of roles that the tenant can be associated with.</td>
-          <td style="text-align: left">Yes</td>
-          <td style="text-align: left">-</td>
+          <td>roles</td>
+          <td>A comma seperate list of roles that the tenant can be associated with.</td>
+          <td>Yes</td>
+          <td>-</td>
       </tr>
       <tr>
-          <td style="text-align: left">approveSdc</td>
-          <td style="text-align: left">ApproveSdc is used to enable an SDC to access the MDM while the SDC is in restricted access mode.</td>
-          <td style="text-align: left">Yes</td>
-          <td style="text-align: left">false</td>
+          <td>approveSdc</td>
+          <td>ApproveSdc is used to enable an SDC to access the MDM while the SDC is in restricted access mode.</td>
+          <td>Yes</td>
+          <td>false</td>
       </tr>
       <tr>
-          <td style="text-align: left">revoke</td>
-          <td style="text-align: left">Revoke is a boolean to indicate whether tenant is revoked. Set to <code>true</code> to revoke the tenant but keep it in CSM Auth.</td>
-          <td style="text-align: left">Yes</td>
-          <td style="text-align: left">false</td>
+          <td>revoke</td>
+          <td>Revoke is a boolean to indicate whether tenant is revoked. Set to <code>true</code> to revoke the tenant but keep it in CSM Auth.</td>
+          <td>Yes</td>
+          <td>false</td>
       </tr>
       <tr>
-          <td style="text-align: left">volumePrefix</td>
-          <td style="text-align: left">The prefix that all volumes and snapshots will contain to show association with the tenant. It should not exceed 3 characters.</td>
-          <td style="text-align: left">Yes</td>
-          <td style="text-align: left">-</td>
+          <td>volumePrefix</td>
+          <td>The prefix that all volumes and snapshots will contain to show association with the tenant. It should not exceed 3 characters.</td>
+          <td>Yes</td>
+          <td>-</td>
       </tr>
   </tbody>
 </table>
@@ -1059,7 +1059,7 @@ Generate a Token <a class="header-link"  href="#generate-a-token" style=" displa
 
       </div><div class="td-footer__center col-12 col-sm-4 py-2 order-sm-2">
         <span class="td-footer__copyright">&copy;
-    2024
+    2025
     <span class="td-footer__authors">The Dell Technologies</span></span><span class="td-footer__all_rights_reserved">All Rights Reserved</span><span class="ms-2"><a href="https://www.dell.com/learn/us/en/uscorp1/policies-privacy" target="_blank" rel="noopener">Privacy Policy</a></span>
       </div>
     </div>

@@ -56,10 +56,10 @@
         <div class="dropdown">
   <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Releases</a>
   <ul class="dropdown-menu">
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.12.0)</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.11.1</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.10.2</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">v1.9.4</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.13.0)</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.12.0</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.11.1</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">v1.10.2</a></li>
     </ul>
 </div></li>
       <li class="td-light-dark-menu nav-item dropdown">
@@ -125,7 +125,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.5b43d3acf6640adab15d0e301eb69f8e.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.30cbd121c9a04dbae82fa0989eaa7269.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -149,7 +149,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.5b43d3acf6640adab15d0e301eb69f8e.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.30cbd121c9a04dbae82fa0989eaa7269.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -703,70 +703,70 @@
 	<table>
   <thead>
       <tr>
-          <th style="text-align: left">Symptoms</th>
-          <th style="text-align: left">Prevention, Resolution or Workaround</th>
+          <th>Symptoms</th>
+          <th>Prevention, Resolution or Workaround</th>
       </tr>
   </thead>
   <tbody>
       <tr>
-          <td style="text-align: left">When you run the command <code>kubectl describe pods powerstore-controller-&lt;suffix&gt; –n csi-powerstore</code>, the system indicates that the driver image could not be loaded.</td>
-          <td style="text-align: left">- If on Kubernetes, edit the daemon.json file found in the registry location and add <code>{ &quot;insecure-registries&quot; :[ &quot;hostname.cloudapp.net:5000&quot; ] }</code> <br> - If on OpenShift, run the command <code>oc edit image.config.openshift.io/cluster</code> and add registries to yaml file that is displayed when you run the command.</td>
+          <td>When you run the command <code>kubectl describe pods powerstore-controller-&lt;suffix&gt; –n csi-powerstore</code>, the system indicates that the driver image could not be loaded.</td>
+          <td>- If on Kubernetes, edit the daemon.json file found in the registry location and add <code>{ &quot;insecure-registries&quot; :[ &quot;hostname.cloudapp.net:5000&quot; ] }</code> <br> - If on OpenShift, run the command <code>oc edit image.config.openshift.io/cluster</code> and add registries to yaml file that is displayed when you run the command.</td>
       </tr>
       <tr>
-          <td style="text-align: left">The <code>kubectl logs -n csi-powerstore powerstore-node-&lt;suffix&gt;</code> driver logs show that the driver can&rsquo;t connect to PowerStore API.</td>
-          <td style="text-align: left">Check if you&rsquo;ve created a secret with correct credentials</td>
+          <td>The <code>kubectl logs -n csi-powerstore powerstore-node-&lt;suffix&gt;</code> driver logs show that the driver can&rsquo;t connect to PowerStore API.</td>
+          <td>Check if you&rsquo;ve created a secret with correct credentials</td>
       </tr>
       <tr>
-          <td style="text-align: left">Installation of the driver on Kubernetes supported versions fails with the following error: <br /><code>Error: unable to build kubernetes objects from release manifest: unable to recognize &quot;&quot;: no matches for kind &quot;VolumeSnapshotClass&quot; in version &quot;snapshot.storage.k8s.io/v1&quot;</code></td>
-          <td style="text-align: left">Kubernetes v1.21/v1.22/v1.23 requires v1 version of snapshot CRDs to be created in cluster, see the <a href="../../../deployment/helm/drivers/installation/powerstore/#optional-volume-snapshot-requirements">Volume Snapshot Requirements</a></td>
+          <td>Installation of the driver on Kubernetes supported versions fails with the following error: <br /><code>Error: unable to build kubernetes objects from release manifest: unable to recognize &quot;&quot;: no matches for kind &quot;VolumeSnapshotClass&quot; in version &quot;snapshot.storage.k8s.io/v1&quot;</code></td>
+          <td>Kubernetes v1.21/v1.22/v1.23 requires v1 version of snapshot CRDs to be created in cluster, see the <a href="../../../deployment/helm/drivers/installation/powerstore/#optional-volume-snapshot-requirements">Volume Snapshot Requirements</a></td>
       </tr>
       <tr>
-          <td style="text-align: left">If PVC is not getting created and getting the following error in PVC description: <br /><code>failed to provision volume with StorageClass &quot;powerstore-iscsi&quot;: rpc error: code = Internal desc = : Unknown error:</code></td>
-          <td style="text-align: left">Check if you&rsquo;ve created a secret with correct credentials</td>
+          <td>If PVC is not getting created and getting the following error in PVC description: <br /><code>failed to provision volume with StorageClass &quot;powerstore-iscsi&quot;: rpc error: code = Internal desc = : Unknown error:</code></td>
+          <td>Check if you&rsquo;ve created a secret with correct credentials</td>
       </tr>
       <tr>
-          <td style="text-align: left">If the NVMeFC pod is not getting created and the host looses the ssh connection, causing the driver pods to go to error state</td>
-          <td style="text-align: left">remove the nvme_tcp module from the host incase of NVMeFC connection</td>
+          <td>If the NVMeFC pod is not getting created and the host looses the ssh connection, causing the driver pods to go to error state</td>
+          <td>remove the nvme_tcp module from the host incase of NVMeFC connection</td>
       </tr>
       <tr>
-          <td style="text-align: left">When a node goes down, the block volumes attached to the node cannot be attached to another node</td>
-          <td style="text-align: left">1. Force delete the pod running on the node that went down <br /> 2. Delete the volumeattachment to the node that went down. <br /> Now the volume can be attached to the new node.</td>
+          <td>When a node goes down, the block volumes attached to the node cannot be attached to another node</td>
+          <td>1. Force delete the pod running on the node that went down <br /> 2. Delete the volumeattachment to the node that went down. <br /> Now the volume can be attached to the new node.</td>
       </tr>
       <tr>
-          <td style="text-align: left">If the pod creation for NVMe takes time when the connections between the host and the array are more than 2 and considerable volumes are mounted on the host</td>
-          <td style="text-align: left">Reduce the number of connections between the host and the array to 2.</td>
+          <td>If the pod creation for NVMe takes time when the connections between the host and the array are more than 2 and considerable volumes are mounted on the host</td>
+          <td>Reduce the number of connections between the host and the array to 2.</td>
       </tr>
       <tr>
-          <td style="text-align: left">Driver install or upgrade fails because of an incompatible Kubernetes version, even though the version seems to be within the range of compatibility. For example: Error: UPGRADE FAILED: chart requires kubeVersion: &gt;= 1.22.0 &lt; 1.25.0 which is incompatible with Kubernetes V1.22.11-mirantis-1</td>
-          <td style="text-align: left">If you are using an extended Kubernetes version, please see the <a href="https://github.com/dell/helm-charts/blob/main/charts/csi-powerstore/Chart.yaml">helm Chart</a> and use the alternate kubeVersion check that is provided in the comments. Please note that this is not meant to be used to enable the use of pre-release alpha and beta versions, which is not supported.</td>
+          <td>Driver install or upgrade fails because of an incompatible Kubernetes version, even though the version seems to be within the range of compatibility. For example: Error: UPGRADE FAILED: chart requires kubeVersion: &gt;= 1.22.0 &lt; 1.25.0 which is incompatible with Kubernetes V1.22.11-mirantis-1</td>
+          <td>If you are using an extended Kubernetes version, please see the <a href="https://github.com/dell/helm-charts/blob/main/charts/csi-powerstore/Chart.yaml">helm Chart</a> and use the alternate kubeVersion check that is provided in the comments. Please note that this is not meant to be used to enable the use of pre-release alpha and beta versions, which is not supported.</td>
       </tr>
       <tr>
-          <td style="text-align: left">If two separate networks are configured for ISCSI and NVMeTCP, the driver may encounter difficulty identifying the second network (e.g., NVMeTCP).</td>
-          <td style="text-align: left">This is a known issue, and the workaround involves creating a single network on the array to serve both ISCSI and NVMeTCP purposes.</td>
+          <td>If two separate networks are configured for ISCSI and NVMeTCP, the driver may encounter difficulty identifying the second network (e.g., NVMeTCP).</td>
+          <td>This is a known issue, and the workaround involves creating a single network on the array to serve both ISCSI and NVMeTCP purposes.</td>
       </tr>
       <tr>
-          <td style="text-align: left">Unable to provision PVC&rsquo;s via driver</td>
-          <td style="text-align: left">Ensure that the NAS name matches the one provided on the array side.</td>
+          <td>Unable to provision PVC&rsquo;s via driver</td>
+          <td>Ensure that the NAS name matches the one provided on the array side.</td>
       </tr>
       <tr>
-          <td style="text-align: left">Unable to install or upgrade the driver</td>
-          <td style="text-align: left">Ensure  that the firewall is configured to grant adequate permissions for downloading images from the registry.</td>
+          <td>Unable to install or upgrade the driver</td>
+          <td>Ensure  that the firewall is configured to grant adequate permissions for downloading images from the registry.</td>
       </tr>
       <tr>
-          <td style="text-align: left">Faulty paths in the multipath</td>
-          <td style="text-align: left">Ensure that the configuration of the multipath is correct and connectivity to the underlying hardware is intact.</td>
+          <td>Faulty paths in the multipath</td>
+          <td>Ensure that the configuration of the multipath is correct and connectivity to the underlying hardware is intact.</td>
       </tr>
       <tr>
-          <td style="text-align: left">Unable to install or upgrade the driver due to minimum Kubernetes version or Openshift version</td>
-          <td style="text-align: left">Currently CSM only supports n, n-1, n-2 version of Kubernetes and Openshift, if you still wanted to continue with existing version update the <code>verify.sh</code> to continue.</td>
+          <td>Unable to install or upgrade the driver due to minimum Kubernetes version or Openshift version</td>
+          <td>Currently CSM only supports n, n-1, n-2 version of Kubernetes and Openshift, if you still wanted to continue with existing version update the <code>verify.sh</code> to continue.</td>
       </tr>
       <tr>
-          <td style="text-align: left">Volumes are not getting deleted on the array when PV&rsquo;s are deleted</td>
-          <td style="text-align: left">Ensure <code>persistentVolumeReclaimPolicy</code> is set to Delete.</td>
+          <td>Volumes are not getting deleted on the array when PV&rsquo;s are deleted</td>
+          <td>Ensure <code>persistentVolumeReclaimPolicy</code> is set to Delete.</td>
       </tr>
       <tr>
-          <td style="text-align: left">fsGroupPolicy may not work as expected without root privileges for NFS only <a href="https://github.com/kubernetes/examples/issues/260">https://github.com/kubernetes/examples/issues/260</a></td>
-          <td style="text-align: left">To get the desired behavior set “RootClientEnabled” = “true” in the storage class parameter</td>
+          <td>fsGroupPolicy may not work as expected without root privileges for NFS only <a href="https://github.com/kubernetes/examples/issues/260">https://github.com/kubernetes/examples/issues/260</a></td>
+          <td>To get the desired behavior set “RootClientEnabled” = “true” in the storage class parameter</td>
       </tr>
   </tbody>
 </table>
@@ -859,7 +859,7 @@
 
       </div><div class="td-footer__center col-12 col-sm-4 py-2 order-sm-2">
         <span class="td-footer__copyright">&copy;
-    2024
+    2025
     <span class="td-footer__authors">The Dell Technologies</span></span><span class="td-footer__all_rights_reserved">All Rights Reserved</span><span class="ms-2"><a href="https://www.dell.com/learn/us/en/uscorp1/policies-privacy" target="_blank" rel="noopener">Privacy Policy</a></span>
       </div>
     </div>

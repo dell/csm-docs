@@ -21,7 +21,7 @@
   <meta itemprop="name" content="Authorization - v1.x">
   <meta itemprop="description" content="Dell Technologies (Dell) Container Storage Modules (CSM) for Authorization v1.x.">
   <meta itemprop="dateModified" content="2024-10-29T12:11:18-04:00">
-  <meta itemprop="wordCount" content="486">
+  <meta itemprop="wordCount" content="483">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Authorization - v1.x">
   <meta name="twitter:description" content="Dell Technologies (Dell) Container Storage Modules (CSM) for Authorization v1.x.">
@@ -55,10 +55,10 @@
         <div class="dropdown">
   <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Releases</a>
   <ul class="dropdown-menu">
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.12.0)</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.11.1</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.10.2</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">v1.9.4</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.13.0)</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.12.0</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.11.1</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">v1.10.2</a></li>
     </ul>
 </div></li>
       <li class="td-light-dark-menu nav-item dropdown">
@@ -124,7 +124,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.5b43d3acf6640adab15d0e301eb69f8e.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.30cbd121c9a04dbae82fa0989eaa7269.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -148,7 +148,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.5b43d3acf6640adab15d0e301eb69f8e.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.30cbd121c9a04dbae82fa0989eaa7269.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -713,12 +713,12 @@
 	
 
 <div class="pageinfo pageinfo-primary">
-<p>Deprecation Notice Pre-Wire:  Starting with CSM 1.13, Authorization v1.x will be deprecated and will be officially discontinued by CSM 1.15 in September 2025. Please switch to Authorization v2.0 before then to avoid any issues. Migration steps are available <a href="/csm-docs/docs/authorization/migration-guide-from-v1-to-v2/">here</a>.</p>
+<p>Starting with CSM 1.13, Authorization v1.x will be deprecated and will be officially discontinued by CSM 1.15 in September 2025. Please switch to Authorization v2.0 before then to avoid any issues. Migration steps are available <a href="/csm-docs/docs/authorization/migration-guide-from-v1-to-v2/">here</a>.</p>
 
 </div>
 
 <p>The following diagram shows a high-level overview of CSM for Authorization with a <code>tenant-app</code> that is using a CSI driver to perform storage operations through the CSM for Authorization <code>proxy-server</code> to access the a Dell storage system. All requests from the CSI driver will contain the token for the given tenant that was granted by the Storage Administrator.</p>
-<p><img alt="CSM for Authorization" src="/csm-docs/docs/authorization/v1.x/karavi-authorization-example.png" title="CSM for Authorization"></p>
+<p><img src="/csm-docs/docs/authorization/v1.x/karavi-authorization-example.png" alt="CSM for Authorization" title="CSM for Authorization"></p>
 <h2 id="csm-for-authorization-capabilities">
 CSM for Authorization Capabilities <a class="header-link"  href="#csm-for-authorization-capabilities" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
             <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
@@ -733,38 +733,38 @@ CSM for Authorization Capabilities <a class="header-link"  href="#csm-for-author
 <table class="table table-striped table-bordered table-sm">
   <thead>
       <tr>
-          <th style="text-align: left">Feature</th>
-          <th style="text-align: left">PowerFlex</th>
-          <th style="text-align: left">PowerMax</th>
-          <th style="text-align: left">PowerScale</th>
-          <th style="text-align: left">Unity XT</th>
-          <th style="text-align: left">PowerStore</th>
+          <th>Feature</th>
+          <th>PowerFlex</th>
+          <th>PowerMax</th>
+          <th>PowerScale</th>
+          <th>Unity XT</th>
+          <th>PowerStore</th>
       </tr>
   </thead>
   <tbody>
       <tr>
-          <td style="text-align: left">Ability to set storage quota limits to ensure k8s tenants are not overconsuming storage</td>
-          <td style="text-align: left">Yes</td>
-          <td style="text-align: left">Yes</td>
-          <td style="text-align: left">No (natively supported)</td>
-          <td style="text-align: left">No</td>
-          <td style="text-align: left">No</td>
+          <td>Ability to set storage quota limits to ensure k8s tenants are not overconsuming storage</td>
+          <td>Yes</td>
+          <td>Yes</td>
+          <td>No (natively supported)</td>
+          <td>No</td>
+          <td>No</td>
       </tr>
       <tr>
-          <td style="text-align: left">Ability to create access control policies to ensure k8s tenant clusters are not accessing storage that does not belong to them</td>
-          <td style="text-align: left">Yes</td>
-          <td style="text-align: left">Yes</td>
-          <td style="text-align: left">No (natively supported)</td>
-          <td style="text-align: left">No</td>
-          <td style="text-align: left">No</td>
+          <td>Ability to create access control policies to ensure k8s tenant clusters are not accessing storage that does not belong to them</td>
+          <td>Yes</td>
+          <td>Yes</td>
+          <td>No (natively supported)</td>
+          <td>No</td>
+          <td>No</td>
       </tr>
       <tr>
-          <td style="text-align: left">Ability to shield storage credentials from Kubernetes administrators ensuring credentials are only handled by storage admins</td>
-          <td style="text-align: left">Yes</td>
-          <td style="text-align: left">Yes</td>
-          <td style="text-align: left">Yes</td>
-          <td style="text-align: left">No</td>
-          <td style="text-align: left">No</td>
+          <td>Ability to shield storage credentials from Kubernetes administrators ensuring credentials are only handled by storage admins</td>
+          <td>Yes</td>
+          <td>Yes</td>
+          <td>Yes</td>
+          <td>No</td>
+          <td>No</td>
       </tr>
   </tbody>
 </table>
@@ -827,7 +827,7 @@ c) Assign the role to the tenant and generate a token.<br></li>
 <li>Tenant Admin inputs the Token into their Kubernetes cluster as a Secret.</li>
 <li>Tenant Admin updates CSI driver with CSM Authorization sidecar module.</li>
 </ol>
-<p><img alt="CSM for Authorization Workflow" src="/csm-docs/docs/authorization/v1.x/design2.png" title="CSM for Authorization Workflow"></p>
+<p><img src="/csm-docs/docs/authorization/v1.x/design2.png" alt="CSM for Authorization Workflow" title="CSM for Authorization Workflow"></p>
 
         <div class="section-index">
     
@@ -905,7 +905,7 @@ c) Assign the role to the tenant and generate a token.<br></li>
 
       </div><div class="td-footer__center col-12 col-sm-4 py-2 order-sm-2">
         <span class="td-footer__copyright">&copy;
-    2024
+    2025
     <span class="td-footer__authors">The Dell Technologies</span></span><span class="td-footer__all_rights_reserved">All Rights Reserved</span><span class="ms-2"><a href="https://www.dell.com/learn/us/en/uscorp1/policies-privacy" target="_blank" rel="noopener">Privacy Policy</a></span>
       </div>
     </div>

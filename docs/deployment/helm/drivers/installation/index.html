@@ -14,17 +14,17 @@
 <meta property="og:url" content="https://dell.github.io/csm-docs/docs/deployment/helm/drivers/installation/">
   <meta property="og:site_name" content="Dell Technologies">
   <meta property="og:title" content="Installation">
-  <meta property="og:description" content="Installation of CSI Drivers using Helm ">
+  <meta property="og:description" content="Installation of CSI Drivers using Helm">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="website">
 
   <meta itemprop="name" content="Installation">
-  <meta itemprop="description" content="Installation of CSI Drivers using Helm ">
-  <meta itemprop="dateModified" content="2024-10-28T15:46:04-04:00">
+  <meta itemprop="description" content="Installation of CSI Drivers using Helm">
+  <meta itemprop="dateModified" content="2024-12-05T12:02:53+05:30">
   <meta itemprop="wordCount" content="176">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Installation">
-  <meta name="twitter:description" content="Installation of CSI Drivers using Helm ">
+  <meta name="twitter:description" content="Installation of CSI Drivers using Helm">
 <link rel="preload" href="/csm-docs/scss/main.min.c1b9d9da997c468756a5165a298685a703e1f9c4d6fb91aecfa7c7d02edab9a7.css" as="style" integrity="sha256-wbnZ2pl8RodWpRZaKYaFpwPh&#43;cTW&#43;5Guz6fH0C7auac=" crossorigin="anonymous">
 <link href="/csm-docs/scss/main.min.c1b9d9da997c468756a5165a298685a703e1f9c4d6fb91aecfa7c7d02edab9a7.css" rel="stylesheet" integrity="sha256-wbnZ2pl8RodWpRZaKYaFpwPh&#43;cTW&#43;5Guz6fH0C7auac=" crossorigin="anonymous">
 <script
@@ -55,10 +55,10 @@
         <div class="dropdown">
   <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Releases</a>
   <ul class="dropdown-menu">
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.12.0)</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.11.1</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.10.2</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">v1.9.4</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.13.0)</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.12.0</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.11.1</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">v1.10.2</a></li>
     </ul>
 </div></li>
       <li class="td-light-dark-menu nav-item dropdown">
@@ -124,7 +124,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.5b43d3acf6640adab15d0e301eb69f8e.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.30cbd121c9a04dbae82fa0989eaa7269.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -148,7 +148,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.5b43d3acf6640adab15d0e301eb69f8e.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.30cbd121c9a04dbae82fa0989eaa7269.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -724,22 +724,22 @@ Dependencies <a class="header-link"  href="#dependencies" style=" display: inlin
 <table>
   <thead>
       <tr>
-          <th style="text-align: left">Dependency</th>
-          <th style="text-align: left">Usage</th>
+          <th>Dependency</th>
+          <th>Usage</th>
       </tr>
   </thead>
   <tbody>
       <tr>
-          <td style="text-align: left"><code>kubectl</code></td>
-          <td style="text-align: left">Kubectl is used to validate that the Kubernetes system meets the requirements of the driver.</td>
+          <td><code>kubectl</code></td>
+          <td>Kubectl is used to validate that the Kubernetes system meets the requirements of the driver.</td>
       </tr>
       <tr>
-          <td style="text-align: left"><code>helm</code></td>
-          <td style="text-align: left">Helm v3 is used as the deployment tool for Charts. Go <a href="https://helm.sh/docs/intro/install/">here</a> to install Helm 3.</td>
+          <td><code>helm</code></td>
+          <td>Helm v3 is used as the deployment tool for Charts. Go <a href="https://helm.sh/docs/intro/install/">here</a> to install Helm 3.</td>
       </tr>
       <tr>
-          <td style="text-align: left"><code>sshpass</code></td>
-          <td style="text-align: left">sshpass is used to check certain pre-requisites in worker nodes (in chosen drivers).</td>
+          <td><code>sshpass</code></td>
+          <td>sshpass is used to check certain pre-requisites in worker nodes (in chosen drivers).</td>
       </tr>
   </tbody>
 </table>
@@ -815,7 +815,7 @@ Dependencies <a class="header-link"  href="#dependencies" style=" display: inlin
 
       </div><div class="td-footer__center col-12 col-sm-4 py-2 order-sm-2">
         <span class="td-footer__copyright">&copy;
-    2024
+    2025
     <span class="td-footer__authors">The Dell Technologies</span></span><span class="td-footer__all_rights_reserved">All Rights Reserved</span><span class="ms-2"><a href="https://www.dell.com/learn/us/en/uscorp1/policies-privacy" target="_blank" rel="noopener">Privacy Policy</a></span>
       </div>
     </div>

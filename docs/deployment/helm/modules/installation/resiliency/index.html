@@ -55,10 +55,10 @@
         <div class="dropdown">
   <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Releases</a>
   <ul class="dropdown-menu">
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.12.0)</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.11.1</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.10.2</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">v1.9.4</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.13.0)</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.12.0</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.11.1</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">v1.10.2</a></li>
     </ul>
 </div></li>
       <li class="td-light-dark-menu nav-item dropdown">
@@ -124,7 +124,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.5b43d3acf6640adab15d0e301eb69f8e.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.30cbd121c9a04dbae82fa0989eaa7269.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -148,7 +148,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.5b43d3acf6640adab15d0e301eb69f8e.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.30cbd121c9a04dbae82fa0989eaa7269.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -801,78 +801,78 @@ Podmon Arguments <a class="header-link"  href="#podmon-arguments" style=" displa
         </a></h2><table>
   <thead>
       <tr>
-          <th style="text-align: left">Argument</th>
-          <th style="text-align: left">Required</th>
-          <th style="text-align: left">Description</th>
-          <th style="text-align: left">Applicability</th>
+          <th>Argument</th>
+          <th>Required</th>
+          <th>Description</th>
+          <th>Applicability</th>
       </tr>
   </thead>
   <tbody>
       <tr>
-          <td style="text-align: left">enabled</td>
-          <td style="text-align: left">Required</td>
-          <td style="text-align: left">Boolean &ldquo;true&rdquo; enables CSM for Resiliency installation with the driver in a helm installation.</td>
-          <td style="text-align: left">top level</td>
+          <td>enabled</td>
+          <td>Required</td>
+          <td>Boolean &ldquo;true&rdquo; enables CSM for Resiliency installation with the driver in a helm installation.</td>
+          <td>top level</td>
       </tr>
       <tr>
-          <td style="text-align: left">mode</td>
-          <td style="text-align: left">Required</td>
-          <td style="text-align: left">Must be set to &ldquo;controller&rdquo; for controller-podmon and &ldquo;node&rdquo; for node-podmon.</td>
-          <td style="text-align: left">controller &amp; node</td>
+          <td>mode</td>
+          <td>Required</td>
+          <td>Must be set to &ldquo;controller&rdquo; for controller-podmon and &ldquo;node&rdquo; for node-podmon.</td>
+          <td>controller &amp; node</td>
       </tr>
       <tr>
-          <td style="text-align: left">csisock</td>
-          <td style="text-align: left">Required</td>
-          <td style="text-align: left">This should be left as set in the helm template for the driver. For controller: <br> <code>-csisock=unix:/var/run/csi/csi.sock</code> <br> For node it will vary depending on the driver&rsquo;s identity: <br> <code>-csisock=unix:/var/lib/kubelet/plugins</code><br><code>/vxflexos.emc.dell.com/csi_sock</code></td>
-          <td style="text-align: left">controller &amp; node</td>
+          <td>csisock</td>
+          <td>Required</td>
+          <td>This should be left as set in the helm template for the driver. For controller: <br> <code>-csisock=unix:/var/run/csi/csi.sock</code> <br> For node it will vary depending on the driver&rsquo;s identity: <br> <code>-csisock=unix:/var/lib/kubelet/plugins</code><br><code>/vxflexos.emc.dell.com/csi_sock</code></td>
+          <td>controller &amp; node</td>
       </tr>
       <tr>
-          <td style="text-align: left">leaderelection</td>
-          <td style="text-align: left">Required</td>
-          <td style="text-align: left">Boolean value that should be set true for controller and false for node. The default value is true.</td>
-          <td style="text-align: left">controller &amp; node</td>
+          <td>leaderelection</td>
+          <td>Required</td>
+          <td>Boolean value that should be set true for controller and false for node. The default value is true.</td>
+          <td>controller &amp; node</td>
       </tr>
       <tr>
-          <td style="text-align: left">skipArrayConnectionValidation</td>
-          <td style="text-align: left">Optional</td>
-          <td style="text-align: left">Boolean value that if set to true will cause controllerPodCleanup to skip the validation that no I/O is ongoing before cleaning up the pod. If set to true will cause controllerPodCleanup on K8S Control Plane failure (kubelet service down).</td>
-          <td style="text-align: left">controller</td>
+          <td>skipArrayConnectionValidation</td>
+          <td>Optional</td>
+          <td>Boolean value that if set to true will cause controllerPodCleanup to skip the validation that no I/O is ongoing before cleaning up the pod. If set to true will cause controllerPodCleanup on K8S Control Plane failure (kubelet service down).</td>
+          <td>controller</td>
       </tr>
       <tr>
-          <td style="text-align: left">labelKey</td>
-          <td style="text-align: left">Optional</td>
-          <td style="text-align: left">String value that sets the label key used to denote pods to be monitored by CSM for Resiliency. It will make life easier if this key is the same for all driver types, and drivers are differentiated by different labelValues (see below). If the label keys are the same across all drivers you can do <code>kubectl get pods -A -l labelKey</code> to find all the CSM for Resiliency protected pods. labelKey defaults to &ldquo;podmon.dellemc.com/driver&rdquo;.</td>
-          <td style="text-align: left">controller &amp; node</td>
+          <td>labelKey</td>
+          <td>Optional</td>
+          <td>String value that sets the label key used to denote pods to be monitored by CSM for Resiliency. It will make life easier if this key is the same for all driver types, and drivers are differentiated by different labelValues (see below). If the label keys are the same across all drivers you can do <code>kubectl get pods -A -l labelKey</code> to find all the CSM for Resiliency protected pods. labelKey defaults to &ldquo;podmon.dellemc.com/driver&rdquo;.</td>
+          <td>controller &amp; node</td>
       </tr>
       <tr>
-          <td style="text-align: left">labelValue</td>
-          <td style="text-align: left">Required</td>
-          <td style="text-align: left">String that sets the value that denotes pods to be monitored by CSM for Resiliency. This must be specific for each driver. Defaults to &ldquo;csi-vxflexos&rdquo; for CSI Driver for Dell PowerFlex and &ldquo;csi-unity&rdquo; for CSI Driver for Dell Unity XT</td>
-          <td style="text-align: left">controller &amp; node</td>
+          <td>labelValue</td>
+          <td>Required</td>
+          <td>String that sets the value that denotes pods to be monitored by CSM for Resiliency. This must be specific for each driver. Defaults to &ldquo;csi-vxflexos&rdquo; for CSI Driver for Dell PowerFlex and &ldquo;csi-unity&rdquo; for CSI Driver for Dell Unity XT</td>
+          <td>controller &amp; node</td>
       </tr>
       <tr>
-          <td style="text-align: left">arrayConnectivityPollRate</td>
-          <td style="text-align: left">Optional</td>
-          <td style="text-align: left">The minimum polling rate in seconds to determine if the array has connectivity to a node. Should not be set to less than 5 seconds. See the specific section for each array type for additional guidance.</td>
-          <td style="text-align: left">controller &amp; node</td>
+          <td>arrayConnectivityPollRate</td>
+          <td>Optional</td>
+          <td>The minimum polling rate in seconds to determine if the array has connectivity to a node. Should not be set to less than 5 seconds. See the specific section for each array type for additional guidance.</td>
+          <td>controller &amp; node</td>
       </tr>
       <tr>
-          <td style="text-align: left">arrayConnectivityConnectionLossThreshold</td>
-          <td style="text-align: left">Optional</td>
-          <td style="text-align: left">Gives the number of failed connection polls that will be deemed to indicate array connectivity loss. Should not be set to less than 3. See the specific section for each array type for additional guidance.</td>
-          <td style="text-align: left">controller</td>
+          <td>arrayConnectivityConnectionLossThreshold</td>
+          <td>Optional</td>
+          <td>Gives the number of failed connection polls that will be deemed to indicate array connectivity loss. Should not be set to less than 3. See the specific section for each array type for additional guidance.</td>
+          <td>controller</td>
       </tr>
       <tr>
-          <td style="text-align: left">driver-config-params</td>
-          <td style="text-align: left">Required</td>
-          <td style="text-align: left">String that set the path to a file containing configuration parameter(for instance, Log levels) for a driver.</td>
-          <td style="text-align: left">controller &amp; node</td>
+          <td>driver-config-params</td>
+          <td>Required</td>
+          <td>String that set the path to a file containing configuration parameter(for instance, Log levels) for a driver.</td>
+          <td>controller &amp; node</td>
       </tr>
       <tr>
-          <td style="text-align: left">ignoreVolumelessPods</td>
-          <td style="text-align: left">Optional</td>
-          <td style="text-align: left">Boolean value that if set to true will enable CSM for Resiliency to ignore pods without persistent volume attached to the pod.</td>
-          <td style="text-align: left">controller &amp; node</td>
+          <td>ignoreVolumelessPods</td>
+          <td>Optional</td>
+          <td>Boolean value that if set to true will enable CSM for Resiliency to ignore pods without persistent volume attached to the pod.</td>
+          <td>controller &amp; node</td>
       </tr>
   </tbody>
 </table>
@@ -1045,54 +1045,54 @@ The ConfigMap to edit will have this pattern: <storage>-config-params (e.g., <co
 <table>
   <thead>
       <tr>
-          <th style="text-align: left">Parameter</th>
-          <th style="text-align: left">Type</th>
-          <th style="text-align: left">Default</th>
-          <th style="text-align: left">Description</th>
+          <th>Parameter</th>
+          <th>Type</th>
+          <th>Default</th>
+          <th>Description</th>
       </tr>
   </thead>
   <tbody>
       <tr>
-          <td style="text-align: left">PODMON_CONTROLLER_LOG_FORMAT</td>
-          <td style="text-align: left">String</td>
-          <td style="text-align: left">&ldquo;text&rdquo;</td>
-          <td style="text-align: left">Logging format output for the controller podmon sidecar. Should be &ldquo;text&rdquo; or &ldquo;json&rdquo;</td>
+          <td>PODMON_CONTROLLER_LOG_FORMAT</td>
+          <td>String</td>
+          <td>&ldquo;text&rdquo;</td>
+          <td>Logging format output for the controller podmon sidecar. Should be &ldquo;text&rdquo; or &ldquo;json&rdquo;</td>
       </tr>
       <tr>
-          <td style="text-align: left">PODMON_CONTROLLER_LOG_LEVEL</td>
-          <td style="text-align: left">String</td>
-          <td style="text-align: left">&ldquo;debug&rdquo;</td>
-          <td style="text-align: left">Logging level for the controller podmon sidecar. Standard values: &lsquo;info&rsquo;, &rsquo;error&rsquo;, &lsquo;warning&rsquo;, &lsquo;debug&rsquo;, &rsquo;trace&rsquo;</td>
+          <td>PODMON_CONTROLLER_LOG_LEVEL</td>
+          <td>String</td>
+          <td>&ldquo;debug&rdquo;</td>
+          <td>Logging level for the controller podmon sidecar. Standard values: &lsquo;info&rsquo;, &rsquo;error&rsquo;, &lsquo;warning&rsquo;, &lsquo;debug&rsquo;, &rsquo;trace&rsquo;</td>
       </tr>
       <tr>
-          <td style="text-align: left">PODMON_NODE_LOG_FORMAT</td>
-          <td style="text-align: left">String</td>
-          <td style="text-align: left">&ldquo;text&rdquo;</td>
-          <td style="text-align: left">Logging format output for the node podmon sidecar. Should be &ldquo;text&rdquo; or &ldquo;json&rdquo;</td>
+          <td>PODMON_NODE_LOG_FORMAT</td>
+          <td>String</td>
+          <td>&ldquo;text&rdquo;</td>
+          <td>Logging format output for the node podmon sidecar. Should be &ldquo;text&rdquo; or &ldquo;json&rdquo;</td>
       </tr>
       <tr>
-          <td style="text-align: left">PODMON_NODE_LOG_LEVEL</td>
-          <td style="text-align: left">String</td>
-          <td style="text-align: left">&ldquo;debug&rdquo;</td>
-          <td style="text-align: left">Logging level for the node podmon sidecar. Standard values: &lsquo;info&rsquo;, &rsquo;error&rsquo;, &lsquo;warning&rsquo;, &lsquo;debug&rsquo;, &rsquo;trace&rsquo;</td>
+          <td>PODMON_NODE_LOG_LEVEL</td>
+          <td>String</td>
+          <td>&ldquo;debug&rdquo;</td>
+          <td>Logging level for the node podmon sidecar. Standard values: &lsquo;info&rsquo;, &rsquo;error&rsquo;, &lsquo;warning&rsquo;, &lsquo;debug&rsquo;, &rsquo;trace&rsquo;</td>
       </tr>
       <tr>
-          <td style="text-align: left">PODMON_ARRAY_CONNECTIVITY_POLL_RATE</td>
-          <td style="text-align: left">Integer (&gt;0)</td>
-          <td style="text-align: left">15</td>
-          <td style="text-align: left">An interval in seconds to poll the underlying array</td>
+          <td>PODMON_ARRAY_CONNECTIVITY_POLL_RATE</td>
+          <td>Integer (&gt;0)</td>
+          <td>15</td>
+          <td>An interval in seconds to poll the underlying array</td>
       </tr>
       <tr>
-          <td style="text-align: left">PODMON_ARRAY_CONNECTIVITY_CONNECTION_LOSS_THRESHOLD</td>
-          <td style="text-align: left">Integer (&gt;0)</td>
-          <td style="text-align: left">3</td>
-          <td style="text-align: left">A value representing the number of failed connection poll intervals before marking the array connectivity as lost</td>
+          <td>PODMON_ARRAY_CONNECTIVITY_CONNECTION_LOSS_THRESHOLD</td>
+          <td>Integer (&gt;0)</td>
+          <td>3</td>
+          <td>A value representing the number of failed connection poll intervals before marking the array connectivity as lost</td>
       </tr>
       <tr>
-          <td style="text-align: left">PODMON_SKIP_ARRAY_CONNECTION_VALIDATION</td>
-          <td style="text-align: left">Boolean</td>
-          <td style="text-align: left">false</td>
-          <td style="text-align: left">Flag to disable the array connectivity check, set to true for NoSchedule or NoExecute taint due to K8S Control Plane failure (kubelet failure)</td>
+          <td>PODMON_SKIP_ARRAY_CONNECTION_VALIDATION</td>
+          <td>Boolean</td>
+          <td>false</td>
+          <td>Flag to disable the array connectivity check, set to true for NoSchedule or NoExecute taint due to K8S Control Plane failure (kubelet failure)</td>
       </tr>
   </tbody>
 </table>
@@ -1144,7 +1144,7 @@ The ConfigMap to edit will have this pattern: <storage>-config-params (e.g., <co
 
       </div><div class="td-footer__center col-12 col-sm-4 py-2 order-sm-2">
         <span class="td-footer__copyright">&copy;
-    2024
+    2025
     <span class="td-footer__authors">The Dell Technologies</span></span><span class="td-footer__all_rights_reserved">All Rights Reserved</span><span class="ms-2"><a href="https://www.dell.com/learn/us/en/uscorp1/policies-privacy" target="_blank" rel="noopener">Privacy Policy</a></span>
       </div>
     </div>

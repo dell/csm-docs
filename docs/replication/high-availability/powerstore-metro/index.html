@@ -17,12 +17,12 @@
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="docs">
-    <meta property="article:modified_time" content="2024-10-21T18:04:33-04:00">
+    <meta property="article:modified_time" content="2025-01-10T13:14:40-06:00">
 
   <meta itemprop="name" content="PowerStore Metro">
   <meta itemprop="description" content="High Availability support for CSI PowerStore">
-  <meta itemprop="dateModified" content="2024-10-21T18:04:33-04:00">
-  <meta itemprop="wordCount" content="695">
+  <meta itemprop="dateModified" content="2025-01-10T13:14:40-06:00">
+  <meta itemprop="wordCount" content="738">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="PowerStore Metro">
   <meta name="twitter:description" content="High Availability support for CSI PowerStore">
@@ -56,10 +56,10 @@
         <div class="dropdown">
   <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Releases</a>
   <ul class="dropdown-menu">
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.12.0)</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.11.1</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.10.2</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">v1.9.4</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.13.0)</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.12.0</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.11.1</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">v1.10.2</a></li>
     </ul>
 </div></li>
       <li class="td-light-dark-menu nav-item dropdown">
@@ -125,7 +125,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.5b43d3acf6640adab15d0e301eb69f8e.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.30cbd121c9a04dbae82fa0989eaa7269.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -149,7 +149,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.5b43d3acf6640adab15d0e301eb69f8e.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.30cbd121c9a04dbae82fa0989eaa7269.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -720,7 +720,7 @@ PowerStore Metro Architecture <a class="header-link"  href="#powerstore-metro-ar
                 <path d="M0 0h24v24H0z" fill="none"/>
                 <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
             </svg>
-        </a></h2><p><img alt="metro architecture diagram" src="../../powerstore-metro.png"></p>
+        </a></h2><p><img src="../../powerstore-metro.png" alt="metro architecture diagram"></p>
 <p>In PowerStore Metro configurations:</p>
 <ul>
 <li>The application host can write data to both sides of the Metro volume.</li>
@@ -752,7 +752,8 @@ extra parameters related to metro replication. A <code>StorageClass</code> to cr
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">reclaimPolicy</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">Delete</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">volumeBindingMode</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">Immediate</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span></code></pre></div><blockquote>
-<p><em><strong>NOTE</strong></em>: Metro at volume group is not supported by the PowerStore driver.</p>
+<p><em><strong>NOTE</strong></em>: Metro support for hosts with Linux operating systems was added from <a href="https://infohub.delltechnologies.com/en-us/l/dell-powerstore-metro-volume-1/introduction-4503/">PowerStoreOS 4.0</a>.</br>
+<em><strong>NOTE</strong></em>: Metro at volume group is not supported by the PowerStore driver.</p>
 </blockquote>
 <p>When a Metro <code>PV</code> is created, the volumeHandle will have the format <code>&lt;volumeID/globalID/protocol:remote-volumeID/remote-globalID&gt;</code>.</p>
 <h3 id="powerstore-metro-volume-expansion">
@@ -761,7 +762,7 @@ PowerStore Metro volume expansion <a class="header-link"  href="#powerstore-metr
                 <path d="M0 0h24v24H0z" fill="none"/>
                 <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
             </svg>
-        </a></h3><p>When a request is made to increase the size of a Metro <code>PV</code>, the metro replication session must be temporarily paused prior to the editing of Kubernetes resources. This can be done from the PowerStore Web UI or CLI. The size of the local/preferred volume is then increased. The metro session must then be manually resumed. It is important to note that the paths for the remote/non-preferred volume will not become active until the metro session is resumed and the remote/non-preferred volume reflects the updated size.</p>
+        </a></h3><p>When a request is made to increase the size of a Metro <code>PV</code>, the metro replication session must be temporarily paused prior to the editing of Kubernetes resources. This can be done from the PowerStore Manager UI or CLI. The size of the local/preferred volume is then increased. The metro session must then be manually resumed. It is important to note that the paths for the remote/non-preferred volume will not become active until the metro session is resumed and the remote/non-preferred volume reflects the updated size.</p>
 <h3 id="snapshots-on-powerstore-metro-volumes">
 Snapshots on PowerStore Metro volumes <a class="header-link"  href="#snapshots-on-powerstore-metro-volumes" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
             <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
@@ -777,11 +778,12 @@ Limitations <a class="header-link"  href="#limitations" style=" display: inline-
             </svg>
         </a></h3><ul>
 <li>PowerStore driver only supports uniform host configuration for Metro volume where the host has active paths to both PowerStore systems.</li>
-<li>Metro volume only supports FC and iSCSI protocols for host access.</li>
 <li>VolumeGroup Metro support is not currently available for uniform host configuration.</li>
+<li>Metro volume only supports FC and iSCSI protocols for host access.</li>
 <li>Each Kubernetes node is automatically registered as a host object on both PowerStore systems when the node pods are running. However, the connectivity type of the host is set to &lsquo;Local Connectivity&rsquo; by default. It needs to be updated manually with the correct &lsquo;Metro connectivity&rsquo; option on both PowerStore systems using the PowerStore Manager UI.</li>
 <li>Actions that need to be performed on the Metro session, such as pausing, resuming, or changing the preferred side, can only be done through the PowerStore Manager UI.</li>
 <li>Some CSI Driver Capabilities, such as snapshot or clone, are not supported on the remote/non-preferred side of the Metro volume.</li>
+<li>While restoring a Metro snapshot or cloning a Metro volume on the local/preferred side, provide a non-Metro storage class. Configuring Metro on clones is not supported on the PowerStore.</li>
 <li>The following <a href="../../../csidriver/features/powerstore/#configurable-volume-attributes-optional">volume attributes</a> on PersistentVolumeClaims (PVCs) are not supported for Metro volumes: <code>csi.dell.com/volume_group_id</code>, <code>csi.dell.com/protection_policy_id</code> if the policy has replication rule.</li>
 </ul>
 
@@ -873,7 +875,7 @@ Limitations <a class="header-link"  href="#limitations" style=" display: inline-
 
       </div><div class="td-footer__center col-12 col-sm-4 py-2 order-sm-2">
         <span class="td-footer__copyright">&copy;
-    2024
+    2025
     <span class="td-footer__authors">The Dell Technologies</span></span><span class="td-footer__all_rights_reserved">All Rights Reserved</span><span class="ms-2"><a href="https://www.dell.com/learn/us/en/uscorp1/policies-privacy" target="_blank" rel="noopener">Privacy Policy</a></span>
       </div>
     </div>

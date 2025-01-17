@@ -17,12 +17,12 @@
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="docs">
-    <meta property="article:modified_time" content="2024-10-28T18:40:36-04:00">
+    <meta property="article:modified_time" content="2025-01-09T09:05:01-05:00">
 
   <meta itemprop="name" content="PowerStore">
   <meta itemprop="description" content="Installing the CSI Driver for Dell PowerStore via Dell CSM Operator">
-  <meta itemprop="dateModified" content="2024-10-28T18:40:36-04:00">
-  <meta itemprop="wordCount" content="2317">
+  <meta itemprop="dateModified" content="2025-01-09T09:05:01-05:00">
+  <meta itemprop="wordCount" content="2606">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="PowerStore">
   <meta name="twitter:description" content="Installing the CSI Driver for Dell PowerStore via Dell CSM Operator">
@@ -56,10 +56,10 @@
         <div class="dropdown">
   <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Releases</a>
   <ul class="dropdown-menu">
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.12.0)</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.11.1</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.10.2</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">v1.9.4</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.13.0)</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.12.0</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.11.1</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">v1.10.2</a></li>
     </ul>
 </div></li>
       <li class="td-light-dark-menu nav-item dropdown">
@@ -125,7 +125,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.5b43d3acf6640adab15d0e301eb69f8e.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.30cbd121c9a04dbae82fa0989eaa7269.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -149,7 +149,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.5b43d3acf6640adab15d0e301eb69f8e.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.30cbd121c9a04dbae82fa0989eaa7269.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -777,8 +777,9 @@ iSCSI Requirements <a class="header-link"  href="#iscsi-requirements" style=" di
             </svg>
         </a></h3><p>The following requirements must be fulfilled in order to successfully use the iSCSI protocol with the CSI PowerStore driver:</p>
 <ul>
-<li>All Kubernetes nodes must have the <em>iscsi-initiator-utils</em> package installed. On Debian based distributions the package name is  <em>open-iscsi</em>.</li>
-<li>The <em>iscsid</em> service must be enabled and running. You can enable the service by running the following command on all worker nodes: <code>systemctl enable --now iscsid</code></li>
+<li>Ensure that the necessary iSCSI initiator utilities are installed on each Kubernetes worker node. This typically includes the <em>iscsi-initiator-utils</em> package for RHEL or <em>open-iscsi</em> package for Ubuntu.</li>
+<li>Enable and start the <em>iscsid</em> service on each Kubernetes worker node. This service is responsible for managing the iSCSI initiator. You can enable the service by running the following command on all worker nodes: <code>systemctl enable --now iscsid</code></li>
+<li>Ensure that the unique initiator name is set in <em>/etc/iscsi/initiatorname.iscsi</em>.</li>
 <li>To configure iSCSI in Red Hat OpenShift clusters, you can create a <code>MachineConfig</code> object using the console or <code>oc</code> to ensure that the iSCSI daemon starts on all the Red Hat CoreOS nodes. Here is an example of a <code>MachineConfig</code> object:</li>
 </ul>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">apiVersion</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">machineconfiguration.openshift.io/v1</span><span style="color:#f8f8f8;text-decoration:underline">
@@ -812,7 +813,37 @@ NVMe Requirements <a class="header-link"  href="#nvme-requirements" style=" disp
             </svg>
         </a></h3><p>The following requirements must be fulfilled in order to successfully use the NVMe protocols with the CSI PowerStore driver:</p>
 <ul>
-<li>All OpenShift or Kubernetes nodes connecting to Dell storage arrays must use unique host NQNs.</li>
+<li>All OpenShift or Kubernetes nodes connecting to Dell storage arrays must use unique host NVMe Qualified Names (NQNs).</li>
+</ul>
+<blockquote>
+<p>The OpenShift deployment process for CoreOS will set the same host NQN for all nodes. The host NQN is stored in the file /etc/nvme/hostnqn. One possible solution to ensure unique host NQNs is to add the following machine config to your OCP cluster:</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">apiVersion</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">machineconfiguration.openshift.io/v1</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">kind</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">MachineConfig</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">metadata</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">labels</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">machineconfiguration.openshift.io/role</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">worker</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#0000cf;font-weight:bold">99</span>-<span style="color:#000">worker-custom-nvme-hostnqn</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">spec</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">config</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">ignition</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">version</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#0000cf;font-weight:bold">3.4.0</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">systemd</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">units</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">        </span>- <span style="color:#204a87;font-weight:bold">contents</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000;font-weight:bold">|</span><span style="color:#8f5902;font-style:italic">
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">            [Unit]
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">            Description=Custom CoreOS Generate NVMe Hostnqn
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">            [Service]
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">            Type=oneshot
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">            ExecStart=/usr/bin/sh -c &#39;/usr/sbin/nvme gen-hostnqn &gt; /etc/nvme/hostnqn&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">            RemainAfterExit=yes
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">            [Install]
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">            WantedBy=multi-user.target</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">          </span><span style="color:#204a87;font-weight:bold">enabled</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">          </span><span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">custom-coreos-generate-nvme-hostnqn.service</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span></code></pre></div><ul>
 <li>The driver requires the NVMe command-line interface (nvme-cli) to manage the NVMe clients and targets. The NVMe CLI tool is installed in the host using the following command on RPM oriented Linux distributions.</li>
 </ul>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo dnf -y install nvme-cli
@@ -916,20 +947,88 @@ You can install it by running <code>dnf install device-mapper-multipath</code> o
 </ul>
 <p>The following is a sample multipath.conf file:</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>defaults {
-</span></span><span style="display:flex;"><span>  user_friendly_names yes
-</span></span><span style="display:flex;"><span>  find_multipaths yes
+</span></span><span style="display:flex;"><span>	polling_interval 5
+</span></span><span style="display:flex;"><span>	checker_timeout 15
+</span></span><span style="display:flex;"><span>	disable_changed_wwids yes
+</span></span><span style="display:flex;"><span>	find_multipaths no
 </span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>  blacklist {
+</span></span><span style="display:flex;"><span>devices {
+</span></span><span style="display:flex;"><span>	device {
+</span></span><span style="display:flex;"><span>		vendor DellEMC
+</span></span><span style="display:flex;"><span>		product PowerStore
+</span></span><span style="display:flex;"><span>		detect_prio &#34;yes&#34;
+</span></span><span style="display:flex;"><span>		path_selector &#34;queue-length 0&#34;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		path_grouping_policy &#34;group_by_prio&#34;
+</span></span><span style="display:flex;"><span>		path_checker tur
+</span></span><span style="display:flex;"><span>		failback immediate
+</span></span><span style="display:flex;"><span>		fast_io_fail_tmo 5
+</span></span><span style="display:flex;"><span>		no_path_retry 3
+</span></span><span style="display:flex;"><span>		rr_min_io_rq 1
+</span></span><span style="display:flex;"><span>		max_sectors_kb 1024
+</span></span><span style="display:flex;"><span>		dev_loss_tmo 10
+</span></span><span style="display:flex;"><span>		hardware_handler &#34;1 alua&#34;
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	device {
+</span></span><span style="display:flex;"><span>		vendor .*
+</span></span><span style="display:flex;"><span>		product dellemc-powerstore
+</span></span><span style="display:flex;"><span>		uid_attribute ID_WWN
+</span></span><span style="display:flex;"><span>		prio ana
+</span></span><span style="display:flex;"><span>		failback immediate
+</span></span><span style="display:flex;"><span>		path_grouping_policy &#34;group_by_prio&#34;
+</span></span><span style="display:flex;"><span>		path_checker &#34;none&#34;
+</span></span><span style="display:flex;"><span>		path_selector &#34;queue-length 0&#34;
+</span></span><span style="display:flex;"><span>		detect_prio &#34;yes&#34;
+</span></span><span style="display:flex;"><span>		fast_io_fail_tmo 5
+</span></span><span style="display:flex;"><span>		no_path_retry 3
+</span></span><span style="display:flex;"><span>		rr_min_io_rq 1
+</span></span><span style="display:flex;"><span>		max_sectors_kb 1024
+</span></span><span style="display:flex;"><span>		dev_loss_tmo 10
+</span></span><span style="display:flex;"><span>	}
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><p>On some distributions the multipathd service for changes to the configuration and dynamically reconfigures itself. If you need to manually trigger a reload you can run the following command:
 <code>sudo systemctl reload multipathd</code></p>
 <p>On OCP clusters you can add a MachineConfig to configure multipathing on the worker nodes.</p>
 <p>You will need to first base64 encode the multipath.conf and add it to the MachineConfig definition.</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#204a87">echo</span> <span style="color:#4e9a06">&#39;defaults {
-</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">user_friendly_names yes
-</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">find_multipaths yes
+</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">	polling_interval 5
+</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">	checker_timeout 15
+</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">	disable_changed_wwids yes
+</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">	find_multipaths no
 </span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">}
-</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">  blacklist {
+</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">devices {
+</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">	device {
+</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">		vendor DellEMC
+</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">		product PowerStore
+</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">		detect_prio &#34;yes&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">		path_selector &#34;queue-length 0&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">
+</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">		path_grouping_policy &#34;group_by_prio&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">		path_checker tur
+</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">		failback immediate
+</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">		fast_io_fail_tmo 5
+</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">		no_path_retry 3
+</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">		rr_min_io_rq 1
+</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">		max_sectors_kb 1024
+</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">		dev_loss_tmo 10
+</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">		hardware_handler &#34;1 alua&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">	}
+</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">	device {
+</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">		vendor .*
+</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">		product dellemc-powerstore
+</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">		uid_attribute ID_WWN
+</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">		prio ana
+</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">		failback immediate
+</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">		path_grouping_policy &#34;group_by_prio&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">		path_checker &#34;none&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">		path_selector &#34;queue-length 0&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">		detect_prio &#34;yes&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">		fast_io_fail_tmo 5
+</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">		no_path_retry 3
+</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">		rr_min_io_rq 1
+</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">		max_sectors_kb 1024
+</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">		dev_loss_tmo 10
+</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">	}
 </span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">}&#39;</span> <span style="color:#000;font-weight:bold">|</span> base64 -w0
 </span></span></code></pre></div><p>Use the base64 encoded string output in the following <code>MachineConfig</code> yaml file (under source section)</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">apiVersion</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">machineconfiguration.openshift.io/v1</span><span style="color:#f8f8f8;text-decoration:underline">
@@ -945,7 +1044,7 @@ You can install it by running <code>dnf install device-mapper-multipath</code> o
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">storage</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">files</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span>- <span style="color:#204a87;font-weight:bold">contents</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">          </span><span style="color:#204a87;font-weight:bold">source</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">data:text/plain;charset=utf-8;base64,ZGVmYXVsdHMgewp1c2VyX2ZyaWVuZGx5X25hbWVzIHllcwpmaW5kX211bHRpcGF0aHMgeWVzCn0KCmJsYWNrbGlzdCB7Cn0K</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">          </span><span style="color:#204a87;font-weight:bold">source</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">data:text/plain;charset=utf-8;base64,ZGVmYXVsdHMgewogIHBvbGxpbmdfaW50ZXJ2YWwgNQogIGNoZWNrZXJfdGltZW91dCAxNQogIGRpc2FibGVfY2hhbmdlZF93d2lkcyB5ZXMKICBmaW5kX211bHRpcGF0aHMgbm8KfQpkZXZpY2VzIHsKICBkZXZpY2UgewogICAgdmVuZG9yIERlbGxFTUMKICAgIHByb2R1Y3QgUG93ZXJTdG9yZQogICAgZGV0ZWN0X3ByaW8gInllcyIKICAgIHBhdGhfc2VsZWN0b3IgInF1ZXVlLWxlbmd0aCAwIgoKICAgIHBhdGhfZ3JvdXBpbmdfcG9saWN5ICJncm91cF9ieV9wcmlvIgogICAgcGF0aF9jaGVja2VyIHR1cgogICAgZmFpbGJhY2sgaW1tZWRpYXRlCiAgICBmYXN0X2lvX2ZhaWxfdG1vIDUKICAgIG5vX3BhdGhfcmV0cnkgMwogICAgcnJfbWluX2lvX3JxIDEKICAgIG1heF9zZWN0b3JzX2tiIDEwMjQKICAgIGRldl9sb3NzX3RtbyAxMAogICAgaGFyZHdhcmVfaGFuZGxlciAiMSBhbHVhIgogIH0KICBkZXZpY2UgewogICAgdmVuZG9yIC4qCiAgICBwcm9kdWN0IGRlbGxlbWMtcG93ZXJzdG9yZQogICAgdWlkX2F0dHJpYnV0ZSBJRF9XV04KICAgIHByaW8gYW5hCiAgICBmYWlsYmFjayBpbW1lZGlhdGUKICAgIHBhdGhfZ3JvdXBpbmdfcG9saWN5ICJncm91cF9ieV9wcmlvIgogICAgcGF0aF9jaGVja2VyICJub25lIgogICAgcGF0aF9zZWxlY3RvciAicXVldWUtbGVuZ3RoIDAiCiAgICBkZXRlY3RfcHJpbyAieWVzIgogICAgZmFzdF9pb19mYWlsX3RtbyA1CiAgICBub19wYXRoX3JldHJ5IDMKICAgIHJyX21pbl9pb19ycSAxCiAgICBtYXhfc2VjdG9yc19rYiAxMDI0CiAgICBkZXZfbG9zc190bW8gMTAKICB9Cn0K</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">          </span><span style="color:#204a87;font-weight:bold">verification</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>{}<span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">filesystem</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">root</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">mode</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#0000cf;font-weight:bold">400</span><span style="color:#f8f8f8;text-decoration:underline">
@@ -1055,90 +1154,108 @@ the sample file provided
 <table>
   <thead>
       <tr>
-          <th style="text-align: left">Parameter</th>
-          <th style="text-align: left">Description</th>
-          <th style="text-align: left">Required</th>
-          <th style="text-align: left">Default</th>
+          <th>Parameter</th>
+          <th>Description</th>
+          <th>Required</th>
+          <th>Default</th>
       </tr>
   </thead>
   <tbody>
       <tr>
-          <td style="text-align: left">replicas</td>
-          <td style="text-align: left">Controls the number of controller pods you deploy. If the number of controller pods is greater than the number of available nodes, the excess pods will be in pending state until new nodes are available for scheduling. Default is 2 which allows for Controller high availability.</td>
-          <td style="text-align: left">Yes</td>
-          <td style="text-align: left">2</td>
+          <td>replicas</td>
+          <td>Controls the number of controller pods you deploy. If the number of controller pods is greater than the number of available nodes, the excess pods will be in pending state until new nodes are available for scheduling. Default is 2 which allows for Controller high availability.</td>
+          <td>Yes</td>
+          <td>2</td>
       </tr>
       <tr>
-          <td style="text-align: left">namespace</td>
-          <td style="text-align: left">Specifies namespace where the driver will be installed</td>
-          <td style="text-align: left">Yes</td>
-          <td style="text-align: left">&ldquo;powerstore&rdquo;</td>
+          <td>namespace</td>
+          <td>Specifies namespace where the driver will be installed</td>
+          <td>Yes</td>
+          <td>&ldquo;powerstore&rdquo;</td>
       </tr>
       <tr>
-          <td style="text-align: left">fsGroupPolicy</td>
-          <td style="text-align: left">Defines which FS Group policy mode to be used. Supported modes <code>None, File and ReadWriteOnceWithFSType</code>. In OCP &lt;= 4.16 and K8s &lt;= 1.29, fsGroupPolicy is an immutable field.</td>
-          <td style="text-align: left">No</td>
-          <td style="text-align: left">&ldquo;ReadWriteOnceWithFSType&rdquo;</td>
+          <td>fsGroupPolicy</td>
+          <td>Defines which FS Group policy mode to be used. Supported modes <code>None, File and ReadWriteOnceWithFSType</code>. In OCP &lt;= 4.16 and K8s &lt;= 1.29, fsGroupPolicy is an immutable field.</td>
+          <td>No</td>
+          <td>&ldquo;ReadWriteOnceWithFSType&rdquo;</td>
       </tr>
       <tr>
-          <td style="text-align: left">storageCapacity</td>
-          <td style="text-align: left">Enable/Disable storage capacity tracking feature</td>
-          <td style="text-align: left">No</td>
-          <td style="text-align: left">false</td>
+          <td>storageCapacity</td>
+          <td>Enable/Disable storage capacity tracking feature</td>
+          <td>No</td>
+          <td>false</td>
       </tr>
       <tr>
-          <td style="text-align: left"><em><strong>Common parameters for node and controller</strong></em></td>
-          <td style="text-align: left"></td>
-          <td style="text-align: left"></td>
-          <td style="text-align: left"></td>
+          <td><em><strong>Common parameters for node and controller</strong></em></td>
+          <td></td>
+          <td></td>
+          <td></td>
       </tr>
       <tr>
-          <td style="text-align: left">X_CSI_POWERSTORE_NODE_NAME_PREFIX</td>
-          <td style="text-align: left">Prefix to add to each node registered by the CSI driver</td>
-          <td style="text-align: left">Yes</td>
-          <td style="text-align: left">&ldquo;csi-node&rdquo;</td>
+          <td>X_CSI_POWERSTORE_NODE_NAME_PREFIX</td>
+          <td>Prefix to add to each node registered by the CSI driver</td>
+          <td>Yes</td>
+          <td>&ldquo;csi-node&rdquo;</td>
       </tr>
       <tr>
-          <td style="text-align: left">X_CSI_FC_PORTS_FILTER_FILE_PATH</td>
-          <td style="text-align: left">To set path to the file which provides a list of WWPN which should be used by the driver for FC connection on this node</td>
-          <td style="text-align: left">No</td>
-          <td style="text-align: left">&ldquo;/etc/fc-ports-filter&rdquo;</td>
+          <td>X_CSI_FC_PORTS_FILTER_FILE_PATH</td>
+          <td>To set path to the file which provides a list of WWPN which should be used by the driver for FC connection on this node</td>
+          <td>No</td>
+          <td>&ldquo;/etc/fc-ports-filter&rdquo;</td>
       </tr>
       <tr>
-          <td style="text-align: left"><em><strong>Controller parameters</strong></em></td>
-          <td style="text-align: left"></td>
-          <td style="text-align: left"></td>
-          <td style="text-align: left"></td>
+          <td><em><strong>Controller parameters</strong></em></td>
+          <td></td>
+          <td></td>
+          <td></td>
       </tr>
       <tr>
-          <td style="text-align: left">X_CSI_POWERSTORE_EXTERNAL_ACCESS</td>
-          <td style="text-align: left">allows specifying additional entries for hostAccess of NFS volumes. Both single IP address and subnet are valid entries</td>
-          <td style="text-align: left">No</td>
-          <td style="text-align: left">empty</td>
+          <td>X_CSI_POWERSTORE_EXTERNAL_ACCESS</td>
+          <td>allows specifying additional entries for hostAccess of NFS volumes. Both single IP address and subnet are valid entries</td>
+          <td>No</td>
+          <td>empty</td>
       </tr>
       <tr>
-          <td style="text-align: left">X_CSI_NFS_ACLS</td>
-          <td style="text-align: left">Defines permissions - POSIX mode bits or NFSv4 ACLs, to be set on NFS target mount directory.</td>
-          <td style="text-align: left">No</td>
-          <td style="text-align: left">&ldquo;0777&rdquo;</td>
+          <td>X_CSI_NFS_ACLS</td>
+          <td>Defines permissions - POSIX mode bits or NFSv4 ACLs, to be set on NFS target mount directory.</td>
+          <td>No</td>
+          <td>&ldquo;0777&rdquo;</td>
       </tr>
       <tr>
-          <td style="text-align: left"><em><strong>Node parameters</strong></em></td>
-          <td style="text-align: left"></td>
-          <td style="text-align: left"></td>
-          <td style="text-align: left"></td>
+          <td><em><strong>Node parameters</strong></em></td>
+          <td></td>
+          <td></td>
+          <td></td>
       </tr>
       <tr>
-          <td style="text-align: left">X_CSI_POWERSTORE_ENABLE_CHAP</td>
-          <td style="text-align: left">Set to true if you want to enable iSCSI CHAP feature</td>
-          <td style="text-align: left">No</td>
-          <td style="text-align: left">false</td>
+          <td>X_CSI_POWERSTORE_ENABLE_CHAP</td>
+          <td>Set to true if you want to enable iSCSI CHAP feature</td>
+          <td>No</td>
+          <td>false</td>
+      </tr>
+      <tr>
+          <td><em><strong>Sidecar parameters</strong></em></td>
+          <td></td>
+          <td></td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>volume-name-prefix</td>
+          <td>The volume-name-prefix will be used by provisioner sidecar as a prefix for all the volumes created</td>
+          <td>Yes</td>
+          <td>csivol</td>
+      </tr>
+      <tr>
+          <td>monitor-interval</td>
+          <td>The monitor-interval will be used by external-health-monitor as an interval for health checks</td>
+          <td>Yes</td>
+          <td>60s</td>
       </tr>
   </tbody>
 </table>
 <ol start="4">
-<li>Execute the following command to create PowerStore custom resource:</li>
-</ol>
+<li>
+<p>Execute the following command to create PowerStore custom resource:</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl create -f &lt;input_sample_file.yaml&gt;
 </span></span></code></pre></div><p>This command will deploy the CSI PowerStore driver in the namespace specified in the input YAML file.</p>
 <ul>
@@ -1146,7 +1263,7 @@ the sample file provided
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl get all -n &lt;driver-namespace&gt;
 </span></span></code></pre></div></li>
 </ul>
-<ol start="5">
+</li>
 <li>
 <p><a href="/csm-docs/docs/deployment/csmoperator/#verifying-the-driver-installation">Verify the CSI Driver installation</a></p>
 </li>
@@ -1172,8 +1289,7 @@ Dynamic secret change detection <a class="header-link"  href="#dynamic-secret-ch
 require the driver to be restarted to properly pick up and process the changes.</p>
 </blockquote>
 <p>To do so, change the configuration file <code>config.yaml</code> and apply the update using the following command:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>sed <span style="color:#4e9a06">&#34;s/CONFIG_YAML/`cat config.yaml | base64 -w0`/g&#34;</span> secret.yaml <span style="color:#000;font-weight:bold">|</span> kubectl apply -f -
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sed <span style="color:#4e9a06">&#34;s/CONFIG_YAML/`cat config.yaml | base64 -w0`/g&#34;</span> secret.yaml <span style="color:#000;font-weight:bold">|</span> kubectl apply -f -
 </span></span></code></pre></div>
 	<style>
   .feedback--answer {
@@ -1263,7 +1379,7 @@ require the driver to be restarted to properly pick up and process the changes.<
 
       </div><div class="td-footer__center col-12 col-sm-4 py-2 order-sm-2">
         <span class="td-footer__copyright">&copy;
-    2024
+    2025
     <span class="td-footer__authors">The Dell Technologies</span></span><span class="td-footer__all_rights_reserved">All Rights Reserved</span><span class="ms-2"><a href="https://www.dell.com/learn/us/en/uscorp1/policies-privacy" target="_blank" rel="noopener">Privacy Policy</a></span>
       </div>
     </div>

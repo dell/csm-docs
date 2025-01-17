@@ -17,12 +17,12 @@
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="docs">
-    <meta property="article:modified_time" content="2024-10-31T14:47:14-05:00">
+    <meta property="article:modified_time" content="2025-01-17T03:37:01+05:30">
 
   <meta itemprop="name" content="PowerMax">
   <meta itemprop="description" content="Installing the CSI Driver for Dell PowerMax via Dell CSM Operator">
-  <meta itemprop="dateModified" content="2024-10-31T14:47:14-05:00">
-  <meta itemprop="wordCount" content="3922">
+  <meta itemprop="dateModified" content="2025-01-17T03:37:01+05:30">
+  <meta itemprop="wordCount" content="4158">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="PowerMax">
   <meta name="twitter:description" content="Installing the CSI Driver for Dell PowerMax via Dell CSM Operator">
@@ -56,10 +56,10 @@
         <div class="dropdown">
   <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Releases</a>
   <ul class="dropdown-menu">
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.12.0)</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.11.1</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.10.2</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">v1.9.4</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.13.0)</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.12.0</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.11.1</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">v1.10.2</a></li>
     </ul>
 </div></li>
       <li class="td-light-dark-menu nav-item dropdown">
@@ -125,7 +125,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.5b43d3acf6640adab15d0e301eb69f8e.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.30cbd121c9a04dbae82fa0989eaa7269.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -149,7 +149,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.5b43d3acf6640adab15d0e301eb69f8e.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.30cbd121c9a04dbae82fa0989eaa7269.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -791,11 +791,29 @@ CSI PowerMax Reverse Proxy <a class="header-link"  href="#csi-powermax-reverse-p
                 <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
             </svg>
         </a></h3><p>The CSI PowerMax Reverse Proxy is a component that will be installed with the CSI PowerMax driver. For more details on this feature, see the related <a href="../../../../csidriver/features/powermax/#csi-powermax-reverse-proxy">documentation</a>.</p>
-<p>Create a TLS secret that holds an SSL certificate and a private key. This is required by the reverse proxy server.
-Use a tool such as <code>openssl</code> to generate this secret using the example below:</p>
+<p>Create a TLS secret that holds an SSL certificate and a private key. This is required by the reverse proxy server.</p>
+<p>Create the Configuration file (openssl.cnf) which includes the subjectAltName:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#ce5c00;font-weight:bold">[</span> req <span style="color:#ce5c00;font-weight:bold">]</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">default_bits</span>       <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#0000cf;font-weight:bold">2048</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">distinguished_name</span> <span style="color:#ce5c00;font-weight:bold">=</span> req_distinguished_name
+</span></span><span style="display:flex;"><span><span style="color:#000">req_extensions</span>     <span style="color:#ce5c00;font-weight:bold">=</span> req_ext
+</span></span><span style="display:flex;"><span><span style="color:#000">prompt</span>             <span style="color:#ce5c00;font-weight:bold">=</span> no
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ce5c00;font-weight:bold">[</span> req_distinguished_name <span style="color:#ce5c00;font-weight:bold">]</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">C</span>  <span style="color:#ce5c00;font-weight:bold">=</span> XX
+</span></span><span style="display:flex;"><span><span style="color:#000">L</span>  <span style="color:#ce5c00;font-weight:bold">=</span> Default City
+</span></span><span style="display:flex;"><span><span style="color:#000">O</span>  <span style="color:#ce5c00;font-weight:bold">=</span> Default Company Ltd
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ce5c00;font-weight:bold">[</span> req_ext <span style="color:#ce5c00;font-weight:bold">]</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">subjectAltName</span> <span style="color:#ce5c00;font-weight:bold">=</span> @alt_names
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ce5c00;font-weight:bold">[</span> alt_names <span style="color:#ce5c00;font-weight:bold">]</span>
+</span></span><span style="display:flex;"><span>DNS.1 <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#4e9a06">&#34;csipowermax-reverseproxy&#34;</span>
+</span></span><span style="display:flex;"><span>IP.1 <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#4e9a06">&#34;0.0.0.0&#34;</span>
+</span></span></code></pre></div><p>Use a tool such as <code>openssl</code> to generate this secret using the example below:</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>openssl genrsa -out tls.key <span style="color:#0000cf;font-weight:bold">2048</span>
-</span></span><span style="display:flex;"><span>openssl req -new -x509 -sha256 -key tls.key -out tls.crt -days <span style="color:#0000cf;font-weight:bold">3650</span>
-</span></span><span style="display:flex;"><span>kubectl create secret -n &lt;namespace&gt; tls revproxy-certs --cert<span style="color:#ce5c00;font-weight:bold">=</span>tls.crt --key<span style="color:#ce5c00;font-weight:bold">=</span>tls.key
+</span></span><span style="display:flex;"><span>openssl req -new -key tls.key -out tls.csr -config openssl.cnf
+</span></span><span style="display:flex;"><span>openssl x509 -req -in tls.csr -signkey tls.key -out tls.crt -days <span style="color:#0000cf;font-weight:bold">3650</span> -extensions v3_req -extfile openssl.cnf
 </span></span><span style="display:flex;"><span>kubectl create secret -n &lt;namespace&gt; tls csirevproxy-tls-secret --cert<span style="color:#ce5c00;font-weight:bold">=</span>tls.crt --key<span style="color:#ce5c00;font-weight:bold">=</span>tls.key
 </span></span></code></pre></div><h3 id="fibre-channel-requirements">
 Fibre Channel Requirements <a class="header-link"  href="#fibre-channel-requirements" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
@@ -817,8 +835,9 @@ iSCSI Requirements <a class="header-link"  href="#iscsi-requirements" style=" di
             </svg>
         </a></h3><p>The following requirements must be fulfilled in order to successfully use the iSCSI protocol with the CSI PowerMax driver.</p>
 <ul>
-<li>All Kubernetes nodes must have the <em>iscsi-initiator-utils</em> package installed. On Debian based distributions the package name is  <em>open-iscsi</em>.</li>
-<li>The <em>iscsid</em> service must be enabled and running. You can enable the service by running the following command on all worker nodes: <code>systemctl enable --now iscsid</code></li>
+<li>Ensure that the necessary iSCSI initiator utilities are installed on each Kubernetes worker node. This typically includes the <em>iscsi-initiator-utils</em> package for RHEL or <em>open-iscsi</em> package for Ubuntu.</li>
+<li>Enable and start the <em>iscsid</em> service on each Kubernetes worker node. This service is responsible for managing the iSCSI initiator. You can enable the service by running the following command on all worker nodes: <code>systemctl enable --now iscsid</code></li>
+<li>Ensure that the unique initiator name is set in <em>/etc/iscsi/initiatorname.iscsi</em>.</li>
 <li>To configure iSCSI in Red Hat OpenShift clusters, you can create a <code>MachineConfig</code> object using the console or <code>oc</code> to ensure that the iSCSI daemon starts on all the Red Hat CoreOS nodes. Here is an example of a <code>MachineConfig</code> object:</li>
 </ul>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">apiVersion</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">machineconfiguration.openshift.io/v1</span><span style="color:#f8f8f8;text-decoration:underline">
@@ -865,7 +884,37 @@ NVMe Requirements <a class="header-link"  href="#nvme-requirements" style=" disp
 </blockquote>
 <p><strong>Cluster requirments</strong></p>
 <ul>
-<li>All OpenShift or Kubernetes nodes connecting to Dell storage arrays must use unique host NQNs.</li>
+<li>All OpenShift or Kubernetes nodes connecting to Dell storage arrays must use unique host NVMe Qualified Names (NQNs).</li>
+</ul>
+<blockquote>
+<p>The OpenShift deployment process for CoreOS will set the same host NQN for all nodes. The host NQN is stored in the file /etc/nvme/hostnqn. One possible solution to ensure unique host NQNs is to add the following machine config to your OCP cluster:</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">apiVersion</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">machineconfiguration.openshift.io/v1</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">kind</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">MachineConfig</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">metadata</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">labels</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">machineconfiguration.openshift.io/role</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">worker</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#0000cf;font-weight:bold">99</span>-<span style="color:#000">worker-custom-nvme-hostnqn</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">spec</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">config</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">ignition</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">version</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#0000cf;font-weight:bold">3.4.0</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">systemd</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">units</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">        </span>- <span style="color:#204a87;font-weight:bold">contents</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000;font-weight:bold">|</span><span style="color:#8f5902;font-style:italic">
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">            [Unit]
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">            Description=Custom CoreOS Generate NVMe Hostnqn
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">            [Service]
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">            Type=oneshot
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">            ExecStart=/usr/bin/sh -c &#39;/usr/sbin/nvme gen-hostnqn &gt; /etc/nvme/hostnqn&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">            RemainAfterExit=yes
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">            [Install]
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">            WantedBy=multi-user.target</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">          </span><span style="color:#204a87;font-weight:bold">enabled</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">          </span><span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">custom-coreos-generate-nvme-hostnqn.service</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span></code></pre></div><ul>
 <li>The driver requires the NVMe command-line interface (nvme-cli) to manage the NVMe clients and targets. The NVMe CLI tool is installed in the host using the following command on RPM oriented Linux distributions.</li>
 </ul>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo dnf -y install nvme-cli
@@ -920,9 +969,9 @@ NFS Requirements <a class="header-link"  href="#nfs-requirements" style=" displa
             </svg>
         </a></h3><p>CSI Driver for Dell PowerMax supports NFS communication. Ensure that the following requirements are met before you install CSI Driver:</p>
 <ul>
-<li>Configure the NFS network. Please refer <a href="https://dl.dell.com/content/manual57826791-dell-powermax-file-protocol-guide.pdf?language=en-us&ps=true">here</a> for more details.</li>
+<li>Configure the NFS network. Please refer <a href="https://dl.dell.com/content/manual57826791-dell-powermax-file-protocol-guide.pdf?language=en-us&amp;ps=true">here</a> for more details.</li>
 <li>PowerMax Embedded Management guest to access Unisphere for PowerMax.</li>
-<li>Create the NAS server. Please refer <a href="https://dl.dell.com/content/manual55638050-dell-powermax-file-quick-start-guide.pdf?language=en-us&ps=true">here</a> for more details.</li>
+<li>Create the NAS server. Please refer <a href="https://dl.dell.com/content/manual55638050-dell-powermax-file-quick-start-guide.pdf?language=en-us&amp;ps=true">here</a> for more details.</li>
 </ul>
 <h3 id="linux-multipathing-requirements">
 Linux Multipathing Requirements <a class="header-link"  href="#linux-multipathing-requirements" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
@@ -980,7 +1029,7 @@ You can install it by running <code>dnf install device-mapper-multipath</code> o
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">apiVersion</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">machineconfiguration.openshift.io/v1</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">kind</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">MachineConfig</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">metadata</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">workers-multipath-conf-default</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#0000cf;font-weight:bold">99</span>-<span style="color:#000">workers-multipath-conf-default</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">labels</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">machineconfiguration.openshift.io/role</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">worker</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">spec</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
@@ -1079,7 +1128,7 @@ Create a file called powermax-creds.yaml with the following content:</p>
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">     </span><span style="color:#8f5902;font-style:italic"># Uncomment the following key if you wish to use ISCSI CHAP authentication (v1.3.0 onwards)</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">     </span><span style="color:#8f5902;font-style:italic"># chapsecret: &lt;base64 CHAP secret&gt;</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span></code></pre></div><p>Replace the values for the username and password parameters. These values can be obtained using base64 encoding as described in the following example:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-BASH" data-lang="BASH"><span style="display:flex;"><span><span style="color:#204a87">echo</span> -n <span style="color:#4e9a06">&#34;myusername&#34;</span> <span style="color:#000;font-weight:bold">|</span> base64
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#204a87">echo</span> -n <span style="color:#4e9a06">&#34;myusername&#34;</span> <span style="color:#000;font-weight:bold">|</span> base64
 </span></span><span style="display:flex;"><span><span style="color:#204a87">echo</span> -n <span style="color:#4e9a06">&#34;mypassword&#34;</span> <span style="color:#000;font-weight:bold">|</span> base64
 </span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"># If mychapsecret is the iSCSI CHAP secret</span>
 </span></span><span style="display:flex;"><span><span style="color:#204a87">echo</span> -n <span style="color:#4e9a06">&#34;mychapsecret&#34;</span> <span style="color:#000;font-weight:bold">|</span> base64
@@ -1088,44 +1137,43 @@ Create a file called powermax-creds.yaml with the following content:</p>
 <li>
 <p>Create a configmap using sample <a href="https://github.com/dell/csm-operator/tree/master/samples/csireverseproxy">here</a>. Fill in the appropriate values for driver configuration.
 Example: config.yaml</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">mode</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">StandAlone</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#8f5902;font-style:italic"># Mode for the reverseproxy, should not be changed</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">port</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#0000cf;font-weight:bold">2222</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#8f5902;font-style:italic"># Port on which reverseproxy will listen</span><span style="color:#f8f8f8;text-decoration:underline">
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">port</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#0000cf;font-weight:bold">2222</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#8f5902;font-style:italic"># Port on which reverseproxy will listen</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">logLevel</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">debug</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">logFormat</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">text</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">standAloneConfig</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">config</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">storageArrays</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">     </span>- <span style="color:#204a87;font-weight:bold">storageArrayId</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;000000000001&#34;</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#8f5902;font-style:italic"># arrayID</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">       </span><span style="color:#204a87;font-weight:bold">primaryURL</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">https://primary-1.unisphe.re:8443</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#8f5902;font-style:italic"># primary unisphere for arrayID</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">       </span><span style="color:#204a87;font-weight:bold">backupURL</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">https://backup-1.unisphe.re:8443  </span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#8f5902;font-style:italic"># backup unisphere for arrayID</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">       </span><span style="color:#204a87;font-weight:bold">proxyCredentialSecrets</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">         </span>- <span style="color:#000">proxy-secret-11</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#8f5902;font-style:italic"># credential secret for primary unisphere, e.g., powermax-creds</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">         </span>- <span style="color:#000">proxy-secret-12</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#8f5902;font-style:italic"># credential secret for backup unisphere, e.g., powermax-creds</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">         </span>- <span style="color:#000">primary-unisphere-secret-1</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#8f5902;font-style:italic"># credential secret for primary unisphere, e.g., powermax-creds</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">         </span>- <span style="color:#000">backup-unisphere-secret-1</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#8f5902;font-style:italic"># credential secret for backup unisphere, e.g., powermax-creds</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">     </span>- <span style="color:#204a87;font-weight:bold">storageArrayId</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;000000000002&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">       </span><span style="color:#204a87;font-weight:bold">primaryURL</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">https://primary-2.unisphe.re:8443</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">       </span><span style="color:#204a87;font-weight:bold">backupURL</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">https://backup-2.unisphe.re:8443</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">       </span><span style="color:#204a87;font-weight:bold">proxyCredentialSecrets</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">        </span>- <span style="color:#000">proxy-secret-21</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">        </span>- <span style="color:#000">proxy-secret-22</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">        </span>- <span style="color:#000">primary-unisphere-secret-2</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">        </span>- <span style="color:#000">backup-unisphere-secret-2</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">managementServers</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span>- <span style="color:#204a87;font-weight:bold">url</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">https://primary-1.unisphe.re:8443</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#8f5902;font-style:italic"># primary unisphere endpoint</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">arrayCredentialSecret</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">primary-1-secret</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#8f5902;font-style:italic"># primary credential secret e.g., powermax-creds</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">arrayCredentialSecret</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">primary-unisphere-secret-1</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#8f5902;font-style:italic"># primary credential secret e.g., powermax-creds</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">skipCertificateValidation</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span>- <span style="color:#204a87;font-weight:bold">url</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">https://backup-1.unisphe.re:8443</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#8f5902;font-style:italic"># backup unisphere endpoint</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">arrayCredentialSecret</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">backup-1-secret</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#8f5902;font-style:italic"># backup credential secret e.g., powermax-creds</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">arrayCredentialSecret</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">backup-unisphere-secret-1</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#8f5902;font-style:italic"># backup credential secret e.g., powermax-creds</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">skipCertificateValidation</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">false</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#8f5902;font-style:italic"># value false, to verify unisphere certificate and provide certSecret</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">certSecret</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">primary-certs</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#8f5902;font-style:italic"># unisphere verification certificate</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span>- <span style="color:#204a87;font-weight:bold">url</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">https://primary-2.unisphe.re:8443</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">arrayCredentialSecret</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">primary-2-secret</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">arrayCredentialSecret</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">primary-unisphere-secret-2</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">skipCertificateValidation</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span>- <span style="color:#204a87;font-weight:bold">url</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">https://backup-2.unisphe.re:8443</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">arrayCredentialSecret</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">backup-2-secret</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">arrayCredentialSecret</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">backup-unisphere-secret-2</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">skipCertificateValidation</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">false</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">certSecret</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">primary-certs</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span></code></pre></div><p>After editing the file, run this command to create a secret called <code>powermax-reverseproxy-config</code>. If you are using a different namespace/secret name, just substitute those into the command.</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl create configmap powermax-reverseproxy-config --from-file config.yaml -n powermax
 </span></span></code></pre></div></li>
 <li>
-<p>Create a configmap using below sample file. Fill in the appropriate values for driver configuration. Example: X_CSI_TRANSPORT_PROTOCOL:&ldquo;ISCSI&rdquo;</p>
+<p>Create a configmap using the sample file <a href="https://github.com/dell/csi-powermax/blob/main/samples/configmap/powermax-array-config.yaml">here</a>. Fill in the appropriate values for driver configuration.</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">   </span><span style="color:#8f5902;font-style:italic"># Copyright © 2024 Dell Inc. or its subsidiaries. All Rights Reserved.</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">   </span><span style="color:#8f5902;font-style:italic">#</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">   </span><span style="color:#8f5902;font-style:italic"># Licensed under the Apache License, Version 2.0 (the &#34;License&#34;);</span><span style="color:#f8f8f8;text-decoration:underline">
@@ -1145,10 +1193,14 @@ Example: config.yaml</p>
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">     </span><span style="color:#204a87;font-weight:bold">namespace</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">powermax</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">   </span><span style="color:#204a87;font-weight:bold">data</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">     </span><span style="color:#204a87;font-weight:bold">powermax-array-config.yaml</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000;font-weight:bold">|</span><span style="color:#8f5902;font-style:italic">
-</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">       X_CSI_POWERMAX_PORTGROUPS: &#34;&#34; # Portgroup is required in case of iSCSI only
-</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">       X_CSI_TRANSPORT_PROTOCOL: &#34;&#34; # Defaults to empty
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">       # List of comma-separated port groups (ISCSI only). Example: PortGroup1, portGroup2 Required for iSCSI only
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">       X_CSI_POWERMAX_PORTGROUPS: &#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">       # Choose which transport protocol to use (ISCSI, FC, NVMETCP, auto) defaults to auto if nothing is specified
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">       X_CSI_TRANSPORT_PROTOCOL: &#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">       # IP address of the Unisphere for PowerMax (Required), Defaults to https://0.0.0.0:8443
 </span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">       X_CSI_POWERMAX_ENDPOINT: &#34;https://10.0.0.0:8443&#34;
-</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">       X_CSI_MANAGED_ARRAYS: &#34;000000000000,000000000000,&#34;</span><span style="color:#f8f8f8;text-decoration:underline">       
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">       # List of comma-separated array ID(s) which will be managed by the driver (Required)
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">       X_CSI_MANAGED_ARRAYS: &#34;000000000000,000000000000,&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span></code></pre></div></li>
 <li>
 <p>Create a CR (Custom Resource) for PowerMax using the sample files provided</p>
@@ -1158,167 +1210,182 @@ the sample file provided
 <p>b. Install the PowerMax driver using the detailed configuration using the sample file provided
 <a href="https://github.com/dell/csm-operator/tree/main/samples">here</a>.</p>
 </li>
+</ol>
+<blockquote>
+<p>NOTE:
+<a href="https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powermax_v2130.yaml#L283">Replication module</a> must be enabled to use the Metro volume</p>
+</blockquote>
+<p>Example:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span>- <span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">replication</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">enabled</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span></code></pre></div><blockquote>
+<p><a href="https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powermax_v2130.yaml#L316">Target clusterID</a> should be set as self</p>
+</blockquote>
+<p>Example:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span>- <span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;TARGET_CLUSTERS_IDS&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">value</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;self&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span></code></pre></div><ol start="6">
 <li>
 <p>Users should configure the parameters in CR. The following table lists the primary configurable parameters of the PowerMax driver and their default values:</p>
 <table>
   <thead>
       <tr>
-          <th style="text-align: left">Parameter</th>
-          <th style="text-align: left">Description</th>
-          <th style="text-align: left">Required</th>
-          <th style="text-align: left">Default</th>
+          <th>Parameter</th>
+          <th>Description</th>
+          <th>Required</th>
+          <th>Default</th>
       </tr>
   </thead>
   <tbody>
       <tr>
-          <td style="text-align: left">dnsPolicy</td>
-          <td style="text-align: left">Determines the DNS Policy of the Node service</td>
-          <td style="text-align: left">Yes</td>
-          <td style="text-align: left">ClusterFirstWithHostNet</td>
+          <td>namespace</td>
+          <td>Specifies namespace where the driver will be installed</td>
+          <td>Yes</td>
+          <td>&ldquo;powermax&rdquo;</td>
       </tr>
       <tr>
-          <td style="text-align: left">replicas</td>
-          <td style="text-align: left">Controls the number of controller Pods you deploy. If controller Pods are greater than the number of available nodes, excess Pods will become stuck in pending. The default is 2 which allows for Controller high availability.</td>
-          <td style="text-align: left">Yes</td>
-          <td style="text-align: left">2</td>
+          <td>dnsPolicy</td>
+          <td>Determines the DNS Policy of the Node service</td>
+          <td>Yes</td>
+          <td>ClusterFirstWithHostNet</td>
       </tr>
       <tr>
-          <td style="text-align: left">fsGroupPolicy</td>
-          <td style="text-align: left">Defines which FS Group policy mode to be used, Supported modes <code>None, File and ReadWriteOnceWithFSType</code>. In OCP &lt;= 4.16 and K8s &lt;= 1.29, fsGroupPolicy is an immutable field.</td>
-          <td style="text-align: left">No</td>
-          <td style="text-align: left">&ldquo;ReadWriteOnceWithFSType&rdquo;</td>
+          <td>replicas</td>
+          <td>Controls the number of controller Pods you deploy. If controller Pods are greater than the number of available nodes, excess Pods will become stuck in pending. The default is 2 which allows for Controller high availability.</td>
+          <td>Yes</td>
+          <td>2</td>
       </tr>
       <tr>
-          <td style="text-align: left"><em><strong>Common parameters for node and controller</strong></em></td>
-          <td style="text-align: left"></td>
-          <td style="text-align: left"></td>
-          <td style="text-align: left"></td>
+          <td>fsGroupPolicy</td>
+          <td>Defines which FS Group policy mode to be used, Supported modes <code>None, File and ReadWriteOnceWithFSType</code>. In OCP &lt;= 4.16 and K8s &lt;= 1.29, fsGroupPolicy is an immutable field.</td>
+          <td>No</td>
+          <td>&ldquo;ReadWriteOnceWithFSType&rdquo;</td>
       </tr>
       <tr>
-          <td style="text-align: left">X_CSI_K8S_CLUSTER_PREFIX</td>
-          <td style="text-align: left">Define a prefix that is appended to all resources created in the array; unique per K8s/CSI deployment; max length - 3 characters</td>
-          <td style="text-align: left">Yes</td>
-          <td style="text-align: left">XYZ</td>
+          <td><em><strong>Common parameters for node and controller</strong></em></td>
+          <td></td>
+          <td></td>
+          <td></td>
       </tr>
       <tr>
-          <td style="text-align: left">X_CSI_POWERMAX_ENDPOINT</td>
-          <td style="text-align: left">IP address of the Unisphere for PowerMax</td>
-          <td style="text-align: left">Yes</td>
-          <td style="text-align: left">https://0.0.0.0:8443</td>
+          <td>X_CSI_K8S_CLUSTER_PREFIX</td>
+          <td>Define a prefix that is appended to all resources created in the array; unique per K8s/CSI deployment; max length - 3 characters</td>
+          <td>No</td>
+          <td>CSM</td>
       </tr>
       <tr>
-          <td style="text-align: left">X_CSI_TRANSPORT_PROTOCOL</td>
-          <td style="text-align: left">Choose which transport protocol to use (ISCSI, FC, NVMETCP, auto or None)</td>
-          <td style="text-align: left">Yes</td>
-          <td style="text-align: left">auto</td>
+          <td>X_CSI_POWERMAX_PROXY_SERVICE_NAME</td>
+          <td>Name of CSI PowerMax ReverseProxy service.</td>
+          <td>Yes</td>
+          <td>csipowermax-reverseproxy</td>
       </tr>
       <tr>
-          <td style="text-align: left">X_CSI_POWERMAX_PORTGROUPS</td>
-          <td style="text-align: left">List of comma-separated port groups (ISCSI only). Example: &ldquo;PortGroup1,PortGroup2&rdquo;</td>
-          <td style="text-align: left">No</td>
-          <td style="text-align: left">-</td>
+          <td>X_CSI_IG_MODIFY_HOSTNAME</td>
+          <td>Change any existing host names. When nodenametemplate is set, it changes the name to the specified format else it uses driver default host name format.</td>
+          <td>No</td>
+          <td>false</td>
       </tr>
       <tr>
-          <td style="text-align: left">X_CSI_MANAGED_ARRAYS</td>
-          <td style="text-align: left">List of comma-separated array ID(s) which will be managed by the driver</td>
-          <td style="text-align: left">Yes</td>
-          <td style="text-align: left">-</td>
+          <td>X_CSI_IG_NODENAME_TEMPLATE</td>
+          <td>Provide a template for the CSI driver to use while creating the Host/IG on the array for the nodes in the cluster. It is of the format a-b-c-%foo%-xyz where foo will be replaced by host name of each node in the cluster.</td>
+          <td>No</td>
+          <td>-</td>
       </tr>
       <tr>
-          <td style="text-align: left">X_CSI_POWERMAX_PROXY_SERVICE_NAME</td>
-          <td style="text-align: left">Name of CSI PowerMax ReverseProxy service.</td>
-          <td style="text-align: left">Yes</td>
-          <td style="text-align: left">csipowermax-reverseproxy</td>
+          <td>X_CSI_POWERMAX_DRIVER_NAME</td>
+          <td>Set custom CSI driver name. For more details on this feature see the related <a href="../../../../csidriver/features/powermax/#custom-driver-name">documentation</a></td>
+          <td>No</td>
+          <td>-</td>
       </tr>
       <tr>
-          <td style="text-align: left">X_CSI_IG_MODIFY_HOSTNAME</td>
-          <td style="text-align: left">Change any existing host names. When nodenametemplate is set, it changes the name to the specified format else it uses driver default host name format.</td>
-          <td style="text-align: left">No</td>
-          <td style="text-align: left">false</td>
+          <td>X_CSI_HEALTH_MONITOR_ENABLED</td>
+          <td>Enable/Disable health monitor of CSI volumes from Controller and Node plugin. Provides details of volume status, usage and volume condition. As a prerequisite, external-health-monitor sidecar section should be uncommented in samples which would install the sidecar</td>
+          <td>No</td>
+          <td>false</td>
       </tr>
       <tr>
-          <td style="text-align: left">X_CSI_IG_NODENAME_TEMPLATE</td>
-          <td style="text-align: left">Provide a template for the CSI driver to use while creating the Host/IG on the array for the nodes in the cluster. It is of the format a-b-c-%foo%-xyz where foo will be replaced by host name of each node in the cluster.</td>
-          <td style="text-align: left">No</td>
-          <td style="text-align: left">-</td>
+          <td>X_CSI_VSPHERE_ENABLED</td>
+          <td>Enable VMware virtualized environment support via RDM</td>
+          <td>No</td>
+          <td>false</td>
       </tr>
       <tr>
-          <td style="text-align: left">X_CSI_POWERMAX_DRIVER_NAME</td>
-          <td style="text-align: left">Set custom CSI driver name. For more details on this feature see the related <a href="../../../../csidriver/features/powermax/#custom-driver-name">documentation</a></td>
-          <td style="text-align: left">No</td>
-          <td style="text-align: left">-</td>
+          <td>X_CSI_VSPHERE_PORTGROUP</td>
+          <td>Existing portGroup that driver will use for vSphere</td>
+          <td>Yes</td>
+          <td>&quot;&quot;</td>
       </tr>
       <tr>
-          <td style="text-align: left">X_CSI_HEALTH_MONITOR_ENABLED</td>
-          <td style="text-align: left">Enable/Disable health monitor of CSI volumes from Controller and Node plugin. Provides details of volume status, usage and volume condition. As a prerequisite, external-health-monitor sidecar section should be uncommented in samples which would install the sidecar</td>
-          <td style="text-align: left">No</td>
-          <td style="text-align: left">false</td>
+          <td>X_CSI_VSPHERE_HOSTNAME</td>
+          <td>Existing host(initiator group)/host group(cascaded initiator group) that driver will use for vSphere</td>
+          <td>Yes</td>
+          <td>&quot;&quot;</td>
       </tr>
       <tr>
-          <td style="text-align: left">X_CSI_VSPHERE_ENABLED</td>
-          <td style="text-align: left">Enable VMware virtualized environment support via RDM</td>
-          <td style="text-align: left">No</td>
-          <td style="text-align: left">false</td>
+          <td>X_CSI_VCenter_HOST</td>
+          <td>URL/endpoint of the vCenter where all the ESX are present</td>
+          <td>Yes</td>
+          <td>&quot;&quot;</td>
       </tr>
       <tr>
-          <td style="text-align: left">X_CSI_VSPHERE_PORTGROUP</td>
-          <td style="text-align: left">Existing portGroup that driver will use for vSphere</td>
-          <td style="text-align: left">Yes</td>
-          <td style="text-align: left">&quot;&quot;</td>
+          <td><em><strong>Node parameters</strong></em></td>
+          <td></td>
+          <td></td>
+          <td></td>
       </tr>
       <tr>
-          <td style="text-align: left">X_CSI_VSPHERE_HOSTNAME</td>
-          <td style="text-align: left">Existing host(initiator group)/host group(cascaded initiator group) that driver will use for vSphere</td>
-          <td style="text-align: left">Yes</td>
-          <td style="text-align: left">&quot;&quot;</td>
+          <td>X_CSI_POWERMAX_ISCSI_ENABLE_CHAP</td>
+          <td>Enable ISCSI CHAP authentication. For more details on this feature see the related <a href="../../../../csidriver/features/powermax/#iscsi-chap">documentation</a></td>
+          <td>No</td>
+          <td>false</td>
       </tr>
       <tr>
-          <td style="text-align: left">X_CSI_VCenter_HOST</td>
-          <td style="text-align: left">URL/endpoint of the vCenter where all the ESX are present</td>
-          <td style="text-align: left">Yes</td>
-          <td style="text-align: left">&quot;&quot;</td>
+          <td>X_CSI_TOPOLOGY_CONTROL_ENABLED</td>
+          <td>Enable/Disabe topology control. It filters out arrays, associated transport protocol available to each node and creates topology keys based on any such user input.</td>
+          <td>No</td>
+          <td>false</td>
       </tr>
       <tr>
-          <td style="text-align: left"><em><strong>Node parameters</strong></em></td>
-          <td style="text-align: left"></td>
-          <td style="text-align: left"></td>
-          <td style="text-align: left"></td>
+          <td><em><strong>CSI Reverseproxy Module</strong></em></td>
+          <td></td>
+          <td></td>
+          <td></td>
       </tr>
       <tr>
-          <td style="text-align: left">X_CSI_POWERMAX_ISCSI_ENABLE_CHAP</td>
-          <td style="text-align: left">Enable ISCSI CHAP authentication. For more details on this feature see the related <a href="../../../../csidriver/features/powermax/#iscsi-chap">documentation</a></td>
-          <td style="text-align: left">No</td>
-          <td style="text-align: left">false</td>
+          <td>X_CSI_REVPROXY_TLS_SECRET</td>
+          <td>Name of TLS secret defined in config map</td>
+          <td>Yes</td>
+          <td>&ldquo;csirevproxy-tls-secret&rdquo;</td>
       </tr>
       <tr>
-          <td style="text-align: left">X_CSI_TOPOLOGY_CONTROL_ENABLED</td>
-          <td style="text-align: left">Enable/Disabe topology control. It filters out arrays, associated transport protocol available to each node and creates topology keys based on any such user input.</td>
-          <td style="text-align: left">No</td>
-          <td style="text-align: left">false</td>
+          <td>X_CSI_REVPROXY_PORT</td>
+          <td>Port number where reverseproxy will listen as defined in config map</td>
+          <td>Yes</td>
+          <td>&ldquo;2222&rdquo;</td>
       </tr>
       <tr>
-          <td style="text-align: left"><em><strong>CSI Reverseproxy Module</strong></em></td>
-          <td style="text-align: left"></td>
-          <td style="text-align: left"></td>
-          <td style="text-align: left"></td>
+          <td>X_CSI_CONFIG_MAP_NAME</td>
+          <td>Name of config map as created for CSI PowerMax</td>
+          <td>Yes</td>
+          <td>&ldquo;powermax-reverseproxy-config&rdquo;</td>
       </tr>
       <tr>
-          <td style="text-align: left">X_CSI_REVPROXY_TLS_SECRET</td>
-          <td style="text-align: left">Name of TLS secret defined in config map</td>
-          <td style="text-align: left">Yes</td>
-          <td style="text-align: left">&ldquo;csirevproxy-tls-secret&rdquo;</td>
+          <td><em><strong>Sidecar parameters</strong></em></td>
+          <td></td>
+          <td></td>
+          <td></td>
       </tr>
       <tr>
-          <td style="text-align: left">X_CSI_REVPROXY_PORT</td>
-          <td style="text-align: left">Port number where reverseproxy will listen as defined in config map</td>
-          <td style="text-align: left">Yes</td>
-          <td style="text-align: left">&ldquo;2222&rdquo;</td>
+          <td>volume-name-prefix</td>
+          <td>The volume-name-prefix will be used by provisioner sidecar as a prefix for all the volumes created</td>
+          <td>Yes</td>
+          <td>pmax</td>
       </tr>
       <tr>
-          <td style="text-align: left">X_CSI_CONFIG_MAP_NAME</td>
-          <td style="text-align: left">Name of config map as created for CSI PowerMax</td>
-          <td style="text-align: left">Yes</td>
-          <td style="text-align: left">&ldquo;powermax-reverseproxy-config&rdquo;</td>
+          <td>monitor-interval</td>
+          <td>The monitor-interval will be used by external-health-monitor as an interval for health checks</td>
+          <td>Yes</td>
+          <td>60s</td>
       </tr>
   </tbody>
 </table>
@@ -1421,42 +1488,42 @@ Example:</p>
 </span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">                  - &#34;000000000002:*&#34;
 </span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">              - nodeName: &#34;node3&#34;
 </span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">                rules:
-</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">                  - &#34;*:*&#34;</span><span style="color:#f8f8f8;text-decoration:underline">            
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">                  - &#34;*:*&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span></code></pre></div><table>
   <thead>
       <tr>
-          <th style="text-align: left">Parameter</th>
-          <th style="text-align: left">Description</th>
+          <th>Parameter</th>
+          <th>Description</th>
       </tr>
   </thead>
   <tbody>
       <tr>
-          <td style="text-align: left">allowedConnections</td>
-          <td style="text-align: left">List of node, array and protocol info for user allowed configuration</td>
+          <td>allowedConnections</td>
+          <td>List of node, array and protocol info for user allowed configuration</td>
       </tr>
       <tr>
-          <td style="text-align: left">allowedConnections.nodeName</td>
-          <td style="text-align: left">Name of the node on which user wants to apply given rules</td>
+          <td>allowedConnections.nodeName</td>
+          <td>Name of the node on which user wants to apply given rules</td>
       </tr>
       <tr>
-          <td style="text-align: left">allowedConnections.rules</td>
-          <td style="text-align: left">List of StorageArrayID:TransportProtocol pair</td>
+          <td>allowedConnections.rules</td>
+          <td>List of StorageArrayID:TransportProtocol pair</td>
       </tr>
       <tr>
-          <td style="text-align: left">deniedConnections</td>
-          <td style="text-align: left">List of node, array and protocol info for user denied configuration</td>
+          <td>deniedConnections</td>
+          <td>List of node, array and protocol info for user denied configuration</td>
       </tr>
       <tr>
-          <td style="text-align: left">deniedConnections.nodeName</td>
-          <td style="text-align: left">Name of the node on which user wants to apply given rules</td>
+          <td>deniedConnections.nodeName</td>
+          <td>Name of the node on which user wants to apply given rules</td>
       </tr>
       <tr>
-          <td style="text-align: left">deniedConnections.rules</td>
-          <td style="text-align: left">List of StorageArrayID:TransportProtocol pair</td>
+          <td>deniedConnections.rules</td>
+          <td>List of StorageArrayID:TransportProtocol pair</td>
       </tr>
       <tr>
-          <td style="text-align: left"><br></td>
-          <td style="text-align: left"></td>
+          <td><br></td>
+          <td></td>
       </tr>
   </tbody>
 </table>
@@ -1618,7 +1685,7 @@ Example:</p>
 
       </div><div class="td-footer__center col-12 col-sm-4 py-2 order-sm-2">
         <span class="td-footer__copyright">&copy;
-    2024
+    2025
     <span class="td-footer__authors">The Dell Technologies</span></span><span class="td-footer__all_rights_reserved">All Rights Reserved</span><span class="ms-2"><a href="https://www.dell.com/learn/us/en/uscorp1/policies-privacy" target="_blank" rel="noopener">Privacy Policy</a></span>
       </div>
     </div>

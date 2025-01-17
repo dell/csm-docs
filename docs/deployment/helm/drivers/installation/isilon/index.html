@@ -17,11 +17,11 @@
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="docs">
-    <meta property="article:modified_time" content="2024-10-30T11:32:58-04:00">
+    <meta property="article:modified_time" content="2024-12-05T12:02:53+05:30">
 
   <meta itemprop="name" content="PowerScale">
   <meta itemprop="description" content="Installing the CSI Driver for Dell PowerScale via Helm">
-  <meta itemprop="dateModified" content="2024-10-30T11:32:58-04:00">
+  <meta itemprop="dateModified" content="2024-12-05T12:02:53+05:30">
   <meta itemprop="wordCount" content="3259">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="PowerScale">
@@ -56,10 +56,10 @@
         <div class="dropdown">
   <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Releases</a>
   <ul class="dropdown-menu">
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.12.0)</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.11.1</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.10.2</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">v1.9.4</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.13.0)</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.12.0</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.11.1</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">v1.10.2</a></li>
     </ul>
 </div></li>
       <li class="td-light-dark-menu nav-item dropdown">
@@ -125,7 +125,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.5b43d3acf6640adab15d0e301eb69f8e.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.30cbd121c9a04dbae82fa0989eaa7269.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -149,7 +149,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.5b43d3acf6640adab15d0e301eb69f8e.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.30cbd121c9a04dbae82fa0989eaa7269.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -842,7 +842,7 @@ Install the Driver <a class="header-link"  href="#install-the-driver" style=" di
         </a></h2><p><strong>Steps</strong></p>
 <ol>
 <li>
-<p>Run <code>git clone -b v2.12.0 https://github.com/dell/csi-powerscale.git</code> to clone the git repository.</p>
+<p>Run <code>git clone -b v2.13.0 https://github.com/dell/csi-powerscale.git</code> to clone the git repository.</p>
 </li>
 <li>
 <p>Ensure that you have created the namespace where you want to install the driver. You can run <code>kubectl create namespace isilon</code> to create a new one. The use of &ldquo;isilon&rdquo;  as the namespace is just an example. You can choose any name for the namespace.</p>
@@ -852,309 +852,309 @@ Install the Driver <a class="header-link"  href="#install-the-driver" style=" di
 <p><strong>Note</strong>: The &lsquo;clusterName&rsquo; serves as a logical, unique identifier for the array that should remain unchanged once it is included in the volume handle. Altering this identifier is not advisable, as it would result in the failure of all operations associated with the volume that was created earlier.</p>
 </li>
 <li>
-<p>Download <code>wget -O my-isilon-settings.yaml https://raw.githubusercontent.com/dell/helm-charts/csi-isilon-2.12.0/charts/csi-isilon/values.yaml</code> into <code>cd ../dell-csi-helm-installer</code> to customize settings for installation.</p>
+<p>Download <code>wget -O my-isilon-settings.yaml https://raw.githubusercontent.com/dell/helm-charts/csi-isilon-2.13.0/charts/csi-isilon/values.yaml</code> into <code>cd ../dell-csi-helm-installer</code> to customize settings for installation.</p>
 </li>
 <li>
 <p>Edit <em>my-isilon-settings.yaml</em> to set the following parameters for your installation:
 The following table lists the primary configurable parameters of the PowerScale driver Helm chart and their default values. More detailed information can be
-found in the  <a href="https://github.com/dell/helm-charts/blob/csi-isilon-2.12.0/charts/csi-isilon/values.yaml"><code>values.yaml</code></a> file in this repository.</p>
+found in the  <a href="https://github.com/dell/helm-charts/blob/csi-isilon-2.13.0/charts/csi-isilon/values.yaml"><code>values.yaml</code></a> file in this repository.</p>
 <table>
   <thead>
       <tr>
-          <th style="text-align: left">Parameter</th>
-          <th style="text-align: left">Description</th>
-          <th style="text-align: left">Required</th>
-          <th style="text-align: left">Default</th>
+          <th>Parameter</th>
+          <th>Description</th>
+          <th>Required</th>
+          <th>Default</th>
       </tr>
   </thead>
   <tbody>
       <tr>
-          <td style="text-align: left">images</td>
-          <td style="text-align: left">List all the images used by the CSI driver and CSM. If you use a private repository, change the registries accordingly.</td>
-          <td style="text-align: left">Yes</td>
-          <td style="text-align: left">&quot;&quot;</td>
+          <td>images</td>
+          <td>List all the images used by the CSI driver and CSM. If you use a private repository, change the registries accordingly.</td>
+          <td>Yes</td>
+          <td>&quot;&quot;</td>
       </tr>
       <tr>
-          <td style="text-align: left">logLevel</td>
-          <td style="text-align: left">CSI driver log level</td>
-          <td style="text-align: left">No</td>
-          <td style="text-align: left">&ldquo;debug&rdquo;</td>
+          <td>logLevel</td>
+          <td>CSI driver log level</td>
+          <td>No</td>
+          <td>&ldquo;debug&rdquo;</td>
       </tr>
       <tr>
-          <td style="text-align: left">certSecretCount</td>
-          <td style="text-align: left">Defines the number of certificate secrets, which the user is going to create for SSL authentication. (isilon-cert-0..isilon-cert-(n-1)); Minimum value should be 1.</td>
-          <td style="text-align: left">Yes</td>
-          <td style="text-align: left">1</td>
+          <td>certSecretCount</td>
+          <td>Defines the number of certificate secrets, which the user is going to create for SSL authentication. (isilon-cert-0..isilon-cert-(n-1)); Minimum value should be 1.</td>
+          <td>Yes</td>
+          <td>1</td>
       </tr>
       <tr>
-          <td style="text-align: left"><a href="../../../../../csidriver/features/powerscale/#support-custom-networks-for-nfs-io-traffic">allowedNetworks</a></td>
-          <td style="text-align: left">Defines the list of networks that can be used for NFS I/O traffic, CIDR format must be used.</td>
-          <td style="text-align: left">No</td>
-          <td style="text-align: left">[ ]</td>
+          <td><a href="../../../../../csidriver/features/powerscale/#support-custom-networks-for-nfs-io-traffic">allowedNetworks</a></td>
+          <td>Defines the list of networks that can be used for NFS I/O traffic, CIDR format must be used.</td>
+          <td>No</td>
+          <td>[ ]</td>
       </tr>
       <tr>
-          <td style="text-align: left">maxIsilonVolumesPerNode</td>
-          <td style="text-align: left">Defines the default value for a maximum number of volumes that the controller can publish to the node. If the value is zero CO SHALL decide how many volumes of this type can be published by the controller to the node. This limit is applicable to all the nodes in the cluster for which node label &lsquo;max-isilon-volumes-per-node&rsquo; is not set.</td>
-          <td style="text-align: left">Yes</td>
-          <td style="text-align: left">0</td>
+          <td>maxIsilonVolumesPerNode</td>
+          <td>Defines the default value for a maximum number of volumes that the controller can publish to the node. If the value is zero CO SHALL decide how many volumes of this type can be published by the controller to the node. This limit is applicable to all the nodes in the cluster for which node label &lsquo;max-isilon-volumes-per-node&rsquo; is not set.</td>
+          <td>Yes</td>
+          <td>0</td>
       </tr>
       <tr>
-          <td style="text-align: left">imagePullPolicy</td>
-          <td style="text-align: left">Defines the policy to determine if the image should be pulled prior to starting the container</td>
-          <td style="text-align: left">Yes</td>
-          <td style="text-align: left">IfNotPresent</td>
+          <td>imagePullPolicy</td>
+          <td>Defines the policy to determine if the image should be pulled prior to starting the container</td>
+          <td>Yes</td>
+          <td>IfNotPresent</td>
       </tr>
       <tr>
-          <td style="text-align: left">verbose</td>
-          <td style="text-align: left">Indicates what content of the OneFS REST API message should be logged in debug level logs</td>
-          <td style="text-align: left">Yes</td>
-          <td style="text-align: left">1</td>
+          <td>verbose</td>
+          <td>Indicates what content of the OneFS REST API message should be logged in debug level logs</td>
+          <td>Yes</td>
+          <td>1</td>
       </tr>
       <tr>
-          <td style="text-align: left">kubeletConfigDir</td>
-          <td style="text-align: left">Specify kubelet config dir path</td>
-          <td style="text-align: left">Yes</td>
-          <td style="text-align: left">&ldquo;/var/lib/kubelet&rdquo;</td>
+          <td>kubeletConfigDir</td>
+          <td>Specify kubelet config dir path</td>
+          <td>Yes</td>
+          <td>&ldquo;/var/lib/kubelet&rdquo;</td>
       </tr>
       <tr>
-          <td style="text-align: left">enableCustomTopology</td>
-          <td style="text-align: left">Indicates PowerScale FQDN/IP which will be fetched from node label and the same will be used by controller and node pod to establish a connection to Array. This requires enableCustomTopology to be enabled.</td>
-          <td style="text-align: left">No</td>
-          <td style="text-align: left">false</td>
+          <td>enableCustomTopology</td>
+          <td>Indicates PowerScale FQDN/IP which will be fetched from node label and the same will be used by controller and node pod to establish a connection to Array. This requires enableCustomTopology to be enabled.</td>
+          <td>No</td>
+          <td>false</td>
       </tr>
       <tr>
-          <td style="text-align: left">fsGroupPolicy</td>
-          <td style="text-align: left">Defines which FS Group policy mode to be used, Supported modes <code>None, File and ReadWriteOnceWithFSType</code></td>
-          <td style="text-align: left">No</td>
-          <td style="text-align: left">&ldquo;ReadWriteOnceWithFSType&rdquo;</td>
+          <td>fsGroupPolicy</td>
+          <td>Defines which FS Group policy mode to be used, Supported modes <code>None, File and ReadWriteOnceWithFSType</code></td>
+          <td>No</td>
+          <td>&ldquo;ReadWriteOnceWithFSType&rdquo;</td>
       </tr>
       <tr>
-          <td style="text-align: left">storageCapacity.enabled</td>
-          <td style="text-align: left">Enable/Disable storage capacity tracking</td>
-          <td style="text-align: left">No</td>
-          <td style="text-align: left">true</td>
+          <td>storageCapacity.enabled</td>
+          <td>Enable/Disable storage capacity tracking</td>
+          <td>No</td>
+          <td>true</td>
       </tr>
       <tr>
-          <td style="text-align: left">storageCapacity.pollInterval</td>
-          <td style="text-align: left">Configure how often the driver checks for changed capacity</td>
-          <td style="text-align: left">No</td>
-          <td style="text-align: left">5m</td>
+          <td>storageCapacity.pollInterval</td>
+          <td>Configure how often the driver checks for changed capacity</td>
+          <td>No</td>
+          <td>5m</td>
       </tr>
       <tr>
-          <td style="text-align: left">podmonAPIPort</td>
-          <td style="text-align: left">Defines the port which csi-driver will use within the cluster to support podmon</td>
-          <td style="text-align: left">No</td>
-          <td style="text-align: left">8083</td>
+          <td>podmonAPIPort</td>
+          <td>Defines the port which csi-driver will use within the cluster to support podmon</td>
+          <td>No</td>
+          <td>8083</td>
       </tr>
       <tr>
-          <td style="text-align: left">maxPathLen</td>
-          <td style="text-align: left">Defines the maximum length of path for a volume</td>
-          <td style="text-align: left">No</td>
-          <td style="text-align: left">192</td>
+          <td>maxPathLen</td>
+          <td>Defines the maximum length of path for a volume</td>
+          <td>No</td>
+          <td>192</td>
       </tr>
       <tr>
-          <td style="text-align: left"><em><strong>controller</strong></em></td>
-          <td style="text-align: left">Configure controller pod specific parameters</td>
-          <td style="text-align: left"></td>
-          <td style="text-align: left"></td>
+          <td><em><strong>controller</strong></em></td>
+          <td>Configure controller pod specific parameters</td>
+          <td></td>
+          <td></td>
       </tr>
       <tr>
-          <td style="text-align: left">controllerCount</td>
-          <td style="text-align: left">Defines the number of csi-powerscale controller pods to deploy to the Kubernetes release</td>
-          <td style="text-align: left">Yes</td>
-          <td style="text-align: left">2</td>
+          <td>controllerCount</td>
+          <td>Defines the number of csi-powerscale controller pods to deploy to the Kubernetes release</td>
+          <td>Yes</td>
+          <td>2</td>
       </tr>
       <tr>
-          <td style="text-align: left">volumeNamePrefix</td>
-          <td style="text-align: left">Defines a string prefix for the names of PersistentVolumes created</td>
-          <td style="text-align: left">Yes</td>
-          <td style="text-align: left">&ldquo;k8s&rdquo;</td>
+          <td>volumeNamePrefix</td>
+          <td>Defines a string prefix for the names of PersistentVolumes created</td>
+          <td>Yes</td>
+          <td>&ldquo;k8s&rdquo;</td>
       </tr>
       <tr>
-          <td style="text-align: left">snapshot.enabled</td>
-          <td style="text-align: left">Enable/Disable volume snapshot feature</td>
-          <td style="text-align: left">Yes</td>
-          <td style="text-align: left">true</td>
+          <td>snapshot.enabled</td>
+          <td>Enable/Disable volume snapshot feature</td>
+          <td>Yes</td>
+          <td>true</td>
       </tr>
       <tr>
-          <td style="text-align: left">snapshot.snapNamePrefix</td>
-          <td style="text-align: left">Defines a string prefix for the names of the Snapshots created</td>
-          <td style="text-align: left">Yes</td>
-          <td style="text-align: left">&ldquo;snapshot&rdquo;</td>
+          <td>snapshot.snapNamePrefix</td>
+          <td>Defines a string prefix for the names of the Snapshots created</td>
+          <td>Yes</td>
+          <td>&ldquo;snapshot&rdquo;</td>
       </tr>
       <tr>
-          <td style="text-align: left">resizer.enabled</td>
-          <td style="text-align: left">Enable/Disable volume expansion feature</td>
-          <td style="text-align: left">Yes</td>
-          <td style="text-align: left">true</td>
+          <td>resizer.enabled</td>
+          <td>Enable/Disable volume expansion feature</td>
+          <td>Yes</td>
+          <td>true</td>
       </tr>
       <tr>
-          <td style="text-align: left">healthMonitor.enabled</td>
-          <td style="text-align: left">Enable/Disable health monitor of CSI volumes- volume status, volume condition</td>
-          <td style="text-align: left">Yes</td>
-          <td style="text-align: left">false</td>
+          <td>healthMonitor.enabled</td>
+          <td>Enable/Disable health monitor of CSI volumes- volume status, volume condition</td>
+          <td>Yes</td>
+          <td>false</td>
       </tr>
       <tr>
-          <td style="text-align: left">healthMonitor.interval</td>
-          <td style="text-align: left">Interval of monitoring volume health condition</td>
-          <td style="text-align: left">Yes</td>
-          <td style="text-align: left">60s</td>
+          <td>healthMonitor.interval</td>
+          <td>Interval of monitoring volume health condition</td>
+          <td>Yes</td>
+          <td>60s</td>
       </tr>
       <tr>
-          <td style="text-align: left">nodeSelector</td>
-          <td style="text-align: left">Define node selection constraints for pods of controller deployment</td>
-          <td style="text-align: left">No</td>
-          <td style="text-align: left"></td>
+          <td>nodeSelector</td>
+          <td>Define node selection constraints for pods of controller deployment</td>
+          <td>No</td>
+          <td></td>
       </tr>
       <tr>
-          <td style="text-align: left">tolerations</td>
-          <td style="text-align: left">Define tolerations for the controller deployment, if required</td>
-          <td style="text-align: left">No</td>
-          <td style="text-align: left"></td>
+          <td>tolerations</td>
+          <td>Define tolerations for the controller deployment, if required</td>
+          <td>No</td>
+          <td></td>
       </tr>
       <tr>
-          <td style="text-align: left">leader-election-lease-duration</td>
-          <td style="text-align: left">Duration, that non-leader candidates will wait to force acquire leadership</td>
-          <td style="text-align: left">No</td>
-          <td style="text-align: left">20s</td>
+          <td>leader-election-lease-duration</td>
+          <td>Duration, that non-leader candidates will wait to force acquire leadership</td>
+          <td>No</td>
+          <td>20s</td>
       </tr>
       <tr>
-          <td style="text-align: left">leader-election-renew-deadline</td>
-          <td style="text-align: left">Duration, that the acting leader will retry refreshing leadership before giving up</td>
-          <td style="text-align: left">No</td>
-          <td style="text-align: left">15s</td>
+          <td>leader-election-renew-deadline</td>
+          <td>Duration, that the acting leader will retry refreshing leadership before giving up</td>
+          <td>No</td>
+          <td>15s</td>
       </tr>
       <tr>
-          <td style="text-align: left">leader-election-retry-period</td>
-          <td style="text-align: left">Duration, the LeaderElector clients should wait between tries of actions</td>
-          <td style="text-align: left">No</td>
-          <td style="text-align: left">5s</td>
+          <td>leader-election-retry-period</td>
+          <td>Duration, the LeaderElector clients should wait between tries of actions</td>
+          <td>No</td>
+          <td>5s</td>
       </tr>
       <tr>
-          <td style="text-align: left"><em><strong>node</strong></em></td>
-          <td style="text-align: left">Configure node pod specific parameters</td>
-          <td style="text-align: left"></td>
-          <td style="text-align: left"></td>
+          <td><em><strong>node</strong></em></td>
+          <td>Configure node pod specific parameters</td>
+          <td></td>
+          <td></td>
       </tr>
       <tr>
-          <td style="text-align: left">nodeSelector</td>
-          <td style="text-align: left">Define node selection constraints for pods of node daemonset</td>
-          <td style="text-align: left">No</td>
-          <td style="text-align: left"></td>
+          <td>nodeSelector</td>
+          <td>Define node selection constraints for pods of node daemonset</td>
+          <td>No</td>
+          <td></td>
       </tr>
       <tr>
-          <td style="text-align: left">tolerations</td>
-          <td style="text-align: left">Define tolerations for the node daemonset, if required</td>
-          <td style="text-align: left">No</td>
-          <td style="text-align: left"></td>
+          <td>tolerations</td>
+          <td>Define tolerations for the node daemonset, if required</td>
+          <td>No</td>
+          <td></td>
       </tr>
       <tr>
-          <td style="text-align: left">dnsPolicy</td>
-          <td style="text-align: left">Define the DNS Policy of the Node service</td>
-          <td style="text-align: left">Yes</td>
-          <td style="text-align: left">ClusterFirstWithHostNet</td>
+          <td>dnsPolicy</td>
+          <td>Define the DNS Policy of the Node service</td>
+          <td>Yes</td>
+          <td>ClusterFirstWithHostNet</td>
       </tr>
       <tr>
-          <td style="text-align: left">healthMonitor.enabled</td>
-          <td style="text-align: left">Enable/Disable health monitor of CSI volumes- volume usage, volume condition</td>
-          <td style="text-align: left">Yes</td>
-          <td style="text-align: left">false</td>
+          <td>healthMonitor.enabled</td>
+          <td>Enable/Disable health monitor of CSI volumes- volume usage, volume condition</td>
+          <td>Yes</td>
+          <td>false</td>
       </tr>
       <tr>
-          <td style="text-align: left"><em><strong>PLATFORM ATTRIBUTES</strong></em></td>
-          <td style="text-align: left"></td>
-          <td style="text-align: left"></td>
-          <td style="text-align: left"></td>
+          <td><em><strong>PLATFORM ATTRIBUTES</strong></em></td>
+          <td></td>
+          <td></td>
+          <td></td>
       </tr>
       <tr>
-          <td style="text-align: left">endpointPort</td>
-          <td style="text-align: left">Define the HTTPs port number of the PowerScale OneFS API server. If authorization is enabled, endpointPort should be the HTTPS localhost port that the authorization sidecar will listen on. This value acts as a default value for endpointPort, if not specified for a cluster config in secret.</td>
-          <td style="text-align: left">No</td>
-          <td style="text-align: left">8080</td>
+          <td>endpointPort</td>
+          <td>Define the HTTPs port number of the PowerScale OneFS API server. If authorization is enabled, endpointPort should be the HTTPS localhost port that the authorization sidecar will listen on. This value acts as a default value for endpointPort, if not specified for a cluster config in secret.</td>
+          <td>No</td>
+          <td>8080</td>
       </tr>
       <tr>
-          <td style="text-align: left">skipCertificateValidation</td>
-          <td style="text-align: left">Specify whether the PowerScale OneFS API server&rsquo;s certificate chain and hostname must be verified. This value acts as a default value for skipCertificateValidation, if not specified for a cluster config in secret.</td>
-          <td style="text-align: left">No</td>
-          <td style="text-align: left">true</td>
+          <td>skipCertificateValidation</td>
+          <td>Specify whether the PowerScale OneFS API server&rsquo;s certificate chain and hostname must be verified. This value acts as a default value for skipCertificateValidation, if not specified for a cluster config in secret.</td>
+          <td>No</td>
+          <td>true</td>
       </tr>
       <tr>
-          <td style="text-align: left">isiAuthType</td>
-          <td style="text-align: left">Indicates the authentication method to be used. If set to 1 then it follows as session-based authentication else basic authentication. If authorization.enabled=true, this value must be set to 1.</td>
-          <td style="text-align: left">No</td>
-          <td style="text-align: left">0</td>
+          <td>isiAuthType</td>
+          <td>Indicates the authentication method to be used. If set to 1 then it follows as session-based authentication else basic authentication. If authorization.enabled=true, this value must be set to 1.</td>
+          <td>No</td>
+          <td>0</td>
       </tr>
       <tr>
-          <td style="text-align: left">isiAccessZone</td>
-          <td style="text-align: left">Define the name of the access zone a volume can be created in. If storageclass is missing with AccessZone parameter, then value of isiAccessZone is used for the same.</td>
-          <td style="text-align: left">No</td>
-          <td style="text-align: left">System</td>
+          <td>isiAccessZone</td>
+          <td>Define the name of the access zone a volume can be created in. If storageclass is missing with AccessZone parameter, then value of isiAccessZone is used for the same.</td>
+          <td>No</td>
+          <td>System</td>
       </tr>
       <tr>
-          <td style="text-align: left">enableQuota</td>
-          <td style="text-align: left">Indicates whether the provisioner should attempt to set (later unset) quota on a newly provisioned volume. This requires SmartQuotas to be enabled.</td>
-          <td style="text-align: left">No</td>
-          <td style="text-align: left">true</td>
+          <td>enableQuota</td>
+          <td>Indicates whether the provisioner should attempt to set (later unset) quota on a newly provisioned volume. This requires SmartQuotas to be enabled.</td>
+          <td>No</td>
+          <td>true</td>
       </tr>
       <tr>
-          <td style="text-align: left">isiPath</td>
-          <td style="text-align: left">Define the base path for the volumes to be created on PowerScale cluster. This value acts as a default value for isiPath, if not specified for a cluster config in secret</td>
-          <td style="text-align: left">No</td>
-          <td style="text-align: left">/ifs/data/csi</td>
+          <td>isiPath</td>
+          <td>Define the base path for the volumes to be created on PowerScale cluster. This value acts as a default value for isiPath, if not specified for a cluster config in secret</td>
+          <td>No</td>
+          <td>/ifs/data/csi</td>
       </tr>
       <tr>
-          <td style="text-align: left">ignoreUnresolvableHosts</td>
-          <td style="text-align: left">Allows new host to add to existing export list though any of the existing hosts from the same exports are unresolvable/doesn&rsquo;t exist anymore.</td>
-          <td style="text-align: left">No</td>
-          <td style="text-align: left">false</td>
+          <td>ignoreUnresolvableHosts</td>
+          <td>Allows new host to add to existing export list though any of the existing hosts from the same exports are unresolvable/doesn&rsquo;t exist anymore.</td>
+          <td>No</td>
+          <td>false</td>
       </tr>
       <tr>
-          <td style="text-align: left">noProbeOnStart</td>
-          <td style="text-align: left">Define whether the controller/node plugin should probe all the PowerScale clusters during driver initialization</td>
-          <td style="text-align: left">No</td>
-          <td style="text-align: left">false</td>
+          <td>noProbeOnStart</td>
+          <td>Define whether the controller/node plugin should probe all the PowerScale clusters during driver initialization</td>
+          <td>No</td>
+          <td>false</td>
       </tr>
       <tr>
-          <td style="text-align: left">autoProbe</td>
-          <td style="text-align: left">Specify if automatically probe the PowerScale cluster if not done already during CSI calls</td>
-          <td style="text-align: left">No</td>
-          <td style="text-align: left">true</td>
+          <td>autoProbe</td>
+          <td>Specify if automatically probe the PowerScale cluster if not done already during CSI calls</td>
+          <td>No</td>
+          <td>true</td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>authorization</strong></td>
-          <td style="text-align: left"><a href="../../../../../deployment/helm/modules/installation/authorization-v2.0/">Authorization</a> is an optional feature to apply credential shielding of the backend PowerScale.</td>
-          <td style="text-align: left">-</td>
-          <td style="text-align: left">-</td>
+          <td><strong>authorization</strong></td>
+          <td><a href="../../../../../deployment/helm/modules/installation/authorization-v2.0/">Authorization</a> is an optional feature to apply credential shielding of the backend PowerScale.</td>
+          <td>-</td>
+          <td>-</td>
       </tr>
       <tr>
-          <td style="text-align: left">enabled</td>
-          <td style="text-align: left">A boolean that enables/disables authorization feature. If enabled, isiAuthType must be set to 1.</td>
-          <td style="text-align: left">No</td>
-          <td style="text-align: left">false</td>
+          <td>enabled</td>
+          <td>A boolean that enables/disables authorization feature. If enabled, isiAuthType must be set to 1.</td>
+          <td>No</td>
+          <td>false</td>
       </tr>
       <tr>
-          <td style="text-align: left">proxyHost</td>
-          <td style="text-align: left">Hostname of the csm-authorization server.</td>
-          <td style="text-align: left">No</td>
-          <td style="text-align: left">Empty</td>
+          <td>proxyHost</td>
+          <td>Hostname of the csm-authorization server.</td>
+          <td>No</td>
+          <td>Empty</td>
       </tr>
       <tr>
-          <td style="text-align: left">skipCertificateValidation</td>
-          <td style="text-align: left">A boolean that enables/disables certificate validation of the csm-authorization proxy server.</td>
-          <td style="text-align: left">No</td>
-          <td style="text-align: left">true</td>
+          <td>skipCertificateValidation</td>
+          <td>A boolean that enables/disables certificate validation of the csm-authorization proxy server.</td>
+          <td>No</td>
+          <td>true</td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>podmon</strong></td>
-          <td style="text-align: left"><a href="../../../../../deployment/helm/modules/installation/resiliency/">Podmon</a> is an optional feature to enable application pods to be resilient to node failure.</td>
-          <td style="text-align: left">-</td>
-          <td style="text-align: left">-</td>
+          <td><strong>podmon</strong></td>
+          <td><a href="../../../../../deployment/helm/modules/installation/resiliency/">Podmon</a> is an optional feature to enable application pods to be resilient to node failure.</td>
+          <td>-</td>
+          <td>-</td>
       </tr>
       <tr>
-          <td style="text-align: left">enabled</td>
-          <td style="text-align: left">A boolean that enables/disables podmon feature.</td>
-          <td style="text-align: left">No</td>
-          <td style="text-align: left">false</td>
+          <td>enabled</td>
+          <td>A boolean that enables/disables podmon feature.</td>
+          <td>No</td>
+          <td>false</td>
       </tr>
   </tbody>
 </table>
@@ -1171,78 +1171,78 @@ found in the  <a href="https://github.com/dell/helm-charts/blob/csi-isilon-2.12.
 <table>
   <thead>
       <tr>
-          <th style="text-align: left">Parameter</th>
-          <th style="text-align: left">Description</th>
-          <th style="text-align: left">Required</th>
-          <th style="text-align: left">Default</th>
+          <th>Parameter</th>
+          <th>Description</th>
+          <th>Required</th>
+          <th>Default</th>
       </tr>
   </thead>
   <tbody>
       <tr>
-          <td style="text-align: left">clusterName</td>
-          <td style="text-align: left">Logical name of PoweScale cluster against which volume CRUD operations are performed through this secret.</td>
-          <td style="text-align: left">Yes</td>
-          <td style="text-align: left">-</td>
+          <td>clusterName</td>
+          <td>Logical name of PoweScale cluster against which volume CRUD operations are performed through this secret.</td>
+          <td>Yes</td>
+          <td>-</td>
       </tr>
       <tr>
-          <td style="text-align: left">username</td>
-          <td style="text-align: left">username for connecting to PowerScale OneFS API server</td>
-          <td style="text-align: left">Yes</td>
-          <td style="text-align: left">-</td>
+          <td>username</td>
+          <td>username for connecting to PowerScale OneFS API server</td>
+          <td>Yes</td>
+          <td>-</td>
       </tr>
       <tr>
-          <td style="text-align: left">password</td>
-          <td style="text-align: left">password for connecting to PowerScale OneFS API server</td>
-          <td style="text-align: left">Yes</td>
-          <td style="text-align: left">-</td>
+          <td>password</td>
+          <td>password for connecting to PowerScale OneFS API server</td>
+          <td>Yes</td>
+          <td>-</td>
       </tr>
       <tr>
-          <td style="text-align: left">endpoint</td>
-          <td style="text-align: left">HTTPS endpoint of the PowerScale OneFS API server. If authorization is enabled, endpoint should be the HTTPS localhost endpoint that the authorization sidecar will listen on</td>
-          <td style="text-align: left">Yes</td>
-          <td style="text-align: left">-</td>
+          <td>endpoint</td>
+          <td>HTTPS endpoint of the PowerScale OneFS API server. If authorization is enabled, endpoint should be the HTTPS localhost endpoint that the authorization sidecar will listen on</td>
+          <td>Yes</td>
+          <td>-</td>
       </tr>
       <tr>
-          <td style="text-align: left">isDefault</td>
-          <td style="text-align: left">Indicates if this is a default cluster (would be used by storage classes without ClusterName parameter). Only one of the cluster config should be marked as default.</td>
-          <td style="text-align: left">No</td>
-          <td style="text-align: left">false</td>
+          <td>isDefault</td>
+          <td>Indicates if this is a default cluster (would be used by storage classes without ClusterName parameter). Only one of the cluster config should be marked as default.</td>
+          <td>No</td>
+          <td>false</td>
       </tr>
       <tr>
-          <td style="text-align: left"><em><strong>Optional parameters</strong></em></td>
-          <td style="text-align: left">Following parameters are Optional. If specified will override default values from values.yaml.</td>
-          <td style="text-align: left"></td>
-          <td style="text-align: left"></td>
+          <td><em><strong>Optional parameters</strong></em></td>
+          <td>Following parameters are Optional. If specified will override default values from values.yaml.</td>
+          <td></td>
+          <td></td>
       </tr>
       <tr>
-          <td style="text-align: left">skipCertificateValidation</td>
-          <td style="text-align: left">Specify whether the PowerScale OneFS API server&rsquo;s certificate chain and hostname must be verified.</td>
-          <td style="text-align: left">No</td>
-          <td style="text-align: left">default value from values.yaml</td>
+          <td>skipCertificateValidation</td>
+          <td>Specify whether the PowerScale OneFS API server&rsquo;s certificate chain and hostname must be verified.</td>
+          <td>No</td>
+          <td>default value from values.yaml</td>
       </tr>
       <tr>
-          <td style="text-align: left">ignoreUnresolvableHosts</td>
-          <td style="text-align: left">Allows new host to add to existing export list though any of the existing hosts from the same exports are unresolvable/doesn&rsquo;t exist anymore.</td>
-          <td style="text-align: left">No</td>
-          <td style="text-align: left">default value from values.yaml</td>
+          <td>ignoreUnresolvableHosts</td>
+          <td>Allows new host to add to existing export list though any of the existing hosts from the same exports are unresolvable/doesn&rsquo;t exist anymore.</td>
+          <td>No</td>
+          <td>default value from values.yaml</td>
       </tr>
       <tr>
-          <td style="text-align: left">endpointPort</td>
-          <td style="text-align: left">Specify the HTTPs port number of the PowerScale OneFS API server</td>
-          <td style="text-align: left">No</td>
-          <td style="text-align: left">default value from values.yaml</td>
+          <td>endpointPort</td>
+          <td>Specify the HTTPs port number of the PowerScale OneFS API server</td>
+          <td>No</td>
+          <td>default value from values.yaml</td>
       </tr>
       <tr>
-          <td style="text-align: left">isiPath</td>
-          <td style="text-align: left">The base path for the volumes to be created on PowerScale cluster. Note: IsiPath parameter in storageclass, if present will override this attribute.</td>
-          <td style="text-align: left">No</td>
-          <td style="text-align: left">default value from values.yaml</td>
+          <td>isiPath</td>
+          <td>The base path for the volumes to be created on PowerScale cluster. Note: IsiPath parameter in storageclass, if present will override this attribute.</td>
+          <td>No</td>
+          <td>default value from values.yaml</td>
       </tr>
       <tr>
-          <td style="text-align: left">mountEndpoint</td>
-          <td style="text-align: left">Endpoint of the PowerScale OneFS API server, for example, 10.0.0.1. This must be specified if <a href="https://github.com/dell/karavi-authorization">CSM-Authorization</a> is enabled.</td>
-          <td style="text-align: left">No</td>
-          <td style="text-align: left">-</td>
+          <td>mountEndpoint</td>
+          <td>Endpoint of the PowerScale OneFS API server, for example, 10.0.0.1. This must be specified if <a href="https://github.com/dell/karavi-authorization">CSM-Authorization</a> is enabled.</td>
+          <td>No</td>
+          <td>-</td>
       </tr>
   </tbody>
 </table>
@@ -1258,50 +1258,50 @@ User privileges <a class="header-link"  href="#user-privileges" style=" display:
 <table>
   <thead>
       <tr>
-          <th style="text-align: left">Privilege</th>
-          <th style="text-align: left">Type</th>
+          <th>Privilege</th>
+          <th>Type</th>
       </tr>
   </thead>
   <tbody>
       <tr>
-          <td style="text-align: left">ISI_PRIV_LOGIN_PAPI</td>
-          <td style="text-align: left">Read Only</td>
+          <td>ISI_PRIV_LOGIN_PAPI</td>
+          <td>Read Only</td>
       </tr>
       <tr>
-          <td style="text-align: left">ISI_PRIV_NFS</td>
-          <td style="text-align: left">Read Write</td>
+          <td>ISI_PRIV_NFS</td>
+          <td>Read Write</td>
       </tr>
       <tr>
-          <td style="text-align: left">ISI_PRIV_QUOTA</td>
-          <td style="text-align: left">Read Write</td>
+          <td>ISI_PRIV_QUOTA</td>
+          <td>Read Write</td>
       </tr>
       <tr>
-          <td style="text-align: left">ISI_PRIV_SNAPSHOT</td>
-          <td style="text-align: left">Read Write</td>
+          <td>ISI_PRIV_SNAPSHOT</td>
+          <td>Read Write</td>
       </tr>
       <tr>
-          <td style="text-align: left">ISI_PRIV_IFS_RESTORE</td>
-          <td style="text-align: left">Read Only</td>
+          <td>ISI_PRIV_IFS_RESTORE</td>
+          <td>Read Only</td>
       </tr>
       <tr>
-          <td style="text-align: left">ISI_PRIV_NS_IFS_ACCESS</td>
-          <td style="text-align: left">Read Only</td>
+          <td>ISI_PRIV_NS_IFS_ACCESS</td>
+          <td>Read Only</td>
       </tr>
       <tr>
-          <td style="text-align: left">ISI_PRIV_IFS_BACKUP</td>
-          <td style="text-align: left">Read Only</td>
+          <td>ISI_PRIV_IFS_BACKUP</td>
+          <td>Read Only</td>
       </tr>
       <tr>
-          <td style="text-align: left">ISI_PRIV_AUTH_ZONES</td>
-          <td style="text-align: left">Read Only</td>
+          <td>ISI_PRIV_AUTH_ZONES</td>
+          <td>Read Only</td>
       </tr>
       <tr>
-          <td style="text-align: left">ISI_PRIV_SYNCIQ</td>
-          <td style="text-align: left">Read Write</td>
+          <td>ISI_PRIV_SYNCIQ</td>
+          <td>Read Write</td>
       </tr>
       <tr>
-          <td style="text-align: left">ISI_PRIV_STATISTICS</td>
-          <td style="text-align: left">Read Only</td>
+          <td>ISI_PRIV_STATISTICS</td>
+          <td>Read Only</td>
       </tr>
   </tbody>
 </table>
@@ -1322,7 +1322,7 @@ User privileges <a class="header-link"  href="#user-privileges" style=" display:
 </li>
 <li>
 <p>Install the driver using <code>csi-install.sh</code> bash script and default yaml by running</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#204a87">cd</span> dell-csi-helm-installer <span style="color:#ce5c00;font-weight:bold">&amp;&amp;</span> wget -O my-isilon-settings.yaml https://raw.githubusercontent.com/dell/helm-charts/csi-isilon-2.10.0/charts/csi-isilon/values.yaml <span style="color:#ce5c00;font-weight:bold">&amp;&amp;</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#204a87">cd</span> dell-csi-helm-installer <span style="color:#ce5c00;font-weight:bold">&amp;&amp;</span> wget -O my-isilon-settings.yaml https://raw.githubusercontent.com/dell/helm-charts/csi-isilon-2.13.0/charts/csi-isilon/values.yaml <span style="color:#ce5c00;font-weight:bold">&amp;&amp;</span>
 </span></span><span style="display:flex;"><span>./csi-install.sh --namespace isilon --values  my-isilon-settings.yaml --helm-charts-version &lt;version&gt;
 </span></span></code></pre></div></li>
 </ol>
@@ -1395,8 +1395,8 @@ The storage classes created as part of the installation have an annotation - &ld
 <li>At least one storage class is required for one array.</li>
 <li>If you uninstall the driver and reinstall it, you can still face errors if any update in the <code>values.yaml</code> file leads to an update of the storage class(es):</li>
 </ul>
-<pre tabindex="0"><code>    Error: cannot patch &#34;&lt;sc-name&gt;&#34; with kind StorageClass: StorageClass.storage.k8s.io &#34;&lt;sc-name&gt;&#34; is invalid: parameters: Forbidden: updates to parameters are forbidden
-</code></pre><p>In case you want to make such updates, ensure to delete the existing storage classes using the <code>kubectl delete storageclass</code> command.
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>    Error: cannot patch <span style="color:#4e9a06">&#34;&lt;sc-name&gt;&#34;</span> with kind StorageClass: StorageClass.storage.k8s.io <span style="color:#4e9a06">&#34;&lt;sc-name&gt;&#34;</span> is invalid: parameters: Forbidden: updates to parameters are forbidden
+</span></span></code></pre></div><p>In case you want to make such updates, ensure to delete the existing storage classes using the <code>kubectl delete storageclass</code> command.
 Deleting a storage class has no impact on a running Pod with mounted PVCs. You cannot provision new PVCs until at least one storage class is newly created.</p>
 <blockquote>
 <p>Note: If you continue to use the old storage classes, you may not be able to take advantage of any new storage class parameter supported by the driver.</p>
@@ -1470,10 +1470,10 @@ Silent Mount Re-tries (v2.6.0) <a class="header-link"  href="#silent-mount-re-tr
 <li>No such file or directory (NFSv4)</li>
 </ul>
 <p><em>Sample</em>:</p>
-<pre tabindex="0"><code>level=error clusterName=powerscale runid=10 msg=&#34;mount failed: exit status 32
-mounting arguments: -t nfs -o rw XX.XX.XX.XX:/ifs/data/csi/k8s-ac7b91962d /var/lib/kubelet/pods/9f72096a-a7dc-4517-906c-20697f9d7375/volumes/kubernetes.io~csi/k8s-ac7b91962d/mount
-output: mount.nfs: access denied by server while mounting XX.XX.XX.XX:/ifs/data/csi/k8s-ac7b91962d
-</code></pre>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#000">level</span><span style="color:#ce5c00;font-weight:bold">=</span>error <span style="color:#000">clusterName</span><span style="color:#ce5c00;font-weight:bold">=</span>powerscale <span style="color:#000">runid</span><span style="color:#ce5c00;font-weight:bold">=</span><span style="color:#0000cf;font-weight:bold">10</span> <span style="color:#000">msg</span><span style="color:#ce5c00;font-weight:bold">=</span><span style="color:#4e9a06">&#34;mount failed: exit status 32
+</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">mounting arguments: -t nfs -o rw XX.XX.XX.XX:/ifs/data/csi/k8s-ac7b91962d /var/lib/kubelet/pods/9f72096a-a7dc-4517-906c-20697f9d7375/volumes/kubernetes.io~csi/k8s-ac7b91962d/mount
+</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">output: mount.nfs: access denied by server while mounting XX.XX.XX.XX:/ifs/data/csi/k8s-ac7b91962d
+</span></span></span></code></pre></div>
 	<style>
   .feedback--answer {
     display: inline-block;
@@ -1562,7 +1562,7 @@ output: mount.nfs: access denied by server while mounting XX.XX.XX.XX:/ifs/data/
 
       </div><div class="td-footer__center col-12 col-sm-4 py-2 order-sm-2">
         <span class="td-footer__copyright">&copy;
-    2024
+    2025
     <span class="td-footer__authors">The Dell Technologies</span></span><span class="td-footer__all_rights_reserved">All Rights Reserved</span><span class="ms-2"><a href="https://www.dell.com/learn/us/en/uscorp1/policies-privacy" target="_blank" rel="noopener">Privacy Policy</a></span>
       </div>
     </div>

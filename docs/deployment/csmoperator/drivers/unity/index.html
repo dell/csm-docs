@@ -17,12 +17,12 @@
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="docs">
-    <meta property="article:modified_time" content="2024-10-28T15:46:04-04:00">
+    <meta property="article:modified_time" content="2024-12-10T18:09:33+05:30">
 
   <meta itemprop="name" content="Unity XT">
   <meta itemprop="description" content="Installing the CSI Driver for Dell Unity XT via Dell CSM Operator">
-  <meta itemprop="dateModified" content="2024-10-28T15:46:04-04:00">
-  <meta itemprop="wordCount" content="799">
+  <meta itemprop="dateModified" content="2024-12-10T18:09:33+05:30">
+  <meta itemprop="wordCount" content="836">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Unity XT">
   <meta name="twitter:description" content="Installing the CSI Driver for Dell Unity XT via Dell CSM Operator">
@@ -56,10 +56,10 @@
         <div class="dropdown">
   <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Releases</a>
   <ul class="dropdown-menu">
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.12.0)</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.11.1</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.10.2</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">v1.9.4</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.13.0)</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.12.0</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.11.1</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">v1.10.2</a></li>
     </ul>
 </div></li>
       <li class="td-light-dark-menu nav-item dropdown">
@@ -125,7 +125,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.5b43d3acf6640adab15d0e301eb69f8e.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.30cbd121c9a04dbae82fa0989eaa7269.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -149,7 +149,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.5b43d3acf6640adab15d0e301eb69f8e.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.30cbd121c9a04dbae82fa0989eaa7269.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -788,120 +788,138 @@ the sample file provided
 <table>
   <thead>
       <tr>
-          <th style="text-align: left">Parameter</th>
-          <th style="text-align: left">Description</th>
-          <th style="text-align: left">Required</th>
-          <th style="text-align: left">Default</th>
+          <th>Parameter</th>
+          <th>Description</th>
+          <th>Required</th>
+          <th>Default</th>
       </tr>
   </thead>
   <tbody>
       <tr>
-          <td style="text-align: left">replicas</td>
-          <td style="text-align: left">Controls the number of controller pods you deploy. If the number of controller pods is greater than the number of available nodes, the excess pods will be in pending state until new nodes are available for scheduling. Default is 2 which allows for Controller high availability.</td>
-          <td style="text-align: left">Yes</td>
-          <td style="text-align: left">2</td>
+          <td>replicas</td>
+          <td>Controls the number of controller pods you deploy. If the number of controller pods is greater than the number of available nodes, the excess pods will be in pending state until new nodes are available for scheduling. Default is 2 which allows for Controller high availability.</td>
+          <td>Yes</td>
+          <td>2</td>
       </tr>
       <tr>
-          <td style="text-align: left">namespace</td>
-          <td style="text-align: left">Specifies namespace where the driver will be installed</td>
-          <td style="text-align: left">Yes</td>
-          <td style="text-align: left">&ldquo;unity&rdquo;</td>
+          <td>namespace</td>
+          <td>Specifies namespace where the driver will be installed</td>
+          <td>Yes</td>
+          <td>&ldquo;unity&rdquo;</td>
       </tr>
       <tr>
-          <td style="text-align: left">fsGroupPolicy</td>
-          <td style="text-align: left">Defines which FS Group policy mode to be used. Supported modes <code>None, File and ReadWriteOnceWithFSType</code>. In OCP &lt;= 4.16 and K8s &lt;= 1.29, fsGroupPolicy is an immutable field.</td>
-          <td style="text-align: left">No</td>
-          <td style="text-align: left">&ldquo;ReadWriteOnceWithFSType&rdquo;</td>
+          <td>fsGroupPolicy</td>
+          <td>Defines which FS Group policy mode to be used. Supported modes <code>None, File and ReadWriteOnceWithFSType</code>. In OCP &lt;= 4.16 and K8s &lt;= 1.29, fsGroupPolicy is an immutable field.</td>
+          <td>No</td>
+          <td>&ldquo;ReadWriteOnceWithFSType&rdquo;</td>
       </tr>
       <tr>
-          <td style="text-align: left">storageCapacity.enabled</td>
-          <td style="text-align: left">Enable/Disable storage capacity tracking</td>
-          <td style="text-align: left">No</td>
-          <td style="text-align: left">true</td>
+          <td>storageCapacity.enabled</td>
+          <td>Enable/Disable storage capacity tracking</td>
+          <td>No</td>
+          <td>true</td>
       </tr>
       <tr>
-          <td style="text-align: left">storageCapacity.pollInterval</td>
-          <td style="text-align: left">Configure how often the driver checks for changed capacity</td>
-          <td style="text-align: left">No</td>
-          <td style="text-align: left">5m</td>
+          <td>storageCapacity.pollInterval</td>
+          <td>Configure how often the driver checks for changed capacity</td>
+          <td>No</td>
+          <td>5m</td>
       </tr>
       <tr>
-          <td style="text-align: left"><em><strong>Common parameters for node and controller</strong></em></td>
-          <td style="text-align: left"></td>
-          <td style="text-align: left"></td>
-          <td style="text-align: left"></td>
+          <td><em><strong>Common parameters for node and controller</strong></em></td>
+          <td></td>
+          <td></td>
+          <td></td>
       </tr>
       <tr>
-          <td style="text-align: left">X_CSI_UNITY_ALLOW_MULTI_POD_ACCESS</td>
-          <td style="text-align: left">To enable sharing of volumes across multiple pods within the same node in RWO access mode</td>
-          <td style="text-align: left">No</td>
-          <td style="text-align: left">false</td>
+          <td>X_CSI_UNITY_ALLOW_MULTI_POD_ACCESS</td>
+          <td>To enable sharing of volumes across multiple pods within the same node in RWO access mode</td>
+          <td>No</td>
+          <td>false</td>
       </tr>
       <tr>
-          <td style="text-align: left">X_CSI_UNITY_SYNC_NODEINFO_INTERVAL</td>
-          <td style="text-align: left">Time interval to add node info to array. Default 15 minutes. Minimum value should be 1</td>
-          <td style="text-align: left">No</td>
-          <td style="text-align: left">15</td>
+          <td>X_CSI_UNITY_SYNC_NODEINFO_INTERVAL</td>
+          <td>Time interval to add node info to array. Default 15 minutes. Minimum value should be 1</td>
+          <td>No</td>
+          <td>15</td>
       </tr>
       <tr>
-          <td style="text-align: left">CSI_LOG_LEVEL</td>
-          <td style="text-align: left">Sets the logging level of the driver</td>
-          <td style="text-align: left">true</td>
-          <td style="text-align: left">info</td>
+          <td>CSI_LOG_LEVEL</td>
+          <td>Sets the logging level of the driver</td>
+          <td>true</td>
+          <td>info</td>
       </tr>
       <tr>
-          <td style="text-align: left">TENANT_NAME</td>
-          <td style="text-align: left">Tenant name added while adding host entry to the array</td>
-          <td style="text-align: left">No</td>
-          <td style="text-align: left"></td>
+          <td>TENANT_NAME</td>
+          <td>Tenant name added while adding host entry to the array</td>
+          <td>No</td>
+          <td></td>
       </tr>
       <tr>
-          <td style="text-align: left">CERT_SECRET_COUNT</td>
-          <td style="text-align: left">Represents the number of certificate secrets, which the user is going to create for SSL authentication. (unity-cert-0..unity-cert-n). The minimum value should be 1.</td>
-          <td style="text-align: left">false</td>
-          <td style="text-align: left">1</td>
+          <td>CERT_SECRET_COUNT</td>
+          <td>Represents the number of certificate secrets, which the user is going to create for SSL authentication. (unity-cert-0..unity-cert-n). The minimum value should be 1.</td>
+          <td>false</td>
+          <td>1</td>
       </tr>
       <tr>
-          <td style="text-align: left">X_CSI_UNITY_SKIP_CERTIFICATE_VALIDATION</td>
-          <td style="text-align: left">Specifies if the driver is going to validate unisphere certs while connecting to the Unisphere REST API interface.If it is set to false, then a secret unity-certs has to be created with an X.509 certificate of CA which signed the Unisphere certificate</td>
-          <td style="text-align: left">No</td>
-          <td style="text-align: left">true</td>
+          <td>X_CSI_UNITY_SKIP_CERTIFICATE_VALIDATION</td>
+          <td>Specifies if the driver is going to validate unisphere certs while connecting to the Unisphere REST API interface.If it is set to false, then a secret unity-certs has to be created with an X.509 certificate of CA which signed the Unisphere certificate</td>
+          <td>No</td>
+          <td>true</td>
       </tr>
       <tr>
-          <td style="text-align: left"><em><strong>Controller parameters</strong></em></td>
-          <td style="text-align: left"></td>
-          <td style="text-align: left"></td>
-          <td style="text-align: left"></td>
+          <td><em><strong>Controller parameters</strong></em></td>
+          <td></td>
+          <td></td>
+          <td></td>
       </tr>
       <tr>
-          <td style="text-align: left">X_CSI_HEALTH_MONITOR_ENABLED</td>
-          <td style="text-align: left">Enable/Disable health monitor of CSI volumes from Controller plugin - volume condition</td>
-          <td style="text-align: left">No</td>
-          <td style="text-align: left">false</td>
+          <td>X_CSI_HEALTH_MONITOR_ENABLED</td>
+          <td>Enable/Disable health monitor of CSI volumes from Controller plugin - volume condition</td>
+          <td>No</td>
+          <td>false</td>
       </tr>
       <tr>
-          <td style="text-align: left"><em><strong>Node parameters</strong></em></td>
-          <td style="text-align: left"></td>
-          <td style="text-align: left"></td>
-          <td style="text-align: left"></td>
+          <td><em><strong>Node parameters</strong></em></td>
+          <td></td>
+          <td></td>
+          <td></td>
       </tr>
       <tr>
-          <td style="text-align: left">X_CSI_HEALTH_MONITOR_ENABLED</td>
-          <td style="text-align: left">Enable/Disable health monitor of CSI volumes from Controller plugin - volume condition</td>
-          <td style="text-align: left">No</td>
-          <td style="text-align: left">false</td>
+          <td>X_CSI_HEALTH_MONITOR_ENABLED</td>
+          <td>Enable/Disable health monitor of CSI volumes from Controller plugin - volume condition</td>
+          <td>No</td>
+          <td>false</td>
       </tr>
       <tr>
-          <td style="text-align: left">X_CSI_ALLOWED_NETWORKS</td>
-          <td style="text-align: left">Custom networks for Unity export. List of networks that can be used for NFS I/O traffic, CIDR format should be used &ldquo;ip/prefix, ip/prefix&rdquo;</td>
-          <td style="text-align: left">No</td>
-          <td style="text-align: left">empty</td>
+          <td>X_CSI_ALLOWED_NETWORKS</td>
+          <td>Custom networks for Unity export. List of networks that can be used for NFS I/O traffic, CIDR format should be used &ldquo;ip/prefix, ip/prefix&rdquo;</td>
+          <td>No</td>
+          <td>empty</td>
+      </tr>
+      <tr>
+          <td><em><strong>Sidecar parameters</strong></em></td>
+          <td></td>
+          <td></td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>volume-name-prefix</td>
+          <td>The volume-name-prefix will be used by provisioner sidecar as a prefix for all the volumes created</td>
+          <td>Yes</td>
+          <td>csivol</td>
+      </tr>
+      <tr>
+          <td>monitor-interval</td>
+          <td>The monitor-interval will be used by external-health-monitor as an interval for health checks</td>
+          <td>Yes</td>
+          <td>60s</td>
       </tr>
   </tbody>
 </table>
 <ol start="4">
-<li>Execute the following command to create Unity XT custom resource:</li>
-</ol>
+<li>
+<p>Execute the following command to create Unity XT custom resource:</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl create -f &lt;input_sample_file.yaml&gt;
 </span></span></code></pre></div><p>This command will deploy the CSI Unity XT driver in the namespace specified in the input YAML file.</p>
 <ul>
@@ -909,7 +927,7 @@ the sample file provided
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl get all -n &lt;driver-namespace&gt;
 </span></span></code></pre></div></li>
 </ul>
-<ol start="5">
+</li>
 <li>
 <p><a href="/csm-docs/docs/deployment/csmoperator/#verifying-the-driver-installation">Verify the CSI Driver installation</a></p>
 </li>
@@ -1011,7 +1029,7 @@ the sample file provided
 
       </div><div class="td-footer__center col-12 col-sm-4 py-2 order-sm-2">
         <span class="td-footer__copyright">&copy;
-    2024
+    2025
     <span class="td-footer__authors">The Dell Technologies</span></span><span class="td-footer__all_rights_reserved">All Rights Reserved</span><span class="ms-2"><a href="https://www.dell.com/learn/us/en/uscorp1/policies-privacy" target="_blank" rel="noopener">Privacy Policy</a></span>
       </div>
     </div>

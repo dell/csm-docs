@@ -56,10 +56,10 @@
         <div class="dropdown">
   <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Releases</a>
   <ul class="dropdown-menu">
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.12.0)</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.11.1</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.10.2</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">v1.9.4</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.13.0)</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.12.0</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.11.1</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">v1.10.2</a></li>
     </ul>
 </div></li>
       <li class="td-light-dark-menu nav-item dropdown">
@@ -125,7 +125,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.5b43d3acf6640adab15d0e301eb69f8e.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.30cbd121c9a04dbae82fa0989eaa7269.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -149,7 +149,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.5b43d3acf6640adab15d0e301eb69f8e.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.30cbd121c9a04dbae82fa0989eaa7269.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -704,50 +704,50 @@
 <table>
   <thead>
       <tr>
-          <th style="text-align: left">Symptoms</th>
-          <th style="text-align: left">Prevention, Resolution or Workaround</th>
+          <th>Symptoms</th>
+          <th>Prevention, Resolution or Workaround</th>
       </tr>
   </thead>
   <tbody>
       <tr>
-          <td style="text-align: left">When you run the command <code>kubectl describe pods unity-controller-&lt;suffix&gt; –n unity</code>, the system indicates that the driver image could not be loaded.</td>
-          <td style="text-align: left">You may need to put an insecure-registries entry in <code>/etc/docker/daemon.json</code> or login to the docker registry</td>
+          <td>When you run the command <code>kubectl describe pods unity-controller-&lt;suffix&gt; –n unity</code>, the system indicates that the driver image could not be loaded.</td>
+          <td>You may need to put an insecure-registries entry in <code>/etc/docker/daemon.json</code> or login to the docker registry</td>
       </tr>
       <tr>
-          <td style="text-align: left">The <code>kubectl logs -n unity unity-node-&lt;suffix&gt;</code> driver logs show that the driver can&rsquo;t connect to Unity XT - Authentication failure.</td>
-          <td style="text-align: left">Check if you have created a secret with correct credentials</td>
+          <td>The <code>kubectl logs -n unity unity-node-&lt;suffix&gt;</code> driver logs show that the driver can&rsquo;t connect to Unity XT - Authentication failure.</td>
+          <td>Check if you have created a secret with correct credentials</td>
       </tr>
       <tr>
-          <td style="text-align: left"><code>fsGroup</code> specified in pod spec is not reflected in files or directories at mounted path of volume.</td>
-          <td style="text-align: left">fsType of PVC must be set for fsGroup to work. fsType can be specified while creating a storage class. For NFS protocol, fsType can be specified as <code>nfs</code>. fsGroup doesn&rsquo;t work for ephemeral inline volumes.</td>
+          <td><code>fsGroup</code> specified in pod spec is not reflected in files or directories at mounted path of volume.</td>
+          <td>fsType of PVC must be set for fsGroup to work. fsType can be specified while creating a storage class. For NFS protocol, fsType can be specified as <code>nfs</code>. fsGroup doesn&rsquo;t work for ephemeral inline volumes.</td>
       </tr>
       <tr>
-          <td style="text-align: left">Dynamic array detection will not work in Topology based environment</td>
-          <td style="text-align: left">Whenever a new array is added or removed, then the driver controller and node pod should be restarted with command <strong>kubectl get pods -n unity &ndash;no-headers=true | awk &lsquo;/unity-/{print $1}&rsquo;| xargs kubectl delete -n unity pod</strong> when <strong>topology-based storage classes are used</strong>. For dynamic array addition without topology, the driver will detect the newly added or removed arrays automatically</td>
+          <td>Dynamic array detection will not work in Topology based environment</td>
+          <td>Whenever a new array is added or removed, then the driver controller and node pod should be restarted with command <strong>kubectl get pods -n unity &ndash;no-headers=true | awk &lsquo;/unity-/{print $1}&rsquo;| xargs kubectl delete -n unity pod</strong> when <strong>topology-based storage classes are used</strong>. For dynamic array addition without topology, the driver will detect the newly added or removed arrays automatically</td>
       </tr>
       <tr>
-          <td style="text-align: left">If source PVC is deleted when cloned PVC exists, then source PVC will be deleted in the cluster but on array, it will still be present and marked for deletion.</td>
-          <td style="text-align: left">All the cloned PVC should be deleted in order to delete the source PVC from the array.</td>
+          <td>If source PVC is deleted when cloned PVC exists, then source PVC will be deleted in the cluster but on array, it will still be present and marked for deletion.</td>
+          <td>All the cloned PVC should be deleted in order to delete the source PVC from the array.</td>
       </tr>
       <tr>
-          <td style="text-align: left">PVC creation fails on a fresh cluster with <strong>iSCSI</strong> and <strong>NFS</strong> protocols alone enabled with error <strong>failed to provision volume with StorageClass &ldquo;unity-iscsi&rdquo;: error generating accessibility requirements: no available topology found</strong>.</td>
-          <td style="text-align: left">This is because iSCSI initiator login takes longer than the node pod startup time. This can be overcome by bouncing the node pods in the cluster using the below command the driver pods with <strong>kubectl get pods -n unity &ndash;no-headers=true | awk &lsquo;/unity-/{print $1}&rsquo;| xargs kubectl delete -n unity pod</strong></td>
+          <td>PVC creation fails on a fresh cluster with <strong>iSCSI</strong> and <strong>NFS</strong> protocols alone enabled with error <strong>failed to provision volume with StorageClass &ldquo;unity-iscsi&rdquo;: error generating accessibility requirements: no available topology found</strong>.</td>
+          <td>This is because iSCSI initiator login takes longer than the node pod startup time. This can be overcome by bouncing the node pods in the cluster using the below command the driver pods with <strong>kubectl get pods -n unity &ndash;no-headers=true | awk &lsquo;/unity-/{print $1}&rsquo;| xargs kubectl delete -n unity pod</strong></td>
       </tr>
       <tr>
-          <td style="text-align: left">Driver install or upgrade fails because of an incompatible Kubernetes version, even though the version seems to be within the range of compatibility. For example: <code>Error: UPGRADE FAILED: chart requires kubeVersion: &gt;= 1.24.0 &lt; 1.29.0 which is incompatible with Kubernetes 1.24.6-mirantis-1</code></td>
-          <td style="text-align: left">If you are using an extended Kubernetes version, see the helm Chart at <code>helm/csi-unity/Chart.yaml</code> and use the alternate <code>kubeVersion</code> check that is provided in the comments. <em>Note</em> that this is not meant to be used to enable the use of pre-release alpha and beta versions, which is not supported.</td>
+          <td>Driver install or upgrade fails because of an incompatible Kubernetes version, even though the version seems to be within the range of compatibility. For example: <code>Error: UPGRADE FAILED: chart requires kubeVersion: &gt;= 1.24.0 &lt; 1.29.0 which is incompatible with Kubernetes 1.24.6-mirantis-1</code></td>
+          <td>If you are using an extended Kubernetes version, see the helm Chart at <code>helm/csi-unity/Chart.yaml</code> and use the alternate <code>kubeVersion</code> check that is provided in the comments. <em>Note</em> that this is not meant to be used to enable the use of pre-release alpha and beta versions, which is not supported.</td>
       </tr>
       <tr>
-          <td style="text-align: left">When a node goes down, the block volumes attached to the node cannot be attached to another node</td>
-          <td style="text-align: left">1. Force delete the pod running on the node that went down <br /> 2. Delete the VolumeAttachment to the node that went down. <br /> Now the volume can be attached to the new node.</td>
+          <td>When a node goes down, the block volumes attached to the node cannot be attached to another node</td>
+          <td>1. Force delete the pod running on the node that went down <br /> 2. Delete the VolumeAttachment to the node that went down. <br /> Now the volume can be attached to the new node.</td>
       </tr>
       <tr>
-          <td style="text-align: left">Standby controller pod is in crashloopbackoff state</td>
-          <td style="text-align: left">Scale down the replica count of the controller pod&rsquo;s deployment to 1 using <code>kubectl scale deployment &lt;deployment_name&gt; --replicas=1 -n &lt;driver_namespace&gt;</code></td>
+          <td>Standby controller pod is in crashloopbackoff state</td>
+          <td>Scale down the replica count of the controller pod&rsquo;s deployment to 1 using <code>kubectl scale deployment &lt;deployment_name&gt; --replicas=1 -n &lt;driver_namespace&gt;</code></td>
       </tr>
       <tr>
-          <td style="text-align: left">fsGroupPolicy may not work as expected without root privileges for NFS only <a href="https://github.com/kubernetes/examples/issues/260">https://github.com/kubernetes/examples/issues/260</a></td>
-          <td style="text-align: left">To get the desired behavior set “RootClientEnabled” = “true” in the storage class parameter</td>
+          <td>fsGroupPolicy may not work as expected without root privileges for NFS only <a href="https://github.com/kubernetes/examples/issues/260">https://github.com/kubernetes/examples/issues/260</a></td>
+          <td>To get the desired behavior set “RootClientEnabled” = “true” in the storage class parameter</td>
       </tr>
   </tbody>
 </table>
@@ -840,7 +840,7 @@
 
       </div><div class="td-footer__center col-12 col-sm-4 py-2 order-sm-2">
         <span class="td-footer__copyright">&copy;
-    2024
+    2025
     <span class="td-footer__authors">The Dell Technologies</span></span><span class="td-footer__all_rights_reserved">All Rights Reserved</span><span class="ms-2"><a href="https://www.dell.com/learn/us/en/uscorp1/policies-privacy" target="_blank" rel="noopener">Privacy Policy</a></span>
       </div>
     </div>

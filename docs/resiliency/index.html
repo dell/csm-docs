@@ -20,7 +20,7 @@
 
   <meta itemprop="name" content="Resiliency">
   <meta itemprop="description" content="Dell Container Storage Modules (CSM) for Resiliency">
-  <meta itemprop="dateModified" content="2024-10-30T11:56:46-05:00">
+  <meta itemprop="dateModified" content="2024-12-05T12:02:53+05:30">
   <meta itemprop="wordCount" content="2517">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Resiliency">
@@ -55,10 +55,10 @@
         <div class="dropdown">
   <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Releases</a>
   <ul class="dropdown-menu">
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.12.0)</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.11.1</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.10.2</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">v1.9.4</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.13.0)</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.12.0</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.11.1</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">v1.10.2</a></li>
     </ul>
 </div></li>
       <li class="td-light-dark-menu nav-item dropdown">
@@ -124,7 +124,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.5b43d3acf6640adab15d0e301eb69f8e.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.30cbd121c9a04dbae82fa0989eaa7269.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -148,7 +148,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.5b43d3acf6640adab15d0e301eb69f8e.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.30cbd121c9a04dbae82fa0989eaa7269.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -757,7 +757,7 @@ CSM for Resiliency Capabilities <a class="header-link"  href="#csm-for-resilienc
 <table class="table table-striped table-bordered table-sm">
   <thead>
       <tr>
-          <th style="text-align: left">Capability</th>
+          <th>Capability</th>
           <th style="text-align: center">PowerScale</th>
           <th style="text-align: center">Unity XT</th>
           <th style="text-align: center">PowerStore</th>
@@ -767,7 +767,7 @@ CSM for Resiliency Capabilities <a class="header-link"  href="#csm-for-resilienc
   </thead>
   <tbody>
       <tr>
-          <td style="text-align: left">Detect pod failures when: Node failure, K8S Control Plane Network failure, K8S Control Plane failure, Array I/O Network failure</td>
+          <td>Detect pod failures when: Node failure, K8S Control Plane Network failure, K8S Control Plane failure, Array I/O Network failure</td>
           <td style="text-align: center">yes</td>
           <td style="text-align: center">yes</td>
           <td style="text-align: center">yes</td>
@@ -775,7 +775,7 @@ CSM for Resiliency Capabilities <a class="header-link"  href="#csm-for-resilienc
           <td style="text-align: center">yes</td>
       </tr>
       <tr>
-          <td style="text-align: left">Cleanup pod artifacts from failed nodes</td>
+          <td>Cleanup pod artifacts from failed nodes</td>
           <td style="text-align: center">yes</td>
           <td style="text-align: center">yes</td>
           <td style="text-align: center">yes</td>
@@ -783,7 +783,7 @@ CSM for Resiliency Capabilities <a class="header-link"  href="#csm-for-resilienc
           <td style="text-align: center">yes</td>
       </tr>
       <tr>
-          <td style="text-align: left">Revoke PV access from failed nodes</td>
+          <td>Revoke PV access from failed nodes</td>
           <td style="text-align: center">yes</td>
           <td style="text-align: center">yes</td>
           <td style="text-align: center">yes</td>
@@ -808,18 +808,18 @@ Supported Operating Systems/Container Orchestrator Platforms <a class="header-li
 <table class="table table-striped table-bordered table-sm">
   <thead>
       <tr>
-          <th style="text-align: left">COP/OS</th>
+          <th>COP/OS</th>
           <th style="text-align: center">Supported Versions</th>
       </tr>
   </thead>
   <tbody>
       <tr>
-          <td style="text-align: left">Kubernetes</td>
-          <td style="text-align: center">1.29, 1.30, 1.31</td>
+          <td>Kubernetes</td>
+          <td style="text-align: center">1.30, 1.31, 1.32</td>
       </tr>
       <tr>
-          <td style="text-align: left">Red Hat OpenShift</td>
-          <td style="text-align: center">4.16, 4.17</td>
+          <td>Red Hat OpenShift</td>
+          <td style="text-align: center">4.17, 4.18</td>
       </tr>
   </tbody>
 </table>
@@ -839,7 +839,7 @@ Supported Storage Platforms <a class="header-link"  href="#supported-storage-pla
 <table class="table table-striped table-bordered table-sm">
   <thead>
       <tr>
-          <th style="text-align: left"></th>
+          <th></th>
           <th style="text-align: center">PowerFlex</th>
           <th style="text-align: center">Unity XT</th>
           <th style="text-align: center">PowerScale</th>
@@ -849,7 +849,7 @@ Supported Storage Platforms <a class="header-link"  href="#supported-storage-pla
   </thead>
   <tbody>
       <tr>
-          <td style="text-align: left">Storage Array</td>
+          <td>Storage Array</td>
           <td style="text-align: center">3.6.x, 4.5.x, 4.6.x</td>
           <td style="text-align: center">5.2.x, 5.3.x, 5.4.x</td>
           <td style="text-align: center">OneFS 9.4, 9.5.0.x (x &gt;= 5), 9.7, 9.8, 9.9</td>
@@ -875,34 +875,34 @@ Supported CSI Drivers <a class="header-link"  href="#supported-csi-drivers" styl
 <table class="table table-striped table-bordered table-sm">
   <thead>
       <tr>
-          <th style="text-align: left">Storage Array</th>
+          <th>Storage Array</th>
           <th style="text-align: center">CSI Driver</th>
           <th style="text-align: center">Supported Versions</th>
       </tr>
   </thead>
   <tbody>
       <tr>
-          <td style="text-align: left">CSI Driver for Dell PowerFlex</td>
+          <td>CSI Driver for Dell PowerFlex</td>
           <td style="text-align: center"><a href="https://github.com/dell/csi-powerflex">csi-powerflex</a></td>
           <td style="text-align: center">v2.0.0 +</td>
       </tr>
       <tr>
-          <td style="text-align: left">CSI Driver for Dell Unity XT</td>
+          <td>CSI Driver for Dell Unity XT</td>
           <td style="text-align: center"><a href="https://github.com/dell/csi-unity">csi-unity</a></td>
           <td style="text-align: center">v2.0.0 +</td>
       </tr>
       <tr>
-          <td style="text-align: left">CSI Driver for Dell PowerScale</td>
+          <td>CSI Driver for Dell PowerScale</td>
           <td style="text-align: center"><a href="https://github.com/dell/csi-powerscale">csi-powerscale</a></td>
           <td style="text-align: center">v2.3.0 +</td>
       </tr>
       <tr>
-          <td style="text-align: left">CSI Driver for Dell PowerStore</td>
+          <td>CSI Driver for Dell PowerStore</td>
           <td style="text-align: center"><a href="https://github.com/dell/csi-powerstore">csi-powerstore</a></td>
           <td style="text-align: center">v2.6.0 +</td>
       </tr>
       <tr>
-          <td style="text-align: left">CSI Driver for Dell PowerMax</td>
+          <td>CSI Driver for Dell PowerMax</td>
           <td style="text-align: center"><a href="https://github.com/dell/csi-powermax">csi-powermax</a></td>
           <td style="text-align: center">v2.11.0 +</td>
       </tr>
@@ -1181,7 +1181,7 @@ Testing Methodology and Results <a class="header-link"  href="#testing-methodolo
 
       </div><div class="td-footer__center col-12 col-sm-4 py-2 order-sm-2">
         <span class="td-footer__copyright">&copy;
-    2024
+    2025
     <span class="td-footer__authors">The Dell Technologies</span></span><span class="td-footer__all_rights_reserved">All Rights Reserved</span><span class="ms-2"><a href="https://www.dell.com/learn/us/en/uscorp1/policies-privacy" target="_blank" rel="noopener">Privacy Policy</a></span>
       </div>
     </div>

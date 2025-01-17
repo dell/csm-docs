@@ -56,10 +56,10 @@
         <div class="dropdown">
   <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Releases</a>
   <ul class="dropdown-menu">
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.12.0)</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.11.1</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.10.2</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">v1.9.4</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.13.0)</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.12.0</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.11.1</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">v1.10.2</a></li>
     </ul>
 </div></li>
       <li class="td-light-dark-menu nav-item dropdown">
@@ -125,7 +125,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.5b43d3acf6640adab15d0e301eb69f8e.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.30cbd121c9a04dbae82fa0989eaa7269.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -149,7 +149,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.5b43d3acf6640adab15d0e301eb69f8e.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.30cbd121c9a04dbae82fa0989eaa7269.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -730,18 +730,18 @@ Dependencies <a class="header-link"  href="#dependencies" style=" display: inlin
 <table class="table table-striped table-bordered table-sm">
   <thead>
       <tr>
-          <th style="text-align: left">Dependency</th>
-          <th style="text-align: left">Usage</th>
+          <th>Dependency</th>
+          <th>Usage</th>
       </tr>
   </thead>
   <tbody>
       <tr>
-          <td style="text-align: left"><code>kubectl</code></td>
-          <td style="text-align: left">Kubectl is used to validate that the Kubernetes system meets the requirements of the driver.</td>
+          <td><code>kubectl</code></td>
+          <td>Kubectl is used to validate that the Kubernetes system meets the requirements of the driver.</td>
       </tr>
       <tr>
-          <td style="text-align: left"><code>helm</code></td>
-          <td style="text-align: left">Helm v3 is used as the deployment tool for Charts. Go <a href="https://helm.sh/docs/intro/install/">here</a> to install Helm 3.</td>
+          <td><code>helm</code></td>
+          <td>Helm v3 is used as the deployment tool for Charts. Go <a href="https://helm.sh/docs/intro/install/">here</a> to install Helm 3.</td>
       </tr>
   </tbody>
 </table>
@@ -783,84 +783,84 @@ The following table lists the primary configurable parameters of the COSI driver
 <table class="table table-striped table-bordered table-sm">
   <thead>
       <tr>
-          <th style="text-align: left">Parameter</th>
-          <th style="text-align: left">Description</th>
+          <th>Parameter</th>
+          <th>Description</th>
           <th style="text-align: center">Required</th>
-          <th style="text-align: left">Default</th>
+          <th>Default</th>
       </tr>
   </thead>
   <tbody>
       <tr>
-          <td style="text-align: left">provisioner.logLevel</td>
-          <td style="text-align: left">The logging level for the COSI driver provisioner.</td>
+          <td>provisioner.logLevel</td>
+          <td>The logging level for the COSI driver provisioner.</td>
           <td style="text-align: center">yes</td>
-          <td style="text-align: left"><code>4</code></td>
+          <td><code>4</code></td>
       </tr>
       <tr>
-          <td style="text-align: left">provisioner.logFormat</td>
-          <td style="text-align: left">The logging format for the COSI driver provisioner.</td>
+          <td>provisioner.logFormat</td>
+          <td>The logging format for the COSI driver provisioner.</td>
           <td style="text-align: center">yes</td>
-          <td style="text-align: left"><code>&quot;text&quot;</code></td>
+          <td><code>&quot;text&quot;</code></td>
       </tr>
       <tr>
-          <td style="text-align: left">provisioner.image.reposiotry</td>
-          <td style="text-align: left">COSI driver provisioner container image repository.</td>
+          <td>provisioner.image.reposiotry</td>
+          <td>COSI driver provisioner container image repository.</td>
           <td style="text-align: center">yes</td>
-          <td style="text-align: left"><code>&quot;docker.io/dell/cosi&quot;</code></td>
+          <td><code>&quot;docker.io/dell/cosi&quot;</code></td>
       </tr>
       <tr>
-          <td style="text-align: left">provisioner.image.tag</td>
-          <td style="text-align: left">COSI driver provisioner container image tag.</td>
+          <td>provisioner.image.tag</td>
+          <td>COSI driver provisioner container image tag.</td>
           <td style="text-align: center">yes</td>
-          <td style="text-align: left"><code>&quot;v0.1.0&quot;</code></td>
+          <td><code>&quot;v0.1.0&quot;</code></td>
       </tr>
       <tr>
-          <td style="text-align: left">provisioner.image.pullPolicy</td>
-          <td style="text-align: left">COSI driver provisioner container image pull policy. Maps 1-to-1 with <a href="https://kubernetes.io/docs/concepts/containers/images/#image-pull-policy">Kubernetes image pull policy</a>.</td>
+          <td>provisioner.image.pullPolicy</td>
+          <td>COSI driver provisioner container image pull policy. Maps 1-to-1 with <a href="https://kubernetes.io/docs/concepts/containers/images/#image-pull-policy">Kubernetes image pull policy</a>.</td>
           <td style="text-align: center">yes</td>
-          <td style="text-align: left"><code>&quot;IfNotPresent&quot;</code></td>
+          <td><code>&quot;IfNotPresent&quot;</code></td>
       </tr>
       <tr>
-          <td style="text-align: left">sidecar.verbosity</td>
-          <td style="text-align: left">The logging verbosity for the COSI driver sidecar, higher values are more verbose, possible values are integers from <em>-2,147,483,648</em> to <em>2,147,483,647</em>. Generally the range used is between -4 and 12. However, there may be cases where numbers outside that range might provide more information. For additional information, refer to the <a href="https://github.com/kubernetes-sigs/container-object-storage-interface-provisioner-sidecar">COSI sidecar documentation</a>.</td>
+          <td>sidecar.verbosity</td>
+          <td>The logging verbosity for the COSI driver sidecar, higher values are more verbose, possible values are integers from <em>-2,147,483,648</em> to <em>2,147,483,647</em>. Generally the range used is between -4 and 12. However, there may be cases where numbers outside that range might provide more information. For additional information, refer to the <a href="https://github.com/kubernetes-sigs/container-object-storage-interface-provisioner-sidecar">COSI sidecar documentation</a>.</td>
           <td style="text-align: center">yes</td>
-          <td style="text-align: left"><code>5</code></td>
+          <td><code>5</code></td>
       </tr>
       <tr>
-          <td style="text-align: left">sidecar.image.reposiotry</td>
-          <td style="text-align: left">COSI driver sidecar container image repository.</td>
+          <td>sidecar.image.reposiotry</td>
+          <td>COSI driver sidecar container image repository.</td>
           <td style="text-align: center">yes</td>
-          <td style="text-align: left"><code>&quot;gcr.io/k8s-staging-sig-storage/objectstorage-sidecar/objectstorage-sidecar&quot;</code></td>
+          <td><code>&quot;gcr.io/k8s-staging-sig-storage/objectstorage-sidecar/objectstorage-sidecar&quot;</code></td>
       </tr>
       <tr>
-          <td style="text-align: left">sidecar.image.tag</td>
-          <td style="text-align: left">COSI driver sidecar container image tag.</td>
+          <td>sidecar.image.tag</td>
+          <td>COSI driver sidecar container image tag.</td>
           <td style="text-align: center">yes</td>
-          <td style="text-align: left"><code>&quot;v20230130-v0.1.0-24-gc0cf995&quot;</code></td>
+          <td><code>&quot;v20230130-v0.1.0-24-gc0cf995&quot;</code></td>
       </tr>
       <tr>
-          <td style="text-align: left">sidecar.image.pullPolicy</td>
-          <td style="text-align: left">COSI driver sidecar container image pull policy. Maps 1-to-1 with <a href="https://kubernetes.io/docs/concepts/containers/images/#image-pull-policy">Kubernetes image pull policy</a>.</td>
+          <td>sidecar.image.pullPolicy</td>
+          <td>COSI driver sidecar container image pull policy. Maps 1-to-1 with <a href="https://kubernetes.io/docs/concepts/containers/images/#image-pull-policy">Kubernetes image pull policy</a>.</td>
           <td style="text-align: center">yes</td>
-          <td style="text-align: left"><code>&quot;IfNotPresent&quot;</code></td>
+          <td><code>&quot;IfNotPresent&quot;</code></td>
       </tr>
       <tr>
-          <td style="text-align: left">configuration.create</td>
-          <td style="text-align: left">Specifies whether a secret with driver configuration should be created If set to false, you must set <code>configuration.secretName</code> field to an existing configuration secret name.</td>
+          <td>configuration.create</td>
+          <td>Specifies whether a secret with driver configuration should be created If set to false, you must set <code>configuration.secretName</code> field to an existing configuration secret name.</td>
           <td style="text-align: center">yes</td>
-          <td style="text-align: left"><code>true</code></td>
+          <td><code>true</code></td>
       </tr>
       <tr>
-          <td style="text-align: left">configuration.secretName</td>
-          <td style="text-align: left">Name can be used to specify an existing secret name to use for the driver configuration or override the generated name.</td>
+          <td>configuration.secretName</td>
+          <td>Name can be used to specify an existing secret name to use for the driver configuration or override the generated name.</td>
           <td style="text-align: center">no</td>
-          <td style="text-align: left"><code>&quot;cosi-config&quot;</code></td>
+          <td><code>&quot;cosi-config&quot;</code></td>
       </tr>
       <tr>
-          <td style="text-align: left">configuration.data</td>
-          <td style="text-align: left">Data should be provided when installing chart, it will be used to create the Secret with the driver configuration. <code>configuration.create</code> must be set to <code>true</code> for this to work.</td>
+          <td>configuration.data</td>
+          <td>Data should be provided when installing chart, it will be used to create the Secret with the driver configuration. <code>configuration.create</code> must be set to <code>true</code> for this to work.</td>
           <td style="text-align: center">no</td>
-          <td style="text-align: left"><code>&quot;&quot;</code></td>
+          <td><code>&quot;&quot;</code></td>
       </tr>
   </tbody>
 </table>
@@ -973,7 +973,7 @@ Bucket Classes, Bucket Access Classes <a class="header-link"  href="#bucket-clas
 
       </div><div class="td-footer__center col-12 col-sm-4 py-2 order-sm-2">
         <span class="td-footer__copyright">&copy;
-    2024
+    2025
     <span class="td-footer__authors">The Dell Technologies</span></span><span class="td-footer__all_rights_reserved">All Rights Reserved</span><span class="ms-2"><a href="https://www.dell.com/learn/us/en/uscorp1/policies-privacy" target="_blank" rel="noopener">Privacy Policy</a></span>
       </div>
     </div>

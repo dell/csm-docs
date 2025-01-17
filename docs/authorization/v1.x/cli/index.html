@@ -22,7 +22,7 @@
   <meta itemprop="name" content="CLI">
   <meta itemprop="description" content="Dell Technologies (Dell) Container Storage Modules (CSM) for Authorization CLI">
   <meta itemprop="dateModified" content="2024-10-29T12:11:18-04:00">
-  <meta itemprop="wordCount" content="2638">
+  <meta itemprop="wordCount" content="2635">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="CLI">
   <meta name="twitter:description" content="Dell Technologies (Dell) Container Storage Modules (CSM) for Authorization CLI">
@@ -56,10 +56,10 @@
         <div class="dropdown">
   <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Releases</a>
   <ul class="dropdown-menu">
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.12.0)</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.11.1</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.10.2</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">v1.9.4</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.13.0)</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.12.0</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.11.1</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">v1.10.2</a></li>
     </ul>
 </div></li>
       <li class="td-light-dark-menu nav-item dropdown">
@@ -125,7 +125,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.5b43d3acf6640adab15d0e301eb69f8e.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.30cbd121c9a04dbae82fa0989eaa7269.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -149,7 +149,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.5b43d3acf6640adab15d0e301eb69f8e.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.30cbd121c9a04dbae82fa0989eaa7269.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -748,7 +748,7 @@
 	
 
 <div class="pageinfo pageinfo-primary">
-<p>Deprecation Notice Pre-Wire:  Starting with CSM 1.13, Authorization v1.x will be deprecated and will be officially discontinued by CSM 1.15 in September 2025. Please switch to Authorization v2.0 before then to avoid any issues. Migration steps are available <a href="/csm-docs/docs/authorization/migration-guide-from-v1-to-v2/">here</a>.</p>
+<p>Starting with CSM 1.13, Authorization v1.x will be deprecated and will be officially discontinued by CSM 1.15 in September 2025. Please switch to Authorization v2.0 before then to avoid any issues. Migration steps are available <a href="/csm-docs/docs/authorization/migration-guide-from-v1-to-v2/">here</a>.</p>
 
 </div>
 
@@ -758,118 +758,118 @@ This document outlines all karavictl commands, their intended use, options that 
 <table>
   <thead>
       <tr>
-          <th style="text-align: left">Command</th>
-          <th style="text-align: left">Description</th>
+          <th>Command</th>
+          <th>Description</th>
       </tr>
   </thead>
   <tbody>
       <tr>
-          <td style="text-align: left"><a href="/csm-docs/docs/authorization/v1.x/cli/#karavictl">karavictl</a></td>
-          <td style="text-align: left">karavictl is used to interact with CSM Authorization Server</td>
+          <td><a href="/csm-docs/docs/authorization/v1.x/cli/#karavictl">karavictl</a></td>
+          <td>karavictl is used to interact with CSM Authorization Server</td>
       </tr>
       <tr>
-          <td style="text-align: left"><a href="/csm-docs/docs/authorization/v1.x/cli/#karavictl-admin-token">karavictl admin token</a></td>
-          <td style="text-align: left">Generate admin tokens</td>
+          <td><a href="/csm-docs/docs/authorization/v1.x/cli/#karavictl-admin-token">karavictl admin token</a></td>
+          <td>Generate admin tokens</td>
       </tr>
       <tr>
-          <td style="text-align: left"><a href="/csm-docs/docs/authorization/v1.x/cli/#karavictl-cluster-info">karavictl cluster-info</a></td>
-          <td style="text-align: left">Display the state of resources within the cluster</td>
+          <td><a href="/csm-docs/docs/authorization/v1.x/cli/#karavictl-cluster-info">karavictl cluster-info</a></td>
+          <td>Display the state of resources within the cluster</td>
       </tr>
       <tr>
-          <td style="text-align: left"><a href="/csm-docs/docs/authorization/v1.x/cli/#karavictl-generate">karavictl generate</a></td>
-          <td style="text-align: left">Generate resources for use with CSM</td>
+          <td><a href="/csm-docs/docs/authorization/v1.x/cli/#karavictl-generate">karavictl generate</a></td>
+          <td>Generate resources for use with CSM</td>
       </tr>
       <tr>
-          <td style="text-align: left"><a href="/csm-docs/docs/authorization/v1.x/cli/#karavictl-generate-token">karavictl generate token</a></td>
-          <td style="text-align: left">Generate tokens</td>
+          <td><a href="/csm-docs/docs/authorization/v1.x/cli/#karavictl-generate-token">karavictl generate token</a></td>
+          <td>Generate tokens</td>
       </tr>
       <tr>
-          <td style="text-align: left"><a href="/csm-docs/docs/authorization/v1.x/cli/#karavictl-role">karavictl role</a></td>
-          <td style="text-align: left">Manage role</td>
+          <td><a href="/csm-docs/docs/authorization/v1.x/cli/#karavictl-role">karavictl role</a></td>
+          <td>Manage role</td>
       </tr>
       <tr>
-          <td style="text-align: left"><a href="/csm-docs/docs/authorization/v1.x/cli/#karavictl-role-get">karavictl role get</a></td>
-          <td style="text-align: left">Get role</td>
+          <td><a href="/csm-docs/docs/authorization/v1.x/cli/#karavictl-role-get">karavictl role get</a></td>
+          <td>Get role</td>
       </tr>
       <tr>
-          <td style="text-align: left"><a href="/csm-docs/docs/authorization/v1.x/cli/#karavictl-role-list">karavictl role list</a></td>
-          <td style="text-align: left">List roles</td>
+          <td><a href="/csm-docs/docs/authorization/v1.x/cli/#karavictl-role-list">karavictl role list</a></td>
+          <td>List roles</td>
       </tr>
       <tr>
-          <td style="text-align: left"><a href="/csm-docs/docs/authorization/v1.x/cli/#karavictl-role-create">karavictl role create</a></td>
-          <td style="text-align: left">Create one or more CSM roles</td>
+          <td><a href="/csm-docs/docs/authorization/v1.x/cli/#karavictl-role-create">karavictl role create</a></td>
+          <td>Create one or more CSM roles</td>
       </tr>
       <tr>
-          <td style="text-align: left"><a href="/csm-docs/docs/authorization/v1.x/cli/#karavictl-role-update">karavictl role update</a></td>
-          <td style="text-align: left">Update the quota of one or more CSM roles</td>
+          <td><a href="/csm-docs/docs/authorization/v1.x/cli/#karavictl-role-update">karavictl role update</a></td>
+          <td>Update the quota of one or more CSM roles</td>
       </tr>
       <tr>
-          <td style="text-align: left"><a href="/csm-docs/docs/authorization/v1.x/cli/#karavictl-role-delete">karavictl role delete</a></td>
-          <td style="text-align: left">Delete role</td>
+          <td><a href="/csm-docs/docs/authorization/v1.x/cli/#karavictl-role-delete">karavictl role delete</a></td>
+          <td>Delete role</td>
       </tr>
       <tr>
-          <td style="text-align: left"><a href="/csm-docs/docs/authorization/v1.x/cli/#karavictl-rolebinding">karavictl rolebinding</a></td>
-          <td style="text-align: left">Manage role bindings</td>
+          <td><a href="/csm-docs/docs/authorization/v1.x/cli/#karavictl-rolebinding">karavictl rolebinding</a></td>
+          <td>Manage role bindings</td>
       </tr>
       <tr>
-          <td style="text-align: left"><a href="/csm-docs/docs/authorization/v1.x/cli/#karavictl-rolebinding-create">karavictl rolebinding create</a></td>
-          <td style="text-align: left">Create a rolebinding between role and tenant</td>
+          <td><a href="/csm-docs/docs/authorization/v1.x/cli/#karavictl-rolebinding-create">karavictl rolebinding create</a></td>
+          <td>Create a rolebinding between role and tenant</td>
       </tr>
       <tr>
-          <td style="text-align: left"><a href="/csm-docs/docs/authorization/v1.x/cli/#karavictl-rolebinding-delete">karavictl rolebinding delete</a></td>
-          <td style="text-align: left">Delete a rolebinding between role and tenant</td>
+          <td><a href="/csm-docs/docs/authorization/v1.x/cli/#karavictl-rolebinding-delete">karavictl rolebinding delete</a></td>
+          <td>Delete a rolebinding between role and tenant</td>
       </tr>
       <tr>
-          <td style="text-align: left"><a href="/csm-docs/docs/authorization/v1.x/cli/#karavictl-storage">karavictl storage</a></td>
-          <td style="text-align: left">Manage storage systems</td>
+          <td><a href="/csm-docs/docs/authorization/v1.x/cli/#karavictl-storage">karavictl storage</a></td>
+          <td>Manage storage systems</td>
       </tr>
       <tr>
-          <td style="text-align: left"><a href="/csm-docs/docs/authorization/v1.x/cli/#karavictl-storage-get">karavictl storage get</a></td>
-          <td style="text-align: left">Get details on a registered storage system</td>
+          <td><a href="/csm-docs/docs/authorization/v1.x/cli/#karavictl-storage-get">karavictl storage get</a></td>
+          <td>Get details on a registered storage system</td>
       </tr>
       <tr>
-          <td style="text-align: left"><a href="/csm-docs/docs/authorization/v1.x/cli/#karavictl-storage-list">karavictl storage list</a></td>
-          <td style="text-align: left">List registered storage systems</td>
+          <td><a href="/csm-docs/docs/authorization/v1.x/cli/#karavictl-storage-list">karavictl storage list</a></td>
+          <td>List registered storage systems</td>
       </tr>
       <tr>
-          <td style="text-align: left"><a href="/csm-docs/docs/authorization/v1.x/cli/#karavictl-storage-create">karavictl storage create</a></td>
-          <td style="text-align: left">Create and register a storage system</td>
+          <td><a href="/csm-docs/docs/authorization/v1.x/cli/#karavictl-storage-create">karavictl storage create</a></td>
+          <td>Create and register a storage system</td>
       </tr>
       <tr>
-          <td style="text-align: left"><a href="/csm-docs/docs/authorization/v1.x/cli/#karavictl-storage-update">karavictl storage update</a></td>
-          <td style="text-align: left">Update a registered storage system</td>
+          <td><a href="/csm-docs/docs/authorization/v1.x/cli/#karavictl-storage-update">karavictl storage update</a></td>
+          <td>Update a registered storage system</td>
       </tr>
       <tr>
-          <td style="text-align: left"><a href="/csm-docs/docs/authorization/v1.x/cli/#karavictl-storage-delete">karavictl storage delete</a></td>
-          <td style="text-align: left">Delete a registered storage system</td>
+          <td><a href="/csm-docs/docs/authorization/v1.x/cli/#karavictl-storage-delete">karavictl storage delete</a></td>
+          <td>Delete a registered storage system</td>
       </tr>
       <tr>
-          <td style="text-align: left"><a href="/csm-docs/docs/authorization/v1.x/cli/#karavictl-tenant">karavictl tenant </a></td>
-          <td style="text-align: left">Manage tenants</td>
+          <td><a href="/csm-docs/docs/authorization/v1.x/cli/#karavictl-tenant">karavictl tenant </a></td>
+          <td>Manage tenants</td>
       </tr>
       <tr>
-          <td style="text-align: left"><a href="/csm-docs/docs/authorization/v1.x/cli/#karavictl-tenant-create">karavictl tenant create</a></td>
-          <td style="text-align: left">Create a tenant resource within CSM</td>
+          <td><a href="/csm-docs/docs/authorization/v1.x/cli/#karavictl-tenant-create">karavictl tenant create</a></td>
+          <td>Create a tenant resource within CSM</td>
       </tr>
       <tr>
-          <td style="text-align: left"><a href="/csm-docs/docs/authorization/v1.x/cli/#karavictl-tenant-get">karavictl tenant get</a></td>
-          <td style="text-align: left">Get a tenant resource within CSM</td>
+          <td><a href="/csm-docs/docs/authorization/v1.x/cli/#karavictl-tenant-get">karavictl tenant get</a></td>
+          <td>Get a tenant resource within CSM</td>
       </tr>
       <tr>
-          <td style="text-align: left"><a href="/csm-docs/docs/authorization/v1.x/cli/#karavictl-tenant-list">karavictl tenant list</a></td>
-          <td style="text-align: left">Lists tenant resources within CSM</td>
+          <td><a href="/csm-docs/docs/authorization/v1.x/cli/#karavictl-tenant-list">karavictl tenant list</a></td>
+          <td>Lists tenant resources within CSM</td>
       </tr>
       <tr>
-          <td style="text-align: left"><a href="/csm-docs/docs/authorization/v1.x/cli/#karavictl-tenant-revoke">karavictl tenant revoke</a></td>
-          <td style="text-align: left">Get a tenant resource within CSM</td>
+          <td><a href="/csm-docs/docs/authorization/v1.x/cli/#karavictl-tenant-revoke">karavictl tenant revoke</a></td>
+          <td>Get a tenant resource within CSM</td>
       </tr>
       <tr>
-          <td style="text-align: left"><a href="/csm-docs/docs/authorization/v1.x/cli/#karavictl-tenant-delete">karavictl tenant delete</a></td>
-          <td style="text-align: left">Deletes a tenant resource within CSM</td>
+          <td><a href="/csm-docs/docs/authorization/v1.x/cli/#karavictl-tenant-delete">karavictl tenant delete</a></td>
+          <td>Deletes a tenant resource within CSM</td>
       </tr>
       <tr>
-          <td style="text-align: left"><a href="/csm-docs/docs/authorization/v1.x/cli/#karavictl-tenant-update">karavictl tenant update</a></td>
-          <td style="text-align: left">Updates a tenant resource within CSM</td>
+          <td><a href="/csm-docs/docs/authorization/v1.x/cli/#karavictl-tenant-update">karavictl tenant update</a></td>
+          <td>Updates a tenant resource within CSM</td>
       </tr>
   </tbody>
 </table>
@@ -1626,7 +1626,7 @@ Output</h5><div class="highlight"><pre tabindex="0" style="background-color:#f8f
 
       </div><div class="td-footer__center col-12 col-sm-4 py-2 order-sm-2">
         <span class="td-footer__copyright">&copy;
-    2024
+    2025
     <span class="td-footer__authors">The Dell Technologies</span></span><span class="td-footer__all_rights_reserved">All Rights Reserved</span><span class="ms-2"><a href="https://www.dell.com/learn/us/en/uscorp1/policies-privacy" target="_blank" rel="noopener">Privacy Policy</a></span>
       </div>
     </div>
