@@ -5,7 +5,7 @@ weight: 9
 Description: >
   Dell Container Storage Modules (CSM) release notes for replication
 ---
-## Release Notes - CSM Replication 1.10.0
+## Release Notes - CSM Replication 1.11.0
 
 
 
