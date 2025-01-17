@@ -15,7 +15,7 @@ csi-powerstore:
     provisioner: 
       image: registry.k8s.io/sig-storage/csi-provisioner:v5.1.0
     snapshotter: 
-      image: registry.k8s.io/sig-storage/csi-snapshotter:v8.1.0
+      image: registry.k8s.io/sig-storage/csi-snapshotter:v8.2.0
     resizer: 
       image: registry.k8s.io/sig-storage/csi-resizer:v1.12.0
     registrar: 
@@ -138,7 +138,7 @@ csi-powermax:
     provisioner: 
       image: registry.k8s.io/sig-storage/csi-provisioner:v5.1.0
     snapshotter: 
-      image: registry.k8s.io/sig-storage/csi-snapshotter:v8.1.0
+      image: registry.k8s.io/sig-storage/csi-snapshotter:v8.2.0
     resizer: 
       image: registry.k8s.io/sig-storage/csi-resizer:v1.12.0
     registrar: 
@@ -257,7 +257,7 @@ csi-vxflexos:
     provisioner: 
       image: registry.k8s.io/sig-storage/csi-provisioner:v5.1.0
     snapshotter: 
-      image: registry.k8s.io/sig-storage/csi-snapshotter:v8.1.0
+      image: registry.k8s.io/sig-storage/csi-snapshotter:v8.2.0
     resizer: 
       image: registry.k8s.io/sig-storage/csi-resizer:v1.12.0
     registrar: 
@@ -367,7 +367,7 @@ csi-isilon:
     provisioner: 
       image: registry.k8s.io/sig-storage/csi-provisioner:v5.1.0
     snapshotter: 
-      image: registry.k8s.io/sig-storage/csi-snapshotter:v8.1.0
+      image: registry.k8s.io/sig-storage/csi-snapshotter:v8.2.0
     resizer: 
       image: registry.k8s.io/sig-storage/csi-resizer:v1.12.0
     registrar: 
@@ -486,7 +486,7 @@ csi-unity:
     provisioner: 
       image: registry.k8s.io/sig-storage/csi-provisioner:v5.1.0
     snapshotter: 
-      image: registry.k8s.io/sig-storage/csi-snapshotter:v8.1.0
+      image: registry.k8s.io/sig-storage/csi-snapshotter:v8.2.0
     resizer: 
       image: registry.k8s.io/sig-storage/csi-resizer:v1.12.0
     registrar: 
