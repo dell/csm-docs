@@ -7,7 +7,7 @@ Description: >
 ---
 
 {{% pageinfo color="primary" %}}
-We are pleased to announce that Application Mobility will be available with Container Storage Modules starting early next year (2025).
+Application mobility will be available soon with container storage modules.
 {{% /pageinfo %}}
 
 Container Storage Modules for Application Mobility provide Kubernetes administrators the ability to clone their stateful application workloads and application data to other clusters, either on-premise or in the cloud.
