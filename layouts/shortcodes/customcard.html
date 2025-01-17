@@ -25,42 +25,42 @@
 
 {{ $imagePaths := dict 
   "1" (dict 
-      "path" "/csm-docs/icons/card-icons/save-disk.svg" 
+      "path" "/beta-csm-docs/icons/card-icons/save-disk.svg" 
       "comment" "Save Disk Icon"
   ) 
   "2" (dict 
-      "path" "/csm-docs/icons/card-icons/doc-reports.svg" 
+      "path" "/beta-csm-docs/icons/card-icons/doc-reports.svg" 
       "comment" "doc-reports"
   ) 
   "3" (dict 
-      "path" "/csm-docs/icons/card-icons/storage-array-icon.png" 
+      "path" "/beta-csm-docs/icons/card-icons/storage-array-icon.png" 
       "comment" "Storage Array icons"
   ) 
   "4" (dict 
-      "path" "/csm-docs/icons/card-icons/prerequisite-icon.png" 
+      "path" "/beta-csm-docs/icons/card-icons/prerequisite-icon.png" 
       "comment" "Prerequisite icons"
   )  
   "5" (dict 
-  "path" "/csm-docs/icons/card-icons/kubernetes-icon.png" 
+  "path" "/beta-csm-docs/icons/card-icons/kubernetes-icon.png" 
   "comment" "Kubernetes icon"
    ) 
 
    "6" (dict 
-   "path" "/csm-docs/icons/card-icons/deployment-icon-operator-helm-offline.png" 
+   "path" "/beta-csm-docs/icons/card-icons/deployment-icon-operator-helm-offline.png" 
    "comment" "deployment icon"
     ) 
 
     "7" (dict 
-   "path" "/csm-docs/icons/card-icons/containerorchestrators-icon.png" 
+   "path" "/beta-csm-docs/icons/card-icons/containerorchestrators-icon.png" 
    "comment" "Container Orchestrators icon"
     )
 
     "8" (dict 
-    "path" "/csm-docs/icons/card-icons/troubleshooting-icon.png" 
+    "path" "/beta-csm-docs/icons/card-icons/troubleshooting-icon.png" 
     "comment" "Troubleshooting" 
     ) 
     "9" (dict 
-    "path" "/csm-docs/icons/card-icons/migration-icon.png" 
+    "path" "/beta-csm-docs/icons/card-icons/migration-icon.png" 
     "comment" "Migration" 
     )
 }}
@@ -109,16 +109,20 @@
       margin-left:0px; 
       background-color:var(--td-pre-bg) !important;  
       padding: 0px;
+      height:100%; 
     }  
     .no-top-margin{
       padding-top:10px;
+    } 
+    .card-body{
+      padding:0px;
     }
 
 </style>
 <div class="col-md-6 mb-4">
   <a href="{{ if .Get "link1" }}{{ .Get "link1"}}{{ else }}{{ .Get "link"}}{{ end }}" class="card-link">
-    <div class="card card-hover shadow-sm p-3 bg-white rounded">
-      <div class="row no-gutters align-items-center">
+    <div class="card card-hover d-flex align-items-center shadow-sm p-3 bg-white rounded">
+      <div class="row no-gutters align-items-center h-100 w-100 " style="margin:0.6rem;">
         <div class="col-2 text-center">
             <img src="{{ $image }}" alt="{{ .Get "title" }}" class="card-image img-fluid">
         </div>

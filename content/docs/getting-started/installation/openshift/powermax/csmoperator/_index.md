@@ -31,20 +31,32 @@ Supported driver and module versions offered by the Container Storage Module Ope
 
 </br>
  
-Go to [`OperatorHub`](https://operatorhub.io/) and use the keyword filter to search for <span style="user-select: all;">`Dell Container`</span>. Click on the result
+1. On the OpenShift console, navigate to **OperatorHub** and use the keyword filter to search for **Dell Container Storage Modules.** 
 
-Keep all default settings and click **Install**.
+2. Click **Dell Container Storage Modules** tile 
+
+3. Keep all default settings and click **Install**.
 
 </br>
+<ol>
 
-Verify that the operator **Pods** are in a Running state
+Verify that the operator is deployed 
 ```terminal 
-oc get pods -A  | grep dell-csm-operator
+oc get operators
 
-NAME                                                       READY   STATUS       RESTARTS    AGE
-dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      0           4m
+NAME                                                          AGE
+dell-csm-operator-certified.openshift-operators               2d21h
+```  
+
+```terminal
+oc get pod -n openshift-operators
+
+NAME                                                       READY   STATUS       RESTARTS      AGE
+dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      21 (19h ago)  2d21h
 ``` 
 
+
+</ol>
 </br>
 
 ### Install Driver

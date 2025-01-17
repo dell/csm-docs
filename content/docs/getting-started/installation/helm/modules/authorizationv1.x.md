@@ -143,7 +143,7 @@ mv ./karavictl ~/.local/bin/karavictl
 # and then append (or prepend) ~/.local/bin to $PATH
 ```
 
-Karavictl commands and intended use can be found [here](../../../../../../../concepts/authorization/v1.x/cli/). 
+Karavictl commands and intended use can be found [here](docs/concepts/authorization/v1.x/cli/). 
 
 ## Configuring the Container Storage Module Authorization Proxy Server
 
@@ -183,13 +183,13 @@ On the machine running `karavictl`, the `/etc/hosts` file needs to be updated wi
 <master_node_ip> csm-authorization.com
 ```
 
-Please continue following the steps outlined in the [proxy server](../../../../../../../concepts/authorization/v1.x/configuration/proxy-server) configuration.
+Please continue following the steps outlined in the [proxy server](docs/concepts/authorization/v1.x/configuration/proxy-server) configuration.
 
 ## Configuring a Dell CSI Driver with Container Storage Module for Authorization
 
-The second part of Authorization deployment is to configure one or more of the [supported](../../../../../../../concepts/authorization#supported-csi-drivers) CSI drivers. This is controlled by the Kubernetes tenant admin.
+The second part of Authorization deployment is to configure one or more of the [supported](docs/concepts/authorization#supported-csi-drivers) CSI drivers. This is controlled by the Kubernetes tenant admin.
 
-Please continue following the configuration steps for a specific CSI Driver [here](../../../../../../../concepts/authorization/v1.x/configuration/).
+Please continue following the configuration steps for a specific CSI Driver [here](docs/concepts/authorization/v1.x/configuration/).
 
 ## Updating Container Storage Module for Authorization Proxy Server Configuration
 

@@ -17,7 +17,7 @@ Install Helm 3.x on the master node before you install the CSI Driver for PowerS
   curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
   ```
 {{< accordion id="One" title="CSM Installation Wizard" >}}
-    {{<include  file="content/docs/getting-started/installation/installationwizard/helm.md" hideIds="2,4">}}
+    {{<include  file="content/docs/getting-started/installation/installationwizard/helm.md" Var="powerstore" hideIds="2,4">}}
 {{< /accordion >}}
 
 <br>

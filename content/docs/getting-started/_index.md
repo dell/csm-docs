@@ -7,6 +7,8 @@ description: How to get started with Container Storage Module
 weight: 2
 ---
 {{% pageinfo color="primary" %}}
+1. <span><span/>{{< message text="9" >}}
+
 1. <span><span/>{{< message text="7" >}}
 
 2. <span><span/>{{< message text="1" >}}

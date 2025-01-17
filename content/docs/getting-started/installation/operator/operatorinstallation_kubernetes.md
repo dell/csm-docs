@@ -60,7 +60,7 @@ git clone -b v1.8.0 https://github.com/dell/csm-operator.git
 
 >NOTE: CSM Operator will be installed in the `dell-csm-operator` namespace.
 
-<img src="/csm-docs/images/deployment/install.jpg" width="2500px"  style="border: 2px solid #ccc; padding: 10px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+<img src="/beta-csm-docs/images/deployment/install.jpg" width="2500px"  style="border: 2px solid #ccc; padding: 10px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
 
 8. Run the command to validate the installation.
 ```bash
@@ -68,4 +68,4 @@ kubectl get pods -n dell-csm-operator
 ```
  If installed successfully, you should be able to see the operator pod in the `dell-csm-operator` namespace.
 
-<img src="/csm-docs/images/deployment/install_pods.jpg" width="2500px"  style="border: 2px solid #ccc; padding: 10px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+<img src="/beta-csm-docs/images/deployment/install_pods.jpg" width="2500px"  style="border: 2px solid #ccc; padding: 10px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">

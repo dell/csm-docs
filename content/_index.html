@@ -51,13 +51,13 @@ linkTitle = "Dell Technologies"
     font-size: 1.25rem;
     font-weight: 600;
     margin-bottom: 10px;
-    color: #007BFF; /* Change the color for the title */
+    color: var(--bs-link-color) /* Change the color for the title */
   }
 
   /* Card text */
   .custom-card-text {
     font-size: 0.95rem;
-    color: #6c757d; 
+    color: var(--bs-body-color);
   }
 
   /* Custom margins for the card grid */
@@ -81,12 +81,12 @@ linkTitle = "Dell Technologies"
   }
   .custom-card-text span{
     text-decoration: underline;
-    color: blue; /* Initial color */
+    color: var(--bs-link-color); /* Initial color */
     transition: color 0.3s ease, text-decoration 0.3s ease; /* Transition for smooth effect */
 }
 
 .custom-card-text span:hover {
-    color: darkblue; /* Change this color for hover effect */
+    color: var(--bs-link-hover-color); /* Change this color for hover effect */
     text-decoration: none; /* Optional: remove underline on hover */
 } 
 .card-container{
@@ -148,7 +148,7 @@ linkTitle = "Dell Technologies"
 
 {{< blocks/cover title="Container Storage Modules Documentation" image_anchor="top" height="min" color="primary" >}}
 <div class="mx-auto">
-        <a class="btn btn-lg btn-primary me-3 mb-4" href="/csm-docs/docs/getting-started">
+        <a class="btn btn-lg btn-primary me-3 mb-4" href="/beta-csm-docs/docs/getting-started">
                 Getting Started <i class="fas fa-arrow-alt-circle-right ms-2"></i>
         </a> 
         <a class="btn btn-lg btn-primary me-3 mb-4" href="https://github.com/dell/csm/releases/">
@@ -172,7 +172,7 @@ linkTitle = "Dell Technologies"
          </ol>   
         </div -->
         <div>
-          <p> <a class="btn btn-lg btn-primary me-3 mb-4" href="./docs/support/announcement/" target="_blank">Announchment </a> </p>  
+          <p> <a class="btn btn-lg btn-primary me-3 mb-4" href="./docs/support/announcement/" target="_blank">Announcement</a> </p>  
         </div>
 
           </p> 

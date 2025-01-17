@@ -182,7 +182,7 @@ Check if ContainerStorageModule CR is created successfully:
 oc get csm vxflexos -n vxflexos
 
 NAME        CREATIONTIME   CSIDRIVERTYPE   CONFIGVERSION   STATE
-vxflexos    3h             powerflex       v2.12.0         Succeeded
+vxflexos    3h             powerflex       v2.13.0         Succeeded
 ```
 
 Check the status of the CR to verify if the driver installation is in the `Succeeded` state. If the status is not `Succeeded`, see the [Troubleshooting guide](../troubleshooting/#my-dell-csi-driver-install-failed-how-do-i-fix-it) for more information.

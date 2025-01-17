@@ -24,25 +24,37 @@ Supported driver and module versions offered by the Container Storage Module Ope
 
 </br>
 
-### Operator Installation
+#### Operator Installation
 
 </br>
  
-Go to [`OperatorHub`](https://operatorhub.io/) and use the keyword filter to search for <span style="user-select: all;">`Dell Container`</span>. Click on the result
+1. On the OpenShift console, navigate to **OperatorHub** and use the keyword filter to search for **Dell Container Storage Modules.** 
 
-Keep all default settings and click **Install**.
+2. Click **Dell Container Storage Modules** tile 
+
+3. Keep all default settings and click **Install**.
 
 </br>
+<ol>
 
-Verify that the operator **Pods** are in a Running state
+Verify that the operator is deployed 
 ```terminal 
-oc get pods -A  | grep dell-csm-operator
+oc get operators
 
-NAME                                                       READY   STATUS       RESTARTS    AGE
-dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      0           4m
+NAME                                                          AGE
+dell-csm-operator-certified.openshift-operators               2d21h
+```  
+
+```terminal
+oc get pod -n openshift-operators
+
+NAME                                                       READY   STATUS       RESTARTS      AGE
+dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      21 (19h ago)  2d21h
 ``` 
 
-<br>
+
+</ol>
+</br>
 
 ### CSI Driver Installation
 </br>
@@ -206,7 +218,7 @@ Check if ContainerStorageModule CR is created successfully:
 oc get csm isilon -n isilon
 
 NAME        CREATIONTIME   CSIDRIVERTYPE   CONFIGVERSION   STATE
-isilon      3h             isilon      v2.12.0         Succeeded      
+isilon      3h             isilon      v2.13.0         Succeeded      
 ```
 
 Check the status of the CR to verify if the driver installation is in the `Succeeded` state. If the status is not `Succeeded`, see the [Troubleshooting guide](../troubleshooting/#my-dell-csi-driver-install-failed-how-do-i-fix-it) for more information.

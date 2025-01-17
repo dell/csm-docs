@@ -10,13 +10,13 @@
     {{ $currentURL := .Page.Permalink | default .Site.BaseURL }}
     {{ $currentVersion := "" }}
     
-    {{ if strings.Contains $currentURL "/csm-docs/docs" }}
+    {{ if strings.Contains $currentURL "/beta-csm-docs/docs" }}
       {{ $currentVersion = (index .Site.Params.versions 0).version }}
-    {{ else if strings.Contains $currentURL "/csm-docs/v1" }}
+    {{ else if strings.Contains $currentURL "/beta-csm-docs/v1" }}
       {{ $currentVersion = (index .Site.Params.versions 1).version }}
-    {{ else if strings.Contains $currentURL "/csm-docs/v2" }}
+    {{ else if strings.Contains $currentURL "/beta-csm-docs/v2" }}
       {{ $currentVersion = (index .Site.Params.versions 2).version }}
-    {{ else if strings.Contains $currentURL "/csm-docs/v3" }}
+    {{ else if strings.Contains $currentURL "/beta-csm-docs/v3" }}
       {{ $currentVersion = (index .Site.Params.versions 3).version }}
     {{ else }} 
       {{$currentVersion = (index .Site.Params.versions 0).version }}

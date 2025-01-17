@@ -40,11 +40,11 @@ The installation process involves the creation of a `Subscription` object either
 
 2. On the **OperatorHub** page, search for “container storage module” and select the **container storage module** card: 
 
-   <img src="/csm-docs/images/deployment/operator/operatorhub_page.png" > 
+   <img src="/beta-csm-docs/images/deployment/operator/operatorhub_page.png" > 
 
 3. Select the **appropriate** operator version and click on **install**.
 
-   <img src="/csm-docs/images/deployment/operator/operator_version.png" style="border:1px solid black">  
+   <img src="/beta-csm-docs/images/deployment/operator/operator_version.png" style="border:1px solid black">  
 
    **Contained storage module** Operator begins to install and takes you to the **Install Operator** page.  
 
@@ -54,7 +54,7 @@ The installation process involves the creation of a `Subscription` object either
 
 4. In the **Create Project window**, provide the name dell-csm-operator and click **Create** to create a namespace called **“dell-csm-operator”**. 
 
-   <img src="/csm-docs/images/deployment/operator/create_project.png"> 
+   <img src="/beta-csm-docs/images/deployment/operator/create_project.png"> 
 
    * To install an operator, you need to create a Subscription object. You can do this using either the OperatorHub UI or kubectl/oc commands. During this process, you can set the Approval strategy for the InstallPlan 
 
@@ -62,17 +62,17 @@ The installation process involves the creation of a `Subscription` object either
 
    * **Manual** - If you want a cluster administrator to manually review and approve the InstallPlan for installation/upgrades.  
 
-   <img src="/csm-docs/images/deployment/operator/install_operator.png" style="border:1px solid black">  
+   <img src="/beta-csm-docs/images/deployment/operator/install_operator.png" style="border:1px solid black">  
 
 5. Click **Install** to deploy container storage module Operator in the dell-csm-operator namespace.  
 
-   <img src="/csm-docs/images/deployment/operator/installing_operator.png" >
+   <img src="/beta-csm-docs/images/deployment/operator/installing_operator.png" >
 
-   <img src="/csm-docs/images/deployment/operator/installing_operator1.png" style="border:1px solid black">   
+   <img src="/beta-csm-docs/images/deployment/operator/installing_operator1.png" style="border:1px solid black">   
 
 6. Once the operator is installed it will be displayed under the **“Installed Operators”**. 
    
-   <img src="/csm-docs/images/deployment/operator/installed_operator.png" style="border: 1px solid black">
+   <img src="/beta-csm-docs/images/deployment/operator/installed_operator.png" style="border: 1px solid black">
 
 >Note
 

@@ -8,9 +8,10 @@ Description: >
 ---
 ### Deprecation Notice
 {{% pageinfo title="Deprecation Notice" color="primary" %}}
-1. <span><span/>{{< message text="1" >}}
-2. <span><span/>{{< message text="7" >}}
-3. <span><span/>{{< message text="5" >}}
+1. <span><span/>{{< message text="9" >}}
+2. <span><span/>{{< message text="1" >}}
+3. <span><span/>{{< message text="7" >}}
+4. <span><span/>{{< message text="5" >}}
 {{% /pageinfo %}}
 
 ### Announcement
