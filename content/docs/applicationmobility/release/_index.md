@@ -6,7 +6,7 @@ Description: >
   Release Notes
 ---
 {{% pageinfo color="primary" %}}
-We are pleased to announce that Application Mobility will be available with Container Storage Modules starting early next year (2025).
+Application mobility will be available soon with container storage modules.
 {{% /pageinfo %}}
 
 ## Release Notes - CSM Application Mobility v1.3.0
