@@ -20,8 +20,8 @@
 
   <meta itemprop="name" content="Release notes">
   <meta itemprop="description" content="Release notes for Dell Container Storage Modules Operator">
-  <meta itemprop="dateModified" content="2025-01-02T09:07:07-05:00">
-  <meta itemprop="wordCount" content="394">
+  <meta itemprop="dateModified" content="2025-01-17T10:35:06-05:00">
+  <meta itemprop="wordCount" content="573">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Release notes">
   <meta name="twitter:description" content="Release notes for Dell Container Storage Modules Operator">
@@ -124,7 +124,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.30cbd121c9a04dbae82fa0989eaa7269.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.f92c64970093c6ebdb086cfdab6b81e4.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -148,7 +148,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.30cbd121c9a04dbae82fa0989eaa7269.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.f92c64970093c6ebdb086cfdab6b81e4.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -675,7 +675,7 @@
             <div class="td-toc">
         <nav id="TableOfContents">
   <ul>
-    <li><a href="#release-notes---container-storage-modules-operator-v161">Release Notes - Container Storage Modules Operator v1.6.1</a>
+    <li><a href="#release-notes---container-storage-modules-operator-v180">Release Notes - Container Storage Modules Operator v1.8.0</a>
       <ul>
         <li><a href="#new-featureschanges">New Features/Changes</a></li>
         <li><a href="#fixed-issues">Fixed Issues</a></li>
@@ -717,8 +717,8 @@
 
 </div>
 
-<h2 id="release-notes---container-storage-modules-operator-v161">
-Release Notes - Container Storage Modules Operator v1.6.1 <a class="header-link"  href="#release-notes---container-storage-modules-operator-v161" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
+<h2 id="release-notes---container-storage-modules-operator-v180">
+Release Notes - Container Storage Modules Operator v1.8.0 <a class="header-link"  href="#release-notes---container-storage-modules-operator-v180" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
             <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
                 <path d="M0 0h24v24H0z" fill="none"/>
                 <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
@@ -730,10 +730,9 @@ New Features/Changes <a class="header-link"  href="#new-featureschanges" style="
                 <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
             </svg>
         </a></h3><ul>
-<li><a href="https://github.com/dell/csm/issues/1449">#1449 - [FEATURE]: Simplify the CSM Operator deployment</a></li>
-<li><a href="https://github.com/dell/csm/issues/1473">#1473 - [FEATURE]: Add Support for OpenShift Container Platform (OCP) 4.17</a></li>
-<li><a href="https://github.com/dell/csm/issues/1484">#1484 - [FEATURE]: Remove ACC Support</a></li>
-<li><a href="https://github.com/dell/csm/issues/1508">#1508 - [FEATURE]:  Add Support for KubeVirt</a></li>
+<li><a href="https://github.com/dell/csm/issues/1561">#1561 - [FEATURE]: Added support for Kubernetes 1.32 </a></li>
+<li><a href="https://github.com/dell/csm/issues/1610">#1610 - [FEATURE]: Added support for PowerStore 4.1 </a></li>
+<li><a href="https://github.com/dell/csm/issues/1611">#1611 - [FEATURE]: Added support for PowerScale 9.10</a></li>
 </ul>
 <h3 id="fixed-issues">
 Fixed Issues <a class="header-link"  href="#fixed-issues" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
@@ -742,13 +741,26 @@ Fixed Issues <a class="header-link"  href="#fixed-issues" style=" display: inlin
                 <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
             </svg>
         </a></h3><ul>
-<li><a href="https://github.com/dell/csm/issues/1427">#1427 - [BUG]: CSM Operator e2e tests: Error in test 3</a></li>
-<li><a href="https://github.com/dell/csm/issues/1448">#1448 - [BUG]: CSM-operator build fails from disk space issue</a></li>
-<li><a href="https://github.com/dell/csm/issues/1475">#1475 - [BUG]: CSM Operator - Changes to csiDriverSpec does not reflect in CSM state or csidrivers.storage.k8s.io object</a></li>
-<li><a href="https://github.com/dell/csm/issues/1507">#1507 - [BUG]: CSM Operator E2E tests are not passing</a></li>
-<li><a href="https://github.com/dell/csm/issues/1510">#1510 - [BUG]: Missing Node tolerations for resiliency module</a></li>
-<li><a href="https://github.com/dell/csm/issues/1531">#1531 - [BUG]: CSM-Operator resets dell-replication-controller-config configmap</a></li>
-<li><a href="https://github.com/dell/csm/issues/1533">#1533 - [BUG]: CSM Operator Will Continually Add Components to Observability</a></li>
+<li><a href="https://github.com/dell/csm/issues/1566">#1566 - [BUG]: Inconsistent naming convention of secret is misleading in Installation of PowerMax </a></li>
+<li><a href="https://github.com/dell/csm/issues/1567">#1567 - [BUG]: Mode is mentioned incorrectly in the configMap of PowerMax even when it is deployed as a sidecar </a></li>
+<li><a href="https://github.com/dell/csm/issues/1570">#1570 - [BUG]: Stale entries in CSM operator samples and helm-charts for PowerMax </a></li>
+<li><a href="https://github.com/dell/csm/issues/1574">#1574 - [BUG]: Operator offline bundle doesn&rsquo;t prepare registries correctly</a></li>
+<li><a href="https://github.com/dell/csm/issues/1581">#1581 - [BUG]: Offline bundle doesn&rsquo;t include Authorization Server images</a></li>
+<li><a href="https://github.com/dell/csm/issues/1585">#1585 - [BUG]: Stale entries in CSI PowerMax Samples of CSM operator </a></li>
+<li><a href="https://github.com/dell/csm/issues/1591">#1591 - [BUG]: Operator e2e scenario for powerflex driver with second set of alternate values is failing in OpenShift cluster</a></li>
+<li><a href="https://github.com/dell/csm/issues/1594">#1594 - [BUG]: Remove extra fields from the driver specs when using minimal sample</a></li>
+<li><a href="https://github.com/dell/csm/issues/1600">#1600 - [BUG]: Operator e2e scenario for powerscale driver with second set of alternate values is failing in OpenShift cluster</a></li>
+<li><a href="https://github.com/dell/csm/issues/1601">#1601 - [BUG]: &ldquo;make install&rdquo; command is failing for csm-operator</a></li>
+<li><a href="https://github.com/dell/csm/issues/1603">#1603 - [BUG]: CSM Operator Crashing</a></li>
+<li><a href="https://github.com/dell/csm/issues/1604">#1604 - [BUG]: CSM Operator not deleting the deployment and daemon sets after deleting the CSM</a></li>
+<li><a href="https://github.com/dell/csm/issues/1605">#1605 - [BUG]: Not able to create CSM using the minimal file, if the Operator deployed from the Operator Hub</a></li>
+<li><a href="https://github.com/dell/csm/issues/1638">#1638 - [BUG]: CSM Docs Multiple fixes for CSI-Powermax installation</a></li>
+<li><a href="https://github.com/dell/csm/issues/1642">#1642 - [BUG]: E2E and cert-csi tets are failing</a></li>
+<li><a href="https://github.com/dell/csm/issues/1648">#1648 - [BUG]: CSM-Operator: E2E Tests are running with 1 replica count</a></li>
+<li><a href="https://github.com/dell/csm/issues/1667">#1667 - [BUG]: Labels versions and maintainer update for CSM images </a></li>
+<li><a href="https://github.com/dell/csm/issues/1668">#1668 - [BUG]: CSM-Operator is reconciling non CSM pods</a></li>
+<li><a href="https://github.com/dell/csm/issues/1633">#1633 - [BUG]: CSM deployment minimal file - pulling from quay after updating the image registry</a></li>
+<li><a href="https://github.com/dell/csm/issues/1671">#1671 - [BUG]: Minimal CR for Powerflex is failing in Csm-operator</a></li>
 </ul>
 <h3 id="known-issues">
 Known Issues <a class="header-link"  href="#known-issues" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">

@@ -20,8 +20,8 @@
 
   <meta itemprop="name" content="Release notes">
   <meta itemprop="description" content="Dell Container Storage Modules (CSM) release notes for observability">
-  <meta itemprop="dateModified" content="2025-01-02T09:07:07-05:00">
-  <meta itemprop="wordCount" content="51">
+  <meta itemprop="dateModified" content="2025-01-17T10:35:06-05:00">
+  <meta itemprop="wordCount" content="88">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Release notes">
   <meta name="twitter:description" content="Dell Container Storage Modules (CSM) release notes for observability">
@@ -124,7 +124,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.30cbd121c9a04dbae82fa0989eaa7269.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.f92c64970093c6ebdb086cfdab6b81e4.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -148,7 +148,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.30cbd121c9a04dbae82fa0989eaa7269.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.f92c64970093c6ebdb086cfdab6b81e4.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -675,7 +675,7 @@
             <div class="td-toc">
         <nav id="TableOfContents">
   <ul>
-    <li><a href="#release-notes---csm-observability-1100">Release Notes - CSM Observability 1.10.0</a>
+    <li><a href="#release-notes---csm-observability-1110">Release Notes - CSM Observability 1.11.0</a>
       <ul>
         <li><a href="#new-featureschanges">New Features/Changes</a></li>
         <li><a href="#fixed-issues">Fixed Issues</a></li>
@@ -708,8 +708,8 @@
 	<h1>Release notes</h1>
      
 	
-	<h2 id="release-notes---csm-observability-1100">
-Release Notes - CSM Observability 1.10.0 <a class="header-link"  href="#release-notes---csm-observability-1100" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
+	<h2 id="release-notes---csm-observability-1110">
+Release Notes - CSM Observability 1.11.0 <a class="header-link"  href="#release-notes---csm-observability-1110" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
             <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
                 <path d="M0 0h24v24H0z" fill="none"/>
                 <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
@@ -721,9 +721,11 @@ New Features/Changes <a class="header-link"  href="#new-featureschanges" style="
                 <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
             </svg>
         </a></h3><ul>
-<li><a href="https://github.com/dell/csm/issues/1443">#1443 - [FEATURE]: PowerStore Sync / Metro for Block - CSM Replication</a></li>
-<li><a href="https://github.com/dell/csm/issues/1472">#1472 - [FEATURE]: Support for Kubernetes 1.31</a></li>
-<li><a href="https://github.com/dell/csm/issues/1473">#1473 - [FEATURE]: Add Support for OpenShift Container Platform (OCP) 4.17</a></li>
+<li><a href="https://github.com/dell/csm/issues/1560">#1560 - [FEATURE]: CSM support for OpenShift 4.18</a></li>
+<li><a href="https://github.com/dell/csm/issues/1561">#1561 - [FEATURE]: Added support for Kubernetes 1.32 </a></li>
+<li><a href="https://github.com/dell/csm/issues/1563">#1563 - [FEATURE]: Support KubeVirt for CSM modules</a></li>
+<li><a href="https://github.com/dell/csm/issues/1610">#1610 - [FEATURE]: Added support for PowerStore 4.1 </a></li>
+<li><a href="https://github.com/dell/csm/issues/1611">#1611 - [FEATURE]: Added support for PowerScale 9.10</a></li>
 </ul>
 <h3 id="fixed-issues">
 Fixed Issues <a class="header-link"  href="#fixed-issues" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
@@ -732,7 +734,9 @@ Fixed Issues <a class="header-link"  href="#fixed-issues" style=" display: inlin
                 <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
             </svg>
         </a></h3><ul>
-<li><a href="https://github.com/dell/csm/issues/1431">#1431 - [BUG]: Upgrade k8s.io modules in csm-observability module</a></li>
+<li><a href="https://github.com/dell/csm/issues/1587">#1587 - [BUG]: Observability for PowerFlex Creates Too Many Sessions </a></li>
+<li><a href="https://github.com/dell/csm/issues/1667">#1667 - [BUG]: Labels versions and maintainer update for CSM images </a></li>
+<li><a href="https://github.com/dell/csm/issues/1632">#1632 - [BUG]: csm-metrics-powerstore doesn&rsquo;t start when the PowerStore endpoint is using a DNS name</a></li>
 </ul>
 <h3 id="known-issues">
 Known Issues <a class="header-link"  href="#known-issues" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
