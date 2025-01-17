@@ -16,14 +16,16 @@ description: Release notes for CSM Installation Wizard
 
 
 
+
 ### New Features/Changes
 
-There are no new features in this release.
+- [#1560 - [FEATURE]: CSM support for Openshift 4.18](https://github.com/dell/csm/issues/1560)
+- [#1610 - [FEATURE]: Added Support for PowerStore 4.1 ](https://github.com/dell/csm/issues/1610)
+- [#1611 - [FEATURE]: Added support for PowerScale 9.10](https://github.com/dell/csm/issues/1611)
 
 ### Fixed Issues
 
-- [#1540 - [BUG]: CSM Installation Wizard ](https://github.com/dell/csm/issues/1540)
-
+There are no issues fixed in this release.
 ### Known Issues
 
 There are no known issues in this release
