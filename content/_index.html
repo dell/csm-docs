@@ -2,11 +2,301 @@
 title = "Dell Technologies"
 linkTitle = "Dell Technologies"
 +++
+<style> 
+.td-card-group{
+  max-width:100% !important;
+} 
+.video-container {
+    position: relative;
+    padding-bottom: 30%; /* Adjust this value to change the aspect ratio */
+    height: 0;
+    overflow: hidden;
+    max-width: 55%; /* Adjust this value to change the width */
+    background: #000;
+    margin: 0 auto; /* Center the video */
+        }
 
-{{< blocks/cover title="Welcome to Dell Technologies Container Storage Modules documentation!" image_anchor="top" height="max" color="primary" >}}
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+    .custom-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: none; /* Remove default border */
+    border-radius: 15px; /* Rounded corners */
+    overflow: hidden;
+  }
+
+  /* Hover effect for cards */
+  .custom-card:hover {
+    transform: translateY(-10px); /* Lift the card on hover */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); /* Add a soft shadow */
+  }
+
+  /* Card image */
+  .custom-card-img {
+    height: 250px;
+    object-fit: cover; /* Ensure image fits within card */ 
+  }
+  .img-fluid{
+    width:50%; 
+    height:auto;  
+  }
+  /* Card title */
+  .custom-card-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: var(--bs-link-color) /* Change the color for the title */
+  }
+
+  /* Card text */
+  .custom-card-text {
+    font-size: 0.95rem;
+    color: var(--bs-body-color);
+  }
+
+  /* Custom margins for the card grid */
+  .g-4 > .col {
+    margin-bottom: 30px;
+  }
+  .card{
+    border:none;
+    border-radius:0 0 0rem 0rem; 
+    height:100% !important;
+  } 
+  .card-body{
+    border: 1px solid #b1dbe9; /* This sets all borders */
+    height:100%; 
+    border-top:none; 
+    border-radius:0rem 0rem 0rem 0rem;
+  } 
+  .custom-card{
+    max-width:300px;
+    max-height:440px; 
+  }
+  .custom-card-text span{
+    text-decoration: underline;
+    color: var(--bs-link-color); /* Initial color */
+    transition: color 0.3s ease, text-decoration 0.3s ease; /* Transition for smooth effect */
+}
+
+.custom-card-text span:hover {
+    color: var(--bs-link-hover-color); /* Change this color for hover effect */
+    text-decoration: none; /* Optional: remove underline on hover */
+} 
+.card-container{
+  width:75%; 
+} 
+
+.pinfo {
+     text-align: left;
+}
+
+
+
+@media (min-width: 1500px) {
+  .section-head {
+    font-size: 2.5rem; /* Increase heading size */
+    margin-bottom: 40px; /* Adjust margin as needed */ 
+  }
+
+  .lead {
+    font-size: 1.3rem; /* Increase text size for the paragraph */
+    line-height: 1.6; /* Adjust line height for better readability */
+    margin-bottom: 20px; /* Adjust bottom margin as needed */
+  }
+  .custom-card {
+    max-width: 320px; /* Increase card width */
+    max-height: 500px; /* Adjust height as needed */
+  }
+
+  .custom-card-img {
+    max-height: 200px; /* Increase image height */
+  }
+
+  .custom-card-title {
+    font-size: 1.5rem; /* Increase title size */
+  }
+
+  .custom-card-text {
+    font-size: 1.1rem; /* Increase text size */
+  } 
+  .card-container{
+    width:79%; 
+  }
+
+  .video-container {
+    width: 60%; /* Adjust video container width */
+  }
+
+  /* Adjust hexagon image */
+  .img-fluid {
+    width:40%; /* Increase hexagon image size */
+    height: auto; /* Maintain aspect ratio */
+  } 
+
+
+
+}
+</style>
+
+
+{{< blocks/cover title="Container Storage Modules Documentation" image_anchor="top" height="min" color="primary" >}}
 <div class="mx-auto">
-        <a class="btn btn-lg btn-primary me-3 mb-4" href="/csm-docs/docs/">
-                Learn More <i class="fas fa-arrow-alt-circle-right ms-2"></i>
+        <a class="btn btn-lg btn-primary me-3 mb-4" href="/csm-docs/docs/getting-started">
+                Getting Started <i class="fas fa-arrow-alt-circle-right ms-2"></i>
+        </a> 
+        <a class="btn btn-lg btn-primary me-3 mb-4" href="https://github.com/dell/csm/releases/">
+            Releases <i class="fab fa-github ms-2"></i>
         </a>
 </div>
-{{< /blocks/cover >}}
+{{< /blocks/cover >}} 
+
+<div id="overview" class="text-center py-5" > 
+        <div class="container" > 
+          <p class="lead">
+
+        
+        <!--div class="pinfo pageinfo pageinfo-primary">
+          <ol>
+            <li>{{< message text="7" >}}</li> 
+            <br>
+            <li>{{< message text="1" >}}</li> 
+            <br>
+            <li>{{< message text="5" >}}</li>            
+         </ol>   
+        </div -->
+        <div>
+          <p> <a class="btn btn-lg btn-primary me-3 mb-4" href="./docs/support/announcement/" target="_blank">Announcement</a> </p>  
+        </div>
+
+          </p> 
+          <h3 class="section-head mb-4">What is Container Storage Modules?</h3>
+          <p class="lead">
+            Container Storage Module enhances the Container Storage Interface (CSI) to provide advanced enterprise storage features for Kubernetes clusters. It includes software modules that extend beyond CSI, offering enterprise storage capabilities to Kubernetes users. Dell’s primary storage options (PowerStore, PowerScale, PowerFlex, PowerMax, and Unity XT) can use these modules to simplify management. This allows developers to easily access and automate tasks like Authorization, Replication, Snapshotting, Resiliency, Observability, and Application Mobility.
+          </p>           
+            <img src="./images/csm_hexagon.png" alt="CSM Hex Diagram" class="img-fluid my-4" />    
+             <div class = "row justify-content-center"   > 
+                 <div class="col-12 justify-content-center">  
+                  <div class="card-container container mt-5 mb-5">
+                    <div class="row row-cols-1 row-cols-md-3 g-4 " >
+                      <div class="col">
+                        <a href="docs/concepts/authorization/" class="card h-100 text-decoration-none custom-card">
+                          <div class="card">
+                            <img src="./images/landing-images/authorization.png" class="card-img-top custom-card-img" alt="App mobility">
+                            <div class="card-body text-center">
+                              
+                              <p class="card-text custom-card-text"><span>Authorization</span> provides storage and Kubernetes administrators the ability to apply RBAC for Dell CSI Drivers. It does this by deploying a proxy between the CSI driver and the storage system to enforce role-based access and usage rules.<br></p>
+                            </div>
+                          </div>
+                        </a>
+                      </div>
+
+                      <div class="col">
+                        <a href="docs/concepts/replication/" class="card h-100 text-decoration-none custom-card">
+                          <div class="card">
+                            <img src="./images/landing-images/replication.png" class="card-img-top custom-card-img" alt="App mobility">
+                            <div class="card-body text-center">
+                             
+                              <p class="card-text custom-card-text"><span>Replication</span> project aims to bring Replication & Disaster Recovery capabilities of Dell Storage Arrays to Kubernetes clusters. It helps you replicate groups of volumes and can provide you a way to restart applications in case of both planned and unplanned migration.</p>
+                            </div>
+                          </div>
+                        </a>
+                      </div>
+                  
+                      <!-- Additional cards -->
+                      <div class="col">
+                        <a href="docs/concepts/resiliency/" class="card h-100 text-decoration-none custom-card">
+                          <div class="card">
+                            <img src="./images/landing-images/resiliency.png" class="card-img-top custom-card-img" alt="Another Card">
+                            <div class="card-body text-center">
+                              
+                              <p class="card-text custom-card-text"><span>Resiliency</span> is designed to make Kubernetes Applications, including those that utilize persistent storage, more resilient to various failures.</p>
+                            </div>
+                          </div>
+                        </a>
+                      </div> 
+
+                      
+                      <!-- Add more cards as needed -->
+                    </div>
+
+                    <div class="row row-cols-1 row-cols-md-3 g-4 mt-1 justify-content-center">
+                       
+                    
+                        <!-- Additional cards -->
+                        <div class="col">
+                          <a href="docs/concepts/observability/" class="card h-100 text-decoration-none custom-card">
+                            <div class="card">
+                              <img src="./images/landing-images/observability.png" class="card-img-top custom-card-img" alt="Another Card">
+                              <div class="card-body text-center">
+                               
+                                <p class="card-text custom-card-text"><span>Observability</span> provides visibility on the capacity of the volumes/file shares that is being managed with Container Storage Modules. It includes CSI (Container Storage Interface) drivers along with their performance in terms of bandwidth, IOPS, and response time.
+                                </p>
+                              </div>
+                            </div>
+                          </a>
+                        </div>
+                        
+
+                        <div class="col">
+                          <a href="docs/concepts/applicationmobility/" class="card h-100 text-decoration-none custom-card">
+                            <div class="card">
+                              <img src="./images/landing-images/appmobility.png" class="card-img-top custom-card-img" alt="Another Card">
+                              <div class="card-body text-center">
+                               
+                                <p class="card-text custom-card-text"><span>Application Mobility</span> provide Kubernetes administrators the ability to clone their stateful application workloads and application data to other clusters in the cloud.</p>
+                              </div>
+                            </div>
+                          </a>
+                        </div> 
+  
+                        <!-- Add more cards as needed -->
+                      </div>
+                  </div>
+
+                  
+                  
+                </div>
+            </div> 
+        
+
+            <div class="row"> 
+                <div class="col-12 justify-content-center mt-5" > 
+                
+                    <div class="video-container">
+                      <video id="video" src="./videos/dell_csm_explainer_video.mp4" controls 
+                      allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" 
+                      style="width: 100%; height: auto;" 
+                      frameborder="0" 
+                      allowfullscreen>
+                   Your browser does not support the video tag.
+               </video>
+                    </div> 
+               
+
+                </div>
+            </div>
+
+        </div>
+</div>
+
+<script>
+  function pauseVideo() {
+      var video = document.getElementById('video');
+      if (video) {
+          video.pause(); // Ensure the video is paused
+      }
+  }
+
+  // Pause the video on DOM content loaded
+  document.addEventListener('DOMContentLoaded', pauseVideo);
+
+  // Pause the video when the page is shown (includes back navigation)
+  window.addEventListener('pageshow', pauseVideo);
+</script>

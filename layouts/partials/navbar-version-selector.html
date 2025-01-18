@@ -1,0 +1,33 @@
+<style>
+.dropdown-toggle{
+  font-size:small;  
+  font-weight:500 !important; 
+} 
+
+</style>
+<div class="dropdown" style="margin-top:3px; color:#fff">
+  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:#fff">
+    {{ $currentURL := .Page.Permalink | default .Site.BaseURL }}
+    {{ $currentVersion := "" }}
+    
+    {{ if strings.Contains $currentURL "/csm-docs/docs" }}
+      {{ $currentVersion = (index .Site.Params.versions 0).version }}
+    {{ else if strings.Contains $currentURL "/csm-docs/v1" }}
+      {{ $currentVersion = (index .Site.Params.versions 1).version }}
+    {{ else if strings.Contains $currentURL "/csm-docs/v2" }}
+      {{ $currentVersion = (index .Site.Params.versions 2).version }}
+    {{ else if strings.Contains $currentURL "/csm-docs/v3" }}
+      {{ $currentVersion = (index .Site.Params.versions 3).version }}
+    {{ else }} 
+      {{$currentVersion = (index .Site.Params.versions 0).version }}
+    {{ end }}
+    
+    {{ $currentVersion }}
+  </a>
+  <ul class="dropdown-menu">
+    {{ range .Site.Params.versions -}}
+      <li><a class="dropdown-item" href="{{ .url }}" >{{ .version }}</a></li>
+    {{ end -}}
+  </ul> 
+
+</div>

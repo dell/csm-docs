@@ -105,12 +105,15 @@ github_repo = ""
 offlineSearch = true
 
 # Enable syntax highlighting and copy buttons on code blocks with Prism
-prism_syntax_highlighting = true
+prism_syntax_highlighting = false
 
 # User interface configuration
 [params.ui]
 # Enable to show the side bar menu in its compact state.
 sidebar_menu_compact = true
+ul_show = 1
+sidebar_menu_foldable = true
+sidebar_cache_limit = 1000
 #  Set to true to disable breadcrumb navigation.
 breadcrumb_disable = false
 #  Set to true to hide the sidebar search box (the top nav search box will still be displayed if search is enabled)
@@ -129,8 +132,8 @@ showLightDarkModeMenu = true
 [params.ui.feedback]
 enable = true
 # The responses that the user sees after clicking "yes" (the page was helpful) or "no" (the page was not helpful).
-yes = 'Glad to hear it! Please <a href="https://github.com/dell/csm/issues/new/choose">tell us how we can improve</a>.'
-no = 'Sorry to hear that. Please <a href="https://github.com/dell/csm/issues/new/choose">tell us how we can improve</a>.'
+yes = 'Thank you for your feedback!'
+no = 'Sorry to hear that. Please <a href="https://github.com/dell/csm/issues/new?&labels=type%2Ffeedback%2Cneeds-triage%2Carea%2Fcsm-docs&title=%5Bcsm-docs%5D%20-%20+{{.File.Path}}">tell us how we can improve</a>.'
 
 # Adds a reading time to the top of each doc.
 # If you want this feature, but occasionally need to remove the Reading time from a single page, 
@@ -165,36 +168,45 @@ algolia_docsearch = false
 	url = "https://github.com/dell/csm"
 	icon = "fab fa-github"
         desc = "Development takes place here!"
-[[params.links.developer]]
-	name = "Slack"
-	url = "http://del.ly/Slack_request"
-	icon = "fab fa-slack"
-        desc = "Chat with other project developers"
 #[[params.links.developer]]
 #	name = "Developer mailing list"
 #	url = "https://example.org/mail"
 #	icon = "fa fa-envelope"
-#        desc = "Discuss development issues around the project"
+#        desc = "Discuss development issues around the project" 
+
 [[params.versions]]
-  version = "Current(v1.13.0)"
+  version = "1.14.0"
   url = "https://dell.github.io/csm-docs/docs/"
 
 [[params.versions]]
-  version = "v1.12.0"
-  url = "https://dell.github.io/csm-docs/v1"
+  version = "1.13.0"
+  url = "https://dell.github.io/csm-docs/v1/"
 
 [[params.versions]]
-  version = "v1.11.1"
-  url = "https://dell.github.io/csm-docs/v2"
+  version = "1.12.0"
+  url = "https://dell.github.io/csm-docs/v2/"
 
 [[params.versions]]
-  version = "v1.10.2"
-  url = "https://dell.github.io/csm-docs/v3"  
+  version = "1.11.1"
+  url = "https://dell.github.io/csm-docs/v3/" 
 
 [[menu.main]]
-    name = "GitHub"
+    name = " "
     weight = 50
-    url = "https://github.com/dell/csm"
+    url = "https://github.com/dell/csm" 
+    pre = "<i class='fa-brands fa-github'></i>" 
+[[menu.main]]
+    name = ""
+    weight = 60
+    url = "/docs/support/announcement/" 
+    pre = "<i class='fa-regular fa-bullhorn'></i>"
+[[menu.main]]
+    name = "Blog" 
+    weight = 70  
+    url="https://infohub.delltechnologies.com/en-us/t/blogs-99/" 
+    pre = "<i class='fa-solid fa-square-rss'></i>"
+
+    
 
 [module]
   # uncomment line below for temporary local development of module
@@ -210,4 +222,3 @@ algolia_docsearch = false
     disable = false
 
 ignoreFiles = ['^content/docs/deployment/csminstallationwizard/src/index\.html$']
-

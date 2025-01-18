@@ -1,0 +1,96 @@
+{{ $currentNode := . }}
+
+{{ template "menu-nextprev" dict "menu" .Site.Home "currentnode" $currentNode }}
+
+{{ define "menu-nextprev" }}
+    {{$currentNode := .currentnode }}
+    {{ if ne .menu.Params.hidden true}}
+        {{if hasPrefix $currentNode.RelPermalink .menu.RelPermalink }}
+            {{ $currentNode.Scratch.Set "NextPageOK" "OK" }}
+            {{ $currentNode.Scratch.Set "prevPage" ($currentNode.Scratch.Get "prevPageTmp") }}
+        {{else}}
+            {{if eq ($currentNode.Scratch.Get "NextPageOK") "OK"}}
+                {{ if not .menu.Params.toc_hide }} <!-- Skip if toc_hide: true -->
+                    {{ $currentNode.Scratch.Set "NextPageOK" nil }}
+                    {{ $currentNode.Scratch.Set "nextPage" .menu }}
+                {{ end }}
+            {{end}}
+        {{end}}
+        {{ if not .menu.Params.toc_hide }} <!-- Skip setting prevPageTmp if toc_hide: true -->
+            {{ $currentNode.Scratch.Set "prevPageTmp" .menu }}
+        {{ end }}
+
+        {{ $currentNode.Scratch.Set "pages" .menu.Pages }}
+        {{ if .menu.IsHome}}
+            {{ $currentNode.Scratch.Set "pages" .menu.Sections }}
+        {{ else if .menu.Sections}}
+            {{ $currentNode.Scratch.Set "pages" (.menu.Pages | union .menu.Sections) }}
+        {{end}}
+        {{ $pages := ($currentNode.Scratch.Get "pages") }}
+
+        {{ range $pages.ByWeight }}
+            {{ if not .Params.toc_hide }} <!-- Skip processing files with toc_hide: true -->
+                {{ template "menu-nextprev" dict "menu" . "currentnode" $currentNode }}
+            {{ end }}
+        {{ end }}
+    {{ end }}
+{{ end }}
+
+<style> 
+.pagination-nav {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.pagination-nav__link {
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    background-color: var(--td-pre-bg) !important;
+    border: 1px solid #dee2e6;
+    border-radius: 5px;
+    text-decoration: none;
+    color: #007bff;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.pagination-nav__link:hover {
+    background-color: #007bff !important;
+    color: #fff;
+}
+
+.pagination-nav__sublabel {
+    font-size: 12px;
+    color: #6c757d;
+}
+
+.pagination-nav__label {
+    font-size: 16px;
+    font-weight: bold;
+    margin-left: 5px;
+}
+
+.pagination-nav__link--prev .fa-chevron-left,
+.pagination-nav__link--next .fa-chevron-right {
+    margin-right: 5px;
+}
+</style>
+
+<nav class="pagination-nav mt-5" aria-label="Docs pages">
+    {{$showPrevNext := (and (not .Params.disableNextPrev) (not .Site.Params.disableNextPrev))}}
+    {{if $showPrevNext}}
+        {{with ($.Scratch.Get "prevPage")}}
+        <a class="pagination-nav__link pagination-nav__link--prev" href="{{.RelPermalink}}">
+            <div class="pagination-nav__sublabel"></div>
+            <div class="pagination-nav__label"><i class="fa fa-chevron-left"></i>{{ if .Params.linkTitle }}{{ .Params.linkTitle }}{{ else }}{{ .Title }}{{ end }}</div>
+        </a>
+        {{end}}
+        {{with ($.Scratch.Get "nextPage")}}
+        <a class="pagination-nav__link pagination-nav__link--next" href="{{.RelPermalink}}">
+            <div class="pagination-nav__sublabel"></div>
+            <div class="pagination-nav__label">{{ if .Params.linkTitle }}{{ .Params.linkTitle }}{{ else }}{{ .Title }}{{ end }}<i class="fa fa-chevron-right"></i></div>
+        </a>
+        {{end}}
+    {{end}}
+</nav>

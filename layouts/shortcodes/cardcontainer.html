@@ -1,0 +1,23 @@
+<style>
+.custom-container{
+    width: 100%; /* Default width for mobile screens */
+} 
+
+@media (min-width: 1400px) {
+    .custom-container {
+        width: 90%; /* Width for all other screens */
+    }
+} 
+
+@media (min-width: 1700px) {
+    .custom-container {
+        width: 80%; /* Width for all other screens */
+    }
+} 
+</style>
+
+<div class="container mt-5 ps-0 custom-container" style="margin-left:0px">
+    <div class="row">
+        {{ .Inner }}
+    </div>
+</div>
