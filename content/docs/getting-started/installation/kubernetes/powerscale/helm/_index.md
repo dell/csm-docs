@@ -32,9 +32,9 @@ The following are requirements to be met before installing the CSI Driver for Po
 - Mount propagation is enabled on container runtime that is being used
 - `nfs-utils` package must be installed on nodes that will mount volumes
 - If using Snapshot feature, satisfy all Volume Snapshot requirements
-- If enabling CSM for Authorization, please refer to the [Authorization deployment steps](../../../../../deployment/helm/modules/installation/authorization-v2.0/) first
-- If enabling CSM for Replication, please refer to the [Replication deployment steps](../../../../../deployment/helm/modules/installation/replication/) first
-- If enabling CSM for Resiliency, please refer to the [Resiliency deployment steps](../../../../../deployment/helm/modules/installation/resiliency/) first
+- If enabling CSM for Authorization, please refer to the [Authorization deployment steps](../helm/csm-modules/authorizationv2.0/) first
+- If enabling CSM for Replication, please refer to the [Replication deployment steps](../helm/csm-modules/replication/) first
+- If enabling CSM for Resiliency, please refer to the [Resiliency deployment steps](../helm/csm-modules/resiliency/) first
 
 ### (Optional) Volume Snapshot Requirements
 
@@ -156,11 +156,11 @@ CRDs should be configured during replication prepare stage with repctl as descri
    | ignoreUnresolvableHosts | Allows new host to add to existing export list though any of the existing hosts from the same exports are unresolvable/doesn't exist anymore. | No | false |
    | noProbeOnStart | Define whether the controller/node plugin should probe all the PowerScale clusters during driver initialization | No | false |
    | autoProbe | Specify if automatically probe the PowerScale cluster if not done already during CSI calls | No | true |
-   | **authorization** | [Authorization](../../../../../deployment/helm/modules/installation/authorization-v2.0/) is an optional feature to apply credential shielding of the backend PowerScale. | - | - |
+   | **authorization** | [Authorization](../helm/csm-modules/authorizationv2.0/) is an optional feature to apply credential shielding of the backend PowerScale. | - | - |
    | enabled                  | A boolean that enables/disables authorization feature. If enabled, isiAuthType must be set to 1. |  No      |   false   |
    | proxyHost | Hostname of the csm-authorization server. | No | Empty |
    | skipCertificateValidation | A boolean that enables/disables certificate validation of the csm-authorization proxy server. | No | true |
-   | **podmon**               | [Podmon](../../../../../deployment/helm/modules/installation/resiliency/) is an optional feature to enable application pods to be resilient to node failure.  |  -        |  -       |
+   | **podmon**               | [Podmon](../helm/csm-modules/resiliency/) is an optional feature to enable application pods to be resilient to node failure.  |  -        |  -       |
    | enabled                  | A boolean that enables/disables podmon feature. |  No      |   false   |
     
    *NOTE:*
@@ -215,7 +215,7 @@ Create isilon-creds secret using the following command:
    - If any key/value is present in all *my-isilon-settings.yaml*, *secret*, and storageClass, then the values provided in storageClass parameters take precedence.
    - The user has to validate the yaml syntax and array-related key/values while replacing or appending the isilon-creds secret. The driver will continue to use previous values in case of an error found in the yaml file.
    - For the key isiIP/endpoint, the user can give either IP address or FQDN. Also, the user can prefix 'https' (For example, https://192.168.1.1) with the value.
-   - The *isilon-creds* secret has a *mountEndpoint* parameter which should only be updated and used when [Authorization](../../../../../authorization) is enabled.
+   - The *isilon-creds* secret has a *mountEndpoint* parameter which should only be updated and used when [Authorization](../../../../../concepts/authorization) is enabled.
 </ul>
 
 7. Install OneFS CA certificates by following the instructions from the next section, if you want to validate OneFS API server's certificates. If not, create an empty secret using the following command and an empty secret must be created for the successful installation of CSI Driver for PowerScale.
