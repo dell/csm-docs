@@ -18,6 +18,8 @@ Support for CSM via Slack will be deprecated on 5/31/2025, aligning with the CSM
 We are thrilled to announce the launch of our brand-new <a href="https://dell.github.io/beta-csm-docs/" target="_blank"> <b> Documentation Portal!</b></a>
 {{ else if eq (.Get "text") "10" }}
 Application Mobility will be part of the Container Storage Modules open-source suite in an upcoming release.
+{{ else if eq (.Get "text") "11" }}
+Starting with CSM 1.14, CSI PowerMax Reverse Proxy Config Map will be deprecated and will be officially discontinued by CSM 1.16. Please switch to using the CSI PowerMax Mount Credentials. Installation instrucation are stated for both Helm and Operator.
 {{else}}  
 <p>Default text if no valid parameter is passed.</p>
 {{ end }}

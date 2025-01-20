@@ -678,3 +678,26 @@ These are the CSM modules not supported with NVMeTCP protocol:
 - CSM Observability
 - CSM Application Mobility
 - Metro Replication
+
+## Mount Credentials Support
+
+The CSI Driver for Dell PowerMax supports Mount Credentials from v2.14.0 and the configMap will be deprecated. In previous versions of the PowerMax Reverse Proxy, in order to configure it, a config map needed to be created and the credentials for the arrays would be stored in secrets which the config map would reference. To simplify this solution, a mountable secret can be used which contains the array information and credentials all in one location.
+```yaml
+storageArrays:
+  - storageArrayId: "000000000001"
+    primaryEndpoint: https://primary-1.unisphe.re:8443
+    backupEndpoint: https://backup-1.unisphe.re:8443
+managementServers:
+  - endpoint: https://primary-1.unisphe.re:8443
+    username: admin
+    password: password
+    skipCertificateValidation: true
+  - endpoint: https://backup-1.unisphe.re:8443
+    username: admin2
+    password: password2
+    skipCertificateValidation: false
+```
+
+This approach is supported in both `helm` and `operator` installation for PowerMax. Both installation will automatically mount the secret to be used by the PowerMax driver/node and the Reverse Proxy.
+
+**Note:** The config map approach is being deprecated but to adhere to backwards compatibility, one can still configure and use the PowerMax driver with the config map.
