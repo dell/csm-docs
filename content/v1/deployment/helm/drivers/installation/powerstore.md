@@ -48,8 +48,9 @@ The following requirements must be fulfilled in order to successfully use the Fi
 
 The following requirements must be fulfilled in order to successfully use the iSCSI protocol with the CSI PowerStore driver:
 
-- All Kubernetes nodes must have the _iscsi-initiator-utils_ package installed. On Debian based distributions the package name is  _open-iscsi_.
-- The _iscsid_ service must be enabled and running. You can enable the service by running the following command on all worker nodes: `systemctl enable --now iscsid`
+- Ensure that the necessary iSCSI initiator utilities are installed on each Kubernetes worker node. This typically includes the _iscsi-initiator-utils_ package for RHEL or _open-iscsi_ package for Ubuntu.
+- Enable and start the _iscsid_ service on each Kubernetes worker node. This service is responsible for managing the iSCSI initiator. You can enable the service by running the following command on all worker nodes: `systemctl enable --now iscsid`
+- Ensure that the unique initiator name is set in _/etc/iscsi/initiatorname.iscsi_.
 - To configure iSCSI in Red Hat OpenShift clusters, you can create a `MachineConfig` object using the console or `oc` to ensure that the iSCSI daemon starts on all the Red Hat CoreOS nodes. Here is an example of a `MachineConfig` object:
 
 ```yaml
@@ -83,7 +84,38 @@ Refer to the [Dell Host Connectivity Guide](https://elabnavigator.dell.com/vault
 
 The following requirements must be fulfilled in order to successfully use the NVMe protocols with the CSI PowerStore driver:
 
-- All OpenShift or Kubernetes nodes connecting to Dell storage arrays must use unique host NQNs.
+- All OpenShift or Kubernetes nodes connecting to Dell storage arrays must use unique host NVMe Qualified Names (NQNs).
+
+> The OpenShift deployment process for CoreOS will set the same host NQN for all nodes. The host NQN is stored in the file /etc/nvme/hostnqn. One possible solution to ensure unique host NQNs is to add the following machine config to your OCP cluster:
+
+```yaml
+apiVersion: machineconfiguration.openshift.io/v1
+kind: MachineConfig
+metadata:
+  labels:
+    machineconfiguration.openshift.io/role: worker
+  name: 99-worker-custom-nvme-hostnqn
+spec:
+  config:
+    ignition:
+      version: 3.4.0
+    systemd:
+      units:
+        - contents: |
+            [Unit]
+            Description=Custom CoreOS Generate NVMe Hostnqn
+
+            [Service]
+            Type=oneshot
+            ExecStart=/usr/bin/sh -c '/usr/sbin/nvme gen-hostnqn > /etc/nvme/hostnqn'
+            RemainAfterExit=yes
+
+            [Install]
+            WantedBy=multi-user.target
+          enabled: true
+          name: custom-coreos-generate-nvme-hostnqn.service
+```
+
 - The driver requires the NVMe command-line interface (nvme-cli) to manage the NVMe clients and targets. The NVMe CLI tool is installed in the host using the following command on RPM oriented Linux distributions.
 
 ```bash
@@ -149,6 +181,7 @@ To reduce the impact of PowerStore non disruptive software upgrades you must set
 ```text
 ACTION=="add|change", SUBSYSTEM=="nvme", KERNEL=="nvme*", ATTR{ctrl_loss_tmo}="-1"
 ```
+
 In order to change the rules on a running kernel you can run the following commands:
 
 ```bash
@@ -265,6 +298,7 @@ Alternatively, you can check the status of the multipath service by running the 
 Refer to the [Dell Host Connectivity Guide](https://elabnavigator.dell.com/vault/pdf/Linux.pdf) for more information.
 
 ### Volume Snapshot Requirements (Optional)
+
 For detailed snapshot setup procedure, [click here.](../../../../../snapshots/#optional-volume-snapshot-requirements)
 
 ### Volume Health Monitoring
@@ -297,6 +331,7 @@ volume stats value under node should be set to true.
         # Default value: None
         enabled: false
    ```
+
 ### Replication feature Requirements (Optional)
 
 Applicable only if you decided to enable the Replication feature in `values.yaml`
@@ -305,6 +340,7 @@ Applicable only if you decided to enable the Replication feature in `values.yaml
 replication:
   enabled: true
 ```
+
 #### Replication CRD's
 
 The CRDs for replication can be obtained and installed from the csm-replication project on Github. Use `csm-replication/deploy/replicationcrds.all.yaml` located in csm-replication git repo for the installation.
@@ -314,7 +350,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
 ## Install the Driver
 
 **Steps**
-1. Run `git clone -b v2.12.0 https://github.com/dell/csi-powerstore.git` to clone the git repository.
+1. Run `git clone -b v2.13.0 https://github.com/dell/csi-powerstore.git` to clone the git repository.
 2. Ensure that you have created namespace where you want to install the driver. You can run `kubectl create namespace csi-powerstore` to create a new one. "csi-powerstore" is just an example. You can choose any name for the namespace.
    But make sure to align to the same namespace during the whole installation.
 3. Edit `samples/secret/secret.yaml` file and configure connection information for your PowerStore arrays changing following parameters:
@@ -341,7 +377,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
     > If you do not specify `arrayID` parameter in the storage class then the array that was specified as the default would be used for provisioning volumes.
 6. Download the default values.yaml file
    ```bash
-   cd dell-csi-helm-installer && wget -O my-powerstore-settings.yaml https://github.com/dell/helm-charts/raw/csi-powerstore-2.12.0/charts/csi-powerstore/values.yaml
+   cd dell-csi-helm-installer && wget -O my-powerstore-settings.yaml https://github.com/dell/helm-charts/raw/csi-powerstore-2.13.0/charts/csi-powerstore/values.yaml
    ```
 7. Edit the newly created values file and provide values for the following parameters `vi my-powerstore-settings.yaml`:
 

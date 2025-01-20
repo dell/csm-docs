@@ -32,10 +32,12 @@ This document outlines all dellctl commands, their intended use, options that ca
 | [dellctl encryption rekey-status](#dellctl-encryption-rekey-status) | Get status of an encryption rekey operation |
 | [dellctl images](#dellctl-images) | List the container images needed by csi driver |
 | [dellctl volume get](#dellctl-volume-get) | Gets PowerFlex volume infomation for a given tenant on a local cluster |
+| [dellctl admin token](#dellctl-admin-token) | Generate an administrator token for administrating CSM Authorization v2 |
+| [dellctl generate token](#dellctl-generate-token) | Generate a tenant token for configuring a Dell CSI Driver with CSM Authorization v2 |
 
 
 ## Installation instructions
-1. Download `dellctl` from [here](https://github.com/dell/csm/releases/tag/v1.6.0).
+1. Download `dellctl` from [here](https://github.com/dell/csm/releases/latest/download/dellctl).
 2. chmod +x dellctl
 3. Move `dellctl` to `/usr/local/bin` or add `dellctl`'s containing directory path to PATH environment variable.
 4. Run `dellctl --help` to know available commands or run `dellctl command --help` to know more about a specific command.
@@ -961,7 +963,7 @@ Gets PowerFlex volume infomation for a given tenant on a local cluster. The name
 dellctl volume get --proxy <proxy.dell.com> --namespace vxflexos
 ```
 ```
-# dellctl volume get --proxy <proxy.dell.com/proxy/volumes> --namespace vxflexos
+# dellctl volume get --proxy <proxy.dell.com> --namespace vxflexos
 
 NAME             VOLUME ID          SIZE       POOL     SYSTEM ID          PV NAME          PV STATUS   STORAGE CLASS   PVC NAME       NAMESPACE
 k8s-e7c8b39112   a69bf18e00000008   8.000000   mypool   636468e3638c840f   k8s-e7c8b39112   Released    vxflexos        demo-claim10   default
@@ -969,4 +971,69 @@ k8s-e6e2b46103   a69bf18f00000009   8.000000   mypool   636468e3638c840f   k8s-e
 k8s-b1abb817d3   a69bf19000000001   8.000000   mypool   636468e3638c840f   k8s-b1abb817d3   Bound       vxflexos        demo-claim13   default
 k8s-28e4184f41   c6b2280d0000009a   8.000000   mypool   636468e3638c840f   k8s-28e4184f41   Available   local-storage  
 k8s-7296621062   a69b554f00000004   8.000000   mypool   636468e3638c840f
+```
+
+### dellctl admin token
+
+Generate an administrator token for administrating CSM Authorization v2
+
+##### Flags
+
+```
+      --access-token-expiration duration    Expiration time of the access token, e.g. 1m30s (default 1m0s)
+  -h, --help                                help for token
+  -s, --jwt-signing-secret string           Specify JWT signing secret, or omit to use stdin
+  -n, --name string                         Admin name
+      --refresh-token-expiration duration   Expiration time of the refresh token, e.g. 48h (default 720h0m0s)
+```
+
+##### Output
+
+```bash
+dellctl admin token -n <administrator-name> --jwt-signing-secret <signing-secret>
+```
+
+```
+# dellctl admin token -n admin --jwt-signing-secret secret
+{
+  "Access": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJjc20iLCJleHAiOjE3MjA3MDk1MTcsImdyb3VwIjoiYWRtaW4iLCJpc3MiOiJjb20uZGVsbC5jc20iLCJyb2xlcyI6IiIsInN1YiI6ImNzbS1hZG1pbiJ9.WS5NSxrCoMn90ohOZZyyGoBias583xYumeKvmIrCqSs",
+  "Refresh": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJjc20iLCJleHAiOjE3MjMzMDE0NTcsImdyb3VwIjoiYWRtaW4iLCJpc3MiOiJjb20uZGVsbC5jc20iLCJyb2xlcyI6IiIsInN1YiI6ImNzbS1hZG1pbiJ9.MJ9ajrB-nLEQKdAA-H8n78kS9QiX1yW_-m7K4Tmu7Mg"
+}
+```
+
+### dellctl generate token
+
+Generate a tenant token for configuring a Dell CSI Driver with CSM Authorization v2
+
+##### Flags
+
+```
+      --access-token-expiration duration    Expiration time of the access token, e.g. 1m30s (default 1m0s)
+  -h, --help                                help for token
+      --refresh-token-expiration duration   Expiration time of the refresh token, e.g. 48h (default 720h0m0s)
+  -t, --tenant string                       Tenant name
+
+Global Flags:
+      --addr string          Address of the CSM Authorization Proxy Server; required
+  -f, --admin-token string   Path to admin token file; required
+      --insecure             Skip certificate validation of the CSM Authorization Proxy Server
+```
+
+##### Output
+
+```bash
+dellctl generate token --admin-token <admin-token-file> --addr <csm-authorization-address> --tenant <tenant-name>
+```
+
+```
+# dellctl admin token -n admin --jwt-signing-secret secret
+apiVersion: v1
+data:
+  access: ZXlKaGJHY2lPaUpJVXpJMU5pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SmhkV1FpT2lKamMyMGlMQ0psZUhBaU9qRTJPREl3TVRBeU5UTXNJbWR5YjNWd0lqb2labTl2SWl3aWFYTnpJam9pWTI5dExtUmxiR3d1WTNOdElpd2ljbTlzWlhNaU9pSmlZWElpTENKemRXSWlPaUpqYzIwdGRHVnVZVzUwSW4wLjlSYkJISzJUS2dZbVdDX0paazBoSXV0N0daSDV4NGVjQVk2ekdaUDNvUWs=
+  refresh: ZXlKaGJHY2lPaUpJVXpJMU5pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SmhkV1FpT2lKamMyMGlMQ0psZUhBaU9qRTJPRFEyTURJeE9UTXNJbWR5YjNWd0lqb2labTl2SWl3aWFYTnpJam9pWTI5dExtUmxiR3d1WTNOdElpd2ljbTlzWlhNaU9pSmlZWElpTENKemRXSWlPaUpqYzIwdGRHVnVZVzUwSW4wLkxQcDQzbXktSVJudTFjdmZRcko4M0pMdTR2NXlWQlRDV2NjWFpfWjROQkU=
+kind: Secret
+metadata:
+  creationTimestamp: null
+  name: proxy-authz-tokens
+type: Opaque
 ```

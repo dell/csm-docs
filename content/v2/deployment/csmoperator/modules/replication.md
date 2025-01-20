@@ -4,6 +4,9 @@ linkTitle: "Replication"
 description: >
   Installing Replication via Dell CSM Operator
 ---
+{{% pageinfo color="primary" %}}
+{{< message text="1" >}}
+{{% /pageinfo %}}
 
 The CSM Replication module for supported Dell CSI Drivers can be installed via the Dell CSM Operator. Dell CSM Operator will deploy the CSM Replication sidecar and the CSM Replication Controller Manager.
 
@@ -31,14 +34,14 @@ This change will need to be made to the /etc/hosts file on:
 The [csm-replication](https://github.com/dell/csm-replication.git) GitHub repository is cloned to your source cluster as part of the installation. On your source cluster run the following to clone and build the repctl tool:
 
 ```bash
-git clone -b v1.9.0 https://github.com/dell/csm-replication.git
+git clone -b v1.10.0 https://github.com/dell/csm-replication.git
 cd csm-replication/repctl
 make build
 ```
 
 Alternately, you can download a pre-built repctl binary from our [Releases](https://github.com/dell/csm-replication/releases) page.
 ```shell
-wget https://github.com/dell/csm-replication/releases/download/v1.9.0/repctl-linux-amd64
+wget https://github.com/dell/csm-replication/releases/download/v1.10.0/repctl-linux-amd64
 mv repctl-linux-amd64 repctl
 chmod +x repctl
 ```
@@ -82,3 +85,19 @@ To configure Replication perform the following steps:
     kubectl patch deployment -n dell-replication-controller dell-replication-controller-manager \
     -p '{"spec":{"template":{"spec":{"hostAliases":[{"hostnames":["<remote-FQDN>"],"ip":"<remote-IP>"}]}}}}'
     ```
+9. **If installing replication via operator with the PowerMax driver on two clusters:** you will need to create a Kubernetes service for the reverseproxy on the target cluster. Insert values from your deployment into this service.yaml file and then create it on the target cluster using `kubectl create -f service.yaml`.
+    ```
+    apiVersion: v1
+    kind: Service
+    metadata:
+      name: csipowermax-reverseproxy
+      namespace: <INSERT DRIVER NAMESPACE>
+    spec:
+      ports:
+        - port: <INSERT X_CSI_REVPROXY_PORT FROM DRIVER SAMPLE FILE>
+          protocol: TCP
+          targetPort: 2222
+      selector:
+        app: <INSERT DRIVER DEPLOYMENT NAME>-controller
+      type: ClusterIP
+      ```
