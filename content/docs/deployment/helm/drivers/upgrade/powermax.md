@@ -24,14 +24,14 @@ Upgrades to the CSI Driver for Dell PowerMax can be made using Helm or Dell CSM 
 **Steps**
 
 1. Run `git clone -b v2.14.0 https://github.com/dell/csi-powermax.git` to clone the git repository.
-2. As of CSI PowerMax v2.14.0, the csi reverse proxy configuration and connectivity information has been migrated from a ConfigMap to a Secret. If a powermax reverse proxy secret was not previously created, reference [helm install instructions step 3](../../installation/powermax#installation) and your existing `my-powermax-settings.yaml` file to configure the new powermax reverse proxy Secret. Then create the reverse proxy Secret.
+2. As of CSI PowerMax v2.14.0, the csi reverse proxy configuration and connectivity information has been migrated from a ConfigMap to a Secret. If a powermax reverse proxy secret was not previously created, reference the [CSI Driver installation steps](../../installation/powermax#installation) and your existing `my-powermax-settings.yaml` file to configure the new powermax reverse proxy Secret. Then create the reverse proxy Secret.
    ```bash
    kubectl create secret generic powermax-config --namespace powermax --from-file=config=samples/secret/secret.yaml
    ```
 > Note: The `powermax-reverseproxy-config` ConfigMap has been deprecated as of CSI PowerMax v2.14.0 and will be removed in a future release.
   The `powermax-reverseproxy-config` remains for backward compatibility only. Use of the powermax reverse proxy secret, as outlined above, is recommended.
   If you would like to continue using the `powemax-reverseproxy-config` ConfigMap, set `csireverseproxy.useSecret: false` in your helm values file.
-3. Download the latest helm values file and update as needed. Reference the [PowerMax Helm Installation steps](../../installation/powermax#installation) for more details on the available options.
+3. Download the latest helm values file and update as needed. Reference the [CSI Driver installation steps](../../installation/powermax#installation) for more details on the available options.
    ```bash
    wget -O my-powermax-settings.yaml https://github.com/dell/helm-charts/raw/csi-powermax-2.14.0/charts/csi-powermax/values.yaml
    ```

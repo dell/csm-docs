@@ -387,16 +387,10 @@ CRDs should be configured during replication prepare stage with repctl as descri
     kubectl create namespace powermax
     ```
 3. Edit the `samples/secret/secret.yaml` file, referencing the details below, to provide the necessary information for connecting the driver to the desired Unisphere instances.
-
-    - *storageArrays*: A list of storage arrays and their associated details.
-      - *storageArrayId*: A unique PowerMax Symmetrix ID.
-      - *primaryEndpoint*: The URL of the Unisphere server managing this storage array.
-      - *backupEndpoint*: The URL of the backup Unisphere server managing this storage array; utilized if the primary server is unreachable.
-    - *managementServers*: A list of Unisphere management server endpoints and resources used to make connections with those servers.
-      - *endpoint*: The URL of the Unisphere server (primary or backup). This should match one of the URLs listed under `storageArrays`.
-      - *username*: The username to be used when connecting to the `endpoint`.
-      - *password*: The password to be used when connecting to the `endpoint`.
-      - *skipCertificateValidation*: Set to `false` to perform client-side TLS certificate verification for the Unisphere instance, `true` to skip verification.
+    ```bash
+    cd csi-powermax/
+    vi samples/secret/secret.yaml
+    ```
 
     Example: `samples/secret/secret.yaml`
 
@@ -415,6 +409,17 @@ CRDs should be configured during replication prepare stage with repctl as descri
         password: Password123
         skipCertificateValidation: false
     ```
+
+    - *storageArrays*: A list of storage arrays and their associated details.
+      - *storageArrayId*: A unique PowerMax Symmetrix ID.
+      - *primaryEndpoint*: The URL of the Unisphere server managing this storage array.
+      - *backupEndpoint*: The URL of the backup Unisphere server managing this storage array; utilized if the primary server is unreachable.
+    - *managementServers*: A list of Unisphere management server endpoints and resources used to make connections with those servers.
+      - *endpoint*: The URL of the Unisphere server (primary or backup). This should match one of the URLs listed under `storageArrays`.
+      - *username*: The username to be used when connecting to the `endpoint`.
+      - *password*: The password to be used when connecting to the `endpoint`.
+      - *skipCertificateValidation*: Set to `false` to perform client-side TLS certificate verification for the Unisphere instance, `true` to skip verification.
+
 4. Create the powermax-reverseproxy-secret Secret.
     ```bash
     kubectl create secret generic powermax-config --namespace powermax --from-file=config=samples/secret/secret.yaml
@@ -510,7 +515,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
 | &nbsp;&nbsp; vCenterHost                  | URL/endpoint of the vCenter where all the ESX are present                                                                                                                                                                                                                                                                                                                       |  Yes      |   ""   |
 | &nbsp;&nbsp; vCenterCredSecret                  | Secret name for the vCenter credentials.                                                                                                                                                                                                                                                                                                                                        |  Yes      |   ""   |
 
-8. Make sure to provide the base64 encoded TLS certificate and key contents created in the [CSI PowerMax Reverse Proxy](#csi-powermax-reverse-proxy) prerequisite step above.
+7. Make sure to provide the base64 encoded TLS certificate and key contents created in the [CSI PowerMax Reverse Proxy](#csi-powermax-reverse-proxy) prerequisite step above.
     ```yaml
     csireverseproxy:
       tlsSecret: csirevproxy-tls-secret
@@ -528,14 +533,14 @@ CRDs should be configured during replication prepare stage with repctl as descri
           IHByaXZhdGUga2V5IG1pZ2h0IGxvb2sgbGlrZSBpbiBteS1wb3dlcm1heC1zZXR0aW5ncy55YW1s
           IGZpbGUK
     ```
-9. Install the driver using `csi-install.sh` bash script in the `dell-csi-helm-installer` directory by running
+8. Install the driver using `csi-install.sh` bash script in the `dell-csi-helm-installer` directory by running
     ```bash
     ./csi-install.sh --namespace powermax --values ./my-powermax-settings.yaml --helm-charts-version <version>
     ```
-10. Or you can also install the driver using standalone helm chart using the command
-    ```bash
-    helm install powermax ./csi-powermax --namespace powermax --values my-powermax-settings.yaml
-    ```
+  > Alternatively, you can also install the driver using the standalone helm chart.
+  > ```bash
+  > helm install powermax ./csi-powermax --namespace powermax --values my-powermax-settings.yaml
+  > ```
 
 > Notes:
 > - The parameter `--helm-charts-version` is optional and if you do not specify the flag, by default the `csi-install.sh` script will clone the version of the helm chart that is specified in the driver's [csi-install.sh](https://github.com/dell/csi-powermax/blob/main/dell-csi-helm-installer/csi-install.sh#L52) file. If you wish to install the driver using a different version of the helm chart, you need to include this flag. Also, remember to delete the `helm-charts` repository present in the `csi-powermax` directory if it was cloned before.
