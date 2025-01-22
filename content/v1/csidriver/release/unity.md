@@ -3,7 +3,9 @@ title: Unity XT
 description: Release notes for Unity XT CSI driver
 ---
 
-## Release Notes - CSI Unity XT v2.12.0
+## Release Notes - CSI Unity XT v2.13.0
+
+
 
 
 
@@ -17,13 +19,12 @@ description: Release notes for Unity XT CSI driver
 
 ### New Features/Changes
 
-- [#1472 - [FEATURE]: Support for Kubernetes 1.31](https://github.com/dell/csm/issues/1472)
-- [#1473 - [FEATURE]: Add Support for OpenShift Container Platform (OCP) 4.17](https://github.com/dell/csm/issues/1473)
+There are no new features in this release.
 
 ### Fixed Issues
 
-- [#1447 - [BUG]: Gobrick does not clean wwids from /etc/multipath/wwids after removing multipath devices ](https://github.com/dell/csm/issues/1447)
-- [#1448 - [BUG]: CSM-operator build fails from disk space issue](https://github.com/dell/csm/issues/1448)
+- [#1654 - [BUG]: Helm installation still check snapshot CRD even though snapshot enabled is set to false](https://github.com/dell/csm/issues/1654)
+- [#1667 - [BUG]: Labels versions and maintainer update for CSM images ](https://github.com/dell/csm/issues/1667)
 
 ### Known Issues
 

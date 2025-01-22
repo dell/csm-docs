@@ -4,6 +4,10 @@ linktitle: PowerFlex
 weight: 6
 description: Enabling Replication feature for CSI PowerFlex
 ---
+{{% pageinfo color="primary" %}}
+{{< message text="1" >}}
+{{% /pageinfo %}}
+
 ## Enabling Replication In CSI PowerFlex
 
 Container Storage Modules (CSM) Replication sidecar is a helper container that
