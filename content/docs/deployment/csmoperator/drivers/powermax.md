@@ -5,9 +5,9 @@ description: >
   Installing the CSI Driver for Dell PowerMax via Dell CSM Operator
 ---
 {{% pageinfo color="primary" %}}
-1. <span></span>{{< message text="1" >}}
+1. <span></span>{{< message text="11" >}}
 
-2. <span></span>{{< message text="11" >}}
+2. <span></span>{{< message text="1" >}}
 {{% /pageinfo %}}
 The CSI Driver for Dell PowerMax can be installed via the Dell CSM Operator.
 To deploy the Operator, follow the instructions available [here](../../#installation).
@@ -371,9 +371,9 @@ Create a secret named powermax-certs in the namespace where the CSI PowerMax dri
 
 1. Create a namespace in which the driver will be installed.
    ```bash
-   kubectl create namespace <driver-namespace>
+   kubectl create namespace powermax
    ```
-2. Create the `powermax-reverseproxy-secret` secret.
+2. Create the `powermax-creds` secret.
 
     - *storageArrays*: A list of storage arrays and their associated details.
       - *storageArrayId*: A unique PowerMax Symmetrix ID.
@@ -400,9 +400,9 @@ Create a secret named powermax-certs in the namespace where the CSI PowerMax dri
         password: password2
         skipCertificateValidation: false
     ```
-    After editing the file, run this command to create a secret called `powermax-reverseproxy-config`. If you are using a different namespace/secret name, just substitute those into the command.
+    After editing the file, run this command to create a secret called `powermax-creds`. If you are using a different namespace/secret name, just substitute those into the command.
     ```bash
-    kubectl create secret generic powermax-reverseproxy-secret --namespace powermax --from-file=config=samples/secret/secret.yaml
+    kubectl create secret generic powermax-creds --namespace powermax --from-file=config=samples/secret/secret.yaml
     ```
 4. Create a configmap using the sample file [here](https://github.com/dell/csi-powermax/blob/main/samples/configmap/powermax-array-config.yaml). Fill in the appropriate values for driver configuration.
    ```yaml
@@ -479,7 +479,7 @@ Example:
    | X_CSI_VSPHERE_PORTGROUP                         | Existing portGroup that driver will use for vSphere                                                                                                                                                                                                                      | Yes      | ""                             |
    | X_CSI_VSPHERE_HOSTNAME                          | Existing host(initiator group)/host group(cascaded initiator group) that driver will use for vSphere                                                                                                                                                                     | Yes      | ""                             |
    | X_CSI_VCenter_HOST                              | URL/endpoint of the vCenter where all the ESX are present                                                                                                                                                                                                                | Yes      | ""                             |
-   | X_CSI_REVPROXY_USE_SECRET | Define whether or not to use the new secret format for the PowerMax and the Reverse Proxy. The secret used will be whatever secret is defined in the `authSecret`. **Note:** If this paramter remains `false`, PowerMax and the reverse proxy will use the configMap approach. | Yes      | "false" |
+   | X_CSI_REVPROXY_USE_SECRET | Define whether or not to use the new secret format for the PowerMax and the Reverse Proxy. The secret format will be determined by the contents of the secret specified in the `authSecret`. **Note:** If this paramter remains `false`, PowerMax and the reverse proxy will use the configMap approach. | Yes      | "false" |
    | ***Node parameters***                           |                                                                                                                                                                                                                                                                          |          |                                |
    | X_CSI_POWERMAX_ISCSI_ENABLE_CHAP                | Enable ISCSI CHAP authentication. For more details on this feature see the related [documentation](../../../../csidriver/features/powermax/#iscsi-chap)                                                                                                                               | No       | false                          |
    | X_CSI_TOPOLOGY_CONTROL_ENABLED                  | Enable/Disabe topology control. It filters out arrays, associated transport protocol available to each node and creates topology keys based on any such user input.                                                                                                      | No       | false                          |

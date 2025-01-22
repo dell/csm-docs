@@ -19,7 +19,7 @@ We are thrilled to announce the launch of our brand-new <a href="https://dell.gi
 {{ else if eq (.Get "text") "10" }}
 Application Mobility will be part of the Container Storage Modules open-source suite in an upcoming release.
 {{ else if eq (.Get "text") "11" }}
-Starting with CSM 1.14, CSI PowerMax Reverse Proxy Config Map will be deprecated and will be officially discontinued by CSM 1.16. Please switch to using the CSI PowerMax Mount Credentials. Installation instrucation are stated for both Helm and Operator.
+The CSI PowerMax Reverse Proxy Config Map will no longer be supported as of May 30, 2025 and completely deprecated by January 31, 2026. Please switch to using the CSI PowerMax Mount Credentials before these dates to prevent any potential disruptions. Migration steps are available for both <a href="/docs/deployment/helm/drivers/installation/powermax/#installation">Helm</a> and <a href="/docs/deployment/csmoperator/drivers/powermax/#install-driver">Operator</a>.
 {{else}}  
 <p>Default text if no valid parameter is passed.</p>
 {{ end }}
