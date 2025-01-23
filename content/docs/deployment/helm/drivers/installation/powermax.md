@@ -381,6 +381,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
 1. Clone the csi-powermax repository, using the latest release branch. This will include the Helm charts and dell-csi-helm-installer scripts.
     ```bash
     git clone -b v2.14.0 https://github.com/dell/csi-powermax.git
+    cd ./csi-powermax
     ```
 2. Create a namespace in which the driver will be installed.
     ```bash
@@ -388,8 +389,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
     ```
 3. Edit the `samples/secret/secret.yaml` file, referencing the details below, to provide the necessary information for connecting the driver to the desired Unisphere instances.
     ```bash
-    cd csi-powermax/
-    vi samples/secret/secret.yaml
+    vi ./samples/secret/secret.yaml
     ```
 
     Example: `samples/secret/secret.yaml`
