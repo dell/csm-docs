@@ -404,21 +404,34 @@ CRDs should be configured during replication prepare stage with repctl as descri
         username: admin
         password: password
         skipCertificateValidation: true
+        limits:
+          maxActiveRead: 10
+          maxActiveWrite: 10
+          maxOutstandingRead: 10
+          maxOutstandingWrite: 10
       - endpoint: https://backup-1.unisphe.re:8443
         username: admin2
-        password: Password123
+        password: password2
         skipCertificateValidation: false
+        certSecret: my-unishpere-cert-secret
     ```
 
     - *storageArrays*: A list of storage arrays and their associated details.
       - *storageArrayId*: A unique PowerMax Symmetrix ID.
       - *primaryEndpoint*: The URL of the Unisphere server managing this storage array.
-      - *backupEndpoint*: The URL of the backup Unisphere server managing this storage array; utilized if the primary server is unreachable.
+      - **backupEndpoint*: The URL of the backup Unisphere server managing this storage array; utilized if the primary server is unreachable.
     - *managementServers*: A list of Unisphere management server endpoints and resources used to make connections with those servers.
       - *endpoint*: The URL of the Unisphere server (primary or backup). This should match one of the URLs listed under `storageArrays`.
       - *username*: The username to be used when connecting to the `endpoint`.
       - *password*: The password to be used when connecting to the `endpoint`.
       - *skipCertificateValidation*: Set to `false` to perform client-side TLS certificate verification for the Unisphere instance, `true` to skip verification.
+      - *certSecret*: The name of the secret in the same namespace containing the CA certificates of the Unisphere server. This field is not required if `skipCertificatValidation` is set to `false`.
+      - **limits*: A set of various limits for Reverse Proxy, outlined below.
+        - **maxActiveRead*: This refers to the maximum concurrent READ request handled by the reverse proxy.
+        - **maxActiveWrite*: This refers to the maximum concurrent WRITE request handled by the reverse proxy.
+        - **maxOutstandingRead*: This refers to maximum queued READ request when reverse proxy receives more than _maxActiveRead_ requests.
+        - **maxOutstandingWrite*: This refers to maximum queued WRITE request when reverse proxy receives more than _maxActiveWrite_ requests.
+> The Secret fields marked with an asterisk (*) are optional and can be omitted from the Secret if they are not required.
 
 4. Create the powermax-reverseproxy-secret Secret.
     ```bash
@@ -426,7 +439,8 @@ CRDs should be configured during replication prepare stage with repctl as descri
     ```
 5. Download the default values.yaml file.
     ```bash
-    cd dell-csi-helm-installer && wget -O my-powermax-settings.yaml https://github.com/dell/helm-charts/raw/csi-powermax-2.14.0/charts/csi-powermax/values.yaml
+    cd dell-csi-helm-installer
+    wget -O my-powermax-settings.yaml https://github.com/dell/helm-charts/raw/csi-powermax-2.14.0/charts/csi-powermax/values.yaml
     ```
 6. Edit the newly created file and provide values for the following parameters.
     ```bash
@@ -446,12 +460,12 @@ CRDs should be configured during replication prepare stage with repctl as descri
 | &nbsp;&nbsp;&nbsp;&nbsp; ~~endpoint~~ | **Deprecated**. Refer to [installation step 3](#installation) to configure management servers. <br> This refers to the URL of the Unisphere server. If authorization is enabled, endpoint should be the HTTPS localhost endpoint that the authorization sidecar will listen on                                                                                                                                                                                                      | Yes | https\://primary-1.unisphe.re:8443 |
 | &nbsp;&nbsp;&nbsp;&nbsp; ~~credentialsSecret~~ | **Deprecated**. Refer to [installation step 3](#installation) to configure management servers. <br> This refers to the user credentials for _endpoint_                                                                                                                                                                                                                                                                                                                              | Yes| primary-unisphere-secret-1|
 | &nbsp;&nbsp;&nbsp;&nbsp; ~~skipCertificateValidation~~ | **Deprecated**. Refer to [installation step 3](#installation) to configure management servers. <br> This parameter should be set to false if you want to do client-side TLS verification of Unisphere for PowerMax SSL certificates.                                                                                                                                                                                                                                                | No | "True"       |
-| &nbsp;&nbsp;&nbsp;&nbsp; certSecret | The name of the secret in the same namespace containing the CA certificates of the Unisphere server. Should match the name of csireverseproxy.tlsSecret value. | Yes, if skipCertificateValidation is set to false | Empty|
-| &nbsp;&nbsp;&nbsp;&nbsp; limits | This refers to various limits for Reverse Proxy                                                                                                                                                                                                                                                                                                                                 | No | - |
-| &nbsp;&nbsp;&nbsp;&nbsp; maxActiveRead | This refers to the maximum concurrent READ request handled by the reverse proxy.                                                                                                                                                                                                                                                                                                | No | 5 |
-| &nbsp;&nbsp;&nbsp;&nbsp; maxActiveWrite | This refers to the maximum concurrent WRITE request handled by the reverse proxy.                                                                                                                                                                                                                                                                                               | No | 4 |
-| &nbsp;&nbsp;&nbsp;&nbsp; maxOutStandingRead | This refers to maximum queued READ request when reverse proxy receives more than _maxActiveRead_ requests.                                                                                                                                                                                                                                                                      | No | 50 |
-| &nbsp;&nbsp;&nbsp;&nbsp; maxOutStandingWrite| This refers to maximum queued WRITE request when reverse proxy receives more than _maxActiveWrite_ requests.                                                                                                                                                                                                                                                                    | No | 50 |
+| &nbsp;&nbsp;&nbsp;&nbsp; ~~certSecret~~ | **Deprecated**. Refer to [installation step 3](#installation) to specify the `certSecret`.<br>The name of the secret in the same namespace containing the CA certificates of the Unisphere server. | Yes, if skipCertificateValidation is set to false | Empty|
+| &nbsp;&nbsp;&nbsp;&nbsp; ~~limits~~ | **Deprecated**. Refer to [installation step 3](#installation) to configure reverse proxy `limits`.<br>This refers to various limits for Reverse Proxy                                                                                                                                                                                                                                                                                                                                 | No | - |
+| &nbsp;&nbsp;&nbsp;&nbsp; ~~maxActiveRead~~ | **Deprecated**. Refer to [installation step 3](#installation) to configure read limits. <br>This refers to the maximum concurrent READ request handled by the reverse proxy.                                                                                                                                                                                                                                                                                                | No | 5 |
+| &nbsp;&nbsp;&nbsp;&nbsp; ~~maxActiveWrite~~| **Deprecated**. Refer to [installation step 3](#installation) to configure write limits. <br>This refers to the maximum concurrent WRITE request handled by the reverse proxy.                                                                                                                                                                                                                                                                                               | No | 4 |
+| &nbsp;&nbsp;&nbsp;&nbsp; ~~maxOutStandingRead~~ | **Deprecated**. Refer to [installation step 3](#installation) to configure read limits. <br>This refers to maximum queued READ request when reverse proxy receives more than _maxActiveRead_ requests.                                                                                                                                                                                                                                                                      | No | 50 |
+| &nbsp;&nbsp;&nbsp;&nbsp; ~~maxOutStandingWrite~~ | **Deprecated**. Refer to [installation step 3](#installation) to configure write limits. <br>This refers to maximum queued WRITE request when reverse proxy receives more than _maxActiveWrite_ requests.                                                                                                                                                                                                                                                                    | No | 50 |
 | &nbsp;&nbsp; logLevel | CSI driver log level. Allowed values: "error", "warn"/"warning", "info", "debug".                                                                                                                                                                                                                                                                                               | Yes | "debug" |
 | &nbsp;&nbsp; logFormat | CSI driver log format. Allowed values: "TEXT" or "JSON".                                                                                                                                                                                                                                                                                                                        | Yes | "TEXT" |
 | imagePullPolicy | The default pull policy is IfNotPresent which causes the Kubelet to skip pulling an image if it already exists.                                                                                                                                                                                                                                                                 | Yes | IfNotPresent |
