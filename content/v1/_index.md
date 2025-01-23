@@ -1,12 +1,17 @@
 
 ---
-title: "Documentation"
-linkTitle: "Documentation"
+title: "Container Storage Modules"
+linkTitle: "Container Storage Modules"
+weight: 20
+no_list: true
 ---
 
-{{% pageinfo color="primary" %}}
+{{% pageinfo color="dark" %}}
+<span><span/>{{< message text="6" >}}
+{{% /pageinfo %}}
 
-1. <span><span/>{{< message text="6" >}}
+{{% pageinfo color="primary" %}}
+1. <span><span/>{{< message text="8" >}}
 
 2. <span><span/>{{< message text="7" >}}
 

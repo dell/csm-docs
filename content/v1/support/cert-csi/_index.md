@@ -26,6 +26,7 @@ There are three methods of installing `cert-csi`.
 > The exectuable from the GitHub Release only supports Linux. For non-Linux users, you must build the `cert-csi` executable [locally](#building-locally).
 
 ### Download Release (Linux)
+
 > NOTE: Please ensure you delete any previously downloaded Cert-CSI binaries, as each release uses the same name (`cert-csi-linux-amd64`). After installing the latest version, run the `cert-csi -v` command to verify the installed version.
 
 1. Download `cert-csi` from [here](https://github.com/dell/cert-csi/releases/latest/download/cert-csi-linux-amd64)
@@ -66,7 +67,9 @@ mv ./cert-csi-linux-amd64 ~/.local/bin/cert-csi
    {{< /tabpane >}}
 
 ### Building Locally
+
 #### Prerequisites
+
 - [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
 - [Go](https://go.dev/doc/install) (If buidling the executable)
 - Podman or Docker (If building the container image)

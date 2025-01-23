@@ -5,6 +5,10 @@ weight: 7
 description: >
   Enabling Replication feature for CSI PowerStore
 ---
+{{% pageinfo color="primary" %}}
+{{< message text="1" >}}
+{{% /pageinfo %}}
+
 ## Enabling Replication In CSI PowerStore
 
 Container Storage Modules (CSM) Replication sidecar is a helper container that is installed alongside a CSI driver to facilitate replication functionality. Such CSI drivers must implement `dell-csi-extensions` calls.
@@ -91,10 +95,11 @@ kind: StorageClass
 metadata:
   name: "powerstore-replication"
 provisioner: "csi-powerstore.dellemc.com"
-reclaimPolicy: Retain
+reclaimPolicy: Delete
 volumeBindingMode: Immediate
 parameters:
   replication.storage.dell.com/isReplicationEnabled: "true"
+  replication.storage.dell.com/mode: "ASYNC"
   replication.storage.dell.com/remoteStorageClassName: "powerstore-replication"
   replication.storage.dell.com/remoteClusterID: "tgt-cluster-id"
   replication.storage.dell.com/remoteSystem: "RT-0000"
@@ -107,13 +112,17 @@ parameters:
 Let's go through each parameter and what it means:
 * `replication.storage.dell.com/isReplicationEnabled` if set to `true` will mark this storage class as replication enabled,
   just leave it as `true`.
+* `replication.storage.dell.com/mode` points to the replication mode you want to use. It should be one out of "ASYNC", "SYNC" and "METRO". The default value is 'ASYNC'. If mode is set to 'METRO', the driver does not need `remoteStorageClassName` and `remoteClusterID` parameters as it supports METRO with single cluster configuration.
+
+> _**NOTE**_: Metro mode doesn't involve the replication sidecar or the common replication controller, nor does it cause the creation of any replication related custom resources. It just needs the `csi-powerstore` driver.
+
 * `replication.storage.dell.com/remoteStorageClassName` points to the name of the remote storage class. If you are using replication with the multi-cluster configuration you can make it the same as the current storage class name.
 * `replication.storage.dell.com/remoteClusterID` represents ID of a remote Kubernetes cluster. It is the same ID you put in the replication controller config map.
 * `replication.storage.dell.com/remoteSystem` is the name of the remote system as seen from the current PowerStore instance.
 * `replication.storage.dell.com/rpo` is an acceptable amount of data, which is measured in units of time,
-  that may be lost due to a failure.
-* `replication.storage.dell.com/ignoreNamespaces`, if set to `true` PowerStore driver, it will ignore in what namespace volumes are created and put every volume created using this storage class into a single volume group.
-* `replication.storage.dell.com/volumeGroupPrefix` represents what string would be appended to the volume group name to differentiate them. It is important to not use the same prefix for different kubernetes clusters, otherwise any action on a replication group in one kubernetes cluster will impact the other.
+  that may be lost due to a failure. For 'SYNC' mode, RPO will be set to zero by default and not required to be specified. This parameter is not applicable for Metro mode.
+* `replication.storage.dell.com/ignoreNamespaces`, if set to `true` the PowerStore driver will ignore the namespace in which the persistent volume claim resides and put every volume created using this storage class into a single volume group. This parameter is not applicable for Metro mode.
+* `replication.storage.dell.com/volumeGroupPrefix` represents what string would be appended to the volume group name to differentiate them. It is important to not use the same prefix for different kubernetes clusters, otherwise any action on a replication group in one kubernetes cluster will impact the other. This parameter is not applicable for Metro mode.
   
 > _**NOTE**_: To configure the VolumeGroupPrefix, the name format of \'\<volumeGroupPrefix\>-\<namespace\>-\<Cluster Name\>-\<rpo\>' cannot be more than 63 characters.
 
@@ -127,6 +136,7 @@ storage arrays:
 * Cluster `cluster-2` connected to array `RT-0002`
 * Storage array `RT-0001` has a unique ID of `PS000000001`
 * Storage array `RT-0002` has a unique ID of `PS000000002`
+* Replication mode is `ASYNC`
 
 And this is what our pair of storage classes would look like:
 
@@ -137,10 +147,11 @@ kind: StorageClass
 metadata:
   name: "powerstore-replication"
 provisioner: "csi-powerstore.dellemc.com"
-reclaimPolicy: Retain
+reclaimPolicy: Delete
 volumeBindingMode: Immediate
 parameters:
   replication.storage.dell.com/isReplicationEnabled: "true"
+  replication.storage.dell.com/mode: "ASYNC"
   replication.storage.dell.com/remoteStorageClassName: "powerstore-replication"
   replication.storage.dell.com/remoteClusterID: "cluster-2"
   replication.storage.dell.com/remoteSystem: "RT-0002"
@@ -157,10 +168,11 @@ kind: StorageClass
 metadata:
   name: "powerstore-replication"
 provisioner: "csi-powerstore.dellemc.com"
-reclaimPolicy: Retain
+reclaimPolicy: Delete
 volumeBindingMode: Immediate
 parameters:
   replication.storage.dell.com/isReplicationEnabled: "true"
+  replication.storage.dell.com/mode: "ASYNC"
   replication.storage.dell.com/remoteStorageClassName: "powerstore-replication"
   replication.storage.dell.com/remoteClusterID: "cluster-1"
   replication.storage.dell.com/remoteSystem: "RT-0001"
@@ -188,7 +200,7 @@ sourceClusterID: "cluster-1"
 targetClusterID: "cluster-2"
 name: "powerstore-replication"
 driver: "powerstore"
-reclaimPolicy: "Retain"
+reclaimPolicy: "Delete"
 replicationPrefix: "replication.storage.dell.com"
 parameters:
   arrayID:
@@ -197,6 +209,7 @@ parameters:
   remoteSystem:
     source: "RT-0002"
     target: "RT-0001"
+  mode : "ASYNC"
   rpo: "Five_Minutes"
   ignoreNamespaces: "false"
   volumeGroupPrefix: "csi"
@@ -218,6 +231,12 @@ created storage classes.
 On your source cluster, create a PersistentVolumeClaim using one of the replication enabled Storage Classes.
 The CSI PowerStore driver will create a volume on the array, add it to a VolumeGroup and configure replication
 using the parameters provided in the replication enabled Storage Class.
+
+>**NOTE**:  
+    To add or remove volumes in an existing SYNC Replication Group in PowerStore, first pause the replication group, add or delete the volume, and then resume the replication group.<br>
+    Use the following commands:<br>
+    > - Pause the replication group:  `repctl --rg <rg-id> exec -a suspend` 
+    > - Resume the replication group:   `repctl --rg <rg-id> exec -a resume`  
 
 ### Supported Replication Actions
 The CSI PowerStore driver supports the following list of replication actions:

@@ -5,10 +5,9 @@ weight: 1
 Description: Code features for PowerMax Driver
 ---
 
-## Multi Unisphere Support 
+## Multi Unisphere Support
 
-Starting with v1.7, the CSI PowerMax driver can communicate with multiple Unisphere for PowerMax servers to manage multiple PowerMax arrays.
-In order to use this feature, you must install CSI PowerMax ReverseProxy in `StandAlone` mode with the driver. For more details on how
+Starting with v1.7, the CSI PowerMax driver can communicate with multiple Unisphere for PowerMax servers to manage multiple PowerMax arrays.For more details on how
 to configure the driver and ReverseProxy, see the relevant section [here](../../../deployment/helm/drivers/installation/powermax#sample-values-file)
 
 ## Volume Snapshot Feature
@@ -16,6 +15,7 @@ to configure the driver and ReverseProxy, see the relevant section [here](../../
 The CSI PowerMax driver version 1.7 and later supports v1 snapshots.
 
 In order to use Volume Snapshots, ensure the following components have been deployed to your cluster:
+
 - Kubernetes Volume Snapshot CRDs
 - Volume Snapshot Controller
 - Volume Snapshot Class
@@ -27,13 +27,15 @@ snapshot:
   enabled: true
 ```
 
->Note: From v1.7, the CSI PowerMax driver installation process will no longer create VolumeSnapshotClass. 
+>Note: From v1.7, the CSI PowerMax driver installation process will no longer create VolumeSnapshotClass.
 > If you want to create VolumeSnapshots, then create a VolumeSnapshotClass using the sample provided in the _csi-powermax/samples/volumesnapshotclass_ folder
 
->Note: Snapshots for File in PowerMax is currently not supported. 
+>Note: Snapshots for File in PowerMax is currently not supported.
 
 ### Creating Volume Snapshots
+
 The following is a sample manifest for creating a Volume Snapshot using the **v1** snapshot APIs:
+
 ```yaml
 apiVersion: snapshot.storage.k8s.io/v1
 kind: VolumeSnapshot
@@ -49,6 +51,7 @@ spec:
 After the VolumeSnapshot has been successfully created by the CSI PowerMax driver, a VolumeSnapshotContent object is automatically created. When the status of the VolumeSnapshot object has the _readyToUse_ field set to _true_, it is available for use.
 
 The following is the relevant section of VolumeSnapshot object status:
+
 ```yaml
 status:
   boundVolumeSnapshotContentName: snapcontent-5a8334d2-eb40-4917-83a2-98f238c4bda
@@ -59,6 +62,7 @@ status:
 ### Creating PVCs with VolumeSnapshots as Source
 
 The following is a sample manifest for creating a PVC with a VolumeSnapshot as a source:
+
 ```yaml
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -81,6 +85,7 @@ spec:
 ### Creating PVCs with PVCs as source
 
 This is a sample manifest for creating a PVC with another PVC as a source:
+
 ```yaml
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -103,6 +108,7 @@ spec:
 
 Starting from version 1.3.0, the unidirectional Challenge Handshake Authentication Protocol (CHAP) for iSCSI has been supported.
 To enable CHAP authentication:
+
 1. Create secret `powermax-creds` with the key `chapsecret` set to the iSCSI CHAP secret. If the secret exists, delete and re-create the secret with this newly added key.
 2. Set the parameter `enableCHAP` in `my-powermax-settings.yaml` to true.
 
@@ -111,7 +117,6 @@ The driver uses the provided chapsecret to configure the iSCSI node database on 
 When the driver is installed and all the node plug-ins have initialized successfully, the storage administrator must enable CHAP authentication using the following Solutions Enabler (SYMCLI) commands:
 
 ```bash
-
 symaccess -sid <symid> -iscsi <host iqn> set chap -cred <host IQN> -secret <CHAP secret>
 ```
 
@@ -130,6 +135,7 @@ When challenged, the host initiator transmits a CHAP credential and CHAP secret 
 Starting from version 1.3.0 of the driver, a custom name can be assigned to the driver at the time of installation. This enables installation of the CSI driver in a different namespace and installation of multiple CSI drivers for Dell PowerMax in the same Kubernetes/OpenShift cluster.
 
 To use this feature, set the following values under `customDriverName` in `my-powermax-settings.yaml`.
+
 - Value: Set this to the custom name of the driver.
 - Enabled: Set this to true in case you want to enable this feature.
 The driver helm chart installation uses the values above to:
@@ -146,12 +152,14 @@ For example, if the driver name is set to _driver_ and it is installed in the na
 ### Install multiple drivers
 
 To install multiple CSI Drivers for Dell PowerMax in a single Kubernetes cluster, you can take advantage of the custom driver name feature. There are a few important restrictions that should be strictly adhered to:
+
 - Only one driver can be installed in a single namespace
 - Different drivers should not connect to a single Unisphere server
 - Different drivers should not be used to manage a single PowerMax array
 - Storage class and snapshot class names must be unique across installations
 
 To install multiple CSI drivers, follow these steps:
+
 1. Create (or use) a new namespace.
 2. Ensure that all the pre-requisites are met:
     - `powermax-creds` secret is created in this namespace
@@ -171,7 +179,6 @@ resizer:
 ```
 
 To use this feature, the storage class that is used to create the PVC must have the attribute `allowVolumeExpansion` set to `true`.
-
 
 This is a sample manifest for a storage class that allows for Volume Expansion.
 
@@ -209,6 +216,7 @@ spec:
       storage: 10Gi #Updated size from 5Gi to 10Gi
   storageClassName: powermax-expand-sc
 ```
+
 *NOTE*: The Kubernetes Volume Expansion feature can only be used to increase the size of the volume, it cannot be used to shrink a volume.
 
 ## Raw block support
@@ -265,6 +273,7 @@ Optionally, you can specify an alternate (backup) Unisphere server and if the pr
 ### Installation
 
 The CSI PowerMax Reverse Proxy can be installed in two ways:
+
 1. It can be installed as a Kubernetes deployment in the same namespace as the driver.
 2. It can be installed as a sidecar to the driver's controller Pod.
 
@@ -280,8 +289,9 @@ Starting from v2.7.0 , the secrets for proxy will be created automatically using
 For this , we need to install cert-manager using below command which manages the certs and secrets  .
 
 ```bash
-kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.11.0/cert-manager.yaml
+kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.16.1/cert-manager.yaml
 ```
+
 Here is an example showing how to generate a private key and use that to sign an SSL certificate using the openssl tool:
 
 ```bash
@@ -315,13 +325,16 @@ Starting with version 1.5, the CSI PowerMax driver supports running multiple rep
 Leader election is only applicable for all sidecar containers and driver container will be running in all controller pods . In case of a failure, one of the standby Pods becomes active and takes the position of leader. This is achieved by using native leader election mechanisms utilizing `kubernetes leases`. Additionally by leveraging `pod anti-affinity`, no two-controller Pods are ever scheduled on the same node.
 
 To increase or decrease the number of controller Pods, edit the following value in `values.yaml` file:
+
 ```yaml
 controllerCount: 2
-```  
+```
+
 > *NOTE:* The default value for controllerCount is 2. We recommend not changing this unless it is really necessary.
 > Also, if the controller count is greater than the number of available nodes (where the Pods can be scheduled), some controller Pods will remain in the Pending state  
-   
-If you are using the Dell CSM Operator, the value to adjust is: 
+
+If you are using the Dell CSM Operator, the value to adjust is:
+
 ```yaml
 replicas: 2  
 ```
@@ -330,19 +343,19 @@ For more details about configuring Controller HA using the Dell CSM Operator, se
 
 ## NodeSelectors and Tolerations
 
-Starting with version 1.5, the CSI PowerMax driver helm installer allows you to specify a set of `nodeSelectors` and `tolerations` which can be applied on the driver controller `Deployment` and driver node `Daemonset`. There are two new sections in the `values` file - `controller` and `node` - where you can specify these values separately for the controller and node Pods. 
+Starting with version 1.5, the CSI PowerMax driver helm installer allows you to specify a set of `nodeSelectors` and `tolerations` which can be applied on the driver controller `Deployment` and driver node `Daemonset`. There are two new sections in the `values` file - `controller` and `node` - where you can specify these values separately for the controller and node Pods.
 
 ### controller
 
 If you want to apply `nodeSelectors` and `tolerations` for the controller Pods, edit the  `controller` section in the `values` file.  
 
-Here are some examples:   
+Here are some examples:
 * To schedule controller Pods to worker nodes only (Default):
 ```yaml
 controller:
   nodeSelector:
   tolerations:
-```  
+```
 * Set the following values for controller Pods to tolerate the taint `NoSchedule` on master nodes:
 ```yaml
 controller:
@@ -351,8 +364,10 @@ controller:
    - key: "node-role.kubernetes.io/master"
      operator: "Exists"
      effect: "NoSchedule"
-```  
+```
+
 * Set the following values for controller Pods to be scheduled only on nodes labelled `master` (*node-role.kubernetes.io/master*):
+
 ```yaml
 controller:
   nodeSelector:
@@ -362,7 +377,9 @@ controller:
      operator: "Exists"
      effect: "NoSchedule"
 ```
+
 ### node
+
 If you want to apply `nodeSelectors` and `tolerations` for the node Pods, edit the  `node` section in the `values` file.  
 The `values` file already includes a set of default `tolerations` and you can add and remove tolerations to this list
 
@@ -394,6 +411,7 @@ node:
 Starting from version 1.5, the CSI PowerMax driver supports topology-aware volume provisioning which helps the Kubernetes scheduler place PVCs on worker nodes that have access to the backend storage. When used with `nodeSelectors` which can be specified for the driver node Pods, it provides an effective way to provision applications on nodes that have access to the PowerMax array.
 
 After a successful installation of the driver, if a node Pod is running successfully on a worker node, the following topology keys are created for a specific PowerMax array:
+
 * `csi-powermax.dellemc.com/\<array-id\>`
 * If the worker node has Fibre Channel connectivity to the PowerMax array -
 `csi-powermax.dellemc.com/\<array-id\>.fc`
@@ -407,11 +425,13 @@ The values for all these keys are always set to the name of the provisioner whic
 Starting from version 2.3.0, topology keys have been enhanced to filter out arrays, associated transport protocol available to each node and create topology keys based on any such user input.
 
 ### Topology Usage
-To use the Topology feature, the storage classes must be modified as follows:  
+
+To use the Topology feature, the storage classes must be modified as follows:
 * _volumeBindingMode_ must be set to `WaitForFirstConsumer`
 * _allowedTopologies_ should be set to one or more topology keys described in the previous section
 
 For example, a PVC created using the following storage class will **always** be scheduled on nodes which have FC connectivity to the PowerMax array `000000000001`
+
 ```yaml
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
@@ -438,12 +458,14 @@ allowedTopologies:
 In the above example, if you remove the entry for the key `csi-powermax.dellemc.com/000000000001.fc`, then the PVCs created using this storage class will be scheduled
 on any worker node with access to the PowerMax array `000000000001` irrespective of the transport protocol
 
-> A set of sample storage class definitions to enable topology-aware volume provisioning has been provided in the `csi-powermax/samples/storageclass` folder 
+> A set of sample storage class definitions to enable topology-aware volume provisioning has been provided in the `csi-powermax/samples/storageclass` folder
 
 For additional information on how to use _Topology aware Volume Provisioning_, see the [Kubernetes Topology documentation](https://kubernetes-csi.github.io/docs/topology.html).
 
 ### Custom Topology keys
+
 To use the enhanced topology keys:
+
 1. To use this feature, set node.topologyControl.enabled to true.
 2. Edit the config file [topologyConfig.yaml](https://github.com/dell/csi-powermax/blob/main/samples/configmap/topologyConfig.yaml) in `csi-powermax/samples/configmap` folder and provide values for the following parameters.
 
@@ -458,7 +480,7 @@ To use the enhanced topology keys:
 
 <br>
 
-**Sample config file:** 
+**Sample config file:**
 
 ```yaml
 # allowedConnections contains a list of (node, array and protocol) info for user allowed configuration
@@ -513,22 +535,22 @@ For example, let there be 3 nodes and 2 arrays, so based on the sample config fi
 New Topology keys
 N1: csi-driver/000000000001.FC:csi-driver, csi-driver/000000000002.FC:csi-driver
 <br>
-N2 and N3: None 
-
+N2 and N3: None
 
 >Note: Name of the configmap should always be `node-topology-config`.
 
-
 ## Dynamic Logging Configuration
 
-This feature is introduced in CSI Driver for PowerMax version 2.0.0. 
+This feature is introduced in CSI Driver for PowerMax version 2.0.0.
 
 ### Helm based installation
-As part of driver installation, a ConfigMap with the name `powermax-config-params` is created, which contains an attribute `CSI_LOG_LEVEL` which specifies the current log level of CSI driver. 
+
+As part of driver installation, a ConfigMap with the name `powermax-config-params` is created, which contains an attribute `CSI_LOG_LEVEL` which specifies the current log level of CSI driver.
 
 Users can set the default log level by specifying log level to `logLevel` attribute in my-powermax-settings.yaml during driver installation.
 
-To change the log level dynamically to a different value, the user can edit the same my-powermax-settings.yaml, and run the following command
+To change the log level dynamically to a different value, the user can edit the same my-powermax-settings.yaml, and run the following command:
+
 ```bash
 cd dell-csi-helm-installer
 ./csi-install.sh --namespace powermax --values ./my-powermax-settings.yaml --upgrade
@@ -536,11 +558,12 @@ cd dell-csi-helm-installer
 
 Note: my-powermax-settings.yaml is a values.yaml file which the user has used for driver installation.  
 
-
 ### Operator based installation
+
 As part of driver installation, a ConfigMap with the name `powermax-config-params` is created using the manifest located in the sample file. This ConfigMap contains an attribute `CSI_LOG_LEVEL` which specifies the current log level of the CSI driver. To set the default/initial log level the user can set this field during driver installation.
 
 To update the log level dynamically, the user has to edit the ConfigMap `powermax-config-params` and update `CSI_LOG_LEVEL` to the desired log level.
+
 ```bash
 kubectl edit configmap -n powermax powermax-config-params
 ```  
@@ -549,11 +572,12 @@ kubectl edit configmap -n powermax powermax-config-params
 
 CSI Driver for Dell PowerMax 2.2.0 and above supports volume health monitoring. Alpha feature gate `CSIVolumeHealth` needs to be enabled for the node side monitoring to take effect. For more information, please refer to the [Kubernetes GitHub repository](https://github.com/kubernetes-csi/external-health-monitor/blob/master/README.md). To use this feature, set controller.healthMonitor.enabled and node.healthMonitor.enabled to true. To change the monitor interval, set controller.healthMonitor.interval parameter.
 
-## Single Pod Access Mode for PersistentVolumes- ReadWriteOncePod 
+## Single Pod Access Mode for PersistentVolumes- ReadWriteOncePod
 
 Use `ReadWriteOncePod(RWOP)` access mode if you want to ensure that only one pod across the whole cluster can read that PVC or write to it. This is only supported for CSI Driver for PowerMax 2.2.0+ and Kubernetes version 1.22+.
 
 ### Creating a PersistentVolumeClaim
+
 ```yaml
 kind: PersistentVolumeClaim
 apiVersion: v1
@@ -580,6 +604,7 @@ This feature supports volume provisioning on Kubernetes clusters running on vSph
 It will be supported only on new/freshly installed clusters where the cluster is exclusively deployed in a virtualized vSphere environment. Having hybrid topologies like iSCSI, NVMeTCP or FC (in pass-through) is not supported.  
 
 To use this feature
+
 - Set `vSphere.enabled` to true.
 - Create a secret which contains vCenter privileges. Follow the steps [here](../../../deployment/helm/drivers/installation/powermax#auto-rdm-for-vsphere-over-fc-requirements) to create it. Update `vCenterCredSecret` with the secret name created.
   
@@ -622,6 +647,7 @@ Without storage capacity tracking, pods get scheduled on a node satisfying the t
 Storage capacity can be tracked by setting the attribute `storageCapacity.enabled` to true in values.yaml (set to true by default) during driver installation. To configure how often driver checks for changed capacity, set the `storageCapacity.pollInterval` attribute (set to 5m by default). In case of driver installed via operator, this interval can be configured in the sample file provided [here.](https://github.com/dell/csm-operator/blob/main/samples) by editing the `--capacity-poll-interval` argument present in the provisioner sidecar.
 
 ## Metro support
+
 The CSI PowerMax driver supports the provisioning of Metro volumes. The process and details of how to provision and use Metro volumes can be found [here](../../../replication/high-availability).
 
 Please note that the Metro feature does not require the deployment of the replicator sidecar or the replication controller.
@@ -633,20 +659,21 @@ The CSI Driver for Dell PowerMax allows users to specify the maximum number of P
 The user can set the volume limit for a node by creating a node label `max-powermax-volumes-per-node` and specifying the volume limit for that node.
 <br/> `kubectl label node <node_name> max-powermax-volumes-per-node=<volume_limit>`
 
-The user can also set the volume limit for all the nodes in the cluster by specifying the same to `maxPowerMaxVolumesPerNode` attribute in values.yaml. In case of driver installed via operator, this attribute can be modified in the sample file provided [here](https://github.com/dell/csm-operator/blob/main/samples) by editing the `X_CSI_MAX_VOLUMES_PER_NODE` parameter. 
+The user can also set the volume limit for all the nodes in the cluster by specifying the same to `maxPowerMaxVolumesPerNode` attribute in values.yaml. In case of driver installed via operator, this attribute can be modified in the sample file provided [here](https://github.com/dell/csm-operator/blob/main/samples) by editing the `X_CSI_MAX_VOLUMES_PER_NODE` parameter.
 
 This feature is also supported for limiting the volume provisioning on Kubernetes clusters running on vSphere (VMware hypervisor) via RDM mechanism. User can set `vSphere.enabled` to true and also set volume limits to positive values less than or equal 60 via labels or in Values.yaml file.
 
-
 >**NOTE:** <br>The default value of `maxPowerMaxVolumesPerNode` is 0. <br>If `maxPowerMaxVolumesPerNode` is set to zero, then CO shall decide how many volumes of this type can be published by the controller to the node.<br><br>The volume limit specified to `maxPowerMaxVolumesPerNode` attribute is applicable to all the nodes in the cluster for which node label `max-powermax-volumes-per-node` is not set.
-<br>Supported maximum number of RDM Volumes per VM is 60 as per the limitations. <br>If the value is set both by node label and values.yaml file then node label value will get the precedence and user has to remove the node label in order to reflect the values.yaml value. 
+<br>Supported maximum number of RDM Volumes per VM is 60 as per the limitations. <br>If the value is set both by node label and values.yaml file then node label value will get the precedence and user has to remove the node label in order to reflect the values.yaml value.
 
 ## NVMe/TCP Support
 
 The CSI Driver for Dell PowerMax supports NVMeTCP from v2.11.0. To enable NVMe/TCP provisioning, blockProtocol in settings file should be specified as NVMETCP.
 
-**Limitations**<br>
+**Limitations**
+
 These are the CSM modules not supported with NVMeTCP protocol:
+
 - CSM Authorization
 - CSM Observability
 - CSM Application Mobility

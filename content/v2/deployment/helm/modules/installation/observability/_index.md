@@ -115,7 +115,9 @@ The Grafana dashboards require Grafana to be deployed in the same Kubernetes clu
 
 | Supported Version | Helm Chart                                                |
 | ----------------- | --------------------------------------------------------- |
-| 8.5.0      | [Grafana Helm chart](https://github.com/grafana/helm-charts/tree/main/charts/grafana) |
+| 10.x      | [Grafana Helm chart](https://github.com/grafana/helm-charts/tree/main/charts/grafana) |
+
+**Note:** Starting from Grafana version 10.x, deprecation warnings related to the Angular plugins will be displayed in the Grafana user interface. This does not affect the functionality of the dashboards. Currently, Grafana version 11.x is not supported. 
 
 Grafana must be configured with the following data sources/plugins:
 
@@ -187,7 +189,7 @@ Below are the steps to deploy a new Grafana instance into your Kubernetes cluste
     # grafana-values.yaml 
     image:
       repository: grafana/grafana
-      tag: 8.5.0
+      tag: 10.4.3
       sha: ""
       pullPolicy: IfNotPresent
     service:
