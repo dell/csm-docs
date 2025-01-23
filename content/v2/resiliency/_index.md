@@ -41,8 +41,8 @@ CSM for Resiliency provides the following capabilities:
 {{<table "table table-striped table-bordered table-sm">}}
 | COP/OS            | Supported Versions |
 | ----------------- | :----------------: |
-| Kubernetes        | 1.28, 1.29, 1.30   |
-| Red Hat OpenShift |     4.15, 4.16   |
+| Kubernetes        | 1.29, 1.30, 1.31   |
+| Red Hat OpenShift |     4.16, 4.17   |
 {{</table>}}
 
 ## Supported Storage Platforms
@@ -50,7 +50,7 @@ CSM for Resiliency provides the following capabilities:
 {{<table "table table-striped table-bordered table-sm">}}
 |               | PowerFlex    | Unity XT                          | PowerScale                              | PowerStore                    | PowerMax |
 | ------------- | :----------: | :-------------------------------: | :-------------------------------------: | :---------------------------: | :---------------------------: |
-| Storage Array | 3.6.x, 4.5.x, 4.6.x | 5.2.x, 5.3.0, 5.4.x | OneFS 9.4, 9.5.0.x (x >= 5), 9.7 | 3.0, 3.2, 3.5, 3.6 | 2500/8500 PowerMax OS 10 (6079), Unisphere 10.x |
+| Storage Array | 3.6.x, 4.5.x, 4.6.x | 5.2.x, 5.3.x, 5.4.x | OneFS 9.4, 9.5.0.x (x >= 5), 9.7, 9.8, 9.9 | 3.5, 3.6, 4.0 | 2500/8500 PowerMax OS 10 (6079), Unisphere 10.x |
 {{</table>}}
 
 ## Supported CSI Drivers
@@ -188,6 +188,9 @@ Similarly, the label selector for csi-powerscale, csi-unity, csi-powerstore and 
  2. CSM for Resiliency does not directly monitor application health. However, if standard Kubernetes health checks are configured, that may help reduce pod recovery time in the event of node failure, as CSM for Resiliency should receive an event that the application is Not Ready. Note that a Not Ready pod is not sufficient to trigger CSM for Resiliency action unless there is also some condition indicating a Node failure or problem, such as the Node is tainted, or the array has lost connectivity to the node.
 
  3. As noted previously in the Limitations and Exclusions section, CSM for Resiliency has not yet been verified to work with ReadWriteMany or ReadOnlyMany volumes. Also, it has not been verified to work with pod controllers other than StatefulSet.
+
+ ### Storage Array Upgrades
+To avoid application pods getting stuck in a Pending state, CSM for Resiliency should be disabled for storage array upgrades; even if the storage array upgrade is advertised as non-distruptive. If the container orchestrator platform nodes lose connectivity with the array, which is more likely during an upgrade, then Resiliency will delete the application pods on the affected nodes and attempt to move them to a healthy node. If all of the nodes are affected, then the application pods will be stuck in a Pending state.
 
 ## Recovering From Failures
 

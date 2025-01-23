@@ -5,7 +5,9 @@ weight: 3
 description: >
   Dell Container Storage Modules (CSM) for Observability Upgrade
 ---
-
+{{% pageinfo color="primary" %}}
+{{< message text="2" >}}
+{{% /pageinfo %}}
 This section outlines the upgrade steps for Container Storage Modules (CSM) for Observability. CSM for Observability upgrade can be achieved in one of two ways:
 
 - Helm Chart Upgrade
@@ -26,24 +28,25 @@ Check if the latest Helm chart version is available:
 ```bash
 helm search repo dell
 ```
-```
+
+```bash
 NAME                            CHART VERSION   APP VERSION     DESCRIPTION
-dell/karavi-observability       1.9.0           1.9.0           CSM for Observability is part of the [Container...
+dell/karavi-observability       1.10.0          1.10.0          CSM for Observability is part of the [Container...
 ```
 
 >Note: If using cert-manager CustomResourceDefinitions older than v1.5.3, delete the old CRDs and install v1.5.3 of the CRDs prior to upgrade. See [Prerequisites](../../installation/observability/deployment#prerequisites) for location of CRDs.
 
 Upgrade to the latest CSM for Observability release:
 
-
 Upgrade Helm and Online Installer deployments:
-```bash
 
+```bash
 helm upgrade --version $latest_chart_version --values values.yaml karavi-observability dell/karavi-observability -n $namespace
 ```
-Upgrade Offline Installer deployment:
-```bash
 
+Upgrade Offline Installer deployment:
+
+```bash
 helm upgrade --version $latest_chart_version karavi-observability dell/karavi-observability -n $namespace
 ```
 
@@ -54,17 +57,20 @@ The [configuration](../../installation/observability/deployment#configuration) s
 CSM for Observability online installer upgrade can be used if the initial deployment was performed using the [Online Installer](../../installation/observability/installer) or [Helm](../../installation/observability/deployment).
 
 1. Change to the installer directory:
+
     ```bash
     cd karavi-observability/installer
     ```
+
 2. Update `values.yaml` file as needed. Configuration options are outlined in the [Helm chart deployment section](../../installation/observability/deployment#configuration).
 
 3. Execute the `./karavi-observability-install.sh` script:
-    ```bash
 
+    ```bash
     ./karavi-observability-install.sh upgrade --namespace $namespace --values myvalues.yaml --version $latest_chart_version
     ```
-    ```
+
+    ```bash
     ---------------------------------------------------------------------------------
     >  Upgrading Karavi Observability in namespace karavi on 1.27
     ---------------------------------------------------------------------------------
@@ -101,14 +107,17 @@ These instructions can be followed when a Helm chart was installed and will be u
 
 3. Perform Helm upgrade
    1. Change directory to `helm` which contains the updated Helm chart directory:
+
       ```bash
       cd helm
       ```
-   2. Install necessary cert-manager CustomResourceDefinitions provided.
-      ```bash
 
+   2. Install necessary cert-manager CustomResourceDefinitions provided.
+
+      ```bash
       kubectl apply --validate=false -f cert-manager.crds.yaml
       ```
+
    3. (Optional) Enable Karavi Observability for PowerFlex/PowerScale to use an existing instance of Karavi Authorization for accessing the REST API for the given storage systems.
       **Note**: Assuming that if the Karavi Observability's Authorization has been enabled in the phase of [Offline Karavi Observability Helm Chart Installer](../../../../offline/modules), the Authorization Secrets/Configmap have been copied to the Karavi Observability namespace.
       A sample configuration values.yaml file is located [here](https://github.com/dell/helm-charts/blob/main/charts/karavi-observability/values.yaml).
@@ -117,11 +126,12 @@ These instructions can be followed when a Helm chart was installed and will be u
    4. After the images have been made available and the Helm chart configuration is updated, follow the instructions within the Helm chart's repository to complete the installation.
       **Note**: Assuming that Your Secrets from CSI Drivers have been copied to the Karavi Observability namespace during the steps of [Offline Karavi Observability Helm Chart Installer](../../../../offline/modules)
       Optionally, you could provide your own [configurations](../../installation/observability/#configuration). A sample values.yaml file is located [here](https://github.com/dell/helm-charts/blob/main/charts/karavi-observability/values.yaml).
-      ```bash
 
+      ```bash
         helm upgrade -n install-namespace app-name karavi-observability
       ```
-      ```
+
+      ```bash
         NAME: app-name
         LAST DEPLOYED: Wed Aug 17 14:44:04 2022
         NAMESPACE: install-namespace
