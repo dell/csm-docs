@@ -45,8 +45,9 @@ The following requirements must be fulfilled in order to successfully use the Fi
 
 The following requirements must be fulfilled in order to successfully use the iSCSI protocol with the CSI PowerStore driver:
 
-- All Kubernetes nodes must have the _iscsi-initiator-utils_ package installed. On Debian based distributions the package name is  _open-iscsi_.
-- The _iscsid_ service must be enabled and running. You can enable the service by running the following command on all worker nodes: `systemctl enable --now iscsid`
+- Ensure that the necessary iSCSI initiator utilities are installed on each Kubernetes worker node. This typically includes the _iscsi-initiator-utils_ package for RHEL or _open-iscsi_ package for Ubuntu.
+- Enable and start the _iscsid_ service on each Kubernetes worker node. This service is responsible for managing the iSCSI initiator. You can enable the service by running the following command on all worker nodes: `systemctl enable --now iscsid`
+- Ensure that the unique initiator name is set in _/etc/iscsi/initiatorname.iscsi_.
 - To configure iSCSI in Red Hat OpenShift clusters, you can create a `MachineConfig` object using the console or `oc` to ensure that the iSCSI daemon starts on all the Red Hat CoreOS nodes. Here is an example of a `MachineConfig` object:
 
 ```yaml
@@ -80,7 +81,38 @@ Refer to the [Dell Host Connectivity Guide](https://elabnavigator.dell.com/vault
 
 The following requirements must be fulfilled in order to successfully use the NVMe protocols with the CSI PowerStore driver:
 
-- All OpenShift or Kubernetes nodes connecting to Dell storage arrays must use unique host NQNs.
+- All OpenShift or Kubernetes nodes connecting to Dell storage arrays must use unique host NVMe Qualified Names (NQNs).
+
+> The OpenShift deployment process for CoreOS will set the same host NQN for all nodes. The host NQN is stored in the file /etc/nvme/hostnqn. One possible solution to ensure unique host NQNs is to add the following machine config to your OCP cluster:
+
+```yaml
+apiVersion: machineconfiguration.openshift.io/v1
+kind: MachineConfig
+metadata:
+  labels:
+    machineconfiguration.openshift.io/role: worker
+  name: 99-worker-custom-nvme-hostnqn
+spec:
+  config:
+    ignition:
+      version: 3.4.0
+    systemd:
+      units:
+        - contents: |
+            [Unit]
+            Description=Custom CoreOS Generate NVMe Hostnqn
+
+            [Service]
+            Type=oneshot
+            ExecStart=/usr/bin/sh -c '/usr/sbin/nvme gen-hostnqn > /etc/nvme/hostnqn'
+            RemainAfterExit=yes
+
+            [Install]
+            WantedBy=multi-user.target
+          enabled: true
+          name: custom-coreos-generate-nvme-hostnqn.service
+```
+
 - The driver requires the NVMe command-line interface (nvme-cli) to manage the NVMe clients and targets. The NVMe CLI tool is installed in the host using the following command on RPM oriented Linux distributions.
 
 ```bash
@@ -209,10 +241,44 @@ The following is a sample multipath.conf file:
 
 ```text
 defaults {
-  user_friendly_names yes
-  find_multipaths yes
+	polling_interval 5
+	checker_timeout 15
+	disable_changed_wwids yes
+	find_multipaths no
 }
-  blacklist {
+devices {
+	device {
+		vendor DellEMC
+		product PowerStore
+		detect_prio "yes"
+		path_selector "queue-length 0"
+
+		path_grouping_policy "group_by_prio"
+		path_checker tur
+		failback immediate
+		fast_io_fail_tmo 5
+		no_path_retry 3
+		rr_min_io_rq 1
+		max_sectors_kb 1024
+		dev_loss_tmo 10
+		hardware_handler "1 alua"
+	}
+	device {
+		vendor .*
+		product dellemc-powerstore
+		uid_attribute ID_WWN
+		prio ana
+		failback immediate
+		path_grouping_policy "group_by_prio"
+		path_checker "none"
+		path_selector "queue-length 0"
+		detect_prio "yes"
+		fast_io_fail_tmo 5
+		no_path_retry 3
+		rr_min_io_rq 1
+		max_sectors_kb 1024
+		dev_loss_tmo 10
+	}
 }
 ```
 
@@ -225,10 +291,44 @@ You will need to first base64 encode the multipath.conf and add it to the Machin
 
 ```bash
 echo 'defaults {
-user_friendly_names yes
-find_multipaths yes
+	polling_interval 5
+	checker_timeout 15
+	disable_changed_wwids yes
+	find_multipaths no
 }
-  blacklist {
+devices {
+	device {
+		vendor DellEMC
+		product PowerStore
+		detect_prio "yes"
+		path_selector "queue-length 0"
+
+		path_grouping_policy "group_by_prio"
+		path_checker tur
+		failback immediate
+		fast_io_fail_tmo 5
+		no_path_retry 3
+		rr_min_io_rq 1
+		max_sectors_kb 1024
+		dev_loss_tmo 10
+		hardware_handler "1 alua"
+	}
+	device {
+		vendor .*
+		product dellemc-powerstore
+		uid_attribute ID_WWN
+		prio ana
+		failback immediate
+		path_grouping_policy "group_by_prio"
+		path_checker "none"
+		path_selector "queue-length 0"
+		detect_prio "yes"
+		fast_io_fail_tmo 5
+		no_path_retry 3
+		rr_min_io_rq 1
+		max_sectors_kb 1024
+		dev_loss_tmo 10
+	}
 }' | base64 -w0
 ```
 
@@ -248,7 +348,7 @@ spec:
     storage:
       files:
       - contents:
-          source: data:text/plain;charset=utf-8;base64,ZGVmYXVsdHMgewp1c2VyX2ZyaWVuZGx5X25hbWVzIHllcwpmaW5kX211bHRpcGF0aHMgeWVzCn0KCmJsYWNrbGlzdCB7Cn0K
+          source: data:text/plain;charset=utf-8;base64,ZGVmYXVsdHMgewogIHBvbGxpbmdfaW50ZXJ2YWwgNQogIGNoZWNrZXJfdGltZW91dCAxNQogIGRpc2FibGVfY2hhbmdlZF93d2lkcyB5ZXMKICBmaW5kX211bHRpcGF0aHMgbm8KfQpkZXZpY2VzIHsKICBkZXZpY2UgewogICAgdmVuZG9yIERlbGxFTUMKICAgIHByb2R1Y3QgUG93ZXJTdG9yZQogICAgZGV0ZWN0X3ByaW8gInllcyIKICAgIHBhdGhfc2VsZWN0b3IgInF1ZXVlLWxlbmd0aCAwIgoKICAgIHBhdGhfZ3JvdXBpbmdfcG9saWN5ICJncm91cF9ieV9wcmlvIgogICAgcGF0aF9jaGVja2VyIHR1cgogICAgZmFpbGJhY2sgaW1tZWRpYXRlCiAgICBmYXN0X2lvX2ZhaWxfdG1vIDUKICAgIG5vX3BhdGhfcmV0cnkgMwogICAgcnJfbWluX2lvX3JxIDEKICAgIG1heF9zZWN0b3JzX2tiIDEwMjQKICAgIGRldl9sb3NzX3RtbyAxMAogICAgaGFyZHdhcmVfaGFuZGxlciAiMSBhbHVhIgogIH0KICBkZXZpY2UgewogICAgdmVuZG9yIC4qCiAgICBwcm9kdWN0IGRlbGxlbWMtcG93ZXJzdG9yZQogICAgdWlkX2F0dHJpYnV0ZSBJRF9XV04KICAgIHByaW8gYW5hCiAgICBmYWlsYmFjayBpbW1lZGlhdGUKICAgIHBhdGhfZ3JvdXBpbmdfcG9saWN5ICJncm91cF9ieV9wcmlvIgogICAgcGF0aF9jaGVja2VyICJub25lIgogICAgcGF0aF9zZWxlY3RvciAicXVldWUtbGVuZ3RoIDAiCiAgICBkZXRlY3RfcHJpbyAieWVzIgogICAgZmFzdF9pb19mYWlsX3RtbyA1CiAgICBub19wYXRoX3JldHJ5IDMKICAgIHJyX21pbl9pb19ycSAxCiAgICBtYXhfc2VjdG9yc19rYiAxMDI0CiAgICBkZXZfbG9zc190bW8gMTAKICB9Cn0K
           verification: {}
         filesystem: root
         mode: 400
@@ -358,7 +458,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
 | volume-name-prefix | The volume-name-prefix will be used by provisioner sidecar as a prefix for all the volumes created  | Yes | csivol |
 | monitor-interval | The monitor-interval will be used by external-health-monitor as an interval for health checks  | Yes | 60s |
 
-4.  Execute the following command to create PowerStore custom resource:
+4. Execute the following command to create PowerStore custom resource:
    ```bash
    kubectl create -f <input_sample_file.yaml>
    ```
@@ -369,7 +469,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
       kubectl get all -n <driver-namespace>
       ```
 
-5.  [Verify the CSI Driver installation](../#verifying-the-driver-installation)
+5. [Verify the CSI Driver installation](../#verifying-the-driver-installation)
 
 6. Refer https://github.com/dell/csi-powerstore/tree/main/samples for the sample files.
 
@@ -385,7 +485,7 @@ CSI PowerStore supports the ability to dynamically modify array information with
 > require the driver to be restarted to properly pick up and process the changes.
 
 To do so, change the configuration file `config.yaml` and apply the update using the following command:
-```bash
 
+```bash
 sed "s/CONFIG_YAML/`cat config.yaml | base64 -w0`/g" secret.yaml | kubectl apply -f -
 ```

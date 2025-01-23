@@ -12,7 +12,7 @@ This section outlines the uninstallation steps for Application Mobility.
 
 This command removes all the Kubernetes components associated with the chart.
 
-```bash 
+```bash
 
 helm delete [APPLICATION_MOBILITY_NAME] --namespace [APPLICATION_MOBILITY_NAMESPACE]
 ```
