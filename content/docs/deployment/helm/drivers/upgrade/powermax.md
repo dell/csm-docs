@@ -17,7 +17,7 @@ Upgrades to the CSI Driver for Dell PowerMax can be made using Helm or Dell CSM 
 ### Updating the CSI Driver to use 10.0 Unisphere
 
 1. Upgrade the Unisphere to have 10.0 endpoint support. Please find the instructions [here.](https://dl.dell.com/content/manual34878027-dell-unisphere-for-powermax-10-0-0-installation-guide.pdf?language=en-us&ps=true)
-2. Update the powermax reverse proxy secret to specify endpoints with Unisphere version 10.0 support.
+2. Update the powermax-config secret to specify endpoints with Unisphere version 10.0 support.
 
 ## Update Driver from v2.13.0 to v2.14.0 using Helm
 
@@ -28,17 +28,18 @@ Upgrades to the CSI Driver for Dell PowerMax can be made using Helm or Dell CSM 
    git clone -b v2.14.0 https://github.com/dell/csi-powermax.git
    cd ./csi-powermax
    ```
-2. As of CSI PowerMax v2.14.0, the csi reverse proxy configuration and connectivity information has been migrated from a ConfigMap to a Secret. If a powermax reverse proxy secret was not previously created, reference the [CSI Driver installation steps](../../installation/powermax#installation) and your existing `my-powermax-settings.yaml` file to configure the new powermax reverse proxy secret.
+2. As of CSI PowerMax v2.14.0, the csi reverse proxy configuration and connectivity information has been migrated from a ConfigMap to a Secret. If the `powermax-config`
+secret was not previously created, reference the [CSI Driver installation steps](../../installation/powermax#installation) and your existing `my-powermax-settings.yaml` file to configure the new `powermax-config` Secret.
    ```bash
    vi ./samples/secret/secret.yaml
    ```
-3. Create the powermax-reverseproxy-secret Secret.
+3. Create the `powermax-config` Secret.
    ```bash
    kubectl create secret generic powermax-config --namespace powermax --from-file=config=samples/secret/secret.yaml
    ```
 > Note: The `powermax-reverseproxy-config` ConfigMap has been deprecated as of CSI PowerMax v2.14.0 and will be removed in a future release.
-  The `powermax-reverseproxy-config` remains for backward compatibility only. Use of the powermax reverse proxy secret, as outlined above, is recommended.
-  If you would like to continue using the `powemax-reverseproxy-config` ConfigMap, set `csireverseproxy.useSecret: false` in your helm values file, and skip the creation of this secret.
+  The `powermax-reverseproxy-config` remains for backward compatibility only. Use of the `powermax-config` Secret, as outlined above, is recommended.
+  If you would like to continue using the `powemax-reverseproxy-config` ConfigMap, set `global.useSecret: false` in your helm values file, and skip the creation of this Secret.
 4. Download the latest helm values file and update as needed. Reference the [CSI Driver installation steps](../../installation/powermax#installation) for more details on the available options.
    ```bash
    cd ./dell-csi-helm-installer
