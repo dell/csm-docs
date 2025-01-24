@@ -475,22 +475,6 @@ Create a secret named powermax-certs in the namespace where the CSI PowerMax dri
     b. Install the PowerMax driver using the detailed configuration using the sample file provided
     [here](https://github.com/dell/csm-operator/tree/main/samples).
 
-> NOTE:
-> [Replication module](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powermax_v2130.yaml#L283) must be enabled to use the Metro volume
-
-Example:
-```yaml
-    - name: replication
-      enabled: true
-```
->  [Target clusterID](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powermax_v2130.yaml#L316) should be set as self
-
-Example:
-```yaml
-    - name: "TARGET_CLUSTERS_IDS"
-      value: "self"
-```
-
 6. Users should configure the parameters in CR. The following table lists the primary configurable parameters of the PowerMax driver and their default values:
 
    | Parameter | Description | Required | Default |
