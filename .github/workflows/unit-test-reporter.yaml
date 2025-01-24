@@ -2,7 +2,7 @@ name: Unit Test Action
 
 on:
   push:
-    branches: [ main ]
+    branches: [ merge_main ]
   pull_request:
     branches: [ main, release-* ]
 jobs:
@@ -13,7 +13,8 @@ jobs:
       steps:
       - uses: actions/checkout@v1
       - name: Run Tests
-        working-directory: ./content/docs/deployment/csminstallationwizard/src/
+        working-directory: ./content/docs/deployment/csminstallationwizard/src/ 
+#       working-directory: ./content/docs/getting-started/installation/installationwizard/src
         run: |
           npm install 
           npm test
