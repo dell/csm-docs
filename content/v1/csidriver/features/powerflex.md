@@ -132,11 +132,13 @@ status:
 > *NOTE:* Kubernetes Volume Expansion feature cannot be used to shrink a volume and volumes cannot be expanded to a value that is not a multiple of 8. If attempted, the driver will round up. For example, if the above PVC was edited to have a size of 20 Gb, the size would actually be expanded to 24 Gb, the next highest multiple of 8.
 
 ## Volume Cloning Feature
+
 The CSI PowerFlex driver version 1.3 and later support volume cloning. This feature allows specifying existing PVCs in the _dataSource_ field to indicate a user would like to clone a Volume.
 
 The source PVC must be bound and available (not in use). Source and destination PVC must be in the same namespace and have the same Storage Class.
 
 To clone a volume, you must first have an existing pvc, for example, pvol0:
+
 ```yaml
 kind: PersistentVolumeClaim
 apiVersion: v1
@@ -154,6 +156,7 @@ spec:
 ```
 
 The following is a sample manifest for cloning pvol0:
+
 ```yaml
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -206,6 +209,7 @@ spec:
           requests:
           storage: 8Gi
 ```
+
 Allowable access modes are _ReadWriteOnce_, _ReadWriteMany_, and for block devices that have been previously initialized, _ReadOnlyMany_.
 
 Raw Block volumes are presented as a block device to the pod by using a bind mount to a block device in the node's file system. The driver does not format or check the format of any file system on the block device. Raw Block volumes do support online Volume Expansion, but it is up to the application to manage to reconfigure the file system (if any) to the new size.
@@ -238,13 +242,13 @@ allowedTopologies:
     - csi-vxflexos.dellemc.com
 
 ```
+
 - *WARNING*: Before utilizing format options, you must first be fully aware of the potential impact and understand your environment's requirements for the specified option.
-
-
 
 ## Topology Support
 
 The CSI PowerFlex driver version 1.2 and later supports Topology which forces volumes to be placed on worker nodes that have connectivity to the backend storage. This covers use cases where:
+
 - The PowerFlex SDC may not be installed or running on some nodes.
 - Users have chosen to restrict the nodes on which the CSI driver is deployed.
 
@@ -255,6 +259,7 @@ This Topology support does not include customer-defined topology, users cannot c
 To utilize the Topology feature, the storage classes are modified to specify the _volumeBindingMode_ as _WaitForFirstConsumer_ and to specify the desired topology labels within _allowedTopologies_. This ensures that the pod schedule takes advantage of the topology and be guaranteed that the node selected has access to provisioned volumes.
 
 Storage Class Example with Topology Support:
+
 ```yaml
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
@@ -281,29 +286,35 @@ allowedTopologies:
     values:
     - csi-vxflexos.dellemc.com
 ```
+
 For additional information, see the [Kubernetes Topology documentation](https://kubernetes-csi.github.io/docs/topology.html).
 
 > *NOTE*: In the manifest file of the Dell CSM operator, topology can be enabled by specifying the system name or _systemid_ in the allowed topologies field. _Volumebindingmode_ is also set to _WaitForFirstConsumer_ by default.
 
-## Controller HA   
+## Controller HA
 
 The CSI PowerFlex driver version 1.3 and later support multiple controller pods. A Controller pod can be assigned to a worker node or a master node, as long as no other controller pod is currently assigned to the node. To control the number of controller pods, edit:
+
 ```yaml
 controllerCount: 2
 ```
-in your values file to the desired number of controller pods. By default, the driver will deploy with two controller pods, each assigned to a different worker node. 
 
-> *NOTE:* If the controller count is greater than the number of available nodes, excess controller pods will be stuck in a pending state. 
+in your values file to the desired number of controller pods. By default, the driver will deploy with two controller pods, each assigned to a different worker node.
 
-If you are using the Dell CSM Operator, the value to adjust is:  
-```yaml  
+> *NOTE:* If the controller count is greater than the number of available nodes, excess controller pods will be stuck in a pending state.
+
+If you are using the Dell CSM Operator, the value to adjust is:
+
+```yaml
 replicas: 1  
 ```
+
 in your driver yaml in `config/samples/`
 
-If you want to specify where controller pods get assigned, make the following edits to your values file at `csi-vxflexos/helm/csi-vxflexos/values.yaml`:    
+If you want to specify where controller pods get assigned, make the following edits to your values file at `csi-vxflexos/helm/csi-vxflexos/values.yaml`:
 
-To assign controller pods to worker nodes only (Default):   
+To assign controller pods to worker nodes only (Default):
+
 ```yaml
 # "controller" allows to configure controller specific parameters
 controller:
@@ -326,7 +337,9 @@ controller:
   #   effect: "NoSchedule"
 
 ```
-To assign controller pods to master and worker nodes:  
+
+To assign controller pods to master and worker nodes:
+
 ```yaml
 # "controller" allows to configure controller specific parameters
 controller:
@@ -349,7 +362,8 @@ controller:
      effect: "NoSchedule"
 ```
 
-To assign controller pods to master nodes only:  
+To assign controller pods to master nodes only:
+
 ```yaml
 # "controller" allows to configure controller specific parameters
 controller:
@@ -371,7 +385,8 @@ controller:
      operator: "Exists"
      effect: "NoSchedule"
 ```
-> *NOTE:* Tolerations/selectors work the same way for node pods.   
+
+> *NOTE:* Tolerations/selectors work the same way for node pods.
 
 For configuring Controller HA on the Dell CSM Operator, please refer to the [Dell CSM Operator documentation](../../../deployment/csmoperator/#custom-resource-specification).  
 
@@ -383,13 +398,13 @@ The CSI PowerFlex driver version 1.3 and later support the automatic deployment 
 - Optionally, if the SDC monitor is enabled, another container is started and runs as the monitor. Follow PowerFlex SDC documentation to get monitor metrics.
 - On nodes that do not support automatic SDC deployment by SDC init container, manual installation steps must be followed. The SDC init container skips installing and you can see this mentioned in the logs by running kubectl logs on the node for SDC.
   Refer to https://hub.docker.com/r/dellemc/sdc for supported OS versions.
-- There is no automated uninstallation of the SDC kernel module. Follow PowerFlex SDC documentation to manually uninstall the SDC driver from the node. 
+- There is no automated uninstallation of the SDC kernel module. Follow PowerFlex SDC documentation to manually uninstall the SDC driver from the node.
 
 From CSM 1.12.0, you can disable automatic SDC deployment.
 
 By default, SDC deployment is enabled. If you do not want to deploy `sdc` with PowerFlex, it can be disabled by setting the `sdc.enabled` field to `false`.
 
-```
+```yaml
 node:
   ...
   sdc:
@@ -777,7 +792,7 @@ The user can also set the volume limit for all the nodes in the cluster by speci
 ## NFS volume support
 Starting with version 2.8, the CSI driver for PowerFlex will support NFS volumes for PowerFlex storage systems version 4.0.x.
 
-> NOTE: 
+> NOTE:
 > Starting from CSM 1.11.0, the CSI-PowerFlex driver will automatically round up NFS volume sizes to a minimum of 3GB if a smaller size is requested. This change prevents backend errors and ensures compatibility.
 
 CSI driver will support following operations for NFS volumes:
@@ -988,3 +1003,87 @@ If such a node is not available, the pods stay in Pending state. This means pods
 Without storage capacity tracking, pods get scheduled on a node satisfying the topology constraints. If the required capacity is not available, volume attachment to the pods fails, and pods remain in ContainerCreating state. Storage capacity tracking eliminates unnecessary scheduling of pods when there is insufficient capacity.
 
 The attribute `storageCapacity.enabled` in `values.yaml` can be used to enable/disable the feature during driver installation using helm. This is by default set to true. To configure how often the driver checks for changed capacity set `storageCapacity.pollInterval` attribute. In case of driver installed via operator, this interval can be configured in the sample file provided [here](https://github.com/dell/csm-operator/blob/main/samples/) by editing the `--capacity-poll-interval` argument present in the provisioner sidecar.
+
+## Multiple Availability Zones
+PowerFlex CSI driver version 2.13.0 and above supports multiple Availability Zones for Block. NFS is not supported at this time.
+
+This feature supports the use of a StorageClass that is not associated with any specific PowerFlex system or storage pool. Each cluster node must be labeled with a zone and each PowerFlex system must be assigned to a single zone. When a Pod is scheduled on a node, the volume will be provisioned on the PowerFlex system associated with the cluster node's zone.
+
+Requirements:
+- Every cluster worker node must be labeled with a zone label.
+- Every PowerFlex system in the driver Secret must be assigned to their own zone.
+- The StorageClass does not contain any reference to the SystemID or storagepool.
+- Use the CSM Operator to install the PowerFlex CSI driver. The CSM Operator will detect if multiple Availability Zones are enabled in the driver Secret and ensure the correct MDMs are configured on each worker node during the SDC installation.
+
+> Note: Helm deployment currently doesn’t support multiple Availability Zones.
+
+The example manifests below illustrate how to configure two PowerFlex systems, with each system assigned to its own zone. Zone labels can have any custom key, but it must be consistent across the StorageClass, Secret, and Node labels.
+
+#### Labeling Worker Nodes
+```
+# Label each worker node in the cluster
+kubectl label nodes worker-1 topology.kubernetes.io/zone=zone1
+kubectl label nodes worker-2 topology.kubernetes.io/zone=zone1
+...
+kubectl label nodes worker-3 topology.kubernetes.io/zone=zone2
+kubectl label nodes worker-4 topology.kubernetes.io/zone=zone2
+```
+
+#### StorageClass
+For multiple Availability Zones support, the StorageClass does not require details about the PowerFlex system. Optionally, the `allowedTopologies` can be used to specify topology labels used when provisioning volumes with this StorageClass.
+
+> Note: The StorageClass must use `volumeBindingMode: WaitForFirstConsumer`. Using `volumeBindingMode: Immediate` **will not guarantee** that the volume is provisioned in the same zone as the scheduled Pod.
+
+```yaml
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+allowVolumeExpansion: true
+allowedTopologies:
+- matchLabelExpressions:
+  - key: topology.kubernetes.io/zone
+    values:
+    - zone1
+    - zone2
+metadata:
+  name: powerflex-multiaz
+parameters:
+  csi.storage.k8s.io/fstype: ext4
+provisioner: csi-vxflexos.dellemc.com
+reclaimPolicy: Delete
+volumeBindingMode: WaitForFirstConsumer
+```
+
+#### Secret
+The Secret specifies the zone associated with each PowerFlex system along with additional details such as the protection domain and storage pool name.
+
+> Note: The protection domain name is required if storage pool names are not unique across protection domains.
+
+```yaml
+- username: "user"
+  password: "password"
+  systemID: "2000000000000001"
+  endpoint: "https://10.0.0.1"
+  skipCertificateValidation: true
+  mdm: "10.0.0.2,10.0.0.3"
+  zone:
+    name: "zone1"
+    labelKey: "topology.kubernetes.io/zone"
+    protectionDomains:
+      - name: "domain1"
+        pools:
+          - "pool1"
+
+- username: "user"
+  password: "password"
+  systemID: "2000000000000002"
+  endpoint: "https://10.0.0.4"
+  skipCertificateValidation: true
+  mdm: "10.0.0.5,10.0.0.6"
+  zone:
+    name: "zone2"
+    labelKey: "topology.kubernetes.io/zone"
+    protectionDomains:
+      - name: "domain2"
+        pools:
+          - "pool2"
+```

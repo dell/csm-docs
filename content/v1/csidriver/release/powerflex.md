@@ -3,7 +3,9 @@ title: PowerFlex
 description: Release notes for PowerFlex CSI driver
 ---
 
-## Release Notes - CSI PowerFlex v2.12.0
+## Release Notes - CSI PowerFlex v2.13.0
+
+
 
 
 
@@ -17,15 +19,18 @@ description: Release notes for PowerFlex CSI driver
 
 ### New Features/Changes
 
-- [#1472 - [FEATURE]: Support for Kubernetes 1.31](https://github.com/dell/csm/issues/1472)
-- [#1508 - [FEATURE]:  Add Support for KubeVirt](https://github.com/dell/csm/issues/1508)
-- [#663 - [FEATURE]: Enable/disable automatic SDC deployment along with driver installation.](https://github.com/dell/csm/issues/663)
+- [#1560 - [FEATURE]: CSM support for OpenShift 4.18](https://github.com/dell/csm/issues/1560)
+- [#1561 - [FEATURE]: Added support for Kubernetes 1.32 ](https://github.com/dell/csm/issues/1561)
+- [#1612 - [FEATURE]: Multi-Availability Zone (AZ) support with multiple storage systems - dedicated storage systems in each AZ](https://github.com/dell/csm/issues/1612)
+- [#1613 - [FEATURE]: CSI PowerFlex must have the ability to connect a subset of the worker nodes to a storage array for multi-array support](https://github.com/dell/csm/issues/1613)
 
 ### Fixed Issues
 
-- [#1448 - [BUG]: CSM-operator build fails from disk space issue](https://github.com/dell/csm/issues/1448)
-- [#1521 - [BUG]: PowerFlex e2e-fsgroup tests are failing](https://github.com/dell/csm/issues/1521)
-- [#1546 - [BUG]: privTgt mount is lost after vxflexos-node pod restart](https://github.com/dell/csm/issues/1546)
+- [#1562 - [BUG]: Documentation for PowerFlex nasName states it is not a required field](https://github.com/dell/csm/issues/1562)
+- [#1608 - [BUG]: Volume Size Rounding Issue in PowerFlex: Rounds Down Instead of Up for Multiples of 8GB](https://github.com/dell/csm/issues/1608)
+- [#1639 - [BUG]: CSM PowerFlex entering boot loop when array has long response times](https://github.com/dell/csm/issues/1639)
+- [#1641 - [BUG]: NodeGetVolumeStats will cause panic when called w/ an Ephemeral volume ](https://github.com/dell/csm/issues/1641)
+- [#1667 - [BUG]: Labels versions and maintainer update for CSM images ](https://github.com/dell/csm/issues/1667)
 
 ### Known Issues
 

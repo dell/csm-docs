@@ -6,16 +6,17 @@ description: >
   Dell Container Storage Modules (CSM) for Replication Uninstallation
 ---
 
-This section outlines the uninstallation steps for Container Storage Modules (CSM) for Replication. 
+This section outlines the uninstallation steps for Container Storage Modules (CSM) for Replication.
 
 ## Uninstalling replication controller
 
 To uninstall the replication controller, you can use the script `uninstall.sh` located in the `scripts` folder:
+
 ```shell
 ./uninstall.sh 
 ```
 
-This script will automatically detect how the current version was installed (repctl or Helm) and use the correct method to delete it. 
+This script will automatically detect how the current version was installed (repctl or Helm) and use the correct method to delete it.
 
 You can also manually uninstall the replication controller using a method that depends on how you installed it.
 
