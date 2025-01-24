@@ -13,8 +13,7 @@ jobs:
       steps:
       - uses: actions/checkout@v1
       - name: Run Tests
-#      working-directory: ./content/docs/deployment/csminstallationwizard/src/ 
-       working-directory: ./content/docs/getting-started/installation/installationwizard/src
+        working-directory: ./content/docs/getting-started/installation/installationwizard/src
         run: |
           npm install 
           npm test
