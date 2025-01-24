@@ -112,7 +112,7 @@ A workaround on most browsers is to accept the `karavi-topology` certificate by 
 
   <details>
    <summary>Deploy certificate with new Grafana instance</summary>
- Please follow the steps in <a href="docs/getting-started/installation/kubernetes/powermax/helm/csm-modules/observability/postinstallation/#grafana">Sample Grafana Deployment</a> but attach the certificate to your `grafana-values.yaml` before deploying. The file should look like:
+ Please follow the steps in <a href="/csm-docs/docs/getting-started/installation/kubernetes/powermax/helm/csm-modules/observability/postinstallation/#grafana">Sample Grafana Deployment</a> but attach the certificate to your `grafana-values.yaml` before deploying. The file should look like:
 
 ```yaml
 # grafana-values.yaml 

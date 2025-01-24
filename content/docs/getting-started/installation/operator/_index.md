@@ -16,7 +16,7 @@ For detailed snapshot setup procedure, [click here.](docs/concepts/snapshots/#he
 ## Installing CSI Driver via Operator
 
 Refer [PowerScale Driver](../kubernetes/powerscale/csmoperator) to install the driver via Operator <br>
-Refer [PowerFlex Driver](../kubernentes/powerflex/csmoperator) to install the driver via Operator <br>
+Refer [PowerFlex Driver](../kubernetes/powerflex/csmoperator) to install the driver via Operator <br>
 Refer [PowerMax Driver](../kubernetes/powermax/csmoperator) to install the driver via Operator <br>
 Refer [PowerStore Driver](../kubernetes/powerstore/csmoperator) to install the driver via Operator <br>
 Refer [Unity XT Driver](../kubernetes/unityxt/csmoperator) to install the driver via Operator <br>

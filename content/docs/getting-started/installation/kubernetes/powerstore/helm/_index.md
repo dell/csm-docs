@@ -124,7 +124,7 @@ volume stats value under node should be set to true.
 | allowAutoRoundOffFilesystemSize | Allows the controller to round off filesystem to 3Gi which is the minimum supported value | No | false |
 | storageCapacity.enabled | Allows to enable/disable storage capacity tracking feature | No | true
 | storageCapacity.pollInterval | Configure how often the driver checks for changed capacity | No | 5m
-| podmon.enabled | Allows to enable/disable [Resiliency](../../../../../deployment/helm/modules/installation/resiliency#powerstore-specific-recommendations) feature | No | false
+| podmon.enabled | Allows to enable/disable [Resiliency](./csm-modules/resiliency#powerstore-specific-recommendations) feature | No | false
 {{< /collapse >}} 
 </ul>
 

@@ -134,17 +134,17 @@ Follow the instructions for [Installing dellctl](docs/tooling/cli/#installation-
 
 ### Configure the Container Storage Module Authorization Proxy Server
 
-Follow the instructions available in Authorization for [Configuring the Authorization Proxy Server](../../../../../../../concepts/authorization/v2.x/configuration/).
+Follow the instructions available in Authorization for [Configuring the Authorization Proxy Server](docs/concepts/authorization/v2.x/configuration/).
 
 ### Configure a Dell CSI Driver with Container Storage Module Authorization
 
 Follow the instructions available in Authorization for
 
-{{< hide id="1" >}}- [Configuring PowerFlex with Authorization](../../../../../../../concepts/authorization/v2.x/configuration/powerflex).{{< /hide >}}
+{{< hide id="1" >}}- [Configuring PowerFlex with Authorization](docs/concepts/authorization/v2.x/configuration/powerflex).{{< /hide >}}
 
-{{< hide id="2" >}}- [Configuring PowerMax with Authorization](../../../../../../../concepts/authorization/v2.x/configuration/powermax).{{< /hide >}}
+{{< hide id="2" >}}- [Configuring PowerMax with Authorization](docs/concepts/authorization/v2.x/configuration/powermax).{{< /hide >}}
 
-{{< hide id="3" >}}- [Configuring PowerScale with Authorization](../../../../../../../concepts/authorization/v2.x/configuration/powerscale).{{< /hide >}}
+{{< hide id="3" >}}- [Configuring PowerScale with Authorization](docs/concepts/authorization/v2.x/configuration/powerscale).{{< /hide >}}
 
 ## Vault Server Installation
 

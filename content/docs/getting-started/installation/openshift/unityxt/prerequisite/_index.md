@@ -10,7 +10,7 @@ Before you install CSI Driver for Unity XT, verify the requirements that are men
 
 ### Requirements
 
-* Install Kubernetes or OpenShift (see [supported versions](../../../../../../concepts/csidriver/#features-and-capabilities))
+* Install Kubernetes or OpenShift (see [supported versions](../../../../../concepts/csidriver/#features-and-capabilities))
 * To use FC protocol, the host must be zoned with Unity XT array and Multipath needs to be configured
 * To use iSCSI protocol, iSCSI initiator utils packages needs to be installed and Multipath needs to be configured
 * To use NFS protocol, NFS utility packages needs to be installed
