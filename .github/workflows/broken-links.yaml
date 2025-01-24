@@ -2,7 +2,7 @@ name: Check Broken Links
 
 on:
   push:
-    branches: [ merge-main ]
+    branches: [ merge_main ]
   pull_request:
     branches: [ main, release-* ]
 jobs:
