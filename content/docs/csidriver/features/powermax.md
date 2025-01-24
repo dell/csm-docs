@@ -696,6 +696,7 @@ managementServers:
     username: admin2
     password: password2
     skipCertificateValidation: false
+    certSecret: primary-cert
 ```
 
 This method works with both `helm` and `operator` installations for PowerMax, automatically mounting the secret for use by the PowerMax driver/node and the Reverse Proxy.

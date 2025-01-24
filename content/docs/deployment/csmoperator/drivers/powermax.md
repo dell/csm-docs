@@ -399,6 +399,7 @@ Create a secret named powermax-certs in the namespace where the CSI PowerMax dri
         username: admin2
         password: password2
         skipCertificateValidation: false
+        certSecret: primary-cert
     ```
     After editing the file, run this command to create a secret called `powermax-creds`. If you are using a different namespace/secret name, just substitute those into the command.
     ```bash
