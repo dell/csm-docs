@@ -70,7 +70,7 @@ Generate the CSR and Self-Signed Certificate:
 ```bash
 openssl genrsa -out tls.key 2048
 openssl req -new -key tls.key -out tls.csr -config openssl.cnf
-openssl x509 -req -in tls.csr -signkey tls.key -out tls.crt -days 3650 -extensions v3_req -extfile openssl.cnf
+openssl x509 -req -in tls.csr -signkey tls.key -out tls.crt -days 3650 -extensions req_ext -extfile openssl.cnf
 ```
 
 ### Install Helm 3
