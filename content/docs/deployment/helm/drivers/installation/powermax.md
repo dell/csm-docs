@@ -52,10 +52,12 @@ default_bits       = 2048
 distinguished_name = req_distinguished_name
 req_extensions     = req_ext
 prompt             = no
+
 [ req_distinguished_name ]
 C  = XX
 L  = Default City
 O  = Default Company Ltd
+
 [ req_ext ]
 subjectAltName = @alt_names
 
