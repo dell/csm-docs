@@ -71,7 +71,7 @@ Use a tool such as `openssl` to generate this secret using the example below:
 ```bash
 openssl genrsa -out tls.key 2048
 openssl req -new -key tls.key -out tls.csr -config openssl.cnf
-openssl x509 -req -in tls.csr -signkey tls.key -out tls.crt -days 3650 -extensions v3_req -extfile openssl.cnf
+openssl x509 -req -in tls.csr -signkey tls.key -out tls.crt -days 3650 -extensions req_ext -extfile openssl.cnf
 kubectl create secret -n <namespace> tls csirevproxy-tls-secret --cert=tls.crt --key=tls.key
 ```
 
