@@ -56,12 +56,12 @@ mv ./cert-csi-linux-amd64 ~/.local/bin/cert-csi
 
    {{< tabpane name="pulling-cert-csi-image" lang="bash">}}
    {{<tab header="Docker" >}}
-      docker pull quay.io/dell/container-storage-modules/cert-csi:v1.6.0
+      docker pull quay.io/dell/container-storage-modules/cert-csi:v1.7.0
 
    {{</tab >}}
    {{<tab header="Podman" >}}
 
-      podman pull quay.io/dell/container-storage-modules/cert-csi:v1.6.0
+      podman pull quay.io/dell/container-storage-modules/cert-csi:v1.7.0
 
    {{</tab >}}
    {{< /tabpane >}}
@@ -77,7 +77,7 @@ mv ./cert-csi-linux-amd64 ~/.local/bin/cert-csi
 1. Clone the repository
 
 ```bash
-git clone -b "v1.6.0" https://github.com/dell/cert-csi.git && cd cert-csi
+git clone -b "v1.7.0" https://github.com/dell/cert-csi.git && cd cert-csi
 ```
 
 2. Build cert-csi
@@ -112,10 +112,10 @@ make install-ms
    cert-csi --help
 {{</tab >}}
 {{<tab header="Docker" >}}
-   docker run --rm -it -v ~/.kube/config:/root/.kube/config quay.io/dell/container-storage-modules/cert-csi:v1.6.0 --help
+   docker run --rm -it -v ~/.kube/config:/root/.kube/config quay.io/dell/container-storage-modules/cert-csi:v1.7.0 --help
 {{</tab >}}
 {{<tab header="Podman" >}}
-   podman run --rm -it -v ~/.kube/config:/root/.kube/config quay.io/dell/container-storage-modules/cert-csi:v1.6.0 --help
+   podman run --rm -it -v ~/.kube/config:/root/.kube/config quay.io/dell/container-storage-modules/cert-csi:v1.7.0 --help
 
 {{</tab >}}
 {{< /tabpane >}}
@@ -373,10 +373,10 @@ If you are using the container image, the `cert-config` file must be mounted int
 
 {{< tabpane name="running-container-certify" lang="bash">}}
 {{<tab header="Docker" >}}
-   docker run --rm -it -v ~/.kube/config:/root/.kube/config -v /home/user/example-certify-config.yaml:/example-certify-config.yaml quay.io/dell/container-storage-modules/cert-csi:v1.6.0 certify --cert-config /example-certify-config.yaml --vsc <volume-snapshot-class>
+   docker run --rm -it -v ~/.kube/config:/root/.kube/config -v /home/user/example-certify-config.yaml:/example-certify-config.yaml quay.io/dell/container-storage-modules/cert-csi:v1.7.0 certify --cert-config /example-certify-config.yaml --vsc <volume-snapshot-class>
 {{</tab >}}
 {{<tab header="Podman" >}}
-   podman run --rm -it -v ~/.kube/config:/root/.kube/config -v /home/user/example-certify-config.yaml:/example-certify-config.yaml quay.io/dell/container-storage-modules/cert-csi:v1.6.0 certify --cert-config /example-certify-config.yaml --vsc <volume-snapshot-class>
+   podman run --rm -it -v ~/.kube/config:/root/.kube/config -v /home/user/example-certify-config.yaml:/example-certify-config.yaml quay.io/dell/container-storage-modules/cert-csi:v1.7.0 certify --cert-config /example-certify-config.yaml --vsc <volume-snapshot-class>
 {{</tab >}}
 {{< /tabpane >}}
 
@@ -566,10 +566,10 @@ If you are using the container image, the `attr` file must be mounted into the c
 
 {{< tabpane name="running-container-ephemeral-volume" lang="bash">}}
 {{<tab header="Docker" >}}
-   docker run --rm -it -v ~/.kube/config:/root/.kube/config -v /home/user/ephemeral-config.properties:/ephemeral-config.properties quay.io/dell/container-storage-modules/cert-csi:v1.6.0 test ephemeral-volume --driver <driver-name> --attr /ephemeral-config.properties
+   docker run --rm -it -v ~/.kube/config:/root/.kube/config -v /home/user/ephemeral-config.properties:/ephemeral-config.properties quay.io/dell/container-storage-modules/cert-csi:v1.7.0 test ephemeral-volume --driver <driver-name> --attr /ephemeral-config.properties
 {{</tab >}}
 {{<tab header="Podman" >}}
-   podman run --rm -it -v ~/.kube/config:/root/.kube/config -v /home/user/ephemeral-config.properties:/ephemeral-config.properties quay.io/dell/container-storage-modules/cert-csi:v1.6.0 test ephemeral-volume --driver <driver-name> --attr /ephemeral-config.properties
+   podman run --rm -it -v ~/.kube/config:/root/.kube/config -v /home/user/ephemeral-config.properties:/ephemeral-config.properties quay.io/dell/container-storage-modules/cert-csi:v1.7.0 test ephemeral-volume --driver <driver-name> --attr /ephemeral-config.properties
 
 {{</tab >}}
 {{< /tabpane >}}
