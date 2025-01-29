@@ -29,7 +29,7 @@ kubectl delete -f tests/simple/simple.yaml
 You can use existent volumes from PowerStore array as Persistent Volumes in your Kubernetes, perform the following steps:
 
 1. Open your volume in PowerStore Management UI, and take a note of volume-id. The volume link must look similar to `https://<powerstore.api.ip>/#/storage/volumes/0055558c-5ae1-4ed1-b421-6f5a9475c19f/capacity`, where the `volume-id` is `0055558c-5ae1-4ed1-b421-6f5a9475c19f`.
-2. Create PersistentVolume and use this volume-id in volumeHandle in format `<volume-id/globalID/protocol>` in the manifest. In case of Metro volume, the volumeHandle should be in the format `<volume-id/globalID/protocol:remote-volume-id/remote-globalID>`. The protocol can be specified as 'scsi' for block-based protocols and 'NFS' for file-based protocols. Modify other parameters according to your needs.
+2. Create PersistentVolume and use this volume-id in volumeHandle in format `<volume-id/globalID/protocol>` in the manifest. In case of Metro volume, the volumeHandle should be in the format `<volume-id/globalID/protocol:remote-volume-id/remote-globalID>`. The protocol can be specified as 'scsi' for block-based protocols and 'nfs' for file-based protocols. Modify other parameters according to your needs.
 
 ```yaml
 apiVersion: v1
