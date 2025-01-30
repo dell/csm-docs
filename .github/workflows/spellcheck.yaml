@@ -28,7 +28,7 @@ jobs:
       - name: Run Codespell on Markdown Files
         run: |
           find . -type f -name "*.md" -exec codespell \
-            --ignore-words=.github/Spell-check-autofix/codespell.txt \
+            --ignore-words=.github/spell-check-autofix/codespell.txt \
             --builtin clear,rare,informal {} +
           # 'find' command searches for all .md files and runs 'codespell' on them.
           # The '--ignore-words' option specifies custom dictionary file.

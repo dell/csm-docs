@@ -6,4 +6,4 @@
 # Ensure that the 'codespell-autofix.sh' script has executable permissions.
 #   chmod +x .github/Spell-check-autofix/codespell-autofix.sh
 spell-fix:
-	./.github/Spell-check-autofix/codespell-autofix.sh
+	./.github/spell-check-autofix/codespell-autofix.sh
