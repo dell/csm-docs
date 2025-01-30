@@ -12,13 +12,13 @@ Description: Upgrade PowerScale CSI driver
 
 You can upgrade the CSI Driver for Dell PowerScale using Helm or Dell CSM Operator.
 
-## Upgrade Driver from version v2.12.0 to v2.13.0 using Helm
+## Upgrade Driver from version {{< version-docs key="PScale_preVersion" >}} to {{< version-docs key="PScale_latestVersion" >}} using Helm
 
 **Note:** While upgrading the driver via helm, controllerCount variable in myvalues.yaml can be at most one less than the number of worker nodes.
 
 ### Steps
 
-1. Clone the repository using `git clone -b v2.13.0 https://github.com/dell/csi-powerscale.git`
+1. Clone the repository using `git clone -b {{< version-docs key="PScale_latestVersion" >}} https://github.com/dell/csi-powerscale.git`
 
 2. Change to directory dell-csi-helm-installer to install the Dell PowerScale `cd dell-csi-helm-installer`
 3. Download the default values.yaml using following command:

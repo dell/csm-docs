@@ -91,7 +91,7 @@ To deploy the Operator, follow the instructions available [here](../../../operat
       spec:
       driver:
          csiDriverType: "isilon"
-         configVersion: v2.13.0
+         configVersion: {{< version-docs key="PScale_latestVersion" >}}
          forceRemoveDriver: true
    ```
       [sample file](https://github.com/dell/csm-operator/blob/main/samples/minimal-samples/powerscale_v2130.yaml) for default settings. Modify if needed.

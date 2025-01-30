@@ -155,7 +155,7 @@ dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      
     spec:
     driver:
        csiDriverType: "powerstore"
-       configVersion: v2.13.0
+       configVersion: {{< version-docs key="PStore_latestVersion" >}}
        forceRemoveDriver: true
     EOF 
     ``` 
@@ -190,8 +190,8 @@ Check if ContainerStorageModule CR is created successfully:
 ```terminal
 oc get csm powerstore -n powerstore
 
-NAME        CREATIONTIME   CSIDRIVERTYPE   CONFIGVERSION   STATE
-powerstore   3h            powerstore      v2.13.0         Succeeded      
+NAME        CREATIONTIME   CSIDRIVERTYPE   CONFIGVERSION                                        STATE
+powerstore   3h            powerstore      {{< version-docs key="PStore_latestVersion" >}}      Succeeded      
 ```
 
 Check the status of the CR to verify if the driver installation is in the `Succeeded` state. If the status is not `Succeeded`, see the [Troubleshooting guide](../troubleshooting/#my-dell-csi-driver-install-failed-how-do-i-fix-it) for more information.

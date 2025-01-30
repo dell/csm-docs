@@ -171,7 +171,7 @@ dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      
     spec:
       driver:
         csiDriverType: "isilon"
-        configVersion: v2.13.0
+        configVersion: {{< version-docs key="PScale_latestVersion" >}}
     EOF 
     ``` 
     </div> 
@@ -217,8 +217,8 @@ Check if ContainerStorageModule CR is created successfully:
 ```terminal
 oc get csm isilon -n isilon
 
-NAME        CREATIONTIME   CSIDRIVERTYPE   CONFIGVERSION   STATE
-isilon      3h             isilon      v2.13.0         Succeeded      
+NAME        CREATIONTIME   CSIDRIVERTYPE   CONFIGVERSION                                          STATE
+isilon      3h             isilon          {{< version-docs key="PScale_latestVersion" >}}        Succeeded      
 ```
 
 Check the status of the CR to verify if the driver installation is in the `Succeeded` state. If the status is not `Succeeded`, see the [Troubleshooting guide](../troubleshooting/#my-dell-csi-driver-install-failed-how-do-i-fix-it) for more information.

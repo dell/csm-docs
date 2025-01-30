@@ -121,7 +121,7 @@ kubectl -n vxflexos create secret generic karavi-authorization-config --from-fil
 
       # sidecarProxyImage: the container image used for the csm-authorization-sidecar.
       # Default value: quay.io/dell/container-storage-modules/csm-authorization-sidecar:v1.13.0
-      sidecarProxyImage: quay.io/dell/container-storage-modules/csm-authorization-sidecar:v1.13.0
+      sidecarProxyImage: quay.io/dell/container-storage-modules/csm-authorization-sidecar:{{< version-docs key="Authv1_csm_authorization_sidecar" >}}
 
       # proxyHost: hostname of the csm-authorization server
       # Default value: None
@@ -157,10 +157,10 @@ kubectl -n vxflexos create secret generic karavi-authorization-config --from-fil
       - name: authorization
         # enable: Enable/Disable csm-authorization
         enabled: true
-        configVersion: v1.13.0
+        configVersion: {{< version-docs key="Authv1_ConfigVersion" >}}
         components:
         - name: karavi-authorization-proxy
-          image: quay.io/dell/container-storage-modules/csm-authorization-sidecar:v1.13.0
+          image: quay.io/dell/container-storage-modules/csm-authorization-sidecar:{{< version-docs key="Authv1_csm_authorization_sidecar" >}}
           envs:
             # proxyHost: hostname of the csm-authorization server
             - name: "PROXY_HOST"

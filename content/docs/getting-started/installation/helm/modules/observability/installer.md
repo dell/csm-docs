@@ -88,12 +88,12 @@ To perform an online installation of Container Storage Module Observability, the
  {{< hide id="3" >}}- For CSI PowerMax with Authorization, configure `karaviMetricsPowerMax.authorization` in `myvalues.yaml` {{< /hide >}}
 
     ```bash
-
     ./karavi-observability-install.sh install --namespace [CSM_NAMESPACE] --values myvalues.yaml
     ```
-    ```
+
+    ```terminal
     ---------------------------------------------------------------------------------
-    > Installing Karavi Observability in namespace karavi on 1.27
+    > Installing Karavi Observability in namespace karavi on 1.32
     ---------------------------------------------------------------------------------
     |
     |- Karavi Observability is not installed                            Success

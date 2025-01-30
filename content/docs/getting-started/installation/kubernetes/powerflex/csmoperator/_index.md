@@ -129,7 +129,7 @@ run `/opt/emc/scaleio/sdc/bin/drv_cfg --add_mdm --ip 10.xx.xx.xx.xx,10.xx.xx.xx`
     spec:
       driver:
         csiDriverType: "powerflex"
-        configVersion: v2.13.0
+        configVersion: {{< version-docs key="PFlex_latestVersion" >}}
         forceRemoveDriver: true
     ```   
      Refer the [sample file](https://github.com/dell/csm-operator/blob/main/samples/minimal-samples/powerflex_v2130.yaml). Modify if needed.

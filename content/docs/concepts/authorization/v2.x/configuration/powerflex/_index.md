@@ -128,10 +128,10 @@ Given a setup where Kubernetes, a storage system, and the Authorization Proxy Se
       - name: authorization
         # enable: Enable/Disable csm-authorization
         enabled: true
-        configVersion: v1.13.0
+        configVersion: {{< version-docs key="Authv1_ConfigVersion" >}}
         components:
         - name: karavi-authorization-proxy
-          image: quay.io/dell/container-storage-modules/csm-authorization-sidecar:v2.0.0
+          image: quay.io/dell/container-storage-modules/csm-authorization-sidecar:{{< version-docs key="Authv2_csm_authorization_sidecar" >}}
           envs:
             # proxyHost: hostname of the csm-authorization server
             - name: "PROXY_HOST"
@@ -162,7 +162,7 @@ Given a setup where Kubernetes, a storage system, and the Authorization Proxy Se
 
       # sidecarProxyImage: the container image used for the csm-authorization-sidecar.
       # Default value: quay.io/dell/container-storage-modules/csm-authorization-sidecar:v2.0.0
-      sidecarProxyImage: quay.io/dell/container-storage-modules/csm-authorization-sidecar:v2.0.0
+      sidecarProxyImage: quay.io/dell/container-storage-modules/csm-authorization-sidecar:{{< version-docs key="Authv2_csm_authorization_sidecar" >}}
 
       # proxyHost: hostname of the csm-authorization server
       # Default value: None

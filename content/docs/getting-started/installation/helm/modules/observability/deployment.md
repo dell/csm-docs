@@ -204,7 +204,7 @@ The following table lists the configurable parameters of the CContainer Storage 
 
 | Parameter | Description | Default |
 | - | - | - |
-| `karaviTopology.image` | Location of the csm-topology Container image | `quay.io/dell/container-storage-modules/csm-topology:v1.10.0` |
+| `karaviTopology.image` | Location of the csm-topology Container image | `quay.io/dell/container-storage-modules/csm-topology:{{< version-docs key="Observability_csm_topology_image" >}}` |
 | `karaviTopology.enabled` | Enable the CSM for Observability Topology service | `true` |
 | `karaviTopology.provisionerNames` | Provisioner Names used to filter the Persistent Volumes created on the Kubernetes cluster (must be a comma-separated list) | ` csi-vxflexos.dellemc.com` |
 | `karaviTopology.service.type` | Kubernetes service type | `ClusterIP` |
@@ -215,7 +215,7 @@ The following table lists the configurable parameters of the CContainer Storage 
 | `otelCollector.certificateFile` | Optional valid CA public certificate file that will be used to deploy the OpenTelemetry Collector. Must use domain name 'otel-collector'. | |
 | `otelCollector.privateKeyFile` | Optional public certificate's associated private key file that will be used to deploy the OpenTelemetry Collector. Must use domain name 'otel-collector'. |  |
 | `otelCollector.service.type` | Kubernetes service type | `ClusterIP` |
-| `karaviMetricsPowerflex.image` |  CSM Metrics for PowerFlex Service image | `quay.io/dell/container-storage-modules/csm-metrics-powerflex:v1.10.0` |
+| `karaviMetricsPowerflex.image` |  CSM Metrics for PowerFlex Service image | `quay.io/dell/container-storage-modules/csm-metrics-powerflex:{{< version-docs key="Observability_csm_metrics_PFlex_image" >}}` |
 | `karaviMetricsPowerflex.enabled` | Enable CSM Metrics for PowerFlex service | `true` |
 | `karaviMetricsPowerflex.collectorAddr` | Metrics Collector accessible from the Kubernetes cluster | `otel-collector:55680`  |
 | `karaviMetricsPowerflex.provisionerNames` | Provisioner Names used to filter for determining PowerFlex SDC nodes( Must be a Comma-separated list) | ` csi-vxflexos.dellemc.com` |
@@ -233,7 +233,7 @@ The following table lists the configurable parameters of the CContainer Storage 
 | `karaviMetricsPowerflex.service.type` | Kubernetes service type | `ClusterIP` |
 | `karaviMetricsPowerflex.logLevel` | Output logs that are at or above the given log level severity (Valid values: TRACE, DEBUG, INFO, WARN, ERROR, FATAL, PANIC) | `INFO`|
 | `karaviMetricsPowerflex.logFormat` | Output logs in the specified format (Valid values: text, json) | `text`|
-| `karaviMetricsPowerstore.image` |  CSM Metrics for PowerStore Service image | `quay.io/dell/container-storage-modules/csm-metrics-powerstore:v1.10.0`|
+| `karaviMetricsPowerstore.image` |  CSM Metrics for PowerStore Service image | `quay.io/dell/container-storage-modules/csm-metrics-powerstore:{{< version-docs key="Observability_csm_metrics_PStore_image" >}}`|
 | `karaviMetricsPowerstore.enabled` | Enable CSM Metrics for PowerStore service | `true` |
 | `karaviMetricsPowerstore.collectorAddr` | Metrics Collector accessible from the Kubernetes cluster | `otel-collector:55680` |
 | `karaviMetricsPowerstore.provisionerNames` | Provisioner Names used to filter for determining PowerStore volumes (must be a Comma-separated list) | `csi-powerstore.dellemc.com` |

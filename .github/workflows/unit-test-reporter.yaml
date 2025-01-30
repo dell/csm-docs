@@ -2,7 +2,7 @@ name: Unit Test Action
 
 on:
   push:
-    branches: [ merge_main ]
+    branches: [ main ]
   pull_request:
     branches: [ main, release-* ]
 jobs:

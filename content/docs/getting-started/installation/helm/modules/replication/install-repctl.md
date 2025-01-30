@@ -19,7 +19,7 @@ Before you begin, make sure you have the repctl tool available.
 You can download a pre-built repctl binary from our [Releases](https://github.com/dell/csm-replication/releases) page.
 
 ```shell
-wget https://github.com/dell/csm-replication/releases/download/v1.11.0/repctl-linux-amd64
+wget https://github.com/dell/csm-replication/releases/download/{{< version-docs key="Replication" >}}/repctl-linux-amd64
 mv repctl-linux-amd64 repctl
 chmod +x repctl
 ```
@@ -27,7 +27,7 @@ chmod +x repctl
 Alternately, if you want to build the binary yourself, you can follow these steps:
 
 ```shell
-git clone -b v1.11.0 https://github.com/dell/csm-replication.git
+git clone -b {{< version-docs key="Replication" >}} https://github.com/dell/csm-replication.git
 cd csm-replication/repctl
 make build
 ```

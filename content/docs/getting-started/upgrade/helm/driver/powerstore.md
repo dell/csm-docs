@@ -11,13 +11,13 @@ Description: Upgrade PowerStore CSI driver
 {{% /pageinfo %}}
 You can upgrade the CSI Driver for Dell PowerStore using Helm.
 
-## Update Driver from v2.12.0 to v2.13.0 using Helm
+## Update Driver from {{< version-docs key="PStore_preVersion" >}} to {{< version-docs key="PStore_latestVersion" >}} using Helm
 
 Note: While upgrading the driver via helm, controllerCount variable in myvalues.yaml can be at most one less than the number of worker nodes.
 
 **Steps**
 
-1. Run `git clone -b v2.13.0 https://github.com/dell/csi-powerstore.git` to clone the git repository and get the driver.
+1. Run `git clone -b {{< version-docs key="PStore_latestVersion" >}} https://github.com/dell/csi-powerstore.git` to clone the git repository and get the driver.
 2. Edit `samples/secret/secret.yaml` file and configure connection information for your PowerStore arrays changing the following parameters:
     - *endpoint*: defines the full URL path to the PowerStore API.
     - *globalID*: specifies what storage cluster the driver should use  

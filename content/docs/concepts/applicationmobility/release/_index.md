@@ -7,7 +7,7 @@ Description: >
   Release Notes
 ---
 {{% pageinfo color="primary" %}} 
-{{< message text="8" >}} 
+{{< message text="10" >}} 
 {{% /pageinfo %}}
 
 ## CSM Application Mobility v1.3.0
