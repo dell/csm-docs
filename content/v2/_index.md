@@ -7,10 +7,6 @@ linkTitle: "Documentation"
 <span><span/>{{< message text="6" >}}
 {{% /pageinfo %}}
 
-{{% pageinfo color="dark" %}}
-<span><span/>{{< message text="6" >}}
-{{% /pageinfo %}}
-
 {{% pageinfo color="primary" %}}
 
 1. <span><span/>{{< message text="7" >}}
