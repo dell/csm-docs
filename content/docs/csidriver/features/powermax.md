@@ -692,6 +692,11 @@ managementServers:
     username: admin
     password: password
     skipCertificateValidation: true
+    limits:
+      maxActiveRead: 5
+      maxActiveWrite: 4
+      maxOutStandingRead: 50
+      maxOutStandingWrite: 50
   - endpoint: https://backup-1.unisphe.re:8443
     username: admin2
     password: password2
