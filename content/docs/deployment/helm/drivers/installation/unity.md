@@ -51,6 +51,10 @@ If you use the iSCSI protocol, set up the iSCSI initiators as follows:
 - Enable and start the _iscsid_ service on each Kubernetes worker node. This service is responsible for managing the iSCSI initiator. You can enable the service by running the following command on all worker nodes: `systemctl enable --now iscsid`
 - Ensure that the unique initiator name is set in _/etc/iscsi/initiatorname.iscsi_.
 
+**Note**: The Dell CSI driver supports both iSCSI and FC protocols simultaneously. If iSCSI IQNs are present and 
+FC WWNs are present, then Host registrations on the Unity system will include all initiators. 
+    To limit the initiators, ensure only the desired initiators are configured on the worker nodes.
+
 For more information about configuring iSCSI, see [Dell Host Connectivity guide](https://www.delltechnologies.com/asset/en-us/products/storage/technical-support/docu5128.pdf).
 
 ### Linux multipathing requirements
