@@ -1,0 +1,43 @@
+# Copyright (c) 2024 Dell Inc., or its subsidiaries. All Rights Reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#  http://www.apache.org/licenses/LICENSE-2.0
+
+name: Spell Check
+
+on: 
+  pull_request:  # Trigger this workflow on pull request events
+
+jobs:
+  spell_check:  # Job name for clarity
+    name: Spell Check with Codespell
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.8]  # Define the Python version here
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2  # Check out the repository code
+
+      - name: Set Up Python Environment
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}  # Set up the specified Python version
+
+      - name: Install Codespell
+        run: |
+          python -m pip install --upgrade pip  # Upgrade pip
+          pip install codespell  # Install codespell
+
+      - name: Run Codespell on Markdown Files
+        run: |
+          find . -type f -name "*.md" -exec codespell \
+            --ignore-words=.github/spell-check-autofix/codespell.txt \
+            --builtin clear,rare,informal {} +
+        # 'find' command searches for all .md files and runs 'codespell' on them.
+        # The '--ignore-words' option specifies custom dictionary file.
+        # The '--builtin' option uses 'codespell' with built-in dictionaries: clear, rare, informal.
