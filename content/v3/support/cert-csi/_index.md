@@ -21,9 +21,9 @@ There are three methods of installing `cert-csi`.
 
 1. [Download the executable from the latest GitHub release](#download-release-linux).
 2. [Pull the container image from DockerHub](#pull-the-container-image).
-3. [Build the exectuable or container image locally](#building-locally).
+3. [Build the executable or container image locally](#building-locally).
 
-> The exectuable from the GitHub Release only supports Linux. For non-Linux users, you must build the `cert-csi` executable [locally](#building-locally).
+> The executable from the GitHub Release only supports Linux. For non-Linux users, you must build the `cert-csi` executable [locally](#building-locally).
 
 ### Download Release (Linux)
 > NOTE: Please ensure you delete any previously downloaded Cert-CSI binaries, as each release uses the same name (`cert-csi-linux-amd64`). After installing the latest version, run the `cert-csi -v` command to verify the installed version.
@@ -73,7 +73,7 @@ mv ./cert-csi-linux-amd64 ~/.local/bin/cert-csi
 ### Building Locally
 #### Prerequisites
 - [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
-- [Go](https://go.dev/doc/install) (If buidling the executable)
+- [Go](https://go.dev/doc/install) (If building the executable)
 - Podman or Docker (If building the container image)
 
 1. Clone the repository
@@ -135,7 +135,7 @@ make install-ms
 > Database (SQLite) file for test suites is `<storage-class-name>.db` in the working directory of cert-csi.\
 > Database (SQLite) file for functional test suites is `cert-csi-functional.db` in the working directory of cert-csi.
 
-> NOTE: If using the container image, these files will be inside the container. If you are interested in these files, it is recommended to use the exectuable.
+> NOTE: If using the container image, these files will be inside the container. If you are interested in these files, it is recommended to use the executable.
 
 ## Run All Test Suites
 
@@ -167,7 +167,7 @@ storageClasses:
         attr1: # volume attr for EphemeralVolumeSuite
         attr2: # volume attr for EphemeralVolumeSuite
     capacityTracking: # capacityTracking test requires the storage class to have volume binding mode as 'WaitForFirstConsumer'
-      driverNamespace: # namepsace where driver is installed
+      driverNamespace: # namespace where driver is installed
       pollInterval:    # duration to poll capacity (e.g., 2m)  
 ```
 
@@ -354,14 +354,14 @@ storageClasses:
 3. If `storageClasses.clone` is `true`, executes the [Volume Cloning](#volume-cloning) suite.
 4. If `storageClasses.expansion` is `true`, executes the [Volume Expansion](#volume-expansion) suite.
 5. If `storageClasses.expansion` is `true` and `storageClasses.rawBlock` is `true`, executes the [Volume Expansion](#volume-expansion) suite with raw block volumes.
-6. If `storageClasses.snapshot` is `true`, exeuctes the [Snapshot](#snapshots) suite and the [Replication](#replication) suite.
+6. If `storageClasses.snapshot` is `true`, executes the [Snapshot](#snapshots) suite and the [Replication](#replication) suite.
 7. If `storageClasses.rawBlock` is `true`, executes the [Multi-Attach Volume](#multi-attach-volume) suite with raw block volumes.
 8. If `storageClasses.rwx` is `true`, executes the [Multi-Attach Volume](#multi-attach-volume) suite. (Storgae Class must be NFS.)
 9. If `storageClasses.volumeHealth` is `true`, executes the [Volume Health Metrics](#volume-health-metrics) suite.
 10. If `storageClasses.rwop` is `true`, executes the [Multi-Attach Volume](#multi-attach-volume) suite with the volume access mode `ReadWriteOncePod`.
 11. If `storageClasses.ephemeral` exists, executes the [Ephemeral Volumes](#ephemeral-volumes) suite.
 12. If `storageClasses.vgs` is `true`, executes the [Volume Group Snapshot]() suite.
-13. If `storageClasses.capacityTracking` exists, exeuctes the [Storage Class Capacity Tracking](#storage-capacity-tracking) suite.
+13. If `storageClasses.capacityTracking` exists, executes the [Storage Class Capacity Tracking](#storage-capacity-tracking) suite.
 
 > NOTE: For testing/debugging purposes, it can be useful to use the `--no-cleanup` so resources do not get deleted.
 
@@ -371,7 +371,7 @@ storageClasses:
 cert-csi certify --cert-config <path-to-config> --vsc <volume-snapshot-class>
 ```
 
-Withold the `--vsc` argument if Snapshot capabilities are disabled.
+Withhold the `--vsc` argument if Snapshot capabilities are disabled.
 
 ```bash
 cert-csi certify --cert-config <path-to-config>
@@ -381,7 +381,7 @@ Optional Params:
 
 Run `cert-csi certify -h` for more options.
 
-If you are using the container image, the `cert-config` file must be mounted into the container. Assuming your `cert-config` file is `/home/user/example-certify-config.yaml`, here are examples of how to exeucte this suite with the container image.
+If you are using the container image, the `cert-config` file must be mounted into the container. Assuming your `cert-config` file is `/home/user/example-certify-config.yaml`, here are examples of how to execute this suite with the container image.
 
 {{< tabpane name="running-container-certify" lang="bash">}}
 {{<tab header="Docker" >}}
@@ -539,7 +539,7 @@ Run `cert-csi test expansion -h` for more options.
 6. Waits for the Volume Snapshot to be Ready.
 7. Create a Persistent Volume Claim with raw block volume mode from the Volume Snapshot.
 8. Creates Pod to consume the Persistent Volume Claim.
-9. Mounts the raw block volume and verifes the checksum of the data.
+9. Mounts the raw block volume and verifies the checksum of the data.
 
 ```bash
 cert-csi test blocksnap --sc <storageClass> --vsc <snapshotclass>
@@ -578,7 +578,7 @@ Run `cert-csi test ephemeral-volume -h` for more options.
 > `--driver` is the name of a CSI Driver from the output of `kubectl get csidriver` (e.g, csi-vxflexos.dellemc.com).
 > This suite does not delete resources on success.
 
-If you are using the container image, the `attr` file must be mounted into the container. Assuming your `attr` file is `/home/user/ephemeral-config.properties`, here are examples of how to exeucte this suite with the container image.
+If you are using the container image, the `attr` file must be mounted into the container. Assuming your `attr` file is `/home/user/ephemeral-config.properties`, here are examples of how to execute this suite with the container image.
 
 {{< tabpane name="running-container-ephemeral-volume" lang="bash">}}
 {{<tab header="Docker" >}}
@@ -634,9 +634,9 @@ Sample ephemeral-config.properties (key/value pair)
 
 #### Storage Capacity Tracking
 1. Creates namespace `functional-test` where resources will be created.
-2. Creates a duplicate of the provided storge class using prefix `capacity-tracking`.
+2. Creates a duplicate of the provided storage class using prefix `capacity-tracking`.
 3. Waits for the associated CSIStorageCapacity object to be created.
-4. Deletes the duplicate storge class.
+4. Deletes the duplicate storage class.
 5. Waits for the associated CSIStorageCapacity to be deleted.
 6. Sets the capacity of the CSIStorageCapacity of the provided storage class to zero.
 7. Creates Pod with a volume using the provided storage class.
@@ -714,7 +714,7 @@ cert-csi --db <path/to/.db> report --testrun <test-run-name> --html --txt
 Report types:
 --html: performance html report
 --txt: performance txt report
---xml: junit compatible xml report, contains basic run infomation
+--xml: junit compatible xml report, contains basic run information
 --tabular: tidy html report with basic run information
 ```
 
