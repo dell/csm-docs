@@ -13,7 +13,7 @@ For logs use:
 kubectl logs <driver pod> -n dell-cosi
 ```
 
-Additionaly check kubernetes resources:
+Additionally check kubernetes resources:
 
 ```bash
 kubectl get bucketclaim -n dell-cosi

@@ -31,7 +31,7 @@ This document outlines all dellctl commands, their intended use, options that ca
 | [dellctl encryption rekey](#dellctl-encryption-rekey) | Rekey an encrypted volume |
 | [dellctl encryption rekey-status](#dellctl-encryption-rekey-status) | Get status of an encryption rekey operation |
 | [dellctl images](#dellctl-images) | List the container images needed by csi driver |
-| [dellctl volume get](#dellctl-volume-get) | Gets PowerFlex volume infomation for a given tenant on a local cluster |
+| [dellctl volume get](#dellctl-volume-get) | Gets PowerFlex volume information for a given tenant on a local cluster |
 | [dellctl admin token](#dellctl-admin-token) | Generate an administrator token for administrating CSM Authorization v2 |
 | [dellctl generate token](#dellctl-generate-token) | Generate a tenant token for configuring a Dell CSI Driver with CSM Authorization v2 |
 
@@ -939,7 +939,7 @@ dellemc/csm-authorization-sidecar:v1.7.0        k8s1.27,k8s1.26,k8s1.25         
 
 ### dellctl volume get
 
-Gets PowerFlex volume infomation for a given tenant on a local cluster
+Gets PowerFlex volume information for a given tenant on a local cluster
 
 ##### Aliases
   get, ls, list
@@ -955,7 +955,7 @@ Gets PowerFlex volume infomation for a given tenant on a local cluster
 
 ##### Output
 
-Gets PowerFlex volume infomation for a given tenant on a local cluster. The namespace is the namespace where tenant secret is created. 
+Gets PowerFlex volume information for a given tenant on a local cluster. The namespace is the namespace where tenant secret is created. 
 
 >Note: This was output was generated using Authorization Proxy version 1.5.1. Please ensure you are using version 1.5.1 or greater.
 

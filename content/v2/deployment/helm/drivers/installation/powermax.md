@@ -117,7 +117,7 @@ modprobe nvme_tcp
 > Starting with OCP 4.14 NVMe/TCP is enabled by default on RCOS nodes.
 
 
-**Cluster requirments**
+**Cluster requirements**
 
 - All OpenShift or Kubernetes nodes connecting to Dell storage arrays must use unique host NQNs.
 - The driver requires the NVMe command-line interface (nvme-cli) to manage the NVMe clients and targets. The NVMe CLI tool is installed in the host using the following command on RPM oriented Linux distributions.

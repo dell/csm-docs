@@ -28,13 +28,13 @@ weight: 1
 | Platform                   | Version          |
 |----------------------------|:----------------:|
 | Kubernetes                 | 1.30, 1.31, 1.32 |
-| Red Hat OpenShift          | 4.17, 4.18       |
+| Red Hat OpenShift          | 4.16, 4.17       |
 | Mirantis Kubernetes Engine | 3.7.x            |
 {{</table>}}
 
 > Notes:
 > * Any orchestrator platform or version that's not mentioned here must be self-certified using [Cert-CSI](../support/cert-csi/) in order to be supported. Although not mandatory, we recommend users to use orchestrator platforms and versions that have not met their end of life.
-> * CSM Authorization Server v1 is not supported on Red Hat OpenShift. However, it is supported to install CSM Authorization Server v1 on standard Kubernetes and a Dell CSI Drvier enabled with CSM Authorization on Red Hat OpenShift. CSM Authorization Server v2 is supported on Red Hat OpenShift.
+> * CSM Authorization Server v1 is not supported on Red Hat OpenShift. However, it is supported to install CSM Authorization Server v1 on standard Kubernetes and a Dell CSI Driver enabled with CSM Authorization on Red Hat OpenShift. CSM Authorization Server v2 is supported on Red Hat OpenShift.
 
 ## OpenShift Virtualization
 

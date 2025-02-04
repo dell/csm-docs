@@ -167,7 +167,7 @@ To enable this feature you need to set `connection.enableCHAP` to `true` when in
 
 The driver uses the generated chapsecret to configure the iSCSI node database on each node with iSCSI access.
 
-When creating a new host on powerstore array driver will populate host chap credentials with generated values. When re-using already existing hosts driver must override existing CHAP credentials with newly generated ones. 
+When creating a new host on powerstore array driver will populate host chap credentials with generated values. When reusing already existing hosts driver must override existing CHAP credentials with newly generated ones. 
 
 ## Volume Expansion
 
@@ -708,7 +708,7 @@ CSI Driver for Dell Powerstore 2.3.0 and above supports creating volume groups a
 
 ## Configurable Volume Attributes (Optional)
 
-The CSI PowerStore driver version 2.3.0 and above supports Configurable volume atttributes. 
+The CSI PowerStore driver version 2.3.0 and above supports Configurable volume attributes. 
 
 PowerStore array provides a set of optional volume creation attributes. These attributes can be configured for the volume (block and NFS) at the time of creation through PowerStore CSI driver. 
 These attributes can be specified as labels in PVC yaml file. The following is a sample manifest for creating volume with some of the configurable volume attributes. 

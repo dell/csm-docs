@@ -140,7 +140,7 @@ modprobe nvme_tcp
 
 > Starting with OCP 4.14 NVMe/TCP is enabled by default on RCOS nodes.
 
-**Cluster requirments**
+**Cluster requirements**
 
 - All OpenShift or Kubernetes nodes connecting to Dell storage arrays must use unique host NVMe Qualified Names (NQNs).
 
