@@ -27,7 +27,7 @@ description: Release notes for PowerStore CSI driver
 - [#1447 - [BUG]: Gobrick does not clean wwids from /etc/multipath/wwids after removing multipath devices ](https://github.com/dell/csm/issues/1447)
 - [#1458 - [BUG]: CSI-PowerStore Node Prefix is ignored](https://github.com/dell/csm/issues/1458)
 - [#1530 - [BUG]: Duplicate host NQNs on nodes with no logs](https://github.com/dell/csm/issues/1530)
-- [#1534 - [BUG]: CSI PowerStore unable to resize NVMe block PVC, even though volume on the array get's resized](https://github.com/dell/csm/issues/1534)
+- [#1534 - [BUG]: CSI PowerStore unable to resize NVMe block PVC, even though volume on the array gets resized](https://github.com/dell/csm/issues/1534)
 - [#1538 - [BUG]: Host definitions not being created after adding new appliance to secret](https://github.com/dell/csm/issues/1538)
 - [#1539 - [BUG]: Wrong storage protocol used when multiple PowerStore arrays are defined in secret](https://github.com/dell/csm/issues/1539)
 
