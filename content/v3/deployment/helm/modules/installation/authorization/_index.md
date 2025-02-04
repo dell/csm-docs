@@ -17,7 +17,7 @@ The following CSM Authorization components are installed in the specified namesp
 - proxy-service, which forwards requests from the CSI Driver to the backend storage array
 - tenant-service, which configures tenants, role bindings, and generates JSON Web Tokens
 - role-service, which configures roles for tenants to be bound to
-- storage-service, which configures backend storage arrays for the proxy-server to foward requests to
+- storage-service, which configures backend storage arrays for the proxy-server to forward requests to
 
 The following third-party components are installed in the specified namespace:
 - redis, which stores data regarding tenants and their volume ownership, quota, and revokation status

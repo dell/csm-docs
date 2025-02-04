@@ -175,4 +175,4 @@ Given a setup where Kubernetes, a storage system, and the CSM for Authorization 
       skipCertificateValidation: true
     ```
 
-1. Install the Dell CSI PowerFlex driver following the appropriate documenation for your installation method.
+1. Install the Dell CSI PowerFlex driver following the appropriate documentation for your installation method.
