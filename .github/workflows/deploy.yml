@@ -15,10 +15,16 @@ jobs:
          submodules: recursive  # Fetch Hugo themes
          fetch-depth: 0    # Fetch all history for .GitInfo and .Lastmod
 
+     - name: Get latest Hugo version
+       id: hugo_version
+       run: |
+         latest_version=$(curl -s https://api.github.com/repos/gohugoio/hugo/releases/latest | jq -r .tag_name)
+         echo "HUGO_VERSION=$latest_version" >> $GITHUB_ENV
+
      - name: Setup Hugo
        uses: peaceiris/actions-hugo@v2
        with:
-         hugo-version: "0.141.0"
+         hugo-version: ${{ env.HUGO_VERSION }}
          extended: true
 
      - name: Setup Go
