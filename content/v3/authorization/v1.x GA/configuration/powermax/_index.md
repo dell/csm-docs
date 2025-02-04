@@ -166,6 +166,6 @@ Create the karavi-authorization-config secret using this command:
               value: "true"
     ```
 
-5. Install the Dell CSI PowerMax driver following the appropriate documenation for your installation method.
+5. Install the Dell CSI PowerMax driver following the appropriate documentation for your installation method.
 
 6. (Optional) Install [dellctl](../../../../support/cli/#installation-instructions) to perform Kubernetes administrator commands for additional capabilities (e.g., list volumes). Please refer to the [dellctl documentation page](../../../../support/cli) for the installation steps and command list.
