@@ -53,6 +53,10 @@ If you use the iSCSI protocol, set up the iSCSI initiators as follows:
 
 For more information about configuring iSCSI, see [Dell Host Connectivity guide](https://www.delltechnologies.com/asset/en-us/products/storage/technical-support/docu5128.pdf).
 
+**Note**: The Dell CSI driver supports both iSCSI and FC protocols simultaneously.If both iSCSI IQNs and 
+FC WWNs are present, then the Host registrations on the Unity system will include all initiators. 
+    To limit the initiators, ensure only the desired initiators are configured on the worker nodes.
+
 ### Linux multipathing requirements
 
 Dell Unity XT supports Linux multipathing. Configure Linux multipathing before installing the CSI Driver for Dell
