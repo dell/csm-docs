@@ -109,7 +109,7 @@ modprobe nvme_tcp
 
 ### Auto RDM for vSphere over FC requirements
 
-The CSI Driver for Dell PowerMax supports auto RDM for vSphere over FC. These requirements are applicable for the clusters deployed on ESX/ESXi using virtualized environement.
+The CSI Driver for Dell PowerMax supports auto RDM for vSphere over FC. These requirements are applicable for the clusters deployed on ESX/ESXi using virtualized environment.
 
 Set up the environment as follows: 
 
