@@ -57,7 +57,7 @@ A `storage` entity in CSM Authorization consists of the storage type (`powerflex
 
    | Parameter                 | Description                                                                          | Required | Default |
    | ------------------------- | ------------------------------------------------------------------------------------ | -------- | ------- |
-   | type                      | The type of the stoage array.                                                        | Yes      | -       |
+   | type                      | The type of the storage array.                                                        | Yes      | -       |
    | endpoint                  | HTTPS REST API endpoint of the backend storage array.                                | Yes      | -       |
    | systemID                  | System ID of the backend storage array.                                              | Yes      | -       |
    | vault.identifier          | The identifier of the Vault to be used that was configured in the Authorization CR.  | Yes      | -       |
@@ -97,7 +97,7 @@ A `role` consists of a name, the storage array to use, and the quota limit for t
    | name       | The name of the role that will be used to bind with the tenant. | Yes      | -       |
    | quota      | The amount of allocated space for the specified role.           | Yes      | -       |
    | systemID   | System ID of the backend storage array.                         | Yes      | -       |
-   | systemType | The type of the stoage array.                                   | Yes      | -       |
+   | systemType | The type of the storage array.                                   | Yes      | -       |
    | pool       | The storage pool name.                                          | Yes      | -       |
 
 For example, to create a role named `role1` using the PowerFlex storage created above with a quota limit of 128iB in storage pool `myStoragePool`:
@@ -129,7 +129,7 @@ A `tenant` is a Kubernetes cluster that a role will be bound to. Edit these para
 
    | Parameter    | Description                                                                                                                    | Required | Default |
    | ------------ | ------------------------------------------------------------------------------------------------------------------------------ | -------- | ------- |
-   | roles        | A comma seperate list of roles that the tenant can be associated with.                                                         | Yes      | -       |
+   | roles        | A comma separate list of roles that the tenant can be associated with.                                                         | Yes      | -       |
    | approveSdc   | ApproveSdc is used to enable an SDC to access the MDM while the SDC is in restricted access mode.                              | Yes      | false   |
    | revoke       | Revoke is a boolean to indicate whether tenant is revoked. Set to `true` to revoke the tenant but keep it in CSM Auth.         | Yes      | false   |
    | volumePrefix | The prefix that all volumes and snapshots will contain to show association with the tenant. It should not exceed 3 characters. | Yes      | -       |

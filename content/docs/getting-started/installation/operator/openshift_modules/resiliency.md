@@ -120,7 +120,7 @@ Resiliency can be enabled by following sample file
      
       <br>
 
-      Use this comand to enable **resilincey protection** on a pod 
+      Use this command to enable **resilincey protection** on a pod 
 
       ```terminal
       oc label pods pod-vxflexos podmon.dellemc.com/driver=csi-vxflexos 
@@ -152,14 +152,14 @@ Resiliency can be enabled by following sample file
 
     <br> 
 
-    Use this comand to disable **resilincey** 
+    Use this command to disable **resilincey** 
 
 
     ```bash
     oc edit csm vxflexos -n vxflexos
     ``` 
 
-    Exmple: 
+    Example: 
     ```bash
     apiVersion: storage.dell.com/v1
     kind: ContainerStorageModule

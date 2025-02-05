@@ -1,5 +1,5 @@
 ---
-title: "Offline Dependecies"
+title: "Offline Dependencies"
 linkTitle: "Offline Dependencies"
 no_list: true
 description: Offline Dependencies

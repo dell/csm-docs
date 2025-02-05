@@ -182,7 +182,7 @@ This section outlines the upgrade steps for Container Storage Modules (CSM) for 
       kubectl get csm -n <driver-namespace>
       ```
 
-      For example - If the CSI PowerFlex driver is installed in vxflexos namepace then run this command to get the object name
+      For example - If the CSI PowerFlex driver is installed in vxflexos namespace then run this command to get the object name
 
       ```bash
       kubectl get csm -n vxflexos

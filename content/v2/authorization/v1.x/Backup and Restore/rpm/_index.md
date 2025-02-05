@@ -79,7 +79,7 @@ deployment.apps/proxy-server restarted
 
 Redis is used to store application data regarding [tenants, quota, and volume ownership](../../design#quota--volume-ownership). This data is stored on the system under `/var/lib/rancher/k3s/storage/<redis-primary-pv-claim-volume-name>/appendonly.aof`. 
 
-`appendonly.aof` can be copied and used to restore this appliation data in Authorization deployments. See the example.
+`appendonly.aof` can be copied and used to restore this application data in Authorization deployments. See the example.
 
 ### Steps to execute in the existing Authorization deployment
 

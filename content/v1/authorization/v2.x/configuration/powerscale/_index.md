@@ -179,4 +179,4 @@ Given a setup where Kubernetes, a storage system, and the CSM for Authorization 
       skipCertificateValidation: true
     ```
 
-6. Install the Dell CSI PowerScale driver following the appropriate documenation for your installation method.
+6. Install the Dell CSI PowerScale driver following the appropriate documentation for your installation method.

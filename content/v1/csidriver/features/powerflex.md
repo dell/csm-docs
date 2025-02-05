@@ -570,7 +570,7 @@ When creating ephemeral volumes, it is important to specify the following within
 
 ## Consuming Existing Volumes with Static Provisioning
 
-To use existing volumes from PowerFlex array as Peristent volumes in your Kubernetes environment, perform these steps:
+To use existing volumes from PowerFlex array as Persistent volumes in your Kubernetes environment, perform these steps:
 1. Log into one of the MDMs of the PowerFlex cluster.
 2. Execute these commands to retrieve the `systemID` and `volumeID`.
     1. ```bash

@@ -22,7 +22,7 @@ The CSM Authorization RPM will be deprecated in a future release. It is highly r
   This response occurs when running 'make rpm' without the proper permissions or correct pathing of the Authorization repository.
 
 ```
-Error response from daemon: failed to create shim task: OCI runtime create failed: runc create failed: unable to start container process: error during container init: error mounting "/root/karavi-authorization/bin/deploy" to rootfs at "/home/builder/rpm/deploy": mount /root/karavi-authorization/bin/deploy:/home/builder/rpm/deploy (via /proc/self/fd/6), flags: 0x5000: not a directory: unknown: Are you trying to mount a directory onto a file (or vice-versa)? Check if the specified host path exists and is the expected type.ERRO[0001] error waiting for container: context canceled 
+Error response from daemon: failed to create shim task: OCI runtime create failed: runc create failed: unable to start container process: error during container init: error mounting "/root/karavi-authorization/bin/deploy" to rootfs at "/home/builder/rpm/deploy": mount /root/karavi-authorization/bin/deploy:/home/builder/rpm/deploy (via /proc/self/fd/6), flags: 0x5000: not a directory: unknown: Are you trying to mount a directory onto a file (or vice-versa)? Check if the specified host path exists and is the expected type.ERROR[0001] error waiting for container: context canceled 
 ```
 
 __Resolution__

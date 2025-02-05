@@ -177,4 +177,4 @@ Given a setup where Kubernetes, a storage system, and the Container Storage Modu
       skipCertificateValidation: true
     ```
 
-6. Install the CSI PowerScale driver following the appropriate documentation for your installation method.
+6. Install the Dell CSI PowerScale driver following the appropriate documentation for your installation method.

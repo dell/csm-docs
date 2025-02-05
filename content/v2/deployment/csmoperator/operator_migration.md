@@ -19,7 +19,7 @@ description: >
 2. Map and update the settings from the CR in step 1 to the relevant CSM Operator CR (found in [csm-operator repository](https://github.com/dell/csm-operator/blob/main/samples)).
     - As the yaml content may differ, ensure the values held in the step 1 CR backup are present in the new CR before installing the new driver. CR Samples for [CSI Operator](https://github.com/dell/dell-csi-operator/tree/main/samples) and [CSM Operator](https://github.com/dell/csm-operator/tree/main/samples) can be used to compare and map the differences in attributes.
         - Ex: spec.driver.fsGroupPolicy in [CSI Operator](https://github.com/dell/dell-csi-operator/blob/main/samples/) maps to spec.driver.csiDriverSpec.fSGroupPolicy in [CSM Operator](https://github.com/dell/csm-operator/blob/main/samples/)
-3. Retain (or do not delete) the secret, namespace, storage classes, and volume snapshot classes from the original deployment as they will be re-used in the CSM operator deployment
+3. Retain (or do not delete) the secret, namespace, storage classes, and volume snapshot classes from the original deployment as they will be reused in the CSM operator deployment
 4. Uninstall the CR from the CSI Operator
   ```
       kubectl delete <driver_type>/<driver_name> -n <driver_namespace>
@@ -44,7 +44,7 @@ description: >
       kubectl -n openshift-operators get CSIUnity
       kubectl -n openshift-operators get CSIUnity/test-unity -o yaml
   ```
-2. Retain (or do not delete) the secret, namespace, storage classes, and volume snapshot classes from the original deployment as they will be re-used in the CSM operator deployment
+2. Retain (or do not delete) the secret, namespace, storage classes, and volume snapshot classes from the original deployment as they will be reused in the CSM operator deployment
 3. Delete the CSI driver through the CSI Operator in the OpenShift Web Console
     - Find the CSI operator under *Operators* -> *Installed Operators*
     - Select the *Dell CSI Operator* and find your installed CSI driver under *All instances*

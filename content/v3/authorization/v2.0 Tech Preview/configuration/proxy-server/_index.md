@@ -120,7 +120,7 @@ spec:
 ```
 
 >__Note__: 
-> - The `roles` are a comma seperate list of roles that the tenant can be associated with.
+> - The `roles` are a comma separate list of roles that the tenant can be associated with.
 > - The `volumePrefix` is the prefix that all volumes and snapshots will contain to show association with the tenant.
 > - By creating a tenant, it will automatically bind with the roles for usage.
 

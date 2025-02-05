@@ -207,4 +207,4 @@ Given a setup where Kubernetes, a storage system, and the CSM for Authorization 
       skipCertificateValidation: true
     ```
 
-7. Install the Dell CSI PowerMax driver following the appropriate documenation for your installation method.
+7. Install the Dell CSI PowerMax driver following the appropriate documentation for your installation method.
