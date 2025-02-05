@@ -405,11 +405,11 @@ Check the status of the CR to verify if the driver installation is in the `Succe
 </li>
 <li>
 
-  ##### **Delete Persistance Volume Claim**
+  ##### **Delete Persistence Volume Claim**
   
   </br>
 
-  Use this command to  **Delete Persistance Volume Claim**:
+  Use this command to  **Delete Persistence Volume Claim**:
 
   ```bash
   oc delete pvc pvc-isilon-restore -n default
