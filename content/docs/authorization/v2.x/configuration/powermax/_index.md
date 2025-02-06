@@ -62,10 +62,14 @@ Given a setup where Kubernetes, a storage system, and the CSM for Authorization 
     Refer to the [Install Driver](../../../../deployment/csmoperator/drivers/powermax/#install-driver) section to prepare `powermax-creds.yaml` to configure the driver to communicate with the CSM Authorization sidecar.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     Update endpoint to match the localhost endpoint in `samples/secret/karavi-authorization-config.json`. Leave `username` and `password` with the default values as they will be ignored.
 =======
     Update endpoint to match the endpoint in `samples/secret/karavi-authorization-config.json`. Leave `username` and `password` with the default values as they will be ignored.
 >>>>>>> 55540fabec (tweak)
+=======
+    Update endpoint to match the localhost endpoint in `samples/secret/karavi-authorization-config.json`. Leave `username` and `password` with the default values as they will be ignored.
+>>>>>>> e02079c82c (tweek)
     
     **Note:** Authorization does not support `backupEndpoint` at this moment. 
     
@@ -91,10 +95,14 @@ Given a setup where Kubernetes, a storage system, and the CSM for Authorization 
     Refer to the [Install the Driver](../../../../deployment/helm/drivers/installation/powermax/#install-the-driver) section where you edit `samples/secret/secret.yaml` with the credentials of the PowerMax.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     Update endpoint to match the localhost endpoint in `samples/secret/karavi-authorization-config.json`. Leave `username` and `password` with the default values as they will be ignored.
 =======
     Update endpoint to match the endpoint in `samples/secret/karavi-authorization-config.json`. Leave `username` and `password` with the default values as they will be ignored.
 >>>>>>> 55540fabec (tweak)
+=======
+    Update endpoint to match the localhost endpoint in `samples/secret/karavi-authorization-config.json`. Leave `username` and `password` with the default values as they will be ignored.
+>>>>>>> e02079c82c (tweek)
     
     **Note:** Authorization does not support `backupEndpoint` at this moment. 
 
