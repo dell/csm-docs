@@ -1,0 +1,75 @@
+<div class="mycontent">
+  <div class="accordion" id="accordion{{ .Get "id" }}">
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="heading{{ .Get "id" }}">
+        <button class="accordion-button collapsed" style="border:1px solid #d2dcdb;" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ .Get "id" }}" aria-expanded="false" aria-controls="collapse{{ .Get "id" }}">
+          <h5>{{ .Get "title" }}</h5>
+        </button>
+      </h2>
+      <div id="collapse{{ .Get "id" }}" class="accordion-collapse collapse" aria-labelledby="heading{{ .Get "id" }}" data-bs-parent="#accordion{{ .Get "id" }}">
+        <div class="accordion-body">
+          {{ if eq (or (.Get "markdown") "false") "true" }}
+            {{ .Inner | markdownify }}
+          {{ else }}
+            {{ .Inner }}
+          {{ end }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div> 
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    // Create a unique key for the current page
+    var pageKey = "accordionState-" + window.location.pathname;
+
+    // Expand accordion based on URL hash
+    var hash = window.location.hash;
+    if (hash) {
+      var targetElement = document.querySelector(hash);
+      if (targetElement) {
+        var collapseElement = targetElement.closest(".accordion-collapse");
+        if (collapseElement) {
+          var accordionButton = document.querySelector(
+            'button[data-bs-target="#' + collapseElement.id + '"]'
+          );
+          if (accordionButton) {
+            expandAccordion(collapseElement, accordionButton);
+          }
+        }
+      }
+    }
+
+    // Restore accordion state from sessionStorage using the unique page key
+    var accordionState = JSON.parse(sessionStorage.getItem(pageKey) || "{}");
+    for (var id in accordionState) {
+      var collapseElement = document.getElementById(id);
+      if (collapseElement && accordionState[id] === "open") {
+        var accordionButton = document.querySelector(
+          'button[data-bs-target="#' + id + '"]'
+        );
+        expandAccordion(collapseElement, accordionButton);
+      }
+    }
+  });
+
+  // Save accordion state before the page unloads using the unique page key
+  window.addEventListener("beforeunload", function () {
+    var accordions = document.querySelectorAll(".accordion-collapse");
+    var accordionState = {};
+    accordions.forEach(function (collapseElement) {
+      var isExpanded = collapseElement.classList.contains("show");
+      accordionState[collapseElement.id] = isExpanded ? "open" : "closed";
+    });
+    var pageKey = "accordionState-" + window.location.pathname;
+    sessionStorage.setItem(pageKey, JSON.stringify(accordionState));
+  });
+
+  // Helper function to expand accordion
+  function expandAccordion(collapseElement, accordionButton) {
+    collapseElement.classList.add("show");
+    accordionButton.classList.remove("collapsed");
+    accordionButton.setAttribute("aria-expanded", "true");
+  }
+</script>

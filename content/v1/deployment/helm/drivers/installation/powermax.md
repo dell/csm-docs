@@ -67,6 +67,50 @@ IP.1 = "0.0.0.0"
 ```
 Use a tool such as `openssl` to generate this secret using the example below:
 
+Create the Configuration file (openssl.cnf) which includes the subjectAltName:
+```bash
+[ req ]
+default_bits       = 2048
+distinguished_name = req_distinguished_name
+req_extensions     = req_ext
+prompt             = no
+
+[ req_distinguished_name ]
+C  = XX
+L  = Default City
+O  = Default Company Ltd
+
+[ req_ext ]
+subjectAltName = @alt_names
+
+[ alt_names ]
+DNS.1 = "csipowermax-reverseproxy"
+IP.1 = "0.0.0.0"
+```
+Use a tool such as `openssl` to generate this secret using the example below:
+
+Create the Configuration file (openssl.cnf) which includes the subjectAltName:
+```bash
+[ req ]
+default_bits       = 2048
+distinguished_name = req_distinguished_name
+req_extensions     = req_ext
+prompt             = no
+
+[ req_distinguished_name ]
+C  = XX
+L  = Default City
+O  = Default Company Ltd
+
+[ req_ext ]
+subjectAltName = @alt_names
+
+[ alt_names ]
+DNS.1 = "powermax-reverseproxy"
+IP.1 = "0.0.0.0"
+```
+
+Generate the CSR and Self-Signed Certificate:
 ```bash
 openssl genrsa -out tls.key 2048
 openssl req -new -key tls.key -out tls.csr -config openssl.cnf
