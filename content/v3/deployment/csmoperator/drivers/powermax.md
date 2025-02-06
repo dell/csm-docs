@@ -175,7 +175,7 @@ Follow this procedure to set up PowerPath for Linux:
 
 ### Auto RDM for vSphere over FC requirements
 
-The CSI Driver for Dell PowerMax supports auto RDM for vSphere over FC. These requirements are applicable for the clusters deployed on ESX/ESXi using virtualized environement.
+The CSI Driver for Dell PowerMax supports auto RDM for vSphere over FC. These requirements are applicable for the clusters deployed on ESX/ESXi using virtualized environment.
 
 Set up the environment as follows:
 
@@ -305,7 +305,7 @@ Create a secret named powermax-certs in the namespace where the CSI PowerMax dri
    | X_CSI_VCenter_HOST                              | URL/endpoint of the vCenter where all the ESX are present                                                                                                                                                                                                                | Yes      | ""                             |
    | ***Node parameters***                           |                                                                                                                                                                                                                                                                          |          |                                |
    | X_CSI_POWERMAX_ISCSI_ENABLE_CHAP                | Enable ISCSI CHAP authentication. For more details on this feature see the related [documentation](../../../../csidriver/features/powermax/#iscsi-chap)                                                                                                                               | No       | false                          |
-   | X_CSI_TOPOLOGY_CONTROL_ENABLED                  | Enable/Disabe topology control. It filters out arrays, associated transport protocol available to each node and creates topology keys based on any such user input.                                                                                                      | No       | false                          |
+   | X_CSI_TOPOLOGY_CONTROL_ENABLED                  | Enable/Disable topology control. It filters out arrays, associated transport protocol available to each node and creates topology keys based on any such user input.                                                                                                      | No       | false                          |
    | ***CSI Reverseproxy Module***                   |                                                                                                                                                                                                                                                                          |          |                                |
    | X_CSI_REVPROXY_TLS_SECRET                       | Name of TLS secret defined in config map                                                                                                                                                                                                                                 | Yes      | "csirevproxy-tls-secret"       |
    | X_CSI_REVPROXY_PORT                             | Port number where reverseproxy will listen as defined in config map                                                                                                                                                                                                      | Yes      | "2222"                         |
@@ -443,10 +443,10 @@ Support for auto RDM for vSphere over FC feature is optional and by default this
            # Default value: "" <empty>
            - name: "X_CSI_VSPHERE_PORTGROUP"
              value: ""
-           # X_CSI_VSPHERE_HOSTNAME: An existing host(initiator group)/ host group(cascaded intiator group) that driver will use for vSphere
+           # X_CSI_VSPHERE_HOSTNAME: An existing host(initiator group)/ host group(cascaded initiator group) that driver will use for vSphere
            # this host/host group should contain initiators from all the ESXs/ESXi host where the cluster is deployed
            # recommended format: csi-x-VC-HN, x can be anything of user choice
-           # Allowed value: valid existing host(initiator group)/ host group(cascaded intiator group) on the array
+           # Allowed value: valid existing host(initiator group)/ host group(cascaded initiator group) on the array
            # Default value: "" <empty>
            - name: "X_CSI_VSPHERE_HOSTNAME"
              value: ""

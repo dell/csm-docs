@@ -937,7 +937,7 @@ dellemc/csm-authorization-sidecar:v1.7.0        k8s1.27,k8s1.26,k8s1.25         
 
 ### dellctl volume get
 
-Gets PowerFlex volume infomation for a given tenant on a local cluster
+Gets PowerFlex volume information for a given tenant on a local cluster
 
 ##### Aliases
   get, ls, list
@@ -953,7 +953,7 @@ Gets PowerFlex volume infomation for a given tenant on a local cluster
 
 ##### Output
 
-Gets PowerFlex volume infomation for a given tenant on a local cluster. The namespace is the namespace where tenant secret is created. 
+Gets PowerFlex volume information for a given tenant on a local cluster. The namespace is the namespace where tenant secret is created. 
 
 >Note: This was output was generated using Authorization Proxy version 1.5.1. Please ensure you are using version 1.5.1 or greater.
 
