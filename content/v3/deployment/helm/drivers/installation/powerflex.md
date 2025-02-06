@@ -172,7 +172,7 @@ Use the below command to replace or update the secret:
 | defaultFsType | Used to set the default FS type which will be used for mount volumes if FsType is not specified in the storage class. Allowed values: ext4, xfs. | Yes | ext4 |
 | fsGroupPolicy | Defines which FS Group policy mode to be used. Supported modes are`None, File, and ReadWriteOnceWithFSType.` | No | "ReadWriteOnceWithFSType" |
 | imagePullPolicy | Policy to determine if the image should be pulled prior to starting the container. Allowed values: Always, IfNotPresent, Never. | Yes | IfNotPresent | 
-| enablesnapshotcgdelete | A boolean that, when enabled, will delete all snapshots in a consistency group everytime a snap in the group is deleted. | Yes | false |
+| enablesnapshotcgdelete | A boolean that, when enabled, will delete all snapshots in a consistency group every time a snap in the group is deleted. | Yes | false |
 | enablelistvolumesnapshot | A boolean that, when enabled, will allow list volume operation to include snapshots (since creating a volume from a snap actually results in a new snap). It is recommend this be false unless instructed otherwise. | Yes | false |
 | allowRWOMultiPodAccess | Setting allowRWOMultiPodAccess to "true" will allow multiple pods on the same node to access the same RWO volume. This behavior conflicts with the CSI specification version 1.3. NodePublishVolume description that requires an error to be returned in this case. However, some other CSI drivers support this behavior and some customers desire this behavior. Customers use this option at their own risk. | Yes | false |
 | enableQuota | A boolean that, when enabled, will set quota limit for a newly provisioned NFS volume. | No | false |
