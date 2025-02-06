@@ -17,11 +17,11 @@
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="v3">
-    <meta property="article:modified_time" content="2024-12-16T15:34:31+05:30">
+    <meta property="article:modified_time" content="2025-02-07T02:00:50+05:30">
 
   <meta itemprop="name" content="PowerMax">
   <meta itemprop="description" content="Installing Dell CSI Driver for PowerMax via Dell CSM Operator">
-  <meta itemprop="dateModified" content="2024-12-16T15:34:31+05:30">
+  <meta itemprop="dateModified" content="2025-02-07T02:00:50+05:30">
   <meta itemprop="wordCount" content="3173">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="PowerMax">
@@ -125,7 +125,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.2c979588a488ea3b5ba08b4591eb14e4.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.4ce42cf420aee8c64c943055cdcb2407.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -149,7 +149,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.2c979588a488ea3b5ba08b4591eb14e4.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.4ce42cf420aee8c64c943055cdcb2407.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -914,7 +914,7 @@ Auto RDM for vSphere over FC requirements <a class="header-link"  href="#auto-rd
                 <path d="M0 0h24v24H0z" fill="none"/>
                 <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
             </svg>
-        </a></h3><p>The CSI Driver for Dell PowerMax supports auto RDM for vSphere over FC. These requirements are applicable for the clusters deployed on ESX/ESXi using virtualized environement.</p>
+        </a></h3><p>The CSI Driver for Dell PowerMax supports auto RDM for vSphere over FC. These requirements are applicable for the clusters deployed on ESX/ESXi using virtualized environment.</p>
 <p>Set up the environment as follows:</p>
 <ul>
 <li>
@@ -1178,7 +1178,7 @@ Example: config.yaml</p>
       </tr>
       <tr>
           <td>X_CSI_TOPOLOGY_CONTROL_ENABLED</td>
-          <td>Enable/Disabe topology control. It filters out arrays, associated transport protocol available to each node and creates topology keys based on any such user input.</td>
+          <td>Enable/Disable topology control. It filters out arrays, associated transport protocol available to each node and creates topology keys based on any such user input.</td>
           <td>No</td>
           <td>false</td>
       </tr>
@@ -1398,10 +1398,10 @@ Support for auto RDM for vSphere over FC <a class="header-link"  href="#support-
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#8f5902;font-style:italic"># Default value: &#34;&#34; &lt;empty&gt;</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">        </span>- <span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;X_CSI_VSPHERE_PORTGROUP&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">          </span><span style="color:#204a87;font-weight:bold">value</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#8f5902;font-style:italic"># X_CSI_VSPHERE_HOSTNAME: An existing host(initiator group)/ host group(cascaded intiator group) that driver will use for vSphere</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#8f5902;font-style:italic"># X_CSI_VSPHERE_HOSTNAME: An existing host(initiator group)/ host group(cascaded initiator group) that driver will use for vSphere</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#8f5902;font-style:italic"># this host/host group should contain initiators from all the ESXs/ESXi host where the cluster is deployed</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#8f5902;font-style:italic"># recommended format: csi-x-VC-HN, x can be anything of user choice</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#8f5902;font-style:italic"># Allowed value: valid existing host(initiator group)/ host group(cascaded intiator group) on the array</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#8f5902;font-style:italic"># Allowed value: valid existing host(initiator group)/ host group(cascaded initiator group) on the array</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#8f5902;font-style:italic"># Default value: &#34;&#34; &lt;empty&gt;</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">        </span>- <span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;X_CSI_VSPHERE_HOSTNAME&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">          </span><span style="color:#204a87;font-weight:bold">value</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
