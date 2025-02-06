@@ -20,7 +20,7 @@
 
   <meta itemprop="name" content="Cert-CSI">
   <meta itemprop="description" content="Tool to validate Dell CSI Drivers">
-  <meta itemprop="dateModified" content="2024-11-20T19:40:41-05:00">
+  <meta itemprop="dateModified" content="2025-02-07T02:00:50+05:30">
   <meta itemprop="wordCount" content="3251">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Cert-CSI">
@@ -124,7 +124,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.2c979588a488ea3b5ba08b4591eb14e4.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.4ce42cf420aee8c64c943055cdcb2407.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -148,7 +148,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.2c979588a488ea3b5ba08b4591eb14e4.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.4ce42cf420aee8c64c943055cdcb2407.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -768,10 +768,10 @@ Installation <a class="header-link"  href="#installation" style=" display: inlin
 <ol>
 <li><a href="/csm-docs/v3/support/cert-csi/#download-release-linux">Download the executable from the latest GitHub release</a>.</li>
 <li><a href="/csm-docs/v3/support/cert-csi/#pull-the-container-image">Pull the container image from DockerHub</a>.</li>
-<li><a href="/csm-docs/v3/support/cert-csi/#building-locally">Build the exectuable or container image locally</a>.</li>
+<li><a href="/csm-docs/v3/support/cert-csi/#building-locally">Build the executable or container image locally</a>.</li>
 </ol>
 <blockquote>
-<p>The exectuable from the GitHub Release only supports Linux. For non-Linux users, you must build the <code>cert-csi</code> executable <a href="/csm-docs/v3/support/cert-csi/#building-locally">locally</a>.</p>
+<p>The executable from the GitHub Release only supports Linux. For non-Linux users, you must build the <code>cert-csi</code> executable <a href="/csm-docs/v3/support/cert-csi/#building-locally">locally</a>.</p>
 </blockquote>
 <h3 id="download-release-linux">
 Download Release (Linux) <a class="header-link"  href="#download-release-linux" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
@@ -853,7 +853,7 @@ Prerequisites <a class="header-link"  href="#prerequisites" style=" display: inl
             </svg>
         </a></h4><ul>
 <li><a href="https://git-scm.com/book/en/v2/Getting-Started-Installing-Git">Git</a></li>
-<li><a href="https://go.dev/doc/install">Go</a> (If buidling the executable)</li>
+<li><a href="https://go.dev/doc/install">Go</a> (If building the executable)</li>
 <li>Podman or Docker (If building the container image)</li>
 </ul>
 <ol>
@@ -960,7 +960,7 @@ Database (SQLite) file for test suites is <code>&lt;storage-class-name&gt;.db</c
 Database (SQLite) file for functional test suites is <code>cert-csi-functional.db</code> in the working directory of cert-csi.</p>
 </blockquote>
 <blockquote>
-<p>NOTE: If using the container image, these files will be inside the container. If you are interested in these files, it is recommended to use the exectuable.</p>
+<p>NOTE: If using the container image, these files will be inside the container. If you are interested in these files, it is recommended to use the executable.</p>
 </blockquote>
 <h2 id="run-all-test-suites">
 Run All Test Suites <a class="header-link"  href="#run-all-test-suites" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
@@ -997,7 +997,7 @@ Preparing Config <a class="header-link"  href="#preparing-config" style=" displa
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">attr1</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#8f5902;font-style:italic"># volume attr for EphemeralVolumeSuite</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">attr2</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#8f5902;font-style:italic"># volume attr for EphemeralVolumeSuite</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">capacityTracking</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#8f5902;font-style:italic"># capacityTracking test requires the storage class to have volume binding mode as &#39;WaitForFirstConsumer&#39;</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">driverNamespace</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#8f5902;font-style:italic"># namepsace where driver is installed</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">driverNamespace</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#8f5902;font-style:italic"># namespace where driver is installed</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">pollInterval</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#8f5902;font-style:italic"># duration to poll capacity (e.g., 2m)  </span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span></code></pre></div><p>Driver specific examples:</p>
 
@@ -1231,14 +1231,14 @@ Launching Test Run <a class="header-link"  href="#launching-test-run" style=" di
 <li>If <code>storageClasses.clone</code> is <code>true</code>, executes the <a href="/csm-docs/v3/support/cert-csi/#volume-cloning">Volume Cloning</a> suite.</li>
 <li>If <code>storageClasses.expansion</code> is <code>true</code>, executes the <a href="/csm-docs/v3/support/cert-csi/#volume-expansion">Volume Expansion</a> suite.</li>
 <li>If <code>storageClasses.expansion</code> is <code>true</code> and <code>storageClasses.rawBlock</code> is <code>true</code>, executes the <a href="/csm-docs/v3/support/cert-csi/#volume-expansion">Volume Expansion</a> suite with raw block volumes.</li>
-<li>If <code>storageClasses.snapshot</code> is <code>true</code>, exeuctes the <a href="/csm-docs/v3/support/cert-csi/#snapshots">Snapshot</a> suite and the <a href="/csm-docs/v3/support/cert-csi/#replication">Replication</a> suite.</li>
+<li>If <code>storageClasses.snapshot</code> is <code>true</code>, executes the <a href="/csm-docs/v3/support/cert-csi/#snapshots">Snapshot</a> suite and the <a href="/csm-docs/v3/support/cert-csi/#replication">Replication</a> suite.</li>
 <li>If <code>storageClasses.rawBlock</code> is <code>true</code>, executes the <a href="/csm-docs/v3/support/cert-csi/#multi-attach-volume">Multi-Attach Volume</a> suite with raw block volumes.</li>
 <li>If <code>storageClasses.rwx</code> is <code>true</code>, executes the <a href="/csm-docs/v3/support/cert-csi/#multi-attach-volume">Multi-Attach Volume</a> suite. (Storgae Class must be NFS.)</li>
 <li>If <code>storageClasses.volumeHealth</code> is <code>true</code>, executes the <a href="/csm-docs/v3/support/cert-csi/#volume-health-metrics">Volume Health Metrics</a> suite.</li>
 <li>If <code>storageClasses.rwop</code> is <code>true</code>, executes the <a href="/csm-docs/v3/support/cert-csi/#multi-attach-volume">Multi-Attach Volume</a> suite with the volume access mode <code>ReadWriteOncePod</code>.</li>
 <li>If <code>storageClasses.ephemeral</code> exists, executes the <a href="/csm-docs/v3/support/cert-csi/#ephemeral-volumes">Ephemeral Volumes</a> suite.</li>
 <li>If <code>storageClasses.vgs</code> is <code>true</code>, executes the <a href="">Volume Group Snapshot</a> suite.</li>
-<li>If <code>storageClasses.capacityTracking</code> exists, exeuctes the <a href="/csm-docs/v3/support/cert-csi/#storage-capacity-tracking">Storage Class Capacity Tracking</a> suite.</li>
+<li>If <code>storageClasses.capacityTracking</code> exists, executes the <a href="/csm-docs/v3/support/cert-csi/#storage-capacity-tracking">Storage Class Capacity Tracking</a> suite.</li>
 </ol>
 <blockquote>
 <p>NOTE: For testing/debugging purposes, it can be useful to use the <code>--no-cleanup</code> so resources do not get deleted.</p>
@@ -1247,12 +1247,12 @@ Launching Test Run <a class="header-link"  href="#launching-test-run" style=" di
 <p>NOTE: If you are using CSI PowerScale with <a href="/csm-docs/v3/csidriver/features/powerscale/#usage-of-smartquotas-to-limit-storage-consumption">SmartQuotas</a> disabled, the <code>Volume Expansion</code> suite is expected to timeout due to the way PowerScale provisions storage. Set <code>storageClasses.expansion</code> to <code>false</code> to skip this suite.</p>
 </blockquote>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cert-csi certify --cert-config &lt;path-to-config&gt; --vsc &lt;volume-snapshot-class&gt;
-</span></span></code></pre></div><p>Withold the <code>--vsc</code> argument if Snapshot capabilities are disabled.</p>
+</span></span></code></pre></div><p>Withhold the <code>--vsc</code> argument if Snapshot capabilities are disabled.</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cert-csi certify --cert-config &lt;path-to-config&gt;
 </span></span><span style="display:flex;"><span>Optional Params:
 </span></span><span style="display:flex;"><span>   --vsc: volume snapshot class, required <span style="color:#204a87;font-weight:bold">if</span> you specified snapshot capability
 </span></span></code></pre></div><p>Run <code>cert-csi certify -h</code> for more options.</p>
-<p>If you are using the container image, the <code>cert-config</code> file must be mounted into the container. Assuming your <code>cert-config</code> file is <code>/home/user/example-certify-config.yaml</code>, here are examples of how to exeucte this suite with the container image.</p>
+<p>If you are using the container image, the <code>cert-config</code> file must be mounted into the container. Assuming your <code>cert-config</code> file is <code>/home/user/example-certify-config.yaml</code>, here are examples of how to execute this suite with the container image.</p>
 
 
 
@@ -1461,7 +1461,7 @@ Blocksnap suite <a class="header-link"  href="#blocksnap-suite" style=" display:
 <li>Waits for the Volume Snapshot to be Ready.</li>
 <li>Create a Persistent Volume Claim with raw block volume mode from the Volume Snapshot.</li>
 <li>Creates Pod to consume the Persistent Volume Claim.</li>
-<li>Mounts the raw block volume and verifes the checksum of the data.</li>
+<li>Mounts the raw block volume and verifies the checksum of the data.</li>
 </ol>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cert-csi <span style="color:#204a87">test</span> blocksnap --sc &lt;storageClass&gt; --vsc &lt;snapshotclass&gt;
 </span></span></code></pre></div><p>Run <code>cert-csi test blocksnap -h</code> for more options.</p>
@@ -1502,7 +1502,7 @@ Ephemeral Volumes <a class="header-link"  href="#ephemeral-volumes" style=" disp
 <p><code>--driver</code> is the name of a CSI Driver from the output of <code>kubectl get csidriver</code> (e.g, csi-vxflexos.dellemc.com).
 This suite does not delete resources on success.</p>
 </blockquote>
-<p>If you are using the container image, the <code>attr</code> file must be mounted into the container. Assuming your <code>attr</code> file is <code>/home/user/ephemeral-config.properties</code>, here are examples of how to exeucte this suite with the container image.</p>
+<p>If you are using the container image, the <code>attr</code> file must be mounted into the container. Assuming your <code>attr</code> file is <code>/home/user/ephemeral-config.properties</code>, here are examples of how to execute this suite with the container image.</p>
 
 
 
@@ -1620,9 +1620,9 @@ Storage Capacity Tracking <a class="header-link"  href="#storage-capacity-tracki
             </svg>
         </a></h4><ol>
 <li>Creates namespace <code>functional-test</code> where resources will be created.</li>
-<li>Creates a duplicate of the provided storge class using prefix <code>capacity-tracking</code>.</li>
+<li>Creates a duplicate of the provided storage class using prefix <code>capacity-tracking</code>.</li>
 <li>Waits for the associated CSIStorageCapacity object to be created.</li>
-<li>Deletes the duplicate storge class.</li>
+<li>Deletes the duplicate storage class.</li>
 <li>Waits for the associated CSIStorageCapacity to be deleted.</li>
 <li>Sets the capacity of the CSIStorageCapacity of the provided storage class to zero.</li>
 <li>Creates Pod with a volume using the provided storage class.</li>
@@ -1740,7 +1740,7 @@ Generating report from runs without running tests <a class="header-link"  href="
 </span></span><span style="display:flex;"><span>Report types:
 </span></span><span style="display:flex;"><span>--html: performance html report
 </span></span><span style="display:flex;"><span>--txt: performance txt report
-</span></span><span style="display:flex;"><span>--xml: junit compatible xml report, contains basic run infomation
+</span></span><span style="display:flex;"><span>--xml: junit compatible xml report, contains basic run information
 </span></span><span style="display:flex;"><span>--tabular: tidy html report with basic run information
 </span></span></code></pre></div><p>To generate tabular report from the database, run the command:</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cert-csi -db ./cert-csi-functional.db functional-report -tabular

@@ -17,11 +17,11 @@
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="v3">
-    <meta property="article:modified_time" content="2024-08-14T15:59:46+05:30">
+    <meta property="article:modified_time" content="2025-02-07T02:00:50+05:30">
 
   <meta itemprop="name" content="Troubleshooting">
   <meta itemprop="description" content="Troubleshooting guide">
-  <meta itemprop="dateModified" content="2024-08-14T15:59:46+05:30">
+  <meta itemprop="dateModified" content="2025-02-07T02:00:50+05:30">
   <meta itemprop="wordCount" content="1251">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Troubleshooting">
@@ -125,7 +125,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.2c979588a488ea3b5ba08b4591eb14e4.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.4ce42cf420aee8c64c943055cdcb2407.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -149,7 +149,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.2c979588a488ea3b5ba08b4591eb14e4.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.4ce42cf420aee8c64c943055cdcb2407.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -748,7 +748,7 @@ The Failure of Building an Authorization RPM <a class="header-link"  href="#the-
                 <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
             </svg>
         </a></h3><p>This response occurs when running &lsquo;make rpm&rsquo; without the proper permissions or correct pathing of the Authorization repository.</p>
-<pre tabindex="0"><code>Error response from daemon: failed to create shim task: OCI runtime create failed: runc create failed: unable to start container process: error during container init: error mounting &#34;/root/karavi-authorization/bin/deploy&#34; to rootfs at &#34;/home/builder/rpm/deploy&#34;: mount /root/karavi-authorization/bin/deploy:/home/builder/rpm/deploy (via /proc/self/fd/6), flags: 0x5000: not a directory: unknown: Are you trying to mount a directory onto a file (or vice-versa)? Check if the specified host path exists and is the expected type.ERRO[0001] error waiting for container: context canceled 
+<pre tabindex="0"><code>Error response from daemon: failed to create shim task: OCI runtime create failed: runc create failed: unable to start container process: error during container init: error mounting &#34;/root/karavi-authorization/bin/deploy&#34; to rootfs at &#34;/home/builder/rpm/deploy&#34;: mount /root/karavi-authorization/bin/deploy:/home/builder/rpm/deploy (via /proc/self/fd/6), flags: 0x5000: not a directory: unknown: Are you trying to mount a directory onto a file (or vice-versa)? Check if the specified host path exists and is the expected type.ERROR[0001] error waiting for container: context canceled 
 </code></pre><p><strong>Resolution</strong></p>
 <ol>
 <li>Ensure the cloned repository is in a folder independent of the root or home directory.</li>
