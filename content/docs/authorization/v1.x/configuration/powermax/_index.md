@@ -56,7 +56,7 @@ Create the karavi-authorization-config secret using this command:
 
     Refer to the [Install the Driver](../../../../deployment/helm/drivers/installation/powermax/#install-the-driver) section where you edit `samples/secret/secret.yaml` with the credentials of the PowerMax. 
     
-    Make sure the endpoint points to `https://localhost:9400`. Leave `username` and `password` with the default values as they will be ignored.
+    Update endpoint to match the endpoint in samples/secret/karavi-authorization-config.json. Leave `username` and `password` with the default values as they will be ignored.
 
     **Note:** Authorization does not support backupEndpoint at this moment. 
 
@@ -81,7 +81,7 @@ Create the karavi-authorization-config secret using this command:
 
     Refer to the [Install the Driver](../../../../deployment/csmoperator/drivers/powermax/#install-driver) section to prepare `powermax-creds.yaml`. 
     
-    Make sure the endpoint points to `https://localhost:9400`. Leave `username` and `password` with the default values as they will be ignored.
+    Update endpoint to match the endpoint in samples/secret/karavi-authorization-config.json. Leave `username` and `password` with the default values as they will be ignored.
 
     **Note:** Authorization does not support backupEndpoint at this moment. 
 
