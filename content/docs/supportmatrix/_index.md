@@ -94,12 +94,11 @@ The table below lists the driver and modules installable with the Operator
 |  4.15       | 1.5.1, 1.6.1, 1.7.0        |1.10.2, 1.11.1, 1.12    |
 |  4.16       | 1.6.1, 1.7.0               |1.11.1, 1.12         | 
 |  4.17       | 1.6.1, 1.7.0               |1.11.1, 1.12         |
-|  4.18       | 1.6.1, 1.7.0, 1.8.0        | 1.11.1, 1.12, 1.13.0 |
 {{</table>}}
 **Note:** 
-- Operator version 1.2.0 corresponds to CSM version 1.7.1, and operator version 1.3.0 corresponds to CSM version 1.8.0
-
-This mapping applies to all corresponding versions listed in the table.
+- Operator version 1.2.0 corresponds to CSM version 1.7.1, and operator version 1.3.0 corresponds to CSM version 1.8.0.<br>
+This mapping applies to all corresponding versions listed in the table. 
+- Refer our supported Orchestration platform. While the Operator may be displayed, it does not necessarily mean it has been fully qualified by us. If desired, customers can upgrade the Operator and self-certify it.
 
 
 
