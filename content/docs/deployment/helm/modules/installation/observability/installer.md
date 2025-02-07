@@ -154,8 +154,6 @@ To perform an online installation of CSM for Observability, the following steps 
     |
     |- CSI Driver for PowerMax is installed                             Success
     |
-    |- Copying ConfigMap from powermax to karavi                        Success
-    |
     |- Copying Secret from powermax to karavi                           Success
     |
     |- Installing CertManager CRDs                                      Success

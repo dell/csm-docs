@@ -109,7 +109,7 @@ The Container Storage Modules (CSM) for Observability Helm chart bootstraps an O
 
     If [CSM for Authorization is enabled](../../authorization-v2.0/#configuring-a-dell-csi-driver-with-csm-for-authorization) for CSI PowerScale, perform these steps:
 
-    2. Copy the driver configuration parameters ConfigMap from the CSI PowerScale namespace into the CSM for Observability namespace:
+   2. Copy the driver configuration parameters ConfigMap from the CSI PowerScale namespace into the CSM for Observability namespace:
 
        ```bash
 
@@ -123,7 +123,7 @@ The Container Storage Modules (CSM) for Observability Helm chart bootstraps an O
        kubectl get configmap [ISILON-CONFIG-PARAMS] -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/name: [ISILON-CONFIG-PARAMS]/name: isilon-config-params/' | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -
        ```
 
-    3. Copy the `karavi-authorization-config`, `proxy-server-root-certificate`, `proxy-authz-tokens` Secret from the CSI PowerScale namespace into the CSM for Observability namespace:
+    2. Copy the `karavi-authorization-config`, `proxy-server-root-certificate`, `proxy-authz-tokens` Secret from the CSI PowerScale namespace into the CSM for Observability namespace:
 
        ```bash
 
@@ -132,41 +132,23 @@ The Container Storage Modules (CSM) for Observability Helm chart bootstraps an O
 
     ### PowerMax
 
-    1. Copy the configmap `powermax-reverseproxy-config` from the CSI Driver for Dell PowerMax namespace to the CSM namespace.
+    1. Copy the secret `powermax-config` from the CSI Driver for Dell PowerMax namespace to the CSM namespace.
 
        ```bash
 
-       kubectl get configmap powermax-reverseproxy-config -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -
+       kubectl get secret powermax-config -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -
        ```
 
-       If the CSI driver configmap name is not the default `powermax-reverseproxy-config`, please use the following command to copy configmap:
+       If the CSI driver secret name is not the default `powermax-config`, please use the following command to copy configmap:
 
        ```bash
 
-       kubectl get configmap [POWERMAX-REVERSEPROXY-CONFIG] -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/name: [POWERMAX-REVERSEPROXY-CONFIG]/name: powermax-reverseproxy-config/' | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -
+       kubectl get secret [POWERMAX-CONFIG] -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/name: [POWERMAX-CONFIG]/name: powermax-config/' | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -
        ```
 
-    2. Copy the secrets in `powermax-reverseproxy-config` from the CSI Driver for Dell PowerMax namespace to the CSM namespace.
-       ```console
+    If [CSM for Authorization is enabled](../../authorization-v2.0/#configuring-a-dell-csi-driver-with-csm-for-authorization) for CSI PowerMax, perform these steps:
 
-       for secret in $(kubectl get configmap powermax-reverseproxy-config -n [CSI_DRIVER_NAMESPACE] -o jsonpath="{.data.config\.yaml}" | grep arrayCredentialSecret | awk 'BEGIN{FS=":"}{print $2}' | uniq)
-       do
-          kubectl get secret $secret -n [CSI_DRIVER_NAMESPACE] -o yaml | sed "s/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/" | kubectl create -f -
-       done
-       ```
-
-       If the CSI driver configmap name is not the default `powermax-reverseproxy-config`, please use the following command to copy secrets:
-       ```console
-
-       for secret in $(kubectl get configmap [POWERMAX-REVERSEPROXY-CONFIG] -n [CSI_DRIVER_NAMESPACE] -o jsonpath="{.data.config\.yaml}" | grep arrayCredentialSecret | awk 'BEGIN{FS=":"}{print $2}' | uniq)
-       do
-          kubectl get secret $secret -n [CSI_DRIVER_NAMESPACE] -o yaml | sed "s/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/" | kubectl create -f -
-       done
-       ```
-
-       If [CSM for Authorization is enabled](../../authorization-v2.0/#configuring-a-dell-csi-driver-with-csm-for-authorization) for CSI PowerMax, perform these steps:
-
-    3. Copy the driver configuration parameters ConfigMap from the CSI PowerMax namespace into the CSM for Observability namespace:
+   2. Copy the driver configuration parameters ConfigMap from the CSI PowerMax namespace into the CSM for Observability namespace:
 
        ```bash
 
@@ -180,7 +162,7 @@ The Container Storage Modules (CSM) for Observability Helm chart bootstraps an O
        kubectl get configmap [POWERMAX-CONFIG-PARAMS] -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/name: [POWERMAX-CONFIG-PARAMS]/name: powermax-config-params/' | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -
        ```
 
-    4. Copy the `karavi-authorization-config`, `proxy-server-root-certificate`, `proxy-authz-tokens` Secret from the CSI PowerMax namespace into the CSM for Observability namespace:
+   3. Copy the `karavi-authorization-config`, `proxy-server-root-certificate`, `proxy-authz-tokens` Secret from the CSI PowerMax namespace into the CSM for Observability namespace:
 
        ```bash
 
