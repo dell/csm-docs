@@ -21,7 +21,7 @@ The Container Storage Module Release and Support Lifecycle document helps CSM de
 | CSM Version  | GA Date  | End of Life Date |
 |--------------|:--------:|:----------------:|
 | 1.14         |05/30/2025|05/30/2026      |
-| 1.13         |01/22/2025|01/31/2026        |
+| 1.13         |01/31/2025|01/31/2026        |
 | 1.12         |11/06/2024|10/31/2025        |
 | 1.11         |06/30/2024|06/30/2025        |
 {{</table>}}
