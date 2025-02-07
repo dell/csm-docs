@@ -365,7 +365,7 @@ Set up the environment as follows:
 
 ### Create secret for client-side TLS verification (Optional)
 
-Create a secret named powermax-certs in the namespace where the CSI PowerMax driver will be installed. This is an optional step and is only required if you are setting the env variable X_CSI_POWERMAX_SKIP_CERTIFICATE_VALIDATION to false. See the detailed documentation on how to create this secret [here](../../../helm/drivers/installation/powermax#certificate-validation-for-unisphere-rest-api-calls).
+Create a secret in the namespace where the CSI PowerMax driver will be installed. This is an optional step and is only required if you are setting the env variable X_CSI_POWERMAX_SKIP_CERTIFICATE_VALIDATION to false. See the detailed documentation on how to create this secret [here](../../../helm/drivers/installation/powermax#certificate-validation-for-unisphere-rest-api-calls-optional).
 
 ### Install Driver
 
