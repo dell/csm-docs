@@ -68,7 +68,7 @@ The Container Storage Modules (CSM) for Observability Helm chart bootstraps an O
        kubectl get configmap [VXFLEXOS-CONFIG-PARAMS] -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/name: [VXFLEXOS-CONFIG-PARAMS]/name: vxflexos-config-params/' | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -
        ```
 
-    3. Copy the `karavi-authorization-config`, `proxy-server-root-certificate`, `proxy-authz-tokens` Secret from the CSI PowerFlex namespace into the CSM for Observability namespace:
+    3. Copy the `karavi-authorization-config`, `proxy-server-root-certificate`, and `proxy-authz-tokens` Secrets from the CSI PowerFlex namespace into the CSM for Observability namespace:
 
         ```bash
 
@@ -123,7 +123,7 @@ The Container Storage Modules (CSM) for Observability Helm chart bootstraps an O
        kubectl get configmap [ISILON-CONFIG-PARAMS] -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/name: [ISILON-CONFIG-PARAMS]/name: isilon-config-params/' | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -
        ```
 
-   3. Copy the `karavi-authorization-config`, `proxy-server-root-certificate`, `proxy-authz-tokens` Secret from the CSI PowerScale namespace into the CSM for Observability namespace:
+   3. Copy the `karavi-authorization-config`, `proxy-server-root-certificate`, and `proxy-authz-tokens` Secrets from the CSI PowerScale namespace into the CSM for Observability namespace:
 
        ```bash
 
@@ -162,7 +162,7 @@ The Container Storage Modules (CSM) for Observability Helm chart bootstraps an O
        kubectl get configmap [POWERMAX-CONFIG-PARAMS] -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/name: [POWERMAX-CONFIG-PARAMS]/name: powermax-config-params/' | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -
        ```
 
-    3. Copy the `karavi-authorization-config`, `proxy-server-root-certificate`, `proxy-authz-tokens` Secret from the CSI PowerMax namespace into the CSM for Observability namespace:
+    3. Copy the `karavi-authorization-config`, `proxy-server-root-certificate`, and `proxy-authz-tokens` Secrets from the CSI PowerMax namespace into the CSM for Observability namespace:
 
        ```bash
 
