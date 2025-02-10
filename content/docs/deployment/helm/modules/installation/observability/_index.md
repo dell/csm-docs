@@ -471,13 +471,13 @@ If the list of storage systems managed by a Dell CSI Driver have changed, the fo
 
 ##### CSI Driver for Dell PowerMax
 
-1. Delete the current `powermax-karavi-authorization-config` secret from the CSM namespace.
+1. Delete the current `powermax-karavi-authorization-config` Secret from the CSM namespace.
    ```console
 
    kubectl delete secret powermax-karavi-authorization-config -n [CSM_NAMESPACE]
    ```
 
-2. Copy `powermax-karavi-authorization-config` secret from the CSI Driver for Dell PowerMax to the CSM namespace.
+2. Copy `powermax-karavi-authorization-config` Secret from the CSI Driver for Dell PowerMax to the CSM namespace.
    ```console
 
    kubectl get secret karavi-authorization-config proxy-server-root-certificate -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | sed 's/name: karavi-authorization-config/name: powermax-karavi-authorization-config/' | kubectl create -f - 
@@ -547,18 +547,18 @@ In this case all storage system requests made by CSM for Observability will not 
 
 #### CSI Driver for Dell PowerMax
 
-1. Delete the secret `powermax-config` from the CSM namespace.
+1. Delete the Secret `powermax-config` from the CSM namespace.
    ```console
    kubectl delete secret powermax-config -n [CSM_NAMESPACE]
    ```
 
-2. Copy the secret `powermax-config` from the CSI Driver for Dell PowerMax namespace to the CSM namespace.
+2. Copy the Secret `powermax-config` from the CSI Driver for Dell PowerMax namespace to the CSM namespace.
    
    ```console
    kubectl get secret powermax-config -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -
    ```
 
-   If the CSI driver configmap name is not the default `powermax-config`, please use the following command to copy configmap:
+   If the CSI driver secret name is not the default `powermax-config`, please use the following command to copy the secret:
 
    ```console
 

@@ -123,7 +123,7 @@ The Container Storage Modules (CSM) for Observability Helm chart bootstraps an O
        kubectl get configmap [ISILON-CONFIG-PARAMS] -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/name: [ISILON-CONFIG-PARAMS]/name: isilon-config-params/' | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -
        ```
 
-    2. Copy the `karavi-authorization-config`, `proxy-server-root-certificate`, `proxy-authz-tokens` Secret from the CSI PowerScale namespace into the CSM for Observability namespace:
+   3. Copy the `karavi-authorization-config`, `proxy-server-root-certificate`, `proxy-authz-tokens` Secret from the CSI PowerScale namespace into the CSM for Observability namespace:
 
        ```bash
 
@@ -139,7 +139,7 @@ The Container Storage Modules (CSM) for Observability Helm chart bootstraps an O
        kubectl get secret powermax-config -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -
        ```
 
-       If the CSI driver secret name is not the default `powermax-config`, please use the following command to copy configmap:
+       If the CSI driver secret name is not the default `powermax-config`, please use the following command to copy the secret:
 
        ```bash
 
@@ -148,7 +148,7 @@ The Container Storage Modules (CSM) for Observability Helm chart bootstraps an O
 
     If [CSM for Authorization is enabled](../../authorization-v2.0/#configuring-a-dell-csi-driver-with-csm-for-authorization) for CSI PowerMax, perform these steps:
 
-   2. Copy the driver configuration parameters ConfigMap from the CSI PowerMax namespace into the CSM for Observability namespace:
+    2. Copy the driver configuration parameters ConfigMap from the CSI PowerMax namespace into the CSM for Observability namespace:
 
        ```bash
 
@@ -162,7 +162,7 @@ The Container Storage Modules (CSM) for Observability Helm chart bootstraps an O
        kubectl get configmap [POWERMAX-CONFIG-PARAMS] -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/name: [POWERMAX-CONFIG-PARAMS]/name: powermax-config-params/' | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -
        ```
 
-   3. Copy the `karavi-authorization-config`, `proxy-server-root-certificate`, `proxy-authz-tokens` Secret from the CSI PowerMax namespace into the CSM for Observability namespace:
+    3. Copy the `karavi-authorization-config`, `proxy-server-root-certificate`, `proxy-authz-tokens` Secret from the CSI PowerMax namespace into the CSM for Observability namespace:
 
        ```bash
 
@@ -269,6 +269,8 @@ The following table lists the configurable parameters of the CSM for Observabili
 | `karaviMetricsPowerMax.capacityPollFrequencySeconds` | The polling frequency (in seconds) to gather capacity metrics | `20` |
 | `karaviMetricsPowerMax.performancePollFrequencySeconds` | The polling frequency (in seconds) to gather performance metrics | `20` |
 | `karaviMetricsPowerMax.concurrentPowerMaxQueries` | The number of simultaneous metrics queries to make to PowerMax (MUST be less than 10; otherwise, several request errors from PowerMax will ensue.) | `10` |
+| `karaviMetricsPowermax.useSecret` | Defines whether or not to use the new secret format for the Reverse Proxy. If set to `true` the contents of the Secret specified by `karaviMetricsPowermax.defaultCredentialSecret` will be used to specify the Powermax storage arrays and their login credentials. If set to `false` the Reverse Proxy will use the configMap approach` | `false` | 
+| `karaviMetricsPowermax.defaultCredentialSecret` | The name of the Secret used to specify the Powermax storage arrays and thier login credentials | `powermax-config` |
 | `karaviMetricsPowerMax.authorization.enabled` | [Authorization](../../authorization-v2.0) is an optional feature to apply credential shielding of the backend PowerMax. | `false` |
 | `karaviMetricsPowerMax.authorization.proxyHost` | Hostname of the csm-authorization server. |  |
 | `karaviMetricsPowerMax.authorization.skipCertificateValidation` | A boolean that enables/disables certificate validation of the csm-authorization server. |  |
