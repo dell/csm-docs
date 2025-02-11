@@ -706,4 +706,4 @@ managementServers:
 
 This method works with both `helm` and `operator` installations for PowerMax, automatically mounting the secret for use by the PowerMax driver/node and the Reverse Proxy.
 
-**Note:** The config map approach is being phased out. However, for backwards compatibility, you can still configure and use the PowerMax driver with the config map.
+**Note:** The config map approach has been deprecated as of CSI PowerMax v2.14.0 and will be removed in a future release. However, for backwards compatibility, you can still configure and use the PowerMax driver with the config map.
