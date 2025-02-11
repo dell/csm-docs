@@ -564,3 +564,4 @@ In this case all storage system requests made by CSM for Observability will not 
 
    kubectl get secret [POWERMAX-CONFIG] -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/name: [POWERMAX-CONFIG]/name: powermax-config/' | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -
    ```
+   **Note:** The config map approach is being phased out. However, for backwards compatibility, you can still configure and use the Observability module with PowerMax driver using the config map.
