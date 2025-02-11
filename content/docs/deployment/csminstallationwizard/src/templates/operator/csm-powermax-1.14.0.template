@@ -41,7 +41,6 @@ spec:
     # Default credential secret for Powermax, if not set it to ""
     authSecret: powermax-creds
     dnsPolicy: ClusterFirstWithHostNet
-    forceUpdate: false
     forceRemoveDriver: true
     common:
       # Image for CSI PowerMax driver v2.14.0
@@ -257,14 +256,14 @@ spec:
     - name: csireverseproxy
       # enabled: Always set to true
       enabled: true
-      configVersion: v2.11.0
+      configVersion: v2.13.0
       forceRemoveModule: true
       components:
       - name: csipowermax-reverseproxy
       # image: Define the container images used for the reverse proxy
       # Default value: None
-      # Example: "csipowermax-reverseproxy:v2.11.0"
-        image: quay.io/dell/container-storage-modules/csipowermax-reverseproxy:v2.11.0
+      # Example: "csipowermax-reverseproxy:v2.13.0"
+        image: quay.io/dell/container-storage-modules/csipowermax-reverseproxy:v2.13.0
         envs:
           # "tlsSecret" defines the TLS secret that is created with certificate
           # and its associated key
