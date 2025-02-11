@@ -115,7 +115,6 @@ csi-powerstore:
 ##########################################
 csi-powermax:
   enabled: $POWERMAX_ENABLED
-  useSecret: $REVPROXY_USE_SECRET
   global:
     storageArrays:
       - storageArrayId: "$POWERMAX_STORAGE_ARRAY_ID"
@@ -126,6 +125,11 @@ csi-powermax:
     managementServers:
       - endpoint: $POWERMAX_MANAGEMENT_SERVERS_ENDPOINT_URL
       - endpoint: $TARGET_UNISPHERE
+
+    portGroups: "$POWERMAX_PORT_GROUPS"
+    transportProtocol: "$NODE_TRANSPORT_PROTOCOL"
+    useSecret: $REVPROXY_USE_SECRET
+    managedArrays: "$POWERMAX_STORAGE_ARRAY_ID"
   version: v2.14.0
   images:
     # "driver" defines the container image, used for the driver container.
@@ -160,12 +164,10 @@ csi-powermax:
     noderescan:
       image: quay.io/dell/container-storage-modules/dell-csi-node-rescanner:v1.4.0
   clusterPrefix: $POWERMAX_CLUSTER_PREFIX
-  portGroups: "$POWERMAX_PORT_GROUPS"
   fsGroupPolicy: "$FSGROUP_POLICY"
   maxPowerMaxVolumesPerNode: $MAX_VOLUMES_PER_NODE
   podmonAPIPort: 8083
   enableCHAP: $ISCSI_CHAP_ENABLED
-  transportProtocol: "$NODE_TRANSPORT_PROTOCOL"
   storageCapacity:
     enabled: $STORAGE_CAPACITY_ENABLED
   controller:
