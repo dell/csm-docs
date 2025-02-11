@@ -524,6 +524,9 @@ function displayCommands(releaseNameValue, commandTitleValue, commandNoteValue, 
 		case "1.13.0":
 			helmChartVersion = CONSTANTS.CSM_HELM_V1130;
 			break;
+		case "1.14.0":
+			helmChartVersion = CONSTANTS.CSM_HELM_V1140;
+			break;
 		default:
 			helmChartVersion = CONSTANTS.CSM_HELM_V1130;
 			break;
