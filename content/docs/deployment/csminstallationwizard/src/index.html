@@ -52,7 +52,7 @@ disable_footer: true
                   <label for="array" class="col-sm-1 col-form-label" data-bs-toggle="tooltip" data-bs-placement="right" title="Refers to the storage array" style="width: 65px;">Array</label>
                   <div class="col-sm-9"></div>
                   <div class="col-sm-3">
-                    <select id="array" class="form-select" onchange="validateInput(validateForm, CONSTANTS)" required>
+                    <select id="array" class="form-select" onchange="validateInput(validateForm, CONSTANTS); resetCSMVersion()" required>
                       <option value="" selected>Select the Array</option>
                       <option value="powerstore">PowerStore</option>
                       <option value="powermax">PowerMax</option>
@@ -85,6 +85,7 @@ disable_footer: true
                         <option value="1.11.1">CSM 1.11</option>
                         <option value="1.12.0">CSM 1.12</option>
                         <option value="1.13.0" selected>CSM 1.13</option>
+                        <option value="1.14.0">CSM 1.14</option>
                       </select>
                     </div>
                   </div>
@@ -374,7 +375,7 @@ disable_footer: true
 
                   <div class="row mb-4 approve-sdc">
                     <div class="col-sm-12">
-                      <input class="form-check-input" type="checkbox" id="approve-sdc" value="" onchange="onApproveSdcChange(approveSdcNote) checked">
+                      <input class="form-check-input" type="checkbox" id="approve-sdc" value="" onchange="onApproveSdcChange(approveSdcNote); checked">
                       <label for="approve-sdc" class="form-check-label ms-2 text-dark" data-bs-toggle="tooltip" data-bs-placement="right" title="Enable/Disable SDC approval">Allow driver to approve SDC </label>
                     </div>
                     <div class="row child-level-one" id="approvesdc-note-wrapper">
@@ -616,6 +617,17 @@ disable_footer: true
                           <a class="reset" id="reset-controller-count" onclick="resetControllerCount(csmMap)">Reset to default</a>
                         </div>
                       </div>
+                    </div>
+                  </div>
+
+                  <div class="was-validated row mb-4 powermax-credentials">
+                    <label for="powermax-credentials" class="col-sm-2 col-form-label" data-bs-toggle="tooltip" data-bs-placement="right" title="Refers to the credential approach for Powermax" style="width: 115px;">Credentials</label>
+                    <div class="col-sm-9"></div>
+                    <div class="col-sm-3">
+                      <select id="powermax-credentials" class="form-select" onchange="validateInput(validateForm, CONSTANTS)" required>
+                        <option value="Secret" selected>Secret</option>
+                        <option value="ConfigMap">Config Map</option>
+                      </select>
                     </div>
                   </div>
 

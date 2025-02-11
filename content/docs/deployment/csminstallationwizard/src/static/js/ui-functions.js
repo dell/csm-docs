@@ -235,6 +235,16 @@ function onRenameSDCChange(driverName, CONSTANTS_PARAM) {
 	}
 }
 
+const resetCSMVersion = () => {
+	const optionElement  = document.getElementById("csm-version");
+	$('#csm-version option').each(function () {
+		if (this.defaultSelected) {
+			this.selected = true;
+			return false;
+		}
+	});
+};
+
 
 const onCSMVersionChange = () => {
 	csmVersion = document.getElementById("csm-version").value;
@@ -346,6 +356,7 @@ function displayModules(installationType, driverName, CONSTANTS_PARAM) {
 	$(".vol-name-prefix").show();
 	$("div#snap-prefix").show();
 	$(".fsGroupPolicy").hide();
+	$(".powermax-credentials").hide();
 	$(".image-repository").show();
 	$(".resizer").show();
 	$(".snapshot-feature").show();
@@ -428,6 +439,12 @@ function displayModules(installationType, driverName, CONSTANTS_PARAM) {
 			$(".transport-protocol").show();
 			$(".topology").show();
 			$(".fsGroupPolicy").show();
+
+			// Check the CSM version and show the option for Mount Credentials if version is greater than 1.14.0
+			if (isVersionGreaterOrEqualTo(document.getElementById("csm-version").value, "1.14.0")) {
+				$(".powermax-credentials").show();
+			}
+
 			$(".max-volumes-per-node").show();
 			document.getElementById("driver-namespace").value = CONSTANTS_PARAM.POWERMAX_NAMESPACE;
 			if (installationType === CONSTANTS_PARAM.OPERATOR) {
