@@ -670,7 +670,7 @@ This feature is also supported for limiting the volume provisioning on Kubernete
 
 The CSI Driver for Dell PowerMax supports NVMeTCP from v2.11.0. To enable NVMe/TCP provisioning, blockProtocol in settings file should be specified as NVMETCP.
 
->**NOTE:** <br>If `X_CSI_TRANSPORT_PROTOCOL` is not specified in the powermax-array-config ConfigMap, the driver will detect the available initiators on the host and choose the protocol. Priority is given to NVMe/TCP, followed by FC, then iSCSI.
+>**NOTE:** <br>If `X_CSI_TRANSPORT_PROTOCOL` is not specified or set to `auto` in the powermax-array-config ConfigMap, the driver will detect the available initiators on the host and choose the protocol. Priority is given to NVMe/TCP, followed by FC, then iSCSI.
 
 **Limitations**
 
