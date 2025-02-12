@@ -534,8 +534,6 @@ disable_footer: true
                     </div>
                   </div>
 
-
-
                   <div class="row mb-4 vSphere">
                     <div class="col-sm-12">
                       <input class="form-check-input" type="checkbox" id="vSphere" value="" onchange="onVSphereChange()" oninput="validateInput(validateForm, CONSTANTS)">
@@ -620,14 +618,20 @@ disable_footer: true
                     </div>
                   </div>
 
-                  <div class="was-validated row mb-4 powermax-credentials">
+                  <div class="was-validated row mb-4 col-sm-11 powermax-credentials">
                     <label for="powermax-credentials" class="col-sm-2 col-form-label" data-bs-toggle="tooltip" data-bs-placement="right" title="Refers to the credential approach for Powermax" style="width: 115px;">Credentials</label>
                     <div class="col-sm-9"></div>
                     <div class="col-sm-3">
-                      <select id="powermax-credentials" class="form-select" onchange="validateInput(validateForm, CONSTANTS)" required>
+                      <select id="powermax-credentials" class="form-select" onchange="validateInput(validateForm, CONSTANTS); onPowermaxSecretChange(powermaxCredNote)" required>
                         <option value="Secret" selected>Secret</option>
                         <option value="ConfigMap">Config Map</option>
                       </select>
+                    </div>
+                    <div class="row mb-4 child-level-one" id="powermax-credentials-note-wrapper">
+                      <div class="mt-3 py-2 note padding">
+                        <i class="icon dds__icon dds__icon--alert-info-cir"></i>
+                        <span class="h6" id="powermax-credentials-note"></span>
+                      </div>
                     </div>
                   </div>
 

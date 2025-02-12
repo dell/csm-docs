@@ -90,6 +90,7 @@ function onArrayChange() {
 		onReplicationChange(replicationNote);
 		validateInput(validateForm, CONSTANTS);
 		onRenameSDCChange(driver, CONSTANTS);
+		onPowermaxSecretChange(powermaxCredNote);
 	});
 }
 
@@ -173,6 +174,16 @@ function onTopologyChange(topologyNoteValue) {
 		$("#topology-note").html(topologyNoteValue);
 	} else {
 		$('div#topology-note-wrapper').hide();
+	}
+}
+
+function onPowermaxSecretChange(powermaxCredNoteValue) {
+	const credVal = document.getElementById("powermax-credentials").value
+	if (credVal === "ConfigMap") {
+		$('div#powermax-credentials-note-wrapper').show();
+		$("#powermax-credentials-note").html(powermaxCredNoteValue);
+	} else {
+		$('div#powermax-credentials-note-wrapper').hide();
 	}
 }
 
@@ -443,6 +454,7 @@ function displayModules(installationType, driverName, CONSTANTS_PARAM) {
 			// Check the CSM version and show the option for Mount Credentials if version is greater than 1.14.0
 			if (isVersionGreaterOrEqualTo(document.getElementById("csm-version").value, "1.14.0")) {
 				$(".powermax-credentials").show();
+				$(".powermax-credentials-note-wrapper").hide()
 			}
 
 			$(".max-volumes-per-node").show();
@@ -619,6 +631,7 @@ if (typeof exports !== 'undefined') {
 		hideFields,
 		validateInput,
 		resetVolNamePrefix,
-		resetSnapNamePrefix
+		resetSnapNamePrefix,
+		onPowermaxSecretChange
 	};
 }

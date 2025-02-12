@@ -32,3 +32,5 @@ const podmonNote = 'Uncomment tolerations under node property, if CSM for Resili
 const authorizationNote = 'Only the Authorization sidecar is enabled by the CSM Installation Wizard. The Proxy Server has to be installed and configured separately';
 const topologyNote = 'If Node Topology is enabled, make sure topology configmap is created';
 const replicationNote = 'If Replication is enabled, ensure the Replication CRDs are installed and secrets are created.';
+
+const powermaxCredNote = 'The CSI PowerMax Reverse Proxy Config Map will no longer be supported as of May 30, 2025 and completely deprecated  by January 31, 2026. Please switch to using the CSI PowerMax Mount Credentials before these dates to prevent any potential disruptions. Migration steps are available for both <a href="/csm-docs/docs/deployment/helm/drivers/upgrade/powermax/#update-driver-from-v2130-to-v2140-using-helm">Helm</a> and <a href="/csm-docs/docs/deployment/csmoperator/drivers/powermax/#install-driver">Operator</a>.'
