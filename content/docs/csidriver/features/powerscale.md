@@ -66,7 +66,7 @@ spec:
     requests:
       storage: 5Gi
   volumeName: isilonstaticpv
-  storageClassName: isilon           
+  storageClassName: isilon
 ```
 
 4. Then use this PVC as a volume in a pod.
@@ -108,7 +108,7 @@ spec:
   resources:
     requests:
       storage: 5Gi
-  storageClassName: isilon           
+  storageClassName: isilon
 ```
 
 ## Volume Snapshot Feature
@@ -150,7 +150,7 @@ parameters:
 
 The following is a sample manifest for creating a Volume Snapshot using the **v1** snapshot APIs; The following snippet assumes that the persistent volume claim name is testvolume.
 
-```yaml  
+```yaml
 apiVersion: snapshot.storage.k8s.io/v1
 kind: VolumeSnapshot
 metadata:
@@ -197,6 +197,10 @@ spec:
 ```
 
 > Starting from CSI PowerScale driver version 2.2, different isi paths can be used to create PersistentVolumeClaim from VolumeSnapshot.This means the isi paths of the new volume and the VolumeSnapshot can be different.
+
+>**Note:** When the access mode of ReadWriteMany is used, a writable snapshot is created using the read only snapshot as the source. Creation of snapshots from PVCs which are created from snapshots is not supported.
+
+>**Note:** Older releases of OneFS limit the number of writable snapshot to a maximum of thirty per cluster. Newer releases of OneFS increased the limit to 1024 writable snapshots per cluster. Consult your Dell PowerStore Technical representative if you need to increase the number of writable snapshots.
 
 ## Volume Expansion
 
@@ -287,6 +291,10 @@ spec:
     apiGroup: ""
 ```
 
+During the volume cloning process a read only snapshot of the source volume is made and a writable snapshot is created using the read only snapshot as the source. The use of snapshots provides way to quickly create snapshots and clones of source volumes. A SnapshotIQ license is required for snapshots to be created. Note that cloning of clones is not currently supported.
+
+>**Note:** Older releases of OneFS limit the number of writable snapshot to a maximum of thirty per cluster. Newer releases of OneFS increased the limit to 1024 writable snapshots per cluster. Consult your Dell PowerStore Technical representative if you need to increase the number of writable snapshots.
+
 ## Controller HA
 
 CSI PowerScale driver version 1.4.0 and later supports running multiple replicas of the controller pod. Leader election is only applicable for all sidecar containers and driver container will be running in all controller pods. In case of a failure, one of the standby pods becomes active and takes the position of leader. This is achieved by using native leader election mechanisms utilizing `kubernetes leases`.
@@ -301,10 +309,10 @@ controllerCount: 2
 
 >**NOTE:** The default value for controllerCount is 2. It is recommended to not change this unless really required. Also, if the controller count is greater than the number of available nodes (where the pods can be scheduled), some controller pods will remain in a Pending state.
 
-If you are using the Dell CSM Operator, the value to adjust is: 
+If you are using the Dell CSM Operator, the value to adjust is:
 
 ```yaml
-replicas: 2  
+replicas: 2
 ```
 
 For more details about configuring Controller HA using the Dell CSM Operator, see the [Dell CSM Operator documentation](../../../deployment/csmoperator/#custom-resource-specification).
@@ -374,12 +382,12 @@ To utilize the Topology feature, create a custom `StorageClass` with `volumeBind
 
 ```yaml
 # This is a sample manifest for utilizing the topology feature and mount options.
-# PVCs created using this storage class will be scheduled 
+# PVCs created using this storage class will be scheduled
 # only on the nodes with access to Isilon
 
 # Change all instances of <ISILON_IP> to the IP of the PowerScale OneFS API server
 
-# Provide mount options through "mountOptions" attribute 
+# Provide mount options through "mountOptions" attribute
 # to create PVCs with mount options.
 
 apiVersion: storage.k8s.io/v1
@@ -394,9 +402,9 @@ parameters:
   IsiPath: "/ifs/data/csi"
   # AccessZone groupnet service IP. Update AzServiceIP in values.yaml if different than isiIP.
   #AzServiceIP : 192.168.2.1
-  # When a PVC is being created, it takes the storage class' value of "storageclass.rootClientEnabled", 
-  # which  determines, when a node mounts the PVC, in NodeStageVolume, whether to add the k8s node to 
-  # the "Root clients" field (when true) or "Clients" field (when false) of the NFS export 
+  # When a PVC is being created, it takes the storage class' value of "storageclass.rootClientEnabled",
+  # which  determines, when a node mounts the PVC, in NodeStageVolume, whether to add the k8s node to
+  # the "Root clients" field (when true) or "Clients" field (when false) of the NFS export
   RootClientEnabled: "false"
   # Name of PowerScale cluster where pv will be provisioned
   # This name should match with name of one of the cluster configs in isilon-creds secret
@@ -453,7 +461,7 @@ CSI for PowerScale driver version 2.8.0 and above supports Storage Capacity Trac
 This feature helps the scheduler to make more informed choices about where to schedule pods which depends on unbound volumes with late binding (aka "wait for first consumer"). Pods will be scheduled on a node (satisfying the topology constraints) only if the requested capacity is available on the storage array.
 If such a node is not available, the pods stay in Pending state. This means pods are not scheduled.
 
-Without storage capacity tracking, pods get scheduled on a node satisfying the topology constraints. If the required capacity is not available, volume attachment to the pods fails, and pods remain in ContainerCreating state. Storage capacity tracking eliminates unnecessary scheduling of pods when there is insufficient capacity. 
+Without storage capacity tracking, pods get scheduled on a node satisfying the topology constraints. If the required capacity is not available, volume attachment to the pods fails, and pods remain in ContainerCreating state. Storage capacity tracking eliminates unnecessary scheduling of pods when there is insufficient capacity.
 
 The attribute `storageCapacity.enabled` in `values.yaml` can be used to enable/disable the feature during driver installation using helm. This is by default set to true. To configure how often driver checks for changed capacity set `storageCapacity.pollInterval` attribute. In case of driver installed via operator, this interval can be configured in the sample file provided [here.](https://github.com/dell/csm-operator/blob/main/samples/) by editing the `--capacity-poll-interval` argument present in the provisioner sidecar.
 
@@ -519,12 +527,12 @@ parameters:
   #Optional: true
   #Default value: Limit not Set
   #AdvisoryLimit: "50"
-  
+
   #Parameter to set soft limit to quota
   #Optional: true
   #Default value: Limit not Set
   #SoftLimit: "80"
-  
+
   #Parameter which must be mentioned along with Soft Limit
   #Soft Limit can be exceeded until the grace period
   #Optional: true
@@ -609,7 +617,7 @@ To update the log level dynamically user has to edit the ConfigMap `isilon-confi
 
 ```bash
 kubectl edit configmap -n isilon isilon-config-params
-```  
+```
 
 >Note: Prior to CSI Driver for PowerScale version 2.0.0, the log level was allowed to be updated dynamically through `logLevel` attribute in the secret object.
 
@@ -661,7 +669,7 @@ For example, if a volume were to be deleted from the array, or unmounted outside
 2. For controller plugin, by setting attribute `controller.healthMonitor.enabled` to `true` in `values.yaml` file. Also health monitoring interval can be changed through attribute `controller.healthMonitor.interval` in `values.yaml` file.
 3. For node plugin, by setting attribute `node.healthMonitor.enabled` to `true` in `values.yaml` file.
 
-## Single Pod Access Mode for PersistentVolumes- ReadWriteOncePod 
+## Single Pod Access Mode for PersistentVolumes- ReadWriteOncePod
 
 Use `ReadWriteOncePod(RWOP)` access mode if you want to ensure that only one pod across the whole cluster can read that PVC or write to it. This is supported for CSI Driver for PowerScale 2.1.0+ and Kubernetes version 1.22+.
 
