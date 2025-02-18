@@ -1,0 +1,100 @@
+
+<style>
+  .collapse-toggle {
+      margin-bottom: 30px;
+
+  }
+
+  .collapse-title {
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      user-select: none;
+      border-radius: 5px;
+  }
+
+  .collapse-arrow::before {
+      content: '\25B6'; /* Right arrow (▶) */
+      font-size: 0.8em;
+      margin-right: 5px;
+      color: var(--bs-secondary-color); /* Black arrow */
+  }
+
+  .collapse-title:hover .collapse-text {
+      color: blue /* Keep text white on hover */
+  }
+
+  .collapse-content {
+      margin-top: 8px;
+      padding: 8px;
+
+  }
+  .card-box{
+    border: 0.5px solid rgb(163, 161, 161)
+  }
+</style>
+
+<div class="collapse-toggle">
+  <div class="collapse-title" onclick="toggleContent(this)">
+      <i class="collapse-arrow fas fa-angle-right"></i>
+      <strong class="collapse-text">{{ .Get "title" }}</strong>
+  </div>
+  <div class="collapse-content {{ if eq (.Get "card" | default "false") "true" }}card-box{{ end }}" style="display: none;">
+      {{ .Inner | markdownify }}
+  </div>
+</div>
+
+<script>
+  function toggleContent(element) {
+      const content = element.nextElementSibling;
+      const arrow = element.querySelector('.collapse-arrow');
+
+      // Toggle content visibility
+      if (content.style.display === "none") {
+          content.style.display = "block";
+          arrow.style.transform = "rotate(90deg)";
+      } else {
+          content.style.display = "none";
+          arrow.style.transform = "rotate(0deg)";
+      }
+  }
+</script>
+
+
+<!--
+<style>
+.collapse-toggle .collapse-arrow::before {
+    content: '\25B6'; /* Right arrow (▶) */
+    font-size: 0.8em;
+    margin-right: 5px;
+    color: #000;
+}
+
+.collapse-toggle .collapse-arrow {
+    display: inline-block; /* Ensure the arrow behaves as an inline element */
+    transition: transform 0.01s ease; /* Smooth rotation animation */
+}
+
+.collapse-toggle[aria-expanded="true"] .collapse-arrow {
+    transform: rotate(90deg); /* Rotate 90 degrees to point down */
+} 
+
+</style>
+  
+
+
+<div class="collapse-container">
+    <p class="d-inline-flex gap-1">
+      <a class="collapse-toggle" data-bs-toggle="collapse" href="#{{ .Get "id" }}" role="button" aria-expanded="false" aria-controls="{{ .Get "id" }}" style="background-color: var(--td-pre-bg) !important;">
+        <i class="collapse-arrow fas fa-angle-right"></i>  {{ .Get "title" }}
+      </a>
+    </p>
+    <div class="collapse" id="{{ .Get "id" }}">
+      <div class="card card-body">
+        {{ .Inner | markdownify }}
+      </div>
+    </div>
+  </div>
+  
+
+--> 

@@ -1,0 +1,141 @@
+{{ $path := .Get "path" }}
+{{ $folderCount := 0 }}
+{{ if $path }}
+  {{ if (fileExists $path) }}
+    {{ $allEntries := readDir $path }}
+    {{ range $entry := $allEntries }}
+      {{ if $entry.IsDir }}
+        {{ $indexPath := printf "%s/%s/_index.md" $path $entry.Name }}
+        {{ $shouldCount := true }}
+        {{ if (fileExists $indexPath) }}
+          {{ $content := readFile $indexPath }}
+          {{ if (findRE `(?m)^\s*toc_hide\s*:\s*true\s*$` $content) }}
+            {{ $shouldCount = false }}
+          {{ end }}
+        {{ end }}
+        {{ if $shouldCount }}
+          {{ $folderCount = add $folderCount 1 }}
+        {{ end }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+
+
+
+{{ $imagePaths := dict 
+  "1" (dict 
+      "path" "/csm-docs/icons/card-icons/deployment-icon-operator-helm-offline.png" 
+      "comment" "Troubleshooting"
+  ) 
+  "2" (dict 
+      "path" "/csm-docs/icons/card-icons/doc-reports.svg" 
+      "comment" "doc-reports"
+  ) 
+  "3" (dict 
+      "path" "/csm-docs/icons/card-icons/storage-array-icon.png" 
+      "comment" "Storage Array icons"
+  ) 
+  "4" (dict 
+      "path" "/csm-docs/icons/card-icons/prerequisite-icon.png" 
+      "comment" "Prerequisite icons"
+  )  
+  "5" (dict 
+  "path" "/csm-docs/icons/card-icons/kubernetes-icon.png" 
+  "comment" "Kubernetes icon"
+   ) 
+
+   "6" (dict 
+   "path" "/csm-docs/icons/card-icons/deployment-icon-operator-helm-offline.png" 
+   "comment" "deployment icon"
+    ) 
+
+    "7" (dict 
+   "path" "/csm-docs/icons/card-icons/containerorchestrators-icon.png" 
+   "comment" "Container Orchestrators icon"
+    )
+
+    "8" (dict 
+    "path" "/csm-docs/icons/card-icons/troubleshooting-icon.png" 
+    "comment" "Troubleshooting" 
+    ) 
+    "9" (dict 
+    "path" "/csm-docs/icons/card-icons/migration-icon.png" 
+    "comment" "Migration" 
+    )
+}}
+
+
+{{ $imageNumber := .Get "imageNumber" | default "6" }}
+{{ $imageData := index $imagePaths $imageNumber }}
+
+{{ if not $imageData }}
+  {{ $imageData = index $imagePaths "1" }}
+{{ end }}
+
+{{ $image := $imageData.path }}
+{{ $comment := $imageData.comment }}
+
+<style>
+    .card-hover:hover {
+        transform: scale(1.05);
+        transition: transform 0.3s;
+        border: 0.5px solid rgb(0, 153, 255); 
+    }
+    .card-icon {
+        font-size: 2rem;
+        color: #007bff;
+    }
+    .card-link {
+        text-decoration: none;
+        color: inherit;
+    }
+    .card-link:hover {
+        text-decoration: none;
+    }
+    .card-image {
+        width: 2rem;
+        height: 2rem!important
+        
+    }
+    .card-title {
+        font-weight: bold;
+    }
+    .card-text {
+        font-size: 12px; 
+        color: rgb(136, 134, 134);
+    }
+    .card{
+      margin-left:0px; 
+      background-color:var(--td-pre-bg) !important;  
+      padding: 0px;
+      height:100%; 
+    }  
+    .no-top-margin{
+      padding-top:10px;
+    } 
+    .card-body{
+      padding:0px;
+    }
+
+</style>
+<div class="col-md-6 mb-4">
+  <a href="{{ if .Get "link1" }}{{ .Get "link1"}}{{ else }}{{ .Get "link"}}{{ end }}" class="card-link">
+    <div class="card card-hover d-flex align-items-center shadow-sm p-3 bg-white rounded">
+      <div class="row no-gutters align-items-center h-100 w-100 " style="margin:0.6rem;">
+        <div class="col-2 text-center">
+            <img src="{{ $image }}" alt="{{ .Get "title" }}" class="card-image img-fluid">
+        </div>
+        <div class="col-10">
+          <div class="card-body {{if $path}}no-top-margin{{end}}" >
+            <h5 class="card-title" style="margin-top:2px">{{ .Get "title" }}</h5>
+            {{ if $path }}
+              <p class="card-text" >{{ $folderCount }} Items</p>
+            {{ end }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </a>
+  </div>
+

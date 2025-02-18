@@ -417,14 +417,14 @@ Create a secret named powermax-certs in the namespace where the CSI PowerMax dri
     [here](https://github.com/dell/csm-operator/tree/main/samples).
 
 > NOTE:
-> [Replication module](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powermax_v2130.yaml#L283) must be enabled to use the Metro volume
+> [Replication module](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powermax_{{< version-docs key="sample_sc_pmax" >}}.yaml#L283) must be enabled to use the Metro volume
 
 Example:
 ```yaml
     - name: replication
       enabled: true
 ```
->  [Target clusterID](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powermax_v2130.yaml#L316) should be set as self
+>  [Target clusterID](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powermax_{{< version-docs key="sample_sc_pmax" >}}.yaml#L316) should be set as self
 
 Example:
 ```yaml

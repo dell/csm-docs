@@ -1,0 +1,51 @@
+{{ $file := .Get "file" }}
+{{ $suffix := .Get "suffix" | default "" }}
+{{ $hideIds := .Get "hideIds" | default "" }} <!-- IDs to hide, passed as a comma-separated string -->
+{{ $hideClasses := .Get "hideClasses" | default "" }} <!-- Classes to hide, passed as a comma-separated string -->
+{{ $Var := .Get "Var" | default "" }} <!-- Get the passed variable -->  
+{{ $labels := .Get "labels" | default "" }} <!-- Get the passed variable --> 
+{{ $values := .Get "values" | default "" }} <!-- Get the passed variable -->
+{{ $hideIdList := split $hideIds "," }} <!-- Split the hideIds string into an array -->
+{{ $hideClassList := split $hideClasses "," }} <!-- Split the hideClasses string into an array -->
+{{ $content := readFile $file }}
+{{ $content = replaceRE "^---([\\s\\S]+?)---" "" $content }} <!-- Remove front matter -->
+
+<!-- Replace placeholders in the content with variables -->
+{{ $content = replace $content "{{Var}}" $Var }}
+{{ $content = replace $content "{{values}}" $values }} 
+{{ $content = replace $content "{{labels}}" $labels }}
+
+
+<!-- Replace for ID -->
+{{ $content = replaceRE "\\{\\{<\\s*hide\\s+(id=\"[^\"]+\")\\s+hide=\"true\"\\s*(inline=\"true\")?\\s*>\\}\\}" "{{< hide $1 $2 >}}" $content }}
+
+<!-- Replace for Class -->
+{{ $content = replaceRE "\\{\\{<\\s*hide\\s+(class=\"[^\"]+\")\\s+hide=\"true\"\\s*(inline=\"true\")?\\s*>\\}\\}" "{{< hide $1 $2 >}}" $content }}
+
+
+<!-- Dynamically add the `hide` parameter based on IDs -->
+{{ range $hideIdList }}
+  {{ $id := . }}
+  {{ $content = replaceRE (printf "\\{\\{<\\s*hide\\s+id=\"%s\"(\\s+inline=\"true\")?\\s*>\\}\\}" $id) (printf "{{< hide id=\"%s\" hide=\"true\" >}}" $id) $content }}
+{{ end }}
+
+<!-- Dynamically add the `hide` parameter based on Classes -->
+{{ range $hideClassList }}
+  {{ $class := . }}
+  {{ $content = replaceRE (printf "\\{\\{<\\s*hide\\s+class=\"%s\"(\\s+inline=\"true\")?\\s*>\\}\\}" $class) (printf "{{< hide class=\"%s\" hide=\"true\" >}}" $class) $content }}
+{{ end }}
+
+<!-- Default all other hide shortcodes to false -->
+{{ $content = replaceRE "\\{\\{<\\s*hide\\s+(id|class)=\"[^\"]+\"\\s*>\\}\\}" "{{< hide $1=\"$2\" hide=\"false\" >}}" $content }}
+
+<!-- Markdownify the processed content -->
+{{ $htmlContent := $content | markdownify }}
+
+<!-- Add suffix to headings and links if specified -->
+{{ if ne $suffix "" }}
+  {{ $htmlContent = replaceRE "(<h[1-6] id=\")([^\"]+)(\")" (printf "$1$2-%s$3" $suffix) $htmlContent }}
+  {{ $htmlContent = replaceRE "(<a[^>]*class=\"header-link\"[^>]*href=\"#)([^\"]+)(\")" (printf "$1$2-%s$3" $suffix) $htmlContent }}
+{{ end }}
+
+<!-- Render the final HTML -->
+<div class="td-content">{{ $htmlContent | safeHTML }}</div>

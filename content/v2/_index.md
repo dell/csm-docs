@@ -3,7 +3,6 @@
 title: "Documentation"
 linkTitle: "Documentation"
 ---
-
 {{% pageinfo color="dark" %}}
 <span><span/>{{< message text="6" >}}
 {{% /pageinfo %}}

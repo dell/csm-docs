@@ -1,0 +1,155 @@
+{{- $key := .Get "key" -}}
+{{- if eq $key "PFlex_latestVersion" -}}v2.13.0
+{{- else if eq $key "PFlex_preVersion" -}}v2.12.0
+{{- else if eq $key "PStore_latestVersion" -}}v2.13.0
+{{- else if eq $key "PStore_preVersion" -}}v2.12.0
+{{- else if eq $key "PMax_latestVersion" -}}v2.13.0
+{{- else if eq $key "PMax_preVersion" -}}v2.12.0
+{{- else if eq $key "PScale_latestVersion" -}}v2.13.0
+{{- else if eq $key "PScale_preVersion" -}}v2.12.0
+{{- else if eq $key "PUnity_latestVersion" -}}v2.13.0
+{{- else if eq $key "PUnity_preVersion" -}}v2.12.0
+{{- else if eq $key "cert_csi" -}}v1.7.0
+{{- else if eq $key "Observability_csm_topology_image" -}}v1.11.0 
+{{- else if eq $key "Observability_csm_metrics_PStore_image" -}}v1.11.0
+{{- else if eq $key "Observability_csm_metrics_PMax_image" -}}v1.10.0
+{{- else if eq $key "Observability_csm_metrics_PScale_image" -}}v1.8.0
+{{- else if eq $key "Observability_csm_metrics_PFlex_image" -}}v1.11.0
+{{- else if eq $key "Replication" -}}v1.11.0
+{{- else if eq $key "Operator_Resiliency_ConfigVersion" -}}v1.12.0
+{{- else if eq $key "Authv1_ConfigVersion" -}}v1.13.0 
+{{- else if eq $key "Authv1_csm_authorization_tenant" -}}v1.13.0
+{{- else if eq $key "Authv2_csm_authorization_tenant" -}}v2.1.0  
+{{- else if eq $key "Authv1_csm_authorization_proxy" -}}v1.13.0
+{{- else if eq $key "Authv2_csm_authorization_proxy" -}}v2.1.0  
+{{- else if eq $key "Authv1_csm_authorization_role" -}}v1.13.0
+{{- else if eq $key "Authv2_csm_authorization_role" -}}v2.1.0  
+{{- else if eq $key "Authv1_csm_authorization_storage" -}}v1.13.0
+{{- else if eq $key "Authv2_csm_authorization_storage" -}}v2.1.0 
+{{- else if eq $key "Authv1_csm_authorization_sidecar" -}}v1.13.0
+{{- else if eq $key "Authv2_csm_authorization_sidecar" -}}v2.1.0 
+{{- else if eq $key "Authv2_csm_authorization_controller" -}}v2.1.0 
+{{- else if eq $key "Authv1_PMax_ReverseProxy_ConfigVersion" -}}v1.12.0
+{{- else if eq $key "Min_sample_operator_pflex" -}}v2130
+{{- else if eq $key "Det_sample_operator_pflex" -}}v2130
+{{- else if eq $key "Min_sample_operator_pstore" -}}v2130
+{{- else if eq $key "Det_sample_operator_pstore" -}}v2130
+{{- else if eq $key "Min_sample_operator_pmax" -}}v2130
+{{- else if eq $key "Det_sample_operator_pmax" -}}v2130
+{{- else if eq $key "Min_sample_operator_pscale" -}}v2130
+{{- else if eq $key "Det_sample_operator_pscale" -}}v2130
+{{- else if eq $key "Min_sample_operator_unity" -}}v2130
+{{- else if eq $key "Det_sample_operator_unity" -}}v2130
+{{- else if eq $key "sample_sc_pflex" -}}v2130
+{{- else if eq $key "sample_sc_pmax" -}}v2130
+{{- else if eq $key "sample_sc_pstore" -}}v2130
+{{- else if eq $key "sample_sc_pscale" -}}v2130
+{{- else if eq $key "sample_sc_unity" -}}v2130
+{{- else -}}
+  Default text if no valid parameter is passed.
+{{- end -}}
+
+<!-- 
+
+"PFlex_latestVersion" -> /docs/getting-started/upgrade/helm/driver/powerflex.md ,
+/docs/getting-started/installation/openshift/powerflex/csmoperator/_index.md,
+/docs/getting-started/installation/kubernetes/powerflex/helm/_index.md,
+/docs/getting-started/installation/kubernetes/powerflex/csmoperator/_index.md, 
+
+"PFlex_preVersion" -> /docs/getting-started/upgrade/helm/driver/powerflex.md,  
+
+"PStore_latestVersion" -> /docs/getting-started/installation/kubernetes/powerstore/csmoperator/_index.md,
+/docs/getting-started/installation/kubernetes/powerstore/helm/_index.md,
+/docs/getting-started/installation/openshift/powerstore/csmoperator/_index.md,
+/docs/getting-started/upgrade/helm/driver/powerstore.md,
+
+"PStore_preVersion" -> /docs/getting-started/upgrade/helm/driver/powerstore.md, 
+
+"PMax_latestVersion" -> /docs/getting-started/installation/kubernetes/powermax/helm/_index.md,
+/docs/getting-started/upgrade/helm/driver/powermax.md, 
+
+"PMax_preVersion" -> /docs/getting-started/upgrade/helm/driver/powermax.md
+
+"PScale_latestVersion" -> /docs/getting-started/installation/kubernetes/powerscale/csmoperator/_index.md,
+/docs/getting-started/installation/kubernetes/powerscale/helm/_index.md, 
+/docs/getting-started/installation/openshift/powerscale/csmoperator/_index.md, 
+/docs/getting-started/upgrade/helm/driver/powerscale.md
+
+"PScale_preVersion" -> /docs/getting-started/upgrade/helm/driver/powerscale.md
+
+"PUnity_latestVersion" -> /docs/getting-started/installation/kubernetes/unityxt/helm/_index.md,
+/docs/getting-started/installation/openshift/unityxt/csmoperator/_index.md, 
+/docs/getting-started/upgrade/helm/driver/unityxt.md
+
+"PUnity_preVersion" -> /docs/getting-started/upgrade/helm/driver/unityxt.md 
+
+"cert_csi" -> /docs/tooling/cert-csi/_index.md 
+
+"Observability_csm_topology_image" -> /docs/getting-started/installation/helm/modules/observability.md,
+/docs/getting-started/installation/helm/modules/observability/deployment.md,
+/docs/getting-started/installation/helm/modules/observability/deployment/configuration/configuration.md
+
+"Observability_csm_metrics_PStore_image" -> /docs/getting-started/installation/helm/modules/observability.md,
+/docs/getting-started/installation/helm/modules/observability/deployment.md,
+/docs/getting-started/installation/helm/modules/observability/deployment/configuration/configuration.md
+
+"Observability_csm_metrics_PMax_image" ->  
+
+"Observability_csm_metrics_PScale_image" -> /docs/getting-started/installation/helm/modules/observability.md,
+/docs/getting-started/installation/helm/modules/observability/deployment/configuration/configuration.md
+
+"Observability_csm_metrics_PFlex_image" -> /docs/getting-started/installation/helm/modules/observability.md,
+/docs/getting-started/installation/helm/modules/observability/deployment.md,
+/docs/getting-started/installation/helm/modules/observability/deployment/configuration/configuration.md
+
+"Replication" -> /docs/getting-started/installation/helm/modules/replication/install-repctl.md,
+/docs/getting-started/installation/helm/modules/replication/install-script.md,
+/docs/getting-started/installation/operator/modules/replication.md,
+/docs/getting-started/upgrade/helm/module/replication.md,
+
+"Operator_Resiliency_ConfigVersion"  ->  
+
+"Authv1_ConfigVersion" -> /docs/concepts/authorization/v1.x/configuration/powerflex/_index.md, 
+/docs/concepts/authorization/v1.x/configuration/powermax/_index.md, 
+/docs/concepts/authorization/v1.x/configuration/powerscale/_index.md,
+/docs/concepts/authorization/v2.x/configuration/powerflex/_index.md,
+/docs/concepts/authorization/v2.x/configuration/powermax/_index.md, 
+/docs/concepts/authorization/v2.x/configuration/powerscale/_index.md 
+
+"Authv1_csm_authorization_tenant" -> /docs/getting-started/installation/helm/modules/authorizationv1.x.md, 
+
+"Authv2_csm_authorization_tenant" -> /docs/getting-started/installation/helm/modules/authorizationv2.0.md, 
+
+"Authv1_csm_authorization_proxy" -> /docs/getting-started/installation/helm/modules/authorizationv1.x.md, 
+
+"Authv2_csm_authorization_proxy" -> /docs/getting-started/installation/helm/modules/authorizationv2.0.md,
+
+"Authv1_csm_authorization_role" -> /docs/getting-started/installation/helm/modules/authorizationv1.x.md, 
+
+"Authv2_csm_authorization_role" -> /docs/getting-started/installation/helm/modules/authorizationv2.0.md,  
+
+"Authv1_csm_authorization_storage" -> /docs/getting-started/installation/helm/modules/authorizationv1.x.md, 
+
+"Authv2_csm_authorization_storage" -> /docs/getting-started/installation/helm/modules/authorizationv2.0.md,  
+
+"Authv1_csm_authorization_sidecar" -> /docs/getting-started/installation/helm/modules/authorizationv1.x.md, 
+
+"Authv2_csm_authorization_sidecar" -> /docs/getting-started/installation/helm/modules/authorizationv2.0.md, 
+
+"Authv2_csm_authorization_controller"  ->  
+
+"Authv1_PMax_ReverseProxy_ConfigVersion" -> /docs/concepts/authorization/v1.x/configuration/powermax/_index.md,
+/docs/concepts/authorization/v2.x/configuration/powermax/_index.md
+
+
+
+
+
+
+
+
+
+
+
+
+-->
