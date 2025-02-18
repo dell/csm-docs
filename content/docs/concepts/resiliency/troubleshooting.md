@@ -8,7 +8,7 @@ toc_hide: true
 ---
 
 Some tools have been provided in the [tools](https://github.com/dell/karavi-resiliency/blob/main/tools) directory that will help you understand the system's state and facilitate troubleshooting.
-If you experience a problem with Container Storage Module for Resiliency it is important you provide us with as much information as possible so that we can diagnose the issue and improve Container Storage Module for Resiliency. Some tools have been provided in the [tools](https://github.com/dell/karavi-resiliency/blob/main/tools) directory that will help you understand the system's state and facilitate sending us the logs and other information needed to diagnose a problem.
+If you experience a problem with Container Storage Modules for Resiliency it is important you provide us with as much information as possible so that we can diagnose the issue and improve Container Storage Modules for Resiliency. Some tools have been provided in the [tools](https://github.com/dell/karavi-resiliency/blob/main/tools) directory that will help you understand the system's state and facilitate sending us the logs and other information needed to diagnose a problem.
 
 ## Monitoring Protected Pods and Node Status
 
@@ -33,7 +33,7 @@ For systems with many protected pods, the [monx.sh](https://github.com/dell/kara
 
 ## Collecting Logs
 
-If you have a problem with Container Storage Module for Resiliency it's best to collect the logs to help with diagnosis.  This tool can also be used to collect logs to submit as part of an [issue](https://github.com/dell/csm/issues) to help us diagnose. Please use the [collect_logs.sh](https://github.com/dell/karavi-resiliency/blob/main/tools/collect_logs.sh). Type "collect_logs.sh --help" for help on the arguments.
+If you have a problem with Container Storage Modules for Resiliency it's best to collect the logs to help with diagnosis.  This tool can also be used to collect logs to submit as part of an [issue](https://github.com/dell/csm/issues) to help us diagnose. Please use the [collect_logs.sh](https://github.com/dell/karavi-resiliency/blob/main/tools/collect_logs.sh). Type "collect_logs.sh --help" for help on the arguments.
 
 The script collects the following information:
 * A list of the driver pods.

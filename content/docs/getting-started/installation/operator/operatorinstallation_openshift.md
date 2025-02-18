@@ -38,7 +38,7 @@ The installation process involves the creation of a `Subscription` object either
 
 1. From your OpenShift UI, select **OperatorHub** in the left pane. 
 
-2. On the **OperatorHub** page, search for “container storage module” and select the **container storage module** card: 
+2. On the **OperatorHub** page, search for “Container Storage Modules” and select the **Container Storage Modules** card: 
 
    <img src="/csm-docs/images/deployment/operator/operatorhub_page.png" > 
 
@@ -64,7 +64,7 @@ The installation process involves the creation of a `Subscription` object either
 
    <img src="/csm-docs/images/deployment/operator/install_operator.png" style="border:1px solid black">  
 
-5. Click **Install** to deploy container storage module Operator in the dell-csm-operator namespace.  
+5. Click **Install** to deploy Container Storage Modules Operator in the dell-csm-operator namespace.  
 
    <img src="/csm-docs/images/deployment/operator/installing_operator.png" >
 
@@ -76,7 +76,7 @@ The installation process involves the creation of a `Subscription` object either
 
 >Note
 
-- If your environment has more than 1000 Pods, the Container Storage Module Operator may need more resources. You can adjust the default CPU and memory settings in deploy/operator.yaml and config/manager/manager.yaml. For more details on setting resource requests and limits, refer to the [documentation](https://sdk.operatorframework.io/docs/best-practices/managing-resources/). The current default values are listed below
+- If your environment has more than 1000 Pods, the Container Storage Modules Operator may need more resources. You can adjust the default CPU and memory settings in deploy/operator.yaml and config/manager/manager.yaml. For more details on setting resource requests and limits, refer to the [documentation](https://sdk.operatorframework.io/docs/best-practices/managing-resources/). The current default values are listed below
 
     ```yaml
         resources:

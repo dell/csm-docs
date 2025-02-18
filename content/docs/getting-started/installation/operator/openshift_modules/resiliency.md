@@ -5,7 +5,7 @@ linkTitle: "Resiliency"
 ---
 
 <!--
-The Container Storage Module Operator installs the Resiliency module for supported Dell CSI Drivers, deploying the Resiliency sidecar.
+The Container Storage Modules Operator installs the Resiliency module for supported Dell CSI Drivers, deploying the Resiliency sidecar.
 
 ## Prerequisite
 

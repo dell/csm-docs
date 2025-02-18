@@ -199,9 +199,9 @@ extraConfigmapMounts: []
 
 </details>
 
-### How can I diagnose an issue with Container Storage Module for Observability?
+### How can I diagnose an issue with Container Storage Modules for Observability?
 
-Once you have attempted to install Container Storage Module for Observability to your Kubernetes or OpenShift cluster, the first step in troubleshooting is locating the problem. 
+Once you have attempted to install Container Storage Modules for Observability to your Kubernetes or OpenShift cluster, the first step in troubleshooting is locating the problem. 
 
 Get information on the state of your Pods.
 ```console
@@ -230,13 +230,13 @@ The ServiceMonitor allows us to define how a set of services should be monitored
 
 * For tips on debugging your cluster, please see this [troubleshooting guide](https://kubernetes.io/docs/tasks/debug-application-cluster/debug-cluster/).
 
-### How can I troubleshoot latency problems with Container Storage Module for Observability?
+### How can I troubleshoot latency problems with Container Storage Modules for Observability?
 
 CContainer Storage ModuleSM for Observability is instrumented to report trace data to [Zipkin](https://zipkin.io/).  Please see [Tracing](docs/getting-started/installation/kubernetes/powermax/helm/csm-modules/observability/postinstallation/#tracing) for more information on enabling tracing for CSM for Observability.
 
 ### Why does the Observability installation timeout with pods stuck in 'ContainerCreating'/'CrashLoopBackOff'/'Error' stage?
 
-Check the pods in the Container Storage Module for Observability namespace. If the pod starting with 'karavi-observability-cert-manager-cainjector-*' is in 'CrashLoopBackOff' or 'Error" stage with a number of restarts, check if the logs for that pod show the below error:
+Check the pods in the Container Storage Modules for Observability namespace. If the pod starting with 'karavi-observability-cert-manager-cainjector-*' is in 'CrashLoopBackOff' or 'Error" stage with a number of restarts, check if the logs for that pod show the below error:
 ```console
 kubectl logs -n $namespace $cert-manager-cainjector-podname
 ```
@@ -257,7 +257,7 @@ MountVolume.SetUp failed for volume "tls-secret" : secret "otel-collector-tls" n
 Unable to attach or mount volumes: unmounted volumes=[tls-secret], unattached volumes=[vxflexos-config-params vxflexos-config tls-secret karavi-metrics-powerflex-configmap kube-api-access-4fqgl karavi-authorization-config proxy-server-root-certificate]: timed out waiting for the condition
 ```
 
-### Why do I see 'Failed calling webhook' error when reinstalling Container Storage Module for Observability?
+### Why do I see 'Failed calling webhook' error when reinstalling Container Storage Modules for Observability?
 This warning can occur when a user uninstalls Observability by deleting the Kubernetes namespace before properly cleaning up by running `helm delete` on the Observability Helm installation. This results in the credential manager failing to properly integrate with Observability on future installations. The user may see the following error in the module pods upon reinstallation:
 
 ```

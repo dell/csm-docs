@@ -4,14 +4,14 @@ linktitle: CLI
 toc_hide: true
 weight: 4
 description: >
- Container Storage Module (CSM) for Authorization CLI
+ Container Storage Modules (CSM) for Authorization CLI
 ---
 
 {{% pageinfo color="primary" %}}
 {{< message text="5" >}}
 {{% /pageinfo %}}
 
-karavictl is a command-line interface (CLI) used to interact with and manage your Container Storage Module (CSM) Authorization deployment.
+karavictl is a command-line interface (CLI) used to interact with and manage your Container Storage Modules (CSM) Authorization deployment.
 This document outlines all karavictl commands, their intended use, options that can be provided to alter their execution, and expected output from those commands.
 
 If you feel that something is unclear or missing in this document, please open up an [issue](https://github.com/dell/csm/issues).

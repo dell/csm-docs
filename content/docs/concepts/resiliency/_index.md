@@ -15,9 +15,9 @@ For the complete discussion and rationale, you can read the [pod-safety design p
 
 For more background on the forced deletion of Pods in a StatefulSet, please visit [Force Delete StatefulSet Pods](https://kubernetes.io/docs/tasks/run-application/force-delete-stateful-set-pod/#:~:text=In%20normal%20operation%20of%20a,1%20are%20alive%20and%20ready).
 
-Container Storage Module for Resiliency and [Non graceful node shutdown](https://github.com/kubernetes/enhancements/tree/master/keps/sig-storage/2268-non-graceful-shutdown) are mutually exclusive. One shall use either Resiliency or Non graceful node shutdown feature provided by Kubernetes.
+Container Storage Modules for Resiliency and [Non graceful node shutdown](https://github.com/kubernetes/enhancements/tree/master/keps/sig-storage/2268-non-graceful-shutdown) are mutually exclusive. One shall use either Resiliency or Non graceful node shutdown feature provided by Kubernetes.
 
-## Container Storage Module for Resiliency High-Level Description
+## Container Storage Modules for Resiliency High-Level Description
 
 Resiliency is designed to make Kubernetes Applications, including those that utilize persistent storage, more resilient to various failures. The first component of the Resiliency module is a pod monitor that is specifically designed to protect stateful applications from various failures. It is not a standalone application, but rather is deployed as a _sidecar_ to CSI (Container Storage Interface) drivers, in both the driver's controller pods and the driver's node pods. Deploying Container Storage ModuleResiliency as a sidecar allows it to make direct requests to the driver through the Unix domain socket that Kubernetes sidecars use to make CSI requests.
 
@@ -25,9 +25,9 @@ Some of the methods Resiliency invokes in the driver are standard CSI methods, s
 
 Accordingly,Resiliency is adapted to and qualified with each CSI driver it is to be used with. Different storage systems have different nuances and characteristics for Resiliency must take into account.
 
-## Container Storage Module for Resiliency Capabilities
+## Container Storage Modules for Resiliency Capabilities
 
-Container Storage Module for Resiliency provides the following capabilities:
+Container Storage Modules for Resiliency provides the following capabilities:
 
 {{<table "table table-striped table-bordered table-sm">}}
 | Capability                              | PowerStore | PowerMax | PowerFlex | PowerScale | UnityXT |
@@ -39,7 +39,7 @@ Container Storage Module for Resiliency provides the following capabilities:
 
 ## Supported CSI Drivers
 
-Container Storage Module for Resiliency supports the following CSI drivers and versions.
+Container Storage Modules for Resiliency supports the following CSI drivers and versions.
 {{<table "table table-striped table-bordered table-sm">}}
 | Storage Array                     |  Supported Versions |
 | --------------------------------- | :----------------: |
@@ -51,7 +51,7 @@ Container Storage Module for Resiliency supports the following CSI drivers and v
 {{</table>}}
 
 ## PowerFlex Support
-PowerFlex is highly scalable and well-suited for Kubernetes deployments. The Container Storage Module for Resiliency leverages these features:
+PowerFlex is highly scalable and well-suited for Kubernetes deployments. The Container Storage Modules for Resiliency leverages these features:
 - Quick detection of Array I/O Network Connectivity status changes (1-2 seconds).
 - Robust mechanism to detect if Nodes are doing I/O to volumes (sampled over 5 seconds).
 - Low latency REST API for fast CSI provisioning and de-provisioning.
@@ -82,7 +82,7 @@ These arrays provide robust and scalable solutions for Kubernetes deployments, e
 
 ## Limitations and Exclusions
 
-This file contains information on Limitations and Exclusions that users should be aware of. Additionally, there are driver specific limitations and exclusions that may be called out in the [Deploying Container Storage Module for Resiliency](../../getting-started/installation/kubernetes/powermax/helm/csm-modules/resiliency/) page.
+This file contains information on Limitations and Exclusions that users should be aware of. Additionally, there are driver specific limitations and exclusions that may be called out in the [Deploying Container Storage Modules for Resiliency](../../getting-started/installation/kubernetes/powermax/helm/csm-modules/resiliency/) page.
 
 ### Supported and Tested Operating Modes
 
@@ -109,7 +109,7 @@ The following provisioning types are supported and have been tested:
 
 * PowerFlex with Resiliency is not supported for NFS protocol.
 
-## Deploying and Managing Applications Protected by Container Storage Module for Resiliency
+## Deploying and Managing Applications Protected by Container Storage Modules for Resiliency
 
  The first thing to remember about _CSM for Resiliency_ is that it only takes action on pods configured with the designated label. Both the key and the value have to match what is in the podmon helm configuration. CSM for Resiliency emits a log message at startup with the label key and value it is using to monitor pods:
 
@@ -127,7 +127,7 @@ pmtu2       podmontest-0   1/1     Running   0          3m8s
 pmtu3       podmontest-0   1/1     Running   0          3m6s
  ```
 
- If Container Storage Module for Resiliency detects a problem with a pod caused by a node or other failure that it can initiate remediation for, it will add an event to that pod's events:
+ If Container Storage Modules for Resiliency detects a problem with a pod caused by a node or other failure that it can initiate remediation for, it will add an event to that pod's events:
  ```bash
  kubectl get events -n pmtu1
  ```
@@ -137,7 +137,7 @@ pmtu3       podmontest-0   1/1     Running   0          3m6s
 ...
  ```
 
- Container Storage Module for Resiliency may also generate events if it is unable to clean up a pod for some reason. For example, it may not clean up a pod because the pod is still doing I/O to the array.
+ Container Storage Modules for Resiliency may also generate events if it is unable to clean up a pod for some reason. For example, it may not clean up a pod because the pod is still doing I/O to the array.
 
 Similarly, the label selector for csi-powerscale, csi-unity, csi-powerstore and csi-powermax would be as shown respectively.
  ```yaml
@@ -148,24 +148,24 @@ Similarly, the label selector for csi-powerscale, csi-unity, csi-powerstore and 
  ```
 
  #### Important
- Before putting an application into production that relies on Container Storage Module for Resiliency monitoring, it is important to do a few test failovers first. To do this take the node that is running the pod offline for at least 2-3 minutes. Verify that there is an event message similar to the one above is logged, and that the pod recovers and restarts normally with no loss of data. (Note that if the node is running many Container Storage Module for Resiliency protected pods, the node may need to be down longer for Container Storage Module for Resiliency to have time to evacuate all the protected pods.)
+ Before putting an application into production that relies on Container Storage Modules for Resiliency monitoring, it is important to do a few test failovers first. To do this take the node that is running the pod offline for at least 2-3 minutes. Verify that there is an event message similar to the one above is logged, and that the pod recovers and restarts normally with no loss of data. (Note that if the node is running many Container Storage Modules for Resiliency protected pods, the node may need to be down longer for Container Storage Modules for Resiliency to have time to evacuate all the protected pods.)
 
  ### Application Recommendations
 
- 1. It is recommended that pods that will be monitored by Container Storage Module for Resiliency be configured to exit if they receive any I/O errors. That should help achieve the recovery as quickly as possible.
+ 1. It is recommended that pods that will be monitored by Container Storage Modules for Resiliency be configured to exit if they receive any I/O errors. That should help achieve the recovery as quickly as possible.
 
- 2. Container Storage Module for Resiliency does not directly monitor application health. However, if standard Kubernetes health checks are configured, that may help reduce pod recovery time in the event of node failure, as Container Storage Module for Resiliency should receive an event that the application is Not Ready. Note that a Not Ready pod is not sufficient to trigger Container Storage Module for Resiliency action unless there is also some condition indicating a Node failure or problem, such as the Node is tainted, or the array has lost connectivity to the node.
+ 2. Container Storage Modules for Resiliency does not directly monitor application health. However, if standard Kubernetes health checks are configured, that may help reduce pod recovery time in the event of node failure, as Container Storage Modules for Resiliency should receive an event that the application is Not Ready. Note that a Not Ready pod is not sufficient to trigger Container Storage Modules for Resiliency action unless there is also some condition indicating a Node failure or problem, such as the Node is tainted, or the array has lost connectivity to the node.
 
- 3. As noted previously in the Limitations and Exclusions section, Container Storage Module for Resiliency has not yet been verified to work with ReadWriteMany or ReadOnlyMany volumes. Also, it has not been verified to work with pod controllers other than StatefulSet.
+ 3. As noted previously in the Limitations and Exclusions section, Container Storage Modules for Resiliency has not yet been verified to work with ReadWriteMany or ReadOnlyMany volumes. Also, it has not been verified to work with pod controllers other than StatefulSet.
 
  ### Storage Array Upgrades
-To avoid application pods getting stuck in a Pending state, Container Storage Module for Resiliency should be disabled for storage array upgrades; even if the storage array upgrade is advertised as non-distruptive. If the container orchestrator platform nodes lose connectivity with the array, which is more likely during an upgrade, then Resiliency will delete the application pods on the affected nodes and attempt to move them to a healthy node. If all of the nodes are affected, then the application pods will be stuck in a Pending state.
+To avoid application pods getting stuck in a Pending state, Container Storage Modules for Resiliency should be disabled for storage array upgrades; even if the storage array upgrade is advertised as non-distruptive. If the container orchestrator platform nodes lose connectivity with the array, which is more likely during an upgrade, then Resiliency will delete the application pods on the affected nodes and attempt to move them to a healthy node. If all of the nodes are affected, then the application pods will be stuck in a Pending state.
 
 ## Recovering From Failures
 
-Normally Container Storage Module for Resiliency should be able to move pods that have been impacted by Node Failures to a healthy node. After the failed nodes have come back online, Container Storage Module for Resiliency cleans them up (especially any potential zombie pods) and then automatically removes the Container Storage Module for Resiliency node taint that prevents pods from being scheduled to the failed node(s). There are a few cases where this cannot be fully automated and operator intervention is required, including:
+Normally Container Storage Modules for Resiliency should be able to move pods that have been impacted by Node Failures to a healthy node. After the failed nodes have come back online, Container Storage Modules for Resiliency cleans them up (especially any potential zombie pods) and then automatically removes the Container Storage Modules for Resiliency node taint that prevents pods from being scheduled to the failed node(s). There are a few cases where this cannot be fully automated and operator intervention is required, including:
 
-1. Container Storage Module for Resiliency expects that when a node failure occurs, all Container Storage Module for Resiliency labeled pods are evacuated and rescheduled on other nodes. This process may not complete however if the node comes back online before Container Storage Module for Resiliency has had time to evacuate all the labeled pods. The remaining pods may not restart correctly, going to "Error" or "CrashLoopBackoff". We are considering some possible remediation for this condition but have not implemented them yet.
+1. Container Storage Modules for Resiliency expects that when a node failure occurs, all Container Storage Modules for Resiliency labeled pods are evacuated and rescheduled on other nodes. This process may not complete however if the node comes back online before Container Storage Modules for Resiliency has had time to evacuate all the labeled pods. The remaining pods may not restart correctly, going to "Error" or "CrashLoopBackoff". We are considering some possible remediation for this condition but have not implemented them yet.
 
     If this happens, try deleting the pod with "kubectl delete pod ...". In our experience this normally will cause the pod to be restarted and transition to the "Running" state.
 
@@ -176,13 +176,13 @@ Normally Container Storage Module for Resiliency should be able to move pods tha
     ```yaml
     pods skipped for cleanup because still present: <pod-list>
     ```
-    If this happens, __DO NOT__ manually remove the Container Storage Module for Resiliency node taint. Doing so could possibly cause data corruption if volumes were not cleaned up, and a pod using those volumes was subsequently scheduled to that node.
+    If this happens, __DO NOT__ manually remove the Container Storage Modules for Resiliency node taint. Doing so could possibly cause data corruption if volumes were not cleaned up, and a pod using those volumes was subsequently scheduled to that node.
 
     The correct course of action in this case is to reboot the failed node(s) that have not removed their taints in a reasonable time (5-10 minutes after the node is online again.) The operator can delay executing this reboot until it is convenient, but new pods will not be scheduled to it in the interim. This reboot will cancel any potential zombie pods. After the reboot, node-podmon should automatically remove the node taint after a short time.
 
 ## Testing Methodology and Results
 
-A three tier testing methodology is used for Container Storage Module for Resiliency:
+A three tier testing methodology is used for Container Storage Modules for Resiliency:
 
 1. Unit testing with high coverage (>90% statement) tests the program logic and is especially used to test the error paths by injecting faults.
 2. An integration test describes test scenarios in Gherkin that sets up specific testing scenarios executed against a Kubernetes test cluster. The tests use ranges for many of the parameters to add an element of "chaos testing".

@@ -2,10 +2,10 @@
 title: Proxy Server
 linktitle: Proxy Server
 description: >
-  Configuring the Container Storage Module for Authorization Proxy Server
+  Configuring the Container Storage Modules for Authorization Proxy Server
 ---
 
-## Configuring the Container Storage Module for Authorization Proxy Server
+## Configuring the Container Storage Modules for Authorization Proxy Server
 
 The storage administrator must first configure Authorization with the following via `karavictl`:
 - Karavictl admin token
@@ -61,7 +61,7 @@ $ cat admintoken.yaml
 
 ### Configuring Storage
 
-A `storage` entity in Container Storage Module Authorization consists of the storage type (PowerFlex, PowerMax, PowerScale), the system ID, the API endpoint, and the credentials. For example, to create PowerFlex storage:
+A `storage` entity in Container Storage Modules Authorization consists of the storage type (PowerFlex, PowerMax, PowerScale), the system ID, the API endpoint, and the credentials. For example, to create PowerFlex storage:
 
 #### RPM Deployment
 ```bash

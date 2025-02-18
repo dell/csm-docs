@@ -2,26 +2,26 @@
 title: Replication
 linkTitle: "Replication"
 description: >
-  Installing Replication via Container Storage Module Operator
+  Installing Replication via Container Storage Modules Operator
 ---
 {{% pageinfo color="primary" %}}
 {{< message text="1" >}}
 {{% /pageinfo %}}
 
-The Container Storage Module Operator installs the Replication module for supported Dell CSI Drivers, deploying the Replication sidecar and Controller Manage.
+The Container Storage Modules Operator installs the Replication module for supported Dell CSI Drivers, deploying the Replication sidecar and Controller Manage.
 
 ## Prerequisites
-To configure Replication prior to installation via Container Storage Module Operator, you need:
+To configure Replication prior to installation via Container Storage Modules Operator, you need:
 
 - a source cluster which is the main cluster
 - a target cluster which will serve as the disaster recovery cluster
 > **_NOTE:_**  If using a single Kubernetes cluster in a stretched configuration, there will be only one cluster. The source cluster is also the target cluster.
 
-- _(Optional)_ If Container Storage Module Replication is being deployed using two clusters in an environment where the DNS is not configured, and the cluster API endpoints are
+- _(Optional)_ If Container Storage Modules Replication is being deployed using two clusters in an environment where the DNS is not configured, and the cluster API endpoints are
 FQDNs, it is necessary to add the `<FQDN>:<IP>` mapping in the /etc/hosts file in order to resolve queries to the remote API server.
 This change will need to be made to the /etc/hosts file on:
     - The bastion node(s) (or wherever `repctl` is used).
-    - Either the Container Storage Module Operator Deployment or ClusterServiceVersion custom resource if using an Operator Lifecycle Manager (such as with an OperatorHub install).
+    - Either the Container Storage Modules Operator Deployment or ClusterServiceVersion custom resource if using an Operator Lifecycle Manager (such as with an OperatorHub install).
     - Both dell-replication-controller-manager deployments covered in [Configuration Steps](../replication/#configuration-steps) below.
 
     Update the ClusterServiceVersion before continuing. Execute the command below, replacing the fields for the remote cluster's FQDN and IP.

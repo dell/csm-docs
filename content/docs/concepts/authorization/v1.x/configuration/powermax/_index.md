@@ -2,10 +2,10 @@
 title: PowerMax
 linktitle: PowerMax
 description: >
-  Enabling Container Storage Module Authorization for PowerMax CSI Driver
+  Enabling Container Storage Modules Authorization for PowerMax CSI Driver
 ---
 
-## Configuring PowerMax CSI Driver with Container Storage Module for Authorization
+## Configuring PowerMax CSI Driver with Container Storage Modules for Authorization
 
 Given a setup where Kubernetes, a storage system, and the Authorization Proxy Server are deployed, follow these steps to configure the CSI Drivers to work with the Authorization sidecar:
 
@@ -57,7 +57,7 @@ Create the karavi-authorization-config secret using this command:
 
     Refer to the [Install the Driver](../../../../../getting-started/installation/kubernetes/powermax/csmoperator/#install-driver) section to prepare `powermax-creds.yaml`. Leave `username` and `password` with the default values as they will be ignored.
 
-5. Enable Container Storage Module Authorization in the driver installation applicable to your installation method.
+5. Enable Container Storage Modules Authorization in the driver installation applicable to your installation method.
 
     **Helm**
 
@@ -122,9 +122,9 @@ Create the karavi-authorization-config secret using this command:
 
     - Update the `enabled` field to `true.`
 
-    - Update the `image` to the image of the Container Storage Module Authorization sidecar. In most cases, you can leave the default value.
+    - Update the `image` to the image of the Container Storage Modules Authorization sidecar. In most cases, you can leave the default value.
 
-    - Update the `PROXY_HOST` environment value to the hostname of the Container Storage Module Authorization Proxy Server. `csm-authorization.com` is a placeholder for the proxyHost. See the administrator of Authorization for the correct value.
+    - Update the `PROXY_HOST` environment value to the hostname of the Container Storage Modules Authorization Proxy Server. `csm-authorization.com` is a placeholder for the proxyHost. See the administrator of Authorization for the correct value.
 
     - Update the `SKIP_CERTIFICATE_VALIDATION` environment value to `true` or `false` depending on if you want to disable or enable certificate validation of Authorization Proxy Server.
 
@@ -163,7 +163,7 @@ Create the karavi-authorization-config secret using this command:
     ```
 
     Alternatively, you can use the minimal sample files provided
-    [here](https://github.com/dell/csm-operator/tree/main/samples/minimal-samples/powermax_v2130.yaml) and install the module using default values
+    [here](https://github.com/dell/csm-operator/tree/main/samples/minimal-samples/powermax_{{< version-docs key="Min_sample_operator_pmax" >}}.yaml) and install the module using default values
 
 5. Install the CSI PowerMax driver following the appropriate documentation for your installation method.
 

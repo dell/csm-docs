@@ -78,11 +78,11 @@ To deploy the Operator, follow the instructions available [here](../../../operat
       configVersion: {{< version-docs key="PStore_latestVersion" >}}
       forceRemoveDriver: true
    ```
-     [sample file](https://github.com/dell/csm-operator/blob/main/samples/minimal-samples/powerstore_v2130.yaml) for default settings. Modify if needed.
+     [sample file](https://github.com/dell/csm-operator/blob/main/samples/minimal-samples/powerstore_{{< version-docs key="Min_sample_operator_pstore" >}}.yaml) for default settings. Modify if needed.
 
     [OR]                                                
 
-    b. **Detailed Configuration:**  [sample file](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powerstore_v2130.yaml) for detailed settings.
+    b. **Detailed Configuration:**  [sample file](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powerstore_{{< version-docs key="Det_sample_operator_pstore" >}}.yaml) for detailed settings.
 
    - Users should configure the parameters in CR. The following table lists the primary configurable parameters of the PowerStore driver and their default values: 
    
@@ -178,7 +178,7 @@ To deploy the Operator, follow the instructions available [here](../../../operat
 
 <br>  
 {{< markdownify >}}
-The driver and modules versions installable with the Container Storage Module Operator [Click Here](../../../../../supportmatrix/#operator-compatibility-matrix)
+The driver and modules versions installable with the Container Storage Modules Operator [Click Here](../../../../../supportmatrix/#operator-compatibility-matrix)
 {{< /markdownify >}}
 <br>   
 {{< cardcontainer >}}

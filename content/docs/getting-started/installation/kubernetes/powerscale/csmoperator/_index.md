@@ -94,11 +94,11 @@ To deploy the Operator, follow the instructions available [here](../../../operat
          configVersion: {{< version-docs key="PScale_latestVersion" >}}
          forceRemoveDriver: true
    ```
-      [sample file](https://github.com/dell/csm-operator/blob/main/samples/minimal-samples/powerscale_v2130.yaml) for default settings. Modify if needed.
+      [sample file](https://github.com/dell/csm-operator/blob/main/samples/minimal-samples/powerscale_{{< version-docs key="sample_sc_pflex" >}}.yaml) for default settings. Modify if needed.
 
     [OR]                                                
 
-    b. **Detailed Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powerscale_v2130.yaml) for detailed settings.
+    b. **Detailed Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powerscale_{{< version-docs key="sample_sc_pscale" >}}.yaml) for detailed settings.
 
  -  Users should configure the parameters in CR. The following table lists the primary configurable parameters of the PowerScale driver and their default values:
    <ul>
@@ -199,7 +199,7 @@ ii. **Create PowerScale custom resource**:
 {{< accordion id="Three" title="CSM Modules" >}}
 <br>  
 {{< markdownify >}}
-The driver and modules versions installable with the Container Storage Module Operator [Click Here](../../../../../supportmatrix/#operator-compatibility-matrix)
+The driver and modules versions installable with the Container Storage Modules Operator [Click Here](../../../../../supportmatrix/#operator-compatibility-matrix)
 {{< /markdownify >}}
 <br>   
 {{< cardcontainer >}}

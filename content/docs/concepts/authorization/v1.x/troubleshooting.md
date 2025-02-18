@@ -40,7 +40,7 @@ __Resolution__
 chmod o+rwx deploy/rpm
 ```
 
-### Retrieve Container Storage Module Authorization Server Logs
+### Retrieve Container Storage Modules Authorization Server Logs
 
 To retrieve logs from services on Authorization Server, run the following command (e.g proxy-server logs):
 
@@ -79,7 +79,7 @@ error: failed to install policies (see /tmp/policy-install-for-karavi3163047435)
 
 __Resolution__
 
-This issue should only occur with older versions of Container Storage Module Authorization. If your system is encountering this issue, upgrade to version 1.5.0 or above.
+This issue should only occur with older versions of Container Storage Modules Authorization. If your system is encountering this issue, upgrade to version 1.5.0 or above.
 
 ### After installation, the create-pvc Pod is in an Error state
 If SELinux is enabled, the create-pvc Pod may be in an Error state:
@@ -130,11 +130,11 @@ time="2022-06-30T17:38:32Z" level=error msg="array 2d6fb7c6370a990f probe failed
 time="2022-06-30T17:38:32Z" level=fatal msg="grpc failed" error="rpc error: code = FailedPrecondition desc = All arrays are not working. Could not proceed further: map[2d6fb7c6370a990f:failed to list vols for array 2d6fb7c6370a990f : rpc error: code = Internal desc = Unable to list volumes: request denied for path ]"
 ```
 
-This occurs when the Container Storage Module Authorization proxy-server does not allow all driver HTTPS request paths.
+This occurs when the Container Storage Modules Authorization proxy-server does not allow all driver HTTPS request paths.
 
 __Resolution__
 
-1. Edit the `powerflex-urls` configMap in the namespace where Container Storage Module Authorization is deployed to allow all request paths by default.
+1. Edit the `powerflex-urls` configMap in the namespace where Container Storage Modules Authorization is deployed to allow all request paths by default.
 
 ```bash
 kubectl -n <namespace> edit configMap powerflex-urls
@@ -187,7 +187,7 @@ data:
     input.url]))\n}\n"
 ```
 
-2. Rollout restart the Container Storage Module Authorization proxy-server so the policy change gets applied.
+2. Rollout restart the Container Storage Modules Authorization proxy-server so the policy change gets applied.
 
 ```bash
 kubectl -n <namespace> rollout restart deploy/proxy-server

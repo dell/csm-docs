@@ -2,7 +2,7 @@
 title: Authorization v1.x
 linktitle: "Authorization v1.x"
 description: >
-  Container Storage Module (CSM) for Authorization Helm deployment
+  Container Storage Modules (CSM) for Authorization Helm deployment
 ---
 {{% pageinfo color="primary" %}}
 1. <span><span/>{{< message text="1" >}}
@@ -10,9 +10,9 @@ description: >
 2. <span><span/>{{< message text="5" >}}
 {{% /pageinfo %}}
 
-Container Storage Module Authorization can be installed by using the provided Helm v3 charts on Kubernetes platforms.
+Container Storage Modules Authorization can be installed by using the provided Helm v3 charts on Kubernetes platforms.
 
-The following Container Storage Module Authorization components are installed in the specified namespace:
+The following Container Storage Modules Authorization components are installed in the specified namespace:
 - proxy-service, which forwards requests from the CSI Driver to the backend storage array
 - tenant-service, which configures tenants, role bindings, and generates JSON Web Tokens
 - role-service, which configures roles for tenants to be bound to
@@ -26,7 +26,7 @@ The following third-party components are optionally installed in the specified n
 - cert-manager, which optionally provides a self-signed certificate to configure the Authorization Ingresses
 - nginx-ingress-controller, which fulfills the Authorization Ingresses
 
-## Install Container Storage Module Authorization
+## Install Container Storage Modules Authorization
 
 **Steps**
 1. Create a namespace where you want to install Container Storage ModuleM Authorization.
@@ -145,7 +145,7 @@ mv ./karavictl ~/.local/bin/karavictl
 
 Karavictl commands and intended use can be found [here](docs/concepts/authorization/v1.x/cli/). 
 
-## Configuring the Container Storage Module Authorization Proxy Server
+## Configuring the Container Storage Modules Authorization Proxy Server
 
 The first part of Authorization deployment is to configure the proxy server. This is controlled by the Storage Administrator.
 
@@ -185,13 +185,13 @@ On the machine running `karavictl`, the `/etc/hosts` file needs to be updated wi
 
 Please continue following the steps outlined in the [proxy server](docs/concepts/authorization/v1.x/configuration/proxy-server) configuration.
 
-## Configuring a Dell CSI Driver with Container Storage Module for Authorization
+## Configuring a Dell CSI Driver with Container Storage Modules for Authorization
 
 The second part of Authorization deployment is to configure one or more of the [supported](docs/concepts/authorization#supported-csi-drivers) CSI drivers. This is controlled by the Kubernetes tenant admin.
 
 Please continue following the configuration steps for a specific CSI Driver [here](docs/concepts/authorization/v1.x/configuration/).
 
-## Updating Container Storage Module for Authorization Proxy Server Configuration
+## Updating Container Storage Modules for Authorization Proxy Server Configuration
 
 Authorization has a subset of configuration parameters that can be updated dynamically:
 
@@ -227,7 +227,7 @@ Replace the data in `config.yaml` under the `data` field with your new, encoded 
 
 >__Note__: If you are updating the signing secret, the tenants need to be updated with new tokens via the `karavictl generate token` command.
 
-## Container Storage Module for Authorization Proxy Server Dynamic Configuration Settings
+## Container Storage Modules for Authorization Proxy Server Dynamic Configuration Settings
 
 Some settings are not stored in the `karavi-config-secret` but in the csm-config-params ConfigMap, such as LOG_LEVEL and LOG_FORMAT. To update the Authorization logging settings during runtime, run the below command, make your changes, and save the updated configMap data.
 

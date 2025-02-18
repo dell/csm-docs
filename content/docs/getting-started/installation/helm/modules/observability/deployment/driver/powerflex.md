@@ -7,7 +7,7 @@ linktitle: Powerflex
 
     ### PowerFlex
 
-    1. Copy the config Secret from the CSI PowerFlex namespace into the Container Storage Module Observability namespace:
+    1. Copy the config Secret from the CSI PowerFlex namespace into the Container Storage Modules Observability namespace:
 
        ```bash
        kubectl get secret vxflexos-config -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -
@@ -19,9 +19,9 @@ linktitle: Powerflex
        kubectl get secret [VXFLEXOS-CONFIG] -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/name: [VXFLEXOS-CONFIG]/name: vxflexos-config/' | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -
        ```
 
-    If [Container Storage Module for Authorization is enabled](docs/getting-started/installation/helm/modules/authorizationv2.0#configuring-a-dell-csi-driver-with-container-storage-module-for-authorization) for CSI PowerFlex, perform the following steps:
+    If [Container Storage Modules for Authorization is enabled](docs/getting-started/installation/helm/modules/authorizationv2.0#configuring-a-dell-csi-driver-with-container-storage-module-for-authorization) for CSI PowerFlex, perform the following steps:
 
-    2. Copy the driver configuration parameters ConfigMap from the CSI PowerFlex namespace into the Container Storage Module Observability namespace:
+    2. Copy the driver configuration parameters ConfigMap from the CSI PowerFlex namespace into the Container Storage Modules Observability namespace:
 
        ```bash
        kubectl get configmap vxflexos-config-params -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -
@@ -33,7 +33,7 @@ linktitle: Powerflex
        kubectl get configmap [VXFLEXOS-CONFIG-PARAMS] -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/name: [VXFLEXOS-CONFIG-PARAMS]/name: vxflexos-config-params/' | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -
        ```
 
-    3. Copy the `karavi-authorization-config`, `proxy-server-root-certificate`, `proxy-authz-tokens` Secret from the CSI PowerFlex namespace into the Container Storage Module Observability namespace:
+    3. Copy the `karavi-authorization-config`, `proxy-server-root-certificate`, `proxy-authz-tokens` Secret from the CSI PowerFlex namespace into the Container Storage Modules Observability namespace:
 
         ```bash
 

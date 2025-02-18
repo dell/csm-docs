@@ -10,7 +10,7 @@ tags:
 no_list: true
 ---
 
-Backup and Restore information for Container Storage Module Authorization can be found in this section. 
+Backup and Restore information for Container Storage Modules Authorization can be found in this section. 
 
 
 {{< cardcontainer >}} 

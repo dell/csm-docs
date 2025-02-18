@@ -47,7 +47,7 @@ PowerFlex, PowerMax, PowerStore, PowerScale.
 
 ## Tested Host Operating Systems
 
-Container storage module doesn't officially support specific operating systems, but the following are known to work:
+Container Storage Modules doesn't officially support specific operating systems, but the following are known to work:
 
 - RedHat CoreOS (RHCOS) as supported by OpenShift Container Platform
 - RHEL 8+
@@ -60,7 +60,7 @@ Container storage module doesn't officially support specific operating systems, 
 
 ## Supported Container Storage Modules
 {{<table "table table-striped table-bordered table-sm">}}
-| Container Storage Module                                                    | PowerMax | PowerFlex | Unity XT | PowerScale | PowerStore |
+| Container Storage Modules                                                    | PowerMax | PowerFlex | Unity XT | PowerScale | PowerStore |
 | ------------------------------------------------------------- | :------: | :-------: | :------: | :--------: | :--------: |
 | [Authorization - v1.x](../concepts/authorization/)                 |   Yes    |    Yes    |    No    |    Yes     |     No     |
 | [Authorization - v2.x](../concepts/authorization/)                 |   Yes    |    Yes    |    No    |    Yes     |     No     |

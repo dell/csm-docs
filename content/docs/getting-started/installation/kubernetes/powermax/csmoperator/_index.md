@@ -4,7 +4,7 @@ linkTitle: Operator
 weight: 2
 no_list: true
 description: >
-  Installing the CSI Driver for PowerMax via Container Storage Module Operator
+  Installing the CSI Driver for PowerMax via Container Storage Modules Operator
 ---
 {{% pageinfo color="primary" %}}
 {{< message text="1" >}}
@@ -119,21 +119,21 @@ To deploy the Operator, follow the instructions available [here](../../../operat
 
 5. Create a CR (Custom Resource) for PowerFlex using the sample files provided
 
-    a. **Default Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/main/samples/minimal-samples/powermax_v2130.yaml) for default settings. Modify if needed.
+    a. **Default Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/main/samples/minimal-samples/powermax_{{< version-docs key="Min_sample_operator_pmax" >}}.yaml) for default settings. Modify if needed.
 
     [OR]                                                
 
-    b. **Detailed Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powermax_v2130.yaml) for detailed settings. 
+    b. **Detailed Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powermax_{{< version-docs key="Det_sample_operator_pmax" >}}.yaml) for detailed settings. 
 
 > NOTE:
-> [Replication module](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powermax_v2130.yaml#L283) must be enabled to use the Metro volume
+> [Replication module](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powermax_{{< version-docs key="sample_sc_pmax" >}}.yaml#L283) must be enabled to use the Metro volume
 
 Example:
 ```yaml
     - name: replication
       enabled: true
 ```
->  [Target clusterID](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powermax_v2130.yaml#L316) should be set as self
+>  [Target clusterID](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powermax_{{< version-docs key="sample_sc_pflex" >}}.yaml#L316) should be set as self
 
 Example:
 ```yaml
@@ -295,12 +295,12 @@ X_CSI_TOPOLOGY_CONTROL_ENABLED provides a way to filter topology keys on a node 
 
 <br>
 
-{{< accordion id="Three" title="Container Storage Module"  >}}  
+{{< accordion id="Three" title="Container Storage Modules"  >}}  
 
  <br>  
 
 {{< markdownify >}}
-The driver and modules versions installable with the Container Storage Module Operator [Click Here](../../../../../supportmatrix/#operator-compatibility-matrix)
+The driver and modules versions installable with the Container Storage Modules Operator [Click Here](../../../../../supportmatrix/#operator-compatibility-matrix)
 {{< /markdownify >}}
 
 <br>        

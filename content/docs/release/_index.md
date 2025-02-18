@@ -10,7 +10,7 @@ Description: >
 ## Container Storage Modules Release and Support Lifecycle:
 
 Container Storage Modules Release and Support Lifecycle
-The Container Storage Module Release and Support Lifecycle document helps CSM developers plan deployments and encourage timely upgrades for the latest functionality and fixes.
+The Container Storage Modules Release and Support Lifecycle document helps CSM developers plan deployments and encourage timely upgrades for the latest functionality and fixes.
 
 **Policies:**
 - Each release is fully supported for 12 months. Refer to the matrix for GA and EOL dates of supported versions.

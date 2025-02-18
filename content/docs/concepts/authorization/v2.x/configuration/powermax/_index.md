@@ -86,7 +86,7 @@ Given a setup where Kubernetes, a storage system, and the Container Storage Modu
 
 6. Enable Container Storage Modules Authorization in the driver installation applicable to your installation method.
   Alternatively, you can use the minimal sample files provided
-  [here](https://github.com/dell/csm-operator/tree/main/samples/minimal-samples/powermax_v2130.yaml) and install the module using default values
+  [here](https://github.com/dell/csm-operator/tree/main/samples/minimal-samples/powermax_{{< version-docs key="Min_sample_operator_pmax" >}}.yaml) and install the module using default values
 
     **Operator**
 

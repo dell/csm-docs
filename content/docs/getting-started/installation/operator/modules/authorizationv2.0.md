@@ -2,12 +2,12 @@
 title: Authorization v2.0
 linkTitle: "Authorization v2.0"
 description: >
-  Installing Authorization v2.0 via Container Storage Module Operator
+  Installing Authorization v2.0 via Container Storage Modules Operator
 ---
 {{% pageinfo color="primary" %}}
 {{< message text="1" >}}
 {{% /pageinfo %}}
-## Install Container Storage Module Authorization via Container Storage Module Operator
+## Install Container Storage Modules Authorization via Container Storage Modules Operator
 
 
 ### Prerequisite
@@ -51,7 +51,7 @@ description: >
 > - If you are installing Authorization in a different namespace than `authorization`, edit the `namespace` field in this file to your namespace.
 
 
-### Install Container Storage Module Authorization Proxy Server
+### Install Container Storage Modules Authorization Proxy Server
 
 
 
@@ -119,7 +119,7 @@ To enable reporting of trace data with [Zipkin](https://zipkin.io/), use the `cs
   >__Note__:
   > - This command will deploy the Authorization Proxy Server in the namespace specified in the input YAML file.
 
-### Verify Installation of the Container Storage Module Authorization Proxy Server
+### Verify Installation of the Container Storage Modules Authorization Proxy Server
 Once the Authorization CR is created, you can verify the installation as mentioned below:
 
   ```bash
@@ -132,11 +132,11 @@ Once the Authorization CR is created, you can verify the installation as mention
 
 Follow the instructions for [Installing dellctl](docs/tooling/cli/#installation-instructions).
 
-### Configure the Container Storage Module Authorization Proxy Server
+### Configure the Container Storage Modules Authorization Proxy Server
 
 Follow the instructions available in Authorization for [Configuring the Authorization Proxy Server](docs/concepts/authorization/v2.x/configuration/).
 
-### Configure a Dell CSI Driver with Container Storage Module Authorization
+### Configure a Dell CSI Driver with Container Storage Modules Authorization
 
 Follow the instructions available in Authorization for
 

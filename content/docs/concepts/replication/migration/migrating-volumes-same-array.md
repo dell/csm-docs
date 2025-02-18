@@ -55,7 +55,7 @@ Newly created PV (`test-pv-to-powermax-replication` in our example) is available
 
 ## Namespace Considerations For Replication
 
-Replication Groups in Container Storage Module Replication can be made namespaced, meaning that one SC will generate one Replication Group per namespace. This is also important when migrating volumes from/to replcation storage class.
+Replication Groups in Container Storage Modules Replication can be made namespaced, meaning that one SC will generate one Replication Group per namespace. This is also important when migrating volumes from/to replcation storage class.
 
 "When just setting one annotation migration.storage.dell.com/migrate-to migrated volume is assumed to be used in same namespace as original PV and it’s PVC. In the case of being migrated to replication enabled storage class will be inserted in namespaced Replication Group inside PVC namespace."
 

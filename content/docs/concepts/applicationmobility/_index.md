@@ -10,7 +10,7 @@ Description: >
 {{< message text="10" >}} 
 {{% /pageinfo %}}
 
-Container Storage Module for Application Mobility provide Kubernetes administrators the ability to clone their stateful application workloads and application data to other clusters, either on-premise or in the cloud.
+Container Storage Modules for Application Mobility provide Kubernetes administrators the ability to clone their stateful application workloads and application data to other clusters, either on-premise or in the cloud.
  
 Application Mobility uses object storage to copy application metadata and data. When a backup is requested, it uses these options:
  

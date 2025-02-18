@@ -3,7 +3,7 @@ title: "Concepts"
 hide_feedback: false
 linkTitle: "Concepts"
 no_list: true
-description: "Conceptual and technical information about Container Storage Module" 
+description: "Conceptual and technical information about Container Storage Modules" 
 weight: 3
 --- 
 

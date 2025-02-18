@@ -4,7 +4,7 @@ linktitle: v1.x
 weight: 4 
 no_list: true
 Description: >
-  Container Storage Module (CSM) for Authorization v1.x.
+  Container Storage Modules (CSM) for Authorization v1.x.
 tags:
  - csm-authorization
 ---
@@ -13,11 +13,11 @@ tags:
 {{< message text="5" >}} 
 {{% /pageinfo %}}
 
-The following diagram shows a high-level overview of Container Storage Module for Authorization with a `tenant-app` that is using a CSI driver to perform storage operations through the Authorization `proxy-server` to access the a Dell storage system. All requests from the CSI driver will contain the token for the given tenant that was granted by the Storage Administrator.
+The following diagram shows a high-level overview of Container Storage Modules for Authorization with a `tenant-app` that is using a CSI driver to perform storage operations through the Authorization `proxy-server` to access the a Dell storage system. All requests from the CSI driver will contain the token for the given tenant that was granted by the Storage Administrator.
 
-![Container Storage Module for Authorization](../../../../images/authorization/v1.x/karavi-authorization-example.png "Container Storage Module for Authorization")
+![Container Storage Modules for Authorization](../../../../images/authorization/v1.x/karavi-authorization-example.png "Container Storage Modules for Authorization")
 
-## Container Storage Module Authorization Capabilities
+## Container Storage Modules Authorization Capabilities
 {{<table "table table-striped table-bordered table-sm">}}
 | Feature | PowerFlex | PowerMax | PowerScale | Unity XT | PowerStore |
 | - | - | - | - | - | - |
@@ -29,20 +29,20 @@ The following diagram shows a high-level overview of Container Storage Module fo
 **NOTE:** PowerScale OneFS implements its own form of Role-Based Access Control (RBAC). Authorization does not enforce any role-based restrictions for PowerScale. To configure RBAC for PowerScale, refer to the PowerScale OneFS [documentation](https://www.dell.com/support/home/en-us/product-support/product/isilon-onefs/docs).
 
 ## Authorization Components Support Matrix
-Authorization consists of 2 components - The authorization sidecar, bundled with the driver, communicates with the Authorization proxy server to validate access to Storage platforms. The authorization sidecar is backward compatible with older Authorization proxy server versions. However, it is highly recommended to have the Authorization proxy server and sidecar installed from the same release of Container Storage Module.
+Authorization consists of 2 components - The authorization sidecar, bundled with the driver, communicates with the Authorization proxy server to validate access to Storage platforms. The authorization sidecar is backward compatible with older Authorization proxy server versions. However, it is highly recommended to have the Authorization proxy server and sidecar installed from the same release of Container Storage Modules.
 
 **NOTE:** If the deployed CSI driver has a number of controller pods equal to the number of schedule nodes in your cluster, Authorization may not be able to inject properly into the driver's controller pod.
 To resolve this, please refer to our [troubleshooting guide](./troubleshooting) on the topic.
 
 ## Roles and Responsibilities
 
-The Container Storage Module for Authorization CLI can be executed in the context of the following roles:
+The Container Storage Modules for Authorization CLI can be executed in the context of the following roles:
 - Storage Administrators
 - Kubernetes Tenant Administrators
 
 ### Storage Administrators
 
-Storage Administrators can perform the following operations within Container Storage Module for Authorization
+Storage Administrators can perform the following operations within Container Storage Modules for Authorization
 
 - Tenant Management (create, get, list, delete, bind roles, unbind roles)
 - Token Management (generate, revoke)
@@ -51,17 +51,17 @@ Storage Administrators can perform the following operations within Container Sto
 
 ### Tenant Administrators
 
-Tenants of Container Storage Module  for Authorization can use the token provided by the Storage Administrators in their storage requests.
+Tenants of Container Storage Modules  for Authorization can use the token provided by the Storage Administrators in their storage requests.
 
 ### Workflow
 
 1) Tenant Admin requests storage from a Storage Admin.
-2) Storage Admin uses Container Storage Module Authorization CLI to:<br>
+2) Storage Admin uses Container Storage Modules Authorization CLI to:<br>
     a) Create a tenant resource.<br>
     b) Create a role permitting desired storage access.<br>
     c) Assign the role to the tenant and generate a token.<br>
 3) Storage Admin returns a token to the Tenant Admin.
 4) Tenant Admin inputs the Token into their Kubernetes cluster as a Secret.
-5) Tenant Admin updates CSI driver with Container Storage Module Authorization sidecar module.
+5) Tenant Admin updates CSI driver with Container Storage Modules Authorization sidecar module.
 
-![Container Storage Module for Authorization Workflow](../../../../images/authorization/v1.x/design2.png "Authorization Workflow")
+![Container Storage Modules for Authorization Workflow](../../../../images/authorization/v1.x/design2.png "Authorization Workflow")

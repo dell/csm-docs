@@ -3,7 +3,7 @@ title: Architecture
 linktitle: Architecture
 weight: 2
 description: >
-  High level architecture for Container Storage Module for Replication
+  High level architecture for Container Storage Modules for Replication
 no_list: true
 ---
 
@@ -13,8 +13,8 @@ no_list: true
 Container Storage Modules for Replication project consists of the following components:
 
 * `DellCSIReplicationGroup`, a Kubernetes [Custom Resource](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/).
-* Container Storage Module Replication controller which replicates the resources across (or within) Kubernetes clusters.
-* Container Storage Module Replication sidecar container which is part of each CSI driver controller pod.
+* Container Storage Modules Replication controller which replicates the resources across (or within) Kubernetes clusters.
+* Container Storage Modules Replication sidecar container which is part of each CSI driver controller pod.
 * repctl - Multi cluster Kubernetes client for managing replication related objects.
 
 ### DellCSIReplicationGroup
@@ -80,7 +80,7 @@ Here is a diagram representing how the _state_ of the CustomResource changes bas
 ### CSM Replication Sidecar
 ![sidecar](../../../../images/replication/sidecar.png)
 
-Container Storage Module Replication sidecar is deployed as sidecar container in _each_ CSI driver's controller pod. This container is similar to Kubernetes CSI Sidecar
+Container Storage Modules Replication sidecar is deployed as sidecar container in _each_ CSI driver's controller pod. This container is similar to Kubernetes CSI Sidecar
 [containers](https://kubernetes-csi.github.io/docs/sidecar-containers.html) and runs a Controller Manager
 which manages the following controllers:
 * PersistentVolume(PV) Controller
@@ -103,7 +103,7 @@ It is primarily responsible for the following:
 ### CSM Replication Controller
 ![common](../../../../images/replication/common.png)
 
-Container Storage Module Replication Controller is a Kubernetes application deployed independently of CSI drivers and is responsible for
+Container Storage Modules Replication Controller is a Kubernetes application deployed independently of CSI drivers and is responsible for
 the communication between Kubernetes clusters.
 
 The details about the clusters it needs to connect to are provided in the form of a ConfigMap with references to secrets

@@ -12,7 +12,7 @@ Description: >
 
 ## Volume Group Snapshot Feature
 
-The Container Storage Module Volume Group Snapshotter is an operator which extends Kubernetes API to support crash-consistent snapshots of groups of volumes.
+The Container Storage Modules Volume Group Snapshotter is an operator which extends Kubernetes API to support crash-consistent snapshots of groups of volumes.
 Volume Group Snapshot supports PowerFlex and PowerStore driver.
 
 ## Installation
@@ -52,7 +52,7 @@ If you want to create your own CRD for installation with Kustomize, then the com
 
 ### 3. Deploy VGS in CSI Driver with Helm Chart Parameters
 
-The drivers that support Helm chart deployment allow the Container Storage Module Volume Group Snapshotter to be _optionally_ deployed
+The drivers that support Helm chart deployment allow the Container Storage Modules Volume Group Snapshotter to be _optionally_ deployed
 by variables in the chart. There is a _vgsnapshotter_ block specified in the _values.yaml_ file of the chart that will look similar this default text:
 
 ```yaml
@@ -65,9 +65,9 @@ vgsnapshotter:
 ```
 > ℹ️ **NOTE:**: It is recommended you set controllerCount to 1 in your [values file](https://github.com/dell/csi-powerflex/blob/fea900ff9b528837714c215af0e7e340a8773e94/helm/csi-vxflexos/values.yaml#L132), to avoid duplicate vgs controllers running  
 
-To deploy Container Storage Module Volume Group Snapshotter with the driver, these changes are required:
+To deploy Container Storage Modules Volume Group Snapshotter with the driver, these changes are required:
 
-1. Enable Container Storage Module Volume Group Snapshotter by changing the vgsnapshotter.enabled boolean to true.
+1. Enable Container Storage Modules Volume Group Snapshotter by changing the vgsnapshotter.enabled boolean to true.
 2. In the vgsnapshotter.image field, put the location of the image you created, or link to the one already built (such as the one on quay.io, `quay.io/dell/container-storage-modules/csi-volumegroup-snapshotter:v1.8.0`).
 3. Install/upgrade the driver normally. You should now have VGS successfully deployed with the driver!
 

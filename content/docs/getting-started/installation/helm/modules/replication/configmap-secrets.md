@@ -7,12 +7,12 @@ description: >
 ---
 
 ##  Communication between clusters
-Container Storage Module (CSM) for Replication Controller requires access to remote clusters for replicating various objects. There are two ways to set up this communication:
+Container Storage Modules (CSM) for Replication Controller requires access to remote clusters for replicating various objects. There are two ways to set up this communication:
 1. Using Normal Kubernetes users
 2. Using ServiceAccount token
 
 You need to create secrets (using either of the two methods) in each cluster involved in replication and provide their references in `ConfigMap` objects which are used to configure
-the respective Container Storage Module Replication Controllers.
+the respective Container Storage Modules Replication Controllers.
 
 >Important: Direct network visibility between clusters required for CSM-Replication to work.
 > Cluster-1's API URL has to be pingable from cluster-2 pods and vice versa. If private networks are used and/or DNS is not set up properly - you may need to modify `/etc/hosts` file from within controller's pod.
@@ -21,7 +21,7 @@ the respective Container Storage Module Replication Controllers.
 >Note: If you are using a single stretched cluster, then you can skip all the following steps
 
 ### Inject configuration using repctl
-This is the simplest way to configure Container Storage Module Replication Controller.
+This is the simplest way to configure Container Storage Modules Replication Controller.
 `repctl` simplifies the complex configuration process greatly by enabling creation of secrets and updating their references in multiple clusters.
 
 #### Recommended method

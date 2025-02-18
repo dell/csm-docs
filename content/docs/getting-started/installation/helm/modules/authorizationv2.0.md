@@ -25,7 +25,7 @@ The following third-party components are optionally installed in the specified n
 - cert-manager, which optionally provides a self-signed certificate to configure the Authorization Ingresses
 - nginx-ingress-controller, which fulfills the Authorization Ingresses
 
-## Install Container Storage Module Authorization
+## Install Container Storage Modules Authorization
 
 **Steps**
 1. [Install Vault or configure an existing Vault](docs/getting-started/installation/operator/modules/authorizationv2.0#vault-server-installation).
@@ -144,7 +144,7 @@ Follow the instructions for [Installing dellctl](docs/tooling/cli/#installation-
 
 Follow the instructions available in Authorization for [Configuring the Authorization Proxy Server](docs/concepts/authorization/v2.x/configuration/).
 
-## Configuring a Dell CSI Driver with Container Storage Module for Authorization
+## Configuring a Dell CSI Driver with Container Storage Modules for Authorization
 
 Follow the instructions available in Authorization for
 
@@ -154,7 +154,7 @@ Follow the instructions available in Authorization for
 
 {{< hide id="3" >}}- [Configuring PowerScale with Authorization](docs/concepts/authorization/v2.x/configuration/powerscale).{{< /hide >}}
 
-## Updating Container Storage Module for Authorization Proxy Server Configuration
+## Updating Container Storage Modules for Authorization Proxy Server Configuration
 
 Authorization has a subset of configuration parameters that can be updated dynamically:
 

@@ -14,7 +14,7 @@ Storage system I/O performance metrics (IOPS, bandwidth, latency) are available 
 
 To disable these metrics, set the ```karaviMetricsPowerstore.volumeMetricsEnabled``` field to false in helm/values.yaml.
 
-The following I/O performance metrics are available from the OpenTelemetry collector endpoint. Please see the [Container Storage Module for Observability](../) for more information on deploying and configuring the OpenTelemetry collector.
+The following I/O performance metrics are available from the OpenTelemetry collector endpoint. Please see the [Container Storage Modules for Observability](../) for more information on deploying and configuring the OpenTelemetry collector.
 
 | Metric | Description |
 | - | - |
@@ -41,7 +41,7 @@ Provides visibility into the total, used, and available capacity for a storage c
 
 To disable these metrics, set the ```enable_powerstore_metrics``` field to false in helm/values.yaml.
 
-The following storage capacity metrics are available from the OpenTelemetry collector endpoint. Please see the [Container Storage Module for Observability](../) for more information on deploying and configuring the OpenTelemetry collector.
+The following storage capacity metrics are available from the OpenTelemetry collector endpoint. Please see the [Container Storage Modules for Observability](../) for more information on deploying and configuring the OpenTelemetry collector.
 
 | Metric | Description |
 | - | - |

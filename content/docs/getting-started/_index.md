@@ -3,7 +3,7 @@ title: "Getting Started"
 hide_feedback: false
 linkTitle: "Getting Started"
 no_list: true
-description: How to get started with Container Storage Module
+description: How to get started with Container Storage Modules
 weight: 2
 ---
 {{% pageinfo color="primary" %}}
@@ -16,7 +16,7 @@ weight: 2
 4. <span><span/>{{< message text="5" >}}
 {{% /pageinfo %}}
 
-Welcome to the Container Storage Module Getting Started documentation. This section provides detailed instructions on how to install, upgrade, and uninstall the Container Storage Modules.
+Welcome to the Container Storage Modules Getting Started documentation. This section provides detailed instructions on how to install, upgrade, and uninstall the Container Storage Modules.
 
 {{< cardcontainer >}}
 

@@ -9,13 +9,13 @@ Description: >
 
 Container Storage Modules Documentation is an open-source project and we thrive to build a welcoming and open community for anyone who wants to use the project or contribute to it.
 
-### Contributing to Container Storage Module Documentation
+### Contributing to Container Storage Modules Documentation
 
 Become one of the contributors to this project! 
 
 You can contribute to this project in several ways. Here are some examples:
 
-* Contribute to the Container Storage Module documentation.
+* Contribute to the Container Storage Modules documentation.
 * Report an issue.
 * Feature requests.
 

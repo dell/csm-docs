@@ -2,27 +2,27 @@
 title: "Troubleshooting"
 linkTitle: "Troubleshooting"
 Description: >
-  Troubleshooting guide  for Container Storage Module Operator
+  Troubleshooting guide  for Container Storage Modules Operator
 weight: 3
 ---
 
 
-  - <a href="#can-container-storage-module-operator-manage-existing-drivers-installed-using-helm-charts-or-the-csi-operator">Can Container Storage Module Operator manage existing drivers    installed using Helm charts or the CSI Operator?</a> 
+  - <a href="#can-container-storage-module-operator-manage-existing-drivers-installed-using-helm-charts-or-the-csi-operator">Can Container Storage Modules Operator manage existing drivers    installed using Helm charts or the CSI Operator?</a> 
   - <a href="#why-do-some-of-the-custom-resource-fields-show-up-as-invalid-or-unsupported-in-the-operatorhub-gui">Why do some of the Custom Resource fields show up as invalid or unsupported in the OperatorHub GUI?</a> 
-  - <a href="#how-can-i-view-detailed-logs-for-the-container-storage-module-operator">How can I view detailed logs for the Container Storage Module SM Operator?</a> 
+  - <a href="#how-can-i-view-detailed-logs-for-the-container-storage-module-operator">How can I view detailed logs for the Container Storage Modules SM Operator?</a> 
   - <a href="#my-dell-csi-driver-install-failed-how-do-i-fix-it">My Dell CSI Driver install failed. How do I fix it?</a>
   - <a href="#my-csm-replication-install-fails-to-validate-replication-prechecks-with-no-such-host">My CSContainer Storage ModuleM Replication install fails to validate replication prechecks with 'no such host'.</a> 
-  - <a href="#how-to-update-resource-limits-for-csm-operator-when-it-is-deployed-using-operator-hub">How to update resource limits for Container Storage Module Operator when it is deployed using Operator hub</a>
+  - <a href="#how-to-update-resource-limits-for-csm-operator-when-it-is-deployed-using-operator-hub">How to update resource limits for Container Storage Modules Operator when it is deployed using Operator hub</a>
 
-### Can Container Storage Module Operator manage existing drivers installed using Helm charts or the CSI Operator?
-The Container Storage Module Operator is unable to manage any existing driver installed using Helm charts or the CSI Operator. If you already have installed one of the Dell CSI driver in your cluster and  want to use the CSM operator based deployment, uninstall the driver and then redeploy the driver via Container Storage ModuleM Operator
+### Can Container Storage Modules Operator manage existing drivers installed using Helm charts or the CSI Operator?
+The Container Storage Modules Operator is unable to manage any existing driver installed using Helm charts or the CSI Operator. If you already have installed one of the Dell CSI driver in your cluster and  want to use the CSM operator based deployment, uninstall the driver and then redeploy the driver via Container Storage ModuleM Operator
 
 
 ### Why do some of the Custom Resource fields show up as invalid or unsupported in the OperatorHub GUI?
-The Container Storage Module Operator is not fully compliant with the OperatorHub React UI elements. Due to this, some of the Custom Resource fields may show up as invalid or unsupported in the OperatorHub GUI. To get around this problem, use `kubectl/oc` commands to get details about the Custom Resource(CR). This issue will be fixed in the upcoming releases of the Container Storage Module Operator.
+The Container Storage Modules Operator is not fully compliant with the OperatorHub React UI elements. Due to this, some of the Custom Resource fields may show up as invalid or unsupported in the OperatorHub GUI. To get around this problem, use `kubectl/oc` commands to get details about the Custom Resource(CR). This issue will be fixed in the upcoming releases of the Container Storage Modules Operator.
 
-### How can I view detailed logs for the Container Storage Module Operator?
-Detailed logs of the Container Storage Module Operator can be displayed using the following command:
+### How can I view detailed logs for the Container Storage Modules Operator?
+Detailed logs of the Container Storage Modules Operator can be displayed using the following command:
 ```
 kubectl logs <csm-operator-controller-podname> -n <namespace>
 ```
@@ -82,7 +82,7 @@ kubectl patch deployment -n dell-replication-controller dell-replication-control
 ```
 
 ### How to update resource limits for CSM Operator when it is deployed using Operator Hub
-In certain environments where users have deployed CSM Operator using Operator hub, they have encountered issues related to Container Storage Module Operator pods reporting 'OOM Killed'. This issue is attributed to the default resource requests and limits configured in the CSM Operator, which fail to meet the resource requirements of the user environments. In this case users can update the resource limits from Openshift web console by following the steps below:
+In certain environments where users have deployed CSM Operator using Operator hub, they have encountered issues related to Container Storage Modules Operator pods reporting 'OOM Killed'. This issue is attributed to the default resource requests and limits configured in the CSM Operator, which fail to meet the resource requirements of the user environments. In this case users can update the resource limits from Openshift web console by following the steps below:
 
 * Login into OpenShift web console
 * Navigate to `Operators` section in the left pane and expand it and click on 'Installed Operators'

@@ -289,7 +289,7 @@ allowedTopologies:
 
 For additional information, see the [Kubernetes Topology documentation](https://kubernetes-csi.github.io/docs/topology.html).
 
-> *NOTE*: In the manifest file of the Container Storage Module operator, topology can be enabled by specifying the system name or _systemid_ in the allowed topologies field. _Volumebindingmode_ is also set to _WaitForFirstConsumer_ by default.
+> *NOTE*: In the manifest file of the Container Storage Modules operator, topology can be enabled by specifying the system name or _systemid_ in the allowed topologies field. _Volumebindingmode_ is also set to _WaitForFirstConsumer_ by default.
 
 ## Controller HA
 
@@ -303,7 +303,7 @@ in your values file to the desired number of controller pods. By default, the dr
 
 > *NOTE:* If the controller count is greater than the number of available nodes, excess controller pods will be stuck in a pending state.
 
-If you are using the Container Storage Module Operator, the value to adjust is:
+If you are using the Container Storage Modules Operator, the value to adjust is:
 
 ```yaml
 replicas: 1  
@@ -388,7 +388,7 @@ controller:
 
 > *NOTE:* Tolerations/selectors work the same way for node pods.
 
-For configuring Controller HA on the Container Storage Module Operator, please refer to the [Container Storage Module Operator documentation](../../../getting-started/installation/operator/#custom-resource-definitions).  
+For configuring Controller HA on the Container Storage Modules Operator, please refer to the [Container Storage Modules Operator documentation](../../../getting-started/installation/operator/#custom-resource-definitions).  
 
 ## SDC Deployment
 
@@ -400,7 +400,7 @@ The CSI PowerFlex driver version 1.3 and later support the automatic deployment 
   Refer to https://hub.docker.com/r/dellemc/sdc for supported OS versions.
 - There is no automated uninstallation of the SDC kernel module. Follow PowerFlex SDC documentation to manually uninstall the SDC driver from the node.
 
-From Container Storage Module **1.12.0**, you can disable automatic SDC deployment.
+From Container Storage Modules **1.12.0**, you can disable automatic SDC deployment.
 
 By default, SDC deployment is enabled. If you do not want to deploy `sdc` with PowerFlex, it can be disabled by setting the `sdc.enabled` field to `false`.
 
@@ -791,7 +791,7 @@ The user can also set the volume limit for all the nodes in the cluster by speci
 Starting with version 2.8, the CSI driver for PowerFlex will support NFS volumes for PowerFlex storage systems version 4.0.x.
 
 > ℹ️ **NOTE:** :
-> Starting from Container Storage Module 1.11.0, the CSI-PowerFlex driver will automatically round up NFS volume sizes to a minimum of 3GB if a smaller size is requested. This change prevents backend errors and ensures compatibility.
+> Starting from Container Storage Modules 1.11.0, the CSI-PowerFlex driver will automatically round up NFS volume sizes to a minimum of 3GB if a smaller size is requested. This change prevents backend errors and ensures compatibility.
 
 CSI driver will support following operations for NFS volumes:
 
@@ -962,7 +962,7 @@ This means that we allow for NFS Export created by driver to be consumed by addr
 
 ## Configuring NFS independent of SDC
 
-Starting from Container Storage Module 1.12.0, the CSI PowerFlex driver supports configuring NFS independent of SDC. This separation is helpful in scenarios where an SDC is not available in the cluster or additional network interfaces do not need to be deployed.
+Starting from Container Storage Modules 1.12.0, the CSI PowerFlex driver supports configuring NFS independent of SDC. This separation is helpful in scenarios where an SDC is not available in the cluster or additional network interfaces do not need to be deployed.
 
 To disable SDC deployment, update the values file and provide the interface names mapping for each of the nodes that are being used.
 
@@ -1000,7 +1000,7 @@ If such a node is not available, the pods stay in Pending state. This means pods
 
 Without storage capacity tracking, pods get scheduled on a node satisfying the topology constraints. If the required capacity is not available, volume attachment to the pods fails, and pods remain in ContainerCreating state. Storage capacity tracking eliminates unnecessary scheduling of pods when there is insufficient capacity.
 
-The attribute `storageCapacity.enabled` in `values.yaml` can be used to enable/disable the feature during driver installation using helm. This is by default set to true. To configure how often the driver checks for changed capacity set `storageCapacity.pollInterval` attribute. In case of driver installed via operator, this interval can be configured in the sample file provided [here](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powerflex_v2130.yaml) by editing the `--capacity-poll-interval` argument present in the provisioner sidecar.
+The attribute `storageCapacity.enabled` in `values.yaml` can be used to enable/disable the feature during driver installation using helm. This is by default set to true. To configure how often the driver checks for changed capacity set `storageCapacity.pollInterval` attribute. In case of driver installed via operator, this interval can be configured in the sample file provided [here](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powerflex_{{< version-docs key="sample_sc_pflex" >}}.yaml) by editing the `--capacity-poll-interval` argument present in the provisioner sidecar.
 
 ## Multiple Availability Zones
 PowerFlex CSI driver version 2.13.0 and above supports multiple Availability Zones for Block. NFS is not supported at this time.

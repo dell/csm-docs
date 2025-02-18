@@ -2,7 +2,7 @@
 title: "Operator"
 linkTitle: "Operator"
 no_list: true
-description: Container Storage Module Operator Installation
+description: Container Storage Modules Operator Installation
 weight: 1
 ---
 

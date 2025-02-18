@@ -8,7 +8,7 @@ description: >
 
 ## Post Installation Dependencies
 
-The following third-party components are required in the same Kubernetes cluster where Container Storage Module Observability has been deployed:
+The following third-party components are required in the same Kubernetes cluster where Container Storage Modules Observability has been deployed:
 
 * [Prometheus](#prometheus)
 * [Grafana](#grafana)
@@ -16,11 +16,11 @@ The following third-party components are required in the same Kubernetes cluster
 
 There are various ways to deploy these components. We recommend following the Helm deployments according to the specifications defined below. 
 
-**Tip**: Container Storage Module Observability must be deployed first. Once the module has been deployed, you can proceed to deploying/configuring Prometheus and Grafana.
+**Tip**: Container Storage Modules Observability must be deployed first. Once the module has been deployed, you can proceed to deploying/configuring Prometheus and Grafana.
 
 ### Prometheus
 
-Prometheus and Container Storage Module Observability services run on the same Kubernetes cluster, with Container Storage Module sending metrics to the OpenTelemetry Collector, which Prometheus then scrapes for data.
+Prometheus and Container Storage Modules Observability services run on the same Kubernetes cluster, with Container Storage Modules sending metrics to the OpenTelemetry Collector, which Prometheus then scrapes for data.
 
 | Supported Version | Image                   | Helm Chart                                                   |
 | ----------------- | ----------------------- | ------------------------------------------------------------ |
@@ -30,7 +30,7 @@ Prometheus and Container Storage Module Observability services run on the same K
 
 #### Prometheus Helm Deployment
 
-Here’s a minimal Prometheus configuration using insecure skip verify; for proper TLS, add a ca_file signed by the same CA as the Container Storage Module Observability certificate. More details about Prometheus configuration, see [Prometheus configuration](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#configuration).
+Here’s a minimal Prometheus configuration using insecure skip verify; for proper TLS, add a ca_file signed by the same CA as the Container Storage Modules Observability certificate. More details about Prometheus configuration, see [Prometheus configuration](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#configuration).
 
 1. Create a values file named `prometheus-values.yaml`.
 
@@ -109,7 +109,7 @@ Here’s a minimal Prometheus configuration using insecure skip verify; for prop
 
 ### Grafana
 
-The Grafana dashboards require Grafana to be deployed in the same Kubernetes cluster as Container Storage Module Observability.  Below are the configuration details required to properly set up Grafana to work with Container Storage Module Observability.
+The Grafana dashboards require Grafana to be deployed in the same Kubernetes cluster as Container Storage Modules Observability.  Below are the configuration details required to properly set up Grafana to work with Container Storage Modules Observability.
 
 | Supported Version | Helm Chart                                                |
 | ----------------- | --------------------------------------------------------- |
@@ -140,7 +140,7 @@ Settings for the Grafana SimpleJson data source:
 | Setting             | Value                             |
 | ------------------- | --------------------------------- |
 | Name                | Karavi-Topology |
-| URL                 | Access Container Storage Module Observability Topology service at https://karavi-topology.*namespace*.svc.cluster.local:8443 |
+| URL                 | Access Container Storage Modules Observability Topology service at https://karavi-topology.*namespace*.svc.cluster.local:8443 |
 | Skip TLS Verify     | Enabled (If not using CA certificate) |
 | With CA Cert        | Enabled (If using CA certificate) |
 
@@ -267,7 +267,7 @@ Below are the steps to deploy a new Grafana instance into your Kubernetes cluste
 - [Grafana Labs Operator Deployment](https://grafana.com/docs/grafana-cloud/kubernetes/prometheus/prometheus_operator/)
 - [Rancher Monitoring and Alerting Deployment](https://rancher.com/docs/rancher/v2.6/en/monitoring-alerting/)
 
-## Importing Container Storage Module for Observability Dashboards
+## Importing Container Storage Modules for Observability Dashboards
 
 Once Grafana is properly configured, you can import the pre-built observability dashboards. Log into Grafana and click the + icon in the side menu. Then click Import. From here you can upload the JSON files or paste the JSON text directly into the text area.  Below are the locations of the dashboards that can be imported:
 
@@ -311,7 +311,7 @@ Once Grafana is properly configured, you can import the pre-built observability 
 
 ## Dynamic Configuration
 
-Some parameters can be configured/updated during runtime without restarting the Container Storage Module for Observability services. These parameters will be stored in ConfigMaps that can be updated on the Kubernetes cluster. This will automatically change the settings on the services.  
+Some parameters can be configured/updated during runtime without restarting the Container Storage Modules for Observability services. These parameters will be stored in ConfigMaps that can be updated on the Kubernetes cluster. This will automatically change the settings on the services.  
 
 {{< hide class="1" >}}
 | ConfigMap                           | Observability Service     | Parameters                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
@@ -352,7 +352,7 @@ kubectl edit configmap [CONFIG_MAP_NAME] -n [CSM_NAMESPACE]
 
 ## Tracing
 
-Container Storage Module Observability is instrumented to report trace data to [Zipkin](https://zipkin.io/). This helps gather timing data needed to troubleshoot latency problems with Container Storage Module Observability. Follow the instructions below to enable the reporting of trace data:
+Container Storage Modules Observability is instrumented to report trace data to [Zipkin](https://zipkin.io/). This helps gather timing data needed to troubleshoot latency problems with Container Storage Modules Observability. Follow the instructions below to enable the reporting of trace data:
 
 1. Deploy a Zipkin instance in the CSM namespace and expose the service as NodePort for external access.
 
@@ -408,7 +408,7 @@ Container Storage Module Observability is instrumented to report trace data to [
         app.kubernetes.io/instance: zipkin-instance
     ```
 
-2. Add the Zipkin URI to the Container Storage Module Observability ConfigMaps. Based on the manifest above, Zipkin will be running on port 9411.
+2. Add the Zipkin URI to the Container Storage Modules Observability ConfigMaps. Based on the manifest above, Zipkin will be running on port 9411.
 
   {{< hide class="1" >}}  __Note__: Zipkin tracing is currently not supported for the collection of PowerFlex metrics. {{< /hide >}}
 
@@ -431,11 +431,11 @@ Container Storage Module Observability is instrumented to report trace data to [
 
 ## Updating Storage System Credentials
 
-If storage system credentials are updated in the CSI Driver, update Container Storage Module Observability with the new credentials
+If storage system credentials are updated in the CSI Driver, update Container Storage Modules Observability with the new credentials
 
-### When Container Storage Module for Observability uses the Authorization module
+### When Container Storage Modules for Observability uses the Authorization module
 
-All storage system requests by Container Storage Module Observability will go through the Authorization module. Perform the following steps:
+All storage system requests by Container Storage Modules Observability will go through the Authorization module. Perform the following steps:
 
 #### Update the Authorization Module Token
 {{< hide class="1" >}}
@@ -480,7 +480,7 @@ All storage system requests by Container Storage Module Observability will go th
     ```
 {{< /hide >}}
 #### Update Storage Systems
-If the list of storage systems managed by a Dell CSI Driver have changed, the following steps can be performed to update Container Storage Module Observability to reference the updated systems:
+If the list of storage systems managed by a Dell CSI Driver have changed, the following steps can be performed to update Container Storage Modules Observability to reference the updated systems:
 
 {{< hide class="1">}}
 ##### CSI Driver for PowerFlex
@@ -490,7 +490,7 @@ If the list of storage systems managed by a Dell CSI Driver have changed, the fo
     kubectl delete secret karavi-authorization-config -n [CSM_NAMESPACE]
     ```
 
-2. Copy the `karavi-authorization-config` Secret from the CSI Driver for PowerFlex namespace to Container Storage Module Observability namespace.
+2. Copy the `karavi-authorization-config` Secret from the CSI Driver for PowerFlex namespace to Container Storage Modules Observability namespace.
     ```console
     kubectl get secret karavi-authorization-config -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -
     ```
@@ -504,7 +504,7 @@ If the list of storage systems managed by a Dell CSI Driver have changed, the fo
     kubectl delete secret isilon-karavi-authorization-config -n [CSM_NAMESPACE]
     ```
 
-2. Copy the `isilon-karavi-authorization-config` Secret from the CSI Driver for PowerScale namespace to Container Storage Module Observability namespace.
+2. Copy the `isilon-karavi-authorization-config` Secret from the CSI Driver for PowerScale namespace to Container Storage Modules Observability namespace.
     ```console
     kubectl get secret karavi-authorization-config -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | sed 's/name: karavi-authorization-config/name: isilon-karavi-authorization-config/' | kubectl create -f
     ```
@@ -524,9 +524,9 @@ If the list of storage systems managed by a Dell CSI Driver have changed, the fo
    ```
 {{< /hide >}} 
 
-### When Container Storage Module for Observability does not use the Authorization module
+### When Container Storage Modules for Observability does not use the Authorization module
 
-In this case all storage system requests made by Container Storage Module Observability will not be routed through the Authorization module. The following must be performed:
+In this case all storage system requests made by Container Storage Modules Observability will not be routed through the Authorization module. The following must be performed:
 
 {{< hide class="1">}}
 #### CSI Driver for PowerFlex

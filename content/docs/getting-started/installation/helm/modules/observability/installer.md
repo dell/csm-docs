@@ -40,7 +40,7 @@ You may obtain a copy of the License at
 
 ## Online Installer
 
-Follow the instructions below to install Container Storage Module Observability in an environment that has an Internet connection and is capable of downloading the required Helm chart and Docker images.
+Follow the instructions below to install Container Storage Modules Observability in an environment that has an Internet connection and is capable of downloading the required Helm chart and Docker images.
 The installer expects CSI drivers are using the default secret and configmap names.
 
 ### Dependencies
@@ -50,7 +50,7 @@ A Linux-based system, with Internet access, will be used to execute the script t
 | Dependency            | Usage |
 | --------------------- | ----- |
 | `kubectl`   | `kubectl` will be used to verify the Kubernetes/OpenShift environment|
-| `helm`   | `helm` will be used to install the Container Storage Module Observability helm chart|
+| `helm`   | `helm` will be used to install the Container Storage Modules Observability helm chart|
 | `jq`     | `jq` will be used to parse the CContainer Storage Module Authorization configuration file during installation|
 
 
@@ -59,11 +59,11 @@ A Linux-based system, with Internet access, will be used to execute the script t
 ./karavi-observability-install.sh --help
 ```
 
-__Note:__ Container Storage Module for Authorization currently does not support the Observability module for PowerStore. Therefore setting `enable-authorization` is not supported in this case.
+__Note:__ Container Storage Modules for Authorization currently does not support the Observability module for PowerStore. Therefore setting `enable-authorization` is not supported in this case.
 
 ### Executing the Installer
 
-To perform an online installation of Container Storage Module Observability, the following steps should be performed:
+To perform an online installation of Container Storage Modules Observability, the following steps should be performed:
 
 1. Clone the GitHub repository:
     ```bash
@@ -76,7 +76,7 @@ To perform an online installation of Container Storage Module Observability, the
     ```
 
 3. Execute the installation script.
-    The following example will install Container Storage Module Observability into the CSM namespace.
+    The following example will install Container Storage Modules Observability into the CSM namespace.
 
     A sample values.yaml file is located [here](https://github.com/dell/helm-charts/blob/main/charts/karavi-observability/values.yaml). This can be copied into a file named `myvalues.yaml` and modified accordingly for the installer command below. Configuration options are outlined in the [Helm chart deployment section](../observability#configuration).
 

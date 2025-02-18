@@ -2,7 +2,7 @@
 title: Authorization v1.x
 linkTitle: "Authorization v1.x"
 description: >
-  Installing Authorization via Container Storage Module Operator
+  Installing Authorization via Container Storage Modules Operator
 ---
 
 {{% pageinfo color="primary" %}}
@@ -11,7 +11,7 @@ description: >
 2. <span><span/>{{< message text="5" >}}
 {{% /pageinfo %}}
 
-## Install CSM Authorization via Container Storage Module Operator
+## Install CSM Authorization via Container Storage Modules Operator
 
 
 
@@ -120,15 +120,15 @@ Once the Authorization CR is created, you can verify the installation as mention
 
 Follow the instructions available in Authorization for [Installing karavictl](docs/getting-started/installation/helm/modules/authorizationv1.x/#install-karavictl).
 
-### Configure the Container Storage Module Authorization Proxy Server
+### Configure the Container Storage Modules Authorization Proxy Server
 
 **Authorization v1.x**
 
-Follow the instructions available in Authorization for [Configuring the Container Storage Module Authorization Proxy Server](../../../../../../../concepts/authorization/v1.x/configuration/proxy-server/).
+Follow the instructions available in Authorization for [Configuring the Container Storage Modules Authorization Proxy Server](../../../../../../../concepts/authorization/v1.x/configuration/proxy-server/).
 
 
-### Configure a Dell CSI Driver with Container Storage Module Authorization
+### Configure a Dell CSI Driver with Container Storage Modules Authorization
 
 **Authorization v1.x**
 
-Follow the instructions available in Authorization for [Configuring a CSI Driver with Container Storage Module for Authorization](../../../../../../../concepts/authorization/v1.x/configuration/).
+Follow the instructions available in Authorization for [Configuring a CSI Driver with Container Storage Modules for Authorization](../../../../../../../concepts/authorization/v1.x/configuration/).

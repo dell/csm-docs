@@ -4,12 +4,12 @@ linktitle: "Migration Guide From v1 to v2"
 no_list: true
 weight: 4
 description: >
-  Container Storage Module for Authorization v1 to v2 Migration Guide
+  Container Storage Modules for Authorization v1 to v2 Migration Guide
 ---
-Container Storage Module for Authorization v2 has significant architectural changes that prevent a user from upgrading Authorization v1 to Authorization v2. This page provides a reference guide for migrating v1 to v2 using Powerflex as an example.
+Container Storage Modules for Authorization v2 has significant architectural changes that prevent a user from upgrading Authorization v1 to Authorization v2. This page provides a reference guide for migrating v1 to v2 using Powerflex as an example.
 
 **Before migration please note following points**
-  - Container Storage Module for Authorization v2 calculates the actual usage of capacity provisioned by syncing with the array.
+  - Container Storage Modules for Authorization v2 calculates the actual usage of capacity provisioned by syncing with the array.
   - Volumes belonging to a tenant are identified using the **Volume Prefix** configured in csmtenant custom resource.
   - Volumes without the **Volume Prefix** will not be accounted for in usage capacity calculation as ownership of the volume is unknown without the volume prefix.
   - User should rename all volumes that are needed to be accounted for with the **Volume Prefix** before migration to v2. See the [Prerequisites](../Migration%20guide%20from%20v1%20to%20v2/#prerequisites).

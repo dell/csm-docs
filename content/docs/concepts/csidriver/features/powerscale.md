@@ -301,13 +301,13 @@ controllerCount: 2
 
 >**NOTE:** The default value for controllerCount is 2. It is recommended to not change this unless really required. Also, if the controller count is greater than the number of available nodes (where the pods can be scheduled), some controller pods will remain in a Pending state.
 
-If you are using the Container Storage Module Operator, the value to adjust is: 
+If you are using the Container Storage Modules Operator, the value to adjust is: 
 
 ```yaml
 replicas: 2  
 ```
 
-For more details about configuring Controller HA using the Container Storage Module Operator, see the [Container Storage Module Operator documentation](../../../getting-started/installation/operator/#custom-resource-definitions).
+For more details about configuring Controller HA using the Container Storage Modules Operator, see the [Container Storage Modules Operator documentation](../../../getting-started/installation/operator/#custom-resource-definitions).
 ## CSI Ephemeral Inline Volume
 
 The CSI PowerScale driver version 1.4.0 and later supports CSI ephemeral inline volumes.
@@ -454,7 +454,7 @@ If such a node is not available, the pods stay in Pending state. This means pods
 
 Without storage capacity tracking, pods get scheduled on a node satisfying the topology constraints. If the required capacity is not available, volume attachment to the pods fails, and pods remain in ContainerCreating state. Storage capacity tracking eliminates unnecessary scheduling of pods when there is insufficient capacity. 
 
-The attribute `storageCapacity.enabled` in `values.yaml` can be used to enable/disable the feature during driver installation using helm. This is by default set to true. To configure how often driver checks for changed capacity set `storageCapacity.pollInterval` attribute. In case of driver installed via operator, this interval can be configured in the sample file provided [here.](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powerscale_v2130.yaml) by editing the `--capacity-poll-interval` argument present in the provisioner sidecar.
+The attribute `storageCapacity.enabled` in `values.yaml` can be used to enable/disable the feature during driver installation using helm. This is by default set to true. To configure how often driver checks for changed capacity set `storageCapacity.pollInterval` attribute. In case of driver installed via operator, this interval can be configured in the sample file provided [here.](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powerscale_{{< version-docs key="sample_sc_pscale" >}}.yaml) by editing the `--capacity-poll-interval` argument present in the provisioner sidecar.
 
 ## Node selector in helm template
 

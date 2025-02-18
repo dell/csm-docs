@@ -2,15 +2,15 @@
 title: Configuration
 linktitle: Configuration
 weight: 2
-description: Configure Container Storage Module Authorization Proxy Server
+description: Configure Container Storage Modules Authorization Proxy Server
 no_list: true 
 ---
 {{% pageinfo color="primary" %}}
 {{< message text="1" >}}
 {{% /pageinfo %}}
-This section provides the details and instructions on how to configure Container Storage Module Authorization.
+This section provides the details and instructions on how to configure Container Storage Modules Authorization.
 
-## Configuring the Container Storage Module for Authorization Proxy Server
+## Configuring the Container Storage Modules for Authorization Proxy Server
 
 Run `kubectl -n authorization get ingress` and `kubectl -n authorization get service` to see the Ingress rules for these services and the exposed port for accessing these services via the LoadBalancer. For example:
 
@@ -54,7 +54,7 @@ Afterwards, the storage administrator can configure Authorization with the follo
 
 The storage types supported are `powerflex`, `powermax`, and `powerscale`. During the creation of a storage system and role, the storage type must be one of the supported types.
 
-A `storage` entity in Container Storage Module Authorization consists of the storage type (`powerflex`, `powermax` or `powerscale`), the system ID, the API endpoint, and the vault credentials path. Edit these parameters in the manifest:
+A `storage` entity in Container Storage Modules Authorization consists of the storage type (`powerflex`, `powermax` or `powerscale`), the system ID, the API endpoint, and the vault credentials path. Edit these parameters in the manifest:
 
    | Parameter                 | Description                                                                          | Required | Default |
    | ------------------------- | ------------------------------------------------------------------------------------ | -------- | ------- |

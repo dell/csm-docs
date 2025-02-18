@@ -32,7 +32,7 @@
 
 ## Configuration
 
-The following table lists the configurable parameters of the Container Storage Module for Observability Helm chart and their default values.
+The following table lists the configurable parameters of the Container Storage Modules for Observability Helm chart and their default values.
 
 **Topology:** 
 

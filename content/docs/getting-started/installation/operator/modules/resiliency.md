@@ -2,13 +2,13 @@
 title: Resiliency
 linkTitle: "Resiliency"
 description: >
-  Installing Resiliency via Container Storage Module  Operator
+  Installing Resiliency via Container Storage Modules  Operator
 ---
 {{% pageinfo color="primary" %}}
 {{< message text="1" >}}
 {{% /pageinfo %}}
 
-The Container Storage Module Operator installs the Resiliency module for supported Dell CSI Drivers, deploying the Resiliency sidecar.
+The Container Storage Modules Operator installs the Resiliency module for supported Dell CSI Drivers, deploying the Resiliency sidecar.
 
 ## Prerequisite
 

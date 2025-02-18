@@ -65,29 +65,29 @@ methods supported by the Storage Array itself, e.g. Basic authentication over TL
 
 ### Sidecar Proxy
 
-The Container Storage Module for Authorization Sidecar Proxy is deployed as a sidecar in the CSI Driver's Pod. It acts as a proxy and forwards all requests to a
-Container Storage Module Authorization Server.
+The Container Storage Modules for Authorization Sidecar Proxy is deployed as a sidecar in the CSI Driver's Pod. It acts as a proxy and forwards all requests to a
+Container Storage Modules Authorization Server.
 
 The [CSI Driver section](#csi-driver) noted the limitation of a CSI Driver using Storage Array supported authentication methods only. By nature of being a proxy, the Authorization
 Sidecar Proxy is able to override the Authorization HTTP header for outbound requests to use Bearer tokens. Such tokens are managed by  Authorization as will
 be described later in this document.
 
-### Container Storage Module for Authorization Server
+### Container Storage Modules for Authorization Server
 
 The Authorization Server is, at its core, a Layer 7 proxy for intercepting traffic between a CSI Driver and a Storage Array.
 
-Inbound requests are expected to originate from the Container Storage Module for Authorization Sidecar Proxy, for the following reasons:
+Inbound requests are expected to originate from the Container Storage Modules for Authorization Sidecar Proxy, for the following reasons:
 
 * Processing a set of agreed upon HTTP headers (added by the Authorization Sidecar Proxy) to assist in routing traffic to the intended Storage Array.
 * Inspection of CSM-specific Authorization Bearer tokens.
 
-### Container Storage Module for Authorization CLI
+### Container Storage Modules for Authorization CLI
 
-The [*karavictl*](../../../tooling/cli) CLI (Command Line Interface) application allows Storage Admins to manage and interact with a running Container Storage Module for Authorization Server.
+The [*karavictl*](../../../tooling/cli) CLI (Command Line Interface) application allows Storage Admins to manage and interact with a running Container Storage Modules for Authorization Server.
 
 ### Storage Array
 
-A Storage Array is typically considered to be one of the various Dell storage offerings, e.g. Dell PowerFlex which is supported by Container Storage Module for Authorization
+A Storage Array is typically considered to be one of the various Dell storage offerings, e.g. Dell PowerFlex which is supported by Container Storage Modules for Authorization
 today.  Support for more Storage Arrays will come in the future.
 
 ## How it Works

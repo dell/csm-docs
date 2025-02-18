@@ -6,7 +6,7 @@ description: Configure CSM Authorization
 no_list: true 
 ---
 
-This section provides the details and instructions on how to configure Container Storage Module Authorization. 
+This section provides the details and instructions on how to configure Container Storage Modules Authorization. 
 
 
 {{< cardcontainer >}} 

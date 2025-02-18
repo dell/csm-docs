@@ -20,7 +20,7 @@ If irregular Kubernetes cluster/storage array behavior causes the source and tar
 
 ### Performing Failover/Failback/Reprotect on PowerScale
 
-Failover, Failback, and Reprotect one-step operations are not natively supported on PowerScale, and are performed as a series of steps in Container Storage Module replication. When any of these operations are triggered, through the use of `repctl` or by editing the RG, the steps below are performed on the PowerScale storage arrays.
+Failover, Failback, and Reprotect one-step operations are not natively supported on PowerScale, and are performed as a series of steps in Container Storage Modules replication. When any of these operations are triggered, through the use of `repctl` or by editing the RG, the steps below are performed on the PowerScale storage arrays.
 
 #### Failover - Halt Replication and Allow Writes on Target
 
@@ -28,7 +28,7 @@ Steps for performing Failover can be found in the Tools page under [Executing Ac
 - Failover on PowerScale does NOT halt writes on the source side. It is recommended that the storage administrator or end user manually **stop writes** to ensure no data is lost on the source side in the event of future failback. 
 - In the case of unplanned failover, the SyncIQ policy on the source PowerScale array will be left enabled and set to its previously defined `When source is modified` sync schedule. Storage admins **must** manually disable this SyncIQ policy when bringing the failed-over source array back online, or unexpected behavior may occur.
 
-The below steps are performed by Container Storage Module replication to perform a failover.
+The below steps are performed by Container Storage Modules replication to perform a failover.
 
 1. Syncing data from source to target one final time before transition. *(planned failover only)*
 2. Disabling the SyncIQ policy on the source PowerScale storage array. *(planned failover only)*
@@ -36,7 +36,7 @@ The below steps are performed by Container Storage Module replication to perform
 
 #### Failback - Discard Target
 
-Performing failback and discarding changes made to the target is to simply resume synchronization from the source. The steps Container Storage Module replication is following to perform this operation are as follows:
+Performing failback and discarding changes made to the target is to simply resume synchronization from the source. The steps Container Storage Modules replication is following to perform this operation are as follows:
 
 1. Editing the SyncIQ policy on the source PowerScale array's schedule from `When source is modified` to `Manual`. 
 2. Performing `Actions > Disallow writes` on the target PowerScale array's Local Target policy that matches the SyncIQ policy undergoing failback. 
@@ -59,7 +59,7 @@ Information on the methodology for performing a failback while taking changes ma
 
 #### Reprotect - Set Original Target as New Source 
 
-A reprotect operation is, in essence, doing away with the original source-target relationship and establishing a new one in the reverse direction. This is done **only after** failing over to the original target array is complete, and the original source array is up and ready to be made into a new replication destination. To accomplish this, Container Storage Module replication performs the following steps:
+A reprotect operation is, in essence, doing away with the original source-target relationship and establishing a new one in the reverse direction. This is done **only after** failing over to the original target array is complete, and the original source array is up and ready to be made into a new replication destination. To accomplish this, Container Storage Modules replication performs the following steps:
 
 1. Deleting the SyncIQ policy on the original source PowerScale array. 
 2. Creating a new SyncIQ policy on the original target PowerScale array. This policy establishes the original target as a new *source*, and sets its replication destination to the original source (which can be considered the new *target*.)

@@ -16,7 +16,7 @@ The Container Storage Modules for Observability Helm chart bootstraps an Observa
 - Helm 3.x
 - The deployment of one or more supported Dell CSI drivers
 
-## Install the Container Storage Module for Observability Helm Chart
+## Install the Container Storage Modules for Observability Helm Chart
 **Steps**
 1. Create a namespace where you want to install the module
    ```bash
@@ -37,7 +37,7 @@ The Container Storage Modules for Observability Helm chart bootstraps an Observa
 
     ### PowerFlex
 
-    1. Copy the config Secret from the CSI PowerFlex namespace into the Container Storage Module for Observability namespace:
+    1. Copy the config Secret from the CSI PowerFlex namespace into the Container Storage Modules for Observability namespace:
 
        ```bash
        kubectl get secret vxflexos-config -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -
@@ -49,9 +49,9 @@ The Container Storage Modules for Observability Helm chart bootstraps an Observa
        kubectl get secret [VXFLEXOS-CONFIG] -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/name: [VXFLEXOS-CONFIG]/name: vxflexos-config/' | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -
        ```
 
-    If [Container Storage Module for Authorization is enabled](../../authorization-v2.0/#configuring-a-dell-csi-driver-with-csm-for-authorization) for CSI PowerFlex, perform the following steps:
+    If [Container Storage Modules for Authorization is enabled](../../authorization-v2.0/#configuring-a-dell-csi-driver-with-csm-for-authorization) for CSI PowerFlex, perform the following steps:
 
-    2. Copy the driver configuration parameters ConfigMap from the CSI PowerFlex namespace into the Container Storage Module for Observability namespace:
+    2. Copy the driver configuration parameters ConfigMap from the CSI PowerFlex namespace into the Container Storage Modules for Observability namespace:
 
        ```bash
        kubectl get configmap vxflexos-config-params -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -
@@ -85,7 +85,7 @@ The Container Storage Modules for Observability Helm chart bootstraps an Observa
 
     ### PowerScale
 
-    1. Copy the config Secret from the CSI PowerScale namespace into the Container Storage Module for Observability namespace:
+    1. Copy the config Secret from the CSI PowerScale namespace into the Container Storage Modules for Observability namespace:
 
        ```bash
        kubectl get secret isilon-creds -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -
@@ -97,7 +97,7 @@ The Container Storage Modules for Observability Helm chart bootstraps an Observa
        kubectl get secret [ISILON-CREDS] -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/name: [ISILON-CREDS]/name: isilon-creds/' | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -
        ```
 
-    If [Container Storage Module for Authorization is enabled](../../authorization-v2.0/#configuring-a-dell-csi-driver-with-csm-for-authorization) for CSI PowerScale, perform these steps:
+    If [Container Storage Modules for Authorization is enabled](../../authorization-v2.0/#configuring-a-dell-csi-driver-with-csm-for-authorization) for CSI PowerScale, perform these steps:
 
     2. Copy the driver configuration parameters ConfigMap from the CSI PowerScale namespace into the CSM for Observability namespace:
 
@@ -147,9 +147,9 @@ The Container Storage Modules for Observability Helm chart bootstraps an Observa
        done
        ```
 
-       If [Container Storage Module for Authorization is enabled](../../authorization-v2.0/#configuring-a-dell-csi-driver-with-csm-for-authorization) for CSI PowerMax, perform these steps:
+       If [Container Storage Modules for Authorization is enabled](../../authorization-v2.0/#configuring-a-dell-csi-driver-with-csm-for-authorization) for CSI PowerMax, perform these steps:
 
-    3. Copy the driver configuration parameters ConfigMap from the CSI PowerMax namespace into the Container Storage Module for Observability namespace:
+    3. Copy the driver configuration parameters ConfigMap from the CSI PowerMax namespace into the Container Storage Modules for Observability namespace:
 
        ```bash
        kubectl get configmap powermax-config-params -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -
@@ -161,21 +161,21 @@ The Container Storage Modules for Observability Helm chart bootstraps an Observa
        kubectl get configmap [POWERMAX-CONFIG-PARAMS] -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/name: [POWERMAX-CONFIG-PARAMS]/name: powermax-config-params/' | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -
        ```
 
-    4. Copy the `karavi-authorization-config`, `proxy-server-root-certificate`, `proxy-authz-tokens` Secret from the CSI PowerMax namespace into the Container Storage Module for Observability namespace:
+    4. Copy the `karavi-authorization-config`, `proxy-server-root-certificate`, `proxy-authz-tokens` Secret from the CSI PowerMax namespace into the Container Storage Modules for Observability namespace:
 
        ```bash
        kubectl get secret karavi-authorization-config proxy-server-root-certificate proxy-authz-tokens -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | sed 's/name: karavi-authorization-config/name: powermax-karavi-authorization-config/' | sed 's/name: proxy-server-root-certificate/name: powermax-proxy-server-root-certificate/' | sed 's/name: proxy-authz-tokens/name: powermax-proxy-authz-tokens/' | kubectl create -f -
        ```
 
-5. Configure the [parameters](#configuration) and install the Container Storage Module for Observability Helm Chart
+5. Configure the [parameters](#configuration) and install the Container Storage Modules for Observability Helm Chart
 
    A default values.yaml file is located [here](https://github.com/dell/helm-charts/blob/main/charts/karavi-observability/values.yaml) that can be used for installation. This can be copied into a file named `myvalues.yaml` and either used as is or modified accordingly.
 
    __Note:__
-   - The default `values.yaml` is configured to deploy the Container Storage Module for Observability Topology service on install.
-   - If Container Storage Module for Authorization is enabled for CSI PowerFlex, the `karaviMetricsPowerflex.authorization` parameters must be properly configured in your values file for Observability.
-   - If Container Storage Module for Authorization is enabled for CSI PowerScale, the `karaviMetricsPowerscale.authorization` parameters must be properly configured in your values file for Observability.
-   - If Container Storage Module for Authorization is enabled for CSI PowerMax, the `karaviMetricsPowerMax.authorization` parameters must be properly configured in your values file for Observability.
+   - The default `values.yaml` is configured to deploy the Container Storage Modules for Observability Topology service on install.
+   - If Container Storage Modules for Authorization is enabled for CSI PowerFlex, the `karaviMetricsPowerflex.authorization` parameters must be properly configured in your values file for Observability.
+   - If Container Storage Modules for Authorization is enabled for CSI PowerScale, the `karaviMetricsPowerscale.authorization` parameters must be properly configured in your values file for Observability.
+   - If Container Storage Modules for Authorization is enabled for CSI PowerMax, the `karaviMetricsPowerMax.authorization` parameters must be properly configured in your values file for Observability.
 
    ```console
 
@@ -195,7 +195,7 @@ The Container Storage Modules for Observability Helm chart bootstraps an Observa
 
 ## Configuration
 
-The following table lists the configurable parameters of the Container Storage Module for Observability Helm chart and their default values.
+The following table lists the configurable parameters of the Container Storage Modules for Observability Helm chart and their default values.
 
 | Parameter | Description | Default |
 | - | - | - |

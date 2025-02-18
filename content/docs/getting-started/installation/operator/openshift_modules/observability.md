@@ -2,13 +2,13 @@
 title: Observability
 linktitle: Observability
 description: >
-  Installing Observability via Container Storage Module Operator
+  Installing Observability via Container Storage Modules Operator
 ---
 {{% pageinfo color="primary" %}}
 {{< message text="1" >}}
 {{% /pageinfo %}}
 
-Install the Observability module for Dell CSI Drivers using the Container Storage Module Operator. This will deploy Observability with topology service, Otel collector, and metrics services.
+Install the Observability module for Dell CSI Drivers using the Container Storage Modules Operator. This will deploy Observability with topology service, Otel collector, and metrics services.
 
 ## Prerequisites
 
@@ -36,7 +36,7 @@ Create a namespace `karavi`
   
   **Detailed Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_{{Var}}_v2130.yaml) for detailed settings. If cert-manager has already been installed, don’t enable it.
   
-- Install and configure the [Authorization Proxy Server](docs/getting-started/installation/operator/modules/authorizationv2.0) Server before using Observability with Container Storage Module Authorization. Then, enable both the Authorization and Observability modules in the sample manifest.
+- Install and configure the [Authorization Proxy Server](docs/getting-started/installation/operator/modules/authorizationv2.0) Server before using Observability with Container Storage Modules Authorization. Then, enable both the Authorization and Observability modules in the sample manifest.
 - Observability uses self-signed certificates by default. To use custom certificates, generate them, encode in base64, and insert into the sample file for the components you are enabling:
 
 ```yaml
