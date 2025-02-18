@@ -293,7 +293,7 @@ spec:
 
 During the volume cloning process a read only snapshot of the source volume is made and a writable snapshot is created using the read only snapshot as the source. Snapshots provide way to quickly create copies of source volumes. A SnapshotIQ license is required for snapshots to be created. Note that cloning of clones is not currently supported.
 
->**Note:** Older releases of OneFS limit the number of writable snapshot to a maximum of thirty per cluster. Newer releases of OneFS increased the limit to 1024 writable snapshots per cluster. Consult your Dell PowerStore Technical representative if you need to increase the number of writable snapshots.
+>**Note:** Older releases of OneFS limit the number of writable snapshots to a maximum of thirty per cluster. Newer releases of OneFS increased the limit to 1024 writable snapshots per cluster. Consult your Dell PowerStore Technical representative if you need to increase the number of writable snapshots.
 
 ## Controller HA
 
