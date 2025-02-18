@@ -291,7 +291,7 @@ spec:
     apiGroup: ""
 ```
 
-During the volume cloning process a read only snapshot of the source volume is made and a writable snapshot is created using the read only snapshot as the source. The use of snapshots provides way to quickly create snapshots and clones of source volumes. A SnapshotIQ license is required for snapshots to be created. Note that cloning of clones is not currently supported.
+During the volume cloning process a read only snapshot of the source volume is made and a writable snapshot is created using the read only snapshot as the source. Snapshots provide way to quickly create copies of source volumes. A SnapshotIQ license is required for snapshots to be created. Note that cloning of clones is not currently supported.
 
 >**Note:** Older releases of OneFS limit the number of writable snapshot to a maximum of thirty per cluster. Newer releases of OneFS increased the limit to 1024 writable snapshots per cluster. Consult your Dell PowerStore Technical representative if you need to increase the number of writable snapshots.
 
@@ -402,8 +402,8 @@ parameters:
   IsiPath: "/ifs/data/csi"
   # AccessZone groupnet service IP. Update AzServiceIP in values.yaml if different than isiIP.
   #AzServiceIP : 192.168.2.1
-  # When a PVC is being created, it takes the storage class' value of "storageclass.rootClientEnabled",
-  # which  determines, when a node mounts the PVC, in NodeStageVolume, whether to add the k8s node to
+  # When a PVC is being created, it takes the storage class' value of "storageclass.rootClientEnabled"
+  # which  determines (when a node mounts the PVC, in NodeStageVolume) whether to add the k8s node to
   # the "Root clients" field (when true) or "Clients" field (when false) of the NFS export
   RootClientEnabled: "false"
   # Name of PowerScale cluster where pv will be provisioned
