@@ -6,7 +6,8 @@
     order: 1;
 
     p, li, td {
-        font-weight: $font-weight-body-text;
+        font-weight: $font-weight-body-text;  
+        font-size:1rem;
     }
 
     > h1 {
@@ -33,20 +34,29 @@
 
     img {
         @extend .img-fluid;
+        margin-bottom:15px;
+    }
+
+    pre, pre code {
+        background-color: #f8f8f8 !important; 
     }
 
     table{
         border-collapse: collapse;
         border-spacing: 0;
         border:1px solid #000000;
-        width: 100%
+
+        width: auto !important;
     }
 
     th{
-        border:1px solid #000000;
+        border:1px solid #000000;  
+        padding:10px;
+        text-align: center;
     }
     td{
-        border:1px solid #000000;
+        border:1px solid #000000; 
+        padding: 12px;
     }
 
     > blockquote {
@@ -64,7 +74,7 @@
         font-weight: $font-weight-bold;
     }
 
-    > pre, > .highlight, > .lead, > h1, > h2, > ul, > ol, > p, > blockquote, > dl dd, .footnotes, > .alert {
+    > pre, > .highlight, > .lead, > h1, > h2, > ul, > ol, > p, > blockquote, > dl dd, .footnotes, > .alert , > div > .highlight{
         @extend .td-max-width-on-larger-screens;
     }
 
@@ -75,8 +85,35 @@
 
     .lead {
         margin-bottom: 1.5rem;
+    }  
+    
+    .highlight {
+        margin-top: 0.2rem;
+    }   
+
+    p + div.highlight, p + div.code-toolbar{
+        margin-top: -0.5rem;
+    }  
+
+    p + pre {
+        margin-top: -0.5rem !important;
     }
-}
+
+    .language-terminal + p {
+        margin-top: 20px; /* Adjust the value as needed */
+    }
+    p .language-terminal {
+        padding-left: 0;
+    }
+    pre code{
+        color: black;
+    } 
+    .td-click-to-copy{
+        color: rgb(136, 145, 158) !important;
+    }
+
+} 
+
 
 .td-title {
     margin-top: 1rem;
@@ -85,6 +122,10 @@
     @include media-breakpoint-up(sm) {
         font-size: 3rem;
     }
-}
+} 
 
+
+.td-section{
+    
+} 
 
