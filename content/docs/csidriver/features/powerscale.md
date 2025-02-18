@@ -200,7 +200,7 @@ spec:
 
 >**Note:** When the access mode of ReadWriteMany is used, a writable snapshot is created using the read only snapshot as the source. Creation of snapshots from PVCs which are created from snapshots is not supported.
 
->**Note:** Older releases of OneFS limit the number of writable snapshot to a maximum of thirty per cluster. Newer releases of OneFS increased the limit to 1024 writable snapshots per cluster. Consult your Dell PowerStore Technical representative if you need to increase the number of writable snapshots.
+>**Note:** Older releases of OneFS limit the number of writable snapshots to a maximum of thirty per cluster. Newer releases of OneFS increased the limit to 1024 writable snapshots per cluster. Consult your Dell PowerStore Technical representative if you need to increase the number of writable snapshots.
 
 ## Volume Expansion
 
