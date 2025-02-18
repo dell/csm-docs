@@ -36,7 +36,7 @@ The Container Storage Modules and the required CSI Drivers can each be deployed 
   {{< /card >}}
 {{% /cardpane %}}
 {{% cardpane %}}
-  {{< card header="[Dell Container Storage Mod/pow for Observability](helm/modules/installation/observability/)"
+  {{< card header="[Dell Container Storage Modules for Observability](helm/modules/installation/observability/)"
           footer="Installs Observability Module">}}
   CSM for Observability can be deployed either via Helm/CSM operator/CSM for Observability Installer/CSM for Observability Offline Installer
   [...More on installation instructions](helm/modules/installation/observability/)
