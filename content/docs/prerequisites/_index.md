@@ -38,17 +38,19 @@ weight: 1
 
 ## OpenShift Virtualization
 
+### Supported Platforms
 {{<table "table table-striped table-bordered table-sm">}}
-| Version | Operation                                                                | PowerFlex        | PowerMax | PowerStore | PowerScale | Unity |
-|---------|--------------------------------------------------------------------------|------------------|----------|------------|------------|-------|
-| 4.17    | [Storage Profile](https://github.com/kiagnose/kubevirt-storage-checkup)  | Yes              | Yes      | Yes        | Yes        | No    |
+| Version | PowerFlex  | PowerMax | PowerStore | PowerScale | Unity |
+|---------| :--------: | :------: | :--------: | :--------: | :---: |
+| 4.17    |    Yes     |    Yes   |    Yes     |    Yes     |   No  |
 {{</table>}}
 
+### Supported Modules
 {{<table "table table-striped table-bordered table-sm">}}
-| Version | Module                                        | PowerFlex | PowerMax | PowerStore | PowerScale | Unity |
-|---------|-----------------------------------------------|-----------|----------|------------|------------|-------|
-| 4.17    | [CSM Observability](../observability/)        | Yes       | Yes      | No         | Yes        | No    |
-| 4.17    | [CSM Authorization - v2.x](../authorization/) | Yes       | Yes      | No         | Yes        | No    |
+| Version | Module                   | PowerFlex | PowerMax | PowerStore | PowerScale | Unity |
+|---------|--------------------------| :-------: | :------: | :--------: | :--------: | :---: |
+| 4.17    | CSM Observability        | Yes       | Yes      | No         | Yes        | No    |
+| 4.17    | CSM Authorization - v2.x | Yes       | Yes      | No         | Yes        | No    |
 {{</table>}}
 
 ## Tested Host Operating Systems
