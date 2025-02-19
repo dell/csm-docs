@@ -7,13 +7,13 @@ weight: 2
 ---
 
 {{< markdownify >}}
-Supported driver and module versions offered by the Container Storage Modules Operator [here](../../../../../supportmatrix/#operator-compatibility-matrix)
+Supported driver and module versions offered by the Container Storage Module Operator [here](../../../../../supportmatrix/#operator-compatibility-matrix)
 {{< /markdownify >}}
 
 <br>
 <br>
 
-{{< accordion id="Two" title="CSI Driver" markdown="true" >}}  
+{{< accordion id="Two" title="Driver" markdown="true" >}}  
 
 </br>
 
@@ -65,7 +65,7 @@ dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      
 2. ##### **Create config secret:** 
     <br>
 
-    Create a file called `config.yaml` or use [sample](https://https://github.com/dell/csi-unity/tree/main/samples/secret/secret.yaml): 
+    Create a file called `config.yaml` or use [sample](https://github.com/dell/csi-unity/tree/main/samples/secret/secret.yaml): 
    
     Example: 
     <div style="margin-bottom: -1.8rem">
@@ -73,12 +73,12 @@ dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      
     ```yaml
     cat << EOF > config.yaml
      storageArrayList:
-     - arrayId: "APM00******1"                 # unique array id of the Unisphere array
-       username: "user"                        # username for connecting to API
-       password: "password"                    # password for connecting to API
-       endpoint: "https://10.1.1.1/"           # full URL path to the Unity XT API
-       skipCertificateValidation: true         # indicates if client side validation of (management)server's certificate can be skipped
-       isDefault: true                         # treat current array as a default (would be used by storage classes without arrayID parameter)
+       - arrayId: "APM00******1"                 # unique array id of the Unisphere array
+         username: "user"                        # username for connecting to API
+         password: "password"                    # password for connecting to API
+         endpoint: "https://10.1.1.1/"           # full URL path to the Unity XT API
+         skipCertificateValidation: true         # indicates if client side validation of (management)server's certificate can be skipped
+         isDefault: true                         # treat current array as a default (would be used by storage classes without arrayID parameter)
     EOF
     ``` 
     </div>
@@ -146,7 +146,7 @@ dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      
     ``` 
     </div>
 
-    **Detailed Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_unity_{{< version-docs key="sample_sc_unity" >}}.yaml) for detailed settings.
+    **Detailed Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_unity_v2130.yaml) for detailed settings.
 
     To set the parameters in CR. The table shows the main settings of the unity driver and their defaults.
     
@@ -182,8 +182,8 @@ Check if ContainerStorageModule CR is created successfully:
 ```terminal
 oc get csm unity -n unity
 
-NAME        CREATIONTIME   CSIDRIVERTYPE   CONFIGVERSION                                          STATE
-unity       3h             unity           {{< version-docs key="PUnity_latestVersion" >}}        Succeeded      
+NAME        CREATIONTIME   CSIDRIVERTYPE   CONFIGVERSION       STATE
+unity       3h             unity           {{< version-docs key="PUnity_latestVersion" >}}             Succeeded      
 ```
 
 Check the status of the CR to verify if the driver installation is in the `Succeeded` state. If the status is not `Succeeded`, see the [Troubleshooting guide](../troubleshooting/#my-dell-csi-driver-install-failed-how-do-i-fix-it) for more information.
@@ -257,7 +257,7 @@ Check the status of the CR to verify if the driver installation is in the `Succe
     apiVersion: snapshot.storage.k8s.io/v1
     kind: VolumeSnapshotClass
     metadata:
-      name: unity-snapclass 
+      name: vsclass-unity 
     driver: csi-unity.dellemc.com
     deletionPolicy: Delete
     EOF 
@@ -269,7 +269,7 @@ Check the status of the CR to verify if the driver installation is in the `Succe
     oc get volumesnapshotclass
     
     NAME                      DRIVER                              DELETIONPOLICY   AGE
-    unity-snapclass           csi-unity.dellemc.com               Delete           3h9m
+    vsclass-unity             csi-unity.dellemc.com               Delete           3h9m
     ``` 
    </br>
 
@@ -382,7 +382,7 @@ Check the status of the CR to verify if the driver installation is in the `Succe
   Use this command to  **Delete Persistence Volume Claim**:
 
   ```bash
-  oc delete pvc pvc-unity-restore -n default
+  oc delete pvc pvc-unity -n default
   ```
 
   Verify restore pvc is deleted:
@@ -390,7 +390,7 @@ Check the status of the CR to verify if the driver installation is in the `Succe
   ```terminal
   oc get pvc -n default
 
-  NAME                    STATUS   VOLUME             CAPACITY   ACCESS MODES   STORAGECLASS   VOLUMEATTRIBUTESCLASS   AGE
+  NAME                 STATUS      VOLUME             CAPACITY   ACCESS MODES   STORAGECLASS   VOLUMEATTRIBUTESCLASS   AGE
   pvc-unity            Bound       ocp08-095f7d3c52   8Gi        RWO            unity          <unset>                 7m34s
   ```
   </br> 
@@ -463,7 +463,7 @@ snapcontent-80e99281-0d96-4275-b4aa-50301d110bd4   true         8589934592    De
 Use this command to  **Restore Snapshot**:
 
 ```bash
-oc apply -f pvc-unity.yaml
+oc apply -f pvc-unity-restore.yaml
 ```
 
 Example:

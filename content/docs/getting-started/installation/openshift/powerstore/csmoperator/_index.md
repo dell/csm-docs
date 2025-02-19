@@ -2,7 +2,7 @@
 title: Installation
 linkTitle: Operator
 description: >
-  Installing the CSI Driver for PowerStore via Container Storage Modules Operator 
+  Installing the CSI Driver for PowerStore via Container Storage Module Operator 
 no_list: true 
 weight: 2
 ---
@@ -12,19 +12,19 @@ weight: 2
 
 
 {{< markdownify >}}
-Supported driver and module versions offered by the Container Storage Modules Operator [here](../../../../../supportmatrix/#operator-compatibility-matrix)
+Supported driver and module versions offered by the Container Storage Module Operator [here](../../../../../supportmatrix/#operator-compatibility-matrix)
 {{< /markdownify >}}
 
 <br>
 <br>
 
-{{< accordion id="One" title="CSM Installation Wizard" >}}
-  {{< include file="content/docs/getting-started/installation/installationwizard/operator.md" hideIds="1,2,3" >}}
+{{< accordion id="One" title="Prerequisite" >}} 
+
 {{< /accordion >}}
 
 <br>
 
-{{< accordion id="Two" title="CSI Driver" markdown="true" >}}  
+{{< accordion id="Two" title="Driver" markdown="true" >}}  
 
 </br>
 
@@ -87,7 +87,7 @@ dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      
     ```yaml
     cat << EOF > config.yaml
     arrays:
-    - endpoint: "https://11.0.0.1/api/rest"
+      - endpoint: "https://11.0.0.1/api/rest"
         globalID: "unique"
         username: "user"
         password: "password"
@@ -96,17 +96,14 @@ dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      
     EOF
     ```
     </div> 
-
-    Add blocks for each PowerStore array in `config.yaml`, and include both source and target arrays if replication is enabled. 
-    
-    The username in `config.yaml` must be from PowerStore’s authentication providers and have at least the **Storage Operator** role.
  
+
     <br>
 
     Edit the file, then run the command to create the `powerstore-config`.
 
     ```bash
-    oc create secret generic powerstore-config --from-file=config=config.yaml -n powerstore --dry-run=client -oyaml > secret-config.yaml
+    oc create secret generic powerstore-config --from-file=config=config.yaml -n powerstore --dry-run=client -oyaml > secret-powerstore-config.yaml
     ```
     
     Use this command to **create** the config:
@@ -138,7 +135,7 @@ dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      
     Use this command to create the **ContainerStorageModule Custom Resource**:
 
     ```bash
-    oc create -f csm-store.yaml
+    oc create -f csm-powerstore.yaml
     ```
 
     Example:
@@ -150,19 +147,19 @@ dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      
     apiVersion: storage.dell.com/v1
     kind: ContainerStorageModule
     metadata:
-    name: powerstore
-    namespace: powerstore
+      name: powerstore
+      namespace: powerstore
     spec:
-    driver:
-       csiDriverType: "powerstore"
-       configVersion: {{< version-docs key="PStore_latestVersion" >}}
-       forceRemoveDriver: true
+      driver:
+        csiDriverType: "powerstore"
+        configVersion: {{< version-docs key="PStore_latestVersion" >}}
     EOF 
     ``` 
     </div> 
 
-    **Detailed Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powerstore_{{< version-docs key="sample_sc_pstore" >}}.yaml) for detailed settings.
-
+    **Detailed Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powerstore_v2130.yaml) for detailed settings.
+    
+    <br>
     To set the parameters in CR. The table shows the main settings of the PowerStore driver and their defaults.
 <ul>
 {{< collapse id="1" title="Parameters">}}
@@ -190,13 +187,14 @@ Check if ContainerStorageModule CR is created successfully:
 ```terminal
 oc get csm powerstore -n powerstore
 
-NAME        CREATIONTIME   CSIDRIVERTYPE   CONFIGVERSION                                        STATE
-powerstore   3h            powerstore      {{< version-docs key="PStore_latestVersion" >}}      Succeeded      
+NAME        CREATIONTIME   CSIDRIVERTYPE   CONFIGVERSION         STATE
+powerstore  3h             powerstore      {{< version-docs key="PStore_latestVersion" >}}               Succeed    
 ```
 
 Check the status of the CR to verify if the driver installation is in the `Succeeded` state. If the status is not `Succeeded`, see the [Troubleshooting guide](../troubleshooting/#my-dell-csi-driver-install-failed-how-do-i-fix-it) for more information.
 </ul>
 
+<br>
 
 4. ##### **Create Storage class:** 
     
@@ -217,10 +215,13 @@ Check the status of the CR to verify if the driver installation is in the `Succe
     apiVersion: storage.k8s.io/v1
     kind: StorageClass
     metadata:
-    name: "powerstore-ext4"
+      name: "powerstore"
+      annotations:
+        storageclass.kubernetes.io/is-default-class: "true"
     provisioner: "csi-powerstore.dellemc.com"
     parameters:
-    csi.storage.k8s.io/fstype: "ext4"
+      arrayID: "Unique"
+      csi.storage.k8s.io/fstype: "xfs"
     reclaimPolicy: Delete
     allowVolumeExpansion: true
     volumeBindingMode: Immediate
@@ -251,7 +252,7 @@ Check the status of the CR to verify if the driver installation is in the `Succe
 
 
     ```bash
-    oc appky -f vsclass-powerstore.yaml
+    oc apply -f vsclass-powerstore.yaml
     ```
 
     Example:
@@ -260,8 +261,8 @@ Check the status of the CR to verify if the driver installation is in the `Succe
     apiVersion: snapshot.storage.k8s.io/v1
     kind: VolumeSnapshotClass
     metadata:
-    name: powerstore-snapshot
-    driver: "csi-powerstore.dellemc.com" 
+      name: vsclass-powerstore
+    driver: csi-powerstore.dellemc.com
     deletionPolicy: Delete
     EOF 
     ```
@@ -272,7 +273,7 @@ Check the status of the CR to verify if the driver installation is in the `Succe
     oc get volumesnapshotclass
     
     NAME                      DRIVER                              DELETIONPOLICY   AGE
-    powerstore-snapclass      csi-powerstore.dellemc.com          Delete           3h9m
+    vsclass-powerstore        csi-powerstore.dellemc.com          Delete           3h9m
     ``` 
    </br>
 
@@ -323,8 +324,8 @@ Check the status of the CR to verify if the driver installation is in the `Succe
   ```terminal
   oc get pvc -n default
 
-  NAME                           STATUS   VOLUME             CAPACITY   ACCESS MODES   STORAGECLASS   VOLUMEATTRIBUTESCLASS   AGE
-  pvc-powerstore                 Bound  ocp08-9f103c4fc6     8Gi        RWO            powerstore       <unset>               4s
+  NAME                           STATUS   VOLUME             CAPACITY   ACCESS MODES   STORAGECLASS       VOLUMEATTRIBUTESCLASS   AGE
+  pvc-powerstore                 Bound    ocp08-9f103c4fc6   8Gi        RWO            powerstore         <unset>                 4s
   ``` 
 
   <br> 
@@ -387,7 +388,7 @@ Check the status of the CR to verify if the driver installation is in the `Succe
   Use this command to  **Delete Persistence Volume Claim**:
 
   ```bash
-  oc delete pvc pvc-powerstore-restore -n default
+  oc delete pvc pvc-powerstore -n default
   ```
 
   Verify restore pvc is deleted:
@@ -396,7 +397,7 @@ Check the status of the CR to verify if the driver installation is in the `Succe
   oc get pvc -n default
 
   NAME                    STATUS   VOLUME             CAPACITY   ACCESS MODES   STORAGECLASS   VOLUMEATTRIBUTESCLASS   AGE
-  pvc-powerstore          Bound    ocp08-095f7d3c52   8Gi        RWO            powerstore     <unset>                7m34s
+  pvc-powerstore          Bound    ocp08-095f7d3c52   8Gi        RWO            powerstore     <unset>                 7m34s
   ```
   </br> 
   </li> 
@@ -428,7 +429,7 @@ cat << 'EOF' > vs-powerstore.yaml
 apiVersion: snapshot.storage.k8s.io/v1
 kind: VolumeSnapshot
 metadata:
-  name: vs-powerstore'
+  name: vs-powerstore
   namespace: default
 spec:
   volumeSnapshotClassName: vsclass-powerstore
@@ -454,7 +455,7 @@ Verify Volume Snapshot content is created:
 oc get volumesnapshotcontent
 
 NAME                                               READYTOUSE   RESTORESIZE   DELETIONPOLICY   DRIVER                       VOLUMESNAPSHOTCLASS     VOLUMESNAPSHOT   VOLUMESNAPSHOTNAMESPACE   AGE
-snapcontent-80e99281-0d96-4275-b4aa-50301d110bd4   true         8589934592    Delete           csi-powerstore.dellemc.com   vsclass-powerstore      vs-powerstore      default                   23s
+snapcontent-80e99281-0d96-4275-b4aa-50301d110bd4   true         8589934592    Delete           csi-powerstore.dellemc.com   vsclass-powerstore      vs-powerstore    default                   23s
 ```  
 
 <br>  
@@ -468,7 +469,7 @@ snapcontent-80e99281-0d96-4275-b4aa-50301d110bd4   true         8589934592    De
 Use this command to  **Restore Snapshot**:
 
 ```bash
-oc apply -f pvc-powerstore.yaml
+oc apply -f pvc-powerstore-restore.yaml
 ```
 
 Example:
@@ -508,6 +509,20 @@ pvc-powerstore-restore  Bound    ocp08-19874e9042   8Gi        RWO            po
 </li> 
 <li>
 
+##### **Delete Restore Persistant Volume Claim**   
+
+<br>
+Use this command to  **Delete Restore Persistant Volume Claim**:
+
+```bash
+oc delete pvc pvc-powerstore-restore -n default
+``` 
+<br>
+
+</li>
+
+<li> 
+
 ##### **Delete Volume Snapshot**
 </br>
 
@@ -525,17 +540,47 @@ oc get vs -n default
 NAME                    STATUS   VOLUME             CAPACITY   ACCESS MODES   STORAGECLASS   VOLUMEATTRIBUTESCLASS   AGE
 ```
 
-</li>
-</ol>
 
 
-{{< /collapse >}} 
+  </li>
+  </ol>
+
+
+{{< /collapse >}}  
+
+{{< collapse id="3" title="Volume Prefix" card="false" >}}  
+
+Example:
+
+```yaml
+cat << 'EOF' > csm-powerstore.yaml
+apiVersion: storage.dell.com/v1
+kind: ContainerStorageModule
+metadata:
+  name: powerstore
+  namespace: powerstore
+spec:
+  driver:
+    csiDriverType: "powerstore"
+    configVersion: v2.13.0
+    common:
+      envs:
+      - name: X_CSI_POWERSTORE_NODE_NAME_PREFIX
+        value: "ocp08"
+    sideCars:
+    - name: provisioner
+      args: ["--volume-name-prefix=ocp08"]
+EOF
+```  
+
+{{< /collapse >}}  
+
 
 {{< /accordion >}}   
 
 <br>
 
-{{< accordion id="Three" title="CSM Modules" >}}
+{{< accordion id="Three" title="Modules" >}}
 
 <br>   
 

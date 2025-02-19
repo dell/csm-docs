@@ -4,14 +4,14 @@ linkTitle: Operator
 no_list: true
 weight: 2
 description: >
-  Installing the CSI Driver for PowerMax via Container Storage Modules Operator
+  Installing the CSI Driver for PowerMax via Container Storage Module Operator
 ---
 {{% pageinfo color="primary" %}}
 {{< message text="1" >}}
 {{% /pageinfo %}}
 
 {{< markdownify >}}
-Supported driver and module versions offered by the Container Storage Modules Operator [here](../../../../../supportmatrix/#operator-compatibility-matrix)
+Supported driver and module versions offered by the Container Storage Module Operator [here](../../../../../supportmatrix/#operator-compatibility-matrix)
 {{< /markdownify >}}
 
 <br>
@@ -22,7 +22,7 @@ Supported driver and module versions offered by the Container Storage Modules Op
 {{< /accordion >}}
 
 <br>
-{{< accordion id="Two" title="CSI Driver" markdown="true" >}}   
+{{< accordion id="Two" title="Driver" markdown="true" >}}   
 
 
 </br>
@@ -158,21 +158,21 @@ dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      
 
 5. Create a CR (Custom Resource) for PowerFlex using the sample files provided
 
-    a. **Default Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/main/samples/minimal-samples/powermax_{{< version-docs key="Min_sample_operator_pmax" >}}.yaml) for default settings. Modify if needed.
+    a. **Default Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/main/samples/minimal-samples/powermax_v2130.yaml) for default settings. Modify if needed.
 
     [OR]                                                
 
-    b. **Detailed Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powermax_{{< version-docs key="Det_sample_operator_pmax" >}}.yaml) for detailed settings. 
+    b. **Detailed Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powermax_v2130.yaml) for detailed settings. 
 
 > NOTE:
-> [Replication module](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powermax_{{< version-docs key="sample_sc_pmax" >}}.yaml#L283) must be enabled to use the Metro volume
+> [Replication module](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powermax_v2130.yaml#L283) must be enabled to use the Metro volume
 
 Example:
 ```yaml
     - name: replication
       enabled: true
 ```
->  [Target clusterID](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powermax_{{< version-docs key="sample_sc_pmax" >}}.yaml#L316) should be set as self
+>  [Target clusterID](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powermax_v2130.yaml#L316) should be set as self
 
 Example:
 ```yaml
@@ -333,7 +333,7 @@ X_CSI_TOPOLOGY_CONTROL_ENABLED provides a way to filter topology keys on a node 
 
 <br>
 
-{{< accordion id="Three" title="CSM Modules"  >}}  
+{{< accordion id="Three" title="Modules"  >}}  
 
 <br>   
 

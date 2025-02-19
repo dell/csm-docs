@@ -8,19 +8,100 @@ weight: 2
 ---
 
 {{< markdownify >}}
-Supported driver and module versions offered by the Container Storage Modules Operator [here](../../../../../supportmatrix/#operator-compatibility-matrix)
+Supported driver and module versions offered by the Container Storage Module Operator [here](../../../../../supportmatrix/#operator-compatibility-matrix)
 {{< /markdownify >}}
 
 <br>
 <br>
 
+{{< accordion id="Zero" title="Prerequisite" markdown="true">}} 
 
-{{< accordion id="One" title="CSM Installation Wizard" >}}
-  {{< include file="content/docs/getting-started/installation/installationwizard/operator.md" >}}
-{{< /accordion >}}
 <br>
 
-{{< accordion id="Two" title="CSI Driver" markdown="true" >}}   
+1. **Make sure the nfs is enabled in the powerscale**
+
+    ```terminal
+    ps01-1# isi nfs settings global view
+    NFS Service Enabled: Yes
+        NFSv3 Enabled: Yes
+        NFSv4 Enabled: Yes
+                v4.0 Enabled: Yes
+                v4.1 Enabled: Yes
+                v4.2 Enabled: Yes
+    NFS RDMA Enabled: No
+        Rquota Enabled: No   
+
+    ``` 
+    <br>
+
+2. **Create role and assign the required permission** 
+
+    ```bash
+    isi auth roles create CSMAdminRole --description "Dell CSM Admin Role"  --zone System
+    isi auth roles modify CSMAdminRole --zone System --add-priv-read ISI_PRIV_LOGIN_PAPI --add-priv-read ISI_PRIV_IFS_RESTORE --add-priv-read ISI_PRIV_NS_IFS_ACCESS  --add-priv-read ISI_PRIV_IFS_BACKUP --add-priv-read ISI_PRIV_AUTH_ZONES --add-priv-read  ISI_PRIV_STATISTICS 
+    isi auth roles modify CSMAdminRole --zone System --add-priv-write ISI_PRIV_NFS --add-priv-write ISI_PRIV_QUOTA --add-priv-write ISI_PRIV_SNAPSHOT --add-priv-write ISI_PRIV_SYNCIQ
+    ```
+
+3. **Create a user and add the role**  
+
+    ```bash
+    isi auth user create csmadmin --password "P@ssw0rd123"
+    isi auth roles modify CSMAdminRole --add-user csmadmin 
+    ``` 
+
+4. **Get PowerScale Array Details** 
+
+   a. Cluster Name: 
+   
+      ``` 
+      ps01-1# isi cluster identity view
+      Description: 
+          MOTD: 
+      MOTD Header: 
+          Name: ps01 
+      ``` 
+
+   b. Access Zone Name:
+
+      ```
+      ps01-1# isi zone zones list
+      Name      Path               
+      -----------------------------
+      System    /ifs               
+      ps01-az01 /ifs/data/ps01/az01
+      -----------------------------
+      Total: 2 
+      ```
+
+   c. Smart Connect Zone name  
+
+      ```
+      ps01-1# isi network pools list
+      ID                                SC Zone               IP Ranges                   Allocation Method 
+      ------------------------------------------------------------------------------------------------------
+      groupnet0.subnet0.ps01-az01-pool0 ps01-az01.example.com 10.181.98.225-10.181.98.227 static            
+      groupnet0.subnet0.system-pool0    ps01.example.com      10.181.98.222-10.181.98.224 static            
+      ------------------------------------------------------------------------------------------------------
+      Total: 2  
+      ```
+
+5. **Create the base directory for the storage class** 
+    
+   ```bash 
+   mkdir /ifs/data/ps01/az01/csi
+   chown csmadmin:wheel /ifs/data/ps01/az01/csi
+   chmod 770 /ifs/data/ps01/az01/csi
+
+   ```
+
+{{< /accordion >}}
+
+
+
+
+<br>
+
+{{< accordion id="Two" title="Driver" markdown="true" >}}   
 
 </br>
 
@@ -83,11 +164,11 @@ dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      
     ```yaml
     cat << EOF > config.yaml
     isilonClusters:
-     - clusterName: "cluster2"
-        username: "user"
-        password: "password"
-        endpoint: "1.2.3.4"
-        endpointPort: "8080"
+    - clusterName: "ps01"
+      username: "csmadmin"
+      password: "P@ssw0rd123"
+      endpoint: "ps01.example.com"
+      skipCertificateValidation: true
     EOF
     ```
    </div>
@@ -127,10 +208,10 @@ dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      
 3. ##### **Create isilon-certs-n secret.**
       <br>
 
-      If certificate validation is skipped, empty secret must be created. To create an empty secret. Ex: empty-secret.yaml
+      If certificate validation is skipped, empty secret must be created. To create an empty secret. Ex: secret-isilon-certs.yaml
      
       ```yaml 
-      cat << EOF > empty-secret.yaml
+      cat << EOF > secret-isilon-certs.yaml
       apiVersion: v1
       kind: Secret
       metadata:
@@ -143,7 +224,7 @@ dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      
       ```
 
       ```bash
-       oc create -f empty-secret.yaml
+       oc create -f secret-isilon-certs.yaml
       ```
 <br>
 
@@ -176,7 +257,9 @@ dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      
     ``` 
     </div> 
 
-    **Detailed Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powerscale_{{< version-docs key="sample_sc_pscale" >}}.yaml) for detailed settings.
+    **Detailed Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powerscale_v2130.yaml) for detailed settings.
+
+    <br>
 
     To set the parameters in CR. The table shows the main settings of the Powerscale driver and their defaults.
 
@@ -217,8 +300,8 @@ Check if ContainerStorageModule CR is created successfully:
 ```terminal
 oc get csm isilon -n isilon
 
-NAME        CREATIONTIME   CSIDRIVERTYPE   CONFIGVERSION                                          STATE
-isilon      3h             isilon          {{< version-docs key="PScale_latestVersion" >}}        Succeeded      
+NAME        CREATIONTIME   CSIDRIVERTYPE   CONFIGVERSION    STATE
+isilon      3h             isilon          {{< version-docs key="PScale_latestVersion" >}}          Succeeded      
 ```
 
 Check the status of the CR to verify if the driver installation is in the `Succeeded` state. If the status is not `Succeeded`, see the [Troubleshooting guide](../troubleshooting/#my-dell-csi-driver-install-failed-how-do-i-fix-it) for more information.
@@ -247,8 +330,10 @@ Check the status of the CR to verify if the driver installation is in the `Succe
     reclaimPolicy: Delete
     allowVolumeExpansion: true
     parameters:  
-       AccessZone: System  
-       IsiPath: /ifs/data/csi  
+       ClusterName: ps01
+       AccessZone: ps01-az01  
+       AzServiceIP: ps01-az01.example.com 
+       IsiPath: /ifs/data/ps01/az01/csi 
        RootClientEnabled: "false" 
     volumeBindingMode: Immediate
     EOF
@@ -285,11 +370,11 @@ Check the status of the CR to verify if the driver installation is in the `Succe
     apiVersion: snapshot.storage.k8s.io/v1
     kind: VolumeSnapshotClass
     metadata:
-       name: isilon-snapclass
+       name: vsclass-isilon
     driver: csi-isilon.dellemc.com
     deletionPolicy: Delete
     parameters:
-       IsiPath: /ifs/data/csi
+       IsiPath: /ifs/data/ps01/az01/csi
     EOF 
     ```
 
@@ -299,7 +384,7 @@ Check the status of the CR to verify if the driver installation is in the `Succe
     oc get volumesnapshot
     
     NAME                      DRIVER                              DELETIONPOLICY   AGE
-    isilon-snapclass          csi-isilon.dellemc.com              Delete           3h9m
+    vsclass-isilon            csi-isilon.dellemc.com              Delete           3h9m
     ``` 
    </br>
 
@@ -412,7 +497,7 @@ Check the status of the CR to verify if the driver installation is in the `Succe
   Use this command to  **Delete Persistence Volume Claim**:
 
   ```bash
-  oc delete pvc pvc-isilon-restore -n default
+  oc delete pvc pvc-isilon -n default
   ```
 
   Verify restore pvc is deleted:
@@ -492,7 +577,7 @@ snapcontent-80e99281-0d96-4275-b4aa-50301d110bd4   true         8589934592    De
 Use this command to  **Restore Snapshot**:
 
 ```bash
-oc apply -f pvc-isilon.yaml
+oc apply -f pvc-isilon-restore.yaml
 ```
 
 Example:
@@ -553,10 +638,33 @@ NAME                    STATUS   VOLUME             CAPACITY   ACCESS MODES   ST
 </ol>
 {{< /collapse >}} 
 
+{{< collapse id="3" title="Volume Prefix" card="false" >}}  
+
+Example:
+
+```yaml
+cat << 'EOF' > csm-isilon.yaml
+apiVersion: storage.dell.com/v1
+kind: ContainerStorageModule
+metadata:
+  name: isilon
+  namespace: isilon
+spec:
+  driver:
+    csiDriverType: "isilon"
+    configVersion: v2.13.0
+    sideCars:
+    - name: provisioner
+      args: ["--volume-name-prefix=ocp08"]
+EOF
+```  
+
+{{< /collapse >}}  
+
 
 {{< /accordion >}}  
 <br>
-{{< accordion id="Three" title="CSM Modules" >}}
+{{< accordion id="Three" title="Modules" >}}
 
 <br>   
 

@@ -7,13 +7,13 @@ weight: 2
 ---
 
 {{< markdownify >}}
-Supported driver and module versions offered by the Container Storage Modules Operator [here](../../../../../supportmatrix/#operator-compatibility-matrix)
+Supported driver and module versions offered by the Container Storage Module Operator [here](../../../../../supportmatrix/#operator-compatibility-matrix)
 {{< /markdownify >}}
 
 <br>
 <br>
 
-{{< accordion id="Two" title="CSI Driver" markdown="true" >}}
+{{< accordion id="Two" title="Driver" markdown="true" >}}
 
 </br>
 
@@ -143,7 +143,7 @@ dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      
     ``` 
     </div>
     
-    **Detailed Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powerflex_{{< version-docs key="Det_sample_operator_pflex" >}}.yaml) for detailed settings.
+    **Detailed Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powerflex_v2130.yaml) for detailed settings.
    
    </br>
     To set the parameters in CR. The table shows the main settings of the PowerFlex driver and their defaults.
@@ -376,7 +376,7 @@ Check the status of the CR to verify if the driver installation is in the `Succe
   Use this command to  **Delete Persistence Volume Claim**:
 
   ```bash
-  oc delete pvc pvc-vxflexos-restore -n default
+  oc delete pvc pvc-vxflexos -n default
   ```
 
   Verify restore pvc is deleted:
@@ -456,7 +456,7 @@ snapcontent-80e99281-0d96-4275-b4aa-50301d110bd4   true         8589934592    De
 Use this command to  **Restore Snapshot**:
 
 ```bash
-oc apply -f pvc-vxflexos.yaml
+oc apply -f pvc-vxflexos-restore.yaml
 ```
 
 Example:
@@ -516,14 +516,67 @@ NAME                    STATUS   VOLUME             CAPACITY   ACCESS MODES   ST
 
 
 
-{{< /collapse >}} 
+{{< /collapse >}}  
+
+{{< collapse id="3" title="Volume Prefix" card="false" >}}  
+
+Example:
+
+```yaml
+cat << 'EOF' > csm-powerflex.yaml
+apiVersion: storage.dell.com/v1
+kind: ContainerStorageModule
+metadata:
+  name: powerflex
+  namespace: powerflex
+spec:
+  driver:
+    csiDriverType: "powerflex"
+    configVersion: v2.13.0
+    sideCars:
+    - name: provisioner
+      args: ["--volume-name-prefix=ocp08"]
+EOF
+```  
+
+{{< /collapse >}}  
+
+
+{{< collapse id="4" title="Rename SDC" card="false" >}}  
+
+Example:
+
+```yaml
+cat << 'EOF' > csm-powerflex.yaml
+apiVersion: storage.dell.com/v1
+kind: ContainerStorageModule
+metadata:
+  name: powerflex
+  namespace: powerflex
+spec:
+  driver:
+    csiDriverType: "powerflex"
+    configVersion: v2.13.0
+    sideCars:
+    - name: provisioner
+      args: ["--volume-name-prefix=ocp00"]
+    node:
+      envs:
+      - name: X_CSI_RENAME_SDC_ENABLED
+        value: "true"
+      - name: X_CSI_RENAME_SDC_PREFIX
+        value: "sdc"
+EOF
+```  
+
+{{< /collapse >}}  
 
 
 {{< /accordion >}}  
 
 <br>
 
-{{< accordion id="Three" title="CSM Modules">}}
+{{< accordion id="Three" title="Modules">}}
 
 {{< cardcontainer >}}
     {{< customcard link1="./csm-modules/authorizationv1.x"  image="6" title="Authorization v1.x" >}}
