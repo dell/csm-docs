@@ -38,8 +38,18 @@ weight: 1
 
 ## OpenShift Virtualization
 
-OpenShift Virtualization 4.17 <b> supports [storage profile](https://github.com/kiagnose/kubevirt-storage-checkup) operations only </b> for the following storage systems:</br>
-PowerFlex, PowerMax, PowerStore, PowerScale.
+{{<table "table table-striped table-bordered table-sm">}}
+| Version | Operation                                                                | PowerFlex        | PowerMax | PowerStore | PowerScale | Unity |
+|---------|--------------------------------------------------------------------------|------------------|----------|------------|------------|-------|
+| 4.17    | [Storage Profile](https://github.com/kiagnose/kubevirt-storage-checkup)  | Yes              | Yes      | Yes        | Yes        | No    |
+{{</table>}}
+
+{{<table "table table-striped table-bordered table-sm">}}
+| Version | Module                                        | PowerFlex | PowerMax | PowerStore | PowerScale | Unity |
+|---------|-----------------------------------------------|-----------|----------|------------|------------|-------|
+| 4.17    | [CSM Observability](../observability/)        | Yes       | Yes      | No         | Yes        | No    |
+| 4.17    | [CSM Authorization - v2.x](../authorization/) | Yes       | Yes      | No         | Yes        | No    |
+{{</table>}}
 
 ## Tested Host Operating Systems
 
