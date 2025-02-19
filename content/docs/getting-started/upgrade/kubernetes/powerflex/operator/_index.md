@@ -10,12 +10,12 @@ weight: 1
 
 To Upgrade the Operator, follow the instructions available [here](../../../operator/upgrade).
 
-{{< accordion id="Two" title="CSI Driver" markdown="true" >}}  
+{{< accordion id="Two" title="Driver" markdown="true" >}}  
 {{<include file="content/docs/getting-started/upgrade/operator/driver_upgrade.md" hideClasses="1,2,4,5">}}
 {{< /accordion >}}
 
 <br>
-{{< accordion id="Three" title="CSM Modules"  >}}   
+{{< accordion id="Three" title="Modules"  >}}   
 {{< cardcontainer >}}
     {{< customcard link1="./csm-modules/authorizationv1.x"  image="1" title="Authorization v1.x" >}}
 

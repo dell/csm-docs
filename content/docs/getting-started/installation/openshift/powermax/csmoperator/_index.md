@@ -22,7 +22,7 @@ Supported driver and module versions offered by the Container Storage Module Ope
 {{< /accordion >}}
 
 <br>
-{{< accordion id="Two" title="CSI Driver" markdown="true" >}}   
+{{< accordion id="Two" title="Driver" markdown="true" >}}   
 
 
 </br>
@@ -333,7 +333,7 @@ X_CSI_TOPOLOGY_CONTROL_ENABLED provides a way to filter topology keys on a node 
 
 <br>
 
-{{< accordion id="Three" title="CSM Modules"  >}}  
+{{< accordion id="Three" title="Modules"  >}}  
 
 <br>   
 

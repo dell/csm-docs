@@ -22,7 +22,7 @@ Install Helm 3.x on the master node before you install the CSI Driver for PowerS
 
 <br>
 
-{{< accordion id="Two" title="CSI Driver" markdown="true" >}}  
+{{< accordion id="Two" title="Driver" markdown="true" >}}  
 
 ### Volume Snapshot Requirements (Optional)
 For detailed snapshot setup procedure, [click here.](docs/concepts/snapshots/#helm-optional-volume-snapshot-requirements)
@@ -216,7 +216,7 @@ Note: here `my-powerstore-settings.yaml` is a `values.yaml` file which user has 
 
 <br>
 
-{{< accordion id="Three" title="CSM Modules" >}}
+{{< accordion id="Three" title="Modules" >}}
        
 {{< cardcontainer >}}
 

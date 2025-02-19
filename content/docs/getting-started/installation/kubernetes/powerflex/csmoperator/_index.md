@@ -9,7 +9,7 @@ weight: 2
 ## Operator Installation
 To deploy the Operator, follow the instructions available [here](../../../operator/operatorinstallation_kubernetes.md).
 
-{{< accordion id="Two" title="CSI Driver" markdown="true" >}}  
+{{< accordion id="Two" title="Driver" markdown="true" >}}  
 
 ### Prerequisites
 
@@ -242,7 +242,7 @@ ii . **Run this command to create** a PowerFlex custom resource:
 
 <br>
 
-{{< accordion id="Three" title="CSM Modules">}}
+{{< accordion id="Three" title="Modules">}}
  <br>  
 
 {{< markdownify >}}

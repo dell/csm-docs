@@ -19,7 +19,7 @@ To deploy the Operator, follow the instructions available [here](../../../operat
 
 <br>
 
-{{< accordion id="Two" title="CSI Driver" markdown="true" >}}  
+{{< accordion id="Two" title="Driver" markdown="true" >}}  
 
 ### CSI Driver Installation
 
@@ -174,7 +174,7 @@ To deploy the Operator, follow the instructions available [here](../../../operat
 {{< /accordion >}}
 <br>
 
-{{< accordion id="Three" title="CSM Modules" >}}
+{{< accordion id="Three" title="Modules" >}}
 
 <br>  
 {{< markdownify >}}
