@@ -14,7 +14,7 @@ To deploy the Operator, follow the instructions available [here](../../../operat
 {{< /accordion >}}
 <br>
 
-{{< accordion id="Two" title="CSI Driver" markdown="true" >}}  
+{{< accordion id="Two" title="Driver" markdown="true" >}}  
 ### Install CSI Driver
 
 </br>
@@ -196,7 +196,7 @@ ii. **Create PowerScale custom resource**:
 
 {{< /accordion >}}  
 <br>
-{{< accordion id="Three" title="CSM Modules" >}}
+{{< accordion id="Three" title="Modules" >}}
 <br>  
 {{< markdownify >}}
 The driver and modules versions installable with the Container Storage Modules Operator [Click Here](../../../../../supportmatrix/#operator-compatibility-matrix)

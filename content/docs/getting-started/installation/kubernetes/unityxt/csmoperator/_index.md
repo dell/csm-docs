@@ -10,7 +10,7 @@ weight: 2
 To deploy the Operator, follow the instructions available [here](../../../operator/operatorinstallation_kubernetes.md).
 
 
-{{< accordion id="Two" title="CSI Driver" markdown="true" >}}  
+{{< accordion id="Two" title="Driver" markdown="true" >}}  
 
 ### Prerequisites
 
