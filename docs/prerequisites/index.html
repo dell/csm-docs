@@ -20,8 +20,8 @@
 
   <meta itemprop="name" content="Prerequisites and Support Matrix">
   <meta itemprop="description" content="Prerequisites and Support Matrix for CSM">
-  <meta itemprop="dateModified" content="2025-02-07T02:00:50+05:30">
-  <meta itemprop="wordCount" content="707">
+  <meta itemprop="dateModified" content="2025-02-25T09:17:26-05:00">
+  <meta itemprop="wordCount" content="720">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Prerequisites and Support Matrix">
   <meta name="twitter:description" content="Prerequisites and Support Matrix for CSM">
@@ -124,7 +124,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.6917f0de46687ba745cbc35d32addd66.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.cdae9bf75eecbba482ea491f7de864c1.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -148,7 +148,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.6917f0de46687ba745cbc35d32addd66.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.cdae9bf75eecbba482ea491f7de864c1.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -814,8 +814,55 @@ OpenShift Virtualization <a class="header-link"  href="#openshift-virtualization
                 <path d="M0 0h24v24H0z" fill="none"/>
                 <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
             </svg>
-        </a></h2><p>OpenShift Virtualization 4.17 <b> supports <a href="https://github.com/kiagnose/kubevirt-storage-checkup">storage profile</a> operations only </b> for the following storage systems:</br>
-PowerFlex, PowerMax, PowerStore, PowerScale.</p>
+        </a></h2>
+
+
+
+
+<table class="table table-striped table-bordered table-sm">
+  <thead>
+      <tr>
+          <th>Version</th>
+          <th>Capability</th>
+          <th style="text-align: center">PowerFlex</th>
+          <th style="text-align: center">PowerMax</th>
+          <th style="text-align: center">PowerStore</th>
+          <th style="text-align: center">PowerScale</th>
+          <th style="text-align: center">Unity</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>4.17</td>
+          <td><div style="text-align: left"> <a href="https://github.com/kiagnose/kubevirt-storage-checkup">Storage</a> </div></td>
+          <td style="text-align: center">Yes</td>
+          <td style="text-align: center">Yes</td>
+          <td style="text-align: center">Yes</td>
+          <td style="text-align: center">Yes</td>
+          <td style="text-align: center">No</td>
+      </tr>
+      <tr>
+          <td>4.17</td>
+          <td><div style="text-align: left">  Observability        </div></td>
+          <td style="text-align: center">Yes</td>
+          <td style="text-align: center">Yes</td>
+          <td style="text-align: center">No</td>
+          <td style="text-align: center">Yes</td>
+          <td style="text-align: center">No</td>
+      </tr>
+      <tr>
+          <td>4.17</td>
+          <td><div style="text-align: left"> Authorization - v2.x  </div></td>
+          <td style="text-align: center">Yes</td>
+          <td style="text-align: center">Yes</td>
+          <td style="text-align: center">No</td>
+          <td style="text-align: center">Yes</td>
+          <td style="text-align: center">No</td>
+      </tr>
+  </tbody>
+</table>
+
+
 <h2 id="tested-host-operating-systems">
 Tested Host Operating Systems <a class="header-link"  href="#tested-host-operating-systems" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
             <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
