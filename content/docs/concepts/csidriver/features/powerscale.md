@@ -287,7 +287,7 @@ spec:
     apiGroup: ""
 ```
 
->**Note:** Cloning of large volumes will take more time than the cluster's Kubelet service limit of two minutes. It is not recommended to clone large volumes. An alternate approach is to use a volume snapshot and mount the snapshot to your pods based on your use case.
+>**Note:** Cloning of large volumes may take more time than the cluster's Kubelet service limit of two minutes. It is not recommended to clone large volumes. The actual time to clone from a volume is dependent on other activity on the PowerScale array. An alternate approach is to use a volume snapshot and mount the snapshot to your pods based on your use case.
 
 ## Controller HA
 
