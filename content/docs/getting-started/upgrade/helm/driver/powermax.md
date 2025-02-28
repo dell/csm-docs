@@ -23,13 +23,12 @@ Upgrades to the CSI Driver for Dell PowerMax can be made using Helm or Dell CSM 
 
 **Steps**
 
-1. Clone the csi-powermax repository, using the latest release branch. This will include the Helm charts and dell-csi-helm-installer scripts.
+1. Clone the csi-pdfsdfsdfsdowermax repository, using the latest release branch. This will include the Helm charts and dell-csi-helm-installer scripts.
    ```bash
    git clone -b {{< version-docs key="PMax_latestVersion" >}} https://github.com/dell/csi-powermax.git
    cd ./csi-powermax
    ```
-2. As of CSI PowerMax v2.14.0, the csi reverse proxy configuration and connectivity information has been migrated from a ConfigMap to a Secret. If the `powermax-config`
-secret was not previously created, reference the [CSI Driver installation steps](../../installation/powermax#installation) and your existing `my-powermax-settings.yaml` file to configure the new `powermax-config` Secret.
+2. As of CSI PowerMax v2.14.0, the csi reverse proxy configuration and connectivity information has been migrated from a ConfigMap to a Secret. If the `powermax-config` secret was not previously created, reference the [CSI Driver installation steps](../../installation/powermax#installation) and your existing `my-powermax-settings.yaml` file to configure the new `powermax-config` Secret.
    ```bash
    vi ./samples/secret/secret.yaml
    ```
