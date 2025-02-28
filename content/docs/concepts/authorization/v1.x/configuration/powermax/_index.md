@@ -51,11 +51,53 @@ Create the karavi-authorization-config secret using this command:
 
     **Helm**
 
-    Refer to the [Install the Driver](../../../../../getting-started/installation/kubernetes/powermax/helm/#install-driver) section where you edit `samples/secret/secret.yaml` with the credentials of the PowerMax. Leave `username` and `password` with the default values as they will be ignored.
+    Refer to the [Install the Driver](../../../../../getting-started/installation/kubernetes/powermax/helm/#install-driver) section where you edit `samples/secret/secret.yaml` with the credentials of the PowerMax.
+
+    Update endpoint to match the localhost endpoint in `samples/secret/karavi-authorization-config.json`. Leave `username` and `password` with the default values as they will be ignored.
+
+    **Note:** Authorization does not support `backupEndpoint` at this moment. 
+
+    Example: 
+    ```yaml
+    storageArrays:
+      - storageArrayId: "000000000001"
+        primaryEndpoint: https://localhost:9400
+    managementServers:
+      - endpoint: https://localhost:9400
+        username: -
+        password: -
+        skipCertificateValidation: true
+        limits:
+          maxActiveRead: 10
+          maxActiveWrite: 10
+          maxOutstandingRead: 10
+          maxOutstandingWrite: 10
+    ```
 
     **Operator**
 
-    Refer to the [Install the Driver](../../../../../getting-started/installation/kubernetes/powermax/csmoperator/#install-driver) section to prepare `powermax-creds.yaml`. Leave `username` and `password` with the default values as they will be ignored.
+    Refer to the [Install the Driver](../../../../../getting-started/installation/kubernetes/powermax/csmoperator/#install-driver) section to prepare `powermax-creds.yaml`.
+
+    Update endpoint to match the localhost endpoint in `samples/secret/karavi-authorization-config.json`. Leave `username` and `password` with the default values as they will be ignored.
+
+    **Note:** Authorization does not support `backupEndpoint` at this moment. 
+
+    Example: 
+    ```yaml
+    storageArrays:
+      - storageArrayId: "000000000001"
+        primaryEndpoint: https://localhost:9400
+    managementServers:
+      - endpoint: https://localhost:9400
+        username: -
+        password: -
+        skipCertificateValidation: true
+        limits:
+          maxActiveRead: 10
+          maxActiveWrite: 10
+          maxOutstandingRead: 10
+          maxOutstandingWrite: 10
+    ```
 
 5. Enable Container Storage Modules Authorization in the driver installation applicable to your installation method.
 

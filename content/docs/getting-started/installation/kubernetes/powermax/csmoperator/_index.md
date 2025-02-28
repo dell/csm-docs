@@ -7,7 +7,9 @@ description: >
   Installing the CSI Driver for PowerMax via Container Storage Modules Operator
 ---
 {{% pageinfo color="primary" %}}
-{{< message text="1" >}}
+1. <span></span>{{< message text="11" >}}
+
+2. <span></span>{{< message text="1" >}}
 {{% /pageinfo %}}
 
 ## Operator Installation
@@ -22,81 +24,44 @@ To deploy the Operator, follow the instructions available [here](../../../operat
 
 ### Install Driver
 
-1. **Create namespace:** 
-
-   Run `kubectl create namespace <driver-namespace>` using the desired name to create the namespace.
-2. **Create PowerMax credentials:**
-
-   Create a file called powermax-creds.yaml or pick a [sample](https://github.com/dell/csi-powermax/blob/main/samples/secret/secret.yaml) that has Powermax array connection details :
-     ```yaml
-        apiVersion: v1
-        kind: Secret
-        metadata:
-          name: powermax-creds
-            # Replace driver-namespace with the namespace where driver is being deployed
-          namespace: <driver-namespace>
-        type: Opaque
-        data:
-          # set username to the base64 encoded username
-          username: <base64 username>
-          # set password to the base64 encoded password
-          password: <base64 password>
-          # Uncomment the following key if you wish to use ISCSI CHAP authentication (v1.3.0 onwards)
-          # chapsecret: <base64 CHAP secret>
-     ```
-   Replace the values for the username and password parameters. These values can be obtained using base64 encoding as described in the following example:
-   ```BASH
-   echo -n "myusername" | base64
-   echo -n "mypassword" | base64
-   # If mychapsecret is the iSCSI CHAP secret
-   echo -n "mychapsecret" | base64
-
+1.  Create a namespace in which the driver will be installed.
+   ```bash
+   kubectl create namespace powermax
    ```
-   Run the `kubectl create -f powermax-creds.yaml` command to create the secret.
+2. Create the `powermax-creds` secret.
 
-3. **Create Reverseproxy Configmap:** 
+    - *storageArrays*: A list of storage arrays and their associated details.
+      - *storageArrayId*: A unique PowerMax Symmetrix ID.
+      - *primaryEndpoint*: The URL of the Unisphere server managing this storage array.
+      - *backupEndpoint*: The URL of the backup Unisphere server managing this storage array; utilized if the primary server is unreachable.
+    - *managementServers*: A list of Unisphere management server endpoints and resources used to make connections with those servers.
+      - *endpoint*: The URL of the Unisphere server (primary or backup). This should match one of the URLs listed under `storageArrays`.
+      - *username*: The username to be used when connecting to the `endpoint`.
+      - *password*: The password to be used when connecting to the `endpoint`.
+      - *skipCertificateValidation*: Set to `false` to perform client-side TLS certificate verification for the Unisphere instance, `true` to skip verification.
 
-    Create a configmap using sample [here](https://github.com/dell/csm-operator/tree/master/samples/csireverseproxy/config.yaml). Fill in the appropriate values for driver configuration.
-    Example: config.yaml
     ```yaml
-    port: 2222 # Port on which reverseproxy will listen
-    logLevel: debug
-    logFormat: text
-    config:
-      storageArrays:
-          - storageArrayId: "000000000001" # arrayID
-            primaryURL: https://primary-1.unisphe.re:8443 # primary unisphere for arrayID
-            backupURL: https://backup-1.unisphe.re:8443   # backup unisphere for arrayID
-            proxyCredentialSecrets:
-              - primary-unisphere-secret-1 # credential secret for primary unisphere, e.g., powermax-creds
-              - backup-unisphere-secret-1 # credential secret for backup unisphere, e.g., powermax-creds
-          - storageArrayId: "000000000002"
-            primaryURL: https://primary-2.unisphe.re:8443
-            backupURL: https://backup-2.unisphe.re:8443
-            proxyCredentialSecrets:
-            - primary-unisphere-secret-2
-            - backup-unisphere-secret-2
-      managementServers:
-        - url: https://primary-1.unisphe.re:8443 # primary unisphere endpoint
-          arrayCredentialSecret: primary-unisphere-secret-1 # primary credential secret e.g., powermax-creds
-          skipCertificateValidation: true
-        - url: https://backup-1.unisphe.re:8443 # backup unisphere endpoint
-          arrayCredentialSecret: backup-unisphere-secret-1 # backup credential secret e.g., powermax-creds
-          skipCertificateValidation: false # value false, to verify unisphere certificate and provide certSecret
-          certSecret: primary-certs # unisphere verification certificate
-        - url: https://primary-2.unisphe.re:8443
-          arrayCredentialSecret: primary-unisphere-secret-2
-          skipCertificateValidation: true
-        - url: https://backup-2.unisphe.re:8443
-          arrayCredentialSecret: backup-unisphere-secret-2
-          skipCertificateValidation: false
-          certSecret: primary-certs
+    storageArrays:
+      - storageArrayId: "000000000001"
+        primaryEndpoint: https://primary-1.unisphe.re:8443
+        backupEndpoint: https://backup-1.unisphe.re:8443
+    managementServers:
+      - endpoint: https://primary-1.unisphe.re:8443
+        username: admin
+        password: password
+        skipCertificateValidation: true
+      - endpoint: https://backup-1.unisphe.re:8443
+        username: admin2
+        password: password2
+        skipCertificateValidation: false
+        certSecret: primary-cert
     ```
-    After editing the file, run this command to create a secret called `powermax-reverseproxy-config`. If you are using a different namespace/secret name, just substitute those into the command.
-      ```bash
-      kubectl create configmap powermax-reverseproxy-config --from-file config.yaml -n powermax
-      ```
-4. **Create Powermax Array Configmap:**  
+    After editing the file, run this command to create a secret called `powermax-creds`. If you are using a different namespace/secret name, just substitute those into the command.
+    ```bash
+    kubectl create secret generic powermax-creds --namespace powermax --from-file=config=samples/secret/secret.yaml
+    ```
+
+3. **Create Powermax Array Configmap:**  
   Create a configmap using the sample file [here](https://github.com/dell/csi-powermax/blob/main/samples/configmap/powermax-array-config.yaml). Fill in the appropriate values for driver configuration.
    ```yaml
       # To create this configmap use: kubectl create -f powermax-array-config.yaml
@@ -117,7 +82,7 @@ To deploy the Operator, follow the instructions available [here](../../../operat
           X_CSI_MANAGED_ARRAYS: "000000000000,000000000000,"
    ```
 
-5. Create a CR (Custom Resource) for PowerFlex using the sample files provided
+4. Create a CR (Custom Resource) for PowerFlex using the sample files provided
 
     a. **Default Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/main/samples/minimal-samples/powermax_{{< version-docs key="Min_sample_operator_pmax" >}}.yaml) for default settings. Modify if needed.
 
@@ -141,7 +106,7 @@ Example:
       value: "self"
 ```
 
-6. Users should configure the parameters in CR. The following table lists the primary configurable parameters of the PowerMax driver and their default values:
+5. Users should configure the parameters in CR. The following table lists the primary configurable parameters of the PowerMax driver and their default values:
 <ul>   
 {{< collapse id="1" title="Parameters">}}
    | Parameter                                       | Description                                                                                                                                                                                                                                                              | Required | Default                        |
@@ -160,6 +125,7 @@ Example:
    | X_CSI_VSPHERE_PORTGROUP                         | Existing portGroup that driver will use for vSphere                                                                                                                                                                                                                      | Yes      | ""                             |
    | X_CSI_VSPHERE_HOSTNAME                          | Existing host(initiator group)/host group(cascaded initiator group) that driver will use for vSphere                                                                                                                                                                     | Yes      | ""                             |
    | X_CSI_VCenter_HOST                              | URL/endpoint of the vCenter where all the ESX are present                                                                                                                                                                                                                | Yes      | ""                             |
+   | X_CSI_REVPROXY_USE_SECRET | Define whether or not to use the new secret format for the PowerMax and the Reverse Proxy. The secret format will be determined by the contents of the secret specified in the `authSecret`. **Note:** If this paramter remains `false`, PowerMax and the reverse proxy will use the configMap approach. | Yes      | "false" |
    | ***Node parameters***                           |                                                                                                                                                                                                                                                                          |          |                                |
    | X_CSI_POWERMAX_ISCSI_ENABLE_CHAP                | Enable ISCSI CHAP authentication. For more details on this feature see the related [documentation](../../../../../concepts/csidriver/features/powermax/#iscsi-chap)                                                                                                                               | No       | false                          |
    | X_CSI_TOPOLOGY_CONTROL_ENABLED                  | Enable/Disable topology control. It filters out arrays, associated transport protocol available to each node and creates topology keys based on any such user input.                                                                                                      | No       | false                          |
