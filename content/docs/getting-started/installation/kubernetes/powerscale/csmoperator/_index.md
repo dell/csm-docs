@@ -117,6 +117,7 @@ To deploy the Operator, follow the instructions available [here](../../../operat
    | X_CSI_ISI_NO_PROBE_ON_START | Indicates whether the controller/node should probe during initialization | Yes | |
    | X_CSI_ISI_VOLUME_PATH_PERMISSIONS | The permissions for isi volume directory path | Yes | 0777 |
    | X_CSI_ISI_AUTH_TYPE | Indicates the authentication method to be used. If set to 1 then it follows as session-based authentication else basic authentication. If CSM Authorization is enabled, this value must be set to 1. | No | 0 |
+   | X_CSI_DEBUG | Enable/disable gocsi library level debugging. | No | false |
    | GOISILON_DEBUG | Enable/Disable gopowerscale library-level debugging. | No | false |
    | ***Controller parameters*** |
    | X_CSI_MODE   | Driver starting mode  | No | controller |

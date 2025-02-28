@@ -97,6 +97,7 @@ To deploy the Operator, follow the instructions available [here](../../../operat
 | ***Common parameters for node and controller*** |
 | X_CSI_POWERSTORE_NODE_NAME_PREFIX | Prefix to add to each node registered by the CSI driver | Yes | "csi-node"
 | X_CSI_FC_PORTS_FILTER_FILE_PATH | To set path to the file which provides a list of WWPN which should be used by the driver for FC connection on this node | No | "/etc/fc-ports-filter" |
+| X_CSI_DEBUG | Enable/disable gocsi library level debugging. | No | false |
 | GOPOWERSTORE_DEBUG | Enable/Disable gopowerstore library-level debugging. | No | false |
 | ***Controller parameters*** |
 | X_CSI_POWERSTORE_EXTERNAL_ACCESS | allows specifying additional entries for hostAccess of NFS volumes. Both single IP address and subnet are valid entries | No | empty |
