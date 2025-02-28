@@ -28,7 +28,7 @@ To deploy the Operator, follow the instructions available [here](../../../operat
 
 2. **Create `secret` file:**.
 
-   a. Create a file called `secret.yaml` or pick a [sample](https://github.com/dell/csi-powerscale/blob/main/samples/secret/secret.yaml) that has Powerscale array connection details: 
+   a. Create a file called `secret.yaml` or pick a [sample](https://github.com/dell/csi-powerscale/blob/main/samples/secret/secret.yaml) that has Powerscale array connection details:
       ```yaml
      isilonClusters:
       - clusterName: "cluster2"
@@ -117,6 +117,7 @@ To deploy the Operator, follow the instructions available [here](../../../operat
    | X_CSI_ISI_NO_PROBE_ON_START | Indicates whether the controller/node should probe during initialization | Yes | |
    | X_CSI_ISI_VOLUME_PATH_PERMISSIONS | The permissions for isi volume directory path | Yes | 0777 |
    | X_CSI_ISI_AUTH_TYPE | Indicates the authentication method to be used. If set to 1 then it follows as session-based authentication else basic authentication. If CSM Authorization is enabled, this value must be set to 1. | No | 0 |
+   | GOISILON_DEBUG | Enable/Disable gopowerscale library-level debugging. | No | false |
    | ***Controller parameters*** |
    | X_CSI_MODE   | Driver starting mode  | No | controller |
    | X_CSI_ISI_ACCESS_ZONE | Name of the access zone a volume can be created in | No | System |
@@ -124,7 +125,7 @@ To deploy the Operator, follow the instructions available [here](../../../operat
    | ***Node parameters*** |
    | X_CSI_MAX_VOLUMES_PER_NODE | Specify the default value for the maximum number of volumes that the controller can publish to the node | Yes | 0 |
    | X_CSI_MODE   | Driver starting mode  | No | node |
-   {{< /collapse >}} 
+   {{< /collapse >}}
 
 
 ii. **Create PowerScale custom resource**:
@@ -132,7 +133,7 @@ ii. **Create PowerScale custom resource**:
    ```bash
    kubectl create -f <input_sample_file.yaml>
    ```
-   This command will deploy the PowerScale driver in the namespace specified in the input YAML file. 
+   This command will deploy the PowerScale driver in the namespace specified in the input YAML file.
 
    </ul>
 
@@ -146,9 +147,9 @@ ii. **Create PowerScale custom resource**:
 
 </br>
 
-6. **Create Storage Class** 
- 
-    ```yaml 
+6. **Create Storage Class**
+
+    ```yaml
    apiVersion: storage.k8s.io/v1
    kind: StorageClass
    metadata:
@@ -156,13 +157,13 @@ ii. **Create PowerScale custom resource**:
    provisioner: csi-isilon.dellemc.com
    reclaimPolicy: Delete
    allowVolumeExpansion: true
-   parameters:  
-      AccessZone: System  
-      IsiPath: /ifs/data/csi  
-      RootClientEnabled: "false" 
+   parameters:
+      AccessZone: System
+      IsiPath: /ifs/data/csi
+      RootClientEnabled: "false"
    volumeBindingMode: Immediate
-    ````  
-   Refer [Storage Class](https://github.com/dell/csi-powerscale/tree/main/samples/storageclass) for different sample files. 
+    ````
+   Refer [Storage Class](https://github.com/dell/csi-powerscale/tree/main/samples/storageclass) for different sample files.
 
    **Run this command to create** a storage class
 
@@ -170,8 +171,8 @@ ii. **Create PowerScale custom resource**:
      kubectl create -f < storage-class.yaml >
    ```
 
- 7. **Create Volume Snapshot Class** 
-    ```yaml 
+ 7. **Create Volume Snapshot Class**
+    ```yaml
       apiVersion: snapshot.storage.k8s.io/v1
       kind: VolumeSnapshotClass
       metadata:
@@ -194,7 +195,7 @@ ii. **Create PowerScale custom resource**:
    - "Kubelet config dir path" is not yet configurable in case of Operator based driver installation.
    - Also, snapshotter and resizer sidecars are not optional to choose, it comes default with Driver installation.
 
-{{< /accordion >}}  
+{{< /accordion >}}
 <br>
 {{< accordion id="Three" title="CSM Modules" >}}
 <br>  
@@ -209,9 +210,9 @@ The driver and modules versions installable with the Container Storage Modules O
 
     {{< customcard  link1="./csm-modules/observability"   image="6" title="Observability"  >}}
 
-    {{< customcard  link1="./csm-modules/replication"  image="6" title="Replication"  >}} 
+    {{< customcard  link1="./csm-modules/replication"  image="6" title="Replication"  >}}
 
     {{< customcard link1="./csm-modules/resiliency"   image="6" title="Resiliency"  >}}
 
 {{< /cardcontainer >}}
-{{< /accordion >}}  
+{{< /accordion >}}
