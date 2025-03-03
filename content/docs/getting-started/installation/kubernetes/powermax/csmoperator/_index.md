@@ -24,21 +24,13 @@ To deploy the Operator, follow the instructions available [here](../../../operat
 
 ### Install Driver
 
-1.  Create a namespace in which the driver will be installed.
-   ```bash
-   kubectl create namespace powermax
-   ```
-2. Create the `powermax-creds` secret.
+1. **Create Namespace:** 
+    ```bash
+      kubectl create namespace powermax
+    ```
+2. **Create PowerMax credentials:**
 
-    - *storageArrays*: A list of storage arrays and their associated details.
-      - *storageArrayId*: A unique PowerMax Symmetrix ID.
-      - *primaryEndpoint*: The URL of the Unisphere server managing this storage array.
-      - *backupEndpoint*: The URL of the backup Unisphere server managing this storage array; utilized if the primary server is unreachable.
-    - *managementServers*: A list of Unisphere management server endpoints and resources used to make connections with those servers.
-      - *endpoint*: The URL of the Unisphere server (primary or backup). This should match one of the URLs listed under `storageArrays`.
-      - *username*: The username to be used when connecting to the `endpoint`.
-      - *password*: The password to be used when connecting to the `endpoint`.
-      - *skipCertificateValidation*: Set to `false` to perform client-side TLS certificate verification for the Unisphere instance, `true` to skip verification.
+    a. Create a file called `secret.yaml` or pick a [sample](https://github.com/dell/csi-powermax/blob/main/samples/secret/secret.yaml) that has Powermax array connection details:
 
     ```yaml
     storageArrays:
@@ -56,9 +48,11 @@ To deploy the Operator, follow the instructions available [here](../../../operat
         skipCertificateValidation: false
         certSecret: primary-cert
     ```
-    After editing the file, run this command to create a secret called `powermax-creds`. If you are using a different namespace/secret name, just substitute those into the command.
+
+    After editing the file, **run this command to create a `secret.yaml`** called `powermax-config`. If you are using a different namespace/secret name, just substitute those into the command.
+
     ```bash
-    kubectl create secret generic powermax-creds --namespace powermax --from-file=config=samples/secret/secret.yaml
+    kubectl create secret generic powermax-config --namespace powermax --from-file=config=secret.yaml
     ```
 
 3. **Create Powermax Array Configmap:**  
@@ -82,11 +76,13 @@ To deploy the Operator, follow the instructions available [here](../../../operat
           X_CSI_MANAGED_ARRAYS: "000000000000,000000000000,"
    ```
 
-4. Create a CR (Custom Resource) for PowerFlex using the sample files provided
+4. **Install Driver**
 
-    a. **Default Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/main/samples/minimal-samples/powermax_{{< version-docs key="Min_sample_operator_pmax" >}}.yaml) for default settings. Modify if needed.
+    i. **Create a CR (Custom Resource)** for PowerMax using the sample files provided
+    
+    a. **Minimal Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/main/samples/minimal-samples/powermax_{{< version-docs key="Min_sample_operator_pmax" >}}.yaml) for default settings. If using the secret above, ensure that the secret name of the secret created is `powermax-creds`.
 
-    [OR]                                                
+    [OR]
 
     b. **Detailed Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powermax_{{< version-docs key="Det_sample_operator_pmax" >}}.yaml) for detailed settings. 
 
@@ -106,7 +102,8 @@ Example:
       value: "self"
 ```
 
-5. Users should configure the parameters in CR. The following table lists the primary configurable parameters of the PowerMax driver and their default values:
+  - Users should configure the parameters in CR. The following table lists the primary configurable parameters of the PowerMax driver and their default values:
+
 <ul>   
 {{< collapse id="1" title="Parameters">}}
    | Parameter                                       | Description                                                                                                                                                                                                                                                              | Required | Default                        |
@@ -134,20 +131,30 @@ Example:
    | X_CSI_REVPROXY_PORT                             | Port number where reverseproxy will listen as defined in config map                                                                                                                                                                                                      | Yes      | "2222"                         |
    | X_CSI_CONFIG_MAP_NAME                           | Name of config map as created for CSI PowerMax                                                                                                                                                                                                                           | Yes      | "powermax-reverseproxy-config" |
   {{< /collapse >}} 
+
+  ii. **Create PowerMax custom resource**:
+
+  ```bash
+  kubectl create -f <input_sample_file.yaml>
+  ```
+
+  This command will deploy the CSI PowerMax driver in the namespace specified in the input YAML file.
+
+  - Check driver pods **status** by running the appropriate command
+    ```bash
+    kubectl get all -n powermax
+    ```
 </ul> 
 
-7. Execute the following command to create the PowerMax custom resource:`kubectl create -f <input_sample_file.yaml>`. The above command will deploy the CSI-PowerMax driver.
-8. The mandatory module CSI PowerMax Reverseproxy will be installed automatically with the same command. 
-9. Once the driver `Custom Resource (CR)` is created, you can verify the installation as mentioned below
+5. **Verify the installation** as mentioned below
 
-    * Check if ContainerStorageModule CR is created successfully using the command below:
+    - Check if ContainerStorageModule CR is created successfully using the command below:
         ```bash
-        kubectl get csm/<name-of-custom-resource> -n <driver-namespace> -o yaml
+        kubectl get csm/powermax -n powermax -o yaml
         ```
-    * Check the status of the CR to verify if the driver installation is in the `Succeeded` state. If the status is not `Succeeded`, see the [Troubleshooting guide](../troubleshooting/#my-dell-csi-driver-install-failed-how-do-i-fix-it) for more information.     
-10. Refer [Volume Snapshot Class](https://github.com/dell/csi-powermax/tree/main/samples/volumesnapshotclass) and [Storage Class](https://github.com/dell/csi-powermax/tree/main/samples/storageclass) for the sample files. 
+    * Check the status of the CR to verify if the driver installation is in the `Succeeded` state. If the status is not `Succeeded`, see the [Troubleshooting guide](../troubleshooting/#my-dell-csi-driver-install-failed-how-do-i-fix-it) for more information.
+6. Refer [Volume Snapshot Class](https://github.com/dell/csi-powermax/tree/main/samples/volumesnapshotclass) and [Storage Class](https://github.com/dell/csi-powermax/tree/main/samples/storageclass) for the sample files. 
    
-
 ## Other features to enable
 ### Dynamic Logging Configuration
 

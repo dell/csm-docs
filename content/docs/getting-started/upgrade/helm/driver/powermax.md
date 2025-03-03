@@ -23,12 +23,12 @@ Upgrades to the CSI Driver for Dell PowerMax can be made using Helm or Dell CSM 
 
 **Steps**
 
-1. Clone the csi-pdfsdfsdfsdowermax repository, using the latest release branch. This will include the Helm charts and dell-csi-helm-installer scripts.
+1. Clone the csi-powermax repository, using the latest release branch. This will include the Helm charts and dell-csi-helm-installer scripts.
    ```bash
    git clone -b {{< version-docs key="PMax_latestVersion" >}} https://github.com/dell/csi-powermax.git
    cd ./csi-powermax
    ```
-2. As of CSI PowerMax v2.14.0, the csi reverse proxy configuration and connectivity information has been migrated from a ConfigMap to a Secret. If the `powermax-config` secret was not previously created, reference the [CSI Driver installation steps](../../installation/powermax#installation) and your existing `my-powermax-settings.yaml` file to configure the new `powermax-config` Secret.
+2. As of CSI PowerMax v2.14.0, the csi reverse proxy configuration and connectivity information has been migrated from a ConfigMap to a Secret. If the `powermax-config` secret was not previously created, reference the [CSI Driver installation steps](../../../../installation/kubernetes/powermax/helm/#install-driver) and your existing `my-powermax-settings.yaml` file to configure the new `powermax-config` Secret.
    ```bash
    vi ./samples/secret/secret.yaml
    ```
@@ -39,7 +39,7 @@ Upgrades to the CSI Driver for Dell PowerMax can be made using Helm or Dell CSM 
 > Note: The `powermax-reverseproxy-config` ConfigMap has been deprecated as of CSI PowerMax v2.14.0 and will be removed in a future release.
   The `powermax-reverseproxy-config` remains for backward compatibility only. Use of the `powermax-config` Secret, as outlined above, is recommended.
   If you would like to continue using the `powemax-reverseproxy-config` ConfigMap, set `global.useSecret: false` in your helm values file, and skip the creation of this Secret.
-4. Download the latest helm values file and update as needed. Reference the [CSI Driver installation steps](../../installation/powermax#installation) for more details on the available options.
+4. Download the latest helm values file and update as needed. Reference the [CSI Driver installation steps](../../../../installation/kubernetes/powermax/helm/#install-driver) for more details on the available options.
    ```bash
    cd ./dell-csi-helm-installer
    wget -O my-powermax-settings.yaml https://github.com/dell/helm-charts/raw/csi-powermax-2.14.0/charts/csi-powermax/values.yaml

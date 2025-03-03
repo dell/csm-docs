@@ -76,24 +76,6 @@ Install Helm 3 on the master node before you install CSI Driver for PowerMax.
         certSecret: my-unishpere-cert-secret
     ```
 
-    - *storageArrays*: A list of storage arrays and their associated details.
-      - *storageArrayId*: A unique PowerMax Symmetrix ID.
-      - *primaryEndpoint*: The URL of the Unisphere server managing this storage array.
-      - **backupEndpoint*: The URL of the backup Unisphere server managing this storage array; utilized if the primary server is unreachable.
-    - *managementServers*: A list of Unisphere management server endpoints and resources used to make connections with those servers.
-      - *endpoint*: The URL of the Unisphere server (primary or backup). This should match one of the URLs listed under `storageArrays`.
-      - *username*: The username to be used when connecting to the `endpoint`.
-      - *password*: The password to be used when connecting to the `endpoint`.
-      - *skipCertificateValidation*: Set to `false` to perform client-side TLS certificate verification for the Unisphere instance, `true` to skip verification.
-      - *certSecret*: The name of the secret in the same namespace containing the CA certificates of the Unisphere server. This field is not required if `skipCertificatValidation` is set to `false`.
-      - **limits*: A set of various limits for Reverse Proxy, outlined below.
-        - **maxActiveRead*: This refers to the maximum concurrent READ request handled by the reverse proxy.
-        - **maxActiveWrite*: This refers to the maximum concurrent WRITE request handled by the reverse proxy.
-        - **maxOutstandingRead*: This refers to maximum queued READ request when reverse proxy receives more than _maxActiveRead_ requests.
-        - **maxOutstandingWrite*: This refers to maximum queued WRITE request when reverse proxy receives more than _maxActiveWrite_ requests.
-
-    > The Secret fields marked with an asterisk (*) are optional and can be omitted from the Secret if they are not required.
-
 4. Create the `powermax-config` Secret.
     ```bash
     kubectl create secret generic powermax-config --namespace powermax --from-file=config=samples/secret/secret.yaml
@@ -105,9 +87,7 @@ Install Helm 3 on the master node before you install CSI Driver for PowerMax.
     wget -O my-powermax-settings.yaml https://github.com/dell/helm-charts/raw/csi-powermax-2.14.0/charts/csi-powermax/values.yaml
     ```
 
-6. Ensure the unisphere have 10.0 REST endpoint support by clicking on Unisphere -> Help (?) -> About in Unisphere for PowerMax GUI.
-
-7. Edit the newly created file and provide values for the following parameters.
+6. Edit the newly created file and provide values for the following parameters.
     ```bash
     vi my-powermax-settings.yaml
     ```
@@ -198,7 +178,7 @@ Install Helm 3 on the master node before you install CSI Driver for PowerMax.
 {{< /collapse >}}
 </ul>
 
-8. Make sure to provide the base64 encoded TLS certificate and key contents created in the [CSI PowerMax Reverse Proxy](#csi-powermax-reverse-proxy) prerequisite step above.
+7. Using the TLS certificate and key created in the [CSI PowerMax Reverse Proxy](../prerequisite/#csi-powermax-reverse-proxy) prerequisite step, provide the base64 encoded certificate and key contents to `csireverseproxy.certManager.certificateFile` and `csireverseproxy.certManager.privateKeyFile`.
     ```yaml
     csireverseproxy:
       tlsSecret: csirevproxy-tls-secret
@@ -216,7 +196,7 @@ Install Helm 3 on the master node before you install CSI Driver for PowerMax.
           IHByaXZhdGUga2V5IG1pZ2h0IGxvb2sgbGlrZSBpbiBteS1wb3dlcm1heC1zZXR0aW5ncy55YW1s
           IGZpbGUK
     ```
-9. Install the driver using `csi-install.sh` bash script in the `dell-csi-helm-installer` directory by running
+8. Install the driver using `csi-install.sh` bash script in the `dell-csi-helm-installer` directory by running
     ```bash
     ./csi-install.sh --namespace powermax --values ./my-powermax-settings.yaml --helm-charts-version <version>
     ```
