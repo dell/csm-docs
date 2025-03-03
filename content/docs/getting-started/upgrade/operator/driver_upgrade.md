@@ -54,10 +54,12 @@ kubectl get csm -n unity
    kubectl create secret generic powermax-config --namespace powermax --from-file=config=samples/secret/secret.yaml
    ```
 
+   Set the `authSecret` to the name of the secret created, `powermax-config`.
+
 - Note: The `powermax-reverseproxy-config` ConfigMap has been deprecated as of CSI PowerMax v2.14.0 and will be removed in a future release.
   The `powermax-reverseproxy-config` remains for backward compatibility only. Use of the `powermax-config` Secret, as outlined above, is recommended.
   
-  If you would like to continue using the `powemax-reverseproxy-config` ConfigMap, set `global.useSecret: false` in your helm values file, and skip the creation of this Secret.
+  If you would like to continue using the `powemax-reverseproxy-config` ConfigMap, set `X_CSI_REVPROXY_USE_SECRET: false` in your CSM file, and skip the creation of this Secret.
 
 {{< /hide >}} 
 
