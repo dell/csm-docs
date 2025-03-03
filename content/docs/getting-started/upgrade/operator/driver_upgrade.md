@@ -42,7 +42,7 @@ kubectl get csm -n unity
 {{< /hide >}} 
 
 {{< hide class="4" >}}
-   As of CSI PowerMax v2.14.0, the csi reverse proxy configuration and connectivity information has been migrated from a ConfigMap to a Secret. If the `powermax-config` secret was not previously created, reference the [CSI Driver installation steps](../../../../installation/kubernetes/powermax/helm/#install-driver) and your existing `my-powermax-settings.yaml` file to configure the new `powermax-config` Secret.
+   As of CSI PowerMax v2.14.0, the csi reverse proxy configuration and connectivity information has been migrated from a ConfigMap to a Secret. If the `powermax-config` secret was not previously created, reference the [CSI Driver installation steps](../../../../installation/kubernetes/powermax/csmoperator/#install-driver) and your existing `my-powermax-settings.yaml` file to configure the new `powermax-config` Secret.
 
    ```bash
    vi ./samples/secret/secret.yaml
