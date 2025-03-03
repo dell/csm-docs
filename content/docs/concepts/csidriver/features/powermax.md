@@ -752,7 +752,7 @@ With the above configuration, nodes labelled with the matching region, _region1_
 
 #### Optional Parameters
 
-In additon to the topology description, common array parameters can be defined in the secret to provide defaults when those parameters are not specified in the storage class. In the example above the SRP and service level are defaults for array 000000000001 so are no longer needed in the storage class definition. If the SRP is specified in the storage class then the storage class parameters will override the parameters in the secret.
+In addition to the topology description, common array parameters can be defined in the secret to provide defaults when those parameters are not specified in the storage class. In the example above the SRP and service level are defaults for array 000000000001 so are no longer needed in the storage class definition. If the SRP is specified in the storage class then the storage class parameters will override the parameters in the secret.
 
 The following parameters can be defined in the secret as defaults when not defined in the storage class. These parameters if specified in the storage class can override the values in the secret:
 
