@@ -261,7 +261,7 @@ The following table lists the configurable parameters of the CContainer Storage 
 | `karaviMetricsPowerMax.performancePollFrequencySeconds` | The polling frequency (in seconds) to gather performance metrics | `20` |
 | `karaviMetricsPowerMax.concurrentPowerMaxQueries` | The number of simultaneous metrics queries to make to PowerMax (MUST be less than 10; otherwise, several request errors from PowerMax will ensue.) | `10` |
 | `karaviMetricsPowermax.useSecret` | Defines whether or not to use the new secret format for the Reverse Proxy. If set to `true` the contents of the Secret specified by `karaviMetricsPowermax.defaultCredentialSecret` will be used to specify the Powermax storage arrays and their login credentials. If set to `false` the Reverse Proxy will use the configMap approach` | `false` | 
-| `karaviMetricsPowermax.defaultCredentialSecret` | The name of the Secret used to specify the Powermax storage arrays and thier login credentials | `powermax-config` |
+| `karaviMetricsPowermax.defaultCredentialSecret` | The name of the Secret used to specify the Powermax storage arrays and their login credentials | `powermax-config` |
 | `karaviMetricsPowerMax.authorization.enabled` | [Authorization](../../authorization-v2.0) is an optional feature to apply credential shielding of the backend PowerMax. | `false` |
 | `karaviMetricsPowerMax.authorization.proxyHost` | Hostname of the csm-authorization server. |  |
 | `karaviMetricsPowerMax.authorization.skipCertificateValidation` | A boolean that enables/disables certificate validation of the csm-authorization server. |  |
