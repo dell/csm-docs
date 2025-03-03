@@ -5,6 +5,11 @@ no_list: true
 description: Helm Installation
 weight: 3
 ---
+{{% pageinfo color="primary" %}}
+1. <span></span>{{< message text="11" >}}
+
+2. <span></span>{{< message text="1" >}}
+{{% /pageinfo %}}
 
 ### Install Helm 3
 
@@ -22,9 +27,10 @@ Install Helm 3 on the master node before you install CSI Driver for PowerMax.
 
 <br>
 
-{{< accordion id="Two" title="CSI Driver" markdown="true" >}}  
+{{< accordion id="Two" title="CSI Driver" markdown="true" >}}
 ### Volume Snapshot Requirements (Optional)
-  For detailed snapshot setup procedure, [click here.](docs/concepts/snapshots/#helm-optional-volume-snapshot-requirements)
+
+> For detailed snapshot setup procedure, [click here.](docs/concepts/snapshots/#helm-optional-volume-snapshot-requirements)
       
 ## Install Driver
 
@@ -35,7 +41,7 @@ Install Helm 3 on the master node before you install CSI Driver for PowerMax.
     git clone -b {{< version-docs key="PMax_latestVersion" >}} https://github.com/dell/csi-powermax.git  
     cd ./csi-powermax
     ```
-    
+
 2. Create a namespace in which the driver will be installed.
     ```bash
     kubectl create namespace powermax
@@ -85,7 +91,7 @@ Install Helm 3 on the master node before you install CSI Driver for PowerMax.
         - **maxActiveWrite*: This refers to the maximum concurrent WRITE request handled by the reverse proxy.
         - **maxOutstandingRead*: This refers to maximum queued READ request when reverse proxy receives more than _maxActiveRead_ requests.
         - **maxOutstandingWrite*: This refers to maximum queued WRITE request when reverse proxy receives more than _maxActiveWrite_ requests.
-        
+
     > The Secret fields marked with an asterisk (*) are optional and can be omitted from the Secret if they are not required.
 
 4. Create the `powermax-config` Secret.
@@ -214,10 +220,10 @@ Install Helm 3 on the master node before you install CSI Driver for PowerMax.
     ```bash
     ./csi-install.sh --namespace powermax --values ./my-powermax-settings.yaml --helm-charts-version <version>
     ```
-    > Alternatively, you can also install the driver using the standalone helm chart.
-    > ```bash
-    > helm install powermax ./csi-powermax --namespace powermax --values my-powermax-settings.yaml
-    > ```
+    Alternatively, you can also install the driver using the standalone helm chart.
+    ```bash
+    helm install powermax ./csi-powermax --namespace powermax --values my-powermax-settings.yaml
+    ```
 
 > Notes:
 > - The parameter `--helm-charts-version` is optional and if you do not specify the flag, by default the `csi-install.sh` script will clone the version of the helm chart that is specified in the driver's [csi-install.sh](https://github.com/dell/csi-powermax/blob/main/dell-csi-helm-installer/csi-install.sh#L52) file. If you wish to install the driver using a different version of the helm chart, you need to include this flag. Also, remember to delete the `helm-charts` repository present in the `csi-powermax` directory if it was cloned before.
