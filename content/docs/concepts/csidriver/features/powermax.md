@@ -1,6 +1,6 @@
 ---
 title: PowerMax
-linktitle: PowerMax 
+linktitle: PowerMax
 weight: 1
 Description: Code features for PowerMax Driver
 ---
@@ -331,12 +331,12 @@ controllerCount: 2
 ```
 
 > *NOTE:* The default value for controllerCount is 2. We recommend not changing this unless it is really necessary.
-> Also, if the controller count is greater than the number of available nodes (where the Pods can be scheduled), some controller Pods will remain in the Pending state  
+> Also, if the controller count is greater than the number of available nodes (where the Pods can be scheduled), some controller Pods will remain in the Pending state
 
 If you are using the Container Storage Modules Operator, the value to adjust is:
 
 ```yaml
-replicas: 2  
+replicas: 2
 ```
 
 For more details about configuring Controller HA using the Container Storage Modules Operator, see the [Container Storage Modules Operator documentation](../../../getting-started/installation/operator/#custom-resource-definitions).
@@ -347,7 +347,7 @@ Starting with version 1.5, the CSI PowerMax driver helm installer allows you to 
 
 ### controller
 
-If you want to apply `nodeSelectors` and `tolerations` for the controller Pods, edit the  `controller` section in the `values` file.  
+If you want to apply `nodeSelectors` and `tolerations` for the controller Pods, edit the  `controller` section in the `values` file.
 
 Here are some examples:
 * To schedule controller Pods to worker nodes only (Default):
@@ -380,7 +380,7 @@ controller:
 
 ### node
 
-If you want to apply `nodeSelectors` and `tolerations` for the node Pods, edit the  `node` section in the `values` file.  
+If you want to apply `nodeSelectors` and `tolerations` for the node Pods, edit the  `node` section in the `values` file.
 The `values` file already includes a set of default `tolerations` and you can add and remove tolerations to this list
 
 ```yaml
@@ -441,7 +441,7 @@ parameters:
   SRP: "SRP_1"
   SYMID: "000000000001"
   ServiceLevel: <Service Level> #Insert Service Level Name
-provisioner: csi-powermax.dellemc.com 
+provisioner: csi-powermax.dellemc.com
 reclaimPolicy: Delete
 volumeBindingMode: WaitForFirstConsumer
 allowVolumeExpansion: true
@@ -469,12 +469,12 @@ To use the enhanced topology keys:
 1. To use this feature, set node.topologyControl.enabled to true.
 2. Edit the config file [topologyConfig.yaml](https://github.com/dell/csi-powermax/blob/main/samples/configmap/topologyConfig.yaml) in `csi-powermax/samples/configmap` folder and provide values for the following parameters.
 
-| Parameter | Description  |  
+| Parameter | Description  |
 |-----------|--------------|
-| allowedConnections | List of node, array and protocol info for user allowed configuration |  
+| allowedConnections | List of node, array and protocol info for user allowed configuration |
 | allowedConnections.nodeName | Name of the node on which user wants to apply given rules |
 | allowedConnections.rules | List of StorageArrayID:TransportProtocol pair |
-| deniedConnections | List of node, array and protocol info for user denied configuration |  
+| deniedConnections | List of node, array and protocol info for user denied configuration |
 | deniedConnections.nodeName | Name of the node on which user wants to apply given rules  |
 | deniedConnections.rules | List of StorageArrayID:TransportProtocol pair |
 
@@ -523,10 +523,10 @@ deniedConnections:
       - "*:*"
 ```
 
-3. Use the below command to create ConfigMap with configmap name as `node-topology-config` in the namespace powermax,  
+3. Use the below command to create ConfigMap with configmap name as `node-topology-config` in the namespace powermax,
 
   ```bash
-  
+
   kubectl create configmap node-topology-config --from-file=topologyConfig.yaml -n powermax
   ```
 
@@ -556,7 +556,7 @@ cd dell-csi-helm-installer
 ./csi-install.sh --namespace powermax --values ./my-powermax-settings.yaml --upgrade
 ```
 
-Note: my-powermax-settings.yaml is a values.yaml file which the user has used for driver installation.  
+Note: my-powermax-settings.yaml is a values.yaml file which the user has used for driver installation.
 
 ### Operator based installation
 
@@ -566,7 +566,7 @@ To update the log level dynamically, the user has to edit the ConfigMap `powerma
 
 ```bash
 kubectl edit configmap -n powermax powermax-config-params
-```  
+```
 
 ## Volume Health Monitoring
 
@@ -594,20 +594,20 @@ spec:
 When this feature is enabled, the existing `ReadWriteOnce(RWO)` access mode restricts volume access to a single node and allows multiple pods on the same node to read from and write to the same volume.
 
 To migrate existing PersistentVolumes to use `ReadWriteOncePod`, please follow the instruction from [here](https://kubernetes.io/docs/tasks/administer-cluster/change-pv-access-mode-readwriteoncepod/).
-  
+
 ## Support for auto RDM for vSphere over FC
-  
+
 CSI Driver for PowerMax 2.5.0 and above supports auto RDM for vSphere over FC.
 
 This feature supports volume provisioning on Kubernetes clusters running on vSphere (VMware hypervisor) via RDM mechanism. This feature enables the users to use PMAX CSI drivers with VMs on vSphere Hypervisor with the same feature and functionality as there with bare metal servers when they have only FC ports in PMAX storage.
 
-It will be supported only on new/freshly installed clusters where the cluster is exclusively deployed in a virtualized vSphere environment. Having hybrid topologies like iSCSI, NVMeTCP or FC (in pass-through) is not supported.  
+It will be supported only on new/freshly installed clusters where the cluster is exclusively deployed in a virtualized vSphere environment. Having hybrid topologies like iSCSI, NVMeTCP or FC (in pass-through) is not supported.
 
 To use this feature
 
 - Set `vSphere.enabled` to true.
 - Create a secret which contains vCenter privileges. Follow the steps [here](../../../../getting-started/installation/kubernetes/powermax/prerequisite#auto-rdm-for-vsphere-over-fc-requirements) to create it. Update `vCenterCredSecret` with the secret name created.
-  
+
 ```yaml
  VMware/vSphere virtualization support
 # set enable to true, if you to enable VMware virtualized environment support via RDM
@@ -628,11 +628,11 @@ vSphere:
   # vCenterHost: URL/endpoint of the vCenter where all the ESX are present
   vCenterHost: "00.000.000.01"
   # vCenterCredSecret: secret name for the vCenter credentials
-  vCenterCredSecret: vcenter-creds  
+  vCenterCredSecret: vcenter-creds
 ```
-  
+
 >Note: Replication is not supported with this feature.
->Limitations of RDM can be referred [here.](https://configmax.esp.vmware.com/home)  
+>Limitations of RDM can be referred [here.](https://configmax.esp.vmware.com/home)
 >Supported number of RDM Volumes per VM is 60 as per the limitations.
 >RDMs should not be added/removed manually from vCenter on any of the cluster VMs.
 
@@ -680,3 +680,90 @@ These are the Container Storage Modules not supported with NVMeTCP protocol:
 - Container Storage Modules Observability
 - Container Storage Modules Application Mobility
 - Metro Replication
+
+## Multiple Avalabilty Zones
+
+Starting with CSM 2.14.0 the PowerMax CSI driver supports multiple availability zones (AZ) for block protocols. NFS is not supported at this time.
+
+This feature supports the use of of a StorageClass that is not associated with any specific PowerMax array or storage resource pool (SRP). Each cluster node must be labelled with topology labels which match the labels in the secret.
+
+Requirements:
+- Only one PowerMax array per availability zone is supported.
+- Every PowerMax array must be labelled with one or more zone labels.
+- Every cluster worker node must be assigned to a zone.
+- The StorageClass does not contain any references to the array ID.
+- The volumeBindingMode must be set to WaitForFirstConsumer.
+
+With this support a single storage class can be used to provision volumes from a pool of PowerMax arrays based on topology information where each AZ has its own PowerMax array. The following represents an example of the secret showing two arrays in different availability zones:
+
+### Secret
+
+```yaml
+storageArrays:
+  - storageArrayId: "000000000001"
+    primaryEndpoint: https://primary-1.unisphe.re:8443
+    backupEndpoint: https://backup-1.unisphe.re:8443
+    labels:
+      topology.kubernetes.io/region: region1
+      topology.kubernetes.io/zone: zone1
+    parameters:
+      SRP: srp_1
+      ServiceLevel: Gold
+  - storageArrayId: "000000000002"
+    primaryEndpoint: https://primary-2.unisphe.re:8443
+    backupEndpoint: https://backup-2.unisphe.re:8443
+    labels:
+      topology.kubernetes.io/region: region1
+      topology.kubernetes.io/zone: zone2
+    parameters:
+      SRP: srp_2
+```
+
+### Labelling Worker Nodes
+
+The worker nodes should have corresponding labels to match an availability zone.
+
+```bash
+# Label each worker node in the cluster
+kubectl label nodes worker-1 topology.kubernetes.io/region=region1
+kubectl label nodes worker-2 topology.kubernetes.io/region=region1
+...
+kubectl label nodes worker-1 topology.kubernetes.io/zone=zone1
+kubectl label nodes worker-2 topology.kubernetes.io/zone=zone2
+```
+
+### Storage Class
+
+For multiple availability zones support the StorageClass does not require details about the PowerMax array.
+
+```yaml
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: powermax-multi-az
+parameters:
+  csi.storage.k8s.io/fstype: xfs
+provisioner: csi-powermax.dellemc.com
+volumeBindingMode: WaitForFirstConsumer
+reclaimPolicy: Delete
+```
+
+With the above configuration, nodes labelled with the matching region, _region1_ and zone _zone1_ will access volumes provisioned on PowerMax array 000000000001. Nodes labelled with region _region1_ and zone _zone2_ will access volumes provisioned on PowerMax array 000000000002. Different storage resource pools (SRP) will be used for each array based on the specifications in the secret.
+
+#### Optional Parameters
+
+In additon to the topology description, common array parameters can be defined in the secret to provide defaults when those parameters are not specified in the storage class. In the example above the SRP and service level are defaults for array 000000000001 so are no longer needed in the storage class definition. If the SRP is specified in the storage class then the storage class parameters will override the parameters in the secret.
+
+The following parameters can be defined in the secret as defaults when not defined in the storage class. These parameters if specified in the storage class can override the values in the secret:
+
+{{<table "table table-striped table-bordered table-sm">}}
+|Parameter|Required|Default|Description|
+|:-|:-|:-|:-|
+|SRP|true||Name of SRP on the PowerMax array that should be used for provisioning|
+|ServiceLevel|false|Optimized|Name of Service Level on PowerMax array that should be used for provisioning|
+|ApplicationPrefix|false|None|Name of application to be used to group volumes|
+|HostLimitName|false|None|HostLimitName uniquely identifies given set of limits|
+|HostIOLimitMBSec|false|None|The MBs per Second Host IO limit|
+|HostIOLimitIOSec|false|None|The IOs per Second Host IO limit|
+|DynamicDistribution|false|None|Distribution of the Host IO limits|
+{{</table>}}
