@@ -18,7 +18,7 @@ Before you install CSI Driver for Unity XT, verify the requirements that are men
 {{< tabpane text=true lang="en" >}}
 {{% tab header="FC" lang="en" %}}
 
-1. Complete the zoning of each host with the Unity Storage Array. Please refer to <a  href="https://elabnavigator.dell.com/vault/pdf/Linux.pdf" target="_blank" style="font-size:0.9rem">Host Connectivity Guide</a> for the guidelines when setting a Fibre Channel SAN infrastructure.  
+1. Complete the zoning of each host with the Unity Storage Array. Please refer to <a  href="https://elabnavigator.dell.com/vault/pdf/Linux.pdf" target="_blank" style="font-size:0.9rem">Host Connectivity Guide</a> for the guidelines when setting up a Fibre Channel SAN infrastructure.  
 <br> 
 
 2. Verify the initiators of each host are logged in to the Unity Storage Array. CSM will perform the Host Registration of each host with the Unity Array. 

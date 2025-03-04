@@ -300,7 +300,7 @@ The following requirements must be fulfilled in order to successfully use the Fi
 {{% tab header="NVMeFC" lang="en" %}}
 
 
-1. Complete the zoning of each host with the PowerMax Storage Array. Please refer to <a  href="https://elabnavigator.dell.com/vault/pdf/Linux.pdf" target="_blank" style="font-size:0.9rem">Host Connectivity Guide</a> for the guidelines when setting a Fibre Channel SAN infrastructure.
+1. Complete the zoning of each host with the PowerMax Storage Array. Please refer to <a  href="https://elabnavigator.dell.com/vault/pdf/Linux.pdf" target="_blank" style="font-size:0.9rem">Host Connectivity Guide</a> for the guidelines when setting up a Fibre Channel SAN infrastructure.
  
 <br>
 
