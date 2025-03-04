@@ -24,4 +24,5 @@ description: Community Qualified Configurations
 | [Ticket 1623](https://github.com/dell/csm/issues/1623) | Red Hat Enterprise Linux CoreOS | OKE 4.14.31 | PowerScale v9.5.0.8 | NFS | CSI v2.12.0 |
 | [Ticket 1624](https://github.com/dell/csm/issues/1624) | Red Hat Enterprise Linux CoreOS | OKE 4.14.31 | PowerFlex 3.6.4000 | NFS | CSI v2.12.0 |
 | [Ticket 1625](https://github.com/dell/csm/issues/1625) | Ubuntu 20.04.6 LTS | MKE - 3.6.13 | PowerFlex 3.6.4000 | NFS | CSI v2.12.0 |
+| [Ticket 1767](https://github.com/dell/csm/issues/1767) | Red Hat Enterprise Linux release 8.10 (Ootpa) | MKE 3.8.2 (Mirantis Kubernetes Engine) | PowerScale | NFS | CSI v2.13.0 |
 {{</table>}}
