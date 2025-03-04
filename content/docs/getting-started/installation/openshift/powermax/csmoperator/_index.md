@@ -86,10 +86,10 @@ dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      
         certSecret: primary-cert
     ```
 
-    Edit the file, then run the command to create the `powermax-config`.
+    Edit the file, then run the command to create the `powermax-creds`.
 
     ```bash
-      oc create secret generic powermax-config --from-file=config=secret.yaml -n powermax --dry-run=client -oyaml > secret-powermax-config.yaml
+      oc create secret generic powermax-creds --from-file=config=secret.yaml -n powermax --dry-run=client -oyaml > secret-powermax-config.yaml
     ```
 
     Use this command to `create` the config:
@@ -107,7 +107,7 @@ dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      
       oc get secret -n powermax
 
       NAME                 TYPE        DATA   AGE
-      powermax-config      Opaque      1      3h7m
+      powermax-creds      Opaque      1      3h7m
     ```
 
 3. **Create Powermax Array Configmap:**  
@@ -185,9 +185,11 @@ Example:
    | X_CSI_REVPROXY_TLS_SECRET                       | Name of TLS secret defined in config map                                                                                                                                                                                                                                 | Yes      | "csirevproxy-tls-secret"       |
    | X_CSI_REVPROXY_PORT                             | Port number where reverseproxy will listen as defined in config map                                                                                                                                                                                                      | Yes      | "2222"                         |
    | X_CSI_CONFIG_MAP_NAME                           | Name of config map as created for CSI PowerMax                                                                                                                                                                                                                           | Yes      | "powermax-reverseproxy-config" |
-  {{< /collapse >}} 
+  {{< /collapse >}}
 
-  ii. **Create PowerMax custom resource**:
+  ii. Confirm that value of `X_CSI_REVPROXY_USE_SECRET` is set to `true`.
+
+  iii. **Create PowerMax custom resource**:
 
   ```bash
   oc create -f <input_sample_file.yaml>

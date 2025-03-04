@@ -122,18 +122,18 @@ The Container Storage Modules for Observability Helm chart bootstraps an Observa
 
     ### PowerMax
 
-    1. Copy the secret `powermax-config` from the CSI Driver for Dell PowerMax namespace to the CSM namespace.
+    1. Copy the secret `powermax-creds` from the CSI Driver for Dell PowerMax namespace to the CSM namespace.
 
        ```bash
 
-       kubectl get secret powermax-config -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -
+       kubectl get secret powermax-creds -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -
        ```
 
-       If the CSI driver secret name is not the default `powermax-config`, please use the following command to copy the secret:
+       If the CSI driver secret name is not the default `powermax-creds`, please use the following command to copy the secret:
 
        ```bash
 
-       kubectl get secret [POWERMAX-CONFIG] -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/name: [POWERMAX-CONFIG]/name: powermax-config/' | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -
+       kubectl get secret [POWERMAX-CONFIG] -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/name: [POWERMAX-CONFIG]/name: powermax-creds/' | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -
        ```
 
     If [CSM for Authorization is enabled](../../authorization-v2.0/#configuring-a-dell-csi-driver-with-csm-for-authorization) for CSI PowerMax, perform these steps:
@@ -261,7 +261,7 @@ The following table lists the configurable parameters of the CContainer Storage 
 | `karaviMetricsPowerMax.performancePollFrequencySeconds` | The polling frequency (in seconds) to gather performance metrics | `20` |
 | `karaviMetricsPowerMax.concurrentPowerMaxQueries` | The number of simultaneous metrics queries to make to PowerMax (MUST be less than 10; otherwise, several request errors from PowerMax will ensue.) | `10` |
 | `karaviMetricsPowermax.useSecret` | Defines whether or not to use the new secret format for the Reverse Proxy. If set to `true` the contents of the Secret specified by `karaviMetricsPowermax.defaultCredentialSecret` will be used to specify the Powermax storage arrays and their login credentials. If set to `false` the Reverse Proxy will use the configMap approach` | `false` | 
-| `karaviMetricsPowermax.defaultCredentialSecret` | The name of the Secret used to specify the Powermax storage arrays and their login credentials | `powermax-config` |
+| `karaviMetricsPowermax.defaultCredentialSecret` | The name of the Secret used to specify the Powermax storage arrays and their login credentials | `powermax-creds` |
 | `karaviMetricsPowerMax.authorization.enabled` | [Authorization](../../authorization-v2.0) is an optional feature to apply credential shielding of the backend PowerMax. | `false` |
 | `karaviMetricsPowerMax.authorization.proxyHost` | Hostname of the csm-authorization server. |  |
 | `karaviMetricsPowerMax.authorization.skipCertificateValidation` | A boolean that enables/disables certificate validation of the csm-authorization server. |  |

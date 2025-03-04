@@ -49,10 +49,10 @@ To deploy the Operator, follow the instructions available [here](../../../operat
         certSecret: primary-cert
     ```
 
-    After editing the file, **run this command to create a `secret.yaml`** called `powermax-config`. If you are using a different namespace/secret name, just substitute those into the command.
+    After editing the file, **run this command to create a `secret.yaml`** called `powermax-creds`. If you are using a different namespace/secret name, just substitute those into the command.
 
     ```bash
-      kubectl create secret generic powermax-config --namespace powermax --from-file=config=secret.yaml
+      kubectl create secret generic powermax-creds --namespace powermax --from-file=config=secret.yaml
     ```
 
 3. **Create Powermax Array Configmap:**  
@@ -80,7 +80,7 @@ To deploy the Operator, follow the instructions available [here](../../../operat
 
     i. **Create a CR (Custom Resource)** for PowerMax using the sample files provided
     
-    a. **Default Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/main/samples/minimal-samples/powermax_{{< version-docs key="Min_sample_operator_pmax" >}}.yaml) for default settings. If using the secret above, ensure that the secret name of the secret created is `powermax-creds`.
+    a. **Default Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/main/samples/minimal-samples/powermax_{{< version-docs key="Min_sample_operator_pmax" >}}.yaml) for default settings. Modify if needed.
 
     [OR]
 
@@ -130,9 +130,11 @@ Example:
    | X_CSI_REVPROXY_TLS_SECRET                       | Name of TLS secret defined in config map                                                                                                                                                                                                                                 | Yes      | "csirevproxy-tls-secret"       |
    | X_CSI_REVPROXY_PORT                             | Port number where reverseproxy will listen as defined in config map                                                                                                                                                                                                      | Yes      | "2222"                         |
    | X_CSI_CONFIG_MAP_NAME                           | Name of config map as created for CSI PowerMax                                                                                                                                                                                                                           | Yes      | "powermax-reverseproxy-config" |
-  {{< /collapse >}} 
+  {{< /collapse >}}
 
-  ii. **Create PowerMax custom resource**:
+  ii. Confirm that value of `X_CSI_REVPROXY_USE_SECRET` is set to `true`.
+
+  iii. **Create PowerMax custom resource**:
 
   ```bash
   kubectl create -f <input_sample_file.yaml>

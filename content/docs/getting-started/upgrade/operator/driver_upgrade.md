@@ -42,21 +42,21 @@ kubectl get csm -n unity
 {{< /hide >}} 
 
 {{< hide class="4" >}}
-   As of CSI PowerMax v2.14.0, the csi reverse proxy configuration and connectivity information has been migrated from a ConfigMap to a Secret. If the `powermax-config` secret was not previously created, reference the [CSI Driver installation steps](../../../../installation/kubernetes/powermax/csmoperator/#install-driver).
+   As of CSI PowerMax v2.14.0, the csi reverse proxy configuration and connectivity information has been migrated from a ConfigMap to a Secret. If the `powermax-creds` secret format was not previously updated, reference the [CSI Driver installation steps](../../../../installation/kubernetes/powermax/csmoperator/#install-driver).
 
    ```bash
    vi ./samples/secret/secret.yaml
    ```
 
-   Create the `powermax-config` Secret.
+   Create the `powermax-creds` Secret.
 
    ```bash
-   kubectl create secret generic powermax-config --namespace powermax --from-file=config=samples/secret/secret.yaml
+   kubectl create secret generic powermax-creds --namespace powermax --from-file=config=samples/secret/secret.yaml
    ```
 
-   Set the `authSecret` to the name of the secret created, `powermax-config`. Also, set `X_CSI_REVPROXY_USE_SECRET: true` in your CSM file to use the new secret configuration.
+   Set the `authSecret` to the name of the secret created, `powermax-creds`. Also, set `X_CSI_REVPROXY_USE_SECRET: true` in your CSM file to use the new secret configuration.
 
-   **Note:** The `powermax-reverseproxy-config` ConfigMap has been deprecated as of CSI PowerMax v2.14.0 and will be removed in a future release. The `powermax-reverseproxy-config` remains for backward compatibility only. Use of the `powermax-config` Secret, as outlined above, is recommended.
+   **Note:** The `powermax-reverseproxy-config` ConfigMap has been deprecated as of CSI PowerMax v2.14.0 and will be removed in a future release. The `powermax-reverseproxy-config` remains for backward compatibility only. Use of the `powermax-creds` Secret, as outlined above, is recommended.
   
    If you would like to continue using the `powemax-reverseproxy-config` ConfigMap, set `X_CSI_REVPROXY_USE_SECRET: false` in your CSM file, and skip the creation of this Secret.
 

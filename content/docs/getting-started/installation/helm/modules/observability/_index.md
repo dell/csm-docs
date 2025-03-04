@@ -588,18 +588,18 @@ In this case all storage system requests made by Container Storage Modules Obser
 {{< hide class="4">}}
 #### CSI Driver for PowerMax
 
-1. Delete the Secret `powermax-config` from the CSM namespace.
+1. Delete the Secret `powermax-creds` from the CSM namespace.
    ```console
-   kubectl delete secret powermax-config -n [CSM_NAMESPACE]
+   kubectl delete secret powermax-creds -n [CSM_NAMESPACE]
    ```
 
-2. Copy the Secret `powermax-config` from the CSI Driver for Dell PowerMax namespace to the CSM namespace.
+2. Copy the Secret `powermax-creds` from the CSI Driver for Dell PowerMax namespace to the CSM namespace.
    
    ```console
-   kubectl get secret powermax-config -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -
+   kubectl get secret powermax-creds -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -
    ```
 
-   If the CSI driver secret name is not the default `powermax-config`, please use the following command to copy the secret:
+   If the CSI driver secret name is not the default `powermax-creds`, please use the following command to copy the secret:
 
    ```console
    kubectl get secret [POWERMAX-CONFIG] -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/name: [POWERMAX-CONFIG]/name: powermax-config/' | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -
