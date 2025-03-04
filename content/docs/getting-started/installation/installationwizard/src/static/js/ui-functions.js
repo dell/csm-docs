@@ -90,6 +90,7 @@ function onArrayChange() {
 		onReplicationChange(replicationNote);
 		validateInput(validateForm, CONSTANTS);
 		onRenameSDCChange(driver, CONSTANTS);
+		onPowermaxSecretChange(powermaxCredNote);
 	});
 }
 
@@ -176,6 +177,16 @@ function onTopologyChange(topologyNoteValue) {
 	}
 }
 
+function onPowermaxSecretChange(powermaxCredNoteValue) {
+	const credVal = document.getElementById("powermax-credentials").value
+	if (credVal === "ConfigMap") {
+		$('div#powermax-credentials-note-wrapper').show();
+		$("#powermax-credentials-note").html(powermaxCredNoteValue);
+	} else {
+		$('div#powermax-credentials-note-wrapper').hide();
+	}
+}
+
 function onReplicationChange(replicationNoteValue) {
 	if ($("#replication").prop('checked') === true && $("#installation-type").val() === "operator") {
 		replicationOperatorNoteValue = replicationNoteValue + " Enter the target cluster ID or `self` in case of stretched/single cluster";
@@ -234,6 +245,16 @@ function onRenameSDCChange(driverName, CONSTANTS_PARAM) {
 		$(".sdc-prefix").hide();
 	}
 }
+
+const resetCSMVersion = () => {
+	const optionElement  = document.getElementById("csm-version");
+	$('#csm-version option').each(function () {
+		if (this.defaultSelected) {
+			this.selected = true;
+			return false;
+		}
+	});
+};
 
 
 const onCSMVersionChange = () => {
@@ -346,6 +367,7 @@ function displayModules(installationType, driverName, CONSTANTS_PARAM) {
 	$(".vol-name-prefix").show();
 	$("div#snap-prefix").show();
 	$(".fsGroupPolicy").hide();
+	$(".powermax-credentials").hide();
 	$(".image-repository").show();
 	$(".resizer").show();
 	$(".snapshot-feature").show();
@@ -428,6 +450,13 @@ function displayModules(installationType, driverName, CONSTANTS_PARAM) {
 			$(".transport-protocol").show();
 			$(".topology").show();
 			$(".fsGroupPolicy").show();
+
+			// Check the CSM version and show the option for Mount Credentials if version is greater than 1.14.0
+			if (isVersionGreaterOrEqualTo(document.getElementById("csm-version").value, "1.14.0")) {
+				$(".powermax-credentials").show();
+				$(".powermax-credentials-note-wrapper").hide()
+			}
+
 			$(".max-volumes-per-node").show();
 			document.getElementById("driver-namespace").value = CONSTANTS_PARAM.POWERMAX_NAMESPACE;
 			if (installationType === CONSTANTS_PARAM.OPERATOR) {
@@ -506,6 +535,9 @@ function displayCommands(releaseNameValue, commandTitleValue, commandNoteValue, 
 			break;
 		case "1.13.0":
 			helmChartVersion = CONSTANTS.CSM_HELM_V1130;
+			break;
+		case "1.14.0":
+			helmChartVersion = CONSTANTS.CSM_HELM_V1140;
 			break;
 		default:
 			helmChartVersion = CONSTANTS.CSM_HELM_V1130;
@@ -599,6 +631,7 @@ if (typeof exports !== 'undefined') {
 		hideFields,
 		validateInput,
 		resetVolNamePrefix,
-		resetSnapNamePrefix
+		resetSnapNamePrefix,
+		onPowermaxSecretChange
 	};
 }

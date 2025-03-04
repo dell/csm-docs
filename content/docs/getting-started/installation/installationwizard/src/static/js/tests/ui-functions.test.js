@@ -41,7 +41,8 @@ const {
 	displayModules,
 	displayCommands,
 	hideFields,
-	validateInput
+	validateInput,
+	onPowermaxSecretChange
 } = require('../ui-functions');
 
 const CONSTANTS = {
@@ -272,6 +273,32 @@ describe("GIVEN onTopologyChange function", () => {
 		onCertManagerChange("Temp topology note");
 		expect($("div#topology-note-wrapper").css("display")).toEqual("none");
 		expect($("div#observability-operator-topology-wrapper").css("display")).toEqual("none");
+	});
+});
+
+describe("GIVEN onPowermaxSecretChange function", () => {
+	test("SHOULD not show ConfigMap note when Secret is selected", () => {
+		document.body.innerHTML = `
+			<select id="powermax-credentials">
+				<option value="Secret" selected>Secret</option>
+				<option value="ConfigMap">Config Map</option>
+			</select>
+			<div id="powermax-credentials-note-wrapper">
+        `;
+		onPowermaxSecretChange("myNote");
+		expect($("div#powermax-credentials-note-wrapper").css("display")).toEqual("none");
+	});
+
+	test("SHOULD show ConfigMap note when is selected", () => {
+		document.body.innerHTML = `
+			<select id="powermax-credentials">
+				<option value="Secret">Secret</option>
+				<option value="ConfigMap" selected>Config Map</option>
+			</select>
+			<div id="powermax-credentials-note-wrapper">
+        `;
+		onPowermaxSecretChange("myNote");
+		expect($("div#powermax-credentials-note-wrapper").css("display")).toEqual("block");
 	});
 });
 
