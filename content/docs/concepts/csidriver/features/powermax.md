@@ -683,9 +683,9 @@ These are the Container Storage Modules not supported with NVMeTCP protocol:
 
 ## Multiple Avalabilty Zones
 
-Starting with CSM 2.14.0 the PowerMax CSI driver supports multiple availability zones (AZ) for block protocols. NFS is not supported at this time.
+Starting with CSM 2.14.0, the PowerMax CSI driver supports multiple availability zones (AZ) for block protocols. NFS is not supported at this time.
 
-This feature supports the use of of a StorageClass that is not associated with any specific PowerMax array or storage resource pool (SRP). Each cluster node must be labelled with topology labels which match the labels in the secret.
+This feature supports the use of a StorageClass that is not associated with any specific PowerMax array or storage resource pool (SRP). Each cluster node must be labelled with topology labels which match the labels in the secret.
 
 Requirements:
 - Only one PowerMax array per availability zone is supported.
