@@ -24,7 +24,7 @@ spec:
 
 ## Prerequisites
 
-In order to use COSI Driver on ObjectScale platform, the following components MUST be deployed to your cluster:
+To use the COSI Driver on the ObjectScale platform, you must deploy the following components to your cluster:
 
 - Kubernetes Container Object Storage Interface CRDs
 - Container Object Storage Interface Controller
