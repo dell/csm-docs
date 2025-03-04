@@ -52,7 +52,7 @@ To deploy the Operator, follow the instructions available [here](../../../operat
     After editing the file, **run this command to create a `secret.yaml`** called `powermax-config`. If you are using a different namespace/secret name, just substitute those into the command.
 
     ```bash
-    kubectl create secret generic powermax-config --namespace powermax --from-file=config=secret.yaml
+      kubectl create secret generic powermax-config --namespace powermax --from-file=config=secret.yaml
     ```
 
 3. **Create Powermax Array Configmap:**  
@@ -80,7 +80,7 @@ To deploy the Operator, follow the instructions available [here](../../../operat
 
     i. **Create a CR (Custom Resource)** for PowerMax using the sample files provided
     
-    a. **Minimal Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/main/samples/minimal-samples/powermax_{{< version-docs key="Min_sample_operator_pmax" >}}.yaml) for default settings. If using the secret above, ensure that the secret name of the secret created is `powermax-creds`.
+    a. **Default Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/main/samples/minimal-samples/powermax_{{< version-docs key="Min_sample_operator_pmax" >}}.yaml) for default settings. If using the secret above, ensure that the secret name of the secret created is `powermax-creds`.
 
     [OR]
 

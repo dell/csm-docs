@@ -63,7 +63,7 @@ dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      
 
 1. **Create namespace:** 
     ```bash
-      kubectl create namespace powermax
+      oc create namespace powermax
     ```
 2. **Create PowerMax credentials:**
 
@@ -86,10 +86,28 @@ dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      
         certSecret: primary-cert
     ```
 
-    After editing the file, **run this command to create a `secret.yaml`** called `powermax-config`. If you are using a different namespace/secret name, just substitute those into the command.
+    Edit the file, then run the command to create the `powermax-config`.
 
     ```bash
-    kubectl create secret generic powermax-config --namespace powermax --from-file=config=secret.yaml
+      oc create secret generic powermax-config --from-file=config=secret.yaml -n powermax --dry-run=client -oyaml > secret-powermax-config.yaml
+    ```
+
+    Use this command to `create` the config:
+    ```bash
+      oc apply -f secret-powermax-config.yaml
+    ```
+
+    Use this command to `replace or update` the config:
+    ```bash
+      oc replace -f secret-powermax-config.yaml --force
+    ```
+
+    Verify config secret is created.
+    ```bash
+      oc get secret -n powermax
+
+      NAME                 TYPE        DATA   AGE
+      powermax-config      Opaque      1      3h7m
     ```
 
 3. **Create Powermax Array Configmap:**  
@@ -113,7 +131,7 @@ dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      
           X_CSI_MANAGED_ARRAYS: "000000000000,000000000000,"
    ```
 
-5. Create a CR (Custom Resource) for PowerFlex using the sample files provided
+5. **Create a CR (Custom Resource)** for PowerMax using the sample files provided
 
     i. **Create a CR (Custom Resource)** for PowerMax using the sample files provided
 
@@ -168,30 +186,27 @@ Example:
    | X_CSI_REVPROXY_PORT                             | Port number where reverseproxy will listen as defined in config map                                                                                                                                                                                                      | Yes      | "2222"                         |
    | X_CSI_CONFIG_MAP_NAME                           | Name of config map as created for CSI PowerMax                                                                                                                                                                                                                           | Yes      | "powermax-reverseproxy-config" |
   {{< /collapse >}} 
-</ul>
 
   ii. **Create PowerMax custom resource**:
 
   ```bash
-  kubectl create -f <input_sample_file.yaml>
+  oc create -f <input_sample_file.yaml>
   ```
 
   This command will deploy the CSI PowerMax driver in the namespace specified in the input YAML file.
 
-  - Check driver pods **status** by running the appropriate command
-    ```bash
-    kubectl get all -n powermax
-    ```
+  Check if ContainerStorageModule CR is created successfully:
+  ```bash
+  oc get csm powermax -n powermax
+
+  NAME        CREATIONTIME   CSIDRIVERTYPE   CONFIGVERSION   STATE
+  powermax    3h             powermax        v2.13.0         Succeeded      
+  ```
+
+  Check the status of the CR to verify if the driver installation is in the `Succeeded` state. If the status is not `Succeeded`, see the [Troubleshooting guide](../troubleshooting/#my-dell-csi-driver-install-failed-how-do-i-fix-it) for more information.
 </ul> 
 
-5. **Verify the installation** as mentioned below
-
-    - Check if ContainerStorageModule CR is created successfully using the command below:
-        ```bash
-        kubectl get csm/powermax -n powermax -o yaml
-        ```
-    * Check the status of the CR to verify if the driver installation is in the `Succeeded` state. If the status is not `Succeeded`, see the [Troubleshooting guide](../troubleshooting/#my-dell-csi-driver-install-failed-how-do-i-fix-it) for more information.
-6. Refer [Volume Snapshot Class](https://github.com/dell/csi-powermax/tree/main/samples/volumesnapshotclass) and [Storage Class](https://github.com/dell/csi-powermax/tree/main/samples/storageclass) for the sample files. 
+5. Refer [Volume Snapshot Class](https://github.com/dell/csi-powermax/tree/main/samples/volumesnapshotclass) and [Storage Class](https://github.com/dell/csi-powermax/tree/main/samples/storageclass) for the sample files. 
 
 ## Other features to enable
 ### Dynamic Logging Configuration
