@@ -34,20 +34,22 @@ Supported driver and module versions offered by the Container Storage Module Ope
     ``` 
     <br>
 
-2. **Create role and assign the required permission** 
+2. **Create Group and User for CSM**  
+
+    ```bash
+    isi auth group create csmadmin --zone system
+    isi auth user create csmadmin --password "P@ssw0rd123" --primary-group csmadmin --zone system
+    ``` 
+
+3. **Create role and assign the required permission** 
 
     ```bash
     isi auth roles create CSMAdminRole --description "Dell CSM Admin Role"  --zone System
     isi auth roles modify CSMAdminRole --zone System --add-priv-read ISI_PRIV_LOGIN_PAPI --add-priv-read ISI_PRIV_IFS_RESTORE --add-priv-read ISI_PRIV_NS_IFS_ACCESS  --add-priv-read ISI_PRIV_IFS_BACKUP --add-priv-read ISI_PRIV_AUTH_ZONES --add-priv-read  ISI_PRIV_STATISTICS 
     isi auth roles modify CSMAdminRole --zone System --add-priv-write ISI_PRIV_NFS --add-priv-write ISI_PRIV_QUOTA --add-priv-write ISI_PRIV_SNAPSHOT --add-priv-write ISI_PRIV_SYNCIQ
+    isi auth roles modify CSMAdminRole --add-group csmadmin 
+
     ```
-
-3. **Create a user and add the role**  
-
-    ```bash
-    isi auth user create csmadmin --password "P@ssw0rd123"
-    isi auth roles modify CSMAdminRole --add-user csmadmin 
-    ``` 
 
 4. **Get PowerScale Array Details** 
 
@@ -85,14 +87,27 @@ Supported driver and module versions offered by the Container Storage Module Ope
       Total: 2  
       ```
 
+<br> 
+
 5. **Create the base directory for the storage class** 
     
    ```bash 
    mkdir /ifs/data/ps01/az01/csi
-   chown csmadmin:wheel /ifs/data/ps01/az01/csi
-   chmod 770 /ifs/data/ps01/az01/csi
+   chown csmadmin:csmadmin /ifs/data/ps01/az01/csi
+   chmod 755 /ifs/data/ps01/az01/csi
 
    ```
+<br> 
+
+6. Make sure all the parent directoty of the base path has permission 755 
+
+<br>
+
+7. **(optional) Create quota on the base directory** 
+
+   ```bash 
+   isi quota quotas create /ifs/data/ps01/az01/csi directory --percent-advisorythreshold=80 --percent-soft-threshold=90 --soft-grace=1d --hardthreshold=10T --include-snapshots true
+   ``` 
 
 {{< /accordion >}}
 
@@ -253,8 +268,13 @@ dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      
       driver:
         csiDriverType: "isilon"
         configVersion: {{< version-docs key="PScale_latestVersion" >}}
-    EOF 
-    ``` 
+        authSecret: isilon-config
+        common:
+          envs:
+            - name: X_CSI_ISI_AUTH_TYPE
+              value: "1"
+     EOF 
+     ``` 
     </div> 
 
     **Detailed Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powerscale_v2130.yaml) for detailed settings.
@@ -329,12 +349,15 @@ Check the status of the CR to verify if the driver installation is in the `Succe
     provisioner: csi-isilon.dellemc.com
     reclaimPolicy: Delete
     allowVolumeExpansion: true
+    IsiVolumePathPermissions: "0775"
+    mountOptions: ["vers=4"]
     parameters:  
        ClusterName: ps01
        AccessZone: ps01-az01  
        AzServiceIP: ps01-az01.example.com 
        IsiPath: /ifs/data/ps01/az01/csi 
        RootClientEnabled: "false" 
+       csi.storage.k8s.io/fstype: "nfs" 
     volumeBindingMode: Immediate
     EOF
     ```
@@ -653,6 +676,11 @@ spec:
   driver:
     csiDriverType: "isilon"
     configVersion: v2.13.0
+    authSecret: isilon-config
+    common:
+     envs:
+      - name: X_CSI_ISI_AUTH_TYPE
+        value: "1"
     sideCars:
     - name: provisioner
       args: ["--volume-name-prefix=ocp08"]
@@ -660,6 +688,38 @@ EOF
 ```  
 
 {{< /collapse >}}  
+
+{{< collapse id="3" title="Custom Network for PowerScale Export" card="false" >}}  
+
+Example:
+
+```yaml
+cat << 'EOF' > csm-isilon.yaml
+apiVersion: storage.dell.com/v1
+kind: ContainerStorageModule
+metadata:
+  name: isilon
+  namespace: isilon
+spec:
+  driver:
+    csiDriverType: "isilon"
+    configVersion: v2.13.0
+    authSecret: isilon-config
+    common:
+      envs:
+      - name: X_CSI_ISI_AUTH_TYPE
+        value: "1"
+    node:
+      envs:
+      - name: X_CSI_ALLOWED_NETWORKS
+        value: "[192.168.1.0/24]"
+    sideCars:
+    - name: provisioner
+      args: ["--volume-name-prefix=ocp08"]
+EOF
+```  
+
+{{< /collapse >}} 
 
 
 {{< /accordion >}}  

@@ -6,19 +6,15 @@ description: >
 no_list: true 
 weight: 2
 ---
-{{% pageinfo color="primary" %}}
-{{< message text="1" >}}
-{{% /pageinfo %}}
 
 
-{{< markdownify >}}
-Supported driver and module versions offered by the Container Storage Module Operator [here](../../../../../supportmatrix/#operator-compatibility-matrix)
-{{< /markdownify >}}
 
 <br>
 <br>
 
 {{< accordion id="One" title="Prerequisite" >}} 
+<br>
+{{<include  file="content/docs/getting-started/installation/openshift/powerstore/prerequisite/_index.md" >}}
 
 {{< /accordion >}}
 
@@ -87,10 +83,10 @@ dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      
     ```yaml
     cat << EOF > config.yaml
     arrays:
-      - endpoint: "https://11.0.0.1/api/rest"
-        globalID: "unique"
-        username: "user"
-        password: "password"
+      - endpoint: "https://powerstore.example.com/api/rest"
+        globalID: "PSxxxxxxxxxxxx"
+        username: "csmadmin"
+        password: "P@ssw0rd123"
         skipCertificateValidation: true
         blockProtocol: "FC"
     EOF
