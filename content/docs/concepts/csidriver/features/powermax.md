@@ -734,7 +734,7 @@ kubectl label nodes worker-2 topology.kubernetes.io/zone=zone2
 
 ### Storage Class
 
-For multiple availability zones support the StorageClass does not require details about the PowerMax array.
+When using multiple availability zones the StorageClass does not require details about the PowerMax array. The following sample shows a minimal StorageClass definition:
 
 ```yaml
 apiVersion: storage.k8s.io/v1
