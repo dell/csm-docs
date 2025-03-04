@@ -19,9 +19,9 @@ Install Helm 3 on the master node before you install CSI Driver for PowerMax.
 
   Run the command to install Helm 3.
    ```bash
-   curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash 
+   curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
    ```
-{{< accordion id="One" title="CSM Installation Wizard" markdown="true" >}}  
+{{< accordion id="One" title="CSM Installation Wizard" markdown="true" >}}
 {{<include  file="content/docs/getting-started/installation/installationwizard/helm.md" Var="powermax" hideIds="2">}}
 {{< /accordion >}}
 
@@ -31,14 +31,14 @@ Install Helm 3 on the master node before you install CSI Driver for PowerMax.
 ### Volume Snapshot Requirements (Optional)
 
 > For detailed snapshot setup procedure, [click here.](docs/concepts/snapshots/#helm-optional-volume-snapshot-requirements)
-      
+
 ## Install Driver
 
 **Steps**
 
 1. Clone the csi-powermax repository, using the latest release branch. This will include the Helm charts and dell-csi-helm-installer scripts.
     ```bash
-    git clone -b {{< version-docs key="PMax_latestVersion" >}} https://github.com/dell/csi-powermax.git  
+    git clone -b {{< version-docs key="PMax_latestVersion" >}} https://github.com/dell/csi-powermax.git
     cd ./csi-powermax
     ```
 
@@ -76,9 +76,9 @@ Install Helm 3 on the master node before you install CSI Driver for PowerMax.
         certSecret: my-unishpere-cert-secret
     ```
 
-4. Create the `powermax-config` Secret.
+4. Create the `powermax-creds` Secret.
     ```bash
-    kubectl create secret generic powermax-config --namespace powermax --from-file=config=samples/secret/secret.yaml
+    kubectl create secret generic powermax-creds --namespace powermax --from-file=config=samples/secret/secret.yaml
     ```
 
 5. Download the default values.yaml file.
@@ -97,7 +97,7 @@ Install Helm 3 on the master node before you install CSI Driver for PowerMax.
 | Parameter | Description                                                                                                                                                                                                                                                                                                                                                                     | Required   | Default  |
 |-----------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|----------|
 | **global**| This section refers to configuration options for both CSI PowerMax Driver and Reverse Proxy                                                                                                                                                                                                                                                                                     | - | - |
-| &nbsp;&nbsp; defaultCredentialsSecret | The name of the Secret, created in [installation step 3](../helm/#install-driver), used to specify PowerMax storage arrays and their login credentials. Formerly used to provide the name of the Secret containing storage admin login credentials. | Yes | powermax-config |
+| &nbsp;&nbsp; defaultCredentialsSecret | The name of the Secret, created in [installation step 3](../helm/#install-driver), used to specify PowerMax storage arrays and their login credentials. Formerly used to provide the name of the Secret containing storage admin login credentials. | Yes | powermax-creds |
 | &nbsp;&nbsp; useSecret | Defines if the reverseproxy and driver containers should use the Secret instead of the deprecated powermax-reverseproxy-config ConfigMap. If set to `true`, the contents of the Secret specified by `global.defaultCredentialsSecret` will be used, in the new format, to specify Unisphere for PowerMax endpoints, array IDs, and login credentials. If set to `false`, the deprecated powermax-reverseprpoxy-config ConfigMap will be used, and `global.defaultCredentialsSecret` will be used in the deprecated format to provide storage admin login credentials. | Yes | false |
 | &nbsp;&nbsp; ~~**storageArrays**~~ | **Deprecated**. Refer to [installation step 3](../helm/#install-driver) to configure storage arrays. <br> This section refers to the list of arrays managed by the driver and Reverse Proxy.                                                                                                                                                                                                                                                                           | - | - |
 | &nbsp;&nbsp;&nbsp;&nbsp; ~~storageArrayId~~ | **Deprecated**. Refer to [installation step 3](../helm/#install-driver) to configure storage arrays. <br> This refers to PowerMax Symmetrix ID.                                                                                                                                                                                                                                                                                                                                           | Yes | 000000000001|
@@ -178,7 +178,9 @@ Install Helm 3 on the master node before you install CSI Driver for PowerMax.
 {{< /collapse >}}
 </ul>
 
-7. Using the TLS certificate and key created in the [CSI PowerMax Reverse Proxy](../prerequisite/#csi-powermax-reverse-proxy) prerequisite step, provide the base64 encoded certificate and key contents to `csireverseproxy.certManager.certificateFile` and `csireverseproxy.certManager.privateKeyFile`.
+7. Confirm the value of `global.useSecret` is set to `true`.
+
+8. Using the TLS certificate and key created in the [CSI PowerMax Reverse Proxy](../prerequisite/#csi-powermax-reverse-proxy) prerequisite step, provide the base64 encoded certificate and key contents to `csireverseproxy.certManager.certificateFile` and `csireverseproxy.certManager.privateKeyFile`.
     ```yaml
     csireverseproxy:
       tlsSecret: csirevproxy-tls-secret
@@ -196,7 +198,7 @@ Install Helm 3 on the master node before you install CSI Driver for PowerMax.
           IHByaXZhdGUga2V5IG1pZ2h0IGxvb2sgbGlrZSBpbiBteS1wb3dlcm1heC1zZXR0aW5ncy55YW1s
           IGZpbGUK
     ```
-8. Install the driver using `csi-install.sh` bash script in the `dell-csi-helm-installer` directory by running
+9. Install the driver using `csi-install.sh` bash script in the `dell-csi-helm-installer` directory by running
     ```bash
     ./csi-install.sh --namespace powermax --values ./my-powermax-settings.yaml --helm-charts-version <version>
     ```
@@ -228,9 +230,9 @@ Starting with CSI PowerMax v1.7.0, `dell-csi-helm-installer` will not create any
 {{< /accordion >}}
 
 
-<br> 
+<br>
 
-{{< accordion id="Three" title="CSM Modules">}}  
+{{< accordion id="Three" title="CSM Modules">}}
 
 
 {{< cardcontainer >}}
@@ -240,7 +242,7 @@ Starting with CSI PowerMax v1.7.0, `dell-csi-helm-installer` will not create any
 
     {{< customcard  link1="./csm-modules/observability"   image="1" title="Observability"  >}}
 
-    {{< customcard  link1="./csm-modules/replication"  image="1" title="Replication"  >}} 
+    {{< customcard  link1="./csm-modules/replication"  image="1" title="Replication"  >}}
 
     {{< customcard link1="./csm-modules/resiliency"   image="1" title="Resiliency"  >}}
 

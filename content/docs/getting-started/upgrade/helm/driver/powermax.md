@@ -17,7 +17,7 @@ Upgrades to the CSI Driver for Dell PowerMax can be made using Helm or Dell CSM 
 ### Updating the CSI Driver to use 10.0 Unisphere
 
 1. Upgrade the Unisphere to have 10.0 endpoint support. Please find the instructions [here.](https://dl.dell.com/content/manual34878027-dell-unisphere-for-powermax-10-0-0-installation-guide.pdf?language=en-us&ps=true)
-2. Update the powermax-config secret to specify endpoints with Unisphere version 10.0 support.
+2. Update the powermax-creds secret to specify endpoints with Unisphere version 10.0 support.
 
 ## Update Driver from {{< version-docs key="PMax_preVersion" >}} to {{< version-docs key="PMax_latestVersion" >}} using Helm
 
@@ -28,17 +28,17 @@ Upgrades to the CSI Driver for Dell PowerMax can be made using Helm or Dell CSM 
    git clone -b {{< version-docs key="PMax_latestVersion" >}} https://github.com/dell/csi-powermax.git
    cd ./csi-powermax
    ```
-2. As of CSI PowerMax v2.14.0, the csi reverse proxy configuration and connectivity information has been migrated from a ConfigMap to a Secret. If the `powermax-config` secret was not previously created, reference the [CSI Driver installation steps](../../../../installation/kubernetes/powermax/helm/#install-driver) and your existing `my-powermax-settings.yaml` file to configure the new `powermax-config` Secret.
+2. As of CSI PowerMax v2.14.0, the csi reverse proxy configuration and connectivity information has been migrated from a ConfigMap to a Secret. If the `powermax-creds` secret format was not previously updated, reference the [CSI Driver installation steps](../../../../installation/kubernetes/powermax/helm/#install-driver) and your existing `my-powermax-settings.yaml` file to configure the new `powermax-creds` Secret.
    ```bash
    vi ./samples/secret/secret.yaml
    ```
-3. Create the `powermax-config` Secret.
+3. Create the `powermax-creds` Secret.
    ```bash
-   kubectl create secret generic powermax-config --namespace powermax --from-file=config=samples/secret/secret.yaml
+   kubectl create secret generic powermax-creds --namespace powermax --from-file=config=samples/secret/secret.yaml
    ```
 
 > Note: The `powermax-reverseproxy-config` ConfigMap has been deprecated as of CSI PowerMax v2.14.0 and will be removed in a future release.
-> The `powermax-reverseproxy-config` remains for backward compatibility only. Use of the `powermax-config` Secret, as outlined above, is recommended.
+> The `powermax-reverseproxy-config` remains for backward compatibility only. Use of the `powermax-creds` Secret, as outlined above, is recommended.
 > If you would like to continue using the `powemax-reverseproxy-config` ConfigMap, set `global.useSecret: false` in your helm values file, and skip the creation of this Secret.
 
 4. Download the latest helm values file and update as needed. Reference the [CSI Driver installation steps](../../../../installation/kubernetes/powermax/helm/#install-driver) for more details on the available options.
@@ -46,7 +46,10 @@ Upgrades to the CSI Driver for Dell PowerMax can be made using Helm or Dell CSM 
    cd ./dell-csi-helm-installer
    wget -O my-powermax-settings.yaml https://github.com/dell/helm-charts/raw/csi-powermax-2.14.0/charts/csi-powermax/values.yaml
    ```
-5. Run the `csi-install` script with the option _\-\-upgrade_ by running:
+
+5. Confirm the value of `global.useSecret` is set to `true` if electing to use the new secret format, and `false` otherwise.
+
+6. Run the `csi-install` script with the option _\-\-upgrade_ by running:
    ```bash
    ./csi-install.sh --namespace powermax --values ./my-powermax-settings.yaml --upgrade --helm-charts-version <version>
    ```
