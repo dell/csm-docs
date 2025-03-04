@@ -67,9 +67,10 @@ dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      
     ```
 2. **Create PowerMax credentials:**
 
-   Create a file called `secret.yaml` or pick a [sample](https://github.com/dell/csi-powermax/blob/main/samples/secret/secret.yaml) that has Powermax array connection details:
+   Create a file called `config.yaml` or pick a [sample](https://github.com/dell/csi-powermax/blob/main/samples/secret/secret.yaml).
 
     ```yaml
+    cat << EOF > config.yaml
     storageArrays:
       - storageArrayId: "000000000001"
         primaryEndpoint: https://primary-1.unisphe.re:8443
@@ -84,12 +85,13 @@ dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      
         password: password2
         skipCertificateValidation: false
         certSecret: primary-cert
+    EOF
     ```
 
     Edit the file, then run the command to create the `powermax-creds`.
 
     ```bash
-      oc create secret generic powermax-creds --from-file=config=secret.yaml -n powermax --dry-run=client -oyaml > secret-powermax-config.yaml
+      oc create secret generic powermax-creds --from-file=config=config.yaml -n powermax --dry-run=client -oyaml > secret-powermax-config.yaml
     ```
 
     Use this command to `create` the config:
@@ -103,11 +105,11 @@ dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      
     ```
 
     Verify config secret is created.
-    ```bash
+    ```terminal
       oc get secret -n powermax
 
       NAME                 TYPE        DATA   AGE
-      powermax-creds      Opaque      1      3h7m
+      powermax-creds       Opaque      1      3h7m
     ```
 
 3. **Create Powermax Array Configmap:**  

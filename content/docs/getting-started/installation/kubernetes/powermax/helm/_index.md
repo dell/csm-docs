@@ -47,13 +47,7 @@ Install Helm 3 on the master node before you install CSI Driver for PowerMax.
     kubectl create namespace powermax
     ```
 
-3. Edit the `samples/secret/secret.yaml` file, referencing the details below, to provide the necessary information for connecting the driver to the desired Unisphere instances.
-    ```bash
-    vi ./samples/secret/secret.yaml
-    ```
-
-    Example: `samples/secret/secret.yaml`
-
+3. Create a file called `secret.yaml` or pick a [sample](https://github.com/dell/csi-powermax/blob/main/samples/secret/secret.yaml) that has Powermax array connection details:
     ```yaml
     storageArrays:
       - storageArrayId: "000000000001"
@@ -78,7 +72,7 @@ Install Helm 3 on the master node before you install CSI Driver for PowerMax.
 
 4. Create the `powermax-creds` Secret.
     ```bash
-    kubectl create secret generic powermax-creds --namespace powermax --from-file=config=samples/secret/secret.yaml
+    kubectl create secret generic powermax-creds --namespace powermax --from-file=config=secret.yaml
     ```
 
 5. Download the default values.yaml file.
