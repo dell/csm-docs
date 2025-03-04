@@ -281,7 +281,7 @@ describe("GIVEN onPowermaxSecretChange function", () => {
 		document.body.innerHTML = `
 			<select id="powermax-credentials">
 				<option value="Secret" selected>Secret</option>
-				<option value="ConfigMap">Config Map</option>
+				<option value="ConfigMap">ConfigMap</option>
 			</select>
 			<div id="powermax-credentials-note-wrapper">
         `;

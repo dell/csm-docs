@@ -157,7 +157,7 @@ The Container Storage Modules for Observability Helm chart bootstraps an Observa
        kubectl get secret karavi-authorization-config proxy-server-root-certificate proxy-authz-tokens -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | sed 's/name: karavi-authorization-config/name: powermax-karavi-authorization-config/' | sed 's/name: proxy-server-root-certificate/name: powermax-proxy-server-root-certificate/' | sed 's/name: proxy-authz-tokens/name: powermax-proxy-authz-tokens/' | kubectl create -f -
        ```
 
-       **Note:** The config map approach has been deprecated as of CSI PowerMax v2.14.0 and will be removed in a future release. However, for backwards compatibility, you can still configure and use the Observability module with PowerMax driver using the config map.
+       **Note:** ConfigMaps to specify credentials is deprecated as of CSI PowerMax v2.14.0 and will be removed in a future release. However, for backwards compatibility, you can still configure and use the Observability module with PowerMax driver using the config map.
 
 
 5. Configure the [parameters](#configuration) and install the Container Storage ModuleObservability Helm Chart
