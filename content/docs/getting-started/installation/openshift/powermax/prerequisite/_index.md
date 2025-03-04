@@ -37,7 +37,8 @@ openssl x509 -req -in tls.csr -signkey tls.key -out tls.crt -days 3650 -extensio
 kubectl create secret -n <namespace> tls csirevproxy-tls-secret --cert=tls.crt --key=tls.key
 ```
 {{< tabpane text=true lang="en" >}}
-{{% tab header="Fibre Channel" lang="en" %}} 
+{{% tab header="Fibre Channel" lang="en" %}}
+
 ### Fibre Channel Requirements
 
 The following requirements must be fulfilled in order to successfully use the Fiber Channel protocol with the CSI PowerMax driver:
@@ -46,15 +47,14 @@ The following requirements must be fulfilled in order to successfully use the Fi
 - Ensure that the HBA WWNs (initiators) appear on the list of initiators that are logged into the array.
 - If the number of volumes that will be published to nodes is high, then configure the maximum number of LUNs for your HBAs on each node. See the appropriate HBA document to configure the maximum number of LUNs.
 
-
- 1. Complete the zoning of each host with the PowerMax Storage Array. Please refer the <a  href="https://elabnavigator.dell.com/vault/pdf/Linux.pdf" target="_blank" style="font-weight:bold; font-size:0.9rem">Host Connectivity Guide</a> for the guidelines when setting a Fibre Channel SAN infrastructure.  
+ 1. Complete the zoning of each host with the PowerMax Storage Array. Please refer to <a  href="https://elabnavigator.dell.com/vault/pdf/Linux.pdf" target="_blank" style="font-size:0.9rem">Host Connectivity Guide</a> for the guidelines when setting a Fibre Channel SAN infrastructure.  
  <br> 
 
- 2. Verify the initiators of each host are logged in to the PowerMax Storage Array. CSM will perform the Host Registration of each host with the PowerMax Array. 
+ 2. Verify the initiators of each host are logged in to the PowerMax Storage Array. CSM will perform the Host Registration of each host with the PowerMax Array.
 
  <br> 
 
- 3. Multipathing software configuration 
+ 3. Multipathing software configuration
      
      
      a. Configure Device Mapper MPIO for PowerMax FC connectivity
@@ -95,7 +95,8 @@ The following requirements must be fulfilled in order to successfully use the Fi
      <br>
      <br>
 
-     ```yaml 
+     ```yaml
+
      cat <<EOF> 99-workers-multipath-conf.yaml
      apiVersion: machineconfiguration.openshift.io/v1
      kind: MachineConfig
@@ -149,9 +150,6 @@ The following requirements must be fulfilled in order to successfully use the Fi
              enabled: true
      EOF
      ``` 
-
-
-
      <br>
 
 
@@ -160,12 +158,12 @@ The following requirements must be fulfilled in order to successfully use the Fi
 
 {{% tab header="iSCSI" lang="en" %}}
 
-1. Complete the iSCSI network configuration to connect the hosts with the PowerMax Storage array. Please refer the [host connectivity guide](https://elabnavigator.dell.com/vault/pdf/Linux.pdf) for the  best practices for attaching the hosts to a PowerMax storage array.  
+1. Complete the iSCSI network configuration to connect the hosts with the PowerMax Storage array. Please refer to <a  href="https://elabnavigator.dell.com/vault/pdf/Linux.pdf" target="_blank" style="font-size:0.9rem">Host Connectivity Guide</a> for the  best practices for attaching the hosts to a PowerMax storage array.  
 <br>
 2. Verify the initiators of each host are logged in to the PowerMax Storage Array. CSM will perform the Host Registration of each host with the PowerMax Array.  
 <br>
-3. Enable iSCSI service 
-<br> 
+3. Enable iSCSI service
+<br>
 
    Use this command to create the machine configuration to enable the iscsid service.
    ```bash
@@ -191,15 +189,16 @@ The following requirements must be fulfilled in order to successfully use the Fi
           units:
           - name: "iscsid.service"
             enabled: true
+    EOF
     ```
 <br>
 
-4. Multipathing software configuration 
+4. Multipathing software configuration
     
     
-   a. Configure Device Mapper MPIO for PowerMax FC connectivity 
+   a. Configure Device Mapper MPIO for PowerMax FC connectivity
 
-      Use this command to create the machine configuration to configure the DM-MPIO service on all the worker hosts for FC  connectivity.
+      Use this command to create the machine configuration to configure the DM-MPIO service on all the worker hosts for FC connectivity.
 
       ```bash 
       oc apply -f 99-workers-multipath-conf.yaml
@@ -301,7 +300,7 @@ The following requirements must be fulfilled in order to successfully use the Fi
 {{% tab header="NVMeFC" lang="en" %}}
 
 
-1. Complete the zoning of each host with the PowerMax Storage Array. Please refer the <a  href="https://elabnavigator.dell.com/vault/pdf/Linux.pdf" target="_blank" style="font-weight:bold; font-size:0.9rem">Host Connectivity Guide</a> for the guidelines when setting a Fibre Channel SAN infrastructure. 
+1. Complete the zoning of each host with the PowerMax Storage Array. Please refer to <a  href="https://elabnavigator.dell.com/vault/pdf/Linux.pdf" target="_blank" style="font-size:0.9rem">Host Connectivity Guide</a> for the guidelines when setting a Fibre Channel SAN infrastructure.
  
 <br>
 
@@ -309,12 +308,13 @@ The following requirements must be fulfilled in order to successfully use the Fi
 
 <br>
 
-3. Multipathing software configuration 
+3. Multipathing software configuration
 
 
    ```yaml 
    cat <<EOF> 71-nvmf-iopolicy-dell.rules
    ACTION=="add", SUBSYSTEM=="nvme-subsystem", ATTR{model}=="dellemc-powermax",ATTR{iopolicy}="round-robin"
+   EOF
    ``` 
    <br> 
    <br>
@@ -339,16 +339,16 @@ The following requirements must be fulfilled in order to successfully use the Fi
            filesystem: root
            mode: 420
            path: /etc/udev/rules.d/71-nvme-io-policy.rules 
-
+   EOF
    ``` 
 <br> 
 
 4. Configure NVMe reconnecting forever 
 
-
    ```yaml 
    cat <<EOF> 72-nvmf-ctrl_loss_tmo.rules
    ACTION=="add|change", SUBSYSTEM=="nvme", KERNEL=="nvme*", ATTR{ctrl_loss_tmo}="-1"
+   EOF
    ``` 
 
    <br> 
@@ -373,12 +373,13 @@ The following requirements must be fulfilled in order to successfully use the Fi
            filesystem: root
            mode: 420
            path: /etc/udev/rules.d/72-nvmf-ctrl_loss_tmo.rules
+    EOF
    ```
 
-{{% /tab %}} 
+{{% /tab %}}
 
 {{% tab header="NVMeTCP" lang="en" %}}
-{{% /tab %}} 
+{{% /tab %}}
 
 {{% tab header="NFS" lang="en" %}}
 
