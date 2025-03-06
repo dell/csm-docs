@@ -2,7 +2,7 @@
 title: "Replication"
 linkTitle: "Replication"
 weight: 6
-no_list: true 
+no_list: true
 Description: >
   Container Storage Modules (CSM) for Replication
 ---
@@ -36,8 +36,6 @@ Container Storage Modules for Replication provides the following capabilities:
 > _**NOTE**_: To add or delete PV s on an existing SYNC Replication Group in PowerStore, the user needs to pause, perform the operation and then resume the replication group. For more details, please refer to the troubleshooting section.
 
 > _**NOTE**_: To delete the last PV from a SYNC Replication Group in PowerStore, the user needs to first unassign the protection policy from the corresponding volume group on the PowerStore Manager UI. For more details, please refer to the troubleshooting section.
-
-> _**NOTE**_: Snapshot for SyncIQ replicated volumes is not supported by the CSI-PowerScale driver.
 
 ## Details
 
