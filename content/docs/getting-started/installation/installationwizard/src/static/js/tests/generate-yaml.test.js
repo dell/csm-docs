@@ -116,11 +116,14 @@ describe("GIVEN setValues function", () => {
             <input type="text" id="manage-array-id">
             <input type="text" id="manage-array-endpoint-url">
             <input type="checkbox" id="topology">
-			<input type="checkbox" id="enable-sdc">
-			<input type="checkbox" id="rename-sdc">
-			<input type="text" id="sdc-prefix" value="">
-			<input type="checkbox" id="approve-sdc">
-			<input type="checkbox" id="enable-quota">
+            <input type="checkbox" id="enable-sdc">
+            <input type="checkbox" id="rename-sdc">
+            <input type="text" id="sdc-prefix" value="">
+            <input type="checkbox" id="approve-sdc">
+            <input type="checkbox" id="enable-quota">
+            <select id="powermax-credentials">
+              <option value="Secret">Secret</option>
+            </select>
         `;
 
 		const expected = {
@@ -195,6 +198,7 @@ describe("GIVEN setValues function", () => {
 			sdcPrefix: "",
 			approveSDC: false,
 			enableQuota: false,
+      powermaxUseSecret: true,
 		};
 
 		const received = setValues(testCSMMap, CONSTANTS);
@@ -243,11 +247,14 @@ describe("GIVEN setValues function", () => {
             <input type="text" id="manage-array-endpoint-url">
             <input type="checkbox" id="topology">
             <input type="checkbox" id="leader-election">
-	    <input type="checkbox" id="enable-sdc">
-			<input type="checkbox" id="rename-sdc">
-			<input type="text" id="sdc-prefix" value="">
-			<input type="checkbox" id="approve-sdc">
-			<input type="checkbox" id="enable-quota">
+            <input type="checkbox" id="enable-sdc">
+            <input type="checkbox" id="rename-sdc">
+            <input type="text" id="sdc-prefix" value="">
+            <input type="checkbox" id="approve-sdc">
+            <input type="checkbox" id="enable-quota">
+            <select id="powermax-credentials">
+              <option value="Secret">Secret</option>
+            </select>
         `;
 
 		const expected = {
@@ -322,6 +329,7 @@ describe("GIVEN setValues function", () => {
 			sdcPrefix: "",
 			approveSDC: false,
 			enableQuota: false,
+      powermaxUseSecret: true,
 		};
 
 		const received = setValues(testCSMMap, CONSTANTS);
@@ -361,6 +369,9 @@ describe("GIVEN setValues function", () => {
             <input type="text" id="replication-helm-arrayid" value="">
             <input type="text" id="replication-helm-unisphere" value="">
             <input type="checkbox" id="leader-election">
+            <select id="powermax-credentials">
+              <option value="ConfigMap">Config Map</option>
+            </select>
         `;
 
 		const expected = {
@@ -385,7 +396,8 @@ describe("GIVEN setValues function", () => {
 			authorization: false,
 			authorizationSkipCertValidation: true,
 			certManagerEnabled: false,
-			taint: "node-role.kubernetes.io/control-plane"
+			taint: "node-role.kubernetes.io/control-plane",
+      powermaxUseSecret: false,
 		};
 
 		const received = setValues(testCSMMap, CONSTANTS);

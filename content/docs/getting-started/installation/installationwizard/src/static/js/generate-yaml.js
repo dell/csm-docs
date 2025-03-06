@@ -1,6 +1,6 @@
 /*
  *
- * Copyright © 2023 Dell Inc. or its subsidiaries. All Rights Reserved.
+ * Copyright © 2023 - 2025 Dell Inc. or its subsidiaries. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -53,6 +53,7 @@ function setValues(csmMapValues, CONSTANTS_PARAM) {
 	DriverValues.targetArrayID = document.getElementById("replication-helm-arrayid").value;
 	DriverValues.targetUnisphere = document.getElementById("replication-helm-unisphere").value || '""';
 	DriverValues.fsGroupPolicy = document.getElementById("fsGroup-Policy").value;
+	DriverValues.powermaxUseSecret = document.getElementById("powermax-credentials").value === "Secret" ? true: false;
 	DriverValues.driverNamespace = document.getElementById("driver-namespace").value;
 	DriverValues.labelValue = document.getElementById("label-value").value;
 	DriverValues.pollRate = document.getElementById("poll-rate").value;
@@ -192,6 +193,7 @@ function createYamlString(yamlTpl, yamlTplValues, driverParam, CONSTANTS_PARAM) 
 	yamlTpl = yamlTpl.replaceAll("$SDC_PREFIX", yamlTplValues.sdcPrefix);
 	yamlTpl = yamlTpl.replaceAll("$APPROVE_SDC_ENABLED", yamlTplValues.approveSDC);
 	yamlTpl = yamlTpl.replaceAll("$QUOTA_ENABLED", yamlTplValues.enableQuota);
+	yamlTpl = yamlTpl.replaceAll("$REVPROXY_USE_SECRET", yamlTplValues.powermaxUseSecret);
 
 
 	if (driverParam === CONSTANTS_PARAM.POWERSTORE) {

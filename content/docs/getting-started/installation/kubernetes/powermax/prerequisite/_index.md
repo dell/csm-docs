@@ -9,6 +9,7 @@ Description: >
 The following requirements must be met before installing the CSI Driver for PowerMax:
 
 - A Kubernetes or OpenShift cluster (see [supported versions](../../../../../concepts/csidriver/#features-and-capabilities)).
+- A PowerMax system managed by a Unisphere instance with software version 10.0 or later.
 - If enabling CSM for Authorization, please refer to the Authorization deployment steps first
 - If enabling CSM Replication, both source and target storage systems must be locally managed by Unisphere.
   - _Example_: When using two Unisphere instances, the first Unisphere instance should be configured with the source storage system as locally
@@ -444,3 +445,25 @@ The CRDs for replication can be obtained and installed from the csm-replication 
 
 CRDs should be configured during replication prepare stage with repctl as described in [install-repctl](docs/getting-started/installation/helm/modules/replication/install-repctl) 
 
+### Certificate validation for Unisphere REST API calls (Optional)
+
+As part of the CSI driver installation, the CSI driver supports an optional secret that contains the X509 certificates of the CA which signed the Unisphere SSL certificate in PEM format. This secret is mounted as a volume in the driver container.
+
+The CSI driver exposes an install parameter `skipCertificateValidation` which determines if the driver performs client-side verification of the Unisphere certificates. The `skipCertificateValidation` parameter is set to _true_ by default, and the driver does not verify the Unisphere certificates.
+
+If the `skipCertificateValidation` parameter is set to _false_ and a previous installation attempt created an empty secret, then this secret must be deleted and re-created using the CA certs.
+
+If the Unisphere certificate is self-signed or if you are using an embedded Unisphere, then perform the following steps:
+1. To fetch the certificate, run
+   ```bash
+   openssl s_client -showcerts -connect [Unisphere IP]:8443 </dev/null 2> /dev/null | openssl x509 -outform PEM > ca_cert.pem
+   ```
+
+   *NOTE*: The IP address varies for each user.
+
+2. To create the secret, run
+   ```bash
+   kubectl create secret generic primary-cert --from-file=cert=ca_cert.pem -n powermax
+   ```
+
+   *NOTE*: The above example creates a Secret with name `primary-cert`. Set this value in the `certSecret` field during CSI driver installation.
