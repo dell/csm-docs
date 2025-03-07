@@ -24,7 +24,7 @@ jobs:
      - name: Setup Hugo
        uses: peaceiris/actions-hugo@v2
        with:
-         hugo-version: "1.24"
+         hugo-version: ${{ env.HUGO_VERSION }}
          extended: true
 
      - name: Setup Go
