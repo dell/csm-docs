@@ -125,6 +125,10 @@ csi-powermax:
     managementServers:
       - endpoint: $POWERMAX_MANAGEMENT_SERVERS_ENDPOINT_URL
       - endpoint: $TARGET_UNISPHERE
+
+    portGroups: "$POWERMAX_PORT_GROUPS"
+    transportProtocol: "$NODE_TRANSPORT_PROTOCOL"
+    managedArrays: "$POWERMAX_STORAGE_ARRAY_ID"
   version: v2.12.0
   images:
     # "driver" defines the container image, used for the driver container.
