@@ -723,6 +723,8 @@ Requirements:
 - Every cluster worker node must be assigned to a zone.
 - The volumeBindingMode must be set to WaitForFirstConsumer.
 
+> **Note:** Cluster nodes that are not in a zone will not be able to access arrays that are zoned. Conversely, arrays that are unzoned will only be accessible from cluster nodes that are unzoned.
+
 With this support a single storage class can be used to provision volumes from a pool of PowerMax arrays based on topology information where each AZ has its own PowerMax array. The following represents an example of the secret showing two arrays in different availability zones:
 
 ### Secret
