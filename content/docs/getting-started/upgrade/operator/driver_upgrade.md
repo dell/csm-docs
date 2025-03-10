@@ -9,7 +9,6 @@ weight: 2
 
 You can update CSI Drivers installed by the Dell CSM Operator like any Kubernetes resource:
 
-
 1. </b>Get the driver-object details using kubectl command:</b></br> 
 
 {{< hide class="1" >}}
@@ -40,6 +39,17 @@ kubectl get csm -n powermax
 ```bash
 kubectl get csm -n unity
 ```
+{{< /hide >}} 
+
+{{< hide class="4" >}}
+   As of CSI PowerMax v2.14.0, the csi reverse proxy configuration and connectivity information has been migrated from a ConfigMap to a Secret. If the `powermax-creds` secret format was not previously updated, reference **Step 2** in [CSI Driver installation steps](../../../../installation/kubernetes/powermax/csmoperator/#install-driver).
+
+   Set the `authSecret` to the name of the secret created, `powermax-creds`. Also, set `X_CSI_REVPROXY_USE_SECRET: true` in your CSM file to use the new secret configuration.
+
+   **Note:** The `powermax-reverseproxy-config` remains for backward compatibility only. Use of the `powermax-creds` Secret, as outlined above, is recommended.
+  
+   If you would like to continue using the `powemax-reverseproxy-config` ConfigMap, set `X_CSI_REVPROXY_USE_SECRET: false` in your CSM file, and skip the creation of this Secret.
+
 {{< /hide >}} 
 
 2. Use the object name in the kubectl edit command: </br>
