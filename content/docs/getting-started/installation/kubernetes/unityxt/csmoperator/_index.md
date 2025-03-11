@@ -75,6 +75,8 @@ To deploy the Operator, follow the instructions available [here](../../../operat
 | TENANT_NAME | Tenant name added while adding host entry to the array | No |  |
 | CERT_SECRET_COUNT | Represents the number of certificate secrets, which the user is going to create for SSL authentication. (unity-cert-0..unity-cert-n). The minimum value should be 1. | false | 1 |
 | X_CSI_UNITY_SKIP_CERTIFICATE_VALIDATION | Specifies if the driver is going to validate unisphere certs while connecting to the Unisphere REST API interface.If it is set to false, then a secret unity-certs has to be created with an X.509 certificate of CA which signed the Unisphere certificate | No | true |
+| GOUNITY_DEBUG | Enable/Disable gounity library-level debugging. | No | false |
+| GOUNITY_SHOWHTTP | Enable/Disable gounity library-level REST request logging. Enabling will also **enable** GOUNITY_DEBUG regardless of GOUNITY_DEBUG setting. | No | false |
 | ***Controller parameters*** |
 | X_CSI_HEALTH_MONITOR_ENABLED | Enable/Disable health monitor of CSI volumes from Controller plugin - volume condition | No | false |
 | ***Node parameters*** |
