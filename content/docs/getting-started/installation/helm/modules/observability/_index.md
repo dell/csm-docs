@@ -513,12 +513,12 @@ If the list of storage systems managed by a Dell CSI Driver have changed, the fo
 {{< hide class="4">}}
 ##### CSI Driver for PowerMax
 
-1. Delete the current `powermax-karavi-authorization-config` secret from the CSM namespace.
+1. Delete the current `powermax-karavi-authorization-config` Secret from the CSM namespace.
    ```console
    kubectl delete secret powermax-karavi-authorization-config -n [CSM_NAMESPACE]
    ```
 
-2. Copy `powermax-karavi-authorization-config` secret from the CSI Driver for PowerMax to the CSM namespace.
+2. Copy `powermax-karavi-authorization-config` Secret from the CSI Driver for PowerMax to the CSM namespace.
    ```console
    kubectl get secret karavi-authorization-config proxy-server-root-certificate -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | sed 's/name: karavi-authorization-config/name: powermax-karavi-authorization-config/' | kubectl create -f - 
    ```
@@ -588,44 +588,23 @@ In this case all storage system requests made by Container Storage Modules Obser
 {{< hide class="4">}}
 #### CSI Driver for PowerMax
 
-1. Delete the secrets in `powermax-reverseproxy-config` configmap from the CSM namespace. 
+1. Delete the Secret `powermax-creds` from the CSM namespace.
    ```console
-   for secret in $(kubectl get configmap powermax-reverseproxy-config -n [CSM_NAMESPACE] -o jsonpath="{.data.config\.yaml}" | grep arrayCredentialSecret | awk 'BEGIN{FS=":"}{print $2}' | uniq)
-   do
-      kubectl delete secret $secret -n [CSM_NAMESPACE]
-   done
+   kubectl delete secret powermax-creds -n [CSM_NAMESPACE]
    ```
 
-2. Delete the current `powermax-reverseproxy-config` configmap from the CSM namespace.
-   ```console
-   kubectl delete configmap powermax-reverseproxy-config -n [CSM_NAMESPACE] 
-   ```
-
-3. Copy the configmap `powermax-reverseproxy-config` from the CSI Driver for PowerMax namespace to the CSM namespace.  
+2. Copy the Secret `powermax-creds` from the CSI Driver for Dell PowerMax namespace to the CSM namespace.
    
    ```console
-   kubectl get configmap powermax-reverseproxy-config -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -
+   kubectl get secret powermax-creds -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -
    ```
 
-   If the CSI driver configmap name is not the default `powermax-reverseproxy-config`, please use the following command to copy configmap:
+   If the CSI driver secret name is not the default `powermax-creds`, please use the following command to copy the secret:
 
    ```console
-   kubectl get configmap [POWERMAX-REVERSEPROXY-CONFIG] -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/name: [POWERMAX-REVERSEPROXY-CONFIG]/name: powermax-reverseproxy-config/' | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -
+   kubectl get secret [POWERMAX-CONFIG] -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/name: [POWERMAX-CONFIG]/name: powermax-config/' | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -
    ```
+   
+   **Note:** ConfigMaps to specify credentials is deprecated as of CSI PowerMax v2.14.0 and will be removed in a future release. However, for backwards compatibility, you can still configure and use the Observability module with PowerMax driver using the config map.
 
-4. Copy the secrets in `powermax-reverseproxy-config` from the CSI Driver for Dell PowerMax namespace to the CSM namespace.  
-    ```console
-    for secret in $(kubectl get configmap powermax-reverseproxy-config -n [CSI_DRIVER_NAMESPACE] -o jsonpath="{.data.config\.yaml}" | grep arrayCredentialSecret | awk 'BEGIN{FS=":"}{print $2}' | uniq)
-    do
-       kubectl get secret $secret -n [CSI_DRIVER_NAMESPACE] -o yaml | sed "s/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/" | kubectl create -f -
-    done
-    ```
-
-    If the CSI driver configmap name is not the default `powermax-reverseproxy-config`, please use the following command to copy secrets:
-    ```console
-    for secret in $(kubectl get configmap [POWERMAX-REVERSEPROXY-CONFIG] -n [CSI_DRIVER_NAMESPACE] -o jsonpath="{.data.config\.yaml}" | grep arrayCredentialSecret | awk 'BEGIN{FS=":"}{print $2}' | uniq)
-    do
-       kubectl get secret $secret -n [CSI_DRIVER_NAMESPACE] -o yaml | sed "s/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/" | kubectl create -f -
-    done
-    ```
 {{< /hide >}}
