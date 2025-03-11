@@ -712,12 +712,13 @@ This method works with both `helm` and `operator` installations for PowerMax, au
 
 ## Multiple Availability Zones
 
-Starting with CSM 1.14.0, the PowerMax CSI driver supports multiple availability zones (AZ) for block protocols. NFS is not supported at this time.
+Starting with CSM 1.14.0, the PowerMax CSI driver supports multiple availability zones (AZ) for block protocols. Availability Zones permit provisioning of volumes on storage arrays that are dedicated to a set of cluster nodes. Cluster nodes in an AZ will only access storage in the same AZ. Arrays in an AZ will not be used to provision storage to nodes which are not in the same AZ. This may be of benefit when stricter control of access to storage is needed or for disaster preparation use case.
 
-This feature supports the use of a StorageClass that is not associated with any specific PowerMax array or storage resource pool (SRP). Each cluster node must be labelled with topology labels which match the labels in the secret.
+Avaibalility Zones support the use of a single StorageClass that is not associated with any specific PowerMax array or storage resource pool (SRP). Each cluster node must be labelled with topology labels which match the labels in the secret.
 
 Requirements:
 
+- Support is limited to block storage only, NFS is not supported.
 - Only one PowerMax array per availability zone is supported.
 - Every PowerMax array must be labelled with one or more zone labels.
 - Every cluster worker node must be assigned to a zone.
@@ -727,7 +728,7 @@ Requirements:
 
 > **Note:** The initial support for Availability Zones does not include support for Metro Volumes.
 
-With this support a single storage class can be used to provision volumes from a pool of PowerMax arrays based on topology information where each AZ has its own PowerMax array. The following represents an example of the secret showing two arrays in different availability zones:
+With this support, a single storage class can be used to provision volumes from a pool of PowerMax arrays based on topology information, where each AZ has its own PowerMax array. The following represents an example of the secret showing two arrays in different availability zones:
 
 ### Secret
 
