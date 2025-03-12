@@ -160,9 +160,9 @@ csi-powermax:
     podmon:
       image: quay.io/dell/container-storage-modules/podmon:v1.13.0
     # Node rescan sidecar does a rescan on nodes for identifying new paths
-    # Default value: quay.io/dell/container-storage-modules/dell-csi-node-rescanner:v1.4.0
+    # Default value: quay.io/dell/container-storage-modules/dell-csi-node-rescanner:v1.7.0
     noderescan:
-      image: quay.io/dell/container-storage-modules/dell-csi-node-rescanner:v1.4.0
+      image: quay.io/dell/container-storage-modules/dell-csi-node-rescanner:v1.7.0
   clusterPrefix: $POWERMAX_CLUSTER_PREFIX
   fsGroupPolicy: "$FSGROUP_POLICY"
   maxPowerMaxVolumesPerNode: $MAX_VOLUMES_PER_NODE
