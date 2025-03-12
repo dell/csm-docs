@@ -30,24 +30,11 @@ Accordingly,Resiliency is adapted to and qualified with each CSI driver it is to
 Container Storage Modules for Resiliency provides the following capabilities:
 
 {{<table "table table-striped table-bordered table-sm">}}
-| Capability                              | PowerStore | PowerMax | PowerFlex | PowerScale | UnityXT |
-| --------------------------------------- | :--------: | :------: | :--------: | :-------: | :------: |
-| Detect pod failures when: Node failure, K8S Control Plane Network failure, K8S Control Plane failure, Array I/O Network failure | yes  | yes | yes | yes | yes |
-| Cleanup pod artifacts from failed nodes | yes         | yes   | yes         | yes       | yes       |
-| Revoke PV access from failed nodes      | yes         | yes   | yes         | yes       | yes       |
-{{</table>}}
-
-## Supported CSI Drivers
-
-Container Storage Modules for Resiliency supports the following CSI drivers and versions.
-{{<table "table table-striped table-bordered table-sm">}}
-| Storage Array                     |  Supported Versions |
-| --------------------------------- | :----------------: |
-| CSI Driver for PowerFlex  |  v2.0.0 +|
-| CSI Driver for Unity XT   | v2.0.0 + |
-| CSI Driver for PowerScale | v2.3.0 + |
-| CSI Driver for PowerStore | v2.6.0 + |
-| CSI Driver for PowerMax   | v2.11.0 +|
+| Capability                              | PowerStore | PowerScale | PowerFlex |  PowerMax | UnityXT |
+| --------------------------------------- | :--------: | :------: | :--------: | :-------:  | :------: |
+| <div style="text-align: left"> Detect pod failures when: Node failure, K8S Control Plane Network failure, </br> K8S Control Plane failure, Array I/O Network failure | Yes  | Yes | Yes | Yes | Yes |
+| <div style="text-align: left"> Cleanup pod artifacts from failed nodes | Yes         | Yes   | Yes         | Yes       | Yes       |
+| <div style="text-align: left"> Revoke PV access from failed nodes      | Yes         | Yes   | Yes         | Yes       | Yes       |
 {{</table>}}
 
 ## PowerFlex Support

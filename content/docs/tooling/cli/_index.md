@@ -7,32 +7,33 @@ Description: >
 ---
 dellctl is a common command line interface(CLI) used to interact with and manage your [Container Storage Modules](https://github.com/dell/csm) (CSM) resources.
 This document outlines all dellctl commands, their intended use, options that can be provided to alter their execution, and expected output from those commands.
-
+{{<table "table table-striped table-bordered table-sm tdleft">}}
 | Command | Description |
 | - | - |
-| [dellctl](#dellctl) | dellctl is used to interact with Container Storage Modules |
-| [dellctl cluster](#dellctl-cluster) | Manipulate one or more k8s cluster configurations |
-| [dellctl cluster add](#dellctl-cluster-add) | Add a k8s cluster to be managed by dellctl |
-| [dellctl cluster remove](#dellctl-cluster-remove) | Removes a k8s cluster managed by dellctl |
-| [dellctl cluster get](#dellctl-cluster-get) | List all clusters currently being managed by dellctl |
-| [dellctl backup](#dellctl-backup) | Allows you to manipulate application backups/clones |
-| [dellctl backup create](#dellctl-backup-create) | Create an application backup/clones |
-| [dellctl backup delete](#dellctl-backup-delete) | Delete application backups |
-| [dellctl backup get](#dellctl-backup-get) | Get application backups |
-| [dellctl restore](#dellctl-restore) | Allows you to manipulate application restores |
-| [dellctl restore create](#dellctl-restore-create) | Restore an application backup |
-| [dellctl restore delete](#dellctl-restore-delete) | Delete application restores |
-| [dellctl restore get](#dellctl-restore-get) | Get application restores |
-| [dellctl schedule](#dellctl-schedule) | Allows you to manipulate schedules |
-| [dellctl schedule create](#dellctl-schedule-create) | Create a schedule |
-| [dellctl schedule create for-backup](#dellctl-schedule-create-for-backup) | Create a schedule for application backups |
-| [dellctl schedule delete](#dellctl-schedule-delete) | Delete schedules |
-| [dellctl schedule get](#dellctl-schedule-get) | Get schedules |
-| [dellctl images](#dellctl-images) | List the container images needed by csi driver |
-| [dellctl volume get](#dellctl-volume-get) | Gets driver volume information for a given tenant on a local cluster |
-| [dellctl snapshot get](#dellctl-snapshot-get) | Gets driver snapshot information for a given tenant on a local cluster |
-| [dellctl admin token](#dellctl-admin-token) | Generate an administrator token for administrating CSM Authorization v2 |
-| [dellctl generate token](#dellctl-generate-token) | Generate a tenant token for configuring a Dell CSI Driver with CSM Authorization v2 |
+| [dellctl](../cli/#dellctl) | dellctl is used to interact with Container Storage Modules |
+| [dellctl cluster](../cli/#dellctl-cluster) | Manipulate one or more k8s cluster configurations |
+| [dellctl cluster add](../cli/#dellctl-cluster-add) | Add a k8s cluster to be managed by dellctl |
+| [dellctl cluster remove](../cli/#dellctl-cluster-remove) | Removes a k8s cluster managed by dellctl |
+| [dellctl cluster get](../cli/#dellctl-cluster-get) | List all clusters currently being managed by dellctl |
+| [dellctl backup](../cli/#dellctl-backup) | Allows you to manipulate application backups/clones |
+| [dellctl backup create](../cli/#dellctl-backup-create) | Create an application backup/clones |
+| [dellctl backup delete](../cli/#dellctl-backup-delete) | Delete application backups |
+| [dellctl backup get](../cli/#dellctl-backup-get) | Get application backups |
+| [dellctl restore](../cli/#dellctl-restore) | Allows you to manipulate application restores |
+| [dellctl restore create](../cli/#dellctl-restore-create) | Restore an application backup |
+| [dellctl restore delete](../cli/#dellctl-restore-delete) | Delete application restores |
+| [dellctl restore get](../cli/#dellctl-restore-get) | Get application restores |
+| [dellctl schedule](../cli/#dellctl-schedule) | Allows you to manipulate schedules |
+| [dellctl schedule create](../cli/#dellctl-schedule-create) | Create a schedule |
+| [dellctl schedule create for-backup](../cli/#dellctl-schedule-create-for-backup) | Create a schedule for application backups |
+| [dellctl schedule delete](../cli/#dellctl-schedule-delete) | Delete schedules |
+| [dellctl schedule get](../cli/#dellctl-schedule-get) | Get schedules |
+| [dellctl images](../cli/#dellctl-images) | List the container images needed by csi driver |
+| [dellctl volume get](../cli/#dellctl-volume-get) | Gets driver volume information for a given tenant on a local cluster |
+| [dellctl snapshot get](../cli/#dellctl-snapshot-get) | Gets driver snapshot information for a given tenant on a local cluster |
+| [dellctl admin token](../cli/#dellctl-admin-token) | Generate an administrator token for administrating CSM Authorization v2 |
+| [dellctl generate token](../cli/#dellctl-generate-token) | Generate a tenant token for configuring a Dell CSI Driver with CSM Authorization v2 |
+{{</table>}}
 
 ## Installation instructions
 

@@ -37,17 +37,17 @@ Supported driver and module versions offered by the Container Storage Module Ope
 2. **Create Group and User for CSM**  
 
     ```bash
-    isi auth group create csmadmin --zone system
-    isi auth user create csmadmin --password "P@ssw0rd123" --primary-group csmadmin --zone system
+    isi auth group create csmadmins --zone system
+    isi auth user create csmadmin --password "P@ssw0rd123" --primary-group csmadmins --zone system
     ``` 
 
 3. **Create role and assign the required permission** 
 
     ```bash
     isi auth roles create CSMAdminRole --description "Dell CSM Admin Role"  --zone System
-    isi auth roles modify CSMAdminRole --zone System --add-priv-read ISI_PRIV_LOGIN_PAPI --add-priv-read ISI_PRIV_IFS_RESTORE --add-priv-read ISI_PRIV_NS_IFS_ACCESS  --add-priv-read ISI_PRIV_IFS_BACKUP --add-priv-read ISI_PRIV_AUTH_ZONES --add-priv-read  ISI_PRIV_STATISTICS 
+    isi auth roles modify CSMAdminRole --zone System --add-priv-read ISI_PRIV_LOGIN_PAPI --add-priv-read ISI_PRIV_IFS_RESTORE --add-priv-read ISI_PRIV_NS_IFS_ACCESS  --add-priv-read ISI_PRIV_IFS_BACKUP --add-priv-read ISI_PRIV_AUTH --add-priv-read ISI_PRIV_AUTH_ZONES --add-priv-read  ISI_PRIV_STATISTICS
     isi auth roles modify CSMAdminRole --zone System --add-priv-write ISI_PRIV_NFS --add-priv-write ISI_PRIV_QUOTA --add-priv-write ISI_PRIV_SNAPSHOT --add-priv-write ISI_PRIV_SYNCIQ
-    isi auth roles modify CSMAdminRole --add-group csmadmin 
+    isi auth roles modify CSMAdminRole --add-group csmadmins
 
     ```
 
@@ -93,7 +93,7 @@ Supported driver and module versions offered by the Container Storage Module Ope
     
    ```bash 
    mkdir /ifs/data/ps01/az01/csi
-   chown csmadmin:csmadmin /ifs/data/ps01/az01/csi
+   chown csmadmin:csmadmins /ifs/data/ps01/az01/csi
    chmod 755 /ifs/data/ps01/az01/csi
 
    ```
@@ -106,7 +106,7 @@ Supported driver and module versions offered by the Container Storage Module Ope
 7. **(optional) Create quota on the base directory** 
 
    ```bash 
-   isi quota quotas create /ifs/data/ps01/az01/csi directory --percent-advisorythreshold=80 --percent-soft-threshold=90 --soft-grace=1d --hardthreshold=10T --include-snapshots true
+   isi quota quotas create /ifs/data/ps01/az01/csi directory --percent-advisory-threshold 80 --percent-soft-threshold 90 --soft-grace 1D --hard-threshold 100G --include-snapshots true
    ``` 
 
 {{< /accordion >}}

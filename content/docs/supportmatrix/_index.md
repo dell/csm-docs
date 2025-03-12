@@ -11,12 +11,11 @@ weight: 1
 {{<table "table table-striped table-bordered table-sm tdleft">}}
 | Platform | Version | OS Dependencies |
 | -------- | :-----: | :-------------: |
-| PowerMax  |Unisphere 10.0,10.0.1,10.1,10.2 | iscsi-initiator-utils<br>multipathd or powerpath<br>nvme-cli<br>nfs-utils |
-| PowerFlex   | 3.6.x, 4.5.x, 4.6.x | [SDC](https://www.dell.com/support/home/en-us/product-support/product/scaleio/drivers) |
-| Unity XT    | 5.2.x, 5.3.x, 5.4.x | iscsi-initiator-utils<br>multipathd<br>nfs-utils |
-| PowerScale  | OneFS 9.4, 9.5.0.x (x >= 5), 9.7, 9.8, 9.9, 9.10 | nfs-utils |
 | PowerStore  |  3.5, 3.6, 4.0, 4.1 | iscsi-initiator-utils<br>multipathd<br>nvme-cli<br>nfs-utils |
-| ObjectScale |  1.2.x | - |
+| PowerScale  | OneFS 9.4, 9.5.0.x (x >= 5), 9.7, 9.8, 9.9, 9.10 | nfs-utils |
+| PowerFlex   | 3.6.x, 4.5.x, 4.6.x | [SDC](https://www.dell.com/support/home/en-us/product-support/product/scaleio/drivers) |
+| PowerMax  |Unisphere 10.0,10.0.1,10.1,10.2 | iscsi-initiator-utils<br>multipathd or powerpath<br>nvme-cli<br>nfs-utils |
+| Unity XT    | 5.2.x, 5.3.x, 5.4.x | iscsi-initiator-utils<br>multipathd<br>nfs-utils |
 {{</table>}}
 
 **Notes:**
@@ -43,11 +42,11 @@ weight: 1
 ## OpenShift Virtualization
 
 {{<table "table table-striped table-bordered table-sm">}}
-| Version | Capability               | PowerFlex | PowerMax | PowerStore | PowerScale | Unity |
+| Version | Capability               | PowerStore | PowerScale | PowerFlex| PowerMax | Unity |
 |---------|--------------------------| :-------: | :------: | :--------: | :--------: | :---: |
 | 4.17    |  <div style="text-align: left"> [Storage](https://github.com/kiagnose/kubevirt-storage-checkup) </div> | Yes       | Yes      | Yes        | Yes        | No    |
-| 4.17    | <div style="text-align: left">  Observability        </div>   | Yes       | Yes      | No         | Yes        | No    |
-| 4.17    | <div style="text-align: left"> Authorization - v2.x  </div>   | Yes       | Yes      | No         | Yes        | No    |
+| 4.17    | <div style="text-align: left">  Observability        </div>   | No       | Yes      | Yes         | Yes        | No    |
+| 4.17    | <div style="text-align: left"> Authorization - v2.x  </div>   | No       | Yes      | Yes         | Yes        | No    |
 {{</table>}}
 
 ## Operating Systems
@@ -67,9 +66,9 @@ Container Storage Modules doesn't officially support specific operating systems,
 {{<table "table table-striped table-bordered table-sm">}}
 | CSI Driver         |  Authorization v1|  Authorization v2 | Replication | Observability | Resiliency | Application Mobility|
 | ------------------ |------------------| --------------- |-----------------|-------------------|----------------|------|
+| PowerStore         |  No      |   No              |  Yes              | Yes                 |    Yes     |No|
 | PowerScale         |  Yes     |   Yes             |  Yes              | Yes                 |    Yes     |No|
 | PowerFlex          |  Yes     |   Yes             |  Yes              | Yes                 |    Yes     |No|
-| PowerStore         |  No      |   No              |  Yes              | Yes                 |    Yes     |No|
 | PowerMax           |  Yes     |   Yes             |  Yes              | Yes                 |    Yes     |Yes|
 | Unity XT           |  No      |   No              |  No               | No                  |    Yes     |No|
 {{</table>}}
@@ -78,9 +77,9 @@ Container Storage Modules doesn't officially support specific operating systems,
 {{<table "table table-striped table-bordered table-sm">}}
 | CSI Driver         |  Authorization v1|  Authorization v2 | Replication | Observability | Resiliency |
 | ------------------ |------------------| --------------|-----------------|-------------------|----------------|
+| PowerStore         |  No      |   No              |  No               | No                  |    Yes     |
 | PowerScale         |  Yes     |   Yes             |  Yes              | Yes                 |    Yes     |
 | PowerFlex          |  Yes     |   Yes             |  Yes              | Yes                 |    Yes     |
-| PowerStore         |  No      |   No              |  No               | No                  |    Yes     |
 | PowerMax           |  Yes     |   Yes             |  Yes              | Yes                 |    Yes     |
 | Unity XT           |  No      |   No              |  No               | No                  |    No      |
 {{</table>}}
@@ -106,9 +105,9 @@ Container Storage Modules doesn't officially support specific operating systems,
 | CSI Driver         |     Helm   | Operator  |
 | ------------------ |  ------ | --------- |
 |  PowerStore     | Yes️      |Yes️        |
-|  PowerMax       | Yes️      |Yes️        |
-|  PowerFlex      | Yes️      |No         |
 |  PowerScale     | Yes️      |Yes️        |
+|  PowerFlex      | Yes️      |No         |
+|  PowerMax       | Yes️      |Yes️        |
 |  Unity XT       | Yes️      |No         |
 {{</table>}}
 
