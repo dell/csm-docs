@@ -29,9 +29,11 @@ The following diagram shows a high-level overview of Container Storage Modules f
 **NOTE:** PowerScale OneFS implements its own form of Role-Based Access Control (RBAC). Authorization does not enforce any role-based restrictions for PowerScale. To configure RBAC for PowerScale, refer to the PowerScale OneFS [documentation](https://www.dell.com/support/home/en-us/product-support/product/isilon-onefs/docs).
 
 ## Authorization Components Support Matrix
-Authorization consists of 2 components - The authorization sidecar, bundled with the driver, communicates with the Authorization proxy server to validate access to Storage platforms. We highly recommend that customers install or upgrade the Authorization proxy server and sidecar from the same release of CSM. This practice helps ensure optimal performance and compatibility, avoiding potential issues from version discrepancies.
+Authorization consists of two main components - the Authorization Sidecar, bundled with the driver, which forwards requests to the Authorization proxy server, and the Authorization Proxy Server, which validates access to Storage platforms.
 
-**NOTE:** If the deployed CSI driver has a number of controller pods equal to the number of schedule nodes in your cluster, Authorization may not be able to inject properly into the driver's controller pod.
+We highly recommend that customers install or upgrade the Authorization proxy server and sidecar from the same release of CSM. This practice helps ensure optimal performance and compatibility, avoiding potential issues from version discrepancies.
+
+**NOTE:** If the number of controller pods deployed by the CSI driver matches the number of scheduled nodes in your cluster, Authorization may not be able to inject properly into the driver's controller pod.
 To resolve this, please refer to our [troubleshooting guide](./troubleshooting) on the topic.
 
 ## Roles and Responsibilities
