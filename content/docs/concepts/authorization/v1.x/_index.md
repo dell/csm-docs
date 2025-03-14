@@ -1,7 +1,7 @@
 ---
 title: Authorization - v1.x
 linktitle: v1.x
-weight: 4 
+weight: 4
 no_list: true
 Description: >
   Container Storage Modules (CSM) for Authorization v1.x.
@@ -10,7 +10,7 @@ tags:
 ---
 
 {{% pageinfo color="primary" %}}
-{{< message text="5" >}} 
+{{< message text="5" >}}
 {{% /pageinfo %}}
 
 The following diagram shows a high-level overview of Container Storage Modules for Authorization with a `tenant-app` that is using a CSI driver to perform storage operations through the Authorization `proxy-server` to access the a Dell storage system. All requests from the CSI driver will contain the token for the given tenant that was granted by the Storage Administrator.
@@ -29,9 +29,11 @@ The following diagram shows a high-level overview of Container Storage Modules f
 **NOTE:** PowerScale OneFS implements its own form of Role-Based Access Control (RBAC). Authorization does not enforce any role-based restrictions for PowerScale. To configure RBAC for PowerScale, refer to the PowerScale OneFS [documentation](https://www.dell.com/support/home/en-us/product-support/product/isilon-onefs/docs).
 
 ## Authorization Components Support Matrix
-Authorization consists of 2 components - The authorization sidecar, bundled with the driver, communicates with the Authorization proxy server to validate access to Storage platforms. The authorization sidecar is backward compatible with older Authorization proxy server versions. However, it is highly recommended to have the Authorization proxy server and sidecar installed from the same release of Container Storage Modules.
+Authorization consists of two main components - the Authorization Sidecar and the Authorization Proxy Server. The Authorization Sidecar is bundled with the CSI driver, and the Authorization Proxy Server validates access to storage platforms.
 
-**NOTE:** If the deployed CSI driver has a number of controller pods equal to the number of schedule nodes in your cluster, Authorization may not be able to inject properly into the driver's controller pod.
+Users should always install or upgrade the Authorization proxy server and sidecar from the same release. This practice helps ensure optimal performance and compatibility, avoiding potential issues from version discrepancies.
+
+**NOTE:** If the number of controller pods deployed by the CSI driver matches the number of scheduled nodes in your cluster, Authorization may not be able to inject properly into the driver's controller pod.
 To resolve this, please refer to our [troubleshooting guide](./troubleshooting) on the topic.
 
 ## Roles and Responsibilities
