@@ -31,7 +31,7 @@ The following diagram shows a high-level overview of Container Storage Modules f
 ## Authorization Components Support Matrix
 Authorization consists of two main components - the Authorization Sidecar, bundled with the driver, which forwards requests to the Authorization proxy server, and the Authorization Proxy Server, which validates access to Storage platforms.
 
-We highly recommend that customers install or upgrade the Authorization proxy server and sidecar from the same release of CSM. This practice helps ensure optimal performance and compatibility, avoiding potential issues from version discrepancies.
+Customers should always install or upgrade the Authorization proxy server and sidecar from the same release of CSM. This practice helps ensure optimal performance and compatibility, avoiding potential issues from version discrepancies.
 
 **NOTE:** If the number of controller pods deployed by the CSI driver matches the number of scheduled nodes in your cluster, Authorization may not be able to inject properly into the driver's controller pod.
 To resolve this, please refer to our [troubleshooting guide](./troubleshooting) on the topic.
