@@ -89,7 +89,6 @@ To deploy the Operator, follow the instructions available [here](../../#installa
    | **vault** | This section configures the vault components. | - | - |
    | vaultAddress | The address where vault is hosted with the credentials to the array (`https://10.0.0.1:<port>`). | Yes | - |
    | vaultRole | The configured authentication role in vault. | Yes | csm-authorization |
-   | kvEnginePath | The vault path where the credentials are stored. | Yes | secret |
    | certificate | The base64-encoded certificate for the certificate/private-key pair to connect to Vault. Leave empty to use self-signed certificate. | No | - |
    | privateKey | The base64-encoded private key for the certificate/private-key pair to connect to Vault. Leave empty to use self-signed certificate. | No | - |
    | certificateAuthority | The base64-encoded certificate authority for validating the Vault server. | No | - |
