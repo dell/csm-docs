@@ -38,7 +38,7 @@ Supported driver and module versions offered by the Container Storage Module Ope
 
     ```bash
     isi auth group create csmadmins --zone system
-    isi auth user create csmadmin --password "P@ssw0rd123" --primary-group csmadmins --zone system
+    isi auth user create csmadmin --password "P@ssw0rd123" --password-expires false --primary-group csmadmins --zone system
     ``` 
 
 3. **Create role and assign the required permission** 
@@ -324,7 +324,6 @@ NAME        CREATIONTIME   CSIDRIVERTYPE   CONFIGVERSION    STATE
 isilon      3h             isilon          {{< version-docs key="PScale_latestVersion" >}}          Succeeded      
 ```
 
-Check the status of the CR to verify if the driver installation is in the `Succeeded` state. If the status is not `Succeeded`, see the [Troubleshooting guide](../troubleshooting/#my-dell-csi-driver-install-failed-how-do-i-fix-it) for more information.
 </ul>
 
 <br>
