@@ -269,11 +269,9 @@ Before you install CSI Driver for Unity XT, verify the requirements that are men
 <!--
 The CSI Driver for Unity XT supports iSCSI connectivity.
 
-If you use the iSCSI protocol, set up the iSCSI initiators as follows:
-- Ensure that each Kubernetes worker node has network connectivity to an iSCSI port on the Unity XT array, allowing access via IP interfaces. Manually create the necessary IP routes.
-- Ensure that the necessary iSCSI initiator utilities are installed on each Kubernetes worker node. This typically includes the _iscsi-initiator-utils_ package for RHEL or _open-iscsi_ package for Ubuntu.
-- Enable and start the _iscsid_ service on each Kubernetes worker node. This service is responsible for managing the iSCSI initiator. You can enable the service by running the following command on all worker nodes: `systemctl enable --now iscsid`
-- Ensure that the unique initiator name is set in _/etc/iscsi/initiatorname.iscsi_.
+3. Multipathing software configuration
+        
+    a. Configure Device Mapper MPIO for Unity FC connectivity
 
 For more information about configuring iSCSI, see [Dell Host Connectivity guide](https://www.delltechnologies.com/asset/en-us/products/storage/technical-support/docu5128.pdf). 
 -->

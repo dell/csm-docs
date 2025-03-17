@@ -642,80 +642,57 @@ dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      
 ### Install Driver
 
 1. **Create namespace:** 
-
-   Run `kubectl create namespace <driver-namespace>` using the desired name to create the namespace.
+    ```bash
+      oc create namespace powermax
+    ```
 2. **Create PowerMax credentials:**
 
-   Create a file called powermax-creds.yaml or pick a [sample](https://github.com/dell/csi-powermax/blob/main/samples/secret/secret.yaml) that has Powermax array connection details :
-     ```yaml
-        apiVersion: v1
-        kind: Secret
-        metadata:
-          name: powermax-creds
-            # Replace driver-namespace with the namespace where driver is being deployed
-          namespace: <driver-namespace>
-        type: Opaque
-        data:
-          # set username to the base64 encoded username
-          username: <base64 username>
-          # set password to the base64 encoded password
-          password: <base64 password>
-          # Uncomment the following key if you wish to use ISCSI CHAP authentication (v1.3.0 onwards)
-          # chapsecret: <base64 CHAP secret>
-     ```
-   Replace the values for the username and password parameters. These values can be obtained using base64 encoding as described in the following example:
-   ```BASH
-   echo -n "myusername" | base64
-   echo -n "mypassword" | base64
-   # If mychapsecret is the iSCSI CHAP secret
-   echo -n "mychapsecret" | base64
+   Create a file called `config.yaml` or pick a [sample](https://github.com/dell/csi-powermax/blob/main/samples/secret/secret.yaml).
 
-   ```
-   Run the `kubectl create -f powermax-creds.yaml` command to create the secret.
-
-3. **Create Reverseproxy Configmap:** 
-
-    Create a configmap using sample [here](https://github.com/dell/csm-operator/tree/master/samples/csireverseproxy/config.yaml). Fill in the appropriate values for driver configuration.
-    Example: config.yaml
     ```yaml
-    port: 2222 # Port on which reverseproxy will listen
-    logLevel: debug
-    logFormat: text
-    config:
-      storageArrays:
-          - storageArrayId: "000000000001" # arrayID
-            primaryURL: https://primary-1.unisphe.re:8443 # primary unisphere for arrayID
-            backupURL: https://backup-1.unisphe.re:8443   # backup unisphere for arrayID
-            proxyCredentialSecrets:
-              - primary-unisphere-secret-1 # credential secret for primary unisphere, e.g., powermax-creds
-              - backup-unisphere-secret-1 # credential secret for backup unisphere, e.g., powermax-creds
-          - storageArrayId: "000000000002"
-            primaryURL: https://primary-2.unisphe.re:8443
-            backupURL: https://backup-2.unisphe.re:8443
-            proxyCredentialSecrets:
-            - primary-unisphere-secret-2
-            - backup-unisphere-secret-2
-      managementServers:
-        - url: https://primary-1.unisphe.re:8443 # primary unisphere endpoint
-          arrayCredentialSecret: primary-unisphere-secret-1 # primary credential secret e.g., powermax-creds
-          skipCertificateValidation: true
-        - url: https://backup-1.unisphe.re:8443 # backup unisphere endpoint
-          arrayCredentialSecret: backup-unisphere-secret-1 # backup credential secret e.g., powermax-creds
-          skipCertificateValidation: false # value false, to verify unisphere certificate and provide certSecret
-          certSecret: primary-certs # unisphere verification certificate
-        - url: https://primary-2.unisphe.re:8443
-          arrayCredentialSecret: primary-unisphere-secret-2
-          skipCertificateValidation: true
-        - url: https://backup-2.unisphe.re:8443
-          arrayCredentialSecret: backup-unisphere-secret-2
-          skipCertificateValidation: false
-          certSecret: primary-certs
+    cat << EOF > config.yaml
+    storageArrays:
+      - storageArrayId: "000000000001"
+        primaryEndpoint: https://primary-1.unisphe.re:8443
+        backupEndpoint: https://backup-1.unisphe.re:8443
+    managementServers:
+      - endpoint: https://primary-1.unisphe.re:8443
+        username: admin
+        password: password
+        skipCertificateValidation: true
+      - endpoint: https://backup-1.unisphe.re:8443
+        username: admin2
+        password: password2
+        skipCertificateValidation: false
+        certSecret: primary-cert
+    EOF
     ```
-    After editing the file, run this command to create a secret called `powermax-reverseproxy-config`. If you are using a different namespace/secret name, just substitute those into the command.
-      ```bash
-      kubectl create configmap powermax-reverseproxy-config --from-file config.yaml -n powermax
-      ```
-4. **Create Powermax Array Configmap:**  
+
+    Edit the file, then run the command to create the `powermax-creds`.
+
+    ```bash
+      oc create secret generic powermax-creds --from-file=config=config.yaml -n powermax --dry-run=client -oyaml > secret-powermax-config.yaml
+    ```
+
+    Use this command to `create` the config:
+    ```bash
+      oc apply -f secret-powermax-config.yaml
+    ```
+
+    Use this command to `replace or update` the config:
+    ```bash
+      oc replace -f secret-powermax-config.yaml --force
+    ```
+
+    Verify config secret is created.
+    ```terminal
+      oc get secret -n powermax
+
+      NAME                 TYPE        DATA   AGE
+      powermax-creds       Opaque      1      3h7m
+    ```
+
+3. **Create Powermax Array Configmap:**  
   Create a configmap using the sample file [here](https://github.com/dell/csi-powermax/blob/main/samples/configmap/powermax-array-config.yaml). Fill in the appropriate values for driver configuration.
    ```yaml
       # To create this configmap use: kubectl create -f powermax-array-config.yaml
@@ -736,7 +713,7 @@ dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      
           X_CSI_MANAGED_ARRAYS: "000000000000,000000000000,"
    ```
 
-5. Create a CR (Custom Resource) for PowerFlex using the sample files provided
+5. **Create a CR (Custom Resource)** for PowerMax using the sample files provided
 
     a. **Default Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/main/samples/minimal-samples/powermax_v2130.yaml) for default settings. Modify if needed.
 
@@ -760,7 +737,7 @@ Example:
       value: "self"
 ```
 
-6. Users should configure the parameters in CR. The following table lists the primary configurable parameters of the PowerMax driver and their default values:
+  - Users should configure the parameters in CR. The following table lists the primary configurable parameters of the PowerMax driver and their default values:
 
 <ul>
 {{< collapse id="1" title="Parameters">}}
@@ -772,7 +749,7 @@ Example:
    | ***Common parameters for node and controller*** |                                                                                                                                                                                                                                                                          |          |                                |
    | X_CSI_K8S_CLUSTER_PREFIX                        | Define a prefix that is appended to all resources created in the array; unique per K8s/CSI deployment; max length - 3 characters                                                                                                                                         | No      | CSM                            |
    | X_CSI_POWERMAX_PROXY_SERVICE_NAME               | Name of CSI PowerMax ReverseProxy service.                                                                                                                                                                                                                               | Yes      | csipowermax-reverseproxy       |
-   | X_CSI_IG_MODIFY_HOSTNAME                        | Change any existing host names. When nodenametemplate is set, it changes the name to the specified format else it uses driver default host name format.                                                                                                                  | No       | false                          |
+   | X_CSI_IG_MODIFY_HOSTNAME                        | Change any existing host names. When node name template is set, it changes the name to the specified format else it uses driver default host name format.                                                                                                                  | No       | false                          |
    | X_CSI_IG_NODENAME_TEMPLATE                      | Provide a template for the CSI driver to use while creating the Host/IG on the array for the nodes in the cluster. It is of the format a-b-c-%foo%-xyz where foo will be replaced by host name of each node in the cluster.                                              | No       | -                              |
    | X_CSI_POWERMAX_DRIVER_NAME                      | Set custom CSI driver name. For more details on this feature see the related [documentation](../../../../../concepts/csidriver/features/powermax/#custom-driver-name)                                                                                                                             | No       | -                              |
    | X_CSI_HEALTH_MONITOR_ENABLED                    | Enable/Disable health monitor of CSI volumes from Controller and Node plugin. Provides details of volume status, usage and volume condition. As a prerequisite, external-health-monitor sidecar section should be uncommented in samples which would install the sidecar | No       | false                          |
@@ -780,6 +757,7 @@ Example:
    | X_CSI_VSPHERE_PORTGROUP                         | Existing portGroup that driver will use for vSphere                                                                                                                                                                                                                      | Yes      | ""                             |
    | X_CSI_VSPHERE_HOSTNAME                          | Existing host(initiator group)/host group(cascaded initiator group) that driver will use for vSphere                                                                                                                                                                     | Yes      | ""                             |
    | X_CSI_VCenter_HOST                              | URL/endpoint of the vCenter where all the ESX are present                                                                                                                                                                                                                | Yes      | ""                             |
+   | X_CSI_REVPROXY_USE_SECRET | Define whether or not to use the new secret format for the PowerMax and the Reverse Proxy. The secret format will be determined by the contents of the secret specified in the `authSecret`. **Note:** If this parameter remains `false`, PowerMax and the reverse proxy will use the configMap approach. | Yes      | "false" |
    | ***Node parameters***                           |                                                                                                                                                                                                                                                                          |          |                                |
    | X_CSI_POWERMAX_ISCSI_ENABLE_CHAP                | Enable ISCSI CHAP authentication. For more details on this feature see the related [documentation](../../../../../concepts/csidriver/features/powermax/#iscsi-chap)                                                                                                                               | No       | false                          |
    | X_CSI_TOPOLOGY_CONTROL_ENABLED                  | Enable/Disable topology control. It filters out arrays, associated transport protocol available to each node and creates topology keys based on any such user input.                                                                                                      | No       | false                          |
@@ -787,20 +765,30 @@ Example:
    | X_CSI_REVPROXY_TLS_SECRET                       | Name of TLS secret defined in config map                                                                                                                                                                                                                                 | Yes      | "csirevproxy-tls-secret"       |
    | X_CSI_REVPROXY_PORT                             | Port number where reverseproxy will listen as defined in config map                                                                                                                                                                                                      | Yes      | "2222"                         |
    | X_CSI_CONFIG_MAP_NAME                           | Name of config map as created for CSI PowerMax                                                                                                                                                                                                                           | Yes      | "powermax-reverseproxy-config" |
-{{< /collapse >}}
-</ul>
+  {{< /collapse >}}
 
-7. Execute the following command to create the PowerMax custom resource:`kubectl create -f <input_sample_file.yaml>`. The above command will deploy the CSI-PowerMax driver.
-8. The mandatory module CSI PowerMax Reverseproxy will be installed automatically with the same command. 
-9. Once the driver `Custom Resource (CR)` is created, you can verify the installation as mentioned below
+  ii. Confirm that value of `X_CSI_REVPROXY_USE_SECRET` is set to `true`.
 
-    * Check if ContainerStorageModule CR is created successfully using the command below:
-        ```bash
-        kubectl get csm/<name-of-custom-resource> -n <driver-namespace> -o yaml
-        ```
-    * Check the status of the CR to verify if the driver installation is in the `Succeeded` state. If the status is not `Succeeded`, see the [Troubleshooting guide](../troubleshooting/#my-dell-csi-driver-install-failed-how-do-i-fix-it) for more information. 
-     
-10. Refer [Volume Snapshot Class](https://github.com/dell/csi-powermax/tree/main/samples/volumesnapshotclass) and [Storage Class](https://github.com/dell/csi-powermax/tree/main/samples/storageclass) for the sample files. 
+  iii. **Create PowerMax custom resource**:
+
+  ```bash
+  oc create -f <input_sample_file.yaml>
+  ```
+
+  This command will deploy the CSI PowerMax driver in the namespace specified in the input YAML file.
+
+  Check if ContainerStorageModule CR is created successfully:
+  ```bash
+  oc get csm powermax -n powermax
+
+  NAME        CREATIONTIME   CSIDRIVERTYPE   CONFIGVERSION   STATE
+  powermax    3h             powermax        v2.13.0         Succeeded      
+  ```
+
+  Check the status of the CR to verify if the driver installation is in the `Succeeded` state. If the status is not `Succeeded`, see the [Troubleshooting guide](../troubleshooting/#my-dell-csi-driver-install-failed-how-do-i-fix-it) for more information.
+</ul> 
+
+5. Refer [Volume Snapshot Class](https://github.com/dell/csi-powermax/tree/main/samples/volumesnapshotclass) and [Storage Class](https://github.com/dell/csi-powermax/tree/main/samples/storageclass) for the sample files. 
 
 ## Other features to enable
 ### Dynamic Logging Configuration
