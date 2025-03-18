@@ -21,7 +21,7 @@ curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bas
 {{< /accordion >}}
 <br>
 
-{{< accordion id="Two" title="CSI Driver" markdown="true" >}}  
+{{< accordion id="Two" title="Driver" markdown="true" >}}  
 
 ## Install Driver
 
@@ -412,7 +412,7 @@ Note: myvalues.yaml is a values.yaml file which user has used for driver install
 
 <br>
 
-{{< accordion id="Three" title="CSM Modules" >}}
+{{< accordion id="Three" title="Modules" >}}
        
 {{< cardcontainer >}}
 

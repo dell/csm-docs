@@ -21,7 +21,7 @@ Install Helm 3.0 on the master node before you install the CSI Driver for PowerS
             {{<include  file="content/docs/getting-started/installation/installationwizard/helm.md" Var="powerscale" hideIds="2">}}
 {{< /accordion >}}
 <br>
-{{< accordion id="Two" title="CSI Driver" markdown="true" >}}  
+{{< accordion id="Two" title="Driver" markdown="true" >}}  
 
 ## Prerequisites
 
@@ -368,7 +368,7 @@ output: mount.nfs: access denied by server while mounting XX.XX.XX.XX:/ifs/data/
 ```
 {{< /accordion >}}  
 
-{{< accordion id="Three" title="CSM Modules" >}}
+{{< accordion id="Three" title="Modules" >}}
 {{< cardcontainer >}}
   {{< customcard link1="./csm-modules/authorizationv1.x" image="1" title="Authorization v1.x" >}}
   {{< customcard link1="./csm-modules/authorizationv2.0" image="1" title="Authorization v2.0" >}}

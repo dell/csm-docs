@@ -27,7 +27,7 @@ Install Helm 3 on the master node before you install CSI Driver for PowerMax.
 
 <br>
 
-{{< accordion id="Two" title="CSI Driver" markdown="true" >}}
+{{< accordion id="Two" title="Driver" markdown="true" >}}  
 ### Volume Snapshot Requirements (Optional)
 
 > For detailed snapshot setup procedure, [click here.](docs/concepts/snapshots/#helm-optional-volume-snapshot-requirements)
@@ -226,7 +226,7 @@ Starting with CSI PowerMax v1.7.0, `dell-csi-helm-installer` will not create any
 
 <br>
 
-{{< accordion id="Three" title="CSM Modules">}}
+{{< accordion id="Three" title="Modules">}}  
 
 
 {{< cardcontainer >}}

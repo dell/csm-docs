@@ -22,7 +22,7 @@ Install Helm 3.x on the master node before you install the CSI Driver for Dell P
 
 <br>
 
-{{< accordion id="Two" title="CSI Driver" markdown="true" >}}  
+{{< accordion id="Two" title="Driver" markdown="true" >}}  
 ## Prerequisites
 
 The following are requirements that must be met before installing the CSI Driver for Dell PowerFlex:
@@ -345,7 +345,7 @@ Starting CSI PowerFlex v1.5, `dell-csi-helm-installer` will not create any Volum
 
 <br>
 
-{{< accordion id="Three" title="CSM Modules" >}}
+{{< accordion id="Three" title="Modules" >}}
        
 
 {{< cardcontainer >}}
