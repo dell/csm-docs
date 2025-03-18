@@ -30,16 +30,16 @@ spec:
       #   true: enable storage capacity tracking
       #   false: disable storage capacity tracking
       storageCapacity: $STORAGE_CAPACITY_ENABLED
-    # Config version for CSI PowerScale v2.11.0 driver
-    configVersion: v2.11.0
+    # Config version for CSI PowerScale v2.14.0 driver
+    configVersion: v2.14.0
     authSecret: isilon-creds
     replicas: $CONTROLLER_COUNT
     dnsPolicy: ClusterFirstWithHostNet
     # Uninstall CSI Driver and/or modules when CR is deleted
     forceRemoveDriver: true
     common:
-      # Image for CSI PowerScale driver v2.11.0
-      image: "dellemc/csi-isilon:v2.11.0"
+      # Image for CSI PowerScale driver v2.14.0
+      image: "quay.io/dell/container-storage-modules/csi-isilon:v2.14.0"
       imagePullPolicy: IfNotPresent
       envs:
         # X_CSI_VERBOSE: Indicates what content of the OneFS REST API message should be logged in debug level logs
@@ -54,7 +54,7 @@ spec:
         # X_CSI_ISI_PORT: Specify the HTTPs port number of the PowerScale OneFS API server
         # This value acts as a default value for endpointPort, if not specified for a cluster config in secret
         # Allowed value: valid port number
-        # Default value: 8080	
+        # Default value: 8080
         - name: X_CSI_ISI_PORT
           value: "8080"
 
@@ -69,7 +69,7 @@ spec:
 
         # X_CSI_ISI_NO_PROBE_ON_START: Indicates whether the controller/node should probe all the PowerScale clusters during driver initialization
         # Allowed values:
-        #   true : do not probe all PowerScale clusters during driver initialization	
+        #   true : do not probe all PowerScale clusters during driver initialization
         #   false: probe all PowerScale clusters during driver initialization
         # Default value: false
         - name: X_CSI_ISI_NO_PROBE_ON_START
@@ -88,8 +88,8 @@ spec:
         # This value acts as a default value for skipCertificateValidation, if not specified for a cluster config in secret
         # Allowed values:
         #   true: skip OneFS API server's certificate verification
-        #   false: verify OneFS API server's certificates 
-        # Default value: true	
+        #   false: verify OneFS API server's certificates
+        # Default value: true
         - name: X_CSI_ISI_SKIP_CERTIFICATE_VALIDATION
           value: "true"
 
@@ -243,22 +243,23 @@ spec:
 
     sideCars:
       - name: provisioner
-        image: registry.k8s.io/sig-storage/csi-provisioner:v5.0.1
+        image: registry.k8s.io/sig-storage/csi-provisioner:v5.2.0
         args: ["--volume-name-prefix=$VOLUME_NAME_PREFIX"]
-      - name: attacher
-        image: registry.k8s.io/sig-storage/csi-attacher:v4.6.1
-      - name: registrar
-        image: registry.k8s.io/sig-storage/csi-node-driver-registrar:v2.10.1
-      - name: resizer
-        image: registry.k8s.io/sig-storage/csi-resizer:v1.11.1
-      - name: snapshotter
-        image: registry.k8s.io/sig-storage/csi-snapshotter:v8.0.1
-      - name: csi-metadata-retriever
-        image: dellemc/csi-metadata-retriever:v1.8.0
       # health monitor is disabled by default, refer to driver documentation before enabling it
+      - name: attacher
+        image: registry.k8s.io/sig-storage/csi-attacher:v4.8.1
+      - name: registrar
+        image: registry.k8s.io/sig-storage/csi-node-driver-registrar:v2.13.0
+      - name: resizer
+        image: registry.k8s.io/sig-storage/csi-resizer:v1.13.2
+      - name: snapshotter
+        image: registry.k8s.io/sig-storage/csi-snapshotter:v8.2.1
+      - name: csi-metadata-retriever
+        image: quay.io/dell/container-storage-modules/csi-metadata-retriever:v1.11.0
       - name: external-health-monitor
         enabled: $HEALTH_MONITOR_ENABLED
         args: ["--monitor-interval=60s"]
+        image: registry.k8s.io/sig-storage/csi-external-health-monitor-controller:v0.14.0
       # Uncomment the following to configure how often external-provisioner polls the driver to detect changed capacity
       # Configure when the storageCapacity is set as "true"
       # Allowed values: 1m,2m,3m,...,10m,...,60m etc. Default value: 5m
@@ -270,16 +271,16 @@ spec:
     - name: authorization
       # enable: Enable/Disable csm-authorization
       enabled: $AUTHORIZATION_ENABLED
-      configVersion: v1.11.0
+      configVersion: v2.2.0
       components:
       - name: karavi-authorization-proxy
-        image: dellemc/csm-authorization-sidecar:v1.11.0
+        image: quay.io/dell/container-storage-modules/csm-authorization-sidecar:v2.2.0
         envs:
           # proxyHost: hostname of the csm-authorization server
           - name: "PROXY_HOST"
             value: "$AUTHORIZATION_PROXY_HOST"
 
-          # skipCertificateValidation: Enable/Disable certificate validation of the csm-authorization server       
+          # skipCertificateValidation: Enable/Disable certificate validation of the csm-authorization server
           - name: "SKIP_CERTIFICATE_VALIDATION"
             value: "$AUTHORIZATION_SKIP_CERTIFICATE_VALIDATION"
 
@@ -292,13 +293,13 @@ spec:
       #   false: disable replication feature(do not install dell-csi-replicator sidecar)
       # Default value: false
       enabled: $REPLICATION_ENABLED
-      configVersion: v1.9.0
+      configVersion: v1.12.0
       components:
       - name: dell-csi-replicator
         # image: Image to use for dell-csi-replicator. This shouldn't be changed
         # Allowed values: string
         # Default value: None
-        image: dellemc/dell-csi-replicator:v1.9.0
+        image: quay.io/dell/container-storage-modules/dell-csi-replicator:v1.12.0
         envs:
           # replicationPrefix: prefix to prepend to storage classes parameters
           # Allowed values: string
@@ -314,7 +315,7 @@ spec:
       - name: dell-replication-controller-manager
         # image: Defines controller image. This shouldn't be changed
         # Allowed values: string
-        image: dellemc/dell-replication-controller:v1.9.0
+        image: quay.io/dell/container-storage-modules/dell-replication-controller:v1.12.0
         envs:
           # TARGET_CLUSTERS_IDS: comma separated list of cluster IDs of the targets clusters. DO NOT include the source(wherever CSM Operator is deployed) cluster ID
           # Set the value to "self" in case of stretched/single cluster configuration
@@ -346,14 +347,14 @@ spec:
     - name: observability
       # enabled: Enable/Disable observability
       enabled: $OBSERVABILITY_OPERATOR_ENABLED
-      configVersion: v1.9.0
+      configVersion: v1.12.0
       components:
         - name: topology
           # enabled: Enable/Disable topology
           enabled: $OBSERVABILITY_OPERATOR_TOPOLOGY
           # image: Defines karavi-topology image. This shouldn't be changed
           # Allowed values: string
-          image: dellemc/csm-topology:v1.9.0
+          image: quay.io/dell/container-storage-modules/csm-topology:v1.12.0
           envs:
             # topology log level
             # Valid values: TRACE, DEBUG, INFO, WARN, ERROR, FATAL, PANIC
@@ -370,9 +371,9 @@ spec:
           envs:
             # image of nginx proxy image
             # Allowed values: string
-            # Default value: "nginxinc/nginx-unprivileged:1.20"
+            # Default value: "nginxinc/nginx-unprivileged:1.27"
             - name: "NGINX_PROXY_IMAGE"
-              value: "nginxinc/nginx-unprivileged:1.20"
+              value: "nginxinc/nginx-unprivileged:1.27"
 
         - name: cert-manager
           # enabled: Enable/Disable cert-manager
@@ -387,7 +388,7 @@ spec:
           enabled: $OBSERVABILITY_OPERATOR_METRICS
           # image: Defines PowerScale metrics image. This shouldn't be changed
           # Allowed values: string
-          image: dellemc/csm-metrics-powerscale:v1.6.0
+          image: quay.io/dell/container-storage-modules/csm-metrics-powerscale:v1.9.0
           envs:
             # POWERSCALE_MAX_CONCURRENT_QUERIES: set the default max concurrent queries to PowerScale
             # Allowed values: int
@@ -456,10 +457,10 @@ spec:
       #   false: disable Resiliency feature(do not deploy podmon sidecar)
       # Default value: false
       enabled: $OPERATOR_RESILIENCY_ENABLED
-      configVersion: v1.10.0
+      configVersion: v1.13.0
       components:
         - name: podmon-controller
-          image: dellemc/podmon:v1.10.0
+          image: quay.io/dell/container-storage-modules/podmon:v1.13.0
           imagePullPolicy: IfNotPresent
           args:
             - "--labelvalue=$LABEL_VALUE"
@@ -474,7 +475,7 @@ spec:
             - "--driverPath=csi-isilon.dellemc.com"
             - "--driver-config-params=/csi-isilon-config-params/driver-config-params.yaml"
         - name: podmon-node
-          image: dellemc/podmon:v1.10.0
+          image: quay.io/dell/container-storage-modules/podmon:v1.13.0
           imagePullPolicy: IfNotPresent
           envs:
             # podmonAPIPort: Defines the port to be used within the kubernetes cluster
