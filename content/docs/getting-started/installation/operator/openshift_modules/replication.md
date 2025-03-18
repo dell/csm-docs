@@ -90,7 +90,7 @@ description: >
    ````
 <br> 
 
-2. Configure the repctl utlity
+2. Configure the repctl utility
    
    ```bash
    repctl cluster add -f kubeconfig -n ocp01

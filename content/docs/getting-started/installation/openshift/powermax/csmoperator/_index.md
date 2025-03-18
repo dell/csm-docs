@@ -503,10 +503,10 @@ pvc-powerstore-restore  Bound    ocp08-19874e9042   8Gi        RWO            po
 </li> 
 <li>
 
-##### **Delete Restore Persistant Volume Claim**   
+##### **Delete Restore Persistent Volume Claim**   
 
 <br>
-Use this command to  **Delete Restore Persistant Volume Claim**:
+Use this command to  **Delete Restore Persistent Volume Claim**:
 
 ```bash
 oc delete pvc pvc-powerstore-restore -n default

@@ -72,7 +72,7 @@ description: >
     
    <br>
   
-   Verify the Observability Servcies. 
+   Verify the Observability Services. 
 
     ```terminal 
     oc get svc -n karavi
@@ -86,7 +86,7 @@ description: >
 
 5. Create Service Monitor to scrap the Observability module by the OpenShift Observability. 
 
-   Use this commend to create the ServiceMonitor. 
+   Use this command to create the ServiceMonitor. 
 
    ```bash 
    oc apply -f smon-otel-collector.yaml

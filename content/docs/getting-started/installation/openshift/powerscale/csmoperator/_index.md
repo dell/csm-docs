@@ -99,7 +99,7 @@ Supported driver and module versions offered by the Container Storage Module Ope
    ```
 <br> 
 
-6. Make sure all the parent directoty of the base path has permission 755 
+6. Make sure all the parent directory of the base path has permission 755 
 
 <br>
 
