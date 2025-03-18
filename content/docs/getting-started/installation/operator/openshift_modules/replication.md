@@ -5,6 +5,74 @@ description: >
   Installing Replication via Container Storage Modules Operator
 --- 
 
+1. Review the SyncIQ configuration on both the source and target PowerScale
+
+   a. Use the below command to verify the SyncIQ is licensed on both PowerScale.
+
+        isi license list
+
+   b. Use the below command to review the SyncIQ configuration on the source PowerScale
+     
+      ```terminal
+     ps01-1# isi sync settings view
+
+                                       Service: on
+                                 Source Subnet: -
+                                   Source Pool: -
+                               Force Interface: No
+                       Restrict Target Network: No
+                             Tw Chkpt Interval: -
+                                Report Max Age: 1Y
+                              Report Max Count: 2000
+                                    RPO Alerts: Yes
+                           Max Concurrent Jobs: 24
+      Bandwidth Reservation Reserve Percentage: 1
+        Bandwidth Reservation Reserve Absolute: -
+                           Encryption Required: Yes
+                        Cluster Certificate ID: 809c57b723f765b33a4a1a9905fd5837c12ae0ebe5f75ffd5aa3353cd83536e8
+                    OCSP Issuer Certificate ID: 
+                                  OCSP Address: 
+                        Encryption Cipher List: 
+                           Elliptic Curve List: 
+                          Renegotiation Period: 8H
+                       Service History Max Age: 1Y
+                     Service History Max Count: 2000
+                          Use Workers Per Node: No
+                           Preferred RPO Alert: Never
+                                  Password Set: No
+      ``` 
+   
+   c. Use this command to review the SyncIQ configuration on the target PowerScale
+    
+    ```terminal
+
+    ps02-1# isi sync settings view
+                                     Service: on
+                               Source Subnet: -
+                                 Source Pool: -
+                             Force Interface: No
+                     Restrict Target Network: No
+                           Tw Chkpt Interval: -
+                              Report Max Age: 1Y
+                            Report Max Count: 2000
+                                  RPO Alerts: Yes
+                         Max Concurrent Jobs: 24
+    Bandwidth Reservation Reserve Percentage: 1
+      Bandwidth Reservation Reserve Absolute: -
+                         Encryption Required: Yes
+                      Cluster Certificate ID: 1e3def272e919debfb3cb5bfd1a8de2be09d4b0dfe9a0af1b3b26eab16477e80
+                  OCSP Issuer Certificate ID: 
+                                OCSP Address: 
+                      Encryption Cipher List: 
+                         Elliptic Curve List: 
+                        Renegotiation Period: 8H
+                     Service History Max Age: 1Y
+                   Service History Max Count: 2000
+                        Use Workers Per Node: No
+                         Preferred RPO Alert: Never
+                                Password Set: No 
+    ```
+
 1. Install the repctl utility
 
    ```bash

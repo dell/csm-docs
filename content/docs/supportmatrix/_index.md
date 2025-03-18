@@ -40,13 +40,12 @@ weight: 1
 - CSM Authorization Server v2 is supported on Red Hat OpenShift.
 
 ## OpenShift Virtualization
-
 {{<table "table table-striped table-bordered table-sm">}}
-| Version | Capability               | PowerFlex | PowerMax | PowerStore | PowerScale | Unity |
-|---------|--------------------------| :-------: | :------: | :--------: | :--------: | :---: |
-| 4.17    |  <div style="text-align: left"> [Storage](https://github.com/kiagnose/kubevirt-storage-checkup) </div> | Yes       | Yes      | Yes        | Yes        | No    |
-| 4.17    | <div style="text-align: left">  Observability        </div>   | Yes       | Yes      | No         | Yes        | No    |
-| 4.17    | <div style="text-align: left"> Authorization - v2.x  </div>   | Yes       | Yes      | No         | Yes        | No    |
+| Version | Capability               | PowerStore | PowerScale | PowerFlex | PowerMax | Unity |
+|---------|--------------------------| :--------: | :--------: | :-------: | :------: | :---: |
+| 4.17    | <div style="text-align: left"> Storage </div> | Yes        | Yes        | Yes       | Yes      | No    |
+| 4.17    | <div style="text-align: left"> Observability </div> | No         | Yes        | Yes       | Yes      | No    |
+| 4.17    | <div style="text-align: left"> Authorization - v2.x </div> | No         | Yes        | Yes       | Yes      | No    |
 {{</table>}}
 
 ## Operating Systems
