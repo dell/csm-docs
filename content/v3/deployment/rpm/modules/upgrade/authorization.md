@@ -13,7 +13,7 @@ The CSM Authorization RPM will be deprecated in a future release. It is highly r
 This section outlines the upgrade steps for Container Storage Modules (CSM) for Authorization.  The upgrade of CSM for Authorization RPM is handled in 2 parts:
 - Upgrading the CSM for Authorization proxy server
 - Upgrading the Dell CSI drivers with CSM for Authorization enabled
-The Authorization proxy server should be upgraded before upgrading the CSI Driver and Authorization sidecar.
+The Authorization proxy server must be upgraded before upgrading the CSI Driver and Authorization sidecar.
 
 ## Upgrading CSM for Authorization proxy server
 

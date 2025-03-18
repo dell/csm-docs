@@ -26,7 +26,7 @@ The following diagram shows a high-level overview of CSM for Authorization with 
 ## Authorization Components Support Matrix
 Authorization consists of two main components - the Authorization Sidecar and the Authorization Proxy Server. The Authorization Sidecar is bundled with the CSI driver, and the Authorization Proxy Server validates access to storage platforms.
 
-Users should always install or upgrade the Authorization proxy server and sidecar from the same release. This practice helps ensure optimal performance and compatibility, avoiding potential issues from version discrepancies.
+Users should always install or upgrade to the Authorization proxy server and sidecar from the same release. This practice helps ensure optimal performance and compatibility, avoiding potential issues from version discrepancies.
 
 **NOTE:** If the number of controller pods deployed by the CSI driver matches the number of scheduled nodes in your cluster, Authorization may not be able to inject properly into the driver's controller pod.
 To resolve this, please refer to our [troubleshooting guide](./troubleshooting) on the topic.
