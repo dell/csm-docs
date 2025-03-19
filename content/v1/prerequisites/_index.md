@@ -61,6 +61,7 @@ Container Storage Modules (CSM) does not officially support specific operating s
 > * Any operating system or version that's not mentioned here must be self-certified using [Cert-CSI](../support/cert-csi/) in order to be supported. Although not mandatory, we recommend users to use operating systems and versions that have not met their end of life.
 
 ## CSM Component Versions
+
 {{<table "table table-striped table-bordered table-sm">}}
 | Component | Version |
 | - | - |
