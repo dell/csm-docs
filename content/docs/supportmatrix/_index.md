@@ -63,6 +63,23 @@ Container Storage Modules doesn't officially support specific operating systems,
 - Ensure the host OS/version aligns with Dell Storage platform support. Check [E-Lab Navigator](https://elabnavigator.dell.com/eln/modernHomeSSM) for details.
 - OS versions not listed must be self-certified using [Cert-CSI](../tooling/cert-csi/). It's recommended to use OS versions that haven't reached end of life.
 
+## CSM Component Versions
+{{<table "table table-striped table-bordered table-sm">}}
+| Component | Version |
+| - | - |
+| CSI PowerFlex | v2.13.0 |
+| CSI PowerStore | v2.13.0 |
+| CSI PowerMax | v2.13.0 |
+| CSI PowerScale | v2.13.0 |
+| CSI Unity XT | v2.13.0 |
+| CSM Authorization v1.x | v1.13.0 |
+| CSM Authorization v2.x | v2.1.0 |
+| CSM Observability | v1.11.0 |
+| CSM Replication | v1.11.0 |
+| CSM Resiliency | v1.12.0 |
+| CSM Application Mobility | v1.13.0 |
+{{</table>}}
+
 ## Supported Container Storage Modules
 {{<table "table table-striped table-bordered table-sm">}}
 | Container Storage Modules                                                    | PowerMax | PowerFlex | Unity XT | PowerScale | PowerStore |
@@ -76,7 +93,7 @@ Container Storage Modules doesn't officially support specific operating systems,
 | [Volume Group Snapshot](../concepts/snapshots/volume-group-snapshots/) |    No    |    Yes    |    No    |     No     |    Yes     |
 {{</table>}}
 
-## Operator compatibility matrix
+## Operator Compatibility Matrix
 
 The table below lists the driver and modules installable with the Operator
 {{<table "table table-striped table-bordered table-sm">}}
