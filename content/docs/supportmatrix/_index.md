@@ -77,7 +77,7 @@ Container Storage Modules doesn't officially support specific operating systems,
 | CSM Observability | v1.11.0 |
 | CSM Replication | v1.11.0 |
 | CSM Resiliency | v1.12.0 |
-| CSM Application Mobility | v1.13.0 |
+| CSM Application Mobility | v1.3.0 |
 {{</table>}}
 
 ## Supported Container Storage Modules
