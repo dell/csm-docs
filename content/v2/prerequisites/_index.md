@@ -53,6 +53,23 @@ Container Storage Modules (CSM) does not officially support specific operating s
 > * The host operating system/version being used must align with what each Dell Storage platform supports. Please visit [E-Lab Navigator](https://elabnavigator.dell.com/eln/modernHomeSSM) for specific Dell Storage platform host operating system level support matrices.
 > * Any operating system or version that's not mentioned here must be self-certified using [Cert-CSI](../support/cert-csi/) in order to be supported. Although not mandatory, we recommend users to use operating systems and versions that have not met their end of life.
 
+## CSM Component Versions
+
+{{<table "table table-striped table-bordered table-sm">}}
+| Component | Version |
+| - | - |
+| CSI PowerFlex | v2.11.0 |
+| CSI PowerStore | v2.11.1 |
+| CSI PowerMax | v2.11.0 |
+| CSI PowerScale | v2.11.0 |
+| CSI Unity XT | v2.11.1 |
+| CSM Authorization | v1.11.0 |
+| CSM Observability | v1.9.0 |
+| CSM Replication | v1.9.0 |
+| CSM Resiliency | v1.10.0 |
+| CSM Application Mobility | v1.1.0 |
+{{</table>}}
+
 ## Supported CSM Modules
 
 {{<table "table table-striped table-bordered table-sm">}}
@@ -66,7 +83,7 @@ Container Storage Modules (CSM) does not officially support specific operating s
 | [Volume Group Snapshot](../snapshots/volume-group-snapshots/) |    No    |    Yes    |    No    |     No     |    Yes     |
 {{</table>}}
 
-## CSM Operator compatibility matrix
+## CSM Operator Compatibility Matrix
 
 The table below lists the driver and modules versions installable with the CSM Operator:
 {{<table "table table-striped table-bordered table-sm">}}
