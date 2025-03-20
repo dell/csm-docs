@@ -17,17 +17,17 @@
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="v1">
-    <meta property="article:modified_time" content="2024-11-20T19:40:41-05:00">
+    <meta property="article:modified_time" content="2025-03-20T08:08:36-04:00">
 
   <meta itemprop="name" content="Authorization">
   <meta itemprop="description" content="Dell Technologies (Dell) Container Storage Modules (CSM) for Authorization Upgrade">
-  <meta itemprop="dateModified" content="2024-11-20T19:40:41-05:00">
-  <meta itemprop="wordCount" content="331">
+  <meta itemprop="dateModified" content="2025-03-20T08:08:36-04:00">
+  <meta itemprop="wordCount" content="346">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Authorization">
   <meta name="twitter:description" content="Dell Technologies (Dell) Container Storage Modules (CSM) for Authorization Upgrade">
-<link rel="preload" href="/csm-docs/scss/main.min.c1b9d9da997c468756a5165a298685a703e1f9c4d6fb91aecfa7c7d02edab9a7.css" as="style" integrity="sha256-wbnZ2pl8RodWpRZaKYaFpwPh&#43;cTW&#43;5Guz6fH0C7auac=" crossorigin="anonymous">
-<link href="/csm-docs/scss/main.min.c1b9d9da997c468756a5165a298685a703e1f9c4d6fb91aecfa7c7d02edab9a7.css" rel="stylesheet" integrity="sha256-wbnZ2pl8RodWpRZaKYaFpwPh&#43;cTW&#43;5Guz6fH0C7auac=" crossorigin="anonymous">
+<link rel="preload" href="/csm-docs/scss/main.min.156a66fbabfbf8e5f1468954a367c3c1fdfaed9183e6d744c3b2b1d6a1604e0c.css" as="style" integrity="sha256-FWpm&#43;6v7&#43;OXxRolUo2fDwf367ZGD5tdEw7Kx1qFgTgw=" crossorigin="anonymous">
+<link href="/csm-docs/scss/main.min.156a66fbabfbf8e5f1468954a367c3c1fdfaed9183e6d744c3b2b1d6a1604e0c.css" rel="stylesheet" integrity="sha256-FWpm&#43;6v7&#43;OXxRolUo2fDwf367ZGD5tdEw7Kx1qFgTgw=" crossorigin="anonymous">
 <script
   src="https://code.jquery.com/jquery-3.7.1.min.js"
   integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
@@ -125,7 +125,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.cdae9bf75eecbba482ea491f7de864c1.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.7ad6556f3c7273c6621f3a6d0e50cb8b.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -149,7 +149,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.cdae9bf75eecbba482ea491f7de864c1.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.7ad6556f3c7273c6621f3a6d0e50cb8b.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -736,7 +736,8 @@ Starting with CSM 1.13, Authorization v1.x will be deprecated and will be offici
 <p>This section outlines the upgrade steps for Container Storage Modules (CSM) for Authorization.  The upgrade of CSM for Authorization RPM is handled in 2 parts:</p>
 <ul>
 <li>Upgrading the CSM for Authorization proxy server</li>
-<li>Upgrading the Dell CSI drivers with CSM for Authorization enabled</li>
+<li>Upgrading the Dell CSI drivers with CSM for Authorization enabled
+The Authorization proxy server must be upgraded before upgrading the CSI Driver and Authorization sidecar.</li>
 </ul>
 <h2 id="upgrading-csm-for-authorization-proxy-server">
 Upgrading CSM for Authorization proxy server <a class="header-link"  href="#upgrading-csm-for-authorization-proxy-server" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
