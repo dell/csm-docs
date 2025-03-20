@@ -20,13 +20,13 @@
 
   <meta itemprop="name" content="Authorization - v1.x GA">
   <meta itemprop="description" content="Dell Technologies (Dell) Container Storage Modules (CSM) for Authorization v1.x GA.">
-  <meta itemprop="dateModified" content="2024-11-20T19:40:41-05:00">
-  <meta itemprop="wordCount" content="447">
+  <meta itemprop="dateModified" content="2025-03-20T08:08:36-04:00">
+  <meta itemprop="wordCount" content="450">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Authorization - v1.x GA">
   <meta name="twitter:description" content="Dell Technologies (Dell) Container Storage Modules (CSM) for Authorization v1.x GA.">
-<link rel="preload" href="/csm-docs/scss/main.min.c1b9d9da997c468756a5165a298685a703e1f9c4d6fb91aecfa7c7d02edab9a7.css" as="style" integrity="sha256-wbnZ2pl8RodWpRZaKYaFpwPh&#43;cTW&#43;5Guz6fH0C7auac=" crossorigin="anonymous">
-<link href="/csm-docs/scss/main.min.c1b9d9da997c468756a5165a298685a703e1f9c4d6fb91aecfa7c7d02edab9a7.css" rel="stylesheet" integrity="sha256-wbnZ2pl8RodWpRZaKYaFpwPh&#43;cTW&#43;5Guz6fH0C7auac=" crossorigin="anonymous">
+<link rel="preload" href="/csm-docs/scss/main.min.156a66fbabfbf8e5f1468954a367c3c1fdfaed9183e6d744c3b2b1d6a1604e0c.css" as="style" integrity="sha256-FWpm&#43;6v7&#43;OXxRolUo2fDwf367ZGD5tdEw7Kx1qFgTgw=" crossorigin="anonymous">
+<link href="/csm-docs/scss/main.min.156a66fbabfbf8e5f1468954a367c3c1fdfaed9183e6d744c3b2b1d6a1604e0c.css" rel="stylesheet" integrity="sha256-FWpm&#43;6v7&#43;OXxRolUo2fDwf367ZGD5tdEw7Kx1qFgTgw=" crossorigin="anonymous">
 <script
   src="https://code.jquery.com/jquery-3.7.1.min.js"
   integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
@@ -124,7 +124,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.cdae9bf75eecbba482ea491f7de864c1.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.7ad6556f3c7273c6621f3a6d0e50cb8b.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -148,7 +148,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.cdae9bf75eecbba482ea491f7de864c1.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.7ad6556f3c7273c6621f3a6d0e50cb8b.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -791,8 +791,9 @@ Authorization Components Support Matrix <a class="header-link"  href="#authoriza
                 <path d="M0 0h24v24H0z" fill="none"/>
                 <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
             </svg>
-        </a></h2><p>CSM for Authorization consists of 2 components - The authorization sidecar, bundled with the driver, communicates with the Authorization proxy server to validate access to Storage platforms. The authorization sidecar is backward compatible with older Authorization proxy server versions. However, it is highly recommended to have the Authorization proxy server and sidecar installed from the same release of CSM.</p>
-<p><strong>NOTE:</strong> If the deployed CSI driver has a number of controller pods equal to the number of schedulable nodes in your cluster, CSM for Authorization may not be able to inject properly into the driver&rsquo;s controller pod.
+        </a></h2><p>Authorization consists of two main components - the Authorization Sidecar and the Authorization Proxy Server. The Authorization Sidecar is bundled with the CSI driver, and the Authorization Proxy Server validates access to storage platforms.</p>
+<p>Users should always install or upgrade to the Authorization proxy server and sidecar from the same release. This practice helps ensure optimal performance and compatibility, avoiding potential issues from version discrepancies.</p>
+<p><strong>NOTE:</strong> If the number of controller pods deployed by the CSI driver matches the number of scheduled nodes in your cluster, Authorization may not be able to inject properly into the driver&rsquo;s controller pod.
 To resolve this, please refer to our <a href="/csm-docs/v2/authorization/v1.x-ga/troubleshooting/">troubleshooting guide</a> on the topic.</p>
 <h2 id="roles-and-responsibilities">
 Roles and Responsibilities <a class="header-link"  href="#roles-and-responsibilities" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
