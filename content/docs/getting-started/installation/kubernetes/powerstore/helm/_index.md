@@ -22,7 +22,7 @@ Install Helm 3.x on the master node before you install the CSI Driver for PowerS
 
 <br>
 
-{{< accordion id="Two" title="CSI Driver" markdown="true" >}}  
+{{< accordion id="Two" title="CSI Driver" markdown="true" >}}
 
 ### Volume Snapshot Requirements (Optional)
 For detailed snapshot setup procedure, [click here.](docs/concepts/snapshots/#helm-optional-volume-snapshot-requirements)
@@ -88,9 +88,9 @@ volume stats value under node should be set to true.
     > If you do not specify `arrayID` parameter in the storage class then the array that was specified as the default would be used for provisioning volumes.
 6. Download the default values.yaml file
    ```bash
-   cd dell-csi-helm-installer && wget -O my-powerstore-settings.yaml https://github.com/dell/helm-charts/raw/csi-powerstore-2.13.0/charts/csi-powerstore/values.yaml
+   cd dell-csi-helm-installer && wget -O my-powerstore-settings.yaml https://github.com/dell/helm-charts/raw/csi-powerstore-2.14.0/charts/csi-powerstore/values.yaml
    ```
-7. Edit the newly created values file and provide values for the following parameters `vi my-powerstore-settings.yaml`: 
+7. Edit the newly created values file and provide values for the following parameters `vi my-powerstore-settings.yaml`:
 <ul>
 {{< collapse id="1" title="Parameters">}}
 | Parameter | Description | Required | Default |
@@ -125,7 +125,7 @@ volume stats value under node should be set to true.
 | storageCapacity.enabled | Allows to enable/disable storage capacity tracking feature | No | true
 | storageCapacity.pollInterval | Configure how often the driver checks for changed capacity | No | 5m
 | podmon.enabled | Allows to enable/disable [Resiliency](./csm-modules/resiliency#powerstore-specific-recommendations) feature | No | false
-{{< /collapse >}} 
+{{< /collapse >}}
 </ul>
 
 8. Install the driver using `csi-install.sh` bash script by running
@@ -212,20 +212,20 @@ cd dell-csi-helm-installer
 ```
 
 Note: here `my-powerstore-settings.yaml` is a `values.yaml` file which user has used for driver installation.
-{{< /accordion >}}  
+{{< /accordion >}}
 
 <br>
 
 {{< accordion id="Three" title="CSM Modules" >}}
-       
+
 {{< cardcontainer >}}
 
     {{< customcard  link1="./csm-modules/observability"   image="1" title="Observability"  >}}
 
-    {{< customcard  link1="./csm-modules/replication"  image="1" title="Replication"  >}} 
+    {{< customcard  link1="./csm-modules/replication"  image="1" title="Replication"  >}}
 
     {{< customcard link1="./csm-modules/resiliency"   image="1" title="Resiliency"  >}}
 
 {{< /cardcontainer >}}
 
-{{< /accordion >}}  
+{{< /accordion >}}

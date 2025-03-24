@@ -78,7 +78,7 @@ deployment.apps/proxy-server restarted
 
 ## Tenants, Quota, and Volume ownership
 
-Redis is used to store application data regarding [tenants, quota, and volume ownership](../../design#quota--volume-ownership) with the Storage Class `csm-authorization-local-storage` or the one specified in the `redis.storageClass` parameter in the values file. 
+Redis is used to store application data regarding [tenants, quota, and volume ownership](../../design#quota--volume-ownership) with the Storage Class `csm-authorization-local-storage` or the one specified in the `redis.storageClass` parameter in the values file.
 
 The Persistent Volume for Redis is provisioned by the above Storage Class with the `redis-primary-pv-claim` Persistent Volume Claim. See the example.
 
@@ -102,7 +102,7 @@ k8s-ab74921ab9      8Gi        RWO            Delete           Bound      author
 kubectl -n <authorization-namespace> edit deploy/redis-primary
 ```
 
-The Deployment has a volumes field that should look like this: 
+The Deployment has a volumes field that should look like this:
 
 ```yaml
 volumes:
@@ -111,7 +111,7 @@ volumes:
     claimName: redis-primary-pv-claim
 ```
 
-Replace the value of `claimName` with the name of the Persisent Volume Claim associated with the backup. If the new Persisent Volume Claim name is `redis-backup`, you would edit the deployment to look like this:
+Replace the value of `claimName` with the name of the Persistent Volume Claim associated with the backup. If the new Persistent Volume Claim name is `redis-backup`, you would edit the deployment to look like this:
 
 ```yaml
 volumes:
@@ -120,4 +120,4 @@ volumes:
     claimName: redis-backup
 ```
 
-Once saved, Redis will now use the backup volume. 
+Once saved, Redis will now use the backup volume.
