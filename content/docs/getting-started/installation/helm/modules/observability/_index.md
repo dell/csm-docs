@@ -209,7 +209,7 @@ Below are the steps to deploy a new Grafana instance into your Kubernetes cluste
         - name: Karavi-Topology
           type: yesoreyeram-infinity-datasource
           access: proxy
-          url: 'https://karavi-topology:8443'
+          url: 'https://karavi-topology:8443/topology.json'
           isDefault: null
           version: 1
           editable: true
