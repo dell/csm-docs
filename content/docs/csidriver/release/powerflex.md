@@ -2,20 +2,15 @@
 title: PowerFlex
 description: Release notes for PowerFlex CSI driver
 ---
+## Release Notes - CSI PowerFlex v2.13.1
+
+### New Features/Changes
+
+### Fixed Issues
+- [#1782 - [BUG]: Pods Stuck in Terminating State After PowerFlex CSI Node Pod Restart When Deployments Share Same Node](https://github.com/dell/csm/issues/1782)
+
 
 ## Release Notes - CSI PowerFlex v2.13.0
-
-
-
-
-
-
-
-
-
-
-
-
 
 ### New Features/Changes
 
