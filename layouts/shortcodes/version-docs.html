@@ -29,7 +29,7 @@
 {{- else if eq $key "Authv1_csm_authorization_sidecar" -}}v1.14.0
 {{- else if eq $key "Authv2_csm_authorization_sidecar" -}}v2.2.0
 {{- else if eq $key "Authv2_csm_authorization_controller" -}}v2.2.0
-{{- else if eq $key "Authv1_PMax_ReverseProxy_ConfigVersion" -}}v1.12.0
+{{- else if eq $key "Authv1_PMax_ReverseProxy_ConfigVersion" -}}v1.13.0
 {{- else if eq $key "Min_sample_operator_pflex" -}}v2140
 {{- else if eq $key "Det_sample_operator_pflex" -}}v2140
 {{- else if eq $key "Min_sample_operator_pstore" -}}v2140
@@ -45,6 +45,18 @@
 {{- else if eq $key "sample_sc_pstore" -}}v2140
 {{- else if eq $key "sample_sc_pscale" -}}v2140
 {{- else if eq $key "sample_sc_unity" -}}v2140
+{{- else if eq $key "Csm_Operator_latest_version" -}}v1.9.0
+{{- else if eq $key "attacher_latest_version" -}}v4.8.1
+{{- else if eq $key "health_monitor_controller_latest_version" -}}v0.14.0
+{{- else if eq $key "node_driver_registrar_latest_version" -}}v2.13.0
+{{- else if eq $key "provisioner_latest_version" -}}v5.2.0
+{{- else if eq $key "resizer_latest_version" -}}v1.13.2
+{{- else if eq $key "csi_snapshotter_latest_version" -}}v8.2.1
+{{- else if eq $key "metadata_retriever_latestVersion" -}}v1.11.0
+{{- else if eq $key "volumegroup_snapshotter_latest_version" -}}v1.8.1
+{{- else if eq $key "replicator_latest_version" -}}v1.12.0
+{{- else if eq $key "replication_controller_latest_version" -}}v1.12.0
+{{- else if eq $key "podmon_latest_version" -}}v1.13.0
 {{- else -}}
   Default text if no valid parameter is passed.
 {{- end -}}

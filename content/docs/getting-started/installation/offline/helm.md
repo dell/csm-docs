@@ -4,13 +4,13 @@ linkTitle: "Offline Helm Installation"
 no_list: true
 description: Offline Helm Installation
 weight: 4
---- 
+---
 
 ## Workflow
 
 To perform an offline installation :
 
-1. [**Build an offline bundle**](../offline#building-an-offline-bundle-2) 
+1. [**Build an offline bundle**](../offline#building-an-offline-bundle-2)
 2. [**Unpack the offline bundle**](../offline#unpacking-the-offline-bundle-and-preparing-for-installation-2) and prepare for installation.
 3. [**Install Container Storage Modules**](../offline#install-container-storage-module-2) using the unpacked files.
 
@@ -21,14 +21,14 @@ To perform an offline installation :
 
 - On a Linux system with Internet access, clone the desired repository:
   - For Helm installs, clone the specific driver repo.
-- Run the `csi-offline-bundle.sh` script with the `-c` option to create the bundle: 
+- Run the `csi-offline-bundle.sh` script with the `-c` option to create the bundle:
 ```bash
 git clone -b <version tag> https://github.com/dell/csi-<driver>.git
 cd csi-<driver>/dell-csi-helm-installer
 bash csi-offline-bundle.sh -c
-``` 
+```
 {{< collapse id="1" title="Output">}}
-```bash 
+```bash
 *
 * Building image manifest file
 
@@ -37,17 +37,17 @@ bash csi-offline-bundle.sh -c
 *
 * Pulling and saving container images
 
-   quay.io/dell/container-storage-modules/csi-metadata-retriever:v1.9.0
-   quay.io/dell/container-storage-modules/csi-powerstore:v2.12.0
-   quay.io/dell/container-storage-modules/csi-volumegroup-snapshotter:v1.7.0
-   quay.io/dell/container-storage-modules/dell-csi-replicator:v1.10.0
-   quay.io/dell/container-storage-modules/podmon:v1.11.0
-   registry.k8s.io/sig-storage/csi-attacher:v4.7.0
-   registry.k8s.io/sig-storage/csi-external-health-monitor-controller:v0.13.0
-   registry.k8s.io/sig-storage/csi-node-driver-registrar:v2.12.0
-   registry.k8s.io/sig-storage/csi-provisioner:v5.1.0
-   registry.k8s.io/sig-storage/csi-resizer:v1.12.0
-   registry.k8s.io/sig-storage/csi-snapshotter:v8.1.0
+quay.io/dell/container-storage-modules/csi-metadata-retriever:{{< version-docs key="metadata_retriever_latest_version" >}}
+quay.io/dell/container-storage-modules/csi-powerstore:{{< version-docs key="PStore_latestVersion" >}}
+quay.io/dell/container-storage-modules/csi-volumegroup-snapshotter:{{< version-docs key="volumegroup_snapshotter_latest_version" >}}
+quay.io/dell/container-storage-modules/dell-csi-replicator:{{< version-docs key="replicator_latest_version" >}}
+quay.io/dell/container-storage-modules/podmon:{{< version-docs key="podmon_latest_version" >}}
+registry.k8s.io/sig-storage/csi-attacher:{{< version-docs key="attacher_latest_version" >}}
+registry.k8s.io/sig-storage/csi-external-health-monitor-controller:{{< version-docs key="health_monitor_controller_latest_version" >}}
+registry.k8s.io/sig-storage/csi-node-driver-registrar:{{< version-docs key="node_driver_registrar_latest_version" >}}
+registry.k8s.io/sig-storage/csi-provisioner:{{< version-docs key="provisioner_latest_version" >}}
+registry.k8s.io/sig-storage/csi-resizer:{{< version-docs key="resizer_latest_version" >}}
+registry.k8s.io/sig-storage/csi-snapshotter:{{< version-docs key="snapshotter_latest_version" >}}
 
 *
 * Copying necessary files
@@ -60,100 +60,100 @@ bash csi-offline-bundle.sh -c
 *
 * Compressing release
 
-csi-<driver>-bundle-2.12.0/
-csi-<driver>-bundle-2.12.0/helm-charts/
-csi-<driver>-bundle-2.12.0/helm-charts/charts/
-csi-<driver>-bundle-2.12.0/helm-charts/charts/csi-<driver>/
-csi-<driver>-bundle-2.12.0/helm-charts/charts/csi-<driver>/Chart.yaml
-csi-<driver>-bundle-2.12.0/helm-charts/charts/csi-<driver>/values.yaml
-csi-<driver>-bundle-2.12.0/helm-charts/charts/csi-<driver>/templates/
-csi-<driver>-bundle-2.12.0/helm-charts/charts/csi-<driver>/templates/node.yaml
-csi-<driver>-bundle-2.12.0/helm-charts/charts/csi-<driver>/templates/_helpers.tpl
-csi-<driver>-bundle-2.12.0/helm-charts/charts/csi-<driver>/templates/csidriver.yaml
-csi-<driver>-bundle-2.12.0/helm-charts/charts/csi-<driver>/templates/driver-config-params.yaml
-csi-<driver>-bundle-2.12.0/helm-charts/charts/csi-<driver>/templates/controller.yaml
-csi-<driver>-bundle-2.12.0/LICENSE
-csi-<driver>-bundle-2.12.0/README.md
-csi-<driver>-bundle-2.12.0/dell-csi-helm-installer/
-csi-<driver>-bundle-2.12.0/dell-csi-helm-installer/common.sh
-csi-<driver>-bundle-2.12.0/dell-csi-helm-installer/verify-csi-powerstore.sh
-csi-<driver>-bundle-2.12.0/dell-csi-helm-installer/images.tar/
-csi-<driver>-bundle-2.12.0/dell-csi-helm-installer/images.tar/registry.k8s.io-sig-storage-csi-resizer-v1.12.0.tar
-csi-<driver>-bundle-2.12.0/dell-csi-helm-installer/images.tar/quay.io-dell-container-storage-modules-csi-metadata-retriever-v1.9.0.tar
-csi-<driver>-bundle-2.12.0/dell-csi-helm-installer/images.tar/registry.k8s.io-sig-storage-csi-attacher-v4.7.0.tar
-csi-<driver>-bundle-2.12.0/dell-csi-helm-installer/images.tar/quay.io-dell-container-storage-modules-csi-powerstore-v2.12.0.tar
-csi-<driver>-bundle-2.12.0/dell-csi-helm-installer/images.tar/registry.k8s.io-sig-storage-csi-snapshotter-v8.1.0.tar
-csi-<driver>-bundle-2.12.0/dell-csi-helm-installer/images.tar/quay.io-dell-container-storage-modules-dell-csi-replicator-v1.10.0.tar
-csi-<driver>-bundle-2.12.0/dell-csi-helm-installer/images.tar/quay.io-dell-container-storage-modules-podmon-v1.11.0.tar
-csi-<driver>-bundle-2.12.0/dell-csi-helm-installer/images.tar/registry.k8s.io-sig-storage-csi-external-health-monitor-controller-v0.13.0.tar
-csi-<driver>-bundle-2.12.0/dell-csi-helm-installer/images.tar/registry.k8s.io-sig-storage-csi-node-driver-registrar-v2.12.0.tar
-csi-<driver>-bundle-2.12.0/dell-csi-helm-installer/images.tar/quay.io-dell-container-storage-modules-csi-volumegroup-snapshotter-v1.7.0.tar
-csi-<driver>-bundle-2.12.0/dell-csi-helm-installer/images.tar/registry.k8s.io-sig-storage-csi-provisioner-v5.1.0.tar
-csi-<driver>-bundle-2.12.0/dell-csi-helm-installer/csi-offline-bundle.md
-csi-<driver>-bundle-2.12.0/dell-csi-helm-installer/.gitignore
-csi-<driver>-bundle-2.12.0/dell-csi-helm-installer/README.md
-csi-<driver>-bundle-2.12.0/dell-csi-helm-installer/csi-install.sh
-csi-<driver>-bundle-2.12.0/dell-csi-helm-installer/images.manifest
-csi-<driver>-bundle-2.12.0/dell-csi-helm-installer/verify.sh
-csi-<driver>-bundle-2.12.0/dell-csi-helm-installer/csi-uninstall.sh
-csi-<driver>-bundle-2.12.0/dell-csi-helm-installer/csi-offline-bundle.sh
+csi-<driver>-bundle-2.14.0/
+csi-<driver>-bundle-2.14.0/helm-charts/
+csi-<driver>-bundle-2.14.0/helm-charts/charts/
+csi-<driver>-bundle-2.14.0/helm-charts/charts/csi-<driver>/
+csi-<driver>-bundle-2.14.0/helm-charts/charts/csi-<driver>/Chart.yaml
+csi-<driver>-bundle-2.14.0/helm-charts/charts/csi-<driver>/values.yaml
+csi-<driver>-bundle-2.14.0/helm-charts/charts/csi-<driver>/templates/
+csi-<driver>-bundle-2.14.0/helm-charts/charts/csi-<driver>/templates/node.yaml
+csi-<driver>-bundle-2.14.0/helm-charts/charts/csi-<driver>/templates/_helpers.tpl
+csi-<driver>-bundle-2.14.0/helm-charts/charts/csi-<driver>/templates/csidriver.yaml
+csi-<driver>-bundle-2.14.0/helm-charts/charts/csi-<driver>/templates/driver-config-params.yaml
+csi-<driver>-bundle-2.14.0/helm-charts/charts/csi-<driver>/templates/controller.yaml
+csi-<driver>-bundle-2.14.0/LICENSE
+csi-<driver>-bundle-2.14.0/README.md
+csi-<driver>-bundle-2.14.0/dell-csi-helm-installer/
+csi-<driver>-bundle-2.14.0/dell-csi-helm-installer/common.sh
+csi-<driver>-bundle-2.14.0/dell-csi-helm-installer/verify-csi-powerstore.sh
+csi-<driver>-bundle-2.14.0/dell-csi-helm-installer/images.tar/
+csi-<driver>-bundle-2.14.0/dell-csi-helm-installer/images.tar/registry.k8s.io-sig-storage-csi-resizer-{{< version-docs key="resizer_latest_version" >}}.tar
+csi-<driver>-bundle-2.14.0/dell-csi-helm-installer/images.tar/quay.io-dell-container-storage-modules-csi-metadata-retriever-{{< version-docs key="metadata_retriever_latest_version" >}}.tar
+csi-<driver>-bundle-2.14.0/dell-csi-helm-installer/images.tar/registry.k8s.io-sig-storage-csi-attacher-{{< version-docs key="attacher_latest_version" >}}.tar
+csi-<driver>-bundle-2.14.0/dell-csi-helm-installer/images.tar/quay.io-dell-container-storage-modules-csi-powerstore-{{< version-docs key="PStore_latestVersion" >}}.tar
+csi-<driver>-bundle-2.14.0/dell-csi-helm-installer/images.tar/registry.k8s.io-sig-storage-csi-snapshotter-{{< version-docs key="snapshotter_latest_version" >}}.tar
+csi-<driver>-bundle-2.14.0/dell-csi-helm-installer/images.tar/quay.io-dell-container-storage-modules-dell-csi-replicator-{{< version-docs key="replicator_latest_version" >}}.tar
+csi-<driver>-bundle-2.14.0/dell-csi-helm-installer/images.tar/quay.io-dell-container-storage-modules-podmon-{{< version-docs key="podmon_latest_version" >}}.tar
+csi-<driver>-bundle-2.14.0/dell-csi-helm-installer/images.tar/registry.k8s.io-sig-storage-csi-external-health-monitor-controller-{{< version-docs key="health_monitor_controller_latest_version" >}}.tar
+csi-<driver>-bundle-2.14.0/dell-csi-helm-installer/images.tar/registry.k8s.io-sig-storage-csi-node-driver-registrar-{{< version-docs key="node_driver_registrar_latest_version" >}}.tar
+csi-<driver>-bundle-2.14.0/dell-csi-helm-installer/images.tar/quay.io-dell-container-storage-modules-csi-volumegroup-snapshotter-{{< version-docs key="volumegroup_snapshotter_latest_version" >}}.tar
+csi-<driver>-bundle-2.14.0/dell-csi-helm-installer/images.tar/registry.k8s.io-sig-storage-csi-provisioner-{{< version-docs key="provisioner_latest_version" >}}.tar
+csi-<driver>-bundle-2.14.0/dell-csi-helm-installer/csi-offline-bundle.md
+csi-<driver>-bundle-2.14.0/dell-csi-helm-installer/.gitignore
+csi-<driver>-bundle-2.14.0/dell-csi-helm-installer/README.md
+csi-<driver>-bundle-2.14.0/dell-csi-helm-installer/csi-install.sh
+csi-<driver>-bundle-2.14.0/dell-csi-helm-installer/images.manifest
+csi-<driver>-bundle-2.14.0/dell-csi-helm-installer/verify.sh
+csi-<driver>-bundle-2.14.0/dell-csi-helm-installer/csi-uninstall.sh
+csi-<driver>-bundle-2.14.0/dell-csi-helm-installer/csi-offline-bundle.sh
 
 *
 * Complete
 
-Offline bundle file is: ~/csi-<driver>/csi-<driver>-bundle-2.12.0.tar.gz
+Offline bundle file is: ~/csi-<driver>/csi-<driver>-bundle-2.14.0.tar.gz
 ```
 {{< /collapse >}}
 
 #### **Unpacking the offline bundle and preparing for installation**
 
 1. On a Linux system with registry access, copy the bundle file.
-2.  Expand the bundle file: `tar xvfz csi-<driver>-bundle-2.12.0.tar.gz`
-{{< collapse id="2" title="Output">}}   
+2.  Expand the bundle file: `tar xvfz csi-<driver>-bundle-2.14.0.tar.gz`
+{{< collapse id="2" title="Output">}}
 
 ```bash
-  csi-<driver>-bundle-2.12.0/
-  csi-<driver>-bundle-2.12.0/helm-charts/
-  csi-<driver>-bundle-2.12.0/helm-charts/charts/
-  csi-<driver>-bundle-2.12.0/helm-charts/charts/csi-<driver>/
-  csi-<driver>-bundle-2.12.0/helm-charts/charts/csi-<driver>/Chart.yaml
-  csi-<driver>-bundle-2.12.0/helm-charts/charts/csi-<driver>/values.yaml
-  csi-<driver>-bundle-2.12.0/helm-charts/charts/csi-<driver>/templates/
-  csi-<driver>-bundle-2.12.0/helm-charts/charts/csi-<driver>/templates/node.yaml
-  csi-<driver>-bundle-2.12.0/helm-charts/charts/csi-<driver>/templates/_helpers.tpl
-  csi-<driver>-bundle-2.12.0/helm-charts/charts/csi-<driver>/templates/csidriver.yaml
-  csi-<driver>-bundle-2.12.0/helm-charts/charts/csi-<driver>/templates/driver-config-params.yaml
-  csi-<driver>-bundle-2.12.0/helm-charts/charts/csi-<driver>/templates/controller.yaml
-  csi-<driver>-bundle-2.12.0/LICENSE
-  csi-<driver>-bundle-2.12.0/README.md
-  csi-<driver>-bundle-2.12.0/dell-csi-helm-installer/
-  csi-<driver>-bundle-2.12.0/dell-csi-helm-installer/common.sh
-  csi-<driver>-bundle-2.12.0/dell-csi-helm-installer/verify-csi-<driver>.sh
-  csi-<driver>-bundle-2.12.0/dell-csi-helm-installer/images.tar/
-  csi-<driver>-bundle-2.12.0/dell-csi-helm-installer/images.tar/registry.k8s.io-sig-storage-csi-resizer-v1.12.0.tar
-  csi-<driver>-bundle-2.12.0/dell-csi-helm-installer/images.tar/quay.io-dell-container-storage-modules-csi-metadata-retriever-v1.9.0.tar
-  csi-<driver>-bundle-2.12.0/dell-csi-helm-installer/images.tar/registry.k8s.io-sig-storage-csi-attacher-v4.7.0.tar
-  csi-<driver>-bundle-2.12.0/dell-csi-helm-installer/images.tar/quay.io-dell-container-storage-modules-csi-<driver>-v2.12.0.tar
-  csi-<driver>-bundle-2.12.0/dell-csi-helm-installer/images.tar/registry.k8s.io-sig-storage-csi-snapshotter-v8.1.0.tar
-  csi-<driver>-bundle-2.12.0/dell-csi-helm-installer/images.tar/quay.io-dell-container-storage-modules-dell-csi-replicator-v1.10.0.tar
-  csi-<driver>-bundle-2.12.0/dell-csi-helm-installer/images.tar/quay.io-dell-container-storage-modules-podmon-v1.11.0.tar
-  csi-<driver>-bundle-2.12.0/dell-csi-helm-installer/images.tar/registry.k8s.io-sig-storage-csi-external-health-monitor-controller-v0.13.0.tar
-  csi-<driver>-bundle-2.12.0/dell-csi-helm-installer/images.tar/registry.k8s.io-sig-storage-csi-node-driver-registrar-v2.12.0.tar
-  csi-<driver>-bundle-2.12.0/dell-csi-helm-installer/images.tar/quay.io-dell-container-storage-modules-csi-volumegroup-snapshotter-v1.7.0.tar
-  csi-<driver>-bundle-2.12.0/dell-csi-helm-installer/images.tar/registry.k8s.io-sig-storage-csi-provisioner-v5.1.0.tar
-  csi-<driver>-bundle-2.12.0/dell-csi-helm-installer/csi-offline-bundle.md
-  csi-<driver>-bundle-2.12.0/dell-csi-helm-installer/.gitignore
-  csi-<driver>-bundle-2.12.0/dell-csi-helm-installer/README.md
-  csi-<driver>-bundle-2.12.0/dell-csi-helm-installer/csi-install.sh
-  csi-<driver>-bundle-2.12.0/dell-csi-helm-installer/images.manifest
-  csi-<driver>-bundle-2.12.0/dell-csi-helm-installer/verify.sh
-  csi-<driver>-bundle-2.12.0/dell-csi-helm-installer/csi-uninstall.sh
-  csi-<driver>-bundle-2.12.0/dell-csi-helm-installer/csi-offline-bundle.sh 
+  csi-<driver>-bundle-2.14.0/
+  csi-<driver>-bundle-2.14.0/helm-charts/
+  csi-<driver>-bundle-2.14.0/helm-charts/charts/
+  csi-<driver>-bundle-2.14.0/helm-charts/charts/csi-<driver>/
+  csi-<driver>-bundle-2.14.0/helm-charts/charts/csi-<driver>/Chart.yaml
+  csi-<driver>-bundle-2.14.0/helm-charts/charts/csi-<driver>/values.yaml
+  csi-<driver>-bundle-2.14.0/helm-charts/charts/csi-<driver>/templates/
+  csi-<driver>-bundle-2.14.0/helm-charts/charts/csi-<driver>/templates/node.yaml
+  csi-<driver>-bundle-2.14.0/helm-charts/charts/csi-<driver>/templates/_helpers.tpl
+  csi-<driver>-bundle-2.14.0/helm-charts/charts/csi-<driver>/templates/csidriver.yaml
+  csi-<driver>-bundle-2.14.0/helm-charts/charts/csi-<driver>/templates/driver-config-params.yaml
+  csi-<driver>-bundle-2.14.0/helm-charts/charts/csi-<driver>/templates/controller.yaml
+  csi-<driver>-bundle-2.14.0/LICENSE
+  csi-<driver>-bundle-2.14.0/README.md
+  csi-<driver>-bundle-2.14.0/dell-csi-helm-installer/
+  csi-<driver>-bundle-2.14.0/dell-csi-helm-installer/common.sh
+  csi-<driver>-bundle-2.14.0/dell-csi-helm-installer/verify-csi-<driver>.sh
+  csi-<driver>-bundle-2.14.0/dell-csi-helm-installer/images.tar/
+csi-<driver>-bundle-2.14.0/dell-csi-helm-installer/images.tar/registry.k8s.io-sig-storage-csi-resizer-{{< version-docs key="resizer_latest_version" >}}.tar
+csi-<driver>-bundle-2.14.0/dell-csi-helm-installer/images.tar/quay.io-dell-container-storage-modules-csi-metadata-retriever-{{< version-docs key="metadata_retriever_latest_version" >}}.tar
+csi-<driver>-bundle-2.14.0/dell-csi-helm-installer/images.tar/registry.k8s.io-sig-storage-csi-attacher-{{< version-docs key="attacher_latest_version" >}}.tar
+csi-<driver>-bundle-2.14.0/dell-csi-helm-installer/images.tar/quay.io-dell-container-storage-modules-csi-<driver>-{{< version-docs key="PStore_latestVersion" >}}.tar
+csi-<driver>-bundle-2.14.0/dell-csi-helm-installer/images.tar/registry.k8s.io-sig-storage-csi-snapshotter-{{< version-docs key="snapshotter_latest_version" >}}.tar
+csi-<driver>-bundle-2.14.0/dell-csi-helm-installer/images.tar/quay.io-dell-container-storage-modules-dell-csi-replicator-{{< version-docs key="replicator_latest_version" >}}.tar
+csi-<driver>-bundle-2.14.0/dell-csi-helm-installer/images.tar/quay.io-dell-container-storage-modules-podmon-{{< version-docs key="podmon_latest_version" >}}.tar
+csi-<driver>-bundle-2.14.0/dell-csi-helm-installer/images.tar/registry.k8s.io-sig-storage-csi-external-health-monitor-controller-{{< version-docs key="health_monitor_controller_latest_version" >}}.tar
+csi-<driver>-bundle-2.14.0/dell-csi-helm-installer/images.tar/registry.k8s.io-sig-storage-csi-node-driver-registrar-{{< version-docs key="node_driver_registrar_latest_version" >}}.tar
+csi-<driver>-bundle-2.14.0/dell-csi-helm-installer/images.tar/quay.io-dell-container-storage-modules-csi-volumegroup-snapshotter-{{< version-docs key="volumegroup_snapshotter_latest_version" >}}.tar
+csi-<driver>-bundle-2.14.0/dell-csi-helm-installer/images.tar/registry.k8s.io-sig-storage-csi-provisioner-{{< version-docs key="provisioner_latest_version" >}}.tar
+  csi-<driver>-bundle-2.14.0/dell-csi-helm-installer/csi-offline-bundle.md
+  csi-<driver>-bundle-2.14.0/dell-csi-helm-installer/.gitignore
+  csi-<driver>-bundle-2.14.0/dell-csi-helm-installer/README.md
+  csi-<driver>-bundle-2.14.0/dell-csi-helm-installer/csi-install.sh
+  csi-<driver>-bundle-2.14.0/dell-csi-helm-installer/images.manifest
+  csi-<driver>-bundle-2.14.0/dell-csi-helm-installer/verify.sh
+  csi-<driver>-bundle-2.14.0/dell-csi-helm-installer/csi-uninstall.sh
+  csi-<driver>-bundle-2.14.0/dell-csi-helm-installer/csi-offline-bundle.sh
 ```
 {{< /collapse >}}
 3. Run the `csi-offline-bundle.sh` script with the `-p` option and specify the registry path with the `-r` option:
-```bash  
-cd csi-<driver>-bundle-2.12.0/dell-csi-helm-installer 
+```bash
+cd csi-<driver>-bundle-2.14.0/dell-csi-helm-installer
 ./csi-offline-bundle.sh -p -r localregistry:5000/dell-csi-<driver>
 ```
 
@@ -165,6 +165,6 @@ cd csi-<driver>-bundle-2.12.0/dell-csi-helm-installer
 
 #### **Install Container Storage Modules**
 
-**Prepare for Installation:**  Ensure required images are available and Helm Charts configuration is updated. 
+**Prepare for Installation:**  Ensure required images are available and Helm Charts configuration is updated.
 
 **Follow Installation Procedure:** Proceed with the usual installation steps as documented for [Helm](docs/getting-started/installation/helm).
