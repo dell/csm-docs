@@ -60,15 +60,15 @@ by variables in the chart. There is a _vgsnapshotter_ block specified in the _va
 # These options control the running of the vgsnapshotter container
 vgsnapshotter:
   enabled: false
-  image: 
- 
+  image:
+
 ```
-> ℹ️ **NOTE:**: It is recommended you set controllerCount to 1 in your [values file](https://github.com/dell/csi-powerflex/blob/fea900ff9b528837714c215af0e7e340a8773e94/helm/csi-vxflexos/values.yaml#L132), to avoid duplicate vgs controllers running  
+> ℹ️ **NOTE:**: It is recommended you set controllerCount to 1 in your [values file](https://github.com/dell/csi-powerflex/blob/fea900ff9b528837714c215af0e7e340a8773e94/helm/csi-vxflexos/values.yaml#L132), to avoid duplicate vgs controllers running
 
 To deploy Container Storage Modules Volume Group Snapshotter with the driver, these changes are required:
 
 1. Enable Container Storage Modules Volume Group Snapshotter by changing the vgsnapshotter.enabled boolean to true.
-2. In the vgsnapshotter.image field, put the location of the image you created, or link to the one already built (such as the one on quay.io, `quay.io/dell/container-storage-modules/csi-volumegroup-snapshotter:v1.8.0`).
+2. In the vgsnapshotter.image field, put the location of the image you created, or link to the one already built (such as the one on quay.io, `quay.io/dell/container-storage-modules/csi-volumegroup-snapshotter:v1.8.2`).
 3. Install/upgrade the driver normally. You should now have VGS successfully deployed with the driver!
 
 ## Creating Volume Group Snapshots

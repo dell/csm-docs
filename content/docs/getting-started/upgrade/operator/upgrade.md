@@ -1,8 +1,8 @@
 ---
 title: "Operator Upgrade"
 linkTitle: "Operator Upgrade"
-description: 
-toc_hide: true 
+description:
+toc_hide: true
 weight: 2
 ---
 
@@ -30,7 +30,7 @@ The `Update approval` (**`InstallPlan`** in OLM terms) strategy plays a role whi
 1. Clone and checkout the required csm-operator version using
 
   ```bash
-  git clone -b v1.8.0 https://github.com/dell/csm-operator.git
+  git clone -b v1.9.0 https://github.com/dell/csm-operator.git
   ```
 2. `cd csm-operator`
 3. Execute `bash scripts/install.sh --upgrade`  . This command will install the latest version of the operator.
