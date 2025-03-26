@@ -62,7 +62,7 @@ Given a setup where Kubernetes, a storage system, and the Container Storage Modu
 
     **Note:** Authorization does not currently support the `backupEndpoint` parameter.
 
-    Example: 
+    Example:
     ```yaml
     storageArrays:
       - storageArrayId: "000000000001"
@@ -87,7 +87,7 @@ Given a setup where Kubernetes, a storage system, and the Container Storage Modu
 
     **Note:** Authorization does not currently support the `backupEndpoint` parameter.
 
-    Example: 
+    Example:
     ```yaml
     storageArrays:
       - storageArrayId: "000000000001"
@@ -229,7 +229,7 @@ Given a setup where Kubernetes, a storage system, and the Container Storage Modu
     authorization:
       enabled: true
       # sidecarProxyImage: the container image used for the csm-authorization-sidecar.
-      # Default value: quay.io/dell/container-storage-modules/csm-authorization-sidecar:v2.0.0
+      # Default value: quay.io/dell/container-storage-modules/csm-authorization-sidecar:v2.2.0
       sidecarProxyImage: quay.io/dell/container-storage-modules/csm-authorization-sidecar:{{< version-docs key="Authv2_csm_authorization_sidecar" >}}
       # proxyHost: hostname of the csm-authorization server
       # Default value: None
