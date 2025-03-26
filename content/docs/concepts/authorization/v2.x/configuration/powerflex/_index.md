@@ -118,7 +118,7 @@ Given a setup where Kubernetes, a storage system, and the Authorization Proxy Se
 
     - Update the `SKIP_CERTIFICATE_VALIDATION` environment value to `true` or `false` depending on if you want to disable or enable certificate validation of Authorization Proxy Server.
 
-    - Do not update the `configVersion`. You will notice in the example that it is set to v1.14.0, this ensures that Operator checks on version support do not prevent deployment of the v2.2.0 version of authorization.
+    - Do not update the `configVersion`. You will notice in the example that it is set to v1.14.0. This ensures that Operator checks on version support do not prevent deployment of the v2.2.0 version of authorization.
 
     Example:
 

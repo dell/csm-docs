@@ -102,7 +102,7 @@ k8s-ab74921ab9      8Gi        RWO            Delete           Bound      author
 kubectl -n <authorization-namespace> edit deploy/redis-primary
 ```
 
-The Deployment has a volumes field that should look like this:
+The Deployment has a volumes field that must look like this:
 
 ```yaml
 volumes:
@@ -120,4 +120,4 @@ volumes:
     claimName: redis-backup
 ```
 
-Once saved, Redis will now use the backup volume.
+Once saved, Redis now uses the backup volume.
