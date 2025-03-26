@@ -72,7 +72,7 @@ Both editions have the same codebase and are supported by Dell Technologies, the
 1. Install volume snapshot CRDs. For detailed snapshot setup procedure, [click here](../../snapshots/#volume-snapshot-feature).
 2. Clone and checkout the required csm-operator version using
 ```bash
-git clone -b v1.8.0 https://github.com/dell/csm-operator.git
+git clone -b v1.8.1 https://github.com/dell/csm-operator.git
 ```
 3. `cd csm-operator`
 4. _(Optional)_ If using a local Docker image, edit the `deploy/operator.yaml` file and set the image name for the CSM Operator Deployment.
