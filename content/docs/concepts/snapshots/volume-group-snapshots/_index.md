@@ -68,7 +68,7 @@ vgsnapshotter:
 To deploy Container Storage Modules Volume Group Snapshotter with the driver, these changes are required:
 
 1. Enable Container Storage Modules Volume Group Snapshotter by changing the vgsnapshotter.enabled boolean to true.
-2. In the vgsnapshotter.image field, put the location of the image you created, or link to the one already built (such as the one on quay.io, `quay.io/dell/container-storage-modules/csi-volumegroup-snapshotter:v1.8.2`).
+2. In the vgsnapshotter.image field, put the location of the image you created, or link to the one already built (such as the one on quay.io, `quay.io/dell/container-storage-modules/csi-volumegroup-snapshotter:v1.8.1`).
 3. Install/upgrade the driver normally. You should now have VGS successfully deployed with the driver!
 
 ## Creating Volume Group Snapshots
