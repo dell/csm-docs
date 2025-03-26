@@ -17,12 +17,12 @@
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="docs">
-    <meta property="article:modified_time" content="2025-02-07T02:00:50+05:30">
+    <meta property="article:modified_time" content="2025-03-26T08:31:54-05:00">
 
   <meta itemprop="name" content="PowerMax">
   <meta itemprop="description" content="Release notes for PowerMax CSI driver">
-  <meta itemprop="dateModified" content="2025-02-07T02:00:50+05:30">
-  <meta itemprop="wordCount" content="641">
+  <meta itemprop="dateModified" content="2025-03-26T08:31:54-05:00">
+  <meta itemprop="wordCount" content="733">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="PowerMax">
   <meta name="twitter:description" content="Release notes for PowerMax CSI driver">
@@ -125,7 +125,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.7ad6556f3c7273c6621f3a6d0e50cb8b.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.f5c8a282291d59ef570c588e13dae29c.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -149,7 +149,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.7ad6556f3c7273c6621f3a6d0e50cb8b.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.f5c8a282291d59ef570c588e13dae29c.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -802,6 +802,10 @@ Known Issues <a class="header-link"  href="#known-issues" style=" display: inlin
       <tr>
           <td>When running CSI-PowerMax with Replication in a multi-cluster configuration, the driver on the target cluster fails and the following error is seen in logs: <code>error=&quot;CSI reverseproxy service host or port not found, CSI reverseproxy not installed properly&quot;</code></td>
           <td>The reverseproxy service needs to be created manually on the target cluster. Follow <a href="../../../deployment/csmoperator/modules/replication#configuration-steps">the instructions here</a> to create it.</td>
+      </tr>
+      <tr>
+          <td>When using Helm charts to install the driver with multiple PowerMax arrays, the <code>powermax-array-config</code> ConfigMap is incorrectly created, resulting in multiple <code>X_CSI_POWERMAX_ENDPOINT</code> entries. This causes the driver pods to crash with the error <code>&quot;mapping key &quot;X_CSI_POWERMAX_ENDPOINT&quot; already defined&quot;</code>.</td>
+          <td>This issue has been reported at <a href="https://github.com/dell/csm/issues/1760">https://github.com/dell/csm/issues/1760</a>. Workaround: <br /> 1. Edit the ConfigMap <code>powermax-array-config</code> and remove all instances of <code>X_CSI_POWERMAX_ENDPOINT</code>. <br /> <code>kubectl edit configmaps powermax-array-config -n &lt;csi-powermax-namespace&gt;</code> <br /> 2. Restart the driver pods.  <br /> <code>kubectl rollout restart deployment,daemonset -n &lt;csi-powermax-namespace&gt;</code> <br /> Note: Users may also need to delete any old ReplicaSets in order to bring the new controllers up.</td>
       </tr>
   </tbody>
 </table>
