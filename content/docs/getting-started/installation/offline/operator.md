@@ -55,7 +55,7 @@ Here is the output of a request to build an offline bundle for the Dell CSM Oper
 * Pulling and saving container images
 
    quay.io/dell/container-storage-modules/csi-isilon:{{< version-docs key="PScale_latestVersion" >}}
-   quay.io/dell/container-storage-modules/csi-metadata-retriever:{{< version-docs key="metadata_retriever_latestVersion" >}}
+   quay.io/dell/container-storage-modules/csi-metadata-retriever:{{< version-docs key="metadata_retriever_latest_version" >}}
    quay.io/dell/container-storage-modules/csipowermax-reverseproxy:{{< version-docs key="Authv1_PMax_ReverseProxy_ConfigVersion" >}}
    quay.io/dell/container-storage-modules/csi-powermax:{{< version-docs key="PMax_latestVersion" >}}
    quay.io/dell/container-storage-modules/csi-powerstore:{{< version-docs key="PStore_latestVersion" >}}
@@ -173,7 +173,7 @@ Loaded image: registry.k8s.io/sig-storage/csi-snapshotter:{{< version-docs key="
 * Tagging and pushing images
 
    quay.io/dell/container-storage-modules/csi-isilon:{{< version-docs key="PScale_latestVersion" >}} -> localregistry:5000/dell-csm-operator/csi-isilon:{{< version-docs key="PScale_latestVersion" >}}
-   quay.io/dell/container-storage-modules/csi-metadata-retriever:{{< version-docs key="metadata_retriever_latestVersion" >}} -> localregistry:5000/dell-csm-operator/csi-metadata-retriever:{{< version-docs key="metadata_retriever_latestVersion" >}}
+   quay.io/dell/container-storage-modules/csi-metadata-retriever:{{< version-docs key="metadata_retriever_latest_version" >}} -> localregistry:5000/dell-csm-operator/csi-metadata-retriever:{{< version-docs key="metadata_retriever_latest_version" >}}
    ...
    ...
    registry.k8s.io/sig-storage/csi-resizer:{{< version-docs key="resizer_latest_version" >}} -> localregistry:5000/dell-csm-operator/csi-resizer:{{< version-docs key="resizer_latest_version" >}}
@@ -182,7 +182,7 @@ Loaded image: registry.k8s.io/sig-storage/csi-snapshotter:{{< version-docs key="
 * Preparing files within /root/dell-csm-operator-bundle
 
    changing: quay.io/dell/container-storage-modules/csi-isilon:{{< version-docs key="PScale_latestVersion" >}} -> localregistry:5000/dell-csm-operator/csi-isilon:{{< version-docs key="PScale_latestVersion" >}}
-   changing: quay.io/dell/container-storage-modules/csi-metadata-retriever:{{< version-docs key="metadata_retriever_latestVersion" >}} -> localregistry:5000/dell-csm-operator/csi-metadata-retriever:{{< version-docs key="metadata_retriever_latestVersion" >}}
+   changing: quay.io/dell/container-storage-modules/csi-metadata-retriever:{{< version-docs key="metadata_retriever_latest_version" >}} -> localregistry:5000/dell-csm-operator/csi-metadata-retriever:{{< version-docs key="metadata_retriever_latest_version" >}}
    ...
    ...
    changing: registry.k8s.io/sig-storage/csi-resizer:{{< version-docs key="resizer_latest_version" >}} -> localregistry:5000/dell-csm-operator/csi-resizer:{{< version-docs key="resizer_latest_version" >}}
