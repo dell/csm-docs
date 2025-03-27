@@ -113,9 +113,7 @@ The Grafana dashboards require Grafana to be deployed in the same Kubernetes clu
 
 | Supported Version | Helm Chart                                                |
 | ----------------- | --------------------------------------------------------- |
-| 10.x      | [Grafana Helm chart](https://github.com/grafana/helm-charts/tree/main/charts/grafana) |
-
-**Note:** From Grafana 10.x, deprecation warnings for Angular plugins will appear in the UI, but dashboards still work. **Use of Grafana 11.x is recommended**
+| 11.x      | [Grafana Helm chart](https://github.com/grafana/helm-charts/tree/main/charts/grafana) |
 
 Grafana must be configured with the following data sources/plugins:
 
