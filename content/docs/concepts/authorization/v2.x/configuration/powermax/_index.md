@@ -162,13 +162,13 @@ Given a setup where Kubernetes, a storage system, and the Container Storage Modu
           # and its associated key
           # Default value: None
           # Example: "tls-secret"
-          - name: X_CSI_REVPROXY_TLS_SECRET143
+          - name: X_CSI_REVPROXY_TLS_SECRET
               value: "csirevproxy-tls-secret"
           - name: X_CSI_REVPROXY_PORT
               value: "2222"
           - name: X_CSI_CONFIG_MAP_NAME
               value: "powermax-reverseproxy-config"
-          # deployAsSidecar defines the way reversproxy is installed with the driver
+          # deployAsSidecar defines the way reverseproxy is installed with the driver
           # set it true, if csm-auth is enabled / you want it as a sidecar container
           # set it false, if you want it as a deployment
           - name: "DeployAsSidecar"
