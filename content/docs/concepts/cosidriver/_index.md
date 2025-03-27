@@ -19,8 +19,8 @@ Dell COSI Driver is a multi-backend driver, meaning that it can connect to multi
 {{<table "table table-striped table-bordered table-sm">}}
 |            |    COSI    |
 |------------|:----------:|
-| Kubernetes |    1.27    |
-| K3s        |    1.27    |
+|  <div style="text-align: left"> Kubernetes |    1.27    |
+| <div style="text-align: left">  K3s        |    1.27    |
 {{</table>}}
 
 ### COSI Driver Capabilities
@@ -28,10 +28,10 @@ Dell COSI Driver is a multi-backend driver, meaning that it can connect to multi
 {{<table "table table-striped table-bordered table-sm">}}
 | Features               | ObjectScale |
 |------------------------|:-----------:|
-| Bucket Creation        |     yes     |
-| Bucket Deletion        |     yes     |
-| Bucket Access Granting |     yes     |
-| Bucket Access Revoking |     yes     |
+|  <div style="text-align: left"> Bucket Creation        |     Yes     |
+|  <div style="text-align: left"> Bucket Deletion        |     Yes     |
+|  <div style="text-align: left"> Bucket Access Granting |     Yes     |
+|  <div style="text-align: left"> Bucket Access Revoking |     Yes     |
 {{</table>}}
 
 ## Backend Storage Details
@@ -39,9 +39,9 @@ Dell COSI Driver is a multi-backend driver, meaning that it can connect to multi
 {{<table "table table-striped table-bordered table-sm">}}
 | Protocol   | ObjectScale |
 |------------|:-----------:|
-| AWS S3     |     yes     |
-| GCS        |     N/A     |
-| Azure Blob |     N/A     |
+|  <div style="text-align: left"> AWS S3     |     Yes     |
+|  <div style="text-align: left"> GCS        |     N/A     |
+|  <div style="text-align: left"> Azure Blob |     N/A     |
 {{</table>}}
 
 ## Supported Storage Platforms
@@ -49,7 +49,7 @@ Dell COSI Driver is a multi-backend driver, meaning that it can connect to multi
 {{<table "table table-striped table-bordered table-sm">}}
 | Storage Platform | Versions |
 |------------------|:--------:|
-| ObjectScale      |  1.2.x   |
+| <div style="text-align: left">  ObjectScale      |  1.2.x   |
 {{</table>}}
 
 > **NOTE:** Object Scale 1.2.x is planned for End of Standard Support on January 31st 2025. Please refer <a href="https://www.dell.com/support/kbdoc/en-uk/000185734/all-dell-emc-end-of-life-documents?lang=en">Dell Support documentation</a> for more information. We plan to support COSI driver when a new version of ObjectScale is available.

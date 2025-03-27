@@ -3,6 +3,8 @@ title: PowerMax
 linktitle: PowerMax 
 description: Troubleshooting PowerMax Driver
 ---
+<div class="tdleft">
+
 | Symptoms | Prevention, Resolution or Workaround |
 |------------|--------------|
 | `kubectl describe pod powermax-controller-<xyz> –n <namespace>` indicates that the driver image could not be loaded | You may need to put an insecure-registries entry in `/etc/docker/daemon.json` or log in to the docker registry |
@@ -22,3 +24,4 @@ description: Troubleshooting PowerMax Driver
 | Standby controller pod is in crashloopbackoff state | Scale down the replica count of the controller pod's deployment to 1 using ```kubectl scale deployment <deployment_name> --replicas=1 -n <driver_namespace>``` |  
 | When running CSI-PowerMax with Replication in a multi-cluster configuration, the driver on the target cluster fails and the following error is seen in logs: `error="CSI reverseproxy service host or port not found, CSI reverseproxy not installed properly"` | The reverseproxy service needs to be created manually on the target cluster. Follow [the instructions here](/docs/getting-started/installation/kubernetes/powermax/csmoperator/csm-modules/replication/#configuration-steps) to create it.|
 | PVC creation is failing with error `A problem occurred modifying the storage group resource: Failed to create batch task(s): The maximum allowed devices for a storage group has been exceeded`. This is because of a hardware limit of 4k devices in a storage group.| Create a separate Storage Class with a new unique `ApplicationPrefix` parameter (such as `ApplicationPrefix: OCPX`) or add a new unique `StorageGroup` parameter (such as `StorageGroup: "custom_SG_1"`) to place the provisioned volumes in a new Storage Group.|
+</div>

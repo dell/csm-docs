@@ -3,7 +3,7 @@ title: "Prerequisite"
 linkTitle: "Prerequisite"
 weight: 1
 Description: >
-
+toc_hide: true
 ---  
 
 Before you install CSI Driver for Unity XT, verify the requirements that are mentioned in this topic are installed and configured.
@@ -18,15 +18,16 @@ Before you install CSI Driver for Unity XT, verify the requirements that are men
 {{< tabpane text=true lang="en" >}}
 {{% tab header="FC" lang="en" %}}
 
-1. Complete the zoning of each host with the Unity Storage Array. Please refer to <a  href="https://elabnavigator.dell.com/vault/pdf/Linux.pdf" target="_blank" style="font-size:0.9rem">Host Connectivity Guide</a> for the guidelines when setting up a Fibre Channel SAN infrastructure.  
+1. Complete the zoning of each host with the Unity Storage Array. Please refer the <a  href="https://elabnavigator.dell.com/vault/pdf/Linux.pdf" target="_blank" style="font-weight:bold; font-size:0.9rem">Host Connectivity Guide</a> for the guidelines when setting a Fibre Channel SAN infrastructure.  
 <br> 
 
 2. Verify the initiators of each host are logged in to the Unity Storage Array. CSM will perform the Host Registration of each host with the Unity Array. 
 
 <br> 
 
-3. Multipathing software configuration
-        
+3. Multipathing software configuration 
+    
+    
     a. Configure Device Mapper MPIO for Unity FC connectivity
 
     Use this command to create the machine configuration to configure the DM-MPIO service on all the worker hosts for FC connectivity.
@@ -121,13 +122,14 @@ Before you install CSI Driver for Unity XT, verify the requirements that are men
     ``` 
 
 
+
     <br> 
 
 {{% /tab %}}
 {{% tab header="iSCSI" lang="en" %}}
 
 
- 1. Complete the iSCSI network configuration to connect the hosts with the Unity Storage array. Please refer to <a  href="https://elabnavigator.dell.com/vault/pdf/Linux.pdf" target="_blank" style="font-size:0.9rem">Host Connectivity Guide</a>. for the  best practices for attaching the hosts to a Unity storage array.  
+ 1. Complete the iSCSI network configuration to connect the hosts with the Unity Storage array. Please refer the [host connectivity guide](https://www.delltechnologies.com/asset/en-us/products/storage/technical-support/docu5128.pdf). for the  best practices for attaching the hosts to a Unity storage array.  
  <br>
  2. Verify the initiators of each host are logged in to the Unity Storage Array. CSM will perform the Host Registration of each host with the Unity Array.  
  <br>
@@ -158,7 +160,6 @@ Before you install CSI Driver for Unity XT, verify the requirements that are men
            units:
            - name: "iscsid.service"
              enabled: true
-     EOF
      ```
  <br>
 
@@ -263,3 +264,14 @@ Before you install CSI Driver for Unity XT, verify the requirements that are men
      <br> 
 {{% /tab %}}
 {{< /tabpane >}}   
+
+
+<!--
+The CSI Driver for Unity XT supports iSCSI connectivity.
+
+3. Multipathing software configuration
+        
+    a. Configure Device Mapper MPIO for Unity FC connectivity
+
+For more information about configuring iSCSI, see [Dell Host Connectivity guide](https://www.delltechnologies.com/asset/en-us/products/storage/technical-support/docu5128.pdf). 
+-->
