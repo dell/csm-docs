@@ -6,14 +6,6 @@ description: Release notes for PowerFlex CSI driver
 
 ### New Features/Changes
 
-### Fixed Issues
-- [#1782 - [BUG]: Pods Stuck in Terminating State After PowerFlex CSI Node Pod Restart When Deployments Share Same Node](https://github.com/dell/csm/issues/1782)
-
-
-## Release Notes - CSI PowerFlex v2.13.0
-
-### New Features/Changes
-
 - [#1561 - [FEATURE]: Added support for Kubernetes 1.32 ](https://github.com/dell/csm/issues/1561)
 - [#1612 - [FEATURE]: Multi-Availability Zone (AZ) support with multiple storage systems - dedicated storage systems in each AZ](https://github.com/dell/csm/issues/1612)
 - [#1613 - [FEATURE]: CSI PowerFlex must have the ability to connect a subset of the worker nodes to a storage array for multi-array support](https://github.com/dell/csm/issues/1613)
@@ -25,6 +17,7 @@ description: Release notes for PowerFlex CSI driver
 - [#1639 - [BUG]: CSM PowerFlex entering boot loop when array has long response times](https://github.com/dell/csm/issues/1639)
 - [#1641 - [BUG]: NodeGetVolumeStats will cause panic when called w/ an Ephemeral volume ](https://github.com/dell/csm/issues/1641)
 - [#1667 - [BUG]: Labels versions and maintainer update for CSM images ](https://github.com/dell/csm/issues/1667)
+- [#1782 - [BUG]: Pods Stuck in Terminating State After PowerFlex CSI Node Pod Restart When Deployments Share Same Node](https://github.com/dell/csm/issues/1782)
 
 ### Known Issues
 
