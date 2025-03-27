@@ -1,6 +1,6 @@
 ---
 title: Authorization
-linktitle: Authorization 
+linktitle: Authorization
 weight: 3
 description: >
   Dell Technologies (Dell) Container Storage Modules (CSM) for Authorization Upgrade
@@ -31,7 +31,7 @@ This section outlines the upgrade steps for Container Storage Modules (CSM) for 
 
     ```bash
     NAME                            CHART VERSION   APP VERSION     DESCRIPTION
-    dell/csm-authorization          1.13.0          1.13.0          CSM for Authorization is part of the [Container...
+    dell/csm-authorization          1.14.0          1.14.0          CSM for Authorization is part of the [Container...
     ```
 
 3. Upgrade to the latest CSM for Authorization release:

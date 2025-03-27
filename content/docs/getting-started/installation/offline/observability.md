@@ -77,11 +77,11 @@ To perform an offline installation of a Helm chart, the following steps should b
     *
     * Downloading and saving Docker images
 
-      quay.io/dell/container-storage-modules/csm-topology:v1.11.0
-      quay.io/dell/container-storage-modules/csm-metrics-powerflex:v1.11.0
-      quay.io/dell/container-storage-modules/csm-metrics-powerstore:v1.11.0
-      quay.io/dell/container-storage-modules/csm-metrics-powerscale:v1.8.0
-      quay.io/dell/container-storage-modules/csm-metrics-powermax:v1.6.0
+      quay.io/dell/container-storage-modules/csm-topology:{{< version-docs key="Observability_csm_topology_image" >}}
+      quay.io/dell/container-storage-modules/csm-metrics-powerflex:{{< version-docs key="Observability_csm_metrics_PFlex_image" >}}
+      quay.io/dell/container-storage-modules/csm-metrics-powerstore:{{< version-docs key="Observability_csm_metrics_PStore_image" >}}
+      quay.io/dell/container-storage-modules/csm-metrics-powerscale:{{< version-docs key="Observability_csm_metrics_PScale_image" >}}
+      quay.io/dell/container-storage-modules/csm-metrics-powermax:{{< version-docs key="Observability_csm_metrics_PMax_image" >}}
       otel/opentelemetry-collector:0.42.0
       nginxinc/nginx-unprivileged:1.27
 
@@ -113,11 +113,11 @@ To perform an offline installation of a Helm chart, the following steps should b
     *
     * Loading, tagging, and pushing Docker images to registry <my-registry>:5000/
 
-      quay.io/dell/container-storage-modules/csm-topology:v1.11.0 -> <my-registry>:5000/csm-topology:v1.11.0
-      quay.io/dell/container-storage-modules/csm-metrics-powerflex:v1.11.0 -> <my-registry>:5000/csm-metrics-powerflex:v1.11.0
-      quay.io/dell/container-storage-modules/csm-metrics-powerstore:v1.11.0 -> <my-registry>:5000/csm-metrics-powerstore:v1.11.0
-      quay.io/dell/container-storage-modules/csm-metrics-powerscale:v1.8.0 -> <my-registry>:5000/csm-metrics-powerscale:v1.8.0
-      quay.io/dell/container-storage-modules/csm-metrics-powermax:v1.6.0 -> <my-registry>:5000/csm-metrics-powermax:v1.6.0
+      quay.io/dell/container-storage-modules/csm-topology:{{< version-docs key="Observability_csm_topology_image" >}} -> <my-registry>:5000/csm-topology:{{< version-docs key="Observability_csm_topology_image" >}}
+      quay.io/dell/container-storage-modules/csm-metrics-powerflex:{{< version-docs key="Observability_csm_metrics_PFlex_image" >}} -> <my-registry>:5000/csm-metrics-powerflex:{{< version-docs key="Observability_csm_metrics_PFlex_image" >}}
+      quay.io/dell/container-storage-modules/csm-metrics-powerstore:{{< version-docs key="Observability_csm_metrics_PStore_image" >}} -> <my-registry>:5000/csm-metrics-powerstore:{{< version-docs key="Observability_csm_metrics_PStore_image" >}}
+      quay.io/dell/container-storage-modules/csm-metrics-powerscale:{{< version-docs key="Observability_csm_metrics_PScale_image" >}} -> <my-registry>:5000/csm-metrics-powerscale:{{< version-docs key="Observability_csm_metrics_PScale_image" >}}
+      quay.io/dell/container-storage-modules/csm-metrics-powermax:{{< version-docs key="Observability_csm_metrics_PMax_image" >}} -> <my-registry>:5000/csm-metrics-powermax:{{< version-docs key="Observability_csm_metrics_PMax_image" >}}
       otel/opentelemetry-collector:0.42.0 -> <my-registry>:5000/opentelemetry-collector:0.42.0
       nginxinc/nginx-unprivileged:1.27 -> <my-registry>:5000/nginx-unprivileged:1.27
     ```
@@ -170,7 +170,7 @@ kubectl get configmap [VXFLEXOS-CONFIG-PARAMS] -n [CSI_DRIVER_NAMESPACE] -o yaml
 
 kubectl get secret karavi-authorization-config proxy-server-root-certificate proxy-authz-tokens -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -
 ```
-{{< /hide >}} 
+{{< /hide >}}
 
 {{< hide id="2">}}
 
@@ -219,7 +219,7 @@ kubectl get configmap [ISILON-CONFIG-PARAMS] -n [CSI_DRIVER_NAMESPACE] -o yaml |
 kubectl get secret karavi-authorization-config proxy-server-root-certificate proxy-authz-tokens -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | sed 's/name: karavi-authorization-config/name: isilon-karavi-authorization-config/' | sed 's/name: proxy-server-root-certificate/name: isilon-proxy-server-root-certificate/' | sed 's/name: proxy-authz-tokens/name: isilon-proxy-authz-tokens/' | kubectl create -f -
 ```
 {{< /hide >}}
-{{< hide id="4">}} 
+{{< hide id="4">}}
 
 __CSI Driver for PowerMax:__
 
@@ -280,7 +280,7 @@ kubectl get secret karavi-authorization-config proxy-server-root-certificate pro
   {{< hide id="0" >}}- The default `values.yaml` is configured to deploy the CSM for Observability Topology service on install.{{< /hide >}}
   {{< hide id="5" >}}- If CSM for Authorization is enabled for CSI PowerFlex, the `karaviMetricsPowerflex.authorization` parameters must be properly configured.{{< /hide >}}
   {{< hide id="6" >}}- If CSM for Authorization is enabled for CSI PowerScale, the `karaviMetricsPowerscale.authorization` parameters must be properly configured.{{< /hide >}}
-  {{< hide id="7" >}}- If CSM for Authorization is enabled for CSI PowerMax, the `karaviMetricsPowerMax.authorization` parameters must be properly configured.{{< /hide >}} 
+  {{< hide id="7" >}}- If CSM for Authorization is enabled for CSI PowerMax, the `karaviMetricsPowerMax.authorization` parameters must be properly configured.{{< /hide >}}
 
     ```bash
     helm install -n install-namespace app-name karavi-observability

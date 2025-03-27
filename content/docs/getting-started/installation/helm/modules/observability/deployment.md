@@ -235,7 +235,7 @@ The following table lists the configurable parameters of the CContainer Storage 
 | `karaviMetricsPowerstore.zipkin.uri` | URI of a Zipkin instance where tracing data can be forwarded | |
 | `karaviMetricsPowerstore.zipkin.serviceName` | Service name used for Zipkin tracing data | `metrics-powerstore`|
 | `karaviMetricsPowerstore.zipkin.probability` | Percentage of trace information to send to Zipkin (Valid range: 0.0 to 1.0) | `0` |
-| `karaviMetricsPowerscale.image` |  CSM Metrics for PowerScale Service image | `quay.io/dell/container-storage-modules/csm-metrics-powerscale:v1.7.0`|
+| `karaviMetricsPowerscale.image` |  CSM Metrics for PowerScale Service image | `quay.io/dell/container-storage-modules/csm-metrics-powerscale:{{< version-docs key="Observability_csm_metrics_PScale_image" >}}`|
 | `karaviMetricsPowerscale.enabled` | Enable CSM Metrics for PowerScale service | `true` |
 | `karaviMetricsPowerscale.collectorAddr` | Metrics Collector accessible from the Kubernetes cluster | `otel-collector:55680` |
 | `karaviMetricsPowerscale.provisionerNames` | Provisioner Names used to filter for determining PowerScale volumes (must be a Comma-separated list) | `csi-isilon.dellemc.com` |
@@ -260,7 +260,7 @@ The following table lists the configurable parameters of the CContainer Storage 
 | `karaviMetricsPowerMax.capacityPollFrequencySeconds` | The polling frequency (in seconds) to gather capacity metrics | `20` |
 | `karaviMetricsPowerMax.performancePollFrequencySeconds` | The polling frequency (in seconds) to gather performance metrics | `20` |
 | `karaviMetricsPowerMax.concurrentPowerMaxQueries` | The number of simultaneous metrics queries to make to PowerMax (MUST be less than 10; otherwise, several request errors from PowerMax will ensue.) | `10` |
-| `karaviMetricsPowermax.useSecret` | Defines whether or not to use the new secret format for the Reverse Proxy. If set to `true` the contents of the Secret specified by `karaviMetricsPowermax.defaultCredentialSecret` will be used to specify the Powermax storage arrays and their login credentials. If set to `false` the Reverse Proxy will use the configMap approach` | `false` | 
+| `karaviMetricsPowermax.useSecret` | Defines whether or not to use the new secret format for the Reverse Proxy. If set to `true` the contents of the Secret specified by `karaviMetricsPowermax.defaultCredentialSecret` will be used to specify the Powermax storage arrays and their login credentials. If set to `false` the Reverse Proxy will use the configMap approach` | `false` |
 | `karaviMetricsPowermax.defaultCredentialSecret` | The name of the Secret used to specify the Powermax storage arrays and their login credentials | `powermax-creds` |
 | `karaviMetricsPowerMax.authorization.enabled` | [Authorization](../../authorization-v2.0) is an optional feature to apply credential shielding of the backend PowerMax. | `false` |
 | `karaviMetricsPowerMax.authorization.proxyHost` | Hostname of the csm-authorization server. |  |

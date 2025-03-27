@@ -1,6 +1,6 @@
 ---
 title: Installation
-linkTitle: Operator 
+linkTitle: Operator
 no_list: true
 weight: 2
 description: >
@@ -17,12 +17,12 @@ Supported driver and module versions offered by the Container Storage Modules Op
 <br>
 <br>
 
-{{< accordion id="One" title="CSM Installation Wizard" markdown="true" >}}  
+{{< accordion id="One" title="CSM Installation Wizard" markdown="true" >}}
 {{<include  file="content/docs/getting-started/installation/installationwizard/operator.md" >}}
 {{< /accordion >}}
 
 <br>
-{{< accordion id="Two" title="CSI Driver" markdown="true" >}}   
+{{< accordion id="Two" title="CSI Driver" markdown="true" >}}
 
 
 </br>
@@ -30,30 +30,30 @@ Supported driver and module versions offered by the Container Storage Modules Op
 ### Operator Installation
 
 </br>
- 
-1. On the OpenShift console, navigate to **OperatorHub** and use the keyword filter to search for **Dell Container Storage Modules.** 
 
-2. Click **Dell Container Storage Modules** tile 
+1. On the OpenShift console, navigate to **OperatorHub** and use the keyword filter to search for **Dell Container Storage Modules.**
+
+2. Click **Dell Container Storage Modules** tile
 
 3. Keep all default settings and click **Install**.
 
 </br>
 <ol>
 
-Verify that the operator is deployed 
-```terminal 
+Verify that the operator is deployed
+```terminal
 oc get operators
 
 NAME                                                          AGE
 dell-csm-operator-certified.openshift-operators               2d21h
-```  
+```
 
 ```terminal
 oc get pod -n openshift-operators
 
 NAME                                                       READY   STATUS       RESTARTS      AGE
 dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      21 (19h ago)  2d21h
-``` 
+```
 
 
 </ol>
@@ -61,7 +61,7 @@ dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      
 
 ### Install Driver
 
-1. **Create namespace:** 
+1. **Create namespace:**
     ```bash
       oc create namespace powermax
     ```
@@ -112,7 +112,7 @@ dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      
       powermax-creds       Opaque      1      3h7m
     ```
 
-3. **Create Powermax Array Configmap:**  
+3. **Create Powermax Array Configmap:**
   Create a configmap using the sample file [here](https://github.com/dell/csi-powermax/blob/main/samples/configmap/powermax-array-config.yaml). Fill in the appropriate values for driver configuration.
    ```yaml
       # To create this configmap use: kubectl create -f powermax-array-config.yaml
@@ -128,7 +128,7 @@ dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      
           # Choose which transport protocol to use (ISCSI, FC, NVMETCP, auto) defaults to auto if nothing is specified
           X_CSI_TRANSPORT_PROTOCOL: ""
           # IP address of the Unisphere for PowerMax (Required), Defaults to https://0.0.0.0:8443
-          X_CSI_POWERMAX_ENDPOINT: "https://10.0.0.0:8443" 
+          X_CSI_POWERMAX_ENDPOINT: "https://10.0.0.0:8443"
           # List of comma-separated array ID(s) which will be managed by the driver (Required)
           X_CSI_MANAGED_ARRAYS: "000000000000,000000000000,"
    ```
@@ -139,9 +139,9 @@ dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      
 
     a. **Minimal Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/main/samples/minimal-samples/powermax_{{< version-docs key="Min_sample_operator_pmax" >}}.yaml) for default settings. If using the secret above, ensure that the secret name of the secret created is `powermax-creds`.
 
-    [OR]                                                
+    [OR]
 
-    b. **Detailed Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powermax_{{< version-docs key="Det_sample_operator_pmax" >}}.yaml) for detailed settings. 
+    b. **Detailed Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powermax_{{< version-docs key="Det_sample_operator_pmax" >}}.yaml) for detailed settings.
 
 > NOTE:
 > [Replication module](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powermax_{{< version-docs key="sample_sc_pmax" >}}.yaml#L283) must be enabled to use the Metro volume
@@ -204,13 +204,13 @@ Example:
   oc get csm powermax -n powermax
 
   NAME        CREATIONTIME   CSIDRIVERTYPE   CONFIGVERSION   STATE
-  powermax    3h             powermax        v2.13.0         Succeeded      
+  powermax    3h             powermax        {{< version-docs key="PMax_latestVersion" >}}         Succeeded      
   ```
 
   Check the status of the CR to verify if the driver installation is in the `Succeeded` state. If the status is not `Succeeded`, see the [Troubleshooting guide](../troubleshooting/#my-dell-csi-driver-install-failed-how-do-i-fix-it) for more information.
-</ul> 
+</ul>
 
-5. Refer [Volume Snapshot Class](https://github.com/dell/csi-powermax/tree/main/samples/volumesnapshotclass) and [Storage Class](https://github.com/dell/csi-powermax/tree/main/samples/storageclass) for the sample files. 
+5. Refer [Volume Snapshot Class](https://github.com/dell/csi-powermax/tree/main/samples/volumesnapshotclass) and [Storage Class](https://github.com/dell/csi-powermax/tree/main/samples/storageclass) for the sample files.
 
 ## Other features to enable
 ### Dynamic Logging Configuration
@@ -307,7 +307,7 @@ X_CSI_TOPOLOGY_CONTROL_ENABLED provides a way to filter topology keys on a node 
    | allowedConnections.rules | List of StorageArrayID:TransportProtocol pair |
    | deniedConnections | List of node, array and protocol info for user denied configuration |
    | deniedConnections.nodeName | Name of the node on which user wants to apply given rules  |
-   | deniedConnections.rules | List of StorageArrayID:TransportProtocol pair | 
+   | deniedConnections.rules | List of StorageArrayID:TransportProtocol pair |
    {{< /collapse >}}
   </ul>
 <br>
@@ -323,9 +323,9 @@ X_CSI_TOPOLOGY_CONTROL_ENABLED provides a way to filter topology keys on a node 
 
 <br>
 
-{{< accordion id="Three" title="CSM Modules"  >}}  
+{{< accordion id="Three" title="CSM Modules"  >}}
 
-<br>   
+<br>
 
 {{< cardcontainer >}}
     {{< customcard link1="./csm-modules/authorizationv1.x"  image="1" title="Authorization v1.x" >}}
@@ -334,10 +334,10 @@ X_CSI_TOPOLOGY_CONTROL_ENABLED provides a way to filter topology keys on a node 
 
     {{< customcard  link1="./csm-modules/observability"   image="1" title="Observability"  >}}
 
-    {{< customcard  link1="./csm-modules/replication"  image="1" title="Replication"  >}} 
+    {{< customcard  link1="./csm-modules/replication"  image="1" title="Replication"  >}}
 
     {{< customcard link1="./csm-modules/resiliency"   image="1" title="Resiliency"  >}}
 
-{{< /cardcontainer >}} 
+{{< /cardcontainer >}}
 
 {{< /accordion >}}
