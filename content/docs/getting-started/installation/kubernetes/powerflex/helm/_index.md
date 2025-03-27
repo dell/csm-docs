@@ -1,10 +1,13 @@
 ---
-title: "Helm"
+title: "Installation Guide"
 linkTitle: "Helm"
 no_list: true
 description: Helm Installation
 weight: 3
 ---
+1. Set up a Kubernetes cluster following the official documentation.
+3. Complete the base installation.
+4. Proceed with module installation.
 ### Install Helm 3.x
 
 Install Helm 3.x on the master node before you install the CSI Driver for Dell PowerFlex.
@@ -22,7 +25,7 @@ Install Helm 3.x on the master node before you install the CSI Driver for Dell P
 
 <br>
 
-{{< accordion id="Two" title="Driver" markdown="true" >}}  
+{{< accordion id="Two" title="Base Install" markdown="true" >}}  
 ## Prerequisites
 
 The following are requirements that must be met before installing the CSI Driver for Dell PowerFlex:
@@ -102,15 +105,15 @@ Note that the namespace can be any user-defined name that follows the convention
 {{< collapse id="1" title="Parameters">}}
 | Parameter | Description                                                  | Required | Default |
 | --------- | ------------------------------------------------------------ | -------- | ------- |
-| username  | Username for accessing PowerFlex system. If authorization is enabled, username will be ignored.                       | true     | -       |
-| password  | Password for accessing PowerFlex system. If authorization is enabled, password will be ignored.                     | true     | -       |
-| systemID  | PowerFlex system name or ID.                           | true     | -       |
-| allSystemNames | List of previous names of powerflex array if used for PV create     | false    | -       |
-| endpoint  | REST API gateway HTTPS endpoint/PowerFlex Manager public IP for PowerFlex system. If authorization is enabled, endpoint should be the HTTPS localhost endpoint that the authorization sidecar will listen on          | true     | -       |
-| skipCertificateValidation  | Determines if the driver is going to validate certs while connecting to PowerFlex REST API interface. | true     | true    |
-| isDefault | An array having isDefault=true is for backward compatibility. This parameter should occur once in the list. | false    | false   |
-| mdm       | mdm defines the MDM(s) that SDC should register with on start. This should be a list of MDM IP addresses or hostnames separated by comma. | true     | -       |
-| nasName       | nasName defines what NAS should be used for NFS volumes. NFS volumes are supported on arrays version >=4.0.x | true     | ""       |
+|<div style="text-align: left"> username  |<div style="text-align: left"> Username for accessing PowerFlex system. If authorization is enabled, username will be ignored.                       | true     | -       |
+|<div style="text-align: left"> password  |<div style="text-align: left"> Password for accessing PowerFlex system. If authorization is enabled, password will be ignored.                     | true     | -       |
+|<div style="text-align: left"> systemID  |<div style="text-align: left"> PowerFlex system name or ID.                           | true     | -       |
+|<div style="text-align: left"> allSystemNames |<div style="text-align: left"> List of previous names of powerflex array if used for PV create     | false    | -       |
+|<div style="text-align: left"> endpoint  |<div style="text-align: left"> REST API gateway HTTPS endpoint/PowerFlex Manager public IP for PowerFlex system. If authorization is enabled, endpoint should be the HTTPS localhost endpoint that the authorization sidecar will listen on          | true     | -       |
+|<div style="text-align: left"> skipCertificateValidation  |<div style="text-align: left"> Determines if the driver is going to validate certs while connecting to PowerFlex REST API interface. | true     | true    |
+|<div style="text-align: left"> isDefault |<div style="text-align: left"> An array having isDefault=true is for backward compatibility. This parameter should occur once in the list. | false    | false   |
+|<div style="text-align: left"> mdm       |<div style="text-align: left"> mdm defines the MDM(s) that SDC should register with on start. This should be a list of MDM IP addresses or hostnames separated by comma. | true     | -       |
+|<div style="text-align: left"> nasName       |<div style="text-align: left"> nasName defines what NAS should be used for NFS volumes. NFS volumes are supported on arrays version >=4.0.x | true     | ""       |
 {{< /collapse >}}
 
                                             
@@ -182,58 +185,58 @@ Use the below command to replace or update the secret:
 {{< collapse id="2" title="Parameters">}}
 | Parameter                | Description                                                                                                                                                                                                                                                                                                                                                                                                    | Required | Default |
 | ------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ------- |
-| version | Set to verify the values file version matches driver version and used to pull the image as part of the image name. | Yes | 2.13.0 |
-| images | List all the images used by the CSI driver and CSM. If you use a private repository, change the registries accordingly. | Yes | "" |
-| images.powerflexSdc | Set to give the location of the SDC image used if automatic SDC deployment is being utilized. | Yes | quay.io/dell/storage/powerflex/sdc:4.5.2.1 |
-| certSecretCount | Represents the number of certificate secrets, which the user is going to create for SSL authentication. | No | 0 |
-| logLevel | CSI driver log level. Allowed values: "error", "warn"/"warning", "info", "debug". | Yes | "debug" |
-| logFormat | CSI driver log format. Allowed values: "TEXT" or "JSON". | Yes | "TEXT" |
-| kubeletConfigDir | kubelet config directory path. Ensure that the secret.yaml file is present at this path. | Yes | /var/lib/kubelet |
-| defaultFsType | Used to set the default FS type which will be used for mount volumes if FsType is not specified in the storage class. Allowed values: ext4, xfs. | Yes | ext4 |
-| fsGroupPolicy | Defines which FS Group policy mode to be used. Supported modes are`None, File, and ReadWriteOnceWithFSType.` | No | "ReadWriteOnceWithFSType" |
-| imagePullPolicy | Policy to determine if the image should be pulled prior to starting the container. Allowed values: Always, IfNotPresent, Never. | Yes | IfNotPresent |
-| enablesnapshotcgdelete | A boolean that, when enabled, will delete all snapshots in a consistency group every a snap in the group is deleted. | Yes | false |
-| enablelistvolumesnapshot | A boolean that, when enabled, will allow list volume operation to include snapshots (since creating a volume from a snap actually results in a new snap). It is recommend this be false unless instructed otherwise. | Yes | false |
-| allowRWOMultiPodAccess | Setting allowRWOMultiPodAccess to "true" will allow multiple pods on the same node to access the same RWO volume. This behavior conflicts with the CSI specification version 1.3. NodePublishVolume description that requires an error to be returned in this case. However, some other CSI drivers support this behavior and some customers desire this behavior. Customers use this option at their own risk. | Yes | false |
-| enableQuota | A boolean that, when enabled, will set quota limit for a newly provisioned NFS volume. | No | false |
-| externalAccess | Defines additional entries for hostAccess of NFS volumes, single IP address and subnet are valid entries | No | " " |
-| **controller**           | This section allows the configuration of controller-specific parameters. To maximize the number of available nodes for controller pods, see this section. For more details on the new controller pod configurations, see the [Features section](../../../../../concepts/csidriver/features/powerflex#controller-ha) for Powerflex specifics.              | -        | -       |
-| volumeNamePrefix | Set so that volumes created by the driver have a default prefix. If one PowerFlex/VxFlex OS system is servicing several different Kubernetes installations or users, these prefixes help you distinguish them. | Yes | "k8s" |
-| controllerCount | Set to deploy multiple controller instances. If the controller count is greater than the number of available nodes, excess pods remain in a pending state. It should be greater than 0. You can increase the number of available nodes by configuring the "controller" section in your values.yaml. For more details on the new controller pod configurations, see the [Features section](../../../../../concepts/csidriver/features/powerflex#controller-ha) for Powerflex specifics. | Yes | 2 |
-| snapshot.enabled | A boolean that enable/disable volume snapshot feature. | No | true |
-| resizer.enabled | A boolean that enable/disable volume expansion feature. | No | true |
-| nodeSelector             | Defines what nodes would be selected for pods of controller deployment. Leave as blank to use all nodes. Uncomment this section to deploy on master nodes exclusively.                                                                                                                                                                                                                                         | Yes     | " "     |
-| tolerations              | Defines tolerations that would be applied to controller deployment. Leave as blank to install the controller on worker nodes only. If deploying on master nodes is desired, uncomment out this section.                                                                                                                                                                                                            | Yes     | " "     |
-| **healthMonitor** |  This section configures the optional deployment of the external health monitor sidecar, for controller side volume health monitoring. | - | - |
-| enabled | Enable/Disable deployment of external health monitor sidecar. | No | false |
-| interval | Interval of monitoring volume health condition. Allowed values: Number followed by unit (s,m,h)| No | 60s |
-| **node** | This section allows the configuration of node-specific parameters. | - | - |
-| healthMonitor.enabled | Enable/Disable health monitor of CSI volumes- volume usage, volume condition | No | false |
-| nodeSelector | Defines what nodes would be selected for pods of node daemonset. Leave as blank to use all nodes. | Yes | " " |
-| tolerations | Defines tolerations that would be applied to node daemonset. Leave as blank to install node driver only on worker nodes. | Yes | " " |
-| **sdc** | This section allows the configuration of the SDC installation. | - | - |
-| enabled | A boolean that enables/disables installation of the SDC. | No | true |
-| **renameSDC** | This section allows the rename operation for SDC. | - | - |
-| enabled | A boolean that enable/disable rename SDC feature. | No | false |
-| prefix | Defines a string for the prefix of the SDC. | No | " " |
-| approveSDC.enabled | A boolean that enable/disable SDC approval feature. | No | false |
-| **storageCapacity** | Enable/Disable storage capacity tracking | - | - |
-| enabled | A boolean that enables/disables storage capacity tracking feature. | Yes | true |
-| pollInterval | Configure how often the driver checks for changed capacity | No | 5m |
-| **monitor**              | This section allows the configuration of the SDC monitoring pod.                                                                                                                                                                                                                                                                                                                                                  | -        | -       |
-| enabled                  | Set to enable the usage of the monitoring pod.                                                                                                                                                                                                                                                                                                                                                                | Yes     | false |
-| hostNetwork              | Set whether the monitor pod should run on the host network or not.                                                                                                                                                                                                                                                                                                                                            | Yes     | true |
-| hostPID                  | Set whether the monitor pod should run in the host namespace or not.                                                                                                                                                                                                                                                                                                                                          | Yes     | true |
-| **vgsnapshotter** | This section allows the configuration of the volume group snapshotter(vgsnapshotter) pod.  | - | - |
-| enabled | A boolean that enable/disable vg snapshotter feature. | No | false |
-| image | Image for vg snapshotter. | No | " " |
-| **podmon**               | [Podmon](./csm-modules/resiliency/) is an optional feature to enable application pods to be resilient to node failure.  |  -        |  -       |
-| enabled                  | A boolean that enables/disables podmon feature. |  No      |   false   |
-| **authorization** | [Authorization](./csm-modules/authorizationv2.0/) is an optional feature to apply credential shielding of the backend PowerFlex. | - | - |
-| enabled                  | A boolean that enables/disables authorization feature. |  No      |   false   |
-| proxyHost | Hostname of the csm-authorization server. | No | Empty |
-| skipCertificateValidation | A boolean that enables/disables certificate validation of the csm-authorization proxy server. | No | true |
-| **interfaceNames** | A mapping of node names to interface names. Only necessary when SDC is disabled (see above).  | No | "" |
+|<div style="text-align: left"> version |<div style="text-align: left"> Set to verify the values file version matches driver version and used to pull the image as part of the image name. | Yes | 2.13.0 |
+|<div style="text-align: left"> images |<div style="text-align: left"> List all the images used by the CSI driver and CSM. If you use a private repository, change the registries accordingly. | Yes | "" |
+|<div style="text-align: left"> images.powerflexSdc |<div style="text-align: left"> Set to give the location of the SDC image used if automatic SDC deployment is being utilized. | Yes | quay.io/dell/storage/powerflex/sdc:4.5.2.1 |
+|<div style="text-align: left"> certSecretCount |<div style="text-align: left"> Represents the number of certificate secrets, which the user is going to create for SSL authentication. | No | 0 |
+|<div style="text-align: left"> logLevel |<div style="text-align: left"> CSI driver log level. Allowed values: "error", "warn"/"warning", "info", "debug". | Yes | "debug" |
+|<div style="text-align: left"> logFormat |<div style="text-align: left"> CSI driver log format. Allowed values: "TEXT" or "JSON". | Yes | "TEXT" |
+|<div style="text-align: left"> kubeletConfigDir |<div style="text-align: left"> kubelet config directory path. Ensure that the secret.yaml file is present at this path. | Yes | /var/lib/kubelet |
+|<div style="text-align: left"> defaultFsType |<div style="text-align: left"> Used to set the default FS type which will be used for mount volumes if FsType is not specified in the storage class. Allowed values: ext4, xfs. | Yes | ext4 |
+|<div style="text-align: left"> fsGroupPolicy |<div style="text-align: left"> Defines which FS Group policy mode to be used. Supported modes are`None, File, and ReadWriteOnceWithFSType.` | No | "ReadWriteOnceWithFSType" |
+|<div style="text-align: left"> imagePullPolicy |<div style="text-align: left"> Policy to determine if the image should be pulled prior to starting the container. Allowed values: Always, IfNotPresent, Never. | Yes | IfNotPresent |
+|<div style="text-align: left"> enablesnapshotcgdelete |<div style="text-align: left"> A boolean that, when enabled, will delete all snapshots in a consistency group every a snap in the group is deleted. | Yes | false |
+|<div style="text-align: left"> enablelistvolumesnapshot |<div style="text-align: left"> A boolean that, when enabled, will allow list volume operation to include snapshots (since creating a volume from a snap actually results in a new snap). It is recommend this be false unless instructed otherwise. | Yes | false |
+|<div style="text-align: left"> allowRWOMultiPodAccess |<div style="text-align: left"> Setting allowRWOMultiPodAccess to "true" will allow multiple pods on the same node to access the same RWO volume. This behavior conflicts with the CSI specification version 1.3. NodePublishVolume description that requires an error to be returned in this case. However, some other CSI drivers support this behavior and some customers desire this behavior. Customers use this option at their own risk. | Yes | false |
+|<div style="text-align: left"> enableQuota |<div style="text-align: left"> A boolean that, when enabled, will set quota limit for a newly provisioned NFS volume. | No | false |
+|<div style="text-align: left"> externalAccess |<div style="text-align: left"> Defines additional entries for hostAccess of NFS volumes, single IP address and subnet are valid entries | No | " " |
+|<div style="text-align: left"> **controller**           |<div style="text-align: left"> This section allows the configuration of controller-specific parameters. To maximize the number of available nodes for controller pods, see this section. For more details on the new controller pod configurations, see the [Features section](../../../../../concepts/csidriver/features/powerflex#controller-ha) for Powerflex specifics.              | -        | -       |
+|<div style="text-align: left"> volumeNamePrefix |<div style="text-align: left"> Set so that volumes created by the driver have a default prefix. If one PowerFlex/VxFlex OS system is servicing several different Kubernetes installations or users, these prefixes help you distinguish them. | Yes | "k8s" |
+|<div style="text-align: left"> controllerCount |<div style="text-align: left"> Set to deploy multiple controller instances. If the controller count is greater than the number of available nodes, excess pods remain in a pending state. It should be greater than 0. You can increase the number of available nodes by configuring the "controller" section in your values.yaml. For more details on the new controller pod configurations, see the [Features section](../../../../../concepts/csidriver/features/powerflex#controller-ha) for Powerflex specifics. | Yes | 2 |
+|<div style="text-align: left"> snapshot.enabled |<div style="text-align: left"> A boolean that enable/disable volume snapshot feature. | No | true |
+|<div style="text-align: left"> resizer.enabled |<div style="text-align: left"> A boolean that enable/disable volume expansion feature. | No | true |
+|<div style="text-align: left"> nodeSelector             |<div style="text-align: left"> Defines what nodes would be selected for pods of controller deployment. Leave as blank to use all nodes. Uncomment this section to deploy on master nodes exclusively.                                                                                                                                                                                                                                         | Yes     | " "     |
+|<div style="text-align: left"> tolerations              |<div style="text-align: left"> Defines tolerations that would be applied to controller deployment. Leave as blank to install the controller on worker nodes only. If deploying on master nodes is desired, uncomment out this section.                                                                                                                                                                                                            | Yes     | " "     |
+|<div style="text-align: left"> **healthMonitor** |<div style="text-align: left">  This section configures the optional deployment of the external health monitor sidecar, for controller side volume health monitoring. | - | - |
+|<div style="text-align: left"> enabled | Enable/Disable deployment of external health monitor sidecar. | No | false |
+|<div style="text-align: left"> interval |<div style="text-align: left"> Interval of monitoring volume health condition. Allowed values: Number followed by unit (s,m,h)| No | 60s |
+|<div style="text-align: left"> **node** |<div style="text-align: left"> This section allows the configuration of node-specific parameters. | - | - |
+|<div style="text-align: left"> healthMonitor.enabled |<div style="text-align: left"> Enable/Disable health monitor of CSI volumes- volume usage, volume condition | No | false |
+|<div style="text-align: left"> nodeSelector |<div style="text-align: left"> Defines what nodes would be selected for pods of node daemonset. Leave as blank to use all nodes. | Yes | " " |
+|<div style="text-align: left"> tolerations |<div style="text-align: left"> Defines tolerations that would be applied to node daemonset. Leave as blank to install node driver only on worker nodes. | Yes | " " |
+|<div style="text-align: left"> **sdc** |<div style="text-align: left"> This section allows the configuration of the SDC installation. | - | - |
+|<div style="text-align: left"> enabled |<div style="text-align: left"> A boolean that enables/disables installation of the SDC. | No | true |
+|<div style="text-align: left"> **renameSDC** |<div style="text-align: left"> This section allows the rename operation for SDC. | - | - |
+|<div style="text-align: left"> enabled |<div style="text-align: left"> A boolean that enable/disable rename SDC feature. | No | false |
+|<div style="text-align: left"> prefix |<div style="text-align: left"> Defines a string for the prefix of the SDC. | No | " " |
+|<div style="text-align: left"> approveSDC.enabled |<div style="text-align: left"> A boolean that enable/disable SDC approval feature. | No | false |
+|<div style="text-align: left"> **storageCapacity** |<div style="text-align: left"> Enable/Disable storage capacity tracking | - | - |
+|<div style="text-align: left"> enabled |<div style="text-align: left"> A boolean that enables/disables storage capacity tracking feature. | Yes | true |
+|<div style="text-align: left"> pollInterval |<div style="text-align: left"> Configure how often the driver checks for changed capacity | No | 5m |
+|<div style="text-align: left"> **monitor**              |<div style="text-align: left"> This section allows the configuration of the SDC monitoring pod.                                                                                                                                                                                                                                                                                                                                                  | -        | -       |
+|<div style="text-align: left"> enabled                  |<div style="text-align: left"> Set to enable the usage of the monitoring pod.                                                                                                                                                                                                                                                                                                                                                                | Yes     | false |
+|<div style="text-align: left"> hostNetwork              |<div style="text-align: left"> Set whether the monitor pod should run on the host network or not.                                                                                                                                                                                                                                                                                                                                            | Yes     | true |
+|<div style="text-align: left"> hostPID                  |<div style="text-align: left"> Set whether the monitor pod should run in the host namespace or not.                                                                                                                                                                                                                                                                                                                                          | Yes     | true |
+|<div style="text-align: left"> **vgsnapshotter** |<div style="text-align: left"> This section allows the configuration of the volume group snapshotter(vgsnapshotter) pod.  | - | - |
+|<div style="text-align: left"> enabled |<div style="text-align: left"> A boolean that enable/disable vg snapshotter feature. | No | false |
+|<div style="text-align: left"> image |<div style="text-align: left"> Image for vg snapshotter. | No | " " |
+|<div style="text-align: left"> **podmon**               |<div style="text-align: left"> [Podmon](./csm-modules/resiliency/) is an optional feature to enable application pods to be resilient to node failure.  |  -        |  -       |
+|<div style="text-align: left"> enabled                  |<div style="text-align: left"> A boolean that enables/disables podmon feature. |  No      |   false   |
+|<div style="text-align: left"> **authorization** |<div style="text-align: left"> [Authorization](./csm-modules/authorizationv2.0/) is an optional feature to apply credential shielding of the backend PowerFlex. | - | - |
+|<div style="text-align: left"> enabled                  |<div style="text-align: left"> A boolean that enables/disables authorization feature. |  No      |   false   |
+|<div style="text-align: left"> proxyHost |<div style="text-align: left"> Hostname of the csm-authorization server. | No | Empty |
+|<div style="text-align: left"> skipCertificateValidation |<div style="text-align: left"> A boolean that enables/disables certificate validation of the csm-authorization proxy server. | No | true |
+|<div style="text-align: left"> **interfaceNames** |<div style="text-align: left"> A mapping of node names to interface names. Only necessary when SDC is disabled (see above).  | No | "" |
 {{< /collapse >}}
 </ul> 
 

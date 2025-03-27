@@ -58,29 +58,70 @@ description: >
    ```
 
     Verify the Observability Pods are created. 
+<ol> 
+{{< hide class="1" >}}
 
-    ```terminal
-    oc get pod -n karavi
+```terminal
+oc get pod -n karavi
 
-    NAME                                        READY   STATUS    RESTARTS   AGE
-    karavi-metrics-{{Var}}-69855dbdd5-5mshq   1/1     Running   0          2m54s
-    karavi-topology-b7c9f6fc7-zk7l8             1/1     Running   0          2m55s
-    otel-collector-b496d8c4d-gp6zz              2/2     Running   0          2m55s 
+NAME                                         READY   STATUS    RESTARTS   AGE
+karavi-metrics-powerscale-69855dbdd5-5mshq   1/1     Running   0          2m54s
+karavi-topology-b7c9f6fc7-zk7l8              1/1     Running   0          2m55s
+otel-collector-b496d8c4d-gp6zz               2/2     Running   0          2m55s 
+```
+{{< /hide >}}
+</ol>
+<ol> 
+{{< hide class="2" >}}
+
+```terminal
+oc get pod -n karavi
+
+NAME                                         READY   STATUS    RESTARTS   AGE
+karavi-metrics-powerflex-69855dbdd5-5mshq    1/1     Running   0          2m54s
+karavi-topology-b7c9f6fc7-zk7l8              1/1     Running   0          2m55s
+otel-collector-b496d8c4d-gp6zz               2/2     Running   0          2m55s 
 
 
-    ``` 
-    
+```
+{{< /hide >}}
+</ol> 
+
    <br>
-  
-   Verify the Observability Services. 
+   
+    
 
-    ```terminal 
-    oc get svc -n karavi
-    NAME                           TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)              AGE
-    karavi-metrics-{{Var}}      ClusterIP   172.30.169.86    <none>        2222/TCP             3m29s
-    karavi-topology                ClusterIP   172.30.66.155    <none>        8443/TCP             3m29s
-    otel-collector                 ClusterIP   172.30.127.237   <none>        55680/TCP,8443/TCP   3m29s 
-    ``` 
+<ol>
+
+Verify the Observability Services.
+
+{{< hide class="1" >}}
+
+```terminal 
+oc get svc -n karavi
+NAME                           TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)              AGE
+karavi-metrics-powerscale      ClusterIP   172.30.169.86    <none>        2222/TCP             3m29s
+karavi-topology                ClusterIP   172.30.66.155    <none>        8443/TCP             3m29s
+otel-collector                 ClusterIP   172.30.127.237   <none>        55680/TCP,8443/TCP   3m29s 
+``` 
+
+{{< /hide >}} 
+
+</ol> 
+
+<ol>
+{{< hide class="2" >}}
+
+ ```terminal 
+ oc get svc -n karavi
+ NAME                           TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)              AGE
+ karavi-metrics-powerflex       ClusterIP   172.30.169.86    <none>        2222/TCP             3m29s
+ karavi-topology                ClusterIP   172.30.66.155    <none>        8443/TCP             3m29s
+ otel-collector                 ClusterIP   172.30.127.237   <none>        55680/TCP,8443/TCP   3m29s 
+ ``` 
+
+{{< /hide >}}
+</ol>
 
 <br> 
 

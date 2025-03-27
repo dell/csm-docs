@@ -3,7 +3,7 @@ title: "Prerequisite"
 linkTitle: "Prerequisite"
 weight: 1
 Description: >
-
+toc_hide: true
 --- 
 
 1. Create a user in the PowerStore Navigate in the PowerStore Manager Settings -> Users -> Add 

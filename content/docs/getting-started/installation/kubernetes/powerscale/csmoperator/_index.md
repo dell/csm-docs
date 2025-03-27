@@ -1,20 +1,20 @@
 ---
-title: "Operator"
+title: "Installation Guide"
 linktitle: "Operator"
 no_list: true
 description: CSM Operator Installation
-weight: 2
+weight: 2 
 ---
-
+1. Set up a Kubernetes cluster following the official documentation.
+2. Complete the base installation.
+3. Proceed with module installation.
 ## Operator Installation
 To deploy the Operator, follow the instructions available [here](../../../operator/operatorinstallation_kubernetes.md).
 
-{{< accordion id="One" title="CSM Installation Wizard" >}}
-  {{< include file="content/docs/getting-started/installation/installationwizard/operator.md" >}}
-{{< /accordion >}}
+
 <br>
 
-{{< accordion id="Two" title="Driver" markdown="true" >}}  
+{{< accordion id="Two" title="Base Install" markdown="true" >}}  
 ### Install CSI Driver
 
 </br>
@@ -98,33 +98,33 @@ To deploy the Operator, follow the instructions available [here](../../../operat
 
     [OR]                                                
 
-    b. **Detailed Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powerscale_{{< version-docs key="sample_sc_pscale" >}}.yaml) for detailed settings.
+    b. **Detailed Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powerscale_{{< version-docs key="sample_sc_pscale" >}}.yaml) for detailed settings or use [Wizard](./installationwizard#generate-manifest-file) to generate the sample file.
 
  -  Users should configure the parameters in CR. The following table lists the primary configurable parameters of the PowerScale driver and their default values:
    <ul>
    {{< collapse id="1" title="Parameters">}}
    | Parameter | Description | Required | Default |
    | --------- | ----------- | -------- |-------- |
-   | dnsPolicy | Determines the DNS Policy of the Node service | Yes | ClusterFirstWithHostNet |
-   | fsGroupPolicy | Defines which FS Group policy mode to be used, Supported modes `None, File and ReadWriteOnceWithFSType`. In OCP <= 4.16 and K8s <= 1.29, fsGroupPolicy is an immutable field. | No | "ReadWriteOnceWithFSType" |
-   | storageCapacity | Enable/Disable storage capacity tracking feature | No | false |
-   | ***Common parameters for node and controller*** |
-   | CSI_ENDPOINT | The UNIX socket address for handling gRPC calls | No | /var/run/csi/csi.sock |
-   | X_CSI_ISI_SKIP_CERTIFICATE_VALIDATION | Specifies whether SSL security needs to be enabled for communication between PowerScale and CSI Driver | No | true |
-   | X_CSI_ISI_PATH | Base path for the volumes to be created | Yes | |
-   | X_CSI_ALLOWED_NETWORKS | Custom networks for PowerScale export. List of networks that can be used for NFS I/O traffic, CIDR format should be used | No | empty |
-   | X_CSI_ISI_AUTOPROBE | To enable auto probing for driver | No | true |
-   | X_CSI_ISI_NO_PROBE_ON_START | Indicates whether the controller/node should probe during initialization | Yes | |
+   |<div style="text-align: left"> dnsPolicy |<div style="text-align: left"> Determines the DNS Policy of the Node service | Yes | ClusterFirstWithHostNet |
+   |<div style="text-align: left"> fsGroupPolicy |<div style="text-align: left"> Defines which FS Group policy mode to be used, Supported modes `None, File and ReadWriteOnceWithFSType`. In OCP <= 4.16 and K8s <= 1.29, fsGroupPolicy is an immutable field. | No | "ReadWriteOnceWithFSType" |
+   |<div style="text-align: left"> storageCapacity |<div style="text-align: left"> Enable/Disable storage capacity tracking feature | No | false |
+   |<div style="text-align: left"> ***Common parameters for node and controller*** |
+   |<div style="text-align: left"> CSI_ENDPOINT |<div style="text-align: left"> The UNIX socket address for handling gRPC calls | No | /var/run/csi/csi.sock |
+   |<div style="text-align: left"> X_CSI_ISI_SKIP_CERTIFICATE_VALIDATION |<div style="text-align: left"> Specifies whether SSL security needs to be enabled for communication between PowerScale and CSI Driver | No | true |
+   |<div style="text-align: left"> X_CSI_ISI_PATH |<div style="text-align: left"> Base path for the volumes to be created | Yes | |
+   |<div style="text-align: left"> X_CSI_ALLOWED_NETWORKS |<div style="text-align: left"> Custom networks for PowerScale export. List of networks that can be used for NFS I/O traffic, CIDR format should be used | No | empty |
+   |<div style="text-align: left"> X_CSI_ISI_AUTOPROBE |<div style="text-align: left"> To enable auto probing for driver | No | true |
+   |<div style="text-align: left"> X_CSI_ISI_NO_PROBE_ON_START |<div style="text-align: left"> Indicates whether the controller/node should probe during initialization | Yes | |
    | X_CSI_ISI_VOLUME_PATH_PERMISSIONS | The permissions for isi volume directory path | Yes | 0777 |
-   | X_CSI_ISI_AUTH_TYPE | Indicates the authentication method to be used. If set to 1 then it follows as session-based authentication else basic authentication. If CSM Authorization is enabled, this value must be set to 1. | No | 0 |
-   | GOISILON_DEBUG | Enable/Disable gopowerscale library-level debugging. | No | false |
-   | ***Controller parameters*** |
-   | X_CSI_MODE   | Driver starting mode  | No | controller |
-   | X_CSI_ISI_ACCESS_ZONE | Name of the access zone a volume can be created in | No | System |
-   | X_CSI_ISI_QUOTA_ENABLED | To enable SmartQuotas | Yes | |
-   | ***Node parameters*** |
-   | X_CSI_MAX_VOLUMES_PER_NODE | Specify the default value for the maximum number of volumes that the controller can publish to the node | Yes | 0 |
-   | X_CSI_MODE   | Driver starting mode  | No | node |
+   |<div style="text-align: left"> X_CSI_ISI_AUTH_TYPE |<div style="text-align: left"> Indicates the authentication method to be used. If set to 1 then it follows as session-based authentication else basic authentication. If CSM Authorization is enabled, this value must be set to 1. | No | 0 |
+   |<div style="text-align: left"> GOISILON_DEBUG |<div style="text-align: left"> Enable/Disable gopowerscale library-level debugging. | No | false |
+   |<div style="text-align: left"> ***Controller parameters*** |
+   |<div style="text-align: left"> X_CSI_MODE   |<div style="text-align: left"> Driver starting mode  | No | controller |
+   |<div style="text-align: left"> X_CSI_ISI_ACCESS_ZONE |<div style="text-align: left"> Name of the access zone a volume can be created in | No | System |
+   |<div style="text-align: left"> X_CSI_ISI_QUOTA_ENABLED |<div style="text-align: left"> To enable SmartQuotas | Yes | |
+   |<div style="text-align: left"> ***Node parameters*** |
+   |<div style="text-align: left"> X_CSI_MAX_VOLUMES_PER_NODE |<div style="text-align: left"> Specify the default value for the maximum number of volumes that the controller can publish to the node | Yes | 0 |
+   |<div style="text-align: left"> X_CSI_MODE   |<div style="text-align: left"> Driver starting mode  | No | node |
    {{< /collapse >}}
 
 

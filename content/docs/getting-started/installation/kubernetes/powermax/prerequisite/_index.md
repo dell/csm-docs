@@ -96,10 +96,11 @@ Refer to the [Dell Host Connectivity Guide](https://elabnavigator.dell.com/vault
 The following requirements must be fulfilled in order to successfully use the NVMe/TCP protocols with the CSI PowerMax driver:
 
 - Modules including the nvme, nvme_core, nvme_fabrics, and nvme_tcp are required for using NVMe over Fabrics using TCP. Load the NVMe and NVMe-OF Modules using the below commands:
-```bash
-modprobe nvme
-modprobe nvme_tcp
-```
+  ```bash
+  modprobe nvme
+  modprobe nvme_tcp
+  ``` 
+  <br>
 - The NVMe modules may not be available after a node reboot. Loading the modules at startup is recommended.
 
 > Starting with OCP 4.14 NVMe/TCP is enabled by default on RCOS nodes.
@@ -107,45 +108,18 @@ modprobe nvme_tcp
 
 **Cluster requirements**
 
-- All OpenShift or Kubernetes nodes connecting to Dell storage arrays must use unique host NVMe Qualified Names (NQNs).
-> The OpenShift deployment process for CoreOS will set the same host NQN for all nodes. The host NQN is stored in the file /etc/nvme/hostnqn. One possible solution to ensure unique host NQNs is to add the following machine config to your OCP cluster:
-```yaml
-apiVersion: machineconfiguration.openshift.io/v1
-kind: MachineConfig
-metadata:
-  labels:
-    machineconfiguration.openshift.io/role: worker
-  name: 99-worker-custom-nvme-hostnqn
-spec:
-  config:
-    ignition:
-      version: 3.4.0
-    systemd:
-      units:
-        - contents: |
-            [Unit]
-            Description=Custom CoreOS Generate NVMe Hostnqn
-            [Service]
-            Type=oneshot
-            ExecStart=/usr/bin/sh -c '/usr/sbin/nvme gen-hostnqn > /etc/nvme/hostnqn'
-            RemainAfterExit=yes
-            [Install]
-            WantedBy=multi-user.target
-          enabled: true
-          name: custom-coreos-generate-nvme-hostnqn.service
-```
-
 - The driver requires the NVMe command-line interface (nvme-cli) to manage the NVMe clients and targets. The NVMe CLI tool is installed in the host using the following command on RPM oriented Linux distributions.
 
-```bash
-sudo dnf -y install nvme-cli
-```
+  ```bash
+  sudo dnf -y install nvme-cli
+  ```
+ <br>
 
 - Support for NVMe requires native NVMe multipathing to be configured on each worker node in the cluster. Please refer to the [Dell Host Connectivity Guide](https://elabnavigator.dell.com/vault/pdf/Linux.pdf) for more details on NVMe multipathing requirements. To determine if the worker nodes are configured for native NVMe multipathing run the following command on each worker node:
 
-```bash
-cat /sys/module/nvme_core/parameters/multipath
-```
+  ```bash
+  cat /sys/module/nvme_core/parameters/multipath
+  ```
 
  >If the result of the command displays Y then NVMe native multipathing is enabled in the kernel. If the output is N then native NVMe multipating is disabled. Consult the [Dell Host Connectivity Guide](https://elabnavigator.dell.com/vault/pdf/Linux.pdf) for Linux to enable native NVMe multipathing.
 
@@ -153,44 +127,21 @@ cat /sys/module/nvme_core/parameters/multipath
 
 - The default NVMeTCP native multipathing policy is "numa". The preferred IO policy for NVMe devices used for PowerMax is round-robin. You can use udev rules to enable the round robin policy on all worker nodes. To view the IO policy you can use the following command:
 
-```bash
-nvme list-subsys
-```
+  ```bash
+  nvme list-subsys
+  ```
 
 To change the IO policy to round-robin you can add a udev rule on each worker node. Place a config file in /etc/udev/rules.d with the name 71-nvme-io-policy.rules with the following contents:
 
 ```text
 ACTION=="add|change", SUBSYSTEM=="nvme-subsystem", ATTR{iopolicy}="round-robin"
 ```
-
+<br> 
 In order to change the rules on a running kernel you can run the following commands:
 
 ```bash
 /sbin/udevadm control --reload-rules
 /sbin/udevadm trigger --type=devices --action=change
-```
-
-On OCP clusters you can add a MachineConfig to enable this rule on all worker nodes:
-
-```yaml
-apiVersion: machineconfiguration.openshift.io/v1
-kind: MachineConfig
-metadata:
-  name: 99-workers-multipath-round-robin
-  labels:
-    machineconfiguration.openshift.io/role: worker
-spec:
-  config:
-    ignition:
-      version: 3.4.0
-    storage:
-      files:
-      - contents:
-          source: data:text/plain;charset=utf-8;base64,QUNUSU9OPT0iYWRkfGNoYW5nZSIsIFNVQlNZU1RFTT09Im52bWUtc3Vic3lzdGVtIiwgQVRUUntpb3BvbGljeX09InJvdW5kLXJvYmluIg==
-          verification: {}
-        filesystem: root
-        mode: 420
-        path: /etc/udev/rules.d/71-nvme-io-policy.rules
 ```
 
 **Array requirements**
@@ -353,56 +304,6 @@ defaults {
 
 On some distributions the multipathd service for changes to the configuration and dynamically reconfigures itself. If you need to manually trigger a reload you can run the following command:
 `sudo systemctl reload multipathd`
-
-To enable multipathd on RedHat CoreOS nodes you need to prepare a working configuration encoded in base64. For example you can run the following command to encode the above multipath.config file.
-
-```text
-echo 'defaults {
-  user_friendly_names yes
-  find_multipaths yes
-  path_grouping_policy multibus
-  path_checker tur
-  features "1 queue_if_no_path"
-  path_selector "round-robin 0"
-  no_path_retry 10
-}
-  blacklist {
-}' | base64 -w0
-```
-
-The output of the above command follows:
-```text
-ZGVmYXVsdHMgewogIHVzZXJfZnJpZW5kbHlfbmFtZXMgeWVzCiAgZmluZF9tdWx0aXBhdGhzIHllcwogIHBhdGhfZ3JvdXBpbmdfcG9saWN5IG11bHRpYnVzCiAgcGF0aF9jaGVja2VyIHR1cgogIGZlYXR1cmVzICIxIHF1ZXVlX2lmX25vX3BhdGgiCiAgcGF0aF9zZWxlY3RvciAicm91bmQtcm9iaW4gMCIKICBub19wYXRoX3JldHJ5IDEwCn0KICBibGFja2xpc3Qgewp9Cg==
-```
-
-Use the base64 encoded string output in the following `MachineConfig` yaml file (under source section)
-
-```yaml
-apiVersion: machineconfiguration.openshift.io/v1
-kind: MachineConfig
-metadata:
-  name: 99-workers-multipath-conf-default
-  labels:
-    machineconfiguration.openshift.io/role: worker
-spec:
-  config:
-    ignition:
-      version: 3.4.0
-    storage:
-      files:
-      - contents:
-          source: data:text/plain;charset=utf-8;base64,ZGVmYXVsdHMgewogIHVzZXJfZnJpZW5kbHlfbmFtZXMgeWVzCiAgZmluZF9tdWx0aXBhdGhzIHllcwogIHBhdGhfZ3JvdXBpbmdfcG9saWN5IG11bHRpYnVzCiAgcGF0aF9jaGVja2VyIHR1cgogIGZlYXR1cmVzICIxIHF1ZXVlX2lmX25vX3BhdGgiCiAgcGF0aF9zZWxlY3RvciAicm91bmQtcm9iaW4gMCIKICBub19wYXRoX3JldHJ5IDEwCn0KICBibGFja2xpc3Qgewp9Cg==
-          verification: {}
-        filesystem: root
-        mode: 400
-        path: /etc/multipath.conf
-```
-
-After deploying this`MachineConfig` object, CoreOS will start the multipath service automatically.
-Alternatively, you can check the status of the multipath service by running the following command on each worker node.
-`sudo multipath -ll`
-
-Refer to the [Dell Host Connectivity Guide](https://elabnavigator.dell.com/vault/pdf/Linux.pdf) for more information.
 
 {{< /collapse >}}
 

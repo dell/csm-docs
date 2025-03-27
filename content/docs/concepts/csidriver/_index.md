@@ -6,7 +6,7 @@ no_list: true
 weight: 3
 ---
 
-The CSI Drivers implement an interface between [CSI](https://kubernetes-csi.github.io/docs/) (CSI spec v1.6) enabled Container Orchestrator (CO) and Storage Arrays. It is a plug-in that is installed into Kubernetes to provide persistent storage using the Dell storage system.
+The CSI Drivers implement an interface between [CSI](https://kubernetes-csi.github.io/docs/) enabled Container Orchestrator (CO) and Storage Arrays. It is a plug-in that is installed into Kubernetes to provide persistent storage using the Dell storage system.
 
 ![CSI Architecture](../../../images/csidriver/Architecture_Diagram.png)
 

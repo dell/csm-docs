@@ -1,16 +1,20 @@
 ---
-title: "Operator"
+title: "Installation Guide"
 linktitle: "Operator"
 no_list: true
 description: CSM Operator Installation
 weight: 2
 
 ---
+1. Set up a Kubernetes cluster following the official documentation.
+2. Proceed to the [pre-requisites](../prerequisite/_index.md).
+3. Complete the base installation.
+4. Proceed with module installation.
 ## Operator Installation
 To deploy the Operator, follow the instructions available [here](../../../operator/operatorinstallation_kubernetes.md).
 
 
-{{< accordion id="Two" title="Driver" markdown="true" >}}  
+{{< accordion id="Two" title="Base Install" markdown="true" >}}  
 
 ### Prerequisites
 
@@ -63,28 +67,28 @@ To deploy the Operator, follow the instructions available [here](../../../operat
 
 | Parameter | Description | Required | Default |
 | --------- | ----------- | -------- |-------- |
-| replicas | Controls the number of controller pods you deploy. If the number of controller pods is greater than the number of available nodes, the excess pods will be in pending state until new nodes are available for scheduling. Default is 2 which allows for Controller high availability. | Yes | 2 |
-| namespace | Specifies namespace where the driver will be installed | Yes | "unity" |
-| fsGroupPolicy | Defines which FS Group policy mode to be used. Supported modes `None, File and ReadWriteOnceWithFSType`. In OCP <= 4.16 and K8s <= 1.29, fsGroupPolicy is an immutable field. | No |"ReadWriteOnceWithFSType"|
-| storageCapacity.enabled | Enable/Disable storage capacity tracking | No | true |
-| storageCapacity.pollInterval | Configure how often the driver checks for changed capacity | No | 5m |
-| ***Common parameters for node and controller*** |
-| X_CSI_UNITY_ALLOW_MULTI_POD_ACCESS | To enable sharing of volumes across multiple pods within the same node in RWO access mode | No | false |
-| X_CSI_UNITY_SYNC_NODEINFO_INTERVAL | Time interval to add node info to array. Default 15 minutes. Minimum value should be 1 | No | 15 |
-| CSI_LOG_LEVEL | Sets the logging level of the driver | true | info |
-| TENANT_NAME | Tenant name added while adding host entry to the array | No |  |
-| CERT_SECRET_COUNT | Represents the number of certificate secrets, which the user is going to create for SSL authentication. (unity-cert-0..unity-cert-n). The minimum value should be 1. | false | 1 |
-| X_CSI_UNITY_SKIP_CERTIFICATE_VALIDATION | Specifies if the driver is going to validate unisphere certs while connecting to the Unisphere REST API interface.If it is set to false, then a secret unity-certs has to be created with an X.509 certificate of CA which signed the Unisphere certificate | No | true |
-| GOUNITY_DEBUG | Enable/Disable gounity library-level debugging. | No | false |
-| GOUNITY_SHOWHTTP | Enable/Disable gounity library-level REST request logging. Enabling will also **enable** GOUNITY_DEBUG regardless of GOUNITY_DEBUG setting. | No | false |
-| ***Controller parameters*** |
-| X_CSI_HEALTH_MONITOR_ENABLED | Enable/Disable health monitor of CSI volumes from Controller plugin - volume condition | No | false |
-| ***Node parameters*** |
-| X_CSI_HEALTH_MONITOR_ENABLED | Enable/Disable health monitor of CSI volumes from Controller plugin - volume condition | No | false |
-| X_CSI_ALLOWED_NETWORKS | Custom networks for Unity export. List of networks that can be used for NFS I/O traffic, CIDR format should be used "ip/prefix, ip/prefix" | No | empty |
-| ***Sidecar parameters*** |
-| volume-name-prefix | The volume-name-prefix will be used by provisioner sidecar as a prefix for all the volumes created  | Yes | csivol |
-| monitor-interval | The monitor-interval will be used by external-health-monitor as an interval for health checks  | Yes | 60s |
+|<div style="text-align: left"> replicas |<div style="text-align: left"> Controls the number of controller pods you deploy. If the number of controller pods is greater than the number of available nodes, the excess pods will be in pending state until new nodes are available for scheduling. Default is 2 which allows for Controller high availability. | Yes | 2 |
+|<div style="text-align: left"> namespace |<div style="text-align: left"> Specifies namespace where the driver will be installed | Yes | "unity" |
+|<div style="text-align: left"> fsGroupPolicy |<div style="text-align: left"> Defines which FS Group policy mode to be used. Supported modes `None, File and ReadWriteOnceWithFSType`. In OCP <= 4.16 and K8s <= 1.29, fsGroupPolicy is an immutable field. | No |"ReadWriteOnceWithFSType"|
+|<div style="text-align: left"> storageCapacity.enabled |<div style="text-align: left"> Enable/Disable storage capacity tracking | No | true |
+|<div style="text-align: left"> storageCapacity.pollInterval |<div style="text-align: left"> Configure how often the driver checks for changed capacity | No | 5m |
+|<div style="text-align: left"> ***Common parameters for node and controller*** |
+|<div style="text-align: left"> X_CSI_UNITY_ALLOW_MULTI_POD_ACCESS |<div style="text-align: left"> To enable sharing of volumes across multiple pods within the same node in RWO access mode | No | false |
+|<div style="text-align: left"> X_CSI_UNITY_SYNC_NODEINFO_INTERVAL |<div style="text-align: left"> Time interval to add node info to array. Default 15 minutes. Minimum value should be 1 | No | 15 |
+|<div style="text-align: left"> CSI_LOG_LEVEL |<div style="text-align: left"> Sets the logging level of the driver | true | info |
+|<div style="text-align: left"> TENANT_NAME |<div style="text-align: left"> Tenant name added while adding host entry to the array | No |  |
+|<div style="text-align: left"> CERT_SECRET_COUNT |<div style="text-align: left"> Represents the number of certificate secrets, which the user is going to create for SSL authentication. (unity-cert-0..unity-cert-n). The minimum value should be 1. | false | 1 |
+|<div style="text-align: left"> X_CSI_UNITY_SKIP_CERTIFICATE_VALIDATION |<div style="text-align: left"> Specifies if the driver is going to validate unisphere certs while connecting to the Unisphere REST API interface.If it is set to false, then a secret unity-certs has to be created with an X.509 certificate of CA which signed the Unisphere certificate | No | true |
+|<div style="text-align: left"> GOUNITY_DEBUG |<div style="text-align: left"> Enable/Disable gounity library-level debugging. | No | false |
+|<div style="text-align: left"> GOUNITY_SHOWHTTP |<div style="text-align: left"> Enable/Disable gounity library-level REST request logging. Enabling will also **enable** GOUNITY_DEBUG regardless of GOUNITY_DEBUG setting. | No | false |
+|<div style="text-align: left"> ***Controller parameters*** |
+|<div style="text-align: left"> X_CSI_HEALTH_MONITOR_ENABLED |<div style="text-align: left"> Enable/Disable health monitor of CSI volumes from Controller plugin - volume condition | No | false |
+|<div style="text-align: left"> ***Node parameters*** |
+|<div style="text-align: left"> X_CSI_HEALTH_MONITOR_ENABLED |<div style="text-align: left"> Enable/Disable health monitor of CSI volumes from Controller plugin - volume condition | No | false |
+|<div style="text-align: left"> X_CSI_ALLOWED_NETWORKS |<div style="text-align: left"> Custom networks for Unity export. List of networks that can be used for NFS I/O traffic, CIDR format should be used "ip/prefix, ip/prefix" | No | empty |
+|<div style="text-align: left"> ***Sidecar parameters*** |
+|<div style="text-align: left"> volume-name-prefix |<div style="text-align: left"> The volume-name-prefix will be used by provisioner sidecar as a prefix for all the volumes created  | Yes | csivol |
+|<div style="text-align: left"> monitor-interval |<div style="text-align: left"> The monitor-interval will be used by external-health-monitor as an interval for health checks  | Yes | 60s |
 
 {{< /collapse >}}
 </ul> 

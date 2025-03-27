@@ -1,10 +1,14 @@
 ---
-title: "Helm"
+title: "Installation Guide"
 linkTitle: "Helm"
 no_list: true
 description: Helm Installation
 weight: 3
---- 
+---
+1. Set up a Kubernetes cluster following the official documentation.
+2. Proceed to the [pre-requisites](../prerequisite/_index.md).
+3. Complete the base installation.
+4. Proceed with module installation.
 ### Install Helm 3.0
 
 Install Helm 3.0 on the master node before you install the CSI Driver for Unity XT.
@@ -21,7 +25,7 @@ curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bas
 {{< /accordion >}}
 <br>
 
-{{< accordion id="Two" title="Driver" markdown="true" >}}  
+{{< accordion id="Two" title="Base Install" markdown="true" >}}  
 
 ## Install Driver
 
@@ -59,35 +63,35 @@ cd dell-csi-helm-installer && wget -O my-unity-settings.yaml https://github.com/
   {{< collapse id="1" title="Parameters">}}
   | Parameter | Description | Required | Default |
   | --------- | ----------- | -------- |-------- |
-  | images | List all the images used by the CSI driver and CSM. If you use a private repository, change the registries accordingly. | Yes | "" |
-  | logLevel | LogLevel is used to set the logging level of the driver | No | info |
-  | allowRWOMultiPodAccess | Flag to enable multiple pods to use the same PVC on the same node with RWO access mode. | No | false |
-  | kubeletConfigDir | Specify kubelet config dir path | Yes | /var/lib/kubelet |
-  | syncNodeInfoInterval | Time interval to add node info to the array. Default 15 minutes. The minimum value should be 1 minute. | No | 15 |
-  | maxUnityVolumesPerNode | Maximum number of volumes that controller can publish to the node. | No | 0 |
-  | certSecretCount | Represents the number of certificate secrets, which the user is going to create for SSL authentication. (unity-cert-0..unity-cert-n). The minimum value should be 1. | No | 1 |
-  | [allowedNetworks](../../../../../concepts/csidriver/features/unity/#support-custom-networks-for-nfs-io-traffic) | Defines the list of networks that can be used for NFS I/O traffic, CIDR format must be used. | No | empty |
-  | imagePullPolicy |  The default pull policy is IfNotPresent which causes the Kubelet to skip pulling an image if it already exists. | Yes | IfNotPresent |
-  | podmon.enabled | service to monitor failing jobs and notify | No | false |
-  | tenantName | Tenant name added while adding host entry to the array | No |  |
-  | fsGroupPolicy | Defines which FS Group policy mode to be used, Supported modes `None, File and ReadWriteOnceWithFSType` | No | "ReadWriteOnceWithFSType" |
-  | storageCapacity.enabled | Enable/Disable storage capacity tracking | No | true |
-  | storageCapacity.pollInterval | Configure how often the driver checks for changed capacity | No | 5m |
-  | **controller** | Allows configuration of the controller-specific parameters.| - | - |
-  | controllerCount | Defines the number of csi-unity controller pods to deploy to the Kubernetes release| Yes | 2 |
-  | volumeNamePrefix | Defines a string prefix for the names of PersistentVolumes created | Yes | "k8s" |
-  | snapshot.enabled | Enable/Disable volume snapshot feature | Yes | true |
-  | snapshot.snapNamePrefix | Defines a string prefix for the names of the Snapshots created | Yes | "snapshot" |
-  | resizer.enabled | Enable/Disable volume expansion feature | Yes | true |
-  | nodeSelector | Define node selection constraints for pods of controller deployment | No | |
-  | tolerations | Define tolerations for the controller deployment, if required | No | |
-  | healthMonitor.enabled | Enable/Disable deployment of external health monitor sidecar for controller side volume health monitoring. | No | false |
-  | healthMonitor.interval | Interval of monitoring volume health condition. Allowed values: Number followed by unit (s,m,h) | No | 60s |
-  | ***node*** | Allows configuration of the node-specific parameters.| - | - |
-  | dnsPolicy | Define the DNS Policy of the Node service | Yes | ClusterFirstWithHostNet |
-  | healthMonitor.enabled | Enable/Disable health monitor of CSI volumes- volume usage, volume condition | No | false |
-  | nodeSelector | Define node selection constraints for pods of node deployment | No | |
-  | tolerations | Define tolerations for the node deployment, if required | No | |
+  |<div style="text-align: left"> images |<div style="text-align: left"> List all the images used by the CSI driver and CSM. If you use a private repository, change the registries accordingly. | Yes | "" |
+  |<div style="text-align: left"> logLevel |<div style="text-align: left"> LogLevel is used to set the logging level of the driver | No | info |
+  |<div style="text-align: left"> allowRWOMultiPodAccess |<div style="text-align: left"> Flag to enable multiple pods to use the same PVC on the same node with RWO access mode. | No | false |
+  |<div style="text-align: left"> kubeletConfigDir |<div style="text-align: left"> Specify kubelet config dir path | Yes | /var/lib/kubelet |
+  |<div style="text-align: left"> syncNodeInfoInterval |<div style="text-align: left"> Time interval to add node info to the array. Default 15 minutes. The minimum value should be 1 minute. | No | 15 |
+  |<div style="text-align: left"> maxUnityVolumesPerNode |<div style="text-align: left"> Maximum number of volumes that controller can publish to the node. | No | 0 |
+  |<div style="text-align: left"> certSecretCount |<div style="text-align: left"> Represents the number of certificate secrets, which the user is going to create for SSL authentication. (unity-cert-0..unity-cert-n). The minimum value should be 1. | No | 1 |
+  |<div style="text-align: left"> [allowedNetworks](../../../../../concepts/csidriver/features/unity/#support-custom-networks-for-nfs-io-traffic) |<div style="text-align: left"> Defines the list of networks that can be used for NFS I/O traffic, CIDR format must be used. | No | empty |
+  |<div style="text-align: left"> imagePullPolicy |<div style="text-align: left">  The default pull policy is IfNotPresent which causes the Kubelet to skip pulling an image if it already exists. | Yes | IfNotPresent |
+  |<div style="text-align: left"> podmon.enabled |<div style="text-align: left"> service to monitor failing jobs and notify | No | false |
+  |<div style="text-align: left"> tenantName |<div style="text-align: left"> Tenant name added while adding host entry to the array | No |  |
+  |<div style="text-align: left"> fsGroupPolicy |<div style="text-align: left"> Defines which FS Group policy mode to be used, Supported modes `None, File and ReadWriteOnceWithFSType` | No | "ReadWriteOnceWithFSType" |
+  |<div style="text-align: left"> storageCapacity.enabled |<div style="text-align: left"> Enable/Disable storage capacity tracking | No | true |
+  |<div style="text-align: left"> storageCapacity.pollInterval |<div style="text-align: left"> Configure how often the driver checks for changed capacity | No | 5m |
+  |<div style="text-align: left"> **controller** | <div style="text-align: left">Allows configuration of the controller-specific parameters.| - | - |
+  |<div style="text-align: left"> controllerCount |<div style="text-align: left"> Defines the number of csi-unity controller pods to deploy to the Kubernetes release| Yes | 2 |
+  |<div style="text-align: left"> volumeNamePrefix |<div style="text-align: left"> Defines a string prefix for the names of PersistentVolumes created | Yes | "k8s" |
+  |<div style="text-align: left"> snapshot.enabled |<div style="text-align: left"> Enable/Disable volume snapshot feature | Yes | true |
+  |<div style="text-align: left"> snapshot.snapNamePrefix |<div style="text-align: left"> Defines a string prefix for the names of the Snapshots created | Yes | "snapshot" |
+  |<div style="text-align: left"> resizer.enabled |<div style="text-align: left"> Enable/Disable volume expansion feature | Yes | true |
+  |<div style="text-align: left"> nodeSelector |<div style="text-align: left"> Define node selection constraints for pods of controller deployment | No | |
+  |<div style="text-align: left"> tolerations |<div style="text-align: left"> Define tolerations for the controller deployment, if required | No | |
+  |<div style="text-align: left"> healthMonitor.enabled |<div style="text-align: left"> Enable/Disable deployment of external health monitor sidecar for controller side volume health monitoring. | No | false |
+  |<div style="text-align: left"> healthMonitor.interval |<div style="text-align: left"> Interval of monitoring volume health condition. Allowed values: Number followed by unit (s,m,h) | No | 60s |
+  |<div style="text-align: left"> ***node*** |<div style="text-align: left"> Allows configuration of the node-specific parameters.| - | - |
+  |<div style="text-align: left"> dnsPolicy |<div style="text-align: left"> Define the DNS Policy of the Node service | Yes | ClusterFirstWithHostNet |
+  |<div style="text-align: left"> healthMonitor.enabled |<div style="text-align: left"> Enable/Disable health monitor of CSI volumes- volume usage, volume condition | No | false |
+  |<div style="text-align: left"> nodeSelector |<div style="text-align: left"> Define node selection constraints for pods of node deployment | No | |
+  |<div style="text-align: left"> tolerations |<div style="text-align: left"> Define tolerations for the node deployment, if required | No | |
 
   **Note**:
 
@@ -133,12 +137,12 @@ Example *myvalues.yaml*
 
 | Parameter                 | Description                                    | Required | Default |
 | ------------------------- | ---------------------------------------------- | -------- |-------- |
-| storageArrayList.username | Username for accessing Unity XT system         | Yes     | -       |
-| storageArrayList.password | Password for accessing Unity XT system         | Yes     | -       |
-| storageArrayList.endpoint | REST API gateway HTTPS endpoint Unity XT system| Yes     | -       |
-| storageArrayList.arrayId  | ArrayID for Unity XT system                    | Yes     | -       |
-| storageArrayList.skipCertificateValidation | "skipCertificateValidation " determines if the driver is going to validate unisphere certs while connecting to the Unisphere REST API interface. If it is set to false, then a secret unity-certs has to be created with an X.509 certificate of CA which signed the Unisphere certificate. | Yes | true |
-| storageArrayList.isDefault| An array having isDefault=true or isDefault=true will be considered as the default array when arrayId is not specified in the storage class. This parameter should occur only once in the list. | Yes | - |
+|<div style="text-align: left"> storageArrayList.username |<div style="text-align: left"> Username for accessing Unity XT system         | Yes     | -       |
+|<div style="text-align: left"> storageArrayList.password |<div style="text-align: left"> Password for accessing Unity XT system         | Yes     | -       |
+|<div style="text-align: left"> storageArrayList.endpoint |<div style="text-align: left"> REST API gateway HTTPS endpoint Unity XT system| Yes     | -       |
+|<div style="text-align: left"> storageArrayList.arrayId  |<div style="text-align: left"> ArrayID for Unity XT system                    | Yes     | -       |
+|<div style="text-align: left"> storageArrayList.skipCertificateValidation |<div style="text-align: left"> "skipCertificateValidation " determines if the driver is going to validate unisphere certs while connecting to the Unisphere REST API interface. If it is set to false, then a secret unity-certs has to be created with an X.509 certificate of CA which signed the Unisphere certificate. | Yes | true |
+|<div style="text-align: left"> storageArrayList.isDefault|<div style="text-align: left"> An array having isDefault=true or isDefault=true will be considered as the default array when arrayId is not specified in the storage class. This parameter should occur only once in the list. | Yes | - |
    {{< /collapse >}}
 
 

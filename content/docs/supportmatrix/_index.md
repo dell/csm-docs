@@ -61,7 +61,7 @@ Container Storage Modules doesn't officially support specific operating systems,
 - Ensure the host OS/version aligns with Dell Storage platform support. Check [E-Lab Navigator](https://elabnavigator.dell.com/eln/modernHomeSSM) for details.
 - OS versions not listed must be self-certified using [Cert-CSI](../tooling/cert-csi/). It's recommended to use OS versions that haven't reached end of life.
 
-## Helm compatibility
+## Helm Compatibility
 {{<table "table table-striped table-bordered table-sm">}}
 | CSI Driver         |  Authorization v1|  Authorization v2 | Replication | Observability | Resiliency | Application Mobility|
 | ------------------ |------------------| --------------- |-----------------|-------------------|----------------|------|
@@ -72,7 +72,7 @@ Container Storage Modules doesn't officially support specific operating systems,
 | Unity XT           |  No      |   No              |  No               | No                  |    Yes     |No|
 {{</table>}}
 
-## Operator compatibility
+## Operator Compatibility
 {{<table "table table-striped table-bordered table-sm">}}
 | CSI Driver         |  Authorization v1|  Authorization v2 | Replication | Observability | Resiliency |
 | ------------------ |------------------| --------------|-----------------|-------------------|----------------|
@@ -114,7 +114,7 @@ Container Storage Modules doesn't officially support specific operating systems,
 {{<table "table table-striped table-bordered table-sm tdleft">}}
 | Container Storage Modules | Version |
 | -----------------| --------- |
-| Observability    | 1.8.0+    |
 | Replication      | 1.8.0+    |
+| Observability    | 1.8.0+    |
 | Resiliency       | 1.8.0+    |
 {{</table>}}

@@ -1,10 +1,14 @@
 ---
-title: "Helm"
+title: "Installation Guide"
 linkTitle: "Helm"
 no_list: true
 description: Helm Installation
 weight: 3
 ---
+1. Set up a Kubernetes cluster following the official documentation.
+2. Proceed to the [pre-requisites](../prerequisite/_index.md).
+3. Complete the base installation.
+4. Proceed with module installation. 
 ### Install Helm 3.x
 
 Install Helm 3.x on the master node before you install the CSI Driver for PowerStore.
@@ -22,7 +26,7 @@ Install Helm 3.x on the master node before you install the CSI Driver for PowerS
 
 <br>
 
-{{< accordion id="Two" title="Driver" markdown="true" >}}  
+{{< accordion id="Two" title="Base Install" markdown="true" >}}  
 
 ### Volume Snapshot Requirements (Optional)
 For detailed snapshot setup procedure, [click here.](docs/concepts/snapshots/#helm-optional-volume-snapshot-requirements)
@@ -95,36 +99,36 @@ volume stats value under node should be set to true.
 {{< collapse id="1" title="Parameters">}}
 | Parameter | Description | Required | Default |
 |-----------|-------------|----------|---------|
-| images | List all the images used by the CSI driver and CSM. If you use a private repository, change the registries accordingly. | Yes | "" |
-| logLevel | Defines CSI driver log level | No | "debug" |
-| logFormat | Defines CSI driver log format | No | "JSON" |
-| externalAccess | Defines additional entries for hostAccess of NFS volumes, single IP address and subnet are valid entries | No | " " |
-| kubeletConfigDir | Defines kubelet config path for cluster | Yes | "/var/lib/kubelet" |
-| maxPowerstoreVolumesPerNode | Defines the default value for maximum number of volumes that the controller can publish to the node. If the value is zero, then CO shall decide how many volumes of this type can be published by the controller to the node. This limit is applicable to all the nodes in the cluster for which the node label 'max-powerstore-volumes-per-node' is not set. | No | 0 |
-| imagePullPolicy | Policy to determine if the image should be pulled prior to starting the container. | Yes | "IfNotPresent" |
-| nfsAcls | Defines permissions - POSIX mode bits or NFSv4 ACLs, to be set on NFS target mount directory. | No | "0777" |
-| connection.enableCHAP   | Defines whether the driver should use CHAP for iSCSI connections or not | No | False |
-| controller.controllerCount     | Defines number of replicas of controller deployment | Yes | 2 |
-| controller.volumeNamePrefix | Defines the string added to each volume that the CSI driver creates | No | "csivol" |
-| controller.snapshot.enabled | Allows to enable/disable snapshotter sidecar with driver installation for snapshot feature | No | "true" |
-| controller.snapshot.snapNamePrefix | Defines prefix to apply to the names of a created snapshots | No | "csisnap" |
-| controller.resizer.enabled | Allows to enable/disable resizer sidecar with driver installation for volume expansion feature | No | "true" |
-| controller.healthMonitor.enabled | Allows to enable/disable volume health monitor | No | false |
-| controller.healthMonitor.interval | Interval of monitoring volume health condition | No | 60s |
-| controller.nodeSelector | Defines what nodes would be selected for pods of controller deployment | Yes | " " |
-| controller.tolerations  | Defines tolerations that would be applied to controller deployment | Yes | " " |
-| node.nodeNamePrefix | Defines the string added to each node that the CSI driver registers | No | "csi-node" |
-| node.nodeIDPath | Defines a path to file with a unique identifier identifying the node in the Kubernetes cluster| No | "/etc/machine-id" |
-| node.healthMonitor.enabled | Allows to enable/disable volume health monitor | No | false |
-| node.nodeSelector | Defines what nodes would be selected for pods of node daemonset | Yes | " " |
-| node.tolerations  | Defines tolerations that would be applied to node daemonset | Yes | " " |
-| fsGroupPolicy | Defines which FS Group policy mode to be used, Supported modes `None, File and ReadWriteOnceWithFSType` | No | "ReadWriteOnceWithFSType" |
-| controller.vgsnapshot.enabled | Allows to enable/disable the volume group snapshot feature | No | "true" |
-| version | To use any driver version | No | Latest driver version |
-| allowAutoRoundOffFilesystemSize | Allows the controller to round off filesystem to 3Gi which is the minimum supported value | No | false |
-| storageCapacity.enabled | Allows to enable/disable storage capacity tracking feature | No | true
-| storageCapacity.pollInterval | Configure how often the driver checks for changed capacity | No | 5m
-| podmon.enabled | Allows to enable/disable [Resiliency](./csm-modules/resiliency#powerstore-specific-recommendations) feature | No | false
+|<div style="text-align: left"> images |<div style="text-align: left"> List all the images used by the CSI driver and CSM. If you use a private repository, change the registries accordingly. | Yes | "" |
+|<div style="text-align: left"> logLevel |<div style="text-align: left"> Defines CSI driver log level | No | "debug" |
+|<div style="text-align: left"> logFormat |<div style="text-align: left"> Defines CSI driver log format | No | "JSON" |
+|<div style="text-align: left"> externalAccess |<div style="text-align: left"> Defines additional entries for hostAccess of NFS volumes, single IP address and subnet are valid entries | No | " " |
+|<div style="text-align: left"> kubeletConfigDir |<div style="text-align: left"> Defines kubelet config path for cluster | Yes | "/var/lib/kubelet" |
+|<div style="text-align: left"> maxPowerstoreVolumesPerNode |<div style="text-align: left"> Defines the default value for maximum number of volumes that the controller can publish to the node. If the value is zero, then CO shall decide how many volumes of this type can be published by the controller to the node. This limit is applicable to all the nodes in the cluster for which the node label 'max-powerstore-volumes-per-node' is not set. | No | 0 |
+|<div style="text-align: left"> imagePullPolicy |<div style="text-align: left"> Policy to determine if the image should be pulled prior to starting the container. | Yes | "IfNotPresent" |
+|<div style="text-align: left"> nfsAcls |<div style="text-align: left"> Defines permissions - POSIX mode bits or NFSv4 ACLs, to be set on NFS target mount directory. | No | "0777" |
+|<div style="text-align: left"> connection.enableCHAP   |<div style="text-align: left"> Defines whether the driver should use CHAP for iSCSI connections or not | No | False |
+|<div style="text-align: left"> controller.controllerCount     |<div style="text-align: left"> Defines number of replicas of controller deployment | Yes | 2 |
+|<div style="text-align: left"> controller.volumeNamePrefix |<div style="text-align: left"> Defines the string added to each volume that the CSI driver creates | No | "csivol" |
+|<div style="text-align: left"> controller.snapshot.enabled |<div style="text-align: left"> Allows to enable/disable snapshotter sidecar with driver installation for snapshot feature | No | "true" |
+|<div style="text-align: left"> controller.snapshot.snapNamePrefix |<div style="text-align: left"> Defines prefix to apply to the names of a created snapshots | No | "csisnap" |
+|<div style="text-align: left"> controller.resizer.enabled |<div style="text-align: left"> Allows to enable/disable resizer sidecar with driver installation for volume expansion feature | No | "true" |
+| <div style="text-align: left">controller.healthMonitor.enabled |<div style="text-align: left"> Allows to enable/disable volume health monitor | No | false |
+|<div style="text-align: left"> controller.healthMonitor.interval |<div style="text-align: left"> Interval of monitoring volume health condition | No | 60s |
+|<div style="text-align: left"> controller.nodeSelector |<div style="text-align: left"> Defines what nodes would be selected for pods of controller deployment | Yes | " " |
+|<div style="text-align: left"> controller.tolerations  |<div style="text-align: left"> Defines tolerations that would be applied to controller deployment | Yes | " " |
+|<div style="text-align: left"> node.nodeNamePrefix |<div style="text-align: left"> Defines the string added to each node that the CSI driver registers | No | "csi-node" |
+|<div style="text-align: left"> node.nodeIDPath |<div style="text-align: left"> Defines a path to file with a unique identifier identifying the node in the Kubernetes cluster| No | "/etc/machine-id" |
+|<div style="text-align: left"> node.healthMonitor.enabled |<div style="text-align: left"> Allows to enable/disable volume health monitor | No | false |
+|<div style="text-align: left"> node.nodeSelector |<div style="text-align: left"> Defines what nodes would be selected for pods of node daemonset | Yes | " " |
+|<div style="text-align: left"> node.tolerations  |<div style="text-align: left"> Defines tolerations that would be applied to node daemonset | Yes | " " |
+|<div style="text-align: left"> fsGroupPolicy |<div style="text-align: left"> Defines which FS Group policy mode to be used, Supported modes `None, File and ReadWriteOnceWithFSType` | No | "ReadWriteOnceWithFSType" |
+|<div style="text-align: left"> controller.vgsnapshot.enabled |<div style="text-align: left"> Allows to enable/disable the volume group snapshot feature | No | "true" |
+|<div style="text-align: left"> version |<div style="text-align: left"> To use any driver version | No | Latest driver version |
+|<div style="text-align: left"> allowAutoRoundOffFilesystemSize | <div style="text-align: left">Allows the controller to round off filesystem to 3Gi which is the minimum supported value | No | false |
+|<div style="text-align: left"> storageCapacity.enabled |<div style="text-align: left"> Allows to enable/disable storage capacity tracking feature | No | true
+|<div style="text-align: left"> storageCapacity.pollInterval |<div style="text-align: left"> Configure how often the driver checks for changed capacity | No | 5m
+|<div style="text-align: left"> podmon.enabled |<div style="text-align: left"> Allows to enable/disable [Resiliency](./csm-modules/resiliency#powerstore-specific-recommendations) feature | No | false
 {{< /collapse >}} 
 </ul>
 
