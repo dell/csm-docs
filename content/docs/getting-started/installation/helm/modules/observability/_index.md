@@ -113,18 +113,14 @@ The Grafana dashboards require Grafana to be deployed in the same Kubernetes clu
 
 | Supported Version | Helm Chart                                                |
 | ----------------- | --------------------------------------------------------- |
-| 10.x      | [Grafana Helm chart](https://github.com/grafana/helm-charts/tree/main/charts/grafana) |
-
-**Note:** From Grafana 10.x, deprecation warnings for Angular plugins will appear in the UI, but dashboards still work. **Grafana 11.x isn’t supported yet**
+| 11.x      | [Grafana Helm chart](https://github.com/grafana/helm-charts/tree/main/charts/grafana) |
 
 Grafana must be configured with the following data sources/plugins:
 
 | Name                   | Additional Information                                                     |
 | ---------------------- | -------------------------------------------------------------------------- |
-| Prometheus data source | [Prometheus data source](https://grafana.com/docs/grafana/latest/features/datasources/prometheus/)   |
-| Data Table plugin      | [Data Table plugin](https://grafana.com/grafana/plugins/briangann-datatable-panel) |
-| Pie Chart plugin       | [Pie Chart plugin](https://grafana.com/grafana/plugins/grafana-piechart-panel)                 |
-| SimpleJson data source | [SimpleJson data source](https://grafana.com/grafana/plugins/grafana-simple-json-datasource)                 |
+| Prometheus data source | [Prometheus data source](https://grafana.com/docs/grafana/latest/features/datasources/prometheus/)   |                 |
+| Infinity data source plugin | [Infinity data source plugin](https://grafana.com/grafana/plugins/yesoreyeram-infinity-datasource)                 |
 
 Settings for the Grafana Prometheus data source:
 
@@ -135,12 +131,12 @@ Settings for the Grafana Prometheus data source:
 | URL     | http://PROMETHEUS_IP:PORT | The IP/PORT of your running Prometheus instance |
 | Access  | Proxy                     |                                                 |
 
-Settings for the Grafana SimpleJson data source:
+Settings for the Infinity data source plugin:
 
 | Setting             | Value                             |
 | ------------------- | --------------------------------- |
 | Name                | Karavi-Topology |
-| URL                 | Access Container Storage Modules Observability Topology service at https://karavi-topology.*namespace*.svc.cluster.local:8443 |
+| URL                 | Access Container Storage Modules Observability Topology service at https://karavi-topology.*namespace*.svc.cluster.local:8443/topology.json |
 | Skip TLS Verify     | Enabled (If not using CA certificate) |
 | With CA Cert        | Enabled (If using CA certificate) |
 
@@ -186,7 +182,7 @@ Below are the steps to deploy a new Grafana instance into your Kubernetes cluste
     # grafana-values.yaml 
     image:
       repository: grafana/grafana
-      tag: 10.4.3
+      tag: 11.5.2
       sha: ""
       pullPolicy: IfNotPresent
     service:
@@ -199,9 +195,7 @@ Below are the steps to deploy a new Grafana instance into your Kubernetes cluste
     ## Pass the plugins you want to be installed as a list.
     ##
     plugins:
-      - grafana-simple-json-datasource
-      - briangann-datatable-panel
-      - grafana-piechart-panel
+      - yesoreyeram-infinity-datasource
 
     ## Configure grafana datasources
     ## ref: http://docs.grafana.org/administration/provisioning/#datasources
@@ -211,9 +205,9 @@ Below are the steps to deploy a new Grafana instance into your Kubernetes cluste
         apiVersion: 1
         datasources:
         - name: Karavi-Topology
-          type: grafana-simple-json-datasource
+          type: yesoreyeram-infinity-datasource
           access: proxy
-          url: 'https://karavi-topology:8443'
+          url: 'https://karavi-topology:8443/topology.json'
           isDefault: null
           version: 1
           editable: true
