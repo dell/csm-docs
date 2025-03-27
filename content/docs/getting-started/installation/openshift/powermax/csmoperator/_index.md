@@ -204,7 +204,7 @@ Example:
   oc get csm powermax -n powermax
 
   NAME        CREATIONTIME   CSIDRIVERTYPE   CONFIGVERSION   STATE
-  powermax    3h             powermax        {{< version-docs key="PMax_latestVersion" >}}         Succeeded
+  powermax    3h             powermax        {{< version-docs key="PMax_latestVersion" >}}         Succeeded      
   ```
 
   Check the status of the CR to verify if the driver installation is in the `Succeeded` state. If the status is not `Succeeded`, see the [Troubleshooting guide](../troubleshooting/#my-dell-csi-driver-install-failed-how-do-i-fix-it) for more information.
