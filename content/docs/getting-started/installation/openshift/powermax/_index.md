@@ -11,13 +11,6 @@ weight: 2
 PowerMax is a high-performance, enterprise-class storage solution designed to meet the demanding needs of modern data centers. It is renowned for its exceptional speed, scalability, and reliability, making it ideal for mission-critical applications and workloads. 
 
 
-
-{{< cardcontainer >}}
-
-    {{< customcard  link="./prerequisite"  imageNumber="4" title="Prerequisite">}} 
-
-{{< /cardcontainer >}}
-
 {{< cardcontainer >}}
 
        {{< customcard  link="./csmoperator" imageNumber="6"  title="Operator" >}}
