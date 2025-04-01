@@ -22,6 +22,7 @@ description: Release notes for PowerMax CSI driver
 
 ### New Features/Changes
 
+- [#1560 - [FEATURE]: CSM support for OpenShift 4.18](https://github.com/dell/csm/issues/1560)
 - [#1561 - [FEATURE]: Added support for Kubernetes 1.32 ](https://github.com/dell/csm/issues/1561)
 
 ### Fixed Issues

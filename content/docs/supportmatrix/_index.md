@@ -31,7 +31,7 @@ weight: 1
 | Platform                   | Version          |
 |----------------------------|:----------------:|
 | Kubernetes                 | 1.30, 1.31, 1.32 |
-| Red Hat OpenShift          | 4.16, 4.17       |
+| Red Hat OpenShift          | 4.17, 4.18       |
 | Mirantis Kubernetes Engine | 3.7.x            |
 {{</table>}}
 
@@ -45,10 +45,12 @@ weight: 1
 {{<table "table table-striped table-bordered table-sm">}}
 | Version | Capability               | PowerFlex | PowerMax | PowerStore | PowerScale | Unity |
 |---------|--------------------------| :-------: | :------: | :--------: | :--------: | :---: |
-| 4.17    |  <div style="text-align: left"> [Storage](https://github.com/kiagnose/kubevirt-storage-checkup) </div> | Yes       | Yes      | Yes        | Yes        | No    |
-| 4.17    | <div style="text-align: left">  Observability        </div>   | Yes       | Yes      | No         | Yes        | No    |
-| 4.17    | <div style="text-align: left"> Authorization - v2.x  </div>   | Yes       | Yes      | No         | Yes        | No    |
+| 4.17 - 4.18    |  <div style="text-align: left"> [Storage](https://github.com/kiagnose/kubevirt-storage-checkup) </div> | Yes       | Yes      | Yes        | Yes        | No    |
+| 4.17 - 4.18   | <div style="text-align: left">  Observability        </div>   | Yes       | Yes      | No         | Yes        | No    |
+| 4.17 - 4.18    | <div style="text-align: left"> Authorization - v2.x  </div>   | Yes       | Yes      | No         | Yes        | No    |
 {{</table>}}
+
+> Note: Resiliency and Replication are not supported.
 
 ## Tested Host Operating Systems
 
@@ -93,12 +95,11 @@ The table below lists the driver and modules installable with the Operator
 {{<table "table table-striped table-bordered table-sm">}}
 |  OpenShift Version        | Operator Version        | CSM version |
 | ------------| ------------------| ----------- |
-|  4.12       | 1.2.0, 1.3.0               |1.7.1, 1.8.0           |
-|  4.13       | 1.3.0, 1.4.4, 1.5.1        |1.8.0, 1.9.4, 1.10.2      |
 |  4.14       | 1.4.4, 1.5.1, 1.6.1, 1.7.0, 1.8.0 |1.9.4, 1.10.2, 1.11.1, 1.12, 1.13|
 |  4.15       | 1.5.1, 1.6.1, 1.7.0, 1.8.0        |1.10.2, 1.11.1, 1.12, 1.13    |
 |  4.16       | 1.6.1, 1.7.0, 1.8.0               |1.11.1, 1.12, 1.13         |
 |  4.17       | 1.6.1, 1.7.0, 1.8.0               |1.11.1, 1.12, 1.13         |
+|  4.18       | 1.6.1, 1.7.0, 1.8.0               |1.11.1, 1.12, 1.13         |
 {{</table>}}
 **Note:**
 - Operator version 1.2.0 corresponds to CSM version 1.7.1, and operator version 1.3.0 corresponds to CSM version 1.8.0.<br>
