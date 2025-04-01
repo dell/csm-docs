@@ -30,7 +30,7 @@ weight: 1
 | Platform                   | Version          |
 |----------------------------|:----------------:|
 | Kubernetes                 | 1.30, 1.31, 1.32 |
-| Red Hat OpenShift          | 4.16, 4.17       |
+| Red Hat OpenShift          | 4.17, 4.18       |
 | Mirantis Kubernetes Engine | 3.7.x            |
 {{</table>}}
 
@@ -41,14 +41,16 @@ weight: 1
 
 ## OpenShift Virtualization
 {{<table "table table-striped table-bordered table-sm">}}
-| Version | Capability               | PowerStore | PowerScale | PowerFlex | PowerMax | Unity |
-|---------|--------------------------| :--------: | :--------: | :-------: | :------: | :---: |
-| 4.17    | <div style="text-align: left"> Storage </div> | Yes        | Yes        | Yes       | Yes      | No    |
-| 4.17    | <div style="text-align: left"> Observability </div> | No         | Yes        | Yes       | Yes      | No    |
-| 4.17    | <div style="text-align: left"> Authorization - v2.x </div> | No         | Yes        | Yes       | Yes      | No    |
+| Version | Capability               | PowerFlex | PowerMax | PowerStore | PowerScale | Unity |
+|---------|--------------------------| :-------: | :------: | :--------: | :--------: | :---: |
+| 4.17 - 4.18    |  <div style="text-align: left"> [Storage](https://github.com/kiagnose/kubevirt-storage-checkup) </div> | Yes       | Yes      | Yes        | Yes        | No    |
+| 4.17 - 4.18   | <div style="text-align: left">  Observability        </div>   | Yes       | Yes      | No         | Yes        | No    |
+| 4.17 - 4.18    | <div style="text-align: left"> Authorization - v2.x  </div>   | Yes       | Yes      | No         | Yes        | No    |
 {{</table>}}
 
-## Operating Systems
+> Note: Resiliency and Replication are not supported.
+
+## Tested Host Operating Systems
 
 Container Storage Modules doesn't officially support specific operating systems, but the following are known to work:
 
@@ -86,11 +88,13 @@ Container Storage Modules doesn't officially support specific operating systems,
 ## OpenShift Compatibility with Operator  
 
 {{<table "table table-striped table-bordered table-sm">}}
-|  CSM Version      | OpenShift version       | Operator version|
-| ------------------| ------------------------| ----------- |
-|  1.11.x           | 4.14 - 4.17             |   1.8.0     |
-|  1.12.x           | 4.14 - 4.17             |   1.8.0     |
-|  1.13.x           | 4.14 - 4.17             |   1.8.0     |
+|  OpenShift Version        | Operator Version        | CSM version |
+| ------------| ------------------| ----------- |
+|  4.14       | 1.4.4, 1.5.1, 1.6.1, 1.7.0, 1.8.0 |1.9.4, 1.10.2, 1.11.1, 1.12, 1.13|
+|  4.15       | 1.5.1, 1.6.1, 1.7.0, 1.8.0        |1.10.2, 1.11.1, 1.12, 1.13    |
+|  4.16       | 1.6.1, 1.7.0, 1.8.0               |1.11.1, 1.12, 1.13         | 
+|  4.17       | 1.6.1, 1.7.0, 1.8.0               |1.11.1, 1.12, 1.13         |
+|  4.18       | 1.6.1, 1.7.0, 1.8.0               |1.11.1, 1.12, 1.13         |
 {{</table>}}
 **Note:**  
 - [Refer](#supported-container-orchestrator-platforms) our supported Orchestration platform. While the Operator may be displayed, it does not necessarily mean it has been fully qualified by us. If desired, customers can upgrade the Operator and self-certify it.
