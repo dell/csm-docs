@@ -57,7 +57,7 @@ Create the karavi-authorization-config secret using this command:
 
     **Note:** Authorization does not currently support the `backupEndpoint` parameter.
 
-    Example: 
+    Example:
     ```yaml
     storageArrays:
       - storageArrayId: "000000000001"
@@ -82,7 +82,7 @@ Create the karavi-authorization-config secret using this command:
 
     **Note:** Authorization does not currently support the `backupEndpoint` parameter.
 
-    Example: 
+    Example:
     ```yaml
     storageArrays:
       - storageArrayId: "000000000001"
@@ -141,7 +141,7 @@ Create the karavi-authorization-config secret using this command:
       enabled: true
 
       # sidecarProxyImage: the container image used for the csm-authorization-sidecar.
-      # Default value: quay.io/dell/container-storage-modules/csm-authorization-sidecar:v1.13.0
+      # Default value: quay.io/dell/container-storage-modules/csm-authorization-sidecar:v1.14.0
       sidecarProxyImage: quay.io/dell/container-storage-modules/csm-authorization-sidecar:{{< version-docs key="Authv1_csm_authorization_sidecar" >}}
 
       # proxyHost: hostname of the csm-authorization server
@@ -151,8 +151,8 @@ Create the karavi-authorization-config secret using this command:
       # skipCertificateValidation: certificate validation of the csm-authorization server
       # Allowed Values:
       #   "true" - TLS certificate verification will be skipped
-      #   "false" - TLS certificate will be verified 
-      # Default value: "true" 
+      #   "false" - TLS certificate will be verified
+      # Default value: "true"
       skipCertificateValidation: true
     ```
 
@@ -198,8 +198,8 @@ Create the karavi-authorization-config secret using this command:
             # proxyHost: hostname of the csm-authorization server
             - name: "PROXY_HOST"
               value: "csm-authorization.com"
-          
-            # skipCertificateValidation: Enable/Disable certificate validation of the csm-authorization server       
+
+            # skipCertificateValidation: Enable/Disable certificate validation of the csm-authorization server
             - name: "SKIP_CERTIFICATE_VALIDATION"
               value: "true"
     ```

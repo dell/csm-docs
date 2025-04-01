@@ -2,7 +2,7 @@
 title: "Operator"
 linktitle: "Operator"
 description: Container Storage Modules Operator
-toc_hide: true 
+toc_hide: true
 weight: 2
 ---
 {{% pageinfo color="primary" %}}
@@ -27,7 +27,7 @@ Before installing the driver, you need to install the operator. You can find the
 1. Install volume snapshot CRDs. For detailed snapshot setup procedure, [click here](docs/concepts/snapshots/#volume-snapshot-feature).
 2. Clone and checkout the required csm-operator version using
 ```bash
-git clone -b v1.8.0 https://github.com/dell/csm-operator.git
+git clone -b {{< version-docs key="csm-operator_latest_version" >}} https://github.com/dell/csm-operator.git
 ```
 3. `cd csm-operator`
 4. _(Optional)_ If using a local Docker image, edit the `deploy/operator.yaml` file and set the image name for the CSM Operator Deployment.

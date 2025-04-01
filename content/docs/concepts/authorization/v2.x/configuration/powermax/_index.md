@@ -62,7 +62,7 @@ Given a setup where Kubernetes, a storage system, and the Container Storage Modu
 
     **Note:** Authorization does not currently support the `backupEndpoint` parameter.
 
-    Example: 
+    Example:
     ```yaml
     storageArrays:
       - storageArrayId: "000000000001"
@@ -87,7 +87,7 @@ Given a setup where Kubernetes, a storage system, and the Container Storage Modu
 
     **Note:** Authorization does not currently support the `backupEndpoint` parameter.
 
-    Example: 
+    Example:
     ```yaml
     storageArrays:
       - storageArrayId: "000000000001"
@@ -140,7 +140,7 @@ Given a setup where Kubernetes, a storage system, and the Container Storage Modu
 
     - Update the `SKIP_CERTIFICATE_VALIDATION` environment value to `true` or `false` depending on if you want to disable or enable certificate validation of Authorization Proxy Server.
 
-    - Do not update the `configVersion`. You will notice in the example that it is set to v1.13.0, this ensures that Operator checks on version support do not prevent deployment of the v2.0.0-alpha authorization tech preview.
+    - Do not update the `configVersion`. You will notice in the example that it is set to v1.14.0. This ensures that Operator checks on version support do not prevent deployment of the v2.2.0.
 
     Example:
 
@@ -168,7 +168,7 @@ Given a setup where Kubernetes, a storage system, and the Container Storage Modu
               value: "2222"
           - name: X_CSI_CONFIG_MAP_NAME
               value: "powermax-reverseproxy-config"
-          # deployAsSidecar defines the way reversproxy is installed with the driver
+          # deployAsSidecar defines the way reverseproxy is installed with the driver
           # set it true, if csm-auth is enabled / you want it as a sidecar container
           # set it false, if you want it as a deployment
           - name: "DeployAsSidecar"
@@ -229,7 +229,7 @@ Given a setup where Kubernetes, a storage system, and the Container Storage Modu
     authorization:
       enabled: true
       # sidecarProxyImage: the container image used for the csm-authorization-sidecar.
-      # Default value: quay.io/dell/container-storage-modules/csm-authorization-sidecar:v2.0.0
+      # Default value: quay.io/dell/container-storage-modules/csm-authorization-sidecar:v2.2.0
       sidecarProxyImage: quay.io/dell/container-storage-modules/csm-authorization-sidecar:{{< version-docs key="Authv2_csm_authorization_sidecar" >}}
       # proxyHost: hostname of the csm-authorization server
       # Default value: None

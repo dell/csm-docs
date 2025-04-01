@@ -72,8 +72,8 @@ kubectl -n vxflexos create secret generic karavi-authorization-config --from-fil
       password: "ignored"
       systemID: "ID2"
       endpoint: "https://localhost:9400"
-      skipCertificateValidation: true 
-      isDefault: true 
+      skipCertificateValidation: true
+      isDefault: true
       mdm: "10.0.0.3,10.0.0.4"
     ```
 
@@ -94,8 +94,8 @@ kubectl -n vxflexos create secret generic karavi-authorization-config --from-fil
       password: "ignored"
       systemID: "ID2"
       endpoint: "https://localhost:9400"
-      skipCertificateValidation: true 
-      isDefault: true 
+      skipCertificateValidation: true
+      isDefault: true
       mdm: "10.0.0.3,10.0.0.4"
     ```
 
@@ -120,7 +120,7 @@ kubectl -n vxflexos create secret generic karavi-authorization-config --from-fil
       enabled: true
 
       # sidecarProxyImage: the container image used for the csm-authorization-sidecar.
-      # Default value: quay.io/dell/container-storage-modules/csm-authorization-sidecar:v1.13.0
+      # Default value: quay.io/dell/container-storage-modules/csm-authorization-sidecar:v1.14.0
       sidecarProxyImage: quay.io/dell/container-storage-modules/csm-authorization-sidecar:{{< version-docs key="Authv1_csm_authorization_sidecar" >}}
 
       # proxyHost: hostname of the csm-authorization server
@@ -130,8 +130,8 @@ kubectl -n vxflexos create secret generic karavi-authorization-config --from-fil
       # skipCertificateValidation: certificate validation of the csm-authorization server
       # Allowed Values:
       #   "true" - TLS certificate verification will be skipped
-      #   "false" - TLS certificate will be verified 
-      # Default value: "true" 
+      #   "false" - TLS certificate will be verified
+      # Default value: "true"
       skipCertificateValidation: true
     ```
 
@@ -165,8 +165,8 @@ kubectl -n vxflexos create secret generic karavi-authorization-config --from-fil
             # proxyHost: hostname of the csm-authorization server
             - name: "PROXY_HOST"
               value: "csm-authorization.com"
-          
-            # skipCertificateValidation: Enable/Disable certificate validation of the csm-authorization server       
+
+            # skipCertificateValidation: Enable/Disable certificate validation of the csm-authorization server
             - name: "SKIP_CERTIFICATE_VALIDATION"
               value: "true"
     ```

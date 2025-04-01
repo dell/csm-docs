@@ -1,8 +1,8 @@
 ---
 title: "CSI Drivers"
 linkTitle: "CSI Drivers"
-description: About Dell Technologies (Dell) CSI Drivers 
-no_list: true 
+description: About Dell Technologies (Dell) CSI Drivers
+no_list: true
 weight: 3
 ---
 
@@ -16,7 +16,7 @@ The CSI Drivers implement an interface between [CSI](https://kubernetes-csi.gith
 {{<table "table table-striped table-bordered table-sm">}}
 | Features                 | PowerMax | PowerFlex | Unity XT  | PowerScale | PowerStore |
 |--------------------------|:--------:|:---------:|:---------:|:----------:|:----------:|
-| CSI Driver version       | 2.13.0   | 2.13.0    | 2.13.0    | 2.13.0     | 2.13.0     |
+| CSI Driver version       | 2.14.0   | 2.14.0    | 2.14.0    | 2.14.0     | 2.14.0     |
 | Static Provisioning      | yes      | yes       | yes       | yes        | yes        |
 | Dynamic Provisioning     | yes      | yes       | yes       | yes        | yes        |
 | Expand Persistent Volume | yes      | yes       | yes       | yes        | yes        |

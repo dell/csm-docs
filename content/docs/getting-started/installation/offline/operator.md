@@ -4,7 +4,7 @@ linkTitle: "Offline Operator Installation"
 no_list: true
 description: Offline Operator Installation
 weight: 4
---- 
+---
 
 ## Workflow
 
@@ -25,9 +25,9 @@ On a Linux system with Internet access:
 
 1. Clone the required `csm-operator` version:
 ```bash
-git clone -b v1.8.0 https://github.com/dell/csm-operator.git 
+git clone -b v1.9.0 https://github.com/dell/csm-operator.git
 cd csm-operator
-``` 
+```
 
 2. Run the csm-offline-bundle.sh script to create an offline bundle:
 ```bash
@@ -54,30 +54,30 @@ Here is the output of a request to build an offline bundle for the Dell CSM Oper
 
 * Pulling and saving container images
 
-   quay.io/dell/container-storage-modules/csi-isilon:v2.13.0
-   quay.io/dell/container-storage-modules/csi-metadata-retriever:v1.10.0
-   quay.io/dell/container-storage-modules/csipowermax-reverseproxy:v2.12.0
-   quay.io/dell/container-storage-modules/csi-powermax:v2.13.0
-   quay.io/dell/container-storage-modules/csi-powerstore:v2.13.0
-   quay.io/dell/container-storage-modules/csi-unity:v2.13.0
-   quay.io/dell/container-storage-modules/csi-vxflexos:v2.13.0
-   quay.io/dell/container-storage-modules/csm-authorization-sidecar:v1.13.0
-   quay.io/dell/container-storage-modules/csm-metrics-powerflex:v1.11.0
-   quay.io/dell/container-storage-modules/csm-metrics-powerscale:v1.8.0
-   quay.io/dell/container-storage-modules/csm-topology:v1.11.0
-   quay.io/dell/container-storage-modules/dell-csi-replicator:v1.11.0
-   quay.io/dell/container-storage-modules/dell-replication-controller:v1.11.0
+   quay.io/dell/container-storage-modules/csi-isilon:{{< version-docs key="PScale_latestVersion" >}}
+   quay.io/dell/container-storage-modules/csi-metadata-retriever:{{< version-docs key="metadata_retriever_latest_version" >}}
+   quay.io/dell/container-storage-modules/csipowermax-reverseproxy:{{< version-docs key="Authv1_PMax_ReverseProxy_ConfigVersion" >}}
+   quay.io/dell/container-storage-modules/csi-powermax:{{< version-docs key="PMax_latestVersion" >}}
+   quay.io/dell/container-storage-modules/csi-powerstore:{{< version-docs key="PStore_latestVersion" >}}
+   quay.io/dell/container-storage-modules/csi-unity:{{< version-docs key="PUnity_latestVersion" >}}
+   quay.io/dell/container-storage-modules/csi-vxflexos:{{< version-docs key="PFlex_latestVersion" >}}
+   quay.io/dell/container-storage-modules/csm-authorization-sidecar:{{< version-docs key="Authv1_csm_authorization_sidecar" >}}
+   quay.io/dell/container-storage-modules/csm-metrics-powerflex:{{< version-docs key="Observability_csm_metrics_PFlex_image" >}}
+   quay.io/dell/container-storage-modules/csm-metrics-powerscale:{{< version-docs key="Observability_csm_metrics_PScale_image" >}}
+   quay.io/dell/container-storage-modules/csm-topology:{{< version-docs key="Observability_csm_topology_image" >}}
+   quay.io/dell/container-storage-modules/dell-csi-replicator:{{< version-docs key="replicator_latest_version" >}}
+   quay.io/dell/container-storage-modules/dell-replication-controller:{{< version-docs key="replication_controller_latest_version" >}}
    quay.io/dell/storage/powerflex/sdc:4.5.2.1
-   quay.io/dell/container-storage-modules/dell-csm-operator:v1.8.0
+   quay.io/dell/container-storage-modules/dell-csm-operator:{{< version-docs key="csm-operator_latest_version" >}}
    registry.redhat.io/openshift4/ose-kube-rbac-proxy-rhel9:v4.16.0-202409051837.p0.g8ea2c99.assembly.stream.el9
    nginxinc/nginx-unprivileged:1.27
    otel/opentelemetry-collector:0.42.0
-   registry.k8s.io/sig-storage/csi-attacher:v4.7.0
-   registry.k8s.io/sig-storage/csi-external-health-monitor-controller:v0.13.0
-   registry.k8s.io/sig-storage/csi-node-driver-registrar:v2.12.0
-   registry.k8s.io/sig-storage/csi-provisioner:v5.1.0
-   registry.k8s.io/sig-storage/csi-resizer:v1.12.0
-   registry.k8s.io/sig-storage/csi-snapshotter:v8.1.0
+   registry.k8s.io/sig-storage/csi-attacher:{{< version-docs key="attacher_latest_version" >}}
+   registry.k8s.io/sig-storage/csi-external-health-monitor-controller:{{< version-docs key="health_monitor_controller_latest_version" >}}
+   registry.k8s.io/sig-storage/csi-node-driver-registrar:{{< version-docs key="node_driver_registrar_latest_version" >}}
+   registry.k8s.io/sig-storage/csi-provisioner:{{< version-docs key="provisioner_latest_version" >}}
+   registry.k8s.io/sig-storage/csi-resizer:{{< version-docs key="resizer_latest_version" >}}
+   registry.k8s.io/sig-storage/csi-snapshotter:{{< version-docs key="csi_snapshotter_latest_version" >}}
 
 * Copying necessary files
 
@@ -106,7 +106,7 @@ dell-csm-operator-bundle/LICENSE
 
 Offline bundle file is: /root/csm-operator/dell-csm-operator-bundle.tar.gz
 ```
-{{< /collapse >}} 
+{{< /collapse >}}
 
 The resulting offline bundle file can be copied to another machine, if necessary, to gain access to the desired image registry.
 
@@ -115,7 +115,7 @@ The resulting offline bundle file can be copied to another machine, if necessary
 This step needs to be performed on a Linux system with access to an image registry that will host container images. If the registry requires `login`, that should be done before proceeding.
 
 1. **Copy the Offline Bundle :** Transfer the offline bundle file to a machine with access to the desired image registry.
-2. **Unpack the Bundle:**  
+2. **Unpack the Bundle:**
     - On a Linux system with registry access, expand the bundle file:
     ```bash
     tar xvfz dell-csm-operator-bundle.tar.gz
@@ -138,11 +138,11 @@ This step needs to be performed on a Linux system with access to an image regist
    dell-csm-operator-bundle/LICENSE
    ```
 {{< /collapse >}}
-</ul> 
+</ul>
 
 3. **Prepare for Installation:** Run the `csm-offline-bundle.sh` script with the `-p` option and specify the internal registry path with the `-r` option:
       ```bash
-      cd dell-csm-operator-bundle 
+      cd dell-csm-operator-bundle
 
       bash scripts/csm-offline-bundle.sh -p -r localregistry:5000/dell-csm-operator/
       ```
@@ -163,30 +163,30 @@ Preparing a offline bundle for installation
 
 * Loading quay.io images
 
-Loaded image: quay.io/dell/container-storage-modules/csi-powerstore:v2.13.0
-Loaded image: quay.io/dell/container-storage-modules/csi-isilon:v2.13.0
+Loaded image: quay.io/dell/container-storage-modules/csi-powerstore:{{< version-docs key="PStore_latestVersion" >}}
+Loaded image: quay.io/dell/container-storage-modules/csi-isilon:{{< version-docs key="PScale_latestVersion" >}}
 ...
 ...
-Loaded image: registry.k8s.io/sig-storage/csi-resizer:v1.12.0
-Loaded image: registry.k8s.io/sig-storage/csi-snapshotter:v8.1.0
+Loaded image: registry.k8s.io/sig-storage/csi-resizer:{{< version-docs key="resizer_latest_version" >}}
+Loaded image: registry.k8s.io/sig-storage/csi-snapshotter:{{< version-docs key="csi_snapshotter_latest_version" >}}
 
 * Tagging and pushing images
 
-   quay.io/dell/container-storage-modules/csi-isilon:v2.13.0 -> localregistry:5000/dell-csm-operator/csi-isilon:v2.13.0
-   quay.io/dell/container-storage-modules/csi-metadata-retriever:v1.10.0 -> localregistry:5000/dell-csm-operator/csi-metadata-retriever:v1.10.0
+   quay.io/dell/container-storage-modules/csi-isilon:{{< version-docs key="PScale_latestVersion" >}} -> localregistry:5000/dell-csm-operator/csi-isilon:{{< version-docs key="PScale_latestVersion" >}}
+   quay.io/dell/container-storage-modules/csi-metadata-retriever:{{< version-docs key="metadata_retriever_latest_version" >}} -> localregistry:5000/dell-csm-operator/csi-metadata-retriever:{{< version-docs key="metadata_retriever_latest_version" >}}
    ...
    ...
-   registry.k8s.io/sig-storage/csi-resizer:v1.12.0 -> localregistry:5000/dell-csm-operator/csi-resizer:v1.12.0
-   registry.k8s.io/sig-storage/csi-snapshotter:v8.1.0 -> localregistry:5000/dell-csm-operator/csi-snapshotter:v8.1.0
+   registry.k8s.io/sig-storage/csi-resizer:{{< version-docs key="resizer_latest_version" >}} -> localregistry:5000/dell-csm-operator/csi-resizer:{{< version-docs key="resizer_latest_version" >}}
+   registry.k8s.io/sig-storage/csi-snapshotter:{{< version-docs key="csi_snapshotter_latest_version" >}} -> localregistry:5000/dell-csm-operator/csi-snapshotter:{{< version-docs key="csi_snapshotter_latest_version" >}}
 
 * Preparing files within /root/dell-csm-operator-bundle
 
-   changing: quay.io/dell/container-storage-modules/csi-isilon:v2.13.0 -> localregistry:5000/dell-csm-operator/csi-isilon:v2.13.0
-   changing: quay.io/dell/container-storage-modules/csi-metadata-retriever:v1.10.0 -> localregistry:5000/dell-csm-operator/csi-metadata-retriever:v1.10.0
+   changing: quay.io/dell/container-storage-modules/csi-isilon:{{< version-docs key="PScale_latestVersion" >}} -> localregistry:5000/dell-csm-operator/csi-isilon:{{< version-docs key="PScale_latestVersion" >}}
+   changing: quay.io/dell/container-storage-modules/csi-metadata-retriever:{{< version-docs key="metadata_retriever_latest_version" >}} -> localregistry:5000/dell-csm-operator/csi-metadata-retriever:{{< version-docs key="metadata_retriever_latest_version" >}}
    ...
    ...
-   changing: registry.k8s.io/sig-storage/csi-resizer:v1.12.0 -> localregistry:5000/dell-csm-operator/csi-resizer:v1.12.0
-   changing: registry.k8s.io/sig-storage/csi-snapshotter:v8.1.0 -> localregistry:5000/dell-csm-operator/csi-snapshotter:v8.1.0
+   changing: registry.k8s.io/sig-storage/csi-resizer:{{< version-docs key="resizer_latest_version" >}} -> localregistry:5000/dell-csm-operator/csi-resizer:{{< version-docs key="resizer_latest_version" >}}
+   changing: registry.k8s.io/sig-storage/csi-snapshotter:{{< version-docs key="csi_snapshotter_latest_version" >}} -> localregistry:5000/dell-csm-operator/csi-snapshotter:{{< version-docs key="csi_snapshotter_latest_version" >}}
 
 * Complete
 ```
@@ -196,18 +196,18 @@ Loaded image: registry.k8s.io/sig-storage/csi-snapshotter:v8.1.0
 
 #### **Install Operator:**
 
-   - Run the `install.sh` script to install the operator: 
+   - Run the `install.sh` script to install the operator:
 
       ```bash
       bash scripts/install.sh
       ```
-#### **Install Container Storage Modules** 
+#### **Install Container Storage Modules**
 
 **Prepare for Installation:** Ensure required images are available and Operator configuration is updated.
 
 **Follow Installation Procedure:** Proceed with the usual installation steps as documented for the [Operator](docs/getting-started/installation/operator/operatorinstallation_openshift/#installation).
 
->Notes: 
+>Notes:
 - The Operator installs to the `dell-csm-operator` namespace by default
 - Offline bundle installation is only supported with manual installs (without using Operator Lifecycle Manager).
 - Use files from the unpacked offline bundle (dell-csm-operator-bundle.tar.gz) as image tags in the manifests are modified to point to the internal registry.
