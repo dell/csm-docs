@@ -54,7 +54,7 @@ kubectl get csm -n unity
 
 {{< hide class="4" >}}
    As of CSI PowerMax v2.14.0, the powermax-array-config has been deprecated and values present in powermax-array-config has been migrated to sample yaml.
-   If you would like to continue using the powermax-array-config , create using refernce **Step 3** in [CSI Driver installation steps](../../installation/kubernetes/powermax/csmoperator/#install-driver).
+   If you would like to continue using the powermax-array-config , create using reference **Step 3** in [CSI Driver installation steps](../../installation/kubernetes/powermax/csmoperator/#install-driver).
 
    If powermax-array-config is not created, add values to X_CSI_MANAGED_ARRAYS, X_CSI_POWERMAX_PORTGROUPS, X_CSI_TRANSPORT_PROTOCOL in sample yaml. 
 
