@@ -7,8 +7,10 @@ weight: 3
 ---
 {{% pageinfo color="primary" %}}
 1. <span></span>{{< message text="11" >}}
+   
+2. <span></span>{{< message text="13" >}}
 
-2. <span></span>{{< message text="1" >}}
+3. <span></span>{{< message text="1" >}}
 {{% /pageinfo %}}
 
 ### Install Helm 3
