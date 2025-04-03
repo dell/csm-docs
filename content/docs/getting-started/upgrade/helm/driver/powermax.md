@@ -45,6 +45,7 @@ Upgrades to the CSI Driver for Dell PowerMax can be made using Helm or Dell CSM 
    ```bash
    ./csi-install.sh --namespace powermax --values ./my-powermax-settings.yaml --upgrade --helm-charts-version <version>
    ```
+> Note: The `powermax-array-config` remains for backward compatibility only. It has been deprecated and will be removed from future release. 
 
 > Notes:
 > - The parameter `--helm-charts-version` is optional and if you do not specify the flag, by default the `csi-install.sh` script will clone the version of the helm chart that is specified in the driver's [csi-install.sh](https://github.com/dell/csi-powermax/blob/main/dell-csi-helm-installer/csi-install.sh#L52) file. If you wish to install the driver using a different version of the helm chart, you need to include this flag. Also, remember to delete the `helm-charts` repository present in the `csi-powermax` directory if it was cloned before.
