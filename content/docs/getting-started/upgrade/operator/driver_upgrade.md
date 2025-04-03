@@ -50,13 +50,11 @@ kubectl get csm -n unity
 
    If you would like to continue using the `powemax-reverseproxy-config` ConfigMap, set `X_CSI_REVPROXY_USE_SECRET: false` in your CSM file, and skip the creation of this Secret.
 
-{{< /hide >}}
-
-{{< hide class="4" >}}
-   As of CSI PowerMax v2.14.0, the powermax-array-config has been deprecated and values present in powermax-array-config has been migrated to sample yaml.
+   Additionally, the powermax-array-config has been deprecated and you can delete the existing powermax-array-config. Values present in powermax-array-config have been migrated to powermax sample yaml [here](https://github.com/dell/csm-operator/blob/main/samples).
+   
    If you would like to continue using the powermax-array-config , create using reference **Step 3** in [CSI Driver installation steps](../../../../installation/kubernetes/powermax/csmoperator/#install-driver).
 
-   If powermax-array-config is not created, add values to X_CSI_MANAGED_ARRAYS, X_CSI_POWERMAX_PORTGROUPS, X_CSI_TRANSPORT_PROTOCOL in sample yaml. 
+   If powermax-array-config is not created, add values to X_CSI_MANAGED_ARRAYS, X_CSI_POWERMAX_PORTGROUPS, X_CSI_TRANSPORT_PROTOCOL in sample yaml.
 
    **Note:** The `powermax-array-config` remains for backward compatibility only.
 

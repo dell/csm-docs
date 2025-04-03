@@ -9,7 +9,9 @@ description: >
 {{% pageinfo color="primary" %}}
 1. <span></span>{{< message text="11" >}}
 
-2. <span></span>{{< message text="1" >}}
+2. <span></span>{{< message text="12" >}}
+
+3. <span></span>{{< message text="1" >}}
 {{% /pageinfo %}}
 
 ## Operator Installation
@@ -56,7 +58,7 @@ To deploy the Operator, follow the instructions available [here](../../../operat
     ```
 
 3. **Create Powermax Array Configmap:**  
-  **Note:** You can skip creating `powermax-array-config` .It remains for backward compatibility only. Instead you can add values for X_CSI_MANAGED_ARRAYS, X_CSI_TRANSPORT_PROTOCOL and X_CSI_POWERMAX_PORTGROUPS in sample files.
+  **Note:** You can skip creating `powermax-array-config`. It remains for backward compatibility only. Instead you can add values for X_CSI_MANAGED_ARRAYS, X_CSI_TRANSPORT_PROTOCOL and X_CSI_POWERMAX_PORTGROUPS in sample files.
 
   Create a configmap using the sample file [here](https://github.com/dell/csi-powermax/blob/main/samples/configmap/powermax-array-config.yaml). Fill in the appropriate values for driver configuration.
    ```yaml
