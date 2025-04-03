@@ -113,6 +113,8 @@ dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      
     ```
 
 3. **Create Powermax Array Configmap:**
+  > Note: You can skip creating `powermax-array-config` .It remains for backward compatibility only. Instead you can add values for X_CSI_MANAGED_ARRAYS, X_CSI_TRANSPORT_PROTOCOL and X_CSI_POWERMAX_PORTGROUPS in sample files.
+  
   Create a configmap using the sample file [here](https://github.com/dell/csi-powermax/blob/main/samples/configmap/powermax-array-config.yaml). Fill in the appropriate values for driver configuration.
    ```yaml
       # DEPRECATION NOTICE: The powermax-array-configmap has been deprecated and will
@@ -136,7 +138,7 @@ dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      
           X_CSI_MANAGED_ARRAYS: "000000000000,000000000000,"
    ```
 
-5. **Create a CR (Custom Resource)** for PowerMax using the sample files provided
+4. **Create a CR (Custom Resource)** for PowerMax using the sample files provided
 
     i. **Create a CR (Custom Resource)** for PowerMax using the sample files provided
 
