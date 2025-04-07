@@ -20,6 +20,11 @@ We are thrilled to announce the launch of our brand-new <a href="https://dell.gi
 Application Mobility will be part of the Container Storage Modules open-source suite in an upcoming release.
 {{ else if eq (.Get "text") "11" }}
 The CSI PowerMax Reverse Proxy ConfigMap will not be supported after CSM 1.14 (May 2025) and will be fully deprecated by CSM 1.16 (January 2026). Please switch to using the CSI PowerMax secret before these dates to avoid disruptions. Migration steps are available for both <a href="/csm-docs/docs/getting-started/upgrade/kubernetes/powermax/helm/">Helm</a> and <a href="/csm-docs/docs/getting-started/upgrade/kubernetes/powermax/operator/">Operator</a>.
+{{ else if eq (.Get "text") "12" }}
+The CSI PowerMax Array ConfigMap won't be supported after CSM 1.14 (May 2025) and will be deprecated by CSM 1.16 (January 2026). Use the PowerMax sample to add values to the configmap parameters. Migration steps are available for the <a href="/csm-docs/docs/getting-started/upgrade/kubernetes/powermax/operator/">Operator</a>.
+{{ else if eq (.Get "text") "13" }}
+The CSI PowerMax Array ConfigMap won't be supported after CSM 1.14 (May 2025) and will be deprecated by CSM 1.16 (January 2026). Use the PowerMax sample to add values to the configmap parameters.
+
 {{else}}  
 <p>Default text if no valid parameter is passed.</p>
 {{ end }}
