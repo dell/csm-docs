@@ -113,6 +113,9 @@ dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      
     ```
 
 3. **Create Powermax Array Configmap:**
+  
+  **Note:** `powermax-array-config` is deprecated and remains for backward compatibility only. You can skip creating it and instead add values for X_CSI_MANAGED_ARRAYS, X_CSI_TRANSPORT_PROTOCOL, and X_CSI_POWERMAX_PORTGROUPS in the sample files.
+
   Create a configmap using the sample file [here](https://github.com/dell/csi-powermax/blob/main/samples/configmap/powermax-array-config.yaml). Fill in the appropriate values for driver configuration.
    ```yaml
       # To create this configmap use: kubectl create -f powermax-array-config.yaml
@@ -133,7 +136,7 @@ dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      
           X_CSI_MANAGED_ARRAYS: "000000000000,000000000000,"
    ```
 
-5. **Create a CR (Custom Resource)** for PowerMax using the sample files provided
+4. **Create a CR (Custom Resource)** for PowerMax using the sample files provided
 
     i. **Create a CR (Custom Resource)** for PowerMax using the sample files provided
 
@@ -169,6 +172,9 @@ Example:
    | replicas                                        | Controls the number of controller Pods you deploy. If controller Pods are greater than the number of available nodes, excess Pods will become stuck in pending. The default is 2 which allows for Controller high availability.                                          | Yes      | 2                              |
    | fsGroupPolicy                                   | Defines which FS Group policy mode to be used, Supported modes `None, File and ReadWriteOnceWithFSType`. In OCP <= 4.16 and K8s <= 1.29, fsGroupPolicy is an immutable field.                                                                                                                                                                  | No       | "ReadWriteOnceWithFSType"      |
    | ***Common parameters for node and controller*** |                                                                                                                                                                                                                                                                          |          |                                |
+   | X_CSI_TRANSPORT_PROTOCOL                        | Choose which transport protocol to use (ISCSI, FC, NVMETCP, "")	                                                                                                                                                                                                        | Yes      | ""                           |
+   | X_CSI_POWERMAX_PORTGROUPS                       | List of comma-separated port groups (ISCSI and NVMETCP only). Example: "PortGroup1,PortGroup2"                                                                                                                                                                                       | No       | -                              |
+   | X_CSI_MANAGED_ARRAYS                            | List of comma-separated array ID(s) which will be managed by the driver                                                                                                                                                                                                  | Yes      | -
    | X_CSI_K8S_CLUSTER_PREFIX                        | Define a prefix that is appended to all resources created in the array; unique per K8s/CSI deployment; max length - 3 characters                                                                                                                                         | No      | CSM                            |
    | X_CSI_POWERMAX_PROXY_SERVICE_NAME               | Name of CSI PowerMax ReverseProxy service.                                                                                                                                                                                                                               | Yes      | csipowermax-reverseproxy       |
    | X_CSI_IG_MODIFY_HOSTNAME                        | Change any existing host names. When node name template is set, it changes the name to the specified format else it uses driver default host name format.                                                                                                                  | No       | false                          |
