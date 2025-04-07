@@ -62,9 +62,6 @@ To deploy the Operator, follow the instructions available [here](../../../operat
 
   Create a configmap using the sample file [here](https://github.com/dell/csi-powermax/blob/main/samples/configmap/powermax-array-config.yaml). Fill in the appropriate values for driver configuration.
    ```yaml
-      # DEPRECATION NOTICE: The powermax-array-configmap has been deprecated and will
-      # be removed in a future release. It remains for backward compatibility only.
-      # These values have been migrated to sample yamls
       # To create this configmap use: kubectl create -f powermax-array-config.yaml
       apiVersion: v1
       kind: ConfigMap
