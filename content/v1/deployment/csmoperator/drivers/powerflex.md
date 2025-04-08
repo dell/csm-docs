@@ -26,6 +26,8 @@ kubectl get csm --all-namespaces
 
 >NOTE: This step can be skipped with OpenShift.
 
+- If using Host Based NFS - Install necessary nfs packages and ensure nfs-server and nfs-mountd services are active and running on all nodes. 
+
 #### SDC Deployment for Operator
 
 - This feature deploys the sdc kernel modules on all nodes with the help of an init container.

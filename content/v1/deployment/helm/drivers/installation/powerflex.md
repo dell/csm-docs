@@ -24,6 +24,7 @@ The following are requirements that must be met before installing the CSI Driver
 - If enabling CSM for Authorization, please refer to the [Authorization deployment steps](../../../../../deployment/helm/modules/installation/authorization-v2.0/) first
 - If multipath is configured, ensure CSI-PowerFlex volumes are blacklisted by multipathd. See [troubleshooting section](../../../../../csidriver/troubleshooting/powerflex) for details
 - Secure boot is not supported; ensure that secure boot is disabled in the BIOS.
+- If using Host Based NFS - Install necessary nfs packages and ensure nfs-server and nfs-mountd services are active and running on all nodes. 
 
 ### Install Helm 3.x
 
