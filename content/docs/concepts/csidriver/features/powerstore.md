@@ -770,7 +770,12 @@ The CSI PowerStore driver supports the provisioning of Metro volumes. The proces
 Please note that the Metro feature does not require the deployment of the replicator sidecar or the replication controller.
 
 ## Host Based NFS
-Host-Based NFS leverages the Network File System (NFS) protocol to enable file and directory sharing over a network. It follows a client-server model in which a host functions as an NFS server—while optionally also acting as a client—sharing directories that can be mounted by other clients into their local file systems. This setup allows remote files to be accessed as if they were local. By centralizing files on a single host or a group of hosts, Host-Based NFS simplifies file management and reduces duplication, leading to more efficient storage use. Compared to traditional NFS, which relies on a single dedicated NFS server, Host-Based NFS offers improved scalability and flexibility. For optimal performance and compatibility, NFSv4 is recommended. A key prerequisite is that NFS-related services—specifically nfs-server and nfs-mountd on Linux—must be running on all participating worker nodes. CSI PowerStore version 2.14 introduces support for Host-Based NFS via a new StorageClass, defined as follows:
+- Uses the NFS protocol to share files and directories over a network, operating on a client-server model where a host acts as an NFS server.
+- Centralized File Management: Allows remote files to be accessed as if they were local, simplifying file management and reducing duplication for more efficient storage use.
+- Scalability and Flexibility: Offers better scalability and flexibility compared to traditional NFS, which relies on a single dedicated server.
+- NFSv4 Recommendation: For optimal performance and compatibility, NFSv4 is recommended.
+- Prerequisites: NFS-related services (nfs-server and nfs-mountd on Linux) must be running on all participating worker nodes.
+- CSI PowerStore Support: Version 2.14 introduces support for Host-Based NFS with a new StorageClass.
 
 ```yaml
 apiVersion: storage.k8s.io/v1
