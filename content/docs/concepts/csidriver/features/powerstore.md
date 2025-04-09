@@ -770,7 +770,7 @@ The CSI PowerStore driver supports the provisioning of Metro volumes. The proces
 Please note that the Metro feature does not require the deployment of the replicator sidecar or the replication controller.
 
 ## Host Based NFS
-- Uses the NFS protocol to share files and directories over a network, operating on a client-server model where a host acts as an NFS server.
+Uses the NFS protocol to share files and directories over a network, operating on a client-server model where a host acts as an NFS server.
 - **Centralized File Management**: Allows remote files to be accessed as if they were local, simplifying file management and reducing duplication for more efficient storage use.
 - **Scalability and Flexibility**: Offers better scalability and flexibility compared to traditional NFS, which relies on a single dedicated server.
 - **NFSv4 Recommendation**: For optimal performance and compatibility, NFSv4 is recommended.
