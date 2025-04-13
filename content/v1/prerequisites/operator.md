@@ -15,7 +15,7 @@ The table below lists the driver and modules versions installable with the Conta
 | CSI PowerStore     | 2.13.0  | ❌ , ❌                        | ❌             | ❌                | ✔ 1.12.0      |
 | CSI PowerMax       | 2.13.0  | ✔ 1.13.0 , 2.1.0                | ✔ 1.11.0       | ✔ 1.11.0          | ✔ 1.12.0      |
 | CSI Unity XT       | 2.13.0  | ❌ , ❌                        | ❌             | ❌                | ❌            |
-{{</table>}} 
+{{</table>}}
 
 
 ## CSM Component Versions
@@ -32,5 +32,5 @@ The table below lists the driver and modules versions installable with the Conta
 |<div style="text-align:left"> CSM Observability | v1.11.0 |
 |<div style="text-align:left"> CSM Replication | v1.11.0 |
 |<div style="text-align:left"> CSM Resiliency | v1.12.0 |
-| CSM Application Mobility | v1.3.0 |
+|<div style="text-align:left"> CSM Application Mobility | v1.3.0 |
 {{</table>}}

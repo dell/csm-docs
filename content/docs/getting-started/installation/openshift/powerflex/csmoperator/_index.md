@@ -383,7 +383,7 @@ Check the status of the CR to verify if the driver installation is in the `Succe
   oc get pvc -n default
 
   NAME                    STATUS   VOLUME             CAPACITY   ACCESS MODES   STORAGECLASS   VOLUMEATTRIBUTESCLASS   AGE
-  pvc-vxflexos            Bound    ocp08-095f7d3c52   8Gi        RWO            vxflexos      <unset>                 7m34s
+
   ```
   </br> 
 </li> 
@@ -516,58 +516,6 @@ NAME                    STATUS   VOLUME             CAPACITY   ACCESS MODES   ST
 
 {{< /collapse >}}  
 
-{{< collapse id="3" title="Volume Prefix" card="false" >}}  
-
-Example:
-
-```yaml
-cat << 'EOF' > csm-powerflex.yaml
-apiVersion: storage.dell.com/v1
-kind: ContainerStorageModule
-metadata:
-  name: powerflex
-  namespace: powerflex
-spec:
-  driver:
-    csiDriverType: "powerflex"
-    configVersion: v2.13.0
-    sideCars:
-    - name: provisioner
-      args: ["--volume-name-prefix=ocp08"]
-EOF
-```  
-
-{{< /collapse >}}  
-
-
-{{< collapse id="4" title="Rename SDC" card="false" >}}  
-
-Example:
-
-```yaml
-cat << 'EOF' > csm-powerflex.yaml
-apiVersion: storage.dell.com/v1
-kind: ContainerStorageModule
-metadata:
-  name: powerflex
-  namespace: powerflex
-spec:
-  driver:
-    csiDriverType: "powerflex"
-    configVersion: v2.13.0
-    sideCars:
-    - name: provisioner
-      args: ["--volume-name-prefix=ocp00"]
-    node:
-      envs:
-      - name: X_CSI_RENAME_SDC_ENABLED
-        value: "true"
-      - name: X_CSI_RENAME_SDC_PREFIX
-        value: "sdc"
-EOF
-```  
-
-{{< /collapse >}}  
 
 
 {{< /accordion >}}  

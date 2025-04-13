@@ -395,7 +395,7 @@ Check the status of the CR to verify if the driver installation is in the `Succe
   oc get pvc -n default
 
   NAME                    STATUS   VOLUME             CAPACITY   ACCESS MODES   STORAGECLASS   VOLUMEATTRIBUTESCLASS   AGE
-  pvc-powerstore          Bound    ocp08-095f7d3c52   8Gi        RWO            powerstore     <unset>                 7m34s
+
   ```
   </br> 
   </li> 
@@ -510,6 +510,7 @@ pvc-powerstore-restore  Bound    ocp08-19874e9042   8Gi        RWO            po
 ##### **Delete Restore Persistent Volume Claim**   
 
 <br>
+
 Use this command to  **Delete Restore Persistent Volume Claim**:
 
 ```bash
@@ -543,33 +544,6 @@ NAME                    STATUS   VOLUME             CAPACITY   ACCESS MODES   ST
   </li>
   </ol>
 
-
-{{< /collapse >}}  
-
-{{< collapse id="3" title="Volume Prefix" card="false" >}}  
-
-Example:
-
-```yaml
-cat << 'EOF' > csm-powerstore.yaml
-apiVersion: storage.dell.com/v1
-kind: ContainerStorageModule
-metadata:
-  name: powerstore
-  namespace: powerstore
-spec:
-  driver:
-    csiDriverType: "powerstore"
-    configVersion: v2.13.0
-    common:
-      envs:
-      - name: X_CSI_POWERSTORE_NODE_NAME_PREFIX
-        value: "ocp08"
-    sideCars:
-    - name: provisioner
-      args: ["--volume-name-prefix=ocp08"]
-EOF
-```  
 
 {{< /collapse >}}  
 

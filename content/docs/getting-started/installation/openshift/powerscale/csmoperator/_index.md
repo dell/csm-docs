@@ -529,7 +529,7 @@ isilon      3h             isilon          {{< version-docs key="PScale_latestVe
   oc get pvc -n default
 
   NAME                    STATUS   VOLUME             CAPACITY   ACCESS MODES   STORAGECLASS   VOLUMEATTRIBUTESCLASS   AGE
-  pvc-isilon              Bound    ocp08-095f7d3c52   8Gi        RWO            isilon         <unset>                 7m34s
+
   ```
   </br>
   </li> 
@@ -661,65 +661,6 @@ NAME                    STATUS   VOLUME             CAPACITY   ACCESS MODES   ST
 </ol>
 {{< /collapse >}} 
 
-{{< collapse id="3" title="Volume Prefix" card="false" >}}  
-
-Example:
-
-```yaml
-cat << 'EOF' > csm-isilon.yaml
-apiVersion: storage.dell.com/v1
-kind: ContainerStorageModule
-metadata:
-  name: isilon
-  namespace: isilon
-spec:
-  driver:
-    csiDriverType: "isilon"
-    configVersion: v2.13.0
-    authSecret: isilon-config
-    common:
-     envs:
-      - name: X_CSI_ISI_AUTH_TYPE
-        value: "1"
-    sideCars:
-    - name: provisioner
-      args: ["--volume-name-prefix=ocp08"]
-EOF
-```  
-
-{{< /collapse >}}  
-
-{{< collapse id="3" title="Custom Network for PowerScale Export" card="false" >}}  
-
-Example:
-
-```yaml
-cat << 'EOF' > csm-isilon.yaml
-apiVersion: storage.dell.com/v1
-kind: ContainerStorageModule
-metadata:
-  name: isilon
-  namespace: isilon
-spec:
-  driver:
-    csiDriverType: "isilon"
-    configVersion: v2.13.0
-    authSecret: isilon-config
-    common:
-      envs:
-      - name: X_CSI_ISI_AUTH_TYPE
-        value: "1"
-    node:
-      envs:
-      - name: X_CSI_ALLOWED_NETWORKS
-        value: "[192.168.1.0/24]"
-    sideCars:
-    - name: provisioner
-      args: ["--volume-name-prefix=ocp08"]
-EOF
-```  
-
-{{< /collapse >}} 
 
 
 {{< /accordion >}}  
