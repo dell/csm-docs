@@ -9,7 +9,7 @@ description: Release notes for PowerMax CSI driver
 
 > Note: Starting from CSI v2.4.0, Only Unisphere 10.0 REST endpoints are supported. It is mandatory that Unisphere should be updated to 10.0. Please find the instructions [here.](https://dl.dell.com/content/manual34878027-dell-unisphere-for-powermax-10-0-0-installation-guide.pdf?language=en-us&ps=true)
 
->Note: File Replication for PowerMax is currently not supported 
+>Note: File Replication for PowerMax is currently not supported
 
 
 
@@ -22,6 +22,7 @@ description: Release notes for PowerMax CSI driver
 
 ### New Features/Changes
 
+- [#1560 - [FEATURE]: CSM support for OpenShift 4.18](https://github.com/dell/csm/issues/1560)
 - [#1561 - [FEATURE]: Added support for Kubernetes 1.32 ](https://github.com/dell/csm/issues/1561)
 
 ### Fixed Issues
@@ -53,6 +54,7 @@ description: Release notes for PowerMax CSI driver
 | [Node stage is failing with error "wwn for FC device not found"](https://github.com/dell/csm/issues/1070)| This is an intermittent issue, rebooting the node will resolve this issue |
 | When the driver is installed using CSM Operator , few times, pods created using block volume are getting stuck in containercreating/terminating state or devices are not available inside the pod. | Update the daemonset with parameter `mountPropagation: "Bidirectional"` for volumedevices-path under volumeMounts section.|
 | When running CSI-PowerMax with Replication in a multi-cluster configuration, the driver on the target cluster fails and the following error is seen in logs: `error="CSI reverseproxy service host or port not found, CSI reverseproxy not installed properly"` | The reverseproxy service needs to be created manually on the target cluster. Follow [the instructions here](v1/deployment/csmoperator/modules/replication#configuration-steps) to create it.|
+| When using Helm charts to install the driver with multiple PowerMax arrays, the `powermax-array-config` ConfigMap is incorrectly created, resulting in multiple `X_CSI_POWERMAX_ENDPOINT` entries. This causes the driver pods to crash with the error `"mapping key "X_CSI_POWERMAX_ENDPOINT" already defined"`. | This issue has been reported at https://github.com/dell/csm/issues/1760. Workaround: <br /> 1. Edit the ConfigMap `powermax-array-config` and remove all instances of `X_CSI_POWERMAX_ENDPOINT`. <br /> `kubectl edit configmaps powermax-array-config -n <csi-powermax-namespace>` <br /> 2. Restart the driver pods.  <br /> `kubectl rollout restart deployment,daemonset -n <csi-powermax-namespace>` <br /> Note: Users may also need to delete any old ReplicaSets in order to bring the new controllers up. |
 ### Note:
 
 - Support for Kubernetes alpha features like Volume Health Monitoring will not be available in Openshift environment as Openshift doesn't support enabling of alpha features for Production Grade clusters.

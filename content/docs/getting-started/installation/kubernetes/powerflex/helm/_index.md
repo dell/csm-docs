@@ -18,11 +18,11 @@ Install Helm 3.x on the master node before you install the CSI Driver for Dell P
   ```
 {{< accordion id="One" title="Installation Wizard" >}}
             {{<include  file="content/docs/getting-started/installation/installationwizard/helm.md" Var="powerflex" >}}
-{{< /accordion >}} 
+{{< /accordion >}}
 
 <br>
 
-{{< accordion id="Two" title="CSI Driver" markdown="true" >}}  
+{{< accordion id="Two" title="CSI Driver" markdown="true" >}}
 ## Prerequisites
 
 The following are requirements that must be met before installing the CSI Driver for Dell PowerFlex:
@@ -113,7 +113,7 @@ Note that the namespace can be any user-defined name that follows the convention
 | nasName       | nasName defines what NAS should be used for NFS volumes. NFS volumes are supported on arrays version >=4.0.x | true     | ""       |
 {{< /collapse >}}
 
-                                            
+
   Example: `samples/secret.yaml`
 
 ```yaml
@@ -163,7 +163,7 @@ Use the below command to replace or update the secret:
 - If the user is using complex K8s version like "v1.21.3-mirantis-1", use this kubeVersion check in helm/csi-unity/Chart.yaml file.
            kubeVersion: ">= 1.21.0-0 < 1.29.0-0"
 
-</ul> 
+</ul>
 
 5. Default logging options are set during Helm install. To see possible configuration options, see the [Dynamic Logging Configuration](../../../../../concepts/csidriver/features/powerflex#dynamic-logging-configuration) section in Features.
 
@@ -172,17 +172,17 @@ Use the below command to replace or update the secret:
 
 7. Download the default values.yaml file
    ```bash
-   cd dell-csi-helm-installer && wget -O myvalues.yaml https://github.com/dell/helm-charts/raw/csi-vxflexos-2.13.0/charts/csi-vxflexos/values.yaml
+   cd dell-csi-helm-installer && wget -O myvalues.yaml https://github.com/dell/helm-charts/raw/csi-vxflexos-2.14.0/charts/csi-vxflexos/values.yaml
    ```
 
 8. If you are using custom images, check the fields under `images` in `my-vxflexos-settings.yaml` to make sure that they are pointing to the correct image repository.
 
-9. Look over all the other fields `myvalues.yaml` and fill in/adjust any as needed. All the fields are described here: 
+9. Look over all the other fields `myvalues.yaml` and fill in/adjust any as needed. All the fields are described here:
 <ul>
 {{< collapse id="2" title="Parameters">}}
 | Parameter                | Description                                                                                                                                                                                                                                                                                                                                                                                                    | Required | Default |
 | ------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ------- |
-| version | Set to verify the values file version matches driver version and used to pull the image as part of the image name. | Yes | 2.13.0 |
+| version | Set to verify the values file version matches driver version and used to pull the image as part of the image name. | Yes | 2.14.0 |
 | images | List all the images used by the CSI driver and CSM. If you use a private repository, change the registries accordingly. | Yes | "" |
 | images.powerflexSdc | Set to give the location of the SDC image used if automatic SDC deployment is being utilized. | Yes | quay.io/dell/storage/powerflex/sdc:4.5.2.1 |
 | certSecretCount | Represents the number of certificate secrets, which the user is going to create for SSL authentication. | No | 0 |
@@ -235,7 +235,7 @@ Use the below command to replace or update the secret:
 | skipCertificateValidation | A boolean that enables/disables certificate validation of the csm-authorization proxy server. | No | true |
 | **interfaceNames** | A mapping of node names to interface names. Only necessary when SDC is disabled (see above).  | No | "" |
 {{< /collapse >}}
-</ul> 
+</ul>
 
 10. Install the driver using `csi-install.sh` bash script by running `cd dell-csi-helm-installer && ./csi-install.sh --namespace vxflexos --values myvalues.yaml --helm-charts-version <version>`. You may modify the release name with the `--release` arg. If arg is not provided, release will be named `vxflexos` by default.
 Alternatively, to do a helm install solely with Helm charts (without shell scripts), refer to `helm/README.md`.
@@ -341,12 +341,12 @@ Deleting a storage class has no impact on a running Pod with mounted PVCs. You c
 
 Starting CSI PowerFlex v1.5, `dell-csi-helm-installer` will not create any Volume Snapshot Class during the driver installation. There is a sample Volume Snapshot Class manifest present in the _samples/_ folder. Please use this sample to create a new Volume Snapshot Class to create Volume Snapshots.
 
-{{< /accordion >}}  
+{{< /accordion >}}
 
 <br>
 
 {{< accordion id="Three" title="CSM Modules" >}}
-       
+
 
 {{< cardcontainer >}}
     {{< customcard link1="./csm-modules/authorizationv1.x"  image="1" title="Authorization v1.x" >}}
@@ -355,10 +355,10 @@ Starting CSI PowerFlex v1.5, `dell-csi-helm-installer` will not create any Volum
 
     {{< customcard  link1="./csm-modules/observability"   image="1" title="Observability"  >}}
 
-    {{< customcard  link1="./csm-modules/replication"  image="1" title="Replication"  >}} 
+    {{< customcard  link1="./csm-modules/replication"  image="1" title="Replication"  >}}
 
     {{< customcard link1="./csm-modules/resiliency"   image="1" title="Resiliency"  >}}
 
 {{< /cardcontainer >}}
 
-{{< /accordion >}}  
+{{< /accordion >}}

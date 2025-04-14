@@ -123,7 +123,7 @@ kubectl -n isilon create secret generic karavi-authorization-config --from-file=
       enabled: true
 
       # sidecarProxyImage: the container image used for the csm-authorization-sidecar.
-      # Default value: quay.io/dell/container-storage-modules/csm-authorization-sidecar:v1.13.0
+      # Default value: quay.io/dell/container-storage-modules/csm-authorization-sidecar:v1.14.0
       sidecarProxyImage: quay.io/dell/container-storage-modules/csm-authorization-sidecar:{{< version-docs key="Authv1_csm_authorization_sidecar" >}}
 
       # proxyHost: hostname of the csm-authorization server
@@ -133,8 +133,8 @@ kubectl -n isilon create secret generic karavi-authorization-config --from-file=
       # skipCertificateValidation: certificate validation of the csm-authorization server
       # Allowed Values:
       #   "true" - TLS certificate verification will be skipped
-      #   "false" - TLS certificate will be verified 
-      # Default value: "true" 
+      #   "false" - TLS certificate will be verified
+      # Default value: "true"
       skipCertificateValidation: true
     ```
 
@@ -166,8 +166,8 @@ kubectl -n isilon create secret generic karavi-authorization-config --from-file=
             # proxyHost: hostname of the csm-authorization server
             - name: "PROXY_HOST"
               value: "csm-authorization.com"
-          
-            # skipCertificateValidation: Enable/Disable certificate validation of the csm-authorization server       
+
+            # skipCertificateValidation: Enable/Disable certificate validation of the csm-authorization server
             - name: "SKIP_CERTIFICATE_VALIDATION"
               value: "true"
     ```
