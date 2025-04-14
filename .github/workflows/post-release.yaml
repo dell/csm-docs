@@ -53,18 +53,31 @@ jobs:
 
           echo "🔍 Found latest release branch: release-$latest_release"
 
-          # Extract major.minor and build full version and branch name
-          major_minor=$(echo "$latest_release" | awk -F. '{print $1"."$2}')
+          # Extract major, minor, patch
+          major=$(echo "$latest_release" | awk -F. '{print $1}')
+          minor=$(echo "$latest_release" | awk -F. '{print $2}')
+          patch=$(echo "$latest_release" | awk -F. '{print $3}')
+
+          # Calculate new minor version (increment minor, reset patch to 0)
+          new_minor=$((minor + 1))
+          next_target_version="v$major.$new_minor.0"
+          next_release_branch="release-$major.$new_minor.0"
+
+          # Current release vars
           target_version="v$latest_release"
           target_release_branch="release-$latest_release"
 
-          # Export to GitHub Actions env (will work only in GH Actions)
+          # Export to GitHub Actions env
           echo "TARGET_VERSION=$target_version" >> "$GITHUB_ENV"
           echo "TARGET_RELEASE_BRANCH=$target_release_branch" >> "$GITHUB_ENV"
+          echo "NEXT_TARGET_VERSION=$next_target_version" >> "$GITHUB_ENV"
+          echo "NEXT_RELEASE_BRANCH=$next_release_branch" >> "$GITHUB_ENV"
 
           # For local testing output
           echo "✅ TARGET_VERSION: $target_version"
           echo "✅ TARGET_RELEASE_BRANCH: $target_release_branch"
+          echo "✅ NEXT_TARGET_VERSION: $next_target_version"
+          echo "✅ NEXT_RELEASE_BRANCH: $next_release_branch"
       
       - name: Update hugo.toml with new version
         run: |
@@ -332,14 +345,14 @@ jobs:
           git config --global user.email "github-actions@github.com"
           git config --global user.name "GitHub Actions"
           git add .
-          git commit -m "Setup Main branch for $TARGET_VERSION"
+          git commit -m "Setup Main branch for $NEXT_TARGET_VERSION"
           git push origin $BRANCH_NAME
         
       # Step 7: Create a pull request back to main
       - name: Create Pull Request
         run: |
-          gh pr create --title "Setup Main branch for $TARGET_VERSION" \
-                       --body "<h1 style='margin-top: 0; margin-bottom: 0;'>Description</h1><ul><li>Set up main branch for $TARGET_VERSION <ul><li>Move "content/docs" to v1, move the v1 content to v2, and finally move the v2 content to v3.</li><li>Pointed csm-release versions to latest ones.</li></ul></li></ul><h2 style='margin-top: 0; margin-bottom: 0;'>GitHub Issues</h2><p>List the GitHub issues impacted by this PR:</p><table><tr><th>GitHub Issue #</th></tr><tr><td><a href=''></a></td></tr></table><h2 style='margin-top: 0; margin-bottom: 0;'>Checklist</h2><ul><li>[ ] Have you run a grammar and spell checks against your submission?</li><li>[ ] Have you tested the changes locally?</li><li>[ ] Have you tested whether the hyperlinks are working properly?</li><li>[ ] Did you add the examples wherever applicable?</li><li>[ ] Have you added high-resolution images?</li></ul>" \
+          gh pr create --title "Setup Main branch for $NEXT_TARGET_VERSION" \
+                       --body "<h1 style='margin-top: 0; margin-bottom: 0;'>Description</h1><ul><li>Set up main branch for $NEXT_TARGET_VERSION <ul><li>Move "content/docs" to v1, move the v1 content to v2, and finally move the v2 content to v3.</li><li>Pointed csm-release versions to latest ones.</li></ul></li></ul><h2 style='margin-top: 0; margin-bottom: 0;'>GitHub Issues</h2><p>List the GitHub issues impacted by this PR:</p><table><tr><th>GitHub Issue #</th></tr><tr><td><a href=''></a></td></tr></table><h2 style='margin-top: 0; margin-bottom: 0;'>Checklist</h2><ul><li>[ ] Have you run a grammar and spell checks against your submission?</li><li>[ ] Have you tested the changes locally?</li><li>[ ] Have you tested whether the hyperlinks are working properly?</li><li>[ ] Did you add the examples wherever applicable?</li><li>[ ] Have you added high-resolution images?</li></ul>" \
                        --base main \
                        --head $BRANCH_NAME
         env:
