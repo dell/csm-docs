@@ -15,7 +15,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0        # Ensure we get full history and branches
-          token: ${{ secrets.PAT_TOKEN }}  # Use PAT for pushing and creating PRs
+          token: ${{ secrets.CSMBOT_PAT }}  # Use PAT for pushing and creating PRs
 
       - name: Get New Release Version from deploy.yml
         id: get-new-version

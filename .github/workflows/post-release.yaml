@@ -18,7 +18,7 @@ jobs:
         with:
           ref: main
           fetch-depth: 0  # Required to create a new branch from the full commit history
-          token: ${{ secrets.PAT_TOKEN }}
+          token: ${{ secrets.CSMBOT_PAT }}
 
       # Step 2: Configure Git user identity for commits
       - name: Set up Git user
@@ -356,4 +356,4 @@ jobs:
                        --base main \
                        --head $BRANCH_NAME
         env:
-          GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}  # Ensure you store this token in GitHub secrets
+          GITHUB_TOKEN: ${{ secrets.CSMBOT_PAT }}  # Ensure you store this token in GitHub secrets
