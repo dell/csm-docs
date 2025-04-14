@@ -77,26 +77,3 @@ jobs:
           git add .github/workflows/deploy.yml
           git commit -m "Update deploy.yml to track $NEW_RELEASE"
           git push origin "$NEW_RELEASE"
-
-      - name: Create PR to Update `deploy.yml` in Main
-        run: |
-          git checkout main
-          git pull origin main
-
-          # Create temp branch for PR
-          git checkout -b update-release-main
-
-          # Update deploy.yml with new release name
-          sed -i -E "s/release-[0-9]+\.[0-9]+\.[0-9]+/$NEW_RELEASE/g" .github/workflows/deploy.yml
-
-          git add .github/workflows/deploy.yml
-          git commit -m "Update deploy.yml to track $NEW_RELEASE in main"
-          git push origin update-release-main
-
-          # Create PR using GitHub CLI
-          gh pr create --title "Update deploy.yml for $NEW_RELEASE" \
-                       --body "This PR updates deploy.yml to track the new release: $NEW_RELEASE." \
-                       --base main \
-                       --head update-release-main
-        env:
-          GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}

@@ -1,11 +1,15 @@
-name: Update Main Branch
+name: Setup Main Branch
 
 on:
   workflow_dispatch:  # Allows manual triggering from the GitHub UI
 
 jobs:
-  update-version:
+  setup-main-branch:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write           # Needed to push commits
+      pull-requests: write      # Needed to open PRs
+
 
     steps:
       # Step 1: Checkout the main branch with full history
@@ -14,6 +18,7 @@ jobs:
         with:
           ref: main
           fetch-depth: 0  # Required to create a new branch from the full commit history
+          token: ${{ secrets.PAT_TOKEN }}
 
       # Step 2: Configure Git user identity for commits
       - name: Set up Git user
@@ -21,13 +26,109 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
-      # Step 3: Create a new timestamped branch for changes
+      # Step 3: Create a new branch for changes
       - name: Create new branch
         run: |
-          BRANCH_NAME="version-update-$(date +%Y%m%d%H%M%S)"
+          BRANCH_NAME="setup_main_branch"
           git checkout -b $BRANCH_NAME
           echo "BRANCH_NAME=$BRANCH_NAME" >> $GITHUB_ENV
 
+      - name: Determine version for main branch setup
+        run: |
+          git fetch --all
+
+          # Extract only release branches with x.y.z pattern and clean whitespace
+          latest_release=$(git branch -r \
+            | grep -E 'origin/release-[0-9]+\.[0-9]+\.[0-9]+$' \
+            | sed 's|origin/release-||' \
+            | sed 's/^[[:space:]]*//' \
+            | sort -V \
+            | tail -n 1)
+
+          # Exit if nothing matched
+          if [[ -z "$latest_release" ]]; then
+            echo "❌ No valid release branch found (format: release-x.y.z)"
+            exit 1
+          fi
+
+          echo "🔍 Found latest release branch: release-$latest_release"
+
+          # Extract major.minor and build full version and branch name
+          major_minor=$(echo "$latest_release" | awk -F. '{print $1"."$2}')
+          target_version="v$latest_release"
+          target_release_branch="release-$latest_release"
+
+          # Export to GitHub Actions env (will work only in GH Actions)
+          echo "TARGET_VERSION=$target_version" >> "$GITHUB_ENV"
+          echo "TARGET_RELEASE_BRANCH=$target_release_branch" >> "$GITHUB_ENV"
+
+          # For local testing output
+          echo "✅ TARGET_VERSION: $target_version"
+          echo "✅ TARGET_RELEASE_BRANCH: $target_release_branch"
+      
+      - name: Update hugo.toml with new version
+        run: |
+          #!/bin/bash
+
+          set -e
+
+          TOML_FILE="hugo.toml"
+
+          # Read all existing versions under [[params.versions]]
+          versions=()
+          in_block=0
+
+          while IFS= read -r line; do
+            if [[ $line =~ \[\[params\.versions\]\] ]]; then
+              in_block=1
+            elif [[ $in_block -eq 1 && $line =~ version\ =\ \"(.*)\" ]]; then
+              versions+=("${BASH_REMATCH[1]}")
+              in_block=0
+            fi
+          done < "$TOML_FILE"
+
+          # Get the count of versions
+          count=${#versions[@]}
+
+          # Shift versions down
+          for ((i=count-1; i>0; i--)); do
+            versions[$i]=${versions[$((i-1))]}
+          done
+
+          # Increment minor version for latest version
+          IFS='.' read -r major minor patch <<< "${versions[0]}"
+          minor=$((minor + 1))
+          patch=0
+          versions[0]="$major.$minor.$patch"
+
+          # Update the file in-place
+          current=0
+          awk -v count="$count" -v vlist="$(IFS=,; echo "${versions[*]}")" '
+          BEGIN {
+            split(vlist, v, ",")
+            current=1
+            in_block=0
+          }
+          {
+            # Detect the beginning of a [[params.versions]] block
+            if ($0 ~ /^\[\[params\.versions\]\]$/) {
+              in_block=1
+            } 
+            # If inside the block, update the version line
+            else if (in_block && $0 ~ /version =/) {
+              if (current <= count) {
+                print "  version = \"" v[current] "\""
+                current++
+                in_block=0
+                next
+              }
+            }
+            print
+          }
+          ' "$TOML_FILE" > "$TOML_FILE.tmp" && mv "$TOML_FILE.tmp" "$TOML_FILE"
+
+          echo "✅ hugo.toml versions updated successfully in [[params.versions]]."
+      
       # Step 4: Run the full version update logic
       - name: Propagate Hugo Content Versions
         run: |
@@ -73,7 +174,7 @@ jobs:
               fi
           done
 
-          index_file="content/v1/_index.md"
+          index_file="content/v1/getting-started/_index.md"
           if [ -f "$index_file" ]; then
               echo "📝 Modifying $index_file to add page info block..."
 
@@ -214,18 +315,31 @@ jobs:
 
           echo "🎉 Release folder cleanup, new version creation, and reference update complete!"
 
-      # Step 6: Commit and push changes to the new branch
+      # Step 6: Update deploy.yml to track latest release branch
+      - name: Update deploy.yml to track latest release branch
+        run: |
+          echo "Before update:"
+          cat .github/workflows/deploy.yml
+
+          sed -i -E "s/release-[0-9]+\.[0-9]+\.[0-9]+/$TARGET_RELEASE_BRANCH/g" .github/workflows/deploy.yml
+
+          echo "After update:"
+          cat .github/workflows/deploy.yml
+      
+      # Step 7: Commit and push changes to the new branch
       - name: Commit and push changes
         run: |
+          git config --global user.email "github-actions@github.com"
+          git config --global user.name "GitHub Actions"
           git add .
-          git commit -m "Automated version update"
+          git commit -m "Setup Main branch for $TARGET_VERSION"
           git push origin $BRANCH_NAME
-
+        
       # Step 7: Create a pull request back to main
       - name: Create Pull Request
         run: |
-          gh pr create --title "Automated Version Update" \
-                       --body "This PR updates the project version automatically." \
+          gh pr create --title "Setup Main branch for $TARGET_VERSION" \
+                       --body "<h1 style='margin-top: 0; margin-bottom: 0;'>Description</h1><ul><li>Set up main branch for $TARGET_VERSION <ul><li>Move "content/docs" to v1, move the v1 content to v2, and finally move the v2 content to v3.</li><li>Pointed csm-release versions to latest ones.</li></ul></li></ul><h2 style='margin-top: 0; margin-bottom: 0;'>GitHub Issues</h2><p>List the GitHub issues impacted by this PR:</p><table><tr><th>GitHub Issue #</th></tr><tr><td><a href=''></a></td></tr></table><h2 style='margin-top: 0; margin-bottom: 0;'>Checklist</h2><ul><li>[ ] Have you run a grammar and spell checks against your submission?</li><li>[ ] Have you tested the changes locally?</li><li>[ ] Have you tested whether the hyperlinks are working properly?</li><li>[ ] Did you add the examples wherever applicable?</li><li>[ ] Have you added high-resolution images?</li></ul>" \
                        --base main \
                        --head $BRANCH_NAME
         env:
