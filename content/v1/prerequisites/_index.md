@@ -46,7 +46,7 @@ weight: 1
 | 4.17-4.18    | <div style="text-align: left"> Authorization - v2.x  </div>   | Yes       | Yes      | No         | Yes        | No    |
 {{</table>}}
 
-> Note: Replication is not supported.
+> Note: Resiliency and Replication are not supported.
 
 ## Tested Host Operating Systems
 

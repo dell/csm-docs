@@ -51,7 +51,7 @@ weight: 1
 | 4.17 - 4.18    | <div style="text-align: left"> Resiliency            </div>   | Yes       | Yes      | Yes         | Yes        | No    |
 {{</table>}}
 
-> Note: Resiliency and Replication are not supported.
+> Note: Replication is not supported.
 
 ## Tested Host Operating Systems
 
