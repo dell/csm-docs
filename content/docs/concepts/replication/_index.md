@@ -24,6 +24,7 @@ Container Storage Modules for Replication provides the following capabilities:
 | Asynchronous block volume replication                                                                                               |   yes    |    yes     |    n/a     |    yes    |  no   |
 | Synchronous file volume replication                                                                                                 |   no     |     no     |     no     |    no     |  no   |
 | Synchronous block volume replication                                                                                                |   yes    |     yes    |    n/a     |    no     |  no   |
+| Host-Based NFS volume replication                                                                                                   |   n/a    |    yes     |    n/a     |    n/a    |  n/a  |
 | Active-Active (Metro) block volume replication                                                                                      |   yes    |     yes    |    n/a     |    no     |  no   |
 | Active-Active (Metro) file volume replication                                                                                       |   no     |     no     |     no     |    no     |  no   |
 | Create `PersistentVolume` objects in the cluster representing the replicated volume                                                 |   yes    |    yes     |    yes     |    yes    |  no   |
