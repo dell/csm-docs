@@ -111,7 +111,7 @@ The following provisioning types are supported and have been tested:
 
 ## Deploying and Managing Applications Protected by Container Storage Modules for Resiliency
 
- The first thing to remember about _CSM for Resiliency_ is that it only takes action on pods configured with the designated label.This functionality extends to VM workloads running on OpenShift Virtualization, as long as the Virtual Machine is labeled correctly. Both the key and the value have to match what is in the podmon helm configuration.  CSM for Resiliency emits a log message at startup with the label key and value it is using to monitor pods:
+ The first thing to remember about _CSM for Resiliency_ is that it only takes action on pods configured with the designated label. This functionality extends to VM workloads running on OpenShift Virtualization, as long as the Virtual Machine is labeled correctly. Both the key and the value have to match what is in the podmon helm configuration.  CSM for Resiliency emits a log message at startup with the label key and value it is using to monitor pods:
 
  ```yaml
  labelSelector: {map[podmon.dellemc.com/driver:csi-vxflexos]
@@ -143,20 +143,21 @@ spec:
   template:
     metadata:
       labels:
-        kubevirt.io/vm: vm-alpine-rwo
+        kubevirt.io/vm: vm-alpine
         podmon.dellemc.com/driver: csi-vxflexos
 ```
 Once the VM is up and running, verify the virt-launcher pod is being tracked by CSM for Resiliency:
 
 kubectl get pods -A -l podmon.dellemc.com/driver=csi-vxflexos
+
 Example output:
 ```bash
 NAMESPACE   NAME                                                READY   STATUS    RESTARTS   AGE
-default     virt-launcher-vm-alpine-rwo-xyz                     1/1     Running   0          5d13h
+default     virt-launcher-vm-alpine-xyz                          1/1     Running   0          5d13h
 ```
 If the virt-launcher pod appears in this list, the VM is successfully protected by CSM for Resiliency.
 
- If Container Storage Modules for Resiliency detects a problem with a pod caused by a node or other failure that it can initiate remediation for, it will add an event to that pod's events:
+If Container Storage Modules for Resiliency detects a problem with a pod caused by a node or other failure that it can initiate remediation for, it will add an event to that pod's events:
  ```bash
  kubectl get events -n pmtu1
  ```
@@ -175,7 +176,6 @@ Similarly, the label selector for csi-powerscale, csi-unity, csi-powerstore and 
  labelSelector: {map[podmon.dellemc.com/driver:csi-powerstore]
  labelSelector: {map[podmon.dellemc.com/driver:csi-powermax]
  ```
-
 
  #### Important
  Before putting an application into production that relies on Container Storage Modules for Resiliency monitoring, it is important to do a few test failovers first. To do this take the node that is running the pod offline for at least 2-3 minutes. Verify that there is an event message similar to the one above is logged, and that the pod recovers and restarts normally with no loss of data. (Note that if the node is running many Container Storage Modules for Resiliency protected pods, the node may need to be down longer for Container Storage Modules for Resiliency to have time to evacuate all the protected pods.)
