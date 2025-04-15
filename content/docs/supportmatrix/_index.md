@@ -48,6 +48,7 @@ weight: 1
 | 4.17 - 4.18    |  <div style="text-align: left"> [Storage](https://github.com/kiagnose/kubevirt-storage-checkup) </div> | Yes       | Yes      | Yes        | Yes        | No    |
 | 4.17 - 4.18   | <div style="text-align: left">  Observability        </div>   | Yes       | Yes      | No         | Yes        | No    |
 | 4.17 - 4.18    | <div style="text-align: left"> Authorization - v2.x  </div>   | Yes       | Yes      | No         | Yes        | No    |
+| 4.17 - 4.18    | <div style="text-align: left"> Resiliency            </div>   | Yes       | Yes      | Yes         | Yes        | No    |
 {{</table>}}
 
 > Note: Resiliency and Replication are not supported.
