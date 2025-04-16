@@ -34,7 +34,7 @@ The following are requirements that must be met before installing the CSI Driver
 - Install PowerFlex Storage Data Client
 - If using Snapshot feature, satisfy all Volume Snapshot requirements
 - A user must exist on the array with a role _>= FrontEndConfigure_
-- If enabling CSM for Authorization, please refer to the [Authorization deployment steps](docs/getting-started/installation/helm/modules/authorizationv2.0/) first
+- If enabling CSM for Authorization, please refer to the [Authorization deployment steps](docs/getting-started/installation/helm/modules/authorizationv2/) first
 - If multipath is configured, ensure CSI-PowerFlex volumes are blacklisted by multipathd. See [troubleshooting section](../../../../../concepts/csidriver/troubleshooting/powerflex) for details
 - Secure boot is not supported; ensure that secure boot is disabled in the BIOS.
 
@@ -229,7 +229,7 @@ Use the below command to replace or update the secret:
 | image | Image for vg snapshotter. | No | " " |
 | **podmon**               | [Podmon](./csm-modules/resiliency/) is an optional feature to enable application pods to be resilient to node failure.  |  -        |  -       |
 | enabled                  | A boolean that enables/disables podmon feature. |  No      |   false   |
-| **authorization** | [Authorization](./csm-modules/authorizationv2.0/) is an optional feature to apply credential shielding of the backend PowerFlex. | - | - |
+| **authorization** | [Authorization](./csm-modules/authorizationv2/) is an optional feature to apply credential shielding of the backend PowerFlex. | - | - |
 | enabled                  | A boolean that enables/disables authorization feature. |  No      |   false   |
 | proxyHost | Hostname of the csm-authorization server. | No | Empty |
 | skipCertificateValidation | A boolean that enables/disables certificate validation of the csm-authorization proxy server. | No | true |
@@ -349,9 +349,9 @@ Starting CSI PowerFlex v1.5, `dell-csi-helm-installer` will not create any Volum
 
 
 {{< cardcontainer >}}
-    {{< customcard link1="./csm-modules/authorizationv1.x"  image="1" title="Authorization v1.x" >}}
+    {{< customcard link1="./csm-modules/authorizationv1"  image="1" title="Authorization v1.x" >}}
 
-    {{< customcard link1="./csm-modules/authorizationv2.0"   image="1" title="Authorization v2.0"  >}}
+    {{< customcard link1="./csm-modules/authorizationv2"   image="1" title="Authorization v2.0"  >}}
 
     {{< customcard  link1="./csm-modules/observability"   image="1" title="Observability"  >}}
 
