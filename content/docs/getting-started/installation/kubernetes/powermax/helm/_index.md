@@ -150,7 +150,7 @@ Install Helm 3 on the master node before you install CSI Driver for PowerMax.
 | &nbsp;&nbsp;&nbsp;&nbsp; selfSignedCert | Set selfSignedCert to `true` to use a self-signed certificate                                                                                                                                                                                                                                                                                                                             | No | true |
 | &nbsp;&nbsp;&nbsp;&nbsp; certificateFile | certificateFile contains the tls.key contents in base64 encoded format                                                                                                                                                                                                                                                                                                                           | No | tls.crt.encoded64 |
 | &nbsp;&nbsp;&nbsp;&nbsp; privateKeyFile | privateKeyFile contains the tls.key contents in base64 encoded format                                                                                                                                                                                                                                                                                                                            | No | tls.key.encoded64 |
-| **authorization** | [Authorization](./csm-modules/authorizationv2.0/) is an optional feature to apply credential shielding of the backend PowerMax.                                                                                                                                                                                                               | - | - |
+| **authorization** | [Authorization](./csm-modules/authorizationv2/) is an optional feature to apply credential shielding of the backend PowerMax.                                                                                                                                                                                                               | - | - |
 | &nbsp;&nbsp; enabled                  | A boolean that enables/disables authorization feature.                                                                                                                                                                                                                                                                                                                          |  No      |   false   |
 | &nbsp;&nbsp; proxyHost | Hostname of the csm-authorization server.                                                                                                                                                                                                                                                                                                                                       | No | Empty |
 | &nbsp;&nbsp; skipCertificateValidation | A boolean that enables/disables certificate validation of the csm-authorization proxy server.                                                                                                                                                                                                                                                                                   | No | true |
@@ -233,9 +233,9 @@ Starting with CSI PowerMax v1.7.0, `dell-csi-helm-installer` will not create any
 
 
 {{< cardcontainer >}}
-    {{< customcard link1="./csm-modules/authorizationv1.x"  image="1" title="Authorization v1.x" >}}
+    {{< customcard link1="./csm-modules/authorizationv1"  image="1" title="Authorization v1.x" >}}
 
-    {{< customcard link1="./csm-modules/authorizationv2.0"   image="1" title="Authorization v2.0"  >}}
+    {{< customcard link1="./csm-modules/authorizationv2"   image="1" title="Authorization v2.0"  >}}
 
     {{< customcard  link1="./csm-modules/observability"   image="1" title="Observability"  >}}
 
