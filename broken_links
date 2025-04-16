@@ -1,0 +1,21 @@
+❌ Broken: http://127.0.0.1:1313/csm-docs/docs/getting-started/installation/installationwizard/src/static/css/dds-icons.min.css
+🔗 Source: http://127.0.0.1:1313/csm-docs/docs/getting-started/installation/installationwizard/src/
+
+❌ Broken: http://127.0.0.1:1313/csm-docs/v1/deployment/csmoperator/modules/authorization-v2.0/
+🔗 Source: http://127.0.0.1:1313/csm-docs/v1/deployment/
+
+❌ Broken: http://127.0.0.1:1313/csm-docs/v1/deployment/csmoperator/modules/authorization-v2.0
+🔗 Source: http://127.0.0.1:1313/csm-docs/v1/deployment/csminstallationwizard/
+
+❌ Broken: http://127.0.0.1:1313/csm-docs/v1/deployment/csminstallationwizard/src/static/css/dds-icons.min.css
+🔗 Source: http://127.0.0.1:1313/csm-docs/v1/deployment/csminstallationwizard/src/
+
+❌ Broken: http://127.0.0.1:1313/csm-docs/v1/deployment/csmoperator/modules/authorization-v1.x/
+🔗 Source: http://127.0.0.1:1313/csm-docs/v1/deployment/csmoperator/
+
+❌ Broken: http://127.0.0.1:1313/csm-docs/v1/deployment/rpm/modules/installation/authorization-v1.x/authorization-v1.x
+🔗 Source: http://127.0.0.1:1313/csm-docs/v1/deployment/rpm/modules/upgrade/authorization/
+
+❌ Broken: http://127.0.0.1:1313/csm-docs/v1/support/cert-csi/img/resourceUsage.png
+🔗 Source: http://127.0.0.1:1313/csm-docs/v1/support/cert-csi/
+
