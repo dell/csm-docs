@@ -101,8 +101,8 @@ The following scenarios are not supported.
 
 * Pods that use persistent volumes from multiple CSI drivers. This _cannot_ be supported because multiple controller-podmons (one for each driver type) would be trying to manage the failover with conflicting actions.
 
-* ReadWriteMany volumes. This may have issues if a node has multiple pods accessing the same volumes. In any case once pod cleanup fences the volumes on a node, they will no longer be available to any pods using those volumes on that node. We will endeavor to support this in the future.
-
+* When using ReadWriteMany volumes, issues occur if multiple pods on the same node access the same volume. During pod cleanup, the volume is fenced on that node, making it unavailable to any other pods on the same node that are using it.
+  
 * Multiple instances of the same driver type (for example two CSI driver for PowerFlex deployments.)
 
 * PowerFlex with Resiliency is not supported for the NFS protocol.
