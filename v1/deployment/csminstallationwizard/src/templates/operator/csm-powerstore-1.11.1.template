@@ -54,7 +54,7 @@ spec:
         - name: KUBELET_CONFIG_DIR
           value: /var/lib/kubelet
         - name: CSI_LOG_LEVEL
-          value: info
+          value: debug
 
     sideCars:
       - name: provisioner
