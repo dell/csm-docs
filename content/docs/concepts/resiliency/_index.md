@@ -86,32 +86,30 @@ This file contains information on Limitations and Exclusions that users should b
 
 ### Supported and Tested Operating Modes
 
-The following provisioning types are supported and have been tested:
+The following provisioning types are supported
 
-* Dynamic PVC/PVs of accessModes "ReadWriteOnce" and volumeMode "FileSystem".
-* Dynamic PVC/PVs of accessModes "ReadWriteOnce" and volumeMode "Block".
+* Dynamic PVC/PVs of accessModes "ReadWriteOnce, ReadWriteMany" and volumeMode "FileSystem".
+* Dynamic PVC/PVs of accessModes "ReadWriteOnce, ReadWriteMany" and volumeMode "Block".
 * Use of the above volumes with Pods created by StatefulSets.
 * Up to 12 or so protected pods on a given node.
 * Failing up to 3 nodes at a time in 9 worker node clusters, or failing 1 node at a time in smaller clusters. Application recovery times are dependent on the number of pods that need to be moved as a result of the failure. See the section on "Testing and Performance" for some of the details.
 * Multi-array are supported. In case of CSI Driver for PowerScale and CSI Driver for Unity, if any one of the array is not connected, the array connectivity will be false. CSI Driver for Powerflex connectivity will be determined by connection to default array.
 
-### Not Tested But Assumed to Work
+>Note:
 
-* Deployments with the above volume types, provided two pods from the same deployment do not reside on the same node. At the current time anti-affinity rules should be used to guarantee no two pods accessing the same volumes are scheduled to the same node.
-
-### Not Yet Tested or Supported
+The following scenarios are not supported.
 
 * Pods that use persistent volumes from multiple CSI drivers. This _cannot_ be supported because multiple controller-podmons (one for each driver type) would be trying to manage the failover with conflicting actions.
 
-* ReadWriteMany volumes. This may have issues if a node has multiple pods accessing the same volumes. In any case once pod cleanup fences the volumes on a node, they will no longer be available to any pods using those volumes on that node. We will endeavor to support this in the future.
-
+* When using ReadWriteMany volumes, issues occur if multiple pods on the same node access the same volume. During pod cleanup, the volume is fenced on that node, making it unavailable to any other pods on the same node that are using it.
+  
 * Multiple instances of the same driver type (for example two CSI driver for PowerFlex deployments.)
 
-* PowerFlex with Resiliency is not supported for NFS protocol.
+* PowerFlex with Resiliency is not supported for the NFS protocol.
 
 ## Deploying and Managing Applications Protected by Container Storage Modules for Resiliency
 
- The first thing to remember about _CSM for Resiliency_ is that it only takes action on pods configured with the designated label. Both the key and the value have to match what is in the podmon helm configuration. CSM for Resiliency emits a log message at startup with the label key and value it is using to monitor pods:
+ The first thing to remember about _CSM for Resiliency_ is that it only takes action on pods configured with the designated label. This functionality extends to VM workloads running on OpenShift Virtualization, as long as the Virtual Machine is labeled correctly. Both the key and the value have to match what is in the podmon helm configuration.  CSM for Resiliency emits a log message at startup with the label key and value it is using to monitor pods:
 
  ```yaml
  labelSelector: {map[podmon.dellemc.com/driver:csi-vxflexos]
@@ -127,7 +125,37 @@ pmtu2       podmontest-0   1/1     Running   0          3m8s
 pmtu3       podmontest-0   1/1     Running   0          3m6s
  ```
 
- If Container Storage Modules for Resiliency detects a problem with a pod caused by a node or other failure that it can initiate remediation for, it will add an event to that pod's events:
+### Applying Labels for VM Workloads
+To enable resiliency monitoring for a VM, you must ensure the correct label is applied to the VM manifest. This label will automatically propagate to the virt-launcher pod created by OpenShift Virtualization.
+
+```
+apiVersion: kubevirt.io/v1
+kind: VirtualMachine
+metadata:
+  labels:
+    kubevirt.io/vm: vm-alpine
+  name: vm-alpine
+  namespace: vmns
+spec:
+  running: true
+  template:
+    metadata:
+      labels:
+        kubevirt.io/vm: vm-alpine
+        podmon.dellemc.com/driver: csi-vxflexos
+```
+Once the VM is up and running, verify the virt-launcher pod is being tracked by CSM for Resiliency:
+
+kubectl get pods -A -l podmon.dellemc.com/driver=csi-vxflexos
+
+Example output:
+```bash
+NAMESPACE   NAME                                                READY   STATUS    RESTARTS   AGE
+default     virt-launcher-vm-alpine-xyz                          1/1     Running   0          5d13h
+```
+If the virt-launcher pod appears in this list, the VM is successfully protected by CSM for Resiliency.
+
+If Container Storage Modules for Resiliency detects a problem with a pod caused by a node or other failure that it can initiate remediation for, it will add an event to that pod's events:
  ```bash
  kubectl get events -n pmtu1
  ```
