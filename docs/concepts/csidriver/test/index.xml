@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Testing Drivers on </title>
+    <link>https://dell.github.io/csm-docs/docs/concepts/csidriver/test/</link>
+    <description>Recent content in Testing Drivers on </description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <atom:link href="https://dell.github.io/csm-docs/docs/concepts/csidriver/test/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Test PowerFlex CSI Driver</title>
+      <link>https://dell.github.io/csm-docs/docs/concepts/csidriver/test/powerflex/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://dell.github.io/csm-docs/docs/concepts/csidriver/test/powerflex/</guid>
+      <description>&lt;p&gt;This section provides multiple methods to test driver functionality in your environment.&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: To run the test for CSI Driver for PowerFlex, install Helm 3.&lt;/p&gt;&#xA;&lt;h2 id=&#34;test-deploying-a-simple-pod-with-powerflex-storage&#34;&gt;&#xA;Test deploying a simple pod with PowerFlex storage &lt;a class=&#34;header-link&#34;  href=&#34;#test-deploying-a-simple-pod-with-powerflex-storage&#34; style=&#34; display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; &#34; onmouseover=&#34;this.style.opacity=1;&#34; onmouseout=&#34;this.style.opacity=0;&#34;&gt;&#xA;            &lt;svg fill=&#34;currentColor&#34; height=&#34;24&#34; viewBox=&#34;0 0 24 24&#34; width=&#34;24&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34;&gt;&#xA;                &lt;path d=&#34;M0 0h24v24H0z&#34; fill=&#34;none&#34;/&gt;&#xA;                &lt;path d=&#34;M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z&#34;/&gt;&#xA;            &lt;/svg&gt;&#xA;        &lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Test the deployment workflow of a simple pod on PowerFlex storage.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Test PowerMax CSI Driver</title>
+      <link>https://dell.github.io/csm-docs/docs/concepts/csidriver/test/powermax/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://dell.github.io/csm-docs/docs/concepts/csidriver/test/powermax/</guid>
+      <description>&lt;p&gt;This section provides multiple methods to test driver functionality in your environment. The tests are validated using bash as the default shell.&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: To run the test for CSI Driver for PowerMax, install Helm 3.&lt;/p&gt;&#xA;&lt;p&gt;The &lt;em&gt;csi-powermax&lt;/em&gt; repository includes examples of how you can use CSI Driver for PowerMax. The shell scripts are used to automate the installation and uninstallation of helm charts for the creation of Pods with a different number of volumes in a given namespace using the storageclass provided. To test the installation of the CSI driver, perform these tests:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Test PowerScale CSI Driver</title>
+      <link>https://dell.github.io/csm-docs/docs/concepts/csidriver/test/powerscale/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://dell.github.io/csm-docs/docs/concepts/csidriver/test/powerscale/</guid>
+      <description>&lt;p&gt;This section provides multiple methods to test driver functionality in your environment.&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: To run the test for CSI Driver for PowerScale, install Helm 3.&lt;/p&gt;&#xA;&lt;h2 id=&#34;test-deploying-a-simple-pod-with-powerscale-storage&#34;&gt;&#xA;Test deploying a simple pod with PowerScale storage &lt;a class=&#34;header-link&#34;  href=&#34;#test-deploying-a-simple-pod-with-powerscale-storage&#34; style=&#34; display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; &#34; onmouseover=&#34;this.style.opacity=1;&#34; onmouseout=&#34;this.style.opacity=0;&#34;&gt;&#xA;            &lt;svg fill=&#34;currentColor&#34; height=&#34;24&#34; viewBox=&#34;0 0 24 24&#34; width=&#34;24&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34;&gt;&#xA;                &lt;path d=&#34;M0 0h24v24H0z&#34; fill=&#34;none&#34;/&gt;&#xA;                &lt;path d=&#34;M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z&#34;/&gt;&#xA;            &lt;/svg&gt;&#xA;        &lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Test the deployment workflow of a simple pod on PowerScale storage.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Test PowerStore CSI Driver</title>
+      <link>https://dell.github.io/csm-docs/docs/concepts/csidriver/test/powerstore/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://dell.github.io/csm-docs/docs/concepts/csidriver/test/powerstore/</guid>
+      <description>&lt;p&gt;In the repository, a simple test manifest exists that creates three different PersistentVolumeClaims using default ext4, xfs, and nfs&#xA;storage classes and automatically mounts them to the pod.&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;It assumes that you&amp;rsquo;ve created the same basic three storage classes from &lt;code&gt;samples/storageclass&lt;/code&gt; folder without changing their names. If you&amp;rsquo;ve created different storage classes please edit &lt;code&gt;tests/simple/simple.yaml&lt;/code&gt; and change &lt;code&gt;PersistentVolumeClaim&lt;/code&gt; definitions to point to correct storage classes.&lt;/p&gt;&lt;/blockquote&gt;&#xA;&lt;p&gt;&lt;strong&gt;Steps&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;To run this test, run the kubectl command from the root directory of the repository:&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl create -f ./tests/simple/&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;You can find all the created resources in &lt;code&gt;testpowerstore&lt;/code&gt; namespace.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Test Unity XT CSI Driver</title>
+      <link>https://dell.github.io/csm-docs/docs/concepts/csidriver/test/unity/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://dell.github.io/csm-docs/docs/concepts/csidriver/test/unity/</guid>
+      <description>&lt;h2 id=&#34;test-deploying-a-simple-pod-and-pvc-with-unity-xt-storage&#34;&gt;&#xA;Test deploying a simple Pod and PVC with Unity XT storage &lt;a class=&#34;header-link&#34;  href=&#34;#test-deploying-a-simple-pod-and-pvc-with-unity-xt-storage&#34; style=&#34; display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; &#34; onmouseover=&#34;this.style.opacity=1;&#34; onmouseout=&#34;this.style.opacity=0;&#34;&gt;&#xA;            &lt;svg fill=&#34;currentColor&#34; height=&#34;24&#34; viewBox=&#34;0 0 24 24&#34; width=&#34;24&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34;&gt;&#xA;                &lt;path d=&#34;M0 0h24v24H0z&#34; fill=&#34;none&#34;/&gt;&#xA;                &lt;path d=&#34;M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z&#34;/&gt;&#xA;            &lt;/svg&gt;&#xA;        &lt;/a&gt;&lt;/h2&gt;&lt;p&gt;In the repository, a simple test manifest exists that creates three different PersistentVolumeClaims using default NFS and iSCSI and FC storage classes and automatically mounts them to the pod.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

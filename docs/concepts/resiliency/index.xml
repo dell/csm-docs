@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Resiliency on </title>
+    <link>https://dell.github.io/csm-docs/docs/concepts/resiliency/</link>
+    <description>Recent content in Resiliency on </description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <atom:link href="https://dell.github.io/csm-docs/docs/concepts/resiliency/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Design</title>
+      <link>https://dell.github.io/csm-docs/docs/concepts/resiliency/design/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://dell.github.io/csm-docs/docs/concepts/resiliency/design/</guid>
+      <description>&lt;p&gt;This section covers Container Storage Modules for Resiliency&amp;rsquo;s design.  The detail is sufficient that you should be able to understand what Container Storage Modules for Resiliency is designed to do in various situations and how it works. Resiliency is deployed as a sidecar named &lt;em&gt;podmon&lt;/em&gt; with a CSI driver in both the controller pods and node pods. These are referred to as controller-podmon and node-podmon respectively.&lt;/p&gt;&#xA;&lt;p&gt;Generally controller-podmon and the driver controller pods are deployed using a Deployment.&#xA;The Deployments support one or multiple replicas for High Availability and use a standard K8S leader election protocol so that only one controller&#xA;is active at a time (as does the driver and all the controller sidecars.)&#xA;The controller deployment also supports a Node Selector that allows the controllers to be placed on K8S Manager (non Worker) nodes.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Use Cases</title>
+      <link>https://dell.github.io/csm-docs/docs/concepts/resiliency/usecases/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://dell.github.io/csm-docs/docs/concepts/resiliency/usecases/</guid>
+      <description>&lt;p&gt;Container Storage Modules for Resiliency is primarily designed to detect pod failures due to some kind of node failure or node communication failure. The diagram below shows the hardware environment that is assumed in the design.&lt;/p&gt;&#xA;&lt;p&gt;&lt;img src=&#34;../../../../images/resiliency/resiliency_model.jpg&#34; alt=&#34;Container Storage Modules for Resiliency Hardware Model&#34;&gt;&lt;/p&gt;&#xA;&lt;p&gt;A Kubernetes Control Plane is assumed to exist that provides the K8S API service used by Container Storage Modules for Resiliency. There is an arbitrary number of worker nodes (two are shown in the diagram) that&#xA;are connected to the Control Plane through a K8S Control Plane IP Network.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Troubleshooting</title>
+      <link>https://dell.github.io/csm-docs/docs/concepts/resiliency/troubleshooting/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://dell.github.io/csm-docs/docs/concepts/resiliency/troubleshooting/</guid>
+      <description>&lt;p&gt;Some tools have been provided in the &lt;a href=&#34;https://github.com/dell/karavi-resiliency/blob/main/tools&#34;&gt;tools&lt;/a&gt; directory that will help you understand the system&amp;rsquo;s state and facilitate troubleshooting.&#xA;If you experience a problem with Container Storage Modules for Resiliency it is important you provide us with as much information as possible so that we can diagnose the issue and improve Container Storage Modules for Resiliency. Some tools have been provided in the &lt;a href=&#34;https://github.com/dell/karavi-resiliency/blob/main/tools&#34;&gt;tools&lt;/a&gt; directory that will help you understand the system&amp;rsquo;s state and facilitate sending us the logs and other information needed to diagnose a problem.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
