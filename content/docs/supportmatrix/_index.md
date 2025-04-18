@@ -116,9 +116,9 @@ Container Storage Modules doesn't officially support specific operating systems,
 
 ### CSM Modules
 {{<table "table table-striped table-bordered table-sm tdleft">}}
-| Container Storage Modules | Version |
-| -----------------| --------- |
-| Replication      | 1.8.0+    |
-| Observability    | 1.8.0+    |
-| Resiliency       | 1.8.0+    |
+| Container Storage Modules |
+| -----------------|
+| Replication      |
+| Observability    |
+| Resiliency       |
 {{</table>}}
