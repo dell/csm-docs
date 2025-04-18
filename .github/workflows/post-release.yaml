@@ -221,6 +221,8 @@ jobs:
       - name: Manage Release Folders and Bump Version
         run: |
           #!/bin/bash
+          set -e
+
           versions=("docs" "v1" "v2" "v3")
 
           for version in "${versions[@]}"; do
@@ -229,7 +231,7 @@ jobs:
             if [ -d "$release_dir" ]; then
               echo "📁 Found release folder in $version"
 
-              version_files=($(ls "$release_dir" | grep -E '^v[0-9]+\.[0-9]+\.[0-9]+\.md$' | sort -V))
+              version_files=($(ls "$release_dir" | grep -E '^v[0-9]+-[0-9]+-[0-9]+\.md$' | sort -V))
 
               if [ ${#version_files[@]} -eq 0 ]; then
                 echo "⚠️ No version files found in $release_dir"
@@ -243,14 +245,16 @@ jobs:
               if [ "$version" == "docs" ]; then
                 latest_version_file="${version_files[-1]}"
                 latest_version="${latest_version_file%.md}"
-                IFS='.' read -r major minor patch <<< "${latest_version#v}"
+                IFS='-' read -r major minor patch <<< "${latest_version#v}"
                 new_minor=$((minor + 1))
-                new_version="v$major.$new_minor.0"
+                new_version="v$major-$new_minor-0"
                 new_file="$release_dir/$new_version.md"
 
                 echo "📄 Creating new version file: $new_file from $latest_version_file"
                 cp "$release_dir/$latest_version_file" "$new_file"
-                sed -i "s/$latest_version/$new_version/g" "$new_file"
+                old_version_dotted="${latest_version//-/.}"
+                new_version_dotted="${new_version//-/.}"
+                sed -i "s/$old_version_dotted/$new_version_dotted/g" "$new_file"
                 echo "✅ Created $new_file"
               fi
             else
@@ -262,12 +266,11 @@ jobs:
 
           for ((i=0; i<${#version_folders[@]}; i++)); do
               current_folder="${version_folders[i]}"
-              next_folder="${version_folders[i+1]}"
               release_path="content/${current_folder}/release"
 
               if [ -d "$release_path" ]; then
                   echo "📁 Processing $release_path"
-                  mapfile -t version_files < <(find "$release_path" -type f -name 'v1.*.*.md')
+                  mapfile -t version_files < <(find "$release_path" -type f -name 'v1-*-*.md')
 
                   if [ ${#version_files[@]} -eq 0 ]; then
                       echo "⚠️ No versioned files found in $release_path"
@@ -306,19 +309,16 @@ jobs:
                           if ($0 ~ /^---[[:space:]]*$/) {
                               inside_front_matter++
                           }
-
                           if (inside_front_matter == 1 && $0 ~ /^weight:/) {
                               print "weight: " new_weight
                               updated = 1
                           } else {
                               print
                           }
-
                           if ($0 ~ /^---[[:space:]]*$/ && inside_front_matter == 2 && !updated) {
                               print "weight: " new_weight
                           }
                       }' "$file_path" > tmp.md && mv tmp.md "$file_path"
-
                       ((weight++))
                   done
               else
@@ -327,6 +327,7 @@ jobs:
           done
 
           echo "🎉 Release folder cleanup, new version creation, and reference update complete!"
+
 
       # Step 6: Update deploy.yml to track latest release branch
       - name: Update deploy.yml to track latest release branch
