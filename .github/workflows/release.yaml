@@ -1,0 +1,79 @@
+name: Create New Release Branch
+
+on:
+  workflow_dispatch:  # Allows manual trigger
+
+jobs:
+  create-release-branch:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write           # Needed to push commits
+      pull-requests: write      # Needed to open PRs
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0        # Ensure we get full history and branches
+          token: ${{ secrets.CSMBOT_PAT }}  # Use PAT for pushing and creating PRs
+
+      - name: Get New Release Version from deploy.yml
+        id: get-new-version
+        run: |
+          DEPLOY_FILE=".github/workflows/deploy.yml"
+
+          # Extract the version number from the release-* branch under `branches:` section
+          current_version=$(awk '
+            /branches:/ { in_branches=1; next }
+            in_branches && /- release-/ {
+              match($0, /release-([0-9]+\.[0-9]+\.[0-9]+)/, arr)
+              print arr[1]
+              exit
+            }
+          ' "$DEPLOY_FILE")
+
+          echo "🔹 Current version: $current_version"
+
+          if [[ -z "$current_version" ]]; then
+            echo "❌ Failed to extract current version from $DEPLOY_FILE"
+            exit 1
+          fi
+
+          # Split version into major, minor, patch
+          IFS='.' read -r major minor patch <<< "$current_version"
+
+          # Increment minor version
+          new_minor=$((minor + 1))
+          new_version="$major.$new_minor.0"
+          new_release="release-$new_version"
+
+          echo "✅ New release version: $new_release"
+
+          echo "NEW_RELEASE=$new_release" >> $GITHUB_ENV
+          echo "new_release=$new_release" >> $GITHUB_OUTPUT
+
+
+      - name: Create and Push New Release Branch
+        run: |
+          git checkout -b "$NEW_RELEASE"
+          git push origin "$NEW_RELEASE"
+
+      - name: Update `deploy.yml` in New Release Branch
+        run: |
+          git checkout "$NEW_RELEASE"
+          
+          echo "Before update:"
+          cat .github/workflows/deploy.yml
+          
+          # Update release version inside deploy.yml
+          sed -i -E "s/release-[0-9]+\.[0-9]+\.[0-9]+/$NEW_RELEASE/g" .github/workflows/deploy.yml
+          
+          echo "After update:"
+          cat .github/workflows/deploy.yml
+
+          # Configure Git and commit the changes
+          git config --global user.email "github-actions@github.com"
+          git config --global user.name "GitHub Actions"
+          git add .github/workflows/deploy.yml
+          git commit -m "Update deploy.yml to track $NEW_RELEASE"
+          git push origin "$NEW_RELEASE"
