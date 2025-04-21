@@ -712,9 +712,9 @@ This method works with both `helm` and `operator` installations for PowerMax, au
 
 ## Multiple Availability Zones
 
-Starting with CSM 1.14.0, the PowerMax CSI driver supports multiple availability zones (AZ) for block protocols. Availability Zones permit provisioning of volumes on storage arrays that are dedicated to a set of cluster nodes. Cluster nodes in an AZ will only access storage in the same AZ. Arrays in an AZ will not be used to provision storage to nodes which are not in the same AZ. This may be of benefit when stricter control of access to storage is needed or for disaster preparation use case.
+Starting with CSM 1.14.0, the PowerMax CSI driver supports multiple availability zones (AZ) for block protocols. Availability Zones permit provisioning of volumes on storage arrays that are dedicated to a set of cluster nodes. Cluster nodes in an AZ will only access storage in the same AZ. Arrays in an AZ will not be used to provision storage to nodes which are not in the same AZ. This may be of benefit when stricter control of access to storage is needed or for disaster preparation use cases. Unlike the [topology support](#topology-support) mentioned earlier, multi AZ support restricts driver access to storage to only from arrays within the cluster node's AZ. No host registration nor storage connectivity setup is performed to arrays not in the node's AZ.
 
-Avaibalility Zones support the use of a single StorageClass that is not associated with any specific PowerMax array or storage resource pool (SRP). Each cluster node must be labelled with topology labels which match the labels in the secret.
+Availability Zones support the use of a single StorageClass that is not associated with any specific PowerMax array or storage resource pool (SRP). Each cluster node must be labelled with topology labels that match the labels in the secret for the AZ local target array. This allows for using minimal storage classes which can more easily adapt to changes in the storage and cluster environment, thus reducing management activities.
 
 Requirements:
 
@@ -724,11 +724,13 @@ Requirements:
 - Every cluster worker node must be assigned to a zone.
 - The volumeBindingMode must be set to WaitForFirstConsumer.
 
-> **Note:** Cluster nodes that are not in a zone will not be able to access arrays that are zoned. Conversely, arrays that are unzoned will only be accessible from cluster nodes that are unzoned.
+> **Note:** Cluster nodes that are not in a zone will not be able to access arrays that are zoned. Conversely, arrays that are unzoned will be accessible from any node in the cluster.
 
 > **Note:** The initial support for Availability Zones does not include support for Metro Volumes.
 
-With this support, a single storage class can be used to provision volumes from a pool of PowerMax arrays based on topology information, where each AZ has its own PowerMax array. The following represents an example of the secret showing two arrays in different availability zones:
+With this support, a single storage class can be used to provision volumes from a pool of PowerMax arrays based on topology information, where each AZ has its own PowerMax array. When the StorageClass's volumeBindingMode property is set to _WaitForFirstConsumer_ the volume creation and binding is done at the time the volume is mounted to the cluster. It is at this time that the physical volume is provisioned on the local array based on the AZ.
+
+The following represents an example of the secret showing two arrays in different availability zones:
 
 ### Secret
 
