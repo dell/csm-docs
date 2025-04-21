@@ -125,7 +125,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.c6ae3eb40b4bc4f60c6c3a1af84ff339.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.3a29160b6913fd6754a7a57bf9bceb3c.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -149,7 +149,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.c6ae3eb40b4bc4f60c6c3a1af84ff339.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.3a29160b6913fd6754a7a57bf9bceb3c.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -761,8 +761,7 @@ Creating volumes and consuming them <a class="header-link"  href="#creating-volu
 You can check created PVCs by running <code>kubectl get pvc -n unity</code> and check statefulset&rsquo;s pods by running <code>kubectl get pods -n unity</code> command.
 The pod should be <code>Ready</code> and <code>Running</code>.</p>
 <blockquote>
-<p>If Pod is in CrashLoopback or PVCs is in a Pending state then driver installation is not successful, check logs of node and controller.</p>
-</blockquote>
+<p>If Pod is in CrashLoopback or PVCs is in a Pending state then driver installation is not successful, check logs of node and controller.</p></blockquote>
 <h2 id="deleting-volumes">
 Deleting volumes <a class="header-link"  href="#deleting-volumes" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
             <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
@@ -945,8 +944,7 @@ Volume Expansion <a class="header-link"  href="#volume-expansion" style=" displa
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">            </span><span style="color:#204a87;font-weight:bold">storage</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">30Gi</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#8f5902;font-style:italic"># Updated size from 3Gi to 30Gi</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">storageClassName</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">unity-expand-sc</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span></code></pre></div><blockquote>
-<p>The Kubernetes Volume Expansion feature can only be used to increase the size of a volume. It cannot be used to shrink a volume.</p>
-</blockquote>
+<p>The Kubernetes Volume Expansion feature can only be used to increase the size of a volume. It cannot be used to shrink a volume.</p></blockquote>
 <h2 id="snapshot-ingestion-procedure">
 Snapshot Ingestion procedure <a class="header-link"  href="#snapshot-ingestion-procedure" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
             <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
@@ -977,8 +975,7 @@ Below are the key steps involved</p>
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">snap1</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">namespace</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">unity</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span></code></pre></div><blockquote>
-<p>Example snapshot handle format: snap1-FC-apm00123456789-3865491234567</p>
-</blockquote>
+<p>Example snapshot handle format: snap1-FC-apm00123456789-3865491234567</p></blockquote>
 <ol start="3">
 <li>Create a VolumeSnapshot as explained below</li>
 </ol>
@@ -1208,8 +1205,7 @@ Topology Usage <a class="header-link"  href="#topology-usage" style=" display: i
 </span></span></span></code></pre></div><p>This example matches all nodes where the driver has a connection to the Unity XT array with array ID mentioned via Fiber Channel. Similarly, by replacing <code>fc</code> with <code>iscsi</code> in the key checks for iSCSI connectivity with the node.</p>
 <p>You can check what labels your nodes contain by running <code>kubectl get nodes --show-labels</code> command.</p>
 <blockquote>
-<p>Note that <code>volumeBindingMode:</code> is set to <code>WaitForFirstConsumer</code> this is required for the topology feature to work properly.</p>
-</blockquote>
+<p>Note that <code>volumeBindingMode:</code> is set to <code>WaitForFirstConsumer</code> this is required for the topology feature to work properly.</p></blockquote>
 <p>For any additional information about the topology, see the <a href="https://kubernetes-csi.github.io/docs/topology.html">Kubernetes Topology documentation</a>.</p>
 <h2 id="volume-limit">
 Volume Limit <a class="header-link"  href="#volume-limit" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
@@ -1222,8 +1218,7 @@ Volume Limit <a class="header-link"  href="#volume-limit" style=" display: inlin
 <br/> <code>kubectl label node &lt;node_name&gt; max-unity-volumes-per-node=&lt;volume_limit&gt;</code></p>
 <p>The user can also set the volume limit for all the nodes in the cluster by specifying the same to <code>maxUnityVolumesPerNode</code> attribute in values.yaml file.</p>
 <blockquote>
-<p><strong>NOTE:</strong> <br>To reflect the changes after setting the value either via node label or in values.yaml file, user has to bounce the driver controller and node pods using the command <code>kubectl get pods -n unity --no-headers=true | awk '/unity-/{print $1}'| xargs kubectl delete -n unity pod</code>. <br><br> If the value is set both by node label and values.yaml file then node label value will get the precedence and user has to remove the node label in order to reflect the values.yaml value. <br><br>The default value of <code>maxUnityVolumesPerNode</code> is 0. <br><br>If <code>maxUnityVolumesPerNode</code> is set to zero, then Container Orchestration decides how many volumes of this type can be published by the controller to the node.<br><br>The volume limit specified to <code>maxUnityVolumesPerNode</code> attribute is applicable to all the nodes in the cluster for which node label <code>max-unity-volumes-per-node</code> is not set.</p>
-</blockquote>
+<p><strong>NOTE:</strong> <br>To reflect the changes after setting the value either via node label or in values.yaml file, user has to bounce the driver controller and node pods using the command <code>kubectl get pods -n unity --no-headers=true | awk '/unity-/{print $1}'| xargs kubectl delete -n unity pod</code>. <br><br> If the value is set both by node label and values.yaml file then node label value will get the precedence and user has to remove the node label in order to reflect the values.yaml value. <br><br>The default value of <code>maxUnityVolumesPerNode</code> is 0. <br><br>If <code>maxUnityVolumesPerNode</code> is set to zero, then Container Orchestration decides how many volumes of this type can be published by the controller to the node.<br><br>The volume limit specified to <code>maxUnityVolumesPerNode</code> attribute is applicable to all the nodes in the cluster for which node label <code>max-unity-volumes-per-node</code> is not set.</p></blockquote>
 <h2 id="nat-support">
 NAT Support <a class="header-link"  href="#nat-support" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
             <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
@@ -1411,8 +1406,7 @@ Example <em>pvc.yaml</em></p>
 </span></span></span></code></pre></div><p>With the usage shown in the example, the user will be able to create an NFS pod with PVC using the NAS and the Pool associated with the added Tenants specified in SC.</p>
 <blockquote>
 <p>Note: Current feature supports <strong>ONLY single Tenant</strong> for all the nodes in the cluster.
-Users may expect an error if PVC is created from the NAS server whose pool is mapped to the different tenants not associated with this SC.</p>
-</blockquote>
+Users may expect an error if PVC is created from the NAS server whose pool is mapped to the different tenants not associated with this SC.</p></blockquote>
 <p>For operator based installation, mention the TENANT_NAME in configmap as shown in the following example:
 Example <em>configmap.yaml</em></p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">apiVersion</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">v1</span><span style="color:#f8f8f8;text-decoration:underline">
@@ -1428,8 +1422,7 @@ Example <em>configmap.yaml</em></p>
 </span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">    SYNC_NODE_INFO_TIME_INTERVAL: &#34;15&#34;
 </span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">    TENANT_NAME: &#34;&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span></code></pre></div><blockquote>
-<p>Note: csi-unity supports Tenancy in multi-array setup, provided the TenantName is the same across Unity XT instances.</p>
-</blockquote>
+<p>Note: csi-unity supports Tenancy in multi-array setup, provided the TenantName is the same across Unity XT instances.</p></blockquote>
 <h2 id="support-custom-networks-for-nfs-io-traffic">
 Support custom networks for NFS I/O traffic <a class="header-link"  href="#support-custom-networks-for-nfs-io-traffic" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
             <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
@@ -1541,7 +1534,7 @@ communication (same IP/fqdn as k8s node) by default.</p>
 
 	  
     </div>
-    <script src="/csm-docs/js/main.min.f72d00502781aaf278a14088eb2356b1ba2a05ad698a0c43fe86314d74ceab56.js" integrity="sha256-9y0AUCeBqvJ4oUCI6yNWsboqBa1pigxD/oYxTXTOq1Y=" crossorigin="anonymous"></script>
+    <script src="/csm-docs/js/main.min.90902a026ed2aee7ed45d85797f4c790b240ba148ac6f8a6f194cb1981ffecf5.js" integrity="sha256-kJAqAm7SruftRdhXl/THkLJAuhSKxvim8ZTLGYH/7PU=" crossorigin="anonymous"></script>
 <script src='/csm-docs/js/prism.js'></script>
 <script src='/csm-docs/js/tabpane-persist.js'></script>
 

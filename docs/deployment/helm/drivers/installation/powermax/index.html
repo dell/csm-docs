@@ -125,7 +125,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.c6ae3eb40b4bc4f60c6c3a1af84ff339.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.3a29160b6913fd6754a7a57bf9bceb3c.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -149,7 +149,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.c6ae3eb40b4bc4f60c6c3a1af84ff339.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.3a29160b6913fd6754a7a57bf9bceb3c.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -877,15 +877,13 @@ NVMe Requirements <a class="header-link"  href="#nvme-requirements" style=" disp
 <li>The NVMe modules may not be available after a node reboot. Loading the modules at startup is recommended.</li>
 </ul>
 <blockquote>
-<p>Starting with OCP 4.14 NVMe/TCP is enabled by default on RCOS nodes.</p>
-</blockquote>
+<p>Starting with OCP 4.14 NVMe/TCP is enabled by default on RCOS nodes.</p></blockquote>
 <p><strong>Cluster requirements</strong></p>
 <ul>
 <li>All OpenShift or Kubernetes nodes connecting to Dell storage arrays must use unique host NVMe Qualified Names (NQNs).</li>
 </ul>
 <blockquote>
-<p>The OpenShift deployment process for CoreOS will set the same host NQN for all nodes. The host NQN is stored in the file /etc/nvme/hostnqn. One possible solution to ensure unique host NQNs is to add the following machine config to your OCP cluster:</p>
-</blockquote>
+<p>The OpenShift deployment process for CoreOS will set the same host NQN for all nodes. The host NQN is stored in the file /etc/nvme/hostnqn. One possible solution to ensure unique host NQNs is to add the following machine config to your OCP cluster:</p></blockquote>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">apiVersion</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">machineconfiguration.openshift.io/v1</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">kind</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">MachineConfig</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">metadata</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
@@ -920,8 +918,7 @@ NVMe Requirements <a class="header-link"  href="#nvme-requirements" style=" disp
 </ul>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cat /sys/module/nvme_core/parameters/multipath
 </span></span></code></pre></div><blockquote>
-<p>If the result of the command displays Y then NVMe native multipathing is enabled in the kernel. If the output is N then native NVMe multipating is disabled. Consult the <a href="https://elabnavigator.dell.com/vault/pdf/Linux.pdf">Dell Host Connectivity Guide</a> for Linux to enable native NVMe multipathing.</p>
-</blockquote>
+<p>If the result of the command displays Y then NVMe native multipathing is enabled in the kernel. If the output is N then native NVMe multipating is disabled. Consult the <a href="https://elabnavigator.dell.com/vault/pdf/Linux.pdf">Dell Host Connectivity Guide</a> for Linux to enable native NVMe multipathing.</p></blockquote>
 <p><strong>Configure the IO policy</strong></p>
 <ul>
 <li>The default NVMeTCP native multipathing policy is &ldquo;numa&rdquo;. The preferred IO policy for NVMe devices used for PowerMax is round-robin. You can use udev rules to enable the round robin policy on all worker nodes. To view the IO policy you can use the following command:</li>
@@ -978,8 +975,7 @@ Linux Multipathing Requirements <a class="header-link"  href="#linux-multipathin
             </svg>
         </a></h3><p>Dell PowerMax supports Linux multipathing (DM-MPIO) and NVMe native multipathing. Configure Linux multipathing before installing the CSI Driver.</p>
 <blockquote>
-<p>For NVMe connectivity native NVMe multipathing is used. The following sections apply only for iSCSI and Fiber Channel connectivity.</p>
-</blockquote>
+<p>For NVMe connectivity native NVMe multipathing is used. The following sections apply only for iSCSI and Fiber Channel connectivity.</p></blockquote>
 <p>Configure Linux multipathing as follows:</p>
 <ul>
 <li>Ensure that all nodes have the <em>Device Mapper Multipathing</em> package installed.
@@ -1059,8 +1055,7 @@ PowerPath for Linux requirements <a class="header-link"  href="#powerpath-for-li
 <li>Start the PowerPath service using <code>systemctl start PowerPath</code></li>
 </ul>
 <blockquote>
-<p>Note: Do not install Dell PowerPath if multi-path software is already installed, as they cannot co-exist with native multi-path software.</p>
-</blockquote>
+<p>Note: Do not install Dell PowerPath if multi-path software is already installed, as they cannot co-exist with native multi-path software.</p></blockquote>
 <h3 id="volume-snapshot-requirements-optional">
 Volume Snapshot Requirements (Optional) <a class="header-link"  href="#volume-snapshot-requirements-optional" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
             <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
@@ -1682,8 +1677,7 @@ You can specify primary and backup Unisphere servers for each storage array. If 
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">deployAsSidecar</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">port</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#0000cf;font-weight:bold">2222</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span></code></pre></div><blockquote>
-<p>Note: If the credential secret is missing from any management server details, the installer will try to use the defaultCredentialsSecret</p>
-</blockquote>
+<p>Note: If the credential secret is missing from any management server details, the installer will try to use the defaultCredentialsSecret</p></blockquote>
 
 	<style>
   .feedback--answer {
@@ -1782,7 +1776,7 @@ You can specify primary and backup Unisphere servers for each storage array. If 
 
 	  
     </div>
-    <script src="/csm-docs/js/main.min.f72d00502781aaf278a14088eb2356b1ba2a05ad698a0c43fe86314d74ceab56.js" integrity="sha256-9y0AUCeBqvJ4oUCI6yNWsboqBa1pigxD/oYxTXTOq1Y=" crossorigin="anonymous"></script>
+    <script src="/csm-docs/js/main.min.90902a026ed2aee7ed45d85797f4c790b240ba148ac6f8a6f194cb1981ffecf5.js" integrity="sha256-kJAqAm7SruftRdhXl/THkLJAuhSKxvim8ZTLGYH/7PU=" crossorigin="anonymous"></script>
 <script src='/csm-docs/js/prism.js'></script>
 <script src='/csm-docs/js/tabpane-persist.js'></script>
 

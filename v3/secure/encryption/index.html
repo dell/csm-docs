@@ -124,7 +124,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.c6ae3eb40b4bc4f60c6c3a1af84ff339.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.3a29160b6913fd6754a7a57bf9bceb3c.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -148,7 +148,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.c6ae3eb40b4bc4f60c6c3a1af84ff339.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.3a29160b6913fd6754a7a57bf9bceb3c.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -720,12 +720,10 @@
 	<p><strong>NOTE:</strong>  Encryption is not supported for CSM 1.10.x release. Please refer to the <a href="/csm-docs/v3/secure/encryption/release/">release notes</a> for more details.</p>
 <p>Encryption provides the capability to encrypt user data residing on volumes created by Dell CSI Drivers.</p>
 <blockquote>
-<p><strong>NOTE:</strong> This tech-preview release is not intended for use in production environment.</p>
-</blockquote>
+<p><strong>NOTE:</strong> This tech-preview release is not intended for use in production environment.</p></blockquote>
 <blockquote>
 <p><strong>NOTE:</strong> Encryption requires a time-based license to create new encrypted volumes. Request a <a href="/csm-docs/v3/support/license/">trial license</a> prior to deployment.</p>
-<p>After the license expiration, existing encrypted volume can still be unlocked and used, but no new encrypted volumes can be created.</p>
-</blockquote>
+<p>After the license expiration, existing encrypted volume can still be unlocked and used, but no new encrypted volumes can be created.</p></blockquote>
 <p>The volume data is encrypted on the Kubernetes worker host running the application workload, transparently for the application.</p>
 <p>Under the hood, <em>gocryptfs</em>, an open-source FUSE based encryptor, is used to encrypt both files content and the names of files and directories.</p>
 <p>Files content is encrypted using AES-256-GCM and names are encrypted using AES-256-EME.</p>
@@ -924,15 +922,12 @@ Hashicorp Vault Support <a class="header-link"  href="#hashicorp-vault-support" 
 Even the simplest standalone single instance server with in-memory storage will suffice for testing.</p>
 <blockquote>
 <p><strong>NOTE:</strong> Properly deployed and configured Vault is crucial for security of the volumes encrypted with Encryption.
-Please refer to the Hashicorp Vault documentation regarding recommended deployment options.</p>
-</blockquote>
+Please refer to the Hashicorp Vault documentation regarding recommended deployment options.</p></blockquote>
 <blockquote>
-<p><strong>CAUTION:</strong> Compromised Vault server or Vault storage back-end may lead to unauthorized access to the volumes encrypted with Encryption.</p>
-</blockquote>
+<p><strong>CAUTION:</strong> Compromised Vault server or Vault storage back-end may lead to unauthorized access to the volumes encrypted with Encryption.</p></blockquote>
 <blockquote>
 <p><strong>CAUTION:</strong> Destroyed Vault storage back-end or the encryption key stored in it, will make it impossible to unlock the volume encrypted with Encryption.
-Access to the data will be lost for ever.</p>
-</blockquote>
+Access to the data will be lost for ever.</p></blockquote>
 <p>Refer to <a href="/csm-docs/v3/deployment/helm/modules/installation/encryption/vault/">Vault Configuration section</a> for minimal configuration steps required to support Encryption and other configuration considerations.</p>
 <h2 id="key-rotation-rekey">
 Key Rotation (rekey) <a class="header-link"  href="#key-rotation-rekey" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
@@ -954,8 +949,7 @@ Kubernetes Worker Hosts Requirements <a class="header-link"  href="#kubernetes-w
 <li>SSH server should remain running all the time whenever an application with an encrypted volume is running on the host.</li>
 </ul>
 <blockquote>
-<p><strong>NOTE:</strong> Stopping the SSH server on the worker host makes any encrypted volume attached to this host <a href="/csm-docs/v3/secure/encryption/troubleshooting/#ssh-stopped">inaccessible</a>.</p>
-</blockquote>
+<p><strong>NOTE:</strong> Stopping the SSH server on the worker host makes any encrypted volume attached to this host <a href="/csm-docs/v3/secure/encryption/troubleshooting/#ssh-stopped">inaccessible</a>.</p></blockquote>
 <ul>
 <li>Each Kubernetes worker host should have commands <code>fusermount</code> and <code>mount.fuse</code>. They are pre-installed in most Linux distros.
 To install package <em>fuse</em> in Ubuntu/Debian run command similar to <code>apt install fuse</code>.
@@ -1020,7 +1014,7 @@ To install package <em>fuse</em> in SUSE run command similar to <code>zypper ins
 </footer>
 
     </div>
-    <script src="/csm-docs/js/main.min.f72d00502781aaf278a14088eb2356b1ba2a05ad698a0c43fe86314d74ceab56.js" integrity="sha256-9y0AUCeBqvJ4oUCI6yNWsboqBa1pigxD/oYxTXTOq1Y=" crossorigin="anonymous"></script>
+    <script src="/csm-docs/js/main.min.90902a026ed2aee7ed45d85797f4c790b240ba148ac6f8a6f194cb1981ffecf5.js" integrity="sha256-kJAqAm7SruftRdhXl/THkLJAuhSKxvim8ZTLGYH/7PU=" crossorigin="anonymous"></script>
 <script src='/csm-docs/js/prism.js'></script>
 <script src='/csm-docs/js/tabpane-persist.js'></script>
 

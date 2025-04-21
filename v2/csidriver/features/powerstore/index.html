@@ -125,7 +125,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.c6ae3eb40b4bc4f60c6c3a1af84ff339.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.3a29160b6913fd6754a7a57bf9bceb3c.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -149,7 +149,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.c6ae3eb40b4bc4f60c6c3a1af84ff339.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.3a29160b6913fd6754a7a57bf9bceb3c.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -791,8 +791,7 @@ Creating volumes and consuming them <a class="header-link"  href="#creating-volu
 You can check created PVCs by running <code>kubectl get pvc -n testpowerstore</code> and check statefulset&rsquo;s pods by running <code>kubectl get pods -n testpowerstore</code></p>
 <p>The pod must be <code>Ready</code> and <code>Running</code></p>
 <blockquote>
-<p>If Pod is in CrashLoopback or PVCs is in a Pending state then driver installation is not successful, check logs of node and controller.</p>
-</blockquote>
+<p>If Pod is in CrashLoopback or PVCs is in a Pending state then driver installation is not successful, check logs of node and controller.</p></blockquote>
 <h2 id="deleting-volumes">
 Deleting volumes <a class="header-link"  href="#deleting-volumes" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
             <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
@@ -879,8 +878,7 @@ Volume Snapshot Feature <a class="header-link"  href="#volume-snapshot-feature" 
 </ul>
 <blockquote>
 <p>Note: From v1.4, the CSI PowerStore driver installation process will no longer create VolumeSnapshotClass.
-If you want to create VolumeSnapshots, then create a VolumeSnapshotClass using the sample provided in the <em>samples</em> folder</p>
-</blockquote>
+If you want to create VolumeSnapshots, then create a VolumeSnapshotClass using the sample provided in the <em>samples</em> folder</p></blockquote>
 <h3 id="creating-volume-snapshots">
 Creating Volume Snapshots <a class="header-link"  href="#creating-volume-snapshots" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
             <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
@@ -983,8 +981,7 @@ Volume Expansion <a class="header-link"  href="#volume-expansion" style=" displa
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">            </span><span style="color:#204a87;font-weight:bold">storage</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">30Gi</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#8f5902;font-style:italic"># Updated size from 3Gi to 30Gi</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">storageClassName</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">powerstore-expand-sc</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span></code></pre></div><blockquote>
-<p>The Kubernetes Volume Expansion feature can only be used to increase the size of a volume. It cannot be used to shrink a volume.</p>
-</blockquote>
+<p>The Kubernetes Volume Expansion feature can only be used to increase the size of a volume. It cannot be used to shrink a volume.</p></blockquote>
 <h2 id="raw-block-support">
 Raw block support <a class="header-link"  href="#raw-block-support" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
             <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
@@ -1178,8 +1175,7 @@ Topology Usage <a class="header-link"  href="#topology-usage" style=" display: i
 <p>You can check what labels your nodes contain by running</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl get nodes --show-labels
 </span></span></code></pre></div><blockquote>
-<p>Notice that <code>volumeBindingMode:</code> is set to <code>WaitForFirstConsumer</code> this is required for the topology feature to work.</p>
-</blockquote>
+<p>Notice that <code>volumeBindingMode:</code> is set to <code>WaitForFirstConsumer</code> this is required for the topology feature to work.</p></blockquote>
 <p>For any additional information about the topology, see the <a href="https://kubernetes-csi.github.io/docs/topology.html">Kubernetes Topology documentation</a>.</p>
 <h2 id="volume-limits">
 Volume Limits <a class="header-link"  href="#volume-limits" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
@@ -1192,8 +1188,7 @@ Volume Limits <a class="header-link"  href="#volume-limits" style=" display: inl
 <br/> <code>kubectl label node &lt;node_name&gt; max-powerstore-volumes-per-node=&lt;volume_limit&gt;</code></p>
 <p>The user can also set the volume limit for all the nodes in the cluster by specifying the same value for the <code>maxPowerstoreVolumesPerNode</code> attribute in values.yaml during Helm installation. In the case of driver installed via the operator, this attribute can be modified in the sample yaml file for PowerStore, which is located at <a href="https://github.com/dell/csm-operator/blob/main/samples/">https://github.com/dell/csm-operator/blob/main/samples/</a> by editing the <code>X_CSI_POWERSTORE_MAX_VOLUMES_PER_NODE</code> parameter.</p>
 <blockquote>
-<p><strong>NOTE:</strong> <br>The default value of <code>maxPowerstoreVolumesPerNode</code> is 0. <br>If <code>maxPowerstoreVolumesPerNode</code> is set to zero, then CO shall decide how many volumes of this type can be published by the controller to the node.<br><br>The volume limit specified in the <code>maxPowerstoreVolumesPerNode</code> attribute is applicable to all the nodes in the cluster for which the node label <code>max-powerstore-volumes-per-node</code> is not set.</p>
-</blockquote>
+<p><strong>NOTE:</strong> <br>The default value of <code>maxPowerstoreVolumesPerNode</code> is 0. <br>If <code>maxPowerstoreVolumesPerNode</code> is set to zero, then CO shall decide how many volumes of this type can be published by the controller to the node.<br><br>The volume limit specified in the <code>maxPowerstoreVolumesPerNode</code> attribute is applicable to all the nodes in the cluster for which the node label <code>max-powerstore-volumes-per-node</code> is not set.</p></blockquote>
 <h2 id="reuse-powerstore-hostname">
 Reuse PowerStore hostname <a class="header-link"  href="#reuse-powerstore-hostname" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
             <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
@@ -1291,8 +1286,7 @@ Dynamic secret change detection <a class="header-link"  href="#dynamic-secret-ch
 <u><em>credentials</em></u> for the PowerStore arrays, in-flight, without restarting the driver.</p>
 <blockquote>
 <p>Note: Updates to the secret that include adding a new array, or modifying the endpoint, globalID, or blockProtocol parameters
-require the driver to be restarted to properly pick up and process the changes.</p>
-</blockquote>
+require the driver to be restarted to properly pick up and process the changes.</p></blockquote>
 <p>To do so, change the configuration file <code>config.yaml</code> and apply the update using the following command:</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>sed <span style="color:#4e9a06">&#34;s/CONFIG_YAML/`cat config.yaml | base64 -w0`/g&#34;</span> secret.yaml <span style="color:#000;font-weight:bold">|</span> kubectl apply -f -
@@ -1323,8 +1317,7 @@ It has to be specified in <code>config.yaml</code> and in Storage Classes.</p>
 <p>The change provides backward compatibility with previously created PVs.
 However, to provision new volumes, make sure to delete old Storage Classes and create new ones with <code>arrayID</code> instead of <code>arrayIP</code> specified.</p>
 <blockquote>
-<p>NOTE: It is recommended to migrate the PVs to new identifiers before changing management IPs of storage systems. The recommended way to do it is to clone the existing volume and delete the old one. The cloned volume will automatically switch to using globalID instead of management IP.</p>
-</blockquote>
+<p>NOTE: It is recommended to migrate the PVs to new identifiers before changing management IPs of storage systems. The recommended way to do it is to clone the existing volume and delete the old one. The cloned volume will automatically switch to using globalID instead of management IP.</p></blockquote>
 <h2 id="root-squashing">
 Root squashing <a class="header-link"  href="#root-squashing" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
             <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
@@ -1342,8 +1335,7 @@ Root squashing <a class="header-link"  href="#root-squashing" style=" display: i
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#000">...</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">allowRoot</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;false&#34;</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#8f5902;font-style:italic"># enables or disables root squashing</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span></code></pre></div><blockquote>
-<p>The 1.4 version and later of the driver also enables any container user, to have full access to provisioned NFS volume, in earlier versions only <code>root</code> user had access</p>
-</blockquote>
+<p>The 1.4 version and later of the driver also enables any container user, to have full access to provisioned NFS volume, in earlier versions only <code>root</code> user had access</p></blockquote>
 <h2 id="dynamic-logging-configuration">
 Dynamic Logging Configuration <a class="header-link"  href="#dynamic-logging-configuration" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
             <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
@@ -1411,8 +1403,7 @@ Creating a PersistentVolumeClaim <a class="header-link"  href="#creating-a-persi
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">requests</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">storage</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">5Gi</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span></code></pre></div><blockquote>
-<p>Note: The access mode ReadWriteOnce allows multiple pods to access a single volume within a single worker node and the behavior is consistent across all supported Kubernetes versions.</p>
-</blockquote>
+<p>Note: The access mode ReadWriteOnce allows multiple pods to access a single volume within a single worker node and the behavior is consistent across all supported Kubernetes versions.</p></blockquote>
 <p>When this feature is enabled, the existing <code>ReadWriteOnce(RWO)</code> access mode restricts volume access to a single node and allows multiple pods on the same node to read from and write to the same volume.</p>
 <p>To migrate existing PersistentVolumes to use <code>ReadWriteOncePod</code>, please follow the instruction from <a href="https://kubernetes.io/docs/tasks/administer-cluster/change-pv-access-mode-readwriteoncepod/">here</a>.</p>
 <h2 id="posix-mode-bits-and-nfsv4-acls">
@@ -1435,8 +1426,7 @@ POSIX mode bits and NFSv4 ACLs <a class="header-link"  href="#posix-mode-bits-an
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">nfsAcls</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;A::OWNER@:rwatTnNcCy,A::GROUP@:rxtncy,A::EVERYONE@:rxtncy,A::user@domain.com:rxtncy&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span></code></pre></div><blockquote>
 <p>Note: If no values are specified, default value of &ldquo;0777&rdquo; will be set.
-POSIX ACLs are not supported and only POSIX mode bits are supported for NFSv3 shares.</p>
-</blockquote>
+POSIX ACLs are not supported and only POSIX mode bits are supported for NFSv3 shares.</p></blockquote>
 <h2 id="nvme-support">
 NVMe Support <a class="header-link"  href="#nvme-support" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
             <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
@@ -1447,20 +1437,16 @@ NVMe Support <a class="header-link"  href="#nvme-support" style=" display: inlin
 CSI Driver for Dell Powerstore 2.2.0 and above supports NVMe/TCP provisioning. To enable NVMe/TCP provisioning, blockProtocol on secret should be specified as <code>NVMeTCP</code>.</p>
 <blockquote>
 <p>Note: NVMe/TCP is not supported on RHEL 7.x versions and CoreOS.
-NVMe/TCP is supported with Powerstore 2.1 and above.</p>
-</blockquote>
+NVMe/TCP is supported with Powerstore 2.1 and above.</p></blockquote>
 <p><strong>NVMeFC Support</strong>
 CSI Driver for Dell Powerstore 2.3.0 and above supports NVMe/FC provisioning. To enable NVMe/FC provisioning, blockProtocol on secret should be specified as <code>NVMeFC</code>.</p>
 <blockquote>
-<p>NVMe/FC is supported with Powerstore 3.0 and above.</p>
-</blockquote>
+<p>NVMe/FC is supported with Powerstore 3.0 and above.</p></blockquote>
 <blockquote>
-<p>NVMe-FC feature is supported with Helm.</p>
-</blockquote>
+<p>NVMe-FC feature is supported with Helm.</p></blockquote>
 <blockquote>
 <p>Note:
-In case blockProtocol is specified as <code>auto</code>, the driver will be able to find the initiators on the host and choose the protocol accordingly. If the host has multiple protocols enabled, then NVMeFC gets the highest priority followed by NVMeTCP, followed by FC and then iSCSI.</p>
-</blockquote>
+In case blockProtocol is specified as <code>auto</code>, the driver will be able to find the initiators on the host and choose the protocol accordingly. If the host has multiple protocols enabled, then NVMeFC gets the highest priority followed by NVMeTCP, followed by FC and then iSCSI.</p></blockquote>
 <h2 id="volume-group-snapshot-support">
 Volume group snapshot Support <a class="header-link"  href="#volume-group-snapshot-support" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
             <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
@@ -1494,8 +1480,7 @@ These attributes can be specified as labels in PVC yaml file. The following is a
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">          </span><span style="color:#204a87;font-weight:bold">storage</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">8Gi</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">storageClassName</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">powerstore-ext4</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span></code></pre></div><blockquote>
-<p>Note: Default description value is <code>pvcName-pvcNamespace</code>.</p>
-</blockquote>
+<p>Note: Default description value is <code>pvcName-pvcNamespace</code>.</p></blockquote>
 <p>This is the list of all the attributes supported by PowerStore CSI driver:</p>
 <table>
   <thead>
@@ -1515,14 +1500,11 @@ These attributes can be specified as labels in PVC yaml file. The following is a
 <p><strong>Note:</strong></p>
 <blockquote>
 <p>Refer to the PowerStore array specification for the allowed values for each attribute, at <code>https://&lt;array-ip&gt;/swaggerui/</code>.
-Make sure that the attributes specified are supported by the version of PowerStore array used.</p>
-</blockquote>
+Make sure that the attributes specified are supported by the version of PowerStore array used.</p></blockquote>
 <blockquote>
-<p>Configurable Volume Attributes feature is supported with Helm.</p>
-</blockquote>
+<p>Configurable Volume Attributes feature is supported with Helm.</p></blockquote>
 <blockquote>
-<p>Prefix <code>csi.dell.com/</code> has been added to the attributes from CSI PowerStore driver version 2.8.0</p>
-</blockquote>
+<p>Prefix <code>csi.dell.com/</code> has been added to the attributes from CSI PowerStore driver version 2.8.0</p></blockquote>
 <h2 id="storage-capacity-tracking">
 Storage Capacity Tracking <a class="header-link"  href="#storage-capacity-tracking" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
             <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
@@ -1631,7 +1613,7 @@ To configure how often driver checks for changed capacity set <code>storageCapac
 </footer>
 
     </div>
-    <script src="/csm-docs/js/main.min.f72d00502781aaf278a14088eb2356b1ba2a05ad698a0c43fe86314d74ceab56.js" integrity="sha256-9y0AUCeBqvJ4oUCI6yNWsboqBa1pigxD/oYxTXTOq1Y=" crossorigin="anonymous"></script>
+    <script src="/csm-docs/js/main.min.90902a026ed2aee7ed45d85797f4c790b240ba148ac6f8a6f194cb1981ffecf5.js" integrity="sha256-kJAqAm7SruftRdhXl/THkLJAuhSKxvim8ZTLGYH/7PU=" crossorigin="anonymous"></script>
 <script src='/csm-docs/js/prism.js'></script>
 <script src='/csm-docs/js/tabpane-persist.js'></script>
 

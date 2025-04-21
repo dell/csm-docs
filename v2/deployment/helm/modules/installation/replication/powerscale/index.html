@@ -125,7 +125,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.c6ae3eb40b4bc4f60c6c3a1af84ff339.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.3a29160b6913fd6754a7a57bf9bceb3c.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -149,7 +149,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.c6ae3eb40b4bc4f60c6c3a1af84ff339.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.3a29160b6913fd6754a7a57bf9bceb3c.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -807,8 +807,7 @@ helm parameter <code>controller.replication.enabled</code> in your copy of examp
 </span></span></span></code></pre></div><p>You can leave other parameters like <code>replicationContextPrefix</code>, and <code>replicationPrefix</code> as they are.</p>
 <p>After enabling the replication module, you can continue to install the CSI driver for PowerScale following the usual installation procedure. Just ensure you&rsquo;ve added the necessary array connection information to the Kubernetes secret for the PowerScale driver.</p>
 <blockquote>
-<p><strong><em>NOTE:</em></strong> You need to install your driver on all clusters where you want to use replication. Both arrays must be accessible from each cluster.</p>
-</blockquote>
+<p><strong><em>NOTE:</em></strong> You need to install your driver on all clusters where you want to use replication. Both arrays must be accessible from each cluster.</p></blockquote>
 <h5 id="synciq-encryption-1">
 SyncIQ encryption</h5><p>If you plan to use encryption, you need to set <code>replicationCertificateID</code> in the array connection secret. To check the ID of the certificate for the cluster, you can navigate to <code>Data protection-&gt;SyncIQ-&gt;Settings,</code> find your certificate in the <code>Server Certificates</code> section and then push the <code>View/Edit</code> button. It will open a dialog that should contain the  <code>Id</code> field. Use the value of that field to set <code>replicationCertificateID</code>.</p>
 <h3 id="creating-storage-classes">
@@ -865,15 +864,13 @@ just leave it as <code>true</code>.</li>
 <li><code>replication.storage.dell.com/rpo</code> is an acceptable amount of data, which is measured in units of time, that may be lost due to a failure.</li>
 </ul>
 <blockquote>
-<p><strong><em>NOTE</em></strong>: Available RPO values &ldquo;Five_Minutes&rdquo;, &ldquo;Fifteen_Minutes&rdquo;, &ldquo;Thirty_Minutes&rdquo;, &ldquo;One_Hour&rdquo;, &ldquo;Six_Hours&rdquo;, &ldquo;Twelve_Hours&rdquo;, &ldquo;One_Day&rdquo;</p>
-</blockquote>
+<p><strong><em>NOTE</em></strong>: Available RPO values &ldquo;Five_Minutes&rdquo;, &ldquo;Fifteen_Minutes&rdquo;, &ldquo;Thirty_Minutes&rdquo;, &ldquo;One_Hour&rdquo;, &ldquo;Six_Hours&rdquo;, &ldquo;Twelve_Hours&rdquo;, &ldquo;One_Day&rdquo;</p></blockquote>
 <ul>
 <li><code>replication.storage.dell.com/ignoreNamespaces</code>, if set to <code>true</code> PowerScale driver, it will ignore in what namespace volumes are created and put every volume created using this storage class into a single volume group.</li>
 <li><code>replication.storage.dell.com/volumeGroupPrefix</code> represents what string would be appended to the volume group name to differentiate them. It is important to not use the same prefix for different kubernetes clusters, otherwise any action on a replication group in one kubernetes cluster will impact the other.</li>
 </ul>
 <blockquote>
-<p><strong><em>NOTE</em></strong>: To configure the VolumeGroupPrefix, the name format of '&lt;volumeGroupPrefix&gt;-&lt;namespace&gt;-&lt;System IP Address OR FQDN&gt;-&lt;rpo&gt;' cannot be more than 63 characters.</p>
-</blockquote>
+<p><strong><em>NOTE</em></strong>: To configure the VolumeGroupPrefix, the name format of '&lt;volumeGroupPrefix&gt;-&lt;namespace&gt;-&lt;System IP Address OR FQDN&gt;-&lt;rpo&gt;' cannot be more than 63 characters.</p></blockquote>
 <ul>
 <li><code>Accesszone</code> is the name of the access zone a volume can be created in.</li>
 <li><code>AzServiceIP</code> AccessZone groupnet service IP. It is optional and can be provided if different than the PowerScale cluster endpoint.</li>
@@ -1048,7 +1045,7 @@ Supported Replication Actions <a class="header-link"  href="#supported-replicati
 </footer>
 
     </div>
-    <script src="/csm-docs/js/main.min.f72d00502781aaf278a14088eb2356b1ba2a05ad698a0c43fe86314d74ceab56.js" integrity="sha256-9y0AUCeBqvJ4oUCI6yNWsboqBa1pigxD/oYxTXTOq1Y=" crossorigin="anonymous"></script>
+    <script src="/csm-docs/js/main.min.90902a026ed2aee7ed45d85797f4c790b240ba148ac6f8a6f194cb1981ffecf5.js" integrity="sha256-kJAqAm7SruftRdhXl/THkLJAuhSKxvim8ZTLGYH/7PU=" crossorigin="anonymous"></script>
 <script src='/csm-docs/js/prism.js'></script>
 <script src='/csm-docs/js/tabpane-persist.js'></script>
 

@@ -125,7 +125,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.c6ae3eb40b4bc4f60c6c3a1af84ff339.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.3a29160b6913fd6754a7a57bf9bceb3c.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -149,7 +149,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.c6ae3eb40b4bc4f60c6c3a1af84ff339.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.3a29160b6913fd6754a7a57bf9bceb3c.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -893,8 +893,7 @@ Volume Snapshot Feature <a class="header-link"  href="#volume-snapshot-feature" 
 <blockquote>
 <p>For general use, update the snapshot controller YAMLs with an appropriate namespace before installing. For
 example, on a Vanilla Kubernetes cluster, update the namespace from default to kube-system before issuing the
-kubectl create command.</p>
-</blockquote>
+kubectl create command.</p></blockquote>
 <h3 id="volume-snapshot-class">
 Volume Snapshot Class <a class="header-link"  href="#volume-snapshot-class" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
             <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
@@ -959,8 +958,7 @@ Creating PVCs with Volume Snapshots as Source <a class="header-link"  href="#cre
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">requests</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">storage</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">5Gi</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span></code></pre></div><blockquote>
-<p>Starting from CSI PowerScale driver version 2.2, different isi paths can be used to create PersistentVolumeClaim from VolumeSnapshot.This means the isi paths of the new volume and the VolumeSnapshot can be different.</p>
-</blockquote>
+<p>Starting from CSI PowerScale driver version 2.2, different isi paths can be used to create PersistentVolumeClaim from VolumeSnapshot.This means the isi paths of the new volume and the VolumeSnapshot can be different.</p></blockquote>
 <h2 id="volume-expansion">
 Volume Expansion <a class="header-link"  href="#volume-expansion" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
             <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
@@ -999,8 +997,7 @@ Volume Expansion <a class="header-link"  href="#volume-expansion" style=" displa
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">storage</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">30Gi</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#8f5902;font-style:italic"># Updated size from 3Gi to 30Gi</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">storageClassName</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">isilon-expand-sc</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span></code></pre></div><blockquote>
-<p>The Kubernetes Volume Expansion feature can only be used to increase the size of a volume. It cannot be used to shrink a volume.</p>
-</blockquote>
+<p>The Kubernetes Volume Expansion feature can only be used to increase the size of a volume. It cannot be used to shrink a volume.</p></blockquote>
 <h2 id="volume-cloning-feature">
 Volume Cloning Feature <a class="header-link"  href="#volume-cloning-feature" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
             <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
@@ -1050,8 +1047,7 @@ Controller HA <a class="header-link"  href="#controller-ha" style=" display: inl
 <p>To increase or decrease the number of controller pods, edit the following value in <code>myvalues.yaml</code> file:</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">controllerCount</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#0000cf;font-weight:bold">2</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span></code></pre></div><blockquote>
-<p><strong>NOTE:</strong> The default value for controllerCount is 2. It is recommended to not change this unless really required. Also, if the controller count is greater than the number of available nodes (where the pods can be scheduled), some controller pods will remain in a Pending state.</p>
-</blockquote>
+<p><strong>NOTE:</strong> The default value for controllerCount is 2. It is recommended to not change this unless really required. Also, if the controller count is greater than the number of available nodes (where the pods can be scheduled), some controller pods will remain in a Pending state.</p></blockquote>
 <p>If you are using the Dell CSM Operator, the value to adjust is:</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">replicas</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#0000cf;font-weight:bold">2</span><span style="color:#f8f8f8;text-decoration:underline">  
 </span></span></span></code></pre></div><p>For more details about configuring Controller HA using the Dell CSM Operator, see the <a href="../../../deployment/csmoperator/#custom-resource-specification">Dell CSM Operator documentation</a>.</p>
@@ -1186,8 +1182,7 @@ Volume Limit <a class="header-link"  href="#volume-limit" style=" display: inlin
 <br/> <code>kubectl label node &lt;node_name&gt; max-isilon-volumes-per-node=&lt;volume_limit&gt;</code></p>
 <p>The user can also set the volume limit for all the nodes in the cluster by specifying the same to <code>maxIsilonVolumesPerNode</code> attribute in values.yaml.</p>
 <blockquote>
-<p><strong>NOTE:</strong> <br>The default value of <code>maxIsilonVolumesPerNode</code> is 0. <br>If <code>maxIsilonVolumesPerNode</code> is set to zero, then CO shall decide how many volumes of this type can be published by the controller to the node.<br><br>The volume limit specified to <code>maxIsilonVolumesPerNode</code> attribute is applicable to all the nodes in the cluster for which node label <code>max-isilon-volumes-per-node</code> is not set.</p>
-</blockquote>
+<p><strong>NOTE:</strong> <br>The default value of <code>maxIsilonVolumesPerNode</code> is 0. <br>If <code>maxIsilonVolumesPerNode</code> is set to zero, then CO shall decide how many volumes of this type can be published by the controller to the node.<br><br>The volume limit specified to <code>maxIsilonVolumesPerNode</code> attribute is applicable to all the nodes in the cluster for which node label <code>max-isilon-volumes-per-node</code> is not set.</p></blockquote>
 <h2 id="storage-capacity-tracking">
 Storage Capacity Tracking <a class="header-link"  href="#storage-capacity-tracking" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
             <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
@@ -1354,8 +1349,7 @@ Operator based installation <a class="header-link"  href="#operator-based-instal
 <p>To update the log level dynamically user has to edit the ConfigMap <code>isilon-config-params</code> and update <code>CSI_LOG_LEVEL</code> to the desired log level.</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl edit configmap -n isilon isilon-config-params
 </span></span></code></pre></div><blockquote>
-<p>Note: Prior to CSI Driver for PowerScale version 2.0.0, the log level was allowed to be updated dynamically through <code>logLevel</code> attribute in the secret object.</p>
-</blockquote>
+<p>Note: Prior to CSI Driver for PowerScale version 2.0.0, the log level was allowed to be updated dynamically through <code>logLevel</code> attribute in the secret object.</p></blockquote>
 <h2 id="nat-support">
 NAT Support <a class="header-link"  href="#nat-support" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
             <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
@@ -1391,8 +1385,7 @@ Helm based installation <a class="header-link"  href="#helm-based-installation-1
 </span></span></span></code></pre></div><p>The permissions present in values.yaml are the default for all cluster config.</p>
 <p>If the volume permission is not present in storage class then secrets are considered and if it is not present even in secrets then values.yaml is considered.</p>
 <blockquote>
-<p><strong>Note:</strong> <br>For volume creation from source (volume from snapshot/volume from volume) permissions are inherited from source. <br><br>Create myvalues.yaml/my-isilon-settings.yaml and storage class accordingly.</p>
-</blockquote>
+<p><strong>Note:</strong> <br>For volume creation from source (volume from snapshot/volume from volume) permissions are inherited from source. <br><br>Create myvalues.yaml/my-isilon-settings.yaml and storage class accordingly.</p></blockquote>
 <h3 id="operator-based-installation-1">
 Operator based installation <a class="header-link"  href="#operator-based-installation-1" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
             <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
@@ -1541,7 +1534,7 @@ Creating a PersistentVolumeClaim <a class="header-link"  href="#creating-a-persi
 </footer>
 
     </div>
-    <script src="/csm-docs/js/main.min.f72d00502781aaf278a14088eb2356b1ba2a05ad698a0c43fe86314d74ceab56.js" integrity="sha256-9y0AUCeBqvJ4oUCI6yNWsboqBa1pigxD/oYxTXTOq1Y=" crossorigin="anonymous"></script>
+    <script src="/csm-docs/js/main.min.90902a026ed2aee7ed45d85797f4c790b240ba148ac6f8a6f194cb1981ffecf5.js" integrity="sha256-kJAqAm7SruftRdhXl/THkLJAuhSKxvim8ZTLGYH/7PU=" crossorigin="anonymous"></script>
 <script src='/csm-docs/js/prism.js'></script>
 <script src='/csm-docs/js/tabpane-persist.js'></script>
 

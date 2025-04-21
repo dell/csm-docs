@@ -125,7 +125,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.c6ae3eb40b4bc4f60c6c3a1af84ff339.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.3a29160b6913fd6754a7a57bf9bceb3c.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -149,7 +149,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.c6ae3eb40b4bc4f60c6c3a1af84ff339.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.3a29160b6913fd6754a7a57bf9bceb3c.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -791,11 +791,9 @@ Volume Snapshot Feature <a class="header-link"  href="#volume-snapshot-feature" 
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">enabled</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span></code></pre></div><blockquote>
 <p>Note: From v1.7, the CSI PowerMax driver installation process will no longer create VolumeSnapshotClass.
-If you want to create VolumeSnapshots, then create a VolumeSnapshotClass using the sample provided in the <em>csi-powermax/samples/volumesnapshotclass</em> folder</p>
-</blockquote>
+If you want to create VolumeSnapshots, then create a VolumeSnapshotClass using the sample provided in the <em>csi-powermax/samples/volumesnapshotclass</em> folder</p></blockquote>
 <blockquote>
-<p>Note: Snapshots for File in PowerMax is currently not supported.</p>
-</blockquote>
+<p>Note: Snapshots for File in PowerMax is currently not supported.</p></blockquote>
 <h3 id="creating-volume-snapshots">
 Creating Volume Snapshots <a class="header-link"  href="#creating-volume-snapshots" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
             <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
@@ -1082,8 +1080,7 @@ Leader election is only applicable for all sidecar containers and driver contain
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">controllerCount</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#0000cf;font-weight:bold">2</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span></code></pre></div><blockquote>
 <p><em>NOTE:</em> The default value for controllerCount is 2. We recommend not changing this unless it is really necessary.
-Also, if the controller count is greater than the number of available nodes (where the Pods can be scheduled), some controller Pods will remain in the Pending state</p>
-</blockquote>
+Also, if the controller count is greater than the number of available nodes (where the Pods can be scheduled), some controller Pods will remain in the Pending state</p></blockquote>
 <p>If you are using the Dell CSM Operator, the value to adjust is:</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">replicas</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#0000cf;font-weight:bold">2</span><span style="color:#f8f8f8;text-decoration:underline">  
 </span></span></span></code></pre></div><p>For more details about configuring Controller HA using the Dell CSM Operator, see the <a href="../../../deployment/csmoperator/#custom-resource-specification">Dell CSM Operator documentation</a>.</p>
@@ -1209,8 +1206,7 @@ Topology Usage <a class="header-link"  href="#topology-usage" style=" display: i
 </span></span></span></code></pre></div><p>In the above example, if you remove the entry for the key <code>csi-powermax.dellemc.com/000000000001.fc</code>, then the PVCs created using this storage class will be scheduled
 on any worker node with access to the PowerMax array <code>000000000001</code> irrespective of the transport protocol</p>
 <blockquote>
-<p>A set of sample storage class definitions to enable topology-aware volume provisioning has been provided in the <code>csi-powermax/samples/storageclass</code> folder</p>
-</blockquote>
+<p>A set of sample storage class definitions to enable topology-aware volume provisioning has been provided in the <code>csi-powermax/samples/storageclass</code> folder</p></blockquote>
 <p>For additional information on how to use <em>Topology aware Volume Provisioning</em>, see the <a href="https://kubernetes-csi.github.io/docs/topology.html">Kubernetes Topology documentation</a>.</p>
 <h3 id="custom-topology-keys">
 Custom Topology keys <a class="header-link"  href="#custom-topology-keys" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
@@ -1308,8 +1304,7 @@ N1: csi-driver/000000000001.FC:csi-driver, csi-driver/000000000002.FC:csi-driver
 <br>
 N2 and N3: None</p>
 <blockquote>
-<p>Note: Name of the configmap should always be <code>node-topology-config</code>.</p>
-</blockquote>
+<p>Note: Name of the configmap should always be <code>node-topology-config</code>.</p></blockquote>
 <h2 id="dynamic-logging-configuration">
 Dynamic Logging Configuration <a class="header-link"  href="#dynamic-logging-configuration" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
             <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
@@ -1408,8 +1403,7 @@ Support for auto RDM for vSphere over FC <a class="header-link"  href="#support-
 <p>Note: Replication is not supported with this feature.
 Limitations of RDM can be referred <a href="https://configmax.esp.vmware.com/home">here.</a><br>
 Supported number of RDM Volumes per VM is 60 as per the limitations.
-RDMs should not be added/removed manually from vCenter on any of the cluster VMs.</p>
-</blockquote>
+RDMs should not be added/removed manually from vCenter on any of the cluster VMs.</p></blockquote>
 <h2 id="storage-capacity-tracking">
 Storage Capacity Tracking <a class="header-link"  href="#storage-capacity-tracking" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
             <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
@@ -1441,8 +1435,7 @@ Volume Limits <a class="header-link"  href="#volume-limits" style=" display: inl
 <p>This feature is also supported for limiting the volume provisioning on Kubernetes clusters running on vSphere (VMware hypervisor) via RDM mechanism. User can set <code>vSphere.enabled</code> to true and also set volume limits to positive values less than or equal 60 via labels or in Values.yaml file.</p>
 <blockquote>
 <p><strong>NOTE:</strong> <br>The default value of <code>maxPowerMaxVolumesPerNode</code> is 0. <br>If <code>maxPowerMaxVolumesPerNode</code> is set to zero, then CO shall decide how many volumes of this type can be published by the controller to the node.<br><br>The volume limit specified to <code>maxPowerMaxVolumesPerNode</code> attribute is applicable to all the nodes in the cluster for which node label <code>max-powermax-volumes-per-node</code> is not set.
-<br>Supported maximum number of RDM Volumes per VM is 60 as per the limitations. <br>If the value is set both by node label and values.yaml file then node label value will get the precedence and user has to remove the node label in order to reflect the values.yaml value.</p>
-</blockquote>
+<br>Supported maximum number of RDM Volumes per VM is 60 as per the limitations. <br>If the value is set both by node label and values.yaml file then node label value will get the precedence and user has to remove the node label in order to reflect the values.yaml value.</p></blockquote>
 <h2 id="nvmetcp-support">
 NVMe/TCP Support <a class="header-link"  href="#nvmetcp-support" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
             <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
@@ -1556,7 +1549,7 @@ NVMe/TCP Support <a class="header-link"  href="#nvmetcp-support" style=" display
 
 	  
     </div>
-    <script src="/csm-docs/js/main.min.f72d00502781aaf278a14088eb2356b1ba2a05ad698a0c43fe86314d74ceab56.js" integrity="sha256-9y0AUCeBqvJ4oUCI6yNWsboqBa1pigxD/oYxTXTOq1Y=" crossorigin="anonymous"></script>
+    <script src="/csm-docs/js/main.min.90902a026ed2aee7ed45d85797f4c790b240ba148ac6f8a6f194cb1981ffecf5.js" integrity="sha256-kJAqAm7SruftRdhXl/THkLJAuhSKxvim8ZTLGYH/7PU=" crossorigin="anonymous"></script>
 <script src='/csm-docs/js/prism.js'></script>
 <script src='/csm-docs/js/tabpane-persist.js'></script>
 

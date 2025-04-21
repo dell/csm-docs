@@ -125,7 +125,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.c6ae3eb40b4bc4f60c6c3a1af84ff339.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.3a29160b6913fd6754a7a57bf9bceb3c.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -149,7 +149,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.c6ae3eb40b4bc4f60c6c3a1af84ff339.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.3a29160b6913fd6754a7a57bf9bceb3c.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -753,14 +753,11 @@ Prerequisites <a class="header-link"  href="#prerequisites" style=" display: inl
 <li>If you plan to use either the Fibre Channel, iSCSI, NVMe/TCP, or NVMe/FC protocols, refer to either <em>Fibre Channel requirements</em> or <em>Set up the iSCSI Initiator</em> or <em>Set up the NVMe Initiator</em> sections below. You can use NFS volumes without FC, iSCSI, NVMe/TCP, or NVMe/FC configurations.</li>
 </ul>
 <blockquote>
-<p>You can use either the Fibre Channel (FC), iSCSI, NVMe/TCP, or NVMe/FC protocol, but you do not need all four to be enabled.</p>
-</blockquote>
+<p>You can use either the Fibre Channel (FC), iSCSI, NVMe/TCP, or NVMe/FC protocol, but you do not need all four to be enabled.</p></blockquote>
 <blockquote>
-<p>For NVMe support the preferred multipath solution is NVMe native multipathing. The <a href="https://elabnavigator.dell.com/vault/pdf/Linux.pdf?key=1725374107988">Dell Host Connectivity Guide</a> describes the details of each configuration option.</p>
-</blockquote>
+<p>For NVMe support the preferred multipath solution is NVMe native multipathing. The <a href="https://elabnavigator.dell.com/vault/pdf/Linux.pdf?key=1725374107988">Dell Host Connectivity Guide</a> describes the details of each configuration option.</p></blockquote>
 <blockquote>
-<p>If you want to use pre-configured iSCSI/FC hosts be sure to check that they are not part of any host group.</p>
-</blockquote>
+<p>If you want to use pre-configured iSCSI/FC hosts be sure to check that they are not part of any host group.</p></blockquote>
 <ul>
 <li>Linux native multipathing requirements</li>
 <li>Mount propagation is enabled on container runtime that is being used</li>
@@ -824,8 +821,7 @@ Set up the NVMe Initiator <a class="header-link"  href="#set-up-the-nvme-initiat
 </ul>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cat /sys/module/nvme_core/parameters/multipath
 </span></span></code></pre></div><blockquote>
-<p>If the result of the command displays Y then NVMe native multipathing is enabled in the kernel. If the output is N then native NVMe multipathing is disabled. Consult the <a href="https://elabnavigator.dell.com/vault/pdf/Linux.pdf?key=1725374107988">Dell Host Connectivity Guide</a> for Linux to enable native NVMe multipathing.</p>
-</blockquote>
+<p>If the result of the command displays Y then NVMe native multipathing is enabled in the kernel. If the output is N then native NVMe multipathing is disabled. Consult the <a href="https://elabnavigator.dell.com/vault/pdf/Linux.pdf?key=1725374107988">Dell Host Connectivity Guide</a> for Linux to enable native NVMe multipathing.</p></blockquote>
 <ul>
 <li>The default NVMeTCP native multipathing policy is &ldquo;numa&rdquo;. The preferred IO policy for NVMe devices used for PowerStore is round-robin. You can use udev rules to enable the round robin policy on all worker nodes. To view the IO policy you can use the following command:</li>
 </ul>
@@ -882,8 +878,7 @@ Set up the NVMe Initiator <a class="header-link"  href="#set-up-the-nvme-initiat
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">path</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">/etc/udev/rules.d/72-nvmf-ctrl_loss_tmo.rules</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span></code></pre></div><p><strong>Requirements for NVMeTCP</strong></p>
 <blockquote>
-<p>Starting with OCP 4.14 NVMe/TCP is enabled by default on RCOS nodes.</p>
-</blockquote>
+<p>Starting with OCP 4.14 NVMe/TCP is enabled by default on RCOS nodes.</p></blockquote>
 <ul>
 <li>Modules including the nvme, nvme_core, nvme_fabrics, and nvme_tcp are required for using NVMe over Fabrics using TCP. Load the NVMe and NVMe-OF Modules using the below commands:</li>
 </ul>
@@ -907,8 +902,7 @@ Linux multipathing requirements <a class="header-link"  href="#linux-multipathin
                 <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
             </svg>
         </a></h3><blockquote>
-<p>For NVMe connectivity native NVMe multipathing is used. The following sections apply only for iSCSI and Fiber Channel connectivity.</p>
-</blockquote>
+<p>For NVMe connectivity native NVMe multipathing is used. The following sections apply only for iSCSI and Fiber Channel connectivity.</p></blockquote>
 <p>Dell PowerStore supports Linux multipathing and NVMe native multipathing. Configure Linux multipathing before installing the CSI Driver for Dell
 PowerStore.</p>
 <p>Set up Linux multipathing as follows:</p>
@@ -916,8 +910,7 @@ PowerStore.</p>
 <li>Ensure that all nodes have the <em>Device Mapper Multipathing</em> package installed.</li>
 </ul>
 <blockquote>
-<p>You can install it by running <code>yum install device-mapper-multipath</code> on CentOS or <code>apt install multipath-tools</code> on Ubuntu. This package should create a multipath configuration file located in <code>/etc/multipath.conf</code>.</p>
-</blockquote>
+<p>You can install it by running <code>yum install device-mapper-multipath</code> on CentOS or <code>apt install multipath-tools</code> on Ubuntu. This package should create a multipath configuration file located in <code>/etc/multipath.conf</code>.</p></blockquote>
 <ul>
 <li>Enable multipathing using the <code>mpathconf --enable --with_multipathd y</code> command.</li>
 <li>Enable <code>user_friendly_names</code> and <code>find_multipaths</code> in the <code>multipath.conf</code> file.</li>
@@ -1065,8 +1058,7 @@ User Privileges <a class="header-link"  href="#user-privileges" style=" display:
 <li>
 <p>Create storage classes using ones from <code>samples/storageclass</code> folder as an example and apply them to the Kubernetes cluster by running <code>kubectl create -f &lt;path_to_storageclass_file&gt;</code></p>
 <blockquote>
-<p>If you do not specify <code>arrayID</code> parameter in the storage class then the array that was specified as the default would be used for provisioning volumes.</p>
-</blockquote>
+<p>If you do not specify <code>arrayID</code> parameter in the storage class then the array that was specified as the default would be used for provisioning volumes.</p></blockquote>
 </li>
 <li>
 <p>Download the default values.yaml file</p>
@@ -1305,8 +1297,7 @@ What happens to my existing storage classes? <a class="header-link"  href="#what
             </svg>
         </a></h3><p>Upgrading from an older version of the driver: The storage classes will be deleted if you upgrade the driver. If you wish to continue using those storage classes, you can patch them and apply the annotation “helm.sh/resource-policy”: keep before performing an upgrade.</p>
 <blockquote>
-<p>Note: If you continue to use the old storage classes, you may not be able to take advantage of any new storage class parameter supported by the driver.</p>
-</blockquote>
+<p>Note: If you continue to use the old storage classes, you may not be able to take advantage of any new storage class parameter supported by the driver.</p></blockquote>
 <p><strong>Steps to create storage class:</strong></p>
 <p>There are samples storage class yaml files available under <code>samples/storageclass</code>.  These can be copied and modified as needed.</p>
 <ol>
@@ -1349,8 +1340,7 @@ Dynamically update the powerstore secrets <a class="header-link"  href="#dynamic
 <u><em>credentials</em></u> for the PowerStore arrays, in-flight, without restarting the driver.</p>
 <blockquote>
 <p>Note: Updates to the secret that include adding a new array, or modifying the endpoint, globalID, or blockProtocol parameters
-require the driver to be restarted to properly pick up and process the changes.</p>
-</blockquote>
+require the driver to be restarted to properly pick up and process the changes.</p></blockquote>
 <p>User can update the secret using the following commands:</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl create secret generic powerstore-config -n csi-powerstore --from-file<span style="color:#ce5c00;font-weight:bold">=</span><span style="color:#000">config</span><span style="color:#ce5c00;font-weight:bold">=</span>secret.yaml -o yaml --dry-run<span style="color:#ce5c00;font-weight:bold">=</span>client <span style="color:#000;font-weight:bold">|</span> kubectl replace -f -
 </span></span></code></pre></div><h2 id="dynamic-logging-configuration">
@@ -1468,7 +1458,7 @@ Helm based installation <a class="header-link"  href="#helm-based-installation" 
 </footer>
 
     </div>
-    <script src="/csm-docs/js/main.min.f72d00502781aaf278a14088eb2356b1ba2a05ad698a0c43fe86314d74ceab56.js" integrity="sha256-9y0AUCeBqvJ4oUCI6yNWsboqBa1pigxD/oYxTXTOq1Y=" crossorigin="anonymous"></script>
+    <script src="/csm-docs/js/main.min.90902a026ed2aee7ed45d85797f4c790b240ba148ac6f8a6f194cb1981ffecf5.js" integrity="sha256-kJAqAm7SruftRdhXl/THkLJAuhSKxvim8ZTLGYH/7PU=" crossorigin="anonymous"></script>
 <script src='/csm-docs/js/prism.js'></script>
 <script src='/csm-docs/js/tabpane-persist.js'></script>
 

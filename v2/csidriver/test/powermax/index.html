@@ -125,7 +125,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.c6ae3eb40b4bc4f60c6c3a1af84ff339.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.3a29160b6913fd6754a7a57bf9bceb3c.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -149,7 +149,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.c6ae3eb40b4bc4f60c6c3a1af84ff339.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.3a29160b6913fd6754a7a57bf9bceb3c.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -764,8 +764,7 @@ Volume test <a class="header-link"  href="#volume-test" style=" display: inline-
 </li>
 </ol>
 <blockquote>
-<p><em>NOTE</em>: Helm tests have been designed assuming that users have created storageclass names like <code>storageclass-name</code> and <code>storageclass-name-xfs</code>. You can use <code>kubectl get sc</code> to check for the storageclass names.</p>
-</blockquote>
+<p><em>NOTE</em>: Helm tests have been designed assuming that users have created storageclass names like <code>storageclass-name</code> and <code>storageclass-name-xfs</code>. You can use <code>kubectl get sc</code> to check for the storageclass names.</p></blockquote>
 <h4 id="volume-clone-test">
 Volume clone test <a class="header-link"  href="#volume-clone-test" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
             <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
@@ -808,8 +807,7 @@ Snapshot test <a class="header-link"  href="#snapshot-test" style=" display: inl
 <li>Cleans up all the resources that were created as part of the test.</li>
 </ul>
 <blockquote>
-<p><em>NOTE</em>: This test has been designed assuming that users are using the snapshot class name <code>powermax-snapclass</code>. You must update the snapshot class name in the file <code>snap1.yaml</code> present in the test/helm folder based on your method of deployment. To get a list of volume snapshot classes, run the command - <code>kubectl get volumesnapshotclass</code></p>
-</blockquote>
+<p><em>NOTE</em>: This test has been designed assuming that users are using the snapshot class name <code>powermax-snapclass</code>. You must update the snapshot class name in the file <code>snap1.yaml</code> present in the test/helm folder based on your method of deployment. To get a list of volume snapshot classes, run the command - <code>kubectl get volumesnapshotclass</code></p></blockquote>
 <h4 id="volume-expansion-test">
 Volume Expansion test <a class="header-link"  href="#volume-expansion-test" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
             <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
@@ -830,8 +828,7 @@ Volume Expansion test <a class="header-link"  href="#volume-expansion-test" styl
 <li>Cleans up all the resources that were created as part of the test</li>
 </ul>
 <blockquote>
-<p>Note: This is not applicable for replicated volumes.</p>
-</blockquote>
+<p>Note: This is not applicable for replicated volumes.</p></blockquote>
 <h3 id="setting-application-prefix">
 Setting Application Prefix <a class="header-link"  href="#setting-application-prefix" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
             <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
@@ -845,8 +842,7 @@ Setting Application Prefix <a class="header-link"  href="#setting-application-pr
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#8f5902;font-style:italic"># Examples: APP, app, sanity, tests</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">ApplicationPrefix</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">&lt;application prefix&gt;  </span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span></code></pre></div><blockquote>
-<p>Note: Supported length of storage group for PowerMax is 64 characters. Storage group name is of the format &ldquo;csi-<code>clusterprefix</code>-<code>application prefix</code>-<code>SLO name</code>-<code>SRP name</code>-SG&rdquo;. Based on the other inputs like clusterprefix,SLO name and SRP name maximum length of the ApplicationPrefix can vary.</p>
-</blockquote>
+<p>Note: Supported length of storage group for PowerMax is 64 characters. Storage group name is of the format &ldquo;csi-<code>clusterprefix</code>-<code>application prefix</code>-<code>SLO name</code>-<code>SRP name</code>-SG&rdquo;. Based on the other inputs like clusterprefix,SLO name and SRP name maximum length of the ApplicationPrefix can vary.</p></blockquote>
 <h2 id="consuming-existing-volumes-with-static-provisioning">
 Consuming existing volumes with static provisioning <a class="header-link"  href="#consuming-existing-volumes-with-static-provisioning" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
             <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
@@ -932,8 +928,7 @@ Consuming existing volumes with static provisioning <a class="header-link"  href
 <li>After the pod becomes <code>Ready</code> and <code>Running</code>, you can start to use this pod and volume.</li>
 </ol>
 <blockquote>
-<p>Note: CSI driver for PowerMax will create the necessary objects like Storage group, HostID and Masking View. They must not be created manually.</p>
-</blockquote>
+<p>Note: CSI driver for PowerMax will create the necessary objects like Storage group, HostID and Masking View. They must not be created manually.</p></blockquote>
 <h2 id="setting-qos-parameters-for-throttling-performance-and-bandwidth">
 Setting QoS parameters for throttling performance and bandwidth <a class="header-link"  href="#setting-qos-parameters-for-throttling-performance-and-bandwidth" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
             <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
@@ -1066,7 +1061,7 @@ Setting QoS parameters for throttling performance and bandwidth <a class="header
 </footer>
 
     </div>
-    <script src="/csm-docs/js/main.min.f72d00502781aaf278a14088eb2356b1ba2a05ad698a0c43fe86314d74ceab56.js" integrity="sha256-9y0AUCeBqvJ4oUCI6yNWsboqBa1pigxD/oYxTXTOq1Y=" crossorigin="anonymous"></script>
+    <script src="/csm-docs/js/main.min.90902a026ed2aee7ed45d85797f4c790b240ba148ac6f8a6f194cb1981ffecf5.js" integrity="sha256-kJAqAm7SruftRdhXl/THkLJAuhSKxvim8ZTLGYH/7PU=" crossorigin="anonymous"></script>
 <script src='/csm-docs/js/prism.js'></script>
 <script src='/csm-docs/js/tabpane-persist.js'></script>
 
