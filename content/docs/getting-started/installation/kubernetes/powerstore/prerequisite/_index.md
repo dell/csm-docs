@@ -129,9 +129,11 @@ Supported Multipathing
   - Dell PowerStore supports Linux multipathing (DM-MPIO) and NVMe native multipathing.  
   - Configure Linux multipathing before installing the CSI Driver.
 
-{{< collapse id="1" title="NVMe" >}}For NVMe connectivity native NVMe multipathing is used. Refer [Dell Technologies Host Connectivity](https://elabnavigator.dell.com/vault/pdf/Linux.pdf#page=209).{{< /collapse >}}
+{{< tabpane text=true lang="en" >}}
+{{% tab header="NVMe" lang="en" %}}For NVMe connectivity native NVMe multipathing is used. Refer [Dell Technologies Host Connectivity](https://elabnavigator.dell.com/vault/pdf/Linux.pdf#page=209).
+{{% /tab %}}
 
-{{< collapse id="2" title="FC/iSCSI" >}}
+{{% tab header="Fibre Channel / iSCSI" lang="en" %}}
 
 1. Configuration steps: 
 
@@ -193,8 +195,8 @@ devices {
 On some distributions the multipathd service for changes to the configuration and dynamically reconfigures itself. If you need to manually trigger a reload you can run the following command:
 `sudo systemctl reload multipathd`
 
-{{< /collapse >}}
-
+{{% /tab %}}
+{{< /tabpane >}}
 
 ### Replication feature Requirements (Optional)
 

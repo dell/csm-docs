@@ -56,7 +56,7 @@ toc_hide: true
            vendor                   DellEMC
            product                  PowerStore
            detect_prio              "yes"
-           path_selector            "queue-length 0"
+           path_selector            "service-time 0"
            path_grouping_policy     "group_by_prio"
            path_checker             tur
            failback                 immediate
@@ -199,7 +199,7 @@ toc_hide: true
            vendor                   DellEMC
            product                  PowerStore
            detect_prio              "yes"
-           path_selector            "queue-length 0"
+           path_selector            "service-time 0"
            path_grouping_policy     "group_by_prio"
            path_checker             tur
            failback                 immediate
