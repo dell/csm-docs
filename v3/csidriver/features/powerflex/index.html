@@ -125,7 +125,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.c6ae3eb40b4bc4f60c6c3a1af84ff339.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.3a29160b6913fd6754a7a57bf9bceb3c.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -149,7 +149,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.c6ae3eb40b4bc4f60c6c3a1af84ff339.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.3a29160b6913fd6754a7a57bf9bceb3c.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -878,8 +878,7 @@ Volume Expansion Feature <a class="header-link"  href="#volume-expansion-feature
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">storage</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">8Gi</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">phase</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">Bound</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span></code></pre></div><blockquote>
-<p><em>NOTE:</em> Kubernetes Volume Expansion feature cannot be used to shrink a volume and volumes cannot be expanded to a value that is not a multiple of 8. If attempted, the driver will round up. For example, if the above PVC was edited to have a size of 20 Gb, the size would actually be expanded to 24 Gb, the next highest multiple of 8.</p>
-</blockquote>
+<p><em>NOTE:</em> Kubernetes Volume Expansion feature cannot be used to shrink a volume and volumes cannot be expanded to a value that is not a multiple of 8. If attempted, the driver will round up. For example, if the above PVC was edited to have a size of 20 Gb, the size would actually be expanded to 24 Gb, the next highest multiple of 8.</p></blockquote>
 <h2 id="volume-cloning-feature">
 Volume Cloning Feature <a class="header-link"  href="#volume-cloning-feature" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
             <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
@@ -1030,8 +1029,7 @@ Topology Usage <a class="header-link"  href="#topology-usage" style=" display: i
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span>- <span style="color:#000">csi-vxflexos.dellemc.com</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span></code></pre></div><p>For additional information, see the <a href="https://kubernetes-csi.github.io/docs/topology.html">Kubernetes Topology documentation</a>.</p>
 <blockquote>
-<p><em>NOTE</em>: In the manifest file of the Dell CSM operator, topology can be enabled by specifying the system name or <em>systemid</em> in the allowed topologies field. <em>Volumebindingmode</em> is also set to <em>WaitForFirstConsumer</em> by default.</p>
-</blockquote>
+<p><em>NOTE</em>: In the manifest file of the Dell CSM operator, topology can be enabled by specifying the system name or <em>systemid</em> in the allowed topologies field. <em>Volumebindingmode</em> is also set to <em>WaitForFirstConsumer</em> by default.</p></blockquote>
 <h2 id="controller-ha">
 Controller HA <a class="header-link"  href="#controller-ha" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
             <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
@@ -1042,8 +1040,7 @@ Controller HA <a class="header-link"  href="#controller-ha" style=" display: inl
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">controllerCount</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#0000cf;font-weight:bold">2</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span></code></pre></div><p>in your values file to the desired number of controller pods. By default, the driver will deploy with two controller pods, each assigned to a different worker node.</p>
 <blockquote>
-<p><em>NOTE:</em> If the controller count is greater than the number of available nodes, excess controller pods will be stuck in a pending state.</p>
-</blockquote>
+<p><em>NOTE:</em> If the controller count is greater than the number of available nodes, excess controller pods will be stuck in a pending state.</p></blockquote>
 <p>If you are using the Dell CSM Operator, the value to adjust is:</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">replicas</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#0000cf;font-weight:bold">1</span><span style="color:#f8f8f8;text-decoration:underline">  
 </span></span></span></code></pre></div><p>in your driver yaml in <code>config/samples/</code></p>
@@ -1109,8 +1106,7 @@ Controller HA <a class="header-link"  href="#controller-ha" style=" display: inl
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">     </span><span style="color:#204a87;font-weight:bold">operator</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;Exists&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">     </span><span style="color:#204a87;font-weight:bold">effect</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;NoSchedule&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span></code></pre></div><blockquote>
-<p><em>NOTE:</em> Tolerations/selectors work the same way for node pods.</p>
-</blockquote>
+<p><em>NOTE:</em> Tolerations/selectors work the same way for node pods.</p></blockquote>
 <p>For configuring Controller HA on the Dell CSM Operator, please refer to the <a href="../../../deployment/csmoperator/#custom-resource-specification">Dell CSM Operator documentation</a>.</p>
 <h2 id="sdc-deployment">
 SDC Deployment <a class="header-link"  href="#sdc-deployment" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
@@ -1377,8 +1373,7 @@ Volume Health Monitoring <a class="header-link"  href="#volume-health-monitoring
             </svg>
         </a></h2><blockquote>
 <p><em>NOTE</em>: Alpha feature gate <code>CSIVolumeHealth</code> needs to be enabled for the node side monitoring to take effect. For more information, please refer to the <a href="https://github.com/kubernetes-csi/external-health-monitor/blob/master/README.md">Kubernetes GitHub repository</a>. If the feature gate is on, and you want to use this feature,
-ensure the proper values are enabled in your values file. See the values table in the installation doc for more details.</p>
-</blockquote>
+ensure the proper values are enabled in your values file. See the values table in the installation doc for more details.</p></blockquote>
 <p>Starting in version 2.1, CSI Driver for PowerFlex now supports volume health monitoring. This allows Kubernetes to report on the condition of the underlying volumes via events when a volume condition is abnormal. For example, if a volume were to be deleted from the array, or unmounted outside of Kubernetes, Kubernetes will now report these abnormal conditions as events.</p>
 <p>To accomplish this, the driver utilizes the external-health-monitor sidecar. When driver detects a volume condition is abnormal, the sidecar will report an event to the corresponding PVC. For example, in this event from <code>kubectl describe pvc -n &lt;ns&gt;</code> we can see that the underlying volume was deleted from the PowerFlex array:</p>
 <pre tabindex="0"><code>Events:
@@ -1401,8 +1396,7 @@ Set QoS Limits <a class="header-link"  href="#set-qos-limits" style=" display: i
 In this release this is supported at the StorageClass level, so once a volume is created QoS Settings can&rsquo;t be adjusted later.
 To accomplish this, two new parameters are introduced in the storage class: bandwidthLimitInKbps and iopsLimit.</p>
 <blockquote>
-<p>Ensure that the proper values are enabled in your storage class yaml files. Refer to the <a href="https://github.com/dell/csi-powerflex/tree/main/samples/storageclass">sample storage class yamls</a> for more details.</p>
-</blockquote>
+<p>Ensure that the proper values are enabled in your storage class yaml files. Refer to the <a href="https://github.com/dell/csi-powerflex/tree/main/samples/storageclass">sample storage class yamls</a> for more details.</p></blockquote>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">apiVersion</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">storage.k8s.io/v1</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">kind</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">StorageClass</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">metadata</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
@@ -1463,8 +1457,7 @@ Rename SDC <a class="header-link"  href="#rename-sdc" style=" display: inline-bl
 <li>If enabled and prefix not given then set worker_node_name for SDC name.</li>
 </ul>
 <blockquote>
-<p>NOTE: name of the SDC cannot be more than 31 characters, hence the prefix given and the worker node hostname name taken should be such that the total length does not exceed 31 character limit.</p>
-</blockquote>
+<p>NOTE: name of the SDC cannot be more than 31 characters, hence the prefix given and the worker node hostname name taken should be such that the total length does not exceed 31 character limit.</p></blockquote>
 <h2 id="pre-approving-sdc-by-guid">
 Pre-approving SDC by GUID <a class="header-link"  href="#pre-approving-sdc-by-guid" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
             <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
@@ -1489,8 +1482,7 @@ CSI PowerFlex driver will detect the SDC mode set on the PowerFlex array and wil
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#8f5902;font-style:italic"># Default value: false</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">enabled</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">false</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span></code></pre></div><blockquote>
-<p>NOTE: Currently, the CSI-PowerFlex driver only supports GUID for the restricted SDC mode.</p>
-</blockquote>
+<p>NOTE: Currently, the CSI-PowerFlex driver only supports GUID for the restricted SDC mode.</p></blockquote>
 <p>If SDC approval is denied, then provisioning of the volume will not be attempted and an appropriate error message is reported in the logs/events so the user is informed.</p>
 <h2 id="volume-limit">
 Volume Limit <a class="header-link"  href="#volume-limit" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
@@ -1503,8 +1495,7 @@ Volume Limit <a class="header-link"  href="#volume-limit" style=" display: inlin
 <br/> <code>kubectl label node &lt;node_name&gt; max-vxflexos-volumes-per-node=&lt;volume_limit&gt;</code></p>
 <p>The user can also set the volume limit for all the nodes in the cluster by specifying the same to <code>maxVxflexosVolumesPerNode</code> attribute in values.yaml file.</p>
 <blockquote>
-<p><strong>NOTE:</strong> <br>To reflect the changes after setting the value either via node label or in values.yaml file, user has to bounce the driver controller and node pods using the command <code>kubectl get pods -n vxflexos --no-headers=true | awk '/vxflexos-/{print $1}'| xargs kubectl delete -n vxflexos pod</code>. <br><br> If the value is set both by node label and values.yaml file then node label value will get the precedence and user has to remove the node label in order to reflect the values.yaml value. <br><br>The default value of <code>maxVxflexosVolumesPerNode</code> is 0. <br><br>If <code>maxVxflexosVolumesPerNode</code> is set to zero, then Container Orchestration decides how many volumes of this type can be published by the controller to the node.<br><br>The volume limit specified to <code>maxVxflexosVolumesPerNode</code> attribute is applicable to all the nodes in the cluster for which node label <code>max-vxflexos-volumes-per-node</code> is not set.</p>
-</blockquote>
+<p><strong>NOTE:</strong> <br>To reflect the changes after setting the value either via node label or in values.yaml file, user has to bounce the driver controller and node pods using the command <code>kubectl get pods -n vxflexos --no-headers=true | awk '/vxflexos-/{print $1}'| xargs kubectl delete -n vxflexos pod</code>. <br><br> If the value is set both by node label and values.yaml file then node label value will get the precedence and user has to remove the node label in order to reflect the values.yaml value. <br><br>The default value of <code>maxVxflexosVolumesPerNode</code> is 0. <br><br>If <code>maxVxflexosVolumesPerNode</code> is set to zero, then Container Orchestration decides how many volumes of this type can be published by the controller to the node.<br><br>The volume limit specified to <code>maxVxflexosVolumesPerNode</code> attribute is applicable to all the nodes in the cluster for which node label <code>max-vxflexos-volumes-per-node</code> is not set.</p></blockquote>
 <h2 id="nfs-volume-support">
 NFS volume support <a class="header-link"  href="#nfs-volume-support" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
             <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
@@ -1537,8 +1528,7 @@ NFS volume support <a class="header-link"  href="#nfs-volume-support" style=" di
 <li>If the PowerFlex storage system v4.0.x is configured with only block capabilities, then the user is required to give the default value for nasName as &ldquo;none&rdquo;.</li>
 </ul>
 </li>
-</ul>
-</blockquote>
+</ul></blockquote>
 <p>The user has to update the <code>secret.yaml</code>, <code>values.yaml</code> and <code>storageclass-nfs.yaml</code> with the above keys as like below:</p>
 <p><a href="https://github.com/dell/csi-powerflex/blob/main/samples/secret.yaml"><code>samples/secret.yaml</code></a></p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span>- <span style="color:#204a87;font-weight:bold">username</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;admin&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
@@ -1638,8 +1628,7 @@ Usage of Quotas to Limit Storage Consumption for NFS volumes <a class="header-li
 <li>When a volume with quota enabled is expanded then the hardLimit and softLimit are also recalculated by driver w.r.t. to the new PVC size.</li>
 <li><code>sofLimit</code> cannot be set to unlimited value (0), otherwise it will become greater than hardLimit (PVC size).</li>
 <li><code>softLimit</code> should be lesser than 100%, since hardLimit will be set to 100% (PVC size) internally by the driver.</li>
-</ul>
-</blockquote>
+</ul></blockquote>
 <h3 id="storage-class-example-with-quota-limit-parameters">
 Storage Class Example with Quota Limit Parameters <a class="header-link"  href="#storage-class-example-with-quota-limit-parameters" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
             <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
@@ -1787,7 +1776,7 @@ If such a node is not available, the pods stay in Pending state. This means pods
 </footer>
 
     </div>
-    <script src="/csm-docs/js/main.min.f72d00502781aaf278a14088eb2356b1ba2a05ad698a0c43fe86314d74ceab56.js" integrity="sha256-9y0AUCeBqvJ4oUCI6yNWsboqBa1pigxD/oYxTXTOq1Y=" crossorigin="anonymous"></script>
+    <script src="/csm-docs/js/main.min.90902a026ed2aee7ed45d85797f4c790b240ba148ac6f8a6f194cb1981ffecf5.js" integrity="sha256-kJAqAm7SruftRdhXl/THkLJAuhSKxvim8ZTLGYH/7PU=" crossorigin="anonymous"></script>
 <script src='/csm-docs/js/prism.js'></script>
 <script src='/csm-docs/js/tabpane-persist.js'></script>
 

@@ -125,7 +125,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.c6ae3eb40b4bc4f60c6c3a1af84ff339.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.3a29160b6913fd6754a7a57bf9bceb3c.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -149,7 +149,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.c6ae3eb40b4bc4f60c6c3a1af84ff339.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.3a29160b6913fd6754a7a57bf9bceb3c.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -816,8 +816,7 @@ NVMe Requirements <a class="header-link"  href="#nvme-requirements" style=" disp
 <li>All OpenShift or Kubernetes nodes connecting to Dell storage arrays must use unique host NVMe Qualified Names (NQNs).</li>
 </ul>
 <blockquote>
-<p>The OpenShift deployment process for CoreOS will set the same host NQN for all nodes. The host NQN is stored in the file /etc/nvme/hostnqn. One possible solution to ensure unique host NQNs is to add the following machine config to your OCP cluster:</p>
-</blockquote>
+<p>The OpenShift deployment process for CoreOS will set the same host NQN for all nodes. The host NQN is stored in the file /etc/nvme/hostnqn. One possible solution to ensure unique host NQNs is to add the following machine config to your OCP cluster:</p></blockquote>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">apiVersion</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">machineconfiguration.openshift.io/v1</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">kind</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">MachineConfig</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">metadata</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
@@ -852,8 +851,7 @@ NVMe Requirements <a class="header-link"  href="#nvme-requirements" style=" disp
 </ul>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cat /sys/module/nvme_core/parameters/multipath
 </span></span></code></pre></div><blockquote>
-<p>If the result of the command displays Y then NVMe native multipathing is enabled in the kernel. If the output is N then native NVMe multipating is disabled. Consult the <a href="https://elabnavigator.dell.com/vault/pdf/Linux.pdf">Dell Host Connectivity Guide</a> for Linux to enable native NVMe multipathing.</p>
-</blockquote>
+<p>If the result of the command displays Y then NVMe native multipathing is enabled in the kernel. If the output is N then native NVMe multipating is disabled. Consult the <a href="https://elabnavigator.dell.com/vault/pdf/Linux.pdf">Dell Host Connectivity Guide</a> for Linux to enable native NVMe multipathing.</p></blockquote>
 <p><strong>Configure the IO policy</strong></p>
 <ul>
 <li>The default NVMeTCP native multipathing policy is &ldquo;numa&rdquo;. The preferred IO policy for NVMe devices used for PowerStore is round-robin. You can use udev rules to enable the round robin policy on all worker nodes. To view the IO policy you can use the following command:</li>
@@ -910,8 +908,7 @@ NVMe Requirements <a class="header-link"  href="#nvme-requirements" style=" disp
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">path</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">/etc/udev/rules.d/72-nvmf-ctrl_loss_tmo.rules</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span></code></pre></div><p><strong>Requirements for NVMeTCP</strong></p>
 <blockquote>
-<p>Starting with OCP 4.14 NVMe/TCP is enabled by default on RCOS nodes.</p>
-</blockquote>
+<p>Starting with OCP 4.14 NVMe/TCP is enabled by default on RCOS nodes.</p></blockquote>
 <ul>
 <li>Modules including the nvme, nvme_core, nvme_fabrics, and nvme_tcp are required for using NVMe over Fabrics using TCP. Load the NVMe and NVMe-OF Modules using the below commands:</li>
 </ul>
@@ -925,8 +922,7 @@ NVMe Requirements <a class="header-link"  href="#nvme-requirements" style=" disp
 <li>NVMeFC Zoning of the Host Bus Adapters (HBAs) to the Fibre Channel port must be done.</li>
 </ul>
 <blockquote>
-<p>Do not load the nvme_tcp module for NVMeFC</p>
-</blockquote>
+<p>Do not load the nvme_tcp module for NVMeFC</p></blockquote>
 <h3 id="linux-multipathing-requirements">
 Linux Multipathing Requirements <a class="header-link"  href="#linux-multipathing-requirements" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
             <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
@@ -935,8 +931,7 @@ Linux Multipathing Requirements <a class="header-link"  href="#linux-multipathin
             </svg>
         </a></h3><p>Dell PowerStore supports Linux multipathing (DM-MPIO) and NVMe native multipathing. Configure Linux multipathing before installing the CSI Driver.</p>
 <blockquote>
-<p>For NVMe connectivity native NVMe multipathing is used. The following sections apply only for iSCSI and Fiber Channel connectivity.</p>
-</blockquote>
+<p>For NVMe connectivity native NVMe multipathing is used. The following sections apply only for iSCSI and Fiber Channel connectivity.</p></blockquote>
 <p>Configure Linux multipathing as follows:</p>
 <ul>
 <li>Ensure that all nodes have the <em>Device Mapper Multipathing</em> package installed.
@@ -1286,8 +1281,7 @@ Dynamic secret change detection <a class="header-link"  href="#dynamic-secret-ch
 <u><em>credentials</em></u> for the PowerStore arrays, in-flight, without restarting the driver.</p>
 <blockquote>
 <p>Note: Updates to the secret that include adding a new array, or modifying the endpoint, globalID, or blockProtocol parameters
-require the driver to be restarted to properly pick up and process the changes.</p>
-</blockquote>
+require the driver to be restarted to properly pick up and process the changes.</p></blockquote>
 <p>To do so, change the configuration file <code>config.yaml</code> and apply the update using the following command:</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sed <span style="color:#4e9a06">&#34;s/CONFIG_YAML/`cat config.yaml | base64 -w0`/g&#34;</span> secret.yaml <span style="color:#000;font-weight:bold">|</span> kubectl apply -f -
 </span></span></code></pre></div>
@@ -1388,7 +1382,7 @@ require the driver to be restarted to properly pick up and process the changes.<
 
 	  
     </div>
-    <script src="/csm-docs/js/main.min.f72d00502781aaf278a14088eb2356b1ba2a05ad698a0c43fe86314d74ceab56.js" integrity="sha256-9y0AUCeBqvJ4oUCI6yNWsboqBa1pigxD/oYxTXTOq1Y=" crossorigin="anonymous"></script>
+    <script src="/csm-docs/js/main.min.90902a026ed2aee7ed45d85797f4c790b240ba148ac6f8a6f194cb1981ffecf5.js" integrity="sha256-kJAqAm7SruftRdhXl/THkLJAuhSKxvim8ZTLGYH/7PU=" crossorigin="anonymous"></script>
 <script src='/csm-docs/js/prism.js'></script>
 <script src='/csm-docs/js/tabpane-persist.js'></script>
 

@@ -124,7 +124,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.c6ae3eb40b4bc4f60c6c3a1af84ff339.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.3a29160b6913fd6754a7a57bf9bceb3c.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -148,7 +148,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.c6ae3eb40b4bc4f60c6c3a1af84ff339.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.3a29160b6913fd6754a7a57bf9bceb3c.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -893,8 +893,7 @@ OpenShift Installation via Operator Hub <a class="header-link"  href="#openshift
                 <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
             </svg>
         </a></h3><blockquote>
-<p>NOTE: You can update the resource requests and limits when you are deploying operator using Operator Hub</p>
-</blockquote>
+<p>NOTE: You can update the resource requests and limits when you are deploying operator using Operator Hub</p></blockquote>
 <p><code>dell-csm-operator</code> can be installed via Operator Hub on upstream Kubernetes clusters &amp; Red Hat OpenShift Clusters.</p>
 <p>The installation process involves the creation of a <code>Subscription</code> object either via the <em>OperatorHub</em> UI or using <code>kubectl/oc</code>. While creating the <code>Subscription</code> you can set the Approval strategy for the <code>InstallPlan</code> for the operator to:</p>
 <ul>
@@ -923,8 +922,7 @@ Manual Installation on a cluster without OLM <a class="header-link"  href="#manu
                 <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
             </svg>
         </a></h3><blockquote>
-<p>NOTE: You can update the resource requests and limits when you are deploying operator using manual installation without OLM</p>
-</blockquote>
+<p>NOTE: You can update the resource requests and limits when you are deploying operator using manual installation without OLM</p></blockquote>
 <ol>
 <li>Install volume snapshot CRDs. For detailed snapshot setup procedure, <a href="/csm-docs/docs/snapshots/#volume-snapshot-feature">click here</a>.</li>
 <li>Clone and checkout the required csm-operator version using</li>
@@ -959,10 +957,9 @@ Manual Installation on a cluster without OLM <a class="header-link"  href="#manu
 <li>Run <code>bash scripts/install.sh</code> to install the operator.</li>
 </ol>
 <blockquote>
-<p>NOTE: Dell CSM Operator will be installed in the <code>dell-csm-operator</code> namespace.</p>
-</blockquote>
+<p>NOTE: Dell CSM Operator will be installed in the <code>dell-csm-operator</code> namespace.</p></blockquote>
 <figure class="card rounded p-2 td-post-card mb-4 mt-4" style="max-width: 2510px">
-<img class="card-img-top" src="/csm-docs/docs/deployment/csmoperator/install_hu18006664551979612774.JPG" width="2500" height="1649">
+<img class="card-img-top" src="/csm-docs/docs/deployment/csmoperator/install_hu_9bde217e859cfe8c.JPG" width="2500" height="1649">
 </figure>
 
 <ol start="8">
@@ -971,7 +968,7 @@ Manual Installation on a cluster without OLM <a class="header-link"  href="#manu
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl get pods -n dell-csm-operator
 </span></span></code></pre></div><p>If installed successfully, you should be able to see the operator pod in the <code>dell-csm-operator</code> namespace.</p>
 <figure class="card rounded p-2 td-post-card mb-4 mt-4" style="max-width: 2510px">
-<img class="card-img-top" src="/csm-docs/docs/deployment/csmoperator/install_pods_hu10368114091828838963.jpg" width="2500" height="785">
+<img class="card-img-top" src="/csm-docs/docs/deployment/csmoperator/install_pods_hu_7b1d5e9cacb7bf59.jpg" width="2500" height="785">
 </figure>
 
 <h3 id="offline-bundle-installation-on-a-cluster-without-olm">
@@ -1043,8 +1040,7 @@ Workflow <a class="header-link"  href="#workflow" style=" display: inline-block;
 <li>Perform driver installation using the files obtained after unpacking in Step 2</li>
 </ol>
 <blockquote>
-<p>NOTE: It is recommended to use the same build tool for packing and unpacking of images (either docker or podman).</p>
-</blockquote>
+<p>NOTE: It is recommended to use the same build tool for packing and unpacking of images (either docker or podman).</p></blockquote>
 <h4 id="building-an-offline-bundle">
 Building an offline bundle <a class="header-link"  href="#building-an-offline-bundle" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
             <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
@@ -1052,8 +1048,7 @@ Building an offline bundle <a class="header-link"  href="#building-an-offline-bu
                 <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
             </svg>
         </a></h4><blockquote>
-<p>NOTE: Login to the <code>registry.redhat.io</code> registry using RedHat credentials before you proceed with offline bundle creation.</p>
-</blockquote>
+<p>NOTE: Login to the <code>registry.redhat.io</code> registry using RedHat credentials before you proceed with offline bundle creation.</p></blockquote>
 <p>This needs to be performed on a Linux system with access to the Internet as a git repo will need to be cloned, and container images pulled from public registries.</p>
 <p>To build an offline bundle, the following steps are needed:</p>
 <ol>
@@ -1209,8 +1204,7 @@ Perform Operator installation <a class="header-link"  href="#perform-operator-in
         </a></h4><p>Now that the required images are available and the Operator configuration updated, you can proceed to install the operator by executing <code>install.sh</code> script.</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>bash scripts/install.sh
 </span></span></code></pre></div><blockquote>
-<p>NOTE: Dell CSM Operator would install to the &lsquo;dell-csm-operator&rsquo; namespace by default.</p>
-</blockquote>
+<p>NOTE: Dell CSM Operator would install to the &lsquo;dell-csm-operator&rsquo; namespace by default.</p></blockquote>
 <h2 id="uninstall">
 Uninstall <a class="header-link"  href="#uninstall" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
             <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
@@ -1225,7 +1219,7 @@ Operator uninstallation on a cluster without OLM <a class="header-link"  href="#
             </svg>
         </a></h3><p>To uninstall a CSM operator, run <code>bash scripts/uninstall.sh</code>. This will uninstall the operator in <code>dell-csm-operator</code> namespace.</p>
 <figure class="card rounded p-2 td-post-card mb-4 mt-4" style="max-width: 2510px">
-<img class="card-img-top" src="/csm-docs/docs/deployment/csmoperator/uninstall_hu13292128117025961793.JPG" width="2500" height="738">
+<img class="card-img-top" src="/csm-docs/docs/deployment/csmoperator/uninstall_hu_d99f461ae08c2887.JPG" width="2500" height="738">
 </figure>
 
 <h2 id="upgrade">
@@ -1262,11 +1256,9 @@ Using OLM <a class="header-link"  href="#using-olm" style=" display: inline-bloc
 <li>If the upgrade policy is set to <code>Manual</code>, OpenShift notifies of an available upgrade. This notification can be viewed by the user in the <strong><code>Installed Operators</code></strong> section of the OpenShift console. Clicking on the hyperlink to <code>Approve</code> the installation would trigger the dell-csm-operator upgrade process.</li>
 </ul>
 <blockquote>
-<p>NOTE: The recommended version of OLM for Upstream Kubernetes is <strong><code>v0.25.0</code></strong>.</p>
-</blockquote>
+<p>NOTE: The recommended version of OLM for Upstream Kubernetes is <strong><code>v0.25.0</code></strong>.</p></blockquote>
 <blockquote>
-<p>NOTE: The recommended <strong><code>Update approval</code></strong> is <strong><code>Manual</code></strong> to prevent the installation of non-qualified versions of operator.</p>
-</blockquote>
+<p>NOTE: The recommended <strong><code>Update approval</code></strong> is <strong><code>Manual</code></strong> to prevent the installation of non-qualified versions of operator.</p></blockquote>
 <h4 id="using-installation-script">
 Using Installation Script <a class="header-link"  href="#using-installation-script" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
             <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
@@ -1282,8 +1274,7 @@ Using Installation Script <a class="header-link"  href="#using-installation-scri
 <li>Execute <code>bash scripts/install.sh --upgrade</code>  . This command will install the latest version of the operator.</li>
 </ol>
 <blockquote>
-<p>NOTE: Dell CSM Operator would install to the &lsquo;dell-csm-operator&rsquo; namespace by default.</p>
-</blockquote>
+<p>NOTE: Dell CSM Operator would install to the &lsquo;dell-csm-operator&rsquo; namespace by default.</p></blockquote>
 <h3 id="upgrading-drivers-with-dell-csm-operator">
 Upgrading Drivers with Dell CSM Operator <a class="header-link"  href="#upgrading-drivers-with-dell-csm-operator" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
             <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
@@ -1308,8 +1299,7 @@ Upgrading Drivers with Dell CSM Operator <a class="header-link"  href="#upgradin
 <li>Refer how to <a href="https://infohub.delltechnologies.com/en-us/p/best-practices-for-deployment-and-life-cycle-management-of-dell-csm-modules-1/#:~:text=Upgrades%20with%20Operator">upgrade</a> guide if you have more questions </br></li>
 </ol>
 <blockquote>
-<p>Note: Starting with CSM 1.12, use images from <a href="https://quay.io/organization/dell">quay.io</a>. From CSM 1.14 (May 2025), editing the CSM object will fail if using images from <a href="https://hub.docker.com/r/dellemc/">Docker Hub</a>.</p>
-</blockquote>
+<p>Note: Starting with CSM 1.12, use images from <a href="https://quay.io/organization/dell">quay.io</a>. From CSM 1.14 (May 2025), editing the CSM object will fail if using images from <a href="https://hub.docker.com/r/dellemc/">Docker Hub</a>.</p></blockquote>
 <h3 id="upgrade-modules-using-dell-csm-operator">
 Upgrade Modules using Dell CSM Operator <a class="header-link"  href="#upgrade-modules-using-dell-csm-operator" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
             <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
@@ -1369,8 +1359,7 @@ Optional fields <a class="header-link"  href="#optional-fields" style=" display:
 <p><strong>tolerations</strong> - List of tolerations which should be applied to the driver StatefulSet/Deployment and DaemonSet. It should be set separately in the controller and node sections if you want separate set of tolerations for them.</p>
 <p><strong>nodeSelector</strong> - Used to specify node selectors for the driver StatefulSet/Deployment and DaemonSet.</p>
 <blockquote>
-<p>NOTE: The <code>image</code> field should point to the correct image tag for version of the driver you are installing.</p>
-</blockquote>
+<p>NOTE: The <code>image</code> field should point to the correct image tag for version of the driver you are installing.</p></blockquote>
 
         <div class="section-index">
     
@@ -1451,7 +1440,7 @@ Optional fields <a class="header-link"  href="#optional-fields" style=" display:
 
 	  
     </div>
-    <script src="/csm-docs/js/main.min.f72d00502781aaf278a14088eb2356b1ba2a05ad698a0c43fe86314d74ceab56.js" integrity="sha256-9y0AUCeBqvJ4oUCI6yNWsboqBa1pigxD/oYxTXTOq1Y=" crossorigin="anonymous"></script>
+    <script src="/csm-docs/js/main.min.90902a026ed2aee7ed45d85797f4c790b240ba148ac6f8a6f194cb1981ffecf5.js" integrity="sha256-kJAqAm7SruftRdhXl/THkLJAuhSKxvim8ZTLGYH/7PU=" crossorigin="anonymous"></script>
 <script src='/csm-docs/js/prism.js'></script>
 <script src='/csm-docs/js/tabpane-persist.js'></script>
 

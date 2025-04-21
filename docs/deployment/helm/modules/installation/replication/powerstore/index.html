@@ -125,7 +125,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.c6ae3eb40b4bc4f60c6c3a1af84ff339.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.3a29160b6913fd6754a7a57bf9bceb3c.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -149,7 +149,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.c6ae3eb40b4bc4f60c6c3a1af84ff339.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.3a29160b6913fd6754a7a57bf9bceb3c.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -797,8 +797,7 @@ Helm parameter <code>controller.replication.enabled</code> in your copy of examp
 usual installation procedure, just ensure you&rsquo;ve added necessary array connection information to secret.</p>
 <blockquote>
 <p><strong><em>NOTE:</em></strong> You need to install your driver on all clusters where you want to use replication. Both arrays
-must be accessible from each cluster.</p>
-</blockquote>
+must be accessible from each cluster.</p></blockquote>
 <h3 id="creating-storage-classes">
 Creating Storage Classes <a class="header-link"  href="#creating-storage-classes" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
             <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
@@ -842,8 +841,7 @@ just leave it as <code>true</code>.</li>
 <li><code>replication.storage.dell.com/mode</code> points to the replication mode you want to use. It should be one out of &ldquo;ASYNC&rdquo;, &ldquo;SYNC&rdquo; and &ldquo;METRO&rdquo;. The default value is &lsquo;ASYNC&rsquo;. If mode is set to &lsquo;METRO&rsquo;, the driver does not need <code>remoteStorageClassName</code> and <code>remoteClusterID</code> parameters as it supports METRO with single cluster configuration.</li>
 </ul>
 <blockquote>
-<p><em><strong>NOTE</strong></em>: Metro mode doesn&rsquo;t involve the replication sidecar or the common replication controller, nor does it cause the creation of any replication related custom resources. It just needs the <code>csi-powerstore</code> driver.</p>
-</blockquote>
+<p><em><strong>NOTE</strong></em>: Metro mode doesn&rsquo;t involve the replication sidecar or the common replication controller, nor does it cause the creation of any replication related custom resources. It just needs the <code>csi-powerstore</code> driver.</p></blockquote>
 <ul>
 <li><code>replication.storage.dell.com/remoteStorageClassName</code> points to the name of the remote storage class. If you are using replication with the multi-cluster configuration you can make it the same as the current storage class name.</li>
 <li><code>replication.storage.dell.com/remoteClusterID</code> represents ID of a remote Kubernetes cluster. It is the same ID you put in the replication controller config map.</li>
@@ -854,8 +852,7 @@ that may be lost due to a failure. For &lsquo;SYNC&rsquo; mode, RPO will be set 
 <li><code>replication.storage.dell.com/volumeGroupPrefix</code> represents what string would be appended to the volume group name to differentiate them. It is important to not use the same prefix for different kubernetes clusters, otherwise any action on a replication group in one kubernetes cluster will impact the other. This parameter is not applicable for Metro mode.</li>
 </ul>
 <blockquote>
-<p><em><strong>NOTE</strong></em>: To configure the VolumeGroupPrefix, the name format of '&lt;volumeGroupPrefix&gt;-&lt;namespace&gt;-&lt;Cluster Name&gt;-&lt;rpo&gt;&rsquo; cannot be more than 63 characters.</p>
-</blockquote>
+<p><em><strong>NOTE</strong></em>: To configure the VolumeGroupPrefix, the name format of '&lt;volumeGroupPrefix&gt;-&lt;namespace&gt;-&lt;Cluster Name&gt;-&lt;rpo&gt;&rsquo; cannot be more than 63 characters.</p></blockquote>
 <ul>
 <li><code>arrayID</code> is a unique identifier of the storage array you specified in array connection secret.</li>
 </ul>
@@ -958,8 +955,7 @@ using the parameters provided in the replication enabled Storage Class.</p>
 To add or remove volumes in an existing SYNC Replication Group in PowerStore, first pause the replication group, add or delete the volume, and then resume the replication group.<br>
 Use the following commands:<br>
 &gt; - Pause the replication group:  <code>repctl --rg &lt;rg-id&gt; exec -a suspend</code>
-&gt; - Resume the replication group:   <code>repctl --rg &lt;rg-id&gt; exec -a resume</code></p>
-</blockquote>
+&gt; - Resume the replication group:   <code>repctl --rg &lt;rg-id&gt; exec -a resume</code></p></blockquote>
 <h3 id="supported-replication-actions">
 Supported Replication Actions <a class="header-link"  href="#supported-replication-actions" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
             <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
@@ -1073,7 +1069,7 @@ Supported Replication Actions <a class="header-link"  href="#supported-replicati
 
 	  
     </div>
-    <script src="/csm-docs/js/main.min.f72d00502781aaf278a14088eb2356b1ba2a05ad698a0c43fe86314d74ceab56.js" integrity="sha256-9y0AUCeBqvJ4oUCI6yNWsboqBa1pigxD/oYxTXTOq1Y=" crossorigin="anonymous"></script>
+    <script src="/csm-docs/js/main.min.90902a026ed2aee7ed45d85797f4c790b240ba148ac6f8a6f194cb1981ffecf5.js" integrity="sha256-kJAqAm7SruftRdhXl/THkLJAuhSKxvim8ZTLGYH/7PU=" crossorigin="anonymous"></script>
 <script src='/csm-docs/js/prism.js'></script>
 <script src='/csm-docs/js/tabpane-persist.js'></script>
 

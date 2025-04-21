@@ -17,12 +17,12 @@
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="docs">
-    <meta property="article:modified_time" content="2025-03-27T16:05:56-04:00">
+    <meta property="article:modified_time" content="2025-04-21T11:36:34-04:00">
 
   <meta itemprop="name" content="PowerMax">
   <meta itemprop="description" content="Release notes for PowerMax CSI driver">
-  <meta itemprop="dateModified" content="2025-03-27T16:05:56-04:00">
-  <meta itemprop="wordCount" content="733">
+  <meta itemprop="dateModified" content="2025-04-21T11:36:34-04:00">
+  <meta itemprop="wordCount" content="833">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="PowerMax">
   <meta name="twitter:description" content="Release notes for PowerMax CSI driver">
@@ -125,7 +125,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.c6ae3eb40b4bc4f60c6c3a1af84ff339.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.3a29160b6913fd6754a7a57bf9bceb3c.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -149,7 +149,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.c6ae3eb40b4bc4f60c6c3a1af84ff339.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.3a29160b6913fd6754a7a57bf9bceb3c.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -721,14 +721,11 @@ Release Notes - CSI PowerMax v2.13.0 <a class="header-link"  href="#release-note
                 <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
             </svg>
         </a></h2><blockquote>
-<p>Note: Auto SRDF group creation is currently not supported in PowerMaxOS 10.1 (6079) Arrays.</p>
-</blockquote>
+<p>Note: Auto SRDF group creation is currently not supported in PowerMaxOS 10.1 (6079) Arrays.</p></blockquote>
 <blockquote>
-<p>Note: Starting from CSI v2.4.0, Only Unisphere 10.0 REST endpoints are supported. It is mandatory that Unisphere should be updated to 10.0. Please find the instructions <a href="https://dl.dell.com/content/manual34878027-dell-unisphere-for-powermax-10-0-0-installation-guide.pdf?language=en-us&amp;ps=true">here.</a></p>
-</blockquote>
+<p>Note: Starting from CSI v2.4.0, Only Unisphere 10.0 REST endpoints are supported. It is mandatory that Unisphere should be updated to 10.0. Please find the instructions <a href="https://dl.dell.com/content/manual34878027-dell-unisphere-for-powermax-10-0-0-installation-guide.pdf?language=en-us&amp;ps=true">here.</a></p></blockquote>
 <blockquote>
-<p>Note: File Replication for PowerMax is currently not supported</p>
-</blockquote>
+<p>Note: File Replication for PowerMax is currently not supported</p></blockquote>
 <h3 id="new-featureschanges">
 New Features/Changes <a class="header-link"  href="#new-featureschanges" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
             <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
@@ -736,6 +733,7 @@ New Features/Changes <a class="header-link"  href="#new-featureschanges" style="
                 <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
             </svg>
         </a></h3><ul>
+<li><a href="https://github.com/dell/csm/issues/1560">#1560 - [FEATURE]: CSM support for OpenShift 4.18</a></li>
 <li><a href="https://github.com/dell/csm/issues/1561">#1561 - [FEATURE]: Added support for Kubernetes 1.32 </a></li>
 </ul>
 <h3 id="fixed-issues">
@@ -806,6 +804,10 @@ Known Issues <a class="header-link"  href="#known-issues" style=" display: inlin
       <tr>
           <td>When using Helm charts to install the driver with multiple PowerMax arrays, the <code>powermax-array-config</code> ConfigMap is incorrectly created, resulting in multiple <code>X_CSI_POWERMAX_ENDPOINT</code> entries. This causes the driver pods to crash with the error <code>&quot;mapping key &quot;X_CSI_POWERMAX_ENDPOINT&quot; already defined&quot;</code>.</td>
           <td>This issue has been reported at <a href="https://github.com/dell/csm/issues/1760">https://github.com/dell/csm/issues/1760</a>. Workaround: <br /> 1. Edit the ConfigMap <code>powermax-array-config</code> and remove all instances of <code>X_CSI_POWERMAX_ENDPOINT</code>. <br /> <code>kubectl edit configmaps powermax-array-config -n &lt;csi-powermax-namespace&gt;</code> <br /> 2. Restart the driver pods.  <br /> <code>kubectl rollout restart deployment,daemonset -n &lt;csi-powermax-namespace&gt;</code> <br /> Note: Users may also need to delete any old ReplicaSets in order to bring the new controllers up.</td>
+      </tr>
+      <tr>
+          <td>When using Helm charts to install the driver with multiple PowerMax arrays, the <code>powermax-array-config</code> ConfigMap is incorrectly created, resulting in multiple <code>X_CSI_POWERMAX_ENDPOINT</code> entries. This causes the driver pods to crash with the error <code>&quot;mapping key &quot;X_CSI_POWERMAX_ENDPOINT&quot; already defined&quot;</code>.</td>
+          <td>This issue has been reported at <a href="https://github.com/dell/csm/issues/1760">https://github.com/dell/csm/issues/1760</a>. Workaround: <br /> 1. Edit the ConfigMap <code>powermax-array-config</code> and remove all instances of <code>X_CSI_POWERMAX_ENDPOINT</code>. <br /> <code>kubectl edit configmaps powermax-array-config -n &lt;csi-powermax-namespace&gt;</code> <br /> 2. Restart the driver pods. <br /> <code>kubectl rollout restart deployment,daemonset -n &lt;csi-powermax-namespace&gt;</code> <br /> Note: Users may also need to delete any old ReplicaSets in order to bring the new controllers up.</td>
       </tr>
   </tbody>
 </table>
@@ -916,7 +918,7 @@ Note: <a class="header-link"  href="#note" style=" display: inline-block; opacit
 
 	  
     </div>
-    <script src="/csm-docs/js/main.min.f72d00502781aaf278a14088eb2356b1ba2a05ad698a0c43fe86314d74ceab56.js" integrity="sha256-9y0AUCeBqvJ4oUCI6yNWsboqBa1pigxD/oYxTXTOq1Y=" crossorigin="anonymous"></script>
+    <script src="/csm-docs/js/main.min.90902a026ed2aee7ed45d85797f4c790b240ba148ac6f8a6f194cb1981ffecf5.js" integrity="sha256-kJAqAm7SruftRdhXl/THkLJAuhSKxvim8ZTLGYH/7PU=" crossorigin="anonymous"></script>
 <script src='/csm-docs/js/prism.js'></script>
 <script src='/csm-docs/js/tabpane-persist.js'></script>
 

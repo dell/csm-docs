@@ -124,7 +124,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.c6ae3eb40b4bc4f60c6c3a1af84ff339.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.3a29160b6913fd6754a7a57bf9bceb3c.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -148,7 +148,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.c6ae3eb40b4bc4f60c6c3a1af84ff339.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.3a29160b6913fd6754a7a57bf9bceb3c.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -882,11 +882,9 @@ Secret <em>vault-auth</em> <a class="header-link"  href="#secret-vault-auth" sty
             </svg>
         </a></h3><p>A secret with the AppRole credentials used by Encryption to authenticate to the Vault server.</p>
 <blockquote>
-<p>Set <code>role_id</code> and <code>secret_id</code> to the values provided by the Vault server administrator.</p>
-</blockquote>
+<p>Set <code>role_id</code> and <code>secret_id</code> to the values provided by the Vault server administrator.</p></blockquote>
 <blockquote>
-<p>If a self-managed test Vault instance is used, generate role ID and secret ID following <a href="/csm-docs/v3/deployment/helm/modules/installation/encryption/vault/#set-role-id-and-secret-id-to-the-role">these steps</a>.</p>
-</blockquote>
+<p>If a self-managed test Vault instance is used, generate role ID and secret ID following <a href="/csm-docs/v3/deployment/helm/modules/installation/encryption/vault/#set-role-id-and-secret-id-to-the-role">these steps</a>.</p></blockquote>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>cat &gt;auth.json <span style="color:#4e9a06">&lt;&lt;EOF
 </span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">{
 </span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">	&#34;role_id&#34;: &#34;&lt;role ID&gt;&#34;,
@@ -912,8 +910,7 @@ Secret <em>vault-cert</em> <a class="header-link"  href="#secret-vault-cert" sty
             </svg>
         </a></h3><p>A secret with TLS certificates used by Encryption to communicate with the Vault server.</p>
 <blockquote>
-<p>Files <em>server-ca.crt</em>, <em>client.crt</em> and <em>client.key</em> should be in PEM format.</p>
-</blockquote>
+<p>Files <em>server-ca.crt</em>, <em>client.crt</em> and <em>client.key</em> should be in PEM format.</p></blockquote>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>kubectl create secret generic vault-cert -n &lt;driver namespace&gt; <span style="color:#4e9a06">\
 </span></span></span><span style="display:flex;"><span><span style="color:#4e9a06"></span>	--from-file<span style="color:#ce5c00;font-weight:bold">=</span>server-ca.crt --from-file<span style="color:#ce5c00;font-weight:bold">=</span>client.crt --from-file<span style="color:#ce5c00;font-weight:bold">=</span>client.key <span style="color:#4e9a06">\
 </span></span></span><span style="display:flex;"><span><span style="color:#4e9a06"></span>	-o yaml --dry-run<span style="color:#ce5c00;font-weight:bold">=</span>client <span style="color:#000;font-weight:bold">|</span> kubectl apply -f -
@@ -927,8 +924,7 @@ ConfigMap <em>vault-client-conf</em> <a class="header-link"  href="#configmap-va
             </svg>
         </a></h3><p>A config map with settings used by Encryption to communicate with the Vault server.</p>
 <blockquote>
-<p>Populate <em>client.json</em> with your settings.</p>
-</blockquote>
+<p>Populate <em>client.json</em> with your settings.</p></blockquote>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>cat &gt;client.json <span style="color:#4e9a06">&lt;&lt;EOF
 </span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">{
 </span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">	&#34;auth_type&#34;: &#34;approle&#34;,
@@ -1080,7 +1076,7 @@ ConfigMap <em>vault-client-conf</em> <a class="header-link"  href="#configmap-va
 </footer>
 
     </div>
-    <script src="/csm-docs/js/main.min.f72d00502781aaf278a14088eb2356b1ba2a05ad698a0c43fe86314d74ceab56.js" integrity="sha256-9y0AUCeBqvJ4oUCI6yNWsboqBa1pigxD/oYxTXTOq1Y=" crossorigin="anonymous"></script>
+    <script src="/csm-docs/js/main.min.90902a026ed2aee7ed45d85797f4c790b240ba148ac6f8a6f194cb1981ffecf5.js" integrity="sha256-kJAqAm7SruftRdhXl/THkLJAuhSKxvim8ZTLGYH/7PU=" crossorigin="anonymous"></script>
 <script src='/csm-docs/js/prism.js'></script>
 <script src='/csm-docs/js/tabpane-persist.js'></script>
 

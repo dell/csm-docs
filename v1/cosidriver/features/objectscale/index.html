@@ -125,7 +125,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.c6ae3eb40b4bc4f60c6c3a1af84ff339.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.3a29160b6913fd6754a7a57bf9bceb3c.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -149,7 +149,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.c6ae3eb40b4bc4f60c6c3a1af84ff339.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.3a29160b6913fd6754a7a57bf9bceb3c.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -755,8 +755,7 @@ Prerequisites <a class="header-link"  href="#prerequisites" style=" display: inl
 <li>Container Object Storage Interface Controller</li>
 </ul>
 <blockquote>
-<p>ℹ️ <strong>NOTE:</strong> use <a href="https://container-object-storage-interface.github.io/docs/deployment-guide#quick-start">the official COSI guide</a> to deploy the required components.</p>
-</blockquote>
+<p>ℹ️ <strong>NOTE:</strong> use <a href="https://container-object-storage-interface.github.io/docs/deployment-guide#quick-start">the official COSI guide</a> to deploy the required components.</p></blockquote>
 <h2 id="kubernetes-objects">
 Kubernetes Objects <a class="header-link"  href="#kubernetes-objects" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
             <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
@@ -841,8 +840,7 @@ Dell COSI Driver is a multi-backend driver, meaning that for every platform the 
                 <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
             </svg>
         </a></h4><blockquote>
-<p>⚠ <strong>WARNING:</strong> this field is case sensitive, and the bucket deletion will fail if policy is not set exactly to <em>Delete</em> or <em>Retain</em>.</p>
-</blockquote>
+<p>⚠ <strong>WARNING:</strong> this field is case sensitive, and the bucket deletion will fail if policy is not set exactly to <em>Delete</em> or <em>Retain</em>.</p></blockquote>
 <p><code>deletionPolicy</code> in <code>BucketClass</code> resource is used to specify how COSI should handle deletion of the bucket. There are two possible values:</p>
 <ul>
 <li><strong>Retain</strong>: Indicates that the bucket should not be deleted from the object store. The underlying bucket is not cleaned up when the Bucket object is deleted. With this option, the bucket is unreachable from Kubernetes level.</li>
@@ -880,8 +878,7 @@ The default sample is shown below:</p>
                 <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
             </svg>
         </a></h4><blockquote>
-<p>⚠ <strong>WARNING:</strong> this field is case sensitive, and the granting access will fail if it is not set exactly to <em>Key</em> or <em>IAM</em>.</p>
-</blockquote>
+<p>⚠ <strong>WARNING:</strong> this field is case sensitive, and the granting access will fail if it is not set exactly to <em>Key</em> or <em>IAM</em>.</p></blockquote>
 <p><code>authenticationType</code> denotes the style of authentication. The only supported option for COSI Driver is <code>Key</code>.</p>
 <h4 id="unsupported-options-1">
 Unsupported options <a class="header-link"  href="#unsupported-options-1" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
@@ -916,8 +913,7 @@ Bucket Access <a class="header-link"  href="#bucket-access" style=" display: inl
                 <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
             </svg>
         </a></h4><blockquote>
-<p>⚠ <strong>WARNING:</strong> this field is case sensitive, and the provisioning will fail if protocol is not set exactly to <em>S3</em>.</p>
-</blockquote>
+<p>⚠ <strong>WARNING:</strong> this field is case sensitive, and the provisioning will fail if protocol is not set exactly to <em>S3</em>.</p></blockquote>
 <p><code>spec.protocol</code> is the name of the Protocol that this access credential is supposed to support.</p>
 <h4 id="unsupported-options-2">
 Unsupported options <a class="header-link"  href="#unsupported-options-2" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
@@ -1111,8 +1107,7 @@ Greenfield Provisioning <a class="header-link"  href="#greenfield-provisioning" 
 </span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">  protocols: [ &#39;S3&#39; ]
 </span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">EOF</span>
 </span></span></code></pre></div><blockquote>
-<p>ℹ️ <strong>NOTE:</strong> remember to replace <em>my-namespace</em>, <em>my-bucketclass</em> and <em>my-bucketclaim</em> with actual values.</p>
-</blockquote>
+<p>ℹ️ <strong>NOTE:</strong> remember to replace <em>my-namespace</em>, <em>my-bucketclass</em> and <em>my-bucketclaim</em> with actual values.</p></blockquote>
 <h4 id="brownfield-provisioning">
 Brownfield Provisioning <a class="header-link"  href="#brownfield-provisioning" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
             <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
@@ -1145,8 +1140,7 @@ Brownfield Provisioning <a class="header-link"  href="#brownfield-provisioning" 
 </span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">  protocols: [ &#39;S3&#39; ]
 </span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">EOF</span>
 </span></span></code></pre></div><blockquote>
-<p>ℹ️ <strong>NOTE:</strong> remember to replace <em>my-namespace</em>, <em>existing-bucket-name</em> and <em>my-bucketclaim</em> with actual values.</p>
-</blockquote>
+<p>ℹ️ <strong>NOTE:</strong> remember to replace <em>my-namespace</em>, <em>existing-bucket-name</em> and <em>my-bucketclaim</em> with actual values.</p></blockquote>
 <h2 id="deleting-buckets">
 Deleting Buckets <a class="header-link"  href="#deleting-buckets" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
             <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
@@ -1157,8 +1151,7 @@ Deleting Buckets <a class="header-link"  href="#deleting-buckets" style=" displa
 <p>The following example shows how to delete a <code>BucketClaim</code>.</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl --namespace<span style="color:#ce5c00;font-weight:bold">=</span>my-namespace delete bucketclaim my-bucketclaim
 </span></span></code></pre></div><blockquote>
-<p>ℹ️ <strong>NOTE:</strong> remember to replace <em>my-namespace</em> and <em>my-bucketclaim</em> with actual values.</p>
-</blockquote>
+<p>ℹ️ <strong>NOTE:</strong> remember to replace <em>my-namespace</em> and <em>my-bucketclaim</em> with actual values.</p></blockquote>
 <h2 id="granting-access">
 Granting Access <a class="header-link"  href="#granting-access" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
             <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
@@ -1190,8 +1183,7 @@ End-user Steps <a class="header-link"  href="#end-user-steps-1" style=" display:
                 <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
             </svg>
         </a></h3><blockquote>
-<p>⚠ <strong>WARNING:</strong> only full access granting is supported.</p>
-</blockquote>
+<p>⚠ <strong>WARNING:</strong> only full access granting is supported.</p></blockquote>
 <p>The underlying workflow for granting access to the object storage primitive is:</p>
 <ul>
 <li>user is added to particular account in the ObjectScale;</li>
@@ -1211,8 +1203,7 @@ End-user Steps <a class="header-link"  href="#end-user-steps-1" style=" display:
 </span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">  protocol: S3
 </span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">EOF</span>
 </span></span></code></pre></div><blockquote>
-<p>ℹ️ <strong>NOTE:</strong> remember to replace <em>my-namespace</em>, <em>my-bucketaccessclass</em>, <em>my-bucketclaim</em>, <em>my-s3-secret</em> and <em>my-bucketaccess</em> with actual values.</p>
-</blockquote>
+<p>ℹ️ <strong>NOTE:</strong> remember to replace <em>my-namespace</em>, <em>my-bucketaccessclass</em>, <em>my-bucketclaim</em>, <em>my-s3-secret</em> and <em>my-bucketaccess</em> with actual values.</p></blockquote>
 <h2 id="revoking-access">
 Revoking Access <a class="header-link"  href="#revoking-access" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
             <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
@@ -1229,8 +1220,7 @@ When resource of <code>BucketAccess</code> kind is removed from Kubernetes it tr
 <p>The following example shows how to revoke a <code>BucketAccess</code>:</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl --namespace<span style="color:#ce5c00;font-weight:bold">=</span>my-namespace delete bucketaccess my-bucketaccess
 </span></span></code></pre></div><blockquote>
-<p>ℹ️ <strong>NOTE:</strong> remember to replace <em>my-namespace</em> and <em>my-bucketaccess</em> with actual values.</p>
-</blockquote>
+<p>ℹ️ <strong>NOTE:</strong> remember to replace <em>my-namespace</em> and <em>my-bucketaccess</em> with actual values.</p></blockquote>
 
 	<style>
   .feedback--answer {
@@ -1327,7 +1317,7 @@ When resource of <code>BucketAccess</code> kind is removed from Kubernetes it tr
 </footer>
 
     </div>
-    <script src="/csm-docs/js/main.min.f72d00502781aaf278a14088eb2356b1ba2a05ad698a0c43fe86314d74ceab56.js" integrity="sha256-9y0AUCeBqvJ4oUCI6yNWsboqBa1pigxD/oYxTXTOq1Y=" crossorigin="anonymous"></script>
+    <script src="/csm-docs/js/main.min.90902a026ed2aee7ed45d85797f4c790b240ba148ac6f8a6f194cb1981ffecf5.js" integrity="sha256-kJAqAm7SruftRdhXl/THkLJAuhSKxvim8ZTLGYH/7PU=" crossorigin="anonymous"></script>
 <script src='/csm-docs/js/prism.js'></script>
 <script src='/csm-docs/js/tabpane-persist.js'></script>
 

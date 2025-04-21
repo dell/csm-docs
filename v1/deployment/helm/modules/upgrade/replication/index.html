@@ -125,7 +125,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.c6ae3eb40b4bc4f60c6c3a1af84ff339.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.3a29160b6913fd6754a7a57bf9bceb3c.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -149,7 +149,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.c6ae3eb40b4bc4f60c6c3a1af84ff339.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.3a29160b6913fd6754a7a57bf9bceb3c.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -737,8 +737,7 @@ CSM Replication module consists of two components:</p>
 <p>Those two components should be upgraded separately. When upgrading them ensure that you use the same versions for both sidecar and
 controller, because different versions could be incompatible with each other.</p>
 <blockquote>
-<p><em><strong>Note</strong></em>: While upgrading the module via helm, the <code>replicas</code> variable in <code>myvalues.yaml</code> can be at most one less than the number of worker nodes.</p>
-</blockquote>
+<p><em><strong>Note</strong></em>: While upgrading the module via helm, the <code>replicas</code> variable in <code>myvalues.yaml</code> can be at most one less than the number of worker nodes.</p></blockquote>
 <h2 id="updating-csm-replication-sidecar">
 Updating CSM Replication sidecar <a class="header-link"  href="#updating-csm-replication-sidecar" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
             <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
@@ -747,8 +746,7 @@ Updating CSM Replication sidecar <a class="header-link"  href="#updating-csm-rep
             </svg>
         </a></h2><p>To upgrade the CSM Replication sidecar that is installed along with the driver, the following steps are required.</p>
 <blockquote>
-<p><em><strong>Note</strong></em>: These steps refer to the values file and <code>csi-install.sh</code> script that was used during the initial installation of the Dell CSI driver.</p>
-</blockquote>
+<p><em><strong>Note</strong></em>: These steps refer to the values file and <code>csi-install.sh</code> script that was used during the initial installation of the Dell CSI driver.</p></blockquote>
 <p><strong>Steps</strong></p>
 <ol>
 <li>Update the <code>controller.replication.image</code> value in the values files to reference the new CSM Replication sidecar image.</li>
@@ -759,8 +757,7 @@ Updating CSM Replication sidecar <a class="header-link"  href="#updating-csm-rep
 <li>Run the same command on the second Kubernetes cluster if you use multi-cluster replication topology</li>
 </ol>
 <blockquote>
-<p>For more information on upgrading the CSI driver, please visit the <a href="../../../drivers/upgrade">CSI driver upgrade page</a>.</p>
-</blockquote>
+<p>For more information on upgrading the CSI driver, please visit the <a href="../../../drivers/upgrade">CSI driver upgrade page</a>.</p></blockquote>
 <h3 id="powerscale">
 PowerScale <a class="header-link"  href="#powerscale" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
             <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
@@ -804,8 +801,7 @@ Upgrading with Helm <a class="header-link"  href="#upgrading-with-helm" style=" 
 </ol>
 <blockquote>
 <p><em><strong>Note</strong></em>: Upgrade won&rsquo;t override currently existing ConfigMap, even if you change templated values in myvalues.yaml file. If you want to change the logLevel - edit ConfigMap from within the cluster using
-<code>bash  kubectl edit cm -n dell-replication-controller dell-replication-controller-config   </code></p>
-</blockquote>
+<code>bash  kubectl edit cm -n dell-replication-controller dell-replication-controller-config   </code></p></blockquote>
 <h3 id="upgrading-with-repctl">
 Upgrading with repctl <a class="header-link"  href="#upgrading-with-repctl" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
             <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
@@ -813,8 +809,7 @@ Upgrading with repctl <a class="header-link"  href="#upgrading-with-repctl" styl
                 <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
             </svg>
         </a></h3><blockquote>
-<p><em><strong>Note</strong></em>: These steps assume that you already have <code>repctl</code> configured to use correct clusters, if you don&rsquo;t know how to do that please refer to <a href="../../installation/replication/install-repctl">installing with repctl</a></p>
-</blockquote>
+<p><em><strong>Note</strong></em>: These steps assume that you already have <code>repctl</code> configured to use correct clusters, if you don&rsquo;t know how to do that please refer to <a href="../../installation/replication/install-repctl">installing with repctl</a></p></blockquote>
 <p><strong>Steps</strong></p>
 <ol>
 <li>
@@ -839,8 +834,7 @@ Replication CRD version update <a class="header-link"  href="#replication-crd-ve
             </svg>
         </a></h3><p>CRD <code>dellcsireplicationgroups.replication.storage.dell.com</code> has been updated to version <code>v1</code> in CSM Replication v1.4.0. To facilitate the continued use of existing <code>DellCSIReplicationGroup</code> CR objects after upgrading to CSM Replication v1.4.0 or later, an <code>init container</code> will be deployed during upgrade. The <code>init container</code> updates the existing CRs with necessary steps for their continued use.</p>
 <blockquote>
-<p><em><strong>Note</strong></em>: Do not update the CRD as part of upgrade. An <code>init container</code> included in the replication controller pod takes care of updating existing CRD and CR versions.</p>
-</blockquote>
+<p><em><strong>Note</strong></em>: Do not update the CRD as part of upgrade. An <code>init container</code> included in the replication controller pod takes care of updating existing CRD and CR versions.</p></blockquote>
 <p>Starting from CSM Replication v1.6.0, the <code>init container</code> has been removed. Therefore, when upgrading from versions older than v1.4.0 to v1.6.0 or any later versions, it is mandatory to perform an intermediate upgrade to either v1.4.0 or v1.5.0 before proceeding with any further upgrades.</p>
 
 	<style>
@@ -938,7 +932,7 @@ Replication CRD version update <a class="header-link"  href="#replication-crd-ve
 </footer>
 
     </div>
-    <script src="/csm-docs/js/main.min.f72d00502781aaf278a14088eb2356b1ba2a05ad698a0c43fe86314d74ceab56.js" integrity="sha256-9y0AUCeBqvJ4oUCI6yNWsboqBa1pigxD/oYxTXTOq1Y=" crossorigin="anonymous"></script>
+    <script src="/csm-docs/js/main.min.90902a026ed2aee7ed45d85797f4c790b240ba148ac6f8a6f194cb1981ffecf5.js" integrity="sha256-kJAqAm7SruftRdhXl/THkLJAuhSKxvim8ZTLGYH/7PU=" crossorigin="anonymous"></script>
 <script src='/csm-docs/js/prism.js'></script>
 <script src='/csm-docs/js/tabpane-persist.js'></script>
 

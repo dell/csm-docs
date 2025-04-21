@@ -125,7 +125,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.c6ae3eb40b4bc4f60c6c3a1af84ff339.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.3a29160b6913fd6754a7a57bf9bceb3c.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -149,7 +149,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.c6ae3eb40b4bc4f60c6c3a1af84ff339.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.3a29160b6913fd6754a7a57bf9bceb3c.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -836,8 +836,7 @@ Installing the RPM <a class="header-link"  href="#installing-the-rpm" style=" di
 <ul>
 <li><code>DNS-hostname</code> refers to the hostname of the system in which the CSM for Authorization server will be installed. This hostname can be found by running <code>nslookup &lt;IP_address&gt;</code></li>
 <li>There are a number of ways to create certificates. In a production environment, certificates are usually created and managed by an IT administrator. Otherwise, certificates can be created using OpenSSL.</li>
-</ul>
-</blockquote>
+</ul></blockquote>
 <ol start="3">
 <li>
 <p>To install the rpm package on the system, you must first extract the contents of the tar file with the command:</p>
@@ -909,8 +908,7 @@ Updating CSM for Authorization Proxy Server Configuration <a class="header-link"
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>k3s kubectl -n karavi edit secret/karavi-config-secret
 </span></span></code></pre></div><p>Replace the data in <code>config.yaml</code> under the <code>data</code> field with your new, encoded data. Save the changes and CSM for Authorization will read the changed secret.</p>
 <blockquote>
-<p><strong>Note</strong>: If you are updating the signing secret, the tenants need to be updated with new tokens via the <code>karavictl generate token</code> command like so. The <code>--insecure</code> flag is required if certificates were not provided in <code>$HOME/.karavi/config.json</code></p>
-</blockquote>
+<p><strong>Note</strong>: If you are updating the signing secret, the tenants need to be updated with new tokens via the <code>karavictl generate token</code> command like so. The <code>--insecure</code> flag is required if certificates were not provided in <code>$HOME/.karavi/config.json</code></p></blockquote>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>karavictl generate token --tenant <span style="color:#000">$TenantName</span> --insecure --addr DNS-hostname <span style="color:#000;font-weight:bold">|</span> sed -e <span style="color:#4e9a06">&#39;s/&#34;Token&#34;: //&#39;</span> -e <span style="color:#4e9a06">&#39;s/[{}&#34;]//g&#39;</span> -e <span style="color:#4e9a06">&#39;s/\\n/\n/g&#39;</span> <span style="color:#000;font-weight:bold">|</span> kubectl -n <span style="color:#000">$namespace</span> apply -f -
 </span></span></code></pre></div><h2 id="csm-for-authorization-proxy-server-dynamic-configuration-settings">
 CSM for Authorization Proxy Server Dynamic Configuration Settings <a class="header-link"  href="#csm-for-authorization-proxy-server-dynamic-configuration-settings" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
@@ -1019,7 +1017,7 @@ CSM for Authorization Proxy Server Dynamic Configuration Settings <a class="head
 </footer>
 
     </div>
-    <script src="/csm-docs/js/main.min.f72d00502781aaf278a14088eb2356b1ba2a05ad698a0c43fe86314d74ceab56.js" integrity="sha256-9y0AUCeBqvJ4oUCI6yNWsboqBa1pigxD/oYxTXTOq1Y=" crossorigin="anonymous"></script>
+    <script src="/csm-docs/js/main.min.90902a026ed2aee7ed45d85797f4c790b240ba148ac6f8a6f194cb1981ffecf5.js" integrity="sha256-kJAqAm7SruftRdhXl/THkLJAuhSKxvim8ZTLGYH/7PU=" crossorigin="anonymous"></script>
 <script src='/csm-docs/js/prism.js'></script>
 <script src='/csm-docs/js/tabpane-persist.js'></script>
 

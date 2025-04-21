@@ -124,7 +124,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.c6ae3eb40b4bc4f60c6c3a1af84ff339.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.3a29160b6913fd6754a7a57bf9bceb3c.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -148,7 +148,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.c6ae3eb40b4bc4f60c6c3a1af84ff339.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.3a29160b6913fd6754a7a57bf9bceb3c.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -712,8 +712,7 @@
 	</header>
 	<p>The <a href="/csm-docs/v3/deployment/csminstallationwizard/src/">Dell Container Storage Modules Installation Wizard</a> is a webpage that generates a manifest file for installing Dell CSI Drivers and its supported CSM Modules, based on input from the user. It generates a single manifest file to install both Dell CSI Drivers and its supported CSM Modules, thereby eliminating the need to download individual Helm charts for drivers and modules. The user can enable or disable the necessary modules through the UI, and a manifest file is generated accordingly without manually editing the helm charts.</p>
 <blockquote>
-<p>NOTE: The CSM Installation Wizard supports Helm and Operator based manifest file generation.</p>
-</blockquote>
+<p>NOTE: The CSM Installation Wizard supports Helm and Operator based manifest file generation.</p></blockquote>
 <h2 id="supported-dell-csi-drivers">
 Supported Dell CSI Drivers <a class="header-link"  href="#supported-dell-csi-drivers" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
             <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
@@ -853,8 +852,7 @@ Supported Dell CSI Drivers <a class="header-link"  href="#supported-dell-csi-dri
   </tbody>
 </table>
 <blockquote>
-<p>NOTE: The Installation Wizard currently does not support operator-based manifest file generation for Unity XT and PowerFlex drivers.</p>
-</blockquote>
+<p>NOTE: The Installation Wizard currently does not support operator-based manifest file generation for Unity XT and PowerFlex drivers.</p></blockquote>
 <h2 id="supported-dell-csm-modules">
 Supported Dell CSM Modules <a class="header-link"  href="#supported-dell-csm-modules" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
             <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
@@ -912,8 +910,7 @@ Installation Using Helm Chart <a class="header-link"  href="#installation-using-
             </svg>
         </a></h2><p><strong>Steps</strong></p>
 <blockquote>
-<p>NOTE: Ensure that the namespace and secrets are created before installing the Helm chart.</p>
-</blockquote>
+<p>NOTE: Ensure that the namespace and secrets are created before installing the Helm chart.</p></blockquote>
 <ol>
 <li>
 <p>Add the Dell Helm Charts repository.</p>
@@ -929,8 +926,7 @@ helm repo update
 </li>
 </ol>
 <blockquote>
-<p>NOTE: The CSM Installation Wizard generates <code>values.yaml</code> with the minimal inputs required to install the CSM. To configure additional parameters in values.yaml, you can follow the steps outlined in <a href="/csm-docs/v3/deployment/helm/drivers/installation/powerstore/#install-the-driver">PowerStore</a>, <a href="/csm-docs/v3/deployment/helm/drivers/installation/powermax/#install-the-driver">PowerMax</a>, <a href="/csm-docs/v3/deployment/helm/drivers/installation/isilon/#install-the-driver">PowerScale</a>, <a href="/csm-docs/v3/deployment/helm/drivers/installation/powerflex/#install-the-driver">PowerFlex</a>, <a href="/csm-docs/v3/deployment/helm/drivers/installation/unity/#install-csi-driver">Unity XT</a>, <a href="/csm-docs/v3/deployment/csmoperator/modules/observability/">Observability</a>, <a href="/csm-docs/v3/deployment/csmoperator/modules/replication/">Replication</a>, <a href="/csm-docs/v3/deployment/csmoperator/modules/resiliency/">Resiliency</a>.</p>
-</blockquote>
+<p>NOTE: The CSM Installation Wizard generates <code>values.yaml</code> with the minimal inputs required to install the CSM. To configure additional parameters in values.yaml, you can follow the steps outlined in <a href="/csm-docs/v3/deployment/helm/drivers/installation/powerstore/#install-the-driver">PowerStore</a>, <a href="/csm-docs/v3/deployment/helm/drivers/installation/powermax/#install-the-driver">PowerMax</a>, <a href="/csm-docs/v3/deployment/helm/drivers/installation/isilon/#install-the-driver">PowerScale</a>, <a href="/csm-docs/v3/deployment/helm/drivers/installation/powerflex/#install-the-driver">PowerFlex</a>, <a href="/csm-docs/v3/deployment/helm/drivers/installation/unity/#install-csi-driver">Unity XT</a>, <a href="/csm-docs/v3/deployment/csmoperator/modules/observability/">Observability</a>, <a href="/csm-docs/v3/deployment/csmoperator/modules/replication/">Replication</a>, <a href="/csm-docs/v3/deployment/csmoperator/modules/resiliency/">Resiliency</a>.</p></blockquote>
 <ol start="4">
 <li>
 <p>When the PowerFlex driver is installed using values generated by installation wizard, the user needs to update the secret for driver by patching the MDM keys, as follows:</p>
@@ -964,8 +960,7 @@ Installation Using Operator <a class="header-link"  href="#installation-using-op
             </svg>
         </a></h2><p><strong>Steps</strong></p>
 <blockquote>
-<p>NOTE: Ensure that the csm-operator is installed and that the namespace, secrets, and <code>config.yaml</code> are created as prerequisites.</p>
-</blockquote>
+<p>NOTE: Ensure that the csm-operator is installed and that the namespace, secrets, and <code>config.yaml</code> are created as prerequisites.</p></blockquote>
 <ol>
 <li>
 <p>Copy the downloaded <code>values.yaml</code> file.</p>
@@ -975,8 +970,7 @@ Installation Using Operator <a class="header-link"  href="#installation-using-op
 </li>
 </ol>
 <blockquote>
-<p>NOTE: The CSM Installation Wizard generates <code>values.yaml</code> with the minimal inputs required to install the CSM. To configure additional parameters in values.yaml, you can follow the steps outlined in <a href="/csm-docs/v3/deployment/csmoperator/drivers/powerstore/">PowerStore</a>, <a href="/csm-docs/v3/deployment/csmoperator/drivers/powermax/">PowerMax</a>, <a href="/csm-docs/v3/deployment/csmoperator/drivers/powerscale/">PowerScale</a>, <a href="/csm-docs/v3/deployment/csmoperator/modules/resiliency/">Resiliency</a>.</p>
-</blockquote>
+<p>NOTE: The CSM Installation Wizard generates <code>values.yaml</code> with the minimal inputs required to install the CSM. To configure additional parameters in values.yaml, you can follow the steps outlined in <a href="/csm-docs/v3/deployment/csmoperator/drivers/powerstore/">PowerStore</a>, <a href="/csm-docs/v3/deployment/csmoperator/drivers/powermax/">PowerMax</a>, <a href="/csm-docs/v3/deployment/csmoperator/drivers/powerscale/">PowerScale</a>, <a href="/csm-docs/v3/deployment/csmoperator/modules/resiliency/">Resiliency</a>.</p></blockquote>
 <ol start="3">
 <li>
 <p>If Observability is checked in the wizard, refer to <a href="/csm-docs/v3/deployment/csmoperator/modules/observability/">Observability</a> to export metrics to Prometheus and load the Grafana dashboards.</p>
@@ -1052,7 +1046,7 @@ Installation Using Operator <a class="header-link"  href="#installation-using-op
 </footer>
 
     </div>
-    <script src="/csm-docs/js/main.min.f72d00502781aaf278a14088eb2356b1ba2a05ad698a0c43fe86314d74ceab56.js" integrity="sha256-9y0AUCeBqvJ4oUCI6yNWsboqBa1pigxD/oYxTXTOq1Y=" crossorigin="anonymous"></script>
+    <script src="/csm-docs/js/main.min.90902a026ed2aee7ed45d85797f4c790b240ba148ac6f8a6f194cb1981ffecf5.js" integrity="sha256-kJAqAm7SruftRdhXl/THkLJAuhSKxvim8ZTLGYH/7PU=" crossorigin="anonymous"></script>
 <script src='/csm-docs/js/prism.js'></script>
 <script src='/csm-docs/js/tabpane-persist.js'></script>
 
