@@ -2,13 +2,13 @@
 title: "Installation Wizard Helm"
 linkTitle: "Installation Wizard Helm"
 description: Container Storage Modules Installation Wizard
-weight: 1 
+weight: 1
 toc_hide: true
----  
+---
 <br>
 
 Installation Wizard Support Matrix [Click Here](../../../../../supportmatrix/#installation-wizard-compatibility-matrix)
-<br> 
+<br>
 <br>
 The Container Storage Modules Installation Wizard is a webpage that helps you create a manifest file to install Dell CSI Drivers and CSM Modules. Users can enable or disable modules through the UI, and it generates a single manifest file, eliminating the need to download individual Helm charts for drivers and modules.
 
@@ -56,7 +56,7 @@ The Container Storage Modules Installation Wizard is a webpage that helps you cr
 
     ```bash
     echo -n '<MDM_IPS>' | base64
-    kubectl create secret generic vxflexos-config -n vxflexos --from-file=config=samples/config.yaml --from-literal=MDM='xx.xx.xx.xx,yy.yy.yy.yy&zz.zz.zz.zz' 
+    kubectl create secret generic vxflexos-config -n vxflexos --from-file=config=samples/config.yaml --from-literal=MDM='xx.xx.xx.xx,yy.yy.yy.yy&zz.zz.zz.zz'
     ```
 {{< /hide >}}
 
@@ -65,7 +65,7 @@ The Container Storage Modules Installation Wizard is a webpage that helps you cr
 {{< /hide >}}
 
 {{< hide id="4" >}}
-- If Authorization is checked in the wizard, only the sidecar is enabled. Refer to [Authorization](../helm/csm-modules/authorizationv2.0/) to install and configure the CSM Authorization Proxy Server.
+- If Authorization is checked in the wizard, only the sidecar is enabled. Refer to [Authorization](../helm/csm-modules/authorizationv2/) to install and configure the CSM Authorization Proxy Server.
 {{< /hide >}}
 
 {{< hide id="5" >}}
@@ -81,4 +81,4 @@ The Container Storage Modules Installation Wizard is a webpage that helps you cr
     ```bash
     helm install <release-name> dell/container-storage-modules -n <namespace> --version <container-storage-module chart-version> -f <values.yaml location>
     ```
-    Example: helm install {{Var}} dell/container-storage-modules -n csi-{{Var}} --version 1.4.0 -f values.yaml
+    Example: helm install {{Var}} dell/container-storage-modules -n csi-{{Var}} --version 1.7.0 -f values.yaml

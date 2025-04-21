@@ -53,12 +53,12 @@ Procedure
 2. Get the required values.yaml using the command below:
 
 ```bash
-cd dell-csi-helm-installer && wget -O my-unity-settings.yaml https://github.com/dell/helm-charts/raw/csi-unity-2.13.0/charts/csi-unity/values.yaml
+cd dell-csi-helm-installer && wget -O my-unity-settings.yaml https://github.com/dell/helm-charts/raw/csi-unity-2.14.0/charts/csi-unity/values.yaml
 ```
 
 3. Edit `values.yaml` to set the following parameters for your installation:
 
-    The following table lists the primary configurable parameters of the Unity XT driver chart and their default values. More detailed information can be found in the [`values.yaml`](https://github.com/dell/helm-charts/blob/csi-unity-2.13.0/charts/csi-unity/values.yaml) file in this repository. 
+    The following table lists the primary configurable parameters of the Unity XT driver chart and their default values. More detailed information can be found in the [`values.yaml`](https://github.com/dell/helm-charts/blob/csi-unity-2.14.0/charts/csi-unity/values.yaml) file in this repository.
 <ul>
   {{< collapse id="1" title="Parameters">}}
   | Parameter | Description | Required | Default |
@@ -132,7 +132,7 @@ Example *myvalues.yaml*
 
 5. Prepare the `secret.yaml`  for driver configuration.
     The following table lists driver configuration parameters for multiple storage arrays.
-<ul>    
+<ul>
     {{< collapse id="2" title="Parameters">}}
 
 | Parameter                 | Description                                    | Required | Default |
@@ -292,7 +292,7 @@ Example: secret.yaml
 
    **Syntax**:
    ```bash
-   git clone -b csi-unity-2.13.0 https://github.com/dell/helm-charts
+   git clone -b csi-unity-2.14.0 https://github.com/dell/helm-charts
 
    helm install <release-name> dell/container-storage-modules -n <namespace> --version <container-storage-module chart-version> -f <values.yaml location>
 
@@ -412,7 +412,7 @@ cd dell-csi-helm-installer
 
 Note: myvalues.yaml is a values.yaml file which user has used for driver installation.
 
-{{< /accordion >}}  
+{{< /accordion >}}
 
 <br>
 
@@ -424,4 +424,4 @@ Note: myvalues.yaml is a values.yaml file which user has used for driver install
 
 {{< /cardcontainer >}}
 
-{{< /accordion >}}  
+{{< /accordion >}}

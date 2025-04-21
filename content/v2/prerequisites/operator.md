@@ -16,4 +16,4 @@ The table below lists the driver and modules versions installable with the Conta
 | CSI PowerStore     | 2.12.0  | ❌ , ❌                        | ❌             | ❌                | ✔ 1.11.0      |
 | CSI PowerMax       | 2.12.0  | ✔ 1.12.0 , 2.0.0                | ✔ 1.10.0       | ✔ 1.10.0          | ✔ 1.11.0      |
 | CSI Unity XT       | 2.12.0  | ❌ , ❌                        | ❌             | ❌                | ❌            |
-{{</table>}} 
+{{</table>}}

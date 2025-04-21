@@ -2,8 +2,8 @@
 title: Installation Guide
 linkTitle: Operator
 description: >
-  Installing the CSI Driver for PowerStore via Container Storage Module Operator 
-no_list: true 
+  Installing the CSI Driver for PowerStore via Container Storage Modules Operator
+no_list: true
 weight: 2
 ---
 
@@ -29,30 +29,30 @@ weight: 2
 ### Operator Installation
 
 </br>
- 
-1. On the OpenShift console, navigate to **OperatorHub** and use the keyword filter to search for **Dell Container Storage Modules.** 
 
-2. Click **Dell Container Storage Modules** tile 
+1. On the OpenShift console, navigate to **OperatorHub** and use the keyword filter to search for **Dell Container Storage Modules.**
+
+2. Click **Dell Container Storage Modules** tile
 
 3. Keep all default settings and click **Install**.
 
 </br>
 <ol>
 
-Verify that the operator is deployed 
-```terminal 
+Verify that the operator is deployed
+```terminal
 oc get operators
 
 NAME                                                          AGE
 dell-csm-operator-certified.openshift-operators               2d21h
-```  
+```
 
 ```terminal
 oc get pod -n openshift-operators
 
 NAME                                                       READY   STATUS       RESTARTS      AGE
 dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      21 (19h ago)  2d21h
-``` 
+```
 
 
 </ol>
@@ -63,25 +63,25 @@ dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      
 </br>
 
 1. ##### **Create project:**
-    
+
     <br>
 
     Use this command to create new project. You can use any project name instead of `powerstore`.
 
-    ```bash 
+    ```bash
     oc new-project powerstore
     ```
 
 
-2. ##### **Create config secret:** 
-       
+2. ##### **Create config secret:**
+
     <br>
 
-    Create a file called `config.yaml` or use [sample](https://github.com/dell/csi-powerstore/blob/main/samples/secret/secret.yaml): 
-   
-    Example: 
+    Create a file called `config.yaml` or use [sample](https://github.com/dell/csi-powerstore/blob/main/samples/secret/secret.yaml):
+
+    Example:
     <div style="margin-bottom: -1.8rem">
-    
+
     ```yaml
     cat << EOF > config.yaml
     arrays:
@@ -93,8 +93,11 @@ dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      
         blockProtocol: "FC"
     EOF
     ```
-    </div> 
- 
+    </div>
+
+    Add blocks for each PowerStore array in `config.yaml`, and include both source and target arrays if replication is enabled.
+
+    The username in `config.yaml` must be from PowerStore’s authentication providers and have at least the **Storage Operator** role.
 
     <br>
 
@@ -103,10 +106,10 @@ dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      
     ```bash
     oc create secret generic powerstore-config --from-file=config=config.yaml -n powerstore --dry-run=client -oyaml > secret-powerstore-config.yaml
     ```
-    
+
     Use this command to **create** the config:
 
-    ```bash 
+    ```bash
     oc apply -f secret-powerstore-config.yaml
     ```
 
@@ -115,19 +118,19 @@ dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      
     ```bash
     oc replace -f secret-powerstore-config.yaml --force
     ```
-  
+
     Verify config secret is created.
 
     ```terminal
     oc get secret -n powerstore
-     
+
     NAME                 TYPE        DATA   AGE
     powerstore-config    Opaque      1      3h7m
-    ```  
+    ```
   </br>
 
 3. ##### **Create Custom Resource** ContainerStorageModule for powerstore.
-   
+
    <br>
 
     Use this command to create the **ContainerStorageModule Custom Resource**:
@@ -148,12 +151,13 @@ dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      
       name: powerstore
       namespace: powerstore
     spec:
-      driver:
-        csiDriverType: "powerstore"
-        configVersion: {{< version-docs key="PStore_latestVersion" >}}
-    EOF 
-    ``` 
-    </div> 
+    driver:
+       csiDriverType: "powerstore"
+       configVersion: {{< version-docs key="PStore_latestVersion" >}}
+       forceRemoveDriver: true
+    EOF
+    ```
+    </div>
 
     **Detailed Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powerstore_{{< version-docs key="sample_sc_pstore" >}}.yaml) for detailed settings or use [Wizard](./installationwizard#generate-manifest-file) to generate the sample file.
     
@@ -194,17 +198,17 @@ Check the status of the CR to verify if the driver installation is in the `Succe
 
 <br>
 
-4. ##### **Create Storage class:** 
-    
+4. ##### **Create Storage class:**
+
     <br>
 
-    Use this command to create the **Storage Class**: 
+    Use this command to create the **Storage Class**:
 
     ```bash
     oc apply -f sc-powerstore.yaml
     ```
 
-    Example: 
+    Example:
     <div style="margin-bottom: -1.8rem">
 
 
@@ -226,27 +230,27 @@ Check the status of the CR to verify if the driver installation is in the `Succe
     EOF
     ```
     </div>
-    
-     Replace placeholders with actual values for your powerstore array and various storage class sample refer [here](https://github.com/dell/csi-powerstore/tree/main/samples/storageclass) 
-    
+
+     Replace placeholders with actual values for your powerstore array and various storage class sample refer [here](https://github.com/dell/csi-powerstore/tree/main/samples/storageclass)
+
     <br>
 
-    Verify Storage Class is created: 
+    Verify Storage Class is created:
 
     ```terminal
     oc get storageclass powerstore
-  
+
     NAME                    PROVISIONER                    RECLAIMPOLICY   VOLUMEBINDINGMODE   ALLOWVOLUMEEXPANSION   AGE
     powerstore(default)     csi-powerstore.dellemc.com     Delete          Immediate           true                   3h8m
-    ``` 
+    ```
 
     </br>
 
-6. ##### **Create Volume Snapshot Class:** 
+6. ##### **Create Volume Snapshot Class:**
 
     <br>
-    
-    Use this command to create the **Volume Snapshot**: 
+
+    Use this command to create the **Volume Snapshot**:
 
 
     ```bash
@@ -259,17 +263,17 @@ Check the status of the CR to verify if the driver installation is in the `Succe
     apiVersion: snapshot.storage.k8s.io/v1
     kind: VolumeSnapshotClass
     metadata:
-      name: vsclass-powerstore
-    driver: csi-powerstore.dellemc.com
+    name: powerstore-snapshot
+    driver: "csi-powerstore.dellemc.com"
     deletionPolicy: Delete
-    EOF 
+    EOF
     ```
 
-    Verify Volume Snapshot Class is created: 
+    Verify Volume Snapshot Class is created:
 
     ```terminal
     oc get volumesnapshotclass
-    
+
     NAME                      DRIVER                              DELETIONPOLICY   AGE
     vsclass-powerstore        csi-powerstore.dellemc.com          Delete           3h9m
     ``` 
@@ -281,9 +285,9 @@ Check the status of the CR to verify if the driver installation is in the `Succe
 <br>
 
 
-{{< collapse id="2" title="Persistent Volume Claim" card="false" >}} 
-  
-  <br> 
+{{< collapse id="2" title="Persistent Volume Claim" card="false" >}}
+
+  <br>
   <ol>
   <li>
 
@@ -322,15 +326,15 @@ Check the status of the CR to verify if the driver installation is in the `Succe
   ```terminal
   oc get pvc -n default
 
-  NAME                           STATUS   VOLUME             CAPACITY   ACCESS MODES   STORAGECLASS       VOLUMEATTRIBUTESCLASS   AGE
-  pvc-powerstore                 Bound    ocp08-9f103c4fc6   8Gi        RWO            powerstore         <unset>                 4s
-  ``` 
+  NAME                           STATUS   VOLUME             CAPACITY   ACCESS MODES   STORAGECLASS   VOLUMEATTRIBUTESCLASS   AGE
+  pvc-powerstore                 Bound    ocp08-9f103c4fc6   8Gi        RWO            powerstore     <unset>                 4s
+  ```
 
-  <br> 
+  <br>
   </li>
-  
+
   <li>
-  
+
   ##### **Create Pod which uses Persistent Volume Claim with storage class**
 
   <br>
@@ -342,7 +346,7 @@ Check the status of the CR to verify if the driver installation is in the `Succe
   oc apply -f pod-powerstore.yaml
   ```
 
-  Example: 
+  Example:
   ```yaml
   cat << 'EOF' > pod-powerstore.yaml
   apiVersion: v1
@@ -373,14 +377,14 @@ Check the status of the CR to verify if the driver installation is in the `Succe
 
   NAME                                        READY   STATUS    RESTARTS   AGE
   pod-powerstore                              1/1     Running   0          109s
-  ``` 
+  ```
 
-  <br>  
+  <br>
   </li>
   <li>
 
   ##### **Delete Persistence Volume Claim**
-  
+
   </br>
 
   Use this command to  **Delete Persistence Volume Claim**:
@@ -397,20 +401,20 @@ Check the status of the CR to verify if the driver installation is in the `Succe
   NAME                    STATUS   VOLUME             CAPACITY   ACCESS MODES   STORAGECLASS   VOLUMEATTRIBUTESCLASS   AGE
 
   ```
-  </br> 
-  </li> 
+  </br>
+  </li>
 </ol>
 
 {{< /collapse >}}
 
 
-{{< collapse id="4" title="Volume Snapshot" card="false" >}} 
-<br> 
+{{< collapse id="4" title="Volume Snapshot" card="false" >}}
+<br>
 
-<ol> 
+<ol>
 <li>
 
-##### **Create Volume Snapshot**  
+##### **Create Volume Snapshot**
 
 <br>
 
@@ -443,7 +447,7 @@ oc get volumesnapshot -n default
 
 NAME           READYTOUSE   SOURCEPVC       SOURCESNAPSHOTCONTENT   RESTORESIZE   SNAPSHOTCLASS        SNAPSHOTCONTENT                                    CREATIONTIME   AGE
 vs-powerstore  true         pvc-powerstore                          8Gi           vsclass-powerstore   snapcontent-80e99281-0d96-4275-b4aa-50301d110bd4   2m57s          12s
-``` 
+```
 
 </br>
 
@@ -456,11 +460,11 @@ NAME                                               READYTOUSE   RESTORESIZE   DE
 snapcontent-80e99281-0d96-4275-b4aa-50301d110bd4   true         8589934592    Delete           csi-powerstore.dellemc.com   vsclass-powerstore      vs-powerstore    default                   23s
 ```  
 
-<br>  
+<br>
 </li>
 <li>
 
-##### **Restore Snapshot** 
+##### **Restore Snapshot**
 
 </br>
 
@@ -473,7 +477,7 @@ oc apply -f pvc-powerstore-restore.yaml
 Example:
 
 ```yaml
-cat << 'EOF' > pvc-powerstore-restore.yaml  
+cat << 'EOF' > pvc-powerstore-restore.yaml
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
@@ -491,7 +495,7 @@ spec:
     requests:
       storage: 8Gi
   EOF
-``` 
+```
 
 Verify restore pvc is created:
 
@@ -503,8 +507,8 @@ pvc-powerstore          Bound    ocp08-095f7d3c52   8Gi        RWO            po
 pvc-powerstore-restore  Bound    ocp08-19874e9042   8Gi        RWO            powerstore     <unset>                 4s
 ```
 
-<br> 
-</li> 
+<br>
+</li>
 <li>
 
 ##### **Delete Restore Persistent Volume Claim**   
@@ -548,17 +552,17 @@ NAME                    STATUS   VOLUME             CAPACITY   ACCESS MODES   ST
 {{< /collapse >}}  
 
 
-{{< /accordion >}}   
+{{< /accordion >}}
 
 <br>
 
 {{< accordion id="Three" title="Modules" >}}
 
-<br>   
+<br>
 
 {{< cardcontainer >}}
 
     {{< customcard link1="./csm-modules/resiliency"   image="1" title="Resiliency"  >}}
 
 {{< /cardcontainer >}}
-{{< /accordion >}}  
+{{< /accordion >}}

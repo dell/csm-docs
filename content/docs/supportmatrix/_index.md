@@ -4,7 +4,7 @@ linkTitle: "Support Matrix"
 description: Support Matrix for Container Storage Modules
 no_list: true
 weight: 1
---- 
+---
 
 ## Storage Platforms
 
@@ -34,8 +34,8 @@ weight: 1
 | Mirantis Kubernetes Engine | 3.7.x            |
 {{</table>}}
 
-**Notes:** 
-- Self-certify unsupported orchestrator platforms/versions using [Cert-CSI](../tooling/cert-csi/). Use platforms that haven't reached end of life. 
+**Notes:**
+- Self-certify unsupported orchestrator platforms/versions using [Cert-CSI](../tooling/cert-csi/). Use platforms that haven't reached end of life.
 - CSM Authorization Server v1 is not supported on Red Hat OpenShift. It can be installed on standard Kubernetes and used with a Dell CSI Driver enabled with CSM Authorization on Red Hat OpenShift.
 - CSM Authorization Server v2 is supported on Red Hat OpenShift.
 
@@ -46,9 +46,10 @@ weight: 1
 | 4.17 - 4.18    |  <div style="text-align: left"> [Storage](https://github.com/kiagnose/kubevirt-storage-checkup) </div> | Yes       | Yes      | Yes        | Yes        | No    |
 | 4.17 - 4.18   | <div style="text-align: left">  Observability        </div>   | Yes       | Yes      | No         | Yes        | No    |
 | 4.17 - 4.18    | <div style="text-align: left"> Authorization - v2.x  </div>   | Yes       | Yes      | No         | Yes        | No    |
+| 4.17 - 4.18    | <div style="text-align: left"> Resiliency            </div>   | Yes       | Yes      | Yes         | Yes        | No    |
 {{</table>}}
 
-> Note: Resiliency and Replication are not supported.
+> Note: Replication is not supported.
 
 ## Tested Host Operating Systems
 
@@ -85,14 +86,14 @@ Container Storage Modules doesn't officially support specific operating systems,
 | Unity XT           |  No      |   No              |  No               | No                  |    No      |
 {{</table>}}
 
-## OpenShift Compatibility with Operator  
+## OpenShift Compatibility with Operator
 
 {{<table "table table-striped table-bordered table-sm">}}
 |  OpenShift Version        | Operator Version        | CSM version |
 | ------------| ------------------| ----------- |
 |  4.14       | 1.4.4, 1.5.1, 1.6.1, 1.7.0, 1.8.0 |1.9.4, 1.10.2, 1.11.1, 1.12, 1.13|
 |  4.15       | 1.5.1, 1.6.1, 1.7.0, 1.8.0        |1.10.2, 1.11.1, 1.12, 1.13    |
-|  4.16       | 1.6.1, 1.7.0, 1.8.0               |1.11.1, 1.12, 1.13         | 
+|  4.16       | 1.6.1, 1.7.0, 1.8.0               |1.11.1, 1.12, 1.13         |
 |  4.17       | 1.6.1, 1.7.0, 1.8.0               |1.11.1, 1.12, 1.13         |
 |  4.18       | 1.6.1, 1.7.0, 1.8.0               |1.11.1, 1.12, 1.13         |
 {{</table>}}

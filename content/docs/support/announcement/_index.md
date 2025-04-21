@@ -12,6 +12,8 @@ Description: >
 2. <span><span/>{{< message text="1" >}}
 3. <span><span/>{{< message text="7" >}}
 4. <span><span/>{{< message text="5" >}}
+5. <span><span/>{{< message text="11" >}}
+6. <span><span/>{{< message text="12" >}}
 {{% /pageinfo %}}
 
 ### Notification

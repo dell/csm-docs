@@ -349,7 +349,7 @@ Supported driver and module versions offered by the Container Storage Module Ope
 <br>
 <br>
 
-{{< accordion id="One" title="CSM Installation Wizard" markdown="true" >}}  
+{{< accordion id="One" title="CSM Installation Wizard" markdown="true" >}}
 {{<include  file="content/docs/getting-started/installation/installationwizard/operator.md" >}}
 {{< /accordion >}}
 
@@ -362,30 +362,30 @@ Supported driver and module versions offered by the Container Storage Module Ope
 ### Operator Installation
 
 </br>
- 
-1. On the OpenShift console, navigate to **OperatorHub** and use the keyword filter to search for **Dell Container Storage Modules.** 
 
-2. Click **Dell Container Storage Modules** tile 
+1. On the OpenShift console, navigate to **OperatorHub** and use the keyword filter to search for **Dell Container Storage Modules.**
+
+2. Click **Dell Container Storage Modules** tile
 
 3. Keep all default settings and click **Install**.
 
 </br>
 <ol>
 
-Verify that the operator is deployed 
-```terminal 
+Verify that the operator is deployed
+```terminal
 oc get operators
 
 NAME                                                          AGE
 dell-csm-operator-certified.openshift-operators               2d21h
-```  
+```
 
 ```terminal
 oc get pod -n openshift-operators
 
 NAME                                                       READY   STATUS       RESTARTS      AGE
 dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      21 (19h ago)  2d21h
-``` 
+```
 
 
 </ol>
@@ -393,7 +393,7 @@ dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      
 
 ### Install Driver
 
-1. **Create namespace:** 
+1. **Create namespace:**
     ```bash
       oc create namespace powermax
     ```
@@ -444,7 +444,10 @@ dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      
       powermax-creds       Opaque      1      3h7m
     ```
 
-3. **Create Powermax Array Configmap:**  
+3. **Create Powermax Array Configmap:**
+  
+  **Note:** `powermax-array-config` is deprecated and remains for backward compatibility only. You can skip creating it and instead add values for X_CSI_MANAGED_ARRAYS, X_CSI_TRANSPORT_PROTOCOL, and X_CSI_POWERMAX_PORTGROUPS in the sample files.
+
   Create a configmap using the sample file [here](https://github.com/dell/csi-powermax/blob/main/samples/configmap/powermax-array-config.yaml). Fill in the appropriate values for driver configuration.
    ```yaml
       # To create this configmap use: kubectl create -f powermax-array-config.yaml
@@ -460,16 +463,16 @@ dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      
           # Choose which transport protocol to use (ISCSI, FC, NVMETCP, auto) defaults to auto if nothing is specified
           X_CSI_TRANSPORT_PROTOCOL: ""
           # IP address of the Unisphere for PowerMax (Required), Defaults to https://0.0.0.0:8443
-          X_CSI_POWERMAX_ENDPOINT: "https://10.0.0.0:8443" 
+          X_CSI_POWERMAX_ENDPOINT: "https://10.0.0.0:8443"
           # List of comma-separated array ID(s) which will be managed by the driver (Required)
           X_CSI_MANAGED_ARRAYS: "000000000000,000000000000,"
    ```
 
-5. **Create a CR (Custom Resource)** for PowerMax using the sample files provided
+4. **Create a CR (Custom Resource)** for PowerMax using the sample files provided
 
     a. **Default Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/main/samples/minimal-samples/powermax_v2130.yaml) for default settings. Modify if needed.
 
-    [OR]                                                
+    [OR]
 
     b. **Detailed Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powermax_v2130.yaml) for detailed settings. 
 
@@ -499,6 +502,9 @@ Example:
    | replicas                                        | Controls the number of controller Pods you deploy. If controller Pods are greater than the number of available nodes, excess Pods will become stuck in pending. The default is 2 which allows for Controller high availability.                                          | Yes      | 2                              |
    | fsGroupPolicy                                   | Defines which FS Group policy mode to be used, Supported modes `None, File and ReadWriteOnceWithFSType`. In OCP <= 4.16 and K8s <= 1.29, fsGroupPolicy is an immutable field.                                                                                                                                                                  | No       | "ReadWriteOnceWithFSType"      |
    | ***Common parameters for node and controller*** |                                                                                                                                                                                                                                                                          |          |                                |
+   | X_CSI_TRANSPORT_PROTOCOL                        | Choose which transport protocol to use (ISCSI, FC, NVMETCP, "")	                                                                                                                                                                                                        | Yes      | ""                           |
+   | X_CSI_POWERMAX_PORTGROUPS                       | List of comma-separated port groups (ISCSI and NVMETCP only). Example: "PortGroup1,PortGroup2"                                                                                                                                                                                       | No       | -                              |
+   | X_CSI_MANAGED_ARRAYS                            | List of comma-separated array ID(s) which will be managed by the driver                                                                                                                                                                                                  | Yes      | -
    | X_CSI_K8S_CLUSTER_PREFIX                        | Define a prefix that is appended to all resources created in the array; unique per K8s/CSI deployment; max length - 3 characters                                                                                                                                         | No      | CSM                            |
    | X_CSI_POWERMAX_PROXY_SERVICE_NAME               | Name of CSI PowerMax ReverseProxy service.                                                                                                                                                                                                                               | Yes      | csipowermax-reverseproxy       |
    | X_CSI_IG_MODIFY_HOSTNAME                        | Change any existing host names. When node name template is set, it changes the name to the specified format else it uses driver default host name format.                                                                                                                  | No       | false                          |
@@ -534,13 +540,13 @@ Example:
   oc get csm powermax -n powermax
 
   NAME        CREATIONTIME   CSIDRIVERTYPE   CONFIGVERSION   STATE
-  powermax    3h             powermax        v2.13.0         Succeeded      
+  powermax    3h             powermax        {{< version-docs key="PMax_latestVersion" >}}         Succeeded      
   ```
 
   Check the status of the CR to verify if the driver installation is in the `Succeeded` state. If the status is not `Succeeded`, see the [Troubleshooting guide](../troubleshooting/#my-dell-csi-driver-install-failed-how-do-i-fix-it) for more information.
-</ul> 
+</ul>
 
-5. Refer [Volume Snapshot Class](https://github.com/dell/csi-powermax/tree/main/samples/volumesnapshotclass) and [Storage Class](https://github.com/dell/csi-powermax/tree/main/samples/storageclass) for the sample files. 
+5. Refer [Volume Snapshot Class](https://github.com/dell/csi-powermax/tree/main/samples/volumesnapshotclass) and [Storage Class](https://github.com/dell/csi-powermax/tree/main/samples/storageclass) for the sample files.
 
 ## Other features to enable
 ### Dynamic Logging Configuration
@@ -637,7 +643,7 @@ X_CSI_TOPOLOGY_CONTROL_ENABLED provides a way to filter topology keys on a node 
    | allowedConnections.rules | List of StorageArrayID:TransportProtocol pair |
    | deniedConnections | List of node, array and protocol info for user denied configuration |
    | deniedConnections.nodeName | Name of the node on which user wants to apply given rules  |
-   | deniedConnections.rules | List of StorageArrayID:TransportProtocol pair | 
+   | deniedConnections.rules | List of StorageArrayID:TransportProtocol pair |
    {{< /collapse >}}
   </ul>
 <br>
@@ -655,20 +661,20 @@ X_CSI_TOPOLOGY_CONTROL_ENABLED provides a way to filter topology keys on a node 
 
 {{< accordion id="Three" title="Modules"  >}}  
 
-<br>   
+<br>
 
 {{< cardcontainer >}}
-    {{< customcard link1="./csm-modules/authorizationv1.x"  image="1" title="Authorization v1.x" >}}
+    {{< customcard link1="./csm-modules/authorizationv1"  image="1" title="Authorization v1.x" >}}
 
-    {{< customcard link1="./csm-modules/authorizationv2.0"   image="1" title="Authorization v2.0"  >}}
+    {{< customcard link1="./csm-modules/authorizationv2"   image="1" title="Authorization v2.0"  >}}
 
     {{< customcard  link1="./csm-modules/observability"   image="1" title="Observability"  >}}
 
-    {{< customcard  link1="./csm-modules/replication"  image="1" title="Replication"  >}} 
+    {{< customcard  link1="./csm-modules/replication"  image="1" title="Replication"  >}}
 
     {{< customcard link1="./csm-modules/resiliency"   image="1" title="Resiliency"  >}}
 
-{{< /cardcontainer >}} 
+{{< /cardcontainer >}}
 
 {{< /accordion >}}
 -->

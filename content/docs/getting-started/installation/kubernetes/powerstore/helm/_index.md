@@ -92,9 +92,9 @@ volume stats value under node should be set to true.
     > If you do not specify `arrayID` parameter in the storage class then the array that was specified as the default would be used for provisioning volumes.
 6. Download the default values.yaml file
    ```bash
-   cd dell-csi-helm-installer && wget -O my-powerstore-settings.yaml https://github.com/dell/helm-charts/raw/csi-powerstore-2.13.0/charts/csi-powerstore/values.yaml
+   cd dell-csi-helm-installer && wget -O my-powerstore-settings.yaml https://github.com/dell/helm-charts/raw/csi-powerstore-2.14.0/charts/csi-powerstore/values.yaml
    ```
-7. Edit the newly created values file and provide values for the following parameters `vi my-powerstore-settings.yaml`: 
+7. Edit the newly created values file and provide values for the following parameters `vi my-powerstore-settings.yaml`:
 <ul>
 {{< collapse id="1" title="Parameters">}}
 | Parameter | Description | Required | Default |
@@ -216,7 +216,7 @@ cd dell-csi-helm-installer
 ```
 
 Note: here `my-powerstore-settings.yaml` is a `values.yaml` file which user has used for driver installation.
-{{< /accordion >}}  
+{{< /accordion >}}
 
 <br>
 
@@ -226,10 +226,10 @@ Note: here `my-powerstore-settings.yaml` is a `values.yaml` file which user has 
 
     {{< customcard  link1="./csm-modules/observability"   image="1" title="Observability"  >}}
 
-    {{< customcard  link1="./csm-modules/replication"  image="1" title="Replication"  >}} 
+    {{< customcard  link1="./csm-modules/replication"  image="1" title="Replication"  >}}
 
     {{< customcard link1="./csm-modules/resiliency"   image="1" title="Resiliency"  >}}
 
 {{< /cardcontainer >}}
 
-{{< /accordion >}}  
+{{< /accordion >}}

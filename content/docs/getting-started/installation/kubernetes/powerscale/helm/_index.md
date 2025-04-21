@@ -35,7 +35,7 @@ The following are requirements to be met before installing the CSI Driver for Po
 - Mount propagation is enabled on container runtime that is being used
 - `nfs-utils` package must be installed on nodes that will mount volumes
 - If using Snapshot feature, satisfy all Volume Snapshot requirements
-- If enabling CSM for Authorization, please refer to the [Authorization deployment steps](../helm/csm-modules/authorizationv2.0/) first
+- If enabling CSM for Authorization, please refer to the [Authorization deployment steps](../helm/csm-modules/authorizationv2/) first
 - If enabling CSM for Replication, please refer to the [Replication deployment steps](../helm/csm-modules/replication/) first
 - If enabling CSM for Resiliency, please refer to the [Resiliency deployment steps](../helm/csm-modules/resiliency/) first
 
@@ -108,10 +108,10 @@ CRDs should be configured during replication prepare stage with repctl as descri
 
    **Note**: The 'clusterName' serves as a logical, unique identifier for the array that should remain unchanged once it is included in the volume handle. Altering this identifier is not advisable, as it would result in the failure of all operations associated with the volume that was created earlier.
 
-4. Download `wget -O my-isilon-settings.yaml https://raw.githubusercontent.com/dell/helm-charts/csi-isilon-2.13.0/charts/csi-isilon/values.yaml` into `cd ../dell-csi-helm-installer` to customize settings for installation.
+4. Download `wget -O my-isilon-settings.yaml https://raw.githubusercontent.com/dell/helm-charts/csi-isilon-2.14.0/charts/csi-isilon/values.yaml` into `cd ../dell-csi-helm-installer` to customize settings for installation.
 5. Edit *my-isilon-settings.yaml* to set the following parameters for your installation:
    The following table lists the primary configurable parameters of the PowerScale driver Helm chart and their default values. More detailed information can be
-   found in the  [`values.yaml`](https://github.com/dell/helm-charts/blob/csi-isilon-2.13.0/charts/csi-isilon/values.yaml) file in this repository.  
+   found in the  [`values.yaml`](https://github.com/dell/helm-charts/blob/csi-isilon-2.14.0/charts/csi-isilon/values.yaml) file in this repository.
 
   <ul>
    {{< collapse id="2" title="Parameters">}}
@@ -171,11 +171,11 @@ CRDs should be configured during replication prepare stage with repctl as descri
    - ControllerCount parameter value must not exceed the number of nodes in the Kubernetes cluster. Otherwise, some of the controller pods remain in a "Pending" state till new nodes are available for scheduling. The installer exits with a WARNING on the same.
    - Whenever the *certSecretCount* parameter changes in *my-isilon-setting.yaml* user needs to reinstall the driver.
    - In order to enable authorization, there should be an authorization proxy server already installed.
-   - If you are using custom images, update each attributes under the *images* field in *my-isilon-setting.yaml* to make sure that they are pointing to the correct image repository and version. 
-   {{< /collapse >}} 
+   - If you are using custom images, update each attributes under the *images* field in *my-isilon-setting.yaml* to make sure that they are pointing to the correct image repository and version.
+   {{< /collapse >}}
    </ul>
 
-6. Edit following parameters in samples/secret/secret.yaml file and update/add connection/authentication information for one or more PowerScale clusters. If replication feature is enabled, ensure the secret includes all the PowerScale clusters involved in replication. 
+6. Edit following parameters in samples/secret/secret.yaml file and update/add connection/authentication information for one or more PowerScale clusters. If replication feature is enabled, ensure the secret includes all the PowerScale clusters involved in replication.
 
 <ul>
 {{< collapse id="3" title="Parameters">}}
@@ -369,12 +369,12 @@ level=error clusterName=powerscale runid=10 msg="mount failed: exit status 32
 mounting arguments: -t nfs -o rw XX.XX.XX.XX:/ifs/data/csi/k8s-ac7b91962d /var/lib/kubelet/pods/9f72096a-a7dc-4517-906c-20697f9d7375/volumes/kubernetes.io~csi/k8s-ac7b91962d/mount
 output: mount.nfs: access denied by server while mounting XX.XX.XX.XX:/ifs/data/csi/k8s-ac7b91962d
 ```
-{{< /accordion >}}  
+{{< /accordion >}}
 
 {{< accordion id="Three" title="Modules" >}}
 {{< cardcontainer >}}
-  {{< customcard link1="./csm-modules/authorizationv1.x" image="1" title="Authorization v1.x" >}}
-  {{< customcard link1="./csm-modules/authorizationv2.0" image="1" title="Authorization v2.0" >}}
+  {{< customcard link1="./csm-modules/authorizationv1" image="1" title="Authorization v1.x" >}}
+  {{< customcard link1="./csm-modules/authorizationv2" image="1" title="Authorization v2.0" >}}
   {{< customcard  link1="./csm-modules/observability" image="1" title="Observability"  >}}
   {{< customcard  link1="./csm-modules/replication" image="1" title="Replication"  >}}
   {{< customcard link1="./csm-modules/resiliency" image="1" title="Resiliency"  >}}

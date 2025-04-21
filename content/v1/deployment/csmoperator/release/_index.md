@@ -8,7 +8,7 @@ Description: >
 {{% pageinfo color="primary" %}}
 {{< message text="1" >}}
 {{% /pageinfo %}}
-## Release Notes - Container Storage Modules Operator v1.8.0
+## Release Notes - Container Storage Modules Operator v1.8.1
 
 
 
@@ -54,6 +54,7 @@ Description: >
 - [#1668 - [BUG]: CSM-Operator is reconciling non CSM pods](https://github.com/dell/csm/issues/1668)
 - [#1633 - [BUG]: CSM deployment minimal file - pulling from quay after updating the image registry](https://github.com/dell/csm/issues/1633)
 - [#1671 - [BUG]: Minimal CR for Powerflex is failing in Csm-operator](https://github.com/dell/csm/issues/1671)
+- [#1782 - [BUG]: Pods Stuck in Terminating State After PowerFlex CSI Node Pod Restart When Deployments Share Same Node](https://github.com/dell/csm/issues/1782)
 
 ### Known Issues
 | Issue | Workaround |

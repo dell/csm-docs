@@ -4,17 +4,16 @@ linkTitle: "Resiliency"
 
 ---
 
-1. #### Enable Resiliency Module   
-    
-    <br> 
+1. #### Enable Resiliency Module
 
-    Use this command to create the **ContainerStorageModule Custom Resource** with Resiliency: 
+    <br>
+    Use this command to create the **ContainerStorageModule Custom Resource** with Resiliency:
 
     ```bash 
     oc create -f csm-{{labels}}.yaml
     ```
 
-    Example: 
+    Example:
 
     <div style="margin-bottom:-1.8rem">
 
@@ -31,16 +30,16 @@ linkTitle: "Resiliency"
         configVersion: v2.12.0
       modules:
       - name: resiliency
-        enabled: true  
+        enabled: true
     EOF
-    ``` 
-    </div>  
+    ```
+    </div>
 
     **Detailed Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_{{Var}}_{{< version-docs key="sample_sc_pmax" >}}.yaml) for detailed settings.
 
 
     <br>
-    
+
     Check if Resiliency module successfully installed:
 
     ```terminal
@@ -55,13 +54,13 @@ linkTitle: "Resiliency"
 
     <br>
 
-    Verify the Resiliency Sidecar are displayed  in controller pod: 
+    Verify the Resiliency Sidecar are displayed  in controller pod:
 
     ```terminal 
     oc get pod {{Var}}-controller-5bcb5ff8cb-fjdmf -o jsonpath='{.spec.containers[*].name}'
 
     podmon attacher provisioner snapshotter resizer driver
-    ``` 
+    ```
     <br>
 
     Verify the Resiliency Sidecar are displayed  in node pod:
@@ -70,12 +69,12 @@ linkTitle: "Resiliency"
     oc get pod {{Var}}-node-j4jsz -o jsonpath='{.spec.containers[*].name}'
 
     podmon driver registrar
-    ``` 
+    ```
 
 <br>
 
-2. #### Protect Pods with Resiliency Module  
-     
+2. #### Protect Pods with Resiliency Module
+
       <br>
 
       Use this command to enable **resiliency protection** on a pod 
@@ -87,7 +86,7 @@ linkTitle: "Resiliency"
       ``` 
       <br>
 
-      Verify: 
+      Verify:
 
       ```terminal
       oc get pods -l podmon.dellemc.com/driver=csi-{{labels}} 
@@ -96,8 +95,8 @@ linkTitle: "Resiliency"
       pod-{{labels}}   1/1     Running   0          5m11s
       ``` 
       <br>
-       
-      Disable resiliency protection on a pod: 
+
+      Disable resiliency protection on a pod:
 
       ```terminal
       oc label pods pod-{{labels}} podmon.dellemc.com/driver-
@@ -106,18 +105,18 @@ linkTitle: "Resiliency"
       ```
 <br>
 
-3. #### Disabling Resiliency Module 
+3. #### Disabling Resiliency Module
 
-    <br> 
+    <br>
 
-    Use this command to disable **resilincey** 
+    Use this command to disable **resiliency**
 
 
     ```bash
     oc edit csm {{labels}} -n {{labels}}
     ``` 
 
-    Example: 
+    Example:
     ```bash
     apiVersion: storage.dell.com/v1
     kind: ContainerStorageModule
@@ -127,7 +126,7 @@ linkTitle: "Resiliency"
     spec:
       driver:
         csiDriverType: "{{Var}}"
-        configVersion: v2.12.0
+        configVersion: v2.14.0
       modules:
       - name: resiliency
         enabled: false

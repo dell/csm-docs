@@ -1,8 +1,8 @@
 ---
 title: "CSI Drivers"
 linkTitle: "CSI Drivers"
-description: About Dell Technologies (Dell) CSI Drivers 
-no_list: true 
+description: About Dell Technologies (Dell) CSI Drivers
+no_list: true
 weight: 3
 ---
 
