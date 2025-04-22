@@ -18,7 +18,7 @@ The table below lists the driver and modules versions installable with the CSM O
 | CSI PowerScale     | 2.13.0  | ✔ 1.13.0 , 2.1.0                | ✔ 1.11.0       | ✔ 1.11.0          | ✔ 1.12.0      |
 | CSI PowerScale     | 2.12.0  | ✔ 1.12.0 , 2.0.0                | ✔ 1.10.0       | ✔ 1.10.0          | ✔ 1.11.0      |
 | CSI PowerScale     | 2.11.0  | ✔ 1.11.0 , ❌                  | ✔ 1.9.0        | ✔ 1.9.0           | ✔ 1.10.0      |
-| CSI PowerFlex      | 2.13.0  | ✔ 1.13.0 , 2.1.0                | ✔ 1.11.0       | ✔ 1.11.0          | ✔ 1.12.0      |
+| CSI PowerFlex      | 2.13.1  | ✔ 1.13.0 , 2.1.0                | ✔ 1.11.0       | ✔ 1.11.0          | ✔ 1.12.0      |
 | CSI PowerFlex      | 2.12.0  | ✔ 1.12.0 , 2.0.0                | ✔ 1.10.0       | ✔ 1.10.0          | ✔ 1.11.0      |
 | CSI PowerFlex      | 2.11.0  | ✔ 1.11.0 , ❌                  | ✔ 1.9.0        | ✔ 1.9.0           | ✔ 1.10.0      |
 | CSI PowerStore     | 2.13.0  | ❌ , ❌                        | ❌             | ❌                | ✔ 1.12.0      |
@@ -72,7 +72,7 @@ Both editions have the same codebase and are supported by Dell Technologies, the
 1. Install volume snapshot CRDs. For detailed snapshot setup procedure, [click here](../../snapshots/#volume-snapshot-feature).
 2. Clone and checkout the required csm-operator version using
 ```bash
-git clone -b v1.8.0 https://github.com/dell/csm-operator.git
+git clone -b v1.8.1 https://github.com/dell/csm-operator.git
 ```
 3. `cd csm-operator`
 4. _(Optional)_ If using a local Docker image, edit the `deploy/operator.yaml` file and set the image name for the CSM Operator Deployment.
@@ -161,7 +161,7 @@ To build an offline bundle, the following steps are needed:
 
 1. Clone and checkout the required csm-operator version using
 ```bash
-git clone -b v1.8.0 https://github.com/dell/csm-operator.git
+git clone -b v1.8.1 https://github.com/dell/csm-operator.git
 ```
 2. `cd csm-operator`
 3. Run the `csm-offline-bundle.sh` script which will be found in the `scripts` directory with an argument of `-c` in order to create an offline bundle
@@ -200,7 +200,7 @@ Here is the output of a request to build an offline bundle for the Dell CSM Oper
    quay.io/dell/container-storage-modules/dell-csi-replicator:v1.11.0
    quay.io/dell/container-storage-modules/dell-replication-controller:v1.11.0
    quay.io/dell/storage/powerflex/sdc:4.5.2.1
-   quay.io/dell/container-storage-modules/dell-csm-operator:v1.8.0
+   quay.io/dell/container-storage-modules/dell-csm-operator:v1.8.1
    registry.redhat.io/openshift4/ose-kube-rbac-proxy-rhel9:v4.16.0-202409051837.p0.g8ea2c99.assembly.stream.el9
    nginxinc/nginx-unprivileged:1.27
    otel/opentelemetry-collector:0.42.0
@@ -363,7 +363,7 @@ The `Update approval` (**`InstallPlan`** in OLM terms) strategy plays a role whi
 1. Clone and checkout the required csm-operator version using
 
   ```bash
-  git clone -b v1.8.0 https://github.com/dell/csm-operator.git
+  git clone -b v1.8.1 https://github.com/dell/csm-operator.git
   ```
 2. `cd csm-operator`
 3. Execute `bash scripts/install.sh --upgrade`  . This command will install the latest version of the operator.
@@ -407,7 +407,7 @@ Modify the installation as needed, typically updating driver versions, sidecars,
 
 * Refer [Upgrade Obsevability Module](./modules/observability/#upgrade-observability) to upgrade the Observability Module via Operator
 
-* Refer [Upgrade Authorization Module](./modules/authorization-v1.x/#upgrade-csm-authorization) to upgrade the Authorization Module via Operator
+* Refer [Upgrade Authorization Module](./modules/authorization-v1/#upgrade-csm-authorization) to upgrade the Authorization Module via Operator
 
 ## Custom Resource Definitions
 

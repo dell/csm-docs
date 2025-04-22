@@ -24,7 +24,7 @@ The [Dell Container Storage Modules Installation Wizard](./src/index.html) is a 
 | CSI PowerMax       | 2.12.0    |✔️      |✔️        |
 | CSI PowerMax       | 2.11.0    |✔️      |✔️        |
 | CSI PowerMax       | 2.10.1    |✔️      |✔️        |
-| CSI PowerFlex      | 2.13.0    |✔️      |❌        |
+| CSI PowerFlex      | 2.13.1    |✔️      |❌        |
 | CSI PowerFlex      | 2.12.0    |✔️      |❌        |
 | CSI PowerFlex      | 2.11.0    |✔️      |❌        |
 | CSI PowerFlex      | 2.10.1    |✔️      |❌        |
@@ -122,7 +122,7 @@ The [Dell Container Storage Modules Installation Wizard](./src/index.html) is a 
 
 3. If Observability is checked in the wizard, refer to [Observability](../csmoperator/modules/observability) to export metrics to Prometheus and load the Grafana dashboards.
 
-4. If Authorization is checked in the wizard, only the sidecar is enabled. Refer to [Authorization](../csmoperator/modules/authorization-v2.0) to install and configure the CSM Authorization Proxy Server.
+4. If Authorization is checked in the wizard, only the sidecar is enabled. Refer to [Authorization](../csmoperator/modules/authorization-v2) to install and configure the CSM Authorization Proxy Server.
 
 5. If Replication is checked in the wizard, refer to [Replication](../csmoperator/modules/replication) for the necessary prerequisites required for this module.
 
