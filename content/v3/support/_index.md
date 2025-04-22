@@ -7,7 +7,7 @@ Description: >
 ---
 ### Where can I get support ?
 
-You can also interact with us on [GitHub](https://github.com/dell/csm) by creating a [GitHub Issue](https://github.com/dell/csm/issues).
+You can interact with us on [GitHub](https://github.com/dell/csm) by creating a [GitHub Issue](https://github.com/dell/csm/issues).
 
 If you have a support contract for a Dell Storage Backend that has a CSI Driver you can open a service request on [https://dell.com/support](https://dell.com/support) and select the **CSI Driver** product.
 
