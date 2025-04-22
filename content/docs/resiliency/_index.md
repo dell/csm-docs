@@ -36,15 +36,6 @@ CSM for Resiliency provides the following capabilities:
 | Revoke PV access from failed nodes      | yes         | yes   | yes         | yes       | yes       |
 {{</table>}}
 
-## Supported Operating Systems/Container Orchestrator Platforms
-
-{{<table "table table-striped table-bordered table-sm">}}
-| COP/OS            | Supported Versions |
-| ----------------- | :----------------: |
-| Kubernetes        | 1.30, 1.31, 1.32   |
-| Red Hat OpenShift |     4.16, 4.17     |
-{{</table>}}
-
 ## Supported Storage Platforms
 
 {{<table "table table-striped table-bordered table-sm">}}
