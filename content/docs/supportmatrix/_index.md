@@ -76,7 +76,6 @@ Container Storage Modules doesn't officially support specific operating systems,
 | [Replication](../concepts/replication/)                            |   Yes    |    Yes    |    No    |    Yes     |    Yes     |
 | [Resiliency](../concepts/resiliency/)                              |   Yes    |    Yes    |   Yes    |    Yes     |    Yes     |
 | [Application Mobility](../concepts/applicationmobility/)           |   Yes    |    No     |    No    |     No     |     No     |
-| [Volume Group Snapshot](../concepts/snapshots/volume-group-snapshots/) |    No    |    Yes    |    No    |     No     |    Yes     |
 {{</table>}}
 
 ## Operator compatibility matrix

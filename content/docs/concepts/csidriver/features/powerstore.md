@@ -704,10 +704,6 @@ nfsAcls: "A::OWNER@:rwatTnNcCy,A::GROUP@:rxtncy,A::EVERYONE@:rxtncy,A::user@doma
 **Note**:
 - If `blockProtocol` is set to `auto`, the driver will choose the protocol based on host initiators. Priority: NVMeFC > NVMeTCP > FC > iSCSI.
 
-## Volume group snapshot Support
-
-CSI Driver for Powerstore 2.3.0 and above supports creating volume groups and take snapshot of them by making use of CRD (Custom Resource Definition). More information can be found here: [Volume Group Snapshotter](../../../snapshots/volume-group-snapshots/).
-
 ## Configurable Volume Attributes (Optional)
 
 The CSI PowerStore driver version 2.3.0 and above supports Configurable volume attributes.

@@ -14,7 +14,6 @@ Container Storage Modules for Application Mobility provide Kubernetes administra
  
 Application Mobility uses object storage to copy application metadata and data. When a backup is requested, it uses these options:
  
-- **[Volume Group Snapshots](../snapshots/volume-group-snapshots/)** : If enabled, crash consistent snapshots of all volumes are used.
 - **[Volume Snapshots](../snapshots/)** : If enabled and supported by the CSI driver, individual snapshots are used for each Persistent Volume.
 - **Full Copies**: If no snapshot options are enabled, full copies of each Persistent Volume are used.
  

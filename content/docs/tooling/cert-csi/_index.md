@@ -146,8 +146,6 @@ storageClasses:
     RWX: # is ReadWriteMany volume access mode supported for non RawBlock volumes (true or false)
     volumeHealth: # set this to enable the execution of the VolumeHealthMetricsSuite (true or false)
     # Make sure to enable healthMonitor for the driver's controller and node pods before running this suite. It is recommended to use a smaller interval time for this sidecar and pass the required arguments.
-    VGS: # set this to enable the execution of the VolumeGroupSnapSuite (true or false)
-    # Additionally, make sure to provide the necessary required arguments such as volumeSnapshotClass, vgs-volume-label, and any others as needed.
     RWOP: # set this to enable the execution of the MultiAttachSuite with the AccessMode set to ReadWriteOncePod (true or false)
     ephemeral: # if exists, then run EphemeralVolumeSuite. See the Ephemeral Volumes suite section for example Volume Attributes
       driver: # driver name for EphemeralVolumeSuite (e.g., csi-vxflexos.dellemc.com)
@@ -345,8 +343,7 @@ storageClasses:
 9. If `storageClasses.volumeHealth` is `true`, executes the [Volume Health Metrics](#volume-health-metrics) suite.
 10. If `storageClasses.rwop` is `true`, executes the [Multi-Attach Volume](#multi-attach-volume) suite with the volume access mode `ReadWriteOncePod`.
 11. If `storageClasses.ephemeral` exists, executes the [Ephemeral Volumes](#ephemeral-volumes) suite.
-12. If `storageClasses.vgs` is `true`, executes the [Volume Group Snapshot]() suite.
-13. If `storageClasses.capacityTracking` exists, executes the [Storage Class Capacity Tracking](#storage-capacity-tracking) suite.
+12. If `storageClasses.capacityTracking` exists, executes the [Storage Class Capacity Tracking](#storage-capacity-tracking) suite.
 
 > ℹ️ **NOTE:**: For testing/debugging purposes, it can be useful to use the `--no-cleanup` so resources do not get deleted.
 
@@ -427,16 +424,6 @@ cert-csi test snap --sc <storage class> --vsc <volume snapshot class>
 ```
 
 Run `cert-csi test snap -h` for more options.
-
-#### Volume Group Snapshots
-1. Creates the namespace `vgs-snap-test-*` where resources will be created.
-2. Creates Persistent Volume Claims.
-3. If the specified storage class binding mode is not `WaitForFirstConsumer`, waits for Persistent Volume Claim to be bound to Persistent Volumes.
-4. Create Pods to consume the Persistent Volume Claims.
-5. Creates Volume Group Snapshot.
-6. Waits for Volume Group Snapshot state to be COMPLETE.
-
-> ℹ️ **NOTE:**: Volume Group Snapshots are only supported by CSI PowerFlex and CSI PowerStore.
 
 #### Multi-Attach Volume
 1. Creates the namespace `mas-test-*` where resources will be created.
