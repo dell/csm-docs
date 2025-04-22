@@ -770,18 +770,18 @@ The CSI PowerStore driver supports the provisioning of Metro volumes. The proces
 Please note that the Metro feature does not require the deployment of the replicator sidecar or the replication controller.
 
 ## Shared NFS
-Uses the NFS protocol to share files and directories over a network, operating on a client-server model where a host acts as an NFS server.
+Shared NFS leverages native NFS capabilities to support large scale RWX volumes through AccessMode, allowing multiple consumers to share storage efficiently. It is based on a client-server model where a node acts as an NFS server (and maybe client too).
 - **Scalability and Flexibility**: Offers enhanced scalability and flexibility compared to traditional NFS, which relies on a single dedicated server.
 - **Centralized File Management**: Allows remote files to be accessed as if they were local, simplifying file management and reducing duplication for more efficient storage use.
 - **NFSv4 Recommendation**: For optimal performance and compatibility, NFSv4 is recommended.
 - **Prerequisites**: NFS-related services (nfs-server and nfs-mountd on Linux) must be running on all participating worker nodes.
-- **CSI PowerStore Support**: Version 2.14 introduces support for Host-Based NFS with a new StorageClass.
+- **CSI PowerStore Support**: Version 2.14 introduces support for Shared NFS via a new StorageClass.
 
 ```yaml
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
-    name: powerstore-hostbasednfs-sc
+    name: powerstore-sharednfs-sc
     annotations:
         storageclass.kubernetes.io/is-default-class: false
 provisioner: csi-powerstore.dellemc.com
