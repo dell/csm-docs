@@ -394,7 +394,7 @@ Modify the installation as needed, typically updating driver versions, sidecars,
 
 * Refer [Upgrade Obsevability Module](./modules/observability/#upgrade-observability) to upgrade the Observability Module via Operator
 
-* Refer [Upgrade Authorization Module](./modules/authorization-v1.x/#upgrade-csm-authorization) to upgrade the Authorization Module via Operator
+* Refer [Upgrade Authorization Module](./modules/authorization-v1/#upgrade-csm-authorization) to upgrade the Authorization Module via Operator
 
 ## Custom Resource Definitions
 
