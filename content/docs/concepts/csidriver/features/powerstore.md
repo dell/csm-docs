@@ -773,7 +773,7 @@ Please note that the Metro feature does not require the deployment of the replic
 Shared NFS utilizes native NFS features to support large-scale ReadWriteMany (RWX) volumes through the access mode, enabling efficient shared storage across multiple consumers. It follows a client-server model, with a node serving as an NFS server—and potentially a client as well.
 - **Scalability and Flexibility**: Offers enhanced scalability and flexibility compared to traditional NFS, which relies on a single dedicated server.
 - **Centralized File Management**: Allows remote files to be accessed as if they were local, simplifying file management and reducing duplication for more efficient storage use.
-- **NFSv4 Recommendation**: For optimal performance and compatibility, NFSv4 is recommended.
+- **NFSv4 Recommendation**: NFS versions v4,1, v4.2.
 - **Prerequisites**: NFS-related services (nfs-server and nfs-mountd on Linux) must be running on all participating worker nodes.
 - **CSI PowerStore Support**: Version 2.14 introduces support for Shared NFS via a new StorageClass.
 
