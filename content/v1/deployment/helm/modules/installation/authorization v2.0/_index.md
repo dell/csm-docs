@@ -28,7 +28,7 @@ The following third-party components are optionally installed in the specified n
 ## Install CSM Authorization
 
 **Steps**
-1. [Install Vault or configure an existing Vault](../../../../csmoperator/modules/authorization-v2#vault-server-installation).
+1. [Install Vault or configure an existing Vault](../../../../csmoperator/modules/authorization-v2.0#vault-server-installation).
 2. Create a namespace where you want to install CSM Authorization.
    ```bash
    kubectl create namespace authorization

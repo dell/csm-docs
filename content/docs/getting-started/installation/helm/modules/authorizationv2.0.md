@@ -28,7 +28,7 @@ The following third-party components are optionally installed in the specified n
 ## Install Container Storage Modules Authorization
 
 **Steps**
-1. [Install Vault or configure an existing Vault](docs/getting-started/installation/operator/modules/authorizationv2#vault-server-installation).
+1. [Install Vault or configure an existing Vault](docs/getting-started/installation/operator/modules/authorizationv2.0#vault-server-installation).
 2. Create a namespace where you want to install Authorization.
    ```bash
    kubectl create namespace authorization

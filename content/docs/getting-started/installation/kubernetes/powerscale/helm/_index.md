@@ -32,7 +32,7 @@ The following are requirements to be met before installing the CSI Driver for Po
 - Mount propagation is enabled on container runtime that is being used
 - `nfs-utils` package must be installed on nodes that will mount volumes
 - If using Snapshot feature, satisfy all Volume Snapshot requirements
-- If enabling CSM for Authorization, please refer to the [Authorization deployment steps](../helm/csm-modules/authorizationv2/) first
+- If enabling CSM for Authorization, please refer to the [Authorization deployment steps](../helm/csm-modules/authorizationv2.0/) first
 - If enabling CSM for Replication, please refer to the [Replication deployment steps](../helm/csm-modules/replication/) first
 - If enabling CSM for Resiliency, please refer to the [Resiliency deployment steps](../helm/csm-modules/resiliency/) first
 
@@ -156,7 +156,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
    | ignoreUnresolvableHosts | Allows new host to add to existing export list though any of the existing hosts from the same exports are unresolvable/doesn't exist anymore. | No | false |
    | noProbeOnStart | Define whether the controller/node plugin should probe all the PowerScale clusters during driver initialization | No | false |
    | autoProbe | Specify if automatically probe the PowerScale cluster if not done already during CSI calls | No | true |
-   | **authorization** | [Authorization](../helm/csm-modules/authorizationv2/) is an optional feature to apply credential shielding of the backend PowerScale. | - | - |
+   | **authorization** | [Authorization](../helm/csm-modules/authorizationv2.0/) is an optional feature to apply credential shielding of the backend PowerScale. | - | - |
    | enabled                  | A boolean that enables/disables authorization feature. If enabled, isiAuthType must be set to 1. |  No      |   false   |
    | proxyHost | Hostname of the csm-authorization server. | No | Empty |
    | skipCertificateValidation | A boolean that enables/disables certificate validation of the csm-authorization proxy server. | No | true |
@@ -370,8 +370,8 @@ output: mount.nfs: access denied by server while mounting XX.XX.XX.XX:/ifs/data/
 
 {{< accordion id="Three" title="CSM Modules" >}}
 {{< cardcontainer >}}
-  {{< customcard link1="./csm-modules/authorizationv1" image="1" title="Authorization v1.x" >}}
-  {{< customcard link1="./csm-modules/authorizationv2" image="1" title="Authorization v2.0" >}}
+  {{< customcard link1="./csm-modules/authorizationv1.x" image="1" title="Authorization v1.x" >}}
+  {{< customcard link1="./csm-modules/authorizationv2.0" image="1" title="Authorization v2.0" >}}
   {{< customcard  link1="./csm-modules/observability" image="1" title="Observability"  >}}
   {{< customcard  link1="./csm-modules/replication" image="1" title="Replication"  >}}
   {{< customcard link1="./csm-modules/resiliency" image="1" title="Resiliency"  >}}

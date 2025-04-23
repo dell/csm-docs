@@ -12,7 +12,7 @@ description: >
 
 ### Prerequisite
 
-1. [Install Vault or configure an existing Vault](../authorizationv2/#vault-server-installation).
+1. [Install Vault or configure an existing Vault](../authorizationv2.0/#vault-server-installation).
 
 2. Execute `kubectl create namespace authorization` to create the authorization namespace (if not already present). Note that the namespace can be any user-defined name, in this example, we assume that the namespace is 'authorization'.
 
