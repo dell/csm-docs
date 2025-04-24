@@ -6,7 +6,7 @@ description: >
   Automated Failover and PVC Attachment on Kubernetes Stretched Clusters
 ---
 
-This feature is to automatically attach the Persistent Volume Claim (PVC) to the active volume/Persistent Volume (PV) without requiring manual intervention on a Kubernetes single stretched cluster using CSM replication.
+This feature automatically attaches the Persistent Volume Claim (PVC) to the active volume/Persistent Volume (PV) without requiring manual intervention on a Kubernetes single stretched cluster using CSM replication.
 
 ## Prerequisites
 
