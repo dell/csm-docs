@@ -6,6 +6,10 @@ Description: >
   Dell Container Storage Modules (CSM) support
 ---
 
+{{% pageinfo color="primary" %}}
+<span><span/>{{< message text="8" >}}
+{{% /pageinfo %}}
+
 ### Where can I get support ?
 
 You can interact with us on [GitHub](https://github.com/dell/csm) by creating a [GitHub Issue](https://github.com/dell/csm/issues).

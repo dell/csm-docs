@@ -7,11 +7,13 @@ description: How to get started with Container Storage Modules
 weight: 2
 ---
 {{% pageinfo color="primary" %}}
-1. <span><span/>{{< message text="7" >}}
+1. <span><span/>{{< message text="8" >}}
 
-2. <span><span/>{{< message text="1" >}}
+2. <span><span/>{{< message text="7" >}}
 
-3. <span><span/>{{< message text="5" >}}
+3. <span><span/>{{< message text="1" >}}
+
+4. <span><span/>{{< message text="5" >}}
 {{% /pageinfo %}}
 
 Welcome to the Container Storage Modules Getting Started documentation. This section provides detailed instructions on how to install, upgrade, and uninstall the Container Storage Modules.
