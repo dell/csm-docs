@@ -771,7 +771,7 @@ kubectl label nodes worker-2 topology.kubernetes.io/zone=zone2
 
 ### Storage Class
 
-When using multiple availability zones the StorageClass does not require details about the PowerMax array. The following sample shows a minimal StorageClass definition:
+When using multiple availability zones the StorageClass (AZ StorageClass) should not include the SYMID parameter. The following sample shows a minimal StorageClass definition:
 
 ```yaml
 apiVersion: storage.k8s.io/v1
@@ -787,7 +787,7 @@ With the above configuration, nodes labelled with the matching region, _region1_
 
 #### Optional Parameters
 
-In addition to the topology description, common array parameters can be defined in the secret to provide defaults when those parameters are not specified in the StorageClass. In the example above the SRP and service level are defaults for array 000000000001 so are no longer needed in the StorageClass definition. If the SRP is specified in the StorageClass then the StorageClass parameters will override the parameters in the secret.
+In addition to the topology description, common array parameters can be defined in the secret to provide defaults when those parameters are not specified in the StorageClass. In the examples above the SRP and service level are defaults for array 000000000001 so are no longer needed in the StorageClass definition. If the SRP is specified in the StorageClass then the StorageClass parameters will override the parameters in the secret.
 
 The following parameters can be defined in the secret as defaults when not defined in the StorageClass. These parameters if specified in the StorageClass can override the values in the secret:
 
