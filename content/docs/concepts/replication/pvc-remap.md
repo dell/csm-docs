@@ -14,13 +14,13 @@ This feature is enabled by default.
 
 ### Users can disable it at time of the installation
 
-* For installation done via `helm-charts`, user can set the argument `disablePVCRemap` to `true` in `values.yaml`. You can refer the following exerpt:
+* For installation done via `helm-charts`, user can set the argument `disablePVCRemap` to `true` in `values.yaml`. You can refer the following excerpt:
 
     ```yaml
     disablePVCRemap: "true"
     ```
 
-* For installation done via csm-operator, user can set the argument `DISABLE_PVC_REMAP` to `true` in `values.yaml`. You can refer the following exerpt:
+* For installation done via csm-operator, user can set the argument `DISABLE_PVC_REMAP` to `true` in `values.yaml`. You can refer the following excerpt:
 
     ```yaml
     - name: "DISABLE_PVC_REMAP"
