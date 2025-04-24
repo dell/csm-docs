@@ -716,15 +716,16 @@ Starting with CSM 1.14.0, the PowerMax CSI driver supports multiple availability
 
 Availability Zones support the use of a single StorageClass that is not associated with any specific PowerMax array or storage resource pool (SRP). Each cluster node must be labelled with topology labels that match the labels in the secret for the AZ local target array. This allows for using minimal storage classes which can more easily adapt to changes in the storage and cluster environment, thus reducing management activities.
 
-Requirements:
+Restrictions:
 
 - Support is limited to block storage only, NFS is not supported.
 - Only one PowerMax array per availability zone is supported.
 - Every PowerMax array must be labelled with one or more zone labels.
 - Every cluster worker node must be assigned to a zone.
 - The volumeBindingMode must be set to WaitForFirstConsumer.
+- The controller pods will still need access to the Unisphere API service across availability zones.
 
-> **Note:** Cluster nodes that are not in a zone will not be able to access arrays that are zoned. Conversely, arrays that are unzoned will be accessible from any node in the cluster.
+> **Note:** Cluster nodes that are not in a zone will not be able to access arrays that are zoned. Conversely, arrays that are unzoned will only be accessible from nodes that are not zoned to an array.
 
 > **Note:** The initial support for Availability Zones does not include support for Metro Volumes.
 
@@ -777,8 +778,6 @@ apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
   name: powermax-multi-az
-parameters:
-  csi.storage.k8s.io/fstype: xfs
 provisioner: csi-powermax.dellemc.com
 volumeBindingMode: WaitForFirstConsumer
 reclaimPolicy: Delete
@@ -788,9 +787,9 @@ With the above configuration, nodes labelled with the matching region, _region1_
 
 #### Optional Parameters
 
-In addition to the topology description, common array parameters can be defined in the secret to provide defaults when those parameters are not specified in the storage class. In the example above the SRP and service level are defaults for array 000000000001 so are no longer needed in the storage class definition. If the SRP is specified in the storage class then the storage class parameters will override the parameters in the secret.
+In addition to the topology description, common array parameters can be defined in the secret to provide defaults when those parameters are not specified in the StorageClass. In the example above the SRP and service level are defaults for array 000000000001 so are no longer needed in the StorageClass definition. If the SRP is specified in the StorageClass then the StorageClass parameters will override the parameters in the secret.
 
-The following parameters can be defined in the secret as defaults when not defined in the storage class. These parameters if specified in the storage class can override the values in the secret:
+The following parameters can be defined in the secret as defaults when not defined in the StorageClass. These parameters if specified in the StorageClass can override the values in the secret:
 
 {{<table "table table-striped table-bordered table-sm">}}
 |Parameter|Required|Default|Description|
@@ -803,3 +802,7 @@ The following parameters can be defined in the secret as defaults when not defin
 |HostIOLimitIOSec|false|None|The IOs per Second Host IO limit|
 |DynamicDistribution|false|None|Distribution of the Host IO limits|
 {{</table>}}
+
+#### Creating PVCs from a Snapshot or PVC with Multi-AZ
+
+When creating a PVC which uses a snapshot or another PVC as a source, the PVC will not be bound until a consuming pod is deployed to a node in the availability zone of the source volume. This is due to the `volumeBindingMode` property of the StorageClass being set to `WaitForFirstConsumer`. If a bound PVC is required before a pod is deployed then you can use another non AZ StorageClass for the new PVC which uses a `volumeBindingMode` of `Immediate`. The new StorageClass must specify the array ID and must match the array ID of the source PVC or VolumeSnapshot.
