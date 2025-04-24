@@ -5,7 +5,7 @@ description: About Dell Technologies (Dell) COSI Driver
 weight: 3
 ---
 
-The COSI Driver by Dell implements an interface between [COSI (spec v1alpha1)](https://container-object-storage-interface.github.io/docs/) enabled Container Orchestrator and Dell Storage Arrays. It is a plug-in that is installed into Kubernetes to provide object storage using Dell storage systems.
+The COSI Driver by Dell implements an interface between [COSI (spec v1alpha1)](https://github.com/kubernetes-sigs/container-object-storage-interface) enabled Container Orchestrator and Dell Storage Arrays. It is a plug-in that is installed into Kubernetes to provide object storage using Dell storage systems.
 
 Dell COSI Driver is a multi-backend driver, meaning that it can connect to multiple Object Storage Platform (OSP) Instances and provide access to them using the same COSI interface.
 
