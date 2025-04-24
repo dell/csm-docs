@@ -5,7 +5,6 @@ weight: 13
 Description: >
   Dell Container Storage Modules (CSM) support
 ---
-
 {{% pageinfo color="primary" %}}
 <span><span/>{{< message text="8" >}}
 {{% /pageinfo %}}
