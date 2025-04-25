@@ -61,6 +61,7 @@ You can start using Container Storage Modules for Replication with help from `re
           ```shell
           ./repctl cluster inject
           ```
+    > **_NOTE:_**  After running this step dell-replication-controller will be replicated to target cluster.
 5. Modify `csm-replication/repctl/examples/<storage>_example_values.yaml` config with replication information:
    > **_NOTE:_**  `clusterID` should match names you gave to clusters in step 2
 6. Create replication storage classes using config:
@@ -68,7 +69,7 @@ You can start using Container Storage Modules for Replication with help from `re
 
       ./repctl create sc --from-config ./examples/<storage>_example_values.yaml
       ```
-7. Install CSI driver for your chosen storage in source cluster and provision replicated volumes
+7. Install CSI driver for your chosen storage in source and target cluster and provision replicated volumes
 8. (optional) Create PVCs on target cluster from Replication Group:
       ```shell
       
