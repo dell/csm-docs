@@ -28,7 +28,7 @@ There are three methods of installing `cert-csi`.
 ### Download Release (Linux)
 > NOTE: Please ensure you delete any previously downloaded Cert-CSI binaries, as each release uses the same name (`cert-csi`). After installing the latest version, run the `cert-csi -v` command to verify the installed version.
 
-1. Download `cert-csi` from [here](https://github.com/dell/cert-csi/releases/download/v1.7.0/cert-csi)
+1. Download `cert-csi` from [here](https://github.com/dell/cert-csi/releases/latest/download/cert-csi)
 
 2. Set the execute permission before running it.
 
@@ -36,7 +36,7 @@ There are three methods of installing `cert-csi`.
 chmod +x ./cert-csi
 ```
 
-3. Install cert-csi as cert-csi.
+3. Install cert-csi-linux-am as cert-csi.
 
 ```bash
 sudo install -o root -g root -m 0755 cert-csi /usr/local/bin/cert-csi
@@ -45,7 +45,7 @@ sudo install -o root -g root -m 0755 cert-csi /usr/local/bin/cert-csi
 If you do not have root access on the target system, you can still install cert-csi to the ~/.local/bin directory:
 
 ```bash
-chmod +x ./cert-csi
+chmod +x ./cert-csi-linux-amd64
 mkdir -p ~/.local/bin
 mv ./cert-csi ~/.local/bin/cert-csi
 # and then append (or prepend) ~/.local/bin to $PATH
