@@ -60,7 +60,7 @@ storage products from Kubernetes clusters
 
 ##### Commands
 
-```
+```terminal
   admin        Generate admin token for use with CSM Authorization
   cluster-info Display the state of resources within the cluster
   completion   Generate the autocompletion script for the specified shell
@@ -74,7 +74,7 @@ storage products from Kubernetes clusters
 
 ##### Options
 
-```
+```terminal
   -h, --help          Help for karavictl
   -f, --admin-token   Path to admin token file; required for all commands except `admin token` and `cluster-info`
       --addr          Address of the CSM Authorization Proxy Server; required for all commands except `admin token` and `cluster-info`
@@ -103,12 +103,12 @@ karavictl admin token [flags]
 ```
 
 ##### Required Flags
-```
+```terminal
   -n, --name   Name of the admin
 ```
 
 ##### Optional Flags
-```
+```terminal
   -h, --help                       Help for token
   -s, --jwt-signing-secret         Specify JWT signing secret, or omit to use stdin
       --refresh-token-expiration   Expiration time of the refresh token, e.g. 48h (default 720h0m0s)
@@ -153,7 +153,7 @@ karavictl cluster-info [flags]
 ```
 
 ##### Optional Flags
-```
+```terminal
   -h, --help    Help for cluster-info
   -w, --watch   Watch for changes
 ```
@@ -163,7 +163,7 @@ karavictl cluster-info [flags]
 ```bash
 karavictl cluster-info
 ```
-```
+```terminal
 NAME                   READY   UP-TO-DATE   AVAILABLE   AGE
 tenant-service         1/1     1            1           59m
 redis-primary          1/1     1            1           59m
@@ -192,7 +192,7 @@ karavictl generate [flags]
 
 ##### Optional Flags
 
-```
+```terminal
   -h, --help   Help for generate
 ```
 
@@ -212,14 +212,14 @@ karavictl generate token --tenant Alice --admin-token admintoken.yaml --addr csm
 ```
 
 ##### Required Flags
-```
+```terminal
   -t, --tenant        Name of the tenant
   -f, --admin-token   Path to admin token file
       --addr          Address of the CSM Authorization Proxy Server
 ```
 
 ##### Optional Flags
-```
+```terminal
   -h, --help                       Help for token
       --insecure                   Skip certificate validation of the CSM Authorization Proxy Server
       --access-token-expiration    Expiration time of the access token, e.g. 1m30s (default 1m0s)
@@ -268,7 +268,7 @@ karavictl role [flags]
 
 ##### Options
 
-```
+```terminal
   -h, --help   Help for role
 ```
 
@@ -285,14 +285,14 @@ karavictl role get [flags]
 ```
 
 ##### Required Flags
-```
+```terminal
   -n, --name          Name of the role
   -f, --admin-token   Path to admin token file
       --addr          Address of the CSM Authorization Proxy Server
 ```
 
 ##### Optional Flags
-```
+```terminal
   -h, --help       Help for get
       --insecure   Skip certificate validation of the CSM Authorization Proxy Server
 ```
@@ -334,13 +334,13 @@ karavictl role list [flags]
 ```
 
 ##### Required Flags
-```
+```terminal
   -f, --admin-token   Path to admin token file
       --addr          Address of the CSM Authorization Proxy Server
 ```
 
 ##### Optional Flags
-```
+```terminal
   -h, --help       Help for list
       --insecure   Skip certificate validation of the CSM Authorization Proxy Server
 ```
@@ -396,14 +396,14 @@ karavictl role create [flags]
 ```
 
 ##### Required Flags
-```
+```terminal
       --role          Role in the form <name>=<type>=<id>=<pool>=<quota>
   -f, --admin-token   Path to admin token file
       --addr          Address of the CSM Authorization Proxy Server
 ```
 
 ##### Optional Flags
-```
+```terminal
   -h, --help       Help for create
       --insecure   Skip certificate validation of the CSM Authorization Proxy Server
 ```
@@ -436,14 +436,14 @@ karavictl role update [flags]
 ```
 
 ##### Required Flags
-```
+```terminal
       --role          Role in the form <name>=<type>=<id>=<pool>=<quota>
   -f, --admin-token   Path to admin token file
       --addr          Address of the CSM Authorization Proxy Server
 ```
 
 ##### Optional Flags
-```
+```terminal
   -h, --help       Help for update
       --insecure   Skip certificate validation of the CSM Authorization Proxy Server
 ```
@@ -473,14 +473,14 @@ karavictl role delete [flags]
 ```
 
 ##### Required Flags
-```
+```terminal
       --role          Role in the form <name>=<type>=<id>=<pool>=<quota>
   -f, --admin-token   Path to admin token file
       --addr          Address of the CSM Authorization Proxy Server
 ```
 
 ##### Optional Flags
-```
+```terminal
   -h, --help       Help for delete
       --insecure   Skip certificate validation of the CSM Authorization Proxy Server
 ```
@@ -512,7 +512,7 @@ karavictl rolebinding [flags]
 
 ##### Options
 
-```
+```terminal
   -h, --help   help for rolebinding
 ```
 
@@ -529,7 +529,7 @@ karavictl rolebinding create [flags]
 ```
 
 ##### Required Flags
-```
+```terminal
   -r, --role          Role name
   -t, --tenant        Tenant name
   -f, --admin-token   Path to admin token file
@@ -537,7 +537,7 @@ karavictl rolebinding create [flags]
 ```
 
 ##### Optional Flags
-```
+```terminal
   -h, --help       Help for create
       --insecure   Skip certificate validation of the CSM Authorization Proxy Server
 ```
@@ -568,7 +568,7 @@ karavictl rolebinding delete [flags]
 ```
 
 ##### Required Flags
-```
+```terminal
   -r, --role          Role name
   -t, --tenant        Tenant name
   -f, --admin-token   Path to admin token file
@@ -576,7 +576,7 @@ karavictl rolebinding delete [flags]
 ```
 
 ##### Optional Flags
-```
+```terminal
   -h, --help       Help for delete
       --insecure   Skip certificate validation of the CSM Authorization Proxy Server
 ```
@@ -609,7 +609,7 @@ karavictl storage [flags]
 
 ##### Options
 
-```
+```terminal
   -h, --help               Help for storage
 ```
 
@@ -626,7 +626,7 @@ karavictl storage get [flags]
 ```
 
 ##### Required Flags
-```
+```terminal
   -s, --system-id     System identifier (default "systemid")
   -t, --type          Type of storage system ("powerflex", "powermax", "powerscale")
   -f, --admin-token   Path to admin token file
@@ -634,7 +634,7 @@ karavictl storage get [flags]
 ```
 
 ##### Optional Flags
-```
+```terminal
   -h, --help       Help for delete
       --insecure   Skip certificate validation of the CSM Authorization Proxy Server
 ```
@@ -671,14 +671,14 @@ karavictl storage list [flags]
 ```
 
 ##### Required Flags
-```
+```terminal
   -t, --type          Type of storage system ("powerflex", "powermax", "powerscale")
   -f, --admin-token   Path to admin token file
       --addr          Address of the CSM Authorization Proxy Server
 ```
 
 ##### Optional Flags
-```
+```terminal
   -h, --help       Help for delete
       --insecure   Skip certificate validation of the CSM Authorization Proxy Server
 ```
@@ -721,7 +721,7 @@ karavictl storage create [flags]
 ```
 
 ##### Required Flags
-```
+```terminal
   -e, --endpoint         Endpoint of REST API gateway
   -p, --password         Password (default "****")
   -s, --system-id        System identifier (default "systemid")
@@ -732,7 +732,7 @@ karavictl storage create [flags]
 ```
 
 ##### Optional Flags
-```
+```terminal
   -h, --help             Help for delete
   -a, --array-insecure   Skip certificate validation of the storage array
       --insecure         Skip certificate validation of the CSM Authorization Proxy Server
@@ -764,7 +764,7 @@ karavictl storage update [flags]
 ```
 
 ##### Required Flags
-```
+```terminal
   -e, --endpoint         Endpoint of REST API gateway
   -p, --pass             Password (default "****")
   -s, --system-id        System identifier (default "systemid")
@@ -775,7 +775,7 @@ karavictl storage update [flags]
 ```
 
 ##### Optional Flags
-```
+```terminal
   -h, --help             Help for delete
   -a, --array-insecure   Skip certificate validation of the storage array
       --insecure         Skip certificate validation of the CSM Authorization Proxy Server
@@ -808,7 +808,7 @@ karavictl storage delete [flags]
 ```
 
 ##### Required Flags
-```
+```terminal
   -s, --system-id     System identifier (default "systemid")
   -t, --type          Type of storage system ("powerflex", "powermax")
   -f, --admin-token   Path to admin token file
@@ -816,7 +816,7 @@ karavictl storage delete [flags]
 ```
 
 ##### Optional Flags
-```
+```terminal
   -h, --help       Help for delete
       --insecure   Skip certificate validation of the CSM Authorization Proxy Server
 ```
@@ -870,14 +870,14 @@ karavictl tenant create [flags]
 ```
 
 ##### Required Flags
-```
+```terminal
   -n, --name          Tenant name
   -f, --admin-token   Path to admin token file
       --addr          Address of the CSM Authorization Proxy Server
 ```
 
 ##### Optional Flags
-```
+```terminal
   -h, --help         Help for delete
   -a, --approvesdc   To allow/deny SDC approval requests (default true | This flag is only applicable to PowerFlex. This flag will Approve/Deny  a tenant's SDC request)
       --insecure     Skip certificate validation of the CSM Authorization Proxy Server
@@ -909,14 +909,14 @@ karavictl tenant get [flags]
 ```
 
 ##### Required Flags
-```
+```terminal
   -n, --name          Tenant name
   -f, --admin-token   Path to admin token file
       --addr          Address of the CSM Authorization Proxy Server
 ```
 
 ##### Optional Flags
-```
+```terminal
   -h, --help       Help for delete
       --insecure   Skip certificate validation of the CSM Authorization Proxy Server
 ```
@@ -952,13 +952,13 @@ karavictl tenant list [flags]
 ```
 
 ##### Required Flags
-```
+```terminal
   -f, --admin-token   Path to admin token file
       --addr          Address of the CSM Authorization Proxy Server
 ```
 
 ##### Optional Flags
-```
+```terminal
   -h, --help       Help for delete
       --insecure   Skip certificate validation of the CSM Authorization Proxy Server
 ```
@@ -997,14 +997,14 @@ karavictl tenant revoke [flags]
 ```
 
 ##### Required Flags
-```
+```terminal
   -n, --name          Tenant name
   -f, --admin-token   Path to admin token file
       --addr          Address of the CSM Authorization Proxy Server
 ```
 
 ##### Optional Flags
-```
+```terminal
   -c, --cancel     Cancel a previous tenant revocation
   -h, --help       Help for delete
       --insecure   Skip certificate validation of the CSM Authorization Proxy Server
@@ -1035,14 +1035,14 @@ karavictl tenant delete [flags]
 ```
 
 ##### Required Flags
-```
+```terminal
   -n, --name          Tenant name
   -f, --admin-token   Path to admin token file
       --addr          Address of the CSM Authorization Proxy Server
 ```
 
 ##### Optional Flags
-```
+```terminal
   -h, --help       Help for delete
       --insecure   Skip certificate validation of the CSM Authorization Proxy Server
 ```
@@ -1072,14 +1072,14 @@ karavictl tenant update [flags]
 ```
 
 ##### Required Flags
-```
+```terminal
   -n, --name          Tenant name
   -f, --admin-token   Path to admin token file
       --addr          Address of the CSM Authorization Proxy Server
 ```
 
 ##### Optional Flags
-```
+```terminal
   -h, --help         Help for delete
   -a, --approvesdc   To allow/deny SDC approval requests (default true | This flag is only applicable to PowerFlex. This flag will Approve/Deny a tenant's SDC request)
       --insecure     Skip certificate validation of the CSM Authorization Proxy Server

@@ -57,7 +57,7 @@ ReplicationGroups) would be created in the same cluster with the `replicated-` p
 ```shell
 kubectl get pv 
 ```
-```
+```terminal
 NAME                           CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS      STORAGECLASS                 AGE
 csivol-06d51bfcc5              3Gi        RWO            Retain           Bound       powerstore-replication       23s
 replicated-csivol-06d51bfcc5   3Gi        RWO            Retain           Available   powerstore-replication-tgt   23s
@@ -65,7 +65,7 @@ replicated-csivol-06d51bfcc5   3Gi        RWO            Retain           Availa
 ```shell
 kubectl get rg
 ```
-```
+```terminal
 NAME                                                 AGE   STATE   LINK STATE     LAST LINKSTATE UPDATE
 replicated-rg-240721b0-12fb-4151-8dd8-94794ae2493e   34s   Ready   SYNCHRONIZED   2021-08-03T11:23:18Z
 rg-240721b0-12fb-4151-8dd8-94794ae2493e              34s   Ready   SYNCHRONIZED   2021-08-03T11:22:18Z
@@ -118,14 +118,14 @@ created in both `source` and `target` clusters under the same names. For example
 ```shell
 kubectl get pv
 ```
-```
+```terminal
 NAME                           CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS      STORAGECLASS                 AGE
 csivol-06d51bfcc5              3Gi        RWO            Retain           Bound       powerstore-replication       23s
 ```
 ```shell
 kubectl get rg
 ```
-```
+```terminal
 NAME                                      AGE   STATE   LINK STATE     LAST LINKSTATE UPDATE
 rg-240721b0-12fb-4151-8dd8-94794ae2493e   34s   Ready   SYNCHRONIZED   2021-08-03T11:22:18Z
 ```
@@ -133,14 +133,14 @@ rg-240721b0-12fb-4151-8dd8-94794ae2493e   34s   Ready   SYNCHRONIZED   2021-08-0
 ```shell
 kubectl get pv
 ```
-```
+```terminal
 NAME                           CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS          STORAGECLASS                 AGE
 csivol-06d51bfcc5              3Gi        RWO            Retain           Available       powerstore-replication       18s
 ```
 ```shell
 kubectl get rg
 ```
-```
+```terminal
 NAME                                      AGE   STATE   LINK STATE     LAST LINKSTATE UPDATE
 rg-240721b0-12fb-4151-8dd8-94794ae2493e   30s   Ready   SYNCHRONIZED   2021-08-03T11:22:18Z
 ```

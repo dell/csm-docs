@@ -17,14 +17,17 @@ Run `kubectl -n authorization get ingress` and `kubectl -n authorization get ser
 ```bash
 kubectl -n authorization get ingress
 ```
-```
+
+```terminal
 NAME              CLASS   HOSTS                           ADDRESS   PORTS     AGE
 proxy-server      nginx   csm-authorization.com                     00, 000   86s
-```
+``` 
+
 ```bash
 kubectl -n authorization get service
-```
-```
+``` 
+
+```terminal
 NAME                                               TYPE           CLUSTER-IP       EXTERNAL-IP   PORT(S)                      AGE
 authorization-cert-manager                         ClusterIP      00.000.000.000    <none>        000/TCP                     28s
 authorization-cert-manager-webhook                 ClusterIP      00.000.000.000    <none>        000/TCP                     27s

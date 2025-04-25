@@ -37,7 +37,7 @@ kubectl create -f deploy/kubernetes/snapshot-controller
 
 ### 2. Install VGS CRD
 
-```
+```terminal
 IMPORTANT: delete previous v1aplha2 version of CRD and vgs resources created using alpha version.
 	   Snapshots on array will remain if memberReclaimPolicy=retain was used.
 ```

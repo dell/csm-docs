@@ -15,7 +15,7 @@ If an RG doesn't have any PVs associated with it, the driver will not receive an
 
 This status can be obtained from the RG using a standard `kubectl get` call on the resource name:
 
-```
+```terminal
 NAME                                                 AGE     STATE   LINK STATE     LAST LINKSTATE UPDATE
 replicated-rg-240721b0-12fb-4151-8dd8-94794ae2493e   51d     Ready   SUSPENDED      2021-09-10T10:48:09Z
 ```

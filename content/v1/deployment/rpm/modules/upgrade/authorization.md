@@ -19,7 +19,7 @@ The Authorization proxy server should be upgraded before upgrading the CSI Drive
 
 ## Upgrading CSM for Authorization proxy server
 
-Obtain the latest single binary installer RPM by following one of our two options [here](../../installation/authorization-v1.x/authorization-v1#shell-script-installer).
+Obtain the latest single binary installer RPM by following one of our two options [here](../../installation/authorization-v1.x/authorizationv1-x#shell-script-installer).
 
 To update the rpm package on the system, run the below command from within the extracted folder:
 

@@ -23,7 +23,7 @@ If you are a developer who is new to Authorization and want to build a mental ma
 
 ## Bird's Eye View
 
-```
+```terminal
 +-----------------------------------+                                                                                 
 |   Kubernetes                      |                                                                                 
 |                                   |                                                                                 
@@ -136,7 +136,7 @@ The refresh approach is beneficial for the following reasons:
 
 The following diagram shows the access and refresh tokens in play and how a valid access token is required for a request to be proxied to the intended Storage Array.
 
-```
+```terminal
   +---------+                                           +---------------+
   |         |                                           |               |
   |         |                                           |               |       +----------+
@@ -216,7 +216,7 @@ Authorization leverages the [Open Policy Agent](https://www.openpolicyagent.org/
 
 Given these inputs, many decisions can be made to answer questions like "Can Tenant X, with _these_ roles provision _this_ volume of size Y?".  The result of the policy decision will determine whether or not the request is proxied.
 
-```
+```terminal
                  +----------------+                   
                   |   Open Policy  |                   
                   |     Agent      |                   

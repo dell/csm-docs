@@ -88,7 +88,8 @@ Redis is used to store application data regarding [tenants, quota, and volume ow
 ```bash
 k3s kubectl -n karavi get pvc
 ```
-```
+
+```terminal
 NAME                     STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS   AGE
 redis-primary-pv-claim   Bound    pvc-12d8cc05-910d-45bd-9f30-f6807b287a69   8Gi        RWO            local-path     65m
 ```
@@ -109,7 +110,7 @@ cp /var/lib/rancher/k3s/storage/pvc-12d8cc05-910d-45bd-9f30-f6807b287a69/appendo
 ```bash
 k3s kubectl -n karavi get pvc
 ```
-```
+```terminal
 NAME                     STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS   AGE
 redis-primary-pv-claim   Bound    pvc-e7ea31bf-3d79-41fc-88d8-50ba356a298b   8Gi        RWO            local-path     65m
 ```
