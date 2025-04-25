@@ -446,7 +446,7 @@ Restore application backup `backup1` on remote cluster `cluster2` in namespace `
 dellctl restore create restore1 --from-backup backup1 --cluster-id cluster2
 ```
 
-```
+```terminal
  INFO Restore request "restore1" submitted successfully.
  INFO Run 'dellctl restore get restore1' for more details.
 ```

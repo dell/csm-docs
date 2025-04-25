@@ -46,7 +46,7 @@ The Container Storage Modules Installation Wizard is a webpage that helps you cr
 {{< /hide >}}
 
 {{< hide id="2" >}}
-- If Authorization is checked in the wizard, only the sidecar is enabled. Refer to [Authorization](../csmoperator/csm-modules/authorizationv2) to install and configure the CSM Authorization Proxy Server. 
+- If Authorization is checked in the wizard, only the sidecar is enabled. Refer to [Authorization](../csmoperator/csm-modules/authorizationv2-0) to install and configure the CSM Authorization Proxy Server. 
 {{< /hide >}}
 
 {{< hide id="3">}}
