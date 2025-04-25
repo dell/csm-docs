@@ -85,7 +85,7 @@ The Persistent Volume for Redis is provisioned by the above Storage Class with t
 ```bash
 kubectl get persistentvolume
 ```
-```
+```terminal
 NAME                CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS     CLAIM                                      STORAGECLASS    REASON   AGE
 k8s-ab74921ab9      8Gi        RWO            Delete           Bound      authorization/redis-primary-pv-claim       <storage-class>          112m
 ```
