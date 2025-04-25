@@ -7,7 +7,7 @@ description: >
 ---  
 
 
-{{<include file="content/docs/getting-started/installation/helm/modules/authorizationv1-x.x.md">}}
+{{<include file="content/docs/getting-started/installation/helm/modules/authorizationv1-x.md">}}
 
 
 <script> 
