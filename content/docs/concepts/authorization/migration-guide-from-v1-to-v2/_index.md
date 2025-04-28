@@ -17,7 +17,7 @@ Container Storage Modules for Authorization v2 has significant architectural cha
 ## Prerequisites
 ### On the storage array, rename the volumes owned by each tenant with a tenant prefix.
 Use [dellctl](../../../tooling/cli/) to list the volumes owned by the tenant. 
-```
+```terminal
 # dellctl volume get --proxy <csm-authorization-proxy-address> --namespace <driver-namespace>
 NAME             VOLUME ID          SIZE       POOL    SYSTEM ID          PV NAME          PV STATUS   STORAGE CLASS   PVC NAME                NAMESPACE            SNAPSHOT COUNT
 k8s-4cfa97ba5d   c6cfdfe000000229   8.000000   pool1   3000000000011111   k8s-4cfa97ba5d   Bound       vxflexos        vol-create-test-vndq8   test                 0
@@ -34,7 +34,7 @@ On the storage array, rename each volume with your chosen tenant prefix. For exa
 Authorization v1 setup, list the storage to get all the storage systems configured in the environment.
 Example:
 
-```
+```terminal
 karavictl storage list --admin-token admintoken.yaml --addr csm-authorization.host.com
 
 {
@@ -52,7 +52,7 @@ karavictl storage list --admin-token admintoken.yaml --addr csm-authorization.ho
 ```
 Authorization v2, storage is created using custom resources. For each Storage in a v1 environment, create using the CR, example:
 
-```
+```terminal
 kubectl create -f controller/config/samples/csm-authorization_v1_storage.yaml
 ```
 ```yaml
@@ -83,10 +83,10 @@ Authorization v2, role creation is simpler. User will not be required to bind th
 
 List all the roles that are created in Container Storage Modules for Authorization v1 setup.
 Example:
-```
+```terminal
 karavictl role list --admin-token admintoken.yaml --addr csm-authorization.host.com
 ```
-```
+```terminal
 {
   "CSIGold": [
     {
@@ -113,7 +113,7 @@ karavictl role list --admin-token admintoken.yaml --addr csm-authorization.host.
 }
 ```
 Authorization v2, roles are created using custom resources. For each role in a v1 environment, create using the CR, example:
-```
+```terminal
 kubectl create -f controller/config/samples/csm-authorization_v1_csmrole.yaml
 ```
 ```yaml
@@ -143,10 +143,10 @@ spec:
 
 List all the tenants in v1 setup and all those tenants should be created in v2 setup.
 List tenants in v1 setup, example:
-```
+```bash
 karavictl tenant list --admin-token admintoken.yaml --addr csm-authorization.host.com
 ```
-```
+```terminal
 {
   "tenants": [
     {
@@ -156,10 +156,10 @@ karavictl tenant list --admin-token admintoken.yaml --addr csm-authorization.hos
 }
 ```
 Get detail of each tenant, example:
-```
+```bash
 karavictl tenant get --name Alice --admin-token admintoken.yaml --addr csm-authorization.host.com
 ```
-```
+```json
 {
   "name": "Alice"
   "roles": "CSIGold,CSISilver"
@@ -167,7 +167,7 @@ karavictl tenant get --name Alice --admin-token admintoken.yaml --addr csm-autho
 }
 ```
 Authorization v2, tenants are created using custom resources. The `spec.volumePrefix` field must be the prefix used in the prerequisite step of renaming the storage array volumes. For each tenant in a v1 environment, create using the CR, example:
-```
+```bash
 kubectl create -f controller/config/samples/csm-authorization_v1_csmtenant.yaml
 ```
 csm-authorization_v1_csmtenant.yaml file will look like following example:

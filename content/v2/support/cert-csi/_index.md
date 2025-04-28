@@ -26,20 +26,20 @@ There are three methods of installing `cert-csi`.
 > The executable from the GitHub Release only supports Linux. For non-Linux users, you must build the `cert-csi` executable [locally](#building-locally).
 
 ### Download Release (Linux)
-> NOTE: Please ensure you delete any previously downloaded Cert-CSI binaries, as each release uses the same name (`cert-csi-linux-amd64`). After installing the latest version, run the `cert-csi -v` command to verify the installed version.
+> NOTE: Please ensure you delete any previously downloaded Cert-CSI binaries, as each release uses the same name (`cert-csi`). After installing the latest version, run the `cert-csi -v` command to verify the installed version.
 
-1. Download `cert-csi` from [here](https://github.com/dell/cert-csi/releases/latest/download/cert-csi-linux-amd64)
+1. Download `cert-csi` from [here](https://github.com/dell/cert-csi/releases/latest/download/cert-csi)
 
 2. Set the execute permission before running it.
 
 ``` bash
-chmod +x ./cert-csi-linux-amd64
+chmod +x ./cert-csi
 ```
 
-3. Install cert-csi-linux-amd64 as cert-csi.
+3. Install cert-csi-linux-am as cert-csi.
 
 ```bash
-sudo install -o root -g root -m 0755 cert-csi-linux-amd64 /usr/local/bin/cert-csi
+sudo install -o root -g root -m 0755 cert-csi /usr/local/bin/cert-csi
 ```
 
 If you do not have root access on the target system, you can still install cert-csi to the ~/.local/bin directory:
@@ -47,7 +47,7 @@ If you do not have root access on the target system, you can still install cert-
 ```bash
 chmod +x ./cert-csi-linux-amd64
 mkdir -p ~/.local/bin
-mv ./cert-csi-linux-amd64 ~/.local/bin/cert-csi
+mv ./cert-csi ~/.local/bin/cert-csi
 # and then append (or prepend) ~/.local/bin to $PATH
 ```
 

@@ -22,7 +22,7 @@ Description: >
 ### The Failure of Building an Authorization RPM
   This response occurs when running 'make rpm' without the proper permissions or correct pathing of the Authorization repository.
 
-```
+```terminal
 Error response from daemon: failed to create shim task: OCI runtime create failed: runc create failed: unable to start container process: error during container init: error mounting "/root/karavi-authorization/bin/deploy" to rootfs at "/home/builder/rpm/deploy": mount /root/karavi-authorization/bin/deploy:/home/builder/rpm/deploy (via /proc/self/fd/6), flags: 0x5000: not a directory: unknown: Are you trying to mount a directory onto a file (or vice-versa)? Check if the specified host path exists and is the expected type.ERROR[0001] error waiting for container: context canceled 
 ```
 
@@ -59,7 +59,7 @@ This situation may occur if there are Iptables or other firewall rules preventin
 ```bash
 karavictl tenant list --addr <DNS-hostname>
 ```
-```
+```terminal
 {
   "ErrorMsg": "rpc error: code = Unavailable desc = Gateway Timeout: HTTP status code 504; 
   transport: received the unexpected content-type \"text/plain; charset=utf-8\""
@@ -73,7 +73,7 @@ prevent communication with the `DNS-hostname`, either new rules must be created 
 ### Installation fails to install policies
 If SELinux is enabled, the policies may fail to install:
 
-```
+```terminal
 error: failed to install policies (see /tmp/policy-install-for-karavi3163047435): exit status 1
 ```
 
@@ -84,7 +84,7 @@ This issue should only occur with older versions of Container Storage Modules Au
 ### After installation, the create-pvc Pod is in an Error state
 If SELinux is enabled, the create-pvc Pod may be in an Error state:
 
-```
+```terminal
 kube-system    create-pvc-44a763c7-e70f-4e32-a114-e94615041042   0/1     Error       0          102s
 ```
 
@@ -115,7 +115,7 @@ kubectl -n <driver-namespace> rollout restart ds/<driver>-node
 
 ### The CSI Driver for Dell PowerFlex v2.3.0 is in an Error or CrashLoopBackoff state due to "request denied for path" errors
 The vxflexos-controller pods will have logs similar to:
-```
+```terminal
 time="2022-06-30T17:35:03Z" level=error msg="failed to list vols for array 2d6fb7c6370a990f : rpc error: code = Internal desc = Unable to list volumes: request denied for path " error="rpc error: code = Internal desc = Unable to list volumes: request denied for path"
 time="2022-06-30T17:35:03Z" level=error msg="array 2d6fb7c6370a990f probe failed: failed to list vols for array 2d6fb7c6370a990f : rpc error: code = Internal desc = Unable to list volumes: request denied for path "
 ...
@@ -123,7 +123,7 @@ time="2022-06-30T17:35:03Z" level=fatal msg="grpc failed" error="rpc error: code
 ```
 
 The vxflexos-node pods will have logs similar to:
-```
+```terminal
 time="2022-06-30T17:38:32Z" level=error msg="failed to list vols for array 2d6fb7c6370a990f : rpc error: code = Internal desc = Unable to list volumes: request denied for path " error="rpc error: code = Internal desc = Unable to list volumes: request denied for path"
 time="2022-06-30T17:38:32Z" level=error msg="array 2d6fb7c6370a990f probe failed: failed to list vols for array 2d6fb7c6370a990f : rpc error: code = Internal desc = Unable to list volumes: request denied for path "
 ...
