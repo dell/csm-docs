@@ -8,12 +8,12 @@ toc_hide: true
 ## Migration Steps
 
 1. Save the CR yaml file of the current CSI driver to preserve the settings. Use the following commands in your cluster to get the CR:
-  ```
+  ```terminal
       kubectl -n <namespace> get <CRD_kind>
       kubectl -n <namespace> get <CRD_kind>/<CR_name> -o yaml
   ```
   Example for CSI Unity:
-  ```
+  ```terminal
       kubectl -n openshift-operators get CSIUnity
       kubectl -n openshift-operators get CSIUnity/test-unity -o yaml
   ```
