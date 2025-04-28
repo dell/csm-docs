@@ -54,6 +54,8 @@ This change will need to be made to the /etc/hosts file on:
 
 >Note: Please ensure that replication CRDs are installed in the clusters where you are installing the CSI drivers. These CRDs are generally installed as part of the Container Storage Modules Replication controller installation process.
 
+>Note: CSI Driver needs to be installed on both source and target cluster.
+
 ### Dynamic Log Level Change
 Container Storage Modules Replication Controller can dynamically change its logs' verbosity level.
 To set log level in runtime, you need to edit the controllers ConfigMap:
