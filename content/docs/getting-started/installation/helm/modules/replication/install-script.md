@@ -12,7 +12,6 @@ description: Installation of CSM for Replication using script (Helm chart)
 
 > **_NOTE:_**  These steps should be repeated on all Kubernetes clusters where you want to configure replication.
 
-
 ```shell
 git clone -b {{< version-docs key="Replication" >}} https://github.com/dell/csm-replication.git
 cd csm-replication
