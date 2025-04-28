@@ -22,16 +22,6 @@ wget -O myvalues.yaml https://raw.githubusercontent.com/dell/helm-charts/csm-rep
 bash scripts/install.sh --values ./myvalues.yaml
 ```
 
-Setup [repctl](../replication/install-repctl/#set-up-repctl-tool) tool
-
-Prepare admin Kubernetes clusters configs
-
-Add admin configs as clusters to `repctl`:
-```shell
-
-./repctl cluster add -f "/root/.kube/config-1","/root/.kube/config-2" -n "cluster-1","cluster-2"
-```
-
 >Note: Current installation method allows you to specify custom `<FQDN>:<IP>` entries to be appended to controller's `/etc/hosts` file. It can be useful if controller is being deployed in private environment where DNS is not set up properly, but kubernetes clusters use FQDN as API server's address.
 > The feature can be enabled by modifying `values.yaml`.
 >``` hostAliases:
@@ -55,8 +45,4 @@ After the installation ConfigMap will consist of only the `logLevel` field, to a
 ```shell
     cd csm-replication
     kubectl create configmap dell-replication-controller-config --namespace dell-replication-controller --from-file deploy/config.yaml -o yaml --dry-run | kubectl apply -f -
-```
-Inject admin configs into clusters:
-```shell
-./repctl cluster inject
 ```
