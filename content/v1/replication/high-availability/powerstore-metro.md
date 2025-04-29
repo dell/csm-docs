@@ -26,7 +26,7 @@ CSM PowerStore supports registering worker nodes as new hosts using `Metro Conne
 To manage your setup:
 
 Label the worker nodes: Add zone labels to the worker nodes.
-####Zone Identification:
+#### Zone Identification:
 Nodes in the same zone as the array configuration are considered the current system.
 Nodes in different zones are considered the remote system.
 
