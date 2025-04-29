@@ -15,13 +15,13 @@ This feature is enabled by default.
 
 ### Users can disable it at the time of installation
 
-* For installation done via `helm-charts`, user can set the argument `disablePVCRemap` to `true` in `values.yaml`. You can refer to the following excerpt:
+* For installation done via `helm-charts`, user can set the argument `disablePVCRemap` to `true` in `values.yaml`. You can refer to the following selection:
 
     ```yaml
     disablePVCRemap: "true"
     ```
 
-* For installation done via csm-operator, user can set the argument `DISABLE_PVC_REMAP` to `true` in sample files. eg. `storage_csm_powerflex_xxxxx.yaml`. You can refer to the following excerpt:
+* For installation done via csm-operator, user can set the argument `DISABLE_PVC_REMAP` to `true` in sample files. eg. `storage_csm_powerflex_xxxxx.yaml`. You can refer to the following selection:
 
     ```yaml
     - name: "DISABLE_PVC_REMAP"
