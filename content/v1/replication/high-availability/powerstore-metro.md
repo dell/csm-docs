@@ -57,8 +57,6 @@ arrays:
 * The node that does not match the array's topology zone key will be registered as `Host is co-located with remote system`
 * When both worker nodes have the same topology key as the array's topology zone key, then both nodes will be registered as `Co-located with both systems`
 * When the node does not have any zone keys in its label, the host is registered as `Local connectivity`
- 
- 
 
 ### Usage
 The Metro replicated volumes are created just like the normal volumes, but the `StorageClass` contains some
