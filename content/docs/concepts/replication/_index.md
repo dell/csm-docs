@@ -30,7 +30,7 @@ Container Storage Modules for Replication provides the following capabilities:
 | Create `DellCSIReplicationGroup` objects in the cluster                                                                             |   yes    |    yes     |    yes     |    yes    |  no   |
 | Failover & Reprotect applications using the replicated volumes                                                                      |   yes    |    yes     |    yes     |    yes    |  no   |
 | Online Volume Expansion for replicated volumes                                                                                      |   yes    |     no     |     no     |    yes    |  no   |
-| Controller reattach failover PV to PVC automatically in a single cluster                                                            |   yes    |     yes    |     yes    |    yes    |  no   |
+| Controller reattach failover PV to PVC automatically in a stretched cluster                                                            |   yes    |     yes    |     yes    |    yes    |  no   |
 | Provides a command line utility - [repctl](tools) for configuring & managing replication related resources across multiple clusters |   yes    |    yes     |    yes     |    yes    |  no   |
 {{</table>}}
 
