@@ -806,3 +806,22 @@ The following parameters can be defined in the secret as defaults when not defin
 #### Creating PVCs from a Snapshot or PVC with Multi-AZ
 
 When creating a PVC which uses a snapshot or another PVC as a source, the PVC will not be bound until a consuming pod is deployed to a node in the availability zone of the source volume. This is due to the `volumeBindingMode` property of the StorageClass being set to `WaitForFirstConsumer`. If a bound PVC is required before a pod is deployed then you can use another non AZ StorageClass for the new PVC which uses a `volumeBindingMode` of `Immediate`. The new StorageClass must specify the array ID and must match the array ID of the source PVC or VolumeSnapshot.
+
+There is no guarantee that PVCs will be scheduled to be created on the same array as the source snapshot or PVC. This is due to Kubernetes scheduling pods on nodes which may be in an AZ that is different from the source AZ. To avoid volume creation failures one can use a different storage class for the new PVC which is on the same array as the source by specifying the array ID. Another option is to make use of node affinity directives to schedule the pod on nodes which are in the same AZ as the source pod. For example one can add the following affinity stanza to indicate that the pod must be deployed on an AZ based on the matchedExpressions:
+
+```yaml
+spec:
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: zone.topology.kubernetes.io/region
+            operator: In
+            values:
+            - region1
+          - key: zone.topology.kubernetes.io/zone
+            operator: In
+            values:
+            - zone1
+```
