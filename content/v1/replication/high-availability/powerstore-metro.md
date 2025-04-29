@@ -21,7 +21,15 @@ The driver on receiving the metro-related parameters in the `CreateVolume` call 
 The creation of volumes in metro mode doesn't involve the replication sidecar or the common replication controller, nor does it cause the creation of any replication related custom resources. It just needs the `csi-powerstore` driver that implements the `CreateVolume` gRPC endpoint with metro capability for it to work.
 
 ### Host Registration for Powerstore Metro
-CSM PowerStore supports Host Registration as `Metro Connectivity` for registration of worker nodes as new hosts. Metro configuration is enabled via the array secret by specifying `metroTopology` as Uniform for a given array. To handle the metro configuration, the user will have to add node label on to the worker nodes, the node that fall in the same zone as in the array config will be considered as current system and the node that falls into a different zone will be considered as remote system.
+CSM PowerStore supports registering worker nodes as new hosts using `Metro Connectivity`. To enable this, you need to set the `metroTopology` to `Uniform` in the array's secret configuration. 
+
+To manage your setup:
+
+Label the worker nodes: Add zone labels to the worker nodes.
+####Zone Identification:
+Nodes in the same zone as the array configuration are considered the current system.
+Nodes in different zones are considered the remote system.
+
 
 ```yaml
 arrays:
