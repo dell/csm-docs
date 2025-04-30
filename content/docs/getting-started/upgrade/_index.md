@@ -17,4 +17,4 @@ weight: 2
 
 {{< /cardcontainer >}}
 
->Note: The upgrade steps for Kubernetes and Mirantis Kubernetes Engine (MKE) are the same.
+>Note: The installation, upgrade, and uninstallation procedures for Kubernetes and Mirantis Kubernetes Engine (MKE) are identical. 
