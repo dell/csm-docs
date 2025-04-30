@@ -16,7 +16,7 @@ weight: 2
 ** *See notifications from prior releases*
 
 
-This section provides detailed instructions on how to install, upgrade, and uninstall the Container Storage Modules.
+This section provides detailed instructions on how to install, upgrade, and uninstall Container Storage Modules.
 
 {{< cardcontainer >}}
 
