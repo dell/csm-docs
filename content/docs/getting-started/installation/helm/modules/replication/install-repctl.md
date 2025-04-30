@@ -69,7 +69,7 @@ You can start using Container Storage Modules for Replication with help from `re
 
       ./repctl create sc --from-config ./examples/<storage>_example_values.yaml
       ```
-7. Install CSI driver for your chosen storage in source and target cluster and provision replicated volumes
+7. Install CSI driver for your chosen storage on source and target cluster and provision replicated volumes
 8. (optional) Create PVCs on target cluster from Replication Group:
       ```shell
       
