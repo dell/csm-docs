@@ -8,7 +8,7 @@ weight: 2
 ---
 
 1. Set up an OpenShift cluster following the official documentation.
-2. Proceed to the [Prerequisite](./prerequisite).
+2. Proceed to the Prerequisite
 3. Complete the base installation.
 4. Proceed with module installation.
 

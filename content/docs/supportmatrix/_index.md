@@ -66,7 +66,7 @@ Container Storage Modules doesn't officially support specific operating systems,
 
 ## Helm Compatibility
 {{<table "table table-striped table-bordered table-sm">}}
-| CSI Driver         |  Authorization v1|  Authorization v2 | Replication | Observability | Resiliency | Application Mobility|
+| Platform         |  Authorization v1|  Authorization v2 | Replication | Observability | Resiliency | Application Mobility|
 | ------------------ |------------------| --------------- |-----------------|-------------------|----------------|------|
 | PowerStore         |  No      |   No              |  Yes              | Yes                 |    Yes     |No|
 | PowerScale         |  Yes     |   Yes             |  Yes              | Yes                 |    Yes     |No|
@@ -77,7 +77,7 @@ Container Storage Modules doesn't officially support specific operating systems,
 
 ## Operator Compatibility
 {{<table "table table-striped table-bordered table-sm">}}
-| CSI Driver         |  Authorization v1|  Authorization v2 | Replication | Observability | Resiliency |
+| Platform         |  Authorization v1|  Authorization v2 | Replication | Observability | Resiliency |
 | ------------------ |------------------| --------------|-----------------|-------------------|----------------|
 | PowerStore         |  No      |   No              |  No               | No                  |    Yes     |
 | PowerScale         |  Yes     |   Yes             |  Yes              | Yes                 |    Yes     |
@@ -103,10 +103,10 @@ Container Storage Modules doesn't officially support specific operating systems,
 
 ## Installation Wizard Compatibility 
 
-### CSI Drivers
+### Drivers
 
 {{<table "table table-striped table-bordered table-sm">}}
-| CSI Driver         |     Helm   | Operator  |
+| Platform         |     Helm   | Operator  |
 | ------------------ |  ------ | --------- |
 |  PowerStore     | Yes️      |Yes️        |
 |  PowerScale     | Yes️      |Yes️        |
@@ -115,7 +115,7 @@ Container Storage Modules doesn't officially support specific operating systems,
 |  Unity XT       | Yes️      |No         |
 {{</table>}}
 
-### CSM Modules
+### Modules
 {{<table "table table-striped table-bordered table-sm tdleft">}}
 | Container Storage Modules |
 | -----------------|

@@ -9,14 +9,18 @@ description: >
 
 
 1. Set up an OpenShift cluster following the official documentation.
-2. Proceed to the [Prerequisite](../prerequisite/_index.md).
+2. Proceed to the Prerequisite
 3. Complete the base installation.
 4. Proceed with module installation.
 <br>
 
 
 
+{{< accordion id="One" title="Prerequisite" >}} 
+<br>
+{{<include  file="content/docs/getting-started/installation/openshift/powermax/prerequisite/_index.md" >}}
 
+{{< /accordion >}}
 <br>
 
 {{< accordion id="Two" title="Base Install" markdown="true" >}}  

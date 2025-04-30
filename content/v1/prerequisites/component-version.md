@@ -17,5 +17,5 @@ weight: 1
 |<div style="text-align:left">  Observability | v1.11.0 |
 |<div style="text-align:left">  Replication | v1.11.0 |
 |<div style="text-align:left">  Resiliency | v1.12.0 |
-| CSM Application Mobility | v1.3.0 |
+| Application Mobility | v1.3.0 |
 {{</table>}}
