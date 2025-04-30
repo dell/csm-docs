@@ -41,7 +41,7 @@ kubectl patch pv test-pv -p '{"metadata": {"annotations":{"migration.storage.del
 Patching PV resource will trigger migration sidecar that will call `VolumeMigrate` call from the CSI driver. After migration is finished new PersistentVolume will be created in cluster with name of original PV plus `-to-<sc-name>` appended to it. 
 
 In our example, we will see this when running `kubectl get pv`: 
-```
+```terminal
 NAME                                   CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS      CLAIM                       STORAGECLASS                REASON   AGE
 test-pv                                1Gi        RWO            Retain           Bound       default/test-pvc            powermax                             5m
 test-pv-to-powermax-replication        1Gi        RWO            Retain           Available                               powermax-replication                 10s

@@ -94,6 +94,7 @@ Continuing from our earlier example with Cluster A & Cluster B:
 3. Create a ClusterRoleBinding in _Cluster B_ for the user:
    ```shell
    kubectl create clusterrolebinding <name> --clusterrole=dell-replication-manager-role --user=<user-name>
+   kubectl create rolebinding <name> --role=dell-replication-manager-role --user=<user-name> --namespace=dell-replication-controller
    ```
 4. Create a secret in _Cluster A_ using the kubeconfig file for this user:
    ```shell

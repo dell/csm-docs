@@ -250,16 +250,16 @@ spec:
     - name: csireverseproxy
       # enabled: Always set to true
       enabled: true
-      configVersion: v2.11.0
+      configVersion: v2.12.0
       forceRemoveModule: true
       components:
       - name: csipowermax-reverseproxy
       # image: Define the container images used for the reverse proxy
       # Default value: None
-      # Example: "csipowermax-reverseproxy:v2.11.0"
-        image: quay.io/dell/container-storage-modules/csipowermax-reverseproxy:v2.11.0
+      # Example: "csipowermax-reverseproxy:v2.12.0"
+        image: quay.io/dell/container-storage-modules/csipowermax-reverseproxy:v2.12.0
         envs:
-          # "tlsSecret" defines the TLS secret that is created with certificate
+          # "tlsSecret" defines the TLS secret that is created with the certificate
           # and its associated key
           # Default value: None
           # Example: "tls-secret"
