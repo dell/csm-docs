@@ -13,7 +13,7 @@ weight: 2
 > * <span><span/>{{< message text="1" >}}
 > * <span><span/>{{< message text="5" >}}
 
-** *See notifications from prior releases*
+##### ** *See notifications from prior releases*
 
 
 This section provides detailed instructions on how to install, upgrade, and uninstall Container Storage Modules.
