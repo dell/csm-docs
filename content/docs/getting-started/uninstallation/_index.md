@@ -19,4 +19,4 @@ weight: 3
 
 {{< /cardcontainer >}}
 
->Note: The uninstallation steps for Kubernetes and Mirantis Kubernetes Engine (MKE) are the same. 
+>Note: The installation, upgrade, and uninstallation procedures for Kubernetes and Mirantis Kubernetes Engine (MKE) are identical. 
