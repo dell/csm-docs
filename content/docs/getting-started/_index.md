@@ -6,8 +6,8 @@ no_list: true
 description: How to get started with Container Storage Modules
 weight: 2
 ---
-{{% pageinfo %}}
 ##ℹ️ Notifications
+{{% pageinfo %}}
 > 1. <span><span/>{{< message text="8" >}}
 > 2. <span><span/>{{< message text="7" >}}
 > 3. <span><span/>{{< message text="1" >}}
