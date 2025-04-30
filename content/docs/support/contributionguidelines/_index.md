@@ -82,7 +82,6 @@ The Container Storage Modules documentation portal follows a release branch stra
 - Install [latest Hugo version extended version](https://github.com/gohugoio/hugo/releases). 
     > Note: Please note we have to install an extended version.
 - Create a local copy of the csm-docs repository using `git clone`. 
-- Update docsy submodules inside themes folder using `git submodule update --recursive --init`
 - Change to the csm-docs folder and run 
     ```
     hugo server 
