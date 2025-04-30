@@ -12,6 +12,8 @@ weight: 2
 > * <span><span/>{{< message text="7" >}}
 > * <span><span/>{{< message text="1" >}}
 > * <span><span/>{{< message text="5" >}}
+> * <span><span/>{{< message text="11" >}}
+> * <span><span/>{{< message text="12" >}}
 
 ###### ** *See notifications from prior releases*
 
