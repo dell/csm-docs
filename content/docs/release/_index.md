@@ -23,7 +23,7 @@ Description: >
 
 ## Release and Support Lifecycle:
 
-The following information is designed to help customers and partners effectively plan, deploy,and maintain timely upgrades for the latest functionality and fixes.
+The following information is designed to help customers and partners effectively plan, deploy, and maintain timely upgrades for the latest functionality and fixes.
 
 **Policies:**
 - Each release is fully supported for 12 months. Refer to the matrix for General Availability (GA) and End-of-Life (EOL) dates of supported versions.
