@@ -28,4 +28,4 @@ This section provides detailed instructions on how to install, upgrade, and unin
 
 {{< /cardcontainer >}} 
 
->Note: The steps for Kubernetes and Mirantis Kubernetes Engine (MKE) are the same. You can follow them for installation, upgrade, and uninstallation.
+
