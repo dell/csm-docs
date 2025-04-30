@@ -1,5 +1,5 @@
 {{ if eq (.Get "text") "1" }} 
-Docker Hub images are discontinued. All deployments will be using images from <a href="https://quay.io/organization/dell">quay.io</a>. **
+Docker Hub images are discontinued. All deployments will be using images from <a href="https://quay.io/organization/dell">quay.io</a>. [^1]
 {{ else if eq (.Get "text") "2" }}
 Starting with CSM 1.12, all deployments will need to use images from <a href="https://quay.io/organization/dell">quay.io</a>. Please note that from CSM 1.14 (May 2025), upgrading with helm will fail if it attempts to use images from <a href="https://hub.docker.com/r/dellemc/">Docker Hub</a>.
 {{ else if eq (.Get "text") "3" }}
@@ -11,7 +11,7 @@ As of Container Storage Modules v1.15, Authorization v1.x will no longer be supp
 {{ else if eq (.Get "text") "6" }}
 This document version is no longer actively maintained. The site that you are currently viewing is an archived snapshot. For up-to-date documentation, see the [latest version](/csm-docs/)
 {{ else if eq (.Get "text") "7" }}
-Container Storage Modules Volume Group Snapshotter is no longer supported. **
+Container Storage Modules Volume Group Snapshotter is no longer supported. [^1]
 {{ else if eq (.Get "text") "8" }}
 Support via Slack is discontinued. For support, please reach out via the <a href="https://www.dell.com/support/incidents-online/en-us/contactus/product/container-storage-modules">Dell Support Portal</a>.
 {{ else if eq (.Get "text") "9" }}
