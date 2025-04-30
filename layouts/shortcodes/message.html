@@ -7,7 +7,7 @@ Starting with CSM 1.12, all deployments will use images from <a href="https://qu
 {{ else if eq (.Get "text") "4" }}
 Starting with CSM 1.12, all deployments will need to use images from <a href="https://quay.io/organization/dell">quay.io</a> . Please note that from CSM 1.14 (May 2025), upgrading will fail if it attempts to use images from <a href="https://hub.docker.com/r/dellemc/">Docker Hub</a>.
 {{ else if eq (.Get "text") "5" }}
-As of Container Storage Modules v1.15, Authorization v1.x will no longer be supported. Please migrate to Authorization v2.0 using the following <a href="/csm-docs/docs/concepts/authorization/migration-guide-from-v1-to-v2/">guide</a>.
+As of Container Storage Modules v1.15, Authorization v1.x will not be supported. Please migrate to Authorization v2.0 using the following <a href="/csm-docs/docs/concepts/authorization/migration-guide-from-v1-to-v2/">guide</a>.
 {{ else if eq (.Get "text") "6" }}
 This document version is no longer actively maintained. The site that you are currently viewing is an archived snapshot. For up-to-date documentation, see the [latest version](/csm-docs/)
 {{ else if eq (.Get "text") "7" }}
