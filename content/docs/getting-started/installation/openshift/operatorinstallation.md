@@ -37,7 +37,7 @@ The installation process involves the creation of a `Subscription` object either
 
 1. From your OpenShift UI, select **OperatorHub** in the left pane.
 
-2. On the **OperatorHub page**, search for `Container Storage Modules` and select its card.
+2. On the **OperatorHub page**, search for `container storage module` and select its card.
 
    <img src="./../../../../../images/deployment/operator/operatorhub_page.png" ><br> 
 
@@ -45,7 +45,7 @@ The installation process involves the creation of a `Subscription` object either
 
    <img src="./../../../../../images/deployment/operator/operator_version.png" style="border:1px solid black"> <br> 
 
-   Its starts installing the `Container Storage Modules` operator and directs you to the **Install Operator** page.
+   Its starts installing the `container storage module` operator and directs you to the **Install Operator** page.
 
    In the **Installation mode** section:
    - Select `A specific namespace on the cluster`.
@@ -63,7 +63,7 @@ The installation process involves the creation of a `Subscription` object either
 
    <img src="./../../../../../images/deployment/operator/install_operator.png" style="border:1px solid black"> </br> 
 
-5. Click **Install** to deploy `Container Storage Modules Operator` in the `dell-csm-operator` namespace.  
+5. Click **Install** to deploy `container storage module Operator` in the `dell-csm-operator` namespace.  
 
    <img src="./../../../../../images/deployment/operator/installing_operator.png" > </br>
 
@@ -79,7 +79,7 @@ The installation process involves the creation of a `Subscription` object either
 
 ### Certified vs Community
 
-Container Storage Modules Operator is distributed as both `Certified` & `Community` editions.
+Container Storage Module Operator is distributed as both `Certified` & `Community` editions.
 
 Both editions have the same codebase and are supported by Dell Technologies, the only differences are:
 

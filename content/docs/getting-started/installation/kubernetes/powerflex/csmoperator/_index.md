@@ -1,15 +1,20 @@
 ---
-title: "Operator"
+title: "Installation Guide"
 linktitle: "Operator"
 no_list: true
 description: CSM Operator Installation
 weight: 2
 ---
 
+1. Set up a Kubernetes cluster following the official documentation.
+3. Complete the base installation.
+4. Proceed with module installation.
+
 ## Operator Installation
+
 To deploy the Operator, follow the instructions available [here](../../../operator/operatorinstallation_kubernetes.md).
 
-{{< accordion id="Two" title="CSI Driver" markdown="true" >}}  
+{{< accordion id="Two" title="Base Install" markdown="true" >}}  
 
 ### Prerequisites
 
@@ -143,33 +148,34 @@ run `/opt/emc/scaleio/sdc/bin/drv_cfg --add_mdm --ip 10.xx.xx.xx.xx,10.xx.xx.xx`
 {{< collapse id="1" title="Parameters">}}
    | Parameter | Description | Required | Default |
    | --------- | ----------- | -------- |-------- |
-   | namespace | Specifies namespace where the driver will be installed | Yes | "vxflexos" |
-   | dnsPolicy | Determines the DNS Policy of the Node service | Yes | ClusterFirstWithHostNet |
-   | fsGroupPolicy | Defines which FS Group policy mode to be used, Supported modes `None, File and ReadWriteOnceWithFSType`. In OCP <= 4.16 and K8s <= 1.29, fsGroupPolicy is an immutable field. | No | "File" |
-   | replicas | Controls the number of controller pods you deploy. If the number of controller pods is greater than the number of available nodes, excess pods will become stay in a pending state. | Yes | 1 |
-   | storageCapacity.enabled | Enable/Disable storage capacity tracking | No | true |
-   | storageCapacity.pollInterval | Configure how often the driver checks for changed capacity | No | 5m |
-   | enableQuota | a boolean that, when enabled, will set quota limit for a newly provisioned NFS volume | No | none |
-   | maxVxflexosVolumesPerNode | Specify default value for maximum number of volumes that controller can publish to the node.If value is zero CO SHALL decide how many volumes of this type can be published by the controller to the node | Yes | 0 |
-   | ***Common parameters for node and controller*** |
-   | X_CSI_VXFLEXOS_ENABLELISTVOLUMESNAPSHOT | Enable list volume operation to include snapshots (since creating a volume from a snap actually results in a new snap) | No | false |
-   | X_CSI_VXFLEXOS_ENABLESNAPSHOTCGDELETE | Enable this to automatically delete all snapshots in a consistency group when a snap in the group is deleted | No | false |
-   | X_CSI_ALLOW_RWO_MULTI_POD_ACCESS | Setting allowRWOMultiPodAccess to "true" will allow multiple pods on the same node to access the same RWO volume. This behavior conflicts with the CSI specification version 1.3. NodePublishVolume description that requires an error to be returned in this case. However, some other CSI drivers support this behavior and some customers desire this behavior. Customers use this option at their own risk. | No | false |
-   | INTERFACE_NAMES | A mapping of node names to interface names. Only necessary when SDC is disabled. | No | none |
-   | CSI_LOG_LEVEL | Sets the logging level of the driver. | No | INFO |
-   | GOSCALEIO_DEBUG | Enable/Disable goscaleio library-level debugging. | No | false |
-   | GOSCALEIO_SHOWHTTP | Enable/Disable goscaleio library-level REST request logging. Enabling will also **enable** GOSCALEIO_DEBUG regardless of GOSCALEIO_DEBUG setting. | No | false |
-   | ***Controller parameters*** |
-   | X_CSI_POWERFLEX_EXTERNAL_ACCESS | allows specifying additional entries for hostAccess of NFS volumes. Both single IP address and subnet are valid entries | No | empty |
-   | X_CSI_HEALTH_MONITOR_ENABLED | Enable/Disable health monitor of CSI volumes from Controller plugin - volume condition | No | false |
-   | ***Node parameters*** |
-   | X_CSI_RENAME_SDC_ENABLED | Enable this to rename the SDC with the given prefix. The new name will be ("prefix" + "worker_node_hostname") and it should not exceed 31 chars. | Yes | false |
-   | X_CSI_APPROVE_SDC_ENABLED | Enable this to to approve restricted SDC by GUID during setup | Yes | false |
-   | X_CSI_HEALTH_MONITOR_ENABLED | Enable/Disable health monitor of CSI volumes from Node plugin - volume condition | No | false |
-   | X_CSI_SDC_ENABLED | Enable/Disable installation of the SDC. | Yes | true |
-   | ***Sidecar parameters*** |
-   | volume-name-prefix | The volume-name-prefix will be used by provisioner sidecar as a prefix for all the volumes created  | Yes | k8s |
-   | monitor-interval | The monitor-interval will be used by external-health-monitor as an interval for health checks  | Yes | 60s |
+   |<div style="text-align: left"> namespace |<div style="text-align: left"> Specifies namespace where the driver will be installed | Yes | "vxflexos" |
+   |<div style="text-align: left"> dnsPolicy |<div style="text-align: left"> Determines the DNS Policy of the Node service | Yes | ClusterFirstWithHostNet |
+   |<div style="text-align: left"> fsGroupPolicy |<div style="text-align: left"> Defines which FS Group policy mode to be used, Supported modes `None, File and ReadWriteOnceWithFSType`. In OCP <= 4.16 and K8s <= 1.29, fsGroupPolicy is an immutable field. | No | "File" |
+   |<div style="text-align: left"> replicas |<div style="text-align: left"> Controls the number of controller pods you deploy. If the number of controller pods is greater than the number of available nodes, excess pods will become stay in a pending state. | Yes | 1 |
+   |<div style="text-align: left"> storageCapacity.enabled |<div style="text-align: left"> Enable/Disable storage capacity tracking | No | true |
+   |<div style="text-align: left"> storageCapacity.pollInterval |<div style="text-align: left"> Configure how often the driver checks for changed capacity | No | 5m |
+   |<div style="text-align: left"> enableQuota |<div style="text-align: left"> a boolean that, when enabled, will set quota limit for a newly provisioned NFS volume | No | none |
+   |<div style="text-align: left"> maxVxflexosVolumesPerNode |<div style="text-align: left"> Specify default value for maximum number of volumes that controller can publish to the node.If value is zero CO SHALL decide how many volumes of this type can be published by the controller to the node | Yes | 0 |
+   |<div style="text-align: left"> ***Common parameters for node and controller*** |
+   |<div style="text-align: left"> X_CSI_VXFLEXOS_ENABLELISTVOLUMESNAPSHOT |<div style="text-align: left"> Enable list volume operation to include snapshots (since creating a volume from a snap actually results in a new snap) | No | false |
+   |<div style="text-align: left"> X_CSI_VXFLEXOS_ENABLESNAPSHOTCGDELETE |<div style="text-align: left"> Enable this to automatically delete all snapshots in a consistency group when a snap in the group is deleted | No | false |
+   |<div style="text-align: left"> X_CSI_ALLOW_RWO_MULTI_POD_ACCESS |<div style="text-align: left"> Setting allowRWOMultiPodAccess to "true" will allow multiple pods on the same node to access the same RWO volume. This behavior conflicts with the CSI specification version 1.3. NodePublishVolume description that requires an error to be returned in this case. However, some other CSI drivers support this behavior and some customers desire this behavior. Customers use this option at their own risk. | No | false |
+   |<div style="text-align: left"> INTERFACE_NAMES |<div style="text-align: left"> A mapping of node names to interface names. Only necessary when SDC is disabled. | No | none |
+   |<div style="text-align: left"> CSI_LOG_LEVEL |<div style="text-align: left"> Sets the logging level of the driver. | No | INFO |
+   |<div style="text-align: left"> GOSCALEIO_DEBUG |<div style="text-align: left"> Enable/Disable goscaleio library-level debugging. | No | false |
+   |<div style="text-align: left"> GOSCALEIO_SHOWHTTP |<div style="text-align: left"> Enable/Disable goscaleio library-level REST request logging. Enabling will also **enable** GOSCALEIO_DEBUG regardless of GOSCALEIO_DEBUG setting. | No | false |
+   |<div style="text-align: left"> ***Controller parameters*** |
+   |<div style="text-align: left"> X_CSI_POWERFLEX_EXTERNAL_ACCESS |<div style="text-align: left"> allows specifying additional entries for hostAccess of NFS volumes. Both single IP address and subnet are valid entries | No | empty |
+   |<div style="text-align: left"> X_CSI_HEALTH_MONITOR_ENABLED |<div style="text-align: left"> Enable/Disable health monitor of CSI volumes from Controller plugin - volume condition | No | false |
+   |<div style="text-align: left"> ***Node parameters*** |
+   |<div style="text-align: left"> X_CSI_RENAME_SDC_ENABLED |<div style="text-align: left"> Enable this to rename the SDC with the given prefix. The new name will be ("prefix" + "worker_node_hostname") and it should not exceed 31 chars. | Yes | false |
+   |<div style="text-align: left"> X_CSI_APPROVE_SDC_ENABLED |<div style="text-align: left"> Enable this to to approve restricted SDC by GUID during setup | Yes | false |
+   |<div style="text-align: left"> X_CSI_HEALTH_MONITOR_ENABLED |<div style="text-align: left"> Enable/Disable health monitor of CSI volumes from Node plugin - volume condition | No | false |
+   |<div style="text-align: left"> X_CSI_SDC_ENABLED |<div style="text-align: left"> Enable/Disable installation of the SDC. | Yes | true |
+   |<div style="text-align: left"> ***Sidecar parameters*** |
+   |<div style="text-align: left">  volume-name-prefix |<div style="text-align: left">  The volume-name-prefix will be used by provisioner sidecar as a prefix for all the volumes created  | Yes | k8s |
+   |<div style="text-align: left"> volume-name-prefix |<div style="text-align: left">  The volume-name-prefix will be used by provisioner sidecar as a prefix for all the volumes created  | Yes | k8s |
+   |<div style="text-align: left">  monitor-interval |<div style="text-align: left">  The monitor-interval will be used by external-health-monitor as an interval for health checks  | Yes | 60s |
 {{< /collapse >}}
 
 ii . **Run this command to create** a PowerFlex custom resource:
@@ -244,7 +250,7 @@ ii . **Run this command to create** a PowerFlex custom resource:
 
 <br>
 
-{{< accordion id="Three" title="CSM Modules">}}
+{{< accordion id="Three" title="Modules">}}
  <br>  
 
 {{< markdownify >}}
