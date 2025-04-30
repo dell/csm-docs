@@ -37,7 +37,7 @@ The following are requirements that must be met before installing the CSI Driver
 - Install PowerFlex Storage Data Client
 - If using Snapshot feature, satisfy all Volume Snapshot requirements
 - A user must exist on the array with a role _>= FrontEndConfigure_
-- If enabling CSM for Authorization, please refer to the [Authorization deployment steps](docs/getting-started/installation/helm/modules/authorizationv2/) first
+- If enabling CSM for Authorization, please refer to the [Authorization deployment steps](docs/getting-started/installation/helm/modules/authorizationv2-0/) first
 - If multipath is configured, ensure CSI-PowerFlex volumes are blacklisted by multipathd. See [troubleshooting section](../../../../../concepts/csidriver/troubleshooting/powerflex) for details
 - Secure boot is not supported; ensure that secure boot is disabled in the BIOS.
 
@@ -352,9 +352,9 @@ Starting CSI PowerFlex v1.5, `dell-csi-helm-installer` will not create any Volum
        
 
 {{< cardcontainer >}}
-    {{< customcard link1="./csm-modules/authorizationv1"  image="1" title="Authorization v1.x" >}}
+    {{< customcard link1="./csm-modules/authorizationv1-x"  image="1" title="Authorization v1.x" >}}
 
-    {{< customcard link1="./csm-modules/authorizationv2"   image="1" title="Authorization v2.0"  >}}
+    {{< customcard link1="./csm-modules/authorizationv2-0"   image="1" title="Authorization v2.0"  >}}
 
     {{< customcard  link1="./csm-modules/observability"   image="1" title="Observability"  >}}
 

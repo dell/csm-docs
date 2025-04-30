@@ -670,9 +670,9 @@ NAME                    STATUS   VOLUME             CAPACITY   ACCESS MODES   ST
 <br>   
 
 {{< cardcontainer >}}
-    {{< customcard link1="./csm-modules/authorizationv1"  image="1" title="Authorization v1.x" >}}
+    {{< customcard link1="./csm-modules/authorizationv1-x"  image="1" title="Authorization v1.x" >}}
 
-    {{< customcard link1="./csm-modules/authorizationv2"   image="1" title="Authorization v2.0"  >}}
+    {{< customcard link1="./csm-modules/authorizationv2-0"   image="1" title="Authorization v2.0"  >}}
 
     {{< customcard  link1="./csm-modules/observability"   image="1" title="Observability"  >}}
 

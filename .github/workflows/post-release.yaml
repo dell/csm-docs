@@ -1,0 +1,360 @@
+name: Setup Main Branch
+
+on:
+  workflow_dispatch:  # Allows manual triggering from the GitHub UI
+
+jobs:
+  setup-main-branch:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write           # Needed to push commits
+      pull-requests: write      # Needed to open PRs
+
+
+    steps:
+      # Step 1: Checkout the main branch with full history
+      - name: Checkout main branch
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0  # Required to create a new branch from the full commit history
+          token: ${{ secrets.CSMBOT_PAT }}
+
+      # Step 2: Configure Git user identity for commits
+      - name: Set up Git user
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+      # Step 3: Create a new branch for changes
+      - name: Create new branch
+        run: |
+          BRANCH_NAME="setup_main_branch"
+          git checkout -b $BRANCH_NAME
+          echo "BRANCH_NAME=$BRANCH_NAME" >> $GITHUB_ENV
+
+      - name: Determine version for main branch setup
+        run: |
+          git fetch --all
+
+          # Extract only release branches with x.y.z pattern and clean whitespace
+          latest_release=$(git branch -r \
+            | grep -E 'origin/release-[0-9]+\.[0-9]+\.[0-9]+$' \
+            | sed 's|origin/release-||' \
+            | sed 's/^[[:space:]]*//' \
+            | sort -V \
+            | tail -n 1)
+
+          # Exit if nothing matched
+          if [[ -z "$latest_release" ]]; then
+            echo "❌ No valid release branch found (format: release-x.y.z)"
+            exit 1
+          fi
+
+          echo "🔍 Found latest release branch: release-$latest_release"
+
+          # Extract major, minor, patch
+          major=$(echo "$latest_release" | awk -F. '{print $1}')
+          minor=$(echo "$latest_release" | awk -F. '{print $2}')
+          patch=$(echo "$latest_release" | awk -F. '{print $3}')
+
+          # Calculate new minor version (increment minor, reset patch to 0)
+          new_minor=$((minor + 1))
+          next_target_version="v$major.$new_minor.0"
+          next_release_branch="release-$major.$new_minor.0"
+
+          # Current release vars
+          target_version="v$latest_release"
+          target_release_branch="release-$latest_release"
+
+          # Export to GitHub Actions env
+          echo "TARGET_VERSION=$target_version" >> "$GITHUB_ENV"
+          echo "TARGET_RELEASE_BRANCH=$target_release_branch" >> "$GITHUB_ENV"
+          echo "NEXT_TARGET_VERSION=$next_target_version" >> "$GITHUB_ENV"
+          echo "NEXT_RELEASE_BRANCH=$next_release_branch" >> "$GITHUB_ENV"
+
+          # For local testing output
+          echo "✅ TARGET_VERSION: $target_version"
+          echo "✅ TARGET_RELEASE_BRANCH: $target_release_branch"
+          echo "✅ NEXT_TARGET_VERSION: $next_target_version"
+          echo "✅ NEXT_RELEASE_BRANCH: $next_release_branch"
+      
+      - name: Update hugo.toml with new version
+        run: |
+          #!/bin/bash
+
+          set -e
+
+          TOML_FILE="hugo.toml"
+
+          # Read all existing versions under [[params.versions]]
+          versions=()
+          in_block=0
+
+          while IFS= read -r line; do
+            if [[ $line =~ \[\[params\.versions\]\] ]]; then
+              in_block=1
+            elif [[ $in_block -eq 1 && $line =~ version\ =\ \"(.*)\" ]]; then
+              versions+=("${BASH_REMATCH[1]}")
+              in_block=0
+            fi
+          done < "$TOML_FILE"
+
+          # Get the count of versions
+          count=${#versions[@]}
+
+          # Shift versions down
+          for ((i=count-1; i>0; i--)); do
+            versions[$i]=${versions[$((i-1))]}
+          done
+
+          # Increment minor version for latest version
+          IFS='.' read -r major minor patch <<< "${versions[0]}"
+          minor=$((minor + 1))
+          patch=0
+          versions[0]="$major.$minor.$patch"
+
+          # Update the file in-place
+          current=0
+          awk -v count="$count" -v vlist="$(IFS=,; echo "${versions[*]}")" '
+          BEGIN {
+            split(vlist, v, ",")
+            current=1
+            in_block=0
+          }
+          {
+            # Detect the beginning of a [[params.versions]] block
+            if ($0 ~ /^\[\[params\.versions\]\]$/) {
+              in_block=1
+            } 
+            # If inside the block, update the version line
+            else if (in_block && $0 ~ /version =/) {
+              if (current <= count) {
+                print "  version = \"" v[current] "\""
+                current++
+                in_block=0
+                next
+              }
+            }
+            print
+          }
+          ' "$TOML_FILE" > "$TOML_FILE.tmp" && mv "$TOML_FILE.tmp" "$TOML_FILE"
+
+          echo "✅ hugo.toml versions updated successfully in [[params.versions]]."
+      
+      # Step 4: Run the full version update logic
+      - name: Propagate Hugo Content Versions
+        run: |
+          #!/bin/bash
+          set -e
+
+          versions=("docs" "v1" "v2" "v3")
+
+          echo "🚀 Starting version propagation..."
+
+          for ((i=${#versions[@]}-2; i>=0; i--)); do
+              src="content/${versions[i]}"
+              dest="content/${versions[i+1]}"
+
+              echo "🔄 Updating from $src → $dest"
+
+              if [ ! -d "$src" ]; then
+                  echo "❌ Error: Source directory $src does not exist!"
+                  exit 1
+              fi
+
+              rm -rf "$dest"
+              mkdir -p "$dest"
+              cp -r "$src/." "$dest/" || echo "⚠️ Warning: No files copied from $src"
+              echo "✅ Copied contents from $src to $dest"
+
+              find "$dest" -type f -exec sed -i "s#\\(\\S*\\)(${versions[i]}/#\\1(${versions[i+1]}/#g" {} +
+              find "$dest" -type f -exec sed -i "s#\\(\\S*\\)content/${versions[i]}/#\\1content/${versions[i+1]}/#g" {} +
+              find "$dest" -type f -exec sed -i "s/{{< version-${versions[i]}\\b/{{< version-${versions[i+1]}/g" {} +
+
+              echo "🛠️ Updated references in $dest from ${versions[i]} to ${versions[i+1]}"
+
+              git diff --stat "$dest" || echo "ℹ️ No changes detected in $dest"
+
+              shortcode_src="layouts/shortcodes/version-${versions[i]}.html"
+              shortcode_dest="layouts/shortcodes/version-${versions[i+1]}.html"
+
+              if [ -f "$shortcode_src" ]; then
+                  cp "$shortcode_src" "$shortcode_dest"
+                  echo "✅ Copied shortcode: $shortcode_src → $shortcode_dest"
+              else
+                  echo "⚠️ Shortcode not found: $shortcode_src (skipping)"
+              fi
+          done
+
+          index_file="content/v1/getting-started/_index.md"
+          if [ -f "$index_file" ]; then
+              echo "📝 Modifying $index_file to add page info block..."
+
+              awk '
+              BEGIN {
+                  front_matter_count = 0;
+                  inserted = 0;
+              }
+              {
+                  print;
+                  if ($0 ~ /^---[ \t]*$/) {
+                      front_matter_count++;
+                      if (front_matter_count == 2 && inserted == 0) {
+                          print "";
+                          print "{{% pageinfo color=\"dark\" %}}";
+                          print "<span><span/>{{< message text=\"6\" >}}";
+                          print "{{% /pageinfo %}}";
+                          print "";
+                          inserted = 1;
+                      }
+                  }
+              }' "$index_file" > temp.md && mv temp.md "$index_file"
+
+              echo "✅ Inserted info block into $index_file"
+          else
+              echo "⚠️ Warning: $index_file not found. Skipping modification."
+          fi
+
+          echo "🎉 Version update completed successfully!"
+      # Step 7: Release Folder Management 
+      - name: Manage Release Folders and Bump Version
+        run: |
+          #!/bin/bash
+          set -e
+
+          versions=("docs" "v1" "v2" "v3")
+
+          for version in "${versions[@]}"; do
+            release_dir="content/$version/release"
+
+            if [ -d "$release_dir" ]; then
+              echo "📁 Found release folder in $version"
+
+              version_files=($(ls "$release_dir" | grep -E '^v[0-9]+-[0-9]+-[0-9]+\.md$' | sort -V))
+
+              if [ ${#version_files[@]} -eq 0 ]; then
+                echo "⚠️ No version files found in $release_dir"
+                continue
+              fi
+
+              oldest_version_file="${version_files[0]}"
+              echo "🗑️ Deleting oldest version file: $oldest_version_file"
+              rm "$release_dir/$oldest_version_file"
+
+              if [ "$version" == "docs" ]; then
+                latest_version_file="${version_files[-1]}"
+                latest_version="${latest_version_file%.md}"
+                IFS='-' read -r major minor patch <<< "${latest_version#v}"
+                new_minor=$((minor + 1))
+                new_version="v$major-$new_minor-0"
+                new_file="$release_dir/$new_version.md"
+
+                echo "📄 Creating new version file: $new_file from $latest_version_file"
+                cp "$release_dir/$latest_version_file" "$new_file"
+                old_version_dotted="${latest_version//-/.}"
+                new_version_dotted="${new_version//-/.}"
+                sed -i "s/$old_version_dotted/$new_version_dotted/g" "$new_file"
+                echo "✅ Created $new_file"
+              fi
+            else
+              echo "ℹ️ No release folder in $version, skipping."
+            fi
+          done
+
+          version_folders=("docs" "v1" "v2")
+
+          for ((i=0; i<${#version_folders[@]}; i++)); do
+              current_folder="${version_folders[i]}"
+              release_path="content/${current_folder}/release"
+
+              if [ -d "$release_path" ]; then
+                  echo "📁 Processing $release_path"
+                  mapfile -t version_files < <(find "$release_path" -type f -name 'v1-*-*.md')
+
+                  if [ ${#version_files[@]} -eq 0 ]; then
+                      echo "⚠️ No versioned files found in $release_path"
+                      continue
+                  fi
+
+                  latest_file=$(basename "$(printf "%s\n" "${version_files[@]}" | sed 's/.*\///' | sort -V | tail -n1)")
+                  echo "🆕 Skipping latest version file: $latest_file"
+
+                  for file in "${version_files[@]}"; do
+                      filename=$(basename "$file")
+                      if [[ "$filename" != "$latest_file" ]]; then
+                          echo "🔄 Updating paths in $filename"
+                          sed -i "s#content/v2/#content/v3/#g" "$file"
+                          sed -i "s#content/v1/#content/v2/#g" "$file"
+                          sed -i "s#content/docs/#content/v1/#g" "$file"
+                          echo "✅ Updated $file"
+                      else
+                          echo "⏭️ Skipped $filename (latest version)"
+                      fi
+                  done
+
+                  echo "⚖️ Assigning weights in release files..."
+                  sorted_files=($(printf "%s\n" "${version_files[@]}" | sort -V))
+                  reversed_files=()
+                  for ((idx=${#sorted_files[@]}-1; idx>=0; idx--)); do
+                      reversed_files+=("${sorted_files[idx]}")
+                  done
+
+                  weight=1
+                  for file_path in "${reversed_files[@]}"; do
+                      echo "⚖️ Updating weight to $weight in: $file_path"
+                      awk -v new_weight="$weight" '
+                      BEGIN { inside_front_matter = 0; updated = 0 }
+                      {
+                          if ($0 ~ /^---[[:space:]]*$/) {
+                              inside_front_matter++
+                          }
+                          if (inside_front_matter == 1 && $0 ~ /^weight:/) {
+                              print "weight: " new_weight
+                              updated = 1
+                          } else {
+                              print
+                          }
+                          if ($0 ~ /^---[[:space:]]*$/ && inside_front_matter == 2 && !updated) {
+                              print "weight: " new_weight
+                          }
+                      }' "$file_path" > tmp.md && mv tmp.md "$file_path"
+                      ((weight++))
+                  done
+              else
+                  echo "🚫 No release folder in $current_folder, skipping."
+              fi
+          done
+
+          echo "🎉 Release folder cleanup, new version creation, and reference update complete!"
+
+
+      # Step 6: Update deploy.yml to track latest release branch
+      - name: Update deploy.yml to track latest release branch
+        run: |
+          echo "Before update:"
+          cat .github/workflows/deploy.yml
+
+          sed -i -E "s/release-[0-9]+\.[0-9]+\.[0-9]+/$TARGET_RELEASE_BRANCH/g" .github/workflows/deploy.yml
+
+          echo "After update:"
+          cat .github/workflows/deploy.yml
+      
+      # Step 7: Commit and push changes to the new branch
+      - name: Commit and push changes
+        run: |
+          git config --global user.email "github-actions@github.com"
+          git config --global user.name "GitHub Actions"
+          git add .
+          git commit -m "Setup Main branch for $NEXT_TARGET_VERSION"
+          git push origin $BRANCH_NAME
+        
+      # Step 7: Create a pull request back to main
+      - name: Create Pull Request
+        run: |
+          gh pr create --title "Setup Main branch for $NEXT_TARGET_VERSION" \
+                       --body "<h1 style='margin-top: 0; margin-bottom: 0;'>Description</h1><ul><li>Set up main branch for $NEXT_TARGET_VERSION <ul><li>Move "content/docs" to v1, move the v1 content to v2, and finally move the v2 content to v3.</li></ul></li></ul><h2 style='margin-top: 0; margin-bottom: 0;'>GitHub Issues</h2><p>List the GitHub issues impacted by this PR:</p><table><tr><th>GitHub Issue #</th></tr><tr><td><a href=''></a></td></tr></table><h2 style='margin-top: 0; margin-bottom: 0;'>Checklist</h2><ul><li>[ ] Have you run a grammar and spell checks against your submission?</li><li>[ ] Have you tested the changes locally?</li><li>[ ] Have you tested whether the hyperlinks are working properly?</li><li>[ ] Did you add the examples wherever applicable?</li><li>[ ] Have you added high-resolution images?</li></ul>" \
+                       --base main \
+                       --head $BRANCH_NAME
+        env:
+          GITHUB_TOKEN: ${{ secrets.CSMBOT_PAT }}  # Ensure you store this token in GitHub secrets

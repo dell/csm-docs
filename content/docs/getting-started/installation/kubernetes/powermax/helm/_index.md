@@ -231,9 +231,9 @@ Starting with CSI PowerMax v1.7.0, `dell-csi-helm-installer` will not create any
 
 
 {{< cardcontainer >}}
-    {{< customcard link1="./csm-modules/authorizationv1"  image="1" title="Authorization v1.x" >}}
+    {{< customcard link1="./csm-modules/authorizationv1-x"  image="1" title="Authorization v1.x" >}}
 
-    {{< customcard link1="./csm-modules/authorizationv2"   image="1" title="Authorization v2.0"  >}}
+    {{< customcard link1="./csm-modules/authorizationv2-0"   image="1" title="Authorization v2.0"  >}}
 
     {{< customcard  link1="./csm-modules/observability"   image="1" title="Observability"  >}}
 

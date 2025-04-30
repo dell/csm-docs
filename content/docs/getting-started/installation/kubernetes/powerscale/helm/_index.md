@@ -35,7 +35,7 @@ The following are requirements to be met before installing the CSI Driver for Po
 - Mount propagation is enabled on container runtime that is being used
 - `nfs-utils` package must be installed on nodes that will mount volumes
 - If using Snapshot feature, satisfy all Volume Snapshot requirements
-- If enabling CSM for Authorization, please refer to the [Authorization deployment steps](../helm/csm-modules/authorizationv2/) first
+- If enabling CSM for Authorization, please refer to the [Authorization deployment steps](../helm/csm-modules/authorizationv2-0/) first
 - If enabling CSM for Replication, please refer to the [Replication deployment steps](../helm/csm-modules/replication/) first
 - If enabling CSM for Resiliency, please refer to the [Resiliency deployment steps](../helm/csm-modules/resiliency/) first
 
@@ -373,8 +373,8 @@ output: mount.nfs: access denied by server while mounting XX.XX.XX.XX:/ifs/data/
 
 {{< accordion id="Three" title="Modules" >}}
 {{< cardcontainer >}}
-  {{< customcard link1="./csm-modules/authorizationv1" image="1" title="Authorization v1.x" >}}
-  {{< customcard link1="./csm-modules/authorizationv2" image="1" title="Authorization v2.0" >}}
+  {{< customcard link1="./csm-modules/authorizationv1-x" image="1" title="Authorization v1.x" >}}
+  {{< customcard link1="./csm-modules/authorizationv2-0" image="1" title="Authorization v2.0" >}}
   {{< customcard  link1="./csm-modules/observability" image="1" title="Observability"  >}}
   {{< customcard  link1="./csm-modules/replication" image="1" title="Replication"  >}}
   {{< customcard link1="./csm-modules/resiliency" image="1" title="Resiliency"  >}}
