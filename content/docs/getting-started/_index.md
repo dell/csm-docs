@@ -6,17 +6,7 @@ no_list: true
 description: How to get started with Container Storage Modules
 weight: 2
 ---
-### ℹ️ Notifications
-
-> * <span><span/>{{< message text="8" >}}
-> * <span><span/>{{< message text="7" >}}
-> * <span><span/>{{< message text="1" >}}
-> * <span><span/>{{< message text="5" >}}
-> * <span><span/>{{< message text="11" >}}
-> * <span><span/>{{< message text="12" >}}
-
-###### ** *See notifications from prior releases*
-
+### ℹ️See <a href="/csm-docs/docs/release/#notifications">Release Notes</a> for general and deprecation notices.
 
 This section provides detailed instructions on how to install, upgrade, and uninstall Container Storage Modules.
 
