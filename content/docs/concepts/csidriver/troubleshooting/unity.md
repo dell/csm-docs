@@ -4,6 +4,8 @@ description: Troubleshooting Unity XT Driver
 ---
 
 ---
+<div class="tdleft">
+
 | Symptoms | Prevention, Resolution or Workaround |
 | --- | --- |
 | When you run the command `kubectl describe pods unity-controller-<suffix> –n unity`, the system indicates that the driver image could not be loaded. | You may need to put an insecure-registries entry in `/etc/docker/daemon.json` or login to the docker registry |
@@ -17,3 +19,4 @@ description: Troubleshooting Unity XT Driver
 | Standby controller pod is in crashloopbackoff state | Scale down the replica count of the controller pod's deployment to 1 using ```kubectl scale deployment <deployment_name> --replicas=1 -n <driver_namespace>``` |
 | fsGroupPolicy may not work as expected without root privileges for NFS only [https://github.com/kubernetes/examples/issues/260](https://github.com/kubernetes/examples/issues/260) | To get the desired behavior set “RootClientEnabled” = “true” in the storage class parameter |
 | When both iSCSI IQNs and FC WWNs are present, host registrations on Unity systems will include all initiators. If only FC WWNs are present, a warning message will appear: **‘iSCSI Initiators’ cannot be retrieved.**| Ensure only desired initiators are configured on the worker nodes to limit the initiators included in the host registrations |
+</div>
