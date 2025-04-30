@@ -7,6 +7,20 @@ Description: >
   Container Storage Modules release notes
 ---
 
+## Notifications:
+
+**General:**
+
+> * <span><span/>{{< message text="8" >}}
+> * <span><span/>{{< message text="7" >}}
+> * <span><span/>{{< message text="1" >}}
+
+**Deprecation:**
+
+> * <span><span/>{{< message text="5" >}}
+> * <span><span/>{{< message text="11" >}}
+> * <span><span/>{{< message text="12" >}}
+
 ## Container Storage Modules Release and Support Lifecycle:
 
 Container Storage Modules Release and Support Lifecycle
