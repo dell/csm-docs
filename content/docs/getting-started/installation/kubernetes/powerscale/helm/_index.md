@@ -1,10 +1,13 @@
 ---
-title: "Helm"
+title: "Installation Guide"
 linkTitle: "Helm"
 no_list: true
 description: Helm Installation
 weight: 3
 ---
+1. Set up a Kubernetes cluster following the official documentation.
+2. Complete the base installation.
+3. Proceed with module installation.
 ### Install Helm 3.0
 
 Install Helm 3.0 on the master node before you install the CSI Driver for PowerScale.
@@ -21,7 +24,7 @@ Install Helm 3.0 on the master node before you install the CSI Driver for PowerS
             {{<include  file="content/docs/getting-started/installation/installationwizard/helm.md" Var="powerscale" hideIds="2">}}
 {{< /accordion >}}
 <br>
-{{< accordion id="Two" title="CSI Driver" markdown="true" >}}
+{{< accordion id="Two" title="Base Install" markdown="true" >}}  
 
 ## Prerequisites
 
@@ -114,55 +117,55 @@ CRDs should be configured during replication prepare stage with repctl as descri
    {{< collapse id="2" title="Parameters">}}
    | Parameter | Description | Required | Default |
    | --------- | ----------- | -------- |-------- |
-   | images | List all the images used by the CSI driver and CSM. If you use a private repository, change the registries accordingly. | Yes | "" |
-   | logLevel | CSI driver log level | No | "debug" |
-   | certSecretCount | Defines the number of certificate secrets, which the user is going to create for SSL authentication. (isilon-cert-0..isilon-cert-(n-1)); Minimum value should be 1.| Yes | 1 |
-   | [allowedNetworks](../../../../../concepts/csidriver/features/powerscale/#support-custom-networks-for-nfs-io-traffic) | Defines the list of networks that can be used for NFS I/O traffic, CIDR format must be used. | No | [ ] |
-   | maxIsilonVolumesPerNode | Defines the default value for a maximum number of volumes that the controller can publish to the node. If the value is zero CO SHALL decide how many volumes of this type can be published by the controller to the node. This limit is applicable to all the nodes in the cluster for which node label 'max-isilon-volumes-per-node' is not set. | Yes | 0 |
-   | imagePullPolicy | Defines the policy to determine if the image should be pulled prior to starting the container | Yes | IfNotPresent |
-   | verbose | Indicates what content of the OneFS REST API message should be logged in debug level logs | Yes | 1 |
-   | kubeletConfigDir | Specify kubelet config dir path | Yes | "/var/lib/kubelet" |
-   | enableCustomTopology | Indicates PowerScale FQDN/IP which will be fetched from node label and the same will be used by controller and node pod to establish a connection to Array. This requires enableCustomTopology to be enabled. | No | false |
-   | fsGroupPolicy | Defines which FS Group policy mode to be used, Supported modes `None, File and ReadWriteOnceWithFSType` | No | "ReadWriteOnceWithFSType" |
-   | storageCapacity.enabled | Enable/Disable storage capacity tracking | No | true |
-   | storageCapacity.pollInterval | Configure how often the driver checks for changed capacity | No | 5m |
-   | podmonAPIPort | Defines the port which csi-driver will use within the cluster to support podmon | No | 8083 |
-   | maxPathLen | Defines the maximum length of path for a volume | No | 192 |
-   | ***controller*** | Configure controller pod specific parameters | | |
-   | controllerCount | Defines the number of csi-powerscale controller pods to deploy to the Kubernetes release| Yes | 2 |
-   | volumeNamePrefix | Defines a string prefix for the names of PersistentVolumes created | Yes | "k8s" |
-   | snapshot.enabled | Enable/Disable volume snapshot feature | Yes | true |
-   | snapshot.snapNamePrefix | Defines a string prefix for the names of the Snapshots created | Yes | "snapshot" |
-   | resizer.enabled | Enable/Disable volume expansion feature | Yes | true |
-   | healthMonitor.enabled | Enable/Disable health monitor of CSI volumes- volume status, volume condition | Yes | false |
-   | healthMonitor.interval | Interval of monitoring volume health condition | Yes | 60s |
-   | nodeSelector | Define node selection constraints for pods of controller deployment | No | |
-   | tolerations | Define tolerations for the controller deployment, if required | No | |
-   | leader-election-lease-duration | Duration, that non-leader candidates will wait to force acquire leadership | No | 20s |
-   | leader-election-renew-deadline   | Duration, that the acting leader will retry refreshing leadership before giving up  | No | 15s |
-   | leader-election-retry-period   | Duration, the LeaderElector clients should wait between tries of actions  | No | 5s |
-   | ***node*** | Configure node pod specific parameters | | |
-   | nodeSelector | Define node selection constraints for pods of node daemonset | No | |
-   | tolerations | Define tolerations for the node daemonset, if required | No | |
-   | dnsPolicy | Define the DNS Policy of the Node service | Yes | ClusterFirstWithHostNet |
-   | healthMonitor.enabled | Enable/Disable health monitor of CSI volumes- volume usage, volume condition | Yes | false |
-   | ***PLATFORM ATTRIBUTES*** | | | |
-   | endpointPort | Define the HTTPs port number of the PowerScale OneFS API server. If authorization is enabled, endpointPort should be the HTTPS localhost port that the authorization sidecar will listen on. This value acts as a default value for endpointPort, if not specified for a cluster config in secret. | No | 8080 |
-   | skipCertificateValidation | Specify whether the PowerScale OneFS API server's certificate chain and hostname must be verified. This value acts as a default value for skipCertificateValidation, if not specified for a cluster config in secret. | No | true |
-   | isiAuthType | Indicates the authentication method to be used. If set to 1 then it follows as session-based authentication else basic authentication. If authorization.enabled=true, this value must be set to 1. | No | 0 |
-   | isiAccessZone | Define the name of the access zone a volume can be created in. If storageclass is missing with AccessZone parameter, then value of isiAccessZone is used for the same. | No | System |
-   | enableQuota | Indicates whether the provisioner should attempt to set (later unset) quota on a newly provisioned volume. This requires SmartQuotas to be enabled.| No | true |
-   | isiPath | Define the base path for the volumes to be created on PowerScale cluster. This value acts as a default value for isiPath, if not specified for a cluster config in secret| No | /ifs/data/csi |
-   | ignoreUnresolvableHosts | Allows new host to add to existing export list though any of the existing hosts from the same exports are unresolvable/doesn't exist anymore. | No | false |
-   | noProbeOnStart | Define whether the controller/node plugin should probe all the PowerScale clusters during driver initialization | No | false |
-   | autoProbe | Specify if automatically probe the PowerScale cluster if not done already during CSI calls | No | true |
-   | **authorization** | [Authorization](../helm/csm-modules/authorizationv2-0/) is an optional feature to apply credential shielding of the backend PowerScale. | - | - |
-   | enabled                  | A boolean that enables/disables authorization feature. If enabled, isiAuthType must be set to 1. |  No      |   false   |
-   | proxyHost | Hostname of the csm-authorization server. | No | Empty |
-   | skipCertificateValidation | A boolean that enables/disables certificate validation of the csm-authorization proxy server. | No | true |
-   | **podmon**               | [Podmon](../helm/csm-modules/resiliency/) is an optional feature to enable application pods to be resilient to node failure.  |  -        |  -       |
-   | enabled                  | A boolean that enables/disables podmon feature. |  No      |   false   |
-
+   |<div style="text-align: left"> images |<div style="text-align: left"> List all the images used by the CSI driver and CSM. If you use a private repository, change the registries accordingly. | Yes | "" |
+   |<div style="text-align: left"> logLevel |<div style="text-align: left"> CSI driver log level | No | "debug" |
+   |<div style="text-align: left"> certSecretCount |<div style="text-align: left"> Defines the number of certificate secrets, which the user is going to create for SSL authentication. (isilon-cert-0..isilon-cert-(n-1)); Minimum value should be 1.| Yes | 1 |
+   |<div style="text-align: left"> [allowedNetworks](../../../../../concepts/csidriver/features/powerscale/#support-custom-networks-for-nfs-io-traffic) |<div style="text-align: left"> Defines the list of networks that can be used for NFS I/O traffic, CIDR format must be used. | No | [ ] |
+   |<div style="text-align: left"> maxIsilonVolumesPerNode |<div style="text-align: left"> Defines the default value for a maximum number of volumes that the controller can publish to the node. If the value is zero CO SHALL decide how many volumes of this type can be published by the controller to the node. This limit is applicable to all the nodes in the cluster for which node label 'max-isilon-volumes-per-node' is not set. | Yes | 0 |
+   |<div style="text-align: left"> imagePullPolicy |<div style="text-align: left"> Defines the policy to determine if the image should be pulled prior to starting the container | Yes | IfNotPresent |
+   |<div style="text-align: left"> verbose |<div style="text-align: left"> Indicates what content of the OneFS REST API message should be logged in debug level logs | Yes | 1 |
+   |<div style="text-align: left"> kubeletConfigDir |<div style="text-align: left"> Specify kubelet config dir path | Yes | "/var/lib/kubelet" |
+   |<div style="text-align: left"> enableCustomTopology |<div style="text-align: left"> Indicates PowerScale FQDN/IP which will be fetched from node label and the same will be used by controller and node pod to establish a connection to Array. This requires enableCustomTopology to be enabled. | No | false |
+   |<div style="text-align: left"> fsGroupPolicy |<div style="text-align: left"> Defines which FS Group policy mode to be used, Supported modes `None, File and ReadWriteOnceWithFSType` | No | "ReadWriteOnceWithFSType" |
+   |<div style="text-align: left"> storageCapacity.enabled |<div style="text-align: left"> Enable/Disable storage capacity tracking | No | true |
+   |<div style="text-align: left"> storageCapacity.pollInterval |<div style="text-align: left"> Configure how often the driver checks for changed capacity | No | 5m |
+   |<div style="text-align: left"> podmonAPIPort |<div style="text-align: left"> Defines the port which csi-driver will use within the cluster to support podmon | No | 8083 |
+   |<div style="text-align: left"> maxPathLen |<div style="text-align: left"> Defines the maximum length of path for a volume | No | 192 |
+   |<div style="text-align: left"> ***controller*** |<div style="text-align: left"> Configure controller pod specific parameters | | |
+   |<div style="text-align: left"> controllerCount |<div style="text-align: left"> Defines the number of csi-powerscale controller pods to deploy to the Kubernetes release| Yes | 2 |
+   |<div style="text-align: left"> volumeNamePrefix |<div style="text-align: left"> Defines a string prefix for the names of PersistentVolumes created | Yes | "k8s" |
+   |<div style="text-align: left"> snapshot.enabled |<div style="text-align: left"> Enable/Disable volume snapshot feature | Yes | true |
+   |<div style="text-align: left"> snapshot.snapNamePrefix |<div style="text-align: left"> Defines a string prefix for the names of the Snapshots created | Yes | "snapshot" |
+   |<div style="text-align: left"> resizer.enabled |<div style="text-align: left"> Enable/Disable volume expansion feature | Yes | true |
+   |<div style="text-align: left"> healthMonitor.enabled |<div style="text-align: left"> Enable/Disable health monitor of CSI volumes- volume status, volume condition | Yes | false |
+   |<div style="text-align: left"> healthMonitor.interval |<div style="text-align: left"> Interval of monitoring volume health condition | Yes | 60s |
+   |<div style="text-align: left"> nodeSelector |<div style="text-align: left"> Define node selection constraints for pods of controller deployment | No | |
+   |<div style="text-align: left"> tolerations |<div style="text-align: left"> Define tolerations for the controller deployment, if required | No | |
+   |<div style="text-align: left"> leader-election-lease-duration |<div style="text-align: left"> Duration, that non-leader candidates will wait to force acquire leadership | No | 20s |
+   |<div style="text-align: left"> leader-election-renew-deadline   |<div style="text-align: left"> Duration, that the acting leader will retry refreshing leadership before giving up  | No | 15s |
+   |<div style="text-align: left"> leader-election-retry-period   |<div style="text-align: left"> Duration, the LeaderElector clients should wait between tries of actions  | No | 5s |
+   |<div style="text-align: left"> ***node*** |<div style="text-align: left"> Configure node pod specific parameters | | |
+   |<div style="text-align: left"> nodeSelector |<div style="text-align: left"> Define node selection constraints for pods of node daemonset | No | |
+   |<div style="text-align: left"> tolerations |<div style="text-align: left"> Define tolerations for the node daemonset, if required | No | |
+   |<div style="text-align: left"> dnsPolicy |<div style="text-align: left"> Define the DNS Policy of the Node service | Yes | ClusterFirstWithHostNet |
+   |<div style="text-align: left"> healthMonitor.enabled |<div style="text-align: left"> Enable/Disable health monitor of CSI volumes- volume usage, volume condition | Yes | false |
+   |<div style="text-align: left"> ***PLATFORM ATTRIBUTES*** | | | |
+   |<div style="text-align: left"> endpointPort |<div style="text-align: left"> Define the HTTPs port number of the PowerScale OneFS API server. If authorization is enabled, endpointPort should be the HTTPS localhost port that the authorization sidecar will listen on. This value acts as a default value for endpointPort, if not specified for a cluster config in secret. | No | 8080 |
+   |<div style="text-align: left"> skipCertificateValidation |<div style="text-align: left"> Specify whether the PowerScale OneFS API server's certificate chain and hostname must be verified. This value acts as a default value for skipCertificateValidation, if not specified for a cluster config in secret. | No | true |
+   |<div style="text-align: left"> isiAuthType |<div style="text-align: left"> Indicates the authentication method to be used. If set to 1 then it follows as session-based authentication else basic authentication. If authorization.enabled=true, this value must be set to 1. | No | 0 |
+   |<div style="text-align: left"> isiAccessZone |<div style="text-align: left"> Define the name of the access zone a volume can be created in. If storageclass is missing with AccessZone parameter, then value of isiAccessZone is used for the same. | No | System |
+   |<div style="text-align: left"> enableQuota |<div style="text-align: left"> Indicates whether the provisioner should attempt to set (later unset) quota on a newly provisioned volume. This requires SmartQuotas to be enabled.| No | true |
+   |<div style="text-align: left"> isiPath |<div style="text-align: left"> Define the base path for the volumes to be created on PowerScale cluster. This value acts as a default value for isiPath, if not specified for a cluster config in secret| No | /ifs/data/csi |
+   |<div style="text-align: left"> ignoreUnresolvableHosts |<div style="text-align: left"> Allows new host to add to existing export list though any of the existing hosts from the same exports are unresolvable/doesn't exist anymore. | No | false |
+   |<div style="text-align: left"> noProbeOnStart |<div style="text-align: left"> Define whether the controller/node plugin should probe all the PowerScale clusters during driver initialization | No | false |
+   |<div style="text-align: left"> autoProbe |<div style="text-align: left"> Specify if automatically probe the PowerScale cluster if not done already during CSI calls | No | true |
+   |<div style="text-align: left"> **authorization** |<div style="text-align: left"> [Authorization](../helm/csm-modules/authorizationv2-0/) is an optional feature to apply credential shielding of the backend PowerScale. | - | - |
+   |<div style="text-align: left"> enabled                  |<div style="text-align: left"> A boolean that enables/disables authorization feature. If enabled, isiAuthType must be set to 1. |  No      |   false   |
+   |<div style="text-align: left"> proxyHost |<div style="text-align: left"> Hostname of the csm-authorization server. | No | Empty |
+   |<div style="text-align: left"> skipCertificateValidation |<div style="text-align: left"> A boolean that enables/disables certificate validation of the csm-authorization proxy server. | No | true |
+   |<div style="text-align: left"> **podmon**               |<div style="text-align: left"> [Podmon](../helm/csm-modules/resiliency/) is an optional feature to enable application pods to be resilient to node failure.  |  -        |  -       |
+   |<div style="text-align: left"> enabled                  |<div style="text-align: left"> A boolean that enables/disables podmon feature. |  No      |   false   |
+    
    *NOTE:*
 
    - ControllerCount parameter value must not exceed the number of nodes in the Kubernetes cluster. Otherwise, some of the controller pods remain in a "Pending" state till new nodes are available for scheduling. The installer exits with a WARNING on the same.
@@ -178,18 +181,18 @@ CRDs should be configured during replication prepare stage with repctl as descri
 {{< collapse id="3" title="Parameters">}}
    | Parameter | Description | Required | Default |
    | --------- | ----------- | -------- |-------- |
-   | clusterName | Logical name of PowerScale cluster against which volume CRUD operations are performed through this secret. | Yes | - |
-   | username | username for connecting to PowerScale OneFS API server | Yes | - |
-   | password | password for connecting to PowerScale OneFS API server | Yes | - |
-   | endpoint | HTTPS endpoint of the PowerScale OneFS API server. If authorization is enabled, endpoint should be the HTTPS localhost endpoint that the authorization sidecar will listen on | Yes | - |
-   | isDefault | Indicates if this is a default cluster (would be used by storage classes without ClusterName parameter). Only one of the cluster config should be marked as default. | No | false |
-   | ***Optional parameters*** | Following parameters are Optional. If specified will override default values from values.yaml. |
-   | skipCertificateValidation | Specify whether the PowerScale OneFS API server's certificate chain and hostname must be verified. | No | default value from values.yaml |
-   | ignoreUnresolvableHosts | Allows new host to add to existing export list though any of the existing hosts from the same exports are unresolvable/doesn't exist anymore. | No | default value from values.yaml |
-   | endpointPort | Specify the HTTPs port number of the PowerScale OneFS API server | No | default value from values.yaml |
-   | isiPath | The base path for the volumes to be created on PowerScale cluster. Note: IsiPath parameter in storageclass, if present will override this attribute. | No | default value from values.yaml |
-   | mountEndpoint | Endpoint of the PowerScale OneFS API server, for example, 10.0.0.1. This must be specified if [CSM-Authorization](https://github.com/dell/karavi-authorization) is enabled. | No | - |
-{{< /collapse >}}
+   |<div style="text-align: left"> clusterName |<div style="text-align: left"> Logical name of PoweScale cluster against which volume CRUD operations are performed through this secret. | Yes | - |
+   |<div style="text-align: left"> username |<div style="text-align: left"> username for connecting to PowerScale OneFS API server | Yes | - |
+   |<div style="text-align: left"> password |<div style="text-align: left"> password for connecting to PowerScale OneFS API server | Yes | - |
+   |<div style="text-align: left"> endpoint |<div style="text-align: left"> HTTPS endpoint of the PowerScale OneFS API server. If authorization is enabled, endpoint should be the HTTPS localhost endpoint that the authorization sidecar will listen on | Yes | - |
+   |<div style="text-align: left"> isDefault |<div style="text-align: left"> Indicates if this is a default cluster (would be used by storage classes without ClusterName parameter). Only one of the cluster config should be marked as default. | No | false |
+   |<div style="text-align: left"> ***Optional parameters*** |<div style="text-align: left"> Following parameters are Optional. If specified will override default values from values.yaml. |
+   |<div style="text-align: left"> skipCertificateValidation |<div style="text-align: left"> Specify whether the PowerScale OneFS API server's certificate chain and hostname must be verified. | No | default value from values.yaml |
+   |<div style="text-align: left"> ignoreUnresolvableHosts |<div style="text-align: left"> Allows new host to add to existing export list though any of the existing hosts from the same exports are unresolvable/doesn't exist anymore. | No | default value from values.yaml |
+   |<div style="text-align: left"> endpointPort |<div style="text-align: left"> Specify the HTTPs port number of the PowerScale OneFS API server | No | default value from values.yaml |
+   |<div style="text-align: left"> isiPath |<div style="text-align: left"> The base path for the volumes to be created on PowerScale cluster. Note: IsiPath parameter in storageclass, if present will override this attribute. | No | default value from values.yaml |
+   |<div style="text-align: left"> mountEndpoint |<div style="text-align: left"> Endpoint of the PowerScale OneFS API server, for example, 10.0.0.1. This must be specified if [CSM-Authorization](https://github.com/dell/karavi-authorization) is enabled. | No | - |
+{{< /collapse >}} 
 
 ### User privileges
 
@@ -368,7 +371,7 @@ output: mount.nfs: access denied by server while mounting XX.XX.XX.XX:/ifs/data/
 ```
 {{< /accordion >}}
 
-{{< accordion id="Three" title="CSM Modules" >}}
+{{< accordion id="Three" title="Modules" >}}
 {{< cardcontainer >}}
   {{< customcard link1="./csm-modules/authorizationv1-x" image="1" title="Authorization v1.x" >}}
   {{< customcard link1="./csm-modules/authorizationv2-0" image="1" title="Authorization v2.0" >}}

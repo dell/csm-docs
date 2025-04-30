@@ -5,6 +5,8 @@ description: Troubleshooting PowerScale Driver
 
 Here are some installation failures that might be encountered and how to mitigate them.
 
+<div class="tdleft">
+
 | Symptoms | Prevention, Resolution or Workaround |
 |------------|--------------|
 |The `kubectl logs isilon-controller-0 -n isilon -c driver` logs shows the driver **cannot authenticate** | Check your secret's username and password for corresponding cluster |
@@ -20,3 +22,5 @@ Here are some installation failures that might be encountered and how to mitigat
 |Driver install or upgrade fails because of an incompatible Kubernetes version, even though the version seems to be within the range of compatibility. For example: Error: UPGRADE FAILED: chart requires kubeVersion: >= 1.22.0 < 1.25.0 which is incompatible with Kubernetes V1.22.11-mirantis-1 | If you are using an extended Kubernetes version, please see the [helm Chart](https://github.com/dell/helm-charts/blob/main/charts/csi-isilon/Chart.yaml) and use the alternate kubeVersion check that is provided in the comments. Please note that this is not meant to be used to enable the use of pre-release alpha and beta versions, which is not supported.|
 | Standby controller pod is in crashloopbackoff state | Scale down the replica count of the controller pod's deployment to 1 using ```kubectl scale deployment <deployment_name> --replicas=1 -n <driver_namespace>``` |
 | fsGroupPolicy may not work as expected without root privileges for NFS only [https://github.com/kubernetes/examples/issues/260](https://github.com/kubernetes/examples/issues/260) | To get the desired behavior set “RootClientEnabled” = “true” in the storage class parameter |
+<div>
+

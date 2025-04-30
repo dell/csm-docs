@@ -1,26 +1,123 @@
 
 ---
-title: "Installation"
+title: "Installation Guide"
 linktitle: "Operator"
 no_list: true
 description: CSM Operator Installation
 weight: 2
 ---
 
-{{< markdownify >}}
-Supported driver and module versions offered by the Container Storage Modules Operator [here](../../../../../supportmatrix/#operator-compatibility-matrix)
-{{< /markdownify >}}
+1. Set up an OpenShift cluster following the official documentation.
+2. Proceed to the Prerequisite
+3. Complete the base installation.
+4. Proceed with module installation.
 
 <br>
+
+
+{{< accordion id="Zero" title="Prerequisite" markdown="true">}} 
+
 <br>
 
+1. **Make sure the nfs is enabled in the powerscale**
 
-{{< accordion id="One" title="CSM Installation Wizard" >}}
-  {{< include file="content/docs/getting-started/installation/installationwizard/operator.md" >}}
+    ```terminal
+    ps01-1# isi nfs settings global view
+    NFS Service Enabled: Yes
+        NFSv3 Enabled: Yes
+        NFSv4 Enabled: Yes
+                v4.0 Enabled: Yes
+                v4.1 Enabled: Yes
+                v4.2 Enabled: Yes
+    NFS RDMA Enabled: No
+        Rquota Enabled: No   
+
+    ``` 
+    <br>
+
+2. **Create Group and User for CSM**  
+
+    ```bash
+    isi auth group create csmadmins --zone system
+    isi auth user create csmadmin --password "P@ssw0rd123" --password-expires false --primary-group csmadmins --zone system
+    ``` 
+
+3. **Create role and assign the required permission** 
+
+    ```bash
+    isi auth roles create CSMAdminRole --description "Dell CSM Admin Role"  --zone System
+    isi auth roles modify CSMAdminRole --zone System --add-priv-read ISI_PRIV_LOGIN_PAPI --add-priv-read ISI_PRIV_IFS_RESTORE --add-priv-read ISI_PRIV_NS_IFS_ACCESS  --add-priv-read ISI_PRIV_IFS_BACKUP --add-priv-read ISI_PRIV_AUTH --add-priv-read ISI_PRIV_AUTH_ZONES --add-priv-read  ISI_PRIV_STATISTICS
+    isi auth roles modify CSMAdminRole --zone System --add-priv-write ISI_PRIV_NFS --add-priv-write ISI_PRIV_QUOTA --add-priv-write ISI_PRIV_SNAPSHOT --add-priv-write ISI_PRIV_SYNCIQ
+    isi auth roles modify CSMAdminRole --add-group csmadmins
+
+    ```
+
+4. **Get PowerScale Array Details** 
+
+   a. Cluster Name: 
+   
+      ``` 
+      ps01-1# isi cluster identity view
+      Description: 
+          MOTD: 
+      MOTD Header: 
+          Name: ps01 
+      ``` 
+
+   b. Access Zone Name:
+
+      ```
+      ps01-1# isi zone zones list
+      Name      Path               
+      -----------------------------
+      System    /ifs               
+      ps01-az01 /ifs/data/ps01/az01
+      -----------------------------
+      Total: 2 
+      ```
+
+   c. Smart Connect Zone name  
+
+      ```
+      ps01-1# isi network pools list
+      ID                                SC Zone               IP Ranges                   Allocation Method 
+      ------------------------------------------------------------------------------------------------------
+      groupnet0.subnet0.ps01-az01-pool0 ps01-az01.example.com 10.181.98.225-10.181.98.227 static            
+      groupnet0.subnet0.system-pool0    ps01.example.com      10.181.98.222-10.181.98.224 static            
+      ------------------------------------------------------------------------------------------------------
+      Total: 2  
+      ```
+
+<br> 
+
+5. **Create the base directory for the storage class** 
+    
+   ```bash 
+   mkdir /ifs/data/ps01/az01/csi
+   chown csmadmin:csmadmins /ifs/data/ps01/az01/csi
+   chmod 755 /ifs/data/ps01/az01/csi
+
+   ```
+<br> 
+
+6. Make sure all the parent directory of the base path has permission 755 
+
+<br>
+
+7. **(optional) Create quota on the base directory** 
+
+   ```bash 
+   isi quota quotas create /ifs/data/ps01/az01/csi directory --percent-advisory-threshold 80 --percent-soft-threshold 90 --soft-grace 1D --hard-threshold 100G --include-snapshots true
+   ``` 
+
 {{< /accordion >}}
+
+
+
+
 <br>
 
-{{< accordion id="Two" title="CSI Driver" markdown="true" >}}   
+{{< accordion id="Two" title="Base Install" markdown="true" >}}   
 
 </br>
 
@@ -83,11 +180,11 @@ dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      
     ```yaml
     cat << EOF > config.yaml
     isilonClusters:
-     - clusterName: "cluster2"
-        username: "user"
-        password: "password"
-        endpoint: "1.2.3.4"
-        endpointPort: "8080"
+    - clusterName: "ps01"
+      username: "csmadmin"
+      password: "P@ssw0rd123"
+      endpoint: "ps01.example.com"
+      skipCertificateValidation: true
     EOF
     ```
    </div>
@@ -127,10 +224,10 @@ dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      
 3. ##### **Create isilon-certs-n secret.**
       <br>
 
-      If certificate validation is skipped, empty secret must be created. To create an empty secret. Ex: empty-secret.yaml
+      If certificate validation is skipped, empty secret must be created. To create an empty secret. Ex: secret-isilon-certs.yaml
      
       ```yaml 
-      cat << EOF > empty-secret.yaml
+      cat << EOF > secret-isilon-certs.yaml
       apiVersion: v1
       kind: Secret
       metadata:
@@ -143,7 +240,7 @@ dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      
       ```
 
       ```bash
-       oc create -f empty-secret.yaml
+       oc create -f secret-isilon-certs.yaml
       ```
 <br>
 
@@ -172,11 +269,18 @@ dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      
       driver:
         csiDriverType: "isilon"
         configVersion: {{< version-docs key="PScale_latestVersion" >}}
-    EOF 
-    ``` 
+        authSecret: isilon-config
+        common:
+          envs:
+            - name: X_CSI_ISI_AUTH_TYPE
+              value: "1"
+     EOF 
+     ``` 
     </div> 
 
-    **Detailed Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powerscale_{{< version-docs key="sample_sc_pscale" >}}.yaml) for detailed settings.
+    **Detailed Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powerscale_{{< version-docs key="sample_sc_pscale" >}}.yaml) for detailed settings or use [Wizard](./installationwizard#generate-manifest-file) to generate the sample file..
+
+    <br>
 
     To set the parameters in CR. The table shows the main settings of the Powerscale driver and their defaults.
 
@@ -184,30 +288,30 @@ dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      
 {{< collapse id="1" title="Parameters">}}
    | Parameter | Description | Required | Default |
    | --------- | ----------- | -------- |-------- |
-   | namespace | Specifies namespace where the driver will be installed | Yes | "isilon" |
-   | replicas | Controls the number of controller pods you deploy. If the number of controller pods is greater than the number of available nodes, the excess pods will be in pending state until new nodes are available for scheduling. Default is 2 which allows for Controller high availability. | Yes | 2 |
-   | dnsPolicy | Determines the DNS Policy of the Node service | Yes | ClusterFirstWithHostNet |
-   | fsGroupPolicy | Defines which FS Group policy mode to be used, Supported modes `None, File and ReadWriteOnceWithFSType`. In OCP <= 4.16 and K8s <= 1.29, fsGroupPolicy is an immutable field. | No | "ReadWriteOnceWithFSType" |
-   | storageCapacity | Enable/Disable storage capacity tracking feature | No | false |
-   | ***Common parameters for node and controller*** |
-   | CSI_ENDPOINT | The UNIX socket address for handling gRPC calls | No | /var/run/csi/csi.sock |
-   | X_CSI_ISI_SKIP_CERTIFICATE_VALIDATION | Specifies whether SSL security needs to be enabled for communication between PowerScale and CSI Driver | No | true |
-   | X_CSI_ISI_PATH | Base path for the volumes to be created | Yes | |
-   | X_CSI_ALLOWED_NETWORKS | Custom networks for PowerScale export. List of networks that can be used for NFS I/O traffic, CIDR format should be used | No | empty |
-   | X_CSI_ISI_AUTOPROBE | To enable auto probing for driver | No | true |
-   | X_CSI_ISI_NO_PROBE_ON_START | Indicates whether the controller/node should probe during initialization | Yes | |
-   | X_CSI_ISI_VOLUME_PATH_PERMISSIONS | The permissions for isi volume directory path | Yes | 0777 |
-   | X_CSI_ISI_AUTH_TYPE | Indicates the authentication method to be used. If set to 1 then it follows as session-based authentication else basic authentication. If CSM Authorization is enabled, this value must be set to 1. | No | 0 |
-   | ***Controller parameters*** |
-   | X_CSI_MODE   | Driver starting mode  | No | controller |
-   | X_CSI_ISI_ACCESS_ZONE | Name of the access zone a volume can be created in | No | System |
-   | X_CSI_ISI_QUOTA_ENABLED | To enable SmartQuotas | Yes | |
-   | ***Node parameters*** |
-   | X_CSI_MAX_VOLUMES_PER_NODE | Specify the default value for the maximum number of volumes that the controller can publish to the node | Yes | 0 |
-   | X_CSI_MODE   | Driver starting mode  | No | node |
-   | ***Sidecar parameters*** |
-   | volume-name-prefix | The volume-name-prefix will be used by provisioner sidecar as a prefix for all the volumes created  | Yes | k8s |
-   | monitor-interval | The monitor-interval will be used by external-health-monitor as an interval for health checks  | Yes | 60s |
+   |<div style="text-align: left"> namespace |<div style="text-align: left"> Specifies namespace where the driver will be installed | Yes | "isilon" |
+   |<div style="text-align: left"> replicas |<div style="text-align: left"> Controls the number of controller pods you deploy. If the number of controller pods is greater than the number of available nodes, the excess pods will be in pending state until new nodes are available for scheduling. Default is 2 which allows for Controller high availability. | Yes | 2 |
+   |<div style="text-align: left"> dnsPolicy |<div style="text-align: left"> Determines the DNS Policy of the Node service | Yes | ClusterFirstWithHostNet |
+   |<div style="text-align: left"> fsGroupPolicy |<div style="text-align: left"> Defines which FS Group policy mode to be used, Supported modes `None, File and ReadWriteOnceWithFSType`. In OCP <= 4.16 and K8s <= 1.29, fsGroupPolicy is an immutable field. | No | "ReadWriteOnceWithFSType" |
+   |<div style="text-align: left"> storageCapacity |<div style="text-align: left"> Enable/Disable storage capacity tracking feature | No | false |
+   |<div style="text-align: left"> ***Common parameters for node and controller*** |
+   |<div style="text-align: left"> CSI_ENDPOINT |<div style="text-align: left"> The UNIX socket address for handling gRPC calls | No | /var/run/csi/csi.sock |
+   |<div style="text-align: left"> X_CSI_ISI_SKIP_CERTIFICATE_VALIDATION |<div style="text-align: left"> Specifies whether SSL security needs to be enabled for communication between PowerScale and CSI Driver | No | true |
+   |<div style="text-align: left"> X_CSI_ISI_PATH |<div style="text-align: left"> Base path for the volumes to be created | Yes | |
+   |<div style="text-align: left"> X_CSI_ALLOWED_NETWORKS |<div style="text-align: left"> Custom networks for PowerScale export. List of networks that can be used for NFS I/O traffic, CIDR format should be used | No | empty |
+   |<div style="text-align: left"> X_CSI_ISI_AUTOPROBE |<div style="text-align: left"> To enable auto probing for driver | No | true |
+   |<div style="text-align: left"> X_CSI_ISI_NO_PROBE_ON_START |<div style="text-align: left"> Indicates whether the controller/node should probe during initialization | Yes | |
+   |<div style="text-align: left"> X_CSI_ISI_VOLUME_PATH_PERMISSIONS |<div style="text-align: left"> The permissions for isi volume directory path | Yes | 0777 |
+   |<div style="text-align: left"> X_CSI_ISI_AUTH_TYPE |<div style="text-align: left"> Indicates the authentication method to be used. If set to 1 then it follows as session-based authentication else basic authentication. If CSM Authorization is enabled, this value must be set to 1. | No | 0 |
+   |<div style="text-align: left"> ***Controller parameters*** |
+   |<div style="text-align: left"> X_CSI_MODE   |<div style="text-align: left"> Driver starting mode  | No | controller |
+   |<div style="text-align: left"> X_CSI_ISI_ACCESS_ZONE |<div style="text-align: left"> Name of the access zone a volume can be created in | No | System |
+   |<div style="text-align: left"> X_CSI_ISI_QUOTA_ENABLED |<div style="text-align: left"> To enable SmartQuotas | Yes | |
+   |<div style="text-align: left"> ***Node parameters*** |
+   |<div style="text-align: left"> X_CSI_MAX_VOLUMES_PER_NODE |<div style="text-align: left"> Specify the default value for the maximum number of volumes that the controller can publish to the node | Yes | 0 |
+   |<div style="text-align: left"> X_CSI_MODE   |<div style="text-align: left"> Driver starting mode  | No | node |
+   |<div style="text-align: left"> ***Sidecar parameters*** |
+   |<div style="text-align: left"> volume-name-prefix |<div style="text-align: left"> The volume-name-prefix will be used by provisioner sidecar as a prefix for all the volumes created  | Yes | k8s |
+   |<div style="text-align: left"> monitor-interval |<div style="text-align: left"> The monitor-interval will be used by external-health-monitor as an interval for health checks  | Yes | 60s |
 {{< /collapse >}}
 </ul>
 
@@ -217,11 +321,10 @@ Check if ContainerStorageModule CR is created successfully:
 ```terminal
 oc get csm isilon -n isilon
 
-NAME        CREATIONTIME   CSIDRIVERTYPE   CONFIGVERSION                                          STATE
-isilon      3h             isilon          {{< version-docs key="PScale_latestVersion" >}}        Succeeded      
+NAME        CREATIONTIME   CSIDRIVERTYPE   CONFIGVERSION    STATE
+isilon      3h             isilon          {{< version-docs key="PScale_latestVersion" >}}          Succeeded      
 ```
 
-Check the status of the CR to verify if the driver installation is in the `Succeeded` state. If the status is not `Succeeded`, see the [Troubleshooting guide](../troubleshooting/#my-dell-csi-driver-install-failed-how-do-i-fix-it) for more information.
 </ul>
 
 <br>
@@ -246,10 +349,15 @@ Check the status of the CR to verify if the driver installation is in the `Succe
     provisioner: csi-isilon.dellemc.com
     reclaimPolicy: Delete
     allowVolumeExpansion: true
+    IsiVolumePathPermissions: "0775"
+    mountOptions: ["vers=4"]
     parameters:  
-       AccessZone: System  
-       IsiPath: /ifs/data/csi  
+       ClusterName: ps01
+       AccessZone: ps01-az01  
+       AzServiceIP: ps01-az01.example.com 
+       IsiPath: /ifs/data/ps01/az01/csi 
        RootClientEnabled: "false" 
+       csi.storage.k8s.io/fstype: "nfs" 
     volumeBindingMode: Immediate
     EOF
     ```
@@ -285,11 +393,11 @@ Check the status of the CR to verify if the driver installation is in the `Succe
     apiVersion: snapshot.storage.k8s.io/v1
     kind: VolumeSnapshotClass
     metadata:
-       name: isilon-snapclass
+       name: vsclass-isilon
     driver: csi-isilon.dellemc.com
     deletionPolicy: Delete
     parameters:
-       IsiPath: /ifs/data/csi
+       IsiPath: /ifs/data/ps01/az01/csi
     EOF 
     ```
 
@@ -299,7 +407,7 @@ Check the status of the CR to verify if the driver installation is in the `Succe
     oc get volumesnapshot
     
     NAME                      DRIVER                              DELETIONPOLICY   AGE
-    isilon-snapclass          csi-isilon.dellemc.com              Delete           3h9m
+    vsclass-isilon            csi-isilon.dellemc.com              Delete           3h9m
     ``` 
    </br>
 
@@ -412,7 +520,7 @@ Check the status of the CR to verify if the driver installation is in the `Succe
   Use this command to  **Delete Persistence Volume Claim**:
 
   ```bash
-  oc delete pvc pvc-isilon-restore -n default
+  oc delete pvc pvc-isilon -n default
   ```
 
   Verify restore pvc is deleted:
@@ -421,7 +529,7 @@ Check the status of the CR to verify if the driver installation is in the `Succe
   oc get pvc -n default
 
   NAME                    STATUS   VOLUME             CAPACITY   ACCESS MODES   STORAGECLASS   VOLUMEATTRIBUTESCLASS   AGE
-  pvc-isilon              Bound    ocp08-095f7d3c52   8Gi        RWO            isilon         <unset>                 7m34s
+
   ```
   </br>
   </li> 
@@ -492,7 +600,7 @@ snapcontent-80e99281-0d96-4275-b4aa-50301d110bd4   true         8589934592    De
 Use this command to  **Restore Snapshot**:
 
 ```bash
-oc apply -f pvc-isilon.yaml
+oc apply -f pvc-isilon-restore.yaml
 ```
 
 Example:
@@ -554,9 +662,10 @@ NAME                    STATUS   VOLUME             CAPACITY   ACCESS MODES   ST
 {{< /collapse >}} 
 
 
+
 {{< /accordion >}}  
 <br>
-{{< accordion id="Three" title="CSM Modules" >}}
+{{< accordion id="Three" title="Modules" >}}
 
 <br>   
 

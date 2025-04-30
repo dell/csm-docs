@@ -11,7 +11,7 @@ weight: 3
 
       {{< customcard  link="./cosidriver"  title="COSI Driver" imageNumber="6" >}} 
 
-      {{< customcard        link="./csidriver"       title="CSI Driver"      imageNumber="6">}}
+      {{< customcard        link="./csidriver"       title="Driver"      imageNumber="6">}}
 
       {{< customcard  link="./authorization" title="Authorization"  imageNumber="6">}}  
       
