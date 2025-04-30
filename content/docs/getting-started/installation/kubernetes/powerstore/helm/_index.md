@@ -6,7 +6,7 @@ description: Helm Installation
 weight: 3
 ---
 1. Set up a Kubernetes cluster following the official documentation.
-2. Proceed to the [pre-requisites](../prerequisite/_index.md).
+2. Proceed to the [Prerequisite](../prerequisite/_index.md).
 3. Complete the base installation.
 4. Proceed with module installation. 
 ### Install Helm 3.x

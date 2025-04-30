@@ -8,7 +8,7 @@ weight: 2
 ---
 
 1. Set up an OpenShift cluster following the official documentation.
-2. Proceed to the pre-requisites.
+2. Proceed to the Prerequisite.
 3. Complete the base installation.
 4. Proceed with module installation.
 
@@ -276,7 +276,7 @@ Check the status of the CR to verify if the driver installation is in the `Succe
 
     NAME                      DRIVER                              DELETIONPOLICY   AGE
     vsclass-powerstore        csi-powerstore.dellemc.com          Delete           3h9m
-    ``` 
+    ```
    </br>
 
 
@@ -458,7 +458,7 @@ oc get volumesnapshotcontent
 
 NAME                                               READYTOUSE   RESTORESIZE   DELETIONPOLICY   DRIVER                       VOLUMESNAPSHOTCLASS     VOLUMESNAPSHOT   VOLUMESNAPSHOTNAMESPACE   AGE
 snapcontent-80e99281-0d96-4275-b4aa-50301d110bd4   true         8589934592    Delete           csi-powerstore.dellemc.com   vsclass-powerstore      vs-powerstore    default                   23s
-```  
+```
 
 <br>
 </li>

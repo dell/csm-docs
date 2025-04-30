@@ -3,7 +3,7 @@ title: "Installation Guide"
 linktitle: "Operator"
 no_list: true
 description: CSM Operator Installation
-weight: 2 
+weight: 2
 ---
 1. Set up a Kubernetes cluster following the official documentation.
 2. Complete the base installation.

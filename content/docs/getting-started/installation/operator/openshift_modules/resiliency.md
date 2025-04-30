@@ -9,7 +9,7 @@ linkTitle: "Resiliency"
     <br>
     Use this command to create the **ContainerStorageModule Custom Resource** with Resiliency:
 
-    ```bash 
+    ```bash
     oc create -f csm-{{labels}}.yaml
     ```
 
@@ -17,7 +17,7 @@ linkTitle: "Resiliency"
 
     <div style="margin-bottom:-1.8rem">
 
-    ```yaml  
+    ```yaml
     cat << EOF > csm-{{labels}}.yaml
     apiVersion: storage.dell.com/v1
     kind: ContainerStorageModule
@@ -56,7 +56,7 @@ linkTitle: "Resiliency"
 
     Verify the Resiliency Sidecar are displayed  in controller pod:
 
-    ```terminal 
+    ```terminal
     oc get pod {{Var}}-controller-5bcb5ff8cb-fjdmf -o jsonpath='{.spec.containers[*].name}'
 
     podmon attacher provisioner snapshotter resizer driver
@@ -65,7 +65,7 @@ linkTitle: "Resiliency"
 
     Verify the Resiliency Sidecar are displayed  in node pod:
 
-    ```terminal   
+    ```terminal
     oc get pod {{Var}}-node-j4jsz -o jsonpath='{.spec.containers[*].name}'
 
     podmon driver registrar
@@ -83,7 +83,7 @@ linkTitle: "Resiliency"
       oc label pods pod-{{labels}} podmon.dellemc.com/driver=csi-{{labels}} 
 
       pod/pod-{{labels}} labeled
-      ``` 
+      ```
       <br>
 
       Verify:
@@ -114,7 +114,7 @@ linkTitle: "Resiliency"
 
     ```bash
     oc edit csm {{labels}} -n {{labels}}
-    ``` 
+    ```
 
     Example:
     ```bash

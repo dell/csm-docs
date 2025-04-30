@@ -168,8 +168,3 @@ otel-collector                 ClusterIP   172.30.127.237   <none>        55680/
 6. Verify the PowerFlex metrics are visible in the OpenShift Console. 
 
    On the OpenShift Console, navigate to Observer and then Metrics, search for PowerFlex metric.
-
-
-
-    
-
