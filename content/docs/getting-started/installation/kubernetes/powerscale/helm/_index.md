@@ -159,7 +159,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
    |<div style="text-align: left"> ignoreUnresolvableHosts |<div style="text-align: left"> Allows new host to add to existing export list though any of the existing hosts from the same exports are unresolvable/doesn't exist anymore. | No | false |
    |<div style="text-align: left"> noProbeOnStart |<div style="text-align: left"> Define whether the controller/node plugin should probe all the PowerScale clusters during driver initialization | No | false |
    |<div style="text-align: left"> autoProbe |<div style="text-align: left"> Specify if automatically probe the PowerScale cluster if not done already during CSI calls | No | true |
-   |<div style="text-align: left"> **authorization** |<div style="text-align: left"> [Authorization](../helm/csm-modules/authorizationv2.0/) is an optional feature to apply credential shielding of the backend PowerScale. | - | - |
+   |<div style="text-align: left"> **authorization** |<div style="text-align: left"> [Authorization](../helm/csm-modules/authorizationv2-0/) is an optional feature to apply credential shielding of the backend PowerScale. | - | - |
    |<div style="text-align: left"> enabled                  |<div style="text-align: left"> A boolean that enables/disables authorization feature. If enabled, isiAuthType must be set to 1. |  No      |   false   |
    |<div style="text-align: left"> proxyHost |<div style="text-align: left"> Hostname of the csm-authorization server. | No | Empty |
    |<div style="text-align: left"> skipCertificateValidation |<div style="text-align: left"> A boolean that enables/disables certificate validation of the csm-authorization proxy server. | No | true |

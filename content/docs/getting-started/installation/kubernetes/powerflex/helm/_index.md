@@ -232,7 +232,7 @@ Use the below command to replace or update the secret:
 |<div style="text-align: left"> image |<div style="text-align: left"> Image for vg snapshotter. | No | " " |
 |<div style="text-align: left"> **podmon**               |<div style="text-align: left"> [Podmon](./csm-modules/resiliency/) is an optional feature to enable application pods to be resilient to node failure.  |  -        |  -       |
 |<div style="text-align: left"> enabled                  |<div style="text-align: left"> A boolean that enables/disables podmon feature. |  No      |   false   |
-|<div style="text-align: left"> **authorization** |<div style="text-align: left"> [Authorization](./csm-modules/authorizationv2.0/) is an optional feature to apply credential shielding of the backend PowerFlex. | - | - |
+|<div style="text-align: left"> **authorization** |<div style="text-align: left"> [Authorization](./csm-modules/authorizationv2-0/) is an optional feature to apply credential shielding of the backend PowerFlex. | - | - |
 |<div style="text-align: left"> enabled                  |<div style="text-align: left"> A boolean that enables/disables authorization feature. |  No      |   false   |
 |<div style="text-align: left"> proxyHost |<div style="text-align: left"> Hostname of the csm-authorization server. | No | Empty |
 |<div style="text-align: left"> skipCertificateValidation |<div style="text-align: left"> A boolean that enables/disables certificate validation of the csm-authorization proxy server. | No | true |
