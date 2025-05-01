@@ -16,5 +16,4 @@ weight: 2
 
 
 {{< /cardcontainer >}}
-
->Note: The upgrade steps for Kubernetes and Mirantis Kubernetes Engine (MKE) are the same.
+ 
