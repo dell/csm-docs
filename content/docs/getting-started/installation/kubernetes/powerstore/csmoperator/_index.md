@@ -1,25 +1,25 @@
 ---
-title: Operator
+title: Installation Guide
 linkTitle: Operator
 weight: 2
 description: >
   Installing the CSI Driver for PowerStore via CSM Operator
 no_list: true
 ---
-{{% pageinfo color="primary" %}}
-{{< message text="1" >}}
-{{% /pageinfo %}}
+
+1. Set up a Kubernetes cluster following the official documentation.
+2. Proceed to the [Prerequisite](../prerequisite/_index.md).
+3. Complete the base installation.
+4. Proceed with module installation.
 
 ## Operator Installation
 To deploy the Operator, follow the instructions available [here](../../../operator/operatorinstallation_kubernetes.md).
 
-{{< accordion id="One" title="CSM Installation Wizard" >}}
-  {{< include file="content/docs/getting-started/installation/installationwizard/operator.md" hideIds="1,2,3" >}}
-{{< /accordion >}}
+
 
 <br>
 
-{{< accordion id="Two" title="CSI Driver" markdown="true" >}}  
+{{< accordion id="Two" title="Base Install" markdown="true" >}}  
 
 ### CSI Driver Installation
 
@@ -82,7 +82,7 @@ To deploy the Operator, follow the instructions available [here](../../../operat
 
     [OR]                                                
 
-    b. **Detailed Configuration:**  [sample file](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powerstore_{{< version-docs key="Det_sample_operator_pstore" >}}.yaml) for detailed settings.
+    b. **Detailed Configuration:**  [sample file](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powerstore_{{< version-docs key="Det_sample_operator_pstore" >}}.yaml) for detailed settings or use [Wizard](./installationwizard#generate-manifest-file) to generate the sample file.
 
    - Users should configure the parameters in CR. The following table lists the primary configurable parameters of the PowerStore driver and their default values: 
    
@@ -90,19 +90,19 @@ To deploy the Operator, follow the instructions available [here](../../../operat
 {{< collapse id="1" title="Parameters">}}
   | Parameter | Description | Required | Default |
 | --------- | ----------- | -------- |-------- |
-| replicas | Controls the number of controller pods you deploy. If the number of controller pods is greater than the number of available nodes, the excess pods will be in pending state until new nodes are available for scheduling. Default is 2 which allows for Controller high availability. | Yes | 2 |
-| namespace | Specifies namespace where the driver will be installed | Yes | "powerstore" |
-| fsGroupPolicy | Defines which FS Group policy mode to be used. Supported modes `None, File and ReadWriteOnceWithFSType`. In OCP <= 4.16 and K8s <= 1.29, fsGroupPolicy is an immutable field. | No |"ReadWriteOnceWithFSType"|
-| storageCapacity | Enable/Disable storage capacity tracking feature | No | false |
-| ***Common parameters for node and controller*** |
-| X_CSI_POWERSTORE_NODE_NAME_PREFIX | Prefix to add to each node registered by the CSI driver | Yes | "csi-node"
-| X_CSI_FC_PORTS_FILTER_FILE_PATH | To set path to the file which provides a list of WWPN which should be used by the driver for FC connection on this node | No | "/etc/fc-ports-filter" |
-| GOPOWERSTORE_DEBUG | Enable/Disable gopowerstore library-level debugging. | No | false |
-| ***Controller parameters*** |
-| X_CSI_POWERSTORE_EXTERNAL_ACCESS | allows specifying additional entries for hostAccess of NFS volumes. Both single IP address and subnet are valid entries | No | empty |
-| X_CSI_NFS_ACLS | Defines permissions - POSIX mode bits or NFSv4 ACLs, to be set on NFS target mount directory. | No | "0777" |
-| ***Node parameters*** |
-| X_CSI_POWERSTORE_ENABLE_CHAP | Set to true if you want to enable iSCSI CHAP feature | No | false |
+|<div style="text-align: left"> replicas </div>| <div style="text-align: left">Controls the number of controller pods you deploy. If the number of controller pods is greater than the number of available nodes, the excess pods will be in pending state until new nodes are available for scheduling. Default is 2 which allows for Controller high availability. | Yes | 2 |
+|<div style="text-align: left"> namespace | <div style="text-align: left">Specifies namespace where the driver will be installed | Yes | "powerstore" |
+| <div style="text-align: left">fsGroupPolicy |<div style="text-align: left"> Defines which FS Group policy mode to be used. Supported modes `None, File and ReadWriteOnceWithFSType`. In OCP <= 4.16 and K8s <= 1.29, fsGroupPolicy is an immutable field. | No |"ReadWriteOnceWithFSType"|
+|<div style="text-align: left"> storageCapacity | <div style="text-align: left"> Enable/Disable storage capacity tracking feature | No | false |
+|<div style="text-align: left"> ***Common parameters for node and controller*** |
+|<div style="text-align: left"> X_CSI_POWERSTORE_NODE_NAME_PREFIX |<div style="text-align: left"> Prefix to add to each node registered by the CSI driver | Yes | "csi-node"
+|<div style="text-align: left"> X_CSI_FC_PORTS_FILTER_FILE_PATH | <div style="text-align: left">To set path to the file which provides a list of WWPN which should be used by the driver for FC connection on this node | No | "/etc/fc-ports-filter" |
+|<div style="text-align: left"> GOPOWERSTORE_DEBUG | <div style="text-align: left"> Enable/Disable gopowerstore library-level debugging. | No | false |
+|<div style="text-align: left"> ***Controller parameters*** |
+|<div style="text-align: left"> X_CSI_POWERSTORE_EXTERNAL_ACCESS |<div style="text-align: left"> allows specifying additional entries for hostAccess of NFS volumes. Both single IP address and subnet are valid entries | No | empty |
+|<div style="text-align: left"> X_CSI_NFS_ACLS | <div style="text-align: left"> Defines permissions - POSIX mode bits or NFSv4 ACLs, to be set on NFS target mount directory. | No | "0777" |
+|<div style="text-align: left"> ***Node parameters*** |
+|<div style="text-align: left"> X_CSI_POWERSTORE_ENABLE_CHAP |<div style="text-align: left"> Set to true if you want to enable iSCSI CHAP feature | No | false |
 {{< /collapse >}}
 
 
@@ -175,7 +175,7 @@ To deploy the Operator, follow the instructions available [here](../../../operat
 {{< /accordion >}}
 <br>
 
-{{< accordion id="Three" title="CSM Modules" >}}
+{{< accordion id="Three" title="Modules" >}}
 
 <br>  
 {{< markdownify >}}

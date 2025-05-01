@@ -3,6 +3,8 @@ title: PowerStore
 linktitle: PowerStore 
 description: Troubleshooting PowerStore Driver
 ---
+<div class="tdleft">
+
 | Symptoms | Prevention, Resolution or Workaround |
 | --- | --- | 
 | When you run the command `kubectl describe pods powerstore-controller-<suffix> –n csi-powerstore`, the system indicates that the driver image could not be loaded. | - If on Kubernetes, edit the daemon.json file found in the registry location and add `{ "insecure-registries" :[ "hostname.cloudapp.net:5000" ] }` <br> - If on OpenShift, run the command `oc edit image.config.openshift.io/cluster` and add registries to yaml file that is displayed when you run the command.|
@@ -20,3 +22,4 @@ description: Troubleshooting PowerStore Driver
 | Unable to install or upgrade the driver due to minimum Kubernetes version or Openshift version | Currently CSM only supports n, n-1, n-2 version of Kubernetes and Openshift, if you still wanted to continue with existing version update the `verify.sh` to continue.| 
 | Volumes are not getting deleted on the array when PV's are deleted | Ensure `persistentVolumeReclaimPolicy` is set to Delete. |
 | fsGroupPolicy may not work as expected without root privileges for NFS only [https://github.com/kubernetes/examples/issues/260](https://github.com/kubernetes/examples/issues/260) | To get the desired behavior set “RootClientEnabled” = “true” in the storage class parameter |
+</div>

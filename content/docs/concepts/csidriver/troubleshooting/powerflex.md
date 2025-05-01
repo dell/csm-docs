@@ -3,6 +3,7 @@ title: PowerFlex
 linktitle: PowerFlex 
 description: Troubleshooting PowerFlex Driver
 ---
+<div class="tdleft">
 
 | Symptoms | Prevention, Resolution or Workaround |
 |------------|--------------|
@@ -29,4 +30,4 @@ A CSI ephemeral pod may not get created in OpenShift 4.13 and fail with the erro
 |CSM object `vxflexos` is in failed state and CSI-Powerflex driver is not in running state | Verify the secret name: `kubectl get secret -n <namespace_name>` it should be in `<CR-name>-config` format. 1. Retrieve the existing secret: `kubectl get secret old-secret-name -n <namespace_name> -o yaml > secret.yaml` <br> 2. Edit the secret.yaml file: Change metadata.name to <CR-name>-Config <br> 3. Apply the new secret: `kubectl apply -f secret.yaml` <br> 4. Delete the old secret: kubectl delete secret old-secret-name|
 
 >
-
+</div>

@@ -22,21 +22,20 @@ Container Storage Modules for Replication provides the following capabilities:
 
 {{<table "table table-striped table-bordered table-sm">}}
 
-| Capability                                                                                                                          | PowerMax | PowerStore | PowerScale | PowerFlex | Unity |
-| ----------------------------------------------------------------------------------------------------------------------------------- | :------: | :--------: | :--------: | :-------: | :---: |
-| Replicate data using native storage array based replication                                                                         |   yes    |    yes     |    yes     |    yes    |  no   |
-| Asynchronous file volume replication                                                                                                |    no    |     no     |    yes     |    no     |  no   |
-| Asynchronous block volume replication                                                                                               |   yes    |    yes     |    n/a     |    yes    |  no   |
-| Synchronous file volume replication                                                                                                 |    no    |     no     |     no     |    no     |  no   |
-| Synchronous block volume replication                                                                                                |   yes    |    yes     |    n/a     |    no     |  no   |
-| Active-Active (Metro) block volume replication                                                                                      |   yes    |    yes     |    n/a     |    no     |  no   |
-| Active-Active (Metro) file volume replication                                                                                       |    no    |     no     |     no     |    no     |  no   |
-| Create `PersistentVolume` objects in the cluster representing the replicated volume                                                 |   yes    |    yes     |    yes     |    yes    |  no   |
-| Create `DellCSIReplicationGroup` objects in the cluster                                                                             |   yes    |    yes     |    yes     |    yes    |  no   |
-| Failover & Reprotect applications using the replicated volumes                                                                      |   yes    |    yes     |    yes     |    yes    |  no   |
-| Online Volume Expansion for replicated volumes                                                                                      |   yes    |     no     |     no     |    yes    |  no   |
-| Controller reattach failover PV to PVC automatically in a stretched cluster                                                         |   yes    |    yes     |    yes     |    yes    |  no   |
-| Provides a command line utility - [repctl](tools) for configuring & managing replication related resources across multiple clusters |   yes    |    yes     |    yes     |    yes    |  no   |
+| Capability                                                                                                                                                        | PowerStore | PowerScale | PowerFlex | PowerMax | Unity |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------- | :--------: | :--------: | :-------: | :------: | :---: |
+| <div style="text-align: left">Replicate data using native storage array based replication                                                                         |    Yes     |    Yes     |    Yes    |   Yes    |  No   |
+| <div style="text-align: left">Asynchronous file volume replication                                                                                                |    Yes     |    Yes     |    No     |    No    |  No   |
+| <div style="text-align: left">Asynchronous block volume replication                                                                                               |    N/A     |    N/A     |    Yes    |   Yes    |  No   |
+| <div style="text-align: left">Synchronous file volume replication                                                                                                 |     No     |     No     |    No     |    No    |  No   |
+| <div style="text-align: left">Synchronous block volume replication                                                                                                |    N/A     |    N/A     |    No     |   Yes    |  No   |
+| <div style="text-align: left">Active-Active (Metro) block volume replication                                                                                      |    N/A     |    N/A     |    No     |   Yes    |  No   |
+| <div style="text-align: left">Active-Active (Metro) file volume replication                                                                                       |     No     |     No     |    No     |    No    |  No   |
+| <div style="text-align: left">Create `PersistentVolume` objects in the cluster representing the replicated volume                                                 |    Yes     |    Yes     |    Yes    |   Yes    |  No   |
+| <div style="text-align: left">Create `DellCSIReplicationGroup` objects in the cluster                                                                             |    Yes     |    Yes     |    Yes    |   Yes    |  No   |
+| <div style="text-align: left">Failover & Reprotect applications using the replicated volumes                                                                      |    Yes     |    Yes     |    Yes    |   Yes    |  No   |
+| <div style="text-align: left">Online Volume Expansion for replicated volumes                                                                                      |     No     |     No     |    Yes    |   Yes    |  No   |
+| <div style="text-align: left">Provides a command line utility - [repctl](tools) for configuring & managing replication related resources across multiple clusters |    Yes     |    Yes     |    Yes    |   Yes    |  No   |
 
 {{</table>}}
 
