@@ -103,6 +103,9 @@ volume stats value under node should be set to true.
 | maxPowerstoreVolumesPerNode | Defines the default value for maximum number of volumes that the controller can publish to the node. If the value is zero, then CO shall decide how many volumes of this type can be published by the controller to the node. This limit is applicable to all the nodes in the cluster for which the node label 'max-powerstore-volumes-per-node' is not set. | No | 0 |
 | imagePullPolicy | Policy to determine if the image should be pulled prior to starting the container. | Yes | "IfNotPresent" |
 | nfsAcls | Defines permissions - POSIX mode bits or NFSv4 ACLs, to be set on NFS target mount directory. | No | "0777" |
+| nfsExportDirectory | Define the file path of the underlying cluster node where Host-Based NFS volumes will be mounted. | No | "/var/lib/dell/nfs" |
+| nfsServerPort | Define the port for the Host-Based NFS server. This value should match what port the nfs-server is configured on. See /etc/nfs.conf on the worker nodes for port information. | No | "2049" |
+| nfsClientPort | Define the port for the Host-Based NFS client. | No | "2050" |
 | connection.enableCHAP   | Defines whether the driver should use CHAP for iSCSI connections or not | No | False |
 | controller.controllerCount     | Defines number of replicas of controller deployment | Yes | 2 |
 | controller.volumeNamePrefix | Defines the string added to each volume that the CSI driver creates | No | "csivol" |
