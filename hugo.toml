@@ -198,7 +198,7 @@ algolia_docsearch = false
 [[menu.main]]
     name = ""
     weight = 60
-    url = "/docs/support/announcement/" 
+    url = "/docs/release/#notifications" 
     pre = "<i class='fa-regular fa-bullhorn'></i>"
 [[menu.main]]
     name = "Blog" 
