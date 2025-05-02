@@ -1,13 +1,10 @@
 ---
-title: "Installation"
-linkTitle: "Installation"
+title: 'Installation'
+linkTitle: 'Installation'
 no_list: true
 description: Installation
 weight: 1
 ---
-<hr>
- 
-
 
 {{< cardcontainer >}}
 
@@ -15,6 +12,4 @@ weight: 1
 
     {{< customcard  path="content/docs/getting-started/installation/openshift" link="./openshift"  title="OpenShift" imageNumber="7">}}
 
-
 {{< /cardcontainer >}}
-

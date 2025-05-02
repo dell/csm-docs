@@ -1,5 +1,6 @@
 <div class="td-content" >
 	<h1>{{ .Title }}</h1>
+	<hr/>
 	{{ with .Params.description }}<div class="lead">{{ . | markdownify }}</div>{{ end }}
 	<header class="article-meta">
 		{{ partial "taxonomy_terms_article_wrapper.html" . -}}

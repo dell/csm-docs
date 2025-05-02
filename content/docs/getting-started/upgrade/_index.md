@@ -1,12 +1,10 @@
 ---
-title: "Upgrade"
-linkTitle: "Upgrade"
+title: 'Upgrade'
+linkTitle: 'Upgrade'
 no_list: true
 description: Upgrade
 weight: 2
 ---
-<hr>
- 
 
 {{< cardcontainer >}}
 
@@ -14,6 +12,4 @@ weight: 2
 
     {{< customcard  path="content/docs/getting-started/upgrade/openshift" link="./openshift"  title="OpenShift" imageNumber="7">}}
 
-
 {{< /cardcontainer >}}
- 

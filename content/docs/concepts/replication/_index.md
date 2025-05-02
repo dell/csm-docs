@@ -7,9 +7,6 @@ Description: >
   Container Storage Modules (CSM) for Replication
 ---
 
-<hr>
-<br>
-
 Replication aims to bring Replication & Disaster Recovery capabilities of Dell
 Storage Arrays to Kubernetes clusters. It helps you replicate groups of volumes
 using the native replication technology available on the storage array and can
