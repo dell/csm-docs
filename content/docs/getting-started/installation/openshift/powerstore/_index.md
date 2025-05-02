@@ -6,13 +6,6 @@ description: Powerstore Installation
 weight: 1
 ---
 
-
-{{< cardcontainer >}}
-
-    {{< customcard  link="./prerequisite"  imageNumber="4" title="Prerequisite">}} 
-
-{{< /cardcontainer >}}
-
 {{< cardcontainer >}}
 
        {{< customcard  link="./csmoperator" imageNumber="6"  title="Operator" >}}

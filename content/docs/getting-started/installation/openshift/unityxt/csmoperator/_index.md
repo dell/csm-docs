@@ -1,19 +1,26 @@
 ---
-title: "Installation"
+title: "Installation Guide"
 linktitle: "Operator"
 no_list: true
 description: CSM Operator Installation
 weight: 2
 ---
 
-{{< markdownify >}}
-Supported driver and module versions offered by the Container Storage Modules Operator [here](../../../../../supportmatrix/#operator-compatibility-matrix)
-{{< /markdownify >}}
+1. Set up an OpenShift cluster following the official documentation.
+2. Proceed to the Prerequisite.
+3. Complete the base installation.
 
 <br>
-<br>
 
-{{< accordion id="Two" title="CSI Driver" markdown="true" >}}  
+{{< accordion id="One" title="Prerequisite" >}} 
+<br>
+{{<include  file="content/docs/getting-started/installation/openshift/unityxt/prerequisite/_index.md" >}}
+
+{{< /accordion >}}
+
+<br> 
+
+{{< accordion id="Two" title="Base Install" markdown="true" >}}  
 
 </br>
 
@@ -65,7 +72,7 @@ dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      
 2. ##### **Create config secret:** 
     <br>
 
-    Create a file called `config.yaml` or use [sample](https://https://github.com/dell/csi-unity/tree/main/samples/secret/secret.yaml): 
+    Create a file called `config.yaml` or use [sample](https://github.com/dell/csi-unity/tree/main/samples/secret/secret.yaml): 
    
     Example: 
     <div style="margin-bottom: -1.8rem">
@@ -73,12 +80,12 @@ dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      
     ```yaml
     cat << EOF > config.yaml
      storageArrayList:
-     - arrayId: "APM00******1"                 # unique array id of the Unisphere array
-       username: "user"                        # username for connecting to API
-       password: "password"                    # password for connecting to API
-       endpoint: "https://10.1.1.1/"           # full URL path to the Unity XT API
-       skipCertificateValidation: true         # indicates if client side validation of (management)server's certificate can be skipped
-       isDefault: true                         # treat current array as a default (would be used by storage classes without arrayID parameter)
+       - arrayId: "APM00******1"                 # unique array id of the Unisphere array
+         username: "user"                        # username for connecting to API
+         password: "password"                    # password for connecting to API
+         endpoint: "https://10.1.1.1/"           # full URL path to the Unity XT API
+         skipCertificateValidation: true         # indicates if client side validation of (management)server's certificate can be skipped
+         isDefault: true                         # treat current array as a default (would be used by storage classes without arrayID parameter)
     EOF
     ``` 
     </div>
@@ -155,23 +162,23 @@ dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      
 {{< collapse id="1" title="Parameters">}}
 | Parameter | Description | Required | Default |
 | --------- | ----------- | -------- |-------- |
-| replicas | Controls the number of controller pods you deploy. If the number of controller pods is greater than the number of available nodes, the excess pods will be in pending state until new nodes are available for scheduling. Default is 2 which allows for Controller high availability. | Yes | 2 |
-| namespace | Specifies namespace where the driver will be installed | Yes | "unity" |
-| fsGroupPolicy | Defines which FS Group policy mode to be used. Supported modes `None, File and ReadWriteOnceWithFSType`. In OCP <= 4.16 and K8s <= 1.29, fsGroupPolicy is an immutable field. | No |"ReadWriteOnceWithFSType"|
-| storageCapacity.enabled | Enable/Disable storage capacity tracking | No | true |
-| storageCapacity.pollInterval | Configure how often the driver checks for changed capacity | No | 5m |
-| ***Common parameters for node and controller*** |
-| X_CSI_UNITY_ALLOW_MULTI_POD_ACCESS | To enable sharing of volumes across multiple pods within the same node in RWO access mode | No | false |
-| X_CSI_UNITY_SYNC_NODEINFO_INTERVAL | Time interval to add node info to array. Default 15 minutes. Minimum value should be 1 | No | 15 |
-| CSI_LOG_LEVEL | Sets the logging level of the driver | true | info |
-| TENANT_NAME | Tenant name added while adding host entry to the array | No |  |
-| CERT_SECRET_COUNT | Represents the number of certificate secrets, which the user is going to create for SSL authentication. (unity-cert-0..unity-cert-n). The minimum value should be 1. | false | 1 |
-| X_CSI_UNITY_SKIP_CERTIFICATE_VALIDATION | Specifies if the driver is going to validate unisphere certs while connecting to the Unisphere REST API interface.If it is set to false, then a secret unity-certs has to be created with an X.509 certificate of CA which signed the Unisphere certificate | No | true |
-| ***Controller parameters*** |
-| X_CSI_HEALTH_MONITOR_ENABLED | Enable/Disable health monitor of CSI volumes from Controller plugin - volume condition | No | false |
-| ***Node parameters*** |
-| X_CSI_HEALTH_MONITOR_ENABLED | Enable/Disable health monitor of CSI volumes from Controller plugin - volume condition | No | false |
-| X_CSI_ALLOWED_NETWORKS | Custom networks for Unity export. List of networks that can be used for NFS I/O traffic, CIDR format should be used "ip/prefix, ip/prefix" | No | empty |
+|<div style="text-align: left"> replicas |<div style="text-align: left"> Controls the number of controller pods you deploy. If the number of controller pods is greater than the number of available nodes, the excess pods will be in pending state until new nodes are available for scheduling. Default is 2 which allows for Controller high availability. | Yes | 2 |
+|<div style="text-align: left"> namespace |<div style="text-align: left"> Specifies namespace where the driver will be installed | Yes | "unity" |
+|<div style="text-align: left"> fsGroupPolicy |<div style="text-align: left"> Defines which FS Group policy mode to be used. Supported modes `None, File and ReadWriteOnceWithFSType`. In OCP <= 4.16 and K8s <= 1.29, fsGroupPolicy is an immutable field. | No |"ReadWriteOnceWithFSType"|
+|<div style="text-align: left"> storageCapacity.enabled |<div style="text-align: left"> Enable/Disable storage capacity tracking | No | true |
+|<div style="text-align: left"> storageCapacity.pollInterval |<div style="text-align: left"> Configure how often the driver checks for changed capacity | No | 5m |
+|<div style="text-align: left"> ***Common parameters for node and controller*** |
+|<div style="text-align: left"> X_CSI_UNITY_ALLOW_MULTI_POD_ACCESS |<div style="text-align: left"> To enable sharing of volumes across multiple pods within the same node in RWO access mode | No | false |
+|<div style="text-align: left"> X_CSI_UNITY_SYNC_NODEINFO_INTERVAL |<div style="text-align: left"> Time interval to add node info to array. Default 15 minutes. Minimum value should be 1 | No | 15 |
+|<div style="text-align: left"> CSI_LOG_LEVEL |<div style="text-align: left"> Sets the logging level of the driver | true | info |
+|<div style="text-align: left"> TENANT_NAME |<div style="text-align: left"> Tenant name added while adding host entry to the array | No |  |
+|<div style="text-align: left"> CERT_SECRET_COUNT |<div style="text-align: left"> Represents the number of certificate secrets, which the user is going to create for SSL authentication. (unity-cert-0..unity-cert-n). The minimum value should be 1. | false | 1 |
+|<div style="text-align: left"> X_CSI_UNITY_SKIP_CERTIFICATE_VALIDATION |<div style="text-align: left"> Specifies if the driver is going to validate unisphere certs while connecting to the Unisphere REST API interface.If it is set to false, then a secret unity-certs has to be created with an X.509 certificate of CA which signed the Unisphere certificate | No | true |
+|<div style="text-align: left"> ***Controller parameters*** |
+|<div style="text-align: left"> X_CSI_HEALTH_MONITOR_ENABLED |<div style="text-align: left"> Enable/Disable health monitor of CSI volumes from Controller plugin - volume condition | No | false |
+|<div style="text-align: left"> ***Node parameters*** |
+|<div style="text-align: left"> X_CSI_HEALTH_MONITOR_ENABLED |<div style="text-align: left"> Enable/Disable health monitor of CSI volumes from Controller plugin - volume condition | No | false |
+|<div style="text-align: left"> X_CSI_ALLOWED_NETWORKS |<div style="text-align: left"> Custom networks for Unity export. List of networks that can be used for NFS I/O traffic, CIDR format should be used "ip/prefix, ip/prefix" | No | empty |
 {{< /collapse >}}
 </ul>
 
@@ -182,8 +189,8 @@ Check if ContainerStorageModule CR is created successfully:
 ```terminal
 oc get csm unity -n unity
 
-NAME        CREATIONTIME   CSIDRIVERTYPE   CONFIGVERSION                                          STATE
-unity       3h             unity           {{< version-docs key="PUnity_latestVersion" >}}        Succeeded      
+NAME        CREATIONTIME   CSIDRIVERTYPE   CONFIGVERSION       STATE
+unity       3h             unity           {{< version-docs key="PUnity_latestVersion" >}}             Succeeded      
 ```
 
 Check the status of the CR to verify if the driver installation is in the `Succeeded` state. If the status is not `Succeeded`, see the [Troubleshooting guide](../troubleshooting/#my-dell-csi-driver-install-failed-how-do-i-fix-it) for more information.
@@ -257,7 +264,7 @@ Check the status of the CR to verify if the driver installation is in the `Succe
     apiVersion: snapshot.storage.k8s.io/v1
     kind: VolumeSnapshotClass
     metadata:
-      name: unity-snapclass 
+      name: vsclass-unity 
     driver: csi-unity.dellemc.com
     deletionPolicy: Delete
     EOF 
@@ -269,7 +276,7 @@ Check the status of the CR to verify if the driver installation is in the `Succe
     oc get volumesnapshotclass
     
     NAME                      DRIVER                              DELETIONPOLICY   AGE
-    unity-snapclass           csi-unity.dellemc.com               Delete           3h9m
+    vsclass-unity             csi-unity.dellemc.com               Delete           3h9m
     ``` 
    </br>
 
@@ -382,7 +389,7 @@ Check the status of the CR to verify if the driver installation is in the `Succe
   Use this command to  **Delete Persistence Volume Claim**:
 
   ```bash
-  oc delete pvc pvc-unity-restore -n default
+  oc delete pvc pvc-unity -n default
   ```
 
   Verify restore pvc is deleted:
@@ -390,7 +397,7 @@ Check the status of the CR to verify if the driver installation is in the `Succe
   ```terminal
   oc get pvc -n default
 
-  NAME                    STATUS   VOLUME             CAPACITY   ACCESS MODES   STORAGECLASS   VOLUMEATTRIBUTESCLASS   AGE
+  NAME                 STATUS      VOLUME             CAPACITY   ACCESS MODES   STORAGECLASS   VOLUMEATTRIBUTESCLASS   AGE
   pvc-unity            Bound       ocp08-095f7d3c52   8Gi        RWO            unity          <unset>                 7m34s
   ```
   </br> 
@@ -463,7 +470,7 @@ snapcontent-80e99281-0d96-4275-b4aa-50301d110bd4   true         8589934592    De
 Use this command to  **Restore Snapshot**:
 
 ```bash
-oc apply -f pvc-unity.yaml
+oc apply -f pvc-unity-restore.yaml
 ```
 
 Example:

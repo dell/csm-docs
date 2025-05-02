@@ -7,12 +7,8 @@ Description: >
   Container Storage Modules support
 ---
 
-{{% pageinfo color="primary" %}}
-<span><span/>{{< message text="9" >}}
-{{% /pageinfo %}}
-
 ### Where can I get support?
-- Interact with us on GitHub by creating a [GitHub Issue](https://github.com/dell/csm/issues).
+
 - If you have a Dell Storage Backend support contract with a CSI Driver, open a service request on [Dell Support](https://dell.com/support) and select the CSI Driver product.
 ### How to report Security Issues or Vulnerabilities?
 
