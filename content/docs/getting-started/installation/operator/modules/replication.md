@@ -122,21 +122,10 @@ To configure Replication perform the following steps:
    ./repctl create sc --from-config ./examples/<storage>_example_values.yaml
    ```
 
-{{< hide class="2" hide="true">}}
-
 6. On the target cluster, configure the
    [prerequisites](../../../csmoperator/#install-driver) for deploying the
    driver via Dell CSM Operator. _This is not necessary in stretched-cluster
-   configurations that do not have a separate target cluster._{{< /hide >}}
-
-{{< hide class="3" >}} 6. On the target cluster, configure the
-[prerequisites](../../../kubernetes) for deploying the driver via Dell CSM
-Operator. _This is not necessary in stretched-cluster configurations that do not
-have a separate target cluster._
-
-{{< /hide >}}
-
-{{< hide class="2" hide="true" >}}
+   configurations that do not have a separate target cluster._
 
 7. Install the CSI driver for your chosen storage platform on the source cluster
    according to the instructions for
@@ -150,36 +139,18 @@ have a separate target cluster._
    _This is not necessary in stretched-cluster configurations that do not have a
    separate target cluster._
 
-{{< /hide >}}
+9. _(Optional)_ If CSM Replication is deployed using two clusters in an
+   environment where the DNS is not configured, it is necessary to update the
+   dell-replication-controller-manager Kubernetes deployment to map the API
+   endpoint FQDN to an IP address by adding the `hostAliases` field and
+   associated FQDN:IP mappings.
 
-{{< hide class="3" >}}
+   To update the dell-replication-controller-manager deployment, execute the
+   command below, replacing the fields for the remote cluster's FQDN and IP.
+   Make sure to update the deployment on both the primary and disaster recovery
+   clusters.
 
-7. Install the CSI driver for your chosen storage platform on the source cluster
-   according to the instructions for
-   [installing the drivers using CSM Operator](../../../kubernetes). Ensure that
-   replication is set to `enabled` in the custom resource YAML used to install
-   the driver, under the `components` field.
-
-8. Repeat the installation of the CSI driver for your chosen storage platform on
-   the target cluster. Again, ensure that replication is set to `enabled` in the
-   custom resource YAML used for installation, under the `components` field.
-   _This is not necessary in stretched-cluster configurations that do not have a
-   separate target cluster._
-
-{{< /hide >}}
-
-9.  _(Optional)_ If CSM Replication is deployed using two clusters in an
-    environment where the DNS is not configured, it is necessary to update the
-    dell-replication-controller-manager Kubernetes deployment to map the API
-    endpoint FQDN to an IP address by adding the `hostAliases` field and
-    associated FQDN:IP mappings.
-
-    To update the dell-replication-controller-manager deployment, execute the
-    command below, replacing the fields for the remote cluster's FQDN and IP.
-    Make sure to update the deployment on both the primary and disaster recovery
-    clusters.
-
-    ```shell
-    kubectl patch deployment -n dell-replication-controller dell-replication-controller-manager \
-    -p '{"spec":{"template":{"spec":{"hostAliases":[{"hostnames":["<remote-FQDN>"],"ip":"<remote-IP>"}]}}}}'
-    ```
+   ```shell
+   kubectl patch deployment -n dell-replication-controller dell-replication-controller-manager \
+   -p '{"spec":{"template":{"spec":{"hostAliases":[{"hostnames":["<remote-FQDN>"],"ip":"<remote-IP>"}]}}}}'
+   ```
