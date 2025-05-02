@@ -7,18 +7,18 @@ Description: >
   Container Storage Modules (CSM) for Replication
 ---
 
-[Container Storage Modules](https://github.com/dell/csm) for Replication is part
-of the open-source suite of Kubernetes storage enablers for Dell products.
+<hr>
+<br>
 
-Container Storage Modules for Replication project aims to bring Replication &
-Disaster Recovery capabilities of Dell Storage Arrays to Kubernetes clusters. It
-helps you replicate groups of volumes using the native replication technology
-available on the storage array and can provide you a way to restart applications
-in case of both planned and unplanned migration.
+Replication aims to bring Replication & Disaster Recovery capabilities of Dell
+Storage Arrays to Kubernetes clusters. It helps you replicate groups of volumes
+using the native replication technology available on the storage array and can
+provide you a way to restart applications in case of both planned and unplanned
+migration.
 
-## Container Storage Modules for Replication Capabilities
+## Replication Capabilities
 
-Container Storage Modules for Replication provides the following capabilities:
+Replication provides the following capabilities:
 
 {{<table "table table-striped table-bordered table-sm">}}
 
@@ -84,7 +84,7 @@ objects still exist in source/target pairs.
 1. Install all required components:
 
 - Enable replication during CSI driver installation
-- Install Container Storage Modules Replication Controller & repctl
+- Install Replication Controller & repctl
 
 2. Create replication enabled storage classes
 3. Create `PersistentVolumeClaim` using the replication enabled storage class
