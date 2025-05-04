@@ -778,13 +778,11 @@ apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
     name: powerstore-sharednfs-sc
-    annotations:
-        storageclass.kubernetes.io/is-default-class: false
 provisioner: csi-powerstore.dellemc.com
 reclaimPolicy: Delete
 parameters:
   arrayID: <array-id>
-  csi-nfs: RWX
+  shared-nfs: RWX
   csi.storage.k8s.io/fstype: ext4
 provisioner: csi-powerstore.dellemc.com
 reclaimPolicy: Delete
