@@ -108,7 +108,7 @@ volume stats value under node should be set to true.
 |<div style="text-align: left"> imagePullPolicy |<div style="text-align: left"> Policy to determine if the image should be pulled prior to starting the container. | Yes | "IfNotPresent" |
 |<div style="text-align: left"> nfsAcls |<div style="text-align: left"> Defines permissions - POSIX mode bits or NFSv4 ACLs, to be set on NFS target mount directory. | No | "0777" |
 |<div style="text-align: left"> nfsExportDirectory |<div style="text-align: left"> Define the file path of the underlying cluster node where Shared NFS volumes will be mounted. | No | "/var/lib/dell/nfs" |
-|<div style="text-align: left"> nfsServerPort |<div style="text-align: left"> Define the port for the Shared NFS server. This value should match what port the nfs-server is configured on. See /etc/nfs.conf on the worker nodes for port information. | No | "2049" |
+|<div style="text-align: left"> nfsServerPort |<div style="text-align: left"> Define the port for the Shared NFS server. This value must match what port the nfs-server is configured on. See /etc/nfs.conf on the worker nodes for port information. | No | "2049" |
 |<div style="text-align: left"> nfsClientPort |<div style="text-align: left"> Define the port for the Shared NFS client. | No | "2050" |
 |<div style="text-align: left"> connection.enableCHAP   |<div style="text-align: left"> Defines whether the driver should use CHAP for iSCSI connections or not | No | False |
 |<div style="text-align: left"> controller.controllerCount     |<div style="text-align: left"> Defines number of replicas of controller deployment | Yes | 2 |
