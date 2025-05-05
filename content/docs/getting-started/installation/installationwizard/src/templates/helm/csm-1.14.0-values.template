@@ -26,8 +26,6 @@ csi-powerstore:
     # CSM sidecars
     replication: 
       image: quay.io/dell/container-storage-modules/dell-csi-replicator:v1.12.0
-    vgsnapshotter: 
-      image: quay.io/dell/container-storage-modules/csi-volumegroup-snapshotter:v1.8.1
     podmon: 
       image: quay.io/dell/container-storage-modules/podmon:v1.13.0
     metadataretriever: 
@@ -42,8 +40,6 @@ csi-powerstore:
     tolerations: $CONTROLLER_TOLERATIONS
     replication:
       enabled: $REPLICATION_ENABLED
-    vgsnapshot:
-      enabled: $VG_SNAPSHOT_ENABLED
     snapshot:
       enabled: $SNAPSHOT_ENABLED
       snapNamePrefix: $SNAP_NAME_PREFIX
@@ -270,8 +266,6 @@ csi-vxflexos:
     # CSM sidecars
     replication: 
       image: quay.io/dell/container-storage-modules/dell-csi-replicator:v1.12.0
-    vgsnapshotter: 
-      image: quay.io/dell/container-storage-modules/csi-volumegroup-snapshotter:v1.8.1
     podmon: 
       image: quay.io/dell/container-storage-modules/podmon:v1.13.0
     authorization: 
@@ -327,8 +321,6 @@ csi-vxflexos:
   externalAccess:
   monitor:
     enabled: $MONITOR_ENABLED
-  vgsnapshotter:
-    enabled: $VG_SNAPSHOT_ENABLED
   podmon:
     enabled: $RESILIENCY_ENABLED
     controller:
