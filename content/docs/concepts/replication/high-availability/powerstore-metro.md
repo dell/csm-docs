@@ -20,6 +20,44 @@ The driver on receiving the metro-related parameters in the `CreateVolume` call 
 
 The creation of volumes in metro mode doesn't involve the replication sidecar or the common replication controller, nor does it cause the creation of any replication related custom resources. It just needs the `csi-powerstore` driver that implements the `CreateVolume` gRPC endpoint with metro capability for it to work.
 
+### Host Registration for Powerstore Metro
+CSM PowerStore supports registering worker nodes as new hosts using `Metro Connectivity`. To enable this, you need to set the `metroTopology` to `Uniform` in the array's secret configuration. 
+
+To manage your setup:
+
+Label the worker nodes: Add zone labels to the worker nodes.
+#### Zone Identification:
+* Nodes in the same zone as the array configuration are considered the current system.
+* Nodes in different zones are considered the remote system.
+
+
+```yaml
+arrays:
+  - endpoint: "https://11.0.0.1/api/rest"
+    globalID: "unique1"
+    username: "user"
+    password: "password"
+    skipCertificateValidation: true
+    blockProtocol: "FC"
+    metroTopology: Uniform
+    labels:
+      topology.kubernetes.io/zone: zone1
+  - endpoint: "https://11.0.0.2/api/rest"
+    globalID: "unique2"
+    username: "user"
+    password: "password"
+    skipCertificateValidation: true
+    blockProtocol: "FC"    
+    metroTopology: Uniform
+    labels:
+      topology.kubernetes.io/zone: zone2
+```
+
+* The node that match the array's topology zone key will be registered as `Host is co-located with this system`
+* The node that does not match the array's topology zone key will be registered as `Host is co-located with remote system`
+* When both worker nodes have the same topology key as the array's topology zone key, then both nodes will be registered as `Co-located with both systems`
+* When the node does not have any zone keys in its label, the host is registered as `Local connectivity`
+
 ### Usage
 The Metro replicated volumes are created just like the normal volumes, but the `StorageClass` contains some
 extra parameters related to metro replication. A `StorageClass` to create metro replicated volumes may look as follows:
@@ -53,6 +91,8 @@ When a VolumeSnapshot object is created for the Metro `PV`, snapshots are create
 
 ### Limitations
 - PowerStore driver only supports uniform host configuration for Metro volume where the host has active paths to both PowerStore systems.
+- Metro configuration needs to be done by the user by adding zone keys as node labels as per the configuration requirements.
+- Powerstore driver does only fresh host registration for metro configuration. To modify an existing host entry, the user will have to remove the existing host entry from the array and restart node pods to enable the Powerstore driver to create fresh host entry.
 - VolumeGroup Metro support is not currently available for uniform host configuration.
 - Metro volume only supports FC and iSCSI protocols for host access.
 - Each Kubernetes node is automatically registered as a host object on both PowerStore systems when the node pods are running. However, the connectivity type of the host is set to 'Local Connectivity' by default. It needs to be updated manually with the correct 'Metro connectivity' option on both PowerStore systems using the PowerStore Manager UI.
