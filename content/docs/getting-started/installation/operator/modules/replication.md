@@ -86,13 +86,7 @@ To configure Replication perform the following steps:
    > and performing the service account configuration injection in step 3 are
    > still mandatory.
 
-2. Install the replication controller CRDs:
-
-   ```shell
-   ./repctl create -f ../deploy/replicationcrds.all.yaml
-   ```
-
-3. Inject the service account's configuration into the clusters.
+2. Inject the service account's configuration into the clusters.
 
    ```shell
    ./repctl cluster inject
@@ -111,35 +105,39 @@ To configure Replication perform the following steps:
     ./repctl cluster inject --custom-configs "/root/.repctl/clusters/config-1"
    ```
 
-4. Customize the `examples/<storage>_example_values.yaml` sample config. Set the
+3. Customize the `examples/<storage>_example_values.yaml` sample config. Set the
    values for sourceClusterID and targetClusterID to the same names used in
    step 1. For a stretched cluster set both fields to `self`.
 
-5. Create the replication storage classes using the modified configuration from
+4. Create the replication storage classes using the modified configuration from
    step 4:
 
    ```shell
    ./repctl create sc --from-config ./examples/<storage>_example_values.yaml
    ```
 
-6. On the target cluster, configure the
+5. On the target cluster, configure the
    [prerequisites](../../../csmoperator/#install-driver) for deploying the
    driver via Dell CSM Operator. _This is not necessary in stretched-cluster
    configurations that do not have a separate target cluster._
 
-7. Install the CSI driver for your chosen storage platform on the source cluster
+6. Install the CSI driver for your chosen storage platform on the source cluster
    according to the instructions for
    [installing the drivers using CSM Operator](../../../csmoperator/#install-driver).
    Ensure that replication is set to `enabled` in the custom resource YAML used
    to install the driver, under the `components` field.
 
-8. Repeat the installation of the CSI driver for your chosen storage platform on
+   > **_NOTE:_** As of CSM release 1.14, all Custom Resource Definitions that
+   > are required for Replication functionality are installed by the CSM
+   > Operator automatically when a Replication-enabled driver is installed.
+
+7. Repeat the installation of the CSI driver for your chosen storage platform on
    the target cluster. Again, ensure that replication is set to `enabled` in the
    custom resource YAML used for installation, under the `components` field.
    _This is not necessary in stretched-cluster configurations that do not have a
    separate target cluster._
 
-9. _(Optional)_ If CSM Replication is deployed using two clusters in an
+8. _(Optional)_ If CSM Replication is deployed using two clusters in an
    environment where the DNS is not configured, it is necessary to update the
    dell-replication-controller-manager Kubernetes deployment to map the API
    endpoint FQDN to an IP address by adding the `hostAliases` field and
