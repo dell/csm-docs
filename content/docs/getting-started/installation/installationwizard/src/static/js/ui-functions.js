@@ -395,6 +395,9 @@ function displayModules(installationType, driverName, CONSTANTS_PARAM) {
 			if (document.getElementById("csm-version").value !== "1.7.0") {
 				$(".max-volumes-per-node").show();
 			}
+   if (isVersionGreaterOrEqualTo(document.getElementById("csm-version").value,"1.14.0")) {
+     $(".vgsnapshot").hide();
+   }
 			document.getElementById("driver-namespace").value = CONSTANTS_PARAM.POWERSTORE_NAMESPACE;
 			if (installationType === 'operator'){
 				$(".resiliency").hide();
@@ -490,7 +493,10 @@ function displayModules(installationType, driverName, CONSTANTS_PARAM) {
 			$(".approve-sdc").show();
 			if (document.getElementById("csm-version").value === "1.8.0") {
 				$(".max-volumes-per-node").show();
-				$(".nfs-feature").show();
+				$(".nfs-feature").show(); 
+    if (isVersionGreaterOrEqualTo(document.getElementById("csm-version").value, "1.14.0")) {
+     $(".vgsnapshot").hide();
+   }
 			}
 			document.getElementById("driver-namespace").value = CONSTANTS_PARAM.POWERFLEX_NAMESPACE;
 			break;
