@@ -7,7 +7,11 @@ description: "Conceptual and technical information about Container Storage Modul
 weight: 3
 --- 
 
+
+
 {{< cardcontainer >}}
+
+      {{< customcard  link="./csi"  title="Optimizing Kubernetes Storage with Container Storage Modules CSI" imageNumber="6" >}} 
 
       {{< customcard  link="./cosidriver"  title="COSI Driver" imageNumber="6" >}} 
 
