@@ -771,7 +771,7 @@ Shared NFS utilizes native NFS features to support large-scale ReadWriteMany (RW
 - **Centralized File Management**: Allows remote files to be accessed as if they were local, simplifying file management and reducing duplication for more efficient storage use.
 - **NFSv4 Recommendation**: NFS versions v4,1, v4.2.
 - **Prerequisites**: NFS-related services (nfs-server and nfs-mountd on Linux) must be running on all participating worker nodes.
-- **CSI PowerStore Support**: Version 2.14 introduces support for Shared NFS via a new StorageClass.
+- **Enable Shared NFS Support**: Version 2.14 introduces support for Shared NFS via a new StorageClass.
 
 ```yaml
 apiVersion: storage.k8s.io/v1
