@@ -90,7 +90,6 @@ To deploy the Operator, follow the instructions available [here](../../../operat
 {{< collapse id="1" title="Parameters">}}
   | Parameter | Description | Required | Default |
 | --------- | ----------- | -------- |-------- |
-<<<<<<< HEAD
 |<div style="text-align: left"> replicas </div>| <div style="text-align: left">Controls the number of controller pods you deploy. If the number of controller pods is greater than the number of available nodes, the excess pods will be in pending state until new nodes are available for scheduling. Default is 2 which allows for Controller high availability. | Yes | 2 |
 |<div style="text-align: left"> namespace | <div style="text-align: left">Specifies namespace where the driver will be installed | Yes | "powerstore" |
 | <div style="text-align: left">fsGroupPolicy |<div style="text-align: left"> Defines which FS Group policy mode to be used. Supported modes `None, File and ReadWriteOnceWithFSType`. In OCP <= 4.16 and K8s <= 1.29, fsGroupPolicy is an immutable field. | No |"ReadWriteOnceWithFSType"|
