@@ -123,7 +123,6 @@ volume stats value under node should be set to true.
 |<div style="text-align: left"> node.nodeSelector |<div style="text-align: left"> Defines what nodes would be selected for pods of node daemonset | Yes | " " |
 |<div style="text-align: left"> node.tolerations  |<div style="text-align: left"> Defines tolerations that would be applied to node daemonset | Yes | " " |
 |<div style="text-align: left"> fsGroupPolicy |<div style="text-align: left"> Defines which FS Group policy mode to be used, Supported modes `None, File and ReadWriteOnceWithFSType` | No | "ReadWriteOnceWithFSType" |
-|<div style="text-align: left"> controller.vgsnapshot.enabled |<div style="text-align: left"> Allows to enable/disable the volume group snapshot feature | No | "true" |
 |<div style="text-align: left"> version |<div style="text-align: left"> To use any driver version | No | Latest driver version |
 |<div style="text-align: left"> allowAutoRoundOffFilesystemSize | <div style="text-align: left">Allows the controller to round off filesystem to 3Gi which is the minimum supported value | No | false |
 |<div style="text-align: left"> storageCapacity.enabled |<div style="text-align: left"> Allows to enable/disable storage capacity tracking feature | No | true
