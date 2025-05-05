@@ -6,8 +6,4 @@ Description: >
   Optimizing Kubernetes Storage with Container Storage Modules CSI
 ---
 
-{{< cardcontainer >}} 
 
-    {{< customcard link="./overview"  title="Overview and Core Principles"  >}} 
-
-{{< /cardcontainer >}}
