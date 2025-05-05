@@ -33,7 +33,7 @@ To deploy the Operator, follow the instructions available [here](../../../operat
 
 2. **Create `secret.yaml`.**
 
-   a. Create a file called `secret.yaml` or pick a [sample](https://github.com/dell/csi-powerstore/blob/main/samples/secret/secret.yaml) that has Powerstore array connection details:
+   a. Create a file called `secret.yaml` or pick a [sample](https://github.com/dell/csi-powerstore/blob/main/samples/secret/secret.yaml) that has PowerStore array connection details:
 
    ```yaml
    arrays:
