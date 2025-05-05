@@ -26,7 +26,6 @@ weight: 3
       {{< customcard  link="./resiliency" title="Resiliency" imageNumber="6">}} 
 
       {{< customcard  link="./snapshots" title="Snapshots" imageNumber="6">}}  
-
        
       {{< customcard  link="./applicationmobility" title="Application Mobility" imageNumber="6">}}  
 
