@@ -17,7 +17,7 @@ toc_hide: true
 
 <br>
 
-3. (Optional) For "Shared NFS", install necessary nfs packages and ensure nfs-server and nfs-mountd services are active and running on all nodes.
+3. (Optional) For "Shared NFS", install necessary nfs-utils package and ensure nfs-server and nfs-mountd services are active and running on all nodes.
 
 <br>
 
