@@ -110,7 +110,7 @@ To configure Replication perform the following steps:
    step 1. For a stretched cluster set both fields to `self`.
 
 4. Create the replication storage classes using the modified configuration from
-   step 4:
+   step 3:
 
    ```shell
    ./repctl create sc --from-config ./examples/<storage>_example_values.yaml
