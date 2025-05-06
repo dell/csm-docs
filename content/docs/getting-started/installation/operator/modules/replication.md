@@ -116,10 +116,9 @@ To configure Replication perform the following steps:
    ./repctl create sc --from-config ./examples/<storage>_example_values.yaml
    ```
 
-5. On the target cluster, configure the
-   [prerequisites](../../../csmoperator/#install-driver) for deploying the
-   driver via Dell CSM Operator. _This is not necessary in stretched-cluster
-   configurations that do not have a separate target cluster._
+5. On both source and target clusters, configure any driver-specific
+   [prerequisites](../../../csmoperator) for deploying the driver via Dell CSM
+   Operator.
 
 6. Install the CSI driver for your chosen storage platform on the source cluster
    according to the instructions for
