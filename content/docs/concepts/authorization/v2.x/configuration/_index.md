@@ -65,7 +65,7 @@ A `storage` entity in Container Storage Modules Authorization consists of the st
    | endpoint                  | HTTPS REST API endpoint of the backend storage array.                                | Yes      | -       |
    | systemID                  | System ID of the backend storage array.                                              | Yes      | -       |
    | vault.identifier          | The identifier of the Vault to be used that was configured in the Authorization CR.  | Yes      | -       |
-   | vault.kvEngine            | The mount path of the KV secrets engine.                                                   | Yes      | csm-authorization  |
+   | vault.kvEngine            | The mount path of the KV secrets engine.                                             | Yes      | csm-authorization  |
    | vault.path                | The location within the store that the credentials for the array are stored.         | Yes      | -       |
    | skipCertificateValidation | A boolean that enables/disables certificate validation of the backend storage array. | No       | true    |
    | pollInterval              | PollInterval is the polling frequency to test the storage connectivity.              | No       | 30s     |
