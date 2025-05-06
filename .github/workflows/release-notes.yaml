@@ -12,7 +12,7 @@ on:
   workflow_dispatch:  # Allows manual trigger
     inputs:
       version:
-        description: 'Semantic version to release. Ex: v1.14.0'
+        description: 'Semantic version of the latest CSM milestone. Ex: v1.14.0'
         required: false
         type: string
 
@@ -46,8 +46,8 @@ jobs:
             MILESTONE=${{ inputs.version }}
           fi
 
-          git clone https://${GITHUB_TOKEN}@github.com/dell/change-log.git
-          cd change-log
+          git clone https://${GITHUB_TOKEN}@github.com/dell/csm-change-log.git
+          cd csm-change-log
 
           # Update labels for release Notes
           echo '  - area/csi-powermax                                   
@@ -59,8 +59,6 @@ jobs:
             - area/csm-resiliency
             - area/csm-authorization
             - area/csm-observability
-          #  - area/csm-encryption
-          #  - area/csm-application-mobility
             - area/installation-wizard
             - area/csm-operator' >> config.yaml
 
@@ -68,10 +66,10 @@ jobs:
           sed -i "s/milestone: \(.*\)*/milestone: \"$MILESTONE\"/g" config.yaml
 
           # Generate the release notes.
-          ./bin/change-log generate --release-notes
+          ./bin/csm-change-log generate --release-notes
 
           # Update release notes.
-          ./bin/change-log update --contentPath out/area --docsPath ../csm-docs
+          ./bin/csm-change-log update --contentPath out/area --docsPath ../csm-docs
 
           # Clean up change-log directory.
           cd ../
