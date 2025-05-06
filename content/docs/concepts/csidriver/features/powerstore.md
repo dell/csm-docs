@@ -764,3 +764,28 @@ To configure how often driver checks for changed capacity set `storageCapacity.p
 The CSI PowerStore driver supports the provisioning of Metro volumes. The process and details of how to provision and use Metro volumes can be found [here](../../../replication/high-availability).
 
 Please note that the Metro feature does not require the deployment of the replicator sidecar or the replication controller.
+
+## Shared NFS
+Shared NFS utilizes native NFS features to support large-scale ReadWriteMany (RWX) volumes through the access mode, enabling efficient shared storage across multiple consumers. It follows a client-server model, with a node serving as an NFS server and potentially a client as well.
+- **Scalability and Flexibility**: Offers enhanced scalability and flexibility compared to traditional NFS, which relies on a single dedicated server.
+- **Centralized File Management**: Allows remote files to be accessed as if they were local, simplifying file management and reducing duplication for more efficient storage use.
+- **NFSv4 Recommendation**: NFS versions v4,1, v4.2.
+- **Prerequisites**: NFS-related services (nfs-server and nfs-mountd on Linux) must be running on all participating worker nodes.
+- **Enable Shared NFS Support**: Version 2.14 introduces support for Shared NFS via a new StorageClass.
+
+```yaml
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+    name: powerstore-sharednfs-sc
+provisioner: csi-powerstore.dellemc.com
+reclaimPolicy: Delete
+parameters:
+  arrayID: <array-id>
+  shared-nfs: RWX
+  csi.storage.k8s.io/fstype: ext4
+provisioner: csi-powerstore.dellemc.com
+reclaimPolicy: Delete
+volumeBindingMode: WaitForFirstConsumer
+
+```
