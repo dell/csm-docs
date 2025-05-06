@@ -784,3 +784,4 @@ reclaimPolicy: Delete
 volumeBindingMode: Immediate
 
 ```
+In this example, different NAS servers (e.g., nas-server-1, nas-server-2) can be specified for provisioning volumes. This configuration ensures effective scaling when creating volumes.
