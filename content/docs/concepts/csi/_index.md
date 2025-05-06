@@ -26,7 +26,10 @@ CSI allows storage drivers to operate independently of Kubernetes updates, provi
 
 With Container Storage Modules (CSM) utilizing CSI, you can perform various storage operations efficiently and effectively.
 
-![CSM Architecture](./csm_arc.png)
+!CSM Architecture ./csm_arc.png
 {{< /accordion >}} 
 
 ![CSM Architecture](./csm_arc.png)
+
+
+
