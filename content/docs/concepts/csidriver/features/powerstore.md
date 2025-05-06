@@ -764,3 +764,23 @@ To configure how often driver checks for changed capacity set `storageCapacity.p
 The CSI PowerStore driver supports the provisioning of Metro volumes. The process and details of how to provision and use Metro volumes can be found [here](../../../replication/high-availability).
 
 Please note that the Metro feature does not require the deployment of the replicator sidecar or the replication controller.
+
+
+## Multi NAS Support
+The CSI PowerStore driver version 2.3.0 and later introduces multi-NAS support. This feature allows users to specify multiple NAS servers within a single storage class. By supporting multiple NAS servers in a single storage class, customers can create 2000 filesystems per PowerStore system. Previously, multiple storage classes were needed to support this configuration
+
+The following is a sample storage class file that supports multiple NAS servers for provisioning volumes:
+```yaml
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: powerstore-multi-nas
+provisioner: csi-powerstore.dell.com
+parameters:
+  nasServers: "nas-server-1,nas-server-2,nas-server-3"
+  storagePool: "pool-1"
+  fsType: "nfs"
+reclaimPolicy: Delete
+volumeBindingMode: Immediate
+
+```
