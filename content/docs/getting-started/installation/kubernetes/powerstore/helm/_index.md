@@ -8,7 +8,7 @@ weight: 3
 1. Set up a Kubernetes cluster following the official documentation.
 2. Proceed to the [Prerequisite](../prerequisite/_index.md).
 3. Complete the base installation.
-4. Proceed with module installation. 
+4. Proceed with module installation.
 ### Install Helm 3.x
 
 Install Helm 3.x on the master node before you install the CSI Driver for PowerStore.
@@ -26,7 +26,7 @@ Install Helm 3.x on the master node before you install the CSI Driver for PowerS
 
 <br>
 
-{{< accordion id="Two" title="Base Install" markdown="true" >}}  
+{{< accordion id="Two" title="Base Install" markdown="true" >}}
 
 ### Volume Snapshot Requirements (Optional)
 For detailed snapshot setup procedure, [click here.](docs/concepts/snapshots/#helm-optional-volume-snapshot-requirements)
@@ -107,6 +107,9 @@ volume stats value under node should be set to true.
 |<div style="text-align: left"> maxPowerstoreVolumesPerNode |<div style="text-align: left"> Defines the default value for maximum number of volumes that the controller can publish to the node. If the value is zero, then CO shall decide how many volumes of this type can be published by the controller to the node. This limit is applicable to all the nodes in the cluster for which the node label 'max-powerstore-volumes-per-node' is not set. | No | 0 |
 |<div style="text-align: left"> imagePullPolicy |<div style="text-align: left"> Policy to determine if the image should be pulled prior to starting the container. | Yes | "IfNotPresent" |
 |<div style="text-align: left"> nfsAcls |<div style="text-align: left"> Defines permissions - POSIX mode bits or NFSv4 ACLs, to be set on NFS target mount directory. | No | "0777" |
+|<div style="text-align: left"> nfsExportDirectory |<div style="text-align: left"> Define the file path of the underlying cluster node where Shared NFS volumes will be mounted. | No | "/var/lib/dell/nfs" |
+|<div style="text-align: left"> nfsServerPort |<div style="text-align: left"> Define the port for the Shared NFS server. This value must match what port the nfs-server is configured on. See /etc/nfs.conf on the worker nodes for port information. | No | "2049" |
+|<div style="text-align: left"> nfsClientPort |<div style="text-align: left"> Define the port for the Shared NFS client. | No | "2050" |
 |<div style="text-align: left"> connection.enableCHAP   |<div style="text-align: left"> Defines whether the driver should use CHAP for iSCSI connections or not | No | False |
 |<div style="text-align: left"> controller.controllerCount     |<div style="text-align: left"> Defines number of replicas of controller deployment | Yes | 2 |
 |<div style="text-align: left"> controller.volumeNamePrefix |<div style="text-align: left"> Defines the string added to each volume that the CSI driver creates | No | "csivol" |
@@ -128,7 +131,7 @@ volume stats value under node should be set to true.
 |<div style="text-align: left"> storageCapacity.enabled |<div style="text-align: left"> Allows to enable/disable storage capacity tracking feature | No | true
 |<div style="text-align: left"> storageCapacity.pollInterval |<div style="text-align: left"> Configure how often the driver checks for changed capacity | No | 5m
 |<div style="text-align: left"> podmon.enabled |<div style="text-align: left"> Allows to enable/disable [Resiliency](./csm-modules/resiliency#powerstore-specific-recommendations) feature | No | false
-{{< /collapse >}} 
+{{< /collapse >}}
 </ul>
 
 8. Install the driver using `csi-install.sh` bash script by running
@@ -220,7 +223,7 @@ Note: here `my-powerstore-settings.yaml` is a `values.yaml` file which user has 
 <br>
 
 {{< accordion id="Three" title="Modules" >}}
-       
+
 {{< cardcontainer >}}
 
     {{< customcard  link1="./csm-modules/observability"   image="1" title="Observability"  >}}
