@@ -7,7 +7,7 @@ Description: >
   Container Storage Modules (CSM) release notes for observability
 ---
 
-## CSM Observability 1.11.0
+## CSM Observability v1.11.0
 
 ### New Features/Changes
 

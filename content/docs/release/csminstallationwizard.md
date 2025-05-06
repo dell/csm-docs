@@ -6,7 +6,7 @@ weight: 5
 description: Release notes for CSM Installation Wizard
 ---
 
-## CSM Installation Wizard 1.5.0
+## CSM Installation Wizard v1.5.0
 
 ### New Features/Changes
 
