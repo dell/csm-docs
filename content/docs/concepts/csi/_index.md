@@ -30,7 +30,6 @@ With Container Storage Modules (CSM) utilizing CSI, you can perform various stor
 
 {{< /accordion >}} 
 
-![CSM Architecture](./csm_arc.png)
 
 
 
