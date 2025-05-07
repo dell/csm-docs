@@ -68,7 +68,7 @@ A `storage` entity in Container Storage Modules Authorization consists of the st
    | vault.kvEngine            | The path to the KV secrets engine.                                                   | Yes      | secret  |
    | vault.path                | The location within the store that the credentials for the array are stored.         | Yes      | -       |
    | skipCertificateValidation | A boolean that enables/disables certificate validation of the backend storage array. | No       | true    |
-   | pollInterval              | PollInterval is the polling frequency to test the storage connectivity.              | No       | 30s     |
+   | pollInterval              | PollInterval is the polling frequency to test the storage connectivity.              | No       | 5m     |
 
 For example, to create PowerFlex storage:
 
@@ -86,7 +86,7 @@ spec:
     kvEngine: secret
     path: csm-authorization/powerflex/1000000000000000
   skipCertificateValidation: true
-  pollInterval: 30s
+  pollInterval: 10m
 ```
 
 >__Note__:
