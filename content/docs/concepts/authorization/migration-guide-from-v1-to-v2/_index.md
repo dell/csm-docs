@@ -74,7 +74,7 @@ spec:
   # SkipCertificateValidation is the flag to skip certificate validation
   skipCertificateValidation: true
   # PollInterval is the polling frequency to test the storage connectivity
-  pollInterval: 30s
+  pollInterval: 10m
 ```
 
 ## Role and Role Binding
