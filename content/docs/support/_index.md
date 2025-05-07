@@ -9,7 +9,7 @@ Description: >
 
 ### Where can I get Container Storage Modules support?
 
-- Please create a service request via the [Dell Support](https://www.dell.com/support/incidents-online/en-us/contactus/product/container-storage-modules) Portal if you have a valid support contract. For more details, please see our [Dell Support Page](https://www.dell.com/support/home/en-us).
+- Please create a service request via the [Dell Support](https://www.dell.com/support/incidents-online/en-us/contactus/product/container-storage-modules) Portal if you have a valid support contract. For more details, please see our [Dell Support Page](https://www.dell.com/support/home/en-us). 
 
 ### How to report Security Issues or Vulnerabilities?
 
