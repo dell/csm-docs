@@ -12,18 +12,11 @@ Please select one of the following options to get support for Container Storage 
 
 {{< cardcontainer markdown="true">}}
       
-      {{< customcard imageNumber="6" title="Contact support" >}}  
+      {{< customcard imageNumber="6" link="https://www.dell.com/support/incidents-online/en-us/contactus/product/container-storage-modules" title="Contact support" >}}  
 
-      {{< customcard imageNumber="6" title="Dell community" >}} 
-
-      {{< customcard imageNumber="6" link="https://www.dell.com/support/incidents-online/en-us/contactus/product/container-storage-modules" title="Community support" >}} 
+      {{< customcard imageNumber="6" link="https://www.dell.com/community/Dell-Community/ct-p/English?profile.language=en" title="Dell Community support" >}} 
 
 {{< /cardcontainer >}}
-
-### Need help with Container Storage Modules?
-
-- Please contact our support team via the [Dell Support](https://www.dell.com/support/incidents-online/en-us/contactus/product/container-storage-modules) Portal if you have an active support contract. 
-- Join our community of users like yourself to find answers or share your knowledge with others. For more details, please see our [Dell Community](https://www.dell.com/community/Dell-Community/ct-p/English?profile.language=en). 
 
 ### How to report Security Issues or Vulnerabilities?
 
