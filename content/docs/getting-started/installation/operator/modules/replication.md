@@ -122,7 +122,7 @@ To configure Replication perform the following steps:
 
 6. Install the CSI driver for your chosen storage platform on the source cluster
    according to the instructions for
-   [installing the drivers using CSM Operator](../../../csmoperator/#install-driver).
+   [installing the drivers using CSM Operator](../../../csmoperator).
    Ensure that replication is set to `enabled` in the custom resource YAML used
    to install the driver, under the `components` field.
 
