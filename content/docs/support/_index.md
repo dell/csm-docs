@@ -17,8 +17,8 @@ Please select one of the following options to get support for Container Storage 
       {{< customcard imageNumber="6" title="Dell community" >}} 
 
       {{< customcard imageNumber="6" >}} 
-        <a href="https://www.dell.com/support/incidents-online/en-us/contactus/product/container-storage-modules"></a> 
-      {{< /customcard >}}
+        <a href="https://www.dell.com/support/incidents-online/en-us/contactus/product/container-storage-modules">Click here</a> 
+      
 
 {{< /cardcontainer >}}
 
