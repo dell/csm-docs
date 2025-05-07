@@ -61,7 +61,7 @@ spec:
   credentialStore: vault
   credentialPath: storage/powerflex
   skipCertificateValidation: true
-  pollInterval: 10m
+  pollInterval: 30m
 ```
 
 >__Note__:

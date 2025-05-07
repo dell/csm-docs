@@ -86,7 +86,7 @@ spec:
     kvEngine: secret
     path: csm-authorization/powerflex/1000000000000000
   skipCertificateValidation: true
-  pollInterval: 10m
+  pollInterval: 30m
 ```
 
 >__Note__:
