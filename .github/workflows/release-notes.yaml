@@ -46,7 +46,7 @@ jobs:
             MILESTONE=${{ inputs.version }}
           fi
 
-          git clone https://${GITHUB_TOKEN}@github.com/dell/csm-change-log.git
+          git clone https://github.com/dell/csm-change-log.git
           cd csm-change-log
 
           # Update labels for release Notes
