@@ -303,19 +303,21 @@ feature is disabled for drivers when installed via CSM operator.
    These values can be obtained using base64 encoding as described in the
    following example:
 
-```bash
-echo -n "myusername" | base64
-echo -n "mypassword" | base64
-```
+    ```bash
+    echo -n "myusername" | base64
+    echo -n "mypassword" | base64
+    ```
 
-where _myusername_ and _mypassword_ are credentials for a user with vCenter
-privileges. 3. 4. Run following command to create the configmap
+    where _myusername_ and _mypassword_ are credentials for a user with vCenter
+    privileges.
 
-```bash
-kubectl create -f vcenter-secret.yaml
-```
+3. Run following command to create the configmap
 
-> Note: Name of the secret should always be `vcenter-creds`.
+      ```bash
+      kubectl create -f vcenter-secret.yaml
+      ```
+
+      > Note: The name of the secret should always be `vcenter-creds`.
 
 {{% /tab %}} {{< /tabpane >}}
 
@@ -356,36 +358,35 @@ multipathing is used.{{< /collapse >}} <br>
 
 2.  Best Practices
 
-        Use these options in multipath.conf for efficient path detection:
+    Use these options in multipath.conf for efficient path detection:
 
-        ```text
-        path_grouping_policy multibus
-        path_checker tur
-        features "1 queue_if_no_path"
-        path_selector "round-robin 0"
-        no_path_retry 10
-        ```
+
+          path_grouping_policy multibus
+          path_checker tur
+          features "1 queue_if_no_path"
+          path_selector "round-robin 0"
+          no_path_retry 10
 
     <br>
     The following is a sample multipath.conf file. You may have to adjust these values based on your environment.
+    <br>
 
-```text
-defaults {
-  user_friendly_names yes
-  find_multipaths yes
-  path_grouping_policy multibus
-  path_checker tur
-  features "1 queue_if_no_path"
-  path_selector "round-robin 0"
-  no_path_retry 10
-}
-  blacklist {
-}
-```
+        defaults {
+          user_friendly_names yes
+          find_multipaths yes
+          path_grouping_policy multibus
+          path_checker tur
+          features "1 queue_if_no_path"
+          path_selector "round-robin 0"
+          no_path_retry 10
+        }
+          blacklist {
+        }
 
-On some distributions the multipathd service for changes to the configuration
-and dynamically reconfigures itself. If you need to manually trigger a reload
-you can run the following command: `sudo systemctl reload multipathd`
+
+    On some distributions the multipathd service for changes to the configuration
+    and dynamically reconfigures itself. If you need to manually trigger a reload
+    you can run the following command: `sudo systemctl reload multipathd`
 
 {{< /collapse >}}
 

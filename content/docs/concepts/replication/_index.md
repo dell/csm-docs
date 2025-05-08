@@ -53,7 +53,7 @@ Replication provides the following capabilities:
 ## Details
 
 As on the storage arrays, all replication related Kubernetes entities are
-required/created in pairs -
+required to be created in pairs -
 
 1. Pair of Kubernetes Clusters
 2. Pair of replication enabled Storage classes
@@ -84,8 +84,8 @@ objects still exist in source/target pairs.
 
 1. Install all required components:
 
-- Enable replication during CSI driver installation
-- Install Replication Controller & repctl
+    - Enable replication during CSI driver installation
+    - Install Replication Controller & repctl
 
 2. Create replication enabled storage classes
 3. Create `PersistentVolumeClaim` using the replication enabled storage class
