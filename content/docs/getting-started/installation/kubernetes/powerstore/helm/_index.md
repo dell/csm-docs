@@ -128,8 +128,8 @@ volume stats value under node should be set to true.
 |<div style="text-align: left"> storageCapacity.enabled |<div style="text-align: left"> Allows to enable/disable storage capacity tracking feature | No | true |
 |<div style="text-align: left"> storageCapacity.pollInterval |<div style="text-align: left"> Configure how often the driver checks for changed capacity | No | 5m |
 |<div style="text-align: left"> podmon.enabled |<div style="text-align: left"> Allows to enable/disable [Resiliency](./csm-modules/resiliency#powerstore-specific-recommendations) feature | No | false |
-|<div style="text-align: left"> multiNas.threshold |<div style="text-align: left"> Number of consecutive FS creation failures after which a NAS is put into cooldown. Please refer [Multi NAS Support](../../../../../concepts/csidriver/features/powerstore.md#multi-nas-support) for more details. | No | 5 |
-|<div style="text-align: left"> multiNas.cooldownPeriod |<div style="text-align: left"> Duration for which a NAS remains in cooldown once the threshold is reached. Please refer [Multi NAS Support](../../../../../concepts/csidriver/features/powerstore.md#multi-nas-support) for more details. | No | 5m |
+|<div style="text-align: left"> multiNas.threshold |<div style="text-align: left"> Number of consecutive FS creation failures after which a NAS is put into cooldown. Please refer [Multi NAS Support](../../../../../concepts/csidriver/features/powerstore#multi-nas-support) for more details. | No | 5 |
+|<div style="text-align: left"> multiNas.cooldownPeriod |<div style="text-align: left"> Duration for which a NAS remains in cooldown once the threshold is reached. Please refer [Multi NAS Support](../../../../../concepts/csidriver/features/powerstore#multi-nas-support) for more details. | No | 5m |
 {{< /collapse >}} 
 </ul>
 
