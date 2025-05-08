@@ -525,9 +525,25 @@ volumeBindingMode: WaitForFirstConsumer
 parameters:
   arrayID: "GlobalUniqueID"
   csi.storage.k8s.io/fstype: "xfs"
+---
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: "powerstore-nfs"
+provisioner: "csi-powerstore.dellemc.com"
+parameters:
+  arrayID: "Unique"
+  csi.storage.k8s.io/fstype: "nfs"
+  nasName: "nas-server1, nas-server2, nas-server3"
+  allowRoot: "false"
+reclaimPolicy: Delete
+allowVolumeExpansion: true
+volumeBindingMode: WaitForFirstConsumer
 ```
 
 Here we specify two storage classes: one of them uses the first array and `ext4` filesystem, and the other uses the second array and `xfs` filesystem.
+
+> ℹ️ **NOTE:** : Storage Class for NFS Platform ,users can specify one or multiple NAS servers, separated by commas.
 
 Then we need to apply storage classes to Kubernetes using `kubectl`:
 ```bash
