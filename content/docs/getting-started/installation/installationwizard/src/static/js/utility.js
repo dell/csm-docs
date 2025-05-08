@@ -40,6 +40,12 @@ function validateForm(CONSTANTS_PARAM) {
 	if (document.getElementById('max-volumes-per-node').value.trim() < 0) {
 		return false;
 	}
+	if (document.getElementById('multi-nas-failure-threshold').value.trim() < 0) {
+		return false;
+	}
+	if (document.getElementById('multi-nas-cooldown-period').value.trim() < 0) {
+		return false;
+	}
 
 	if ($("#installation-type").val() === CONSTANTS_PARAM.OPERATOR && ($("#array").val() === CONSTANTS_PARAM.POWERFLEX || $("#array").val() === CONSTANTS_PARAM.UNITY)) {
 		return false;
@@ -135,6 +141,8 @@ function setDefaultValues(defaultValuesParam, csmMapValues) {
 	document.getElementById("poll-rate").value = csmMapValues.get("pollRate");
 	document.getElementById("array-threshold").value = csmMapValues.get("arrayThreshold");
 	document.getElementById("driver-pod-label").value = csmMapValues.get("driverPodLabel");
+	document.getElementById("multi-nas-failure-threshold").value = String(csmMapValues.get("multiNasFailureThreashold"));
+	document.getElementById("multi-nas-cooldown-period").value = String(csmMapValues.get("multiNasCooldownPeriod"));
 
 }
 
