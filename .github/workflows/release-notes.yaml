@@ -30,7 +30,7 @@ jobs:
 
       - name: Generate Release Notes
         env:
-          GITHUB_TOKEN: ${{ secrets.CSM_RELEASE_APP_PRIVATE_KEY }}
+          GITHUB_TOKEN: ${{ secrets.CSMBOT_PAT }}
         run: |
           # Go back to not clone within the repo.
           cd ..
@@ -87,10 +87,11 @@ jobs:
         uses: peter-evans/create-pull-request@v7
         with:
           token: ${{ steps.generate-token.outputs.token }}
-          branch: "release-notes-update"
+          branch: "docs/relnotes-update"
           commit-message: "Update Release Notes"
           title: "Update Release Notes"
           body: |
-            Update release-notes to include features and bug fixes.
+            Update the Release Notes to include features and bug fixes.
           sign-commits: true
           delete-branch: true
+          draft: true
