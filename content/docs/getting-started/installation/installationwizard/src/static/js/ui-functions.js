@@ -337,7 +337,7 @@ const resetTaint = csmMapValue => {
 	document.getElementById("taint").value = String(csmMapValue.get("taint"));
 }
 
-const resetMultiNasFailureThreashold = csmMapValue => {
+const resetMultiNasFailureThreshold = csmMapValue => {
 	document.getElementById("multi-nas-failure-threshold").value = String(csmMapValue.get("multiNasFailureThreashold"));
 }
 
@@ -643,7 +643,7 @@ if (typeof exports !== 'undefined') {
 		resetDriverPodLabel,
 		resetArrayConnectionLossThreshold,
 		resetTaint,
-		resetMultiNasFailureThreashold,
+		resetMultiNasFailureThreshold,
 		resetMultiNasCooldownPeriod,
 		downloadFile,
 		displayModules,
