@@ -5,19 +5,20 @@ description: Release notes for PowerScale CSI driver
 ---
 
 
-## CSI Driver for PowerScale v2.13.0
+## CSI Driver for PowerScale v2.14.0
 
 ### New Features/Changes
 
-- [#1560 - [FEATURE]: CSM support for OpenShift 4.18](https://github.com/dell/csm/issues/1560)
-- [#1561 - [FEATURE]: Added support for Kubernetes 1.32 ](https://github.com/dell/csm/issues/1561)
-- [#1611 - [FEATURE]: Added support for PowerScale 9.10](https://github.com/dell/csm/issues/1611)
+- [#1743 - [FEATURE]: Add support for PowerScale 9.11](https://github.com/dell/csm/issues/1743)
+- [#1750 - [FEATURE]: Kubernetes 1.33 Qualification](https://github.com/dell/csm/issues/1750)
 
 ### Fixed Issues
 
-- [#1514 - [BUG]: snapshot restore failed with Message = failed to get acl entries: Too many links](https://github.com/dell/csm/issues/1514)
-- [#1620 - [BUG]: PowerScale - handle panic error in ParseNormalizedSnapshotID](https://github.com/dell/csm/issues/1620)
-- [#1667 - [BUG]: Labels versions and maintainer update for CSM images ](https://github.com/dell/csm/issues/1667)
+- [#1726 - [BUG]: Panic Error During Volume Expansion When Hard Limit is Not Set for CSI PowerScale Driver](https://github.com/dell/csm/issues/1726)
+- [#1763 - [BUG]: Cloned PVC remains in a Pending state when cloning a large PVC in PowerScale](https://github.com/dell/csm/issues/1763)
+- [#1773 - [BUG]: gopowerscale CopyIsiVolume* functions ignoring error cases](https://github.com/dell/csm/issues/1773)
+- [#1823 - [BUG]: Powerscale CSI driver not setting snapshot restoreSize field](https://github.com/dell/csm/issues/1823)
+- [#1858 - [BUG]: Resiliency Tests Fail on GOARCH=386 Due to Type Mismatch in gofsutil (statfs.Bsize)](https://github.com/dell/csm/issues/1858)
 
 ### Known Issues
 

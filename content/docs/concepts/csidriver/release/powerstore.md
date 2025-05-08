@@ -4,20 +4,22 @@ toc_hide: true
 description: Release notes for PowerStore CSI driver
 ---
 
-## CSI PowerStore v2.13.0
+## CSI PowerStore v2.14.0
 
 ### New Features/Changes
 
-- [#1560 - [FEATURE]: CSM support for OpenShift 4.18](https://github.com/dell/csm/issues/1560)
-- [#1561 - [FEATURE]: Added support for Kubernetes 1.32 ](https://github.com/dell/csm/issues/1561)
-- [#1610 - [FEATURE]: Added support for PowerStore 4.1 ](https://github.com/dell/csm/issues/1610)
+- [#1742 - [FEATURE]: Shared NFS for File Scalability](https://github.com/dell/csm/issues/1742)
+- [#1746 - [FEATURE]: Add support for  PowerStore 4.1](https://github.com/dell/csm/issues/1746)
+- [#1750 - [FEATURE]: Kubernetes 1.33 Qualification](https://github.com/dell/csm/issues/1750)
+- [#1753 - [FEATURE]: CSM PowerStore - Host Registration for PowerStore Metro](https://github.com/dell/csm/issues/1753)
+- [#1758 - [FEATURE]: CSM PowerStore - Multiple NAS Servers Support](https://github.com/dell/csm/issues/1758)
 
 ### Fixed Issues
 
-- [#1549 - [BUG]: The NVMeCommand constant needs to use full path](https://github.com/dell/csm/issues/1549)
-- [#1582 - [BUG]: CSI-PowerStore Fails to Apply 'mountOptions' Passed in StorageClass](https://github.com/dell/csm/issues/1582)
-- [#1586 - [BUG]: Snapshot from metro volume restore as non-metro even if metro storage class is chosen](https://github.com/dell/csm/issues/1586)
-- [#1667 - [BUG]: Labels versions and maintainer update for CSM images ](https://github.com/dell/csm/issues/1667)
+- [#1714 - [BUG]: PowerStore CSI driver version 2.12 - only supports the default interface for iSCSI discovery. ](https://github.com/dell/csm/issues/1714)
+- [#1729 - [BUG]: [CSI-Powerstore] Clarify protocol value use in PV](https://github.com/dell/csm/issues/1729)
+- [#1845 - [BUG]: PowerStore driver 2.12 error with OCP 4.14 on NVMe](https://github.com/dell/csm/issues/1845)
+- [#1858 - [BUG]: Resiliency Tests Fail on GOARCH=386 Due to Type Mismatch in gofsutil (statfs.Bsize)](https://github.com/dell/csm/issues/1858)
 
 ### Known Issues
 

@@ -6,20 +6,20 @@ weight: 9
 Description: >
   Container Storage Modules (CSM) release notes for replication
 ---
-## CSM Replication v1.11.0
+## CSM Replication v1.12.0
 
 ### New Features/Changes
 
-- [#1560 - [FEATURE]: CSM support for OpenShift 4.18](https://github.com/dell/csm/issues/1560)
-- [#1561 - [FEATURE]: Added support for Kubernetes 1.32 ](https://github.com/dell/csm/issues/1561)
-- [#1563 - [FEATURE]: Support KubeVirt for CSM modules](https://github.com/dell/csm/issues/1563)
-- [#1610 - [FEATURE]: Added support for PowerStore 4.1 ](https://github.com/dell/csm/issues/1610)
-- [#1611 - [FEATURE]: Added support for PowerScale 9.10](https://github.com/dell/csm/issues/1611)
+- [#1749 - [FEATURE]: CSM Operator - CSM Operator must manage the CRD only on the K8S cluster where the Operator is deployed](https://github.com/dell/csm/issues/1749)
+- [#1750 - [FEATURE]: Kubernetes 1.33 Qualification](https://github.com/dell/csm/issues/1750)
+- [#1756 - [FEATURE]: CSM Replication - Controller reattach failover PV to PVC automatically on stretched cluster](https://github.com/dell/csm/issues/1756)
+- [#1757 - [FEATURE]: CSM Replication - Test replication failover by creating remote snaps and PVCs/PVs from the snaps](https://github.com/dell/csm/issues/1757)
+- [#1850 - [FEATURE]: Controller reattach failover PV to PVC automatically on stretched cluster](https://github.com/dell/csm/issues/1850)
+- [#1862 - [FEATURE]: CSM Replication - Add claimRef to the target PV](https://github.com/dell/csm/issues/1862)
 
 ### Fixed Issues
 
-- [#1535 - [BUG]: Issue with CSM replication and unable to choose the target cluster certificate](https://github.com/dell/csm/issues/1535)
-- [#1667 - [BUG]: Labels versions and maintainer update for CSM images ](https://github.com/dell/csm/issues/1667)
+- [#1775 - [BUG]: CSI+Rep using Operator for PMAX failing during deployment.](https://github.com/dell/csm/issues/1775)
 
 ### Known Issues
 | Symptoms | Prevention, Resolution or Workaround |
