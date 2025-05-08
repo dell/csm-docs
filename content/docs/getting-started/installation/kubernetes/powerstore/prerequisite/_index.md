@@ -16,6 +16,7 @@ The following requirements must be met before installing the CSI Driver for Powe
 - Insecure registries are defined in Docker or other container runtime for CSI drivers that are hosted in a non-secure location.
 - Ensure that your nodes support mounting NFS volumes if using NFS.
 - For NVMe support the preferred multipath solution is NVMe native multipathing. The [Dell Host Connectivity Guide](https://elabnavigator.dell.com/vault/pdf/Linux.pdf) describes the details of each configuration option.
+- For "Shared NFS" - Install necessary nfs-utils package and ensure nfs-server and nfs-mountd services are active and running on all nodes.
 
 {{< tabpane text=true lang="en" >}}
 {{% tab header="Fibre Channel" lang="en" %}}

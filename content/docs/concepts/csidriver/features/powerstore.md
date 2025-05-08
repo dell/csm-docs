@@ -781,6 +781,30 @@ The CSI PowerStore driver supports the provisioning of Metro volumes. The proces
 
 Please note that the Metro feature does not require the deployment of the replicator sidecar or the replication controller.
 
+## Shared NFS
+Shared NFS utilizes native NFS features to support large-scale ReadWriteMany (RWX) volumes through the access mode, enabling efficient shared storage across multiple consumers. It follows a client-server model, with a node serving as an NFS server and potentially a client as well.
+- **Scalability and Flexibility**: Offers enhanced scalability and flexibility compared to traditional NFS, which relies on a single dedicated server.
+- **Centralized File Management**: Allows remote files to be accessed as if they were local, simplifying file management and reducing duplication for more efficient storage use.
+- **NFSv4 Recommendation**: NFS versions v4,1, v4.2.
+- **Prerequisites**: NFS-related services (nfs-server and nfs-mountd on Linux) must be running on all participating worker nodes.
+- **Enable Shared NFS Support**: Version 2.14 introduces support for Shared NFS via a new StorageClass.
+
+```yaml
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+    name: powerstore-sharednfs-sc
+provisioner: csi-powerstore.dellemc.com
+reclaimPolicy: Delete
+parameters:
+  arrayID: <array-id>
+  shared-nfs: RWX
+  csi.storage.k8s.io/fstype: ext4
+provisioner: csi-powerstore.dellemc.com
+reclaimPolicy: Delete
+volumeBindingMode: WaitForFirstConsumer
+
+```
 
 ## Multi NAS Support
 The CSI PowerStore driver version 2.3.0 and later introduces multi-NAS support. This feature allows users to specify multiple NAS servers within a single storage class. By supporting multiple NAS servers in a single storage class, customers can create 2000 filesystems per PowerStore system. Previously, multiple storage classes were needed to support this configuration
