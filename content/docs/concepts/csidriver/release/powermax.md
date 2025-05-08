@@ -4,7 +4,7 @@ toc_hide: true
 description: Release notes for PowerMax CSI driver
 ---
 
-## CSI PowerMax v2.13.0
+## CSI PowerMax v2.14.0
 
 > ℹ️ **NOTE:** Auto SRDF group creation is currently not supported in PowerMaxOS 10.1 (6079) Arrays.
 
@@ -16,26 +16,23 @@ Starting from CSI v2.4.0, only Unisphere 10.0 REST endpoints are supported. It i
 
 ### New Features/Changes
 
-- [#1560 - [FEATURE]: CSM support for OpenShift 4.18](https://github.com/dell/csm/issues/1560)
-- [#1561 - [FEATURE]: Added support for Kubernetes 1.32 ](https://github.com/dell/csm/issues/1561)
+- [#1614 - [FEATURE]: CSI-PowerMax - Mount credentials secret to the reverse-proxy (Customer Ask)](https://github.com/dell/csm/issues/1614)
+- [#1748 - [FEATURE]: CSM PowerMax - Multi-Availability Zone (AZ) support with multiple storage systems - dedicated storage systems in each AZ](https://github.com/dell/csm/issues/1748)
+- [#1750 - [FEATURE]: Kubernetes 1.33 Qualification](https://github.com/dell/csm/issues/1750)
+- [#1754 - [FEATURE]: Add support for Powermax 10.2](https://github.com/dell/csm/issues/1754)
 
 ### Fixed Issues
 
-- [#1549 - [BUG]: The NVMeCommand constant needs to use full path](https://github.com/dell/csm/issues/1549)
-- [#1566 - [BUG]: Inconsistent naming convention of secret is misleading in Installation of PowerMax ](https://github.com/dell/csm/issues/1566)
-- [#1568 - [BUG]: Examples provided in the secrets of install driver for the Primary Unisphere and Back up Unisphere is lacking clarity in ConfigMap](https://github.com/dell/csm/issues/1568)
-- [#1569 - [BUG]: Unused variable "X_CSI_POWERMAX_ENDPOINT" resulting in driver not to start in PowerMax](https://github.com/dell/csm/issues/1569)
-- [#1570 - [BUG]: Stale entries in CSM operator samples and helm-charts for PowerMax ](https://github.com/dell/csm/issues/1570)
-- [#1571 - [BUG]: SubjectAltName needs to be updated in the tls.crt ](https://github.com/dell/csm/issues/1571)
-- [#1584 - [BUG]: Driver should not be expecting a secret which is not used at all for PowerMax when authorization is enabled ](https://github.com/dell/csm/issues/1584)
-- [#1589 - [BUG]: Automation for reverseproxy tls secret and  powermax-array-config does not present in E2E](https://github.com/dell/csm/issues/1589)
-- [#1593 - [BUG]: Update the cert-manager version in Powermax Prerequisite](https://github.com/dell/csm/issues/1593)
-- [#1638 - [BUG]: CSM Docs Multiple fixes for CSI-Powermax installation](https://github.com/dell/csm/issues/1638)
-- [#1644 - [BUG]: Cannot create PowerMax clones](https://github.com/dell/csm/issues/1644)
-- [#1650 - [BUG]: PowerMax - X_CSI_IG_MODIFY_HOSTNAME fails to rename a host with same name in different case](https://github.com/dell/csm/issues/1650)
-- [#1663 - [BUG]: Pod filesystem not resized while volume gets successfully expanded](https://github.com/dell/csm/issues/1663)
-- [#1667 - [BUG]: Labels versions and maintainer update for CSM images ](https://github.com/dell/csm/issues/1667)
-- [#1634 - [BUG]: CSM PowerMax wrong error message](https://github.com/dell/csm/issues/1634)
+- [#1689 - [BUG]: Auto select protocol makes the node driver to crash](https://github.com/dell/csm/issues/1689)
+- [#1698 - [BUG]: 1.13 documentation | PowerMax | CSI PowerMax Reverse Proxy](https://github.com/dell/csm/issues/1698)
+- [#1711 - [BUG]: Unable to provision PowerMax Metro volumes with replication module not enabled](https://github.com/dell/csm/issues/1711)
+- [#1725 - [BUG]: Scale test fails with powermax nvmetcp protocol when X_CSI_TRANSPORT_PROTOCOL= ""](https://github.com/dell/csm/issues/1725)
+- [#1760 - [BUG]: [csi-powermax]: Yaml error in configmap generation](https://github.com/dell/csm/issues/1760)
+- [#1769 - [BUG]: PowerMax node pods are crashing even though the second array is reachable](https://github.com/dell/csm/issues/1769)
+- [#1826 - [BUG]: PowerMax CSI Driver attempts to create Port Group with Mixed FC and NVMe/FC Ports](https://github.com/dell/csm/issues/1826)
+- [#1858 - [BUG]: Resiliency Tests Fail on GOARCH=386 Due to Type Mismatch in gofsutil (statfs.Bsize)](https://github.com/dell/csm/issues/1858)
+- [#1870 - [BUG]: PowerMax Resiliency E2E Tests Failing Due to Incorrect Image Patch in Driver Node Pod](https://github.com/dell/csm/issues/1870)
+- [#1775 - [BUG]: CSI+Rep using Operator for PMAX failing during deployment.](https://github.com/dell/csm/issues/1775)
 
 ### Known Issues
 

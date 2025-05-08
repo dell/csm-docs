@@ -4,16 +4,18 @@ toc_hide: true
 description: Release notes for Unity XT CSI driver
 ---
 
-## CSI Unity XT v2.13.0
+## CSI Unity XT v2.14.0
 
 ### New Features/Changes
 
-There are no new features in this release.
+- [#1744 - [FEATURE]: Add support for Unity 5.5](https://github.com/dell/csm/issues/1744)
+- [#1750 - [FEATURE]: Kubernetes 1.33 Qualification](https://github.com/dell/csm/issues/1750)
 
 ### Fixed Issues
 
-- [#1654 - [BUG]: Helm installation still check snapshot CRD even though snapshot enabled is set to false](https://github.com/dell/csm/issues/1654)
-- [#1667 - [BUG]: Labels versions and maintainer update for CSM images ](https://github.com/dell/csm/issues/1667)
+- [#1717 - [BUG]: CSM Unity XT protocol/host registration documentation is not clear](https://github.com/dell/csm/issues/1717)
+- [#1736 - [BUG]: failed to provision volume with StorageClass error generating accessibility requirements: no available topology found](https://github.com/dell/csm/issues/1736)
+- [#1858 - [BUG]: Resiliency Tests Fail on GOARCH=386 Due to Type Mismatch in gofsutil (statfs.Bsize)](https://github.com/dell/csm/issues/1858)
 
 ### Known Issues
 

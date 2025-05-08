@@ -9,38 +9,20 @@ Description: >
 {{% pageinfo color="primary" %}}
 {{< message text="1" >}}
 {{% /pageinfo %}}
-## Container Storage Modules Operator v1.8.1
+## Container Storage Modules Operator v1.9.0
 
 ### New Features/Changes
 
-- [#1560 - [FEATURE]: CSM support for OpenShift 4.18](https://github.com/dell/csm/issues/1560)
-- [#1561 - [FEATURE]: Added support for Kubernetes 1.32 ](https://github.com/dell/csm/issues/1561)
-- [#1610 - [FEATURE]: Added support for PowerStore 4.1 ](https://github.com/dell/csm/issues/1610)
-- [#1611 - [FEATURE]: Added support for PowerScale 9.10](https://github.com/dell/csm/issues/1611)
+- [#1749 - [FEATURE]: CSM Operator - CSM Operator must manage the CRD only on the K8S cluster where the Operator is deployed](https://github.com/dell/csm/issues/1749)
+- [#1751 - [FEATURE]: CSM RBAC rules](https://github.com/dell/csm/issues/1751)
+- [#1752 - [FEATURE]: CSM PowerFlex - Expose the SFTP settings to automatically pull the scini.ko kernel module](https://github.com/dell/csm/issues/1752)
 
 ### Fixed Issues
 
-- [#1566 - [BUG]: Inconsistent naming convention of secret is misleading in Installation of PowerMax ](https://github.com/dell/csm/issues/1566)
-- [#1567 - [BUG]: Mode is mentioned incorrectly in the configMap of PowerMax even when it is deployed as a sidecar ](https://github.com/dell/csm/issues/1567)
-- [#1570 - [BUG]: Stale entries in CSM operator samples and helm-charts for PowerMax ](https://github.com/dell/csm/issues/1570)
-- [#1574 - [BUG]: Operator offline bundle doesn't prepare registries correctly](https://github.com/dell/csm/issues/1574)
-- [#1581 - [BUG]: Offline bundle doesn't include Authorization Server images](https://github.com/dell/csm/issues/1581)
-- [#1585 - [BUG]: Stale entries in CSI PowerMax Samples of CSM operator ](https://github.com/dell/csm/issues/1585)
-- [#1591 - [BUG]: Operator e2e scenario for powerflex driver with second set of alternate values is failing in OpenShift cluster](https://github.com/dell/csm/issues/1591)
-- [#1594 - [BUG]: Remove extra fields from the driver specs when using minimal sample](https://github.com/dell/csm/issues/1594)
-- [#1600 - [BUG]: Operator e2e scenario for powerscale driver with second set of alternate values is failing in OpenShift cluster](https://github.com/dell/csm/issues/1600)
-- [#1601 - [BUG]: "make install" command is failing for csm-operator](https://github.com/dell/csm/issues/1601)
-- [#1603 - [BUG]: CSM Operator Crashing](https://github.com/dell/csm/issues/1603)
-- [#1604 - [BUG]: CSM Operator not deleting the deployment and daemon sets after deleting the CSM](https://github.com/dell/csm/issues/1604)
-- [#1605 - [BUG]: Not able to create CSM using the minimal file, if the Operator deployed from the Operator Hub](https://github.com/dell/csm/issues/1605)
-- [#1638 - [BUG]: CSM Docs Multiple fixes for CSI-Powermax installation](https://github.com/dell/csm/issues/1638)
-- [#1642 - [BUG]: E2E and cert-csi tets are failing](https://github.com/dell/csm/issues/1642)
-- [#1648 - [BUG]: CSM-Operator: E2E Tests are running with 1 replica count](https://github.com/dell/csm/issues/1648)
-- [#1667 - [BUG]: Labels versions and maintainer update for CSM images ](https://github.com/dell/csm/issues/1667)
-- [#1668 - [BUG]: CSM-Operator is reconciling non CSM pods](https://github.com/dell/csm/issues/1668)
-- [#1633 - [BUG]: CSM deployment minimal file - pulling from quay after updating the image registry](https://github.com/dell/csm/issues/1633)
-- [#1671 - [BUG]: Minimal CR for Powerflex is failing in Csm-operator](https://github.com/dell/csm/issues/1671)
-- [#1782 - [BUG]: Pods Stuck in Terminating State After PowerFlex CSI Node Pod Restart When Deployments Share Same Node](https://github.com/dell/csm/issues/1782)
+- [#1689 - [BUG]: Auto select protocol makes the node driver to crash](https://github.com/dell/csm/issues/1689)
+- [#1762 - [BUG]: CSM Operator samples are incomplete](https://github.com/dell/csm/issues/1762)
+- [#1861 - [BUG]: Update the OTEL image version in operator and helm sample files](https://github.com/dell/csm/issues/1861)
+- [#1775 - [BUG]: CSI+Rep using Operator for PMAX failing during deployment.](https://github.com/dell/csm/issues/1775)
 
 ### Known Issues
 | Issue | Workaround |
