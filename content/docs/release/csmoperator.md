@@ -11,21 +11,6 @@ Description: >
 {{% /pageinfo %}}
 ## Container Storage Modules Operator v1.8.1
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ### New Features/Changes
 
 - [#1560 - [FEATURE]: CSM support for OpenShift 4.18](https://github.com/dell/csm/issues/1560)

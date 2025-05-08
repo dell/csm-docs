@@ -6,18 +6,6 @@ description: Release notes for Unity XT CSI driver
 
 ## CSI Unity XT v2.13.0
 
-
-
-
-
-
-
-
-
-
-
-
-
 ### New Features/Changes
 
 There are no new features in this release.

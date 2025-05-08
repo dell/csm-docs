@@ -1,0 +1,96 @@
+# Copyright (c) 2025 Dell Inc., or its subsidiaries. All Rights Reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#  http://www.apache.org/licenses/LICENSE-2.0
+
+name: Update Release Notes
+
+on:
+  workflow_dispatch:  # Allows manual trigger
+    inputs:
+      version:
+        description: 'Semantic version of the latest CSM milestone. Ex: v1.14.0'
+        required: false
+        type: string
+
+jobs:
+  release-notes-update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: "1.24"
+
+      - name: Generate Release Notes
+        env:
+          GITHUB_TOKEN: ${{ secrets.CSM_RELEASE_APP_PRIVATE_KEY }}
+        run: |
+          # Go back to not clone within the repo.
+          cd ..
+
+          MILESTONE=""
+          if [[ -z "${{ inputs.version }}" ]]; then
+            # Retrieve the latest milestone.
+            echo "Retrieving the latest milestone..."
+            MILESTONE=$(curl -s https://api.github.com/repos/dell/csm/milestones | jq -r '.[].title')
+          else
+            # Use the provided version.
+            echo "Using the provided version..."
+            MILESTONE=${{ inputs.version }}
+          fi
+
+          git clone https://${GITHUB_TOKEN}@github.com/dell/csm-change-log.git
+          cd csm-change-log
+
+          # Update labels for release Notes
+          echo '  - area/csi-powermax                                   
+            - area/csi-powerstore
+            - area/csi-powerflex
+            - area/csi-unity
+            - area/csi-powerscale
+            - area/csm-replication
+            - area/csm-resiliency
+            - area/csm-authorization
+            - area/csm-observability
+            - area/installation-wizard
+            - area/csm-operator' >> config.yaml
+
+          make build
+          sed -i "s/milestone: \(.*\)*/milestone: \"$MILESTONE\"/g" config.yaml
+
+          # Generate the release notes.
+          ./bin/csm-change-log generate --release-notes
+
+          # Update release notes.
+          ./bin/csm-change-log update --contentPath out/area --docsPath ../csm-docs
+
+          # Clean up change-log directory.
+          cd ../
+          rm -rf change-log
+
+      - uses: actions/create-github-app-token@v2.0.5
+        id: generate-token
+        with:
+          app-id: ${{ vars.CSM_RELEASE_APP_ID }}
+          private-key: ${{ secrets.CSM_RELEASE_APP_PRIVATE_KEY }}
+
+      # Must enable "allow GitHub Actions to create pull requests" setting
+      # Author defaults to the user who triggered the workflow run
+      - name: Create pull request
+        uses: peter-evans/create-pull-request@v7
+        with:
+          token: ${{ steps.generate-token.outputs.token }}
+          branch: "release-notes-update"
+          commit-message: "Update Release Notes"
+          title: "Update Release Notes"
+          body: |
+            Update release-notes to include features and bug fixes.
+          sign-commits: true
+          delete-branch: true
