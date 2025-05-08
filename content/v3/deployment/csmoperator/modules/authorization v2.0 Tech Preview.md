@@ -347,7 +347,7 @@ The role needs to be:
 ### Write a secret
 
 ```shell
-vault kv put -mount=csm-authorization /storage/powerflex/systemid1 username=user password=pass
+vault kv put -mount=secret /storage/powerflex/systemid1 username=user password=pass
 ```
 
 The username must use the key `username` and the password must use the key `password`.
