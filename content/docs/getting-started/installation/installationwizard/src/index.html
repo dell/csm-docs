@@ -648,7 +648,37 @@ disable_footer: true
                       </div>
                     </div>
                   </div>
-                  
+
+                  <div class="was-validated row mb-4 multi-nas-failure-threshold">
+                    <label for="multi-nas-failure-threshold" class="col-sm-2 col-form-label" data-bs-toggle="tooltip" data-bs-placement="right" title="Number of consecutive FS creation failures after which a NAS is put into cooldown." style="width: 180px;">Multi NAS Failure Threshold</label>
+                    <div class="col-sm-9"></div>
+                    <div class="row">
+                      <div class="col-sm-2">
+                        <input class="form-control input-lg" type="text" id="multi-nas-failure-threshold" placeholder="csivol"  oninput="validateInput(validateForm, CONSTANTS)" required>
+                      </div>
+                      <div class="col-sm-4">
+                        <div class="row mt-1">
+                          <a class="reset" id="reset-multi-nas-failure-threshold" onclick="resetMultiNasFailureThreshold(csmMap)">Reset to default</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="was-validated row mb-4 multi-nas-cooldown-period">
+                    <label for="multi-nas-cooldown-period" class="col-sm-2 col-form-label" data-bs-toggle="tooltip" data-bs-placement="right" title="Duration for which a NAS remains in cooldown once the threshold is reached." style="width: 180px;">Multi NAS Cooldown Period</label>
+                    <div class="col-sm-9"></div>
+                    <div class="row">
+                      <div class="col-sm-2">
+                        <input class="form-control input-lg" type="text" id="multi-nas-cooldown-period" placeholder="csivol"  oninput="validateInput(validateForm, CONSTANTS)" required>
+                      </div>
+                      <div class="col-sm-4">
+                        <div class="row mt-1">
+                          <a class="reset" id="multi-nas-cooldown-period" onclick="resetMultiNasCooldownPeriod(csmMap)">Reset to default</a>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
                   <div class="row mb-4 nodeselector">
                     <div class="col-sm-12">
                       <input class="form-check-input" type="checkbox" id="controller-pods-node-selector" value="" onchange="onNodeSelectorChange(nodeSelectorNote, csmMap)">

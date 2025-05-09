@@ -65,6 +65,8 @@ function setValues(csmMapValues, CONSTANTS_PARAM) {
 	DriverValues.controllerPodsNodeSelector = $("#controller-pods-node-selector").prop('checked') ? true : "";
 	DriverValues.nodePodsNodeSelector = $("#node-pods-node-selector").prop('checked') ? true : "";
 	DriverValues.nodeSelectorLabel = document.getElementById("node-selector-label").value || '""';
+	DriverValues.multiNasFailureThreshold = document.getElementById("multi-nas-failure-threshold").value;
+	DriverValues.multiNasCooldownPeriod = document.getElementById("multi-nas-cooldown-period").value;
 	var taint = document.getElementById("taint").value || '""';
 	var labels = DriverValues.nodeSelectorLabel.split(":");
 	var nodeSelector
@@ -194,6 +196,8 @@ function createYamlString(yamlTpl, yamlTplValues, driverParam, CONSTANTS_PARAM) 
 	yamlTpl = yamlTpl.replaceAll("$APPROVE_SDC_ENABLED", yamlTplValues.approveSDC);
 	yamlTpl = yamlTpl.replaceAll("$QUOTA_ENABLED", yamlTplValues.enableQuota);
 	yamlTpl = yamlTpl.replaceAll("$REVPROXY_USE_SECRET", yamlTplValues.powermaxUseSecret);
+	yamlTpl = yamlTpl.replaceAll("$MULTI_NAS_FAILURE_THRESHOLD", yamlTplValues.multiNasFailureThreshold);
+	yamlTpl = yamlTpl.replaceAll("$MULTI_NAS_COOLDOWN_PERIOD", yamlTplValues.multiNasCooldownPeriod);
 
 
 	if (driverParam === CONSTANTS_PARAM.POWERSTORE) {
