@@ -1,15 +1,15 @@
 ---
-title: Allow PVC creation on target cluster & claimRef update on remove PV 
-linktitle: Allow PVC creation on target cluster & claimRef update on remove PV
+title: Allow PVC creation on target cluster & claimRef update on remote PV 
+linktitle: Allow PVC creation on target cluster & claimRef update on remote PV
 weight: 6
 description: >
-  Allow PVC creation on target cluster & claimRef update on remove PV
+  Allow PVC creation on target cluster & claimRef update on remote PV
 ---
 
 Enabled: It creates a corresponding PVC on target cluster same as source cluster.
          Applicable only on multi cluster scenarios.
 
-Disabled: It updates `claimRef` on remove PV, so it cannot be claimed unless `claimRef` is removed or updated with expected claim details. 
+Disabled: It updates `claimRef` on remote PV, so it cannot be claimed unless `claimRef` is removed or updated with expected claim details. 
 ```yaml
 claimRef:                                       
   apiVersion: v1
