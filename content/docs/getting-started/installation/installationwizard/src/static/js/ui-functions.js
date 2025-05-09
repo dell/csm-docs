@@ -338,7 +338,7 @@ const resetTaint = csmMapValue => {
 }
 
 const resetMultiNasFailureThreshold = csmMapValue => {
-	document.getElementById("multi-nas-failure-threshold").value = String(csmMapValue.get("multiNasFailureThreashold"));
+	document.getElementById("multi-nas-failure-threshold").value = String(csmMapValue.get("multiNasFailureThreshold"));
 }
 
 const resetMultiNasCooldownPeriod = csmMapValue => {

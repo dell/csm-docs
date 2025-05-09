@@ -40,12 +40,6 @@ function validateForm(CONSTANTS_PARAM) {
 	if (document.getElementById('max-volumes-per-node').value.trim() < 0) {
 		return false;
 	}
-	if (document.getElementById('multi-nas-failure-threshold').value.trim() < 0) {
-		return false;
-	}
-	if (document.getElementById('multi-nas-cooldown-period').value.trim() < 0) {
-		return false;
-	}
 
 	if ($("#installation-type").val() === CONSTANTS_PARAM.OPERATOR && ($("#array").val() === CONSTANTS_PARAM.POWERFLEX || $("#array").val() === CONSTANTS_PARAM.UNITY)) {
 		return false;
@@ -56,6 +50,8 @@ function validateForm(CONSTANTS_PARAM) {
 
 	const powerflexSelected = document.getElementById('array').value.trim() === CONSTANTS_PARAM.POWERFLEX;
 	const renameSDCEnabled = $("#rename-sdc").prop('checked') ? true : false;
+
+	const powerstoreSelected = document.getElementById('array').value.trim() === CONSTANTS_PARAM.POWERSTORE;
 
 	if (powermaxSelected) {
 		if (document.getElementById('installation-type').value === CONSTANTS_PARAM.HELM) {
@@ -102,6 +98,14 @@ function validateForm(CONSTANTS_PARAM) {
 			}
 		}
 	}
+	if (powerstoreSelected) {
+		if (document.getElementById('multi-nas-failure-threshold').value.trim() < 0) {
+			return false;
+		}
+		if (document.getElementById('multi-nas-cooldown-period').value.trim() < 0) {
+			return false;
+		}
+	}
 	if ($('#controller-pods-node-selector').prop('checked') || $('#node-pods-node-selector').prop('checked')){
 		if (document.getElementById('node-selector-label').value.trim() === "") {
 			return false;
@@ -141,7 +145,7 @@ function setDefaultValues(defaultValuesParam, csmMapValues) {
 	document.getElementById("poll-rate").value = csmMapValues.get("pollRate");
 	document.getElementById("array-threshold").value = csmMapValues.get("arrayThreshold");
 	document.getElementById("driver-pod-label").value = csmMapValues.get("driverPodLabel");
-	document.getElementById("multi-nas-failure-threshold").value = String(csmMapValues.get("multiNasFailureThreashold"));
+	document.getElementById("multi-nas-failure-threshold").value = String(csmMapValues.get("multiNasFailureThreshold"));
 	document.getElementById("multi-nas-cooldown-period").value = String(csmMapValues.get("multiNasCooldownPeriod"));
 
 }
