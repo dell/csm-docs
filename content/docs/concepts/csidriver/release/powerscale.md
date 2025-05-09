@@ -7,18 +7,6 @@ description: Release notes for PowerScale CSI driver
 
 ## CSI Driver for PowerScale v2.13.0
 
-
-
-
-
-
-
-
-
-
-
-
-
 ### New Features/Changes
 
 - [#1560 - [FEATURE]: CSM support for OpenShift 4.18](https://github.com/dell/csm/issues/1560)

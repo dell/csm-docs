@@ -6,18 +6,6 @@ description: Release notes for PowerStore CSI driver
 
 ## CSI PowerStore v2.13.0
 
-
-
-
-
-
-
-
-
-
-
-
-
 ### New Features/Changes
 
 - [#1560 - [FEATURE]: CSM support for OpenShift 4.18](https://github.com/dell/csm/issues/1560)

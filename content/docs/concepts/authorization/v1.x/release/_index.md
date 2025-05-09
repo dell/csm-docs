@@ -7,7 +7,7 @@ Description: >
   Container Storage Modules (CSM) release notes for authorization
 ---
 
-## CSM Authorization 1.13.0
+## CSM Authorization v1.13.0
 
 {{% pageinfo color="primary" %}}
 {{< message text="5" >}}
