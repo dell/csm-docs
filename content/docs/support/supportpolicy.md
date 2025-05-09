@@ -4,11 +4,8 @@ linkTitle: "Support Policy"
 weight: 13 
 no_list: true 
 Description: >
-  Container Storage Modules support policy
 ---
 <hr>
-
-## Support Policy:
 
 The following information is designed to help customers and partners effectively plan, deploy, and maintain timely upgrades for the latest functionality and fixes.
 
