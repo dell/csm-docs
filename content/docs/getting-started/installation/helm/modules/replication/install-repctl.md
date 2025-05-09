@@ -45,14 +45,24 @@ You can start using Container Storage Modules for Replication with help from `re
       ./repctl cluster add -f "/root/.kube/config-1","/root/.kube/config-2" -n "cluster-1","cluster-2"
       ```
    > **_NOTE:_**  If using a single Kubernetes cluster in a stretched configuration there will be only one cluster.
-3. Install replication controller and CRDs:
+3. Install replication CRDs:
       ```shell
       ./repctl create -f ../deploy/replicationcrds.all.yaml
+      ```
+4. Install replication controller:
+
+   Update `allow-pvc-creation-on-target` arg to `true` or `false` as required.  
+   Default: `false`
+
+     `true`: It will replicate the PVC on target cluster (in case of `multi cluster`)
+
+     `false`: It will update the `claimRef` on remove PV 
+      ```shell
       ./repctl create -f ../deploy/controller.yaml
       ```
    > **_NOTE:_**  The controller will report that configmap is invalid. This is expected behavior.
    > The message should disappear once you inject the kubeconfigs (next step).
-4. (Choose one)
+5. (Choose one)
     1. (More secure) Inject service accounts' configs into clusters:
           ```shell
           ./repctl cluster inject --use-sa
@@ -62,15 +72,15 @@ You can start using Container Storage Modules for Replication with help from `re
           ./repctl cluster inject
           ```
     > **_NOTE:_**  After running this command, dell-replication-controller will be replicated to the target cluster.
-5. Modify `csm-replication/repctl/examples/<storage>_example_values.yaml` config with replication information:
+6. Modify `csm-replication/repctl/examples/<storage>_example_values.yaml` config with replication information:
    > **_NOTE:_**  `clusterID` should match names you gave to clusters in step 2
-6. Create replication storage classes using config:
+7. Create replication storage classes using config:
       ```shell
 
       ./repctl create sc --from-config ./examples/<storage>_example_values.yaml
       ```
-7. Install CSI driver for your chosen storage on source and target cluster and provision replicated volumes
-8. (optional) Create PVCs on target cluster from Replication Group:
+8. Install CSI driver for your chosen storage on source and target cluster and provision replicated volumes
+9. (optional) Create PVCs on target cluster from Replication Group:
       ```shell
       
       ./repctl create pvc --rg <rg-name> -t <target-namespace> --dry-run=false
