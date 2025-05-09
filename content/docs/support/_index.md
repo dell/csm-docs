@@ -16,7 +16,9 @@ Please select one of the following options to get support for Container Storage 
 
       {{< customcard imageNumber="6" link="https://www.dell.com/community/en/topics/containers" title="Dell Community support" >}}
 
-      {{< customcard imageNumber="6" link="https://github.com/dell/csm/security/advisories/new" title="Report a vulnerability" >}} 
+      {{< customcard imageNumber="6" link="https://github.com/dell/csm/security/advisories/new" title="Report a vulnerability" >}}
+
+      {{< customcard imageNumber="6" link="./supportpolicy" title="Support policy" >}}  
 
 {{< /cardcontainer >}}
 
