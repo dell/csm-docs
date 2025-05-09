@@ -56,7 +56,7 @@ You can start using Container Storage Modules for Replication with help from `re
 
      `true`: It will replicate the PVC on target cluster (in case of `multi cluster`)
 
-     `false`: It will update the `claimRef` on remove PV 
+     `false`: It will update the `claimRef` on remote PV 
       ```shell
       ./repctl create -f ../deploy/controller.yaml
       ```
