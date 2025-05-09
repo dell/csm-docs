@@ -1,7 +1,7 @@
 ---
 title: "Support Policy"
 linkTitle: "Support Policy"
-weight: 13 
+weight: 1 
 no_list: true 
 Description: >
 ---
