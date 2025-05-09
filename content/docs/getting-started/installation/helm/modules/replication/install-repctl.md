@@ -54,9 +54,9 @@ You can start using Container Storage Modules for Replication with help from `re
    Update `allow-pvc-creation-on-target` arg to `true` or `false` as required.  
    Default: `false`
 
-     `true`: It will replicate the PVC on target cluster (in case of `multi cluster`)
+     `true`: It replicates the PVC on target cluster (in case of `multi cluster`)
 
-     `false`: It will update the `claimRef` on remote PV 
+     `false`: It updates the `claimRef` on remote PV 
       ```shell
       ./repctl create -f ../deploy/controller.yaml
       ```
