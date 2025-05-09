@@ -4,22 +4,22 @@ toc_hide: true
 description: Release notes for PowerFlex CSI driver
 ---
 
-## CSI PowerFlex v2.13.0
+## CSI PowerFlex v2.14.0
 
 ### New Features/Changes
 
-- [#1560 - [FEATURE]: CSM support for OpenShift 4.18](https://github.com/dell/csm/issues/1560)
-- [#1561 - [FEATURE]: Added support for Kubernetes 1.32 ](https://github.com/dell/csm/issues/1561)
-- [#1612 - [FEATURE]: Multi-Availability Zone (AZ) support with multiple storage systems - dedicated storage systems in each AZ](https://github.com/dell/csm/issues/1612)
-- [#1613 - [FEATURE]: CSI PowerFlex must have the ability to connect a subset of the worker nodes to a storage array for multi-array support](https://github.com/dell/csm/issues/1613)
+- [#1745 - [FEATURE]: Add support for  PowerFlex 4.8](https://github.com/dell/csm/issues/1745)
+- [#1750 - [FEATURE]: Kubernetes 1.33 Qualification](https://github.com/dell/csm/issues/1750)
+- [#1752 - [FEATURE]: CSM PowerFlex - Expose the SFTP settings to automatically pull the scini.ko kernel module](https://github.com/dell/csm/issues/1752)
+- [#1759 - [FEATURE]: CSM PowerFlex - Address API Changes and remove Replication support for PowerFlex 5.0](https://github.com/dell/csm/issues/1759)
 
 ### Fixed Issues
 
-- [#1562 - [BUG]: Documentation for PowerFlex nasName states it is not a required field](https://github.com/dell/csm/issues/1562)
-- [#1608 - [BUG]: Volume Size Rounding Issue in PowerFlex: Rounds Down Instead of Up for Multiples of 8GB](https://github.com/dell/csm/issues/1608)
-- [#1639 - [BUG]: CSM PowerFlex entering boot loop when array has long response times](https://github.com/dell/csm/issues/1639)
-- [#1641 - [BUG]: NodeGetVolumeStats will cause panic when called w/ an Ephemeral volume ](https://github.com/dell/csm/issues/1641)
-- [#1667 - [BUG]: Labels versions and maintainer update for CSM images ](https://github.com/dell/csm/issues/1667)
+- [#1740 - [BUG]: CSI PowerFlex does not list volumes from non-default systems](https://github.com/dell/csm/issues/1740)
+- [#1774 - [BUG]: CSI-PowerFlex - DriverConfigMap is using hard-coded value](https://github.com/dell/csm/issues/1774)
+- [#1782 - [BUG]: Pods Stuck in Terminating State After PowerFlex CSI Node Pod Restart When Deployments Share Same Node](https://github.com/dell/csm/issues/1782)
+- [#1841 - [BUG]: "unable to get node list" error="csinodes.storage.k8s.io is forbidden](https://github.com/dell/csm/issues/1841)
+- [#1858 - [BUG]: Resiliency Tests Fail on GOARCH=386 Due to Type Mismatch in gofsutil (statfs.Bsize)](https://github.com/dell/csm/issues/1858)
 
 ### Known Issues
 
