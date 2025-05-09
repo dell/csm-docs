@@ -1,28 +1,30 @@
-name: Create New Release Branch
+name: Create Release Branch and GitHub Release
 
 on:
-  workflow_dispatch:  # Allows manual trigger
+  workflow_dispatch:  # Manual trigger
 
 jobs:
   create-release-branch:
     runs-on: ubuntu-latest
     permissions:
-      contents: write           # Needed to push commits
-      pull-requests: write      # Needed to open PRs
+      contents: write
+      pull-requests: write
+
+    outputs:
+      new_release: ${{ steps.get-new-version.outputs.new_release }}
 
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0        # Ensure we get full history and branches
-          token: ${{ secrets.CSMBOT_PAT }}  # Use PAT for pushing and creating PRs
+          fetch-depth: 0
+          token: ${{ secrets.CSMBOT_PAT }}
 
       - name: Get New Release Version from deploy.yml
         id: get-new-version
         run: |
           DEPLOY_FILE=".github/workflows/deploy.yml"
 
-          # Extract the version number from the release-* branch under `branches:` section
           current_version=$(awk '
             /branches:/ { in_branches=1; next }
             in_branches && /- release-/ {
@@ -39,10 +41,7 @@ jobs:
             exit 1
           fi
 
-          # Split version into major, minor, patch
           IFS='.' read -r major minor patch <<< "$current_version"
-
-          # Increment minor version
           new_minor=$((minor + 1))
           new_version="$major.$new_minor.0"
           new_release="release-$new_version"
@@ -52,28 +51,105 @@ jobs:
           echo "NEW_RELEASE=$new_release" >> $GITHUB_ENV
           echo "new_release=$new_release" >> $GITHUB_OUTPUT
 
-
       - name: Create and Push New Release Branch
         run: |
           git checkout -b "$NEW_RELEASE"
           git push origin "$NEW_RELEASE"
 
-      - name: Update `deploy.yml` in New Release Branch
+      - name: Update deploy.yml in New Release Branch
         run: |
           git checkout "$NEW_RELEASE"
-          
+
           echo "Before update:"
           cat .github/workflows/deploy.yml
-          
-          # Update release version inside deploy.yml
+
           sed -i -E "s/release-[0-9]+\.[0-9]+\.[0-9]+/$NEW_RELEASE/g" .github/workflows/deploy.yml
-          
+
           echo "After update:"
           cat .github/workflows/deploy.yml
 
-          # Configure Git and commit the changes
           git config --global user.email "github-actions@github.com"
           git config --global user.name "GitHub Actions"
           git add .github/workflows/deploy.yml
           git commit -m "Update deploy.yml to track $NEW_RELEASE"
           git push origin "$NEW_RELEASE"
+
+  release:
+    runs-on: ubuntu-latest
+    needs: create-release-branch
+
+    steps:
+      - name: Checkout current repo
+        uses: actions/checkout@v4
+
+      - name: Checkout dell/csm
+        uses: actions/checkout@v4
+        with:
+          repository: dell/csm
+          path: csm
+          ref: main
+
+      - name: Set up Python and install PyYAML
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y python3-pip
+          pip3 install pyyaml
+
+      - name: Parse csm-version and generate release notes
+        id: prepare
+        run: |
+          python3 -c "
+          import yaml
+          import os
+
+          with open('csm/config/csm-versions.yaml') as f:
+              versions = yaml.safe_load(f)
+
+          csm_version = versions.get('csm-version', 'vX.X.X')
+          csm_version_stripped = csm_version.lstrip('v')
+
+          data = {
+              'karavi_authorization': versions.get('karavi-authorization', 'vX.X.X'),
+              'csm_replication': versions.get('csm-replication', 'vX.X.X'),
+              'karavi_observability': versions.get('karavi-observability', 'vX.X.X'),
+              'karavi_resiliency': versions.get('karavi-resiliency', 'vX.X.X'),
+              'csi_powerflex': versions.get('csi-vxflexos', 'vX.X.X'),
+              'csi_powermax': versions.get('csi-powermax', 'vX.X.X'),
+              'csi_powerscale': versions.get('csi-powerscale', 'vX.X.X'),
+              'csi_powerstore': versions.get('csi-powerstore', 'vX.X.X'),
+              'csi_unity': versions.get('csi-unity', 'vX.X.X'),
+              'cert_csi': versions.get('cert-csi', 'vX.X.X'),
+              'csm_operator': versions.get('csm-operator', 'vX.X.X'),
+          }
+
+          with open(os.environ['GITHUB_ENV'], 'a') as env:
+              env.write(f'RELEASE_TAG={csm_version}\n')
+              env.write(f'RELEASE_TITLE=Container Storage Modules {csm_version_stripped}\n')
+
+          with open('release_body.md', 'w') as f:
+              f.write(f\"\"\"Documentation updates for [Container Storage Modules {csm_version_stripped}](https://github.com/dell/csm/releases/tag/{csm_version})
+
+          [CSM for Authorization](https://github.com/dell/karavi-authorization/releases/tag/{data['karavi_authorization']})
+          [CSM for Replication](https://github.com/dell/csm-replication/releases/tag/{data['csm_replication']})
+          [CSM for Observability](https://github.com/dell/karavi-observability/releases/tag/{data['karavi_observability']})
+          [CSM for Resiliency](https://github.com/dell/karavi-resiliency/releases/tag/{data['karavi_resiliency']})
+          [CSI Driver for Dell PowerFlex](https://github.com/dell/csi-powerflex/releases/tag/{data['csi_powerflex']})
+          [CSI Driver for Dell PowerMax](https://github.com/dell/csi-powermax/releases/tag/{data['csi_powermax']})
+          [CSI Driver for Dell PowerScale](https://github.com/dell/csi-powerscale/releases/tag/{data['csi_powerscale']})
+          [CSI Driver for Dell PowerStore](https://github.com/dell/csi-powerstore/releases/tag/{data['csi_powerstore']})
+          [CSI Driver for Dell Unity](https://github.com/dell/csi-unity/releases/tag/{data['csi_unity']})
+          [CSM Installation Wizard](https://dell.github.io/csm-docs/docs/getting-started/installation/installationwizard/src/)
+          [Tool to validate Dell CSI Drivers](https://github.com/dell/cert-csi/releases/tag/{data['cert_csi']})
+          [CSM Operator](https://github.com/dell/csm-operator/releases/tag/{data['csm_operator']})
+          \"\"\")
+          "
+
+      - name: Create GitHub Release
+        uses: ncipollo/release-action@v1
+        with:
+          tag: ${{ env.RELEASE_TAG }}
+          name: ${{ env.RELEASE_TITLE }}
+          bodyFile: release_body.md
+          draft: true
+          prerelease: false
+          token: ${{ secrets.CSMBOT_PAT}}
