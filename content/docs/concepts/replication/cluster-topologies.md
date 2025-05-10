@@ -123,6 +123,13 @@ NAME                           CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS
 csivol-06d51bfcc5              3Gi        RWO            Retain           Bound       powerstore-replication       23s
 ```
 ```shell
+kubectl get pvc
+```
+```terminal
+NAME          STATUS      VOLUME              CAPACITY   ACCESS MODES   STORAGECLASS             VOLUMEATTRIBUTESCLASS   AGE
+test-pvc      Bound       csivol-06d51bfcc5   3Gi        RWO            powerstore-replication   <unset>                 23s
+```
+```shell
 kubectl get rg
 ```
 ```terminal
@@ -136,6 +143,13 @@ kubectl get pv
 ```terminal
 NAME                           CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS          STORAGECLASS                 AGE
 csivol-06d51bfcc5              3Gi        RWO            Retain           Available       powerstore-replication       18s
+```
+```shell
+kubectl get pvc
+```
+```terminal
+NAME          STATUS      VOLUME              CAPACITY   ACCESS MODES   STORAGECLASS             VOLUMEATTRIBUTESCLASS   AGE
+test-pvc      Bound       csivol-06d51bfcc5   3Gi        RWO            powerstore-replication   <unset>                 18s
 ```
 ```shell
 kubectl get rg
