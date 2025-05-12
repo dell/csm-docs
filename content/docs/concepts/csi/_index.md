@@ -30,7 +30,7 @@ With Container Storage Modules (CSM) utilizing CSI, you can perform various stor
 
 {{< /accordion >}} 
 
-{{< accordion id="One" title="Capabilities and Dell Storage Platforms" markdown="true">}} 
+{{< accordion id="Two" title="Capabilities and Dell Storage Platforms" markdown="true">}} 
 
 ### CSI Driver Capabilities
 {{<table "table table-striped table-bordered table-sm">}}
