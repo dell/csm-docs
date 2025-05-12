@@ -106,6 +106,9 @@ csi-powerstore:
 
   maxPowerstoreVolumesPerNode: $MAX_VOLUMES_PER_NODE
   podmonAPIPort: 8083
+  multiNas:
+    threshold: $MULTI_NAS_FAILURE_THRESHOLD
+    cooldownPeriod: $MULTI_NAS_COOLDOWN_PERIOD
 
 ## K8S/CSI-PowerMax ATTRIBUTES
 ##########################################
