@@ -1092,7 +1092,7 @@ The driver will try to find the kernel modules in the following order:
 
 Driver will fetch pre-compiled kernel modules for various Linux kernels that are typically included in PowerFlex SDC installation packages. These modules are stored in a driver cache. 
 
-- Automatic Fetching from SFTP respository:
+- Automatic Fetching from SFTP repository:
 
 Driver will fetch the necessary kernel modules from a remote SFTP repository. This is configured through environment variables and secrets in the deployment templates.
 
