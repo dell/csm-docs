@@ -807,7 +807,7 @@ volumeBindingMode: WaitForFirstConsumer
 ```
 
 ## Multi NAS Support
-The CSI PowerStore driver version from 2.3.0 to 2.14.0 introduces multi-NAS support. This feature allows users to specify multiple NAS servers within a single storage class. By supporting multiple NAS servers in a single storage class, customers can create 2000 filesystems per PowerStore system across multiple NAS servers configured in SC. Previously, multiple storage classes were needed to support this configuration.
+The CSI PowerStore driver version 2.14.0 and later introduces multi-NAS support. This feature allows users to specify multiple NAS servers within a single storage class. By supporting multiple NAS servers in a single storage class, customers can create 2000 filesystems per PowerStore system across multiple NAS servers configured in SC. Previously, multiple storage classes were needed to support this configuration.
 
 The following is a sample storage class file that supports multiple NAS servers for provisioning volumes:
 ```yaml
