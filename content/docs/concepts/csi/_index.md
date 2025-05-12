@@ -30,9 +30,9 @@ With Container Storage Modules (CSM) utilizing CSI, you can perform various stor
 
 {{< /accordion >}} 
 
-{{< accordion id="Two" title="Capabilities and Dell Storage Platforms" markdown="true">}} 
+{{< accordion id="Two" title="Features" markdown="true">}} 
 
-### CSI Driver Capabilities
+### Core Features
 {{<table "table table-striped table-bordered table-sm">}}
 | Features                 | PowerStore | PowerScale | PowerFlex | PowerMax | Unity XT  |
 |--------------------------|:----------:|:----------:|:---------:|:--------:|:---------:|
@@ -54,7 +54,7 @@ With Container Storage Modules (CSM) utilizing CSI, you can perform various stor
 | <div style="text-align: left"> Volume Limit             | yes        | yes        | yes       | yes      | yes       |
 {{</table>}}
 
-### Dell Storage Platform Details
+### Dell Storage Features
 {{<table "table table-striped table-bordered table-sm">}}
 | Features      | PowerStore       | PowerScale       | PowerFlex          | PowerMax         | Unity XT         |
 |---------------|:----------------:|:----------------:|:------------------:|:----------------:|:----------------:|
@@ -74,6 +74,21 @@ With Container Storage Modules (CSM) utilizing CSI, you can perform various stor
 > **Note:** Please note Dual-Stack or IPv6 is not supported.
 
 {{< /accordion >}} 
+
+### Dell Storage Features
+{{< cardcontainer >}} 
+
+    {{< customcard  link="./powerstore"  imageNumber="3" title="PowerStore"  >}}
+
+    {{< customcard   link="./powermax"  imageNumber="3" title="PowerMax" >}} 
+
+    {{< customcard link="./powerflex" imageNumber="3" title="PowerFlex"  >}} 
+
+    {{< customcard  link="./powerscale"  imageNumber="3" title="PowerScale"  >}}
+
+    {{< customcard link="./unity"   imageNumber="3" title="Unity"  >}}
+
+{{< /cardcontainer >}}
 
 </br>
 
