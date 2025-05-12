@@ -33,9 +33,6 @@ Authorization consists of two main components - the Authorization Sidecar and th
 
 Users should always install or upgrade the Authorization proxy server and sidecar from the same release. This practice helps ensure optimal performance and compatibility, avoiding potential issues from version discrepancies.
 
-**NOTE:** If the number of controller pods deployed by the CSI driver matches the number of scheduled nodes in your cluster, Authorization may not be able to inject properly into the driver's controller pod.
-To resolve this, please refer to our [troubleshooting guide](./troubleshooting) on the topic.
-
 ## Roles and Responsibilities
 
 The Container Storage Modules for Authorization CLI can be executed in the context of the following roles:

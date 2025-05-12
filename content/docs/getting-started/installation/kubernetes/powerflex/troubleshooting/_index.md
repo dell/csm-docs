@@ -17,9 +17,7 @@ weight: 5
 
 {{< cardcontainer >}}
 
-     {{< customcard   link="../../../../../concepts/authorization/v1.x/troubleshooting"  imageNumber="1" title="Authorization v1.x" >}}
-
-       {{< customcard link="../../../../../concepts/authorization/v2.x/troubleshooting"   imageNumber="1" title="Authorization v2.0"  >}}
+      {{< customcard   link="../../../../../concepts/authorization/troubleshooting"  imageNumber="1" title="Authorization" >}}
 
       {{< customcard  link="../../../../../concepts/observability/troubleshooting"   imageNumber="1" title="Observability"  >}}
 

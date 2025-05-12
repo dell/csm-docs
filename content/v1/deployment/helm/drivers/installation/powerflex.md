@@ -23,7 +23,7 @@ The following are requirements that must be met before installing the CSI Driver
 - A user must exist on the array with a role _>= FrontEndConfigure_
 - If enabling CSM for Authorization, please refer to the [Authorization deployment steps](../../../../../deployment/helm/modules/installation/authorization-v2.0/) first
 - If multipath is configured, ensure CSI-PowerFlex volumes are blacklisted by multipathd. See [troubleshooting section](../../../../../csidriver/troubleshooting/powerflex) for details
-- Secure boot is not supported; ensure that secure boot is disabled in the BIOS.
+- Secure boot is not supported; ensure that secure boot is disabled in the BIOS. 
 
 ### Install Helm 3.x
 
