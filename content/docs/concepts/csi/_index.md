@@ -4,6 +4,7 @@ linkTitle: "Container Storage Modules with CSI"
 weight: 2
 Description: >
   Optimizing Kubernetes Storage with Container Storage Modules - CSI
+no_list: true
 ---
 
 <hr> 
