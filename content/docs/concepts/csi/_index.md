@@ -31,7 +31,7 @@ With Container Storage Modules (CSM) utilizing CSI, you can perform various stor
 
 {{< /accordion >}} 
 
-{{< accordion id="Two" title="Features" markdown="true">}} 
+{{< accordion id="Two" title="Features Summary" markdown="true">}} 
 
 ### Core Features
 {{<table "table table-striped table-bordered table-sm">}}
@@ -74,9 +74,39 @@ With Container Storage Modules (CSM) utilizing CSI, you can perform various stor
 
 > **Note:** Please note Dual-Stack or IPv6 is not supported.
 
+| **Feature Category**                  | **PowerStore** | **PowerScale** | **PowerFlex** | **PowerMax** | **Unity XT** |
+|---------------------------------------|----------------|----------------|---------------|--------------|--------------|
+| **Connectivity Options**              |                |                |               |              |              |
+| Fibre Channel                         | Yes            | N/A            | N/A           | Yes          | Yes          |
+| iSCSI                                 | Yes            | N/A            | N/A           | Yes          | Yes          |
+| NVMeTCP                               | Yes            | N/A            | N/A           | Yes          | N/A          |
+| NVMeFC                                | Yes            | N/A            | N/A           | N/A          | N/A          |
+| **File System Support**               |                |                |               |              |              |
+| NFS                                   | Yes            | Yes            | Yes           | Yes (SDNAS)  | Yes          |
+| Other Protocols                       | N/A            | N/A            | ScaleIO       | N/A          | N/A          |
+| **Supported File Systems**            |                |                |               |              |              |
+| ext3 / ext4 / xfs / NFS               | Yes            | NFS            | Yes           | Yes          | Yes          |
+| **Provisioning**                      |                |                |               |              |              |
+| Thin Provisioning                     | Yes            | N/A            | Yes           | Yes          | Yes          |
+| Thick Provisioning                    | N/A            | N/A            | N/A           | N/A          | Yes          |
+| **Platform-Specific Configurable Settings** |          |                |               |              |              |
+| iSCSI CHAP                            | Yes            | N/A            | N/A           | Yes          | N/A          |
+| Access Zone                           | N/A            | Yes            | N/A           | N/A          | N/A          |
+| NFS version (3 or 4); Configurable Export IPs | Yes     | N/A            | Yes           | N/A          | N/A          |
+| Service Level selection               | N/A            | N/A            | N/A           | Yes          | Yes          |
+| Host IO Limit                         | N/A            | N/A            | N/A           | Yes          | N/A          |
+| Tiering Policy                        | N/A            | N/A            | N/A           | Yes          | N/A          |
+| NFS Host IO size                      | N/A            | N/A            | N/A           | Yes          | N/A          |
+| Snapshot Retention duration           | N/A            | N/A            | N/A           | Yes          | N/A          |
+| **Additional Features**               |                |                |               |              |              |
+| Auto RDM (vSphere)                    | N/A            | N/A            | N/A           | Yes (over FC)| N/A          |
+| **Internet Protocol**                 |                |                |               |              |              |
+| IPv4                                  | Yes            | Yes            | Yes           | Yes          | Yes          |
+
+
 {{< /accordion >}} 
 
-### Dell Storage Features
+### Dell Storage Details
 {{< cardcontainer >}} 
 
     {{< customcard  link="./powerstore"  imageNumber="3" title="PowerStore"  >}}
