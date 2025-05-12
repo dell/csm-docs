@@ -23,7 +23,7 @@ Replication provides the following capabilities:
 {{<table "table table-striped table-bordered table-sm">}}
 
 | Capability                                                                                                                                                        | PowerStore | PowerScale | PowerFlex | PowerMax | Unity |
-| ----------------------------------------------------------------------------------------------------------------------------------------------------------------- | :--------: | :--------: | :-------: | :------: | :---: |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |:----------:| :--------: | :-------: |:--------:| :---: |
 | <div style="text-align: left">Replicate data using native storage array based replication                                                                         |    Yes     |    Yes     |    Yes    |   Yes    |  No   |
 | <div style="text-align: left">Asynchronous file volume replication                                                                                                |    Yes     |    Yes     |    No     |    No    |  No   |
 | <div style="text-align: left">Asynchronous block volume replication                                                                                               |    N/A     |    N/A     |    Yes    |   Yes    |  No   |
@@ -35,6 +35,8 @@ Replication provides the following capabilities:
 | <div style="text-align: left">Create `PersistentVolume` objects in the cluster representing the replicated volume                                                 |    Yes     |    Yes     |    Yes    |   Yes    |  No   |
 | <div style="text-align: left">Create `DellCSIReplicationGroup` objects in the cluster                                                                             |    Yes     |    Yes     |    Yes    |   Yes    |  No   |
 | <div style="text-align: left">Failover & Reprotect applications using the replicated volumes                                                                      |    Yes     |    Yes     |    Yes    |   Yes    |  No   |
+| <div style="text-align: left">Controller reattach failover PV to PVC automatically in a stretched cluster                                                         |    Yes     |    Yes     |    Yes    |   Yes    |  No   |
+| <div style="text-align: left">Allow PVC creation on target(multi cluster), claimRef update on remote PV (both single & multi cluster)                             |    Yes     |    Yes     |    Yes    |   Yes    |  No   | 
 | <div style="text-align: left">Online Volume Expansion for replicated volumes                                                                                      |     No     |     No     |    Yes    |   Yes    |  No   |
 | <div style="text-align: left">Provides a command line utility - [repctl](tools) for configuring & managing replication related resources across multiple clusters |    Yes     |    Yes     |    Yes    |   Yes    |  No   |
 
@@ -71,7 +73,7 @@ objects still exist in source/target pairs.
 - Replicate application manifests within/across clusters.
 - Stop applications before the planned/unplanned migration.
 - Start applications after the migration.
-- Replicate `PersistentVolumeClaim` objects within/across clusters.
+- Replicate `PersistentVolumeClaim` objects within single cluster.
 - Replication with METRO mode does not need replicator sidecar and common
   replication controller.
 - Different namespaces cannot share the same RDF group for creating volumes with
@@ -101,6 +103,8 @@ object using a replication enabled storage class -
 3. A `DellCSIReplicationGroup` object is created in the cluster representing the
    protection group on the storage array
 4. A replica of the `PersistentVolume` & `DellCSIReplicationGroup` is created
+5. A replica of the `PersistentVolumeClaim` is created on target cluster (only in case of `multi-cluster`)
+
 
 You can refer this [page](architecture) for more details about the architecture.
 

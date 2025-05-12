@@ -124,8 +124,19 @@ remote protection groups on the backend storage array. This controller can also 
 Both the PV & RG objects in the remote cluster have extra metadata associated with them in form of annotations & labels. This metadata includes
 information about the respective objects in the source cluster.
 
-The PVC objects are never replicated across the clusters. Instead, the remote PV objects have annotations related to the
-source PVC objects. This information can be easily used to create the PVCs whenever required using `repctl` or `kubectl`.
+`multi-cluster` The PVC objects are replicated across the clusters (when `allowPvcCreationOnTarget` or `REPLICATION_ALLOW_PVC_CREATION_ON_TARGET` is set to `true`).
+
+`single cluster` claimRef params is updated on remote PV with `name` and `namespace` as `reserved` by default to prevent the remote PV being available to everyone.
+Remote PV can be used by editing/removing the PV claimRef object.
+```yaml
+claimRef:                                       
+  apiVersion: v1
+  kind: PersistentVolumeClaim
+  name: reserved
+  namespace: reserved
+```
+
+In addition, the remote PV objects have annotations related to the source PVC objects. This information can be easily used to create the PVCs whenever required using `repctl` or `kubectl`.
 
 ### Supported Cluster Topologies
 Click [here](../cluster-topologies) for details for the various types of supported cluster topologies
