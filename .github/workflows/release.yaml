@@ -151,13 +151,13 @@ jobs:
           \"\"\")
           "
 
-          - name: Create GitHub Release
-            uses: softprops/action-gh-release@v2
-            with:
-              tag_name: ${{ env.RELEASE_TAG }}
-              name: ${{ env.RELEASE_TITLE }}
-              body_path: release_body.md
-              draft: true
-              prerelease: false
-            env:
-              GITHUB_TOKEN: ${{ secrets.CSMBOT_PAT }}
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ env.RELEASE_TAG }}
+          name: ${{ env.RELEASE_TITLE }}
+          body_path: release_body.md
+          draft: true
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.CSMBOT_PAT }}
