@@ -1081,3 +1081,46 @@ The Secret specifies the zone associated with each PowerFlex system along with a
         pools:
           - "pool2"
 ```
+## Expose the SFTP settings to automatically pull the scini.ko kernel module
+PowerFlex CSI driver version 2.14.0 and above supports exposing the SFTP settings to automatically pull the scini.ko kernel module.
+
+This feature allows the configuration of SFTP settings to automatically pull the scini.ko kernel module from a specified SFTP repository or SFTP repository of Dell. This ensures that the necessary kernel module is available and up-to-date on the cluster.
+
+The driver will try to find the kernel modules in the following order:
+
+- Pre-compiled Modules:
+
+Driver will fetch pre-compiled kernel modules for various Linux kernels that are typically included in PowerFlex SDC installation packages. These modules are stored in a driver cache. 
+
+- Automatic Fetching from SFTP respository:
+
+Driver will fetch the necessary kernel modules from a remote SFTP repository. This is configured through environment variables and secrets in the deployment templates.
+
+- Automatic SDC Compilation:
+
+If a matching pre-compiled module or the kernel module from SFTP repository is not available, driver will compile the SDC driver automatically. This involves compiling the scini.ko kernel module to match the running kernel.
+
+### Configuration Steps
+
+#### Enable SFTP Repository Settings:
+
+Enable the SFTP repository settings by enabling the SDC SFTP Repo and configuring the SFTP repository address, username, and secret.
+
+
+ *NOTE:*
+- Exposing SFTP settings to automatically pull scini.ko modules is only available for SDC 3.6.5 and 4.5.4
+- Ensure that sdcrepo-private-secret and sdcrepo-public-secret are created from the secrets file. 
+- Ensure that private key is generated via `ssh-keygen` and public key is pulled from known hosts after logging in to server via private key. 
+- The secrets should have permissions set to 600 to ensure security and proper access control. Setting permissions to 600 ensures that only the owner has read and write access, preventing unauthorized users from accessing or modifying the secrets.
+- After creating the private SFTP server,
+  scini.tar should be located in the folder structure with the format of RHEL version as the username followed by sdc kernel version. For example the format should be `RHEL9/4.5.4000.111/5.14.0-503.40.1.el9_5.x86_64/scini.tar`.
+  SSH Configuration on the Server should be enablued for public key authentication and public key should be added to authorized keys. For example, in /etc/ssh/sshd_config the following config should exist
+    ```ssh 
+        PubkeyAuthentication yes
+        AuthorizedKeysFile .ssh/authorized_keys
+        Match Group sftpusers
+            ChrootDirectory /home
+            ForceCommand internal-sftp
+            AllowTcpForwarding no
+            X11Forwarding no
+    ```

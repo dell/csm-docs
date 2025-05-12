@@ -216,6 +216,11 @@ Use the below command to replace or update the secret:
 |<div style="text-align: left"> tolerations |<div style="text-align: left"> Defines tolerations that would be applied to node daemonset. Leave as blank to install node driver only on worker nodes. | Yes | " " |
 |<div style="text-align: left"> **sdc** |<div style="text-align: left"> This section allows the configuration of the SDC installation. | - | - |
 |<div style="text-align: left"> enabled |<div style="text-align: left"> A boolean that enables/disables installation of the SDC. | No | true |
+|<div style="text-align: left"> sdcSFTPRepo.enabled |<div style="text-align: left"> A boolean that enables/disables the SFTP repository settings for SDC. | No | true |
+|<div style="text-align: left"> sdcSFTPRepo.sdcSFTPRepoAddress  |<div style="text-align: left"> Specifies the address of the SFTP/private repository to look up for SDC kernel files. | No | "sftp://0.0.0.0" |
+|<div style="text-align: left"> sdcSFTPRepo.sdcSFTPRepoUser  |<div style="text-align: left"> Specifies the username to authenticate to the SFTP repository. | No | "sdcSFTPRepoUser" |
+|<div style="text-align: left"> sdcSFTPRepo.sdcSFTPRepoPrivateSecret |<div style="text-align: left"> Specifies the secret containing the private key of the SFTP repository. | No | "sdcsftprepo-private-secret" |
+|<div style="text-align: left"> sdcSFTPRepo.sdcSFTPRepoPublicSecret  |<div style="text-align: left"> Specifies the secret containing the public key of the SFTP repository. | No | "sdcsftprepo-pubic-secret" |
 |<div style="text-align: left"> **renameSDC** |<div style="text-align: left"> This section allows the rename operation for SDC. | - | - |
 |<div style="text-align: left"> enabled |<div style="text-align: left"> A boolean that enable/disable rename SDC feature. | No | false |
 |<div style="text-align: left"> prefix |<div style="text-align: left"> Defines a string for the prefix of the SDC. | No | " " |

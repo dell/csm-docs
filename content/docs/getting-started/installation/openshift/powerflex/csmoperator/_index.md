@@ -169,6 +169,8 @@ dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      
 |<div style="text-align: left"> X_CSI_APPROVE_SDC_ENABLED |<div style="text-align: left"> Enable this to to approve restricted SDC by GUID during setup | Yes | false |
 |<div style="text-align: left"> X_CSI_HEALTH_MONITOR_ENABLED |<div style="text-align: left"> Enable/Disable health monitor of CSI volumes from Node plugin - volume condition | No | false |
 |<div style="text-align: left"> X_CSI_SDC_ENABLED |<div style="text-align: left"> Enable/Disable installation of the SDC. | Yes | true |
+|<div style="text-align: left"> X_CSI_SFTP_REPO_ADDRESS  |<div style="text-align: left"> Specifies the address of the SFTP/private repository to look up for SDC kernel files. | No | "sftp://0.0.0.0" |
+|<div style="text-align: left"> X_CSI_SFTP_REPO_USER  |<div style="text-align: left"> Specifies the username to authenticate to the SFTP repository. | No | "sdcSFTPRepoUser" |
 {{< /collapse >}}
 </ul>
 
