@@ -55,25 +55,28 @@ With Container Storage Modules (CSM) utilizing CSI, you can perform various stor
 | <div style="text-align: left"> Volume Limit             | yes        | yes        | yes       | yes      | yes       |
 {{</table>}}
 
-### Dell Storage Features
 {{<table "table table-striped table-bordered table-sm">}}
-| Features      | PowerStore       | PowerScale       | PowerFlex          | PowerMax         | Unity XT         |
-|---------------|:----------------:|:----------------:|:------------------:|:----------------:|:----------------:|
-| <div style="text-align: left"> Fibre Channel | yes              | N/A              | N/A                | yes              | yes              |
-| <div style="text-align: left"> iSCSI         | yes              | N/A              | N/A                | yes              | yes              |
-| <div style="text-align: left"> NVMeTCP       | yes              | N/A              | N/A                | yes              | N/A              |
-| <div style="text-align: left"> NVMeFC        | yes              | N/A              | N/A                | N/A              | N/A              |
-| <div style="text-align: left"> NFS           | yes              | yes              | yes                | yes - SDNAS only (not eNAS) | yes              |
-| <div style="text-align: left"> Other         | N/A              | N/A              | ScaleIO protocol   | N/A              | N/A              |
-| <div style="text-align: left"> Supported FS  | ext3 / ext4 / xfs / NFS | NFS       | ext4 / xfs / NFS   | ext4 / xfs / NFS | ext4 / xfs / NFS |
-| <div style="text-align: left"> Thin / Thick provisioning | Thin             | N/A              | Thin               | Thin             | Thin/Thick       |
-| <div style="text-align: left"> Platform-specific configurable settings | iSCSI CHAP | Access Zone<br>NFS version (3 or 4);Configurable Export IPs | - | Service Level selection<br>iSCSI CHAP | Host IO Limit<br>Tiering Policy<br>NFS Host IO size<br>Snapshot Retention duration |
-| <div style="text-align: left"> Auto RDM(vSphere)  | N/A              | N/A              | N/A                | Yes(over FC)     | N/A              |
-| <div style="text-align: left"> Internet Protocol| IPv4             | IPv4             | IPv4               | IPv4             | IPv4             |
+| Features                 | PowerStore | PowerScale | PowerFlex | PowerMax | Unity XT  |
+|--------------------------|:----------:|:----------:|:---------:|:--------:|:---------:|
+| CSI Driver version       | 2.13.0     | 2.13.0     | 2.13.0    | 2.13.0   | 2.13.0    |
+| Static Provisioning      | yes        | yes        | yes       | yes      | yes       |
+| Dynamic Provisioning     | yes        | yes        | yes       | yes      | yes       |
+| Expand Persistent Volume | yes        | yes        | yes       | yes      | yes       |
+| Volume Snapshot          | yes        | yes        | yes       | yes (LUN)<br>no (NFS) | yes       |
+| Volume Clone             | yes        | yes        | yes       | yes (LUN)<br>no (NFS) | yes       |
+| Filesystem Access Mode   | RWO, RWOP<br>ROX, RWX (NFS) | RWO, RWX, ROX, RWOP | RWO, ROX, RWOP<br>RWX (NFS) | RWO, RWOP<br>ROX, RWX (NFS) | RWO, ROX, RWOP<br>RWX (NFS) |
+| Block Access Mode        | RWO, RWX, ROX, RWOP | Not Supported | RWX, ROX, RWOP | RWX, ROX, RWOP | RWO, RWX |
+| Raw Block Volume         | yes        | no         | yes       | yes      | yes       |
+| CSI Ephemeral Volume     | yes        | yes        | yes       | no       | yes       |
+| Generic Ephemeral Volume | yes        | yes        | yes       | yes      | yes       |
+| Topology                 | yes        | yes        | yes       | yes      | yes       |
+| Multi-array              | yes        | yes        | yes       | yes      | yes       |
+| Volume Health Monitoring | yes        | yes        | yes       | yes      | yes       |
+| Storage Capacity Tracking| yes        | yes        | yes       | yes      | yes       |
+| Volume Limit             | yes        | yes        | yes       | yes      | yes       |
 {{</table>}}
 
-> **Note:** Please note Dual-Stack or IPv6 is not supported.
-
+### Dell Storage Features
 {{<table "table table-striped table-bordered table-sm">}}
 | **Feature Category**                  | **PowerStore** | **PowerScale** | **PowerFlex** | **PowerMax** | **Unity XT** |
 |---------------------------------------|----------------|----------------|---------------|--------------|--------------|
@@ -105,7 +108,11 @@ With Container Storage Modules (CSM) utilizing CSI, you can perform various stor
 | IPv4                                  | Yes            | Yes            | Yes           | Yes          | Yes          |
 {{</table>}}
 
+> **Note:** Please note Dual-Stack or IPv6 is not supported.
+
 {{< /accordion >}} 
+
+
 
 ### Dell Storage Details
 {{< cardcontainer >}} 
