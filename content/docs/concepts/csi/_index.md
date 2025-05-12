@@ -20,7 +20,7 @@ margin-bottom:20px;
 </style>
 
 {{< accordion id="One" title="Overview and Core Principles" markdown="true">}} 
-**Overview** : Container Storage Interface ([CSI](https://kubernetes-csi.github.io/docs/)) is a standardized model designed to integrate storage systems with Kubernetes and other orchestration platforms. Since Kubernetes version 1.10, CSI has been supported in beta, enabling seamless storage integration.
+Container Storage Interface ([CSI](https://kubernetes-csi.github.io/docs/)) is a standardized model designed to integrate storage systems with Kubernetes and other orchestration platforms. Since Kubernetes version 1.10, CSI has been supported in beta, enabling seamless storage integration.
 
 CSI allows storage drivers to operate independently of Kubernetes updates, providing storage vendors the flexibility to release, upgrade, and enhance their drivers on their own schedules. This ensures that Kubernetes remains a stable and reliable orchestration system while accommodating advancements in storage technology.
 
@@ -30,8 +30,7 @@ With Container Storage Modules (CSM) utilizing CSI, you can perform various stor
 
 {{< /accordion >}} 
 
-
-## Features and capabilities
+{{< accordion id="One" title="Capabilities and Dell Storage Platforms" markdown="true">}} 
 
 ### CSI Driver Capabilities
 {{<table "table table-striped table-bordered table-sm">}}
@@ -55,7 +54,7 @@ With Container Storage Modules (CSM) utilizing CSI, you can perform various stor
 | <div style="text-align: left"> Volume Limit             | yes        | yes        | yes       | yes      | yes       |
 {{</table>}}
 
-### Storage Platform Details
+### Dell Storage Platform Details
 {{<table "table table-striped table-bordered table-sm">}}
 | Features      | PowerStore       | PowerScale       | PowerFlex          | PowerMax         | Unity XT         |
 |---------------|:----------------:|:----------------:|:------------------:|:----------------:|:----------------:|
@@ -73,6 +72,8 @@ With Container Storage Modules (CSM) utilizing CSI, you can perform various stor
 {{</table>}}
 
 > **Note:** Please note Dual-Stack or IPv6 is not supported.
+
+{{< /accordion >}} 
 
 </br>
 
