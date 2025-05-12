@@ -56,24 +56,29 @@ With Container Storage Modules (CSM) utilizing CSI, you can perform various stor
 {{</table>}}
 
 {{<table "table table-striped table-bordered table-sm">}}
-| Features                 | PowerStore | PowerScale | PowerFlex | PowerMax | Unity XT  |
-|--------------------------|:----------:|:----------:|:---------:|:--------:|:---------:|
-| CSI Driver version       | 2.13.0     | 2.13.0     | 2.13.0    | 2.13.0   | 2.13.0    |
-| Static Provisioning      | yes        | yes        | yes       | yes      | yes       |
-| Dynamic Provisioning     | yes        | yes        | yes       | yes      | yes       |
-| Expand Persistent Volume | yes        | yes        | yes       | yes      | yes       |
-| Volume Snapshot          | yes        | yes        | yes       | yes (LUN)<br>no (NFS) | yes       |
-| Volume Clone             | yes        | yes        | yes       | yes (LUN)<br>no (NFS) | yes       |
+| **Feature Category**             | **PowerStore** | **PowerScale** | **PowerFlex** | **PowerMax** | **Unity XT**  |
+|--------------------------|:--------------:|:--------------:|:-------------:|:------------:|:-------------:|
+| **Driver version**       | 2.13.0         | 2.13.0         | 2.13.0        | 2.13.0       | 2.13.0        |
+| **Provisioning**         |                |                |               |              |               |
+| Static Provisioning      | yes            | yes            | yes           | yes          | yes           |
+| Dynamic Provisioning     | yes            | yes            | yes           | yes          | yes           |
+| Expand Persistent Volume | yes            | yes            | yes           | yes          | yes           |
+| **Volume Management**    |                |                |               |              |               |
+| Volume Snapshot          | yes            | yes            | yes           | yes (LUN)<br>no (NFS) | yes       |
+| Volume Clone             | yes            | yes            | yes           | yes (LUN)<br>no (NFS) | yes       |
+| **Access Modes**         |                |                |               |              |               |
 | Filesystem Access Mode   | RWO, RWOP<br>ROX, RWX (NFS) | RWO, RWX, ROX, RWOP | RWO, ROX, RWOP<br>RWX (NFS) | RWO, RWOP<br>ROX, RWX (NFS) | RWO, ROX, RWOP<br>RWX (NFS) |
 | Block Access Mode        | RWO, RWX, ROX, RWOP | Not Supported | RWX, ROX, RWOP | RWX, ROX, RWOP | RWO, RWX |
-| Raw Block Volume         | yes        | no         | yes       | yes      | yes       |
-| CSI Ephemeral Volume     | yes        | yes        | yes       | no       | yes       |
-| Generic Ephemeral Volume | yes        | yes        | yes       | yes      | yes       |
-| Topology                 | yes        | yes        | yes       | yes      | yes       |
-| Multi-array              | yes        | yes        | yes       | yes      | yes       |
-| Volume Health Monitoring | yes        | yes        | yes       | yes      | yes       |
-| Storage Capacity Tracking| yes        | yes        | yes       | yes      | yes       |
-| Volume Limit             | yes        | yes        | yes       | yes      | yes       |
+| **Volume Types**         |                |                |               |              |               |
+| Raw Block Volume         | yes            | no             | yes           | yes          | yes           |
+| CSI Ephemeral Volume     | yes            | yes            | yes           | no           | yes           |
+| Generic Ephemeral Volume | yes            | yes            | yes           | yes          | yes           |
+| **Additional Features**  |                |                |               |              |               |
+| Topology                 | yes            | yes            | yes           | yes          | yes           |
+| Multi-array              | yes            | yes            | yes           | yes          | yes           |
+| Volume Health Monitoring | yes            | yes            | yes           | yes          | yes           |
+| Storage Capacity Tracking| yes            | yes            | yes           | yes          | yes           |
+| Volume Limit             | yes            | yes            | yes           | yes          | yes           |
 {{</table>}}
 
 ### Dell Storage Features
