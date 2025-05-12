@@ -74,6 +74,7 @@ With Container Storage Modules (CSM) utilizing CSI, you can perform various stor
 
 > **Note:** Please note Dual-Stack or IPv6 is not supported.
 
+{{<table "table table-striped table-bordered table-sm">}}
 | **Feature Category**                  | **PowerStore** | **PowerScale** | **PowerFlex** | **PowerMax** | **Unity XT** |
 |---------------------------------------|----------------|----------------|---------------|--------------|--------------|
 | **Connectivity Options**              |                |                |               |              |              |
@@ -102,7 +103,7 @@ With Container Storage Modules (CSM) utilizing CSI, you can perform various stor
 | Auto RDM (vSphere)                    | N/A            | N/A            | N/A           | Yes (over FC)| N/A          |
 | **Internet Protocol**                 |                |                |               |              |              |
 | IPv4                                  | Yes            | Yes            | Yes           | Yes          | Yes          |
-
+{{</table>}}
 
 {{< /accordion >}} 
 
