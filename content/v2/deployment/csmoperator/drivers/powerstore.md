@@ -296,6 +296,9 @@ CRDs should be configured during replication prepare stage with repctl as descri
         nfsAcls: "0777"                           # (Optional) defines permissions - POSIX mode bits or NFSv4 ACLs, to be set on NFS target mount directory.
                                                   # NFSv4 ACls are supported for NFSv4 shares on NFSv4 enabled NAS servers only. POSIX ACLs are not supported and only POSIX mode bits are supported for NFSv3 shares.
    ```
+   **Note** :
+   skipCertificateValidation flag is currently unsupported. Please refrain from changing its value.
+   
    Change the parameters with relevant values for your PowerStore array.
    Add more blocks similar to above for each PowerStore array if necessary.
 

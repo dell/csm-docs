@@ -44,6 +44,9 @@ To deploy the Operator, follow the instructions available [here](../../../operat
         skipCertificateValidation: true
         blockProtocol: "FC"
    ```
+   **Note** :
+    skipCertificateValidation flag is currently unsupported. Please refrain from changing its value.
+    
       - **Update Parameters:** Replace placeholders with actual values for your PowerStore array.
       - **Add Blocks:** If you have multiple PowerStore arrays, add similar blocks for each one.
       - **Replication:** If replication is enabled, make sure the `config.yaml` includes all involved PowerStore arrays.
