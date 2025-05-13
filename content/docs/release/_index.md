@@ -51,7 +51,6 @@ Description: >
 
 - [#1732 - [BUG]: Updating approveSDC in tenant CR doesn't reflect in backend](https://github.com/dell/csm/issues/1732)
 - [#1804 - [BUG]: Support multiple sidecar headers in the Authorization Proxy Server](https://github.com/dell/csm/issues/1804)
-- [#1752 - [FEATURE]: CSM PowerFlex - Expose the SFTP settings to automatically pull the scini.ko kernel module](https://github.com/dell/csm/issues/1752)
 - [#1740 - [BUG]: CSI PowerFlex does not list volumes from non-default systems](https://github.com/dell/csm/issues/1740)
 - [#1774 - [BUG]: CSI-PowerFlex - DriverConfigMap is using hard-coded value](https://github.com/dell/csm/issues/1774)
 - [#1782 - [BUG]: Pods Stuck in Terminating State After PowerFlex CSI Node Pod Restart When Deployments Share Same Node](https://github.com/dell/csm/issues/1782)
