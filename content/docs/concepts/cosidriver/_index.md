@@ -20,15 +20,11 @@ margin-bottom:20px;
 </style>
 
 {{< accordion id="One" title="Overview and Core Principles" markdown="true">}} 
-🧰 Dell COSI Driver
 The Container Object Storage Interface (COSI) is a Kubernetes-native standard for managing object storage, similar to how the Container Storage Interface (CSI) manages block and file storage.
 
 The Dell COSI Driver is a Kubernetes plug-in that integrates COSI-enabled container orchestrators with Dell storage arrays. It enables seamless provisioning and access to object storage using Dell’s enterprise storage platforms.
 
-🔄 Multi-Backend Support
 The Dell COSI Driver supports multiple Object Storage Platform (OSP) instances, allowing users to connect and manage several backends through a single, unified COSI interface.
-
-## 📐 COSI Architecture
 
 The diagram below illustrates the architecture of the Container Object Storage Interface (COSI) in Kubernetes:
 
