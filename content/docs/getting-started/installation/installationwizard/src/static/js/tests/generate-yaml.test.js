@@ -2377,10 +2377,10 @@ describe("GIVEN createYamlString function", () => {
           enabled: false
           sdcSFTPRepo:
             enabled: false
-            sdcSFTPRepoAddress:
-            sdcSFTPRepoUser:
-            sdcSFTPRepoPrivateSecret:
-            sdcSFTPRepoPublicSecret:
+            sdcSFTPRepoAddress: 
+            sdcSFTPRepoUser: 
+            sdcSFTPRepoPrivateSecret: 
+            sdcSFTPRepoPublicSecret: 
         nodeSelector: false
         renameSDC:
 		  enabled: false
@@ -2661,10 +2661,10 @@ describe("GIVEN createYamlString function", () => {
           enabled: false
           sdcSFTPRepo:
             enabled: false
-            sdcSFTPRepoAddress:
-            sdcSFTPRepoUser:
-            sdcSFTPRepoPrivateSecret:
-            sdcSFTPRepoPublicSecret:
+            sdcSFTPRepoAddress: 
+            sdcSFTPRepoUser: 
+            sdcSFTPRepoPrivateSecret: 
+            sdcSFTPRepoPublicSecret: 
         nodeSelector: false
         renameSDC:
 		  enabled: false
