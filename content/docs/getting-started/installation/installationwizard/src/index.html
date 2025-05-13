@@ -356,6 +356,40 @@ disable_footer: true
                       <span class="h6"> SDC is required for using block storage. Verify your environment is supported on the <a href="https://hub.docker.com/r/dellemc/sdc" target="_blank">SDC Release Notes</a> before selecting this option. If your environment is not supported, refer to the manual installation instructions on the <a href="https://dell.github.io/csm-docs/docs/deployment/helm/drivers/installation/powerflex/#install-powerflex-storage-data-client" target="_blank">CSM Documentation</a>. </span>
                       </div>
                     </div>
+                   </div>                  
+                  <div class="row mb-4 enable-sdc-sftp-repo">
+                    <div class="col-sm-12">
+                      <input class="form-check-input" type="checkbox" id="enable-sdc-sftp-repo" value="" onchange="onSDCSFTPRepoChange(driver, CONSTANTS)">
+                      <label for="enable-sdc-sftp-repo" class="form-check-label ms-2 text-dark" data-bs-toggle="tooltip" data-bs-placement="right" title="Enable SDC SFTP Repo">Enable SDC SFTP Repo</label>
+                    </div>
+                    <div class="was-validated row mt-3 child-level-one sdc-sftp-repo-address">
+                      <label for="sdc-sftp-repo-address" class="col-sm-3 col-form-label" data-bs-toggle="tooltip" data-bs-placement="right" title="Address for SDC SFTP Repo">Address for SDC SFTP Repo</label>
+                      <div class="col-sm-9"></div>
+                      <div class="col-sm-2">
+                        <input class="form-control input-lg" type="text" id="sdc-sftp-repo-address" placeholder="sftp://0.0.0.0" oninput="validateInput(validateForm, CONSTANTS)" required>
+                      </div>
+                    </div>
+                    <div class="was-validated row mt-3 child-level-one sdc-sftp-repo-user">
+                      <label for="sdc-sftp-repo-user" class="col-sm-3 col-form-label" data-bs-toggle="tooltip" data-bs-placement="right" title="Username for SDC SFTP Repo">Username for SDC SFTP Repo</label>
+                      <div class="col-sm-9"></div>
+                      <div class="col-sm-2">
+                        <input class="form-control input-lg" type="text" id="sdc-sftp-repo-user" placeholder="sdcSFTPRepoUser" oninput="validateInput(validateForm, CONSTANTS)" required>
+                      </div>
+                    </div>
+                    <div class="was-validated row mt-3 child-level-one sdc-sftp-repo-private-secret">
+                      <label for="sdc-sftp-repo-private-secret" class="col-sm-3 col-form-label" data-bs-toggle="tooltip" data-bs-placement="right" title="Private secret name for SDC SFTP Repo">Private secret name for SDC SFTP Repo</label>
+                      <div class="col-sm-9"></div>
+                      <div class="col-sm-2">
+                        <input class="form-control input-lg" type="text" id="sdc-sftp-repo-private-secret" placeholder="sdcsftprepo-private-secret" oninput="validateInput(validateForm, CONSTANTS)" required>
+                      </div>
+                    </div>
+                    <div class="was-validated row mt-3 child-level-one sdc-sftp-repo-public-secret">
+                      <label for="sdc-sftp-repo-public-secret" class="col-sm-3 col-form-label" data-bs-toggle="tooltip" data-bs-placement="right" title="Address for SDC SFTP Repo">Address for SDC SFTP Repo</label>
+                      <div class="col-sm-9"></div>
+                      <div class="col-sm-2">
+                        <input class="form-control input-lg" type="text" id="sdc-sftp-repo-public-secret" placeholder="sdcsftprepo-public-secret" oninput="validateInput(validateForm, CONSTANTS)" required>
+                      </div>
+                    </div>
                    </div>
 
                   <div class="row mb-4 col-sm-11 rename-sdc-feature">

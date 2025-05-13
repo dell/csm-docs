@@ -130,6 +130,11 @@ function setValues(csmMapValues, CONSTANTS_PARAM) {
 	DriverValues.vSphereVCenterCredSecret = $("#vSphere-vCenter-cred-secret").val();
 	DriverValues.renameSDC = $("#rename-sdc").prop('checked') ? true : false;
 	DriverValues.sdcEnabled = $("#enable-sdc").prop('checked') ? true : false;
+	DriverValues.sdcSFTPRepoEnabled = $("#enable-sdc-sftp-repo").prop('checked') ? true : false;
+	DriverValues.sdcSFTPRepoUser = $("#sdc-sftp-repo-user").val();
+	DriverValues.sdcSFTPRepoAddress = $("#sdc-sftp-repo-address").val();
+	DriverValues.sdcSFTPRepoPrivateSecret = $("#sdc-sftp-repo-private-secret").val();
+	DriverValues.sdcSFTPRepoPublicSecret = $("#sdc-sftp-repo-public-secret").val();
 	DriverValues.sdcPrefix = $("#sdc-prefix").val();
 	DriverValues.approveSDC = $("#approve-sdc").prop('checked') ? true : false;
 	DriverValues.enableQuota = $("#enable-quota").prop('checked') ? true : false;
@@ -191,6 +196,11 @@ function createYamlString(yamlTpl, yamlTplValues, driverParam, CONSTANTS_PARAM) 
 	yamlTpl = yamlTpl.replaceAll("$TARGET_ARRAY_ID", yamlTplValues.targetArrayID);
 	yamlTpl = yamlTpl.replaceAll("$TARGET_UNISPHERE", yamlTplValues.targetUnisphere);
 	yamlTpl = yamlTpl.replaceAll("$SDC_ENABLED", yamlTplValues.sdcEnabled);
+	yamlTpl = yamlTpl.replaceAll("$SDC_SFTP_REPO_ENABLED", yamlTplValues.sdcSFTPRepoEnabled);
+	yamlTpl = yamlTpl.replaceAll("$SDC_SFTP_REPO_ADDRESS", yamlTplValues.sdcSFTPRepoUser);
+	yamlTpl = yamlTpl.replaceAll("$SDC_SFTP_REPO_USER", yamlTplValues.sdcSFTPRepoAddress);
+	yamlTpl = yamlTpl.replaceAll("$SDC_SFTP_REPO_PRIVATE_SECRET", yamlTplValues.sdcSFTPRepoPrivateSecret);
+	yamlTpl = yamlTpl.replaceAll("$SDC_SFTP_REPO_PUBLIC_SECRET", yamlTplValues.sdcSFTPRepoPublicSecret);
 	yamlTpl = yamlTpl.replaceAll("$RENAME_SDC_ENABLED", yamlTplValues.renameSDC);
 	yamlTpl = yamlTpl.replaceAll("$SDC_PREFIX", yamlTplValues.sdcPrefix);
 	yamlTpl = yamlTpl.replaceAll("$APPROVE_SDC_ENABLED", yamlTplValues.approveSDC);
