@@ -20,7 +20,7 @@ margin-bottom:20px;
 }
 </style>
 
-{{< accordion id="One" title="Overview and Core Principles" markdown="true">}} 
+{{< accordion id="One" title="Overview and Core Principles" expanded="true" markdown="true">}} 
 Container Storage Interface ([CSI](https://kubernetes-csi.github.io/docs/)) is a standardized model designed to integrate storage systems with Kubernetes and other orchestration platforms. Since Kubernetes version 1.10, CSI has been supported in beta, enabling seamless storage integration.
 
 CSI allows storage drivers to operate independently of Kubernetes updates, providing storage vendors the flexibility to release, upgrade, and enhance their drivers on their own schedules. This ensures that Kubernetes remains a stable and reliable orchestration system while accommodating advancements in storage technology.
