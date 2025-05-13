@@ -87,68 +87,72 @@ To perform an online installation of Container Storage Modules Observability, th
  {{< hide id="2" >}}- For CSI PowerScale with Authorization, configure `karaviMetricsPowerscale.authorization` in `myvalues.yaml`.{{< /hide >}}
  {{< hide id="3" >}}- For CSI PowerMax with Authorization, configure `karaviMetricsPowerMax.authorization` in `myvalues.yaml` {{< /hide >}}
 
-    ```bash
-    ./karavi-observability-install.sh install --namespace [CSM_NAMESPACE] --values myvalues.yaml
-    ```
+<ul>
+ 
+ ```bash
+ ./karavi-observability-install.sh install --namespace [CSM_NAMESPACE] --values myvalues.yaml
+ ```
 
-    ```terminal
-    ---------------------------------------------------------------------------------
-    > Installing Karavi Observability in namespace karavi on 1.32
-    ---------------------------------------------------------------------------------
-    |
-    |- Karavi Observability is not installed                            Success
-    |
-    |- Karavi Authorization will be enabled during installation
-    |
-    |- Verifying Kubernetes versions
-      |
-      |--> Verifying minimum Kubernetes version                         Success
-      |
-      |--> Verifying maximum Kubernetes version                         Success
-    |
-    |- Verifying helm version                                           Success
-    |
-    |- Configure helm chart repository
-      |
-      |--> Adding helm repository https://dell.github.io/helm-charts    Success
-      |
-      |--> Updating helm repositories                                   Success
-    |
-    |- Creating namespace karavi                                        Success
-    |
-    |- CSI Driver for PowerFlex is installed                            Success
-    |
-    |- Copying Secret from vxflexos to karavi                           Success
-    |
-    |- CSI Driver for PowerStore is installed                           Success
-    |
-    |- Copying Secret from powerstore to karavi                         Success
-    |
-    |- CSI Driver for PowerScale is installed                           Success
-    |
-    |- Copying Secret from isilon to karavi                             Success
-    |
-    |- CSI Driver for PowerMax is installed                             Success
-    |
-    |- Copying Secret from powermax to karavi                           Success
-    |
-    |- Installing CertManager CRDs                                      Success
-    |
-    |- Enabling Karavi Authorization for Karavi Observability
-      |
-      |--> Copying ConfigMap from vxflexos to karavi                    Success
-      |
-      |--> Copying Karavi Authorization Secrets from vxflexos to karavi Success
-      |
-      |--> Copying ConfigMap from isilon to karavi                      Success
-      |
-      |--> Copying Karavi Authorization Secrets from isilon to karavi   Success
-      |
-      |--> Copying ConfigMap from powermax to karavi                    Success
-      |
-      |--> Copying Karavi Authorization Secrets from powermax to karavi Success
-    |
-    |- Installing Karavi Observability helm chart                       Success
-    |
-    |- Waiting for pods in namespace karavi to be ready                 Success
-    ```
+ ```terminal
+ ---------------------------------------------------------------------------------
+ > Installing Karavi Observability in namespace karavi on 1.32
+ ---------------------------------------------------------------------------------
+ |
+ |- Karavi Observability is not installed                            Success
+ |
+ |- Karavi Authorization will be enabled during installation
+ |
+ |- Verifying Kubernetes versions
+   |
+   |--> Verifying minimum Kubernetes version                         Success
+   |
+   |--> Verifying maximum Kubernetes version                         Success
+ |
+ |- Verifying helm version                                           Success
+ |
+ |- Configure helm chart repository
+   |
+   |--> Adding helm repository https://dell.github.io/helm-charts    Success
+   |
+   |--> Updating helm repositories                                   Success
+ |
+ |- Creating namespace karavi                                        Success
+ |
+ |- CSI Driver for PowerFlex is installed                            Success
+ |
+ |- Copying Secret from vxflexos to karavi                           Success
+ |
+ |- CSI Driver for PowerStore is installed                           Success
+ |
+ |- Copying Secret from powerstore to karavi                         Success
+ |
+ |- CSI Driver for PowerScale is installed                           Success
+ |
+ |- Copying Secret from isilon to karavi                             Success
+ |
+ |- CSI Driver for PowerMax is installed                             Success
+ |
+ |- Copying Secret from powermax to karavi                           Success
+ |
+ |- Installing CertManager CRDs                                      Success
+ |
+ |- Enabling Karavi Authorization for Karavi Observability
+   |
+   |--> Copying ConfigMap from vxflexos to karavi                    Success
+   |
+   |--> Copying Karavi Authorization Secrets from vxflexos to karavi Success
+   |
+   |--> Copying ConfigMap from isilon to karavi                      Success
+   |
+   |--> Copying Karavi Authorization Secrets from isilon to karavi   Success
+   |
+   |--> Copying ConfigMap from powermax to karavi                    Success
+   |
+   |--> Copying Karavi Authorization Secrets from powermax to karavi Success
+ |
+ |- Installing Karavi Observability helm chart                       Success
+ |
+ |- Waiting for pods in namespace karavi to be ready                 Success
+ ``` 
+
+</ul>
