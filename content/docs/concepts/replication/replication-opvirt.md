@@ -34,8 +34,8 @@ replication for Persistent Volumes (PVs) created via virtualized workloads
   the source as well as target arrays, as there is an active-active replication
   session between the two clusters.
 
-- Refer this document
-  (https://docs.openshift.com/rosa/virt/virtual_machines/creating_vms_rh/virt-creating-vms-from-cli.html)
+- Refer this
+  [document](https://docs.openshift.com/rosa/virt/virtual_machines/creating_vms_rh/virt-creating-vms-from-cli.html)
   for creating virtual machine from the command line.
 
 ## Access Metro Volume on cluster
