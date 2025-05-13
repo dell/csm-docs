@@ -21,7 +21,7 @@ replication for Persistent Volumes (PVs) created via virtualized workloads
 - Install the OpenShift Virtualization operator from the RedHat UI on OpenShift
   Cluster.
 - The Replication modes supported are: Metro
-
+- CSI Driver supported: PowerMax, PowerStore
 - Make sure a default storage class configured for metro replication. To set the
   replication storage class as the default, update the annotation as follows:
 
