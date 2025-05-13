@@ -337,6 +337,14 @@ const resetTaint = csmMapValue => {
 	document.getElementById("taint").value = String(csmMapValue.get("taint"));
 }
 
+const resetMultiNasFailureThreshold = csmMapValue => {
+	document.getElementById("multi-nas-failure-threshold").value = String(csmMapValue.get("multiNasFailureThreshold"));
+}
+
+const resetMultiNasCooldownPeriod = csmMapValue => {
+	document.getElementById("multi-nas-cooldown-period").value = String(csmMapValue.get("multiNasCooldownPeriod"));
+}
+
 const downloadFile = (validateFormFunc, generateYamlFileFunc, displayCommandsFunc, validateInputFunc, CONSTANTS_PARAM) => {
 	var link = document.getElementById('download-file');
 	link.href = generateYamlFileFunc(template);
@@ -385,6 +393,9 @@ function displayModules(installationType, driverName, CONSTANTS_PARAM) {
 	$(".rename-sdc-feature").hide();
 	$(".approve-sdc").hide();
 	$(".nfs-feature").hide();
+	$(".multi-nas-failure-threshold").hide();
+	$(".multi-nas-cooldown-period").hide();
+
 
 	switch (driverName) {
 		case CONSTANTS_PARAM.POWERSTORE:
@@ -395,8 +406,15 @@ function displayModules(installationType, driverName, CONSTANTS_PARAM) {
 			if (document.getElementById("csm-version").value !== "1.7.0") {
 				$(".max-volumes-per-node").show();
 			}
+   if (isVersionGreaterOrEqualTo(document.getElementById("csm-version").value,"1.14.0")) {
+	   $(".vgsnapshot").hide();
+   }
 			document.getElementById("driver-namespace").value = CONSTANTS_PARAM.POWERSTORE_NAMESPACE;
-			if (installationType === 'operator'){
+			if (isVersionGreaterOrEqualTo(document.getElementById("csm-version").value, "1.14.0")) {
+				$(".multi-nas-failure-threshold").show();
+				$(".multi-nas-cooldown-period").show();
+			}
+			if (installationType === 'operator') {
 				$(".resiliency").hide();
 				$(".resiliency-operator").show();
 				$(".observability").hide();
@@ -490,7 +508,10 @@ function displayModules(installationType, driverName, CONSTANTS_PARAM) {
 			$(".approve-sdc").show();
 			if (document.getElementById("csm-version").value === "1.8.0") {
 				$(".max-volumes-per-node").show();
-				$(".nfs-feature").show();
+				$(".nfs-feature").show(); 
+    if (isVersionGreaterOrEqualTo(document.getElementById("csm-version").value, "1.14.0")) {
+     $(".vgsnapshot").hide();
+   }
 			}
 			document.getElementById("driver-namespace").value = CONSTANTS_PARAM.POWERFLEX_NAMESPACE;
 			break;
@@ -622,6 +643,8 @@ if (typeof exports !== 'undefined') {
 		resetDriverPodLabel,
 		resetArrayConnectionLossThreshold,
 		resetTaint,
+		resetMultiNasFailureThreshold,
+		resetMultiNasCooldownPeriod,
 		downloadFile,
 		displayModules,
 		displayCommands,

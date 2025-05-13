@@ -17,7 +17,7 @@ Metrics data is collected and pushed to the [OpenTelemetry Collector](https://gi
 
 Container Storage Modules for Observability is composed of several services, each residing in its own GitHub repository, that can be installed following one of the four deployments we support [here](../../getting-started/installation/kubernetes/powermax/helm/csm-modules/observability/). Contributions can be made to this repository or any of the Container Storage Modules for Observability repositories listed below.
 
-{{<table "table table-striped table-bordered table-sm">}}
+{{<table "table table-striped table-bordered table-sm tdleft">}}
 | Name | Repository | Description |
 | ---- | ---------  | ----------- |
 | Metrics for PowerFlex | [Container Storage Modules Metrics for PowerFlex](https://github.com/dell/karavi-metrics-powerflex) | Metrics for PowerFlex captures telemetry data about Kubernetes storage usage and performance obtained through the CSI (Container Storage Interface) Driver for PowerFlex. The metrics service pushes it to the OpenTelemetry Collector, so it can be processed, and exported in a format consumable by Prometheus. Prometheus can then be configured to scrape the OpenTelemetry Collector exporter endpoint to provide metrics, so they can be visualized in Grafana. Please visit the repository for more information. |
@@ -32,22 +32,22 @@ Container Storage Modules for Observability is composed of several services, eac
 Container Storage Modules for Observability provides the following capabilities:
 
 {{<table "table table-striped table-bordered table-sm">}}
-| Capability | PowerMax | PowerFlex | Unity XT | PowerScale | PowerStore |
+| Capability | PowerStore | PowerScale |PowerFlex |PowerMax| Unity XT |
 | - | :-: | :-: | :-: | :-: | :-: |
-| Collect and expose Volume Metrics via the OpenTelemetry Collector | yes | yes | no | yes | yes |
-| Collect and expose File System Metrics via the OpenTelemetry Collector | no |  no | no | no | yes |
-| Collect and expose export (k8s) node metrics via the OpenTelemetry Collector | no |  yes | no | no | no |
-| Collect and expose block storage metrics via the OpenTelemetry Collector | yes | yes | no | no | yes |
-| Collect and expose file storage metrics via the OpenTelemetry Collector | no | no | no | yes | yes |
-| Non-disruptive config changes | yes |  yes | no | yes | yes |
-| Non-disruptive log level changes | yes |  yes | no | yes | yes |
-| Grafana Dashboards for displaying metrics and topology data | yes |  yes | no | yes | yes |
+| <div style="text-align: left">  Collect and expose Volume Metrics via the OpenTelemetry Collector | Yes | Yes | Yes | Yes | No |
+| <div style="text-align: left">  Collect and expose File System Metrics via the OpenTelemetry Collector | Yes |  No | No | No | No |
+| <div style="text-align: left">  Collect and expose export (k8s) node metrics via the OpenTelemetry Collector | Yes |  No | No | Yes | No |
+| <div style="text-align: left">  Collect and expose block storage metrics via the OpenTelemetry Collector | Yes | No | Yes | Yes | No |
+| <div style="text-align: left">  Collect and expose file storage metrics via the OpenTelemetry Collector | Yes | Yes | No | No | No |
+| <div style="text-align: left">  Non-disruptive config changes | Yes |  Yes | Yes | Yes | No |
+| <div style="text-align: left">  Non-disruptive log level changes | Yes |  Yes | Yes | Yes | No |
+| <div style="text-align: left">  Grafana Dashboards for displaying metrics and topology data | Yes |  Yes | Yes | Yes | No |
 {{</table>}}
 
 ## Topology Data
 
 Container Storage Modules for Observability provides Kubernetes administrators with the topology data related to containerized storage. This topology data is visualized using Grafana:
-{{<table "table table-striped table-bordered table-sm">}}
+{{<table "table table-striped table-bordered table-sm tdleft">}}
 | Field                      | Description                                                                                                                                        |
 | -------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Namespace                  | The namespace associated with the persistent volume claim                                                                                          |
@@ -55,7 +55,7 @@ Container Storage Modules for Observability provides Kubernetes administrators w
 | Persistent Volume          | The name of the persistent volume                                                                                                                  |
 | Storage Class              | The storage class associated with the persistent volume                                                                                            |
 | Provisioned Size           | The provisioned size of the persistent volume                                                                                                      |
-| Status                     | The status of the persistent volume. "Released" indicates the persistent volume does not have a claim. "Bound" indicates the persistent volume has a claim |
+| Status                     | The status of the persistent volume. "Released" indicates the persistent volume does not have a claim. </br> "Bound" indicates the persistent volume has a claim |
 | Created                    | The date the persistent volume was created                                                                                                         |
 | Storage System             | The storage system ID or IP address the volume is associated with                                                                                  |
 | Protocol                   | The storage system protocol type the volume/storage class is associated with                                                                       |
@@ -67,10 +67,10 @@ Container Storage Modules for Observability provides Kubernetes administrators w
 
 Container Storage Modules for Observability deployment relies on [cert-manager](https://github.com/jetstack/cert-manager) to manage SSL certificates that are used to encrypt communication between various components. When [deploying Container Storage Modules for Observability](../../getting-started/installation/kubernetes/powermax/helm/csm-modules/observability/), cert-manager is installed and configured automatically.  The cert-manager components listed below will be installed alongside Container Storage Modules for Observability.
 
-{{<table "table table-striped table-bordered table-sm">}}
+{{<table "table table-striped table-bordered table-sm tdleft">}}
 | Component |
 | --------- |
-| cert-manager |
+| <div style="text-align: left"> cert-manager |
 | cert-manager-cainjector |
 | cert-manager-webhook |
 {{</table>}}

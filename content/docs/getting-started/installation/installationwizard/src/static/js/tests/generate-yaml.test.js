@@ -121,6 +121,8 @@ describe("GIVEN setValues function", () => {
             <input type="text" id="sdc-prefix" value="">
             <input type="checkbox" id="approve-sdc">
             <input type="checkbox" id="enable-quota">
+            <input type="text" id="multi-nas-failure-threshold" value="5">
+            <input type="text" id="multi-nas-cooldown-period" value="5m">
             <select id="powermax-credentials">
               <option value="Secret">Secret</option>
             </select>
@@ -199,6 +201,8 @@ describe("GIVEN setValues function", () => {
 			approveSDC: false,
 			enableQuota: false,
       powermaxUseSecret: true,
+      multiNasFailureThreshold: '5',
+      multiNasCooldownPeriod: '5m',
 		};
 
 		const received = setValues(testCSMMap, CONSTANTS);
@@ -252,6 +256,8 @@ describe("GIVEN setValues function", () => {
             <input type="text" id="sdc-prefix" value="">
             <input type="checkbox" id="approve-sdc">
             <input type="checkbox" id="enable-quota">
+            <input type="text" id="multi-nas-failure-threshold" value="5">
+            <input type="text" id="multi-nas-cooldown-period" value="5m">
             <select id="powermax-credentials">
               <option value="Secret">Secret</option>
             </select>
@@ -330,6 +336,8 @@ describe("GIVEN setValues function", () => {
 			approveSDC: false,
 			enableQuota: false,
       powermaxUseSecret: true,
+      multiNasFailureThreshold: '5',
+      multiNasCooldownPeriod: '5m',
 		};
 
 		const received = setValues(testCSMMap, CONSTANTS);
@@ -369,6 +377,8 @@ describe("GIVEN setValues function", () => {
             <input type="text" id="replication-helm-arrayid" value="">
             <input type="text" id="replication-helm-unisphere" value="">
             <input type="checkbox" id="leader-election">
+            <input type="text" id="multi-nas-failure-threshold" value="5">
+            <input type="text" id="multi-nas-cooldown-period" value="5m">
             <select id="powermax-credentials">
               <option value="ConfigMap">Config Map</option>
             </select>
@@ -398,6 +408,8 @@ describe("GIVEN setValues function", () => {
 			certManagerEnabled: false,
 			taint: "node-role.kubernetes.io/control-plane",
       powermaxUseSecret: false,
+      multiNasFailureThreshold: '5',
+      multiNasCooldownPeriod: '5m',
 		};
 
 		const received = setValues(testCSMMap, CONSTANTS);

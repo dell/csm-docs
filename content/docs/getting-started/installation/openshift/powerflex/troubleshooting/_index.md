@@ -9,7 +9,7 @@ weight: 5
 {{<include file="content/docs/getting-started/installation/troubleshooting/csmoperator/_index.md">}} 
 {{< /accordion >}}
 <br>
-{{< accordion id="Two" title="CSI Driver" markdown="true" >}}  
+{{< accordion id="Two" title="Base Install" markdown="true" >}}  
 {{<include file="content/docs/concepts/csidriver/troubleshooting/powerflex.md">}} 
 {{< /accordion >}} 
 <br>
@@ -17,9 +17,7 @@ weight: 5
 
 {{< cardcontainer >}}
 
-     {{< customcard   link="../../../../../concepts/authorization/v1.x/troubleshooting"  imageNumber="1" title="Authorization v1.x" >}}
-
-       {{< customcard link="../../../../../concepts/authorization/v2.x/troubleshooting"   imageNumber="1" title="Authorization v2.0"  >}}
+      {{< customcard link="../../../../../concepts/authorization/troubleshooting"   imageNumber="1" title="Authorization"  >}}
 
       {{< customcard  link="../../../../../concepts/observability/troubleshooting"   imageNumber="1" title="Observability"  >}}
 

@@ -1,39 +1,39 @@
 ---
-title: Operator
+title: Installation Guide
 linkTitle: Operator
 weight: 2
 description: >
   Installing the CSI Driver for PowerStore via CSM Operator
 no_list: true
 ---
-{{% pageinfo color="primary" %}}
-{{< message text="1" >}}
-{{% /pageinfo %}}
+
+1. Set up a Kubernetes cluster following the official documentation.
+2. Proceed to the [Prerequisite](../prerequisite/_index.md).
+3. Complete the base installation.
+4. Proceed with module installation.
 
 ## Operator Installation
 To deploy the Operator, follow the instructions available [here](../../../operator/operatorinstallation_kubernetes.md).
 
-{{< accordion id="One" title="CSM Installation Wizard" >}}
-  {{< include file="content/docs/getting-started/installation/installationwizard/operator.md" hideIds="1,2,3" >}}
-{{< /accordion >}}
+
 
 <br>
 
-{{< accordion id="Two" title="CSI Driver" markdown="true" >}}  
+{{< accordion id="Two" title="Base Install" markdown="true" >}}
 
 ### CSI Driver Installation
 
 <br>
 
-1. **Create Namespace.**    
-   ```bash 
+1. **Create Namespace.**
+   ```bash
       kubectl create namespace powerstore
    ```
    This command creates a namespace called `powerstore`. You can replace `powerstore` with any name you prefer.
 
-2. **Create `secret.yaml`.** 
-   
-   a. Create a file called `secret.yaml` or pick a [sample](https://github.com/dell/csi-powerstore/blob/main/samples/secret/secret.yaml) that has Powerstore array connection details: 
+2. **Create `secret.yaml`.**
+
+   a. Create a file called `secret.yaml` or pick a [sample](https://github.com/dell/csi-powerstore/blob/main/samples/secret/secret.yaml) that has PowerStore array connection details:
 
    ```yaml
    arrays:
@@ -49,7 +49,7 @@ To deploy the Operator, follow the instructions available [here](../../../operat
       - **Replication:** If replication is enabled, make sure the `config.yaml` includes all involved PowerStore arrays.
   </br>
   </br>
-  
+
    **User Privileges**
 
    The username in `secret.yaml` must be from PowerStore’s authentication providers and have at least the **Storage Operator** role.
@@ -60,11 +60,11 @@ To deploy the Operator, follow the instructions available [here](../../../operat
    kubectl create secret generic -n powerstore powerstore-config --from-file=config=secret.yaml
    ```
 
-3. **Install Driver** 
+3. **Install Driver**
 
    i. **Create a CR (Custom Resource)** for PowerStore using the sample files provided
 
-   a. **Minimal Configuration:** 
+   a. **Minimal Configuration:**
 
    ```yaml
    apiVersion: storage.dell.com/v1
@@ -80,29 +80,34 @@ To deploy the Operator, follow the instructions available [here](../../../operat
    ```
      [sample file](https://github.com/dell/csm-operator/blob/main/samples/minimal-samples/powerstore_{{< version-docs key="Min_sample_operator_pstore" >}}.yaml) for default settings. Modify if needed.
 
-    [OR]                                                
+    [OR]
 
-    b. **Detailed Configuration:**  [sample file](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powerstore_{{< version-docs key="Det_sample_operator_pstore" >}}.yaml) for detailed settings.
+    b. **Detailed Configuration:**  [sample file](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powerstore_{{< version-docs key="Det_sample_operator_pstore" >}}.yaml) for detailed settings or use [Wizard](./installationwizard#generate-manifest-file) to generate the sample file.
 
-   - Users should configure the parameters in CR. The following table lists the primary configurable parameters of the PowerStore driver and their default values: 
-   
+   - Users should configure the parameters in CR. The following table lists the primary configurable parameters of the PowerStore driver and their default values:
+
 <ul>
 {{< collapse id="1" title="Parameters">}}
   | Parameter | Description | Required | Default |
 | --------- | ----------- | -------- |-------- |
-| replicas | Controls the number of controller pods you deploy. If the number of controller pods is greater than the number of available nodes, the excess pods will be in pending state until new nodes are available for scheduling. Default is 2 which allows for Controller high availability. | Yes | 2 |
-| namespace | Specifies namespace where the driver will be installed | Yes | "powerstore" |
-| fsGroupPolicy | Defines which FS Group policy mode to be used. Supported modes `None, File and ReadWriteOnceWithFSType`. In OCP <= 4.16 and K8s <= 1.29, fsGroupPolicy is an immutable field. | No |"ReadWriteOnceWithFSType"|
-| storageCapacity | Enable/Disable storage capacity tracking feature | No | false |
-| ***Common parameters for node and controller*** |
-| X_CSI_POWERSTORE_NODE_NAME_PREFIX | Prefix to add to each node registered by the CSI driver | Yes | "csi-node"
-| X_CSI_FC_PORTS_FILTER_FILE_PATH | To set path to the file which provides a list of WWPN which should be used by the driver for FC connection on this node | No | "/etc/fc-ports-filter" |
-| GOPOWERSTORE_DEBUG | Enable/Disable gopowerstore library-level debugging. | No | false |
-| ***Controller parameters*** |
-| X_CSI_POWERSTORE_EXTERNAL_ACCESS | allows specifying additional entries for hostAccess of NFS volumes. Both single IP address and subnet are valid entries | No | empty |
-| X_CSI_NFS_ACLS | Defines permissions - POSIX mode bits or NFSv4 ACLs, to be set on NFS target mount directory. | No | "0777" |
-| ***Node parameters*** |
-| X_CSI_POWERSTORE_ENABLE_CHAP | Set to true if you want to enable iSCSI CHAP feature | No | false |
+|<div style="text-align: left"> replicas </div>| <div style="text-align: left">Controls the number of controller pods you deploy. If the number of controller pods is greater than the number of available nodes, the excess pods will be in pending state until new nodes are available for scheduling. Default is 2 which allows for Controller high availability. | Yes | 2 |
+|<div style="text-align: left"> namespace | <div style="text-align: left">Specifies namespace where the driver will be installed | Yes | "powerstore" |
+| <div style="text-align: left">fsGroupPolicy |<div style="text-align: left"> Defines which FS Group policy mode to be used. Supported modes `None, File and ReadWriteOnceWithFSType`. In OCP <= 4.16 and K8s <= 1.29, fsGroupPolicy is an immutable field. | No |"ReadWriteOnceWithFSType"|
+|<div style="text-align: left"> storageCapacity | <div style="text-align: left"> Enable/Disable storage capacity tracking feature | No | false |
+|<div style="text-align: left"> ***Common parameters for node and controller*** |
+|<div style="text-align: left"> X_CSI_POWERSTORE_NODE_NAME_PREFIX |<div style="text-align: left"> Prefix to add to each node registered by the CSI driver | Yes | "csi-node"
+|<div style="text-align: left"> X_CSI_FC_PORTS_FILTER_FILE_PATH | <div style="text-align: left">To set path to the file which provides a list of WWPN which should be used by the driver for FC connection on this node | No | "/etc/fc-ports-filter" |
+|<div style="text-align: left"> GOPOWERSTORE_DEBUG | <div style="text-align: left"> Enable/Disable gopowerstore library-level debugging. | No | false |
+|<div style="text-align: left"> X_CSI_NFS_CLIENT_PORT |<div style="text-align: left"> Define the port for the Shared NFS Client. | No | "2050" |
+|<div style="text-align: left"> X_CSI_NFS_SERVER_PORT |<div style="text-align: left"> Define the port for the Shared NFS Server. This value should match what port the nfs-server is configured on. See /etc/nfs.conf on the worker nodes for port information. | No | "2049" |
+|<div style="text-align: left"> X_CSI_NFS_EXPORT_DIRECTORY |<div style="text-align: left"> Define the file path of the underlying cluster node where Shared NFS volumes will be mounted. | No | "/var/lib/dell/nfs" |
+|<div style="text-align: left"> ***Controller parameters*** |
+|<div style="text-align: left"> X_CSI_POWERSTORE_EXTERNAL_ACCESS |<div style="text-align: left"> allows specifying additional entries for hostAccess of NFS volumes. Both single IP address and subnet are valid entries | No | empty |
+|<div style="text-align: left"> X_CSI_NFS_ACLS | <div style="text-align: left"> Defines permissions - POSIX mode bits or NFSv4 ACLs, to be set on NFS target mount directory. | No | "0777" |
+|<div style="text-align: left"> X_CSI_MULTI_NAS_FAILURE_THRESHOLD | <div style="text-align: left"> Number of consecutive FS creation failures after which a NAS is put into cooldown. Please refer [Multi NAS Support](../../../../../concepts/csidriver/features/powerstore#multi-nas-support) for more details. | No | "5" |
+|<div style="text-align: left"> X_CSI_MULTI_NAS_COOLDOWN_PERIOD | <div style="text-align: left"> Duration for which a NAS remains in cooldown once the threshold is reached. Please refer [Multi NAS Support](../../../../../concepts/csidriver/features/powerstore#multi-nas-support) for more details. | No | "5m" |
+|<div style="text-align: left"> ***Node parameters*** |
+|<div style="text-align: left"> X_CSI_POWERSTORE_ENABLE_CHAP |<div style="text-align: left"> Set to true if you want to enable iSCSI CHAP feature | No | false |
 {{< /collapse >}}
 
 
@@ -117,9 +122,9 @@ To deploy the Operator, follow the instructions available [here](../../../operat
       ```bash
       kubectl get all -n powerstore
       ```
-</ul> 
+</ul>
 
-4. **Verify the installation** as mentioned below
+1. **Verify the installation** as mentioned below
 
     * Check if ContainerStorageModule CR is created successfully using the command below:
         ```bash
@@ -129,9 +134,9 @@ To deploy the Operator, follow the instructions available [here](../../../operat
 
    </br>
 
-5. **Create Storage Class** 
+2. **Create Storage Class** 
 
-   ```yaml 
+   ```yaml
    apiVersion: storage.k8s.io/v1
    kind: StorageClass
    metadata:
@@ -143,8 +148,8 @@ To deploy the Operator, follow the instructions available [here](../../../operat
    allowVolumeExpansion: true
    volumeBindingMode: Immediate
    ````
-   
-   Refer [Storage Class](https://github.com/dell/csi-powerstore/tree/main/samples/storageclass) for different sample files. 
+
+   Refer [Storage Class](https://github.com/dell/csi-powerstore/tree/main/samples/storageclass) for different sample files.
 
    **Run this command to create** a storage class
 
@@ -152,13 +157,13 @@ To deploy the Operator, follow the instructions available [here](../../../operat
      kubectl create -f < storage-class.yaml >
    ```
 
-6. **Create Volume Snapshot Class** 
+3. **Create Volume Snapshot Class** 
    ```yaml 
    apiVersion: snapshot.storage.k8s.io/v1
    kind: VolumeSnapshotClass
    metadata:
    name: powerstore-snapshot
-   driver: "csi-powerstore.dellemc.com" 
+   driver: "csi-powerstore.dellemc.com"
    deletionPolicy: Delete
    ````
    Refer [Volume Snapshot Class](https://github.com/dell/csi-powerstore/tree/main/samples/volumesnapshotclass) for the sample files.
@@ -175,17 +180,17 @@ To deploy the Operator, follow the instructions available [here](../../../operat
 {{< /accordion >}}
 <br>
 
-{{< accordion id="Three" title="CSM Modules" >}}
+{{< accordion id="Three" title="Modules" >}}
 
-<br>  
+<br>
 {{< markdownify >}}
 The driver and modules versions installable with the Container Storage Modules Operator [Click Here](../../../../../supportmatrix/#operator-compatibility-matrix)
 {{< /markdownify >}}
-<br>   
+<br>
 {{< cardcontainer >}}
 
 {{< customcard link1="./csm-modules/resiliency"   image="6" title="Resiliency"  >}}
 
 {{< /cardcontainer >}}
 
-{{< /accordion >}}  
+{{< /accordion >}}

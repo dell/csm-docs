@@ -18,5 +18,3 @@ weight: 1
 
 {{< /cardcontainer >}}
 
->Note: The installation steps for Kubernetes and Mirantis Kubernetes Engine (MKE) are the same. 
-

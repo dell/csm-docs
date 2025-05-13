@@ -525,9 +525,25 @@ volumeBindingMode: WaitForFirstConsumer
 parameters:
   arrayID: "GlobalUniqueID"
   csi.storage.k8s.io/fstype: "xfs"
+---
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: "powerstore-nfs"
+provisioner: "csi-powerstore.dellemc.com"
+parameters:
+  arrayID: "Unique"
+  csi.storage.k8s.io/fstype: "nfs"
+  nasName: "nas-server1, nas-server2, nas-server3"
+  allowRoot: "false"
+reclaimPolicy: Delete
+allowVolumeExpansion: true
+volumeBindingMode: WaitForFirstConsumer
 ```
 
-Here we specify two storage classes: one of them uses the first array and `ext4` filesystem, and the other uses the second array and `xfs` filesystem.
+Here we specify three storage classes: first one of them uses the first array and `ext4` filesystem, and the second one  uses the second array and `xfs` filesystem and the third uses an nfs filesystem for multi-NAS support.
+
+> ℹ️ **NOTE:** : For PowerStore storage platform, users can specify one or more NAS servers in the storage class, separated by commas.
 
 Then we need to apply storage classes to Kubernetes using `kubectl`:
 ```bash
@@ -704,10 +720,6 @@ nfsAcls: "A::OWNER@:rwatTnNcCy,A::GROUP@:rxtncy,A::EVERYONE@:rxtncy,A::user@doma
 **Note**:
 - If `blockProtocol` is set to `auto`, the driver will choose the protocol based on host initiators. Priority: NVMeFC > NVMeTCP > FC > iSCSI.
 
-## Volume group snapshot Support
-
-CSI Driver for Powerstore 2.3.0 and above supports creating volume groups and take snapshot of them by making use of CRD (Custom Resource Definition). More information can be found here: [Volume Group Snapshotter](../../../snapshots/volume-group-snapshots/).
-
 ## Configurable Volume Attributes (Optional)
 
 The CSI PowerStore driver version 2.3.0 and above supports Configurable volume attributes.
@@ -768,3 +780,47 @@ To configure how often driver checks for changed capacity set `storageCapacity.p
 The CSI PowerStore driver supports the provisioning of Metro volumes. The process and details of how to provision and use Metro volumes can be found [here](../../../replication/high-availability).
 
 Please note that the Metro feature does not require the deployment of the replicator sidecar or the replication controller.
+
+## Shared NFS
+Shared NFS utilizes native NFS features to support large-scale ReadWriteMany (RWX) volumes through the access mode, enabling efficient shared storage across multiple consumers. It follows a client-server model, with a node serving as an NFS server and potentially a client as well.
+- **Scalability and Flexibility**: Offers enhanced scalability and flexibility compared to traditional NFS, which relies on a single dedicated server.
+- **Centralized File Management**: Allows remote files to be accessed as if they were local, simplifying file management and reducing duplication for more efficient storage use.
+- **NFSv4 Recommendation**: NFS versions v4,1, v4.2.
+- **Prerequisites**: NFS-related services (nfs-server and nfs-mountd on Linux) must be running on all participating worker nodes.
+- **Enable Shared NFS Support**: Version 2.14 introduces support for Shared NFS via a new StorageClass.
+
+```yaml
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+    name: powerstore-sharednfs-sc
+provisioner: csi-powerstore.dellemc.com
+reclaimPolicy: Delete
+parameters:
+  arrayID: <array-id>
+  shared-nfs: RWX
+  csi.storage.k8s.io/fstype: ext4
+provisioner: csi-powerstore.dellemc.com
+reclaimPolicy: Delete
+volumeBindingMode: WaitForFirstConsumer
+
+```
+
+## Multi NAS Support
+The CSI PowerStore driver version 2.14.0 and later introduces multi-NAS support. This feature allows users to specify multiple NAS servers within a single storage class. By supporting multiple NAS servers in a single storage class, customers can create 2000 filesystems per PowerStore system across multiple NAS servers configured in SC. Previously, multiple storage classes were needed to support this configuration.
+
+The following is a sample storage class file that supports multiple NAS servers for provisioning volumes:
+```yaml
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: powerstore-multi-nas
+provisioner: csi-powerstore.dell.com
+parameters:
+  nasServers: "nas-server-1,nas-server-2,nas-server-3"
+  fsType: "nfs"
+reclaimPolicy: Delete
+volumeBindingMode: Immediate
+
+```
+In this example, different NAS servers (e.g., nas-server-1, nas-server-2) can be specified for provisioning volumes. This configuration ensures effective scaling when creating volumes.

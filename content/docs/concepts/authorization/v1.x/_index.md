@@ -19,11 +19,11 @@ The following diagram shows a high-level overview of Container Storage Modules f
 
 ## Container Storage Modules Authorization Capabilities
 {{<table "table table-striped table-bordered table-sm">}}
-| Feature | PowerFlex | PowerMax | PowerScale | Unity XT | PowerStore |
+| Feature | PowerStore | PowerScale | PowerFlex | PowerMax | Unity XT |
 | - | - | - | - | - | - |
-| Ability to set storage quota limits to ensure k8s tenants are not over consuming storage | Yes | Yes | No (natively supported) | No | No |
-| Ability to create access control policies to ensure k8s tenant clusters are not accessing storage that does not belong to them | Yes | Yes | No (natively supported) | No | No |
-| Ability to shield storage credentials from Kubernetes administrators ensuring credentials are only handled by storage admins | Yes | Yes | Yes | No | No |
+|  <div style="text-align: left"> Ability to set storage quota limits to ensure k8s tenants are not over consuming storage | No | No (natively supported) | Yes | Yes | No |
+|  <div style="text-align: left"> Ability to create access control policies to ensure k8s tenant clusters are not accessing storage that does not belong to them | No | No (natively supported) | Yes | Yes | No |
+|  <div style="text-align: left"> Ability to shield storage credentials from Kubernetes administrators ensuring credentials are only handled by storage admins | No | Yes | Yes | Yes | No |
 {{</table>}}
 
 **NOTE:** PowerScale OneFS implements its own form of Role-Based Access Control (RBAC). Authorization does not enforce any role-based restrictions for PowerScale. To configure RBAC for PowerScale, refer to the PowerScale OneFS [documentation](https://www.dell.com/support/home/en-us/product-support/product/isilon-onefs/docs).
@@ -32,9 +32,6 @@ The following diagram shows a high-level overview of Container Storage Modules f
 Authorization consists of two main components - the Authorization Sidecar and the Authorization Proxy Server. The Authorization Sidecar is bundled with the CSI driver, and the Authorization Proxy Server validates access to storage platforms.
 
 Users should always install or upgrade the Authorization proxy server and sidecar from the same release. This practice helps ensure optimal performance and compatibility, avoiding potential issues from version discrepancies.
-
-**NOTE:** If the number of controller pods deployed by the CSI driver matches the number of scheduled nodes in your cluster, Authorization may not be able to inject properly into the driver's controller pod.
-To resolve this, please refer to our [troubleshooting guide](./troubleshooting) on the topic.
 
 ## Roles and Responsibilities
 

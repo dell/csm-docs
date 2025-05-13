@@ -8,12 +8,6 @@ weight: 5
 
 {{< cardcontainer >}}
 
-    {{< customcard  link="./prerequisite"  imageNumber="4" title="Prerequisite">}} 
-
-{{< /cardcontainer >}}
-
-{{< cardcontainer >}}
-
        {{< customcard  link="./csmoperator" imageNumber="6"  title="Operator" >}}
 
        {{< customcard  link="./offline"  imageNumber="6" title="Offline">}}

@@ -45,7 +45,6 @@
         border-collapse: collapse;
         border-spacing: 0;
         border:1px solid #000000;
-
         width: auto !important;
     }
 
@@ -57,8 +56,16 @@
     td{
         border:1px solid #000000; 
         padding: 12px;
+        text-align: center ;
     }
-
+   .tdleft td{
+        border:1px solid #000000; 
+        padding: 12px;
+        text-align: left !important;;
+    } 
+    .tleft,.tleft td{
+       text-align: left !important;
+    }
     > blockquote {
         padding: 0 0 0 1rem;
         margin-bottom: $spacer;
@@ -92,7 +99,7 @@
     }   
 
     p + div.highlight, p + div.code-toolbar{
-        margin-top: -0.5rem;
+        margin-top: -0.5rem !important;
     }  
 
     p + pre {
@@ -110,9 +117,12 @@
     } 
     .td-click-to-copy{
         color: rgb(136, 145, 158) !important;
+    } 
+    .tab-body{
+     background-color: #fff !important;
     }
-
 } 
+
 
 
 .td-title {
@@ -123,6 +133,7 @@
         font-size: 3rem;
     }
 } 
+
 
 
 .td-section{

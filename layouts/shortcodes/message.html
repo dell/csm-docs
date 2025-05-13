@@ -1,27 +1,27 @@
 {{ if eq (.Get "text") "1" }} 
-  As of Container Storage Modules v1.14, use of Docker Hub images will be discontinued. All future deployments will be using images from <a href="https://quay.io/organization/dell">quay.io</a>. See notifications from prior releases. 
+Docker Hub images are discontinued. All deployments will be using images from <a href="https://quay.io/organization/dell">quay.io</a>.
 {{ else if eq (.Get "text") "2" }}
-  Starting with CSM 1.12, all deployments will need to use images from <a href="https://quay.io/organization/dell">quay.io</a>. Please note that from CSM 1.14 (May 2025), upgrading with helm will fail if it attempts to use images from <a href="https://hub.docker.com/r/dellemc/">Docker Hub</a>.
+Starting with CSM 1.12, all deployments will need to use images from <a href="https://quay.io/organization/dell">quay.io</a>. Please note that from CSM 1.14 (May 2025), upgrading with helm will fail if it attempts to use images from <a href="https://hub.docker.com/r/dellemc/">Docker Hub</a>.
 {{ else if eq (.Get "text") "3" }}
-  Starting with CSM 1.12, all deployments will use images from <a href="https://quay.io/organization/dell">quay.io</a> by default. New release images will be available on <a href="https://hub.docker.com/r/dellemc/">Docker Hub</a> until CSM 1.14 (May 2025), and existing releases will remain on Docker Hub.
+Starting with CSM 1.12, all deployments will use images from <a href="https://quay.io/organization/dell">quay.io</a> by default. New release images will be available on <a href="https://hub.docker.com/r/dellemc/">Docker Hub</a> until CSM 1.14 (May 2025), and existing releases will remain on Docker Hub.
 {{ else if eq (.Get "text") "4" }}
 Starting with CSM 1.12, all deployments will need to use images from <a href="https://quay.io/organization/dell">quay.io</a> . Please note that from CSM 1.14 (May 2025), upgrading will fail if it attempts to use images from <a href="https://hub.docker.com/r/dellemc/">Docker Hub</a>.
 {{ else if eq (.Get "text") "5" }}
-As of Container Storage Modules v1.15, Authorization v1.x will no longer be supported. See deprecation notices from prior releases. Please switch to Authorization v2.0 before then to avoid any issues. Migration steps are available <a href="/csm-docs/docs/concepts/authorization/migration-guide-from-v1-to-v2/">here</a>.
+As of Container Storage Modules v1.15, Authorization v1.x will not be supported. Please migrate to Authorization v2.0 using the following <a href="/csm-docs/docs/concepts/authorization/migration-guide-from-v1-to-v2/">guide</a>.
 {{ else if eq (.Get "text") "6" }}
 This document version is no longer actively maintained. The site that you are currently viewing is an archived snapshot. For up-to-date documentation, see the [latest version](/csm-docs/)
 {{ else if eq (.Get "text") "7" }}
-As of Container Storage Modules v1.14, Dell CSM Volume Group Snapshotter is no longer supported. See deprecation notices from prior releases.
+Container Storage Modules Volume Group Snapshotter is no longer supported.
 {{ else if eq (.Get "text") "8" }}
-As of Container Storage Modules v1.14, support via Slack is discontinued. All existing Slack channels are archived. For support, please reach out via the <a href="https://www.dell.com/support/incidents-online/en-us/contactus/product/container-storage-modules">Dell Support Portal</a> if you have a valid support contract. For more details, please see our <a href="/csm-docs/docs/support/">Dell Support Page</a>.
+Support via Slack is discontinued. For support, please reach out via the <a href="https://www.dell.com/support/incidents-online/en-us/contactus/product/container-storage-modules">Dell Support Portal</a>.
 {{ else if eq (.Get "text") "9" }}
 We are thrilled to announce the launch of our brand-new <a href="https://dell.github.io/beta-csm-docs/" target="_blank"> <b> Documentation Portal!</b></a>
 {{ else if eq (.Get "text") "10" }}
 Application Mobility will be part of the Container Storage Modules open-source suite in an upcoming release.
 {{ else if eq (.Get "text") "11" }}
-The CSI PowerMax Reverse Proxy ConfigMap will not be supported after CSM 1.14 (May 2025) and will be fully deprecated by CSM 1.16 (January 2026). Please switch to using the CSI PowerMax secret before these dates to avoid disruptions. Migration steps are available for both <a href="/csm-docs/docs/getting-started/upgrade/kubernetes/powermax/helm/">Helm</a> and <a href="/csm-docs/docs/getting-started/upgrade/kubernetes/powermax/operator/">Operator</a>.
+As of Container Storage Modules v1.16, the CSI PowerMax Reverse Proxy ConfigMap will not be supported. Please migrate to CSI PowerMax secret using the following guides <a href="/csm-docs/docs/getting-started/upgrade/kubernetes/powermax/helm/">Helm</a> and <a href="/csm-docs/docs/getting-started/upgrade/kubernetes/powermax/operator/">Operator</a>.
 {{ else if eq (.Get "text") "12" }}
-The CSI PowerMax Array ConfigMap won't be supported after CSM 1.14 (May 2025) and will be deprecated by CSM 1.16 (January 2026). Use the PowerMax sample to add values to the configmap parameters. Migration steps are available for the <a href="/csm-docs/docs/getting-started/upgrade/kubernetes/powermax/operator/">Operator</a>.
+As of Container Storage Modules v1.16, the CSI PowerMax array ConfigMap will not be supported. Use the PowerMax sample to add values to the ConfigMap parameters and migrate to the latest ConfigMap using the following guide <a href="/csm-docs/docs/getting-started/upgrade/kubernetes/powermax/operator/">Operator</a>.
 {{ else if eq (.Get "text") "13" }}
 The CSI PowerMax Array ConfigMap won't be supported after CSM 1.14 (May 2025) and will be deprecated by CSM 1.16 (January 2026). Use the PowerMax sample to add values to the configmap parameters.
 

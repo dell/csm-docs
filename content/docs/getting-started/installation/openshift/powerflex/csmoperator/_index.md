@@ -1,19 +1,17 @@
 ---
-title: "Installation"
+title: "Installation Guide"
 linktitle: "Operator"
 no_list: true
 description: CSM Operator Installation
 weight: 2
 ---
 
-{{< markdownify >}}
-Supported driver and module versions offered by the Container Storage Modules Operator [here](../../../../../supportmatrix/#operator-compatibility-matrix)
-{{< /markdownify >}}
-
-<br>
+1. Set up an OpenShift cluster following the official documentation.
+2. Complete the base installation.
+3. Proceed with module installation.
 <br>
 
-{{< accordion id="Two" title="CSI Driver" markdown="true" >}}
+{{< accordion id="Two" title="Base Install" markdown="true" >}}
 
 </br>
 
@@ -151,26 +149,26 @@ dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      
 {{< collapse id="1" title="Parameters">}}
 | Parameter | Description | Required | Default |
 | --------- | ----------- | -------- |-------- |
-| dnsPolicy | Determines the DNS Policy of the Node service | Yes | ClusterFirstWithHostNet |
-| fsGroupPolicy | Defines which FS Group policy mode to be used, Supported modes `None, File and ReadWriteOnceWithFSType`. In OCP <= 4.16 and K8s <= 1.29, fsGroupPolicy is an immutable field. | No | "ReadWriteOnceWithFSType" |
-| replicas | Controls the number of controller pods you deploy. If the number of controller pods is greater than the number of available nodes, excess pods will become stay in a pending state. Defaults are 2 which allows for Controller high availability. | Yes | 2 |
-| storageCapacity.enabled | Enable/Disable storage capacity tracking | No | true |
-| storageCapacity.pollInterval | Configure how often the driver checks for changed capacity | No | 5m |
-| enableQuota | a boolean that, when enabled, will set quota limit for a newly provisioned NFS volume | No | none |
-| maxVxflexosVolumesPerNode | Specify default value for maximum number of volumes that controller can publish to the node.If value is zero CO SHALL decide how many volumes of this type can be published by the controller to the node | Yes | 0 |
-| ***Common parameters for node and controller*** |
-| X_CSI_VXFLEXOS_ENABLELISTVOLUMESNAPSHOT | Enable list volume operation to include snapshots (since creating a volume from a snap actually results in a new snap) | No | false |
-| X_CSI_VXFLEXOS_ENABLESNAPSHOTCGDELETE | Enable this to automatically delete all snapshots in a consistency group when a snap in the group is deleted | No | false |
-| X_CSI_ALLOW_RWO_MULTI_POD_ACCESS | Setting allowRWOMultiPodAccess to "true" will allow multiple pods on the same node to access the same RWO volume. This behavior conflicts with the CSI specification version 1.3. NodePublishVolume description that requires an error to be returned in this case. However, some other CSI drivers support this behavior and some customers desire this behavior. Customers use this option at their own risk. | No | false |
-| INTERFACE_NAMES | A mapping of node names to interface names. Only necessary when SDC is disabled. | No | none |
-| ***Controller parameters*** |
-| X_CSI_POWERFLEX_EXTERNAL_ACCESS | allows specifying additional entries for hostAccess of NFS volumes. Both single IP address and subnet are valid entries | No | empty |
-| X_CSI_HEALTH_MONITOR_ENABLED | Enable/Disable health monitor of CSI volumes from Controller plugin - volume condition | No | false |
-| ***Node parameters*** |
-| X_CSI_RENAME_SDC_ENABLED | Enable this to rename the SDC with the given prefix. The new name will be ("prefix" + "worker_node_hostname") and it should not exceed 31 chars. | Yes | false |
-| X_CSI_APPROVE_SDC_ENABLED | Enable this to to approve restricted SDC by GUID during setup | Yes | false |
-| X_CSI_HEALTH_MONITOR_ENABLED | Enable/Disable health monitor of CSI volumes from Node plugin - volume condition | No | false |
-| X_CSI_SDC_ENABLED | Enable/Disable installation of the SDC. | Yes | true |
+|<div style="text-align: left"> dnsPolicy |<div style="text-align: left"> Determines the DNS Policy of the Node service | Yes | ClusterFirstWithHostNet |
+|<div style="text-align: left"> fsGroupPolicy |<div style="text-align: left"> Defines which FS Group policy mode to be used, Supported modes `None, File and ReadWriteOnceWithFSType`. In OCP <= 4.16 and K8s <= 1.29, fsGroupPolicy is an immutable field. | No | "ReadWriteOnceWithFSType" |
+|<div style="text-align: left"> replicas |<div style="text-align: left"> Controls the number of controller pods you deploy. If the number of controller pods is greater than the number of available nodes, excess pods will become stay in a pending state. Defaults are 2 which allows for Controller high availability. | Yes | 2 |
+|<div style="text-align: left"> storageCapacity.enabled |<div style="text-align: left"> Enable/Disable storage capacity tracking | No | true |
+|<div style="text-align: left"> storageCapacity.pollInterval |<div style="text-align: left"> Configure how often the driver checks for changed capacity | No | 5m |
+|<div style="text-align: left"> enableQuota |<div style="text-align: left"> a boolean that, when enabled, will set quota limit for a newly provisioned NFS volume | No | none |
+|<div style="text-align: left"> maxVxflexosVolumesPerNode |<div style="text-align: left"> Specify default value for maximum number of volumes that controller can publish to the node.If value is zero CO SHALL decide how many volumes of this type can be published by the controller to the node | Yes | 0 |
+|<div style="text-align: left"> ***Common parameters for node and controller*** |
+|<div style="text-align: left"> X_CSI_VXFLEXOS_ENABLELISTVOLUMESNAPSHOT |<div style="text-align: left"> Enable list volume operation to include snapshots (since creating a volume from a snap actually results in a new snap) | No | false |
+|<div style="text-align: left"> X_CSI_VXFLEXOS_ENABLESNAPSHOTCGDELETE |<div style="text-align: left"> Enable this to automatically delete all snapshots in a consistency group when a snap in the group is deleted | No | false |
+|<div style="text-align: left"> X_CSI_ALLOW_RWO_MULTI_POD_ACCESS |<div style="text-align: left"> Setting allowRWOMultiPodAccess to "true" will allow multiple pods on the same node to access the same RWO volume. This behavior conflicts with the CSI specification version 1.3. NodePublishVolume description that requires an error to be returned in this case. However, some other CSI drivers support this behavior and some customers desire this behavior. Customers use this option at their own risk. | No | false |
+|<div style="text-align: left"> INTERFACE_NAMES |<div style="text-align: left"> A mapping of node names to interface names. Only necessary when SDC is disabled. | No | none |
+|<div style="text-align: left"> ***Controller parameters*** |
+|<div style="text-align: left"> X_CSI_POWERFLEX_EXTERNAL_ACCESS |<div style="text-align: left"> allows specifying additional entries for hostAccess of NFS volumes. Both single IP address and subnet are valid entries | No | empty |
+|<div style="text-align: left"> X_CSI_HEALTH_MONITOR_ENABLED |<div style="text-align: left"> Enable/Disable health monitor of CSI volumes from Controller plugin - volume condition | No | false |
+|<div style="text-align: left"> ***Node parameters*** |
+|<div style="text-align: left"> X_CSI_RENAME_SDC_ENABLED |<div style="text-align: left"> Enable this to rename the SDC with the given prefix. The new name will be ("prefix" + "worker_node_hostname") and it should not exceed 31 chars. | Yes | false |
+|<div style="text-align: left"> X_CSI_APPROVE_SDC_ENABLED |<div style="text-align: left"> Enable this to to approve restricted SDC by GUID during setup | Yes | false |
+|<div style="text-align: left"> X_CSI_HEALTH_MONITOR_ENABLED |<div style="text-align: left"> Enable/Disable health monitor of CSI volumes from Node plugin - volume condition | No | false |
+|<div style="text-align: left"> X_CSI_SDC_ENABLED |<div style="text-align: left"> Enable/Disable installation of the SDC. | Yes | true |
 {{< /collapse >}}
 </ul>
 
@@ -375,7 +373,7 @@ Check the status of the CR to verify if the driver installation is in the `Succe
   Use this command to  **Delete Persistence Volume Claim**:
 
   ```bash
-  oc delete pvc pvc-vxflexos-restore -n default
+  oc delete pvc pvc-vxflexos -n default
   ```
 
   Verify restore pvc is deleted:
@@ -384,7 +382,7 @@ Check the status of the CR to verify if the driver installation is in the `Succe
   oc get pvc -n default
 
   NAME                    STATUS   VOLUME             CAPACITY   ACCESS MODES   STORAGECLASS   VOLUMEATTRIBUTESCLASS   AGE
-  pvc-vxflexos            Bound    ocp08-095f7d3c52   8Gi        RWO            vxflexos      <unset>                 7m34s
+
   ```
   </br> 
 </li> 
@@ -455,7 +453,7 @@ snapcontent-80e99281-0d96-4275-b4aa-50301d110bd4   true         8589934592    De
 Use this command to  **Restore Snapshot**:
 
 ```bash
-oc apply -f pvc-vxflexos.yaml
+oc apply -f pvc-vxflexos-restore.yaml
 ```
 
 Example:
@@ -515,14 +513,15 @@ NAME                    STATUS   VOLUME             CAPACITY   ACCESS MODES   ST
 
 
 
-{{< /collapse >}} 
+{{< /collapse >}}  
+
 
 
 {{< /accordion >}}  
 
 <br>
 
-{{< accordion id="Three" title="CSM Modules">}}
+{{< accordion id="Three" title="Modules">}}
 
 {{< cardcontainer >}}
     {{< customcard link1="./csm-modules/authorizationv1-x"  image="6" title="Authorization v1.x" >}}

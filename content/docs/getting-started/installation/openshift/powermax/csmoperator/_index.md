@@ -1,65 +1,67 @@
 ---
-title: Installation
+title: Installation Guide
 linkTitle: Operator
 no_list: true
 weight: 2
 description: >
-  Installing the CSI Driver for PowerMax via Container Storage Modules Operator
+  Installing the CSI Driver for PowerMax via Container Storage Module Operator
 ---
-{{% pageinfo color="primary" %}}
-{{< message text="1" >}}
-{{% /pageinfo %}}
 
-{{< markdownify >}}
-Supported driver and module versions offered by the Container Storage Modules Operator [here](../../../../../supportmatrix/#operator-compatibility-matrix)
-{{< /markdownify >}}
 
-<br>
+1. Set up an OpenShift cluster following the official documentation.
+2. Proceed to the Prerequisite
+3. Complete the base installation.
+4. Proceed with module installation.
 <br>
 
-{{< accordion id="One" title="CSM Installation Wizard" markdown="true" >}}
-{{<include  file="content/docs/getting-started/installation/installationwizard/operator.md" >}}
+
+
+{{< accordion id="One" title="Prerequisite" >}} 
+<br>
+{{<include  file="content/docs/getting-started/installation/openshift/powermax/prerequisite/_index.md" >}}
+
 {{< /accordion >}}
-
 <br>
-{{< accordion id="Two" title="CSI Driver" markdown="true" >}}
 
+{{< accordion id="Two" title="Base Install" markdown="true" >}}  
 
 </br>
 
 ### Operator Installation
 
 </br>
+ 
+1. On the OpenShift console, navigate to **OperatorHub** and use the keyword filter to search for **Dell Container Storage Modules.** 
 
-1. On the OpenShift console, navigate to **OperatorHub** and use the keyword filter to search for **Dell Container Storage Modules.**
-
-2. Click **Dell Container Storage Modules** tile
+2. Click **Dell Container Storage Modules** tile 
 
 3. Keep all default settings and click **Install**.
 
 </br>
 <ol>
 
-Verify that the operator is deployed
-```terminal
+Verify that the operator is deployed 
+```terminal 
 oc get operators
 
 NAME                                                          AGE
 dell-csm-operator-certified.openshift-operators               2d21h
-```
+```  
 
 ```terminal
 oc get pod -n openshift-operators
 
 NAME                                                       READY   STATUS       RESTARTS      AGE
 dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      21 (19h ago)  2d21h
-```
+``` 
 
 
 </ol>
 </br>
 
-### Install Driver
+
+### CSI Driver Installation
+</br>
 
 1. **Create namespace:**
     ```bash
@@ -113,9 +115,6 @@ dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      
     ```
 
 3. **Create Powermax Array Configmap:**
-  
-  **Note:** `powermax-array-config` is deprecated and remains for backward compatibility only. You can skip creating it and instead add values for X_CSI_MANAGED_ARRAYS, X_CSI_TRANSPORT_PROTOCOL, and X_CSI_POWERMAX_PORTGROUPS in the sample files.
-
   Create a configmap using the sample file [here](https://github.com/dell/csi-powermax/blob/main/samples/configmap/powermax-array-config.yaml). Fill in the appropriate values for driver configuration.
    ```yaml
       # To create this configmap use: kubectl create -f powermax-array-config.yaml
@@ -136,7 +135,7 @@ dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      
           X_CSI_MANAGED_ARRAYS: "000000000000,000000000000,"
    ```
 
-4. **Create a CR (Custom Resource)** for PowerMax using the sample files provided
+5. **Create a CR (Custom Resource)** for PowerMax using the sample files provided
 
     i. **Create a CR (Custom Resource)** for PowerMax using the sample files provided
 
@@ -172,9 +171,6 @@ Example:
    | replicas                                        | Controls the number of controller Pods you deploy. If controller Pods are greater than the number of available nodes, excess Pods will become stuck in pending. The default is 2 which allows for Controller high availability.                                          | Yes      | 2                              |
    | fsGroupPolicy                                   | Defines which FS Group policy mode to be used, Supported modes `None, File and ReadWriteOnceWithFSType`. In OCP <= 4.16 and K8s <= 1.29, fsGroupPolicy is an immutable field.                                                                                                                                                                  | No       | "ReadWriteOnceWithFSType"      |
    | ***Common parameters for node and controller*** |                                                                                                                                                                                                                                                                          |          |                                |
-   | X_CSI_TRANSPORT_PROTOCOL                        | Choose which transport protocol to use (ISCSI, FC, NVMETCP, "")	                                                                                                                                                                                                        | Yes      | ""                           |
-   | X_CSI_POWERMAX_PORTGROUPS                       | List of comma-separated port groups (ISCSI and NVMETCP only). Example: "PortGroup1,PortGroup2"                                                                                                                                                                                       | No       | -                              |
-   | X_CSI_MANAGED_ARRAYS                            | List of comma-separated array ID(s) which will be managed by the driver                                                                                                                                                                                                  | Yes      | -
    | X_CSI_K8S_CLUSTER_PREFIX                        | Define a prefix that is appended to all resources created in the array; unique per K8s/CSI deployment; max length - 3 characters                                                                                                                                         | No      | CSM                            |
    | X_CSI_POWERMAX_PROXY_SERVICE_NAME               | Name of CSI PowerMax ReverseProxy service.                                                                                                                                                                                                                               | Yes      | csipowermax-reverseproxy       |
    | X_CSI_IG_MODIFY_HOSTNAME                        | Change any existing host names. When node name template is set, it changes the name to the specified format else it uses driver default host name format.                                                                                                                  | No       | false                          |
@@ -319,31 +315,24 @@ X_CSI_TOPOLOGY_CONTROL_ENABLED provides a way to filter topology keys on a node 
 <br>
 
 3. Run following command to create the configmap
-  ```bash
-  kubectl create -f topologyConfig.yaml
-  ```
+   ```bash
+   kubectl create -f topologyConfig.yaml
+   ```
  >Note: Name of the configmap should always be `node-topology-config`.
 
-{{< /accordion >}}
 
 
-<br>
-
-{{< accordion id="Three" title="CSM Modules"  >}}
+{{< /accordion >}}   
 
 <br>
+
+{{< accordion id="Three" title="Modules" >}}
+
+<br>   
 
 {{< cardcontainer >}}
-    {{< customcard link1="./csm-modules/authorizationv1-x"  image="1" title="Authorization v1.x" >}}
-
-    {{< customcard link1="./csm-modules/authorizationv2-0"   image="1" title="Authorization v2.0"  >}}
-
-    {{< customcard  link1="./csm-modules/observability"   image="1" title="Observability"  >}}
-
-    {{< customcard  link1="./csm-modules/replication"  image="1" title="Replication"  >}}
 
     {{< customcard link1="./csm-modules/resiliency"   image="1" title="Resiliency"  >}}
 
 {{< /cardcontainer >}}
-
-{{< /accordion >}}
+{{< /accordion >}}  

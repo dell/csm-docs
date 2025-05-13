@@ -22,7 +22,9 @@ If one system has both Internet access and registry access, it can be used for b
 
 ## Dependencies and Usage
 
-Preparing an offline bundle requires the following utilities:
+Preparing an offline bundle requires the following utilities: 
+
+<div class="tdleft">
 
 | **Dependency**            | **Usage** |
 | ------------------------- | ----- |
@@ -32,3 +34,5 @@ Preparing an offline bundle requires the following utilities:
 | **`git`**                 | Used to manually clone repositories to create an offline bundle. 
 |                           | Needed only on the system preparing the offline bundle. 
 |                           | Tested versions: git 1.8+ (any version should work).
+
+</div>
