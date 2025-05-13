@@ -50,9 +50,6 @@ weight: 1
 | 4.18    | <div style="text-align: left"> Replication (Metro)	</div>   | No       | Yes      | Yes         | No        | No    |
 {{</table>}}
 
-
-{{</table>}}
-
 > Note: Replication with Sync/Async modes is not supported.
 
 ## Tested Host Operating Systems
