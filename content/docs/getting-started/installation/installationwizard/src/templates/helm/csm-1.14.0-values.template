@@ -155,7 +155,7 @@ csi-powermax:
     authorization: 
       image: quay.io/dell/container-storage-modules/csm-authorization-sidecar:v2.2.0
     migration: 
-      image: quay.io/dell/container-storage-modules/dell-csi-migrator:v1.5.0
+      image: quay.io/dell/container-storage-modules/dell-csi-migrator:v1.8.0
     podmon:
       image: quay.io/dell/container-storage-modules/podmon:v1.13.0
     # Node rescan sidecar does a rescan on nodes for identifying new paths
@@ -252,7 +252,7 @@ csi-vxflexos:
       image: quay.io/dell/container-storage-modules/csi-vxflexos:v2.14.0
     # "powerflexSdc" defines the SDC image for init container.
     powerflexSdc: 
-      image: dellemc/sdc:4.5.2.1
+      image: dellemc/sdc:4.5.3
     # CSI sidecars
     attacher: 
       image: registry.k8s.io/sig-storage/csi-attacher:v4.8.1
