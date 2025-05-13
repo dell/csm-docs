@@ -110,11 +110,11 @@ The diagram below illustrates the architecture of the Container Object Storage I
 ### Storage Details
 {{< cardcontainer >}}
 
-      {{< customcard path="content/docs/concepts/cosidriver" link="./objectscale" title="ObjectScale"  imageNumber="6">}}
+      {{< customcard  link="./objectscale"  imageNumber="3" title="ObjectScale"  >}}
 
 {{< /cardcontainer >}} 
 
-This section provides detailed instructions on how to install, upgrade, and uninstall and troubleshoot
+### Installation, Upgrade, Uninstallation and Troubleshooting Details
 .
 {{< cardcontainer >}}
 
