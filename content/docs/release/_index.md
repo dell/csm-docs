@@ -25,7 +25,6 @@ Description: >
 
 ### New Features/Changes
 
-
 - [#1614 - [FEATURE]: CSM PowerMax - Mount credentials secret to the reverse-proxy](https://github.com/dell/csm/issues/1614)
 - [#1742 - [FEATURE]: Shared NFS for File Scalability](https://github.com/dell/csm/issues/1742)
 - [#1743 - [FEATURE]: Add support for PowerScale 9.11](https://github.com/dell/csm/issues/1743)
@@ -39,13 +38,9 @@ Description: >
 - [#1755 - [FEATURE]: CSM Observability - Grafana Migration from Angular JS to React](https://github.com/dell/csm/issues/1755)
 - [#1758 - [FEATURE]: CSM PowerStore - Multiple NAS Servers Support](https://github.com/dell/csm/issues/1758)
 - [#1844 - [FEATURE]: Add Openshift Virtualization support for resiliency module](https://github.com/dell/csm/issues/1844)
-- [#1862 - [FEATURE]: CSM Replication - Add claimRef to the target PV](https://github.com/dell/csm/issues/1862)
-- [#1882-  [FEATURE]: Metro Replication Qualification - Support PowerMax and PowerStore with OpenShift Virtualization](https://github.com/dell/csm/issues/1882)
 - [#1850 - [FEATURE]: Controller reattach failover PV to PVC automatically on stretched cluster](https://github.com/dell/csm/issues/1850)
-- [#1743 - [FEATURE]: Add support for PowerScale 9.11](https://github.com/dell/csm/issues/1743)
-- [#1744 - [FEATURE]: Add support for Unity 5.5](https://github.com/dell/csm/issues/1744)
-
-
+- [#1862 - [FEATURE]: CSM Replication - Add claimRef to the target PV](https://github.com/dell/csm/issues/1862)
+- [#1882-  [FEATURE]: Metro Replication Qualification - Support PowerMax and PowerStore with OpenShift Virtualization](https://github.com/dell/csm/issues/1882)
 
 ### Fixed Issues
 
