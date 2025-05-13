@@ -131,10 +131,10 @@ function setValues(csmMapValues, CONSTANTS_PARAM) {
 	DriverValues.renameSDC = $("#rename-sdc").prop('checked') ? true : false;
 	DriverValues.sdcEnabled = $("#enable-sdc").prop('checked') ? true : false;
 	DriverValues.sdcSFTPRepoEnabled = $("#enable-sdc-sftp-repo").prop('checked') ? true : false;
-	DriverValues.sdcSFTPRepoUser = $("#sdc-sftp-repo-user").val();
-	DriverValues.sdcSFTPRepoAddress = $("#sdc-sftp-repo-address").val();
-	DriverValues.sdcSFTPRepoPrivateSecret = $("#sdc-sftp-repo-private-secret").val();
-	DriverValues.sdcSFTPRepoPublicSecret = $("#sdc-sftp-repo-public-secret").val();
+	DriverValues.sdcSFTPRepoUser = $("#sdc-sftp-repo-user").val() || '""';
+	DriverValues.sdcSFTPRepoAddress = $("#sdc-sftp-repo-address").val() || '""';
+	DriverValues.sdcSFTPRepoPrivateSecret = $("#sdc-sftp-repo-private-secret").val() || '""';
+	DriverValues.sdcSFTPRepoPublicSecret = $("#sdc-sftp-repo-public-secret").val() || '""';
 	DriverValues.sdcPrefix = $("#sdc-prefix").val();
 	DriverValues.approveSDC = $("#approve-sdc").prop('checked') ? true : false;
 	DriverValues.enableQuota = $("#enable-quota").prop('checked') ? true : false;
