@@ -197,8 +197,8 @@ function createYamlString(yamlTpl, yamlTplValues, driverParam, CONSTANTS_PARAM) 
 	yamlTpl = yamlTpl.replaceAll("$TARGET_UNISPHERE", yamlTplValues.targetUnisphere);
 	yamlTpl = yamlTpl.replaceAll("$SDC_ENABLED", yamlTplValues.sdcEnabled);
 	yamlTpl = yamlTpl.replaceAll("$SDC_SFTP_REPO_ENABLED", yamlTplValues.sdcSFTPRepoEnabled);
-	yamlTpl = yamlTpl.replaceAll("$SDC_SFTP_REPO_ADDRESS", yamlTplValues.sdcSFTPRepoUser);
-	yamlTpl = yamlTpl.replaceAll("$SDC_SFTP_REPO_USER", yamlTplValues.sdcSFTPRepoAddress);
+	yamlTpl = yamlTpl.replaceAll("$SDC_SFTP_REPO_ADDRESS", yamlTplValues.sdcSFTPRepoAddress);
+	yamlTpl = yamlTpl.replaceAll("$SDC_SFTP_REPO_USER", yamlTplValues.sdcSFTPRepoUser);
 	yamlTpl = yamlTpl.replaceAll("$SDC_SFTP_REPO_PRIVATE_SECRET", yamlTplValues.sdcSFTPRepoPrivateSecret);
 	yamlTpl = yamlTpl.replaceAll("$SDC_SFTP_REPO_PUBLIC_SECRET", yamlTplValues.sdcSFTPRepoPublicSecret);
 	yamlTpl = yamlTpl.replaceAll("$RENAME_SDC_ENABLED", yamlTplValues.renameSDC);
