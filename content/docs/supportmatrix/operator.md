@@ -10,9 +10,9 @@ The table below lists the driver and modules versions installable with the Conta
 {{<table "table table-striped table-bordered table-sm">}}
 | CSI Driver         | Version | CSM Authorization 1.x.x , 2.x.x | CSM Replication | CSM Observability | CSM Resiliency |
 | ------------------ |---------|---------------------------------|-----------------|-------------------|----------------|
-| CSI PowerScale     | 2.14.0  | ✔ 1.14.0 , 2.2.0                | ✔ 1.12.0       | ✔ 1.12.0          | ✔ 1.13.0      |
-| CSI PowerFlex      | 2.14.0  | ✔ 1.14.0 , 2.2.0                | ✔ 1.12.0       | ✔ 1.12.0          | ✔ 1.13.0      |
-| CSI PowerStore     | 2.14.0  | ❌ , ❌                        | ❌             | ❌                | ✔ 1.13.0      |
-| CSI PowerMax       | 2.14.0  | ✔ 1.14.0 , 2.2.0                | ✔ 1.12.0       | ✔ 1.12.0          | ✔ 1.13.0      |
-| CSI Unity XT       | 2.14.0  | ❌ , ❌                        | ❌             | ❌                | ❌            |
+| CSI PowerScale     | {{< version-docs key="PScale_latestVersion" >}}  | ✔ {{< version-docs key="Authv1" >}} , {{< version-docs key="Authv2" >}}                | ✔ {{< version-docs key="Replication" >}}       | ✔ {{< version-docs key="Observability" >}}          | ✔ {{< version-docs key="Resiliency" >}}      |
+| CSI PowerFlex      | {{< version-docs key="PFlex_latestVersion" >}}  | ✔ {{< version-docs key="Authv1" >}} , {{< version-docs key="Authv2" >}}                | ✔ {{< version-docs key="Replication" >}}       | ✔ {{< version-docs key="Observability" >}}          | ✔ {{< version-docs key="Resiliency" >}}      |
+| CSI PowerStore     | {{< version-docs key="PStore_latestVersion" >}}  | ❌ , ❌                        | ❌             | ❌                | ✔ {{< version-docs key="Resiliency" >}}      |
+| CSI PowerMax       | {{< version-docs key="PMax_latestVersion" >}}  | ✔ {{< version-docs key="Authv1" >}} , {{< version-docs key="Authv2" >}}                | ✔ {{< version-docs key="Replication" >}}       | ✔ {{< version-docs key="Observability" >}}          | ✔ {{< version-docs key="Resiliency" >}}      |
+| CSI Unity XT       | {{< version-docs key="PUnity_latestVersion" >}}  | ❌ , ❌                        | ❌             | ❌                | ❌            |
 {{</table>}}

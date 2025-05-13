@@ -7,6 +7,7 @@ linkTitle: "Resiliency"
 1. #### Enable Resiliency Module
 
     <br>
+
     Use this command to create the **ContainerStorageModule Custom Resource** with Resiliency:
 
     ```bash
@@ -27,7 +28,7 @@ linkTitle: "Resiliency"
     spec:
       driver:
         csiDriverType: "{{Var}}"
-        configVersion: v2.12.0
+        configVersion: {{< version-docs key="PFlex-latestVersion" >}}
       modules:
       - name: resiliency
         enabled: true
@@ -126,7 +127,7 @@ linkTitle: "Resiliency"
     spec:
       driver:
         csiDriverType: "{{Var}}"
-        configVersion: v2.14.0
+        configVersion: {{< version-docs key="PFlex-latestVersion" >}}
       modules:
       - name: resiliency
         enabled: false

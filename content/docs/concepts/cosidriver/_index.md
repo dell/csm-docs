@@ -3,7 +3,7 @@ title: "COSI Driver"
 linkTitle: "COSI Driver"
 description: About Dell Technologies (Dell) COSI Driver 
 no_list: true 
-weight: 3
+weight: 10
 ---
 
 The COSI Driver by Dell connects a COSI-enabled Container Orchestrator with Dell Storage Arrays. It is a Kubernetes plug-in that provides object storage using Dell storage systems.

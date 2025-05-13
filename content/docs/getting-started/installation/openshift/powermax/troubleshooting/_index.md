@@ -9,11 +9,11 @@ weight: 5
 {{<include file="content/docs/getting-started/installation/troubleshooting/csmoperator/_index.md">}} 
 {{< /accordion >}}
 <br>
-{{< accordion id="Two" title="Base Install" markdown="true" >}}  
+{{< accordion id="Two" title="Driver" markdown="true" >}}  
 {{<include file="content/docs/concepts/csidriver/troubleshooting/powermax.md">}} 
 {{< /accordion >}} 
 <br>
-{{< accordion id="Three" title="CSM Module" >}}  
+{{< accordion id="Three" title="Modules" >}}  
 
 {{< cardcontainer >}}
 

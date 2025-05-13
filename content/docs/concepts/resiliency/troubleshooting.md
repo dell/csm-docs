@@ -4,7 +4,7 @@ linktitle: Troubleshooting
 weight: 4
 description: >
    Container Storage Modules (CSM) for Resiliency - Troubleshooting 
-toc_hide: true
+toc_hide: false
 ---
 
 Some tools have been provided in the [tools](https://github.com/dell/karavi-resiliency/blob/main/tools) directory that will help you understand the system's state and facilitate troubleshooting.

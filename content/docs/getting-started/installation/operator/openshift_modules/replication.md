@@ -86,7 +86,7 @@ description: >
    Verify the repctl utility is installed.
    ```terminal
    repctl -v
-   repctl version v1.11.0
+   repctl version {{< version-docs key="repctl" >}}
    ````
 <br> 
 
@@ -278,7 +278,7 @@ description: >
           envs:
           - name: X_CSI_ISI_AUTH_TYPE
             value: "1"
-        configVersion: v2.13.0
+        configVersion: {{< version-docs key="PFlex-latestVersion" >}}
         csiDriverSpec:
           fSGroupPolicy: File
           storageCapacity: true

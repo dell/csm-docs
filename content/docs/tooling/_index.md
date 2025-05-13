@@ -10,4 +10,6 @@ These tools are designed to enhance your workflow by providing robust, easy-to-u
 
 
 * Cert-CSI: Dell’s Cert-CSI tool validates CSI Drivers, containing various test suites to ensure drivers meet certification standards in different environments.
-* dellctl: dellctl is a command-line interface (CLI) used to manage Container Storage Modules (CSM) resources, providing commands for interaction and management.
+* dellctl: dellctl is a command-line interface (CLI) used to manage Container Storage Modules (CSM) resources, providing commands for interaction and management. 
+* repctl: repctl is a command-line client for configuring replication and managing replicated resources between multiple Kubernetes clusters.
+
