@@ -1,6 +1,6 @@
 ---
-title: "CContainer Storage Modules with COSI"
-linkTitle: "CContainer Storage Modules with COSI"
+title: "Container Storage Modules with COSI"
+linkTitle: "Container Storage Modules with COSI"
 description: Optimizing Kubernetes Storage with Container Storage Modules - COSI 
 no_list: true 
 weight: 3
@@ -15,6 +15,7 @@ The COSI Driver by Dell connects a COSI-enabled Container Orchestrator with Dell
 Dell COSI Driver is a multi-backend driver, meaning that it can connect to multiple Object Storage Platform (OSP) Instances and provide access to them using the same COSI interface.
 
 {{< /accordion >}} 
+
 
 {{< accordion id="Two" title="Features Summary" markdown="true">}} 
 
@@ -40,7 +41,7 @@ Dell COSI Driver is a multi-backend driver, meaning that it can connect to multi
 |  <div style="text-align: left"> Bucket Access Revoking |     Yes     |
 {{</table>}}
 
-## Storage Protocols
+### Storage Protocols
 
 {{<table "table table-striped table-bordered table-sm">}}
 | Protocol   | ObjectScale |
@@ -50,7 +51,7 @@ Dell COSI Driver is a multi-backend driver, meaning that it can connect to multi
 |  <div style="text-align: left"> Azure Blob |     N/A     |
 {{</table>}}
 
-## Dell Storage Platforms
+### Dell Storage Platforms
 
 {{<table "table table-striped table-bordered table-sm">}}
 | Storage Platform | Versions |
@@ -60,9 +61,32 @@ Dell COSI Driver is a multi-backend driver, meaning that it can connect to multi
 
 > **NOTE:** Object Scale 1.2.x is planned for End of Standard Support on January 31st 2025. Please refer <a href="https://www.dell.com/support/kbdoc/en-uk/000185734/all-dell-emc-end-of-life-documents?lang=en">Dell Support documentation</a> for more information. We plan to support COSI driver when a new version of ObjectScale is available.
 
-## Bucket Lifecycle Workflow
+### Bucket Lifecycle Workflow
 
 1. Create Bucket &rarr; Delete Bucket
 1. Create Bucket &rarr; Grant Access &rarr; Revoke Access &rarr; Delete Bucket
 
+### ObjectScale
+
+{{<table "table table-striped table-bordered table-sm">}}
+| Area              | Core Features          |  Implementation level   |     Status      | Details                                                                                     |
+|:------------------|:-----------------------|:-----------------------:|:---------------:|---------------------------------------------------------------------------------------------|
+| Provisioning      | _Create Bucket_        | Minimum Viable Product  |     ✅ Done      | Bucket is created using default settings.                                                   |
+|                   |                        | Brownfield provisioning |     ✅ Done      | Bucket is created based on existing bucket in Object Storage Provisioner.                   |
+|                   |                        |  Advanced provisioning  | 📝 Design draft | Extra (non-default) parameters for bucket provisioning are controlled from the BucketClass. |
+|                   | _Delete Bucket_        | Minimum Viable Product  |     ✅ Done      | Bucket is deleted.                                                                          |
+| Access Management | _Grant Bucket Access_  | Minimum Viable Product  |     ✅ Done      | Full access is granted for given bucket.                                                    |
+|                   |                        |  Advanced permissions   | 📝 Design draft | More control over permission is done through BucketAccessClass.                             |
+|                   | _Revoke Bucket Access_ | Minimum Viable Product  |     ✅ Done      | Access is revoked.                                                                          |
+{{</table>}}
+
+
 {{< /accordion >}} 
+
+
+### Storage Details
+{{< cardcontainer >}} 
+
+    {{< customcard  link="./objectscale"  imageNumber="3" title="ObjectStore"  >}}
+
+{{< /cardcontainer >}}

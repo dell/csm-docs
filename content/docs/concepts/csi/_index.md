@@ -31,6 +31,7 @@ With Container Storage Modules (CSM) utilizing CSI, you can perform various stor
 
 {{< /accordion >}} 
 
+
 {{< accordion id="Two" title="Features Summary" markdown="true">}} 
 
 ### CSI Driver Capabilities
@@ -75,8 +76,6 @@ With Container Storage Modules (CSM) utilizing CSI, you can perform various stor
 > **Note:** Please note Dual-Stack or IPv6 is not supported.
 
 {{< /accordion >}} 
-
-
 
 ### Storage Details
 {{< cardcontainer >}} 
