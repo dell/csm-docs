@@ -585,7 +585,7 @@ describe("GIVEN createYamlString function", () => {
             sdcSFTPRepoAddress: $SDC_SFTP_REPO_ADDRESS
             sdcSFTPRepoUser: $SDC_SFTP_REPO_USER
             sdcSFTPRepoPrivateSecret: $SDC_SFTP_REPO_PRIVATE_SECRET
-            sdcSFTPRepoPublicSecret: $SDC_SFTP_REPO_PUBLIC_SECRET 
+            sdcSFTPRepoPublicSecret: $SDC_SFTP_REPO_PUBLIC_SECRET
         nodeSelector: $NODE_POD_NODE_SELECTOR
         renameSDC:
           enabled: $RENAME_SDC_ENABLED
@@ -912,10 +912,10 @@ describe("GIVEN createYamlString function", () => {
           enabled: true
           sdcSFTPRepo:
             enabled: false
-            sdcSFTPRepoAddress:
-            sdcSFTPRepoUser:
-            sdcSFTPRepoPrivateSecret:
-            sdcSFTPRepoPublicSecret:
+            sdcSFTPRepoAddress: 
+            sdcSFTPRepoUser: 
+            sdcSFTPRepoPrivateSecret: 
+            sdcSFTPRepoPublicSecret: 
         nodeSelector: false
         renameSDC:
           enabled: false
@@ -1200,7 +1200,7 @@ describe("GIVEN createYamlString function", () => {
             sdcSFTPRepoAddress: $SDC_SFTP_REPO_ADDRESS
             sdcSFTPRepoUser: $SDC_SFTP_REPO_USER
             sdcSFTPRepoPrivateSecret: $SDC_SFTP_REPO_PRIVATE_SECRET
-            sdcSFTPRepoPublicSecret: $SDC_SFTP_REPO_PUBLIC_SECRET 
+            sdcSFTPRepoPublicSecret: $SDC_SFTP_REPO_PUBLIC_SECRET
         nodeSelector: $NODE_POD_NODE_SELECTOR
         renameSDC:
 		  enabled: $RENAME_SDC_ENABLED
@@ -1527,10 +1527,10 @@ describe("GIVEN createYamlString function", () => {
           enabled: false
           sdcSFTPRepo:
             enabled: false
-            sdcSFTPRepoAddress:
-            sdcSFTPRepoUser:
-            sdcSFTPRepoPrivateSecret:
-            sdcSFTPRepoPublicSecret:
+            sdcSFTPRepoAddress: 
+            sdcSFTPRepoUser: 
+            sdcSFTPRepoPrivateSecret: 
+            sdcSFTPRepoPublicSecret: 
         nodeSelector: false
         renameSDC:
 		  enabled: false
@@ -1809,10 +1809,10 @@ describe("GIVEN createYamlString function", () => {
           enabled: false
           sdcSFTPRepo:
             enabled: false
-            sdcSFTPRepoAddress:
-            sdcSFTPRepoUser:
-            sdcSFTPRepoPrivateSecret:
-            sdcSFTPRepoPublicSecret:
+            sdcSFTPRepoAddress: 
+            sdcSFTPRepoUser: 
+            sdcSFTPRepoPrivateSecret: 
+            sdcSFTPRepoPublicSecret: 
         nodeSelector: false
         renameSDC:
 		  enabled: false
@@ -2092,10 +2092,10 @@ describe("GIVEN createYamlString function", () => {
           enabled: false
           sdcSFTPRepo:
             enabled: false
-            sdcSFTPRepoAddress:
-            sdcSFTPRepoUser:
-            sdcSFTPRepoPrivateSecret:
-            sdcSFTPRepoPublicSecret:
+            sdcSFTPRepoAddress: 
+            sdcSFTPRepoUser: 
+            sdcSFTPRepoPrivateSecret: 
+            sdcSFTPRepoPublicSecret: 
         nodeSelector: false
         renameSDC:
 		  enabled: false
