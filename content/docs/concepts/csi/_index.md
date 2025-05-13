@@ -33,64 +33,43 @@ With Container Storage Modules (CSM) utilizing CSI, you can perform various stor
 
 {{< accordion id="Two" title="Features Summary" markdown="true">}} 
 
-### Core 
-
+### CSI Driver Capabilities
 {{<table "table table-striped table-bordered table-sm">}}
-| **Feature Category**             | **PowerStore** | **PowerScale** | **PowerFlex** | **PowerMax** | **Unity XT**  |
-|--------------------------|:--------------:|:--------------:|:-------------:|:------------:|:-------------:|
-| **Driver version**       | 2.13.0         | 2.13.0         | 2.13.0        | 2.13.0       | 2.13.0        |
-| **Provisioning**         |                |                |               |              |               |
-| Static Provisioning      | yes            | yes            | yes           | yes          | yes           |
-| Dynamic Provisioning     | yes            | yes            | yes           | yes          | yes           |
-| Expand Persistent Volume | yes            | yes            | yes           | yes          | yes           |
-| **Volume Management**    |                |                |               |              |               |
-| Volume Snapshot          | yes            | yes            | yes           | yes (LUN)<br>no (NFS) | yes       |
-| Volume Clone             | yes            | yes            | yes           | yes (LUN)<br>no (NFS) | yes       |
-| **Access Modes**         |                |                |               |              |               |
-| Filesystem Access Mode   | RWO, RWOP<br>ROX, RWX (NFS) | RWO, RWX, ROX, RWOP | RWO, ROX, RWOP<br>RWX (NFS) | RWO, RWOP<br>ROX, RWX (NFS) | RWO, ROX, RWOP<br>RWX (NFS) |
-| Block Access Mode        | RWO, RWX, ROX, RWOP | Not Supported | RWX, ROX, RWOP | RWX, ROX, RWOP | RWO, RWX |
-| **Volume Types**         |                |                |               |              |               |
-| Raw Block Volume         | yes            | no             | yes           | yes          | yes           |
-| CSI Ephemeral Volume     | yes            | yes            | yes           | no           | yes           |
-| Generic Ephemeral Volume | yes            | yes            | yes           | yes          | yes           |
-| **Additional Features**  |                |                |               |              |               |
-| Topology                 | yes            | yes            | yes           | yes          | yes           |
-| Multi-array              | yes            | yes            | yes           | yes          | yes           |
-| Volume Health Monitoring | yes            | yes            | yes           | yes          | yes           |
-| Storage Capacity Tracking| yes            | yes            | yes           | yes          | yes           |
-| Volume Limit             | yes            | yes            | yes           | yes          | yes           |
+| Features                 | PowerStore | PowerScale | PowerFlex | PowerMax | Unity XT  |
+|--------------------------|:----------:|:----------:|:---------:|:--------:|:---------:|
+| <div style="text-align: left"> CSI Driver version       | 2.13.0     | 2.13.0     | 2.13.0    | 2.13.0   | 2.13.0    |
+| <div style="text-align: left"> Static Provisioning      | yes        | yes        | yes       | yes      | yes       |
+| <div style="text-align: left"> Dynamic Provisioning     | yes        | yes        | yes       | yes      | yes       |
+| <div style="text-align: left"> Expand Persistent Volume | yes        | yes        | yes       | yes      | yes       |
+| <div style="text-align: left"> Volume Snapshot    | yes        | yes        | yes       | yes for LUN<br>no for NFS | yes       |
+| <div style="text-align: left"> Volume Clone | yes        | yes        | yes       | yes for LUN<br>no for NFS | yes       |
+| <div style="text-align: left"> [Access Mode](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#access-modes) for [volumeMode: Filesystem](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#volume-mode)| RWO, RWOP<br><br>ROX, RWX **with NFS ONLY** | RWO, RWX, ROX, RWOP | RWO, ROX, RWOP<br><br>RWX  **with NFS ONLY** | RWO, RWOP<br><br>ROX, RWX **with NFS ONLY** | RWO, ROX, RWOP<br><br>RWX  **with NFS ONLY** |
+| <div style="text-align: left"> Access Mode for `volumeMode: Block`| RWO, RWX, ROX, RWOP | Not Supported | RWX, ROX, RWOP | RWX, ROX, RWOP | RWO, RWX |
+| [Raw Block Volume](https://kubernetes.io/docs/concepts/storage/volume-pvc-datasource/)                               | yes      | no       | yes       | yes         | yes        |
+| [CSI Ephemeral Volume](https://kubernetes.io/docs/concepts/storage/ephemeral-volumes/#csi-ephemeral-volumes)         | yes       | yes       | yes       | no        | yes        |
+| [Generic Ephemeral Volume](https://kubernetes.io/docs/concepts/storage/ephemeral-volumes/#generic-ephemeral-volumes) | yes      | yes       | yes       | yes        | yes        |
+| <div style="text-align: left"> Topology                 | yes        | yes        | yes       | yes      | yes       |
+| <div style="text-align: left"> Multi-array              | yes        | yes        | yes       | yes      | yes       |
+| <div style="text-align: left"> Volume Health Monitoring | yes        | yes        | yes       | yes      | yes       |
+| <div style="text-align: left"> Storage Capacity Tracking | yes       | yes        | yes       | yes      | yes       |
+| <div style="text-align: left"> Volume Limit             | yes        | yes        | yes       | yes      | yes       |
 {{</table>}}
 
-### Dell Storage 
+### Storage Platform 
 {{<table "table table-striped table-bordered table-sm">}}
-| **Feature Category**                  | **PowerStore** | **PowerScale** | **PowerFlex** | **PowerMax** | **Unity XT** |
-|---------------------------------------|----------------|----------------|---------------|--------------|--------------|
-| **Connectivity Options**              |                |                |               |              |              |
-| Fibre Channel                         | Yes            | N/A            | N/A           | Yes          | Yes          |
-| iSCSI                                 | Yes            | N/A            | N/A           | Yes          | Yes          |
-| NVMeTCP                               | Yes            | N/A            | N/A           | Yes          | N/A          |
-| NVMeFC                                | Yes            | N/A            | N/A           | N/A          | N/A          |
-| **File System Support**               |                |                |               |              |              |
-| NFS                                   | Yes            | Yes            | Yes           | Yes (SDNAS)  | Yes          |
-| Other Protocols                       | N/A            | N/A            | ScaleIO       | N/A          | N/A          |
-| **Supported File Systems**            |                |                |               |              |              |
-| ext3 / ext4 / xfs / NFS               | Yes            | NFS            | Yes           | Yes          | Yes          |
-| **Provisioning**                      |                |                |               |              |              |
-| Thin Provisioning                     | Yes            | N/A            | Yes           | Yes          | Yes          |
-| Thick Provisioning                    | N/A            | N/A            | N/A           | N/A          | Yes          |
-| **Platform-Specific Configurable Settings** |          |                |               |              |              |
-| iSCSI CHAP                            | Yes            | N/A            | N/A           | Yes          | N/A          |
-| Access Zone                           | N/A            | Yes            | N/A           | N/A          | N/A          |
-| NFS version (3 or 4); Configurable Export IPs | Yes     | N/A            | Yes           | N/A          | N/A          |
-| Service Level selection               | N/A            | N/A            | N/A           | Yes          | Yes          |
-| Host IO Limit                         | N/A            | N/A            | N/A           | Yes          | N/A          |
-| Tiering Policy                        | N/A            | N/A            | N/A           | Yes          | N/A          |
-| NFS Host IO size                      | N/A            | N/A            | N/A           | Yes          | N/A          |
-| Snapshot Retention duration           | N/A            | N/A            | N/A           | Yes          | N/A          |
-| **Additional Features**               |                |                |               |              |              |
-| Auto RDM (vSphere)                    | N/A            | N/A            | N/A           | Yes (over FC)| N/A          |
-| **Internet Protocol**                 |                |                |               |              |              |
-| IPv4                                  | Yes            | Yes            | Yes           | Yes          | Yes          |
+| Features      | PowerStore       | PowerScale       | PowerFlex          | PowerMax         | Unity XT         |
+|---------------|:----------------:|:----------------:|:------------------:|:----------------:|:----------------:|
+| <div style="text-align: left"> Fibre Channel | yes              | N/A              | N/A                | yes              | yes              |
+| <div style="text-align: left"> iSCSI         | yes              | N/A              | N/A                | yes              | yes              |
+| <div style="text-align: left"> NVMeTCP       | yes              | N/A              | N/A                | yes              | N/A              |
+| <div style="text-align: left"> NVMeFC        | yes              | N/A              | N/A                | N/A              | N/A              |
+| <div style="text-align: left"> NFS           | yes              | yes              | yes                | yes - SDNAS only (not eNAS) | yes              |
+| <div style="text-align: left"> Other         | N/A              | N/A              | ScaleIO protocol   | N/A              | N/A              |
+| <div style="text-align: left"> Supported FS  | ext3 / ext4 / xfs / NFS | NFS       | ext4 / xfs / NFS   | ext4 / xfs / NFS | ext4 / xfs / NFS |
+| <div style="text-align: left"> Thin / Thick provisioning | Thin             | N/A              | Thin               | Thin             | Thin/Thick       |
+| <div style="text-align: left"> Platform-specific configurable settings | iSCSI CHAP | Access Zone<br>NFS version (3 or 4);Configurable Export IPs | - | Service Level selection<br>iSCSI CHAP | Host IO Limit<br>Tiering Policy<br>NFS Host IO size<br>Snapshot Retention duration |
+| <div style="text-align: left"> Auto RDM(vSphere)  | N/A              | N/A              | N/A                | Yes(over FC)     | N/A              |
+| <div style="text-align: left"> Internet Protocol| IPv4             | IPv4             | IPv4               | IPv4             | IPv4             |
 {{</table>}}
 
 > **Note:** Please note Dual-Stack or IPv6 is not supported.
@@ -99,7 +78,7 @@ With Container Storage Modules (CSM) utilizing CSI, you can perform various stor
 
 
 
-### Dell Storage Details
+### Storage Details
 {{< cardcontainer >}} 
 
     {{< customcard  link="./powerstore"  imageNumber="3" title="PowerStore"  >}}
