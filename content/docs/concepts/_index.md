@@ -11,9 +11,7 @@ weight: 3
 
       {{< customcard  link="./csi"  title="Container Storage Modules with CSI" imageNumber="6" >}} 
       
-      {{< customcard  link="./cosidriver" title="COSI Driver" imageNumber="6" >}} 
-
-      {{< customcard  link="./csidriver" title="Driver" imageNumber="6">}}
+      {{< customcard  link="./cosidriver" title="Container Storage Modules with COSI" imageNumber="6" >}} 
 
       {{< customcard  link="./authorization" title="Authorization"  imageNumber="6">}}  
       

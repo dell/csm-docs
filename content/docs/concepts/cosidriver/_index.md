@@ -1,16 +1,22 @@
 ---
-title: "COSI Driver"
-linkTitle: "COSI Driver"
-description: About Dell Technologies (Dell) COSI Driver 
+title: "CContainer Storage Modules with COSI"
+linkTitle: "CContainer Storage Modules with COSI"
+description: Optimizing Kubernetes Storage with Container Storage Modules - COSI 
 no_list: true 
 weight: 3
 ---
+
+{{< accordion id="One" title="Overview and Core Principles" markdown="true">}} 
+
+The Container Object Storage Interface (COSI) is a Kubernetes-native standard designed to manage object storage in a way similar to how the Container Storage Interface (CSI) manages block and file storage.
 
 The COSI Driver by Dell connects a COSI-enabled Container Orchestrator with Dell Storage Arrays. It is a Kubernetes plug-in that provides object storage using Dell storage systems.
 
 Dell COSI Driver is a multi-backend driver, meaning that it can connect to multiple Object Storage Platform (OSP) Instances and provide access to them using the same COSI interface.
 
-## Features and capabilities
+{{< /accordion >}} 
+
+{{< accordion id="Two" title="Features Summary" markdown="true">}} 
 
 ### Supported Container Orchestrator Platforms
 
@@ -34,7 +40,7 @@ Dell COSI Driver is a multi-backend driver, meaning that it can connect to multi
 |  <div style="text-align: left"> Bucket Access Revoking |     Yes     |
 {{</table>}}
 
-## Backend Storage Details
+## Storage Protocols
 
 {{<table "table table-striped table-bordered table-sm">}}
 | Protocol   | ObjectScale |
@@ -44,7 +50,7 @@ Dell COSI Driver is a multi-backend driver, meaning that it can connect to multi
 |  <div style="text-align: left"> Azure Blob |     N/A     |
 {{</table>}}
 
-## Supported Storage Platforms
+## Dell Storage Platforms
 
 {{<table "table table-striped table-bordered table-sm">}}
 | Storage Platform | Versions |
@@ -58,3 +64,5 @@ Dell COSI Driver is a multi-backend driver, meaning that it can connect to multi
 
 1. Create Bucket &rarr; Delete Bucket
 1. Create Bucket &rarr; Grant Access &rarr; Revoke Access &rarr; Delete Bucket
+
+{{< /accordion >}} 
