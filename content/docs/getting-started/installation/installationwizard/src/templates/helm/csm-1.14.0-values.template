@@ -295,10 +295,10 @@ csi-vxflexos:
       enabled: $SDC_ENABLED
       sdcSFTPRepo:
         enabled: $SDC_SFTP_REPO_ENABLED
-        sdcSFTPRepoAddress: $SDC_SFTP_REPO_ADDRESS
-        sdcSFTPRepoUser: $SDC_SFTP_REPO_USER
-        sdcSFTPRepoPrivateSecret: $SDC_SFTP_REPO_PRIVATE_SECRET
-        sdcSFTPRepoPublicSecret: $SDC_SFTP_REPO_PUBLIC_SECRET 
+        sdcSFTPRepoAddress: "$SDC_SFTP_REPO_ADDRESS"
+        sdcSFTPRepoUser: "$SDC_SFTP_REPO_USER"
+        sdcSFTPRepoPrivateSecret: "$SDC_SFTP_REPO_PRIVATE_SECRET"
+        sdcSFTPRepoPublicSecret: "$SDC_SFTP_REPO_PUBLIC_SECRET" 
     renameSDC:
       enabled: $RENAME_SDC_ENABLED
       sdcPrefix: $SDC_PREFIX
