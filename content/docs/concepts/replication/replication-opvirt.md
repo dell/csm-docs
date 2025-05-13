@@ -45,7 +45,7 @@ replication for Persistent Volumes (PVs) created via virtualized workloads
   binary:
 
   ```
-  ./virtctl console repl-vm -n kubevirttest
+  ./virtctl console <vm-name> -n <namespace>
   ```
 
 - Write data to Persistent Volume (PV):
