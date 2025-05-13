@@ -2,9 +2,10 @@
 title: "PowerScale"
 linkTitle: "PowerScale"
 no_list: true
-description: Power Scale Installation
+description: PowerScale Installation
 weight: 4
 ---
+<hr>
 
 {{< cardcontainer >}}
 

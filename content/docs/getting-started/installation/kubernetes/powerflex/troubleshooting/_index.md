@@ -4,6 +4,7 @@ linktitle: Troubleshooting
 description: >
 weight: 5
 ---
+<hr>
 
 {{< accordion id="One" title="Operator" markdown="true" >}}  
 {{<include file="content/docs/getting-started/installation/troubleshooting/csmoperator/_index.md">}} 

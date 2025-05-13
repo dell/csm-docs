@@ -5,8 +5,7 @@ no_list: true
 description: Powermax Installation
 weight: 2
 --- 
-
-<br>
+<hr>
 
 PowerMax is a high-performance, enterprise-class storage solution designed to meet the demanding needs of modern data centers. It is renowned for its exceptional speed, scalability, and reliability, making it ideal for mission-critical applications and workloads.
 

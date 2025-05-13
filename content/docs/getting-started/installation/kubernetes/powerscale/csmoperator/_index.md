@@ -1,16 +1,16 @@
 ---
-title: "Installation Guide"
+title: "Operator Installation Guide"
 linktitle: "Operator"
 no_list: true
 description: CSM Operator Installation
 weight: 2
 ---
-1. Set up a Kubernetes cluster following the official documentation.
-2. Complete the base installation.
-3. Proceed with module installation.
-## Operator Installation
-To deploy the Operator, follow the instructions available [here](../../../operator/operatorinstallation_kubernetes.md).
+<hr>
 
+1. Set up a Kubernetes cluster following the official documentation.
+2. Deploy CSM Operator using instructions available [here](../../../operator/operatorinstallation_kubernetes.md).
+3. Complete the base installation.
+3. Proceed with module installation.
 
 <br>
 

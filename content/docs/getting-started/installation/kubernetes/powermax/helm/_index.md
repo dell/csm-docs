@@ -1,20 +1,21 @@
 ---
-title: "Installation Guide"
+title: "Helm Installation Guide"
 linkTitle: "Helm"
 no_list: true
 description: Helm Installation
 weight: 3
 ---
-
+<hr>
 
 1. Set up a Kubernetes cluster following the official documentation.
 2. Proceed to the [Prerequisite](../prerequisite/_index.md).
-3. Complete the base installation.
-4. Proceed with module installation.
+3. Install Helm 3.x
+4. Complete the base installation.
+5. Proceed with module installation.
 
-### Install Helm 3
+### Install Helm 3.x
 
-Install Helm 3 on the master node before you install CSI Driver for PowerMax.
+Install Helm 3.x on the master node before you install CSI Driver for PowerMax.
 
 **Steps**
 

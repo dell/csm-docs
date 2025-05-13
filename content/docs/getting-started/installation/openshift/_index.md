@@ -5,7 +5,7 @@ no_list: true
 description: OpenShift Installation
 weight: 2
 --- 
-
+<hr>
 {{< cardcontainer >}} 
 
     {{< customcard path="content/docs/getting-started/installation/openshift/powerstore" link="./powerstore"  imageNumber="3" title="PowerStore"  >}}

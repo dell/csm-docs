@@ -2,9 +2,9 @@
 title: "Prerequisite"
 linkTitle: "Prerequisite"
 weight: 1
-Description: >
-
+Description: Unity Prerequisite
 ---  
+<hr>
 
 Before you install CSI Driver for Unity XT, verify the requirements that are mentioned in this topic are installed and configured.
 

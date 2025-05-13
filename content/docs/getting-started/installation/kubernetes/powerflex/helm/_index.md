@@ -1,11 +1,14 @@
 ---
-title: "Installation Guide"
+title: "Helm Installation Guide"
 linkTitle: "Helm"
 no_list: true
 description: Helm Installation
 weight: 3
 ---
+<hr>
+
 1. Set up a Kubernetes cluster following the official documentation.
+2. Install Helm 3.x
 3. Complete the base installation.
 4. Proceed with module installation.
 ### Install Helm 3.x
