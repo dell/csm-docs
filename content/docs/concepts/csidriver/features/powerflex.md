@@ -1110,11 +1110,16 @@ Enable the SFTP repository settings by enabling the SDC SFTP Repo and configurin
  *NOTE:*
 - Exposing SFTP settings to automatically pull scini.ko modules is only available for SDC 3.6.5 and 4.5.4
 - Ensure that sdcrepo-private-secret and sdcrepo-public-secret are created from the secrets file. 
-- Ensure that private key is generated via `ssh-keygen` and public key is pulled from known hosts after logging in to server via private key. 
+```
+kubectl create secret generic sdcsftprepo-private-secret -n vxflexos --from-file=user_private_rsa_key=sftp-secret-private.yaml
+kubectl create secret generic sdcsftprepo-public-secret -n vxflexos --from-file=repo_public_rsa_key=sftp-secret-public.yaml
+
+```
+- Private key of SFTP server should be obtained and public key should be pulled from known hosts after logging in to server via private key. 
 - The secrets should have permissions set to 600 to ensure security and proper access control. Setting permissions to 600 ensures that only the owner has read and write access, preventing unauthorized users from accessing or modifying the secrets.
 - After creating the private SFTP server,
   scini.tar should be located in the folder structure with the format of RHEL version as the username followed by sdc kernel version. For example the format should be `RHEL9/4.5.4000.111/5.14.0-503.40.1.el9_5.x86_64/scini.tar`.
-  SSH Configuration on the Server should be enablued for public key authentication and public key should be added to authorized keys. For example, in /etc/ssh/sshd_config the following config should exist
+  SSH Configuration on the Server should be enabled for public key authentication and public key should be added to authorized keys. For example, in /etc/ssh/sshd_config the following config should exist
     ```ssh 
         PubkeyAuthentication yes
         AuthorizedKeysFile .ssh/authorized_keys
