@@ -541,7 +541,7 @@ allowVolumeExpansion: true
 volumeBindingMode: WaitForFirstConsumer
 ```
 
-Here we specify two storage classes: one of them uses the first array and `ext4` filesystem, and the other uses the second array and `xfs` filesystem.
+Here we specify three storage classes: first one of them uses the first array and `ext4` filesystem, and the second one  uses the second array and `xfs` filesystem and the third uses an nfs filesystem for multi-NAS support.
 
 > ℹ️ **NOTE:** : For PowerStore storage platform, users can specify one or more NAS servers in the storage class, separated by commas.
 
