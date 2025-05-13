@@ -6,13 +6,41 @@ no_list: true
 weight: 3
 ---
 
+<hr> 
+<style> 
+h2{
+  font-weight:600;
+}
+h3{
+  font-weight:500;
+} 
+.mycontent{
+margin-bottom:20px;
+}
+</style>
+
 {{< accordion id="One" title="Overview and Core Principles" markdown="true">}} 
+🧰 Dell COSI Driver
+The Container Object Storage Interface (COSI) is a Kubernetes-native standard for managing object storage, similar to how the Container Storage Interface (CSI) manages block and file storage.
 
-The Container Object Storage Interface (COSI) is a Kubernetes-native standard designed to manage object storage in a way similar to how the Container Storage Interface (CSI) manages block and file storage.
+The Dell COSI Driver is a Kubernetes plug-in that integrates COSI-enabled container orchestrators with Dell storage arrays. It enables seamless provisioning and access to object storage using Dell’s enterprise storage platforms.
 
-The COSI Driver by Dell connects a COSI-enabled Container Orchestrator with Dell Storage Arrays. It is a Kubernetes plug-in that provides object storage using Dell storage systems.
+🔄 Multi-Backend Support
+The Dell COSI Driver supports multiple Object Storage Platform (OSP) instances, allowing users to connect and manage several backends through a single, unified COSI interface.
 
-Dell COSI Driver is a multi-backend driver, meaning that it can connect to multiple Object Storage Platform (OSP) Instances and provide access to them using the same COSI interface.
+## 📐 COSI Architecture
+
+The diagram below illustrates the architecture of the Container Object Storage Interface (COSI) in Kubernetes:
+
+<img src="./cosi_arc.png" alt="COSI Architecture"></img>
+
+### Components
+
+- **Kubernetes API Server**: Handles bucket provisioning and access requests.
+- **COSI Controller Manager**: Manages the lifecycle of buckets and access objects.
+- **COSI Sidecar**: Translates Kubernetes API calls into gRPC requests.
+- **COSI Driver**: Vendor-specific implementation that communicates with the object storage backend.
+- **Object Storage Backend**: The actual storage system (e.g., Dell ObjectScale, AWS S3).
 
 {{< /accordion >}} 
 
