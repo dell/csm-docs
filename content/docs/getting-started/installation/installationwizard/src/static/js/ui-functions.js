@@ -90,8 +90,24 @@ function onArrayChange() {
 		onReplicationChange(replicationNote);
 		validateInput(validateForm, CONSTANTS);
 		onRenameSDCChange(driver, CONSTANTS);
+		onSDCSFTPRepoChange(driver, CONSTANTS);
 		onPowermaxSecretChange(powermaxCredNote);
 	});
+}
+function onSDCSFTPRepoChange(driverName, CONSTANTS_PARAM) {
+	if ($("#enable-sdc-sftp-repo").prop('checked') === true) {
+		if (driverName === CONSTANTS_PARAM.POWERFLEX){
+			$(".sdc-sftp-repo-user").show();
+			$(".sdc-sftp-repo-address").show();
+			$(".sdc-sftp-repo-private-secret").show();
+			$(".sdc-sftp-repo-public-secret").show();
+		}
+	} else {
+			$(".sdc-sftp-repo-user").hide();
+			$(".sdc-sftp-repo-address").hide();
+			$(".sdc-sftp-repo-private-secret").hide();
+			$(".sdc-sftp-repo-public-secret").hide();
+	}
 }
 
 function onAuthorizationChange(authorizationNoteValue) {
@@ -390,6 +406,11 @@ function displayModules(installationType, driverName, CONSTANTS_PARAM) {
 	$(".replication-helm-arrayid").hide();
 	$(".replication-helm-unisphere").hide();
 	$(".enable-sdc").hide();
+	$(".enable-sdc-sftp-repo").hide();
+	$(".sdc-sftp-repo-user").hide();
+	$(".sdc-sftp-repo-address").hide();
+	$(".sdc-sftp-repo-private-secret").hide();
+	$(".sdc-sftp-repo-public-secret").hide();
 	$(".rename-sdc-feature").hide();
 	$(".approve-sdc").hide();
 	$(".nfs-feature").hide();
@@ -504,6 +525,7 @@ function displayModules(installationType, driverName, CONSTANTS_PARAM) {
 			$("div#snap-prefix").hide();
 			$(".storage-capacity").show();
 			$(".enable-sdc").show();
+			$(".enable-sdc-sftp-repo").show();
 			$(".rename-sdc-feature").show();
 			$(".approve-sdc").show();
 			if (document.getElementById("csm-version").value === "1.8.0") {
@@ -633,6 +655,7 @@ if (typeof exports !== 'undefined') {
 		onNodeSelectorChange,
 		onCopyButtonClickHandler,
 		onRenameSDCChange,
+		onSDCSFTPRepoChange,
 		resetImageRepository,
 		resetMaxVolumesPerNode,
 		resetControllerCount,
