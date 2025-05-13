@@ -28,7 +28,7 @@ linkTitle: "Resiliency"
     spec:
       driver:
         csiDriverType: "{{Var}}"
-        configVersion: v1.14.0
+        configVersion: {{< version-docs key="PFlex-latestVersion" >}}
       modules:
       - name: resiliency
         enabled: true
@@ -127,7 +127,7 @@ linkTitle: "Resiliency"
     spec:
       driver:
         csiDriverType: "{{Var}}"
-        configVersion: v2.14.0
+        configVersion: {{< version-docs key="PFlex-latestVersion" >}}
       modules:
       - name: resiliency
         enabled: false

@@ -7,15 +7,15 @@ weight: 1
 {{<table "table table-striped table-bordered table-sm">}}
 | Component | Image Version |
 | - | - |
-|<div style="text-align:left"> PowerFlex | v2.14.0 |
-|<div style="text-align:left"> PowerStore | v2.14.0 |
-|<div style="text-align:left"> PowerMax | v2.14.0 |
-|<div style="text-align:left"> PowerScale | v2.14.0 |
-|<div style="text-align:left"> Unity XT | v2.14.0 |
-|<div style="text-align:left"> Authorization v1.x | v1.14.0 |
-|<div style="text-align:left"> Authorization v2.x | v2.2.0 |
-|<div style="text-align:left"> Observability | v1.12.0 |
-|<div style="text-align:left"> Replication | v1.12.0 |
-|<div style="text-align:left"> Resiliency | v1.13.0 |
-| Application Mobility | v1.4.0 |
+|<div style="text-align:left"> PowerFlex | {{< version-docs key="PFlex_latestVersion" >}} |
+|<div style="text-align:left"> PowerStore | {{< version-docs key="PStore_latestVersion" >}} |
+|<div style="text-align:left"> PowerMax | {{< version-docs key="PMax_latestVersion" >}} |
+|<div style="text-align:left"> PowerScale | {{< version-docs key="PScale_latestVersion" >}} |
+|<div style="text-align:left"> Unity XT | {{< version-docs key="PUnity_latestVersion" >}} |
+|<div style="text-align:left"> Authorization v1.x | {{< version-docs key="Authv1" >}} |
+|<div style="text-align:left"> Authorization v2.x |{{< version-docs key="Authv2" >}} |
+|<div style="text-align:left"> Observability | {{< version-docs key="Observability" >}} |
+|<div style="text-align:left"> Replication |{{< version-docs key="Replication" >}} |
+|<div style="text-align:left"> Resiliency | {{< version-docs key="Resiliency" >}} |
+| Application Mobility |{{< version-docs key="application-mobility" >}} |
 {{</table>}}
