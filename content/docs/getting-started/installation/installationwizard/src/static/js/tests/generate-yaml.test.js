@@ -203,7 +203,7 @@ describe("GIVEN setValues function", () => {
 			sdcEnabled: false,
 			sdcSFTPRepoEnabled: false,
 			sdcSFTPRepoAddress: "",
-			sdcSFTPRepoAddress: "",
+			sdcSFTPRepoUser: "",
 			sdcSFTPRepoPrivateSecret: "",
 			sdcSFTPRepoPublicSecret: "",
 			renameSDC: false,
@@ -912,10 +912,10 @@ describe("GIVEN createYamlString function", () => {
           enabled: true
           sdcSFTPRepo:
             enabled: false
-            sdcSFTPRepoAddress: ""
-            sdcSFTPRepoUser: ""
-            sdcSFTPRepoPrivateSecret: ""
-            sdcSFTPRepoPublicSecret: ""
+            sdcSFTPRepoAddress:
+            sdcSFTPRepoUser:
+            sdcSFTPRepoPrivateSecret:
+            sdcSFTPRepoPublicSecret:
         nodeSelector: false
         renameSDC:
           enabled: false
@@ -1527,10 +1527,10 @@ describe("GIVEN createYamlString function", () => {
           enabled: false
           sdcSFTPRepo:
             enabled: false
-            sdcSFTPRepoAddress: ""
-            sdcSFTPRepoUser: ""
-            sdcSFTPRepoPrivateSecret: ""
-            sdcSFTPRepoPublicSecret: ""
+            sdcSFTPRepoAddress:
+            sdcSFTPRepoUser:
+            sdcSFTPRepoPrivateSecret:
+            sdcSFTPRepoPublicSecret:
         nodeSelector: false
         renameSDC:
 		  enabled: false
@@ -1809,10 +1809,10 @@ describe("GIVEN createYamlString function", () => {
           enabled: false
           sdcSFTPRepo:
             enabled: false
-            sdcSFTPRepoAddress: ""
-            sdcSFTPRepoUser: ""
-            sdcSFTPRepoPrivateSecret: ""
-            sdcSFTPRepoPublicSecret: ""
+            sdcSFTPRepoAddress:
+            sdcSFTPRepoUser:
+            sdcSFTPRepoPrivateSecret:
+            sdcSFTPRepoPublicSecret:
         nodeSelector: false
         renameSDC:
 		  enabled: false
@@ -2092,10 +2092,10 @@ describe("GIVEN createYamlString function", () => {
           enabled: false
           sdcSFTPRepo:
             enabled: false
-            sdcSFTPRepoAddress: ""
-            sdcSFTPRepoUser: ""
-            sdcSFTPRepoPrivateSecret: ""
-            sdcSFTPRepoPublicSecret: ""
+            sdcSFTPRepoAddress:
+            sdcSFTPRepoUser:
+            sdcSFTPRepoPrivateSecret:
+            sdcSFTPRepoPublicSecret:
         nodeSelector: false
         renameSDC:
 		  enabled: false
@@ -2377,10 +2377,10 @@ describe("GIVEN createYamlString function", () => {
           enabled: false
           sdcSFTPRepo:
             enabled: false
-            sdcSFTPRepoAddress: ""
-            sdcSFTPRepoUser: ""
-            sdcSFTPRepoPrivateSecret: ""
-            sdcSFTPRepoPublicSecret: ""
+            sdcSFTPRepoAddress:
+            sdcSFTPRepoUser:
+            sdcSFTPRepoPrivateSecret:
+            sdcSFTPRepoPublicSecret:
         nodeSelector: false
         renameSDC:
 		  enabled: false
@@ -2661,10 +2661,10 @@ describe("GIVEN createYamlString function", () => {
           enabled: false
           sdcSFTPRepo:
             enabled: false
-            sdcSFTPRepoAddress: ""
-            sdcSFTPRepoUser: ""
-            sdcSFTPRepoPrivateSecret: ""
-            sdcSFTPRepoPublicSecret: ""
+            sdcSFTPRepoAddress:
+            sdcSFTPRepoUser:
+            sdcSFTPRepoPrivateSecret:
+            sdcSFTPRepoPublicSecret:
         nodeSelector: false
         renameSDC:
 		  enabled: false
