@@ -4,7 +4,7 @@ linktitle: Troubleshooting
 weight: 8
 description: >
    Troubleshooting guide 
-toc_hide: true
+toc_hide: false
 ---
 
 <div class="tdleft">
