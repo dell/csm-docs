@@ -181,6 +181,8 @@ dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      
 |<div style="text-align: left"> ***Controller parameters*** |
 |<div style="text-align: left"> X_CSI_POWERSTORE_EXTERNAL_ACCESS |<div style="text-align: left"> allows specifying additional entries for hostAccess of NFS volumes. Both single IP address and subnet are valid entries | No | empty |
 |<div style="text-align: left"> X_CSI_NFS_ACLS |<div style="text-align: left"> Defines permissions - POSIX mode bits or NFSv4 ACLs, to be set on NFS target mount directory. | No | "0777" |
+|<div style="text-align: left"> X_CSI_MULTI_NAS_FAILURE_THRESHOLD | <div style="text-align: left"> Number of consecutive FS creation failures after which a NAS is put into cooldown. Please refer [Multi NAS Support](../../../../../concepts/csidriver/features/powerstore#multi-nas-support) for more details. | No | "5" |
+|<div style="text-align: left"> X_CSI_MULTI_NAS_COOLDOWN_PERIOD | <div style="text-align: left"> Duration for which a NAS remains in cooldown once the threshold is reached. Please refer [Multi NAS Support](../../../../../concepts/csidriver/features/powerstore#multi-nas-support) for more details. | No | "5m" |
 |<div style="text-align: left"> ***Node parameters*** |
 |<div style="text-align: left"> X_CSI_POWERSTORE_ENABLE_CHAP |<div style="text-align: left"> Set to true if you want to enable iSCSI CHAP feature | No | false |
 {{< /collapse >}}

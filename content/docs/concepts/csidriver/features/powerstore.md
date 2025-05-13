@@ -525,9 +525,25 @@ volumeBindingMode: WaitForFirstConsumer
 parameters:
   arrayID: "GlobalUniqueID"
   csi.storage.k8s.io/fstype: "xfs"
+---
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: "powerstore-nfs"
+provisioner: "csi-powerstore.dellemc.com"
+parameters:
+  arrayID: "Unique"
+  csi.storage.k8s.io/fstype: "nfs"
+  nasName: "nas-server1, nas-server2, nas-server3"
+  allowRoot: "false"
+reclaimPolicy: Delete
+allowVolumeExpansion: true
+volumeBindingMode: WaitForFirstConsumer
 ```
 
-Here we specify two storage classes: one of them uses the first array and `ext4` filesystem, and the other uses the second array and `xfs` filesystem.
+Here we specify three storage classes: first one of them uses the first array and `ext4` filesystem, and the second one  uses the second array and `xfs` filesystem and the third uses an nfs filesystem for multi-NAS support.
+
+> ℹ️ **NOTE:** : For PowerStore storage platform, users can specify one or more NAS servers in the storage class, separated by commas.
 
 Then we need to apply storage classes to Kubernetes using `kubectl`:
 ```bash
@@ -789,3 +805,22 @@ reclaimPolicy: Delete
 volumeBindingMode: WaitForFirstConsumer
 
 ```
+
+## Multi NAS Support
+The CSI PowerStore driver version 2.14.0 and later introduces multi-NAS support. This feature allows users to specify multiple NAS servers within a single storage class. By supporting multiple NAS servers in a single storage class, customers can create 2000 filesystems per PowerStore system across multiple NAS servers configured in SC. Previously, multiple storage classes were needed to support this configuration.
+
+The following is a sample storage class file that supports multiple NAS servers for provisioning volumes:
+```yaml
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: powerstore-multi-nas
+provisioner: csi-powerstore.dell.com
+parameters:
+  nasServers: "nas-server-1,nas-server-2,nas-server-3"
+  fsType: "nfs"
+reclaimPolicy: Delete
+volumeBindingMode: Immediate
+
+```
+In this example, different NAS servers (e.g., nas-server-1, nas-server-2) can be specified for provisioning volumes. This configuration ensures effective scaling when creating volumes.

@@ -347,6 +347,8 @@ describe("GIVEN setDefaultValues function", () => {
 			<input type="number" id="poll-rate">
 			<input type="number" id="array-threshold">
 			<input type="text" id="driver-pod-label">
+			<input type="text" id="multi-nas-failure-threshold" value="0">
+			<input type="text" id="multi-nas-cooldown-period" value="0m">
 		`;
 
 		const testCSMMap = new Map([
@@ -360,7 +362,9 @@ describe("GIVEN setDefaultValues function", () => {
 			["taint", "node-role.kubernetes.io/control-plane"],
 			["pollRate", "60"],
 			["arrayThreshold", "3"],
-			["driverPodLabel", "dell-storage"]
+			["driverPodLabel", "dell-storage"],
+			["multiNasFailureThreshold", "5"],
+			["multiNasCooldownPeriod", "5m"]
 		]);
 
 		setDefaultValues("csmVersion=1.7.0\r\nimageRepository=dellemc\r\ncontrollerCount=2\r\ncertSecretCount=1", testCSMMap);
@@ -376,6 +380,8 @@ describe("GIVEN setDefaultValues function", () => {
 		expect(document.getElementById("poll-rate").value).toEqual("60");
 		expect(document.getElementById("array-threshold").value).toEqual("3");
 		expect(document.getElementById("driver-pod-label").value).toEqual("dell-storage");
+		expect(document.getElementById("multi-nas-failure-threshold").value).toEqual("5");
+		expect(document.getElementById("multi-nas-cooldown-period").value).toEqual("5m");
 
 	});
 });
