@@ -107,6 +107,15 @@ The diagram below illustrates the architecture of the Container Object Storage I
 
 {{< /accordion >}} 
 
+### Storage Details
+{{< cardcontainer >}}
+
+      {{< customcard path="content/docs/concepts/cosidriver" link="./objectscale" title="ObjectScale"  imageNumber="6">}}
+
+{{< /cardcontainer >}} 
+
+This section provides detailed instructions on how to install, upgrade, and uninstall and troubleshoot
+.
 {{< cardcontainer >}}
 
       {{< customcard path="content/docs/concepts/cosidriver/installation" link="./installation"  title="Installation" imageNumber="6" >}} 
@@ -114,8 +123,6 @@ The diagram below illustrates the architecture of the Container Object Storage I
       {{< customcard path="content/docs/concepts/cosidriver/upgrade" link="./upgrade" title="Upgrade" imageNumber="6">}}
 
       {{< customcard path="content/docs/concepts/cosidriver/uninstallation" link="./uninstallation" title="Uninstallation"  imageNumber="6">}}
-
-      {{< customcard path="content/docs/concepts/cosidriver" link="./objectscale" title="ObjectScale"  imageNumber="6">}}
 
       {{< customcard path="content/docs/concepts/cosidriver/troubleshooting" link="./troubleshooting" title="Troubleshooting"  imageNumber="6">}}
 
