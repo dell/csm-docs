@@ -5,7 +5,7 @@ no_list: true
 description: Offline Installation
 weight: 4
 ---
-
+<hr>
 {{<include  file="content/docs/getting-started/installation/offline/dependencies.md" >}}
 <br>
 {{< accordion id="One" title="Operator" markdown="true" >}} 

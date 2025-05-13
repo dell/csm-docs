@@ -3,6 +3,8 @@ title: "Component Version"
 linkTitle: "Component Version"
 weight: 1 
 --- 
+<hr>
+
 
 {{<table "table table-striped table-bordered table-sm">}}
 | Component | Image Version |

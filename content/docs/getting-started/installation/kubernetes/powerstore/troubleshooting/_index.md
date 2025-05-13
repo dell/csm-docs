@@ -4,7 +4,7 @@ linktitle: Troubleshooting
 description: >
 weight: 5
 ---
-
+<hr>
 
 
 {{< accordion id="One" title="Operator" markdown="true" >}}  

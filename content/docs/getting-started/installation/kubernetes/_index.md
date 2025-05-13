@@ -5,6 +5,8 @@ no_list: true
 description: Kubernetes Installation
 weight: 1
 ---
+<hr>
+
 Kubernetes provides a powerful platform for managing containerized applications, and it extends its capabilities to storage management through the use of Container Storage Interface (CSI) drivers. 
 
 

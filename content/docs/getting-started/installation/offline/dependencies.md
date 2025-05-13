@@ -5,9 +5,6 @@ no_list: true
 description: Offline Dependencies
 weight: 4
 --- 
-{{% pageinfo color="primary" %}}
-{{< message text="3" >}}
-{{% /pageinfo %}}
 The `csi-offline-bundle.sh` script creates a package for offline installation of Dell CSI Storage Providers using Helm or the Dell CSM Operator. 
 
 ## Dependencies

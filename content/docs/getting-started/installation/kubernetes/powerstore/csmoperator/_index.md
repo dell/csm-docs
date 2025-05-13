@@ -1,20 +1,18 @@
 ---
-title: Installation Guide
+title: Operator Installation Guide
 linkTitle: Operator
 weight: 2
 description: >
   Installing the CSI Driver for PowerStore via CSM Operator
 no_list: true
 ---
+<hr>
 
 1. Set up a Kubernetes cluster following the official documentation.
 2. Proceed to the [Prerequisite](../prerequisite/_index.md).
-3. Complete the base installation.
-4. Proceed with module installation.
-
-## Operator Installation
-To deploy the Operator, follow the instructions available [here](../../../operator/operatorinstallation_kubernetes.md).
-
+3. Deploy CSM Operator using instructions available [here](../../../operator/operatorinstallation_kubernetes.md).
+4. Complete the base installation.
+5. Proceed with module installation.
 
 
 <br>
