@@ -430,7 +430,7 @@ kubectl get nodes --show-labels
 
 Here's an example of how the labels look after describing the nodes:
 csi-powerstore.dellemc.com/127.0.0.1-nfs=true
-csi-powerstore.dellemc.com/127.0.0.1-nfs=true
+csi-powerstore.dellemc.com/127.0.0.1-iscsi=true
 csi-powerstore.dellemc.com/127.0.0.1-nvmetcp=true
 
 >Notice that `volumeBindingMode:` is set to `WaitForFirstConsumer` this is required for the topology feature to work.
