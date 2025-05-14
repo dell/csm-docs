@@ -53,28 +53,29 @@ To deploy the Operator, follow the instructions available [here](../../../operat
       kubectl create secret generic powermax-creds --namespace powermax --from-file=config=secret.yaml
     ```
 
-3. **Create Powermax Array Configmap:**  
-  **Note:** `powermax-array-config` is deprecated and remains for backward compatibility only. You can skip creating it and instead add values for X_CSI_MANAGED_ARRAYS, X_CSI_TRANSPORT_PROTOCOL, and X_CSI_POWERMAX_PORTGROUPS in the sample files.
+3. **Create Powermax Array Configmap:**
 
-  Create a configmap using the sample file [here](https://github.com/dell/csi-powermax/blob/main/samples/configmap/powermax-array-config.yaml). Fill in the appropriate values for driver configuration.
-   ```yaml
-      # To create this configmap use: kubectl create -f powermax-array-config.yaml
-      apiVersion: v1
-      kind: ConfigMap
-      metadata:
-        name: powermax-array-config
-        namespace: powermax
-      data:
-        powermax-array-config.yaml: |
-          # List of comma-separated port groups (ISCSI only). Example: PortGroup1, portGroup2 Required for iSCSI only
-          X_CSI_POWERMAX_PORTGROUPS: ""
-          # Choose which transport protocol to use (ISCSI, FC, NVMETCP, auto) defaults to auto if nothing is specified
-          X_CSI_TRANSPORT_PROTOCOL: ""
-          # IP address of the Unisphere for PowerMax (Required), Defaults to https://0.0.0.0:8443
-          X_CSI_POWERMAX_ENDPOINT: "https://10.0.0.0:8443" 
-          # List of comma-separated array ID(s) which will be managed by the driver (Required)
-          X_CSI_MANAGED_ARRAYS: "000000000000,000000000000,"
-   ```
+   **Note:** `powermax-array-config` is deprecated and remains for backward compatibility only. You can skip creating it and instead add values for X_CSI_MANAGED_ARRAYS, X_CSI_TRANSPORT_PROTOCOL, and X_CSI_POWERMAX_PORTGROUPS in the sample files.
+
+   Create a configmap using the sample file [here](https://github.com/dell/csi-powermax/blob/main/samples/configmap/powermax-array-config.yaml). Fill in the appropriate values for driver configuration.
+    ```yaml
+       # To create this configmap use: kubectl create -f powermax-array-config.yaml
+       apiVersion: v1
+       kind: ConfigMap
+       metadata:
+         name: powermax-array-config
+         namespace: powermax
+       data:
+         powermax-array-config.yaml: |
+           # List of comma-separated port groups (ISCSI only). Example: PortGroup1, portGroup2 Required for iSCSI only
+           X_CSI_POWERMAX_PORTGROUPS: ""
+           # Choose which transport protocol to use (ISCSI, FC, NVMETCP, auto) defaults to auto if nothing is specified
+           X_CSI_TRANSPORT_PROTOCOL: ""
+           # IP address of the Unisphere for PowerMax (Required), Defaults to https://0.0.0.0:8443
+           X_CSI_POWERMAX_ENDPOINT: "https://10.0.0.0:8443" 
+           # List of comma-separated array ID(s) which will be managed by the driver (Required)
+           X_CSI_MANAGED_ARRAYS: "000000000000,000000000000,"
+    ```
 
 4. **Install Driver**
 
@@ -86,23 +87,23 @@ To deploy the Operator, follow the instructions available [here](../../../operat
 
     b. **Detailed Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powermax_{{< version-docs key="Det_sample_operator_pmax" >}}.yaml) for detailed settings or use [Wizard](./installationwizard#generate-manifest-file) to generate the sample file. 
 
-> NOTE:
-> [Replication module](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powermax_{{< version-docs key="sample_sc_pmax" >}}.yaml#L283) must be enabled to use the Metro volume
+    > NOTE:
+    > [Replication module](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powermax_{{< version-docs key="sample_sc_pmax" >}}.yaml#L283) must be enabled to use the Metro volume
 
-Example:
-```yaml
-    - name: replication
-      enabled: true
-```
->  [Target clusterID](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powermax_{{< version-docs key="sample_sc_pflex" >}}.yaml#L316) should be set as self
+    Example:
+    ```yaml
+        - name: replication
+          enabled: true
+    ```
+    >  [Target clusterID](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powermax_{{< version-docs key="sample_sc_pflex" >}}.yaml#L316) should be set as self
 
-Example:
-```yaml
-    - name: "TARGET_CLUSTERS_IDS"
-      value: "self"
-```
+    Example:
+    ```yaml
+        - name: "TARGET_CLUSTERS_IDS"
+          value: "self"
+    ```
 
-  - Users should configure the parameters in CR. The following table lists the primary configurable parameters of the PowerMax driver and their default values:
+   - Users should configure the parameters in CR. The following table lists the primary configurable parameters of the PowerMax driver and their default values:
 
 <ul>   
 {{< collapse id="1" title="Parameters">}}
@@ -156,6 +157,7 @@ Example:
         kubectl get csm/powermax -n powermax -o yaml
         ```
     * Check the status of the CR to verify if the driver installation is in the `Succeeded` state. If the status is not `Succeeded`, see the [Troubleshooting guide](../troubleshooting/#my-dell-csi-driver-install-failed-how-do-i-fix-it) for more information.
+
 6. Refer [Volume Snapshot Class](https://github.com/dell/csi-powermax/tree/main/samples/volumesnapshotclass) and [Storage Class](https://github.com/dell/csi-powermax/tree/main/samples/storageclass) for the sample files. 
    
 ## Other features to enable
