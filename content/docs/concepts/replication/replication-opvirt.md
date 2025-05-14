@@ -6,7 +6,7 @@ description: >
   Support of Metro Replication with OpenShift Virtualization for CSI drivers.
 ---
 
-Starting in v1.12.0, the Replication module supports the metro volume
+Starting in CSM 1.14, the Replication module supports the metro volume
 replication for Persistent Volumes (PVs) created via virtualized workloads
 (VMs).
 
