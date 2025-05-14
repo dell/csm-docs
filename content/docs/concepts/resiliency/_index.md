@@ -142,6 +142,10 @@ default     virt-launcher-vm-alpine-xyz                          1/1     Running
 ```
 If the virt-launcher pod appears in this list, the VM is successfully protected by CSM for Resiliency.
 
+> Note:
+#### Single Replica Deployment of kubevirt-ipam-controller-manager and Its Recovery Impact
+The kubevirt-ipam-controller-manager deployment currently operates with a single replica in the openshift-cnv namespace. In the event of a node failure, particularly if the controller pod is running on the affected node, recovery can be delayed. Since the virt-launcher pods rely on the controller, they cannot be recreated until the controller pod is rescheduled to a healthy node, which can significantly increase the overall recovery time.
+
 If Container Storage Modules for Resiliency detects a problem with a pod caused by a node or other failure that it can initiate remediation for, it will add an event to that pod's events:
  ```bash
  kubectl get events -n pmtu1
