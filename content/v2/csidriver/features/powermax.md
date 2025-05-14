@@ -401,6 +401,8 @@ After a successful installation of the driver, if a node Pod is running successf
 `csi-powermax.dellemc.com/\<array-id\>.iscsi`
 * If the worker node has NVMeTCP connectivity to the PowerMax array -
 `csi-powermax.dellemc.com/\<array-id\>.nvmetcp`
+* nfs labels are added by default -
+`csi-powermax.dellemc.com/\<array-id\>.nfs`
 
 The values for all these keys are always set to the name of the provisioner which is usually `csi-powermax.dellemc.com`.
 
@@ -439,6 +441,15 @@ In the above example, if you remove the entry for the key `csi-powermax.dellemc.
 on any worker node with access to the PowerMax array `000000000001` irrespective of the transport protocol
 
 > A set of sample storage class definitions to enable topology-aware volume provisioning has been provided in the `csi-powermax/samples/storageclass` folder 
+
+**Note** : 
+  The NFS labels are automatically added by the driver, assuming that NFS dependencies are configured by default. These dependencies come with the default Linux OS package from the node and the array supports NFS. For other protocols (iSCSI, FC, NVMe/TCP), all necessary connectivity checks between the initiator and target are performed before labels are added.
+  This label should not impact any other functionality, even if NFS is not configured on the array or node.
+
+You can check what labels your nodes contain by running
+```bash
+kubectl get nodes --show-labels
+```
 
 For additional information on how to use _Topology aware Volume Provisioning_, see the [Kubernetes Topology documentation](https://kubernetes-csi.github.io/docs/topology.html).
 
