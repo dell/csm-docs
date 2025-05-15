@@ -419,10 +419,19 @@ allowedTopologies:
 
 This example matches all nodes where the driver has a connection to PowerStore with an IP of `127.0.0.1` via FibreChannel. Similar examples can be found in mentioned folder for NFS, iSCSI and NVMe.
 
+**Note** : 
+  The NFS labels are automatically added by the driver, assuming that NFS dependencies are configured by default. These dependencies come with the default Linux OS package from the node and the array supports NFS. For other protocols (iSCSI, FC, NVMe), all necessary connectivity checks between the initiator and target are performed before labels are added.
+  This label should not impact any other functionality, even if NFS is not configured on the array or node.
+
 You can check what labels your nodes contain by running
 ```bash
 kubectl get nodes --show-labels
 ```
+
+Here's an example of how the labels look after describing the nodes:
+csi-powerstore.dellemc.com/127.0.0.1-nfs=true
+csi-powerstore.dellemc.com/127.0.0.1-iscsi=true
+csi-powerstore.dellemc.com/127.0.0.1-nvmetcp=true
 
 >Notice that `volumeBindingMode:` is set to `WaitForFirstConsumer` this is required for the topology feature to work.
 

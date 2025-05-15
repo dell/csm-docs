@@ -493,7 +493,16 @@ allowedTopologies:
 
 This example matches all nodes where the driver has a connection to the Unity XT array with array ID mentioned via Fiber Channel. Similarly, by replacing `fc` with `iscsi` in the key checks for iSCSI connectivity with the node.
 
+**Note** : 
+  The NFS labels are automatically added by the driver, assuming that NFS dependencies are configured by default. These dependencies come with the default Linux OS package from the node and the array supports NFS. For other protocols (iSCSI, FC), all necessary connectivity checks between the initiator and target are performed before labels are added.
+  This label should not impact any other functionality, even if NFS is not configured on the array or node.
+
 You can check what labels your nodes contain by running `kubectl get nodes --show-labels` command.
+
+Here's an example of how the labels look after describing the nodes:
+csi-unity.dellemc.com/<array_id>-nfs=true
+csi-unity.dellemc.com/<array_id>-fc=true
+csi-unity.dellemc.com/<array_id>-iscsi=true
 
 >Note that `volumeBindingMode:` is set to `WaitForFirstConsumer` this is required for the topology feature to work properly.
 
