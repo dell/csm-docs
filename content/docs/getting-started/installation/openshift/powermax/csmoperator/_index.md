@@ -150,21 +150,6 @@ dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      
     b. **Detailed Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powermax_{{< version-docs key="Det_sample_operator_pmax" >}}.yaml) for detailed settings or use [Wizard](./installationwizard#generate-manifest-file) to generate the sample file. 
     .
 
-   > NOTE:
-   > [Replication module](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powermax_{{< version-docs key="sample_sc_pmax" >}}.yaml#L283) must be enabled to use the Metro volume
-
-   Example:
-   ```yaml
-       - name: replication
-         enabled: true
-   ```
-   >  [Target clusterID](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powermax_{{< version-docs key="sample_sc_pmax" >}}.yaml#L316) should be set as self
-
-   Example:
-   ```yaml
-       - name: "TARGET_CLUSTERS_IDS"
-         value: "self"
-   ```
 
    - Users should configure the parameters in CR. The following table lists the primary configurable parameters of the PowerMax driver and their default values:
 
