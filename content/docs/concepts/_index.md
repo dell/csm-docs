@@ -9,25 +9,13 @@ weight: 3
 
 {{< cardcontainer >}}
 
-      {{< customcard  link="./cosidriver"  title="COSI Driver" imageNumber="6" >}} 
-
-      {{< customcard        link="./csidriver"       title="Driver"      imageNumber="6">}}
-
-      {{< customcard  link="./authorization" title="Authorization"  imageNumber="6">}}  
-      
-      {{< customcard  link="./observability" title="Observability"  imageNumber="6">}}   
-
-      {{< customcard  link="./replication" title="Replication"  imageNumber="6">}}   
-
-      {{< customcard  link="./resiliency" title="Resiliency"  imageNumber="6">}} 
-
-      {{< customcard  link="./snapshots" title="Snapshots"  imageNumber="6">}}  
-
-       
-      {{< customcard  link="./applicationmobility" title="Application Mobility"  imageNumber="6">}}  
-
-
-
-
+      {{< customcard  link="./csidriver"   title="Container Storage Modules with CSI"  imageNumber="6">}}
+      {{< customcard  link="./cosidriver"  title="Container Storage Modules with COSI" imageNumber="6" >}}
+      {{< customcard  link="./authorization" title="Authorization"  imageNumber="6">}}    
+      {{< customcard  link="./observability" title="Observability"  imageNumber="6">}}  
+      {{< customcard  link="./replication" title="Replication"  imageNumber="6">}}
+      {{< customcard  link="./resiliency" title="Resiliency"  imageNumber="6">}}
+      {{< customcard  link="./snapshots" title="Snapshots"  imageNumber="6">}}       
+      {{< customcard  link="./applicationmobility" title="Application Mobility"  imageNumber="6">}}
 
 {{< /cardcontainer >}}
