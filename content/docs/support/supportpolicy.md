@@ -1,16 +1,14 @@
 ---
-title: "Support Lifecycle"
-linkTitle: "Support Lifecycle"
-weight: 30
+title: "Support Policy"
+linkTitle: "Support Policy"
+weight: 1 
+no_list: true 
 Description: >
-  Container Storage Modules (CSM) Support Lifecycle
 ---
-
 <hr>
 
 The following information is designed to help customers and partners effectively plan, deploy, and maintain timely upgrades for the latest functionality and fixes.
 
-**Policies:**
 - Each release is fully supported for 12 months. Refer to the matrix for General Availability (GA) and End-of-Life (EOL) dates of supported versions.
 - If running a version older than 12 months, upgrade to a newer version or submit cert-csi test results to Dell support.
 
