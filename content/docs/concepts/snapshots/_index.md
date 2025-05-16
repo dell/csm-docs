@@ -1,7 +1,7 @@
 ---
 title: "Snapshots"
 linkTitle: "Snapshots"
-weight: 8
+weight: 6
 no_list: true
 Description: >
   Snapshot module of Dell CSI drivers

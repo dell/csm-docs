@@ -1,6 +1,7 @@
 ---
 title: Community Qualified Configurations
 linktitle: Community Qualified Configurations
+weight: 6
 description: Community Qualified Configurations
 ---
 
