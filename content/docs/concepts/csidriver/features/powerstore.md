@@ -799,7 +799,7 @@ This setup offers better scalability and flexibility than traditional NFS system
 
 **Prerequisites** </br>
 
-- NFS Version Compatibility: Use NFS v4.1 or v4.2 for optimal performance and full feature support.</br>
+- NFS Version Compatibility: NFS v4.2 is required for optimal performance and full feature support.</br>
 - System Configuration: Ensure that `nfs-server` and `nfs-mountd` services are active on all participating worker nodes.</br>
 - Driver Requirements: Shared NFS is supported starting from driver version v2.14. Current integration is available with iSCSI-based backends, with plans to expand support to additional storage protocols in future releases.
 
