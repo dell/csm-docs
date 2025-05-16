@@ -115,7 +115,11 @@ dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      
     ```
 
 3. **Create Powermax Array Configmap:**
-  Create a configmap using the sample file [here](https://github.com/dell/csi-powermax/blob/main/samples/configmap/powermax-array-config.yaml). Fill in the appropriate values for driver configuration.
+
+   **Note:** `powermax-array-config` is deprecated and remains for backward compatibility only. You can skip creating it and instead add values for X_CSI_MANAGED_ARRAYS, X_CSI_TRANSPORT_PROTOCOL, and X_CSI_POWERMAX_PORTGROUPS in the sample files.
+
+   Create a configmap using the sample file [here](https://github.com/dell/csi-powermax/blob/main/samples/configmap/powermax-array-config.yaml). Fill in the appropriate values for driver configuration.
+
    ```yaml
       # To create this configmap use: kubectl create -f powermax-array-config.yaml
       apiVersion: v1
@@ -143,10 +147,11 @@ dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      
 
     [OR]
 
-    b. **Detailed Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powermax_{{< version-docs key="Det_sample_operator_pmax" >}}.yaml) for detailed settings.
+    b. **Detailed Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powermax_{{< version-docs key="Det_sample_operator_pmax" >}}.yaml) for detailed settings or use [Wizard](./installationwizard#generate-manifest-file) to generate the sample file. 
+    .
 
 
-  - Users should configure the parameters in CR. The following table lists the primary configurable parameters of the PowerMax driver and their default values:
+   - Users should configure the parameters in CR. The following table lists the primary configurable parameters of the PowerMax driver and their default values:
 
 <ul>
 {{< collapse id="1" title="Parameters">}}
