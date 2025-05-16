@@ -1,7 +1,7 @@
 ---
-title: "COSI Driver"
-linkTitle: "COSI Driver"
-description: About Dell Technologies (Dell) COSI Driver 
+title: "Container Storage Modules with COSI"
+linkTitle: "Container Storage Modules with COSI"
+description: About Dell Technologies (Dell) Container Storage Modules with COSI
 no_list: true 
 weight: 10
 ---

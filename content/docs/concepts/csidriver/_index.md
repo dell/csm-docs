@@ -1,7 +1,7 @@
 ---
-title: "CSI Drivers"
-linkTitle: "CSI Drivers"
-description: About Dell Technologies (Dell) CSI Drivers
+title: "Container Storage Modules with CSI"
+linkTitle: "Container Storage Modules with CSI"
+description: About Dell Technologies (Dell) Container Storage Modules with CSI
 no_list: true
 weight: 3
 ---
