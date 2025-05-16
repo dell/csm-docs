@@ -287,6 +287,18 @@ allowedTopologies:
     - csi-vxflexos.dellemc.com
 ```
 
+**Note** : 
+  The NFS labels are automatically added by the driver for PowerFlex version greater than or equal to 4.0, assuming that NFS dependencies are configured by default. These dependencies come with the default Linux OS package from the node and the array supports NFS.
+  This label should not impact any other functionality, even if NFS is not configured on the array or node.
+
+You can check what labels your nodes contain by running
+```bash
+kubectl get nodes --show-labels
+```
+
+Here's an example of how the labels look after describing the nodes:
+csi-vxflexos.dellemc.com/<system-id>-nfs=true
+
 For additional information, see the [Kubernetes Topology documentation](https://kubernetes-csi.github.io/docs/topology.html).
 
 > *NOTE*: In the manifest file of the Dell CSM operator, topology can be enabled by specifying the system name or _systemid_ in the allowed topologies field. _Volumebindingmode_ is also set to _WaitForFirstConsumer_ by default.

@@ -12,10 +12,10 @@ weight: 1
 | Platform | Version | OS Dependencies |
 | -------- | :-----: | :-------------: |
 | PowerStore  |  3.5, 3.6, 4.0, 4.1 | iscsi-initiator-utils<br>multipathd<br>nvme-cli<br>nfs-utils |
-| PowerScale  | OneFS 9.4, 9.5.0.x (x >= 5), 9.7, 9.8, 9.9, 9.10 | nfs-utils |
+| PowerScale  | OneFS 9.4, 9.5.0.x (x >= 5), 9.7, 9.8, 9.9, 9.10, 9.11 | nfs-utils |
 | PowerFlex   | 3.6.x, 4.5.x, 4.6.x | [SDC](https://www.dell.com/support/home/en-us/product-support/product/scaleio/drivers) |
 | PowerMax  |Unisphere 10.0,10.1,10.2 | iscsi-initiator-utils<br>multipathd or powerpath<br>nvme-cli<br>nfs-utils |
-| Unity XT    | 5.2.x, 5.3.x, 5.4.x | iscsi-initiator-utils<br>multipathd<br>nfs-utils |
+| Unity XT    | 5.3.x, 5.4.x, 5.5 | iscsi-initiator-utils<br>multipathd<br>nfs-utils |
 {{</table>}}
 
 **Notes:**
@@ -47,9 +47,10 @@ weight: 1
 | 4.17 - 4.18   | <div style="text-align: left">  Observability        </div>   | Yes       | Yes      | No         | Yes        | No    |
 | 4.17 - 4.18    | <div style="text-align: left"> Authorization - v2.x  </div>   | Yes       | Yes      | No         | Yes        | No    |
 | 4.17 - 4.18    | <div style="text-align: left"> Resiliency            </div>   | Yes       | Yes      | Yes         | Yes        | No    |
+| 4.18    | <div style="text-align: left"> Replication (Metro)	</div>   | No       | Yes      | Yes         | No        | No    |
 {{</table>}}
 
-> Note: Replication is not supported.
+> Note: Replication with Sync/Async modes is not supported.
 
 ## Tested Host Operating Systems
 
