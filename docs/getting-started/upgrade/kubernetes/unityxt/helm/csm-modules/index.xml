@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>CSM Module on </title>
+    <link>https://dell.github.io/csm-docs/docs/getting-started/upgrade/kubernetes/unityxt/helm/csm-modules/</link>
+    <description>Recent content in CSM Module on </description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <atom:link href="https://dell.github.io/csm-docs/docs/getting-started/upgrade/kubernetes/unityxt/helm/csm-modules/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Resiliency</title>
+      <link>https://dell.github.io/csm-docs/docs/getting-started/upgrade/kubernetes/unityxt/helm/csm-modules/resiliency/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://dell.github.io/csm-docs/docs/getting-started/upgrade/kubernetes/unityxt/helm/csm-modules/resiliency/</guid>
+      <description>&lt;p&gt;&#xA;&#xA;&lt;div class=&#34;pageinfo pageinfo-primary&#34;&gt;&#xA;&lt;p&gt;Starting with CSM 1.12, all deployments will need to use images from &lt;a href=&#34;https://quay.io/organization/dell&#34;&gt;quay.io&lt;/a&gt;. Please note that from CSM 1.14 (May 2025), upgrading with helm will fail if it attempts to use images from &lt;a href=&#34;https://hub.docker.com/r/dellemc/&#34;&gt;Docker Hub&lt;/a&gt;.&lt;/p&gt;&#xA;&#xA;&lt;/div&gt;&#xA;&#xA;CSM for Resiliency can be upgraded as part of the Dell CSI driver upgrade process. The drivers can be upgraded either by a &lt;em&gt;helm chart&lt;/em&gt; or by the &lt;em&gt;Dell CSM Operator&lt;/em&gt;. Currently, only &lt;em&gt;Helm chart&lt;/em&gt; upgrade is supported for CSM for Resiliency.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>CSM Module on </title>
+    <link>https://dell.github.io/csm-docs/docs/getting-started/installation/kubernetes/powerstore/csmoperator/csm-modules/</link>
+    <description>Recent content in CSM Module on </description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <atom:link href="https://dell.github.io/csm-docs/docs/getting-started/installation/kubernetes/powerstore/csmoperator/csm-modules/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Resiliency</title>
+      <link>https://dell.github.io/csm-docs/docs/getting-started/installation/kubernetes/powerstore/csmoperator/csm-modules/resiliency/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://dell.github.io/csm-docs/docs/getting-started/installation/kubernetes/powerstore/csmoperator/csm-modules/resiliency/</guid>
+      <description>&lt;div class=&#34;pageinfo pageinfo-primary&#34;&gt;&#xA;&lt;p&gt;Docker Hub images are discontinued. All deployments will be using images from &lt;a href=&#34;https://quay.io/organization/dell&#34;&gt;quay.io&lt;/a&gt;.&lt;/p&gt;&#xA;&#xA;&lt;/div&gt;&#xA;&#xA;&lt;p&gt;The Container Storage Modules Operator installs the Resiliency module for supported Dell CSI Drivers, deploying the Resiliency sidecar.&lt;/p&gt;&#xA;&lt;h2 id=&#34;prerequisite&#34;&gt;&#xA;Prerequisite &lt;a class=&#34;header-link&#34;  href=&#34;#prerequisite&#34; style=&#34; display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; &#34; onmouseover=&#34;this.style.opacity=1;&#34; onmouseout=&#34;this.style.opacity=0;&#34;&gt;&#xA;            &lt;svg fill=&#34;currentColor&#34; height=&#34;24&#34; viewBox=&#34;0 0 24 24&#34; width=&#34;24&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34;&gt;&#xA;                &lt;path d=&#34;M0 0h24v24H0z&#34; fill=&#34;none&#34;/&gt;&#xA;                &lt;path d=&#34;M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z&#34;/&gt;&#xA;            &lt;/svg&gt;&#xA;        &lt;/a&gt;&lt;/h2&gt;&lt;p&gt;The Resiliency module only acts on pods with a specific label. At startup, it logs the label key and value. Apply this label to the StatefulSet you want monitored&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
