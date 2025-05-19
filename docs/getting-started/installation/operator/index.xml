@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title></title>
+    <link>https://dell.github.io/csm-docs/docs/getting-started/installation/operator/</link>
+    <description>Recent content on </description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <atom:link href="https://dell.github.io/csm-docs/docs/getting-started/installation/operator/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Operator</title>
+      <link>https://dell.github.io/csm-docs/docs/getting-started/installation/operator/operatorinstallation_kubernetes/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://dell.github.io/csm-docs/docs/getting-started/installation/operator/operatorinstallation_kubernetes/</guid>
+      <description>&lt;p&gt;&#xA;&#xA;&lt;div class=&#34;pageinfo pageinfo-primary&#34;&gt;&#xA;&lt;p&gt;Docker Hub images are discontinued. All deployments will be using images from &lt;a href=&#34;https://quay.io/organization/dell&#34;&gt;quay.io&lt;/a&gt;.&lt;/p&gt;&#xA;&#xA;&lt;/div&gt;&#xA;&#xA;The Container Storage Modules Operator is a Kubernetes Operator, which can be used to install and manage the CSI Drivers and CSM Modules provided by Dell for various storage platforms. This operator is available as a community operator for upstream Kubernetes and can be deployed using OperatorHub.io. The operator can be installed using OLM (Operator Lifecycle Manager) or manually.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Operator</title>
+      <link>https://dell.github.io/csm-docs/docs/getting-started/installation/operator/operatorinstallation_openshift/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://dell.github.io/csm-docs/docs/getting-started/installation/operator/operatorinstallation_openshift/</guid>
+      <description>&lt;p&gt;&#xA;&#xA;&lt;div class=&#34;pageinfo pageinfo-primary&#34;&gt;&#xA;&lt;p&gt;Docker Hub images are discontinued. All deployments will be using images from &lt;a href=&#34;https://quay.io/organization/dell&#34;&gt;quay.io&lt;/a&gt;.&lt;/p&gt;&#xA;&#xA;&lt;/div&gt;&#xA;&#xA;The Dell Container Storage Modules Operator is a Kubernetes Operator, which can be used to install and manage the CSI Drivers and CSM Modules provided by Dell for various storage platforms. This operator is available as a community operator for upstream Kubernetes and can be deployed using OperatorHub.io. The operator can be installed using OLM (Operator Lifecycle Manager) or manually.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

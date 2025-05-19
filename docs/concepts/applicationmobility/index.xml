@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Application Mobility on </title>
+    <link>https://dell.github.io/csm-docs/docs/concepts/applicationmobility/</link>
+    <description>Recent content in Application Mobility on </description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <atom:link href="https://dell.github.io/csm-docs/docs/concepts/applicationmobility/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Use Cases</title>
+      <link>https://dell.github.io/csm-docs/docs/concepts/applicationmobility/use_cases/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://dell.github.io/csm-docs/docs/concepts/applicationmobility/use_cases/</guid>
+      <description>&lt;p&gt;After Application Mobility is installed, the &lt;a href=&#34;../../../tooling/cli&#34;&gt;dellctl CLI&lt;/a&gt; can be used to register clusters and manage backups and restores of applications. These examples also provide references for using the Application Mobility Custom Resource Definitions (CRDs) to define Custom Resources (CRs) as an alternative to using the &lt;code&gt;dellctl&lt;/code&gt; CLI.&lt;/p&gt;&#xA;&lt;h2 id=&#34;backup-and-restore-an-application&#34;&gt;&#xA;Backup and Restore an Application &lt;a class=&#34;header-link&#34;  href=&#34;#backup-and-restore-an-application&#34; style=&#34; display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; &#34; onmouseover=&#34;this.style.opacity=1;&#34; onmouseout=&#34;this.style.opacity=0;&#34;&gt;&#xA;            &lt;svg fill=&#34;currentColor&#34; height=&#34;24&#34; viewBox=&#34;0 0 24 24&#34; width=&#34;24&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34;&gt;&#xA;                &lt;path d=&#34;M0 0h24v24H0z&#34; fill=&#34;none&#34;/&gt;&#xA;                &lt;path d=&#34;M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z&#34;/&gt;&#xA;            &lt;/svg&gt;&#xA;        &lt;/a&gt;&lt;/h2&gt;&lt;p&gt;This example details the steps when an application in namespace &lt;code&gt;demo1&lt;/code&gt; is being backed up and then later restored to either the same cluster or another cluster. In this sample, both Application Mobility and Velero are installed in the &lt;code&gt;application-mobility&lt;/code&gt; namespace.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
