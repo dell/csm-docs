@@ -155,6 +155,59 @@ volume stats value under node should be set to true.
    - Mount options are specified in storageclass yaml under _mountOptions_.
    - *WARNING*: Before utilizing mount options, you must first be fully aware of the potential impact and understand your environment's requirements for the specified option.
 
+## Certificate validation for PowerStore Gateway REST API calls
+
+This topic provides details about setting up the certificate for the CSI Driver for Dell PowerStore.
+
+*Before you begin*
+
+As part of the CSI driver installation, the CSI driver requires a secret with the name powerstore-certs-0 to powerstore-certs-n based on the ".Values.certSecretCount" parameter present in the namespace powerstore.
+
+This secret contains the X509 certificates of the CA which signed PowerStore gateway SSL certificate in PEM format.
+
+The CSI driver exposes an install parameter in secret.yaml, `skipCertificateValidation`, which determines if the driver performs client-side verification of the gateway certificates.
+
+`skipCertificateValidation` parameter is set to true by default, and the driver does not verify the gateway certificates.
+
+If `skipCertificateValidation` is set to false, then the secret powerstore-certs-n must contain the CA certificate for the array gateway.
+
+If this secret is an empty secret, then the validation of the certificate fails, and the driver fails to start.
+
+If the gateway certificate is self-signed or if you are using an embedded gateway, then perform the following steps.
+
+1. To fetch the certificate, run the following command.
+
+   ```bash
+   openssl s_client -showcerts -connect <Gateway IP:Port> </dev/null 2>/dev/null | openssl x509 -outform PEM > ca_cert_0.pem
+   ```
+
+   Example:
+   ```b
+   openssl s_client -showcerts -connect 1.1.1.1:443 </dev/null 2>/dev/null | openssl x509 -outform PEM > ca_cert_0.pem
+   ```
+
+2. Run the following command to create the cert secret with index '0':
+
+   ```bash
+   kubectl create secret generic powerstore-certs-0 --from-file=cert-0=ca_cert_0.pem -n powerstore
+   ```
+
+   Use the following command to replace the secret:
+
+   ```bash
+   kubectl create secret generic powerstore-certs-0 -n powerstore --from-file=cert-0=ca_cert_0.pem -o yaml --dry-run | kubectl replace -f -
+   ```
+
+3. Repeat step 1 and 2 to create multiple cert secrets with incremental index (example: powerstore-certs-1, powerstore-certs-2, etc)
+
+
+*Notes:*
+
+- "powerstore" is the namespace for Helm-based installation but namespace can be user-defined in operator-based installation.
+- User can add multiple certificates in the same secret. The certificate file should not exceed more than 1Mb due to Kubernetes secret size limitation.
+- Whenever certSecretCount parameter changes in `myvalues.yaml` user needs to uninstall and install the driver.
+- Updating powerstore-certs-n secrets is a manual process, unlike powerstore-config. Users have to re-install the driver in case of updating/adding the SSL certificates or changing the certSecretCount parameter.
+
 ## Storage Classes
 
 The CSI driver for PowerStore version 1.3 and later, `dell-csi-helm-installer` does not create any storage classes as part of the driver installation. A wide set of annotated storage class manifests have been provided in the `samples/storageclass` folder. Use these samples to create new storage classes to provision storage.
