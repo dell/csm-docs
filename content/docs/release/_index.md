@@ -26,7 +26,6 @@ Description: >
 ### New Features/Changes
 
 - [#1614 - [FEATURE]: CSM PowerMax - Mount credentials secret to the reverse-proxy](https://github.com/dell/csm/issues/1614)
-- [#1742 - [FEATURE]: Shared NFS for File Scalability](https://github.com/dell/csm/issues/1742)
 - [#1743 - [FEATURE]: Add support for PowerScale 9.11](https://github.com/dell/csm/issues/1743)
 - [#1744 - [FEATURE]: Add support for Unity 5.5](https://github.com/dell/csm/issues/1744)
 - [#1748 - [FEATURE]: CSM PowerMax - Multi-Availability Zone (AZ) support with multiple storage systems - dedicated storage systems in each AZ](https://github.com/dell/csm/issues/1748)
