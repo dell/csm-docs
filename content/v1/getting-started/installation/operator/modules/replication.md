@@ -117,14 +117,12 @@ To configure Replication perform the following steps:
    ```
 
 5. On both source and target clusters, configure any driver-specific
-   [prerequisites](../../../csmoperator) for deploying the driver via Dell CSM
+   {{< hide class="default" inline="true" >}}[prerequisites](../../../kubernetes) {{< /hide >}} {{< hide class="driver" hide="true" inline="true" >}}[prerequisites](../../../csmoperator) {{< /hide >}}for deploying the driver via Dell CSM
    Operator.
 
 6. Install the CSI driver for your chosen storage platform on the source cluster
    according to the instructions for
-   [installing the drivers using CSM Operator](../../../csmoperator).
-   Ensure that replication is set to `enabled` in the custom resource YAML used
-   to install the driver, under the `components` field.
+   {{< hide class="default" inline="true" >}}[installing the drivers using CSM Operator](../../../kubernetes) {{< /hide >}}  {{< hide class="driver" hide="true" inline="true" >}} [installing the drivers using CSM Operator](../../../csmoperator){{< /hide >}} .
 
    > **_NOTE:_** As of CSM release 1.14, all Custom Resource Definitions that
    > are required for Replication functionality are installed by the CSM
