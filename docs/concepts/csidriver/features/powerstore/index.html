@@ -17,12 +17,12 @@
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="docs">
-    <meta property="article:modified_time" content="2025-05-16T14:33:02-04:00">
+    <meta property="article:modified_time" content="2025-05-20T12:58:37-03:00">
 
   <meta itemprop="name" content="PowerStore">
   <meta itemprop="description" content="Code features for PowerStore Driver">
-  <meta itemprop="dateModified" content="2025-05-16T14:33:02-04:00">
-  <meta itemprop="wordCount" content="4764">
+  <meta itemprop="dateModified" content="2025-05-20T12:58:37-03:00">
+  <meta itemprop="wordCount" content="4491">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="PowerStore">
   <meta name="twitter:description" content="Code features for PowerStore Driver">
@@ -204,7 +204,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.3aebfbb478c0be602d699a93da5b1842.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.6715f4bea3dd3627dd322a023cfcdfd7.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -4736,38 +4736,6 @@ Metro support <a class="header-link"  href="#metro-support" style=" display: inl
             </svg>
         </a></h2><p>The CSI PowerStore driver supports the provisioning of Metro volumes. The process and details of how to provision and use Metro volumes can be found <a href="../../../replication/high-availability">here</a>.</p>
 <p>Please note that the Metro feature does not require the deployment of the replicator sidecar or the replication controller.</p>
-<h2 id="shared-nfs">
-Shared NFS <a class="header-link"  href="#shared-nfs" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
-            <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-                <path d="M0 0h24v24H0z" fill="none"/>
-                <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
-            </svg>
-        </a></h2><p>Shared NFS leverages native NFS capabilities to provide scalable <strong>ReadWriteMany (RWX)</strong> volumes, allowing multiple containers or nodes to access the same persistent storage simultaneously. This enables efficient shared storage in Kubernetes environments and follows a standard client-server architecture, where a node can act as both an NFS server and a client. </br>
-This setup offers better scalability and flexibility than traditional NFS systems that rely on a single server. It also simplifies storage by allowing remote file access as if the files were local, reducing the need for data duplication </br></p>
-<p><strong>Prerequisites</strong> </br></p>
-<ul>
-<li>NFS Version Compatibility: NFS v4.2 is required for optimal performance and full feature support.</br></li>
-<li>System Configuration: Ensure that <code>nfs-server</code> and <code>nfs-mountd</code> services are active on all participating worker nodes.</br></li>
-<li>Driver Requirements: Shared NFS is supported starting from driver version v2.14. Current integration is available with iSCSI-based backends, with plans to expand support to additional storage protocols in future releases.</li>
-</ul>
-<p>To enable Shared NFS, define the <code>shared-nfs: RWX</code> parameter in the parameters section of your StorageClass. This activates <code>RWX</code> support using the NFS backend. Refer to the example below for implementation details</p>
-<p><strong>Example StorageClass  for Shared NFS</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">apiVersion</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">storage.k8s.io/v1</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">kind</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">StorageClass</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">metadata</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">powerstore-sharednfs-sc</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">provisioner</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">csi-powerstore.dellemc.com</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">reclaimPolicy</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">Delete</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">parameters</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">arrayID</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">&lt;array-id&gt;</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">shared-nfs</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">RWX</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">csi.storage.k8s.io/fstype</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">ext4</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">provisioner</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">csi-powerstore.dellemc.com</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">reclaimPolicy</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">Delete</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">volumeBindingMode</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">WaitForFirstConsumer</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span></code></pre></div><blockquote>
-<p><strong>Note:</strong> </br>
-Performance and scalability are influenced by factors such as the array appliance, network latency, and available Kubernetes resources. The current solution is designed to handle a significant number of volumes, with ongoing enhancements planned to support even greater demands in future releases. All testing is conducted using industry-standard methodologies, including stress testing frameworks such as the OpenShift LUN stress test.</p></blockquote>
 <h2 id="multi-nas-support">
 Multi NAS Support <a class="header-link"  href="#multi-nas-support" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
             <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
