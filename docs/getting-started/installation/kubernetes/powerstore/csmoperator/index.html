@@ -20,8 +20,8 @@
 
   <meta itemprop="name" content="Installation Guide">
   <meta itemprop="description" content="Installing the CSI Driver for PowerStore via CSM Operator">
-  <meta itemprop="dateModified" content="2025-05-13T16:43:56+05:30">
-  <meta itemprop="wordCount" content="816">
+  <meta itemprop="dateModified" content="2025-05-20T12:58:37-03:00">
+  <meta itemprop="wordCount" content="755">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Installation Guide">
   <meta name="twitter:description" content="Installing the CSI Driver for PowerStore via CSM Operator">
@@ -203,7 +203,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.3aebfbb478c0be602d699a93da5b1842.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.6715f4bea3dd3627dd322a023cfcdfd7.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -4139,24 +4139,6 @@ skipCertificateValidation flag is currently unsupported. Please refrain from cha
           <td><div style="text-align: left"> Enable/Disable gopowerstore library-level debugging.</td>
           <td>No</td>
           <td>false</td>
-      </tr>
-      <tr>
-          <td><div style="text-align: left"> X_CSI_NFS_CLIENT_PORT</td>
-          <td><div style="text-align: left"> Define the port for the Shared NFS Client.</td>
-          <td>No</td>
-          <td>&ldquo;2050&rdquo;</td>
-      </tr>
-      <tr>
-          <td><div style="text-align: left"> X_CSI_NFS_SERVER_PORT</td>
-          <td><div style="text-align: left"> Define the port for the Shared NFS Server. This value should match what port the nfs-server is configured on. See /etc/nfs.conf on the worker nodes for port information.</td>
-          <td>No</td>
-          <td>&ldquo;2049&rdquo;</td>
-      </tr>
-      <tr>
-          <td><div style="text-align: left"> X_CSI_NFS_EXPORT_DIRECTORY</td>
-          <td><div style="text-align: left"> Define the file path of the underlying cluster node where Shared NFS volumes will be mounted.</td>
-          <td>No</td>
-          <td>&ldquo;/var/lib/dell/nfs&rdquo;</td>
       </tr>
       <tr>
           <td><div style="text-align: left"> <em><strong>Controller parameters</strong></em></td>

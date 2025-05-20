@@ -20,8 +20,8 @@
 
   <meta itemprop="name" content="Installation Guide">
   <meta itemprop="description" content="Installing the CSI Driver for PowerStore via Container Storage Modules Operator">
-  <meta itemprop="dateModified" content="2025-05-13T11:11:28+05:30">
-  <meta itemprop="wordCount" content="2246">
+  <meta itemprop="dateModified" content="2025-05-20T12:58:37-03:00">
+  <meta itemprop="wordCount" content="2164">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Installation Guide">
   <meta name="twitter:description" content="Installing the CSI Driver for PowerStore via Container Storage Modules Operator">
@@ -203,7 +203,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.3aebfbb478c0be602d699a93da5b1842.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.6715f4bea3dd3627dd322a023cfcdfd7.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -4038,10 +4038,6 @@ User Role: Storage Operator</p>
 </ol>
 <br>
 <ol start="3">
-<li>(Optional) For &ldquo;Shared NFS&rdquo;, install necessary nfs-utils package and ensure nfs-server and nfs-mountd services are active and running on all nodes.</li>
-</ol>
-<br>
-<ol start="4">
 <li>
 <p>For the protocol specific prerequisite check below.
 <br></p>
@@ -4784,24 +4780,6 @@ powerstore-config    Opaque      1      3h7m
           <td><div style="text-align: left"> To set path to the file which provides a list of WWPN which should be used by the driver for FC connection on this node</td>
           <td>No</td>
           <td>&ldquo;/etc/fc-ports-filter&rdquo;</td>
-      </tr>
-      <tr>
-          <td><div style="text-align: left"> X_CSI_NFS_CLIENT_PORT</td>
-          <td><div style="text-align: left"> Define the port for the Shared NFS client.</td>
-          <td>No</td>
-          <td>&ldquo;2050&rdquo;</td>
-      </tr>
-      <tr>
-          <td><div style="text-align: left"> X_CSI_NFS_SERVER_PORT</td>
-          <td><div style="text-align: left"> Define the port for the Shared NFS server. This value must match what port the nfs-server is configured on. See /etc/nfs.conf on the worker nodes for port information.</td>
-          <td>No</td>
-          <td>&ldquo;2049&rdquo;</td>
-      </tr>
-      <tr>
-          <td><div style="text-align: left"> X_CSI_NFS_EXPORT_DIRECTORY</td>
-          <td><div style="text-align: left"> Define the file path of the underlying cluster node where Shared NFS volumes will be mounted.</td>
-          <td>No</td>
-          <td>&ldquo;/var/lib/dell/nfs&rdquo;</td>
       </tr>
       <tr>
           <td><div style="text-align: left"> <em><strong>Controller parameters</strong></em></td>
