@@ -6,35 +6,72 @@ Description: >
 toc_hide: true
 ---
 
-1. Create a user in the PowerStore Navigate in the PowerStore Manager Settings -> Users -> Add 
-   <br> 
-   <br>
-   Username: csmadmin <br>
-   User Role: Storage Operator 
 
+### CSI PowerMax Reverse Proxy
 
-2. (Optional) Create NAS server Navigate in the PowerStore Manager Storage -> Nas Servers -> Create 
+The CSI PowerMax Reverse Proxy is a component that will be installed with the CSI PowerMax driver. For more details on this feature, see the related [documentation](../../../../../concepts/csidriver/features/powermax.md#csi-powermax-reverse-proxy).
 
-<br> 
+Create a TLS secret that holds an SSL certificate and a private key. This is required by the reverse proxy server.
 
-3. For the protocol specific prerequisite check below. 
+Create the Configuration file (openssl.cnf) which includes the subjectAltName:
+
+```bash
+[ req ]
+default_bits       = 2048
+distinguished_name = req_distinguished_name
+req_extensions     = req_ext
+prompt             = no
+
+[ req_distinguished_name ]
+C  = XX
+L  = Default City
+O  = Default Company Ltd
+
+[ req_ext ]
+subjectAltName = @alt_names
+
+[ alt_names ]
+DNS.1 = "csipowermax-reverseproxy"
+IP.1 = "0.0.0.0"
+```
+Use a tool such as `openssl` to generate this secret using the example below:
+
+```bash
+openssl genrsa -out tls.key 2048
+openssl req -new -key tls.key -out tls.csr -config openssl.cnf
+openssl x509 -req -in tls.csr -signkey tls.key -out tls.crt -days 3650 -extensions req_ext -extfile openssl.cnf
+kubectl create secret -n <namespace> tls csirevproxy-tls-secret --cert=tls.crt --key=tls.key
+```
+
+1. For the protocol specific prerequisite check below. 
    <br>
 
 
    {{< tabpane text=true lang="en" >}}
+  
+  {{% tab header="NFS" lang="en" %}}
+
+  PowerMax driver supports NFS communication. Ensure that the following requirements are met before you install CSI Driver:
+
+  - Configure the NFS network. Please refer [here](https://dl.dell.com/content/manual57826791-dell-powermax-file-protocol-guide.pdf?language=en-us&ps=true) for more details.
+  - PowerMax Embedded Management guest to access Unisphere for PowerMax.
+  - Create the NAS server. Please refer [here](https://dl.dell.com/content/manual55638050-dell-powermax-file-quick-start-guide.pdf?language=en-us&ps=true) for more details.
+
+   {{% /tab %}}
+
    {{% tab header="FC" lang="en" %}}
 
-   1. Complete the zoning of each host with the PowerStore Storage Array. Please refer the <a  href="https://elabnavigator.dell.com/vault/pdf/Linux.pdf" target="_blank" style="font-weight:bold; font-size:0.9rem">Host Connectivity Guide</a> for the guidelines when setting a Fibre Channel SAN infrastructure.  
+   1. Complete the zoning of each host with the PowerMax Storage Array. Please refer the <a  href="https://elabnavigator.dell.com/vault/pdf/Linux.pdf" target="_blank" style="font-weight:bold; font-size:0.9rem">Host Connectivity Guide</a> for the guidelines when setting a Fibre Channel SAN infrastructure.  
    <br> 
 
-   2. Verify the initiators of each host are logged in to the PowerStore Storage Array. CSM will perform the Host Registration of each host with the PowerStore Array. 
+   2. Verify the initiators of each host are logged in to the PowerMax Storage Array. CSM will perform the Host Registration of each host with the PowerMax Array. 
 
    <br> 
 
    3. Multipathing software configuration 
        
        
-       a. Configure Device Mapper MPIO for PowerStore FC connectivity
+       a. Configure Device Mapper MPIO for PowerMax FC connectivity
 
        Use this command to create the machine configuration to configure the DM-MPIO service on all the worker hosts for FC  connectivity.
        ```bash 
@@ -54,7 +91,7 @@ toc_hide: true
        devices {
          device {
            vendor                   DellEMC
-           product                  PowerStore
+           product                  PowerMax
            detect_prio              "yes"
            path_selector            "service-time 0"
            path_grouping_policy     "group_by_prio"
@@ -136,9 +173,9 @@ toc_hide: true
    {{% tab header="iSCSI" lang="en" %}}
 
 
-   1. Complete the iSCSI network configuration to connect the hosts with the PowerStore Storage array. Please refer the <a  href="https://elabnavigator.dell.com/vault/pdf/Linux.pdf" target="_blank" style="font-weight:bold; font-size:0.9rem">Host Connectivity Guide</a> for the  best practices for attaching the hosts to a PowerStore storage array.  
+   1. Complete the iSCSI network configuration to connect the hosts with the PowerMax Storage array. Please refer the <a  href="https://elabnavigator.dell.com/vault/pdf/Linux.pdf" target="_blank" style="font-weight:bold; font-size:0.9rem">Host Connectivity Guide</a> for the  best practices for attaching the hosts to a PowerMax storage array.  
    <br>
-   2. Verify the initiators of each host are logged in to the PowerStore Storage Array. CSM will perform the Host Registration of each host with the PowerStore Array.  
+   2. Verify the initiators of each host are logged in to the PowerMax Storage Array. CSM will perform the Host Registration of each host with the PowerMax Array.  
    <br> 
 
    3. Enable iSCSI service 
@@ -168,6 +205,7 @@ toc_hide: true
              units:
              - name: "iscsid.service"
                enabled: true
+      EOF
        ```
    <br>
    <br>
@@ -175,7 +213,7 @@ toc_hide: true
    4. Multipathing software configuration 
        
        
-      a. Configure Device Mapper MPIO for PowerStore iSCSI connectivity 
+      a. Configure Device Mapper MPIO for PowerMax iSCSI connectivity 
 
          Use this command to create the machine configuration to configure the DM-MPIO service on all the worker hosts for iSCSI  connectivity.
 
@@ -197,7 +235,7 @@ toc_hide: true
        devices {
          device {
            vendor                   DellEMC
-           product                  PowerStore
+           product                  PowerMax
            detect_prio              "yes"
            path_selector            "service-time 0"
            path_grouping_policy     "group_by_prio"
@@ -279,12 +317,12 @@ toc_hide: true
    {{% tab header="NVMeFC" lang="en" %}}
 
 
-   1. Complete the zoning of each host with the PowerStore Storage Array. Please refer the <a  href="https://elabnavigator.dell.com/vault/pdf/Linux.pdf" target="_blank" style="font-weight:bold; font-size:0.9rem">Host Connectivity Guide</a> for the guidelines when setting a Fibre Channel SAN infrastructure. 
+   1. Complete the zoning of each host with the PowerMax Storage Array. Please refer the <a  href="https://elabnavigator.dell.com/vault/pdf/Linux.pdf" target="_blank" style="font-weight:bold; font-size:0.9rem">Host Connectivity Guide</a> for the guidelines when setting a Fibre Channel SAN infrastructure. 
     
    <br> 
    <br>
 
-   2. Verify the initiators of each host are logged in to the PowerStore Storage Array. CSM will perform the Host Registration of each host with the PowerStore Array.
+   2. Verify the initiators of each host are logged in to the PowerMax Storage Array. CSM will perform the Host Registration of each host with the PowerMax Array.
 
    <br>
    <br>
@@ -301,7 +339,7 @@ toc_hide: true
   
       ```yaml 
       cat <<EOF> 71-nvmf-iopolicy-dell.rules
-      ACTION=="add", SUBSYSTEM=="nvme-subsystem", ATTR{model}=="dellemc-powerstore",ATTR{iopolicy}="round-robin"
+      ACTION=="add", SUBSYSTEM=="nvme-subsystem", ATTR{model}=="dellemc-powermax",ATTR{iopolicy}="round-robin"
       EOF
       ``` 
       <br> 
@@ -381,12 +419,12 @@ toc_hide: true
    {{% tab header="NVMeTCP" lang="en" %}} 
 
 
-   1. Complete the NVMe network configuration to connect the hosts with the PowerStore Storage array. Please refer <a  href="https://elabnavigator.dell.com/vault/pdf/Linux.pdf" target="_blank" style="font-weight:bold; font-size:0.9rem">Host Connectivity Guide</a> for the best practices for attaching the hosts to a PowerStore storage array.
+   1. Complete the NVMe network configuration to connect the hosts with the PowerMax Storage array. Please refer <a  href="https://elabnavigator.dell.com/vault/pdf/Linux.pdf" target="_blank" style="font-weight:bold; font-size:0.9rem">Host Connectivity Guide</a> for the best practices for attaching the hosts to a PowerMax storage array.
     
    <br> 
    <br>
 
-   2. Verify the initiators of each host are logged in to the PowerStore Storage Array. CSM will perform the Host Registration of each host with the PowerStore Array.
+   2. Verify the initiators of each host are logged in to the PowerMax Storage Array. CSM will perform the Host Registration of each host with the PowerMax Array.
 
    <br>
    <br>
@@ -403,7 +441,7 @@ toc_hide: true
   
       ```yaml 
       cat <<EOF> 71-nvmf-iopolicy-dell.rules
-      ACTION=="add", SUBSYSTEM=="nvme-subsystem", ATTR{model}=="dellemc-powerstore",ATTR{iopolicy}="round-robin"
+      ACTION=="add", SUBSYSTEM=="nvme-subsystem", ATTR{model}=="dellemc-powermax",ATTR{iopolicy}="round-robin"
       EOF
       ``` 
       <br> 
@@ -477,8 +515,44 @@ toc_hide: true
               path: /etc/udev/rules.d/72-nvmf-ctrl_loss_tmo.rules
       EOF
       ```
+</br>
 
+**Cluster requirements**
+
+- All OpenShift nodes connecting to Dell storage arrays must use unique host NVMe Qualified Names (NQNs).
+
+> The OpenShift deployment process for CoreOS will set the same host NQN for all nodes. The host NQN is stored in the file /etc/nvme/hostnqn. One possible solution to ensure unique host NQNs is to add the following machine config to your OCP cluster:
+
+  ```yaml
+  cat <<EOF> 99-worker-custom-nvme-hostnqn.yaml
+  apiVersion: machineconfiguration.openshift.io/v1
+  kind: MachineConfig
+  metadata:
+    labels:
+      machineconfiguration.openshift.io/role: worker
+    name: 99-worker-custom-nvme-hostnqn
+  spec:
+    config:
+      ignition:
+        version: 3.4.0
+      systemd:
+        units:
+          - contents: |
+              [Unit]
+              Description=Custom CoreOS Generate NVMe Hostnqn
+
+              [Service]
+              Type=oneshot
+              ExecStart=/usr/bin/sh -c '/usr/sbin/nvme gen-hostnqn > /etc/nvme/hostnqn'
+              RemainAfterExit=yes
+
+              [Install]
+              WantedBy=multi-user.target
+            enabled: true
+            name: custom-coreos-generate-nvme-hostnqn.service
+  EOF
+  ```
    {{% /tab %}} 
 
 
-   {{< /tabpane >}}   
+   {{< /tabpane >}}

@@ -143,9 +143,9 @@ NVMe/TCP protocols with the CSI PowerMax driver:
 - The NVMe modules may not be available after a node reboot. Loading the modules
   at startup is recommended.
 
-> Starting with OCP 4.14 NVMe/TCP is enabled by default on RCOS nodes.
-
 **Cluster requirements**
+
+- Kubernetes nodes connecting to Dell storage arrays must use unique host NVMe Qualified Names (NQNs).
 
 - The driver requires the NVMe command-line interface (nvme-cli) to manage the
   NVMe clients and targets. The NVMe CLI tool is installed in the host using the

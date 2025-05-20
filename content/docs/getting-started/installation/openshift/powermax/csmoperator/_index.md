@@ -322,7 +322,11 @@ X_CSI_TOPOLOGY_CONTROL_ENABLED provides a way to filter topology keys on a node 
 
 {{< cardcontainer >}}
 
-    {{< customcard link1="./csm-modules/resiliency"   image="1" title="Resiliency"  >}}
+    {{< customcard link1="./csm-modules/authorizationv1-x"  image="1" title="Authorization v1.x" >}}
+    {{< customcard link1="./csm-modules/authorizationv2-0"   image="1" title="Authorization v2.0" >}}
+    {{< customcard  link1="./csm-modules/observability"   image="1" title="Observability" >}}
+    {{< customcard  link1="./csm-modules/replication"  image="1" title="Replication" >}}
+    {{< customcard link1="./csm-modules/resiliency"   image="1" title="Resiliency" >}}
 
 {{< /cardcontainer >}}
 {{< /accordion >}}  
