@@ -77,7 +77,14 @@ To deploy the Operator, follow the instructions available [here](../../../operat
         X_CSI_MANAGED_ARRAYS: "000000000000,000000000000,"
     ```
 
-4. **Install Driver**
+4. **Create the Reverse Proxy TLS Secret**
+
+    Referencing the TLS certificate and key created in the [CSI PowerMax Reverse Proxy](../prerequisite#csi-powermax-reverse-proxy) prerequisite, create the `csirevproxy-tls-secret` secret.
+    ```bash
+    oc create secret -n powermax tls csirevproxy-tls-secret --cert=tls.crt --key=tls.key
+    ```
+
+5. **Install Driver**
 
     i. **Create a CR (Custom Resource)** for PowerMax using the sample files provided
     
@@ -135,7 +142,7 @@ To deploy the Operator, follow the instructions available [here](../../../operat
     ```
 </ul> 
 
-5. **Verify the installation** as mentioned below
+6. **Verify the installation** as mentioned below
 
     - Check if ContainerStorageModule CR is created successfully using the command below:
         ```bash
@@ -143,7 +150,7 @@ To deploy the Operator, follow the instructions available [here](../../../operat
         ```
     * Check the status of the CR to verify if the driver installation is in the `Succeeded` state. If the status is not `Succeeded`, see the [Troubleshooting guide](../troubleshooting/#my-dell-csi-driver-install-failed-how-do-i-fix-it) for more information.
 
-6. Refer [Volume Snapshot Class](https://github.com/dell/csi-powermax/tree/main/samples/volumesnapshotclass) and [Storage Class](https://github.com/dell/csi-powermax/tree/main/samples/storageclass) for the sample files. 
+7. Refer [Volume Snapshot Class](https://github.com/dell/csi-powermax/tree/main/samples/volumesnapshotclass) and [Storage Class](https://github.com/dell/csi-powermax/tree/main/samples/storageclass) for the sample files. 
    
 ## Other features to enable
 ### Dynamic Logging Configuration

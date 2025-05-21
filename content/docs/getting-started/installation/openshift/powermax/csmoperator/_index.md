@@ -138,7 +138,14 @@ dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      
         X_CSI_MANAGED_ARRAYS: "000000000000,000000000000,"
     ```
 
-4. **Create a CR (Custom Resource)** for PowerMax using the sample files provided
+4. **Create the Reverse Proxy TLS Secret**
+
+    Referencing the TLS certificate and key created in the [CSI PowerMax Reverse Proxy](./#csi-powermax-reverse-proxy) prerequisite, create the `csirevproxy-tls-secret` secret.
+    ```bash
+    oc create secret -n powermax tls csirevproxy-tls-secret --cert=tls.crt --key=tls.key
+    ```
+
+5. **Create a CR (Custom Resource)** for PowerMax using the sample files provided
 
     i. **Create a CR (Custom Resource)** for PowerMax using the sample files provided
 
@@ -201,7 +208,7 @@ dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      
   Check the status of the CR to verify if the driver installation is in the `Succeeded` state. If the status is not `Succeeded`, see the [Troubleshooting guide](../troubleshooting/#my-dell-csi-driver-install-failed-how-do-i-fix-it) for more information.
 </ul>
 
-5. Refer [Volume Snapshot Class](https://github.com/dell/csi-powermax/tree/main/samples/volumesnapshotclass) and [Storage Class](https://github.com/dell/csi-powermax/tree/main/samples/storageclass) for the sample files.
+6. Refer [Volume Snapshot Class](https://github.com/dell/csi-powermax/tree/main/samples/volumesnapshotclass) and [Storage Class](https://github.com/dell/csi-powermax/tree/main/samples/storageclass) for the sample files.
 
 ## Other features to enable
 ### Dynamic Logging Configuration
