@@ -24,9 +24,9 @@ The CSI Drivers implement an interface between [CSI](https://kubernetes-csi.gith
 | <div style="text-align: left"> Volume Clone | yes        | yes        | yes       | yes for LUN<br>no for NFS | yes       |
 | <div style="text-align: left"> [Access Mode](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#access-modes) for [volumeMode: Filesystem](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#volume-mode)| RWO, RWOP<br><br>ROX, RWX **with NFS ONLY** | RWO, RWX, ROX, RWOP | RWO, ROX, RWOP<br><br>RWX  **with NFS ONLY** | RWO, RWOP<br><br>ROX, RWX **with NFS ONLY** | RWO, ROX, RWOP<br><br>RWX  **with NFS ONLY** |
 | <div style="text-align: left"> Access Mode for `volumeMode: Block`| RWO, RWX, ROX, RWOP | Not Supported | RWX, ROX, RWOP | RWX, ROX, RWOP | RWO, RWX |
-| [Raw Block Volume](https://kubernetes.io/docs/concepts/storage/volume-pvc-datasource/)                               | yes      | no       | yes       | yes         | yes        |
-| [CSI Ephemeral Volume](https://kubernetes.io/docs/concepts/storage/ephemeral-volumes/#csi-ephemeral-volumes)         | yes       | yes       | yes       | no        | yes        |
-| [Generic Ephemeral Volume](https://kubernetes.io/docs/concepts/storage/ephemeral-volumes/#generic-ephemeral-volumes) | yes      | yes       | yes       | yes        | yes        |
+|<div style="text-align: left"> [Raw Block Volume](https://kubernetes.io/docs/concepts/storage/volume-pvc-datasource/)                               | yes      | no       | yes       | yes         | yes        |
+|<div style="text-align: left"> [CSI Ephemeral Volume](https://kubernetes.io/docs/concepts/storage/ephemeral-volumes/#csi-ephemeral-volumes)         | yes       | yes       | yes       | no        | yes        |
+|<div style="text-align: left"> [Generic Ephemeral Volume](https://kubernetes.io/docs/concepts/storage/ephemeral-volumes/#generic-ephemeral-volumes) | yes      | yes       | yes       | yes        | yes        |
 | <div style="text-align: left"> Topology                 | yes        | yes        | yes       | yes      | yes       |
 | <div style="text-align: left"> Multi-array              | yes        | yes        | yes       | yes      | yes       |
 | <div style="text-align: left"> Volume Health Monitoring | yes        | yes        | yes       | yes      | yes       |

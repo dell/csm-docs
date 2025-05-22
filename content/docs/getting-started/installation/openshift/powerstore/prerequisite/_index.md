@@ -17,11 +17,7 @@ toc_hide: true
 
 <br>
 
-3. (Optional) For "Shared NFS", install necessary nfs-utils package and ensure nfs-server and nfs-mountd services are active and running on all nodes.
-
-<br>
-
-4. For the protocol specific prerequisite check below.
+3. For the protocol specific prerequisite check below.
    <br>
 
 
@@ -172,6 +168,7 @@ toc_hide: true
              units:
              - name: "iscsid.service"
                enabled: true
+      EOF
        ```
    <br>
    <br>

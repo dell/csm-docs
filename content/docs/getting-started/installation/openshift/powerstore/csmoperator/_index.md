@@ -175,9 +175,6 @@ dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      
 |<div style="text-align: left"> ***Common parameters for node and controller*** |
 |<div style="text-align: left"> X_CSI_POWERSTORE_NODE_NAME_PREFIX |<div style="text-align: left"> Prefix to add to each node registered by the CSI driver | Yes | "csi-node"
 |<div style="text-align: left"> X_CSI_FC_PORTS_FILTER_FILE_PATH |<div style="text-align: left"> To set path to the file which provides a list of WWPN which should be used by the driver for FC connection on this node | No | "/etc/fc-ports-filter" |
-|<div style="text-align: left"> X_CSI_NFS_CLIENT_PORT |<div style="text-align: left"> Define the port for the Shared NFS client. | No | "2050" |
-|<div style="text-align: left"> X_CSI_NFS_SERVER_PORT |<div style="text-align: left"> Define the port for the Shared NFS server. This value must match what port the nfs-server is configured on. See /etc/nfs.conf on the worker nodes for port information. | No | "2049" |
-|<div style="text-align: left"> X_CSI_NFS_EXPORT_DIRECTORY |<div style="text-align: left"> Define the file path of the underlying cluster node where Shared NFS volumes will be mounted. | No | "/var/lib/dell/nfs" |
 |<div style="text-align: left"> ***Controller parameters*** |
 |<div style="text-align: left"> X_CSI_POWERSTORE_EXTERNAL_ACCESS |<div style="text-align: left"> allows specifying additional entries for hostAccess of NFS volumes. Both single IP address and subnet are valid entries | No | empty |
 |<div style="text-align: left"> X_CSI_NFS_ACLS |<div style="text-align: left"> Defines permissions - POSIX mode bits or NFSv4 ACLs, to be set on NFS target mount directory. | No | "0777" |

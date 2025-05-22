@@ -6,391 +6,433 @@ Description: >
 toc_hide: true
 ---
 
-1. Create a user in the PowerStore Navigate in the PowerStore Manager Settings -> Users -> Add 
-   <br> 
-   <br>
-   Username: csmadmin <br>
-   User Role: Storage Operator 
 
+### CSI PowerMax Reverse Proxy
 
-2. (Optional) Create NAS server Navigate in the PowerStore Manager Storage -> Nas Servers -> Create 
+The CSI PowerMax Reverse Proxy is a component that will be installed with the CSI PowerMax driver. For more details on this feature, see the related [documentation](../../../../../concepts/csidriver/features/powermax.md#csi-powermax-reverse-proxy).
 
-<br> 
+Create a TLS secret that holds an SSL certificate and a private key. This is required by the reverse proxy server.
 
-3. For the protocol specific prerequisite check below. 
+Create the Configuration file (openssl.cnf) which includes the subjectAltName:
+
+```bash
+[ req ]
+default_bits       = 2048
+distinguished_name = req_distinguished_name
+req_extensions     = req_ext
+prompt             = no
+
+[ req_distinguished_name ]
+C  = XX
+L  = Default City
+O  = Default Company Ltd
+
+[ req_ext ]
+subjectAltName = @alt_names
+
+[ alt_names ]
+DNS.1 = "csipowermax-reverseproxy"
+IP.1 = "0.0.0.0"
+```
+Use a tool such as `openssl` to generate this secret using the example below:
+
+```bash
+openssl genrsa -out tls.key 2048
+openssl req -new -key tls.key -out tls.csr -config openssl.cnf
+openssl x509 -req -in tls.csr -signkey tls.key -out tls.crt -days 3650 -extensions req_ext -extfile openssl.cnf
+```
+Make note of the newly created tls.crt and tls.key files as they will be referenced later to create Kubernetes Secret resources.
+
+For the protocol specific prerequisite check below. 
    <br>
 
 
    {{< tabpane text=true lang="en" >}}
-   {{% tab header="FC" lang="en" %}}
+{{% tab header="Fibre Channel" lang="en" %}}
 
-   1. Complete the zoning of each host with the PowerStore Storage Array. Please refer the <a  href="https://elabnavigator.dell.com/vault/pdf/Linux.pdf" target="_blank" style="font-weight:bold; font-size:0.9rem">Host Connectivity Guide</a> for the guidelines when setting a Fibre Channel SAN infrastructure.  
-   <br> 
+### Fibre Channel Requirements
 
-   2. Verify the initiators of each host are logged in to the PowerStore Storage Array. CSM will perform the Host Registration of each host with the PowerStore Array. 
+The following requirements must be fulfilled in order to successfully use the Fiber Channel protocol with the CSI PowerMax driver:
 
-   <br> 
+- Zoning of the Host Bus Adapters (HBAs) to the Fibre Channel port director must be completed.
+- Ensure that the HBA WWNs (initiators) appear on the list of initiators that are logged into the array.
+- If the number of volumes that will be published to nodes is high, then configure the maximum number of LUNs for your HBAs on each node. See the appropriate HBA document to configure the maximum number of LUNs. 
 
-   3. Multipathing software configuration 
-       
-       
-       a. Configure Device Mapper MPIO for PowerStore FC connectivity
+</br>
 
-       Use this command to create the machine configuration to configure the DM-MPIO service on all the worker hosts for FC  connectivity.
-       ```bash 
-       oc apply -f 99-workers-multipath-conf.yaml
-       ``` 
-       <br> 
-
-       Example:
-       ```yaml
-       cat <<EOF> multipath.conf
-       defaults {
-         polling_interval 5
-         checker_timeout 15
-         disable_changed_wwids yes
-         find_multipaths no
-       }
-       devices {
-         device {
-           vendor                   DellEMC
-           product                  PowerStore
-           detect_prio              "yes"
-           path_selector            "service-time 0"
-           path_grouping_policy     "group_by_prio"
-           path_checker             tur
-           failback                 immediate
-           fast_io_fail_tmo         5
-           no_path_retry            3
-           rr_min_io_rq             1
-           max_sectors_kb           1024
-           dev_loss_tmo             10
-         }
-       }  
-       EOF
-       ``` 
-       <br>
-       <br>
-
-       ```yaml 
-       cat <<EOF> 99-workers-multipath-conf.yaml
-       apiVersion: machineconfiguration.openshift.io/v1
-       kind: MachineConfig
-       metadata:
-         name: 99-workers-multipath-conf
-         labels:
-           machineconfiguration.openshift.io/role: worker
-       spec:
-         config:
-           ignition:
-             version: 3.4.0
-           storage:
-             files:
-             - contents:
-                 source: data:text/plain;charset=utf-8;base64,$(cat multipath.conf | base64 -w0)
-                 verification: {}
-               filesystem: root
-               mode: 400
-               path: /etc/multipath.conf   
-       EOF  
-       ``` 
-
-       <br>
-       <br>
-
-       b. Enable Linux Device Mapper MPIO
-
-       Use this command to create the machine configuration to enable the DM-MPIO service on all the worker host
-
-       ```bash 
-       oc apply -f 99-workers-enable-multipathd.yaml
-       ``` 
-
-       <br> 
-       
-       ```yaml
-       cat << EOF > 99-workers-enable-multipathd.yaml 
-       apiVersion: machineconfiguration.openshift.io/v1
-       kind: MachineConfig
-       metadata:
-         name: 99-workers-enable-multipathd.yaml
-         labels:
-           machineconfiguration.openshift.io/role: worker
-       spec:
-         config:
-           ignition:
-             version: 3.4.0  
-           systemd:
-             units:
-             - name: "multipathd.service"
-               enabled: true
-       EOF
-       ``` 
-
-
-
-       <br>
-
-   {{% /tab %}}
-
-   {{% tab header="iSCSI" lang="en" %}}
-
-
-   1. Complete the iSCSI network configuration to connect the hosts with the PowerStore Storage array. Please refer the <a  href="https://elabnavigator.dell.com/vault/pdf/Linux.pdf" target="_blank" style="font-weight:bold; font-size:0.9rem">Host Connectivity Guide</a> for the  best practices for attaching the hosts to a PowerStore storage array.  
-   <br>
-   2. Verify the initiators of each host are logged in to the PowerStore Storage Array. CSM will perform the Host Registration of each host with the PowerStore Array.  
-   <br> 
-
-   3. Enable iSCSI service 
-   <br> 
-
-      Use this command to create the machine configuration to enable the iscsid service.
-      ```bash
-      oc apply -f 99-workers-enable-iscsid.yaml
-      ```
+ 1. Complete the zoning of each host with the PowerMax Storage Array. Please refer to <a  href="https://elabnavigator.dell.com/vault/pdf/Linux.pdf" target="_blank" style="font-size:0.9rem">Host Connectivity Guide</a> for the guidelines when setting up a Fibre Channel SAN infrastructure.  
+ <br>
+ 2. Verify the initiators of each host are logged in to the PowerMax Storage Array. CSM will perform the Host Registration of each host with the PowerMax Array.
+ <br>
+ 3. Multipathing software configuration
      
-      <br>
+     
+     a. Configure Device Mapper MPIO for PowerMax FC connectivity
 
-       Example: 
-       ```yaml
-       cat <<EOF> 99-workers-enable-iscsid.yaml
-       apiVersion: machineconfiguration.openshift.io/v1
-       kind: MachineConfig
-       metadata:
-         name: 99-workers-enable-iscsid
-         labels:
-           machineconfiguration.openshift.io/role: worker
-       spec:
-         config:
-           ignition:
-             version: 3.4.0  
-           systemd:
-             units:
-             - name: "iscsid.service"
-               enabled: true
-       ```
-   <br>
-   <br>
+     Use this command to create the machine configuration to configure the DM-MPIO service on all the worker hosts for FC  connectivity.
+     ```bash 
+     oc apply -f 99-workers-multipath-conf.yaml
+     ``` 
+     <br> 
 
-   4. Multipathing software configuration 
-       
-       
-      a. Configure Device Mapper MPIO for PowerStore iSCSI connectivity 
+     Example:
 
-         Use this command to create the machine configuration to configure the DM-MPIO service on all the worker hosts for iSCSI  connectivity.
+      ```yaml
+      cat <<EOF> multipath.conf
+        defaults {
+          polling_interval 5
+          checker_timeout 15
+          disable_changed_wwids yes
+          find_multipaths no
+        }
+        devices {
+          device {
+            vendor                   DellEMC
+            product                  PowerMax
+            detect_prio              "yes"
+            path_selector            "service-time 0"
+            path_grouping_policy     "group_by_prio"
+            path_checker             tur
+            failback                 immediate
+            fast_io_fail_tmo         5
+            no_path_retry            3
+            rr_min_io_rq             1
+            max_sectors_kb           1024
+            dev_loss_tmo             10
+          }
+        }  
+      EOF
+      ``` 
+     <br>
+     <br>
 
-         ```bash 
-         oc apply -f 99-workers-multipath-conf.yaml
-         ``` 
-       <br>
-       <br> 
-       Example: 
-       
-       ```yaml
-       cat <<EOF> multipath.conf
-       defaults {
-         polling_interval 5
-         checker_timeout 15
-         disable_changed_wwids yes
-         find_multipaths no
-       }
-       devices {
-         device {
-           vendor                   DellEMC
-           product                  PowerStore
-           detect_prio              "yes"
-           path_selector            "service-time 0"
-           path_grouping_policy     "group_by_prio"
-           path_checker             tur
-           failback                 immediate
-           fast_io_fail_tmo         5
-           no_path_retry            3
-           rr_min_io_rq             1
-           max_sectors_kb           1024
-           dev_loss_tmo             10
-         }
-       }  
-       EOF
-       ``` 
+     ```yaml
 
-       <br>
+     cat <<EOF> 99-workers-multipath-conf.yaml
+     apiVersion: machineconfiguration.openshift.io/v1
+     kind: MachineConfig
+     metadata:
+       name: 99-workers-multipath-conf
+       labels:
+         machineconfiguration.openshift.io/role: worker
+     spec:
+       config:
+         ignition:
+           version: 3.4.0
+         storage:
+           files:
+           - contents:
+               source: data:text/plain;charset=utf-8;base64,$(cat multipath.conf | base64 -w0)
+               verification: {}
+             filesystem: root
+             mode: 400
+             path: /etc/multipath.conf   
+     EOF  
+     ``` 
 
-       ```yaml 
-       cat <<EOF> 99-workers-multipath-conf.yaml
-       apiVersion: machineconfiguration.openshift.io/v1
-       kind: MachineConfig
-       metadata:
-         name: 99-workers-multipath-conf
-         labels:
-           machineconfiguration.openshift.io/role: worker
-       spec:
-         config:
-           ignition:
-             version: 3.4.0
-           storage:
-             files:
-             - contents:
-                 source: data:text/plain;charset=utf-8;base64,$(cat multipath.conf | base64 -w0)
-                 verification: {}
-               filesystem: root
-               mode: 400
-               path: /etc/multipath.conf   
-       EOF  
-       ``` 
+     <br>
+     <br>
 
-       <br>
-       <br>
+     b. Enable Linux Device Mapper MPIO
 
-       b. Enable Linux Device Mapper MPIO 
+     Use this command to create the machine configuration to enable the DM-MPIO service on all the worker host
 
-       Use this command to create the machine configuration to enable the DM-MPIO service on all the worker host
+     ```bash 
+     oc apply -f 99-workers-enable-multipathd.yaml
+     ``` 
 
-       ```bash 
-       oc apply -f 99-workers-enable-multipathd.yaml
-       ``` 
-
-       <br> 
-       
-       ```yaml
-       cat << EOF > 99-workers-enable-multipathd.yaml 
-       apiVersion: machineconfiguration.openshift.io/v1
-       kind: MachineConfig
-       metadata:
-         name: 99-workers-enable-multipathd.yaml
-         labels:
-           machineconfiguration.openshift.io/role: worker
-       spec:
-         config:
-           ignition:
-             version: 3.4.0  
-           systemd:
-             units:
-             - name: "multipathd.service"
-               enabled: true
-       EOF
-       ``` 
+     <br> 
+     
+     ```yaml
+     cat << EOF > 99-workers-enable-multipathd.yaml 
+     apiVersion: machineconfiguration.openshift.io/v1
+     kind: MachineConfig
+     metadata:
+       name: 99-workers-enable-multipathd.yaml
+       labels:
+         machineconfiguration.openshift.io/role: worker
+     spec:
+       config:
+         ignition:
+           version: 3.4.0  
+         systemd:
+           units:
+           - name: "multipathd.service"
+             enabled: true
+     EOF
+     ``` 
+     <br>
 
 
-
-       <br>
-
-   {{% /tab %}}
-
-   {{% tab header="NVMeFC" lang="en" %}}
+{{% /tab %}}
 
 
-   1. Complete the zoning of each host with the PowerStore Storage Array. Please refer the <a  href="https://elabnavigator.dell.com/vault/pdf/Linux.pdf" target="_blank" style="font-weight:bold; font-size:0.9rem">Host Connectivity Guide</a> for the guidelines when setting a Fibre Channel SAN infrastructure. 
-    
-   <br> 
-   <br>
+{{% tab header="iSCSI" lang="en" %}}
 
-   2. Verify the initiators of each host are logged in to the PowerStore Storage Array. CSM will perform the Host Registration of each host with the PowerStore Array.
+1. Complete the iSCSI network configuration to connect the hosts with the PowerMax Storage array. Please refer to <a  href="https://elabnavigator.dell.com/vault/pdf/Linux.pdf" target="_blank" style="font-size:0.9rem">Host Connectivity Guide</a> for the  best practices for attaching the hosts to a PowerMax storage array.  
+<br>
+2. Verify the initiators of each host are logged in to the PowerMax Storage Array. CSM will perform the Host Registration of each host with the PowerMax Array.  
+<br>
+3. Enable iSCSI service
+<br>
 
-   <br>
-   <br>
-
-   3. Configure IO policy for native NVMe multipathing  
-
-      Use this comment to create the machine configuration to configure the native NVMe multipathing IO Policy to round robin. 
-
-      ```bash 
-      oc apply -f 99-workers-multipath-round-robin.yaml
-      ```
-      <br> 
-      <br>
+   Use this command to create the machine configuration to enable the iscsid service.
+   ```bash
+   oc apply -f 99-workers-enable-iscsid.yaml
+   ```
   
-      ```yaml 
-      cat <<EOF> 71-nvmf-iopolicy-dell.rules
-      ACTION=="add", SUBSYSTEM=="nvme-subsystem", ATTR{model}=="dellemc-powerstore",ATTR{iopolicy}="round-robin"
-      EOF
-      ``` 
-      <br> 
-      <br>
-      Example: 
+   <br>
 
-      ```yaml 
-      cat <<EOF> 99-workers-multipath-round-robin.yaml
-      apiVersion: machineconfiguration.openshift.io/v1
-      kind: MachineConfig
-      metadata:
-        name: 99-workers-multipath-round-robin
-        labels:
-          machineconfiguration.openshift.io/role: worker
-      spec:
-        config:
-          ignition:
-            version: 3.4.0
-          storage:
-            files:
-            - contents:
-                source: data:text/plain;charset=utf-8;base64,$(cat 71-nvmf-iopolicy-dell.rules | base64 -w0)
-                verification: {}
-              filesystem: root
-              mode: 420
-              path: /etc/udev/rules.d/71-nvme-io-policy.rules 
-      EOF
+    Example: 
+
+  ```yaml
+  cat <<EOF> 99-workers-enable-iscsid.yaml
+  apiVersion: machineconfiguration.openshift.io/v1
+  kind: MachineConfig
+  metadata:
+    name: 99-workers-enable-iscsid
+    labels:
+      machineconfiguration.openshift.io/role: worker
+  spec:
+    config:
+      ignition:
+        version: 3.4.0  
+      systemd:
+        units:
+        - name: "iscsid.service"
+          enabled: true
+  EOF
+  ```
+<br>
+
+4. Multipathing software configuration
+    
+    
+   a. Configure Device Mapper MPIO for PowerMax FC connectivity
+
+      Use this command to create the machine configuration to configure the DM-MPIO service on all the worker hosts for FC connectivity.
+
+      ```bash 
+      oc apply -f 99-workers-multipath-conf.yaml
       ``` 
+    <br>
+    
+    ```yaml
+    cat <<EOF> multipath.conf
+    defaults {
+      polling_interval 5
+      checker_timeout 15
+      disable_changed_wwids yes
+      find_multipaths no
+    }
+    devices {
+      device {
+        vendor                   DellEMC
+        product                  PowerMax
+        detect_prio              "yes"
+        path_selector            "service-time 0"
+        path_grouping_policy     "group_by_prio"
+        path_checker             tur
+        failback                 immediate
+        fast_io_fail_tmo         5
+        no_path_retry            3
+        rr_min_io_rq             1
+        max_sectors_kb           1024
+        dev_loss_tmo             10
+      }
+    }  
+    EOF
+    ``` 
+
+    <br>
+
+    ```yaml 
+    cat <<EOF> 99-workers-multipath-conf.yaml
+    apiVersion: machineconfiguration.openshift.io/v1
+    kind: MachineConfig
+    metadata:
+      name: 99-workers-multipath-conf
+      labels:
+        machineconfiguration.openshift.io/role: worker
+    spec:
+      config:
+        ignition:
+          version: 3.4.0
+        storage:
+          files:
+          - contents:
+              source: data:text/plain;charset=utf-8;base64,$(cat multipath.conf | base64 -w0)
+              verification: {}
+            filesystem: root
+            mode: 400
+            path: /etc/multipath.conf   
+    EOF  
+    ``` 
+
+    <br>
+    <br>
+
+    b. Enable Linux Device Mapper MPIO 
+
+    Use this command to create the machine configuration to enable the DM-MPIO service on all the worker host
+
+    ```bash 
+    oc apply -f 99-workers-enable-multipathd.yaml
+    ``` 
+
+    <br> 
+    
+    ```yaml
+    cat << EOF > 99-workers-enable-multipathd.yaml 
+    apiVersion: machineconfiguration.openshift.io/v1
+    kind: MachineConfig
+    metadata:
+      name: 99-workers-enable-multipathd.yaml
+      labels:
+        machineconfiguration.openshift.io/role: worker
+    spec:
+      config:
+        ignition:
+          version: 3.4.0  
+        systemd:
+          units:
+          - name: "multipathd.service"
+            enabled: true
+    EOF
+    ``` 
+{{% /tab %}}
+
+
+
+{{% tab header="NVMeFC" lang="en" %}}
+
+
+1. Complete the zoning of each host with the PowerMax Storage Array. Please refer to <a  href="https://elabnavigator.dell.com/vault/pdf/Linux.pdf" target="_blank" style="font-size:0.9rem">Host Connectivity Guide</a> for the guidelines when setting a Fibre Channel SAN infrastructure.
+ 
+<br>
+
+2. Verify the initiators of each host are logged in to the PowerMax Storage Array. CSM will perform the Host Registration of each host with the PowerMax Array.
+
+<br>
+
+3. Multipathing software configuration
+
+
+   ```yaml 
+   cat <<EOF> 71-nvmf-iopolicy-dell.rules
+   ACTION=="add", SUBSYSTEM=="nvme-subsystem", ATTR{model}=="dellemc-powermax",ATTR{iopolicy}="round-robin"
+   EOF
+   ``` 
    <br> 
    <br>
 
-   4. Configure NVMe reconnecting forever 
+   ```yaml 
+   cat <<EOF> 99-workers-multipath-round-robin.yaml
+   apiVersion: machineconfiguration.openshift.io/v1
+   kind: MachineConfig
+   metadata:
+     name: 99-workers-multipath-round-robin
+     labels:
+       machineconfiguration.openshift.io/role: worker
+   spec:
+     config:
+       ignition:
+         version: 3.4.0
+       storage:
+         files:
+         - contents:
+             source: data:text/plain;charset=utf-8;base64,$(cat 71-nvmf-iopolicy-dell.rules | base64 -w0)
+             verification: {}
+           filesystem: root
+           mode: 420
+           path: /etc/udev/rules.d/71-nvme-io-policy.rules 
+   EOF
+   ``` 
+<br> 
 
-      Use this command to create the machine configuration to configure the NVMe reconnect
+4. Configure NVMe reconnecting forever 
 
-      ```bash 
-      oc apply -f 99-workers-nvmf-ctrl-loss-tmo.yaml 
-      ```
+   ```yaml 
+   cat <<EOF> 72-nvmf-ctrl_loss_tmo.rules
+   ACTION=="add|change", SUBSYSTEM=="nvme", KERNEL=="nvme*", ATTR{ctrl_loss_tmo}="-1"
+   EOF
+   ``` 
 
-      <br> 
-      <br>
+   <br> 
 
-      ```yaml 
-      cat <<EOF> 72-nvmf-ctrl_loss_tmo.rules
-      ACTION=="add|change", SUBSYSTEM=="nvme", KERNEL=="nvme*", ATTR{ctrl_loss_tmo}="-1"
-      EOF
-      ``` 
+   ```yaml 
+   cat <<EOF> 99-nvmf-ctrl-loss-tmo.yaml
+   apiVersion: machineconfiguration.openshift.io/v1
+   kind: MachineConfig
+   metadata:
+     name: 99-nvmf-ctrl-loss-tmo
+     labels:
+       machineconfiguration.openshift.io/role: worker
+   spec:
+     config:
+       ignition:
+         version: 3.4.0
+       storage:
+         files:
+         - contents:
+             source: data:text/plain;charset=utf-8;base64,(cat 72-nvmf-ctrl_loss_tmo.rules | base64 -w0)
+             verification: {}
+           filesystem: root
+           mode: 420
+           path: /etc/udev/rules.d/72-nvmf-ctrl_loss_tmo.rules
+    EOF
+   ```
+   </br>
 
-      <br> 
-      <br>
+**Cluster requirements**
 
-      ```yaml 
-      cat <<EOF> 99-workers-nvmf-ctrl-loss-tmo.yaml
-      apiVersion: machineconfiguration.openshift.io/v1
-      kind: MachineConfig
-      metadata:
-        name: 99-workers-nvmf-ctrl-loss-tmo
-        labels:
-          machineconfiguration.openshift.io/role: worker
-      spec:
-        config:
-          ignition:
-            version: 3.4.0
-          storage:
-            files:
-            - contents:
-                source: data:text/plain;charset=utf-8;base64,$(cat 72-nvmf-ctrl_loss_tmo.rules | base64 -w0)
-                verification: {}
-              filesystem: root
-              mode: 420
-              path: /etc/udev/rules.d/72-nvmf-ctrl_loss_tmo.rules
-      EOF
-      ```
+All OpenShift nodes connecting to Dell storage arrays must use unique host NVMe Qualified Names (NQNs).
 
-   {{% /tab %}} 
+> The OpenShift deployment process for CoreOS will set the same host NQN for all nodes. The host NQN is stored in the file /etc/nvme/hostnqn. One possible solution to ensure unique host NQNs is to add the following machine config to your OCP cluster:
+
+  ```yaml
+  cat <<EOF> 99-worker-custom-nvme-hostnqn.yaml
+  apiVersion: machineconfiguration.openshift.io/v1
+  kind: MachineConfig
+  metadata:
+    labels:
+      machineconfiguration.openshift.io/role: worker
+    name: 99-worker-custom-nvme-hostnqn
+  spec:
+    config:
+      ignition:
+        version: 3.4.0
+      systemd:
+        units:
+          - contents: |
+              [Unit]
+              Description=Custom CoreOS Generate NVMe Hostnqn
+
+              [Service]
+              Type=oneshot
+              ExecStart=/usr/bin/sh -c '/usr/sbin/nvme gen-hostnqn > /etc/nvme/hostnqn'
+              RemainAfterExit=yes
+
+              [Install]
+              WantedBy=multi-user.target
+            enabled: true
+            name: custom-coreos-generate-nvme-hostnqn.service
+  EOF
+  ```
+
+{{% /tab %}}
 
    {{% tab header="NVMeTCP" lang="en" %}} 
 
 
-   1. Complete the NVMe network configuration to connect the hosts with the PowerStore Storage array. Please refer <a  href="https://elabnavigator.dell.com/vault/pdf/Linux.pdf" target="_blank" style="font-weight:bold; font-size:0.9rem">Host Connectivity Guide</a> for the best practices for attaching the hosts to a PowerStore storage array.
+   1. Complete the NVMe network configuration to connect the hosts with the PowerMax Storage array. Please refer <a  href="https://elabnavigator.dell.com/vault/pdf/Linux.pdf" target="_blank" style="font-weight:bold; font-size:0.9rem">Host Connectivity Guide</a> for the best practices for attaching the hosts to a PowerMax storage array.
     
    <br> 
-   <br>
+  
+   2. Verify the initiators of each host are logged in to the PowerMax Storage Array. CSM will perform the Host Registration of each host with the PowerMax Array.
 
-   2. Verify the initiators of each host are logged in to the PowerStore Storage Array. CSM will perform the Host Registration of each host with the PowerStore Array.
-
    <br>
-   <br>
-
+  
    3. Configure IO policy for native NVMe multipathing  
 
       Use this comment to create the machine configuration to configure the native NVMe multipathing IO Policy to round robin. 
@@ -399,16 +441,15 @@ toc_hide: true
       oc apply -f 99-workers-multipath-round-robin.yaml
       ```
       <br> 
-      <br>
-  
+     
       ```yaml 
       cat <<EOF> 71-nvmf-iopolicy-dell.rules
-      ACTION=="add", SUBSYSTEM=="nvme-subsystem", ATTR{model}=="dellemc-powerstore",ATTR{iopolicy}="round-robin"
+      ACTION=="add", SUBSYSTEM=="nvme-subsystem", ATTR{model}=="dellemc-powermax",ATTR{iopolicy}="round-robin"
       EOF
       ``` 
       <br> 
-      <br>
-      Example: 
+  
+        Example: 
 
       ```yaml 
       cat <<EOF> 99-workers-multipath-round-robin.yaml
@@ -433,7 +474,6 @@ toc_hide: true
       EOF
       ``` 
    <br> 
-   <br>
 
    4. Configure NVMe reconnecting forever 
 
@@ -444,8 +484,7 @@ toc_hide: true
       ```
 
       <br> 
-      <br>
-
+   
       ```yaml 
       cat <<EOF> 72-nvmf-ctrl_loss_tmo.rules
       ACTION=="add|change", SUBSYSTEM=="nvme", KERNEL=="nvme*", ATTR{ctrl_loss_tmo}="-1"
@@ -453,8 +492,7 @@ toc_hide: true
       ``` 
 
       <br> 
-      <br>
-
+  
       ```yaml 
       cat <<EOF> 99-workers-nvmf-ctrl-loss-tmo.yaml
       apiVersion: machineconfiguration.openshift.io/v1
@@ -477,8 +515,65 @@ toc_hide: true
               path: /etc/udev/rules.d/72-nvmf-ctrl_loss_tmo.rules
       EOF
       ```
+</br>
 
+**Cluster requirements**
+
+All OpenShift nodes connecting to Dell storage arrays must use unique host NVMe Qualified Names (NQNs).
+
+> The OpenShift deployment process for CoreOS will set the same host NQN for all nodes. The host NQN is stored in the file /etc/nvme/hostnqn. One possible solution to ensure unique host NQNs is to add the following machine config to your OCP cluster:
+
+  ```yaml
+  cat <<EOF> 99-worker-custom-nvme-hostnqn.yaml
+  apiVersion: machineconfiguration.openshift.io/v1
+  kind: MachineConfig
+  metadata:
+    labels:
+      machineconfiguration.openshift.io/role: worker
+    name: 99-worker-custom-nvme-hostnqn
+  spec:
+    config:
+      ignition:
+        version: 3.4.0
+      systemd:
+        units:
+          - contents: |
+              [Unit]
+              Description=Custom CoreOS Generate NVMe Hostnqn
+
+              [Service]
+              Type=oneshot
+              ExecStart=/usr/bin/sh -c '/usr/sbin/nvme gen-hostnqn > /etc/nvme/hostnqn'
+              RemainAfterExit=yes
+
+              [Install]
+              WantedBy=multi-user.target
+            enabled: true
+            name: custom-coreos-generate-nvme-hostnqn.service
+  EOF
+  ```
    {{% /tab %}} 
 
 
-   {{< /tabpane >}}   
+{{% tab header="NFS" lang="en" %}}
+
+### NFS Requirements
+
+- Ensure that your nodes support mounting NFS volumes if using NFS.
+
+{{% /tab %}}
+{{< /tabpane >}}   
+
+### Replication Requirements (Optional)
+
+Applicable only if you decided to enable the Replication feature in `my-powermax-settings.yaml`
+
+```yaml
+replication:
+  enabled: true
+```
+#### Replication CRD's
+
+The CRDs for replication can be obtained and installed from the csm-replication project on Github. Use `csm-replication/deploy/replicationcrds.all.yaml` located in the csm-replication git repo for the installation.
+
+CRDs should be configured during replication prepare stage with repctl as described in [install-repctl](../../../../../getting-started/installation/kubernetes/powermax/helm/csm-modules/replication/install-repctl/)

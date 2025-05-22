@@ -175,25 +175,31 @@ Install Helm 3 on the master node before you install CSI Driver for PowerMax.
 
 7. Confirm the value of `global.useSecret` is set to `true`.
 
-8. Using the TLS certificate and key created in the [CSI PowerMax Reverse Proxy](../prerequisite/#csi-powermax-reverse-proxy) prerequisite step, provide the base64 encoded certificate and key contents to `csireverseproxy.certManager.certificateFile` and `csireverseproxy.certManager.privateKeyFile`.
+8. Using the TLS certificate and key created in the [CSI PowerMax Reverse Proxy](../prerequisite/#csi-powermax-reverse-proxy) prerequisite step, base64 encode the contents of each file and provide the contents to `csireverseproxy.certManager.certificateFile` and `csireverseproxy.certManager.privateKeyFile`.
+
+    To encode the certificate and key:
+    ```bash
+    cat tls.crt | base64 -w 0
+    cat tls.key | base64 -w 0
+    ```
+    Example:
     ```yaml
     csireverseproxy:
       tlsSecret: csirevproxy-tls-secret
       deployAsSidecar: false
       port: 2222
-      useSecret: true
       certManager:
         selfSignedCert: false
-        certificateFile: |
-          dGhpcyBzdHJpbmcgc2VydmVzIGFzIGFuIGV4YW1wbGUgb2Ygd2hhdCBhIGJhc2U2NCBlbmNvZGVk
-          IGNlcnRpZmljYXRlIGZpbGUgbWlnaHQgbG9vayBsaWtlIGluIG15LXBvd2VybWF4LXNldHRpbmdz
-          LnlhbWwgZmlsZQo=
-        privateKeyFile: |
-          dGhpcyBzdHJpbmcgc2VydmVzIGFzIGFuIGV4YW1wbGUgb2Ygd2hhdCBhIGJhc2U2NCBlbmNvZGVk
-          IHByaXZhdGUga2V5IG1pZ2h0IGxvb2sgbGlrZSBpbiBteS1wb3dlcm1heC1zZXR0aW5ncy55YW1s
-          IGZpbGUK
+        certificateFile: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCmp1c3QgYW4gZXhhbXBsZSBjZXJ0aWZpY2F0ZQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg==
+        privateKeyFile: LS0tLS1CRUdJTiBSU0EgUFJJVkFURSBLRVktLS0tLQpqdXN0IGFuIGV4YW1wbGUgdGxzIGtleQotLS0tLUVORCBSU0EgUFJJVkFURSBLRVktLS0tLQo=
     ```
-9. Install the driver using `csi-install.sh` bash script in the `dell-csi-helm-installer` directory by running
+
+9. Install cert-manager to manage CA certificate validation and renewal.
+    ```bash
+    kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.11.0/cert-manager.yaml
+    ```
+
+10. Install the driver using `csi-install.sh` bash script in the `dell-csi-helm-installer` directory by running
     ```bash
     ./csi-install.sh --namespace powermax --values ./my-powermax-settings.yaml --helm-charts-version <version>
     ```
