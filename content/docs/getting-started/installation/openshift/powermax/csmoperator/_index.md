@@ -115,29 +115,35 @@ dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      
     ```
 
 3. **Create Powermax Array Configmap:**
+  
+    **Note:** `powermax-array-config` is deprecated and remains for backward compatibility only. You can skip creating it and instead add values for X_CSI_MANAGED_ARRAYS, X_CSI_TRANSPORT_PROTOCOL, and X_CSI_POWERMAX_PORTGROUPS in the sample files.
 
-   **Note:** `powermax-array-config` is deprecated and remains for backward compatibility only. You can skip creating it and instead add values for X_CSI_MANAGED_ARRAYS, X_CSI_TRANSPORT_PROTOCOL, and X_CSI_POWERMAX_PORTGROUPS in the sample files.
+    Create a configmap using the sample file [here](https://github.com/dell/csi-powermax/blob/main/samples/configmap/powermax-array-config.yaml). Fill in the appropriate values for driver configuration.
+    ```yaml
+    # To create this configmap use: kubectl create -f powermax-array-config.yaml
+    apiVersion: v1
+    kind: ConfigMap
+    metadata:
+      name: powermax-array-config
+      namespace: powermax
+    data:
+      powermax-array-config.yaml: |
+        # List of comma-separated port groups (ISCSI only). Example: PortGroup1, portGroup2 Required for iSCSI only
+        X_CSI_POWERMAX_PORTGROUPS: ""
+        # Choose which transport protocol to use (ISCSI, FC, NVMETCP, auto) defaults to auto if nothing is specified
+        X_CSI_TRANSPORT_PROTOCOL: ""
+        # IP address of the Unisphere for PowerMax (Required), Defaults to https://0.0.0.0:8443
+        X_CSI_POWERMAX_ENDPOINT: "https://10.0.0.0:8443"
+        # List of comma-separated array ID(s) which will be managed by the driver (Required)
+        X_CSI_MANAGED_ARRAYS: "000000000000,000000000000,"
+    ```
 
-   Create a configmap using the sample file [here](https://github.com/dell/csi-powermax/blob/main/samples/configmap/powermax-array-config.yaml). Fill in the appropriate values for driver configuration.
+4. **Create the Reverse Proxy TLS Secret**
 
-   ```yaml
-      # To create this configmap use: kubectl create -f powermax-array-config.yaml
-      apiVersion: v1
-      kind: ConfigMap
-      metadata:
-        name: powermax-array-config
-        namespace: powermax
-      data:
-        powermax-array-config.yaml: |
-          # List of comma-separated port groups (ISCSI only). Example: PortGroup1, portGroup2 Required for iSCSI only
-          X_CSI_POWERMAX_PORTGROUPS: ""
-          # Choose which transport protocol to use (ISCSI, FC, NVMETCP, auto) defaults to auto if nothing is specified
-          X_CSI_TRANSPORT_PROTOCOL: ""
-          # IP address of the Unisphere for PowerMax (Required), Defaults to https://0.0.0.0:8443
-          X_CSI_POWERMAX_ENDPOINT: "https://10.0.0.0:8443"
-          # List of comma-separated array ID(s) which will be managed by the driver (Required)
-          X_CSI_MANAGED_ARRAYS: "000000000000,000000000000,"
-   ```
+    Referencing the TLS certificate and key created in the [CSI PowerMax Reverse Proxy](./#csi-powermax-reverse-proxy) prerequisite, create the `csirevproxy-tls-secret` secret.
+    ```bash
+    oc create secret -n powermax tls csirevproxy-tls-secret --cert=tls.crt --key=tls.key
+    ```
 
 5. **Create a CR (Custom Resource)** for PowerMax using the sample files provided
 
@@ -202,7 +208,7 @@ dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      
   Check the status of the CR to verify if the driver installation is in the `Succeeded` state. If the status is not `Succeeded`, see the [Troubleshooting guide](../troubleshooting/#my-dell-csi-driver-install-failed-how-do-i-fix-it) for more information.
 </ul>
 
-5. Refer [Volume Snapshot Class](https://github.com/dell/csi-powermax/tree/main/samples/volumesnapshotclass) and [Storage Class](https://github.com/dell/csi-powermax/tree/main/samples/storageclass) for the sample files.
+6. Refer [Volume Snapshot Class](https://github.com/dell/csi-powermax/tree/main/samples/volumesnapshotclass) and [Storage Class](https://github.com/dell/csi-powermax/tree/main/samples/storageclass) for the sample files.
 
 ## Other features to enable
 ### Dynamic Logging Configuration
@@ -322,7 +328,11 @@ X_CSI_TOPOLOGY_CONTROL_ENABLED provides a way to filter topology keys on a node 
 
 {{< cardcontainer >}}
 
-    {{< customcard link1="./csm-modules/resiliency"   image="1" title="Resiliency"  >}}
+    {{< customcard link1="./csm-modules/authorizationv1-x"  image="1" title="Authorization v1.x" >}}
+    {{< customcard link1="./csm-modules/authorizationv2-0"   image="1" title="Authorization v2.0" >}}
+    {{< customcard  link1="./csm-modules/observability"   image="1" title="Observability" >}}
+    {{< customcard  link1="./csm-modules/replication"  image="1" title="Replication" >}}
+    {{< customcard link1="./csm-modules/resiliency"   image="1" title="Resiliency" >}}
 
 {{< /cardcontainer >}}
 {{< /accordion >}}  

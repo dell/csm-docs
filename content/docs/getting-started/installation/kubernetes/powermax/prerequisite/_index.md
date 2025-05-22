@@ -71,8 +71,8 @@ Use a tool such as `openssl` to generate this secret using the example below:
 openssl genrsa -out tls.key 2048
 openssl req -new -key tls.key -out tls.csr -config openssl.cnf
 openssl x509 -req -in tls.csr -signkey tls.key -out tls.crt -days 3650 -extensions req_ext -extfile openssl.cnf
-kubectl create secret -n <namespace> tls csirevproxy-tls-secret --cert=tls.crt --key=tls.key
 ```
+Make note of the newly created tls.crt and tls.key files as they will be referenced later to create Kubernetes Secret resources.
 
 {{< tabpane text=true lang="en" >}} {{% tab header="Fibre Channel" lang="en" %}}
 
@@ -143,9 +143,9 @@ NVMe/TCP protocols with the CSI PowerMax driver:
 - The NVMe modules may not be available after a node reboot. Loading the modules
   at startup is recommended.
 
-> Starting with OCP 4.14 NVMe/TCP is enabled by default on RCOS nodes.
-
 **Cluster requirements**
+
+- Kubernetes nodes connecting to Dell storage arrays must use unique host NVMe Qualified Names (NQNs).
 
 - The driver requires the NVMe command-line interface (nvme-cli) to manage the
   NVMe clients and targets. The NVMe CLI tool is installed in the host using the
