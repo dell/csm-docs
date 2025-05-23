@@ -28,11 +28,7 @@ The following package needs to be installed on the Linux host:
 
 Use the appropriate package manager on the machine to install the package.
 
-### Using yum on CentOS/RedHat 7:
-
-yum install -y container-selinux
-
-### Using yum on CentOS/RedHat 8:
+### Using yum on RedHat:
 
 yum install -y container-selinux
 
