@@ -17,12 +17,12 @@
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="docs">
-    <meta property="article:modified_time" content="2025-05-09T08:37:12-05:00">
+    <meta property="article:modified_time" content="2025-05-23T19:29:42+05:30">
 
   <meta itemprop="name" content="Replication">
   <meta itemprop="description" content="Installing Replication via Container Storage Modules Operator">
-  <meta itemprop="dateModified" content="2025-05-09T08:37:12-05:00">
-  <meta itemprop="wordCount" content="708">
+  <meta itemprop="dateModified" content="2025-05-23T19:29:42+05:30">
+  <meta itemprop="wordCount" content="709">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Replication">
   <meta name="twitter:description" content="Installing Replication via Container Storage Modules Operator">
@@ -204,7 +204,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.6715f4bea3dd3627dd322a023cfcdfd7.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.3160224dcab520b8827d3b286605e76d.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -4069,13 +4069,33 @@ step 3:</p>
 </span></span></code></pre></div></li>
 <li>
 <p>On both source and target clusters, configure any driver-specific
-<a href="../../../csmoperator">prerequisites</a> for deploying the driver via Dell CSM
+<style>
+.visible-content {
+  display: block;
+}
+.inline-content {
+  display: inline;
+}
+</style>
+<span id="" class="inline-content default">
+  <a href="../../../kubernetes">prerequisites</a>
+</span> for deploying the driver via Dell CSM
 Operator.</p>
 </li>
 <li>
 <p>Install the CSI driver for your chosen storage platform on the source cluster
 according to the instructions for
-<a href="../../../csmoperator">installing the drivers using CSM Operator</a>.
+<style>
+.visible-content {
+  display: block;
+}
+.inline-content {
+  display: inline;
+}
+</style>
+<span id="" class="inline-content default">
+  <a href="../../../kubernetes">installing the drivers using CSM Operator</a>
+</span>  .
 Ensure that replication is set to <code>enabled</code> in the custom resource YAML used
 to install the driver, under the <code>components</code> field.</p>
 <blockquote>

@@ -10,29 +10,25 @@
 <link rel="icon" type="image/png" href="/csm-docs/favicons/favicon-16x16.png" sizes="16x16">
 <link rel="icon" type="image/png" href="/csm-docs/favicons/favicon-32x32.png" sizes="32x32">
 <title>Prerequisite | </title>
-<meta name="description" content="Create a user in the PowerStore Navigate in the PowerStore Manager Settings -&gt; Users -&gt; Add Username: csmadmin User Role: Storage Operator
-(Optional) Create NAS server Navigate in the PowerStore Manager Storage -&gt; Nas Servers -&gt; Create
-For the protocol specific prerequisite check below. FC iSCSI NVMeFC NVMeTCP Complete the zoning of each host with the PowerStore Storage Array. Please refer the Host Connectivity Guide for the guidelines when setting a Fibre Channel SAN infrastructure.">
+<meta name="description" content="CSI PowerMax Reverse Proxy The CSI PowerMax Reverse Proxy is a component that will be installed with the CSI PowerMax driver. For more details on this feature, see the related documentation.
+Create a TLS secret that holds an SSL certificate and a private key. This is required by the reverse proxy server.">
 <meta property="og:url" content="https://dell.github.io/csm-docs/docs/getting-started/installation/openshift/powermax/prerequisite/">
   <meta property="og:site_name" content="Dell Technologies">
   <meta property="og:title" content="Prerequisite">
-  <meta property="og:description" content="Create a user in the PowerStore Navigate in the PowerStore Manager Settings -&gt; Users -&gt; Add Username: csmadmin User Role: Storage Operator
-(Optional) Create NAS server Navigate in the PowerStore Manager Storage -&gt; Nas Servers -&gt; Create
-For the protocol specific prerequisite check below. FC iSCSI NVMeFC NVMeTCP Complete the zoning of each host with the PowerStore Storage Array. Please refer the Host Connectivity Guide for the guidelines when setting a Fibre Channel SAN infrastructure.">
+  <meta property="og:description" content="CSI PowerMax Reverse Proxy The CSI PowerMax Reverse Proxy is a component that will be installed with the CSI PowerMax driver. For more details on this feature, see the related documentation.
+Create a TLS secret that holds an SSL certificate and a private key. This is required by the reverse proxy server.">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="website">
 
   <meta itemprop="name" content="Prerequisite">
-  <meta itemprop="description" content="Create a user in the PowerStore Navigate in the PowerStore Manager Settings -&gt; Users -&gt; Add Username: csmadmin User Role: Storage Operator
-(Optional) Create NAS server Navigate in the PowerStore Manager Storage -&gt; Nas Servers -&gt; Create
-For the protocol specific prerequisite check below. FC iSCSI NVMeFC NVMeTCP Complete the zoning of each host with the PowerStore Storage Array. Please refer the Host Connectivity Guide for the guidelines when setting a Fibre Channel SAN infrastructure.">
-  <meta itemprop="dateModified" content="2025-04-30T23:27:03+05:30">
-  <meta itemprop="wordCount" content="957">
+  <meta itemprop="description" content="CSI PowerMax Reverse Proxy The CSI PowerMax Reverse Proxy is a component that will be installed with the CSI PowerMax driver. For more details on this feature, see the related documentation.
+Create a TLS secret that holds an SSL certificate and a private key. This is required by the reverse proxy server.">
+  <meta itemprop="dateModified" content="2025-05-23T19:29:42+05:30">
+  <meta itemprop="wordCount" content="1428">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Prerequisite">
-  <meta name="twitter:description" content="Create a user in the PowerStore Navigate in the PowerStore Manager Settings -&gt; Users -&gt; Add Username: csmadmin User Role: Storage Operator
-(Optional) Create NAS server Navigate in the PowerStore Manager Storage -&gt; Nas Servers -&gt; Create
-For the protocol specific prerequisite check below. FC iSCSI NVMeFC NVMeTCP Complete the zoning of each host with the PowerStore Storage Array. Please refer the Host Connectivity Guide for the guidelines when setting a Fibre Channel SAN infrastructure.">
+  <meta name="twitter:description" content="CSI PowerMax Reverse Proxy The CSI PowerMax Reverse Proxy is a component that will be installed with the CSI PowerMax driver. For more details on this feature, see the related documentation.
+Create a TLS secret that holds an SSL certificate and a private key. This is required by the reverse proxy server.">
 <link rel="preload" href="/csm-docs/scss/main.min.e7545a059fd5aae4ec208e1d6f1035f1f3d13bb652f75b2bdb72aa84e1998b74.css" as="style" integrity="sha256-51RaBZ/VquTsII4dbxA18fPRO7ZS91sr23KqhOGZi3Q=" crossorigin="anonymous">
 <link href="/csm-docs/scss/main.min.e7545a059fd5aae4ec208e1d6f1035f1f3d13bb652f75b2bdb72aa84e1998b74.css" rel="stylesheet" integrity="sha256-51RaBZ/VquTsII4dbxA18fPRO7ZS91sr23KqhOGZi3Q=" crossorigin="anonymous">
 <script
@@ -211,7 +207,7 @@ For the protocol specific prerequisite check below. FC iSCSI NVMeFC NVMeTCP Comp
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.6715f4bea3dd3627dd322a023cfcdfd7.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.3160224dcab520b8827d3b286605e76d.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -3965,39 +3961,59 @@ document.addEventListener("DOMContentLoaded", function() {
      
 	
     
-        <ol>
-<li>
-<p>Create a user in the PowerStore Navigate in the PowerStore Manager Settings -&gt; Users -&gt; Add
-<br>
-<br>
-Username: csmadmin <br>
-User Role: Storage Operator</p>
-</li>
-<li>
-<p>(Optional) Create NAS server Navigate in the PowerStore Manager Storage -&gt; Nas Servers -&gt; Create</p>
-</li>
-</ol>
-<br> 
-<ol start="3">
-<li>
+        <h3 id="csi-powermax-reverse-proxy">
+CSI PowerMax Reverse Proxy <a class="header-link"  href="#csi-powermax-reverse-proxy" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
+            <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 0h24v24H0z" fill="none"/>
+                <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
+            </svg>
+        </a></h3><p>The CSI PowerMax Reverse Proxy is a component that will be installed with the CSI PowerMax driver. For more details on this feature, see the related <a href="/csm-docs/docs/concepts/csidriver/features/powermax/#csi-powermax-reverse-proxy">documentation</a>.</p>
+<p>Create a TLS secret that holds an SSL certificate and a private key. This is required by the reverse proxy server.</p>
+<p>Create the Configuration file (openssl.cnf) which includes the subjectAltName:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#ce5c00;font-weight:bold">[</span> req <span style="color:#ce5c00;font-weight:bold">]</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">default_bits</span>       <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#0000cf;font-weight:bold">2048</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">distinguished_name</span> <span style="color:#ce5c00;font-weight:bold">=</span> req_distinguished_name
+</span></span><span style="display:flex;"><span><span style="color:#000">req_extensions</span>     <span style="color:#ce5c00;font-weight:bold">=</span> req_ext
+</span></span><span style="display:flex;"><span><span style="color:#000">prompt</span>             <span style="color:#ce5c00;font-weight:bold">=</span> no
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ce5c00;font-weight:bold">[</span> req_distinguished_name <span style="color:#ce5c00;font-weight:bold">]</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">C</span>  <span style="color:#ce5c00;font-weight:bold">=</span> XX
+</span></span><span style="display:flex;"><span><span style="color:#000">L</span>  <span style="color:#ce5c00;font-weight:bold">=</span> Default City
+</span></span><span style="display:flex;"><span><span style="color:#000">O</span>  <span style="color:#ce5c00;font-weight:bold">=</span> Default Company Ltd
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ce5c00;font-weight:bold">[</span> req_ext <span style="color:#ce5c00;font-weight:bold">]</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">subjectAltName</span> <span style="color:#ce5c00;font-weight:bold">=</span> @alt_names
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ce5c00;font-weight:bold">[</span> alt_names <span style="color:#ce5c00;font-weight:bold">]</span>
+</span></span><span style="display:flex;"><span>DNS.1 <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#4e9a06">&#34;csipowermax-reverseproxy&#34;</span>
+</span></span><span style="display:flex;"><span>IP.1 <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#4e9a06">&#34;0.0.0.0&#34;</span>
+</span></span></code></pre></div><p>Use a tool such as <code>openssl</code> to generate this secret using the example below:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>openssl genrsa -out tls.key <span style="color:#0000cf;font-weight:bold">2048</span>
+</span></span><span style="display:flex;"><span>openssl req -new -key tls.key -out tls.csr -config openssl.cnf
+</span></span><span style="display:flex;"><span>openssl x509 -req -in tls.csr -signkey tls.key -out tls.crt -days <span style="color:#0000cf;font-weight:bold">3650</span> -extensions req_ext -extfile openssl.cnf
+</span></span></code></pre></div><p>Make note of the newly created tls.crt and tls.key files as they will be referenced later to create Kubernetes Secret resources.</p>
 <p>For the protocol specific prerequisite check below.
 <br></p>
 
-   
 
-   
+
+
+
+
+
+
+
 
     
 
-    
 
 
-   <ul class="nav nav-tabs" id="tabs-0" role="tablist">
+<ul class="nav nav-tabs" id="tabs-0" role="tablist">
   <li class="nav-item">
       <button class="nav-link active"
           id="tabs-00-00-tab" data-bs-toggle="tab" data-bs-target="#tabs-00-00" role="tab"
-          data-td-tp-persist="fc" aria-controls="tabs-00-00" aria-selected="true">
-        FC
+          data-td-tp-persist="fibre channel" aria-controls="tabs-00-00" aria-selected="true">
+        Fibre Channel
       </button>
     </li><li class="nav-item">
       <button class="nav-link"
@@ -4017,57 +4033,75 @@ User Role: Storage Operator</p>
           data-td-tp-persist="nvmetcp" aria-controls="tabs-00-03" aria-selected="false">
         NVMeTCP
       </button>
+    </li><li class="nav-item">
+      <button class="nav-link"
+          id="tabs-00-04-tab" data-bs-toggle="tab" data-bs-target="#tabs-00-04" role="tab"
+          data-td-tp-persist="nfs" aria-controls="tabs-00-04" aria-selected="false">
+        NFS
+      </button>
     </li>
 </ul>
 
 <div class="tab-content" id="tabs-0-content">
     <div class="tab-body tab-pane fade show active"
         id="tabs-00-00" role="tabpanel" aria-labelled-by="tabs-00-00-tab" tabindex="0">
-        <ol>
+        <h3 id="fibre-channel-requirements">
+Fibre Channel Requirements <a class="header-link"  href="#fibre-channel-requirements" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
+            <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 0h24v24H0z" fill="none"/>
+                <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
+            </svg>
+        </a></h3><p>The following requirements must be fulfilled in order to successfully use the Fiber Channel protocol with the CSI PowerMax driver:</p>
+<ul>
+<li>Zoning of the Host Bus Adapters (HBAs) to the Fibre Channel port director must be completed.</li>
+<li>Ensure that the HBA WWNs (initiators) appear on the list of initiators that are logged into the array.</li>
+<li>If the number of volumes that will be published to nodes is high, then configure the maximum number of LUNs for your HBAs on each node. See the appropriate HBA document to configure the maximum number of LUNs.</li>
+</ul>
+</br>
+<ol>
 <li>
-<p>Complete the zoning of each host with the PowerStore Storage Array. Please refer the <a  href="https://elabnavigator.dell.com/vault/pdf/Linux.pdf" target="_blank" style="font-weight:bold; font-size:0.9rem">Host Connectivity Guide</a> for the guidelines when setting a Fibre Channel SAN infrastructure.<br>
+<p>Complete the zoning of each host with the PowerMax Storage Array. Please refer to <a  href="https://elabnavigator.dell.com/vault/pdf/Linux.pdf" target="_blank" style="font-size:0.9rem">Host Connectivity Guide</a> for the guidelines when setting up a Fibre Channel SAN infrastructure.<br>
 <br></p>
 </li>
 <li>
-<p>Verify the initiators of each host are logged in to the PowerStore Storage Array. CSM will perform the Host Registration of each host with the PowerStore Array.</p>
+<p>Verify the initiators of each host are logged in to the PowerMax Storage Array. CSM will perform the Host Registration of each host with the PowerMax Array.
+<br></p>
 </li>
-</ol>
-   <br> 
-<ol start="3">
 <li>
 <p>Multipathing software configuration</p>
-<p>a. Configure Device Mapper MPIO for PowerStore FC connectivity</p>
+<p>a. Configure Device Mapper MPIO for PowerMax FC connectivity</p>
 <p>Use this command to create the machine configuration to configure the DM-MPIO service on all the worker hosts for FC  connectivity.</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>oc apply -f 99-workers-multipath-conf.yaml
 </span></span></code></pre></div> <br> 
 <p>Example:</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#000">cat &lt;&lt;EOF&gt; multipath.conf</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#000">defaults {</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#000">polling_interval 5</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#000">checker_timeout 15</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#000">disable_changed_wwids yes</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#000">find_multipaths no</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span>}<span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#000">devices {</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#000">device {</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#000">vendor                   DellEMC</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#000">product                  PowerStore</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#000">detect_prio              &#34;yes&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#000">path_selector            &#34;service-time 0&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#000">path_grouping_policy     &#34;group_by_prio&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#000">path_checker             tur</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#000">failback                 immediate</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#000">fast_io_fail_tmo         5</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#000">no_path_retry            3</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#000">rr_min_io_rq             1</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#000">max_sectors_kb           1024</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#000">dev_loss_tmo             10</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#000">defaults {</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#000">polling_interval 5</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#000">checker_timeout 15</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#000">disable_changed_wwids yes</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#000">find_multipaths no</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span>}<span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span>}<span style="color:#f8f8f8;text-decoration:underline">  
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#000">devices {</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#000">device {</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#000">vendor                   DellEMC</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#000">product                  PowerMax</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#000">detect_prio              &#34;yes&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#000">path_selector            &#34;service-time 0&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#000">path_grouping_policy     &#34;group_by_prio&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#000">path_checker             tur</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#000">failback                 immediate</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#000">fast_io_fail_tmo         5</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#000">no_path_retry            3</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#000">rr_min_io_rq             1</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#000">max_sectors_kb           1024</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#000">dev_loss_tmo             10</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span>}<span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span>}<span style="color:#f8f8f8;text-decoration:underline">  
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#000">EOF</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span></code></pre></div> <br>
  <br>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#000">cat &lt;&lt;EOF&gt; 99-workers-multipath-conf.yaml</span><span style="color:#f8f8f8;text-decoration:underline">
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#000">cat &lt;&lt;EOF&gt; 99-workers-multipath-conf.yaml</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">apiVersion</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">machineconfiguration.openshift.io/v1</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">kind</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">MachineConfig</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">metadata</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
@@ -4118,11 +4152,11 @@ User Role: Storage Operator</p>
         id="tabs-00-01" role="tabpanel" aria-labelled-by="tabs-00-01-tab" tabindex="0">
         <ol>
 <li>
-<p>Complete the iSCSI network configuration to connect the hosts with the PowerStore Storage array. Please refer the <a  href="https://elabnavigator.dell.com/vault/pdf/Linux.pdf" target="_blank" style="font-weight:bold; font-size:0.9rem">Host Connectivity Guide</a> for the  best practices for attaching the hosts to a PowerStore storage array.<br>
+<p>Complete the iSCSI network configuration to connect the hosts with the PowerMax Storage array. Please refer to <a  href="https://elabnavigator.dell.com/vault/pdf/Linux.pdf" target="_blank" style="font-size:0.9rem">Host Connectivity Guide</a> for the  best practices for attaching the hosts to a PowerMax storage array.<br>
 <br></p>
 </li>
 <li>
-<p>Verify the initiators of each host are logged in to the PowerStore Storage Array. CSM will perform the Host Registration of each host with the PowerStore Array.<br>
+<p>Verify the initiators of each host are logged in to the PowerMax Storage Array. CSM will perform the Host Registration of each host with the PowerMax Array.<br>
 <br></p>
 </li>
 <li>
@@ -4132,6 +4166,8 @@ User Role: Storage Operator</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>oc apply -f 99-workers-enable-iscsid.yaml
 </span></span></code></pre></div><br>
 <p>Example:</p>
+</li>
+</ol>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#000">cat &lt;&lt;EOF&gt; 99-workers-enable-iscsid.yaml</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">apiVersion</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">machineconfiguration.openshift.io/v1</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">kind</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">MachineConfig</span><span style="color:#f8f8f8;text-decoration:underline">
@@ -4147,19 +4183,15 @@ User Role: Storage Operator</p>
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">units</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span>- <span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;iscsid.service&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">enabled</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span></code></pre></div></li>
-</ol>
-   <br>
-   <br>
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#000">EOF</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span></code></pre></div><br>
 <ol start="4">
 <li>
 <p>Multipathing software configuration</p>
-<p>a. Configure Device Mapper MPIO for PowerStore iSCSI connectivity</p>
-<p>Use this command to create the machine configuration to configure the DM-MPIO service on all the worker hosts for iSCSI  connectivity.</p>
+<p>a. Configure Device Mapper MPIO for PowerMax FC connectivity</p>
+<p>Use this command to create the machine configuration to configure the DM-MPIO service on all the worker hosts for FC connectivity.</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>oc apply -f 99-workers-multipath-conf.yaml
 </span></span></code></pre></div> <br>
- <br> 
- Example: 
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#000">cat &lt;&lt;EOF&gt; multipath.conf</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#000">defaults {</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#000">polling_interval 5</span><span style="color:#f8f8f8;text-decoration:underline">
@@ -4170,7 +4202,7 @@ User Role: Storage Operator</p>
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#000">devices {</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#000">device {</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#000">vendor                   DellEMC</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#000">product                  PowerStore</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#000">product                  PowerMax</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#000">detect_prio              &#34;yes&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#000">path_selector            &#34;service-time 0&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#000">path_grouping_policy     &#34;group_by_prio&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
@@ -4227,36 +4259,28 @@ User Role: Storage Operator</p>
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span>- <span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;multipathd.service&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">enabled</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#000">EOF</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span></code></pre></div> <br>
-</li>
+</span></span></span></code></pre></div></li>
 </ol>
 
     </div>
     <div class="tab-body tab-pane fade"
         id="tabs-00-02" role="tabpanel" aria-labelled-by="tabs-00-02-tab" tabindex="0">
         <ol>
-<li>Complete the zoning of each host with the PowerStore Storage Array. Please refer the <a  href="https://elabnavigator.dell.com/vault/pdf/Linux.pdf" target="_blank" style="font-weight:bold; font-size:0.9rem">Host Connectivity Guide</a> for the guidelines when setting a Fibre Channel SAN infrastructure.</li>
+<li>Complete the zoning of each host with the PowerMax Storage Array. Please refer to <a  href="https://elabnavigator.dell.com/vault/pdf/Linux.pdf" target="_blank" style="font-size:0.9rem">Host Connectivity Guide</a> for the guidelines when setting a Fibre Channel SAN infrastructure.</li>
 </ol>
-   <br> 
-   <br>
+<br>
 <ol start="2">
-<li>Verify the initiators of each host are logged in to the PowerStore Storage Array. CSM will perform the Host Registration of each host with the PowerStore Array.</li>
+<li>Verify the initiators of each host are logged in to the PowerMax Storage Array. CSM will perform the Host Registration of each host with the PowerMax Array.</li>
 </ol>
-   <br>
-   <br>
+<br>
 <ol start="3">
 <li>
-<p>Configure IO policy for native NVMe multipathing</p>
-<p>Use this comment to create the machine configuration to configure the native NVMe multipathing IO Policy to round robin.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>oc apply -f 99-workers-multipath-round-robin.yaml
-</span></span></code></pre></div><br> 
-<br>
+<p>Multipathing software configuration</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#000">cat &lt;&lt;EOF&gt; 71-nvmf-iopolicy-dell.rules</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#000">ACTION==&#34;add&#34;, SUBSYSTEM==&#34;nvme-subsystem&#34;, ATTR{model}==&#34;dellemc-powerstore&#34;,ATTR{iopolicy}=&#34;round-robin&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#000">ACTION==&#34;add&#34;, SUBSYSTEM==&#34;nvme-subsystem&#34;, ATTR{model}==&#34;dellemc-powermax&#34;,ATTR{iopolicy}=&#34;round-robin&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#000">EOF</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span></code></pre></div><br> 
 <br>
-Example: 
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#000">cat &lt;&lt;EOF&gt; 99-workers-multipath-round-robin.yaml</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">apiVersion</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">machineconfiguration.openshift.io/v1</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">kind</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">MachineConfig</span><span style="color:#f8f8f8;text-decoration:underline">
@@ -4279,25 +4303,19 @@ Example:
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#000">EOF</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span></code></pre></div></li>
 </ol>
-   <br> 
-   <br>
+<br> 
 <ol start="4">
 <li>
 <p>Configure NVMe reconnecting forever</p>
-<p>Use this command to create the machine configuration to configure the NVMe reconnect</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>oc apply -f 99-workers-nvmf-ctrl-loss-tmo.yaml 
-</span></span></code></pre></div><br> 
-<br>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#000">cat &lt;&lt;EOF&gt; 72-nvmf-ctrl_loss_tmo.rules</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#000">ACTION==&#34;add|change&#34;, SUBSYSTEM==&#34;nvme&#34;, KERNEL==&#34;nvme*&#34;, ATTR{ctrl_loss_tmo}=&#34;-1&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#000">EOF</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span></code></pre></div><br> 
-<br>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#000">cat &lt;&lt;EOF&gt; 99-workers-nvmf-ctrl-loss-tmo.yaml</span><span style="color:#f8f8f8;text-decoration:underline">
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#000">cat &lt;&lt;EOF&gt; 99-nvmf-ctrl-loss-tmo.yaml</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">apiVersion</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">machineconfiguration.openshift.io/v1</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">kind</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">MachineConfig</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">metadata</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#0000cf;font-weight:bold">99</span>-<span style="color:#000">workers-nvmf-ctrl-loss-tmo</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#0000cf;font-weight:bold">99</span>-<span style="color:#000">nvmf-ctrl-loss-tmo</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">labels</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">machineconfiguration.openshift.io/role</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">worker</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">spec</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
@@ -4307,27 +4325,57 @@ Example:
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">storage</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">files</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span>- <span style="color:#204a87;font-weight:bold">contents</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">          </span><span style="color:#204a87;font-weight:bold">source</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">data:text/plain;charset=utf-8;base64,$(cat 72-nvmf-ctrl_loss_tmo.rules | base64 -w0)</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">          </span><span style="color:#204a87;font-weight:bold">source</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">data:text/plain;charset=utf-8;base64,(cat 72-nvmf-ctrl_loss_tmo.rules | base64 -w0)</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">          </span><span style="color:#204a87;font-weight:bold">verification</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>{}<span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">filesystem</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">root</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">mode</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#0000cf;font-weight:bold">420</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">path</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">/etc/udev/rules.d/72-nvmf-ctrl_loss_tmo.rules</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#000">EOF</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span></code></pre></div></li>
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">EOF</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span></code></pre></div></br>
+</li>
 </ol>
-
+<p><strong>Cluster requirements</strong></p>
+<p>All OpenShift nodes connecting to Dell storage arrays must use unique host NVMe Qualified Names (NQNs).</p>
+<blockquote>
+<p>The OpenShift deployment process for CoreOS will set the same host NQN for all nodes. The host NQN is stored in the file /etc/nvme/hostnqn. One possible solution to ensure unique host NQNs is to add the following machine config to your OCP cluster:</p></blockquote>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#000">cat &lt;&lt;EOF&gt; 99-worker-custom-nvme-hostnqn.yaml</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">apiVersion</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">machineconfiguration.openshift.io/v1</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">kind</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">MachineConfig</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">metadata</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">labels</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">machineconfiguration.openshift.io/role</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">worker</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#0000cf;font-weight:bold">99</span>-<span style="color:#000">worker-custom-nvme-hostnqn</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">spec</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">config</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">ignition</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">version</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#0000cf;font-weight:bold">3.4.0</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">systemd</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">units</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">        </span>- <span style="color:#204a87;font-weight:bold">contents</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000;font-weight:bold">|</span><span style="color:#8f5902;font-style:italic">
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">            [Unit]
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">            Description=Custom CoreOS Generate NVMe Hostnqn
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">            [Service]
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">            Type=oneshot
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">            ExecStart=/usr/bin/sh -c &#39;/usr/sbin/nvme gen-hostnqn &gt; /etc/nvme/hostnqn&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">            RemainAfterExit=yes
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">            [Install]
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">            WantedBy=multi-user.target</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">          </span><span style="color:#204a87;font-weight:bold">enabled</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">          </span><span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">custom-coreos-generate-nvme-hostnqn.service</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#000">EOF</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span></code></pre></div>
     </div>
     <div class="tab-body tab-pane fade"
         id="tabs-00-03" role="tabpanel" aria-labelled-by="tabs-00-03-tab" tabindex="0">
         <ol>
-<li>Complete the NVMe network configuration to connect the hosts with the PowerStore Storage array. Please refer <a  href="https://elabnavigator.dell.com/vault/pdf/Linux.pdf" target="_blank" style="font-weight:bold; font-size:0.9rem">Host Connectivity Guide</a> for the best practices for attaching the hosts to a PowerStore storage array.</li>
+<li>Complete the NVMe network configuration to connect the hosts with the PowerMax Storage array. Please refer <a  href="https://elabnavigator.dell.com/vault/pdf/Linux.pdf" target="_blank" style="font-weight:bold; font-size:0.9rem">Host Connectivity Guide</a> for the best practices for attaching the hosts to a PowerMax storage array.</li>
 </ol>
    <br> 
-   <br>
 <ol start="2">
-<li>Verify the initiators of each host are logged in to the PowerStore Storage Array. CSM will perform the Host Registration of each host with the PowerStore Array.</li>
+<li>Verify the initiators of each host are logged in to the PowerMax Storage Array. CSM will perform the Host Registration of each host with the PowerMax Array.</li>
 </ol>
-   <br>
    <br>
 <ol start="3">
 <li>
@@ -4335,13 +4383,11 @@ Example:
 <p>Use this comment to create the machine configuration to configure the native NVMe multipathing IO Policy to round robin.</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>oc apply -f 99-workers-multipath-round-robin.yaml
 </span></span></code></pre></div><br> 
-<br>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#000">cat &lt;&lt;EOF&gt; 71-nvmf-iopolicy-dell.rules</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#000">ACTION==&#34;add&#34;, SUBSYSTEM==&#34;nvme-subsystem&#34;, ATTR{model}==&#34;dellemc-powerstore&#34;,ATTR{iopolicy}=&#34;round-robin&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#000">ACTION==&#34;add&#34;, SUBSYSTEM==&#34;nvme-subsystem&#34;, ATTR{model}==&#34;dellemc-powermax&#34;,ATTR{iopolicy}=&#34;round-robin&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#000">EOF</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span></code></pre></div><br> 
-<br>
-Example: 
+<p>Example:</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#000">cat &lt;&lt;EOF&gt; 99-workers-multipath-round-robin.yaml</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">apiVersion</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">machineconfiguration.openshift.io/v1</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">kind</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">MachineConfig</span><span style="color:#f8f8f8;text-decoration:underline">
@@ -4365,19 +4411,16 @@ Example:
 </span></span></span></code></pre></div></li>
 </ol>
    <br> 
-   <br>
 <ol start="4">
 <li>
 <p>Configure NVMe reconnecting forever</p>
 <p>Use this command to create the machine configuration to configure the NVMe reconnect</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>oc apply -f 99-workers-nvmf-ctrl-loss-tmo.yaml 
 </span></span></code></pre></div><br> 
-<br>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#000">cat &lt;&lt;EOF&gt; 72-nvmf-ctrl_loss_tmo.rules</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#000">ACTION==&#34;add|change&#34;, SUBSYSTEM==&#34;nvme&#34;, KERNEL==&#34;nvme*&#34;, ATTR{ctrl_loss_tmo}=&#34;-1&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#000">EOF</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span></code></pre></div><br> 
-<br>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#000">cat &lt;&lt;EOF&gt; 99-workers-nvmf-ctrl-loss-tmo.yaml</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">apiVersion</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">machineconfiguration.openshift.io/v1</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">kind</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">MachineConfig</span><span style="color:#f8f8f8;text-decoration:underline">
@@ -4400,6 +4443,51 @@ Example:
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#000">EOF</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span></code></pre></div></li>
 </ol>
+</br>
+<p><strong>Cluster requirements</strong></p>
+<p>All OpenShift nodes connecting to Dell storage arrays must use unique host NVMe Qualified Names (NQNs).</p>
+<blockquote>
+<p>The OpenShift deployment process for CoreOS will set the same host NQN for all nodes. The host NQN is stored in the file /etc/nvme/hostnqn. One possible solution to ensure unique host NQNs is to add the following machine config to your OCP cluster:</p></blockquote>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#000">cat &lt;&lt;EOF&gt; 99-worker-custom-nvme-hostnqn.yaml</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">apiVersion</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">machineconfiguration.openshift.io/v1</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">kind</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">MachineConfig</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">metadata</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">labels</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">machineconfiguration.openshift.io/role</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">worker</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#0000cf;font-weight:bold">99</span>-<span style="color:#000">worker-custom-nvme-hostnqn</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">spec</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">config</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">ignition</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">version</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#0000cf;font-weight:bold">3.4.0</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">systemd</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">units</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">        </span>- <span style="color:#204a87;font-weight:bold">contents</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000;font-weight:bold">|</span><span style="color:#8f5902;font-style:italic">
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">            [Unit]
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">            Description=Custom CoreOS Generate NVMe Hostnqn
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">            [Service]
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">            Type=oneshot
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">            ExecStart=/usr/bin/sh -c &#39;/usr/sbin/nvme gen-hostnqn &gt; /etc/nvme/hostnqn&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">            RemainAfterExit=yes
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">            [Install]
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">            WantedBy=multi-user.target</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">          </span><span style="color:#204a87;font-weight:bold">enabled</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">          </span><span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">custom-coreos-generate-nvme-hostnqn.service</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#000">EOF</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span></code></pre></div>
+    </div>
+    <div class="tab-body tab-pane fade"
+        id="tabs-00-04" role="tabpanel" aria-labelled-by="tabs-00-04-tab" tabindex="0">
+        <h3 id="nfs-requirements">
+NFS Requirements <a class="header-link"  href="#nfs-requirements" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
+            <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 0h24v24H0z" fill="none"/>
+                <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
+            </svg>
+        </a></h3><ul>
+<li>Ensure that your nodes support mounting NFS volumes if using NFS.</li>
+</ul>
 
     </div>
 </div> 
@@ -4444,8 +4532,23 @@ Example:
   });
   </script>
   
-</li>
-</ol>
+<h3 id="replication-requirements-optional">
+Replication Requirements (Optional) <a class="header-link"  href="#replication-requirements-optional" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
+            <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 0h24v24H0z" fill="none"/>
+                <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
+            </svg>
+        </a></h3><p>Applicable only if you decided to enable the Replication feature in <code>my-powermax-settings.yaml</code></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">replication</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">enabled</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span></code></pre></div><h4 id="replication-crds">
+Replication CRD&rsquo;s <a class="header-link"  href="#replication-crds" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
+            <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 0h24v24H0z" fill="none"/>
+                <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
+            </svg>
+        </a></h4><p>The CRDs for replication can be obtained and installed from the csm-replication project on Github. Use <code>csm-replication/deploy/replicationcrds.all.yaml</code> located in the csm-replication git repo for the installation.</p>
+<p>CRDs should be configured during replication prepare stage with repctl as described in <a href="/csm-docs/docs/getting-started/installation/kubernetes/powermax/helm/csm-modules/replication/install-repctl/">install-repctl</a></p>
 
 	
         <div class="section-index">

@@ -23,8 +23,8 @@ A Kubernetes or OpenShift cluster (see supported versions). A PowerMax system ma
   <meta itemprop="name" content="Prerequisite">
   <meta itemprop="description" content="The following requirements must be met before installing the CSI Driver for PowerMax:
 A Kubernetes or OpenShift cluster (see supported versions). A PowerMax system managed by a Unisphere instance with software version 10.0 or later. If enabling CSM for Authorization, please refer to the Authorization deployment steps first If enabling CSM Replication, both source and target storage systems must be locally managed by Unisphere. Example: When using two Unisphere instances, the first Unisphere instance should be configured with the source storage system as locally managed and target storage system as remotely managed. The second Unisphere configuration should mirror the first — locally managing the target storage system and remotely managing the source storage system. Refer to the sections below for protocol specific requirements. For NVMe support the preferred multipath solution is NVMe native multipathing. The Dell Host Connectivity Guide describes the details of each configuration option. Linux multipathing requirements (described later). PowerPath for Linux requirements (described later). Mount propagation is enabled on the container runtime that is being used. If using Snapshot feature, satisfy all Volume Snapshot requirements. Insecure registries are defined in Docker or other container runtime for CSI drivers that are hosted in a non-secure location. Ensure that your nodes support mounting NFS volumes if using NFS. Auto RDM for vSphere over FC requirements CSI PowerMax Reverse Proxy The CSI PowerMax Reverse Proxy is a component that will be installed with the CSI PowerMax driver. For more details on this feature, see the related documentation.">
-  <meta itemprop="dateModified" content="2025-05-09T08:37:12-05:00">
-  <meta itemprop="wordCount" content="2208">
+  <meta itemprop="dateModified" content="2025-05-23T19:29:42+05:30">
+  <meta itemprop="wordCount" content="2223">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Prerequisite">
   <meta name="twitter:description" content="The following requirements must be met before installing the CSI Driver for PowerMax:
@@ -207,7 +207,7 @@ A Kubernetes or OpenShift cluster (see supported versions). A PowerMax system ma
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.6715f4bea3dd3627dd322a023cfcdfd7.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.3160224dcab520b8827d3b286605e76d.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -4025,8 +4025,8 @@ required by the reverse proxy server.</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>openssl genrsa -out tls.key <span style="color:#0000cf;font-weight:bold">2048</span>
 </span></span><span style="display:flex;"><span>openssl req -new -key tls.key -out tls.csr -config openssl.cnf
 </span></span><span style="display:flex;"><span>openssl x509 -req -in tls.csr -signkey tls.key -out tls.crt -days <span style="color:#0000cf;font-weight:bold">3650</span> -extensions req_ext -extfile openssl.cnf
-</span></span><span style="display:flex;"><span>kubectl create secret -n &lt;namespace&gt; tls csirevproxy-tls-secret --cert<span style="color:#ce5c00;font-weight:bold">=</span>tls.crt --key<span style="color:#ce5c00;font-weight:bold">=</span>tls.key
-</span></span></code></pre></div> 
+</span></span></code></pre></div><p>Make note of the newly created tls.crt and tls.key files as they will be referenced later to create Kubernetes Secret resources.</p>
+ 
 
 
 
@@ -4150,10 +4150,11 @@ the below commands:
 <li>The NVMe modules may not be available after a node reboot. Loading the modules
 at startup is recommended.</li>
 </ul>
-<blockquote>
-<p>Starting with OCP 4.14 NVMe/TCP is enabled by default on RCOS nodes.</p></blockquote>
 <p><strong>Cluster requirements</strong></p>
 <ul>
+<li>
+<p>Kubernetes nodes connecting to Dell storage arrays must use unique host NVMe Qualified Names (NQNs).</p>
+</li>
 <li>
 <p>The driver requires the NVMe command-line interface (nvme-cli) to manage the
 NVMe clients and targets. The NVMe CLI tool is installed in the host using the
