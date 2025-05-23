@@ -26,6 +26,7 @@ var nodeSelectorNote = 'For the pod to be eligible to run on a node, the node mu
 
 const snapshotNote = 'If Snapshot is enabled, ensure the Snapshot CRDs are installed';
 const certmanagerNote = 'If cert-manager is enabled, ensure the cert-manager CRDs are installed';
+const approveSdcNote = 'If approve SDC is not enabled, ensure to approve the SDC manually before provisioning';
 const veleroNote = 'If Velero is enabled, please add the respective credentials and configurations in the YAML file.';
 const podmonNote = 'Uncomment tolerations under node property, if CSM for Resiliency and CSI Driver pods monitor are enabled in the generated YAML';
 const authorizationNote = 'Only the Authorization sidecar is enabled by the CSM Installation Wizard. The Proxy Server has to be installed and configured separately';

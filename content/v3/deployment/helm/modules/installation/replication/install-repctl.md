@@ -4,6 +4,9 @@ linktitle: Installation using repctl
 weight: 4
 description: Installation of CSM for Replication using repctl
 ---
+{{% pageinfo color="primary" %}}
+{{< message text="1" >}}
+{{% /pageinfo %}}
 
 ## Install Replication Walkthrough
 > **_NOTE:_**  These steps should not be used when installing using Dell CSM Operator.
@@ -13,14 +16,14 @@ Before you begin, make sure you have the repctl tool available.
 
 You can download a pre-built repctl binary from our [Releases](https://github.com/dell/csm-replication/releases) page.
 ```shell
-wget https://github.com/dell/csm-replication/releases/download/v1.9.0/repctl-linux-amd64
+wget https://github.com/dell/csm-replication/releases/download/v1.10.0/repctl-linux-amd64
 mv repctl-linux-amd64 repctl
 chmod +x repctl
 ```
 
 Alternately, if you want to build the binary yourself, you can follow these steps:
 ```shell
-git clone -b v1.9.0 https://github.com/dell/csm-replication.git
+git clone -b v1.10.0 https://github.com/dell/csm-replication.git
 cd csm-replication/repctl
 make build
 ```
