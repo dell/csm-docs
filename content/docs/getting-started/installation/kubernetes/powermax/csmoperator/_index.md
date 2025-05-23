@@ -55,29 +55,36 @@ To deploy the Operator, follow the instructions available [here](../../../operat
 
 3. **Create Powermax Array Configmap:**
 
-   **Note:** `powermax-array-config` is deprecated and remains for backward compatibility only. You can skip creating it and instead add values for X_CSI_MANAGED_ARRAYS, X_CSI_TRANSPORT_PROTOCOL, and X_CSI_POWERMAX_PORTGROUPS in the sample files.
+    **Note:** `powermax-array-config` is deprecated and remains for backward compatibility only. You can skip creating it and instead add values for X_CSI_MANAGED_ARRAYS, X_CSI_TRANSPORT_PROTOCOL, and X_CSI_POWERMAX_PORTGROUPS in the sample files.
 
-   Create a configmap using the sample file [here](https://github.com/dell/csi-powermax/blob/main/samples/configmap/powermax-array-config.yaml). Fill in the appropriate values for driver configuration.
+    Create a configmap using the sample file [here](https://github.com/dell/csi-powermax/blob/main/samples/configmap/powermax-array-config.yaml). Fill in the appropriate values for driver configuration.
     ```yaml
-       # To create this configmap use: kubectl create -f powermax-array-config.yaml
-       apiVersion: v1
-       kind: ConfigMap
-       metadata:
-         name: powermax-array-config
-         namespace: powermax
-       data:
-         powermax-array-config.yaml: |
-           # List of comma-separated port groups (ISCSI only). Example: PortGroup1, portGroup2 Required for iSCSI only
-           X_CSI_POWERMAX_PORTGROUPS: ""
-           # Choose which transport protocol to use (ISCSI, FC, NVMETCP, auto) defaults to auto if nothing is specified
-           X_CSI_TRANSPORT_PROTOCOL: ""
-           # IP address of the Unisphere for PowerMax (Required), Defaults to https://0.0.0.0:8443
-           X_CSI_POWERMAX_ENDPOINT: "https://10.0.0.0:8443" 
-           # List of comma-separated array ID(s) which will be managed by the driver (Required)
-           X_CSI_MANAGED_ARRAYS: "000000000000,000000000000,"
+    # To create this configmap use: kubectl create -f powermax-array-config.yaml
+    apiVersion: v1
+    kind: ConfigMap
+    metadata:
+      name: powermax-array-config
+      namespace: powermax
+    data:
+      powermax-array-config.yaml: |
+        # List of comma-separated port groups (ISCSI only). Example: PortGroup1, portGroup2 Required for iSCSI only
+        X_CSI_POWERMAX_PORTGROUPS: ""
+        # Choose which transport protocol to use (ISCSI, FC, NVMETCP, auto) defaults to auto if nothing is specified
+        X_CSI_TRANSPORT_PROTOCOL: ""
+        # IP address of the Unisphere for PowerMax (Required), Defaults to https://0.0.0.0:8443
+        X_CSI_POWERMAX_ENDPOINT: "https://10.0.0.0:8443"
+        # List of comma-separated array ID(s) which will be managed by the driver (Required)
+        X_CSI_MANAGED_ARRAYS: "000000000000,000000000000,"
     ```
 
-4. **Install Driver**
+4. **Create the Reverse Proxy TLS Secret**
+
+    Referencing the TLS certificate and key created in the [CSI PowerMax Reverse Proxy](../prerequisite#csi-powermax-reverse-proxy) prerequisite, create the `csirevproxy-tls-secret` secret.
+    ```bash
+    oc create secret -n powermax tls csirevproxy-tls-secret --cert=tls.crt --key=tls.key
+    ```
+
+5. **Install Driver**
 
     i. **Create a CR (Custom Resource)** for PowerMax using the sample files provided
     
@@ -135,7 +142,7 @@ To deploy the Operator, follow the instructions available [here](../../../operat
     ```
 </ul> 
 
-5. **Verify the installation** as mentioned below
+6. **Verify the installation** as mentioned below
 
     - Check if ContainerStorageModule CR is created successfully using the command below:
         ```bash
@@ -143,7 +150,7 @@ To deploy the Operator, follow the instructions available [here](../../../operat
         ```
     * Check the status of the CR to verify if the driver installation is in the `Succeeded` state. If the status is not `Succeeded`, see the [Troubleshooting guide](../troubleshooting/#my-dell-csi-driver-install-failed-how-do-i-fix-it) for more information.
 
-6. Refer [Volume Snapshot Class](https://github.com/dell/csi-powermax/tree/main/samples/volumesnapshotclass) and [Storage Class](https://github.com/dell/csi-powermax/tree/main/samples/storageclass) for the sample files. 
+7. Refer [Volume Snapshot Class](https://github.com/dell/csi-powermax/tree/main/samples/volumesnapshotclass) and [Storage Class](https://github.com/dell/csi-powermax/tree/main/samples/storageclass) for the sample files. 
    
 ## Other features to enable
 ### Dynamic Logging Configuration
