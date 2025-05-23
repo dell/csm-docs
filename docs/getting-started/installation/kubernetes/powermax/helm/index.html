@@ -20,8 +20,8 @@
 
   <meta itemprop="name" content="Installation Guide">
   <meta itemprop="description" content="Helm Installation">
-  <meta itemprop="dateModified" content="2025-05-13T20:06:59+05:30">
-  <meta itemprop="wordCount" content="2601">
+  <meta itemprop="dateModified" content="2025-05-23T19:29:42+05:30">
+  <meta itemprop="wordCount" content="2628">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Installation Guide">
   <meta name="twitter:description" content="Helm Installation">
@@ -203,7 +203,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.6715f4bea3dd3627dd322a023cfcdfd7.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.3160224dcab520b8827d3b286605e76d.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -4783,23 +4783,24 @@ Install Driver <a class="header-link"  href="#install-driver" style=" display: i
 <p>Confirm the value of <code>global.useSecret</code> is set to <code>true</code>.</p>
 </li>
 <li>
-<p>Using the TLS certificate and key created in the <a href="../prerequisite/#csi-powermax-reverse-proxy">CSI PowerMax Reverse Proxy</a> prerequisite step, provide the base64 encoded certificate and key contents to <code>csireverseproxy.certManager.certificateFile</code> and <code>csireverseproxy.certManager.privateKeyFile</code>.</p>
+<p>Using the TLS certificate and key created in the <a href="../prerequisite/#csi-powermax-reverse-proxy">CSI PowerMax Reverse Proxy</a> prerequisite step, base64 encode the contents of each file and provide the contents to <code>csireverseproxy.certManager.certificateFile</code> and <code>csireverseproxy.certManager.privateKeyFile</code>.</p>
+<p>To encode the certificate and key:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cat tls.crt <span style="color:#000;font-weight:bold">|</span> base64 -w <span style="color:#0000cf;font-weight:bold">0</span>
+</span></span><span style="display:flex;"><span>cat tls.key <span style="color:#000;font-weight:bold">|</span> base64 -w <span style="color:#0000cf;font-weight:bold">0</span>
+</span></span></code></pre></div><p>Example:</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">csireverseproxy</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">tlsSecret</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">csirevproxy-tls-secret</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">deployAsSidecar</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">false</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">port</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#0000cf;font-weight:bold">2222</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">useSecret</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">certManager</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">selfSignedCert</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">false</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">certificateFile</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000;font-weight:bold">|</span><span style="color:#8f5902;font-style:italic">
-</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">      dGhpcyBzdHJpbmcgc2VydmVzIGFzIGFuIGV4YW1wbGUgb2Ygd2hhdCBhIGJhc2U2NCBlbmNvZGVk
-</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">      IGNlcnRpZmljYXRlIGZpbGUgbWlnaHQgbG9vayBsaWtlIGluIG15LXBvd2VybWF4LXNldHRpbmdz
-</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">      LnlhbWwgZmlsZQo=</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">privateKeyFile</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000;font-weight:bold">|</span><span style="color:#8f5902;font-style:italic">
-</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">      dGhpcyBzdHJpbmcgc2VydmVzIGFzIGFuIGV4YW1wbGUgb2Ygd2hhdCBhIGJhc2U2NCBlbmNvZGVk
-</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">      IHByaXZhdGUga2V5IG1pZ2h0IGxvb2sgbGlrZSBpbiBteS1wb3dlcm1heC1zZXR0aW5ncy55YW1s
-</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">      IGZpbGUK</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">certificateFile</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCmp1c3QgYW4gZXhhbXBsZSBjZXJ0aWZpY2F0ZQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg==</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">privateKeyFile</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">LS0tLS1CRUdJTiBSU0EgUFJJVkFURSBLRVktLS0tLQpqdXN0IGFuIGV4YW1wbGUgdGxzIGtleQotLS0tLUVORCBSU0EgUFJJVkFURSBLRVktLS0tLQo=</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span></code></pre></div></li>
+<li>
+<p>Install cert-manager to manage CA certificate validation and renewal.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.11.0/cert-manager.yaml
+</span></span></code></pre></div></li>
 <li>
 <p>Install the driver using <code>csi-install.sh</code> bash script in the <code>dell-csi-helm-installer</code> directory by running</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>./csi-install.sh --namespace powermax --values ./my-powermax-settings.yaml --helm-charts-version &lt;version&gt;
