@@ -36,7 +36,7 @@ Container Storage Modules for Observability provides the following capabilities:
 | - | :-: | :-: | :-: | :-: | :-: |
 | <div style="text-align: left">  Collect and expose Volume Metrics via the OpenTelemetry Collector | Yes | Yes | Yes | Yes | No |
 | <div style="text-align: left">  Collect and expose File System Metrics via the OpenTelemetry Collector | Yes |  No | No | No | No |
-| <div style="text-align: left">  Collect and expose export (k8s) node metrics via the OpenTelemetry Collector | Yes |  No | No | Yes | No |
+| <div style="text-align: left">  Collect and expose export (k8s) node metrics via the OpenTelemetry Collector | No |  No | Yes | No | No |
 | <div style="text-align: left">  Collect and expose block storage metrics via the OpenTelemetry Collector | Yes | No | Yes | Yes | No |
 | <div style="text-align: left">  Collect and expose file storage metrics via the OpenTelemetry Collector | Yes | Yes | No | No | No |
 | <div style="text-align: left">  Non-disruptive config changes | Yes |  Yes | Yes | Yes | No |
