@@ -1,0 +1,214 @@
+<!-- Chatbot Toggle Button -->
+<button id="chatbot-toggle" class="chatbot-toggle">
+  💬 Chat
+</button>
+
+<!-- Chatbot Box -->
+<div id="chatbot-box" class="chatbot-box">
+  <div class="chatbot-header">
+    <span>Chatbot</span>
+    <div>
+      <button id="chatbot-clear" class="chatbot-header-btn">Clear</button>
+      <button id="chatbot-cancel" class="chatbot-header-btn">✖</button>
+    </div>
+  </div>
+  <div id="chat-messages" class="chat-messages"></div>
+  <input type="text" id="chat-input" class="chat-input" placeholder="Type your message..." />
+</div>
+
+<!-- Confirmation Modal -->
+<div id="confirm-modal" class="confirm-modal">
+  <div class="confirm-content">
+    <p>Are you sure you want to clear the chat history?</p>
+    <div class="confirm-buttons">
+      <button id="confirm-yes">Yes</button>
+      <button id="confirm-no">No</button>
+    </div>
+  </div>
+</div>
+
+<style>
+  .chatbot-toggle {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 50px;
+    padding: 12px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease;
+  }
+
+  .chatbot-toggle:hover {
+    background-color: #0056b3;
+  }
+
+  .chatbot-box {
+    display: none;
+    position: fixed;
+    bottom: 70px;
+    right: 20px;
+    width: 320px;
+    height: 420px;
+    background: #ffffff;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    z-index: 1000;
+    padding: 10px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .chatbot-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+
+  .chatbot-header-btn {
+    background: none;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    margin-left: 5px;
+    color: #888;
+  }
+
+  .chatbot-header-btn:hover {
+    color: #000;
+  }
+
+  .chat-messages {
+    flex: 1;
+    overflow-y: auto;
+    margin-bottom: 10px;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+  }
+
+  .chat-input {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+  }
+
+  .chat-messages div {
+    margin-bottom: 8px;
+  }
+
+  .chat-messages strong {
+    color: #007bff;
+  }
+
+  .confirm-modal {
+    display: none;
+    position: fixed;
+    z-index: 1100;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    justify-content: center;
+    align-items: center;
+  }
+
+  .confirm-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    width: 280px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  }
+
+  .confirm-buttons {
+    margin-top: 15px;
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .confirm-buttons button {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  #confirm-yes {
+    background-color: #dc3545;
+    color: white;
+  }
+
+  #confirm-no {
+    background-color: #6c757d;
+    color: white;
+  }
+</style>
+
+<script>
+  const toggleBtn = document.getElementById("chatbot-toggle");
+  const cancelBtn = document.getElementById("chatbot-cancel");
+  const clearBtn = document.getElementById("chatbot-clear");
+  const chatBox = document.getElementById("chatbot-box");
+  const chatInput = document.getElementById("chat-input");
+  const chatMessages = document.getElementById("chat-messages");
+
+  const modal = document.getElementById("confirm-modal");
+  const confirmYes = document.getElementById("confirm-yes");
+  const confirmNo = document.getElementById("confirm-no");
+
+  toggleBtn.addEventListener("click", () => {
+    chatBox.style.display = "flex";
+  });
+
+  cancelBtn.addEventListener("click", () => {
+    chatBox.style.display = "none";
+  });
+
+  clearBtn.addEventListener("click", () => {
+    modal.style.display = "flex";
+  });
+
+  confirmYes.addEventListener("click", () => {
+    chatMessages.innerHTML = "";
+    modal.style.display = "none";
+  });
+
+  confirmNo.addEventListener("click", () => {
+    modal.style.display = "none";
+  });
+
+  chatInput.addEventListener("keypress", async (e) => {
+    if (e.key === "Enter" && chatInput.value.trim() !== "") {
+      const userMsg = chatInput.value.trim();
+      chatMessages.innerHTML += `<div><strong>You:</strong> ${userMsg}</div>`;
+      chatInput.value = "";
+
+      try {
+        const res = await fetch("http://localhost:8000/chat", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ query: userMsg })
+        });
+
+        const data = await res.json();
+        chatMessages.innerHTML += `<div><strong>Bot:</strong> ${data.response}</div>`;
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+      } catch (error) {
+        chatMessages.innerHTML += `<div><strong>Bot:</strong> Error connecting to server.</div>`;
+      }
+    }
+  });
+</script>
