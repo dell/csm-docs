@@ -6,7 +6,7 @@
 <!-- Chatbot Box -->
 <div id="chatbot-box" class="chatbot-box">
   <div class="chatbot-header">
-    <span>Chatbot</span>
+    <span>Ask Me Anything</span>
     <div>
       <button id="chatbot-clear" class="chatbot-header-btn">Clear</button>
       <button id="chatbot-cancel" class="chatbot-header-btn">✖</button>
@@ -53,7 +53,7 @@
     position: fixed;
     bottom: 70px;
     right: 20px;
-    width: 320px;
+    width: 400px;
     height: 420px;
     background: #ffffff;
     border-radius: 10px;
@@ -155,6 +155,32 @@
     background-color: #6c757d;
     color: white;
   }
+
+  /* Typing indicator animation */
+  .typing-indicator {
+    display: inline-block;
+    font-weight: bold;
+    color: #007bff;
+  }
+
+  .typing-indicator span {
+    display: inline-block;
+    animation: blink 1.4s infinite both;
+  }
+
+  .typing-indicator span:nth-child(2) {
+    animation-delay: 0.2s;
+  }
+
+  .typing-indicator span:nth-child(3) {
+    animation-delay: 0.4s;
+  }
+
+  @keyframes blink {
+    0% { opacity: 0.2; }
+    20% { opacity: 1; }
+    100% { opacity: 0.2; }
+  }
 </style>
 
 <script>
@@ -196,17 +222,30 @@
       chatMessages.innerHTML += `<div><strong>You:</strong> ${userMsg}</div>`;
       chatInput.value = "";
 
+      // Show typing indicator
+      const typingIndicator = document.createElement("div");
+      typingIndicator.classList.add("typing-indicator");
+      typingIndicator.innerHTML = `<strong>Bot:</strong> <span>.</span><span>.</span><span>.</span>`;
+      chatMessages.appendChild(typingIndicator);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+
       try {
-        const res = await fetch("http://localhost:8000/chat", {
+        const res = await fetch("http://10.247.101.92:5000/generate-response", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ query: userMsg })
         });
 
         const data = await res.json();
+
+        // Remove typing indicator
+        chatMessages.removeChild(typingIndicator);
+
+        // Show actual response
         chatMessages.innerHTML += `<div><strong>Bot:</strong> ${data.response}</div>`;
         chatMessages.scrollTop = chatMessages.scrollHeight;
       } catch (error) {
+        chatMessages.removeChild(typingIndicator);
         chatMessages.innerHTML += `<div><strong>Bot:</strong> Error connecting to server.</div>`;
       }
     }
