@@ -187,15 +187,17 @@
     color: white;
   }
 
-  .typing-indicator {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 4px;
-    margin: 5px 0;
-    font-weight: bold;
-    color: #007bff;
-  }
+.typing-indicator {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  margin: 5px 0;
+  font-weight: normal;
+  font-size: 12px; /* Smaller font size */
+  color: #007bff;
+}
+
 
   .typing-indicator .dots {
     display: flex;
@@ -273,7 +275,7 @@
       const typingIndicator = document.createElement("div");
       typingIndicator.classList.add("typing-indicator");
       typingIndicator.innerHTML = `
-        <div><strong>Bot is typing...</strong></div>
+        <div><strong>Bot is typing</strong></div>
         <div class="dots"><span></span><span></span><span></span></div>
       `;
       chatMessages.appendChild(typingIndicator);
