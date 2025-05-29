@@ -3,7 +3,13 @@ title: PowerFlex
 linktitle: PowerFlex 
 description: Troubleshooting PowerFlex Driver
 ---
-<div class="tdleft">
+<style> 
+.alignment td{
+   width: 50%; 
+}
+</style>
+
+<div class="tdleft alignment">
 
 | Symptoms | Prevention, Resolution or Workaround |
 |------------|--------------|
@@ -28,13 +34,21 @@ description: Troubleshooting PowerFlex Driver
 A CSI ephemeral pod may not get created in OpenShift 4.13 and fail with the error `"error when creating pod: the pod uses an inline volume provided by CSIDriver csi-vxflexos.dellemc.com, and the namespace has a pod security enforcement level that is lower than privileged."` | This issue occurs because OpenShift 4.13 introduced the CSI Volume Admission plugin to restrict the use of a CSI driver capable of provisioning CSI ephemeral volumes during pod admission. Therefore, an additional label `security.openshift.io/csi-ephemeral-volume-profile` in [csidriver.yaml](https://github.com/dell/helm-charts/blob/csi-vxflexos-2.8.0/charts/csi-vxflexos/templates/csidriver.yaml) file with the required security profile value should be provided. Follow [OpenShift 4.13 documentation for CSI Ephemeral Volumes](https://docs.openshift.com/container-platform/4.13/storage/container_storage_interface/ephemeral-storage-csi-inline.html) for more information. |
 | Standby controller pod is in crashloopbackoff state | Scale down the replica count of the controller pod's deployment to 1 using ```kubectl scale deployment <deployment_name> --replicas=1 -n <driver_namespace>``` |
 |CSM object `vxflexos` is in failed state and CSI-Powerflex driver is not in running state | Verify the secret name: `kubectl get secret -n <namespace_name>` it should be in `<CR-name>-config` format. 1. Retrieve the existing secret: `kubectl get secret old-secret-name -n <namespace_name> -o yaml > secret.yaml` <br> 2. Edit the secret.yaml file: Change metadata.name to <CR-name>-Config <br> 3. Apply the new secret: `kubectl apply -f secret.yaml` <br> 4. Delete the old secret: kubectl delete secret old-secret-name|
-| Minimal installation of the driver via Operator does not create driver pods | This issue has been resolved in the latest Operator image, but if using a released image, there is a workaround: add the following to the CSM object manifest YAML file:
-```
-node:
-  envs:
-    - name: X_CSI_SDC_SFTP_REPO_ENABLED
-      value: "false"
-``` |
 
->
+<table style="border-top:0px">
+  <tr style="border-top: 0px">
+    <td style="border-top: 0px">Minimal installation of the driver via Operator does not create driver pods</td>
+    <td style="border-top: 0px">
+    This issue has been resolved in the latest Operator image, but if using a released image, there is a workaround: add the following to the CSM object manifest YAML file:
+
+   ```yaml
+   node:
+     envs:
+       - name: X_CSI_SDC_SFTP_REPO_ENABLED
+         value: "false"
+   ```
+   </td>
+  </tr>
+</table>
+
 </div>
