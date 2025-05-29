@@ -131,7 +131,7 @@ A CSI ephemeral pod may not get created in OpenShift 4.13 and fail with the erro
   <tr style="border-top: 0px">
     <td style="border-top: 0px; text-align: left">Minimal installation of the driver via Operator does not create driver pods</td>
     <td style="border-top: 0px; text-align: left">
-    This issue has been resolved in the latest Operator image, but if using a released image, there is a workaround: add the following to the CSM object manifest YAML file:
+    This issue has been resolved in the latest Operator image, but if using a released image, there is a workaround. Add the following to the CSM object manifest YAML (for example, <code>minimal-samples/powerflex_v2140.yaml</code>) file:
 
    ```yaml
    node:
