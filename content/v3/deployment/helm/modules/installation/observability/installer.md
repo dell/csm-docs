@@ -5,7 +5,9 @@ weight: 3
 description: >
   Dell Container Storage Modules (CSM) for Observability Installer
 ---
-
+{{% pageinfo color="primary" %}}
+{{< message text="1" >}}
+{{% /pageinfo %}}
 <!--
 Copyright (c) 2020-2023 Dell Inc., or its subsidiaries. All Rights Reserved.
 

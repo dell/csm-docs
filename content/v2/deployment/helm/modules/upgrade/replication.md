@@ -8,17 +8,19 @@ description: >
 {{% pageinfo color="primary" %}}
 {{< message text="2" >}}
 {{% /pageinfo %}}
-CSM Replication module consists of two components: 
-* CSM Replication sidecar (installed along with the driver) 
+CSM Replication module consists of two components:
+
+* CSM Replication sidecar (installed along with the driver)
 * CSM Replication controller
 
 Those two components should be upgraded separately. When upgrading them ensure that you use the same versions for both sidecar and
-controller, because different versions could be incompatible with each other. 
+controller, because different versions could be incompatible with each other.
 
 > _**Note**_: While upgrading the module via helm, the `replicas` variable in `myvalues.yaml` can be at most one less than the number of worker nodes.
+
 ## Updating CSM Replication sidecar
 
-To upgrade the CSM Replication sidecar that is installed along with the driver, the following steps are required. 
+To upgrade the CSM Replication sidecar that is installed along with the driver, the following steps are required.
 
 > _**Note**_: These steps refer to the values file and `csi-install.sh` script that was used during the initial installation of the Dell CSI driver.
 
@@ -38,7 +40,7 @@ To upgrade the CSM Replication sidecar that is installed along with the driver, 
 
 On PowerScale systems, an additional step is needed when upgrading to CSM Replication v1.4.0 or later. Because the SyncIQ policy created on the target-side storage array is no longer used, it must be deleted for any existing `DellCSIReplicationGroup` objects after performing the upgrade to the CSM Replication sidecar and PowerScale CSI driver. These steps should be performed before the `DellCSIReplicationGroup` objects are used with the new version of the CSI driver. Until this step is performed, existing `DellCSIReplicationGroup` objects will display an UNKNOWN link state.
 
-1. Log in to the target PowerScale array. 
+1. Log in to the target PowerScale array.
 2. Navigate to the `Data Protection > SyncIQ` page and select the `Policies` tab.
 3. Delete disabled, target-side SyncIQ policies that are used for CSM Replication. Such policies will be distinguished by their names, of the format `<prefix>-<kubernetes namespace>-<IP of replication destination>-<RPO duration>`.
 
@@ -47,7 +49,7 @@ On PowerScale systems, an additional step is needed when upgrading to CSM Replic
 Make sure the appropriate release branch is available on the machine performing the upgrade by running:
 
 ```bash
-git clone -b v1.10.0 https://github.com/dell/csm-replication.git
+git clone -b v1.11.0 https://github.com/dell/csm-replication.git
 ```
 
 ### Upgrading with Helm
@@ -55,6 +57,7 @@ git clone -b v1.10.0 https://github.com/dell/csm-replication.git
 This option will only work if you have previously installed replication via Helm chart, available since version 1.1. If you used simple manifest or `repctl` please use [upgrading with repctl](#upgrading-with-repctl)
 
 **Steps**
+
 1. Update the `image` value in the values files to reference the new CSM Replication controller image or use a new version of the csm-replication Helm chart.
 2. Run the install script with the option `--upgrade` by running:
 
@@ -65,23 +68,23 @@ This option will only work if you have previously installed replication via Helm
 
 3. Run the same command on the second Kubernetes cluster if you use multi-cluster replication topology.
 
-> _**Note**_: Upgrade won't override currently existing ConfigMap, even if you change templated values in myvalues.yaml file. If you want to change the logLevel - edit ConfigMap from within the cluster using 
-      ```bash 
+> _**Note**_: Upgrade won't override currently existing ConfigMap, even if you change templated values in myvalues.yaml file. If you want to change the logLevel - edit ConfigMap from within the cluster using
+      ```bash
       kubectl edit cm -n dell-replication-controller dell-replication-controller-config  
       ```
 
-
 ### Upgrading with repctl
 
-> _**Note**_: These steps assume that you already have `repctl` configured to use correct clusters, if you don't know how to do that please refer to [installing with repctl](../../installation/replication/install-repctl) 
+> _**Note**_: These steps assume that you already have `repctl` configured to use correct clusters, if you don't know how to do that please refer to [installing with repctl](../../installation/replication/install-repctl)
 
 **Steps**
+
 1. Find a new version of deployment manifest that can be found in `deploy/controller.yaml`, with newer `image` pointing to the version of CSM Replication controller you want to upgrade to.
 2. Apply said manifest using the usual `repctl create` command like so:
 
       ```bash
       ./repctl create -f ../deploy/controller.yaml
-      ``` 
+      ```
 
       The output should have this line `Successfully updated existing deployment: dell-replication-controller-manager`
 3. Check if everything is OK by querying your Kubernetes clusters using `kubectl` using a `kubectl get`:

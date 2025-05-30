@@ -18,18 +18,22 @@ The following I/O performance metrics are available from the OpenTelemetry colle
 
 | Metric | Description |
 | - | - |
-| powerstore_volume_read_bw_megabytes_per_second	| The volume read bandwidth (MB/s) |
+| powerstore_volume_read_bw_megabytes_per_second | The volume read bandwidth (MB/s) |
 | powerstore_volume_write_bw_megabytes_per_second | The volume write bandwidth (MB/s) |
 | powerstore_volume_read_latency_milliseconds | The time (in ms) to complete read operations to a volume |
 | powerstore_volume_write_latency_milliseconds | The time (in ms) to complete write operations to a volume |
 | powerstore_volume_read_iops_per_second | The number of read operations performed against a volume (per second) |
 | powerstore_volume_write_iops_per_second | The number of write operations performed against a volume (per second) |
-| powerstore_filesystem_read_bw_megabytes_per_second | The filesystem read bandwidth MB/s |
+| powerstore_volume_mirror_bw_megabytes_per_second | The volume replication traffic bandwidth against a volume (MB/s) |
+| powerstore_volume_data_remaining_megabytes | The data remaining to be replicated against a volume (MB) |
+| powerstore_filesystem_read_bw_megabytes_per_second | The filesystem read bandwidth (MB/s) |
 | powerstore_filesystem_write_bw_megabytes_per_second | The filesystem write bandwidth (MB/s) |
 | powerstore_filesystem_read_iops_per_second |  The number of read operations performed against a filesystem (per second) |
 | powerstore_filesystem_write_iops_per_second | The number of write operations performed against a filesystem (per second) |
 | powerstore_filesystem_read_latency_milliseconds | The time (in ms) to complete read operations to a filesystem |
 | powerstore_filesystem_write_latency_milliseconds | The time (in ms) to complete write operations to a filesystem |
+
+> __NOTE__: The powerstore_volume_mirror_bw_megabytes_per_second and powerstore_volume_data_remaining_megabytes provides the replication metrics for replication session at volume level.
 
 ## Storage Capacity Metrics
 

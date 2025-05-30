@@ -4,7 +4,9 @@ linkTitle: "CSI Drivers"
 description: Installation of Dell CSI Drivers using Dell CSM Operator
 weight: 1
 ---
-
+{{% pageinfo color="primary" %}}
+{{< message text="1" >}}
+{{% /pageinfo %}}
 ## (Optional) Volume Snapshot Requirements
 
 On Upstream Kubernetes clusters, ensure that to install
@@ -31,23 +33,38 @@ Once the driver `Custom Resource (CR)` is created, you can verify the installati
 
 *  Check if ContainerStorageModule CR is created successfully using the command below:
     ```bash
-
     kubectl get csm/<name-of-custom-resource> -n <driver-namespace> -o yaml
     ```
 * Check the status of the CR to verify if the driver installation is in the `Succeeded` state. If the status is not `Succeeded`, see the [Troubleshooting guide](../troubleshooting/#my-dell-csi-driver-install-failed-how-do-i-fix-it) for more information.
 
+## Upgrading Drivers with Dell CSM Operator
+You can update CSI Drivers installed by the Dell CSM Operator like any Kubernetes resource:
 
-### Update CSI Drivers
-The CSI Drivers and CSM Modules installed by the Dell CSM Operator can be updated like any Kubernetes resource. This can be achieved in various ways which include:
+1. </b>Modify Installation via kubectl edit:</b></br>
 
-* Modifying the installation directly via `kubectl edit`
-    For example - If the name of the installed PowerScale driver is powerscale, then run
-    #Replace driver-namespace with the namespace where the PowerScale driver is installed
-    ```bash
-    kubectl edit csm/powerscale -n <driver-namespace>
-    ```
-    and modify the installation
-* Modify the API object in-place via `kubectl patch`
+```bash
+kubectl get <driver-object> -n <driver-namespace>
+```
+2. Replace `<driver-namespace>` with the appropriate namespace. For example, to get the CSI PowerStore driver object: </br>
+```bash
+kubectl get csm -n <driver-namespace>
+```
+Use the object name in the kubectl edit command: </br>
+
+```bash
+kubectl edit csm <driver-object>/<object-name> -n <driver-namespace>
+```
+For example, if the object name is powerstore:</br>
+
+```bash
+kubectl edit csm powerstore -n <driver-namespace>
+```
+
+Modify the installation as needed, typically updating driver versions, sidecars, and environment variables.
+
+3. Refer how to [upgrade](https://infohub.delltechnologies.com/en-us/p/best-practices-for-deployment-and-life-cycle-management-of-dell-csm-modules-1/#:~:text=Upgrades%20with%20Operator)guide if you have more questions </br>
+
+> Note: Starting with CSM 1.12, use images from [quay.io](https://quay.io/organization/dell). From CSM 1.14 (May 2025), editing the CSM object will fail if using images from [Docker Hub](https://hub.docker.com/r/dellemc/).
 
 #### Supported modifications
 * Changing environment variable values for driver
@@ -58,9 +75,9 @@ The CSI Drivers and CSM Modules installed by the Dell CSM Operator can be update
 1. If you are trying to upgrade the CSI driver from an older version, make sure to modify the _configVersion_ field if required.
    ```yaml
       driver:
-        configVersion: v2.10.0
+        configVersion: v2.12.0
    ```
-2. Do not try to update the operator by modifying the original `CustomResource` manifest file and running the `kubectl apply -f` command. As part of the driver installation, the Operator sets some annotations on the `CustomResource` object which are further utilized in some workflows (like detecting upgrade of drivers). If you run the `kubectl apply -f` command to update the driver, these annotations are overwritten and this may lead to failures.
+>NOTE: <b> Avoid updating the operator by modifying the original CustomResource manifest file and running `kubectl apply -f`. This can overwrite important annotations set by the Operator, leading to failures in workflows like driver upgrades. </b>
 
 ### Uninstall CSI Driver
 The CSI Drivers and CSM Modules can be uninstalled by deleting the Custom Resource.

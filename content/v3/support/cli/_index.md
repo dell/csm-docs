@@ -28,10 +28,9 @@ This document outlines all dellctl commands, their intended use, options that ca
 | [dellctl schedule create for-backup](#dellctl-schedule-create-for-backup) | Create a schedule for application backups |
 | [dellctl schedule delete](#dellctl-schedule-delete) | Delete schedules |
 | [dellctl schedule get](#dellctl-schedule-get) | Get schedules |
-| [dellctl encryption rekey](#dellctl-encryption-rekey) | Rekey an encrypted volume |
-| [dellctl encryption rekey-status](#dellctl-encryption-rekey-status) | Get status of an encryption rekey operation |
 | [dellctl images](#dellctl-images) | List the container images needed by csi driver |
-| [dellctl volume get](#dellctl-volume-get) | Gets PowerFlex volume information for a given tenant on a local cluster |
+| [dellctl volume get](#dellctl-volume-get) | Gets driver volume information for a given tenant on a local cluster |
+| [dellctl snapshot get](#dellctl-snapshot-get) | Gets driver snapshot information for a given tenant on a local cluster |
 | [dellctl admin token](#dellctl-admin-token) | Generate an administrator token for administrating CSM Authorization v2 |
 | [dellctl generate token](#dellctl-generate-token) | Generate a tenant token for configuring a Dell CSI Driver with CSM Authorization v2 |
 
@@ -810,58 +809,17 @@ NAME          STATUS    CREATED                         PAUSED   SCHEDULE    LAS
 schedule1     Enabled   2022-11-04 08:33:35 +0000 UTC   false    @every 1h   NA
 ```
 
-### dellctl encryption rekey
 
-Encryption rekey with a name for the rekey object and volume name of an encrypted volume
-
-##### Flags
-
-```
-      --cluster-id string   Id of the cluster managed by dellctl
-  -h, --help                help for get
-```
+---
 
 
-##### Output
-
-
-```bash
-dellctl encryption rekey myrekey k8s-5d2cc565d4
-```
-```
- INFO rekey request "myrekey" submitted successfully for persistent volume "k8s-5d2cc565d4".
- INFO Run 'dellctl encryption rekey-status myrekey' for more details.
-```
-
-
-### dellctl encryption rekey-status
-
-Encryption rekey status with name of the rekey object
-
-##### Flags
-
-```
-      --cluster-id string   Id of the cluster managed by dellctl
-  -h, --help                help for get
-```
-
-
-##### Output
-
-
-```bash
-dellctl encryption rekey-status myrekey
-```
-```
- INFO Status of rekey request myrekey = completed
-```
 
 ### dellctl images
 
 List the container images needed by csm components
 
 **NOTE.**: 
-# Supported CSM Components
+#### Supported CSM Components
 [csi-vxflexos,csi-isilon,csi-powerstore,csi-unity,csi-powermax,csm-authorization]
 
 
@@ -887,23 +845,7 @@ dellctl images --component csi-vxflexos
 ```
 ```
 Driver/Module Image             Supported Orchestrator Versions         Sidecar Images
-dellemc/csi-vxflexos:v2.9.0     k8s1.28,k8s1.27,k8s1.26,ocp4.14,ocp4.13 registry.k8s.io/sig-storage/csi-attacher:v4.4.2
-                                                                        registry.k8s.io/sig-storage/csi-provisioner:v3.6.2
-                                                                        registry.k8s.io/sig-storage/csi-external-health-monitor-controller:v0.10.0
-                                                                        registry.k8s.io/sig-storage/csi-snapshotter:v6.3.2
-                                                                        registry.k8s.io/sig-storage/csi-resizer:v1.9.2
-                                                                        registry.k8s.io/sig-storage/csi-node-driver-registrar:v2.9.1
-                                                                        dellemc/sdc:4.5
-
-dellemc/csi-vxflexos:v2.8.0     k8s1.27,k8s1.26,k8s1.25,ocp4.13,ocp4.12 registry.k8s.io/sig-storage/csi-attacher:v4.3.0
-                                                                        registry.k8s.io/sig-storage/csi-provisioner:v3.5.0
-                                                                        registry.k8s.io/sig-storage/csi-external-health-monitor-controller:v0.9.0
-                                                                        registry.k8s.io/sig-storage/csi-snapshotter:v6.2.2
-                                                                        registry.k8s.io/sig-storage/csi-resizer:v1.8.0
-                                                                        registry.k8s.io/sig-storage/csi-node-driver-registrar:v2.8.0
-                                                                        dellemc/sdc:3.6.1
-
-dellemc/csi-vxflexos:v2.7.0     k8s1.27,k8s1.26,k8s1.25,ocp4.12,ocp4.11 registry.k8s.io/sig-storage/csi-attacher:v4.3.0
+quay.io/dell/container-storage-modules/csi-vxflexos:v2.12.0     k8s1.31,k8s1.30,k8s1.29,ocp4.17,ocp4.16 registry.k8s.io/sig-storage/csi-attacher:v4.3.0
                                                                         registry.k8s.io/sig-storage/csi-provisioner:v3.5.0
                                                                         registry.k8s.io/sig-storage/csi-external-health-monitor-controller:v0.9.0
                                                                         registry.k8s.io/sig-storage/csi-snapshotter:v6.2.2
@@ -918,28 +860,21 @@ dellctl images --component csm-authorization
 ```
 ```
 Driver/Module Image                             Supported Orchestrator Versions Sidecar Images
-dellemc/csm-authorization-sidecar:v1.9.0        k8s1.28,k8s1.27,k8s1.26         jetstack/cert-manager-cainjector:v1.6.1
-                                                                                jetstack/cert-manager-controller:v1.6.1
-                                                                                jetstack/cert-manager-webhook:v1.6.1
-                                                                                ingress-nginx/controller:v1.4.0
-                                                                                ingress-nginx/kube-webhook-certgen:v20220916-gd32f8c343
-
-dellemc/csm-authorization-sidecar:v1.8.0        k8s1.27,k8s1.26,k8s1.25         jetstack/cert-manager-cainjector:v1.6.1
-                                                                                jetstack/cert-manager-controller:v1.6.1
-                                                                                jetstack/cert-manager-webhook:v1.6.1
-                                                                                ingress-nginx/controller:v1.4.0
-                                                                                ingress-nginx/kube-webhook-certgen:v20220916-gd32f8c343
-
-dellemc/csm-authorization-sidecar:v1.7.0        k8s1.27,k8s1.26,k8s1.25         jetstack/cert-manager-cainjector:v1.6.1
+quay.io/dell/container-storage-modules/csm-authorization-sidecar:v1.12.0        k8s1.31,k8s1.30,k8s1.29         jetstack/cert-manager-cainjector:v1.6.1
                                                                                 jetstack/cert-manager-controller:v1.6.1
                                                                                 jetstack/cert-manager-webhook:v1.6.1
                                                                                 ingress-nginx/controller:v1.4.0
                                                                                 ingress-nginx/kube-webhook-certgen:v20220916-gd32f8c343
 ```
 
+
+---
+
+
+
 ### dellctl volume get
 
-Gets PowerFlex volume information for a given tenant on a local cluster
+Gets the drivers volume information from the authorization proxy for a given tenant on a local cluster
 
 ##### Aliases
   get, ls, list
@@ -955,23 +890,62 @@ Gets PowerFlex volume information for a given tenant on a local cluster
 
 ##### Output
 
-Gets PowerFlex volume information for a given tenant on a local cluster. The namespace is the namespace where tenant secret is created. 
-
->Note: This was output was generated using Authorization Proxy version 1.5.1. Please ensure you are using version 1.5.1 or greater.
+Gets the drivers volume information for a given tenant on a local cluster. The namespace is the namespace where tenant secret is created.
 
 ```bash
-dellctl volume get --proxy <proxy.dell.com> --namespace vxflexos
+dellctl volume get --proxy <proxy.dell.com> --namespace <namespace>
 ```
 ```
 # dellctl volume get --proxy <proxy.dell.com> --namespace vxflexos
-
-NAME             VOLUME ID          SIZE       POOL     SYSTEM ID          PV NAME          PV STATUS   STORAGE CLASS   PVC NAME       NAMESPACE
-k8s-e7c8b39112   a69bf18e00000008   8.000000   mypool   636468e3638c840f   k8s-e7c8b39112   Released    vxflexos        demo-claim10   default
-k8s-e6e2b46103   a69bf18f00000009   8.000000   mypool   636468e3638c840f   k8s-e6e2b46103   Bound       vxflexos        demo-claim11   default
-k8s-b1abb817d3   a69bf19000000001   8.000000   mypool   636468e3638c840f   k8s-b1abb817d3   Bound       vxflexos        demo-claim13   default
-k8s-28e4184f41   c6b2280d0000009a   8.000000   mypool   636468e3638c840f   k8s-28e4184f41   Available   local-storage  
-k8s-7296621062   a69b554f00000004   8.000000   mypool   636468e3638c840f
+NAME                 VOLUME ID          SIZE       POOL    SYSTEM ID          PV NAME          PV STATUS   STORAGE CLASS   PVC NAME                NAMESPACE            SNAPSHOT COUNT
+tn1-k8s-82b35df793   c6c98e30000000d3   8.000000   pool1   636468e3638c840f                                                                                             0
+tn1-k8s-e0e7958ee0   c6cf35ba000001a3   8.000000   pool1   636468e3638c840f   k8s-e0e7958ee0   Bound       vxflexos        pvol-vxflexos           default              2
+tn1-k8s-bc83d4c626   c6cf35c1000001a1   8.000000   pool1   636468e3638c840f   k8s-bc83d4c626   Bound       vxflexos        vol-create-test-xbgnr   snap-test-057de678   3
 ```
+
+
+---
+
+
+
+### dellctl snapshot get
+
+Gets the drivers snapshot information from the authorization proxy for a given tenant on a local cluster
+
+##### Aliases
+  get, ls, list
+
+##### Flags
+
+```
+  -h, --help                            help for get
+      --insecure optionalBool[=true]    provide flag to skip certificate validation
+      --namespace string                namespace of the secret for the given tenant
+      --proxy string                    auth proxy endpoint to use
+```
+
+##### Output
+
+Get the drivers snapshot information for a given tenant on a local cluster. The namespace is the namespace where the tenant secret is created.
+
+```bash
+dellctl snapshot get --proxy <proxy.dell.com> --namespace <namespace>
+```
+```
+# dellctl snapshot get --proxy <proxy.dell.com> --namespace vxflexos
+NAME                              SNAPSHOT ID        SIZE       POOL    SYSTEM ID          ACCESS MODE   SOURCE VOLUME ID
+tn1-sn-8e51dfa6-6f64-4cac-a776-   c6cf35c4000001aa   8.000000   pool1   636468e3638c840f   ReadWrite     c6cf35c1000001a1
+tn1-sn-27ff7d0c-b60d-4f5d-be2e-   c6cf35c2000001a2   8.000000   pool1   636468e3638c840f   ReadWrite     c6cf35c1000001a1
+tn1-sn-85e32ce4-379b-4a9e-948b-   c6cf35c3000001a9   8.000000   pool1   636468e3638c840f   ReadWrite     c6cf35c1000001a1
+tn1-sn-59c272f4-babd-4e24-951a-   c6cf35bb000001a4   8.000000   pool1   636468e3638c840f   ReadWrite     c6cf35ba000001a3
+tn1-sn-2d1580a4-60ec-4082-8234-   c6cf35bc000001a6   8.000000   pool1   636468e3638c840f   ReadWrite     c6cf35ba000001a3
+
+```
+
+
+---
+
+
 
 ### dellctl admin token
 
@@ -1000,6 +974,11 @@ dellctl admin token -n <administrator-name> --jwt-signing-secret <signing-secret
   "Refresh": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJjc20iLCJleHAiOjE3MjMzMDE0NTcsImdyb3VwIjoiYWRtaW4iLCJpc3MiOiJjb20uZGVsbC5jc20iLCJyb2xlcyI6IiIsInN1YiI6ImNzbS1hZG1pbiJ9.MJ9ajrB-nLEQKdAA-H8n78kS9QiX1yW_-m7K4Tmu7Mg"
 }
 ```
+
+
+---
+
+
 
 ### dellctl generate token
 

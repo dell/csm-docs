@@ -5,6 +5,10 @@ weight: 13
 Description: >
   Dell Container Storage Modules (CSM) support
 ---
+{{% pageinfo color="primary" %}}
+<span><span/>{{< message text="8" >}}
+{{% /pageinfo %}}
+
 ### Where can I get support ?
 
 You can interact with us on [GitHub](https://github.com/dell/csm) by creating a [GitHub Issue](https://github.com/dell/csm/issues).
@@ -19,4 +23,3 @@ The Dell Container Storage Modules team and community take security bugs serious
 To report a security issue, please submit the security advisory form ["Report a Vulnerability"](https://github.com/dell/csm/security/advisories/new).
 
 >CSM recommends staying on the [latest release](https://github.com/dell/csm/releases/latest) of Dell Container Storage Modules to take advantage of new features, enhancements, bug fixes, and security fixes.
-

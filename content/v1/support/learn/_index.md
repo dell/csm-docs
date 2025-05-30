@@ -1,6 +1,7 @@
 ---
-title: Learn more about CSM
-Description: Blogs and Youtube videos for CSM
+title: "Learn more" 
+linkTitle:  "Learn More"  
+Description: Blogs and Youtube videos for Container Storage Modules
 weight: 7
 ---
 You can learn more and engage with the CSM community over different channels by:

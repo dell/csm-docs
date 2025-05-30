@@ -84,6 +84,7 @@ function onArrayChange() {
 		onResiliencyChange(podmonNote);
 		onSnapshotChange(snapshotNote, driver, CONSTANTS);
 		onCertManagerChange(certmanagerNote);
+		onApproveSdcChange(approveSdcNote);
 		onTopologyChange(topologyNote);
 		onVSphereChange();
 		onReplicationChange(replicationNote);
@@ -156,6 +157,16 @@ function onCertManagerChange(certmanagerNoteValue) {
 	}
 }
 
+function onApproveSdcChange(approveSdcNoteValue) {
+	if ($("#approve-sdc").prop('checked') === false) {
+		$('div#approvesdc-note-wrapper').show();
+		$("#approvesdc-note").html(approveSdcNoteValue);
+	} else {
+		$('div#approvesdc-note-wrapper').hide();	
+	}
+}
+
+
 function onTopologyChange(topologyNoteValue) {
 	if ($("#topology").prop('checked') === true) {
 		$('div#topology-note-wrapper').show();
@@ -212,6 +223,7 @@ function onNodeSelectorChange(nodeSelectorNoteValue, csmMapValue) {
 		$(".node-sel-attributes").hide();
 	}
 }
+
 
 function onRenameSDCChange(driverName, CONSTANTS_PARAM) {
 	if ($("#rename-sdc").prop('checked') === true) {
@@ -347,6 +359,7 @@ function displayModules(installationType, driverName, CONSTANTS_PARAM) {
 	$(".replication-operator-clusterid").hide();
 	$(".replication-helm-arrayid").hide();
 	$(".replication-helm-unisphere").hide();
+	$(".enable-sdc").hide();
 	$(".rename-sdc-feature").hide();
 	$(".approve-sdc").hide();
 	$(".nfs-feature").hide();
@@ -402,8 +415,8 @@ function displayModules(installationType, driverName, CONSTANTS_PARAM) {
 			$(".storageArrays").show();
 			$(".cluster-prefix").show();
 			$(".port-groups").show();
-			$(".resiliency").hide();
-			if (document.getElementById("csm-version").value === "1.11.0") {
+			// Check the CSM version and show the resiliency module if version is greater than 1.11.0
+			if (isVersionGreaterOrEqualTo(document.getElementById("csm-version").value, "1.11.0")) {
 				$(".resiliency").show();
 			}
 			$(".migration").show();
@@ -422,7 +435,8 @@ function displayModules(installationType, driverName, CONSTANTS_PARAM) {
 				$(".observability-operator").show();
 				$(".observability").hide();
 				$(".resiliency").hide();
-				if (document.getElementById("csm-version").value === "1.11.0") {
+				// Check the CSM version and show the resiliency module if version is greater than 1.11.0
+				if (isVersionGreaterOrEqualTo(document.getElementById("csm-version").value, "1.11.0")) {
 					$(".resiliency-operator").show();
 				}
 				$(".replication-operator-clusterid").hide();
@@ -442,6 +456,7 @@ function displayModules(installationType, driverName, CONSTANTS_PARAM) {
 			$(".cert-secret-count-wrapper").show();
 			$("div#snap-prefix").hide();
 			$(".storage-capacity").show();
+			$(".enable-sdc").show();
 			$(".rename-sdc-feature").show();
 			$(".approve-sdc").show();
 			if (document.getElementById("csm-version").value === "1.8.0") {
@@ -465,26 +480,38 @@ function displayModules(installationType, driverName, CONSTANTS_PARAM) {
 	}
 }
 
+// Function to compare two version strings
+function isVersionGreaterOrEqualTo(currentVersion, targetVersion) {
+	const currentParts = currentVersion.split('.').map(Number);
+	const targetParts = targetVersion.split('.').map(Number);
+
+	for (let i = 0; i < targetParts.length; i++) {
+		if (currentParts[i] > targetParts[i]) return true;
+		if (currentParts[i] < targetParts[i]) return false;
+	}
+	return true;
+}
+
 function displayCommands(releaseNameValue, commandTitleValue, commandNoteValue, commandNoteOperatorValue, csmOperatorNoteValue, command1Value, command2Value, command3Value, CONSTANTS) {
 	driverNamespace = document.getElementById("driver-namespace").value;
 	csmVersion = document.getElementById("csm-version").value;
 	installationType = document.getElementById("installation-type").value
 	var helmChartVersion;
 	switch (csmVersion) {
-		case "1.8.0":
-			helmChartVersion = CONSTANTS.CSM_HELM_V180;
-			break;
 		case "1.9.3":
 			helmChartVersion = CONSTANTS.CSM_HELM_V193;
 			break;
 		case "1.10.2":
 			helmChartVersion = CONSTANTS.CSM_HELM_V1102;
 			break;
-		case "1.11.0":
-			helmChartVersion = CONSTANTS.CSM_HELM_V1110;
+		case "1.11.1":
+			helmChartVersion = CONSTANTS.CSM_HELM_V1111;
+			break;
+		case "1.12.0":
+			helmChartVersion = CONSTANTS.CSM_HELM_V1120;
 			break;
 		default:
-			helmChartVersion = CONSTANTS.CSM_HELM_V1110;
+			helmChartVersion = CONSTANTS.CSM_HELM_V1120;
 			break;
 	}
 	$("#command-text-area").show();
@@ -552,6 +579,7 @@ if (typeof exports !== 'undefined') {
 		onOperatorResiliencyChange,
 		onSnapshotChange,
 		onCertManagerChange,
+		onApproveSdcChange,
 		onTopologyChange,
 		onReplicationChange,
 		onVSphereChange,
