@@ -3,18 +3,7 @@ title: PowerFlex
 linktitle: PowerFlex 
 description: Troubleshooting PowerFlex Driver
 ---
-<style>
-.alignment td{
-   width: 50% !important;
-}
-
-.alignment table{
- table-layout: fixed !important;
- width:100% !important;
-}
-</style>
-
-<div class="tdleft alignment">
+<div class="tdleft">
 
 | Symptoms | Prevention, Resolution or Workaround |
 |------------|--------------|
@@ -40,20 +29,5 @@ A CSI ephemeral pod may not get created in OpenShift 4.13 and fail with the erro
 | Standby controller pod is in crashloopbackoff state | Scale down the replica count of the controller pod's deployment to 1 using ```kubectl scale deployment <deployment_name> --replicas=1 -n <driver_namespace>``` |
 |CSM object `vxflexos` is in failed state and CSI-Powerflex driver is not in running state | Verify the secret name: `kubectl get secret -n <namespace_name>` it should be in `<CR-name>-config` format. 1. Retrieve the existing secret: `kubectl get secret old-secret-name -n <namespace_name> -o yaml > secret.yaml` <br> 2. Edit the secret.yaml file: Change metadata.name to <CR-name>-Config <br> 3. Apply the new secret: `kubectl apply -f secret.yaml` <br> 4. Delete the old secret: kubectl delete secret old-secret-name|
 
-<table style="width:100% !important; border-top:0px">
-  <tr style="border-top: 0px">
-    <td style="border-top: 0px">Minimal installation of the driver via Operator does not create driver pods</td>
-    <td style="border-top: 0px">
-    This issue has been resolved in the latest Operator image, but if using a released image, there is a workaround. Add the following to the CSM object manifest YAML (for example, <code>minimal-samples/powerflex_v2140.yaml</code>) file:
-
-   ```yaml
-   node:
-     envs:
-       - name: X_CSI_SDC_SFTP_REPO_ENABLED
-         value: "false"
-   ```
-   </td>
-  </tr>
-</table>
-
+>
 </div>
