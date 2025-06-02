@@ -6,6 +6,16 @@ weight: 20
 Description: >
   Container Storage Modules release notes
 ---
+<style>
+.alignment td{
+   width: 50% !important;
+} 
+
+.alignment table{
+ table-layout: fixed !important;
+ width:100% !important;
+}
+</style>
 
 ## Notifications:
 
@@ -73,6 +83,8 @@ Description: >
 
 ### Known Issues
 
+<div class="alignment">
+
 | Issue | Workaround |
 |-------|------------|
 | <div style="text-align: left"> When CSM Operator creates a deployment that includes secrets (e.g., application-mobility, observability, cert-manager, velero), these secrets are not deleted on uninstall and will be left behind. For example, the `karavi-topology-tls`, `otel-collector-tls`, and `cert-manager-webhook-ca` secrets will not be deleted. |  <div style="text-align: left"> This should not cause any issues on the system, but all secrets present on the cluster can be found with `kubectl get secrets -A`, and any unwanted secrets can be deleted with `kubectl delete secret -n <secret-namespace> <secret-name>`|
@@ -115,3 +127,19 @@ A CSI ephemeral pod may not get created in OpenShift 4.13 and fail with the erro
 |  <div style="text-align: left">  fsGroupPolicy may not work as expected without root privileges for NFS only [https://github.com/kubernetes/examples/issues/260](https://github.com/kubernetes/examples/issues/260) |  <div style="text-align: left">  To get the desired behavior set “RootClientEnabled” = “true” in the storage class parameter |
 |  <div style="text-align: left">  Controller publish is taking too long to complete/ Health monitoring is causing Unity array to panic by opening multiple sessions/ There are error messages in the log `context deadline exceeded`, when health monitoring is enabled |  <div style="text-align: left">  Disable volume health monitoring on the node and keep it only at the controller level. Refer [here](https://dell.github.io/csm-docs/docs/csidriver/features/unity/#volume-health-monitoring) for more information about enabling/disabling volume health monitoring|
 
+<table style="border-top:0px">
+  <tr style="border-top: 0px">
+    <td style="border-top: 0px; text-align: left">Minimal installation of the driver via Operator does not create driver pods</td>
+    <td style="border-top: 0px; text-align: left">
+    This issue has been resolved in the latest Operator image, but if using a released image, there is a workaround. Add the following to the CSM object manifest YAML (for example, <code>minimal-samples/powerflex_v2140.yaml</code>) file:
+
+   ```yaml
+   node:
+     envs:
+       - name: X_CSI_SDC_SFTP_REPO_ENABLED
+         value: "false"
+   ```
+   </td>
+  </tr>
+</table>
+</div>
