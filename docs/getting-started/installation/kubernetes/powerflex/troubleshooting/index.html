@@ -21,7 +21,7 @@
   <meta itemprop="name" content="Troubleshooting">
   <meta itemprop="description" content="Operator Can Container Storage Modules Operator manage existing drivers installed using Helm charts or the CSI Operator? Why do some of the Custom Resource fields show up as invalid or unsupported in the OperatorHub GUI? How can I view detailed logs for the Container Storage Modules SM Operator? My Dell CSI Driver install failed. How do I fix it? My CSContainer Storage ModuleM Replication install fails to validate replication prechecks with ’no such host’. How to update resource limits for Container Storage Modules Operator when it is deployed using Operator hub Can Container Storage Modules Operator manage existing drivers installed using Helm charts or the CSI Operator? The Container Storage Modules Operator is unable to manage any existing driver installed using Helm charts or the CSI Operator. If you already have installed one of the Dell CSI driver in your cluster and want to use the CSM operator based deployment, uninstall the driver and then redeploy the driver via Container Storage ModuleM Operator">
   <meta itemprop="dateModified" content="2025-05-13T20:06:59+05:30">
-  <meta itemprop="wordCount" content="1764">
+  <meta itemprop="wordCount" content="1816">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Troubleshooting">
   <meta name="twitter:description" content="Operator Can Container Storage Modules Operator manage existing drivers installed using Helm charts or the CSI Operator? Why do some of the Custom Resource fields show up as invalid or unsupported in the OperatorHub GUI? How can I view detailed logs for the Container Storage Modules SM Operator? My Dell CSI Driver install failed. How do I fix it? My CSContainer Storage ModuleM Replication install fails to validate replication prechecks with ’no such host’. How to update resource limits for Container Storage Modules Operator when it is deployed using Operator hub Can Container Storage Modules Operator manage existing drivers installed using Helm charts or the CSI Operator? The Container Storage Modules Operator is unable to manage any existing driver installed using Helm charts or the CSI Operator. If you already have installed one of the Dell CSI driver in your cluster and want to use the CSM operator based deployment, uninstall the driver and then redeploy the driver via Container Storage ModuleM Operator">
@@ -203,7 +203,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.3160224dcab520b8827d3b286605e76d.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.75ad541b9a420ae33fc6392f872224da.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -4230,6 +4230,10 @@ How to update resource limits for CSM Operator when it is deployed using Operato
       <tr>
           <td>CSM object <code>vxflexos</code> is in failed state and CSI-Powerflex driver is not in running state</td>
           <td>Verify the secret name: <code>kubectl get secret -n &lt;namespace_name&gt;</code> it should be in <code>&lt;CR-name&gt;-config</code> format. 1. Retrieve the existing secret: <code>kubectl get secret old-secret-name -n &lt;namespace_name&gt; -o yaml &gt; secret.yaml</code> <br> 2. Edit the secret.yaml file: Change metadata.name to <CR-name>-Config <br> 3. Apply the new secret: <code>kubectl apply -f secret.yaml</code> <br> 4. Delete the old secret: kubectl delete secret old-secret-name</td>
+      </tr>
+      <tr>
+          <td>Minimal installation of the driver via Operator does not create driver pods</td>
+          <td><div style="text-align: left">This issue has been resolved in the latest Operator image, but if using a released image, there is a workaround. Add the following to the CSM object manifest YAML (for example, <code>minimal-samples/powerflex_v2140.yaml</code>) file: <br><br><pre>node:<br>  envs:<br>    - name: X_CSI_SDC_SFTP_REPO_ENABLED<br>      value: &ldquo;false&rdquo;</pre></div></td>
       </tr>
   </tbody>
 </table>
