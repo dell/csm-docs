@@ -8,7 +8,7 @@ description: >
 
 ## PowerStore Metro Architecture
 
-![metro architecture diagram](../../../../../images/replication/metro.png)
+![metro architecture diagram](../../../../../images/replication/powerstore-metro.png)
 
 In PowerStore Metro configurations:
 * The application host can write data to both sides of the Metro volume.
