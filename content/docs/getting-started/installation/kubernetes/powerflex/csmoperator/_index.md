@@ -143,7 +143,7 @@ run `/opt/emc/scaleio/sdc/bin/drv_cfg --add_mdm --ip 10.xx.xx.xx.xx,10.xx.xx.xx`
 
     b. **Detailed Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powerflex_{{< version-docs key="sample_sc_pflex" >}}.yaml) for detailed settings.
 
-- Users should configure the parameters in CR. The following table lists the primary configurable parameters of the PowerFlex driver and their default values:
+- You should configure the parameters in CR. The following table lists the primary configurable parameters of the PowerFlex driver and their default values:
 <ul>
 {{< collapse id="1" title="Parameters">}}
    | Parameter | Description | Required | Default |
@@ -173,8 +173,8 @@ run `/opt/emc/scaleio/sdc/bin/drv_cfg --add_mdm --ip 10.xx.xx.xx.xx,10.xx.xx.xx`
    |<div style="text-align: left"> X_CSI_HEALTH_MONITOR_ENABLED |<div style="text-align: left"> Enable/Disable health monitor of CSI volumes from Node plugin - volume condition | No | false |
    |<div style="text-align: left"> X_CSI_SDC_ENABLED |<div style="text-align: left"> Enable/Disable installation of the SDC. | Yes | true |
    |<div style="text-align: left"> ***Sidecar parameters*** |
-   |<div style="text-align: left"> volume-name-prefix |<div style="text-align: left"> The volume-name-prefix will be used by provisioner sidecar as a prefix for all the volumes created  | Yes | k8s |
-   |<div style="text-align: left"> monitor-interval |<div style="text-align: left"> The monitor-interval will be used by external-health-monitor as an interval for health checks  | Yes | 60s |
+   |<div style="text-align: left"> volume-name-prefix |<div style="text-align: left"> The volume-name-prefix is used by provisioner sidecar as a prefix for all the volumes created  | Yes | k8s |
+   |<div style="text-align: left"> monitor-interval |<div style="text-align: left"> The monitor-interval is used by external-health-monitor as an interval for health checks  | Yes | 60s |
 {{< /collapse >}}
 
 ii . **Run this command to create** a PowerFlex custom resource:
