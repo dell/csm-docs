@@ -143,7 +143,7 @@ run `/opt/emc/scaleio/sdc/bin/drv_cfg --add_mdm --ip 10.xx.xx.xx.xx,10.xx.xx.xx`
 
     b. **Detailed Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powerflex_{{< version-docs key="sample_sc_pflex" >}}.yaml) for detailed settings.
 
-- You should configure the parameters in CR. The following table lists the primary configurable parameters of the PowerFlex driver and their default values:
+- Configure the parameters in the CR. The table below lists the primary configurable parameters of the PowerFlex driver and their default values:
 <ul>
 {{< collapse id="1" title="Parameters">}}
    | Parameter | Description | Required | Default |
