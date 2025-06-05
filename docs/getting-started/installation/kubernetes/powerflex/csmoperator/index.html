@@ -20,8 +20,8 @@
 
   <meta itemprop="name" content="Installation Guide">
   <meta itemprop="description" content="CSM Operator Installation">
-  <meta itemprop="dateModified" content="2025-04-30T23:27:03+05:30">
-  <meta itemprop="wordCount" content="1237">
+  <meta itemprop="dateModified" content="2025-06-05T15:13:59-05:00">
+  <meta itemprop="wordCount" content="1215">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Installation Guide">
   <meta name="twitter:description" content="CSM Operator Installation">
@@ -203,7 +203,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.c9f42e617f2d065b04ba689fdc82ab3a.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.0c8c222ed82d7be24e2a510cd10a03f9.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -4042,12 +4042,12 @@ Export the MDM IPs as a comma-separated list:</p>
 </span></span></code></pre></div><p>where xxx represents the actual IP address in your environment.</p>
 </li>
 <li>
-<p><strong>Install SDC:</strong><br>
+<p><strong>Install SDC:</strong>
 Install the SDC per the <em>Dell PowerFlex Deployment Guide</em>:</p>
 <ul>
 <li>For RPM environments, run:</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>rpm -iv ./EMC-ScaleIO-sdc-*.x86_64.rpm 
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>rpm -iv ./EMC-ScaleIO-sdc-*.x86_64.rpm
 </span></span></code></pre></div><p>Replace * with the SDC name corresponding to the PowerFlex version.</p>
 </li>
 <li>
@@ -4065,8 +4065,8 @@ CSI Driver Installation <a class="header-link"  href="#csi-driver-installation" 
 <ol>
 <li>
 <p><strong>Create namespace:</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>   kubectl create namespace powerflex
-</span></span></code></pre></div><p>This command creates a namespace called <code>powerflex</code>. You can replace <code>powerflex</code> with any name you prefer.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>   kubectl create namespace vxflexos
+</span></span></code></pre></div><p>This command creates a namespace called <code>vxflexos</code>. You can replace <code>vxflexos</code> with any name you prefer.</p>
 </li>
 <li>
 <p><strong>Create <code>secret.yaml</code>.</strong></p>
@@ -4081,12 +4081,12 @@ CSI Driver Installation <a class="header-link"  href="#csi-driver-installation" 
 <li><strong>Update Parameters:</strong> Replace placeholders with actual values for your Powerflex array.</li>
 <li><strong>Add Blocks:</strong> If you have multiple Powerflex arrays, add similar blocks for each one.</li>
 <li><strong>Replication:</strong> If replication is enabled, make sure the <code>secret.yaml</code> includes all involved Powerflex arrays.
-<br><br>
-b. After editing the file, <strong>run this command to create a secret</strong> called <code>powerflex-config</code>.</li>
+<br>
+b. After editing the file, <strong>run this command to create a secret</strong> called <code>vxflexos-config</code>.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>  kubectl create secret generic powerflex-config -n powerflex --from-file<span style="color:#ce5c00;font-weight:bold">=</span><span style="color:#000">config</span><span style="color:#ce5c00;font-weight:bold">=</span>secret.yaml
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>  kubectl create secret generic vxflexos-config -n vxflexos --from-file<span style="color:#ce5c00;font-weight:bold">=</span><span style="color:#000">config</span><span style="color:#ce5c00;font-weight:bold">=</span>secret.yaml
 </span></span></code></pre></div><p>Use this command to <strong>replace or update</strong> the secret:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>  kubectl create secret generic powerflex-config -n powerflex --from-file<span style="color:#ce5c00;font-weight:bold">=</span><span style="color:#000">config</span><span style="color:#ce5c00;font-weight:bold">=</span>secret.yaml -o yaml --dry-run<span style="color:#ce5c00;font-weight:bold">=</span>client <span style="color:#000;font-weight:bold">|</span> kubectl replace -f -
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>  kubectl create secret generic vxflexos-config -n vxflexos --from-file<span style="color:#ce5c00;font-weight:bold">=</span><span style="color:#000">config</span><span style="color:#ce5c00;font-weight:bold">=</span>secret.yaml -o yaml --dry-run<span style="color:#ce5c00;font-weight:bold">=</span>client <span style="color:#000;font-weight:bold">|</span> kubectl replace -f -
 </span></span></code></pre></div></li>
 <li>
 <p><strong>Install driver:</strong></p>
@@ -4096,7 +4096,7 @@ b. After editing the file, <strong>run this command to create a secret</strong> 
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">kind</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">ContainerStorageModule</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">metadata</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">vxflexos</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">namespace</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">powerflex</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">namespace</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">vxflexos</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">spec</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">driver</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">csiDriverType</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;powerflex&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
@@ -4108,7 +4108,7 @@ b. After editing the file, <strong>run this command to create a secret</strong> 
 </li>
 </ol>
 <ul>
-<li>Users should configure the parameters in CR. The following table lists the primary configurable parameters of the PowerFlex driver and their default values:</li>
+<li>Configure the parameters in the CR. The table below lists the primary configurable parameters of the PowerFlex driver and their default values:</li>
 </ul>
 <ul>
 <style>
@@ -4312,20 +4312,14 @@ b. After editing the file, <strong>run this command to create a secret</strong> 
           <td></td>
       </tr>
       <tr>
-          <td><div style="text-align: left">  volume-name-prefix</td>
-          <td><div style="text-align: left">  The volume-name-prefix will be used by provisioner sidecar as a prefix for all the volumes created</td>
-          <td>Yes</td>
-          <td>k8s</td>
-      </tr>
-      <tr>
           <td><div style="text-align: left"> volume-name-prefix</td>
-          <td><div style="text-align: left">  The volume-name-prefix will be used by provisioner sidecar as a prefix for all the volumes created</td>
+          <td><div style="text-align: left"> The volume-name-prefix is used by provisioner sidecar as a prefix for all the volumes created</td>
           <td>Yes</td>
           <td>k8s</td>
       </tr>
       <tr>
-          <td><div style="text-align: left">  monitor-interval</td>
-          <td><div style="text-align: left">  The monitor-interval will be used by external-health-monitor as an interval for health checks</td>
+          <td><div style="text-align: left"> monitor-interval</td>
+          <td><div style="text-align: left"> The monitor-interval is used by external-health-monitor as an interval for health checks</td>
           <td>Yes</td>
           <td>60s</td>
       </tr>
@@ -4351,13 +4345,13 @@ b. After editing the file, <strong>run this command to create a secret</strong> 
 <p>ii . <strong>Run this command to create</strong> a PowerFlex custom resource:</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>  kubectl create -f &lt;input_sample_file.yaml&gt;
 </span></span></code></pre></div><p>This command will deploy the CSI-PowerFlex driver in the namespace specified in the input YAML file.</p>
-</ul> 
+</ul>
 <ol start="4">
 <li>
 <p><strong>Verify the installation:</strong></p>
 <ul>
 <li>Check if ContainerStorageModule CR is created successfully using the command below:
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl get csm/powerflex -n powerflex
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl get csm/vxflexos -n vxflexos
 </span></span></code></pre></div></li>
 <li>Check the status of the CR to verify if the driver installation is in the <code>Succeed</code> state. If the status is not <code>Succeed</code>, see the <a href="../troubleshooting/#my-dell-csi-driver-install-failed-how-do-i-fix-it">Troubleshooting guide</a> for more information.</li>
 </ul>
@@ -4396,7 +4390,7 @@ b. After editing the file, <strong>run this command to create a secret</strong> 
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">kind</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">VolumeSnapshotClass</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">metadata</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">vxflexos-snapclass</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">deletionPolicy</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">Delete </span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">deletionPolicy</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">Delete</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span></code></pre></div><p>Refer <a href="https://github.com/dell/csi-powerflex/tree/main/samples/volumesnapshotclass/">Volume Snapshot Class</a> sample file.</p>
 <p><strong>Run this command to create</strong> a volume snapshot class</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span> kubectl create -f &lt; volume-snapshot-class.yaml &gt;
@@ -4482,12 +4476,12 @@ b. After editing the file, <strong>run this command to create a secret</strong> 
         <div class="accordion-body">
           
             
- <br>  
+ <br>
 
 The driver and modules versions installable with the Container Storage Modules Operator <a href="../../../../../supportmatrix/#operator-compatibility-matrix">Click Here</a>
 
 
-<br>   
+<br>
 
 <style>
 .custom-container{
@@ -4828,7 +4822,7 @@ The driver and modules versions installable with the Container Storage Modules O
       </a>
       </div>
     
- 
+
 
     
     
