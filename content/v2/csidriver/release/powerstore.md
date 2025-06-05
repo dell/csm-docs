@@ -3,7 +3,9 @@ title: PowerStore
 description: Release notes for PowerStore CSI driver
 ---
 
-## Release Notes - CSI PowerStore v2.12.0
+## Release Notes - CSI PowerStore v2.13.0
+
+
 
 
 
@@ -16,20 +18,16 @@ description: Release notes for PowerStore CSI driver
 
 
 ### New Features/Changes
-
-- [#1472 - [FEATURE]: Support for Kubernetes 1.31](https://github.com/dell/csm/issues/1472)
-- [#1473 - [FEATURE]: Add Support for OpenShift Container Platform (OCP) 4.17](https://github.com/dell/csm/issues/1473)
-- [#1508 - [FEATURE]:  Add Support for KubeVirt](https://github.com/dell/csm/issues/1508)
-- [#1443 - [FEATURE]: PowerStore Sync / Metro for Block - CSM Replication](https://github.com/dell/csm/issues/1443)
+- [#1560 - [FEATURE]: CSM support for OpenShift 4.18](https://github.com/dell/csm/issues/1560)
+- [#1561 - [FEATURE]: Added support for Kubernetes 1.32 ](https://github.com/dell/csm/issues/1561)
+- [#1610 - [FEATURE]: Added support for PowerStore 4.1 ](https://github.com/dell/csm/issues/1610)
 
 ### Fixed Issues
 
-- [#1447 - [BUG]: Gobrick does not clean wwids from /etc/multipath/wwids after removing multipath devices ](https://github.com/dell/csm/issues/1447)
-- [#1458 - [BUG]: CSI-PowerStore Node Prefix is ignored](https://github.com/dell/csm/issues/1458)
-- [#1530 - [BUG]: Duplicate host NQNs on nodes with no logs](https://github.com/dell/csm/issues/1530)
-- [#1534 - [BUG]: CSI PowerStore unable to resize NVMe block PVC, even though volume on the array gets resized](https://github.com/dell/csm/issues/1534)
-- [#1538 - [BUG]: Host definitions not being created after adding new appliance to secret](https://github.com/dell/csm/issues/1538)
-- [#1539 - [BUG]: Wrong storage protocol used when multiple PowerStore arrays are defined in secret](https://github.com/dell/csm/issues/1539)
+- [#1549 - [BUG]: The NVMeCommand constant needs to use full path](https://github.com/dell/csm/issues/1549)
+- [#1582 - [BUG]: CSI-PowerStore Fails to Apply 'mountOptions' Passed in StorageClass](https://github.com/dell/csm/issues/1582)
+- [#1586 - [BUG]: Snapshot from metro volume restore as non-metro even if metro storage class is chosen](https://github.com/dell/csm/issues/1586)
+- [#1667 - [BUG]: Labels versions and maintainer update for CSM images ](https://github.com/dell/csm/issues/1667)
 
 ### Known Issues
 

@@ -1,8 +1,13 @@
 ---
 title: PowerScale
+linkTitle: PowerScale
 description: >
-  Installing CSI Driver for PowerScale via Helm
+  Installing the CSI Driver for Dell PowerScale via Helm
 ---
+{{% pageinfo color="primary" %}}
+{{< message text="1" >}}
+{{% /pageinfo %}}
+
 The CSI Driver for Dell PowerScale can be deployed by using the provided Helm v3 charts and installation scripts on both Kubernetes and OpenShift platforms. For more detailed information on the installation scripts, review the script [documentation](https://github.com/dell/csi-powerscale/tree/master/dell-csi-helm-installer).
 
 ## Prerequisites
@@ -14,10 +19,9 @@ The following are requirements to be met before installing the CSI Driver for De
 - Mount propagation is enabled on container runtime that is being used
 - `nfs-utils` package must be installed on nodes that will mount volumes
 - If using Snapshot feature, satisfy all Volume Snapshot requirements
-- If enabling CSM for Authorization, please refer to the [Authorization deployment steps](../../../../../deployment/helm/modules/installation/authorization/) first
+- If enabling CSM for Authorization, please refer to the [Authorization deployment steps](../../../../../deployment/helm/modules/installation/authorization-v2.0/) first
 - If enabling CSM for Replication, please refer to the [Replication deployment steps](../../../../../deployment/helm/modules/installation/replication/) first
 - If enabling CSM for Resiliency, please refer to the [Resiliency deployment steps](../../../../../deployment/helm/modules/installation/resiliency/) first
-- If enabling Encryption, please refer to the [Encryption deployment steps](../../../../../deployment/helm/modules/installation/encryption/) first
 
 ### Install Helm 3.0
 
@@ -69,7 +73,7 @@ node:
     enabled: false
 ```
 
-*NOTE*: To enable this feature to existing driver OR enable this feature while upgrading the driver versions, 
+*NOTE*: To enable this feature to existing driver OR enable this feature while upgrading the driver versions,
 follow either of the way.
 
 1. Reinstall of Driver
@@ -94,19 +98,19 @@ CRDs should be configured during replication prepare stage with repctl as descri
 
 **Steps**
 
-1. Run `git clone -b v2.11.0 https://github.com/dell/csi-powerscale.git` to clone the git repository.
+1. Run `git clone -b v2.12.0 https://github.com/dell/csi-powerscale.git` to clone the git repository.
 2. Ensure that you have created the namespace where you want to install the driver. You can run `kubectl create namespace isilon` to create a new one. The use of "isilon"  as the namespace is just an example. You can choose any name for the namespace.
 3. Collect information from the PowerScale Systems like IP address, IsiPath, username, and password. Make a note of the value for these parameters as they must be entered in the *secret.yaml*.
 
    **Note**: The 'clusterName' serves as a logical, unique identifier for the array that should remain unchanged once it is included in the volume handle. Altering this identifier is not advisable, as it would result in the failure of all operations associated with the volume that was created earlier.
-   
-4. Download `wget -O my-isilon-settings.yaml https://raw.githubusercontent.com/dell/helm-charts/csi-isilon-2.11.0/charts/csi-isilon/values.yaml` into `cd ../dell-csi-helm-installer` to customize settings for installation.
+
+4. Download `wget -O my-isilon-settings.yaml https://raw.githubusercontent.com/dell/helm-charts/csi-isilon-2.12.0/charts/csi-isilon/values.yaml` into `cd ../dell-csi-helm-installer` to customize settings for installation.
 5. Edit *my-isilon-settings.yaml* to set the following parameters for your installation:
    The following table lists the primary configurable parameters of the PowerScale driver Helm chart and their default values. More detailed information can be
-   found in the  [`values.yaml`](https://github.com/dell/helm-charts/blob/csi-isilon-2.11.0/charts/csi-isilon/values.yaml) file in this repository.
+   found in the  [`values.yaml`](https://github.com/dell/helm-charts/blob/csi-isilon-2.12.0/charts/csi-isilon/values.yaml) file in this repository.
 
    | Parameter | Description | Required | Default |
-   | --------- | ----------- | -------- |-------- |  
+   | --------- | ----------- | -------- |-------- |
    | images | List all the images used by the CSI driver and CSM. If you use a private repository, change the registries accordingly. | Yes | "" |
    | logLevel | CSI driver log level | No | "debug" |
    | certSecretCount | Defines the number of certificate secrets, which the user is going to create for SSL authentication. (isilon-cert-0..isilon-cert-(n-1)); Minimum value should be 1.| Yes | 1 |
@@ -139,24 +143,22 @@ CRDs should be configured during replication prepare stage with repctl as descri
    | tolerations | Define tolerations for the node daemonset, if required | No | |
    | dnsPolicy | Define the DNS Policy of the Node service | Yes | ClusterFirstWithHostNet |
    | healthMonitor.enabled | Enable/Disable health monitor of CSI volumes- volume usage, volume condition | Yes | false |
-   | ***PLATFORM ATTRIBUTES*** | | | |   
+   | ***PLATFORM ATTRIBUTES*** | | | |
    | endpointPort | Define the HTTPs port number of the PowerScale OneFS API server. If authorization is enabled, endpointPort should be the HTTPS localhost port that the authorization sidecar will listen on. This value acts as a default value for endpointPort, if not specified for a cluster config in secret. | No | 8080 |
    | skipCertificateValidation | Specify whether the PowerScale OneFS API server's certificate chain and hostname must be verified. This value acts as a default value for skipCertificateValidation, if not specified for a cluster config in secret. | No | true |
    | isiAuthType | Indicates the authentication method to be used. If set to 1 then it follows as session-based authentication else basic authentication. If authorization.enabled=true, this value must be set to 1. | No | 0 |
    | isiAccessZone | Define the name of the access zone a volume can be created in. If storageclass is missing with AccessZone parameter, then value of isiAccessZone is used for the same. | No | System |
-   | enableQuota | Indicates whether the provisioner should attempt to set (later unset) quota on a newly provisioned volume. This requires SmartQuotas to be enabled.| No | true |   
+   | enableQuota | Indicates whether the provisioner should attempt to set (later unset) quota on a newly provisioned volume. This requires SmartQuotas to be enabled.| No | true |
    | isiPath | Define the base path for the volumes to be created on PowerScale cluster. This value acts as a default value for isiPath, if not specified for a cluster config in secret| No | /ifs/data/csi |
    | ignoreUnresolvableHosts | Allows new host to add to existing export list though any of the existing hosts from the same exports are unresolvable/doesn't exist anymore. | No | false |
    | noProbeOnStart | Define whether the controller/node plugin should probe all the PowerScale clusters during driver initialization | No | false |
    | autoProbe | Specify if automatically probe the PowerScale cluster if not done already during CSI calls | No | true |
-   | **authorization** | [Authorization](../../../../../deployment/helm/modules/installation/authorization/) is an optional feature to apply credential shielding of the backend PowerScale. | - | - |
+   | **authorization** | [Authorization](../../../../../deployment/helm/modules/installation/authorization-v2.0/) is an optional feature to apply credential shielding of the backend PowerScale. | - | - |
    | enabled                  | A boolean that enables/disables authorization feature. If enabled, isiAuthType must be set to 1. |  No      |   false   |
    | proxyHost | Hostname of the csm-authorization server. | No | Empty |
    | skipCertificateValidation | A boolean that enables/disables certificate validation of the csm-authorization proxy server. | No | true |
    | **podmon**               | [Podmon](../../../../../deployment/helm/modules/installation/resiliency/) is an optional feature to enable application pods to be resilient to node failure.  |  -        |  -       |
    | enabled                  | A boolean that enables/disables podmon feature. |  No      |   false   |
-   | **encryption** | [Encryption](.../../../../../modules/installation/encryption/) is an optional feature to apply encryption to CSI volumes. | - | - |
-   | enabled        | A boolean that enables/disables Encryption feature. | No | false |
 
    *NOTE:*
 
@@ -200,7 +202,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
 Create isilon-creds secret using the following command:
   <br/> `kubectl create secret generic isilon-creds -n isilon --from-file=config=secret.yaml`
 
-   *NOTE:* 
+   *NOTE:*
    - If any key/value is present in all *my-isilon-settings.yaml*, *secret*, and storageClass, then the values provided in storageClass parameters take precedence.
    - The user has to validate the yaml syntax and array-related key/values while replacing or appending the isilon-creds secret. The driver will continue to use previous values in case of an error found in the yaml file.
    - For the key isiIP/endpoint, the user can give either IP address or FQDN. Also, the user can prefix 'https' (For example, https://192.168.1.1) with the value.
@@ -226,22 +228,22 @@ Create isilon-creds secret using the following command:
 The CSI driver exposes an install parameter 'skipCertificateValidation' which determines if the driver
 performs client-side verification of the OneFS certificates. The 'skipCertificateValidation' parameter is set to true by default and the driver does not verify the OneFS certificates.
 
-If the 'skipCertificateValidation' is set to false, then the secret isilon-certs must contain the CA certificate for OneFS. 
+If the 'skipCertificateValidation' is set to false, then the secret isilon-certs must contain the CA certificate for OneFS.
 If this secret is an empty secret, then the validation of the certificate fails, and the driver fails to start.
 
 If the 'skipCertificateValidation' parameter is set to false and a previous installation attempt to create the empty secret, then this secret must be deleted and re-created using the CA certs. If the OneFS certificate is self-signed, then perform the following steps:
 
 ### Procedure
 
-1. To fetch the certificate, run 
+1. To fetch the certificate, run
 ```bash
 openssl s_client -showcerts -connect [OneFS IP] </dev/null 2>/dev/null | openssl x509 -outform PEM > ca_cert_0.pem
 ```
-2. To create the certs secret, run 
+2. To create the certs secret, run
 ```bash
 kubectl create secret generic isilon-certs-0 --from-file=cert-0=ca_cert_0.pem -n isilon
 ```
-3. Use the following command to replace the secret <br/> 
+3. Use the following command to replace the secret <br/>
 ```bash
 kubectl create secret generic isilon-certs-0 -n isilon --from-file=cert-0=ca_cert_0.pem -o yaml --dry-run | kubectl replace -f -
 ```
@@ -281,7 +283,7 @@ The storage classes created as part of the installation have an annotation - "he
     Error: cannot patch "<sc-name>" with kind StorageClass: StorageClass.storage.k8s.io "<sc-name>" is invalid: parameters: Forbidden: updates to parameters are forbidden
 ```
 
-In case you want to make such updates, ensure to delete the existing storage classes using the `kubectl delete storageclass` command.  
+In case you want to make such updates, ensure to delete the existing storage classes using the `kubectl delete storageclass` command.
 Deleting a storage class has no impact on a running Pod with mounted PVCs. You cannot provision new PVCs until at least one storage class is newly created.
 
 >Note: If you continue to use the old storage classes, you may not be able to take advantage of any new storage class parameter supported by the driver.
@@ -292,7 +294,7 @@ There are samples storage class yaml files available under `samples/storageclass
 
 1. Copy the `storageclass.yaml` to `second_storageclass.yaml` (This is just an example, you can rename to file you require.)
 2. Edit the  `second_storageclass.yaml` yaml file and update following parameters:
-- Update the `name` parameter to you require 
+- Update the `name` parameter to you require
    ```yaml
     metadata:
       name: isilon-new

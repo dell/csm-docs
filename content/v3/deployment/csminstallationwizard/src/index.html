@@ -9,14 +9,16 @@ disable_footer: true
     <meta charset="utf-8">
     <title>CSM Installation Wizard | Dell Technologies</title>
     <link rel="stylesheet" type="text/css" href="static/css/bootstrap.min.css">
-    <link rel="stylesheet" href="static/css/dds-icons.min.css" />
+    <link rel="stylesheet" href="static/css/dds-icons-min.css" />
     <link rel="stylesheet" href="static/css/dds-icons.css" />
     <link rel="stylesheet" type="text/css" href="static/css/style.css">
     <script type="text/javascript" src="static/js/jquery-3.6.1.min.js"></script>
     <script type="text/javascript" src="static/js/bootstrap.bundle.min.js"></script>
   </head>
   <body>
-    <div class="container-fluid pt-5">
+   
+    <div class="container-fluid pt-5 ">
+      
         <div class="row">
           <div class="col-12 pl-md-5">
             <span class="heading">Container Storage Modules (CSM) Installation Wizard </span>
@@ -80,10 +82,10 @@ disable_footer: true
                     <div class="col-sm-9"></div>
                     <div class="col-sm-3">
                       <select id="csm-version" class="form-select" onchange="onCSMVersionChange(); validateInput(validateForm, CONSTANTS)" required>
-                        <option value="1.8.0">CSM 1.8</option>
-                        <option value="1.9.3">CSM 1.9</option>                        
-                        <option value="1.10.2">CSM 1.10</option>
-                        <option value="1.11.0" selected>CSM 1.11</option>
+                        <option value="1.9.3">CSM 1.9</option>
+                        <option value="1.10.2">CSM 1.10</option>                        
+                        <option value="1.11.1">CSM 1.11</option>
+                        <option value="1.12.0" selected>CSM 1.12</option>
                       </select>
                     </div>
                   </div>
@@ -344,13 +346,26 @@ disable_footer: true
                     </div>
                   </div>
 
+                  <div class="row mb-4 enable-sdc">
+                    <div class="col-sm-12">
+                      <input class="form-check-input" type="checkbox" id="enable-sdc" value="">
+                      <label for="enable-sdc" class="form-check-label ms-2 text-dark" data-bs-toggle="tooltip" data-bs-placement="right" title="Install SDC">Install SDC</label>
+                    </div>
+                    <div class="row child-level-one" id="enablesdc-note-wrapper-helm">
+                      <div class="mt-3 py-2 note">
+                        <i class="icon dds__icon dds__icon--alert-info-cir"></i>
+                      <span class="h6"> SDC is required for using block storage. Verify your environment is supported on the <a href="https://hub.docker.com/r/dellemc/sdc" target="_blank">SDC Release Notes</a> before selecting this option. If your environment is not supported, refer to the manual installation instructions on the <a href="https://dell.github.io/csm-docs/docs/deployment/helm/drivers/installation/powerflex/#install-powerflex-storage-data-client" target="_blank">CSM Documentation</a>. </span>
+                      </div>
+                    </div>
+                   </div>
+
                   <div class="row mb-4 col-sm-11 rename-sdc-feature">
                     <div class="col-sm-12">
                       <input class="form-check-input" type="checkbox" id="rename-sdc" value="" onchange="onRenameSDCChange(driver, CONSTANTS)">
-                      <label for="rename-sdc" class="form-check-label ms-2 text-dark" data-bs-toggle="tooltip" data-bs-placement="right" title="Enable/Disable Rename SDC feature.">Rename SDC</label>
+                      <label for="rename-sdc" class="form-check-label ms-2 text-dark" data-bs-toggle="tooltip" data-bs-placement="right" title="Enable/Disable Rename SDC feature.">Allow driver to rename SDC to match name of node</label>
                     </div>
                     <div class="was-validated row mt-3 child-level-one sdc-prefix">
-                      <label for="sdc-prefix" class="col-sm-3 col-form-label" data-bs-toggle="tooltip" data-bs-placement="right" title="Prefix to apply for a SDC name">SDC Prefix</label>
+                      <label for="sdc-prefix" class="col-sm-3 col-form-label" data-bs-toggle="tooltip" data-bs-placement="right" title="Prefix to apply for a SDC name">Prefix to apply for SDC names</label>
                       <div class="col-sm-9"></div>
                       <div class="col-sm-2">
                         <input class="form-control input-lg" type="text" id="sdc-prefix" placeholder="sdc-test" oninput="validateInput(validateForm, CONSTANTS)" required>
@@ -360,8 +375,14 @@ disable_footer: true
 
                   <div class="row mb-4 approve-sdc">
                     <div class="col-sm-12">
-                      <input class="form-check-input" type="checkbox" id="approve-sdc" value="">
-                      <label for="approve-sdc" class="form-check-label ms-2 text-dark" data-bs-toggle="tooltip" data-bs-placement="right" title="Enable/Disable SDC approval">Approve SDC</label>
+                      <input class="form-check-input" type="checkbox" id="approve-sdc" value="" onchange="onApproveSdcChange(approveSdcNote) checked">
+                      <label for="approve-sdc" class="form-check-label ms-2 text-dark" data-bs-toggle="tooltip" data-bs-placement="right" title="Enable/Disable SDC approval">Allow driver to approve SDC </label>
+                    </div>
+                    <div class="row child-level-one" id="approvesdc-note-wrapper">
+                      <div class="mt-3 py-2 note">
+                        <i class="icon dds__icon dds__icon--alert-info-cir"></i>
+                        <span class="h6" id="approvesdc-note"></span>
+                      </div>
                     </div>
                   </div>
 

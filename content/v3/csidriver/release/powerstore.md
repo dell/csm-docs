@@ -3,7 +3,9 @@ title: PowerStore
 description: Release notes for PowerStore CSI driver
 ---
 
-## Release Notes - CSI PowerStore v2.11.0
+## Release Notes - CSI PowerStore v2.12.0
+
+
 
 
 
@@ -15,20 +17,19 @@ description: Release notes for PowerStore CSI driver
 
 ### New Features/Changes
 
-- [#1359 - [FEATURE]: Add Support for OpenShift Container Platform (OCP) 4.16 ](https://github.com/dell/csm/issues/1359)
-- [#1400 - [FEATURE]: Support for Kubernetes 1.30](https://github.com/dell/csm/issues/1400)
+- [#1472 - [FEATURE]: Support for Kubernetes 1.31](https://github.com/dell/csm/issues/1472)
+- [#1473 - [FEATURE]: Add Support for OpenShift Container Platform (OCP) 4.17](https://github.com/dell/csm/issues/1473)
+- [#1508 - [FEATURE]:  Add Support for KubeVirt](https://github.com/dell/csm/issues/1508)
+- [#1443 - [FEATURE]: PowerStore Sync / Metro for Block - CSM Replication](https://github.com/dell/csm/issues/1443)
 
 ### Fixed Issues
 
-- [#1188 - [BUG]: Controller Pod keeps restarting due to "Lost connection to CSI driver" error](https://github.com/dell/csm/issues/1188)
-- [#1209 - [BUG]: Doc hyper links in driver Readme is broken](https://github.com/dell/csm/issues/1209)
-- [#1216 - [BUG]: Incorrect Error message in Resiliency Podmon in controllerCleanupPod() func](https://github.com/dell/csm/issues/1216)
-- [#1218 - [BUG]: Add the helm-charts-version parameter to the install command for all drivers in csm-docs](https://github.com/dell/csm/issues/1218)
-- [#1239 - [BUG]: Changes in new release of google.golang.org/protobuf is causing compilation issues](https://github.com/dell/csm/issues/1239)
-- [#1270 - [BUG]: Missing entries for Resiliency in installation wizard template](https://github.com/dell/csm/issues/1270)
-- [#1317 - [BUG]: CSM PowerStore - Remove the RESTAPI code that is not needed](https://github.com/dell/csm/issues/1317)
-- [#1338 - [BUG]: Data loss (DL) when deleting PVC but leaves unusable volumesnapshot and volumesnapshotcontent](https://github.com/dell/csm/issues/1338)
-- [#1346 - [BUG]: Parsing an NVME response fails for list-subsys](https://github.com/dell/csm/issues/1346)
+- [#1447 - [BUG]: Gobrick does not clean wwids from /etc/multipath/wwids after removing multipath devices ](https://github.com/dell/csm/issues/1447)
+- [#1458 - [BUG]: CSI-PowerStore Node Prefix is ignored](https://github.com/dell/csm/issues/1458)
+- [#1530 - [BUG]: Duplicate host NQNs on nodes with no logs](https://github.com/dell/csm/issues/1530)
+- [#1534 - [BUG]: CSI PowerStore unable to resize NVMe block PVC, even though volume on the array gets resized](https://github.com/dell/csm/issues/1534)
+- [#1538 - [BUG]: Host definitions not being created after adding new appliance to secret](https://github.com/dell/csm/issues/1538)
+- [#1539 - [BUG]: Wrong storage protocol used when multiple PowerStore arrays are defined in secret](https://github.com/dell/csm/issues/1539)
 
 ### Known Issues
 

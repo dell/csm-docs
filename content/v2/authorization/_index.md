@@ -16,4 +16,4 @@ Kubernetes administrators will have an interface to create, delete, and manage r
 
 Currently, we have two versions of Authorization, **v1.x** and **v2.x**. **v2.x is not backward compatible with v1.x versions**.
 
-**Deprecation Notice Pre-Wire: Starting with CSM 1.13, Authorization v1.x will be deprecated and will be officially discontinued by CSM 1.15 in September 2025. Please migrate to Authorization v2.0 before then to avoid any issues using the v2 Migration guide linked below.**
+**Starting with CSM 1.13, Authorization v1.x will be deprecated and will be officially discontinued by CSM 1.15 in September 2025. Please migrate to Authorization v2.0 before then to avoid any issues using the v2 Migration guide linked below.**

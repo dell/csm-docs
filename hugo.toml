@@ -175,19 +175,19 @@ algolia_docsearch = false
 #        desc = "Discuss development issues around the project" 
 
 [[params.versions]]
-  version = "1.14.0"
+  version = "1.15.0"
   url = "https://dell.github.io/csm-docs/docs/"
 
 [[params.versions]]
-  version = "1.13.1"
+  version = "1.14.0"
   url = "https://dell.github.io/csm-docs/v1/"
 
 [[params.versions]]
-  version = "1.12.0"
+  version = "1.13.1"
   url = "https://dell.github.io/csm-docs/v2/"
 
 [[params.versions]]
-  version = "1.11.1"
+  version = "1.12.0"
   url = "https://dell.github.io/csm-docs/v3/" 
 
 [[menu.main]]

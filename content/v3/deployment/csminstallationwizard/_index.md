@@ -4,6 +4,9 @@ linkTitle: "CSM Installation Wizard"
 description: Container Storage Modules Installation Wizard
 weight: 1
 ---
+{{% pageinfo color="primary" %}}
+{{< message text="1" >}}
+{{% /pageinfo %}}
 
 The [Dell Container Storage Modules Installation Wizard](./src/index.html) is a webpage that generates a manifest file for installing Dell CSI Drivers and its supported CSM Modules, based on input from the user. It generates a single manifest file to install both Dell CSI Drivers and its supported CSM Modules, thereby eliminating the need to download individual Helm charts for drivers and modules. The user can enable or disable the necessary modules through the UI, and a manifest file is generated accordingly without manually editing the helm charts.
 
@@ -13,33 +16,33 @@ The [Dell Container Storage Modules Installation Wizard](./src/index.html) is a 
 
 | CSI Driver         | Version   | Helm   | Operator  |
 | ------------------ | --------- | ------ | --------- |
-| CSI PowerStore     | 2.11.0    |✔️      |✔️        |
+| CSI PowerStore     | 2.12.0    |✔️      |✔️        |
+| CSI PowerStore     | 2.11.1    |✔️      |✔️        |
 | CSI PowerStore     | 2.10.1    |✔️      |✔️        |
 | CSI PowerStore     | 2.9.1     |✔️      |✔️        |
-| CSI PowerStore     | 2.8.0     |✔️      |✔️        |
+| CSI PowerMax       | 2.12.0    |✔️      |✔️        |
 | CSI PowerMax       | 2.11.0    |✔️      |✔️        |
 | CSI PowerMax       | 2.10.1    |✔️      |✔️        |
 | CSI PowerMax       | 2.9.1     |✔️      |✔️        |
-| CSI PowerMax       | 2.8.0     |✔️      |✔️        |
+| CSI PowerFlex      | 2.12.0    |✔️      |❌        |
 | CSI PowerFlex      | 2.11.0    |✔️      |❌        |
 | CSI PowerFlex      | 2.10.1    |✔️      |❌        |
-| CSI PowerFlex      | 2.9.1     |✔️      |❌        | 
-| CSI PowerFlex      | 2.8.0     |✔️      |❌        | 
+| CSI PowerFlex      | 2.9.1     |✔️      |❌        |
+| CSI PowerScale     | 2.12.0    |✔️      |✔️        |
 | CSI PowerScale     | 2.11.0    |✔️      |✔️        |
 | CSI PowerScale     | 2.10.1    |✔️      |✔️        |
-| CSI PowerScale     | 2.9.1     |✔️      |✔️        | 
-| CSI PowerScale     | 2.8.0     |✔️      |✔️        | 
+| CSI PowerScale     | 2.9.1     |✔️      |✔️        |
+| CSI Unity XT       | 2.12.0    |✔️      |❌        |
 | CSI Unity XT       | 2.11.0    |✔️      |❌        |
 | CSI Unity XT       | 2.10.1    |✔️      |❌        |
-| CSI Unity XT       | 2.9.1     |✔️      |❌        | 
-| CSI Unity XT       | 2.8.0     |✔️      |❌        | 
+| CSI Unity XT       | 2.9.1     |✔️      |❌        |
 
 >NOTE: The Installation Wizard currently does not support operator-based manifest file generation for Unity XT and PowerFlex drivers.
 
 ## Supported Dell CSM Modules
 
-| CSM Modules          | Version   | 
-| ---------------------| --------- | 
+| CSM Modules          | Version   |
+| ---------------------| --------- |
 | CSM Observability    | 1.7.0+     |
 | CSM Replication      | 1.7.0+     |
 | CSM Resiliency       | 1.7.0+     |
@@ -50,15 +53,15 @@ The [Dell Container Storage Modules Installation Wizard](./src/index.html) is a 
 2. Select the `Installation Type` as `Helm`/`Operator`.
 3. Select the `Array`.
 4. Enter the `Image Repository`. The default value is `dellemc`.
-5. Select the `CSM Version`. 
-6. Select the modules for installation. If there are module specific inputs, enter their values. 
+5. Select the `CSM Version`.
+6. Select the modules for installation. If there are module specific inputs, enter their values.
 7. If needed, modify the `Controller Pods Count`.
 8. If needed, select `Install Controller Pods on Control Plane` and/or `Install Node Pods on Control Plane`.
 9. Enter the `Namespace`. The default value is `csi-<array>`.
 10. Click on `Generate YAML`.
-13. A manifest file, `values.yaml` will be generated and downloaded. 
+13. A manifest file, `values.yaml` will be generated and downloaded.
 14. A section `Run the following commands to install` will be displayed.
-15. Run the commands displayed to install Dell CSI Driver and Modules using the generated manifest file. 
+15. Run the commands displayed to install Dell CSI Driver and Modules using the generated manifest file.
 
 ## Installation Using Helm Chart
 
@@ -90,7 +93,7 @@ The [Dell Container Storage Modules Installation Wizard](./src/index.html) is a 
 
 5. If Observability is checked in the wizard, refer to [Observability](../csmoperator/modules/observability#post-installation-dependencies) to export metrics to Prometheus and load the Grafana dashboards.
 
-6. If Authorization is checked in the wizard, only the sidecar is enabled. Refer to [Authorization](../../deployment/helm/modules/installation/authorization/) to install and configure the CSM Authorization Proxy Server.
+6. If Authorization is checked in the wizard, only the sidecar is enabled. Refer to [Authorization](../../deployment/helm/modules/installation/authorization-v2.0/) to install and configure the CSM Authorization Proxy Server.
 
 7. If Replication is checked in the wizard, refer to [Replication](../../deployment/helm/modules/installation/replication/) on configuring communication between Kubernetes clusters.
 
@@ -119,7 +122,7 @@ The [Dell Container Storage Modules Installation Wizard](./src/index.html) is a 
 
 3. If Observability is checked in the wizard, refer to [Observability](../csmoperator/modules/observability) to export metrics to Prometheus and load the Grafana dashboards.
 
-4. If Authorization is checked in the wizard, only the sidecar is enabled. Refer to [Authorization](../csmoperator/modules/authorization) to install and configure the CSM Authorization Proxy Server.
+4. If Authorization is checked in the wizard, only the sidecar is enabled. Refer to [Authorization](../csmoperator/modules/authorizationv2-0) to install and configure the CSM Authorization Proxy Server.
 
 5. If Replication is checked in the wizard, refer to [Replication](../csmoperator/modules/replication) for the necessary prerequisites required for this module.
 

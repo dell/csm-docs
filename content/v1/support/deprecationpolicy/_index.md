@@ -3,29 +3,18 @@ title: "Deprecation Policy"
 linkTitle: "Deprecation Policy"
 weight: 4
 Description: >
-  Dell Technologies (Dell) Container Storage Modules (CSM) Deprecation Policy
+  Container Storage Modules (CSM) Deprecation Policy
 ---
 
-The Deprecation policy for Dell Container Storage Modules (CSM) is in place to help users prevent any disruptive incidents from occurring. We aim to provide appropriate notice when CLI elements, APIs, features, or behaviors are slated to be removed.
+The Deprecation policy for Container Storage Modules (CSM) helps users prevent disruptive incidents. We provide notice when CLI elements, APIs, features, or behaviors are to be removed.
 
 ### Deprecating a CLI Element
-
-This captures situations when a flag or command is removed from a CLI.
-
-CLI elements must function after their announced deprecation for no less than two releases. This includes when the releases become Generally Available (GA), including both major or minor release versions. 
-
-When deprecating a CLI command, a warning message must be displayed each time the command is used.  This warning message should capture the deprecation details along with the release in which the command that is being deprecated will be removed.
-
+- CLI elements must function for at least two releases after deprecation is announced.
+- A warning message with deprecation details and removal release must be displayed when the command is used.
 ### Deprecating an API, Feature, or Behavior
-
-CSM features must function after their announced deprecation for no less than two releases. This includes when the releases become Generally Available (GA), including both major or minor release versions. 
-
+- Features must function for at least two releases after deprecation is announced.
 ### Tech Previews
-
-Features released as tech preview are not supported and therefore are not intended for production.  No deprecation notice will be required before removing any features/behaviors that are released as tech previews.
-
+- Tech preview features are not supported and not intended for production. No deprecation notice is required before removal.
 ### Required Deprecation Notice
-
-CSM documentation for the release in which the deprecation is being announced must include deprecation details along with the release in which the item(s) being deprecated will be removed.
-
-In addition, the changelog and release notes for the release in which the deprecation is being announced must contain a section titled "Important Deprecation Information".  In this section, the deprecation details must be provided along with the release in which the item(s) being deprecated will be removed.
+- Documentation must include deprecation details and removal release.
+- Changelog and release notes must have a section titled “Important Deprecation Information” with deprecation details and removal release.

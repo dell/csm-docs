@@ -3,25 +3,25 @@ title: "Contribution Guidelines"
 linkTitle: "Contribution Guidelines"
 weight: 5
 Description: >
-  Dell Technologies (Dell) Container Storage Modules (CSM) docs Contribution Guidelines
+ Container Storage Modules (CSM) docs Contribution Guidelines
 ---
 
 
-CSM Docs is an open-source project and we thrive to build a welcoming and open community for anyone who wants to use the project or contribute to it.
+Container Storage Modules Documentation is an open-source project and we thrive to build a welcoming and open community for anyone who wants to use the project or contribute to it.
 
-### Contributing to CSM Docs
+### Contributing to Container Storage Modules Documentation
 
 Become one of the contributors to this project! 
 
 You can contribute to this project in several ways. Here are some examples:
 
-* Contribute to the CSM documentation.
+* Contribute to the Container Storage Modules documentation.
 * Report an issue.
 * Feature requests.
 
-CSM docs reside in <https://github.com/dell/csm-docs>. 
+Container Storage Modules documentation reside in <https://github.com/dell/csm-docs>. 
 
-CSM project resides in <https://github.com/dell/csm>.
+Container Storage Modules project resides in <https://github.com/dell/csm>.
 
 #### Don't
 
@@ -47,7 +47,7 @@ We use GitHub pull requests for this purpose.
 
 ### Branching strategy
 
-The CSM documentation portal follows a release branch strategy where a branch is created for each release and all documentation changes made for a release are done on that branch. The release branch is then merged into the main branch at the time of the release. In some situations it may be sufficient to merge a non-release branch to main if it fixes some issue in the documentation for the current released version.
+The Container Storage Modules documentation portal follows a release branch strategy where a branch is created for each release and all documentation changes made for a release are done on that branch. The release branch is then merged into the main branch at the time of the release. In some situations it may be sufficient to merge a non-release branch to main if it fixes some issue in the documentation for the current released version.
 
 #### Branch Naming Convention
 
@@ -82,7 +82,6 @@ The CSM documentation portal follows a release branch strategy where a branch is
 - Install [latest Hugo version extended version](https://github.com/gohugoio/hugo/releases). 
     > Note: Please note we have to install an extended version.
 - Create a local copy of the csm-docs repository using `git clone`. 
-- Update docsy submodules inside themes folder using `git submodule update --recursive --init`
 - Change to the csm-docs folder and run 
     ```
     hugo server 

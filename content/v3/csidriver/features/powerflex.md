@@ -281,6 +281,19 @@ allowedTopologies:
     values:
     - csi-vxflexos.dellemc.com
 ```
+
+**Note** : 
+  The NFS labels are automatically added by the driver for PowerFlex version greater than or equal to 4.0, assuming that NFS dependencies are configured by default. These dependencies come with the default Linux OS package from the node and the array supports NFS.
+  This label should not impact any other functionality, even if NFS is not configured on the array or node.
+
+You can check what labels your nodes contain by running
+```bash
+kubectl get nodes --show-labels
+```
+
+Here's an example of how the labels look after describing the nodes:
+csi-vxflexos.dellemc.com/<system-id>-nfs=true
+
 For additional information, see the [Kubernetes Topology documentation](https://kubernetes-csi.github.io/docs/topology.html).
 
 > *NOTE*: In the manifest file of the Dell CSM operator, topology can be enabled by specifying the system name or _systemid_ in the allowed topologies field. _Volumebindingmode_ is also set to _WaitForFirstConsumer_ by default.
@@ -384,6 +397,18 @@ The CSI PowerFlex driver version 1.3 and later support the automatic deployment 
 - On nodes that do not support automatic SDC deployment by SDC init container, manual installation steps must be followed. The SDC init container skips installing and you can see this mentioned in the logs by running kubectl logs on the node for SDC.
   Refer to https://hub.docker.com/r/dellemc/sdc for supported OS versions.
 - There is no automated uninstallation of the SDC kernel module. Follow PowerFlex SDC documentation to manually uninstall the SDC driver from the node. 
+
+From CSM 1.12.0, you can disable automatic SDC deployment.
+
+By default, SDC deployment is enabled. If you do not want to deploy `sdc` with PowerFlex, it can be disabled by setting the `sdc.enabled` field to `false`.
+
+```
+node:
+  ...
+  sdc:
+    # enabled: Enable/Disable SDC
+    enabled: true
+```
 
 ## Multiarray Support
 
@@ -934,6 +959,38 @@ externalAccess: "10.0.0.0/24"
 ```
 
 This means that we allow for NFS Export created by driver to be consumed by address range `10.0.0.0-10.0.0.255`.
+
+## Configuring NFS independent of SDC
+
+Starting from CSM 1.12.0, the CSI PowerFlex driver supports configuring NFS independent of SDC. This separation is helpful in scenarios where an SDC is not available in the cluster or additional network interfaces do not need to be deployed.
+
+To disable SDC deployment, update the values file and provide the interface names mapping for each of the nodes that are being used.
+
+**Helm**
+```
+node:
+  ...
+  sdc:
+    # enabled: Enable/Disable SDC
+    enabled: false
+  ...
+
+interfaceNames:
+  # worker-1-jxsjoueeewabc.domain: "ens192"
+  # worker-2-jxsjoueeewabc.domain: "ens192"
+```
+
+**Operator**
+```
+common:
+...
+  - name: INTERFACE_NAMES: 'worker-1-jxsjoueeewabc.domain: "ens192", worker-2-jxsjoueeewabc.domain: "ens192"'
+...
+node:
+...
+  - name: X_CSI_SDC_ENABLED
+    value: "false"
+```
 
 ## Storage Capacity Tracking
 CSI-PowerFlex driver version 2.8.0 and above supports Storage Capacity Tracking.

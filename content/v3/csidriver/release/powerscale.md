@@ -4,7 +4,9 @@ description: Release notes for PowerScale CSI driver
 ---
 
 
-## Release Notes - CSI Driver for PowerScale v2.11.0
+## Release Notes - CSI Driver for PowerScale v2.12.0
+
+
 
 
 
@@ -16,21 +18,16 @@ description: Release notes for PowerScale CSI driver
 
 ### New Features/Changes
 
-- [#1359 - [FEATURE]: Add Support for OpenShift Container Platform (OCP) 4.16 ](https://github.com/dell/csm/issues/1359)
-- [#1400 - [FEATURE]: Support for Kubernetes 1.30](https://github.com/dell/csm/issues/1400)
-- [#1397 - [FEATURE]: Observability upgrade is supported in CSM Operator](https://github.com/dell/csm/issues/1397)
-- [#1398 - [FEATURE]: PowerScale  OneFS 9.7 support ](https://github.com/dell/csm/issues/1398)
+- [#1472 - [FEATURE]: Support for Kubernetes 1.31](https://github.com/dell/csm/issues/1472)
+- [#1473 - [FEATURE]: Add Support for OpenShift Container Platform (OCP) 4.17](https://github.com/dell/csm/issues/1473)
+- [#1508 - [FEATURE]:  Add Support for KubeVirt](https://github.com/dell/csm/issues/1508)
 
 ### Fixed Issues
 
-- [#1203 - [BUG]: OCP min/max version support](https://github.com/dell/csm/issues/1203)
-- [#1209 - [BUG]: Doc hyper links in driver Readme is broken](https://github.com/dell/csm/issues/1209)
-- [#1215 - [BUG]: Discrepancy in their secret](https://github.com/dell/csm/issues/1215)
-- [#1218 - [BUG]: Add the helm-charts-version parameter to the install command for all drivers in csm-docs](https://github.com/dell/csm/issues/1218)
-- [#1239 - [BUG]: Changes in new release of google.golang.org/protobuf is causing compilation issues](https://github.com/dell/csm/issues/1239)
-- [#1270 - [BUG]: Missing entries for Resiliency in installation wizard template](https://github.com/dell/csm/issues/1270)
-- [#1316 - [BUG]: PowerScale CSI - Creating PVC from csi snapshot is failing](https://github.com/dell/csm/issues/1316)
-- [#1322 - [BUG]: PowerScale CSM:  Updating the fsGroupPolicy in the csm is not updating the csidriver](https://github.com/dell/csm/issues/1322)
+- [#1438 - [BUG]: Remove mutex locks from interceptors on method calls](https://github.com/dell/csm/issues/1438)
+- [#1448 - [BUG]: CSM-operator build fails from disk space issue](https://github.com/dell/csm/issues/1448)
+- [#1475 - [BUG]: CSM Operator - Changes to csiDriverSpec does not reflect in CSM state or csidrivers.storage.k8s.io object](https://github.com/dell/csm/issues/1475)
+- [#1531 - [BUG]: CSM-Operator resets dell-replication-controller-config configmap](https://github.com/dell/csm/issues/1531)
 
 ### Known Issues
 

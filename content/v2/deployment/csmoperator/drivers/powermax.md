@@ -45,11 +45,33 @@ The following requirements must be met before installing the CSI Driver for Dell
 The CSI PowerMax Reverse Proxy is a component that will be installed with the CSI PowerMax driver. For more details on this feature, see the related [documentation](../../../../csidriver/features/powermax/#csi-powermax-reverse-proxy).
 
 Create a TLS secret that holds an SSL certificate and a private key. This is required by the reverse proxy server.
+
+Create the Configuration file (openssl.cnf) which includes the subjectAltName:
+```bash
+[ req ]
+default_bits       = 2048
+distinguished_name = req_distinguished_name
+req_extensions     = req_ext
+prompt             = no
+
+[ req_distinguished_name ]
+C  = XX
+L  = Default City
+O  = Default Company Ltd
+
+[ req_ext ]
+subjectAltName = @alt_names
+
+[ alt_names ]
+DNS.1 = "csipowermax-reverseproxy"
+IP.1 = "0.0.0.0"
+```
 Use a tool such as `openssl` to generate this secret using the example below:
 
 ```bash
 openssl genrsa -out tls.key 2048
-openssl req -new -x509 -sha256 -key tls.key -out tls.crt -days 3650
+openssl req -new -key tls.key -out tls.csr -config openssl.cnf
+openssl x509 -req -in tls.csr -signkey tls.key -out tls.crt -days 3650 -extensions req_ext -extfile openssl.cnf
 kubectl create secret -n <namespace> tls csirevproxy-tls-secret --cert=tls.crt --key=tls.key
 ```
 
@@ -65,8 +87,9 @@ The following requirements must be fulfilled in order to successfully use the Fi
 
 The following requirements must be fulfilled in order to successfully use the iSCSI protocol with the CSI PowerMax driver.
 
-- All Kubernetes nodes must have the _iscsi-initiator-utils_ package installed. On Debian based distributions the package name is  _open-iscsi_.
-- The _iscsid_ service must be enabled and running. You can enable the service by running the following command on all worker nodes: `systemctl enable --now iscsid`
+- Ensure that the necessary iSCSI initiator utilities are installed on each Kubernetes worker node. This typically includes the _iscsi-initiator-utils_ package for RHEL or _open-iscsi_ package for Ubuntu.
+- Enable and start the _iscsid_ service on each Kubernetes worker node. This service is responsible for managing the iSCSI initiator. You can enable the service by running the following command on all worker nodes: `systemctl enable --now iscsid`
+- Ensure that the unique initiator name is set in _/etc/iscsi/initiatorname.iscsi_.
 - To configure iSCSI in Red Hat OpenShift clusters, you can create a `MachineConfig` object using the console or `oc` to ensure that the iSCSI daemon starts on all the Red Hat CoreOS nodes. Here is an example of a `MachineConfig` object:
 
 ```yaml
@@ -110,10 +133,40 @@ modprobe nvme_tcp
 
 > Starting with OCP 4.14 NVMe/TCP is enabled by default on RCOS nodes.
 
-
 **Cluster requirements**
 
-- All OpenShift or Kubernetes nodes connecting to Dell storage arrays must use unique host NQNs.
+- All OpenShift or Kubernetes nodes connecting to Dell storage arrays must use unique host NVMe Qualified Names (NQNs).
+
+> The OpenShift deployment process for CoreOS will set the same host NQN for all nodes. The host NQN is stored in the file /etc/nvme/hostnqn. One possible solution to ensure unique host NQNs is to add the following machine config to your OCP cluster:
+
+```yaml
+apiVersion: machineconfiguration.openshift.io/v1
+kind: MachineConfig
+metadata:
+  labels:
+    machineconfiguration.openshift.io/role: worker
+  name: 99-worker-custom-nvme-hostnqn
+spec:
+  config:
+    ignition:
+      version: 3.4.0
+    systemd:
+      units:
+        - contents: |
+            [Unit]
+            Description=Custom CoreOS Generate NVMe Hostnqn
+
+            [Service]
+            Type=oneshot
+            ExecStart=/usr/bin/sh -c '/usr/sbin/nvme gen-hostnqn > /etc/nvme/hostnqn'
+            RemainAfterExit=yes
+
+            [Install]
+            WantedBy=multi-user.target
+          enabled: true
+          name: custom-coreos-generate-nvme-hostnqn.service
+```
+
 - The driver requires the NVMe command-line interface (nvme-cli) to manage the NVMe clients and targets. The NVMe CLI tool is installed in the host using the following command on RPM oriented Linux distributions.
 
 ```bash
@@ -176,13 +229,14 @@ spec:
 
 Once the NVMe endpoint is created on the array, follow the following steps to update the endpoint name to adhere to the CSI driver requirements.
 
-   - Run  ```nvme discover --transport=tcp --traddr=<InterfaceAdd> --trsvcid=4420```. <InterfaceAdd> is the placeholder for actual IP address of NVMe Endpoint.
-   - Fetch the _subnqn_, for e.g.,  _nqn.1988-11.com.dell:PowerMax_2500:00:000120001100_, this will be used as the subnqn holder while updating NVMe endpoint name.
-   - Update the NVMe endpoint name as ```<subnqn>:<dir><port>>```. Here is an example how it should look, _nqn.1988-11.com.dell:PowerMax_2500:00:000120001100:OR1C000_
+  - Run  ```nvme discover --transport=tcp --traddr=<InterfaceAdd> --trsvcid=4420```. <InterfaceAdd> is the placeholder for actual IP address of NVMe Endpoint.
+  - Fetch the _subnqn_, for e.g.,  _nqn.1988-11.com.dell:PowerMax_2500:00:000120001100_, this will be used as the subnqn holder while updating NVMe endpoint name.
+  - Update the NVMe endpoint name as ```<subnqn>:<dir><port>>```. Here is an example how it should look, _nqn.1988-11.com.dell:PowerMax_2500:00:000120001100:OR1C000_
 
 ### NFS Requirements
 
 CSI Driver for Dell PowerMax supports NFS communication. Ensure that the following requirements are met before you install CSI Driver:
+
 - Configure the NFS network. Please refer [here](https://dl.dell.com/content/manual57826791-dell-powermax-file-protocol-guide.pdf?language=en-us&ps=true) for more details.
 - PowerMax Embedded Management guest to access Unisphere for PowerMax.
 - Create the NAS server. Please refer [here](https://dl.dell.com/content/manual55638050-dell-powermax-file-quick-start-guide.pdf?language=en-us&ps=true) for more details.
@@ -194,6 +248,7 @@ Dell PowerMax supports Linux multipathing (DM-MPIO) and NVMe native multipathing
 > For NVMe connectivity native NVMe multipathing is used. The following sections apply only for iSCSI and Fiber Channel connectivity.
 
 Configure Linux multipathing as follows:
+
 - Ensure that all nodes have the _Device Mapper Multipathing_ package installed.
   You can install it by running `dnf install device-mapper-multipath` or `apt install multipath-tools` based on your Linux distribution.
 - Ensure that the multipath command `mpathconf` is available on all Kubernetes nodes.
@@ -245,6 +300,7 @@ echo 'defaults {
 ```
 
 The output of the above command follows:
+
 ```text
 ZGVmYXVsdHMgewogIHVzZXJfZnJpZW5kbHlfbmFtZXMgeWVzCiAgZmluZF9tdWx0aXBhdGhzIHllcwogIHBhdGhfZ3JvdXBpbmdfcG9saWN5IG11bHRpYnVzCiAgcGF0aF9jaGVja2VyIHR1cgogIGZlYXR1cmVzICIxIHF1ZXVlX2lmX25vX3BhdGgiCiAgcGF0aF9zZWxlY3RvciAicm91bmQtcm9iaW4gMCIKICBub19wYXRoX3JldHJ5IDEwCn0KICBibGFja2xpc3Qgewp9Cg==
 ```
@@ -255,7 +311,7 @@ Use the base64 encoded string output in the following `MachineConfig` yaml file 
 apiVersion: machineconfiguration.openshift.io/v1
 kind: MachineConfig
 metadata:
-  name: workers-multipath-conf-default
+  name: 99-workers-multipath-conf-default
   labels:
     machineconfiguration.openshift.io/role: worker
 spec:
@@ -306,6 +362,7 @@ Set up the environment as follows:
 ## Installation
 
 ### Create secret for client-side TLS verification (Optional)
+
 Create a secret named powermax-certs in the namespace where the CSI PowerMax driver will be installed. This is an optional step and is only required if you are setting the env variable X_CSI_POWERMAX_SKIP_CERTIFICATE_VALIDATION to false. See the detailed documentation on how to create this secret [here](../../../helm/drivers/installation/powermax#certificate-validation-for-unisphere-rest-api-calls).
 
 ### Install Driver
@@ -331,48 +388,46 @@ Create a secret named powermax-certs in the namespace where the CSI PowerMax dri
           # chapsecret: <base64 CHAP secret>
      ```
    Replace the values for the username and password parameters. These values can be obtained using base64 encoding as described in the following example:
-   ```BASH
+   ```bash
    echo -n "myusername" | base64
    echo -n "mypassword" | base64
    # If mychapsecret is the iSCSI CHAP secret
    echo -n "mychapsecret" | base64
-
    ```
    Run the `kubectl create -f powermax-creds.yaml` command to create the secret.
 3. Create a configmap using sample [here](https://github.com/dell/csm-operator/tree/master/samples/csireverseproxy). Fill in the appropriate values for driver configuration.
    Example: config.yaml
    ```yaml
-   mode: StandAlone # Mode for the reverseproxy, should not be changed
    port: 2222 # Port on which reverseproxy will listen
    logLevel: debug
    logFormat: text
-   standAloneConfig:
+   config:
      storageArrays:
         - storageArrayId: "000000000001" # arrayID
           primaryURL: https://primary-1.unisphe.re:8443 # primary unisphere for arrayID
           backupURL: https://backup-1.unisphe.re:8443   # backup unisphere for arrayID
           proxyCredentialSecrets:
-            - proxy-secret-11 # credential secret for primary unisphere, e.g., powermax-creds
-            - proxy-secret-12 # credential secret for backup unisphere, e.g., powermax-creds
+            - primary-unisphere-secret-1 # credential secret for primary unisphere, e.g., powermax-creds
+            - backup-unisphere-secret-1 # credential secret for backup unisphere, e.g., powermax-creds
         - storageArrayId: "000000000002"
           primaryURL: https://primary-2.unisphe.re:8443
           backupURL: https://backup-2.unisphe.re:8443
           proxyCredentialSecrets:
-           - proxy-secret-21
-           - proxy-secret-22
+           - primary-unisphere-secret-2
+           - backup-unisphere-secret-2
      managementServers:
        - url: https://primary-1.unisphe.re:8443 # primary unisphere endpoint
-         arrayCredentialSecret: primary-1-secret # primary credential secret e.g., powermax-creds
+         arrayCredentialSecret: primary-unisphere-secret-1 # primary credential secret e.g., powermax-creds
          skipCertificateValidation: true
        - url: https://backup-1.unisphe.re:8443 # backup unisphere endpoint
-         arrayCredentialSecret: backup-1-secret # backup credential secret e.g., powermax-creds
+         arrayCredentialSecret: backup-unisphere-secret-1 # backup credential secret e.g., powermax-creds
          skipCertificateValidation: false # value false, to verify unisphere certificate and provide certSecret
          certSecret: primary-certs # unisphere verification certificate
        - url: https://primary-2.unisphe.re:8443
-         arrayCredentialSecret: primary-2-secret
+         arrayCredentialSecret: primary-unisphere-secret-2
          skipCertificateValidation: true
        - url: https://backup-2.unisphe.re:8443
-         arrayCredentialSecret: backup-2-secret
+         arrayCredentialSecret: backup-unisphere-secret-2
          skipCertificateValidation: false
          certSecret: primary-certs
    ```
@@ -380,7 +435,7 @@ Create a secret named powermax-certs in the namespace where the CSI PowerMax dri
     ```bash
     kubectl create configmap powermax-reverseproxy-config --from-file config.yaml -n powermax
     ```
-4. Create a configmap using below sample file. Fill in the appropriate values for driver configuration. Example: X_CSI_TRANSPORT_PROTOCOL:"ISCSI"
+4. Create a configmap using the sample file [here](https://github.com/dell/csi-powermax/blob/main/samples/configmap/powermax-array-config.yaml). Fill in the appropriate values for driver configuration.
    ```yaml
       # Copyright © 2024 Dell Inc. or its subsidiaries. All Rights Reserved.
       #
@@ -401,9 +456,13 @@ Create a secret named powermax-certs in the namespace where the CSI PowerMax dri
         namespace: powermax
       data:
         powermax-array-config.yaml: |
-          X_CSI_POWERMAX_PORTGROUPS: "" # Portgroup is required in case of iSCSI only
-          X_CSI_TRANSPORT_PROTOCOL: "" # Defaults to empty
+          # List of comma-separated port groups (ISCSI only). Example: PortGroup1, portGroup2 Required for iSCSI only
+          X_CSI_POWERMAX_PORTGROUPS: ""
+          # Choose which transport protocol to use (ISCSI, FC, NVMETCP, auto) defaults to auto if nothing is specified
+          X_CSI_TRANSPORT_PROTOCOL: ""
+          # IP address of the Unisphere for PowerMax (Required), Defaults to https://0.0.0.0:8443
           X_CSI_POWERMAX_ENDPOINT: "https://10.0.0.0:8443"
+          # List of comma-separated array ID(s) which will be managed by the driver (Required)
           X_CSI_MANAGED_ARRAYS: "000000000000,000000000000,"
    ```
 
@@ -441,11 +500,7 @@ Example:
    | replicas  | Controls the number of controller Pods you deploy. If controller Pods are greater than the number of available nodes, excess Pods will become stuck in pending. The default is 2 which allows for Controller high availability.                                          | Yes      | 2                              |
    | fsGroupPolicy                                   | Defines which FS Group policy mode to be used, Supported modes `None, File and ReadWriteOnceWithFSType`. In OCP <= 4.16 and K8s <= 1.29, fsGroupPolicy is an immutable field.                                                                                                                                                                  | No       | "ReadWriteOnceWithFSType"      |
    | ***Common parameters for node and controller*** |                                                                                                                                                                                                                                                                          |          |                                |
-   | X_CSI_K8S_CLUSTER_PREFIX                        | Define a prefix that is appended to all resources created in the array; unique per K8s/CSI deployment; max length - 3 characters                                                                                                                                         | Yes      | XYZ                            |
-   | X_CSI_POWERMAX_ENDPOINT                         | IP address of the Unisphere for PowerMax                                                                                                                                                                                                                                 | Yes      | https://0.0.0.0:8443           |
-   | X_CSI_TRANSPORT_PROTOCOL                        | Choose which transport protocol to use (ISCSI, FC, NVMETCP, auto)	                                                                                                                                                                                                        | Yes      | auto                           |
-   | X_CSI_POWERMAX_PORTGROUPS                       | List of comma-separated port groups (ISCSI only). Example: "PortGroup1,PortGroup2"                                                                                                                                                                                       | No       | -                              |
-   | X_CSI_MANAGED_ARRAYS                            | List of comma-separated array ID(s) which will be managed by the driver                                                                                                                                                                                                  | Yes      | -                              |
+   | X_CSI_K8S_CLUSTER_PREFIX                        | Define a prefix that is appended to all resources created in the array; unique per K8s/CSI deployment; max length - 3 characters                                                                                                                                         | No      | CSM                            |
    | X_CSI_POWERMAX_PROXY_SERVICE_NAME               | Name of CSI PowerMax ReverseProxy service.                                                                                                                                                                                                                               | Yes      | csipowermax-reverseproxy       |
    | X_CSI_IG_MODIFY_HOSTNAME                        | Change any existing host names. When nodenametemplate is set, it changes the name to the specified format else it uses driver default host name format.                                                                                                                  | No       | false                          |
    | X_CSI_IG_NODENAME_TEMPLATE                      | Provide a template for the CSI driver to use while creating the Host/IG on the array for the nodes in the cluster. It is of the format a-b-c-%foo%-xyz where foo will be replaced by host name of each node in the cluster.                                              | No       | -                              |
@@ -471,6 +526,7 @@ Example:
 9. Refer https://github.com/dell/csi-powermax/tree/main/samples for the sample files.
 
 ## Other features to enable
+
 ### Dynamic Logging Configuration
 
 This feature is introduced in CSI Driver for powermax version 2.0.0.
@@ -478,17 +534,20 @@ This feature is introduced in CSI Driver for powermax version 2.0.0.
 As part of driver installation, a ConfigMap with the name `powermax-config-params` is created using the manifest located in the sample file. This ConfigMap contains an attribute `CSI_LOG_LEVEL` which specifies the current log level of the CSI driver. To set the default/initial log level user can set this field during driver installation.
 
 To update the log level dynamically user has to edit the ConfigMap `powermax-config-params` and update `CSI_LOG_LEVEL` to the desired log level.
+
 ```bash
 kubectl edit configmap -n powermax powermax-config-params
 ```
 
 ### Volume Health Monitoring
+
 This feature is introduced in CSI Driver for PowerMax version 2.2.0.
 
 Volume Health Monitoring feature is optional and by default this feature is disabled for drivers when installed via CSM operator.
 
 To enable this feature, set  `X_CSI_HEALTH_MONITOR_ENABLED` to `true` in the driver manifest under controller and node section. Also, install the `external-health-monitor` from `sideCars` section for controller plugin.
 To get the volume health state `value` under controller should be set to true as seen below. To get the volume stats `value` under node should be set to true.
+
 ```yaml
      # Install the 'external-health-monitor' sidecar accordingly.
         # Allowed values:
@@ -530,6 +589,7 @@ X_CSI_TOPOLOGY_CONTROL_ENABLED provides a way to filter topology keys on a node 
            - name: X_CSI_TOPOLOGY_CONTROL_ENABLED
              value: "false"
    ```
+
 2. Edit the sample config map "node-topology-config" as described [here](https://github.com/dell/csi-powermax/blob/main/samples/configmap/topologyConfig.yaml) with appropriate values:
    Example:
    ```yaml

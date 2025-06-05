@@ -51,6 +51,8 @@ Dell COSI Driver is a multi-backend driver, meaning that it can connect to multi
 | ObjectScale      |  1.2.x   |
 {{</table>}}
 
+> **NOTE:** Object Scale 1.2.x is planned for End of Standard Support on January 31st 2025. Please refer <a href="https://www.dell.com/support/kbdoc/en-uk/000185734/all-dell-emc-end-of-life-documents?lang=en">Dell Support documentation</a> for more information. We plan to support COSI driver when a new version of ObjectScale is available.
+
 ## Bucket Lifecycle Workflow
 
 1. Create Bucket &rarr; Delete Bucket

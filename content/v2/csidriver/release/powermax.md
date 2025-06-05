@@ -3,13 +3,15 @@ title: PowerMax
 description: Release notes for PowerMax CSI driver
 ---
 
-## Release Notes - CSI PowerMax v2.12.0
+## Release Notes - CSI PowerMax v2.13.0
 
 >Note: Auto SRDF group creation is currently not supported in PowerMaxOS 10.1 (6079) Arrays.
 
 > Note: Starting from CSI v2.4.0, Only Unisphere 10.0 REST endpoints are supported. It is mandatory that Unisphere should be updated to 10.0. Please find the instructions [here.](https://dl.dell.com/content/manual34878027-dell-unisphere-for-powermax-10-0-0-installation-guide.pdf?language=en-us&ps=true)
 
->Note: File Replication for PowerMax is currently not supported 
+>Note: File Replication for PowerMax is currently not supported
+
+
 
 
 
@@ -20,22 +22,26 @@ description: Release notes for PowerMax CSI driver
 
 ### New Features/Changes
 
-- [#1410 - [FEATURE]: Adding support for PowerMax Magnolia](https://github.com/dell/csm/issues/1410)
-- [#1472 - [FEATURE]: Support for Kubernetes 1.31](https://github.com/dell/csm/issues/1472)
-- [#1473 - [FEATURE]: Add Support for OpenShift Container Platform (OCP) 4.17](https://github.com/dell/csm/issues/1473)
-- [#1508 - [FEATURE]:  Add Support for KubeVirt](https://github.com/dell/csm/issues/1508)
+- [#1560 - [FEATURE]: CSM support for OpenShift 4.18](https://github.com/dell/csm/issues/1560)
+- [#1561 - [FEATURE]: Added support for Kubernetes 1.32 ](https://github.com/dell/csm/issues/1561)
 
 ### Fixed Issues
 
-- [#1416 - [BUG]:  Dell CSM Installation Issues](https://github.com/dell/csm/issues/1416)
-- [#1418 - [BUG]: csi-powermax crashed when attempting to unmount volume from node](https://github.com/dell/csm/issues/1418)
-- [#1425 - [BUG]: Incorrect Volume Creation Due to Idempotency in CreateVolume](https://github.com/dell/csm/issues/1425)
-- [#1447 - [BUG]: Gobrick does not clean wwids from /etc/multipath/wwids after removing multipath devices ](https://github.com/dell/csm/issues/1447)
-- [#1448 - [BUG]: CSM-operator build fails from disk space issue](https://github.com/dell/csm/issues/1448)
-- [#1453 - [BUG]: Improve Documentation - Multipath configuration for FC and FC-NVMe attached arrays ](https://github.com/dell/csm/issues/1453)
-- [#1499 - [BUG]: Fix Gosec error in service.go](https://github.com/dell/csm/issues/1499)
-- [#1519 - [BUG]: Powermax Integration test failing](https://github.com/dell/csm/issues/1519)
-- [#1534 - [BUG]: CSI PowerStore unable to resize NVMe block PVC, even though volume on the array gets resized](https://github.com/dell/csm/issues/1534)
+- [#1549 - [BUG]: The NVMeCommand constant needs to use full path](https://github.com/dell/csm/issues/1549)
+- [#1566 - [BUG]: Inconsistent naming convention of secret is misleading in Installation of PowerMax ](https://github.com/dell/csm/issues/1566)
+- [#1568 - [BUG]: Examples provided in the secrets of install driver for the Primary Unisphere and Back up Unisphere is lacking clarity in ConfigMap](https://github.com/dell/csm/issues/1568)
+- [#1569 - [BUG]: Unused variable "X_CSI_POWERMAX_ENDPOINT" resulting in driver not to start in PowerMax](https://github.com/dell/csm/issues/1569)
+- [#1570 - [BUG]: Stale entries in CSM operator samples and helm-charts for PowerMax ](https://github.com/dell/csm/issues/1570)
+- [#1571 - [BUG]: SubjectAltName needs to be updated in the tls.crt ](https://github.com/dell/csm/issues/1571)
+- [#1584 - [BUG]: Driver should not be expecting a secret which is not used at all for PowerMax when authorization is enabled ](https://github.com/dell/csm/issues/1584)
+- [#1589 - [BUG]: Automation for reverseproxy tls secret and  powermax-array-config does not present in E2E](https://github.com/dell/csm/issues/1589)
+- [#1593 - [BUG]: Update the cert-manager version in Powermax Prerequisite](https://github.com/dell/csm/issues/1593)
+- [#1638 - [BUG]: CSM Docs Multiple fixes for CSI-Powermax installation](https://github.com/dell/csm/issues/1638)
+- [#1644 - [BUG]: Cannot create PowerMax clones](https://github.com/dell/csm/issues/1644)
+- [#1650 - [BUG]: PowerMax - X_CSI_IG_MODIFY_HOSTNAME fails to rename a host with same name in different case](https://github.com/dell/csm/issues/1650)
+- [#1663 - [BUG]: Pod filesystem not resized while volume gets successfully expanded](https://github.com/dell/csm/issues/1663)
+- [#1667 - [BUG]: Labels versions and maintainer update for CSM images ](https://github.com/dell/csm/issues/1667)
+- [#1634 - [BUG]: CSM PowerMax wrong error message](https://github.com/dell/csm/issues/1634)
 
 ### Known Issues
 
@@ -48,6 +54,7 @@ description: Release notes for PowerMax CSI driver
 | [Node stage is failing with error "wwn for FC device not found"](https://github.com/dell/csm/issues/1070)| This is an intermittent issue, rebooting the node will resolve this issue |
 | When the driver is installed using CSM Operator , few times, pods created using block volume are getting stuck in containercreating/terminating state or devices are not available inside the pod. | Update the daemonset with parameter `mountPropagation: "Bidirectional"` for volumedevices-path under volumeMounts section.|
 | When running CSI-PowerMax with Replication in a multi-cluster configuration, the driver on the target cluster fails and the following error is seen in logs: `error="CSI reverseproxy service host or port not found, CSI reverseproxy not installed properly"` | The reverseproxy service needs to be created manually on the target cluster. Follow [the instructions here](v2/deployment/csmoperator/modules/replication#configuration-steps) to create it.|
+| When using Helm charts to install the driver with multiple PowerMax arrays, the `powermax-array-config` ConfigMap is incorrectly created, resulting in multiple `X_CSI_POWERMAX_ENDPOINT` entries. This causes the driver pods to crash with the error `"mapping key "X_CSI_POWERMAX_ENDPOINT" already defined"`. | This issue has been reported at https://github.com/dell/csm/issues/1760. Workaround: <br /> 1. Edit the ConfigMap `powermax-array-config` and remove all instances of `X_CSI_POWERMAX_ENDPOINT`. <br /> `kubectl edit configmaps powermax-array-config -n <csi-powermax-namespace>` <br /> 2. Restart the driver pods.  <br /> `kubectl rollout restart deployment,daemonset -n <csi-powermax-namespace>` <br /> Note: Users may also need to delete any old ReplicaSets in order to bring the new controllers up. |
 ### Note:
 
 - Support for Kubernetes alpha features like Volume Health Monitoring will not be available in Openshift environment as Openshift doesn't support enabling of alpha features for Production Grade clusters.

@@ -1,25 +1,22 @@
 ---
 title: "Support"
 linkTitle: "Support"
-weight: 13
+weight: 13 
+no_list: true 
 Description: >
-  Dell Container Storage Modules (CSM) support
+  Container Storage Modules support
 ---
-{{% pageinfo color="primary" %}}
-<span><span/>{{< message text="8" >}}
-{{% /pageinfo %}}
 
-### Where can I get support ?
+<hr>
 
-You can interact with us on [GitHub](https://github.com/dell/csm) by creating a [GitHub Issue](https://github.com/dell/csm/issues).
+Please select one of the following options to get support for Container Storage Modules.
 
-If you have a support contract for a Dell Storage Backend that has a CSI Driver you can open a service request on [https://dell.com/support](https://dell.com/support) and select the **CSI Driver** product.
+{{< cardcontainer markdown="true">}}
+      
+      {{< customcard imageNumber="6" link="https://www.dell.com/support/incidents-online/en-us/contactus/product/container-storage-modules" title="Contact support" >}}  
 
+      {{< customcard imageNumber="6" link="https://github.com/dell/csm/security/advisories/new" title="Report a vulnerability" >}}
 
-### How to report Security Issues or Vulnerabilities ?
+      {{< customcard imageNumber="6" link="./supportpolicy" title="Support policy" >}}  
 
-The Dell Container Storage Modules team and community take security bugs seriously. We sincerely appreciate all your efforts and responsibility to disclose your findings.
-
-To report a security issue, please submit the security advisory form ["Report a Vulnerability"](https://github.com/dell/csm/security/advisories/new).
-
->CSM recommends staying on the [latest release](https://github.com/dell/csm/releases/latest) of Dell Container Storage Modules to take advantage of new features, enhancements, bug fixes, and security fixes.
+{{< /cardcontainer >}}

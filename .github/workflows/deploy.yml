@@ -3,7 +3,7 @@ name: Build w/ Hugo & deploy to GitHub Pages
 on:
  push:
    branches:
-     - release-1.13.1
+     - release-1.14.0
  workflow_dispatch:
 
 jobs:
