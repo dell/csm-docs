@@ -14,7 +14,7 @@ weight: 2
 
 To deploy the Operator, follow the instructions available [here](../../../operator/operatorinstallation_kubernetes.md).
 
-{{< accordion id="Two" title="Base Install" markdown="true" >}}  
+{{< accordion id="Two" title="Base Install" markdown="true" >}}
 
 ### Prerequisites
 
@@ -61,25 +61,25 @@ For detailed PowerFlex installation procedure, see the [Dell PowerFlex Deploymen
 
 **Steps**
 
-1. **Download SDC:** 
+1. **Download SDC:**
 Download the PowerFlex SDC from [Dell Online support](https://www.dell.com/support). The filename is EMC-ScaleIO-sdc-*.rpm, where * is the SDC name corresponding to the PowerFlex installation version.
-2. **Set MDM IPs:** 
-  Export the MDM IPs as a comma-separated list: 
+2. **Set MDM IPs:**
+  Export the MDM IPs as a comma-separated list:
     ```bash
      export MDM_IP=xx.xxx.xx.xx,xx.xxx.xx.xx
-    ``` 
-   where xxx represents the actual IP address in your environment. 
+    ```
+   where xxx represents the actual IP address in your environment.
 
-3. **Install SDC:**   
-Install the SDC per the _Dell PowerFlex Deployment Guide_: 
+3. **Install SDC:**
+Install the SDC per the _Dell PowerFlex Deployment Guide_:
 
     - For RPM environments, run:
      ```bash
-     rpm -iv ./EMC-ScaleIO-sdc-*.x86_64.rpm 
-     ``` 
-     Replace * with the SDC name corresponding to the PowerFlex version. 
+     rpm -iv ./EMC-ScaleIO-sdc-*.x86_64.rpm
+     ```
+     Replace * with the SDC name corresponding to the PowerFlex version.
 
-4. **Add MDM IPs for Multi-Array support:** 
+4. **Add MDM IPs for Multi-Array support:**
 run `/opt/emc/scaleio/sdc/bin/drv_cfg --add_mdm --ip 10.xx.xx.xx.xx,10.xx.xx.xx`.
 
 
@@ -88,14 +88,14 @@ run `/opt/emc/scaleio/sdc/bin/drv_cfg --add_mdm --ip 10.xx.xx.xx.xx,10.xx.xx.xx`
 
 1. **Create namespace:**
 
-   ```bash 
-      kubectl create namespace powerflex
+   ```bash
+      kubectl create namespace vxflexos
    ```
-   This command creates a namespace called `powerflex`. You can replace `powerflex` with any name you prefer.
+   This command creates a namespace called `vxflexos`. You can replace `vxflexos` with any name you prefer.
 
-2. **Create `secret.yaml`.** 
-   
-   a. Create a file called `secret.yaml` or pick a [sample](https://github.com/dell/csi-powerflex/blob/main/samples/secret.yaml) that has Powerflex array connection details: 
+2. **Create `secret.yaml`.**
+
+   a. Create a file called `secret.yaml` or pick a [sample](https://github.com/dell/csi-powerflex/blob/main/samples/secret.yaml) that has Powerflex array connection details:
 
    ```yaml
     - username: "admin"
@@ -108,42 +108,42 @@ run `/opt/emc/scaleio/sdc/bin/drv_cfg --add_mdm --ip 10.xx.xx.xx.xx,10.xx.xx.xx`
       - **Update Parameters:** Replace placeholders with actual values for your Powerflex array.
       - **Add Blocks:** If you have multiple Powerflex arrays, add similar blocks for each one.
       - **Replication:** If replication is enabled, make sure the `secret.yaml` includes all involved Powerflex arrays.
-   <br>   
-   b. After editing the file, **run this command to create a secret** called `powerflex-config`.
+   <br>
+   b. After editing the file, **run this command to create a secret** called `vxflexos-config`.
 
     ```bash
-      kubectl create secret generic powerflex-config -n powerflex --from-file=config=secret.yaml
+      kubectl create secret generic vxflexos-config -n vxflexos --from-file=config=secret.yaml
     ```
      Use this command to **replace or update** the secret:
 
     ```bash
-      kubectl create secret generic powerflex-config -n powerflex --from-file=config=secret.yaml -o yaml --dry-run=client | kubectl replace -f -
+      kubectl create secret generic vxflexos-config -n vxflexos --from-file=config=secret.yaml -o yaml --dry-run=client | kubectl replace -f -
     ```
 
 3. **Install driver:**
 
    i. **Create a CR (Custom Resource)** for PowerFlex using the sample files provided
 
-      a. **Minimal Configuration:** 
+      a. **Minimal Configuration:**
     ```yaml
     apiVersion: storage.dell.com/v1
     kind: ContainerStorageModule
     metadata:
       name: vxflexos
-      namespace: powerflex
+      namespace: vxflexos
     spec:
       driver:
         csiDriverType: "powerflex"
         configVersion: {{< version-docs key="PFlex_latestVersion" >}}
         forceRemoveDriver: true
-    ```   
+    ```
      Refer the [sample file](https://github.com/dell/csm-operator/blob/main/samples/minimal-samples/powerflex_{{< version-docs key="sample_sc_pflex" >}}.yaml). Modify if needed.
 
-    [OR]                                                
+    [OR]
 
     b. **Detailed Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powerflex_{{< version-docs key="sample_sc_pflex" >}}.yaml) for detailed settings.
 
-- Users should configure the parameters in CR. The following table lists the primary configurable parameters of the PowerFlex driver and their default values: 
+- Configure the parameters in the CR. The table below lists the primary configurable parameters of the PowerFlex driver and their default values:
 <ul>
 {{< collapse id="1" title="Parameters">}}
    | Parameter | Description | Required | Default |
@@ -173,9 +173,8 @@ run `/opt/emc/scaleio/sdc/bin/drv_cfg --add_mdm --ip 10.xx.xx.xx.xx,10.xx.xx.xx`
    |<div style="text-align: left"> X_CSI_HEALTH_MONITOR_ENABLED |<div style="text-align: left"> Enable/Disable health monitor of CSI volumes from Node plugin - volume condition | No | false |
    |<div style="text-align: left"> X_CSI_SDC_ENABLED |<div style="text-align: left"> Enable/Disable installation of the SDC. | Yes | true |
    |<div style="text-align: left"> ***Sidecar parameters*** |
-   |<div style="text-align: left">  volume-name-prefix |<div style="text-align: left">  The volume-name-prefix will be used by provisioner sidecar as a prefix for all the volumes created  | Yes | k8s |
-   |<div style="text-align: left"> volume-name-prefix |<div style="text-align: left">  The volume-name-prefix will be used by provisioner sidecar as a prefix for all the volumes created  | Yes | k8s |
-   |<div style="text-align: left">  monitor-interval |<div style="text-align: left">  The monitor-interval will be used by external-health-monitor as an interval for health checks  | Yes | 60s |
+   |<div style="text-align: left"> volume-name-prefix |<div style="text-align: left"> The volume-name-prefix is used by provisioner sidecar as a prefix for all the volumes created  | Yes | k8s |
+   |<div style="text-align: left"> monitor-interval |<div style="text-align: left"> The monitor-interval is used by external-health-monitor as an interval for health checks  | Yes | 60s |
 {{< /collapse >}}
 
 ii . **Run this command to create** a PowerFlex custom resource:
@@ -185,19 +184,19 @@ ii . **Run this command to create** a PowerFlex custom resource:
 ```
 
    This command will deploy the CSI-PowerFlex driver in the namespace specified in the input YAML file.
-</ul> 
+</ul>
 
 4. **Verify the installation:**
 
     * Check if ContainerStorageModule CR is created successfully using the command below:
         ```bash
-        kubectl get csm/powerflex -n powerflex
+        kubectl get csm/vxflexos -n vxflexos
         ```
     * Check the status of the CR to verify if the driver installation is in the `Succeed` state. If the status is not `Succeed`, see the [Troubleshooting guide](../troubleshooting/#my-dell-csi-driver-install-failed-how-do-i-fix-it) for more information.
 
  <br>
 
-5. **Create Storage class:** 
+5. **Create Storage class:**
    ```yaml
     apiVersion: storage.k8s.io/v1
     kind: StorageClass
@@ -220,20 +219,20 @@ ii . **Run this command to create** a PowerFlex custom resource:
               - csi-vxflexos.dellemc.com
    ```
      Refer [Storage Class](https://github.com/dell/csi-powerflex/tree/main/samples/storageclass) for different sample files.
-    
+
     **Run this command to create** a storage class
-    
+
    ```bash
      kubectl create -f < storage-class.yaml >
    ```
 
-6. **Create Volume Snapshot Class:** 
+6. **Create Volume Snapshot Class:**
     ```yaml
       apiVersion: snapshot.storage.k8s.io/v1
       kind: VolumeSnapshotClass
       metadata:
         name: vxflexos-snapclass
-      deletionPolicy: Delete 
+      deletionPolicy: Delete
       ```
       Refer [Volume Snapshot Class](https://github.com/dell/csi-powerflex/tree/main/samples/volumesnapshotclass/) sample file.
 
@@ -246,18 +245,18 @@ ii . **Run this command to create** a PowerFlex custom resource:
 **Note** :
    - Snapshotter and resizer sidecars are installed by default.
 
-{{< /accordion >}}  
+{{< /accordion >}}
 
 <br>
 
 {{< accordion id="Three" title="Modules">}}
- <br>  
+ <br>
 
 {{< markdownify >}}
 The driver and modules versions installable with the Container Storage Modules Operator [Click Here](../../../../../supportmatrix/#operator-compatibility-matrix)
 {{< /markdownify >}}
 
-<br>   
+<br>
 
 {{< cardcontainer >}}
     {{< customcard link1="./csm-modules/authorizationv1-x"  image="6" title="Authorization v1.x" >}}
@@ -266,9 +265,9 @@ The driver and modules versions installable with the Container Storage Modules O
 
     {{< customcard  link1="./csm-modules/observability"   image="6" title="Observability"  >}}
 
-    {{< customcard  link1="./csm-modules/replication"  image="6" title="Replication"  >}} 
+    {{< customcard  link1="./csm-modules/replication"  image="6" title="Replication"  >}}
 
     {{< customcard link1="./csm-modules/resiliency"   image="6" title="Resiliency"  >}}
 
 {{< /cardcontainer >}}
-{{< /accordion >}}  
+{{< /accordion >}}
