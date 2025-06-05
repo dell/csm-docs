@@ -1,13 +1,15 @@
 ---
 title: Authorization
-linktitle: Authorization 
+linktitle: Authorization
 weight: 3
 description: >
   Dell Technologies (Dell) Container Storage Modules (CSM) for Authorization Upgrade
 ---
 
 {{% pageinfo color="primary" %}}
-The CSM Authorization RPM will be deprecated in a future release. It is highly recommended that you use CSM Authorization Helm deployment or CSM Operator going forward.
+1. <span></span>{{< message text="4" >}}
+
+2. <span></span>{{< message text="5" >}}
 {{% /pageinfo %}}
 
 This section outlines the upgrade steps for Container Storage Modules (CSM) for Authorization.  The upgrade of CSM for Authorization RPM is handled in 2 parts:
@@ -16,7 +18,7 @@ This section outlines the upgrade steps for Container Storage Modules (CSM) for 
 
 ## Upgrading CSM for Authorization proxy server
 
-Obtain the latest single binary installer RPM by following one of our two options [here](../../installation/authorization/authorization#single-binary-installer).
+Obtain the latest single binary installer RPM by following one of our two options [here](../../installation/authorization-v1.x/authorizationv1-x#shell-script-installer).
 
 To update the rpm package on the system, run the below command from within the extracted folder:
 
@@ -41,9 +43,9 @@ To verify that the new version of the rpm is installed and K3s has been updated,
 ```bash
 rpm -qa | grep karavi
 k3s kubectl version
-``` 
+```
 
->__Note__: The above steps manage install and upgrade of all dependencies that are required by the CSM for Authorization proxy server. 
+>__Note__: The above steps manage install and upgrade of all dependencies that are required by the CSM for Authorization proxy server.
 
 ## Upgrading Dell CSI Driver(s) with CSM for Authorization enabled
 

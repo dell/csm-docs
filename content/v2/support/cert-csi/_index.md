@@ -26,6 +26,7 @@ There are three methods of installing `cert-csi`.
 > The executable from the GitHub Release only supports Linux. For non-Linux users, you must build the `cert-csi` executable [locally](#building-locally).
 
 ### Download Release (Linux)
+
 > NOTE: Please ensure you delete any previously downloaded Cert-CSI binaries, as each release uses the same name (`cert-csi`). After installing the latest version, run the `cert-csi -v` command to verify the installed version.
 
 1. Download `cert-csi` from [here](https://github.com/dell/cert-csi/releases/latest/download/cert-csi)
@@ -36,7 +37,7 @@ There are three methods of installing `cert-csi`.
 chmod +x ./cert-csi
 ```
 
-3. Install cert-csi-linux-am as cert-csi.
+3. Install cert-csi as cert-csi.
 
 ```bash
 sudo install -o root -g root -m 0755 cert-csi /usr/local/bin/cert-csi
@@ -45,7 +46,7 @@ sudo install -o root -g root -m 0755 cert-csi /usr/local/bin/cert-csi
 If you do not have root access on the target system, you can still install cert-csi to the ~/.local/bin directory:
 
 ```bash
-chmod +x ./cert-csi-linux-amd64
+chmod +x ./cert-csi
 mkdir -p ~/.local/bin
 mv ./cert-csi ~/.local/bin/cert-csi
 # and then append (or prepend) ~/.local/bin to $PATH
@@ -55,18 +56,20 @@ mv ./cert-csi ~/.local/bin/cert-csi
 
    {{< tabpane name="pulling-cert-csi-image" lang="bash">}}
    {{<tab header="Docker" >}}
-      docker pull quay.io/dell/container-storage-modules/cert-csi:v1.6.0
+      docker pull quay.io/dell/container-storage-modules/cert-csi:v1.7.0
 
    {{</tab >}}
    {{<tab header="Podman" >}}
 
-      podman pull quay.io/dell/container-storage-modules/cert-csi:v1.6.0
+      podman pull quay.io/dell/container-storage-modules/cert-csi:v1.7.0
 
    {{</tab >}}
    {{< /tabpane >}}
 
 ### Building Locally
+
 #### Prerequisites
+
 - [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
 - [Go](https://go.dev/doc/install) (If building the executable)
 - Podman or Docker (If building the container image)
@@ -74,7 +77,7 @@ mv ./cert-csi ~/.local/bin/cert-csi
 1. Clone the repository
 
 ```bash
-git clone -b "v1.6.0" https://github.com/dell/cert-csi.git && cd cert-csi
+git clone -b "v1.7.0" https://github.com/dell/cert-csi.git && cd cert-csi
 ```
 
 2. Build cert-csi
@@ -109,10 +112,10 @@ make install-ms
    cert-csi --help
 {{</tab >}}
 {{<tab header="Docker" >}}
-   docker run --rm -it -v ~/.kube/config:/root/.kube/config quay.io/dell/container-storage-modules/cert-csi:v1.6.0 --help
+   docker run --rm -it -v ~/.kube/config:/root/.kube/config quay.io/dell/container-storage-modules/cert-csi:v1.7.0 --help
 {{</tab >}}
 {{<tab header="Podman" >}}
-   podman run --rm -it -v ~/.kube/config:/root/.kube/config quay.io/dell/container-storage-modules/cert-csi:v1.6.0 --help
+   podman run --rm -it -v ~/.kube/config:/root/.kube/config quay.io/dell/container-storage-modules/cert-csi:v1.7.0 --help
 
 {{</tab >}}
 {{< /tabpane >}}
@@ -370,10 +373,10 @@ If you are using the container image, the `cert-config` file must be mounted int
 
 {{< tabpane name="running-container-certify" lang="bash">}}
 {{<tab header="Docker" >}}
-   docker run --rm -it -v ~/.kube/config:/root/.kube/config -v /home/user/example-certify-config.yaml:/example-certify-config.yaml quay.io/dell/container-storage-modules/cert-csi:v1.6.0 certify --cert-config /example-certify-config.yaml --vsc <volume-snapshot-class>
+   docker run --rm -it -v ~/.kube/config:/root/.kube/config -v /home/user/example-certify-config.yaml:/example-certify-config.yaml quay.io/dell/container-storage-modules/cert-csi:v1.7.0 certify --cert-config /example-certify-config.yaml --vsc <volume-snapshot-class>
 {{</tab >}}
 {{<tab header="Podman" >}}
-   podman run --rm -it -v ~/.kube/config:/root/.kube/config -v /home/user/example-certify-config.yaml:/example-certify-config.yaml quay.io/dell/container-storage-modules/cert-csi:v1.6.0 certify --cert-config /example-certify-config.yaml --vsc <volume-snapshot-class>
+   podman run --rm -it -v ~/.kube/config:/root/.kube/config -v /home/user/example-certify-config.yaml:/example-certify-config.yaml quay.io/dell/container-storage-modules/cert-csi:v1.7.0 certify --cert-config /example-certify-config.yaml --vsc <volume-snapshot-class>
 {{</tab >}}
 {{< /tabpane >}}
 
@@ -563,10 +566,10 @@ If you are using the container image, the `attr` file must be mounted into the c
 
 {{< tabpane name="running-container-ephemeral-volume" lang="bash">}}
 {{<tab header="Docker" >}}
-   docker run --rm -it -v ~/.kube/config:/root/.kube/config -v /home/user/ephemeral-config.properties:/ephemeral-config.properties quay.io/dell/container-storage-modules/cert-csi:v1.6.0 test ephemeral-volume --driver <driver-name> --attr /ephemeral-config.properties
+   docker run --rm -it -v ~/.kube/config:/root/.kube/config -v /home/user/ephemeral-config.properties:/ephemeral-config.properties quay.io/dell/container-storage-modules/cert-csi:v1.7.0 test ephemeral-volume --driver <driver-name> --attr /ephemeral-config.properties
 {{</tab >}}
 {{<tab header="Podman" >}}
-   podman run --rm -it -v ~/.kube/config:/root/.kube/config -v /home/user/ephemeral-config.properties:/ephemeral-config.properties quay.io/dell/container-storage-modules/cert-csi:v1.6.0 test ephemeral-volume --driver <driver-name> --attr /ephemeral-config.properties
+   podman run --rm -it -v ~/.kube/config:/root/.kube/config -v /home/user/ephemeral-config.properties:/ephemeral-config.properties quay.io/dell/container-storage-modules/cert-csi:v1.7.0 test ephemeral-volume --driver <driver-name> --attr /ephemeral-config.properties
 
 {{</tab >}}
 {{< /tabpane >}}
