@@ -799,12 +799,12 @@ dellctl images --component csi-vxflexos
 
 ```bash
 Driver/Module Image             Supported Orchestrator Versions         Sidecar Images
-quay.io/dell/container-storage-modules/csi-vxflexos:v2.13.0     k8s1.32,k8s1.31,k8s1.30,ocp4.18,ocp4.17 registry.k8s.io/sig-storage/csi-attacher:v4.7.0
+quay.io/dell/container-storage-modules/csi-vxflexos:v2.13.0     k8s1.32,k8s1.31,k8s1.30,ocp4.18,ocp4.17 registry.k8s.io/sig-storage/csi-attacher:v4.8.0
                                                                         registry.k8s.io/sig-storage/csi-provisioner:v5.1.0
-                                                                        registry.k8s.io/sig-storage/csi-external-health-monitor-controller:v0.13.0
+                                                                        registry.k8s.io/sig-storage/csi-external-health-monitor-controller:v0.14.0
                                                                         registry.k8s.io/sig-storage/csi-snapshotter:v8.1.0
-                                                                        registry.k8s.io/sig-storage/csi-resizer:v1.12.0
-                                                                        registry.k8s.io/sig-storage/csi-node-driver-registrar:v2.12.0
+                                                                        registry.k8s.io/sig-storage/csi-resizer:v1.13.1
+                                                                        registry.k8s.io/sig-storage/csi-node-driver-registrar:v2.13.0
                                                                         quay.io/dell/storage/powerflex/sdc:4.5.2.1
 
 ```
