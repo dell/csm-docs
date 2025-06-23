@@ -306,12 +306,12 @@ dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      
    |<div style="text-align: left"> X_CSI_MODE   |<div style="text-align: left"> Driver starting mode  | No | controller |
    |<div style="text-align: left"> X_CSI_ISI_ACCESS_ZONE |<div style="text-align: left"> Name of the access zone a volume can be created in | No | System |
    |<div style="text-align: left"> X_CSI_ISI_QUOTA_ENABLED |<div style="text-align: left"> To enable SmartQuotas | Yes | |
-   |<div style="text-align: left"> X_CSI_VOL_PREFIX |<div style="text-align: left"> The X_CSI_VOL_PREFIX will be used by provisioner sidecar as a prefix for all the volumes created | Yes | csivol |
    |<div style="text-align: left"> ***Node parameters*** |
    |<div style="text-align: left"> X_CSI_MAX_VOLUMES_PER_NODE |<div style="text-align: left"> Specify the default value for the maximum number of volumes that the controller can publish to the node | Yes | 0 |
    |<div style="text-align: left"> X_CSI_MODE   |<div style="text-align: left"> Driver starting mode  | No | node |
    |<div style="text-align: left"> ***Sidecar parameters*** |
-   |<div style="text-align: left"> monitor-interval |<div style="text-align: left"> The monitor-interval will be used by external-health-monitor as an interval for health checks  | Yes | 60s |
+   |<div style="text-align: left"> volume-name-prefix |<div style="text-align: left"> The volume-name-prefix is used by provisioner sidecar as a prefix for all the volumes created  | Yes | csivol |
+   |<div style="text-align: left"> monitor-interval |<div style="text-align: left"> The monitor-interval is used by external-health-monitor as an interval for health checks  | Yes | 60s |
 {{< /collapse >}}
 </ul>
 
