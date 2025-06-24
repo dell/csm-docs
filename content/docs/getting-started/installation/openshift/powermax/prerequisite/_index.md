@@ -9,7 +9,7 @@ toc_hide: true
 
 ### CSI PowerMax Reverse Proxy
 
-The CSI PowerMax Reverse Proxy is a component that will be installed with the CSI PowerMax driver. For more details on this feature, see the related [documentation](../../../../../concepts/csidriver/features/powermax#csi-powermax-reverse-proxy).
+The CSI PowerMax Reverse Proxy is a component that is installed with the CSI PowerMax driver. For more details on this feature, see the related [documentation](../../../../../concepts/csidriver/features/powermax#csi-powermax-reverse-proxy).
 
 Create a TLS secret that holds an SSL certificate and a private key. This is required by the reverse proxy server.
 
