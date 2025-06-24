@@ -555,7 +555,7 @@
     <lastmod>2025-02-18T23:05:05+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/docs/getting-started/installation/openshift/powermax/prerequisite/</loc>
-    <lastmod>2025-05-23T19:29:42+05:30</lastmod>
+    <lastmod>2025-06-24T12:58:47-05:00</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/docs/getting-started/installation/openshift/powerscale/csmoperator/prerequisite/</loc>
     <lastmod>2025-04-30T23:27:03+05:30</lastmod>
@@ -1157,6 +1157,9 @@
     <loc>https://dell.github.io/csm-docs/v3/csidriver/</loc>
     <lastmod>2025-01-23T13:43:03-05:00</lastmod>
   </url><url>
+    <loc>https://dell.github.io/csm-docs/docs/getting-started/installation/helm/modules/observability/</loc>
+    <lastmod>2025-02-18T23:05:05+05:30</lastmod>
+  </url><url>
     <loc>https://dell.github.io/csm-docs/docs/getting-started/installation/helm/modules/observability/deployment/</loc>
     <lastmod>2025-04-01T13:32:08+05:30</lastmod>
   </url><url>
@@ -1204,9 +1207,6 @@
   </url><url>
     <loc>https://dell.github.io/csm-docs/v3/deployment/helm/modules/installation/observability/installer/</loc>
     <lastmod>2024-11-20T19:40:41-05:00</lastmod>
-  </url><url>
-    <loc>https://dell.github.io/csm-docs/docs/getting-started/installation/helm/modules/observability/</loc>
-    <lastmod>2025-03-27T15:36:54+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/docs/getting-started/installation/kubernetes/powerflex/csmoperator/csm-modules/observability/</loc>
     <lastmod>2025-02-18T23:05:05+05:30</lastmod>
