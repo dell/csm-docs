@@ -11,7 +11,7 @@ name: Update CSI Sidecars
 on:
   workflow_dispatch:  # Allows manual trigger
     schedule:
-    - cron: '0 1 * * 1'  # Runs every Monday at 01:00
+    - cron: '0 0 * * 3'  # Runs every Wednesday at Midnight
 
 jobs:
   csi-sidecars-update:
