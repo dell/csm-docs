@@ -72,11 +72,11 @@ Here is the output of a request to build an offline bundle for the Dell CSM Oper
    registry.redhat.io/openshift4/ose-kube-rbac-proxy-rhel9:v4.16.0-202409051837.p0.g8ea2c99.assembly.stream.el9
    nginxinc/nginx-unprivileged:1.27
    otel/opentelemetry-collector:0.42.0
-   registry.k8s.io/sig-storage/csi-attacher:{{< version-docs key="attacher_latest_version" >}}
-   registry.k8s.io/sig-storage/csi-external-health-monitor-controller:{{< version-docs key="health_monitor_controller_latest_version" >}}
-   registry.k8s.io/sig-storage/csi-node-driver-registrar:{{< version-docs key="node_driver_registrar_latest_version" >}}
-   registry.k8s.io/sig-storage/csi-provisioner:{{< version-docs key="provisioner_latest_version" >}}
-   registry.k8s.io/sig-storage/csi-resizer:{{< version-docs key="resizer_latest_version" >}}
+   registry.k8s.io/sig-storage/csi-attacher:{{< version-docs key="csi_attacher_latest_version" >}}
+   registry.k8s.io/sig-storage/csi-external-health-monitor-controller:{{< version-docs key="csi_external_health_monitor_controller_latest_version" >}}
+   registry.k8s.io/sig-storage/csi-node-driver-registrar:{{< version-docs key="csi_node_driver_registrar_latest_version" >}}
+   registry.k8s.io/sig-storage/csi-provisioner:{{< version-docs key="csi_provisioner_latest_version" >}}
+   registry.k8s.io/sig-storage/csi-resizer:{{< version-docs key="csi_resizer_latest_version" >}}
    registry.k8s.io/sig-storage/csi-snapshotter:{{< version-docs key="csi_snapshotter_latest_version" >}}
 
 * Copying necessary files
@@ -167,7 +167,7 @@ Loaded image: quay.io/dell/container-storage-modules/csi-powerstore:{{< version-
 Loaded image: quay.io/dell/container-storage-modules/csi-isilon:{{< version-docs key="PScale_latestVersion" >}}
 ...
 ...
-Loaded image: registry.k8s.io/sig-storage/csi-resizer:{{< version-docs key="resizer_latest_version" >}}
+Loaded image: registry.k8s.io/sig-storage/csi-resizer:{{< version-docs key="csi_resizer_latest_version" >}}
 Loaded image: registry.k8s.io/sig-storage/csi-snapshotter:{{< version-docs key="csi_snapshotter_latest_version" >}}
 
 * Tagging and pushing images
@@ -176,7 +176,7 @@ Loaded image: registry.k8s.io/sig-storage/csi-snapshotter:{{< version-docs key="
    quay.io/dell/container-storage-modules/csi-metadata-retriever:{{< version-docs key="metadata_retriever_latest_version" >}} -> localregistry:5000/dell-csm-operator/csi-metadata-retriever:{{< version-docs key="metadata_retriever_latest_version" >}}
    ...
    ...
-   registry.k8s.io/sig-storage/csi-resizer:{{< version-docs key="resizer_latest_version" >}} -> localregistry:5000/dell-csm-operator/csi-resizer:{{< version-docs key="resizer_latest_version" >}}
+   registry.k8s.io/sig-storage/csi-resizer:{{< version-docs key="csi_resizer_latest_version" >}} -> localregistry:5000/dell-csm-operator/csi-resizer:{{< version-docs key="csi_resizer_latest_version" >}}
    registry.k8s.io/sig-storage/csi-snapshotter:{{< version-docs key="csi_snapshotter_latest_version" >}} -> localregistry:5000/dell-csm-operator/csi-snapshotter:{{< version-docs key="csi_snapshotter_latest_version" >}}
 
 * Preparing files within /root/dell-csm-operator-bundle
@@ -185,7 +185,7 @@ Loaded image: registry.k8s.io/sig-storage/csi-snapshotter:{{< version-docs key="
    changing: quay.io/dell/container-storage-modules/csi-metadata-retriever:{{< version-docs key="metadata_retriever_latest_version" >}} -> localregistry:5000/dell-csm-operator/csi-metadata-retriever:{{< version-docs key="metadata_retriever_latest_version" >}}
    ...
    ...
-   changing: registry.k8s.io/sig-storage/csi-resizer:{{< version-docs key="resizer_latest_version" >}} -> localregistry:5000/dell-csm-operator/csi-resizer:{{< version-docs key="resizer_latest_version" >}}
+   changing: registry.k8s.io/sig-storage/csi-resizer:{{< version-docs key="csi_resizer_latest_version" >}} -> localregistry:5000/dell-csm-operator/csi-resizer:{{< version-docs key="csi_resizer_latest_version" >}}
    changing: registry.k8s.io/sig-storage/csi-snapshotter:{{< version-docs key="csi_snapshotter_latest_version" >}} -> localregistry:5000/dell-csm-operator/csi-snapshotter:{{< version-docs key="csi_snapshotter_latest_version" >}}
 
 * Complete
