@@ -15,6 +15,6 @@ on:
 
 jobs:
   csi-sidecars-update:
-    uses: dellc/common-github-actions/.github/workflows/csi-sidecars-update.yaml@main
+    uses: dell/common-github-actions/.github/workflows/csi-sidecars-update.yaml@main
     name: CSI Sidecars Update
     secrets: inherit
