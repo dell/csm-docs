@@ -20,7 +20,7 @@
 
   <meta itemprop="name" content="CSM Operator">
   <meta itemprop="description" content="Container Storage Modules Operator">
-  <meta itemprop="dateModified" content="2025-04-26T00:25:26+05:30">
+  <meta itemprop="dateModified" content="2025-06-26T11:14:52+05:30">
   <meta itemprop="wordCount" content="2439">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="CSM Operator">
@@ -202,7 +202,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.b5788f2d3606d3e097531d225a186ee6.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.95eb2351085177b48c340d036c8a9b3d.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -3051,11 +3051,11 @@ Building an offline bundle <a class="header-link"  href="#building-an-offline-bu
 </span></span><span style="display:flex;"><span>   registry.redhat.io/openshift4/ose-kube-rbac-proxy-rhel9:v4.16.0-202409051837.p0.g8ea2c99.assembly.stream.el9
 </span></span><span style="display:flex;"><span>   nginxinc/nginx-unprivileged:1.27
 </span></span><span style="display:flex;"><span>   otel/opentelemetry-collector:0.42.0
-</span></span><span style="display:flex;"><span>   registry.k8s.io/sig-storage/csi-attacher:v4.7.0
-</span></span><span style="display:flex;"><span>   registry.k8s.io/sig-storage/csi-external-health-monitor-controller:v0.13.0
-</span></span><span style="display:flex;"><span>   registry.k8s.io/sig-storage/csi-node-driver-registrar:v2.12.0
+</span></span><span style="display:flex;"><span>   registry.k8s.io/sig-storage/csi-attacher:v4.8.0
+</span></span><span style="display:flex;"><span>   registry.k8s.io/sig-storage/csi-external-health-monitor-controller:v0.14.0
+</span></span><span style="display:flex;"><span>   registry.k8s.io/sig-storage/csi-node-driver-registrar:v2.13.0
 </span></span><span style="display:flex;"><span>   registry.k8s.io/sig-storage/csi-provisioner:v5.1.0
-</span></span><span style="display:flex;"><span>   registry.k8s.io/sig-storage/csi-resizer:v1.12.0
+</span></span><span style="display:flex;"><span>   registry.k8s.io/sig-storage/csi-resizer:v1.13.1
 </span></span><span style="display:flex;"><span>   registry.k8s.io/sig-storage/csi-snapshotter:v8.1.0
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>* Copying necessary files
@@ -3131,7 +3131,7 @@ Unpacking the offline bundle and preparing for installation <a class="header-lin
 </span></span><span style="display:flex;"><span>Loaded image: quay.io/dell/container-storage-modules/csi-isilon:v2.13.0
 </span></span><span style="display:flex;"><span>...
 </span></span><span style="display:flex;"><span>...
-</span></span><span style="display:flex;"><span>Loaded image: registry.k8s.io/sig-storage/csi-resizer:v1.12.0
+</span></span><span style="display:flex;"><span>Loaded image: registry.k8s.io/sig-storage/csi-resizer:v1.13.1
 </span></span><span style="display:flex;"><span>Loaded image: registry.k8s.io/sig-storage/csi-snapshotter:v8.1.0
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>* Tagging and pushing images
@@ -3140,7 +3140,7 @@ Unpacking the offline bundle and preparing for installation <a class="header-lin
 </span></span><span style="display:flex;"><span>   quay.io/dell/container-storage-modules/csi-metadata-retriever:v1.10.0 -&gt; localregistry:5000/dell-csm-operator/csi-metadata-retriever:v1.10.0
 </span></span><span style="display:flex;"><span>   ...
 </span></span><span style="display:flex;"><span>   ...
-</span></span><span style="display:flex;"><span>   registry.k8s.io/sig-storage/csi-resizer:v1.12.0 -&gt; localregistry:5000/dell-csm-operator/csi-resizer:v1.12.0
+</span></span><span style="display:flex;"><span>   registry.k8s.io/sig-storage/csi-resizer:v1.13.1 -&gt; localregistry:5000/dell-csm-operator/csi-resizer:v1.13.1
 </span></span><span style="display:flex;"><span>   registry.k8s.io/sig-storage/csi-snapshotter:v8.1.0 -&gt; localregistry:5000/dell-csm-operator/csi-snapshotter:v8.1.0
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>* Preparing files within /root/dell-csm-operator-bundle
@@ -3149,7 +3149,7 @@ Unpacking the offline bundle and preparing for installation <a class="header-lin
 </span></span><span style="display:flex;"><span>   changing: quay.io/dell/container-storage-modules/csi-metadata-retriever:v1.10.0 -&gt; localregistry:5000/dell-csm-operator/csi-metadata-retriever:v1.10.0
 </span></span><span style="display:flex;"><span>   ...
 </span></span><span style="display:flex;"><span>   ...
-</span></span><span style="display:flex;"><span>   changing: registry.k8s.io/sig-storage/csi-resizer:v1.12.0 -&gt; localregistry:5000/dell-csm-operator/csi-resizer:v1.12.0
+</span></span><span style="display:flex;"><span>   changing: registry.k8s.io/sig-storage/csi-resizer:v1.13.1 -&gt; localregistry:5000/dell-csm-operator/csi-resizer:v1.13.1
 </span></span><span style="display:flex;"><span>   changing: registry.k8s.io/sig-storage/csi-snapshotter:v8.1.0 -&gt; localregistry:5000/dell-csm-operator/csi-snapshotter:v8.1.0
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>* Complete
