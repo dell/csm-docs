@@ -186,13 +186,13 @@ If the gateway certificate is self-signed or if you are using an embedded gatewa
 2. Run the following command to create the cert secret with index '0':
 
    ```bash
-   kubectl create secret generic powerstore-certs-0 --from-file=cert-0=ca_cert_0.pem -n powerstore
+   kubectl create secret generic powerstore-certs-0 --from-file=cert-0=ca_cert_0.pem -n csi-powerstore
    ```
 
    Use the following command to replace the secret:
 
    ```bash
-   kubectl create secret generic powerstore-certs-0 -n powerstore --from-file=cert-0=ca_cert_0.pem -o yaml --dry-run | kubectl replace -f -
+   kubectl create secret generic powerstore-certs-0 -n csi-powerstore --from-file=cert-0=ca_cert_0.pem -o yaml --dry-run | kubectl replace -f -
    ```
 
 3. Repeat step 1 and 2 to create multiple cert secrets with incremental index (example: powerstore-certs-1, powerstore-certs-2, etc)
@@ -200,9 +200,9 @@ If the gateway certificate is self-signed or if you are using an embedded gatewa
 
 *Notes:*
 
-- "powerstore" is the namespace for Helm-based installation but namespace can be user-defined in operator-based installation.
+- "csi-powerstore" is the namespace for Helm-based installation but namespace can be user-defined in operator-based installation.
 - User can add multiple certificates in the same secret. The certificate file should not exceed more than 1Mb due to Kubernetes secret size limitation.
-- Whenever certSecretCount parameter changes in `myvalues.yaml` user needs to uninstall and install the driver.
+- Whenever certSecretCount parameter changes in `./my-powerstore-settings.yaml` user needs to uninstall and install the driver.
 - Updating powerstore-certs-n secrets is a manual process, unlike powerstore-config. Users have to re-install the driver in case of updating/adding the SSL certificates or changing the certSecretCount parameter.
 
 ## Storage Classes
