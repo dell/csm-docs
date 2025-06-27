@@ -799,12 +799,12 @@ dellctl images --component csi-vxflexos
 
 ```bash
 Driver/Module Image             Supported Orchestrator Versions         Sidecar Images
-quay.io/dell/container-storage-modules/csi-vxflexos:v2.13.0     k8s1.32,k8s1.31,k8s1.30,ocp4.18,ocp4.17 registry.k8s.io/sig-storage/csi-attacher:v4.7.0
-                                                                        registry.k8s.io/sig-storage/csi-provisioner:v5.1.0
-                                                                        registry.k8s.io/sig-storage/csi-external-health-monitor-controller:v0.13.0
-                                                                        registry.k8s.io/sig-storage/csi-snapshotter:v8.1.0
-                                                                        registry.k8s.io/sig-storage/csi-resizer:v1.12.0
-                                                                        registry.k8s.io/sig-storage/csi-node-driver-registrar:v2.12.0
+quay.io/dell/container-storage-modules/csi-vxflexos:v2.13.0     k8s1.32,k8s1.31,k8s1.30,ocp4.18,ocp4.17 registry.k8s.io/sig-storage/csi-attacher:{{< version-docs key="csi_attacher_latest_version" >}}
+                                                                        registry.k8s.io/sig-storage/csi-provisioner:{{< version-docs key="csi_provisioner_latest_version" >}}
+                                                                        registry.k8s.io/sig-storage/csi-external-health-monitor-controller:{{< version-docs key="csi_health_monitor_controller_latest_version" >}}
+                                                                        registry.k8s.io/sig-storage/csi-snapshotter:{{< version-v1 key="csi_snapshotter_latest_version" >}}
+                                                                        registry.k8s.io/sig-storage/csi-resizer:{{< version-docs key="csi_resizer_latest_version" >}}
+                                                                        registry.k8s.io/sig-storage/csi-node-driver-registrar:{{< version-docs key="csi_node_driver_registrar_latest_version" >}}
                                                                         quay.io/dell/storage/powerflex/sdc:4.5.2.1
 
 ```

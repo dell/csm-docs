@@ -138,7 +138,7 @@ Follow the instructions available in CSM Authorization for [Configuring the CSM 
 Follow the instructions available in CSM Authorization for
 - [Configuring PowerFlex with Authorization](../../../../authorization/v2.x/configuration/powerflex).
 - [Configuring PowerMax with Authorization](../../../../authorization/v2.x/configuration/powermax).
-- [Configuring PowerScale with Authorization](../../../../authorization/v2.x/configuration/powermax).
+- [Configuring PowerScale with Authorization](../../../../authorization/v2.x/configuration/powerscale).
 
 ## Vault Server Installation
 

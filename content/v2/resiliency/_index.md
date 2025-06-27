@@ -41,8 +41,8 @@ CSM for Resiliency provides the following capabilities:
 {{<table "table table-striped table-bordered table-sm">}}
 | COP/OS            | Supported Versions |
 | ----------------- | :----------------: |
-| Kubernetes        | 1.29, 1.30, 1.31   |
-| Red Hat OpenShift |     4.16, 4.17   |
+| Kubernetes        | 1.30, 1.31, 1.32   |
+| Red Hat OpenShift |     4.16, 4.17     |
 {{</table>}}
 
 ## Supported Storage Platforms
@@ -50,7 +50,7 @@ CSM for Resiliency provides the following capabilities:
 {{<table "table table-striped table-bordered table-sm">}}
 |               | PowerFlex    | Unity XT                          | PowerScale                              | PowerStore                    | PowerMax |
 | ------------- | :----------: | :-------------------------------: | :-------------------------------------: | :---------------------------: | :---------------------------: |
-| Storage Array | 3.6.x, 4.5.x, 4.6.x | 5.2.x, 5.3.x, 5.4.x | OneFS 9.4, 9.5.0.x (x >= 5), 9.7, 9.8, 9.9 | 3.5, 3.6, 4.0 | 2500/8500 PowerMax OS 10 (6079), Unisphere 10.x |
+| Storage Array | 3.6.x, 4.5.x, 4.6.x | 5.2.x, 5.3.x, 5.4.x | OneFS 9.4, 9.5.0.x (x >= 5), 9.7, 9.8, 9.9, 9.10 | 3.5, 3.6, 4.0, 4.1 | 2500/8500 PowerMax OS 10 (6079), Unisphere 10.x |
 {{</table>}}
 
 ## Supported CSI Drivers

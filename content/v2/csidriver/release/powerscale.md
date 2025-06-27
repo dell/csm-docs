@@ -4,7 +4,9 @@ description: Release notes for PowerScale CSI driver
 ---
 
 
-## Release Notes - CSI Driver for PowerScale v2.12.0
+## Release Notes - CSI Driver for PowerScale v2.13.0
+
+
 
 
 
@@ -18,16 +20,15 @@ description: Release notes for PowerScale CSI driver
 
 ### New Features/Changes
 
-- [#1472 - [FEATURE]: Support for Kubernetes 1.31](https://github.com/dell/csm/issues/1472)
-- [#1473 - [FEATURE]: Add Support for OpenShift Container Platform (OCP) 4.17](https://github.com/dell/csm/issues/1473)
-- [#1508 - [FEATURE]:  Add Support for KubeVirt](https://github.com/dell/csm/issues/1508)
+- [#1560 - [FEATURE]: CSM support for OpenShift 4.18](https://github.com/dell/csm/issues/1560)
+- [#1561 - [FEATURE]: Added support for Kubernetes 1.32 ](https://github.com/dell/csm/issues/1561)
+- [#1611 - [FEATURE]: Added support for PowerScale 9.10](https://github.com/dell/csm/issues/1611)
 
 ### Fixed Issues
 
-- [#1438 - [BUG]: Remove mutex locks from interceptors on method calls](https://github.com/dell/csm/issues/1438)
-- [#1448 - [BUG]: CSM-operator build fails from disk space issue](https://github.com/dell/csm/issues/1448)
-- [#1475 - [BUG]: CSM Operator - Changes to csiDriverSpec does not reflect in CSM state or csidrivers.storage.k8s.io object](https://github.com/dell/csm/issues/1475)
-- [#1531 - [BUG]: CSM-Operator resets dell-replication-controller-config configmap](https://github.com/dell/csm/issues/1531)
+- [#1514 - [BUG]: snapshot restore failed with Message = failed to get acl entries: Too many links](https://github.com/dell/csm/issues/1514)
+- [#1620 - [BUG]: PowerScale - handle panic error in ParseNormalizedSnapshotID](https://github.com/dell/csm/issues/1620)
+- [#1667 - [BUG]: Labels versions and maintainer update for CSM images ](https://github.com/dell/csm/issues/1667)
 
 ### Known Issues
 
