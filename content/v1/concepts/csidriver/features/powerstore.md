@@ -483,7 +483,7 @@ Create a file called `config.yaml` and populate it with the following content
 ```
 
 **Note** :
-    skipCertificateValidation flag is supported from driver version 1.15.
+    skipCertificateValidation flag is supported from CSM version 1.15.
 
 Here we specify that we want to CSI driver to manage two arrays: one with an IP `10.0.0.1` and the other with an IP `10.0.0.2`, we want to connect to the first array with `iSCSI` protocol and with `FC` to the second array. Also, we want to be able to create NFS-based volume so we provide the name of the NAS to the first array.
 
