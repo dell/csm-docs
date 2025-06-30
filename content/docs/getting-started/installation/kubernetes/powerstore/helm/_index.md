@@ -172,28 +172,30 @@ If this secret is an empty secret, then the validation of the certificate fails,
 
 If the gateway certificate is self-signed or if you are using an embedded gateway, then perform the following steps.
 
+### Procedure
+
 1. Fetch the certificate by running the following command:
 
-   ```bash
-   openssl s_client -showcerts -connect <Gateway IP:Port> </dev/null 2>/dev/null | openssl x509 -outform PEM > ca_cert_0.pem
-   ```
+```bash
+openssl s_client -showcerts -connect <Gateway IP:Port> </dev/null 2>/dev/null | openssl x509 -outform PEM > ca_cert_0.pem
+```
 
    Example:
-   ```b
-   openssl s_client -showcerts -connect 1.1.1.1:443 </dev/null 2>/dev/null | openssl x509 -outform PEM > ca_cert_0.pem
-   ```
+```bash
+openssl s_client -showcerts -connect 1.1.1.1:443 </dev/null 2>/dev/null | openssl x509 -outform PEM > ca_cert_0.pem
+ ```
 
 2. Run the following command to create the cert secret with index '0':
 
-   ```bash
-   kubectl create secret generic powerstore-certs-0 --from-file=cert-0=ca_cert_0.pem -n csi-powerstore
-   ```
+```bash
+kubectl create secret generic powerstore-certs-0 --from-file=cert-0=ca_cert_0.pem -n csi-powerstore
+```
 
-   Use the following command to replace the secret:
+Use the following command to replace the secret:
 
-   ```bash
-   kubectl create secret generic powerstore-certs-0 -n csi-powerstore --from-file=cert-0=ca_cert_0.pem -o yaml --dry-run | kubectl replace -f -
-   ```
+```bash
+kubectl create secret generic powerstore-certs-0 -n csi-powerstore --from-file=cert-0=ca_cert_0.pem -o yaml --dry-run | kubectl replace -f -
+```
 
 3. Repeat steps 1 and 2 to create multiple cert secrets with incremental index (example: powerstore-certs-1, powerstore-certs-2, etc)
 
