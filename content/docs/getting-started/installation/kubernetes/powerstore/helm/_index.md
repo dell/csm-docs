@@ -164,7 +164,7 @@ This secret contains the X509 certificates of the CA which signed PowerStore gat
 
 The CSI driver exposes an install parameter in secret.yaml, `skipCertificateValidation`, which determines if the driver performs client-side verification of the gateway certificates.
 
-`skipCertificateValidation` parameter is set to true by default, and the driver does not verify the gateway certificates.
+The `skipCertificateValidation` parameter is set to true by default, and the driver does not verify the gateway certificates.
 
 If `skipCertificateValidation` is set to false, then the secret powerstore-certs-n must contain the CA certificate for the array gateway.
 
@@ -172,7 +172,7 @@ If this secret is an empty secret, then the validation of the certificate fails,
 
 If the gateway certificate is self-signed or if you are using an embedded gateway, then perform the following steps.
 
-1. To fetch the certificate, run the following command.
+1. Fetch the certificate by running the following command:
 
    ```bash
    openssl s_client -showcerts -connect <Gateway IP:Port> </dev/null 2>/dev/null | openssl x509 -outform PEM > ca_cert_0.pem
@@ -195,7 +195,7 @@ If the gateway certificate is self-signed or if you are using an embedded gatewa
    kubectl create secret generic powerstore-certs-0 -n csi-powerstore --from-file=cert-0=ca_cert_0.pem -o yaml --dry-run | kubectl replace -f -
    ```
 
-3. Repeat step 1 and 2 to create multiple cert secrets with incremental index (example: powerstore-certs-1, powerstore-certs-2, etc)
+3. Repeat steps 1 and 2 to create multiple cert secrets with incremental index (example: powerstore-certs-1, powerstore-certs-2, etc)
 
 
 *Notes:*
