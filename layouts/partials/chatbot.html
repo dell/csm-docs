@@ -1,0 +1,315 @@
+<!-- Chatbot Toggle Button -->
+<button id="chatbot-toggle" class="chatbot-toggle">
+  💬 CSM Chat
+</button>
+
+<!-- Chatbot Box -->
+<div id="chatbot-box" class="chatbot-box">
+  <div class="chatbot-header">
+    <span>Ask Me Anything</span>
+    <div>
+      <button id="chatbot-clear" class="chatbot-header-btn">Clear</button>
+      <button id="chatbot-cancel" class="chatbot-header-btn">✖</button>
+    </div>
+  </div>
+  <div id="chat-messages" class="chat-messages"></div>
+  <input type="text" id="chat-input" class="chat-input" placeholder="Type your message..." />
+</div>
+
+<!-- Confirmation Modal -->
+<div id="confirm-modal" class="confirm-modal">
+  <div class="confirm-content">
+    <p>Are you sure you want to clear the chat history?</p>
+    <div class="confirm-buttons">
+      <button id="confirm-yes">Yes</button>
+      <button id="confirm-no">No</button>
+    </div>
+  </div>
+</div>
+
+<style>
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+
+  .chatbot-toggle {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+    background: linear-gradient(135deg, #007bff, #00c6ff);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    padding: 12px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+  }
+
+  .chatbot-toggle:hover {
+    transform: scale(1.05);
+    background: linear-gradient(135deg, #0056b3, #0099cc);
+  }
+
+  .chatbot-box {
+    display: none;
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+    width: 480px;
+    height: 600px;
+    background: linear-gradient(to bottom right, #ffffff, #f0f4ff);
+    border-radius: 15px;
+    border: 1px solid #ccc;
+    z-index: 1000;
+    padding: 15px;
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    transition: all 0.3s ease;
+  }
+
+  .chatbot-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #333;
+  }
+
+  .chatbot-header-btn {
+    background: none;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    margin-left: 8px;
+    color: #888;
+    transition: color 0.2s;
+  }
+
+  .chatbot-header-btn:hover {
+    color: #000;
+  }
+
+  .chat-messages {
+    flex: 1;
+    overflow-y: auto;
+    margin-bottom: 10px;
+    padding-right: 5px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .chat-messages div {
+    margin-bottom: 10px;
+    max-width: 80%;
+    padding: 10px 14px;
+    border-radius: 20px;
+    line-height: 1.4;
+    word-wrap: break-word;
+  }
+
+  .chat-messages .user {
+    background-color: #007bff;
+    color: white;
+    align-self: flex-end;
+    margin-left: auto;
+  }
+
+  .chat-messages .bot {
+    background-color: #e9f0ff;
+    color: #333;
+    align-self: flex-start;
+    margin-right: auto;
+  }
+
+  .chat-input {
+    width: 100%;
+    padding: 12px;
+    border-radius: 25px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    outline: none;
+    transition: border 0.2s;
+  }
+
+  .chat-input:focus {
+    border-color: #007bff;
+  }
+
+  .confirm-modal {
+    display: none;
+    position: fixed;
+    z-index: 1100;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    justify-content: center;
+    align-items: center;
+  }
+
+  .confirm-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    width: 300px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
+  }
+
+  .confirm-buttons {
+    margin-top: 15px;
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .confirm-buttons button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+  }
+
+  #confirm-yes {
+    background-color: #dc3545;
+    color: white;
+  }
+
+  #confirm-no {
+    background-color: #6c757d;
+    color: white;
+  }
+
+.typing-indicator {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  margin: 5px 0;
+  font-weight: normal;
+  font-size: 12px; /* Smaller font size */
+  color: #007bff;
+}
+
+
+  .typing-indicator .dots {
+    display: flex;
+    gap: 6px;
+  }
+
+  .typing-indicator .dots span {
+    width: 8px;
+    height: 8px;
+    background-color: #007bff;
+    border-radius: 50%;
+    display: inline-block;
+    animation: bounce 1.2s infinite ease-in-out;
+  }
+
+  .typing-indicator .dots span:nth-child(2) {
+    animation-delay: 0.2s;
+  }
+
+  .typing-indicator .dots span:nth-child(3) {
+    animation-delay: 0.4s;
+  }
+
+  @keyframes bounce {
+    0%, 80%, 100% {
+      transform: scale(0.8);
+      opacity: 0.3;
+    }
+    40% {
+      transform: scale(1.2);
+      opacity: 1;
+    }
+  }
+</style>
+
+<script>
+  const toggleBtn = document.getElementById("chatbot-toggle");
+  const cancelBtn = document.getElementById("chatbot-cancel");
+  const clearBtn = document.getElementById("chatbot-clear");
+  const chatBox = document.getElementById("chatbot-box");
+  const chatInput = document.getElementById("chat-input");
+  const chatMessages = document.getElementById("chat-messages");
+
+  const modal = document.getElementById("confirm-modal");
+  const confirmYes = document.getElementById("confirm-yes");
+  const confirmNo = document.getElementById("confirm-no");
+
+  toggleBtn.addEventListener("click", () => {
+    chatBox.style.display = "flex";
+  });
+
+  cancelBtn.addEventListener("click", () => {
+    chatBox.style.display = "none";
+  });
+
+  clearBtn.addEventListener("click", () => {
+    modal.style.display = "flex";
+  });
+
+  confirmYes.addEventListener("click", () => {
+    chatMessages.innerHTML = "";
+    modal.style.display = "none";
+  });
+
+  confirmNo.addEventListener("click", () => {
+    modal.style.display = "none";
+  });
+
+  chatInput.addEventListener("keypress", async (e) => {
+    if (e.key === "Enter" && chatInput.value.trim() !== "") {
+      const userMsg = chatInput.value.trim();
+      chatMessages.innerHTML += `<div class="user">${userMsg}</div>`;
+      chatInput.value = "";
+
+      const typingIndicator = document.createElement("div");
+      typingIndicator.classList.add("typing-indicator");
+      typingIndicator.innerHTML = `
+        <div><strong>Let me think</strong></div>
+        <div class="dots"><span></span><span></span><span></span></div>
+      `;
+      chatMessages.appendChild(typingIndicator);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+
+      try {
+        const res = await fetch("http://127.0.0.1:5000/generate-response", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ query: userMsg })
+
+        });
+
+        const data = await res.json()
+                chatMessages.removeChild(typingIndicator);
+        chatMessages.innerHTML += `<div class="bot"><pre>${data.response}</pre></div>`;
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+      } catch (error) {
+        chatMessages.removeChild(typingIndicator);
+        chatMessages.innerHTML += `<div class="bot">Error connecting to server.</div>`;
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+      }
+    }
+  });
+
+function formatResponse(response) {
+  // Replace newline characters with HTML line breaks
+  let formattedResponse = response.replace(/\n/g, '<br>');
+  
+  // Replace list indicators with HTML list elements
+  formattedResponse = formattedResponse.replace(/- /g, '<li>').replace(/:/g, '</li><ul>').replace(/:/g, '</ul>');
+  
+  return formattedResponse;
+}
+</script>
+
+
