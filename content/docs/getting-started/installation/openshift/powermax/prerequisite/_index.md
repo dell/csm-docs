@@ -44,21 +44,21 @@ openssl x509 -req -in tls.csr -signkey tls.key -out tls.crt -days 3650 -extensio
 Make note of the newly created tls.crt and tls.key files as they will be referenced later to create Kubernetes Secret resources.
 
 For the protocol specific prerequisite check below. 
-   <br>
+<br>
 
 
-   {{< tabpane text=true lang="en" >}}
+{{< tabpane text=true lang="en" >}}
 {{% tab header="Fibre Channel" lang="en" %}}
 
 ### Fibre Channel Requirements
 
-The following requirements must be fulfilled in order to successfully use the Fiber Channel protocol with the CSI PowerMax driver:
+The following requirements must be fulfilled in order to successfully use the Fibre Channel protocol with the CSI PowerMax driver:
 
 - Zoning of the Host Bus Adapters (HBAs) to the Fibre Channel port director must be completed.
 - Ensure that the HBA WWNs (initiators) appear on the list of initiators that are logged into the array.
 - If the number of volumes that will be published to nodes is high, then configure the maximum number of LUNs for your HBAs on each node. See the appropriate HBA document to configure the maximum number of LUNs. 
 
-</br>
+<br>
 
  1. Complete the zoning of each host with the PowerMax Storage Array. Please refer to <a  href="https://elabnavigator.dell.com/vault/pdf/Linux.pdf" target="_blank" style="font-size:0.9rem">Host Connectivity Guide</a> for the guidelines when setting up a Fibre Channel SAN infrastructure.  
  <br>
@@ -166,8 +166,9 @@ The following requirements must be fulfilled in order to successfully use the Fi
 
 {{% /tab %}}
 
-
 {{% tab header="iSCSI" lang="en" %}}
+
+### iSCSI Requirements
 
 1. Complete the iSCSI network configuration to connect the hosts with the PowerMax Storage array. Please refer to <a  href="https://elabnavigator.dell.com/vault/pdf/Linux.pdf" target="_blank" style="font-size:0.9rem">Host Connectivity Guide</a> for the  best practices for attaching the hosts to a PowerMax storage array.  
 <br>
@@ -208,9 +209,9 @@ The following requirements must be fulfilled in order to successfully use the Fi
 4. Multipathing software configuration
     
     
-   a. Configure Device Mapper MPIO for PowerMax FC connectivity
+   a. Configure Device Mapper MPIO for PowerMax iSCSI connectivity
 
-      Use this command to create the machine configuration to configure the DM-MPIO service on all the worker hosts for FC connectivity.
+      Use this command to create the machine configuration to configure the DM-MPIO service on all the worker hosts for iSCSI connectivity.
 
       ```bash 
       oc apply -f 99-workers-multipath-conf.yaml
@@ -302,10 +303,9 @@ The following requirements must be fulfilled in order to successfully use the Fi
     ``` 
 {{% /tab %}}
 
-
-
 {{% tab header="NVMeFC" lang="en" %}}
 
+### NVMe/FC Requirements
 
 1. Complete the zoning of each host with the PowerMax Storage Array. Please refer to <a  href="https://elabnavigator.dell.com/vault/pdf/Linux.pdf" target="_blank" style="font-size:0.9rem">Host Connectivity Guide</a> for the guidelines when setting a Fibre Channel SAN infrastructure.
  
@@ -422,7 +422,9 @@ All OpenShift nodes connecting to Dell storage arrays must use unique host NVMe 
 
 {{% /tab %}}
 
-   {{% tab header="NVMeTCP" lang="en" %}} 
+{{% tab header="NVMeTCP" lang="en" %}} 
+
+### NVMe/TCP Requirements
 
 
    1. Complete the NVMe network configuration to connect the hosts with the PowerMax Storage array. Please refer <a  href="https://elabnavigator.dell.com/vault/pdf/Linux.pdf" target="_blank" style="font-weight:bold; font-size:0.9rem">Host Connectivity Guide</a> for the best practices for attaching the hosts to a PowerMax storage array.
@@ -552,8 +554,7 @@ All OpenShift nodes connecting to Dell storage arrays must use unique host NVMe 
             name: custom-coreos-generate-nvme-hostnqn.service
   EOF
   ```
-   {{% /tab %}} 
-
+{{% /tab %}} 
 
 {{% tab header="NFS" lang="en" %}}
 

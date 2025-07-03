@@ -265,7 +265,7 @@ Check the status of the CR to verify if the driver installation is in the `Succe
     apiVersion: snapshot.storage.k8s.io/v1
     kind: VolumeSnapshotClass
     metadata:
-    name: powerstore-snapshot
+      name: powerstore-snapshot
     driver: "csi-powerstore.dellemc.com"
     deletionPolicy: Delete
     EOF
