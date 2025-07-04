@@ -12,11 +12,6 @@ Install the Observability module for Dell CSI Drivers using the Container Storag
 
 ## Prerequisites
 
-Create a namespace `karavi`
-
-  ```bash
-  kubectl create namespace karavi
-  ```
   Enable the Observability module with the following configuration:
   
   ```yaml
