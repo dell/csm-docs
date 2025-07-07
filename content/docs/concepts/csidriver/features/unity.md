@@ -494,8 +494,7 @@ allowedTopologies:
 This example matches all nodes where the driver has a connection to the Unity XT array with array ID mentioned via Fiber Channel. Similarly, by replacing `fc` with `iscsi` in the key checks for iSCSI connectivity with the node.
 
 **Note** : 
-  The NFS labels are automatically added by the driver, assuming that NFS dependencies are configured by default. These dependencies come with the default Linux OS package from the node and the array supports NFS. For other protocols (iSCSI, FC), all necessary connectivity checks between the initiator and target are performed before labels are added.
-  This label should not impact any other functionality, even if NFS is not configured on the array or node.
+  The NFS labels are added by the driver only after verifying that NFS is enabled in the storage. It is assumed that NFS dependencies are configured by default on the node, as these dependencies are included in the default Linux OS package. For other protocols (iSCSI, FC), all necessary connectivity checks between the initiator and target are performed before labels are added.
 
 You can check what labels your nodes contain by running `kubectl get nodes --show-labels` command.
 
