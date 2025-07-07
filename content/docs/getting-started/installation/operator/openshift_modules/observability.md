@@ -125,11 +125,9 @@ otel-collector                 ClusterIP   172.30.127.237   <none>        55680/
    ```
 
    <br> 
-
-  <ol>
-  {{< hide class="1" >}}
+   
    Example:
-
+   {{< hide class="1" >}}
    ```yaml 
    cat <<EOF> smon-otel-collector.yaml
    apiVersion: monitoring.coreos.com/v1
@@ -149,23 +147,11 @@ otel-collector                 ClusterIP   172.30.127.237   <none>        55680/
          app.kubernetes.io/instance: karavi-observability
          app.kubernetes.io/name: otel-collector 
     EOF
-    ```  
+   ```  
+   {{< /hide >}} 
 
-   Verify the ServiceMonitor is created. 
-
-    ```terminal
-    oc get smon -n isilon
-    NAME             AGE
-    otel-collector   44h 
-    ``` 
-  {{< /hide >}} 
-  </ol>
-    
-  <ol>
   {{< hide class="2" >}}
-   Example:
-
-   ```yaml 
+  ```yaml 
    cat <<EOF> smon-otel-collector.yaml
    apiVersion: monitoring.coreos.com/v1
    kind: ServiceMonitor
@@ -184,17 +170,36 @@ otel-collector                 ClusterIP   172.30.127.237   <none>        55680/
          app.kubernetes.io/instance: karavi-observability
          app.kubernetes.io/name: otel-collector 
     EOF
-    ``` 
-
-   Verify the ServiceMonitor is created. 
-
-    ```terminal
-    oc get smon -n vxflexos
-    NAME             AGE
-    otel-collector   44h 
-    ``` 
+  ```  
   {{< /hide >}} 
-  </ol>
+
+<ol>
+
+Verify the ServiceMonitor is created. 
+
+{{< hide class="1" >}}
+
+```terminal 
+oc get smon -n isilon
+NAME             AGE
+otel-collector   44h 
+``` 
+
+{{< /hide >}} 
+
+</ol> 
+
+<ol>
+{{< hide class="2" >}}
+
+ ```terminal 
+oc get smon -n vxflexos
+NAME             AGE
+otel-collector   44h 
+ ``` 
+
+{{< /hide >}}
+</ol>
 
 6. Verify the PowerFlex metrics are visible in the OpenShift Console. 
 
