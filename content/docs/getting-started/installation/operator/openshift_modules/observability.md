@@ -13,16 +13,7 @@ description: >
 
 <br>
 
-3. Create a Project for deploying Observability Module 
-   
- 
-
-   Use this command to create new project. You must use the project name as karavi  
-   ```bash
-   oc new-project karavi 
-   ```
-
-4. Enable Observability module in the CSM  
+3. Enable Observability module in the CSM  
    
 
    Use this command to create the **ContainerStorageModule** custom resource with Observability enabled.
@@ -62,7 +53,7 @@ description: >
 {{< hide class="1" >}}
 
 ```terminal
-oc get pod -n karavi
+oc get pod -n isilon
 
 NAME                                         READY   STATUS    RESTARTS   AGE
 karavi-metrics-powerscale-69855dbdd5-5mshq   1/1     Running   0          2m54s
@@ -75,7 +66,7 @@ otel-collector-b496d8c4d-gp6zz               2/2     Running   0          2m55s
 {{< hide class="2" >}}
 
 ```terminal
-oc get pod -n karavi
+oc get pod -n vxflexos
 
 NAME                                         READY   STATUS    RESTARTS   AGE
 karavi-metrics-powerflex-69855dbdd5-5mshq    1/1     Running   0          2m54s
@@ -98,7 +89,7 @@ Verify the Observability Services.
 {{< hide class="1" >}}
 
 ```terminal 
-oc get svc -n karavi
+oc get svc -n isilon
 NAME                           TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)              AGE
 karavi-metrics-powerscale      ClusterIP   172.30.169.86    <none>        2222/TCP             3m29s
 karavi-topology                ClusterIP   172.30.66.155    <none>        8443/TCP             3m29s
@@ -113,7 +104,7 @@ otel-collector                 ClusterIP   172.30.127.237   <none>        55680/
 {{< hide class="2" >}}
 
  ```terminal 
- oc get svc -n karavi
+ oc get svc -n vxflexos
  NAME                           TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)              AGE
  karavi-metrics-powerflex       ClusterIP   172.30.169.86    <none>        2222/TCP             3m29s
  karavi-topology                ClusterIP   172.30.66.155    <none>        8443/TCP             3m29s
@@ -136,13 +127,14 @@ otel-collector                 ClusterIP   172.30.127.237   <none>        55680/
    <br> 
    
    Example:
+   {{< hide class="1" >}}
    ```yaml 
    cat <<EOF> smon-otel-collector.yaml
    apiVersion: monitoring.coreos.com/v1
    kind: ServiceMonitor
    metadata:
      name: otel-collector
-     namespace: karavi
+     namespace: isilon
    spec:
      endpoints:
      - path: /metrics
@@ -155,15 +147,59 @@ otel-collector                 ClusterIP   172.30.127.237   <none>        55680/
          app.kubernetes.io/instance: karavi-observability
          app.kubernetes.io/name: otel-collector 
     EOF
-    ```  
+   ```  
+   {{< /hide >}} 
 
-   Verify the ServiceMonitor is created. 
+  {{< hide class="2" >}}
+  ```yaml 
+   cat <<EOF> smon-otel-collector.yaml
+   apiVersion: monitoring.coreos.com/v1
+   kind: ServiceMonitor
+   metadata:
+     name: otel-collector
+     namespace: vxflexos
+   spec:
+     endpoints:
+     - path: /metrics
+       port: exporter-https
+       scheme: https
+       tlsConfig:
+         insecureSkipVerify: true
+     selector:
+       matchLabels:
+         app.kubernetes.io/instance: karavi-observability
+         app.kubernetes.io/name: otel-collector 
+    EOF
+  ```  
+  {{< /hide >}} 
 
-    ```terminal
-    oc get smon -n karavi
-    NAME             AGE
-    otel-collector   44h 
-    ``` 
+<ol>
+
+Verify the ServiceMonitor is created. 
+
+{{< hide class="1" >}}
+
+```terminal 
+oc get smon -n isilon
+NAME             AGE
+otel-collector   44h 
+``` 
+
+{{< /hide >}} 
+
+</ol> 
+
+<ol>
+{{< hide class="2" >}}
+
+ ```terminal 
+oc get smon -n vxflexos
+NAME             AGE
+otel-collector   44h 
+ ``` 
+
+{{< /hide >}}
+</ol>
 
 6. Verify the PowerFlex metrics are visible in the OpenShift Console. 
 
