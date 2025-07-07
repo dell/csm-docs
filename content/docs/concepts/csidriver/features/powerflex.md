@@ -284,7 +284,8 @@ allowedTopologies:
 ```
 
 **Note** : 
-  The NFS labels are added by the driver only after verifying that NFS is enabled in the storage. It is assumed that NFS dependencies are configured by default on the node, as these dependencies are included in the default Linux OS package.
+- From CSM 1.15 onwards, the CSI driver adds NFS labels to the CSI nodes only after verifying that NFS is enabled on the storage array. This ensures that node labeling accurately reflects the capabilities of the backend storage system.
+- It is assumed that the required NFS dependencies are already present on the node, as these are typically included in standard Linux OS packages by default.
 
 You can check what labels your nodes contain by running
 ```bash
