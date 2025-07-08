@@ -419,7 +419,7 @@ After a successful installation of the driver, if a node Pod is running successf
 `csi-powermax.dellemc.com/\<array-id\>.iscsi`
 * If the worker node has NVMeTCP connectivity to the PowerMax array -
 `csi-powermax.dellemc.com/\<array-id\>.nvmetcp`
-* nfs labels are added by default -
+* If the worker node has NFS connectivity to the PowerMax array -
 `csi-powermax.dellemc.com/\<array-id\>.nfs`
 
 The values for all these keys are always set to the name of the provisioner which is usually `csi-powermax.dellemc.com`.
@@ -463,8 +463,8 @@ on any worker node with access to the PowerMax array `000000000001` irrespective
 > A set of sample storage class definitions to enable topology-aware volume provisioning has been provided in the `csi-powermax/samples/storageclass` folder
 
 **Note** : 
-  The NFS labels are automatically added by the driver, assuming that NFS dependencies are configured by default. These dependencies come with the default Linux OS package from the node and the array supports NFS. For other protocols (iSCSI, FC, NVMe/TCP), all necessary connectivity checks between the initiator and target are performed before labels are added.
-  This label should not impact any other functionality, even if NFS is not configured on the array or node.
+- From CSM 1.15 onwards, the CSI driver adds NFS labels to the CSI nodes only after verifying that NFS is enabled on the storage array. This ensures that node labeling accurately reflects the capabilities of the backend storage system. 
+- It is assumed that NFS dependencies are configured by default on the node, as these dependencies are included in the default Linux OS package. For other protocols (iSCSI, FC, NVMe/TCP), all necessary connectivity checks between the initiator and target are performed before labels are added.
 
 You can check what labels your nodes contain by running
 ```bash

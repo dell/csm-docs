@@ -284,8 +284,8 @@ allowedTopologies:
 ```
 
 **Note** : 
-  The NFS labels are automatically added by the driver for PowerFlex version greater than or equal to 4.0, assuming that NFS dependencies are configured by default. These dependencies come with the default Linux OS package from the node and the array supports NFS.
-  This label should not impact any other functionality, even if NFS is not configured on the array or node.
+- From CSM 1.15 onwards, the CSI driver adds NFS labels to the CSI nodes only after verifying that NFS is enabled on the storage array. This ensures that node labeling accurately reflects the capabilities of the backend storage system.
+- It is assumed that the required NFS dependencies are already present on the node, as these are typically included in standard Linux OS packages by default.
 
 You can check what labels your nodes contain by running
 ```bash
