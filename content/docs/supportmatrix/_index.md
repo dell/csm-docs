@@ -36,7 +36,6 @@ weight: 1
 
 **Notes:**
 - Self-certify unsupported orchestrator platforms/versions using [Cert-CSI](../tooling/cert-csi/). Use platforms that haven't reached end of life.
-- CSM Authorization Server v1 is not supported on Red Hat OpenShift. It can be installed on standard Kubernetes and used with a Dell CSI Driver enabled with CSM Authorization on Red Hat OpenShift.
 - CSM Authorization Server v2 is supported on Red Hat OpenShift.
 
 ## OpenShift Virtualization
@@ -67,24 +66,24 @@ Container Storage Modules doesn't officially support specific operating systems,
 
 ## Helm Compatibility
 {{<table "table table-striped table-bordered table-sm">}}
-| Platform         |  Authorization v1|  Authorization v2 | Replication | Observability | Resiliency | Application Mobility|
-| ------------------ |------------------| --------------- |-----------------|-------------------|----------------|------|
-| PowerStore         |  No      |   No              |  Yes              | Yes                 |    Yes     |No|
-| PowerScale         |  Yes     |   Yes             |  Yes              | Yes                 |    Yes     |No|
-| PowerFlex          |  Yes     |   Yes             |  Yes              | Yes                 |    Yes     |No|
-| PowerMax           |  Yes     |   Yes             |  Yes              | Yes                 |    Yes     |Yes|
-| Unity XT           |  No      |   No              |  No               | No                  |    Yes     |No|
+| Platform         |  Authorization v2 | Replication | Observability | Resiliency |
+| ------------------ |--------------- |-----------------|-------------------|----------------|
+| PowerStore         | Yes              |  Yes              | Yes                 |    Yes     |
+| PowerScale         | Yes             |  Yes              | Yes                 |    Yes     |
+| PowerFlex          | Yes             |  Yes              | Yes                 |    Yes     |
+| PowerMax           | Yes             |  Yes              | Yes                 |    Yes     |
+| Unity XT           | No              |  No               | No                  |    Yes     |
 {{</table>}}
 
 ## Operator Compatibility
 {{<table "table table-striped table-bordered table-sm">}}
-| Platform         |  Authorization v1|  Authorization v2 | Replication | Observability | Resiliency |
-| ------------------ |------------------| --------------|-----------------|-------------------|----------------|
-| PowerStore         |  No      |   No              |  No               | No                  |    Yes     |
-| PowerScale         |  Yes     |   Yes             |  Yes              | Yes                 |    Yes     |
-| PowerFlex          |  Yes     |   Yes             |  Yes              | Yes                 |    Yes     |
-| PowerMax           |  Yes     |   Yes             |  Yes              | Yes                 |    Yes     |
-| Unity XT           |  No      |   No              |  No               | No                  |    No      |
+| Platform         |  Authorization v2 | Replication | Observability | Resiliency |
+| ------------------ | --------------|-----------------|-------------------|----------------|
+| PowerStore         |  Yes             |  No               | No                  |    Yes     |
+| PowerScale         |  Yes             |  Yes              | Yes                 |    Yes     |
+| PowerFlex          |  Yes             |  Yes              | Yes                 |    Yes     |
+| PowerMax           |  Yes             |  Yes              | Yes                 |    Yes     |
+| Unity XT           |  No              |  No               | No                  |    No      |
 {{</table>}}
 
 ## OpenShift Compatibility with Operator
