@@ -183,13 +183,23 @@ helm -n authorization install authorization -f myvalues.yaml charts/csm-authoriz
 
 1. Create a Kubernetes Secret.
 
-   Example Kubernetes Secret
+   Example Secret YAML File named `secret-1.yaml`:
    ```bash
-   INSERT EXAMPLE
+   # Username and password for accessing storage system
+   username: "username"
+   password: "password"
    ```
 
    ```bash
-   INSERT COMMAND
+   kubectl create secret generic secret-1 -n authorization --from-file=secret-1.yaml
+   ```
+
+   If you get the secret in YAML format, you should see something similar to the following:
+   ```bash
+   apiVersion: v1
+   data:
+     secret-1.yaml: <base64-encoded>
+   kind: Secret
    ```
 2. Create the Authorization namespace.
    ```bash
@@ -198,7 +208,7 @@ helm -n authorization install authorization -f myvalues.yaml charts/csm-authoriz
 
 3. Add the Dell Helm Charts repo
    ```bash
-     helm repo add dell https://dell.github.io/helm-charts
+   helm repo add dell https://dell.github.io/helm-charts
    ```
 
 4. Prepare `samples/csm-authorization/config.yaml` which contains the JWT signing secret. The following table lists the configuration parameters.
