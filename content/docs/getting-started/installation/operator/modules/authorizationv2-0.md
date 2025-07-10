@@ -352,6 +352,7 @@ The role needs to be:
 
 ### Write a secret
 
+Given an example below for writing a secret to vault for PowerFlex,
 ```shell
 vault kv put -mount=secret /storage/powerflex/systemid1 username=user password=pass
 ```
