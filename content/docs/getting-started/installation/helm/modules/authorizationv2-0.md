@@ -34,7 +34,7 @@ Only one of the two can be specified at a time.
 
 **Steps**
 
-{{< accordion id="One" title="Using a Secret Provider Class" markdown="true" >}}
+{{< accordion id="secret-provider-class" title="Using a Secret Provider Class" markdown="true" >}}
 
 ## Using a Secret Provider Class
 
@@ -84,7 +84,7 @@ Only one of the two can be specified at a time.
 
 4. Add the Dell Helm Charts repo
    ```bash
-     helm repo add dell https://dell.github.io/helm-charts
+   helm repo add dell https://dell.github.io/helm-charts
    ```
 
 5. Prepare `samples/csm-authorization/config.yaml` which contains the JWT signing secret. The following table lists the configuration parameters.
@@ -176,7 +176,7 @@ helm -n authorization install authorization -f myvalues.yaml charts/csm-authoriz
 ```
 {{< /accordion >}}
 
-{{< accordion id="One" title="Using a Kubernetes Secret" markdown="true" >}}
+{{< accordion id="kubernetes-secret" title="Using a Kubernetes Secret" markdown="true" >}}
 
 ## Using a Kubernetes Secret
 
@@ -190,11 +190,12 @@ helm -n authorization install authorization -f myvalues.yaml charts/csm-authoriz
    password: "password"
    ```
 
+   Use the following command to create the Kubernetes Secret:
    ```bash
    kubectl create secret generic secret-1 -n authorization --from-file=secret-1.yaml
    ```
 
-   If you get the secret in YAML format, you should see something similar to the following:
+   After creating the secret, if you get it in YAML format, you should see something similar to the following:
    ```bash
    apiVersion: v1
    data:
