@@ -1,6 +1,6 @@
 ---
-title: Authorization v1.x
-linkTitle: "Authorization v1.x"
+title: Authorization v2.x
+linkTitle: "Authorization v2.x"
 description: >
 toc_hide: true   
 ---
@@ -74,4 +74,4 @@ This section outlines the upgrade steps for Container Storage Modules (CSM) for 
       - Update the Authorization config version and karavi-authorization-proxy image.
 
 >__Note__:
-> - In Authorization module upgrade, only `n-1` to `n` upgrade is supported, e.g. if the current authorization version is `v1.8.x`, it can be upgraded to `1.9.x`.
+> - In Authorization module upgrade, only `n-1` to `n` upgrade is supported, e.g. if the current authorization version is `v2.1.x`, it can be upgraded to `2.2.x`.

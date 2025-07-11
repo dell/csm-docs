@@ -12,10 +12,8 @@ weight: 1
 |<div style="text-align:left"> PowerMax | {{< version-docs key="PMax_latestVersion" >}} |
 |<div style="text-align:left"> PowerScale | {{< version-docs key="PScale_latestVersion" >}} |
 |<div style="text-align:left"> Unity XT | {{< version-docs key="PUnity_latestVersion" >}} |
-|<div style="text-align:left"> Authorization v1.x | {{< version-docs key="Authv1" >}} |
 |<div style="text-align:left"> Authorization v2.x |{{< version-docs key="Authv2" >}} |
 |<div style="text-align:left"> Observability | {{< version-docs key="Observability" >}} |
 |<div style="text-align:left"> Replication |{{< version-docs key="Replication" >}} |
 |<div style="text-align:left"> Resiliency | {{< version-docs key="Resiliency" >}} |
-| Application Mobility |{{< version-docs key="application-mobility" >}} |
 {{</table>}}

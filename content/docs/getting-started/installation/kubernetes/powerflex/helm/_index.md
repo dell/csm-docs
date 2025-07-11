@@ -175,7 +175,7 @@ Use the below command to replace or update the secret:
 
 7. Download the default values.yaml file
    ```bash
-   cd dell-csi-helm-installer && wget -O myvalues.yaml https://github.com/dell/helm-charts/raw/csi-vxflexos-2.14.0/charts/csi-vxflexos/values.yaml
+   cd dell-csi-helm-installer && wget -O myvalues.yaml https://github.com/dell/helm-charts/raw/csi-vxflexos-2.15.0/charts/csi-vxflexos/values.yaml
    ```
 
 8. If you are using custom images, check the fields under `images` in `my-vxflexos-settings.yaml` to make sure that they are pointing to the correct image repository.
@@ -357,7 +357,6 @@ Starting CSI PowerFlex v1.5, `dell-csi-helm-installer` will not create any Volum
        
 
 {{< cardcontainer >}}
-    {{< customcard link1="./csm-modules/authorizationv1-x"  image="1" title="Authorization v1.x" >}}
 
     {{< customcard link1="./csm-modules/authorizationv2-0"   image="1" title="Authorization v2.0"  >}}
 

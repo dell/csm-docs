@@ -56,12 +56,10 @@ Here is the output of a request to build an offline bundle for the Dell CSM Oper
 
    quay.io/dell/container-storage-modules/csi-isilon:{{< version-docs key="PScale_latestVersion" >}}
    quay.io/dell/container-storage-modules/csi-metadata-retriever:{{< version-docs key="metadata_retriever_latest_version" >}}
-   quay.io/dell/container-storage-modules/csipowermax-reverseproxy:{{< version-docs key="Authv1_PMax_ReverseProxy_ConfigVersion" >}}
    quay.io/dell/container-storage-modules/csi-powermax:{{< version-docs key="PMax_latestVersion" >}}
    quay.io/dell/container-storage-modules/csi-powerstore:{{< version-docs key="PStore_latestVersion" >}}
    quay.io/dell/container-storage-modules/csi-unity:{{< version-docs key="PUnity_latestVersion" >}}
    quay.io/dell/container-storage-modules/csi-vxflexos:{{< version-docs key="PFlex_latestVersion" >}}
-   quay.io/dell/container-storage-modules/csm-authorization-sidecar:{{< version-docs key="Authv1_csm_authorization_sidecar" >}}
    quay.io/dell/container-storage-modules/csm-metrics-powerflex:{{< version-docs key="Observability_csm_metrics_PFlex_image" >}}
    quay.io/dell/container-storage-modules/csm-metrics-powerscale:{{< version-docs key="Observability_csm_metrics_PScale_image" >}}
    quay.io/dell/container-storage-modules/csm-topology:{{< version-docs key="Observability_csm_topology_image" >}}

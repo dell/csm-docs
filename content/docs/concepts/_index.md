@@ -15,7 +15,6 @@ weight: 3
       {{< customcard  link="./replication" title="Replication"  imageNumber="6">}}
       {{< customcard  link="./resiliency" title="Resiliency"  imageNumber="6">}}
       {{< customcard  link="./snapshots" title="Snapshots"  imageNumber="6">}}
-      {{< customcard  link="./applicationmobility" title="Application Mobility"  imageNumber="6">}}
       {{< customcard  link="./cosidriver"  title="Container Storage Modules with COSI" imageNumber="6" >}}
 
 {{< /cardcontainer >}}
