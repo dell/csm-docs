@@ -12,7 +12,7 @@ on:
   workflow_dispatch:  # Allows manual trigger
     inputs:
       version:
-        description: 'Semantic version of the latest CSM milestone. Ex: v1.14.1'
+        description: 'Semantic version of the latest CSM milestone. Ex: v1.14.0'
         required: false
         type: string
 
