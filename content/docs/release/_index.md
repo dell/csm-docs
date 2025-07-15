@@ -70,6 +70,9 @@ Description: >
 - [#1736 - [BUG]: failed to provision volume with StorageClass error generating accessibility requirements: no available topology found](https://github.com/dell/csm/issues/1736)
 - [#1762 - [BUG]: CSM Operator samples are incomplete](https://github.com/dell/csm/issues/1762)
 - [#1861 - [BUG]: Update the OTEL image version in operator and helm sample files](https://github.com/dell/csm/issues/1861)
+- [#1930 - [BUG]: Update the OTEL image version in operator and helm sample files](https://github.com/dell/csm/issues/1930)
+- [#1896 - [BUG]: Update the OTEL image version in operator and helm sample files](https://github.com/dell/csm/issues/1896)
+
 
 ### Known Issues
 
