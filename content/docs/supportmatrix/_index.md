@@ -95,8 +95,9 @@ Container Storage Modules doesn't officially support specific operating systems,
 |  4.14       | 1.4.4, 1.5.1, 1.6.1, 1.7.0, 1.8.1, 1.9.0 |1.9.4, 1.10.2, 1.11.1, 1.12, 1.13.1, 1.14 |
 |  4.15       | 1.5.1, 1.6.1, 1.7.0, 1.8.1, 1.9.0        |1.10.2, 1.11.1, 1.12, 1.13.1, 1.14        |
 |  4.16       | 1.6.1, 1.7.0, 1.8.1, 1.9.0               |1.11.1, 1.12, 1.13.1, 1.14                |
-|  4.17       | 1.6.1, 1.7.0, 1.8.1, 1.9.0               |1.11.1, 1.12, 1.13.1, 1.14                |
-|  4.18       | 1.6.1, 1.7.0, 1.8.1, 1.9.0               |1.11.1, 1.12, 1.13.1, 1.14                |
+|  4.17       | 1.6.1, 1.7.0, 1.8.1, 1.9.0               |1.11.1, 1.12, 1.13.1, 1.14.1              |
+|  4.18       | 1.6.1, 1.7.0, 1.8.1, 1.9.1               |1.11.1, 1.12, 1.13.1, 1.14.1              |
+|  4.19       | 1.6.1, 1.7.0, 1.8.1, 1.9.1               |1.11.1, 1.12, 1.13.1, 1.14.1              |
 {{</table>}}
 **Note:**
 - [Refer](#supported-container-orchestrator-platforms) our supported Orchestration platform. While the Operator may be displayed, it does not necessarily mean it has been fully qualified by us. If desired, customers can upgrade the Operator and self-certify it.
