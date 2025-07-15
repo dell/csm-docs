@@ -180,8 +180,12 @@ helm -n authorization install authorization -f myvalues.yaml charts/csm-authoriz
 
 ## Using a Kubernetes Secret
 
+1. Create the Authorization namespace.
+   ```bash
+   kubectl create namespace authorization
+   ```
 
-1. Create a Kubernetes Secret.
+2. Create a Kubernetes Secret.
 
    Example Secret YAML File named `secret-1.yaml`:
    ```bash
@@ -201,10 +205,6 @@ helm -n authorization install authorization -f myvalues.yaml charts/csm-authoriz
    data:
      secret-1.yaml: <base64-encoded>
    kind: Secret
-   ```
-2. Create the Authorization namespace.
-   ```bash
-   kubectl create namespace authorization
    ```
 
 3. Add the Dell Helm Charts repo
