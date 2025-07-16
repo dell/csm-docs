@@ -31,8 +31,8 @@ spec:
       #   true: enable storage capacity tracking
       #   false: disable storage capacity tracking
       storageCapacity: $STORAGE_CAPACITY_ENABLED
-    # Config version for CSI PowerMax v2.12.0 driver
-    configVersion: v2.12.0
+    # Config version for CSI PowerMax v2.15.0 driver
+    configVersion: v2.15.0
     # replica: Define the number of PowerMax controller nodes
     # to deploy to the Kubernetes release
     # Allowed values: n, where n > 0
@@ -41,11 +41,10 @@ spec:
     # Default credential secret for Powermax, if not set it to ""
     authSecret: powermax-creds
     dnsPolicy: ClusterFirstWithHostNet
-    forceUpdate: false
     forceRemoveDriver: true
     common:
-      # Image for CSI PowerMax driver v2.12.0
-      image: quay.io/dell/container-storage-modules/csi-powermax:v2.12.0
+      # Image for CSI PowerMax driver v2.15.0
+      image: quay.io/dell/container-storage-modules/csi-powermax:v2.15.0
       # imagePullPolicy: Policy to determine if the image should be pulled prior to starting the container.
       # Allowed values:
       #  Always: Always pull the image.
@@ -123,6 +122,13 @@ spec:
         # Default value: "" <empty>
         - name: "X_CSI_VCENTER_HOST"
           value: "$VSPHERE_VCENTER_HOST"
+        # X_CSI_REVPROXY_USE_SECRET: Define whether or not to use the new secret format for the reverse proxy.
+        # Allowed values:
+        #   "true" - Use secret format for the reverse proxy
+        #   "false" - Use configmap format for the reverse proxy
+        # Default value: "false"
+        - name: "X_CSI_REVPROXY_USE_SECRET"
+          value: "$REVPROXY_USE_SECRET"
     controller:
       envs:
         # X_CSI_HEALTH_MONITOR_ENABLED: Enable/Disable health monitor of CSI volumes from node plugin- volume usage, volume condition
@@ -222,18 +228,18 @@ spec:
     sideCars:
       # 'csivol' represents a string prepended to each volume created by the CSI driver
       - name: provisioner
-        image: registry.k8s.io/sig-storage/csi-provisioner:v5.1.0
+        image: registry.k8s.io/sig-storage/csi-provisioner:v5.2.0
         args: ["--volume-name-prefix=$VOLUME_NAME_PREFIX"]
       - name: attacher
-        image: registry.k8s.io/sig-storage/csi-attacher:v4.7.0
+        image: registry.k8s.io/sig-storage/csi-attacher:v4.8.1
       - name: registrar
-        image: registry.k8s.io/sig-storage/csi-node-driver-registrar:v2.12.0
+        image: registry.k8s.io/sig-storage/csi-node-driver-registrar:v2.13.0
       - name: resizer
-        image: registry.k8s.io/sig-storage/csi-resizer:v1.12.0
+        image: registry.k8s.io/sig-storage/csi-resizer:v1.13.2
       - name: snapshotter
-        image: registry.k8s.io/sig-storage/csi-snapshotter:v8.1.0
+        image: registry.k8s.io/sig-storage/csi-snapshotter:v8.2.1
       - name: csi-metadata-retriever
-        image: quay.io/dell/container-storage-modules/csi-metadata-retriever:v1.9.0
+        image: quay.io/dell/container-storage-modules/csi-metadata-retriever:v1.11.0
       # health monitor is disabled by default, refer to driver documentation before enabling it
       - name: external-health-monitor
         enabled: $HEALTH_MONITOR_ENABLED
@@ -250,14 +256,14 @@ spec:
     - name: csireverseproxy
       # enabled: Always set to true
       enabled: true
-      configVersion: v2.11.0
+      configVersion: v2.14.0
       forceRemoveModule: true
       components:
       - name: csipowermax-reverseproxy
       # image: Define the container images used for the reverse proxy
       # Default value: None
-      # Example: "csipowermax-reverseproxy:v2.11.0"
-        image: quay.io/dell/container-storage-modules/csipowermax-reverseproxy:v2.11.0
+      # Example: "csipowermax-reverseproxy:v2.14.0"
+        image: quay.io/dell/container-storage-modules/csipowermax-reverseproxy:v2.14.0
         envs:
           # "tlsSecret" defines the TLS secret that is created with certificate
           # and its associated key
@@ -275,10 +281,10 @@ spec:
     - name: authorization
       # enabled: Enable/Disable csm-authorization
       enabled: $AUTHORIZATION_ENABLED
-      configVersion: v1.12.0
+      configVersion: v2.2.0
       components:
       - name: karavi-authorization-proxy
-        image: quay.io/dell/container-storage-modules/csm-authorization-sidecar:v1.12.0
+        image: quay.io/dell/container-storage-modules/csm-authorization-sidecar:v2.2.0
         envs:
           # proxyHost: hostname of the csm-authorization server
           - name: "PROXY_HOST"
@@ -296,13 +302,13 @@ spec:
       #   false: disable replication feature(do not install dell-csi-replicator sidecar)
       # Default value: false
       enabled: $REPLICATION_ENABLED
-      configVersion: v1.10.0
+      configVersion: v1.12.0
       components:
       - name: dell-csi-replicator
         # image: Image to use for dell-csi-replicator. This shouldn't be changed
         # Allowed values: string
         # Default value: None
-        image: quay.io/dell/container-storage-modules/dell-csi-replicator:v1.10.0
+        image: quay.io/dell/container-storage-modules/dell-csi-replicator:v1.12.0
         envs:
           # replicationPrefix: prefix to prepend to storage classes parameters
           # Allowed values: string
@@ -318,7 +324,7 @@ spec:
       - name: dell-replication-controller-manager
         # image: Defines controller image. This shouldn't be changed
         # Allowed values: string
-        image: quay.io/dell/container-storage-modules/dell-replication-controller:v1.10.0
+        image: quay.io/dell/container-storage-modules/dell-replication-controller:v1.12.0
         envs:
           # TARGET_CLUSTERS_IDS: comma separated list of cluster IDs of the targets clusters. DO NOT include the source(wherever CSM Operator is deployed) cluster ID
           # Set the value to "self" in case of stretched/single cluster configuration
@@ -349,14 +355,14 @@ spec:
     - name: observability
       # enabled: Enable/Disable observability
       enabled: $OBSERVABILITY_OPERATOR_ENABLED
-      configVersion: v1.10.0
+      configVersion: v1.12.0
       components:
       - name: topology
         # enabled: Enable/Disable topology
         enabled: $OBSERVABILITY_OPERATOR_TOPOLOGY
         # image: Defines karavi-topology image. This shouldn't be changed
         # Allowed values: string
-        image: quay.io/dell/container-storage-modules/csm-topology:v1.10.0
+        image: quay.io/dell/container-storage-modules/csm-topology:v1.12.0
         envs:
           # topology log level
           # Valid values: TRACE, DEBUG, INFO, WARN, ERROR, FATAL, PANIC
@@ -369,7 +375,7 @@ spec:
         enabled: $OBSERVABILITY_OPERATOR_OTEL
         # image: Defines otel-collector image. This shouldn't be changed
         # Allowed values: string
-        image: otel/opentelemetry-collector:0.42.0
+        image: ghcr.io/open-telemetry/opentelemetry-collector-releases/opentelemetry-collector:0.124.0
         envs:
           # image of nginx proxy image
           # Allowed values: string
@@ -381,7 +387,7 @@ spec:
         # enabled: Enable/Disable PowerMax metrics
         enabled: $OBSERVABILITY_OPERATOR_METRICS
         # image: Defines PowerMax metrics image. This shouldn't be changed
-        image: quay.io/dell/container-storage-modules/csm-metrics-powermax:v1.5.0
+        image: quay.io/dell/container-storage-modules/csm-metrics-powermax:v1.7.0
         envs:
           # POWERMAX_MAX_CONCURRENT_QUERIES: set the default max concurrent queries to PowerMax
           # Allowed values: int
@@ -433,10 +439,10 @@ spec:
       #   false: disable Resiliency feature(do not deploy podmon sidecar)
       # Default value: false
       enabled: $OPERATOR_RESILIENCY_ENABLED
-      configVersion: v1.11.0
+      configVersion: v1.13.0
       components:
         - name: podmon-controller
-          image: quay.io/dell/container-storage-modules/podmon:v1.11.0
+          image: quay.io/dell/container-storage-modules/podmon:v1.13.0
           imagePullPolicy: IfNotPresent
           args:
             - "--labelvalue=$LABEL_VALUE"
@@ -451,7 +457,7 @@ spec:
             - "--driver-config-params=/powermax-config-params/driver-config-params.yaml"
             - "--driverPath=csi-powermax.dellemc.com"
         - name: podmon-node
-          image: quay.io/dell/container-storage-modules/podmon:v1.11.0
+          image: quay.io/dell/container-storage-modules/podmon:v1.13.0
           imagePullPolicy: IfNotPresent
           envs:
             # podmonAPIPort: Defines the port to be used within the kubernetes cluster

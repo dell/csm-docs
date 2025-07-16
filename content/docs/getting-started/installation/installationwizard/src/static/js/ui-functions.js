@@ -419,9 +419,7 @@ function displayModules(installationType, driverName, CONSTANTS_PARAM) {
 
 
 	switch (driverName) {
-		case CONSTANTS_PARAM.POWERSTORE:
-			$(".authorization").hide();
-			$("#authorization").prop('checked', false);
+		case CONSTANTS_PARAM.POWERSTORE:			
 			$(".storage-capacity").show();
 			$(".resiliency").show();
 			if (document.getElementById("csm-version").value !== "1.7.0") {
