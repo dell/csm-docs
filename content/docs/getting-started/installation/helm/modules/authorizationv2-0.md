@@ -185,7 +185,7 @@ helm -n authorization install authorization -f myvalues.yaml charts/csm-authoriz
    kubectl create namespace authorization
    ```
 
-2. Create a Kubernetes Secret.
+2. Create a Kubernetes Secret containing storage system credentials.
 
    Example Secret YAML File named `secret-1.yaml`:
    ```bash
@@ -280,7 +280,7 @@ helm -n authorization install authorization -f myvalues.yaml charts/csm-authoriz
 | images.redis                        | The image to use for Redis.                                                                                            | Yes      | redis:7.4.0-alpine                                                                                                           |
 | images.commander                    | The image to use for Redis Commander.                                                                                  | Yes      | rediscommander/redis-commander:latest                                                                                        |
 | **storageSystemCredentials**        | This section configures the storageSystemCredentials.                                                                  | -        | -                                                                                                                            |
-| secrets               | A name that is used to identify a kubernetes secret.                                                          | Yes      | -                                                                                                                            |
+| secrets               | A name that is used to identify a kubernetes Secret.                                                          | Yes      | -                                                                                                                            |
 {{< /collapse >}}
 </ul>
 
