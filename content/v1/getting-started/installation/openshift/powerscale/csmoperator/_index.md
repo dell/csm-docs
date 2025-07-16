@@ -193,10 +193,10 @@ dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      
  
     <br>
 
-    Edit the file, then run the command to create the `isilon-config`.
+    Edit the file, then run the command to create the `isilon-creds`.
 
     ```bash
-    oc create secret generic isilon-config --from-file=config=config.yaml -n isilon --dry-run=client -oyaml > secret-isilon-config.yaml
+    oc create secret generic isilon-creds --from-file=config=config.yaml -n isilon --dry-run=client -oyaml > secret-isilon-config.yaml
     ```
     
     Use this command to **create** the config:
@@ -269,7 +269,7 @@ dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      
       driver:
         csiDriverType: "isilon"
         configVersion: {{< version-v1 key="PScale_latestVersion" >}}
-        authSecret: isilon-config
+        authSecret: isilon-creds
         common:
           envs:
             - name: X_CSI_ISI_AUTH_TYPE
