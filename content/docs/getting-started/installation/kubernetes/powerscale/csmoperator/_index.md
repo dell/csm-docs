@@ -204,7 +204,6 @@ The driver and modules versions installable with the Container Storage Modules O
 {{< /markdownify >}}
 <br>   
 {{< cardcontainer >}}
-    {{< customcard link1="./csm-modules/authorizationv1-x"  image="6" title="Authorization v1.x" >}}
 
     {{< customcard link1="./csm-modules/authorizationv2-0"   image="6" title="Authorization v2.0"  >}}
 

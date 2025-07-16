@@ -69,9 +69,9 @@ const CONSTANTS = {
 	PROPERTIES: ".properties",
 	HELM: "helm",
 	OPERATOR: "operator",
-	CSM_HELM_V1120: "1.5.0",
 	CSM_HELM_V1130: "1.6.0",
 	CSM_HELM_V1140: "1.7.0",
+	CSM_HELM_V1150: "1.8.0",
 };
 
 describe("GIVEN onAuthorizationChange function", () => {
@@ -763,7 +763,7 @@ describe("GIVEN displayCommands function", () => {
 		expect($("#command-title").text()).toEqual("Run the following commands to install");
 		expect($("#command-note").text()).toEqual("Ensure that the namespaces and secrets are created before installing the helm chart");
 		expect($("#command1").text()).toEqual("helm repo add dell https://dell.github.io/helm-charts");
-		expect($("#command2").text()).toEqual("helm install powerstore dell/container-storage-modules -n csi-powerstore --version 1.5.0 -f values.yaml");
+		expect($("#command2").text()).toEqual("helm install powerstore dell/container-storage-modules -n csi-powerstore --version 1.8.0 -f values.yaml");
 	});
 
 	test("SHOULD show expected commands: Installation Type: Operator", () => {
