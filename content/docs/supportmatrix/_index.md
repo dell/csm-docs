@@ -29,8 +29,8 @@ weight: 1
 {{<table "table table-striped table-bordered table-sm tdleft">}}
 | Platform                   | Version          |
 |----------------------------|:----------------:|
-| Kubernetes                 | 1.30, 1.31, 1.32 |
-| Red Hat OpenShift          | 4.17, 4.18       |
+| Kubernetes                 | 1.31, 1.32, 1.33 |
+| Red Hat OpenShift          | 4.18, 4.19       |
 | Mirantis Kubernetes Engine | 3.7.x            |
 {{</table>}}
 
@@ -43,7 +43,7 @@ weight: 1
 {{<table "table table-striped table-bordered table-sm">}}
 | Version | Capability               | PowerFlex | PowerMax | PowerStore | PowerScale | Unity |
 |---------|--------------------------| :-------: | :------: | :--------: | :--------: | :---: |
-| 4.17 - 4.18    |  <div style="text-align: left"> [Storage](https://github.com/kiagnose/kubevirt-storage-checkup) </div> | Yes       | Yes      | Yes        | Yes        | No    |
+| 4.18 - 4.19    |  <div style="text-align: left"> [Storage](https://github.com/kiagnose/kubevirt-storage-checkup) </div> | Yes       | Yes      | Yes        | Yes        | No    |
 | 4.17 - 4.18   | <div style="text-align: left">  Observability        </div>   | Yes       | Yes      | No         | Yes        | No    |
 | 4.17 - 4.18    | <div style="text-align: left"> Authorization - v2.x  </div>   | Yes       | Yes      | No         | Yes        | No    |
 | 4.17 - 4.18    | <div style="text-align: left"> Resiliency            </div>   | Yes       | Yes      | Yes         | Yes        | No    |
@@ -95,8 +95,9 @@ Container Storage Modules doesn't officially support specific operating systems,
 |  4.14       | 1.4.4, 1.5.1, 1.6.1, 1.7.0, 1.8.1, 1.9.0 |1.9.4, 1.10.2, 1.11.1, 1.12, 1.13.1, 1.14 |
 |  4.15       | 1.5.1, 1.6.1, 1.7.0, 1.8.1, 1.9.0        |1.10.2, 1.11.1, 1.12, 1.13.1, 1.14        |
 |  4.16       | 1.6.1, 1.7.0, 1.8.1, 1.9.0               |1.11.1, 1.12, 1.13.1, 1.14                |
-|  4.17       | 1.6.1, 1.7.0, 1.8.1, 1.9.0               |1.11.1, 1.12, 1.13.1, 1.14                |
-|  4.18       | 1.6.1, 1.7.0, 1.8.1, 1.9.0               |1.11.1, 1.12, 1.13.1, 1.14                |
+|  4.17       | 1.6.1, 1.7.0, 1.8.1, 1.9.0               |1.11.1, 1.12, 1.13.1, 1.14.1              |
+|  4.18       | 1.6.1, 1.7.0, 1.8.1, 1.9.1               |1.11.1, 1.12, 1.13.1, 1.14.1              |
+|  4.19       | 1.6.1, 1.7.0, 1.8.1, 1.9.1               |1.11.1, 1.12, 1.13.1, 1.14.1              |
 {{</table>}}
 **Note:**
 - [Refer](#supported-container-orchestrator-platforms) our supported Orchestration platform. While the Operator may be displayed, it does not necessarily mean it has been fully qualified by us. If desired, customers can upgrade the Operator and self-certify it.
