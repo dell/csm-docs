@@ -30,7 +30,7 @@ This feature deploys the SDC kernel modules on all nodes using an init container
 Set the `X_CSI_SDC_ENABLED` value in the CR file. By default, SDC is enabled.
 
 -  **Manual Deployment:**
-For unsupported OS versions, follow the manual SDC deployment steps. Refer to https://hub.docker.com/r/dellemc/sdc for supported versions.
+For unsupported OS versions, follow the manual SDC deployment steps.  Refer to https://quay.io/repository/dell/storage/powerflex/sdc for supported OS versions.
 
 - **MDM Value:**
 The operator sets the MDM value for initContainers in the driver CR from the `mdm` attributes in `config.yaml`. Do not set this manually.
