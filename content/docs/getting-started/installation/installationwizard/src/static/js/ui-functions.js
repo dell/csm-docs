@@ -425,9 +425,13 @@ function displayModules(installationType, driverName, CONSTANTS_PARAM) {
 			if (document.getElementById("csm-version").value !== "1.7.0") {
 				$(".max-volumes-per-node").show();
 			}
-   if (isVersionGreaterOrEqualTo(document.getElementById("csm-version").value,"1.14.0")) {
-	   $(".vgsnapshot").hide();
-   }
+			if (isVersionGreaterOrEqualTo(document.getElementById("csm-version").value,"1.14.0")) {
+				$(".vgsnapshot").hide();
+			}
+			if (!(isVersionGreaterOrEqualTo(document.getElementById("csm-version").value,"1.15.0"))) {
+				$(".authorization").hide();
+				$("#authorization").prop('checked', false);
+			}
 			document.getElementById("driver-namespace").value = CONSTANTS_PARAM.POWERSTORE_NAMESPACE;
 			if (isVersionGreaterOrEqualTo(document.getElementById("csm-version").value, "1.14.0")) {
 				$(".multi-nas-failure-threshold").show();
