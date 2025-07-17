@@ -93,6 +93,7 @@ The following third-party components are optionally installed in the specified n
 | logLevel                            | Authorization log level. Allowed values: “error”, “warn”/“warning”, “info”, “debug”.                                                 | Yes      | debug                                     |
 | concurrentPowerFlexRequests         | Number of concurrent requests to PowerFlex. Used with dellctl to list tenant volumes.                                                | Yes      | 10                                        |
 | concurrentPowerScaleRequests        | Number of concurrent requests to PowerScale. Used with dellctl to list tenant volumes.                                               | Yes      | 10                                        |
+| concurrentPowerStoreRequests        | Number of concurrent requests to PowerStore. Used with dellctl to list tenant volumes.                                               | Yes      | 10                                        |
 | zipkin.collectoruri                 | The URI of the Zipkin instance to export traces.                                                                                     | No       | -                                         |
 | zipkin.probability                  | The ratio of traces to export.                                                                                                       | No       | -                                         |
 | proxyServerIngress.ingressClassName | The ingressClassName of the proxy-service Ingress.                                                                                   | Yes      | -                                         |
@@ -153,6 +154,8 @@ Follow the instructions available in Authorization for
 {{< hide id="2" >}}- [Configuring PowerMax with Authorization](docs/concepts/authorization/v2.x/configuration/powermax).{{< /hide >}} 
 
 {{< hide id="3" >}}- [Configuring PowerScale with Authorization](docs/concepts/authorization/v2.x/configuration/powerscale).{{< /hide >}}
+
+{{< hide id="3" >}}- [Configuring PowerStore with Authorization](docs/concepts/authorization/v2.x/configuration/powerstore).{{< /hide >}}
 
 ## Updating Container Storage Modules for Authorization Proxy Server Configuration
 

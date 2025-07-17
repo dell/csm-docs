@@ -25,6 +25,8 @@ weight: 5
 
       {{< customcard  link="../../../../../concepts/resiliency/troubleshooting"   imageNumber="1" title="Resiliency"  >}}
 
+      {{< customcard  link="../../../../../concepts/authorization/troubleshooting"   imageNumber="1" title="Authorization"  >}}
+
 {{< /cardcontainer >}}
 
 
