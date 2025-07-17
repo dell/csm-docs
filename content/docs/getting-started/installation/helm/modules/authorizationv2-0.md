@@ -155,7 +155,7 @@ Follow the instructions available in Authorization for
 
 {{< hide id="3" >}}- [Configuring PowerScale with Authorization](docs/concepts/authorization/v2.x/configuration/powerscale).{{< /hide >}}
 
-{{< hide id="3" >}}- [Configuring PowerStore with Authorization](docs/concepts/authorization/v2.x/configuration/powerscale).{{< /hide >}}
+{{< hide id="3" >}}- [Configuring PowerStore with Authorization](docs/concepts/authorization/v2.x/configuration/powerstore).{{< /hide >}}
 
 ## Updating Container Storage Modules for Authorization Proxy Server Configuration
 
