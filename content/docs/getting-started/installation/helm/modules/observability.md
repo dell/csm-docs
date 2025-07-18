@@ -235,6 +235,8 @@ The following table lists the configurable parameters of the Container Storage M
 | `karaviMetricsPowerstore.volumePollFrequencySeconds` | The polling frequency (in seconds) to gather volume metrics | `10` |
 | `karaviMetricsPowerstore.concurrentPowerstoreQueries` | The number of simultaneous metrics queries to make to PowerStore (must be less than 10; otherwise, several request errors from PowerStore will ensue.) | `10` |
 | `karaviMetricsPowerstore.volumeMetricsEnabled` | Enable PowerStore Volume Metrics Collection | `true` |
+| `karaviMetricsPowerstore.topologyMetricsEnabled` | Enable PowerStore Topology Metrics Collection | `true` |
+| `karaviMetricsPowerstore.topologyMetricsPollFrequencySeconds` | The polling frequency (in seconds) to gather topology metrics | `30` |
 | `karaviMetricsPowerstore.endpoint` | Endpoint for pod leader election | `karavi-metrics-powerstore` |
 | `karaviMetricsPowerstore.service.type` | Kubernetes service type | `ClusterIP` |
 | `karaviMetricsPowerstore.logLevel` | Output logs that are at or above the given log level severity (Valid values: TRACE, DEBUG, INFO, WARN, ERROR, FATAL, PANIC) | `INFO`|
