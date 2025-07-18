@@ -12,13 +12,12 @@ description: >
 Storage system credentials can be provided in one of two ways:
 1. Using a SecretProviderClass (for dynamic secrets from external providers)
 2. Using a Kubernetes Secret (for static credentials)
+
 Only one of the two can be specified at a time.
 
 {{< accordion id="secret-provider-class" title="Using a Secret Provider Class" markdown="true" >}}
 
 ## Using a Secret Provider Class
-
-### Prerequisite
 
 1. Install a supported [External Secret Provider](https://secrets-store-csi-driver.sigs.k8s.io/getting-started/installation#install-external-secret-providers) to integrate with the Secrets Store CSI Driver. For guidance on setting up Vault, refer to our [Vault installation guide](docs/getting-started/installation/operator/modules/authorizationv2-0#vault-csi-provider-installation).
 2. Install the [Secrets Store CSI Driver](https://secrets-store-csi-driver.sigs.k8s.io/getting-started/installation) enabling the [`Sync as Kubernetes Secret`](https://secrets-store-csi-driver.sigs.k8s.io/topics/sync-as-kubernetes-secret) and [`Secret Auto Rotation`](https://secrets-store-csi-driver.sigs.k8s.io/topics/secret-auto-rotation) features.
@@ -52,123 +51,16 @@ Only one of the two can be specified at a time.
         # "secretPath" is the path in Vault where the secret should be retrieved.
         # "secretKey" is the key within the Vault secret response to extract a value from.
    ```
-
-4. Execute `kubectl create namespace authorization` to create the authorization namespace (if not already present). Note that the namespace can be any user-defined name, in this example, we assume that the namespace is 'authorization'.
-
-    For OpenShift environments:
-   ```bash
-   kubectl label namespace authorization \
-    pod-security.kubernetes.io/enforce=privileged \
-    security.openshift.io/MinimallySufficientPodSecurityStandard=privileged \
-    --overwrite
-   ```
-
-5. Install cert-manager CRDs
-    ```bash
-    kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v1.11.0/cert-manager.crds.yaml
-    ```
-
-6. Prepare [samples/authorization/config.yaml](https://github.com/dell/csm-operator/blob/main/samples/authorization/config.yaml) which contains the JWT signing secret. The following table lists the configuration parameters.
-
-    | Parameter            | Description                         | Required | Default |
-    | -------------------- | ----------------------------------- | -------- | ------- |
-    | web.jwtsigningsecret | String used to sign JSON Web Tokens | true     | secret  | . |
-
-    Example:
-
-    ```yaml
-    web:
-      jwtsigningsecret: randomString123
-    ```
-
-    After editing the file, run this command to create a secret called `karavi-config-secret`:
-
-    ```bash
-    kubectl create secret generic karavi-config-secret -n authorization --from-file=config.yaml=samples/authorization/config.yaml
-    ```
-
-    Use this command to replace or update the secret:
-
-    ```bash
-    kubectl create secret generic karavi-config-secret -n authorization --from-file=config.yaml=samples/authorization/config.yaml -o yaml --dry-run=client | kubectl replace -f -
-    ```
-
-
->__Note__:
-> - If you are installing Authorization in a different namespace than `authorization`, edit the `namespace` field in this file to your namespace.
-
-
-### Install Container Storage Modules Authorization Proxy Server
-
-
-
-1. Create a CR (Custom Resource) for Authorization from a [sample manifest](https://github.com/dell/csm-operator/blob/main/samples/authorization/csm_authorization_proxy_server_v230.yaml). This file can be modified to use custom parameters if needed.
-
-2. Users should configure the parameters in the CR. This table lists the primary configurable parameters of the Authorization Proxy Server and their default values:
-
-<ul>
-{{< collapse title="Parameters" id="1">}}
-   | Parameter                           | Description                                                                                                                                                          | Required | Default               |
-   | ----------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | --------------------- |
-   | **nginx**                           | This section configures the enablement of the NGINX Ingress Controller.                                                                                              | -        | -                     |
-   | enabled                             | For Kubernetes Container Platform only: Enable/Disable deployment of the NGINX Ingress Controller. Set to false if you already have an Ingress Controller installed. | No       | true                  |
-   | **cert-manager**                    | This section configures the enablement of cert-manager.                                                                                                              | -        | -                     |
-   | enabled                             | Enable/Disable deployment of cert-manager. Set to false if you already have cert-manager installed.                                                                  | No       | true                  |
-   | **authorization**                   | This section configures the CSM-Authorization components.                                                                                                            | -        | -                     |
-   | certificate                         | The base64-encoded certificate for the certificate/private-key to configure the proxy-service Ingress. Leave empty to use self-signed certificate.                   | No       | -                     |
-   | privateKey                          | The base64-encoded private key for the certificate/private-key to configure the proxy-service Ingress. Leave empty to use self-signed certificate.                   | No       | -                     |
-   | hostname                            | The hostname to configure the self-signed certificate (if applicable), and the proxy service Ingress.                                                                | No       | csm-authorization.com |
-   | proxyServerIngress.ingressClassName | The ingressClassName of the proxy-service Ingress.                                                                                                                   | Yes      | nginx                 |
-   | proxyServerIngress.hosts            | Additional host rules to be applied to the proxy-service Ingress.                                                                                                    | No       | -                     |
-   | proxyServerIngress.annotations      | Additional annotations for the proxy-service Ingress.                                                                                                                | No       | -                     |
-{{< /collapse >}}
-{{< collapse title="Additional v2.0 Parameters" >}}
-   | Parameter                    | Description                                                                                                | Required | Default        |
-   | ---------------------------- | ---------------------------------------------------------------------------------------------------------- | -------- | -------------- |
-   | **redis**                    | This section configures the Redis components.                                                              | -        | -              |
-   | redisName                    | The prefix of the redis pods. The number of pods is determined by the number of replicas.                  | Yes      | redis-csm      |
-   | redisCommander               | The prefix of the redis commander pod.                                                                     | Yes      | rediscommander |
-   | sentinel                     | The prefix of the redis sentinel pods. The number of pods is determined by the number of replicas.         | Yes      | sentinel       |
-   | redisReplicas                | The number of replicas for the sentinel and redis pods.                                                    | Yes      | 5              |
-   | storageclass                 | The storage class for Redis to use for persistence. If not supplied, a locally provisioned volume is used. | No       | -              |
-   | **storageSystemCredentials** | This section configures the storageSystemCredentials.                                                      | -        | -              |
-   | secretProviderClasses        | A name that is used to identify a secretProviderClass object.                                              | Yes      | -              |
-{{< /collapse >}}
-
-
->__Note__:
-> - If you are installing Authorization in a different namespace than `authorization`, edit the `namespace` fields in this file to your namespace.
-> - If you specify `storageclass`, the storage class must NOT be provisioned by the Dell CSI Driver to be configured with this installation of Authorization.
-
-**Optional:**
-To enable reporting of trace data with [Zipkin](https://zipkin.io/), use the `csm-config-params` configMap in the sample CR or dynamically by editing the configMap.
-
-  Add the Zipkin values to the configMap where `ZIPKIN_ADDRESS` is the IP address or hostname of the Zipkin server.
-  ```bash
-  ZIPKIN_URI: "http://ZIPKIN_ADDRESS:9411/api/v2/spans"
-  ZIPKIN_PROBABILITY: "1.0"
-  ```
-
-</ul>
-
-3. Execute this command to create the Authorization CR:
-
-    ```bash
-    kubectl create -f <SAMPLE FILE>
-    ```
-
-  >__Note__:
-  > - This command will deploy the Authorization Proxy Server in the namespace specified in the input YAML file.
-
 {{< /accordion >}}
 
 {{< accordion id="kubernetes-secret" title="Using a Kubernetes Secret" markdown="true" >}}
 
 ## Using a Kubernetes Secret
 
-### Prerequisite
-
-1. Execute `kubectl create namespace authorization` to create the authorization namespace (if not already present). Note that the namespace can be any user-defined name, in this example, we assume that the namespace is 'authorization'.
+1. Create the Authorization namespace.
+   ```bash
+   kubectl create namespace authorization
+   ```
 
 2. Create a Kubernetes Secret containing storage system credentials.
 
@@ -191,13 +83,26 @@ To enable reporting of trace data with [Zipkin](https://zipkin.io/), use the `cs
      secret-1.yaml: <base64-encoded>
    kind: Secret
    ```
+{{< /accordion >}}
 
-3. Install cert-manager CRDs
+Continue installation with the remaining steps:
+
+1. Execute `kubectl create namespace authorization` to create the authorization namespace (if not already present). Note that the namespace can be any user-defined name, in this example, we assume that the namespace is 'authorization'.
+
+    For OpenShift environments:
+   ```bash
+   kubectl label namespace authorization \
+    pod-security.kubernetes.io/enforce=privileged \
+    security.openshift.io/MinimallySufficientPodSecurityStandard=privileged \
+    --overwrite
+   ```
+
+2. Install cert-manager CRDs
     ```bash
     kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v1.11.0/cert-manager.crds.yaml
     ```
 
-4. Prepare [samples/authorization/config.yaml](https://github.com/dell/csm-operator/blob/main/samples/authorization/config.yaml) which contains the JWT signing secret. The following table lists the configuration parameters.
+3. Prepare [samples/authorization/config.yaml](https://github.com/dell/csm-operator/blob/main/samples/authorization/config.yaml) which contains the JWT signing secret. The following table lists the configuration parameters.
 
     | Parameter            | Description                         | Required | Default |
     | -------------------- | ----------------------------------- | -------- | ------- |
@@ -229,8 +134,6 @@ To enable reporting of trace data with [Zipkin](https://zipkin.io/), use the `cs
 
 ### Install Container Storage Modules Authorization Proxy Server
 
-
-
 1. Create a CR (Custom Resource) for Authorization from a [sample manifest](https://github.com/dell/csm-operator/blob/main/samples/authorization/csm_authorization_proxy_server_v230.yaml). This file can be modified to use custom parameters if needed.
 
 2. Users should configure the parameters in the CR. This table lists the primary configurable parameters of the Authorization Proxy Server and their default values:
@@ -252,16 +155,17 @@ To enable reporting of trace data with [Zipkin](https://zipkin.io/), use the `cs
    | proxyServerIngress.annotations      | Additional annotations for the proxy-service Ingress.                                                                                                                | No       | -                     |
 {{< /collapse >}}
 {{< collapse title="Additional v2.0 Parameters" >}}
-   | Parameter                    | Description                                                                                                | Required | Default        |
-   | ---------------------------- | ---------------------------------------------------------------------------------------------------------- | -------- | -------------- |
-   | **redis**                    | This section configures the Redis components.                                                              | -        | -              |
-   | redisName                    | The prefix of the redis pods. The number of pods is determined by the number of replicas.                  | Yes      | redis-csm      |
-   | redisCommander               | The prefix of the redis commander pod.                                                                     | Yes      | rediscommander |
-   | sentinel                     | The prefix of the redis sentinel pods. The number of pods is determined by the number of replicas.         | Yes      | sentinel       |
-   | redisReplicas                | The number of replicas for the sentinel and redis pods.                                                    | Yes      | 5              |
-   | storageclass                 | The storage class for Redis to use for persistence. If not supplied, a locally provisioned volume is used. | No       | -              |
-   | **storageSystemCredentials** | This section configures the storageSystemCredentials.                                                      | -        | -              |
-   | secrets                      | A name that is used to identify a Kubernetes Secret.                                                       | Yes      | -              |
+   | Parameter | Description | Required | Default |
+   | --------- | ----------- | -------- |-------- |
+   | **redis** | This section configures the Redis components. | - | - |
+   | redisName | The prefix of the redis pods. The number of pods is determined by the number of replicas. | Yes | redis-csm |
+   | redisCommander | The prefix of the redis commander pod. | Yes | rediscommander |
+   | sentinel | The prefix of the redis sentinel pods. The number of pods is determined by the number of replicas. | Yes | sentinel |
+   | redisReplicas | The number of replicas for the sentinel and redis pods. | Yes | 5 |
+   | storageclass | The storage class for Redis to use for persistence. If not supplied, a locally provisioned volume is used. | No | - |
+   | **storageSystemCredentials** | This section configures the storageSystemCredentials. | - | - |
+   | secretProviderClasses | A name that is used to identify a secretProviderClass object. | Yes | - |
+   | secrets | A name that is used to identify a Kubernetes Secret. | No | - |
 {{< /collapse >}}
 
 
@@ -288,8 +192,6 @@ To enable reporting of trace data with [Zipkin](https://zipkin.io/), use the `cs
 
   >__Note__:
   > - This command will deploy the Authorization Proxy Server in the namespace specified in the input YAML file.
-
-{{< /accordion >}}
 
 ### Verify Installation of the Container Storage Modules Authorization Proxy Server
 Once the Authorization CR is created, you can verify the installation as mentioned below:

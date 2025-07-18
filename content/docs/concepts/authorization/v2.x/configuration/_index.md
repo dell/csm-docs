@@ -64,18 +64,23 @@ A `storage` entity in Container Storage Modules Authorization consists of the st
 
 Edit these parameters in the manifest:
 
-   | Parameter                                    | Description                                                                          | Required | Default |
-   | -------------------------------------------- | ------------------------------------------------------------------------------------ | -------- | ------- |
-   | type                                         | The type of the storage array.                                                       | Yes      | -       |
-   | endpoint                                     | HTTPS REST API endpoint of the backend storage array.                                | Yes      | -       |
-   | systemID                                     | System ID of the backend storage array.                                              | Yes      | -       |
-   | storageSystemCredentials.secretProviderClass | The secretProviderClass containing the storage system credentials.                   | Yes      | -       |
-   | storageSystemCredentials.secret              | The Kubernetes Secret containing the storage system credentials                      | No       | -       |
-   | skipCertificateValidation                    | A boolean that enables/disables certificate validation of the backend storage array. | No       | true    |
-   | pollInterval                                 | PollInterval is the polling frequency to test the storage connectivity.              | No       | 30s     |
+   | Parameter                                                       | Description                                                                          | Required | Default |
+   | --------------------------------------------------------------- | ------------------------------------------------------------------------------------ | -------- | ------- |
+   | type                                                            | The type of the storage array.                                                       | Yes      | -       |
+   | endpoint                                                        | HTTPS REST API endpoint of the backend storage array.                                | Yes      | -       |
+   | systemID                                                        | System ID of the backend storage array.                                              | Yes      | -       |
+   | storageSystemCredentials.secretProviderClass                    | The SecretProviderClass containing the storage system credentials.                   | Yes      | -       |
+   | storageSystemCredentials.secretProviderClass.name               | The SecretProviderClass name.                                                        | Yes      | -       |
+   | storageSystemCredentials.secretProviderClass.usernameObjectName | The SecretProviderClass objectName for the username.                                 | Yes      | -       |
+   | storageSystemCredentials.secretProviderClass.passwordObjectName | The SecretProviderClass objectName for the password.                                 | Yes      | -       |
+   | storageSystemCredentials.secret                                 | The Kubernetes Secret containing the storage system credentials                      | No       | -       |
+   | skipCertificateValidation                                       | A boolean that enables/disables certificate validation of the backend storage array. | No       | true    |
+   | pollInterval                                                    | PollInterval is the polling frequency to test the storage connectivity.              | No       | 30s     |
 
-For example, to create PowerFlex storage using a secret provider class:
 
+
+{{< accordion id="secret-provider-class" title="Using a Secret Provider Class" markdown="true" >}}
+For example, create PowerFlex storage using a SecretProviderClass:
 ```yaml
 apiVersion: csm-authorization.storage.dell.com/v1
 kind: Storage
@@ -93,7 +98,10 @@ spec:
   skipCertificateValidation: true
   pollInterval: 30s
 ```
-Another example to create PowerFlex storage using a Kubernetes Secret:
+{{< /accordion >}}
+
+{{< accordion id="kubernetes-secret" title="Using a Kubernetes Secret" markdown="true" >}}
+For example, create PowerFlex storage using a Kubernetes Secret:
 ```yaml
 apiVersion: csm-authorization.storage.dell.com/v1
 kind: Storage
@@ -108,6 +116,8 @@ spec:
   skipCertificateValidation: true
   pollInterval: 30s
 ```
+{{< /accordion >}}
+
 
 >__Note__:
 > - The `systemID` can vary from storage type to storage type. Please contact the storage administrator for more details on how to obtain it.
@@ -122,6 +132,7 @@ A `role` consists of a name, the storage array to use, and the quota limit for t
    | quota      | The amount of allocated space for the specified role.           | Yes      | -       |
    | systemID   | System ID of the backend storage array.                         | Yes      | -       |
    | systemType | The type of the storage array.                                  | Yes      | -       |
+   | systemType | The type of the storage array.                                  | Yes      | -       |
    | pool       | The storage pool name.                                          | Yes      | -       |
 
 For example, to create a role named `role1` using the PowerFlex storage created above with a quota limit of 128iB in storage pool `myStoragePool`:
@@ -130,12 +141,6 @@ For example, to create a role named `role1` using the PowerFlex storage created 
 apiVersion: csm-authorization.storage.dell.com/v1
 kind: CSMRole
 metadata:
-  labels:
-    app.kubernetes.io/name: role
-    app.kubernetes.io/instance: role-sample
-    app.kubernetes.io/part-of: csm-authorization
-    app.kubernetes.io/managed-by: kustomize
-    app.kubernetes.io/created-by: csm-authorization
   name: role1
 spec:
   quota: 128GiB
@@ -164,12 +169,6 @@ For example, to create a tenant named `csmtenant-sample`:
 apiVersion: csm-authorization.storage.dell.com/v1
 kind: CSMTenant
 metadata:
-  labels:
-    app.kubernetes.io/name: csmtenant
-    app.kubernetes.io/instance: csmtenant-sample
-    app.kubernetes.io/part-of: csm-authorization
-    app.kubernetes.io/managed-by: kustomize
-    app.kubernetes.io/created-by: csm-authorization
   name: csmtenant-sample
 spec:
   roles: role1
