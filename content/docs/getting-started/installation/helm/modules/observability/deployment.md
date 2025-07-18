@@ -217,6 +217,8 @@ The following table lists the configurable parameters of the Container Storage M
 | `karaviMetricsPowerflex.sdcMetricsEnabled` | Enable PowerFlex SDC Metrics Collection | `true` |
 | `karaviMetricsPowerflex.volumeMetricsEnabled` | Enable PowerFlex Volume Metrics Collection | `true` |
 | `karaviMetricsPowerflex.storageClassPoolMetricsEnabled` | Enable PowerFlex  Storage Class/Pool Metrics Collection | `true` |
+| `karaviMetricsPowerflex.topologyMetricsEnabled` | Enable PowerFlex Topology Metrics Collection | `true` |
+| `karaviMetricsPowerflex.topologyMetricsPollFrequencySeconds` | The polling frequency (in seconds) to gather topology metrics | `30` |
 | `karaviMetricsPowerflex.endpoint` | Endpoint for pod leader election | `karavi-metrics-powerflex` |
 | `karaviMetricsPowerflex.service.type` | Kubernetes service type | `ClusterIP` |
 | `karaviMetricsPowerflex.logLevel` | Output logs that are at or above the given log level severity (Valid values: TRACE, DEBUG, INFO, WARN, ERROR, FATAL, PANIC) | `INFO`|
@@ -263,6 +265,8 @@ The following table lists the configurable parameters of the Container Storage M
 | `karaviMetricsPowerMax.performanceMetricsEnabled` | Enable PowerMax performance metric Collection | `true` |
 | `karaviMetricsPowerMax.capacityPollFrequencySeconds` | The polling frequency (in seconds) to gather capacity metrics | `20` |
 | `karaviMetricsPowerMax.performancePollFrequencySeconds` | The polling frequency (in seconds) to gather performance metrics | `20` |
+| `karaviMetricsPowerMax.topologyMetricsEnabled` | Enable PowerMax Topology Metrics Collection | `true` |
+| `karaviMetricsPowerMax.topologyMetricsPollFrequencySeconds` | The polling frequency (in seconds) to gather topology metrics | `30` |
 | `karaviMetricsPowerMax.concurrentPowerMaxQueries` | The number of simultaneous metrics queries to make to PowerMax (MUST be less than 10; otherwise, several request errors from PowerMax will ensue.) | `10` |
 | `karaviMetricsPowermax.useSecret` | Defines whether or not to use the new secret format for the Reverse Proxy. If set to `true` the contents of the Secret specified by `karaviMetricsPowermax.defaultCredentialSecret` will be used to specify the Powermax storage arrays and their login credentials. If set to `false` the Reverse Proxy will use the configMap approach` | `false` |
 | `karaviMetricsPowermax.defaultCredentialSecret` | The name of the Secret used to specify the Powermax storage arrays and their login credentials | `powermax-creds` |
