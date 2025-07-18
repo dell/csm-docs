@@ -18,9 +18,10 @@ You may obtain a copy of the License at
     http://www.apache.org/licenses/LICENSE-2.0
 -->
 
-## CSM for Observability Installer 
+## CSM for Observability Installer
 
 **The installer bootstraps Helm for a simplified and robust deployment by:**
+
 - Checking if Container Storage Modules for Observability is installed
 - Verifying Kubernetes/OpenShift and Helm versions
 - Adding and refreshing the Dell Helm chart repository
@@ -29,6 +30,7 @@ You may obtain a copy of the License at
 - Waiting for CSM pods to be ready
 
 **If Authorization is enabled for CSI drivers in the same Kubernetes cluster:**
+
 - Verifies the `karavictl` binary is available.
 - Verifies the appropriate Secrets and ConfigMap exist in the CSI driver namespace.
 - Updates the CSM Observability deployment to use the existing Authorization instance if not already enabled.
@@ -53,8 +55,8 @@ A Linux-based system, with Internet access, will be used to execute the script t
 | `helm`   | `helm` will be used to install the Container Storage Modules Observability helm chart|
 | `jq`     | `jq` will be used to parse the CContainer Storage Module Authorization configuration file during installation|
 
-
 ### Installer Usage
+
 ```bash
 ./karavi-observability-install.sh --help
 ```
@@ -82,13 +84,12 @@ To perform an online installation of Container Storage Modules Observability, th
 
     __Note:__
 
- {{< hide id="0" >}}- The default `values.yaml` deploys the CSM for Observability Topology service.{{< /hide >}}
  {{< hide id="1" >}}- For CSI PowerFlex with Authorization, configure `karaviMetricsPowerflex.authorization` in `myvalues.yaml`.{{< /hide >}}
  {{< hide id="2" >}}- For CSI PowerScale with Authorization, configure `karaviMetricsPowerscale.authorization` in `myvalues.yaml`.{{< /hide >}}
  {{< hide id="3" >}}- For CSI PowerMax with Authorization, configure `karaviMetricsPowerMax.authorization` in `myvalues.yaml` {{< /hide >}}
 
 <ul>
- 
+
  ```bash
  ./karavi-observability-install.sh install --namespace [CSM_NAMESPACE] --values myvalues.yaml
  ```
@@ -153,6 +154,6 @@ To perform an online installation of Container Storage Modules Observability, th
  |- Installing Karavi Observability helm chart                       Success
  |
  |- Waiting for pods in namespace karavi to be ready                 Success
- ``` 
+ ```
 
 </ul>
