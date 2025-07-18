@@ -217,6 +217,8 @@ The following table lists the configurable parameters of the Container Storage M
 | `karaviMetricsPowerflex.sdcPollFrequencySeconds` | The polling frequency (in seconds) to gather SDC metrics | `10` |
 | `karaviMetricsPowerflex.volumePollFrequencySeconds` | The polling frequency (in seconds) to gather volume metrics | `10` |
 | `karaviMetricsPowerflex.storageClassPoolPollFrequencySeconds` | The polling frequency (in seconds) to gather storage class/pool metrics | `10` |
+| `karaviMetricsPowerMax.topologyMetricsEnabled` | Enable PowerMax Topology Metrics Collection | `true` |
+| `karaviMetricsPowerMax.topologyMetricsPollFrequencySeconds` | The polling frequency (in seconds) to gather topology metrics | `30` |
 | `karaviMetricsPowerflex.concurrentPowerflexQueries` | The number of simultaneous metrics queries to make to Powerflex(MUST be less than 10; otherwise, several request errors from Powerflex will ensue. | `10` |
 | `karaviMetricsPowerflex.authorization.enabled` | [Authorization](../../authorization-v2.0) is an optional feature to apply credential shielding of the backend PowerFlex. | `false` |
 | `karaviMetricsPowerflex.authorization.proxyHost` | Hostname of the csm-authorization server. |  |
@@ -270,6 +272,8 @@ The following table lists the configurable parameters of the Container Storage M
 | `karaviMetricsPowerMax.performanceMetricsEnabled` | Enable PowerMax performance metric Collection | `true` |
 | `karaviMetricsPowerMax.capacityPollFrequencySeconds` | The polling frequency (in seconds) to gather capacity metrics | `20` |
 | `karaviMetricsPowerMax.performancePollFrequencySeconds` | The polling frequency (in seconds) to gather performance metrics | `20` |
+| `karaviMetricsPowerflex.topologyMetricsEnabled` | Enable PowerFlex Topology Metrics Collection | `true` |
+| `karaviMetricsPowerflex.topologyMetricsPollFrequencySeconds` | The polling frequency (in seconds) to gather topology metrics | `30` |
 | `karaviMetricsPowerMax.concurrentPowerMaxQueries` | The number of simultaneous metrics queries to make to PowerMax (MUST be less than 10; otherwise, several request errors from PowerMax will ensue.) | `10` |
 | `karaviMetricsPowerMax.authorization.enabled` | [Authorization](../../authorization-v2.0) is an optional feature to apply credential shielding of the backend PowerMax. | `false` |
 | `karaviMetricsPowerMax.authorization.proxyHost` | Hostname of the csm-authorization server. |  |
