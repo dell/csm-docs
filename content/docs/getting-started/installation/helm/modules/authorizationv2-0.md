@@ -38,8 +38,9 @@ Only one of the two can be specified at a time.
 
 ## Using a Secret Provider Class
 
-1. Install the [Secrets Store CSI Driver](https://secrets-store-csi-driver.sigs.k8s.io/getting-started/installation) and a supported [External Secret Provider](https://secrets-store-csi-driver.sigs.k8s.io/getting-started/installation#install-external-secret-providers).
-2. Create your own [SecretProviderClass Object](https://secrets-store-csi-driver.sigs.k8s.io/getting-started/usage#create-your-own-secretproviderclass-object) based on your external secret provider.
+1. Install a supported [External Secret Provider](https://secrets-store-csi-driver.sigs.k8s.io/getting-started/installation#install-external-secret-providers) to integrate with the Secrets Store CSI Driver. For guidance on setting up Vault, refer to our [Vault installation guide](docs/getting-started/installation/operator/modules/authorizationv2-0#vault-csi-provider-installation).
+2. Install the [Secrets Store CSI Driver](https://secrets-store-csi-driver.sigs.k8s.io/getting-started/installation) enabling the [`Sync as Kubernetes Secret`](https://secrets-store-csi-driver.sigs.k8s.io/topics/sync-as-kubernetes-secret) and [`Secret Auto Rotation`](https://secrets-store-csi-driver.sigs.k8s.io/topics/secret-auto-rotation) features.
+3. Create your own [SecretProviderClass Object](https://secrets-store-csi-driver.sigs.k8s.io/getting-started/usage#create-your-own-secretproviderclass-object) based on your external secret provider.
 
    Example SecretProviderClass using Vault Provider:
    ```bash
@@ -69,7 +70,7 @@ Only one of the two can be specified at a time.
         # "secretPath" is the path in Vault where the secret should be retrieved.
         # "secretKey" is the key within the Vault secret response to extract a value from.
    ```
-3. Create the Authorization namespace.
+4. Create the Authorization namespace.
    ```bash
    kubectl create namespace authorization
    ```
@@ -82,12 +83,12 @@ Only one of the two can be specified at a time.
     --overwrite
    ```
 
-4. Add the Dell Helm Charts repo
+5. Add the Dell Helm Charts repo
    ```bash
    helm repo add dell https://dell.github.io/helm-charts
    ```
 
-5. Prepare `samples/csm-authorization/config.yaml` which contains the JWT signing secret. The following table lists the configuration parameters.
+6. Prepare `samples/csm-authorization/config.yaml` which contains the JWT signing secret. The following table lists the configuration parameters.
 
     | Parameter            | Description                         | Required | Default |
     | -------------------- | ----------------------------------- | -------- | ------- |
@@ -114,9 +115,9 @@ Only one of the two can be specified at a time.
     kubectl create secret generic karavi-config-secret -n authorization --from-file=config.yaml=samples/csm-authorization/config.yaml -o yaml --dry-run=client | kubectl replace -f -
     ```
 
-6. Copy the default values.yaml file `cp charts/csm-authorization-v2.0/values.yaml myvalues.yaml`
+7. Copy the default values.yaml file `cp charts/csm-authorization-v2.0/values.yaml myvalues.yaml`
 
-7. Look over all the fields in `myvalues.yaml` and fill in/adjust any as needed.
+8. Look over all the fields in `myvalues.yaml` and fill in/adjust any as needed.
 
 <ul>
 
@@ -159,7 +160,7 @@ Only one of the two can be specified at a time.
 {{< /collapse >}}
 </ul>
 
-8. Install the driver using `helm`:
+1. Install the driver using `helm`:
 
 To install Authorization with the service Ingresses using your own certificate, run:
 
