@@ -254,6 +254,8 @@ The following table lists the configurable parameters of the Container Storage M
 | `karaviMetricsPowerscale.clusterPerformancePollFrequencySeconds` | The polling frequency (in seconds) to gather cluster performance metrics | `20` |
 | `karaviMetricsPowerscale.quotaCapacityPollFrequencySeconds` | The polling frequency (in seconds) to gather volume capacity metrics | `30` |
 | `karaviMetricsPowerscale.concurrentPowerscaleQueries` | The number of simultaneous metrics queries to make to PowerScale(MUST be less than 10; otherwise, several request errors from PowerScale will ensue.) | `10` |
+| `karaviMetricsPowerscale.topologyMetricsEnabled` | Enable Powerscale Topology Metrics Collection | `true` |
+| `karaviMetricsPowerscale.topologyMetricsPollFrequencySeconds` | The polling frequency (in seconds) to gather topology metrics | `30` |
 | `karaviMetricsPowerscale.endpoint` | Endpoint for pod leader election | `karavi-metrics-powerscale` |
 | `karaviMetricsPowerscale.service.type` | Kubernetes service type | `ClusterIP` |
 | `karaviMetricsPowerscale.logLevel` | Output logs that are at or above the given log level severity (Valid values: TRACE, DEBUG, INFO, WARN, ERROR, FATAL, PANIC) | `INFO`|
