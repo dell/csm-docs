@@ -17,6 +17,7 @@ The Container Storage Modules for Observability Helm chart bootstraps an Observa
 - The deployment of one or more supported Dell CSI drivers
 
 ## Install the Container Storage Modules for Observability Helm Chart
+
 **Steps**
 1. Create a namespace where you want to install the module
    ```bash
@@ -172,7 +173,6 @@ The Container Storage Modules for Observability Helm chart bootstraps an Observa
    A default values.yaml file is located [here](https://github.com/dell/helm-charts/blob/main/charts/karavi-observability/values.yaml) that can be used for installation. This can be copied into a file named `myvalues.yaml` and either used as is or modified accordingly.
 
    __Note:__
-   - The default `values.yaml` is configured to deploy the Container Storage Modules for Observability Topology service on install.
    - If Container Storage Modules for Authorization is enabled for CSI PowerFlex, the `karaviMetricsPowerflex.authorization` parameters must be properly configured in your values file for Observability.
    - If Container Storage Modules for Authorization is enabled for CSI PowerScale, the `karaviMetricsPowerscale.authorization` parameters must be properly configured in your values file for Observability.
    - If Container Storage Modules for Authorization is enabled for CSI PowerMax, the `karaviMetricsPowerMax.authorization` parameters must be properly configured in your values file for Observability.
@@ -187,8 +187,6 @@ The Container Storage Modules for Observability Helm chart bootstraps an Observa
    ```console
 
    helm install karavi-observability dell/karavi-observability -n [CSM_NAMESPACE] \
-   --set-file karaviTopology.certificateFile=<location-of-karavi-topology-certificate-file> \
-   --set-file karaviTopology.privateKeyFile=<location-of-karavi-topology-private-key-file> \
    --set-file otelCollector.certificateFile=<location-of-otel-collector-certificate-file> \
    --set-file otelCollector.privateKeyFile=<location-of-otel-collector-private-key-file>
    ```
@@ -199,21 +197,13 @@ The following table lists the configurable parameters of the Container Storage M
 
 | Parameter | Description | Default |
 | - | - | - |
-| `karaviTopology.image` | Location of the csm-topology Container image | `quay.io/dell/container-storage-modules/csm-topology:{{< version-docs key="Observability_csm_topology_image" >}}` |
-| `karaviTopology.enabled` | Enable the CSM for Observability Topology service | `true` |
-| `karaviTopology.provisionerNames` | Provisioner Names used to filter the Persistent Volumes created on the Kubernetes cluster (must be a comma-separated list) | `csi-vxflexos.dellemc.com` |
-| `karaviTopology.service.type` | Kubernetes service type | `ClusterIP` |
-| `karaviTopology.certificateFile` | Optional valid CA public certificate file that will be used to deploy the Topology service. Must use domain name 'karavi-topology'. | |
-| `karaviTopology.privateKeyFile` | Optional public certificate's associated private key file that will be used to deploy the Topology service. Must use domain name 'karavi-topology'. | |
-| `karaviTopology.logLevel` | Output logs that are at or above the given log level severity (Valid values: TRACE, DEBUG, INFO, WARN, ERROR, FATAL, PANIC) | `INFO` |
-| `karaviTopology.logFormat` | Output logs in the specified format (Valid values: text, json) | `text` |
 | `otelCollector.certificateFile` | Optional valid CA public certificate file that will be used to deploy the OpenTelemetry Collector. Must use domain name 'otel-collector'. | |
 | `otelCollector.privateKeyFile` | Optional public certificate's associated private key file that will be used to deploy the OpenTelemetry Collector. Must use domain name 'otel-collector'. |  |
 | `otelCollector.service.type` | Kubernetes service type | `ClusterIP` |
 | `karaviMetricsPowerflex.image` |  CSM Metrics for PowerFlex Service image | `quay.io/dell/container-storage-modules/csm-metrics-powerflex:{{< version-docs key="Observability_csm_metrics_PFlex_image" >}}` |
 | `karaviMetricsPowerflex.enabled` | Enable CSM Metrics for PowerFlex service | `true` |
 | `karaviMetricsPowerflex.collectorAddr` | Metrics Collector accessible from the Kubernetes cluster | `otel-collector:55680`  |
-| `karaviMetricsPowerflex.provisionerNames` | Provisioner Names used to filter for determining PowerFlex SDC nodes( Must be a Comma-separated list) | ` csi-vxflexos.dellemc.com` |
+| `karaviMetricsPowerflex.provisionerNames` | Provisioner Names used to filter for determining PowerFlex SDC nodes( Must be a Comma-separated list) | `csi-vxflexos.dellemc.com` |
 | `karaviMetricsPowerflex.sdcPollFrequencySeconds` | The polling frequency (in seconds) to gather SDC metrics | `10` |
 | `karaviMetricsPowerflex.volumePollFrequencySeconds` | The polling frequency (in seconds) to gather volume metrics | `10` |
 | `karaviMetricsPowerflex.storageClassPoolPollFrequencySeconds` | The polling frequency (in seconds) to gather storage class/pool metrics | `10` |
