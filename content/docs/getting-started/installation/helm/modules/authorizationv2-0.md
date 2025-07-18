@@ -28,6 +28,7 @@ The following third-party components are optionally installed in the specified n
 Storage system credentials can be provided in one of two ways:
 1. Using a SecretProviderClass (for dynamic secrets from external providers)
 2. Using a Kubernetes Secret (for static credentials)
+
 Only one of the two can be specified at a time.
 
 ## Install Container Storage Modules Authorization
@@ -70,7 +71,43 @@ Only one of the two can be specified at a time.
         # "secretPath" is the path in Vault where the secret should be retrieved.
         # "secretKey" is the key within the Vault secret response to extract a value from.
    ```
-4. Create the Authorization namespace.
+{{< /accordion >}}
+
+{{< accordion id="kubernetes-secret" title="Using a Kubernetes Secret" markdown="true" >}}
+
+## Using a Kubernetes Secret
+
+1. Create the Authorization namespace.
+   ```bash
+   kubectl create namespace authorization
+   ```
+
+2. Create a Kubernetes Secret containing storage system credentials.
+
+   Example Secret YAML File named `secret-1.yaml`:
+   ```bash
+   # Username and password for accessing storage system
+   username: "username"
+   password: "password"
+   ```
+
+   Use the following command to create the Kubernetes Secret:
+   ```bash
+   kubectl create secret generic secret-1 -n authorization --from-file=secret-1.yaml
+   ```
+
+   After creating the secret, if you get it in YAML format, you should see something similar to the following:
+   ```bash
+   apiVersion: v1
+   data:
+     secret-1.yaml: <base64-encoded>
+   kind: Secret
+   ```
+{{< /accordion >}}
+
+Continue installation with the remaining steps:
+
+1. Create the Authorization namespace.
    ```bash
    kubectl create namespace authorization
    ```
@@ -83,12 +120,12 @@ Only one of the two can be specified at a time.
     --overwrite
    ```
 
-5. Add the Dell Helm Charts repo
+2. Add the Dell Helm Charts repo
    ```bash
    helm repo add dell https://dell.github.io/helm-charts
    ```
 
-6. Prepare `samples/csm-authorization/config.yaml` which contains the JWT signing secret. The following table lists the configuration parameters.
+3. Prepare `samples/csm-authorization/config.yaml` which contains the JWT signing secret. The following table lists the configuration parameters.
 
     | Parameter            | Description                         | Required | Default |
     | -------------------- | ----------------------------------- | -------- | ------- |
@@ -115,9 +152,9 @@ Only one of the two can be specified at a time.
     kubectl create secret generic karavi-config-secret -n authorization --from-file=config.yaml=samples/csm-authorization/config.yaml -o yaml --dry-run=client | kubectl replace -f -
     ```
 
-7. Copy the default values.yaml file `cp charts/csm-authorization-v2.0/values.yaml myvalues.yaml`
+4. Copy the default values.yaml file `cp charts/csm-authorization-v2.0/values.yaml myvalues.yaml`
 
-8. Look over all the fields in `myvalues.yaml` and fill in/adjust any as needed.
+5. Look over all the fields in `myvalues.yaml` and fill in/adjust any as needed.
 
 <ul>
 
@@ -157,135 +194,11 @@ Only one of the two can be specified at a time.
 | images.commander                    | The image to use for Redis Commander.                                                                                                | Yes      | rediscommander/redis-commander:latest     |
 | **storageSystemCredentials** | This section configures the storageSystemCredentials.             | -        | -                                    |
 | secretProviderClasses        | A name that is used to identify a secretProviderClass object.     | Yes      | -                                    |
-{{< /collapse >}}
-</ul>
-
-1. Install the driver using `helm`:
-
-To install Authorization with the service Ingresses using your own certificate, run:
-
-```bash
-helm -n authorization install authorization -f myvalues.yaml charts/csm-authorization-v2.0 \
---set-file authorization.certificate=<location-of-certificate-file> \
---set-file authorization.privateKey=<location-of-private-key-file>
-```
-
-To install Authorization with the service Ingresses using a self-signed certificate generated via cert-manager, run:
-
-```bash
-helm -n authorization install authorization -f myvalues.yaml charts/csm-authorization-v2.0
-```
-{{< /accordion >}}
-
-{{< accordion id="kubernetes-secret" title="Using a Kubernetes Secret" markdown="true" >}}
-
-## Using a Kubernetes Secret
-
-1. Create the Authorization namespace.
-   ```bash
-   kubectl create namespace authorization
-   ```
-
-2. Create a Kubernetes Secret containing storage system credentials.
-
-   Example Secret YAML File named `secret-1.yaml`:
-   ```bash
-   # Username and password for accessing storage system
-   username: "username"
-   password: "password"
-   ```
-
-   Use the following command to create the Kubernetes Secret:
-   ```bash
-   kubectl create secret generic secret-1 -n authorization --from-file=secret-1.yaml
-   ```
-
-   After creating the secret, if you get it in YAML format, you should see something similar to the following:
-   ```bash
-   apiVersion: v1
-   data:
-     secret-1.yaml: <base64-encoded>
-   kind: Secret
-   ```
-
-3. Add the Dell Helm Charts repo
-   ```bash
-   helm repo add dell https://dell.github.io/helm-charts
-   ```
-
-4. Prepare `samples/csm-authorization/config.yaml` which contains the JWT signing secret. The following table lists the configuration parameters.
-
-    | Parameter            | Description                         | Required | Default |
-    | -------------------- | ----------------------------------- | -------- | ------- |
-    | web.jwtsigningsecret | String used to sign JSON Web Tokens | true     | secret  | . |
-
-    Example:
-
-    ```yaml
-    web:
-      jwtsigningsecret: randomString123
-    ```
-
-    After editing the file, run the following command to create a secret called `karavi-config-secret`:
-
-    ```bash
-
-    kubectl create secret generic karavi-config-secret -n authorization --from-file=config.yaml=samples/csm-authorization/config.yaml
-    ```
-
-    Use the following command to replace or update the secret:
-
-    ```bash
-
-    kubectl create secret generic karavi-config-secret -n authorization --from-file=config.yaml=samples/csm-authorization/config.yaml -o yaml --dry-run=client | kubectl replace -f -
-    ```
-
-5. Copy the default values.yaml file `cp charts/csm-authorization-v2.0/values.yaml myvalues.yaml`
-
-6. Look over all the fields in `myvalues.yaml` and fill in/adjust any as needed.
-
-<ul>
-
-{{< collapse id="1" title="Parameter" >}}
-
-| Parameter                           | Description                                                                                                            | Required | Default                                                                                                                      |
-| ----------------------------------- | ---------------------------------------------------------------------------------------------------------------------- | -------- | ---------------------------------------------------------------------------------------------------------------------------- |
-| openshift                           | Enable/Disable deployment of the OpenShift Ingress Operator. Set to false if you have an Ingress Controller installed. | No       | true                                                                                                                         |
-| **nginx**                           | This section configures the enablement of the NGINX Ingress Controller.                                                | -        | -                                                                                                                            |
-| enabled                             | Enable/Disable deployment of the NGINX Ingress Controller. Set to false if you have an Ingress Controller installed.   | No       | true                                                                                                                         |
-| **cert-manager**                    | This section configures the enablement of cert-manager.                                                                | -        | -                                                                                                                            |
-| enabled                             | Enable/Disable deployment of cert-manager. Set to false if you already have cert-manager installed.                    | No       | true                                                                                                                         |
-| **authorization**                   | This section configures the Authorization components.                                                                  | -        | -                                                                                                                            |
-| images.proxyService                 | The image to use for the proxy-service.                                                                                | Yes      | quay.io/dell/container-storage-modules/csm-authorization-proxy:{{< version-docs key="Authv2_csm_authorization_proxy" >}}     |
-| images.tenantService                | The image to use for the tenant-service.                                                                               | Yes      | quay.io/dell/container-storage-modules/csm-authorization-tenant:{{< version-docs key="Authv2_csm_authorization_tenant" >}}   |
-| images.roleService                  | The image to use for the role-service.                                                                                 | Yes      | quay.io/dell/container-storage-modules/csm-authorization-proxy:{{< version-docs key="Authv2_csm_authorization_role" >}}      |
-| images.storageService               | The image to use for the storage-service.                                                                              | Yes      | quay.io/dell/container-storage-modules/csm-authorization-storage:{{< version-docs key="Authv2_csm_authorization_storage" >}} |
-| images.authorizationController      | The image to use for the controller.                                                                                   | Yes      | quay.io/dell/container-storage-modules/csm-authorization-controller                                                          |
-| images.opa                          | The image to use for Open Policy Agent.                                                                                | Yes      | openpolicyagent/opa                                                                                                          |
-| images.opaKubeMgmt                  | The image to use for Open Policy Agent kube-mgmt.                                                                      | Yes      | openpolicyagent/kube-mgmt:8.5.8                                                                                              |
-| hostname                            | The hostname to configure the self-signed certificate (if applicable) and the proxy Ingress.                           | Yes      | csm-authorization.com                                                                                                        |
-| logLevel                            | Authorization log level. Allowed values: “error”, “warn”/“warning”, “info”, “debug”.                                   | Yes      | debug                                                                                                                        |
-| concurrentPowerFlexRequests         | Number of concurrent requests to PowerFlex. Used with dellctl to list tenant volumes.                                  | Yes      | 10                                                                                                                           |
-| concurrentPowerScaleRequests        | Number of concurrent requests to PowerScale. Used with dellctl to list tenant volumes.                                 | Yes      | 10                                                                                                                           |
-| zipkin.collectoruri                 | The URI of the Zipkin instance to export traces.                                                                       | No       | -                                                                                                                            |
-| zipkin.probability                  | The ratio of traces to export.                                                                                         | No       | -                                                                                                                            |
-| proxyServerIngress.ingressClassName | The ingressClassName of the proxy-service Ingress.                                                                     | Yes      | -                                                                                                                            |
-| proxyServerIngress.hosts            | Additional host rules to be applied to the proxy-service Ingress.                                                      | No       | -                                                                                                                            |
-| proxyServerIngress.annotations      | Additional annotations for the proxy-service Ingress.                                                                  | No       | -                                                                                                                            |
-| storageCapacityPollInterval         | Interval the storage-service uses to poll the backend array for tenant capacity.                                       | Yes      | 5m                                                                                                                           |
-| **redis**                           | This section configures Redis.                                                                                         | -        | -                                                                                                                            |
-| name                                | The prefix of the redis pods. The number of pods is determined by the number of replicas.                              | Yes      | redis-csm                                                                                                                    |
-| sentinel                            | The prefix of the redis sentinel pods. The number of pods is determined by the number of replicas.                     | Yes      | sentinel                                                                                                                     |
-| redisCommander                      | The prefix of the redis commander pod.                                                                                 | Yes      | rediscommander                                                                                                               |
-| replicas                            | The number of replicas for the sentinel and redis pods.                                                                | Yes      | 5                                                                                                                            |
-| images.redis                        | The image to use for Redis.                                                                                            | Yes      | redis:7.4.0-alpine                                                                                                           |
-| images.commander                    | The image to use for Redis Commander.                                                                                  | Yes      | rediscommander/redis-commander:latest                                                                                        |
-| **storageSystemCredentials**        | This section configures the storageSystemCredentials.                                                                  | -        | -                                                                                                                            |
 | secrets               | A name that is used to identify a kubernetes Secret.                                                          | Yes      | -                                                                                                                            |
 {{< /collapse >}}
 </ul>
 
-7. Install the driver using `helm`:
+6. Install the driver using `helm`:
 
 To install Authorization with the service Ingresses using your own certificate, run:
 
@@ -300,8 +213,6 @@ To install Authorization with the service Ingresses using a self-signed certific
 ```bash
 helm -n authorization install authorization -f myvalues.yaml charts/csm-authorization-v2.0
 ```
-{{< /accordion >}}
-
 
 ## Install Dellctl
 
