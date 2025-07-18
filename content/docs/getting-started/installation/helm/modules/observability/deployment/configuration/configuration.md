@@ -22,32 +22,13 @@
    ```console
 
    helm install karavi-observability dell/karavi-observability -n [CSM_NAMESPACE] \
-   --set-file karaviTopology.certificateFile=<location-of-karavi-topology-certificate-file> \
-   --set-file karaviTopology.privateKeyFile=<location-of-karavi-topology-private-key-file> \
    --set-file otelCollector.certificateFile=<location-of-otel-collector-certificate-file> \
    --set-file otelCollector.privateKeyFile=<location-of-otel-collector-private-key-file>
    ```
 
-
-
 ## Configuration
 
 The following table lists the configurable parameters of the Container Storage Modules for Observability Helm chart and their default values.
-
-**Topology:** 
-
-| Parameter | Description | Default |
-| - | - | - |
-| `karaviTopology.image` | Location of the csm-topology Container image | `quay.io/dell/container-storage-modules/csm-topology:{{< version-docs key="Observability_csm_topology_image" >}}` |
-| `karaviTopology.enabled` | Enable the CSM for Observability Topology service | `true` |
-| `karaviTopology.provisionerNames` | Provisioner Names used to filter the Persistent Volumes created on the Kubernetes cluster (must be a comma-separated list) | ` csi-vxflexos.dellemc.com` |
-| `karaviTopology.service.type` | Kubernetes service type | `ClusterIP` |
-| `karaviTopology.certificateFile` | Optional valid CA public certificate file that will be used to deploy the Topology service. Must use domain name 'karavi-topology'. | |
-| `karaviTopology.privateKeyFile` | Optional public certificate's associated private key file that will be used to deploy the Topology service. Must use domain name 'karavi-topology'. | |
-| `karaviTopology.logLevel` | Output logs that are at or above the given log level severity (Valid values: TRACE, DEBUG, INFO, WARN, ERROR, FATAL, PANIC) | `INFO` |
-| `karaviTopology.logFormat` | Output logs in the specified format (Valid values: text, json) | `text` | 
-
-<br>
 
 **Otel:**
 
@@ -57,7 +38,7 @@ The following table lists the configurable parameters of the Container Storage M
 | `otelCollector.privateKeyFile` | Optional public certificate's associated private key file that will be used to deploy the OpenTelemetry Collector. Must use domain name 'otel-collector'. |  |
 | `otelCollector.service.type` | Kubernetes service type | `ClusterIP` |
 
-<br> 
+<br>
 
 {{< hide id="4" >}}
 **Metrics:** 
@@ -83,7 +64,7 @@ The following table lists the configurable parameters of the Container Storage M
 | `karaviMetricsPowerflex.endpoint` | Endpoint for pod leader election | `karavi-metrics-powerflex` |
 | `karaviMetricsPowerflex.service.type` | Kubernetes service type | `ClusterIP` |
 | `karaviMetricsPowerflex.logLevel` | Output logs that are at or above the given log level severity (Valid values: TRACE, DEBUG, INFO, WARN, ERROR, FATAL, PANIC) | `INFO`|
-| `karaviMetricsPowerflex.logFormat` | Output logs in the specified format (Valid values: text, json) | `text`| 
+| `karaviMetricsPowerflex.logFormat` | Output logs in the specified format (Valid values: text, json) | `text`|
 {{< /hide >}}
 
 {{< hide id="5" >}}
@@ -106,12 +87,12 @@ The following table lists the configurable parameters of the Container Storage M
 | `karaviMetricsPowerstore.logFormat` | Output logs in the specified format (Valid values: text, json) | `text` |
 | `karaviMetricsPowerstore.zipkin.uri` | URI of a Zipkin instance where tracing data can be forwarded | |
 | `karaviMetricsPowerstore.zipkin.serviceName` | Service name used for Zipkin tracing data | `metrics-powerstore`|
-| `karaviMetricsPowerstore.zipkin.probability` | Percentage of trace information to send to Zipkin (Valid range: 0.0 to 1.0) | `0` | 
+| `karaviMetricsPowerstore.zipkin.probability` | Percentage of trace information to send to Zipkin (Valid range: 0.0 to 1.0) | `0` |
 {{< /hide >}}
 
-{{< hide id="6">}} 
+{{< hide id="6">}}
 
-**Metrics:** 
+**Metrics:**
 
 | Parameter | Description | Default |
 | - | - | - |
@@ -136,8 +117,8 @@ The following table lists the configurable parameters of the Container Storage M
 | `karaviMetricsPowerscale.isiClientOptions.isiLogVerbose` | Decide High/Medium/Low content of the OneFS REST API message | `0` |
 | `karaviMetricsPowerscale.authorization.enabled` | [Authorization](docs/getting-started/installation/helm/modules/authorizationv2-0) is an optional feature to apply credential shielding of the backend PowerScale. | `false` | 
 | `karaviMetricsPowerscale.authorization.proxyHost` | Hostname of the csm-authorization server. |  |
-| `karaviMetricsPowerscale.authorization.skipCertificateValidation` | A boolean that enables/disables certificate validation of the csm-authorization server. |  | 
-{{< /hide >}} 
+| `karaviMetricsPowerscale.authorization.skipCertificateValidation` | A boolean that enables/disables certificate validation of the csm-authorization server. |  |
+{{< /hide >}}
 
 {{< hide id="7">}}
 
