@@ -15,7 +15,9 @@ To Upgrade the Operator, follow the instructions available [here](../../../opera
 {{< /accordion >}}
 <br>
 {{< accordion id="Three" title="Modules"  >}}   
-
+{{< cardcontainer >}}
+    {{< customcard link1="./csm-modules/authorizationv2-x"  image="1" title="Authorization v2.x" >}}
+{{< /cardcontainer >}} 
 {{< markdownify >}}
 To Upgrade Resiliency  refer  [here.](https://infohub.delltechnologies.com/en-us/p/best-practices-for-deployment-and-life-cycle-management-of-dell-csm-modules-1/#:~:text=Upgrades%20with%20Operator) 
 {{</ markdownify >}}

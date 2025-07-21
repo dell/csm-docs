@@ -1,7 +1,7 @@
 ---
 title: Authorization - v2.x
 linktitle: v2.x
-weight: 4
+weight: 1
 no_list: true 
 Description: >
   Container Storage Modules (CSM) for Authorization v2.x.
@@ -17,13 +17,13 @@ This is the introduction to a Stateless Architecture for Authorization. The crea
 
 ## Container Storage Modules for Authorization Capabilities
 {{<table "table table-striped table-bordered table-sm">}}
-| Feature                                                                                                                        | PowerScale | PowerFlex | PowerMax |
-| ------------------------------------------------------------------------------------------------------------------------------ | ---------- | --------- | -------- |
-|  <div style="text-align: left"> Ability to set storage quota limits to ensure k8s tenants are not overconsuming storage                                        | No         | Yes       | Yes      |
-|  <div style="text-align: left"> Ability to create access control policies to ensure k8s tenant clusters are not accessing storage that does not belong to them | No         | Yes       | Yes      |
-|  <div style="text-align: left"> Ability to shield storage credentials from Kubernetes administrators by storing them in vault                                  | Yes        | Yes       | Yes      |
-|  <div style="text-align: left"> Ability to create snapshots from owned volumes that consume the storage quota                                                  | Yes        | Yes       | Yes      |
-|  <div style="text-align: left"> Ability to periodically query storage array to keep quota consumption in sync                                                  | No         | Yes       | Yes      |
+| Feature                                                                                                                        | PowerScale | PowerFlex | PowerMax | PowerStore |
+| ------------------------------------------------------------------------------------------------------------------------------ | ---------- | --------- | -------- | -------- |
+|  <div style="text-align: left"> Ability to set storage quota limits to ensure k8s tenants are not overconsuming storage                                        | No         | Yes       | Yes      | Yes  |
+|  <div style="text-align: left"> Ability to create access control policies to ensure k8s tenant clusters are not accessing storage that does not belong to them | No         | Yes       | Yes      | Yes  |
+|  <div style="text-align: left"> Ability to shield storage credentials from Kubernetes administrators by storing them in vault                                  | Yes        | Yes       | Yes      | Yes  |
+|  <div style="text-align: left"> Ability to create snapshots from owned volumes that consume the storage quota                                                  | Yes        | Yes       | Yes      | Yes  |
+|  <div style="text-align: left"> Ability to periodically query storage array to keep quota consumption in sync                                                  | No         | Yes       | Yes      | Yes  |
 {{</table>}}
 
 ### Snapshot Support
@@ -72,4 +72,4 @@ For more information on the configuration of the above, see the configuration of
 
 Tenants of Authorization can use the token provided by the Storage Administrators in their storage requests.
 
-For more information on how to use the token and configuration, see configuration for the [PowerFlex driver](../v2.x/configuration/powerflex), [PowerMax driver](../v2.x/configuration/powermax), or the [PowerScale driver](../v2.x/configuration/powerscale).
+For more information on how to use the token and configuration, see configuration for the [PowerFlex driver](../v2.x/configuration/powerflex), [PowerMax driver](../v2.x/configuration/powermax), or the [PowerScale driver](../v2.x/configuration/powerscale), [PowerStore driver](../v2.x/configuration/powerstore)

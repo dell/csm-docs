@@ -23,11 +23,6 @@ This document outlines all dellctl commands, their intended use, options that ca
 | [dellctl restore create](../cli/#dellctl-restore-create) | Restore an application backup |
 | [dellctl restore delete](../cli/#dellctl-restore-delete) | Delete application restores |
 | [dellctl restore get](../cli/#dellctl-restore-get) | Get application restores |
-| [dellctl schedule](../cli/#dellctl-schedule) | Allows you to manipulate schedules |
-| [dellctl schedule create](../cli/#dellctl-schedule-create) | Create a schedule |
-| [dellctl schedule create for-backup](../cli/#dellctl-schedule-create-for-backup) | Create a schedule for application backups |
-| [dellctl schedule delete](../cli/#dellctl-schedule-delete) | Delete schedules |
-| [dellctl schedule get](../cli/#dellctl-schedule-get) | Get schedules |
 | [dellctl images](../cli/#dellctl-images) | List the container images needed by csi driver |
 | [dellctl volume get](../cli/#dellctl-volume-get) | Gets driver volume information for a given tenant on a local cluster |
 | [dellctl snapshot get](../cli/#dellctl-snapshot-get) | Gets driver snapshot information for a given tenant on a local cluster |

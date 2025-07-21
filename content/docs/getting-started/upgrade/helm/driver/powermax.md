@@ -36,7 +36,7 @@ Upgrades to the CSI Driver for Dell PowerMax can be made using Helm or Dell CSM 
 3. Download the latest helm values file and update as needed. Reference the [CSI Driver installation steps](../../../../installation/kubernetes/powermax/helm/#install-driver) for more details on the available options.
    ```bash
    cd ./dell-csi-helm-installer
-   wget -O my-powermax-settings.yaml https://github.com/dell/helm-charts/raw/csi-powermax-2.14.0/charts/csi-powermax/values.yaml
+   wget -O my-powermax-settings.yaml https://github.com/dell/helm-charts/raw/csi-powermax-2.15.0/charts/csi-powermax/values.yaml
    ```
 
 4. Confirm the value of `global.useSecret` is set to `true` if electing to use the new secret format, and `false` otherwise.

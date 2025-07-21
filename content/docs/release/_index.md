@@ -7,7 +7,7 @@ Description: >
   Container Storage Modules release notes
 ---
 
-## Notifications:
+## Notifications
 
 **General:**
 
@@ -17,7 +17,6 @@ Description: >
 
 **Deprecation:**
 
-> * <span><span/>{{< message text="5" >}}
 > * <span><span/>{{< message text="11" >}}
 > * <span><span/>{{< message text="12" >}}
 

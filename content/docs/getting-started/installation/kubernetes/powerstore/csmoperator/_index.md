@@ -189,6 +189,8 @@ The driver and modules versions installable with the Container Storage Modules O
 <br>
 {{< cardcontainer >}}
 
+{{< customcard link1="./csm-modules/authorizationv2-0"   image="6" title="Authorization"  >}}
+
 {{< customcard link1="./csm-modules/resiliency"   image="6" title="Resiliency"  >}}
 
 {{< /cardcontainer >}}
