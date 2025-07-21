@@ -94,7 +94,7 @@ To deploy the Operator, follow the instructions available [here](../../../operat
          configVersion: {{< version-docs key="PScale_latestVersion" >}}
          forceRemoveDriver: true
    ```
-      [sample file](https://github.com/dell/csm-operator/blob/main/samples/minimal-samples/powerscale_{{< version-docs key="sample_sc_pflex" >}}.yaml) for default settings. Modify if needed.
+          Refer the minimal sample files provided in respective CSM versions folder under samples [here](https://github.com/dell/csm-operator/tree/main/samples). Modify if needed.
 
     [OR]                                                
 
