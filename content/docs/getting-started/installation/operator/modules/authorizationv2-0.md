@@ -145,6 +145,8 @@ Follow the instructions available in Authorization for
 
 {{< hide id="3" >}}- [Configuring PowerScale with Authorization](docs/concepts/authorization/v2.x/configuration/powerscale).{{< /hide >}}
 
+{{< hide id="1" >}}- [Configuring PowerStore with Authorization](docs/concepts/authorization/v2.x/configuration/powerstore).{{< /hide >}}
+
 ## Vault Server Installation
 
 If there is already a Vault server available, skip to [Minimum Server Configuration](#minimum-server-configuration).
@@ -350,6 +352,7 @@ The role needs to be:
 
 ### Write a secret
 
+Given an example below for writing a secret to vault for PowerFlex,
 ```shell
 vault kv put -mount=secret /storage/powerflex/systemid1 username=user password=pass
 ```

@@ -7,10 +7,6 @@ Description: >
   Container Storage Modules (CSM) for Authorization
 ---
 
-{{% pageinfo color="primary" %}}
-{{< message text="5" >}} 
-{{% /pageinfo %}}
-
 Container Storage Modules for Authorization is part of the open-source suite of Kubernetes storage enablers for Dell products.
 
 Container Storage Modules for Authorization provides storage and Kubernetes administrators the ability to apply RBAC for Dell CSI Drivers. It does this by deploying a proxy between the CSI driver and the storage system to enforce role-based access and usage rules.
