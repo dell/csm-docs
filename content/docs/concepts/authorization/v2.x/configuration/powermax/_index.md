@@ -140,7 +140,7 @@ Given a setup where Kubernetes, a storage system, and the Container Storage Modu
 
     - Update the `SKIP_CERTIFICATE_VALIDATION` environment value to `true` or `false` depending on if you want to disable or enable certificate validation of Authorization Proxy Server.
 
-    - Do not update the `configVersion`. You will notice in the example that it is set to v1.14.0. This ensures that Operator checks on version support do not prevent deployment of the v2.2.0.
+    - Do not update the `configVersion`. You will notice in the example that it is set to v1.14.0. This ensures that Operator checks on version support do not prevent deployment of latest version.
 
     Example:
 
@@ -229,7 +229,7 @@ Given a setup where Kubernetes, a storage system, and the Container Storage Modu
     authorization:
       enabled: true
       # sidecarProxyImage: the container image used for the csm-authorization-sidecar.
-      # Default value: quay.io/dell/container-storage-modules/csm-authorization-sidecar:v2.2.0
+      # Default value: quay.io/dell/container-storage-modules/csm-authorization-sidecar:v2.3.0
       sidecarProxyImage: quay.io/dell/container-storage-modules/csm-authorization-sidecar:{{< version-docs key="Authv2_csm_authorization_sidecar" >}}
       # proxyHost: hostname of the csm-authorization server
       # Default value: None

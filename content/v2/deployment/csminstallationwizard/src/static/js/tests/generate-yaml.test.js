@@ -517,7 +517,7 @@ describe("GIVEN createYamlString function", () => {
       version: v2.12.0
       images:
         driverRepository: $IMAGE_REPOSITORY
-        powerflexSdc: dellemc/sdc:3.6.0.6
+        powerflexSdc: quay.io/dell/storage/powerflex/sdc:3.6.0.6
       certSecretCount: $CERT_SECRET_COUNT
       controller:
         replication:
@@ -836,7 +836,7 @@ describe("GIVEN createYamlString function", () => {
       version: v2.12.0
       images:
         driverRepository: dellemc
-        powerflexSdc: dellemc/sdc:3.6.0.6
+        powerflexSdc: quay.io/dell/storage/powerflex/sdc:3.6.0.6
       certSecretCount: 0
       controller:
         replication:
@@ -1115,7 +1115,7 @@ describe("GIVEN createYamlString function", () => {
       version: v2.12.0
       images:
         driverRepository: $IMAGE_REPOSITORY
-        powerflexSdc: dellemc/sdc:3.6.0.6
+        powerflexSdc: quay.io/dell/storage/powerflex/sdc:3.6.0.6
       certSecretCount: $CERT_SECRET_COUNT
       controller:
         replication:
@@ -1434,7 +1434,7 @@ describe("GIVEN createYamlString function", () => {
       version: v2.12.0
       images:
         driverRepository: dellemc
-        powerflexSdc: dellemc/sdc:3.6.0.6
+        powerflexSdc: quay.io/dell/storage/powerflex/sdc:3.6.0.6
       certSecretCount: 0
       controller:
         replication:
@@ -1710,7 +1710,7 @@ describe("GIVEN createYamlString function", () => {
       version: v2.12.0
       images:
         driverRepository: dellemc
-        powerflexSdc: dellemc/sdc:3.6.0.6
+        powerflexSdc: quay.io/dell/storage/powerflex/sdc:3.6.0.6
       certSecretCount: 0
       controller:
         replication:
@@ -1987,7 +1987,7 @@ describe("GIVEN createYamlString function", () => {
       version: v2.12.0
       images:
         driverRepository: dellemc
-        powerflexSdc: dellemc/sdc:3.6.0.6
+        powerflexSdc: quay.io/dell/storage/powerflex/sdc:3.6.0.6
       certSecretCount: 0
       controller:
         replication:
@@ -2266,7 +2266,7 @@ describe("GIVEN createYamlString function", () => {
       version: v2.12.0
       images:
         driverRepository: dellemc
-        powerflexSdc: dellemc/sdc:3.6.0.6
+        powerflexSdc: quay.io/dell/storage/powerflex/sdc:3.6.0.6
       certSecretCount: 0
       controller:
         replication:
@@ -2544,7 +2544,7 @@ describe("GIVEN createYamlString function", () => {
       version: v2.12.0
       images:
         driverRepository: dellemc
-        powerflexSdc: dellemc/sdc:3.6.0.6
+        powerflexSdc: quay.io/dell/storage/powerflex/sdc:3.6.0.6
       certSecretCount: 0
       controller:
         replication:

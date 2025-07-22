@@ -155,7 +155,7 @@ Given a setup where Kubernetes, a storage system, and the Authorization Proxy Se
       enabled: true
 
       # sidecarProxyImage: the container image used for the csm-authorization-sidecar.
-      # Default value: quay.io/dell/container-storage-modules/csm-authorization-sidecar:v2.2.0
+      # Default value: quay.io/dell/container-storage-modules/csm-authorization-sidecar:v2.3.0
       sidecarProxyImage: quay.io/dell/container-storage-modules/csm-authorization-sidecar:{{< version-docs key="Authv2_csm_authorization_sidecar" >}}
 
       # proxyHost: hostname of the csm-authorization server

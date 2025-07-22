@@ -25,7 +25,7 @@ spec:
     forceRemoveDriver: true
     common:
       # Image for CSI PowerScale driver v2.10.1
-      image: "dellemc/csi-isilon:v2.10.1"
+      image: "quay.io/dell/container-storage-modules/csi-isilon:v2.10.1"
       imagePullPolicy: IfNotPresent
       envs:
         # X_CSI_VERBOSE: Indicates what content of the OneFS REST API message should be logged in debug level logs
@@ -240,7 +240,7 @@ spec:
       - name: snapshotter
         image: registry.k8s.io/sig-storage/csi-snapshotter:v7.0.1
       - name: csi-metadata-retriever
-        image: dellemc/csi-metadata-retriever:v1.7.3
+        image: quay.io/dell/container-storage-modules/csi-metadata-retriever:v1.7.3
       # health monitor is disabled by default, refer to driver documentation before enabling it
       - name: external-health-monitor
         enabled: $HEALTH_MONITOR_ENABLED
@@ -260,7 +260,7 @@ spec:
       configVersion: v1.10.1
       components:
       - name: karavi-authorization-proxy
-        image: dellemc/csm-authorization-sidecar:v1.10.1
+        image: quay.io/dell/container-storage-modules/csm-authorization-sidecar:v1.10.1
         envs:
           # proxyHost: hostname of the csm-authorization server
           - name: "PROXY_HOST"
@@ -285,7 +285,7 @@ spec:
         # image: Image to use for dell-csi-replicator. This shouldn't be changed
         # Allowed values: string
         # Default value: None
-        image: dellemc/dell-csi-replicator:v1.8.1
+        image: quay.io/dell/container-storage-modules/dell-csi-replicator:v1.8.1
         envs:
           # replicationPrefix: prefix to prepend to storage classes parameters
           # Allowed values: string
@@ -301,7 +301,7 @@ spec:
       - name: dell-replication-controller-manager
         # image: Defines controller image. This shouldn't be changed
         # Allowed values: string
-        image: dellemc/dell-replication-controller:v1.8.1
+        image: quay.io/dell/container-storage-modules/dell-replication-controller:v1.8.1
         envs:
           # TARGET_CLUSTERS_IDS: comma separated list of cluster IDs of the targets clusters. DO NOT include the source(wherever CSM Operator is deployed) cluster ID
           # Set the value to "self" in case of stretched/single cluster configuration
@@ -340,7 +340,7 @@ spec:
           enabled: $OBSERVABILITY_OPERATOR_TOPOLOGY
           # image: Defines karavi-topology image. This shouldn't be changed
           # Allowed values: string
-          image: dellemc/csm-topology:v1.8.1
+          image: quay.io/dell/container-storage-modules/csm-topology:v1.8.1
           envs:
             # topology log level
             # Valid values: TRACE, DEBUG, INFO, WARN, ERROR, FATAL, PANIC
@@ -374,7 +374,7 @@ spec:
           enabled: $OBSERVABILITY_OPERATOR_METRICS
           # image: Defines PowerScale metrics image. This shouldn't be changed
           # Allowed values: string
-          image: dellemc/csm-metrics-powerscale:v1.5.1
+          image: quay.io/dell/container-storage-modules/csm-metrics-powerscale:v1.5.1
           envs:
             # POWERSCALE_MAX_CONCURRENT_QUERIES: set the default max concurrent queries to PowerScale
             # Allowed values: int
@@ -446,7 +446,7 @@ spec:
       configVersion: v1.9.1
       components:
         - name: podmon-controller
-          image: dellemc/podmon:v1.9.1
+          image: quay.io/dell/container-storage-modules/podmon:v1.9.1
           imagePullPolicy: IfNotPresent
           args:
             - "--labelvalue=$LABEL_VALUE"
@@ -461,7 +461,7 @@ spec:
             - "--driverPath=csi-isilon.dellemc.com"
             - "--driver-config-params=/csi-isilon-config-params/driver-config-params.yaml"
         - name: podmon-node
-          image: dellemc/podmon:v1.9.1
+          image: quay.io/dell/container-storage-modules/podmon:v1.9.1
           imagePullPolicy: IfNotPresent
           envs:
             # podmonAPIPort: Defines the port to be used within the kubernetes cluster

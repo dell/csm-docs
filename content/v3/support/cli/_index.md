@@ -851,7 +851,7 @@ quay.io/dell/container-storage-modules/csi-vxflexos:v2.12.0     k8s1.31,k8s1.30,
                                                                         registry.k8s.io/sig-storage/csi-snapshotter:v6.2.2
                                                                         registry.k8s.io/sig-storage/csi-resizer:v1.8.0
                                                                         registry.k8s.io/sig-storage/csi-node-driver-registrar:v2.8.0
-                                                                        dellemc/sdc:3.6.0.6
+                                                                        quay.io/dell/storage/powerflex/sdc:3.6.0.6
 
 ```
 
