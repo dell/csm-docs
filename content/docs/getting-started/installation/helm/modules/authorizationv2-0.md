@@ -39,42 +39,60 @@ Only one of the two can be specified at a time.
 
 ## Using a Secret Provider Class
 
-1. Install a supported [External Secret Provider](https://secrets-store-csi-driver.sigs.k8s.io/getting-started/installation#install-external-secret-providers) to integrate with the Secrets Store CSI Driver. For guidance on setting up Vault, refer to our [Vault installation guide](docs/getting-started/installation/operator/modules/authorizationv2-0#vault-csi-provider-installation).
+1. Install a supported [External Secret Provider](https://secrets-store-csi-driver.sigs.k8s.io/getting-started/installation#install-external-secret-providers) to integrate with the Secrets Store CSI Driver. For guidance on setting up Vault, refer to our [Vault installation guide](docs/getting-started/installation/operator/modules/authorizationv2-0#vault-csi-provider-installation). For Conjur, refer to our [Conjur installation guide](docs/getting-started/installation/operator/modules/authorizationv2-0#conjur-csi-provider-installation)
 2. Install the [Secrets Store CSI Driver](https://secrets-store-csi-driver.sigs.k8s.io/getting-started/installation) enabling the [`Sync as Kubernetes Secret`](https://secrets-store-csi-driver.sigs.k8s.io/topics/sync-as-kubernetes-secret) and [`Secret Auto Rotation`](https://secrets-store-csi-driver.sigs.k8s.io/topics/secret-auto-rotation) features.
+>__Note__: If you are using Conjur with the Secrets Store CSI Drvier, be sure to configure `--set 'tokenRequests[0].audience=conjur'` when installing the driver.
 3. Create your own [SecretProviderClass Object](https://secrets-store-csi-driver.sigs.k8s.io/getting-started/usage#create-your-own-secretproviderclass-object) based on your external secret provider. You also have the option to create your own Redis secret in the SecretProviderClass.
 
   {{< collapse id="2" title="SecretProviderClass without Redis" card="false" >}}
 
   <br>
-  Example SecretProviderClass using Vault Provider:
-
-  ```bash
-  apiVersion: secrets-store.csi.x-k8s.io/v1
-  kind: SecretProviderClass
-  metadata:
-    name: vault-db-creds
-  spec:
-    # Vault CSI Provider
-    provider: vault
-    parameters:
-      # Vault role name to use during login
-      roleName: 'csm-authorization'
-      # Vault's hostname
-      vaultAddress: 'https://vault:8200'
-      # TLS CA certification for validation
-      vaultCACertPath: '/vault/tls/ca.crt'
-      objects: |
-        - objectName: "dbUsername"
-          secretPath: "database/creds/db-app"
-          secretKey: "username"
-        - objectName: "dbPassword"
-          secretPath: "database/creds/db-app"
-          secretKey: "password"
-      # "objectName" is an alias used within the SecretProviderClass to reference
-      # that specific secret. This will also be the filename containing the secret.
-      # "secretPath" is the path in Vault where the secret should be retrieved.
-      # "secretKey" is the key within the Vault secret response to extract a value from.
-  ```
+  {{< tabpane name="secret-provider-class-no-redis" lang="bash">}}
+  {{<tab header="Vault" >}}
+apiVersion: secrets-store.csi.x-k8s.io/v1
+kind: SecretProviderClass
+metadata:
+  name: vault-db-creds
+spec:
+  # Vault CSI Provider
+  provider: vault
+  parameters:
+    # Vault role name to use during login
+    roleName: 'csm-authorization'
+    # Vault's hostname
+    vaultAddress: 'https://vault:8200'
+    # TLS CA certification for validation
+    vaultCACertPath: '/vault/tls/ca.crt'
+    objects: |
+      - objectName: "dbUsername"
+        secretPath: "database/creds/db-app"
+        secretKey: "username"
+      - objectName: "dbPassword"
+        secretPath: "database/creds/db-app"
+        secretKey: "password"
+    # "objectName" is an alias used within the SecretProviderClass to reference
+    # that specific secret. This will also be the filename containing the secret.
+    # "secretPath" is the path in Vault where the secret should be retrieved.
+    # "secretKey" is the key within the Vault secret response to extract a value from.
+  {{</tab >}}
+  {{<tab header="Conjur" >}}
+apiVersion: secrets-store.csi.x-k8s.io/v1
+kind: SecretProviderClass
+metadata:
+  name: conjur-db-creds
+spec:
+  provider: conjur
+  parameters:
+    conjur.org/configurationVersion: 0.2.0
+    account: replace-me-account
+    applianceUrl: 'https://conjur-conjur-oss.default.svc.cluster.local'
+    authnId: authn-jwt/kube
+    sslCertificate: |
+      -----BEGIN CERTIFICATE-----
+      ...
+      -----END CERTIFICATE-----
+  {{</tab >}}
+  {{< /tabpane >}}
 
   {{< /collapse >}}
 
