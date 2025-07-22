@@ -28,7 +28,7 @@ kubectl get csm --all-namespaces
 #### SDC Deployment for Operator
 - This feature deploys the sdc kernel modules on all nodes with the help of an init container.
 - Powerflex can be deployed with or without SDC. SDC deployment can be enabled and disabled by setting `X_CSI_SDC_ENABLED` value in CR file. By default, driver is deployed with SDC enabled.
-- For non-supported versions of the OS also do the manual SDC deployment steps given below. Refer to https://hub.docker.com/r/dellemc/sdc for supported versions.
+- For non-supported versions of the OS also do the manual SDC deployment steps given below. Refer to https://quay.io/repository/dell/storage/powerflex/sdc for supported versions.
 - **Note:** When the driver is created, MDM value for initContainers in driver CR is set by the operator from mdm attributes in the driver configuration file,
   config.yaml. An example of config.yaml is below in this document. Do not set MDM value for initContainers in the driver CR file manually.
   - Optionally, enable sdc monitor by setting the enable flag for the sdc-monitor to true. Please note:
@@ -40,7 +40,7 @@ kubectl get csm --all-namespaces
     # sdc-monitor is disabled by default, due to high CPU usage
       - name: sdc-monitor
         enabled: false
-        image: dellemc/sdc:4.5
+        image: quay.io/dell/storage/powerflex/sdc:4.5
         envs:
         - name: HOST_PID
           value: "1"
