@@ -102,7 +102,7 @@ Given a setup where Kubernetes, a storage system, and the Authorization Proxy Se
     ```
 
 5. Enable Container Storage Modules Authorization in the driver installation applicable to your installation method.
-  Alternatively, you can use the minimal sample files provided [here](https://github.com/dell/csm-operator/tree/main/samples/minimal-samples/powerflex_{{< version-docs key="Min_sample_operator_pflex" >}}.yaml) and install the module using default value.
+  Alternatively, you can use the minimal sample files provided in respective CSM versions folder under samples [here](https://github.com/dell/csm-operator/tree/main/samples) and install the module using default value.
 
     **Operator**
 
@@ -118,7 +118,7 @@ Given a setup where Kubernetes, a storage system, and the Authorization Proxy Se
 
     - Update the `SKIP_CERTIFICATE_VALIDATION` environment value to `true` or `false` depending on if you want to disable or enable certificate validation of Authorization Proxy Server.
 
-    - Do not update the `configVersion`. You will notice in the example that it is set to v1.14.0. This ensures that Operator checks on version support do not prevent deployment of the v2.2.0 version of authorization.
+    - Do not update the `configVersion`. You will notice in the example that it is set to v1.14.0. This ensures that Operator checks on version support do not prevent deployment of the latest version of authorization.
 
     Example:
 
@@ -161,7 +161,7 @@ Given a setup where Kubernetes, a storage system, and the Authorization Proxy Se
       enabled: true
 
       # sidecarProxyImage: the container image used for the csm-authorization-sidecar.
-      # Default value: quay.io/dell/container-storage-modules/csm-authorization-sidecar:v2.2.0
+      # Default value: quay.io/dell/container-storage-modules/csm-authorization-sidecar:v2.3.0
       sidecarProxyImage: quay.io/dell/container-storage-modules/csm-authorization-sidecar:{{< version-docs key="Authv2_csm_authorization_sidecar" >}}
 
       # proxyHost: hostname of the csm-authorization server

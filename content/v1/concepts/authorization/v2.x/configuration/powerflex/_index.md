@@ -102,7 +102,7 @@ Given a setup where Kubernetes, a storage system, and the Authorization Proxy Se
     ```
 
 5. Enable Container Storage Modules Authorization in the driver installation applicable to your installation method.
-  Alternatively, you can use the minimal sample files provided [here](https://github.com/dell/csm-operator/tree/main/samples/minimal-samples/powerflex_{{< version-v1 key="Min_sample_operator_pflex" >}}.yaml) and install the module using default value.
+  Alternatively, you can use the minimal sample files provided in respective CSM versions folder under samples [here](https://github.com/dell/csm-operator/tree/main/samples) and install the module using default value.
 
     **Operator**
 

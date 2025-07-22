@@ -96,7 +96,7 @@ Given a setup where Kubernetes, a storage system, and the Authorization Proxy Se
     ```
 
 5. Enable Container Storage Modules Authorization in the driver installation applicable to your installation method.
-  Alternatively, you can use the minimal sample files provided [here](https://github.com/dell/csm-operator/tree/main/samples/minimal-samples/powerstore_{{< version-docs key="Min_sample_operator_pstore" >}}.yaml) and install the module using default value.
+  Alternatively, you can use the minimal sample files provided in respective CSM versions folder under samples [here](https://github.com/dell/csm-operator/tree/main/samples) and install the module using default value.
 
     **Operator**
 
@@ -155,7 +155,7 @@ Given a setup where Kubernetes, a storage system, and the Authorization Proxy Se
       enabled: true
 
       # sidecarProxyImage: the container image used for the csm-authorization-sidecar.
-      # Default value: quay.io/dell/container-storage-modules/csm-authorization-sidecar:v2.2.0
+      # Default value: quay.io/dell/container-storage-modules/csm-authorization-sidecar:v2.3.0
       sidecarProxyImage: quay.io/dell/container-storage-modules/csm-authorization-sidecar:{{< version-docs key="Authv2_csm_authorization_sidecar" >}}
 
       # proxyHost: hostname of the csm-authorization server

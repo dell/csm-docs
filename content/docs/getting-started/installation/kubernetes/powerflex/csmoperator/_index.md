@@ -30,7 +30,7 @@ This feature deploys the SDC kernel modules on all nodes using an init container
 Set the `X_CSI_SDC_ENABLED` value in the CR file. By default, SDC is enabled.
 
 -  **Manual Deployment:**
-For unsupported OS versions, follow the manual SDC deployment steps. Refer to https://hub.docker.com/r/dellemc/sdc for supported versions.
+For unsupported OS versions, follow the manual SDC deployment steps. Refer to https://quay.io/repository/dell/storage/powerflex/sdc for supported OS versions.
 
 - **MDM Value:**
 The operator sets the MDM value for initContainers in the driver CR from the `mdm` attributes in `config.yaml`. Do not set this manually.
@@ -137,7 +137,7 @@ run `/opt/emc/scaleio/sdc/bin/drv_cfg --add_mdm --ip 10.xx.xx.xx.xx,10.xx.xx.xx`
         configVersion: {{< version-docs key="PFlex_latestVersion" >}}
         forceRemoveDriver: true
     ```
-     Refer the [sample file](https://github.com/dell/csm-operator/blob/main/samples/minimal-samples/powerflex_{{< version-docs key="sample_sc_pflex" >}}.yaml). Modify if needed.
+     Refer the minimal sample files provided in respective CSM versions folder under samples [here](https://github.com/dell/csm-operator/tree/main/samples). Modify if needed.
 
     [OR]
 

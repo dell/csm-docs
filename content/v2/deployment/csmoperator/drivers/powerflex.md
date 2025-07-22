@@ -30,7 +30,7 @@ kubectl get csm --all-namespaces
 
 - This feature deploys the sdc kernel modules on all nodes with the help of an init container.
 - Powerflex can be deployed with or without SDC. SDC deployment can be enabled and disabled by setting `X_CSI_SDC_ENABLED` value in CR file. By default, driver is deployed with SDC enabled.
-- For non-supported versions of the OS also do the manual SDC deployment steps given below. Refer to https://hub.docker.com/r/dellemc/sdc for supported versions.
+- For non-supported versions of the OS also do the manual SDC deployment steps given below.  Refer to https://quay.io/repository/dell/storage/powerflex/sdc for supported OS versions. 
 - **Note:** When the driver is created, MDM value for initContainers in driver CR is set by the operator from mdm attributes in the driver configuration file,
   config.yaml. An example of config.yaml is below in this document. Do not set MDM value for initContainers in the driver CR file manually.
   - Optionally, enable sdc monitor by setting the enable flag for the sdc-monitor to true. Please note:
@@ -138,8 +138,7 @@ For detailed PowerFlex installation procedure, see the [Dell PowerFlex Deploymen
 2. Create a CR (Custom Resource) for PowerFlex using the sample files provided
 
     a. Install the PowerFlex driver using default configuration using
-    the sample file provided
-   [here](https://github.com/dell/csm-operator/tree/main/samples/minimal-samples). This file can be modified to use custom parameters if needed.
+    the sample file provided under minimal-samples folder of respective CSM versions [here](https://github.com/dell/csm-operator/tree/main/samples). This file can be modified to use custom parameters if needed.
 
     b. Install the PowerFlex driver using the detailed configuration using the sample file provided
     [here](https://github.com/dell/csm-operator/tree/main/samples).
