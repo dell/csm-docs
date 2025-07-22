@@ -71,8 +71,8 @@ Edit these parameters in the manifest:
    | systemID                                                        | System ID of the backend storage array.                                              | Yes      | -       |
    | storageSystemCredentials.secretProviderClass                    | The SecretProviderClass containing the storage system credentials.                   | Yes      | -       |
    | storageSystemCredentials.secretProviderClass.name               | The SecretProviderClass name.                                                        | Yes      | -       |
-   | storageSystemCredentials.secretProviderClass.usernameObjectName | The SecretProviderClass objectName for the username.                                 | Yes      | -       |
-   | storageSystemCredentials.secretProviderClass.passwordObjectName | The SecretProviderClass objectName for the password.                                 | Yes      | -       |
+   | storageSystemCredentials.secretProviderClass.usernameObjectName | The SecretProviderClass objectName (Vault) or secret path (Conjur) for the username. | Yes      | -       |
+   | storageSystemCredentials.secretProviderClass.passwordObjectName | The SecretProviderClass objectName (Vault) or secret path (Conjur) for the password. | Yes      | -       |
    | storageSystemCredentials.secret                                 | The Kubernetes Secret containing the storage system credentials                      | No       | -       |
    | skipCertificateValidation                                       | A boolean that enables/disables certificate validation of the backend storage array. | No       | true    |
    | pollInterval                                                    | PollInterval is the polling frequency to test the storage connectivity.              | No       | 30s     |

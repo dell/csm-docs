@@ -289,7 +289,7 @@ Follow the instructions available in Authorization for
 
 If there is already a Vault CSI provider install available, skip to [Minimum Server Configuration](#minimum-server-configuration).
 
-If there is no Vault CSI provider available to use with Authorization, it can be installed following [Hashicorp Vault documentation](https://www.vaultproject.io/docs).
+If there is no Vault CSI provider available to use with CSM Authorization, it can be installed following [Hashicorp Vault documentation](https://www.vaultproject.io/docs).
 
 For a testing environment, however, a simple deployment suggested in this section may suffice.
 > **NOTE**: It creates a standalone server with in-memory (non-persistent) storage. It is insecure and will lose data on every restart. It is only made for development or experimentation.
@@ -307,7 +307,7 @@ This is the recommended installation method for [Vault Provider for Secrets Stor
 
 ## Minimum Server Configuration
 
-> **NOTE:** This configuration is a bare minimum to support Authorization.
+> **NOTE:** This configuration is a bare minimum to support CSM Authorization.
 Refer to the [Hashicorp Vault documentation](https://www.vaultproject.io/docs) for recommended configuration options.
 
 > To start an interactive shell session, run `kubectl exec -it vault-0 -- /bin/sh`. After completing the configuration process, exit the shell by typing `exit`.
@@ -381,3 +381,122 @@ With the default server settings, role level values control TTL in this way:
 The client token will only be able to renew 3 times before reaching it total allowed TTL of 2 hours.
 
 Existing role values can be changed using `vault write auth/kubernetes/role/csm-authorization token_ttl=30m token_explicit_max_ttl=2h`.
+
+## Conjur CSI Provider Installation
+
+If there is already a Conjur CSI provider install available, skip to [Minimum Server Configuration](#conjur-minimum-server-configuration).
+
+If there is no Conjur CSI provider available to use with CSM Authorization, it can be installed following [Conjur K8S CSI Provider documentation](https://github.com/cyberark/conjur-k8s-csi-provider).
+
+For a testing environment, however, a simple deployment suggested in this section may suffice.
+
+### Start Conjur CSI Provider
+
+```shell
+helm repo add cyberark https://cyberark.github.io/helm-charts
+helm install conjur-csi-provider \
+  cyberark/conjur-k8s-csi-provider \
+  --set provider.name="conjur" \
+  --set securityContext.privileged=true \
+  --set securityContext.allowPrivilegeEscalation=true
+```
+
+### Conjur Minimum Server Configuration
+> **NOTE:** This configuration is a bare minimum to support CSM Authorization.
+
+#### Load Host Policy
+Load the following policy file using `conjur-cli`. In this example, the yaml below is saved in `$HOME/.conjur-cli/config.yaml`. 
+
+> **NOTE:** This example uses `public-keys` of the Service Account Issuer Discovery service in Kubernetes. `jwks-uri` is also available to set and configure.
+
+```yaml
+# Define the policy branch
+- !policy
+  id: csm-authorization
+  body:
+    - !host
+      id: system:serviceaccount:authorization:storage-service
+      annotations:
+        authn-jwt/kube/kubernetes.io/namespace: "authorization"
+        authn-jwt/kube/kubernetes.io/serviceaccount/name: "storage-service"
+
+# Define the webservice and its variables
+- !webservice
+  id: conjur/authn-jwt/kube
+
+- !variable
+  id: conjur/authn-jwt/kube/issuer
+
+- !variable
+  id: conjur/authn-jwt/kube/public-keys
+
+- !variable
+  id: conjur/authn-jwt/kube/audience
+
+- !variable
+  id: conjur/authn-jwt/kube/token-app-property
+
+- !variable
+  id: conjur/authn-jwt/kube/identity-path
+
+# Permit the nested host access to the webservice
+- !permit
+  role: !host csm-authorization/system:serviceaccount:authorization:storage-service
+  privilege: [ read, authenticate ]
+  resource: !webservice conjur/authn-jwt/kube
+
+```
+
+```shell
+podman run --rm -it -v ~/.conjur-cli:/home/cli docker.io/cyberark/conjur-cli:8 policy load -b root -f /home/cli/config.yaml
+```
+
+#### Configure JWT Authentication
+
+Save your cluster's JWKS information.
+
+```shell
+kubectl get --raw /openid/v1/jwks > $HOME/.conjur-cli/jwks.json
+```
+
+Configure the `public-keys`, `issuer`, `token-app-property`, `identity-path`, and `audience` variables.
+
+If your cluster is OpenShift, the `issuer` is `https://kubernetes.default.svc`. For standard Kubernetes, it is `https://kubernetes.default.svc.cluster.local`. In this example, the cluster is OpenShift.
+
+```shell
+ISSUER="https://kubernetes.default.svc"
+
+podman run --rm -v ~/.conjur-cli:/home/cli docker.io/cyberark/conjur-cli:8 variable set -i conjur/authn-jwt/kube/public-keys -v "{\"type\":\"jwks\", \"value\":$(cat ~/.conjur-cli/jwks.json | jq -c .)}" && \
+podman run --rm -v ~/.conjur-cli:/home/cli docker.io/cyberark/conjur-cli:8 variable set -i conjur/authn-jwt/kube/issuer -v "$ISSUER && \
+podman run --rm -v ~/.conjur-cli:/home/cli docker.io/cyberark/conjur-cli:8 variable set -i conjur/authn-jwt/kube/token-app-property -v "sub" && \
+podman run --rm -v ~/.conjur-cli:/home/cli docker.io/cyberark/conjur-cli:8 variable set -i conjur/authn-jwt/kube/identity-path -v csm-authorization && \
+podman run --rm -v ~/.conjur-cli:/home/cli docker.io/cyberark/conjur-cli:8 variable set -i conjur/authn-jwt/kube/audience -v "conjur"
+```
+
+#### Load and Configure a Secret
+
+In this example, the following yaml is saved in `$HOME/.conjur-cli/app-secret.yaml`.
+
+```yaml
+- !policy
+  id: secrets
+  body:
+    - &variables
+      - !variable username
+      - !variable password
+    - !permit
+      role: !host /csm-authorization/system:serviceaccount:authorization:storage-service
+      privilege: [ read, execute ]
+      resource: *variables
+```
+
+```shell
+podman run --rm -it -v ~/.conjur-cli:/home/cli docker.io/cyberark/conjur-cli:8 policy load -b root -f /home/cli/app-secret.yaml
+```
+
+Set the variable with values. In this example, `usr` and `pwd` are the values.
+
+```shell
+podman run --rm -it -v ~/.conjur-cli:/home/cli docker.io/cyberark/conjur-cli:8 variable set -i secrets/username -v usr && \
+podman run --rm -it -v ~/.conjur-cli:/home/cli docker.io/cyberark/conjur-cli:8 variable set -i secrets/password -v pwd
+```
