@@ -419,6 +419,17 @@ All OpenShift nodes connecting to Dell storage arrays must use unique host NVMe 
             name: custom-coreos-generate-nvme-hostnqn.service
   EOF
   ```
+  **Array requirements**
+Once the NVMe endpoint is created on the array, follow the following steps to
+update the endpoint name to adhere to the CSI driver requirements.
+- Run `nvme discover --transport=tcp --traddr=<InterfaceAdd> --trsvcid=4420`.
+  <InterfaceAdd> is the placeholder for actual IP address of NVMe Endpoint.
+- Fetch the _subnqn_, for e.g.,
+  _nqn.1988-11.com.dell:PowerMax_2500:00:000120001100_, this will be used as the
+  subnqn holder while updating NVMe endpoint name.
+- Update the NVMe endpoint name as `<subnqn>:<dir><port>>`. Here is an example
+  how it should look,
+  _nqn.1988-11.com.dell:PowerMax_2500:00:000120001100:OR1C000_ 
 
 {{% /tab %}}
 
@@ -552,7 +563,18 @@ All OpenShift nodes connecting to Dell storage arrays must use unique host NVMe 
             name: custom-coreos-generate-nvme-hostnqn.service
   EOF
   ```
-   {{% /tab %}} 
+
+**Array requirements**
+Once the NVMe endpoint is created on the array, follow the following steps to
+update the endpoint name to adhere to the CSI driver requirements.
+- Run `nvme discover --transport=tcp --traddr=<InterfaceAdd> --trsvcid=4420`.
+  <InterfaceAdd> is the placeholder for actual IP address of NVMe Endpoint.
+- Fetch the _subnqn_, for e.g.,
+  _nqn.1988-11.com.dell:PowerMax_2500:00:000120001100_, this will be used as the
+  subnqn holder while updating NVMe endpoint name.
+- Update the NVMe endpoint name as `<subnqn>:<dir><port>>`. Here is an example
+  how it should look,
+  _nqn.1988-11.com.dell:PowerMax_2500:00:000120001100:OR1C000_ {{% /tab %}}
 
 
 {{% tab header="NFS" lang="en" %}}

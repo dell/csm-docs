@@ -72,6 +72,7 @@ Description: >
 - [#1861 - [BUG]: Update the OTEL image version in operator and helm sample files](https://github.com/dell/csm/issues/1861)
 - [#1930 - [BUG]: Powerstore has unnecessary sharedNFS related codes that affects performance](https://github.com/dell/csm/issues/1930)
 - [#1942 - [BUG]: NVMe/TCP mounts fail on OCP 4.19/RHEL 9.6 having NVMe CLI v2.11.0](https://github.com/dell/csm/issues/1939)
+- [#1957 - [BUG]: Powermax NVMe volumes not reattached after pod deletion](https://github.com/dell/csm/issues/1957)
 
 
 ### Known Issues

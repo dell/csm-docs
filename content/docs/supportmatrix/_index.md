@@ -100,7 +100,7 @@ Container Storage Modules doesn't officially support specific operating systems,
 |  4.19       | 1.6.1, 1.7.0, 1.8.1, 1.9.1               |1.11.1, 1.12, 1.13.1, 1.14.1              |
 {{</table>}}
 **Note:**
-- [Refer](#supported-container-orchestrator-platforms) our supported Orchestration platform. While the Operator may be displayed, it does not necessarily mean it has been fully qualified by us. If desired, customers can upgrade the Operator and self-certify it.
+- [Refer](#container-orchestrator-platforms) our supported Orchestration platform. While the Operator may be displayed, it does not necessarily mean it has been fully qualified by us. If desired, customers can upgrade the Operator and self-certify it.
 
 
 ## Installation Wizard Compatibility
