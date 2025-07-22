@@ -88,7 +88,7 @@ To deploy the Operator, follow the instructions available [here](../../../operat
 
     i. **Create a CR (Custom Resource)** for PowerMax using the sample files provided
     
-    a. **Default Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/main/samples/minimal-samples/powermax_{{< version-docs key="Min_sample_operator_pmax" >}}.yaml) for default settings. Modify if needed.
+    a. **Default Configuration:** Refer the minimal sample files provided in respective CSM versions folder under samples [here](https://github.com/dell/csm-operator/tree/main/samples). Modify if needed.
 
     [OR]
 

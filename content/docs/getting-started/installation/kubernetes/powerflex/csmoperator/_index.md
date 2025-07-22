@@ -137,7 +137,7 @@ run `/opt/emc/scaleio/sdc/bin/drv_cfg --add_mdm --ip 10.xx.xx.xx.xx,10.xx.xx.xx`
         configVersion: {{< version-docs key="PFlex_latestVersion" >}}
         forceRemoveDriver: true
     ```
-     Refer the [sample file](https://github.com/dell/csm-operator/blob/main/samples/minimal-samples/powerflex_{{< version-docs key="sample_sc_pflex" >}}.yaml). Modify if needed.
+     Refer the minimal sample files provided in respective CSM versions folder under samples [here](https://github.com/dell/csm-operator/tree/main/samples). Modify if needed.
 
     [OR]
 

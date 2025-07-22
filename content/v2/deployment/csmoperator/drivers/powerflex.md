@@ -138,8 +138,7 @@ For detailed PowerFlex installation procedure, see the [Dell PowerFlex Deploymen
 2. Create a CR (Custom Resource) for PowerFlex using the sample files provided
 
     a. Install the PowerFlex driver using default configuration using
-    the sample file provided
-   [here](https://github.com/dell/csm-operator/tree/main/samples/minimal-samples). This file can be modified to use custom parameters if needed.
+    the sample file provided under minimal-samples folder of respective CSM versions [here](https://github.com/dell/csm-operator/tree/main/samples). This file can be modified to use custom parameters if needed.
 
     b. Install the PowerFlex driver using the detailed configuration using the sample file provided
     [here](https://github.com/dell/csm-operator/tree/main/samples).
