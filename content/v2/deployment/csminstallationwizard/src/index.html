@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- 
+<!--
 +++
 disable_footer: true
 +++
@@ -16,9 +16,9 @@ disable_footer: true
     <script type="text/javascript" src="static/js/bootstrap.bundle.min.js"></script>
   </head>
   <body>
-   
+
     <div class="container-fluid pt-5 ">
-      
+
         <div class="row">
           <div class="col-12 pl-md-5">
             <span class="heading">Container Storage Modules (CSM) Installation Wizard </span>
@@ -259,7 +259,7 @@ disable_footer: true
                   <div class="row mb-4">
                     <div class="col-sm-12 h5">Select the features for installation</div>
                   </div>
-                
+
                   <div class="row mb-4 authorization col-sm-11">
                     <div class="col-sm-12">
                       <input class="form-check-input" type="checkbox" id="authorization" value="" onchange="onAuthorizationChange(authorizationNote); validateInput(validateForm, CONSTANTS)">
@@ -374,7 +374,7 @@ disable_footer: true
 
                   <div class="row mb-4 approve-sdc">
                     <div class="col-sm-12">
-                      <input class="form-check-input" type="checkbox" id="approve-sdc" value="" onchange="onApproveSdcChange(approveSdcNote) checked">
+                      <input class="form-check-input" type="checkbox" id="approve-sdc" value="" onchange="onApproveSdcChange(approveSdcNote); checked">
                       <label for="approve-sdc" class="form-check-label ms-2 text-dark" data-bs-toggle="tooltip" data-bs-placement="right" title="Enable/Disable SDC approval">Allow driver to approve SDC </label>
                     </div>
                     <div class="row child-level-one" id="approvesdc-note-wrapper">
@@ -604,7 +604,7 @@ disable_footer: true
                       </div>
                     </div>
                   </div>
-                  
+
                   <div class="was-validated row mb-4">
                     <label for="controller-count" class="col-sm-2 col-form-label" data-bs-toggle="tooltip" data-bs-placement="right" title="Defines the number of controller pods to deploy." style="width: 180px;">Controller Pods Count</label>
                     <div class="row">
@@ -633,7 +633,7 @@ disable_footer: true
                       </div>
                     </div>
                   </div>
-                  
+
                   <div class="row mb-4 nodeselector">
                     <div class="col-sm-12">
                       <input class="form-check-input" type="checkbox" id="controller-pods-node-selector" value="" onchange="onNodeSelectorChange(nodeSelectorNote, csmMap)">

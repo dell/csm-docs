@@ -25,7 +25,7 @@ Install Helm 3.x on the master node before you install the CSI Driver for Dell P
 
 <br>
 
-{{< accordion id="Two" title="Base Install" markdown="true" >}}  
+{{< accordion id="Two" title="Base Install" markdown="true" >}}
 ## Prerequisites
 
 The following are requirements that must be met before installing the CSI Driver for Dell PowerFlex:
@@ -175,7 +175,7 @@ Use the below command to replace or update the secret:
 
 7. Download the default values.yaml file
    ```bash
-   cd dell-csi-helm-installer && wget -O myvalues.yaml https://github.com/dell/helm-charts/raw/csi-vxflexos-2.14.0/charts/csi-vxflexos/values.yaml
+   cd dell-csi-helm-installer && wget -O myvalues.yaml https://github.com/dell/helm-charts/raw/csi-vxflexos-2.15.0/charts/csi-vxflexos/values.yaml
    ```
 
 8. If you are using custom images, check the fields under `images` in `my-vxflexos-settings.yaml` to make sure that they are pointing to the correct image repository.
@@ -354,7 +354,7 @@ Starting CSI PowerFlex v1.5, `dell-csi-helm-installer` will not create any Volum
 <br>
 
 {{< accordion id="Three" title="Modules" >}}
-       
+
 
 {{< cardcontainer >}}
 
