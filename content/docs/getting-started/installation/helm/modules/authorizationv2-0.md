@@ -41,7 +41,7 @@ Only one of the two can be specified at a time.
 
 1. Install a supported [External Secret Provider](https://secrets-store-csi-driver.sigs.k8s.io/getting-started/installation#install-external-secret-providers) to integrate with the Secrets Store CSI Driver. For guidance on setting up Vault, refer to our [Vault installation guide](docs/getting-started/installation/operator/modules/authorizationv2-0#vault-csi-provider-installation). For Conjur, refer to our [Conjur installation guide](docs/getting-started/installation/operator/modules/authorizationv2-0#conjur-csi-provider-installation)
 2. Install the [Secrets Store CSI Driver](https://secrets-store-csi-driver.sigs.k8s.io/getting-started/installation) enabling the [`Sync as Kubernetes Secret`](https://secrets-store-csi-driver.sigs.k8s.io/topics/sync-as-kubernetes-secret) and [`Secret Auto Rotation`](https://secrets-store-csi-driver.sigs.k8s.io/topics/secret-auto-rotation) features.
->__Note__: If you are using Conjur with the Secrets Store CSI Drvier, be sure to configure `--set 'tokenRequests[0].audience=conjur'` when installing the driver.
+>__Note__: If you are using Conjur with the Secrets Store CSI Driver, be sure to configure `--set 'tokenRequests[0].audience=conjur'` when installing the driver.
 3. Create your own [SecretProviderClass Object](https://secrets-store-csi-driver.sigs.k8s.io/getting-started/usage#create-your-own-secretproviderclass-object) based on your external secret provider. You also have the option to create your own Redis secret in the SecretProviderClass.
 
   {{< collapse id="2" title="SecretProviderClass without Redis" card="false" >}}
@@ -369,7 +369,7 @@ This edit will not update the logging level for the sidecar-proxy containers run
 
 ```bash
 
-kubectl -n [CSM_CSI_DRVIER_NAMESPACE] edit configmap/<release_name>-config-params
+kubectl -n [CSM_CSI_DRIVER_NAMESPACE] edit configmap/<release_name>-config-params
 ```
 
 Using PowerFlex as an example, `kubectl -n vxflexos edit configmap/vxflexos-config-params` can be used to update the logging level of the sidecar-proxy and the driver.
