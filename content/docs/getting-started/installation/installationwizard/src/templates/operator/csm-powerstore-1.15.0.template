@@ -196,11 +196,11 @@ spec:
     - name: authorization
       # enabled: Enable/Disable csm-authorization
       enabled: false
-      configVersion: v2.2.0
+      configVersion: v2.3.0
       components:
         - name: karavi-authorization-proxy
-          # Use image: quay.io/dell/container-storage-modules/csm-authorization-sidecar:v2.2.0 for Authorization v2.2.0
-          image: quay.io/dell/container-storage-modules/csm-authorization-sidecar:v2.2.0
+          # Use image: quay.io/dell/container-storage-modules/csm-authorization-sidecar:v2.3.0 for Authorization v2.3.0
+          image: quay.io/dell/container-storage-modules/csm-authorization-sidecar:v2.3.0
           envs:
             # proxyHost: hostname of the csm-authorization server
             # Default value: none
