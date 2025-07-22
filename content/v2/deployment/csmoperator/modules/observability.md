@@ -62,8 +62,7 @@ The CSM Observability module for supported Dell CSI Drivers can be installed via
 
 ## How to enable this module using minimal CR
 
-Alternatively, you can use the minimal sample files provided
-  [here](https://github.com/dell/csm-operator/tree/main/samples/minimal-samples).
+Alternatively, you can use the minimal sample files provided in respective CSM versions folder under samples [here](https://github.com/dell/csm-operator/tree/main/samples) and install the module using default value.
 
 ## Upgrade Observability
 
