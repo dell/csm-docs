@@ -25,21 +25,107 @@ The following third-party components are optionally installed in the specified n
 - cert-manager, which optionally provides a self-signed certificate to configure the Authorization Ingresses
 - nginx-ingress-controller, which fulfills the Authorization Ingresses
 
+Storage system credentials can be provided in one of two ways:
+1. Using a SecretProviderClass (for dynamic secrets from external providers)
+2. Using a Kubernetes Secret (for static credentials)
+
+Only one of the two can be specified at a time.
+
 ## Install Container Storage Modules Authorization
 
 **Steps**
-1. [Install Vault or configure an existing Vault](docs/getting-started/installation/operator/modules/authorizationv2-0#vault-server-installation).
-2. Create a namespace where you want to install Authorization.
+
+{{< accordion id="secret-provider-class" title="Using a Secret Provider Class" markdown="true" >}}
+
+## Using a Secret Provider Class
+
+1. Install a supported [External Secret Provider](https://secrets-store-csi-driver.sigs.k8s.io/getting-started/installation#install-external-secret-providers) to integrate with the Secrets Store CSI Driver. For guidance on setting up Vault, refer to our [Vault installation guide](docs/getting-started/installation/operator/modules/authorizationv2-0#vault-csi-provider-installation).
+2. Install the [Secrets Store CSI Driver](https://secrets-store-csi-driver.sigs.k8s.io/getting-started/installation) enabling the [`Sync as Kubernetes Secret`](https://secrets-store-csi-driver.sigs.k8s.io/topics/sync-as-kubernetes-secret) and [`Secret Auto Rotation`](https://secrets-store-csi-driver.sigs.k8s.io/topics/secret-auto-rotation) features.
+3. Create your own [SecretProviderClass Object](https://secrets-store-csi-driver.sigs.k8s.io/getting-started/usage#create-your-own-secretproviderclass-object) based on your external secret provider.
+
+   Example SecretProviderClass using Vault Provider:
+   ```bash
+    apiVersion: secrets-store.csi.x-k8s.io/v1
+    kind: SecretProviderClass
+    metadata:
+      name: vault-db-creds
+    spec:
+      # Vault CSI Provider
+      provider: vault
+      parameters:
+        # Vault role name to use during login
+        roleName: 'csm-authorization'
+        # Vault's hostname
+        vaultAddress: 'https://vault:8200'
+        # TLS CA certification for validation
+        vaultCACertPath: '/vault/tls/ca.crt'
+        objects: |
+          - objectName: "dbUsername"
+            secretPath: "database/creds/db-app"
+            secretKey: "username"
+          - objectName: "dbPassword"
+            secretPath: "database/creds/db-app"
+            secretKey: "password"
+        # "objectName" is an alias used within the SecretProviderClass to reference
+        # that specific secret. This will also be the filename containing the secret.
+        # "secretPath" is the path in Vault where the secret should be retrieved.
+        # "secretKey" is the key within the Vault secret response to extract a value from.
+   ```
+{{< /accordion >}}
+
+{{< accordion id="kubernetes-secret" title="Using a Kubernetes Secret" markdown="true" >}}
+
+## Using a Kubernetes Secret
+
+1. Create the Authorization namespace.
    ```bash
    kubectl create namespace authorization
    ```
 
-3. Add the Dell Helm Charts repo
+2. Create a Kubernetes Secret containing storage system credentials.
+
+   Example Secret YAML File named `secret-1.yaml`:
    ```bash
-     helm repo add dell https://dell.github.io/helm-charts
+   # Username and password for accessing storage system
+   username: "username"
+   password: "password"
    ```
 
-4. Prepare `samples/csm-authorization/config.yaml` which contains the JWT signing secret. The following table lists the configuration parameters.
+   Use the following command to create the Kubernetes Secret:
+   ```bash
+   kubectl create secret generic secret-1 -n authorization --from-file=secret-1.yaml
+   ```
+
+   After creating the secret, if you get it in YAML format, you should see something similar to the following:
+   ```bash
+   apiVersion: v1
+   data:
+     secret-1.yaml: <base64-encoded>
+   kind: Secret
+   ```
+{{< /accordion >}}
+
+Continue installation with the remaining steps:
+
+1. Create the Authorization namespace.
+   ```bash
+   kubectl create namespace authorization
+   ```
+
+    For OpenShift environments:
+   ```bash
+   kubectl label namespace authorization \
+    pod-security.kubernetes.io/enforce=privileged \
+    security.openshift.io/MinimallySufficientPodSecurityStandard=privileged \
+    --overwrite
+   ```
+
+2. Add the Dell Helm Charts repo
+   ```bash
+   helm repo add dell https://dell.github.io/helm-charts
+   ```
+
+3. Prepare `samples/csm-authorization/config.yaml` which contains the JWT signing secret. The following table lists the configuration parameters.
 
     | Parameter            | Description                         | Required | Default |
     | -------------------- | ----------------------------------- | -------- | ------- |
@@ -66,13 +152,13 @@ The following third-party components are optionally installed in the specified n
     kubectl create secret generic karavi-config-secret -n authorization --from-file=config.yaml=samples/csm-authorization/config.yaml -o yaml --dry-run=client | kubectl replace -f -
     ```
 
-5. Copy the default values.yaml file `cp charts/csm-authorization-v2.0/values.yaml myvalues.yaml`
+4. Copy the default values.yaml file `cp charts/csm-authorization-v2.0/values.yaml myvalues.yaml`
 
-6. Look over all the fields in `myvalues.yaml` and fill in/adjust any as needed.
+5. Look over all the fields in `myvalues.yaml` and fill in/adjust any as needed.
 
 <ul>
 
-{{< collapse id="1" title="Parameter" >}} 
+{{< collapse id="1" title="Parameter" >}}
 
 | Parameter                           | Description                                                                                                                          | Required | Default                                   |
 | ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ | -------- | ----------------------------------------- |
@@ -93,7 +179,6 @@ The following third-party components are optionally installed in the specified n
 | logLevel                            | Authorization log level. Allowed values: “error”, “warn”/“warning”, “info”, “debug”.                                                 | Yes      | debug                                     |
 | concurrentPowerFlexRequests         | Number of concurrent requests to PowerFlex. Used with dellctl to list tenant volumes.                                                | Yes      | 10                                        |
 | concurrentPowerScaleRequests        | Number of concurrent requests to PowerScale. Used with dellctl to list tenant volumes.                                               | Yes      | 10                                        |
-| concurrentPowerStoreRequests        | Number of concurrent requests to PowerStore. Used with dellctl to list tenant volumes.                                               | Yes      | 10                                        |
 | zipkin.collectoruri                 | The URI of the Zipkin instance to export traces.                                                                                     | No       | -                                         |
 | zipkin.probability                  | The ratio of traces to export.                                                                                                       | No       | -                                         |
 | proxyServerIngress.ingressClassName | The ingressClassName of the proxy-service Ingress.                                                                                   | Yes      | -                                         |
@@ -107,19 +192,13 @@ The following third-party components are optionally installed in the specified n
 | replicas                            | The number of replicas for the sentinel and redis pods.                                                                              | Yes      | 5                                         |
 | images.redis                        | The image to use for Redis.                                                                                                          | Yes      | redis:7.4.0-alpine                        |
 | images.commander                    | The image to use for Redis Commander.                                                                                                | Yes      | rediscommander/redis-commander:latest     |
-| **vault**                           | This section configures the vault components.                                                                                        | -        | -                                         |
-| identifier                          | A name that is used to identify a vault instance.                                                                                    | Yes      | vault0                                    |
-| address                             | The address where vault is hosted with the credentials to the array (`https://10.0.0.1:<port>`).                                     | Yes      | -                                         |
-| role                                | The configured authentication role in vault.                                                                                         | Yes      | csm-authorization                         |
-| skipCertificateValidation           | A boolean that enables/disables certificate validation to vault.                                                                     | Yes      | true                                      |
-| clientCertificate                   | The base64-encoded certificate for the certificate/private-key pair to connect to Vault. Leave empty to use self-signed certificate. | No       | -                                         |
-| clientKey                           | The base64-encoded private key for the certificate/private-key pair to connect to Vault. Leave empty to use self-signed certificate. | No       | -                                         |
-| certificateAuthority                | The base64-encoded certificate authority for validating the Vault server.                                                            | No       | -                                         |
-
-{{< /collapse >}} 
+| **storageSystemCredentials** | This section configures the storageSystemCredentials.             | -        | -                                    |
+| secretProviderClasses        | A name that is used to identify a secretProviderClass object.     | Yes      | -                                    |
+| secrets               | A name that is used to identify a kubernetes Secret.                                                          | Yes      | -                                                                                                                            |
+{{< /collapse >}}
 </ul>
 
-7. Install the driver using `helm`:
+6. Install the driver using `helm`:
 
 To install Authorization with the service Ingresses using your own certificate, run:
 
@@ -151,7 +230,7 @@ Follow the instructions available in Authorization for
 
 {{< hide id="1" >}} - [Configuring PowerFlex with Authorization](docs/concepts/authorization/v2.x/configuration/powerflex). {{< /hide >}}
 
-{{< hide id="2" >}}- [Configuring PowerMax with Authorization](docs/concepts/authorization/v2.x/configuration/powermax).{{< /hide >}} 
+{{< hide id="2" >}}- [Configuring PowerMax with Authorization](docs/concepts/authorization/v2.x/configuration/powermax).{{< /hide >}}
 
 {{< hide id="3" >}}- [Configuring PowerScale with Authorization](docs/concepts/authorization/v2.x/configuration/powerscale).{{< /hide >}}
 
