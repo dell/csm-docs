@@ -547,6 +547,10 @@ csi-unity:
     #  - key: "isilon.podmon.storage.dell.com"
     #    operator: "Exists"
     #    effect: "NoSchedule"
+  authorization:
+    enabled: $AUTHORIZATION_ENABLED
+    proxyHost: $AUTHORIZATION_PROXY_HOST
+    skipCertificateValidation: $AUTHORIZATION_SKIP_CERTIFICATE_VALIDATION 
   storageCapacity:
     enabled: $STORAGE_CAPACITY_ENABLED
   maxUnityVolumesPerNode: $MAX_VOLUMES_PER_NODE
