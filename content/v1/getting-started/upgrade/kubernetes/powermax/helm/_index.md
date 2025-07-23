@@ -12,7 +12,7 @@ weight: 2
 <br>
 {{< accordion id="Three" title="Modules"  >}}   
 {{< cardcontainer >}}
-    {{< customcard link1="./csm-modules/authorizationv2-0"  image="1" title="Authorization" >}}
+    {{< customcard link1="./csm-modules/authorization"  image="1" title="Authorization" >}}
 
     {{< customcard  link1="./csm-modules/observability"   image="1" title="Observability"  >}} 
 
