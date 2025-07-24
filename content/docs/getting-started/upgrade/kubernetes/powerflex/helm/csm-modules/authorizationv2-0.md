@@ -1,6 +1,6 @@
 ---
-title: Authorization
-linktitle: Authorization 
+title: Authorization v2.0
+linktitle: Authorization v2.0
 weight: 3
 description: >
 ---
