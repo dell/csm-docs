@@ -81,4 +81,4 @@ The Container Storage Modules Installation Wizard is a webpage that helps you cr
     ```bash
     helm install <release-name> dell/container-storage-modules -n <namespace> --version <container-storage-module chart-version> -f <values.yaml location>
     ```
-    Example: helm install {{Var}} dell/container-storage-modules -n csi-{{Var}} --version 1.7.0 -f values.yaml
+    Example: helm install {{Var}} dell/container-storage-modules -n csi-{{Var}} --version 1.7.1 -f values.yaml
