@@ -29,20 +29,29 @@ Storage system credentials can be provided in one of two ways:
 1. Using a SecretProviderClass (for dynamic secrets from external providers)
 2. Using a Kubernetes Secret (for static credentials)
 
-Only one of the two can be specified at a time.
-
 ## Install Container Storage Modules Authorization
 
-**Steps**
+1. Create the Authorization namespace.
+   ```bash
+   kubectl create namespace authorization
+   ```
 
-{{< accordion id="secret-provider-class" title="Using a Secret Provider Class" markdown="true" >}}
+2. Configure Storage Credentials
 
-## Using a Secret Provider Class
-
-1. Install a supported [External Secret Provider](https://secrets-store-csi-driver.sigs.k8s.io/getting-started/installation#install-external-secret-providers) to integrate with the Secrets Store CSI Driver. For guidance on setting up Vault, refer to our [Vault installation guide](docs/getting-started/installation/operator/modules/authorizationv2-0#vault-csi-provider-installation). For Conjur, refer to our [Conjur installation guide](docs/getting-started/installation/operator/modules/authorizationv2-0#conjur-csi-provider-installation)
+{{< tabpane text=true lang="en" >}}
+{{% tab header="SecretProviderClass" lang="en" %}}
+1. Install a supported [External Secret Provider](https://secrets-store-csi-driver.sigs.k8s.io/getting-started/installation#install-external-secret-providers) to integrate with the Secrets Store CSI Driver. For guidance on setting up Vault, refer to our [Vault installation guide](docs/getting-started/installation/operator/modules/authorizationv2-0#vault-csi-provider-installation). For Conjur, refer to our [Conjur installation guide](docs/getting-started/installation/operator/modules/authorizationv2-0#conjur-csi-provider-installation).
 2. Install the [Secrets Store CSI Driver](https://secrets-store-csi-driver.sigs.k8s.io/getting-started/installation) enabling the [`Sync as Kubernetes Secret`](https://secrets-store-csi-driver.sigs.k8s.io/topics/sync-as-kubernetes-secret) and [`Secret Auto Rotation`](https://secrets-store-csi-driver.sigs.k8s.io/topics/secret-auto-rotation) features.
->__Note__: If you are using Conjur with the Secrets Store CSI Driver, be sure to configure `--set 'tokenRequests[0].audience=conjur'` when installing the driver.
+>__Note__: If you are using Conjur with the Secrets Store CSI Driver, be sure to configure `--set 'tokenRequests[0].audience=conjur'` when installing the Secrets Store CSI Driver.
 3. Create your own [SecretProviderClass Object](https://secrets-store-csi-driver.sigs.k8s.io/getting-started/usage#create-your-own-secretproviderclass-object) based on your external secret provider. You also have the option to create your own Redis secret in the SecretProviderClass.
+4. For OpenShift environments, label the namespace:
+
+   ```bash
+   kubectl label namespace authorization \
+    pod-security.kubernetes.io/enforce=privileged \
+    security.openshift.io/MinimallySufficientPodSecurityStandard=privileged \
+    --overwrite
+   ```
 
   {{< collapse id="2" title="SecretProviderClass without Redis" card="false" >}}
 
@@ -93,7 +102,6 @@ spec:
       -----END CERTIFICATE-----
   {{</tab >}}
   {{< /tabpane >}}
-
   {{< /collapse >}}
 
   {{< collapse id="2" title="SecretProviderClass with Redis" card="false" >}}
@@ -148,64 +156,36 @@ spec:
       # "secretKey" is the key within the Vault secret response to extract a value from.
   ```
 
-  {{< /collapse >}}
+{{< /collapse >}}
+{{% /tab %}}
+{{% tab header="Secret" lang="en" %}}
+1. Create a YAML file (in this example, `storage-secret.yaml`) containing the credentials:
 
-{{< /accordion >}}
+```bash
+# Username and password for accessing storage system
+username: "username"
+password: "password"
+```
+<br>
 
+2. Create the Secret:
 
-{{< accordion id="kubernetes-secret" title="Using a Kubernetes Secret" markdown="true" >}}
+```bash
+kubectl create secret generic storage-secret -n authorization --from-file=storage-secret.yaml
+```
+{{% /tab %}}
+{{< /tabpane >}}
 
-## Using a Kubernetes Secret
+>__Note__: Only one of SecretProviderClass or Secret can be used at a time.
 
-1. Create the Authorization namespace.
-   ```bash
-   kubectl create namespace authorization
-   ```
+<br>
 
-2. Create a Kubernetes Secret containing storage system credentials.
-
-   Example Secret YAML File named `secret-1.yaml`:
-   ```bash
-   # Username and password for accessing storage system
-   username: "username"
-   password: "password"
-   ```
-
-   Use the following command to create the Kubernetes Secret:
-   ```bash
-   kubectl create secret generic secret-1 -n authorization --from-file=secret-1.yaml
-   ```
-
-   After creating the secret, if you get it in YAML format, you should see something similar to the following:
-   ```bash
-   apiVersion: v1
-   data:
-     secret-1.yaml: <base64-encoded>
-   kind: Secret
-   ```
-{{< /accordion >}}
-
-Continue installation with the remaining steps:
-
-1. Create the Authorization namespace.
-   ```bash
-   kubectl create namespace authorization
-   ```
-
-    For OpenShift environments:
-   ```bash
-   kubectl label namespace authorization \
-    pod-security.kubernetes.io/enforce=privileged \
-    security.openshift.io/MinimallySufficientPodSecurityStandard=privileged \
-    --overwrite
-   ```
-
-2. Add the Dell Helm Charts repo
+3. Add the Dell Helm Charts repo
    ```bash
    helm repo add dell https://dell.github.io/helm-charts
    ```
 
-3. Prepare `samples/csm-authorization/config.yaml` which contains the JWT signing secret. The following table lists the configuration parameters.
+4. Prepare `samples/csm-authorization/config.yaml` which contains the JWT signing secret. The following table lists the configuration parameters.
 
     | Parameter            | Description                         | Required | Default |
     | -------------------- | ----------------------------------- | -------- | ------- |
@@ -232,9 +212,9 @@ Continue installation with the remaining steps:
     kubectl create secret generic karavi-config-secret -n authorization --from-file=config.yaml=samples/csm-authorization/config.yaml -o yaml --dry-run=client | kubectl replace -f -
     ```
 
-4. Copy the default values.yaml file `cp charts/csm-authorization-v2.0/values.yaml myvalues.yaml`
+5. Copy the default values.yaml file `cp charts/csm-authorization-v2.0/values.yaml myvalues.yaml`
 
-5. Look over all the fields in `myvalues.yaml` and fill in/adjust any as needed.
+6. Look over all the fields in `myvalues.yaml` and fill in/adjust any as needed.
 
 <ul>
 

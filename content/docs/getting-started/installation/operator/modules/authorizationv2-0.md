@@ -7,21 +7,47 @@ description: >
 {{% pageinfo color="primary" %}}
 {{< message text="1" >}}
 {{% /pageinfo %}}
-## Install Container Storage Modules Authorization via Container Storage Modules Operator
+
+The following Authorization components are installed in the specified namespace:
+- proxy-service, which forwards requests from the CSI Driver to the backend storage array
+- tenant-service, which configures tenants, role bindings, and generates JSON Web Tokens
+- role-service, which configures roles for tenants to be bound to
+- storage-service, which configures backend storage arrays for the proxy-server to forward requests to
+
+The following third-party components are installed in the specified namespace:
+- redis, which stores data regarding tenants and their volume ownership, quota, and revokation status
+- redis-commander, a web management tool for Redis
+
+The following third-party components are optionally installed in the specified namespace:
+- cert-manager, which optionally provides a self-signed certificate to configure the Authorization Ingresses
+- nginx-ingress-controller, which fulfills the Authorization Ingresses
 
 Storage system credentials can be provided in one of two ways:
 1. Using a SecretProviderClass (for dynamic secrets from external providers)
 2. Using a Kubernetes Secret (for static credentials)
 
-Only one of the two can be specified at a time.
+## Install Container Storage Modules Authorization
 
-{{< accordion id="secret-provider-class" title="Using a Secret Provider Class" markdown="true" >}}
+1. Create the Authorization namespace.
+   ```bash
+   kubectl create namespace authorization
+   ```
 
-## Using a Secret Provider Class
+2. Configure Storage Credentials
 
+{{< tabpane text=true lang="en" >}}
+{{% tab header="SecretProviderClass" lang="en" %}}
 1. Install a supported [External Secret Provider](https://secrets-store-csi-driver.sigs.k8s.io/getting-started/installation#install-external-secret-providers) to integrate with the Secrets Store CSI Driver. For guidance on setting up Vault, refer to our [Vault installation guide](docs/getting-started/installation/operator/modules/authorizationv2-0#vault-csi-provider-installation).
 2. Install the [Secrets Store CSI Driver](https://secrets-store-csi-driver.sigs.k8s.io/getting-started/installation) enabling the [`Sync as Kubernetes Secret`](https://secrets-store-csi-driver.sigs.k8s.io/topics/sync-as-kubernetes-secret) and [`Secret Auto Rotation`](https://secrets-store-csi-driver.sigs.k8s.io/topics/secret-auto-rotation) features.
 3. Create your own [SecretProviderClass Object](https://secrets-store-csi-driver.sigs.k8s.io/getting-started/usage#create-your-own-secretproviderclass-object) based on your external secret provider. You also have the option to create your own Redis secret in the SecretProviderClass.
+4. For OpenShift environments, label the namespace:
+
+   ```bash
+   kubectl label namespace authorization \
+    pod-security.kubernetes.io/enforce=privileged \
+    security.openshift.io/MinimallySufficientPodSecurityStandard=privileged \
+    --overwrite
+   ```
 
   {{< collapse id="2" title="SecretProviderClass without Redis" card="false" >}}
 
@@ -111,59 +137,36 @@ Only one of the two can be specified at a time.
   ```
 
   {{< /collapse >}}
+  {{% /tab %}}
 
-{{< /accordion >}}
+{{% tab header="Secret" lang="en" %}}
+1. Create a YAML file (in this example, `storage-secret.yaml`) containing the credentials:
 
-{{< accordion id="kubernetes-secret" title="Using a Kubernetes Secret" markdown="true" >}}
+```bash
+# Username and password for accessing storage system
+username: "username"
+password: "password"
+```
+<br>
 
-## Using a Kubernetes Secret
+2. Create the Secret:
 
-1. Create the Authorization namespace.
-   ```bash
-   kubectl create namespace authorization
-   ```
+```bash
+kubectl create secret generic storage-secret -n authorization --from-file=storage-secret.yaml
+```
+{{% /tab %}}
+{{< /tabpane >}}
 
-2. Create a Kubernetes Secret containing storage system credentials.
+>__Note__: Only one of SecretProviderClass or Secret can be used at a time.
 
-   Example Secret YAML File named `secret-1.yaml`:
-   ```bash
-   # Username and password for accessing storage system
-   username: "username"
-   password: "password"
-   ```
+<br>
 
-   Use the following command to create the Kubernetes Secret:
-   ```bash
-   kubectl create secret generic secret-1 -n authorization --from-file=secret-1.yaml
-   ```
-
-   After creating the secret, if you get it in YAML format, you should see something similar to the following:
-   ```bash
-   apiVersion: v1
-   data:
-     secret-1.yaml: <base64-encoded>
-   kind: Secret
-   ```
-{{< /accordion >}}
-
-Continue installation with the remaining steps:
-
-1. Execute `kubectl create namespace authorization` to create the authorization namespace (if not already present). Note that the namespace can be any user-defined name, in this example, we assume that the namespace is 'authorization'.
-
-    For OpenShift environments:
-   ```bash
-   kubectl label namespace authorization \
-    pod-security.kubernetes.io/enforce=privileged \
-    security.openshift.io/MinimallySufficientPodSecurityStandard=privileged \
-    --overwrite
-   ```
-
-2. Install cert-manager CRDs
+3. Install cert-manager CRDs
     ```bash
     kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v1.11.0/cert-manager.crds.yaml
     ```
 
-3. Prepare [samples/authorization/config.yaml](https://github.com/dell/csm-operator/blob/main/samples/authorization/config.yaml) which contains the JWT signing secret. The following table lists the configuration parameters.
+4. Prepare [samples/authorization/config.yaml](https://github.com/dell/csm-operator/blob/main/samples/authorization/config.yaml) which contains the JWT signing secret. The following table lists the configuration parameters.
 
     | Parameter            | Description                         | Required | Default |
     | -------------------- | ----------------------------------- | -------- | ------- |
