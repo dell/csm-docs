@@ -37,10 +37,15 @@ Storage system credentials can be provided in one of two ways:
 
 {{< tabpane text=true lang="en" >}}
 {{% tab header="SecretProviderClass" lang="en" %}}
-1. Install a supported [External Secret Provider](https://secrets-store-csi-driver.sigs.k8s.io/getting-started/installation#install-external-secret-providers) to integrate with the Secrets Store CSI Driver. For guidance on setting up Vault, refer to our [Vault installation guide](docs/getting-started/installation/operator/modules/authorizationv2-0#vault-csi-provider-installation).
-2. Install the [Secrets Store CSI Driver](https://secrets-store-csi-driver.sigs.k8s.io/getting-started/installation) enabling the [`Sync as Kubernetes Secret`](https://secrets-store-csi-driver.sigs.k8s.io/topics/sync-as-kubernetes-secret) and [`Secret Auto Rotation`](https://secrets-store-csi-driver.sigs.k8s.io/topics/secret-auto-rotation) features.
-3. Create your own [SecretProviderClass Object](https://secrets-store-csi-driver.sigs.k8s.io/getting-started/usage#create-your-own-secretproviderclass-object) based on your external secret provider. You also have the option to create your own Redis secret in the SecretProviderClass.
-4. For OpenShift environments, label the namespace:
+<br>
+
+- Install a supported [External Secret Provider](https://secrets-store-csi-driver.sigs.k8s.io/getting-started/installation#install-external-secret-providers) to integrate with the Secrets Store CSI Driver. For guidance on setting up Vault, refer to our [Vault installation guide](docs/getting-started/installation/operator/modules/authorizationv2-0#vault-csi-provider-installation).
+
+- Install the [Secrets Store CSI Driver](https://secrets-store-csi-driver.sigs.k8s.io/getting-started/installation) enabling the [`Sync as Kubernetes Secret`](https://secrets-store-csi-driver.sigs.k8s.io/topics/sync-as-kubernetes-secret) and [`Secret Auto Rotation`](https://secrets-store-csi-driver.sigs.k8s.io/topics/secret-auto-rotation) features.
+
+- Create your own [SecretProviderClass Object](https://secrets-store-csi-driver.sigs.k8s.io/getting-started/usage#create-your-own-secretproviderclass-object) based on your external secret provider. You also have the option to create your own Redis secret in the SecretProviderClass.
+
+- For OpenShift environments, label the namespace:
 
    ```bash
    kubectl label namespace authorization \
@@ -140,20 +145,20 @@ Storage system credentials can be provided in one of two ways:
   {{% /tab %}}
 
 {{% tab header="Secret" lang="en" %}}
-1. Create a YAML file (in this example, `storage-secret.yaml`) containing the credentials:
+- Create a YAML file (in this example, `storage-secret.yaml`) containing the credentials:
 
-```bash
-# Username and password for accessing storage system
-username: "username"
-password: "password"
-```
-<br>
+  ```bash
+  # Username and password for accessing storage system
+  username: "username"
+  password: "password"
+  ```
+</br>
 
-2. Create the Secret:
+- Create the Secret:
 
-```bash
-kubectl create secret generic storage-secret -n authorization --from-file=storage-secret.yaml
-```
+  ```bash
+  kubectl create secret generic storage-secret -n authorization --from-file=storage-secret.yaml
+  ```
 {{% /tab %}}
 {{< /tabpane >}}
 
