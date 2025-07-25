@@ -23,6 +23,7 @@ weight: 1
 - Always use the CSM and Kubernetes API for storage operations.
 - Changes made outside these tools (like using storage array GUIs or CLIs) won’t be reflected in Kubernetes, leading to inaccurate metadata and state information.
 - If you make external changes, manually update the Kubernetes cluster to keep everything in sync.
+- Use [SFTP](https://dell.github.io/csm-docs/docs/concepts/csidriver/features/powerflex/#expose-the-sftp-settings-to-automatically-pull-the-sciniko-kernel-module) to fix mismatches between PowerFlex SDC's scini kernel module and OpenShift's RHEL kernel.
 
 ## Container Orchestrator Platforms
 
