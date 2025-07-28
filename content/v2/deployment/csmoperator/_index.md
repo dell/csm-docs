@@ -39,7 +39,7 @@ The table below lists the driver and modules versions installable with the CSM O
 | CSI Unity XT       | 2.7.0   | ❌                | ❌              | ❌                 | ❌              |
 
 >NOTE:
->- Refer to sample files [here](https://github.com/dell/csm-operator/tree/main/samples).
+>- Refer to sample files [here](https://github.com/dell/csm-operator/tree/release/v1.7.0/samples).
 
 ## Installation
 Dell CSM Operator can be installed manually or via Operator Hub.

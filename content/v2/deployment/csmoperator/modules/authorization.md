@@ -20,7 +20,7 @@ To deploy the Operator, follow the instructions available [here](../../#installa
 kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v1.6.1/cert-manager.crds.yaml
 ```
 
-3. Prepare `samples/authorization/config.yaml` provided [here](https://github.com/dell/csm-operator/blob/main/samples/authorization/config.yaml) which contains the JWT signing secret. The following table lists the configuration parameters.
+3. Prepare `samples/authorization/config.yaml` provided [here](https://github.com/dell/csm-operator/tree/release/v1.7.0/authorization/config.yaml) which contains the JWT signing secret. The following table lists the configuration parameters.
 
     | Parameter | Description                                                  | Required | Default |
     | --------- | ------------------------------------------------------------ | -------- | ------- |
@@ -47,7 +47,7 @@ kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/relea
     kubectl create secret generic karavi-config-secret -n authorization --from-file=config.yaml=samples/authorization/config.yaml -o yaml --dry-run=client | kubectl replace -f -
     ```
 
-4. Create the `karavi-storage-secret` using the file provided [here](https://github.com/dell/csm-operator/blob/main/samples/authorization/karavi-storage-secret.yaml) to store storage system credentials.
+4. Create the `karavi-storage-secret` using the file provided [here](https://github.com/dell/csm-operator/tree/release/v1.7.0/authorization/karavi-storage-secret.yaml) to store storage system credentials.
 
     Use this command to create the secret:
 
@@ -148,7 +148,7 @@ kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/relea
 
 1. Follow all the [prerequisites](#prerequisite).
 
-2. Create a CR (Custom Resource) for Authorization using the sample file provided [here](https://github.com/dell/csm-operator/blob/main/samples/authorization/csm_authorization_proxy_server_v170.yaml). This file can be modified to use custom parameters if needed.
+2. Create a CR (Custom Resource) for Authorization using the sample file provided [here](https://github.com/dell/csm-operator/tree/release/v1.7.0/authorization/csm_authorization_proxy_server_v170.yaml). This file can be modified to use custom parameters if needed.
 
 3. Users should configure the parameters in the CR. This table lists the primary configurable parameters of the Authorization Proxy Server and their default values:
 
@@ -192,7 +192,7 @@ To enable reporting of trace data with [Zipkin](https://zipkin.io/), use the `cs
     kubectl create secret tls karavi-auth-tls -n authorization --key <location-of-private-key-file> --cert <location-of-certificate-file>
     ```
 
-    If using a self-signed certificate, prepare `samples/authorization/certificate_v170.yaml` provided [here](https://github.com/dell/csm-operator/blob/main/samples/authorization/certificate_v170.yaml). An entry for each hostname specified in the CR must be added under `dnsNames` for the certificate to be valid for each Ingress. 
+    If using a self-signed certificate, prepare `samples/authorization/certificate_v170.yaml` provided [here](https://github.com/dell/csm-operator/tree/release/v1.7.0/authorization/certificate_v170.yaml). An entry for each hostname specified in the CR must be added under `dnsNames` for the certificate to be valid for each Ingress. 
 
     Use this command to create the `karavi-auth-tls` secret:
 

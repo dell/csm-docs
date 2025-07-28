@@ -54,7 +54,7 @@ The CSM Observability module for supported Dell CSI Drivers can be installed via
       ```bash
       kubectl create -f custom-cert.yaml
       ```
-- Enable Observability module and components in [sample manifests](https://github.com/dell/csm-operator/tree/main/samples)
+- Enable Observability module and components in [sample manifests](https://github.com/dell/csm-operator/tree/release/v1.7.0/samples)
     - Scenario 1: Deploy one supported CSI Driver and enable Observability module
       - If you enable `metrics-powerscale` or `metrics-powerflex`, must enable `otel-collector` as well.
     

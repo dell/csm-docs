@@ -28,7 +28,7 @@ The table below lists the driver and modules versions installable with the CSM O
 | CSI PowerStore     | 2.6.0   | N/A               | N/A             | N/A               | N/A            |
 
 >NOTE:
->- Refer to sample files [here](https://github.com/dell/csm-operator/tree/main/samples) for prior versions of CSM.
+>- Refer to sample files [here](https://github.com/dell/csm-operator/tree/release/v1.6.0/samples) for prior versions of CSM.
 
 ## Installation
 Dell CSM Operator can be installed manually or via Operator Hub.
