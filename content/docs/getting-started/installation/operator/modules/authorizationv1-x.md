@@ -24,7 +24,7 @@ description: >
     kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v1.11.0/cert-manager.crds.yaml
     ```
 
-3. Prepare [samples/authorization/config.yaml](https://github.com/dell/csm-operator/blob/main/samples/authorization/config.yaml) which contains the JWT signing secret. The following table lists the configuration parameters.
+3. Prepare [samples/authorization/config.yaml](https://github.com/dell/csm-operator/tree/release/v1.9.1/samples/authorization/config.yaml) which contains the JWT signing secret. The following table lists the configuration parameters.
 
     | Parameter | Description                                                  | Required | Default |
     | --------- | ------------------------------------------------------------ | -------- | ------- |
@@ -49,7 +49,7 @@ description: >
     kubectl create secret generic karavi-config-secret -n authorization --from-file=config.yaml=samples/authorization/config.yaml -o yaml --dry-run=client | kubectl replace -f -
     ```
 
-4. Create the [karavi-storage-secret](https://github.com/dell/csm-operator/blob/main/samples/authorization/karavi-storage-secret.yaml) to store storage system credentials.
+4. Create the [karavi-storage-secret](https://github.com/dell/csm-operator/tree/release/v1.9.1/samples/authorization/karavi-storage-secret.yaml) to store storage system credentials.
 
     Use this command to create the secret:
 
@@ -63,7 +63,7 @@ description: >
 ### Install CSM Authorization Proxy Server
 
 
-1. Create a CR (Custom Resource) for Authorization from a [sample manifest](https://github.com/dell/csm-operator/blob/main/samples/authorization/csm_authorization_proxy_server_v1110.yaml). This file can be modified to use custom parameters if needed.
+1. Create a CR (Custom Resource) for Authorization from a [sample manifest](https://github.com/dell/csm-operator/tree/release/v1.9.1/samples/authorization/csm_authorization_proxy_server_v1110.yaml). This file can be modified to use custom parameters if needed.
 
 2. Users should configure the parameters in the CR. This table lists the primary configurable parameters of the Authorization Proxy Server and their default values:
 <ul>

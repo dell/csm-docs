@@ -104,7 +104,7 @@ Given a setup where Kubernetes, a storage system, and the Container Storage Modu
           maxOutstandingWrite: 10
     ```
 
-5. **Operator Only**: Prepare the reverse proxy configMap using sample [here](https://github.com/dell/csm-operator/blob/main/samples/csireverseproxy/config.yaml). Fill in the appropriate values for driver configuration.
+5. **Operator Only**: Prepare the reverse proxy configMap using sample [here](https://github.com/dell/csm-operator/tree/release/v1.9.1/samples/csireverseproxy/config.yaml). Fill in the appropriate values for driver configuration.
    Example: config.yaml
    ```yaml
     port: 2222
@@ -124,7 +124,7 @@ Given a setup where Kubernetes, a storage system, and the Container Storage Modu
 
 6. Enable Container Storage Modules Authorization in the driver installation applicable to your installation method.
   Alternatively, you can use the minimal sample files provided
-  [here](https://github.com/dell/csm-operator/tree/main/samples/minimal-samples/powermax_{{< version-docs key="Min_sample_operator_pmax" >}}.yaml) and install the module using default values
+  [here](https://github.com/dell/csm-operator/tree/release/v1.9.1/samples/minimal-samples/powermax_{{< version-docs key="Min_sample_operator_pmax" >}}.yaml) and install the module using default values
 
     **Operator**
 

@@ -172,7 +172,7 @@ kubectl -n vxflexos create secret generic karavi-authorization-config --from-fil
     ```
 
     Alternatively, you can use the minimal sample files provided
-    [here](https://github.com/dell/csm-operator/tree/main/samples/minimal-samples/powerflex_{{< version-docs key="Min_sample_operator_pflex" >}}.yaml) and install the module using default values
+    [here](https://github.com/dell/csm-operator/tree/release/v1.9.1/samples/minimal-samples/powerflex_{{< version-docs key="Min_sample_operator_pflex" >}}.yaml) and install the module using default values
 
 6. Install the Dell CSI PowerFlex driver following the appropriate documentation for your installation method.
 

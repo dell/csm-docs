@@ -176,7 +176,7 @@ kubectl -n isilon create secret generic karavi-authorization-config --from-file=
     ```
 
     Alternatively, you can use the minimal sample files provided
-    [here](https://github.com/dell/csm-operator/tree/main/samples/minimal-samples) and install the module using default values
+    [here](https://github.com/dell/csm-operator/tree/release/v1.8.1/samples/minimal-samples) and install the module using default values
 
 6. Install the Dell CSI PowerScale driver following the appropriate documentation for your installation method.
 

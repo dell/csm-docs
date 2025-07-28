@@ -25,7 +25,7 @@ To deploy the Operator, follow the instructions available [here](../../#installa
     kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v1.11.0/cert-manager.crds.yaml
     ```
 
-4. Prepare [samples/authorization/config.yaml](https://github.com/dell/csm-operator/blob/main/samples/authorization/config.yaml) which contains the JWT signing secret. The following table lists the configuration parameters.
+4. Prepare [samples/authorization/config.yaml](https://github.com/dell/csm-operator/tree/release-v1.6.0/samples/authorization/config.yaml) which contains the JWT signing secret. The following table lists the configuration parameters.
 
     | Parameter | Description                                                  | Required | Default |
     | --------- | ------------------------------------------------------------ | -------- | ------- |
@@ -61,7 +61,7 @@ To deploy the Operator, follow the instructions available [here](../../#installa
 
 1. Follow all the [prerequisites](#prerequisite).
 
-2. Create a CR (Custom Resource) for Authorization from a [sample manifest](https://github.com/dell/csm-operator/blob/main/samples/authorization/csm_authorization_proxy_server_v200-alpha.yaml). This file can be modified to use custom parameters if needed.
+2. Create a CR (Custom Resource) for Authorization from a [sample manifest](https://github.com/dell/csm-operator/tree/release-v1.6.0/samples/authorization/csm_authorization_proxy_server_v200-alpha.yaml). This file can be modified to use custom parameters if needed.
 
 3. Users should configure the parameters in the CR. This table lists the primary configurable parameters of the Authorization Proxy Server and their default values:
 

@@ -170,7 +170,7 @@ Given a setup where Kubernetes, a storage system, and the CSM for Authorization 
     ```
 
     Alternatively, you can use the minimal sample files provided
-    [here](https://github.com/dell/csm-operator/tree/main/samples/minimal-samples) and install the module using default values
+    [here](https://github.com/dell/csm-operator/tree/release/v1.8.1/samples/minimal-samples) and install the module using default values
 
 6. Install the Dell CSI PowerFlex driver following the appropriate documentation for your installation method.
 

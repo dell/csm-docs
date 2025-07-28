@@ -153,7 +153,7 @@ dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      
     ``` 
     </div>
 
-    **Detailed Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_unity_{{< version-docs key="sample_sc_unity" >}}.yaml) for detailed settings.
+    **Detailed Configuration:** Use the [sample file](https://github.com/dell/csm-operator/tree/release/v1.9.1/samples/storage_csm_unity_{{< version-docs key="sample_sc_unity" >}}.yaml) for detailed settings.
 
     To set the parameters in CR. The table shows the main settings of the unity driver and their defaults.
     
