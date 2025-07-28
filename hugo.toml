@@ -179,7 +179,7 @@ algolia_docsearch = false
   url = "https://dell.github.io/csm-docs/docs/"
 
 [[params.versions]]
-  version = "1.13.1"
+  version = "1.13.2"
   url = "https://dell.github.io/csm-docs/v1/"
 
 [[params.versions]]
