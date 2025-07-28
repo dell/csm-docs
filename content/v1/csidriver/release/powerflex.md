@@ -3,7 +3,7 @@ title: PowerFlex
 description: Release notes for PowerFlex CSI driver
 ---
 
-## Release Notes - CSI PowerFlex v2.13.1
+## Release Notes - CSI PowerFlex v2.13.2
 
 ### New Features/Changes
 
@@ -20,6 +20,7 @@ description: Release notes for PowerFlex CSI driver
 - [#1641 - [BUG]: NodeGetVolumeStats will cause panic when called w/ an Ephemeral volume ](https://github.com/dell/csm/issues/1641)
 - [#1667 - [BUG]: Labels versions and maintainer update for CSM images ](https://github.com/dell/csm/issues/1667)
 - [#1782 - [BUG]: Pods Stuck in Terminating State After PowerFlex CSI Node Pod Restart When Deployments Share Same Node](https://github.com/dell/csm/issues/1782)
+- [#1956 - [BUG]: Make probe-retry in Powerflex driver configurable](https://github.com/dell/csm/issues/1956)
 
 ### Known Issues
 
