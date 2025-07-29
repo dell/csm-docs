@@ -101,7 +101,7 @@ Given a setup where Kubernetes, a storage system, and the CSM for Authorization 
     ```
 
 5. Enable CSM Authorization in the driver installation applicable to your installation method.
-  Alternatively, you can use the minimal sample files provided in respective CSM versions folder under samples [here](https://github.com/dell/csm-operator/tree/main/samples) and install the module using default value.
+  Alternatively, you can use the minimal sample files provided in respective CSM versions folder under samples [here](https://github.com/dell/csm-operator/tree/release/v1.8.1/samples/minimal-samples) and install the module using default value.
 
     **Operator**
 

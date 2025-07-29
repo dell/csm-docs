@@ -444,7 +444,7 @@ The CSI Driver for Dell PowerStore allows users to specify the maximum number of
 The user can set the volume limit for a node by creating a node label `max-powerstore-volumes-per-node` and specifying the volume limit for that node.
 <br/> `kubectl label node <node_name> max-powerstore-volumes-per-node=<volume_limit>`
 
-The user can also set the volume limit for all the nodes in the cluster by specifying the same value for the `maxPowerstoreVolumesPerNode` attribute in values.yaml during Helm installation. In the case of driver installed via the operator, this attribute can be modified in the sample yaml file for PowerStore, which is located at https://github.com/dell/csm-operator/blob/main/samples/ by editing the `X_CSI_POWERSTORE_MAX_VOLUMES_PER_NODE` parameter.
+The user can also set the volume limit for all the nodes in the cluster by specifying the same value for the `maxPowerstoreVolumesPerNode` attribute in values.yaml during Helm installation. In the case of driver installed via the operator, this attribute can be modified in the sample yaml file for PowerStore, which is located at https://github.com/dell/csm-operator/tree/release/v1.8.1/samples/ by editing the `X_CSI_POWERSTORE_MAX_VOLUMES_PER_NODE` parameter.
 
 >**NOTE:** <br>The default value of `maxPowerstoreVolumesPerNode` is 0. <br>If `maxPowerstoreVolumesPerNode` is set to zero, then CO shall decide how many volumes of this type can be published by the controller to the node.<br><br>The volume limit specified in the `maxPowerstoreVolumesPerNode` attribute is applicable to all the nodes in the cluster for which the node label `max-powerstore-volumes-per-node` is not set.
 
@@ -775,7 +775,7 @@ If such a node is not available, the pods stay in Pending state. This means they
 Without storage capacity tracking, pods get scheduled on a node satisfying the topology constraints. If the required capacity is not available, volume attachment to the pods fails, and pods remain in ContainerCreating state. Storage capacity tracking eliminates unnecessary scheduling of pods when there is insufficient capacity.
 
 The attribute `storageCapacity.enabled` in `my-powerstore-settings.yaml` can be used to enabled/disabled the feature during driver installation .
-To configure how often driver checks for changed capacity set `storageCapacity.pollInterval` attribute. In case of driver installed via operator, this interval can be configured in the sample files provided [here](https://github.com/dell/csm-operator/tree/main/samples) by editing the `capacity-poll-interval` argument present in the `provisioner` sidecar.
+To configure how often driver checks for changed capacity set `storageCapacity.pollInterval` attribute. In case of driver installed via operator, this interval can be configured in the sample files provided [here](https://github.com/dell/csm-operator/tree/release/v1.8.1/samples) by editing the `capacity-poll-interval` argument present in the `provisioner` sidecar.
 
 ## Metro support
 The CSI PowerStore driver supports the provisioning of Metro volumes. The process and details of how to provision and use Metro volumes can be found [here](../../../replication/high-availability).
