@@ -564,6 +564,8 @@ NAME                    STATUS   VOLUME             CAPACITY   ACCESS MODES   ST
 
 {{< cardcontainer >}}
 
+    {{< customcard link1="./csm-modules/authorizationv2-0"   image="1" title="Authorization v2.0"  >}}
+
     {{< customcard link1="./csm-modules/resiliency"   image="1" title="Resiliency"  >}}
 
 {{< /cardcontainer >}}

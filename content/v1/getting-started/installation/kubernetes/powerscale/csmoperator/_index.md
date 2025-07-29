@@ -94,7 +94,7 @@ To deploy the Operator, follow the instructions available [here](../../../operat
          configVersion: {{< version-v1 key="PScale_latestVersion" >}}
          forceRemoveDriver: true
    ```
-      [sample file](https://github.com/dell/csm-operator/blob/main/samples/minimal-samples/powerscale_{{< version-v1 key="sample_sc_pflex" >}}.yaml) for default settings. Modify if needed.
+          Refer the minimal sample files provided in respective CSM versions folder under samples [here](https://github.com/dell/csm-operator/tree/main/samples). Modify if needed.
 
     [OR]                                                
 
@@ -204,7 +204,6 @@ The driver and modules versions installable with the Container Storage Modules O
 {{< /markdownify >}}
 <br>   
 {{< cardcontainer >}}
-    {{< customcard link1="./csm-modules/authorizationv1-x"  image="6" title="Authorization v1.x" >}}
 
     {{< customcard link1="./csm-modules/authorizationv2-0"   image="6" title="Authorization v2.0"  >}}
 

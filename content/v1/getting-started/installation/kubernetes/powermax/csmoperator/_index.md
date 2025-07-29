@@ -88,7 +88,7 @@ To deploy the Operator, follow the instructions available [here](../../../operat
 
     i. **Create a CR (Custom Resource)** for PowerMax using the sample files provided
     
-    a. **Default Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/main/samples/minimal-samples/powermax_{{< version-v1 key="Min_sample_operator_pmax" >}}.yaml) for default settings. Modify if needed.
+    a. **Default Configuration:** Refer the minimal sample files provided in respective CSM versions folder under samples [here](https://github.com/dell/csm-operator/tree/main/samples). Modify if needed.
 
     [OR]
 
@@ -276,7 +276,6 @@ The driver and modules versions installable with the Container Storage Modules O
 <br>        
 
 {{< cardcontainer >}}
-    {{< customcard link1="./csm-modules/authorizationv1-x"  image="1" title="Authorization v1.x" >}}
 
     {{< customcard link1="./csm-modules/authorizationv2-0"   image="1" title="Authorization v2.0"  >}}
 

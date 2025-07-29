@@ -95,7 +95,7 @@ volume stats value under node should be set to true.
     > If you do not specify `arrayID` parameter in the storage class then the array that was specified as the default would be used for provisioning volumes.
 6. Download the default values.yaml file
    ```bash
-   cd dell-csi-helm-installer && wget -O my-powerstore-settings.yaml https://github.com/dell/helm-charts/raw/csi-powerstore-2.14.0/charts/csi-powerstore/values.yaml
+   cd dell-csi-helm-installer && wget -O my-powerstore-settings.yaml https://github.com/dell/helm-charts/raw/csi-powerstore-2.15.0/charts/csi-powerstore/values.yaml
    ```
 7. Edit the newly created values file and provide values for the following parameters `vi my-powerstore-settings.yaml`:
 <ul>
@@ -151,6 +151,61 @@ volume stats value under node should be set to true.
 - (Optional) Enable additional Mount Options - A user is able to specify additional mount options as needed for the driver.
    - Mount options are specified in storageclass yaml under _mountOptions_.
    - *WARNING*: Before utilizing mount options, you must first be fully aware of the potential impact and understand your environment's requirements for the specified option.
+
+## Certificate validation for PowerStore Gateway REST API calls
+
+This topic provides details about setting up the certificate for the CSI Driver for Dell PowerStore.
+
+*Before you begin*
+
+As part of the CSI driver installation, the CSI driver requires a secret with the name powerstore-certs-0 to powerstore-certs-n based on the ".Values.certSecretCount" parameter present in the namespace powerstore.
+
+This secret contains the X509 certificates of the CA which signed PowerStore gateway SSL certificate in PEM format.
+
+The CSI driver exposes an install parameter in secret.yaml, `skipCertificateValidation`, which determines if the driver performs client-side verification of the gateway certificates.
+
+The `skipCertificateValidation` parameter is set to true by default, and the driver does not verify the gateway certificates.
+
+If `skipCertificateValidation` is set to false, then the secret powerstore-certs-n must contain the CA certificate for the array gateway.
+
+If this secret is an empty secret, then the validation of the certificate fails, and the driver fails to start.
+
+If the gateway certificate is self-signed or if you are using an embedded gateway, then perform the following steps.
+
+### Procedure
+
+1. Fetch the certificate by running the following command:
+
+```bash
+openssl s_client -showcerts -connect <Gateway IP:Port> </dev/null 2>/dev/null | openssl x509 -outform PEM > ca_cert_0.pem
+```
+
+   Example:
+```bash
+openssl s_client -showcerts -connect 1.1.1.1:443 </dev/null 2>/dev/null | openssl x509 -outform PEM > ca_cert_0.pem
+ ```
+
+2. Run the following command to create the cert secret with index '0':
+
+```bash
+kubectl create secret generic powerstore-certs-0 --from-file=cert-0=ca_cert_0.pem -n csi-powerstore
+```
+
+Use the following command to replace the secret:
+
+```bash
+kubectl create secret generic powerstore-certs-0 -n csi-powerstore --from-file=cert-0=ca_cert_0.pem -o yaml --dry-run | kubectl replace -f -
+```
+
+3. Repeat steps 1 and 2 to create multiple cert secrets with incremental index (example: powerstore-certs-1, powerstore-certs-2, etc)
+
+
+*Notes:*
+
+- "csi-powerstore" is the namespace for Helm-based installation but namespace can be user-defined in operator-based installation.
+- User can add multiple certificates in the same secret. The certificate file should not exceed more than 1Mb due to Kubernetes secret size limitation.
+- Whenever certSecretCount parameter changes in `./my-powerstore-settings.yaml` user needs to uninstall and install the driver.
+- Updating powerstore-certs-n secrets is a manual process, unlike powerstore-config. Users have to re-install the driver in case of updating/adding the SSL certificates or changing the certSecretCount parameter.
 
 ## Storage Classes
 
@@ -227,6 +282,8 @@ Note: here `my-powerstore-settings.yaml` is a `values.yaml` file which user has 
 {{< accordion id="Three" title="Modules" >}}
 
 {{< cardcontainer >}}
+
+    {{< customcard  link1="./csm-modules/authorizationv2-0"   image="1" title="Authorization v2.0"  >}}
 
     {{< customcard  link1="./csm-modules/observability"   image="1" title="Observability"  >}}
 

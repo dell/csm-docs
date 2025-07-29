@@ -420,8 +420,8 @@ allowedTopologies:
 This example matches all nodes where the driver has a connection to PowerStore with an IP of `127.0.0.1` via FibreChannel. Similar examples can be found in mentioned folder for NFS, iSCSI and NVMe.
 
 **Note** : 
-  The NFS labels are automatically added by the driver, assuming that NFS dependencies are configured by default. These dependencies come with the default Linux OS package from the node and the array supports NFS. For other protocols (iSCSI, FC, NVMe), all necessary connectivity checks between the initiator and target are performed before labels are added.
-  This label should not impact any other functionality, even if NFS is not configured on the array or node.
+- From CSM 1.15 onwards, the CSI driver adds NFS labels to the CSI nodes only after verifying that NFS is enabled on the storage array. This ensures that node labeling accurately reflects the capabilities of the backend storage system.  
+- It is assumed that NFS dependencies are configured by default on the node, as these dependencies are included in the default Linux OS package. For other protocols (iSCSI, FC, NVMe), all necessary connectivity checks between the initiator and target are performed before labels are added.
 
 You can check what labels your nodes contain by running
 ```bash
@@ -482,8 +482,6 @@ Create a file called `config.yaml` and populate it with the following content
         blockProtocol: "FC"
 ```
 
-**Note** :
-    skipCertificateValidation flag is supported from CSM version 1.15.
 
 Here we specify that we want to CSI driver to manage two arrays: one with an IP `10.0.0.1` and the other with an IP `10.0.0.2`, we want to connect to the first array with `iSCSI` protocol and with `FC` to the second array. Also, we want to be able to create NFS-based volume so we provide the name of the NAS to the first array.
 
@@ -785,7 +783,7 @@ If such a node is not available, the pods stay in Pending state. This means they
 Without storage capacity tracking, pods get scheduled on a node satisfying the topology constraints. If the required capacity is not available, volume attachment to the pods fails, and pods remain in ContainerCreating state. Storage capacity tracking eliminates unnecessary scheduling of pods when there is insufficient capacity.
 
 The attribute `storageCapacity.enabled` in `my-powerstore-settings.yaml` can be used to enabled/disabled the feature during driver installation .
-To configure how often driver checks for changed capacity set `storageCapacity.pollInterval` attribute. In case of driver installed via operator, this interval can be configured in the sample files provided in the respective samples under CSM version folder[here](https://github.com/dell/csm-operator/tree/main/samples) by editing the `capacity-poll-interval` argument present in the `provisioner` sidecar.
+To configure how often driver checks for changed capacity set `storageCapacity.pollInterval` attribute. In case of driver installed via operator, this interval can be configured in the sample files provided [here](https://github.com/dell/csm-operator/tree/main/samples) by editing the `capacity-poll-interval` argument present in the `provisioner` sidecar in the sample yaml file under respective CSM versions.
 
 ## Metro support
 The CSI PowerStore driver supports the provisioning of Metro volumes. The process and details of how to provision and use Metro volumes can be found [here](../../../replication/high-availability).

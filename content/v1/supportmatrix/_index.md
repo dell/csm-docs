@@ -36,7 +36,6 @@ weight: 1
 
 **Notes:**
 - Self-certify unsupported orchestrator platforms/versions using [Cert-CSI](../tooling/cert-csi/). Use platforms that haven't reached end of life.
-- CSM Authorization Server v1 is not supported on Red Hat OpenShift. It can be installed on standard Kubernetes and used with a Dell CSI Driver enabled with CSM Authorization on Red Hat OpenShift.
 - CSM Authorization Server v2 is supported on Red Hat OpenShift.
 
 ## OpenShift Virtualization
@@ -67,24 +66,24 @@ Container Storage Modules doesn't officially support specific operating systems,
 
 ## Helm Compatibility
 {{<table "table table-striped table-bordered table-sm">}}
-| Platform         |  Authorization v1|  Authorization v2 | Replication | Observability | Resiliency | Application Mobility|
-| ------------------ |------------------| --------------- |-----------------|-------------------|----------------|------|
-| PowerStore         |  No      |   No              |  Yes              | Yes                 |    Yes     |No|
-| PowerScale         |  Yes     |   Yes             |  Yes              | Yes                 |    Yes     |No|
-| PowerFlex          |  Yes     |   Yes             |  Yes              | Yes                 |    Yes     |No|
-| PowerMax           |  Yes     |   Yes             |  Yes              | Yes                 |    Yes     |Yes|
-| Unity XT           |  No      |   No              |  No               | No                  |    Yes     |No|
+| Platform         |  Authorization v2 | Replication | Observability | Resiliency |
+| ------------------ |--------------- |-----------------|-------------------|----------------|
+| PowerStore         | Yes              |  Yes              | Yes                 |    Yes     |
+| PowerScale         | Yes             |  Yes              | Yes                 |    Yes     |
+| PowerFlex          | Yes             |  Yes              | Yes                 |    Yes     |
+| PowerMax           | Yes             |  Yes              | Yes                 |    Yes     |
+| Unity XT           | No              |  No               | No                  |    Yes     |
 {{</table>}}
 
 ## Operator Compatibility
 {{<table "table table-striped table-bordered table-sm">}}
-| Platform         |  Authorization v1|  Authorization v2 | Replication | Observability | Resiliency |
-| ------------------ |------------------| --------------|-----------------|-------------------|----------------|
-| PowerStore         |  No      |   No              |  No               | No                  |    Yes     |
-| PowerScale         |  Yes     |   Yes             |  Yes              | Yes                 |    Yes     |
-| PowerFlex          |  Yes     |   Yes             |  Yes              | Yes                 |    Yes     |
-| PowerMax           |  Yes     |   Yes             |  Yes              | Yes                 |    Yes     |
-| Unity XT           |  No      |   No              |  No               | No                  |    No      |
+| Platform         |  Authorization v2 | Replication | Observability | Resiliency |
+| ------------------ | --------------|-----------------|-------------------|----------------|
+| PowerStore         |  Yes             |  No               | No                  |    Yes     |
+| PowerScale         |  Yes             |  Yes              | Yes                 |    Yes     |
+| PowerFlex          |  Yes             |  Yes              | Yes                 |    Yes     |
+| PowerMax           |  Yes             |  Yes              | Yes                 |    Yes     |
+| Unity XT           |  No              |  No               | No                  |    No      |
 {{</table>}}
 
 ## OpenShift Compatibility with Operator
@@ -92,17 +91,17 @@ Container Storage Modules doesn't officially support specific operating systems,
 {{<table "table table-striped table-bordered table-sm">}}
 |  OpenShift Version        | Operator Version        | CSM version |
 | ------------| ------------------| ----------- |
-|  4.14       | 1.4.4, 1.5.1, 1.6.1, 1.7.0, 1.8.1 |1.9.4, 1.10.2, 1.11.1, 1.12, 1.13.1|
-|  4.15       | 1.5.1, 1.6.1, 1.7.0, 1.8.1        |1.10.2, 1.11.1, 1.12, 1.13.1    |
-|  4.16       | 1.6.1, 1.7.0, 1.8.1               |1.11.1, 1.12, 1.13.1         |
-|  4.17       | 1.6.1, 1.7.0, 1.8.1               |1.11.1, 1.12, 1.13.1         |
-|  4.18       | 1.6.1, 1.7.0, 1.8.1               |1.11.1, 1.12, 1.13.1         |
+|  4.14       | 1.4.4, 1.5.1, 1.6.1, 1.7.0, 1.8.1, 1.9.0 |1.9.4, 1.10.2, 1.11.1, 1.12, 1.13.1, 1.14 |
+|  4.15       | 1.5.1, 1.6.1, 1.7.0, 1.8.1, 1.9.0        |1.10.2, 1.11.1, 1.12, 1.13.1, 1.14        |
+|  4.16       | 1.6.1, 1.7.0, 1.8.1, 1.9.0               |1.11.1, 1.12, 1.13.1, 1.14                |
+|  4.17       | 1.6.1, 1.7.0, 1.8.1, 1.9.0               |1.11.1, 1.12, 1.13.1, 1.14                |
+|  4.18       | 1.6.1, 1.7.0, 1.8.1, 1.9.0               |1.11.1, 1.12, 1.13.1, 1.14                |
 {{</table>}}
-**Note:**  
-- [Refer](#supported-container-orchestrator-platforms) our supported Orchestration platform. While the Operator may be displayed, it does not necessarily mean it has been fully qualified by us. If desired, customers can upgrade the Operator and self-certify it.
+**Note:**
+- [Refer](#container-orchestrator-platforms) our supported Orchestration platform. While the Operator may be displayed, it does not necessarily mean it has been fully qualified by us. If desired, customers can upgrade the Operator and self-certify it.
 
 
-## Installation Wizard Compatibility 
+## Installation Wizard Compatibility
 
 ### Drivers
 

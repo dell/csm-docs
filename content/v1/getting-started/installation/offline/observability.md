@@ -82,7 +82,7 @@ To perform an offline installation of a Helm chart, the following steps should b
       quay.io/dell/container-storage-modules/csm-metrics-powerstore:{{< version-v1 key="Observability_csm_metrics_PStore_image" >}}
       quay.io/dell/container-storage-modules/csm-metrics-powerscale:{{< version-v1 key="Observability_csm_metrics_PScale_image" >}}
       quay.io/dell/container-storage-modules/csm-metrics-powermax:{{< version-v1 key="Observability_csm_metrics_PMax_image" >}}
-      otel/opentelemetry-collector:0.42.0
+      ghcr.io/open-telemetry/opentelemetry-collector-releases/opentelemetry-collector:{{< version-v1 key="opentelemetry_collector_latest_version" >}}
       nginxinc/nginx-unprivileged:1.27
 
     *
@@ -118,7 +118,7 @@ To perform an offline installation of a Helm chart, the following steps should b
       quay.io/dell/container-storage-modules/csm-metrics-powerstore:{{< version-v1 key="Observability_csm_metrics_PStore_image" >}} -> <my-registry>:5000/csm-metrics-powerstore:{{< version-v1 key="Observability_csm_metrics_PStore_image" >}}
       quay.io/dell/container-storage-modules/csm-metrics-powerscale:{{< version-v1 key="Observability_csm_metrics_PScale_image" >}} -> <my-registry>:5000/csm-metrics-powerscale:{{< version-v1 key="Observability_csm_metrics_PScale_image" >}}
       quay.io/dell/container-storage-modules/csm-metrics-powermax:{{< version-v1 key="Observability_csm_metrics_PMax_image" >}} -> <my-registry>:5000/csm-metrics-powermax:{{< version-v1 key="Observability_csm_metrics_PMax_image" >}}
-      otel/opentelemetry-collector:0.42.0 -> <my-registry>:5000/opentelemetry-collector:0.42.0
+      ghcr.io/open-telemetry/opentelemetry-collector-releases/opentelemetry-collector:{{< version-v1 key="opentelemetry_collector_latest_version" >}} -> <my-registry>:5000/opentelemetry-collector:{{< version-v1 key="opentelemetry_collector_latest_version" >}}
       nginxinc/nginx-unprivileged:1.27 -> <my-registry>:5000/nginx-unprivileged:1.27
     ```
 

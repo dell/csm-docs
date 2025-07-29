@@ -7,14 +7,164 @@ description: >
 {{% pageinfo color="primary" %}}
 {{< message text="1" >}}
 {{% /pageinfo %}}
-## Install Container Storage Modules Authorization via Container Storage Modules Operator
 
+The following Authorization components are installed in the specified namespace:
+- proxy-service, which forwards requests from the CSI Driver to the backend storage array
+- tenant-service, which configures tenants, role bindings, and generates JSON Web Tokens
+- role-service, which configures roles for tenants to be bound to
+- storage-service, which configures backend storage arrays for the proxy-server to forward requests to
 
-### Prerequisite
+The following third-party components are installed in the specified namespace:
+- redis, which stores data regarding tenants and their volume ownership, quota, and revokation status
+- redis-commander, a web management tool for Redis
 
-1. [Install Vault or configure an existing Vault](../authorizationv2-0/#vault-server-installation).
+The following third-party components are optionally installed in the specified namespace:
+- cert-manager, which optionally provides a self-signed certificate to configure the Authorization Ingresses
+- nginx-ingress-controller, which fulfills the Authorization Ingresses
 
-2. Execute `kubectl create namespace authorization` to create the authorization namespace (if not already present). Note that the namespace can be any user-defined name, in this example, we assume that the namespace is 'authorization'.
+Storage system credentials can be provided in one of two ways:
+1. Using a SecretProviderClass (for dynamic secrets from external providers)
+2. Using a Kubernetes Secret (for static credentials)
+
+## Install Container Storage Modules Authorization
+
+1. Create the Authorization namespace.
+   ```bash
+   kubectl create namespace authorization
+   ```
+
+2. Configure Storage Credentials
+
+{{< tabpane text=true lang="en" >}}
+{{% tab header="SecretProviderClass" lang="en" %}}
+<br>
+
+- Install a supported [External Secret Provider](https://secrets-store-csi-driver.sigs.k8s.io/getting-started/installation#install-external-secret-providers) to integrate with the Secrets Store CSI Driver. For guidance on setting up Vault, refer to our [Vault installation guide](v1/getting-started/installation/operator/modules/authorizationv2-0#vault-csi-provider-installation).
+
+- Install the [Secrets Store CSI Driver](https://secrets-store-csi-driver.sigs.k8s.io/getting-started/installation) enabling the [`Sync as Kubernetes Secret`](https://secrets-store-csi-driver.sigs.k8s.io/topics/sync-as-kubernetes-secret) and [`Secret Auto Rotation`](https://secrets-store-csi-driver.sigs.k8s.io/topics/secret-auto-rotation) features.
+
+- Create your own [SecretProviderClass Object](https://secrets-store-csi-driver.sigs.k8s.io/getting-started/usage#create-your-own-secretproviderclass-object) based on your external secret provider. You also have the option to create your own Redis secret in the SecretProviderClass.
+
+- For OpenShift environments, label the namespace:
+
+   ```bash
+   kubectl label namespace authorization \
+    pod-security.kubernetes.io/enforce=privileged \
+    security.openshift.io/MinimallySufficientPodSecurityStandard=privileged \
+    --overwrite
+   ```
+
+  {{< collapse id="2" title="SecretProviderClass without Redis" card="false" >}}
+
+  <br>
+  Example SecretProviderClass using Vault Provider:
+
+  ```bash
+  apiVersion: secrets-store.csi.x-k8s.io/v1
+  kind: SecretProviderClass
+  metadata:
+    name: vault-db-creds
+  spec:
+    # Vault CSI Provider
+    provider: vault
+    parameters:
+      # Vault role name to use during login
+      roleName: 'csm-authorization'
+      # Vault's hostname
+      vaultAddress: 'https://vault:8200'
+      # TLS CA certification for validation
+      vaultCACertPath: '/vault/tls/ca.crt'
+      objects: |
+        - objectName: "dbUsername"
+          secretPath: "database/creds/db-app"
+          secretKey: "username"
+        - objectName: "dbPassword"
+          secretPath: "database/creds/db-app"
+          secretKey: "password"
+      # "objectName" is an alias used within the SecretProviderClass to reference
+      # that specific secret. This will also be the filename containing the secret.
+      # "secretPath" is the path in Vault where the secret should be retrieved.
+      # "secretKey" is the key within the Vault secret response to extract a value from.
+  ```
+
+  {{< /collapse >}}
+
+  {{< collapse id="2" title="SecretProviderClass with Redis" card="false" >}}
+
+  <br>
+  Example SecretProviderClass using Vault Provider:
+
+  ```bash
+  apiVersion: secrets-store.csi.x-k8s.io/v1
+  kind: SecretProviderClass
+  metadata:
+    name: vault-db-creds
+  spec:
+    # Vault CSI Provider
+    provider: vault
+    secretObjects:
+    # Name of the Kubernetes Secret object
+    # This name will be used during deployment
+    - secretName: vault-db-creds
+      type: kubernetes.io/basic-auth
+      data:
+        # Name of the mounted content to sync
+        # This could be the object name or the object alias
+        - objectName: dbRedisUsername
+          # Data field to populate
+          key: username
+        - objectName: dbRedisPassword
+          key: password
+    parameters:
+      # Vault role name to use during login
+      roleName: 'csm-authorization'
+      # Vault's hostname
+      vaultAddress: 'https://vault:8200'
+      # TLS CA certification for validation
+      vaultCACertPath: '/vault/tls/ca.crt'
+      objects: |
+        - objectName: "dbUsername"
+          secretPath: "database/creds/db-app"
+          secretKey: "username"
+        - objectName: "dbPassword"
+          secretPath: "database/creds/db-app"
+          secretKey: "password"
+        - objectName: "dbRedisUsername"
+          secretPath: "database/creds/redis"
+          secretKey: "username"
+        - objectName: "dbRedisPassword"
+          secretPath: "database/creds/redis"
+          secretKey: "password"
+      # "objectName" is an alias used within the SecretProviderClass to reference
+      # that specific secret. This will also be the filename containing the secret.
+      # "secretPath" is the path in Vault where the secret should be retrieved.
+      # "secretKey" is the key within the Vault secret response to extract a value from.
+  ```
+
+  {{< /collapse >}}
+  {{% /tab %}}
+
+{{% tab header="Secret" lang="en" %}}
+- Create a YAML file (in this example, `storage-secret.yaml`) containing the credentials:
+
+  ```bash
+  # Username and password for accessing storage system
+  username: "username"
+  password: "password"
+  ```
+</br>
+
+- Create the Secret:
+
+  ```bash
+  kubectl create secret generic storage-secret -n authorization --from-file=storage-secret.yaml
+  ```
+{{% /tab %}}
+{{< /tabpane >}}
+
+>__Note__: Only one of SecretProviderClass or Secret can be used at a time.
+
+<br>
 
 3. Install cert-manager CRDs
     ```bash
@@ -23,9 +173,9 @@ description: >
 
 4. Prepare [samples/authorization/config.yaml](https://github.com/dell/csm-operator/blob/main/samples/authorization/config.yaml) which contains the JWT signing secret. The following table lists the configuration parameters.
 
-    | Parameter | Description                                                  | Required | Default |
-    | --------- | ------------------------------------------------------------ | -------- | ------- |
-    | web.jwtsigningsecret  | String used to sign JSON Web Tokens                       | true     | secret       |.
+    | Parameter            | Description                         | Required | Default |
+    | -------------------- | ----------------------------------- | -------- | ------- |
+    | web.jwtsigningsecret | String used to sign JSON Web Tokens | true     | secret  | . |
 
     Example:
 
@@ -53,44 +203,42 @@ description: >
 
 ### Install Container Storage Modules Authorization Proxy Server
 
-
-
-1. Create a CR (Custom Resource) for Authorization from a [sample manifest](https://github.com/dell/csm-operator/blob/main/samples/authorization/csm_authorization_proxy_server_v200.yaml). This file can be modified to use custom parameters if needed.
+1. Create a CR (Custom Resource) for Authorization from a [sample manifest](https://github.com/dell/csm-operator/blob/main/samples/authorization/csm_authorization_proxy_server_v230.yaml). This file can be modified to use custom parameters if needed.
 
 2. Users should configure the parameters in the CR. This table lists the primary configurable parameters of the Authorization Proxy Server and their default values:
 
 <ul>
 {{< collapse title="Parameters" id="1">}}
-   | Parameter | Description | Required | Default |
-   | --------- | ----------- | -------- |-------- |
-   | **nginx** | This section configures the enablement of the NGINX Ingress Controller. | - | - |
-   | enabled | For Kubernetes Container Platform only: Enable/Disable deployment of the NGINX Ingress Controller. Set to false if you already have an Ingress Controller installed. | No | true |
-   | **cert-manager** | This section configures the enablement of cert-manager. | - | - |
-   | enabled | Enable/Disable deployment of cert-manager. Set to false if you already have cert-manager installed. | No | true |
-   | **authorization** | This section configures the CSM-Authorization components. | - | - |
-   | certificate | The base64-encoded certificate for the certificate/private-key to configure the proxy-service Ingress. Leave empty to use self-signed certificate. | No | - |
-   | privateKey | The base64-encoded private key for the certificate/private-key to configure the proxy-service Ingress. Leave empty to use self-signed certificate. | No | - |
-   | hostname | The hostname to configure the self-signed certificate (if applicable), and the proxy service Ingress. | No | csm-authorization.com |
-   | proxyServerIngress.ingressClassName | The ingressClassName of the proxy-service Ingress. | Yes | nginx |
-   | proxyServerIngress.hosts | Additional host rules to be applied to the proxy-service Ingress. | No | - |
-   | proxyServerIngress.annotations | Additional annotations for the proxy-service Ingress. | No | - |
-{{< /collapse >}} 
+   | Parameter                           | Description                                                                                                                                                          | Required | Default               |
+   | ----------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | --------------------- |
+   | **nginx**                           | This section configures the enablement of the NGINX Ingress Controller.                                                                                              | -        | -                     |
+   | enabled                             | For Kubernetes Container Platform only: Enable/Disable deployment of the NGINX Ingress Controller. Set to false if you already have an Ingress Controller installed. | No       | true                  |
+   | **cert-manager**                    | This section configures the enablement of cert-manager.                                                                                                              | -        | -                     |
+   | enabled                             | Enable/Disable deployment of cert-manager. Set to false if you already have cert-manager installed.                                                                  | No       | true                  |
+   | **authorization**                   | This section configures the CSM-Authorization components.                                                                                                            | -        | -                     |
+   | certificate                         | The base64-encoded certificate for the certificate/private-key to configure the proxy-service Ingress. Leave empty to use self-signed certificate.                   | No       | -                     |
+   | privateKey                          | The base64-encoded private key for the certificate/private-key to configure the proxy-service Ingress. Leave empty to use self-signed certificate.                   | No       | -                     |
+   | hostname                            | The hostname to configure the self-signed certificate (if applicable), and the proxy service Ingress.                                                                | No       | csm-authorization.com |
+   | proxyServerIngress.ingressClassName | The ingressClassName of the proxy-service Ingress.                                                                                                                   | Yes      | nginx                 |
+   | proxyServerIngress.hosts            | Additional host rules to be applied to the proxy-service Ingress.                                                                                                    | No       | -                     |
+   | proxyServerIngress.annotations      | Additional annotations for the proxy-service Ingress.                                                                                                                | No       | -                     |
+{{< /collapse >}}
 {{< collapse title="Additional v2.0 Parameters" >}}
-**Additional v2.0 Parameters:**
    | Parameter | Description | Required | Default |
    | --------- | ----------- | -------- |-------- |
    | **redis** | This section configures the Redis components. | - | - |
    | redisName | The prefix of the redis pods. The number of pods is determined by the number of replicas. | Yes | redis-csm |
+   | **redisSecretProviderClass** | This section configures the Redis credentials. | - | - |
+   | redisSecretName | The name of the Kubernetes secret created by the CSI driver. | No | - |
+   | redisUsernameKey | The key in the secret that stores the Redis username. | Yes | username |
+   | redisPasswordKey | The key in the secret that stores the Redis password. | Yes | password |
    | redisCommander | The prefix of the redis commander pod. | Yes | rediscommander |
    | sentinel | The prefix of the redis sentinel pods. The number of pods is determined by the number of replicas. | Yes | sentinel |
    | redisReplicas | The number of replicas for the sentinel and redis pods. | Yes | 5 |
    | storageclass | The storage class for Redis to use for persistence. If not supplied, a locally provisioned volume is used. | No | - |
-   | **vault** | This section configures the vault components. | - | - |
-   | vaultAddress | The address where vault is hosted with the credentials to the array (`https://10.0.0.1:<port>`). | Yes | - |
-   | vaultRole | The configured authentication role in vault. | Yes | csm-authorization |
-   | certificate | The base64-encoded certificate for the certificate/private-key pair to connect to Vault. Leave empty to use self-signed certificate. | No | - |
-   | privateKey | The base64-encoded private key for the certificate/private-key pair to connect to Vault. Leave empty to use self-signed certificate. | No | - |
-   | certificateAuthority | The base64-encoded certificate authority for validating the Vault server. | No | - |
+   | **storageSystemCredentials** | This section configures the storageSystemCredentials. | - | - |
+   | secretProviderClasses | A name that is used to identify a secretProviderClass object. | Yes | - |
+   | secrets | A name that is used to identify a Kubernetes Secret. | No | - |
 {{< /collapse >}}
 
 
@@ -145,160 +293,32 @@ Follow the instructions available in Authorization for
 
 {{< hide id="3" >}}- [Configuring PowerScale with Authorization](v1/concepts/authorization/v2.x/configuration/powerscale).{{< /hide >}}
 
-## Vault Server Installation
+## Vault CSI Provider Installation
 
-If there is already a Vault server available, skip to [Minimum Server Configuration](#minimum-server-configuration).
+If there is already a Vault CSI provider install available, skip to [Minimum Server Configuration](#minimum-server-configuration).
 
-If there is no Vault server available to use with Authorization, it can be installed in many ways following [Hashicorp Vault documentation](https://www.vaultproject.io/docs).
+If there is no Vault CSI provider available to use with CSM Authorization, it can be installed following [Hashicorp Vault documentation](https://www.vaultproject.io/docs).
 
-For testing environment, however, a simple deployment suggested in this section may suffice.
-It creates a standalone server with in-memory (non-persistent) storage, running in a Docker container.
+For a testing environment, however, a simple deployment suggested in this section may suffice.
+> **NOTE**: It creates a standalone server with in-memory (non-persistent) storage. It is insecure and will lose data on every restart. It is only made for development or experimentation.
 
-> **NOTE**: With in-memory storage, the data in Vault is permanently destroyed upon the server's termination.
-
-### Generate TLS certificates for server and client
-
-Create server CA private key and certificate:
+### Start Vault CSI Provider
 
 ```shell
-openssl req -x509 -sha256 -days 365 -newkey rsa:2048 -nodes \
-	-subj "/CN=Vault Root CA" \
-	-keyout server-ca.key \
-	-out server-ca.crt
+helm repo add hashicorp https://helm.releases.hashicorp.com
+helm install vault hashicorp/vault \
+    --set "server.dev.enabled=true" \
+    --set "injector.enabled=false" \
+    --set "csi.enabled=true"
 ```
-
-Create server private key and CSR:
-
-```shell
-openssl req -newkey rsa:2048 -nodes \
-	-subj "/CN=vault-demo-server" \
-	-keyout server.key \
-	-out server.csr
-```
-
-Create server certificate signed by the CA:
-
-> Replace `<external IP>` with an IP address by which Authorization can reach the Vault server.
-This may be the address of the Docker host where the Vault server will be running.
-
-```shell
-cat > cert.ext <<EOF
-authorityKeyIdentifier=keyid,issuer
-basicConstraints=CA:FALSE
-subjectAltName = @alt_names
-[alt_names]
-DNS.1 = vault-demo-server
-IP.1 = 127.0.0.1
-IP.2 = <external IP>
-EOF
-
-openssl x509 -req \
-	-CA server-ca.crt -CAkey server-ca.key \
-	-in server.csr \
-	-out server.crt \
-	-days 365 \
-	-extfile cert.ext \
-	-CAcreateserial
-
-cat server-ca.crt >> server.crt
-```
-
-Create client CA private key and certificate:
-
-```shell
-openssl req -x509 -sha256 -days 365 -newkey rsa:2048 -nodes \
-	-subj "/CN=Client Root CA" \
-	-keyout client-ca.key \
-	-out client-ca.crt
-```
-
-Create client private key and CSR:
-
-```shell
-openssl req -newkey rsa:2048 -nodes \
-	-subj "/CN=vault-client" \
-	-keyout client.key \
-	-out client.csr
-```
-
-Create client certificate signed by the CA:
-```shell
-cat > cert.ext <<EOF
-authorityKeyIdentifier=keyid,issuer
-basicConstraints=CA:FALSE
-subjectAltName = @alt_names
-[alt_names]
-DNS.1 = vault-client
-IP.1 = 127.0.0.1
-EOF
-
-openssl x509 -req \
-	-CA client-ca.crt -CAkey client-ca.key \
-	-in client.csr \
-	-out client.crt \
-	-days 365 \
-	-extfile cert.ext \
-	-CAcreateserial
-
-cat client-ca.crt >> client.crt
-```
-
-### Create server hcl file
-
-```shell
-cat >server.hcl <<EOF
-storage "inmem" {}
-
-listener "tcp" {
-	address = "0.0.0.0:8400"
-	tls_disable = "false"
-	tls_cipher_suites = "TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384"
-	tls_min_version = "tls12"
-	tls_cert_file = "/var/vault/server.crt"
-	tls_key_file  = "/var/vault/server.key"
-	tls_client_ca_file = "/var/vault/client-ca.crt"
-	tls_require_and_verify_client_cert = "true"
-}
-
-disable_mlock = true
-api_addr = "http://127.0.0.1:8200"
-ui = true
-EOF
-```
-
-### Start Vault Server
-
-> Variable `CONF_DIR` below refers to the directory containing files *server.crt*, *server.key*, *client-ca.crt* and *server.hcl*.
-```shell
-VOL_DIR="$CONF_DIR"
-VOL_DIR_D="/var/vault"
-ROOT_TOKEN="DemoRootToken"
-VAULT_IMG="vault:1.13.3"
-
-docker run --rm -d \
-	--name="vault-server" \
-	-p 8200:8200 -p 8400:8400 \
-	-v $VOL_DIR:$VOL_DIR_D -w $VOL_DIR_D \
-	-e VAULT_DEV_ROOT_TOKEN_ID=$ROOT_TOKEN \
-	-e VAULT_ADDR="http://127.0.0.1:8200" \
-	-e VAULT_TOKEN=$ROOT_TOKEN \
-	$VAULT_IMG \
-	sh -c 'vault server -dev -dev-listen-address 0.0.0.0:8200 -config=server.hcl'
-```
+This is the recommended installation method for [Vault Provider for Secrets Store CSI Driver](https://github.com/hashicorp/vault-csi-provider?tab=readme-ov-file#hashicorp-vault-provider-for-secrets-store-csi-driver).
 
 ## Minimum Server Configuration
 
-> **NOTE:** this configuration is a bare minimum to support Authorization and is not intended for use in production environment.
+> **NOTE:** This configuration is a bare minimum to support CSM Authorization.
 Refer to the [Hashicorp Vault documentation](https://www.vaultproject.io/docs) for recommended configuration options.
 
-> If a [test instance of Vault](#vault-server-installation) is used, the `vault` commands below can be executed in the Vault server container shell.
-> To enter the shell, run `docker exec -it vault-server sh`. After completing the configuration process, exit the shell by typing `exit`.
->
-> Alternatively, you can [download the vault binary](https://www.vaultproject.io/downloads) and run it anywhere.
-> It will require two environment variables to communicate with the Vault server:
-> - `VAULT_ADDR` - URL similar to `http://127.0.0.1:8200`. You may need to change the address in the URL to the address of
-the Docker host where the server is running.
-> - `VAULT_TOKEN` - Authentication token, e.g. the root token `DemoRootToken` used in the [test instance of Vault](#vault-server-installation).
+> To start an interactive shell session, run `kubectl exec -it vault-0 -- /bin/sh`. After completing the configuration process, exit the shell by typing `exit`.
 
 ### Enable Key/Value secret engine
 
@@ -338,7 +358,7 @@ vault write auth/kubernetes/role/csm-authorization \
 	token_ttl=1h \
 	token_max_ttl=1h \
 	token_explicit_max_ttl=10d \
-  bound_service_account_names=storage-service \
+  bound_service_account_names=storage-service,tenant-service,proxy-server,sentinel,redis \
   bound_service_account_namespaces=authorization \
   policies=csm-authorization
 ```
@@ -350,6 +370,7 @@ The role needs to be:
 
 ### Write a secret
 
+Given an example below for writing a secret to vault for PowerFlex,
 ```shell
 vault kv put -mount=secret /storage/powerflex/systemid1 username=user password=pass
 ```
@@ -368,3 +389,122 @@ With the default server settings, role level values control TTL in this way:
 The client token will only be able to renew 3 times before reaching it total allowed TTL of 2 hours.
 
 Existing role values can be changed using `vault write auth/kubernetes/role/csm-authorization token_ttl=30m token_explicit_max_ttl=2h`.
+
+## Conjur CSI Provider Installation
+
+If there is already a Conjur CSI provider install available, skip to [Minimum Server Configuration](#conjur-minimum-server-configuration).
+
+If there is no Conjur CSI provider available to use with CSM Authorization, it can be installed following [Conjur K8S CSI Provider documentation](https://github.com/cyberark/conjur-k8s-csi-provider).
+
+For a testing environment, however, a simple deployment suggested in this section may suffice.
+
+### Start Conjur CSI Provider
+
+```shell
+helm repo add cyberark https://cyberark.github.io/helm-charts
+helm install conjur-csi-provider \
+  cyberark/conjur-k8s-csi-provider \
+  --set provider.name="conjur" \
+  --set securityContext.privileged=true \
+  --set securityContext.allowPrivilegeEscalation=true
+```
+
+### Conjur Minimum Server Configuration
+> **NOTE:** This configuration is a bare minimum to support CSM Authorization.
+
+#### Load Host Policy
+Load the following policy file using `conjur-cli`. In this example, the yaml below is saved in `$HOME/.conjur-cli/config.yaml`. 
+
+> **NOTE:** This example uses `public-keys` of the Service Account Issuer Discovery service in Kubernetes. `jwks-uri` is also available to set and configure.
+
+```yaml
+# Define the policy branch
+- !policy
+  id: csm-authorization
+  body:
+    - !host
+      id: system:serviceaccount:authorization:storage-service
+      annotations:
+        authn-jwt/kube/kubernetes.io/namespace: "authorization"
+        authn-jwt/kube/kubernetes.io/serviceaccount/name: "storage-service"
+
+# Define the webservice and its variables
+- !webservice
+  id: conjur/authn-jwt/kube
+
+- !variable
+  id: conjur/authn-jwt/kube/issuer
+
+- !variable
+  id: conjur/authn-jwt/kube/public-keys
+
+- !variable
+  id: conjur/authn-jwt/kube/audience
+
+- !variable
+  id: conjur/authn-jwt/kube/token-app-property
+
+- !variable
+  id: conjur/authn-jwt/kube/identity-path
+
+# Permit the nested host access to the webservice
+- !permit
+  role: !host csm-authorization/system:serviceaccount:authorization:storage-service
+  privilege: [ read, authenticate ]
+  resource: !webservice conjur/authn-jwt/kube
+
+```
+
+```shell
+podman run --rm -it -v ~/.conjur-cli:/home/cli docker.io/cyberark/conjur-cli:8 policy load -b root -f /home/cli/config.yaml
+```
+
+#### Configure JWT Authentication
+
+Save your cluster's JWKS information.
+
+```shell
+kubectl get --raw /openid/v1/jwks > $HOME/.conjur-cli/jwks.json
+```
+
+Configure the `public-keys`, `issuer`, `token-app-property`, `identity-path`, and `audience` variables.
+
+If your cluster is OpenShift, the `issuer` is `https://kubernetes.default.svc`. For standard Kubernetes, it is `https://kubernetes.default.svc.cluster.local`. In this example, the cluster is OpenShift.
+
+```shell
+ISSUER="https://kubernetes.default.svc"
+
+podman run --rm -v ~/.conjur-cli:/home/cli docker.io/cyberark/conjur-cli:8 variable set -i conjur/authn-jwt/kube/public-keys -v "{\"type\":\"jwks\", \"value\":$(cat ~/.conjur-cli/jwks.json | jq -c .)}" && \
+podman run --rm -v ~/.conjur-cli:/home/cli docker.io/cyberark/conjur-cli:8 variable set -i conjur/authn-jwt/kube/issuer -v "$ISSUER && \
+podman run --rm -v ~/.conjur-cli:/home/cli docker.io/cyberark/conjur-cli:8 variable set -i conjur/authn-jwt/kube/token-app-property -v "sub" && \
+podman run --rm -v ~/.conjur-cli:/home/cli docker.io/cyberark/conjur-cli:8 variable set -i conjur/authn-jwt/kube/identity-path -v csm-authorization && \
+podman run --rm -v ~/.conjur-cli:/home/cli docker.io/cyberark/conjur-cli:8 variable set -i conjur/authn-jwt/kube/audience -v "conjur"
+```
+
+#### Load and Configure a Secret
+
+In this example, the following yaml is saved in `$HOME/.conjur-cli/app-secret.yaml`.
+
+```yaml
+- !policy
+  id: secrets
+  body:
+    - &variables
+      - !variable username
+      - !variable password
+    - !permit
+      role: !host /csm-authorization/system:serviceaccount:authorization:storage-service
+      privilege: [ read, execute ]
+      resource: *variables
+```
+
+```shell
+podman run --rm -it -v ~/.conjur-cli:/home/cli docker.io/cyberark/conjur-cli:8 policy load -b root -f /home/cli/app-secret.yaml
+```
+
+Set the variable with values. In this example, `usr` and `pwd` are the values.
+
+```shell
+podman run --rm -it -v ~/.conjur-cli:/home/cli docker.io/cyberark/conjur-cli:8 variable set -i secrets/username -v usr && \
+podman run --rm -it -v ~/.conjur-cli:/home/cli docker.io/cyberark/conjur-cli:8 variable set -i secrets/password -v pwd
+```

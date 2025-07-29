@@ -56,12 +56,10 @@ Here is the output of a request to build an offline bundle for the Dell CSM Oper
 
    quay.io/dell/container-storage-modules/csi-isilon:{{< version-v1 key="PScale_latestVersion" >}}
    quay.io/dell/container-storage-modules/csi-metadata-retriever:{{< version-v1 key="metadata_retriever_latest_version" >}}
-   quay.io/dell/container-storage-modules/csipowermax-reverseproxy:{{< version-v1 key="Authv1_PMax_ReverseProxy_ConfigVersion" >}}
    quay.io/dell/container-storage-modules/csi-powermax:{{< version-v1 key="PMax_latestVersion" >}}
    quay.io/dell/container-storage-modules/csi-powerstore:{{< version-v1 key="PStore_latestVersion" >}}
    quay.io/dell/container-storage-modules/csi-unity:{{< version-v1 key="PUnity_latestVersion" >}}
    quay.io/dell/container-storage-modules/csi-vxflexos:{{< version-v1 key="PFlex_latestVersion" >}}
-   quay.io/dell/container-storage-modules/csm-authorization-sidecar:{{< version-v1 key="Authv1_csm_authorization_sidecar" >}}
    quay.io/dell/container-storage-modules/csm-metrics-powerflex:{{< version-v1 key="Observability_csm_metrics_PFlex_image" >}}
    quay.io/dell/container-storage-modules/csm-metrics-powerscale:{{< version-v1 key="Observability_csm_metrics_PScale_image" >}}
    quay.io/dell/container-storage-modules/csm-topology:{{< version-v1 key="Observability_csm_topology_image" >}}
@@ -71,12 +69,12 @@ Here is the output of a request to build an offline bundle for the Dell CSM Oper
    quay.io/dell/container-storage-modules/dell-csm-operator:{{< version-v1 key="csm-operator_latest_version" >}}
    registry.redhat.io/openshift4/ose-kube-rbac-proxy-rhel9:v4.16.0-202409051837.p0.g8ea2c99.assembly.stream.el9
    nginxinc/nginx-unprivileged:1.27
-   otel/opentelemetry-collector:0.42.0
-   registry.k8s.io/sig-storage/csi-attacher:{{< version-v1 key="attacher_latest_version" >}}
-   registry.k8s.io/sig-storage/csi-external-health-monitor-controller:{{< version-v1 key="health_monitor_controller_latest_version" >}}
-   registry.k8s.io/sig-storage/csi-node-driver-registrar:{{< version-v1 key="node_driver_registrar_latest_version" >}}
-   registry.k8s.io/sig-storage/csi-provisioner:{{< version-v1 key="provisioner_latest_version" >}}
-   registry.k8s.io/sig-storage/csi-resizer:{{< version-v1 key="resizer_latest_version" >}}
+   ghcr.io/open-telemetry/opentelemetry-collector-releases/opentelemetry-collector:{{< version-v1 key="opentelemetry_collector_latest_version" >}}
+   registry.k8s.io/sig-storage/csi-attacher:{{< version-v1 key="csi_attacher_latest_version" >}}
+   registry.k8s.io/sig-storage/csi-external-health-monitor-controller:{{< version-v1 key="csi_external_health_monitor_controller_latest_version" >}}
+   registry.k8s.io/sig-storage/csi-node-driver-registrar:{{< version-v1 key="csi_node_driver_registrar_latest_version" >}}
+   registry.k8s.io/sig-storage/csi-provisioner:{{< version-v1 key="csi_provisioner_latest_version" >}}
+   registry.k8s.io/sig-storage/csi-resizer:{{< version-v1 key="csi_resizer_latest_version" >}}
    registry.k8s.io/sig-storage/csi-snapshotter:{{< version-v1 key="csi_snapshotter_latest_version" >}}
 
 * Copying necessary files
@@ -167,7 +165,7 @@ Loaded image: quay.io/dell/container-storage-modules/csi-powerstore:{{< version-
 Loaded image: quay.io/dell/container-storage-modules/csi-isilon:{{< version-v1 key="PScale_latestVersion" >}}
 ...
 ...
-Loaded image: registry.k8s.io/sig-storage/csi-resizer:{{< version-v1 key="resizer_latest_version" >}}
+Loaded image: registry.k8s.io/sig-storage/csi-resizer:{{< version-v1 key="csi_resizer_latest_version" >}}
 Loaded image: registry.k8s.io/sig-storage/csi-snapshotter:{{< version-v1 key="csi_snapshotter_latest_version" >}}
 
 * Tagging and pushing images
@@ -176,7 +174,7 @@ Loaded image: registry.k8s.io/sig-storage/csi-snapshotter:{{< version-v1 key="cs
    quay.io/dell/container-storage-modules/csi-metadata-retriever:{{< version-v1 key="metadata_retriever_latest_version" >}} -> localregistry:5000/dell-csm-operator/csi-metadata-retriever:{{< version-v1 key="metadata_retriever_latest_version" >}}
    ...
    ...
-   registry.k8s.io/sig-storage/csi-resizer:{{< version-v1 key="resizer_latest_version" >}} -> localregistry:5000/dell-csm-operator/csi-resizer:{{< version-v1 key="resizer_latest_version" >}}
+   registry.k8s.io/sig-storage/csi-resizer:{{< version-v1 key="csi_resizer_latest_version" >}} -> localregistry:5000/dell-csm-operator/csi-resizer:{{< version-v1 key="csi_resizer_latest_version" >}}
    registry.k8s.io/sig-storage/csi-snapshotter:{{< version-v1 key="csi_snapshotter_latest_version" >}} -> localregistry:5000/dell-csm-operator/csi-snapshotter:{{< version-v1 key="csi_snapshotter_latest_version" >}}
 
 * Preparing files within /root/dell-csm-operator-bundle
@@ -185,7 +183,7 @@ Loaded image: registry.k8s.io/sig-storage/csi-snapshotter:{{< version-v1 key="cs
    changing: quay.io/dell/container-storage-modules/csi-metadata-retriever:{{< version-v1 key="metadata_retriever_latest_version" >}} -> localregistry:5000/dell-csm-operator/csi-metadata-retriever:{{< version-v1 key="metadata_retriever_latest_version" >}}
    ...
    ...
-   changing: registry.k8s.io/sig-storage/csi-resizer:{{< version-v1 key="resizer_latest_version" >}} -> localregistry:5000/dell-csm-operator/csi-resizer:{{< version-v1 key="resizer_latest_version" >}}
+   changing: registry.k8s.io/sig-storage/csi-resizer:{{< version-v1 key="csi_resizer_latest_version" >}} -> localregistry:5000/dell-csm-operator/csi-resizer:{{< version-v1 key="csi_resizer_latest_version" >}}
    changing: registry.k8s.io/sig-storage/csi-snapshotter:{{< version-v1 key="csi_snapshotter_latest_version" >}} -> localregistry:5000/dell-csm-operator/csi-snapshotter:{{< version-v1 key="csi_snapshotter_latest_version" >}}
 
 * Complete

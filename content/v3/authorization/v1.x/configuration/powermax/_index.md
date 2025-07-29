@@ -28,7 +28,6 @@ Given a setup where Kubernetes, a storage system, and the CSM for Authorization 
    | skipCertificateValidation  | A boolean that enables/disables certificate validation of the backend storage array. This parameter is not used. | No | true |
    | isDefault | A boolean that indicates if the array is the default array. This parameter is not used. | No | default value from values.yaml |
 
-
 Create the karavi-authorization-config secret using this command:
   ```bash
 
@@ -72,11 +71,11 @@ Create the karavi-authorization-config secret using this command:
     - Update `global.managementServers.endpoint` to match the localhost endpoint in `samples/secret/karavi-authorization-config.json`.
 
     - Update `authorization.enabled` to `true`.
-    
+
     - Update `images.authorization` to the image of the CSM Authorization sidecar. In most cases, you can leave the default value.
 
     - Update `authorization.proxyHost` to the hostname of the CSM Authorization Proxy Server. `csm-authorization.com` is a placeholder for the proxyHost. See the administrator of CSM for Authorization for the correct value.
-    
+
     - Update `authorization.skipCertificateValidation` to `true` or `false` depending on if you want to disable or enable certificate validation of the CSM Authorization Proxy Server.
 
     - Update `csireverseproxy.deployAsSidecar` to `true`.
@@ -103,8 +102,8 @@ Create the karavi-authorization-config secret using this command:
       enabled: true
 
       # sidecarProxyImage: the container image used for the csm-authorization-sidecar.
-      # Default value: quay.io/dell/container-storage-modules/csm-authorization-sidecar:v1.12.0
-      sidecarProxyImage: quay.io/dell/container-storage-modules/csm-authorization-sidecar:v1.12.0
+      # Default value: quay.io/dell/container-storage-modules/csm-authorization-sidecar:v1.13.0
+      sidecarProxyImage: quay.io/dell/container-storage-modules/csm-authorization-sidecar:v1.13.0
 
       # proxyHost: hostname of the csm-authorization server
       # Default value: None
@@ -134,7 +133,7 @@ Create the karavi-authorization-config secret using this command:
 
     - Update the `DeployAsSidecar` environment variable for the `csipowermax-reverseproxy` component to `true`.
 
-    Example: 
+    Example:
 
     ```yaml
     modules:
@@ -142,7 +141,7 @@ Create the karavi-authorization-config secret using this command:
         # enabled: Always set to true
         enabled: true
         forceRemoveModule: true
-        configVersion: v2.11.0
+        configVersion: v2.12.0
         components:
           - name: csipowermax-reverseproxy
             envs:
@@ -152,10 +151,10 @@ Create the karavi-authorization-config secret using this command:
       - name: authorization
         # enable: Enable/Disable csm-authorization
         enabled: true
-        configVersion: v1.12.0
+        configVersion: v1.13.0
         components:
         - name: karavi-authorization-proxy
-          image: quay.io/dell/container-storage-modules/csm-authorization-sidecar:v1.12.0
+          image: quay.io/dell/container-storage-modules/csm-authorization-sidecar:v1.13.0
           envs:
             # proxyHost: hostname of the csm-authorization server
             - name: "PROXY_HOST"

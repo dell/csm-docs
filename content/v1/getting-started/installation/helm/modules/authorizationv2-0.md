@@ -25,18 +25,168 @@ The following third-party components are optionally installed in the specified n
 - cert-manager, which optionally provides a self-signed certificate to configure the Authorization Ingresses
 - nginx-ingress-controller, which fulfills the Authorization Ingresses
 
+Storage system credentials can be provided in one of two ways:
+1. Using a SecretProviderClass (for dynamic secrets from external providers)
+2. Using a Kubernetes Secret (for static credentials)
+
 ## Install Container Storage Modules Authorization
 
-**Steps**
-1. [Install Vault or configure an existing Vault](v1/getting-started/installation/operator/modules/authorizationv2-0#vault-server-installation).
-2. Create a namespace where you want to install Authorization.
+1. Create the Authorization namespace.
    ```bash
    kubectl create namespace authorization
    ```
 
+2. Configure Storage Credentials
+
+{{< tabpane text=true lang="en" >}}
+{{% tab header="SecretProviderClass" lang="en" %}}
+<br>
+
+- Install a supported [External Secret Provider](https://secrets-store-csi-driver.sigs.k8s.io/getting-started/installation#install-external-secret-providers) to integrate with the Secrets Store CSI Driver. For guidance on setting up Vault, refer to our [Vault installation guide](v1/getting-started/installation/operator/modules/authorizationv2-0#vault-csi-provider-installation). For Conjur, refer to our [Conjur installation guide](v1/getting-started/installation/operator/modules/authorizationv2-0#conjur-csi-provider-installation).
+
+- Install the [Secrets Store CSI Driver](https://secrets-store-csi-driver.sigs.k8s.io/getting-started/installation) enabling the [`Sync as Kubernetes Secret`](https://secrets-store-csi-driver.sigs.k8s.io/topics/sync-as-kubernetes-secret) and [`Secret Auto Rotation`](https://secrets-store-csi-driver.sigs.k8s.io/topics/secret-auto-rotation) features.
+   >__Note__: If you are using Conjur with the Secrets Store CSI Driver, be sure to configure `--set 'tokenRequests[0].audience=conjur'` when installing the Secrets Store CSI Driver.
+- Create your own [SecretProviderClass Object](https://secrets-store-csi-driver.sigs.k8s.io/getting-started/usage#create-your-own-secretproviderclass-object) based on your external secret provider. You also have the option to create your own Redis secret in the SecretProviderClass.
+
+- For OpenShift environments, label the namespace:
+
+   ```sh
+   kubectl label namespace authorization \
+    pod-security.kubernetes.io/enforce=privileged \
+    security.openshift.io/MinimallySufficientPodSecurityStandard=privileged \
+    --overwrite
+   ```
+
+  {{< collapse id="2" title="SecretProviderClass without Redis" card="false" >}}
+
+  <br>
+  {{< tabpane name="secret-provider-class-no-redis" lang="bash">}}
+  {{<tab header="Vault" >}}
+apiVersion: secrets-store.csi.x-k8s.io/v1
+kind: SecretProviderClass
+metadata:
+  name: vault-db-creds
+spec:
+  # Vault CSI Provider
+  provider: vault
+  parameters:
+    # Vault role name to use during login
+    roleName: 'csm-authorization'
+    # Vault's hostname
+    vaultAddress: 'https://vault:8200'
+    # TLS CA certification for validation
+    vaultCACertPath: '/vault/tls/ca.crt'
+    objects: |
+      - objectName: "dbUsername"
+        secretPath: "database/creds/db-app"
+        secretKey: "username"
+      - objectName: "dbPassword"
+        secretPath: "database/creds/db-app"
+        secretKey: "password"
+    # "objectName" is an alias used within the SecretProviderClass to reference
+    # that specific secret. This will also be the filename containing the secret.
+    # "secretPath" is the path in Vault where the secret should be retrieved.
+    # "secretKey" is the key within the Vault secret response to extract a value from.
+  {{</tab >}}
+  {{<tab header="Conjur" >}}
+apiVersion: secrets-store.csi.x-k8s.io/v1
+kind: SecretProviderClass
+metadata:
+  name: conjur-db-creds
+spec:
+  provider: conjur
+  parameters:
+    conjur.org/configurationVersion: 0.2.0
+    account: replace-me-account
+    applianceUrl: 'https://conjur-conjur-oss.default.svc.cluster.local'
+    authnId: authn-jwt/kube
+    sslCertificate: |
+      -----BEGIN CERTIFICATE-----
+      ...
+      -----END CERTIFICATE-----
+  {{</tab >}}
+  {{< /tabpane >}}
+  {{< /collapse >}}
+
+  {{< collapse id="2" title="SecretProviderClass with Redis" card="false" >}}
+
+  <br>
+  Example SecretProviderClass using Vault Provider:
+
+  ```bash
+  apiVersion: secrets-store.csi.x-k8s.io/v1
+  kind: SecretProviderClass
+  metadata:
+    name: vault-db-creds
+  spec:
+    # Vault CSI Provider
+    provider: vault
+    secretObjects:
+    # Name of the Kubernetes Secret object
+    # This name will be used during deployment
+    - secretName: vault-db-creds
+      type: kubernetes.io/basic-auth
+      data:
+        # Name of the mounted content to sync
+        # This could be the object name or the object alias
+        - objectName: dbRedisUsername
+          # Data field to populate
+          key: username
+        - objectName: dbRedisPassword
+          key: password
+    parameters:
+      # Vault role name to use during login
+      roleName: 'csm-authorization'
+      # Vault's hostname
+      vaultAddress: 'https://vault:8200'
+      # TLS CA certification for validation
+      vaultCACertPath: '/vault/tls/ca.crt'
+      objects: |
+        - objectName: "dbUsername"
+          secretPath: "database/creds/db-app"
+          secretKey: "username"
+        - objectName: "dbPassword"
+          secretPath: "database/creds/db-app"
+          secretKey: "password"
+        - objectName: "dbRedisUsername"
+          secretPath: "database/creds/redis"
+          secretKey: "username"
+        - objectName: "dbRedisPassword"
+          secretPath: "database/creds/redis"
+          secretKey: "password"
+      # "objectName" is an alias used within the SecretProviderClass to reference
+      # that specific secret. This will also be the filename containing the secret.
+      # "secretPath" is the path in Vault where the secret should be retrieved.
+      # "secretKey" is the key within the Vault secret response to extract a value from.
+  ```
+
+{{< /collapse >}}
+{{% /tab %}}
+{{% tab header="Secret" lang="en" %}}
+- Create a YAML file (in this example, `storage-secret.yaml`) containing the credentials:
+
+  ```bash
+  # Username and password for accessing storage system
+  username: "username"
+  password: "password"
+  ```
+<br>
+
+- Create the Secret:
+
+  ```bash
+  kubectl create secret generic storage-secret -n authorization --from-file=storage-secret.yaml
+  ```
+{{% /tab %}}
+{{< /tabpane >}}
+
+>__Note__: Only one of SecretProviderClass or Secret can be used at a time.
+
+<br>
+
 3. Add the Dell Helm Charts repo
    ```bash
-     helm repo add dell https://dell.github.io/helm-charts
+   helm repo add dell https://dell.github.io/helm-charts
    ```
 
 4. Prepare `samples/csm-authorization/config.yaml` which contains the JWT signing secret. The following table lists the configuration parameters.
@@ -72,53 +222,51 @@ The following third-party components are optionally installed in the specified n
 
 <ul>
 
-{{< collapse id="1" title="Parameter" >}} 
+{{< collapse id="1" title="Parameter" >}}
 
-| Parameter                           | Description                                                                                                                          | Required | Default                                   |
-| ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ | -------- | ----------------------------------------- |
-| openshift                           | Enable/Disable deployment of the OpenShift Ingress Operator. Set to false if you have an Ingress Controller installed.               | No       | true                                      |
-| **nginx**                           | This section configures the enablement of the NGINX Ingress Controller.                                                              | -        | -                                         |
-| enabled                             | Enable/Disable deployment of the NGINX Ingress Controller. Set to false if you have an Ingress Controller installed.                 | No       | true                                      |
-| **cert-manager**                    | This section configures the enablement of cert-manager.                                                                              | -        | -                                         |
-| enabled                             | Enable/Disable deployment of cert-manager. Set to false if you already have cert-manager installed.                                  | No       | true                                      |
-| **authorization**                   | This section configures the Authorization components.                                                                                 | -        | -                                         |
-| images.proxyService                 | The image to use for the proxy-service.                                                                                              | Yes      | quay.io/dell/container-storage-modules/csm-authorization-proxy:{{< version-v1 key="Authv2_csm_authorization_proxy" >}}   |
-| images.tenantService                | The image to use for the tenant-service.                                                                                             | Yes      | quay.io/dell/container-storage-modules/csm-authorization-tenant:{{< version-v1 key="Authv2_csm_authorization_tenant" >}}  |
-| images.roleService                  | The image to use for the role-service.                                                                                               | Yes      | quay.io/dell/container-storage-modules/csm-authorization-proxy:{{< version-v1 key="Authv2_csm_authorization_role" >}}   |
-| images.storageService               | The image to use for the storage-service.                                                                                            | Yes      | quay.io/dell/container-storage-modules/csm-authorization-storage:{{< version-v1 key="Authv2_csm_authorization_storage" >}} |
-| images.authorizationController      | The image to use for the controller.                                                                                                 | Yes      | quay.io/dell/container-storage-modules/csm-authorization-controller      |
-| images.opa                          | The image to use for Open Policy Agent.                                                                                              | Yes      | openpolicyagent/opa                       |
-| images.opaKubeMgmt                  | The image to use for Open Policy Agent kube-mgmt.                                                                                    | Yes      | openpolicyagent/kube-mgmt:8.5.8           |
-| hostname                            | The hostname to configure the self-signed certificate (if applicable) and the proxy Ingress.                                         | Yes      | csm-authorization.com                     |
-| logLevel                            | Authorization log level. Allowed values: “error”, “warn”/“warning”, “info”, “debug”.                                                 | Yes      | debug                                     |
-| concurrentPowerFlexRequests         | Number of concurrent requests to PowerFlex. Used with dellctl to list tenant volumes.                                                | Yes      | 10                                        |
-| concurrentPowerScaleRequests        | Number of concurrent requests to PowerScale. Used with dellctl to list tenant volumes.                                               | Yes      | 10                                        |
-| zipkin.collectoruri                 | The URI of the Zipkin instance to export traces.                                                                                     | No       | -                                         |
-| zipkin.probability                  | The ratio of traces to export.                                                                                                       | No       | -                                         |
-| proxyServerIngress.ingressClassName | The ingressClassName of the proxy-service Ingress.                                                                                   | Yes      | -                                         |
-| proxyServerIngress.hosts            | Additional host rules to be applied to the proxy-service Ingress.                                                                    | No       | -                                         |
-| proxyServerIngress.annotations      | Additional annotations for the proxy-service Ingress.                                                                                | No       | -                                         |
-| storageCapacityPollInterval         | Interval the storage-service uses to poll the backend array for tenant capacity.                                                     | Yes      | 5m                                        |
-| **redis**                           | This section configures Redis.                                                                                                       | -        | -                                         |
-| name                                | The prefix of the redis pods. The number of pods is determined by the number of replicas.                                            | Yes      | redis-csm                                 |
-| sentinel                            | The prefix of the redis sentinel pods. The number of pods is determined by the number of replicas.                                   | Yes      | sentinel                                  |
-| redisCommander                      | The prefix of the redis commander pod.                                                                                               | Yes      | rediscommander                            |
-| replicas                            | The number of replicas for the sentinel and redis pods.                                                                              | Yes      | 5                                         |
-| images.redis                        | The image to use for Redis.                                                                                                          | Yes      | redis:7.4.0-alpine                        |
-| images.commander                    | The image to use for Redis Commander.                                                                                                | Yes      | rediscommander/redis-commander:latest     |
-| **vault**                           | This section configures the vault components.                                                                                        | -        | -                                         |
-| identifier                          | A name that is used to identify a vault instance.                                                                                    | Yes      | vault0                                    |
-| address                             | The address where vault is hosted with the credentials to the array (`https://10.0.0.1:<port>`).                                     | Yes      | -                                         |
-| role                                | The configured authentication role in vault.                                                                                         | Yes      | csm-authorization                         |
-| skipCertificateValidation           | A boolean that enables/disables certificate validation to vault.                                                                     | Yes      | true                                      |
-| clientCertificate                   | The base64-encoded certificate for the certificate/private-key pair to connect to Vault. Leave empty to use self-signed certificate. | No       | -                                         |
-| clientKey                           | The base64-encoded private key for the certificate/private-key pair to connect to Vault. Leave empty to use self-signed certificate. | No       | -                                         |
-| certificateAuthority                | The base64-encoded certificate authority for validating the Vault server.                                                            | No       | -                                         |
-
-{{< /collapse >}} 
+| Parameter                           | Description                                                                                                            | Required | Default                                                                                                                      |
+| ----------------------------------- | ---------------------------------------------------------------------------------------------------------------------- | -------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| openshift                           | Enable/Disable deployment of the OpenShift Ingress Operator. Set to false if you have an Ingress Controller installed. | No       | true                                                                                                                         |
+| **nginx**                           | This section configures the enablement of the NGINX Ingress Controller.                                                | -        | -                                                                                                                            |
+| enabled                             | Enable/Disable deployment of the NGINX Ingress Controller. Set to false if you have an Ingress Controller installed.   | No       | true                                                                                                                         |
+| **cert-manager**                    | This section configures the enablement of cert-manager.                                                                | -        | -                                                                                                                            |
+| enabled                             | Enable/Disable deployment of cert-manager. Set to false if you already have cert-manager installed.                    | No       | true                                                                                                                         |
+| **authorization**                   | This section configures the Authorization components.                                                                  | -        | -                                                                                                                            |
+| images.proxyService                 | The image to use for the proxy-service.                                                                                | Yes      | quay.io/dell/container-storage-modules/csm-authorization-proxy:{{< version-v1 key="Authv2_csm_authorization_proxy" >}}     |
+| images.tenantService                | The image to use for the tenant-service.                                                                               | Yes      | quay.io/dell/container-storage-modules/csm-authorization-tenant:{{< version-v1 key="Authv2_csm_authorization_tenant" >}}   |
+| images.roleService                  | The image to use for the role-service.                                                                                 | Yes      | quay.io/dell/container-storage-modules/csm-authorization-proxy:{{< version-v1 key="Authv2_csm_authorization_role" >}}      |
+| images.storageService               | The image to use for the storage-service.                                                                              | Yes      | quay.io/dell/container-storage-modules/csm-authorization-storage:{{< version-v1 key="Authv2_csm_authorization_storage" >}} |
+| images.authorizationController      | The image to use for the controller.                                                                                   | Yes      | quay.io/dell/container-storage-modules/csm-authorization-controller                                                          |
+| images.opa                          | The image to use for Open Policy Agent.                                                                                | Yes      | openpolicyagent/opa                                                                                                          |
+| images.opaKubeMgmt                  | The image to use for Open Policy Agent kube-mgmt.                                                                      | Yes      | openpolicyagent/kube-mgmt:8.5.8                                                                                              |
+| hostname                            | The hostname to configure the self-signed certificate (if applicable) and the proxy Ingress.                           | Yes      | csm-authorization.com                                                                                                        |
+| logLevel                            | Authorization log level. Allowed values: “error”, “warn”/“warning”, “info”, “debug”.                                   | Yes      | debug                                                                                                                        |
+| concurrentPowerFlexRequests         | Number of concurrent requests to PowerFlex. Used with dellctl to list tenant volumes.                                  | Yes      | 10                                                                                                                           |
+| concurrentPowerScaleRequests        | Number of concurrent requests to PowerScale. Used with dellctl to list tenant volumes.                                 | Yes      | 10                                                                                                                           |
+| zipkin.collectoruri                 | The URI of the Zipkin instance to export traces.                                                                       | No       | -                                                                                                                            |
+| zipkin.probability                  | The ratio of traces to export.                                                                                         | No       | -                                                                                                                            |
+| proxyServerIngress.ingressClassName | The ingressClassName of the proxy-service Ingress.                                                                     | Yes      | -                                                                                                                            |
+| proxyServerIngress.hosts            | Additional host rules to be applied to the proxy-service Ingress.                                                      | No       | -                                                                                                                            |
+| proxyServerIngress.annotations      | Additional annotations for the proxy-service Ingress.                                                                  | No       | -                                                                                                                            |
+| storageCapacityPollInterval         | Interval the storage-service uses to poll the backend array for tenant capacity.                                       | Yes      | 5m                                                                                                                           |
+| **redis**                           | This section configures Redis.                                                                                         | -        | -                                                                                                                            |
+| name                                | The prefix of the redis pods. The number of pods is determined by the number of replicas.                              | Yes      | redis-csm                                                                                                                    |
+| **redisSecretProviderClass**        | This section configures the Redis credentials.                                                                         | -        | -                                                                                                                            |
+| redisSecretName                     | The name of the Kubernetes secret created by the CSI driver.                                                           | No       | -                                                                                                                            |
+| redisUsernameKey                    | The key in the secret that stores the Redis username.                                                                  | Yes      | username                                                                                                                     |
+| redisPasswordKey                    | The key in the secret that stores the Redis password.                                                                  | Yes      | password                                                                                                                     |
+| sentinel                            | The prefix of the redis sentinel pods. The number of pods is determined by the number of replicas.                     | Yes      | sentinel                                                                                                                     |
+| redisCommander                      | The prefix of the redis commander pod.                                                                                 | Yes      | rediscommander                                                                                                               |
+| replicas                            | The number of replicas for the sentinel and redis pods.                                                                | Yes      | 5                                                                                                                            |
+| images.redis                        | The image to use for Redis.                                                                                            | Yes      | redis:7.4.0-alpine                                                                                                           |
+| images.commander                    | The image to use for Redis Commander.                                                                                  | Yes      | rediscommander/redis-commander:latest                                                                                        |
+| **storageSystemCredentials**        | This section configures the storageSystemCredentials.                                                                  | -        | -                                                                                                                            |
+| secretProviderClasses               | A name that is used to identify a secretProviderClass object.                                                          | Yes      | -                                                                                                                            |
+| secrets                             | A name that is used to identify a kubernetes Secret.                                                                   | Yes      | -                                                                                                                            |
+{{< /collapse >}}
 </ul>
 
-7. Install the driver using `helm`:
+6. Install the driver using `helm`:
 
 To install Authorization with the service Ingresses using your own certificate, run:
 
@@ -150,9 +298,11 @@ Follow the instructions available in Authorization for
 
 {{< hide id="1" >}} - [Configuring PowerFlex with Authorization](v1/concepts/authorization/v2.x/configuration/powerflex). {{< /hide >}}
 
-{{< hide id="2" >}}- [Configuring PowerMax with Authorization](v1/concepts/authorization/v2.x/configuration/powermax).{{< /hide >}} 
+{{< hide id="2" >}}- [Configuring PowerMax with Authorization](v1/concepts/authorization/v2.x/configuration/powermax).{{< /hide >}}
 
 {{< hide id="3" >}}- [Configuring PowerScale with Authorization](v1/concepts/authorization/v2.x/configuration/powerscale).{{< /hide >}}
+
+{{< hide id="3" >}}- [Configuring PowerStore with Authorization](v1/concepts/authorization/v2.x/configuration/powerstore).{{< /hide >}}
 
 ## Updating Container Storage Modules for Authorization Proxy Server Configuration
 
@@ -203,7 +353,7 @@ This edit will not update the logging level for the sidecar-proxy containers run
 
 ```bash
 
-kubectl -n [CSM_CSI_DRVIER_NAMESPACE] edit configmap/<release_name>-config-params
+kubectl -n [CSM_CSI_DRIVER_NAMESPACE] edit configmap/<release_name>-config-params
 ```
 
 Using PowerFlex as an example, `kubectl -n vxflexos edit configmap/vxflexos-config-params` can be used to update the logging level of the sidecar-proxy and the driver.

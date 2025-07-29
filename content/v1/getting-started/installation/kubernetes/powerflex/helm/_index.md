@@ -25,7 +25,7 @@ Install Helm 3.x on the master node before you install the CSI Driver for Dell P
 
 <br>
 
-{{< accordion id="Two" title="Base Install" markdown="true" >}}  
+{{< accordion id="Two" title="Base Install" markdown="true" >}}
 ## Prerequisites
 
 The following are requirements that must be met before installing the CSI Driver for Dell PowerFlex:
@@ -59,7 +59,7 @@ Verify that zero padding is enabled on the PowerFlex storage pools that will be 
 
 The CSI Driver for PowerFlex requires you to have installed the PowerFlex Storage Data Client (SDC) on all Kubernetes nodes which run the node portion of the CSI driver.
 SDC could be installed automatically by CSI driver install on Kubernetes nodes with OS platform which support automatic SDC deployment; for Red Hat CoreOS (RHCOS) and RHEL. On Kubernetes nodes with OS version not supported by automatic install, you must perform the Manual SDC Deployment steps [below](#manual-sdc-deployment).
- Refer to https://quay.io/repository/dell/storage/powerflex/sdc for supported OS versions.
+Refer to https://quay.io/repository/dell/storage/powerflex/sdc for supported OS versions. 
 Please visit [E-Lab Navigator](https://elabnavigator.dell.com/eln/modernHomeSSM) for specific Dell Storage platform host operating system level support matrices.
 
 *NOTE:* To install CSI driver for Powerflex with automated SDC deployment, you need below two packages on worker nodes.
@@ -175,7 +175,7 @@ Use the below command to replace or update the secret:
 
 7. Download the default values.yaml file
    ```bash
-   cd dell-csi-helm-installer && wget -O myvalues.yaml https://github.com/dell/helm-charts/raw/csi-vxflexos-2.14.0/charts/csi-vxflexos/values.yaml
+   cd dell-csi-helm-installer && wget -O myvalues.yaml https://github.com/dell/helm-charts/raw/csi-vxflexos-2.15.0/charts/csi-vxflexos/values.yaml
    ```
 
 8. If you are using custom images, check the fields under `images` in `my-vxflexos-settings.yaml` to make sure that they are pointing to the correct image repository.
@@ -354,10 +354,9 @@ Starting CSI PowerFlex v1.5, `dell-csi-helm-installer` will not create any Volum
 <br>
 
 {{< accordion id="Three" title="Modules" >}}
-       
+
 
 {{< cardcontainer >}}
-    {{< customcard link1="./csm-modules/authorizationv1-x"  image="1" title="Authorization v1.x" >}}
 
     {{< customcard link1="./csm-modules/authorizationv2-0"   image="1" title="Authorization v2.0"  >}}
 

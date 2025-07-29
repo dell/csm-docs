@@ -30,7 +30,7 @@ This feature deploys the SDC kernel modules on all nodes using an init container
 Set the `X_CSI_SDC_ENABLED` value in the CR file. By default, SDC is enabled.
 
 -  **Manual Deployment:**
-For unsupported OS versions, follow the manual SDC deployment steps.  Refer to https://quay.io/repository/dell/storage/powerflex/sdc for supported OS versions.
+For unsupported OS versions, follow the manual SDC deployment steps. Refer to https://quay.io/repository/dell/storage/powerflex/sdc for supported OS versions.
 
 - **MDM Value:**
 The operator sets the MDM value for initContainers in the driver CR from the `mdm` attributes in `config.yaml`. Do not set this manually.
@@ -137,7 +137,7 @@ run `/opt/emc/scaleio/sdc/bin/drv_cfg --add_mdm --ip 10.xx.xx.xx.xx,10.xx.xx.xx`
         configVersion: {{< version-v1 key="PFlex_latestVersion" >}}
         forceRemoveDriver: true
     ```
-     Refer the [sample file](https://github.com/dell/csm-operator/blob/main/samples/minimal-samples/powerflex_{{< version-v1 key="sample_sc_pflex" >}}.yaml). Modify if needed.
+     Refer the minimal sample files provided in respective CSM versions folder under samples [here](https://github.com/dell/csm-operator/tree/main/samples). Modify if needed.
 
     [OR]
 
@@ -259,7 +259,6 @@ The driver and modules versions installable with the Container Storage Modules O
 <br>
 
 {{< cardcontainer >}}
-    {{< customcard link1="./csm-modules/authorizationv1-x"  image="6" title="Authorization v1.x" >}}
 
     {{< customcard link1="./csm-modules/authorizationv2-0"   image="6" title="Authorization v2.0"  >}}
 
