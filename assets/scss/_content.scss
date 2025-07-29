@@ -119,7 +119,7 @@
         color: rgb(136, 145, 158) !important;
     } 
     .tab-body{
-     background-color: #fff !important;
+     background-color: var(--bs-body-bg); 
     }
 } 
 
