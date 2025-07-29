@@ -32,6 +32,8 @@ Prometheus and Container Storage Modules Observability services run on the same 
 
 Here’s a minimal Prometheus configuration using insecure skip verify; for proper TLS, add a ca_file signed by the same CA as the Container Storage Modules Observability certificate. More details about Prometheus configuration, see [Prometheus configuration](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#configuration).
 
+**Note**: Replace `OTEL-COLLECTOR-NAMESPACE` with the namespace where otel-collector service is running in prometheus-values.yaml.
+
 1. Create a values file named `prometheus-values.yaml`.
 
     ```yaml
@@ -62,10 +64,27 @@ Here’s a minimal Prometheus configuration using insecure skip verify; for prop
       - job_name: 'karavi-metrics-[CSI-DRIVER]'
         scrape_interval: 5s
         scheme: https
-        static_configs:
-          - targets: ['otel-collector:8443']
         tls_config:
           insecure_skip_verify: true
+        metrics_path: /metrics
+        kubernetes_sd_configs:
+          - role: endpoints
+            namespaces:
+              names:
+                - [OTEL-COLLECTOR-NAMESPACE]
+        relabel_configs:
+          - source_labels:
+              - __meta_kubernetes_service_label_app_kubernetes_io_instance
+              - __meta_kubernetes_service_label_app_kubernetes_io_name
+            action: keep
+            regex: karavi-observability;otel-collector
+          - source_labels: [__meta_kubernetes_endpoint_port_name]
+            action: keep
+            regex: exporter-https
+          - source_labels: [__address__]
+            target_label: __address__
+            regex: (.+):\d+
+            replacement: ${1}:8443
    ```
 
 2. If using Rancher, create a ServiceMonitor.
