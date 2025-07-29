@@ -37,7 +37,6 @@ Storage system credentials can be provided in one of two ways:
 
 {{< tabpane text=true lang="en" >}}
 {{% tab header="SecretProviderClass" lang="en" %}}
-<br>
 
 - Install a supported [External Secret Provider](https://secrets-store-csi-driver.sigs.k8s.io/getting-started/installation#install-external-secret-providers) to integrate with the Secrets Store CSI Driver. For guidance on setting up Vault, refer to our [Vault installation guide](docs/getting-started/installation/operator/modules/authorizationv2-0#vault-csi-provider-installation).
 
@@ -56,7 +55,6 @@ Storage system credentials can be provided in one of two ways:
 
   {{< collapse id="2" title="SecretProviderClass without Redis" card="false" >}}
 
-  <br>
   Example SecretProviderClass using Vault Provider:
 
   ```bash
@@ -91,7 +89,6 @@ Storage system credentials can be provided in one of two ways:
 
   {{< collapse id="2" title="SecretProviderClass with Redis" card="false" >}}
 
-  <br>
   Example SecretProviderClass using Vault Provider:
 
   ```bash
