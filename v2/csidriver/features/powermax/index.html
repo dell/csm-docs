@@ -17,11 +17,11 @@
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="v2">
-    <meta property="article:modified_time" content="2025-05-14T21:04:46+05:30">
+    <meta property="article:modified_time" content="2025-07-28T16:48:02+05:30">
 
   <meta itemprop="name" content="PowerMax">
   <meta itemprop="description" content="Code features for PowerMax Driver">
-  <meta itemprop="dateModified" content="2025-05-14T21:04:46+05:30">
+  <meta itemprop="dateModified" content="2025-07-28T16:48:02+05:30">
   <meta itemprop="wordCount" content="4542">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="PowerMax">
@@ -76,8 +76,8 @@
     1.12.0
   </a>
   <ul class="dropdown-menu">
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/" >1.14.0</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1/" >1.13.1</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/" >1.14.1</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1/" >1.13.2</a></li>
     <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v2/" >1.12.0</a></li>
     <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v3/" >1.11.1</a></li>
     </ul> 
@@ -203,7 +203,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.95eb2351085177b48c340d036c8a9b3d.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.dc3489660055756a26943be68dc26f26.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -3346,7 +3346,7 @@ Storage Capacity Tracking <a class="header-link"  href="#storage-capacity-tracki
         </a></h2><p>CSI PowerMax driver version 2.8.0 and above supports Storage Capacity Tracking.</p>
 <p>This feature helps the scheduler to make more informed choices about where to start pods that depend on unbound volumes with late binding (aka “wait for first consumer”). Nodes satisfying the topology constraints, and with the requested capacity that is present on the storage array, will be available for scheduling the pods, Otherwise, the pods stay in pending state. External-provisioner makes one GetCapacity() call per storage class that is present on the cluster to get the AvailableCapacity for the array specified in the storage class that matches with the array mentioned during driver deployment.</p>
 <p>Without storage capacity tracking, pods get scheduled on a node satisfying the topology constraints. If the required capacity is not available, volume attachment to the pods fails, and pods remain in the ContainerCreating state. Storage capacity tracking eliminates unnecessary scheduling of pods when there is insufficient capacity.</p>
-<p>Storage capacity can be tracked by setting the attribute <code>storageCapacity.enabled</code> to true in values.yaml (set to true by default) during driver installation. To configure how often driver checks for changed capacity, set the <code>storageCapacity.pollInterval</code> attribute (set to 5m by default). In case of driver installed via operator, this interval can be configured in the sample file provided <a href="https://github.com/dell/csm-operator/blob/main/samples">here.</a> by editing the <code>--capacity-poll-interval</code> argument present in the provisioner sidecar.</p>
+<p>Storage capacity can be tracked by setting the attribute <code>storageCapacity.enabled</code> to true in values.yaml (set to true by default) during driver installation. To configure how often driver checks for changed capacity, set the <code>storageCapacity.pollInterval</code> attribute (set to 5m by default). In case of driver installed via operator, this interval can be configured in the sample file provided <a href="https://github.com/dell/csm-operator/tree/release-v1.7.0/samples">here.</a> by editing the <code>--capacity-poll-interval</code> argument present in the provisioner sidecar.</p>
 <h2 id="metro-support">
 Metro support <a class="header-link"  href="#metro-support" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
             <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
@@ -3364,7 +3364,7 @@ Volume Limits <a class="header-link"  href="#volume-limits" style=" display: inl
         </a></h2><p>The CSI Driver for Dell PowerMax allows users to specify the maximum number of PowerMax volumes that can be created on a node.</p>
 <p>The user can set the volume limit for a node by creating a node label <code>max-powermax-volumes-per-node</code> and specifying the volume limit for that node.
 <br/> <code>kubectl label node &lt;node_name&gt; max-powermax-volumes-per-node=&lt;volume_limit&gt;</code></p>
-<p>The user can also set the volume limit for all the nodes in the cluster by specifying the same to <code>maxPowerMaxVolumesPerNode</code> attribute in values.yaml. In case of driver installed via operator, this attribute can be modified in the sample file provided <a href="https://github.com/dell/csm-operator/blob/main/samples">here</a> by editing the <code>X_CSI_MAX_VOLUMES_PER_NODE</code> parameter.</p>
+<p>The user can also set the volume limit for all the nodes in the cluster by specifying the same to <code>maxPowerMaxVolumesPerNode</code> attribute in values.yaml. In case of driver installed via operator, this attribute can be modified in the sample file provided <a href="https://github.com/dell/csm-operator/tree/release-v1.7.0/samples">here</a> by editing the <code>X_CSI_MAX_VOLUMES_PER_NODE</code> parameter.</p>
 <p>This feature is also supported for limiting the volume provisioning on Kubernetes clusters running on vSphere (VMware hypervisor) via RDM mechanism. User can set <code>vSphere.enabled</code> to true and also set volume limits to positive values less than or equal 60 via labels or in Values.yaml file.</p>
 <blockquote>
 <p><strong>NOTE:</strong> <br>The default value of <code>maxPowerMaxVolumesPerNode</code> is 0. <br>If <code>maxPowerMaxVolumesPerNode</code> is set to zero, then CO shall decide how many volumes of this type can be published by the controller to the node.<br><br>The volume limit specified to <code>maxPowerMaxVolumesPerNode</code> attribute is applicable to all the nodes in the cluster for which node label <code>max-powermax-volumes-per-node</code> is not set.

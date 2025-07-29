@@ -17,11 +17,11 @@
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="v2">
-    <meta property="article:modified_time" content="2025-05-08T18:49:47+05:30">
+    <meta property="article:modified_time" content="2025-07-28T16:48:02+05:30">
 
   <meta itemprop="name" content="Authorization v2.0">
   <meta itemprop="description" content="Installing Authorization v2.0 via Dell CSM Operator">
-  <meta itemprop="dateModified" content="2025-05-08T18:49:47+05:30">
+  <meta itemprop="dateModified" content="2025-07-28T16:48:02+05:30">
   <meta itemprop="wordCount" content="1750">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Authorization v2.0">
@@ -76,8 +76,8 @@
     1.12.0
   </a>
   <ul class="dropdown-menu">
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/" >1.14.0</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1/" >1.13.1</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/" >1.14.1</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1/" >1.13.2</a></li>
     <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v2/" >1.12.0</a></li>
     <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v3/" >1.11.1</a></li>
     </ul> 
@@ -203,7 +203,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.95eb2351085177b48c340d036c8a9b3d.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.dc3489660055756a26943be68dc26f26.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -2724,7 +2724,7 @@ Prerequisite <a class="header-link"  href="#prerequisite" style=" display: inlin
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl apply --validate<span style="color:#ce5c00;font-weight:bold">=</span><span style="color:#204a87">false</span> -f https://github.com/jetstack/cert-manager/releases/download/v1.11.0/cert-manager.crds.yaml
 </span></span></code></pre></div></li>
 <li>
-<p>Prepare <a href="https://github.com/dell/csm-operator/blob/main/samples/authorization/config.yaml">samples/authorization/config.yaml</a> which contains the JWT signing secret. The following table lists the configuration parameters.</p>
+<p>Prepare <a href="https://github.com/dell/csm-operator/tree/release-v1.7.0/samples/authorization/config.yaml">samples/authorization/config.yaml</a> which contains the JWT signing secret. The following table lists the configuration parameters.</p>
 <table>
   <thead>
       <tr>
@@ -2770,7 +2770,7 @@ Install CSM Authorization Proxy Server <a class="header-link"  href="#install-cs
 <p>Follow all the <a href="/csm-docs/v2/deployment/csmoperator/modules/authorizationv2-0/#prerequisite">prerequisites</a>.</p>
 </li>
 <li>
-<p>Create a CR (Custom Resource) for Authorization from a <a href="https://github.com/dell/csm-operator/blob/main/samples/authorization/csm_authorization_proxy_server_v200.yaml">sample manifest</a>. This file can be modified to use custom parameters if needed.</p>
+<p>Create a CR (Custom Resource) for Authorization from a <a href="https://github.com/dell/csm-operator/tree/release-v1.7.0/samples/authorization/csm_authorization_proxy_server_v200.yaml">sample manifest</a>. This file can be modified to use custom parameters if needed.</p>
 </li>
 <li>
 <p>Users should configure the parameters in the CR. This table lists the primary configurable parameters of the Authorization Proxy Server and their default values:</p>

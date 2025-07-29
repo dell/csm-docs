@@ -20,8 +20,8 @@
 
   <meta itemprop="name" content="Installation Guide">
   <meta itemprop="description" content="Helm Installation">
-  <meta itemprop="dateModified" content="2025-05-13T16:28:31+05:30">
-  <meta itemprop="wordCount" content="3947">
+  <meta itemprop="dateModified" content="2025-07-28T16:30:00-04:00">
+  <meta itemprop="wordCount" content="3963">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Installation Guide">
   <meta name="twitter:description" content="Helm Installation">
@@ -73,11 +73,11 @@
       
     
     
-    1.14.0
+    1.14.1
   </a>
   <ul class="dropdown-menu">
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/" >1.14.0</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1/" >1.13.1</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/" >1.14.1</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1/" >1.13.2</a></li>
     <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v2/" >1.12.0</a></li>
     <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v3/" >1.11.1</a></li>
     </ul> 
@@ -203,7 +203,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.95eb2351085177b48c340d036c8a9b3d.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.dc3489660055756a26943be68dc26f26.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -4161,7 +4161,7 @@ Install Helm 3.x <a class="header-link"  href="#install-helm-3x" style=" display
             <p>Install the Helm chart.</p>
             <p>On your terminal, run this command:</p>
             <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>helm install &lt;release-name&gt; dell/container-storage-modules -n &lt;namespace&gt; --version &lt;container-storage-module chart-version&gt; -f &lt;values.yaml location&gt;
-            </span></span></code></pre></div><p>Example: helm install powerflex dell/container-storage-modules -n csi-powerflex &ndash;version 1.7.0 -f values.yaml</p>
+            </span></span></code></pre></div><p>Example: helm install powerflex dell/container-storage-modules -n csi-powerflex &ndash;version 1.7.1 -f values.yaml</p>
             </li>
             </ul>
             
@@ -4339,7 +4339,7 @@ Install Driver <a class="header-link"  href="#install-driver" style=" display: i
         </a></h2><p><strong>Steps</strong></p>
 <ol>
 <li>
-<p>Run <code>git clone -b v2.14.0 https://github.com/dell/csi-powerflex.git</code> to clone the git repository.</p>
+<p>Run <code>git clone -b v2.14.1 https://github.com/dell/csi-powerflex.git</code> to clone the git repository.</p>
 </li>
 <li>
 <p>A namespace for the driver is expected prior to running the command below. If one is not created already, you can run <code>kubectl create namespace vxflexos</code> to create a new one.
@@ -4523,7 +4523,7 @@ kubeVersion: &ldquo;&gt;= 1.21.0-0 &lt; 1.29.0-0&rdquo;</li>
 </li>
 <li>
 <p>Download the default values.yaml file</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#204a87">cd</span> dell-csi-helm-installer <span style="color:#ce5c00;font-weight:bold">&amp;&amp;</span> wget -O myvalues.yaml https://github.com/dell/helm-charts/raw/csi-vxflexos-2.14.0/charts/csi-vxflexos/values.yaml
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#204a87">cd</span> dell-csi-helm-installer <span style="color:#ce5c00;font-weight:bold">&amp;&amp;</span> wget -O myvalues.yaml https://github.com/dell/helm-charts/raw/csi-vxflexos-2.14.1/charts/csi-vxflexos/values.yaml
 </span></span></code></pre></div></li>
 <li>
 <p>If you are using custom images, check the fields under <code>images</code> in <code>my-vxflexos-settings.yaml</code> to make sure that they are pointing to the correct image repository.</p>
@@ -4672,6 +4672,12 @@ kubeVersion: &ldquo;&gt;= 1.21.0-0 &lt; 1.29.0-0&rdquo;</li>
           <td><div style="text-align: left"> Defines additional entries for hostAccess of NFS volumes, single IP address and subnet are valid entries</td>
           <td>No</td>
           <td>&quot; &quot;</td>
+      </tr>
+      <tr>
+          <td><div style="text-align: left"> probeTimeout</td>
+          <td><div style="text-align: left"> Specify the timeout limit for controller and node to communicate with the array.</td>
+          <td>No</td>
+          <td>&ldquo;10s&rdquo;</td>
       </tr>
       <tr>
           <td><div style="text-align: left"> <strong>controller</strong></td>

@@ -17,12 +17,12 @@
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="docs">
-    <meta property="article:modified_time" content="2025-06-26T11:14:52+05:30">
+    <meta property="article:modified_time" content="2025-07-18T14:17:28+05:30">
 
   <meta itemprop="name" content="PowerFlex">
   <meta itemprop="description" content="Troubleshooting PowerFlex Driver">
-  <meta itemprop="dateModified" content="2025-06-26T11:14:52+05:30">
-  <meta itemprop="wordCount" content="998">
+  <meta itemprop="dateModified" content="2025-07-18T14:17:28+05:30">
+  <meta itemprop="wordCount" content="946">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="PowerFlex">
   <meta name="twitter:description" content="Troubleshooting PowerFlex Driver">
@@ -74,11 +74,11 @@
       
     
     
-    1.14.0
+    1.14.1
   </a>
   <ul class="dropdown-menu">
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/" >1.14.0</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1/" >1.13.1</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/" >1.14.1</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1/" >1.13.2</a></li>
     <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v2/" >1.12.0</a></li>
     <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v3/" >1.11.1</a></li>
     </ul> 
@@ -204,7 +204,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.95eb2351085177b48c340d036c8a9b3d.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.dc3489660055756a26943be68dc26f26.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -4049,10 +4049,6 @@ document.addEventListener("DOMContentLoaded", function() {
       <tr>
           <td>CSM object <code>vxflexos</code> is in failed state and CSI-Powerflex driver is not in running state</td>
           <td>Verify the secret name: <code>kubectl get secret -n &lt;namespace_name&gt;</code> it should be in <code>&lt;CR-name&gt;-config</code> format. 1. Retrieve the existing secret: <code>kubectl get secret old-secret-name -n &lt;namespace_name&gt; -o yaml &gt; secret.yaml</code> <br> 2. Edit the secret.yaml file: Change metadata.name to <CR-name>-Config <br> 3. Apply the new secret: <code>kubectl apply -f secret.yaml</code> <br> 4. Delete the old secret: kubectl delete secret old-secret-name</td>
-      </tr>
-      <tr>
-          <td>Minimal installation of the driver via Operator does not create driver pods</td>
-          <td><div style="text-align: left">This issue has been resolved in the latest Operator image, but if using a released image, there is a workaround. Add the following to the CSM object manifest YAML (for example, <code>minimal-samples/powerflex_v2140.yaml</code>) file: <br><br><pre style="color: black; background-color: white">node:<br>  envs:<br>    - name: X_CSI_SDC_SFTP_REPO_ENABLED<br>      value: &ldquo;false&rdquo;</pre></div></td>
       </tr>
   </tbody>
 </table>

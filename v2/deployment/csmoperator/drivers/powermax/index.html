@@ -17,11 +17,11 @@
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="v2">
-    <meta property="article:modified_time" content="2025-02-18T23:05:05+05:30">
+    <meta property="article:modified_time" content="2025-07-28T16:48:02+05:30">
 
   <meta itemprop="name" content="PowerMax">
   <meta itemprop="description" content="Installing the CSI Driver for Dell PowerMax via Dell CSM Operator">
-  <meta itemprop="dateModified" content="2025-02-18T23:05:05+05:30">
+  <meta itemprop="dateModified" content="2025-07-28T16:48:02+05:30">
   <meta itemprop="wordCount" content="3967">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="PowerMax">
@@ -76,8 +76,8 @@
     1.12.0
   </a>
   <ul class="dropdown-menu">
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/" >1.14.0</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1/" >1.13.1</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/" >1.14.1</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1/" >1.13.2</a></li>
     <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v2/" >1.12.0</a></li>
     <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v3/" >1.11.1</a></li>
     </ul> 
@@ -203,7 +203,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.95eb2351085177b48c340d036c8a9b3d.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.dc3489660055756a26943be68dc26f26.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -3101,19 +3101,19 @@ Example: config.yaml</p>
 <p>Create a CR (Custom Resource) for PowerMax using the sample files provided</p>
 <p>a. Install the PowerMax driver using default configuration using
 the sample file provided
-<a href="https://github.com/dell/csm-operator/tree/main/samples/minimal-samples">here</a>. This file can be modified to use custom parameters if needed.</p>
+<a href="https://github.com/dell/csm-operator/tree/release-v1.7.0/samples/minimal-samples">here</a>. This file can be modified to use custom parameters if needed.</p>
 <p>b. Install the PowerMax driver using the detailed configuration using the sample file provided
-<a href="https://github.com/dell/csm-operator/tree/main/samples">here</a>.</p>
+<a href="https://github.com/dell/csm-operator/tree/release-v1.7.0/samples">here</a>.</p>
 </li>
 </ol>
 <blockquote>
 <p>NOTE:
-<a href="https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powermax_v2140.yaml#L283">Replication module</a> must be enabled to use the Metro volume</p></blockquote>
+<a href="https://github.com/dell/csm-operator/tree/release-v1.7.0/samples/storage_csm_powermax_v2140.yaml#L283">Replication module</a> must be enabled to use the Metro volume</p></blockquote>
 <p>Example:</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span>- <span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">replication</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">enabled</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span></code></pre></div><blockquote>
-<p><a href="https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powermax_v2140.yaml#L316">Target clusterID</a> should be set as self</p></blockquote>
+<p><a href="https://github.com/dell/csm-operator/tree/release-v1.7.0/samples/storage_csm_powermax_v2140.yaml#L316">Target clusterID</a> should be set as self</p></blockquote>
 <p>Example:</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span>- <span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;TARGET_CLUSTERS_IDS&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">value</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;self&#34;</span><span style="color:#f8f8f8;text-decoration:underline">

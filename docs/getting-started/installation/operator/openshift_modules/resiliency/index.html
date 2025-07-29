@@ -21,13 +21,13 @@ cat &lt;&lt; EOF &gt; csm-{{labels}}.yaml apiVersion: storage.dell.com/v1 kind: 
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="docs">
-    <meta property="article:modified_time" content="2025-05-13T20:06:59+05:30">
+    <meta property="article:modified_time" content="2025-07-28T16:48:02+05:30">
 
   <meta itemprop="name" content="Resiliency">
   <meta itemprop="description" content="Enable Resiliency Module Use this command to create the ContainerStorageModule Custom Resource with Resiliency:
 oc create -f csm-{{labels}}.yaml Example:
 cat &lt;&lt; EOF &gt; csm-{{labels}}.yaml apiVersion: storage.dell.com/v1 kind: ContainerStorageModule metadata: name: {{labels}} namespace: {{labels}} spec: driver: csiDriverType: &#34;{{Var}}&#34; configVersion: Default text if no valid parameter is passed. modules: - name: resiliency enabled: true EOF Detailed Configuration: Use the sample file for detailed settings.">
-  <meta itemprop="dateModified" content="2025-05-13T20:06:59+05:30">
+  <meta itemprop="dateModified" content="2025-07-28T16:48:02+05:30">
   <meta itemprop="wordCount" content="232">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Resiliency">
@@ -82,11 +82,11 @@ cat &lt;&lt; EOF &gt; csm-{{labels}}.yaml apiVersion: storage.dell.com/v1 kind: 
       
     
     
-    1.14.0
+    1.14.1
   </a>
   <ul class="dropdown-menu">
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/" >1.14.0</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1/" >1.13.1</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/" >1.14.1</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1/" >1.13.2</a></li>
     <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v2/" >1.12.0</a></li>
     <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v3/" >1.11.1</a></li>
     </ul> 
@@ -212,7 +212,7 @@ cat &lt;&lt; EOF &gt; csm-{{labels}}.yaml apiVersion: storage.dell.com/v1 kind: 
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.95eb2351085177b48c340d036c8a9b3d.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.dc3489660055756a26943be68dc26f26.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -3995,7 +3995,7 @@ Enable Resiliency Module <a class="header-link"  href="#enable-resiliency-module
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">enabled</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#000">EOF</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span></code></pre></div> </div>
-<p><strong>Detailed Configuration:</strong> Use the <a href="https://github.com/dell/csm-operator/blob/main/samples/storage_csm_%7B%7BVar%7D%7D_v2140.yaml">sample file</a> for detailed settings.</p>
+<p><strong>Detailed Configuration:</strong> Use the <a href="https://github.com/dell/csm-operator/tree/release/v1.9.1/samples/storage_csm_%7B%7BVar%7D%7D_v2140.yaml">sample file</a> for detailed settings.</p>
  <br>
 <p>Check if Resiliency module successfully installed:</p>
 <pre tabindex="0"><code class="language-terminal" data-lang="terminal">oc get pod -n {{Var}}

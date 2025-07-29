@@ -23,8 +23,8 @@ Create a TLS secret that holds an SSL certificate and a private key. This is req
   <meta itemprop="name" content="Prerequisite">
   <meta itemprop="description" content="CSI PowerMax Reverse Proxy The CSI PowerMax Reverse Proxy is a component that is installed with the CSI PowerMax driver. For more details on this feature, see the related documentation.
 Create a TLS secret that holds an SSL certificate and a private key. This is required by the reverse proxy server.">
-  <meta itemprop="dateModified" content="2025-06-24T12:58:47-05:00">
-  <meta itemprop="wordCount" content="1427">
+  <meta itemprop="dateModified" content="2025-07-22T11:53:36+05:30">
+  <meta itemprop="wordCount" content="1583">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Prerequisite">
   <meta name="twitter:description" content="CSI PowerMax Reverse Proxy The CSI PowerMax Reverse Proxy is a component that is installed with the CSI PowerMax driver. For more details on this feature, see the related documentation.
@@ -77,11 +77,11 @@ Create a TLS secret that holds an SSL certificate and a private key. This is req
       
     
     
-    1.14.0
+    1.14.1
   </a>
   <ul class="dropdown-menu">
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/" >1.14.0</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1/" >1.13.1</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/" >1.14.1</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1/" >1.13.2</a></li>
     <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v2/" >1.12.0</a></li>
     <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v3/" >1.11.1</a></li>
     </ul> 
@@ -207,7 +207,7 @@ Create a TLS secret that holds an SSL certificate and a private key. This is req
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.95eb2351085177b48c340d036c8a9b3d.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.dc3489660055756a26943be68dc26f26.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -4004,7 +4004,7 @@ CSI PowerMax Reverse Proxy <a class="header-link"  href="#csi-powermax-reverse-p
 
 
 
-    
+   
 
 
 
@@ -4365,7 +4365,20 @@ Fibre Channel Requirements <a class="header-link"  href="#fibre-channel-requirem
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">          </span><span style="color:#204a87;font-weight:bold">enabled</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">          </span><span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">custom-coreos-generate-nvme-hostnqn.service</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#000">EOF</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span></code></pre></div>
+</span></span></span></code></pre></div><p><strong>Array requirements</strong>
+Once the NVMe endpoint is created on the array, follow the following steps to
+update the endpoint name to adhere to the CSI driver requirements.</p>
+<ul>
+<li>Run <code>nvme discover --transport=tcp --traddr=&lt;InterfaceAdd&gt; --trsvcid=4420</code>.
+<InterfaceAdd> is the placeholder for actual IP address of NVMe Endpoint.</li>
+<li>Fetch the <em>subnqn</em>, for e.g.,
+<em>nqn.1988-11.com.dell:PowerMax_2500:00:000120001100</em>, this will be used as the
+subnqn holder while updating NVMe endpoint name.</li>
+<li>Update the NVMe endpoint name as <code>&lt;subnqn&gt;:&lt;dir&gt;&lt;port&gt;&gt;</code>. Here is an example
+how it should look,
+<em>nqn.1988-11.com.dell:PowerMax_2500:00:000120001100:OR1C000</em></li>
+</ul>
+
     </div>
     <div class="tab-body tab-pane fade"
         id="tabs-00-03" role="tabpanel" aria-labelled-by="tabs-00-03-tab" tabindex="0">
@@ -4475,7 +4488,20 @@ Fibre Channel Requirements <a class="header-link"  href="#fibre-channel-requirem
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">          </span><span style="color:#204a87;font-weight:bold">enabled</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">          </span><span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">custom-coreos-generate-nvme-hostnqn.service</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#000">EOF</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span></code></pre></div>
+</span></span></span></code></pre></div><p><strong>Array requirements</strong>
+Once the NVMe endpoint is created on the array, follow the following steps to
+update the endpoint name to adhere to the CSI driver requirements.</p>
+<ul>
+<li>Run <code>nvme discover --transport=tcp --traddr=&lt;InterfaceAdd&gt; --trsvcid=4420</code>.
+<InterfaceAdd> is the placeholder for actual IP address of NVMe Endpoint.</li>
+<li>Fetch the <em>subnqn</em>, for e.g.,
+<em>nqn.1988-11.com.dell:PowerMax_2500:00:000120001100</em>, this will be used as the
+subnqn holder while updating NVMe endpoint name.</li>
+<li>Update the NVMe endpoint name as <code>&lt;subnqn&gt;:&lt;dir&gt;&lt;port&gt;&gt;</code>. Here is an example
+how it should look,
+<em>nqn.1988-11.com.dell:PowerMax_2500:00:000120001100:OR1C000</em></li>
+</ul>
+
     </div>
     <div class="tab-body tab-pane fade"
         id="tabs-00-04" role="tabpanel" aria-labelled-by="tabs-00-04-tab" tabindex="0">

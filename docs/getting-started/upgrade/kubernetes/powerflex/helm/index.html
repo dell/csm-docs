@@ -12,27 +12,27 @@
 <title>Helm | </title>
 <meta name="description" content="Driver Starting with CSM 1.12, all deployments will need to use images from quay.io. Please note that from CSM 1.14 (May 2025), upgrading with helm will fail if it attempts to use images from Docker Hub.
 You can upgrade the CSI Driver for Dell PowerFlex using Helm or Dell CSM Operator.
-Update Driver from v2.13.0 to v2.14.0 using Helm Steps">
+Update Driver from v2.13.0 to v2.14.1 using Helm Steps">
 <meta property="og:url" content="https://dell.github.io/csm-docs/docs/getting-started/upgrade/kubernetes/powerflex/helm/">
   <meta property="og:site_name" content="Dell Technologies">
   <meta property="og:title" content="Helm">
   <meta property="og:description" content="Driver Starting with CSM 1.12, all deployments will need to use images from quay.io. Please note that from CSM 1.14 (May 2025), upgrading with helm will fail if it attempts to use images from Docker Hub.
 You can upgrade the CSI Driver for Dell PowerFlex using Helm or Dell CSM Operator.
-Update Driver from v2.13.0 to v2.14.0 using Helm Steps">
+Update Driver from v2.13.0 to v2.14.1 using Helm Steps">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="website">
 
   <meta itemprop="name" content="Helm">
   <meta itemprop="description" content="Driver Starting with CSM 1.12, all deployments will need to use images from quay.io. Please note that from CSM 1.14 (May 2025), upgrading with helm will fail if it attempts to use images from Docker Hub.
 You can upgrade the CSI Driver for Dell PowerFlex using Helm or Dell CSM Operator.
-Update Driver from v2.13.0 to v2.14.0 using Helm Steps">
+Update Driver from v2.13.0 to v2.14.1 using Helm Steps">
   <meta itemprop="dateModified" content="2025-04-30T23:27:03+05:30">
   <meta itemprop="wordCount" content="330">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Helm">
   <meta name="twitter:description" content="Driver Starting with CSM 1.12, all deployments will need to use images from quay.io. Please note that from CSM 1.14 (May 2025), upgrading with helm will fail if it attempts to use images from Docker Hub.
 You can upgrade the CSI Driver for Dell PowerFlex using Helm or Dell CSM Operator.
-Update Driver from v2.13.0 to v2.14.0 using Helm Steps">
+Update Driver from v2.13.0 to v2.14.1 using Helm Steps">
 <link rel="preload" href="/csm-docs/scss/main.min.e7545a059fd5aae4ec208e1d6f1035f1f3d13bb652f75b2bdb72aa84e1998b74.css" as="style" integrity="sha256-51RaBZ/VquTsII4dbxA18fPRO7ZS91sr23KqhOGZi3Q=" crossorigin="anonymous">
 <link href="/csm-docs/scss/main.min.e7545a059fd5aae4ec208e1d6f1035f1f3d13bb652f75b2bdb72aa84e1998b74.css" rel="stylesheet" integrity="sha256-51RaBZ/VquTsII4dbxA18fPRO7ZS91sr23KqhOGZi3Q=" crossorigin="anonymous">
 <script
@@ -81,11 +81,11 @@ Update Driver from v2.13.0 to v2.14.0 using Helm Steps">
       
     
     
-    1.14.0
+    1.14.1
   </a>
   <ul class="dropdown-menu">
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/" >1.14.0</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1/" >1.13.1</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/" >1.14.1</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1/" >1.13.2</a></li>
     <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v2/" >1.12.0</a></li>
     <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v3/" >1.11.1</a></li>
     </ul> 
@@ -211,7 +211,7 @@ Update Driver from v2.13.0 to v2.14.0 using Helm Steps">
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.95eb2351085177b48c340d036c8a9b3d.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.dc3489660055756a26943be68dc26f26.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -3982,14 +3982,14 @@ document.addEventListener("DOMContentLoaded", function() {
 </div>
 <p>You can upgrade the CSI Driver for Dell PowerFlex using Helm or Dell CSM Operator.</p></p>
 <h2 id="update-driver-from-hahahugoshortcode1s1hbhb-to-hahahugoshortcode1s2hbhb-using-helm">
-Update Driver from v2.13.0 to v2.14.0 using Helm <a class="header-link"  href="#update-driver-from-hahahugoshortcode1s1hbhb-to-hahahugoshortcode1s2hbhb-using-helm" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
+Update Driver from v2.13.0 to v2.14.1 using Helm <a class="header-link"  href="#update-driver-from-hahahugoshortcode1s1hbhb-to-hahahugoshortcode1s2hbhb-using-helm" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
             <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
                 <path d="M0 0h24v24H0z" fill="none"/>
                 <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
             </svg>
         </a></h2><p><strong>Steps</strong></p>
 <ol>
-<li>Run <code>git clone -b v2.14.0 https://github.com/dell/csi-powerflex.git</code> to clone the git repository and get the v2.14.0 driver.</li>
+<li>Run <code>git clone -b v2.14.1 https://github.com/dell/csi-powerflex.git</code> to clone the git repository and get the v2.14.1 driver.</li>
 <li>You need to create secret.yaml with the configuration of your system.</li>
 <li>Update myvalues file as needed.</li>
 <li>Run the <code>csi-install</code> script with the option <em>--upgrade</em> by running:

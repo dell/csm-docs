@@ -17,11 +17,11 @@
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="v2">
-    <meta property="article:modified_time" content="2025-04-26T00:25:26+05:30">
+    <meta property="article:modified_time" content="2025-07-28T16:48:02+05:30">
 
   <meta itemprop="name" content="Observability">
   <meta itemprop="description" content="Installing Observability via Dell CSM Operator">
-  <meta itemprop="dateModified" content="2025-04-26T00:25:26+05:30">
+  <meta itemprop="dateModified" content="2025-07-28T16:48:02+05:30">
   <meta itemprop="wordCount" content="590">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Observability">
@@ -76,8 +76,8 @@
     1.12.0
   </a>
   <ul class="dropdown-menu">
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/" >1.14.0</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1/" >1.13.1</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/" >1.14.1</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1/" >1.13.2</a></li>
     <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v2/" >1.12.0</a></li>
     <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v3/" >1.11.1</a></li>
     </ul> 
@@ -203,7 +203,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.95eb2351085177b48c340d036c8a9b3d.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.dc3489660055756a26943be68dc26f26.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -2711,7 +2711,7 @@ Prerequisites <a class="header-link"  href="#prerequisites" style=" display: inl
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl create namespace karavi
 </span></span></code></pre></div></li>
 <li>
-<p>Enable Observability module and components in <a href="https://github.com/dell/csm-operator/tree/main/samples">sample manifests</a>. If cert-manager has already been installed, don&rsquo;t enable it.</p>
+<p>Enable Observability module and components in <a href="https://github.com/dell/csm-operator/tree/release-v1.7.0/samples">sample manifests</a>. If cert-manager has already been installed, don&rsquo;t enable it.</p>
 </li>
 <li>
 <p>To use Observablity with CSM Authorization, the <a href="../authorizationv2-0/">Authorization Proxy Server</a> should be installed and configured first. Then, enable the Authorization module along with the Observability module in the sample manifest.</p>
@@ -2771,7 +2771,7 @@ How to enable this module using minimal CR <a class="header-link"  href="#how-to
                 <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
             </svg>
         </a></h2><p>Alternatively, you can use the minimal sample files provided
-<a href="https://github.com/dell/csm-operator/tree/main/samples/minimal-samples">here</a>.</p>
+<a href="https://github.com/dell/csm-operator/tree/release-v1.7.0/samples/minimal-samples">here</a>.</p>
 <h2 id="upgrade-observability">
 Upgrade Observability <a class="header-link"  href="#upgrade-observability" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
             <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">

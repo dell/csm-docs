@@ -20,7 +20,7 @@
 
   <meta itemprop="name" content="PowerMax">
   <meta itemprop="description" content="Enabling Container Storage Modules Authorization for PowerMax CSI Driver">
-  <meta itemprop="dateModified" content="2025-04-01T13:32:08+05:30">
+  <meta itemprop="dateModified" content="2025-07-28T16:48:02+05:30">
   <meta itemprop="wordCount" content="1174">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="PowerMax">
@@ -73,11 +73,11 @@
       
     
     
-    1.14.0
+    1.14.1
   </a>
   <ul class="dropdown-menu">
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/" >1.14.0</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1/" >1.13.1</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/" >1.14.1</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1/" >1.13.2</a></li>
     <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v2/" >1.12.0</a></li>
     <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v3/" >1.11.1</a></li>
     </ul> 
@@ -203,7 +203,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.95eb2351085177b48c340d036c8a9b3d.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.dc3489660055756a26943be68dc26f26.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -4083,7 +4083,7 @@ Configuring PowerMax CSI Driver with Container Storage Modules for Authorization
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">maxOutstandingWrite</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#0000cf;font-weight:bold">10</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span></code></pre></div></li>
 <li>
-<p><strong>Operator Only</strong>: Prepare the reverse proxy configMap using sample <a href="https://github.com/dell/csm-operator/blob/main/samples/csireverseproxy/config.yaml">here</a>. Fill in the appropriate values for driver configuration.
+<p><strong>Operator Only</strong>: Prepare the reverse proxy configMap using sample <a href="https://github.com/dell/csm-operator/tree/release/v1.9.1/samples/csireverseproxy/config.yaml">here</a>. Fill in the appropriate values for driver configuration.
 Example: config.yaml</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">port</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#0000cf;font-weight:bold">2222</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">logLevel</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">debug</span><span style="color:#f8f8f8;text-decoration:underline">
@@ -4102,7 +4102,7 @@ Example: config.yaml</p>
 <li>
 <p>Enable Container Storage Modules Authorization in the driver installation applicable to your installation method.
 Alternatively, you can use the minimal sample files provided
-<a href="https://github.com/dell/csm-operator/tree/main/samples/minimal-samples/powermax_v2140.yaml">here</a> and install the module using default values</p>
+<a href="https://github.com/dell/csm-operator/tree/release/v1.9.1/samples/minimal-samples/powermax_v2140.yaml">here</a> and install the module using default values</p>
 <p><strong>Operator</strong></p>
 <p>Refer to the <a href="/csm-docs/docs/getting-started/installation/kubernetes/powermax/csmoperator/#install-driver">Install Driver</a> section to edit the parameters in the Custom Resource to enable Authorization.</p>
 <p>Under <code>modules</code>, enable the module named <code>authorization</code>:</p>
