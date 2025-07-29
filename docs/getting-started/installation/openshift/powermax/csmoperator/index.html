@@ -20,8 +20,8 @@
 
   <meta itemprop="name" content="Installation Guide">
   <meta itemprop="description" content="Installing the CSI Driver for PowerMax via Container Storage Module Operator">
-  <meta itemprop="dateModified" content="2025-05-23T19:29:42+05:30">
-  <meta itemprop="wordCount" content="3005">
+  <meta itemprop="dateModified" content="2025-07-28T16:48:02+05:30">
+  <meta itemprop="wordCount" content="3161">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Installation Guide">
   <meta name="twitter:description" content="Installing the CSI Driver for PowerMax via Container Storage Module Operator">
@@ -73,11 +73,11 @@
       
     
     
-    1.14.0
+    1.14.1
   </a>
   <ul class="dropdown-menu">
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/" >1.14.0</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1/" >1.13.1</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/" >1.14.1</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1/" >1.13.2</a></li>
     <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v2/" >1.12.0</a></li>
     <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v3/" >1.11.1</a></li>
     </ul> 
@@ -203,7 +203,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.95eb2351085177b48c340d036c8a9b3d.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.dc3489660055756a26943be68dc26f26.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -4067,7 +4067,7 @@ CSI PowerMax Reverse Proxy <a class="header-link"  href="#csi-powermax-reverse-p
 
 
 
-    
+   
 
 
 
@@ -4428,7 +4428,20 @@ Fibre Channel Requirements <a class="header-link"  href="#fibre-channel-requirem
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">          </span><span style="color:#204a87;font-weight:bold">enabled</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">          </span><span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">custom-coreos-generate-nvme-hostnqn.service</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#000">EOF</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span></code></pre></div>
+</span></span></span></code></pre></div><p><strong>Array requirements</strong>
+Once the NVMe endpoint is created on the array, follow the following steps to
+update the endpoint name to adhere to the CSI driver requirements.</p>
+<ul>
+<li>Run <code>nvme discover --transport=tcp --traddr=&lt;InterfaceAdd&gt; --trsvcid=4420</code>.
+<InterfaceAdd> is the placeholder for actual IP address of NVMe Endpoint.</li>
+<li>Fetch the <em>subnqn</em>, for e.g.,
+<em>nqn.1988-11.com.dell:PowerMax_2500:00:000120001100</em>, this will be used as the
+subnqn holder while updating NVMe endpoint name.</li>
+<li>Update the NVMe endpoint name as <code>&lt;subnqn&gt;:&lt;dir&gt;&lt;port&gt;&gt;</code>. Here is an example
+how it should look,
+<em>nqn.1988-11.com.dell:PowerMax_2500:00:000120001100:OR1C000</em></li>
+</ul>
+
     </div>
     <div class="tab-body tab-pane fade"
         id="tabs-00-03" role="tabpanel" aria-labelled-by="tabs-00-03-tab" tabindex="0">
@@ -4538,7 +4551,20 @@ Fibre Channel Requirements <a class="header-link"  href="#fibre-channel-requirem
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">          </span><span style="color:#204a87;font-weight:bold">enabled</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">          </span><span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">custom-coreos-generate-nvme-hostnqn.service</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#000">EOF</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span></code></pre></div>
+</span></span></span></code></pre></div><p><strong>Array requirements</strong>
+Once the NVMe endpoint is created on the array, follow the following steps to
+update the endpoint name to adhere to the CSI driver requirements.</p>
+<ul>
+<li>Run <code>nvme discover --transport=tcp --traddr=&lt;InterfaceAdd&gt; --trsvcid=4420</code>.
+<InterfaceAdd> is the placeholder for actual IP address of NVMe Endpoint.</li>
+<li>Fetch the <em>subnqn</em>, for e.g.,
+<em>nqn.1988-11.com.dell:PowerMax_2500:00:000120001100</em>, this will be used as the
+subnqn holder while updating NVMe endpoint name.</li>
+<li>Update the NVMe endpoint name as <code>&lt;subnqn&gt;:&lt;dir&gt;&lt;port&gt;&gt;</code>. Here is an example
+how it should look,
+<em>nqn.1988-11.com.dell:PowerMax_2500:00:000120001100:OR1C000</em></li>
+</ul>
+
     </div>
     <div class="tab-body tab-pane fade"
         id="tabs-00-04" role="tabpanel" aria-labelled-by="tabs-00-04-tab" tabindex="0">
@@ -4794,9 +4820,9 @@ CSI Driver Installation <a class="header-link"  href="#csi-driver-installation" 
 <li>
 <p><strong>Create a CR (Custom Resource)</strong> for PowerMax using the sample files provided</p>
 <p>i. <strong>Create a CR (Custom Resource)</strong> for PowerMax using the sample files provided</p>
-<p>a. <strong>Minimal Configuration:</strong> Use the <a href="https://github.com/dell/csm-operator/blob/main/samples/minimal-samples/powermax_v2140.yaml">sample file</a> for default settings. If using the secret above, ensure that the secret name of the secret created is <code>powermax-creds</code>.</p>
+<p>a. <strong>Minimal Configuration:</strong> Use the <a href="https://github.com/dell/csm-operator/tree/release/v1.9.1/samples/minimal-samples/powermax_v2140.yaml">sample file</a> for default settings. If using the secret above, ensure that the secret name of the secret created is <code>powermax-creds</code>.</p>
 <p>[OR]</p>
-<p>b. <strong>Detailed Configuration:</strong> Use the <a href="https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powermax_v2140.yaml">sample file</a> for detailed settings or use <a href="./installationwizard#generate-manifest-file">Wizard</a> to generate the sample file.
+<p>b. <strong>Detailed Configuration:</strong> Use the <a href="https://github.com/dell/csm-operator/tree/release/v1.9.1/samples/storage_csm_powermax_v2140.yaml">sample file</a> for detailed settings or use <a href="./installationwizard#generate-manifest-file">Wizard</a> to generate the sample file.
 .</p>
 <ul>
 <li>Users should configure the parameters in CR. The following table lists the primary configurable parameters of the PowerMax driver and their default values:</li>
@@ -5013,7 +5039,7 @@ CSI Driver Installation <a class="header-link"  href="#csi-driver-installation" 
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>oc get csm powermax -n powermax
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>NAME        CREATIONTIME   CSIDRIVERTYPE   CONFIGVERSION   STATE
-</span></span><span style="display:flex;"><span>powermax    3h             powermax        v2.14.0         Succeeded      
+</span></span><span style="display:flex;"><span>powermax    3h             powermax        v2.14.1         Succeeded      
 </span></span></code></pre></div><p>Check the status of the CR to verify if the driver installation is in the <code>Succeeded</code> state. If the status is not <code>Succeeded</code>, see the <a href="../troubleshooting/#my-dell-csi-driver-install-failed-how-do-i-fix-it">Troubleshooting guide</a> for more information.</p>
 </ul>
 <ol start="6">

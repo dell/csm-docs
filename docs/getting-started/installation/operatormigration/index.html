@@ -20,7 +20,7 @@
 
   <meta itemprop="name" content="CSI to CSM Operator Migration">
   <meta itemprop="description" content="Migrating from CSI Operator to CSM Operator">
-  <meta itemprop="dateModified" content="2025-04-26T00:25:26+05:30">
+  <meta itemprop="dateModified" content="2025-07-28T16:48:02+05:30">
   <meta itemprop="wordCount" content="248">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="CSI to CSM Operator Migration">
@@ -73,11 +73,11 @@
       
     
     
-    1.14.0
+    1.14.1
   </a>
   <ul class="dropdown-menu">
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/" >1.14.0</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1/" >1.13.1</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/" >1.14.1</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1/" >1.13.2</a></li>
     <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v2/" >1.12.0</a></li>
     <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v3/" >1.11.1</a></li>
     </ul> 
@@ -203,7 +203,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.95eb2351085177b48c340d036c8a9b3d.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.dc3489660055756a26943be68dc26f26.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -3968,11 +3968,11 @@ Migration Steps <a class="header-link"  href="#migration-steps" style=" display:
 <pre tabindex="0"><code class="language-terminal" data-lang="terminal">    kubectl -n openshift-operators get CSIUnity
     kubectl -n openshift-operators get CSIUnity/test-unity -o yaml
 </code></pre><ol start="2">
-<li>Map and update the settings from the CR in step 1 to the relevant CSM Operator CR (found in <a href="https://github.com/dell/csm-operator/blob/main/samples">csm-operator repository</a>).
+<li>Map and update the settings from the CR in step 1 to the relevant CSM Operator CR (found in <a href="https://github.com/dell/csm-operator/tree/release/v1.9.1/samples">csm-operator repository</a>).
 <ul>
-<li>As the yaml content may differ, ensure the values held in the step 1 CR backup are present in the new CR before installing the new driver. CR Samples for <a href="https://github.com/dell/dell-csi-operator/tree/main/samples">CSI Operator</a> and <a href="https://github.com/dell/csm-operator/tree/main/samples">CSM Operator</a> can be used to compare and map the differences in attributes.
+<li>As the yaml content may differ, ensure the values held in the step 1 CR backup are present in the new CR before installing the new driver. CR Samples for <a href="https://github.com/dell/dell-csi-operator/tree/main/samples">CSI Operator</a> and <a href="https://github.com/dell/csm-operator/tree/release/v1.9.1/samples">CSM Operator</a> can be used to compare and map the differences in attributes.
 <ul>
-<li>Ex: spec.driver.fsGroupPolicy in <a href="https://github.com/dell/dell-csi-operator/blob/main/samples/">CSI Operator</a> maps to spec.driver.csiDriverSpec.fSGroupPolicy in <a href="https://github.com/dell/csm-operator/blob/main/samples/">CSM Operator</a></li>
+<li>Ex: spec.driver.fsGroupPolicy in <a href="https://github.com/dell/dell-csi-operator/blob/main/samples/">CSI Operator</a> maps to spec.driver.csiDriverSpec.fSGroupPolicy in <a href="https://github.com/dell/csm-operator/tree/release/v1.9.1/samples/">CSM Operator</a></li>
 </ul>
 </li>
 </ul>

@@ -427,11 +427,11 @@ function displayModules(installationType, driverName, CONSTANTS_PARAM) {
 			if (document.getElementById("csm-version").value !== "1.7.0") {
 				$(".max-volumes-per-node").show();
 			}
-   if (isVersionGreaterOrEqualTo(document.getElementById("csm-version").value,"1.14.0")) {
+   if (isVersionGreaterOrEqualTo(document.getElementById("csm-version").value,"1.14.1")) {
 	   $(".vgsnapshot").hide();
    }
 			document.getElementById("driver-namespace").value = CONSTANTS_PARAM.POWERSTORE_NAMESPACE;
-			if (isVersionGreaterOrEqualTo(document.getElementById("csm-version").value, "1.14.0")) {
+			if (isVersionGreaterOrEqualTo(document.getElementById("csm-version").value, "1.14.1")) {
 				$(".multi-nas-failure-threshold").show();
 				$(".multi-nas-cooldown-period").show();
 			}
@@ -490,8 +490,8 @@ function displayModules(installationType, driverName, CONSTANTS_PARAM) {
 			$(".topology").show();
 			$(".fsGroupPolicy").show();
 
-			// Check the CSM version and show the option for Mount Credentials if version is greater than 1.14.0
-			if (isVersionGreaterOrEqualTo(document.getElementById("csm-version").value, "1.14.0")) {
+			// Check the CSM version and show the option for Mount Credentials if version is greater than 1.14.1
+			if (isVersionGreaterOrEqualTo(document.getElementById("csm-version").value, "1.14.1")) {
 				$(".powermax-credentials").show();
 				$(".powermax-credentials-note-wrapper").hide()
 			}
@@ -576,11 +576,11 @@ function displayCommands(releaseNameValue, commandTitleValue, commandNoteValue, 
 		case "1.13.0":
 			helmChartVersion = CONSTANTS.CSM_HELM_V1130;
 			break;
-		case "1.14.0":
-			helmChartVersion = CONSTANTS.CSM_HELM_V1140;
+		case "1.14.1":
+			helmChartVersion = CONSTANTS.CSM_HELM_V1141;
 			break;
 		default:
-			helmChartVersion = CONSTANTS.CSM_HELM_V1140;
+			helmChartVersion = CONSTANTS.CSM_HELM_V1141;
 			break;
 	}
 	$("#command-text-area").show();

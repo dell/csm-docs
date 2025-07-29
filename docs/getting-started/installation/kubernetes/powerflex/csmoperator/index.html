@@ -20,8 +20,8 @@
 
   <meta itemprop="name" content="Installation Guide">
   <meta itemprop="description" content="CSM Operator Installation">
-  <meta itemprop="dateModified" content="2025-06-05T15:13:59-05:00">
-  <meta itemprop="wordCount" content="1215">
+  <meta itemprop="dateModified" content="2025-07-28T16:30:00-04:00">
+  <meta itemprop="wordCount" content="1231">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Installation Guide">
   <meta name="twitter:description" content="CSM Operator Installation">
@@ -73,11 +73,11 @@
       
     
     
-    1.14.0
+    1.14.1
   </a>
   <ul class="dropdown-menu">
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/" >1.14.0</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1/" >1.13.1</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/" >1.14.1</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1/" >1.13.2</a></li>
     <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v2/" >1.12.0</a></li>
     <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v3/" >1.11.1</a></li>
     </ul> 
@@ -203,7 +203,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.95eb2351085177b48c340d036c8a9b3d.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.dc3489660055756a26943be68dc26f26.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -4014,7 +4014,7 @@ Enable the SDC monitor by setting the <code>enable</code> flag to <code>true</co
 <li><strong>With Sidecar</strong>: Edit the <code>HOST_PID</code> and <code>MDM</code> fields with the host PID and MDM IPs.</li>
 <li><strong>Without Sidecar</strong>: Leave the <code>enabled</code> field set to <code>false</code>.</li>
 </ul>
-<p>Example CR: <a href="https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powerflex_v2140.yaml">samples/storage_csm_powerflex_v2140.yaml</a></p>
+<p>Example CR: <a href="https://github.com/dell/csm-operator/tree/release/v1.9.1/samples/storage_csm_powerflex_v2140.yaml">samples/storage_csm_powerflex_v2140.yaml</a></p>
 </li>
 </ul>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">sideCars</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
@@ -4100,11 +4100,11 @@ b. After editing the file, <strong>run this command to create a secret</strong> 
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">spec</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">driver</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">csiDriverType</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;powerflex&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">configVersion</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">v2.14.0</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">configVersion</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">v2.14.1</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">forceRemoveDriver</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span></code></pre></div><p>Refer the <a href="https://github.com/dell/csm-operator/blob/main/samples/minimal-samples/powerflex_v2140.yaml">sample file</a>. Modify if needed.</p>
+</span></span></span></code></pre></div><p>Refer the <a href="https://github.com/dell/csm-operator/tree/release/v1.9.1/samples/minimal-samples/powerflex_v2140.yaml">sample file</a>. Modify if needed.</p>
 <p>[OR]</p>
-<p>b. <strong>Detailed Configuration:</strong> Use the <a href="https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powerflex_v2140.yaml">sample file</a> for detailed settings.</p>
+<p>b. <strong>Detailed Configuration:</strong> Use the <a href="https://github.com/dell/csm-operator/tree/release/v1.9.1/samples/storage_csm_powerflex_v2140.yaml">sample file</a> for detailed settings.</p>
 </li>
 </ol>
 <ul>
@@ -4256,6 +4256,12 @@ b. After editing the file, <strong>run this command to create a secret</strong> 
           <td><div style="text-align: left"> Enable/Disable goscaleio library-level REST request logging. Enabling will also <strong>enable</strong> GOSCALEIO_DEBUG regardless of GOSCALEIO_DEBUG setting.</td>
           <td>No</td>
           <td>false</td>
+      </tr>
+      <tr>
+          <td><div style="text-align: left"> X_CSI_PROBE_TIMEOUT</td>
+          <td><div style="text-align: left"> Specify the timeout limit for controller and node to communicate with the array.</td>
+          <td>No</td>
+          <td>&ldquo;10s&rdquo;</td>
       </tr>
       <tr>
           <td><div style="text-align: left"> <em><strong>Controller parameters</strong></em></td>

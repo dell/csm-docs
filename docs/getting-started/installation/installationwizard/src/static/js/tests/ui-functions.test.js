@@ -771,7 +771,7 @@ describe("GIVEN displayCommands function", () => {
 			<input id="array" value="powerstore">
 			<input id="installation-type" value="operator">
 			<input type="text" id="driver-namespace" value="csi-powerstore">
-			<input type="text" id="csm-version" value="1.9.0">
+			<input type="text" id="csm-version" value="1.9.1">
             <div id="command-text-area" style="display:none">
                 <div id="command-title"></div>
 				<span id="csm-operator-note" style="display:none"></span>

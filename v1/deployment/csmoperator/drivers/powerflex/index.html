@@ -17,11 +17,11 @@
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="v1">
-    <meta property="article:modified_time" content="2025-06-05T15:13:59-05:00">
+    <meta property="article:modified_time" content="2025-07-28T16:48:02+05:30">
 
   <meta itemprop="name" content="PowerFlex">
   <meta itemprop="description" content="Installing the CSI Driver for Dell PowerFlex via Dell CSM Operator">
-  <meta itemprop="dateModified" content="2025-06-05T15:13:59-05:00">
+  <meta itemprop="dateModified" content="2025-07-28T16:48:02+05:30">
   <meta itemprop="wordCount" content="1416">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="PowerFlex">
@@ -73,11 +73,11 @@
       
     
     
-    1.13.1
+    1.13.2
   </a>
   <ul class="dropdown-menu">
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/" >1.14.0</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1/" >1.13.1</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/" >1.14.1</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1/" >1.13.2</a></li>
     <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v2/" >1.12.0</a></li>
     <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v3/" >1.11.1</a></li>
     </ul> 
@@ -203,7 +203,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.95eb2351085177b48c340d036c8a9b3d.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.dc3489660055756a26943be68dc26f26.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -2743,7 +2743,7 @@ config.yaml. An example of config.yaml is below in this document. Do not set MDM
 </li>
 </ul>
 <h5 id="example-cr--samplesstorage_">
-Example CR:  <a href="https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powerflex_v2131.yaml">samples/storage_csm_powerflex_v2131.yaml</a></h5><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">sideCars</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+Example CR:  <a href="https://github.com/dell/csm-operator/tree/release/v1.8.1/samples/storage_csm_powerflex_v2131.yaml">samples/storage_csm_powerflex_v2131.yaml</a></h5><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">sideCars</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#8f5902;font-style:italic"># sdc-monitor is disabled by default, due to high CPU usage</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span>- <span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">sdc-monitor</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">enabled</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">false</span><span style="color:#f8f8f8;text-decoration:underline">
@@ -2848,9 +2848,9 @@ Install Driver <a class="header-link"  href="#install-driver" style=" display: i
 <p>Create a CR (Custom Resource) for PowerFlex using the sample files provided</p>
 <p>a. Install the PowerFlex driver using default configuration using
 the sample file provided
-<a href="https://github.com/dell/csm-operator/tree/main/samples/minimal-samples">here</a>. This file can be modified to use custom parameters if needed.</p>
+<a href="https://github.com/dell/csm-operator/tree/release/v1.8.1/samples/minimal-samples">here</a>. This file can be modified to use custom parameters if needed.</p>
 <p>b. Install the PowerFlex driver using the detailed configuration using the sample file provided
-<a href="https://github.com/dell/csm-operator/tree/main/samples">here</a>.</p>
+<a href="https://github.com/dell/csm-operator/tree/release/v1.8.1/samples">here</a>.</p>
 </li>
 <li>
 <p>Users should configure the parameters in CR. The following table lists the primary configurable parameters of the PowerFlex driver and their default values:</p>
