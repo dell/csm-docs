@@ -152,7 +152,7 @@ If the CSI driver secret name is not the default `vxflexos-config`, please use t
 kubectl get secret [VXFLEXOS-CONFIG] -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/name: [VXFLEXOS-CONFIG]/name: vxflexos-config/' | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -
 ```
 
-If [CSM for Authorization is enabled](v1/getting-started/installation/kubernetes/{{Var}}/helm/csm-modules/authorizationv2-0/#configuring-a-dell-csi-driver-with-container-storage-module-for-authorization)  for CSI PowerFlex, perform these steps:
+If [CSM for Authorization is enabled](docs/getting-started/installation/kubernetes/{{Var}}/helm/csm-modules/authorizationv2-0/#configuring-a-dell-csi-driver-with-container-storage-module-for-authorization)  for CSI PowerFlex, perform these steps:
 
 ```bash
 
@@ -200,7 +200,7 @@ If the CSI driver secret name is not the default `isilon-creds`, please use the 
 kubectl get secret [ISILON-CREDS] -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/name: [ISILON-CREDS]/name: isilon-creds/' | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -
 ```
 
-If [CSM for Authorization is enabled](v1/getting-started/installation/kubernetes/{{Var}}/helm/csm-modules/authorizationv2-0/#configuring-a-dell-csi-driver-with-container-storage-module-for-authorization) for CSI PowerScale, perform these steps:
+If [CSM for Authorization is enabled](docs/getting-started/installation/kubernetes/{{Var}}/helm/csm-modules/authorizationv2-0/#configuring-a-dell-csi-driver-with-container-storage-module-for-authorization) for CSI PowerScale, perform these steps:
 
 ```bash
 
@@ -253,7 +253,7 @@ do
 done
 ```
 
-If [CSM for Authorization is enabled](v1/getting-started/installation/kubernetes/{{Var}}/helm/csm-modules/authorizationv2-0/#configuring-a-dell-csi-driver-with-container-storage-module-for-authorization) for CSI PowerMax, perform these steps:
+If [CSM for Authorization is enabled](docs/getting-started/installation/kubernetes/{{Var}}/helm/csm-modules/authorizationv2-0/#configuring-a-dell-csi-driver-with-container-storage-module-for-authorization) for CSI PowerMax, perform these steps:
 
 ```bash
 

@@ -441,7 +441,7 @@ the installation.
 
 When installing the PowerMax driver via Helm, CRDs should be configured during
 replication prepare stage with repctl as described in
-[install-repctl](v1/getting-started/installation/helm/modules/replication/install-repctl).
+[install-repctl](docs/getting-started/installation/helm/modules/replication/install-repctl).
 
 ### Certificate validation for Unisphere REST API calls (Optional)
 

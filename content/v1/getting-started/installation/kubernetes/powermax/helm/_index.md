@@ -23,7 +23,7 @@ Install Helm 3 on the master node before you install CSI Driver for PowerMax.
    curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
    ```
 {{< accordion id="One" title="CSM Installation Wizard" markdown="true" >}}
-{{<include  file="content/v1/getting-started/installation/installationwizard/helm.md" Var="powermax" hideIds="2">}}
+{{<include  file="content/docs/getting-started/installation/installationwizard/helm.md" Var="powermax" hideIds="2">}}
 {{< /accordion >}}
 
 <br>
@@ -31,7 +31,7 @@ Install Helm 3 on the master node before you install CSI Driver for PowerMax.
 {{< accordion id="Two" title="Base Install" markdown="true" >}}
 ### Volume Snapshot Requirements (Optional)
 
-> For detailed snapshot setup procedure, [click here.](v1/concepts/snapshots/#helm-optional-volume-snapshot-requirements)
+> For detailed snapshot setup procedure, [click here.](docs/concepts/snapshots/#helm-optional-volume-snapshot-requirements)
 
 ## Install Driver
 
@@ -79,7 +79,7 @@ Install Helm 3 on the master node before you install CSI Driver for PowerMax.
 5. Download the default values.yaml file.
     ```bash
     cd dell-csi-helm-installer
-    wget -O my-powermax-settings.yaml https://github.com/dell/helm-charts/raw/csi-powermax-2.14.0/charts/csi-powermax/values.yaml
+    wget -O my-powermax-settings.yaml https://github.com/dell/helm-charts/raw/csi-powermax-2.14.1/charts/csi-powermax/values.yaml
     ```
 
 6. Edit the newly created file and provide values for the following parameters.

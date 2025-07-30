@@ -24,7 +24,7 @@ Failover, Failback, and Reprotect one-step operations are not natively supported
 
 #### Failover - Halt Replication and Allow Writes on Target
 
-Steps for performing Failover can be found in the Tools page under [Executing Actions.](v1/tooling/repctl/#executing-actions) There are some PowerScale-specific considerations to keep in mind: 
+Steps for performing Failover can be found in the Tools page under [Executing Actions.](docs/tooling/repctl/#executing-actions) There are some PowerScale-specific considerations to keep in mind: 
 - Failover on PowerScale does NOT halt writes on the source side. It is recommended that the storage administrator or end user manually **stop writes** to ensure no data is lost on the source side in the event of future failback. 
 - In the case of unplanned failover, the SyncIQ policy on the source PowerScale array will be left enabled and set to its previously defined `When source is modified` sync schedule. Storage admins **must** manually disable this SyncIQ policy when bringing the failed-over source array back online, or unexpected behavior may occur.
 

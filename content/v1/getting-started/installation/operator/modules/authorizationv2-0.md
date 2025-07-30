@@ -21,7 +21,7 @@ description: >
     kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v1.11.0/cert-manager.crds.yaml
     ```
 
-4. Prepare [samples/authorization/config.yaml](https://github.com/dell/csm-operator/blob/main/samples/authorization/config.yaml) which contains the JWT signing secret. The following table lists the configuration parameters.
+4. Prepare [samples/authorization/config.yaml](https://github.com/dell/csm-operator/tree/release/v1.9.1/samples/authorization/config.yaml) which contains the JWT signing secret. The following table lists the configuration parameters.
 
     | Parameter | Description                                                  | Required | Default |
     | --------- | ------------------------------------------------------------ | -------- | ------- |
@@ -55,7 +55,7 @@ description: >
 
 
 
-1. Create a CR (Custom Resource) for Authorization from a [sample manifest](https://github.com/dell/csm-operator/blob/main/samples/authorization/csm_authorization_proxy_server_v200.yaml). This file can be modified to use custom parameters if needed.
+1. Create a CR (Custom Resource) for Authorization from a [sample manifest](https://github.com/dell/csm-operator/tree/release/v1.9.1/samples/authorization/csm_authorization_proxy_server_v200.yaml). This file can be modified to use custom parameters if needed.
 
 2. Users should configure the parameters in the CR. This table lists the primary configurable parameters of the Authorization Proxy Server and their default values:
 
@@ -129,21 +129,21 @@ Once the Authorization CR is created, you can verify the installation as mention
 
 >__Note__: Karavictl will not work with Authorization v2.x. Please use dellctl instead.
 
-Follow the instructions for [Installing dellctl](v1/tooling/cli/#installation-instructions).
+Follow the instructions for [Installing dellctl](docs/tooling/cli/#installation-instructions).
 
 ### Configure the Container Storage Modules Authorization Proxy Server
 
-Follow the instructions available in Authorization for [Configuring the Authorization Proxy Server](v1/concepts/authorization/v2.x/configuration/).
+Follow the instructions available in Authorization for [Configuring the Authorization Proxy Server](docs/concepts/authorization/v2.x/configuration/).
 
 ### Configure a Dell CSI Driver with Container Storage Modules Authorization
 
 Follow the instructions available in Authorization for
 
-{{< hide id="1" >}}- [Configuring PowerFlex with Authorization](v1/concepts/authorization/v2.x/configuration/powerflex).{{< /hide >}}
+{{< hide id="1" >}}- [Configuring PowerFlex with Authorization](docs/concepts/authorization/v2.x/configuration/powerflex).{{< /hide >}}
 
-{{< hide id="2" >}}- [Configuring PowerMax with Authorization](v1/concepts/authorization/v2.x/configuration/powermax).{{< /hide >}}
+{{< hide id="2" >}}- [Configuring PowerMax with Authorization](docs/concepts/authorization/v2.x/configuration/powermax).{{< /hide >}}
 
-{{< hide id="3" >}}- [Configuring PowerScale with Authorization](v1/concepts/authorization/v2.x/configuration/powerscale).{{< /hide >}}
+{{< hide id="3" >}}- [Configuring PowerScale with Authorization](docs/concepts/authorization/v2.x/configuration/powerscale).{{< /hide >}}
 
 ## Vault Server Installation
 

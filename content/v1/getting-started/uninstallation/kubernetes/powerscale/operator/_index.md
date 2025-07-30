@@ -6,4 +6,4 @@ description: Container Storage Modules Operator Installation
 weight: 1
 ---
 
-{{<include  file="content/v1/getting-started/uninstallation/operator/driver.md" >}}
+{{<include  file="content/docs/getting-started/uninstallation/operator/driver.md" >}}

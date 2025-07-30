@@ -170,8 +170,9 @@ Given a setup where Kubernetes, a storage system, and the CSM for Authorization 
               value: "true"
     ```
 
-    Alternatively, you can use the minimal sample files provided in respective CSM versions folder under samples [here](https://github.com/dell/csm-operator/tree/main/samples) and install the module using default value.
-    
+    Alternatively, you can use the minimal sample files provided
+    [here](https://github.com/dell/csm-operator/tree/release-v1.7.0/samples/minimal-samples) and install the module using default values
+
 6. Install the Dell CSI PowerFlex driver following the appropriate documentation for your installation method.
 
 7. (Optional) Install [dellctl](../../../../support/cli/#installation-instructions) to perform Kubernetes administrator commands for additional capabilities (e.g., list volumes). Please refer to the [dellctl documentation page](../../../../support/cli) for the installation steps and command list.

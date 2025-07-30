@@ -19,7 +19,7 @@ linktitle: Powerflex
        kubectl get secret [VXFLEXOS-CONFIG] -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/name: [VXFLEXOS-CONFIG]/name: vxflexos-config/' | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -
        ```
 
-    If [Container Storage Modules for Authorization is enabled](v1/getting-started/installation/helm/modules/authorizationv2-0#configuring-a-dell-csi-driver-with-container-storage-module-for-authorization) for CSI PowerFlex, perform the following steps:
+    If [Container Storage Modules for Authorization is enabled](docs/getting-started/installation/helm/modules/authorizationv2-0#configuring-a-dell-csi-driver-with-container-storage-module-for-authorization) for CSI PowerFlex, perform the following steps:
 
     2. Copy the driver configuration parameters ConfigMap from the CSI PowerFlex namespace into the Container Storage Modules Observability namespace:
 

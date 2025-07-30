@@ -24,7 +24,7 @@ Before installing the driver, you need to install the operator. You can find the
 
 >NOTE: You can update the resource requests and limits when you are deploying operator using manual installation without OLM
 
-1. Install volume snapshot CRDs. For detailed snapshot setup procedure, [click here](v1/concepts/snapshots/#volume-snapshot-feature).
+1. Install volume snapshot CRDs. For detailed snapshot setup procedure, [click here](docs/concepts/snapshots/#volume-snapshot-feature).
 2. Clone and checkout the required csm-operator version using
 ```bash
 git clone -b {{< version-v1 key="csm-operator_latest_version" >}} https://github.com/dell/csm-operator.git

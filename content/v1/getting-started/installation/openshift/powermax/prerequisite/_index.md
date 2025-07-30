@@ -9,7 +9,7 @@ toc_hide: true
 
 ### CSI PowerMax Reverse Proxy
 
-The CSI PowerMax Reverse Proxy is a component that will be installed with the CSI PowerMax driver. For more details on this feature, see the related [documentation](../../../../../concepts/csidriver/features/powermax#csi-powermax-reverse-proxy).
+The CSI PowerMax Reverse Proxy is a component that is installed with the CSI PowerMax driver. For more details on this feature, see the related [documentation](../../../../../concepts/csidriver/features/powermax#csi-powermax-reverse-proxy).
 
 Create a TLS secret that holds an SSL certificate and a private key. This is required by the reverse proxy server.
 
@@ -419,12 +419,9 @@ All OpenShift nodes connecting to Dell storage arrays must use unique host NVMe 
             name: custom-coreos-generate-nvme-hostnqn.service
   EOF
   ```
-
- **Array requirements**
-
+  **Array requirements**
 Once the NVMe endpoint is created on the array, follow the following steps to
 update the endpoint name to adhere to the CSI driver requirements.
-
 - Run `nvme discover --transport=tcp --traddr=<InterfaceAdd> --trsvcid=4420`.
   <InterfaceAdd> is the placeholder for actual IP address of NVMe Endpoint.
 - Fetch the _subnqn_, for e.g.,
@@ -568,10 +565,8 @@ All OpenShift nodes connecting to Dell storage arrays must use unique host NVMe 
   ```
 
 **Array requirements**
-
 Once the NVMe endpoint is created on the array, follow the following steps to
 update the endpoint name to adhere to the CSI driver requirements.
-
 - Run `nvme discover --transport=tcp --traddr=<InterfaceAdd> --trsvcid=4420`.
   <InterfaceAdd> is the placeholder for actual IP address of NVMe Endpoint.
 - Fetch the _subnqn_, for e.g.,
@@ -579,9 +574,7 @@ update the endpoint name to adhere to the CSI driver requirements.
   subnqn holder while updating NVMe endpoint name.
 - Update the NVMe endpoint name as `<subnqn>:<dir><port>>`. Here is an example
   how it should look,
-  _nqn.1988-11.com.dell:PowerMax_2500:00:000120001100:OR1C000_ 
-
-{{% /tab %}}
+  _nqn.1988-11.com.dell:PowerMax_2500:00:000120001100:OR1C000_ {{% /tab %}}
 
 
 {{% tab header="NFS" lang="en" %}}

@@ -164,4 +164,4 @@ cd csi-<driver>-bundle-2.14.0/dell-csi-helm-installer
 
 **Prepare for Installation:**  Ensure required images are available and Helm Charts configuration is updated.
 
-**Follow Installation Procedure:** Proceed with the usual installation steps as documented for [Helm](v1/getting-started/installation/helm).
+**Follow Installation Procedure:** Proceed with the usual installation steps as documented for [Helm](docs/getting-started/installation/helm).

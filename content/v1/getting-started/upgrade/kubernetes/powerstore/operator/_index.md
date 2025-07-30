@@ -11,7 +11,7 @@ weight: 1
 To Upgrade the Operator, follow the instructions available [here](../../../operator/upgrade).
 
 {{< accordion id="Two" title="Driver" markdown="true" >}}  
-{{<include file="content/v1/getting-started/upgrade/operator/driver_upgrade.md" hideClasses="2,3,4,5">}}
+{{<include file="content/docs/getting-started/upgrade/operator/driver_upgrade.md" hideClasses="2,3,4,5">}}
 {{< /accordion >}}
 <br>
 {{< accordion id="Three" title="Modules"  >}}   

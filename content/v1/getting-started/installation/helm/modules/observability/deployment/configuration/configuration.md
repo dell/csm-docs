@@ -72,7 +72,7 @@ The following table lists the configurable parameters of the Container Storage M
 | `karaviMetricsPowerflex.volumePollFrequencySeconds` | The polling frequency (in seconds) to gather volume metrics | `10` |
 | `karaviMetricsPowerflex.storageClassPoolPollFrequencySeconds` | The polling frequency (in seconds) to gather storage class/pool metrics | `10` |
 | `karaviMetricsPowerflex.concurrentPowerflexQueries` | The number of simultaneous metrics queries to make to Powerflex(MUST be less than 10; otherwise, several request errors from Powerflex will ensue. | `10` |
-| `karaviMetricsPowerflex.authorization.enabled` | [Authorization](v1/getting-started/installation/helm/modules/authorizationv2-0) is an optional feature to apply credential shielding of the backend PowerFlex. | `false` |
+| `karaviMetricsPowerflex.authorization.enabled` | [Authorization](docs/getting-started/installation/helm/modules/authorizationv2-0) is an optional feature to apply credential shielding of the backend PowerFlex. | `false` |
 | `karaviMetricsPowerflex.authorization.proxyHost` | Hostname of the csm-authorization server. |  |
 | `karaviMetricsPowerflex.authorization.skipCertificateValidation` | A boolean that enables/disables certificate validation of the csm-authorization server. |  |
 | `karaviMetricsPowerflex.sdcMetricsEnabled` | Enable PowerFlex SDC Metrics Collection | `true` |
@@ -128,7 +128,7 @@ The following table lists the configurable parameters of the Container Storage M
 | `karaviMetricsPowerscale.isiClientOptions.isiSkipCertificateValidation` | Skip OneFS API server's certificates | `true` |
 | `karaviMetricsPowerscale.isiClientOptions.isiAuthType` | 0 to enable session-based Authentication; 1 to enables basic Authentication | `1` |
 | `karaviMetricsPowerscale.isiClientOptions.isiLogVerbose` | Decide High/Medium/Low content of the OneFS REST API message | `0` |
-| `karaviMetricsPowerscale.authorization.enabled` | [Authorization](v1/getting-started/installation/helm/modules/authorizationv2-0) is an optional feature to apply credential shielding of the backend PowerScale. | `false` | 
+| `karaviMetricsPowerscale.authorization.enabled` | [Authorization](docs/getting-started/installation/helm/modules/authorizationv2-0) is an optional feature to apply credential shielding of the backend PowerScale. | `false` | 
 | `karaviMetricsPowerscale.authorization.proxyHost` | Hostname of the csm-authorization server. |  |
 | `karaviMetricsPowerscale.authorization.skipCertificateValidation` | A boolean that enables/disables certificate validation of the csm-authorization server. |  | 
 {{< /hide >}} 
@@ -144,7 +144,7 @@ The following table lists the configurable parameters of the Container Storage M
 | `karaviMetricsPowerMax.capacityPollFrequencySeconds` | The polling frequency (in seconds) to gather capacity metrics | `20` |
 | `karaviMetricsPowerMax.performancePollFrequencySeconds` | The polling frequency (in seconds) to gather performance metrics | `20` |
 | `karaviMetricsPowerMax.concurrentPowerMaxQueries` | The number of simultaneous metrics queries to make to PowerMax (MUST be less than 10; otherwise, several request errors from PowerMax will ensue.) | `10` |
-| `karaviMetricsPowerMax.authorization.enabled` | [Authorization](v1/getting-started/installation/helm/modules/authorizationv2-0) is an optional feature to apply credential shielding of the backend PowerMax. | `false` |
+| `karaviMetricsPowerMax.authorization.enabled` | [Authorization](docs/getting-started/installation/helm/modules/authorizationv2-0) is an optional feature to apply credential shielding of the backend PowerMax. | `false` |
 | `karaviMetricsPowerMax.authorization.proxyHost` | Hostname of the csm-authorization server. |  |
 | `karaviMetricsPowerMax.authorization.skipCertificateValidation` | A boolean that enables/disables certificate validation of the csm-authorization server. |  |
 {{< /hide >}}

@@ -410,20 +410,21 @@ Create a secret named powermax-certs in the namespace where the CSI PowerMax dri
 5. Create a CR (Custom Resource) for PowerMax using the sample files provided
 
     a. Install the PowerMax driver using default configuration using
-    the sample file provided under minimal-samples folder of respective CSM versions [here](https://github.com/dell/csm-operator/tree/main/samples). This file can be modified to use custom parameters if needed.
+    the sample file provided
+   [here](https://github.com/dell/csm-operator/tree/release-v1.7.0/samples/minimal-samples). This file can be modified to use custom parameters if needed.
 
     b. Install the PowerMax driver using the detailed configuration using the sample file provided
-    [here](https://github.com/dell/csm-operator/tree/main/samples).
+    [here](https://github.com/dell/csm-operator/tree/release-v1.7.0/samples).
 
 > NOTE:
-> [Replication module](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powermax_{{< version-docs key="sample_sc_pmax" >}}.yaml#L283) must be enabled to use the Metro volume
+> [Replication module](https://github.com/dell/csm-operator/tree/release-v1.7.0/samples/storage_csm_powermax_{{< version-docs key="sample_sc_pmax" >}}.yaml#L283) must be enabled to use the Metro volume
 
 Example:
 ```yaml
     - name: replication
       enabled: true
 ```
->  [Target clusterID](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powermax_{{< version-docs key="sample_sc_pmax" >}}.yaml#L316) should be set as self
+>  [Target clusterID](https://github.com/dell/csm-operator/tree/release-v1.7.0/samples/storage_csm_powermax_{{< version-docs key="sample_sc_pmax" >}}.yaml#L316) should be set as self
 
 Example:
 ```yaml

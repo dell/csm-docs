@@ -21,7 +21,7 @@ Install Helm 3.x on the master node before you install the CSI Driver for PowerS
   curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
   ```
 {{< accordion id="One" title="CSM Installation Wizard" >}}
-    {{<include  file="content/v1/getting-started/installation/installationwizard/helm.md" Var="powerstore" hideIds="2,4">}}
+    {{<include  file="content/docs/getting-started/installation/installationwizard/helm.md" Var="powerstore" hideIds="2,4">}}
 {{< /accordion >}}
 
 <br>
@@ -29,7 +29,7 @@ Install Helm 3.x on the master node before you install the CSI Driver for PowerS
 {{< accordion id="Two" title="Base Install" markdown="true" >}}
 
 ### Volume Snapshot Requirements (Optional)
-For detailed snapshot setup procedure, [click here.](v1/concepts/snapshots/#helm-optional-volume-snapshot-requirements)
+For detailed snapshot setup procedure, [click here.](docs/concepts/snapshots/#helm-optional-volume-snapshot-requirements)
 
 ### Volume Health Monitoring (Optional)
 
@@ -95,7 +95,7 @@ volume stats value under node should be set to true.
     > If you do not specify `arrayID` parameter in the storage class then the array that was specified as the default would be used for provisioning volumes.
 6. Download the default values.yaml file
    ```bash
-   cd dell-csi-helm-installer && wget -O my-powerstore-settings.yaml https://github.com/dell/helm-charts/raw/csi-powerstore-2.14.0/charts/csi-powerstore/values.yaml
+   cd dell-csi-helm-installer && wget -O my-powerstore-settings.yaml https://github.com/dell/helm-charts/raw/csi-powerstore-2.14.1/charts/csi-powerstore/values.yaml
    ```
 7. Edit the newly created values file and provide values for the following parameters `vi my-powerstore-settings.yaml`:
 <ul>

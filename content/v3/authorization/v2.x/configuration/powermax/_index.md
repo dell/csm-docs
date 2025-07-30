@@ -68,7 +68,7 @@ Given a setup where Kubernetes, a storage system, and the CSM for Authorization 
 
     Leave `username` and `password` with the default values as they will be ignored.
 
-5. **Operator Only**: Prepare the reverse proxy configmap using sample [here](https://github.com/dell/csm-operator/blob/main/samples/csireverseproxy/config.yaml). Fill in the appropriate values for driver configuration.
+5. **Operator Only**: Prepare the reverse proxy configmap using sample [here](https://github.com/dell/csm-operator/tree/release-v1.7.0/samples/csireverseproxy/config.yaml). Fill in the appropriate values for driver configuration.
    Example: config.yaml
    ```yaml
     mode: StandAlone # Mode for the reverseproxy, should not be changed
@@ -88,7 +88,8 @@ Given a setup where Kubernetes, a storage system, and the CSM for Authorization 
    ```
 
 6. Enable CSM Authorization in the driver installation applicable to your installation method.
-  Alternatively, you can use the minimal sample files provided in respective CSM versions folder under samples [here](https://github.com/dell/csm-operator/tree/main/samples) and install the module using default value.
+  Alternatively, you can use the minimal sample files provided
+  [here](https://github.com/dell/csm-operator/tree/release-v1.7.0/samples/minimal-samples) and install the module using default values
 
     **Operator**
 

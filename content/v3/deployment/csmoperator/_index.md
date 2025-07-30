@@ -199,7 +199,7 @@ Here is the output of a request to build an offline bundle for the Dell CSM Oper
    quay.io/dell/container-storage-modules/csm-topology:v1.10.0
    quay.io/dell/container-storage-modules/dell-csi-replicator:v1.10.0
    quay.io/dell/container-storage-modules/dell-replication-controller:v1.10.0
-   quay.io/dell/storage/powerflex/sdc:4.5.2.1
+   dellemc/sdc:4.5.2.1
    quay.io/dell/container-storage-modules/dell-csm-operator:v1.7.0
    registry.redhat.io/openshift4/ose-kube-rbac-proxy-rhel9:v4.16.0-202409051837.p0.g8ea2c99.assembly.stream.el9
    nginxinc/nginx-unprivileged:1.20
@@ -388,7 +388,7 @@ Modify the installation as needed, typically updating driver versions, sidecars,
 
 3. Refer how to [upgrade](https://infohub.delltechnologies.com/en-us/p/best-practices-for-deployment-and-life-cycle-management-of-dell-csm-modules-1/#:~:text=Upgrades%20with%20Operator) guide if you have more questions </br>
 
-> Note: Starting with CSM 1.12, use images from [quay.io](https://quay.io/organization/dell). From CSM 1.14 (May 2025), editing the CSM object will fail if using images from [Docker Hub](https://hub.docker.com/r/quay.io/dell/container-storage-modules/).
+> Note: Starting with CSM 1.12, use images from [quay.io](https://quay.io/organization/dell). From CSM 1.14 (May 2025), editing the CSM object will fail if using images from [Docker Hub](https://hub.docker.com/r/dellemc/).
 
 ### Upgrade Modules using Dell CSM Operator
 

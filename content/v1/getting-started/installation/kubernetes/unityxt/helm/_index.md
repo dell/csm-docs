@@ -21,7 +21,7 @@ Run the command to install Helm 3.0.
 curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
 ```
 {{< accordion id="One" title="CSM Installation Wizard" >}}
-            {{< include  file="content/v1/getting-started/installation/installationwizard/helm.md" Var="unity" hideIds="1,2,3,4,5" >}}
+            {{< include  file="content/docs/getting-started/installation/installationwizard/helm.md" Var="unity" hideIds="1,2,3,4,5" >}}
 {{< /accordion >}}
 <br>
 
@@ -204,7 +204,7 @@ Example: secret.yaml
   **Note:** Parameters "allowRWOMultiPodAccess" and "syncNodeInfoInterval" have been enabled for configuration in values.yaml and this helps users to dynamically change these values without the need for driver re-installation.
 </ul>
 
-6. If you want to leverage snapshotting feature, the pre-requisite is to install external-snapshotter. Installation of external-snapshotter is required only for Kubernetes and is available by default with OpenShift installations. [Click here](v1/concepts/snapshots/#helm-optional-volume-snapshot-requirements) to follow the procedure to install external-snapshotter.
+6. If you want to leverage snapshotting feature, the pre-requisite is to install external-snapshotter. Installation of external-snapshotter is required only for Kubernetes and is available by default with OpenShift installations. [Click here](docs/concepts/snapshots/#helm-optional-volume-snapshot-requirements) to follow the procedure to install external-snapshotter.
 
 7. Run the command to proceed with the installation using bash script.
    ```bash

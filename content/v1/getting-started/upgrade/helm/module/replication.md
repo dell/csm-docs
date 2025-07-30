@@ -34,7 +34,7 @@ To upgrade the CSM Replication sidecar that is installed along with the driver, 
       ```
 3. Run the same command on the second Kubernetes cluster if you use multi-cluster replication topology
 
->For more information on upgrading the CSI driver, please visit the [CSI driver upgrade page](v1/getting-started/upgrade/kubernetes).
+>For more information on upgrading the CSI driver, please visit the [CSI driver upgrade page](docs/getting-started/upgrade/kubernetes).
 
 {{< hide id="1">}}
 
@@ -84,7 +84,7 @@ This option will only work if you have previously installed replication via Helm
 
 ### Upgrading with repctl
 
-> _**Note**_: These steps assume that you already have `repctl` configured to use correct clusters, if you don't know how to do that please refer to [installing with repctl](v1/getting-started/installation/helm/modules/replication/install-repctl)
+> _**Note**_: These steps assume that you already have `repctl` configured to use correct clusters, if you don't know how to do that please refer to [installing with repctl](docs/getting-started/installation/helm/modules/replication/install-repctl)
 
 **Steps**
 

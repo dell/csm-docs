@@ -5,4 +5,4 @@ weight: 3
 description: >
 
 --- 
-{{<include  file="content/v1/getting-started/uninstallation/helm/module/resiliency.md" Var="powermax" values="powermax">}}
+{{<include  file="content/docs/getting-started/uninstallation/helm/module/resiliency.md" Var="powermax" values="powermax">}}

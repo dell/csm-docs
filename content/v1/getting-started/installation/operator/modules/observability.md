@@ -34,9 +34,9 @@ Create a namespace `karavi`
   ```                                       
   If cert-manager has already been installed, don’t enable it.
   
-  **Detailed Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_{{Var}}_{{< version-v1 key="sample_sc_pmax" >}}.yaml) for detailed settings. If cert-manager has already been installed, don’t enable it.
+  **Detailed Configuration:** Use the [sample file](https://github.com/dell/csm-operator/tree/release/v1.9.1/samples/storage_csm_{{Var}}_{{< version-v1 key="sample_sc_pmax" >}}.yaml) for detailed settings. If cert-manager has already been installed, don’t enable it.
   
-- Install and configure the [Authorization Proxy Server](v1/getting-started/installation/operator/modules/authorizationv2-0) Server before using Observability with Container Storage Modules Authorization. Then, enable both the Authorization and Observability modules in the sample manifest.
+- Install and configure the [Authorization Proxy Server](docs/getting-started/installation/operator/modules/authorizationv2-0) Server before using Observability with Container Storage Modules Authorization. Then, enable both the Authorization and Observability modules in the sample manifest.
 - Observability uses self-signed certificates by default. To use custom certificates, generate them, encode in base64, and insert into the sample file for the components you are enabling:
 
 ```yaml
