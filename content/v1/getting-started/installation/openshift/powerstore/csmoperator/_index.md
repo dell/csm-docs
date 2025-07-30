@@ -16,7 +16,7 @@ weight: 2
 
 {{< accordion id="One" title="Prerequisite" >}}
 <br>
-{{<include  file="content/docs/getting-started/installation/openshift/powerstore/prerequisite/_index.md" >}}
+{{<include  file="content/v1/getting-started/installation/openshift/powerstore/prerequisite/_index.md" >}}
 
 {{< /accordion >}}
 

@@ -205,7 +205,7 @@ Loaded image: registry.k8s.io/sig-storage/csi-snapshotter:{{< version-v1 key="cs
 
 **Prepare for Installation:** Ensure required images are available and Operator configuration is updated.
 
-**Follow Installation Procedure:** Proceed with the usual installation steps as documented for the [Operator](docs/getting-started/installation/operator/operatorinstallation_openshift/#installation).
+**Follow Installation Procedure:** Proceed with the usual installation steps as documented for the [Operator](v1/getting-started/installation/operator/operatorinstallation_openshift/#installation).
 
 >Notes:
 - The Operator installs to the `dell-csm-operator` namespace by default

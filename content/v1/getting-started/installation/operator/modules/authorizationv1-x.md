@@ -118,7 +118,7 @@ Once the Authorization CR is created, you can verify the installation as mention
 
 ### Install Karavictl
 
-Follow the instructions available in Authorization for [Installing karavictl](docs/getting-started/installation/helm/modules/authorizationv1-x/#install-karavictl).
+Follow the instructions available in Authorization for [Installing karavictl](v1/getting-started/installation/helm/modules/authorizationv1-x/#install-karavictl).
 
 ### Configure the Container Storage Modules Authorization Proxy Server
 

@@ -18,7 +18,7 @@ description: >
 
 {{< accordion id="One" title="Prerequisite" >}} 
 <br>
-{{<include  file="content/docs/getting-started/installation/openshift/powermax/prerequisite/_index.md" >}}
+{{<include  file="content/v1/getting-started/installation/openshift/powermax/prerequisite/_index.md" >}}
 
 {{< /accordion >}}
 <br>

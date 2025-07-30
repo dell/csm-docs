@@ -13,10 +13,6 @@ tags:
 {{< message text="5" >}}
 {{% /pageinfo %}}
 
-The following diagram shows a high-level overview of Container Storage Modules for Authorization with a `tenant-app` that is using a CSI driver to perform storage operations through the Authorization `proxy-server` to access the a Dell storage system. All requests from the CSI driver will contain the token for the given tenant that was granted by the Storage Administrator.
-
-![Container Storage Modules for Authorization](../../../../images/authorization/v1.x/karavi-authorization-example.png "Container Storage Modules for Authorization")
-
 ## Container Storage Modules Authorization Capabilities
 {{<table "table table-striped table-bordered table-sm">}}
 | Feature | PowerStore | PowerScale | PowerFlex | PowerMax | Unity XT |
@@ -62,5 +58,3 @@ Tenants of Container Storage Modules  for Authorization can use the token provid
 3) Storage Admin returns a token to the Tenant Admin.
 4) Tenant Admin inputs the Token into their Kubernetes cluster as a Secret.
 5) Tenant Admin updates CSI driver with Container Storage Modules Authorization sidecar module.
-
-![Container Storage Modules for Authorization Workflow](../../../../images/authorization/v1.x/design2.png "Authorization Workflow")

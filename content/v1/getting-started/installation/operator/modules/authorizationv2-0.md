@@ -129,21 +129,21 @@ Once the Authorization CR is created, you can verify the installation as mention
 
 >__Note__: Karavictl will not work with Authorization v2.x. Please use dellctl instead.
 
-Follow the instructions for [Installing dellctl](docs/tooling/cli/#installation-instructions).
+Follow the instructions for [Installing dellctl](v1/tooling/cli/#installation-instructions).
 
 ### Configure the Container Storage Modules Authorization Proxy Server
 
-Follow the instructions available in Authorization for [Configuring the Authorization Proxy Server](docs/concepts/authorization/v2.x/configuration/).
+Follow the instructions available in Authorization for [Configuring the Authorization Proxy Server](v1/concepts/authorization/v2.x/configuration/).
 
 ### Configure a Dell CSI Driver with Container Storage Modules Authorization
 
 Follow the instructions available in Authorization for
 
-{{< hide id="1" >}}- [Configuring PowerFlex with Authorization](docs/concepts/authorization/v2.x/configuration/powerflex).{{< /hide >}}
+{{< hide id="1" >}}- [Configuring PowerFlex with Authorization](v1/concepts/authorization/v2.x/configuration/powerflex).{{< /hide >}}
 
-{{< hide id="2" >}}- [Configuring PowerMax with Authorization](docs/concepts/authorization/v2.x/configuration/powermax).{{< /hide >}}
+{{< hide id="2" >}}- [Configuring PowerMax with Authorization](v1/concepts/authorization/v2.x/configuration/powermax).{{< /hide >}}
 
-{{< hide id="3" >}}- [Configuring PowerScale with Authorization](docs/concepts/authorization/v2.x/configuration/powerscale).{{< /hide >}}
+{{< hide id="3" >}}- [Configuring PowerScale with Authorization](v1/concepts/authorization/v2.x/configuration/powerscale).{{< /hide >}}
 
 ## Vault Server Installation
 

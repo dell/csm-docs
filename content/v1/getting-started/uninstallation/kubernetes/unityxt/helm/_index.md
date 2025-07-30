@@ -6,7 +6,7 @@ description: Helm Installation
 weight: 2
 ---
 {{< accordion id="Two" title="Driver" markdown="true" >}}  
-{{<include  file="content/docs/getting-started/uninstallation/helm/driver/driver.md" >}}
+{{<include  file="content/v1/getting-started/uninstallation/helm/driver/driver.md" >}}
 {{< /accordion >}} 
 <br>
 {{< accordion id="Three" title="Modules"  >}}   

@@ -6,7 +6,7 @@ description:
 weight: 2
 ---
 {{< accordion id="Two" title="Driver" markdown="true" >}}  
-{{<include  file="content/docs/getting-started/upgrade/helm/driver/unity.md" >}}
+{{<include  file="content/v1/getting-started/upgrade/helm/driver/unity.md" >}}
 {{< /accordion >}}
 
 <br>

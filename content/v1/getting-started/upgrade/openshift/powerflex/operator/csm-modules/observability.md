@@ -4,4 +4,4 @@ linktitle: Observability
 description: >
   
 --- 
-{{<include  file="content/docs/getting-started/upgrade/operator/observability_upgrade.md" >}}
+{{<include  file="content/v1/getting-started/upgrade/operator/observability_upgrade.md" >}}

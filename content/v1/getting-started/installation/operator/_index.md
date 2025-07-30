@@ -9,7 +9,7 @@ On Upstream Kubernetes clusters, ensure that to install
 * VolumeSnapshot CRDs - Install v1 VolumeSnapshot CRDs
 * External Volume Snapshot Controller
 
-For detailed snapshot setup procedure, [click here.](docs/concepts/snapshots/#helm-optional-volume-snapshot-requirements)
+For detailed snapshot setup procedure, [click here.](v1/concepts/snapshots/#helm-optional-volume-snapshot-requirements)
 
 >NOTE: This step can be skipped with OpenShift.
 
@@ -32,7 +32,7 @@ Once the driver `Custom Resource (CR)` is created, you can verify the installati
     ```bash
     kubectl get csm/<name-of-custom-resource> -n <driver-namespace> -o yaml
     ```
-* Check the status of the CR to verify if the driver installation is in the `Succeeded` state. If the status is not `Succeeded`, see the [Troubleshooting guide](docs/getting-started/installation/troubleshooting/csmoperator/#my-dell-csi-driver-install-failed-how-do-i-fix-it) for more information. 
+* Check the status of the CR to verify if the driver installation is in the `Succeeded` state. If the status is not `Succeeded`, see the [Troubleshooting guide](v1/getting-started/installation/troubleshooting/csmoperator/#my-dell-csi-driver-install-failed-how-do-i-fix-it) for more information. 
 
 ## Custom Resource Definitions
 

@@ -6,4 +6,4 @@ description: >
   Container Storage Modules (CSM) for Resiliency installation
 --- 
 
-{{<include file="content/docs/getting-started/installation/operator/openshift_modules/resiliency.md" Var="powerstore" labels="powerstore">}}
+{{<include file="content/v1/getting-started/installation/operator/openshift_modules/resiliency.md" Var="powerstore" labels="powerstore">}}

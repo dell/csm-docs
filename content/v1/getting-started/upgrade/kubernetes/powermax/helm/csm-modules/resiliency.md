@@ -5,4 +5,4 @@ weight: 3
 description: >
 
 --- 
-{{<include  file="content/docs/getting-started/upgrade/helm/module/resiliency.md" >}}
+{{<include  file="content/v1/getting-started/upgrade/helm/module/resiliency.md" >}}

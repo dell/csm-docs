@@ -16,7 +16,7 @@
        kubectl get secret [ISILON-CREDS] -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/name: [ISILON-CREDS]/name: isilon-creds/' | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -
        ```
 
-    If [Container Storage Modules for Authorization is enabled](docs/getting-started/installation/helm/modules/authorizationv2-0#configuring-a-dell-csi-driver-with-container-storage-module-for-authorization) for CSI PowerScale, perform these steps:
+    If [Container Storage Modules for Authorization is enabled](v1/getting-started/installation/helm/modules/authorizationv2-0#configuring-a-dell-csi-driver-with-container-storage-module-for-authorization) for CSI PowerScale, perform these steps:
 
     2. Copy the driver configuration parameters ConfigMap from the CSI PowerScale namespace into the Container Storage Modules Observability namespace:
 
