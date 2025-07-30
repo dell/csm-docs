@@ -72,7 +72,7 @@ The Container Storage Modules Installation Wizard is a webpage that helps you cr
 - If Replication is checked in the wizard, refer to [Replication](../helm/csm-modules/replication/#install-container-storage-module-replication-controller) on configuring communication between Kubernetes clusters.
 {{< /hide >}}
 
-- If your Kubernetes distribution doesn't have the Volume Snapshot feature enabled, refer to [this section](docs/concepts/snapshots) to install the Volume Snapshot CRDs and the default snapshot controller.
+- If your Kubernetes distribution doesn't have the Volume Snapshot feature enabled, refer to [this section](v1/concepts/snapshots) to install the Volume Snapshot CRDs and the default snapshot controller.
 
 - Install the Helm chart.
 
