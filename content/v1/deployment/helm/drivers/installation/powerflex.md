@@ -157,7 +157,7 @@ Use the below command to replace or update the secret:
 
 7. Download the default values.yaml file
    ```bash
-   cd dell-csi-helm-installer && wget -O myvalues.yaml https://github.com/dell/helm-charts/raw/csi-vxflexos-2.13.0/charts/csi-vxflexos/values.yaml
+   cd dell-csi-helm-installer && wget -O myvalues.yaml https://github.com/dell/helm-charts/raw/csi-vxflexos-2.13.2/charts/csi-vxflexos/values.yaml
    ```
 
 8. If you are using custom images, check the fields under `images` in `my-vxflexos-settings.yaml` to make sure that they are pointing to the correct image repository.
@@ -166,7 +166,7 @@ Use the below command to replace or update the secret:
 
 | Parameter                | Description                                                                                                                                                                                                                                                                                                                                                                                                    | Required | Default |
 | ------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ------- |
-| version | Set to verify the values file version matches driver version and used to pull the image as part of the image name. | Yes | 2.13.0 |
+| version | Set to verify the values file version matches driver version and used to pull the image as part of the image name. | Yes | 2.13.2 |
 | images | List all the images used by the CSI driver and CSM. If you use a private repository, change the registries accordingly. | Yes | "" |
 | images.powerflexSdc | Set to give the location of the SDC image used if automatic SDC deployment is being utilized. | Yes | quay.io/dell/storage/powerflex/sdc:4.5.2.1 |
 | certSecretCount | Represents the number of certificate secrets, which the user is going to create for SSL authentication. | No | 0 |
