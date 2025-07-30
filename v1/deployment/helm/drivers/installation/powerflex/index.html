@@ -17,11 +17,11 @@
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="v1">
-    <meta property="article:modified_time" content="2025-07-28T16:30:00-04:00">
+    <meta property="article:modified_time" content="2025-07-30T10:52:42-04:00">
 
   <meta itemprop="name" content="PowerFlex">
   <meta itemprop="description" content="Installing the CSI Driver for Dell PowerFlex via Helm">
-  <meta itemprop="dateModified" content="2025-07-28T16:30:00-04:00">
+  <meta itemprop="dateModified" content="2025-07-30T10:52:42-04:00">
   <meta itemprop="wordCount" content="3439">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="PowerFlex">
@@ -203,7 +203,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.75710d26af4e0a4a277f605006404e9c.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.76dfa577983073c1083158313c596bed.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -2926,7 +2926,7 @@ kubeVersion: &ldquo;&gt;= 1.21.0-0 &lt; 1.29.0-0&rdquo;</li>
 </li>
 <li>
 <p>Download the default values.yaml file</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#204a87">cd</span> dell-csi-helm-installer <span style="color:#ce5c00;font-weight:bold">&amp;&amp;</span> wget -O myvalues.yaml https://github.com/dell/helm-charts/raw/csi-vxflexos-2.13.0/charts/csi-vxflexos/values.yaml
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#204a87">cd</span> dell-csi-helm-installer <span style="color:#ce5c00;font-weight:bold">&amp;&amp;</span> wget -O myvalues.yaml https://github.com/dell/helm-charts/raw/csi-vxflexos-2.13.2/charts/csi-vxflexos/values.yaml
 </span></span></code></pre></div></li>
 <li>
 <p>If you are using custom images, check the fields under <code>images</code> in <code>my-vxflexos-settings.yaml</code> to make sure that they are pointing to the correct image repository.</p>
@@ -2949,7 +2949,7 @@ kubeVersion: &ldquo;&gt;= 1.21.0-0 &lt; 1.29.0-0&rdquo;</li>
           <td>version</td>
           <td>Set to verify the values file version matches driver version and used to pull the image as part of the image name.</td>
           <td>Yes</td>
-          <td>2.13.0</td>
+          <td>2.13.2</td>
       </tr>
       <tr>
           <td>images</td>
