@@ -8,7 +8,7 @@ Description: Code features for PowerMax Driver
 ## Multi Unisphere Support
 
 Starting with v1.7, the CSI PowerMax driver can communicate with multiple Unisphere for PowerMax servers to manage multiple PowerMax arrays.For more details on how
-to configure the driver and ReverseProxy, see the relevant section [here](../../../../docs/getting-started/installation/kubernetes/powermax/helm#sample-values-file)
+to configure the driver and ReverseProxy, see the relevant section [here](../../../../v1/getting-started/installation/kubernetes/powermax/helm#sample-values-file)
 
 ## Volume Snapshot Feature
 
