@@ -34,7 +34,7 @@ kubectl get csm --all-namespaces
   - Optionally, enable sdc monitor by setting the enable flag for the sdc-monitor to true. Please note:
     - **If using sidecar**, you will need to edit the value fields under the HOST_PID and MDM fields by filling the empty quotes with host PID and the MDM IPs.
     - **If not using sidecar**, leave the enabled field set to false.
-##### Example CR:  [samples/storage_csm_powerflex_v2120.yaml](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powerflex_v2120.yaml)
+##### Example CR:  [samples/storage_csm_powerflex_v2120.yaml](https://github.com/dell/csm-operator/tree/{{< version-v3 key="csm-operator_latest_version" >}}/samples/storage_csm_powerflex_v2120.yaml)
 ```yaml
     sideCars:
     # sdc-monitor is disabled by default, due to high CPU usage
@@ -134,10 +134,11 @@ For detailed PowerFlex installation procedure, see the [Dell PowerFlex Deploymen
 2. Create a CR (Custom Resource) for PowerFlex using the sample files provided
 
     a. Install the PowerFlex driver using default configuration using
-    the sample file provided under minimal-samples folder of respective CSM versions [here](https://github.com/dell/csm-operator/tree/main/samples). This file can be modified to use custom parameters if needed.
+    the sample file provided
+   [here](https://github.com/dell/csm-operator/tree/{{< version-v3 key="csm-operator_latest_version" >}}/samples/minimal-samples). This file can be modified to use custom parameters if needed.
 
     b. Install the PowerFlex driver using the detailed configuration using the sample file provided
-    [here](https://github.com/dell/csm-operator/tree/main/samples).
+    [here](https://github.com/dell/csm-operator/tree/{{< version-v3 key="csm-operator_latest_version" >}}/samples).
 
 3. Users should configure the parameters in CR. The following table lists the primary configurable parameters of the PowerFlex driver and their default values:
 

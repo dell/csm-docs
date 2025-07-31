@@ -16,7 +16,7 @@ The Container Storage Modules Installation Wizard is a webpage that helps you cr
 
 ## Generate Manifest File
 
-1. Open the [CSM Installation Wizard](/csm-docs/docs/getting-started/installation/installationwizard/src/index.html).
+1. Open the [CSM Installation Wizard](/csm-docs/v1/getting-started/installation/installationwizard/src/index.html).
 2. Select the `Installation Type` as `Helm`/`Operator`.
 3. Select the `Array`.
 4. Enter the `Image Repository`. The default value is `dellemc`.
@@ -81,4 +81,4 @@ The Container Storage Modules Installation Wizard is a webpage that helps you cr
     ```bash
     helm install <release-name> dell/container-storage-modules -n <namespace> --version <container-storage-module chart-version> -f <values.yaml location>
     ```
-    Example: helm install {{Var}} dell/container-storage-modules -n csi-{{Var}} --version 1.7.0 -f values.yaml
+    Example: helm install {{Var}} dell/container-storage-modules -n csi-{{Var}} --version 1.7.1 -f values.yaml

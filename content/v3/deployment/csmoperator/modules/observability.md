@@ -18,7 +18,7 @@ The CSM Observability module for supported Dell CSI Drivers can be installed via
   kubectl create namespace karavi
   ```
 
-- Enable Observability module and components in [sample manifests](https://github.com/dell/csm-operator/tree/main/samples). If cert-manager has already been installed, don't enable it.
+- Enable Observability module and components in [sample manifests](https://github.com/dell/csm-operator/tree/{{< version-v3 key="csm-operator_latest_version" >}}/samples). If cert-manager has already been installed, don't enable it.
 - To use Observablity with CSM Authorization, the [Authorization Proxy Server](../authorizationv2-0/) should be installed and configured first. Then, enable the Authorization module along with the Observability module in the sample manifest.
 - Observability will deploy with self-signed certificates by default. If you want to have custom certificates created instead, please generate certificates and private keys, encode them in base64, and insert them into the sample file as shown below for whichever components you are enabling:
 
@@ -62,7 +62,8 @@ The CSM Observability module for supported Dell CSI Drivers can be installed via
 
 ## How to enable this module using minimal CR
 
-Alternatively, you can use the minimal sample files provided in respective CSM versions folder under samples [here](https://github.com/dell/csm-operator/tree/main/samples) and install the module using default value.
+Alternatively, you can use the minimal sample files provided
+  [here](https://github.com/dell/csm-operator/tree/{{< version-v3 key="csm-operator_latest_version" >}}/samples/minimal-samples).
 
 ## Upgrade Observability
 
