@@ -16,9 +16,9 @@ description: >
       kubectl -n openshift-operators get CSIUnity
       kubectl -n openshift-operators get CSIUnity/test-unity -o yaml
   ```
-2. Map and update the settings from the CR in step 1 to the relevant CSM Operator CR (found in [csm-operator repository](https://github.com/dell/csm-operator/tree/release-v1.7.0/samples)).
-    - As the yaml content may differ, ensure the values held in the step 1 CR backup are present in the new CR before installing the new driver. CR Samples for [CSI Operator](https://github.com/dell/dell-csi-operator/tree/main/samples) and [CSM Operator](https://github.com/dell/csm-operator/tree/release-v1.7.0/samples) can be used to compare and map the differences in attributes.
-        - Ex: spec.driver.fsGroupPolicy in [CSI Operator](https://github.com/dell/dell-csi-operator/blob/main/samples/) maps to spec.driver.csiDriverSpec.fSGroupPolicy in [CSM Operator](https://github.com/dell/csm-operator/tree/release-v1.7.0/samples/)
+2. Map and update the settings from the CR in step 1 to the relevant CSM Operator CR (found in [csm-operator repository](https://github.com/dell/csm-operator/tree/{{< version-v3 key="csm-operator_latest_version" >}}/samples)).
+    - As the yaml content may differ, ensure the values held in the step 1 CR backup are present in the new CR before installing the new driver. CR Samples for [CSI Operator](https://github.com/dell/dell-csi-operator/tree/main/samples) and [CSM Operator](https://github.com/dell/csm-operator/tree/{{< version-v3 key="csm-operator_latest_version" >}}/samples) can be used to compare and map the differences in attributes.
+        - Ex: spec.driver.fsGroupPolicy in [CSI Operator](https://github.com/dell/dell-csi-operator/blob/main/samples/) maps to spec.driver.csiDriverSpec.fSGroupPolicy in [CSM Operator](https://github.com/dell/csm-operator/tree/{{< version-v3 key="csm-operator_latest_version" >}}/samples/)
 3. Retain (or do not delete) the secret, namespace, storage classes, and volume snapshot classes from the original deployment as they will be reused in the CSM operator deployment
 4. Uninstall the CR from the CSI Operator
   ```
@@ -55,8 +55,8 @@ description: >
 6. Install the CSI driver through the CSM Operator in the OpenShift Web Console
     - Select *Create instance* under the provided Container Storage Modules API
     - Use the CR backup from step 1 to manually map desired settings to the new CSI driver
-    - As the yaml content may differ, ensure the values held in the step 1 CR backup are present in the new CR before installing the new driver. CR Samples for [CSI Operator](https://github.com/dell/dell-csi-operator/tree/main/samples) and [CSM Operator](https://github.com/dell/csm-operator/tree/release-v1.7.0/samples) can be used to compare and map the differences in attributes.
-        - Ex: spec.driver.fsGroupPolicy in [CSI Operator](https://github.com/dell/dell-csi-operator/blob/main/samples/) maps to spec.driver.csiDriverSpec.fSGroupPolicy in [CSM Operator](https://github.com/dell/csm-operator/tree/release-v1.7.0/samples/)
+    - As the yaml content may differ, ensure the values held in the step 1 CR backup are present in the new CR before installing the new driver. CR Samples for [CSI Operator](https://github.com/dell/dell-csi-operator/tree/main/samples) and [CSM Operator](https://github.com/dell/csm-operator/tree/{{< version-v3 key="csm-operator_latest_version" >}}/samples) can be used to compare and map the differences in attributes.
+        - Ex: spec.driver.fsGroupPolicy in [CSI Operator](https://github.com/dell/dell-csi-operator/blob/main/samples/) maps to spec.driver.csiDriverSpec.fSGroupPolicy in [CSM Operator](https://github.com/dell/csm-operator/tree/{{< version-v3 key="csm-operator_latest_version" >}}/samples/)
 >NOTE: Uninstallation of the driver and the Operator is non-disruptive for mounted volumes. Nonetheless you can not create new volume, snapshot or move a Pod.
 
 ## Testing

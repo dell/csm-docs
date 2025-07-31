@@ -411,20 +411,20 @@ Create a secret named powermax-certs in the namespace where the CSI PowerMax dri
 
     a. Install the PowerMax driver using default configuration using
     the sample file provided
-   [here](https://github.com/dell/csm-operator/tree/release-v1.7.0/samples/minimal-samples). This file can be modified to use custom parameters if needed.
+   [here](https://github.com/dell/csm-operator/tree/{{< version-v3 key="csm-operator_latest_version" >}}/samples/minimal-samples). This file can be modified to use custom parameters if needed.
 
     b. Install the PowerMax driver using the detailed configuration using the sample file provided
-    [here](https://github.com/dell/csm-operator/tree/release-v1.7.0/samples).
+    [here](https://github.com/dell/csm-operator/tree/{{< version-v3 key="csm-operator_latest_version" >}}/samples).
 
 > NOTE:
-> [Replication module](https://github.com/dell/csm-operator/tree/release-v1.7.0/samples/storage_csm_powermax_{{< version-docs key="sample_sc_pmax" >}}.yaml#L283) must be enabled to use the Metro volume
+> [Replication module](https://github.com/dell/csm-operator/tree/{{< version-v3 key="csm-operator_latest_version" >}}/samples/storage_csm_powermax_{{< version-docs key="sample_sc_pmax" >}}.yaml#L283) must be enabled to use the Metro volume
 
 Example:
 ```yaml
     - name: replication
       enabled: true
 ```
->  [Target clusterID](https://github.com/dell/csm-operator/tree/release-v1.7.0/samples/storage_csm_powermax_{{< version-docs key="sample_sc_pmax" >}}.yaml#L316) should be set as self
+>  [Target clusterID](https://github.com/dell/csm-operator/tree/{{< version-v3 key="csm-operator_latest_version" >}}/samples/storage_csm_powermax_{{< version-docs key="sample_sc_pmax" >}}.yaml#L316) should be set as self
 
 Example:
 ```yaml
