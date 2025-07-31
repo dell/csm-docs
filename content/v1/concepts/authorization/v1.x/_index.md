@@ -58,4 +58,3 @@ Tenants of Container Storage Modules  for Authorization can use the token provid
 3) Storage Admin returns a token to the Tenant Admin.
 4) Tenant Admin inputs the Token into their Kubernetes cluster as a Secret.
 5) Tenant Admin updates CSI driver with Container Storage Modules Authorization sidecar module.
-
