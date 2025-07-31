@@ -174,7 +174,7 @@ csi-vxflexos:
   version: v2.8.0
   images:
     driverRepository: $IMAGE_REPOSITORY
-    powerflexSdc: quay.io/dell/container-storage-modules/sdc:3.6.1
+    powerflexSdc: quay.io/dell/storage/powerflex/sdc:3.6.1
   certSecretCount: $CERT_SECRET_COUNT
   controller:
     replication:

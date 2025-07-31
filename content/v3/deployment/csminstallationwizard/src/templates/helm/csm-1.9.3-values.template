@@ -195,7 +195,7 @@ csi-vxflexos:
     # "driver" defines the container image, used for the driver container.
     driver: quay.io/dell/container-storage-modules/csi-vxflexos:v2.9.2
     # "powerflexSdc" defines the SDC image for init container.
-    powerflexSdc: quay.io/dell/container-storage-modules/sdc:4.5
+    powerflexSdc: quay.io/dell/storage/powerflex/sdc:4.5
     # CSI sidecars
     attacher: registry.k8s.io/sig-storage/csi-attacher:v4.4.2
     provisioner: registry.k8s.io/sig-storage/csi-provisioner:v3.6.2
