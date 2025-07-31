@@ -21,7 +21,7 @@ Description: >
 > * <span><span/>{{< message text="11" >}}
 > * <span><span/>{{< message text="12" >}}
 
-## Release Notes for v1.14.0
+## Release Notes for v1.14.1
 
 ### New Features/Changes
 
@@ -70,6 +70,11 @@ Description: >
 - [#1736 - [BUG]: failed to provision volume with StorageClass error generating accessibility requirements: no available topology found](https://github.com/dell/csm/issues/1736)
 - [#1762 - [BUG]: CSM Operator samples are incomplete](https://github.com/dell/csm/issues/1762)
 - [#1861 - [BUG]: Update the OTEL image version in operator and helm sample files](https://github.com/dell/csm/issues/1861)
+- [#1930 - [BUG]: Powerstore has unnecessary sharedNFS related codes that affects performance](https://github.com/dell/csm/issues/1930)
+- [#1942 - [BUG]: NVMe/TCP mounts fail on OCP 4.19/RHEL 9.6 having NVMe CLI v2.11.0](https://github.com/dell/csm/issues/1939)
+- [#1957 - [BUG]: Powermax NVMe volumes not reattached after pod deletion](https://github.com/dell/csm/issues/1957)
+- [#1956 - [BUG]: Make probe-retry in Powerflex driver configurable](https://github.com/dell/csm/issues/1956)
+
 
 ### Known Issues
 
@@ -95,7 +100,6 @@ A CSI ephemeral pod may not get created in OpenShift 4.13 and fail with the erro
 |  <div style="text-align: left">  If some older NFS exports /terminated worker nodes still in NFS export client list, CSI driver tries to add a new worker node it fails (For RWX volume). |  <div style="text-align: left">  User need to manually clean the export client list from old entries to make successful addition of new worker nodes. |
 |  <div style="text-align: left">  Delete namespace that has PVCs and pods created with the driver. The External health monitor sidecar crashes as a result of this operation. |  <div style="text-align: left">  Deleting the namespace deletes the PVCs first and then removes the pods in the namespace. This brings a condition where pods exist without their PVCs and causes the external-health-monitor sidecar to crash. This is a known issue and has been reported at https://github.com/kubernetes-csi/external-health-monitor/issues/100 |
 |  <div style="text-align: left">  fsGroupPolicy may not work as expected without root privileges for NFS only<br/>https://github.com/kubernetes/examples/issues/260 |  <div style="text-align: left">  To get the desired behavior set "RootClientEnabled" = "true" in the storage class parameter |
-|  <div style="text-align: left">  Driver logs shows "VendorVersion=2.3.0+dirty"|  <div style="text-align: left">  Update the driver to csi-powerscale 2.4.0 |  <div style="text-align: left">   
 |  <div style="text-align: left">  PowerScale 9.5.0, Driver installation fails with session based auth, "HTTP/1.1 401 Unauthorized" |  <div style="text-align: left">  Fix is available in PowerScale >= 9.5.0.4 |
 |  <div style="text-align: left">  Delete namespace that has PVCs and pods created with the driver. The External health monitor sidecar crashes as a result of this operation |  <div style="text-align: left">  Deleting the namespace deletes the PVCs first and then removes the pods in the namespace. This brings a condition where pods exist without their PVCs and causes the external-health-monitor sidecar to crash. This is a known issue and has been reported at https://github.com/kubernetes-csi/external-health-monitor/issues/100 |
 |  <div style="text-align: left">  fsGroupPolicy may not work as expected without root privileges for NFS only https://github.com/kubernetes/examples/issues/260 |  <div style="text-align: left">  To get the desired behavior set "allowRoot: "true" in the storage class parameter |
@@ -114,4 +118,4 @@ A CSI ephemeral pod may not get created in OpenShift 4.13 and fail with the erro
 | <div style="text-align: left"> A CSI ephemeral pod may not get created in OpenShift 4.13 and fail with the error `"error when creating pod: the pod uses an inline volume provided by CSIDriver csi-unity.dellemc.com, and the namespace has a pod security enforcement level that is lower than privileged."` |  <div style="text-align: left">  This issue occurs because OpenShift 4.13 introduced the CSI Volume Admission plugin to restrict the use of a CSI driver capable of provisioning CSI ephemeral volumes during pod admission. Therefore, an additional label `security.openshift.io/csi-ephemeral-volume-profile` in [csidriver.yaml](https://github.com/dell/helm-charts/blob/csi-unity-2.8.0/charts/csi-unity/templates/csidriver.yaml) file with the required security profile value should be provided. Follow [OpenShift 4.13 documentation for CSI Ephemeral Volumes](https://docs.openshift.com/container-platform/4.13/storage/container_storage_interface/ephemeral-storage-csi-inline.html) for more information. |
 |  <div style="text-align: left">  fsGroupPolicy may not work as expected without root privileges for NFS only [https://github.com/kubernetes/examples/issues/260](https://github.com/kubernetes/examples/issues/260) |  <div style="text-align: left">  To get the desired behavior set “RootClientEnabled” = “true” in the storage class parameter |
 |  <div style="text-align: left">  Controller publish is taking too long to complete/ Health monitoring is causing Unity array to panic by opening multiple sessions/ There are error messages in the log `context deadline exceeded`, when health monitoring is enabled |  <div style="text-align: left">  Disable volume health monitoring on the node and keep it only at the controller level. Refer [here](https://dell.github.io/csm-docs/docs/csidriver/features/unity/#volume-health-monitoring) for more information about enabling/disabling volume health monitoring|
-
+| <div style="text-align: left"> CSM Drivers version v2.14.0 log an incorrect vendor and semver version, `VendorVersion=2.13.0` and `semver:2.13.0` | <div style="text-align: left"> Update to the latest driver version. |

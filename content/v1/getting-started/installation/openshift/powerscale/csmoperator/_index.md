@@ -193,10 +193,10 @@ dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      
  
     <br>
 
-    Edit the file, then run the command to create the `isilon-creds`.
+    Edit the file, then run the command to create the `isilon-config`.
 
     ```bash
-    oc create secret generic isilon-creds --from-file=config=config.yaml -n isilon --dry-run=client -oyaml > secret-isilon-config.yaml
+    oc create secret generic isilon-config --from-file=config=config.yaml -n isilon --dry-run=client -oyaml > secret-isilon-config.yaml
     ```
     
     Use this command to **create** the config:
@@ -269,7 +269,7 @@ dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      
       driver:
         csiDriverType: "isilon"
         configVersion: {{< version-v1 key="PScale_latestVersion" >}}
-        authSecret: isilon-creds
+        authSecret: isilon-config
         common:
           envs:
             - name: X_CSI_ISI_AUTH_TYPE
@@ -278,7 +278,7 @@ dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      
      ``` 
     </div> 
 
-    **Detailed Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powerscale_{{< version-v1 key="sample_sc_pscale" >}}.yaml) for detailed settings or use [Wizard](./installationwizard#generate-manifest-file) to generate the sample file..
+    **Detailed Configuration:** Use the [sample file](https://github.com/dell/csm-operator/tree/release/{{< version-v1 key="csm-operator_latest_version" >}}/samples/storage_csm_powerscale_{{< version-v1 key="sample_sc_pscale" >}}.yaml) for detailed settings or use [Wizard](./installationwizard#generate-manifest-file) to generate the sample file..
 
     <br>
 

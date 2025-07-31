@@ -24,7 +24,7 @@ The [Dell Container Storage Modules Installation Wizard](./src/index.html) is a 
 | CSI PowerMax       | 2.12.0    |✔️      |✔️        |
 | CSI PowerMax       | 2.11.0    |✔️      |✔️        |
 | CSI PowerMax       | 2.10.1    |✔️      |✔️        |
-| CSI PowerFlex      | 2.13.1    |✔️      |❌        |
+| CSI PowerFlex      | 2.13.2    |✔️      |❌        |
 | CSI PowerFlex      | 2.12.0    |✔️      |❌        |
 | CSI PowerFlex      | 2.11.0    |✔️      |❌        |
 | CSI PowerFlex      | 2.10.1    |✔️      |❌        |

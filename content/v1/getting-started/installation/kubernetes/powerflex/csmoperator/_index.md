@@ -30,7 +30,7 @@ This feature deploys the SDC kernel modules on all nodes using an init container
 Set the `X_CSI_SDC_ENABLED` value in the CR file. By default, SDC is enabled.
 
 -  **Manual Deployment:**
-For unsupported OS versions, follow the manual SDC deployment steps.  Refer to https://quay.io/repository/dell/storage/powerflex/sdc for supported OS versions.
+For unsupported OS versions, follow the manual SDC deployment steps. Refer to https://quay.io/repository/dell/storage/powerflex/sdc for supported OS versions.
 
 - **MDM Value:**
 The operator sets the MDM value for initContainers in the driver CR from the `mdm` attributes in `config.yaml`. Do not set this manually.
@@ -40,7 +40,7 @@ Enable the SDC monitor by setting the `enable` flag to `true`.
    - **With Sidecar**: Edit the `HOST_PID` and `MDM` fields with the host PID and MDM IPs.
    - **Without Sidecar**: Leave the `enabled` field set to `false`.
 
-   Example CR: [samples/storage_csm_powerflex_{{< version-v1 key="sample_sc_pflex" >}}.yaml](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powerflex_{{< version-v1 key="sample_sc_pflex" >}}.yaml)
+   Example CR: [samples/storage_csm_powerflex_{{< version-v1 key="sample_sc_pflex" >}}.yaml](https://github.com/dell/csm-operator/tree/release/{{< version-v1 key="csm-operator_latest_version" >}}/samples/storage_csm_powerflex_{{< version-v1 key="sample_sc_pflex" >}}.yaml)
 
 ```yaml
     sideCars:
@@ -137,11 +137,11 @@ run `/opt/emc/scaleio/sdc/bin/drv_cfg --add_mdm --ip 10.xx.xx.xx.xx,10.xx.xx.xx`
         configVersion: {{< version-v1 key="PFlex_latestVersion" >}}
         forceRemoveDriver: true
     ```
-     Refer the [sample file](https://github.com/dell/csm-operator/blob/main/samples/minimal-samples/powerflex_{{< version-v1 key="sample_sc_pflex" >}}.yaml). Modify if needed.
+     Refer the [sample file](https://github.com/dell/csm-operator/tree/release/{{< version-v1 key="csm-operator_latest_version" >}}/samples/minimal-samples/powerflex_{{< version-v1 key="sample_sc_pflex" >}}.yaml). Modify if needed.
 
     [OR]
 
-    b. **Detailed Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powerflex_{{< version-v1 key="sample_sc_pflex" >}}.yaml) for detailed settings.
+    b. **Detailed Configuration:** Use the [sample file](https://github.com/dell/csm-operator/tree/release/{{< version-v1 key="csm-operator_latest_version" >}}/samples/storage_csm_powerflex_{{< version-v1 key="sample_sc_pflex" >}}.yaml) for detailed settings.
 
 - Configure the parameters in the CR. The table below lists the primary configurable parameters of the PowerFlex driver and their default values:
 <ul>
@@ -164,6 +164,7 @@ run `/opt/emc/scaleio/sdc/bin/drv_cfg --add_mdm --ip 10.xx.xx.xx.xx,10.xx.xx.xx`
    |<div style="text-align: left"> CSI_LOG_LEVEL |<div style="text-align: left"> Sets the logging level of the driver. | No | INFO |
    |<div style="text-align: left"> GOSCALEIO_DEBUG |<div style="text-align: left"> Enable/Disable goscaleio library-level debugging. | No | false |
    |<div style="text-align: left"> GOSCALEIO_SHOWHTTP |<div style="text-align: left"> Enable/Disable goscaleio library-level REST request logging. Enabling will also **enable** GOSCALEIO_DEBUG regardless of GOSCALEIO_DEBUG setting. | No | false |
+   |<div style="text-align: left"> X_CSI_PROBE_TIMEOUT |<div style="text-align: left"> Specify the timeout limit for controller and node to communicate with the array. | No | "10s" |
    |<div style="text-align: left"> ***Controller parameters*** |
    |<div style="text-align: left"> X_CSI_POWERFLEX_EXTERNAL_ACCESS |<div style="text-align: left"> allows specifying additional entries for hostAccess of NFS volumes. Both single IP address and subnet are valid entries | No | empty |
    |<div style="text-align: left"> X_CSI_HEALTH_MONITOR_ENABLED |<div style="text-align: left"> Enable/Disable health monitor of CSI volumes from Controller plugin - volume condition | No | false |
