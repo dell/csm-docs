@@ -424,7 +424,6 @@ All OpenShift nodes connecting to Dell storage arrays must use unique host NVMe 
 
 Once the NVMe endpoint is created on the array, follow the following steps to
 update the endpoint name to adhere to the CSI driver requirements.
-
 - Run `nvme discover --transport=tcp --traddr=<InterfaceAdd> --trsvcid=4420`.
   <InterfaceAdd> is the placeholder for actual IP address of NVMe Endpoint.
 - Fetch the _subnqn_, for e.g.,

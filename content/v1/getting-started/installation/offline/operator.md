@@ -25,7 +25,7 @@ On a Linux system with Internet access:
 
 1. Clone the required `csm-operator` version:
 ```bash
-git clone -b v1.9.0 https://github.com/dell/csm-operator.git
+git clone -b {{< version-v1 key="csm-operator_latest_version" >}} https://github.com/dell/csm-operator.git
 cd csm-operator
 ```
 

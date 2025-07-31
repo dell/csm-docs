@@ -12,7 +12,7 @@ weight: 2
 {{% /pageinfo %}}
 
 <hr>
-ℹ️See <a href="/csm-docs/docs/release/#notifications">Release Notes</a> for general and deprecation notices.
+ℹ️See <a href="/csm-docs/v1/release/#notifications">Release Notes</a> for general and deprecation notices.
 <hr>
 <br>
 

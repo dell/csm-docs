@@ -192,7 +192,7 @@ Here is the output of a request to build an offline bundle for the Dell CSM Oper
    quay.io/dell/container-storage-modules/csi-powermax:v2.13.0
    quay.io/dell/container-storage-modules/csi-powerstore:v2.13.0
    quay.io/dell/container-storage-modules/csi-unity:v2.13.0
-   quay.io/dell/container-storage-modules/csi-vxflexos:v2.13.0
+   quay.io/dell/container-storage-modules/csi-vxflexos:v2.13.1
    quay.io/dell/container-storage-modules/csm-authorization-sidecar:v1.13.0
    quay.io/dell/container-storage-modules/csm-metrics-powerflex:v1.11.0
    quay.io/dell/container-storage-modules/csm-metrics-powerscale:v1.8.0

@@ -7,7 +7,7 @@ weight: 1
 {{<table "table table-striped table-bordered table-sm">}}
 | Component | Image Version |
 | - | - |
-|<div style="text-align:left">  PowerFlex | v2.13.0 |
+|<div style="text-align:left">  PowerFlex | v2.13.2 |
 |<div style="text-align:left">  PowerStore | v2.13.0 |
 |<div style="text-align:left">  PowerMax | v2.13.0 |
 |<div style="text-align:left">  PowerScale | v2.13.0 |

@@ -164,6 +164,7 @@ run `/opt/emc/scaleio/sdc/bin/drv_cfg --add_mdm --ip 10.xx.xx.xx.xx,10.xx.xx.xx`
    |<div style="text-align: left"> CSI_LOG_LEVEL |<div style="text-align: left"> Sets the logging level of the driver. | No | INFO |
    |<div style="text-align: left"> GOSCALEIO_DEBUG |<div style="text-align: left"> Enable/Disable goscaleio library-level debugging. | No | false |
    |<div style="text-align: left"> GOSCALEIO_SHOWHTTP |<div style="text-align: left"> Enable/Disable goscaleio library-level REST request logging. Enabling will also **enable** GOSCALEIO_DEBUG regardless of GOSCALEIO_DEBUG setting. | No | false |
+   |<div style="text-align: left"> X_CSI_PROBE_TIMEOUT |<div style="text-align: left"> Specify the timeout limit for controller and node to communicate with the array. | No | "10s" |
    |<div style="text-align: left"> ***Controller parameters*** |
    |<div style="text-align: left"> X_CSI_POWERFLEX_EXTERNAL_ACCESS |<div style="text-align: left"> allows specifying additional entries for hostAccess of NFS volumes. Both single IP address and subnet are valid entries | No | empty |
    |<div style="text-align: left"> X_CSI_HEALTH_MONITOR_ENABLED |<div style="text-align: left"> Enable/Disable health monitor of CSI volumes from Controller plugin - volume condition | No | false |

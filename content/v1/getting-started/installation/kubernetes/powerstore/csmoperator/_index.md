@@ -81,11 +81,11 @@ To deploy the Operator, follow the instructions available [here](../../../operat
       configVersion: {{< version-v1 key="PStore_latestVersion" >}}
       forceRemoveDriver: true
    ```
-     [sample file](https://github.com/dell/csm-operator/blob/main/samples/minimal-samples/powerstore_{{< version-v1 key="Min_sample_operator_pstore" >}}.yaml) for default settings. Modify if needed.
+     [sample file](https://github.com/dell/csm-operator/tree/release/{{< version-v1 key="csm-operator_latest_version" >}}/samples/minimal-samples/powerstore_{{< version-v1 key="Min_sample_operator_pstore" >}}.yaml) for default settings. Modify if needed.
 
     [OR]
 
-    b. **Detailed Configuration:**  [sample file](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powerstore_{{< version-v1 key="Det_sample_operator_pstore" >}}.yaml) for detailed settings or use [Wizard](./installationwizard#generate-manifest-file) to generate the sample file.
+    b. **Detailed Configuration:**  [sample file](https://github.com/dell/csm-operator/tree/release/{{< version-v1 key="csm-operator_latest_version" >}}/samples/storage_csm_powerstore_{{< version-v1 key="Det_sample_operator_pstore" >}}.yaml) for detailed settings or use [Wizard](./installationwizard#generate-manifest-file) to generate the sample file.
 
    - Users should configure the parameters in CR. The following table lists the primary configurable parameters of the PowerStore driver and their default values:
 
@@ -162,7 +162,7 @@ To deploy the Operator, follow the instructions available [here](../../../operat
    apiVersion: snapshot.storage.k8s.io/v1
    kind: VolumeSnapshotClass
    metadata:
-     name: powerstore-snapshot
+   name: powerstore-snapshot
    driver: "csi-powerstore.dellemc.com"
    deletionPolicy: Delete
    ````

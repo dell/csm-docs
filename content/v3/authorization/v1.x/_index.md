@@ -12,7 +12,6 @@ tags:
 {{< message text="5" >}}
 {{% /pageinfo %}}
 
-
 ## CSM for Authorization Capabilities
 {{<table "table table-striped table-bordered table-sm">}}
 | Feature | PowerFlex | PowerMax | PowerScale | Unity XT | PowerStore |
@@ -61,4 +60,3 @@ Tenants of CSM for Authorization can use the token provided by the Storage Admin
 3) Storage Admin returns a token to the Tenant Admin.
 4) Tenant Admin inputs the Token into their Kubernetes cluster as a Secret.
 5) Tenant Admin updates CSI driver with CSM Authorization sidecar module.
-
