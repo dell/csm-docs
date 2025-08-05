@@ -66,10 +66,10 @@ jobs:
           sed -i "s/milestone: \(.*\)*/milestone: \"$MILESTONE\"/g" config.yaml
 
           # Generate the release notes.
-          ./bin/csm-change-log generate --release-notes
+          ./bin/csm-change-log generate
 
           # Update release notes.
-          ./bin/csm-change-log update --contentPath out/area --docsPath ../csm-docs
+          ./bin/csm-change-log update --contentPath out/ --docsPath ../csm-docs
 
           # Clean up change-log directory.
           cd ../
@@ -94,4 +94,3 @@ jobs:
             Update the Release Notes to include features and bug fixes.
           sign-commits: true
           delete-branch: true
-          draft: true
