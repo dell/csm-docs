@@ -775,8 +775,8 @@ node:
   approveSDC:
     # enabled: Enable/Disable SDC approval
     #Allowed values:
-    #  true: Driver will attempt to approve restricted SDC by GUID during setup
-    #  false: Driver will not attempt to approve restricted SDC by GUID during setup
+    #  true: Driver will enable SDC approval based on either GUID or IP address, depending on the restricted SDC mode configured in PowerFlex system
+    #  false: Driver will disable SDC approval based on either GUID or IP address, depending on the restricted SDC mode configured in PowerFlex system
     # Default value: false
     enabled: false
 ```
