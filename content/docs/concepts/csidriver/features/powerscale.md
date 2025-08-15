@@ -289,7 +289,7 @@ spec:
 
 ## Controller HA
 
-CSI PowerScale driver version 1.4.0 and later supports running multiple replicas of the controller pod. Leader election is only applicable for all sidecar containers and driver container will be running in all controller pods. In case of a failure, one of the standby pods becomes active and takes the position of leader. This is achieved by using native leader election mechanisms utilizing `kubernetes leases`.
+CSI PowerScale driver version 1.4.0 and later supports running multiple replicas of the controller pod. Leader election is only applicable for all sidecar containers and driver containers that are running in all controller pods. In case of a failure, one of the standby pods becomes active and takes the position of leader. This is achieved by using native leader election mechanisms utilizing `kubernetes leases`.
 
 Additionally by leveraging `pod anti-affinity`, no two-controller pods are ever scheduled on the same node.
 
@@ -674,7 +674,7 @@ The permissions for volume directory can now be configured in 3 ways:
 
 The permissions present in values.yaml are the default for all cluster config.
 
-If the volume permission is not present in storage class then secrets are considered and if it is not present even in secrets then values.yaml is considered.
+If the volume permission is not present in storage class then secrets are considered. If it is not present even in secrets then values.yaml is considered.
 
 >**Note:** <br>For volume creation from source (volume from snapshot/volume from volume) permissions are inherited from source. <br><br>Create myvalues.yaml/my-isilon-settings.yaml and storage class accordingly.
 
