@@ -17,7 +17,7 @@ You can connect a single CSI-PowerScale driver with multiple PowerScale clusters
 
 ## Consuming existing volumes with static provisioning
 
-You can use existing volumes from the PowerScale array as Persistent Volumes in your Kubernetes, perform the following steps:
+To use existing volumes from the PowerScale array as Persistent Volumes in your Kubernetes, perform the following steps:
 
 1. Open your volume in One FS, and take a note of volume-id.
 2. Create PersistentVolume and use this volume-id as a volumeHandle in the manifest. Modify other parameters according to your needs.
@@ -422,7 +422,7 @@ mountOptions: ["<mountOption1>", "<mountOption2>", ..., "<mountOptionN>"]
 
 For additional information, see the [Kubernetes Topology documentation](https://kubernetes-csi.github.io/docs/topology.html).
 
-## Custom network for NFS I/O traffic
+## Custom networks for NFS I/O traffic
 
 When allowedNetworks is specified for using custom networks to handle NFS traffic, and a user already
 has workloads scheduled, there is a possibility that it might lead to backward compatibility issues. For example, ControllerUnPublish might not be able to completely remove clients from the NFS exports of previously created pods.
@@ -489,7 +489,7 @@ If such a node is not available, the pods stay in Pending state. This means pods
 
 Without storage capacity tracking, pods get scheduled on a node satisfying the topology constraints. If the required capacity is not available, volume attachment to the pods fails, and pods remain in ContainerCreating state. Storage capacity tracking eliminates unnecessary scheduling of pods when there is insufficient capacity.
 
-The attribute `storageCapacity.enabled` in `values.yaml` can be used to enable/disable the feature during driver installation using helm. This is by default set to true. To configure how often driver checks for changed capacity set `storageCapacity.pollInterval` attribute. In case of driver installed via operator, this interval can be configured in the sample file provided [here.](<https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powerscale_{{>< version-docs key="sample_sc_pscale" >}}.yaml) by editing the `--capacity-poll-interval` argument present in the provisioner sidecar.
+The attribute `storageCapacity.enabled` in `values.yaml` can be used to enable/disable the feature during driver installation using helm. This is by default set to true. To configure how often driver checks for changed capacity set `storageCapacity.pollInterval` attribute. In case of driver installed via operator, this interval can be configured in the sample file provided [here.](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powerscale_{{< version-docs key="sample_sc_pscale" >}}.yaml) by editing the `--capacity-poll-interval` argument present in the provisioner sidecar.
 
 ## Node selector in helm template
 
