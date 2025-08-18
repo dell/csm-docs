@@ -763,7 +763,7 @@ Based on these two keys, there are certain scenarios on which the driver is goin
 Starting with version 2.15, the CSI Driver for PowerFlex will support pre-approving SDC by either GUID or IP address.
 CSI PowerFlex driver will detect the SDC mode set on the PowerFlex array and will request SDC approval from the array prior to publishing a volume. This is specific to each SDC.
 
-To request SDC approval either by bGUID or IP address, make the following edits to [values.yaml](https://github.com/dell/helm-charts/blob/main/charts/csi-vxflexos/values.yaml) file:
+To request SDC approval either by GUID or IP address, make the following edits to [values.yaml](https://github.com/dell/helm-charts/blob/main/charts/csi-vxflexos/values.yaml) file:
 ```yaml
 # "node" allows to configure node specific parameters
 node:
