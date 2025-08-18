@@ -758,12 +758,12 @@ Based on these two keys, there are certain scenarios on which the driver is goin
 
 > ℹ️ **NOTE:** : name of the SDC cannot be more than 31 characters, hence the prefix given and the worker node hostname name taken should be such that the total length does not exceed 31 character limit. 
 
-## Pre-approving SDC by GUID
+## Pre-approving SDC
 
-Starting with version 2.6, the CSI Driver for PowerFlex will support pre-approving SDC by GUID.
+Starting with version 2.15, the CSI Driver for PowerFlex will support pre-approving SDC by either GUID or IP address.
 CSI PowerFlex driver will detect the SDC mode set on the PowerFlex array and will request SDC approval from the array prior to publishing a volume. This is specific to each SDC.
 
-To request SDC approval for GUID, make the following edits to [values.yaml](https://github.com/dell/helm-charts/blob/main/charts/csi-vxflexos/values.yaml) file:
+To request SDC approval either by GUID or IP address, make the following edits to [values.yaml](https://github.com/dell/helm-charts/blob/main/charts/csi-vxflexos/values.yaml) file:
 ```yaml
 # "node" allows to configure node specific parameters
 node:
@@ -775,8 +775,8 @@ node:
   approveSDC:
     # enabled: Enable/Disable SDC approval
     #Allowed values:
-    #  true: Driver will attempt to approve restricted SDC by GUID during setup
-    #  false: Driver will not attempt to approve restricted SDC by GUID during setup
+    #  true: Driver will enable SDC approval based on either GUID or IP address, depending on the restricted SDC mode configured in PowerFlex system
+    #  false: Driver will disable SDC approval based on either GUID or IP address, depending on the restricted SDC mode configured in PowerFlex system
     # Default value: false
     enabled: false
 ```
