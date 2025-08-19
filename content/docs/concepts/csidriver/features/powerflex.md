@@ -676,14 +676,17 @@ If either option is set to a value outside of what is supported, the driver will
 Starting in version 2.1, CSI Driver for PowerFlex now supports volume health monitoring. This allows Kubernetes to report on the condition of the underlying volumes via events when a volume condition is abnormal. For example, if a volume were to be deleted from the array, or unmounted outside of Kubernetes, Kubernetes will now report these abnormal conditions as events.  
 
 To accomplish this, the driver utilizes the external-health-monitor sidecar. When driver detects a volume condition is abnormal, the sidecar will report an event to the corresponding PVC. For example, in this event from `kubectl describe pvc -n <ns>` we can see that the underlying volume was deleted from the PowerFlex array:
-```
+
+```text
 Events:
   Type     Reason                     Age                 From                                                         Message
   ----     ------                     ----                ----                                                         ------
   Warning  VolumeConditionAbnormal    32s                 csi-pv-monitor-controller-csi-vxflexos.dellemc.com           Volume is not found at 2021-11-03 20:31:04
 ```
+
 Events will also be reported to pods that have abnormal volumes. In these two events from `kubectl describe pods -n <ns>`, we can see that this pod has two abnormal volumes: one volume was unmounted outside of Kubernetes, while another was deleted from PowerFlex array.
-```
+
+```text
 Events:
   Type     Reason                     Age                 From         Message
   ----     ------                     ----                ----         ------
@@ -975,7 +978,7 @@ Starting from Container Storage Modules 1.12.0, the CSI PowerFlex driver support
 To disable SDC deployment, update the values file and provide the interface names mapping for each of the nodes that are being used.
 
 **Helm**
-```
+```yaml
 node:
   ...
   sdc:
@@ -989,7 +992,7 @@ interfaceNames:
 ```
 
 **Operator**
-```
+```yaml
 common:
 ...
   - name: INTERFACE_NAMES: 'worker-1-jxsjoueeewabc.domain: "ens192", worker-2-jxsjoueeewabc.domain: "ens192"'
@@ -1008,7 +1011,7 @@ If such a node is not available, the pods stay in Pending state. This means pods
 
 Without storage capacity tracking, pods get scheduled on a node satisfying the topology constraints. If the required capacity is not available, volume attachment to the pods fails, and pods remain in ContainerCreating state. Storage capacity tracking eliminates unnecessary scheduling of pods when there is insufficient capacity.
 
-The attribute `storageCapacity.enabled` in `values.yaml` can be used to enable/disable the feature during driver installation using helm. This is by default set to true. To configure how often the driver checks for changed capacity set `storageCapacity.pollInterval` attribute. In case of driver installed via operator, this interval can be configured in the sample file provided [here](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powerflex_{{< version-docs key="sample_sc_pflex" >}}.yaml) by editing the `--capacity-poll-interval` argument present in the provisioner sidecar.
+The attribute `storageCapacity.enabled` in `values.yaml` can be used to enable/disable the feature during driver installation using helm. This is by default set to true. To configure how often the driver checks for changed capacity set `storageCapacity.pollInterval` attribute. In case of driver installed via operator, this interval can be configured in the sample file provided [here](https://github.com/dell/csm-operator/blob/main/samples/{{< version-docs key="csm-operator_latest_samples_dir" >}}/storage_csm_powerflex_{{< version-docs key="Det_sample_operator_pflex" >}}.yaml) by editing the `--capacity-poll-interval` argument present in the provisioner sidecar.
 
 ## Multiple Availability Zones
 PowerFlex CSI driver version 2.13.0 and above supports multiple Availability Zones for Block. NFS is not supported at this time.
@@ -1026,7 +1029,7 @@ Requirements:
 The example manifests below illustrate how to configure two PowerFlex systems, with each system assigned to its own zone. Zone labels can have any custom key, but it must be consistent across the StorageClass, Secret, and Node labels.
 
 #### Labeling Worker Nodes
-```
+```bash
 # Label each worker node in the cluster
 kubectl label nodes worker-1 topology.kubernetes.io/zone=zone1
 kubectl label nodes worker-2 topology.kubernetes.io/zone=zone1
@@ -1118,14 +1121,12 @@ If a matching pre-compiled module or the kernel module from SFTP repository is n
 
 Enable the SFTP repository settings by enabling the SDC SFTP Repo and configuring the SFTP repository address, username, and secret.
 
-
  *NOTE:*
 - Exposing SFTP settings to automatically pull scini.ko modules is only available for SDC 3.6.5 and 4.5.4
 - Ensure that sdcrepo-private-secret and sdcrepo-public-secret are created from the secrets file. 
-```
+```bash
 kubectl create secret generic sdcsftprepo-private-secret -n vxflexos --from-file=user_private_rsa_key=sftp-secret-private.crt
 kubectl create secret generic sdcsftprepo-public-secret -n vxflexos --from-file=repo_public_rsa_key=sftp-secret-public.crt
-
 ```
 - Private key of SFTP server should be obtained and public key should be pulled from known hosts after logging in to server via private key. 
 - The secrets should have permissions set to 600 to ensure security and proper access control. Setting permissions to 600 ensures that only the owner has read and write access, preventing unauthorized users from accessing or modifying the secrets.
