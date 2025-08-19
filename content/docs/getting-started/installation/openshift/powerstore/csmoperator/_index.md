@@ -568,5 +568,9 @@ NAME                    STATUS   VOLUME             CAPACITY   ACCESS MODES   ST
 
     {{< customcard link1="./csm-modules/resiliency"   image="1" title="Resiliency"  >}}
 
+    {{< customcard link1="./csm-modules/replication"   image="1" title="Replication"  >}}
+
+    {{< customcard link1="./csm-modules/observability"   image="1" title="Observability"  >}}
+
 {{< /cardcontainer >}}
 {{< /accordion >}}
