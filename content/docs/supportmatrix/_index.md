@@ -9,13 +9,10 @@ weight: 1
 ## Storage Platforms
 
 {{<table "table table-striped table-bordered table-sm tdleft">}}
-| Platform    | Version                                                | OS Dependencies |
-| ----------- | :----------------------------------------------------: | :-------------: |
-| PowerStore  | 3.5, 3.6, 4.0, 4.1                                     | iscsi-initiator-utils<br>multipathd<br>nvme-cli<br>nfs-utils |
-| PowerScale  | OneFS 9.4, 9.5.0.x (x >= 5), 9.7, 9.8, 9.9, 9.10, 9.11 | nfs-utils |
-| PowerFlex   | 3.6.x, 4.5.x, 4.6.x                                    | [SDC](https://www.dell.com/support/home/en-us/product-support/product/scaleio/drivers) |
-| PowerMax    | Unisphere 10.0, 10.1, 10.2                             | iscsi-initiator-utils<br>multipathd or powerpath<br>nvme-cli<br>nfs-utils |
-| Unity XT    | 5.3.x, 5.4.x, 5.5                                      | iscsi-initiator-utils<br>multipathd<br>nfs-utils |
+| Prerequisites    | PowerStore         | PowerScale | PowerFlex | PowerMax | Unity XT |
+| :--------------: | :----------------: | :--------: | :-------: | :------: | :------: |
+| Version          | 3.5, 3.6, 4.0, 4.1 | OneFS 9.4, 9.5.0.x (x >= 5),<br>9.7, 9.8, 9.9, 9.10, 9.11 | 3.6.x, 4.5.x, 4.6.x  | Unisphere 10.0, 10.1, 10.2 | 5.3.x, 5.4.x, 5.5 |
+| OS Dependencies  | iscsi-initiator-utils<br>multipathd<br>nvme-cli<br>nfs-utils | nfs-utils | [SDC](https://www.dell.com/support/home/en-us/product-support/product/scaleio/drivers) | iscsi-initiator-utils<br>multipathd or powerpath<br>nvme-cli<br>nfs-utils | iscsi-initiator-utils<br>multipathd<br>nfs-utils |
 {{</table>}}
 
 **Notes:**
@@ -107,15 +104,6 @@ Container Storage Modules doesn't officially support specific operating systems,
 {{<table "table table-striped table-bordered table-sm">}}
 | Wizard   | PowerStore | PowerScale | PowerFlex | PowerMax | Unity XT |
 | -------- | ---------- |------------|-----------|----------|----------|
-| Helm     | ✅        |  ✅        | ✅       | ✅       | ❌      |
-| Operator | ✅        |  ✅        | ❌       | ✅       | ❌      |
-{{</table>}}
-
-### Modules
-{{<table "table table-striped table-bordered table-sm tdleft">}}
-| Container Storage Modules |
-| -----------------|
-| Replication      |
-| Observability    |
-| Resiliency       |
+| Helm     | ✅         |  ✅        | ✅       | ✅       | ❌      |
+| Operator | ✅         |  ✅        | ❌       | ✅       | ❌      |
 {{</table>}}
