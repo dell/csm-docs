@@ -30,11 +30,11 @@ Accordingly,Resiliency is adapted to and qualified with each CSI driver it is to
 Container Storage Modules for Resiliency provides the following capabilities:
 
 {{<table "table table-striped table-bordered table-sm">}}
-| Capability                              | PowerStore | PowerScale | PowerFlex |  PowerMax | Unity XT |
-| --------------------------------------- | :--------: | :------: | :--------: | :-------:  | :------: |
+| Capability                                                             | PowerStore | PowerScale | PowerFlex |  PowerMax | Unity XT |
+| ---------------------------------------------------------------------- | :--------: | :------: | :--------: | :-------:  | :------: |
 | <div style="text-align: left"> Detect pod failures when: Node failure, K8S Control Plane Network failure, </br> K8S Control Plane failure, Array I/O Network failure | ✅  | ✅ | ✅ | ✅ | ✅ |
-| <div style="text-align: left"> Cleanup pod artifacts from failed nodes | ✅         | ✅   | ✅         | ✅       | ✅       |
-| <div style="text-align: left"> Revoke PV access from failed nodes      | ✅         | ✅   | ✅         | ✅       | ✅       |
+| <div style="text-align: left"> Cleanup pod artifacts from failed nodes | ✅         | ✅      | ✅         | ✅       | ✅       |
+| <div style="text-align: left"> Revoke PV access from failed nodes      | ✅         | ✅      | ✅         | ✅       | ✅       |
 {{</table>}}
 
 ## PowerFlex Support
