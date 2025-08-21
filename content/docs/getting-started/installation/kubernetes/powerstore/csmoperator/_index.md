@@ -193,6 +193,10 @@ The driver and modules versions installable with the Container Storage Modules O
 
 {{< customcard link1="./csm-modules/resiliency"   image="6" title="Resiliency"  >}}
 
+{{< customcard link1="./csm-modules/replication"   image="6" title="Replication"  >}}
+
+{{< customcard link1="./csm-modules/observability"   image="6" title="Observability"  >}}
+
 {{< /cardcontainer >}}
 
 {{< /accordion >}}
