@@ -29,8 +29,8 @@ A Kubernetes or OpenShift cluster (see supported versions). A PowerMax system ma
   <meta name="twitter:title" content="Prerequisite">
   <meta name="twitter:description" content="The following requirements must be met before installing the CSI Driver for PowerMax:
 A Kubernetes or OpenShift cluster (see supported versions). A PowerMax system managed by a Unisphere instance with software version 10.0 or later. If enabling CSM for Authorization, please refer to the Authorization deployment steps first If enabling CSM Replication, both source and target storage systems must be locally managed by Unisphere. Example: When using two Unisphere instances, the first Unisphere instance should be configured with the source storage system as locally managed and target storage system as remotely managed. The second Unisphere configuration should mirror the first — locally managing the target storage system and remotely managing the source storage system. Refer to the sections below for protocol specific requirements. For NVMe support the preferred multipath solution is NVMe native multipathing. The Dell Host Connectivity Guide describes the details of each configuration option. Linux multipathing requirements (described later). PowerPath for Linux requirements (described later). Mount propagation is enabled on the container runtime that is being used. If using Snapshot feature, satisfy all Volume Snapshot requirements. Insecure registries are defined in Docker or other container runtime for CSI drivers that are hosted in a non-secure location. Ensure that your nodes support mounting NFS volumes if using NFS. Auto RDM for vSphere over FC requirements CSI PowerMax Reverse Proxy The CSI PowerMax Reverse Proxy is a component that will be installed with the CSI PowerMax driver. For more details on this feature, see the related documentation.">
-<link rel="preload" href="/csm-docs/scss/main.min.e7545a059fd5aae4ec208e1d6f1035f1f3d13bb652f75b2bdb72aa84e1998b74.css" as="style" integrity="sha256-51RaBZ/VquTsII4dbxA18fPRO7ZS91sr23KqhOGZi3Q=" crossorigin="anonymous">
-<link href="/csm-docs/scss/main.min.e7545a059fd5aae4ec208e1d6f1035f1f3d13bb652f75b2bdb72aa84e1998b74.css" rel="stylesheet" integrity="sha256-51RaBZ/VquTsII4dbxA18fPRO7ZS91sr23KqhOGZi3Q=" crossorigin="anonymous">
+<link rel="preload" href="/csm-docs/scss/main.min.f92a0a6117d1afe6ee159a45ce4364a8613c79ec6601d7023c09be115507944b.css" as="style" integrity="sha256-&#43;SoKYRfRr&#43;buFZpFzkNkqGE8eexmAdcCPAm&#43;EVUHlEs=" crossorigin="anonymous">
+<link href="/csm-docs/scss/main.min.f92a0a6117d1afe6ee159a45ce4364a8613c79ec6601d7023c09be115507944b.css" rel="stylesheet" integrity="sha256-&#43;SoKYRfRr&#43;buFZpFzkNkqGE8eexmAdcCPAm&#43;EVUHlEs=" crossorigin="anonymous">
 <script
   src="https://code.jquery.com/jquery-3.7.1.min.js"
   integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
@@ -77,10 +77,10 @@ A Kubernetes or OpenShift cluster (see supported versions). A PowerMax system ma
       
     
     
-    1.14.1
+    1.14.2
   </a>
   <ul class="dropdown-menu">
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/" >1.14.1</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/" >1.14.2</a></li>
     <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1/" >1.13.2</a></li>
     <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v2/" >1.12.0</a></li>
     <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v3/" >1.11.1</a></li>
@@ -207,7 +207,7 @@ A Kubernetes or OpenShift cluster (see supported versions). A PowerMax system ma
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.76dfa577983073c1083158313c596bed.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.012a1dbe171b6daf775ce84666a8254d.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >

@@ -17,17 +17,17 @@
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="v1">
-    <meta property="article:modified_time" content="2025-07-28T16:30:00-04:00">
+    <meta property="article:modified_time" content="2025-08-22T13:44:38-04:00">
 
   <meta itemprop="name" content="PowerFlex">
   <meta itemprop="description" content="Release notes for PowerFlex CSI driver">
-  <meta itemprop="dateModified" content="2025-07-28T16:30:00-04:00">
-  <meta itemprop="wordCount" content="795">
+  <meta itemprop="dateModified" content="2025-08-22T13:44:38-04:00">
+  <meta itemprop="wordCount" content="841">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="PowerFlex">
   <meta name="twitter:description" content="Release notes for PowerFlex CSI driver">
-<link rel="preload" href="/csm-docs/scss/main.min.e7545a059fd5aae4ec208e1d6f1035f1f3d13bb652f75b2bdb72aa84e1998b74.css" as="style" integrity="sha256-51RaBZ/VquTsII4dbxA18fPRO7ZS91sr23KqhOGZi3Q=" crossorigin="anonymous">
-<link href="/csm-docs/scss/main.min.e7545a059fd5aae4ec208e1d6f1035f1f3d13bb652f75b2bdb72aa84e1998b74.css" rel="stylesheet" integrity="sha256-51RaBZ/VquTsII4dbxA18fPRO7ZS91sr23KqhOGZi3Q=" crossorigin="anonymous">
+<link rel="preload" href="/csm-docs/scss/main.min.f92a0a6117d1afe6ee159a45ce4364a8613c79ec6601d7023c09be115507944b.css" as="style" integrity="sha256-&#43;SoKYRfRr&#43;buFZpFzkNkqGE8eexmAdcCPAm&#43;EVUHlEs=" crossorigin="anonymous">
+<link href="/csm-docs/scss/main.min.f92a0a6117d1afe6ee159a45ce4364a8613c79ec6601d7023c09be115507944b.css" rel="stylesheet" integrity="sha256-&#43;SoKYRfRr&#43;buFZpFzkNkqGE8eexmAdcCPAm&#43;EVUHlEs=" crossorigin="anonymous">
 <script
   src="https://code.jquery.com/jquery-3.7.1.min.js"
   integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
@@ -76,7 +76,7 @@
     1.13.2
   </a>
   <ul class="dropdown-menu">
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/" >1.14.1</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/" >1.14.2</a></li>
     <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1/" >1.13.2</a></li>
     <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v2/" >1.12.0</a></li>
     <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v3/" >1.11.1</a></li>
@@ -203,7 +203,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.76dfa577983073c1083158313c596bed.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.012a1dbe171b6daf775ce84666a8254d.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -2695,6 +2695,36 @@ Release Notes - CSI PowerFlex v2.13.2 <a class="header-link"  href="#release-not
                 <path d="M0 0h24v24H0z" fill="none"/>
                 <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
             </svg>
+        </a></h2><h3 id="fixed-issues">
+Fixed Issues <a class="header-link"  href="#fixed-issues" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
+            <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 0h24v24H0z" fill="none"/>
+                <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
+            </svg>
+        </a></h3><ul>
+<li><a href="https://github.com/dell/csm/issues/1956">#1956 - [BUG]: Make probe-retry in Powerflex driver configurable</a> - Applies to a limited use case on the PowerFlex platform when deployed via Helm. Full support for both Operator and Helm deployments will be available in the 1.14.1 release.</li>
+</ul>
+<h2 id="release-notes---csi-powerflex-v2131">
+Release Notes - CSI PowerFlex v2.13.1 <a class="header-link"  href="#release-notes---csi-powerflex-v2131" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
+            <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 0h24v24H0z" fill="none"/>
+                <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
+            </svg>
+        </a></h2><h3 id="fixed-issues-1">
+Fixed Issues <a class="header-link"  href="#fixed-issues-1" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
+            <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 0h24v24H0z" fill="none"/>
+                <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
+            </svg>
+        </a></h3><ul>
+<li><a href="https://github.com/dell/csm/issues/1782">#1782 - [BUG]: Pods Stuck in Terminating State After PowerFlex CSI Node Pod Restart When Deployments Share Same Node</a></li>
+</ul>
+<h2 id="release-notes---csi-powerflex-v2130">
+Release Notes - CSI PowerFlex v2.13.0 <a class="header-link"  href="#release-notes---csi-powerflex-v2130" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
+            <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 0h24v24H0z" fill="none"/>
+                <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
+            </svg>
         </a></h2><h3 id="new-featureschanges">
 New Features/Changes <a class="header-link"  href="#new-featureschanges" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
             <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
@@ -2707,8 +2737,8 @@ New Features/Changes <a class="header-link"  href="#new-featureschanges" style="
 <li><a href="https://github.com/dell/csm/issues/1612">#1612 - [FEATURE]: Multi-Availability Zone (AZ) support with multiple storage systems - dedicated storage systems in each AZ</a></li>
 <li><a href="https://github.com/dell/csm/issues/1613">#1613 - [FEATURE]: CSI PowerFlex must have the ability to connect a subset of the worker nodes to a storage array for multi-array support</a></li>
 </ul>
-<h3 id="fixed-issues">
-Fixed Issues <a class="header-link"  href="#fixed-issues" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
+<h3 id="fixed-issues-2">
+Fixed Issues <a class="header-link"  href="#fixed-issues-2" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
             <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
                 <path d="M0 0h24v24H0z" fill="none"/>
                 <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
@@ -2719,8 +2749,6 @@ Fixed Issues <a class="header-link"  href="#fixed-issues" style=" display: inlin
 <li><a href="https://github.com/dell/csm/issues/1639">#1639 - [BUG]: CSM PowerFlex entering boot loop when array has long response times</a></li>
 <li><a href="https://github.com/dell/csm/issues/1641">#1641 - [BUG]: NodeGetVolumeStats will cause panic when called w/ an Ephemeral volume </a></li>
 <li><a href="https://github.com/dell/csm/issues/1667">#1667 - [BUG]: Labels versions and maintainer update for CSM images </a></li>
-<li><a href="https://github.com/dell/csm/issues/1782">#1782 - [BUG]: Pods Stuck in Terminating State After PowerFlex CSI Node Pod Restart When Deployments Share Same Node</a></li>
-<li><a href="https://github.com/dell/csm/issues/1956">#1956 - [BUG]: Make probe-retry in Powerflex driver configurable</a></li>
 </ul>
 <h3 id="known-issues">
 Known Issues <a class="header-link"  href="#known-issues" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
