@@ -20,13 +20,13 @@
 
   <meta itemprop="name" content="Release Notes">
   <meta itemprop="description" content="Container Storage Modules release notes">
-  <meta itemprop="dateModified" content="2025-07-30T19:48:56+05:30">
-  <meta itemprop="wordCount" content="3076">
+  <meta itemprop="dateModified" content="2025-08-22T13:44:38-04:00">
+  <meta itemprop="wordCount" content="3121">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Release Notes">
   <meta name="twitter:description" content="Container Storage Modules release notes">
-<link rel="preload" href="/csm-docs/scss/main.min.e7545a059fd5aae4ec208e1d6f1035f1f3d13bb652f75b2bdb72aa84e1998b74.css" as="style" integrity="sha256-51RaBZ/VquTsII4dbxA18fPRO7ZS91sr23KqhOGZi3Q=" crossorigin="anonymous">
-<link href="/csm-docs/scss/main.min.e7545a059fd5aae4ec208e1d6f1035f1f3d13bb652f75b2bdb72aa84e1998b74.css" rel="stylesheet" integrity="sha256-51RaBZ/VquTsII4dbxA18fPRO7ZS91sr23KqhOGZi3Q=" crossorigin="anonymous">
+<link rel="preload" href="/csm-docs/scss/main.min.f92a0a6117d1afe6ee159a45ce4364a8613c79ec6601d7023c09be115507944b.css" as="style" integrity="sha256-&#43;SoKYRfRr&#43;buFZpFzkNkqGE8eexmAdcCPAm&#43;EVUHlEs=" crossorigin="anonymous">
+<link href="/csm-docs/scss/main.min.f92a0a6117d1afe6ee159a45ce4364a8613c79ec6601d7023c09be115507944b.css" rel="stylesheet" integrity="sha256-&#43;SoKYRfRr&#43;buFZpFzkNkqGE8eexmAdcCPAm&#43;EVUHlEs=" crossorigin="anonymous">
 <script
   src="https://code.jquery.com/jquery-3.7.1.min.js"
   integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
@@ -73,10 +73,10 @@
       
     
     
-    1.14.1
+    1.14.2
   </a>
   <ul class="dropdown-menu">
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/" >1.14.1</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/" >1.14.2</a></li>
     <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1/" >1.13.2</a></li>
     <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v2/" >1.12.0</a></li>
     <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v3/" >1.11.1</a></li>
@@ -203,7 +203,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.76dfa577983073c1083158313c596bed.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.012a1dbe171b6daf775ce84666a8254d.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -3987,14 +3987,46 @@ As of Container Storage Modules v1.16, the CSI PowerMax array ConfigMap will not
 
 </li>
 </ul></blockquote>
-<h2 id="release-notes-for-v1141">
-Release Notes for v1.14.1 <a class="header-link"  href="#release-notes-for-v1141" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
+<h2 id="release-notes-for-v1142">
+Release Notes for v1.14.2 <a class="header-link"  href="#release-notes-for-v1142" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
             <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
                 <path d="M0 0h24v24H0z" fill="none"/>
                 <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
             </svg>
         </a></h2><h3 id="new-featureschanges">
 New Features/Changes <a class="header-link"  href="#new-featureschanges" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
+            <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 0h24v24H0z" fill="none"/>
+                <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
+            </svg>
+        </a></h3><ul>
+<li><a href="https://github.com/dell/csm/issues/1991">#1991 - [FEATURE]: Multi-Access Zone Support in PowerScale CSI Driver for Multi-Tenant Deployments</a> - Applies to a limited use case on the PowerScale platform when deployed via Helm. Full support for both Operator and Helm deployments will be available in the 1.15 release.</li>
+</ul>
+<h2 id="release-notes-for-v1141">
+Release Notes for v1.14.1 <a class="header-link"  href="#release-notes-for-v1141" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
+            <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 0h24v24H0z" fill="none"/>
+                <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
+            </svg>
+        </a></h2><h3 id="fixed-issues">
+Fixed Issues <a class="header-link"  href="#fixed-issues" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
+            <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 0h24v24H0z" fill="none"/>
+                <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
+            </svg>
+        </a></h3><ul>
+<li><a href="https://github.com/dell/csm/issues/1939">#1942 - [BUG]: NVMe/TCP mounts fail on OCP 4.19/RHEL 9.6 having NVMe CLI v2.11.0</a></li>
+<li><a href="https://github.com/dell/csm/issues/1957">#1957 - [BUG]: Powermax NVMe volumes not reattached after pod deletion</a></li>
+<li><a href="https://github.com/dell/csm/issues/1956">#1956 - [BUG]: Make probe-retry in Powerflex driver configurable</a></li>
+</ul>
+<h2 id="release-notes-for-v1140">
+Release Notes for v1.14.0 <a class="header-link"  href="#release-notes-for-v1140" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
+            <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 0h24v24H0z" fill="none"/>
+                <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
+            </svg>
+        </a></h2><h3 id="new-featureschanges-1">
+New Features/Changes <a class="header-link"  href="#new-featureschanges-1" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
             <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
                 <path d="M0 0h24v24H0z" fill="none"/>
                 <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
@@ -4016,8 +4048,8 @@ New Features/Changes <a class="header-link"  href="#new-featureschanges" style="
 <li><a href="https://github.com/dell/csm/issues/1862">#1862 - [FEATURE]: CSM Replication - Add claimRef to the target PV</a></li>
 <li><a href="https://github.com/dell/csm/issues/1882">#1882-  [FEATURE]: Metro Replication Qualification - Support PowerMax and PowerStore with OpenShift Virtualization</a></li>
 </ul>
-<h3 id="fixed-issues">
-Fixed Issues <a class="header-link"  href="#fixed-issues" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
+<h3 id="fixed-issues-1">
+Fixed Issues <a class="header-link"  href="#fixed-issues-1" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
             <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
                 <path d="M0 0h24v24H0z" fill="none"/>
                 <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
@@ -4051,9 +4083,6 @@ Fixed Issues <a class="header-link"  href="#fixed-issues" style=" display: inlin
 <li><a href="https://github.com/dell/csm/issues/1762">#1762 - [BUG]: CSM Operator samples are incomplete</a></li>
 <li><a href="https://github.com/dell/csm/issues/1861">#1861 - [BUG]: Update the OTEL image version in operator and helm sample files</a></li>
 <li><a href="https://github.com/dell/csm/issues/1930">#1930 - [BUG]: Powerstore has unnecessary sharedNFS related codes that affects performance</a></li>
-<li><a href="https://github.com/dell/csm/issues/1939">#1942 - [BUG]: NVMe/TCP mounts fail on OCP 4.19/RHEL 9.6 having NVMe CLI v2.11.0</a></li>
-<li><a href="https://github.com/dell/csm/issues/1957">#1957 - [BUG]: Powermax NVMe volumes not reattached after pod deletion</a></li>
-<li><a href="https://github.com/dell/csm/issues/1956">#1956 - [BUG]: Make probe-retry in Powerflex driver configurable</a></li>
 </ul>
 <h3 id="known-issues">
 Known Issues <a class="header-link"  href="#known-issues" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
@@ -4075,7 +4104,7 @@ Known Issues <a class="header-link"  href="#known-issues" style=" display: inlin
       </tr>
       <tr>
           <td><div style="text-align: left"> In certain environments, users have encountered difficulties in installing drivers using the CSM Operator due to the &lsquo;OOM Killed&rsquo; issue. This issue is attributed to the default resource requests and limits configured in the CSM Operator, which fail to meet the resource requirements of the user environments. OOM error occurs when a process in the container tries to consume more memory than the limit specified in resource configuration.</td>
-          <td><div style="text-align: left"> Before deploying the CSM Operator, it is crucial to adjust the memory and CPU requests and limits in the files <a href="https://github.com/dell/csm-operator/tree/release/v1.9.1/config/manager/manager.yaml#L100">config/manager.yaml</a>, <a href="https://github.com/dell/csm-operator/tree/release/v1.9.1/deploy/operator.yaml#L1330">deploy/operator.yaml</a> to align with the user&rsquo;s environment requirements. If the containers running on the pod exceed the specified CPU and memory limits, the pod may get evicted. Currently CSM Operator do not support updating this configuration dynamically. CSM Operator needs to be redeployed for these updates to take effect in case it is already installed. Steps to manually update the resource configuration and then redeploy CSM Operator are available <a href="https://dell.github.io/csm-docs/docs/deployment/csmoperator/#installation">here</a></td>
+          <td><div style="text-align: left"> Before deploying the CSM Operator, it is crucial to adjust the memory and CPU requests and limits in the files <a href="https://github.com/dell/csm-operator/blob/main/config/manager/manager.yaml#L100">config/manager.yaml</a>, <a href="https://github.com/dell/csm-operator/blob/main/deploy/operator.yaml#L1330">deploy/operator.yaml</a> to align with the user&rsquo;s environment requirements. If the containers running on the pod exceed the specified CPU and memory limits, the pod may get evicted. Currently CSM Operator do not support updating this configuration dynamically. CSM Operator needs to be redeployed for these updates to take effect in case it is already installed. Steps to manually update the resource configuration and then redeploy CSM Operator are available <a href="https://dell.github.io/csm-docs/docs/deployment/csmoperator/#installation">here</a></td>
       </tr>
       <tr>
           <td><div style="text-align: left">  Delete namespace that has PVCs and pods created with the driver. The External health monitor sidecar crashes as a result of this operation.</td>
@@ -4094,7 +4123,7 @@ Known Issues <a class="header-link"  href="#known-issues" style=" display: inlin
           <td><div style="text-align: left">   Workaround: <br /> Change the powerflexSdc to sdc:3.6 in values.yaml <a href="https://github.com/dell/csi-powerflex/blob/72b27acee7553006cc09df97f85405f58478d2e4/helm/csi-vxflexos/values.yaml#L13">https://github.com/dell/csi-powerflex/blob/72b27acee7553006cc09df97f85405f58478d2e4/helm/csi-vxflexos/values.yaml#L13</a> <br /></td>
       </tr>
       <tr>
-          <td><div style="text-align: left"> A CSI ephemeral pod may not get created in OpenShift 4.13 and fail with the error <code>&quot;error when creating pod: the pod uses an inline volume provided by CSIDriver csi-vxflexos.dellemc.com, and the namespace has a pod security enforcement level that is lower than privileged.&quot;</code></td>
+          <td>A CSI ephemeral pod may not get created in OpenShift 4.13 and fail with the error <code>&quot;error when creating pod: the pod uses an inline volume provided by CSIDriver csi-vxflexos.dellemc.com, and the namespace has a pod security enforcement level that is lower than privileged.&quot;</code></td>
           <td><div style="text-align: left">  This issue occurs because OpenShift 4.13 introduced the CSI Volume Admission plugin to restrict the use of a CSI driver capable of provisioning CSI ephemeral volumes during pod admission. Therefore, an additional label <code>security.openshift.io/csi-ephemeral-volume-profile</code> in <a href="https://github.com/dell/helm-charts/blob/csi-vxflexos-2.10.0/charts/csi-vxflexos/templates/csidriver.yaml">csidriver.yaml</a> file with the required security profile value should be provided. Follow <a href="https://docs.openshift.com/container-platform/4.13/storage/container_storage_interface/ephemeral-storage-csi-inline.html">OpenShift 4.13 documentation for CSI Ephemeral Volumes</a> for more information.</td>
       </tr>
       <tr>
@@ -4127,7 +4156,7 @@ Known Issues <a class="header-link"  href="#known-issues" style=" display: inlin
       </tr>
       <tr>
           <td><div style="text-align: left">  When running CSI-PowerMax with Replication in a multi-cluster configuration, the driver on the target cluster fails and the following error is seen in logs: <code>error=&quot;CSI reverseproxy service host or port not found, CSI reverseproxy not installed properly&quot;</code></td>
-          <td><div style="text-align: left">  The reverseproxy service needs to be created manually on the target cluster. Follow <a href="/csm-docs/docs/getting-started/installation/kubernetes/powermax/csmoperator/csm-modules/replication/#configuration-steps">the instructions here</a> to create it.</td>
+          <td><div style="text-align: left">  The reverseproxy service needs to be created manually on the target cluster. Follow <a href="v1/getting-started/installation/kubernetes/powermax/csmoperator/csm-modules/replication/#configuration-steps">the instructions here</a> to create it.</td>
       </tr>
       <tr>
           <td><div style="text-align: left">  Storage capacity tracking does not return <code>MaximumVolumeSize</code> parameter. PowerScale is purely NFS based meaning it has no actual volumes. Therefore <code>MaximumVolumeSize</code> cannot be implemented if there is no volume creation.</td>
@@ -4148,10 +4177,6 @@ Known Issues <a class="header-link"  href="#known-issues" style=" display: inlin
       <tr>
           <td><div style="text-align: left">  fsGroupPolicy may not work as expected without root privileges for NFS only<br/><a href="https://github.com/kubernetes/examples/issues/260">https://github.com/kubernetes/examples/issues/260</a></td>
           <td><div style="text-align: left">  To get the desired behavior set &ldquo;RootClientEnabled&rdquo; = &ldquo;true&rdquo; in the storage class parameter</td>
-      </tr>
-      <tr>
-          <td><div style="text-align: left">  Driver logs shows &ldquo;VendorVersion=2.3.0+dirty&rdquo;</td>
-          <td><div style="text-align: left">  Update the driver to csi-powerscale 2.4.0</td>
       </tr>
       <tr>
           <td><div style="text-align: left">  PowerScale 9.5.0, Driver installation fails with session based auth, &ldquo;HTTP/1.1 401 Unauthorized&rdquo;</td>
