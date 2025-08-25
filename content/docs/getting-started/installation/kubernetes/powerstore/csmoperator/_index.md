@@ -81,11 +81,11 @@ To deploy the Operator, follow the instructions available [here](../../../operat
       configVersion: {{< version-docs key="PStore_latestVersion" >}}
       forceRemoveDriver: true
    ```
-     [sample file](https://github.com/dell/csm-operator/blob/main/samples/minimal-samples/powerstore_{{< version-docs key="Min_sample_operator_pstore" >}}.yaml) for default settings. Modify if needed.
+     [sample file](https://github.com/dell/csm-operator/blob/main/samples/{{< version-docs key="csm-operator_latest_samples_dir" >}}/minimal-samples/powerstore_{{< version-docs key="Min_sample_operator_pstore" >}}.yaml) for default settings. Modify if needed.
 
     [OR]
 
-    b. **Detailed Configuration:**  [sample file](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powerstore_{{< version-docs key="Det_sample_operator_pstore" >}}.yaml) for detailed settings or use [Wizard](./installationwizard#generate-manifest-file) to generate the sample file.
+    b. **Detailed Configuration:**  [sample file](https://github.com/dell/csm-operator/blob/main/samples/{{< version-docs key="csm-operator_latest_samples_dir" >}}/storage_csm_powerstore_{{< version-docs key="Det_sample_operator_pstore" >}}.yaml) for detailed settings or use [Wizard](./installationwizard#generate-manifest-file) to generate the sample file.
 
    - Users should configure the parameters in CR. The following table lists the primary configurable parameters of the PowerStore driver and their default values:
 
@@ -192,6 +192,10 @@ The driver and modules versions installable with the Container Storage Modules O
 {{< customcard link1="./csm-modules/authorizationv2-0"   image="6" title="Authorization v2.0"  >}}
 
 {{< customcard link1="./csm-modules/resiliency"   image="6" title="Resiliency"  >}}
+
+{{< customcard link1="./csm-modules/replication"   image="6" title="Replication"  >}}
+
+{{< customcard link1="./csm-modules/observability"   image="6" title="Observability"  >}}
 
 {{< /cardcontainer >}}
 
