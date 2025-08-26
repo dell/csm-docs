@@ -1,9 +1,22 @@
 ---
 title: PowerFlex
+linkTitle: "PowerFlex"
+weight: 6
 description: Release notes for PowerFlex CSI driver
 ---
 
 ## Release Notes - CSI PowerFlex v2.13.2
+
+### Fixed Issues
+- [#1956 - [BUG]: Make probe-retry in Powerflex driver configurable](https://github.com/dell/csm/issues/1956) - Applies to a limited use case on the PowerFlex platform when deployed via Helm. Full support for both Operator and Helm deployments will be available in the 1.14.1 release.
+
+## Release Notes - CSI PowerFlex v2.13.1
+
+### Fixed Issues
+
+- [#1782 - [BUG]: Pods Stuck in Terminating State After PowerFlex CSI Node Pod Restart When Deployments Share Same Node](https://github.com/dell/csm/issues/1782)
+
+## Release Notes - CSI PowerFlex v2.13.0
 
 ### New Features/Changes
 
@@ -19,8 +32,6 @@ description: Release notes for PowerFlex CSI driver
 - [#1639 - [BUG]: CSM PowerFlex entering boot loop when array has long response times](https://github.com/dell/csm/issues/1639)
 - [#1641 - [BUG]: NodeGetVolumeStats will cause panic when called w/ an Ephemeral volume ](https://github.com/dell/csm/issues/1641)
 - [#1667 - [BUG]: Labels versions and maintainer update for CSM images ](https://github.com/dell/csm/issues/1667)
-- [#1782 - [BUG]: Pods Stuck in Terminating State After PowerFlex CSI Node Pod Restart When Deployments Share Same Node](https://github.com/dell/csm/issues/1782)
-- [#1956 - [BUG]: Make probe-retry in Powerflex driver configurable](https://github.com/dell/csm/issues/1956)
 
 ### Known Issues
 

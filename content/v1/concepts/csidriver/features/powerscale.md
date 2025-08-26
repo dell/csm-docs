@@ -421,7 +421,7 @@ mountOptions: ["<mountOption1>", "<mountOption2>", ..., "<mountOptionN>"]
 
 For additional information, see the [Kubernetes Topology documentation](https://kubernetes-csi.github.io/docs/topology.html).
 
-## Support custom networks for NFS I/O traffic
+## Custom networks for NFS I/O traffic
 
 When allowedNetworks is specified for using custom networks to handle NFS traffic, and a user already
 has workloads scheduled, there is a possibility that it might lead to backward compatibility issues. For example, ControllerUnPublish might not be able to completely remove clients from the NFS exports of previously created pods.
@@ -433,6 +433,40 @@ communication (same IP/fqdn as k8s node) by default.
 
 For a cluster with multiple network interfaces and if a user wants to segregate k8s traffic from NFS traffic; you can use the `allowedNetworks` option.
 `allowedNetworks` takes CIDR addresses as a parameter to match the IPs to be picked up by the driver to allow and route NFS traffic.
+
+>**NOTE:** <br>`allowedNetworks` configures one NFS client IP address; the first network interface that satisfies one of the `allowedNetworks`
+
+## Multi-Access Zone Support for Multi-Tenant Deployments
+
+For a cluster with multiple network interfaces per cluster worker node, you can specify the `AZNetwork` in the storage class to configure the NFS export with all of the associated IP addresses in that network. See the storage class snippets below for examples of storage classes using this feature.
+
+```yaml
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: isilon-access-zone-one
+provisioner: csi-isilon.dellemc.com
+reclaimPolicy: Delete
+allowVolumeExpansion: true
+parameters:
+  AccessZone: access-zone-one
+  AZServiceIP: 10.0.0.1
+  AZNetwork: 192.168.100.0/24
+```
+
+```yaml
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: isilon-access-zone-two
+provisioner: csi-isilon.dellemc.com
+reclaimPolicy: Delete
+allowVolumeExpansion: true
+parameters:
+  AccessZone: access-zone-two
+  AZServiceIP: 10.0.0.2
+  AZNetwork: 172.16.0.0/24
+```
 
 ## Volume Limit
 
