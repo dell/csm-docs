@@ -61,7 +61,7 @@ Storage system credentials can be provided in one of two ways:
 
   <br>
   {{< tabpane Ordinal="2" name="secret-provider-class-no-redis" lang="bash">}}
-  {{<tab header="Vault" id="vault-no-redis" >}}
+  {{<tab header="Vault" >}}
 apiVersion: secrets-store.csi.x-k8s.io/v1
 kind: SecretProviderClass
 metadata:
@@ -88,7 +88,7 @@ spec:
     # "secretPath" is the path in Vault where the secret should be retrieved.
     # "secretKey" is the key within the Vault secret response to extract a value from.
   {{</tab >}}
-  {{<tab header="Conjur" id="conjur-no-redis" >}}
+  {{<tab header="Conjur" >}}
 apiVersion: secrets-store.csi.x-k8s.io/v1
 kind: SecretProviderClass
 metadata:
@@ -245,9 +245,9 @@ spec:
     kubectl create secret generic karavi-config-secret -n authorization --from-file=config.yaml=samples/csm-authorization/config.yaml -o yaml --dry-run=client | kubectl replace -f -
     ```
 
-3. Copy the default values.yaml file `cp charts/csm-authorization-v2.0/values.yaml myvalues.yaml`
+5. Copy the default values.yaml file `cp charts/csm-authorization-v2.0/values.yaml myvalues.yaml`
 
-4. Look over all the fields in `myvalues.yaml` and fill in/adjust any as needed.
+6. Look over all the fields in `myvalues.yaml` and fill in/adjust any as needed.
 
 <ul>
 
