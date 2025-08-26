@@ -60,8 +60,8 @@ Storage system credentials can be provided in one of two ways:
   {{< collapse id="2" title="SecretProviderClass without Redis" card="false" >}}
 
   <br>
-  {{< tabpane name="secret-provider-class-no-redis" lang="bash">}}
-  {{<tab header="Vault" >}}
+  {{< tabpane Ordinal="2" name="secret-provider-class-no-redis" lang="bash">}}
+  {{<tab header="Vault" id="vault-no-redis" >}}
 apiVersion: secrets-store.csi.x-k8s.io/v1
 kind: SecretProviderClass
 metadata:
@@ -88,7 +88,7 @@ spec:
     # "secretPath" is the path in Vault where the secret should be retrieved.
     # "secretKey" is the key within the Vault secret response to extract a value from.
   {{</tab >}}
-  {{<tab header="Conjur" >}}
+  {{<tab header="Conjur" id="conjur-no-redis" >}}
 apiVersion: secrets-store.csi.x-k8s.io/v1
 kind: SecretProviderClass
 metadata:
@@ -108,59 +108,88 @@ spec:
   {{< /tabpane >}}
   {{< /collapse >}}
 
-  {{< collapse id="2" title="SecretProviderClass with Redis" card="false" >}}
+  {{< collapse id="3" title="SecretProviderClass with Redis" card="false" >}}
 
   <br>
-  Example SecretProviderClass using Vault Provider:
-
-  ```bash
-  apiVersion: secrets-store.csi.x-k8s.io/v1
-  kind: SecretProviderClass
-  metadata:
-    name: vault-db-creds
-  spec:
-    # Vault CSI Provider
-    provider: vault
-    secretObjects:
-    # Name of the Kubernetes Secret object
-    # This name will be used during deployment
-    - secretName: vault-db-creds
-      type: kubernetes.io/basic-auth
-      data:
-        # Name of the mounted content to sync
-        # This could be the object name or the object alias
-        - objectName: dbRedisUsername
-          # Data field to populate
-          key: username
-        - objectName: dbRedisPassword
-          key: password
-    parameters:
-      # Vault role name to use during login
-      roleName: 'csm-authorization'
-      # Vault's hostname
-      vaultAddress: 'https://vault:8200'
-      # TLS CA certification for validation
-      vaultCACertPath: '/vault/tls/ca.crt'
-      objects: |
-        - objectName: "dbUsername"
-          secretPath: "database/creds/db-app"
-          secretKey: "username"
-        - objectName: "dbPassword"
-          secretPath: "database/creds/db-app"
-          secretKey: "password"
-        - objectName: "dbRedisUsername"
-          secretPath: "database/creds/redis"
-          secretKey: "username"
-        - objectName: "dbRedisPassword"
-          secretPath: "database/creds/redis"
-          secretKey: "password"
-      # "objectName" is an alias used within the SecretProviderClass to reference
-      # that specific secret. This will also be the filename containing the secret.
-      # "secretPath" is the path in Vault where the secret should be retrieved.
-      # "secretKey" is the key within the Vault secret response to extract a value from.
-  ```
-
-{{< /collapse >}}
+  {{< tabpane Ordinal="3" name="secret-provider-class-with-redis" lang="bash">}}
+  {{<tab header="Vault" >}}
+apiVersion: secrets-store.csi.x-k8s.io/v1
+kind: SecretProviderClass
+metadata:
+  name: vault-db-creds
+spec:
+  # Vault CSI Provider
+  provider: vault
+  secretObjects:
+  # Name of the Kubernetes Secret object
+  # This name will be used during deployment
+  - secretName: vault-db-creds
+    type: kubernetes.io/basic-auth
+    data:
+      # Name of the mounted content to sync
+      # This could be the object name or the object alias
+      - objectName: dbRedisUsername
+        # Data field to populate
+        key: username
+      - objectName: dbRedisPassword
+        key: password
+  parameters:
+    # Vault role name to use during login
+    roleName: 'csm-authorization'
+    # Vault's hostname
+    vaultAddress: 'https://vault:8200'
+    # TLS CA certification for validation
+    vaultCACertPath: '/vault/tls/ca.crt'
+    objects: |
+      - objectName: "dbUsername"
+        secretPath: "database/creds/db-app"
+        secretKey: "username"
+      - objectName: "dbPassword"
+        secretPath: "database/creds/db-app"
+        secretKey: "password"
+      - objectName: "dbRedisUsername"
+        secretPath: "database/creds/redis"
+        secretKey: "username"
+      - objectName: "dbRedisPassword"
+        secretPath: "database/creds/redis"
+        secretKey: "password"
+    # "objectName" is an alias used within the SecretProviderClass to reference
+    # that specific secret. This will also be the filename containing the secret.
+    # "secretPath" is the path in Vault where the secret should be retrieved.
+    # "secretKey" is the key within the Vault secret response to extract a value from.
+  {{</tab >}}
+  {{<tab header="Conjur" >}}
+apiVersion: secrets-store.csi.x-k8s.io/v1
+kind: SecretProviderClass
+metadata:
+  name: conjur-db-creds
+spec:
+  provider: conjur
+  secretObjects:
+  # Name of the Kubernetes Secret object
+  # This name will be used during deployment
+  - secretName: conjur-db-creds
+    type: kubernetes.io/basic-auth
+    data:
+      # Name of the mounted content to sync
+      # This could be the object name or the object alias
+      - objectName: secrets/redis-username
+        # Data field to populate
+        key: username
+      - objectName: secrets/redis-password
+        key: password
+  parameters:
+    conjur.org/configurationVersion: 0.2.0
+    account: replace-me-account
+    applianceUrl: 'https://conjur-conjur-oss.default.svc.cluster.local'
+    authnId: authn-jwt/kube
+    sslCertificate: |
+      -----BEGIN CERTIFICATE-----
+      ...
+      -----END CERTIFICATE-----
+  {{</tab >}}
+  {{< /tabpane >}}
+  {{< /collapse >}}
 {{% /tab %}}
 {{% tab header="Secret" lang="en" %}}
 - Create a YAML file (in this example, `storage-secret.yaml`) containing the credentials:
@@ -184,12 +213,12 @@ spec:
 
 <br>
 
-3. Add the Dell Helm Charts repo
+1. Add the Dell Helm Charts repo
    ```bash
    helm repo add dell https://dell.github.io/helm-charts
    ```
 
-4. Prepare `samples/csm-authorization/config.yaml` which contains the JWT signing secret. The following table lists the configuration parameters.
+2. Prepare `samples/csm-authorization/config.yaml` which contains the JWT signing secret. The following table lists the configuration parameters.
 
     | Parameter            | Description                         | Required | Default |
     | -------------------- | ----------------------------------- | -------- | ------- |
@@ -216,9 +245,9 @@ spec:
     kubectl create secret generic karavi-config-secret -n authorization --from-file=config.yaml=samples/csm-authorization/config.yaml -o yaml --dry-run=client | kubectl replace -f -
     ```
 
-5. Copy the default values.yaml file `cp charts/csm-authorization-v2.0/values.yaml myvalues.yaml`
+3. Copy the default values.yaml file `cp charts/csm-authorization-v2.0/values.yaml myvalues.yaml`
 
-6. Look over all the fields in `myvalues.yaml` and fill in/adjust any as needed.
+4. Look over all the fields in `myvalues.yaml` and fill in/adjust any as needed.
 
 <ul>
 
