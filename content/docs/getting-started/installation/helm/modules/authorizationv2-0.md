@@ -295,7 +295,7 @@ spec:
 {{< /collapse >}}
 </ul>
 
-6. Install the driver using `helm`:
+7. Install the driver using `helm`:
 
 To install Authorization with the service Ingresses using your own certificate, run:
 
