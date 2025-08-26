@@ -213,12 +213,12 @@ spec:
 
 <br>
 
-1. Add the Dell Helm Charts repo
+3. Add the Dell Helm Charts repo
    ```bash
    helm repo add dell https://dell.github.io/helm-charts
    ```
 
-2. Prepare `samples/csm-authorization/config.yaml` which contains the JWT signing secret. The following table lists the configuration parameters.
+4. Prepare `samples/csm-authorization/config.yaml` which contains the JWT signing secret. The following table lists the configuration parameters.
 
     | Parameter            | Description                         | Required | Default |
     | -------------------- | ----------------------------------- | -------- | ------- |
