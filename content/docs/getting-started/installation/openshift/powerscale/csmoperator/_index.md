@@ -404,7 +404,7 @@ isilon      3h             isilon          {{< version-docs key="PScale_latestVe
     Verify Volume Snapshot Class is created: 
 
     ```terminal
-    oc get volumesnapshot
+    oc get volumesnapshotclass
     
     NAME                      DRIVER                              DELETIONPOLICY   AGE
     vsclass-isilon            csi-isilon.dellemc.com              Delete           3h9m
