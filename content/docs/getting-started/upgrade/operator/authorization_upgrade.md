@@ -1,16 +1,178 @@
 ---
-title: Authorization v2.x
-linkTitle: "Authorization v2.x"
+title: Authorization
+linkTitle: "Authorization"
+weight: 3
 description: >
-toc_hide: true   
+  Dell Technologies (Dell) Container Storage Modules (CSM) for Authorization Upgrade
 ---
-
+{{% pageinfo color="primary" %}}
+{{< message text="2" >}}
+{{% /pageinfo %}}
 ## Upgrade CSM Authorization
 
 This section outlines the upgrade steps for Container Storage Modules (CSM) for Authorization. The upgrade of CSM for Authorization is handled in 2 parts:
 1) Upgrading the Authorization proxy server
 2) Upgrading CSI Driver, Authorization sidecar with Authorization module enabled
 
+## Upgrade Notice: CSM 1.14 → CSM 1.15 (Authorization v2.2.0 → v2.3.0)
+
+Starting with CSM 1.15, CSM Authorization (v2.3.0) requires users to configure storage credentials prior to deployment. This is a mandatory step to ensure proper access to external storage systems.
+
+You can configure storage credentials using one of the following methods:
+
+1. Dynamic Secrets via SecretProviderClass
+
+    Use this method if you are integrating with external secret management systems (e.g., HashiCorp Vault, CyberArk Conjur) through the Secrets Store CSI Driver.
+
+2. Static Credentials via Kubernetes Secret
+
+    Use this method if you prefer to manually manage credentials within Kubernetes.
+
+{{< tabpane text=true lang="en" >}}
+{{% tab header="SecretProviderClass" lang="en" %}}
+<br>
+
+- Install a supported [External Secret Provider](https://secrets-store-csi-driver.sigs.k8s.io/getting-started/installation#install-external-secret-providers) to integrate with the Secrets Store CSI Driver, if this hasn’t been done yet. For guidance on setting up Vault, refer to our [Vault installation guide](docs/getting-started/installation/operator/modules/authorizationv2-0#vault-csi-provider-installation). For Conjur, refer to our [Conjur installation guide](docs/getting-started/installation/operator/modules/authorizationv2-0#conjur-csi-provider-installation).
+
+- Install the [Secrets Store CSI Driver](https://secrets-store-csi-driver.sigs.k8s.io/getting-started/installation) enabling the [`Sync as Kubernetes Secret`](https://secrets-store-csi-driver.sigs.k8s.io/topics/sync-as-kubernetes-secret) and [`Secret Auto Rotation`](https://secrets-store-csi-driver.sigs.k8s.io/topics/secret-auto-rotation) features.
+   >__Note__: If you are using Conjur with the Secrets Store CSI Driver, be sure to configure `--set 'tokenRequests[0].audience=conjur'` when installing the Secrets Store CSI Driver.
+- Create your own [SecretProviderClass Object](https://secrets-store-csi-driver.sigs.k8s.io/getting-started/usage#create-your-own-secretproviderclass-object) based on your external secret provider. You also have the option to create your own Redis secret in the SecretProviderClass.
+
+- For OpenShift environments, label the namespace:
+
+   ```sh
+   kubectl label namespace authorization \
+    pod-security.kubernetes.io/enforce=privileged \
+    security.openshift.io/MinimallySufficientPodSecurityStandard=privileged \
+    --overwrite
+   ```
+
+  {{< collapse id="2" title="SecretProviderClass without Redis" card="false" >}}
+
+  <br>
+  {{< tabpane name="secret-provider-class-no-redis" lang="bash">}}
+  {{<tab header="Vault" >}}
+apiVersion: secrets-store.csi.x-k8s.io/v1
+kind: SecretProviderClass
+metadata:
+  name: vault-db-creds
+spec:
+  # Vault CSI Provider
+  provider: vault
+  parameters:
+    # Vault role name to use during login
+    roleName: 'csm-authorization'
+    # Vault's hostname
+    vaultAddress: 'https://vault:8200'
+    # TLS CA certification for validation
+    vaultCACertPath: '/vault/tls/ca.crt'
+    objects: |
+      - objectName: "dbUsername"
+        secretPath: "database/creds/db-app"
+        secretKey: "username"
+      - objectName: "dbPassword"
+        secretPath: "database/creds/db-app"
+        secretKey: "password"
+    # "objectName" is an alias used within the SecretProviderClass to reference
+    # that specific secret. This will also be the filename containing the secret.
+    # "secretPath" is the path in Vault where the secret should be retrieved.
+    # "secretKey" is the key within the Vault secret response to extract a value from.
+  {{</tab >}}
+  {{<tab header="Conjur" >}}
+apiVersion: secrets-store.csi.x-k8s.io/v1
+kind: SecretProviderClass
+metadata:
+  name: conjur-db-creds
+spec:
+  provider: conjur
+  parameters:
+    conjur.org/configurationVersion: 0.2.0
+    account: replace-me-account
+    applianceUrl: 'https://conjur-conjur-oss.default.svc.cluster.local'
+    authnId: authn-jwt/kube
+    sslCertificate: |
+      -----BEGIN CERTIFICATE-----
+      ...
+      -----END CERTIFICATE-----
+  {{</tab >}}
+  {{< /tabpane >}}
+  {{< /collapse >}}
+
+  {{< collapse id="2" title="SecretProviderClass with Redis" card="false" >}}
+
+  <br>
+  Example SecretProviderClass using Vault Provider:
+
+  ```bash
+  apiVersion: secrets-store.csi.x-k8s.io/v1
+  kind: SecretProviderClass
+  metadata:
+    name: vault-db-creds
+  spec:
+    # Vault CSI Provider
+    provider: vault
+    secretObjects:
+    # Name of the Kubernetes Secret object
+    # This name will be used during deployment
+    - secretName: vault-db-creds
+      type: kubernetes.io/basic-auth
+      data:
+        # Name of the mounted content to sync
+        # This could be the object name or the object alias
+        - objectName: dbRedisUsername
+          # Data field to populate
+          key: username
+        - objectName: dbRedisPassword
+          key: password
+    parameters:
+      # Vault role name to use during login
+      roleName: 'csm-authorization'
+      # Vault's hostname
+      vaultAddress: 'https://vault:8200'
+      # TLS CA certification for validation
+      vaultCACertPath: '/vault/tls/ca.crt'
+      objects: |
+        - objectName: "dbUsername"
+          secretPath: "database/creds/db-app"
+          secretKey: "username"
+        - objectName: "dbPassword"
+          secretPath: "database/creds/db-app"
+          secretKey: "password"
+        - objectName: "dbRedisUsername"
+          secretPath: "database/creds/redis"
+          secretKey: "username"
+        - objectName: "dbRedisPassword"
+          secretPath: "database/creds/redis"
+          secretKey: "password"
+      # "objectName" is an alias used within the SecretProviderClass to reference
+      # that specific secret. This will also be the filename containing the secret.
+      # "secretPath" is the path in Vault where the secret should be retrieved.
+      # "secretKey" is the key within the Vault secret response to extract a value from.
+  ```
+
+{{< /collapse >}}
+{{% /tab %}}
+{{% tab header="Secret" lang="en" %}}
+- Create a YAML file (in this example, `storage-secret.yaml`) containing the credentials:
+
+  ```bash
+  # Username and password for accessing storage system
+  username: "username"
+  password: "password"
+  ```
+<br>
+
+- Create the Secret:
+
+  ```bash
+  kubectl create secret generic storage-secret -n authorization --from-file=storage-secret.yaml
+  ```
+{{% /tab %}}
+{{< /tabpane >}}
+
+>__Note__: Only one of SecretProviderClass or Secret can be used at a time.
+
+<br>
 
 ### Upgrading the Authorization Proxy Server
 
@@ -38,11 +200,20 @@ This section outlines the upgrade steps for Container Storage Modules (CSM) for 
       kubectl edit csm authorization -n authorization
       ```
 
-  2.  Modify the installation
+  2.  Modify the installation configuration:
 
-      - Update the CSM Authorization Proxy Server configVersion
-      - Update the images for proxyService, tenantService, roleService and storageService
-
+        When upgrading to the latest version, ensure the following updates are made to your deployment configuration:
+        - Update the `configVersion` for the CSM Authorization Proxy Server to reflect the new release.
+        - Update `container images` to their latest versions:
+            - proxy service
+            - tenant service
+            - role service
+            - storage service
+            - authorization controller
+            - redis
+        - Review and revise configuration parameters:
+            - Add any newly introduced parameters.
+            - Remove any parameters that have been deprecated or are no longer supported.
 
 ### Upgrading CSI Driver, Authorization sidecar with Authorization module enabled
 
