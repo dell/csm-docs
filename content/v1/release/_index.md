@@ -21,7 +21,21 @@ Description: >
 > * <span><span/>{{< message text="11" >}}
 > * <span><span/>{{< message text="12" >}}
 
+## Release Notes for v1.14.2
+
+### New Features/Changes
+
+- [#1991 - [FEATURE]: Multi-Access Zone Support in PowerScale CSI Driver for Multi-Tenant Deployments](https://github.com/dell/csm/issues/1991) - Applies to a limited use case on the PowerScale platform when deployed via Helm. Full support for both Operator and Helm deployments will be available in the 1.15 release.
+
 ## Release Notes for v1.14.1
+
+### Fixed Issues
+
+- [#1942 - [BUG]: NVMe/TCP mounts fail on OCP 4.19/RHEL 9.6 having NVMe CLI v2.11.0](https://github.com/dell/csm/issues/1939)
+- [#1957 - [BUG]: Powermax NVMe volumes not reattached after pod deletion](https://github.com/dell/csm/issues/1957)
+- [#1956 - [BUG]: Make probe-retry in Powerflex driver configurable](https://github.com/dell/csm/issues/1956)
+
+## Release Notes for v1.14.0
 
 ### New Features/Changes
 
@@ -71,9 +85,7 @@ Description: >
 - [#1762 - [BUG]: CSM Operator samples are incomplete](https://github.com/dell/csm/issues/1762)
 - [#1861 - [BUG]: Update the OTEL image version in operator and helm sample files](https://github.com/dell/csm/issues/1861)
 - [#1930 - [BUG]: Powerstore has unnecessary sharedNFS related codes that affects performance](https://github.com/dell/csm/issues/1930)
-- [#1942 - [BUG]: NVMe/TCP mounts fail on OCP 4.19/RHEL 9.6 having NVMe CLI v2.11.0](https://github.com/dell/csm/issues/1939)
-- [#1957 - [BUG]: Powermax NVMe volumes not reattached after pod deletion](https://github.com/dell/csm/issues/1957)
-- [#1956 - [BUG]: Make probe-retry in Powerflex driver configurable](https://github.com/dell/csm/issues/1956)
+
 
 
 ### Known Issues

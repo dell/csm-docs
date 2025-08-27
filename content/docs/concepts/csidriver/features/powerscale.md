@@ -437,7 +437,7 @@ For a cluster with multiple network interfaces and if a user wants to segregate 
 
 >**NOTE:** <br>`allowedNetworks` configures one NFS client IP address; the first network interface that satisfies one of the `allowedNetworks`.
 
-## Multiple custom networks for NFS I/O Traffic
+## Multi-Access Zone Support for Multi-Tenant Deployments
 
 For a cluster with multiple network interfaces per cluster worker node, you can specify the `AZNetwork` in the storage class to configure the NFS export with all of the associated IP addresses in that network. See the storage class snippets below for examples of storage classes using this feature.
 
