@@ -123,7 +123,7 @@ spec:
   secretObjects:
   # Name of the Kubernetes Secret object
   # This name will be used during deployment
-  - secretName: vault-db-creds
+  - secretName: redis-secret-vault
     type: kubernetes.io/basic-auth
     data:
       # Name of the mounted content to sync
@@ -168,7 +168,7 @@ spec:
   secretObjects:
   # Name of the Kubernetes Secret object
   # This name will be used during deployment
-  - secretName: conjur-db-creds
+  - secretName: redis-secret-conjur
     type: kubernetes.io/basic-auth
     data:
       # Name of the mounted content to sync
