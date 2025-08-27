@@ -14,7 +14,7 @@ This section outlines the upgrade steps for Container Storage Modules (CSM) for 
 1) Upgrading the Authorization proxy server
 2) Upgrading CSI Driver, Authorization sidecar with Authorization module enabled
 
-## Upgrade Notice: CSM 1.14 → CSM 1.15 (Authorization v2.2.0 → v2.3.0)
+## Upgrade Notice: CSM v1.14 → CSM v1.15 (Authorization v2.2.0 → v2.3.0)
 
 Starting with CSM 1.15, CSM Authorization (v2.3.0) requires users to configure storage credentials prior to deployment. This is a mandatory step to ensure proper access to external storage systems.
 
@@ -27,6 +27,8 @@ You can configure storage credentials using one of the following methods:
 2. Static Credentials via Kubernetes Secret
 
     Use this method if you prefer to manually manage credentials within Kubernetes.
+
+>__Note__: Only one of SecretProviderClass or Secret can be used at a time.
 
 {{< tabpane text=true lang="en" >}}
 {{% tab header="SecretProviderClass" lang="en" %}}
@@ -47,7 +49,7 @@ You can configure storage credentials using one of the following methods:
     --overwrite
    ```
 
-  {{< collapse id="2" title="SecretProviderClass without Redis" card="false" >}}
+  {{< collapse id="2" title="Minimal SecretProviderClass configuration: includes only array-based credentials" card="false" >}}
 
   <br>
   {{< tabpane name="secret-provider-class-no-redis" lang="bash">}}
@@ -98,7 +100,7 @@ spec:
   {{< /tabpane >}}
   {{< /collapse >}}
 
-  {{< collapse id="2" title="SecretProviderClass with Redis" card="false" >}}
+  {{< collapse id="2" title="SecretProviderClass configuration with array-based and Redis credentials" card="false" >}}
 
   <br>
   Example SecretProviderClass using Vault Provider:
@@ -169,9 +171,6 @@ spec:
   ```
 {{% /tab %}}
 {{< /tabpane >}}
-
->__Note__: Only one of SecretProviderClass or Secret can be used at a time.
-
 <br>
 
 ### Upgrading the Authorization Proxy Server
