@@ -1,8 +1,8 @@
 {{- $key := .Get "key" -}}
 {{- if eq $key "PFlex_latestVersion" -}}v2.14.0
 {{- else if eq $key "PFlex_preVersion" -}}v2.13.0
-{{- else if eq $key "PStore_latestVersion" -}}v2.14.0
-{{- else if eq $key "PStore_preVersion" -}}v2.13.0
+{{- else if eq $key "PStore_latestVersion" -}}v2.15.0
+{{- else if eq $key "PStore_preVersion" -}}v2.14.0
 {{- else if eq $key "PMax_latestVersion" -}}v2.14.0
 {{- else if eq $key "PMax_preVersion" -}}v2.13.0
 {{- else if eq $key "PScale_latestVersion" -}}v2.14.0
@@ -34,21 +34,22 @@
 {{- else if eq $key "Authv2_csm_authorization_sidecar" -}}v2.3.0
 {{- else if eq $key "Authv2_csm_authorization_controller" -}}v2.3.0
 {{- else if eq $key "Authv1_PMax_ReverseProxy_ConfigVersion" -}}v1.13.0
-{{- else if eq $key "Min_sample_operator_pflex" -}}v2140
-{{- else if eq $key "Det_sample_operator_pflex" -}}v2140
-{{- else if eq $key "Min_sample_operator_pstore" -}}v2140
-{{- else if eq $key "Det_sample_operator_pstore" -}}v2140
-{{- else if eq $key "Min_sample_operator_pmax" -}}v2140
-{{- else if eq $key "Det_sample_operator_pmax" -}}v2140
-{{- else if eq $key "Min_sample_operator_pscale" -}}v2140
-{{- else if eq $key "Det_sample_operator_pscale" -}}v2140
-{{- else if eq $key "Min_sample_operator_unity" -}}v2140
-{{- else if eq $key "Det_sample_operator_unity" -}}v2140
-{{- else if eq $key "sample_sc_pflex" -}}v2140
-{{- else if eq $key "sample_sc_pmax" -}}v2140
-{{- else if eq $key "sample_sc_pstore" -}}v2140
-{{- else if eq $key "sample_sc_pscale" -}}v2140
+{{- else if eq $key "Min_sample_operator_pflex" -}}v2150
+{{- else if eq $key "Det_sample_operator_pflex" -}}v2150
+{{- else if eq $key "Min_sample_operator_pstore" -}}v2150
+{{- else if eq $key "Det_sample_operator_pstore" -}}v2150
+{{- else if eq $key "Min_sample_operator_pmax" -}}v2150
+{{- else if eq $key "Det_sample_operator_pmax" -}}v2150
+{{- else if eq $key "Min_sample_operator_pscale" -}}v2150
+{{- else if eq $key "Det_sample_operator_pscale" -}}v2150
+{{- else if eq $key "Min_sample_operator_unity" -}}v2150
+{{- else if eq $key "Det_sample_operator_unity" -}}v2150
+{{- else if eq $key "sample_sc_pflex" -}}v2150
+{{- else if eq $key "sample_sc_pmax" -}}v2150
+{{- else if eq $key "sample_sc_pstore" -}}v2150
+{{- else if eq $key "sample_sc_pscale" -}}v2150
 {{- else if eq $key "sample_sc_unity" -}}v2140
+{{- else if eq $key "csm-operator_latest_samples_dir" -}}v2.15.0
 {{- else if eq $key "csm-operator_latest_version" -}}v1.9.0
 {{- else if eq $key "csi_attacher_latest_version" -}}v4.9.0
 {{- else if eq $key "csi_external_health_monitor_controller_latest_version" -}}v0.15.0
@@ -64,7 +65,7 @@
 {{- else if eq $key "installation-wizard" -}}v1.6.0
 {{- else if eq $key "application-mobility" -}}v1.4.0 
 {{- else if eq $key "repctl" -}}v1.12.0
-{{- else if eq $key "opentelemetry_collector_latest_version" -}}0.130.0
+{{- else if eq $key "opentelemetry_collector_latest_version" -}}0.132.0
 
 {{- else -}}
   Default text if no valid parameter is passed.

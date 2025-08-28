@@ -80,8 +80,8 @@ Container Storage Modules doesn't officially support specific operating systems,
 | Module           | PowerStore | PowerScale | PowerFlex | PowerMax | Unity XT |
 | ---------------- | ---------- |------------|-----------|----------|----------|
 | Authorization v2 | ✅        |  ✅        | ✅       | ✅       | ❌      |
-| Replication      | ❌        |  ✅        | ✅       | ✅       | ❌      |
-| Observability    | ❌        |  ✅        | ✅       | ✅       | ❌      |
+| Replication      | ✅        |  ✅        | ✅       | ✅       | ❌      |
+| Observability    | ✅        |  ✅        | ✅       | ✅       | ❌      |
 | Resiliency       | ✅        |  ✅        | ✅       | ✅       | ❌      |
 {{</table>}}
 
