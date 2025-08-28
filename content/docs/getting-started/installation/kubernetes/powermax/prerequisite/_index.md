@@ -358,29 +358,34 @@ multipathing is used.{{< /collapse >}} <br>
 
 2.  Best Practices
 
-    Use these options in multipath.conf for efficient path detection:
-
-
-          path_grouping_policy multibus
-          path_checker tur
-          features "1 queue_if_no_path"
-          path_selector "round-robin 0"
-          no_path_retry 10
+    The [Host Connectivity Guide for Linux](https://elabnavigator.dell.com/vault/pdf/Linux.pdf)
+    provides comprehensive details on various multipathd configurations.
 
     <br>
-    The following is a sample multipath.conf file. You may have to adjust these values based on your environment.
+    The following is a sample multipath.conf file has been validated with SRDF metro. You may have to adjust these values based on your environment.
     <br>
 
         defaults {
-          user_friendly_names yes
-          find_multipaths yes
-          path_grouping_policy multibus
-          path_checker tur
-          features "1 queue_if_no_path"
-          path_selector "round-robin 0"
-          no_path_retry 10
+          polling_interval 5
+          checker_timeout 15
+          disable_changed_wwids yes
+          find_multipaths no
         }
-          blacklist {
+        devices {
+          device {
+            vendor                   EMC
+            product                  SYMMETRIX
+            detect_prio              "yes"
+            path_selector            "service-time 0"
+            path_grouping_policy     "group_by_prio"
+            path_checker             tur
+            failback                 immediate
+            fast_io_fail_tmo         5
+            no_path_retry            3
+            rr_min_io_rq             1
+            max_sectors_kb           1024
+            dev_loss_tmo             10
+          }
         }
 
 
