@@ -57,7 +57,7 @@ Storage system credentials can be provided in one of two ways:
     --overwrite
    ```
 
-  {{< collapse id="2" title="SecretProviderClass without Redis" card="false" >}}
+  {{< collapse id="2" title="Minimal SecretProviderClass configuration: includes only array-based credentials" card="false" >}}
 
   <br>
   {{< tabpane Ordinal="2" name="secret-provider-class-no-redis" lang="bash">}}
@@ -108,7 +108,7 @@ spec:
   {{< /tabpane >}}
   {{< /collapse >}}
 
-  {{< collapse id="3" title="SecretProviderClass with Redis" card="false" >}}
+  {{< collapse id="3" title="SecretProviderClass configuration with array-based and Redis credentials" card="false" >}}
 
   <br>
   {{< tabpane Ordinal="3" name="secret-provider-class-with-redis" lang="bash">}}
