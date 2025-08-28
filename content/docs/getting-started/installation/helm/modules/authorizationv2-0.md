@@ -60,7 +60,7 @@ Storage system credentials can be provided in one of two ways:
   {{< collapse id="2" title="SecretProviderClass without Redis" card="false" >}}
 
   <br>
-  {{< tabpane name="secret-provider-class-no-redis" lang="bash">}}
+  {{< tabpane Ordinal="2" name="secret-provider-class-no-redis" lang="bash">}}
   {{<tab header="Vault" >}}
 apiVersion: secrets-store.csi.x-k8s.io/v1
 kind: SecretProviderClass
@@ -108,59 +108,88 @@ spec:
   {{< /tabpane >}}
   {{< /collapse >}}
 
-  {{< collapse id="2" title="SecretProviderClass with Redis" card="false" >}}
+  {{< collapse id="3" title="SecretProviderClass with Redis" card="false" >}}
 
   <br>
-  Example SecretProviderClass using Vault Provider:
-
-  ```bash
-  apiVersion: secrets-store.csi.x-k8s.io/v1
-  kind: SecretProviderClass
-  metadata:
-    name: vault-db-creds
-  spec:
-    # Vault CSI Provider
-    provider: vault
-    secretObjects:
-    # Name of the Kubernetes Secret object
-    # This name will be used during deployment
-    - secretName: vault-db-creds
-      type: kubernetes.io/basic-auth
-      data:
-        # Name of the mounted content to sync
-        # This could be the object name or the object alias
-        - objectName: dbRedisUsername
-          # Data field to populate
-          key: username
-        - objectName: dbRedisPassword
-          key: password
-    parameters:
-      # Vault role name to use during login
-      roleName: 'csm-authorization'
-      # Vault's hostname
-      vaultAddress: 'https://vault:8200'
-      # TLS CA certification for validation
-      vaultCACertPath: '/vault/tls/ca.crt'
-      objects: |
-        - objectName: "dbUsername"
-          secretPath: "database/creds/db-app"
-          secretKey: "username"
-        - objectName: "dbPassword"
-          secretPath: "database/creds/db-app"
-          secretKey: "password"
-        - objectName: "dbRedisUsername"
-          secretPath: "database/creds/redis"
-          secretKey: "username"
-        - objectName: "dbRedisPassword"
-          secretPath: "database/creds/redis"
-          secretKey: "password"
-      # "objectName" is an alias used within the SecretProviderClass to reference
-      # that specific secret. This will also be the filename containing the secret.
-      # "secretPath" is the path in Vault where the secret should be retrieved.
-      # "secretKey" is the key within the Vault secret response to extract a value from.
-  ```
-
-{{< /collapse >}}
+  {{< tabpane Ordinal="3" name="secret-provider-class-with-redis" lang="bash">}}
+  {{<tab header="Vault" >}}
+apiVersion: secrets-store.csi.x-k8s.io/v1
+kind: SecretProviderClass
+metadata:
+  name: vault-db-creds
+spec:
+  # Vault CSI Provider
+  provider: vault
+  secretObjects:
+  # Name of the Kubernetes Secret object
+  # This name will be used during deployment
+  - secretName: redis-secret-vault
+    type: kubernetes.io/basic-auth
+    data:
+      # Name of the mounted content to sync
+      # This could be the object name or the object alias
+      - objectName: dbRedisUsername
+        # Data field to populate
+        key: username
+      - objectName: dbRedisPassword
+        key: password
+  parameters:
+    # Vault role name to use during login
+    roleName: 'csm-authorization'
+    # Vault's hostname
+    vaultAddress: 'https://vault:8200'
+    # TLS CA certification for validation
+    vaultCACertPath: '/vault/tls/ca.crt'
+    objects: |
+      - objectName: "dbUsername"
+        secretPath: "database/creds/db-app"
+        secretKey: "username"
+      - objectName: "dbPassword"
+        secretPath: "database/creds/db-app"
+        secretKey: "password"
+      - objectName: "dbRedisUsername"
+        secretPath: "database/creds/redis"
+        secretKey: "username"
+      - objectName: "dbRedisPassword"
+        secretPath: "database/creds/redis"
+        secretKey: "password"
+    # "objectName" is an alias used within the SecretProviderClass to reference
+    # that specific secret. This will also be the filename containing the secret.
+    # "secretPath" is the path in Vault where the secret should be retrieved.
+    # "secretKey" is the key within the Vault secret response to extract a value from.
+  {{</tab >}}
+  {{<tab header="Conjur" >}}
+apiVersion: secrets-store.csi.x-k8s.io/v1
+kind: SecretProviderClass
+metadata:
+  name: conjur-db-creds
+spec:
+  provider: conjur
+  secretObjects:
+  # Name of the Kubernetes Secret object
+  # This name will be used during deployment
+  - secretName: redis-secret-conjur
+    type: kubernetes.io/basic-auth
+    data:
+      # Name of the mounted content to sync
+      # This could be the object name or the object alias
+      - objectName: secrets/redis-username
+        # Data field to populate
+        key: username
+      - objectName: secrets/redis-password
+        key: password
+  parameters:
+    conjur.org/configurationVersion: 0.2.0
+    account: replace-me-account
+    applianceUrl: 'https://conjur-conjur-oss.default.svc.cluster.local'
+    authnId: authn-jwt/kube
+    sslCertificate: |
+      -----BEGIN CERTIFICATE-----
+      ...
+      -----END CERTIFICATE-----
+  {{</tab >}}
+  {{< /tabpane >}}
+  {{< /collapse >}}
 {{% /tab %}}
 {{% tab header="Secret" lang="en" %}}
 - Create a YAML file (in this example, `storage-secret.yaml`) containing the credentials:
@@ -252,21 +281,29 @@ spec:
 | **redis**                           | This section configures Redis.                                                                                         | -        | -                                                                                                                            |
 | name                                | The prefix of the redis pods. The number of pods is determined by the number of replicas.                              | Yes      | redis-csm                                                                                                                    |
 | **redisSecretProviderClass**        | This section configures the Redis credentials.                                                                         | -        | -                                                                                                                            |
-| redisSecretName                     | The name of the Kubernetes secret created by the CSI driver.                                                           | No       | -                                                                                                                            |
-| redisUsernameKey                    | The key in the secret that stores the Redis username.                                                                  | Yes      | username                                                                                                                     |
-| redisPasswordKey                    | The key in the secret that stores the Redis password.                                                                  | Yes      | password                                                                                                                     |
+| secretProviderClassName             | The name of the SecretProviderClass that holds the Redis secretObject.                                                 | No       | -                                                                                                                            |
+| redisSecretName                     | The name of the Kubernetes secret created by the Secrets Store CSI driver.                                             | No       | -                                                                                                                            |
+| redisUsernameKey                    | The key in the secret that stores the Redis username.                                                                  | No       | -                                                                                                                            |
+| redisPasswordKey                    | The key in the secret that stores the Redis password.                                                                  | No       | -                                                                                                                            |
+| conjur                              | A secretProviderClass object when using Conjur.                                                                        | No       | -                                                                                                                            |
+| conjur.name                         | The name of the Conjur secretProviderClass object.                                                                     | No       | -                                                                                                                            |
+| conjur.paths                        | The secret paths of the Conjur secretProviderClass object.                                                             | No       | -                                                                                                                            |
 | sentinel                            | The prefix of the redis sentinel pods. The number of pods is determined by the number of replicas.                     | Yes      | sentinel                                                                                                                     |
 | redisCommander                      | The prefix of the redis commander pod.                                                                                 | Yes      | rediscommander                                                                                                               |
 | replicas                            | The number of replicas for the sentinel and redis pods.                                                                | Yes      | 5                                                                                                                            |
 | images.redis                        | The image to use for Redis.                                                                                            | Yes      | redis:7.4.0-alpine                                                                                                           |
 | images.commander                    | The image to use for Redis Commander.                                                                                  | Yes      | rediscommander/redis-commander:latest                                                                                        |
 | **storageSystemCredentials**        | This section configures the storageSystemCredentials.                                                                  | -        | -                                                                                                                            |
-| secretProviderClasses               | A name that is used to identify a secretProviderClass object.                                                          | Yes      | -                                                                                                                            |
-| secrets                             | A name that is used to identify a kubernetes Secret.                                                                   | Yes      | -                                                                                                                            |
+| **secretProviderClasses**           | This section configures secretProviderClass objects.                                                                   | Yes      | -                                                                                                                            |
+| vault                               | A list of secretProviderClass objects when using Vault.                                                                | Yes      | -                                                                                                                            |
+| conjur                              | A list of secretProviderClass objects when using Conjur.                                                               | No       | -                                                                                                                            |
+| conjur.name                         | The name of a Conjur secretProviderClass object.                                                                       | No       | -                                                                                                                            |
+| conjur.paths                        | The secret paths of a Conjur secretProviderClass object.                                                               | No       | -                                                                                                                            |
+| **secrets**                         | This section configures Kubernetest secrets with their names.                                                          | No      | -                                                                                                                            |
 {{< /collapse >}}
 </ul>
 
-6. Install the driver using `helm`:
+7. Install the driver using `helm`:
 
 To install Authorization with the service Ingresses using your own certificate, run:
 
