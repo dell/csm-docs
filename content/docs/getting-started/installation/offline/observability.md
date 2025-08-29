@@ -271,7 +271,7 @@ kubectl get secret karavi-authorization-config proxy-server-root-certificate pro
 
     **Note:**
     - Optionally, you could provide your own configurations. A sample values.yaml file is located [here](https://github.com/dell/helm-charts/blob/main/charts/karavi-observability/values.yaml).
-  {{< hide id="0" >}}
+
   {{< hide id="5" >}}- If CSM for Authorization is enabled for CSI PowerFlex, the `karaviMetricsPowerflex.authorization` parameters must be properly configured.{{< /hide >}}
   {{< hide id="6" >}}- If CSM for Authorization is enabled for CSI PowerScale, the `karaviMetricsPowerscale.authorization` parameters must be properly configured.{{< /hide >}}
   {{< hide id="7" >}}- If CSM for Authorization is enabled for CSI PowerMax, the `karaviMetricsPowerMax.authorization` parameters must be properly configured.{{< /hide >}}
