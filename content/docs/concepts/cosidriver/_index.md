@@ -28,10 +28,10 @@ Dell COSI Driver is a multi-backend driver, meaning that it can connect to multi
 {{<table "table table-striped table-bordered table-sm">}}
 | Features               | ObjectScale |
 |------------------------|:-----------:|
-|  <div style="text-align: left"> Bucket Creation        |     Yes     |
-|  <div style="text-align: left"> Bucket Deletion        |     Yes     |
-|  <div style="text-align: left"> Bucket Access Granting |     Yes     |
-|  <div style="text-align: left"> Bucket Access Revoking |     Yes     |
+|  <div style="text-align: left"> Bucket Creation        |     ✅     |
+|  <div style="text-align: left"> Bucket Deletion        |     ✅     |
+|  <div style="text-align: left"> Bucket Access Granting |     ✅     |
+|  <div style="text-align: left"> Bucket Access Revoking |     ✅     |
 {{</table>}}
 
 ## Backend Storage Details
@@ -39,7 +39,7 @@ Dell COSI Driver is a multi-backend driver, meaning that it can connect to multi
 {{<table "table table-striped table-bordered table-sm">}}
 | Protocol   | ObjectScale |
 |------------|:-----------:|
-|  <div style="text-align: left"> AWS S3     |     Yes     |
+|  <div style="text-align: left"> AWS S3     |     ✅     |
 |  <div style="text-align: left"> GCS        |     N/A     |
 |  <div style="text-align: left"> Azure Blob |     N/A     |
 {{</table>}}
