@@ -189,7 +189,7 @@ spec:
 
 {{< /collapse >}}
 {{% /tab %}}
-{{% tab header="Secret" lang="en" %}}
+{{% tab Ordinal="7" header="Secret" lang="en" %}}
 - Create a YAML file (in this example, `storage-secret.yaml`) containing the credentials:
 
   ```bash
@@ -218,7 +218,7 @@ spec:
 
 4. Prepare a config which contains the JWT signing secret.
 
-{{< tabpane Ordinal="2" text=true lang="en" >}}
+{{< tabpane Ordinal="4" text=true lang="en" >}}
 {{% tab header="SecretProviderClass" lang="en" %}}
 <br>
 
@@ -240,7 +240,7 @@ spec:
   {{< collapse id="4" title="Minimal SecretProviderClass configuration: includes only array-based credentials" card="false" >}}
 
   <br>
-  {{< tabpane Ordinal="4" name="secret-provider-class-no-redis" lang="bash">}}
+  {{< tabpane Ordinal="5" name="secret-provider-class-no-redis" lang="bash">}}
   {{<tab header="Vault" >}}
 apiVersion: secrets-store.csi.x-k8s.io/v1
 kind: SecretProviderClass
@@ -291,7 +291,7 @@ spec:
   {{< collapse id="5" title="SecretProviderClass configuration with array-based and Config object" card="false" >}}
 
   <br>
-  {{< tabpane Ordinal="5" name="secret-provider-class-with-config" lang="bash">}}
+  {{< tabpane Ordinal="6" name="secret-provider-class-with-config" lang="bash">}}
   {{<tab header="Vault" >}}
 apiVersion: secrets-store.csi.x-k8s.io/v1
 kind: SecretProviderClass
@@ -332,12 +332,6 @@ spec:
       - objectName: "dbPassword"
         secretPath: "database/creds/db-app"
         secretKey: "password"
-      - objectName: "dbRedisUsername"
-        secretPath: "database/creds/redis"
-        secretKey: "username"
-      - objectName: "dbRedisPassword"
-        secretPath: "database/creds/redis"
-        secretKey: "password"
       - objectName: "config.yaml"
         secretPath: "secret/data/config"
         secretKey: "config"
@@ -361,11 +355,9 @@ spec:
     data:
       # Name of the mounted content to sync
       # This could be the object name or the object alias
-      - objectName: secrets/redis-username
+      - objectName: secrets/config-object
         # Data field to populate
-        key: username
-      - objectName: secrets/redis-password
-        key: password
+        key: configKey
   parameters:
     conjur.org/configurationVersion: 0.2.0
     account: replace-me-account
@@ -384,28 +376,28 @@ spec:
 
 Prepare [samples/authorization/config.yaml](https://github.com/dell/csm-operator/blob/main/samples/authorization/config.yaml) which contains the JWT signing secret. The following table lists the configuration parameters.
 
-    | Parameter            | Description                         | Required | Default |
-    | -------------------- | ----------------------------------- | -------- | ------- |
-    | web.jwtsigningsecret | String used to sign JSON Web Tokens | true     | secret  | . |
+| Parameter            | Description                         | Required | Default |
+| -------------------- | ----------------------------------- | -------- | ------- |
+| web.jwtsigningsecret | String used to sign JSON Web Tokens | true     | secret  | . |
 
-    Example:
+  Example:
 
-    ```yaml
-    web:
-      jwtsigningsecret: randomString123
-    ```
+  ```yaml
+  web:
+    jwtsigningsecret: randomString123
+  ```
 
-    After editing the file, run this command to create a secret called `karavi-config-secret`:
+  After editing the file, run this command to create a secret called `karavi-config-secret`:
 
-    ```bash
-    kubectl create secret generic karavi-config-secret -n authorization --from-file=config.yaml=samples/authorization/config.yaml
-    ```
+  ```bash
+  kubectl create secret generic karavi-config-secret -n authorization --from-file=config.yaml=samples/authorization/config.yaml
+  ```
 
-    Use this command to replace or update the secret:
+  Use this command to replace or update the secret:
 
-    ```bash
-    kubectl create secret generic karavi-config-secret -n authorization --from-file=config.yaml=samples/authorization/config.yaml -o yaml --dry-run=client | kubectl replace -f -
-    ```
+  ```bash
+  kubectl create secret generic karavi-config-secret -n authorization --from-file=config.yaml=samples/authorization/config.yaml -o yaml --dry-run=client | kubectl replace -f -
+  ```
 
 {{% /tab %}}
 {{< /tabpane >}}
