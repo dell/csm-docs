@@ -42,9 +42,9 @@ The Observability module installed by the Dell CSM Operator can be updated like 
   - Update the driver config version and image tag
   - Update the Observability config version and the driver metrics images(e.g. for CSI PowerScale driver, the metrics driver image would be `csm-metrics-powerscale`)
   - Follow the additional steps to upgrade to Observability module v1.13.0:
-      - Disable the karavi-topology component:
+      - Remove the karavi-topology component:
 
-          The collection of topology data is now handled by the driver metrics. Therefore, the karavi-topology component is no longer required and should be disabled.
+          The collection of topology data is now handled by the driver metrics. Therefore, the karavi-topology component is no longer required and should be removed.
 
       - Configure Environment Variables:
 
@@ -58,7 +58,7 @@ The Observability module installed by the Dell CSM Operator can be updated like 
       - Delete older observability version deployments and services from karavi namespace.
       ```bash
        kubectl delete deployment karavi-metrics-powerscale -n karavi
-       kubectl delete deployment karavitopology -n karavi
+       kubectl delete deployment karavi-topology -n karavi
        kubectl delete deployment otel-collector -n karavi
        kubectl delete service karavi-metrics-powerscale -n karavi
        kubectl delete service karavi-topology -n karavi
