@@ -213,14 +213,12 @@ spec:
 
 <br>
 
-3. (Optional) Configure Redis Credentials
-
-4. Add the Dell Helm Charts repo
+3. Add the Dell Helm Charts repo
    ```bash
    helm repo add dell https://dell.github.io/helm-charts
    ```
 
-5. Prepare `samples/csm-authorization/config.yaml` which contains the JWT signing secret. The following table lists the configuration parameters.
+4. Prepare `samples/csm-authorization/config.yaml` which contains the JWT signing secret. The following table lists the configuration parameters.
 
     | Parameter            | Description                         | Required | Default |
     | -------------------- | ----------------------------------- | -------- | ------- |
@@ -247,9 +245,9 @@ spec:
     kubectl create secret generic karavi-config-secret -n authorization --from-file=config.yaml=samples/csm-authorization/config.yaml -o yaml --dry-run=client | kubectl replace -f -
     ```
 
-6. Copy the default values.yaml file `cp charts/csm-authorization-v2.0/values.yaml myvalues.yaml`
+5. Copy the default values.yaml file `cp charts/csm-authorization-v2.0/values.yaml myvalues.yaml`
 
-7. Look over all the fields in `myvalues.yaml` and fill in/adjust any as needed.
+6. Look over all the fields in `myvalues.yaml` and fill in/adjust any as needed.
 
 <ul>
 
@@ -310,7 +308,7 @@ spec:
 {{< /collapse >}}
 </ul>
 
-8. Install the driver using `helm`:
+7. Install the driver using `helm`:
 
 To install Authorization with the service Ingresses using your own certificate, run:
 
