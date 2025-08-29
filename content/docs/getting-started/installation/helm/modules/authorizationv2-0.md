@@ -213,12 +213,14 @@ spec:
 
 <br>
 
-3. Add the Dell Helm Charts repo
+3. (Optional) Configure Redis Credentials
+
+4. Add the Dell Helm Charts repo
    ```bash
    helm repo add dell https://dell.github.io/helm-charts
    ```
 
-4. Prepare `samples/csm-authorization/config.yaml` which contains the JWT signing secret. The following table lists the configuration parameters.
+5. Prepare `samples/csm-authorization/config.yaml` which contains the JWT signing secret. The following table lists the configuration parameters.
 
     | Parameter            | Description                         | Required | Default |
     | -------------------- | ----------------------------------- | -------- | ------- |
@@ -245,9 +247,9 @@ spec:
     kubectl create secret generic karavi-config-secret -n authorization --from-file=config.yaml=samples/csm-authorization/config.yaml -o yaml --dry-run=client | kubectl replace -f -
     ```
 
-5. Copy the default values.yaml file `cp charts/csm-authorization-v2.0/values.yaml myvalues.yaml`
+6. Copy the default values.yaml file `cp charts/csm-authorization-v2.0/values.yaml myvalues.yaml`
 
-6. Look over all the fields in `myvalues.yaml` and fill in/adjust any as needed.
+7. Look over all the fields in `myvalues.yaml` and fill in/adjust any as needed.
 
 <ul>
 
@@ -286,24 +288,29 @@ spec:
 | redisUsernameKey                    | The key in the secret that stores the Redis username.                                                                  | No       | -                                                                                                                            |
 | redisPasswordKey                    | The key in the secret that stores the Redis password.                                                                  | No       | -                                                                                                                            |
 | conjur                              | A secretProviderClass object when using Conjur.                                                                        | No       | -                                                                                                                            |
-| conjur.name                         | The name of the Conjur secretProviderClass object.                                                                     | No       | -                                                                                                                            |
-| conjur.paths                        | The secret paths of the Conjur secretProviderClass object.                                                             | No       | -                                                                                                                            |
+| conjur.passwordPath                 | The secret path of the Conjur secretProviderClass redis password object.                                                             | No       | -                                                                                                                            |
+| conjur.usernamePath                 | The secret path of the Conjur secretProviderClass redis username object.                                                             | No       | -                                                                                                                            |
 | sentinel                            | The prefix of the redis sentinel pods. The number of pods is determined by the number of replicas.                     | Yes      | sentinel                                                                                                                     |
 | redisCommander                      | The prefix of the redis commander pod.                                                                                 | Yes      | rediscommander                                                                                                               |
 | replicas                            | The number of replicas for the sentinel and redis pods.                                                                | Yes      | 5                                                                                                                            |
 | images.redis                        | The image to use for Redis.                                                                                            | Yes      | redis:7.4.0-alpine                                                                                                           |
 | images.commander                    | The image to use for Redis Commander.                                                                                  | Yes      | rediscommander/redis-commander:latest                                                                                        |
+| **config**                          | This section configures the config secret.                                                                  | -        | -                                                                                                                            |
+| secretProviderClassName             | The name of the SecretProviderClass that holds the config secretObject.                                                 | No       | -                                                                                                                            |
+| configSecretName                     | The name of the Kubernetes secret created by the Secrets Store CSI driver.                                             | No       | -                                                                                
+| conjur                              | A secretProviderClass object when using Conjur.                                                                        | No       | -                                                                                                                            |
+| conjur.secretPath                   | The secret path of the Conjur secretProviderClass config secret object.                                                             | No       |                                             |-                                                                                                                            |
 | **storageSystemCredentials**        | This section configures the storageSystemCredentials.                                                                  | -        | -                                                                                                                            |
 | **secretProviderClasses**           | This section configures secretProviderClass objects.                                                                   | Yes      | -                                                                                                                            |
 | vault                               | A list of secretProviderClass objects when using Vault.                                                                | Yes      | -                                                                                                                            |
 | conjur                              | A list of secretProviderClass objects when using Conjur.                                                               | No       | -                                                                                                                            |
 | conjur.name                         | The name of a Conjur secretProviderClass object.                                                                       | No       | -                                                                                                                            |
 | conjur.paths                        | The secret paths of a Conjur secretProviderClass object.                                                               | No       | -                                                                                                                            |
-| **secrets**                         | This section configures Kubernetest secrets with their names.                                                          | No      | -                                                                                                                            |
+| **secrets**                         | This section configures Kubernetes secrets with their names.                                                          | No      | -                                                                                                                            |
 {{< /collapse >}}
 </ul>
 
-7. Install the driver using `helm`:
+8. Install the driver using `helm`:
 
 To install Authorization with the service Ingresses using your own certificate, run:
 
