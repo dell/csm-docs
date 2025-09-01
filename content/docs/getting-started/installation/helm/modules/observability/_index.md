@@ -394,18 +394,18 @@ Container Storage Modules Observability is instrumented to report trace data to 
 
   {{< hide class="1" >}}  __Note__: Zipkin tracing is currently not supported for the collection of PowerFlex metrics. {{< /hide >}}
 
-    Update the ConfigMaps from the [table above](#dynamic-configuration). Here is an example updating the karavi-topology-configmap based on the deployment manifest above.
+    Update the ConfigMaps from the [table above](#dynamic-configuration). Here is an example updating the karavi-metrics-powerstore-configmap based on the deployment manifest above.
    
     ```console
     
-    kubectl edit configmap/karavi-topology-configmap -n [CSM_NAMESPACE]
+    kubectl edit configmap/karavi-metrics-powerstore-configmap -n [CSM_NAMESPACE]
     ```
     
     Update the ZIPKIN_URI and ZIPKIN_PROBABILITY values and save the ConfigMap.
    
     ```console
     ZIPKIN_URI: "http://zipkin:9411/api/v2/spans"
-    ZIPKIN_SERVICE_NAME: "karavi-topology"
+    ZIPKIN_SERVICE_NAME: "metrics-powerstore"
     ZIPKIN_PROBABILITY: "1.0"
     ```
     

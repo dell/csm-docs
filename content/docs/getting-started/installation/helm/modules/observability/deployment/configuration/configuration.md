@@ -7,10 +7,9 @@
    A default values.yaml file is located [here](https://github.com/dell/helm-charts/blob/main/charts/karavi-observability/values.yaml) that can be used for installation. This can be copied into a file named `myvalues.yaml` and either used as is or modified accordingly.
 
    __Note:__
-{{< hide id="0">}}- The default `values.yaml` deploys the CSM for Observability Topology service.{{< /hide >}}
-{{< hide id="1">}}- For CSI PowerFlex with Authorization, configure `karaviMetricsPowerflex.authorization` in `myvalues.yaml`.{{< /hide >}}
-{{< hide id="2">}}- For CSI PowerScale with Authorization, configure `karaviMetricsPowerscale.authorization` in `myvalues.yaml`.{{< /hide >}}
-{{< hide id="3">}}- For CSI PowerMax with Authorization, configure `karaviMetricsPowerMax.authorization` in `myvalues.yaml`{{< /hide >}}
+{{< hide id="0">}}- For CSI PowerFlex with Authorization, configure `karaviMetricsPowerflex.authorization` in `myvalues.yaml`.{{< /hide >}}
+{{< hide id="1">}}- For CSI PowerScale with Authorization, configure `karaviMetricsPowerscale.authorization` in `myvalues.yaml`.{{< /hide >}}
+{{< hide id="2">}}- For CSI PowerMax with Authorization, configure `karaviMetricsPowerMax.authorization` in `myvalues.yaml`{{< /hide >}}
 
    ```console
 
