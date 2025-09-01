@@ -200,7 +200,7 @@ describe("GIVEN onObservabilityOperatorChange function", () => {
 		onObservabilityOperatorChange();
 
 		expect($("div#observability-operator-metrics-wrapper").css("display")).not.toEqual("none");
-		expect($("div#observability-operator-topology-wrapper").css("display")).not.toEqual("none");
+		expect($("div#observability-operator-topology-wrapper").css("display")).toEqual("none");
 		expect($("div#observability-operator-otel-wrapper").css("display")).not.toEqual("none");
 	});
 });
