@@ -49,23 +49,23 @@ The Observability module installed by the Dell CSM Operator can be updated like 
       - Configure Environment Variables:
 
           To enable and customize the collection of topology data, add the following environment variables to your custom resource. Or apply the [latest custom resource](https://github.com/dell/csm-operator/blob/main/samples/v2.15.0/). By default, `POWERSCALE_TOPOLOGY_METRICS_ENABLED` is true and `POWERSCALE_TOPOLOGY_METRICS_POLL_FREQUENCY` is 30 seconds.
-      ```bash
-      - name: "POWERSCALE_TOPOLOGY_METRICS_ENABLED"
-        value: "true"
-      - name: "POWERSCALE_TOPOLOGY_METRICS_POLL_FREQUENCY"
-        value: "30"
-      ```
+          ```bash
+          - name: "POWERSCALE_TOPOLOGY_METRICS_ENABLED"
+            value: "true"
+          - name: "POWERSCALE_TOPOLOGY_METRICS_POLL_FREQUENCY"
+            value: "30"
+          ```
       - Delete older observability version deployments and services from karavi namespace.
-      ```bash
-       kubectl delete deployment karavi-metrics-powerscale -n karavi
-       kubectl delete deployment karavi-topology -n karavi
-       kubectl delete deployment otel-collector -n karavi
-       kubectl delete service karavi-metrics-powerscale -n karavi
-       kubectl delete service karavi-topology -n karavi
-       kubectl delete service otel-collector -n karavi
-      ```
+        ```bash
+        kubectl delete deployment karavi-metrics-powerscale -n karavi
+        kubectl delete deployment karavi-topology -n karavi
+        kubectl delete deployment otel-collector -n karavi
+        kubectl delete service karavi-metrics-powerscale -n karavi
+        kubectl delete service karavi-topology -n karavi
+        kubectl delete service otel-collector -n karavi
+        ```
 
 >NOTE:
 
-- In observability module upgrade, only `n-1` to `n` upgrade is supported, e.g. if the current observability version is `v1.7.x`, it can be upgraded to `1.8.x`.
+- In observability module upgrade, only `n-1` to `n` upgrade is supported, e.g. if the current observability version is `v1.12.x`, it can be upgraded to `1.13.x`.
 - Upgrade to csm-operator and csi-driver first which support the corresponding observability module version.
