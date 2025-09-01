@@ -17,36 +17,36 @@ The CSI Drivers implement an interface between [CSI](https://kubernetes-csi.gith
 | Features                 | PowerStore | PowerScale | PowerFlex | PowerMax | Unity XT  |
 |--------------------------|:----------:|:----------:|:---------:|:--------:|:---------:|
 | <div style="text-align: left"> CSI Driver version       |    {{< version-docs key="PStore_latestVersion" >}}  | {{< version-docs key="PScale_latestVersion" >}}    | {{< version-docs key="PFlex_latestVersion" >}}    | {{< version-docs key="PMax_latestVersion" >}}   | {{< version-docs key="PUnity_latestVersion" >}}    |
-| <div style="text-align: left"> Static Provisioning      | yes        | yes        | yes       | yes      | yes       |
-| <div style="text-align: left"> Dynamic Provisioning     | yes        | yes        | yes       | yes      | yes       |
-| <div style="text-align: left"> Expand Persistent Volume | yes        | yes        | yes       | yes      | yes       |
-| <div style="text-align: left"> Volume Snapshot    | yes        | yes        | yes       | yes for LUN<br>no for NFS | yes       |
-| <div style="text-align: left"> Volume Clone | yes        | yes        | yes       | yes for LUN<br>no for NFS | yes       |
+| <div style="text-align: left"> Static Provisioning      | ✅        | ✅        | ✅       | ✅      | ✅       |
+| <div style="text-align: left"> Dynamic Provisioning     | ✅        | ✅        | ✅       | ✅      | ✅       |
+| <div style="text-align: left"> Expand Persistent Volume | ✅        | ✅        | ✅       | ✅      | ✅       |
+| <div style="text-align: left"> Volume Snapshot    | ✅        | ✅        | ✅       | ✅ for LUN<br>❌ for NFS | ✅       |
+| <div style="text-align: left"> Volume Clone | ✅        | ✅        | ✅       | ✅ for LUN<br>❌ for NFS | ✅       |
 | <div style="text-align: left"> [Access Mode](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#access-modes) for [volumeMode: Filesystem](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#volume-mode)| RWO, RWOP<br><br>ROX, RWX **with NFS ONLY** | RWO, RWX, ROX, RWOP | RWO, ROX, RWOP<br><br>RWX  **with NFS ONLY** | RWO, RWOP<br><br>ROX, RWX **with NFS ONLY** | RWO, ROX, RWOP<br><br>RWX  **with NFS ONLY** |
 | <div style="text-align: left"> Access Mode for `volumeMode: Block`| RWO, RWX, ROX, RWOP | Not Supported | RWX, ROX, RWOP | RWX, ROX, RWOP | RWO, RWX |
-|<div style="text-align: left"> [Raw Block Volume](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#raw-block-volume-support)         | yes      | no        | yes       | yes        | yes        |
-|<div style="text-align: left"> [CSI Ephemeral Volume](https://kubernetes.io/docs/concepts/storage/ephemeral-volumes/#csi-ephemeral-volumes)         | yes      | yes       | yes       | no         | yes        |
-|<div style="text-align: left"> [Generic Ephemeral Volume](https://kubernetes.io/docs/concepts/storage/ephemeral-volumes/#generic-ephemeral-volumes) | yes      | yes       | yes       | yes        | yes        |
-| <div style="text-align: left"> Topology                 | yes        | yes        | yes       | yes      | yes       |
-| <div style="text-align: left"> Multi-array              | yes        | yes        | yes       | yes      | yes       |
-| <div style="text-align: left"> Volume Health Monitoring | yes        | yes        | yes       | yes      | yes       |
-| <div style="text-align: left"> Storage Capacity Tracking | yes       | yes        | yes       | yes      | yes       |
-| <div style="text-align: left"> Volume Limit             | yes        | yes        | yes       | yes      | yes       |
+|<div style="text-align: left"> [Raw Block Volume](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#raw-block-volume-support)         | ✅      | ❌        | ✅       | ✅        | ✅        |
+|<div style="text-align: left"> [CSI Ephemeral Volume](https://kubernetes.io/docs/concepts/storage/ephemeral-volumes/#csi-ephemeral-volumes)         | ✅      | ✅       | ✅       | ❌         | ✅        |
+|<div style="text-align: left"> [Generic Ephemeral Volume](https://kubernetes.io/docs/concepts/storage/ephemeral-volumes/#generic-ephemeral-volumes) | ✅      | ✅       | ✅       | ✅        | ✅        |
+| <div style="text-align: left"> Topology                 | ✅        | ✅        | ✅       | ✅      | ✅       |
+| <div style="text-align: left"> Multi-array              | ✅        | ✅        | ✅       | ✅      | ✅       |
+| <div style="text-align: left"> Volume Health Monitoring | ✅        | ✅        | ✅       | ✅      | ✅       |
+| <div style="text-align: left"> Storage Capacity Tracking | ✅       | ✅        | ✅       | ✅      | ✅       |
+| <div style="text-align: left"> Volume Limit             | ✅        | ✅        | ✅       | ✅      | ✅       |
 {{</table>}}
 
 ### Storage Platform Details
 {{<table "table table-striped table-bordered table-sm">}}
 | Features                                     | PowerStore       | PowerScale       | PowerFlex          | PowerMax         | Unity XT         |
 |----------------------------------------------|:----------------:|:----------------:|:------------------:|:----------------:|:----------------:|
-| <div style="text-align: left"> Fibre Channel | yes              | N/A              | N/A                | yes              | yes              |
-| <div style="text-align: left"> iSCSI         | yes              | N/A              | N/A                | yes              | yes              |
-| <div style="text-align: left"> NVMeTCP       | yes              | N/A              | N/A                | yes              | N/A              |
-| <div style="text-align: left"> NVMeFC        | yes              | N/A              | N/A                | N/A              | N/A              |
-| <div style="text-align: left"> NFS           | yes              | yes              | yes                | yes - SDNAS only (not eNAS) | yes   |
+| <div style="text-align: left"> Fibre Channel | ✅              | N/A              | N/A                | ✅              | ✅               |
+| <div style="text-align: left"> iSCSI         | ✅              | N/A              | N/A                | ✅              | ✅               |
+| <div style="text-align: left"> NVMeTCP       | ✅              | N/A              | N/A                | ✅              | N/A               |
+| <div style="text-align: left"> NVMeFC        | ✅              | N/A              | N/A                | N/A              | N/A              |
+| <div style="text-align: left"> NFS           | ✅              | ✅              | ✅                | ✅ - SDNAS only (❌ eNAS) | ✅      |
 | <div style="text-align: left"> Other         | N/A              | N/A              | ScaleIO protocol   | N/A              | N/A              |
 | <div style="text-align: left"> Supported FS  | ext3 / ext4 / xfs / NFS | NFS       | ext4 / xfs / NFS   | ext4 / xfs / NFS | ext4 / xfs / NFS |
 | <div style="text-align: left"> Thin / Thick provisioning | Thin | N/A              | Thin               | Thin             | Thin/Thick       |
-| <div style="text-align: left"> Platform-specific configurable settings | iSCSI CHAP | Access Zone<br>NFS version (3 or 4);Configurable Export IPs | - | Service Level selection<br>iSCSI CHAP | Host IO Limit<br>Tiering Policy<br>NFS Host IO size<br>Snapshot Retention duration |
+| <div style="text-align: left"> Platform-specific configurable settings | iSCSI CHAP | Access Zone<br>NFS version (3 or 4)<br>Configurable Export IPs | - | Service Level selection<br>iSCSI CHAP | Host IO Limit<br>Tiering Policy<br>NFS Host IO size<br>Snapshot Retention duration |
 | <div style="text-align: left"> Auto RDM(vSphere)  | N/A         | N/A              | N/A                | Yes(over FC)     | N/A              |
 | <div style="text-align: left"> Internet Protocol| IPv4          | IPv4             | IPv4               | IPv4             | IPv4             |
 {{</table>}}
