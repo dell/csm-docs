@@ -24,13 +24,13 @@ jobs:
      - name: Setup Hugo
        uses: peaceiris/actions-hugo@v2
        with:
-         hugo-version: "0.145.0"
+         hugo-version: "1.25"
          extended: true
 
      - name: Setup Go
        uses: actions/setup-go@v2
        with:
-         go-version: "1.24"
+         go-version: "1.25"
 
      - name: Setup Node
        uses: actions/setup-node@v3
