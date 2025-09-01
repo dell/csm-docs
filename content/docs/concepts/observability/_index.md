@@ -42,7 +42,7 @@ Container Storage Modules for Observability provides the following capabilities:
 | <div style="text-align: left">  non-disruptive config changes                                                | ✅ | ✅ | ✅ | ✅ | ❌ |
 | <div style="text-align: left">  non-disruptive log level changes                                             | ✅ | ✅ | ✅ | ✅ | ❌ |
 | <div style="text-align: left">  Grafana Dashboards for displaying metrics and topology data                  | ✅ | ✅ | ✅ | ✅ | ❌ |
-| <div style="text-align: left">  Collect and expose Topology Metrics via the OpenTelemetry Collector | ✅ | ✅ | ✅ | ✅ | ❌ |
+| <div style="text-align: left">  Collect and expose Topology Metrics via the OpenTelemetry Collector          | ✅ | ✅ | ✅ | ✅ | ❌ |
 {{</table>}}
 
 ## Topology Data
