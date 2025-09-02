@@ -33,9 +33,14 @@ Storage system credentials can be provided in one of two ways:
    kubectl create namespace authorization
    ```
 
-2. Configure Storage Credentials
+2. Install cert-manager CRDs
+    ```bash
+    kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v1.11.0/cert-manager.crds.yaml
+    ```
 
-{{< tabpane text=true lang="en" >}}
+3. Configure Storage Credentials
+
+{{< tabpane Ordinal="1" text=true lang="en" group="storage-creds-tabs" >}}
 {{% tab header="SecretProviderClass" lang="en" %}}
 <br>
 
@@ -211,31 +216,11 @@ spec:
 
 <br>
 
-3. Install cert-manager CRDs
-    ```bash
-    kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v1.11.0/cert-manager.crds.yaml
-    ```
-
 4. Prepare a config which contains the JWT signing secret.
 
-{{< tabpane Ordinal="4" text=true lang="en" >}}
+{{< tabpane Ordinal="4" text=true lang="en" group="config-tabs" >}}
 {{% tab header="SecretProviderClass" lang="en" %}}
 <br>
-
-- Install a supported [External Secret Provider](https://secrets-store-csi-driver.sigs.k8s.io/getting-started/installation#install-external-secret-providers) to integrate with the Secrets Store CSI Driver. For guidance on setting up Vault, refer to our [Vault installation guide](docs/getting-started/installation/operator/modules/authorizationv2-0#vault-csi-provider-installation). For Conjur, refer to our [Conjur installation guide](docs/getting-started/installation/operator/modules/authorizationv2-0#conjur-csi-provider-installation).
-
-- Install the [Secrets Store CSI Driver](https://secrets-store-csi-driver.sigs.k8s.io/getting-started/installation) enabling the [`Sync as Kubernetes Secret`](https://secrets-store-csi-driver.sigs.k8s.io/topics/sync-as-kubernetes-secret) and [`Secret Auto Rotation`](https://secrets-store-csi-driver.sigs.k8s.io/topics/secret-auto-rotation) features.
-   >__Note__: If you are using Conjur with the Secrets Store CSI Driver, be sure to configure `--set 'tokenRequests[0].audience=conjur'` when installing the Secrets Store CSI Driver.
-- Create your own [SecretProviderClass Object](https://secrets-store-csi-driver.sigs.k8s.io/getting-started/usage#create-your-own-secretproviderclass-object) based on your external secret provider. You also have the option to create your own Redis secret in the SecretProviderClass.
-
-- For OpenShift environments, label the namespace:
-
-   ```sh
-   kubectl label namespace authorization \
-    pod-security.kubernetes.io/enforce=privileged \
-    security.openshift.io/MinimallySufficientPodSecurityStandard=privileged \
-    --overwrite
-   ```
 
   {{< collapse id="4" title="Minimal SecretProviderClass configuration: includes only array-based credentials" card="false" >}}
 
@@ -316,7 +301,7 @@ spec:
     - secretName: config-secret
       type: Opaque
       data:
-        - objectName: config.yaml
+        - objectName: config-object
           key: config.yaml
   parameters:
     # Vault role name to use during login
@@ -350,7 +335,7 @@ spec:
   secretObjects:
   # Name of the Kubernetes Secret object
   # This name will be used during deployment
-  - secretName: redis-secret-conjur
+  - secretName: config-secret-conjur
     type: kubernetes.io/basic-auth
     data:
       # Name of the mounted content to sync
