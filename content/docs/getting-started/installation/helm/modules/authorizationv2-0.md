@@ -345,7 +345,7 @@ spec:
 {{% /tab %}}
 {{< /tabpane >}}
 
->__Note__: Access config content using a SecretProviderClass OR create it manually.
+>__Note__: Only one of SecretProviderClass or Secret can be used at a time.
 
 <br>
 
@@ -412,7 +412,7 @@ spec:
 {{< /collapse >}}
 </ul>
 
-7. Install the driver using `helm`:
+7. Install the module using `helm`:
 
 To install Authorization with the service Ingresses using your own certificate, run:
 
