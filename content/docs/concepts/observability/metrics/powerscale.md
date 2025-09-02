@@ -43,3 +43,15 @@ The following storage capacity metrics are available from the OpenTelemetry coll
 | powerscale_volume_hard_quota_remaining_gigabytes  | Unused spaced below the hard limit for a directory (GB)          |
 | powerscale_volume_quota_subscribed_percentage     | Percentage of space used in hard limit for a directory           |
 | powerscale_volume_hard_quota_remaining_percentage | Percentage of the remaining space in hard limit for a directory  |
+
+## Karavi Topology Metrics
+
+Topology provides Kubernetes administrators with the topology data related to containerized storage that is provisioned by a CSI (Container Storage Interface) Driver for Dell storage products.
+
+To disable these metrics, set the ```topologyMetricsEnabled``` field to false in helm/values.yaml.
+
+The following topology metrics are available from the OpenTelemetry collector endpoint. Please see the [Container Storage Modules for Observability](../) for more information on deploying and configuring the OpenTelemetry collector.
+
+| Metric | Description |
+| - | - |
+| karavi_topology_metrics | Collects topology data. More details [here](../_index.md#topology-data )  |

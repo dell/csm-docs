@@ -17,6 +17,7 @@ The Container Storage Modules for Observability Helm chart bootstraps an Observa
 - The deployment of one or more supported Dell CSI drivers
 
 ## Install the Container Storage Modules for Observability Helm Chart
+
 **Steps**
 1. Create a namespace where you want to install the module
    ```bash
@@ -172,7 +173,6 @@ The Container Storage Modules for Observability Helm chart bootstraps an Observa
    A default values.yaml file is located [here](https://github.com/dell/helm-charts/blob/main/charts/karavi-observability/values.yaml) that can be used for installation. This can be copied into a file named `myvalues.yaml` and either used as is or modified accordingly.
 
    __Note:__
-   - The default `values.yaml` is configured to deploy the Container Storage Modules for Observability Topology service on install.
    - If Container Storage Modules for Authorization is enabled for CSI PowerFlex, the `karaviMetricsPowerflex.authorization` parameters must be properly configured in your values file for Observability.
    - If Container Storage Modules for Authorization is enabled for CSI PowerScale, the `karaviMetricsPowerscale.authorization` parameters must be properly configured in your values file for Observability.
    - If Container Storage Modules for Authorization is enabled for CSI PowerMax, the `karaviMetricsPowerMax.authorization` parameters must be properly configured in your values file for Observability.
@@ -187,8 +187,6 @@ The Container Storage Modules for Observability Helm chart bootstraps an Observa
    ```console
 
    helm install karavi-observability dell/karavi-observability -n [CSM_NAMESPACE] \
-   --set-file karaviTopology.certificateFile=<location-of-karavi-topology-certificate-file> \
-   --set-file karaviTopology.privateKeyFile=<location-of-karavi-topology-private-key-file> \
    --set-file otelCollector.certificateFile=<location-of-otel-collector-certificate-file> \
    --set-file otelCollector.privateKeyFile=<location-of-otel-collector-private-key-file>
    ```
@@ -199,24 +197,18 @@ The following table lists the configurable parameters of the Container Storage M
 
 | Parameter | Description | Default |
 | - | - | - |
-| `karaviTopology.image` | Location of the csm-topology Container image | `quay.io/dell/container-storage-modules/csm-topology:{{< version-docs key="Observability_csm_topology_image" >}}` |
-| `karaviTopology.enabled` | Enable the CSM for Observability Topology service | `true` |
-| `karaviTopology.provisionerNames` | Provisioner Names used to filter the Persistent Volumes created on the Kubernetes cluster (must be a comma-separated list) | `csi-vxflexos.dellemc.com` |
-| `karaviTopology.service.type` | Kubernetes service type | `ClusterIP` |
-| `karaviTopology.certificateFile` | Optional valid CA public certificate file that will be used to deploy the Topology service. Must use domain name 'karavi-topology'. | |
-| `karaviTopology.privateKeyFile` | Optional public certificate's associated private key file that will be used to deploy the Topology service. Must use domain name 'karavi-topology'. | |
-| `karaviTopology.logLevel` | Output logs that are at or above the given log level severity (Valid values: TRACE, DEBUG, INFO, WARN, ERROR, FATAL, PANIC) | `INFO` |
-| `karaviTopology.logFormat` | Output logs in the specified format (Valid values: text, json) | `text` |
 | `otelCollector.certificateFile` | Optional valid CA public certificate file that will be used to deploy the OpenTelemetry Collector. Must use domain name 'otel-collector'. | |
 | `otelCollector.privateKeyFile` | Optional public certificate's associated private key file that will be used to deploy the OpenTelemetry Collector. Must use domain name 'otel-collector'. |  |
 | `otelCollector.service.type` | Kubernetes service type | `ClusterIP` |
 | `karaviMetricsPowerflex.image` |  CSM Metrics for PowerFlex Service image | `quay.io/dell/container-storage-modules/csm-metrics-powerflex:{{< version-docs key="Observability_csm_metrics_PFlex_image" >}}` |
 | `karaviMetricsPowerflex.enabled` | Enable CSM Metrics for PowerFlex service | `true` |
 | `karaviMetricsPowerflex.collectorAddr` | Metrics Collector accessible from the Kubernetes cluster | `otel-collector:55680`  |
-| `karaviMetricsPowerflex.provisionerNames` | Provisioner Names used to filter for determining PowerFlex SDC nodes( Must be a Comma-separated list) | ` csi-vxflexos.dellemc.com` |
+| `karaviMetricsPowerflex.provisionerNames` | Provisioner Names used to filter for determining PowerFlex SDC nodes( Must be a Comma-separated list) | `csi-vxflexos.dellemc.com` |
 | `karaviMetricsPowerflex.sdcPollFrequencySeconds` | The polling frequency (in seconds) to gather SDC metrics | `10` |
 | `karaviMetricsPowerflex.volumePollFrequencySeconds` | The polling frequency (in seconds) to gather volume metrics | `10` |
 | `karaviMetricsPowerflex.storageClassPoolPollFrequencySeconds` | The polling frequency (in seconds) to gather storage class/pool metrics | `10` |
+| `karaviMetricsPowerMax.topologyMetricsEnabled` | Enable PowerMax Topology Metrics Collection | `true` |
+| `karaviMetricsPowerMax.topologyMetricsPollFrequencySeconds` | The polling frequency (in seconds) to gather topology metrics | `30` |
 | `karaviMetricsPowerflex.concurrentPowerflexQueries` | The number of simultaneous metrics queries to make to Powerflex(MUST be less than 10; otherwise, several request errors from Powerflex will ensue. | `10` |
 | `karaviMetricsPowerflex.authorization.enabled` | [Authorization](../../authorization-v2.0) is an optional feature to apply credential shielding of the backend PowerFlex. | `false` |
 | `karaviMetricsPowerflex.authorization.proxyHost` | Hostname of the csm-authorization server. |  |
@@ -235,6 +227,8 @@ The following table lists the configurable parameters of the Container Storage M
 | `karaviMetricsPowerstore.volumePollFrequencySeconds` | The polling frequency (in seconds) to gather volume metrics | `10` |
 | `karaviMetricsPowerstore.concurrentPowerstoreQueries` | The number of simultaneous metrics queries to make to PowerStore (must be less than 10; otherwise, several request errors from PowerStore will ensue.) | `10` |
 | `karaviMetricsPowerstore.volumeMetricsEnabled` | Enable PowerStore Volume Metrics Collection | `true` |
+| `karaviMetricsPowerstore.topologyMetricsEnabled` | Enable PowerStore Topology Metrics Collection | `true` |
+| `karaviMetricsPowerstore.topologyMetricsPollFrequencySeconds` | The polling frequency (in seconds) to gather topology metrics | `30` |
 | `karaviMetricsPowerstore.endpoint` | Endpoint for pod leader election | `karavi-metrics-powerstore` |
 | `karaviMetricsPowerstore.service.type` | Kubernetes service type | `ClusterIP` |
 | `karaviMetricsPowerstore.logLevel` | Output logs that are at or above the given log level severity (Valid values: TRACE, DEBUG, INFO, WARN, ERROR, FATAL, PANIC) | `INFO`|
@@ -252,6 +246,8 @@ The following table lists the configurable parameters of the Container Storage M
 | `karaviMetricsPowerscale.clusterPerformancePollFrequencySeconds` | The polling frequency (in seconds) to gather cluster performance metrics | `20` |
 | `karaviMetricsPowerscale.quotaCapacityPollFrequencySeconds` | The polling frequency (in seconds) to gather volume capacity metrics | `30` |
 | `karaviMetricsPowerscale.concurrentPowerscaleQueries` | The number of simultaneous metrics queries to make to PowerScale(MUST be less than 10; otherwise, several request errors from PowerScale will ensue.) | `10` |
+| `karaviMetricsPowerscale.topologyMetricsEnabled` | Enable Powerscale Topology Metrics Collection | `true` |
+| `karaviMetricsPowerscale.topologyMetricsPollFrequencySeconds` | The polling frequency (in seconds) to gather topology metrics | `30` |
 | `karaviMetricsPowerscale.endpoint` | Endpoint for pod leader election | `karavi-metrics-powerscale` |
 | `karaviMetricsPowerscale.service.type` | Kubernetes service type | `ClusterIP` |
 | `karaviMetricsPowerscale.logLevel` | Output logs that are at or above the given log level severity (Valid values: TRACE, DEBUG, INFO, WARN, ERROR, FATAL, PANIC) | `INFO`|
@@ -266,6 +262,8 @@ The following table lists the configurable parameters of the Container Storage M
 | `karaviMetricsPowerMax.performanceMetricsEnabled` | Enable PowerMax performance metric Collection | `true` |
 | `karaviMetricsPowerMax.capacityPollFrequencySeconds` | The polling frequency (in seconds) to gather capacity metrics | `20` |
 | `karaviMetricsPowerMax.performancePollFrequencySeconds` | The polling frequency (in seconds) to gather performance metrics | `20` |
+| `karaviMetricsPowerflex.topologyMetricsEnabled` | Enable PowerFlex Topology Metrics Collection | `true` |
+| `karaviMetricsPowerflex.topologyMetricsPollFrequencySeconds` | The polling frequency (in seconds) to gather topology metrics | `30` |
 | `karaviMetricsPowerMax.concurrentPowerMaxQueries` | The number of simultaneous metrics queries to make to PowerMax (MUST be less than 10; otherwise, several request errors from PowerMax will ensue.) | `10` |
 | `karaviMetricsPowerMax.authorization.enabled` | [Authorization](../../authorization-v2.0) is an optional feature to apply credential shielding of the backend PowerMax. | `false` |
 | `karaviMetricsPowerMax.authorization.proxyHost` | Hostname of the csm-authorization server. |  |

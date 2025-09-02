@@ -351,19 +351,6 @@ spec:
       enabled: $OBSERVABILITY_OPERATOR_ENABLED
       configVersion: v1.13.0
       components:
-        - name: topology
-          # enabled: Enable/Disable topology
-          # Default value: false
-          enabled: $OBSERVABILITY_OPERATOR_TOPOLOGY
-          # image: Defines karavi-topology image. This shouldn't be changed
-          # Allowed values: string
-          image: quay.io/dell/container-storage-modules/csm-topology:v1.13.0
-          envs:
-            # topology log level
-            # Valid values: TRACE, DEBUG, INFO, WARN, ERROR, FATAL, PANIC
-            # Default value: "INFO"
-            - name: "TOPOLOGY_LOG_LEVEL"
-              value: "INFO"
         - name: otel-collector
           # enabled: Enable/Disable OpenTelemetry Collector
           # Default value: false
@@ -399,6 +386,16 @@ spec:
             # Default value: 10
             - name: "POWERSCALE_MAX_CONCURRENT_QUERIES"
               value: "10"
+            # POWERSCALE_TOPOLOGY_METRICS_ENABLED: enable/disable collection of topology metrics
+            # Allowed values: ture, false
+            # Default value: true
+            - name: "POWERSCALE_TOPOLOGY_METRICS_ENABLED"
+              value: "true"
+            # POWERSCALE_TOPOLOGY_METRICS_POLL_FREQUENCY: set polling frequency to get topology metrics
+            # Allowed values: int
+            # Default value: 30
+            - name: "POWERSCALE_TOPOLOGY_METRICS_POLL_FREQUENCY"
+              value: 30
             # POWERSCALE_CAPACITY_METRICS_ENABLED: enable/disable collection of capacity metrics
             # Allowed values: ture, false
             # Default value: true

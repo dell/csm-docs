@@ -194,12 +194,13 @@ describe("GIVEN onObservabilityOperatorChange function", () => {
             <div id="observability-operator-metrics-wrapper" style="display:none">
 			<div id="observability-operator-topology-wrapper" style="display:none">
 			<div id="observability-operator-otel-wrapper" style="display:none">
+			<input type="text" id="csm-version" value="1.15.0">
         `;
 
 		onObservabilityOperatorChange();
 
 		expect($("div#observability-operator-metrics-wrapper").css("display")).not.toEqual("none");
-		expect($("div#observability-operator-topology-wrapper").css("display")).not.toEqual("none");
+		expect($("div#observability-operator-topology-wrapper").css("display")).toEqual("none");
 		expect($("div#observability-operator-otel-wrapper").css("display")).not.toEqual("none");
 	});
 });

@@ -17,19 +17,21 @@ To perform an offline installation :
 
 >NOTE: Use the same tool (docker or podman) for packing and unpacking images.
 
-#### **Building an offline bundle**
+### **Building an offline bundle**
 
 >NOTE: Login to `registry.redhat.io` with RedHat credentials before starting.
 
 On a Linux system with Internet access:
 
 1. Clone the required `csm-operator` version:
+
 ```bash
 git clone -b v1.9.0 https://github.com/dell/csm-operator.git
 cd csm-operator
 ```
 
 2. Run the csm-offline-bundle.sh script to create an offline bundle:
+
 ```bash
 bash scripts/csm-offline-bundle.sh -c
 ```
@@ -42,7 +44,6 @@ The script will :
 * Build a `tar.gz` file containing the images and necessary installation files.
 
 Here is the output of a request to build an offline bundle for the Dell CSM Operator:
-
 
 {{< collapse id="1" title="Output">}}
 
@@ -63,10 +64,9 @@ Here is the output of a request to build an offline bundle for the Dell CSM Oper
    quay.io/dell/container-storage-modules/csm-metrics-powerflex:{{< version-docs key="Observability_csm_metrics_PFlex_image" >}}
    quay.io/dell/container-storage-modules/csm-metrics-powerscale:{{< version-docs key="Observability_csm_metrics_PScale_image" >}}
    quay.io/dell/container-storage-modules/csm-metrics-powerstore:{{< version-docs key="Observability_csm_metrics_PStore_image" >}}
-   quay.io/dell/container-storage-modules/csm-topology:{{< version-docs key="Observability_csm_topology_image" >}}
    quay.io/dell/container-storage-modules/dell-csi-replicator:{{< version-docs key="replicator_latest_version" >}}
    quay.io/dell/container-storage-modules/dell-replication-controller:{{< version-docs key="replication_controller_latest_version" >}}
-   quay.io/dell/storage/powerflex/sdc:4.5.2.1
+   quay.io/dell/storage/powerflex/sdc:4.5.4
    quay.io/dell/container-storage-modules/dell-csm-operator:{{< version-docs key="csm-operator_latest_version" >}}
    registry.redhat.io/openshift4/ose-kube-rbac-proxy-rhel9:v4.16.0-202409051837.p0.g8ea2c99.assembly.stream.el9
    nginxinc/nginx-unprivileged:1.27
