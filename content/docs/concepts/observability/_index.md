@@ -24,7 +24,6 @@ Container Storage Modules for Observability is composed of several services, eac
 | Metrics for PowerStore | [Container Storage Modules Metrics for PowerStore](https://github.com/dell/csm-metrics-powerstore) | Metrics for PowerStore captures telemetry data about Kubernetes storage usage and performance obtained through the CSI (Container Storage Interface) Driver for PowerStore. The metrics service pushes it to the OpenTelemetry Collector, so it can be processed, and exported in a format consumable by Prometheus. Prometheus can then be configured to scrape the OpenTelemetry Collector exporter endpoint to provide metrics, so they can be visualized in Grafana. Please visit the repository for more information. |
 | Metrics for PowerScale | [Container Storage Modules Metrics for PowerScale](https://github.com/dell/csm-metrics-powerscale) | Metrics for PowerScale captures telemetry data about Kubernetes storage usage and performance obtained through the CSI (Container Storage Interface) Driver for PowerScale. The metrics service pushes it to the OpenTelemetry Collector, so it can be processed, and exported in a format consumable by Prometheus. Prometheus can then be configured to scrape the OpenTelemetry Collector exporter endpoint to provide metrics, so they can be visualized in Grafana. Please visit the repository for more information. |
 | Metrics for PowerMax | [Container Storage Modules Metrics for PowerMax](https://github.com/dell/csm-metrics-powermax) | Metrics for PowerMax captures telemetry data about Kubernetes storage usage and performance obtained through the CSI (Container Storage Interface) Driver for PowerMax. The metrics service pushes it to the OpenTelemetry Collector, so it can be processed, and exported in a format consumable by Prometheus. Prometheus can then be configured to scrape the OpenTelemetry Collector exporter endpoint to provide metrics, so they can be visualized in Grafana. Please visit the repository for more information. |
-| Volume Topology | [Container Storage Modules Topology](https://github.com/dell/karavi-topology) | Topology provides Kubernetes administrators with the topology data related to containerized storage that is provisioned by a CSI (Container Storage Interface) Driver for Dell storage products. The Topology service is enabled by default as part of the Container Storage Modules for Observability Helm Chart [values file](https://github.com/dell/helm-charts/blob/main/charts/karavi-observability/values.yaml). Please visit the repository for more information. |
 {{</table>}}
 
 ## Container Storage Modules for Observability Capabilities
@@ -34,33 +33,36 @@ Container Storage Modules for Observability provides the following capabilities:
 {{<table "table table-striped table-bordered table-sm">}}
 | Capability | PowerStore | PowerScale |PowerFlex |PowerMax| Unity XT |
 | - | :-: | :-: | :-: | :-: | :-: |
-| <div style="text-align: left">  Collect and expose Volume Metrics via the OpenTelemetry Collector | Yes | Yes | Yes | Yes | No |
-| <div style="text-align: left">  Collect and expose File System Metrics via the OpenTelemetry Collector | Yes |  No | No | No | No |
-| <div style="text-align: left">  Collect and expose export (k8s) node metrics via the OpenTelemetry Collector | No |  No | Yes | No | No |
-| <div style="text-align: left">  Collect and expose block storage metrics via the OpenTelemetry Collector | Yes | No | Yes | Yes | No |
-| <div style="text-align: left">  Collect and expose file storage metrics via the OpenTelemetry Collector | Yes | Yes | No | No | No |
-| <div style="text-align: left">  Non-disruptive config changes | Yes |  Yes | Yes | Yes | No |
-| <div style="text-align: left">  Non-disruptive log level changes | Yes |  Yes | Yes | Yes | No |
-| <div style="text-align: left">  Grafana Dashboards for displaying metrics and topology data | Yes |  Yes | Yes | Yes | No |
+| <div style="text-align: left">  Collect and expose Volume Metrics via the OpenTelemetry Collector            | ✅ | ✅ | ✅ | ✅ | ❌ |
+| <div style="text-align: left">  Collect and expose File System Metrics via the OpenTelemetry Collector       | ✅ | ❌ | ❌ | ❌ | ❌ |
+| <div style="text-align: left">  Collect and expose export (k8s) node metrics via the OpenTelemetry Collector | ❌ | ❌ | ✅ | ❌ | ❌ |
+| <div style="text-align: left">  Collect and expose block storage metrics via the OpenTelemetry Collector     | ✅ | ❌ | ✅ | ✅ | ❌ |
+| <div style="text-align: left">  Collect and expose file storage metrics via the OpenTelemetry Collector      | ✅ | ✅ | ❌ | ❌ | ❌ |
+| <div style="text-align: left">  non-disruptive config changes                                                | ✅ | ✅ | ✅ | ✅ | ❌ |
+| <div style="text-align: left">  non-disruptive log level changes                                             | ✅ | ✅ | ✅ | ✅ | ❌ |
+| <div style="text-align: left">  Grafana Dashboards for displaying metrics and topology data                  | ✅ | ✅ | ✅ | ✅ | ❌ |
+| <div style="text-align: left">  Collect and expose Topology Metrics via the OpenTelemetry Collector          | ✅ | ✅ | ✅ | ✅ | ❌ |
 {{</table>}}
 
 ## Topology Data
 
-Container Storage Modules for Observability provides Kubernetes administrators with the topology data related to containerized storage. This topology data is visualized using Grafana:
+>__NOTE__: Starting from CSM version 1.15, the Karavi topology component will no longer operate as a standalone service. Instead, topology data will be directly exported to the OpenTelemetry Collector.
+
+Container Storage Modules for Observability provides Kubernetes administrators with the topology data related to containerized storage. This topology data collected via opentelemetry collector to Prometheus is visualized using Grafana:
 {{<table "table table-striped table-bordered table-sm tdleft">}}
-| Field                      | Description                                                                                                                                        |
-| -------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Namespace                  | The namespace associated with the persistent volume claim                                                                                          |
-| Persistent Volume Claim    | The name of the persistent volume claim associated with the persistent volume                                                                      |
-| Persistent Volume          | The name of the persistent volume                                                                                                                  |
-| Storage Class              | The storage class associated with the persistent volume                                                                                            |
-| Provisioned Size           | The provisioned size of the persistent volume                                                                                                      |
+| Field | Description  |
+| ----- | ------------ |
+| Namespace                  | The namespace associated with the persistent volume claim |
+| Persistent Volume Claim    | The name of the persistent volume claim associated with the persistent volume |
+| Persistent Volume          | The name of the persistent volume |
+| Storage Class              | The storage class associated with the persistent volume |
+| Provisioned Size           | The provisioned size of the persistent volume |
 | Status                     | The status of the persistent volume. "Released" indicates the persistent volume does not have a claim. </br> "Bound" indicates the persistent volume has a claim |
-| Created                    | The date the persistent volume was created                                                                                                         |
-| Storage System             | The storage system ID or IP address the volume is associated with                                                                                  |
-| Protocol                   | The storage system protocol type the volume/storage class is associated with                                                                       |
-| Storage Pool               | The storage pool name the volume/storage class is associated with                                                                                  |
-| Storage System Volume Name | The name of the volume on the storage system that is associated with the persistent volume                                                         |
+| Created                    | The date the persistent volume was created |
+| Storage System             | The storage system ID or IP address the volume is associated with |
+| Protocol                   | The storage system protocol type the volume/storage class is associated with |
+| Storage Pool               | The storage pool name the volume/storage class is associated with |
+| Storage System Volume Name | The name of the volume on the storage system that is associated with the persistent volume |
 {{</table>}}
 
 ## TLS Encryption
@@ -70,7 +72,7 @@ Container Storage Modules for Observability deployment relies on [cert-manager](
 {{<table "table table-striped table-bordered table-sm tdleft">}}
 | Component |
 | --------- |
-| <div style="text-align: left"> cert-manager |
+| cert-manager |
 | cert-manager-cainjector |
 | cert-manager-webhook |
 {{</table>}}

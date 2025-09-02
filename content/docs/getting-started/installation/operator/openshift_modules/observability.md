@@ -14,11 +14,10 @@ description: >
 <br>
 
 3. Enable Observability module in the CSM  
-   
 
    Use this command to create the **ContainerStorageModule** custom resource with Observability enabled.
   
-   ```bash 
+   ```bash
    oc create -f csm-{{labels}}.yaml
    ```
 
@@ -39,8 +38,6 @@ description: >
      - name: observability
        enabled: true
        components:
-       - name: topology
-         enabled: true
        - name: otel-collector
          enabled: true
        - name: metrics-{{Var}}
@@ -48,8 +45,8 @@ description: >
    EOF
    ```
 
-    Verify the Observability Pods are created. 
-<ol> 
+    Verify the Observability Pods are created.
+<ol>
 {{< hide class="1" >}}
 
 ```terminal
@@ -57,12 +54,11 @@ oc get pod -n isilon
 
 NAME                                         READY   STATUS    RESTARTS   AGE
 karavi-metrics-powerscale-69855dbdd5-5mshq   1/1     Running   0          2m54s
-karavi-topology-b7c9f6fc7-zk7l8              1/1     Running   0          2m55s
 otel-collector-b496d8c4d-gp6zz               2/2     Running   0          2m55s 
 ```
 {{< /hide >}}
 </ol>
-<ol> 
+<ol>
 {{< hide class="2" >}}
 
 ```terminal
@@ -70,17 +66,14 @@ oc get pod -n vxflexos
 
 NAME                                         READY   STATUS    RESTARTS   AGE
 karavi-metrics-powerflex-69855dbdd5-5mshq    1/1     Running   0          2m54s
-karavi-topology-b7c9f6fc7-zk7l8              1/1     Running   0          2m55s
 otel-collector-b496d8c4d-gp6zz               2/2     Running   0          2m55s 
 
 
 ```
 {{< /hide >}}
-</ol> 
+</ol>
 
-   <br>
-   
-    
+<br>
 
 <ol>
 
@@ -88,47 +81,45 @@ Verify the Observability Services.
 
 {{< hide class="1" >}}
 
-```terminal 
+```terminal
 oc get svc -n isilon
 NAME                           TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)              AGE
 karavi-metrics-powerscale      ClusterIP   172.30.169.86    <none>        2222/TCP             3m29s
-karavi-topology                ClusterIP   172.30.66.155    <none>        8443/TCP             3m29s
 otel-collector                 ClusterIP   172.30.127.237   <none>        55680/TCP,8443/TCP   3m29s 
-``` 
+```
 
-{{< /hide >}} 
+{{< /hide >}}
 
-</ol> 
+</ol>
 
 <ol>
 {{< hide class="2" >}}
 
- ```terminal 
+ ```terminal
  oc get svc -n vxflexos
  NAME                           TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)              AGE
  karavi-metrics-powerflex       ClusterIP   172.30.169.86    <none>        2222/TCP             3m29s
- karavi-topology                ClusterIP   172.30.66.155    <none>        8443/TCP             3m29s
  otel-collector                 ClusterIP   172.30.127.237   <none>        55680/TCP,8443/TCP   3m29s 
- ``` 
+ ```
 
 {{< /hide >}}
 </ol>
 
-<br> 
+<br>
 
-5. Create Service Monitor to scrap the Observability module by the OpenShift Observability. 
+5. Create Service Monitor to scrap the Observability module by the OpenShift Observability.
 
-   Use this command to create the ServiceMonitor. 
+   Use this command to create the ServiceMonitor.
 
-   ```bash 
+   ```bash
    oc apply -f smon-otel-collector.yaml
    ```
 
-   <br> 
-   
+   <br>
+
    Example:
    {{< hide class="1" >}}
-   ```yaml 
+   ```yaml
    cat <<EOF> smon-otel-collector.yaml
    apiVersion: monitoring.coreos.com/v1
    kind: ServiceMonitor
@@ -147,11 +138,11 @@ otel-collector                 ClusterIP   172.30.127.237   <none>        55680/
          app.kubernetes.io/instance: karavi-observability
          app.kubernetes.io/name: otel-collector 
     EOF
-   ```  
-   {{< /hide >}} 
+   ```
+   {{< /hide >}}
 
   {{< hide class="2" >}}
-  ```yaml 
+  ```yaml
    cat <<EOF> smon-otel-collector.yaml
    apiVersion: monitoring.coreos.com/v1
    kind: ServiceMonitor
@@ -170,37 +161,37 @@ otel-collector                 ClusterIP   172.30.127.237   <none>        55680/
          app.kubernetes.io/instance: karavi-observability
          app.kubernetes.io/name: otel-collector 
     EOF
-  ```  
-  {{< /hide >}} 
+  ```
+  {{< /hide >}}
 
 <ol>
 
-Verify the ServiceMonitor is created. 
+Verify the ServiceMonitor is created.
 
 {{< hide class="1" >}}
 
-```terminal 
+```terminal
 oc get smon -n isilon
 NAME             AGE
 otel-collector   44h 
-``` 
+```
 
-{{< /hide >}} 
+{{< /hide >}}
 
-</ol> 
+</ol>
 
 <ol>
 {{< hide class="2" >}}
 
- ```terminal 
+ ```terminal
 oc get smon -n vxflexos
 NAME             AGE
 otel-collector   44h 
- ``` 
+ ```
 
 {{< /hide >}}
 </ol>
 
-6. Verify the PowerFlex metrics are visible in the OpenShift Console. 
+6. Verify the PowerFlex metrics are visible in the OpenShift Console.
 
    On the OpenShift Console, navigate to Observer and then Metrics, search for PowerFlex metric.

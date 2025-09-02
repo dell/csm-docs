@@ -36,9 +36,9 @@ kubectl create -f deploy/replicationcrds.all.yaml
 
 ## Support Matrix
 
-| PowerMax | PowerStore | PowerScale | PowerFlex | Unity | 
-| - | - | - | - | - | 
-| Yes | No | No | No | No |
+| PowerStore | PowerScale | PowerFlex | PowerMax | Unity |
+| ---------- | ---------- | --------- | -------- | ----- |
+| ❌        | ❌         | ❌       | ✅       | ❌    |
 
 ## Installing Driver With sidecars 
 

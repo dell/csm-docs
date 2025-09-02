@@ -131,7 +131,11 @@ function onObservabilityChange() {
 function onObservabilityOperatorChange() {
 	if ($("#observability-operator").prop('checked') === true) {
 		$('div#observability-operator-metrics-wrapper').show();
-		$('div#observability-operator-topology-wrapper').show();
+		if (isVersionGreaterOrEqualTo(document.getElementById("csm-version").value, "1.15.0")) {
+			$('div#observability-operator-topology-wrapper').hide();
+		} else {
+			$('div#observability-operator-topology-wrapper').show();
+		}
 		$('div#observability-operator-otel-wrapper').show();
 	} else {
 		$('div#observability-operator-metrics-wrapper').hide();
@@ -460,8 +464,13 @@ function displayModules(installationType, driverName, CONSTANTS_PARAM) {
 			$(".max-volumes-per-node").show();
 			$(".topology").show();
 			document.getElementById("driver-namespace").value = CONSTANTS_PARAM.POWERSCALE_NAMESPACE;
-			if (installationType === 'operator'){
+			if (installationType === CONSTANTS_PARAM.OPERATOR){
 				$(".observability-operator").show();
+				if (isVersionGreaterOrEqualTo(document.getElementById("csm-version").value, "1.15.0")) {
+					$('div#observability-operator-topology-wrapper').hide();
+				} else {
+					$('div#observability-operator-topology-wrapper').show();
+				}
 				$(".observability").hide();
 				$(".replication-operator").show();
 				$(".resiliency").hide();
@@ -503,6 +512,11 @@ function displayModules(installationType, driverName, CONSTANTS_PARAM) {
 			if (installationType === CONSTANTS_PARAM.OPERATOR) {
 				
 				$(".observability-operator").show();
+				if (isVersionGreaterOrEqualTo(document.getElementById("csm-version").value, "1.15.0")) {
+					$('div#observability-operator-topology-wrapper').hide();
+				} else {
+					$('div#observability-operator-topology-wrapper').show();
+				}
 				$(".observability").hide();
 				$(".resiliency").hide();
 				// Check the CSM version and show the resiliency module if version is greater than 1.11.0
