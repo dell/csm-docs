@@ -207,8 +207,6 @@ spec:
 
 4. Prepare `samples/csm-authorization/config.yaml` which contains the JWT signing secret. The following table lists the configuration parameters.
 
-Prepare [samples/authorization/config.yaml](https://github.com/dell/csm-operator/blob/main/samples/authorization/config.yaml) which contains the JWT signing secret. The following table lists the configuration parameters.
-
 | Parameter            | Description                         | Required | Default |
 | -------------------- | ----------------------------------- | -------- | ------- |
 | web.jwtsigningsecret | String used to sign JSON Web Tokens | true     | secret  | . |
@@ -226,7 +224,7 @@ Prepare [samples/authorization/config.yaml](https://github.com/dell/csm-operator
 
 - Ensure the Secrets Store CSI Driver is installed and configured with an External Secret Provider. For guidance refer to our [installation and configuration guide](docs/getting-started/installation/helm/modules/authorizationv2-0#installing-and-configuring-the-secrets-store-csi-driver-with-an-external-secret-provider).
 
-- Create your secret within your chosen External Secret Provider. Paste the contents of this file as the secret content.
+- Create your JWT signing secret within your chosen External Secret Provider. Paste the contents of this file as the secret content.
 
 - Create your own [SecretProviderClass Object](https://secrets-store-csi-driver.sigs.k8s.io/getting-started/usage#create-your-own-secretproviderclass-object) based on your external secret provider. You also have the option to create your own Redis secret in the SecretProviderClass.
 
@@ -346,8 +344,8 @@ spec:
 {{% /tab %}}
 {{< /tabpane >}}
 
-
 >__Note__:
+> - Only one of SecretProviderClass or Secret can be used at a time.
 > - If you are installing Authorization in a different namespace than `authorization`, edit the `namespace` field in this file to your namespace.
 
 
