@@ -36,28 +36,22 @@ Storage system credentials can be provided in one of two ways:
    kubectl create namespace authorization
    ```
 
-2. Configure Storage Credentials
-
-{{< tabpane text=true lang="en" >}}
-{{% tab header="SecretProviderClass" lang="en" %}}
-<br>
-
-- Install a supported [External Secret Provider](https://secrets-store-csi-driver.sigs.k8s.io/getting-started/installation#install-external-secret-providers) to integrate with the Secrets Store CSI Driver. For guidance on setting up Vault, refer to our [Vault installation guide](docs/getting-started/installation/operator/modules/authorizationv2-0#vault-csi-provider-installation). For Conjur, refer to our [Conjur installation guide](docs/getting-started/installation/operator/modules/authorizationv2-0#conjur-csi-provider-installation).
-
-- Install the [Secrets Store CSI Driver](https://secrets-store-csi-driver.sigs.k8s.io/getting-started/installation) enabling the [`Sync as Kubernetes Secret`](https://secrets-store-csi-driver.sigs.k8s.io/topics/sync-as-kubernetes-secret) and [`Secret Auto Rotation`](https://secrets-store-csi-driver.sigs.k8s.io/topics/secret-auto-rotation) features.
-   >__Note__: If you are using Conjur with the Secrets Store CSI Driver, be sure to configure `--set 'tokenRequests[0].audience=conjur'` when installing the Secrets Store CSI Driver.
-- Create your own [SecretProviderClass Object](https://secrets-store-csi-driver.sigs.k8s.io/getting-started/usage#create-your-own-secretproviderclass-object) based on your external secret provider. You also have the option to create your own Redis secret in the SecretProviderClass.
-
-- For OpenShift environments, label the namespace:
-
-   ```sh
-   kubectl label namespace authorization \
-    pod-security.kubernetes.io/enforce=privileged \
-    security.openshift.io/MinimallySufficientPodSecurityStandard=privileged \
-    --overwrite
+2. Add the Dell Helm Charts repo
+   ```bash
+   helm repo add dell https://dell.github.io/helm-charts
    ```
 
-  {{< collapse id="2" title="Minimal SecretProviderClass configuration: includes only array-based credentials" card="false" >}}
+3. Configure Storage Credentials
+
+{{< tabpane Ordinal="1" text=true lang="en" >}}
+{{% tab header="SecretProviderClass" lang="en" %}}
+
+- Ensure the Secrets Store CSI Driver is installed and configured with an External Secret Provider. For guidance refer to our [installation and configuration guide](docs/getting-started/installation/helm/modules/authorizationv2-0#installing-and-configuring-the-secrets-store-csi-driver-with-an-external-secret-provider).
+
+- Create your own [SecretProviderClass Object](https://secrets-store-csi-driver.sigs.k8s.io/getting-started/usage#create-your-own-secretproviderclass-object) based on your external secret provider. You also have the option to create your own Redis secret in the SecretProviderClass.
+
+<br>
+  {{< collapse id="1" title="Minimal SecretProviderClass configuration: includes only array-based credentials" card="false" >}}
 
   <br>
   {{< tabpane Ordinal="2" name="secret-provider-class-no-redis" lang="bash">}}
@@ -108,7 +102,7 @@ spec:
   {{< /tabpane >}}
   {{< /collapse >}}
 
-  {{< collapse id="3" title="SecretProviderClass configuration with array-based and Redis credentials" card="false" >}}
+  {{< collapse id="2" title="SecretProviderClass configuration with array-based and Redis credentials" card="false" >}}
 
   <br>
   {{< tabpane Ordinal="3" name="secret-provider-class-with-redis" lang="bash">}}
@@ -190,10 +184,56 @@ spec:
   {{</tab >}}
   {{< /tabpane >}}
   {{< /collapse >}}
-{{< collapse id="4" title="SecretProviderClass configuration with array-based, Redis, and config credentials" card="false" >}}
+{{% /tab %}}
+{{% tab header="Secret" lang="en" %}}
+- Create a YAML file (in this example, `storage-secret.yaml`) containing the credentials:
+
+  ```bash
+  # Username and password for accessing storage system
+  username: "username"
+  password: "password"
+  ```
+<br>
+
+- Create the Secret:
+
+  ```bash
+  kubectl create secret generic storage-secret -n authorization --from-file=storage-secret.yaml
+  ```
+{{% /tab %}}
+{{< /tabpane >}}
+
+>__Note__: Only one of SecretProviderClass or Secret can be used at a time.
+
+<br>
+
+4. Prepare `samples/csm-authorization/config.yaml` which contains the JWT signing secret. The following table lists the configuration parameters.
+
+    | Parameter            | Description                         | Required | Default |
+    | -------------------- | ----------------------------------- | -------- | ------- |
+    | web.jwtsigningsecret | String used to sign JSON Web Tokens | true     | secret  | . |
+
+    Example:
+
+    ```yaml
+    web:
+      jwtsigningsecret: randomString123
+    ```
+
+{{< tabpane Ordinal="4" text=true lang="en" >}}
+{{% tab header="SecretProviderClass " lang="en" %}}
+
+- Ensure the Secrets Store CSI Driver is installed and configured with an External Secret Provider. For guidance refer to our [installation and configuration guide](docs/getting-started/installation/helm/modules/authorizationv2-0#installing-and-configuring-the-secrets-store-csi-driver-with-an-external-secret-provider).
+
+- Create your secret within your chosen External Secret Provider. Paste the contents of this file as the secret content.
+
+- Create your own [SecretProviderClass Object](https://secrets-store-csi-driver.sigs.k8s.io/getting-started/usage#create-your-own-secretproviderclass-object) based on your external secret provider. You also have the option to create your own Redis secret in the SecretProviderClass.
+
+<br>
+{{< collapse id="3" title="SecretProviderClass configuration with array-based, Redis, and config credentials" card="false" >}}
 
   <br>
-  {{< tabpane Ordinal="4" name="secret-provider-class-with-redis-and-config" lang="bash">}}
+  {{< tabpane Ordinal="5" name="secret-provider-class-with-redis-and-config" lang="bash">}}
   {{<tab header="Vault" >}}
 apiVersion: secrets-store.csi.x-k8s.io/v1
 kind: SecretProviderClass
@@ -269,7 +309,7 @@ spec:
         key: username
       - objectName: secrets/redis-password
         key: password
-  - secretName: config-secret-combined
+  - secretName: config-secret-conjur
     type: Opaque
     data:
       - objectName: secrets/config-object
@@ -288,59 +328,26 @@ spec:
   {{< /tabpane >}}
   {{< /collapse >}}
 {{% /tab %}}
-{{% tab header="Secret" lang="en" %}}
-- Create a YAML file (in this example, `storage-secret.yaml`) containing the credentials:
+{{% tab header="Secret " lang="en" %}}
+  After editing the file, run the following command to create a secret called `karavi-config-secret`:
 
   ```bash
-  # Username and password for accessing storage system
-  username: "username"
-  password: "password"
+
+  kubectl create secret generic karavi-config-secret -n authorization --from-file=config.yaml=samples/csm-authorization/config.yaml
   ```
-<br>
 
-- Create the Secret:
+  Use the following command to replace or update the secret:
 
   ```bash
-  kubectl create secret generic storage-secret -n authorization --from-file=storage-secret.yaml
+
+  kubectl create secret generic karavi-config-secret -n authorization --from-file=config.yaml=samples/csm-authorization/config.yaml -o yaml --dry-run=client | kubectl replace -f -
   ```
 {{% /tab %}}
 {{< /tabpane >}}
 
->__Note__: Only one of SecretProviderClass or Secret can be used at a time.
+>__Note__: Access config content using a SecretProviderClass OR create it manually.
 
 <br>
-
-3. Add the Dell Helm Charts repo
-   ```bash
-   helm repo add dell https://dell.github.io/helm-charts
-   ```
-
-4. Prepare `samples/csm-authorization/config.yaml` which contains the JWT signing secret. The following table lists the configuration parameters.
-
-    | Parameter            | Description                         | Required | Default |
-    | -------------------- | ----------------------------------- | -------- | ------- |
-    | web.jwtsigningsecret | String used to sign JSON Web Tokens | true     | secret  | . |
-
-    Example:
-
-    ```yaml
-    web:
-      jwtsigningsecret: randomString123
-    ```
-
-    After editing the file, run the following command to create a secret called `karavi-config-secret`:
-
-    ```bash
-
-    kubectl create secret generic karavi-config-secret -n authorization --from-file=config.yaml=samples/csm-authorization/config.yaml
-    ```
-
-    Use the following command to replace or update the secret:
-
-    ```bash
-
-    kubectl create secret generic karavi-config-secret -n authorization --from-file=config.yaml=samples/csm-authorization/config.yaml -o yaml --dry-run=client | kubectl replace -f -
-    ```
 
 5. Copy the default values.yaml file `cp charts/csm-authorization-v2.0/values.yaml myvalues.yaml`
 
@@ -348,7 +355,7 @@ spec:
 
 <ul>
 
-{{< collapse id="1" title="Parameter" >}}
+{{< collapse id="4" title="Parameter" >}}
 
 | Parameter                           | Description                                                                                                            | Required | Default                                                                                                                      |
 | ----------------------------------- | ---------------------------------------------------------------------------------------------------------------------- | -------- | ---------------------------------------------------------------------------------------------------------------------------- |
@@ -426,6 +433,22 @@ helm -n authorization install authorization -f myvalues.yaml charts/csm-authoriz
 >__Note__: Karavictl will not work with Authorization v2.x. Please use dellctl instead.
 
 Follow the instructions for [Installing dellctl](docs/tooling/cli/#installation-instructions).
+
+## Installing and configuring the Secrets Store CSI Driver with an External Secret Provider
+
+- Install a supported [External Secret Provider](https://secrets-store-csi-driver.sigs.k8s.io/getting-started/installation#install-external-secret-providers) to integrate with the Secrets Store CSI Driver. For guidance on setting up Vault, refer to our [Vault installation guide](docs/getting-started/installation/operator/modules/authorizationv2-0#vault-csi-provider-installation). For Conjur, refer to our [Conjur installation guide](docs/getting-started/installation/operator/modules/authorizationv2-0#conjur-csi-provider-installation).
+
+- Install the [Secrets Store CSI Driver](https://secrets-store-csi-driver.sigs.k8s.io/getting-started/installation) enabling the [`Sync as Kubernetes Secret`](https://secrets-store-csi-driver.sigs.k8s.io/topics/sync-as-kubernetes-secret) and [`Secret Auto Rotation`](https://secrets-store-csi-driver.sigs.k8s.io/topics/secret-auto-rotation) features.
+   >__Note__: If you are using Conjur with the Secrets Store CSI Driver, be sure to configure `--set 'tokenRequests[0].audience=conjur'` when installing the Secrets Store CSI Driver.
+
+- For OpenShift environments, label the namespace:
+
+   ```sh
+   kubectl label namespace authorization \
+    pod-security.kubernetes.io/enforce=privileged \
+    security.openshift.io/MinimallySufficientPodSecurityStandard=privileged \
+    --overwrite
+   ```
 
 ## Configuring the Authorization Proxy Server
 
