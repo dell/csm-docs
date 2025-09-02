@@ -190,6 +190,103 @@ spec:
   {{</tab >}}
   {{< /tabpane >}}
   {{< /collapse >}}
+{{< collapse id="4" title="SecretProviderClass configuration with array-based, Redis, and config credentials" card="false" >}}
+
+  <br>
+  {{< tabpane Ordinal="4" name="secret-provider-class-with-redis-and-config" lang="bash">}}
+  {{<tab header="Vault" >}}
+apiVersion: secrets-store.csi.x-k8s.io/v1
+kind: SecretProviderClass
+metadata:
+  name: vault-db-creds
+spec:
+  # Vault CSI Provider
+  provider: vault
+  secretObjects:
+  # Name of the Kubernetes Secret object
+  # This name will be used during deployment
+  - secretName: redis-secret-vault
+    type: kubernetes.io/basic-auth
+    data:
+      # Name of the mounted content to sync
+      # This could be the object name or the object alias
+      - objectName: dbRedisUsername
+        # Data field to populate
+        key: username
+      - objectName: dbRedisPassword
+        key: password
+  - secretName: config-secret-vault
+    type: Opaque
+    data:
+      - objectName: config-object
+        # The key must be config.yaml for this secret
+        key: config.yaml
+  parameters:
+    # Vault role name to use during login
+    roleName: 'csm-authorization'
+    # Vault's hostname
+    vaultAddress: 'https://vault:8200'
+    # TLS CA certification for validation
+    vaultCACertPath: '/vault/tls/ca.crt'
+    objects: |
+      - objectName: "dbUsername"
+        secretPath: "database/creds/db-app"
+        secretKey: "username"
+      - objectName: "dbPassword"
+        secretPath: "database/creds/db-app"
+        secretKey: "password"
+      - objectName: "dbRedisUsername"
+        secretPath: "database/creds/redis"
+        secretKey: "username"
+      - objectName: "dbRedisPassword"
+        secretPath: "database/creds/redis"
+        secretKey: "password"
+      - objectName: "config-object"
+        secretPath: "database/creds/config"
+        secretKey: "configkey"
+    # "objectName" is an alias used within the SecretProviderClass to reference
+    # that specific secret. This will also be the filename containing the secret.
+    # "secretPath" is the path in Vault where the secret should be retrieved.
+    # "secretKey" is the key within the Vault secret response to extract a value from.
+  {{</tab >}}
+  {{<tab header="Conjur" >}}
+apiVersion: secrets-store.csi.x-k8s.io/v1
+kind: SecretProviderClass
+metadata:
+  name: conjur-db-creds
+spec:
+  provider: conjur
+  secretObjects:
+  # Name of the Kubernetes Secret object
+  # This name will be used during deployment
+  - secretName: redis-secret-conjur
+    type: kubernetes.io/basic-auth
+    data:
+      # Name of the mounted content to sync
+      # This could be the object name or the object alias
+      - objectName: secrets/redis-username
+        # Data field to populate
+        key: username
+      - objectName: secrets/redis-password
+        key: password
+  - secretName: config-secret-combined
+    type: Opaque
+    data:
+      - objectName: secrets/config-object
+        # The key must be config.yaml for this secret
+        key: config.yaml
+  parameters:
+    conjur.org/configurationVersion: 0.2.0
+    account: replace-me-account
+    applianceUrl: 'https://conjur-conjur-oss.default.svc.cluster.local'
+    authnId: authn-jwt/kube
+    sslCertificate: |
+      -----BEGIN CERTIFICATE-----
+      ...
+      -----END CERTIFICATE-----
+  {{</tab >}}
+  {{< /tabpane >}}
+  {{< /collapse >}}
 {{% /tab %}}
 {{% tab header="Secret" lang="en" %}}
 - Create a YAML file (in this example, `storage-secret.yaml`) containing the credentials:
