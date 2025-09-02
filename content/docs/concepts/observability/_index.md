@@ -46,7 +46,7 @@ Container Storage Modules for Observability provides the following capabilities:
 
 ## Topology Data
 
-__NOTE__: Starting from CSM version 1.15, the Karavi topology component will no longer operate as a standalone service. Instead, topology data will be directly exported to the OpenTelemetry Collector.
+>__NOTE__: Starting from CSM version 1.15, the Karavi topology component will no longer operate as a standalone service. Instead, topology data will be directly exported to the OpenTelemetry Collector.
 
 Container Storage Modules for Observability provides Kubernetes administrators with the topology data related to containerized storage. This topology data collected via opentelemetry collector to Prometheus is visualized using Grafana:
 {{<table "table table-striped table-bordered table-sm tdleft">}}
