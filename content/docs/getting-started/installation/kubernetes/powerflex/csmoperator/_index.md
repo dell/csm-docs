@@ -47,7 +47,7 @@ Enable the SDC monitor by setting the `enable` flag to `true`.
     # sdc-monitor is disabled by default, due to high CPU usage
       - name: sdc-monitor
         enabled: false
-        image: quay.io/dell/storage/powerflex/sdc:4.5.2.1
+        image: quay.io/dell/storage/powerflex/sdc:4.5.4
         envs:
         - name: HOST_PID
           value: "1"
