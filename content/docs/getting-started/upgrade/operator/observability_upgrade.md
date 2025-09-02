@@ -27,7 +27,7 @@ The Observability module installed by the Dell CSM Operator can be updated like 
   use the object name in `kubectl edit` command.
 
   ```bash
-  kubectl edit csm <driver-object>/<object-name> -n <driver-namespace>
+  kubectl edit csm <object-name> -n <driver-namespace>
   ```
 
   For example - If the object name is isilon then use the name as isilon
