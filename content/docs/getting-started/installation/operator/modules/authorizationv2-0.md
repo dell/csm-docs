@@ -205,7 +205,7 @@ spec:
 
 <br>
 
-4. Prepare `samples/csm-authorization/config.yaml` which contains the JWT signing secret. The following table lists the configuration parameters.
+4. Prepare [samples/authorization/config.yaml](https://github.com/dell/csm-operator/blob/main/samples/authorization/config.yaml) which contains the JWT signing secret. The following table lists the configuration parameters.
 
 | Parameter            | Description                         | Required | Default |
 | -------------------- | ----------------------------------- | -------- | ------- |
@@ -446,7 +446,6 @@ Follow the instructions for [Installing dellctl](docs/tooling/cli/#installation-
 
 - Install the [Secrets Store CSI Driver](https://secrets-store-csi-driver.sigs.k8s.io/getting-started/installation) enabling the [`Sync as Kubernetes Secret`](https://secrets-store-csi-driver.sigs.k8s.io/topics/sync-as-kubernetes-secret) and [`Secret Auto Rotation`](https://secrets-store-csi-driver.sigs.k8s.io/topics/secret-auto-rotation) features.
    >__Note__: If you are using Conjur with the Secrets Store CSI Driver, be sure to configure `--set 'tokenRequests[0].audience=conjur'` when installing the Secrets Store CSI Driver.
-- Create your own [SecretProviderClass Object](https://secrets-store-csi-driver.sigs.k8s.io/getting-started/usage#create-your-own-secretproviderclass-object) based on your external secret provider. You also have the option to create your own Redis secret in the SecretProviderClass.
 
 - For OpenShift environments, label the namespace:
 
