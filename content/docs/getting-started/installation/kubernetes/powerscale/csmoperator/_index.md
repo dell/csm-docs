@@ -35,6 +35,7 @@ To deploy the Operator, follow the instructions available [here](../../../operat
          username: "user"
          password: "password"
          endpoint: "1.2.3.4"
+         isDefault: true
          endpointPort: "8080"
      ```
       - **Update Parameters:** Replace placeholders with actual values for your PowerScale array.

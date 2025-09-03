@@ -34,6 +34,7 @@ To deploy the Operator, follow the instructions available [here](../../../operat
       - clusterName: "cluster2"
          username: "user"
          password: "password"
+         isDefault: true
          endpoint: "1.2.3.4"
          endpointPort: "8080"
      ```

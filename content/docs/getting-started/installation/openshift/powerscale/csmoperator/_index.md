@@ -183,6 +183,7 @@ dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      
     - clusterName: "ps01"
       username: "csmadmin"
       password: "P@ssw0rd123"
+      isDefault: true
       endpoint: "ps01.example.com"
       skipCertificateValidation: true
     EOF
