@@ -219,7 +219,7 @@ spec:
   ```
 
 {{< tabpane Ordinal="4" text=true lang="en" group="config-tabs" >}}
-{{% tab header="SecretProviderClass" lang="en" %}}
+{{% tab header="SecretProviderClass " lang="en" %}}
 <br>
 
 - Ensure the Secrets Store CSI Driver is installed and configured with an External Secret Provider. For guidance refer to our [installation and configuration guide](docs/getting-started/installation/helm/modules/authorizationv2-0#installing-and-configuring-the-secrets-store-csi-driver-with-an-external-secret-provider).
@@ -327,7 +327,7 @@ spec:
 
 {{< /collapse >}}
 {{% /tab %}}
-{{% tab header="Secret" lang="en" %}}
+{{% tab header="Secret " lang="en" %}}
 
   After editing the file, run this command to create a secret called `karavi-config-secret`:
 
