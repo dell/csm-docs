@@ -399,7 +399,7 @@ spec:
    | conjur | A list of secretProviderClass objects when using Conjur. | No | - |
    | conjur.name | The name of a Conjur secretProviderClass object. | No | - |
    | conjur.paths | The secret paths of a Conjur secretProviderClass object. | No | - |
-   | **secrets** | This section configures Kubernetest secrets with their names. | No | - |
+   | **secrets** | This section configures Kubernetes secrets with their names. | No | - |
 {{< /collapse >}}
 
 
