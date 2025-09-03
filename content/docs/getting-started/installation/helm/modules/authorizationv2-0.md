@@ -207,7 +207,7 @@ spec:
 
 <br>
 
-4. Prepare `samples/csm-authorization/config.yaml` which contains the JWT signing secret. The following table lists the configuration parameters.
+4. Prepare [samples/authorization/config.yaml](https://github.com/dell/helm-charts/blob/main/samples/csm-authorization/config.yaml) which contains the JWT signing secret. The following table lists the configuration parameters.
 
     | Parameter            | Description                         | Required | Default |
     | -------------------- | ----------------------------------- | -------- | ------- |
