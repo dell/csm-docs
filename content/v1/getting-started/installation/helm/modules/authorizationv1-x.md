@@ -29,7 +29,7 @@ The following third-party components are optionally installed in the specified n
 ## Install Container Storage Modules Authorization
 
 **Steps**
-1. Create a namespace where you want to install Container Storage ModuleM Authorization.
+1. Create a namespace where you want to install Container Storage Module Authorization.
    ```bash
    kubectl create namespace authorization
    ```
