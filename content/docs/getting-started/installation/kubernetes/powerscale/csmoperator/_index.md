@@ -80,7 +80,7 @@ To deploy the Operator, follow the instructions available [here](../../../operat
 
 4. **Install Driver**
 
-   i. **Create a CR (Custom Resource)** for PowerFlex using the sample files provided
+   i. **Create a CR (Custom Resource)** for PowerScale using the sample files provided
 
     a. **Minimal Configuration:**
       ```yaml
