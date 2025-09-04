@@ -8,7 +8,7 @@ description: >
 {{< message text="1" >}}
 {{% /pageinfo %}}
 
-Install the Observability module for Dell CSI Drivers using the Container Storage Modules Operator. This will deploy Observability with topology service, Otel collector, and metrics services.
+Install the Observability module for Dell CSI Drivers using the Container Storage Modules Operator. This will deploy Observability with Otel collector, and metrics services.
 
 ## Prerequisites
 
@@ -24,7 +24,8 @@ Install the Observability module for Dell CSI Drivers using the Container Storag
           enabled: false
         - name: metrics-{{labels}}
           enabled: true
-  ```                                       
+  ```
+
   If cert-manager has already been installed, don’t enable it.
   
   **Detailed Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/main/samples/{{< version-docs key="csm-operator_latest_samples_dir" >}}/storage_csm_{{Var}}_{{< version-docs key="sample_sc_pmax" >}}.yaml) for detailed settings. If cert-manager has already been installed, don’t enable it.
@@ -45,7 +46,7 @@ Install the Observability module for Dell CSI Drivers using the Container Storag
 
 - If you enable `metrics-{{labels}}`, you must enable `otel-collector` as well.  
 - Enable the otel-collector only if the metrics component is also enabled.
-- For multiple drivers, enable topology, otel-collector, and cert-manager only in the first driver. For others, enable only the metrics component. Delete the first driver last.
+- For multiple drivers, otel-collector, and cert-manager only in the first driver. For others, enable only the metrics component. Delete the first driver last.
 
 ## Install Observability
 

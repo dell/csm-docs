@@ -35,6 +35,7 @@ To deploy the Operator, follow the instructions available [here](../../../operat
          username: "user"
          password: "password"
          endpoint: "1.2.3.4"
+         isDefault: true
          endpointPort: "8080"
      ```
       - **Update Parameters:** Replace placeholders with actual values for your PowerScale array.
@@ -79,7 +80,7 @@ To deploy the Operator, follow the instructions available [here](../../../operat
 
 4. **Install Driver**
 
-   i. **Create a CR (Custom Resource)** for PowerFlex using the sample files provided
+   i. **Create a CR (Custom Resource)** for PowerScale using the sample files provided
 
     a. **Minimal Configuration:**
       ```yaml

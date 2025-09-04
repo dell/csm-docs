@@ -62,3 +62,15 @@ The following storage capacity metrics are available from the OpenTelemetry coll
 | powermax_volume_total_capacity_gigabytes        | Total capacity of the volume in GB                                      |
 | powermax_volume_used_capacity_gigabytes         | Used capacity of a volume in GB                                         |
 | powermax_volume_used_capacity_percentage        | Used capacity of a volume in percent                                    |
+
+## Karavi Topology Metrics
+
+Topology provides Kubernetes administrators with the topology data related to containerized storage that is provisioned by a CSI (Container Storage Interface) Driver for Dell storage products.
+
+To disable these metrics, set the ```topologyMetricsEnabled``` field to false in helm/values.yaml.
+
+The following topology metrics are available from the OpenTelemetry collector endpoint. Please see the [Container Storage Modules for Observability](../) for more information on deploying and configuring the OpenTelemetry collector.
+
+| Metric | Description |
+| - | - |
+| karavi_topology_metrics | Collects topology data. More details [here](../_index.md#topology-data )  |
