@@ -362,7 +362,9 @@ We support CustomTopology which enables users to apply labels for nodes - "csi-i
 
 When “enableCustomTopology” is set to “true”, the CSI driver fetches custom labels “csi-isilon.dellemc.com/XX.XX.XX.XX=csi-isilon.dellemc.com” applied on worker nodes, and uses them to initialize node pod with custom PowerScale FQDN/IP.
 
-**Note:** Only a single cluster can be configured as part of secret.yaml for custom topology.
+**Note:**
+- The Custom Topology feature is not supported when Authorization is enabled.
+- Only a single cluster can be configured as part of secret.yaml for custom topology.
 
 ### Topology Usage
 
