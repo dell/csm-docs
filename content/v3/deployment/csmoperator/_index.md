@@ -72,7 +72,7 @@ Both editions have the same codebase and are supported by Dell Technologies, the
 git clone -b v1.7.0 https://github.com/dell/csm-operator.git
 ```
 3. `cd csm-operator`
-4. _(Optional)_ If using a local Docker image, edit the `deploy/operator.yaml` file and set the image name for the CSM Operator Deployment.
+4. _(Optional)_ If using a local image, edit the `deploy/operator.yaml` file and set the image name for the CSM Operator Deployment.
 5. _(Optional)_ The Dell CSM Operator might need more resources if users have larger environment (>1000 Pods). You can modify the default resource requests and limits in the files `deploy/operator.yaml`, `config/manager/manager.yaml`  and increase the values for cpu and memory. More information on setting the resource requests and limits can be found [here](https://sdk.operatorframework.io/docs/best-practices/managing-resources/). Current default values are set as below:
     ```yaml
         resources:
