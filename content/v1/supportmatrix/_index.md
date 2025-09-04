@@ -44,10 +44,10 @@ weight: 1
 {{<table "table table-striped table-bordered table-sm">}}
 | Version | Capability               | PowerFlex | PowerMax | PowerStore | PowerScale | Unity |
 |---------|--------------------------| :-------: | :------: | :--------: | :--------: | :---: |
-| 4.18 - 4.19    |  <div style="text-align: left"> [Storage](https://github.com/kiagnose/kubevirt-storage-checkup) </div> | Yes       | Yes      | Yes        | Yes        | No    |
-| 4.18 - 4.19   | <div style="text-align: left">  Observability        </div>   | Yes       | Yes      | No         | Yes        | No    |
-| 4.18 - 4.19    | <div style="text-align: left"> Authorization - v2.x  </div>   | Yes       | Yes      | No         | Yes        | No    |
-| 4.18 - 4.19   | <div style="text-align: left"> Resiliency            </div>   | Yes       | Yes      | Yes         | Yes        | No    |
+| 4.18 - 4.19    |  <div style="text-align: left"> [Storage](https://github.com/kiagnose/kubevirt-storage-checkup) </div> | Yes       | Yes      | Yes        | No        | No    |
+| 4.18 - 4.19   | <div style="text-align: left">  Observability        </div>   | Yes       | Yes      | No         | No        | No    |
+| 4.18 - 4.19    | <div style="text-align: left"> Authorization - v2.x  </div>   | Yes       | Yes      | Yes        | No        | No    |
+| 4.18 - 4.19   | <div style="text-align: left"> Resiliency            </div>   | Yes       | Yes      | Yes         | No        | No    |
 | 4.18 - 4.19    | <div style="text-align: left"> Replication (Metro)	</div>   | No       | Yes      | Yes         | No        | No    |
 {{</table>}}
 
