@@ -1,0 +1,59 @@
+---
+linkTitle: "Component Version"
+weight: 1 
+--- 
+
+### Component Version
+
+{{<table "table table-striped table-bordered table-sm">}}
+| Component | Image Version |
+| - | - |
+|<div style="text-align:left"> PowerFlex | {{< version-v1 key="PFlex_latestVersion" >}} |
+|<div style="text-align:left"> PowerStore | {{< version-v1 key="PStore_latestVersion" >}} |
+|<div style="text-align:left"> PowerMax | {{< version-v1 key="PMax_latestVersion" >}} |
+|<div style="text-align:left"> PowerScale | {{< version-v1 key="PScale_latestVersion" >}} |
+|<div style="text-align:left"> Unity XT | {{< version-v1 key="PUnity_latestVersion" >}} |
+|<div style="text-align:left"> Authorization v1.x | {{< version-v1 key="Authv1" >}} |
+|<div style="text-align:left"> Authorization v2.x |{{< version-v1 key="Authv2" >}} |
+|<div style="text-align:left"> Observability | {{< version-v1 key="Observability" >}} |
+|<div style="text-align:left"> Replication |{{< version-v1 key="Replication" >}} |
+|<div style="text-align:left"> Resiliency | {{< version-v1 key="Resiliency" >}} |
+| Application Mobility |{{< version-v1 key="application-mobility" >}} |
+{{</table>}}
+
+</br>
+
+### Container Storage Modules Operator 1.9.1 Certified Images - PowerFlex
+
+{{<table "table table-striped table-bordered table-sm">}}
+| Version/Digest | Image | Name |
+| - | - | - |
+|1.9.1|<div style="text-align:left"> registry.connect.redhat.com/dell-emc/dell-container-storage-modules-operator@sha256:7f66f9a663aba48449f6ae385f951a32d4bb8f1a38b320c6eda32b3d2c438292    | <div style="text-align:left">  dell-csm-operator|
+|2.14.1|<div style="text-align:left"> registry.connect.redhat.com/dell-emc/dell-csm-powerflex@sha256:94d6528f7beb2a3c59957373873964267c4fa871692d636c7849d55ef515180a    | <div style="text-align:left">  csi-vxflexos |
+|5.1.0|<div style="text-align:left"> registry.k8s.io/sig-storage/csi-provisioner@sha256:672e45d6a55678abc1d102de665b5cbd63848e75dc7896f238c8eaaf3c7d322f  | <div style="text-align:left">  provisioner |
+|4.8.0|<div style="text-align:left"> registry.k8s.io/sig-storage/csi-attacher@sha256:a399393ff5bd156277c56bae0c08389b1a1b95b7fd6ea44a316ce55e0dd559d7  | <div style="text-align:left">  attacher|
+|2.13.0|<div style="text-align:left"> registry.k8s.io/sig-storage/csi-node-driver-registrar@sha256:d7138bcc3aa5f267403d45ad4292c95397e421ea17a0035888850f424c7de25d  |  <div style="text-align:left">  registrar  |
+|1.13.1|<div style="text-align:left"> registry.k8s.io/sig-storage/csi-resizer@sha256:2a0b297cc7c4cd376ac7413df339ff2fdaa1ec9d099aed92b5ea1f031ef7f639  | <div style="text-align:left"> resizer|
+|8.2.0|<div style="text-align:left"> registry.k8s.io/sig-storage/csi-snapshotter@sha256:dd788d79cf4c1b8edee6d9b80b8a1ebfc51a38a365c5be656986b129be9ac784  |  <div style="text-align:left">  snapshotter |
+|1.10.0|<div style="text-align:left"> registry.connect.redhat.com/dell-emc/dell-csm-metadata-retriever@sha256:a8412f649ffca3aa72f5c9f5f2c3eb5dac5d742dfa5d3f4e0ef4bd81d72f2956  | <div style="text-align:left">  metadataretriever  |
+|0.14.0|<div style="text-align:left"> registry.k8s.io/sig-storage/csi-external-health-monitor-controller@sha256:65d118e955cfa0827d0f727fe161a7469e0e1c6829c347a484130aeb6e45f377  |<div style="text-align:left">  externalhealthmonitorcontroller|
+|4.5.4000.111|<div style="text-align:left"> quay.io/dell/storage/powerflex/sdc@sha256:4aca94f895636efcc7308aeb8b083cb2f15133e255185b8db0805b9649ca8540  | <div style="text-align:left">  sdc  |
+|1.12.0|<div style="text-align:left"> registry.connect.redhat.com/dell-emc/dell-csm-topology@sha256:8c99287c7da6fd122d29cc7b2ae0dec147fd0c666b94a8a99a9b2003ffe68586 |<div style="text-align:left"> topology |
+|0.124.0|<div style="text-align:left"> ghcr.io/open-telemetry/opentelemetry-collector-releases/opentelemetry-collector@sha256:9b8b6ef5f387429f5cb27267dfd3ca038b861a23cce40164a6c327efcceb7665  | <div style="text-align:left"> otel-collector |
+|1.12.0|<div style="text-align:left"> registry.connect.redhat.com/dell-emc/dell-csm-metrics-powerflex@sha256:55595df2821dc1d45b6326830511435d0c5d88fe5602ca66547ea3548c970477  |<div style="text-align:left"> metrics-powerflex  |
+|1.12.0|<div style="text-align:left"> registry.connect.redhat.com/dell-emc/dell-csm-replicator@sha256:3647b734da48dd44f4b8af9cd56eaba613d59201927420e877ed9eeefe573b32  | <div style="text-align:left"> dell-csi-replicator  |
+|1.12.0|<div style="text-align:left"> registry.connect.redhat.com/dell-emc/dell-csm-replication-controller-manager@sha256:45ff6eb59f4ac87cd68d4405c07f20e7e34f5a2d33775f33d89b8a3437a06fab  | <div style="text-align:left"> dell-replication-controller-manager  |
+|1.13.0|<div style="text-align:left"> registry.connect.redhat.com/dell-emc/dell-csm-podmon@sha256:5c3f5e473b9f3ce5797a61b2466d16d8b9c488e69ee35ac336c424bef8979abc  | <div style="text-align:left"> podmon-node  |
+|2.2.0|<div style="text-align:left"> registry.connect.redhat.com/dell-emc/dell-csm-authorization-sidecar@sha256:dd8aac3380d1d0664f7bbeb63da36443a57da12f9a26e435f33b8a33bdea4cb9 | <div style="text-align:left"> karavi-authorization-proxy |
+|2.2.0|<div style="text-align:left"> registry.connect.redhat.com/dell-emc/dell-csm-authorization-proxy@sha256:1a3e53c1758850d26881923ee744b3cfff120daaaff33565c438fcc39d65f2ab  | <div style="text-align:left"> csm-authorization-proxy |
+|2.2.0|<div style="text-align:left"> registry.connect.redhat.com/dell-emc/dell-csm-authorization-tenant@sha256:030f1b20442b5df62ee8cce281d40226781478d351ea8fa67477cbb318fcc401  | <div style="text-align:left"> csm-authorization-tenant |
+|2.2.0|<div style="text-align:left"> registry.connect.redhat.com/dell-emc/dell-csm-authorization-role@sha256:c874c7c23b55e88e98615172678e63ceb0e534ab11cdaf8949eef16881af64b7  | <div style="text-align:left"> csm-authorization-role |
+|2.2.0|<div style="text-align:left"> registry.connect.redhat.com/dell-emc/dell-csm-authorization-storage@sha256:bdc27c5bacbdaa601272055e8a8a6a482ae20192df50cce004d9b4a0fd131289  | <div style="text-align:left"> csm-authorization-storage|
+|0.70.0|<div style="text-align:left"> docker.io/openpolicyagent/opa@sha256:2b1c4b231f6dfa6a2baea4af4109203b10cd4b65e836d72f03bfe5d8dfce7095  | <div style="text-align:left"> opa |
+|8.5.11|<div style="text-align:left"> docker.io/openpolicyagent/kube-mgmt@sha256:8b9db2e7af5a237a8cea8f090484f29ddc34c88e30a58a6f5617b45ab5420d22  | <div style="text-align:left"> kube-mgmt|
+|2.2.0|<div style="text-align:left"> registry.connect.redhat.com/dell-emc/dell-csm-authorization-controller@sha256:45af064da686118a8e5c2711dc00f1969c581bb169c26f5fb7f6f6a6186142fa  | <div style="text-align:left"> csm-authorization-controller|
+|7.4.1|<div style="text-align:left"> docker.io/redis@sha256:c1e88455c85225310bbea54816e9c3f4b5295815e6dbf80c34d40afc6df28275  | <div style="text-align:left"> redis |
+|19cd0c49f418|<div style="text-align:left"> docker.io/rediscommander/redis-commander@sha256:19cd0c49f418779fa2822a0496c5e6516d0c792effc39ed20089e6268477e40a   | <div style="text-align:left"> redis-commander|
+|1.27.5|<div style="text-align:left"> docker.io/nginxinc/nginx-unprivileged@sha256:f9dfa9c20b2b0b7c5cc830374f22f23dee3f750b6c5291ca7e0330b5c88e6403   | <div style="text-align:left"> nginx|
+
+{{</table>}}
