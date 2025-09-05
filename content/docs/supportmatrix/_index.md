@@ -46,7 +46,8 @@ weight: 1
 | 4.18        | <div style="text-align: left"> Replication (Metro)	</div>                                            | ✅         | ❌        | ❌        | ✅      | ❌      |
 {{</table>}}
 
-> Note: Replication with Sync/Async modes is not supported.
+> Note: Replication with Sync/Async modes is not supported.<br>
+> Note: For details on the limitations of PowerStore Metro support, please refer [here](../concepts/replication/high-availability/powerstore-metro/#limitations).
 
 ## Tested Host Operating Systems
 
