@@ -27,7 +27,7 @@ weight: 1
 | Platform                   | Version          |
 |----------------------------|:----------------:|
 | Kubernetes                 | 1.30, 1.31, 1.32 |
-| Red Hat OpenShift          | 4.17, 4.18       |
+| Red Hat OpenShift          | 4.18, 4.19       |
 | Mirantis Kubernetes Engine | 3.7.x            |
 {{</table>}}
 
