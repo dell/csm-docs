@@ -266,7 +266,7 @@ spec:
       CONCURRENT_STORAGE_REQUESTS: 10
       ```
 
-  4. Update your Storage, Role, and Tenant resource definitions with the latest [configuration](../../../../concepts/authorization/v2.x/configuration/) schema. Apply changes using the Kubernetes CLI:
+  4. Update your Storage, Role, and Tenant resource definitions with the latest [configuration](docs/concepts/authorization/v2.x/configuration/) schema. Apply changes using the Kubernetes CLI:
 
       ```bash
       kubectl apply -f <file-name> -n authorization

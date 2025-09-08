@@ -228,7 +228,7 @@ spec:
     helm upgrade --version $latest_chart_version -f myvalues.yaml authorization dell/csm-authorization -n authorization
     ```
 
-5. Update your Storage, Role, and Tenant resource definitions with the latest [configuration](../../../../concepts/authorization/v2.x/configuration/) schema. Apply changes using the Kubernetes CLI:
+5. Update your Storage, Role, and Tenant resource definitions with the latest [configuration](docs/concepts/authorization/v2.x/configuration/) schema. Apply changes using the Kubernetes CLI:
 
     ```bash
     kubectl apply -f <file-name> -n authorization
