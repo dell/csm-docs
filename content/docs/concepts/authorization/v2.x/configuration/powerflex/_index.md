@@ -118,7 +118,7 @@ Given a setup where Kubernetes, a storage system, and the Authorization Proxy Se
 
     - Update the `SKIP_CERTIFICATE_VALIDATION` environment value to `true` or `false` depending on if you want to disable or enable certificate validation of Authorization Proxy Server.
 
-    - Do not update the `configVersion`. You will notice in the example that it is set to v1.14.0. This ensures that Operator checks on version support do not prevent deployment of the latest version of authorization.
+    - Do not update the `configVersion`. You will notice in the example that it is set to {{< version-docs key="Authv2" >}}. This ensures that Operator checks on version support do not prevent deployment of the latest version of authorization.
 
     Example:
 
@@ -128,7 +128,7 @@ Given a setup where Kubernetes, a storage system, and the Authorization Proxy Se
       - name: authorization
         # enable: Enable/Disable csm-authorization
         enabled: true
-        configVersion: {{< version-docs key="Authv1_ConfigVersion" >}}
+        configVersion: {{< version-docs key="Authv2" >}}
         components:
         - name: karavi-authorization-proxy
           image: quay.io/dell/container-storage-modules/csm-authorization-sidecar:{{< version-docs key="Authv2_csm_authorization_sidecar" >}}
