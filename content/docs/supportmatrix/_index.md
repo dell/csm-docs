@@ -39,11 +39,11 @@ weight: 1
 {{<table "table table-striped table-bordered table-sm">}}
 | Version     | Capability                                                                                            | PowerStore | PowerScale | PowerFlex | PowerMax | Unity XT |
 |-------------|-------------------------------------------------------------------------------------------------------| :--------: | :--------: | :-------: | :------: | :------: |
-| 4.17 - 4.18 | <div style="text-align: left"> [Storage](https://github.com/kiagnose/kubevirt-storage-checkup) </div> | ✅         | ✅        | ✅        | ✅      | ❌      |
-| 4.17 - 4.18 | <div style="text-align: left">  Observability        </div>                                           | ❌         | ✅        | ✅        | ✅      | ❌      |
-| 4.17 - 4.18 | <div style="text-align: left"> Authorization - v2.x  </div>                                           | ❌         | ✅        | ✅        | ✅      | ❌      |
-| 4.17 - 4.18 | <div style="text-align: left"> Resiliency            </div>                                           | ✅         | ✅        | ✅        | ✅      | ❌      |
-| 4.18        | <div style="text-align: left"> Replication (Metro)	</div>                                            | ✅         | ❌        | ❌        | ✅      | ❌      |
+| 4.17 - 4.18 | <div style="text-align: left"> [Storage](https://github.com/kiagnose/kubevirt-storage-checkup) </div> | Yes        | Yes        | Yes        | Yes     | No       |
+| 4.17 - 4.18 | <div style="text-align: left">  Observability        </div>                                           | No         | Yes        | Yes        | Yes     | No       |
+| 4.17 - 4.18 | <div style="text-align: left"> Authorization - v2.x  </div>                                           | No         | Yes        | Yes        | Yes     | No       |
+| 4.17 - 4.18 | <div style="text-align: left"> Resiliency            </div>                                           | Yes        | Yes        | Yes        | Yes     | No       |
+| 4.18        | <div style="text-align: left"> Replication (Metro)	</div>                                            | Yes        | No         | No         | Yes     | No       |
 {{</table>}}
 
 > Note: Replication with Sync/Async modes is not supported.
@@ -65,10 +65,10 @@ Container Storage Modules doesn't officially support specific operating systems,
 {{<table "table table-striped table-bordered table-sm">}}
 | Module           | PowerStore | PowerScale | PowerFlex | PowerMax | Unity XT |
 | ---------------- | ---------- |------------|-----------|----------|----------|
-| Authorization v2 | ✅        |  ✅        | ✅       | ✅       | ❌      |
-| Replication      | ✅        |  ✅        | ✅       | ✅       | ❌      |
-| Observability    | ✅        |  ✅        | ✅       | ✅       | ❌      |
-| Resiliency       | ✅        |  ✅        | ✅       | ✅       | ✅      |
+| Authorization v2 | Yes        | Yes        | Yes       | Yes       | No      |
+| Replication      | Yes        | Yes        | Yes       | Yes       | No      |
+| Observability    | Yes        | Yes        | Yes       | Yes       | No      |
+| Resiliency       | Yes        | Yes        | Yes       | Yes       | Yes     |
 {{</table>}}
 
 
@@ -76,10 +76,10 @@ Container Storage Modules doesn't officially support specific operating systems,
 {{<table "table table-striped table-bordered table-sm">}}
 | Module           | PowerStore | PowerScale | PowerFlex | PowerMax | Unity XT |
 | ---------------- | ---------- |------------|-----------|----------|----------|
-| Authorization v2 | ✅        |  ✅        | ✅       | ✅       | ❌      |
-| Replication      | ✅        |  ✅        | ✅       | ✅       | ❌      |
-| Observability    | ✅        |  ✅        | ✅       | ✅       | ❌      |
-| Resiliency       | ✅        |  ✅        | ✅       | ✅       | ❌      |
+| Authorization v2 | Yes        |  Yes        | Yes       | Yes      | No      |
+| Replication      | Yes        |  Yes        | Yes       | Yes      | No      |
+| Observability    | Yes        |  Yes        | Yes       | Yes      | No      |
+| Resiliency       | Yes        |  Yes        | Yes       | Yes      | No      |
 {{</table>}}
 
 ## OpenShift Compatibility with Operator
@@ -104,6 +104,6 @@ Container Storage Modules doesn't officially support specific operating systems,
 {{<table "table table-striped table-bordered table-sm">}}
 | Wizard   | PowerStore | PowerScale | PowerFlex | PowerMax | Unity XT |
 | -------- | ---------- |------------|-----------|----------|----------|
-| Helm     | ✅         |  ✅        | ✅       | ✅       | ❌      |
-| Operator | ✅         |  ✅        | ❌       | ✅       | ❌      |
+| Helm     | Yes        |  Yes        | Yes     | Yes       | No       |
+| Operator | Yes        |  Yes        | No      | Yes       | No       |
 {{</table>}}
