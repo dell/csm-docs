@@ -228,6 +228,12 @@ spec:
     helm upgrade --version $latest_chart_version -f myvalues.yaml authorization dell/csm-authorization -n authorization
     ```
 
+5. Update your Storage, Role, and Tenant resource definitions with the latest [configuration](../../../../concepts/authorization/v2.x/configuration/) schema. Apply changes using the Kubernetes CLI:
+
+    ```bash
+    kubectl apply -f <file-name> -n authorization
+    ```
+
 ## Upgrading Dell CSI Driver(s) with CSM for Authorization enabled
 
 Given a setup where the CSM for Authorization proxy server is already upgraded to the latest version, follow the upgrade instructions for the applicable CSI Driver(s) to upgrade the driver and the CSM for Authorization sidecar

@@ -207,23 +207,21 @@ spec:
 
   1.  Modifying the existing Authorization Proxy Server installation directly via `kubectl edit`
 
-      ```bash
-      kubectl get csm -n <module-namespace>
-      ```
+      **Example: Editing the Authorization Proxy Server Configuration**
 
-      For example - If the Authorization Proxy Server is installed in authorization namespace then run this command to get the object name
+      If the Authorization Proxy Server is deployed in the `authorization` namespace, retrieve the CSM object name using:
 
       ```bash
       kubectl get csm -n authorization
       ```
 
-      use the object name in `kubectl edit` command.
+      Use the retrieved object name in the `kubectl get` command to modify its configuration
 
       ```bash
       kubectl edit csm <object-name> -n <module-namespace>
       ```
 
-      For example - If the object name is authorization then use the name as authorization and if the namespace is authorization, then run this command to edit the object
+      For instance, if the object name is `authorization` and the namespace is also `authorization`, run:
 
       ```bash
       kubectl edit csm authorization -n authorization
@@ -243,6 +241,36 @@ spec:
         - Review and revise configuration parameters:
             - Add any newly introduced parameters.
             - Remove any parameters that have been deprecated or are no longer supported.
+
+  3. Modify the Authorization ConfigMap parameters:
+
+      The latest configuration values are available in the updated sample [Custom Resource for Authorization](https://github.com/dell/csm-operator/tree/main/samples/authorization).
+
+      To apply these changes, edit the `csm-config-params` ConfigMap using:
+      ```bash
+      kubectl edit configmap csm-config-params -n authorization
+      ```
+
+      As part of the upgrade from CSM v1.14 → v1.15 (Authorization v2.2.0 → v2.3.0), modify the existing `csm-config-params` ConfigMap in the `authorization` namespace to reflect the new unified concurrency setting.
+
+      Remove:
+
+      ```yaml
+      CONCURRENT_POWERFLEX_REQUESTS: 10
+      CONCURRENT_POWERSCALE_REQUESTS: 10
+      ```
+
+      Add:
+
+      ```yaml
+      CONCURRENT_STORAGE_REQUESTS: 10
+      ```
+
+  4. Update your Storage, Role, and Tenant resource definitions with the latest [configuration](../../../../concepts/authorization/v2.x/configuration/) schema. Apply changes using the Kubernetes CLI:
+
+      ```bash
+      kubectl apply -f <file-name> -n authorization
+      ```
 
 ### Upgrading CSI Driver, Authorization sidecar with Authorization module enabled
 
