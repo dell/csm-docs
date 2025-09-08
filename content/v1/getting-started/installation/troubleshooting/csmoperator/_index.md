@@ -11,11 +11,11 @@ weight: 3
   - <a href="#why-do-some-of-the-custom-resource-fields-show-up-as-invalid-or-unsupported-in-the-operatorhub-gui">Why do some of the Custom Resource fields show up as invalid or unsupported in the OperatorHub GUI?</a> 
   - <a href="#how-can-i-view-detailed-logs-for-the-container-storage-module-operator">How can I view detailed logs for the Container Storage Modules SM Operator?</a> 
   - <a href="#my-dell-csi-driver-install-failed-how-do-i-fix-it">My Dell CSI Driver install failed. How do I fix it?</a>
-  - <a href="#my-csm-replication-install-fails-to-validate-replication-prechecks-with-no-such-host">My CSContainer Storage ModuleM Replication install fails to validate replication prechecks with 'no such host'.</a> 
+  - <a href="#my-csm-replication-install-fails-to-validate-replication-prechecks-with-no-such-host">My Container Storage Module Replication install fails to validate replication prechecks with 'no such host'.</a> 
   - <a href="#how-to-update-resource-limits-for-csm-operator-when-it-is-deployed-using-operator-hub">How to update resource limits for Container Storage Modules Operator when it is deployed using Operator hub</a>
 
 ### Can Container Storage Modules Operator manage existing drivers installed using Helm charts or the CSI Operator?
-The Container Storage Modules Operator is unable to manage any existing driver installed using Helm charts or the CSI Operator. If you already have installed one of the Dell CSI driver in your cluster and  want to use the CSM operator based deployment, uninstall the driver and then redeploy the driver via Container Storage ModuleM Operator
+The Container Storage Modules Operator is unable to manage any existing driver installed using Helm charts or the CSI Operator. If you already have installed one of the Dell CSI driver in your cluster and  want to use the CSM operator based deployment, uninstall the driver and then redeploy the driver via Container Storage Module Operator
 
 
 ### Why do some of the Custom Resource fields show up as invalid or unsupported in the OperatorHub GUI?
