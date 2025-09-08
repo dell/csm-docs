@@ -470,7 +470,7 @@ Follow the instructions available in Authorization for
 
 {{< hide id="3" >}}- [Configuring PowerScale with Authorization](docs/concepts/authorization/v2.x/configuration/powerscale).{{< /hide >}}
 
-{{< hide id="3" >}}- [Configuring PowerStore with Authorization](docs/concepts/authorization/v2.x/configuration/powerstore).{{< /hide >}}
+{{< hide id="4" >}}- [Configuring PowerStore with Authorization](docs/concepts/authorization/v2.x/configuration/powerstore).{{< /hide >}}
 
 ## Vault CSI Provider Installation
 
