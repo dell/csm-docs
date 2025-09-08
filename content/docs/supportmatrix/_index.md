@@ -47,7 +47,7 @@ weight: 1
 {{</table>}}
 
 > Note: Replication with Sync/Async modes is not supported.<br>
-> Note: For details on the limitations of PowerStore Metro support, please refer [here](../concepts/replication/high-availability/powerstore-metro/#limitations).
+> Note: PowerStore does not support VM cloning or VM snapshot operations while Metro replication is enabled.
 
 ## Tested Host Operating Systems
 
