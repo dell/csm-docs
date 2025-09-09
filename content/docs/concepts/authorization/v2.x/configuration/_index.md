@@ -57,7 +57,7 @@ Afterwards, the storage administrator can configure Authorization with the follo
 
 The storage types supported are `powerflex`, `powermax`, `powerscale` and `powerstore`. During the creation of a storage system and role, the storage type must be one of the supported types.
 
-A `storage` entity in Container Storage Modules Authorization consists of the storage type (`powerflex`, `powermax` or `powerscale`), the system ID, the API endpoint, and the storage system credentials.
+A `storage` entity in Container Storage Modules Authorization consists of the storage type (`powerflex`, `powermax`, `powerscale` or `powerstore`), the system ID, the API endpoint, and the storage system credentials.
 
 >__Note__:
 > - You must specify exactly one option for the storageSystemCredentials field, e.g. secretProviderClass.
