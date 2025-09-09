@@ -27,7 +27,7 @@ weight: 1
 | Platform                   | Version          |
 |----------------------------|:----------------:|
 | Kubernetes                 | 1.30, 1.31, 1.32 |
-| Red Hat OpenShift          | 4.17, 4.18       |
+| Red Hat OpenShift          | 4.18, 4.19       |
 | Mirantis Kubernetes Engine | 3.7.x            |
 {{</table>}}
 
@@ -39,14 +39,17 @@ weight: 1
 {{<table "table table-striped table-bordered table-sm">}}
 | Version     | Capability                                                                                            | PowerStore | PowerScale | PowerFlex | PowerMax | Unity XT |
 |-------------|-------------------------------------------------------------------------------------------------------| :--------: | :--------: | :-------: | :------: | :------: |
-| 4.17 - 4.18 | <div style="text-align: left"> [Storage](https://github.com/kiagnose/kubevirt-storage-checkup) </div> | Yes        | Yes        | Yes        | Yes     | No       |
-| 4.17 - 4.18 | <div style="text-align: left">  Observability        </div>                                           | No         | Yes        | Yes        | Yes     | No       |
-| 4.17 - 4.18 | <div style="text-align: left"> Authorization - v2.x  </div>                                           | No         | Yes        | Yes        | Yes     | No       |
-| 4.17 - 4.18 | <div style="text-align: left"> Resiliency            </div>                                           | Yes        | Yes        | Yes        | Yes     | No       |
-| 4.18        | <div style="text-align: left"> Replication (Metro)	</div>                                            | Yes        | No         | No         | Yes     | No       |
+
+| 4.18 - 4.19 | <div style="text-align: left"> [Storage](https://github.com/kiagnose/kubevirt-storage-checkup) </div> | Yes        | Yes        | Yes        | Yes     | No       |
+| 4.18 - 4.19 | <div style="text-align: left">  Observability        </div>                                           | No         | Yes        | Yes        | Yes     | No       |
+| 4.18 - 4.19 | <div style="text-align: left"> Authorization - v2.x  </div>                                           | No         | Yes        | Yes        | Yes     | No       |
+| 4.18 - 4.19 | <div style="text-align: left"> Resiliency            </div>                                           | Yes        | Yes        | Yes        | Yes     | No       |
+| 4.18 - 4.19 | <div style="text-align: left"> Replication (Metro)	</div>                                            | Yes        | No         | No         | Yes     | No       |
+
 {{</table>}}
 
-> Note: Replication with Sync/Async modes is not supported.
+> Note: Replication with Sync/Async modes is not supported.<br>
+> Note: PowerStore does not support VM cloning or VM snapshot operations while Metro replication is enabled.
 
 ## Tested Host Operating Systems
 
