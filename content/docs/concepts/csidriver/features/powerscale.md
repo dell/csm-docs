@@ -471,7 +471,7 @@ parameters:
   AZNetwork: 172.16.0.0/24
 ```
 
->**NOTE:** Multi-Access Zone Support for Multi-Tenant Deployments does not support CSM Modules.
+>**NOTE:** Multi-Access Zone Support for Multi-Tenant Deployments does not support CSM Authorization.
 
 ## Volume Limit
 
