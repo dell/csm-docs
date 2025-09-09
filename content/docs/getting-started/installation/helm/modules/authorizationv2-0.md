@@ -460,11 +460,11 @@ Follow the instructions available in Authorization for
 
 {{< hide id="1" >}} - [Configuring PowerFlex with Authorization](docs/concepts/authorization/v2.x/configuration/powerflex). {{< /hide >}}
 
-{{< hide id="2" >}}- [Configuring PowerMax with Authorization](docs/concepts/authorization/v2.x/configuration/powermax).{{< /hide >}}
+{{< hide id="2" >}} - [Configuring PowerMax with Authorization](docs/concepts/authorization/v2.x/configuration/powermax).{{< /hide >}}
 
-{{< hide id="3" >}}- [Configuring PowerScale with Authorization](docs/concepts/authorization/v2.x/configuration/powerscale).{{< /hide >}}
+{{< hide id="3" >}} - [Configuring PowerScale with Authorization](docs/concepts/authorization/v2.x/configuration/powerscale).{{< /hide >}}
 
-{{< hide id="3" >}}- [Configuring PowerStore with Authorization](docs/concepts/authorization/v2.x/configuration/powerstore).{{< /hide >}}
+{{< hide id="4" >}} - [Configuring PowerStore with Authorization](docs/concepts/authorization/v2.x/configuration/powerstore).{{< /hide >}}
 
 ## Updating Container Storage Modules for Authorization Proxy Server Configuration
 
