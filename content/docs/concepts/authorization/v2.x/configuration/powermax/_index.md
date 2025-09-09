@@ -139,7 +139,7 @@ Given a setup where Kubernetes, a storage system, and the Container Storage Modu
 
     - Update the `SKIP_CERTIFICATE_VALIDATION` environment value to `true` or `false` depending on if you want to disable or enable certificate validation of Authorization Proxy Server.
 
-    - Do not update the `configVersion`. You will notice in the example that it is set to v1.14.0. This ensures that Operator checks on version support do not prevent deployment of latest version.
+    - Do not update the `configVersion`. You will notice in the example that it is set to {{< version-docs key="Authv2" >}}. This ensures that Operator checks on version support do not prevent deployment of latest version.
 
     Example:
 
@@ -150,12 +150,12 @@ Given a setup where Kubernetes, a storage system, and the Container Storage Modu
         # enabled: Always set to true
         enabled: true
         forceRemoveModule: true
-        configVersion: {{< version-docs key="Authv1_ConfigVersion" >}}
+        configVersion: {{< version-docs key="PMax_ReverseProxy_latestVersion" >}}
         components:
         - name: csipowermax-reverseproxy
         # image: Define the container images used for the reverse proxy
         # Default value: None
-          image: quay.io/dell/container-storage-modules/csipowermax-reverseproxy:{{< version-docs key="Authv1_PMax_ReverseProxy_ConfigVersion" >}}
+          image: quay.io/dell/container-storage-modules/csipowermax-reverseproxy:{{< version-docs key="PMax_ReverseProxy_latestVersion" >}}
           envs:
           # "tlsSecret" defines the TLS secret that is created with certificate
           # and its associated key
@@ -177,7 +177,7 @@ Given a setup where Kubernetes, a storage system, and the Container Storage Modu
       - name: authorization
         # enable: Enable/Disable csm-authorization
         enabled: true
-        configVersion: {{< version-docs key="Authv1_ConfigVersion" >}}
+        configVersion: {{< version-docs key="Authv2" >}}
         components:
         - name: karavi-authorization-proxy
           image: quay.io/dell/container-storage-modules/csm-authorization-sidecar:{{< version-docs key="Authv2_csm_authorization_sidecar" >}}

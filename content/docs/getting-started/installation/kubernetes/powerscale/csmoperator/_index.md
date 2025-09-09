@@ -99,7 +99,7 @@ To deploy the Operator, follow the instructions available [here](../../../operat
 
     [OR]                                                
 
-    b. **Detailed Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powerscale_{{< version-docs key="sample_sc_pscale" >}}.yaml) for detailed settings or use [Wizard](./installationwizard#generate-manifest-file) to generate the sample file.
+    b. **Detailed Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/main/samples/{{< version-docs key="csm-operator_latest_samples_dir" >}}/storage_csm_powerscale_{{< version-docs key="Det_sample_operator_pscale" >}}.yaml) for detailed settings or use [Wizard](./installationwizard#generate-manifest-file) to generate the sample file.
 
  -  Users should configure the parameters in CR. The following table lists the primary configurable parameters of the PowerScale driver and their default values:
    <ul>
