@@ -122,7 +122,7 @@ Given a setup where Kubernetes, a storage system, and the Authorization Proxy Se
       - name: authorization
         # enable: Enable/Disable csm-authorization
         enabled: true
-        configVersion: {{< version-docs key="Authv2_ConfigVersion" >}}
+        configVersion: {{< version-docs key="Authv2" >}}
         components:
         - name: karavi-authorization-proxy
           image: quay.io/dell/container-storage-modules/csm-authorization-sidecar:{{< version-docs key="Authv2_csm_authorization_sidecar" >}}
@@ -170,4 +170,4 @@ Given a setup where Kubernetes, a storage system, and the Authorization Proxy Se
       skipCertificateValidation: true
     ```
 
-1. Install the CSI PowerStore driver following the appropriate documentation for your installation method.
+6. Install the CSI PowerStore driver following the appropriate documentation for your installation method.

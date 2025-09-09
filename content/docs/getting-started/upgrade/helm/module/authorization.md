@@ -217,7 +217,7 @@ spec:
 
     ```bash
     NAME                            CHART VERSION   APP VERSION     DESCRIPTION
-    dell/csm-authorization          1.14.0          1.14.0          CSM for Authorization is part of the [Container...
+    dell/csm-authorization          {{< version-docs key="Authv2_latestVersion" >}}          {{< version-docs key="Authv2_latestVersion" >}}          CSM for Authorization is part of the [Container...
     ```
 
 3. Ensure your myvalues.yaml file is updated to align with the latest configuration changes—this includes adding new parameters, removing deprecated ones, and adjusting any modified values introduced in the upgrade.
