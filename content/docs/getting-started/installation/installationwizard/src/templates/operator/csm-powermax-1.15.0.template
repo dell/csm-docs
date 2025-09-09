@@ -273,7 +273,7 @@ spec:
   modules:
     # CSI Powermax Reverseproxy is a mandatory module for Powermax
     - name: csireverseproxy
-      configVersion: v2.14.0
+      configVersion: v2.15.0
       components:
         - name: csipowermax-reverseproxy
           # image: Define the container images used for the reverse proxy
@@ -391,7 +391,7 @@ spec:
           enabled: $OBSERVABILITY_OPERATOR_OTEL
           # image: Defines otel-collector image. This shouldn't be changed
           # Allowed values: string
-          image: ghcr.io/open-telemetry/opentelemetry-collector-releases/opentelemetry-collector:0.132.0
+          image: ghcr.io/open-telemetry/opentelemetry-collector-releases/opentelemetry-collector:0.134.1
           envs:
             # image of nginx proxy image
             # Allowed values: string
