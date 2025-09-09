@@ -47,7 +47,7 @@ snapshot:
 
 #### Volume Snapshot CRD's
 
-The Kubernetes Volume Snapshot CRDs can be obtained and installed from the external-snapshotter project on Github. For installation, use [{{< version-docs key="snapshot_majorVersion" >}}](https://github.com/kubernetes-csi/external-snapshotter/tree/{{< version-docs key="csi_snapshotter_latest_version" >}}/client/config/crd)
+The Kubernetes Volume Snapshot CRDs can be obtained and installed from the external-snapshotter project on Github. For installation, use [{{< version-docs key="csi_snapshotter_latest_version" >}}](https://github.com/kubernetes-csi/external-snapshotter/tree/{{< version-docs key="csi_snapshotter_latest_version" >}}/client/config/crd)
 
 #### Volume Snapshot Controller
 
@@ -56,7 +56,7 @@ The CSI external-snapshotter sidecar is split into two controllers to support Vo
 - A common snapshot controller
 - A CSI external-snapshotter sidecar
 
-The common snapshot controller must be installed only once in the cluster, irrespective of the number of CSI drivers installed in the cluster. On OpenShift clusters 4.4 and later, the common snapshot-controller is pre-installed. In the clusters where it is not present, it can be installed using `kubectl` and the manifests are available here: [{{< version-docs key="snapshot_majorVersion" >}}](https://github.com/kubernetes-csi/external-snapshotter/tree/{{< version-docs key="csi_snapshotter_latest_version" >}}/deploy/kubernetes/snapshot-controller)
+The common snapshot controller must be installed only once in the cluster, irrespective of the number of CSI drivers installed in the cluster. On OpenShift clusters 4.4 and later, the common snapshot-controller is pre-installed. In the clusters where it is not present, it can be installed using `kubectl` and the manifests are available here: [{{< version-docs key="csi_snapshotter_latest_version" >}}](https://github.com/kubernetes-csi/external-snapshotter/tree/{{< version-docs key="csi_snapshotter_latest_version" >}}/deploy/kubernetes/snapshot-controller)
 
 *NOTE:*
 
