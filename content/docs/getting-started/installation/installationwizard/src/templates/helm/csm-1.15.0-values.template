@@ -109,7 +109,7 @@ csi-powerstore:
         - "--driver-config-params=/powerstore-config-params/driver-config-params.yaml"
         - "--driverPodLabelValue=dell-storage"
         - "--ignoreVolumelessPods=false"
-  
+
   maxPowerstoreVolumesPerNode: $MAX_VOLUMES_PER_NODE
   podmonAPIPort: 8083
   multiNas:
