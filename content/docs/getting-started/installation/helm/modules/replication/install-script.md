@@ -17,7 +17,7 @@ git clone -b {{< version-docs key="Replication" >}} https://github.com/dell/csm-
 cd csm-replication
 kubectl create ns dell-replication-controller
 # Download and modify the default values.yaml file if you wish to customize your deployment in any way
-wget -O myvalues.yaml https://raw.githubusercontent.com/dell/helm-charts/csm-replication-1.13.0/charts/csm-replication/values.yaml
+wget -O myvalues.yaml https://raw.githubusercontent.com/dell/helm-charts/csm-replication-{{< version-docs key="replication_latestVersion" >}}/charts/csm-replication/values.yaml
 bash scripts/install.sh --values ./myvalues.yaml
 ```
 

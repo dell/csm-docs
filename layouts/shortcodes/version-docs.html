@@ -67,6 +67,10 @@
 {{- else if eq $key "application-mobility" -}}v1.4.0
 {{- else if eq $key "repctl" -}}v1.13.0
 {{- else if eq $key "opentelemetry_collector_latest_version" -}}0.134.1
+{{- else if eq $key "driver_latestVersion" -}}2.15.0
+{{- else if eq $key "replication_latestVersion" -}}1.13.0
+{{- else if eq $key "Authv2_latestVersion" -}}2.3.0
+{{- else if eq $key "Observability_latestVersion" -}}1.13.0
 
 {{- else -}}
   Default text if no valid parameter is passed.
