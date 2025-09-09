@@ -47,7 +47,7 @@ snapshot:
 
 #### Volume Snapshot CRD's
 
-The Kubernetes Volume Snapshot CRDs can be obtained and installed from the external-snapshotter project on Github. For installation, use [v8.3.x](https://github.com/kubernetes-csi/external-snapshotter/tree/{{< version-docs key="csi_snapshotter_latest_version" >}}/client/config/crd)
+The Kubernetes Volume Snapshot CRDs can be obtained and installed from the external-snapshotter project on Github. For installation, use [{{< version-docs key="snapshot_majorVersion" >}}](https://github.com/kubernetes-csi/external-snapshotter/tree/{{< version-docs key="csi_snapshotter_latest_version" >}}/client/config/crd)
 
 #### Volume Snapshot Controller
 
