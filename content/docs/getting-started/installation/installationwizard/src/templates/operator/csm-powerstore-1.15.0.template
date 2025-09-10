@@ -96,13 +96,11 @@ spec:
         enabled: $HEALTH_MONITOR_ENABLED
         args: ["--monitor-interval=60s"]
         image: registry.k8s.io/sig-storage/csi-external-health-monitor-controller:v0.15.0
-
-      # Uncomment the following to configure how often external-provisioner polls the driver to detect changed capacity
-      # Configure only when the storageCapacity is set as "true"
-      # Allowed values: 1m,2m,3m,...,10m,...,60m etc. Default value: 5m
-      #- name: provisioner
-      #  args: ["--capacity-poll-interval=5m"]
-
+        # Uncomment the following to configure how often external-provisioner polls the driver to detect changed capacity
+        # Configure only when the storageCapacity is set as "true"
+        # Allowed values: 1m,2m,3m,...,10m,...,60m etc. Default value: 5m
+        #- name: provisioner
+        #  args: ["--capacity-poll-interval=5m"]
     controller:
       envs:
         # X_CSI_MULTI_NAS_FAILURE_THRESHOLD: Number of consecutive FS creation failures after which a NAS is put into cooldown.
@@ -154,12 +152,10 @@ spec:
       # Allowed values: map of key-value pairs
       # Default value: None
       nodeSelector: $CONTROLLER_POD_NODE_SELECTOR
-
       # tolerations: Define tolerations for the controllers, if required.
       # Leave as blank to install controller on worker nodes
       # Default value: None
       tolerations: $CONTROLLER_TOLERATIONS
-
     node:
       envs:
         # Set to "true" to enable ISCSI CHAP Authentication
@@ -185,17 +181,15 @@ spec:
       # Allowed values: map of key-value pairs
       # Default value: None
       nodeSelector: $NODE_POD_NODE_SELECTOR
-
       # tolerations: Define tolerations for the controllers, if required.
       # Leave as blank to install controller on worker nodes
       # Default value: None
       tolerations: $NODE_TOLERATIONS
-  
   modules:
     # Authorization: enable csm-authorization for RBAC
     - name: authorization
       # enabled: Enable/Disable csm-authorization
-      enabled: false
+      enabled: $AUTHORIZATION_ENABLED
       configVersion: v2.3.0
       components:
         - name: karavi-authorization-proxy
@@ -205,11 +199,11 @@ spec:
             # proxyHost: hostname of the csm-authorization server
             # Default value: none
             - name: "PROXY_HOST"
-              value: "csm-authorization.com"
+              value: "$AUTHORIZATION_PROXY_HOST"
             # skipCertificateValidation: Enable/Disable certificate validation of the csm-authorization server
             # Default value: "true"
             - name: "SKIP_CERTIFICATE_VALIDATION"
-              value: "true"
+              value: "$AUTHORIZATION_SKIP_CERTIFICATE_VALIDATION"
     - name: resiliency
       # enabled: Enable/Disable Resiliency feature
       # Allowed values:
