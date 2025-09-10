@@ -6,14 +6,14 @@ Description: >
 toc_hide: true
 ---
 
-1. Create a user in the PowerStore Navigate in the PowerStore Manager Settings -> Users -> Add
+1. Create a user in the PowerStore, Go to PowerStore Manager -> Settings -> Users -> Add to create a new user
    <br>
    <br>
    Username: csmadmin <br>
    User Role: Storage Operator
 
 
-2. (Optional) Create NAS server Navigate in the PowerStore Manager Storage -> Nas Servers -> Create
+2. (Optional) To create NAS server, Go to PowerStore Manager Storage -> Nas Servers -> Create
 
 <br>
 

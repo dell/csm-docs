@@ -4,6 +4,9 @@ linktitle: Cert-CSI
 weight: 3
 description: Tool to validate Dell CSI Drivers
 ---
+{{% pageinfo color="primary" %}}
+<span><span/>{{< message text="14" >}}
+{{% /pageinfo %}}
 
 Dell's Cert-CSI is a tool to validate Dell CSI Drivers. It contains various test suites to validate the drivers and addresses the complexity involved with certifiying Dell CSI drivers in different customer environments.
 
