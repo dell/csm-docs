@@ -195,7 +195,7 @@ spec:
     # Authorization: enable csm-authorization for RBAC
     - name: authorization
       # enabled: Enable/Disable csm-authorization
-      enabled: false
+      enabled: $AUTHORIZATION_ENABLED
       configVersion: v2.3.0
       components:
         - name: karavi-authorization-proxy
@@ -205,11 +205,11 @@ spec:
             # proxyHost: hostname of the csm-authorization server
             # Default value: none
             - name: "PROXY_HOST"
-              value: "csm-authorization.com"
+              value: "$AUTHORIZATION_PROXY_HOST"
             # skipCertificateValidation: Enable/Disable certificate validation of the csm-authorization server
             # Default value: "true"
             - name: "SKIP_CERTIFICATE_VALIDATION"
-              value: "true"
+              value: "$AUTHORIZATION_SKIP_CERTIFICATE_VALIDATION"
     - name: resiliency
       # enabled: Enable/Disable Resiliency feature
       # Allowed values:
