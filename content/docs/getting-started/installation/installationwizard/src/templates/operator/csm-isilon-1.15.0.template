@@ -177,11 +177,9 @@ spec:
       # Allowed values: map of key-value pairs
       # Default value: None
       nodeSelector: $CONTROLLER_POD_NODE_SELECTOR
-
       # tolerations: Define tolerations for the controller deployment, if required.
       # Default value: None
       tolerations: $CONTROLLER_TOLERATIONS
-
     node:
       envs:
         # X_CSI_MAX_VOLUMES_PER_NODE: Specify default value for maximum number of volumes that controller can publish to the node.
@@ -220,7 +218,6 @@ spec:
       # Allowed values: map of key-value pairs
       # Default value: None
       nodeSelector: $NODE_POD_NODE_SELECTOR
-
       # tolerations: Define tolerations for the node daemonset, if required.
       # Default value: None
       tolerations: $NODE_TOLERATIONS
@@ -233,7 +230,6 @@ spec:
       # - key: "node.kubernetes.io/network-unavailable"
       #   operator: "Exists"
       #   effect: "NoExecute"
-
     sideCars:
       - name: provisioner
         image: registry.k8s.io/sig-storage/csi-provisioner:v5.3.0
@@ -254,12 +250,11 @@ spec:
         enabled: $HEALTH_MONITOR_ENABLED
         args: ["--monitor-interval=60s"]
         image: registry.k8s.io/sig-storage/csi-external-health-monitor-controller:v0.15.0
-      # Uncomment the following to configure how often external-provisioner polls the driver to detect changed capacity
-      # Configure when the storageCapacity is set as "true"
-      # Allowed values: 1m,2m,3m,...,10m,...,60m etc. Default value: 5m
-      #- name: provisioner
-      #  args: ["--capacity-poll-interval=5m"]
-
+        # Uncomment the following to configure how often external-provisioner polls the driver to detect changed capacity
+        # Configure when the storageCapacity is set as "true"
+        # Allowed values: 1m,2m,3m,...,10m,...,60m etc. Default value: 5m
+        #- name: provisioner
+        #  args: ["--capacity-poll-interval=5m"]
   modules:
     # Authorization: enable csm-authorization for RBAC
     - name: authorization
@@ -363,8 +358,7 @@ spec:
             # Allowed values: string
             # Default value: "docker.io/nginxinc/nginx-unprivileged:1.27"
             - name: "NGINX_PROXY_IMAGE"
-              value: "docker.io/nginxinc/nginx-unprivileged:1.27"
-
+              value: "docker.io/nginxinc/nginx-unprivileged:1.29"
         - name: cert-manager
           # enabled: Enable/Disable cert-manager
           # Allowed values:
@@ -372,7 +366,6 @@ spec:
           #   false: disable deployment of cert-manager only if it's already deployed
           # Default value: false
           enabled: $OBSERVABILITY_OPERATOR_ENABLED
-
         - name: metrics-powerscale
           # enabled: Enable/Disable PowerScale metrics
           # Default value: false
