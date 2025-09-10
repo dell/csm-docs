@@ -471,6 +471,8 @@ parameters:
   AZNetwork: 172.16.0.0/24
 ```
 
+>**NOTE:** Multi-Access Zone Support for Multi-Tenant Deployments does not support CSM Authorization.
+
 ## Volume Limit
 
 The CSI Driver for PowerScale allows users to specify the maximum number of PowerScale volumes that can be used in a node.
