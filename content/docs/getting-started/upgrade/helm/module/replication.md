@@ -55,7 +55,7 @@ On PowerScale systems, an additional step is needed when upgrading to CSM Replic
 Make sure the appropriate release branch is available on the machine performing the upgrade by running:
 
 ```bash
-git clone -b {{< version-docs key="Replication" >}} https://github.com/dell/csm-replication.git
+git clone -b {{< version-docs key="csm_replication_version" >}} https://github.com/dell/csm-replication.git
 ```
 {{< /hide >}} 
 

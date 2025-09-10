@@ -77,10 +77,10 @@ To perform an offline installation of a Helm chart, the following steps should b
     *
     * Downloading and saving Docker images
 
-      quay.io/dell/container-storage-modules/csm-metrics-powerflex:{{< version-docs key="Observability_csm_metrics_PFlex_image" >}}
-      quay.io/dell/container-storage-modules/csm-metrics-powerstore:{{< version-docs key="Observability_csm_metrics_PStore_image" >}}
-      quay.io/dell/container-storage-modules/csm-metrics-powerscale:{{< version-docs key="Observability_csm_metrics_PScale_image" >}}
-      quay.io/dell/container-storage-modules/csm-metrics-powermax:{{< version-docs key="Observability_csm_metrics_PMax_image" >}}
+      quay.io/dell/container-storage-modules/csm-metrics-powerflex:{{< version-docs key="csm_metrics_powerflex_image" >}}
+      quay.io/dell/container-storage-modules/csm-metrics-powerstore:{{< version-docs key="csm_metrics_powerstore_image" >}}
+      quay.io/dell/container-storage-modules/csm-metrics-powerscale:{{< version-docs key="csm_metrics_powerscale_image" >}}
+      quay.io/dell/container-storage-modules/csm-metrics-powermax:{{< version-docs key="csm_metrics_powermax_image" >}}
       ghcr.io/open-telemetry/opentelemetry-collector-releases/opentelemetry-collector:{{< version-docs key="opentelemetry_collector_latest_version" >}}
       nginxinc/nginx-unprivileged:1.27
 
@@ -112,10 +112,10 @@ To perform an offline installation of a Helm chart, the following steps should b
     *
     * Loading, tagging, and pushing Docker images to registry <my-registry>:5000/
 
-      quay.io/dell/container-storage-modules/csm-metrics-powerflex:{{< version-docs key="Observability_csm_metrics_PFlex_image" >}} -> <my-registry>:5000/csm-metrics-powerflex:{{< version-docs key="Observability_csm_metrics_PFlex_image" >}}
-      quay.io/dell/container-storage-modules/csm-metrics-powerstore:{{< version-docs key="Observability_csm_metrics_PStore_image" >}} -> <my-registry>:5000/csm-metrics-powerstore:{{< version-docs key="Observability_csm_metrics_PStore_image" >}}
-      quay.io/dell/container-storage-modules/csm-metrics-powerscale:{{< version-docs key="Observability_csm_metrics_PScale_image" >}} -> <my-registry>:5000/csm-metrics-powerscale:{{< version-docs key="Observability_csm_metrics_PScale_image" >}}
-      quay.io/dell/container-storage-modules/csm-metrics-powermax:{{< version-docs key="Observability_csm_metrics_PMax_image" >}} -> <my-registry>:5000/csm-metrics-powermax:{{< version-docs key="Observability_csm_metrics_PMax_image" >}}
+      quay.io/dell/container-storage-modules/csm-metrics-powerflex:{{< version-docs key="csm_metrics_powerflex_image" >}} -> <my-registry>:5000/csm-metrics-powerflex:{{< version-docs key="csm_metrics_powerflex_image" >}}
+      quay.io/dell/container-storage-modules/csm-metrics-powerstore:{{< version-docs key="csm_metrics_powerstore_image" >}} -> <my-registry>:5000/csm-metrics-powerstore:{{< version-docs key="csm_metrics_powerstore_image" >}}
+      quay.io/dell/container-storage-modules/csm-metrics-powerscale:{{< version-docs key="csm_metrics_powerscale_image" >}} -> <my-registry>:5000/csm-metrics-powerscale:{{< version-docs key="csm_metrics_powerscale_image" >}}
+      quay.io/dell/container-storage-modules/csm-metrics-powermax:{{< version-docs key="csm_metrics_powermax_image" >}} -> <my-registry>:5000/csm-metrics-powermax:{{< version-docs key="csm_metrics_powermax_image" >}}
       ghcr.io/open-telemetry/opentelemetry-collector-releases/opentelemetry-collector:{{< version-docs key="opentelemetry_collector_latest_version" >}} -> <my-registry>:5000/opentelemetry-collector:{{< version-docs key="opentelemetry_collector_latest_version" >}}
       nginxinc/nginx-unprivileged:1.27 -> <my-registry>:5000/nginx-unprivileged:1.27
     ```

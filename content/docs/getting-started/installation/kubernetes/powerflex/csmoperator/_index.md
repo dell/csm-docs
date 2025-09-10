@@ -40,7 +40,7 @@ Enable the SDC monitor by setting the `enable` flag to `true`.
    - **With Sidecar**: Edit the `HOST_PID` and `MDM` fields with the host PID and MDM IPs.
    - **Without Sidecar**: Leave the `enabled` field set to `false`.
 
-   Example CR: [samples/storage_csm_powerflex_{{< version-docs key="sample_sc_pflex" >}}.yaml](https://github.com/dell/csm-operator/blob/main/samples/{{< version-docs key="csm-operator_latest_samples_dir" >}}/storage_csm_powerflex_{{< version-docs key="sample_sc_pflex" >}}.yaml)
+   Example CR: [samples/storage_csm_powerflex_{{< version-docs key="sample_sc_pflex" >}}.yaml](https://github.com/dell/csm-operator/blob/main/samples/{{< version-docs key="csm_operator_latest_samples_dir" >}}/storage_csm_powerflex_{{< version-docs key="sample_sc_pflex" >}}.yaml)
 
 ```yaml
     sideCars:
@@ -141,7 +141,7 @@ run `/opt/emc/scaleio/sdc/bin/drv_cfg --add_mdm --ip 10.xx.xx.xx.xx,10.xx.xx.xx`
 
     [OR]
 
-    b. **Detailed Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/main/samples/{{< version-docs key="csm-operator_latest_samples_dir" >}}/storage_csm_powerflex_{{< version-docs key="Det_sample_operator_pflex" >}}.yaml) for detailed settings.
+    b. **Detailed Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/main/samples/{{< version-docs key="csm_operator_latest_samples_dir" >}}/storage_csm_powerflex_{{< version-docs key="Det_sample_operator_pflex" >}}.yaml) for detailed settings.
 
 - Configure the parameters in the CR. The table below lists the primary configurable parameters of the PowerFlex driver and their default values:
 <ul>

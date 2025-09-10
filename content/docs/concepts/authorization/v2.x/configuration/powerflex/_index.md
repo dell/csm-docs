@@ -118,7 +118,7 @@ Given a setup where Kubernetes, a storage system, and the Authorization Proxy Se
 
     - Update the `SKIP_CERTIFICATE_VALIDATION` environment value to `true` or `false` depending on if you want to disable or enable certificate validation of Authorization Proxy Server.
 
-    - Do not update the `configVersion`. You will notice in the example that it is set to {{< version-docs key="Authv2" >}}. This ensures that Operator checks on version support do not prevent deployment of the latest version of authorization.
+    - Do not update the `configVersion`. You will notice in the example that it is set to {{< version-docs key="csm_authorization_version" >}}. This ensures that Operator checks on version support do not prevent deployment of the latest version of authorization.
 
     Example:
 
@@ -128,10 +128,10 @@ Given a setup where Kubernetes, a storage system, and the Authorization Proxy Se
       - name: authorization
         # enable: Enable/Disable csm-authorization
         enabled: true
-        configVersion: {{< version-docs key="Authv2" >}}
+        configVersion: {{< version-docs key="csm_authorization_version" >}}
         components:
         - name: karavi-authorization-proxy
-          image: quay.io/dell/container-storage-modules/csm-authorization-sidecar:{{< version-docs key="Authv2_csm_authorization_sidecar" >}}
+          image: quay.io/dell/container-storage-modules/csm-authorization-sidecar:{{< version-docs key="csm_authorization_version" >}}
           envs:
             # proxyHost: hostname of the csm-authorization server
             - name: "PROXY_HOST"
@@ -162,7 +162,7 @@ Given a setup where Kubernetes, a storage system, and the Authorization Proxy Se
 
       # sidecarProxyImage: the container image used for the csm-authorization-sidecar.
       # Default value: quay.io/dell/container-storage-modules/csm-authorization-sidecar:v2.3.0
-      sidecarProxyImage: quay.io/dell/container-storage-modules/csm-authorization-sidecar:{{< version-docs key="Authv2_csm_authorization_sidecar" >}}
+      sidecarProxyImage: quay.io/dell/container-storage-modules/csm-authorization-sidecar:{{< version-docs key="csm_authorization_version" >}}
 
       # proxyHost: hostname of the csm-authorization server
       # Default value: None

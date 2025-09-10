@@ -44,7 +44,7 @@ The following table lists the configurable parameters of the Container Storage M
 
 | Parameter | Description | Default |
 | - | - | - |
-| `karaviMetricsPowerflex.image` |  CSM Metrics for PowerFlex Service image | `quay.io/dell/container-storage-modules/csm-metrics-powerflex:{{< version-docs key="Observability_csm_metrics_PFlex_image" >}}` |
+| `karaviMetricsPowerflex.image` |  CSM Metrics for PowerFlex Service image | `quay.io/dell/container-storage-modules/csm-metrics-powerflex:{{< version-docs key="csm_metrics_powerflex_image" >}}` |
 | `karaviMetricsPowerflex.enabled` | Enable CSM Metrics for PowerFlex service | `true` |
 | `karaviMetricsPowerflex.collectorAddr` | Metrics Collector accessible from the Kubernetes cluster | `otel-collector:55680`  |
 | `karaviMetricsPowerflex.provisionerNames` | Provisioner Names used to filter for determining PowerFlex SDC nodes( Must be a Comma-separated list) | ` csi-vxflexos.dellemc.com` |
@@ -71,7 +71,7 @@ The following table lists the configurable parameters of the Container Storage M
 
 | Parameter | Description | Default |
 | - | - | - |
-| `karaviMetricsPowerstore.image` |  CSM Metrics for PowerStore Service image | `quay.io/dell/container-storage-modules/csm-metrics-powerstore:{{< version-docs key="Observability_csm_metrics_PStore_image" >}}`|
+| `karaviMetricsPowerstore.image` |  CSM Metrics for PowerStore Service image | `quay.io/dell/container-storage-modules/csm-metrics-powerstore:{{< version-docs key="csm_metrics_powerstore_image" >}}`|
 | `karaviMetricsPowerstore.enabled` | Enable CSM Metrics for PowerStore service | `true` |
 | `karaviMetricsPowerstore.collectorAddr` | Metrics Collector accessible from the Kubernetes cluster | `otel-collector:55680` |
 | `karaviMetricsPowerstore.provisionerNames` | Provisioner Names used to filter for determining PowerStore volumes (must be a Comma-separated list) | `csi-powerstore.dellemc.com` |
@@ -95,7 +95,7 @@ The following table lists the configurable parameters of the Container Storage M
 
 | Parameter | Description | Default |
 | - | - | - |
-| `karaviMetricsPowerscale.image` |  CSM Metrics for PowerScale Service image | `quay.io/dell/container-storage-modules/csm-metrics-powerscale:{{< version-docs key="Observability_csm_metrics_PScale_image" >}}`|
+| `karaviMetricsPowerscale.image` |  CSM Metrics for PowerScale Service image | `quay.io/dell/container-storage-modules/csm-metrics-powerscale:{{< version-docs key="csm_metrics_powerscale_image" >}}`|
 | `karaviMetricsPowerscale.enabled` | Enable CSM Metrics for PowerScale service | `true` |
 | `karaviMetricsPowerscale.collectorAddr` | Metrics Collector accessible from the Kubernetes cluster | `otel-collector:55680` |
 | `karaviMetricsPowerscale.provisionerNames` | Provisioner Names used to filter for determining PowerScale volumes (must be a Comma-separated list) | `csi-isilon.dellemc.com` |
