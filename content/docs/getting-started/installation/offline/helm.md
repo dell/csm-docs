@@ -38,7 +38,7 @@ bash csi-offline-bundle.sh -c
 * Pulling and saving container images
 
 quay.io/dell/container-storage-modules/csi-metadata-retriever:{{< version-docs key="metadata_retriever_latest_version" >}}
-quay.io/dell/container-storage-modules/csi-powerstore:{{< version-docs key="PStore_latestVersion" >}}
+quay.io/dell/container-storage-modules/csi-powerstore:{{< version-docs key="csi_powerstore_latest_version" >}}
 quay.io/dell/container-storage-modules/dell-csi-replicator:{{< version-docs key="replicator_latest_version" >}}
 quay.io/dell/container-storage-modules/podmon:{{< version-docs key="podmon_latest_version" >}}
 registry.k8s.io/sig-storage/csi-attacher:{{< version-docs key="csi_attacher_latest_version" >}}
@@ -80,7 +80,7 @@ csi-<driver>-bundle-2.15.0/dell-csi-helm-installer/images.tar/
 csi-<driver>-bundle-2.15.0/dell-csi-helm-installer/images.tar/registry.k8s.io-sig-storage-csi-resizer-{{< version-docs key="csi_resizer_latest_version" >}}.tar
 csi-<driver>-bundle-2.15.0/dell-csi-helm-installer/images.tar/quay.io-dell-container-storage-modules-csi-metadata-retriever-{{< version-docs key="metadata_retriever_latest_version" >}}.tar
 csi-<driver>-bundle-2.15.0/dell-csi-helm-installer/images.tar/registry.k8s.io-sig-storage-csi-attacher-{{< version-docs key="csi_attacher_latest_version" >}}.tar
-csi-<driver>-bundle-2.15.0/dell-csi-helm-installer/images.tar/quay.io-dell-container-storage-modules-csi-powerstore-{{< version-docs key="PStore_latestVersion" >}}.tar
+csi-<driver>-bundle-2.15.0/dell-csi-helm-installer/images.tar/quay.io-dell-container-storage-modules-csi-powerstore-{{< version-docs key="csi_powerstore_latest_version" >}}.tar
 csi-<driver>-bundle-2.15.0/dell-csi-helm-installer/images.tar/registry.k8s.io-sig-storage-csi-snapshotter-{{< version-docs key="csi_snapshotter_latest_version" >}}.tar
 csi-<driver>-bundle-2.15.0/dell-csi-helm-installer/images.tar/quay.io-dell-container-storage-modules-dell-csi-replicator-{{< version-docs key="replicator_latest_version" >}}.tar
 csi-<driver>-bundle-2.15.0/dell-csi-helm-installer/images.tar/quay.io-dell-container-storage-modules-podmon-{{< version-docs key="podmon_latest_version" >}}.tar
@@ -131,7 +131,7 @@ Offline bundle file is: ~/csi-<driver>/csi-<driver>-bundle-2.15.0.tar.gz
   csi-<driver>-bundle-2.15.0/dell-csi-helm-installer/images.tar/registry.k8s.io-sig-storage-csi-resizer-{{< version-docs key="csi_resizer_latest_version" >}}.tar
   csi-<driver>-bundle-2.15.0/dell-csi-helm-installer/images.tar/quay.io-dell-container-storage-modules-csi-metadata-retriever-{{< version-docs key="metadata_retriever_latest_version" >}}.tar
   csi-<driver>-bundle-2.15.0/dell-csi-helm-installer/images.tar/registry.k8s.io-sig-storage-csi-attacher-{{< version-docs key="csi_attacher_latest_version" >}}.tar
-  csi-<driver>-bundle-2.15.0/dell-csi-helm-installer/images.tar/quay.io-dell-container-storage-modules-csi-<driver>-{{< version-docs key="PStore_latestVersion" >}}.tar
+  csi-<driver>-bundle-2.15.0/dell-csi-helm-installer/images.tar/quay.io-dell-container-storage-modules-csi-<driver>-{{< version-docs key="csi_powerstore_latest_version" >}}.tar
   csi-<driver>-bundle-2.15.0/dell-csi-helm-installer/images.tar/registry.k8s.io-sig-storage-csi-snapshotter-{{< version-docs key="csi_snapshotter_latest_version" >}}.tar
   csi-<driver>-bundle-2.15.0/dell-csi-helm-installer/images.tar/quay.io-dell-container-storage-modules-dell-csi-replicator-{{< version-docs key="replicator_latest_version" >}}.tar
   csi-<driver>-bundle-2.15.0/dell-csi-helm-installer/images.tar/quay.io-dell-container-storage-modules-podmon-{{< version-docs key="podmon_latest_version" >}}.tar

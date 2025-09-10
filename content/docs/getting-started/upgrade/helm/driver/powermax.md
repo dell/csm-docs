@@ -19,13 +19,13 @@ Upgrades to the CSI Driver for Dell PowerMax can be made using Helm or Dell CSM 
 1. Upgrade the Unisphere to have 10.0 endpoint support. Please find the instructions [here.](https://dl.dell.com/content/manual34878027-dell-unisphere-for-powermax-10-0-0-installation-guide.pdf?language=en-us&ps=true)
 2. Update the powermax-creds secret to specify endpoints with Unisphere version 10.0 support.
 
-## Update Driver from {{< version-docs key="PMax_preVersion" >}} to {{< version-docs key="PMax_latestVersion" >}} using Helm
+## Update Driver from {{< version-docs key="PMax_preVersion" >}} to {{< version-docs key="csi_powermax_latest_version" >}} using Helm
 
 **Steps**
 
 1. Clone the csi-powermax repository, using the latest release branch. This will include the Helm charts and dell-csi-helm-installer scripts.
    ```bash
-   git clone -b {{< version-docs key="PMax_latestVersion" >}} https://github.com/dell/csi-powermax.git
+   git clone -b {{< version-docs key="csi_powermax_latest_version" >}} https://github.com/dell/csi-powermax.git
    cd ./csi-powermax
    ```
 2. As of CSI PowerMax v2.14.0, the csi reverse proxy configuration and connectivity information has been migrated from a ConfigMap to a Secret. If the `powermax-creds` secret format was not previously updated, reference **Step 2** in [CSI Driver installation steps](../../../../installation/kubernetes/powermax/helm/#install-driver).

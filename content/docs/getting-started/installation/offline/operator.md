@@ -55,12 +55,12 @@ Here is the output of a request to build an offline bundle for the Dell CSM Oper
 
 * Pulling and saving container images
 
-   quay.io/dell/container-storage-modules/csi-isilon:{{< version-docs key="PScale_latestVersion" >}}
+   quay.io/dell/container-storage-modules/csi-isilon:{{< version-docs key="csi_powerscale_latest_version" >}}
    quay.io/dell/container-storage-modules/csi-metadata-retriever:{{< version-docs key="metadata_retriever_latest_version" >}}
-   quay.io/dell/container-storage-modules/csi-powermax:{{< version-docs key="PMax_latestVersion" >}}
-   quay.io/dell/container-storage-modules/csi-powerstore:{{< version-docs key="PStore_latestVersion" >}}
-   quay.io/dell/container-storage-modules/csi-unity:{{< version-docs key="PUnity_latestVersion" >}}
-   quay.io/dell/container-storage-modules/csi-vxflexos:{{< version-docs key="PFlex_latestVersion" >}}
+   quay.io/dell/container-storage-modules/csi-powermax:{{< version-docs key="csi_powermax_latest_version" >}}
+   quay.io/dell/container-storage-modules/csi-powerstore:{{< version-docs key="csi_powerstore_latest_version" >}}
+   quay.io/dell/container-storage-modules/csi-unity:{{< version-docs key="csi_unity_latest_version" >}}
+   quay.io/dell/container-storage-modules/csi-vxflexos:{{< version-docs key="csi_powerflex_latest_version" >}}
    quay.io/dell/container-storage-modules/csm-metrics-powerflex:{{< version-docs key="csm_metrics_powerflex_image" >}}
    quay.io/dell/container-storage-modules/csm-metrics-powerscale:{{< version-docs key="csm_metrics_powerscale_image" >}}
    quay.io/dell/container-storage-modules/csm-metrics-powerstore:{{< version-docs key="csm_metrics_powerstore_image" >}}
@@ -162,8 +162,8 @@ Preparing a offline bundle for installation
 
 * Loading quay.io images
 
-Loaded image: quay.io/dell/container-storage-modules/csi-powerstore:{{< version-docs key="PStore_latestVersion" >}}
-Loaded image: quay.io/dell/container-storage-modules/csi-isilon:{{< version-docs key="PScale_latestVersion" >}}
+Loaded image: quay.io/dell/container-storage-modules/csi-powerstore:{{< version-docs key="csi_powerstore_latest_version" >}}
+Loaded image: quay.io/dell/container-storage-modules/csi-isilon:{{< version-docs key="csi_powerscale_latest_version" >}}
 ...
 ...
 Loaded image: registry.k8s.io/sig-storage/csi-resizer:{{< version-docs key="csi_resizer_latest_version" >}}
@@ -171,7 +171,7 @@ Loaded image: registry.k8s.io/sig-storage/csi-snapshotter:{{< version-docs key="
 
 * Tagging and pushing images
 
-   quay.io/dell/container-storage-modules/csi-isilon:{{< version-docs key="PScale_latestVersion" >}} -> localregistry:5000/dell-csm-operator/csi-isilon:{{< version-docs key="PScale_latestVersion" >}}
+   quay.io/dell/container-storage-modules/csi-isilon:{{< version-docs key="csi_powerscale_latest_version" >}} -> localregistry:5000/dell-csm-operator/csi-isilon:{{< version-docs key="csi_powerscale_latest_version" >}}
    quay.io/dell/container-storage-modules/csi-metadata-retriever:{{< version-docs key="metadata_retriever_latest_version" >}} -> localregistry:5000/dell-csm-operator/csi-metadata-retriever:{{< version-docs key="metadata_retriever_latest_version" >}}
    ...
    ...
@@ -180,7 +180,7 @@ Loaded image: registry.k8s.io/sig-storage/csi-snapshotter:{{< version-docs key="
 
 * Preparing files within /root/dell-csm-operator-bundle
 
-   changing: quay.io/dell/container-storage-modules/csi-isilon:{{< version-docs key="PScale_latestVersion" >}} -> localregistry:5000/dell-csm-operator/csi-isilon:{{< version-docs key="PScale_latestVersion" >}}
+   changing: quay.io/dell/container-storage-modules/csi-isilon:{{< version-docs key="csi_powerscale_latest_version" >}} -> localregistry:5000/dell-csm-operator/csi-isilon:{{< version-docs key="csi_powerscale_latest_version" >}}
    changing: quay.io/dell/container-storage-modules/csi-metadata-retriever:{{< version-docs key="metadata_retriever_latest_version" >}} -> localregistry:5000/dell-csm-operator/csi-metadata-retriever:{{< version-docs key="metadata_retriever_latest_version" >}}
    ...
    ...

@@ -269,7 +269,7 @@ dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      
     spec:
       driver:
         csiDriverType: "isilon"
-        configVersion: {{< version-docs key="PScale_latestVersion" >}}
+        configVersion: {{< version-docs key="csi_powerscale_latest_version" >}}
         authSecret: isilon-creds
         common:
           envs:
@@ -323,7 +323,7 @@ Check if ContainerStorageModule CR is created successfully:
 oc get csm isilon -n isilon
 
 NAME        CREATIONTIME   CSIDRIVERTYPE   CONFIGVERSION    STATE
-isilon      3h             isilon          {{< version-docs key="PScale_latestVersion" >}}          Succeeded      
+isilon      3h             isilon          {{< version-docs key="csi_powerscale_latest_version" >}}          Succeeded      
 ```
 
 </ul>

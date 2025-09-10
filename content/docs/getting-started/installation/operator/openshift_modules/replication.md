@@ -309,7 +309,7 @@ description: >
    oc get csm isilon -n isilon
 
    NAME        CREATIONTIME   CSIDRIVERTYPE   CONFIGVERSION    STATE
-   isilon      3h             isilon          {{< version-docs key="PScale_latestVersion" >}}          Succeeded      
+   isilon      3h             isilon          {{< version-docs key="csi_powerscale_latest_version" >}}          Succeeded      
    ```
 
    Verify the CSM Pods are running in the Source OpenSfhift Cluster

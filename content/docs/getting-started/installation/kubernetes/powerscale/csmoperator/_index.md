@@ -92,7 +92,7 @@ To deploy the Operator, follow the instructions available [here](../../../operat
       spec:
       driver:
          csiDriverType: "isilon"
-         configVersion: {{< version-docs key="PScale_latestVersion" >}}
+         configVersion: {{< version-docs key="csi_powerscale_latest_version" >}}
          forceRemoveDriver: true
    ```
           Refer the minimal sample files provided in respective CSM versions folder under samples [here](https://github.com/dell/csm-operator/tree/main/samples). Modify if needed.

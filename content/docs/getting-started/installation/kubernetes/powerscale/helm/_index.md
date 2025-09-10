@@ -102,7 +102,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
 
 **Steps**
 
-1. Run `git clone -b {{< version-docs key="PScale_latestVersion" >}} https://github.com/dell/csi-powerscale.git` to clone the git repository.
+1. Run `git clone -b {{< version-docs key="csi_powerscale_latest_version" >}} https://github.com/dell/csi-powerscale.git` to clone the git repository.
 2. Ensure that you have created the namespace where you want to install the driver. You can run `kubectl create namespace isilon` to create a new one. The use of "isilon"  as the namespace is just an example. You can choose any name for the namespace.
 3. Collect information from the PowerScale Systems like IP address, IsiPath, username, and password. Make a note of the value for these parameters as they must be entered in the *secret.yaml*.
 

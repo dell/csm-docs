@@ -147,7 +147,7 @@ dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      
     spec:
       driver:
         csiDriverType: "unity"
-        configVersion: {{< version-docs key="PUnity_latestVersion" >}}
+        configVersion: {{< version-docs key="csi_unity_latest_version" >}}
         forceRemoveDriver: true
     EOF 
     ``` 
@@ -190,7 +190,7 @@ Check if ContainerStorageModule CR is created successfully:
 oc get csm unity -n unity
 
 NAME        CREATIONTIME   CSIDRIVERTYPE   CONFIGVERSION       STATE
-unity       3h             unity           {{< version-docs key="PUnity_latestVersion" >}}             Succeeded      
+unity       3h             unity           {{< version-docs key="csi_unity_latest_version" >}}             Succeeded      
 ```
 
 Check the status of the CR to verify if the driver installation is in the `Succeeded` state. If the status is not `Succeeded`, see the [Troubleshooting guide](../troubleshooting/#my-dell-csi-driver-install-failed-how-do-i-fix-it) for more information.

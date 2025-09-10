@@ -16,7 +16,7 @@ The CSI Drivers implement an interface between [CSI](https://kubernetes-csi.gith
 {{<table "table table-striped table-bordered table-sm">}}
 | Features                 | PowerStore | PowerScale | PowerFlex | PowerMax | Unity XT  |
 |--------------------------|:----------:|:----------:|:---------:|:--------:|:---------:|
-| <div style="text-align: left"> CSI Driver version       |    {{< version-docs key="PStore_latestVersion" >}}  | {{< version-docs key="PScale_latestVersion" >}}    | {{< version-docs key="PFlex_latestVersion" >}}    | {{< version-docs key="PMax_latestVersion" >}}   | {{< version-docs key="PUnity_latestVersion" >}}    |
+| <div style="text-align: left"> CSI Driver version       |    {{< version-docs key="csi_powerstore_latest_version" >}}  | {{< version-docs key="csi_powerscale_latest_version" >}}    | {{< version-docs key="csi_powerflex_latest_version" >}}    | {{< version-docs key="csi_powermax_latest_version" >}}   | {{< version-docs key="csi_unity_latest_version" >}}    |
 | <div style="text-align: left"> Static Provisioning      | ✅        | ✅        | ✅       | ✅      | ✅       |
 | <div style="text-align: left"> Dynamic Provisioning     | ✅        | ✅        | ✅       | ✅      | ✅       |
 | <div style="text-align: left"> Expand Persistent Volume | ✅        | ✅        | ✅       | ✅      | ✅       |

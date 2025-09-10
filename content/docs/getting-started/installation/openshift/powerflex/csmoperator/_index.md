@@ -136,7 +136,7 @@ dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      
     spec:
       driver:
         csiDriverType: "powerflex"
-        configVersion: {{< version-docs key="PFlex_latestVersion" >}}
+        configVersion: {{< version-docs key="csi_powerflex_latest_version" >}}
     EOF 
     ``` 
     </div>
@@ -182,7 +182,7 @@ Check if ContainerStorageModule CR is created successfully:
 oc get csm vxflexos -n vxflexos
 
 NAME        CREATIONTIME   CSIDRIVERTYPE   CONFIGVERSION                                           STATE
-vxflexos    3h             powerflex       {{< version-docs key="PFlex_latestVersion" >}}         Succeeded
+vxflexos    3h             powerflex       {{< version-docs key="csi_powerflex_latest_version" >}}         Succeeded
 ```
 
 Check the status of the CR to verify if the driver installation is in the `Succeeded` state. If the status is not `Succeeded`, see the [Troubleshooting guide](../troubleshooting/#my-dell-csi-driver-install-failed-how-do-i-fix-it) for more information.
