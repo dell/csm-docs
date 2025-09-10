@@ -1,14 +1,14 @@
 {{- $key := .Get "key" -}}
-{{- if eq $key "PFlex_latestVersion" -}}v2.15.0
+{{- if eq $key "csi_powerflex_latest_version" -}}v2.15.0
 {{- else if eq $key "PFlex_preVersion" -}}v2.14.0
-{{- else if eq $key "PStore_latestVersion" -}}v2.15.0
+{{- else if eq $key "csi_powerstore_latest_version" -}}v2.15.0
 {{- else if eq $key "PStore_preVersion" -}}v2.14.0
-{{- else if eq $key "PMax_latestVersion" -}}v2.15.0
-{{- else if eq $key "PMax_ReverseProxy_latestVersion" -}}v2.14.0
+{{- else if eq $key "csi_powermax_latest_version" -}}v2.15.0
+{{- else if eq $key "csireverseproxy_latest_version" -}}v2.14.0
 {{- else if eq $key "PMax_preVersion" -}}v2.14.0
-{{- else if eq $key "PScale_latestVersion" -}}v2.15.0
+{{- else if eq $key "csi_powerscale_latest_version" -}}v2.15.0
 {{- else if eq $key "PScale_preVersion" -}}v2.14.0
-{{- else if eq $key "PUnity_latestVersion" -}}v2.15.0
+{{- else if eq $key "csi_unity_latest_version" -}}v2.15.0
 {{- else if eq $key "PUnity_preVersion" -}}v2.14.0
 {{- else if eq $key "cert_csi" -}}v1.9.0
 {{- else if eq $key "csm_metrics_powerstore_image" -}}v1.13.0
