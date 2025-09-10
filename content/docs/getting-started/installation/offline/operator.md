@@ -69,7 +69,7 @@ Here is the output of a request to build an offline bundle for the Dell CSM Oper
    quay.io/dell/storage/powerflex/sdc:4.5.4
    quay.io/dell/container-storage-modules/dell-csm-operator:{{< version-docs key="csm_operator_latest_version" >}}
    registry.redhat.io/openshift4/ose-kube-rbac-proxy-rhel9:v4.16.0-202409051837.p0.g8ea2c99.assembly.stream.el9
-   nginxinc/nginx-unprivileged:1.27
+   nginxinc/nginx-unprivileged:{{< version-docs key="nginx_unprivileged_version" >}}
    ghcr.io/open-telemetry/opentelemetry-collector-releases/opentelemetry-collector:{{< version-docs key="opentelemetry_collector_latest_version" >}}
    registry.k8s.io/sig-storage/csi-attacher:{{< version-docs key="csi_attacher_latest_version" >}}
    registry.k8s.io/sig-storage/csi-external-health-monitor-controller:{{< version-docs key="csi_external_health_monitor_controller_latest_version" >}}

@@ -82,7 +82,7 @@ To perform an offline installation of a Helm chart, the following steps should b
       quay.io/dell/container-storage-modules/csm-metrics-powerscale:{{< version-docs key="csm_metrics_powerscale_image" >}}
       quay.io/dell/container-storage-modules/csm-metrics-powermax:{{< version-docs key="csm_metrics_powermax_image" >}}
       ghcr.io/open-telemetry/opentelemetry-collector-releases/opentelemetry-collector:{{< version-docs key="opentelemetry_collector_latest_version" >}}
-      nginxinc/nginx-unprivileged:1.27
+      nginxinc/nginx-unprivileged:{{< version-docs key="nginx_unprivileged_version" >}}
 
     *
     * Compressing offline-karavi-observability-bundle.tar.gz
@@ -117,7 +117,7 @@ To perform an offline installation of a Helm chart, the following steps should b
       quay.io/dell/container-storage-modules/csm-metrics-powerscale:{{< version-docs key="csm_metrics_powerscale_image" >}} -> <my-registry>:5000/csm-metrics-powerscale:{{< version-docs key="csm_metrics_powerscale_image" >}}
       quay.io/dell/container-storage-modules/csm-metrics-powermax:{{< version-docs key="csm_metrics_powermax_image" >}} -> <my-registry>:5000/csm-metrics-powermax:{{< version-docs key="csm_metrics_powermax_image" >}}
       ghcr.io/open-telemetry/opentelemetry-collector-releases/opentelemetry-collector:{{< version-docs key="opentelemetry_collector_latest_version" >}} -> <my-registry>:5000/opentelemetry-collector:{{< version-docs key="opentelemetry_collector_latest_version" >}}
-      nginxinc/nginx-unprivileged:1.27 -> <my-registry>:5000/nginx-unprivileged:1.27
+      nginxinc/nginx-unprivileged:{{< version-docs key="nginx_unprivileged_version" >}} -> <my-registry>:5000/nginx-unprivileged:{{< version-docs key="nginx_unprivileged_version" >}}
     ```
 
 ### Perform Helm installation

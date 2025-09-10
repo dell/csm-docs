@@ -24,7 +24,7 @@ Prometheus and Container Storage Modules Observability services run on the same 
 
 | Supported Version | Image                   | Helm Chart                                                   |
 | ----------------- | ----------------------- | ------------------------------------------------------------ |
-| 2.34.0           | prom/prometheus:v2.34.0 | [Prometheus Helm chart](https://github.com/prometheus-community/helm-charts/tree/main/charts/prometheus) |  
+| {{< version-docs key="prometheus_version" >}}           | prom/prometheus:{{< version-docs key="prometheus_version" >}} | [Prometheus Helm chart](https://github.com/prometheus-community/helm-charts/tree/main/charts/prometheus) |  
 
 **Note**: It is the user's responsibility to provide persistent storage for Prometheus if they want to preserve historical data.
 
@@ -53,7 +53,7 @@ Here’s a minimal Prometheus configuration using insecure skip verify; for prop
       enabled: true
       image:
         repository: quay.io/prometheus/prometheus
-        tag: v2.34.0
+        tag: {{< version-docs key="prometheus_version" >}}
         pullPolicy: IfNotPresent
       persistentVolume:
         enabled: false
@@ -132,7 +132,7 @@ The Grafana dashboards require Grafana to be deployed in the same Kubernetes clu
 
 | Supported Version | Helm Chart                                                |
 | ----------------- | --------------------------------------------------------- |
-| 11.x      | [Grafana Helm chart](https://github.com/grafana/helm-charts/tree/main/charts/grafana) |
+| {{< version-docs key="grafana_version" >}}      | [Grafana Helm chart](https://github.com/grafana/helm-charts/tree/main/charts/grafana) |
 
 Grafana must be configured with the following data sources/plugins:
 
@@ -190,7 +190,7 @@ Below are the steps to deploy a new Grafana instance into your Kubernetes cluste
     # grafana-values.yaml 
     image:
       repository: grafana/grafana
-      tag: 11.5.2
+      tag: {{< version-docs key="grafana_version" >}}
       sha: ""
       pullPolicy: IfNotPresent
     service:
