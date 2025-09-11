@@ -1,8 +1,10 @@
 ---
-title: "Component Version"
-linkTitle: "Component Version"
+title: "Component and Image Details"
+linkTitle: "Component and Image Details"
 weight: 1 
 --- 
+
+### Container Storage Modules Component Version
 
 {{<table "table table-striped table-bordered table-sm">}}
 | Component | Version |
@@ -20,11 +22,11 @@ weight: 1
 | Application Mobility |{{< version-v1 key="csm-applicationmobility" >}} |
 {{</table>}}
 
-### Container Storage Modules Operator 1.9.1 Certified Images
+### Container Storage Modules Certified Operator 1.9.1 Images
 
 <ul>
 
-{{< collapse id="1" title="PowerStore">}}
+{{< collapse id="1" title="PowerStore" show="true">}}
 <div style="overflow-x: auto;">
 {{<table "table table-striped table-bordered table-sm">}}
 | Version/Digest | Image |

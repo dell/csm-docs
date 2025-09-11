@@ -1,8 +1,10 @@
 ---
-title: "Component Version"
-linkTitle: "Component Version"
+title: "Component and Image Details"
+linkTitle: "Component and Image Details"
 weight: 1 
 --- 
+
+### Container Storage Modules Component Version
 
 {{<table "table table-striped table-bordered table-sm">}}
 | Component | Image Version |
@@ -17,3 +19,7 @@ weight: 1
 |<div style="text-align:left"> Replication |{{< version-docs key="csm-replication" >}} |
 |<div style="text-align:left"> Resiliency | {{< version-docs key="karavi-resiliency" >}} |
 {{</table>}}
+
+### Container Storage Modules Certified Operator 1.10.0 Images
+
+> **Note:** This section will be updated with the certified images list once the images have successfully completed the Red Hat certification process.

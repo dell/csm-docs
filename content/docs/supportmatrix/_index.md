@@ -84,19 +84,18 @@ Container Storage Modules doesn't officially support specific operating systems,
 ## OpenShift Compatibility with Operator
 
 {{<table "table table-striped table-bordered table-sm">}}
-|  OpenShift Version | (Operator Version) -> (CSM Version)                                                                                             | 
-| -------------------| ------------------------------------------------------------------------------------------------------------------------------- |
-|  4.14              | <div style="text-align: left"> (1.4.4)->(1.9.4) </br> (1.5.1)->(1.10.2) </br> (1.6.1)->(1.11.1) </br> (1.7.0)->(1.12) </br> (1.8.1)->(1.13.1) </br> (1.9.1)->(1.14.2) </br> (1.10.0)->(1.15) |
-|  4.15              | <div style="text-align: left"> (1.5.1)->(1.10.2) </br> (1.6.1)->(1.11.1) </br> (1.7.0)->(1.12) </br> (1.8.1)->(1.13.1) </br> (1.9.1)->(1.14.2) </br> (1.10.0)->(1.15)                   |
-|  4.16              | <div style="text-align: left"> (1.6.1)->(1.11.1) </br> (1.7.0)->(1.12) </br> (1.8.1)->(1.13.) </br> (1.9.1)->(1.14.2) </br>  (1.10.0)->(1.15)                                       |
-|  4.17              | <div style="text-align: left"> (1.6.1)->(1.11.1) </br> (1.7.0)->(1.12) </br> (1.8.1)->(1.13.) </br> (1.9.1)->(1.14.2) </br> (1.10.0)->(1.15)                                       |
-|  4.17              | <div style="text-align: left"> (1.6.1)->(1.11.1) </br> (1.7.0)->(1.12) </br> (1.8.1)->(1.13.) </br> (1.9.1)->(1.14.2) </br> (1.10.0)->(1.15)                                       |
-|  4.18              | <div style="text-align: left"> (1.6.1)->(1.11.1) </br> (1.7.0)->(1.12) </br> (1.8.1)->(1.13.) </br> (1.9.1)->(1.14.2) </br> (1.10.0)->(1.15)                                       |
-|  4.19              | <div style="text-align: left"> (1.8.1)->(1.13.1) </br> (1.9.1)->(1.14.2) </br> (1.10.0)->(1.15)                                                                          |
-{{</table>}}
+| OpenShift Version | Operator / CSM Combination |
+|------------------|-------------------|
+| 4.14 | 1.4.4 / 1.10.2 </br> 1.5.1 / 1.10.2 </br> 1.6.1 / 1.11.1 </br> 1.7.0 / 1.12   </br> 1.8.1 / 1.13.1  </br> 1.9.1 / 1.14.1 </br>  1.10.0 / 1.15 |
+| 4.15 | 1.5.1 / 1.10.2 </br> 1.6.1 / 1.11.1 </br> 1.7.0 / 1.12   </br> 1.8.1 / 1.13.1 </br> 1.9.1 / 1.14.1  </br> 1.10.0 / 1.15 |
+| 4.16 | 1.6.1 / 1.11.1 </br> 1.7.0 / 1.12   </br> 1.8.1 / 1.13.1 </br> 1.9.1 / 1.14.1 </br> 1.10.0 / 1.15 |
+| 4.17 | 1.6.1 / 1.11.1 </br> 1.7.0 / 1.12   </br> 1.8.1 / 1.13.1 </br> 1.9.1 / 1.14.1 </br> 1.10.0 / 1.15 |
+| 4.18 | 1.6.1 / 1.11.1 </br> 1.7.0 / 1.12   </br> 1.8.1 / 1.13.1 </br> 1.9.1 / 1.14.1 </br> 1.10.0 / 1.15 |
+| 4.19 | 1.8.1 / 1.13.1 </br> 1.9.1 / 1.14.1 </br>  1.10.0 / 1.15 |
+{{</ table >}}
+
 **Note:**
 - [Refer](#container-orchestrator-platforms) our supported Orchestration platform. While the Operator may be displayed, it does not necessarily mean it has been fully qualified by us.
-
 ## Installation Wizard Compatibility
 
 ### Drivers

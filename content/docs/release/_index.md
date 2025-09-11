@@ -20,20 +20,21 @@ Description: >
 > * <span><span/>{{< message text="11" >}}
 > * <span><span/>{{< message text="12" >}}
 > * <span><span/>{{< message text="14" >}}
+> * <span><span/>{{< message text="15" >}}
 
 ## Release Notes for v1.15.0
 
 ### New Features/Changes
 
 - [#1468 - [FEATURE]: Support K8s secrets as credential store in CSM Authorization Proxy v2](https://github.com/dell/csm/issues/1468)
-- [#1750 - [FEATURE]: Kubernetes 1.33 Qualification](https://github.com/dell/csm/issues/1750)
 - [#1947 - [FEATURE]: Authorization support for PowerStore](https://github.com/dell/csm/issues/1947)
 - [#1954 - [FEATURE]: Observability enhancements to prevent hitting the max login limit in PowerFlex](https://github.com/dell/csm/issues/1954)
 - [#1961 - [FEATURE]: Support Resiliency and Metro - Node failure.](https://github.com/dell/csm/issues/1961)
 - [#1962 - [FEATURE]: Deliver restricted SDC access mode support for PowerFlex](https://github.com/dell/csm/issues/1962)
 - [#1988 - [FEATURE]: Embed topology metrics for each storage platform into the storage specific metrics service for Observability](https://github.com/dell/csm/issues/1988)
 - [#2001 - [FEATURE]: CSM support for Kubernetes 1.34](https://github.com/dell/csm/issues/2001)
-
+- [#2023-  [FEATURE]: CSM Operator support Observability deployments for PowerStore](https://github.com/dell/csm/issues/2023)
+- [#2024-  [FEATURE]: CSM operator supports replication deployment for PowerStore](https://github.com/dell/csm/issues/2024)
 
 ### Fixed Issues
 
