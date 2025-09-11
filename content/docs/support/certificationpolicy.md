@@ -1,6 +1,6 @@
 ---
-title: OpenShift Certification for Operator
-linktitle: OpenShift Certification for Operator
+title: Container Storage Modules Operator Certification Policy
+linktitle: Container Storage Modules Operator Certification Policy
 weight: 6
 ---
 
