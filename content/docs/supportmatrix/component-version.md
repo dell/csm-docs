@@ -22,4 +22,4 @@ weight: 1
 
 ### Container Storage Modules Certified Operator 1.10.0 Images
 
-> **Note:** This section will be updated with the certified images list once the images have successfully completed the Red Hat certification process.
+> **Note:** Upon certification of the Dell Container Storage Modules Operator, a detailed image list will be published to support transparency and component verification. See [Container Storage Modules Operator Certification Policy](../support/certificationpolicy)
