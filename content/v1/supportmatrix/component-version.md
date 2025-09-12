@@ -5,7 +5,7 @@ weight: 1
 --- 
 
 ### Container Storage Modules Component Version
-
+<ul style="margin-left:8px">
 {{<table "table table-striped table-bordered table-sm">}}
 | Component | Version |
 | - | - |
@@ -21,11 +21,12 @@ weight: 1
 |<div style="text-align:left"> Resiliency | {{< version-v1 key="karavi-resiliency" >}} |
 | Application Mobility |{{< version-v1 key="csm-applicationmobility" >}} |
 {{</table>}}
+</ul>
+<br>
 
 ### Container Storage Modules Certified Operator 1.9.1 Images
 
 <ul>
-
 {{< collapse id="1" title="PowerStore" show="true">}}
 <div style="overflow-x: auto;">
 {{<table "table table-striped table-bordered table-sm">}}
