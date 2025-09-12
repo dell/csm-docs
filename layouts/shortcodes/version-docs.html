@@ -71,6 +71,15 @@
 {{- else if eq $key "replication_latestVersion" -}}1.13.0
 {{- else if eq $key "Authv2_latestVersion" -}}2.3.0
 {{- else if eq $key "Observability_latestVersion" -}}1.13.0
+{{- else if eq $key "csi-vxflexos" -}}2.15.0
+{{- else if eq $key "csi-powerstore" -}}2.15.0
+{{- else if eq $key "csi-powermax" -}}2.15.0
+{{- else if eq $key "csi-powerscale" -}}2.15.0
+{{- else if eq $key "csi-unity" -}}2.15.0
+{{- else if eq $key "csm-authorization-v2" -}}2.3.0
+{{- else if eq $key "csm-observability" -}}1.13.0
+{{- else if eq $key "csm-replication" -}}1.13.0
+{{- else if eq $key "karavi-resiliency" -}}1.14.0
 
 {{- else -}}
   Default text if no valid parameter is passed.

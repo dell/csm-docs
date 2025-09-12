@@ -62,6 +62,8 @@ arrays:
 The Metro replicated volumes are created just like the normal volumes, but the `StorageClass` contains some
 extra parameters related to metro replication. A `StorageClass` to create metro replicated volumes may look as follows:
 
+Example using`volumeBindingMode: Immediate`
+
 ```yaml
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
@@ -76,6 +78,30 @@ allowVolumeExpansion: true
 provisioner: csi-powerstore.dellemc.com
 reclaimPolicy: Delete
 volumeBindingMode: Immediate
+```
+
+Example using `volumeBindingMode: WaitForFirstConsumer`
+
+```yaml
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: powerstore-metro
+parameters:
+  arrayID: PS000000000001
+  replication.storage.dell.com/isReplicationEnabled: "true"
+  replication.storage.dell.com/mode: METRO
+  replication.storage.dell.com/remoteSystem: RT-D0002
+allowVolumeExpansion: true
+provisioner: csi-powerstore.dellemc.com
+reclaimPolicy: Delete
+volumeBindingMode: WaitForFirstConsumer
+allowedTopologies:
+- matchLabelExpressions:
+  - key: csi-powerstore.dellemc.com/xx.xxx.xx.xx-iscsi
+    values: ["true"]
+  - key: csi-powerstore.dellemc.com/xx.xx.xx.xx-iscsi
+    values: ["true"]
 ```
 
 > _**NOTE**_: Metro support for hosts with Linux operating systems was added from [PowerStoreOS 4.0](https://infohub.delltechnologies.com/en-us/l/dell-powerstore-metro-volume-1/introduction-4503/).</br>

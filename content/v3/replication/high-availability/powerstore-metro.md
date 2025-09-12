@@ -24,6 +24,8 @@ The creation of volumes in metro mode doesn't involve the replication sidecar or
 The Metro replicated volumes are created just like the normal volumes, but the `StorageClass` contains some
 extra parameters related to metro replication. A `StorageClass` to create metro replicated volumes may look as follows:
 
+Example using`volumeBindingMode: Immediate`
+
 ```yaml
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
@@ -38,6 +40,30 @@ allowVolumeExpansion: true
 provisioner: csi-powerstore.dellemc.com
 reclaimPolicy: Delete
 volumeBindingMode: Immediate
+```
+
+Example using `volumeBindingMode: WaitForFirstConsumer`
+
+```yaml
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: powerstore-metro
+parameters:
+  arrayID: PS000000000001
+  replication.storage.dell.com/isReplicationEnabled: "true"
+  replication.storage.dell.com/mode: METRO
+  replication.storage.dell.com/remoteSystem: RT-D0002
+allowVolumeExpansion: true
+provisioner: csi-powerstore.dellemc.com
+reclaimPolicy: Delete
+volumeBindingMode: WaitForFirstConsumer
+allowedTopologies:
+- matchLabelExpressions:
+  - key: csi-powerstore.dellemc.com/xx.xxx.xx.xx-iscsi
+    values: ["true"]
+  - key: csi-powerstore.dellemc.com/xx.xx.xx.xx-iscsi
+    values: ["true"]
 ```
 
 > _**NOTE**_: Metro at volume group is not supported by the PowerStore driver.
