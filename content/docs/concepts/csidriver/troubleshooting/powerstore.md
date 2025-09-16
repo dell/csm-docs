@@ -22,5 +22,4 @@ description: Troubleshooting PowerStore Driver
 | Unable to install or upgrade the driver due to minimum Kubernetes version or Openshift version | Currently CSM only supports n, n-1, n-2 version of Kubernetes and Openshift, if you still wanted to continue with existing version update the `verify.sh` to continue.| 
 | Volumes are not getting deleted on the array when PV's are deleted | Ensure `persistentVolumeReclaimPolicy` is set to Delete. |
 | fsGroupPolicy may not work as expected without root privileges for NFS only [https://github.com/kubernetes/examples/issues/260](https://github.com/kubernetes/examples/issues/260) | To get the desired behavior set “RootClientEnabled” = “true” in the storage class parameter |
-| Volume mounts fail with "exceeds size limit" error | Due to a Kubernetes limitation, volume publish contexts are limited in size to 4kb or less. Having too many ISCSI, NVME, and FC targets available on the storage array will exceed this size limit. Some targets must be removed to reduce the size of the publish context, and the volume must be unpublished/republished. |
 </div>
