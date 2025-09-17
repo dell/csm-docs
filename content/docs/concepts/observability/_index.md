@@ -33,20 +33,21 @@ Container Storage Modules for Observability provides the following capabilities:
 {{<table "table table-striped table-bordered table-sm">}}
 | Capability | PowerStore | PowerScale |PowerFlex |PowerMax| Unity XT |
 | - | :-: | :-: | :-: | :-: | :-: |
-| <div style="text-align: left">  Collect and expose Volume Metrics via the OpenTelemetry Collector            | ✅ | ✅ | ✅ | ✅ | ❌ |
-| <div style="text-align: left">  Collect and expose File System Metrics via the OpenTelemetry Collector       | ✅ | ❌ | ❌ | ❌ | ❌ |
-| <div style="text-align: left">  Collect and expose export (k8s) node metrics via the OpenTelemetry Collector | ❌ | ❌ | ✅ | ❌ | ❌ |
-| <div style="text-align: left">  Collect and expose block storage metrics via the OpenTelemetry Collector     | ✅ | ❌ | ✅ | ✅ | ❌ |
-| <div style="text-align: left">  Collect and expose file storage metrics via the OpenTelemetry Collector      | ✅ | ✅ | ❌ | ❌ | ❌ |
-| <div style="text-align: left">  non-disruptive config changes                                                | ✅ | ✅ | ✅ | ✅ | ❌ |
-| <div style="text-align: left">  non-disruptive log level changes                                             | ✅ | ✅ | ✅ | ✅ | ❌ |
-| <div style="text-align: left">  Grafana Dashboards for displaying metrics and topology data                  | ✅ | ✅ | ✅ | ✅ | ❌ |
-| <div style="text-align: left">  Collect and expose Topology Metrics via the OpenTelemetry Collector          | ✅ | ✅ | ✅ | ✅ | ❌ |
+| <div style="text-align: left">  Collect and expose Volume Metrics via the OpenTelemetry Collector            | Yes | Yes | Yes | Yes | No |
+| <div style="text-align: left">  Collect and expose File System Metrics via the OpenTelemetry Collector       | Yes | No  | No  | No  | No |
+| <div style="text-align: left">  Collect and expose export (k8s) node metrics via the OpenTelemetry Collector | No  | No  | Yes | No  | No |
+| <div style="text-align: left">  Collect and expose block storage metrics via the OpenTelemetry Collector     | Yes | No  | Yes | Yes | No |
+| <div style="text-align: left">  Collect and expose file storage metrics via the OpenTelemetry Collector      | Yes | Yes | No  | No  | No |
+| <div style="text-align: left">  non-disruptive config changes                                                | Yes | Yes | Yes | Yes | No |
+| <div style="text-align: left">  non-disruptive log level changes                                             | Yes | Yes | Yes | Yes | No |
+| <div style="text-align: left">  Grafana Dashboards for displaying metrics and topology data                  | Yes | Yes | Yes | Yes | No |
+| <div style="text-align: left">  Collect and expose Topology Metrics via the OpenTelemetry Collector          | Yes | Yes | Yes | Yes | No |
 {{</table>}}
+
 
 ## Topology Data
 
->__NOTE__: Starting from CSM version 1.15, the Karavi topology component will no longer operate as a standalone service. Instead, topology data will be directly exported to the OpenTelemetry Collector.
+>__NOTE__: <span><span/>{{< message text="16" >}}
 
 Container Storage Modules for Observability provides Kubernetes administrators with the topology data related to containerized storage. This topology data collected via opentelemetry collector to Prometheus is visualized using Grafana:
 {{<table "table table-striped table-bordered table-sm tdleft">}}
