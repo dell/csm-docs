@@ -19,69 +19,73 @@ Description: >
 
 > * <span><span/>{{< message text="11" >}}
 > * <span><span/>{{< message text="12" >}}
+> * <span><span/>{{< message text="14" >}}
+> * <span><span/>{{< message text="15" >}}
+> * <span><span/>{{< message text="16" >}}
 
-## Release Notes for v1.14.0
+## Release Notes for v1.15.0
 
 ### New Features/Changes
 
-- [#1614 - [FEATURE]: CSM PowerMax - Mount credentials secret to the reverse-proxy](https://github.com/dell/csm/issues/1614)
-- [#1743 - [FEATURE]: Add support for PowerScale 9.11](https://github.com/dell/csm/issues/1743)
-- [#1744 - [FEATURE]: Add support for Unity 5.5](https://github.com/dell/csm/issues/1744)
-- [#1748 - [FEATURE]: CSM PowerMax - Multi-Availability Zone (AZ) support with multiple storage systems - dedicated storage systems in each AZ](https://github.com/dell/csm/issues/1748)
-- [#1749 - [FEATURE]: CSM Operator - CSM Operator must manage the CRD only on the K8S cluster where the Operator is deployed](https://github.com/dell/csm/issues/1749)
-- [#1750 - [FEATURE]: Kubernetes 1.33 Qualification](https://github.com/dell/csm/issues/1750)
-- [#1751 - [FEATURE]: CSM RBAC rules](https://github.com/dell/csm/issues/1751)
-- [#1752 - [FEATURE]: CSM PowerFlex - Expose the SFTP settings to automatically pull the scini.ko kernel module](https://github.com/dell/csm/issues/1752)- 
-- [#1753 - [FEATURE]: CSM PowerStore - Host Registration for PowerStore Metro](https://github.com/dell/csm/issues/1753)
-- [#1755 - [FEATURE]: CSM Observability - Grafana Migration from Angular JS to React](https://github.com/dell/csm/issues/1755)
-- [#1758 - [FEATURE]: CSM PowerStore - Multiple NAS Servers Support](https://github.com/dell/csm/issues/1758)
-- [#1844 - [FEATURE]: Add Openshift Virtualization support for resiliency module](https://github.com/dell/csm/issues/1844)
-- [#1850 - [FEATURE]: Controller reattach failover PV to PVC automatically on stretched cluster](https://github.com/dell/csm/issues/1850)
-- [#1862 - [FEATURE]: CSM Replication - Add claimRef to the target PV](https://github.com/dell/csm/issues/1862)
-- [#1882-  [FEATURE]: Metro Replication Qualification - Support PowerMax and PowerStore with OpenShift Virtualization](https://github.com/dell/csm/issues/1882)
+- [#1468 - [FEATURE]: Support K8s secrets as credential store in CSM Authorization Proxy v2](https://github.com/dell/csm/issues/1468)
+- [#1947 - [FEATURE]: Authorization support for PowerStore](https://github.com/dell/csm/issues/1947)
+- [#1954 - [FEATURE]: Observability enhancements to prevent hitting the max login limit in PowerFlex](https://github.com/dell/csm/issues/1954)
+- [#1961 - [FEATURE]: Support Resiliency and Metro - Node failure.](https://github.com/dell/csm/issues/1961)
+- [#1962 - [FEATURE]: Deliver restricted SDC access mode support for PowerFlex](https://github.com/dell/csm/issues/1962)
+- [#1988 - [FEATURE]: Embed topology metrics for each storage platform into the storage specific metrics service for Observability](https://github.com/dell/csm/issues/1988)
+- [#2001 - [FEATURE]: CSM support for Kubernetes 1.34](https://github.com/dell/csm/issues/2001)
+- [#2023-  [FEATURE]: CSM Operator support Observability deployments for PowerStore](https://github.com/dell/csm/issues/2023)
+- [#2024-  [FEATURE]: CSM operator supports replication deployment for PowerStore](https://github.com/dell/csm/issues/2024)
 
 ### Fixed Issues
 
-- [#1732 - [BUG]: Updating approveSDC in tenant CR doesn't reflect in backend](https://github.com/dell/csm/issues/1732)
-- [#1804 - [BUG]: Support multiple sidecar headers in the Authorization Proxy Server](https://github.com/dell/csm/issues/1804)
-- [#1740 - [BUG]: CSI PowerFlex does not list volumes from non-default systems](https://github.com/dell/csm/issues/1740)
-- [#1774 - [BUG]: CSI-PowerFlex - DriverConfigMap is using hard-coded value](https://github.com/dell/csm/issues/1774)
-- [#1782 - [BUG]: Pods Stuck in Terminating State After PowerFlex CSI Node Pod Restart When Deployments Share Same Node](https://github.com/dell/csm/issues/1782)
-- [#1841 - [BUG]: "unable to get node list" error="csinodes.storage.k8s.io is forbidden](https://github.com/dell/csm/issues/1841)
-- [#1858 - [BUG]: Resiliency Tests Fail on GOARCH=386 Due to Type Mismatch in gofsutil (statfs.Bsize)](https://github.com/dell/csm/issues/1858)
-- [#1689 - [BUG]: Auto select protocol makes the node driver to crash](https://github.com/dell/csm/issues/1689)
-- [#1698 - [BUG]: 1.13 documentation | PowerMax | CSI PowerMax Reverse Proxy](https://github.com/dell/csm/issues/1698)
-- [#1711 - [BUG]: Unable to provision PowerMax Metro volumes with replication module not enabled](https://github.com/dell/csm/issues/1711)
-- [#1725 - [BUG]: Scale test fails with powermax nvmetcp protocol when X_CSI_TRANSPORT_PROTOCOL= ""](https://github.com/dell/csm/issues/1725)
-- [#1760 - [BUG]: [csi-powermax]: Yaml error in configmap generation](https://github.com/dell/csm/issues/1760)
-- [#1769 - [BUG]: PowerMax node pods are crashing even though the second array is reachable](https://github.com/dell/csm/issues/1769)
-- [#1826 - [BUG]: PowerMax CSI Driver attempts to create Port Group with Mixed FC and NVMe/FC Ports](https://github.com/dell/csm/issues/1826)
-- [#1870 - [BUG]: PowerMax Resiliency E2E Tests Failing Due to Incorrect Image Patch in Driver Node Pod](https://github.com/dell/csm/issues/1870)
-- [#1775 - [BUG]: CSI+Rep using Operator for PMAX failing during deployment.](https://github.com/dell/csm/issues/1775)
-- [#1726 - [BUG]: Panic Error During Volume Expansion When Hard Limit is Not Set for CSI PowerScale Driver](https://github.com/dell/csm/issues/1726)
-- [#1763 - [BUG]: Cloned PVC remains in a Pending state when cloning a large PVC in PowerScale](https://github.com/dell/csm/issues/1763)
-- [#1773 - [BUG]: gopowerscale CopyIsiVolume* functions ignoring error cases](https://github.com/dell/csm/issues/1773)
-- [#1823 - [BUG]: Powerscale CSI driver not setting snapshot restoreSize field](https://github.com/dell/csm/issues/1823)
-- [#1714 - [BUG]: PowerStore CSI driver version 2.12 - only supports the default interface for iSCSI discovery. ](https://github.com/dell/csm/issues/1714)
-- [#1729 - [BUG]: [CSI-Powerstore] Clarify protocol value use in PV](https://github.com/dell/csm/issues/1729)
-- [#1845 - [BUG]: PowerStore driver 2.12 error with OCP 4.14 on NVMe](https://github.com/dell/csm/issues/1845)
-- [#1717 - [BUG]: CSM Unity XT protocol/host registration documentation is not clear](https://github.com/dell/csm/issues/1717)
-- [#1736 - [BUG]: failed to provision volume with StorageClass error generating accessibility requirements: no available topology found](https://github.com/dell/csm/issues/1736)
-- [#1762 - [BUG]: CSM Operator samples are incomplete](https://github.com/dell/csm/issues/1762)
-- [#1861 - [BUG]: Update the OTEL image version in operator and helm sample files](https://github.com/dell/csm/issues/1861)
+- [#1898 - [BUG]: Incorrect Metro Architecture Diagram Used for PowerStore in Replication](https://github.com/dell/csm/issues/1898)
+- [#1899 - [BUG]: Fix NFS Idempotent CreateVolume Request in Driver](https://github.com/dell/csm/issues/1899)
+- [#1910 - [BUG]: CSM PowerMax is intermittently left in a failed state](https://github.com/dell/csm/issues/1910)
+- [#1911 - [BUG]: Missing skipCertificateValidation Support in PowerStore CSI Driver](https://github.com/dell/csm/issues/1911)
+- [#1917 - [BUG]: Not able to pull the images for Offline installation for karavi-observability](https://github.com/dell/csm/issues/1917)
+- [#1920 - [BUG]: PowerScale Snapshots of volumes with a prefix different to that of the X_CSI_VOL_PREFIX fail in v2.14](https://github.com/dell/csm/issues/1920)
+- [#1924 - [BUG]: After failover with PVC swap, the initial PV does not have a reserved/reserved claim](https://github.com/dell/csm/issues/1924)
+- [#1926 - [BUG]: Unity CSI Driver Fails OCP End to End Intermittently](https://github.com/dell/csm/issues/1926)
+- [#1930 - [BUG]: Powerstore has unnecessary sharedNFS related codes that affects performance.](https://github.com/dell/csm/issues/1930)
+- [#1932 - [BUG]: powerflex driver's replication does not search for correct volume name when name + prefix > 31 chars](https://github.com/dell/csm/issues/1932)
+- [#1936 - [BUG]: CSM-Operator samples under ocp folder for PowerFlex is pointing to old sha id for SDC image](https://github.com/dell/csm/issues/1936)
+- [#1937 - [BUG]: Snapshot class mentioned in documentation fails](https://github.com/dell/csm/issues/1937)
+- [#1938 - [BUG]: Broken referencelink on Support Matrix](https://github.com/dell/csm/issues/1938)
+- [#1943 - [BUG]: CSM Authorization: Proxy server deployment is failing](https://github.com/dell/csm/issues/1943)
+- [#1949 - [BUG]: Duplicate entries in Release notes](https://github.com/dell/csm/issues/1949)
+- [#1951 - [BUG]: Repctl Failover Documentation is Unclear](https://github.com/dell/csm/issues/1951)
+- [#1952 - [BUG]: replication missing permission in operator](https://github.com/dell/csm/issues/1952)
+- [#1955 - [BUG]: Incorrect secret name mentioned for PowerScale installation using operator in OCP environment in CSM Docs](https://github.com/dell/csm/issues/1955)
+- [#1959 - [BUG]: Operator does not apply spec.driver.common.envs to driver node](https://github.com/dell/csm/issues/1959)
+- [#1960 - [BUG]: Formatting is broken in documentation for night mode](https://github.com/dell/csm/issues/1960)
+- [#1964 - [BUG]: CSI PowerFlex driver panics during CreateVolume()](https://github.com/dell/csm/issues/1964)
+- [#1969 - [BUG]: node driver crashed on unlocking an unlocked mutex](https://github.com/dell/csm/issues/1969)
+- [#1970 - [BUG]: PowerMax client is using PowerFlex methods in CSM authorization](https://github.com/dell/csm/issues/1970)
+- [#1972 - [BUG]: Authorization Installation clarity](https://github.com/dell/csm/issues/1972)
+- [#1974 - [BUG]: Host registration is missing when using metro topology label](https://github.com/dell/csm/issues/1974)
+- [#1986 - [BUG]: Operator fails to install PowerStore](https://github.com/dell/csm/issues/1986)
+- [#1997 - [BUG]: broken links to csm-operator samples in concepts section](https://github.com/dell/csm/issues/1997)
+- [#1998 - [BUG]: Powerstore NFS volume usage does not report stats when Volume health Monitoring is enabled](https://github.com/dell/csm/issues/1998)
+- [#1999 - [BUG]: Node preferred added for testing resiliency for metro is causing regression in normal set up](https://github.com/dell/csm/issues/1999)
+- [#2000 - [BUG]: CSI-PowerScale does not log CSI REQ/REP since 2.14](https://github.com/dell/csm/issues/2000)
+- [#2002 - [BUG]: Issue with expansion for PowerStore metro volume](https://github.com/dell/csm/issues/2002)
+- [#2003 - [BUG]: invalid topology labels due to delays in initiators login state report from Unity array](https://github.com/dell/csm/issues/2003)
+- [#2004 - [BUG]: op e2e tests fail for PowerMax](https://github.com/dell/csm/issues/2004)
+- [#2011 - [BUG]: CSI PowerScale is not able to find the default cluster and failing with error "isilon-node-fntjz"](https://github.com/dell/csm/issues/2011)
+- [#2017 - [BUG]: ControllerUnpublish fails to retrieve PV due to tenant prefix mismatch with Auth v2 enabled for powerscale](https://github.com/dell/csm/issues/2017)
 
 ### Known Issues
 
 | Issue | Workaround |
 |-------|------------|
 | <div style="text-align: left"> When CSM Operator creates a deployment that includes secrets (e.g., observability, cert-manager, velero), these secrets are not deleted on uninstall and will be left behind. For example, the `karavi-topology-tls`, `otel-collector-tls`, and `cert-manager-webhook-ca` secrets will not be deleted. |  <div style="text-align: left"> This should not cause any issues on the system, but all secrets present on the cluster can be found with `kubectl get secrets -A`, and any unwanted secrets can be deleted with `kubectl delete secret -n <secret-namespace> <secret-name>`|
-| <div style="text-align: left"> In certain environments, users have encountered difficulties in installing drivers using the CSM Operator due to the 'OOM Killed' issue. This issue is attributed to the default resource requests and limits configured in the CSM Operator, which fail to meet the resource requirements of the user environments. OOM error occurs when a process in the container tries to consume more memory than the limit specified in resource configuration.| <div style="text-align: left"> Before deploying the CSM Operator, it is crucial to adjust the memory and CPU requests and limits in the files [config/manager.yaml](https://github.com/dell/csm-operator/blob/main/config/manager/manager.yaml#L100), [deploy/operator.yaml](https://github.com/dell/csm-operator/blob/main/deploy/operator.yaml#L1330) to align with the user's environment requirements. If the containers running on the pod exceed the specified CPU and memory limits, the pod may get evicted. Currently CSM Operator does not support updating this configuration dynamically. CSM Operator needs to be redeployed for these updates to take effect in case it is already installed. Steps to manually update the resource configuration and then redeploy CSM Operator are available [here](https://dell.github.io/csm-docs/docs/deployment/csmoperator/#installation)|
+| <div style="text-align: left"> In certain environments, users have encountered difficulties in installing drivers using the CSM Operator due to the 'OOM Killed' issue. This issue is attributed to the default resource requests and limits configured in the CSM Operator, which fail to meet the resource requirements of the user environments. OOM error occurs when a process in the container tries to consume more memory than the limit specified in resource configuration.| <div style="text-align: left"> Before deploying the CSM Operator, it is crucial to adjust the memory and CPU requests and limits in the files [config/manager.yaml](https://github.com/dell/csm-operator/blob/main/config/manager/manager.yaml#L100), [deploy/operator.yaml](https://github.com/dell/csm-operator/blob/main/deploy/operator.yaml#L1330) to align with the user's environment requirements. If the containers running on the pod exceed the specified CPU and memory limits, the pod may get evicted. Currently CSM Operator does not support updating this configuration dynamically. CSM Operator needs to be redeployed for these updates to take effect in case it is already installed. Steps to manually update the resource configuration and then redeploy CSM Operator are available [here](../../docs/getting-started/installation/operator/operatorinstallation_kubernetes#installation)|
 |  <div style="text-align: left">  sdc:3.6.x/3.6.x.x is causing issues while installing the csi-powerflex driver on ubuntu/RHEL. |  <div style="text-align: left">   Workaround: <br /> Change the powerflexSdc to sdc:3.6 in `values.yaml` <br /> |
 |  <div style="text-align: left">   <div style="text-align: left">  If the volume limit is exhausted and there are pending pods and PVCs due to `exceed max volume count`, the pending PVCs will be bound to PVs and the pending pods will be scheduled to nodes when the driver pods are restarted. |  <div style="text-align: left">  It is advised not to have any pending pods or PVCs once the volume limit per node is exhausted on a CSI Driver. There is an open issue reported with kubernetes at https://github.com/kubernetes/kubernetes/issues/95911 with the same behavior. |
 |  <div style="text-align: left">  Resource quotas may not work properly with the CSI PowerFlex driver. PowerFlex is only able to assign storage in 8Gi chunks, so if a create volume call is made with a size not divisible by 8Gi, CSI-PowerFlex will round up to the next 8Gi boundary when it provisions storage -- however, the resource quota will not record this size but rather the original size in the create request. This means that, for example, if a 10Gi resource quota is set, and a user provisions 10 1Gi PVCs, 80Gi of storage will actually be allocated, which is well over the amount specified in the resource quota. |  <div style="text-align: left">  For now, users should only provision volumes in 8Gi-divisible chunks if they want to use resource quotas. |
 |  <div style="text-align: left">  Unable to update Host: A problem occurred modifying the host resource |  <div style="text-align: left">  This issue occurs when the nodes do not have unique hostnames or when an IP address/FQDN with same sub-domains are used as hostnames. The workaround is to use unique hostnames or FQDN with unique sub-domains|
 |  <div style="text-align: left">  Automatic SRDF group creation is failing with "Unable to get Remote Port on SAN for Auto SRDF" for PowerMaxOS 10.1 arrays |  <div style="text-align: left">  Create the SRDF Group and add it to the storage class |
-|  <div style="text-align: left">  [Node stage is failing with error "wwn for FC device not found"](https://github.com/dell/csm/issues/1070)|  <div style="text-align: left">  This is an intermittent issue, rebooting the node will resolve this issue |
 |  <div style="text-align: left">  When the driver is installed using CSM Operator , a few times, pods created using block volume are getting stuck in containercreating/terminating state or devices are not available inside the pod. |  <div style="text-align: left">  Update the daemonset with parameter `mountPropagation: "Bidirectional"` for volumedevices-path under volumeMounts section.|
 |  <div style="text-align: left">  When running CSI-PowerMax with Replication in a multi-cluster configuration, the driver on the target cluster fails and the following error is seen in logs: `error="CSI reverseproxy service host or port not found, CSI reverseproxy not installed properly"` |  <div style="text-align: left">  The reverseproxy service needs to be created manually on the target cluster.|
 |  <div style="text-align: left">  Storage capacity tracking does not return `MaximumVolumeSize` parameter. PowerScale is purely NFS based meaning it has no actual volumes. Therefore `MaximumVolumeSize` cannot be implemented if there is no volume creation.|  <div style="text-align: left">  CSI PowerScale 2.9.1 is compliant with CSI 1.6 specification since the field `MaximumVolumeSize` is optional.|
@@ -100,4 +104,3 @@ Description: >
 |  <div style="text-align: left">  NFS Clone - Resize of the snapshot is not supported by Unity XT Platform, however, the user should never try to resize the cloned NFS volume.|  <div style="text-align: left">  Currently, when the driver takes a clone of NFS volume, it succeeds but if the user tries to resize the NFS volumesnapshot, the driver will throw an error.|
 | <div style="text-align: left"> A CSI ephemeral pod may not get created starting OpenShift 4.13 and fail with the error `"error when creating pod: the pod uses an inline volume provided by CSIDriver csi-unity.dellemc.com, and the namespace has a pod security enforcement level that is lower than privileged."` |  <div style="text-align: left">  This issue occurs because OpenShift 4.13 introduced the CSI Volume Admission plugin to restrict the use of a CSI driver capable of provisioning CSI ephemeral volumes during pod admission. Therefore, an additional label `security.openshift.io/csi-ephemeral-volume-profile` in `csidriver.yaml` file with the required security profile value should be provided. |
 |  <div style="text-align: left">  Controller publish is taking too long to complete/ Health monitoring is causing Unity array to panic by opening multiple sessions/ There are error messages in the log `context deadline exceeded`, when health monitoring is enabled |  <div style="text-align: left">  Disable volume health monitoring on the node and keep it only at the controller level.|
-

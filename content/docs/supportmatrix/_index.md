@@ -32,20 +32,18 @@ weight: 1
 {{</table>}}
 
 **Notes:**
-- Self-certify unsupported orchestrator platforms/versions using [Cert-CSI](../tooling/cert-csi/). Use platforms that haven't reached end of life.
 - CSM Authorization Server v2 is supported on Red Hat OpenShift.
 
 ## OpenShift Virtualization
 {{<table "table table-striped table-bordered table-sm">}}
 | Version     | Capability                                                                                            | PowerStore | PowerScale | PowerFlex | PowerMax | Unity XT |
 |-------------|-------------------------------------------------------------------------------------------------------| :--------: | :--------: | :-------: | :------: | :------: |
-| 4.18 - 4.19  | <div style="text-align: left"> [Storage](https://github.com/kiagnose/kubevirt-storage-checkup) </div>| ✅         | ❌        | ✅        | ✅      | ❌       |
-| 4.18 - 4.19  | <div style="text-align: left">  Observability        </div>                                          | ❌         | ❌        | ✅        | ✅      | ❌       |
-| 4.18 - 4.19  | <div style="text-align: left"> Authorization - v2.x  </div>                                          | ✅         | ❌        | ✅        | ✅      | ❌       |
-| 4.18 - 4.19  | <div style="text-align: left"> Resiliency            </div>                                          | ✅         | ❌        | ✅        | ✅      | ❌       |
-| 4.18 - 4.19  | <div style="text-align: left"> Replication (Metro)	</div>                                            | ✅         | ❌        | ❌        | ✅      | ❌       |
+| 4.18 - 4.19  | <div style="text-align: left"> [Storage](https://github.com/kiagnose/kubevirt-storage-checkup) </div>| Yes         | No        | Yes        | Yes      | No       |
+| 4.18 - 4.19  | <div style="text-align: left">  Observability        </div>                                          | No          | No        | Yes        | Yes      | No       |
+| 4.18 - 4.19  | <div style="text-align: left"> Authorization - v2.x  </div>                                          | Yes         | No        | Yes        | Yes      | No       |
+| 4.18 - 4.19  | <div style="text-align: left"> Resiliency            </div>                                          | Yes         | No        | Yes        | Yes      | No       |
+| 4.18 - 4.19  | <div style="text-align: left"> Replication (Metro)	</div>                                            | Yes         | No        | No        | Yes       | No       |
 {{</table>}}
-
 > Note: Replication with Sync/Async modes is not supported.<br>
 > Note: PowerStore does not support VM cloning or VM snapshot operations while Metro replication is enabled.
 
@@ -66,10 +64,10 @@ Container Storage Modules doesn't officially support specific operating systems,
 {{<table "table table-striped table-bordered table-sm">}}
 | Module           | PowerStore | PowerScale | PowerFlex | PowerMax | Unity XT |
 | ---------------- | ---------- |------------|-----------|----------|----------|
-| Authorization v2 | ✅        |  ✅        | ✅       | ✅       | ❌      |
-| Replication      | ✅        |  ✅        | ✅       | ✅       | ❌      |
-| Observability    | ✅        |  ✅        | ✅       | ✅       | ❌      |
-| Resiliency       | ✅        |  ✅        | ✅       | ✅       | ✅      |
+| Authorization v2 | Yes        | Yes        | Yes       | Yes       | No      |
+| Replication      | Yes        | Yes        | Yes       | Yes       | No      |
+| Observability    | Yes        | Yes        | Yes       | Yes       | No      |
+| Resiliency       | Yes        | Yes        | Yes       | Yes       | Yes     |
 {{</table>}}
 
 
@@ -77,29 +75,26 @@ Container Storage Modules doesn't officially support specific operating systems,
 {{<table "table table-striped table-bordered table-sm">}}
 | Module           | PowerStore | PowerScale | PowerFlex | PowerMax | Unity XT |
 | ---------------- | ---------- |------------|-----------|----------|----------|
-| Authorization v2 | ✅        |  ✅        | ✅       | ✅       | ❌      |
-| Replication      | ✅        |  ✅        | ✅       | ✅       | ❌      |
-| Observability    | ✅        |  ✅        | ✅       | ✅       | ❌      |
-| Resiliency       | ✅        |  ✅        | ✅       | ✅       | ❌      |
+| Authorization v2 | Yes        |  Yes        | Yes       | Yes      | No      |
+| Replication      | Yes        |  Yes        | Yes       | Yes      | No      |
+| Observability    | Yes        |  Yes        | Yes       | Yes      | No      |
+| Resiliency       | Yes        |  Yes        | Yes       | Yes      | No      |
 {{</table>}}
 
 ## OpenShift Compatibility with Operator
 
 {{<table "table table-striped table-bordered table-sm">}}
-|  OpenShift Version | (Operator Version) -> (CSM Version)                                                                                             | 
-| -------------------| ------------------------------------------------------------------------------------------------------------------------------- |
-|  4.14              | (1.4.4)->(1.9.4), (1.5.1)->(1.10.2), (1.6.1)->(1.11.1), (1.7.0)->(1.12), (1.8.1)->(1.13.1), (1.9.1)->(1.14.2), (1.10.0)->(1.15) |
-|  4.15              | (1.5.1)->(1.10.2), (1.6.1)->(1.11.1), (1.7.0)->(1.12), (1.8.1)->(1.13.1), (1.9.1)->(1.14.2), (1.10.0)->(1.15)                   |
-|  4.16              | (1.6.1)->(1.11.1), (1.7.0)->(1.12), (1.8.1)->(1.13.), (1.9.1)->(1.14.2), (1.10.0)->(1.15)                                       |
-|  4.17              | (1.6.1)->(1.11.1), (1.7.0)->(1.12), (1.8.1)->(1.13.), (1.9.1)->(1.14.2), (1.10.0)->(1.15)                                       |
-|  4.17              | (1.6.1)->(1.11.1), (1.7.0)->(1.12), (1.8.1)->(1.13.), (1.9.1)->(1.14.2), (1.10.0)->(1.15)                                       |
-|  4.18              | (1.6.1)->(1.11.1), (1.7.0)->(1.12), (1.8.1)->(1.13.), (1.9.1)->(1.14.2), (1.10.0)->(1.15)                                       |
-|  4.19              | (1.8.1)->(1.13.1), (1.9.1)->(1.14.2), (1.10.0)->(1.15)                                                                          |
-{{</table>}}
+| OpenShift Version | Operator / CSM Combination |
+|------------------|-------------------|
+| 4.14 | 1.4.4 / 1.10.2 </br> 1.5.1 / 1.10.2 </br> 1.6.1 / 1.11.1 </br> 1.7.0 / 1.12   </br> 1.8.1 / 1.13.1  </br> 1.9.1 / 1.14.1 </br>  1.10.0 / 1.15 |
+| 4.16 | 1.6.1 / 1.11.1 </br> 1.7.0 / 1.12   </br> 1.8.1 / 1.13.1 </br> 1.9.1 / 1.14.1 </br> 1.10.0 / 1.15 |
+| 4.17 | 1.6.1 / 1.11.1 </br> 1.7.0 / 1.12   </br> 1.8.1 / 1.13.1 </br> 1.9.1 / 1.14.1 </br> 1.10.0 / 1.15 |
+| 4.18 | 1.6.1 / 1.11.1 </br> 1.7.0 / 1.12   </br> 1.8.1 / 1.13.1 </br> 1.9.1 / 1.14.1 </br> 1.10.0 / 1.15 |
+| 4.19 | 1.8.1 / 1.13.1 </br> 1.9.1 / 1.14.1 </br>  1.10.0 / 1.15 |
+{{</ table >}}
+
 **Note:**
-- [Refer](#container-orchestrator-platforms) our supported Orchestration platform. While the Operator may be displayed, it does not necessarily mean it has been fully qualified by us. If desired, customers can upgrade the Operator and self-certify it.
-
-
+- [Refer](#container-orchestrator-platforms) our supported Orchestration platform. While the Operator may be displayed, it does not necessarily mean it has been fully qualified by us.
 ## Installation Wizard Compatibility
 
 ### Drivers
@@ -107,6 +102,6 @@ Container Storage Modules doesn't officially support specific operating systems,
 {{<table "table table-striped table-bordered table-sm">}}
 | Wizard   | PowerStore | PowerScale | PowerFlex | PowerMax | Unity XT |
 | -------- | ---------- |------------|-----------|----------|----------|
-| Helm     | ✅         |  ✅        | ✅       | ✅       | ❌      |
-| Operator | ✅         |  ✅        | ❌       | ✅       | ❌      |
+| Helm     | Yes        |  Yes        | Yes     | Yes       | No       |
+| Operator | Yes        |  Yes        | No      | Yes       | No       |
 {{</table>}}

@@ -32,15 +32,18 @@
   .card-box{
     border: 0.5px solid rgb(163, 161, 161)
   }
+  .rotated {
+      transform: rotate(90deg);
+  }
 </style>
 
 <div class="collapse-toggle">
   <div class="collapse-title" onclick="toggleContent(this)">
-      <i class="collapse-arrow fas fa-angle-right"></i>
+      <i class="collapse-arrow fas fa-angle-right {{ if eq (.Get "show" | default "false") "true" }}rotated{{ end }}"></i>
       <strong class="collapse-text">{{ .Get "title" }}</strong>
   </div>
-  <div class="collapse-content {{ if eq (.Get "card" | default "false") "true" }}card-box{{ end }}" style="display: none;">
-      {{ .Inner | markdownify }}
+<div class="collapse-content {{ if eq (.Get "card" | default "false") "true" }}card-box{{ end }}" style="display: {{ if eq (.Get "show" | default "false") "true" }}block{{ else }}none{{ end }};">
+  {{ .Inner | markdownify }}
   </div>
 </div>
 
@@ -52,10 +55,10 @@
       // Toggle content visibility
       if (content.style.display === "none") {
           content.style.display = "block";
-          arrow.style.transform = "rotate(90deg)";
+          arrow.classList.add("rotated");
       } else {
           content.style.display = "none";
-          arrow.style.transform = "rotate(0deg)";
+          arrow.classList.remove("rotated");
       }
   }
 </script>
@@ -97,4 +100,4 @@
   </div>
   
 
---> 
+-->

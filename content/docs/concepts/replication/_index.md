@@ -24,22 +24,24 @@ Replication provides the following capabilities:
 
 | Capability                                                                                                                            | PowerStore | PowerScale | PowerFlex | PowerMax | Unity XT |
 | ------------------------------------------------------------------------------------------------------------------------------------- |:----------:| :--------: | :-------: |:--------:| :---: |
-| <div style="text-align: left">Replicate data using native storage array based replication                                             |    ✅     |    ✅      |    ✅     |   ✅    |  ❌   |
-| <div style="text-align: left">Asynchronous file volume replication                                                                    |    ❌     |    ✅      |    ❌     |    ❌   |  ❌   |
-| <div style="text-align: left">Asynchronous block volume replication                                                                   |    ✅     |    N/A     |    ✅      |   ✅    |  ❌   |
-| <div style="text-align: left">Synchronous file volume replication                                                                     |    ❌     |    ❌      |    ❌     |    ❌   |  ❌   |
-| <div style="text-align: left">Synchronous block volume replication                                                                    |    ✅     |    N/A     |    N/A     |   ✅    |  ❌   |
-| <div style="text-align: left">Active-Active (Metro) block volume replication                                                          |    ✅     |    N/A     |    N/A     |   ✅    |  ❌   |
-| <div style="text-align: left">Active-Active (Metro) file volume replication                                                           |    ❌     |     N/A    |    N/A     |    ❌   |  ❌   |
-| <div style="text-align: left">Create `PersistentVolume` objects in the cluster representing the replicated volume                     |    ✅     |    ✅      |    ✅     |   ✅    |  ❌   |
-| <div style="text-align: left">Create `DellCSIReplicationGroup` objects in the cluster                                                 |    ✅     |    ✅      |    ✅     |   ✅    |  ❌   |
-| <div style="text-align: left">Failover & Reprotect applications using the replicated volumes                                          |    ✅     |    ✅      |    ✅     |   ✅    |  ❌   |
-| <div style="text-align: left">Controller reattach failover PV to PVC automatically in a stretched cluster                             |    ✅     |    ✅      |    ✅     |   ✅    |  ❌   |
-| <div style="text-align: left">Allow PVC creation on target(multi cluster), claimRef update on remote PV (both single & multi cluster) |    ✅     |    ✅      |    ✅     |   ✅    |  ❌   |
-| <div style="text-align: left">Online Volume Expansion for replicated volumes                                                          |    ❌     |    ❌      |    ✅     |   ✅    |  ❌   |
-| <div style="text-align: left">Provides a command line utility - [repctl](tools) for configuring & managing replication related resources across multiple clusters |    ✅     |    ✅     |    ✅    |   ✅    |  ❌   |
+| <div style="text-align: left">Replicate data using native storage array based replication                                             |    Yes    |    Yes      |    Yes     |   Yes    |  No   |
+| <div style="text-align: left">Asynchronous file volume replication                                                                    |    No     |    Yes      |    N/A*     |    No    |  No   |
+| <div style="text-align: left">Asynchronous block volume replication                                                                   |    Yes    |    N/A      |    Yes     |   Yes    |  No   |
+| <div style="text-align: left">Synchronous file volume replication                                                                     |    No     |    No       |    N/A*     |    No    |  No   |
+| <div style="text-align: left">Synchronous block volume replication                                                                    |    Yes    |    N/A      |    N/A     |   Yes    |  No   |
+| <div style="text-align: left">Active-Active (Metro) block volume replication                                                          |    Yes    |    N/A      |    N/A     |   Yes    |  No   |
+| <div style="text-align: left">Active-Active (Metro) file volume replication                                                           |    No     |    N/A      |    N/A     |    No    |  No   |
+| <div style="text-align: left">Create `PersistentVolume` objects in the cluster representing the replicated volume                     |    Yes    |    Yes      |    Yes     |   Yes    |  No   |
+| <div style="text-align: left">Create `DellCSIReplicationGroup` objects in the cluster                                                 |    Yes    |    Yes      |    Yes     |   Yes    |  No   |
+| <div style="text-align: left">Failover & Reprotect applications using the replicated volumes                                          |    Yes    |    Yes      |    Yes     |   Yes    |  No   |
+| <div style="text-align: left">Controller reattach failover PV to PVC automatically in a stretched cluster                             |    Yes    |    Yes      |    Yes     |   Yes    |  No   |
+| <div style="text-align: left">Allow PVC creation on target(multi cluster), claimRef update on remote PV (both single & multi cluster) |    Yes    |    Yes      |    Yes     |   Yes    |  No   |
+| <div style="text-align: left">Online Volume Expansion for replicated volumes                                                          |    No     |    No       |    Yes     |   Yes    |  No   |
+| <div style="text-align: left">Provides a command line utility - [repctl](tools) for configuring & managing replication related resources across multiple clusters |    Yes     |    Yes     |    Yes    |   Yes    |  No   |
 
 {{</table>}}
+
+> **Note:** * PowerFlex supports file Asynchronous/Synchronous volume replication until version 3.6
 
 > _**NOTE**_: To add or delete PVs on an existing SYNC Replication Group in
 > PowerStore, the user needs to pause, perform the operation and then resume the
@@ -50,6 +52,7 @@ Replication provides the following capabilities:
 > the user needs to first unassign the protection policy from the corresponding
 > volume group on the PowerStore Manager UI. For more details, please refer to
 > the troubleshooting section.
+
 
 ## Details
 
