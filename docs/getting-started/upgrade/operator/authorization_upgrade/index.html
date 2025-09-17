@@ -8,30 +8,26 @@
 <link rel="shortcut icon" href="/csm-docs/favicons/favicon.ico" >
 <link rel="icon" type="image/png" href="/csm-docs/favicons/favicon-16x16.png" sizes="16x16">
 <link rel="icon" type="image/png" href="/csm-docs/favicons/favicon-32x32.png" sizes="32x32">
-<title>Authorization v1.x | </title>
-<meta name="description" content="Upgrade CSM Authorization This section outlines the upgrade steps for Container Storage Modules (CSM) for Authorization. The upgrade of CSM for Authorization is handled in 2 parts:
-Upgrading the Authorization proxy server Upgrading CSI Driver, Authorization sidecar with Authorization module enabled Upgrading the Authorization Proxy Server Modifying the existing Authorization Proxy Server installation directly via kubectl edit">
+<title>Authorization | </title>
+<meta name="description" content="Dell Technologies (Dell) Container Storage Modules (CSM) for Authorization Upgrade">
 <meta property="og:url" content="https://dell.github.io/csm-docs/docs/getting-started/upgrade/operator/authorization_upgrade/">
   <meta property="og:site_name" content="Dell Technologies">
-  <meta property="og:title" content="Authorization v1.x">
-  <meta property="og:description" content="Upgrade CSM Authorization This section outlines the upgrade steps for Container Storage Modules (CSM) for Authorization. The upgrade of CSM for Authorization is handled in 2 parts:
-Upgrading the Authorization proxy server Upgrading CSI Driver, Authorization sidecar with Authorization module enabled Upgrading the Authorization Proxy Server Modifying the existing Authorization Proxy Server installation directly via kubectl edit">
+  <meta property="og:title" content="Authorization">
+  <meta property="og:description" content="Dell Technologies (Dell) Container Storage Modules (CSM) for Authorization Upgrade">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="docs">
-    <meta property="article:modified_time" content="2025-02-18T23:05:05+05:30">
+    <meta property="article:modified_time" content="2025-09-08T15:41:30-04:00">
 
-  <meta itemprop="name" content="Authorization v1.x">
-  <meta itemprop="description" content="Upgrade CSM Authorization This section outlines the upgrade steps for Container Storage Modules (CSM) for Authorization. The upgrade of CSM for Authorization is handled in 2 parts:
-Upgrading the Authorization proxy server Upgrading CSI Driver, Authorization sidecar with Authorization module enabled Upgrading the Authorization Proxy Server Modifying the existing Authorization Proxy Server installation directly via kubectl edit">
-  <meta itemprop="dateModified" content="2025-02-18T23:05:05+05:30">
-  <meta itemprop="wordCount" content="306">
+  <meta itemprop="name" content="Authorization">
+  <meta itemprop="description" content="Dell Technologies (Dell) Container Storage Modules (CSM) for Authorization Upgrade">
+  <meta itemprop="dateModified" content="2025-09-08T15:41:30-04:00">
+  <meta itemprop="wordCount" content="1151">
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Authorization v1.x">
-  <meta name="twitter:description" content="Upgrade CSM Authorization This section outlines the upgrade steps for Container Storage Modules (CSM) for Authorization. The upgrade of CSM for Authorization is handled in 2 parts:
-Upgrading the Authorization proxy server Upgrading CSI Driver, Authorization sidecar with Authorization module enabled Upgrading the Authorization Proxy Server Modifying the existing Authorization Proxy Server installation directly via kubectl edit">
-<link rel="preload" href="/csm-docs/scss/main.min.f92a0a6117d1afe6ee159a45ce4364a8613c79ec6601d7023c09be115507944b.css" as="style" integrity="sha256-&#43;SoKYRfRr&#43;buFZpFzkNkqGE8eexmAdcCPAm&#43;EVUHlEs=" crossorigin="anonymous">
-<link href="/csm-docs/scss/main.min.f92a0a6117d1afe6ee159a45ce4364a8613c79ec6601d7023c09be115507944b.css" rel="stylesheet" integrity="sha256-&#43;SoKYRfRr&#43;buFZpFzkNkqGE8eexmAdcCPAm&#43;EVUHlEs=" crossorigin="anonymous">
+  <meta name="twitter:title" content="Authorization">
+  <meta name="twitter:description" content="Dell Technologies (Dell) Container Storage Modules (CSM) for Authorization Upgrade">
+<link rel="preload" href="/csm-docs/scss/main.min.227c85af7ab92878f8483de5241e5ddc55b1b9bb4ebcb3ec9ca6409b9da7751e.css" as="style" integrity="sha256-InyFr3q5KHj4SD3lJB5d3FWxubtOvLPsnKZAm52ndR4=" crossorigin="anonymous">
+<link href="/csm-docs/scss/main.min.227c85af7ab92878f8483de5241e5ddc55b1b9bb4ebcb3ec9ca6409b9da7751e.css" rel="stylesheet" integrity="sha256-InyFr3q5KHj4SD3lJB5d3FWxubtOvLPsnKZAm52ndR4=" crossorigin="anonymous">
 <script
   src="https://code.jquery.com/jquery-3.7.1.min.js"
   integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
@@ -78,13 +74,13 @@ Upgrading the Authorization proxy server Upgrading CSI Driver, Authorization sid
       
     
     
-    1.14.2
+    1.15.0
   </a>
   <ul class="dropdown-menu">
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/" >1.14.2</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1/" >1.13.2</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v2/" >1.12.0</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v3/" >1.11.1</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/" >1.15.0</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1/" >1.14.2</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v2/" >1.13.2</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v3/" >1.12.0</a></li>
     </ul> 
 
 </div>
@@ -208,7 +204,7 @@ Upgrading the Authorization proxy server Upgrading CSI Driver, Authorization sid
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.012a1dbe171b6daf775ce84666a8254d.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.874ca4d24b947227ac8963bf474ca6a1.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -248,7 +244,7 @@ Upgrading the Authorization proxy server Upgrading CSI Driver, Authorization sid
     <label for="m-csm-docsdocssupportmatrixcomponent-version-check">
       <a href="/csm-docs/docs/supportmatrix/component-version/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocssupportmatrixcomponent-version">
         
-        <span class="">Component Version</span>
+        <span class="">Component and Image Details</span>
       </a>
     </label>
     
@@ -960,7 +956,7 @@ Upgrading the Authorization proxy server Upgrading CSI Driver, Authorization sid
         
 
 
-<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsdocsgetting-startedupgradekubernetespowerstoreoperator-li">
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-csm-docsdocsgetting-startedupgradekubernetespowerstoreoperator-li">
   <input type="checkbox" id="m-csm-docsdocsgetting-startedupgradekubernetespowerstoreoperator-check"/>
     <label for="m-csm-docsdocsgetting-startedupgradekubernetespowerstoreoperator-check">
       <a href="/csm-docs/docs/getting-started/upgrade/kubernetes/powerstore/operator/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsgetting-startedupgradekubernetespowerstoreoperator">
@@ -969,6 +965,36 @@ Upgrading the Authorization proxy server Upgrading CSI Driver, Authorization sid
       </a>
     </label>
     
+    <ul class="ul-6 foldable">
+        
+
+
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-csm-docsdocsgetting-startedupgradekubernetespowerstoreoperatorcsm-modules-li">
+  <input type="checkbox" id="m-csm-docsdocsgetting-startedupgradekubernetespowerstoreoperatorcsm-modules-check"/>
+    <label for="m-csm-docsdocsgetting-startedupgradekubernetespowerstoreoperatorcsm-modules-check">
+      <a href="/csm-docs/docs/getting-started/upgrade/kubernetes/powerstore/operator/csm-modules/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsgetting-startedupgradekubernetespowerstoreoperatorcsm-modules">
+        
+        <span class="">CSM Module</span>
+      </a>
+    </label>
+    
+    <ul class="ul-7 foldable">
+        
+
+
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsdocsgetting-startedupgradekubernetespowerstoreoperatorcsm-modulesauthorizationv2-0-li">
+  <input type="checkbox" id="m-csm-docsdocsgetting-startedupgradekubernetespowerstoreoperatorcsm-modulesauthorizationv2-0-check"/>
+    <label for="m-csm-docsdocsgetting-startedupgradekubernetespowerstoreoperatorcsm-modulesauthorizationv2-0-check">
+      <a href="/csm-docs/docs/getting-started/upgrade/kubernetes/powerstore/operator/csm-modules/authorizationv2-0/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsgetting-startedupgradekubernetespowerstoreoperatorcsm-modulesauthorizationv2-0">
+        
+        <span class="">Authorization v2.0</span>
+      </a>
+    </label>
+    
+</li>
+    </ul>
+</li>
+    </ul>
 </li>  
 
 
@@ -996,6 +1022,18 @@ Upgrading the Authorization proxy server Upgrading CSI Driver, Authorization sid
     
     <ul class="ul-7 foldable">
         
+
+
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsdocsgetting-startedupgradekubernetespowerstorehelmcsm-modulesauthorizationv2-0-li">
+  <input type="checkbox" id="m-csm-docsdocsgetting-startedupgradekubernetespowerstorehelmcsm-modulesauthorizationv2-0-check"/>
+    <label for="m-csm-docsdocsgetting-startedupgradekubernetespowerstorehelmcsm-modulesauthorizationv2-0-check">
+      <a href="/csm-docs/docs/getting-started/upgrade/kubernetes/powerstore/helm/csm-modules/authorizationv2-0/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsgetting-startedupgradekubernetespowerstorehelmcsm-modulesauthorizationv2-0">
+        
+        <span class="">Authorization v2.0</span>
+      </a>
+    </label>
+    
+</li>  
 
 
 <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsdocsgetting-startedupgradekubernetespowerstorehelmcsm-modulesobservability-li">
@@ -1091,12 +1129,12 @@ Upgrading the Authorization proxy server Upgrading CSI Driver, Authorization sid
         
 
 
-<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsdocsgetting-startedupgradekubernetespowermaxoperatorcsm-modulesauthorizationv1-x-li">
-  <input type="checkbox" id="m-csm-docsdocsgetting-startedupgradekubernetespowermaxoperatorcsm-modulesauthorizationv1-x-check"/>
-    <label for="m-csm-docsdocsgetting-startedupgradekubernetespowermaxoperatorcsm-modulesauthorizationv1-x-check">
-      <a href="/csm-docs/docs/getting-started/upgrade/kubernetes/powermax/operator/csm-modules/authorizationv1-x/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsgetting-startedupgradekubernetespowermaxoperatorcsm-modulesauthorizationv1-x">
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsdocsgetting-startedupgradekubernetespowermaxoperatorcsm-modulesauthorizationv2-0-li">
+  <input type="checkbox" id="m-csm-docsdocsgetting-startedupgradekubernetespowermaxoperatorcsm-modulesauthorizationv2-0-check"/>
+    <label for="m-csm-docsdocsgetting-startedupgradekubernetespowermaxoperatorcsm-modulesauthorizationv2-0-check">
+      <a href="/csm-docs/docs/getting-started/upgrade/kubernetes/powermax/operator/csm-modules/authorizationv2-0/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsgetting-startedupgradekubernetespowermaxoperatorcsm-modulesauthorizationv2-0">
         
-        <span class="">Authorization v1.x</span>
+        <span class="">Authorization v2.0</span>
       </a>
     </label>
     
@@ -1145,12 +1183,12 @@ Upgrading the Authorization proxy server Upgrading CSI Driver, Authorization sid
         
 
 
-<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsdocsgetting-startedupgradekubernetespowermaxhelmcsm-modulesauthorization-li">
-  <input type="checkbox" id="m-csm-docsdocsgetting-startedupgradekubernetespowermaxhelmcsm-modulesauthorization-check"/>
-    <label for="m-csm-docsdocsgetting-startedupgradekubernetespowermaxhelmcsm-modulesauthorization-check">
-      <a href="/csm-docs/docs/getting-started/upgrade/kubernetes/powermax/helm/csm-modules/authorization/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsgetting-startedupgradekubernetespowermaxhelmcsm-modulesauthorization">
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsdocsgetting-startedupgradekubernetespowermaxhelmcsm-modulesauthorizationv2-0-li">
+  <input type="checkbox" id="m-csm-docsdocsgetting-startedupgradekubernetespowermaxhelmcsm-modulesauthorizationv2-0-check"/>
+    <label for="m-csm-docsdocsgetting-startedupgradekubernetespowermaxhelmcsm-modulesauthorizationv2-0-check">
+      <a href="/csm-docs/docs/getting-started/upgrade/kubernetes/powermax/helm/csm-modules/authorizationv2-0/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsgetting-startedupgradekubernetespowermaxhelmcsm-modulesauthorizationv2-0">
         
-        <span class="">Authorization</span>
+        <span class="">Authorization v2.0</span>
       </a>
     </label>
     
@@ -1250,12 +1288,12 @@ Upgrading the Authorization proxy server Upgrading CSI Driver, Authorization sid
         
 
 
-<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsdocsgetting-startedupgradekubernetespowerflexoperatorcsm-modulesauthorizationv1-x-li">
-  <input type="checkbox" id="m-csm-docsdocsgetting-startedupgradekubernetespowerflexoperatorcsm-modulesauthorizationv1-x-check"/>
-    <label for="m-csm-docsdocsgetting-startedupgradekubernetespowerflexoperatorcsm-modulesauthorizationv1-x-check">
-      <a href="/csm-docs/docs/getting-started/upgrade/kubernetes/powerflex/operator/csm-modules/authorizationv1-x/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsgetting-startedupgradekubernetespowerflexoperatorcsm-modulesauthorizationv1-x">
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsdocsgetting-startedupgradekubernetespowerflexoperatorcsm-modulesauthorizationv2-0-li">
+  <input type="checkbox" id="m-csm-docsdocsgetting-startedupgradekubernetespowerflexoperatorcsm-modulesauthorizationv2-0-check"/>
+    <label for="m-csm-docsdocsgetting-startedupgradekubernetespowerflexoperatorcsm-modulesauthorizationv2-0-check">
+      <a href="/csm-docs/docs/getting-started/upgrade/kubernetes/powerflex/operator/csm-modules/authorizationv2-0/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsgetting-startedupgradekubernetespowerflexoperatorcsm-modulesauthorizationv2-0">
         
-        <span class="">Authorization v1.x</span>
+        <span class="">Authorization v2.0</span>
       </a>
     </label>
     
@@ -1304,12 +1342,12 @@ Upgrading the Authorization proxy server Upgrading CSI Driver, Authorization sid
         
 
 
-<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsdocsgetting-startedupgradekubernetespowerflexhelmcsm-modulesauthorization-li">
-  <input type="checkbox" id="m-csm-docsdocsgetting-startedupgradekubernetespowerflexhelmcsm-modulesauthorization-check"/>
-    <label for="m-csm-docsdocsgetting-startedupgradekubernetespowerflexhelmcsm-modulesauthorization-check">
-      <a href="/csm-docs/docs/getting-started/upgrade/kubernetes/powerflex/helm/csm-modules/authorization/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsgetting-startedupgradekubernetespowerflexhelmcsm-modulesauthorization">
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsdocsgetting-startedupgradekubernetespowerflexhelmcsm-modulesauthorizationv2-0-li">
+  <input type="checkbox" id="m-csm-docsdocsgetting-startedupgradekubernetespowerflexhelmcsm-modulesauthorizationv2-0-check"/>
+    <label for="m-csm-docsdocsgetting-startedupgradekubernetespowerflexhelmcsm-modulesauthorizationv2-0-check">
+      <a href="/csm-docs/docs/getting-started/upgrade/kubernetes/powerflex/helm/csm-modules/authorizationv2-0/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsgetting-startedupgradekubernetespowerflexhelmcsm-modulesauthorizationv2-0">
         
-        <span class="">Authorization</span>
+        <span class="">Authorization v2.0</span>
       </a>
     </label>
     
@@ -1409,12 +1447,12 @@ Upgrading the Authorization proxy server Upgrading CSI Driver, Authorization sid
         
 
 
-<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsdocsgetting-startedupgradekubernetespowerscaleoperatorcsm-modulesauthorizationv1-x-li">
-  <input type="checkbox" id="m-csm-docsdocsgetting-startedupgradekubernetespowerscaleoperatorcsm-modulesauthorizationv1-x-check"/>
-    <label for="m-csm-docsdocsgetting-startedupgradekubernetespowerscaleoperatorcsm-modulesauthorizationv1-x-check">
-      <a href="/csm-docs/docs/getting-started/upgrade/kubernetes/powerscale/operator/csm-modules/authorizationv1-x/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsgetting-startedupgradekubernetespowerscaleoperatorcsm-modulesauthorizationv1-x">
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsdocsgetting-startedupgradekubernetespowerscaleoperatorcsm-modulesauthorizationv2-0-li">
+  <input type="checkbox" id="m-csm-docsdocsgetting-startedupgradekubernetespowerscaleoperatorcsm-modulesauthorizationv2-0-check"/>
+    <label for="m-csm-docsdocsgetting-startedupgradekubernetespowerscaleoperatorcsm-modulesauthorizationv2-0-check">
+      <a href="/csm-docs/docs/getting-started/upgrade/kubernetes/powerscale/operator/csm-modules/authorizationv2-0/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsgetting-startedupgradekubernetespowerscaleoperatorcsm-modulesauthorizationv2-0">
         
-        <span class="">Authorization v1.x</span>
+        <span class="">Authorization v2.0</span>
       </a>
     </label>
     
@@ -1463,12 +1501,12 @@ Upgrading the Authorization proxy server Upgrading CSI Driver, Authorization sid
         
 
 
-<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsdocsgetting-startedupgradekubernetespowerscalehelmcsm-modulesauthorization-li">
-  <input type="checkbox" id="m-csm-docsdocsgetting-startedupgradekubernetespowerscalehelmcsm-modulesauthorization-check"/>
-    <label for="m-csm-docsdocsgetting-startedupgradekubernetespowerscalehelmcsm-modulesauthorization-check">
-      <a href="/csm-docs/docs/getting-started/upgrade/kubernetes/powerscale/helm/csm-modules/authorization/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsgetting-startedupgradekubernetespowerscalehelmcsm-modulesauthorization">
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsdocsgetting-startedupgradekubernetespowerscalehelmcsm-modulesauthorizationv2-0-li">
+  <input type="checkbox" id="m-csm-docsdocsgetting-startedupgradekubernetespowerscalehelmcsm-modulesauthorizationv2-0-check"/>
+    <label for="m-csm-docsdocsgetting-startedupgradekubernetespowerscalehelmcsm-modulesauthorizationv2-0-check">
+      <a href="/csm-docs/docs/getting-started/upgrade/kubernetes/powerscale/helm/csm-modules/authorizationv2-0/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsgetting-startedupgradekubernetespowerscalehelmcsm-modulesauthorizationv2-0">
         
-        <span class="">Authorization</span>
+        <span class="">Authorization v2.0</span>
       </a>
     </label>
     
@@ -1638,7 +1676,7 @@ Upgrading the Authorization proxy server Upgrading CSI Driver, Authorization sid
         
 
 
-<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsdocsgetting-startedupgradeopenshiftpowerstoreoperator-li">
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-csm-docsdocsgetting-startedupgradeopenshiftpowerstoreoperator-li">
   <input type="checkbox" id="m-csm-docsdocsgetting-startedupgradeopenshiftpowerstoreoperator-check"/>
     <label for="m-csm-docsdocsgetting-startedupgradeopenshiftpowerstoreoperator-check">
       <a href="/csm-docs/docs/getting-started/upgrade/openshift/powerstore/operator/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsgetting-startedupgradeopenshiftpowerstoreoperator">
@@ -1647,6 +1685,36 @@ Upgrading the Authorization proxy server Upgrading CSI Driver, Authorization sid
       </a>
     </label>
     
+    <ul class="ul-6 foldable">
+        
+
+
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-csm-docsdocsgetting-startedupgradeopenshiftpowerstoreoperatorcsm-modules-li">
+  <input type="checkbox" id="m-csm-docsdocsgetting-startedupgradeopenshiftpowerstoreoperatorcsm-modules-check"/>
+    <label for="m-csm-docsdocsgetting-startedupgradeopenshiftpowerstoreoperatorcsm-modules-check">
+      <a href="/csm-docs/docs/getting-started/upgrade/openshift/powerstore/operator/csm-modules/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsgetting-startedupgradeopenshiftpowerstoreoperatorcsm-modules">
+        
+        <span class="">CSM Module</span>
+      </a>
+    </label>
+    
+    <ul class="ul-7 foldable">
+        
+
+
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsdocsgetting-startedupgradeopenshiftpowerstoreoperatorcsm-modulesauthorizationv2-0-li">
+  <input type="checkbox" id="m-csm-docsdocsgetting-startedupgradeopenshiftpowerstoreoperatorcsm-modulesauthorizationv2-0-check"/>
+    <label for="m-csm-docsdocsgetting-startedupgradeopenshiftpowerstoreoperatorcsm-modulesauthorizationv2-0-check">
+      <a href="/csm-docs/docs/getting-started/upgrade/openshift/powerstore/operator/csm-modules/authorizationv2-0/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsgetting-startedupgradeopenshiftpowerstoreoperatorcsm-modulesauthorizationv2-0">
+        
+        <span class="">Authorization v2.0</span>
+      </a>
+    </label>
+    
+</li>
+    </ul>
+</li>
+    </ul>
 </li>  
 
 
@@ -1703,12 +1771,12 @@ Upgrading the Authorization proxy server Upgrading CSI Driver, Authorization sid
         
 
 
-<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsdocsgetting-startedupgradeopenshiftpowermaxoperatorcsm-modulesauthorizationv1-x-li">
-  <input type="checkbox" id="m-csm-docsdocsgetting-startedupgradeopenshiftpowermaxoperatorcsm-modulesauthorizationv1-x-check"/>
-    <label for="m-csm-docsdocsgetting-startedupgradeopenshiftpowermaxoperatorcsm-modulesauthorizationv1-x-check">
-      <a href="/csm-docs/docs/getting-started/upgrade/openshift/powermax/operator/csm-modules/authorizationv1-x/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsgetting-startedupgradeopenshiftpowermaxoperatorcsm-modulesauthorizationv1-x">
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsdocsgetting-startedupgradeopenshiftpowermaxoperatorcsm-modulesauthorizationv2-0-li">
+  <input type="checkbox" id="m-csm-docsdocsgetting-startedupgradeopenshiftpowermaxoperatorcsm-modulesauthorizationv2-0-check"/>
+    <label for="m-csm-docsdocsgetting-startedupgradeopenshiftpowermaxoperatorcsm-modulesauthorizationv2-0-check">
+      <a href="/csm-docs/docs/getting-started/upgrade/openshift/powermax/operator/csm-modules/authorizationv2-0/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsgetting-startedupgradeopenshiftpowermaxoperatorcsm-modulesauthorizationv2-0">
         
-        <span class="">Authorization v1.x</span>
+        <span class="">Authorization v2.0</span>
       </a>
     </label>
     
@@ -1784,12 +1852,12 @@ Upgrading the Authorization proxy server Upgrading CSI Driver, Authorization sid
         
 
 
-<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsdocsgetting-startedupgradeopenshiftpowerflexoperatorcsm-modulesauthorizationv1-x-li">
-  <input type="checkbox" id="m-csm-docsdocsgetting-startedupgradeopenshiftpowerflexoperatorcsm-modulesauthorizationv1-x-check"/>
-    <label for="m-csm-docsdocsgetting-startedupgradeopenshiftpowerflexoperatorcsm-modulesauthorizationv1-x-check">
-      <a href="/csm-docs/docs/getting-started/upgrade/openshift/powerflex/operator/csm-modules/authorizationv1-x/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsgetting-startedupgradeopenshiftpowerflexoperatorcsm-modulesauthorizationv1-x">
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsdocsgetting-startedupgradeopenshiftpowerflexoperatorcsm-modulesauthorizationv2-0-li">
+  <input type="checkbox" id="m-csm-docsdocsgetting-startedupgradeopenshiftpowerflexoperatorcsm-modulesauthorizationv2-0-check"/>
+    <label for="m-csm-docsdocsgetting-startedupgradeopenshiftpowerflexoperatorcsm-modulesauthorizationv2-0-check">
+      <a href="/csm-docs/docs/getting-started/upgrade/openshift/powerflex/operator/csm-modules/authorizationv2-0/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsgetting-startedupgradeopenshiftpowerflexoperatorcsm-modulesauthorizationv2-0">
         
-        <span class="">Authorization v1.x</span>
+        <span class="">Authorization v2.0</span>
       </a>
     </label>
     
@@ -1865,12 +1933,12 @@ Upgrading the Authorization proxy server Upgrading CSI Driver, Authorization sid
         
 
 
-<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsdocsgetting-startedupgradeopenshiftpowerscaleoperatorcsm-modulesauthorizationv1-x-li">
-  <input type="checkbox" id="m-csm-docsdocsgetting-startedupgradeopenshiftpowerscaleoperatorcsm-modulesauthorizationv1-x-check"/>
-    <label for="m-csm-docsdocsgetting-startedupgradeopenshiftpowerscaleoperatorcsm-modulesauthorizationv1-x-check">
-      <a href="/csm-docs/docs/getting-started/upgrade/openshift/powerscale/operator/csm-modules/authorizationv1-x/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsgetting-startedupgradeopenshiftpowerscaleoperatorcsm-modulesauthorizationv1-x">
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsdocsgetting-startedupgradeopenshiftpowerscaleoperatorcsm-modulesauthorizationv2-0-li">
+  <input type="checkbox" id="m-csm-docsdocsgetting-startedupgradeopenshiftpowerscaleoperatorcsm-modulesauthorizationv2-0-check"/>
+    <label for="m-csm-docsdocsgetting-startedupgradeopenshiftpowerscaleoperatorcsm-modulesauthorizationv2-0-check">
+      <a href="/csm-docs/docs/getting-started/upgrade/openshift/powerscale/operator/csm-modules/authorizationv2-0/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsgetting-startedupgradeopenshiftpowerscaleoperatorcsm-modulesauthorizationv2-0">
         
-        <span class="">Authorization v1.x</span>
+        <span class="">Authorization v2.0</span>
       </a>
     </label>
     
@@ -2027,6 +2095,18 @@ Upgrading the Authorization proxy server Upgrading CSI Driver, Authorization sid
         
 
 
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsdocsgetting-starteduninstallationkubernetespowerstorehelmcsm-modulesauthorizationv2-0-li">
+  <input type="checkbox" id="m-csm-docsdocsgetting-starteduninstallationkubernetespowerstorehelmcsm-modulesauthorizationv2-0-check"/>
+    <label for="m-csm-docsdocsgetting-starteduninstallationkubernetespowerstorehelmcsm-modulesauthorizationv2-0-check">
+      <a href="/csm-docs/docs/getting-started/uninstallation/kubernetes/powerstore/helm/csm-modules/authorizationv2-0/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsgetting-starteduninstallationkubernetespowerstorehelmcsm-modulesauthorizationv2-0">
+        
+        <span class="">Authorization v2.0</span>
+      </a>
+    </label>
+    
+</li>  
+
+
 <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsdocsgetting-starteduninstallationkubernetespowerstorehelmcsm-modulesobservability-li">
   <input type="checkbox" id="m-csm-docsdocsgetting-starteduninstallationkubernetespowerstorehelmcsm-modulesobservability-check"/>
     <label for="m-csm-docsdocsgetting-starteduninstallationkubernetespowerstorehelmcsm-modulesobservability-check">
@@ -2118,18 +2198,6 @@ Upgrading the Authorization proxy server Upgrading CSI Driver, Authorization sid
     
     <ul class="ul-7 foldable">
         
-
-
-<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsdocsgetting-starteduninstallationkubernetespowermaxhelmcsm-modulesauthorizationv1-x-li">
-  <input type="checkbox" id="m-csm-docsdocsgetting-starteduninstallationkubernetespowermaxhelmcsm-modulesauthorizationv1-x-check"/>
-    <label for="m-csm-docsdocsgetting-starteduninstallationkubernetespowermaxhelmcsm-modulesauthorizationv1-x-check">
-      <a href="/csm-docs/docs/getting-started/uninstallation/kubernetes/powermax/helm/csm-modules/authorizationv1-x/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsgetting-starteduninstallationkubernetespowermaxhelmcsm-modulesauthorizationv1-x">
-        
-        <span class="">Authorization v1.x</span>
-      </a>
-    </label>
-    
-</li>  
 
 
 <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsdocsgetting-starteduninstallationkubernetespowermaxhelmcsm-modulesauthorizationv2-0-li">
@@ -2237,18 +2305,6 @@ Upgrading the Authorization proxy server Upgrading CSI Driver, Authorization sid
         
 
 
-<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsdocsgetting-starteduninstallationkubernetespowerflexhelmcsm-modulesauthorizationv1-x-li">
-  <input type="checkbox" id="m-csm-docsdocsgetting-starteduninstallationkubernetespowerflexhelmcsm-modulesauthorizationv1-x-check"/>
-    <label for="m-csm-docsdocsgetting-starteduninstallationkubernetespowerflexhelmcsm-modulesauthorizationv1-x-check">
-      <a href="/csm-docs/docs/getting-started/uninstallation/kubernetes/powerflex/helm/csm-modules/authorizationv1-x/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsgetting-starteduninstallationkubernetespowerflexhelmcsm-modulesauthorizationv1-x">
-        
-        <span class="">Authorization v1.x</span>
-      </a>
-    </label>
-    
-</li>  
-
-
 <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsdocsgetting-starteduninstallationkubernetespowerflexhelmcsm-modulesauthorizationv2-0-li">
   <input type="checkbox" id="m-csm-docsdocsgetting-starteduninstallationkubernetespowerflexhelmcsm-modulesauthorizationv2-0-check"/>
     <label for="m-csm-docsdocsgetting-starteduninstallationkubernetespowerflexhelmcsm-modulesauthorizationv2-0-check">
@@ -2352,18 +2408,6 @@ Upgrading the Authorization proxy server Upgrading CSI Driver, Authorization sid
     
     <ul class="ul-7 foldable">
         
-
-
-<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsdocsgetting-starteduninstallationkubernetespowerscalehelmcsm-modulesauthorizationv1-x-li">
-  <input type="checkbox" id="m-csm-docsdocsgetting-starteduninstallationkubernetespowerscalehelmcsm-modulesauthorizationv1-x-check"/>
-    <label for="m-csm-docsdocsgetting-starteduninstallationkubernetespowerscalehelmcsm-modulesauthorizationv1-x-check">
-      <a href="/csm-docs/docs/getting-started/uninstallation/kubernetes/powerscale/helm/csm-modules/authorizationv1-x/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsgetting-starteduninstallationkubernetespowerscalehelmcsm-modulesauthorizationv1-x">
-        
-        <span class="">Authorization v1.x</span>
-      </a>
-    </label>
-    
-</li>  
 
 
 <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsdocsgetting-starteduninstallationkubernetespowerscalehelmcsm-modulesauthorizationv2-0-li">
@@ -2911,147 +2955,6 @@ Upgrading the Authorization proxy server Upgrading CSI Driver, Authorization sid
         
 
 
-<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsdocsconceptsauthorizationmigration-guide-from-v1-to-v2-li">
-  <input type="checkbox" id="m-csm-docsdocsconceptsauthorizationmigration-guide-from-v1-to-v2-check"/>
-    <label for="m-csm-docsdocsconceptsauthorizationmigration-guide-from-v1-to-v2-check">
-      <a href="/csm-docs/docs/concepts/authorization/migration-guide-from-v1-to-v2/" title="Authorization - v2 Migration guide" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsconceptsauthorizationmigration-guide-from-v1-to-v2">
-        
-        <span class="">Migration Guide From v1 to v2</span>
-      </a>
-    </label>
-    
-</li>  
-
-
-<li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-csm-docsdocsconceptsauthorizationv1x-li">
-  <input type="checkbox" id="m-csm-docsdocsconceptsauthorizationv1x-check"/>
-    <label for="m-csm-docsdocsconceptsauthorizationv1x-check">
-      <a href="/csm-docs/docs/concepts/authorization/v1.x/" title="Authorization - v1.x" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsconceptsauthorizationv1x">
-        
-        <span class="">v1.x</span>
-      </a>
-    </label>
-    
-    <ul class="ul-4 foldable">
-        
-
-
-<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsdocsconceptsauthorizationv1xdesign-li">
-  <input type="checkbox" id="m-csm-docsdocsconceptsauthorizationv1xdesign-check"/>
-    <label for="m-csm-docsdocsconceptsauthorizationv1xdesign-check">
-      <a href="/csm-docs/docs/concepts/authorization/v1.x/design/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsconceptsauthorizationv1xdesign">
-        
-        <span class="">Design</span>
-      </a>
-    </label>
-    
-</li>  
-
-
-<li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-csm-docsdocsconceptsauthorizationv1xbackup-and-restore-li">
-  <input type="checkbox" id="m-csm-docsdocsconceptsauthorizationv1xbackup-and-restore-check"/>
-    <label for="m-csm-docsdocsconceptsauthorizationv1xbackup-and-restore-check">
-      <a href="/csm-docs/docs/concepts/authorization/v1.x/backup-and-restore/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsconceptsauthorizationv1xbackup-and-restore">
-        
-        <span class="">Backup and Restore</span>
-      </a>
-    </label>
-    
-    <ul class="ul-5 foldable">
-        
-
-
-<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsdocsconceptsauthorizationv1xbackup-and-restorehelm-li">
-  <input type="checkbox" id="m-csm-docsdocsconceptsauthorizationv1xbackup-and-restorehelm-check"/>
-    <label for="m-csm-docsdocsconceptsauthorizationv1xbackup-and-restorehelm-check">
-      <a href="/csm-docs/docs/concepts/authorization/v1.x/backup-and-restore/helm/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsconceptsauthorizationv1xbackup-and-restorehelm">
-        
-        <span class="">Helm</span>
-      </a>
-    </label>
-    
-</li>  
-
-
-<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsdocsconceptsauthorizationv1xbackup-and-restorerpm-li">
-  <input type="checkbox" id="m-csm-docsdocsconceptsauthorizationv1xbackup-and-restorerpm-check"/>
-    <label for="m-csm-docsdocsconceptsauthorizationv1xbackup-and-restorerpm-check">
-      <a href="/csm-docs/docs/concepts/authorization/v1.x/backup-and-restore/rpm/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsconceptsauthorizationv1xbackup-and-restorerpm">
-        
-        <span class="">RPM</span>
-      </a>
-    </label>
-    
-</li>
-    </ul>
-</li>  
-
-
-<li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-csm-docsdocsconceptsauthorizationv1xconfiguration-li">
-  <input type="checkbox" id="m-csm-docsdocsconceptsauthorizationv1xconfiguration-check"/>
-    <label for="m-csm-docsdocsconceptsauthorizationv1xconfiguration-check">
-      <a href="/csm-docs/docs/concepts/authorization/v1.x/configuration/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsconceptsauthorizationv1xconfiguration">
-        
-        <span class="">Configuration</span>
-      </a>
-    </label>
-    
-    <ul class="ul-5 foldable">
-        
-
-
-<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsdocsconceptsauthorizationv1xconfigurationpowerflex-li">
-  <input type="checkbox" id="m-csm-docsdocsconceptsauthorizationv1xconfigurationpowerflex-check"/>
-    <label for="m-csm-docsdocsconceptsauthorizationv1xconfigurationpowerflex-check">
-      <a href="/csm-docs/docs/concepts/authorization/v1.x/configuration/powerflex/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsconceptsauthorizationv1xconfigurationpowerflex">
-        
-        <span class="">PowerFlex</span>
-      </a>
-    </label>
-    
-</li>  
-
-
-<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsdocsconceptsauthorizationv1xconfigurationpowermax-li">
-  <input type="checkbox" id="m-csm-docsdocsconceptsauthorizationv1xconfigurationpowermax-check"/>
-    <label for="m-csm-docsdocsconceptsauthorizationv1xconfigurationpowermax-check">
-      <a href="/csm-docs/docs/concepts/authorization/v1.x/configuration/powermax/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsconceptsauthorizationv1xconfigurationpowermax">
-        
-        <span class="">PowerMax</span>
-      </a>
-    </label>
-    
-</li>  
-
-
-<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsdocsconceptsauthorizationv1xconfigurationpowerscale-li">
-  <input type="checkbox" id="m-csm-docsdocsconceptsauthorizationv1xconfigurationpowerscale-check"/>
-    <label for="m-csm-docsdocsconceptsauthorizationv1xconfigurationpowerscale-check">
-      <a href="/csm-docs/docs/concepts/authorization/v1.x/configuration/powerscale/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsconceptsauthorizationv1xconfigurationpowerscale">
-        
-        <span class="">PowerScale</span>
-      </a>
-    </label>
-    
-</li>  
-
-
-<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsdocsconceptsauthorizationv1xconfigurationproxy-server-li">
-  <input type="checkbox" id="m-csm-docsdocsconceptsauthorizationv1xconfigurationproxy-server-check"/>
-    <label for="m-csm-docsdocsconceptsauthorizationv1xconfigurationproxy-server-check">
-      <a href="/csm-docs/docs/concepts/authorization/v1.x/configuration/proxy-server/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsconceptsauthorizationv1xconfigurationproxy-server">
-        
-        <span class="">Proxy Server</span>
-      </a>
-    </label>
-    
-</li>
-    </ul>
-</li>
-    </ul>
-</li>  
-
-
 <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-csm-docsdocsconceptsauthorizationv2x-li">
   <input type="checkbox" id="m-csm-docsdocsconceptsauthorizationv2x-check"/>
     <label for="m-csm-docsdocsconceptsauthorizationv2x-check">
@@ -3111,10 +3014,34 @@ Upgrading the Authorization proxy server Upgrading CSI Driver, Authorization sid
       </a>
     </label>
     
+</li>  
+
+
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsdocsconceptsauthorizationv2xconfigurationpowerstore-li">
+  <input type="checkbox" id="m-csm-docsdocsconceptsauthorizationv2xconfigurationpowerstore-check"/>
+    <label for="m-csm-docsdocsconceptsauthorizationv2xconfigurationpowerstore-check">
+      <a href="/csm-docs/docs/concepts/authorization/v2.x/configuration/powerstore/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsconceptsauthorizationv2xconfigurationpowerstore">
+        
+        <span class="">PowerStore</span>
+      </a>
+    </label>
+    
 </li>
     </ul>
 </li>
     </ul>
+</li>  
+
+
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsdocsconceptsauthorizationmigration-guide-from-v1-to-v2-li">
+  <input type="checkbox" id="m-csm-docsdocsconceptsauthorizationmigration-guide-from-v1-to-v2-check"/>
+    <label for="m-csm-docsdocsconceptsauthorizationmigration-guide-from-v1-to-v2-check">
+      <a href="/csm-docs/docs/concepts/authorization/migration-guide-from-v1-to-v2/" title="Authorization - v2 Migration guide" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsconceptsauthorizationmigration-guide-from-v1-to-v2">
+        
+        <span class="">Migration Guide From v1 to v2</span>
+      </a>
+    </label>
+    
 </li>  
 
 
@@ -3525,33 +3452,6 @@ Upgrading the Authorization proxy server Upgrading CSI Driver, Authorization sid
 </li>  
 
 
-<li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-csm-docsdocsconceptsapplicationmobility-li">
-  <input type="checkbox" id="m-csm-docsdocsconceptsapplicationmobility-check"/>
-    <label for="m-csm-docsdocsconceptsapplicationmobility-check">
-      <a href="/csm-docs/docs/concepts/applicationmobility/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsconceptsapplicationmobility">
-        
-        <span class="">Application Mobility</span>
-      </a>
-    </label>
-    
-    <ul class="ul-3 foldable">
-        
-
-
-<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsdocsconceptsapplicationmobilityuse_cases-li">
-  <input type="checkbox" id="m-csm-docsdocsconceptsapplicationmobilityuse_cases-check"/>
-    <label for="m-csm-docsdocsconceptsapplicationmobilityuse_cases-check">
-      <a href="/csm-docs/docs/concepts/applicationmobility/use_cases/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsconceptsapplicationmobilityuse_cases">
-        
-        <span class="">Use Cases</span>
-      </a>
-    </label>
-    
-</li>
-    </ul>
-</li>  
-
-
 <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-csm-docsdocsconceptscosidriver-li">
   <input type="checkbox" id="m-csm-docsdocsconceptscosidriver-check"/>
     <label for="m-csm-docsdocsconceptscosidriver-check">
@@ -3783,6 +3683,18 @@ Upgrading the Authorization proxy server Upgrading CSI Driver, Authorization sid
 </li>  
 
 
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsdocssupportcertificationpolicy-li">
+  <input type="checkbox" id="m-csm-docsdocssupportcertificationpolicy-check"/>
+    <label for="m-csm-docsdocssupportcertificationpolicy-check">
+      <a href="/csm-docs/docs/support/certificationpolicy/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocssupportcertificationpolicy">
+        
+        <span class="">Container Storage Modules Operator Certification Policy</span>
+      </a>
+    </label>
+    
+</li>  
+
+
 <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsdocssupportlearn-li">
   <input type="checkbox" id="m-csm-docsdocssupportlearn-check"/>
     <label for="m-csm-docsdocssupportlearn-check">
@@ -3950,18 +3862,25 @@ document.addEventListener("DOMContentLoaded", function() {
   <li class="breadcrumb-item">
     <a href="/csm-docs/docs/getting-started/upgrade/operator/"></a></li>
   <li class="breadcrumb-item active" aria-current="page">
-    Authorization v1.x</li>
+    Authorization</li>
   </ol>
 </nav> 
             <div>
             
 <div class="td-content" >
-	<h1>Authorization v1.x</h1>
-	
+	<h1>Authorization</h1>
+	<div class="lead">Dell Technologies (Dell) Container Storage Modules (CSM) for Authorization Upgrade</div>
 	<header class="article-meta">
 		
 </header>
-	<h2 id="upgrade-csm-authorization">
+	
+
+<div class="pageinfo pageinfo-primary">
+<p>Starting with CSM 1.12, all deployments will need to use images from <a href="https://quay.io/organization/dell">quay.io</a>. Please note that from CSM 1.14 (May 2025), upgrading with helm will fail if it attempts to use images from <a href="https://hub.docker.com/r/dellemc/">Docker Hub</a>.</p>
+
+</div>
+
+<h2 id="upgrade-csm-authorization">
 Upgrade CSM Authorization <a class="header-link"  href="#upgrade-csm-authorization" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
             <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
                 <path d="M0 0h24v24H0z" fill="none"/>
@@ -3972,6 +3891,493 @@ Upgrade CSM Authorization <a class="header-link"  href="#upgrade-csm-authorizati
 <li>Upgrading the Authorization proxy server</li>
 <li>Upgrading CSI Driver, Authorization sidecar with Authorization module enabled</li>
 </ol>
+<h2 id="upgrade-notice-csm-v114--csm-v115-authorization-v220--v230">
+Upgrade Notice: CSM v1.14 → CSM v1.15 (Authorization v2.2.0 → v2.3.0) <a class="header-link"  href="#upgrade-notice-csm-v114--csm-v115-authorization-v220--v230" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
+            <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 0h24v24H0z" fill="none"/>
+                <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
+            </svg>
+        </a></h2><p>Starting with CSM 1.15, CSM Authorization (v2.3.0) requires users to configure storage credentials prior to deployment. This is a mandatory step to ensure proper access to external storage systems.</p>
+<p>You can configure storage credentials using one of the following methods:</p>
+<ol>
+<li>
+<p>Dynamic Secrets via SecretProviderClass</p>
+<p>Use this method if you are integrating with external secret management systems (e.g., HashiCorp Vault, CyberArk Conjur) through the Secrets Store CSI Driver.</p>
+</li>
+<li>
+<p>Static Credentials via Kubernetes Secret</p>
+<p>Use this method if you prefer to manually manage credentials within Kubernetes.</p>
+</li>
+</ol>
+<blockquote>
+<p><strong>Note</strong>: Only one of SecretProviderClass or Secret can be used at a time.</p></blockquote>
+<p>
+
+
+<ul class="nav nav-tabs" id="tabs-1" role="tablist">
+  <li class="nav-item">
+      <button class="nav-link active"
+          id="tabs-01-00-tab" data-bs-toggle="tab" data-bs-target="#tabs-01-00" role="tab"
+          data-td-tp-persist="secretproviderclass" aria-controls="tabs-01-00" aria-selected="true">
+        SecretProviderClass
+      </button>
+    </li><li class="nav-item">
+      <button class="nav-link"
+          id="tabs-01-01-tab" data-bs-toggle="tab" data-bs-target="#tabs-01-01" role="tab"
+          data-td-tp-persist="secret" aria-controls="tabs-01-01" aria-selected="false">
+        Secret
+      </button>
+    </li>
+</ul>
+
+<div class="tab-content" id="tabs-1-content">
+    <div class="tab-body tab-pane fade show active"
+        id="tabs-01-00" role="tabpanel" aria-labelled-by="tabs-01-00-tab" tabindex="1">
+        <br>
+<ul>
+<li>
+<p>Install a supported <a href="https://secrets-store-csi-driver.sigs.k8s.io/getting-started/installation#install-external-secret-providers">External Secret Provider</a> to integrate with the Secrets Store CSI Driver. For guidance on setting up Vault, refer to our <a href="/csm-docs/docs/getting-started/installation/operator/modules/authorizationv2-0/#vault-csi-provider-installation">Vault installation guide</a>. For Conjur, refer to our <a href="/csm-docs/docs/getting-started/installation/operator/modules/authorizationv2-0/#conjur-csi-provider-installation">Conjur installation guide</a>.</p>
+</li>
+<li>
+<p>Install the <a href="https://secrets-store-csi-driver.sigs.k8s.io/getting-started/installation">Secrets Store CSI Driver</a> enabling the <a href="https://secrets-store-csi-driver.sigs.k8s.io/topics/sync-as-kubernetes-secret"><code>Sync as Kubernetes Secret</code></a> and <a href="https://secrets-store-csi-driver.sigs.k8s.io/topics/secret-auto-rotation"><code>Secret Auto Rotation</code></a> features.</p>
+<blockquote>
+<p><strong>Note</strong>: If you are using Conjur with the Secrets Store CSI Driver, be sure to configure <code>--set 'tokenRequests[0].audience=conjur'</code> when installing the Secrets Store CSI Driver.</p></blockquote>
+</li>
+<li>
+<p>Create your own <a href="https://secrets-store-csi-driver.sigs.k8s.io/getting-started/usage#create-your-own-secretproviderclass-object">SecretProviderClass Object</a> based on your external secret provider. You also have the option to create your own Redis secret in the SecretProviderClass.</p>
+</li>
+<li>
+<p>For OpenShift environments, label the namespace:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>kubectl label namespace authorization <span style="color:#4e9a06">\
+</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06"></span> pod-security.kubernetes.io/enforce<span style="color:#ce5c00;font-weight:bold">=</span>privileged <span style="color:#4e9a06">\
+</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06"></span> security.openshift.io/MinimallySufficientPodSecurityStandard<span style="color:#ce5c00;font-weight:bold">=</span>privileged <span style="color:#4e9a06">\
+</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06"></span> --overwrite
+</span></span></code></pre></div></li>
+</ul>
+<style>
+  .collapse-toggle {
+      margin-bottom: 30px;
+
+  }
+
+  .collapse-title {
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      user-select: none;
+      border-radius: 5px;
+  }
+
+  .collapse-arrow::before {
+      content: '\25B6';  
+      font-size: 0.8em;
+      margin-right: 5px;
+      color: var(--bs-secondary-color);  
+  }
+
+  .collapse-title:hover .collapse-text {
+      color: blue  
+  }
+
+  .collapse-content {
+      margin-top: 8px;
+      padding: 8px;
+
+  }
+  .card-box{
+    border: 0.5px solid rgb(163, 161, 161)
+  }
+  .rotated {
+      transform: rotate(90deg);
+  }
+</style>
+<div class="collapse-toggle">
+  <div class="collapse-title" onclick="toggleContent(this)">
+      <i class="collapse-arrow fas fa-angle-right "></i>
+      <strong class="collapse-text">Minimal SecretProviderClass configuration: includes only array-based credentials</strong>
+  </div>
+<div class="collapse-content " style="display: none;">
+    <br>
+  <ul class="nav nav-tabs" id="tabs-2" role="tablist">
+  <li class="nav-item">
+      <button class="nav-link active"
+          id="tabs-02-00-tab" data-bs-toggle="tab" data-bs-target="#tabs-02-00" role="tab"
+          data-td-tp-persist="vault" aria-controls="tabs-02-00" aria-selected="true">
+        Vault
+      </button>
+    </li><li class="nav-item">
+      <button class="nav-link"
+          id="tabs-02-01-tab" data-bs-toggle="tab" data-bs-target="#tabs-02-01" role="tab"
+          data-td-tp-persist="conjur" aria-controls="tabs-02-01" aria-selected="false">
+        Conjur
+      </button>
+    </li>
+</ul>
+<div class="tab-content" id="tabs-2-content">
+    <div class="tab-pane fade show active"
+        id="tabs-02-00" role="tabpanel" aria-labelled-by="tabs-02-00-tab" tabindex="2">
+        <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>apiVersion: secrets-store.csi.x-k8s.io/v1
+</span></span><span style="display:flex;"><span>kind: SecretProviderClass
+</span></span><span style="display:flex;"><span>metadata:
+</span></span><span style="display:flex;"><span>  name: vault-db-creds
+</span></span><span style="display:flex;"><span>spec:
+</span></span><span style="display:flex;"><span>  <span style="color:#8f5902;font-style:italic"># Vault CSI Provider</span>
+</span></span><span style="display:flex;"><span>  provider: vault
+</span></span><span style="display:flex;"><span>  parameters:
+</span></span><span style="display:flex;"><span>    <span style="color:#8f5902;font-style:italic"># Vault role name to use during login</span>
+</span></span><span style="display:flex;"><span>    roleName: <span style="color:#4e9a06">&#39;csm-authorization&#39;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#8f5902;font-style:italic"># Vault&#39;s hostname</span>
+</span></span><span style="display:flex;"><span>    vaultAddress: <span style="color:#4e9a06">&#39;https://vault:8200&#39;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#8f5902;font-style:italic"># TLS CA certification for validation</span>
+</span></span><span style="display:flex;"><span>    vaultCACertPath: <span style="color:#4e9a06">&#39;/vault/tls/ca.crt&#39;</span>
+</span></span><span style="display:flex;"><span>    objects: <span style="color:#000;font-weight:bold">|</span>
+</span></span><span style="display:flex;"><span>      - objectName: <span style="color:#4e9a06">&#34;dbUsername&#34;</span>
+</span></span><span style="display:flex;"><span>        secretPath: <span style="color:#4e9a06">&#34;database/creds/db-app&#34;</span>
+</span></span><span style="display:flex;"><span>        secretKey: <span style="color:#4e9a06">&#34;username&#34;</span>
+</span></span><span style="display:flex;"><span>      - objectName: <span style="color:#4e9a06">&#34;dbPassword&#34;</span>
+</span></span><span style="display:flex;"><span>        secretPath: <span style="color:#4e9a06">&#34;database/creds/db-app&#34;</span>
+</span></span><span style="display:flex;"><span>        secretKey: <span style="color:#4e9a06">&#34;password&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#8f5902;font-style:italic"># &#34;objectName&#34; is an alias used within the SecretProviderClass to reference</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#8f5902;font-style:italic"># that specific secret. This will also be the filename containing the secret.</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#8f5902;font-style:italic"># &#34;secretPath&#34; is the path in Vault where the secret should be retrieved.</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#8f5902;font-style:italic"># &#34;secretKey&#34; is the key within the Vault secret response to extract a value from.</span>
+</span></span><span style="display:flex;"><span>  </span></span></code></pre></div>
+    </div>
+    <div class="tab-pane fade"
+        id="tabs-02-01" role="tabpanel" aria-labelled-by="tabs-02-01-tab" tabindex="2">
+        <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>apiVersion: secrets-store.csi.x-k8s.io/v1
+</span></span><span style="display:flex;"><span>kind: SecretProviderClass
+</span></span><span style="display:flex;"><span>metadata:
+</span></span><span style="display:flex;"><span>  name: conjur-db-creds
+</span></span><span style="display:flex;"><span>spec:
+</span></span><span style="display:flex;"><span>  provider: conjur
+</span></span><span style="display:flex;"><span>  parameters:
+</span></span><span style="display:flex;"><span>    conjur.org/configurationVersion: 0.2.0
+</span></span><span style="display:flex;"><span>    account: replace-me-account
+</span></span><span style="display:flex;"><span>    applianceUrl: <span style="color:#4e9a06">&#39;https://conjur-conjur-oss.default.svc.cluster.local&#39;</span>
+</span></span><span style="display:flex;"><span>    authnId: authn-jwt/kube
+</span></span><span style="display:flex;"><span>    sslCertificate: <span style="color:#000;font-weight:bold">|</span>
+</span></span><span style="display:flex;"><span>      -----BEGIN CERTIFICATE-----
+</span></span><span style="display:flex;"><span>      ...
+</span></span><span style="display:flex;"><span>      -----END CERTIFICATE-----
+</span></span><span style="display:flex;"><span>  </span></span></code></pre></div>
+    </div>
+</div> 
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    function activateTabFromHash(hash) {
+      if (!hash) return;
+<pre><code>  var targetElement = document.querySelector(hash);
+  if (!targetElement) return;
+
+  
+  var tabPaneElement = targetElement.closest('.tab-pane');
+  if (!tabPaneElement) return;
+
+  
+  var tabPaneId = tabPaneElement.id;
+
+  
+  var tabButton = document.querySelector(
+    'button[data-bs-target=&quot;#' + tabPaneId + '&quot;]'
+  );
+  if (!tabButton) return;
+
+  
+  var tabInstance = new bootstrap.Tab(tabButton);
+  tabInstance.show();
+
+  
+  targetElement.scrollIntoView({ behavior: &quot;smooth&quot; });
+}
+
+
+activateTabFromHash(window.location.hash);
+
+
+window.addEventListener(&quot;hashchange&quot;, function () {
+  activateTabFromHash(window.location.hash);
+});
+</code></pre>
+<p>});
+</script></p>
+  </div>
+</div>
+<script>
+  function toggleContent(element) {
+      const content = element.nextElementSibling;
+      const arrow = element.querySelector('.collapse-arrow');
+
+      
+      if (content.style.display === "none") {
+          content.style.display = "block";
+          arrow.classList.add("rotated");
+      } else {
+          content.style.display = "none";
+          arrow.classList.remove("rotated");
+      }
+  }
+</script>
+<style>
+  .collapse-toggle {
+      margin-bottom: 30px;
+
+  }
+
+  .collapse-title {
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      user-select: none;
+      border-radius: 5px;
+  }
+
+  .collapse-arrow::before {
+      content: '\25B6';  
+      font-size: 0.8em;
+      margin-right: 5px;
+      color: var(--bs-secondary-color);  
+  }
+
+  .collapse-title:hover .collapse-text {
+      color: blue  
+  }
+
+  .collapse-content {
+      margin-top: 8px;
+      padding: 8px;
+
+  }
+  .card-box{
+    border: 0.5px solid rgb(163, 161, 161)
+  }
+  .rotated {
+      transform: rotate(90deg);
+  }
+</style>
+<div class="collapse-toggle">
+  <div class="collapse-title" onclick="toggleContent(this)">
+      <i class="collapse-arrow fas fa-angle-right "></i>
+      <strong class="collapse-text">SecretProviderClass configuration with array-based and Redis credentials</strong>
+  </div>
+<div class="collapse-content " style="display: none;">
+    <br>
+  <ul class="nav nav-tabs" id="tabs-3" role="tablist">
+  <li class="nav-item">
+      <button class="nav-link active"
+          id="tabs-03-00-tab" data-bs-toggle="tab" data-bs-target="#tabs-03-00" role="tab"
+          data-td-tp-persist="vault" aria-controls="tabs-03-00" aria-selected="true">
+        Vault
+      </button>
+    </li><li class="nav-item">
+      <button class="nav-link"
+          id="tabs-03-01-tab" data-bs-toggle="tab" data-bs-target="#tabs-03-01" role="tab"
+          data-td-tp-persist="conjur" aria-controls="tabs-03-01" aria-selected="false">
+        Conjur
+      </button>
+    </li>
+</ul>
+<div class="tab-content" id="tabs-3-content">
+    <div class="tab-pane fade show active"
+        id="tabs-03-00" role="tabpanel" aria-labelled-by="tabs-03-00-tab" tabindex="3">
+        <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>apiVersion: secrets-store.csi.x-k8s.io/v1
+</span></span><span style="display:flex;"><span>kind: SecretProviderClass
+</span></span><span style="display:flex;"><span>metadata:
+</span></span><span style="display:flex;"><span>  name: vault-db-creds
+</span></span><span style="display:flex;"><span>spec:
+</span></span><span style="display:flex;"><span>  <span style="color:#8f5902;font-style:italic"># Vault CSI Provider</span>
+</span></span><span style="display:flex;"><span>  provider: vault
+</span></span><span style="display:flex;"><span>  secretObjects:
+</span></span><span style="display:flex;"><span>  <span style="color:#8f5902;font-style:italic"># Name of the Kubernetes Secret object</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#8f5902;font-style:italic"># This name will be used during deployment</span>
+</span></span><span style="display:flex;"><span>  - secretName: redis-secret-vault
+</span></span><span style="display:flex;"><span>    type: kubernetes.io/basic-auth
+</span></span><span style="display:flex;"><span>    data:
+</span></span><span style="display:flex;"><span>      <span style="color:#8f5902;font-style:italic"># Name of the mounted content to sync</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#8f5902;font-style:italic"># This could be the object name or the object alias</span>
+</span></span><span style="display:flex;"><span>      - objectName: dbRedisUsername
+</span></span><span style="display:flex;"><span>        <span style="color:#8f5902;font-style:italic"># Data field to populate</span>
+</span></span><span style="display:flex;"><span>        key: username
+</span></span><span style="display:flex;"><span>      - objectName: dbRedisPassword
+</span></span><span style="display:flex;"><span>        key: password
+</span></span><span style="display:flex;"><span>  parameters:
+</span></span><span style="display:flex;"><span>    <span style="color:#8f5902;font-style:italic"># Vault role name to use during login</span>
+</span></span><span style="display:flex;"><span>    roleName: <span style="color:#4e9a06">&#39;csm-authorization&#39;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#8f5902;font-style:italic"># Vault&#39;s hostname</span>
+</span></span><span style="display:flex;"><span>    vaultAddress: <span style="color:#4e9a06">&#39;https://vault:8200&#39;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#8f5902;font-style:italic"># TLS CA certification for validation</span>
+</span></span><span style="display:flex;"><span>    vaultCACertPath: <span style="color:#4e9a06">&#39;/vault/tls/ca.crt&#39;</span>
+</span></span><span style="display:flex;"><span>    objects: <span style="color:#000;font-weight:bold">|</span>
+</span></span><span style="display:flex;"><span>      - objectName: <span style="color:#4e9a06">&#34;dbUsername&#34;</span>
+</span></span><span style="display:flex;"><span>        secretPath: <span style="color:#4e9a06">&#34;database/creds/db-app&#34;</span>
+</span></span><span style="display:flex;"><span>        secretKey: <span style="color:#4e9a06">&#34;username&#34;</span>
+</span></span><span style="display:flex;"><span>      - objectName: <span style="color:#4e9a06">&#34;dbPassword&#34;</span>
+</span></span><span style="display:flex;"><span>        secretPath: <span style="color:#4e9a06">&#34;database/creds/db-app&#34;</span>
+</span></span><span style="display:flex;"><span>        secretKey: <span style="color:#4e9a06">&#34;password&#34;</span>
+</span></span><span style="display:flex;"><span>      - objectName: <span style="color:#4e9a06">&#34;dbRedisUsername&#34;</span>
+</span></span><span style="display:flex;"><span>        secretPath: <span style="color:#4e9a06">&#34;database/creds/redis&#34;</span>
+</span></span><span style="display:flex;"><span>        secretKey: <span style="color:#4e9a06">&#34;username&#34;</span>
+</span></span><span style="display:flex;"><span>      - objectName: <span style="color:#4e9a06">&#34;dbRedisPassword&#34;</span>
+</span></span><span style="display:flex;"><span>        secretPath: <span style="color:#4e9a06">&#34;database/creds/redis&#34;</span>
+</span></span><span style="display:flex;"><span>        secretKey: <span style="color:#4e9a06">&#34;password&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#8f5902;font-style:italic"># &#34;objectName&#34; is an alias used within the SecretProviderClass to reference</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#8f5902;font-style:italic"># that specific secret. This will also be the filename containing the secret.</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#8f5902;font-style:italic"># &#34;secretPath&#34; is the path in Vault where the secret should be retrieved.</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#8f5902;font-style:italic"># &#34;secretKey&#34; is the key within the Vault secret response to extract a value from.</span>
+</span></span><span style="display:flex;"><span>  </span></span></code></pre></div>
+    </div>
+    <div class="tab-pane fade"
+        id="tabs-03-01" role="tabpanel" aria-labelled-by="tabs-03-01-tab" tabindex="3">
+        <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>apiVersion: secrets-store.csi.x-k8s.io/v1
+</span></span><span style="display:flex;"><span>kind: SecretProviderClass
+</span></span><span style="display:flex;"><span>metadata:
+</span></span><span style="display:flex;"><span>  name: conjur-db-creds
+</span></span><span style="display:flex;"><span>spec:
+</span></span><span style="display:flex;"><span>  provider: conjur
+</span></span><span style="display:flex;"><span>  secretObjects:
+</span></span><span style="display:flex;"><span>  <span style="color:#8f5902;font-style:italic"># Name of the Kubernetes Secret object</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#8f5902;font-style:italic"># This name will be used during deployment</span>
+</span></span><span style="display:flex;"><span>  - secretName: redis-secret-conjur
+</span></span><span style="display:flex;"><span>    type: kubernetes.io/basic-auth
+</span></span><span style="display:flex;"><span>    data:
+</span></span><span style="display:flex;"><span>      <span style="color:#8f5902;font-style:italic"># Name of the mounted content to sync</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#8f5902;font-style:italic"># This could be the object name or the object alias</span>
+</span></span><span style="display:flex;"><span>      - objectName: secrets/redis-username
+</span></span><span style="display:flex;"><span>        <span style="color:#8f5902;font-style:italic"># Data field to populate</span>
+</span></span><span style="display:flex;"><span>        key: username
+</span></span><span style="display:flex;"><span>      - objectName: secrets/redis-password
+</span></span><span style="display:flex;"><span>        key: password
+</span></span><span style="display:flex;"><span>  parameters:
+</span></span><span style="display:flex;"><span>    conjur.org/configurationVersion: 0.2.0
+</span></span><span style="display:flex;"><span>    account: replace-me-account
+</span></span><span style="display:flex;"><span>    applianceUrl: <span style="color:#4e9a06">&#39;https://conjur-conjur-oss.default.svc.cluster.local&#39;</span>
+</span></span><span style="display:flex;"><span>    authnId: authn-jwt/kube
+</span></span><span style="display:flex;"><span>    sslCertificate: <span style="color:#000;font-weight:bold">|</span>
+</span></span><span style="display:flex;"><span>      -----BEGIN CERTIFICATE-----
+</span></span><span style="display:flex;"><span>      ...
+</span></span><span style="display:flex;"><span>      -----END CERTIFICATE-----
+</span></span><span style="display:flex;"><span>  </span></span></code></pre></div>
+    </div>
+</div> 
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    function activateTabFromHash(hash) {
+      if (!hash) return;
+<pre><code>  var targetElement = document.querySelector(hash);
+  if (!targetElement) return;
+
+  
+  var tabPaneElement = targetElement.closest('.tab-pane');
+  if (!tabPaneElement) return;
+
+  
+  var tabPaneId = tabPaneElement.id;
+
+  
+  var tabButton = document.querySelector(
+    'button[data-bs-target=&quot;#' + tabPaneId + '&quot;]'
+  );
+  if (!tabButton) return;
+
+  
+  var tabInstance = new bootstrap.Tab(tabButton);
+  tabInstance.show();
+
+  
+  targetElement.scrollIntoView({ behavior: &quot;smooth&quot; });
+}
+
+
+activateTabFromHash(window.location.hash);
+
+
+window.addEventListener(&quot;hashchange&quot;, function () {
+  activateTabFromHash(window.location.hash);
+});
+</code></pre>
+<p>});
+</script></p>
+  </div>
+</div>
+<script>
+  function toggleContent(element) {
+      const content = element.nextElementSibling;
+      const arrow = element.querySelector('.collapse-arrow');
+
+      
+      if (content.style.display === "none") {
+          content.style.display = "block";
+          arrow.classList.add("rotated");
+      } else {
+          content.style.display = "none";
+          arrow.classList.remove("rotated");
+      }
+  }
+</script>
+
+    </div>
+    <div class="tab-body tab-pane fade"
+        id="tabs-01-01" role="tabpanel" aria-labelled-by="tabs-01-01-tab" tabindex="1">
+        <ul>
+<li>
+<p>Create a YAML file (in this example, <code>storage-secret.yaml</code>) containing the credentials:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"># Username and password for accessing storage system</span>
+</span></span><span style="display:flex;"><span>username: <span style="color:#4e9a06">&#34;username&#34;</span>
+</span></span><span style="display:flex;"><span>password: <span style="color:#4e9a06">&#34;password&#34;</span>
+</span></span></code></pre></div></li>
+</ul>
+<br>
+<ul>
+<li>
+<p>Create the Secret:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl create secret generic storage-secret -n authorization --from-file<span style="color:#ce5c00;font-weight:bold">=</span>storage-secret.yaml
+</span></span></code></pre></div></li>
+</ul>
+
+    </div>
+</div> 
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    function activateTabFromHash(hash) {
+      if (!hash) return;
+  
+      
+      var targetElement = document.querySelector(hash);
+      if (!targetElement) return;
+  
+      
+      var tabPaneElement = targetElement.closest('.tab-pane');
+      if (!tabPaneElement) return;
+  
+      
+      var tabPaneId = tabPaneElement.id;
+  
+      
+      var tabButton = document.querySelector(
+        'button[data-bs-target="#' + tabPaneId + '"]'
+      );
+      if (!tabButton) return;
+  
+      
+      var tabInstance = new bootstrap.Tab(tabButton);
+      tabInstance.show();
+  
+      
+      targetElement.scrollIntoView({ behavior: "smooth" });
+    }
+  
+    
+    activateTabFromHash(window.location.hash);
+  
+    
+    window.addEventListener("hashchange", function () {
+      activateTabFromHash(window.location.hash);
+    });
+  });
+  </script>
+  
+<br></p>
 <h3 id="upgrading-the-authorization-proxy-server">
 Upgrading the Authorization Proxy Server <a class="header-link"  href="#upgrading-the-authorization-proxy-server" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
             <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
@@ -3981,21 +4387,53 @@ Upgrading the Authorization Proxy Server <a class="header-link"  href="#upgradin
         </a></h3><ol>
 <li>
 <p>Modifying the existing Authorization Proxy Server installation directly via <code>kubectl edit</code></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl get csm -n &lt;module-namespace&gt;
-</span></span></code></pre></div><p>For example - If the Authorization Proxy Server is installed in authorization namespace then run this command to get the object name</p>
+<p><strong>Example: Editing the Authorization Proxy Server Configuration</strong></p>
+<p>If the Authorization Proxy Server is deployed in the <code>authorization</code> namespace, retrieve the CSM object name using:</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl get csm -n authorization
-</span></span></code></pre></div><p>use the object name in <code>kubectl edit</code> command.</p>
+</span></span></code></pre></div><p>Use the retrieved object name in the <code>kubectl get</code> command to modify its configuration</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl edit csm &lt;object-name&gt; -n &lt;module-namespace&gt;
-</span></span></code></pre></div><p>For example - If the object name is authorization then use the name as authorization and if the namespace is authorization, then run this command to edit the object</p>
+</span></span></code></pre></div><p>For instance, if the object name is <code>authorization</code> and the namespace is also <code>authorization</code>, run:</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl edit csm authorization -n authorization
 </span></span></code></pre></div></li>
 <li>
-<p>Modify the installation</p>
+<p>Modify the installation configuration:</p>
+<p>When upgrading to the latest version, ensure the following updates are made to your deployment configuration:</p>
 <ul>
-<li>Update the CSM Authorization Proxy Server configVersion</li>
-<li>Update the images for proxyService, tenantService, roleService and storageService</li>
+<li>Update the <code>configVersion</code> for the CSM Authorization Proxy Server to reflect the new release.</li>
+<li>Update <code>container images</code> to their latest versions:
+<ul>
+<li>proxy service</li>
+<li>tenant service</li>
+<li>role service</li>
+<li>storage service</li>
+<li>authorization controller</li>
+<li>redis</li>
 </ul>
 </li>
+<li>Review and revise configuration parameters:
+<ul>
+<li>Add any newly introduced parameters.</li>
+<li>Remove any parameters that have been deprecated or are no longer supported.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Modify the Authorization ConfigMap parameters:</p>
+<p>The latest configuration values are available in the updated sample <a href="https://github.com/dell/csm-operator/tree/main/samples/authorization">Custom Resource for Authorization</a>.</p>
+<p>To apply these changes, edit the <code>csm-config-params</code> ConfigMap using:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl edit configmap csm-config-params -n authorization
+</span></span></code></pre></div><p>As part of the upgrade from CSM v1.14 → v1.15 (Authorization v2.2.0 → v2.3.0), modify the existing <code>csm-config-params</code> ConfigMap in the <code>authorization</code> namespace to reflect the new unified concurrency setting.</p>
+<p>Remove:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">CONCURRENT_POWERFLEX_REQUESTS</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#0000cf;font-weight:bold">10</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">CONCURRENT_POWERSCALE_REQUESTS</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#0000cf;font-weight:bold">10</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span></code></pre></div><p>Add:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">CONCURRENT_STORAGE_REQUESTS</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#0000cf;font-weight:bold">10</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span></code></pre></div></li>
+<li>
+<p>Update your Storage, Role, and Tenant resource definitions with the latest <a href="/csm-docs/docs/concepts/authorization/v2.x/configuration/">configuration</a> schema. Apply changes using the Kubernetes CLI:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl apply -f &lt;file-name&gt; -n authorization
+</span></span></code></pre></div></li>
 </ol>
 <h3 id="upgrading-csi-driver-authorization-sidecar-with-authorization-module-enabled">
 Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a class="header-link"  href="#upgrading-csi-driver-authorization-sidecar-with-authorization-module-enabled" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
@@ -4025,7 +4463,7 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
 <blockquote>
 <p><strong>Note</strong>:</p>
 <ul>
-<li>In Authorization module upgrade, only <code>n-1</code> to <code>n</code> upgrade is supported, e.g. if the current authorization version is <code>v1.8.x</code>, it can be upgraded to <code>1.9.x</code>.</li>
+<li>In Authorization module upgrade, only <code>n-1</code> to <code>n</code> upgrade is supported, e.g. if the current authorization version is <code>v2.1.x</code>, it can be upgraded to <code>2.2.x</code>.</li>
 </ul></blockquote>
  
 	<style>  
@@ -4056,7 +4494,7 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
         <h2 class="feedback--title">Feedback</h2>
         <p class="feedback--question">Was this page helpful?</p>
         <button class="btn btn-primary mb-4 feedback--answer feedback--answer-yes px-4">Yes</button>
-        <a href="https://github.com/dell/csm/issues/new?template=bug_report.yml&title=%5BBUG%5D%3A%20Authorization&#43;v1.x&bug-description=Feedback%20for%20the%20documentation&driver=CSM%20documentation&co=N%2FA&os=N%2FA&files=N%2FA&steps=%2Fcsm-docs%2Fdocs%2Fgetting-started%2Fupgrade%2Foperator%2Fauthorization_upgrade%2F" target="_blank" >     <button class="btn btn-primary mb-4 feedback--answer feedback--answer-no px-4 ">No</button></a>
+        <a href="https://github.com/dell/csm/issues/new?template=bug_report.yml&title=%5BBUG%5D%3A%20Authorization&bug-description=Feedback%20for%20the%20documentation&driver=CSM%20documentation&co=N%2FA&os=N%2FA&files=N%2FA&steps=%2Fcsm-docs%2Fdocs%2Fgetting-started%2Fupgrade%2Foperator%2Fauthorization_upgrade%2F" target="_blank" >     <button class="btn btn-primary mb-4 feedback--answer feedback--answer-no px-4 ">No</button></a>
         <p class="feedback--response feedback--response-yes">
           Thank you for your feedback!
         </p>
@@ -5413,8 +5851,50 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
 
         
         
+            
+        
+        
+
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
         
+        
+        
+
+        
+    
+
+            
+        
+    
 
+            
         
     
 
@@ -5428,12 +5908,28 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
             
         
          
+            
+        
+
+        
+        
             
+        
         
 
         
+             
+                
+    
+    
         
             
+        
+         
+            
+        
+
+        
         
         
 
@@ -5451,8 +5947,12 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
 
         
         
+        
+
         
+    
 
+            
         
              
                 
@@ -6397,8 +6897,12 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
 
         
         
+        
+
         
+    
 
+            
         
     
 
@@ -6408,9 +6912,23 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
 
             
         
+             
+                
     
+    
+        
+            
+        
+         
+            
+        
 
+        
+        
             
+        
+        
+
         
              
                 
@@ -6444,6 +6962,22 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
         
         
             
+        
+        
+
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
         
         
 
@@ -6468,6 +7002,14 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
 
             
         
+    
+
+            
+        
+    
+
+            
+        
              
                 
     
@@ -7101,20 +7643,8 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
 
         
         
-        
-
-        
-    
-
-            
-        
-    
-
-            
         
-    
 
-            
         
     
 
@@ -7129,14 +7659,28 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
         
          
             
+        
+
+        
+        
         
 
         
+    
+
+            
         
+    
+
             
         
+    
+
+            
         
+    
 
+            
         
              
                 
@@ -7151,12 +7695,10 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
 
         
         
+            
         
-
         
-    
 
-            
         
              
                 
@@ -7171,10 +7713,12 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
 
         
         
-            
         
+
         
+    
 
+            
         
              
                 
@@ -7188,6 +7732,8 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
         
 
         
+        
+            
         
         
 
@@ -7207,10 +7753,6 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
         
         
 
-        
-    
-
-            
         
              
                 
@@ -7356,22 +7898,6 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
         
         
             
-        
-        
-
-        
-             
-                
-    
-    
-        
-            
-        
-         
-            
-        
-
-        
         
         
 
@@ -7392,10 +7918,6 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
         
 
         
-    
-
-            
-        
              
                 
     
@@ -7534,28 +8056,12 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
             
         
          
-            
-        
-
-        
-        
             
-        
         
 
-        
-             
-                
-    
-    
         
-            
         
-         
             
-        
-
-        
         
         
 
@@ -7575,10 +8081,6 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
         
         
 
-        
-    
-
-            
         
              
                 
@@ -8455,12 +8957,10 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
 
         
         
+            
         
-
         
-    
 
-            
         
              
                 
@@ -8513,10 +9013,12 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
 
         
         
-            
         
+
         
+    
 
+            
         
              
                 
@@ -8562,24 +9064,10 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
 
             
         
-             
-                
     
-    
-        
-            
-        
-         
-            
-        
 
-        
-        
             
-        
         
-
-        
              
                 
     
@@ -8613,8 +9101,12 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
 
         
         
+        
+
         
+    
 
+            
         
     
 
@@ -8633,12 +9125,10 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
 
         
         
+            
         
-
         
-    
 
-            
         
              
                 
@@ -8651,20 +9141,10 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
             
         
 
-        
-        
         
-
         
-    
-
-            
         
-    
 
-            
-        
-            
         
     
 
@@ -8683,8 +9163,6 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
 
         
         
-            
-        
         
 
         
@@ -8701,10 +9179,12 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
 
         
         
-            
         
+
         
+    
 
+            
         
              
                 
@@ -8759,12 +9239,8 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
 
         
         
-        
-
         
-    
 
-            
         
     
 
@@ -8829,12 +9305,8 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
 
         
         
-        
-
         
-    
 
-            
         
              
                 
@@ -8847,10 +9319,18 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
             
         
 
+        
+        
         
+
         
+    
+
+            
         
+    
 
+            
         
              
                 
@@ -8923,18 +9403,10 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
             
         
 
-        
-        
         
-
         
-    
-
-            
         
-    
 
-            
         
              
                 
@@ -8956,8 +9428,28 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
 
             
         
+             
+                
     
-
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+    
+
             
         
              
@@ -8973,10 +9465,12 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
 
         
         
-            
         
+
         
+    
 
+            
         
              
                 
@@ -9005,14 +9499,10 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
             
         
 
-        
         
         
-
         
-    
 
-            
         
     
 
@@ -9029,10 +9519,14 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
             
         
 
+        
         
         
+
         
+    
 
+            
         
     
 
@@ -9089,10 +9583,14 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
             
         
 
+        
         
         
+
         
+    
 
+            
         
              
                 
@@ -9112,6 +9610,8 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
         
     
 
+            
+        
             
         
              
@@ -9149,14 +9649,10 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
             
         
 
-        
         
         
-
         
-    
 
-            
         
              
                 
@@ -9169,10 +9665,14 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
             
         
 
+        
         
         
+
         
+    
 
+            
         
              
                 
@@ -9251,12 +9751,10 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
 
         
         
+            
         
-
         
-    
 
-            
         
              
                 
@@ -9269,14 +9767,10 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
             
         
 
-        
         
         
-
         
-    
 
-            
         
              
                 
@@ -9296,8 +9790,6 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
         
     
 
-            
-        
             
         
              
@@ -9335,10 +9827,14 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
             
         
 
+        
         
         
+
         
+    
 
+            
         
              
                 
@@ -9371,14 +9867,10 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
             
         
 
-        
         
         
-
         
-    
 
-            
         
              
                 
@@ -9388,21 +9880,51 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
             
         
          
+            
+        
+
+        
+        
+        
+
+        
+    
+
             
         
+    
 
+            
         
+            
         
+            
         
+    
 
+            
         
     
 
             
         
+             
+                
+    
     
+        
+            
+        
+         
+            
+        
 
+        
+        
             
+        
+        
+
         
              
                 
@@ -9435,10 +9957,14 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
             
         
 
+        
         
         
+
         
+    
 
+            
         
              
                 
@@ -9493,10 +10019,14 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
             
         
 
+        
         
         
+
         
+    
 
+            
         
              
                 
@@ -9529,14 +10059,10 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
             
         
 
-        
         
         
-
         
-    
 
-            
         
     
 
@@ -9593,10 +10119,14 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
             
         
 
+        
         
         
+
         
+    
 
+            
         
              
                 
@@ -9621,10 +10151,22 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
     
 
             
+        
+             
+                
+    
+    
         
             
         
+         
             
+        
+
+        
+        
+        
+
         
     
 
@@ -9663,14 +10205,10 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
             
         
 
-        
         
         
-
         
-    
 
-            
         
              
                 
@@ -9683,10 +10221,16 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
             
         
 
+        
         
         
+
         
+    
 
+            
+        
+            
         
     
 
@@ -9703,18 +10247,12 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
             
         
 
-        
         
         
-
-        
-    
-
             
         
-    
+        
 
-            
         
              
                 
@@ -9747,12 +10285,10 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
 
         
         
+            
         
-
         
-    
 
-            
         
              
                 
@@ -9767,12 +10303,10 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
 
         
         
+            
         
-
         
-    
 
-            
         
              
                 
@@ -9805,10 +10339,16 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
             
         
 
+        
         
+            
         
         
 
+        
+            
+        
+            
         
     
 
@@ -9825,10 +10365,14 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
             
         
 
+        
         
+            
         
         
 
+        
+            
         
     
 
@@ -9845,14 +10389,10 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
             
         
 
-        
         
         
-
         
-    
 
-            
         
     
 
@@ -9911,10 +10451,14 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
             
         
 
+        
         
         
+
         
+    
 
+            
         
              
                 
@@ -9929,11 +10473,11 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
 
         
         
+            
         
-
         
-    
 
+        
             
         
             
@@ -9959,25 +10503,13 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
         
         
 
-        
-             
-                
-    
-    
-        
-            
         
-         
             
         
+    
 
-        
-        
             
         
-        
-
-        
              
                 
     
@@ -10051,10 +10583,18 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
             
         
 
+        
         
+            
+        
+        
+
         
+            
         
+    
 
+            
         
              
                 
@@ -10067,10 +10607,14 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
             
         
 
+        
         
+            
         
         
 
+        
+            
         
     
 
@@ -10107,10 +10651,14 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
             
         
 
+        
         
         
+
         
+    
 
+            
         
     
 
@@ -10129,12 +10677,10 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
 
         
         
+            
         
-
         
-    
 
-            
         
              
                 
@@ -10147,13 +10693,15 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
             
         
 
+        
         
+            
         
         
 
         
-    
-
+            
+        
             
         
     
@@ -10171,10 +10719,18 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
             
         
 
+        
+        
+            
         
         
+
+        
+            
         
+    
 
+            
         
              
                 
@@ -10207,10 +10763,14 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
             
         
 
+        
         
         
+
         
+    
 
+            
         
     
 
@@ -10229,12 +10789,10 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
 
         
         
+            
         
-
         
-    
 
-            
         
              
                 
@@ -10267,14 +10825,10 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
             
         
 
-        
         
         
-
         
-    
 
-            
         
     
 
@@ -10291,10 +10845,14 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
             
         
 
+        
         
+            
         
         
 
+        
+            
         
     
 
@@ -10331,10 +10889,14 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
             
         
 
+        
         
         
+
         
+    
 
+            
         
     
 
@@ -10342,6 +10904,8 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
         
     
 
+            
+        
             
         
              
@@ -10379,6 +10943,8 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
         
         
 
+        
+            
         
              
                 
@@ -10388,13 +10954,23 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
             
         
          
+            
+        
+
+        
+        
             
         
+        
 
         
+            
         
+            
         
+    
 
+            
         
              
                 
@@ -10427,13 +11003,19 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
             
         
 
+        
         
         
+
         
+    
 
+            
         
     
 
+            
+        
             
         
              
@@ -10449,9 +11031,1727 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
 
         
         
+            
+        
+        
+
+        
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+            
+        
+        
+
+        
+            
+        
+            
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+            
+        
+        
+
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+            
+        
+        
+
+        
+            
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+            
+        
+        
+
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+            
+        
+        
+
+        
+            
+        
+            
+        
+            
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+            
+        
+        
+
+        
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+    
+
+            
+        
+    
+
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+            
+        
+        
+
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+            
+        
+        
+
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+            
+        
+        
+
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+            
+        
+        
+
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+    
+
+            
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+            
+        
+        
+
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+            
+        
+        
+
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+    
+
+            
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+            
+        
+        
+
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+    
+
+            
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+            
+        
+        
+
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+            
+        
+        
+
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+    
+
+            
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+            
+        
+        
+
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+    
+
+            
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+            
+        
+        
+
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+            
+        
+        
+
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+    
+
+            
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+            
+        
+        
+
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+    
+
+            
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+            
+        
+        
+
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+            
+        
+        
+
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+    
+
+            
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+    
+
+            
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+            
+        
+        
+
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+            
+        
+        
+
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+            
+        
+        
+
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+            
+        
+        
+
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+    
+
+            
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+            
+        
+        
+
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+            
+        
+        
+
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
         
 
         
+        
+        
+
+        
+    
+
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
+
+        
+    
+
+            
+        
+    
+
+            
+        
     
 
             
@@ -10476,6 +12776,10 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
 
             
         
+    
+
+            
+        
              
                 
     
@@ -10489,16 +12793,44 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
 
         
         
+            
+        
         
 
         
+             
+                
     
+    
+        
+            
+        
+         
+            
+        
 
+        
+        
             
+        
+        
+
         
+             
+                
     
+    
+        
+            
+        
+         
+            
+        
+
+        
+        
+        
 
-            
         
              
                 
@@ -10536,21 +12868,13 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
         
 
         
-             
-                
-    
     
-        
-            
-        
-         
-            
-        
 
-        
-        
+            
         
+    
 
+            
         
     
 
@@ -10567,10 +12891,14 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
             
         
 
+        
         
         
+
         
+    
 
+            
         
     
 
@@ -10589,12 +12917,10 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
 
         
         
+            
         
-
         
-    
 
-            
         
              
                 
@@ -10627,10 +12953,14 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
             
         
 
+        
         
         
+
         
+    
 
+            
         
     
 
@@ -10638,6 +12968,12 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
         
     
 
+            
+        
+            
+        
+            
+        
             
         
     
@@ -10691,7 +13027,9 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
             
         
 
+        
         
+            
         
         
 
@@ -10729,12 +13067,10 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
 
         
         
+            
         
-
         
-    
 
-            
         
              
                 
@@ -10747,14 +13083,10 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
             
         
 
-        
         
         
-
         
-    
 
-            
         
              
                 
@@ -10805,12 +13137,24 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
         
          
             
+        
+
+        
         
+        
 
         
+    
+
+            
         
+    
+
+            
         
+    
 
+            
         
     
 
@@ -10829,12 +13173,10 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
 
         
         
+            
         
-
         
-    
 
-            
         
              
                 
@@ -10867,18 +13209,12 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
             
         
 
-        
         
         
-
-        
-    
-
             
         
-    
+        
 
-            
         
              
                 
@@ -10927,14 +13263,10 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
             
         
 
-        
         
         
-
         
-    
 
-            
         
     
 
@@ -10991,10 +13323,18 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
             
         
 
+        
         
         
+
+        
+    
+
+            
         
+    
 
+            
         
     
 
@@ -11015,7 +13355,9 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
             
         
 
+        
         
+            
         
         
 
@@ -11053,12 +13395,10 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
 
         
         
+            
         
-
         
-    
 
-            
         
              
                 
@@ -11071,14 +13411,10 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
             
         
 
-        
         
         
-
         
-    
 
-            
         
              
                 
@@ -11131,14 +13467,10 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
             
         
 
-        
         
         
-
         
-    
 
-            
         
     
 
@@ -11155,10 +13487,14 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
             
         
 
+        
         
         
+
         
+    
 
+            
         
              
                 
@@ -11169,12 +13505,24 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
         
          
             
+        
+
+        
         
+        
 
         
+    
+
+            
         
+    
+
+            
         
+    
 
+            
         
     
 
@@ -11193,12 +13541,10 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
 
         
         
+            
         
-
         
-    
 
-            
         
              
                 
@@ -11231,26 +13577,28 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
             
         
 
+        
         
+            
         
         
 
         
+             
+                
     
-
+    
+        
             
         
-    
-
+         
             
         
-    
 
-            
         
-    
+        
+        
 
-            
         
              
                 
@@ -11265,10 +13613,12 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
 
         
         
-            
         
+
         
+    
 
+            
         
              
                 
@@ -11321,14 +13671,10 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
             
         
 
-        
         
         
-
         
-    
 
-            
         
     
 
@@ -11343,14 +13689,28 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
         
          
             
+        
+
+        
         
+        
 
         
+    
+
+            
         
+    
+
             
         
+    
+
+            
         
+    
 
+            
         
              
                 
@@ -11381,10 +13741,14 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
             
         
 
+        
         
         
+
         
+    
 
+            
         
              
                 
@@ -11397,18 +13761,12 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
             
         
 
-        
         
         
-
-        
-    
-
             
         
-    
+        
 
-            
         
              
                 
@@ -11435,12 +13793,24 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
         
          
             
+        
+
+        
         
+        
 
         
+    
+
+            
         
+    
+
+            
         
+    
 
+            
         
     
 
@@ -11461,7 +13831,9 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
             
         
 
+        
         
+            
         
         
 
@@ -11477,22 +13849,28 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
             
         
 
+        
         
+            
         
         
 
         
+             
+                
     
-
+    
+        
             
         
-    
-
+         
             
         
-    
 
-            
+        
+        
+        
+
         
     
 
@@ -11531,10 +13909,14 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
             
         
 
+        
         
         
+
         
+    
 
+            
         
     
 
@@ -11551,7 +13933,9 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
             
         
 
+        
         
+            
         
         
 
@@ -11591,7 +13975,9 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
             
         
 
+        
         
+            
         
         
 
@@ -11607,10 +13993,14 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
             
         
 
+        
         
         
+
         
+    
 
+            
         
     
 
@@ -11627,18 +14017,12 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
             
         
 
-        
         
-        
-
         
-    
-
             
         
-    
+        
 
-            
         
              
                 
@@ -11660,21 +14044,21 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
 
             
         
-             
-                
-    
     
-        
-            
-        
-         
+
             
         
+    
 
+            
         
+            
         
+            
         
+    
 
+            
         
     
 
@@ -11691,18 +14075,12 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
             
         
 
-        
         
         
-
-        
-    
-
             
         
-    
+        
 
-            
         
              
                 
@@ -12082,21 +14460,9 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
 
             
         
-             
-                
-    
     
-        
-            
-        
-         
-            
-        
-
-        
-        
-        
 
+            
         
              
                 
@@ -12111,12 +14477,10 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
 
         
         
+            
         
-
         
-    
 
-            
         
              
                 
@@ -12151,12 +14515,10 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
 
         
         
+            
         
-
         
-    
 
-            
         
              
                 
@@ -12191,20 +14553,10 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
 
         
         
-        
-
-        
-    
-
             
         
-    
-
-            
         
-    
 
-            
         
              
                 
@@ -12219,10 +14571,12 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
 
         
         
-            
         
+
         
+    
 
+            
         
              
                 
@@ -12237,8 +14591,12 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
 
         
         
+        
+
         
+    
 
+            
         
     
 
@@ -12295,10 +14653,12 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
 
         
         
-            
         
+
         
+    
 
+            
         
              
                 
@@ -12333,11 +14693,17 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
 
         
         
+        
+
         
+    
 
+            
         
     
 
+            
+        
             
         
     
@@ -12375,12 +14741,10 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
 
         
         
+            
         
-
         
-    
 
-            
         
              
                 
@@ -12446,6 +14810,10 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
 
             
         
+    
+
+            
+        
              
                 
     
@@ -12461,6 +14829,10 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
         
         
 
+        
+    
+
+            
         
     
 
@@ -12479,12 +14851,10 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
 
         
         
+            
         
-
         
-    
 
-            
         
              
                 
@@ -12501,10 +14871,6 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
         
         
 
-        
-    
-
-            
         
     
 
@@ -12523,8 +14889,6 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
 
         
         
-            
-        
         
 
         
@@ -12541,10 +14905,12 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
 
         
         
-            
         
+
         
+    
 
+            
         
              
                 
@@ -12623,8 +14989,12 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
 
         
         
+        
+
         
+    
 
+            
         
     
 
@@ -12641,22 +15011,12 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
             
         
 
-        
-        
         
-
         
-    
-
             
         
-    
-
-            
         
-    
 
-            
         
              
                 
@@ -12671,8 +15031,6 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
 
         
         
-            
-        
         
 
         
@@ -12689,8 +15047,12 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
 
         
         
+        
+
         
+    
 
+            
         
     
 
@@ -12709,8 +15071,12 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
 
         
         
+        
+
         
+    
 
+            
         
              
                 
@@ -12765,12 +15131,8 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
 
         
         
-        
-
         
-    
 
-            
         
              
                 
@@ -12785,12 +15147,8 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
 
         
         
-        
-
         
-    
 
-            
         
     
 
@@ -12809,8 +15167,12 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
 
         
         
+        
+
         
+    
 
+            
         
     
 
@@ -12829,12 +15191,8 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
 
         
         
-        
-
         
-    
 
-            
         
     
 
@@ -12852,8 +15210,6 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
         
 
         
-        
-            
         
         
 
@@ -12874,6 +15230,10 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
         
 
         
+    
+
+            
+        
              
                 
     
@@ -12953,6 +15313,10 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
         
         
 
+        
+    
+
+            
         
              
                 
@@ -12974,6 +15338,8 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
 
             
         
+            
+        
              
                 
     
@@ -13047,12 +15413,8 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
 
         
         
-        
-
         
-    
 
-            
         
     
 
@@ -13076,24 +15438,8 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
         
     
 
-            
-        
-             
-                
-    
-    
-        
-            
-        
-         
             
         
-
-        
-        
-        
-
-        
     
 
             
@@ -13131,12 +15477,8 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
 
         
         
-        
-
         
-    
 
-            
         
              
                 
@@ -13151,8 +15493,12 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
 
         
         
+        
+
         
+    
 
+            
         
     
 
@@ -13169,18 +15515,12 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
             
         
 
-        
-        
         
-
         
-    
-
             
         
-    
+        
 
-            
         
              
                 
@@ -13194,8 +15534,6 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
         
 
         
-        
-            
         
         
 
@@ -13240,6 +15578,10 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
 
             
         
+    
+
+            
+        
              
                 
     
@@ -13275,10 +15617,6 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
         
         
 
-        
-    
-
-            
         
     
 
@@ -13297,8 +15635,6 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
 
         
         
-            
-        
         
 
         
@@ -13313,11 +15649,23 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
             
         
 
+        
+        
         
+
         
+    
+
+            
         
+    
 
+            
+        
+            
         
+            
+        
     
 
             
@@ -13377,12 +15725,8 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
 
         
         
-        
-
         
-    
 
-            
         
     
 
@@ -13401,10 +15745,16 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
 
         
         
-            
+        
+
         
+    
+
+            
         
+    
 
+            
         
              
                 
@@ -13419,12 +15769,10 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
 
         
         
+            
         
-
         
-    
 
-            
         
              
                 
@@ -13459,8 +15807,12 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
 
         
         
+        
+
         
+    
 
+            
         
              
                 
@@ -13475,12 +15827,8 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
 
         
         
-        
-
         
-    
 
-            
         
     
 
@@ -13539,8 +15887,12 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
 
         
         
+        
+
         
+    
 
+            
         
     
 
@@ -13559,12 +15911,8 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
 
         
         
-        
-
         
-    
 
-            
         
     
 
@@ -18011,59 +20359,23 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
             
         
 
-        
-        
         
-
         
-    
-
-            
         
-    
 
-            
         
     
 
             
         
-             
-                
     
-    
-        
-            
-        
-         
-            
-        
 
-        
-        
             
-        
-        
-
         
-             
-                
     
-    
-        
-            
-        
-         
-            
-        
 
-        
-        
             
-        
         
-
-        
              
                 
     
@@ -18073,33 +20385,15 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
         
          
             
-        
-
         
-        
-        
 
-        
-             
-                
-    
-    
         
-            
         
-         
             
-        
-
-        
         
         
 
         
-    
-
-            
-        
              
                 
     
@@ -18113,16 +20407,10 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
 
         
         
-        
-
-        
-    
-
             
         
-    
+        
 
-            
         
              
                 
@@ -18371,15 +20659,35 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
             
         
 
+        
         
         
+
         
+    
 
+            
         
     
 
+            
+        
+             
+                
+    
+    
+        
+            
+        
+         
             
+        
+
+        
         
+        
+
+        
     
 
             
@@ -18899,86 +21207,24 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
         
          
             
-        
-
-        
-        
-        
-
         
-    
 
-            
         
-    
-
-            
         
-    
-
-            
         
-    
 
-            
         
     
 
             
         
-             
-                
-    
     
-        
-            
-        
-         
-            
-        
 
-        
-        
-            
-        
-        
-
-        
-             
-                
-    
-    
-        
             
-        
-         
-            
-        
-
-        
-        
-        
-
         
     
 
-            
-        
-             
-                
-    
-    
-        
             
-        
-         
-            
-        
-
-        
-        
-        
-
         
     
 
@@ -19700,15 +21946,35 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
             
         
          
+            
+        
+
+        
+        
             
         
+        
 
+        
+             
+                
+    
+    
         
+            
         
+         
             
+        
+
         
         
+        
+
+        
+    
 
+            
         
              
                 
@@ -20052,10 +22318,22 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
 
             
         
+             
+                
     
-
+    
+        
+            
+        
+         
             
+        
+
+        
         
+        
+
+        
     
 
             
@@ -20077,10 +22355,12 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
 
         
         
-            
         
+
         
+    
 
+            
         
              
                 
@@ -20093,10 +22373,18 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
             
         
 
+        
         
         
+
+        
+    
+
+            
         
+    
 
+            
         
     
 
@@ -20113,7 +22401,9 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
             
         
 
+        
         
+            
         
         
 
@@ -20149,14 +22439,10 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
             
         
 
-        
         
         
-
         
-    
 
-            
         
              
                 
@@ -20189,14 +22475,10 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
             
         
 
-        
         
         
-
         
-    
 
-            
         
     
 
@@ -20257,28 +22539,14 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
             
         
 
-        
         
-            
         
         
 
         
-             
-                
-    
     
-        
-            
-        
-         
-            
-        
 
-        
-        
-        
-
+            
         
              
                 
@@ -20317,12 +22585,10 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
 
         
         
+            
         
-
         
-    
 
-            
         
              
                 
@@ -20335,14 +22601,10 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
             
         
 
-        
         
         
-
         
-    
 
-            
         
              
                 
@@ -20355,10 +22617,14 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
             
         
 
+        
         
         
+
         
+    
 
+            
         
     
 
@@ -20375,10 +22641,14 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
             
         
 
+        
         
         
+
         
+    
 
+            
         
              
                 
@@ -20411,18 +22681,10 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
             
         
 
-        
         
-        
-
         
-    
-
-            
         
-    
 
-            
         
              
                 
@@ -20455,10 +22717,14 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
             
         
 
+        
         
         
+
         
+    
 
+            
         
     
 
@@ -20475,14 +22741,10 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
             
         
 
-        
         
         
-
         
-    
 
-            
         
              
                 
@@ -20515,10 +22777,14 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
             
         
 
+        
         
         
+
         
+    
 
+            
         
     
 
@@ -20535,14 +22801,10 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
             
         
 
-        
         
         
-
         
-    
 
-            
         
     
 
@@ -20561,10 +22823,12 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
 
         
         
-            
         
+
         
+    
 
+            
         
              
                 
@@ -20679,14 +22943,10 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
             
         
 
-        
         
         
-
         
-    
 
-            
         
     
 
@@ -20705,10 +22965,12 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
 
         
         
-            
         
+
         
+    
 
+            
         
              
                 
@@ -20785,10 +23047,16 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
 
         
         
-            
+        
+
         
+    
+
+            
         
+    
 
+            
         
              
                 
@@ -20803,12 +23071,10 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
 
         
         
+            
         
-
         
-    
 
-            
         
              
                 
@@ -20821,18 +23087,10 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
             
         
 
-        
         
-        
-
         
-    
-
-            
         
-    
 
-            
         
     
 
@@ -20851,10 +23109,16 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
 
         
         
-            
+        
+
         
+    
+
+            
         
+    
 
+            
         
              
                 
@@ -20869,12 +23133,10 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
 
         
         
+            
         
-
         
-    
 
-            
         
              
                 
@@ -20907,10 +23169,14 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
             
         
 
+        
         
         
+
         
+    
 
+            
         
              
                 
@@ -20923,18 +23189,10 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
             
         
 
-        
         
-        
-
         
-    
-
-            
         
-    
 
-            
         
              
                 
@@ -20947,10 +23205,14 @@ Upgrading CSI Driver, Authorization sidecar with Authorization module enabled <a
             
         
 
+        
         
         
+
         
+    
 
+            
         
     
 
