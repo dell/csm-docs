@@ -6,4 +6,4 @@ description: >
   Container Storage Modules (CSM) for Authorization v2.0 Helm deployment
 ---
 
-{{<include file="content/v1/getting-started/installation/helm/modules/authorizationv2-0.md" hideIds="1,3">}}
+{{<include file="content/v1/getting-started/installation/helm/modules/authorizationv2-0.md" hideIds="1,3,4">}}

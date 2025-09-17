@@ -8,7 +8,7 @@ Description: Code features for PowerMax Driver
 ## Multi Unisphere Support
 
 Starting with v1.7, the CSI PowerMax driver can communicate with multiple Unisphere for PowerMax servers to manage multiple PowerMax arrays.For more details on how
-to configure the driver and ReverseProxy, see the relevant section [here](../../../../v1/getting-started/installation/kubernetes/powermax/helm#sample-values-file)
+to configure the driver and ReverseProxy, see the relevant section [here](../../../../docs/getting-started/installation/kubernetes/powermax/helm#sample-values-file)
 
 ## Volume Snapshot Feature
 
@@ -419,7 +419,7 @@ After a successful installation of the driver, if a node Pod is running successf
 `csi-powermax.dellemc.com/\<array-id\>.iscsi`
 * If the worker node has NVMeTCP connectivity to the PowerMax array -
 `csi-powermax.dellemc.com/\<array-id\>.nvmetcp`
-* nfs labels are added by default -
+* If the worker node has NFS connectivity to the PowerMax array -
 `csi-powermax.dellemc.com/\<array-id\>.nfs`
 
 The values for all these keys are always set to the name of the provisioner which is usually `csi-powermax.dellemc.com`.
@@ -463,8 +463,8 @@ on any worker node with access to the PowerMax array `000000000001` irrespective
 > A set of sample storage class definitions to enable topology-aware volume provisioning has been provided in the `csi-powermax/samples/storageclass` folder
 
 **Note** : 
-  The NFS labels are automatically added by the driver, assuming that NFS dependencies are configured by default. These dependencies come with the default Linux OS package from the node and the array supports NFS. For other protocols (iSCSI, FC, NVMe/TCP), all necessary connectivity checks between the initiator and target are performed before labels are added.
-  This label should not impact any other functionality, even if NFS is not configured on the array or node.
+- From CSM 1.15 onwards, the CSI driver adds NFS labels to the CSI nodes only after verifying that NFS is enabled on the storage array. This ensures that node labeling accurately reflects the capabilities of the backend storage system. 
+- It is assumed that NFS dependencies are configured by default on the node, as these dependencies are included in the default Linux OS package. For other protocols (iSCSI, FC, NVMe/TCP), all necessary connectivity checks between the initiator and target are performed before labels are added.
 
 You can check what labels your nodes contain by running
 ```bash
@@ -655,7 +655,7 @@ This feature helps the scheduler to make more informed choices about where to st
 
 Without storage capacity tracking, pods get scheduled on a node satisfying the topology constraints. If the required capacity is not available, volume attachment to the pods fails, and pods remain in the ContainerCreating state. Storage capacity tracking eliminates unnecessary scheduling of pods when there is insufficient capacity.
 
-Storage capacity can be tracked by setting the attribute `storageCapacity.enabled` to true in values.yaml (set to true by default) during driver installation. To configure how often driver checks for changed capacity, set the `storageCapacity.pollInterval` attribute (set to 5m by default). In case of driver installed via operator, this interval can be configured in the sample file provided [here.](https://github.com/dell/csm-operator/tree/release/{{< version-v1 key="csm-operator_latest_version" >}}/samples/storage_csm_powermax_{{< version-v1 key="sample_sc_pmax" >}}.yaml) by editing the `--capacity-poll-interval` argument present in the provisioner sidecar.
+Storage capacity can be tracked by setting the attribute `storageCapacity.enabled` to true in values.yaml (set to true by default) during driver installation. To configure how often driver checks for changed capacity, set the `storageCapacity.pollInterval` attribute (set to 5m by default). In case of driver installed via operator, this interval can be configured in the sample file provided [here](https://github.com/dell/csm-operator/blob/main/samples/{{< version-v1 key="csm-operator_latest_samples_dir" >}}/storage_csm_powermax_{{< version-v1 key="Det_sample_operator_pmax" >}}.yaml) by editing the `--capacity-poll-interval` argument present in the provisioner sidecar.
 
 ## Metro support
 
@@ -670,7 +670,7 @@ The CSI Driver for PowerMax allows users to specify the maximum number of PowerM
 The user can set the volume limit for a node by creating a node label `max-powermax-volumes-per-node` and specifying the volume limit for that node.
 <br/> `kubectl label node <node_name> max-powermax-volumes-per-node=<volume_limit>`
 
-The user can also set the volume limit for all the nodes in the cluster by specifying the same to `maxPowerMaxVolumesPerNode` attribute in values.yaml. In case of driver installed via operator, this attribute can be modified in the sample file provided [here](https://github.com/dell/csm-operator/tree/release/{{< version-v1 key="csm-operator_latest_version" >}}/samples/storage_csm_powermax_{{< version-v1 key="sample_sc_pmax" >}}.yaml) by editing the `X_CSI_MAX_VOLUMES_PER_NODE` parameter.
+The user can also set the volume limit for all the nodes in the cluster by specifying the same to `maxPowerMaxVolumesPerNode` attribute in values.yaml. In case of driver installed via operator, this attribute can be modified in the sample file provided [here](https://github.com/dell/csm-operator/blob/main/samples/{{< version-v1 key="csm-operator_latest_samples_dir" >}}/storage_csm_powermax_{{< version-v1 key="Det_sample_operator_pmax" >}}.yaml) by editing the `X_CSI_MAX_VOLUMES_PER_NODE` parameter.
 
 This feature is also supported for limiting the volume provisioning on Kubernetes clusters running on vSphere (VMware hypervisor) via RDM mechanism. User can set `vSphere.enabled` to true and also set volume limits to positive values less than or equal 60 via labels or in Values.yaml file.
 

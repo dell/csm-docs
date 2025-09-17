@@ -21,7 +21,7 @@ The driver on receiving the metro-related parameters in the `CreateVolume` call 
 The creation of volumes in metro mode doesn't involve the replication sidecar or the common replication controller, nor does it cause the creation of any replication related custom resources. It just needs the `csi-powerstore` driver that implements the `CreateVolume` gRPC endpoint with metro capability for it to work.
 
 ### Host Registration for Powerstore Metro
-CSM PowerStore supports registering worker nodes as new hosts using `Metro Connectivity`. To enable this, you need to set the `metroTopology` to `Uniform` in the array's secret configuration.
+CSM PowerStore supports registering worker nodes as new hosts using `Metro Connectivity`. To enable this, you need to set the `metroTopology` to `Uniform` in the array's secret configuration. 
 
 To manage your setup:
 
@@ -47,7 +47,7 @@ arrays:
     username: "user"
     password: "password"
     skipCertificateValidation: true
-    blockProtocol: "FC"
+    blockProtocol: "FC"    
     metroTopology: Uniform
     labels:
       topology.kubernetes.io/zone: zone2

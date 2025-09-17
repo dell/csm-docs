@@ -7,6 +7,7 @@ description: >
 {{% pageinfo color="primary" %}}
 {{< message text="1" >}}
 {{% /pageinfo %}}
+
 ## Configuring PowerMax CSI Driver with CSM for Authorization
 
 Given a setup where Kubernetes, a storage system, and the CSM for Authorization Proxy Server are deployed, follow these steps to configure the CSI Drivers to work with the Authorization sidecar:
@@ -68,14 +69,13 @@ Given a setup where Kubernetes, a storage system, and the CSM for Authorization 
 
     Leave `username` and `password` with the default values as they will be ignored.
 
-5. **Operator Only**: Prepare the reverse proxy configmap using sample [here](https://github.com/dell/csm-operator/tree/{{< version-v3 key="csm-operator_latest_version" >}}/samples/csireverseproxy/config.yaml). Fill in the appropriate values for driver configuration.
+5. **Operator Only**: Prepare the reverse proxy configmap using sample [here](https://github.com/dell/csm-operator/tree/release/{{< version-v3 key="csm-operator_latest_version" >}}/samples/csireverseproxy/config.yaml). Fill in the appropriate values for driver configuration.
    Example: config.yaml
    ```yaml
-    mode: StandAlone # Mode for the reverseproxy, should not be changed
     port: 2222
     logLevel: debug
     logFormat: text
-    standAloneConfig:
+    config:
     storageArrays:
         - storageArrayId: "000000000001" # arrayID
         primaryURL: "https://localhost:9400" # primary unisphere for arrayID
@@ -88,8 +88,7 @@ Given a setup where Kubernetes, a storage system, and the CSM for Authorization 
    ```
 
 6. Enable CSM Authorization in the driver installation applicable to your installation method.
-  Alternatively, you can use the minimal sample files provided
-  [here](https://github.com/dell/csm-operator/tree/{{< version-v3 key="csm-operator_latest_version" >}}/samples/minimal-samples) and install the module using default values
+  Alternatively, you can use the minimal sample files provided in respective CSM versions folder under samples [here](https://github.com/dell/csm-operator/tree/release/{{< version-v3 key="csm-operator_latest_version" >}}/samples/minimal-samples) and install the module using default value.
 
     **Operator**
 
@@ -105,7 +104,7 @@ Given a setup where Kubernetes, a storage system, and the CSM for Authorization 
 
     - Update the `SKIP_CERTIFICATE_VALIDATION` environment value to `true` or `false` depending on if you want to disable or enable certificate validation of the CSM Authorization Proxy Server.
 
-    - Do not update the `configVersion`. You will notice in the example that it is set to v1.12.0, this ensures that Operator checks on version support do not prevent deployment of the v2.0.0-alpha authorization tech preview.
+    - Do not update the `configVersion`. You will notice in the example that it is set to v1.13.0, this ensures that Operator checks on version support do not prevent deployment of the v2.0.0-alpha authorization tech preview.
 
     Example:
 
@@ -116,12 +115,12 @@ Given a setup where Kubernetes, a storage system, and the CSM for Authorization 
         # enabled: Always set to true
         enabled: true
         forceRemoveModule: true
-        configVersion: v2.11.0
+        configVersion: v2.12.0
         components:
         - name: csipowermax-reverseproxy
         # image: Define the container images used for the reverse proxy
         # Default value: None
-          image: quay.io/dell/container-storage-modules/csipowermax-reverseproxy:v2.11.0
+          image: quay.io/dell/container-storage-modules/csipowermax-reverseproxy:v2.12.0
           envs:
           # "tlsSecret" defines the TLS secret that is created with certificate
           # and its associated key
@@ -143,7 +142,7 @@ Given a setup where Kubernetes, a storage system, and the CSM for Authorization 
       - name: authorization
         # enable: Enable/Disable csm-authorization
         enabled: true
-        configVersion: v1.12.0
+        configVersion: v1.13.0
         components:
         - name: karavi-authorization-proxy
           image: quay.io/dell/container-storage-modules/csm-authorization-sidecar:v2.0.0

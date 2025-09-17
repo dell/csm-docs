@@ -36,7 +36,7 @@ linkTitle: "Resiliency"
     ```
     </div>
 
-    **Detailed Configuration:** Use the [sample file](https://github.com/dell/csm-operator/tree/release/{{< version-v1 key="csm-operator_latest_version" >}}/samples/storage_csm_{{Var}}_{{< version-v1 key="sample_sc_pmax" >}}.yaml) for detailed settings.
+    **Detailed Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_{{Var}}_{{< version-v1 key="sample_sc_pmax" >}}.yaml) for detailed settings.
 
 
     <br>

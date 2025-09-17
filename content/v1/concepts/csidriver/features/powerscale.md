@@ -17,7 +17,7 @@ You can connect a single CSI-PowerScale driver with multiple PowerScale clusters
 
 ## Consuming existing volumes with static provisioning
 
-You can use existing volumes from the PowerScale array as Persistent Volumes in your Kubernetes, perform the following steps:
+To use existing volumes from the PowerScale array as Persistent Volumes in your Kubernetes, perform the following steps:
 
 1. Open your volume in One FS, and take a note of volume-id.
 2. Create PersistentVolume and use this volume-id as a volumeHandle in the manifest. Modify other parameters according to your needs.
@@ -66,7 +66,7 @@ spec:
     requests:
       storage: 5Gi
   volumeName: isilonstaticpv
-  storageClassName: isilon           
+  storageClassName: isilon
 ```
 
 4. Then use this PVC as a volume in a pod.
@@ -108,7 +108,7 @@ spec:
   resources:
     requests:
       storage: 5Gi
-  storageClassName: isilon           
+  storageClassName: isilon
 ```
 
 ## Volume Snapshot Feature
@@ -150,7 +150,7 @@ parameters:
 
 The following is a sample manifest for creating a Volume Snapshot using the **v1** snapshot APIs; The following snippet assumes that the persistent volume claim name is testvolume.
 
-```yaml  
+```yaml
 apiVersion: snapshot.storage.k8s.io/v1
 kind: VolumeSnapshot
 metadata:
@@ -289,7 +289,7 @@ spec:
 
 ## Controller HA
 
-CSI PowerScale driver version 1.4.0 and later supports running multiple replicas of the controller pod. Leader election is only applicable for all sidecar containers and driver container will be running in all controller pods. In case of a failure, one of the standby pods becomes active and takes the position of leader. This is achieved by using native leader election mechanisms utilizing `kubernetes leases`.
+CSI PowerScale driver version 1.4.0 and later supports running multiple replicas of the controller pod. Leader election is only applicable for all sidecar containers and driver containers that are running in all controller pods. In case of a failure, one of the standby pods becomes active and takes the position of leader. This is achieved by using native leader election mechanisms utilizing `kubernetes leases`.
 
 Additionally by leveraging `pod anti-affinity`, no two-controller pods are ever scheduled on the same node.
 
@@ -301,13 +301,14 @@ controllerCount: 2
 
 >**NOTE:** The default value for controllerCount is 2. It is recommended to not change this unless really required. Also, if the controller count is greater than the number of available nodes (where the pods can be scheduled), some controller pods will remain in a Pending state.
 
-If you are using the Container Storage Modules Operator, the value to adjust is: 
+If you are using the Container Storage Modules Operator, the value to adjust is:
 
 ```yaml
-replicas: 2  
+replicas: 2
 ```
 
 For more details about configuring Controller HA using the Container Storage Modules Operator, see the [Container Storage Modules Operator documentation](../../../getting-started/installation/operator/#custom-resource-definitions).
+
 ## CSI Ephemeral Inline Volume
 
 The CSI PowerScale driver version 1.4.0 and later supports CSI ephemeral inline volumes.
@@ -361,7 +362,9 @@ We support CustomTopology which enables users to apply labels for nodes - "csi-i
 
 When “enableCustomTopology” is set to “true”, the CSI driver fetches custom labels “csi-isilon.dellemc.com/XX.XX.XX.XX=csi-isilon.dellemc.com” applied on worker nodes, and uses them to initialize node pod with custom PowerScale FQDN/IP.
 
-**Note:** Only a single cluster can be configured as part of secret.yaml for custom topology.
+**Note:**
+- The Custom Topology feature is not supported when Authorization is enabled.
+- Only a single cluster can be configured as part of secret.yaml for custom topology.
 
 ### Topology Usage
 
@@ -373,12 +376,12 @@ To utilize the Topology feature, create a custom `StorageClass` with `volumeBind
 
 ```yaml
 # This is a sample manifest for utilizing the topology feature and mount options.
-# PVCs created using this storage class will be scheduled 
+# PVCs created using this storage class will be scheduled
 # only on the nodes with access to Isilon
 
 # Change all instances of <ISILON_IP> to the IP of the PowerScale OneFS API server
 
-# Provide mount options through "mountOptions" attribute 
+# Provide mount options through "mountOptions" attribute
 # to create PVCs with mount options.
 
 apiVersion: storage.k8s.io/v1
@@ -393,9 +396,9 @@ parameters:
   IsiPath: "/ifs/data/csi"
   # AccessZone groupnet service IP. Update AzServiceIP in values.yaml if different than isiIP.
   #AzServiceIP : 192.168.2.1
-  # When a PVC is being created, it takes the storage class' value of "storageclass.rootClientEnabled", 
-  # which  determines, when a node mounts the PVC, in NodeStageVolume, whether to add the k8s node to 
-  # the "Root clients" field (when true) or "Clients" field (when false) of the NFS export 
+  # When a PVC is being created, it takes the storage class' value of "storageclass.rootClientEnabled",
+  # which  determines, when a node mounts the PVC, in NodeStageVolume, whether to add the k8s node to
+  # the "Root clients" field (when true) or "Clients" field (when false) of the NFS export
   RootClientEnabled: "false"
   # Name of PowerScale cluster where pv will be provisioned
   # This name should match with name of one of the cluster configs in isilon-creds secret
@@ -434,7 +437,7 @@ communication (same IP/fqdn as k8s node) by default.
 For a cluster with multiple network interfaces and if a user wants to segregate k8s traffic from NFS traffic; you can use the `allowedNetworks` option.
 `allowedNetworks` takes CIDR addresses as a parameter to match the IPs to be picked up by the driver to allow and route NFS traffic.
 
->**NOTE:** <br>`allowedNetworks` configures one NFS client IP address; the first network interface that satisfies one of the `allowedNetworks`
+>**NOTE:** <br>`allowedNetworks` configures one NFS client IP address; the first network interface that satisfies one of the `allowedNetworks`.
 
 ## Multi-Access Zone Support for Multi-Tenant Deployments
 
@@ -468,6 +471,8 @@ parameters:
   AZNetwork: 172.16.0.0/24
 ```
 
+>**NOTE:** Multi-Access Zone Support for Multi-Tenant Deployments does not support CSM Authorization.
+
 ## Volume Limit
 
 The CSI Driver for PowerScale allows users to specify the maximum number of PowerScale volumes that can be used in a node.
@@ -486,9 +491,9 @@ CSI for PowerScale driver version 2.8.0 and above supports Storage Capacity Trac
 This feature helps the scheduler to make more informed choices about where to schedule pods which depends on unbound volumes with late binding (aka "wait for first consumer"). Pods will be scheduled on a node (satisfying the topology constraints) only if the requested capacity is available on the storage array.
 If such a node is not available, the pods stay in Pending state. This means pods are not scheduled.
 
-Without storage capacity tracking, pods get scheduled on a node satisfying the topology constraints. If the required capacity is not available, volume attachment to the pods fails, and pods remain in ContainerCreating state. Storage capacity tracking eliminates unnecessary scheduling of pods when there is insufficient capacity. 
+Without storage capacity tracking, pods get scheduled on a node satisfying the topology constraints. If the required capacity is not available, volume attachment to the pods fails, and pods remain in ContainerCreating state. Storage capacity tracking eliminates unnecessary scheduling of pods when there is insufficient capacity.
 
-The attribute `storageCapacity.enabled` in `values.yaml` can be used to enable/disable the feature during driver installation using helm. This is by default set to true. To configure how often driver checks for changed capacity set `storageCapacity.pollInterval` attribute. In case of driver installed via operator, this interval can be configured in the sample file provided [here.](https://github.com/dell/csm-operator/tree/release/{{< version-v1 key="csm-operator_latest_version" >}}/samples/storage_csm_powerscale_{{< version-v1 key="sample_sc_pscale" >}}.yaml) by editing the `--capacity-poll-interval` argument present in the provisioner sidecar.
+The attribute `storageCapacity.enabled` in `values.yaml` can be used to enable/disable the feature during driver installation using helm. This is by default set to true. To configure how often driver checks for changed capacity set `storageCapacity.pollInterval` attribute. In case of driver installed via operator, this interval can be configured in the sample file provided [here](https://github.com/dell/csm-operator/blob/main/samples/{{< version-v1 key="csm-operator_latest_samples_dir" >}}/storage_csm_powerscale_{{< version-v1 key="Det_sample_operator_pscale" >}}.yaml) by editing the `--capacity-poll-interval` argument present in the provisioner sidecar.
 
 ## Node selector in helm template
 
@@ -552,12 +557,12 @@ parameters:
   #Optional: true
   #Default value: Limit not Set
   #AdvisoryLimit: "50"
-  
+
   #Parameter to set soft limit to quota
   #Optional: true
   #Default value: Limit not Set
   #SoftLimit: "80"
-  
+
   #Parameter which must be mentioned along with Soft Limit
   #Soft Limit can be exceeded until the grace period
   #Optional: true
@@ -642,7 +647,7 @@ To update the log level dynamically user has to edit the ConfigMap `isilon-confi
 
 ```bash
 kubectl edit configmap -n isilon isilon-config-params
-```  
+```
 
 >Note: Prior to CSI Driver for PowerScale version 2.0.0, the log level was allowed to be updated dynamically through `logLevel` attribute in the secret object.
 
@@ -673,7 +678,7 @@ The permissions for volume directory can now be configured in 3 ways:
 
 The permissions present in values.yaml are the default for all cluster config.
 
-If the volume permission is not present in storage class then secrets are considered and if it is not present even in secrets then values.yaml is considered.
+If the volume permission is not present in storage class then secrets are considered. If it is not present even in secrets then values.yaml is considered.
 
 >**Note:** <br>For volume creation from source (volume from snapshot/volume from volume) permissions are inherited from source. <br><br>Create myvalues.yaml/my-isilon-settings.yaml and storage class accordingly.
 
@@ -694,11 +699,12 @@ For example, if a volume were to be deleted from the array, or unmounted outside
 2. For controller plugin, by setting attribute `controller.healthMonitor.enabled` to `true` in `values.yaml` file. Also health monitoring interval can be changed through attribute `controller.healthMonitor.interval` in `values.yaml` file.
 3. For node plugin, by setting attribute `node.healthMonitor.enabled` to `true` in `values.yaml` file.
 
-## Single Pod Access Mode for PersistentVolumes- ReadWriteOncePod 
+## Single Pod Access Mode for PersistentVolumes- ReadWriteOncePod
 
 Use `ReadWriteOncePod(RWOP)` access mode if you want to ensure that only one pod across the whole cluster can read that PVC or write to it. This is supported for CSI Driver for PowerScale 2.1.0+ and Kubernetes version 1.22+.
 
 ### Creating a PersistentVolumeClaim
+
 ```yaml
 kind: PersistentVolumeClaim
 apiVersion: v1

@@ -53,3 +53,15 @@ The following storage capacity metrics are available from the OpenTelemetry coll
 | powerstore_volume_logical_used_megabytes | Logical used storage for a volume |
 | powerstore_filesystem_logical_provisioned_megabytes | Logical provisioned storage for a filesystem |
 | powerstore_filesystem_logical_used_megabytes | Logical used storage for a filesystem |
+
+## Karavi Topology Metrics
+
+Topology provides Kubernetes administrators with the topology data related to containerized storage that is provisioned by a CSI (Container Storage Interface) Driver for Dell storage products.
+
+To disable these metrics, set the ```topologyMetricsEnabled``` field to false in helm/values.yaml.
+
+The following topology metrics are available from the OpenTelemetry collector endpoint. Please see the [Container Storage Modules for Observability](../) for more information on deploying and configuring the OpenTelemetry collector.
+
+| Metric | Description |
+| - | - |
+| karavi_topology_metrics | Collects topology data. More details [here](../_index.md#topology-data )  |
