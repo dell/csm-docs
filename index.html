@@ -21,13 +21,13 @@
 
   <meta itemprop="name" content="Dell Technologies">
   <meta itemprop="description" content="Container Storage Modules Documentation Getting Started Releases Notifications">
-  <meta itemprop="dateModified" content="2025-05-01T11:17:44-04:00">
-  <meta itemprop="wordCount" content="245">
+  <meta itemprop="dateModified" content="2025-07-25T03:44:32+05:30">
+  <meta itemprop="wordCount" content="221">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Dell Technologies">
   <meta name="twitter:description" content="Container Storage Modules Documentation Getting Started Releases Notifications">
-<link rel="preload" href="/csm-docs/scss/main.min.f92a0a6117d1afe6ee159a45ce4364a8613c79ec6601d7023c09be115507944b.css" as="style" integrity="sha256-&#43;SoKYRfRr&#43;buFZpFzkNkqGE8eexmAdcCPAm&#43;EVUHlEs=" crossorigin="anonymous">
-<link href="/csm-docs/scss/main.min.f92a0a6117d1afe6ee159a45ce4364a8613c79ec6601d7023c09be115507944b.css" rel="stylesheet" integrity="sha256-&#43;SoKYRfRr&#43;buFZpFzkNkqGE8eexmAdcCPAm&#43;EVUHlEs=" crossorigin="anonymous">
+<link rel="preload" href="/csm-docs/scss/main.min.227c85af7ab92878f8483de5241e5ddc55b1b9bb4ebcb3ec9ca6409b9da7751e.css" as="style" integrity="sha256-InyFr3q5KHj4SD3lJB5d3FWxubtOvLPsnKZAm52ndR4=" crossorigin="anonymous">
+<link href="/csm-docs/scss/main.min.227c85af7ab92878f8483de5241e5ddc55b1b9bb4ebcb3ec9ca6409b9da7751e.css" rel="stylesheet" integrity="sha256-InyFr3q5KHj4SD3lJB5d3FWxubtOvLPsnKZAm52ndR4=" crossorigin="anonymous">
 <script
   src="https://code.jquery.com/jquery-3.7.1.min.js"
   integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
@@ -73,13 +73,13 @@
       
     
     
-    1.14.2
+    1.15.0
   </a>
   <ul class="dropdown-menu">
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/" >1.14.2</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1/" >1.13.2</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v2/" >1.12.0</a></li>
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v3/" >1.11.1</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/" >1.15.0</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1/" >1.14.2</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v2/" >1.13.2</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v3/" >1.12.0</a></li>
     </ul> 
 
 </div>
@@ -347,12 +347,7 @@ Container Storage Modules Volume Group Snapshotter is no longer supported.
             <li> 
 Docker Hub images are discontinued. All deployments will be using images from <a href="https://quay.io/organization/dell">quay.io</a>.
 
-</li> 
-            <br>
-            <li>
-As of Container Storage Modules v1.15, Authorization v1.x will not be supported. Please migrate to Authorization v2.0 using the following <a href="/csm-docs/docs/concepts/authorization/migration-guide-from-v1-to-v2/">guide</a>.
-
-</li>            
+</li>
          </ol>   
         </div -->
         <div>
@@ -362,9 +357,9 @@ As of Container Storage Modules v1.15, Authorization v1.x will not be supported.
           </p> 
           <h3 class="section-head mb-4">What is Container Storage Modules?</h3>
           <p class="lead">
-            Container Storage Modules enhances the Container Storage Interface (CSI) to provide advanced enterprise storage features for Kubernetes clusters. It includes software modules that extend beyond CSI, offering enterprise storage capabilities to Kubernetes users. Dell’s primary storage options (PowerStore, PowerScale, PowerFlex, PowerMax, and Unity XT) can use these modules to simplify management. This allows developers to easily access and automate tasks like Authorization, Replication, Snapshotting, Resiliency, Observability, and Application Mobility.
+            Container Storage Modules enhances the Container Storage Interface (CSI) to provide advanced enterprise storage features for Kubernetes clusters. It includes software modules that extend beyond CSI, offering enterprise storage capabilities to Kubernetes users. Dell’s primary storage options (PowerStore, PowerScale, PowerFlex, PowerMax, and Unity XT) can use these modules to simplify management. This allows developers to easily access and automate tasks like Authorization, Replication, Snapshotting, Resiliency and Observability.
           </p>           
-            <img src="./images/csm_hexagon.png" alt="CSM Hex Diagram" class="img-fluid my-4" />    
+            <img src="./images/csm_hexagon_new.png" alt="CSM Hex Diagram" class="img-fluid my-4" />    
              <div class = "row justify-content-center"   > 
                  <div class="col-12 justify-content-center">  
                   <div class="card-container container mt-5 mb-5">
@@ -372,7 +367,7 @@ As of Container Storage Modules v1.15, Authorization v1.x will not be supported.
                       <div class="col">
                         <a href="docs/concepts/authorization/" class="card h-100 text-decoration-none custom-card">
                           <div class="card">
-                            <img src="./images/landing-images/authorization.png" class="card-img-top custom-card-img" alt="App mobility">
+                            <img src="./images/landing-images/authorization.png" class="card-img-top custom-card-img" alt="Authorization">
                             <div class="card-body text-center">
                               
                               <p class="card-text custom-card-text"><span>Authorization</span> provides storage and Kubernetes administrators the ability to apply RBAC for Dell CSI Drivers. It does this by deploying a proxy between the CSI driver and the storage system to enforce role-based access and usage rules.<br></p>
@@ -384,7 +379,7 @@ As of Container Storage Modules v1.15, Authorization v1.x will not be supported.
                       <div class="col">
                         <a href="docs/concepts/replication/" class="card h-100 text-decoration-none custom-card">
                           <div class="card">
-                            <img src="./images/landing-images/replication.png" class="card-img-top custom-card-img" alt="App mobility">
+                            <img src="./images/landing-images/replication.png" class="card-img-top custom-card-img" alt="Replication">
                             <div class="card-body text-center">
                              
                               <p class="card-text custom-card-text"><span>Replication</span> project aims to bring Replication & Disaster Recovery capabilities of Dell Storage Arrays to Kubernetes clusters. It helps you replicate groups of volumes and can provide you a way to restart applications in case of both planned and unplanned migration.</p>
@@ -427,19 +422,6 @@ As of Container Storage Modules v1.15, Authorization v1.x will not be supported.
                           </a>
                         </div>
                         
-
-                        <div class="col">
-                          <a href="docs/concepts/applicationmobility/" class="card h-100 text-decoration-none custom-card">
-                            <div class="card">
-                              <img src="./images/landing-images/appmobility.png" class="card-img-top custom-card-img" alt="Another Card">
-                              <div class="card-body text-center">
-                               
-                                <p class="card-text custom-card-text"><span>Application Mobility</span> provide Kubernetes administrators the ability to clone their stateful application workloads and application data to other clusters in the cloud.</p>
-                              </div>
-                            </div>
-                          </a>
-                        </div> 
-  
                         <!-- Add more cards as needed -->
                       </div>
                   </div>
