@@ -108,10 +108,10 @@ CRDs should be configured during replication prepare stage with repctl as descri
 
    **Note**: The 'clusterName' serves as a logical, unique identifier for the array that should remain unchanged once it is included in the volume handle. Altering this identifier is not advisable, as it would result in the failure of all operations associated with the volume that was created earlier.
 
-4. Download `wget -O my-isilon-settings.yaml https://raw.githubusercontent.com/dell/helm-charts/csi-isilon-2.14.0/charts/csi-isilon/values.yaml` into `cd ../dell-csi-helm-installer` to customize settings for installation.
+4. Download `wget -O my-isilon-settings.yaml https://raw.githubusercontent.com/dell/helm-charts/csi-isilon-2.15.0/charts/csi-isilon/values.yaml` into `cd ../dell-csi-helm-installer` to customize settings for installation.
 5. Edit *my-isilon-settings.yaml* to set the following parameters for your installation:
    The following table lists the primary configurable parameters of the PowerScale driver Helm chart and their default values. More detailed information can be
-   found in the  [`values.yaml`](https://github.com/dell/helm-charts/blob/csi-isilon-2.14.0/charts/csi-isilon/values.yaml) file in this repository.
+   found in the  [`values.yaml`](https://github.com/dell/helm-charts/blob/csi-isilon-2.15.0/charts/csi-isilon/values.yaml) file in this repository.
 
   <ul>
    {{< collapse id="2" title="Parameters">}}
@@ -229,7 +229,7 @@ Create isilon-creds secret using the following command:
 
 8. Install the driver using `csi-install.sh` bash script and default yaml by running
     ```bash
-    cd dell-csi-helm-installer && wget -O my-isilon-settings.yaml https://raw.githubusercontent.com/dell/helm-charts/csi-isilon-2.13.0/charts/csi-isilon/values.yaml &&
+    cd dell-csi-helm-installer && wget -O my-isilon-settings.yaml https://raw.githubusercontent.com/dell/helm-charts/csi-isilon-{{< version-v1 key="driver_latestVersion" >}}/charts/csi-isilon/values.yaml &&
     ./csi-install.sh --namespace isilon --values  my-isilon-settings.yaml --helm-charts-version <version>
     ```
 
@@ -373,7 +373,6 @@ output: mount.nfs: access denied by server while mounting XX.XX.XX.XX:/ifs/data/
 
 {{< accordion id="Three" title="Modules" >}}
 {{< cardcontainer >}}
-  {{< customcard link1="./csm-modules/authorizationv1-x" image="1" title="Authorization v1.x" >}}
   {{< customcard link1="./csm-modules/authorizationv2-0" image="1" title="Authorization v2.0" >}}
   {{< customcard  link1="./csm-modules/observability" image="1" title="Observability"  >}}
   {{< customcard  link1="./csm-modules/replication" image="1" title="Replication"  >}}

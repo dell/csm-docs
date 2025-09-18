@@ -194,10 +194,10 @@ dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      
  
     <br>
 
-    Edit the file, then run the command to create the `isilon-config`.
+    Edit the file, then run the command to create the `isilon-creds`.
 
     ```bash
-    oc create secret generic isilon-config --from-file=config=config.yaml -n isilon --dry-run=client -oyaml > secret-isilon-config.yaml
+    oc create secret generic isilon-creds --from-file=config=config.yaml -n isilon --dry-run=client -oyaml > secret-isilon-config.yaml
     ```
     
     Use this command to **create** the config:
@@ -270,7 +270,7 @@ dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      
       driver:
         csiDriverType: "isilon"
         configVersion: {{< version-v1 key="PScale_latestVersion" >}}
-        authSecret: isilon-config
+        authSecret: isilon-creds
         common:
           envs:
             - name: X_CSI_ISI_AUTH_TYPE
@@ -279,7 +279,7 @@ dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      
      ``` 
     </div> 
 
-    **Detailed Configuration:** Use the [sample file](https://github.com/dell/csm-operator/tree/release/{{< version-v1 key="csm-operator_latest_version" >}}/samples/storage_csm_powerscale_{{< version-v1 key="sample_sc_pscale" >}}.yaml) for detailed settings or use [Wizard](./installationwizard#generate-manifest-file) to generate the sample file..
+    **Detailed Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powerscale_{{< version-v1 key="sample_sc_pscale" >}}.yaml) for detailed settings or use [Wizard](./installationwizard#generate-manifest-file) to generate the sample file..
 
     <br>
 
@@ -307,12 +307,12 @@ dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      
    |<div style="text-align: left"> X_CSI_MODE   |<div style="text-align: left"> Driver starting mode  | No | controller |
    |<div style="text-align: left"> X_CSI_ISI_ACCESS_ZONE |<div style="text-align: left"> Name of the access zone a volume can be created in | No | System |
    |<div style="text-align: left"> X_CSI_ISI_QUOTA_ENABLED |<div style="text-align: left"> To enable SmartQuotas | Yes | |
-   |<div style="text-align: left"> X_CSI_VOL_PREFIX |<div style="text-align: left"> The X_CSI_VOL_PREFIX will be used by provisioner sidecar as a prefix for all the volumes created | Yes | csivol |
    |<div style="text-align: left"> ***Node parameters*** |
    |<div style="text-align: left"> X_CSI_MAX_VOLUMES_PER_NODE |<div style="text-align: left"> Specify the default value for the maximum number of volumes that the controller can publish to the node | Yes | 0 |
    |<div style="text-align: left"> X_CSI_MODE   |<div style="text-align: left"> Driver starting mode  | No | node |
    |<div style="text-align: left"> ***Sidecar parameters*** |
-   |<div style="text-align: left"> monitor-interval |<div style="text-align: left"> The monitor-interval will be used by external-health-monitor as an interval for health checks  | Yes | 60s |
+   |<div style="text-align: left"> volume-name-prefix |<div style="text-align: left"> The volume-name-prefix is used by provisioner sidecar as a prefix for all the volumes created  | Yes | csivol |
+   |<div style="text-align: left"> monitor-interval |<div style="text-align: left"> The monitor-interval is used by external-health-monitor as an interval for health checks  | Yes | 60s |
 {{< /collapse >}}
 </ul>
 
@@ -405,7 +405,7 @@ isilon      3h             isilon          {{< version-v1 key="PScale_latestVers
     Verify Volume Snapshot Class is created: 
 
     ```terminal
-    oc get volumesnapshot
+    oc get volumesnapshotclass
     
     NAME                      DRIVER                              DELETIONPOLICY   AGE
     vsclass-isilon            csi-isilon.dellemc.com              Delete           3h9m
@@ -671,7 +671,6 @@ NAME                    STATUS   VOLUME             CAPACITY   ACCESS MODES   ST
 <br>   
 
 {{< cardcontainer >}}
-    {{< customcard link1="./csm-modules/authorizationv1-x"  image="1" title="Authorization v1.x" >}}
 
     {{< customcard link1="./csm-modules/authorizationv2-0"   image="1" title="Authorization v2.0"  >}}
 

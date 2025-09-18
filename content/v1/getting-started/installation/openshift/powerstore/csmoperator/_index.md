@@ -159,7 +159,7 @@ dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      
     ```
     </div>
 
-    **Detailed Configuration:** Use the [sample file](https://github.com/dell/csm-operator/tree/release/{{< version-v1 key="csm-operator_latest_version" >}}/samples/storage_csm_powerstore_{{< version-v1 key="sample_sc_pstore" >}}.yaml) for detailed settings or use [Wizard](./installationwizard#generate-manifest-file) to generate the sample file.
+    **Detailed Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/main/samples/{{< version-v1 key="csm-operator_latest_samples_dir" >}}/storage_csm_powerstore_{{< version-v1 key="sample_sc_pstore" >}}.yaml) for detailed settings or use [Wizard](./installationwizard#generate-manifest-file) to generate the sample file.
 
     <br>
     To set the parameters in CR. The table shows the main settings of the PowerStore driver and their defaults.
@@ -265,7 +265,7 @@ Check the status of the CR to verify if the driver installation is in the `Succe
     apiVersion: snapshot.storage.k8s.io/v1
     kind: VolumeSnapshotClass
     metadata:
-    name: powerstore-snapshot
+      name: powerstore-snapshot
     driver: "csi-powerstore.dellemc.com"
     deletionPolicy: Delete
     EOF
@@ -564,7 +564,13 @@ NAME                    STATUS   VOLUME             CAPACITY   ACCESS MODES   ST
 
 {{< cardcontainer >}}
 
+    {{< customcard link1="./csm-modules/authorizationv2-0"   image="1" title="Authorization v2.0"  >}}
+
     {{< customcard link1="./csm-modules/resiliency"   image="1" title="Resiliency"  >}}
+
+    {{< customcard link1="./csm-modules/replication"   image="1" title="Replication"  >}}
+
+    {{< customcard link1="./csm-modules/observability"   image="1" title="Observability"  >}}
 
 {{< /cardcontainer >}}
 {{< /accordion >}}

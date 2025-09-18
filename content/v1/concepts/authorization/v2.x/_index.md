@@ -1,7 +1,7 @@
 ---
 title: Authorization - v2.x
 linktitle: v2.x
-weight: 4
+weight: 1
 no_list: true 
 Description: >
   Container Storage Modules (CSM) for Authorization v2.x.
@@ -17,13 +17,12 @@ This is the introduction to a Stateless Architecture for Authorization. The crea
 
 ## Container Storage Modules for Authorization Capabilities
 {{<table "table table-striped table-bordered table-sm">}}
-| Feature                                                                                                                        | PowerScale | PowerFlex | PowerMax |
-| ------------------------------------------------------------------------------------------------------------------------------ | ---------- | --------- | -------- |
-|  <div style="text-align: left"> Ability to set storage quota limits to ensure k8s tenants are not overconsuming storage                                        | No         | Yes       | Yes      |
-|  <div style="text-align: left"> Ability to create access control policies to ensure k8s tenant clusters are not accessing storage that does not belong to them | No         | Yes       | Yes      |
-|  <div style="text-align: left"> Ability to shield storage credentials from Kubernetes administrators by storing them in vault                                  | Yes        | Yes       | Yes      |
-|  <div style="text-align: left"> Ability to create snapshots from owned volumes that consume the storage quota                                                  | Yes        | Yes       | Yes      |
-|  <div style="text-align: left"> Ability to periodically query storage array to keep quota consumption in sync                                                  | No         | Yes       | Yes      |
+| Feature                                                                                                                                   | PowerStore | PowerScale | PowerFlex | PowerMax |
+| ----------------------------------------------------------------------------------------------------------------------------------------- | ---------- | --------- | -------- | -------- |
+|  <div style="text-align: left"> Shield storage credentials from Kubernetes administrators by storing them in vault                        | Yes        | Yes       | Yes      | Yes  |
+|  <div style="text-align: left"> Set storage quota limits to ensure k8s tenants are not overconsuming storage                              | Yes        | No        | Yes      | Yes  |
+|  <div style="text-align: left"> Access control policies ensure k8s tenant clusters are not accessing storage that does not belong to them | Yes        | No        | Yes      | Yes  |
+|  <div style="text-align: left"> Create snapshots from owned volumes that consume the storage quota                                        | Yes        | No        | Yes      | Yes  |
 {{</table>}}
 
 ### Snapshot Support
@@ -41,7 +40,7 @@ spec:
     persistentVolumeClaimName: vol1
 ```
 
-This will take a snapshot of the `persistent volume claim` named `vol1`. Container Storage Modules Authorization will verify ownership with Redis to ensure that the tenant who is attempting to create the snapshot owns the `vol1` volume. If the tenant does own the volume, authorization will proceed to check to see if the snapshot fits within the allotted quota and add a record if it does.
+This will take a snapshot of the `PersistentVolumeClaim` named `vol1`. Container Storage Modules Authorization will verify ownership with Redis to ensure that the tenant who is attempting to create the snapshot owns the `vol1` volume. If the tenant does own the volume, authorization will proceed to check to see if the snapshot fits within the allowed quota and add a record if it does.
 
 ### Backend Storage Polling
 
@@ -72,4 +71,4 @@ For more information on the configuration of the above, see the configuration of
 
 Tenants of Authorization can use the token provided by the Storage Administrators in their storage requests.
 
-For more information on how to use the token and configuration, see configuration for the [PowerFlex driver](../v2.x/configuration/powerflex), [PowerMax driver](../v2.x/configuration/powermax), or the [PowerScale driver](../v2.x/configuration/powerscale).
+For more information on how to use the token and configuration, see configuration for the [PowerFlex driver](../v2.x/configuration/powerflex), [PowerMax driver](../v2.x/configuration/powermax), or the [PowerScale driver](../v2.x/configuration/powerscale), [PowerStore driver](../v2.x/configuration/powerstore)

@@ -23,8 +23,8 @@ migration:
 ## Support Matrix
 | Migration Type   | PowerStore | PowerScale | PowerFlex | PowerMax | Unity |
 | ---------------- | ---------- | ---------- | --------- | -------- | ----- |
-| NON_REPL_TO_REPL | ❌        | ❌         | ❌       | ✅       | ❌    |
-| REPL_TO_NON_REPL | ❌        | ❌         | ❌       | ✅       | ❌    |
+| NON_REPL_TO_REPL | No        | No         | No         | Yes       | No    |
+| REPL_TO_NON_REPL | No        | No         | No         | Yes       | No    |
 
 ## Basic Usage
 

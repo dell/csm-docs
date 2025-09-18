@@ -494,8 +494,8 @@ allowedTopologies:
 This example matches all nodes where the driver has a connection to the Unity XT array with array ID mentioned via Fiber Channel. Similarly, by replacing `fc` with `iscsi` in the key checks for iSCSI connectivity with the node.
 
 **Note** : 
-  The NFS labels are automatically added by the driver, assuming that NFS dependencies are configured by default. These dependencies come with the default Linux OS package from the node and the array supports NFS. For other protocols (iSCSI, FC), all necessary connectivity checks between the initiator and target are performed before labels are added.
-  This label should not impact any other functionality, even if NFS is not configured on the array or node.
+- From CSM 1.15 onwards, the CSI driver adds NFS labels to the CSI nodes only after verifying that NFS is enabled on the storage array. This ensures that node labeling accurately reflects the capabilities of the backend storage system. 
+- It is assumed that NFS dependencies are configured by default on the node, as these dependencies are included in the default Linux OS package. For other protocols (iSCSI, FC), all necessary connectivity checks between the initiator and target are performed before labels are added.
 
 You can check what labels your nodes contain by running `kubectl get nodes --show-labels` command.
 
@@ -569,7 +569,7 @@ If such a node is not available, the pods stay in Pending state. This means pods
 
 Without storage capacity tracking, pods get scheduled on a node satisfying the topology constraints. If the required capacity is not available, volume attachment to the pods fails, and pods remain in ContainerCreating state. Storage capacity tracking eliminates unnecessary scheduling of pods when there is insufficient capacity. Moreover, storage capacity tracking returns `MaximumVolumeSize` parameter, which may be used as an input to the volume creation. 
 
-The attribute `storageCapacity.enabled` in `values.yaml` can be used to enable/disable the feature during driver installation using helm. This is by default set to true. To configure how often driver checks for changed capacity set `storageCapacity.pollInterval` attribute. In case of driver installed via operator, this interval can be configured in the sample file provided [here.](https://github.com/dell/csm-operator/tree/release/{{< version-v1 key="csm-operator_latest_version" >}}/samples/storage_csm_unity_{{< version-v1 key="sample_sc_unity" >}}.yaml) by editing the `--capacity-poll-interval` argument present in the provisioner sidecar.
+The attribute `storageCapacity.enabled` in `values.yaml` can be used to enable/disable the feature during driver installation using helm. This is by default set to true. To configure how often driver checks for changed capacity set `storageCapacity.pollInterval` attribute. In case of driver installed via operator, this interval can be configured in the sample file provided [here](https://github.com/dell/csm-operator/blob/main/samples/{{< version-v1 key="csm-operator_latest_samples_dir" >}}/storage_csm_unity_{{< version-v1 key="Det_sample_operator_unity" >}}.yaml) by editing the `--capacity-poll-interval` argument present in the provisioner sidecar.
 
 ## Dynamic Logging Configuration
 

@@ -21,11 +21,10 @@ migration:
 ```
 
 ## Support Matrix
-| Migration Type | PowerMax | PowerStore | PowerScale | PowerFlex | Unity | 
-| - | - | - | - | - | - | 
-| NON_REPL_TO_REPL | Yes | No | No | No | No |
-| REPL_TO_NON_REPL | Yes | No | No | No | No |
-
+| Migration Type   | PowerStore | PowerScale | PowerFlex | PowerMax | Unity |
+| ---------------- | ---------- | ---------- | --------- | -------- | ----- |
+| NON_REPL_TO_REPL | ❌        | ❌         | ❌       | ✅       | ❌    |
+| REPL_TO_NON_REPL | ❌        | ❌         | ❌       | ✅       | ❌    |
 
 ## Basic Usage
 

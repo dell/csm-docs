@@ -141,7 +141,7 @@ dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      
     ``` 
     </div>
     
-    **Detailed Configuration:** Use the [sample file](https://github.com/dell/csm-operator/tree/release/{{< version-v1 key="csm-operator_latest_version" >}}/samples/storage_csm_powerflex_{{< version-v1 key="Det_sample_operator_pflex" >}}.yaml) for detailed settings.
+    **Detailed Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powerflex_{{< version-v1 key="Det_sample_operator_pflex" >}}.yaml) for detailed settings.
    
    </br>
     To set the parameters in CR. The table shows the main settings of the PowerFlex driver and their defaults.
@@ -527,7 +527,6 @@ NAME                    STATUS   VOLUME             CAPACITY   ACCESS MODES   ST
 {{< accordion id="Three" title="Modules">}}
 
 {{< cardcontainer >}}
-    {{< customcard link1="./csm-modules/authorizationv1-x"  image="6" title="Authorization v1.x" >}}
 
     {{< customcard link1="./csm-modules/authorizationv2-0"   image="6" title="Authorization v2.0"  >}}
 

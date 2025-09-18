@@ -12,7 +12,7 @@ This section outlines the metrics collected by the Container Storage Modules Obs
 
 Storage system I/O performance metrics (IOPS, bandwidth, latency) are available by default and broken down by export node and volume.
 
-To disable these metrics, set the ```sdc_metrics_enabled``` field to false in helm/values.yaml.
+To disable these metrics, set the ```sdcMetricsEnabled``` field to false in helm/values.yaml.
 
 The following I/O performance metrics are available from the OpenTelemetry collector endpoint. Please see the [Container Storage Modules for Observability](../) for more information on deploying and configuring the OpenTelemetry collector.
 
@@ -35,7 +35,7 @@ The following I/O performance metrics are available from the OpenTelemetry colle
 
 Provides visibility into the total, used, and available capacity for a storage class and associated underlying storage construct.
 
-To disable these metrics, set the ```storage_class_pool_metrics_enabled``` field to false in helm/values.yaml.
+To disable these metrics, set the ```storageClassPoolMetricsEnabled``` field to false in helm/values.yaml.
 
 The following storage capacity metrics are available from the OpenTelemetry collector endpoint. Please see the [Container Storage Modules for Observability](../) for more information on deploying and configuring the OpenTelemetry collector.
 
@@ -45,3 +45,15 @@ The following storage capacity metrics are available from the OpenTelemetry coll
 | powerflex_storage_pool_logical_capacity_available_gigabytes | The capacity available for use (GB) |
 | powerflex_storage_pool_logical_capacity_in_use_gigabytes | The logical capacity of a storage pool in use (GB) |
 | powerflex_storage_pool_logical_provisioned_gigabytes | The total size of volumes (thick and thin) provisioned in a storage pool (GB) |
+
+## Karavi Topology Metrics
+
+Topology provides Kubernetes administrators with the topology data related to containerized storage that is provisioned by a CSI (Container Storage Interface) Driver for Dell storage products.
+
+To disable these metrics, set the ```topologyMetricsEnabled``` field to false in helm/values.yaml.
+
+The following topology metrics are available from the OpenTelemetry collector endpoint. Please see the [Container Storage Modules for Observability](../) for more information on deploying and configuring the OpenTelemetry collector.
+
+| Metric | Description |
+| - | - |
+| karavi_topology_metrics | Collects topology data. More details [here](../_index.md#topology-data )  |

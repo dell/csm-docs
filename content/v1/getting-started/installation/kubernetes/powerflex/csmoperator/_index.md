@@ -40,14 +40,14 @@ Enable the SDC monitor by setting the `enable` flag to `true`.
    - **With Sidecar**: Edit the `HOST_PID` and `MDM` fields with the host PID and MDM IPs.
    - **Without Sidecar**: Leave the `enabled` field set to `false`.
 
-   Example CR: [samples/storage_csm_powerflex_{{< version-v1 key="sample_sc_pflex" >}}.yaml](https://github.com/dell/csm-operator/tree/release/{{< version-v1 key="csm-operator_latest_version" >}}/samples/storage_csm_powerflex_{{< version-v1 key="sample_sc_pflex" >}}.yaml)
+   Example CR: [samples/storage_csm_powerflex_{{< version-v1 key="sample_sc_pflex" >}}.yaml](https://github.com/dell/csm-operator/blob/main/samples/{{< version-v1 key="csm-operator_latest_samples_dir" >}}/storage_csm_powerflex_{{< version-v1 key="sample_sc_pflex" >}}.yaml)
 
 ```yaml
     sideCars:
     # sdc-monitor is disabled by default, due to high CPU usage
       - name: sdc-monitor
         enabled: false
-        image: quay.io/dell/storage/powerflex/sdc:4.5.2.1
+        image: quay.io/dell/storage/powerflex/sdc:4.5.4
         envs:
         - name: HOST_PID
           value: "1"
@@ -137,11 +137,11 @@ run `/opt/emc/scaleio/sdc/bin/drv_cfg --add_mdm --ip 10.xx.xx.xx.xx,10.xx.xx.xx`
         configVersion: {{< version-v1 key="PFlex_latestVersion" >}}
         forceRemoveDriver: true
     ```
-     Refer the [sample file](https://github.com/dell/csm-operator/tree/release/{{< version-v1 key="csm-operator_latest_version" >}}/samples/minimal-samples/powerflex_{{< version-v1 key="sample_sc_pflex" >}}.yaml). Modify if needed.
+     Refer the minimal sample files provided in respective CSM versions folder under samples [here](https://github.com/dell/csm-operator/tree/main/samples). Modify if needed.
 
     [OR]
 
-    b. **Detailed Configuration:** Use the [sample file](https://github.com/dell/csm-operator/tree/release/{{< version-v1 key="csm-operator_latest_version" >}}/samples/storage_csm_powerflex_{{< version-v1 key="sample_sc_pflex" >}}.yaml) for detailed settings.
+    b. **Detailed Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/main/samples/{{< version-v1 key="csm-operator_latest_samples_dir" >}}/storage_csm_powerflex_{{< version-v1 key="Det_sample_operator_pflex" >}}.yaml) for detailed settings.
 
 - Configure the parameters in the CR. The table below lists the primary configurable parameters of the PowerFlex driver and their default values:
 <ul>
@@ -260,7 +260,6 @@ The driver and modules versions installable with the Container Storage Modules O
 <br>
 
 {{< cardcontainer >}}
-    {{< customcard link1="./csm-modules/authorizationv1-x"  image="6" title="Authorization v1.x" >}}
 
     {{< customcard link1="./csm-modules/authorizationv2-0"   image="6" title="Authorization v2.0"  >}}
 

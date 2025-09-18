@@ -284,8 +284,8 @@ allowedTopologies:
 ```
 
 **Note** : 
-  The NFS labels are automatically added by the driver for PowerFlex version greater than or equal to 4.0, assuming that NFS dependencies are configured by default. These dependencies come with the default Linux OS package from the node and the array supports NFS.
-  This label should not impact any other functionality, even if NFS is not configured on the array or node.
+- From CSM 1.15 onwards, the CSI driver adds NFS labels to the CSI nodes only after verifying that NFS is enabled on the storage array. This ensures that node labeling accurately reflects the capabilities of the backend storage system.
+- It is assumed that the required NFS dependencies are already present on the node, as these are typically included in standard Linux OS packages by default.
 
 You can check what labels your nodes contain by running
 ```bash
@@ -400,12 +400,12 @@ For configuring Controller HA on the Container Storage Modules Operator, please 
 
 ## SDC Deployment
 
-The CSI PowerFlex driver version 1.3 and later support the automatic deployment of the PowerFlex SDC on Kubernetes nodes which run the node portion of the CSI driver. The deployment of the SDC kernel module occurs on these nodes with OS platforms which support automatic SDC deployment: currently Red Hat CoreOS (RHCOS), RHEL8.x,RHEL 7.9 are the only supported OS platforms. On Kubernetes nodes with OS version not supported by automatic install, you must perform the Manual SDC Deployment steps below. Refer to https://quay.io/repository/dell/storage/powerflex/sdc for supported OS versions.
+The CSI PowerFlex driver version 1.3 and later support the automatic deployment of the PowerFlex SDC on Kubernetes nodes which run the node portion of the CSI driver. The deployment of the SDC kernel module occurs on these nodes with OS platforms which support automatic SDC deployment: currently Red Hat CoreOS (RHCOS), RHEL8.x,RHEL 7.9 are the only supported OS platforms. On Kubernetes nodes with OS version not supported by automatic install, you must perform the Manual SDC Deployment steps below. Refer to https://quay.io/repository/dell/storage/powerflex/sdc for supported OS versions. 
 
 - On Kubernetes nodes which run the node portion of the CSI driver, the SDC init container runs prior to the driver being installed. It installs the SDC kernel module on the nodes with OS version which supports automatic SDC deployment. If there is an SDC kernel module installed then the version is checked and updated.
 - Optionally, if the SDC monitor is enabled, another container is started and runs as the monitor. Follow PowerFlex SDC documentation to get monitor metrics.
 - On nodes that do not support automatic SDC deployment by SDC init container, manual installation steps must be followed. The SDC init container skips installing and you can see this mentioned in the logs by running kubectl logs on the node for SDC.
-  Refer to https://quay.io/repository/dell/storage/powerflex/sdc for supported OS versions.
+Refer to https://quay.io/repository/dell/storage/powerflex/sdc for supported OS versions. 
 - There is no automated uninstallation of the SDC kernel module. Follow PowerFlex SDC documentation to manually uninstall the SDC driver from the node.
 
 From Container Storage Modules **1.12.0**, you can disable automatic SDC deployment.
@@ -676,14 +676,17 @@ If either option is set to a value outside of what is supported, the driver will
 Starting in version 2.1, CSI Driver for PowerFlex now supports volume health monitoring. This allows Kubernetes to report on the condition of the underlying volumes via events when a volume condition is abnormal. For example, if a volume were to be deleted from the array, or unmounted outside of Kubernetes, Kubernetes will now report these abnormal conditions as events.  
 
 To accomplish this, the driver utilizes the external-health-monitor sidecar. When driver detects a volume condition is abnormal, the sidecar will report an event to the corresponding PVC. For example, in this event from `kubectl describe pvc -n <ns>` we can see that the underlying volume was deleted from the PowerFlex array:
-```
+
+```text
 Events:
   Type     Reason                     Age                 From                                                         Message
   ----     ------                     ----                ----                                                         ------
   Warning  VolumeConditionAbnormal    32s                 csi-pv-monitor-controller-csi-vxflexos.dellemc.com           Volume is not found at 2021-11-03 20:31:04
 ```
+
 Events will also be reported to pods that have abnormal volumes. In these two events from `kubectl describe pods -n <ns>`, we can see that this pod has two abnormal volumes: one volume was unmounted outside of Kubernetes, while another was deleted from PowerFlex array.
-```
+
+```text
 Events:
   Type     Reason                     Age                 From         Message
   ----     ------                     ----                ----         ------
@@ -758,12 +761,12 @@ Based on these two keys, there are certain scenarios on which the driver is goin
 
 > ℹ️ **NOTE:** : name of the SDC cannot be more than 31 characters, hence the prefix given and the worker node hostname name taken should be such that the total length does not exceed 31 character limit. 
 
-## Pre-approving SDC by GUID
+## Pre-approving SDC
 
-Starting with version 2.6, the CSI Driver for PowerFlex will support pre-approving SDC by GUID.
+Starting with version 2.15, the CSI Driver for PowerFlex will support pre-approving SDC by either GUID or IP address.
 CSI PowerFlex driver will detect the SDC mode set on the PowerFlex array and will request SDC approval from the array prior to publishing a volume. This is specific to each SDC.
 
-To request SDC approval for GUID, make the following edits to [values.yaml](https://github.com/dell/helm-charts/blob/main/charts/csi-vxflexos/values.yaml) file:
+To request SDC approval either by GUID or IP address, make the following edits to [values.yaml](https://github.com/dell/helm-charts/blob/main/charts/csi-vxflexos/values.yaml) file:
 ```yaml
 # "node" allows to configure node specific parameters
 node:
@@ -775,8 +778,8 @@ node:
   approveSDC:
     # enabled: Enable/Disable SDC approval
     #Allowed values:
-    #  true: Driver will attempt to approve restricted SDC by GUID during setup
-    #  false: Driver will not attempt to approve restricted SDC by GUID during setup
+    #  true: Driver will enable SDC approval based on either GUID or IP address, depending on the restricted SDC mode configured in PowerFlex system
+    #  false: Driver will disable SDC approval based on either GUID or IP address, depending on the restricted SDC mode configured in PowerFlex system
     # Default value: false
     enabled: false
 ```
@@ -975,7 +978,7 @@ Starting from Container Storage Modules 1.12.0, the CSI PowerFlex driver support
 To disable SDC deployment, update the values file and provide the interface names mapping for each of the nodes that are being used.
 
 **Helm**
-```
+```yaml
 node:
   ...
   sdc:
@@ -989,7 +992,7 @@ interfaceNames:
 ```
 
 **Operator**
-```
+```yaml
 common:
 ...
   - name: INTERFACE_NAMES: 'worker-1-jxsjoueeewabc.domain: "ens192", worker-2-jxsjoueeewabc.domain: "ens192"'
@@ -1008,7 +1011,7 @@ If such a node is not available, the pods stay in Pending state. This means pods
 
 Without storage capacity tracking, pods get scheduled on a node satisfying the topology constraints. If the required capacity is not available, volume attachment to the pods fails, and pods remain in ContainerCreating state. Storage capacity tracking eliminates unnecessary scheduling of pods when there is insufficient capacity.
 
-The attribute `storageCapacity.enabled` in `values.yaml` can be used to enable/disable the feature during driver installation using helm. This is by default set to true. To configure how often the driver checks for changed capacity set `storageCapacity.pollInterval` attribute. In case of driver installed via operator, this interval can be configured in the sample file provided [here](https://github.com/dell/csm-operator/tree/release/{{< version-v1 key="csm-operator_latest_version" >}}/samples/storage_csm_powerflex_{{< version-v1 key="sample_sc_pflex" >}}.yaml) by editing the `--capacity-poll-interval` argument present in the provisioner sidecar.
+The attribute `storageCapacity.enabled` in `values.yaml` can be used to enable/disable the feature during driver installation using helm. This is by default set to true. To configure how often the driver checks for changed capacity set `storageCapacity.pollInterval` attribute. In case of driver installed via operator, this interval can be configured in the sample file provided [here](https://github.com/dell/csm-operator/blob/main/samples/{{< version-v1 key="csm-operator_latest_samples_dir" >}}/storage_csm_powerflex_{{< version-v1 key="Det_sample_operator_pflex" >}}.yaml) by editing the `--capacity-poll-interval` argument present in the provisioner sidecar.
 
 ## Multiple Availability Zones
 PowerFlex CSI driver version 2.13.0 and above supports multiple Availability Zones for Block. NFS is not supported at this time.
@@ -1026,7 +1029,7 @@ Requirements:
 The example manifests below illustrate how to configure two PowerFlex systems, with each system assigned to its own zone. Zone labels can have any custom key, but it must be consistent across the StorageClass, Secret, and Node labels.
 
 #### Labeling Worker Nodes
-```
+```bash
 # Label each worker node in the cluster
 kubectl label nodes worker-1 topology.kubernetes.io/zone=zone1
 kubectl label nodes worker-2 topology.kubernetes.io/zone=zone1
@@ -1118,14 +1121,12 @@ If a matching pre-compiled module or the kernel module from SFTP repository is n
 
 Enable the SFTP repository settings by enabling the SDC SFTP Repo and configuring the SFTP repository address, username, and secret.
 
-
  *NOTE:*
 - Exposing SFTP settings to automatically pull scini.ko modules is only available for SDC 3.6.5 and 4.5.4
 - Ensure that sdcrepo-private-secret and sdcrepo-public-secret are created from the secrets file. 
-```
+```bash
 kubectl create secret generic sdcsftprepo-private-secret -n vxflexos --from-file=user_private_rsa_key=sftp-secret-private.crt
 kubectl create secret generic sdcsftprepo-public-secret -n vxflexos --from-file=repo_public_rsa_key=sftp-secret-public.crt
-
 ```
 - Private key of SFTP server should be obtained and public key should be pulled from known hosts after logging in to server via private key. 
 - The secrets should have permissions set to 600 to ensure security and proper access control. Setting permissions to 600 ensures that only the owner has read and write access, preventing unauthorized users from accessing or modifying the secrets.

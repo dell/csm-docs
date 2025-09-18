@@ -15,7 +15,7 @@ The Container Storage Modules Installation Wizard is a webpage that helps you cr
 
 ## Generate Manifest File
 
-1. Open the [Installation Wizard](/csm-docs/v1/getting-started/installation/installationwizard/src/index.html).
+1. Open the [Installation Wizard](/csm-docs/docs/getting-started/installation/installationwizard/src/index.html).
 2. Select the `Installation Type` as `Helm`/`Operator`.
 3. Select the `Array`.
 4. Enter the `Image Repository`. The default value is `dellemc`.

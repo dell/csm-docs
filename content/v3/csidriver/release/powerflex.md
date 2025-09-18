@@ -1,31 +1,37 @@
 ---
 title: PowerFlex
+linkTitle: "PowerFlex"
+weight: 6
 description: Release notes for PowerFlex CSI driver
 ---
 
-## Release Notes - CSI PowerFlex v2.12.0
+## Release Notes - CSI PowerFlex v2.13.2
 
+### Fixed Issues
+- [#1956 - [BUG]: Make probe-retry in Powerflex driver configurable](https://github.com/dell/csm/issues/1956) - Applies to a limited use case on the PowerFlex platform when deployed via Helm. Full support for both Operator and Helm deployments will be available in the 1.14.1 release.
 
-
-
-
-
-
-
-
-
-
-### New Features/Changes
-
-- [#1472 - [FEATURE]: Support for Kubernetes 1.31](https://github.com/dell/csm/issues/1472)
-- [#1508 - [FEATURE]:  Add Support for KubeVirt](https://github.com/dell/csm/issues/1508)
-- [#663 - [FEATURE]: Enable/disable automatic SDC deployment along with driver installation.](https://github.com/dell/csm/issues/663)
+## Release Notes - CSI PowerFlex v2.13.1
 
 ### Fixed Issues
 
-- [#1448 - [BUG]: CSM-operator build fails from disk space issue](https://github.com/dell/csm/issues/1448)
-- [#1521 - [BUG]: PowerFlex e2e-fsgroup tests are failing](https://github.com/dell/csm/issues/1521)
-- [#1546 - [BUG]: privTgt mount is lost after vxflexos-node pod restart](https://github.com/dell/csm/issues/1546)
+- [#1782 - [BUG]: Pods Stuck in Terminating State After PowerFlex CSI Node Pod Restart When Deployments Share Same Node](https://github.com/dell/csm/issues/1782)
+
+## Release Notes - CSI PowerFlex v2.13.0
+
+### New Features/Changes
+
+- [#1560 - [FEATURE]: CSM support for OpenShift 4.18](https://github.com/dell/csm/issues/1560)
+- [#1561 - [FEATURE]: Added support for Kubernetes 1.32 ](https://github.com/dell/csm/issues/1561)
+- [#1612 - [FEATURE]: Multi-Availability Zone (AZ) support with multiple storage systems - dedicated storage systems in each AZ](https://github.com/dell/csm/issues/1612)
+- [#1613 - [FEATURE]: CSI PowerFlex must have the ability to connect a subset of the worker nodes to a storage array for multi-array support](https://github.com/dell/csm/issues/1613)
+
+### Fixed Issues
+
+- [#1562 - [BUG]: Documentation for PowerFlex nasName states it is not a required field](https://github.com/dell/csm/issues/1562)
+- [#1608 - [BUG]: Volume Size Rounding Issue in PowerFlex: Rounds Down Instead of Up for Multiples of 8GB](https://github.com/dell/csm/issues/1608)
+- [#1639 - [BUG]: CSM PowerFlex entering boot loop when array has long response times](https://github.com/dell/csm/issues/1639)
+- [#1641 - [BUG]: NodeGetVolumeStats will cause panic when called w/ an Ephemeral volume ](https://github.com/dell/csm/issues/1641)
+- [#1667 - [BUG]: Labels versions and maintainer update for CSM images ](https://github.com/dell/csm/issues/1667)
 
 ### Known Issues
 
@@ -39,7 +45,7 @@ A CSI ephemeral pod may not get created in OpenShift 4.13 and fail with the erro
 | If the volume limit is exhausted and there are pending pods and PVCs due to `exceed max volume count`, the pending PVCs will be bound to PVs and the pending pods will be scheduled to nodes when the driver pods are restarted. | It is advised not to have any pending pods or PVCs once the volume limit per node is exhausted on a CSI Driver. There is an open issue reported with kubernetes at https://github.com/kubernetes/kubernetes/issues/95911 with the same behavior. |
 | Resource quotas may not work properly with the CSI PowerFlex driver. PowerFlex is only able to assign storage in 8Gi chunks, so if a create volume call is made with a size not divisible by 8Gi, CSI-PowerFlex will round up to the next 8Gi boundary when it provisions storage -- however, the resource quota will not record this size but rather the original size in the create request. This means that, for example, if a 10Gi resource quota is set, and a user provisions 10 1Gi PVCs, 80Gi of storage will actually be allocated, which is well over the amount specified in the resource quota. | For now, users should only provision volumes in 8Gi-divisible chunks if they want to use resource quotas. |
 | After restarting a PowerFlex CSI node pod, any deployment whose pods are scheduled on the same node as the restarted CSI node pod will experience pods stuck indefinitely in the Terminating state. This occurs when the deployment is restarted via a command such as 'oc rollout restart'. | Upgrade CSM to v1.13.1 or later. |
-
+| CSM Operator v1.13.1 may cause pod crashes when PowerFlex response times exceed one second due to premature communication timeout. | Upgrade CSM to v1.14.1 or later through CSM Operator. |
 
 ### Note:
 

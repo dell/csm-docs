@@ -124,6 +124,8 @@ The name of the StorageClass resource that is created as the "target" will be ap
 
 This command will perform a planned `failover` to a cluster or an RG.
 
+> ⚠ **WARNING:** Prior to performing a failover, all workloads/pods utilizing the RG that is being failed over should be shut down. Any mounted PVCs that are a part of these replication groups cannot properly failover because their workloads are holding them in place, which will prevent normal operation.
+
 When working with multiple clusters, you can perform failover by specifying the target _cluster ID_. To do that, use `--target <targetClusterID>` parameter:
 
 ```shell

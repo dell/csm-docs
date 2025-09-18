@@ -34,8 +34,8 @@ To deploy the Operator, follow the instructions available [here](../../../operat
       - clusterName: "cluster2"
          username: "user"
          password: "password"
-         isDefault: true
          endpoint: "1.2.3.4"
+         isDefault: true
          endpointPort: "8080"
      ```
       - **Update Parameters:** Replace placeholders with actual values for your PowerScale array.
@@ -80,7 +80,7 @@ To deploy the Operator, follow the instructions available [here](../../../operat
 
 4. **Install Driver**
 
-   i. **Create a CR (Custom Resource)** for PowerFlex using the sample files provided
+   i. **Create a CR (Custom Resource)** for PowerScale using the sample files provided
 
     a. **Minimal Configuration:**
       ```yaml
@@ -95,11 +95,11 @@ To deploy the Operator, follow the instructions available [here](../../../operat
          configVersion: {{< version-v1 key="PScale_latestVersion" >}}
          forceRemoveDriver: true
    ```
-      [sample file](https://github.com/dell/csm-operator/tree/release/{{< version-v1 key="csm-operator_latest_version" >}}/samples/minimal-samples/powerscale_{{< version-v1 key="sample_sc_pflex" >}}.yaml) for default settings. Modify if needed.
+          Refer the minimal sample files provided in respective CSM versions folder under samples [here](https://github.com/dell/csm-operator/tree/main/samples). Modify if needed.
 
     [OR]                                                
 
-    b. **Detailed Configuration:** Use the [sample file](https://github.com/dell/csm-operator/tree/release/{{< version-v1 key="csm-operator_latest_version" >}}/samples/storage_csm_powerscale_{{< version-v1 key="sample_sc_pscale" >}}.yaml) for detailed settings or use [Wizard](./installationwizard#generate-manifest-file) to generate the sample file.
+    b. **Detailed Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/main/samples/{{< version-v1 key="csm-operator_latest_samples_dir" >}}/storage_csm_powerscale_{{< version-v1 key="Det_sample_operator_pscale" >}}.yaml) for detailed settings or use [Wizard](./installationwizard#generate-manifest-file) to generate the sample file.
 
  -  Users should configure the parameters in CR. The following table lists the primary configurable parameters of the PowerScale driver and their default values:
    <ul>
@@ -205,7 +205,6 @@ The driver and modules versions installable with the Container Storage Modules O
 {{< /markdownify >}}
 <br>   
 {{< cardcontainer >}}
-    {{< customcard link1="./csm-modules/authorizationv1-x"  image="6" title="Authorization v1.x" >}}
 
     {{< customcard link1="./csm-modules/authorizationv2-0"   image="6" title="Authorization v2.0"  >}}
 
