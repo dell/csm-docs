@@ -38,7 +38,7 @@ kubectl create -f deploy/replicationcrds.all.yaml
 
 | PowerStore | PowerScale | PowerFlex | PowerMax | Unity |
 | ---------- | ---------- | --------- | -------- | ----- |
-| ❌        | ❌         | ❌       | ✅       | ❌    |
+| No         | No         | No        | Yes       | No    |
 
 ## Installing Driver With sidecars 
 

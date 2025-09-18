@@ -46,7 +46,7 @@ spec:
 The status sub resource of `DellCSIReplicationGroup` contains information about the state of replication & any actions which
 have been performed on the object.
 
-| Field        | Description | 
+| Field        | Description |
 | -------------| ----------  |
 | state | State of the Custom Resource |
 | replicationLinkState | State of the replication on the storage arrays |
@@ -128,5 +128,3 @@ source PVC objects. This information can be easily used to create the PVCs whene
 
 ### Supported Cluster Topologies
 Click [here](../cluster-topologies) for details for the various types of supported cluster topologies
-
-

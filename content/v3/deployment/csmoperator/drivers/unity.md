@@ -54,10 +54,10 @@ kubectl get csm --all-namespaces
 
     a. Install the Unity driver using default configuration using
     the sample file provided
-   [here](https://github.com/dell/csm-operator/tree/{{< version-v3 key="csm-operator_latest_version" >}}/samples/minimal-samples). This file can be modified to use custom parameters if needed.
+   [here](https://github.com/dell/csm-operator/tree/release/{{< version-v3 key="csm-operator_latest_version" >}}/samples/minimal-samples). This file can be modified to use custom parameters if needed.
 
     b. Install the Unity driver using the detailed configuration using the sample file provided
-    [here](https://github.com/dell/csm-operator/tree/{{< version-v3 key="csm-operator_latest_version" >}}/samples).
+    [here](https://github.com/dell/csm-operator/tree/release/{{< version-v3 key="csm-operator_latest_version" >}}/samples).
 
 3. Users should configure the parameters in CR. The following table lists the primary configurable parameters of the Unity XT driver and their default values:
 
@@ -84,7 +84,7 @@ kubectl get csm --all-namespaces
 | volume-name-prefix | The volume-name-prefix will be used by provisioner sidecar as a prefix for all the volumes created  | Yes | csivol |
 | monitor-interval | The monitor-interval will be used by external-health-monitor as an interval for health checks  | Yes | 60s |
 
-4.  Execute the following command to create Unity XT custom resource:
+4. Execute the following command to create Unity XT custom resource:
    ```bash
    kubectl create -f <input_sample_file.yaml>
    ```
@@ -95,7 +95,7 @@ kubectl get csm --all-namespaces
       kubectl get all -n <driver-namespace>
       ```
 
-5.  [Verify the CSI Driver installation](../#verifying-the-driver-installation)
+5. [Verify the CSI Driver installation](../#verifying-the-driver-installation)
 
 6. Refer https://github.com/dell/csi-unity/tree/main/samples for the sample files.
 
