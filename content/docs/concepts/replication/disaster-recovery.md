@@ -44,6 +44,9 @@ b. Execute "reprotect" action on selected ReplicationGroup which will resume the
 ### Unplanned Migration to the target cluster/array
 This scenario is the typical choice when a site goes down: 
 
+Ensure "disablePVCRemap" is set to false is set in the manifest. This will enable automatically attaching the Persistent Volume Claim (PVC) to the active volume/Persistent Volume (PV)
+without requiring manual intervention for failover scenarios on a Kubernetes stretched cluster using CSM replication.
+
 a. Scale down the application pods to zero replicas. This can be done by editing the application manifest yaml file and changing the replicas count to 0.
 
 b. The application pods might go to Error state. Force delete the application pods by running
