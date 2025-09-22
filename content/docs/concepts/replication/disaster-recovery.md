@@ -44,7 +44,7 @@ b. Execute "reprotect" action on selected ReplicationGroup which will resume the
 ### Unplanned Migration to the target cluster/array
 This scenario is the typical choice when a site goes down: 
 
-Ensure "disablePVCRemap" is set to "false" in the driver manifest (Refer: ![pvc-remap](../../concepts/replication/pvc-remap.md)) to enable automatic remapping of PVCs.
+Ensure automatic remapping of PVCs is enabled by setting "disablePVCRemap" to "false" in the driver manifest (Refer: ![pvc-remap](../../concepts/replication/pvc-remap.md)).
 
 a. Scale down the application pods to zero replicas by editing the application manifest yaml file and changing the replicas count to 0.
 
@@ -67,7 +67,7 @@ c. Execute "failover" action on selected ReplicationGroup using the cluster name
 {{% /tab %}}
 {{< /tabpane >}}
 
-d. (This step is only applicable for PowerMax driver) Execute "swap" action on selected ReplicationGroup which would swap personalities of R1 and R2.
+d. (PowerMax driver only) Execute "swap" action on selected ReplicationGroup which would swap personalities of R1 and R2.
 {{< tabpane text=true lang="en" >}} {{% tab header="1️⃣ stretched Kubernetes cluster" lang="en" %}}
    ```bash
     ./repctl --rg rg-id-site-2 swap
