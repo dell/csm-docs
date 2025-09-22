@@ -82,7 +82,7 @@ d. Execute "swap" action on selected ReplicationGroup which would swap personali
 
 > _**Note**_: Unplanned migration usually happens when the original "source" cluster is unavailable. The following action makes sense when the cluster is back.
 
-e. Disable SyncIQ policy on the source PowerScale array (This step is only applicable for PowerScale arrays)
+e. Before initiating a failback or reprotect operation, storage administrators must manually disable the SyncIQ policy when bringing the failed-over source array back online. Failing to do so may result in unexpected behavior. This step applies only to PowerScale arrays.
 
 f. Execute "reprotect" action on selected ReplicationGroup which will resume the replication.
 {{< tabpane text=true lang="en" >}} {{% tab header="1️⃣ stretched Kubernetes cluster" lang="en" %}}
