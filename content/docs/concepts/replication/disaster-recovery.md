@@ -10,6 +10,8 @@ description: >
 
 Once the `DellCSIReplicationGroup` & `PersistentVolume` objects have been replicated across clusters (or within the same cluster), users can exercise the general Disaster Recovery workflows.
 
+Ensure automatic remapping of PVCs is enabled by setting "disablePVCRemap" to "false" in the driver manifest (Refer: ![pvc-remap](../../concepts/replication/pvc-remap.md)).
+
 ### Planned Migration to the target cluster/array
 This scenario is the typical choice when you want to try your disaster recovery plan or you need to switch activities from one site to another: 
 
@@ -43,8 +45,6 @@ b. Execute "reprotect" action on selected ReplicationGroup which will resume the
 
 ### Unplanned Migration to the target cluster/array
 This scenario is the typical choice when a site goes down: 
-
-Ensure automatic remapping of PVCs is enabled by setting "disablePVCRemap" to "false" in the driver manifest (Refer: ![pvc-remap](../../concepts/replication/pvc-remap.md)).
 
 a. Scale down the application pods to zero replicas by editing the application manifest yaml file and changing the replicas count to 0.
 
