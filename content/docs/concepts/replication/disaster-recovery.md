@@ -46,12 +46,12 @@ This scenario is the typical choice when a site goes down:
 
 Ensure "disablePVCRemap" is set to "false" in the driver manifest (Refer: ![pvc-remap](../../concepts/replication/pvc-remap.md)) to enable automatic remapping of PVCs.
 
-a. Scale down the application pods to zero replicas. This can be done by editing the application manifest yaml file and changing the replicas count to 0.
+a. Scale down the application pods to zero replicas by editing the application manifest yaml file and changing the replicas count to 0.
 
 b. The application pods might go to Error state. Force delete the application pods by running
 
    ```bash
-    kubectl delete pods <pod-name> -n <namespace> --force
+   kubectl delete pods <pod-name> -n <namespace> --force
    ```
 
 c. Execute "failover" action on selected ReplicationGroup using the cluster name
@@ -67,7 +67,7 @@ c. Execute "failover" action on selected ReplicationGroup using the cluster name
 {{% /tab %}}
 {{< /tabpane >}}
 
-d. Execute "swap" action on selected ReplicationGroup which would swap personalities of R1 and R2 (This step is only applicable for PowerMax driver)
+d. (This step is only applicable for PowerMax driver) Execute "swap" action on selected ReplicationGroup which would swap personalities of R1 and R2.
 {{< tabpane text=true lang="en" >}} {{% tab header="1️⃣ stretched Kubernetes cluster" lang="en" %}}
    ```bash
     ./repctl --rg rg-id-site-2 swap
@@ -82,7 +82,7 @@ d. Execute "swap" action on selected ReplicationGroup which would swap personali
 
 > _**Note**_: Unplanned migration usually happens when the original "source" cluster is unavailable. The following action makes sense when the cluster is back.
 
-e. Before initiating a failback or reprotect operation, storage administrators must manually disable the SyncIQ policy when bringing the failed-over source array back online. Failing to do so may result in unexpected behavior. This step applies only to PowerScale arrays.
+e. (PowerScale arrays only) Before initiating a failback or reprotect operation, storage administrators must manually disable the SyncIQ policy when bringing the failed-over source array back online. Failing to do so may result in unexpected behavior.
 
 f. Execute "reprotect" action on selected ReplicationGroup which will resume the replication.
 {{< tabpane text=true lang="en" >}} {{% tab header="1️⃣ stretched Kubernetes cluster" lang="en" %}}
@@ -98,7 +98,7 @@ f. Execute "reprotect" action on selected ReplicationGroup which will resume the
 {{< /tabpane >}}
 ![state_changes2](../../../../images/replication/state_changes2.png) 
 
-g. Scale up the application pods to desired count. This can be done by editing the application manifest yaml file and changing the replicas count to desired value.
+g. Scale up the application pods to desired count by editing the application manifest yaml file and changing the replicas count to desired value.
       
 
 > _**NOTE**_: When users do Failover and Failback, the tests pods on the source cluster may go "CrashLoopOff" state since it will try to remount the same volume which is already mounted. To get around this problem, bring down the number of replicas to 0 and then after that is done, bring it up to 1.
