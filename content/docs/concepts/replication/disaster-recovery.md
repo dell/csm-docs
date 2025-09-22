@@ -44,8 +44,7 @@ b. Execute "reprotect" action on selected ReplicationGroup which will resume the
 ### Unplanned Migration to the target cluster/array
 This scenario is the typical choice when a site goes down: 
 
-Ensure "disablePVCRemap" is set to false is set in the manifest. This will enable automatically attaching the Persistent Volume Claim (PVC) to the active volume/Persistent Volume (PV)
-without requiring manual intervention for failover scenarios on a Kubernetes stretched cluster using CSM replication.
+Ensure "disablePVCRemap" is set to "false" in the driver manifest (Refer: ![pvc-remap](../../concepts/replication/pvc-remap)) to enable automatic remapping of PVCs.
 
 a. Scale down the application pods to zero replicas. This can be done by editing the application manifest yaml file and changing the replicas count to 0.
 
@@ -68,7 +67,7 @@ c. Execute "failover" action on selected ReplicationGroup using the cluster name
 {{% /tab %}}
 {{< /tabpane >}}
 
-d. Execute "swap" action on selected ReplicationGroup which would swap personalities of R1 and R2 (only applicable for PowerMax driver)
+d. Execute "swap" action on selected ReplicationGroup which would swap personalities of R1 and R2 (This step is only applicable for PowerMax driver)
 {{< tabpane text=true lang="en" >}} {{% tab header="1️⃣ stretched Kubernetes cluster" lang="en" %}}
    ```bash
     ./repctl --rg rg-id-site-2 swap
