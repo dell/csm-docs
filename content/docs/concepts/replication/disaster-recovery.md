@@ -44,7 +44,7 @@ b. Execute "reprotect" action on selected ReplicationGroup which will resume the
 ### Unplanned Migration to the target cluster/array
 This scenario is the typical choice when a site goes down: 
 
-Ensure "disablePVCRemap" is set to "false" in the driver manifest (Refer: ![pvc-remap](../../concepts/replication/pvc-remap)) to enable automatic remapping of PVCs.
+Ensure "disablePVCRemap" is set to "false" in the driver manifest (Refer: ![pvc-remap](../../concepts/replication/pvc-remap.md)) to enable automatic remapping of PVCs.
 
 a. Scale down the application pods to zero replicas. This can be done by editing the application manifest yaml file and changing the replicas count to 0.
 
