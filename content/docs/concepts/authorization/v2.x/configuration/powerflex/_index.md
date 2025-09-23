@@ -43,7 +43,7 @@ Given a setup where Kubernetes, a storage system, and the Authorization Proxy Se
 
     - Update `skipCertificateValidation` to `true`.
 
-    - The `username` and `password` can be any value since they will be ignored.
+    - The `username` and `password` fields are not used during authentication and can be set to any value.
 
     Example:
 
@@ -65,7 +65,7 @@ Given a setup where Kubernetes, a storage system, and the Authorization Proxy Se
 
     - Update `skipCertificateValidation` to `true`.
 
-    - The `username` and `password` can be any value since they will be ignored.
+    - The `username` and `password` fields are not used during authentication and can be set to any value.
 
     Example:
 

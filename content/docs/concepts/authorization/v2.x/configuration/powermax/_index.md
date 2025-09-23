@@ -41,7 +41,8 @@ Given a setup where Kubernetes, a storage system, and the Container Storage Modu
     Refer to the [Install Driver](../../../../../getting-started/installation/kubernetes/powermax/csmoperator/#install-driver) section to prepare `powermax-creds.yaml` to configure the driver to communicate with Authorization sidecar.
 
     - Update `primaryEndpoint` and `endpoint` to an HTTPS localhost endpoint that the authorization sidecar will listen on.
-    - The `username` and `password` can be any value since they will be ignored.
+
+    - The `username` and `password` fields are not used during authentication and can be set to any value.
 
     **Note:** Authorization does not currently support the `backupEndpoint` parameter.
 
@@ -67,7 +68,8 @@ Given a setup where Kubernetes, a storage system, and the Container Storage Modu
     Refer to the [Install the Driver](../../../../../getting-started/installation/kubernetes/powermax/helm/#install-driver) section where you edit `samples/secret/secret.yaml` with the credentials of the PowerMax.
 
     - Update `primaryEndpoint` and `endpoint` to an HTTPS localhost endpoint that the authorization sidecar will listen on.
-    - The `username` and `password` can be any value since they will be ignored.
+
+    - The `username` and `password` fields are not used during authentication and can be set to any value.
 
     **Note:** Authorization does not currently support the `backupEndpoint` parameter.
 

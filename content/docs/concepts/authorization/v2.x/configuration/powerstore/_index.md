@@ -43,6 +43,8 @@ Given a setup where Kubernetes, a storage system, and the Authorization Proxy Se
 
     - Update `skipCertificateValidation` to `true`.
 
+    - The `username` and `password` fields are not used during authentication and can be set to any value.
+
     Example:
 
     ```yaml
@@ -61,6 +63,8 @@ Given a setup where Kubernetes, a storage system, and the Authorization Proxy Se
     - Update `endpoint` to an HTTPS localhost endpoint that the authorization sidecar will listen on.
 
     - Update `skipCertificateValidation` to `true`.
+
+    - The `username` and `password` fields are not used during authentication and can be set to any value.
 
     Example:
 
