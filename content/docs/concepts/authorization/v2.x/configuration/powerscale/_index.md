@@ -42,6 +42,8 @@ Given a setup where Kubernetes, a storage system, and the Container Storage Modu
 
     - Update `endpoint` to an HTTPS localhost endpoint that the authorization sidecar will listen on.
 
+    - Update `endpointPort` to the port that the authorization sidecar will listen on.
+
     - Update `mountEndpoint` to the PowerScale OneFS API server. For example, 10.0.0.1.
 
     - Update `skipCertificateValidation` to `true`.
@@ -67,6 +69,8 @@ Given a setup where Kubernetes, a storage system, and the Container Storage Modu
     Refer to the [Install the Driver](../../../../../getting-started/installation/kubernetes/powerscale/helm/#install-driver) section to edit the parameters to prepare the `samples/secret/secret.yaml` file to configure the driver to communicate with Authorization sidecar.
 
     - Update `endpoint` to an HTTPS localhost endpoint that the authorization sidecar will listen on.
+
+    - Update `endpointPort` to the port that the authorization sidecar will listen on.
 
     - Update `mountEndpoint` to the PowerScale OneFS API server. For example, 10.0.0.1.
 

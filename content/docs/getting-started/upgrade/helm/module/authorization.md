@@ -13,7 +13,13 @@ This section outlines the upgrade steps for Container Storage Modules (CSM) for 
 - Helm Chart Upgrade
 - Upgrading the Dell CSI drivers with CSM for Authorization enabled
 
-## Upgrade Notice: CSM v1.14 → CSM v1.15 (Authorization v2.2.0 → v2.3.0)
+## Upgrade Notices:
+
+**CSM 1.16**
+
+Starting with CSM 1.16, the `karavi-authorization-config` secret is no longer required. However, existing installations that include this secret will continue to function as expected.
+
+**CSM v1.14 → CSM v1.15 (Authorization v2.2.0 → v2.3.0)**
 
 Starting with CSM 1.15, CSM Authorization (v2.3.0) requires users to configure storage credentials prior to deployment. This is a mandatory step to ensure proper access to external storage systems.
 
