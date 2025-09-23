@@ -20,25 +20,7 @@ Given a setup where Kubernetes, a storage system, and the Container Storage Modu
 
    This takes the assumption that PowerMax will be installed in the `powermax` namespace.
 
-2. Edit these parameters in `samples/secret/karavi-authorization-config.json` file in the [CSI PowerMax](https://github.com/dell/csi-powermax/tree/main/samples/secret/karavi-authorization-config.json) driver and update/add connection information for one or more backend storage arrays. In an instance where multiple CSI drivers are configured on the same Kubernetes cluster, the port range in the *endpoint* parameter must be different for each driver.
-
-   | Parameter | Description | Required | Default |
-   | --------- | ----------- | -------- |-------- |
-   | username  | Username for connecting to the backend storage array. This parameter is ignored. | No | - |
-   | password  | Password for connecting to to the backend storage array. This parameter is ignored. | No | - |
-   | intendedEndpoint | HTTPS REST API endpoint of the backend storage array. | Yes | - |
-   | endpoint  | HTTPS localhost endpoint that the authorization sidecar will listen on. | Yes | https://localhost:9400 |
-   | systemID  | System ID of the backend storage array. | Yes | " " |
-   | skipCertificateValidation  | A boolean that enables/disables certificate validation of the backend storage array. This parameter is not used. | No | true |
-   | isDefault | A boolean that indicates if the array is the default array. This parameter is not used. | No | default value from values.yaml |
-
-    Create the karavi-authorization-config secret using this command:
-
-    ```bash
-    kubectl -n powermax create secret generic karavi-authorization-config --from-file=config=samples/secret/karavi-authorization-config.json -o yaml --dry-run=client | kubectl apply -f -
-    ```
-
-3. Create the proxy-server-root-certificate secret.
+2. Create the proxy-server-root-certificate secret.
 
     If running in *insecure* mode, create the secret with empty data:
 
@@ -52,13 +34,14 @@ Given a setup where Kubernetes, a storage system, and the Container Storage Modu
       kubectl -n powermax create secret generic proxy-server-root-certificate --from-file=rootCertificate.pem=/path/to/rootCA -o yaml --dry-run=client | kubectl apply -f -
       ```
 
-4. Prepare the driver configuration secret, applicable to your driver installation method, to communicate with Authorization sidecar.
+3. Prepare the driver configuration secret, applicable to your driver installation method, to communicate with Authorization sidecar.
 
     **Operator**
 
     Refer to the [Install Driver](../../../../../getting-started/installation/kubernetes/powermax/csmoperator/#install-driver) section to prepare `powermax-creds.yaml` to configure the driver to communicate with Authorization sidecar.
 
-    Update endpoint to match the localhost endpoint in `samples/secret/karavi-authorization-config.json`. Leave `username` and `password` with the default values base64 encoded.
+    - Update `primaryEndpoint` and `endpoint` to an HTTPS localhost endpoint that the authorization sidecar will listen on.
+    - The `username` and `password` can be any value since they will be ignored.
 
     **Note:** Authorization does not currently support the `backupEndpoint` parameter.
 
@@ -83,7 +66,8 @@ Given a setup where Kubernetes, a storage system, and the Container Storage Modu
 
     Refer to the [Install the Driver](../../../../../getting-started/installation/kubernetes/powermax/helm/#install-driver) section where you edit `samples/secret/secret.yaml` with the credentials of the PowerMax.
 
-    Update endpoint to match the localhost endpoint in `samples/secret/karavi-authorization-config.json`. Leave `username` and `password` with the default values base64 encoded.
+    - Update `primaryEndpoint` and `endpoint` to an HTTPS localhost endpoint that the authorization sidecar will listen on.
+    - The `username` and `password` can be any value since they will be ignored.
 
     **Note:** Authorization does not currently support the `backupEndpoint` parameter.
 
@@ -104,7 +88,7 @@ Given a setup where Kubernetes, a storage system, and the Container Storage Modu
           maxOutstandingWrite: 10
     ```
 
-5. **Operator Only**: Prepare the reverse proxy configMap using sample [here](https://github.com/dell/csm-operator/blob/main/samples/csireverseproxy/config.yaml). Fill in the appropriate values for driver configuration.
+4. **Operator Only**: Prepare the reverse proxy configMap using sample [here](https://github.com/dell/csm-operator/blob/main/samples/csireverseproxy/config.yaml). Fill in the appropriate values for driver configuration.
    Example: config.yaml
    ```yaml
     port: 2222
@@ -122,7 +106,7 @@ Given a setup where Kubernetes, a storage system, and the Container Storage Modu
         skipCertificateValidation: true
    ```
 
-6. Enable Container Storage Modules Authorization in the driver installation applicable to your installation method.
+5. Enable Container Storage Modules Authorization in the driver installation applicable to your installation method.
   Alternatively, you can use the minimal sample files provided in respective CSM versions folder under samples [here](https://github.com/dell/csm-operator/tree/main/samples) and install the module using default value.
 
     **Operator**
@@ -241,4 +225,4 @@ Given a setup where Kubernetes, a storage system, and the Container Storage Modu
       skipCertificateValidation: true
     ```
 
-7. Install the Dell CSI PowerMax driver following the appropriate documentation for your installation method.
+6. Install the Dell CSI PowerMax driver following the appropriate documentation for your installation method.
