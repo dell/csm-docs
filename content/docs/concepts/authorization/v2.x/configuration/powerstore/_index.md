@@ -48,12 +48,14 @@ Given a setup where Kubernetes, a storage system, and the Authorization Proxy Se
     Example:
 
     ```yaml
-    - username: "ignored"
-      password: "ignored"
-      systemID: "ID2"
-      endpoint: "https://localhost:9400"
-      skipCertificateValidation: true
-      isDefault: true
+    arrays:
+      - username: "ignored"
+        password: "ignored"
+        globalID: "unique"
+        endpoint: "https://localhost:9400"
+        skipCertificateValidation: true
+        blockProtocol: "FC"
+        isDefault: true
     ```
 
     **Helm**
@@ -69,12 +71,14 @@ Given a setup where Kubernetes, a storage system, and the Authorization Proxy Se
     Example:
 
     ```yaml
-    - username: "ignored"
-      password: "ignored"
-      systemID: "ID2"
-      endpoint: "https://localhost:9400"
-      skipCertificateValidation: true
-      isDefault: true
+    arrays:
+      - username: "ignored"
+        password: "ignored"
+        globalID: "unique"
+        endpoint: "https://localhost:9400"
+        skipCertificateValidation: true
+        blockProtocol: "FC"
+        isDefault: true
     ```
 
 4. Enable Container Storage Modules Authorization in the driver installation applicable to your installation method.
@@ -152,4 +156,4 @@ Given a setup where Kubernetes, a storage system, and the Authorization Proxy Se
       skipCertificateValidation: true
     ```
 
-6. Install the CSI PowerStore driver following the appropriate documentation for your installation method.
+5. Install the CSI PowerStore driver following the appropriate documentation for your installation method.

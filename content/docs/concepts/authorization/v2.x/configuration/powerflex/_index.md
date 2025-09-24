@@ -154,4 +154,4 @@ Given a setup where Kubernetes, a storage system, and the Authorization Proxy Se
       skipCertificateValidation: true
     ```
 
-1. Install the CSI PowerFlex driver following the appropriate documentation for your installation method.
+5. Install the CSI PowerFlex driver following the appropriate documentation for your installation method.
