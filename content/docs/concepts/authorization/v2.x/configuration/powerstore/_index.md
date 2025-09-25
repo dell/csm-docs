@@ -68,12 +68,14 @@ Given a setup where Kubernetes, a storage system, and the Authorization Proxy Se
     Example:
 
     ```yaml
-    - username: "ignored"
-      password: "ignored"
-      systemID: "ID2"
-      endpoint: "https://localhost:9400"
-      skipCertificateValidation: true
-      isDefault: true
+    arrays:
+      - username: "ignored"
+        password: "ignored"
+        globalID: "unique"
+        endpoint: "https://localhost:9400"
+        skipCertificateValidation: true
+        blockProtocol: "FC"
+        isDefault: true
     ```
 
     **Helm**
@@ -87,12 +89,14 @@ Given a setup where Kubernetes, a storage system, and the Authorization Proxy Se
     Example:
 
     ```yaml
-    - username: "ignored"
-      password: "ignored"
-      systemID: "ID2"
-      endpoint: "https://localhost:9400"
-      skipCertificateValidation: true
-      isDefault: true
+    arrays:
+      - username: "ignored"
+        password: "ignored"
+        globalID: "unique"
+        endpoint: "https://localhost:9400"
+        skipCertificateValidation: true
+        blockProtocol: "FC"
+        isDefault: true
     ```
 
 5. Enable Container Storage Modules Authorization in the driver installation applicable to your installation method.
@@ -142,7 +146,7 @@ Given a setup where Kubernetes, a storage system, and the Authorization Proxy Se
 
     - Update `authorization.enabled` to `true`.
 
-    - Update `images.authorization` to the image of Authorization sidecar. 
+    - Update `images.authorization` to the image of Authorization sidecar.
 
     - Update `authorization.proxyHost` to the hostname of Authorization Proxy Server. `csm-authorization.com` is a placeholder for the proxyHost. See the administrator of Authorization for the correct value.
 
