@@ -32,9 +32,9 @@ Given a setup where Kubernetes, a storage system, and the Authorization Proxy Se
       "blockProtocol": "FC"
       "isDefault":true,
     }]
-    ```
+   ```
 	
-{{< collapse id="1" title="Parameters">}}
+{{<collapse id="1" title="Parameters">}}
    | Parameter                 | Description                                                                                                      | Required | Default                        |
    | ------------------------- | ---------------------------------------------------------------------------------------------------------------- | -------- | ------------------------------ |
    | username                  | Username for connecting to the backend storage array. This parameter is ignored.                                 | No       | -                              |
