@@ -13,7 +13,7 @@ Any orchestrator platform, operating system or version that is not mentioned in 
 
 You may qualify your environment for Dell CSI Drivers by executing the [Run All Test Suites](#run-all-test-suites) workflow.
 
-Please submit your test results for our review [here](https://github.com/dell/csm/issues/new?assignees=&labels=type%2Fqualification&projects=&template=community_qualification.yml&title=%5BQualification%5D%3A+). If the results are a success, the orchestrator platform and version will be published under Community Qualified Configurations.
+Please submit your test results for our review via the [Container Storage Modules (CSM) Community](https://www.dell.com/community/en/conversations/container-storage-modules/self-certification-submission-process/68d59a2311f8fe4d5ec5b7b5). If the results are a success, the orchestrator platform and version will be published under Community Qualified Configurations.
 
 ## Installation
 
