@@ -7,7 +7,7 @@ csi-powerstore:
   version: v2.11.1
   images:
     # "driver" defines the container image, used for the driver container.
-    driver: quay.io/dell/container-storage-modules/csi-powerstore:v2.11.1
+    driver: dellemc/csi-powerstore:v2.11.1
     # CSI sidecars
     attacher: registry.k8s.io/sig-storage/csi-attacher:v4.6.1
     provisioner: registry.k8s.io/sig-storage/csi-provisioner:v5.0.1
@@ -17,10 +17,10 @@ csi-powerstore:
     healthmonitor: registry.k8s.io/sig-storage/csi-external-health-monitor-controller:v0.12.1
 
     # CSM sidecars
-    replication: quay.io/dell/container-storage-modules/dell-csi-replicator:v1.9.0
-    vgsnapshotter: quay.io/dell/container-storage-modules/csi-volumegroup-snapshotter:v1.6.0
-    podmon: quay.io/dell/container-storage-modules/podmon:v1.10.0
-    metadataretriever: quay.io/dell/container-storage-modules/csi-metadata-retriever:v1.8.0
+    replication: dellemc/dell-csi-replicator:v1.9.0
+    vgsnapshotter: dellemc/csi-volumegroup-snapshotter:v1.6.0
+    podmon: dellemc/podmon:v1.10.0
+    metadataretriever: dellemc/csi-metadata-retriever:v1.8.0
   ## Controller ATTRIBUTES
   controller:
     controllerCount: $CONTROLLER_COUNT
@@ -117,8 +117,8 @@ csi-powermax:
   version: v2.11.0
   images:
     # "driver" defines the container image, used for the driver container.
-    driver: quay.io/dell/container-storage-modules/csi-powermax:v2.11.0
-    csireverseproxy: quay.io/dell/container-storage-modules/csipowermax-reverseproxy:v2.10.0
+    driver: dellemc/csi-powermax:v2.11.0
+    csireverseproxy: dellemc/csipowermax-reverseproxy:v2.10.0
     # CSI sidecars
     attacher: registry.k8s.io/sig-storage/csi-attacher:v4.6.1
     provisioner: registry.k8s.io/sig-storage/csi-provisioner:v5.0.1
@@ -127,10 +127,10 @@ csi-powermax:
     registrar: registry.k8s.io/sig-storage/csi-node-driver-registrar:v2.10.1
     healthmonitor: registry.k8s.io/sig-storage/csi-external-health-monitor-controller:v0.12.1
     # CSM sidecars
-    replication: quay.io/dell/container-storage-modules/dell-csi-replicator:v1.9.0
-    authorization: quay.io/dell/container-storage-modules/csm-authorization-sidecar:v1.11.0
-    migration: quay.io/dell/container-storage-modules/dell-csi-migrator:v1.5.0
-    noderescan: quay.io/dell/container-storage-modules/dell-csi-node-rescanner:v1.4.0
+    replication: dellemc/dell-csi-replicator:v1.9.0
+    authorization: dellemc/csm-authorization-sidecar:v1.11.0
+    migration: dellemc/dell-csi-migrator:v1.5.0
+    noderescan: dellemc/dell-csi-node-rescanner:v1.4.0
   clusterPrefix: $POWERMAX_CLUSTER_PREFIX
   portGroups: "$POWERMAX_PORT_GROUPS"
   fsGroupPolicy: "$FSGROUP_POLICY"
@@ -219,9 +219,9 @@ csi-vxflexos:
   version: v2.11.0
   images:
     # "driver" defines the container image, used for the driver container.
-    driver: quay.io/dell/container-storage-modules/csi-vxflexos:v2.11.0
+    driver: dellemc/csi-vxflexos:v2.11.0
     # "powerflexSdc" defines the SDC image for init container.
-    powerflexSdc: quay.io/dell/storage/powerflex/sdc:4.5.2.1
+    powerflexSdc: dellemc/sdc:4.5.2.1
     # CSI sidecars
     attacher: registry.k8s.io/sig-storage/csi-attacher:v4.6.1
     provisioner: registry.k8s.io/sig-storage/csi-provisioner:v5.0.1
@@ -230,10 +230,10 @@ csi-vxflexos:
     registrar: registry.k8s.io/sig-storage/csi-node-driver-registrar:v2.10.1
     healthmonitor: registry.k8s.io/sig-storage/csi-external-health-monitor-controller:v0.12.1
     # CSM sidecars
-    replication: quay.io/dell/container-storage-modules/dell-csi-replicator:v1.9.0
-    vgsnapshotter: quay.io/dell/container-storage-modules/csi-volumegroup-snapshotter:v1.6.0
-    podmon: quay.io/dell/container-storage-modules/podmon:v1.10.0
-    authorization: quay.io/dell/container-storage-modules/csm-authorization-sidecar:v1.11.0
+    replication: dellemc/dell-csi-replicator:v1.9.0
+    vgsnapshotter: dellemc/csi-volumegroup-snapshotter:v1.6.0
+    podmon: dellemc/podmon:v1.10.0
+    authorization: dellemc/csm-authorization-sidecar:v1.11.0
   certSecretCount: $CERT_SECRET_COUNT
   controller:
     replication:
@@ -318,7 +318,7 @@ csi-isilon:
   version: "v2.11.0"
   images:
     # "driver" defines the container image, used for the driver container.
-    driver: quay.io/dell/container-storage-modules/csi-isilon:v2.11.0
+    driver: dellemc/csi-isilon:v2.11.0
     # CSI sidecars
     attacher: registry.k8s.io/sig-storage/csi-attacher:v4.6.1
     provisioner: registry.k8s.io/sig-storage/csi-provisioner:v5.0.1
@@ -327,11 +327,11 @@ csi-isilon:
     registrar: registry.k8s.io/sig-storage/csi-node-driver-registrar:v2.10.1
     healthmonitor: registry.k8s.io/sig-storage/csi-external-health-monitor-controller:v0.12.1
     # CSM sidecars
-    replication: quay.io/dell/container-storage-modules/dell-csi-replicator:v1.9.0
-    podmon: quay.io/dell/container-storage-modules/podmon:v1.10.0
-    authorization: quay.io/dell/container-storage-modules/csm-authorization-sidecar:v1.11.0
-    metadataretriever: quay.io/dell/container-storage-modules/csi-metadata-retriever:v1.8.0
-    encryption: quay.io/dell/container-storage-modules/csm-encryption:v0.6.0
+    replication: dellemc/dell-csi-replicator:v1.9.0
+    podmon: dellemc/podmon:v1.10.0
+    authorization: dellemc/csm-authorization-sidecar:v1.11.0
+    metadataretriever: dellemc/csi-metadata-retriever:v1.8.0
+    encryption: dellemc/csm-encryption:v0.6.0
 
   certSecretCount: $CERT_SECRET_COUNT
   allowedNetworks: []
@@ -428,7 +428,7 @@ csi-unity:
   version: v2.11.1
   images:
     # "driver" defines the container image, used for the driver container.
-    driver: quay.io/dell/container-storage-modules/csi-unity:v2.11.1
+    driver: dellemc/csi-unity:v2.11.1
     # CSI sidecars
     attacher: registry.k8s.io/sig-storage/csi-attacher:v4.6.1
     provisioner: registry.k8s.io/sig-storage/csi-provisioner:v5.0.1
@@ -437,7 +437,7 @@ csi-unity:
     registrar: registry.k8s.io/sig-storage/csi-node-driver-registrar:v2.10.1
     healthmonitor: registry.k8s.io/sig-storage/csi-external-health-monitor-controller:v0.12.1
     # CSM sidecars
-    podmon: quay.io/dell/container-storage-modules/podmon:v1.10.0
+    podmon: dellemc/podmon:v1.10.0
   certSecretCount: $CERT_SECRET_COUNT
   allowedNetworks:
   fsGroupPolicy: $FSGROUP_POLICY

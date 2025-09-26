@@ -17,11 +17,11 @@ csi-powerstore:
     tolerations: $CONTROLLER_TOLERATIONS
     replication:
       enabled: $REPLICATION_ENABLED
-      image: quay.io/dell/container-storage-modules/dell-csi-replicator:v1.6.0
+      image: dellemc/dell-csi-replicator:v1.6.0
     vgsnapshot:
       enabled: $VG_SNAPSHOT_ENABLED
-      image: quay.io/dell/container-storage-modules/csi-volumegroup-snapshotter:v1.3.0
-    metadataretriever: quay.io/dell/container-storage-modules/csi-metadata-retriever:v1.5.0
+      image: dellemc/csi-volumegroup-snapshotter:v1.3.0
+    metadataretriever: dellemc/csi-metadata-retriever:v1.5.0
     snapshot:
       enabled: $SNAPSHOT_ENABLED
       snapNamePrefix: $SNAP_NAME_PREFIX
@@ -62,7 +62,7 @@ csi-powerstore:
     enabled: $STORAGE_CAPACITY_ENABLED
   podmon:
     enabled: $RESILIENCY_ENABLED
-    image: quay.io/dell/container-storage-modules/podmon:v1.7.0
+    image: dellemc/podmon:v1.7.0
     controller:
       args:
         - "--csisock=unix:/var/run/csi/csi.sock"
@@ -144,18 +144,18 @@ csi-powermax:
        operator: "Exists"
        effect: "NoExecute"
   csireverseproxy:
-    image: quay.io/dell/container-storage-modules/csipowermax-reverseproxy:v2.7.0
+    image: dellemc/csipowermax-reverseproxy:v2.7.0
     deployAsSidecar: true
   replication:
     enabled: $REPLICATION_ENABLED
-    image: quay.io/dell/container-storage-modules/dell-csi-replicator:v1.6.0
+    image: dellemc/dell-csi-replicator:v1.6.0
   migration:
     enabled: $MIGRATION_ENABLED
-    image: quay.io/dell/container-storage-modules/dell-csi-migrator:v1.2.0
-    nodeRescanSidecarImage: quay.io/dell/container-storage-modules/dell-csi-node-rescanner:v1.1.0
+    image: dellemc/dell-csi-migrator:v1.2.0
+    nodeRescanSidecarImage: dellemc/dell-csi-node-rescanner:v1.1.0
   authorization:
     enabled: $AUTHORIZATION_ENABLED
-    sidecarProxyImage: quay.io/dell/container-storage-modules/csm-authorization-sidecar:v1.8.0
+    sidecarProxyImage: dellemc/csm-authorization-sidecar:v1.8.0
     proxyHost: $AUTHORIZATION_PROXY_HOST
     skipCertificateValidation: $AUTHORIZATION_SKIP_CERTIFICATE_VALIDATION
   storageCapacity:
@@ -174,12 +174,12 @@ csi-vxflexos:
   version: v2.8.0
   images:
     driverRepository: $IMAGE_REPOSITORY
-    powerflexSdc: quay.io/dell/storage/powerflex/sdc:3.6.1
+    powerflexSdc: dellemc/sdc:3.6.1
   certSecretCount: $CERT_SECRET_COUNT
   controller:
     replication:
       enabled: $REPLICATION_ENABLED
-      image: quay.io/dell/container-storage-modules/dell-csi-replicator:v1.6.0
+      image: dellemc/dell-csi-replicator:v1.6.0
     healthMonitor:
       enabled: $HEALTH_MONITOR_ENABLED
     controllerCount: $CONTROLLER_COUNT
@@ -226,10 +226,10 @@ csi-vxflexos:
     enabled: $MONITOR_ENABLED
   vgsnapshotter:
     enabled: $VG_SNAPSHOT_ENABLED
-    image: quay.io/dell/container-storage-modules/csi-volumegroup-snapshotter:v1.3.0
+    image: dellemc/csi-volumegroup-snapshotter:v1.3.0
   podmon:
     enabled: $RESILIENCY_ENABLED
-    image: quay.io/dell/container-storage-modules/podmon:v1.7.0
+    image: dellemc/podmon:v1.7.0
     controller:
       args:
         - "--csisock=unix:/var/run/csi/csi.sock"
@@ -250,7 +250,7 @@ csi-vxflexos:
         - "--ignoreVolumelessPods=false"
   authorization:
     enabled: $AUTHORIZATION_ENABLED
-    sidecarProxyImage: quay.io/dell/container-storage-modules/csm-authorization-sidecar:v1.8.0
+    sidecarProxyImage: dellemc/csm-authorization-sidecar:v1.8.0
     proxyHost: $AUTHORIZATION_PROXY_HOST
     skipCertificateValidation: $AUTHORIZATION_SKIP_CERTIFICATE_VALIDATION
   maxPowerflexVolumesPerNode: $MAX_VOLUMES_PER_NODE
@@ -283,7 +283,7 @@ csi-isilon:
 
     replication:
       enabled: $REPLICATION_ENABLED
-      image: quay.io/dell/container-storage-modules/dell-csi-replicator:v1.6.0
+      image: dellemc/dell-csi-replicator:v1.6.0
 
     snapshot:
       enabled: $SNAPSHOT_ENABLED
@@ -334,14 +334,14 @@ csi-isilon:
 
   authorization:
     enabled: $AUTHORIZATION_ENABLED
-    sidecarProxyImage: quay.io/dell/container-storage-modules/csm-authorization-sidecar:v1.8.0
+    sidecarProxyImage: dellemc/csm-authorization-sidecar:v1.8.0
     proxyHost: $AUTHORIZATION_PROXY_HOST
     skipCertificateValidation: $AUTHORIZATION_SKIP_CERTIFICATE_VALIDATION
 
   # Enable this feature only after contact support for additional information
   podmon:
     enabled: $RESILIENCY_ENABLED
-    image: quay.io/dell/container-storage-modules/podmon:v1.7.0
+    image: dellemc/podmon:v1.7.0
     controller:
       args:
         - "--csisock=unix:/var/run/csi/csi.sock"
@@ -425,7 +425,7 @@ csi-unity:
   maxUnityVolumesPerNode: $MAX_VOLUMES_PER_NODE
   podmon:
     enabled: $RESILIENCY_ENABLED
-    image: quay.io/dell/container-storage-modules/podmon:v1.7.0
+    image: dellemc/podmon:v1.7.0
     controller:
       args:
         - "--csisock=unix:/var/run/csi/csi.sock"

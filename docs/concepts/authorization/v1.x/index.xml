@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Authorization - v1.x on </title>
+    <link>https://dell.github.io/csm-docs/docs/concepts/authorization/v1.x/</link>
+    <description>Recent content in Authorization - v1.x on </description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <atom:link href="https://dell.github.io/csm-docs/docs/concepts/authorization/v1.x/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Design</title>
+      <link>https://dell.github.io/csm-docs/docs/concepts/authorization/v1.x/design/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://dell.github.io/csm-docs/docs/concepts/authorization/v1.x/design/</guid>
+      <description>&lt;p&gt;Container Storage Modules for Authorization is designed as a service mesh solution and consists of many internal components that work together in concert to achieve its overall functionality.&lt;/p&gt;&#xA;&lt;p&gt;This document provides an overview of the major components, including how they fit together and pointers to implementation details.&lt;/p&gt;&#xA;&lt;p&gt;If you are a developer who is new to Authorization and want to build a mental map of how it works, you&amp;rsquo;re in the right place.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>CLI</title>
+      <link>https://dell.github.io/csm-docs/docs/concepts/authorization/v1.x/cli/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://dell.github.io/csm-docs/docs/concepts/authorization/v1.x/cli/</guid>
+      <description>&lt;div class=&#34;pageinfo pageinfo-primary&#34;&gt;&#xA;&lt;p&gt;As of Container Storage Modules v1.15, Authorization v1.x will not be supported. Please migrate to Authorization v2.0 using the following &lt;a href=&#34;https://dell.github.io/csm-docs/docs/concepts/authorization/migration-guide-from-v1-to-v2/&#34;&gt;guide&lt;/a&gt;.&lt;/p&gt;&#xA;&#xA;&lt;/div&gt;&#xA;&#xA;&lt;p&gt;karavictl is a command-line interface (CLI) used to interact with and manage your Container Storage Modules (CSM) Authorization deployment.&#xA;This document outlines all karavictl commands, their intended use, options that can be provided to alter their execution, and expected output from those commands.&lt;/p&gt;&#xA;&lt;p&gt;If you feel that something is unclear or missing in this document, please open up an &lt;a href=&#34;https://github.com/dell/csm/issues&#34;&gt;issue&lt;/a&gt;.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
