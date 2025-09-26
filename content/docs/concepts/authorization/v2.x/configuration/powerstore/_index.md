@@ -19,9 +19,22 @@ Given a setup where Kubernetes, a storage system, and the Authorization Proxy Se
 
    This takes the assumption that PowerStore will be installed in the `powerstore` namespace.
 
-2. Edit these parameters in `samples/secret/karavi-authorization-config.json` file in the [CSI PowerStore](https://github.com/dell/csi-powerstore/tree/main/samples/secret/karavi-authorization-config.json) driver and update/add connection information for one or more backend storage arrays. In an instance where multiple CSI drivers are configured on the same Kubernetes cluster, the port range in the *endpoint* parameter must be different for each driver.
+2. Edit these parameters in below yaml file and update/add connection information for one or more backend storage arrays as csm-authorization-config.json. In an instance where multiple CSI drivers are configured on the same Kubernetes cluster, the port range in the *endpoint* parameter must be different for each driver.
 
-{{< collapse id="1" title="Parameters">}}
+    ```json
+    [{
+      "username":"",
+      "password":"",
+      "intendedEndpoint":"",
+      "endpoint":"https://localhost:9400",
+      "systemID":"",
+      "skipCertificateValidation":true,
+      "isDefault":true,
+      "insecure":true
+    }]
+   ```
+	
+{{<collapse id="1" title="Parameters">}}
    | Parameter                 | Description                                                                                                      | Required | Default                        |
    | ------------------------- | ---------------------------------------------------------------------------------------------------------------- | -------- | ------------------------------ |
    | username                  | Username for connecting to the backend storage array. This parameter is ignored.                                 | No       | -                              |
@@ -70,9 +83,10 @@ Given a setup where Kubernetes, a storage system, and the Authorization Proxy Se
     ```yaml
     - username: "ignored"
       password: "ignored"
-      systemID: "ID2"
+      globalID: "unique"
       endpoint: "https://localhost:9400"
       skipCertificateValidation: true
+      blockProtocol: "FC"
       isDefault: true
     ```
 
@@ -89,9 +103,10 @@ Given a setup where Kubernetes, a storage system, and the Authorization Proxy Se
     ```yaml
     - username: "ignored"
       password: "ignored"
-      systemID: "ID2"
+      globalID: "unique"
       endpoint: "https://localhost:9400"
       skipCertificateValidation: true
+      blockProtocol: "FC"
       isDefault: true
     ```
 
