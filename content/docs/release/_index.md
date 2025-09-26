@@ -14,7 +14,7 @@ Description: >
   <h3 >🔒<strong>Important Notice</strong></h3>
   <hr>
   <p>
-  Starting with the release of <strong>Container Storage Modules v1.16.0</strong> will no longer be maintained as an open source project. Future development will continue under a closed source model. This change reflects our commitment to delivering even greater value to our customers by enabling faster innovation and more deeply integrated features with the Dell storage portfolio.
+  Starting with the release of <strong>Container Storage Modules v1.16.0</strong>, the project will no longer be maintained as an open source project. Future development will continue under a closed source model. This change reflects our commitment to delivering even greater value to our customers by enabling faster innovation and more deeply integrated features with the Dell storage portfolio.
   </p>
   <p>For existing customers using Dell’s Container Storage Modules, you will continue to receive:</p>
   <ul>
