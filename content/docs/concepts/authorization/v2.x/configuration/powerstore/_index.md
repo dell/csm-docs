@@ -27,7 +27,7 @@ Given a setup where Kubernetes, a storage system, and the Authorization Proxy Se
       "password":"",
       "intendedEndpoint":"",
       "endpoint":"https://localhost:9400",
-      "systemID":"",
+      "globalID":"",
       "skipCertificateValidation":true,
       "blockProtocol": "FC"
       "isDefault":true,
@@ -103,7 +103,7 @@ Given a setup where Kubernetes, a storage system, and the Authorization Proxy Se
     ```yaml
     - username: "ignored"
       password: "ignored"
-      globalID: "ID2"
+      globalID: "unique"
       endpoint: "https://localhost:9400"
       skipCertificateValidation: true
       blockProtocol: "FC"
