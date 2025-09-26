@@ -29,7 +29,6 @@ Given a setup where Kubernetes, a storage system, and the Authorization Proxy Se
       "endpoint":"https://localhost:9400",
       "globalID":"",
       "skipCertificateValidation":true,
-      "blockProtocol": "FC"
       "isDefault":true,
     }]
    ```
