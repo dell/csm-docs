@@ -9,11 +9,50 @@ Description: >
 
 ## Notifications
 
-**General:**
+<div style="text-align: left;">
+  
+  <h3 >🔒<strong>Important Notice</strong></h3>
+  <hr>
+  <p>
+  Starting with the release of <strong>Container Storage Modules v1.16.0</strong> will no longer be maintained as an open source project. Future development will continue under a closed source model. This change reflects our commitment to delivering even greater value to our customers by enabling faster innovation and more deeply integrated features with the Dell storage portfolio.
+  </p>
+  <p>For existing customers using Dell’s Container Storage Modules, you will continue to receive:</p>
+  <ul>
+    <li><strong>Ongoing Support &amp; Community Engagement</strong><br>
+        You will continue to receive high-quality support through Dell Support and our community channels. Your experience of engaging with the Dell community remains unchanged.
+    </li>
+    <li><strong>Streamlined Deployment &amp; Updates</strong><br>
+        Deployment and update processes will remain consistent, ensuring a smooth and familiar experience.
+    </li>
+    <li><strong>Access to Documentation &amp; Resources</strong><br>
+        All documentation and related materials will remain publicly accessible, providing transparency and technical guidance.
+    </li>
+    <li><strong>Continued Access to Current Open Source Version</strong><br>
+        The current open-source version will remain available under its existing license for those who rely on it.
+    </li>
+  </ul>
 
+  <p>
+  Moving to a closed source model allows Dell’s development team to accelerate feature delivery and enhance integration across our Enterprise Kubernetes Storage solutions, ultimately providing a more seamless and robust experience.
+  </p>
+
+  <p>
+  We deeply appreciate the contributions of the open source community and remain committed to supporting our customers through this transition.
+  </p>
+
+  <p>
+  For questions or access requests, please contact the maintainers via 
+  <a href="https://www.dell.com/support/kbdoc/en-in/000188046/container-storage-interface-csi-drivers-and-container-storage-modules-csm-how-to-get-support" target="_blank">Dell Support</a>.
+    <hr>
+</div> 
+
+<br>  
+
+ **General:**
+ 
 > * <span><span/>{{< message text="8" >}}
 > * <span><span/>{{< message text="7" >}}
-> * <span><span/>{{< message text="1" >}}
+> * <span><span/>{{< message text="1" >}} 
 
 **Deprecation:**
 
