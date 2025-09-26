@@ -131,11 +131,7 @@ function onObservabilityChange() {
 function onObservabilityOperatorChange() {
 	if ($("#observability-operator").prop('checked') === true) {
 		$('div#observability-operator-metrics-wrapper').show();
-		if (isVersionGreaterOrEqualTo(document.getElementById("csm-version").value, "1.15.0")) {
-			$('div#observability-operator-topology-wrapper').hide();
-		} else {
-			$('div#observability-operator-topology-wrapper').show();
-		}
+		$('div#observability-operator-topology-wrapper').show();
 		$('div#observability-operator-otel-wrapper').show();
 	} else {
 		$('div#observability-operator-metrics-wrapper').hide();
@@ -423,21 +419,19 @@ function displayModules(installationType, driverName, CONSTANTS_PARAM) {
 
 
 	switch (driverName) {
-		case CONSTANTS_PARAM.POWERSTORE:			
+		case CONSTANTS_PARAM.POWERSTORE:
+			$(".authorization").hide();
+			$("#authorization").prop('checked', false);
 			$(".storage-capacity").show();
 			$(".resiliency").show();
 			if (document.getElementById("csm-version").value !== "1.7.0") {
 				$(".max-volumes-per-node").show();
 			}
-			if (isVersionGreaterOrEqualTo(document.getElementById("csm-version").value,"1.14.0")) {
-				$(".vgsnapshot").hide();
-			}
-			if (!(isVersionGreaterOrEqualTo(document.getElementById("csm-version").value,"1.15.0"))) {
-				$(".authorization").hide();
-				$("#authorization").prop('checked', false);
-			}
+   if (isVersionGreaterOrEqualTo(document.getElementById("csm-version").value,"1.14.1")) {
+	   $(".vgsnapshot").hide();
+   }
 			document.getElementById("driver-namespace").value = CONSTANTS_PARAM.POWERSTORE_NAMESPACE;
-			if (isVersionGreaterOrEqualTo(document.getElementById("csm-version").value, "1.14.0")) {
+			if (isVersionGreaterOrEqualTo(document.getElementById("csm-version").value, "1.14.1")) {
 				$(".multi-nas-failure-threshold").show();
 				$(".multi-nas-cooldown-period").show();
 			}
@@ -464,13 +458,8 @@ function displayModules(installationType, driverName, CONSTANTS_PARAM) {
 			$(".max-volumes-per-node").show();
 			$(".topology").show();
 			document.getElementById("driver-namespace").value = CONSTANTS_PARAM.POWERSCALE_NAMESPACE;
-			if (installationType === CONSTANTS_PARAM.OPERATOR){
+			if (installationType === 'operator'){
 				$(".observability-operator").show();
-				if (isVersionGreaterOrEqualTo(document.getElementById("csm-version").value, "1.15.0")) {
-					$('div#observability-operator-topology-wrapper').hide();
-				} else {
-					$('div#observability-operator-topology-wrapper').show();
-				}
 				$(".observability").hide();
 				$(".replication-operator").show();
 				$(".resiliency").hide();
@@ -501,8 +490,8 @@ function displayModules(installationType, driverName, CONSTANTS_PARAM) {
 			$(".topology").show();
 			$(".fsGroupPolicy").show();
 
-			// Check the CSM version and show the option for Mount Credentials if version is greater than 1.14.0
-			if (isVersionGreaterOrEqualTo(document.getElementById("csm-version").value, "1.14.0")) {
+			// Check the CSM version and show the option for Mount Credentials if version is greater than 1.14.1
+			if (isVersionGreaterOrEqualTo(document.getElementById("csm-version").value, "1.14.1")) {
 				$(".powermax-credentials").show();
 				$(".powermax-credentials-note-wrapper").hide()
 			}
@@ -512,11 +501,6 @@ function displayModules(installationType, driverName, CONSTANTS_PARAM) {
 			if (installationType === CONSTANTS_PARAM.OPERATOR) {
 				
 				$(".observability-operator").show();
-				if (isVersionGreaterOrEqualTo(document.getElementById("csm-version").value, "1.15.0")) {
-					$('div#observability-operator-topology-wrapper').hide();
-				} else {
-					$('div#observability-operator-topology-wrapper').show();
-				}
 				$(".observability").hide();
 				$(".resiliency").hide();
 				// Check the CSM version and show the resiliency module if version is greater than 1.11.0
@@ -586,17 +570,17 @@ function displayCommands(releaseNameValue, commandTitleValue, commandNoteValue, 
 	installationType = document.getElementById("installation-type").value
 	var helmChartVersion;
 	switch (csmVersion) {
+		case "1.12.0":
+			helmChartVersion = CONSTANTS.CSM_HELM_V1120;
+			break;
 		case "1.13.0":
 			helmChartVersion = CONSTANTS.CSM_HELM_V1130;
 			break;
-		case "1.14.0":
-			helmChartVersion = CONSTANTS.CSM_HELM_V1140;
-			break;
-		case "1.15.0":
-			helmChartVersion = CONSTANTS.CSM_HELM_V1150;
+		case "1.14.1":
+			helmChartVersion = CONSTANTS.CSM_HELM_V1141;
 			break;
 		default:
-			helmChartVersion = CONSTANTS.CSM_HELM_V1150;
+			helmChartVersion = CONSTANTS.CSM_HELM_V1141;
 			break;
 	}
 	$("#command-text-area").show();

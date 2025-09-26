@@ -45,9 +45,9 @@ const CONSTANT_PARAM = {
 	PROPERTIES: ".properties",
 	HELM: "helm",
 	OPERATOR: "operator",
+	CSM_HELM_V1120: "1.5.0",
 	CSM_HELM_V1130: "1.6.0",
 	CSM_HELM_V1140: "1.7.0",
-	CSM_HELM_V1150: "1.8.0",
 	HELM_TAINTS: `
      - key: "$KEY"
        operator: "Exists"
@@ -125,7 +125,7 @@ describe("GIVEN validateForm functions", () => {
 			</select>
 			<input type="text" id="image-repository" value="some-value">
 			<select id="csm-version" value="1.7.0">
-				<option value="1.8.0" selected>CSM 1.8.0</option>
+				<option value="1.7.0" selected>CSM 1.7.0</option>
 			</select>
 			<input type="text" id="driver-namespace">
 		`;
@@ -142,8 +142,8 @@ describe("GIVEN validateForm functions", () => {
 				<option value="helm">Helm</option>
 			</select>
 			<input type="text" id="image-repository" value="some-value">
-			<select id="csm-version" value="1.8.0">
-				<option value="1.8.0" selected>CSM 1.8.0</option>
+			<select id="csm-version" value="1.7.0">
+				<option value="1.7.0" selected>CSM 1.7.0</option>
 			</select>
 			<input type="text" id="driver-namespace" value="temp-value">
 			<input type="number" id="controller-count">
@@ -161,8 +161,8 @@ describe("GIVEN validateForm functions", () => {
 			<option value="helm">Helm</option>
 		</select>
 		<input type="text" id="image-repository" value="some-value">
-		<select id="csm-version" value="1.8.0">
-			<option value="1.8.0" selected>CSM 1.8.0</option>
+		<select id="csm-version" value="1.7.0">
+			<option value="1.7.0" selected>CSM 1.7.0</option>
 		</select>
 		<input type="text" id="driver-namespace" value="temp-value">
 		<input type="number" id="controller-count" value="1">
@@ -285,8 +285,8 @@ describe("GIVEN validateForm functions", () => {
 			<option value="helm">Helm</option>
 		</select>
 		<input type="text" id="image-repository" value="some-value">
-		<select id="csm-version" value="1.8.0">
-			<option value="1.8.0" selected>CSM 1.8.0</option>
+		<select id="csm-version" value="1.7.0">
+			<option value="1.7.0" selected>CSM 1.7.0</option>
 		</select>
 		<input type="text" id="driver-namespace" value="temp-value">
 		<input type="number" id="controller-count" value="1">
@@ -339,8 +339,8 @@ describe("GIVEN setDefaultValues function", () => {
 			<input type="number" id="controller-count">
 			<input type="text" id="vol-name-prefix">
 			<input type="text" id="snapshot-prefix">
-			<select id="csm-version" value="1.8.0">
-				<option value="1.8.0" selected>CSM 1.8.0</option>
+			<select id="csm-version" value="1.7.0">
+				<option value="1.7.0" selected>CSM 1.7.0</option>
 			</select>
 			<input type="text" id="cert-secret-count">
 			<input type="text" id="taint">
@@ -352,7 +352,7 @@ describe("GIVEN setDefaultValues function", () => {
 		`;
 
 		const testCSMMap = new Map([
-			["csmVersion", "1.8.0"],
+			["csmVersion", "1.7.0"],
 			["imageRepository", "dellemc"],
 			["maxVolumesPerNode", "0"],
 			["controllerCount", "2"],
@@ -367,12 +367,12 @@ describe("GIVEN setDefaultValues function", () => {
 			["multiNasCooldownPeriod", "5m"]
 		]);
 
-		setDefaultValues("csmVersion=1.8.0\r\nimageRepository=dellemc\r\ncontrollerCount=2\r\ncertSecretCount=1", testCSMMap);
+		setDefaultValues("csmVersion=1.7.0\r\nimageRepository=dellemc\r\ncontrollerCount=2\r\ncertSecretCount=1", testCSMMap);
 
 		expect(document.getElementById("image-repository").value).toEqual("dellemc");
 		expect(document.getElementById("max-volumes-per-node").value).toEqual("0");
 		expect(document.getElementById("controller-count").value).toEqual("2");
-		expect(document.getElementById("csm-version").value).toEqual("1.8.0");
+		expect(document.getElementById("csm-version").value).toEqual("1.7.0");
 		expect(document.getElementById("vol-name-prefix").value).toEqual("csivol");
 		expect(document.getElementById("snapshot-prefix").value).toEqual("csi-snap");
 		expect(document.getElementById("cert-secret-count").value).toEqual("1");

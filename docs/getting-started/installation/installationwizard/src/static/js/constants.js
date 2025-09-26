@@ -40,9 +40,9 @@ const CONSTANTS = {
 	PROPERTIES: ".properties",
 	HELM: "helm",
 	OPERATOR: "operator",
-	CSM_HELM_V1130: "1.6.0",
-	CSM_HELM_V1140: "1.7.0",
-	CSM_HELM_V1150: "1.8.0",
+	CSM_HELM_V1120: "1.5.0",
+	CSM_HELM_V1130: "1.6.1",
+	CSM_HELM_V1141: "1.7.1",
 	HELM_TAINTS: `
      - key: "$KEY"
        operator: "Exists"
