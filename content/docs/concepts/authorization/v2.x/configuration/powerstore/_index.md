@@ -19,7 +19,7 @@ Given a setup where Kubernetes, a storage system, and the Authorization Proxy Se
 
    This takes the assumption that PowerStore will be installed in the `powerstore` namespace.
 
-2. Edit these parameters in below yaml file and update/add connection information for one or more backend storage arrays. In an instance where multiple CSI drivers are configured on the same Kubernetes cluster, the port range in the *endpoint* parameter must be different for each driver.
+2. Edit these parameters in below yaml file and update/add connection information for one or more backend storage arrays as csm-authorization-config.json. In an instance where multiple CSI drivers are configured on the same Kubernetes cluster, the port range in the *endpoint* parameter must be different for each driver.
 
     ```json
     [{
@@ -27,9 +27,10 @@ Given a setup where Kubernetes, a storage system, and the Authorization Proxy Se
       "password":"",
       "intendedEndpoint":"",
       "endpoint":"https://localhost:9400",
-      "globalID":"",
+      "systemID":"",
       "skipCertificateValidation":true,
       "isDefault":true,
+      "insecure":true
     }]
    ```
 	
@@ -40,7 +41,7 @@ Given a setup where Kubernetes, a storage system, and the Authorization Proxy Se
    | password                  | Password for connecting to to the backend storage array. This parameter is ignored.                              | No       | -                              |
    | intendedEndpoint          | HTTPS REST API endpoint of the backend storage array.                                                            | Yes      | -                              |
    | endpoint                  | HTTPS localhost endpoint that the authorization sidecar will listen on.                                          | Yes      | https://localhost:9400         |
-   | globalID                  | Array ID of the backend storage array.                                                                          | Yes      | " "                            |
+   | systemID                  | System ID of the backend storage array.                                                                          | Yes      | " "                            |
    | skipCertificateValidation | A boolean that enables/disables certificate validation of the backend storage array. This parameter is not used. | No       | true                           |
    | isDefault                 | A boolean that indicates if the array is the default array. This parameter is not used.                          | No       | default value from values.yaml |
 {{< /collapse >}}
