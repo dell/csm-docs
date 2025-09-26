@@ -41,7 +41,7 @@ Given a setup where Kubernetes, a storage system, and the Authorization Proxy Se
    | password                  | Password for connecting to to the backend storage array. This parameter is ignored.                              | No       | -                              |
    | intendedEndpoint          | HTTPS REST API endpoint of the backend storage array.                                                            | Yes      | -                              |
    | endpoint                  | HTTPS localhost endpoint that the authorization sidecar will listen on.                                          | Yes      | https://localhost:9400         |
-   | systemID                  | System ID of the backend storage array.                                                                          | Yes      | " "                            |
+   | systemID                  | System ID will be the GlobalID of the backend storage array.                                                                          | Yes      | " "                            |
    | skipCertificateValidation | A boolean that enables/disables certificate validation of the backend storage array. This parameter is not used. | No       | true                           |
    | isDefault                 | A boolean that indicates if the array is the default array. This parameter is not used.                          | No       | default value from values.yaml |
 {{< /collapse >}}
