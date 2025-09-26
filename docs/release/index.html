@@ -20,8 +20,8 @@
 
   <meta itemprop="name" content="Release Notes">
   <meta itemprop="description" content="Container Storage Modules release notes">
-  <meta itemprop="dateModified" content="2025-09-17T12:42:34-04:00">
-  <meta itemprop="wordCount" content="2245">
+  <meta itemprop="dateModified" content="2025-09-26T16:34:40-04:00">
+  <meta itemprop="wordCount" content="2469">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Release Notes">
   <meta name="twitter:description" content="Container Storage Modules release notes">
@@ -203,7 +203,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.8524f8e4b4d09d4bff992dc12f161d58.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.95714029787e7c2635ed76d3bbaf61bd.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -3871,7 +3871,40 @@ Notifications <a class="header-link"  href="#notifications" style=" display: inl
                 <path d="M0 0h24v24H0z" fill="none"/>
                 <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
             </svg>
-        </a></h2><p><strong>General:</strong></p>
+        </a></h2><div style="text-align: left;">
+  <h3 >🔒<strong>Important Notice</strong></h3>
+  <hr>
+  <p>
+  Starting with the release of <strong>Container Storage Modules v1.16.0</strong>, the project will no longer be maintained as an open source project. Future development will continue under a closed source model. This change reflects our commitment to delivering even greater value to our customers by enabling faster innovation and more deeply integrated features with the Dell storage portfolio.
+  </p>
+  <p>For existing customers using Dell’s Container Storage Modules, you will continue to receive:</p>
+  <ul>
+    <li><strong>Ongoing Support &amp; Community Engagement</strong><br>
+        You will continue to receive high-quality support through Dell Support and our community channels. Your experience of engaging with the Dell community remains unchanged.
+    </li>
+    <li><strong>Streamlined Deployment &amp; Updates</strong><br>
+        Deployment and update processes will remain consistent, ensuring a smooth and familiar experience.
+    </li>
+    <li><strong>Access to Documentation &amp; Resources</strong><br>
+        All documentation and related materials will remain publicly accessible, providing transparency and technical guidance.
+    </li>
+    <li><strong>Continued Access to Current Open Source Version</strong><br>
+        The current open-source version will remain available under its existing license for those who rely on it.
+    </li>
+  </ul>
+  <p>
+  Moving to a closed source model allows Dell’s development team to accelerate feature delivery and enhance integration across our Enterprise Kubernetes Storage solutions, ultimately providing a more seamless and robust experience.
+  </p>
+  <p>
+  We deeply appreciate the contributions of the open source community and remain committed to supporting our customers through this transition.
+  </p>
+  <p>
+  For questions or access requests, please contact the maintainers via 
+  <a href="https://www.dell.com/support/kbdoc/en-in/000188046/container-storage-interface-csi-drivers-and-container-storage-modules-csm-how-to-get-support" target="_blank">Dell Support</a>.
+    <hr>
+</div> 
+<br>  
+<p><strong>General:</strong></p>
 <blockquote>
 <ul>
 <li><span><span/>
@@ -4099,74 +4132,8 @@ Known Issues <a class="header-link"  href="#known-issues" style=" display: inlin
     
     
     </div>
-
-		<style>  
-    .feedback-container{
-      margin-top:40px;
-    }
-    .feedback--answer {
-      display: inline-block; 
-      border-radius: 20px;
-    }
-    .feedback--answer-no {
-      margin-left: 1em;
-    }
-    .feedback--response {
-      display: none;
-      margin-top: 1em;
-    }
-    .feedback--response__visible {
-      display: block;
-    } 
-
-  </style>
-
-<div class="d-print-none">
-  <div class="container" style="margin-left:0;">
-    <div class="row">
-      <div class="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-4 feedback-container">
-        <h2 class="feedback--title">Feedback</h2>
-        <p class="feedback--question">Was this page helpful?</p>
-        <button class="btn btn-primary mb-4 feedback--answer feedback--answer-yes px-4">Yes</button>
-        <a href="https://github.com/dell/csm/issues/new?template=bug_report.yml&title=%5BBUG%5D%3A%20Release&#43;Notes&bug-description=Feedback%20for%20the%20documentation&driver=CSM%20documentation&co=N%2FA&os=N%2FA&files=N%2FA&steps=%2Fcsm-docs%2Fdocs%2Frelease%2F" target="_blank" >     <button class="btn btn-primary mb-4 feedback--answer feedback--answer-no px-4 ">No</button></a>
-        <p class="feedback--response feedback--response-yes">
-          Thank you for your feedback!
-        </p>
-      </div>
-    </div>
-  </div>
-</div>
-
-  
-  <script>
-    const yesButton = document.querySelector('.feedback--answer-yes');
-    const noButton = document.querySelector('.feedback--answer-no');
-    const yesResponse = document.querySelector('.feedback--response-yes');
-    const noResponse = document.querySelector('.feedback--response-no');
-    const disableButtons = () => {
-      yesButton.disabled = true;
-      noButton.disabled = true;
-    };
-    const sendFeedback = (value) => {
-      if (typeof gtag !== 'function') return;
-      gtag('event', 'page_helpful', {
-        'event_category': 'Helpful',
-        'event_label': window.location.pathname,
-        'value': value
-      });
-    };
-    yesButton.addEventListener('click', () => {
-      yesResponse.classList.add('feedback--response__visible');
-      disableButtons();
-      sendFeedback(100);
-    });
-    noButton.addEventListener('click', () => {
-      noResponse.classList.add('feedback--response__visible');
-      disableButtons();
-      sendFeedback(0);
-    });
-  </script>
-  
+	
+	
 
 </div>
 

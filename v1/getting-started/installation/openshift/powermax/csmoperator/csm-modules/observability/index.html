@@ -203,7 +203,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.8524f8e4b4d09d4bff992dc12f161d58.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.95714029787e7c2635ed76d3bbaf61bd.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -4080,73 +4080,7 @@ Install Observability <a class="header-link"  href="#install-observability" styl
     
     </div>
 
-		<style>  
-    .feedback-container{
-      margin-top:40px;
-    }
-    .feedback--answer {
-      display: inline-block; 
-      border-radius: 20px;
-    }
-    .feedback--answer-no {
-      margin-left: 1em;
-    }
-    .feedback--response {
-      display: none;
-      margin-top: 1em;
-    }
-    .feedback--response__visible {
-      display: block;
-    } 
-
-  </style>
-
-<div class="d-print-none">
-  <div class="container" style="margin-left:0;">
-    <div class="row">
-      <div class="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-4 feedback-container">
-        <h2 class="feedback--title">Feedback</h2>
-        <p class="feedback--question">Was this page helpful?</p>
-        <button class="btn btn-primary mb-4 feedback--answer feedback--answer-yes px-4">Yes</button>
-        <a href="https://github.com/dell/csm/issues/new?template=bug_report.yml&title=%5BBUG%5D%3A%20Observability&bug-description=Feedback%20for%20the%20documentation&driver=CSM%20documentation&co=N%2FA&os=N%2FA&files=N%2FA&steps=%2Fcsm-docs%2Fv1%2Fgetting-started%2Finstallation%2Fopenshift%2Fpowermax%2Fcsmoperator%2Fcsm-modules%2Fobservability%2F" target="_blank" >     <button class="btn btn-primary mb-4 feedback--answer feedback--answer-no px-4 ">No</button></a>
-        <p class="feedback--response feedback--response-yes">
-          Thank you for your feedback!
-        </p>
-      </div>
-    </div>
-  </div>
-</div>
-
-  
-  <script>
-    const yesButton = document.querySelector('.feedback--answer-yes');
-    const noButton = document.querySelector('.feedback--answer-no');
-    const yesResponse = document.querySelector('.feedback--response-yes');
-    const noResponse = document.querySelector('.feedback--response-no');
-    const disableButtons = () => {
-      yesButton.disabled = true;
-      noButton.disabled = true;
-    };
-    const sendFeedback = (value) => {
-      if (typeof gtag !== 'function') return;
-      gtag('event', 'page_helpful', {
-        'event_category': 'Helpful',
-        'event_label': window.location.pathname,
-        'value': value
-      });
-    };
-    yesButton.addEventListener('click', () => {
-      yesResponse.classList.add('feedback--response__visible');
-      disableButtons();
-      sendFeedback(100);
-    });
-    noButton.addEventListener('click', () => {
-      noResponse.classList.add('feedback--response__visible');
-      disableButtons();
-      sendFeedback(0);
-    });
-  </script>
-  
+	
 
 </div>
 

@@ -20,8 +20,8 @@
 
   <meta itemprop="name" content="Contribution Guidelines">
   <meta itemprop="description" content="Container Storage Modules (CSM) docs Contribution Guidelines">
-  <meta itemprop="dateModified" content="2025-04-30T07:03:05+05:30">
-  <meta itemprop="wordCount" content="620">
+  <meta itemprop="dateModified" content="2025-09-26T16:34:40-04:00">
+  <meta itemprop="wordCount" content="653">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Contribution Guidelines">
   <meta name="twitter:description" content="Container Storage Modules (CSM) docs Contribution Guidelines">
@@ -203,7 +203,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.8524f8e4b4d09d4bff992dc12f161d58.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.95714029787e7c2635ed76d3bbaf61bd.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -3867,7 +3867,14 @@ document.addEventListener("DOMContentLoaded", function() {
      
 	
     
-        <p>Container Storage Modules Documentation is an open-source project and we thrive to build a welcoming and open community for anyone who wants to use the project or contribute to it.</p>
+        
+
+<div class="pageinfo pageinfo-primary">
+<p><span><span/>
+Starting with the release of <b> Container Storage Modules v1.16.0</b>, the project will no longer be maintained as an open source project. Future development will continue under a closed source model. This change reflects our commitment to delivering even greater value to our customers by enabling faster innovation and more deeply integrated features with the Dell storage portfolio. For more information like <a href="/csm-docs/docs/release">Release Notes</a></p>
+
+</div>
+
 <h3 id="contributing-to-container-storage-modules-documentation">
 Contributing to Container Storage Modules Documentation <a class="header-link"  href="#contributing-to-container-storage-modules-documentation" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
             <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
@@ -4052,74 +4059,8 @@ Style guide <a class="header-link"  href="#style-guide" style=" display: inline-
     
     
     </div>
-
-		<style>  
-    .feedback-container{
-      margin-top:40px;
-    }
-    .feedback--answer {
-      display: inline-block; 
-      border-radius: 20px;
-    }
-    .feedback--answer-no {
-      margin-left: 1em;
-    }
-    .feedback--response {
-      display: none;
-      margin-top: 1em;
-    }
-    .feedback--response__visible {
-      display: block;
-    } 
-
-  </style>
-
-<div class="d-print-none">
-  <div class="container" style="margin-left:0;">
-    <div class="row">
-      <div class="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-4 feedback-container">
-        <h2 class="feedback--title">Feedback</h2>
-        <p class="feedback--question">Was this page helpful?</p>
-        <button class="btn btn-primary mb-4 feedback--answer feedback--answer-yes px-4">Yes</button>
-        <a href="https://github.com/dell/csm/issues/new?template=bug_report.yml&title=%5BBUG%5D%3A%20Contribution&#43;Guidelines&bug-description=Feedback%20for%20the%20documentation&driver=CSM%20documentation&co=N%2FA&os=N%2FA&files=N%2FA&steps=%2Fcsm-docs%2Fdocs%2Fsupport%2Fcontributionguidelines%2F" target="_blank" >     <button class="btn btn-primary mb-4 feedback--answer feedback--answer-no px-4 ">No</button></a>
-        <p class="feedback--response feedback--response-yes">
-          Thank you for your feedback!
-        </p>
-      </div>
-    </div>
-  </div>
-</div>
-
-  
-  <script>
-    const yesButton = document.querySelector('.feedback--answer-yes');
-    const noButton = document.querySelector('.feedback--answer-no');
-    const yesResponse = document.querySelector('.feedback--response-yes');
-    const noResponse = document.querySelector('.feedback--response-no');
-    const disableButtons = () => {
-      yesButton.disabled = true;
-      noButton.disabled = true;
-    };
-    const sendFeedback = (value) => {
-      if (typeof gtag !== 'function') return;
-      gtag('event', 'page_helpful', {
-        'event_category': 'Helpful',
-        'event_label': window.location.pathname,
-        'value': value
-      });
-    };
-    yesButton.addEventListener('click', () => {
-      yesResponse.classList.add('feedback--response__visible');
-      disableButtons();
-      sendFeedback(100);
-    });
-    noButton.addEventListener('click', () => {
-      noResponse.classList.add('feedback--response__visible');
-      disableButtons();
-      sendFeedback(0);
-    });
-  </script>
-  
+	
+	
 
 </div>
 
