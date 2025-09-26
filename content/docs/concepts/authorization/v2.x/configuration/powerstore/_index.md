@@ -29,10 +29,11 @@ Given a setup where Kubernetes, a storage system, and the Authorization Proxy Se
       "endpoint":"https://localhost:9400",
       "systemID":"",
       "skipCertificateValidation":true,
+      "blockProtocol": "FC"
       "isDefault":true,
     }]
     ```
-<ul>
+	
 {{< collapse id="1" title="Parameters">}}
    | Parameter                 | Description                                                                                                      | Required | Default                        |
    | ------------------------- | ---------------------------------------------------------------------------------------------------------------- | -------- | ------------------------------ |
@@ -40,11 +41,10 @@ Given a setup where Kubernetes, a storage system, and the Authorization Proxy Se
    | password                  | Password for connecting to to the backend storage array. This parameter is ignored.                              | No       | -                              |
    | intendedEndpoint          | HTTPS REST API endpoint of the backend storage array.                                                            | Yes      | -                              |
    | endpoint                  | HTTPS localhost endpoint that the authorization sidecar will listen on.                                          | Yes      | https://localhost:9400         |
-   | systemID                  | System ID of the backend storage array.                                                                          | Yes      | " "                            |
+   | globalID                  | System ID of the backend storage array.                                                                          | Yes      | " "                            |
    | skipCertificateValidation | A boolean that enables/disables certificate validation of the backend storage array. This parameter is not used. | No       | true                           |
    | isDefault                 | A boolean that indicates if the array is the default array. This parameter is not used.                          | No       | default value from values.yaml |
-{{< /collapse >}} 
-</ul>
+{{< /collapse >}}
 <ul style="list-style-type: none;">
 <li>Create the karavi-authorization-config secret using this command:
 
@@ -81,14 +81,13 @@ Given a setup where Kubernetes, a storage system, and the Authorization Proxy Se
     Example:
 
     ```yaml
-    arrays:
-      - username: "ignored"
-        password: "ignored"
-        globalID: "unique"
-        endpoint: "https://localhost:9400"
-        skipCertificateValidation: true
-        blockProtocol: "FC"
-        isDefault: true
+    - username: "ignored"
+      password: "ignored"
+      globalID: "unique"
+      endpoint: "https://localhost:9400"
+      skipCertificateValidation: true
+      blockProtocol: "FC"
+      isDefault: true
     ```
 
     **Helm**
@@ -102,14 +101,13 @@ Given a setup where Kubernetes, a storage system, and the Authorization Proxy Se
     Example:
 
     ```yaml
-    arrays:
-      - username: "ignored"
-        password: "ignored"
-        globalID: "unique"
-        endpoint: "https://localhost:9400"
-        skipCertificateValidation: true
-        blockProtocol: "FC"
-        isDefault: true
+    - username: "ignored"
+      password: "ignored"
+      globalID: "ID2"
+      endpoint: "https://localhost:9400"
+      skipCertificateValidation: true
+      blockProtocol: "FC"
+      isDefault: true
     ```
 
 5. Enable Container Storage Modules Authorization in the driver installation applicable to your installation method.
@@ -159,7 +157,7 @@ Given a setup where Kubernetes, a storage system, and the Authorization Proxy Se
 
     - Update `authorization.enabled` to `true`.
 
-    - Update `images.authorization` to the image of Authorization sidecar.
+    - Update `images.authorization` to the image of Authorization sidecar. 
 
     - Update `authorization.proxyHost` to the hostname of Authorization Proxy Server. `csm-authorization.com` is a placeholder for the proxyHost. See the administrator of Authorization for the correct value.
 
