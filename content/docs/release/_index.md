@@ -49,10 +49,10 @@ Description: >
 <br>  
 
  **General:**
- 
+
 > * <span><span/>{{< message text="8" >}}
 > * <span><span/>{{< message text="7" >}}
-> * <span><span/>{{< message text="1" >}} 
+> * <span><span/>{{< message text="1" >}}
 
 **Deprecation:**
 
