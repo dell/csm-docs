@@ -441,7 +441,7 @@ For a cluster with multiple network interfaces and if a user wants to segregate 
 
 ## Multi-Access Zone Support for Multi-Tenant Deployments
 
-For a cluster with multiple network interfaces per cluster worker node, you can specify the `AZNetwork` in the storage class to configure the NFS export with all of the associated IP addresses in that network. See the storage class snippets below for examples of storage classes using this feature.
+For a cluster with multiple network interfaces per cluster worker node, you can specify the `AzNetwork` in the storage class to configure the NFS export with all of the associated IP addresses in that network. See the storage class snippets below for examples of storage classes using this feature.
 
 ```yaml
 apiVersion: storage.k8s.io/v1
@@ -453,8 +453,8 @@ reclaimPolicy: Delete
 allowVolumeExpansion: true
 parameters:
   AccessZone: access-zone-one
-  AZServiceIP: 10.0.0.1
-  AZNetwork: 192.168.100.0/24
+  AzServiceIP: 10.0.0.1
+  AzNetwork: 192.168.100.0/24
 ```
 
 ```yaml
@@ -467,8 +467,8 @@ reclaimPolicy: Delete
 allowVolumeExpansion: true
 parameters:
   AccessZone: access-zone-two
-  AZServiceIP: 10.0.0.2
-  AZNetwork: 172.16.0.0/24
+  AzServiceIP: 10.0.0.2
+  AzNetwork: 172.16.0.0/24
 ```
 
 >**NOTE:** Multi-Access Zone Support for Multi-Tenant Deployments does not support CSM Authorization.
