@@ -7,7 +7,9 @@ Description: >
 ---
 
 
-CSM Docs is an open-source project and we thrive to build a welcoming and open community for anyone who wants to use the project or contribute to it.
+{{% pageinfo color="primary" %}}
+<span><span/>{{< message text="17" >}}
+{{% /pageinfo %}}
 
 ### Contributing to CSM Docs
 

@@ -30,6 +30,8 @@ Starting from Container Storage Modules 1.17.0, cert-csi tool is deprecated and 
 The Container Storage Modules Application Mobility component has been deprecated and will no longer receive updates or maintenance.
 {{ else if eq (.Get "text") "16" }}
 Starting from CSM version 1.15, the Karavi topology component will no longer operate as a standalone service. Instead, topology data will be directly exported to the OpenTelemetry Collector
+{{ else if eq (.Get "text") "17" }}
+Starting with the release of <b> Container Storage Modules v1.16.0</b>, the project will no longer be maintained as an open source project. Future development will continue under a closed source model. This change reflects our commitment to delivering even greater value to our customers by enabling faster innovation and more deeply integrated features with the Dell storage portfolio. For more information like <a href="/csm-docs/docs/release">Release Notes</a>
 {{else}}
 <p>Default text if no valid parameter is passed.</p>
 {{ end }}
