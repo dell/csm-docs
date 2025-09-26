@@ -42,7 +42,7 @@ weight: 1
 | 4.18 - 4.19  | <div style="text-align: left">  Observability        </div>                                          | No          | No        | Yes        | Yes      | No       |
 | 4.18 - 4.19  | <div style="text-align: left"> Authorization - v2.x  </div>                                          | Yes         | No        | Yes        | Yes      | No       |
 | 4.18 - 4.19  | <div style="text-align: left"> Resiliency            </div>                                          | Yes         | No        | Yes        | Yes      | No       |
-| 4.18 - 4.19  | <div style="text-align: left"> Replication (Metro, Sync)	</div>                                            | Yes         | No        | No        | Yes       | No       |
+| 4.18 - 4.19  | <div style="text-align: left"> Replication (Metro, Sync)	</div>                                    | Yes         | No        | No        | Yes       | No       |
 | 4.18 - 4.19  | <div style="text-align: left"> Replication (Async)	</div>                                            | Yes         | No        | Yes       | Yes       | No       |
 {{</table>}}
 > Note: PowerStore does not support VM cloning or VM snapshot operations while Metro replication is enabled.
