@@ -19,8 +19,20 @@ Given a setup where Kubernetes, a storage system, and the Authorization Proxy Se
 
    This takes the assumption that PowerStore will be installed in the `powerstore` namespace.
 
-2. Edit these parameters in `samples/secret/karavi-authorization-config.json` file in the [CSI PowerStore](https://github.com/dell/csi-powerstore/tree/main/samples/secret/karavi-authorization-config.json) driver and update/add connection information for one or more backend storage arrays. In an instance where multiple CSI drivers are configured on the same Kubernetes cluster, the port range in the *endpoint* parameter must be different for each driver.
+2. Edit these parameters in below yaml file and update/add connection information for one or more backend storage arrays. In an instance where multiple CSI drivers are configured on the same Kubernetes cluster, the port range in the *endpoint* parameter must be different for each driver.
 
+    ```json
+    [{
+      "username":"",
+      "password":"",
+      "intendedEndpoint":"",
+      "endpoint":"https://localhost:9400",
+      "systemID":"",
+      "skipCertificateValidation":true,
+      "isDefault":true,
+    }]
+    ```
+<ul>
 {{< collapse id="1" title="Parameters">}}
    | Parameter                 | Description                                                                                                      | Required | Default                        |
    | ------------------------- | ---------------------------------------------------------------------------------------------------------------- | -------- | ------------------------------ |
@@ -31,7 +43,8 @@ Given a setup where Kubernetes, a storage system, and the Authorization Proxy Se
    | systemID                  | System ID of the backend storage array.                                                                          | Yes      | " "                            |
    | skipCertificateValidation | A boolean that enables/disables certificate validation of the backend storage array. This parameter is not used. | No       | true                           |
    | isDefault                 | A boolean that indicates if the array is the default array. This parameter is not used.                          | No       | default value from values.yaml |
-{{< /collapse >}}
+{{< /collapse >}} 
+</ul>
 <ul style="list-style-type: none;">
 <li>Create the karavi-authorization-config secret using this command:
 
