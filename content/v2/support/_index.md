@@ -20,6 +20,6 @@ If you have a support contract for a Dell Storage Backend that has a CSI Driver 
 
 The Dell Container Storage Modules team and community take security bugs seriously. We sincerely appreciate all your efforts and responsibility to disclose your findings.
 
-To report a security issue, please submit the security advisory form ["Report a Vulnerability"](https://github.com/dell/csm/security/advisories/new).
+To report a security issue, please submit the security advisory form ["Report a Vulnerability"](https://www.dell.com/support/contents/en-us/article/product-support/self-support-knowledgebase/security-antivirus/alerts-vulnerabilities/dell-vulnerability-response-policy).
 
 >CSM recommends staying on the [latest release](https://github.com/dell/csm/releases/latest) of Dell Container Storage Modules to take advantage of new features, enhancements, bug fixes, and security fixes.
