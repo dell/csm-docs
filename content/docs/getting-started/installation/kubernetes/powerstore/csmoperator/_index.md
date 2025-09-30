@@ -42,7 +42,7 @@ To deploy the Operator, follow the instructions available [here](../../../operat
         username: "user"
         password: "password"
         skipCertificateValidation: true
-        blockProtocol: "FC"
+        blockProtocol: "auto"
    ```
    **Note** :
     skipCertificateValidation flag is currently unsupported. Please refrain from changing its value.
