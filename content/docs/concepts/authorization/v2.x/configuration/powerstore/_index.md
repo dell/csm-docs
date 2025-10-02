@@ -19,7 +19,6 @@ Given a setup where Kubernetes, a storage system, and the Authorization Proxy Se
 
    This takes the assumption that PowerStore will be installed in the `powerstore` namespace.
 
-
 2. Create the proxy-server-root-certificate secret.
 
     If running in *insecure* mode, create the secret with empty data:
