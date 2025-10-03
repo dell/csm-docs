@@ -20,25 +20,7 @@ Given a setup where Kubernetes, a storage system, and the Container Storage Modu
 
    This takes the assumption that PowerScale will be installed in the `isilon` namespace.
 
-2. Edit these parameters in `samples/secret/karavi-authorization-config.json` file in [CSI PowerScale](https://github.com/dell/csi-powerscale/tree/main/samples/secret/karavi-authorization-config.json) driver and update/add connection information for one or more backend storage arrays. In an instance where multiple CSI drivers are configured on the same Kubernetes cluster, the port range in the *endpoint* parameter must be different for each driver.
-
-  | Parameter                 | Description                                                                                                      | Required | Default                        |
-  | ------------------------- | ---------------------------------------------------------------------------------------------------------------- | -------- | ------------------------------ |
-  | username                  | Username for connecting to the backend storage array. This parameter is ignored.                                 | No       | -                              |
-  | password                  | Password for connecting to to the backend storage array. This parameter is ignored.                              | No       | -                              |
-  | intendedEndpoint          | HTTPS REST API endpoint of the backend storage array.                                                            | Yes      | -                              |
-  | endpoint                  | HTTPS localhost endpoint that the authorization sidecar will listen on.                                          | Yes      | https://localhost:9400         |
-  | systemID                  | Cluster name of the backend storage array.                                                                       | Yes      | " "                            |
-  | skipCertificateValidation | A boolean that enables/disables certificate validation of the backend storage array. This parameter is not used. | No       | true                           |
-  | isDefault                 | A boolean that indicates if the array is the default array. This parameter is not used.                          | No       | default value from values.yaml |
-
-  Create the karavi-authorization-config secret using this command:
-
-  ```bash
-  kubectl -n isilon create secret generic karavi-authorization-config --from-file=config=samples/secret/karavi-authorization-config.json -o yaml --dry-run=client | kubectl apply -f -
-  ```
-
-3. Create the proxy-server-root-certificate secret.
+2. Create the proxy-server-root-certificate secret.
 
     If running in *insecure* mode, create the secret with empty data:
 
@@ -52,19 +34,21 @@ Given a setup where Kubernetes, a storage system, and the Container Storage Modu
       kubectl -n isilon create secret generic proxy-server-root-certificate --from-file=rootCertificate.pem=/path/to/rootCA -o yaml --dry-run=client | kubectl apply -f -
       ```
 
-4. Prepare the driver configuration secret, applicable to your driver installation method, to communicate with Authorization sidecar.
+3. Prepare the driver configuration secret, applicable to your driver installation method, to communicate with Authorization sidecar.
 
     **Operator**
 
     Refer to the [Prerequisite](../../../../../getting-started/installation/kubernetes/powerscale/csmoperator/#install-driver) section to prepare the `secret.yaml` file to configure the driver to communicate with the CSM Authorization sidecar.
 
-    - Update `endpoint` to match the localhost endpoint in `samples/secret/karavi-authorization-config.json`.
+    - Update `endpoint` to an HTTPS localhost endpoint that the authorization sidecar will listen on.
+
+    - Update `endpointPort` to the port that the authorization sidecar will listen on.
 
     - Update `mountEndpoint` to the PowerScale OneFS API server. For example, 10.0.0.1.
 
     - Update `skipCertificateValidation` to `true`.
 
-    - The `username` and `password` can be any value since they will be ignored.
+    - The `username` and `password` fields are not used during authentication and can be set to any value.
 
     Example:
 
@@ -84,13 +68,15 @@ Given a setup where Kubernetes, a storage system, and the Container Storage Modu
 
     Refer to the [Install the Driver](../../../../../getting-started/installation/kubernetes/powerscale/helm/#install-driver) section to edit the parameters to prepare the `samples/secret/secret.yaml` file to configure the driver to communicate with Authorization sidecar.
 
-    - Update `endpoint` to match the localhost endpoint in `samples/secret/karavi-authorization-config.json`.
+    - Update `endpoint` to an HTTPS localhost endpoint that the authorization sidecar will listen on.
+
+    - Update `endpointPort` to the port that the authorization sidecar will listen on.
 
     - Update `mountEndpoint` to the PowerScale OneFS API server. For example, 10.0.0.1.
 
     - Update `skipCertificateValidation` to `true`.
 
-    - The `username` and `password` can be any value since they will be ignored.
+    - The `username` and `password` fields are not used during authentication and can be set to any value.
 
     Example:
 
@@ -106,7 +92,7 @@ Given a setup where Kubernetes, a storage system, and the Container Storage Modu
         skipCertificateValidation: true
     ```
 
-5. Enable Container Storage Modules Authorization in the driver installation applicable to your installation method.
+4. Enable Container Storage Modules Authorization in the driver installation applicable to your installation method.
 
     **Operator**
 
@@ -178,4 +164,4 @@ Given a setup where Kubernetes, a storage system, and the Container Storage Modu
       skipCertificateValidation: true
     ```
 
-6. Install the Dell CSI PowerScale driver following the appropriate documentation for your installation method.
+5. Install the Dell CSI PowerScale driver following the appropriate documentation for your installation method.
