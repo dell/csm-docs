@@ -90,7 +90,7 @@ dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      
         username: "csmadmin"
         password: "P@ssw0rd123"
         skipCertificateValidation: true
-        blockProtocol: "FC"
+        blockProtocol: "auto"
     EOF
     ```
     </div>

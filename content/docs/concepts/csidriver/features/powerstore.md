@@ -470,7 +470,7 @@ Create a file called `config.yaml` and populate it with the following content
         password: "password"                      # password for connecting to API
         skipCertificateValidation: true                            # use insecure connection or not
         default: true                             # treat current array as a default (would be used by storage classes without arrayIP parameter)
-        blockProtocol: "ISCSI"                    # what transport protocol use on node side (FC, ISCSI, NVMeTCP, None, or auto)
+        blockProtocol: "auto"                     # what transport protocol use on node side (FC, ISCSI, NVMeTCP, None, or auto)
         nasName: "nas-server"                     # what NAS must be used for NFS volumes
         nfsAcls: "0777"                           # (Optional) defines permissions - POSIX mode bits or NFSv4 ACLs, to be set on NFS target mount directory.
                                                   # NFSv4 ACls are supported for NFSv4 shares on NFSv4 enabled NAS servers only. POSIX ACLs are not supported and only POSIX mode bits are supported for NFSv3 shares.
@@ -479,7 +479,7 @@ Create a file called `config.yaml` and populate it with the following content
         username: "user"
         password: "password"
         skipCertificateValidation: true
-        blockProtocol: "FC"
+        blockProtocol: "auto"
 ```
 
 
@@ -719,7 +719,7 @@ nfsAcls: "A::OWNER@:rwatTnNcCy,A::GROUP@:rxtncy,A::EVERYONE@:rxtncy,A::user@doma
 #### NVMeTCP Support
 - Supported from CSI Driver for PowerStore 2.2.0 and above.
 - Enable by setting `blockProtocol` to `NVMeTCP` in the secret.
-- Not supported on RHEL 7.x and CoreOS.
+- Not supported on RHEL 7.x.
 
 #### NVMeFC Support
 - Supported from CSI Driver for PowerStore 2.3.0 and above.

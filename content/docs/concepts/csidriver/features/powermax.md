@@ -689,7 +689,6 @@ These are the Container Storage Modules not supported with NVMeTCP protocol:
 
 - Container Storage Modules Authorization
 - Container Storage Modules Observability
-- Container Storage Modules Application Mobility
 - Metro Replication
 
 ## Mount Credentials Support
