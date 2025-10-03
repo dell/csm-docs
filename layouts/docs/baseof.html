@@ -26,9 +26,7 @@
             {{ if not .Site.Params.ui.breadcrumb_disable }}{{ partial "breadcrumb.html" . }}{{ end }} 
             <div>
             {{ block "main" . }}{{ end }}
-            </div>
-            {{ partial "pager.html" . }}
-            
+            </div>            
           </main>
         </div>
       </div>
