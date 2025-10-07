@@ -45,6 +45,10 @@ The following options are provided to describe the relationship between the clus
 [Assigning Pods to Nodes: Node Affinity](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#node-affinity), and for the full API
 specification, see [Pod: NodeAffinity](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#NodeAffinity).
 
+> **Note:**
+> For all connectivity options, `nodeSelectorTerms` should be mutually exclusive in the set of nodes the selectors match.
+> In other words, there should be no overlap in the nodes each `nodeSelectorTerms` matches. If a node matches more than one connectivity option as defined by `nodeSelectorTerms`
+> the driver will error and fail to register the host for the node.
 
 _Example:_
 There are two zones and two PowerStore systems, where the PowerStore systems have been configured for metro replication.
