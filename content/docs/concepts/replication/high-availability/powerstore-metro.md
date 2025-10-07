@@ -20,17 +20,28 @@ The driver on receiving the metro-related parameters in the `CreateVolume` call 
 
 The creation of volumes in metro mode doesn't involve the replication sidecar or the common replication controller, nor does it cause the creation of any replication related custom resources. It just needs the `csi-powerstore` driver that implements the `CreateVolume` gRPC endpoint with metro capability for it to work.
 
-### Host Registration for Powerstore Metro
-CSM PowerStore supports registering worker nodes as new hosts using `Metro Connectivity`. To enable this, you need to set the `metroTopology` to `Uniform` in the array's secret configuration. 
+### Host Registration for PowerStore Metro
+CSI PowerStore supports configuring optimized metro connections for hosts registered in the PowerStore system.
 
-To manage your setup:
+To utilize this feature, add labels to the nodes, or collect existing node labels that describe the desired topology,
+and use these labels to build node selector statements for the provided host connectivity options under `hostConnectivity.metro`.
 
-Label the worker nodes: Add zone labels to the worker nodes.
-#### Zone Identification:
-* Nodes in the same zone as the array configuration are considered the current system.
-* Nodes in different zones are considered the remote system.
+The following options are provided to describe the relationship between the cluster node and the PowerStore system:
+- `colocatedLocal`: The worker node is co-located with the current PowerStore storage system.
+- `colocatedRemote`: The worker node is co-located with the PowerStore storage system configured as the remote replication pair to the current system.
+- `colocatedBoth`: The worker node is co-located with both the current PowerStore storage system and its remote replication pair.
 
+The driver, running on a worker node, will evaluate the labels assigned to the node against the `nodeSelectorTerms` provided. If a match is confirmed, the driver
+will register the host, for the node, in the PowerStore system with the metro optimization option under which the match occurred.
 
+`nodeSelectorTerms` follow the same format provided by Kubernetes to describe Pod Node Affinity `requiredDuringSchedulingIgnoredDuringExecution`. For more information, see
+[Assigning Pods to Nodes: Node Affinity](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#node-affinity), and for the full API
+specification, see [Pod: NodeAffinity](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#NodeAffinity).
+
+> Example:
+> In this example, there exist two zones -- one containing worker nodes co-located with array "unique1" in zone-a, and
+> one containing worker nodes co-located with array "unique2" in zone-b. Nodes in zone-a will have the label `topology.kubernetes.io/zone: zone-a`,
+> and Nodes in zone-b will have the label `topology.kubernetes.io/zone: zone-b`.
 ```yaml
 arrays:
   - endpoint: "https://11.0.0.1/api/rest"
@@ -39,26 +50,47 @@ arrays:
     password: "password"
     skipCertificateValidation: true
     blockProtocol: "FC"
-    metroTopology: Uniform
-    labels:
-      topology.kubernetes.io/zone: zone1
+    hostConnectivity:
+      metro:
+        colocatedLocal:
+          nodeSelectorTerms:
+            - matchExpressions:
+              - key: "topology.kubernetes.io/zone"
+                operation: "In"
+                values:
+                  - "zone-a"
+        colocatedRemote:
+          nodeSelectorTerms:
+            - matchExpressions:
+              - key: "topology.kubernetes.io/zone"
+                operation: "In"
+                values:
+                  - "zone-b"
   - endpoint: "https://11.0.0.2/api/rest"
     globalID: "unique2"
     username: "user"
     password: "password"
     skipCertificateValidation: true
-    blockProtocol: "FC"    
-    metroTopology: Uniform
-    labels:
-      topology.kubernetes.io/zone: zone2
+    blockProtocol: "FC"
+    hostConnectivity:
+      metro:
+        colocatedLocal:
+          nodeSelectorTerms:
+            - matchExpressions:
+              - key: "topology.kubernetes.io/zone"
+                operation: "In"
+                values:
+                  - "zone-b"
+        colocatedRemote:
+          nodeSelectorTerms:
+            - matchExpressions:
+              - key: "topology.kubernetes.io/zone"
+                operation: "In"
+                values:
+                  - "zone-a"
 ```
 
-* The node that match the array's topology zone key will be registered as `Host is co-located with this system`
-* The node that does not match the array's topology zone key will be registered as `Host is co-located with remote system`
-* When both worker nodes have the same topology key as the array's topology zone key, then both nodes will be registered as `Co-located with both systems`
-* When the node does not have any zone keys in its label, the host is registered as `Local connectivity`
-
-### Usage
+### StorageClass
 The Metro replicated volumes are created just like the normal volumes, but the `StorageClass` contains some
 extra parameters related to metro replication. A `StorageClass` to create metro replicated volumes may look as follows:
 
@@ -104,8 +136,9 @@ allowedTopologies:
     values: ["true"]
 ```
 
-> _**NOTE**_: Metro support for hosts with Linux operating systems was added from [PowerStoreOS 4.0](https://infohub.delltechnologies.com/en-us/l/dell-powerstore-metro-volume-1/introduction-4503/).</br>
-> _**NOTE**_: Metro at volume group is not supported by the PowerStore driver.
+> _**NOTE:**_
+> - Metro support for hosts with Linux operating systems was added from [PowerStoreOS 4.0](https://infohub.delltechnologies.com/en-us/l/dell-powerstore-metro-volume-1/introduction-4503/).</br>
+> - Metro volume groups are not supported by the PowerStore driver.
 
 When a Metro `PV` is created, the volumeHandle will have the format `<volumeID/globalID/protocol:remote-volumeID/remote-globalID>`.
 
