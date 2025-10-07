@@ -21,6 +21,13 @@ The driver on receiving the metro-related parameters in the `CreateVolume` call 
 The creation of volumes in metro mode doesn't involve the replication sidecar or the common replication controller, nor does it cause the creation of any replication related custom resources. It just needs the `csi-powerstore` driver that implements the `CreateVolume` gRPC endpoint with metro capability for it to work.
 
 ### Host Registration for PowerStore Metro
+> **Deprecation Notice:**
+> Use of `metroTopology` in conjunction with `labels` to configure optimized host registration for metro-enabled hosts is deprecated and remains only for
+> purposes of backward compatibility.
+>
+> This configuration option has been replaced by `hostConnectivity`. Please follow the documentation below to configure
+> the secret and enable this feature.
+
 PowerStore supports optimized metro connections by registering hosts based on their location relative to PowerStore systems.
 
 To enable this feature, add labels to the nodes, or make note of existing node labels, that describe the desired topology,
