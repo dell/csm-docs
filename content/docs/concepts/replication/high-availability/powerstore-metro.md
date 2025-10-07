@@ -21,27 +21,28 @@ The driver on receiving the metro-related parameters in the `CreateVolume` call 
 The creation of volumes in metro mode doesn't involve the replication sidecar or the common replication controller, nor does it cause the creation of any replication related custom resources. It just needs the `csi-powerstore` driver that implements the `CreateVolume` gRPC endpoint with metro capability for it to work.
 
 ### Host Registration for PowerStore Metro
-CSI PowerStore supports configuring optimized metro connections for hosts registered in the PowerStore system.
+PowerStore supports optimized metro connections by registering hosts based on their location relative to PowerStore systems.
 
-To utilize this feature, add labels to the nodes, or collect existing node labels that describe the desired topology,
-and use these labels to build node selector statements for the provided host connectivity options under `hostConnectivity.metro`.
+To enable this feature, add labels to the nodes, or make note of existing node labels, that describe the desired topology,
+and use these labels to build node selector statements (`nodeSelectorTerms`) for the provided host connectivity options under `hostConnectivity.metro`.
+
+The CSI driver checks node labels against the provided `nodeSelectorTerms`, and if a match is found, a host is registered for the node
+with the corresponding metro optimization. If no match is found for the node, a regular, local-only host is registered for the node.
 
 The following options are provided to describe the relationship between the cluster node and the PowerStore system:
-- `colocatedLocal`: The worker node is co-located with the current PowerStore storage system.
-- `colocatedRemote`: The worker node is co-located with the PowerStore storage system configured as the remote replication pair to the current system.
-- `colocatedBoth`: The worker node is co-located with both the current PowerStore storage system and its remote replication pair.
+- `colocatedLocal`: The worker node is located near the current PowerStore system.
+- `colocatedRemote`: The worker node is located near the replication target of the current PowerStore system.
+- `colocatedBoth`: The worker node is located near both the current PowerStore system and its replication pair.
 
-The driver, running on a worker node, will evaluate the labels assigned to the node against the `nodeSelectorTerms` provided. If a match is confirmed, the driver
-will register the host, for the node, in the PowerStore system with the metro optimization option under which the match occurred.
-
-`nodeSelectorTerms` follow the same format provided by Kubernetes to describe Pod Node Affinity `requiredDuringSchedulingIgnoredDuringExecution`. For more information, see
+`nodeSelectorTerms` follow Kubernetes' Node Affinity format -- `requiredDuringSchedulingIgnoredDuringExecution`. For more information, see
 [Assigning Pods to Nodes: Node Affinity](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#node-affinity), and for the full API
 specification, see [Pod: NodeAffinity](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#NodeAffinity).
 
-> Example:
-> In this example, there exist two zones -- one containing worker nodes co-located with array "unique1" in zone-a, and
-> one containing worker nodes co-located with array "unique2" in zone-b. Nodes in zone-a will have the label `topology.kubernetes.io/zone: zone-a`,
-> and Nodes in zone-b will have the label `topology.kubernetes.io/zone: zone-b`.
+
+_Example:_
+There are two zones and two PowerStore systems, where the PowerStore systems have been configured for metro replication.
+Zone-a has worker nodes co-located with array "unique1", and zone-b has worker nodes co-located with array "unique2".
+Nodes in zone-a are labeled `topology.kubernetes.io/zone: zone-a`, and Nodes in zone-b are labeled `topology.kubernetes.io/zone: zone-b`.
 ```yaml
 arrays:
   - endpoint: "https://11.0.0.1/api/rest"
