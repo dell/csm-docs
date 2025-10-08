@@ -22,24 +22,26 @@ The creation of volumes in metro mode doesn't involve the replication sidecar or
 
 ### Host Registration for PowerStore Metro
 > **Deprecation Notice:**
-> Use of `metroTopology` in conjunction with `labels` to configure optimized host registration for metro-enabled hosts is deprecated and remains only for
-> purposes of backward compatibility.
+> Configuring optimized host registration for metro-enabled hosts using `metroTopology` and `labels` is deprecated and remains only for purposes
+> of backward compatibility.
 >
-> This configuration option has been replaced by `hostConnectivity`. Please follow the documentation below to configure
+> The functionality provided by `metroTopology` has been replaced by `hostConnectivity`. Please follow the documentation below to configure
 > the secret and enable this feature.
 
-PowerStore supports optimized metro connections by registering hosts based on their location relative to PowerStore systems.
+PowerStore supports optimized metro data paths by registering hosts based on their location relative to PowerStore systems.
 
-To enable this feature, add labels to the nodes, or make note of existing node labels, that describe the desired topology,
-and use these labels to build node selector statements (`nodeSelectorTerms`) for the provided host connectivity options under `hostConnectivity.metro`.
+The driver determines which optimization to use by comparing node labels against user-provided,
+node selector statements specified for a Host Connectivity optimization.
 
-The CSI driver checks node labels against the provided `nodeSelectorTerms`, and if a match is found, a host is registered for the node
-with the corresponding metro optimization. If no match is found for the node, a regular, local-only host is registered for the node.
-
-The following options are provided to describe the relationship between the cluster node and the PowerStore system:
+**Host Connectivity options:**
 - `colocatedLocal`: The worker node is located near the current PowerStore system.
 - `colocatedRemote`: The worker node is located near the replication target of the current PowerStore system.
 - `colocatedBoth`: The worker node is located near both the current PowerStore system and its replication pair.
+
+To enable this feature, add labels to the cluster nodes, or make note of existing node labels, that describe the desired topology,
+and use these labels to build node selector statements (`nodeSelectorTerms`) for the provided Host Connectivity options under `hostConnectivity.metro`.
+If the node labels satisfy the selector terms, a host will be registered for the node using the corresponding metro optimization.
+If the node labels do not satisfy the selector terms, a local host will be registered for the node without metro optimization.
 
 `nodeSelectorTerms` follow Kubernetes' Node Affinity format -- `requiredDuringSchedulingIgnoredDuringExecution`. For more information, see
 [Assigning Pods to Nodes: Node Affinity](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#node-affinity), and for the full API
