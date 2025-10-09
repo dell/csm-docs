@@ -1,4 +1,4 @@
-{{ if eq (.Get "text") "1" }} 
+{{ if eq (.Get "text") "1" }}
 Docker Hub images are discontinued. All deployments will be using images from <a href="https://quay.io/organization/dell">quay.io</a>.
 {{ else if eq (.Get "text") "2" }}
 Starting with CSM 1.12, all deployments will need to use images from <a href="https://quay.io/organization/dell">quay.io</a>. Please note that from CSM 1.14 (May 2025), upgrading with helm will fail if it attempts to use images from <a href="https://hub.docker.com/r/dellemc/">Docker Hub</a>.
@@ -32,6 +32,8 @@ The Container Storage Modules Application Mobility component has been deprecated
 Starting from CSM version 1.15, the Karavi topology component will no longer operate as a standalone service. Instead, topology data will be directly exported to the OpenTelemetry Collector
 {{ else if eq (.Get "text") "17" }}
 Starting with the release of <b> Container Storage Modules v1.16.0</b>, the project will no longer be maintained as an open source project. Future development will continue under a closed source model. This change reflects our commitment to delivering even greater value to our customers by enabling faster innovation and more deeply integrated features with the Dell storage portfolio. For more information like <a href="/csm-docs/docs/release">Release Notes</a>
+{{ else if eq (.Get "text") "18" }}
+Configuring optimized host registration using metroTopology and labels is deprecated and remains only for backward compatibility. Similar functionality is now provided by hostConnectivity. Continue reading for more information.
 {{else}}
 <p>Default text if no valid parameter is passed.</p>
 {{ end }}
