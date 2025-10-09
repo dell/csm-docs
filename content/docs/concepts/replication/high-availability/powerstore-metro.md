@@ -43,7 +43,7 @@ If the node labels do not satisfy the selector terms, a local host will be regis
 specification, see [Pod: NodeAffinity](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#NodeAffinity).
 
 > **Note:**
-> For all connectivity options, `nodeSelectorTerms` should be mutually exclusive in the set of nodes the selectors match, per `arrays` entry.
+> For all Host Connectivity options, for each `arrays` entry, `nodeSelectorTerms` should be mutually exclusive in the set of nodes the selectors match.
 > In other words, there should be no overlap in the nodes each `nodeSelectorTerms` matches.
 > If a node matches more than one connectivity option, for an array, as defined by `nodeSelectorTerms`
 > the driver will error and fail to register the host for the node.
