@@ -45,7 +45,7 @@ specification, see [Pod: NodeAffinity](https://kubernetes.io/docs/reference/kube
 > **Note:**
 > For all Host Connectivity options, for each `arrays` entry, `nodeSelectorTerms` should be mutually exclusive in the set of nodes the selectors match.
 > In other words, there should be no overlap in the nodes each `nodeSelectorTerms` matches.
-> If a node matches more than one connectivity option, for an array, as defined by `nodeSelectorTerms`
+> If a node matches more than one connectivity option as defined by `nodeSelectorTerms`,
 > the driver will error and fail to register the host for the node.
 
 _Example:_
