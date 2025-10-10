@@ -135,7 +135,7 @@ For detailed PowerFlex installation procedure, see the [Dell PowerFlex Deploymen
 
 1. Follow all the [prerequisites](#prerequisites) above
 
-2. Create a CR (Custom Resource) for PowerFlex using the sample files provided
+2. Create a CR (Custom Resource) for Unity using the sample files provided
 
     a. Install the PowerFlex driver using default configuration using
     the sample file provided
