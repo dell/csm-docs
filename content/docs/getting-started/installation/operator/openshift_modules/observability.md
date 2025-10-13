@@ -68,7 +68,7 @@ otel-collector                 ClusterIP   172.30.127.237   <none>        55680/
 
 </ol>
 
-4. Create Service Monitor to scrap the Observability module by the OpenShift Observability.
+4. Create Service Monitor to scrape the Observability module by the OpenShift Observability.
 
    Use this command to create the ServiceMonitor.
 
