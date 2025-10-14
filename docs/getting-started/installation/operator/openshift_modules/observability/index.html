@@ -17,12 +17,12 @@
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="docs">
-    <meta property="article:modified_time" content="2025-09-02T17:13:09+05:30">
+    <meta property="article:modified_time" content="2025-10-14T16:36:57+05:30">
 
   <meta itemprop="name" content="Observability">
   <meta itemprop="description" content="Installing Observability via Container Storage Modules Operator">
-  <meta itemprop="dateModified" content="2025-09-02T17:13:09+05:30">
-  <meta itemprop="wordCount" content="345">
+  <meta itemprop="dateModified" content="2025-10-14T16:36:57+05:30">
+  <meta itemprop="wordCount" content="325">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Observability">
   <meta name="twitter:description" content="Installing Observability via Container Storage Modules Operator">
@@ -204,7 +204,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.2f0ce4d0440657a37d44dfb7d3f0eda8.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.12cc7df643a1e7956432d8eb3e36e221.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -3876,14 +3876,12 @@ document.addEventListener("DOMContentLoaded", function() {
 		
 </header>
 	<ol>
-<li>Verify the Cert-Manager is deployed and configured on the OpenShift Cluster. Please review the Red Hat documentation for the procedure.</li>
-</ol>
-<br>
-<ol start="2">
-<li>Verify the user workload monitoring is enabled and configured on the OpenShift Cluster. Please review Red Hat documentation for the procedure to configure user workload monitoring on the OpenShift Cluster.</li>
-</ol>
-<br>
-<ol start="3">
+<li>
+<p>Verify the Cert-Manager is deployed and configured on the OpenShift Cluster. Please review the RedHat documentation for the procedure.</p>
+</li>
+<li>
+<p>Verify the user workload monitoring is enabled and configured on the OpenShift Cluster. Please review RedHat documentation for the procedure to configure user workload monitoring on the OpenShift Cluster.</p>
+</li>
 <li>
 <p>Enable Observability module in the CSM</p>
 <p>Use this command to create the <strong>ContainerStorageModule</strong> custom resource with Observability enabled.</p>
@@ -3898,7 +3896,7 @@ document.addEventListener("DOMContentLoaded", function() {
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">spec</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">driver</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">csiDriverType</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;{{Var}}&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">configVersion</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">Default text if no valid parameter is passed.</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">configVersion</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">v2.15.0</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">module</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span>- <span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">observability</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">enabled</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span><span style="color:#f8f8f8;text-decoration:underline">
@@ -3912,100 +3910,31 @@ document.addEventListener("DOMContentLoaded", function() {
 </li>
 </ol>
 <ol>
-<style>
-.visible-content {
-  display: block;
-}
-.inline-content {
-  display: inline;
-}
-</style>
-<span id="" class="visible-content 1">
-  <pre tabindex="0"><code class="language-terminal" data-lang="terminal">oc get pod -n isilon
+<pre tabindex="0"><code class="language-terminal" data-lang="terminal">oc get pod -n {{labels}}
 
 NAME                                         READY   STATUS    RESTARTS   AGE
-karavi-metrics-powerscale-69855dbdd5-5mshq   1/1     Running   0          2m54s
+karavi-metrics-{{Var}}-69855dbdd5-5mshq     1/1     Running   0          2m54s
 otel-collector-b496d8c4d-gp6zz               2/2     Running   0          2m55s 
-</code></pre>
-</span>
-</ol>
-<ol>
-<style>
-.visible-content {
-  display: block;
-}
-.inline-content {
-  display: inline;
-}
-</style>
-<span id="" class="visible-content 2">
-  <pre tabindex="0"><code class="language-terminal" data-lang="terminal">oc get pod -n vxflexos
-
-NAME                                         READY   STATUS    RESTARTS   AGE
-karavi-metrics-powerflex-69855dbdd5-5mshq    1/1     Running   0          2m54s
-otel-collector-b496d8c4d-gp6zz               2/2     Running   0          2m55s 
-</code></pre>
-</span>
-</ol>
-<br>
+</code></pre></ol>
 <ol>
 <p>Verify the Observability Services.</p>
-<style>
-.visible-content {
-  display: block;
-}
-.inline-content {
-  display: inline;
-}
-</style>
-<span id="" class="visible-content 1">
-  <pre tabindex="0"><code class="language-terminal" data-lang="terminal">oc get svc -n isilon
+<pre tabindex="0"><code class="language-terminal" data-lang="terminal">oc get svc -n {{labels}}
 NAME                           TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)              AGE
-karavi-metrics-powerscale      ClusterIP   172.30.169.86    &lt;none&gt;        2222/TCP             3m29s
+karavi-metrics-{{Var}}        ClusterIP   172.30.169.86    &lt;none&gt;        2222/TCP             3m29s
 otel-collector                 ClusterIP   172.30.127.237   &lt;none&gt;        55680/TCP,8443/TCP   3m29s 
-</code></pre>
-</span>
-</ol>
-<ol>
-<style>
-.visible-content {
-  display: block;
-}
-.inline-content {
-  display: inline;
-}
-</style>
-<span id="" class="visible-content 2">
-  <pre tabindex="0"><code class="language-terminal" data-lang="terminal">oc get svc -n vxflexos
-NAME                           TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)              AGE
-karavi-metrics-powerflex       ClusterIP   172.30.169.86    &lt;none&gt;        2222/TCP             3m29s
-otel-collector                 ClusterIP   172.30.127.237   &lt;none&gt;        55680/TCP,8443/TCP   3m29s 
-</code></pre>
-</span>
-</ol>
-<br>
-<ol start="5">
+</code></pre></ol>
+<ol start="4">
 <li>
-<p>Create Service Monitor to scrap the Observability module by the OpenShift Observability.</p>
+<p>Create Service Monitor to scrape the Observability module by the OpenShift Observability.</p>
 <p>Use this command to create the ServiceMonitor.</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>oc apply -f smon-otel-collector.yaml
-</span></span></code></pre></div><br>
-<p>Example:
-<style>
-.visible-content {
-  display: block;
-}
-.inline-content {
-  display: inline;
-}
-</style>
-<span id="" class="visible-content 1">
-  <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#000">cat &lt;&lt;EOF&gt; smon-otel-collector.yaml</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></code></pre></div><p>Example:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#000">cat &lt;&lt;EOF&gt; smon-otel-collector.yaml</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">apiVersion</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">monitoring.coreos.com/v1</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">kind</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">ServiceMonitor</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">metadata</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">otel-collector</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">namespace</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">isilon</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">namespace</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>{{<span style="color:#000">labels}}</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">spec</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">endpoints</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span>- <span style="color:#204a87;font-weight:bold">path</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">/metrics</span><span style="color:#f8f8f8;text-decoration:underline">
@@ -4018,41 +3947,14 @@ otel-collector                 ClusterIP   172.30.127.237   &lt;none&gt;        
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">app.kubernetes.io/instance</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">karavi-observability</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">app.kubernetes.io/name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">otel-collector </span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">EOF</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span></code></pre></div>
-</span></p>
-</li>
+</span></span></span></code></pre></div></li>
 </ol>
-<style>
-.visible-content {
-  display: block;
-}
-.inline-content {
-  display: inline;
-}
-</style>
-<span id="" class="visible-content 2">
-  <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">cat &lt;&lt;EOF&gt; smon-otel-collector.yaml</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">apiVersion</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">monitoring.coreos.com/v1</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">kind</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">ServiceMonitor</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">metadata</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">   </span><span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">otel-collector</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">   </span><span style="color:#204a87;font-weight:bold">namespace</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">vxflexos</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">spec</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">   </span><span style="color:#204a87;font-weight:bold">endpoints</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">   </span>- <span style="color:#204a87;font-weight:bold">path</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">/metrics</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">     </span><span style="color:#204a87;font-weight:bold">port</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">exporter-https</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">     </span><span style="color:#204a87;font-weight:bold">scheme</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">https</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">     </span><span style="color:#204a87;font-weight:bold">tlsConfig</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">       </span><span style="color:#204a87;font-weight:bold">insecureSkipVerify</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">   </span><span style="color:#204a87;font-weight:bold">selector</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">     </span><span style="color:#204a87;font-weight:bold">matchLabels</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">       </span><span style="color:#204a87;font-weight:bold">app.kubernetes.io/instance</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">karavi-observability</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">       </span><span style="color:#204a87;font-weight:bold">app.kubernetes.io/name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">otel-collector </span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#000">EOF</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span></code></pre></div>
-</span>
 <ol>
 <p>Verify the ServiceMonitor is created.</p>
+<pre tabindex="0"><code class="language-terminal" data-lang="terminal">oc get smon -n {{labels}}
+NAME             AGE
+otel-collector   44h 
+</code></pre></ol>
 <style>
 .visible-content {
   display: block;
@@ -4062,14 +3964,15 @@ otel-collector                 ClusterIP   172.30.127.237   &lt;none&gt;        
 }
 </style>
 <span id="" class="visible-content 1">
-  <pre tabindex="0"><code class="language-terminal" data-lang="terminal">oc get smon -n isilon
-NAME             AGE
-otel-collector   44h 
-</code></pre>
-</span>
+  <ol start="5">
+<li>
+<p>Verify the PowerScale metrics are visible in the OpenShift Console.</p>
+<p>On the OpenShift Console, navigate to Observer and then Metrics, search for PowerScale metrics.</p>
+</li>
 </ol>
-<ol>
-<style>
+
+</span>
+<p><style>
 .visible-content {
   display: block;
 }
@@ -4078,18 +3981,48 @@ otel-collector   44h
 }
 </style>
 <span id="" class="visible-content 2">
-  <pre tabindex="0"><code class="language-terminal" data-lang="terminal">oc get smon -n vxflexos
-NAME             AGE
-otel-collector   44h 
-</code></pre>
-</span>
-</ol>
-<ol start="6">
+  <ol start="5">
 <li>
 <p>Verify the PowerFlex metrics are visible in the OpenShift Console.</p>
-<p>On the OpenShift Console, navigate to Observer and then Metrics, search for PowerFlex metric.</p>
+<p>On the OpenShift Console, navigate to Observer and then Metrics, search for PowerFlex metrics.</p>
 </li>
 </ol>
+
+</span>
+<style>
+.visible-content {
+  display: block;
+}
+.inline-content {
+  display: inline;
+}
+</style>
+<span id="" class="visible-content 3">
+  <ol start="5">
+<li>
+<p>Verify the PowerMax metrics are visible in the OpenShift Console.</p>
+<p>On the OpenShift Console, navigate to Observer and then Metrics, search for PowerMax metrics.</p>
+</li>
+</ol>
+
+</span>
+<style>
+.visible-content {
+  display: block;
+}
+.inline-content {
+  display: inline;
+}
+</style>
+<span id="" class="visible-content 4">
+  <ol start="5">
+<li>
+<p>Verify the PowerStore metrics are visible in the OpenShift Console.</p>
+<p>On the OpenShift Console, navigate to Observer and then Metrics, search for PowerStore metrics.</p>
+</li>
+</ol>
+
+</span></p>
  
 </div>
 
