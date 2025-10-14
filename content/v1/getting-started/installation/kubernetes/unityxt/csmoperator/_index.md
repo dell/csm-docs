@@ -52,7 +52,7 @@ To deploy the Operator, follow the instructions available [here](../../../operat
 
 ### Install Driver
 
-1. Create a CR (Custom Resource) for PowerFlex using the sample files provided
+1. Create a CR (Custom Resource) for Unity using the sample files provided
 
     a. **Default Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/main/samples/{{< version-v1 key="csm-operator_latest_samples_dir" >}}/minimal-samples/unity_{{< version-v1 key="Min_sample_operator_unity" >}}.yaml) for default settings. Modify if needed.
 

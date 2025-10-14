@@ -6,4 +6,4 @@ description: >
   Container Storage Modules (CSM) for Observability Operator deployment
 --- 
 
-{{<include file="content/v1/getting-started/installation/operator/modules/observability.md" Var="powerstore" labels="powerstore">}}
+{{<include file="content/v1/getting-started/installation/operator/openshift_modules/observability.md" Var="powerstore" labels="powerstore" hideClasses="1,2,3" >}}
