@@ -5,9 +5,9 @@ description: >
   Installing Observability via Container Storage Modules Operator
 ---
 
-1. Verify the Cert-Manager is deployed and configured on the OpenShift Cluster. Please review the Red Hat documentation for the procedure.
+1. Verify the Cert-Manager is deployed and configured on the OpenShift Cluster. Please review the RedHat documentation for the procedure.
 
-2. Verify the user workload monitoring is enabled and configured on the OpenShift Cluster. Please review Red Hat documentation for the procedure to configure user workload monitoring on the OpenShift Cluster.
+2. Verify the user workload monitoring is enabled and configured on the OpenShift Cluster. Please review RedHat documentation for the procedure to configure user workload monitoring on the OpenShift Cluster.
 
 3. Enable Observability module in the CSM  
 
