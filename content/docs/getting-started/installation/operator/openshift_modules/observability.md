@@ -29,7 +29,7 @@ description: >
    spec:
      driver:
        csiDriverType: "{{Var}}"
-       configVersion: {{< version-docs key="PFlex-latestVersion" >}}
+       configVersion: {{< version-docs key="PFlex_latestVersion" >}}
      module:
      - name: observability
        enabled: true
