@@ -87,6 +87,33 @@ Here’s a minimal Prometheus configuration using insecure skip verify; for prop
             replacement: ${1}:8443
    ```
 
+   To scrape the KubeVirt metrics, include the following scrape config to the `prometheus-values.yaml`
+
+   ```yaml
+      - job_name: 'kubevirt-metrics'
+        scrape_interval: 10s
+        # Kubernetes service discovery to find the kubevirt-prometheus-metrics service
+        kubernetes_sd_configs:
+          - role: endpoints
+            namespaces:
+              # Ensure this is the correct namespace where KubeVirt is installed
+              names: [KUBEVIRT-NAMESPACE]
+
+        relabel_configs:
+          - source_labels: [__meta_kubernetes_service_name]
+            regex: 'kubevirt-prometheus-metrics'
+            action: keep
+
+          - source_labels: [__meta_kubernetes_pod_ip, __meta_kubernetes_service_port_name]
+            regex: '(.+);https-metrics'
+            target_label: '__address__'
+            replacement: '$1:8443'
+
+        scheme: https
+        tls_config:
+          insecure_skip_verify: true
+   ```
+
 2. If using Rancher, create a ServiceMonitor.
 
     ```yaml
