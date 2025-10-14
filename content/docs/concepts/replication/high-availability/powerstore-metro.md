@@ -66,14 +66,14 @@ arrays:
           nodeSelectorTerms:
             - matchExpressions:
               - key: "topology.kubernetes.io/zone"
-                operation: "In"
+                operator: "In"
                 values:
                   - "zone-a"
         colocatedRemote:
           nodeSelectorTerms:
             - matchExpressions:
               - key: "topology.kubernetes.io/zone"
-                operation: "In"
+                operator: "In"
                 values:
                   - "zone-b"
   - endpoint: "https://11.0.0.2/api/rest"
@@ -88,14 +88,14 @@ arrays:
           nodeSelectorTerms:
             - matchExpressions:
               - key: "topology.kubernetes.io/zone"
-                operation: "In"
+                operator: "In"
                 values:
                   - "zone-b"
         colocatedRemote:
           nodeSelectorTerms:
             - matchExpressions:
               - key: "topology.kubernetes.io/zone"
-                operation: "In"
+                operator: "In"
                 values:
                   - "zone-a"
 ```
