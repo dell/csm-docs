@@ -115,6 +115,106 @@ Here’s a minimal Prometheus configuration using insecure skip verify; for prop
         tls_config:
           insecure_skip_verify: true
    ```
+   To scrape powerstore metrics using Powerstore Exporter Metrics, add the following configurations to prometheus-values.yaml. More details can be found [here](https://github.com/dell/powerstore-metrics-exporter/tree/main/templates/prometheus)
+
+   ```yaml
+      - job_name: "prometheus"
+        # metrics_path defaults to '/metrics'
+        # scheme defaults to 'http'.
+        static_configs:
+          - targets: ["localhost:9090"]
+      - job_name: powerstore_10.0.0.1_cluster
+          honor_timestamps: true
+          scrape_interval: 15m
+          scrape_timeout: 3m
+          metrics_path: /metrics/10.0.0.1/cluster
+          scheme: http
+          follow_redirects: true
+          static_configs:
+            - targets:
+                - 127.0.0.1:9010
+        - job_name: powerstore_10.0.0.1_port
+          honor_timestamps: true
+          scrape_interval: 5m
+          scrape_timeout: 3m
+          metrics_path: /metrics/10.0.0.1/port
+          scheme: http
+          follow_redirects: true
+          static_configs:
+            - targets:
+                - 127.0.0.1:9010
+        - job_name: powerstore_10.0.0.1_file
+          honor_timestamps: true
+          scrape_interval: 5m
+          scrape_timeout: 3m
+          metrics_path: /metrics/10.0.0.1/file
+          scheme: http
+          follow_redirects: true
+          static_configs:
+            - targets:
+                - 127.0.0.1:9010
+        - job_name: powerstore_10.0.0.1_hardware
+          honor_timestamps: true
+          scrape_interval: 10m
+          scrape_timeout: 3m
+          metrics_path: /metrics/10.0.0.1/hardware
+          scheme: http
+          follow_redirects: true
+          static_configs:
+            - targets:
+                - 127.0.0.1:9010
+        - job_name: powerstore_10.0.0.1_volume
+          honor_timestamps: true
+          scrape_interval: 5m
+          scrape_timeout: 3m
+          metrics_path: /metrics/10.0.0.1/volume
+          scheme: http
+          follow_redirects: true
+          static_configs:
+            - targets:
+                - 127.0.0.1:9010
+        - job_name: powerstore_10.0.0.1_appliance
+          honor_timestamps: true
+          scrape_interval: 5m
+          scrape_timeout: 3m
+          metrics_path: /metrics/10.0.0.1/appliance
+          scheme: http
+          follow_redirects: true
+          static_configs:
+            - targets:
+                - 127.0.0.1:9010
+        - job_name: powerstore_10.0.0.1_nas
+          honor_timestamps: true
+          scrape_interval: 5m
+          scrape_timeout: 3m
+          metrics_path: /metrics/10.0.0.1/nas
+          scheme: http
+          follow_redirects: true
+          static_configs:
+            - targets:
+                - 127.0.0.1:9010
+        - job_name: powerstore_10.0.0.1_volumeGroup
+          honor_timestamps: true
+          scrape_interval: 5m
+          scrape_timeout: 3m
+          metrics_path: /metrics/10.0.0.1/volumeGroup
+          scheme: http
+          follow_redirects: true
+          static_configs:
+            - targets:
+                - 127.0.0.1:9010
+        - job_name: powerstore_10.0.0.1_capacity
+          honor_timestamps: true
+          scrape_interval: 15m
+          scrape_timeout: 3m
+          metrics_path: /metrics/10.0.0.1/capacity
+          scheme: http
+          follow_redirects: true
+          static_configs:
+            - targets:
+                - 127.0.0.1:9010
+   ```
+   Replace 10.0.0.1 with the powerstore array IP.
 
 2. If using Rancher, create a ServiceMonitor.
 
