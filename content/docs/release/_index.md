@@ -10,7 +10,7 @@ Description: >
 ## Notifications
 
 <div style="text-align: left;">
-
+  
   <h3 >🔒<strong>Important Notice</strong></h3>
   <hr>
   <p>
@@ -41,12 +41,12 @@ Description: >
   </p>
 
   <p>
-  For questions or access requests, please contact the maintainers via
+  For questions or access requests, please contact the maintainers via 
   <a href="https://www.dell.com/support/kbdoc/en-in/000188046/container-storage-interface-csi-drivers-and-container-storage-modules-csm-how-to-get-support" target="_blank">Dell Support</a>.
     <hr>
-</div>
+</div> 
 
-<br>
+<br>  
 
  **General:**
 
