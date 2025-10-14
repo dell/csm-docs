@@ -78,7 +78,7 @@ The following provisioning types are supported
 * Dynamic PVC/PVs of accessModes "ReadWriteOnce, ReadWriteMany" and volumeMode "FileSystem".
 * Dynamic PVC/PVs of accessModes "ReadWriteOnce, ReadWriteMany" and volumeMode "Block".
 * Use of the above volumes with Pods created by StatefulSets.
-* Up to 12 or so protected pods on a given node.
+* CSM resiliency has been tested up to 120 pods per node, the amount of pods to be protected is tightly coupled with the node resources
 * Failing up to 3 nodes at a time in 9 worker node clusters, or failing 1 node at a time in smaller clusters. Application recovery times are dependent on the number of pods that need to be moved as a result of the failure. See the section on "Testing and Performance" for some of the details.
 * Multi-array are supported. In case of CSI Driver for PowerScale and CSI Driver for Unity, if any one of the array is not connected, the array connectivity will be false. CSI Driver for Powerflex connectivity will be determined by connection to default array.
 
