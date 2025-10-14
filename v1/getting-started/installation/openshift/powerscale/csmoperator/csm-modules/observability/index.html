@@ -17,12 +17,12 @@
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="v1">
-    <meta property="article:modified_time" content="2025-07-31T13:11:04-04:00">
+    <meta property="article:modified_time" content="2025-10-14T16:36:57+05:30">
 
   <meta itemprop="name" content="Observability">
   <meta itemprop="description" content="Container Storage Modules (CSM) for Observability Operator deployment">
-  <meta itemprop="dateModified" content="2025-07-31T13:11:04-04:00">
-  <meta itemprop="wordCount" content="303">
+  <meta itemprop="dateModified" content="2025-10-14T16:36:57+05:30">
+  <meta itemprop="wordCount" content="294">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Observability">
   <meta name="twitter:description" content="Container Storage Modules (CSM) for Observability Operator deployment">
@@ -203,7 +203,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.2f0ce4d0440657a37d44dfb7d3f0eda8.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.12cc7df643a1e7956432d8eb3e36e221.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -3998,6 +3998,9 @@ document.addEventListener("DOMContentLoaded", function() {
   
   
 
+  
+  
+
 
 
 
@@ -4010,14 +4013,12 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 <ol>
-<li>Verify the Cert-Manager is deployed and configured on the OpenShift Cluster. Please review the Red Hat documentation for the procedure.</li>
-</ol>
-<br>
-<ol start="2">
-<li>Verify the user workload monitoring is enabled and configured on the OpenShift Cluster. Please review Red Hat documentation for the procedure to configure user workload monitoring on the OpenShift Cluster.</li>
-</ol>
-<br>
-<ol start="3">
+<li>
+<p>Verify the Cert-Manager is deployed and configured on the OpenShift Cluster. Please review the RedHat documentation for the procedure.</p>
+</li>
+<li>
+<p>Verify the user workload monitoring is enabled and configured on the OpenShift Cluster. Please review RedHat documentation for the procedure to configure user workload monitoring on the OpenShift Cluster.</p>
+</li>
 <li>
 <p>Create a Project for deploying Observability Module</p>
 <p>Use this command to create new project. You must use the project name as karavi</p>
@@ -4037,7 +4038,7 @@ document.addEventListener("DOMContentLoaded", function() {
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">spec</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">driver</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">csiDriverType</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;powerscale&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">configVersion</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">Default text if no valid parameter is passed.</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">configVersion</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">v2.14.2</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">module</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span>- <span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">observability</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">enabled</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span><span style="color:#f8f8f8;text-decoration:underline">
@@ -4052,59 +4053,28 @@ document.addEventListener("DOMContentLoaded", function() {
 </span></span></span></code></pre></div><p>Verify the Observability Pods are created.</p>
 </li>
 </ol>
-<ol> 
-<style>
-.visible-content {
-  display: block;
-}
-.inline-content {
-  display: inline;
-}
-</style>
-<span id="" class="visible-content ">
-  <pre tabindex="0"><code class="language-terminal" data-lang="terminal">oc get pod -n karavi
+<ol>
+<pre tabindex="0"><code class="language-terminal" data-lang="terminal">oc get pod -n karavi
 
 NAME                                         READY   STATUS    RESTARTS   AGE
 karavi-metrics-powerscale-69855dbdd5-5mshq   1/1     Running   0          2m54s
 karavi-topology-b7c9f6fc7-zk7l8              1/1     Running   0          2m55s
 otel-collector-b496d8c4d-gp6zz               2/2     Running   0          2m55s 
-</code></pre>
-</span>
-</ol>
-<ol> 
-
-</ol> 
-   <br>
+</code></pre></ol>
 <ol>
 <p>Verify the Observability Services.</p>
-<style>
-.visible-content {
-  display: block;
-}
-.inline-content {
-  display: inline;
-}
-</style>
-<span id="" class="visible-content ">
-  <pre tabindex="0"><code class="language-terminal" data-lang="terminal">oc get svc -n karavi
+<pre tabindex="0"><code class="language-terminal" data-lang="terminal">oc get svc -n karavi
 NAME                           TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)              AGE
 karavi-metrics-powerscale      ClusterIP   172.30.169.86    &lt;none&gt;        2222/TCP             3m29s
 karavi-topology                ClusterIP   172.30.66.155    &lt;none&gt;        8443/TCP             3m29s
 otel-collector                 ClusterIP   172.30.127.237   &lt;none&gt;        55680/TCP,8443/TCP   3m29s 
-</code></pre>
-</span>
-</ol> 
-<ol>
-
-</ol>
-<br> 
+</code></pre></ol>
 <ol start="5">
 <li>
-<p>Create Service Monitor to scrap the Observability module by the OpenShift Observability.</p>
+<p>Create Service Monitor to scrape the Observability module by the OpenShift Observability.</p>
 <p>Use this command to create the ServiceMonitor.</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>oc apply -f smon-otel-collector.yaml
-</span></span></code></pre></div><br> 
-<p>Example:</p>
+</span></span></code></pre></div><p>Example:</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#000">cat &lt;&lt;EOF&gt; smon-otel-collector.yaml</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">apiVersion</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">monitoring.coreos.com/v1</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">kind</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">ServiceMonitor</span><span style="color:#f8f8f8;text-decoration:underline">
@@ -4128,11 +4098,26 @@ otel-collector                 ClusterIP   172.30.127.237   &lt;none&gt;        
 NAME             AGE
 otel-collector   44h 
 </code></pre></li>
+</ol>
+<style>
+.visible-content {
+  display: block;
+}
+.inline-content {
+  display: inline;
+}
+</style>
+<span id="" class="visible-content ">
+  <ol start="6">
 <li>
-<p>Verify the PowerFlex metrics are visible in the OpenShift Console.</p>
-<p>On the OpenShift Console, navigate to Observer and then Metrics, search for PowerFlex metric.</p>
+<p>Verify the PowerScale metrics are visible in the OpenShift Console.</p>
+<p>On the OpenShift Console, navigate to Observer and then Metrics, search for PowerScale metrics.</p>
 </li>
 </ol>
+
+</span>
+<p>
+</p>
 
 
 
