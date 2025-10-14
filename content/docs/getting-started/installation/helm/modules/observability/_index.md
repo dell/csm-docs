@@ -24,7 +24,7 @@ Prometheus and Container Storage Modules Observability services run on the same 
 
 | Supported Version | Image                   | Helm Chart                                                   |
 | ----------------- | ----------------------- | ------------------------------------------------------------ |
-| 2.34.0           | prom/prometheus:v2.34.0 | [Prometheus Helm chart](https://github.com/prometheus-community/helm-charts/tree/main/charts/prometheus) |  
+| 2.53.5            | prom/prometheus:v2.53.5 | [Prometheus Helm chart](https://github.com/prometheus-community/helm-charts/tree/main/charts/prometheus) |  
 
 **Note**: It is the user's responsibility to provide persistent storage for Prometheus if they want to preserve historical data.
 
@@ -53,7 +53,7 @@ Here’s a minimal Prometheus configuration using insecure skip verify; for prop
       enabled: true
       image:
         repository: quay.io/prometheus/prometheus
-        tag: v2.34.0
+        tag: v2.53.5
         pullPolicy: IfNotPresent
       persistentVolume:
         enabled: false
@@ -596,6 +596,7 @@ All storage system requests by Container Storage Modules Observability will go t
 {{< /hide >}}
 
 #### Update Storage Systems
+
 If the list of storage systems managed by a Dell CSI Driver have changed, the following steps can be performed to update Container Storage Modules Observability to reference the updated systems:
 
 {{< hide class="1">}}
