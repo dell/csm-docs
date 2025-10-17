@@ -44,7 +44,7 @@ Here’s a minimal Prometheus configuration using insecure skip verify; for prop
       enabled: false
     pushgateway:
       enabled: false
-    kubeStateMetrics:
+    kube-state-metrics:
       enabled: false
     configmapReload:
       prometheus:
@@ -87,7 +87,8 @@ Here’s a minimal Prometheus configuration using insecure skip verify; for prop
             replacement: ${1}:8443
    ```
 
-   To scrape the KubeVirt metrics, include the following scrape config to the `prometheus-values.yaml`
+   To enable scraping of Kubernetes object state metrics, set `kube-state-metrics.enabled` to `true` in the `prometheus-values.yaml` configuration file.
+   To scrape the KubeVirt metrics, include the following scrape config to the `prometheus-values.yaml` configuration file.
 
    ```yaml
       - job_name: 'kubevirt-metrics'
