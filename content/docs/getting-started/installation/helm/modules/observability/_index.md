@@ -88,6 +88,7 @@ Here’s a minimal Prometheus configuration using insecure skip verify; for prop
    ```
 
    To enable scraping of Kubernetes object state metrics, set `kube-state-metrics.enabled` to `true` in the `prometheus-values.yaml` configuration file.
+
    To scrape the KubeVirt metrics, include the following scrape config to the `prometheus-values.yaml` configuration file.
 
    ```yaml
