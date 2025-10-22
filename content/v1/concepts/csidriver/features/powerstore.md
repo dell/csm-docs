@@ -721,7 +721,7 @@ nfsAcls: "A::OWNER@:rwatTnNcCy,A::GROUP@:rxtncy,A::EVERYONE@:rxtncy,A::user@doma
 #### NVMeTCP Support
 - Supported from CSI Driver for PowerStore 2.2.0 and above.
 - Enable by setting `blockProtocol` to `NVMeTCP` in the secret.
-- Not supported on RHEL 7.x and CoreOS.
+- Not supported on RHEL 7.x
 
 #### NVMeFC Support
 - Supported from CSI Driver for PowerStore 2.3.0 and above.
