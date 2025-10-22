@@ -20,8 +20,8 @@
 
   <meta itemprop="name" content="Resiliency">
   <meta itemprop="description" content="Container Storage Modules (CSM) for Resiliency">
-  <meta itemprop="dateModified" content="2025-09-17T12:42:34-04:00">
-  <meta itemprop="wordCount" content="2382">
+  <meta itemprop="dateModified" content="2025-10-22T11:17:08+05:30">
+  <meta itemprop="wordCount" content="2396">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Resiliency">
   <meta name="twitter:description" content="Container Storage Modules (CSM) for Resiliency">
@@ -203,7 +203,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.2f852e160db1262b53ee14aaf92fdc21.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.7cad7c089a9769838e9adbd993b47a49.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -4016,7 +4016,7 @@ Supported and Tested Operating Modes <a class="header-link"  href="#supported-an
 <li>Dynamic PVC/PVs of accessModes &ldquo;ReadWriteOnce, ReadWriteMany&rdquo; and volumeMode &ldquo;FileSystem&rdquo;.</li>
 <li>Dynamic PVC/PVs of accessModes &ldquo;ReadWriteOnce, ReadWriteMany&rdquo; and volumeMode &ldquo;Block&rdquo;.</li>
 <li>Use of the above volumes with Pods created by StatefulSets.</li>
-<li>Up to 12 or so protected pods on a given node.</li>
+<li>CSM resiliency has been tested up to 120 pods per node, the amount of pods to be protected is tightly coupled with the node resources</li>
 <li>Failing up to 3 nodes at a time in 9 worker node clusters, or failing 1 node at a time in smaller clusters. Application recovery times are dependent on the number of pods that need to be moved as a result of the failure. See the section on &ldquo;Testing and Performance&rdquo; for some of the details.</li>
 <li>Multi-array are supported. In case of CSI Driver for PowerScale and CSI Driver for Unity, if any one of the array is not connected, the array connectivity will be false. CSI Driver for Powerflex connectivity will be determined by connection to default array.</li>
 </ul>
