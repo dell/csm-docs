@@ -561,13 +561,13 @@
     <lastmod>2022-09-21T18:28:15+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/docs/concepts/csidriver/features/powermax/</loc>
-    <lastmod>2025-08-19T08:06:44-04:00</lastmod>
+    <lastmod>2025-10-22T11:17:08+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/docs/getting-started/upgrade/helm/driver/powermax/</loc>
     <lastmod>2025-07-21T16:37:29+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/v1/concepts/csidriver/features/powermax/</loc>
-    <lastmod>2025-07-31T13:11:04-04:00</lastmod>
+    <lastmod>2025-10-22T11:17:08+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/v1/getting-started/upgrade/helm/driver/powermax/</loc>
     <lastmod>2025-07-31T13:11:04-04:00</lastmod>
@@ -633,7 +633,7 @@
     <lastmod>2023-06-24T09:21:08+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/docs/concepts/csidriver/features/powerstore/</loc>
-    <lastmod>2025-08-19T08:06:44-04:00</lastmod>
+    <lastmod>2025-10-22T11:17:08+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/docs/getting-started/installation/kubernetes/powerstore/</loc>
     <lastmod>2025-02-18T23:05:05+05:30</lastmod>
@@ -657,7 +657,7 @@
     <lastmod>2025-02-18T23:05:05+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/v1/concepts/csidriver/features/powerstore/</loc>
-    <lastmod>2025-07-31T13:11:04-04:00</lastmod>
+    <lastmod>2025-10-22T11:17:08+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/v1/getting-started/installation/kubernetes/powerstore/</loc>
     <lastmod>2025-06-05T13:26:25-04:00</lastmod>
@@ -2826,10 +2826,10 @@
     <lastmod>2024-03-21T02:39:59+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/docs/concepts/resiliency/</loc>
-    <lastmod>2025-09-17T12:42:34-04:00</lastmod>
+    <lastmod>2025-10-22T11:17:08+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/v1/concepts/resiliency/</loc>
-    <lastmod>2025-06-05T13:26:25-04:00</lastmod>
+    <lastmod>2025-10-22T11:17:08+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/v2/resiliency/</loc>
     <lastmod>2025-06-05T13:26:25-04:00</lastmod>
