@@ -3,6 +3,7 @@ title: "Prerequisite"
 linkTitle: "Prerequisite"
 weight: 1
 Description: >
+toc_hide: true
 ---
 
 
