@@ -69,7 +69,7 @@ The following requirements must be fulfilled in order to successfully use the Fi
      
      a. Configure Device Mapper MPIO for PowerMax FC connectivity
 
-     Use this command to create the machine configuration to configure the DM-MPIO service on all the worker hosts for FC  connectivity.
+     Use this command to create the machine configuration to configure the DM-MPIO service on all the worker hosts for FC connectivity.
      ```bash 
      oc apply -f 99-workers-multipath-conf.yaml
      ``` 
@@ -87,8 +87,8 @@ The following requirements must be fulfilled in order to successfully use the Fi
         }
         devices {
           device {
-            vendor                   DellEMC
-            product                  PowerMax
+            vendor                   EMC
+            product                  SYMMETRIX
             detect_prio              "yes"
             path_selector            "service-time 0"
             path_grouping_policy     "group_by_prio"
