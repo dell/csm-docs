@@ -131,7 +131,7 @@ function onObservabilityChange() {
 function onObservabilityOperatorChange() {
 	if ($("#observability-operator").prop('checked') === true) {
 		$('div#observability-operator-metrics-wrapper').show();
-		if (isVersionGreaterOrEqualTo(document.getElementById("csm-version").value, "1.15.0")) {
+		if (isVersionGreaterOrEqualTo(document.getElementById("csm-version").value, "1.15.1")) {
 			$('div#observability-operator-topology-wrapper').hide();
 		} else {
 			$('div#observability-operator-topology-wrapper').show();
@@ -432,7 +432,7 @@ function displayModules(installationType, driverName, CONSTANTS_PARAM) {
 			if (isVersionGreaterOrEqualTo(document.getElementById("csm-version").value,"1.14.0")) {
 				$(".vgsnapshot").hide();
 			}
-			if (!(isVersionGreaterOrEqualTo(document.getElementById("csm-version").value,"1.15.0"))) {
+			if (!(isVersionGreaterOrEqualTo(document.getElementById("csm-version").value,"1.15.1"))) {
 				$(".authorization").hide();
 				$("#authorization").prop('checked', false);
 			}
@@ -466,7 +466,7 @@ function displayModules(installationType, driverName, CONSTANTS_PARAM) {
 			document.getElementById("driver-namespace").value = CONSTANTS_PARAM.POWERSCALE_NAMESPACE;
 			if (installationType === CONSTANTS_PARAM.OPERATOR){
 				$(".observability-operator").show();
-				if (isVersionGreaterOrEqualTo(document.getElementById("csm-version").value, "1.15.0")) {
+				if (isVersionGreaterOrEqualTo(document.getElementById("csm-version").value, "1.15.1")) {
 					$('div#observability-operator-topology-wrapper').hide();
 				} else {
 					$('div#observability-operator-topology-wrapper').show();
@@ -512,7 +512,7 @@ function displayModules(installationType, driverName, CONSTANTS_PARAM) {
 			if (installationType === CONSTANTS_PARAM.OPERATOR) {
 				
 				$(".observability-operator").show();
-				if (isVersionGreaterOrEqualTo(document.getElementById("csm-version").value, "1.15.0")) {
+				if (isVersionGreaterOrEqualTo(document.getElementById("csm-version").value, "1.15.1")) {
 					$('div#observability-operator-topology-wrapper').hide();
 				} else {
 					$('div#observability-operator-topology-wrapper').show();
@@ -544,7 +544,7 @@ function displayModules(installationType, driverName, CONSTANTS_PARAM) {
 			$(".enable-sdc-sftp-repo").show();
 			$(".rename-sdc-feature").show();
 			$(".approve-sdc").show();
-			if (document.getElementById("csm-version").value === "1.8.0") {
+			if (document.getElementById("csm-version").value === "1.8.1") {
 				$(".max-volumes-per-node").show();
 				$(".nfs-feature").show(); 
     if (isVersionGreaterOrEqualTo(document.getElementById("csm-version").value, "1.14.0")) {
@@ -592,11 +592,11 @@ function displayCommands(releaseNameValue, commandTitleValue, commandNoteValue, 
 		case "1.14.0":
 			helmChartVersion = CONSTANTS.CSM_HELM_V1140;
 			break;
-		case "1.15.0":
-			helmChartVersion = CONSTANTS.CSM_HELM_V1150;
+		case "1.15.1":
+			helmChartVersion = CONSTANTS.CSM_HELM_V1151;
 			break;
 		default:
-			helmChartVersion = CONSTANTS.CSM_HELM_V1150;
+			helmChartVersion = CONSTANTS.CSM_HELM_V1151;
 			break;
 	}
 	$("#command-text-area").show();
