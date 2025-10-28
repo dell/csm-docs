@@ -705,7 +705,7 @@
     <lastmod>2025-06-05T13:26:25-04:00</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/docs/getting-started/installation/kubernetes/powermax/prerequisite/</loc>
-    <lastmod>2025-05-22T16:18:58+05:30</lastmod>
+    <lastmod>2025-10-28T11:09:36+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/docs/getting-started/installation/kubernetes/powerstore/prerequisite/</loc>
     <lastmod>2025-05-22T16:18:58+05:30</lastmod>
@@ -714,7 +714,7 @@
     <lastmod>2025-02-18T23:05:05+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/docs/getting-started/installation/openshift/powermax/prerequisite/</loc>
-    <lastmod>2025-07-08T18:08:57+05:30</lastmod>
+    <lastmod>2025-10-28T11:09:36+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/docs/getting-started/installation/openshift/powerscale/csmoperator/prerequisite/</loc>
     <lastmod>2025-04-30T23:27:03+05:30</lastmod>
@@ -726,7 +726,7 @@
     <lastmod>2025-04-30T23:27:03+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/v1/getting-started/installation/kubernetes/powermax/prerequisite/</loc>
-    <lastmod>2025-06-05T13:26:25-04:00</lastmod>
+    <lastmod>2025-10-28T11:09:36+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/v1/getting-started/installation/kubernetes/powerstore/prerequisite/</loc>
     <lastmod>2025-06-05T13:26:25-04:00</lastmod>
@@ -735,7 +735,7 @@
     <lastmod>2025-06-05T13:26:25-04:00</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/v1/getting-started/installation/openshift/powermax/prerequisite/</loc>
-    <lastmod>2025-07-31T13:11:04-04:00</lastmod>
+    <lastmod>2025-10-28T11:09:36+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/v1/getting-started/installation/openshift/powerscale/csmoperator/prerequisite/</loc>
     <lastmod>2025-06-05T13:26:25-04:00</lastmod>
@@ -1490,6 +1490,9 @@
     <loc>https://dell.github.io/csm-docs/v3/csidriver/</loc>
     <lastmod>2025-06-05T13:26:25-04:00</lastmod>
   </url><url>
+    <loc>https://dell.github.io/csm-docs/docs/getting-started/installation/helm/modules/observability/</loc>
+    <lastmod>2025-09-02T17:13:09+05:30</lastmod>
+  </url><url>
     <loc>https://dell.github.io/csm-docs/docs/getting-started/installation/helm/modules/observability/deployment/</loc>
     <lastmod>2025-09-02T17:13:09+05:30</lastmod>
   </url><url>
@@ -1507,9 +1510,6 @@
   </url><url>
     <loc>https://dell.github.io/csm-docs/docs/getting-started/installation/kubernetes/unityxt/helm/</loc>
     <lastmod>2025-07-21T16:37:29+05:30</lastmod>
-  </url><url>
-    <loc>https://dell.github.io/csm-docs/v1/getting-started/installation/helm/modules/observability/</loc>
-    <lastmod>2025-06-05T13:26:25-04:00</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/v1/getting-started/installation/helm/modules/observability/deployment/</loc>
     <lastmod>2025-06-05T13:26:25-04:00</lastmod>
@@ -1552,9 +1552,6 @@
   </url><url>
     <loc>https://dell.github.io/csm-docs/v3/deployment/helm/modules/installation/observability/installer/</loc>
     <lastmod>2025-06-05T13:26:25-04:00</lastmod>
-  </url><url>
-    <loc>https://dell.github.io/csm-docs/docs/getting-started/installation/helm/modules/observability/</loc>
-    <lastmod>2025-09-02T17:13:09+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/docs/getting-started/installation/kubernetes/powerflex/csmoperator/csm-modules/observability/</loc>
     <lastmod>2025-02-18T23:05:05+05:30</lastmod>
@@ -1621,6 +1618,9 @@
   </url><url>
     <loc>https://dell.github.io/csm-docs/docs/getting-started/upgrade/kubernetes/powerstore/helm/csm-modules/observability/</loc>
     <lastmod>2025-02-18T23:05:05+05:30</lastmod>
+  </url><url>
+    <loc>https://dell.github.io/csm-docs/v1/getting-started/installation/helm/modules/observability/</loc>
+    <lastmod>2025-06-05T13:26:25-04:00</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/v1/getting-started/installation/kubernetes/powerflex/csmoperator/csm-modules/observability/</loc>
     <lastmod>2025-06-05T13:26:25-04:00</lastmod>
