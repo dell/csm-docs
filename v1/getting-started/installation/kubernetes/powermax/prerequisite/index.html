@@ -23,8 +23,8 @@ A Kubernetes or OpenShift cluster (see supported versions). A PowerMax system ma
   <meta itemprop="name" content="Prerequisite">
   <meta itemprop="description" content="The following requirements must be met before installing the CSI Driver for PowerMax:
 A Kubernetes or OpenShift cluster (see supported versions). A PowerMax system managed by a Unisphere instance with software version 10.0 or later. If enabling CSM for Authorization, please refer to the Authorization deployment steps first If enabling CSM Replication, both source and target storage systems must be locally managed by Unisphere. Example: When using two Unisphere instances, the first Unisphere instance should be configured with the source storage system as locally managed and target storage system as remotely managed. The second Unisphere configuration should mirror the first — locally managing the target storage system and remotely managing the source storage system. Refer to the sections below for protocol specific requirements. For NVMe support the preferred multipath solution is NVMe native multipathing. The Dell Host Connectivity Guide describes the details of each configuration option. Linux multipathing requirements (described later). PowerPath for Linux requirements (described later). Mount propagation is enabled on the container runtime that is being used. If using Snapshot feature, satisfy all Volume Snapshot requirements. Insecure registries are defined in Docker or other container runtime for CSI drivers that are hosted in a non-secure location. Ensure that your nodes support mounting NFS volumes if using NFS. Auto RDM for vSphere over FC requirements CSI PowerMax Reverse Proxy The CSI PowerMax Reverse Proxy is a component that will be installed with the CSI PowerMax driver. For more details on this feature, see the related documentation.">
-  <meta itemprop="dateModified" content="2025-06-05T13:26:25-04:00">
-  <meta itemprop="wordCount" content="2223">
+  <meta itemprop="dateModified" content="2025-10-28T11:09:36+05:30">
+  <meta itemprop="wordCount" content="2241">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Prerequisite">
   <meta name="twitter:description" content="The following requirements must be met before installing the CSI Driver for PowerMax:
@@ -206,7 +206,7 @@ A Kubernetes or OpenShift cluster (see supported versions). A PowerMax system ma
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.7cad7c089a9769838e9adbd993b47a49.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.f551ad409a9ce1f587f2ffb31bbd5958.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -4549,26 +4549,32 @@ multipathing is used.
 <ol start="2">
 <li>
 <p>Best Practices</p>
-<p>Use these options in multipath.conf for efficient path detection:</p>
-<pre><code>  path_grouping_policy multibus
-  path_checker tur
-  features &quot;1 queue_if_no_path&quot;
-  path_selector &quot;round-robin 0&quot;
-  no_path_retry 10
-</code></pre>
+<p>The <a href="https://elabnavigator.dell.com/vault/pdf/Linux.pdf">Host Connectivity Guide for Linux</a>
+provides comprehensive details on various multipathd configurations.
 <br>
-The following is a sample multipath.conf file. You may have to adjust these values based on your environment.
-<br>
+The following is a sample multipath.conf file has been validated with SRDF metro. You may have to adjust these values based on your environment.
+<br></p>
 <pre><code>defaults {
-  user_friendly_names yes
-  find_multipaths yes
-  path_grouping_policy multibus
-  path_checker tur
-  features &quot;1 queue_if_no_path&quot;
-  path_selector &quot;round-robin 0&quot;
-  no_path_retry 10
+  polling_interval 5
+  checker_timeout 15
+  disable_changed_wwids yes
+  find_multipaths no
 }
-  blacklist {
+devices {
+  device {
+    vendor                   EMC
+    product                  SYMMETRIX
+    detect_prio              &quot;yes&quot;
+    path_selector            &quot;service-time 0&quot;
+    path_grouping_policy     &quot;group_by_prio&quot;
+    path_checker             tur
+    failback                 immediate
+    fast_io_fail_tmo         5
+    no_path_retry            3
+    rr_min_io_rq             1
+    max_sectors_kb           1024
+    dev_loss_tmo             10
+  }
 }
 </code></pre>
 <p>On some distributions the multipathd service for changes to the configuration

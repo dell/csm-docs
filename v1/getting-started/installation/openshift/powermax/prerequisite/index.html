@@ -23,7 +23,7 @@ Create a TLS secret that holds an SSL certificate and a private key. This is req
   <meta itemprop="name" content="Prerequisite">
   <meta itemprop="description" content="CSI PowerMax Reverse Proxy The CSI PowerMax Reverse Proxy is a component that will be installed with the CSI PowerMax driver. For more details on this feature, see the related documentation.
 Create a TLS secret that holds an SSL certificate and a private key. This is required by the reverse proxy server.">
-  <meta itemprop="dateModified" content="2025-07-31T13:11:04-04:00">
+  <meta itemprop="dateModified" content="2025-10-28T11:09:36+05:30">
   <meta itemprop="wordCount" content="1584">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Prerequisite">
@@ -206,7 +206,7 @@ Create a TLS secret that holds an SSL certificate and a private key. This is req
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.7cad7c089a9769838e9adbd993b47a49.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.f551ad409a9ce1f587f2ffb31bbd5958.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -4070,7 +4070,7 @@ Fibre Channel Requirements <a class="header-link"  href="#fibre-channel-requirem
 <li>
 <p>Multipathing software configuration</p>
 <p>a. Configure Device Mapper MPIO for PowerMax FC connectivity</p>
-<p>Use this command to create the machine configuration to configure the DM-MPIO service on all the worker hosts for FC  connectivity.</p>
+<p>Use this command to create the machine configuration to configure the DM-MPIO service on all the worker hosts for FC connectivity.</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>oc apply -f 99-workers-multipath-conf.yaml
 </span></span></code></pre></div> <br> 
 <p>Example:</p>
@@ -4083,8 +4083,8 @@ Fibre Channel Requirements <a class="header-link"  href="#fibre-channel-requirem
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span>}<span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#000">devices {</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#000">device {</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#000">vendor                   DellEMC</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#000">product                  PowerMax</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#000">vendor                   EMC</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#000">product                  SYMMETRIX</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#000">detect_prio              &#34;yes&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#000">path_selector            &#34;service-time 0&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#000">path_grouping_policy     &#34;group_by_prio&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
