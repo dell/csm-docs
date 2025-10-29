@@ -47,6 +47,7 @@ dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      
 </ol>
 </br>
 
+
 ### CSI Driver Installation
 
 </br>
@@ -113,6 +114,9 @@ dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      
     ```  
   </br>
 
+**Note:** - Configure SFTP settings based on PowerFlex [Concepts](../../../../../concepts/csidriver/features/powerflex/#expose-the-sftp-settings-to-automatically-pull-the-sciniko-kernel-module)
+</br>
+
 3. ##### **Create Custom Resource** ContainerStorageModule for powerflex.
    
    <br>
@@ -141,7 +145,7 @@ dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      
     ``` 
     </div>
     
-    **Detailed Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powerflex_{{< version-docs key="Det_sample_operator_pflex" >}}.yaml) for detailed settings.
+    **Detailed Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/main/samples/{{< version-docs key="csm-operator_latest_samples_dir" >}}/storage_csm_powerflex_{{< version-docs key="Det_sample_operator_pflex" >}}.yaml) for detailed settings.
    
    </br>
     To set the parameters in CR. The table shows the main settings of the PowerFlex driver and their defaults.

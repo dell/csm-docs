@@ -232,11 +232,11 @@ dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      
       apiVersion: v1
       kind: Secret
       metadata:
-         name: isilon-certs-0
-         namespace: isilon
+        name: isilon-certs-0
+        namespace: isilon
       type: Opaque
       data:
-         cert-0: "" 
+        cert-0: "" 
       EOF
       ```
 
@@ -279,7 +279,7 @@ dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      
      ``` 
     </div> 
 
-    **Detailed Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powerscale_{{< version-docs key="sample_sc_pscale" >}}.yaml) for detailed settings or use [Wizard](./installationwizard#generate-manifest-file) to generate the sample file..
+    **Detailed Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/main/samples/{{< version-docs key="csm-operator_latest_samples_dir" >}}/storage_csm_powerscale_{{< version-docs key="sample_sc_pscale" >}}.yaml) for detailed settings or use [Wizard](./installationwizard#generate-manifest-file) to generate the sample file..
 
     <br>
 
