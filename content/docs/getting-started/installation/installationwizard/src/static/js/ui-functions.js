@@ -131,7 +131,7 @@ function onObservabilityChange() {
 function onObservabilityOperatorChange() {
 	if ($("#observability-operator").prop('checked') === true) {
 		$('div#observability-operator-metrics-wrapper').show();
-		if (isVersionGreaterOrEqualTo(document.getElementById("csm-version").value, "1.15.1")) {
+		if (isVersionGreaterOrEqualTo(document.getElementById("csm-version").value, "1.15.0")) {
 			$('div#observability-operator-topology-wrapper').hide();
 		} else {
 			$('div#observability-operator-topology-wrapper').show();
