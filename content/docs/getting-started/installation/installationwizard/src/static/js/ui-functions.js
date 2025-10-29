@@ -544,7 +544,7 @@ function displayModules(installationType, driverName, CONSTANTS_PARAM) {
 			$(".enable-sdc-sftp-repo").show();
 			$(".rename-sdc-feature").show();
 			$(".approve-sdc").show();
-			if (document.getElementById("csm-version").value === "1.8.1") {
+			if (document.getElementById("csm-version").value === "1.8.0") {
 				$(".max-volumes-per-node").show();
 				$(".nfs-feature").show(); 
     if (isVersionGreaterOrEqualTo(document.getElementById("csm-version").value, "1.14.0")) {
