@@ -54,11 +54,11 @@ To deploy the Operator, follow the instructions available [here](../../../operat
 
 1. Create a CR (Custom Resource) for Unity using the sample files provided
 
-    a. **Default Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/main/samples/{{< version-docs key="csm-operator_latest_samples_dir" >}}/minimal-samples/unity_{{< version-docs key="Min_sample_operator_unity" >}}.yaml) for default settings. Modify if needed.
+    a. **Default Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/release/{{< version-docs key="csm-operator_latest_version">}}/samples/{{< version-docs key="csm-operator_latest_samples_dir" >}}/minimal-samples/unity_{{< version-docs key="Min_sample_operator_unity" >}}.yaml) for default settings. Modify if needed.
 
     [OR]                                                
 
-    b. **Detailed Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/main/samples/{{< version-docs key="csm-operator_latest_samples_dir" >}}/storage_csm_unity_{{< version-docs key="Det_sample_operator_unity" >}}.yaml) for detailed settings.
+    b. **Detailed Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/release/{{< version-docs key="csm-operator_latest_version">}}/samples/{{< version-docs key="csm-operator_latest_samples_dir" >}}/storage_csm_unity_{{< version-docs key="Det_sample_operator_unity" >}}.yaml) for detailed settings.
 
 2. Users should configure the parameters in CR. The following table lists the primary configurable parameters of the Unity XT driver and their default values:
 
