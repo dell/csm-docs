@@ -151,7 +151,7 @@ dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      
       name: powerstore
       namespace: powerstore
     spec:
-    driver:
+     driver:
        csiDriverType: "powerstore"
        configVersion: {{< version-docs key="PStore_latestVersion" >}}
        forceRemoveDriver: true

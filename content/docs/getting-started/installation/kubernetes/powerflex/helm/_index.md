@@ -30,7 +30,7 @@ Install Helm 3.x on the master node before you install the CSI Driver for Dell P
 
 The following are requirements that must be met before installing the CSI Driver for Dell PowerFlex:
 
-- Install Kubernetes or OpenShift (see [supported versions](../../../../../concepts/csidriver/#features-and-capabilities))
+- Install Kubernetes cluster (see [supported versions](../../../../../concepts/csidriver/#features-and-capabilities))
 - Install Helm 3.x
 - Enable Zero Padding on PowerFlex
 - Mount propagation is enabled on container runtime that is being used

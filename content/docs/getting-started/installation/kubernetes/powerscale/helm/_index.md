@@ -30,7 +30,7 @@ Install Helm 3.0 on the master node before you install the CSI Driver for PowerS
 
 The following are requirements to be met before installing the CSI Driver for PowerScale:
 
-- Install Kubernetes or OpenShift (see [supported versions](../../../../../concepts/csidriver/#features-and-capabilities))
+- Install Kubernetes cluster (see [supported versions](../../../../../concepts/csidriver/#features-and-capabilities))
 - Install Helm 3
 - Mount propagation is enabled on container runtime that is being used
 - `nfs-utils` package must be installed on nodes that will mount volumes

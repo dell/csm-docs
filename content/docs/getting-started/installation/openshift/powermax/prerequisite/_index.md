@@ -316,7 +316,7 @@ The following requirements must be fulfilled in order to successfully use the Fi
 <br>
 
 3. To ensure successful integration of NVMe protocols with the CSI Driver, the following conditions must be met:
-      - Each OpenShift or Kubernetes node that connects to Dell storage arrays must have a unique NVMe Qualified Name (NQN).
+      - Each OpenShift node that connects to Dell storage arrays must have a unique NVMe Qualified Name (NQN).
       - By default, the OpenShift deployment process for CoreOS assigns the same host NQN to all nodes. This value is stored in the file: /etc/nvme/hostnqn.
       - To resolve this and guarantee unique host NQNs across nodes, you can apply a machine configuration to your OpenShift Container Platform (OCP) cluster. One recommended approach is to  add   the following machine config:
       
@@ -327,28 +327,28 @@ The following requirements must be fulfilled in order to successfully use the Fi
       apiVersion: machineconfiguration.openshift.io/v1
       kind: MachineConfig
       metadata:
-      labels:
-        machineconfiguration.openshift.io/role: worker
-      name: 99-worker-custom-nvme-hostnqn
+        labels:
+          machineconfiguration.openshift.io/role: worker
+        name: 99-worker-custom-nvme-hostnqn
       spec:
-      config:
-        ignition:
-          version: 3.4.0
-        systemd:
-          units:
-            - contents: |
-                [Unit]
-                Description=Custom CoreOS Generate NVMe Hostnqn
+        config:
+          ignition:
+            version: 3.4.0
+          systemd:
+            units:
+              - contents: |
+                  [Unit]
+                  Description=Custom CoreOS Generate NVMe Hostnqn
 
-                [Service]
-                Type=oneshot
-                ExecStart=/usr/bin/sh -c '/usr/sbin/nvme gen-hostnqn > /etc/nvme/hostnqn'
-                RemainAfterExit=yes
+                  [Service]
+                  Type=oneshot
+                  ExecStart=/usr/bin/sh -c '/usr/sbin/nvme gen-hostnqn > /etc/nvme/hostnqn'
+                  RemainAfterExit=yes
 
-                [Install]
-                WantedBy=multi-user.target
-              enabled: true
-              name: custom-coreos-generate-nvme-hostnqn.service
+                  [Install]
+                  WantedBy=multi-user.target
+                enabled: true
+                name: custom-coreos-generate-nvme-hostnqn.service
       EOF
       ```
 
@@ -389,7 +389,7 @@ The following requirements must be fulfilled in order to successfully use the Fi
    ``` 
 <br> 
 
-4. Configure NVMe reconnecting forever 
+5. Configure NVMe reconnecting forever 
 
    ```yaml 
    cat <<EOF> 72-nvmf-ctrl_loss_tmo.rules
@@ -490,7 +490,7 @@ update the endpoint name to adhere to the CSI driver requirements.
    <br> 
 
    3. To ensure successful integration of NVMe protocols with the CSI Driver, the following conditions must be met:
-      - Each OpenShift or Kubernetes node that connects to Dell storage arrays must have a unique NVMe Qualified Name (NQN).
+      - Each OpenShift node that connects to Dell storage arrays must have a unique NVMe Qualified Name (NQN).
       - By default, the OpenShift deployment process for CoreOS assigns the same host NQN to all nodes. This value is stored in the file: /etc/nvme/hostnqn.
       - To resolve this and guarantee unique host NQNs across nodes, you can apply a machine configuration to your OpenShift Container Platform (OCP) cluster. One recommended approach is to  add   the following machine config:
       
@@ -501,28 +501,28 @@ update the endpoint name to adhere to the CSI driver requirements.
       apiVersion: machineconfiguration.openshift.io/v1
       kind: MachineConfig
       metadata:
-      labels:
-        machineconfiguration.openshift.io/role: worker
-      name: 99-worker-custom-nvme-hostnqn
+        labels:
+          machineconfiguration.openshift.io/role: worker
+        name: 99-worker-custom-nvme-hostnqn
       spec:
-      config:
-        ignition:
-          version: 3.4.0
-        systemd:
-          units:
-            - contents: |
-                [Unit]
-                Description=Custom CoreOS Generate NVMe Hostnqn
+        config:
+          ignition:
+            version: 3.4.0
+          systemd:
+            units:
+              - contents: |
+                  [Unit]
+                  Description=Custom CoreOS Generate NVMe Hostnqn
 
-                [Service]
-                Type=oneshot
-                ExecStart=/usr/bin/sh -c '/usr/sbin/nvme gen-hostnqn > /etc/nvme/hostnqn'
-                RemainAfterExit=yes
+                  [Service]
+                  Type=oneshot
+                  ExecStart=/usr/bin/sh -c '/usr/sbin/nvme gen-hostnqn > /etc/nvme/hostnqn'
+                  RemainAfterExit=yes
 
-                [Install]
-                WantedBy=multi-user.target
-              enabled: true
-              name: custom-coreos-generate-nvme-hostnqn.service
+                  [Install]
+                  WantedBy=multi-user.target
+                enabled: true
+                name: custom-coreos-generate-nvme-hostnqn.service
       EOF
       ```
 
@@ -570,7 +570,7 @@ update the endpoint name to adhere to the CSI driver requirements.
       ``` 
    <br> 
 
-   4. Configure NVMe reconnecting forever 
+   5. Configure NVMe reconnecting forever 
 
       Use this command to create the machine configuration to configure the NVMe reconnect
 

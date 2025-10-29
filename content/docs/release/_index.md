@@ -65,7 +65,7 @@ Description: >
 - CSM docs - Volume snapshot class mentioned in documentation has indentation issues and failing off
 - Broken referencelink on Support Matrix
 - CSM Authorization: Proxy server deployment is failing
-- CSM Docs - Duplicate entries in Release notes
+- CSM Docs - Duplicate entries in Release notes for known issues
 - Repctl Failover Documentation is Unclear
 - replication missing permission in operator
 - Incorrect secret name mentioned for PowerScale installation using operator in OCP environment in CSM Docs
@@ -74,7 +74,7 @@ Description: >
 - CSI PowerFlex driver panics during CreateVolume()
 - node driver crashed on unlocking an unlocked mutex
 - PowerMax client is using PowerFlex methods in CSM authorization
-- Authorization Installation clarity - Authorization Install docs should use tabs for for storage credential options.
+- Authorization Install docs should use tabs for for storage credential options.
 - Host registration is missing when using metro topology label
 - Operator fails to install PowerStore
 - CSM Docs - Broken links to csm-operator samples in concepts section
@@ -83,7 +83,6 @@ Description: >
 - CSI-PowerScale does not log CSI REQ/REP since 2.14
 - Issue with expansion for PowerStore metro volume
 - invalid topology labels due to delays in initiators login state report from Unity array
-- op e2e tests fail for PowerMax
 - CSI PowerScale is not able to find the default cluster and failing with error "isilon-node-fntjz"
 - ControllerUnpublish fails to retrieve PV due to tenant prefix mismatch with Auth v2 enabled for powerscale
 
