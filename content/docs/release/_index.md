@@ -28,13 +28,13 @@ Description: >
 
 ### Fixed Issues
 
-- PowerStore NodeGetVolumeStats Fails When StorageClass isipath Differs from X_CSI_ISI_PATH Environment Variable
-- PowerFlex Storage Pool Metrics Not Collected in Multi-AZ Setup Due to Missing SystemID in StorageClass
-- PowerFlex CSI Driver Panics Intermittently When os.Stat Fails During Volume Operation 
-- PowerStore CreateVolume Call Violates Idempotency When Multi-NAS Is Configured 
-- PowerMax Volume Provisioning Fails When Endpoint Is Configured with Trailing Slash 
-- PowerMax Driver Incorrectly Disables NVMe Support Due to Partial Port Group Accessibility During Startup
-- PowerMax Driver Crashes with Segmentation Fault Due to Improper Error Handling of Nil Initiators
+- PowerStore - NodeGetVolumeStats Fails When StorageClass isipath Differs from X_CSI_ISI_PATH Environment Variable
+- PowerFlex - Storage Pool Metrics Not Collected in Multi-AZ Setup Due to Missing SystemID in StorageClass
+- PowerFlex - CSI Driver Panics Intermittently When os.Stat Fails During Volume Operation 
+- PowerStore - CreateVolume Call Violates Idempotency When Multi-NAS Is Configured 
+- PowerMax - Volume Provisioning Fails When Endpoint Is Configured with Trailing Slash 
+- PowerMax - Driver Incorrectly Disables NVMe Support Due to Partial Port Group Accessibility During Startup
+- PowerMax - Driver Crashes with Segmentation Fault Due to Improper Error Handling of Nil Initiators
 
 ## Release Notes for v1.15.0
 
@@ -62,10 +62,10 @@ Description: >
 - Powerstore has unnecessary sharedNFS related codes that affects performance
 - powerflex driver's replication does not search for correct volume name when name + prefix > 31 chars
 - CSM-Operator samples under ocp folder for PowerFlex is pointing to old sha id for SDC image
-- Snapshot class mentioned in documentation fails
+- CSM docs - Volume snapshot class mentioned in documentation has indentation issues and failing off
 - Broken referencelink on Support Matrix
 - CSM Authorization: Proxy server deployment is failing
-- Duplicate entries in Release notes
+- CSM Docs - Duplicate entries in Release notes
 - Repctl Failover Documentation is Unclear
 - replication missing permission in operator
 - Incorrect secret name mentioned for PowerScale installation using operator in OCP environment in CSM Docs
@@ -74,10 +74,10 @@ Description: >
 - CSI PowerFlex driver panics during CreateVolume()
 - node driver crashed on unlocking an unlocked mutex
 - PowerMax client is using PowerFlex methods in CSM authorization
-- Authorization Installation clarity
+- Authorization Installation clarity - Authorization Install docs should use tabs for for storage credential options.
 - Host registration is missing when using metro topology label
 - Operator fails to install PowerStore
-- broken links to csm-operator samples in concepts section
+- CSM Docs - Broken links to csm-operator samples in concepts section
 - Powerstore NFS volume usage does not report stats when Volume health Monitoring is enabled
 - Node preferred added for testing resiliency for metro is causing regression in normal set up
 - CSI-PowerScale does not log CSI REQ/REP since 2.14
