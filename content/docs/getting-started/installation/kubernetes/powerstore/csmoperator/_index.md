@@ -140,13 +140,13 @@ To deploy the Operator, follow the instructions available [here](../../../operat
    apiVersion: storage.k8s.io/v1
    kind: StorageClass
    metadata:
-   name: "powerstore-ext4"
+      name: "powerstore-ext4"
    provisioner: "csi-powerstore.dellemc.com"
    parameters:
-   csi.storage.k8s.io/fstype: "ext4"
+      csi.storage.k8s.io/fstype: "ext4"
    reclaimPolicy: Delete
    allowVolumeExpansion: true
-   volumeBindingMode: Immediate
+   volumeBindingMode: Immediate   
    ````
 
    Refer [Storage Class](https://github.com/dell/csi-powerstore/tree/main/samples/storageclass) for different sample files.
