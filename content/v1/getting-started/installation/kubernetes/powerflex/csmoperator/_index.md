@@ -144,7 +144,7 @@ run `/opt/emc/scaleio/sdc/bin/drv_cfg --add_mdm --ip 10.xx.xx.xx.xx,10.xx.xx.xx`
     b. **Detailed Configuration:** Use the [sample file](https://github.com/dell/csm-operator/tree/release/{{< version-v1 key="csm-operator_latest_version" >}}/samples/storage_csm_powerflex_{{< version-v1 key="sample_sc_pflex" >}}.yaml) for detailed settings.
 
 
- *NOTE:* - Configure SFTP settings based on PowerFlex [Concepts](../../../../../concepts/csidriver/features/powerflex/#expose-the-sftp-settings-to-automatically-pull-the-sciniko-kernel-module)
+    **Note:** Configure SFTP settings based on PowerFlex [Concepts](../../../../../concepts/csidriver/features/powerflex/#expose-the-sftp-settings-to-automatically-pull-the-sciniko-kernel-module)
 
 - Configure the parameters in the CR. The table below lists the primary configurable parameters of the PowerFlex driver and their default values:
 <ul>
@@ -176,6 +176,9 @@ run `/opt/emc/scaleio/sdc/bin/drv_cfg --add_mdm --ip 10.xx.xx.xx.xx,10.xx.xx.xx`
    |<div style="text-align: left"> X_CSI_APPROVE_SDC_ENABLED |<div style="text-align: left"> Enable this to to approve restricted SDC by GUID during setup | Yes | false |
    |<div style="text-align: left"> X_CSI_HEALTH_MONITOR_ENABLED |<div style="text-align: left"> Enable/Disable health monitor of CSI volumes from Node plugin - volume condition | No | false |
    |<div style="text-align: left"> X_CSI_SDC_ENABLED |<div style="text-align: left"> Enable/Disable installation of the SDC. | Yes | true |
+   |<div style="text-align: left"> X_CSI_SDC_SFTP_REPO_ENABLED |<div style="text-align: left"> A boolean that enables/disables the SFTP repository settings for SDC. | No | false |
+   |<div style="text-align: left"> X_CSI_SFTP_REPO_ADDRESS  |<div style="text-align: left"> Specifies the address of the Dell SFTP/private repository to look up for SDC kernel files. | No | "sftp://0.0.0.0" |
+   |<div style="text-align: left"> X_CSI_SFTP_REPO_USER  |<div style="text-align: left"> Specifies the username to authenticate to the SFTP repository. | No | "sdcSFTPRepoUser" |
    |<div style="text-align: left"> ***Sidecar parameters*** |
    |<div style="text-align: left"> volume-name-prefix |<div style="text-align: left"> The volume-name-prefix is used by provisioner sidecar as a prefix for all the volumes created  | Yes | k8s |
    |<div style="text-align: left"> monitor-interval |<div style="text-align: left"> The monitor-interval is used by external-health-monitor as an interval for health checks  | Yes | 60s |
