@@ -24,7 +24,7 @@ You can upgrade the CSI Driver for Dell PowerScale using Helm or Dell CSM Operat
 3. Download the default values.yaml using following command:
 
    ```bash
-   wget -O my-isilon-settings.yaml https://raw.githubusercontent.com/dell/helm-charts/csi-isilon-2.15.0/charts/csi-isilon/values.yaml
+   wget -O my-isilon-settings.yaml https://raw.githubusercontent.com/dell/helm-charts/csi-isilon-2.15.1/charts/csi-isilon/values.yaml
    ```
 
    Edit the _my-isilon-settings.yaml_ as per the requirements.

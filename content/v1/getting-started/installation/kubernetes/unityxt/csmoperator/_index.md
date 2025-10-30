@@ -21,7 +21,7 @@ To deploy the Operator, follow the instructions available [here](../../../operat
 1. **Create namespace:**
 
    ```bash 
-      kubectl create namespace unity
+   kubectl create namespace unity
    ```
    This command creates a namespace called `unity`. You can replace `unity` with any name you prefer.
 
@@ -29,13 +29,13 @@ To deploy the Operator, follow the instructions available [here](../../../operat
 
    Create a file called `secret.yaml` or pick a [sample](https://github.com/dell/csi-unity/blob/main/samples/secret/secret.yaml) that has Unity array connection details: 
    ```yaml
-      storageArrayList:
-      - arrayId: "APM00******1"                 # unique array id of the Unisphere array
-        username: "user"                        # username for connecting to API
-        password: "password"                    # password for connecting to API
-        endpoint: "https://10.1.1.1/"           # full URL path to the Unity XT API
-        skipCertificateValidation: true         # indicates if client side validation of (management)server's certificate can be skipped
-        isDefault: true                         # treat current array as a default (would be used by storage classes without arrayID parameter)
+   storageArrayList:
+   - arrayId: "APM00******1"                 # unique array id of the Unisphere array
+     username: "user"                        # username for connecting to API
+     password: "password"                    # password for connecting to API
+     endpoint: "https://10.1.1.1/"           # full URL path to the Unity XT API
+     skipCertificateValidation: true         # indicates if client side validation of (management)server's certificate can be skipped
+     isDefault: true                         # treat current array as a default (would be used by storage classes without arrayID parameter)
    ```
    Change the parameters with relevant values for your Unity XT array.
    Add more blocks similar to above for each Unity XT array if necessary.

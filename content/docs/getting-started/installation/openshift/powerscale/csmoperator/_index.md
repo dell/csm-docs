@@ -30,8 +30,7 @@ weight: 2
                 v4.1 Enabled: Yes
                 v4.2 Enabled: Yes
     NFS RDMA Enabled: No
-        Rquota Enabled: No   
-
+        Rquota Enabled: No
     ``` 
     <br>
 
@@ -49,7 +48,6 @@ weight: 2
     isi auth roles modify CSMAdminRole --zone System --add-priv-read ISI_PRIV_LOGIN_PAPI --add-priv-read ISI_PRIV_IFS_RESTORE --add-priv-read ISI_PRIV_NS_IFS_ACCESS  --add-priv-read ISI_PRIV_IFS_BACKUP --add-priv-read ISI_PRIV_AUTH --add-priv-read ISI_PRIV_AUTH_ZONES --add-priv-read  ISI_PRIV_STATISTICS
     isi auth roles modify CSMAdminRole --zone System --add-priv-write ISI_PRIV_NFS --add-priv-write ISI_PRIV_QUOTA --add-priv-write ISI_PRIV_SNAPSHOT --add-priv-write ISI_PRIV_SYNCIQ
     isi auth roles modify CSMAdminRole --add-group csmadmins
-
     ```
 
 4. **Get PowerScale Array Details** 
@@ -232,11 +230,11 @@ dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      
       apiVersion: v1
       kind: Secret
       metadata:
-         name: isilon-certs-0
-         namespace: isilon
+        name: isilon-certs-0
+        namespace: isilon
       type: Opaque
       data:
-         cert-0: "" 
+        cert-0: "" 
       EOF
       ```
 
@@ -279,7 +277,7 @@ dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      
      ``` 
     </div> 
 
-    **Detailed Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powerscale_{{< version-docs key="sample_sc_pscale" >}}.yaml) for detailed settings or use [Wizard](./installationwizard#generate-manifest-file) to generate the sample file..
+    **Detailed Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/release/{{< version-docs key="csm-operator_latest_version">}}/samples/{{< version-docs key="csm-operator_latest_samples_dir" >}}/storage_csm_powerscale_{{< version-docs key="sample_sc_pscale" >}}.yaml) for detailed settings or use [Wizard](./installationwizard#generate-manifest-file) to generate the sample file..
 
     <br>
 

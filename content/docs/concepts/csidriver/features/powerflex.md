@@ -1011,7 +1011,7 @@ If such a node is not available, the pods stay in Pending state. This means pods
 
 Without storage capacity tracking, pods get scheduled on a node satisfying the topology constraints. If the required capacity is not available, volume attachment to the pods fails, and pods remain in ContainerCreating state. Storage capacity tracking eliminates unnecessary scheduling of pods when there is insufficient capacity.
 
-The attribute `storageCapacity.enabled` in `values.yaml` can be used to enable/disable the feature during driver installation using helm. This is by default set to true. To configure how often the driver checks for changed capacity set `storageCapacity.pollInterval` attribute. In case of driver installed via operator, this interval can be configured in the sample file provided [here](https://github.com/dell/csm-operator/blob/main/samples/{{< version-docs key="csm-operator_latest_samples_dir" >}}/storage_csm_powerflex_{{< version-docs key="Det_sample_operator_pflex" >}}.yaml) by editing the `--capacity-poll-interval` argument present in the provisioner sidecar.
+The attribute `storageCapacity.enabled` in `values.yaml` can be used to enable/disable the feature during driver installation using helm. This is by default set to true. To configure how often the driver checks for changed capacity set `storageCapacity.pollInterval` attribute. In case of driver installed via operator, this interval can be configured in the sample file provided [here](https://github.com/dell/csm-operator/blob/{{< version-docs key="csm-operator_latest_version">}}/samples/{{< version-docs key="csm-operator_latest_samples_dir" >}}/storage_csm_powerflex_{{< version-docs key="Det_sample_operator_pflex" >}}.yaml) by editing the `--capacity-poll-interval` argument present in the provisioner sidecar.
 
 ## Multiple Availability Zones
 PowerFlex CSI driver version 2.13.0 and above supports multiple Availability Zones for Block. NFS is not supported at this time.
@@ -1114,6 +1114,9 @@ Driver will fetch the necessary kernel modules from a remote SFTP repository. Th
 - Automatic SDC Compilation:
 
 If a matching pre-compiled module or the kernel module from SFTP repository is not available, driver will compile the SDC driver automatically. This involves compiling the scini.ko kernel module to match the running kernel.
+
+**Note:**
+Before setting up or upgrading the cluster, the user must verify that the updated scini.ko tar file is available on the MFT (SFTP) server. It is essential to ensure that the tar file matches the kernel version of the cluster. Proceed with the deployment only if a matching kernel module is found.
 
 ### Configuration Steps
 

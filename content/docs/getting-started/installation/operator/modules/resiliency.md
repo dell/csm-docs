@@ -36,7 +36,7 @@ Resiliency can be enabled by following sample file
       enabled: true
 ```
 
-**Detailed Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_{{Var}}_{{< version-docs key="sample_sc_pmax" >}}.yaml) for detailed settings.
+**Detailed Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/release/{{< version-docs key="csm-operator_latest_version">}}/samples/{{< version-docs key="csm-operator_latest_samples_dir">}}/storage_csm_{{Var}}_{{< version-docs key="sample_sc_pmax" >}}.yaml) for detailed settings.
 
 ### Storage Array Upgrades
 
