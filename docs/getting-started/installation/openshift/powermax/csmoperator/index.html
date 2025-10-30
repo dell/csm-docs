@@ -20,8 +20,8 @@
 
   <meta itemprop="name" content="Installation Guide">
   <meta itemprop="description" content="Installing the CSI Driver for PowerMax via Container Storage Module Operator">
-  <meta itemprop="dateModified" content="2025-07-15T11:10:04+05:30">
-  <meta itemprop="wordCount" content="3166">
+  <meta itemprop="dateModified" content="2025-10-30T22:53:28+05:30">
+  <meta itemprop="wordCount" content="3440">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Installation Guide">
   <meta name="twitter:description" content="Installing the CSI Driver for PowerMax via Container Storage Module Operator">
@@ -73,10 +73,10 @@
       
     
     
-    1.15.0
+    1.15.1
   </a>
   <ul class="dropdown-menu">
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/" >1.15.0</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/" >1.15.1</a></li>
     <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1/" >1.14.2</a></li>
     <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v2/" >1.13.2</a></li>
     <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v3/" >1.12.0</a></li>
@@ -203,7 +203,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.f551ad409a9ce1f587f2ffb31bbd5958.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.7133adb4cdbdb27927d2b7e7bb0dcdae.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -3891,7 +3891,7 @@ document.addEventListener("DOMContentLoaded", function() {
       <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionOne">
         <div class="accordion-body">
           
-             
+            
 <br>
 
 
@@ -4262,6 +4262,45 @@ NVMe/FC Requirements <a class="header-link"  href="#nvmefc-requirements" style="
 <br>
 <ol start="3">
 <li>
+<p>To ensure successful integration of NVMe protocols with the CSI Driver, the following conditions must be met:</p>
+<ul>
+<li>Each OpenShift node that connects to Dell storage arrays must have a unique NVMe Qualified Name (NQN).</li>
+<li>By default, the OpenShift deployment process for CoreOS assigns the same host NQN to all nodes. This value is stored in the file: /etc/nvme/hostnqn.</li>
+<li>To resolve this and guarantee unique host NQNs across nodes, you can apply a machine configuration to your OpenShift Container Platform (OCP) cluster. One recommended approach is to  add   the following machine config:</li>
+</ul>
+ <br>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#000">cat &lt;&lt;EOF &gt; 99-worker-custom-nvme-hostnqn.yaml</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">apiVersion</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">machineconfiguration.openshift.io/v1</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">kind</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">MachineConfig</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">metadata</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">labels</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">machineconfiguration.openshift.io/role</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">worker</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#0000cf;font-weight:bold">99</span>-<span style="color:#000">worker-custom-nvme-hostnqn</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">spec</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">config</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">ignition</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">version</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#0000cf;font-weight:bold">3.4.0</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">systemd</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">units</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">        </span>- <span style="color:#204a87;font-weight:bold">contents</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000;font-weight:bold">|</span><span style="color:#8f5902;font-style:italic">
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">            [Unit]
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">            Description=Custom CoreOS Generate NVMe Hostnqn
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">            [Service]
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">            Type=oneshot
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">            ExecStart=/usr/bin/sh -c &#39;/usr/sbin/nvme gen-hostnqn &gt; /etc/nvme/hostnqn&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">            RemainAfterExit=yes
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">            [Install]
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">            WantedBy=multi-user.target</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">          </span><span style="color:#204a87;font-weight:bold">enabled</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">          </span><span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">custom-coreos-generate-nvme-hostnqn.service</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#000">EOF</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span></code></pre></div></li>
+</ol>
+<br>
+<ol start="4">
+<li>
 <p>Multipathing software configuration</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#000">cat &lt;&lt;EOF&gt; 71-nvmf-iopolicy-dell.rules</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#000">ACTION==&#34;add&#34;, SUBSYSTEM==&#34;nvme-subsystem&#34;, ATTR{model}==&#34;dellemc-powermax&#34;,ATTR{iopolicy}=&#34;round-robin&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
@@ -4291,7 +4330,7 @@ NVMe/FC Requirements <a class="header-link"  href="#nvmefc-requirements" style="
 </span></span></span></code></pre></div></li>
 </ol>
 <br> 
-<ol start="4">
+<ol start="5">
 <li>
 <p>Configure NVMe reconnecting forever</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#000">cat &lt;&lt;EOF&gt; 72-nvmf-ctrl_loss_tmo.rules</span><span style="color:#f8f8f8;text-decoration:underline">
@@ -4382,8 +4421,47 @@ NVMe/TCP Requirements <a class="header-link"  href="#nvmetcp-requirements" style
 <ol start="2">
 <li>Verify the initiators of each host are logged in to the PowerMax Storage Array. CSM will perform the Host Registration of each host with the PowerMax Array.</li>
 </ol>
-   <br>
+   <br> 
 <ol start="3">
+<li>
+<p>To ensure successful integration of NVMe protocols with the CSI Driver, the following conditions must be met:</p>
+<ul>
+<li>Each OpenShift node that connects to Dell storage arrays must have a unique NVMe Qualified Name (NQN).</li>
+<li>By default, the OpenShift deployment process for CoreOS assigns the same host NQN to all nodes. This value is stored in the file: /etc/nvme/hostnqn.</li>
+<li>To resolve this and guarantee unique host NQNs across nodes, you can apply a machine configuration to your OpenShift Container Platform (OCP) cluster. One recommended approach is to  add   the following machine config:</li>
+</ul>
+<br>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#000">cat &lt;&lt;EOF &gt; 99-worker-custom-nvme-hostnqn.yaml</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">apiVersion</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">machineconfiguration.openshift.io/v1</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">kind</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">MachineConfig</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">metadata</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">labels</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">machineconfiguration.openshift.io/role</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">worker</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#0000cf;font-weight:bold">99</span>-<span style="color:#000">worker-custom-nvme-hostnqn</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">spec</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">config</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">ignition</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">version</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#0000cf;font-weight:bold">3.4.0</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">systemd</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">units</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">        </span>- <span style="color:#204a87;font-weight:bold">contents</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000;font-weight:bold">|</span><span style="color:#8f5902;font-style:italic">
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">            [Unit]
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">            Description=Custom CoreOS Generate NVMe Hostnqn
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">            [Service]
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">            Type=oneshot
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">            ExecStart=/usr/bin/sh -c &#39;/usr/sbin/nvme gen-hostnqn &gt; /etc/nvme/hostnqn&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">            RemainAfterExit=yes
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">            [Install]
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">            WantedBy=multi-user.target</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">          </span><span style="color:#204a87;font-weight:bold">enabled</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">          </span><span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">custom-coreos-generate-nvme-hostnqn.service</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#000">EOF</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span></code></pre></div></li>
+</ol>
+   <br>
+<ol start="4">
 <li>
 <p>Configure IO policy for native NVMe multipathing</p>
 <p>Use this comment to create the machine configuration to configure the native NVMe multipathing IO Policy to round robin.</p>
@@ -4417,7 +4495,7 @@ NVMe/TCP Requirements <a class="header-link"  href="#nvmetcp-requirements" style
 </span></span></span></code></pre></div></li>
 </ol>
    <br> 
-<ol start="4">
+<ol start="5">
 <li>
 <p>Configure NVMe reconnecting forever</p>
 <p>Use this command to create the machine configuration to configure the NVMe reconnect</p>
@@ -4750,9 +4828,9 @@ CSI Driver Installation <a class="header-link"  href="#csi-driver-installation" 
 <li>
 <p><strong>Create a CR (Custom Resource)</strong> for PowerMax using the sample files provided</p>
 <p>i. <strong>Create a CR (Custom Resource)</strong> for PowerMax using the sample files provided</p>
-<p>a. <strong>Minimal Configuration:</strong> Use the <a href="https://github.com/dell/csm-operator/blob/main/samples/minimal-samples/powermax_v2150.yaml">sample file</a> for default settings. If using the secret above, ensure that the secret name of the secret created is <code>powermax-creds</code>.</p>
+<p>a. <strong>Minimal Configuration:</strong> Use the <a href="https://github.com/dell/csm-operator/blob/release/v1.10.1/samples/v2.15.0/minimal-samples/powermax_v2151.yaml">sample file</a> for default settings. If using the secret above, ensure that the secret name of the secret created is <code>powermax-creds</code>.</p>
 <p>[OR]</p>
-<p>b. <strong>Detailed Configuration:</strong> Use the <a href="https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powermax_v2150.yaml">sample file</a> for detailed settings or use <a href="./installationwizard#generate-manifest-file">Wizard</a> to generate the sample file.
+<p>b. <strong>Detailed Configuration:</strong> Use the <a href="https://github.com/dell/csm-operator/blob/release/v1.10.1/samples/v2.15.0/storage_csm_powermax_v2151.yaml">sample file</a> for detailed settings or use <a href="./installationwizard#generate-manifest-file">Wizard</a> to generate the sample file.
 .</p>
 <ul>
 <li>Users should configure the parameters in CR. The following table lists the primary configurable parameters of the PowerMax driver and their default values:</li>
@@ -4972,7 +5050,7 @@ CSI Driver Installation <a class="header-link"  href="#csi-driver-installation" 
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>oc get csm powermax -n powermax
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>NAME        CREATIONTIME   CSIDRIVERTYPE   CONFIGVERSION   STATE
-</span></span><span style="display:flex;"><span>powermax    3h             powermax        v2.15.0         Succeeded      
+</span></span><span style="display:flex;"><span>powermax    3h             powermax        v2.15.1         Succeeded      
 </span></span></code></pre></div><p>Check the status of the CR to verify if the driver installation is in the <code>Succeeded</code> state. If the status is not <code>Succeeded</code>, see the <a href="../troubleshooting/#my-dell-csi-driver-install-failed-how-do-i-fix-it">Troubleshooting guide</a> for more information.</p>
 </ul>
 <ol start="6">

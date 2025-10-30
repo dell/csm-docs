@@ -20,8 +20,8 @@
 
   <meta itemprop="name" content="Installation Guide">
   <meta itemprop="description" content="Helm Installation">
-  <meta itemprop="dateModified" content="2025-09-10T00:18:32+05:30">
-  <meta itemprop="wordCount" content="3614">
+  <meta itemprop="dateModified" content="2025-10-30T22:53:28+05:30">
+  <meta itemprop="wordCount" content="3613">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Installation Guide">
   <meta name="twitter:description" content="Helm Installation">
@@ -73,10 +73,10 @@
       
     
     
-    1.15.0
+    1.15.1
   </a>
   <ul class="dropdown-menu">
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/" >1.15.0</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/" >1.15.1</a></li>
     <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1/" >1.14.2</a></li>
     <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v2/" >1.13.2</a></li>
     <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v3/" >1.12.0</a></li>
@@ -203,7 +203,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.f551ad409a9ce1f587f2ffb31bbd5958.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.7133adb4cdbdb27927d2b7e7bb0dcdae.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -4061,7 +4061,7 @@ Install Helm 3.0 <a class="header-link"  href="#install-helm-30" style=" display
             <p>Install the Helm chart.</p>
             <p>On your terminal, run this command:</p>
             <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>helm install &lt;release-name&gt; dell/container-storage-modules -n &lt;namespace&gt; --version &lt;container-storage-module chart-version&gt; -f &lt;values.yaml location&gt;
-            </span></span></code></pre></div><p>Example: helm install powerscale dell/container-storage-modules -n csi-powerscale &ndash;version 1.8.0 -f values.yaml</p>
+            </span></span></code></pre></div><p>Example: helm install powerscale dell/container-storage-modules -n csi-powerscale &ndash;version 1.8.1 -f values.yaml</p>
             </li>
             </ul>
             
@@ -4149,7 +4149,7 @@ Prerequisites <a class="header-link"  href="#prerequisites" style=" display: inl
             </svg>
         </a></h2><p>The following are requirements to be met before installing the CSI Driver for PowerScale:</p>
 <ul>
-<li>Install Kubernetes or OpenShift (see <a href="../../../../../concepts/csidriver/#features-and-capabilities">supported versions</a>)</li>
+<li>Install Kubernetes cluster (see <a href="../../../../../concepts/csidriver/#features-and-capabilities">supported versions</a>)</li>
 <li>Install Helm 3</li>
 <li>Mount propagation is enabled on container runtime that is being used</li>
 <li><code>nfs-utils</code> package must be installed on nodes that will mount volumes</li>
@@ -4229,7 +4229,7 @@ Install Driver <a class="header-link"  href="#install-driver" style=" display: i
         </a></h2><p><strong>Steps</strong></p>
 <ol>
 <li>
-<p>Run <code>git clone -b v2.15.0 https://github.com/dell/csi-powerscale.git</code> to clone the git repository.</p>
+<p>Run <code>git clone -b v2.15.1 https://github.com/dell/csi-powerscale.git</code> to clone the git repository.</p>
 </li>
 <li>
 <p>Ensure that you have created the namespace where you want to install the driver. You can run <code>kubectl create namespace isilon</code> to create a new one. The use of &ldquo;isilon&rdquo;  as the namespace is just an example. You can choose any name for the namespace.</p>
@@ -4239,12 +4239,12 @@ Install Driver <a class="header-link"  href="#install-driver" style=" display: i
 <p><strong>Note</strong>: The &lsquo;clusterName&rsquo; serves as a logical, unique identifier for the array that should remain unchanged once it is included in the volume handle. Altering this identifier is not advisable, as it would result in the failure of all operations associated with the volume that was created earlier.</p>
 </li>
 <li>
-<p>Download <code>wget -O my-isilon-settings.yaml https://raw.githubusercontent.com/dell/helm-charts/csi-isilon-2.15.0/charts/csi-isilon/values.yaml</code> into <code>cd ../dell-csi-helm-installer</code> to customize settings for installation.</p>
+<p>Download <code>wget -O my-isilon-settings.yaml https://raw.githubusercontent.com/dell/helm-charts/csi-isilon-2.15.1/charts/csi-isilon/values.yaml</code> into <code>cd ../dell-csi-helm-installer</code> to customize settings for installation.</p>
 </li>
 <li>
 <p>Edit <em>my-isilon-settings.yaml</em> to set the following parameters for your installation:
 The following table lists the primary configurable parameters of the PowerScale driver Helm chart and their default values. More detailed information can be
-found in the  <a href="https://github.com/dell/helm-charts/blob/csi-isilon-2.15.0/charts/csi-isilon/values.yaml"><code>values.yaml</code></a> file in this repository.</p>
+found in the  <a href="https://github.com/dell/helm-charts/blob/csi-isilon-2.15.1/charts/csi-isilon/values.yaml"><code>values.yaml</code></a> file in this repository.</p>
 </li>
 </ol>
   <ul>
@@ -4946,17 +4946,17 @@ Deleting a storage class has no impact on a running Pod with mounted PVCs. You c
 <li>
 <p>Use newly created storage class <code>isilon-new</code> for volumes to spin up on <code>cluster2</code></p>
 <p>PVC example</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">apiVersion</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">v1</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">kind</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">PersistentVolumeClaim</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">metadata</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">test-pvc</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">spec</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">   </span><span style="color:#204a87;font-weight:bold">accessModes</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">   </span>- <span style="color:#000">ReadWriteOnce</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">   </span><span style="color:#204a87;font-weight:bold">resources</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">     </span><span style="color:#204a87;font-weight:bold">requests</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">       </span><span style="color:#204a87;font-weight:bold">storage</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">5Gi</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">   </span><span style="color:#204a87;font-weight:bold">storageClassName</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">isilon-new</span><span style="color:#f8f8f8;text-decoration:underline">
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">apiVersion</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">v1</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">kind</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">PersistentVolumeClaim</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">metadata</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">test-pvc</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">spec</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">accessModes</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span>- <span style="color:#000">ReadWriteOnce</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">resources</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">requests</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">storage</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">5Gi</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">storageClassName</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">isilon-new</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span></code></pre></div></li>
 </ol>
 <h2 id="volume-snapshot-class">

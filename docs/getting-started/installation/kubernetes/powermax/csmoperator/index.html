@@ -20,7 +20,7 @@
 
   <meta itemprop="name" content="Installation Guide">
   <meta itemprop="description" content="Installing the CSI Driver for PowerMax via Container Storage Modules Operator">
-  <meta itemprop="dateModified" content="2025-09-10T00:18:32+05:30">
+  <meta itemprop="dateModified" content="2025-10-30T22:53:28+05:30">
   <meta itemprop="wordCount" content="1510">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Installation Guide">
@@ -73,10 +73,10 @@
       
     
     
-    1.15.0
+    1.15.1
   </a>
   <ul class="dropdown-menu">
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/" >1.15.0</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/" >1.15.1</a></li>
     <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1/" >1.14.2</a></li>
     <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v2/" >1.13.2</a></li>
     <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v3/" >1.12.0</a></li>
@@ -203,7 +203,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.f551ad409a9ce1f587f2ffb31bbd5958.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.7133adb4cdbdb27927d2b7e7bb0dcdae.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -3907,7 +3907,7 @@ Install Driver <a class="header-link"  href="#install-driver" style=" display: i
         </a></h3><ol>
 <li>
 <p><strong>Create Namespace:</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>  kubectl create namespace powermax
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl create namespace powermax
 </span></span></code></pre></div></li>
 <li>
 <p><strong>Create PowerMax credentials:</strong></p>
@@ -3960,7 +3960,7 @@ Install Driver <a class="header-link"  href="#install-driver" style=" display: i
 <p>i. <strong>Create a CR (Custom Resource)</strong> for PowerMax using the sample files provided</p>
 <p>a. <strong>Default Configuration:</strong> Refer the minimal sample files provided in respective CSM versions folder under samples <a href="https://github.com/dell/csm-operator/tree/main/samples">here</a>. Modify if needed.</p>
 <p>[OR]</p>
-<p>b. <strong>Detailed Configuration:</strong> Use the <a href="https://github.com/dell/csm-operator/blob/main/samples/v2.15.0/storage_csm_powermax_v2150.yaml">sample file</a> for detailed settings or use <a href="./installationwizard#generate-manifest-file">Wizard</a> to generate the sample file.</p>
+<p>b. <strong>Detailed Configuration:</strong> Use the <a href="https://github.com/dell/csm-operator/blob/release/v1.10.1/samples/v2.15.0/storage_csm_powermax_v2151.yaml">sample file</a> for detailed settings or use <a href="./installationwizard#generate-manifest-file">Wizard</a> to generate the sample file.</p>
 <ul>
 <li>Users should configure the parameters in CR. The following table lists the primary configurable parameters of the PowerMax driver and their default values:</li>
 </ul>
@@ -4259,39 +4259,39 @@ Support for custom topology keys <a class="header-link"  href="#support-for-cust
 <ol>
 <li>
 <p>To enable this feature, set  <code>X_CSI_TOPOLOGY_CONTROL_ENABLED</code> to <code>true</code> in the driver manifest under node section.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">   </span><span style="color:#8f5902;font-style:italic"># X_CSI_TOPOLOGY_CONTROL_ENABLED provides a way to filter topology keys on a node based on array and transport protocol</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#8f5902;font-style:italic"># if enabled, user can create custom topology keys by editing node-topology-config configmap.</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#8f5902;font-style:italic"># Allowed values:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#8f5902;font-style:italic">#   true: enable the filtration based on config map</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#8f5902;font-style:italic">#   false: disable the filtration based on config map</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#8f5902;font-style:italic"># Default value: false</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">        </span>- <span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">X_CSI_TOPOLOGY_CONTROL_ENABLED</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">          </span><span style="color:#204a87;font-weight:bold">value</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;false&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"># X_CSI_TOPOLOGY_CONTROL_ENABLED provides a way to filter topology keys on a node based on array and transport protocol</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">     </span><span style="color:#8f5902;font-style:italic"># if enabled, user can create custom topology keys by editing node-topology-config configmap.</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">     </span><span style="color:#8f5902;font-style:italic"># Allowed values:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">     </span><span style="color:#8f5902;font-style:italic">#   true: enable the filtration based on config map</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">     </span><span style="color:#8f5902;font-style:italic">#   false: disable the filtration based on config map</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">     </span><span style="color:#8f5902;font-style:italic"># Default value: false</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">     </span>- <span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">X_CSI_TOPOLOGY_CONTROL_ENABLED</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">       </span><span style="color:#204a87;font-weight:bold">value</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;false&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span></code></pre></div></li>
 <li>
 <p>Edit the sample config map &ldquo;node-topology-config&rdquo; as described <a href="https://github.com/dell/csi-powermax/blob/main/samples/configmap/topologyConfig.yaml">here</a> with appropriate values:
 Example:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">kind</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">ConfigMap</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">metadata</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">          </span><span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">node-topology-config</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">          </span><span style="color:#204a87;font-weight:bold">namespace</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">powermax</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">data</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">          </span><span style="color:#204a87;font-weight:bold">topologyConfig.yaml</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000;font-weight:bold">|</span><span style="color:#8f5902;font-style:italic">
-</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">            allowedConnections:
-</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">              - nodeName: &#34;node1&#34;
-</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">                rules:
-</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">                  - &#34;000000000001:FC&#34;
-</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">                  - &#34;000000000002:FC&#34;
-</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">              - nodeName: &#34;*&#34;
-</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">                rules:
-</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">                  - &#34;000000000002:FC&#34;
-</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">            deniedConnections:
-</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">              - nodeName: &#34;node2&#34;
-</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">                rules:
-</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">                  - &#34;000000000002:*&#34;
-</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">              - nodeName: &#34;node3&#34;
-</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">                rules:
-</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">                  - &#34;*:*&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">kind</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">ConfigMap</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">metadata</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">node-topology-config</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">namespace</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">powermax</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">data</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">topologyConfig.yaml</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000;font-weight:bold">|</span><span style="color:#8f5902;font-style:italic">
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">    allowedConnections:
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">      - nodeName: &#34;node1&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">        rules:
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">          - &#34;000000000001:FC&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">          - &#34;000000000002:FC&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">      - nodeName: &#34;*&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">        rules:
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">          - &#34;000000000002:FC&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">    deniedConnections:
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">      - nodeName: &#34;node2&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">        rules:
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">          - &#34;000000000002:*&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">      - nodeName: &#34;node3&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">        rules:
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">          - &#34;*:*&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span></code></pre></div></li>
 </ol>
 <ul>  
