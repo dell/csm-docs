@@ -1115,6 +1115,9 @@ Driver will fetch the necessary kernel modules from a remote SFTP repository. Th
 
 If a matching pre-compiled module or the kernel module from SFTP repository is not available, driver will compile the SDC driver automatically. This involves compiling the scini.ko kernel module to match the running kernel.
 
+**Note:**
+Before setting up or upgrading the cluster, the user must verify that the updated scini.ko tar file is available on the MFT (SFTP) server. It is essential to ensure that the tar file matches the kernel version of the cluster. Proceed with the deployment only if a matching kernel module is found.
+
 ### Configuration Steps
 
 #### Enable SFTP Repository Settings:

@@ -249,7 +249,7 @@ Use the below command to replace or update the secret:
 Alternatively, to do a helm install solely with Helm charts (without shell scripts), refer to `helm/README.md`.
 
  *NOTE:*
-- Exposing SFTP settings to automatically pull scini.ko modules is only available for SDC 3.6.5 and 4.5.4
+- Configure SFTP settings based on PowerFlex [Concepts](../../../../../concepts/csidriver/features/powerflex/#expose-the-sftp-settings-to-automatically-pull-the-sciniko-kernel-module)
 - The parameter `--helm-charts-version` is optional and if you do not specify the flag, by default the `csi-install.sh` script will clone the version of the helm chart that is specified in the driver's [csi-install.sh](https://github.com/dell/csi-powerflex/blob/main/dell-csi-helm-installer/csi-install.sh#L24) file. If you wish to install the driver using a different version of the helm chart, you need to include this flag. Also, remember to delete the `helm-charts` repository present in the `csi-powerflex` directory if it was cloned before.
 - For detailed instructions on how to run the install scripts, refer to the README.md  in the dell-csi-helm-installer folder.
 - Install script will validate MDM IP(s) in `vxflexos-config` secret and creates a new field consumed by the init container and sdc-monitor container
