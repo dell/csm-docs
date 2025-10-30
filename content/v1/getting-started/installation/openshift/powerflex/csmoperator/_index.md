@@ -47,6 +47,10 @@ dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      
 </ol>
 </br>
 
+
+ *NOTE:*
+- Configure SFTP settings based on PowerFlex [Concepts](../../../../../concepts/csidriver/features/powerflex/#expose-the-sftp-settings-to-automatically-pull-the-sciniko-kernel-module)
+
 ### CSI Driver Installation
 
 </br>

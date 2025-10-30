@@ -83,6 +83,9 @@ Install the SDC per the _Dell PowerFlex Deployment Guide_:
 run `/opt/emc/scaleio/sdc/bin/drv_cfg --add_mdm --ip 10.xx.xx.xx.xx,10.xx.xx.xx`.
 
 
+ *NOTE:*
+- Configure SFTP settings based on PowerFlex [Concepts](../../../../../concepts/csidriver/features/powerflex/#expose-the-sftp-settings-to-automatically-pull-the-sciniko-kernel-module)
+
 ### CSI Driver Installation
 <br>
 
