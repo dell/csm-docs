@@ -66,7 +66,7 @@ Download the PowerFlex SDC from [Dell Online support](https://www.dell.com/suppo
 2. **Set MDM IPs:**
   Export the MDM IPs as a comma-separated list:
     ```bash
-     export MDM_IP=xx.xxx.xx.xx,xx.xxx.xx.xx
+    export MDM_IP=xx.xxx.xx.xx,xx.xxx.xx.xx
     ```
    where xxx represents the actual IP address in your environment.
 

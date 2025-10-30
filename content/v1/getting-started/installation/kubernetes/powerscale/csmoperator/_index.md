@@ -22,7 +22,7 @@ To deploy the Operator, follow the instructions available [here](../../../operat
 1. **Create namespace:**
 
    ```bash 
-      kubectl create namespace isilon
+   kubectl create namespace isilon
    ```
    This command creates a namespace called `isilon`. You can replace `isilon` with any name you prefer.
 
@@ -75,7 +75,7 @@ To deploy the Operator, follow the instructions available [here](../../../operat
       ```
 
       ```bash
-       kubectl create -f empty-secret.yaml
+      kubectl create -f empty-secret.yaml
       ```
 
 4. **Install Driver**
@@ -94,7 +94,7 @@ To deploy the Operator, follow the instructions available [here](../../../operat
           csiDriverType: "isilon"
           configVersion: {{< version-v1 key="PScale_latestVersion" >}}
           forceRemoveDriver: true
-   ```
+      ```
       [sample file](https://github.com/dell/csm-operator/tree/release/{{< version-v1 key="csm-operator_latest_version" >}}/samples/minimal-samples/powerscale_{{< version-v1 key="sample_sc_pflex" >}}.yaml) for default settings. Modify if needed.
 
     [OR]                                                
@@ -173,22 +173,22 @@ ii. **Create PowerScale custom resource**:
    ```
 
  7. **Create Volume Snapshot Class**
-    ```yaml
-      apiVersion: snapshot.storage.k8s.io/v1
-      kind: VolumeSnapshotClass
-      metadata:
-         name: isilon-snapclass
-      driver: csi-isilon.dellemc.com
-      deletionPolicy: Delete
-      parameters:
-         IsiPath: /ifs/data/csi
-    ````
+     ```yaml
+     apiVersion: snapshot.storage.k8s.io/v1
+     kind: VolumeSnapshotClass
+     metadata:
+        name: isilon-snapclass
+     driver: csi-isilon.dellemc.com
+     deletionPolicy: Delete
+     parameters:
+        IsiPath: /ifs/data/csi
+     ````
 
      Refer [Volume Snapshot Class](https://github.com/dell/csi-powerscale/blob/main/samples/volumesnapshotclass/) for the sample files.
 
      **Run this command to create** a volume snapshot class
      ```bash
-       kubectl create -f < volume-snapshot-class.yaml >
+     kubectl create -f < volume-snapshot-class.yaml >
      ```
 
 **Note** :

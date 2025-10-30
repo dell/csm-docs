@@ -27,7 +27,7 @@ To deploy the Operator, follow the instructions available [here](../../../operat
 
 1. **Create Namespace.**
    ```bash
-      kubectl create namespace powerstore
+   kubectl create namespace powerstore
    ```
    This command creates a namespace called `powerstore`. You can replace `powerstore` with any name you prefer.
 
@@ -154,7 +154,7 @@ To deploy the Operator, follow the instructions available [here](../../../operat
    **Run this command to create** a storage class
 
    ```bash
-     kubectl create -f < storage-class.yaml >
+   kubectl create -f < storage-class.yaml >
    ```
 
 3. **Create Volume Snapshot Class** 
@@ -162,7 +162,7 @@ To deploy the Operator, follow the instructions available [here](../../../operat
    apiVersion: snapshot.storage.k8s.io/v1
    kind: VolumeSnapshotClass
    metadata:
-   name: powerstore-snapshot
+     name: powerstore-snapshot
    driver: "csi-powerstore.dellemc.com"
    deletionPolicy: Delete
    ````
@@ -170,7 +170,7 @@ To deploy the Operator, follow the instructions available [here](../../../operat
 
    **Run this command to create** a volume snapshot class
    ```bash
-      kubectl create -f < volume-snapshot-class.yaml >
+   kubectl create -f < volume-snapshot-class.yaml >
    ```
 
 **Note** :

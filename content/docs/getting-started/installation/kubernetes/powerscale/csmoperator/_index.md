@@ -175,18 +175,14 @@ ii. **Create PowerScale custom resource**:
  7. **Create Volume Snapshot Class**
 
     ```yaml
-    apiVersion: storage.k8s.io/v1
-    kind: StorageClass
+    apiVersion: snapshot.storage.k8s.io/v1
+    kind: VolumeSnapshotClass
     metadata:
-      name: isilon
-    provisioner: csi-isilon.dellemc.com
-    reclaimPolicy: Delete
-    allowVolumeExpansion: true
+       name: isilon-snapclass
+    driver: csi-isilon.dellemc.com
+    deletionPolicy: Delete
     parameters:
-      AccessZone: System
-      IsiPath: /ifs/data/csi
-      RootClientEnabled: "false"
-    volumeBindingMode: Immediate
+       IsiPath: /ifs/data/csi
     ```
 
     Refer [Volume Snapshot Class](https://github.com/dell/csi-powerscale/blob/main/samples/volumesnapshotclass/) for the sample files.
