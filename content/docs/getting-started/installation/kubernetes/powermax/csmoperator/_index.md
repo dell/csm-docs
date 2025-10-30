@@ -24,7 +24,7 @@ To deploy the Operator, follow the instructions available [here](../../../operat
 
 1. **Create Namespace:** 
     ```bash
-      kubectl create namespace powermax
+    kubectl create namespace powermax
     ```
 2. **Create PowerMax credentials:**
 
@@ -203,41 +203,40 @@ X_CSI_TOPOLOGY_CONTROL_ENABLED provides a way to filter topology keys on a node 
 1. To enable this feature, set  `X_CSI_TOPOLOGY_CONTROL_ENABLED` to `true` in the driver manifest under node section.
 
    ```yaml
-      # X_CSI_TOPOLOGY_CONTROL_ENABLED provides a way to filter topology keys on a node based on array and transport protocol
-           # if enabled, user can create custom topology keys by editing node-topology-config configmap.
-           # Allowed values:
-           #   true: enable the filtration based on config map
-           #   false: disable the filtration based on config map
-           # Default value: false
-           - name: X_CSI_TOPOLOGY_CONTROL_ENABLED
-             value: "false"
+   # X_CSI_TOPOLOGY_CONTROL_ENABLED provides a way to filter topology keys on a node based on array and transport protocol
+        # if enabled, user can create custom topology keys by editing node-topology-config configmap.
+        # Allowed values:
+        #   true: enable the filtration based on config map
+        #   false: disable the filtration based on config map
+        # Default value: false
+        - name: X_CSI_TOPOLOGY_CONTROL_ENABLED
+          value: "false"
    ```
 2. Edit the sample config map "node-topology-config" as described [here](https://github.com/dell/csi-powermax/blob/main/samples/configmap/topologyConfig.yaml) with appropriate values:
    Example:
    ```yaml
-           kind: ConfigMap
-           metadata:
-             name: node-topology-config
-             namespace: powermax
-           data:
-             topologyConfig.yaml: |
-               allowedConnections:
-                 - nodeName: "node1"
-                   rules:
-                     - "000000000001:FC"
-                     - "000000000002:FC"
-                 - nodeName: "*"
-                   rules:
-                     - "000000000002:FC"
-               deniedConnections:
-                 - nodeName: "node2"
-                   rules:
-                     - "000000000002:*"
-                 - nodeName: "node3"
-                   rules:
-                     - "*:*"
-
-     ```
+   kind: ConfigMap
+   metadata:
+     name: node-topology-config
+     namespace: powermax
+   data:
+     topologyConfig.yaml: |
+       allowedConnections:
+         - nodeName: "node1"
+           rules:
+             - "000000000001:FC"
+             - "000000000002:FC"
+         - nodeName: "*"
+           rules:
+             - "000000000002:FC"
+       deniedConnections:
+         - nodeName: "node2"
+           rules:
+             - "000000000002:*"
+         - nodeName: "node3"
+           rules:
+             - "*:*"
+   ```
 <ul>  
    {{< collapse id="2" title="Parameters">}}
    | Parameter | Description  |

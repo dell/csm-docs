@@ -40,19 +40,19 @@ Enable the SDC monitor by setting the `enable` flag to `true`.
    - **With Sidecar**: Edit the `HOST_PID` and `MDM` fields with the host PID and MDM IPs.
    - **Without Sidecar**: Leave the `enabled` field set to `false`.
 
-   Example CR: [samples/storage_csm_powerflex_{{< version-docs key="sample_sc_pflex" >}}.yaml](https://github.com/dell/csm-operator/blob/main/samples/{{< version-docs key="csm-operator_latest_samples_dir" >}}/storage_csm_powerflex_{{< version-docs key="sample_sc_pflex" >}}.yaml)
+   Example CR: [samples/storage_csm_powerflex_{{< version-docs key="sample_sc_pflex" >}}.yaml](https://github.com/dell/csm-operator/blob/release/{{< version-docs key="csm-operator_latest_version">}}/samples/{{< version-docs key="csm-operator_latest_samples_dir" >}}/storage_csm_powerflex_{{< version-docs key="sample_sc_pflex" >}}.yaml)
 
 ```yaml
-    sideCars:
-    # sdc-monitor is disabled by default, due to high CPU usage
-      - name: sdc-monitor
-        enabled: false
-        image: quay.io/dell/storage/powerflex/sdc:4.5.4
-        envs:
-        - name: HOST_PID
-          value: "1"
-        - name: MDM
-          value: "10.xx.xx.xx,10.xx.xx.xx" #provide the same MDM value from secret
+sideCars:
+# sdc-monitor is disabled by default, due to high CPU usage
+  - name: sdc-monitor
+    enabled: false
+    image: quay.io/dell/storage/powerflex/sdc:4.5.4
+    envs:
+    - name: HOST_PID
+      value: "1"
+    - name: MDM
+      value: "10.xx.xx.xx,10.xx.xx.xx" #provide the same MDM value from secret
 ```
 
 ##### **Manual SDC Deployment**
@@ -89,7 +89,7 @@ run `/opt/emc/scaleio/sdc/bin/drv_cfg --add_mdm --ip 10.xx.xx.xx.xx,10.xx.xx.xx`
 1. **Create namespace:**
 
    ```bash
-      kubectl create namespace vxflexos
+   kubectl create namespace vxflexos
    ```
    This command creates a namespace called `vxflexos`. You can replace `vxflexos` with any name you prefer.
 
@@ -98,12 +98,12 @@ run `/opt/emc/scaleio/sdc/bin/drv_cfg --add_mdm --ip 10.xx.xx.xx.xx,10.xx.xx.xx`
    a. Create a file called `secret.yaml` or pick a [sample](https://github.com/dell/csi-powerflex/blob/main/samples/secret.yaml) that has Powerflex array connection details:
 
    ```yaml
-    - username: "admin"
-      password: "password"
-      systemID: "2b11bb111111bb1b"
-      endpoint: "https://127.0.0.2"
-      skipCertificateValidation: true
-      mdm: "10.0.0.3,10.0.0.4"
+   - username: "admin"
+     password: "password"
+     systemID: "2b11bb111111bb1b"
+     endpoint: "https://127.0.0.2"
+     skipCertificateValidation: true
+     mdm: "10.0.0.3,10.0.0.4"
    ```
       - **Update Parameters:** Replace placeholders with actual values for your Powerflex array.
       - **Add Blocks:** If you have multiple Powerflex arrays, add similar blocks for each one.
@@ -199,48 +199,48 @@ ii . **Run this command to create** a PowerFlex custom resource:
 
 5. **Create Storage class:**
    ```yaml
-    apiVersion: storage.k8s.io/v1
-    kind: StorageClass
-    metadata:
-      name: vxflexos
-      annotations:
-        storageclass.kubernetes.io/is-default-class: "true"
-    provisioner: csi-vxflexos.dellemc.com
-    reclaimPolicy: Delete
-    allowVolumeExpansion: true
-    parameters:
-      storagepool: <STORAGE_POOL>
-      systemID: <SYSTEM_ID>
-      csi.storage.k8s.io/fstype: ext4
-    volumeBindingMode: WaitForFirstConsumer
-    allowedTopologies:
-      - matchLabelExpressions:
-          - key: csi-vxflexos.dellemc.com/<SYSTEM_ID>
-            values:
-              - csi-vxflexos.dellemc.com
+   apiVersion: storage.k8s.io/v1
+   kind: StorageClass
+   metadata:
+     name: vxflexos
+     annotations:
+       storageclass.kubernetes.io/is-default-class: "true"
+   provisioner: csi-vxflexos.dellemc.com
+   reclaimPolicy: Delete
+   allowVolumeExpansion: true
+   parameters:
+     storagepool: <STORAGE_POOL>
+     systemID: <SYSTEM_ID>
+     csi.storage.k8s.io/fstype: ext4
+   volumeBindingMode: WaitForFirstConsumer
+   allowedTopologies:
+     - matchLabelExpressions:
+         - key: csi-vxflexos.dellemc.com/<SYSTEM_ID>
+           values:
+             - csi-vxflexos.dellemc.com
    ```
      Refer [Storage Class](https://github.com/dell/csi-powerflex/tree/main/samples/storageclass) for different sample files.
 
     **Run this command to create** a storage class
 
    ```bash
-     kubectl create -f < storage-class.yaml >
+   kubectl create -f < storage-class.yaml >
    ```
 
 6. **Create Volume Snapshot Class:**
     ```yaml
-      apiVersion: snapshot.storage.k8s.io/v1
-      kind: VolumeSnapshotClass
-      metadata:
-        name: vxflexos-snapclass
-      deletionPolicy: Delete
-      ```
+    apiVersion: snapshot.storage.k8s.io/v1
+    kind: VolumeSnapshotClass
+    metadata:
+      name: vxflexos-snapclass
+    deletionPolicy: Delete
+    ```
       Refer [Volume Snapshot Class](https://github.com/dell/csi-powerflex/tree/main/samples/volumesnapshotclass/) sample file.
 
      **Run this command to create** a volume snapshot class
 
    ```bash
-    kubectl create -f < volume-snapshot-class.yaml >
+   kubectl create -f < volume-snapshot-class.yaml >
    ```
 
 **Note** :

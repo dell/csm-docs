@@ -87,13 +87,13 @@ To deploy the Operator, follow the instructions available [here](../../../operat
       apiVersion: storage.dell.com/v1
       kind: ContainerStorageModule
       metadata:
-      name: isilon
-      namespace: isilon
+        name: isilon
+        namespace: isilon
       spec:
-      driver:
-         csiDriverType: "isilon"
-         configVersion: {{< version-v1 key="PScale_latestVersion" >}}
-         forceRemoveDriver: true
+        driver:
+          csiDriverType: "isilon"
+          configVersion: {{< version-v1 key="PScale_latestVersion" >}}
+          forceRemoveDriver: true
    ```
       [sample file](https://github.com/dell/csm-operator/tree/release/{{< version-v1 key="csm-operator_latest_version" >}}/samples/minimal-samples/powerscale_{{< version-v1 key="sample_sc_pflex" >}}.yaml) for default settings. Modify if needed.
 

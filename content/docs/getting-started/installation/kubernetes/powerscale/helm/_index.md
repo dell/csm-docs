@@ -335,18 +335,18 @@ There are samples storage class yaml files available under `samples/storageclass
 
     PVC example
    ````yaml
-     apiVersion: v1
-     kind: PersistentVolumeClaim
-     metadata:
-       name: test-pvc
-     spec:
-      accessModes:
-      - ReadWriteOnce
-      resources:
-        requests:
-          storage: 5Gi
-      storageClassName: isilon-new
-     ````
+   apiVersion: v1
+   kind: PersistentVolumeClaim
+   metadata:
+     name: test-pvc
+   spec:
+   accessModes:
+   - ReadWriteOnce
+   resources:
+     requests:
+       storage: 5Gi
+   storageClassName: isilon-new
+   ````
 
 ## Volume Snapshot Class
 

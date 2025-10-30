@@ -479,7 +479,7 @@ spec:
   resources:
     requests:
       storage: 8Gi
-  EOF
+EOF
 ``` 
 
 Verify restore pvc is created:
