@@ -20,8 +20,8 @@
 
   <meta itemprop="name" content="Release Notes">
   <meta itemprop="description" content="Container Storage Modules release notes">
-  <meta itemprop="dateModified" content="2025-10-14T17:01:36-04:00">
-  <meta itemprop="wordCount" content="2284">
+  <meta itemprop="dateModified" content="2025-10-30T22:53:28+05:30">
+  <meta itemprop="wordCount" content="2267">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Release Notes">
   <meta name="twitter:description" content="Container Storage Modules release notes">
@@ -73,10 +73,10 @@
       
     
     
-    1.15.0
+    1.15.1
   </a>
   <ul class="dropdown-menu">
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/" >1.15.0</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/" >1.15.1</a></li>
     <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1/" >1.14.2</a></li>
     <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v2/" >1.13.2</a></li>
     <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v3/" >1.12.0</a></li>
@@ -203,7 +203,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.f551ad409a9ce1f587f2ffb31bbd5958.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.7133adb4cdbdb27927d2b7e7bb0dcdae.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -3911,6 +3911,27 @@ Starting from CSM version 1.15, the Karavi topology component will no longer ope
 
 </li>
 </ul></blockquote>
+<h2 id="release-notes-for-v1151">
+Release Notes for v1.15.1 <a class="header-link"  href="#release-notes-for-v1151" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
+            <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 0h24v24H0z" fill="none"/>
+                <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
+            </svg>
+        </a></h2><h3 id="fixed-issues">
+Fixed Issues <a class="header-link"  href="#fixed-issues" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
+            <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 0h24v24H0z" fill="none"/>
+                <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
+            </svg>
+        </a></h3><ul>
+<li>PowerStore - NodeGetVolumeStats Fails When StorageClass isipath Differs from X_CSI_ISI_PATH Environment Variable</li>
+<li>PowerFlex - Storage Pool Metrics Not Collected in Multi-AZ Setup Due to Missing SystemID in StorageClass</li>
+<li>PowerFlex - CSI Driver Panics Intermittently When os.Stat Fails During Volume Operation</li>
+<li>PowerStore - CreateVolume Call Violates Idempotency When Multi-NAS Is Configured</li>
+<li>PowerMax - Volume Provisioning Fails When Endpoint Is Configured with Trailing Slash</li>
+<li>PowerMax - Driver Incorrectly Disables NVMe Support Due to Partial Port Group Accessibility During Startup</li>
+<li>PowerMax - Driver Crashes with Segmentation Fault Due to Improper Error Handling of Nil Initiators</li>
+</ul>
 <h2 id="release-notes-for-v1150">
 Release Notes for v1.15.0 <a class="header-link"  href="#release-notes-for-v1150" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
             <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
@@ -3924,58 +3945,56 @@ New Features/Changes <a class="header-link"  href="#new-featureschanges" style="
                 <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
             </svg>
         </a></h3><ul>
-<li><a href="https://github.com/dell/csm/issues/1468">#1468 - [FEATURE]: Support K8s secrets as credential store in CSM Authorization Proxy v2</a></li>
-<li><a href="https://github.com/dell/csm/issues/1947">#1947 - [FEATURE]: Authorization support for PowerStore</a></li>
-<li><a href="https://github.com/dell/csm/issues/1954">#1954 - [FEATURE]: Observability enhancements to prevent hitting the max login limit in PowerFlex</a></li>
-<li><a href="https://github.com/dell/csm/issues/1961">#1961 - [FEATURE]: Support Resiliency and Metro - Node failure.</a></li>
-<li><a href="https://github.com/dell/csm/issues/1962">#1962 - [FEATURE]: Deliver restricted SDC access mode support for PowerFlex</a></li>
-<li><a href="https://github.com/dell/csm/issues/1988">#1988 - [FEATURE]: Embed topology metrics for each storage platform into the storage specific metrics service for Observability</a></li>
-<li><a href="https://github.com/dell/csm/issues/2001">#2001 - [FEATURE]: CSM support for Kubernetes 1.34</a></li>
-<li><a href="https://github.com/dell/csm/issues/2023">#2023-  [FEATURE]: CSM Operator support Observability deployments for PowerStore</a></li>
-<li><a href="https://github.com/dell/csm/issues/2024">#2024-  [FEATURE]: CSM operator supports replication deployment for PowerStore</a></li>
+<li>Support K8s secrets as credential store in CSM Authorization Proxy v2</li>
+<li>Authorization support for PowerStore</li>
+<li>Observability enhancements to prevent hitting the max login limit in PowerFlex</li>
+<li>Support Resiliency and Metro - Node failure</li>
+<li>Deliver restricted SDC access mode support for PowerFlex</li>
+<li>Embed topology metrics for each storage platform into the storage specific metrics service for Observability</li>
+<li>CSM Operator support Observability deployments for PowerStore</li>
+<li>CSM operator supports replication deployment for PowerStore</li>
 </ul>
-<h3 id="fixed-issues">
-Fixed Issues <a class="header-link"  href="#fixed-issues" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
+<h3 id="fixed-issues-1">
+Fixed Issues <a class="header-link"  href="#fixed-issues-1" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
             <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
                 <path d="M0 0h24v24H0z" fill="none"/>
                 <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
             </svg>
         </a></h3><ul>
-<li><a href="https://github.com/dell/csm/issues/1898">#1898 - [BUG]: Incorrect Metro Architecture Diagram Used for PowerStore in Replication</a></li>
-<li><a href="https://github.com/dell/csm/issues/1899">#1899 - [BUG]: Fix NFS Idempotent CreateVolume Request in Driver</a></li>
-<li><a href="https://github.com/dell/csm/issues/1910">#1910 - [BUG]: CSM PowerMax is intermittently left in a failed state</a></li>
-<li><a href="https://github.com/dell/csm/issues/1911">#1911 - [BUG]: Missing skipCertificateValidation Support in PowerStore CSI Driver</a></li>
-<li><a href="https://github.com/dell/csm/issues/1917">#1917 - [BUG]: Not able to pull the images for Offline installation for karavi-observability</a></li>
-<li><a href="https://github.com/dell/csm/issues/1920">#1920 - [BUG]: PowerScale Snapshots of volumes with a prefix different to that of the X_CSI_VOL_PREFIX fail in v2.14</a></li>
-<li><a href="https://github.com/dell/csm/issues/1924">#1924 - [BUG]: After failover with PVC swap, the initial PV does not have a reserved/reserved claim</a></li>
-<li><a href="https://github.com/dell/csm/issues/1926">#1926 - [BUG]: Unity CSI Driver Fails OCP End to End Intermittently</a></li>
-<li><a href="https://github.com/dell/csm/issues/1930">#1930 - [BUG]: Powerstore has unnecessary sharedNFS related codes that affects performance.</a></li>
-<li><a href="https://github.com/dell/csm/issues/1932">#1932 - [BUG]: powerflex driver&rsquo;s replication does not search for correct volume name when name + prefix &gt; 31 chars</a></li>
-<li><a href="https://github.com/dell/csm/issues/1936">#1936 - [BUG]: CSM-Operator samples under ocp folder for PowerFlex is pointing to old sha id for SDC image</a></li>
-<li><a href="https://github.com/dell/csm/issues/1937">#1937 - [BUG]: Snapshot class mentioned in documentation fails</a></li>
-<li><a href="https://github.com/dell/csm/issues/1938">#1938 - [BUG]: Broken referencelink on Support Matrix</a></li>
-<li><a href="https://github.com/dell/csm/issues/1943">#1943 - [BUG]: CSM Authorization: Proxy server deployment is failing</a></li>
-<li><a href="https://github.com/dell/csm/issues/1949">#1949 - [BUG]: Duplicate entries in Release notes</a></li>
-<li><a href="https://github.com/dell/csm/issues/1951">#1951 - [BUG]: Repctl Failover Documentation is Unclear</a></li>
-<li><a href="https://github.com/dell/csm/issues/1952">#1952 - [BUG]: replication missing permission in operator</a></li>
-<li><a href="https://github.com/dell/csm/issues/1955">#1955 - [BUG]: Incorrect secret name mentioned for PowerScale installation using operator in OCP environment in CSM Docs</a></li>
-<li><a href="https://github.com/dell/csm/issues/1959">#1959 - [BUG]: Operator does not apply spec.driver.common.envs to driver node</a></li>
-<li><a href="https://github.com/dell/csm/issues/1960">#1960 - [BUG]: Formatting is broken in documentation for night mode</a></li>
-<li><a href="https://github.com/dell/csm/issues/1964">#1964 - [BUG]: CSI PowerFlex driver panics during CreateVolume()</a></li>
-<li><a href="https://github.com/dell/csm/issues/1969">#1969 - [BUG]: node driver crashed on unlocking an unlocked mutex</a></li>
-<li><a href="https://github.com/dell/csm/issues/1970">#1970 - [BUG]: PowerMax client is using PowerFlex methods in CSM authorization</a></li>
-<li><a href="https://github.com/dell/csm/issues/1972">#1972 - [BUG]: Authorization Installation clarity</a></li>
-<li><a href="https://github.com/dell/csm/issues/1974">#1974 - [BUG]: Host registration is missing when using metro topology label</a></li>
-<li><a href="https://github.com/dell/csm/issues/1986">#1986 - [BUG]: Operator fails to install PowerStore</a></li>
-<li><a href="https://github.com/dell/csm/issues/1997">#1997 - [BUG]: broken links to csm-operator samples in concepts section</a></li>
-<li><a href="https://github.com/dell/csm/issues/1998">#1998 - [BUG]: Powerstore NFS volume usage does not report stats when Volume health Monitoring is enabled</a></li>
-<li><a href="https://github.com/dell/csm/issues/1999">#1999 - [BUG]: Node preferred added for testing resiliency for metro is causing regression in normal set up</a></li>
-<li><a href="https://github.com/dell/csm/issues/2000">#2000 - [BUG]: CSI-PowerScale does not log CSI REQ/REP since 2.14</a></li>
-<li><a href="https://github.com/dell/csm/issues/2002">#2002 - [BUG]: Issue with expansion for PowerStore metro volume</a></li>
-<li><a href="https://github.com/dell/csm/issues/2003">#2003 - [BUG]: invalid topology labels due to delays in initiators login state report from Unity array</a></li>
-<li><a href="https://github.com/dell/csm/issues/2004">#2004 - [BUG]: op e2e tests fail for PowerMax</a></li>
-<li><a href="https://github.com/dell/csm/issues/2011">#2011 - [BUG]: CSI PowerScale is not able to find the default cluster and failing with error &ldquo;isilon-node-fntjz&rdquo;</a></li>
-<li><a href="https://github.com/dell/csm/issues/2017">#2017 - [BUG]: ControllerUnpublish fails to retrieve PV due to tenant prefix mismatch with Auth v2 enabled for powerscale</a></li>
+<li>Incorrect Metro Architecture Diagram Used for PowerStore in Replication</li>
+<li>Fix NFS Idempotent CreateVolume Request in Driver</li>
+<li>CSM PowerMax is intermittently left in a failed state</li>
+<li>Missing skipCertificateValidation Support in PowerStore CSI Driver</li>
+<li>Not able to pull the images for Offline installation for karavi-observability</li>
+<li>PowerScale Snapshots of volumes with a prefix different to that of the X_CSI_VOL_PREFIX fail in v2.14</li>
+<li>After failover with PVC swap, the initial PV does not have a reserved/reserved claim</li>
+<li>Unity CSI Driver Fails OCP End to End Intermittently</li>
+<li>Powerstore has unnecessary sharedNFS related codes that affects performance</li>
+<li>powerflex driver&rsquo;s replication does not search for correct volume name when name + prefix &gt; 31 chars</li>
+<li>CSM-Operator samples under ocp folder for PowerFlex is pointing to old sha id for SDC image</li>
+<li>CSM docs - Volume snapshot class mentioned in documentation has indentation issues and failing off</li>
+<li>Broken referencelink on Support Matrix</li>
+<li>CSM Authorization: Proxy server deployment is failing</li>
+<li>CSM Docs - Duplicate entries in Release notes for known issues</li>
+<li>Repctl Failover Documentation is Unclear</li>
+<li>replication missing permission in operator</li>
+<li>Incorrect secret name mentioned for PowerScale installation using operator in OCP environment in CSM Docs</li>
+<li>Operator does not apply spec.driver.common.envs to driver node</li>
+<li>Formatting is broken in documentation for night mode</li>
+<li>CSI PowerFlex driver panics during CreateVolume()</li>
+<li>node driver crashed on unlocking an unlocked mutex</li>
+<li>PowerMax client is using PowerFlex methods in CSM authorization</li>
+<li>Authorization Install docs should use tabs for for storage credential options.</li>
+<li>Host registration is missing when using metro topology label</li>
+<li>Operator fails to install PowerStore</li>
+<li>CSM Docs - Broken links to csm-operator samples in concepts section</li>
+<li>Powerstore NFS volume usage does not report stats when Volume health Monitoring is enabled</li>
+<li>Node preferred added for testing resiliency for metro is causing regression in normal set up</li>
+<li>CSI-PowerScale does not log CSI REQ/REP since 2.14</li>
+<li>Issue with expansion for PowerStore metro volume</li>
+<li>invalid topology labels due to delays in initiators login state report from Unity array</li>
+<li>CSI PowerScale is not able to find the default cluster and failing with error &ldquo;isilon-node-fntjz&rdquo;</li>
+<li>ControllerUnpublish fails to retrieve PV due to tenant prefix mismatch with Auth v2 enabled for powerscale</li>
 </ul>
 <h3 id="known-issues">
 Known Issues <a class="header-link"  href="#known-issues" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">

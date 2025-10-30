@@ -20,7 +20,7 @@
 
   <meta itemprop="name" content="Installation Guide">
   <meta itemprop="description" content="Helm Installation">
-  <meta itemprop="dateModified" content="2025-07-25T03:44:32+05:30">
+  <meta itemprop="dateModified" content="2025-10-30T22:53:28+05:30">
   <meta itemprop="wordCount" content="2736">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Installation Guide">
@@ -73,10 +73,10 @@
       
     
     
-    1.15.0
+    1.15.1
   </a>
   <ul class="dropdown-menu">
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/" >1.15.0</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/" >1.15.1</a></li>
     <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1/" >1.14.2</a></li>
     <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v2/" >1.13.2</a></li>
     <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v3/" >1.12.0</a></li>
@@ -203,7 +203,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.f551ad409a9ce1f587f2ffb31bbd5958.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.7133adb4cdbdb27927d2b7e7bb0dcdae.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -4052,7 +4052,7 @@ Install Helm 3.x <a class="header-link"  href="#install-helm-3x" style=" display
     <p>Install the Helm chart.</p>
     <p>On your terminal, run this command:</p>
     <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>helm install &lt;release-name&gt; dell/container-storage-modules -n &lt;namespace&gt; --version &lt;container-storage-module chart-version&gt; -f &lt;values.yaml location&gt;
-    </span></span></code></pre></div><p>Example: helm install powerstore dell/container-storage-modules -n csi-powerstore &ndash;version 1.8.0 -f values.yaml</p>
+    </span></span></code></pre></div><p>Example: helm install powerstore dell/container-storage-modules -n csi-powerstore &ndash;version 1.8.1 -f values.yaml</p>
     </li>
     </ul>
     
@@ -4180,7 +4180,7 @@ Install Driver <a class="header-link"  href="#install-driver" style=" display: i
         </a></h2><p><strong>Steps</strong></p>
 <ol>
 <li>
-<p>Run <code>git clone -b v2.15.0 https://github.com/dell/csi-powerstore.git</code> to clone the git repository.</p>
+<p>Run <code>git clone -b v2.15.1 https://github.com/dell/csi-powerstore.git</code> to clone the git repository.</p>
 </li>
 <li>
 <p>Ensure that you have created namespace where you want to install the driver. You can run <code>kubectl create namespace csi-powerstore</code> to create a new one. &ldquo;csi-powerstore&rdquo; is just an example. You can choose any name for the namespace.
@@ -4221,7 +4221,7 @@ User Privileges <a class="header-link"  href="#user-privileges" style=" display:
 </li>
 <li>
 <p>Download the default values.yaml file</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#204a87">cd</span> dell-csi-helm-installer <span style="color:#ce5c00;font-weight:bold">&amp;&amp;</span> wget -O my-powerstore-settings.yaml https://github.com/dell/helm-charts/raw/csi-powerstore-2.15.0/charts/csi-powerstore/values.yaml
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#204a87">cd</span> dell-csi-helm-installer <span style="color:#ce5c00;font-weight:bold">&amp;&amp;</span> wget -O my-powerstore-settings.yaml https://github.com/dell/helm-charts/raw/csi-powerstore-2.15.1/charts/csi-powerstore/values.yaml
 </span></span></code></pre></div></li>
 <li>
 <p>Edit the newly created values file and provide values for the following parameters <code>vi my-powerstore-settings.yaml</code>:</p>

@@ -17,11 +17,11 @@
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="docs">
-    <meta property="article:modified_time" content="2025-10-22T11:17:08+05:30">
+    <meta property="article:modified_time" content="2025-10-30T22:53:28+05:30">
 
   <meta itemprop="name" content="PowerStore">
   <meta itemprop="description" content="Code features for PowerStore Driver">
-  <meta itemprop="dateModified" content="2025-10-22T11:17:08+05:30">
+  <meta itemprop="dateModified" content="2025-10-30T22:53:28+05:30">
   <meta itemprop="wordCount" content="4495">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="PowerStore">
@@ -74,10 +74,10 @@
       
     
     
-    1.15.0
+    1.15.1
   </a>
   <ul class="dropdown-menu">
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/" >1.15.0</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/" >1.15.1</a></li>
     <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1/" >1.14.2</a></li>
     <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v2/" >1.13.2</a></li>
     <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v3/" >1.12.0</a></li>
@@ -204,7 +204,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.f551ad409a9ce1f587f2ffb31bbd5958.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.7133adb4cdbdb27927d2b7e7bb0dcdae.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -4292,7 +4292,7 @@ Volume Limits <a class="header-link"  href="#volume-limits" style=" display: inl
         </a></h2><p>The CSI Driver for Dell PowerStore allows users to specify the maximum number of PowerStore volumes that can be used in a node.</p>
 <p>The user can set the volume limit for a node by creating a node label <code>max-powerstore-volumes-per-node</code> and specifying the volume limit for that node.
 <br/> <code>kubectl label node &lt;node_name&gt; max-powerstore-volumes-per-node=&lt;volume_limit&gt;</code></p>
-<p>The user can also set the volume limit for all the nodes in the cluster by specifying the same value for the <code>maxPowerstoreVolumesPerNode</code> attribute in values.yaml during Helm installation. In the case of driver installed via the operator, this attribute can be modified in the sample yaml file for PowerStore, which is located <a href="https://github.com/dell/csm-operator/blob/main/samples/v2.15.0/storage_csm_powerstore_v2150.yaml">here</a> by editing the <code>X_CSI_POWERSTORE_MAX_VOLUMES_PER_NODE</code> parameter.</p>
+<p>The user can also set the volume limit for all the nodes in the cluster by specifying the same value for the <code>maxPowerstoreVolumesPerNode</code> attribute in values.yaml during Helm installation. In the case of driver installed via the operator, this attribute can be modified in the sample yaml file for PowerStore, which is located <a href="https://github.com/dell/csm-operator/blob/release/v1.10.1/samples/v2.15.0/storage_csm_powerstore_v2151.yaml">here</a> by editing the <code>X_CSI_POWERSTORE_MAX_VOLUMES_PER_NODE</code> parameter.</p>
 <blockquote>
 <p><strong>NOTE:</strong> <br>The default value of <code>maxPowerstoreVolumesPerNode</code> is 0. <br>If <code>maxPowerstoreVolumesPerNode</code> is set to zero, then CO shall decide how many volumes of this type can be published by the controller to the node.<br><br>The volume limit specified in the <code>maxPowerstoreVolumesPerNode</code> attribute is applicable to all the nodes in the cluster for which the node label <code>max-powerstore-volumes-per-node</code> is not set.</p></blockquote>
 <h2 id="reuse-powerstore-hostname">
@@ -4643,7 +4643,7 @@ Storage Capacity Tracking <a class="header-link"  href="#storage-capacity-tracki
 If such a node is not available, the pods stay in Pending state. This means they are not scheduled.</p>
 <p>Without storage capacity tracking, pods get scheduled on a node satisfying the topology constraints. If the required capacity is not available, volume attachment to the pods fails, and pods remain in ContainerCreating state. Storage capacity tracking eliminates unnecessary scheduling of pods when there is insufficient capacity.</p>
 <p>The attribute <code>storageCapacity.enabled</code> in <code>my-powerstore-settings.yaml</code> can be used to enabled/disabled the feature during driver installation .
-To configure how often driver checks for changed capacity set <code>storageCapacity.pollInterval</code> attribute. In case of driver installed via operator, this interval can be configured in the sample files provided <a href="https://github.com/dell/csm-operator/blob/main/samples/v2.15.0/storage_csm_powerstore_v2150.yaml">here</a> by editing the <code>capacity-poll-interval</code> argument present in the <code>provisioner</code> sidecar in the sample yaml file under respective CSM versions.</p>
+To configure how often driver checks for changed capacity set <code>storageCapacity.pollInterval</code> attribute. In case of driver installed via operator, this interval can be configured in the sample files provided <a href="https://github.com/dell/csm-operator/blob/release/v1.10.1/samples/v2.15.0/storage_csm_powerstore_v2151.yaml">here</a> by editing the <code>capacity-poll-interval</code> argument present in the <code>provisioner</code> sidecar in the sample yaml file under respective CSM versions.</p>
 <h2 id="metro-support">
 Metro support <a class="header-link"  href="#metro-support" style=" display: inline-block; opacity: 0; transition: opacity 0s ease-in-out; " onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0;">
             <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">

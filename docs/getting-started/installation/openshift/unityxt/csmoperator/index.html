@@ -20,8 +20,8 @@
 
   <meta itemprop="name" content="Installation Guide">
   <meta itemprop="description" content="CSM Operator Installation">
-  <meta itemprop="dateModified" content="2025-04-30T23:27:03+05:30">
-  <meta itemprop="wordCount" content="1871">
+  <meta itemprop="dateModified" content="2025-10-30T22:53:28+05:30">
+  <meta itemprop="wordCount" content="1870">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Installation Guide">
   <meta name="twitter:description" content="CSM Operator Installation">
@@ -73,10 +73,10 @@
       
     
     
-    1.15.0
+    1.15.1
   </a>
   <ul class="dropdown-menu">
-    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/" >1.15.0</a></li>
+    <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/" >1.15.1</a></li>
     <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v1/" >1.14.2</a></li>
     <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v2/" >1.13.2</a></li>
     <li><a class="dropdown-item" href="https://dell.github.io/csm-docs/v3/" >1.12.0</a></li>
@@ -203,7 +203,7 @@
     aria-label="Search this site…"
     autocomplete="off"
     
-    data-offline-search-index-json-src="/csm-docs/offline-search-index.f551ad409a9ce1f587f2ffb31bbd5958.json"
+    data-offline-search-index-json-src="/csm-docs/offline-search-index.7133adb4cdbdb27927d2b7e7bb0dcdae.json"
     data-offline-search-base-href="/"
     data-offline-search-max-results="10"
   >
@@ -3947,7 +3947,7 @@ Requirements <a class="header-link"  href="#requirements" style=" display: inlin
                 <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
             </svg>
         </a></h3><ul>
-<li>Install Kubernetes or OpenShift (see <a href="../../../../../concepts/csidriver/#features-and-capabilities">supported versions</a>)</li>
+<li>Install Openshift cluster (see <a href="../../../../../concepts/csidriver/#features-and-capabilities">supported versions</a>)</li>
 <li>To use FC protocol, the host must be zoned with Unity XT array and Multipath needs to be configured</li>
 <li>To use iSCSI protocol, iSCSI initiator utils packages needs to be installed and Multipath needs to be configured</li>
 <li>To use NFS protocol, there is no prerequisite on Openshift</li>
@@ -4408,7 +4408,7 @@ unity-config         Opaque      1      3h7m
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">forceRemoveDriver</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#000">EOF </span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span></code></pre></div> </div>
-<p><strong>Detailed Configuration:</strong> Use the <a href="https://github.com/dell/csm-operator/blob/main/samples/storage_csm_unity_v2140.yaml">sample file</a> for detailed settings.</p>
+<p><strong>Detailed Configuration:</strong> Use the <a href="https://github.com/dell/csm-operator/blob/release/v1.10.1/samples/v2.15.0/storage_csm_unity_v2150.yaml">sample file</a> for detailed settings.</p>
 <p>To set the parameters in CR. The table shows the main settings of the unity driver and their defaults.</p>
 </li>
 </ol>
