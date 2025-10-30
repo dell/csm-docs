@@ -82,10 +82,6 @@ Install the SDC per the _Dell PowerFlex Deployment Guide_:
 4. **Add MDM IPs for Multi-Array support:**
 run `/opt/emc/scaleio/sdc/bin/drv_cfg --add_mdm --ip 10.xx.xx.xx.xx,10.xx.xx.xx`.
 
-
- *NOTE:*
-- Configure SFTP settings based on PowerFlex [Concepts](../../../../../concepts/csidriver/features/powerflex/#expose-the-sftp-settings-to-automatically-pull-the-sciniko-kernel-module)
-
 ### CSI Driver Installation
 <br>
 
@@ -145,6 +141,9 @@ run `/opt/emc/scaleio/sdc/bin/drv_cfg --add_mdm --ip 10.xx.xx.xx.xx,10.xx.xx.xx`
     [OR]
 
     b. **Detailed Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/release/{{< version-docs key="csm-operator_latest_version">}}/samples/{{< version-docs key="csm-operator_latest_samples_dir" >}}/storage_csm_powerflex_{{< version-docs key="Det_sample_operator_pflex" >}}.yaml) for detailed settings.
+
+
+ *NOTE:* - Configure SFTP settings based on PowerFlex [Concepts](../../../../../concepts/csidriver/features/powerflex/#expose-the-sftp-settings-to-automatically-pull-the-sciniko-kernel-module)
 
 - Configure the parameters in the CR. The table below lists the primary configurable parameters of the PowerFlex driver and their default values:
 <ul>
