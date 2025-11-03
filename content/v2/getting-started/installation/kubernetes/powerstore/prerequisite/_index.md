@@ -6,7 +6,7 @@ Description: >
 --- 
 The following requirements must be met before installing the CSI Driver for PowerStore:
 
-- A Kubernetes or OpenShift cluster (see [supported versions](../../../../../concepts/csidriver/#features-and-capabilities))
+- Install Kubernetes cluster (see [supported versions](../../../../../concepts/csidriver/#features-and-capabilities))
 - Install Helm 3.x
 - Refer to the sections below for protocol specific requirements.
 - If you want to use pre-configured iSCSI/FC hosts be sure to check that they are not part of any host group.
