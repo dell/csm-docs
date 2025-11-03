@@ -27,7 +27,7 @@ To deploy the Operator, follow the instructions available [here](../../../operat
 
 1. **Create Namespace.**
    ```bash
-      kubectl create namespace powerstore
+   kubectl create namespace powerstore
    ```
    This command creates a namespace called `powerstore`. You can replace `powerstore` with any name you prefer.
 
@@ -37,12 +37,12 @@ To deploy the Operator, follow the instructions available [here](../../../operat
 
    ```yaml
    arrays:
-    - endpoint: "https://11.0.0.1/api/rest"
-        globalID: "unique"
-        username: "user"
-        password: "password"
-        skipCertificateValidation: true
-        blockProtocol: "FC"
+     - endpoint: "https://11.0.0.1/api/rest"
+       globalID: "unique"
+       username: "user"
+       password: "password"
+       skipCertificateValidation: true
+       blockProtocol: "FC"
    ```
    **Note** :
     skipCertificateValidation flag is currently unsupported. Please refrain from changing its value.
@@ -73,19 +73,19 @@ To deploy the Operator, follow the instructions available [here](../../../operat
    apiVersion: storage.dell.com/v1
    kind: ContainerStorageModule
    metadata:
-   name: powerstore
-   namespace: powerstore
+     name: powerstore
+     namespace: powerstore
    spec:
-   driver:
-      csiDriverType: "powerstore"
-      configVersion: {{< version-v1 key="PStore_latestVersion" >}}
-      forceRemoveDriver: true
+     driver:
+       csiDriverType: "powerstore"
+       configVersion: {{< version-v1 key="PStore_latestVersion" >}}
+       forceRemoveDriver: true
    ```
-     [sample file](https://github.com/dell/csm-operator/blob/main/samples/{{< version-v1 key="csm-operator_latest_samples_dir" >}}/minimal-samples/powerstore_{{< version-v1 key="Min_sample_operator_pstore" >}}.yaml) for default settings. Modify if needed.
+     [sample file](https://github.com/dell/csm-operator/blob/release/{{< version-v1 key="csm-operator_latest_version">}}/samples/{{< version-v1 key="csm-operator_latest_samples_dir" >}}/minimal-samples/powerstore_{{< version-v1 key="Min_sample_operator_pstore" >}}.yaml) for default settings. Modify if needed.
 
     [OR]
 
-    b. **Detailed Configuration:**  [sample file](https://github.com/dell/csm-operator/blob/main/samples/{{< version-v1 key="csm-operator_latest_samples_dir" >}}/storage_csm_powerstore_{{< version-v1 key="Det_sample_operator_pstore" >}}.yaml) for detailed settings or use [Wizard](./installationwizard#generate-manifest-file) to generate the sample file.
+    b. **Detailed Configuration:**  [sample file](https://github.com/dell/csm-operator/blob/release/{{< version-v1 key="csm-operator_latest_version">}}/samples/{{< version-v1 key="csm-operator_latest_samples_dir" >}}/storage_csm_powerstore_{{< version-v1 key="Det_sample_operator_pstore" >}}.yaml) for detailed settings or use [Wizard](./installationwizard#generate-manifest-file) to generate the sample file.
 
    - Users should configure the parameters in CR. The following table lists the primary configurable parameters of the PowerStore driver and their default values:
 
@@ -140,10 +140,10 @@ To deploy the Operator, follow the instructions available [here](../../../operat
    apiVersion: storage.k8s.io/v1
    kind: StorageClass
    metadata:
-   name: "powerstore-ext4"
+     name: "powerstore-ext4"
    provisioner: "csi-powerstore.dellemc.com"
    parameters:
-   csi.storage.k8s.io/fstype: "ext4"
+     csi.storage.k8s.io/fstype: "ext4"
    reclaimPolicy: Delete
    allowVolumeExpansion: true
    volumeBindingMode: Immediate
@@ -154,7 +154,7 @@ To deploy the Operator, follow the instructions available [here](../../../operat
    **Run this command to create** a storage class
 
    ```bash
-     kubectl create -f < storage-class.yaml >
+   kubectl create -f < storage-class.yaml >
    ```
 
 3. **Create Volume Snapshot Class** 
@@ -170,7 +170,7 @@ To deploy the Operator, follow the instructions available [here](../../../operat
 
    **Run this command to create** a volume snapshot class
    ```bash
-      kubectl create -f < volume-snapshot-class.yaml >
+   kubectl create -f < volume-snapshot-class.yaml >
    ```
 
 **Note** :

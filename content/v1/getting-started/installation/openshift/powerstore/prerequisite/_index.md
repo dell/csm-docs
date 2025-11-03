@@ -290,7 +290,47 @@ toc_hide: true
    <br>
    <br>
 
-   3. Configure IO policy for native NVMe multipathing
+   3. To ensure successful integration of NVMe protocols with the CSI Driver, the following conditions must be met:
+      - Each OpenShift node that connects to Dell storage arrays must have a unique NVMe Qualified Name (NQN).
+      - By default, the OpenShift deployment process for CoreOS assigns the same host NQN to all nodes. This value is stored in the file: /etc/nvme/hostnqn.
+      - To resolve this and guarantee unique host NQNs across nodes, you can apply a machine configuration to your OpenShift Container Platform (OCP) cluster. One recommended approach is to  add   the following machine config:
+      
+      <br> 
+
+      ```yaml
+      cat <<EOF > 99-worker-custom-nvme-hostnqn.yaml
+      apiVersion: machineconfiguration.openshift.io/v1
+      kind: MachineConfig
+      metadata:
+        labels:
+          machineconfiguration.openshift.io/role: worker
+        name: 99-worker-custom-nvme-hostnqn
+      spec:
+        config:
+          ignition:
+            version: 3.4.0
+          systemd:
+            units:
+              - contents: |
+                  [Unit]
+                  Description=Custom CoreOS Generate NVMe Hostnqn
+
+                  [Service]
+                  Type=oneshot
+                  ExecStart=/usr/bin/sh -c '/usr/sbin/nvme gen-hostnqn > /etc/nvme/hostnqn'
+                  RemainAfterExit=yes
+
+                  [Install]
+                  WantedBy=multi-user.target
+                enabled: true
+                name: custom-coreos-generate-nvme-hostnqn.service
+      EOF
+      ```
+
+   <br> 
+   <br>  
+
+   4. Configure IO policy for native NVMe multipathing
 
       Use this comment to create the machine configuration to configure the native NVMe multipathing IO Policy to round robin.
 
@@ -334,7 +374,7 @@ toc_hide: true
    <br>
    <br>
 
-   4. Configure NVMe reconnecting forever
+   5. Configure NVMe reconnecting forever
 
       Use this command to create the machine configuration to configure the NVMe reconnect
 
@@ -392,7 +432,46 @@ toc_hide: true
    <br>
    <br>
 
-   3. Configure IO policy for native NVMe multipathing
+   3. To ensure successful integration of NVMe protocols with the CSI Driver, the following conditions must be met:
+      - Each OpenShift node that connects to Dell storage arrays must have a unique NVMe Qualified Name (NQN).
+      - By default, the OpenShift deployment process for CoreOS assigns the same host NQN to all nodes. This value is stored in the file: /etc/nvme/hostnqn.
+      - To resolve this and guarantee unique host NQNs across nodes, you can apply a machine configuration to your OpenShift Container Platform (OCP) cluster. One recommended approach is to  add   the following machine config:
+
+      <br>
+      
+      ```yaml
+      cat <<EOF > 99-worker-custom-nvme-hostnqn.yaml
+      apiVersion: machineconfiguration.openshift.io/v1
+      kind: MachineConfig
+      metadata:
+        labels:
+          machineconfiguration.openshift.io/role: worker
+        name: 99-worker-custom-nvme-hostnqn
+      spec:
+        config:
+          ignition:
+            version: 3.4.0
+          systemd:
+            units:
+              - contents: |
+                  [Unit]
+                  Description=Custom CoreOS Generate NVMe Hostnqn
+
+                  [Service]
+                  Type=oneshot
+                  ExecStart=/usr/bin/sh -c '/usr/sbin/nvme gen-hostnqn > /etc/nvme/hostnqn'
+                  RemainAfterExit=yes
+
+                  [Install]
+                  WantedBy=multi-user.target
+                enabled: true
+                name: custom-coreos-generate-nvme-hostnqn.service
+      EOF
+      ```
+   <br> 
+   <br> 
+
+   4. Configure IO policy for native NVMe multipathing
 
       Use this comment to create the machine configuration to configure the native NVMe multipathing IO Policy to round robin.
 
@@ -436,7 +515,7 @@ toc_hide: true
    <br>
    <br>
 
-   4. Configure NVMe reconnecting forever
+   5. Configure NVMe reconnecting forever
 
       Use this command to create the machine configuration to configure the NVMe reconnect
 
