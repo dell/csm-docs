@@ -78,7 +78,7 @@ To deploy the Operator, follow the instructions available [here](../../../operat
    spec:
      driver:
        csiDriverType: "powerstore"
-       configVersion: {{< version-v1 key="PStore_latestVersion" >}}
+       configVersion: {{< version-v2 key="PStore_latestVersion" >}}
        forceRemoveDriver: true
    ```
      [sample file](https://github.com/dell/csm-operator/tree/release/{{< version-v2 key="csm-operator_latest_version" >}}/samples/minimal-samples/powerstore_{{< version-v2 key="Min_sample_operator_pstore" >}}.yaml) for default settings. Modify if needed.
