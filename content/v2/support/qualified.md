@@ -13,7 +13,7 @@ description: Community Qualified Configurations
 | Ticket 1361 | RHCOS 4.12 | OpenShift 4.12 | PowerStore | iSCSI| CSI v2.8.0 |
 | Ticket 1362 | RHCOS 4.12 | OpenShift 4.12 | PowerScale | NFS  | CSI v2.8.0 |
 | Ticket 1390 | RHCOS 4.15 | OpenShift 4.15 | PowerStore | NVMeTCP  | CSI v2.10.1 |
-| Ticket 1441 <br>Ticket 1462] | Ubuntu 20.04.x | MKE 3.6.13 | PowerScale, <br>PowerFlex | NFS  | CSI v2.11.0 |
+| Ticket 1441 <br>Ticket 1462 | Ubuntu 20.04.x | MKE 3.6.13 | PowerScale, <br>PowerFlex | NFS  | CSI v2.11.0 |
 | Ticket 1442 | RHCOS 4.14.92 | OKE 4.14.31 | PowerScale | NFS| CSI v2.11.0 |
 | Ticket 1456 | RHCOS 4.14.92 | OKE 4.14.31 | PowerFlex | NFS| CSI v2.11.0 |
 | Ticket 1479 | Ubuntu 18.04.x | OpenShift 4.17 | PowerFlex | iSCSI| CSI v2.11.0 |
