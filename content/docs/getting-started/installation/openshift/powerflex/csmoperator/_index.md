@@ -112,8 +112,6 @@ dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      
     NAME                 TYPE        DATA   AGE
     vxflexos-config      Opaque      1      3h7m
     ```  
-  </br>
-
 
 </br>
 
