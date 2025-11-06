@@ -151,7 +151,7 @@ dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      
       name: powerstore
       namespace: powerstore
     spec:
-    driver:
+     driver:
        csiDriverType: "powerstore"
        configVersion: {{< version-docs key="PStore_latestVersion" >}}
        forceRemoveDriver: true
@@ -159,7 +159,7 @@ dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      
     ```
     </div>
 
-    **Detailed Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/main/samples/{{< version-docs key="csm-operator_latest_samples_dir" >}}/storage_csm_powerstore_{{< version-docs key="sample_sc_pstore" >}}.yaml) for detailed settings or use [Wizard](./installationwizard#generate-manifest-file) to generate the sample file.
+    **Detailed Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/release/{{< version-docs key="csm-operator_latest_version">}}/samples/{{< version-docs key="csm-operator_latest_samples_dir" >}}/storage_csm_powerstore_{{< version-docs key="sample_sc_pstore" >}}.yaml) for detailed settings or use [Wizard](./installationwizard#generate-manifest-file) to generate the sample file.
 
     <br>
     To set the parameters in CR. The table shows the main settings of the PowerStore driver and their defaults.

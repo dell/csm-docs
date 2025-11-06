@@ -28,7 +28,7 @@ Install the Observability module for Dell CSI Drivers using the Container Storag
 
   If cert-manager has already been installed, don’t enable it.
   
-  **Detailed Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/main/samples/{{< version-docs key="csm-operator_latest_samples_dir" >}}/storage_csm_{{Var}}_{{< version-docs key="sample_sc_pmax" >}}.yaml) for detailed settings. If cert-manager has already been installed, don’t enable it.
+  **Detailed Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/release/{{< version-docs key="csm-operator_latest_version">}}/samples/{{< version-docs key="csm-operator_latest_samples_dir" >}}/storage_csm_{{Var}}_{{< version-docs key="sample_sc_pmax" >}}.yaml) for detailed settings. If cert-manager has already been installed, don’t enable it.
   
 - Install and configure the [Authorization Proxy Server](docs/getting-started/installation/operator/modules/authorizationv2-0) Server before using Observability with Container Storage Modules Authorization. Then, enable both the Authorization and Observability modules in the sample manifest.
 - Observability uses self-signed certificates by default. To use custom certificates, generate them, encode in base64, and insert into the sample file for the components you are enabling:
