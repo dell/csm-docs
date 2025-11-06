@@ -166,7 +166,7 @@ weight: 1
 | - | - |
 | 1.10.1 |<div style="text-align:left"> registry.connect.redhat.com/dell-emc/dell-container-storage-modules-operator@sha256:9b8e6de276d39f7a596a6ec68f39fc18ad73fd8f2f86af31d14ac689a98e2ef9 |
 | 2.15.1 |<div style="text-align:left"> registry.connect.redhat.com/dell-emc/dell-csm-powermax@sha256:9f879b571cf4f8935a2bc02d17c627327ab115aae989addf6a1f960ac8611cb6 |
-| 2.14.0 |<div style="text-align:left"> registry.connect.redhat.com/dell-emc/dell-csm-powermax-reverseproxy@sha256:eeb95f0f5413314d14e7a5ef2279cef93182e229815577779574ba4d781e2c3e |
+| 2.14.1 |<div style="text-align:left"> registry.connect.redhat.com/dell-emc/dell-csm-powermax-reverseproxy@sha256:eeb95f0f5413314d14e7a5ef2279cef93182e229815577779574ba4d781e2c3e |
 | 1.18.0 |<div style="text-align:left"> registry.connect.redhat.com/dell-emc/dell-csm-metrics-powermax@sha256:baab9e0c17eb30a1a33832b8384d82bfff03ad378d432897231eab83dc679414 |
 | 5.3.0  |<div style="text-align:left"> registry.k8s.io/sig-storage/csi-provisioner@sha256:bb057f866177d5f4139a1527e594499cbe0feeb67b63aaca8679dfdf0a6016f9 |
 | 4.9.0  |<div style="text-align:left"> registry.k8s.io/sig-storage/csi-attacher@sha256:5aaefc24f315b182233c8b6146077f8c32e274d864cb03c632206e78bd0302da |
