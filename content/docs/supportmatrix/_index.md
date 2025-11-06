@@ -39,7 +39,7 @@ weight: 1
 | Version     | Capability                                                                                            | PowerStore | PowerScale | PowerFlex | PowerMax | Unity XT |
 |-------------|-------------------------------------------------------------------------------------------------------| :--------: | :--------: | :-------: | :------: | :------: |
 | 4.18 - 4.19  | <div style="text-align: left"> [Storage](https://github.com/kiagnose/kubevirt-storage-checkup) </div>| Yes         | No        | Yes        | Yes      | No       |
-| 4.18 - 4.19  | <div style="text-align: left">  Observability        </div>                                          | No          | No        | Yes        | Yes      | No       |
+| 4.18 - 4.19  | <div style="text-align: left">  Observability        </div>                                          | Yes          | No        | Yes        | Yes      | No       |
 | 4.18 - 4.19  | <div style="text-align: left"> Authorization - v2.x  </div>                                          | Yes         | No        | Yes        | Yes      | No       |
 | 4.18 - 4.19  | <div style="text-align: left"> Resiliency            </div>                                          | Yes         | No        | Yes        | Yes      | No       |
 | 4.18 - 4.19  | <div style="text-align: left"> Replication (Metro, Sync)	</div>                                    | Yes         | No        | No        | Yes       | No       |
