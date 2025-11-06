@@ -655,7 +655,7 @@ This feature helps the scheduler to make more informed choices about where to st
 
 Without storage capacity tracking, pods get scheduled on a node satisfying the topology constraints. If the required capacity is not available, volume attachment to the pods fails, and pods remain in the ContainerCreating state. Storage capacity tracking eliminates unnecessary scheduling of pods when there is insufficient capacity.
 
-Storage capacity can be tracked by setting the attribute `storageCapacity.enabled` to true in values.yaml (set to true by default) during driver installation. To configure how often driver checks for changed capacity, set the `storageCapacity.pollInterval` attribute (set to 5m by default). In case of driver installed via operator, this interval can be configured in the sample file provided [here](https://github.com/dell/csm-operator/blob/main/samples/{{< version-v1 key="csm-operator_latest_samples_dir" >}}/storage_csm_powermax_{{< version-v1 key="Det_sample_operator_pmax" >}}.yaml) by editing the `--capacity-poll-interval` argument present in the provisioner sidecar.
+Storage capacity can be tracked by setting the attribute `storageCapacity.enabled` to true in values.yaml (set to true by default) during driver installation. To configure how often driver checks for changed capacity, set the `storageCapacity.pollInterval` attribute (set to 5m by default). In case of driver installed via operator, this interval can be configured in the sample file provided [here](https://github.com/dell/csm-operator/blob/release/{{< version-v1 key="csm-operator_latest_version">}}/samples/{{< version-v1 key="csm-operator_latest_samples_dir" >}}/storage_csm_powermax_{{< version-v1 key="Det_sample_operator_pmax" >}}.yaml) by editing the `--capacity-poll-interval` argument present in the provisioner sidecar.
 
 ## Metro support
 
@@ -670,7 +670,7 @@ The CSI Driver for PowerMax allows users to specify the maximum number of PowerM
 The user can set the volume limit for a node by creating a node label `max-powermax-volumes-per-node` and specifying the volume limit for that node.
 <br/> `kubectl label node <node_name> max-powermax-volumes-per-node=<volume_limit>`
 
-The user can also set the volume limit for all the nodes in the cluster by specifying the same to `maxPowerMaxVolumesPerNode` attribute in values.yaml. In case of driver installed via operator, this attribute can be modified in the sample file provided [here](https://github.com/dell/csm-operator/blob/main/samples/{{< version-v1 key="csm-operator_latest_samples_dir" >}}/storage_csm_powermax_{{< version-v1 key="Det_sample_operator_pmax" >}}.yaml) by editing the `X_CSI_MAX_VOLUMES_PER_NODE` parameter.
+The user can also set the volume limit for all the nodes in the cluster by specifying the same to `maxPowerMaxVolumesPerNode` attribute in values.yaml. In case of driver installed via operator, this attribute can be modified in the sample file provided [here](https://github.com/dell/csm-operator/blob/release/{{< version-v1 key="csm-operator_latest_version">}}/samples/{{< version-v1 key="csm-operator_latest_samples_dir" >}}/storage_csm_powermax_{{< version-v1 key="Det_sample_operator_pmax" >}}.yaml) by editing the `X_CSI_MAX_VOLUMES_PER_NODE` parameter.
 
 This feature is also supported for limiting the volume provisioning on Kubernetes clusters running on vSphere (VMware hypervisor) via RDM mechanism. User can set `vSphere.enabled` to true and also set volume limits to positive values less than or equal 60 via labels or in Values.yaml file.
 

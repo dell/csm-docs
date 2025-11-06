@@ -30,14 +30,14 @@ To deploy the Operator, follow the instructions available [here](../../../operat
 
    a. Create a file called `secret.yaml` or pick a [sample](https://github.com/dell/csi-powerscale/blob/main/samples/secret/secret.yaml) that has PowerScale array connection details:
       ```yaml
-     isilonClusters:
-      - clusterName: "cluster2"
-         username: "user"
-         password: "password"
-         endpoint: "1.2.3.4"
-         isDefault: true
-         endpointPort: "8080"
-     ```
+      isilonClusters:
+        - clusterName: "cluster2"
+          username: "user"
+          password: "password"
+          endpoint: "1.2.3.4"
+          isDefault: true
+          endpointPort: "8080"
+      ```
       - **Update Parameters:** Replace placeholders with actual values for your PowerScale array.
       - **Add Blocks:** If you have multiple PowerScale arrays, add similar blocks for each one.
       - **Replication:** If replication is enabled, make sure the `secret.yaml` includes all involved PowerScale arrays.
@@ -67,15 +67,15 @@ To deploy the Operator, follow the instructions available [here](../../../operat
       apiVersion: v1
       kind: Secret
       metadata:
-         name: isilon-certs-0
-         namespace: isilon
+        name: isilon-certs-0
+        namespace: isilon
       type: Opaque
       data:
-         cert-0: ""
+        cert-0: ""
       ```
 
       ```bash
-       kubectl create -f empty-secret.yaml
+      kubectl create -f empty-secret.yaml
       ```
 
 4. **Install Driver**
@@ -87,19 +87,19 @@ To deploy the Operator, follow the instructions available [here](../../../operat
       apiVersion: storage.dell.com/v1
       kind: ContainerStorageModule
       metadata:
-      name: isilon
-      namespace: isilon
+        name: isilon
+        namespace: isilon
       spec:
-      driver:
-         csiDriverType: "isilon"
-         configVersion: {{< version-docs key="PScale_latestVersion" >}}
-         forceRemoveDriver: true
-   ```
-          Refer the minimal sample files provided in respective CSM versions folder under samples [here](https://github.com/dell/csm-operator/tree/main/samples). Modify if needed.
+        driver:
+          csiDriverType: "isilon"
+          configVersion: {{< version-docs key="PScale_latestVersion" >}}
+          forceRemoveDriver: true
+      ```
+    Refer the minimal sample files provided in respective CSM versions folder under samples [here](https://github.com/dell/csm-operator/tree/main/samples). Modify if needed.
 
     [OR]                                                
 
-    b. **Detailed Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/main/samples/{{< version-docs key="csm-operator_latest_samples_dir" >}}/storage_csm_powerscale_{{< version-docs key="Det_sample_operator_pscale" >}}.yaml) for detailed settings or use [Wizard](./installationwizard#generate-manifest-file) to generate the sample file.
+    b. **Detailed Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/release/{{< version-docs key="csm-operator_latest_version">}}/samples/{{< version-docs key="csm-operator_latest_samples_dir" >}}/storage_csm_powerscale_{{< version-docs key="Det_sample_operator_pscale" >}}.yaml) for detailed settings or use [Wizard](./installationwizard#generate-manifest-file) to generate the sample file.
 
  -  Users should configure the parameters in CR. The following table lists the primary configurable parameters of the PowerScale driver and their default values:
    <ul>
@@ -151,18 +151,18 @@ ii. **Create PowerScale custom resource**:
 6. **Create Storage Class**
 
     ```yaml
-   apiVersion: storage.k8s.io/v1
-   kind: StorageClass
-   metadata:
+    apiVersion: storage.k8s.io/v1
+    kind: StorageClass
+    metadata:
       name: isilon
-   provisioner: csi-isilon.dellemc.com
-   reclaimPolicy: Delete
-   allowVolumeExpansion: true
-   parameters:
+    provisioner: csi-isilon.dellemc.com
+    reclaimPolicy: Delete
+    allowVolumeExpansion: true
+    parameters:
       AccessZone: System
       IsiPath: /ifs/data/csi
       RootClientEnabled: "false"
-   volumeBindingMode: Immediate
+    volumeBindingMode: Immediate
     ````
    Refer [Storage Class](https://github.com/dell/csi-powerscale/tree/main/samples/storageclass) for different sample files.
 
@@ -173,23 +173,24 @@ ii. **Create PowerScale custom resource**:
    ```
 
  7. **Create Volume Snapshot Class**
+ 
     ```yaml
-      apiVersion: snapshot.storage.k8s.io/v1
-      kind: VolumeSnapshotClass
-      metadata:
-         name: isilon-snapclass
-      driver: csi-isilon.dellemc.com
-      deletionPolicy: Delete
-      parameters:
-         IsiPath: /ifs/data/csi
-    ````
+    apiVersion: snapshot.storage.k8s.io/v1
+    kind: VolumeSnapshotClass
+    metadata:
+       name: isilon-snapclass
+    driver: csi-isilon.dellemc.com
+    deletionPolicy: Delete
+    parameters:
+       IsiPath: /ifs/data/csi
+    ```
 
-     Refer [Volume Snapshot Class](https://github.com/dell/csi-powerscale/blob/main/samples/volumesnapshotclass/) for the sample files.
+    Refer [Volume Snapshot Class](https://github.com/dell/csi-powerscale/blob/main/samples/volumesnapshotclass/) for the sample files.
 
-     **Run this command to create** a volume snapshot class
-     ```bash
-       kubectl create -f < volume-snapshot-class.yaml >
-     ```
+    **Run this command to create** a volume snapshot class
+    ```bash
+    kubectl create -f < volume-snapshot-class.yaml >
+    ```
 
 **Note** :
 

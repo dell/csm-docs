@@ -24,7 +24,7 @@ To deploy the Operator, follow the instructions available [here](../../../operat
 
 1. **Create Namespace:** 
     ```bash
-      kubectl create namespace powermax
+    kubectl create namespace powermax
     ```
 2. **Create PowerMax credentials:**
 
@@ -50,7 +50,7 @@ To deploy the Operator, follow the instructions available [here](../../../operat
     After editing the file, **run this command to create a `secret.yaml`** called `powermax-creds`. If you are using a different namespace/secret name, just substitute those into the command.
 
     ```bash
-      kubectl create secret generic powermax-creds --namespace powermax --from-file=config=secret.yaml
+    kubectl create secret generic powermax-creds --namespace powermax --from-file=config=secret.yaml
     ```
 
 3. **Create Powermax Array Configmap:**
@@ -172,24 +172,24 @@ Volume Health Monitoring feature is optional and by default this feature is disa
 To enable this feature, set  `X_CSI_HEALTH_MONITOR_ENABLED` to `true` in the driver manifest under controller and node section. Also, install the `external-health-monitor` from `sideCars` section for controller plugin.
 To get the volume health state `value` under controller should be set to true as seen below. To get the volume stats `value` under node should be set to true.
 ```yaml
-     # Install the 'external-health-monitor' sidecar accordingly.
-        # Allowed values:
-        #   true: enable checking of health condition of CSI volumes
-        #   false: disable checking of health condition of CSI volumes
-        # Default value: false
-     controller:
-       envs:
-         - name: X_CSI_HEALTH_MONITOR_ENABLED
-           value: "true"
-     node:
-       envs:
-        # X_CSI_HEALTH_MONITOR_ENABLED: Enable/Disable health monitor of CSI volumes from node plugin - volume usage
-        # Allowed values:
-        #   true: enable checking of health condition of CSI volumes
-        #   false: disable checking of health condition of CSI volumes
-        # Default value: false
-         - name: X_CSI_HEALTH_MONITOR_ENABLED
-           value: "true"
+# Install the 'external-health-monitor' sidecar accordingly.
+   # Allowed values:
+   #   true: enable checking of health condition of CSI volumes
+   #   false: disable checking of health condition of CSI volumes
+   # Default value: false
+controller:
+  envs:
+    - name: X_CSI_HEALTH_MONITOR_ENABLED
+      value: "true"
+node:
+  envs:
+   # X_CSI_HEALTH_MONITOR_ENABLED: Enable/Disable health monitor of CSI volumes from node plugin - volume usage
+   # Allowed values:
+   #   true: enable checking of health condition of CSI volumes
+   #   false: disable checking of health condition of CSI volumes
+   # Default value: false
+    - name: X_CSI_HEALTH_MONITOR_ENABLED
+      value: "true"
 ```
 
 ### Support for custom topology keys
@@ -203,41 +203,40 @@ X_CSI_TOPOLOGY_CONTROL_ENABLED provides a way to filter topology keys on a node 
 1. To enable this feature, set  `X_CSI_TOPOLOGY_CONTROL_ENABLED` to `true` in the driver manifest under node section.
 
    ```yaml
-      # X_CSI_TOPOLOGY_CONTROL_ENABLED provides a way to filter topology keys on a node based on array and transport protocol
-           # if enabled, user can create custom topology keys by editing node-topology-config configmap.
-           # Allowed values:
-           #   true: enable the filtration based on config map
-           #   false: disable the filtration based on config map
-           # Default value: false
-           - name: X_CSI_TOPOLOGY_CONTROL_ENABLED
-             value: "false"
+   # X_CSI_TOPOLOGY_CONTROL_ENABLED provides a way to filter topology keys on a node based on array and transport protocol
+        # if enabled, user can create custom topology keys by editing node-topology-config configmap.
+        # Allowed values:
+        #   true: enable the filtration based on config map
+        #   false: disable the filtration based on config map
+        # Default value: false
+        - name: X_CSI_TOPOLOGY_CONTROL_ENABLED
+          value: "false"
    ```
 2. Edit the sample config map "node-topology-config" as described [here](https://github.com/dell/csi-powermax/blob/main/samples/configmap/topologyConfig.yaml) with appropriate values:
    Example:
    ```yaml
-           kind: ConfigMap
-           metadata:
-             name: node-topology-config
-             namespace: powermax
-           data:
-             topologyConfig.yaml: |
-               allowedConnections:
-                 - nodeName: "node1"
-                   rules:
-                     - "000000000001:FC"
-                     - "000000000002:FC"
-                 - nodeName: "*"
-                   rules:
-                     - "000000000002:FC"
-               deniedConnections:
-                 - nodeName: "node2"
-                   rules:
-                     - "000000000002:*"
-                 - nodeName: "node3"
-                   rules:
-                     - "*:*"
-
-     ```
+   kind: ConfigMap
+   metadata:
+     name: node-topology-config
+     namespace: powermax
+   data:
+     topologyConfig.yaml: |
+       allowedConnections:
+         - nodeName: "node1"
+           rules:
+             - "000000000001:FC"
+             - "000000000002:FC"
+         - nodeName: "*"
+           rules:
+             - "000000000002:FC"
+       deniedConnections:
+         - nodeName: "node2"
+           rules:
+             - "000000000002:*"
+         - nodeName: "node3"
+           rules:
+             - "*:*"
+    ```
 <ul>  
    {{< collapse id="2" title="Parameters">}}
    | Parameter | Description  |

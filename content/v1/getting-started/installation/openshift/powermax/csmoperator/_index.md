@@ -16,7 +16,7 @@ description: >
 
 
 
-{{< accordion id="One" title="Prerequisite" >}} 
+{{< accordion id="One" title="Prerequisite" >}}
 <br>
 {{<include  file="content/v1/getting-started/installation/openshift/powermax/prerequisite/_index.md" >}}
 
@@ -149,11 +149,11 @@ dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      
 
     i. **Create a CR (Custom Resource)** for PowerMax using the sample files provided
 
-    a. **Minimal Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/main/samples/minimal-samples/powermax_{{< version-v1 key="Min_sample_operator_pmax" >}}.yaml) for default settings. If using the secret above, ensure that the secret name of the secret created is `powermax-creds`.
+    a. **Minimal Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/release/{{< version-v1 key="csm-operator_latest_version">}}/samples/{{< version-v1 key="csm-operator_latest_samples_dir" >}}/minimal-samples/powermax_{{< version-v1 key="Min_sample_operator_pmax" >}}.yaml) for default settings. If using the secret above, ensure that the secret name of the secret created is `powermax-creds`.
 
     [OR]
 
-    b. **Detailed Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powermax_{{< version-v1 key="Det_sample_operator_pmax" >}}.yaml) for detailed settings or use [Wizard](./installationwizard#generate-manifest-file) to generate the sample file. 
+    b. **Detailed Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/release/{{< version-v1 key="csm-operator_latest_version">}}/samples/{{< version-v1 key="csm-operator_latest_samples_dir" >}}/storage_csm_powermax_{{< version-v1 key="Det_sample_operator_pmax" >}}.yaml) for detailed settings or use [Wizard](./installationwizard#generate-manifest-file) to generate the sample file. 
     .
 
 

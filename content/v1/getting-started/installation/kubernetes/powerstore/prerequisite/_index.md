@@ -6,7 +6,7 @@ Description: >
 --- 
 The following requirements must be met before installing the CSI Driver for PowerStore:
 
-- A Kubernetes or OpenShift cluster (see [supported versions](../../../../../concepts/csidriver/#features-and-capabilities))
+- Install Kubernetes cluster (see [supported versions](../../../../../concepts/csidriver/#features-and-capabilities))
 - Install Helm 3.x
 - Refer to the sections below for protocol specific requirements.
 - If you want to use pre-configured iSCSI/FC hosts be sure to check that they are not part of any host group.
@@ -51,7 +51,7 @@ Refer to the [Dell Host Connectivity Guide](https://elabnavigator.dell.com/vault
 
 The following requirements must be fulfilled in order to successfully use the NVMe protocols with the CSI PowerStore driver:
 
-- All OpenShift or Kubernetes nodes connecting to Dell storage arrays must use unique host NVMe Qualified Names (NQNs).
+- All Kubernetes nodes connecting to Dell storage arrays must use unique host NVMe Qualified Names (NQNs).
 
 - The driver requires the NVMe command-line interface (nvme-cli) to manage the NVMe clients and targets. The NVMe CLI tool is installed in the host using the following command on RPM oriented Linux distributions.
 

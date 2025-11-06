@@ -26,7 +26,7 @@ Installing any of the CSI Driver components using Helm requires a few utilities 
 
 ## Prerequisites
 
-- Install Kubernetes (see [supported versions](../../../cosidriver/#features-and-capabilities))
+- Install Kubernetes cluster (see [supported versions](../../../cosidriver/#features-and-capabilities))
 
 ## Install the Driver
 

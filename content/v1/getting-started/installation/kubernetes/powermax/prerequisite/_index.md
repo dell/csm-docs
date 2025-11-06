@@ -10,7 +10,7 @@ Description: >
 The following requirements must be met before installing the CSI Driver for
 PowerMax:
 
-- A Kubernetes or OpenShift cluster (see
+- Install Kubernetes cluster (see
   [supported versions](../../../../../concepts/csidriver/#features-and-capabilities)).
 - A PowerMax system managed by a Unisphere instance with software version 10.0
   or later.
