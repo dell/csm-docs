@@ -81,7 +81,7 @@ To deploy the Operator, follow the instructions available [here](../../../operat
 
     Referencing the TLS certificate and key created in the [CSI PowerMax Reverse Proxy](../prerequisite#csi-powermax-reverse-proxy) prerequisite, create the `csirevproxy-tls-secret` secret.
     ```bash
-    oc create secret -n powermax tls csirevproxy-tls-secret --cert=tls.crt --key=tls.key
+    kubectl create secret -n powermax tls csirevproxy-tls-secret --cert=tls.crt --key=tls.key
     ```
 
 5. **Install Driver**
