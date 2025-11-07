@@ -42,7 +42,7 @@
     <lastmod>2024-11-20T19:40:41-05:00</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/docs/supportmatrix/component-version/</loc>
-    <lastmod>2025-10-03T10:37:33-04:00</lastmod>
+    <lastmod>2025-11-07T15:01:12+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/v1/supportmatrix/component-version/</loc>
     <lastmod>2025-09-17T12:42:34-04:00</lastmod>
@@ -525,13 +525,13 @@
     <lastmod>2025-06-05T13:26:25-04:00</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/docs/concepts/csidriver/features/powerflex/</loc>
-    <lastmod>2025-10-30T22:53:28+05:30</lastmod>
+    <lastmod>2025-11-07T15:01:12+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/docs/getting-started/upgrade/helm/driver/powerflex/</loc>
     <lastmod>2025-02-18T23:05:05+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/v1/concepts/csidriver/features/powerflex/</loc>
-    <lastmod>2025-10-30T22:53:28+05:30</lastmod>
+    <lastmod>2025-11-07T15:01:12+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/v1/getting-started/upgrade/helm/driver/powerflex/</loc>
     <lastmod>2025-06-05T13:26:25-04:00</lastmod>
@@ -777,10 +777,10 @@
     <lastmod>2025-02-18T23:05:05+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/docs/supportmatrix/</loc>
-    <lastmod>2025-10-30T22:53:28+05:30</lastmod>
+    <lastmod>2025-11-07T15:01:12+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/v1/supportmatrix/</loc>
-    <lastmod>2025-09-08T12:50:06+05:30</lastmod>
+    <lastmod>2025-11-07T15:01:12+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/docs/support/supportpolicy/</loc>
     <lastmod>2025-09-17T12:42:34-04:00</lastmod>
@@ -1116,7 +1116,7 @@
     <lastmod>2025-10-30T22:53:28+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/docs/getting-started/installation/kubernetes/powermax/csmoperator/</loc>
-    <lastmod>2025-10-30T22:53:28+05:30</lastmod>
+    <lastmod>2025-11-07T15:01:12+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/docs/getting-started/installation/kubernetes/powerscale/csmoperator/</loc>
     <lastmod>2025-10-30T22:53:28+05:30</lastmod>
@@ -1131,7 +1131,7 @@
     <lastmod>2025-04-30T23:27:03+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/docs/getting-started/installation/openshift/powerflex/csmoperator/</loc>
-    <lastmod>2025-10-30T22:53:28+05:30</lastmod>
+    <lastmod>2025-11-07T15:01:12+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/docs/getting-started/installation/openshift/powermax/csmoperator/</loc>
     <lastmod>2025-10-30T22:53:28+05:30</lastmod>
@@ -1155,7 +1155,7 @@
     <lastmod>2025-10-30T22:53:28+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/v1/getting-started/installation/kubernetes/powermax/csmoperator/</loc>
-    <lastmod>2025-10-30T22:53:28+05:30</lastmod>
+    <lastmod>2025-11-07T15:01:12+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/v1/getting-started/installation/kubernetes/powerscale/csmoperator/</loc>
     <lastmod>2025-10-30T22:53:28+05:30</lastmod>
@@ -1170,7 +1170,7 @@
     <lastmod>2025-06-05T13:26:25-04:00</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/v1/getting-started/installation/openshift/powerflex/csmoperator/</loc>
-    <lastmod>2025-10-30T22:53:28+05:30</lastmod>
+    <lastmod>2025-11-07T15:01:12+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/v1/getting-started/installation/openshift/powermax/csmoperator/</loc>
     <lastmod>2025-07-31T13:11:04-04:00</lastmod>
@@ -2664,10 +2664,10 @@
     <lastmod>2025-06-05T13:26:25-04:00</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/docs/support/qualified/</loc>
-    <lastmod>2025-10-30T22:53:28+05:30</lastmod>
+    <lastmod>2025-11-07T15:01:12+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/v1/support/qualified/</loc>
-    <lastmod>2025-10-30T22:53:28+05:30</lastmod>
+    <lastmod>2025-11-07T15:01:12+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/docs/support/certificationpolicy/</loc>
     <lastmod>2025-09-17T12:42:34-04:00</lastmod>
