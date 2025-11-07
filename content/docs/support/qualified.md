@@ -18,7 +18,7 @@ description: Community Qualified Configurations
 | 1456 | RHCOS 4.14.92 | OKE 4.14.31 | PowerFlex | NFS| CSI v2.11.0 |
 | 1479 | Ubuntu 18.04.x | OpenShift 4.17 | PowerFlex | iSCSI| CSI v2.11.0 |
 | 1500 <br> 1501 |  RHCOS 4.14 | OpenShift 4.14.x | PowerStore | iSCSI| CSI 2.10.1 |
-| 1513 RHCOS 4.14 | OpenShift 4.14 | PowerScale | NFS | CSI v2.6.1 |
+| 1513 |RHCOS 4.14 | OpenShift 4.14 | PowerScale | NFS | CSI v2.6.1 |
 | 1516 | Ubuntu 20.04.x | MKE - 3.6.13 | PowerFlex | iSCSI | CSI v2.11.0 |
 | 1590 | RHCOS 4.14 | OpenShift 4.14 | Unity 680F 5.4.0.0.5.094 | NFS | CSI v2.12.0 |
 | 1622 | Ubuntu 20.04.6 LTS | MKE - 3.6.13 | PowerScale v9.5.0.8 | NFS | CSI v2.12.0 |
