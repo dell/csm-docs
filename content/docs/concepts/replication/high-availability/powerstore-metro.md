@@ -6,7 +6,7 @@ description: >
   High Availability support for CSI PowerStore
 ---
 
-## PowerStore Metro Architecture
+## Architecture
 
 ![metro architecture diagram](../../../../../images/replication/powerstore-metro.png)
 
@@ -20,7 +20,7 @@ The driver on receiving the metro-related parameters in the `CreateVolume` call 
 
 The creation of volumes in metro mode doesn't involve the replication sidecar or the common replication controller, nor does it cause the creation of any replication related custom resources. It just needs the `csi-powerstore` driver that implements the `CreateVolume` gRPC endpoint with metro capability for it to work.
 
-### Host Registration for PowerStore Metro
+### Host Registration
 > {{< message text="18" >}}
 
 PowerStore supports optimized metro data paths by registering hosts based on their location relative to PowerStore systems.
@@ -152,10 +152,10 @@ allowedTopologies:
 
 When a Metro `PV` is created, the volumeHandle will have the format `<volumeID/globalID/protocol:remote-volumeID/remote-globalID>`.
 
-### PowerStore Metro volume expansion
+### Volume Expansion
 When a request is made to increase the size of a Metro `PV`, the metro replication session must be temporarily paused prior to the editing of Kubernetes resources. This can be done from the PowerStore Manager UI or CLI. The size of the local/preferred volume is then increased. The metro session must then be manually resumed. It is important to note that the paths for the remote/non-preferred volume will not become active until the metro session is resumed and the remote/non-preferred volume reflects the updated size.
 
-### Snapshots on PowerStore Metro volumes
+### Snapshots
 When a VolumeSnapshot object is created for the Metro `PV`, snapshots are created on each side of the Metro session on the PowerStore systems. However, the VolumeSnapshot object only refers to the local/preferred side of the Metro volume. When a Metro `PV` is deleted, the remote/non-preferred volume, along with any snapshots associated with it, is also automatically deleted.
 
 ### Limitations
