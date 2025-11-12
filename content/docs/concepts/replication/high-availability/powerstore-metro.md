@@ -20,7 +20,7 @@ The driver on receiving the metro-related parameters in the `CreateVolume` call 
 
 The creation of volumes in metro mode doesn't involve the replication sidecar or the common replication controller, nor does it cause the creation of any replication related custom resources. It just needs the `csi-powerstore` driver that implements the `CreateVolume` gRPC endpoint with metro capability for it to work.
 
-### Host Registration
+## Host Registration
 > {{< message text="18" >}}
 
 PowerStore supports optimized metro data paths by registering hosts based on their location relative to PowerStore systems.
@@ -168,7 +168,7 @@ arrays:
 ```
 
 
-### StorageClass
+## StorageClass
 The Metro replicated volumes are created just like the normal volumes, but the `StorageClass` contains some
 extra parameters related to metro replication. A `StorageClass` to create metro replicated volumes may look as follows:
 
@@ -220,13 +220,13 @@ allowedTopologies:
 
 When a Metro `PV` is created, the volumeHandle will have the format `<volumeID/globalID/protocol:remote-volumeID/remote-globalID>`.
 
-### Volume Expansion
+## Volume Expansion
 When a request is made to increase the size of a Metro `PV`, the metro replication session must be temporarily paused prior to the editing of Kubernetes resources. This can be done from the PowerStore Manager UI or CLI. The size of the local/preferred volume is then increased. The metro session must then be manually resumed. It is important to note that the paths for the remote/non-preferred volume will not become active until the metro session is resumed and the remote/non-preferred volume reflects the updated size.
 
-### Snapshots
+## Snapshots
 When a VolumeSnapshot object is created for the Metro `PV`, snapshots are created on each side of the Metro session on the PowerStore systems. However, the VolumeSnapshot object only refers to the local/preferred side of the Metro volume. When a Metro `PV` is deleted, the remote/non-preferred volume, along with any snapshots associated with it, is also automatically deleted.
 
-### Limitations
+## Limitations
 - PowerStore driver only supports uniform host configuration for Metro volume where the host has active paths to both PowerStore systems.
 - Metro configuration needs to be done by the user by adding zone keys as node labels as per the configuration requirements.
 - Powerstore driver does only fresh host registration for metro configuration. To modify an existing host entry, the user will have to remove the existing host entry from the array and restart node pods to enable the Powerstore driver to create fresh host entry.
