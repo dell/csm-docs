@@ -100,6 +100,75 @@ arrays:
                   - "zone-a"
 ```
 
+_Example:_
+There are two PowerStore systems and three zones — zone-a, zone-b, and zone-ab.
+Zone-a has worker nodes co-located with array "PS000000000001", and zone-b has worker nodes co-located with array "PS000000000002".
+The third zone, zone-ab, requires access to both PowerStore arrays.
+Nodes in zone-a are labeled `topology.kubernetes.io/zone: zone-a`, nodes in zone-b are labeled `topology.kubernetes.io/zone: zone-b`, and
+nodes in zone-ab are labeled `topology.kubernetes.io/zone: zone-ab`.
+```yaml
+arrays:
+  - endpoint: "https://11.0.0.1/api/rest"
+    globalID: "PS000000000001"
+    username: "user"
+    password: "password"
+    skipCertificateValidation: true
+    blockProtocol: "FC"
+    hostConnectivity:
+      metro:
+        colocatedLocal:
+          nodeSelectorTerms:
+            - matchExpressions:
+                - key: "topology.kubernetes.io/zone"
+                  operator: "In"
+                  values:
+                    - "zone-a"
+        colocatedRemote:
+          nodeSelectorTerms:
+            - matchExpressions:
+                - key: "topology.kubernetes.io/zone"
+                  operator: "In"
+                  values:
+                    - "zone-b"
+        colocatedBoth:
+          nodeSelectorTerms:
+            - matchExpressions:
+                - key: "topology.kubernetes.io/zone"
+                  operator: "In"
+                  values:
+                    - "zone-ab"
+  - endpoint: "https://11.0.0.2/api/rest"
+    globalID: "PS000000000002"
+    username: "user"
+    password: "password"
+    skipCertificateValidation: true
+    blockProtocol: "FC"
+    hostConnectivity:
+      metro:
+        colocatedLocal:
+          nodeSelectorTerms:
+            - matchExpressions:
+                - key: "topology.kubernetes.io/zone"
+                  operator: "In"
+                  values:
+                    - "zone-b"
+        colocatedRemote:
+          nodeSelectorTerms:
+            - matchExpressions:
+                - key: "topology.kubernetes.io/zone"
+                  operator: "In"
+                  values:
+                    - "zone-a"
+        colocatedBoth:
+          nodeSelectorTerms:
+            - matchExpressions:
+                - key: "topology.kubernetes.io/zone"
+                  operator: "In"
+                  values:
+                    - "zone-ab"
+```
+
+
 ### StorageClass
 The Metro replicated volumes are created just like the normal volumes, but the `StorageClass` contains some
 extra parameters related to metro replication. A `StorageClass` to create metro replicated volumes may look as follows:
