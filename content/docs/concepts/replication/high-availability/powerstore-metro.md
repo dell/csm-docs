@@ -50,12 +50,12 @@ specification, see [Pod: NodeAffinity](https://kubernetes.io/docs/reference/kube
 
 _Example:_
 There are two zones and two PowerStore systems, where the PowerStore systems have been configured for metro replication.
-Zone-a has worker nodes co-located with array "unique1", and zone-b has worker nodes co-located with array "unique2".
+Zone-a has worker nodes co-located with array "PS000000000001", and zone-b has worker nodes co-located with array "PS000000000002".
 Nodes in zone-a are labeled `topology.kubernetes.io/zone: zone-a`, and Nodes in zone-b are labeled `topology.kubernetes.io/zone: zone-b`.
 ```yaml
 arrays:
   - endpoint: "https://11.0.0.1/api/rest"
-    globalID: "unique1"
+    globalID: "PS000000000001"
     username: "user"
     password: "password"
     skipCertificateValidation: true
@@ -77,7 +77,7 @@ arrays:
                 values:
                   - "zone-b"
   - endpoint: "https://11.0.0.2/api/rest"
-    globalID: "unique2"
+    globalID: "PS000000000002"
     username: "user"
     password: "password"
     skipCertificateValidation: true
