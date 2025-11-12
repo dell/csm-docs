@@ -36,7 +36,6 @@ node selector statements specified for a Host Connectivity optimization.
 To enable this feature, add labels to the cluster nodes, or make note of existing node labels, that describe the desired topology,
 and use these labels to build node selector statements (`nodeSelectorTerms`) for the provided Host Connectivity options under `hostConnectivity.metro`.
 If the node labels satisfy the selector terms, a host will be registered for the node using the corresponding metro optimization.
-If the node labels do not satisfy the selector terms, a local host will be registered for the node without metro optimization.
 
 `nodeSelectorTerms` follow Kubernetes' Node Affinity format -- `requiredDuringSchedulingIgnoredDuringExecution`. For more information, see
 [Assigning Pods to Nodes: Node Affinity](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#node-affinity), and for the full API
