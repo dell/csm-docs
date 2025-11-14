@@ -6,4 +6,4 @@ description: >
   Container Storage Modules (CSM) for Replication Operator deployment
 ---
 
-{{<include file="content/docs/getting-started/installation/operator/modules/replication.md" hideClasses="default" >}}
+{{<include file="content/docs/getting-started/installation/operator/modules/replication.md" hideClasses="default,pflex" >}}

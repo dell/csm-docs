@@ -11,6 +11,12 @@ The Container Storage Modules Operator installs the Replication module for
 supported Dell CSI Drivers, deploying the Replication sidecar and Controller
 Manage.
 
+{{< hide class="pflex" hide="true" >}}
+
+{{% pageinfo color="info" %}} > **Note:** In PowerFlex 5.0, the Replication feature is not supported. {{% /pageinfo %}}
+
+{{< /hide >}}
+
 ## Prerequisites
 
 To configure Replication prior to installation via Container Storage Modules

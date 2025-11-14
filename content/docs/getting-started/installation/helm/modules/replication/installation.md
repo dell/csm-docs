@@ -9,6 +9,12 @@ description: >
 {{< message text="1" >}}
 {{% /pageinfo %}}
 
+{{< hide class="pflex" hide="true" >}}
+
+{{% pageinfo color="info" %}} > **Note:** In PowerFlex 5.0, the Replication feature is not supported. {{% /pageinfo %}}
+
+{{< /hide >}}
+
 The installation process consists of two steps:
 
 1. Install Container Storage Modules (CSM) for Replication Controller
