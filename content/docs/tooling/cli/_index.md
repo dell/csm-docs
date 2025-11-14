@@ -112,7 +112,19 @@ Installs Dell CSI Powerstore
 
 >NOTE: `--machineconfig` is applicable for both OpenShift and Kubernetes.
 
-Sample --from-file yaml:
+##### Examples:
+
+```bash
+dellctl install powerstore --machineconfig --validate-connectivity \
+                           --storage "endpoint=10.0.0.1,username=username" \
+                           --storage "endpoint=10.0.0.2,username=username"
+```
+
+```bash
+dellctl install powerstore --from-file=config.yaml
+```
+
+Sample config.yaml:
 
 ```
 namespace: powerstore
