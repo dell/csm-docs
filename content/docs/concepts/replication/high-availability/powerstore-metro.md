@@ -54,7 +54,7 @@ Nodes in zone-a are labeled `topology.kubernetes.io/zone: zone-a`, and Nodes in 
 ```yaml
 arrays:
   - endpoint: "https://11.0.0.1/api/rest"
-    globalID: "PS000000000001"
+    globalID: "PSbadcafef00d"
     username: "user"
     password: "password"
     skipCertificateValidation: true
@@ -64,19 +64,19 @@ arrays:
         colocatedLocal:
           nodeSelectorTerms:
             - matchExpressions:
-              - key: "topology.kubernetes.io/zone"
-                operator: "In"
-                values:
-                  - "zone-a"
+                - key: "topology.kubernetes.io/zone"
+                  operator: "In"
+                  values:
+                    - "zone-a"
         colocatedRemote:
           nodeSelectorTerms:
             - matchExpressions:
-              - key: "topology.kubernetes.io/zone"
-                operator: "In"
-                values:
-                  - "zone-b"
+                - key: "topology.kubernetes.io/zone"
+                  operator: "In"
+                  values:
+                    - "zone-b"
   - endpoint: "https://11.0.0.2/api/rest"
-    globalID: "PS000000000002"
+    globalID: "PSdecafc0ffee"
     username: "user"
     password: "password"
     skipCertificateValidation: true
@@ -86,17 +86,17 @@ arrays:
         colocatedLocal:
           nodeSelectorTerms:
             - matchExpressions:
-              - key: "topology.kubernetes.io/zone"
-                operator: "In"
-                values:
-                  - "zone-b"
+                - key: "topology.kubernetes.io/zone"
+                  operator: "In"
+                  values:
+                    - "zone-b"
         colocatedRemote:
           nodeSelectorTerms:
             - matchExpressions:
-              - key: "topology.kubernetes.io/zone"
-                operator: "In"
-                values:
-                  - "zone-a"
+                - key: "topology.kubernetes.io/zone"
+                  operator: "In"
+                  values:
+                    - "zone-a"
 ```
 
 _Example:_
@@ -108,7 +108,7 @@ nodes in zone-ab are labeled `topology.kubernetes.io/zone: zone-ab`.
 ```yaml
 arrays:
   - endpoint: "https://11.0.0.1/api/rest"
-    globalID: "PS000000000001"
+    globalID: "PSbadcafef00d"
     username: "user"
     password: "password"
     skipCertificateValidation: true
@@ -137,7 +137,7 @@ arrays:
                   values:
                     - "zone-ab"
   - endpoint: "https://11.0.0.2/api/rest"
-    globalID: "PS000000000002"
+    globalID: "PSdecafc0ffee"
     username: "user"
     password: "password"
     skipCertificateValidation: true
@@ -180,7 +180,7 @@ kind: StorageClass
 metadata:
   name: powerstore-metro
 parameters:
-  arrayID: PS000000000001
+  arrayID: PSbadcafef00d
   replication.storage.dell.com/isReplicationEnabled: "true"
   replication.storage.dell.com/mode: METRO
   replication.storage.dell.com/remoteSystem: RT-D0002
@@ -198,7 +198,7 @@ kind: StorageClass
 metadata:
   name: powerstore-metro
 parameters:
-  arrayID: PS000000000001
+  arrayID: PSbadcafef00d
   replication.storage.dell.com/isReplicationEnabled: "true"
   replication.storage.dell.com/mode: METRO
   replication.storage.dell.com/remoteSystem: RT-D0002
