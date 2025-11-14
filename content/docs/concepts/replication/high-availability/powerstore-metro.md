@@ -201,7 +201,7 @@ terms listed under each optimization option.
 If nodes exist that are not part of `zone-a` and `zone-b`, but should still be connected to the PowerStore systems, they can be added under the
 `hostConnectivity.local` field.
 
-The `nodeSelectorTerms` below match all nodes that do not have the `zone-a` or `zone-b` label values for the `toplogy.kubernetes.io/zone` label key.
+The `nodeSelectorTerms` below match all nodes that do not have the `zone-a` or `zone-b` label values for the `topology.kubernetes.io/zone` label key.
 ```yaml
 # secret.yaml
 arrays:
