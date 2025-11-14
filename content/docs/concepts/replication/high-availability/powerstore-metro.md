@@ -184,6 +184,79 @@ arrays:
                     - "zone-ab"
 ```
 
+This example demonstrates how to register additional nodes with a local-only host configuration.
+Similar to the previous examples, the nodes in `zone-a` and `zone-b` will be registered with each PowerStore system using the node selector
+terms listed under each optimization option.
+
+If nodes exist that are not part of `zone-a` and `zone-b`, but should still be connected to the PowerStore systems, they can be added under the
+`hostConnectivity.local` field.
+
+The `nodeSelectorTerms` below match all nodes that do not have the `zone-a` or `zone-b` label values for the `toplogy.kubernetes.io/zone` label key.
+```yaml
+# secret.yaml
+arrays:
+  - endpoint: "https://11.0.0.1/api/rest"
+    globalID: "PSbadcafef00d"
+    username: "user"
+    password: "password"
+    skipCertificateValidation: true
+    blockProtocol: "FC"
+    hostConnectivity:
+      local:
+        nodeSelectorTerms:
+          - matchExpressions:
+              - key: "topology.kubernetes.io/zone"
+                operator: "NotIn"
+                values:
+                  - "zone-a"
+                  - "zone-b"
+      metro:
+        colocatedLocal:
+          nodeSelectorTerms:
+            - matchExpressions:
+                - key: "topology.kubernetes.io/zone"
+                  operator: "In"
+                  values:
+                    - "zone-a"
+        colocatedRemote:
+          nodeSelectorTerms:
+            - matchExpressions:
+                - key: "topology.kubernetes.io/zone"
+                  operator: "In"
+                  values:
+                    - "zone-b"
+  - endpoint: "https://11.0.0.2/api/rest"
+    globalID: "PSdecafc0ffee"
+    username: "user"
+    password: "password"
+    skipCertificateValidation: true
+    blockProtocol: "FC"
+    hostConnectivity:
+      local:
+        nodeSelectorTerms:
+          - matchExpressions:
+              - key: "topology.kubernetes.io/zone"
+                operator: "NotIn"
+                values:
+                  - "zone-a"
+                  - "zone-b"
+      metro:
+        colocatedLocal:
+          nodeSelectorTerms:
+            - matchExpressions:
+                - key: "topology.kubernetes.io/zone"
+                  operator: "In"
+                  values:
+                    - "zone-b"
+        colocatedRemote:
+          nodeSelectorTerms:
+            - matchExpressions:
+                - key: "topology.kubernetes.io/zone"
+                  operator: "In"
+                  values:
+                    - "zone-a"
+```
+
 
 ## StorageClass
 The Metro replicated volumes are created just like the normal volumes, but the `StorageClass` contains some
