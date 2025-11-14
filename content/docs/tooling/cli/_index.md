@@ -97,7 +97,7 @@ Installs Dell CSI Powerstore
       --csm-authorization-proxy-hostname string   Optional. If deploying CSM Authorization, this parameter will be used for the Authorization Proxy hostname in the Operator configuration.
       --force                                     Optional. If set, the existing Container Storage Module resources are deleted and then recreated.
   -F, --from-file string                          Path to a YAML file containing configuration details for installing the CSI driver
-      --machineconfig                             Optional. If set, MachineConfig is generated for pre-requisities based on the provided --block-protocol parameter.
+      --machineconfig                             Optional. If set, MachineConfig is generated for pre-requisities based on the provided block-protocol parameter.
       --modules stringArray                       List of Container Storage Modules modules to install. Supported modules are: replication, authorization, observability, resiliency.
   -n, --namespace string                          Namespace to install into (lowercase alphanumeric, may include dashes, must start/end with alphanumeric)
       --operator-install                          Optional. If set, Container Storage Modules Custom Resource Definitions will be installed.
@@ -110,7 +110,18 @@ Installs Dell CSI Powerstore
       --validate-connectivity                     Optional. If set, run a DaemonSet on all nodes and verify connectivity to storage systems.
 ```
 
->NOTE: `--machineconfig` is applicable for both OpenShift and Kubernetes.
+>**NOTE:** `--machineconfig` is applicable for both OpenShift and Kubernetes.
+>
+> **DEFAULTS**:
+>
+> | Setting            | Value      |
+> |--------------------|-----------|
+> | block-protocol     | FC        |
+> | fsType             | ext4      |
+> | reclaimPolicy      | Delete    |
+> | volumeBindingMode  | Immediate |
+> | csi-volume-prefx   | csivol    |
+> | csi-node-prefix    | csi-node  |
 
 ##### Examples:
 
