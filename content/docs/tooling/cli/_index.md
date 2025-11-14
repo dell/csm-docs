@@ -11,6 +11,8 @@ This document outlines all dellctl commands, their intended use, options that ca
 | Command | Description |
 | - | - |
 | [dellctl](../cli/#dellctl) | dellctl is used to interact with Container Storage Modules |
+| [dellctl install](../cli/#dellctl-install) | Install a Dell CSI Driver |
+| [dellctl install powerstore](../cli/#dellctl-install-powerstore) | Install Dell CSI Powerstore |
 | [dellctl cluster](../cli/#dellctl-cluster) | Manipulate one or more k8s cluster configurations |
 | [dellctl cluster add](../cli/#dellctl-cluster-add) | Add a k8s cluster to be managed by dellctl |
 | [dellctl cluster remove](../cli/#dellctl-cluster-remove) | Removes a k8s cluster managed by dellctl |
@@ -56,6 +58,117 @@ dellctl is a CLI tool for managing Dell Container Storage Resources.
 ##### Output
 
 Outputs help text
+
+---
+
+### dellctl install
+
+Installs a Dell CSI Driver.
+
+##### Available Commands
+
+```bash
+  powerstore         Install the Dell CSI Powerstore driver
+```
+
+##### Flags
+
+```bash
+  -h, --help   help for install
+```
+
+##### Output
+
+Outputs help text
+
+---
+
+### dellctl install powerstore
+
+This command deploys the CSI PowerStore driver and optional modules in your Kubernetes or OpenShift environment. 
+
+##### Available Flags
+
+```bash
+      --certified                                   Optional. If set, the certified sample files pulling from registry.redhat.com are displayed instead of quay.io sample files.
+      --config-version <string>                     Optional version of Container Storage Modules to install. Defaults to the latest version.
+      --csi-node-prefix <string>                    Optional param to set the prefix for all CSI nodes provisioned by the driver. Defaults to 'csi-node'.
+      --csi-volume-prefix <string>                  Optional param to set the prefix for all CSI volumes provisioned by the driver. Defaults to 'csivol'.
+      --csm-authorization-proxy-hostname <string>   Optional. If deploying CSM Authorization, this parameter will be used for the Authorization Proxy hostname in the Operator configuration.
+      --force                                       Optional. If set, the existing Container Storage Module resources are deleted and then recreated.
+  -F, --from-file <string>                          Path to a YAML file containing configuration details for installing the CSI driver
+      --machineconfig                               Optional. If set, MachineConfig is generated for pre-requisities based on the provided block-protocol parameter.
+      --modules <stringArray>                       List of Container Storage Modules modules to install. Supported modules are: replication, authorization, observability, resiliency.
+  -n, --namespace <string>                          Namespace to install into (lowercase alphanumeric, may include dashes, must start/end with alphanumeric)
+      --operator-install                            Optional. If set, Container Storage Modules Custom Resource Definitions will be installed.
+  -o, --output                                      Output from dellctl install [command] [flags] command
+      --registry-url <string>                       Optional registry URL to use for images (must be a valid URL)
+      --skip-cert-validation-authz                  Skip certificate validation when connecting to your CSM Authorization proxy server.
+      --snapshot-controller                         Optional. If set, Snapshot CRDs and controller yaml are generated.
+  -s, --storage <stringArray>                       Storage endpoint configuration in the form 'endpoint=<IP|hostname>,username=<user>[,otherKey=otherValue]'. Can be provided multiple times.
+      --tenant-token <string>                       Path to a YAML file containing Authorization tenant token (proxy-authz-token secret).
+      --validate-connectivity                       Optional. If set, run a DaemonSet on all nodes and verify connectivity to storage systems.
+```
+
+>**NOTE:** `--machineconfig` is applicable for both OpenShift and Kubernetes.
+>
+> **DEFAULTS**:
+>
+> | Setting            | Value      |
+> |:-------------------|:----------|
+> | block-protocol     | FC        |
+> | fsType             | ext4      |
+> | reclaimPolicy      | Delete    |
+> | volumeBindingMode  | Immediate |
+> | csi-volume-prefx   | csivol    |
+> | csi-node-prefix    | csi-node  |
+
+##### Examples:
+
+```bash
+dellctl install powerstore --machineconfig --validate-connectivity \
+                           --storage "endpoint=10.0.0.1,username=username" \
+                           --storage "endpoint=10.0.0.2,username=username"
+```
+
+```bash
+dellctl install powerstore --from-file=config.yaml
+```
+
+Sample config.yaml to install pre-requisities and validate connectivity:
+
+```
+# Global Driver parameters
+namespace: powerstore
+operator-install: true
+machineconfig: true
+validate-connectivity: true
+ 
+# Parameters for each PowerStore system
+storage:
+  - endpoint: 10.0.0.1
+    username: user
+    block-protocol: FC
+  - endpoint: 10.0.0.2
+    username: user
+    block-protocol: FC
+```
+
+Sample config.yaml to to output yaml:
+
+```
+# Global Driver parameters
+namespace: powerstore
+output: true
+operator-install: true
+ 
+# Parameters for each PowerStore system
+storage:
+  - endpoint: 10.0.0.1
+    username: user
+  - endpoint: 10.0.0.2
+    username: user
+```
 
 ---
 
