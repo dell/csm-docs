@@ -304,7 +304,7 @@ arrays:
 The Metro replicated volumes are created just like the normal volumes, but the `StorageClass` contains some
 extra parameters related to metro replication. A `StorageClass` to create metro replicated volumes may look as follows:
 
-Example using`volumeBindingMode: Immediate`
+Example using `volumeBindingMode: Immediate`
 
 ```yaml
 apiVersion: storage.k8s.io/v1
