@@ -257,6 +257,48 @@ arrays:
                     - "zone-a"
 ```
 
+### Non-Uniform Metro
+Use the `hostConnectivity.local` field to configure host connectivity for non-uniform metro.
+
+#### Examples: Non-Uniform Metro
+There are two PowerStore systems and two zones — `zone-a` and `zone-b`.
+
+Using the secret below, nodes in `zone-a` will only be registered with PowerStore `PSbadcafef00d`, and nodes in `zone-b` will
+only be registered with PowerStore `PSdecafc0ffee`.
+
+`Zone-a` nodes will have no connection to `PSdecafc0ffee` and `zone-b` nodes will have no connection to `PSbadcafef00d`.
+```yaml
+# secret.yaml
+arrays:
+  - endpoint: "https://11.0.0.1/api/rest"
+    globalID: "PSbadcafef00d"
+    username: "user"
+    password: "password"
+    skipCertificateValidation: true
+    blockProtocol: "ISCSI"
+    hostConnectivity:
+      local:
+        nodeSelectorTerms:
+          - matchExpressions:
+              - key: "topology.kubernetes.io/zone"
+                operator: "In"
+                values:
+                  - "zone-a"
+  - endpoint: "https://11.0.0.2/api/rest"
+    globalID: "PSdecafc0ffee"
+    username: "user"
+    password: "password"
+    skipCertificateValidation: true
+    blockProtocol: "ISCSI"
+    hostConnectivity:
+      local:
+        nodeSelectorTerms:
+          - matchExpressions:
+              - key: "topology.kubernetes.io/zone"
+                operator: "In"
+                values:
+                  - "zone-b"
+```
 
 ## StorageClass
 The Metro replicated volumes are created just like the normal volumes, but the `StorageClass` contains some
