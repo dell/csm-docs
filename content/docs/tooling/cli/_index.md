@@ -135,74 +135,39 @@ dellctl install powerstore --machineconfig --validate-connectivity \
 dellctl install powerstore --from-file=config.yaml
 ```
 
-Sample config.yaml:
+Sample config.yaml to install pre-requisities and validate connectivity:
 
 ```
+# Global Driver parameters
 namespace: powerstore
-config-version: 1.16.0
-csi-volume-prefix: myvol
-csi-node-prefix: nodepre
 operator-install: true
-output: false
-force: false
 machineconfig: true
-snapshot-controller: true
 validate-connectivity: true
-registry-url: my.registry.com:5000/dell/csm
-modules: replication, authorization, observability, resiliency
+ 
+# Parameters for each PowerStore system
 storage:
   - endpoint: 10.0.0.1
     username: user
     block-protocol: FC
-    nfs-acls: 777
-    skip-certificate-validation: true
-    storage-class:
-      - fsType: ext4
-        reclaimPolicy: Delete
-        volumeBindingMode: WaitForFirstConsumer
-        allowVolumeExpansion: true
-        allowedTopologies:
-          - key: csi-powerstore.dellemc.com/10.0.0.1-fc
-            values:
-              - true
-    metro-replication:
-      - type: Uniform
-        remote: REMOTE-SYSTEM-2
-        labels:
-        - label1: value1
-        - label2: value2
-    include-nas-servers:
-    - nas-1
-    exclude-nas-servers:
-    - nas-2
   - endpoint: 10.0.0.2
     username: user
     block-protocol: FC
-    nfs-acls: 777
-    skip-certificate-validation: true
-    storage-class:
-      - fsType: xfs
-        reclaimPolicy: Delete
-        volumeBindingMode: Immediate
-        allowVolumeExpansion: true
-        allowedTopologies:
-          - key: csi-powerstore.dellemc.com/10.0.0.2-fc
-            values:
-              - true
-    metro-replication:
-      - type: Uniform
-        remote: REMOTE-SYSTEM-2
-        labels:
-        - label1: value1
-        - label2: value2
-    include-nas-servers:
-    - nas-3
-    exclude-nas-servers:
-    - nas-4
-authorization:
-  authorizationProxyHostname: csm-authorization.com
-  tenantTokenPath: /tmp/token.yaml
-  skipCertificateValidation: true
+```
+
+Sample config.yaml to to output yaml:
+
+```
+# Global Driver parameters
+namespace: powerstore
+output: true
+operator-install: true
+ 
+# Parameters for each PowerStore system
+storage:
+  - endpoint: 10.0.0.1
+    username: user
+  - endpoint: 10.0.0.2
+    username: user
 ```
 
 ---
