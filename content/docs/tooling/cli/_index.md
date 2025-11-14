@@ -110,6 +110,8 @@ Installs Dell CSI Powerstore
       --validate-connectivity                     Optional. If set, run a DaemonSet on all nodes and verify connectivity to storage systems.
 ```
 
+>NOTE: `--machineconfig` is applicable for both OpenShift and Kubernetes.
+
 Sample --from-file yaml:
 
 ```
