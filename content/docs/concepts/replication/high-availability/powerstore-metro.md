@@ -25,17 +25,21 @@ The creation of volumes in metro mode doesn't involve the replication sidecar or
 ## Host Registration
 > {{< message text="18" >}}
 
-PowerStore optimizes metro data paths by providing configuration options to describe the host's location in relation to the PowerStore system.
+PowerStore optimizes metro data paths by providing configuration options to describe the host's location relative to the PowerStore system.
 
-The driver determines which optimization to use by comparing node labels against
-node selector statements (`nodeSelectorTerms`) specified for a Host Connectivity option.
+The csi-powerstore driver determines which optimization to use by iterating over a set of Host Connectivity options and comparing node labels against
+the user-configured node selector statements (`nodeSelectorTerms`).
 
+On driver startup, if a node's labels satisfy the selector terms for a Host Connectivity option, a host will be registered for the node. Nodes
+that do not match any of the `nodeSelectorTerms` will remain unregistered.
+
+### Secret Configuration
 To utilize this feature:
 - Add labels to the cluster nodes, or make note of existing node labels, that describe the topology between the cluster nodes and the PowerStore arrays.
-- For each desired optimization option, create a set of `nodeSelectorTerms` to describe a set of nodes.
-- Add these `nodeSelectorTerms` to the secret.yaml to be used to generate the `powerstore-config` Secret.
+- For each desired Host Connectivity option, create a set of `nodeSelectorTerms` to describe a set of nodes.
+- Update the secret.yaml file used to generate the `powerstore-config` Secret.
 
-On driver startup, if a node's labels satisfy the selector terms for an optimization option, a host will be registered for the node.
+Below are some examples that demonstrate what `nodeSelectorTerms` might look like for different metro topologies.
 
 `nodeSelectorTerms` follow Kubernetes' Node Affinity format -- `requiredDuringSchedulingIgnoredDuringExecution`. For more information, see
 [Assigning Pods to Nodes: Node Affinity](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#node-affinity), and for the full API
@@ -54,10 +58,12 @@ Use the `hostConnectivity.metro` field to configure host connectivity for unifor
 - `colocatedRemote`: The worker node is located near the replication target of the current PowerStore system.
 - `colocatedBoth`: The worker node is located near both the current PowerStore system and its replication pair.
 
-If local, non-metro hosts are required alongside uniform metro hosts, use the `hostConnectivity.local` field to specify a set of label expressions
-that describe nodes whose host should be registered with this PowerStore, without optimization.
+> **Note:** If local, non-metro hosts are required alongside uniform metro hosts, use the `hostConnectivity.local` field to specify a set of label expressions
+> that describe nodes whose host should be registered with this PowerStore, without optimization.
 
 #### Examples: Uniform Metro
+
+##### Two-Site Metro
 There are two PowerStore systems and two zones — `zone-a` and `zone-b`
 Nodes in the first zone are labeled `topology.kubernetes.io/zone: zone-a`, and Nodes in the second zone are labeled `topology.kubernetes.io/zone: zone-b`.
 
@@ -113,6 +119,7 @@ arrays:
                     - "zone-a"
 ```
 
+##### Three-Site Metro
 There are two PowerStore systems and three zones — `zone-a`, `zone-b`, and `zone-ab`.
 
 Nodes in zone-a are labeled `topology.kubernetes.io/zone: zone-a`, nodes in zone-b are labeled `topology.kubernetes.io/zone: zone-b`, and
@@ -186,6 +193,7 @@ arrays:
                     - "zone-ab"
 ```
 
+##### Two-Site Metro with Additional Local Hosts
 This example demonstrates how to register additional nodes with a local-only host configuration.
 Similar to the previous examples, the nodes in `zone-a` and `zone-b` will be registered with each PowerStore system using the node selector
 terms listed under each optimization option.
@@ -263,6 +271,8 @@ arrays:
 Use the `hostConnectivity.local` field to configure host connectivity for non-uniform metro.
 
 #### Examples: Non-Uniform Metro
+
+##### Two-Site Non-Uniform Metro
 There are two PowerStore systems and two zones — `zone-a` and `zone-b`.
 
 Using the secret below, nodes in `zone-a` will only be registered with PowerStore `PSbadcafef00d`, and nodes in `zone-b` will
@@ -301,6 +311,7 @@ arrays:
                 values:
                   - "zone-b"
 ```
+
 ----------------
 
 ## StorageClass
