@@ -207,6 +207,30 @@ authorization:
 
 ---
 
+### dellctl cluster
+
+Allows you to manipulate one or more k8s cluster configurations
+
+##### Available Commands
+
+```bash
+  add         Adds a k8s cluster to be managed by dellctl
+  remove      Removes a k8s cluster managed by dellctl
+  get         List all clusters currently being managed by dellctl  
+```
+
+##### Flags
+
+```bash
+  -h, --help   help for cluster  
+```
+
+##### Output
+
+Outputs help text
+
+---
+
 ### dellctl cluster add
 
 Add one or more k8s clusters to be managed by dellctl
