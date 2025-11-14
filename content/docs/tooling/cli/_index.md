@@ -85,29 +85,29 @@ Outputs help text
 
 ### dellctl install powerstore
 
-Installs Dell CSI Powerstore 
+This command deploys the CSI PowerStore driver and optional modules in your Kubernetes or OpenShift environment. 
 
-##### Flags
+##### Available Flags
 
 ```bash
-      --certified                                 Optional. If set, the certified sample files pulling from registry.redhat.com are displayed instead of quay.io sample files.
-      --config-version string                     Optional version of Container Storage Modules to install. Defaults to the latest version.
-      --csi-node-prefix string                    Optional param to set the prefix for all CSI nodes provisioned by the driver. Defaults to 'csi-node'.
-      --csi-volume-prefix string                  Optional param to set the prefix for all CSI volumes provisioned by the driver. Defaults to 'csivol'.
-      --csm-authorization-proxy-hostname string   Optional. If deploying CSM Authorization, this parameter will be used for the Authorization Proxy hostname in the Operator configuration.
-      --force                                     Optional. If set, the existing Container Storage Module resources are deleted and then recreated.
-  -F, --from-file string                          Path to a YAML file containing configuration details for installing the CSI driver
-      --machineconfig                             Optional. If set, MachineConfig is generated for pre-requisities based on the provided block-protocol parameter.
-      --modules stringArray                       List of Container Storage Modules modules to install. Supported modules are: replication, authorization, observability, resiliency.
-  -n, --namespace string                          Namespace to install into (lowercase alphanumeric, may include dashes, must start/end with alphanumeric)
-      --operator-install                          Optional. If set, Container Storage Modules Custom Resource Definitions will be installed.
-  -o, --output                                    Output from dellctl install [command] [flags] command
-      --registry-url string                       Optional registry URL to use for images (must be a valid URL)
-      --skip-cert-validation-authz                Skip certificate validation when connecting to your CSM Authorization proxy server.
-      --snapshot-controller                       Optional. If set, Snapshot CRDs and controller yaml are generated.
-  -s, --storage stringArray                       Storage endpoint configuration in the form 'endpoint=<IP|hostname>,username=<user>[,otherKey=otherValue]'. Can be provided multiple times.
-      --tenant-token string                       Path to a YAML file containing Authorization tenant token (proxy-authz-token secret).
-      --validate-connectivity                     Optional. If set, run a DaemonSet on all nodes and verify connectivity to storage systems.
+      --certified                                   Optional. If set, the certified sample files pulling from registry.redhat.com are displayed instead of quay.io sample files.
+      --config-version <string>                     Optional version of Container Storage Modules to install. Defaults to the latest version.
+      --csi-node-prefix <string>                    Optional param to set the prefix for all CSI nodes provisioned by the driver. Defaults to 'csi-node'.
+      --csi-volume-prefix <string>                  Optional param to set the prefix for all CSI volumes provisioned by the driver. Defaults to 'csivol'.
+      --csm-authorization-proxy-hostname <string>   Optional. If deploying CSM Authorization, this parameter will be used for the Authorization Proxy hostname in the Operator configuration.
+      --force                                       Optional. If set, the existing Container Storage Module resources are deleted and then recreated.
+  -F, --from-file <string>                          Path to a YAML file containing configuration details for installing the CSI driver
+      --machineconfig                               Optional. If set, MachineConfig is generated for pre-requisities based on the provided block-protocol parameter.
+      --modules <stringArray>                       List of Container Storage Modules modules to install. Supported modules are: replication, authorization, observability, resiliency.
+  -n, --namespace <string>                          Namespace to install into (lowercase alphanumeric, may include dashes, must start/end with alphanumeric)
+      --operator-install                            Optional. If set, Container Storage Modules Custom Resource Definitions will be installed.
+  -o, --output                                      Output from dellctl install [command] [flags] command
+      --registry-url <string>                       Optional registry URL to use for images (must be a valid URL)
+      --skip-cert-validation-authz                  Skip certificate validation when connecting to your CSM Authorization proxy server.
+      --snapshot-controller                         Optional. If set, Snapshot CRDs and controller yaml are generated.
+  -s, --storage <stringArray>                       Storage endpoint configuration in the form 'endpoint=<IP|hostname>,username=<user>[,otherKey=otherValue]'. Can be provided multiple times.
+      --tenant-token <string>                       Path to a YAML file containing Authorization tenant token (proxy-authz-token secret).
+      --validate-connectivity                       Optional. If set, run a DaemonSet on all nodes and verify connectivity to storage systems.
 ```
 
 >**NOTE:** `--machineconfig` is applicable for both OpenShift and Kubernetes.
@@ -115,7 +115,7 @@ Installs Dell CSI Powerstore
 > **DEFAULTS**:
 >
 > | Setting            | Value      |
-> |--------------------|-----------|
+> |:-------------------|:----------|
 > | block-protocol     | FC        |
 > | fsType             | ext4      |
 > | reclaimPolicy      | Delete    |
