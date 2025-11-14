@@ -23,35 +23,47 @@ The creation of volumes in metro mode doesn't involve the replication sidecar or
 ## Host Registration
 > {{< message text="18" >}}
 
-PowerStore supports optimized metro data paths by registering hosts based on their location relative to PowerStore systems.
+PowerStore optimizes metro data paths by providing configuration options to describe the host's location in relation to the PowerStore system.
 
-The driver determines which optimization to use by comparing node labels against user-provided,
-node selector statements specified for a Host Connectivity optimization.
+The driver determines which optimization to use by comparing node labels against
+node selector statements (`nodeSelectorTerms`) specified for a Host Connectivity option.
 
-**Host Connectivity options:**
-- `colocatedLocal`: The worker node is located near the current PowerStore system.
-- `colocatedRemote`: The worker node is located near the replication target of the current PowerStore system.
-- `colocatedBoth`: The worker node is located near both the current PowerStore system and its replication pair.
+To utilize this feature:
+- Add labels to the cluster nodes, or make note of existing node labels, that describe the topology between the cluster nodes and the PowerStore arrays.
+- For each desired optimization option, create a set of `nodeSelectorTerms` to describe a set of nodes.
+- Add these `nodeSelectorTerms` to the secret.yaml to be used to generate the `powerstore-config` Secret.
 
-To enable this feature, add labels to the cluster nodes, or make note of existing node labels, that describe the desired topology,
-and use these labels to build node selector statements (`nodeSelectorTerms`) for the provided Host Connectivity options under `hostConnectivity.metro`.
-If the node labels satisfy the selector terms, a host will be registered for the node using the corresponding metro optimization.
+On driver startup, if a node's labels satisfy the selector terms for an optimization option, a host will be registered for the node.
 
 `nodeSelectorTerms` follow Kubernetes' Node Affinity format -- `requiredDuringSchedulingIgnoredDuringExecution`. For more information, see
 [Assigning Pods to Nodes: Node Affinity](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#node-affinity), and for the full API
 specification, see [Pod: NodeAffinity](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#NodeAffinity).
 
 > **Note:**
-> For all Host Connectivity options, for each `arrays` entry, `nodeSelectorTerms` should be mutually exclusive in the set of nodes the selectors match.
+> For all Host Connectivity options, for each item under `arrays`, `nodeSelectorTerms` should be mutually exclusive in the set of nodes the selectors match.
 > In other words, there should be no overlap in the nodes each `nodeSelectorTerms` matches.
-> If a node matches more than one connectivity option as defined by `nodeSelectorTerms`,
-> the driver will error and fail to register the host for the node.
+> Host registration behavior is undefined for a node that matches more than one of the provided `nodeSelectorTerms`.
 
-_Example:_
-There are two zones and two PowerStore systems, where the PowerStore systems have been configured for metro replication.
-Zone-a has worker nodes co-located with array "PS000000000001", and zone-b has worker nodes co-located with array "PS000000000002".
-Nodes in zone-a are labeled `topology.kubernetes.io/zone: zone-a`, and Nodes in zone-b are labeled `topology.kubernetes.io/zone: zone-b`.
+### Uniform Metro
+Use the `hostConnectivity.metro` field to configure host connectivity for uniform metro.
+
+**Host Connectivity Options:**
+- `colocatedLocal`: The worker node is located near the current PowerStore system.
+- `colocatedRemote`: The worker node is located near the replication target of the current PowerStore system.
+- `colocatedBoth`: The worker node is located near both the current PowerStore system and its replication pair.
+
+If local, non-metro hosts are required alongside uniform metro hosts, use the `hostConnectivity.local` field to specify a set of label expressions
+that describe nodes whose host should be registered with this PowerStore, without optimization.
+
+#### Examples: Uniform Metro
+There are two PowerStore systems and two zones — `zone-a` and `zone-b`
+Nodes in the first zone are labeled `topology.kubernetes.io/zone: zone-a`, and Nodes in the second zone are labeled `topology.kubernetes.io/zone: zone-b`.
+
+Using the configuration below:
+- Nodes in `zone-a` will be registered as "co-located local" with PowerStore `PSbadcafef00d` and "co-located remote" with PowerStore `PSdecafc0ffee`.
+- Nodes in `zone-b` will be registered as "co-located remote" with PowerStore `PSbadcafef00d` and "co-located local" with PowerStore `PSdecafc0ffee`.
 ```yaml
+# secret.yaml
 arrays:
   - endpoint: "https://11.0.0.1/api/rest"
     globalID: "PSbadcafef00d"
@@ -99,13 +111,18 @@ arrays:
                     - "zone-a"
 ```
 
-_Example:_
-There are two PowerStore systems and three zones — zone-a, zone-b, and zone-ab.
-Zone-a has worker nodes co-located with array "PS000000000001", and zone-b has worker nodes co-located with array "PS000000000002".
-The third zone, zone-ab, requires access to both PowerStore arrays.
+There are two PowerStore systems and three zones — `zone-a`, `zone-b`, and `zone-ab`.
+
 Nodes in zone-a are labeled `topology.kubernetes.io/zone: zone-a`, nodes in zone-b are labeled `topology.kubernetes.io/zone: zone-b`, and
 nodes in zone-ab are labeled `topology.kubernetes.io/zone: zone-ab`.
+
+This example is similar to the example above, but adds a third zone that sits between the two existing zones. This new zone, `zone-ab`, requires access to both
+PowerStore systems.
+
+Using the configuration below, nodes in `zone-a` and `zone-b` will be registered with the PowerStore systems as described in the previous example, but
+nodes in `zone-ab` will be registered as "co-located both" with both the `PSbadcafef00d` and `PSdecafc0ffee` PowerStore systems.
 ```yaml
+# secret.yaml
 arrays:
   - endpoint: "https://11.0.0.1/api/rest"
     globalID: "PSbadcafef00d"
