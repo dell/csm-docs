@@ -84,7 +84,7 @@ Installs a Dell CSI Driver.
 | from-file <string>                        | Path to a YAML file containing configuration details for installing the CSM.  | No |
 | machineconfig                             | Configure pre-requisities based on the provided block-protocol parameter.  | No |
 | modules <stringArray>                     | Container Storage Modules modules to install. Supported modules are: replication, authorization, observability, resiliency.  | No |
-| namespace <string>                        | Namespace to install into (lowercase alphanumeric, may include dashes, must start/end with alphanumeric).  | No |
+| namespace <string>                        | Namespace to install into (lowercase alphanumeric, may include dashes, must start/end with alphanumeric).  | Yes |
 | operator-install                          | Container Storage Modules Custom Resource Definitions will be installed.  | No |
 | output                                    | Output from dellctl install.  | No |
 | registry-url <string>                     | Registry URL to use for images.  | No |
@@ -122,7 +122,7 @@ This command deploys the CSI PowerStore driver and optional modules in your Kube
 ##### Examples:
 
 ```bash
-dellctl install powerstore --machineconfig --validate-connectivity \
+dellctl install powerstore --machineconfig --validate-connectivity --namespace=powerstore \
                            --storage "endpoint=10.0.0.1,username=username" \
                            --storage "endpoint=10.0.0.2,username=username"
 ```
