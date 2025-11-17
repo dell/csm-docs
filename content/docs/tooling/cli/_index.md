@@ -90,7 +90,7 @@ Installs a Dell CSI Driver.
 | registry-url <string>                     | Registry URL to use for images.  | No |
 | skip-cert-validation-authz                | Skip certificate validation when connecting to the CSM Authorization proxy server.  | No |
 | snapshot-controller                       | Configure snapshot CRDs and controller.  | No |
-| --storage <stringArray>                   | Storage endpoint configuration in the form 'endpoint=<IP\|hostname>,username=<user>[,otherKey=otherValue]'. Can be provided multiple times.  | Yes |
+| storage <stringArray>                   | Storage endpoint configuration in the form 'endpoint=<IP\|hostname>,username=<user>[,otherKey=otherValue]'. Can be provided multiple times.  | Yes |
 | tenant-token                              | Path to a YAML file containing Authorization tenant token (proxy-authz-token secret).  | No |
 | validate-connectivity                     | Run a DaemonSet on all nodes to verify connectivity to storage systems.  | No |
 
