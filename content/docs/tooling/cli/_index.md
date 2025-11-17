@@ -11,8 +11,8 @@ This document outlines all dellctl commands, their intended use, options that ca
 | Command | Description |
 | - | - |
 | [dellctl](../cli/#dellctl) | dellctl is used to interact with Container Storage Modules |
-| [dellctl install](../cli/#dellctl-install) | Install a Dell CSI Driver |
-| [dellctl install powerstore](../cli/#dellctl-install-powerstore) | Install Dell CSI Powerstore |
+| [dellctl install](../cli/#dellctl-install) | Install a CSI Driver |
+| [dellctl install powerstore](../cli/#dellctl-install-powerstore) | Install CSI Powerstore |
 | [dellctl cluster](../cli/#dellctl-cluster) | Manipulate one or more k8s cluster configurations |
 | [dellctl cluster add](../cli/#dellctl-cluster-add) | Add a k8s cluster to be managed by dellctl |
 | [dellctl cluster remove](../cli/#dellctl-cluster-remove) | Removes a k8s cluster managed by dellctl |
