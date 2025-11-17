@@ -799,10 +799,10 @@ The user can also set the volume limit for all the nodes in the cluster by speci
 >**NOTE:** <br>To reflect the changes after setting the value either via node label or in values.yaml file, user has to bounce the driver controller and node pods using the command `kubectl get pods -n vxflexos --no-headers=true | awk '/vxflexos-/{print $1}'| xargs kubectl delete -n vxflexos pod`. <br><br> If the value is set both by node label and values.yaml file then node label value will get the precedence and user has to remove the node label in order to reflect the values.yaml value. <br><br>The default value of `maxVxflexosVolumesPerNode` is 0. <br><br>If `maxVxflexosVolumesPerNode` is set to zero, then Container Orchestration decides how many volumes of this type can be published by the controller to the node.<br><br>The volume limit specified to `maxVxflexosVolumesPerNode` attribute is applicable to all the nodes in the cluster for which node label `max-vxflexos-volumes-per-node` is not set.
 
 ## NFS volume support
-Starting with version 2.8, the CSI driver for PowerFlex will support NFS volumes for PowerFlex storage systems version 4.0.x.
 
 > ℹ️ **NOTE:** :
-> Starting from Container Storage Modules 1.11.0, the CSI-PowerFlex driver will automatically round up NFS volume sizes to a minimum of 3GB if a smaller size is requested. This change prevents backend errors and ensures compatibility.
+> * From PowerFlex CSI driver version 2.8, NFS volumes are supported on PowerFlex 4.0.x systems. This feature is not available on PowerFlex version 5.0
+> * Starting from Container Storage Modules 1.11.0, the CSI-PowerFlex driver will automatically round up NFS volume sizes to a minimum of 3GB if a smaller size is requested. This change prevents backend errors and ensures compatibility.
 
 CSI driver will support following operations for NFS volumes:
 
