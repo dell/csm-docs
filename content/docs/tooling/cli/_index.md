@@ -131,8 +131,7 @@ dellctl install powerstore --machineconfig --validate-connectivity \
 dellctl install powerstore --from-file=config.yaml
 ```
 
-Sample config.yaml to install pre-requisities and validate connectivity:
-
+{{< collapse id="1" title="Sample config.yaml to install pre-requisities and validate connectivity" card="false" >}}
 ```
 # Global Driver parameters
 namespace: powerstore
@@ -144,14 +143,12 @@ validate-connectivity: true
 storage:
   - endpoint: 10.0.0.1
     username: user
-    block-protocol: FC
   - endpoint: 10.0.0.2
     username: user
-    block-protocol: FC
 ```
+{{< /collapse >}}
 
-Sample config.yaml to to output yaml:
-
+{{< collapse id="2" title="Sample config.yaml to to output yaml" card="false" >}}
 ```
 # Global Driver parameters
 namespace: powerstore
@@ -165,6 +162,65 @@ storage:
   - endpoint: 10.0.0.2
     username: user
 ```
+{{< /collapse >}}
+
+{{< collapse id="3" title="Sample config.yaml with all configuration options" card="false" >}}
+```
+# Global Driver parameters
+namespace: powerstore
+config-version: 1.16.0
+csi-volume-prefix: myvol
+csi-node-prefix: nodepre
+operator-install: true
+machineconfig: true
+snapshot-controller: true
+validate-connectivity: true
+registry-url: my.registry.com:5000/dell/csm
+modules: replication,authorization,observability, resiliency
+ 
+# Parameters for each PowerStore system
+storage:
+  - endpoint: 10.0.0.1
+    username: user
+    block-protocol: FC
+    nfs-acls: 0777
+    skip-certificate-validation: true
+    storage-class:
+      - fsType: ext4
+        reclaimPolicy: Delete
+        volumeBindingMode: WaitForFirstConsumer
+        allowVolumeExpansion: true
+        allowedTopologies:
+          - key: value
+    metro-replication:
+      - type: Uniform
+        remote: REMOTE-SYSTEM-2
+        labels:
+          - label1: value1
+          - label2: value2
+    include-nas-servers:
+      - nas-1
+    exclude-nas-servers:
+      - nas-2
+ 
+  - endpoint: 10.0.0.2
+    username: user
+    block-protocol: FC
+    nfs-acls: 0777
+    skip-certificate-validation: false
+    storage-class:
+      - fsType: xfs
+        reclaimPolicy: Delete
+        volumeBindingMode: Immediate
+        allowVolumeExpansion: true
+        allowedTopologies:
+          - key: value
+    include-nas-servers:
+      - nas-3
+    exclude-nas-servers:
+      - nas-4
+```
+{{< /collapse >}}
 
 ---
 
