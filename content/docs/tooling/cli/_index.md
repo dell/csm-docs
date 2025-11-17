@@ -71,44 +71,30 @@ Installs a Dell CSI Driver.
   powerstore         Install the Dell CSI Powerstore driver
 ```
 
-##### Flags
-
-```bash
-  -h, --help   help for install
-```
-
-##### Output
-
-Outputs help text
-
----
-
-### dellctl install powerstore
-
-This command deploys the CSI PowerStore driver and optional modules in your Kubernetes or OpenShift environment. 
-
 ##### Available Flags
 
-```bash
-      --certified                                   Optional. If set, the certified sample files pulling from registry.redhat.com are displayed instead of quay.io sample files.
-      --config-version <string>                     Optional version of Container Storage Modules to install. Defaults to the latest version.
-      --csi-node-prefix <string>                    Optional param to set the prefix for all CSI nodes provisioned by the driver. Defaults to 'csi-node'.
-      --csi-volume-prefix <string>                  Optional param to set the prefix for all CSI volumes provisioned by the driver. Defaults to 'csivol'.
-      --csm-authorization-proxy-hostname <string>   Optional. If deploying CSM Authorization, this parameter will be used for the Authorization Proxy hostname in the Operator configuration.
-      --force                                       Optional. If set, the existing Container Storage Module resources are deleted and then recreated.
-  -F, --from-file <string>                          Path to a YAML file containing configuration details for installing the CSI driver
-      --machineconfig                               Optional. If set, MachineConfig is generated for pre-requisities based on the provided block-protocol parameter.
-      --modules <stringArray>                       List of Container Storage Modules modules to install. Supported modules are: replication, authorization, observability, resiliency.
-  -n, --namespace <string>                          Namespace to install into (lowercase alphanumeric, may include dashes, must start/end with alphanumeric)
-      --operator-install                            Optional. If set, Container Storage Modules Custom Resource Definitions will be installed.
-  -o, --output                                      Output from dellctl install [command] [flags] command
-      --registry-url <string>                       Optional registry URL to use for images (must be a valid URL)
-      --skip-cert-validation-authz                  Skip certificate validation when connecting to your CSM Authorization proxy server.
-      --snapshot-controller                         Optional. If set, Snapshot CRDs and controller yaml are generated.
-  -s, --storage <stringArray>                       Storage endpoint configuration in the form 'endpoint=<IP|hostname>,username=<user>[,otherKey=otherValue]'. Can be provided multiple times.
-      --tenant-token <string>                       Path to a YAML file containing Authorization tenant token (proxy-authz-token secret).
-      --validate-connectivity                       Optional. If set, run a DaemonSet on all nodes and verify connectivity to storage systems.
-```
+| Flag            | Description      | Mandatory |
+|:-------------------|:----------|:----------
+| certified                                 | The certified images from registry.connect.redhat.com are used instead of the quay.io images. | No |
+| config-version <string>                   | Version of Container Storage Modules to install. Defaults to the latest version.      | No |
+| csi-node-prefix <string>                  | The prefix for all CSI nodes provisioned by the driver. Defaults to 'csi-node'.    | No |
+| csi-volume-prefix <string>                | The prefix for all CSI volumes provisioned by the driver. Defaults to 'csivol'. | No |
+| csm-authorization-proxy-hostname <string> | If deploying CSM Authorization, the hostname of the Authorization Proxy Server.  | No |
+| force                                     | The existing Container Storage Module resources are deleted and then recreated.  | No |
+| from-file <string>                        | Path to a YAML file containing configuration details for installing the CSM.  | No |
+| machineconfig                             | Configure pre-requisities based on the provided block-protocol parameter.  | No |
+| modules <stringArray>                     | Container Storage Modules modules to install. Supported modules are: replication, authorization, observability, resiliency.  | No |
+| namespace <string>                        | Namespace to install into (lowercase alphanumeric, may include dashes, must start/end with alphanumeric).  | No |
+| operator-install                          | Container Storage Modules Custom Resource Definitions will be installed.  | No |
+| output                                    | Output from dellctl install.  | No |
+| registry-url <string>                     | Registry URL to use for images.  | No |
+| skip-cert-validation-authz                | Skip certificate validation when connecting to the CSM Authorization proxy server.  | No |
+| snapshot-controller                       | Configure snapshot CRDs and controller.  | No |
+| --storage <stringArray>                   | Storage endpoint configuration in the form 'endpoint=<IP|hostname>,username=<user>[,otherKey=otherValue]'. Can be provided multiple times.  | Yes |
+| tenant-token                              | Path to a YAML file containing Authorization tenant token (proxy-authz-token secret).  | No |
+| validate-connectivity                     | Run a DaemonSet on all nodes to verify connectivity to storage systems.  | No |
+
+&nbsp;
 
 >**NOTE:** `--machineconfig` is applicable for both OpenShift and Kubernetes.
 >
@@ -122,6 +108,16 @@ This command deploys the CSI PowerStore driver and optional modules in your Kube
 > | volumeBindingMode  | Immediate |
 > | csi-volume-prefx   | csivol    |
 > | csi-node-prefix    | csi-node  |
+
+##### Output
+
+Outputs help text
+
+---
+
+### dellctl install powerstore
+
+This command deploys the CSI PowerStore driver and optional modules in your Kubernetes or OpenShift environment. 
 
 ##### Examples:
 
