@@ -106,7 +106,7 @@ Installs a Dell CSI Driver.
 > | fsType             | ext4      |
 > | reclaimPolicy      | Delete    |
 > | volumeBindingMode  | Immediate |
-> | csi-volume-prefx   | csivol    |
+> | csi-volume-prefix   | csivol    |
 > | csi-node-prefix    | csi-node  |
 
 ##### Output
