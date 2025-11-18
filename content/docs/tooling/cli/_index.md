@@ -100,14 +100,24 @@ Installs a Dell CSI Driver and optionally installs protocol prerequisites and va
 >
 > **DEFAULTS**:
 >
-> | Setting            | Value      |
-> |:-------------------|:----------|
-> | block-protocol     | FC        |
-> | fsType             | ext4      |
-> | reclaimPolicy      | Delete    |
-> | volumeBindingMode  | Immediate |
-> | csi-volume-prefix   | csivol    |
-> | csi-node-prefix    | csi-node  |
+> | Setting                     | Value      |
+> |:----------------------------|:----------|
+> | block-protocol              | FC        |
+> | certified                   | false     |
+> | config-version              | latest CSM version |
+> | csi-node-prefix             | csi-node  |
+> | csi-volume-prefix           | csivol    |
+> | force                       | false    |
+> | machineconfig               | false    |
+> | fsType                      | ext4      |
+> | nfsAcls                     | 0777  |
+> | operator-install            | false  |
+> | output                      | false  |
+> | reclaimPolicy               | Delete    |
+> | skip-certificate-validation | false    |
+> | snapshot-controller         | false    |
+> | validate-connectivity       | false |
+> | volumeBindingMode           | Immediate |
 
 ##### Output
 
