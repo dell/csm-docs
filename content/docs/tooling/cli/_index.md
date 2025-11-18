@@ -96,7 +96,7 @@ Installs a Dell CSI Driver and optionally installs protocol prerequisites and va
 
 &nbsp;
 
->**NOTE:** `--machineconfig` is applicable for both OpenShift and Kubernetes.
+> **NOTE:** `--machineconfig` is applicable for both OpenShift and Kubernetes.
 >
 > **DEFAULTS**:
 >
@@ -118,6 +118,19 @@ Installs a Dell CSI Driver and optionally installs protocol prerequisites and va
 > | snapshot-controller         | false    |
 > | validate-connectivity       | false |
 > | volumeBindingMode           | Immediate |
+>
+> &nbsp;
+>
+> Some parameters are only supported per Powerstore system via `--from-file`. See [dellctl install powerstore](#dellctl-install-powerstore) for examples.
+> - block-protocol
+> - include-nas-servers
+> - exclude-nas-servers
+> - nfs-acls
+> - skip-certificate-validation
+> - storage-class
+> - metro-replication
+> - primary
+> - secondary
 
 ##### Output
 
@@ -128,6 +141,7 @@ Outputs help text
 ### dellctl install powerstore
 
 This command deploys the CSI PowerStore driver and optional modules in your Kubernetes or OpenShift environment. 
+
 
 ##### Examples:
 
