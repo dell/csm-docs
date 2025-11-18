@@ -61,10 +61,10 @@ Use the `hostConnectivity.metro` field to configure host connectivity for unifor
 > **Note:** If local, non-metro hosts are required alongside uniform metro hosts, use the `hostConnectivity.local` field to specify a set of label expressions
 > that describe nodes whose host should be registered with this PowerStore, without optimization.
 
-#### Examples: Uniform Metro
+#### Examples -- Uniform Metro
 
-##### Two-Site Metro
-There are two PowerStore systems and two zones — `zone-a` and `zone-b`
+##### Two Metro Zones
+There are two PowerStore systems and two zones -- `zone-a` and `zone-b`
 Nodes in the first zone are labeled `topology.kubernetes.io/zone: zone-a`, and Nodes in the second zone are labeled `topology.kubernetes.io/zone: zone-b`.
 
 Using the configuration below:
@@ -119,8 +119,8 @@ arrays:
                     - "zone-a"
 ```
 
-##### Three-Site Metro
-There are two PowerStore systems and three zones — `zone-a`, `zone-b`, and `zone-ab`.
+##### Three Metro Zones
+There are two PowerStore systems and three zones -- `zone-a`, `zone-b`, and `zone-ab`.
 
 Nodes in zone-a are labeled `topology.kubernetes.io/zone: zone-a`, nodes in zone-b are labeled `topology.kubernetes.io/zone: zone-b`, and
 nodes in zone-ab are labeled `topology.kubernetes.io/zone: zone-ab`.
@@ -193,7 +193,7 @@ arrays:
                     - "zone-ab"
 ```
 
-##### Two-Site Metro with Additional Local Hosts
+##### Two Metro Zones and Additional Non-Metro Zones
 This example demonstrates how to register additional nodes with a local-only host configuration.
 Similar to the previous examples, the nodes in `zone-a` and `zone-b` will be registered with each PowerStore system using the node selector
 terms listed under each optimization option.
@@ -270,10 +270,10 @@ arrays:
 ### Non-Uniform Metro
 Use the `hostConnectivity.local` field to configure host connectivity for non-uniform metro.
 
-#### Examples: Non-Uniform Metro
+#### Examples -- Non-Uniform Metro
 
 ##### Two-Site Non-Uniform Metro
-There are two PowerStore systems and two zones — `zone-a` and `zone-b`.
+There are two PowerStore systems and two zones -- `zone-a` and `zone-b`.
 
 Using the secret below, nodes in `zone-a` will only be registered with PowerStore `PSbadcafef00d`, and nodes in `zone-b` will
 only be registered with PowerStore `PSdecafc0ffee`.
@@ -287,7 +287,7 @@ arrays:
     username: "user"
     password: "password"
     skipCertificateValidation: true
-    blockProtocol: "ISCSI"
+    blockProtocol: "FC"
     hostConnectivity:
       local:
         nodeSelectorTerms:
@@ -301,7 +301,7 @@ arrays:
     username: "user"
     password: "password"
     skipCertificateValidation: true
-    blockProtocol: "ISCSI"
+    blockProtocol: "FC"
     hostConnectivity:
       local:
         nodeSelectorTerms:
