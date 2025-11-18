@@ -353,11 +353,11 @@ provisioner: csi-powerstore.dellemc.com
 reclaimPolicy: Delete
 volumeBindingMode: WaitForFirstConsumer
 allowedTopologies:
-- matchLabelExpressions:
-  - key: csi-powerstore.dellemc.com/xx.xxx.xx.xx-iscsi
-    values: ["true"]
-  - key: csi-powerstore.dellemc.com/xx.xx.xx.xx-iscsi
-    values: ["true"]
+  - matchLabelExpressions:
+      - key: csi-powerstore.dellemc.com/xx.xxx.xx.xx-iscsi
+        values: ["true"]
+      - key: csi-powerstore.dellemc.com/xx.xx.xx.xx-iscsi
+        values: ["true"]
 ```
 
 > _**NOTE:**_
