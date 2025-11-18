@@ -63,7 +63,7 @@ Outputs help text
 
 ### dellctl install
 
-Installs a Dell CSI Driver.
+Installs a Dell CSI Driver and optionally installs protocol prerequisites and validates data path connectivity.
 
 ##### Available Commands
 
