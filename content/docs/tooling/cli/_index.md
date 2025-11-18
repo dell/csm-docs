@@ -86,7 +86,7 @@ Installs a Dell CSI Driver.
 | modules <stringArray>                     | Container Storage Modules modules to install. Supported modules are: replication, authorization, observability, resiliency.  | No |
 | namespace <string>                        | Namespace to install into (lowercase alphanumeric, may include dashes, must start/end with alphanumeric).  | Yes |
 | operator-install                          | Container Storage Modules Custom Resource Definitions will be installed.  | No |
-| output                                    | Output from dellctl install.  | No |
+| output                                    | Output from dellctl install. This dumps every generated yaml to the console. | No |
 | registry-url <string>                     | Registry URL to use for images.  | No |
 | skip-cert-validation-authz                | Skip certificate validation when connecting to the CSM Authorization proxy server.  | No |
 | snapshot-controller                       | Configure snapshot CRDs and controller.  | No |
@@ -176,7 +176,7 @@ machineconfig: true
 snapshot-controller: true
 validate-connectivity: true
 registry-url: my.registry.com:5000/dell/csm
-modules: replication,authorization,observability, resiliency
+modules: replication,authorization,observability,resiliency
  
 # Parameters for each PowerStore system
 storage:
