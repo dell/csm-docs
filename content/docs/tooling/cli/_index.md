@@ -130,7 +130,9 @@ Installs a Dell CSI Driver and optionally installs protocol prerequisites and va
 | storage.storage-class.reclaimPolicy        | The reclaim policy of the provisioned volume. | Delete | No |
 | storage.storage-class.volumeBindingMode    | The binding mode of the provisioned volume. | WaitForFirstConsumer | No |
 | storage.storage-class.allowVolumeExpansion | Enable or disable expansion of the provisioned volume. | true | No |
-| storage.storage-class.allowedTopologies    | The allowed topologies of the provisioned volume. This is provided as an array of key/value pairs. | "" | No |
+| storage.storage-class.allowedTopologies    | The allowed topologies of the provisioned volume. This is provided as an array. | "" | No |
+| storage.storage-class.allowedTopologies.key    | The key of the allowed topology. | "" | No |
+| storage.storage-class.allowedTopologies.values | The values of the allowed topology. This is provided as an array. | "" | No |
 | **storage.metro-replication**              | This section configures metro replication. | - | - |
 | storage.metro-replication.hostConnectivity.local.nodeSelectorTerms.matchExpressions | The label expressions to describe a node whose host should be registered. This is provided as an array.  | "" | No |
 | storage.metro-replication.hostConnectivity.local.nodeSelectorTerms.matchExpressions.key | The label key of the label expression.  | "" | No |
