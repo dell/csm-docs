@@ -54,9 +54,9 @@ specification, see [Pod: NodeAffinity](https://kubernetes.io/docs/reference/kube
 Use the `hostConnectivity.metro` field to configure host connectivity for uniform metro.
 
 **Host Connectivity Options:**
-- `colocatedLocal`: The worker node is located near the current PowerStore system.
-- `colocatedRemote`: The worker node is located near the replication target of the current PowerStore system.
-- `colocatedBoth`: The worker node is located near both the current PowerStore system and its replication pair.
+- `colocatedLocal`: Describes nodes that are located near the current PowerStore system.
+- `colocatedRemote`: Describes nodes that are located near the replication target of the current PowerStore system.
+- `colocatedBoth`: Describes nodes that are located near both the current PowerStore system and its replication pair.
 
 > **Note:** If local, non-metro hosts are required alongside uniform metro hosts, use the `hostConnectivity.local` field to specify a set of label expressions
 > that describe nodes whose host should be registered with this PowerStore, without optimization.
