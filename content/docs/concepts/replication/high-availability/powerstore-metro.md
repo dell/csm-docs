@@ -6,7 +6,7 @@ description: >
   High Availability support for CSI PowerStore
 ---
 
-## PowerStore Metro Architecture
+## Architecture
 
 ![metro architecture diagram](../../../../../images/replication/powerstore-metro.png)
 
@@ -20,42 +20,61 @@ The driver on receiving the metro-related parameters in the `CreateVolume` call 
 
 The creation of volumes in metro mode doesn't involve the replication sidecar or the common replication controller, nor does it cause the creation of any replication related custom resources. It just needs the `csi-powerstore` driver that implements the `CreateVolume` gRPC endpoint with metro capability for it to work.
 
-### Host Registration for PowerStore Metro
+--------------------
+
+## Host Registration
 > {{< message text="18" >}}
 
-PowerStore supports optimized metro data paths by registering hosts based on their location relative to PowerStore systems.
+PowerStore optimizes metro data paths by providing configuration options to describe the host's location relative to the PowerStore system.
 
-The driver determines which optimization to use by comparing node labels against user-provided,
-node selector statements specified for a Host Connectivity optimization.
+The csi-powerstore driver determines which optimization to use by iterating over a set of Host Connectivity options and comparing node labels against
+the user-configured node selector statements (`nodeSelectorTerms`).
 
-**Host Connectivity options:**
-- `colocatedLocal`: The worker node is located near the current PowerStore system.
-- `colocatedRemote`: The worker node is located near the replication target of the current PowerStore system.
-- `colocatedBoth`: The worker node is located near both the current PowerStore system and its replication pair.
+On driver startup, if a node's labels satisfy the selector terms for a Host Connectivity option, a host will be registered for the node. Nodes
+that do not match any of the `nodeSelectorTerms` will remain unregistered.
 
-To enable this feature, add labels to the cluster nodes, or make note of existing node labels, that describe the desired topology,
-and use these labels to build node selector statements (`nodeSelectorTerms`) for the provided Host Connectivity options under `hostConnectivity.metro`.
-If the node labels satisfy the selector terms, a host will be registered for the node using the corresponding metro optimization.
-If the node labels do not satisfy the selector terms, a local host will be registered for the node without metro optimization.
+### Secret Configuration
+To utilize this feature:
+- Add labels to the cluster nodes, or make note of existing node labels, that describe the topology between the cluster nodes and the PowerStore arrays.
+- For each desired Host Connectivity option, create a set of `nodeSelectorTerms` to describe a set of nodes.
+- Update the secret.yaml file used to generate the `powerstore-config` Secret.
+
+Below are some examples that demonstrate what `nodeSelectorTerms` might look like for different metro topologies.
 
 `nodeSelectorTerms` follow Kubernetes' Node Affinity format -- `requiredDuringSchedulingIgnoredDuringExecution`. For more information, see
 [Assigning Pods to Nodes: Node Affinity](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#node-affinity), and for the full API
 specification, see [Pod: NodeAffinity](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#NodeAffinity).
 
 > **Note:**
-> For all Host Connectivity options, for each `arrays` entry, `nodeSelectorTerms` should be mutually exclusive in the set of nodes the selectors match.
+> For all Host Connectivity options, for each item under `arrays`, `nodeSelectorTerms` should be mutually exclusive in the set of nodes the selectors match.
 > In other words, there should be no overlap in the nodes each `nodeSelectorTerms` matches.
-> If a node matches more than one connectivity option as defined by `nodeSelectorTerms`,
-> the driver will error and fail to register the host for the node.
+> Host registration behavior is undefined for a node that matches more than one of the provided `nodeSelectorTerms`.
 
-_Example:_
-There are two zones and two PowerStore systems, where the PowerStore systems have been configured for metro replication.
-Zone-a has worker nodes co-located with array "unique1", and zone-b has worker nodes co-located with array "unique2".
-Nodes in zone-a are labeled `topology.kubernetes.io/zone: zone-a`, and Nodes in zone-b are labeled `topology.kubernetes.io/zone: zone-b`.
+### Uniform Metro
+Use the `hostConnectivity.metro` field to configure host connectivity for uniform metro.
+
+**Host Connectivity Options:**
+- `colocatedLocal`: Describes nodes that are located near the current PowerStore system.
+- `colocatedRemote`: Describes nodes that are located near the replication target of the current PowerStore system.
+- `colocatedBoth`: Describes nodes that are located near both the current PowerStore system and its replication pair.
+
+> **Note:** If local, non-metro hosts are required alongside uniform metro hosts, use the `hostConnectivity.local` field to specify a set of label expressions
+> that describe nodes whose host should be registered with this PowerStore, without optimization.
+
+#### Examples -- Uniform Metro
+
+##### Two Metro Zones
+There are two PowerStore systems and two zones -- `zone-a` and `zone-b`
+Nodes in the first zone are labeled `topology.kubernetes.io/zone: zone-a`, and Nodes in the second zone are labeled `topology.kubernetes.io/zone: zone-b`.
+
+Using the configuration below:
+- Nodes in `zone-a` will be registered as "co-located local" with PowerStore `PSbadcafef00d` and "co-located remote" with PowerStore `PSdecafc0ffee`.
+- Nodes in `zone-b` will be registered as "co-located remote" with PowerStore `PSbadcafef00d` and "co-located local" with PowerStore `PSdecafc0ffee`.
 ```yaml
+# secret.yaml
 arrays:
   - endpoint: "https://11.0.0.1/api/rest"
-    globalID: "unique1"
+    globalID: "PSbadcafef00d"
     username: "user"
     password: "password"
     skipCertificateValidation: true
@@ -65,19 +84,19 @@ arrays:
         colocatedLocal:
           nodeSelectorTerms:
             - matchExpressions:
-              - key: "topology.kubernetes.io/zone"
-                operator: "In"
-                values:
-                  - "zone-a"
+                - key: "topology.kubernetes.io/zone"
+                  operator: "In"
+                  values:
+                    - "zone-a"
         colocatedRemote:
           nodeSelectorTerms:
             - matchExpressions:
-              - key: "topology.kubernetes.io/zone"
-                operator: "In"
-                values:
-                  - "zone-b"
+                - key: "topology.kubernetes.io/zone"
+                  operator: "In"
+                  values:
+                    - "zone-b"
   - endpoint: "https://11.0.0.2/api/rest"
-    globalID: "unique2"
+    globalID: "PSdecafc0ffee"
     username: "user"
     password: "password"
     skipCertificateValidation: true
@@ -87,24 +106,219 @@ arrays:
         colocatedLocal:
           nodeSelectorTerms:
             - matchExpressions:
-              - key: "topology.kubernetes.io/zone"
-                operator: "In"
-                values:
-                  - "zone-b"
+                - key: "topology.kubernetes.io/zone"
+                  operator: "In"
+                  values:
+                    - "zone-b"
         colocatedRemote:
           nodeSelectorTerms:
             - matchExpressions:
-              - key: "topology.kubernetes.io/zone"
-                operator: "In"
-                values:
-                  - "zone-a"
+                - key: "topology.kubernetes.io/zone"
+                  operator: "In"
+                  values:
+                    - "zone-a"
 ```
 
-### StorageClass
+##### Three Metro Zones
+There are two PowerStore systems and three zones -- `zone-a`, `zone-b`, and `zone-ab`.
+
+Nodes in zone-a are labeled `topology.kubernetes.io/zone: zone-a`, nodes in zone-b are labeled `topology.kubernetes.io/zone: zone-b`, and
+nodes in zone-ab are labeled `topology.kubernetes.io/zone: zone-ab`.
+
+This example is similar to the example above, but adds a third zone that sits between the two existing zones. This new zone, `zone-ab`, requires access to both
+PowerStore systems.
+
+Using the configuration below, nodes in `zone-a` and `zone-b` will be registered with the PowerStore systems as described in the previous example, but
+nodes in `zone-ab` will be registered as "co-located both" with both the `PSbadcafef00d` and `PSdecafc0ffee` PowerStore systems.
+```yaml
+# secret.yaml
+arrays:
+  - endpoint: "https://11.0.0.1/api/rest"
+    globalID: "PSbadcafef00d"
+    username: "user"
+    password: "password"
+    skipCertificateValidation: true
+    blockProtocol: "FC"
+    hostConnectivity:
+      metro:
+        colocatedLocal:
+          nodeSelectorTerms:
+            - matchExpressions:
+                - key: "topology.kubernetes.io/zone"
+                  operator: "In"
+                  values:
+                    - "zone-a"
+        colocatedRemote:
+          nodeSelectorTerms:
+            - matchExpressions:
+                - key: "topology.kubernetes.io/zone"
+                  operator: "In"
+                  values:
+                    - "zone-b"
+        colocatedBoth:
+          nodeSelectorTerms:
+            - matchExpressions:
+                - key: "topology.kubernetes.io/zone"
+                  operator: "In"
+                  values:
+                    - "zone-ab"
+  - endpoint: "https://11.0.0.2/api/rest"
+    globalID: "PSdecafc0ffee"
+    username: "user"
+    password: "password"
+    skipCertificateValidation: true
+    blockProtocol: "FC"
+    hostConnectivity:
+      metro:
+        colocatedLocal:
+          nodeSelectorTerms:
+            - matchExpressions:
+                - key: "topology.kubernetes.io/zone"
+                  operator: "In"
+                  values:
+                    - "zone-b"
+        colocatedRemote:
+          nodeSelectorTerms:
+            - matchExpressions:
+                - key: "topology.kubernetes.io/zone"
+                  operator: "In"
+                  values:
+                    - "zone-a"
+        colocatedBoth:
+          nodeSelectorTerms:
+            - matchExpressions:
+                - key: "topology.kubernetes.io/zone"
+                  operator: "In"
+                  values:
+                    - "zone-ab"
+```
+
+##### Two Metro Zones and Additional Non-Metro Zones
+This example demonstrates how to register additional nodes with a local-only host configuration.
+Similar to the previous examples, the nodes in `zone-a` and `zone-b` will be registered with each PowerStore system using the node selector
+terms listed under each optimization option.
+
+If nodes exist that are not part of `zone-a` and `zone-b`, but should still be connected to the PowerStore systems, they can be added under the
+`hostConnectivity.local` field.
+
+The `nodeSelectorTerms` below match all nodes that do not have the `zone-a` or `zone-b` label values for the `topology.kubernetes.io/zone` label key.
+```yaml
+# secret.yaml
+arrays:
+  - endpoint: "https://11.0.0.1/api/rest"
+    globalID: "PSbadcafef00d"
+    username: "user"
+    password: "password"
+    skipCertificateValidation: true
+    blockProtocol: "FC"
+    hostConnectivity:
+      local:
+        nodeSelectorTerms:
+          - matchExpressions:
+              - key: "topology.kubernetes.io/zone"
+                operator: "NotIn"
+                values:
+                  - "zone-a"
+                  - "zone-b"
+      metro:
+        colocatedLocal:
+          nodeSelectorTerms:
+            - matchExpressions:
+                - key: "topology.kubernetes.io/zone"
+                  operator: "In"
+                  values:
+                    - "zone-a"
+        colocatedRemote:
+          nodeSelectorTerms:
+            - matchExpressions:
+                - key: "topology.kubernetes.io/zone"
+                  operator: "In"
+                  values:
+                    - "zone-b"
+  - endpoint: "https://11.0.0.2/api/rest"
+    globalID: "PSdecafc0ffee"
+    username: "user"
+    password: "password"
+    skipCertificateValidation: true
+    blockProtocol: "FC"
+    hostConnectivity:
+      local:
+        nodeSelectorTerms:
+          - matchExpressions:
+              - key: "topology.kubernetes.io/zone"
+                operator: "NotIn"
+                values:
+                  - "zone-a"
+                  - "zone-b"
+      metro:
+        colocatedLocal:
+          nodeSelectorTerms:
+            - matchExpressions:
+                - key: "topology.kubernetes.io/zone"
+                  operator: "In"
+                  values:
+                    - "zone-b"
+        colocatedRemote:
+          nodeSelectorTerms:
+            - matchExpressions:
+                - key: "topology.kubernetes.io/zone"
+                  operator: "In"
+                  values:
+                    - "zone-a"
+```
+
+### Non-Uniform Metro
+Use the `hostConnectivity.local` field to configure host connectivity for non-uniform metro.
+
+#### Examples -- Non-Uniform Metro
+
+##### Two-Site Non-Uniform Metro
+There are two PowerStore systems and two zones -- `zone-a` and `zone-b`.
+
+Using the secret below, nodes in `zone-a` will only be registered with PowerStore `PSbadcafef00d`, and nodes in `zone-b` will
+only be registered with PowerStore `PSdecafc0ffee`.
+
+`Zone-a` nodes will have no connection to `PSdecafc0ffee` and `zone-b` nodes will have no connection to `PSbadcafef00d`.
+```yaml
+# secret.yaml
+arrays:
+  - endpoint: "https://11.0.0.1/api/rest"
+    globalID: "PSbadcafef00d"
+    username: "user"
+    password: "password"
+    skipCertificateValidation: true
+    blockProtocol: "FC"
+    hostConnectivity:
+      local:
+        nodeSelectorTerms:
+          - matchExpressions:
+              - key: "topology.kubernetes.io/zone"
+                operator: "In"
+                values:
+                  - "zone-a"
+  - endpoint: "https://11.0.0.2/api/rest"
+    globalID: "PSdecafc0ffee"
+    username: "user"
+    password: "password"
+    skipCertificateValidation: true
+    blockProtocol: "FC"
+    hostConnectivity:
+      local:
+        nodeSelectorTerms:
+          - matchExpressions:
+              - key: "topology.kubernetes.io/zone"
+                operator: "In"
+                values:
+                  - "zone-b"
+```
+
+----------------
+
+## StorageClass
 The Metro replicated volumes are created just like the normal volumes, but the `StorageClass` contains some
 extra parameters related to metro replication. A `StorageClass` to create metro replicated volumes may look as follows:
 
-Example using`volumeBindingMode: Immediate`
+Example using `volumeBindingMode: Immediate`
 
 ```yaml
 apiVersion: storage.k8s.io/v1
@@ -112,7 +326,7 @@ kind: StorageClass
 metadata:
   name: powerstore-metro
 parameters:
-  arrayID: PS000000000001
+  arrayID: PSbadcafef00d
   replication.storage.dell.com/isReplicationEnabled: "true"
   replication.storage.dell.com/mode: METRO
   replication.storage.dell.com/remoteSystem: RT-D0002
@@ -130,7 +344,7 @@ kind: StorageClass
 metadata:
   name: powerstore-metro
 parameters:
-  arrayID: PS000000000001
+  arrayID: PSbadcafef00d
   replication.storage.dell.com/isReplicationEnabled: "true"
   replication.storage.dell.com/mode: METRO
   replication.storage.dell.com/remoteSystem: RT-D0002
@@ -139,11 +353,11 @@ provisioner: csi-powerstore.dellemc.com
 reclaimPolicy: Delete
 volumeBindingMode: WaitForFirstConsumer
 allowedTopologies:
-- matchLabelExpressions:
-  - key: csi-powerstore.dellemc.com/xx.xxx.xx.xx-iscsi
-    values: ["true"]
-  - key: csi-powerstore.dellemc.com/xx.xx.xx.xx-iscsi
-    values: ["true"]
+  - matchLabelExpressions:
+      - key: csi-powerstore.dellemc.com/xx.xxx.xx.xx-iscsi
+        values: ["true"]
+      - key: csi-powerstore.dellemc.com/xx.xx.xx.xx-iscsi
+        values: ["true"]
 ```
 
 > _**NOTE:**_
@@ -152,13 +366,19 @@ allowedTopologies:
 
 When a Metro `PV` is created, the volumeHandle will have the format `<volumeID/globalID/protocol:remote-volumeID/remote-globalID>`.
 
-### PowerStore Metro volume expansion
+-------------------
+
+## Volume Expansion
 When a request is made to increase the size of a Metro `PV`, the metro replication session must be temporarily paused prior to the editing of Kubernetes resources. This can be done from the PowerStore Manager UI or CLI. The size of the local/preferred volume is then increased. The metro session must then be manually resumed. It is important to note that the paths for the remote/non-preferred volume will not become active until the metro session is resumed and the remote/non-preferred volume reflects the updated size.
 
-### Snapshots on PowerStore Metro volumes
+------------
+
+## Snapshots
 When a VolumeSnapshot object is created for the Metro `PV`, snapshots are created on each side of the Metro session on the PowerStore systems. However, the VolumeSnapshot object only refers to the local/preferred side of the Metro volume. When a Metro `PV` is deleted, the remote/non-preferred volume, along with any snapshots associated with it, is also automatically deleted.
 
-### Limitations
+--------------
+
+## Limitations
 - PowerStore driver only supports uniform host configuration for Metro volume where the host has active paths to both PowerStore systems.
 - Metro configuration needs to be done by the user by adding zone keys as node labels as per the configuration requirements.
 - Powerstore driver does only fresh host registration for metro configuration. To modify an existing host entry, the user will have to remove the existing host entry from the array and restart node pods to enable the Powerstore driver to create fresh host entry.
