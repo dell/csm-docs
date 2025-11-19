@@ -136,6 +136,17 @@ Installs a Dell CSI Driver and optionally installs protocol prerequisites and va
 | storage.metro-replication.hostConnectivity.local.nodeSelectorTerms.matchExpressions.key | The label key of the label expression.  | "" | No |
 | storage.metro-replication.hostConnectivity.local.nodeSelectorTerms.matchExpressions.operator | The operator for the values.  | "" | No |
 | storage.metro-replication.hostConnectivity.local.nodeSelectorTerms.matchExpressions.values | The values of the key. This is provided as an array.  | "" | No |
+| **replication**                            | This sections configures replication. | - | - |
+| replication.sourceClusterID                | The source cluster ID. | "" | No |
+| replication.targetClusterID                | The target cluster ID. | "" | No |
+| replication.parameters.rpo                 | The recovery point objective. | Five_Minutes | No |
+| replication.parameters.mode                | The replication mode (ASYNC, SYNC). | ASYNC | No |
+| replication.parameters.ignoreNamespaces    |  Ignore the namespace in which the persistent volume claim resides and put every volume created into a single volume group. This parameter is not applicable for Metro mode. | false | No |
+| replication.parameters.volumeGroupPrefix   | The string appended to the volume group name. | csi | No |
+| **authorization**                          | This section configures authorization. | - | - |
+| authorization.authorizationProxyHostname                     | The hostname of the CSM Authorization proxy-server. | "" | No |
+| authorization.skipCertificateValidation    | Enable or disable validadting the CSM Authorization proxy-server certificate. | false | No |
+| authorization.tenantTokenPath              | The path to the tenant token file. | "" | No |
 {{</table >}}
 
 ---
