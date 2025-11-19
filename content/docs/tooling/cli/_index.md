@@ -71,70 +71,72 @@ Installs a Dell CSI Driver and optionally installs protocol prerequisites and va
   powerstore         Install the Dell CSI Powerstore driver
 ```
 
-##### Available Flags
-
-| Flag            | Description      | Mandatory |
-|:-------------------|:----------|:----------
-| certified                                 | The certified images from registry.connect.redhat.com are used instead of the quay.io images. | No |
-| config-version <string>                   | Version of Container Storage Modules to install. Defaults to the latest version.      | No |
-| csi-node-prefix <string>                  | The prefix for all CSI nodes provisioned by the driver. Defaults to 'csi-node'.    | No |
-| csi-volume-prefix <string>                | The prefix for all CSI volumes provisioned by the driver. Defaults to 'csivol'. | No |
-| csm-authorization-proxy-hostname <string> | If deploying CSM Authorization, the hostname of the Authorization Proxy Server.  | No |
-| force                                     | The existing Container Storage Module resources are deleted and then recreated.  | No |
-| from-file <string>                        | Path to a YAML file containing configuration details for installing the CSM.  | No |
-| machineconfig                             | Configure pre-requisities based on the provided block-protocol parameter. See the relevant orchestrator and platform [installation page](../../getting-started/installation/_index.md) for which prerequisites are configured.  | No |
-| modules <stringArray>                     | Container Storage Modules modules to install. Supported modules are: replication, authorization, observability, resiliency.  | No |
-| namespace <string>                        | Namespace to install into (lowercase alphanumeric, may include dashes, must start/end with alphanumeric).  | Yes |
-| operator-install                          | Container Storage Modules Custom Resource Definitions will be installed.  | No |
-| output                                    | Output from dellctl install. This dumps every generated yaml to the console. | No |
-| registry-url <string>                     | Registry URL to use for images.  | No |
-| skip-cert-validation-authz                | Skip certificate validation when connecting to the CSM Authorization proxy server.  | No |
-| snapshot-controller                       | Configure snapshot CRDs and controller.  | No |
-| storage <stringArray>                   | Storage endpoint configuration in the form 'endpoint=<IP\|hostname>,username=<user>[,otherKey=otherValue]'. Can be provided multiple times.  | Yes |
-| tenant-token                              | Path to a YAML file containing Authorization tenant token (proxy-authz-token secret).  | No |
-| validate-connectivity                     | Run a DaemonSet on all nodes to verify connectivity to storage systems.  | No |
+##### CLI Flags
+{{<table install-flags >}}
+| Flag               | Description | Default | Mandatory |
+|:-------------------|:------------|:--------|:-----------
+| certified                                 | The certified images from registry.connect.redhat.com are used instead of the quay.io images. | false | No |
+| config-version <string>                   | Version of Container Storage Modules to install. | {{VERSION}} | No |
+| csi-node-prefix <string>                  | The prefix for all CSI nodes provisioned by the driver. | csi-node | No |
+| csi-volume-prefix <string>                | The prefix for all CSI volumes provisioned by the driver. | csivol | No |
+| csm-authorization-proxy-hostname <string> | If deploying CSM Authorization, the hostname of the Authorization Proxy Server.  | "" | No |
+| force                                     | The existing Container Storage Module resources are deleted and then recreated.  | false | No |
+| from-file <string>                        | Path to a YAML file containing configuration details for installing the CSM.  | "" | No |
+| machineconfig                             | Configure pre-requisities based on the provided block-protocol parameter. See the relevant orchestrator and platform [installation page](../../getting-started/installation/_index.md) for which prerequisites are configured.  | false | No |
+| modules <stringArray>                     | Container Storage Modules modules to install. Supported modules are: replication, authorization, observability, resiliency.  | "" | No |
+| namespace <string>                        | Namespace to install into (lowercase alphanumeric, may include dashes, must start/end with alphanumeric).  | "namespace" | Yes |
+| operator-install                          | Container Storage Modules Custom Resource Definitions will be installed.  | false | No |
+| output                                    | Output from dellctl install. This dumps every generated yaml to the console. | false | No |
+| registry-url <string>                     | Registry URL to use for images.  | "" | No |
+| skip-cert-validation-authz                | Skip certificate validation when connecting to the CSM Authorization proxy server. | false | No |
+| snapshot-controller                       | Configure snapshot CRDs and controller.  | false | No |
+| storage <stringArray>                   | Storage endpoint configuration in the form 'endpoint=<IP\|hostname>,username=<user>[,otherKey=otherValue]'. Can be provided multiple times.  |  "" | Yes |
+| tenant-token                              | Path to a YAML file containing Authorization tenant token (proxy-authz-token secret). | "" | No |
+| validate-connectivity                     | Run a DaemonSet on all nodes to verify connectivity to storage systems.  | false | No |
+{{</table >}}
 
 &nbsp;
 
 > **NOTE:** `--machineconfig` is applicable for both OpenShift and Kubernetes.
->
-> **DEFAULTS**:
->
-> | Setting                     | Value      |
-> |:----------------------------|:----------|
-> | block-protocol              | FC        |
-> | certified                   | false     |
-> | config-version              | latest CSM version |
-> | csi-node-prefix             | csi-node  |
-> | csi-volume-prefix           | csivol    |
-> | force                       | false    |
-> | machineconfig               | false    |
-> | fsType                      | ext4      |
-> | nfsAcls                     | 0777  |
-> | operator-install            | false  |
-> | output                      | false  |
-> | reclaimPolicy               | Delete    |
-> | skip-certificate-validation | false    |
-> | snapshot-controller         | false    |
-> | validate-connectivity       | false |
-> | volumeBindingMode           | Immediate |
->
-> &nbsp;
->
-> Some parameters are only supported per Powerstore system via `--from-file`. See [dellctl install powerstore](#dellctl-install-powerstore) for examples.
-> - block-protocol
-> - include-nas-servers
-> - exclude-nas-servers
-> - nfs-acls
-> - skip-certificate-validation
-> - storage-class
-> - metro-replication
-> - primary
-> - secondary
 
-##### Output
-
-Outputs help text
+##### From-File Parameters
+{{<table install-flags >}}
+| Parameter               | Description | Default | Mandatory |
+|:-------------------|:------------|:--------|:-----------
+| certified                                  | The certified images from registry.connect.redhat.com are used instead of the quay.io images. | false | No |
+| config-version <string>                    | Version of Container Storage Modules to install. | {{VERSION}} | No |
+| csi-node-prefix <string>                   | The prefix for all CSI nodes provisioned by the driver. | csi-node | No |
+| csi-volume-prefix <string>                 | The prefix for all CSI volumes provisioned by the driver. | csivol | No |
+| force                                      | The existing Container Storage Module resources are deleted and then recreated.  | false | No |
+| from-file <string>                         | Path to a YAML file containing configuration details for installing the CSM.  | "" | No |
+| machineconfig                              | Configure pre-requisities based on the provided block-protocol parameter. See the relevant orchestrator and platform [installation page](../../getting-started/installation/_index.md) for which prerequisites are configured.  | false | No |
+| modules <stringArray>                      | Container Storage Modules modules to install. Supported modules are: replication, authorization, observability, resiliency.  | "" | No |
+| namespace <string>                         | Namespace to install into (lowercase alphanumeric, may include dashes, must start/end with alphanumeric).  | "namespace" | Yes |
+| operator-install                           | Container Storage Modules Custom Resource Definitions will be installed.  | false | No |
+| output                                     | Output from dellctl install. This dumps every generated yaml to the console. | false | No |
+| registry-url <string>                      | Registry URL to use for images.  | "" | No |
+| snapshot-controller                        | Configure snapshot CRDs and controller.  | false | No |
+| validate-connectivity                      | Run a DaemonSet on all nodes to verify connectivity to storage systems.  | false | No |
+| **storage**                                | This section configures the storage systems. It is provided as an array. | - | - |
+| storage.endpoint                           | The IP address or hostname of the storage system endponit (i.e., 10.0.0.1). | "" | Yes |
+| storage.username                           | Username for accessing PowerFlex system. If authorization is enabled, username will be ignored. | "" | Yes |
+| storage.block-protocol                     | Transport protocol for block storage (Fc, ISCSI, NVMeTCP, NVMeFC, None, auto) | FC | No |
+| storage.nfs-acls                           | NFS ACLs used if NFS is being used on the array. | 0777 | No |
+| storage.skip-certificate-validation        | Enable or disable validadting the storage system certificate. | false | No |
+| storage.primary                            | Replicated storage classes will this cluster as the primary site. | false | No |
+| storage.secondary                          | Replicated storage classes will this cluster as the secondary site. | false | No |
+| **storage.storage-class**                  | This section configures the storage classes. It is provided as an array. | - | - |
+| storage.storage-class.fsType               | The file system type of the provisioned volume. | ext4 | No |
+| storage.storage-class.reclaimPolicy        | The reclaim policy of the provisioned volume. | Delete | No |
+| storage.storage-class.volumeBindingMode    | The binding mode of the provisioned volume. | WaitForFirstConsumer | No |
+| storage.storage-class.allowVolumeExpansion | Enable or disable expansion of the provisioned volume. | true | No |
+| storage.storage-class.allowedTopologies    | The allowed topologies of the provisioned volume. This is provided as an array of key/value pairs. | "" | No |
+| **storage.metro-replication**              | This section configures metro replication. | - | - |
+| storage.metro-replication.hostConnectivity.local.nodeSelectorTerms.matchExpressions | The label expressions to describe a node whose host should be registered. This is provided as an array.  | "" | No |
+| storage.metro-replication.hostConnectivity.local.nodeSelectorTerms.matchExpressions.key | The label key of the label expression.  | "" | No |
+| storage.metro-replication.hostConnectivity.local.nodeSelectorTerms.matchExpressions.operator | The operator for the values.  | "" | No |
+| storage.metro-replication.hostConnectivity.local.nodeSelectorTerms.matchExpressions.values | The values of the key. This is provided as an array.  | "" | No |
+{{</table >}}
 
 ---
 
@@ -172,7 +174,7 @@ storage:
 ```
 {{< /collapse >}}
 
-{{< collapse id="2" title="Sample config.yaml to to output yaml" card="false" >}}
+{{< collapse id="2" title="Sample config.yaml to output yaml" card="false" >}}
 ```
 # Global Driver parameters
 namespace: powerstore
@@ -188,11 +190,11 @@ storage:
 ```
 {{< /collapse >}}
 
-{{< collapse id="3" title="Sample config.yaml with all configuration options" card="false" >}}
+{{< collapse id="3" title="Sample config.yaml with full configuration" card="false" >}}
 ```
 # Global Driver parameters
 namespace: powerstore
-config-version: 1.16.0
+config-version: {{ (index .Site.Params.versions 0).version }}
 csi-volume-prefix: myvol
 csi-node-prefix: nodepre
 operator-install: true
@@ -209,6 +211,7 @@ storage:
     block-protocol: FC
     nfs-acls: 0777
     skip-certificate-validation: true
+    primary: true
     storage-class:
       - fsType: ext4
         reclaimPolicy: Delete
@@ -232,6 +235,7 @@ storage:
     block-protocol: FC
     nfs-acls: 0777
     skip-certificate-validation: false
+    secondary: true
     storage-class:
       - fsType: xfs
         reclaimPolicy: Delete
