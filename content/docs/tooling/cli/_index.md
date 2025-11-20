@@ -83,7 +83,7 @@ Installs a Dell CSI Driver and optionally installs protocol prerequisites and va
 | force                                     | The existing Container Storage Module resources are deleted and then recreated.  | false | No |
 | from-file <string>                        | Path to a YAML file containing configuration details for installing the CSM.  | "" | No |
 | machineconfig                             | Configure pre-requisities based on the provided block-protocol parameter. See the relevant orchestrator and platform [installation page](../../getting-started/installation/_index.md) for which prerequisites are configured.  | false | No |
-| modules <stringArray>                     | Container Storage Modules modules to install. Supported modules are: replication, authorization, observability, resiliency.  | "" | No |
+| modules <stringArray>                     | Container Storage Modules modules to install. This is provided as a comma-separated string. Supported modules are: authorization, observability, resiliency.  | "" | No |
 | namespace <string>                        | Namespace to install into (lowercase alphanumeric, may include dashes, must start/end with alphanumeric).  | "namespace" | Yes |
 | operator-install                          | Container Storage Modules Custom Resource Definitions will be installed.  | false | No |
 | output                                    | Output from dellctl install. This dumps every generated yaml to the console. | false | No |
@@ -97,7 +97,9 @@ Installs a Dell CSI Driver and optionally installs protocol prerequisites and va
 
 &nbsp;
 
-> **NOTE:** `--machineconfig` is applicable for both OpenShift and Kubernetes.
+> **NOTES:**
+> - `--machineconfig` is applicable for both OpenShift and Kubernetes.
+> - Replication is not supported via CLI flags. [From-File](#from-file-parameters) must be used to install Replication.
 
 ##### From-File Parameters
 {{<table install-flags >}}
@@ -157,21 +159,73 @@ Installs a Dell CSI Driver and optionally installs protocol prerequisites and va
 
 This command deploys the CSI PowerStore driver and optional modules in your Kubernetes or OpenShift environment. 
 
-
-##### Examples:
-
+{{< collapse id="dellctl-install-powerstore-examples" title="CLI Flag Examples" card="false" >}}
+{{< collapse id="dellctl-install-powerstore-without-machineconfig-validate" title="Install CSI Powerstore without installing and configuring protocol prerequisites and validating data path connectivity" card="false" >}}
 ```bash
-dellctl install powerstore --machineconfig --validate-connectivity --namespace=powerstore \
+dellctl install powerstore --namespace=powerstore --operator-install=true \
                            --storage "endpoint=10.0.0.1,username=username" \
                            --storage "endpoint=10.0.0.2,username=username"
 ```
+{{< collapse id="dellctl-install-powerstore-machineconfig-validate" title="Install CSI Powerstore with installing and configuring protocol prerequisites and validating data path connectivity" card="false" >}}
+```bash
+dellctl install powerstore --machineconfig --validate-connectivity --namespace=powerstore --operator-install=true \
+                           --storage "endpoint=10.0.0.1,username=username" \
+                           --storage "endpoint=10.0.0.2,username=username"
+```
+{{< /collapse >}}
+{{< /collapse >}}
+{{< collapse id="dellctl-install-powerstore-without-machineconfig-validate-geneerate" title="Output the YAML to install CSI Powerstore without installing and configuring protocol prerequisites and validating data path connectivity" card="false" >}}
+```bash
+dellctl install powerstore --namespace=powerstore --output \
+                           --storage "endpoint=10.0.0.1,username=username" \
+                           --storage "endpoint=10.0.0.2,username=username"
+```
+{{< /collapse >}}
+{{< collapse id="dellctl-install-powerstore-resiliency" title="Install CSI Powerstore with Resiliency" card="false" >}}
+```bash
+dellctl install powerstore --modules=resiliency --namespace=powerstore --operator-install=true \
+                           --storage "endpoint=10.0.0.1,username=username" \
+                           --storage "endpoint=10.0.0.2,username=username"
+```
+{{< /collapse >}}
+{{< collapse id="dellctl-install-powerstore-observability" title="Install CSI Powerstore with Observability" card="false" >}}
+```bash
+dellctl install powerstore --modules=observability --namespace=powerstore --operator-install=true \
+                           --storage "endpoint=10.0.0.1,username=username" \
+                           --storage "endpoint=10.0.0.2,username=username"
+```
+{{< /collapse >}}
+{{< collapse id="dellctl-install-powerstore-authorization" title="Install CSI Powerstore with Authorization" card="false" >}}
+```bash
+dellctl install powerstore  --modules=authorization --namespace=powerstore --operator-install=true \
+                           --csm-authorization-proxy-hostname=csm-authorization.com \
+                           --tenant-token=/tmp/token.yaml \
+                           --storage "endpoint=10.0.0.1,username=username" \
+                           --storage "endpoint=10.0.0.2,username=username"
+```
+{{< /collapse >}}
+{{< /collapse >}}
 
+{{< collapse id="dellctl-install-powerstore-examples" title="From File Examples" card="false" >}}
 ```bash
 dellctl install powerstore --from-file=config.yaml
 ```
-
-{{< collapse id="1" title="Sample config.yaml to install pre-requisities and validate connectivity" card="false" >}}
+{{< collapse id="dellctl-install-powerstore-without-machineconfig-validate" title="Install CSI Powerstore without installing and configuring protocol prerequisites and validating data path connectivity" card="false" >}}
+```yaml
+# Global Driver parameters
+namespace: powerstore
+operator-install: true
+ 
+# Parameters for each PowerStore system
+storage:
+  - endpoint: 10.0.0.1
+    username: user
+  - endpoint: 10.0.0.2
+    username: user
 ```
+{{< /collapse >}}
+{{< collapse id="dellctl-install-powerstore-with-machineconfig-validate" title="Install CSI Powerstore with installing and configuring protocol prerequisites and validating data path connectivity" card="false" >}}
+```yaml
 # Global Driver parameters
 namespace: powerstore
 operator-install: true
@@ -186,13 +240,12 @@ storage:
     username: user
 ```
 {{< /collapse >}}
-
-{{< collapse id="2" title="Sample config.yaml to output yaml" card="false" >}}
-```
+{{< collapse id="dellctl-install-powerstore-without-machineconfig-validate-output" title="Output the YAML to install CSI Powerstore without installing and configuring protocol prerequisites and validating data path connectivity" card="false" >}}
+```yaml
 # Global Driver parameters
 namespace: powerstore
-output: true
 operator-install: true
+output: true
  
 # Parameters for each PowerStore system
 storage:
@@ -202,12 +255,11 @@ storage:
     username: user
 ```
 {{< /collapse >}}
-
-{{< collapse id="3" title="Sample config.yaml with full configuration" card="false" >}}
-```
+{{< collapse id="dellctl-install-powerstore-full-config" title="Configuration with all available storage parameters" card="false" >}}
+```yaml
 # Global Driver parameters
 namespace: powerstore
-config-version: {{ (index .Site.Params.versions 0).version }}
+config-version: {{VERSION}}
 csi-volume-prefix: myvol
 csi-node-prefix: nodepre
 operator-install: true
@@ -261,6 +313,81 @@ storage:
     exclude-nas-servers:
       - nas-4
 ```
+{{< /collapse >}}
+{{< collapse id="dellctl-install-powerstore-resiliency" title="Install CSI Powerstore with Resiliency" card="false" >}}
+```yaml
+# Global Driver parameters
+namespace: powerstore
+operator-install: true
+modules: resiliency
+ 
+# Parameters for each PowerStore system
+storage:
+  - endpoint: 10.0.0.1
+    username: user
+  - endpoint: 10.0.0.2
+    username: user
+```
+{{< /collapse >}}
+{{< collapse id="dellctl-install-powerstore-observability" title="Install CSI Powerstore with Observability" card="false" >}}
+```yaml
+# Global Driver parameters
+namespace: powerstore
+operator-install: true
+modules: observability
+ 
+# Parameters for each PowerStore system
+storage:
+  - endpoint: 10.0.0.1
+    username: user
+  - endpoint: 10.0.0.2
+    username: user
+```
+{{< /collapse >}}
+{{< collapse id="dellctl-install-powerstore-authorization" title="Install CSI Powerstore with Authorization" card="false" >}}
+```yaml
+# Global Driver parameters
+namespace: powerstore
+operator-install: true
+modules: authorization
+ 
+# Parameters for each PowerStore system
+storage:
+  - endpoint: 10.0.0.1
+    username: user
+  - endpoint: 10.0.0.2
+    username: user
+
+authorization:
+  hostname: csm-authorization.com
+  skipCertificateValidation: false
+  tenantTokenPath: /tmp/token.yaml
+```
+{{< /collapse >}}
+{{< collapse id="dellctl-install-powerstore-replication" title="Install CSI Powerstore with Replication" card="false" >}}
+```yaml
+# Global Driver parameters
+namespace: powerstore
+operator-install: true
+modules: replciation
+ 
+# Parameters for each PowerStore system
+storage:
+  - endpoint: 10.0.0.1
+    username: user
+  - endpoint: 10.0.0.2
+    username: user
+
+replication:
+  sourceClusterID: "cluster-1"
+  targetClusterID: "cluster-2"
+  parameters:
+    rpo: "Five_Minutes"
+    mode: "ASYNC"
+    ignoreNamespaces: false
+    volumeGroupPrefix: "rep"
+```
+{{< /collapse >}}
 {{< /collapse >}}
 
 ---
