@@ -285,11 +285,38 @@ storage:
         allowedTopologies:
           - key: value
     metro-replication:
-      - type: Uniform
-        remote: REMOTE-SYSTEM-2
-        labels:
-          - label1: value1
-          - label2: value2
+      - hostConnectivity:
+          local:
+            nodeSelectorTerms:
+              - matchExpressions:
+                - key: "topology.kubernetes.io/zone"
+                  operator: "NotIn"
+                  values:
+                    - "zone-a"
+                    - "zone-b"
+                    - "zone-ab"
+          metro:
+            colocatedLocal:
+              nodeSelectorTerms:
+                - matchExpressions:
+                  - key: "topology.kubernetes.io/zone"
+                    operator: "In"
+                    values:
+                      - "zone-a"
+            colocatedRemote:
+              nodeSelectorTerms:
+                - matchExpressions:
+                  - key: "topology.kubernetes.io/zone"
+                    operator: "In"
+                    values:
+                      - "zone-b"
+            colocatedBoth:
+              nodeSelectorTerms:
+                - matchExpressions:
+                    - key: "topology.kubernetes.io/zone"
+                      operator: "In"
+                      values:
+                        - "zone-ab"
     include-nas-servers:
       - nas-1
     exclude-nas-servers:
@@ -375,8 +402,131 @@ modules: replciation
 storage:
   - endpoint: 10.0.0.1
     username: user
+    metro-replication:
+      - hostConnectivity:
+          local:
+            nodeSelectorTerms:
+              - matchExpressions:
+                - key: "topology.kubernetes.io/zone"
+                  operator: "NotIn"
+                  values:
+                    - "zone-a"
+                    - "zone-b"
+                    - "zone-ab"
+          metro:
+            colocatedLocal:
+              nodeSelectorTerms:
+                - matchExpressions:
+                  - key: "topology.kubernetes.io/zone"
+                    operator: "In"
+                    values:
+                      - "zone-a"
+            colocatedRemote:
+              nodeSelectorTerms:
+                - matchExpressions:
+                  - key: "topology.kubernetes.io/zone"
+                    operator: "In"
+                    values:
+                      - "zone-b"
+            colocatedBoth:
+              nodeSelectorTerms:
+                - matchExpressions:
+                    - key: "topology.kubernetes.io/zone"
+                      operator: "In"
+                      values:
+                        - "zone-ab"
   - endpoint: 10.0.0.2
     username: user
+
+replication:
+  sourceClusterID: "cluster-1"
+  targetClusterID: "cluster-2"
+  parameters:
+    rpo: "Five_Minutes"
+    mode: "ASYNC"
+    ignoreNamespaces: false
+    volumeGroupPrefix: "rep"
+```
+{{< /collapse >}}
+{{< collapse id="dellctl-install-powerstore-replication" title="Install CSI Powerstore with Metro Replication" card="false" >}}
+```yaml
+# Global Driver parameters
+namespace: powerstore
+operator-install: true
+modules: replciation
+ 
+# Parameters for each PowerStore system
+storage:
+  - endpoint: 10.0.0.1
+    username: user
+    metro-replication:
+      - hostConnectivity:
+          local:
+            nodeSelectorTerms:
+              - matchExpressions:
+                - key: "topology.kubernetes.io/zone"
+                  operator: "NotIn"
+                  values:
+                    - "zone-a"
+                    - "zone-b"
+                    - "zone-ab"
+          metro:
+            colocatedLocal:
+              nodeSelectorTerms:
+                - matchExpressions:
+                  - key: "topology.kubernetes.io/zone"
+                    operator: "In"
+                    values:
+                      - "zone-a"
+            colocatedRemote:
+              nodeSelectorTerms:
+                - matchExpressions:
+                  - key: "topology.kubernetes.io/zone"
+                    operator: "In"
+                    values:
+                      - "zone-b"
+            colocatedBoth:
+              nodeSelectorTerms:
+                - matchExpressions:
+                    - key: "topology.kubernetes.io/zone"
+                      operator: "In"
+                      values:
+                        - "zone-ab"
+  - endpoint: 10.0.0.2
+    username: user
+    metro-replication:
+      - hostConnectivity:
+          local:
+            nodeSelectorTerms:
+              - matchExpressions:
+                - key: "topology.kubernetes.io/zone"
+                  operator: "NotIn"
+                  values:
+                    - "zone-a"
+                    - "zone-b"
+                    - "zone-ab"
+          metro:
+            colocatedLocal:
+              nodeSelectorTerms:
+                - matchExpressions:
+                  - key: "topology.kubernetes.io/zone"
+                    operator: "In"
+                    values:
+                      - "zone-a"
+            colocatedRemote:
+              nodeSelectorTerms:
+                - matchExpressions:
+                  - key: "topology.kubernetes.io/zone"
+                    operator: "In"
+                    values:
+                      - "zone-b"
+            colocatedBoth:
+              nodeSelectorTerms:
+                - matchExpressions:
+                    - key: "topology.kubernetes.io/zone"
+                      operator: "In"
+                      values:
+                        - "zone-ab"
 
 replication:
   sourceClusterID: "cluster-1"
