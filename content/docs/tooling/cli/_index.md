@@ -132,14 +132,26 @@ Installs a Dell CSI Driver and optionally installs protocol prerequisites and va
 | storage.storage-class.reclaimPolicy        | The reclaim policy of the provisioned volume. | Delete | No |
 | storage.storage-class.volumeBindingMode    | The binding mode of the provisioned volume. | WaitForFirstConsumer | No |
 | storage.storage-class.allowVolumeExpansion | Enable or disable expansion of the provisioned volume. | true | No |
-| storage.storage-class.allowedTopologies    | The allowed topologies of the provisioned volume. This is provided as an array. | "" | No |
+| storage.storage-class.allowedTopologies.matchLabelExpressions.    | The allowed topologies of the provisioned volume. This is provided as an array. | - | No |
 | storage.storage-class.allowedTopologies.key    | The key of the allowed topology. | "" | No |
 | storage.storage-class.allowedTopologies.values | The values of the allowed topology. This is provided as an array. | "" | No |
 | **storage.metro-replication**              | This section configures metro replication. | - | - |
-| storage.metro-replication.hostConnectivity.local.nodeSelectorTerms.matchExpressions | The label expressions to describe a node whose host should be registered. This is provided as an array.  | "" | No |
+| storage.metro-replication.hostConnectivity.local.nodeSelectorTerms.matchExpressions | The label expressions to describe a node whose host should be registered. This is provided as an array.  | - | No |
 | storage.metro-replication.hostConnectivity.local.nodeSelectorTerms.matchExpressions.key | The label key of the label expression.  | "" | No |
 | storage.metro-replication.hostConnectivity.local.nodeSelectorTerms.matchExpressions.operator | The operator for the values.  | "" | No |
 | storage.metro-replication.hostConnectivity.local.nodeSelectorTerms.matchExpressions.values | The values of the key. This is provided as an array.  | "" | No |
+| storage.metro-replication.hostConnectivity.metro.colocatedLocal.nodeSelectorTerms.matchExpressions | The label expressions to describe a node whose host should be registered. This is provided as an array.  | - | No |
+| storage.metro-replication.hostConnectivity.metro.colocatedLocal.nodeSelectorTerms.matchExpressions.key | The label key of the label expression.  | "" | No |
+| storage.metro-replication.hostConnectivity.metro.colocatedLocal.nodeSelectorTerms.matchExpressions.operator | The operator for the values.  | "" | No |
+| storage.metro-replication.hostConnectivity.metro.colocatedLocal.nodeSelectorTerms.matchExpressions.values | The values of the key. This is provided as an array.  | "" | No |
+| storage.metro-replication.hostConnectivity.metro.colocatedRemote.nodeSelectorTerms.matchExpressions | The label expressions to describe a node whose host should be registered. This is provided as an array.  | - | No |
+| storage.metro-replication.hostConnectivity.metro.colocatedRemote.nodeSelectorTerms.matchExpressions.key | The label key of the label expression.  | "" | No |
+| storage.metro-replication.hostConnectivity.metro.colocatedRemote.nodeSelectorTerms.matchExpressions.operator | The operator for the values.  | "" | No |
+| storage.metro-replication.hostConnectivity.metro.colocatedRemote.nodeSelectorTerms.matchExpressions.values | The values of the key. This is provided as an array.  | "" | No |
+| storage.metro-replication.hostConnectivity.metro.colocatedBoth.nodeSelectorTerms.matchExpressions | The label expressions to describe a node whose host should be registered. This is provided as an array.  | - | No |
+| storage.metro-replication.hostConnectivity.metro.colocatedBoth.nodeSelectorTerms.matchExpressions.key | The label key of the label expression.  | "" | No |
+| storage.metro-replication.hostConnectivity.metro.colocatedBoth.nodeSelectorTerms.matchExpressions.operator | The operator for the values.  | "" | No |
+| storage.metro-replication.hostConnectivity.metro.colocatedBoth.nodeSelectorTerms.matchExpressions.values | The values of the key. This is provided as an array.  | "" | No |
 | **replication**                            | This sections configures replication. | - | - |
 | replication.sourceClusterID                | The source cluster ID. | "" | No |
 | replication.targetClusterID                | The target cluster ID. | "" | No |
@@ -283,7 +295,10 @@ storage:
         volumeBindingMode: WaitForFirstConsumer
         allowVolumeExpansion: true
         allowedTopologies:
-          - key: value
+          - matchLabelExpressions:
+              - key: csi-powerstore.dellemc.com/10.0.0.1-fc
+                values:
+                  - true
     metro-replication:
       - hostConnectivity:
           local:
