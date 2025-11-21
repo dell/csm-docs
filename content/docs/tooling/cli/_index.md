@@ -82,7 +82,7 @@ Installs a Dell CSI Driver and optionally installs protocol prerequisites and va
 | csm-authorization-proxy-hostname <string> | If deploying CSM Authorization, the hostname of the Authorization Proxy Server.  | "" | No |
 | force                                     | The existing Container Storage Module resources are deleted and then recreated.  | false | No |
 | from-file <string>                        | Path to a YAML file containing configuration details for installing the CSM.  | "" | No |
-| machineconfig                             | Configure pre-requisities based on the provided block-protocol parameter. See the relevant orchestrator and platform [installation page](../../getting-started/installation/_index.md) for which prerequisites are configured.  | false | No |
+| machineconfig                             | Configure pre-requisities based on the provided block-protocol parameter. See the relevant orchestrator and platform [installation page](../../getting-started/installation/) for which prerequisites are configured.  | false | No |
 | modules <stringArray>                     | Container Storage Modules modules to install. This is provided as a comma-separated string. Supported modules are: authorization, observability, resiliency.  | "" | No |
 | namespace <string>                        | Namespace to install into (lowercase alphanumeric, may include dashes, must start/end with alphanumeric).  | "namespace" | Yes |
 | operator-install                          | Container Storage Modules Custom Resource Definitions will be installed.  | false | No |
