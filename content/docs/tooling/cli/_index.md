@@ -274,96 +274,7 @@ storage:
     username: user
 ```
 {{< /collapse >}}
-{{< collapse id="dellctl-install-powerstore-full-config" title="Configuration with all available storage parameters" card="false" >}}
-```yaml
-# Global Driver parameters
-namespace: powerstore
-config-version: {{VERSION}}
-csi-volume-prefix: myvol
-csi-node-prefix: nodepre
-operator-install: true
-machineconfig: true
-snapshot-controller: true
-validate-connectivity: true
-registry-url: my.registry.com:5000/dell/csm
-modules: replication,authorization,observability,resiliency
- 
-# Parameters for each PowerStore system
-storage:
-  - endpoint: 10.0.0.1
-    username: user
-    block-protocol: FC
-    nfs-acls: 0777
-    skip-certificate-validation: true
-    primary: true
-    storage-class:
-      - fsType: ext4
-        reclaimPolicy: Delete
-        volumeBindingMode: WaitForFirstConsumer
-        allowVolumeExpansion: true
-        allowedTopologies:
-          - matchLabelExpressions:
-              - key: csi-powerstore.dellemc.com/10.0.0.1-fc
-                values:
-                  - true
-    metro-replication:
-      - hostConnectivity:
-          local:
-            nodeSelectorTerms:
-              - matchExpressions:
-                - key: "topology.kubernetes.io/zone"
-                  operator: "NotIn"
-                  values:
-                    - "zone-a"
-                    - "zone-b"
-                    - "zone-ab"
-          metro:
-            colocatedLocal:
-              nodeSelectorTerms:
-                - matchExpressions:
-                  - key: "topology.kubernetes.io/zone"
-                    operator: "In"
-                    values:
-                      - "zone-a"
-            colocatedRemote:
-              nodeSelectorTerms:
-                - matchExpressions:
-                  - key: "topology.kubernetes.io/zone"
-                    operator: "In"
-                    values:
-                      - "zone-b"
-            colocatedBoth:
-              nodeSelectorTerms:
-                - matchExpressions:
-                    - key: "topology.kubernetes.io/zone"
-                      operator: "In"
-                      values:
-                        - "zone-ab"
-    include-nas-servers:
-      - nas-1
-    exclude-nas-servers:
-      - nas-2
- 
-  - endpoint: 10.0.0.2
-    username: user
-    block-protocol: FC
-    nfs-acls: 0777
-    skip-certificate-validation: false
-    secondary: true
-    storage-class:
-      - fsType: xfs
-        reclaimPolicy: Delete
-        volumeBindingMode: Immediate
-        allowVolumeExpansion: true
-        allowedTopologies:
-          - key: value
-    include-nas-servers:
-      - nas-3
-    exclude-nas-servers:
-      - nas-4
-```
-{{< /collapse >}}
-{{< collapse id="dellctl-install-powerstore-resiliency" title="Install with Resiliency" card="false" >}}
+{{< collapse id="dellctl-install-powerstore-resiliency" title="Install CSI Powerstore with Resiliency" card="false" >}}
 Install CSI Powerstore with CSM Resiliency
 ```yaml
 # Global Driver parameters
@@ -379,7 +290,7 @@ storage:
     username: user
 ```
 {{< /collapse >}}
-{{< collapse id="dellctl-install-powerstore-observability" title="Install with Observability" card="false" >}}
+{{< collapse id="dellctl-install-powerstore-observability" title="Install CSI Powerstore with Observability" card="false" >}}
 Install CSI Powerstore with CSM Observability
 ```yaml
 # Global Driver parameters
@@ -395,7 +306,7 @@ storage:
     username: user
 ```
 {{< /collapse >}}
-{{< collapse id="dellctl-install-powerstore-authorization" title="Install with Authorization" card="false" >}}
+{{< collapse id="dellctl-install-powerstore-authorization" title="Install CSI Powerstore with Authorization" card="false" >}}
 Install CSI Powerstore with CSM Authorization
 ```yaml
 # Global Driver parameters
@@ -416,7 +327,7 @@ authorization:
   tenantTokenPath: /tmp/token.yaml
 ```
 {{< /collapse >}}
-{{< collapse id="dellctl-install-powerstore-replication" title="Install with Replication" card="false" >}}
+{{< collapse id="dellctl-install-powerstore-replication" title="Install CSI Powerstore with Replication" card="false" >}}
 Install CSI Powerstore with CSM Replication
 ```yaml
 # Global Driver parameters
@@ -441,7 +352,7 @@ replication:
     volumeGroupPrefix: "rep"
 ```
 {{< /collapse >}}
-{{< collapse id="dellctl-install-powerstore-replication" title="Install with Metro Replication" card="false" >}}
+{{< collapse id="dellctl-install-powerstore-replication" title="Install CSI Powerstore Metro with Replication" card="false" >}}
 Install CSI Powerstore with CSM Metro Replication
 ```yaml
 # Global Driver parameters
@@ -532,6 +443,95 @@ replication:
     volumeGroupPrefix: "rep"
 ```
 {{< /collapse >}}
+{{< /collapse >}}
+{{< collapse id="dellctl-install-powerstore-full-config" title="Configuration with all available storage parameters" card="false" >}}
+```yaml
+# Global Driver parameters
+namespace: powerstore
+config-version: {{VERSION}}
+csi-volume-prefix: myvol
+csi-node-prefix: nodepre
+operator-install: true
+machineconfig: true
+snapshot-controller: true
+validate-connectivity: true
+registry-url: my.registry.com:5000/dell/csm
+modules: replication,authorization,observability,resiliency
+ 
+# Parameters for each PowerStore system
+storage:
+  - endpoint: 10.0.0.1
+    username: user
+    block-protocol: FC
+    nfs-acls: 0777
+    skip-certificate-validation: true
+    primary: true
+    storage-class:
+      - fsType: ext4
+        reclaimPolicy: Delete
+        volumeBindingMode: WaitForFirstConsumer
+        allowVolumeExpansion: true
+        allowedTopologies:
+          - matchLabelExpressions:
+              - key: csi-powerstore.dellemc.com/10.0.0.1-fc
+                values:
+                  - true
+    metro-replication:
+      - hostConnectivity:
+          local:
+            nodeSelectorTerms:
+              - matchExpressions:
+                - key: "topology.kubernetes.io/zone"
+                  operator: "NotIn"
+                  values:
+                    - "zone-a"
+                    - "zone-b"
+                    - "zone-ab"
+          metro:
+            colocatedLocal:
+              nodeSelectorTerms:
+                - matchExpressions:
+                  - key: "topology.kubernetes.io/zone"
+                    operator: "In"
+                    values:
+                      - "zone-a"
+            colocatedRemote:
+              nodeSelectorTerms:
+                - matchExpressions:
+                  - key: "topology.kubernetes.io/zone"
+                    operator: "In"
+                    values:
+                      - "zone-b"
+            colocatedBoth:
+              nodeSelectorTerms:
+                - matchExpressions:
+                    - key: "topology.kubernetes.io/zone"
+                      operator: "In"
+                      values:
+                        - "zone-ab"
+    include-nas-servers:
+      - nas-1
+    exclude-nas-servers:
+      - nas-2
+ 
+  - endpoint: 10.0.0.2
+    username: user
+    block-protocol: FC
+    nfs-acls: 0777
+    skip-certificate-validation: false
+    secondary: true
+    storage-class:
+      - fsType: xfs
+        reclaimPolicy: Delete
+        volumeBindingMode: Immediate
+        allowVolumeExpansion: true
+        allowedTopologies:
+          - key: value
+    include-nas-servers:
+      - nas-3
+    exclude-nas-servers:
+      - nas-4
+```
 {{< /collapse >}}
 
 ---
