@@ -171,7 +171,7 @@ Installs a Dell CSI Driver and optionally installs protocol prerequisites and va
 This command deploys the CSI PowerStore driver and optional modules in your Kubernetes or OpenShift environment. 
 
 {{< collapse id="dellctl-install-powerstore-examples" title="CLI Flag Examples" card="false" >}}
-{{< collapse id="dellctl-install-powerstore-without-machineconfig-validate" title="Install" card="false" >}}
+{{< collapse id="dellctl-install-powerstore-without-machineconfig-validate" title="Install CSI Powerstore" card="false" >}}
 Without installing and configuring protocol prerequisites and validating data path connectivity
 ```bash
 dellctl install powerstore --namespace=powerstore --operator-install=true \
@@ -186,7 +186,7 @@ dellctl install powerstore --machineconfig --validate-connectivity --namespace=p
                            --storage "endpoint=10.0.0.2,username=username"
 ```
 {{< /collapse >}}
-{{< collapse id="dellctl-install-powerstore-without-machineconfig-validate-geneerate" title="Output the YAML to install" card="false" >}}
+{{< collapse id="dellctl-install-powerstore-without-machineconfig-validate-geneerate" title="Output the YAML to install CSI Powerstore" card="false" >}}
 Output the YAML to install CSI Powerstore to the console
 ```bash
 dellctl install powerstore --namespace=powerstore --output \
@@ -194,7 +194,7 @@ dellctl install powerstore --namespace=powerstore --output \
                            --storage "endpoint=10.0.0.2,username=username"
 ```
 {{< /collapse >}}
-{{< collapse id="dellctl-install-powerstore-resiliency" title="Install with Resiliency" card="false" >}}
+{{< collapse id="dellctl-install-powerstore-resiliency" title="Install CSI Powerstore with Resiliency" card="false" >}}
 Install CSI Powerstore with CSM Resiliency
 ```bash
 dellctl install powerstore --modules=resiliency --namespace=powerstore --operator-install=true \
@@ -202,7 +202,7 @@ dellctl install powerstore --modules=resiliency --namespace=powerstore --operato
                            --storage "endpoint=10.0.0.2,username=username"
 ```
 {{< /collapse >}}
-{{< collapse id="dellctl-install-powerstore-observability" title="Install with Observability" card="false" >}}
+{{< collapse id="dellctl-install-powerstore-observability" title="Install CSI Powerstore with Observability" card="false" >}}
 Install CSI Powerstore with CSM Observability
 ```bash
 dellctl install powerstore --modules=observability --namespace=powerstore --operator-install=true \
@@ -210,7 +210,7 @@ dellctl install powerstore --modules=observability --namespace=powerstore --oper
                            --storage "endpoint=10.0.0.2,username=username"
 ```
 {{< /collapse >}}
-{{< collapse id="dellctl-install-powerstore-authorization" title="Install with Authorization" card="false" >}}
+{{< collapse id="dellctl-install-powerstore-authorization" title="Install CSI Powerstore with Authorization" card="false" >}}
 Install CSI Powerstore with CSM Authorization
 ```bash
 dellctl install powerstore  --modules=authorization --namespace=powerstore --operator-install=true \
@@ -226,7 +226,7 @@ dellctl install powerstore  --modules=authorization --namespace=powerstore --ope
 ```bash
 dellctl install powerstore --from-file=config.yaml
 ```
-{{< collapse id="dellctl-install-powerstore-without-machineconfig-validate" title="Install" card="false" >}}
+{{< collapse id="dellctl-install-powerstore-without-machineconfig-validate" title="Install CSI Powerstore" card="false" >}}
 
 Without installing and configuring protocol prerequisites and validating data path connectivity
 ```yaml
@@ -258,7 +258,7 @@ storage:
     username: user
 ```
 {{< /collapse >}}
-{{< collapse id="dellctl-install-powerstore-without-machineconfig-validate-output" title="Output the YAML to install" card="false" >}}
+{{< collapse id="dellctl-install-powerstore-without-machineconfig-validate-output" title="Output the YAML to install CSI Powerstore" card="false" >}}
 Output the YAML to install CSI Powerstore to the console
 ```yaml
 # Global Driver parameters
