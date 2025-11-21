@@ -123,8 +123,8 @@ Installs a Dell CSI Driver and optionally installs protocol prerequisites and va
 | storage.username                           | Username for accessing PowerStore system. If authorization is enabled, username will be ignored. | "" | Yes |
 | storage.block-protocol                     | Transport protocol for block storage (Fc, ISCSI, NVMeTCP, NVMeFC) | FC | No |
 | storage.nfs-acls                           | NFS ACLs used if NFS is being used on the array. | 0777 | No |
-| storage.include-nas-servers                | NAS Servers to include. This is provided as an array. | "" | No |
-| storage. exclude-nas-servers               | NAS Servers to exclude. This is provided as an array. | "" | No |
+| storage.include-nas-servers | NAS Servers to include. This is provided as an array. | "" | No |
+| storage. exclude-nas-servers | NAS Servers to exclude. This is provided as an array. | "" | No |
 | storage.skip-certificate-validation        | Enable or disable validating the storage system certificate. | false | No |
 | storage.primary                            | Replicated storage classes will use this storage as the primary site. | false | No |
 | storage.secondary                          | Replicated storage classes will use this storage as the secondary site. | false | No |
@@ -488,7 +488,7 @@ storage:
         allowVolumeExpansion: true
         allowedTopologies:
           - matchLabelExpressions:
-              - key: csi-powerstore.dellemc.com/10.0.0.1-fc
+              - key: csi-powerstore.dellemc.com/10.0.0.2-fc
                 values:
                   - true
     include-nas-servers:
