@@ -32,8 +32,10 @@ The following I/O performance metrics are available from the OpenTelemetry colle
 | powerstore_filesystem_write_iops_per_second | The number of write operations performed against a filesystem (per second) |
 | powerstore_filesystem_read_latency_milliseconds | The time (in ms) to complete read operations to a filesystem |
 | powerstore_filesystem_write_latency_milliseconds | The time (in ms) to complete write operations to a filesystem |
+| powerstore_filesystem_syncronization_bw_megabytes_per_second | The filesystem replication traffic bandwidth against a volume (MB/s) |
+| powerstore_filesystem_data_remaining_bytes | The data remaining to be replicated against a filesystem (MB) |
 
-> __NOTE__: The powerstore_volume_mirror_bw_megabytes_per_second and powerstore_volume_data_remaining_megabytes provides the replication metrics for replication session at volume level.
+> __NOTE__: The powerstore_volume_mirror_bw_megabytes_per_second, powerstore_volume_data_remaining_megabytes, powerstore_filesystem_syncronization_bw_megabytes_per_second, and powerstore_filesystem_data_remaining_bytes provides the replication metrics for replication session at volume/filesystem level.
 
 ## Storage Capacity Metrics
 
