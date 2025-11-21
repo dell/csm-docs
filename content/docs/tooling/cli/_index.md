@@ -70,8 +70,7 @@ Installs a Dell CSI Driver and optionally installs protocol prerequisites and va
 ```bash
   powerstore         Install the Dell CSI Powerstore driver
 ```
-
-##### CLI Flags
+{{< collapse id="dellctl-install-cli-params" title="CLI Parameters" card="false" >}}
 {{<table install-flags >}}
 | Flag               | Description | Default | Mandatory |
 |:-------------------|:------------|:--------|:-----------
@@ -94,14 +93,13 @@ Installs a Dell CSI Driver and optionally installs protocol prerequisites and va
 | tenant-token                              | Path to a YAML file containing Authorization tenant token (proxy-authz-token secret). | "" | No |
 | validate-connectivity                     | Run a DaemonSet on all nodes to verify connectivity to storage systems.  | false | No |
 {{</table >}}
-
-&nbsp;
+{{< /collapse >}}
 
 > **NOTES:**
 > - `--machineconfig` is applicable for both OpenShift and Kubernetes.
 > - Replication is not supported via CLI flags. [From-File](#from-file-parameters) must be used to install Replication.
 
-##### From-File Parameters
+{{< collapse id="dellctl-install-cli-params" title="From-File Parameters" card="false" >}}
 {{<table install-flags >}}
 | Parameter               | Description | Default | Mandatory |
 |:-------------------|:------------|:--------|:-----------
@@ -132,26 +130,26 @@ Installs a Dell CSI Driver and optionally installs protocol prerequisites and va
 | storage.storage-class.reclaimPolicy        | The reclaim policy of the provisioned volume. | Delete | No |
 | storage.storage-class.volumeBindingMode    | The binding mode of the provisioned volume. | WaitForFirstConsumer | No |
 | storage.storage-class.allowVolumeExpansion | Enable or disable expansion of the provisioned volume. | true | No |
-| storage.storage-class.allowedTopologies.matchLabelExpressions.    | The allowed topologies of the provisioned volume. This is provided as an array. | - | No |
+| storage.storage-class.<br>allowedTopologies.matchLabelExpressions    | The allowed topologies of the provisioned volume. This is provided as an array. | - | No |
 | storage.storage-class.allowedTopologies.key    | The key of the allowed topology. | "" | No |
 | storage.storage-class.allowedTopologies.values | The values of the allowed topology. This is provided as an array. | "" | No |
 | **storage.metro-replication**              | This section configures metro replication. | - | - |
-| storage.metro-replication.hostConnectivity.local.nodeSelectorTerms.matchExpressions | The label expressions to describe a node whose host should be registered. This is provided as an array.  | - | No |
-| storage.metro-replication.hostConnectivity.local.nodeSelectorTerms.matchExpressions.key | The label key of the label expression.  | "" | No |
-| storage.metro-replication.hostConnectivity.local.nodeSelectorTerms.matchExpressions.operator | The operator for the values.  | "" | No |
-| storage.metro-replication.hostConnectivity.local.nodeSelectorTerms.matchExpressions.values | The values of the key. This is provided as an array.  | "" | No |
-| storage.metro-replication.hostConnectivity.metro.colocatedLocal.nodeSelectorTerms.matchExpressions | The label expressions to describe a node whose host should be registered. This is provided as an array.  | - | No |
-| storage.metro-replication.hostConnectivity.metro.colocatedLocal.nodeSelectorTerms.matchExpressions.key | The label key of the label expression.  | "" | No |
-| storage.metro-replication.hostConnectivity.metro.colocatedLocal.nodeSelectorTerms.matchExpressions.operator | The operator for the values.  | "" | No |
-| storage.metro-replication.hostConnectivity.metro.colocatedLocal.nodeSelectorTerms.matchExpressions.values | The values of the key. This is provided as an array.  | "" | No |
-| storage.metro-replication.hostConnectivity.metro.colocatedRemote.nodeSelectorTerms.matchExpressions | The label expressions to describe a node whose host should be registered. This is provided as an array.  | - | No |
-| storage.metro-replication.hostConnectivity.metro.colocatedRemote.nodeSelectorTerms.matchExpressions.key | The label key of the label expression.  | "" | No |
-| storage.metro-replication.hostConnectivity.metro.colocatedRemote.nodeSelectorTerms.matchExpressions.operator | The operator for the values.  | "" | No |
-| storage.metro-replication.hostConnectivity.metro.colocatedRemote.nodeSelectorTerms.matchExpressions.values | The values of the key. This is provided as an array.  | "" | No |
-| storage.metro-replication.hostConnectivity.metro.colocatedBoth.nodeSelectorTerms.matchExpressions | The label expressions to describe a node whose host should be registered. This is provided as an array.  | - | No |
-| storage.metro-replication.hostConnectivity.metro.colocatedBoth.nodeSelectorTerms.matchExpressions.key | The label key of the label expression.  | "" | No |
-| storage.metro-replication.hostConnectivity.metro.colocatedBoth.nodeSelectorTerms.matchExpressions.operator | The operator for the values.  | "" | No |
-| storage.metro-replication.hostConnectivity.metro.colocatedBoth.nodeSelectorTerms.matchExpressions.values | The values of the key. This is provided as an array.  | "" | No |
+| storage.metro-replication.hostConnectivity.local.<br>nodeSelectorTerms.matchExpressions | The label expressions to describe a node whose host should be registered. This is provided as an array.  | - | No |
+| storage.metro-replication.hostConnectivity.local.<br>nodeSelectorTerms.matchExpressions.key | The label key of the label expression.  | "" | No |
+| storage.metro-replication.hostConnectivity.local.<br>nodeSelectorTerms.matchExpressions.operator | The operator for the values.  | "" | No |
+| storage.metro-replication.hostConnectivity.local.<br>nodeSelectorTerms.matchExpressions.values | The values of the key. This is provided as an array.  | "" | No |
+| storage.metro-replication.hostConnectivity.metro.<br>colocatedLocal.<br>nodeSelectorTerms.matchExpressions | The label expressions to describe a node whose host should be registered. This is provided as an array.  | - | No |
+| storage.metro-replication.hostConnectivity.metro.<br>colocatedLocal.nodeSelectorTerms.<br>matchExpressions.key | The label key of the label expression.  | "" | No |
+| storage.metro-replication.hostConnectivity.metro.<br>colocatedLocal.nodeSelectorTerms.<br>matchExpressions.operator | The operator for the values.  | "" | No |
+| storage.metro-replication.hostConnectivity.metro.<br>colocatedLocal.nodeSelectorTerms.<br>matchExpressions.values | The values of the key. This is provided as an array.  | "" | No |
+| storage.metro-replication.hostConnectivity.metro.<br>colocatedRemote.<br>nodeSelectorTerms.matchExpressions | The label expressions to describe a node whose host should be registered. This is provided as an array.  | - | No |
+| storage.metro-replication.hostConnectivity.metro.<br>colocatedRemote.nodeSelectorTerms.<br>matchExpressions.key | The label key of the label expression.  | "" | No |
+| storage.metro-replication.hostConnectivity.metro.<br>colocatedRemote.nodeSelectorTerms.<br>matchExpressions.operator | The operator for the values.  | "" | No |
+| storage.metro-replication.hostConnectivity.metro.<br>colocatedRemote.nodeSelectorTerms.<br>matchExpressions.values | The values of the key. This is provided as an array.  | "" | No |
+| storage.metro-replication.hostConnectivity.metro.<br>colocatedBoth.nodeSelectorTerms.matchExpressions | The label expressions to describe a node whose host should be registered. This is provided as an array.  | - | No |
+| storage.metro-replication.hostConnectivity.metro.<br>colocatedBoth.nodeSelectorTerms.<br>matchExpressions.key | The label key of the label expression.  | "" | No |
+| storage.metro-replication.hostConnectivity.metro.<br>colocatedBoth.nodeSelectorTerms.<br>matchExpressions.operator | The operator for the values.  | "" | No |
+| storage.metro-replication.hostConnectivity.metro.<br>colocatedBoth.nodeSelectorTerms.<br>matchExpressions.values | The values of the key. This is provided as an array.  | "" | No |
 | **replication**                            | This sections configures replication. | - | - |
 | replication.sourceClusterID                | The source cluster ID. | "" | No |
 | replication.targetClusterID                | The target cluster ID. | "" | No |
@@ -164,6 +162,7 @@ Installs a Dell CSI Driver and optionally installs protocol prerequisites and va
 | authorization.skipCertificateValidation    | Enable or disable validadting the CSM Authorization proxy-server certificate. | false | No |
 | authorization.tenantTokenPath              | The path to the tenant token file. | "" | No |
 {{</table >}}
+{{< /collapse >}}
 
 ---
 
@@ -172,42 +171,43 @@ Installs a Dell CSI Driver and optionally installs protocol prerequisites and va
 This command deploys the CSI PowerStore driver and optional modules in your Kubernetes or OpenShift environment. 
 
 {{< collapse id="dellctl-install-powerstore-examples" title="CLI Flag Examples" card="false" >}}
-{{< collapse id="dellctl-install-powerstore-without-machineconfig-validate" title="Install CSI Powerstore without installing and configuring protocol prerequisites and validating data path connectivity" card="false" >}}
+{{< collapse id="dellctl-install-powerstore-without-machineconfig-validate" title="Install" card="false" >}}
+Without installing and configuring protocol prerequisites and validating data path connectivity
 ```bash
 dellctl install powerstore --namespace=powerstore --operator-install=true \
                            --storage "endpoint=10.0.0.1,username=username" \
                            --storage "endpoint=10.0.0.2,username=username"
 ```
-{{< collapse id="dellctl-install-powerstore-machineconfig-validate" title="Install CSI Powerstore with installing and configuring protocol prerequisites and validating data path connectivity" card="false" >}}
+
+With installing and configuring protocol prerequisites and validating data path connectivity
 ```bash
 dellctl install powerstore --machineconfig --validate-connectivity --namespace=powerstore --operator-install=true \
                            --storage "endpoint=10.0.0.1,username=username" \
                            --storage "endpoint=10.0.0.2,username=username"
 ```
 {{< /collapse >}}
-{{< /collapse >}}
-{{< collapse id="dellctl-install-powerstore-without-machineconfig-validate-geneerate" title="Output the YAML to install CSI Powerstore without installing and configuring protocol prerequisites and validating data path connectivity" card="false" >}}
+{{< collapse id="dellctl-install-powerstore-without-machineconfig-validate-geneerate" title="Output the YAML to install" card="false" >}}
 ```bash
 dellctl install powerstore --namespace=powerstore --output \
                            --storage "endpoint=10.0.0.1,username=username" \
                            --storage "endpoint=10.0.0.2,username=username"
 ```
 {{< /collapse >}}
-{{< collapse id="dellctl-install-powerstore-resiliency" title="Install CSI Powerstore with Resiliency" card="false" >}}
+{{< collapse id="dellctl-install-powerstore-resiliency" title="Install with Resiliency" card="false" >}}
 ```bash
 dellctl install powerstore --modules=resiliency --namespace=powerstore --operator-install=true \
                            --storage "endpoint=10.0.0.1,username=username" \
                            --storage "endpoint=10.0.0.2,username=username"
 ```
 {{< /collapse >}}
-{{< collapse id="dellctl-install-powerstore-observability" title="Install CSI Powerstore with Observability" card="false" >}}
+{{< collapse id="dellctl-install-powerstore-observability" title="Install with Observability" card="false" >}}
 ```bash
 dellctl install powerstore --modules=observability --namespace=powerstore --operator-install=true \
                            --storage "endpoint=10.0.0.1,username=username" \
                            --storage "endpoint=10.0.0.2,username=username"
 ```
 {{< /collapse >}}
-{{< collapse id="dellctl-install-powerstore-authorization" title="Install CSI Powerstore with Authorization" card="false" >}}
+{{< collapse id="dellctl-install-powerstore-authorization" title="Install with Authorization" card="false" >}}
 ```bash
 dellctl install powerstore  --modules=authorization --namespace=powerstore --operator-install=true \
                            --csm-authorization-proxy-hostname=csm-authorization.com \
@@ -222,7 +222,9 @@ dellctl install powerstore  --modules=authorization --namespace=powerstore --ope
 ```bash
 dellctl install powerstore --from-file=config.yaml
 ```
-{{< collapse id="dellctl-install-powerstore-without-machineconfig-validate" title="Install CSI Powerstore without installing and configuring protocol prerequisites and validating data path connectivity" card="false" >}}
+{{< collapse id="dellctl-install-powerstore-without-machineconfig-validate" title="Install" card="false" >}}
+
+Without installing and configuring protocol prerequisites and validating data path connectivity
 ```yaml
 # Global Driver parameters
 namespace: powerstore
@@ -235,8 +237,8 @@ storage:
   - endpoint: 10.0.0.2
     username: user
 ```
-{{< /collapse >}}
-{{< collapse id="dellctl-install-powerstore-with-machineconfig-validate" title="Install CSI Powerstore with installing and configuring protocol prerequisites and validating data path connectivity" card="false" >}}
+
+With installing and configuring protocol prerequisites and validating data path connectivity
 ```yaml
 # Global Driver parameters
 namespace: powerstore
@@ -252,7 +254,7 @@ storage:
     username: user
 ```
 {{< /collapse >}}
-{{< collapse id="dellctl-install-powerstore-without-machineconfig-validate-output" title="Output the YAML to install CSI Powerstore without installing and configuring protocol prerequisites and validating data path connectivity" card="false" >}}
+{{< collapse id="dellctl-install-powerstore-without-machineconfig-validate-output" title="Output the YAML to install" card="false" >}}
 ```yaml
 # Global Driver parameters
 namespace: powerstore
@@ -356,7 +358,7 @@ storage:
       - nas-4
 ```
 {{< /collapse >}}
-{{< collapse id="dellctl-install-powerstore-resiliency" title="Install CSI Powerstore with Resiliency" card="false" >}}
+{{< collapse id="dellctl-install-powerstore-resiliency" title="Install with Resiliency" card="false" >}}
 ```yaml
 # Global Driver parameters
 namespace: powerstore
@@ -371,7 +373,7 @@ storage:
     username: user
 ```
 {{< /collapse >}}
-{{< collapse id="dellctl-install-powerstore-observability" title="Install CSI Powerstore with Observability" card="false" >}}
+{{< collapse id="dellctl-install-powerstore-observability" title="Install with Observability" card="false" >}}
 ```yaml
 # Global Driver parameters
 namespace: powerstore
@@ -386,7 +388,7 @@ storage:
     username: user
 ```
 {{< /collapse >}}
-{{< collapse id="dellctl-install-powerstore-authorization" title="Install CSI Powerstore with Authorization" card="false" >}}
+{{< collapse id="dellctl-install-powerstore-authorization" title="Install with Authorization" card="false" >}}
 ```yaml
 # Global Driver parameters
 namespace: powerstore
@@ -406,7 +408,7 @@ authorization:
   tenantTokenPath: /tmp/token.yaml
 ```
 {{< /collapse >}}
-{{< collapse id="dellctl-install-powerstore-replication" title="Install CSI Powerstore with Replication" card="false" >}}
+{{< collapse id="dellctl-install-powerstore-replication" title="Install with Replication" card="false" >}}
 ```yaml
 # Global Driver parameters
 namespace: powerstore
@@ -463,7 +465,7 @@ replication:
     volumeGroupPrefix: "rep"
 ```
 {{< /collapse >}}
-{{< collapse id="dellctl-install-powerstore-replication" title="Install CSI Powerstore with Metro Replication" card="false" >}}
+{{< collapse id="dellctl-install-powerstore-replication" title="Install with Metro Replication" card="false" >}}
 ```yaml
 # Global Driver parameters
 namespace: powerstore
