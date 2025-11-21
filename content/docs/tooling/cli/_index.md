@@ -443,7 +443,6 @@ replication:
     volumeGroupPrefix: "rep"
 ```
 {{< /collapse >}}
-{{< /collapse >}}
 {{< collapse id="dellctl-install-powerstore-full-config" title="Configuration with all available storage parameters" card="false" >}}
 ```yaml
 # Global Driver parameters
@@ -532,6 +531,7 @@ storage:
     exclude-nas-servers:
       - nas-4
 ```
+{{< /collapse >}}
 {{< /collapse >}}
 
 ---
