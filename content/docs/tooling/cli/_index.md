@@ -123,7 +123,7 @@ Installs a Dell CSI Driver and optionally installs protocol prerequisites and va
 | storage.username                           | Username for accessing Powerstore system. If authorization is enabled, username will be ignored. | "" | Yes |
 | storage.block-protocol                     | Transport protocol for block storage (Fc, ISCSI, NVMeTCP, NVMeFC) | FC | No |
 | storage.nfs-acls                           | NFS ACLs used if NFS is being used on the array. | 0777 | No |
-| storage.skip-certificate-validation        | Enable or disable validadting the storage system certificate. | false | No |
+| storage.skip-certificate-validation        | Enable or disable validating the storage system certificate. | false | No |
 | storage.primary                            | Replicated storage classes will this cluster as the primary site. | false | No |
 | storage.secondary                          | Replicated storage classes will this cluster as the secondary site. | false | No |
 | **storage.storage-class**                  | This section configures the storage classes. It is provided as an array. | - | - |
