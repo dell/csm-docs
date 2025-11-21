@@ -187,6 +187,7 @@ dellctl install powerstore --machineconfig --validate-connectivity --namespace=p
 ```
 {{< /collapse >}}
 {{< collapse id="dellctl-install-powerstore-without-machineconfig-validate-geneerate" title="Output the YAML to install" card="false" >}}
+Output the YAML to install CSI Powerstore to the console
 ```bash
 dellctl install powerstore --namespace=powerstore --output \
                            --storage "endpoint=10.0.0.1,username=username" \
@@ -194,6 +195,7 @@ dellctl install powerstore --namespace=powerstore --output \
 ```
 {{< /collapse >}}
 {{< collapse id="dellctl-install-powerstore-resiliency" title="Install with Resiliency" card="false" >}}
+Install CSI Powerstore with CSM Resiliency
 ```bash
 dellctl install powerstore --modules=resiliency --namespace=powerstore --operator-install=true \
                            --storage "endpoint=10.0.0.1,username=username" \
@@ -201,6 +203,7 @@ dellctl install powerstore --modules=resiliency --namespace=powerstore --operato
 ```
 {{< /collapse >}}
 {{< collapse id="dellctl-install-powerstore-observability" title="Install with Observability" card="false" >}}
+Install CSI Powerstore with CSM Observability
 ```bash
 dellctl install powerstore --modules=observability --namespace=powerstore --operator-install=true \
                            --storage "endpoint=10.0.0.1,username=username" \
@@ -208,6 +211,7 @@ dellctl install powerstore --modules=observability --namespace=powerstore --oper
 ```
 {{< /collapse >}}
 {{< collapse id="dellctl-install-powerstore-authorization" title="Install with Authorization" card="false" >}}
+Install CSI Powerstore with CSM Authorization
 ```bash
 dellctl install powerstore  --modules=authorization --namespace=powerstore --operator-install=true \
                            --csm-authorization-proxy-hostname=csm-authorization.com \
@@ -255,6 +259,7 @@ storage:
 ```
 {{< /collapse >}}
 {{< collapse id="dellctl-install-powerstore-without-machineconfig-validate-output" title="Output the YAML to install" card="false" >}}
+Output the YAML to install CSI Powerstore to the console
 ```yaml
 # Global Driver parameters
 namespace: powerstore
@@ -359,6 +364,7 @@ storage:
 ```
 {{< /collapse >}}
 {{< collapse id="dellctl-install-powerstore-resiliency" title="Install with Resiliency" card="false" >}}
+Install CSI Powerstore with CSM Resiliency
 ```yaml
 # Global Driver parameters
 namespace: powerstore
@@ -374,6 +380,7 @@ storage:
 ```
 {{< /collapse >}}
 {{< collapse id="dellctl-install-powerstore-observability" title="Install with Observability" card="false" >}}
+Install CSI Powerstore with CSM Observability
 ```yaml
 # Global Driver parameters
 namespace: powerstore
@@ -389,6 +396,7 @@ storage:
 ```
 {{< /collapse >}}
 {{< collapse id="dellctl-install-powerstore-authorization" title="Install with Authorization" card="false" >}}
+Install CSI Powerstore with CSM Authorization
 ```yaml
 # Global Driver parameters
 namespace: powerstore
@@ -409,6 +417,7 @@ authorization:
 ```
 {{< /collapse >}}
 {{< collapse id="dellctl-install-powerstore-replication" title="Install with Replication" card="false" >}}
+Install CSI Powerstore with CSM Replication
 ```yaml
 # Global Driver parameters
 namespace: powerstore
@@ -419,39 +428,6 @@ modules: replciation
 storage:
   - endpoint: 10.0.0.1
     username: user
-    metro-replication:
-      - hostConnectivity:
-          local:
-            nodeSelectorTerms:
-              - matchExpressions:
-                - key: "topology.kubernetes.io/zone"
-                  operator: "NotIn"
-                  values:
-                    - "zone-a"
-                    - "zone-b"
-                    - "zone-ab"
-          metro:
-            colocatedLocal:
-              nodeSelectorTerms:
-                - matchExpressions:
-                  - key: "topology.kubernetes.io/zone"
-                    operator: "In"
-                    values:
-                      - "zone-a"
-            colocatedRemote:
-              nodeSelectorTerms:
-                - matchExpressions:
-                  - key: "topology.kubernetes.io/zone"
-                    operator: "In"
-                    values:
-                      - "zone-b"
-            colocatedBoth:
-              nodeSelectorTerms:
-                - matchExpressions:
-                    - key: "topology.kubernetes.io/zone"
-                      operator: "In"
-                      values:
-                        - "zone-ab"
   - endpoint: 10.0.0.2
     username: user
 
@@ -466,6 +442,7 @@ replication:
 ```
 {{< /collapse >}}
 {{< collapse id="dellctl-install-powerstore-replication" title="Install with Metro Replication" card="false" >}}
+Install CSI Powerstore with CSM Metro Replication
 ```yaml
 # Global Driver parameters
 namespace: powerstore
