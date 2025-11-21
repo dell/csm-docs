@@ -118,7 +118,7 @@ Installs a Dell CSI Driver and optionally installs protocol prerequisites and va
 | validate-connectivity                      | Run a DaemonSet on all nodes to verify connectivity to storage systems.  | false | No |
 | **storage**                                | This section configures the storage systems. It is provided as an array. | - | - |
 | storage.endpoint                           | The IP address or hostname of the storage system endponit (i.e., 10.0.0.1). | "" | Yes |
-| storage.username                           | Username for accessing PowerFlex system. If authorization is enabled, username will be ignored. | "" | Yes |
+| storage.username                           | Username for accessing Powerstore system. If authorization is enabled, username will be ignored. | "" | Yes |
 | storage.block-protocol                     | Transport protocol for block storage (Fc, ISCSI, NVMeTCP, NVMeFC, None, auto) | FC | No |
 | storage.nfs-acls                           | NFS ACLs used if NFS is being used on the array. | 0777 | No |
 | storage.skip-certificate-validation        | Enable or disable validadting the storage system certificate. | false | No |
