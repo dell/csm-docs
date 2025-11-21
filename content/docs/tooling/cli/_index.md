@@ -12,7 +12,7 @@ This document outlines all dellctl commands, their intended use, options that ca
 | - | - |
 | [dellctl](../cli/#dellctl) | dellctl is used to interact with Container Storage Modules |
 | [dellctl install](../cli/#dellctl-install) | Install a CSI Driver |
-| [dellctl install powerstore](../cli/#dellctl-install-powerstore) | Install CSI Powerstore |
+| [dellctl install powerstore](../cli/#dellctl-install-powerstore) | Install CSI PowerStore |
 | [dellctl cluster](../cli/#dellctl-cluster) | Manipulate one or more k8s cluster configurations |
 | [dellctl cluster add](../cli/#dellctl-cluster-add) | Add a k8s cluster to be managed by dellctl |
 | [dellctl cluster remove](../cli/#dellctl-cluster-remove) | Removes a k8s cluster managed by dellctl |
@@ -68,7 +68,7 @@ Installs a Dell CSI Driver and optionally installs protocol prerequisites and va
 ##### Available Commands
 
 ```bash
-  powerstore         Install the Dell CSI Powerstore driver
+  powerstore         Install the Dell CSI PowerStore driver
 ```
 {{< collapse id="dellctl-install-cli-params" title="CLI Parameters" card="false" >}}
 {{<table install-flags >}}
@@ -120,16 +120,18 @@ Installs a Dell CSI Driver and optionally installs protocol prerequisites and va
 | validate-connectivity                      | Run a DaemonSet on all nodes to verify connectivity to storage systems.  | false | No |
 | **storage**                                | This section configures the storage systems. It is provided as an array. | - | - |
 | storage.endpoint                           | The IP address or hostname of the storage system endponit (i.e., 10.0.0.1). | "" | Yes |
-| storage.username                           | Username for accessing Powerstore system. If authorization is enabled, username will be ignored. | "" | Yes |
+| storage.username                           | Username for accessing PowerStore system. If authorization is enabled, username will be ignored. | "" | Yes |
 | storage.block-protocol                     | Transport protocol for block storage (Fc, ISCSI, NVMeTCP, NVMeFC) | FC | No |
 | storage.nfs-acls                           | NFS ACLs used if NFS is being used on the array. | 0777 | No |
+| storage.include-nas-servers                | NAS Servers to include. This is provided as an array. | "" | No |
+| storage. exclude-nas-servers               | NAS Servers to exclude. This is provided as an array. | "" | No |
 | storage.skip-certificate-validation        | Enable or disable validating the storage system certificate. | false | No |
 | storage.primary                            | Replicated storage classes will use this storage as the primary site. | false | No |
 | storage.secondary                          | Replicated storage classes will use this storage as the secondary site. | false | No |
 | **storage.storage-class**                  | This section configures the storage classes. It is provided as an array. | - | - |
 | storage.storage-class.fsType               | The file system type of the provisioned volume. | ext4 | No |
 | storage.storage-class.reclaimPolicy        | The reclaim policy of the provisioned volume. | Delete | No |
-| storage.storage-class.volumeBindingMode    | The binding mode of the provisioned volume. | WaitForFirstConsumer | No |
+| storage.storage-class.volumeBindingMode    | The binding mode of the provisioned volume. | Immediate | No |
 | storage.storage-class.allowVolumeExpansion | Enable or disable expansion of the provisioned volume. | true | No |
 | storage.storage-class.<br>allowedTopologies.matchLabelExpressions    | The allowed topologies of the provisioned volume. This is provided as an array. | - | No |
 | storage.storage-class.allowedTopologies.key    | The key of the allowed topology. | "" | No |
@@ -160,7 +162,7 @@ Installs a Dell CSI Driver and optionally installs protocol prerequisites and va
 | replication.parameters.volumeGroupPrefix   | The string appended to the volume group name. | csi | No |
 | **authorization**                          | This section configures authorization. | - | - |
 | authorization.authorizationProxyHostname                     | The hostname of the CSM Authorization proxy-server. | "" | No |
-| authorization.skipCertificateValidation    | Enable or disable validadting the CSM Authorization proxy-server certificate. | false | No |
+| authorization.skipCertificateValidation    | Enable or disable validating the CSM Authorization proxy-server certificate. | false | No |
 | authorization.tenantTokenPath              | The path to the tenant token file. | "" | No |
 {{</table >}}
 {{< /collapse >}}
@@ -172,7 +174,7 @@ Installs a Dell CSI Driver and optionally installs protocol prerequisites and va
 This command deploys the CSI PowerStore driver and optional modules in your Kubernetes or OpenShift environment. 
 
 {{< collapse id="dellctl-install-powerstore-examples" title="CLI Flag Examples" card="false" >}}
-{{< collapse id="dellctl-install-powerstore-without-machineconfig-validate" title="Install CSI Powerstore" card="false" >}}
+{{< collapse id="dellctl-install-powerstore-without-machineconfig-validate" title="Install CSI PowerStore" card="false" >}}
 Without installing and configuring protocol prerequisites and validating data path connectivity
 ```bash
 dellctl install powerstore --namespace=powerstore --operator-install=true \
@@ -187,32 +189,32 @@ dellctl install powerstore --machineconfig --validate-connectivity --namespace=p
                            --storage "endpoint=10.0.0.2,username=username"
 ```
 {{< /collapse >}}
-{{< collapse id="dellctl-install-powerstore-without-machineconfig-validate-geneerate" title="Output the YAML to install CSI Powerstore" card="false" >}}
-Output the YAML to install CSI Powerstore to the console
+{{< collapse id="dellctl-install-powerstore-without-machineconfig-validate-geneerate" title="Output the YAML to install CSI PowerStore" card="false" >}}
+Output the YAML to install CSI PowerStore to the console
 ```bash
-dellctl install powerstore --namespace=powerstore --output \
+dellctl install powerstore --namespace=powerstore --operator-install=true --output \
                            --storage "endpoint=10.0.0.1,username=username" \
                            --storage "endpoint=10.0.0.2,username=username"
 ```
 {{< /collapse >}}
-{{< collapse id="dellctl-install-powerstore-resiliency" title="Install CSI Powerstore with Resiliency" card="false" >}}
-Install CSI Powerstore with CSM Resiliency
+{{< collapse id="dellctl-install-powerstore-resiliency" title="Install CSI PowerStore with Resiliency" card="false" >}}
+Install CSI PowerStore with CSM Resiliency
 ```bash
 dellctl install powerstore --modules=resiliency --namespace=powerstore --operator-install=true \
                            --storage "endpoint=10.0.0.1,username=username" \
                            --storage "endpoint=10.0.0.2,username=username"
 ```
 {{< /collapse >}}
-{{< collapse id="dellctl-install-powerstore-observability" title="Install CSI Powerstore with Observability" card="false" >}}
-Install CSI Powerstore with CSM Observability
+{{< collapse id="dellctl-install-powerstore-observability" title="Install CSI PowerStore with Observability" card="false" >}}
+Install CSI PowerStore with CSM Observability
 ```bash
 dellctl install powerstore --modules=observability --namespace=powerstore --operator-install=true \
                            --storage "endpoint=10.0.0.1,username=username" \
                            --storage "endpoint=10.0.0.2,username=username"
 ```
 {{< /collapse >}}
-{{< collapse id="dellctl-install-powerstore-authorization" title="Install CSI Powerstore with Authorization" card="false" >}}
-Install CSI Powerstore with CSM Authorization
+{{< collapse id="dellctl-install-powerstore-authorization" title="Install CSI PowerStore with Authorization" card="false" >}}
+Install CSI PowerStore with CSM Authorization
 ```bash
 dellctl install powerstore  --modules=authorization --namespace=powerstore --operator-install=true \
                            --csm-authorization-proxy-hostname=csm-authorization.com \
@@ -227,7 +229,7 @@ dellctl install powerstore  --modules=authorization --namespace=powerstore --ope
 ```bash
 dellctl install powerstore --from-file=config.yaml
 ```
-{{< collapse id="dellctl-install-powerstore-without-machineconfig-validate" title="Install CSI Powerstore" card="false" >}}
+{{< collapse id="dellctl-install-powerstore-without-machineconfig-validate" title="Install CSI PowerStore" card="false" >}}
 
 Without installing and configuring protocol prerequisites and validating data path connectivity
 ```yaml
@@ -259,8 +261,8 @@ storage:
     username: user
 ```
 {{< /collapse >}}
-{{< collapse id="dellctl-install-powerstore-without-machineconfig-validate-output" title="Output the YAML to install CSI Powerstore" card="false" >}}
-Output the YAML to install CSI Powerstore to the console
+{{< collapse id="dellctl-install-powerstore-without-machineconfig-validate-output" title="Output the YAML to install CSI PowerStore" card="false" >}}
+Output the YAML to install CSI PowerStore to the console
 ```yaml
 # Global Driver parameters
 namespace: powerstore
@@ -275,8 +277,8 @@ storage:
     username: user
 ```
 {{< /collapse >}}
-{{< collapse id="dellctl-install-powerstore-resiliency" title="Install CSI Powerstore with Resiliency" card="false" >}}
-Install CSI Powerstore with CSM Resiliency
+{{< collapse id="dellctl-install-powerstore-resiliency" title="Install CSI PowerStore with Resiliency" card="false" >}}
+Install CSI PowerStore with CSM Resiliency
 ```yaml
 # Global Driver parameters
 namespace: powerstore
@@ -291,8 +293,8 @@ storage:
     username: user
 ```
 {{< /collapse >}}
-{{< collapse id="dellctl-install-powerstore-observability" title="Install CSI Powerstore with Observability" card="false" >}}
-Install CSI Powerstore with CSM Observability
+{{< collapse id="dellctl-install-powerstore-observability" title="Install CSI PowerStore with Observability" card="false" >}}
+Install CSI PowerStore with CSM Observability
 ```yaml
 # Global Driver parameters
 namespace: powerstore
@@ -307,8 +309,8 @@ storage:
     username: user
 ```
 {{< /collapse >}}
-{{< collapse id="dellctl-install-powerstore-authorization" title="Install CSI Powerstore with Authorization" card="false" >}}
-Install CSI Powerstore with CSM Authorization
+{{< collapse id="dellctl-install-powerstore-authorization" title="Install CSI PowerStore with Authorization" card="false" >}}
+Install CSI PowerStore with CSM Authorization
 ```yaml
 # Global Driver parameters
 namespace: powerstore
@@ -328,20 +330,22 @@ authorization:
   tenantTokenPath: /tmp/token.yaml
 ```
 {{< /collapse >}}
-{{< collapse id="dellctl-install-powerstore-replication" title="Install CSI Powerstore with Replication" card="false" >}}
-Install CSI Powerstore with CSM Replication
+{{< collapse id="dellctl-install-powerstore-replication" title="Install CSI PowerStore with Replication" card="false" >}}
+Install CSI PowerStore with CSM Replication
 ```yaml
 # Global Driver parameters
 namespace: powerstore
 operator-install: true
-modules: replciation
+modules: replication
  
 # Parameters for each PowerStore system
 storage:
   - endpoint: 10.0.0.1
     username: user
+    primary: true
   - endpoint: 10.0.0.2
     username: user
+    secondary: true
 
 replication:
   sourceClusterID: "cluster-1"
@@ -353,18 +357,18 @@ replication:
     volumeGroupPrefix: "csi"
 ```
 {{< /collapse >}}
-{{< collapse id="dellctl-install-powerstore-replication" title="Install CSI Powerstore Metro with Replication" card="false" >}}
-Install CSI Powerstore with CSM Metro Replication
+{{< collapse id="dellctl-install-powerstore-replication" title="Install CSI PowerStore Metro" card="false" >}}
+Install CSI PowerStore with CSM Metro Replication
 ```yaml
 # Global Driver parameters
 namespace: powerstore
 operator-install: true
-modules: replciation
  
 # Parameters for each PowerStore system
 storage:
   - endpoint: 10.0.0.1
     username: user
+    primary: true
     metro-replication:
       - hostConnectivity:
           local:
@@ -400,6 +404,7 @@ storage:
                         - "zone-ab"
   - endpoint: 10.0.0.2
     username: user
+    secondary: true
     metro-replication:
       - hostConnectivity:
           local:
@@ -433,15 +438,6 @@ storage:
                       operator: "In"
                       values:
                         - "zone-ab"
-
-replication:
-  sourceClusterID: "cluster-1"
-  targetClusterID: "cluster-2"
-  parameters:
-    rpo: "Five_Minutes"
-    mode: "ASYNC"
-    ignoreNamespaces: false
-    volumeGroupPrefix: "csi"
 ```
 {{< /collapse >}}
 {{< collapse id="dellctl-install-powerstore-full-config" title="Configuration with all available storage parameters" card="false" >}}
@@ -465,7 +461,6 @@ storage:
     block-protocol: FC
     nfs-acls: 0777
     skip-certificate-validation: true
-    primary: true
     storage-class:
       - fsType: ext4
         reclaimPolicy: Delete
@@ -476,39 +471,6 @@ storage:
               - key: csi-powerstore.dellemc.com/10.0.0.1-fc
                 values:
                   - true
-    metro-replication:
-      - hostConnectivity:
-          local:
-            nodeSelectorTerms:
-              - matchExpressions:
-                - key: "topology.kubernetes.io/zone"
-                  operator: "NotIn"
-                  values:
-                    - "zone-a"
-                    - "zone-b"
-                    - "zone-ab"
-          metro:
-            colocatedLocal:
-              nodeSelectorTerms:
-                - matchExpressions:
-                  - key: "topology.kubernetes.io/zone"
-                    operator: "In"
-                    values:
-                      - "zone-a"
-            colocatedRemote:
-              nodeSelectorTerms:
-                - matchExpressions:
-                  - key: "topology.kubernetes.io/zone"
-                    operator: "In"
-                    values:
-                      - "zone-b"
-            colocatedBoth:
-              nodeSelectorTerms:
-                - matchExpressions:
-                    - key: "topology.kubernetes.io/zone"
-                      operator: "In"
-                      values:
-                        - "zone-ab"
     include-nas-servers:
       - nas-1
     exclude-nas-servers:
@@ -519,14 +481,16 @@ storage:
     block-protocol: FC
     nfs-acls: 0777
     skip-certificate-validation: false
-    secondary: true
     storage-class:
       - fsType: xfs
         reclaimPolicy: Delete
         volumeBindingMode: Immediate
         allowVolumeExpansion: true
         allowedTopologies:
-          - key: value
+          - matchLabelExpressions:
+              - key: csi-powerstore.dellemc.com/10.0.0.1-fc
+                values:
+                  - true
     include-nas-servers:
       - nas-3
     exclude-nas-servers:
