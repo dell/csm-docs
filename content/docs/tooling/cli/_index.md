@@ -91,6 +91,7 @@ Installs a Dell CSI Driver and optionally installs protocol prerequisites and va
 | snapshot-controller                       | Configure snapshot CRDs and controller.  | false | No |
 | storage <stringArray>                   | Storage endpoint configuration in the form 'endpoint=<IP\|hostname>,username=<user>,[otherKey=otherValue]'. Can be provided multiple times.  |  "" | Yes |
 | tenant-token                              | Path to a YAML file containing Authorization tenant token (proxy-authz-token secret). | "" | No |
+| timeout                              | Total timeout for the PowerStore install operation. | 90m | No |
 | validate-connectivity                     | Run a DaemonSet on all nodes to verify connectivity to storage systems.  | false | No |
 {{</table >}}
 {{< /collapse >}}
@@ -115,6 +116,7 @@ Installs a Dell CSI Driver and optionally installs protocol prerequisites and va
 | output                                     | Output from dellctl install. This dumps every generated yaml to the console. | false | No |
 | registry-url <string>                      | Registry URL to use for images.  | "" | No |
 | snapshot-controller                        | Configure snapshot CRDs and controller.  | false | No |
+| timeout                              | Total timeout for the PowerStore install operation. | 90m | No |
 | validate-connectivity                      | Run a DaemonSet on all nodes to verify connectivity to storage systems.  | false | No |
 | **storage**                                | This section configures the storage systems. It is provided as an array. | - | - |
 | storage.endpoint                           | The IP address or hostname of the storage system endponit (i.e., 10.0.0.1). | "" | Yes |
