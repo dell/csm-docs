@@ -85,7 +85,7 @@ Installs a Dell CSI Driver and optionally installs protocol prerequisites and va
 | modules <stringArray>                     | Container Storage Modules modules to install. This is provided as a comma-separated string. Supported modules are: authorization, observability, resiliency.  | "" | No |
 | namespace <string>                        | Namespace to install into (lowercase alphanumeric, may include dashes, must start/end with alphanumeric).  | "namespace" | Yes |
 | operator-install                          | Container Storage Modules Custom Resource Definitions will be installed.  | false | No |
-| output                                    | Output from dellctl install. This dumps every generated yaml to the console. | false | No |
+| output                                    | Output from dellctl install. This dumps every generated yaml to the console and does not execute an installation. | false | No |
 | registry-url <string>                     | Registry URL to use for images.  | "" | No |
 | skip-cert-validation-authz                | Skip certificate validation when connecting to the CSM Authorization proxy server. | false | No |
 | snapshot-controller                       | Configure snapshot CRDs and controller.  | false | No |
