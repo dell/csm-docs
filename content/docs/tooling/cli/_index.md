@@ -349,7 +349,7 @@ replication:
     rpo: "Five_Minutes"
     mode: "ASYNC"
     ignoreNamespaces: false
-    volumeGroupPrefix: "rep"
+    volumeGroupPrefix: "csi"
 ```
 {{< /collapse >}}
 {{< collapse id="dellctl-install-powerstore-replication" title="Install CSI Powerstore Metro with Replication" card="false" >}}
@@ -440,7 +440,7 @@ replication:
     rpo: "Five_Minutes"
     mode: "ASYNC"
     ignoreNamespaces: false
-    volumeGroupPrefix: "rep"
+    volumeGroupPrefix: "csi"
 ```
 {{< /collapse >}}
 {{< collapse id="dellctl-install-powerstore-full-config" title="Configuration with all available storage parameters" card="false" >}}
