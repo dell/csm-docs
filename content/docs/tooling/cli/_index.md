@@ -87,7 +87,8 @@ Installs a Dell CSI Driver and optionally installs protocol prerequisites and va
 | operator-install                          | Container Storage Modules Custom Resource Definitions will be installed.  | false | No |
 | output                                    | Output from dellctl install. This dumps every generated yaml to the console and does not execute an installation. | false | No |
 | registry-url <string>                     | Registry URL to use for images.  | "" | No |
-| skip-cert-validation-authz                | Skip certificate validation when connecting to the CSM Authorization proxy server. | false | No |
+| csm-authorization-skip-cert-validation    | Skip certificate validation when connecting to the CSM Authorization proxy server. | false | No |
+| csm-authorization-root-ca                 | Path to the root CA certificate of the CSM Authorization proxy server. | "" | No |
 | snapshot-controller                       | Configure snapshot CRDs and controller.  | false | No |
 | storage <stringArray>                   | Storage endpoint configuration in the form 'endpoint=<IP\|hostname>,username=<user>,[otherKey=otherValue]'. Can be provided multiple times.  |  "" | Yes |
 | tenant-token                              | Path to a YAML file containing Authorization tenant token (proxy-authz-token secret). | "" | No |
@@ -161,8 +162,9 @@ Installs a Dell CSI Driver and optionally installs protocol prerequisites and va
 | replication.parameters.ignoreNamespaces    |  Ignore the namespace in which the persistent volume claim resides and put every volume created into a single volume group. This parameter is not applicable for Metro mode. | false | No |
 | replication.parameters.volumeGroupPrefix   | The string appended to the volume group name. | csi | No |
 | **authorization**                          | This section configures authorization. | - | - |
-| authorization.authorizationProxyHostname                     | The hostname of the CSM Authorization proxy-server. | "" | No |
+| authorization.proxyHostname                | The hostname of the CSM Authorization proxy-server. | "" | No |
 | authorization.skipCertificateValidation    | Enable or disable validating the CSM Authorization proxy-server certificate. | false | No |
+| authorization.rootCACertificate            | Path to the root CA certificate of the CSM Authorization proxy server. | "" | No |
 | authorization.tenantTokenPath              | The path to the tenant token file. | "" | No |
 {{</table >}}
 {{< /collapse >}}
