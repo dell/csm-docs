@@ -52,7 +52,7 @@ dellctl is a CLI tool for managing Dell Container Storage Resources.
 
 ```bash
   -h, --help      help for dellctl
-  -v, --version   version for dellctl  
+  -v, --version   version for dellctl
 ```
 
 ##### Output
@@ -173,7 +173,7 @@ Installs a Dell CSI Driver and optionally installs protocol prerequisites and va
 
 ### dellctl install powerstore
 
-This command deploys the CSI PowerStore driver and optional modules in your Kubernetes or OpenShift environment. 
+This command deploys the CSI PowerStore driver and optional modules in your Kubernetes or OpenShift environment.
 
 {{< collapse id="dellctl-install-powerstore-examples" title="CLI Flag Examples" card="false" >}}
 {{< collapse id="dellctl-install-powerstore-without-machineconfig-validate" title="Install CSI PowerStore" card="false" >}}
@@ -238,7 +238,7 @@ Without installing and configuring protocol prerequisites and validating data pa
 # Global Driver parameters
 namespace: powerstore
 operator-install: true
- 
+
 # Parameters for each PowerStore system
 storage:
   - endpoint: 10.0.0.1
@@ -254,7 +254,7 @@ namespace: powerstore
 operator-install: true
 machineconfig: true
 validate-connectivity: true
- 
+
 # Parameters for each PowerStore system
 storage:
   - endpoint: 10.0.0.1
@@ -270,7 +270,7 @@ Output the YAML to install CSI PowerStore to the console
 namespace: powerstore
 operator-install: true
 output: true
- 
+
 # Parameters for each PowerStore system
 storage:
   - endpoint: 10.0.0.1
@@ -286,7 +286,7 @@ Install CSI PowerStore with CSM Resiliency
 namespace: powerstore
 operator-install: true
 modules: resiliency
- 
+
 # Parameters for each PowerStore system
 storage:
   - endpoint: 10.0.0.1
@@ -302,7 +302,7 @@ Install CSI PowerStore with CSM Observability
 namespace: powerstore
 operator-install: true
 modules: observability
- 
+
 # Parameters for each PowerStore system
 storage:
   - endpoint: 10.0.0.1
@@ -318,7 +318,7 @@ Install CSI PowerStore with CSM Authorization
 namespace: powerstore
 operator-install: true
 modules: authorization
- 
+
 # Parameters for each PowerStore system
 storage:
   - endpoint: 10.0.0.1
@@ -334,12 +334,13 @@ authorization:
 {{< /collapse >}}
 {{< collapse id="dellctl-install-powerstore-replication" title="Install CSI PowerStore with Replication" card="false" >}}
 Install CSI PowerStore with CSM Replication
+> *NOTE:* To install the replication module for dual-cluster mode, run this command on both clusters. Be sure to switch the primary/secondary storage flags and swap the source and target cluster IDs.
 ```yaml
 # Global Driver parameters
 namespace: powerstore
 operator-install: true
 modules: replication
- 
+
 # Parameters for each PowerStore system
 storage:
   - endpoint: 10.0.0.1
@@ -360,86 +361,86 @@ replication:
 ```
 {{< /collapse >}}
 {{< collapse id="dellctl-install-powerstore-replication" title="Install CSI PowerStore Metro" card="false" >}}
-Install CSI PowerStore with CSM Metro Replication
+Install CSI PowerStore with CSM Metro Replication. For details on the host connectivity labels, refer the [PowerStore Metro](../../concepts/replication/high-availability/powerstore-metro#host-registration) section.
 ```yaml
 # Global Driver parameters
 namespace: powerstore
 operator-install: true
- 
+
 # Parameters for each PowerStore system
 storage:
   - endpoint: 10.0.0.1
     username: user
     primary: true
     metro-replication:
-      - hostConnectivity:
-          local:
+      hostConnectivity:
+        local:
+          nodeSelectorTerms:
+            - matchExpressions:
+              - key: "topology.kubernetes.io/zone"
+                operator: "NotIn"
+                values:
+                  - "zone-a"
+                  - "zone-b"
+                  - "zone-ab"
+        metro:
+          colocatedLocal:
             nodeSelectorTerms:
               - matchExpressions:
                 - key: "topology.kubernetes.io/zone"
-                  operator: "NotIn"
+                  operator: "In"
                   values:
                     - "zone-a"
+          colocatedRemote:
+            nodeSelectorTerms:
+              - matchExpressions:
+                - key: "topology.kubernetes.io/zone"
+                  operator: "In"
+                  values:
                     - "zone-b"
+          colocatedBoth:
+            nodeSelectorTerms:
+              - matchExpressions:
+                - key: "topology.kubernetes.io/zone"
+                  operator: "In"
+                  values:
                     - "zone-ab"
-          metro:
-            colocatedLocal:
-              nodeSelectorTerms:
-                - matchExpressions:
-                  - key: "topology.kubernetes.io/zone"
-                    operator: "In"
-                    values:
-                      - "zone-a"
-            colocatedRemote:
-              nodeSelectorTerms:
-                - matchExpressions:
-                  - key: "topology.kubernetes.io/zone"
-                    operator: "In"
-                    values:
-                      - "zone-b"
-            colocatedBoth:
-              nodeSelectorTerms:
-                - matchExpressions:
-                    - key: "topology.kubernetes.io/zone"
-                      operator: "In"
-                      values:
-                        - "zone-ab"
   - endpoint: 10.0.0.2
     username: user
     secondary: true
     metro-replication:
-      - hostConnectivity:
-          local:
+      hostConnectivity:
+        local:
+          nodeSelectorTerms:
+            - matchExpressions:
+              - key: "topology.kubernetes.io/zone"
+                operator: "NotIn"
+                values:
+                  - "zone-a"
+                  - "zone-b"
+                  - "zone-ab"
+        metro:
+          colocatedLocal:
             nodeSelectorTerms:
               - matchExpressions:
                 - key: "topology.kubernetes.io/zone"
-                  operator: "NotIn"
+                  operator: "In"
                   values:
                     - "zone-a"
+          colocatedRemote:
+            nodeSelectorTerms:
+              - matchExpressions:
+                - key: "topology.kubernetes.io/zone"
+                  operator: "In"
+                  values:
                     - "zone-b"
+          colocatedBoth:
+            nodeSelectorTerms:
+              - matchExpressions:
+                - key: "topology.kubernetes.io/zone"
+                  operator: "In"
+                  values:
                     - "zone-ab"
-          metro:
-            colocatedLocal:
-              nodeSelectorTerms:
-                - matchExpressions:
-                  - key: "topology.kubernetes.io/zone"
-                    operator: "In"
-                    values:
-                      - "zone-a"
-            colocatedRemote:
-              nodeSelectorTerms:
-                - matchExpressions:
-                  - key: "topology.kubernetes.io/zone"
-                    operator: "In"
-                    values:
-                      - "zone-b"
-            colocatedBoth:
-              nodeSelectorTerms:
-                - matchExpressions:
-                    - key: "topology.kubernetes.io/zone"
-                      operator: "In"
-                      values:
-                        - "zone-ab"
 ```
 {{< /collapse >}}
 {{< collapse id="dellctl-install-powerstore-full-config" title="Configuration with all available storage parameters" card="false" >}}
@@ -455,7 +456,7 @@ snapshot-controller: true
 validate-connectivity: true
 registry-url: my.registry.com:5000/dell/csm
 modules: replication,authorization,observability,resiliency
- 
+
 # Parameters for each PowerStore system
 storage:
   - endpoint: 10.0.0.1
@@ -477,7 +478,7 @@ storage:
       - nas-1
     exclude-nas-servers:
       - nas-2
- 
+
   - endpoint: 10.0.0.2
     username: user
     block-protocol: FC
@@ -512,13 +513,13 @@ Allows you to manipulate one or more k8s cluster configurations
 ```bash
   add         Adds a k8s cluster to be managed by dellctl
   remove      Removes a k8s cluster managed by dellctl
-  get         List all clusters currently being managed by dellctl  
+  get         List all clusters currently being managed by dellctl
 ```
 
 ##### Flags
 
 ```bash
-  -h, --help   help for cluster  
+  -h, --help   help for cluster
 ```
 
 ##### Output
