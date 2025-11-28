@@ -118,11 +118,6 @@ Here’s a minimal Prometheus configuration using insecure skip verify; for prop
    To scrape powerstore metrics using Powerstore Exporter Metrics, add the following configurations to prometheus-values.yaml. More details can be found [here](https://github.com/dell/powerstore-metrics-exporter/tree/main/templates/prometheus)
 
    ```yaml
-      - job_name: "prometheus"
-        # metrics_path defaults to '/metrics'
-        # scheme defaults to 'http'.
-        static_configs:
-          - targets: ["localhost:9090"]
       - job_name: powerstore_10.0.0.1_cluster
           honor_timestamps: true
           scrape_interval: 15m
@@ -422,6 +417,31 @@ Once Grafana is properly configured, you can import the pre-built observability 
 | [PowerMax: PowerMax Performance](https://github.com/dell/karavi-observability/blob/main/grafana/dashboards/powermax/performance.json)                                         | Provides visibility into the I/O performance metrics (IOPS, bandwidth) by storage group and volume                                                                     |  
 | [CSI Driver Provisioned Volume Topology](https://github.com/dell/karavi-observability/blob/main/grafana/dashboards/topology/topology.json)                                     | Provides visibility into Dell CSI (Container Storage Interface) driver provisioned volume characteristics in Kubernetes correlated with volumes on the storage system. |
 {{< /hide >}}
+
+Sample dashboards are also available in karavi-observability for kubevirt volumes for each supported platform. To utilize them install kubevirt by following [kubevirt documentation](https://kubevirt.io/user-guide/cluster_admin/installation/#installing-kubevirt-on-kubernetes). Once kubevirt pods are running, to install CDI follow the [CDI installation guide](https://kubevirt.io/user-guide/storage/containerized_data_importer/#containerized-data-importer). Also, enable kube-state-metrics scraping by prometheus that is used to write join PromQL queries to achieve desired metrics and drill-downs provided in the samples grafana dashboards. Below are the locations of the dashboards that can be imported to visualize kubevirt metrics:
+
+| Dashboard | Description |
+|-----------|-------------|
+| [KubeVirt VM Metrics](https://github.com/dell/karavi-observability/blob/main/grafana/dashboards/kubevirt/kubevirt_vm_metric.json)                       | Provides the information about kubevirt volumes in the selected cluster                                                                     |
+| [PowerFlex Volume IO Metrics with kubevirt details](https://github.com/dell/karavi-observability/blob/main/grafana/dashboards/kubevirt/kubevirt_powerflex_metrics.json)                    | Provides visibility into Virtual Machine status and disk details. Also, it captures volume IOS metrics of Dell CSI PowerFlex driver provisioned volumes taht are used by the VMs                                |
+| [PowerMax Performance Metrics for Kubevirt Loads](https://github.com/dell/karavi-observability/blob/main/grafana/dashboards/kubevirt/kubevirt_powermax_metrics.json)                     | Provides visibility into the summary of capacity of Dell CSI PowerMax driver provisioned volumes that are consumed by Virtual Machines. Also, it captures the storage group and volume IOPs                      |
+| [Powerstore Volume Performance metrics for Kubevirt Workloads](https://github.com/dell/karavi-observability/blob/main/grafana/dashboards/kubevirt/kubevirt_powerstore_metrics.json)              | Provides visibility into the summary of capacity of Dell CSI PowerStore driver provisioned volumes that are consumed by Virtual Machines. Also, it captures the storage group and volume IOPs  |
+
+To clone the dashboard, user can import the dashboard in Grafana, then click on `Edit` button on top right of dashboard, click on `Save as Copy` and provide appropriate title before saving it.
+
+To add custom panels to the sample dashboard, user can import the dashboard in Grafana, then click on `Edit` button on top right of dashboard, click on `Add` and add the visualization panel. User can easily right join PromQL queries to retrieved customize metrics. For example, to visualize PVC to VM mapping, user can use the following query:
+ ```terminal
+kubevirt_vmi_info * on(vmi_pod, namespace) group_left(persistentvolumeclaim) label_replace(kube_pod_spec_volumes_persistentvolumeclaims_info, "vmi_pod", "$1", "pod", "(.*)")
+```
+This query performs a join between two metrics: kubevirt_vmi_info (providing VirtualMachineInstance details) and kube_pod_spec_volumes_persistentvolumeclaims_info (providing pod-to-PVC mapping). Using label_replace and PromQL’s on(...) group_left(...) matching, it enriches VMI data with PVC information from the pod specification. 
+
+More details on metrics exported by kubevirt can be found [here](https://kubevirt.io/monitoring/metrics.html#containerized-data-importer) and metrics for kube-state-metrics can be found [here](https://github.com/kubernetes/kube-state-metrics/tree/main/docs/metrics)
+
+
+
+
+
+
 
 ## Dynamic Configuration
 
