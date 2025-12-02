@@ -90,7 +90,7 @@ Installs a Dell CSI Driver and optionally installs protocol prerequisites and va
 | csm-authorization-skip-cert-validation    | Skip certificate validation when connecting to the CSM Authorization proxy server. | false | No |
 | csm-authorization-root-ca                 | Path to the root CA certificate of the CSM Authorization proxy server. | "" | No |
 | snapshot-controller                       | Configure snapshot CRDs and controller.  | false | No |
-| storage <stringArray>                   | Storage endpoint configuration in the form 'endpoint=<IP\|hostname>,username=<user>,skip-certificate-validation=<true|false>,certificate-authority=</path/to/powerstore-ca.pem>[,otherKey=otherValue]'. Can be provided multiple times.  |  "" | Yes |
+| storage <stringArray>                   | Storage endpoint configuration in the form 'endpoint=<IP\|hostname>,username=<user>,skip-certificate-validation=<true|false>,certificate-authority=</path/to/powerstore-ca.pem>,[otherKey=otherValue]'. Can be provided multiple times.  |  "" | Yes |
 | tenant-token                              | Path to a YAML file containing Authorization tenant token (proxy-authz-token secret). | "" | No |
 | timeout                              | Total timeout for the PowerStore install operation. | 90m | No |
 | validate-connectivity                     | Run a DaemonSet on all nodes to verify connectivity to storage systems.  | false | No |
