@@ -112,10 +112,10 @@ description: >
 
 ### Installing OpenShift Virtualization and Accessing KubeVirt Metrics
 
-User can follow the official guide to [install Openshift Virtualization in OCP cluster](https://docs.redhat.com/en/documentation/openshift_container_platform/4.19/html/virtualization/installing#installing-virt-operator_installing-virt). Once installed, OpenShift Virtualization automatically creates the ServiceMonitor required by Prometheus to scrape KubeVirt metrics.
+User can follow the official guide to install [Openshift Virtualization](https://docs.redhat.com/en/documentation/openshift_container_platform/4.19/html/virtualization/installing#installing-virt-operator_installing-virt) in OCP cluster. Once installed, OpenShift Virtualization automatically creates the ServiceMonitor required by Prometheus to scrape KubeVirt metrics.
 
 On the OpenShift Console, navigate to Observer and then Metrics, search for kubevirt metrics. 
-User can use PromQL join queries to correlate KubeVirt metrics with CSI storage metrics for advanced insights. For example, for each VM disk, find its allocated size of the underlying PowerFlex volume, using the following query:
+User can use PromQL join queries to correlate KubeVirt metrics with Dell CSI storage metrics for advanced insights. For example, for each VM disk, find its allocated size of the underlying PowerFlex volume, using the following query:
  
 
  ```bash
@@ -128,12 +128,12 @@ User can use PromQL join queries to correlate KubeVirt metrics with CSI storage 
 
    On the OpenShift Console, navigate to Observer and then Metrics, search for PowerMax metrics.
 
-   ### Installing OpenShift Virtualization and Accessing KubeVirt Metrics
+### Installing OpenShift Virtualization and Accessing KubeVirt Metrics
 
-User can follow the official guide to [install Openshift Virtualization in OCP cluster](https://docs.redhat.com/en/documentation/openshift_container_platform/4.19/html/virtualization/installing#installing-virt-operator_installing-virt). Once installed, OpenShift Virtualization automatically creates the ServiceMonitor required by Prometheus to scrape KubeVirt metrics.
+User can follow the official guide to install [Openshift Virtualization](https://docs.redhat.com/en/documentation/openshift_container_platform/4.19/html/virtualization/installing#installing-virt-operator_installing-virt) in OCP cluster. Once installed, OpenShift Virtualization automatically creates the ServiceMonitor required by Prometheus to scrape KubeVirt metrics.
 
 On the OpenShift Console, navigate to Observer and then Metrics, search for kubevirt metrics. 
-User can use PromQL join queries to correlate KubeVirt metrics with CSI storage metrics for advanced insights. For example, for each VM disk, find its allocated size of the underlying PowerMax volume, using the following query:
+User can use PromQL join queries to correlate KubeVirt metrics with Dell CSI storage metrics for advanced insights. For example, for each VM disk, find its allocated size of the underlying PowerMax volume, using the following query:
  
 
  ```bash
@@ -145,12 +145,12 @@ User can use PromQL join queries to correlate KubeVirt metrics with CSI storage 
 
    On the OpenShift Console, navigate to Observer and then Metrics, search for PowerStore metrics.
 
-   ### Installing OpenShift Virtualization and Accessing KubeVirt Metrics
+### Installing OpenShift Virtualization and Accessing KubeVirt Metrics
 
-User can follow the official guide to [install Openshift Virtualization in OCP cluster](https://docs.redhat.com/en/documentation/openshift_container_platform/4.19/html/virtualization/installing#installing-virt-operator_installing-virt). Once installed, OpenShift Virtualization automatically creates the ServiceMonitor required by Prometheus to scrape KubeVirt metrics.
+User can follow the official guide to install [Openshift Virtualization](https://docs.redhat.com/en/documentation/openshift_container_platform/4.19/html/virtualization/installing#installing-virt-operator_installing-virt) in OCP cluster. Once installed, OpenShift Virtualization automatically creates the ServiceMonitor required by Prometheus to scrape KubeVirt metrics.
 
 On the OpenShift Console, navigate to Observer and then Metrics, search for kubevirt metrics. 
-User can use PromQL join queries to correlate KubeVirt metrics with CSI storage metrics for advanced insights. For example, for each VM disk, find its allocated size of the underlying PowerStore volume, using the following query:
+User can use PromQL join queries to correlate KubeVirt metrics with Dell CSI storage metrics for advanced insights. For example, for each VM disk, find its allocated size of the underlying PowerStore volume, using the following query:
  
 
  ```bash
