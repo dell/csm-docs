@@ -3,7 +3,10 @@
         width:auto !important;
     }
 </style>
-{{ $htmlTable := .Inner | markdownify }}
+{{ $content := .Inner }}
+{{ $version := (index .Site.Params.versions 0).version }}
+{{ $content = replace $content "{{VERSION}}" $version }}
+{{ $htmlTable := $content | markdownify }}
 {{ $class := .Get 0 }}
 {{ $old := "<table>" }}
 {{ $new := printf "<table class=\"%s\">" $class }}
