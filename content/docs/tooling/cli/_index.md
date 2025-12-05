@@ -85,7 +85,7 @@ Installs a Dell CSI Driver and optionally installs protocol prerequisites and va
 | modules <stringArray>                     | Container Storage Modules modules to install. This is provided as a comma-separated string. Supported modules are: authorization, observability, resiliency.  | "" | No |
 | namespace <string>                        | Namespace to install into (lowercase alphanumeric, may include dashes, must start/end with alphanumeric).  | "namespace" | Yes |
 | operator-install                          | Container Storage Modules Custom Resource Definitions will be installed.  | false | No |
-| output                                    | Output from dellctl install. This dumps every generated yaml to the console and does not execute an installation. | false | No |
+| output                                    | Output from dellctl install. This dumps every generated yaml to a file and does not execute an installation. | false | No |
 | registry-url <string>                     | Registry URL to use for images.  | "" | No |
 | csm-authorization-skip-cert-validation    | Skip certificate validation when connecting to the CSM Authorization proxy server. | false | No |
 | csm-authorization-root-ca                 | Path to the root CA certificate of the CSM Authorization proxy server. | "" | No |
@@ -114,7 +114,7 @@ Installs a Dell CSI Driver and optionally installs protocol prerequisites and va
 | modules <stringArray>                      | Container Storage Modules modules to install. Supported modules are: replication, authorization, observability, resiliency.  | "" | No |
 | namespace <string>                         | Namespace to install into (lowercase alphanumeric, may include dashes, must start/end with alphanumeric).  | "namespace" | Yes |
 | operator-install                           | Container Storage Modules Custom Resource Definitions will be installed.  | false | No |
-| output                                     | Output from dellctl install. This dumps every generated yaml to the console. | false | No |
+| output                                     | Output from dellctl install. This dumps every generated yaml to a file. | false | No |
 | registry-url <string>                      | Registry URL to use for images.  | "" | No |
 | snapshot-controller                        | Configure snapshot CRDs and controller.  | false | No |
 | timeout                              | Total timeout for the PowerStore install operation. | 90m | No |
@@ -193,7 +193,7 @@ dellctl install powerstore --machineconfig --validate-connectivity --namespace=p
 ```
 {{< /collapse >}}
 {{< collapse id="dellctl-install-powerstore-without-machineconfig-validate-geneerate" title="Output the YAML to install CSI PowerStore" card="false" >}}
-Output the YAML to install CSI PowerStore to the console
+Output the YAML to install CSI PowerStore to a file
 ```bash
 dellctl install powerstore --namespace=powerstore --operator-install=true --output \
                            --storage "endpoint=10.0.0.1,username=username" \
@@ -265,7 +265,7 @@ storage:
 ```
 {{< /collapse >}}
 {{< collapse id="dellctl-install-powerstore-without-machineconfig-validate-output" title="Output the YAML to install CSI PowerStore" card="false" >}}
-Output the YAML to install CSI PowerStore to the console
+Output the YAML to install CSI PowerStore to a file
 ```yaml
 # Global Driver parameters
 namespace: powerstore
@@ -328,9 +328,10 @@ storage:
     username: user
 
 authorization:
-  hostname: csm-authorization.com
-  skipCertificateValidation: false
+  proxyHostname: csm-authorization.com
   tenantTokenPath: /tmp/token.yaml
+  skipCertificateValidation: false
+  rootCACertificate: /path/to/rootCA
 ```
 {{< /collapse >}}
 {{< collapse id="dellctl-install-powerstore-replication" title="Install CSI PowerStore with Replication" card="false" >}}
