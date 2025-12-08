@@ -6,5 +6,5 @@ weight: 7
 ---
 You can learn more and engage with the CSM community over different channels by:
 * Reading the official [blogs](https://infohub.delltechnologies.com/t/blogs-99/) and [white paper](https://infohub.delltechnologies.com/t/persistent-storage-for-containerized-applications-on-kubernetes-with-powermax-san-storage-13/) are on [https://infohub.delltechnologies.com/](https://infohub.delltechnologies.com/)
-* Seeing the latest CSM features in action from [Dell Technologies' YouTube channel](https://www.youtube.com/watch?v=nO3nDqb1m6s)
+* See the latest CSM, DevOps, and automation capabilities in action on [Dell's YouTube Channel](https://www.youtube.com/playlist?list=PL2nlzNk2-VMHsKVguetbetbmxd4eMfc_X)
 * Learning from technical blogs on [https://volumes.blog/](https://volumes.blog/)
