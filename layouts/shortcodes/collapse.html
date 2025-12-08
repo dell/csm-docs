@@ -37,13 +37,20 @@
   }
 </style>
 
+
+{{ $content := .Inner }}
+{{ $version := (index .Site.Params.versions 0).version }}
+{{ $content = replace $content "{{VERSION}}" $version }}
+{{ $htmlContent := $content | markdownify }}
+
+
 <div class="collapse-toggle">
   <div class="collapse-title" onclick="toggleContent(this)">
       <i class="collapse-arrow fas fa-angle-right {{ if eq (.Get "show" | default "false") "true" }}rotated{{ end }}"></i>
       <strong class="collapse-text">{{ .Get "title" }}</strong>
   </div>
 <div class="collapse-content {{ if eq (.Get "card" | default "false") "true" }}card-box{{ end }}" style="display: {{ if eq (.Get "show" | default "false") "true" }}block{{ else }}none{{ end }};">
-  {{ .Inner | markdownify }}
+  {{ $htmlContent | safeHTML }}
   </div>
 </div>
 
