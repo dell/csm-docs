@@ -592,6 +592,10 @@ externalAccess: "10.0.0.0/24"
 
 This means that we allow for NFS Export created by driver to be consumed by address range `10.0.0.0-10.0.0.255`.
 
+A new flag has been introduced to enforce strict control over NFS traffic, allowing you to restrict traffic to only use the configured external access.
+To enable this, set the `exclusiveAccess` parameter to true in your Helm values.yaml file, or set the `X_CSI_POWERSTORE_EXCLUSIVE_ACCESS` variable when creating a CustomResource via the operator.
+> ℹ️ **NOTE:** : Enable this parameter only when external access is configured.
+
 
 ## Array identification based on GlobalID
 
