@@ -106,6 +106,7 @@ volume stats value under node should be set to true.
 |<div style="text-align: left"> logLevel |<div style="text-align: left"> Defines CSI driver log level | No | "debug" |
 |<div style="text-align: left"> logFormat |<div style="text-align: left"> Defines CSI driver log format | No | "JSON" |
 |<div style="text-align: left"> externalAccess |<div style="text-align: left"> Defines additional entries for hostAccess of NFS volumes, single IP address and subnet are valid entries | No | " " |
+|<div style="text-align: left"> exclusiveAccess |<div style="text-align: left"> Controls whether only externalAccess entries are added to the NFS export | No | false |
 |<div style="text-align: left"> kubeletConfigDir |<div style="text-align: left"> Defines kubelet config path for cluster | Yes | "/var/lib/kubelet" |
 |<div style="text-align: left"> maxPowerstoreVolumesPerNode |<div style="text-align: left"> Defines the default value for maximum number of volumes that the controller can publish to the node. If the value is zero, then CO shall decide how many volumes of this type can be published by the controller to the node. This limit is applicable to all the nodes in the cluster for which the node label 'max-powerstore-volumes-per-node' is not set. | No | 0 |
 |<div style="text-align: left"> imagePullPolicy |<div style="text-align: left"> Policy to determine if the image should be pulled prior to starting the container. | Yes | "IfNotPresent" |
