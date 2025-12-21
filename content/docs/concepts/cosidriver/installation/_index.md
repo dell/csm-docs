@@ -10,6 +10,8 @@ no_list: true
 
     {{< customcard link="./configuration_file"  title="Configuration File"  >}} 
 
-    {{< customcard   link="./helm"  title="Using Helm" >}} 
+    {{< customcard   link="./helm"  title="Using Helm" >}}
+
+    {{< customcard   link="./operator"  title="Using Operator" >}} 
 
 {{< /cardcontainer >}}
