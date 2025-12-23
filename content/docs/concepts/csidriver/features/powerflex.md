@@ -1155,7 +1155,6 @@ OIDC (OpenID Connect) allows Kubernetes deployments to authenticate to PowerFlex
 
 - Keycloak
 - Azure AD
-- Okta
 
 This means that instead of storing long‑lived PowerFlex credentials inside the Kubernetes Secret, the driver uses short‑lived, automatically refreshed access tokens obtained via the OIDC provider.
  
