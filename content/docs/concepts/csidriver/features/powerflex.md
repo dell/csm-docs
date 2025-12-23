@@ -1146,3 +1146,43 @@ kubectl create secret generic sdcsftprepo-public-secret -n vxflexos --from-file=
             AllowTcpForwarding no
             X11Forwarding no
     ```
+
+## OIDC Authentication Support
+### Overview
+
+The PowerFlex CSI driver supports OIDC-based authentication in addition to traditional username/password authentication.
+OIDC (OpenID Connect) allows Kubernetes deployments to authenticate to PowerFlex using OAuth2 tokens, providing stronger security and centralized identity management using providers like:
+
+- Keycloak
+- Azure AD
+- Okta
+
+This means that instead of storing long‑lived PowerFlex credentials inside the Kubernetes Secret, the driver uses short‑lived, automatically refreshed access tokens obtained via the OIDC provider.
+ 
+### Secret Configuration for OIDC
+Below is the required secret structure for OIDC-enabled authentication.
+  ```yaml
+  - username: "user"
+    password: "password"
+    systemID: "2000000000000001"
+    endpoint: "https://10.0.0.1"
+    skipCertificateValidation: true
+    mdm: "10.0.0.2,10.0.0.3"
+
+    # OIDC / CIAM values
+    oidcClientId: "csm"
+    oidcClientSecret: ""     # base64 encoded
+    issuer: "https://10.0.0.4:1010/realms/CSM"  #for keycloak format
+    # https://login.microsoftonline.com/abcd/v2.0" # for azure format
+
+    # CIAM (optional alternative auth mode)
+    ciamClientId: ""
+    ciamClientSecret: ""
+  ```
+
+Enabling OIDC via Helm or Operator
+
+```yaml
+- name: X_CSI_AUTH_TYPE
+  value: "OIDC"   # or "" for BasicAuth
+```
