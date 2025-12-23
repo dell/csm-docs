@@ -145,7 +145,9 @@ dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      
     
     **Detailed Configuration:** Use the [sample file](https://github.com/dell/csm-operator/blob/release/{{< version-docs key="csm-operator_latest_version">}}/samples/{{< version-docs key="csm-operator_latest_samples_dir" >}}/storage_csm_powerflex_{{< version-docs key="Det_sample_operator_pflex" >}}.yaml) for detailed settings.
 
-    **Note:** - Configure SFTP settings based on PowerFlex [Concepts](../../../../../concepts/csidriver/features/powerflex/#expose-the-sftp-settings-to-automatically-pull-the-sciniko-kernel-module)
+    **Note:** 
+    - Configure SFTP settings based on PowerFlex [Concepts](../../../../../concepts/csidriver/features/powerflex/#expose-the-sftp-settings-to-automatically-pull-the-sciniko-kernel-module)
+    - Configure OIDC secret for Powerflex [Concepts](../../../../../concepts/csidriver/features/powerflex/#oidc-authentication-support)
    
    </br>
     To set the parameters in CR. The table shows the main settings of the PowerFlex driver and their defaults.
@@ -165,6 +167,7 @@ dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      
 |<div style="text-align: left"> X_CSI_VXFLEXOS_ENABLESNAPSHOTCGDELETE |<div style="text-align: left"> Enable this to automatically delete all snapshots in a consistency group when a snap in the group is deleted | No | false |
 |<div style="text-align: left"> X_CSI_ALLOW_RWO_MULTI_POD_ACCESS |<div style="text-align: left"> Setting allowRWOMultiPodAccess to "true" will allow multiple pods on the same node to access the same RWO volume. This behavior conflicts with the CSI specification version 1.3. NodePublishVolume description that requires an error to be returned in this case. However, some other CSI drivers support this behavior and some customers desire this behavior. Customers use this option at their own risk. | No | false |
 |<div style="text-align: left"> INTERFACE_NAMES |<div style="text-align: left"> A mapping of node names to interface names. Only necessary when SDC is disabled. | No | none |
+|<div style="text-align: left"> X_CSI_AUTH_TYPE |<div style="text-align: left"> Specify the Authentication type between BasicAuth and OIDC | No | "" |
 |<div style="text-align: left"> ***Controller parameters*** |
 |<div style="text-align: left"> X_CSI_POWERFLEX_EXTERNAL_ACCESS |<div style="text-align: left"> allows specifying additional entries for hostAccess of NFS volumes. Both single IP address and subnet are valid entries | No | empty |
 |<div style="text-align: left"> X_CSI_HEALTH_MONITOR_ENABLED |<div style="text-align: left"> Enable/Disable health monitor of CSI volumes from Controller plugin - volume condition | No | false |
