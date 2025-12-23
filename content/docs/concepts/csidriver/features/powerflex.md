@@ -1180,9 +1180,18 @@ Below is the required secret structure for OIDC-enabled authentication.
     ciamClientSecret: ""
   ```
 
-Enabling OIDC via Helm or Operator
-
+Enabling OIDC via Operator
 ```yaml
 - name: X_CSI_AUTH_TYPE
   value: "OIDC"   # or "" for BasicAuth
+```
+
+Enabling OIDC via Operator
+```yaml
+# "authType" defines the type of authentication that is used.
+# Allowed values:
+#  "OIDC" - use OIDC authentication
+#  "" - by default use Basic authentication
+# Default value: "" <empty>
+authType: "OIDC"
 ```
