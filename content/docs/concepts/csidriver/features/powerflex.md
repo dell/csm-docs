@@ -1162,8 +1162,8 @@ This means that instead of storing long‑lived PowerFlex credentials inside the
 ### Secret Configuration for OIDC
 Below is the required secret structure for OIDC-enabled authentication.
   ```yaml
-  - username: "user"
-    password: "password"
+  - username: ""
+    password: ""
     systemID: "2000000000000001"
     endpoint: "https://10.0.0.1"
     skipCertificateValidation: true
