@@ -1186,7 +1186,7 @@ Enabling OIDC via Operator
   value: "OIDC"   # or "" for BasicAuth
 ```
 
-Enabling OIDC via Operator
+Enabling OIDC via Helm
 ```yaml
 # "authType" defines the type of authentication that is used.
 # Allowed values:
