@@ -1194,3 +1194,308 @@ Enabling OIDC via Helm
 # Default value: "" <empty>
 authType: "OIDC"
 ```
+
+### Pre-requisites for OIDC support
+
+To enable the support for OIDC we need to establish the connection between the ID provider and PowerFlex.
+
+In PowerFlex, the MVM IPs refer to the Management Virtual Machine IP addresses. These are the IPs assigned to the Management Virtual Machines (MVMs) that host the PowerFlex Manager and other management services. These IPs are configured during PowerFlex deployment and can be found in: PowerFlex Manager UI → System → Components → MVM
+
+Execute the below steps by logging into the MVM IP:
+
+Env variables needed for the steps: 
+SSO_IP -  This is the Cluster IP address of the SSO service in Kubernetes Cluster. 
+PM_TOKEN - This is an access token (JWT) retrieved by logging into PowerFlex via its SSO REST API and can be used for subsequent API calls to PowerFlex services.
+IN_IP - This is the External IP address of the rke2-ingress-nginx-controller service, which is typically the load balancer or ingress controller IP used for external traffic.
+
+```bash
+export SSO_IP=`kubectl get svc -A | grep "sso " | awk '{print $4}'`
+export PM_TOKEN=`curl -k --location --request POST "https://${SSO_IP}:8080/rest/auth/login" --header 'Accept: application/json' --header 'Content-Type: application/json' --data '{"username": "user","password": "password" }' | jq -r .access_token`
+export IN_IP=`kubectl get svc -A | grep -m1 rke2-ingress-nginx-controller | sort | awk '{print $5}'`
+```
+1. Initialize the SSO CIAM config for PowerFlex 
+
+This API initializes the SSO CIAM configuration for PowerFlex.
+
+```bash
+curl -k -X POST https://$IN_IP/rest/v1/sso-ciam/init --header 'Accept: application/json' --header 'Content-Type: application/json' --header "Authorization: Bearer ${PM_TOKEN}"
+```
+>Note: The API returns a unique identifier. Record this value, as it will be required in the following steps under the name CIAM_ID.
+
+2. Configure PowerFlex with Embedded Keycloak as the OIDC Service provider 
+
+This API call registers and configures PowerFlex as an OIDC Service Provider with Embedded Keycloak, enabling secure SSO authentication using OpenID Connect.
+
+```bash
+curl -vvL -k --request POST \
+  --url https://$IN_IP/rest/v1/oidc-sp-config \
+  --header 'Content-Type: application/json' \
+  --header "Authorization: Bearer ${PM_TOKEN}" \
+  --data "{
+  \"sp_id\": \"powerflex-$IN_IP\",
+  \"redirect_uri\": \"https://$IN_IP/auth/realms/powerflex/protocol/openid-connect/auth\",
+  \"logout_uri\": \"https://$IN_IP/auth/realms/powerflex/protocol/openid-connect/logout\",
+  \"required_claims\": [\"email\"],
+  \"keycloak_settings\": {
+    \"config\": {
+      \"clientAuthMethod\": \"client_secret_basic\",
+      \"pkceEnabled\": \"true\",
+      \"useJwksUrl\": \"true\",
+      \"validateSignature\": \"true\"
+    },
+    \"first_broker_login_flow_alias\": \"first broker login\",
+    \"post_broker_login_flow_alias\": null,
+    \"link_only\": null,
+    \"store_token\": true,
+    \"add_read_token_role_on_create\": true,
+    \"trust_email\": true
+  },
+  \"days_to_store_state_code_verifier\": 1
+}"
+```
+3. Add certificates to PowerFlex for CIAM services 
+
+PowerFlex CIAM must trust the Azure/Keycloak signing certificate in order to validate RS256‑signed JWT tokens issued by ID provider. This certificate must be added to CIAM as a trusted CA.
+
+a. For Microsoft Azure, 
+
+We have to add the following certificates for CIAM services 
+
+* DigiCert is a trusted Certificate Authority (CA). Azure services use SSL/TLS certificates issued by DigiCert to secure communication.
+* GA2 (GlobalSign or similar root/intermediate) certificates are part of the certificate chain that validates Azure’s identity endpoints. 
+
+They ensure:
+- The OIDC metadata URL (https://login.microsoftonline.com/...) and token endpoints are trusted.
+- Secure HTTPS communication between PowerFlex and Azure IdP.
+
+b. For Keycloak,
+We can obtain the Keycloak certificate using either of the following methods.
+
+Option 1 — Download the Certificate from Browser
+* Open the Keycloak URL in your browser: `https://<PFMP_IP>/auth/`
+* Click the lock icon in the address bar.
+* View the site certificate.
+* Export or download the certificate.
+* Save it locally
+>Note: Ensure the file includes valid PEM headers:
+-----BEGIN CERTIFICATE-----
+<certificate-body>
+-----END CERTIFICATE-----
+
+Option 2 — Retrieve the Certificate from the Keycloak UI 
+This option retrieves the actual RS256 signing certificate directly from Keycloak’s admin interface.
+* Log in to Keycloak Admin Console
+`https://<PFMP_IP>/auth/admin/`
+Log in using the admin credentials obtained via:
+`kubectl get secret keycloak-admin-credentials -o json -n powerflex | jq '.data | map_values(@base64d)'`
+* Select the Correct Realm
+Open the realm dropdown (top-left corner).
+Choose the realm used by PowerFlex based on the deployment
+* Navigate to the Keys Tab
+Go to: Realm Settings → Keys
+This page lists all signing keys for the selected realm.
+* Locate the RS256 Signing Key
+Find the row where: Algorithm: RS256,Use: SIG, Status: Active
+This is the key used to sign all Keycloak-issued JWT tokens.
+* Export the Certificate
+In the RS256 row, click Certificate.
+A dialog appears showing the Base64‑encoded certificate without PEM headers.
+Copy the entire certificate and add the proper PEM headers:
+-----BEGIN CERTIFICATE-----
+<copied-certificate-content>
+-----END CERTIFICATE-----
+
+``` bash
+CA=`<PEM_FILE_OF_CERTIFICATE>`
+curl -kvvL -X POST https://$IN_IP//Api/V1/CIAM/<CIAM_ID>/x509-certificates --header "Authorization: Bearer ${PM_TOKEN}" --data-raw "
+{
+  \"type\": \"CA\",
+  \"service\": \"ALL\",
+  \"certificate_format\": \"PEM\",
+  \"certificate\": \"$CA\"
+}"
+```
+
+4. Add Microsoft Azure/Keycloak Identity provider as the service 
+
+It registers an external identity provider (Azure/Keycloak) with PowerFlex using OpenID Connect (OIDC). This allows PowerFlex users to authenticate through Azure/Keycloak instead of local credentials.
+
+>Note: 
+CLIENT_ID - Client id of Microsoft Azure/Keycloak 
+CLIENT_SECRET - Client secret of Microsoft Azure/Keycloak
+For Azure,
+IDP_METADATA_URL - `https://login.microsoftonline.com/<Tenant_id>/v2.0/.well-known/openid-configuration` where the tenant id is Azure Active Directory tenant the identity provider belongs to.
+For Keycloak,
+IDP_METADATA_URL - `https://<keycloak_ip>/auth/realms/<realm_name>/.well-known/openid-configuration` where the realm name is the name of the realm where the application is created
+
+``` bash
+curl -kvvL --request POST \
+  --url https://$IN_IP/rest/v1/oidc-services \
+  --header 'Content-Type: application/json' \
+  --header "Authorization: Bearer ${PM_TOKEN}" \
+  --data "{
+  \"name\": \"azure\",
+  \"is_enabled\": true,
+  \"idp_metadata_url\": \"$IDP_METADATA_URL\",
+  \"claims_mapper\": [
+    {
+      \"name\": \"email\",
+      \"value\": \"email\"
+    },
+    {
+      \"name\": \"given_name\",
+      \"value\": \"firstName\"
+    },
+    {
+      \"name\": \"preferred_username\",
+      \"value\": \"username\"
+    },
+    {
+      \"name\": \"family_name\",
+      \"value\": \"lastName\"
+    }
+  ],
+  \"client_id\": \"$CLIENT_ID\",
+  \"client_secret\": \"$CLIENT_SECRET\",
+  \"scopes\": [
+    \"openid\",
+    \"profile\",
+    \"email\",
+    \"offline_access\"
+  ],
+  \"pkce_enabled\": true,
+  \"code_challenge_method\": \"S256\",
+  \"idp_type\": \"AzureEntraID\"
+}"
+```
+>Note: An ID will be generated for the service, which will hereafter be referred to as SERVICE_ID_IDP.
+
+5. Configure the service id in the ID Provider 
+
+Since PowerFlex relies on embedded Keycloak for OIDC, a valid redirect URI must be configured.
+
+Redirect URI - `https://<PFMP_IP>/auth/realms/powerflex/broker/<SERVICE_ID_IDP>/endpoint`
+
+In Microsoft Azure, go to the Authentication tab and update the Redirect URIs section.
+Ensure that the redirect URI includes the PowerFlex Management IP (PFMP_IP); resolve the hostname as required.
+
+In Keycloak, Login to Keycloak → Select Realm → Go to Clients → Open your client → Settings → Add URI under “Valid Redirect URIs” → Save 
+
+6.  Configure API permissions 
+
+In Azure, 
+a. Open the application page and select API permissions.
+
+b. Under Microsoft Graph, add:
+
+- offline_access
+- User.Read
+c. Click Update permissions to apply the changes
+
+
+In Keycloak,
+
+- Add the below to Client Scopes → Default Client Scopes:
+
+openid  
+profile
+email
+roles
+offline_access 
+
+- Clients → keycloak_user_client -> Mappers, add mappers:
+
+email → email
+preferred_username → username
+given_name → firstName
+family_name → lastName
+
+7. Create OAuth2 client in CIAM 
+
+This will create a new OAuth2 client in CIAM 
+
+```bash
+curl -kL --request POST \
+  --url https://$IN_IP/rest/v1/oauth2-clients \
+  --header 'Content-Type: application/json' \
+  --header "Authorization: Bearer ${PM_TOKEN}" \
+  --data "{
+  \"client_name\": \"idp_oidc_client\",
+  \"redirect_uris\": [\"\"],
+  \"authorization_code_flow\": false,
+  \"client_credentials_flow\": false,
+  \"token_exchange_enabled\": true,
+  \"offline_access_enabled\": true,
+  \"client_offline_session_idle\": 1,
+  \"client_offline_session_max\": 1,
+  \"client_security_level\": \"TRUSTED\"
+}"
+```
+>Note: The ID and secret generated in this step will be referred to as CIAM_CLIENT_ID and CIAM_CLIENT_SECRET in the subsequent steps.
+
+8. Activate the CIAM Login Client 
+
+This step activates and synchronizes the CIAM OAuth2 client created so that it becomes a login-capable client in PowerFlex CIAM.
+
+``` bash
+curl -k -X PATCH https://$IN_IP/rest/v1/login-clients/$CIAM_CLIENT_ID --header 'Accept: application/json' --header 'Content-Type: application/json' --header "Authorization: Bearer ${PM_TOKEN}" --data '{}'
+```
+9. Add the application to CIAM 
+
+This command will add the application to CIAM 
+
+ROLE refers to the role defined in PowerFlex, CIAM_CLIENT_ID is the ID issued by CIAM, IDP_CLIENT_ID is the client ID from Azure or Keycloak, METADATA represents the metadata URL of the Azure/Keycloak application, and SERVICE_ID_IDP denotes the service ID of the identity provider.
+
+``` bash 
+curl -kLvv --request POST \
+  --url https://$IN_IP/rest/v1/oauth2-token-exchanges \
+  --header 'Content-Type: application/json' \
+  --header 'clientId: ' \
+  --header "Authorization: Bearer ${PM_TOKEN}" \
+  --data "{
+  \"ciam_oauth2_client_id\": \"$CIAM_CLIENT_ID\",
+  \"customer_client_id\": \"$IDP_CLIENT_ID\",
+  \"customer_metadata_url\": \"$METADATA\",
+  \"idp_service_id\": \"$SERVICE_ID_IDP\",
+  \"static_roles\": [
+    \"$ROLE\"
+  ]}"
+  ```
+> Note: Record this application ID; it will be referred to as APP_ID.
+
+10. Configure Role Mapping in the PowerFlex Keycloak (OIDC Service Provider)
+
+This step configures role mapping between Azure/Keycloak and PowerFlex roles within the PowerFlex Realm inside Keycloak (the internal identity provider embedded in PowerFlex).
+This mapping ensures that when a token exchange occurs, CIAM and Keycloak assign the correct PowerFlex roles (e.g., SuperUser, Monitor, Administrator) to the authenticated user.
+
+Although CIAM handles identity federation and token exchange, PowerFlex REST APIs rely on Keycloak role mappings for authorization.
+
+This step ensures:
+
+- The exchanged CIAM token contains the correct PowerFlex role required for API access.
+- The static role assigned during CIAM token exchange is recognized by Keycloak and mapped to the corresponding PowerFlex authorization roles.
+
+CIAM token exchange assigns a static role (e.g., "SuperUser") that must be recognized by Keycloak
+
+a. Log in to Keycloak (PowerFlex Realm Admin Console)
+Open the Keycloak admin UI - https://<PFMP_IP>/auth/admin/
+
+b. Retrieve the Keycloak Admin Credentials
+Run the following command on the PowerFlex MVM:
+kubectl get secret keycloak-admin-credentials -o json -n powerflex | jq '.data | map_values(@base64d)'
+Use these credentials to log in.
+
+c. Select the PowerFlex Realm
+After logging in: On the left menu → Click on Select Realm, Choose PowerFlex. This is where all PowerFlex users and roles are defined.
+
+d. Navigate to Users
+From the left navigation panel: Users → View all users.
+Search for the user with the APP_ID from Step 9. 
+
+e. Open the User Details, Click on the user entry -> Go to the Attributes tab
+
+f. Add Role Attribute
+In the Attributes section:Add an attribute matching the role you mapped during CIAM application creation from Step 9 
+
+
+Once all the steps are completed, a handshake is successfully established between the identity provider and PowerFlex.
