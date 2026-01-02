@@ -19,7 +19,17 @@ To deploy the Operator, follow the instructions available [here](../../../operat
 
 <br>
 
-{{< accordion id="Two" title="Base Install" markdown="true" >}}
+{{< accordion id="One" title="Automated Install With dellctl" markdown="true" >}}
+`dellctl` installs the CSI PowerStore driver and optional modules, optionally installs protocol prerequisites, and optionally validates data path connectivity.
+
+1. Download `dellctl` following the instructions [here](../../../../../tooling/cli/#installation-instructions).
+2. See the [dellctl install](../../../../../tooling/cli/#dellctl-install) and [dellctl install powerstore](../../../../../tooling/cli/#dellctl-install-powerstore) command documentation for instructions and examples.
+{{< /accordion >}}
+
+<br>
+
+{{< accordion id="Two" title="Manual Install" markdown="true" >}}
+{{< accordion id="Three" title="Base Install" markdown="true" >}}
 
 ### CSI Driver Installation
 
@@ -181,7 +191,7 @@ To deploy the Operator, follow the instructions available [here](../../../operat
 {{< /accordion >}}
 <br>
 
-{{< accordion id="Three" title="Modules" >}}
+{{< accordion id="Four" title="Modules" >}}
 
 <br>
 {{< markdownify >}}
@@ -200,4 +210,5 @@ The driver and modules versions installable with the Container Storage Modules O
 
 {{< /cardcontainer >}}
 
+{{< /accordion >}}
 {{< /accordion >}}
