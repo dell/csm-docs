@@ -1199,7 +1199,9 @@ authType: "OIDC"
 
 Starting with v2.16.0, the CSI PowerFlex driver supports NVMe/TCP connectivity. This feature allows the driver to communicate with PowerFlex arrays using the standard NVMe/TCP protocol, eliminating the dependency on the proprietary Storage Data Client (SDC) for worker nodes.
 
->**NOTE:** <br>If `blockProtocol` is not specified or set to `auto` in the vxflexos-config secret , the driver will detect the available initiators on the host and choose the protocol. Priority is given to SDC, followed by NVMe/TCP.
+**Note:**
+- Replication is not supported with NVMe/TCP mapped hosts on PowerFlex 4.8.
+- If `blockProtocol` is not specified or set to `auto` in the vxflexos-config secret , the driver will detect the available initiators on the host and choose the protocol. Priority is given to SDC, followed by NVMe/TCP.
 
 ### Configuration Requirements
 
