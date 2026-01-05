@@ -248,6 +248,7 @@ All OpenShift nodes connecting to Dell storage arrays must use unique host NVMe 
             name: custom-coreos-generate-nvme-hostnqn.service
   EOF
   ```
+{{% /tab %}}
 {{% tab header="NFS" lang="en" %}}
 
 ### NFS Requirements
