@@ -1194,3 +1194,35 @@ Enabling OIDC via Helm
 # Default value: "" <empty>
 authType: "OIDC"
 ```
+
+## NVMe/TCP Support
+
+Starting with v2.16.0, the CSI PowerFlex driver supports NVMe/TCP connectivity. This feature allows the driver to communicate with PowerFlex arrays using the standard NVMe/TCP protocol, eliminating the dependency on the proprietary Storage Data Client (SDC) for worker nodes.
+
+>**NOTE:** <br>If `blockProtocol` is not specified or set to `auto` in the vxflexos-config secret , the driver will detect the available initiators on the host and choose the protocol. Priority is given to SDC, followed by NVMe/TCP.
+
+### Configuration Requirements
+
+To enable NVMe/TCP, the following configurations must be applied:
+
+1.  **Block Protocol**: Explicitly set the `blockProtocol` parameter to `NVMeTCP` in your `secret.yaml`.
+    ```yaml
+    blockProtocol: "NVMeTCP"
+    ```
+
+2.  **Disable SDC**: SDC deployment must be disabled to ensure the driver relies on NVMe/TCP.
+    *   **Helm**: Set `sdc.enabled` to `false` in `values.yaml`.
+    *   **Operator**: Set `X_CSI_SDC_ENABLED` to `false` in the Custom Resource (CR).
+
+> **IMPORTANT**: The driver prioritizes SDC over NVMe/TCP. If SDC is enabled (default) or detected on the node, the driver will default to SDC communication, if `blockProtocol` is set to `auto`.
+
+### Migration to NVMe/TCP
+
+To transition existing nodes from SDC to NVMe/TCP, perform the following steps:
+
+1.  **Uninstall SDC**: Remove the SDC kernel module and package from all worker nodes.
+2.  **Remove Node Label**: Manually remove the SDC identification label from each node using `kubectl`:
+    ```bash
+    kubectl label node <node-name> csi-vxflexos.dellemc.com/<system-id>-
+    ```
+3.  **Verification**: Upon migration and restart, the driver will detect NVMe/TCP capability and automatically apply the new label: `csi-vxflexos.dellemc.com/<system-id>-nvmetcp=true`.

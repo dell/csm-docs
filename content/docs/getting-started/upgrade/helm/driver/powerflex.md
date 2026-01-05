@@ -31,6 +31,7 @@ You can upgrade the CSI Driver for Dell PowerFlex using Helm or Dell CSM Operato
   ./csi-install.sh --namespace vxflexos --values ./myvalues.yaml --helm-charts-version <version> --upgrade
   ```
 - The logging configuration from v1.5 will not work in v2.1, since the log configuration parameters are now set in the myvalues.yaml file located at dell-csi-helm-installer/myvalues.yaml. Please set the logging configuration parameters in the myvalues.yaml file.
+- **NVMe/TCP Migration**: If you are upgrading to use NVMe/TCP, you must disable SDC in your `myvalues.yaml` (`sdc.enabled: false`). Also, if your nodes previously had SDC installed, you must remove the SDC package and the `csi-vxflexos.dellemc.com/<system-id>` label from the nodes. Refer [documentation](../../../../concepts/csidriver/features/powerflex/#nvmetcp-support) for more details.
 
 - You cannot upgrade between drivers with different fsGroupPolicies. To check the current driver's fsGroupPolicy, use this command:  
   ```bash

@@ -105,6 +105,7 @@ Modify the installation as needed, typically updating driver versions, sidecars,
 * Changing environment variable values for driver
 * Updating the image of the driver
 * Upgrading the driver version
+- **NVMe/TCP Migration**: If you are upgrading to use NVMe/TCP, you must disable SDC by setting `X_CSI_SDC_ENABLED` to `false`. Also, if your nodes previously had SDC installed, you must remove the SDC package and the `csi-vxflexos.dellemc.com/<system-id>` label from the nodes. Refer [documentation](../../../concepts/csidriver/features/powerflex/#iscsi-chap) for more details.
 
 **NOTES:**
 1. If you are trying to upgrade the CSI driver from an older version, make sure to modify the _configVersion_ field if required.

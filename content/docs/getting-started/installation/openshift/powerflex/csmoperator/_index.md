@@ -7,8 +7,16 @@ weight: 2
 ---
 
 1. Set up an OpenShift cluster following the official documentation.
-2. Complete the base installation.
-3. Proceed with module installation.
+2. Proceed to the Prerequisite
+3. Complete the base installation.
+4. Proceed with module installation.
+<br>
+
+{{< accordion id="One" title="Prerequisite" >}}
+<br>
+{{<include  file="content/docs/getting-started/installation/openshift/powerflex/prerequisite/_index.md" >}}
+
+{{< /accordion >}}
 <br>
 
 {{< accordion id="Two" title="Base Install" markdown="true" >}}
@@ -78,6 +86,7 @@ dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      
       endpoint: "https://127.0.0.2"
       skipCertificateValidation: true
       mdm: "10.0.0.3,10.0.0.4"
+      blockProtocol: "auto"
     EOF
     ```
     </div>
@@ -175,7 +184,7 @@ dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      
 |<div style="text-align: left"> X_CSI_RENAME_SDC_ENABLED |<div style="text-align: left"> Enable this to rename the SDC with the given prefix. The new name will be ("prefix" + "worker_node_hostname") and it should not exceed 31 chars. | Yes | false |
 |<div style="text-align: left"> X_CSI_APPROVE_SDC_ENABLED |<div style="text-align: left"> Enable this to to approve restricted SDC by GUID during setup | Yes | false |
 |<div style="text-align: left"> X_CSI_HEALTH_MONITOR_ENABLED |<div style="text-align: left"> Enable/Disable health monitor of CSI volumes from Node plugin - volume condition | No | false |
-|<div style="text-align: left"> X_CSI_SDC_ENABLED |<div style="text-align: left"> Enable/Disable installation of the SDC. | Yes | true |
+|<div style="text-align: left"> X_CSI_SDC_ENABLED |<div style="text-align: left"> Enable/Disable installation of the SDC. Set to `false` for NVMe/TCP. | Yes | true |
 |<div style="text-align: left"> X_CSI_SDC_SFTP_REPO_ENABLED |<div style="text-align: left"> A boolean that enables/disables the SFTP repository settings for SDC. | No | false |
 |<div style="text-align: left"> X_CSI_SFTP_REPO_ADDRESS  |<div style="text-align: left"> Specifies the address of the Dell SFTP/private repository to look up for SDC kernel files. | No | "sftp://0.0.0.0" |
 |<div style="text-align: left"> X_CSI_SFTP_REPO_USER  |<div style="text-align: left"> Specifies the username to authenticate to the SFTP repository. | No | "sdcSFTPRepoUser" |
