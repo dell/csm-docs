@@ -1207,7 +1207,7 @@ Starting with v2.16.0, the CSI PowerFlex driver supports NVMe/TCP connectivity. 
 
 To enable NVMe/TCP, the following configurations must be applied:
 
-1.  **Block Protocol**: Explicitly set the `blockProtocol` parameter to `NVMeTCP` in your `secret.yaml`.
+1.  **Block Protocol**: Explicitly set the `blockProtocol` parameter to `NVMeTCP` in [secret.yaml](https://github.com/dell/csi-powerflex/blob/main/samples/secret.yaml).
     ```yaml
     blockProtocol: "NVMeTCP"
     ```
