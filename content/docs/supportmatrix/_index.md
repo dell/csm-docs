@@ -73,7 +73,7 @@ Container Storage Modules doesn't officially support specific operating systems,
 
 **Notes:**
 - In PowerFlex 5.0, the Replication feature is not supported.
-- In PowerFlex 4.8, the Replication feature is not supported with NVMe/TCP mapped hosts.
+- In PowerFlex 4.x, the Replication feature is not supported with NVMe/TCP mapped hosts.
 
 
 ## Operator Compatibility
@@ -88,7 +88,7 @@ Container Storage Modules doesn't officially support specific operating systems,
 
 **Notes:**
 - In PowerFlex 5.0, the Replication feature is not supported.
-- In PowerFlex 4.8, the Replication feature is not supported with NVMe/TCP mapped hosts.
+- In PowerFlex 4.x, the Replication feature is not supported with NVMe/TCP mapped hosts.
 
 ## OpenShift Compatibility with Operator
 

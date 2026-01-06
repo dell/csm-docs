@@ -1197,11 +1197,9 @@ authType: "OIDC"
 
 ## NVMe/TCP Support
 
-Starting with v2.16.0, the CSI PowerFlex driver supports NVMe/TCP connectivity. This feature allows the driver to communicate with PowerFlex arrays using the standard NVMe/TCP protocol, eliminating the dependency on the proprietary Storage Data Client (SDC) for worker nodes.
+Starting with v2.16.0, the CSI PowerFlex driver supports NVMe/TCP connectivity with PowerFlex 4.x and 5.0. This feature allows the driver to communicate with PowerFlex arrays using the standard NVMe/TCP protocol, eliminating the dependency on the proprietary Storage Data Client (SDC) for worker nodes.
 
-**Note:**
-- Replication is not supported with NVMe/TCP mapped hosts on PowerFlex 4.8.
-- If `blockProtocol` is not specified or set to `auto` in the vxflexos-config secret , the driver will detect the available initiators on the host and choose the protocol. Priority is given to SDC, followed by NVMe/TCP.
+> **Note:** If `blockProtocol` is not specified or set to `auto` in the vxflexos-config secret, the driver will detect the available initiators on the host and choose the protocol. Priority is given to SDC, followed by NVMe/TCP.
 
 ### Configuration Requirements
 
@@ -1228,3 +1226,9 @@ To transition existing nodes from SDC to NVMe/TCP, perform the following steps:
     kubectl label node <node-name> csi-vxflexos.dellemc.com/<system-id>-
     ```
 3.  **Verification**: Upon migration and restart, the driver will detect NVMe/TCP capability and automatically apply the new label: `csi-vxflexos.dellemc.com/<system-id>-nvmetcp=true`.
+
+**Limitations**
+
+These are the Container Storage Modules not supported with NVMeTCP protocol:
+
+- Container Storage Modules Replication
