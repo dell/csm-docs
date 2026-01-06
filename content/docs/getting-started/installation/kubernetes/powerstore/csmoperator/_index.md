@@ -177,6 +177,7 @@ To deploy the Operator, follow the instructions available [here](../../../operat
 **Note** :
    - "Kubelet config dir path" is not yet configurable in case of Operator based driver installation.
    - Snapshotter and resizer sidecars are not optional. They are defaults with Driver installation.
+   - **The VolumeJournal CRDs are installed as part of CSI PowerStore Driver installation and are required for Metro Volume configurations with resiliency enabled.**
 
 {{< /accordion >}}
 <br>
