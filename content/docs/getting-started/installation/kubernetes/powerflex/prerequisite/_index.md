@@ -40,6 +40,7 @@ Please visit [E-Lab Navigator](https://elabnavigator.dell.com/eln/modernHomeSSM)
 To install CSI driver for Powerflex with automated SDC deployment, you need below two packages on worker nodes.
 - `libaio`
 - `numactl-libs`
+
 **Optional:** For a typical install, you will pull SDC kernel modules from the Dell FTP site, which is set up by default. Some users might want to mirror this repository to a local location. The [PowerFlex KB article](https://www.dell.com/support/kbdoc/en-us/000184206/how-to-use-a-private-repository-for) has instructions on how to do this.
 
 **For Helm:**
