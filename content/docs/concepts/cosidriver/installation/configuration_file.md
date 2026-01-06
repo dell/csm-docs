@@ -64,12 +64,6 @@ connections:
     # REQUIRED
     mgmt-endpoint: https://gateway.objectscale.test:4443
 
-    # Identity and Access Management (IAM) API specific field.
-    # It points to the region in which object storage provider is installed.
-    #
-    # OPTIONAL
-    region: us-east-1
-
     # Indicates if the contents of the bucket should be emptied as part of the deletion process
     #
     # Possible values:
