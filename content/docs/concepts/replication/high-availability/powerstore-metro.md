@@ -366,7 +366,29 @@ allowedTopologies:
 
 When a Metro `PV` is created, the volumeHandle will have the format `<volumeID/globalID/protocol:remote-volumeID/remote-globalID>`.
 
--------------------
+----------------
+
+## PersistentVolumeClaim (PVC)
+Metro-replicated volumes can be provisioned using different `accessModes`. Both ReadWriteOnce (RWO) and ReadWriteMany (RWX) are supported.
+A PersistentVolumeClaim configured to create a metro replicated volume with ReadWriteMany access mode would look like this:
+
+```yaml
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pvol
+  namespace: powerstore-metro
+spec:
+  accessModes:
+    - ReadWriteMany
+  volumeMode: Filesystem
+  resources:
+    requests:
+      storage: 8Gi
+  storageClassName: powerstore-metro-storage-class
+```
+
+----------------
 
 ## Volume Expansion
 When a request is made to increase the size of a Metro `PV`, the metro replication session must be temporarily paused prior to the editing of Kubernetes resources. This can be done from the PowerStore Manager UI or CLI. The size of the local/preferred volume is then increased. The metro session must then be manually resumed. It is important to note that the paths for the remote/non-preferred volume will not become active until the metro session is resumed and the remote/non-preferred volume reflects the updated size.
