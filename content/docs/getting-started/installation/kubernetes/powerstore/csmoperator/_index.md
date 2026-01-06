@@ -29,7 +29,7 @@ To deploy the Operator, follow the instructions available [here](../../../operat
 
 The `dellctl` tool can automatically install the CSI PowerStore driver and modules, and optionally install protocol prerequisites, and validate data path connectivity.
 
-1. Download `dellctl` following the instructions [here](../../../../../tooling/cli/#installation-instructions).
+1. Download `dellctl` following the [installation instructions](../../../../../tooling/cli/#installation-instructions).
 2. See the [dellctl install](../../../../../tooling/cli/#dellctl-install) and [dellctl install powerstore](../../../../../tooling/cli/#dellctl-install-powerstore) command documentation for instructions and examples.
 
 {{< /collapse >}}
