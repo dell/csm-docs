@@ -25,6 +25,7 @@ You can upgrade the CSI Driver for Dell PowerFlex using Helm or Dell CSM Operato
 
 *NOTE:*
 - **NVMe/TCP Migration**: If you are upgrading to use NVMe/TCP, you must disable SDC in your `myvalues.yaml` (`sdc.enabled: false`). Also, if your nodes previously had SDC installed, you must remove the SDC package and the `csi-vxflexos.dellemc.com/<system-id>` label from the nodes. Refer [documentation](../../../../../concepts/csidriver/features/powerflex/#nvmetcp-support) for more details.
+  > **Important:** Automatic migration of existing SDC volumes to NVMe/TCP is not supported. After removing SDC, the driver will detect NVMe/TCP and schedule new workloads using NVMe/TCP on those nodes.
 - The parameter `--helm-charts-version` is optional and if you do not specify the flag, by default the `csi-install.sh` script will clone the version of the helm chart that is specified in the driver's [csi-install.sh](https://github.com/dell/csi-powerflex/blob/main/dell-csi-helm-installer/csi-install.sh#L24) file. If you wish to install the driver using a different version of the helm chart, you need to include this flag. Also, remember to delete the `helm-charts` repository present in the `csi-powerflex` directory if it was cloned before.
 - If you are upgrading from a driver version that was installed using Helm v2, ensure that you install Helm3 before installing the driver.
 - To update any installation parameter after the driver has been installed, change the `myvalues.yaml` file and run the install script with the option _\-\-upgrade_, for example:
