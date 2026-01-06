@@ -366,6 +366,31 @@ allowedTopologies:
 
 When a Metro `PV` is created, the volumeHandle will have the format `<volumeID/globalID/protocol:remote-volumeID/remote-globalID>`.
 
+----------------
+
+## PersistentVolumeClaim (PVC)
+The Metro replicated volumes can be created with different AccessModes. ReadWriteOnce (RWO) and ReadWriteMany (RWX) are supported.
+A `PersistentVolumeClaim` to create metro replicated volumes that is enabled with ReadWriteMany look as follows:
+
+Example using `volumeBindingMode: Immediate`
+
+```yaml
+apiVersion: v1
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: pvol
+  namespace: powerstore-metro
+spec:
+  accessModes:
+    - ReadWriteMany
+  volumeMode: Filesystem
+  resources:
+    requests:
+      storage: 8Gi
+  storageClassName: powerstore-storage-class
+```
+
 -------------------
 
 ## Volume Expansion
