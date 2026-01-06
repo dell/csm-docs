@@ -1211,7 +1211,7 @@ To enable NVMe/TCP, the following configurations must be applied:
     ```
 
 2.  **Disable SDC**: SDC deployment must be disabled to ensure the driver relies on NVMe/TCP.
-    *   **Helm**: Set `sdc.enabled` to `false` in [values.yaml](https://github.com/dell/helm-charts/csi-vxflexos-{{< version-docs key="driver_latestVersion" >}}/charts/csi-vxflexos/values.yaml).
+    *   **Helm**: Set `sdc.enabled` to `false` in [values.yaml](https://github.com/dell/helm-charts/blob/csi-vxflexos-{{< version-docs key="driver_latestVersion" >}}/charts/csi-vxflexos/values.yaml).
     *   **Operator**: Set `X_CSI_SDC_ENABLED` to `false` in the Custom Resource (CR) [here](https://github.com/dell/csm-operator/blob/release/{{< version-docs key="csm-operator_latest_version">}}/samples/{{< version-docs key="csm-operator_latest_samples_dir" >}}/storage_csm_powerflex_{{< version-docs key="Det_sample_operator_pflex" >}}.yaml).
 
 > **IMPORTANT**: The driver prioritizes SDC over NVMe/TCP. If SDC is enabled (default) or detected on the node, the driver will default to SDC communication, if `blockProtocol` is set to `auto`.
@@ -1231,4 +1231,4 @@ To transition existing nodes from SDC to NVMe/TCP, perform the following steps:
 **Limitations**
 
 - Container Storage Modules Replication is not supported with NVMeTCP protocol on PowerFlex 4.x
-- Autmatic migration of SDC volume to NVMeTCP is not supported
+- Automatic migration of SDC volume to NVMeTCP is not supported
