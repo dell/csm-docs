@@ -5,19 +5,6 @@ weight: 1
 Description: Code features for ObjectScale COSI Driver
 ---
 
-## Prerequisites
-
-To use the COSI Driver on the ObjectScale platform, you must deploy the following components to your cluster:
-
-- Kubernetes Container Object Storage Interface CRDs
-- Container Object Storage Interface Controller
-
-```
-kubectl create -k 'https://github.com/kubernetes-sigs/container-object-storage-interface//?ref=v0.2.1'
-
-kubectl patch deployment container-object-storage-controller -n container-object-storage-system -p '{"spec":{"template":{"spec":{"containers":[{"name":"objectstorage-controller","image":"gcr.io/k8s-staging-sig-storage/objectstorage-controller:release-0.2"}]}}}}'
-```
-
 ## Kubernetes Objects
 
 ### Bucket Class
