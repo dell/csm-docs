@@ -9,12 +9,11 @@ description: >
 The following requirements must be met before installing the CSI Driver for Dell PowerFlex:
 
 - Install Kubernetes cluster (see [supported versions](../../../../../supportmatrix/_index.md#container-orchestrator-platforms))
-- Install Helm 3.x
 - Enable Zero Padding on PowerFlex (see [details below](#enable-zero-padding-on-powerflex))
 - Mount propagation is enabled on container runtime that is being used
 - If using Snapshot feature, satisfy all Volume Snapshot requirements
 - A user must exist on the array with a role _>= FrontEndConfigure_
-- If enabling CSM for Authorization, please refer to the [Authorization deployment steps](docs/getting-started/installation/helm/modules/authorizationv2-0/) first
+- If enabling CSM for Authorization, please refer to the Authorization deployment steps first
 - If multipath is configured, ensure CSI-PowerFlex volumes are blacklisted by multipathd. See [troubleshooting section](../../../../../concepts/csidriver/troubleshooting/powerflex) for details
 - For NVMe support the preferred multipath solution is NVMe native multipathing. The Dell Host Connectivity Guide describes the details of each configuration option.
 - Secure boot is not supported; ensure that secure boot is disabled in the BIOS.
