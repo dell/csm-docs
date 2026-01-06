@@ -10,7 +10,8 @@ The COSI Driver for Dell ObjectScale can be deployed by using the provided Helm 
 The Helm chart installs the following components in a _Deployment_ in the specified namespace:
 - COSI Driver for ObjectScale
 
-## Dependencies
+{{< accordion id="One" title="Dependencies" markdown="true" >}}
+### Dependencies
 
 Installing any of the CSI Driver components using Helm requires a few utilities to be installed on the system running the installation.
 
@@ -23,8 +24,11 @@ Installing any of the CSI Driver components using Helm requires a few utilities 
 
 > ℹ️ **NOTE:**
 > To use these tools, a valid `KUBECONFIG` is required. Ensure that either a valid configuration is in the default location, or, that the `KUBECONFIG` environment variable points to a valid configuration before using these tools.
+{{< /accordion>}}
+<br>
 
-## Prerequisites
+{{< accordion id="Two" title="Prerequisites" markdown="true" >}}
+### Prerequisites
 
 - Install Kubernetes cluster (see [supported versions](../../../cosidriver/#features-and-capabilities))
 
@@ -38,7 +42,10 @@ To use the COSI Driver, you must deploy the following components to your cluster
 kubectl create -k 'https://github.com/kubernetes-sigs/container-object-storage-interface//?ref=v0.2.1'
 kubectl patch deployment container-object-storage-controller -n container-object-storage-system -p '{"spec":{"template":{"spec":{"containers":[{"name":"objectstorage-controller","image":"gcr.io/k8s-staging-sig-storage/objectstorage-controller:release-0.2"}]}}}}'
 ```
+{{< /accordion>}}
+<br>
 
+{{< accordion id="Three" title="Driver Install" markdown="true" >}}
 ## Install the Driver
 
 **Steps**
@@ -66,7 +73,12 @@ kubectl patch deployment container-object-storage-controller -n container-object
 ```bash
 helm install dell-cosi ./cosi --namespace=dell-cosi --values ./my-cosi-values.yaml
 ```
+{{< /accordion>}}
+<br>
 
-## Bucket Classes, Bucket Access Classes
+{{< accordion id="Four" title="Post Install" markdown="true" >}}
+#### Bucket Classes, Bucket Access Classes
 
 The COSI driver for Dell ObjectScale, `dell-csi-helm-installer` does not create any _Bucket Classes_ nor _Bucket Access Classes_ as part of the driver installation. A sample class manifests are available at `samples/bucketclass/objectscale.yaml` and `samples/bucketaccessclass/objectscale.yaml`. Use this sample manifest to create a _Bucket Classes_ to provision storage. Remember to uncomment/update the manifest as per the requirements.
+{{< /accordion>}}
+<br>

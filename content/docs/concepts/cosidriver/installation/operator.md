@@ -75,5 +75,20 @@ If installed successfully, you should be able to see the operator pod in the `de
 {{< /accordion >}}
 <br>
 
-{{< accordion id="Three" title="Driver Install" markdown="true" >}}
+{{< accordion id="Three" title="Prerequisites" markdown="true" >}}
+### Prerequisites
+To use the COSI Driver, you must deploy the following components to your cluster:
+
+- Kubernetes Container Object Storage Interface CRDs
+- Container Object Storage Interface Controller
+
+*Note*: The following `kubectl patch` command is required as the current installation procedure for v0.2.1 will use a previous image version. If you are on an OpenShift cluster you can use the `oc` command instead.
+```bash
+kubectl create -k 'https://github.com/kubernetes-sigs/container-object-storage-interface//?ref=v0.2.1'
+kubectl patch deployment container-object-storage-controller -n container-object-storage-system -p '{"spec":{"template":{"spec":{"containers":[{"name":"objectstorage-controller","image":"gcr.io/k8s-staging-sig-storage/objectstorage-controller:release-0.2"}]}}}}'
+```
+{{< /accordion >}}
+<br>
+
+{{< accordion id="Four" title="Driver Install" markdown="true" >}}
 {{< /accordion >}}
