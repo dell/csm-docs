@@ -112,6 +112,10 @@ Modify the installation as needed, typically updating driver versions, sidecars,
       driver:
         configVersion: {{< version-docs key="PFlex-latestVersion" >}}
    ```
+{{< hide class="3" >}}
+2. **NVMe/TCP Migration**: If you are upgrading to use NVMe/TCP, you must disable SDC by setting `X_CSI_SDC_ENABLED` to `false`. Also, if your nodes previously had SDC installed, you must remove the SDC package and the `csi-vxflexos.dellemc.com/<system-id>` label from the nodes. Refer [documentation](../../../../../concepts/csidriver/features/powerflex/#nvmetcp-support) for more details.
+  > **Important:** Automatic migration of existing SDC volumes to NVMe/TCP is not supported. After removing SDC, the driver will detect NVMe/TCP and schedule new workloads using NVMe/TCP on those nodes.
+{{< /hide >}}
 {{< alert title="Warning" color="warning" >}}
 Don’t update the original CustomResource manifest file with `kubectl apply -f`. It can overwrite important annotations and cause failures.
 {{< /alert >}}

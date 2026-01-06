@@ -7,6 +7,7 @@ weight: 2
 ---
 
 1. Set up a Kubernetes cluster following the official documentation.
+2. Proceed to the [Prerequisite](../prerequisite/_index.md).
 3. Complete the base installation.
 4. Proceed with module installation.
 
@@ -15,72 +16,6 @@ weight: 2
 To deploy the Operator, follow the instructions available [here](../../../operator/operatorinstallation_kubernetes.md).
 
 {{< accordion id="Two" title="Base Install" markdown="true" >}}
-
-### Prerequisites
-
-- If multipath is configured, ensure CSI-PowerFlex volumes are blacklisted by multipathd. See [troubleshooting section](../../../../../concepts//csidriver/troubleshooting/powerflex) for details.
-
-
-##### **SDC Deployment for Operator**
-
-- **Overview:**
-This feature deploys the SDC kernel modules on all nodes using an init container. PowerFlex can be deployed with or without SDC.
-
-- **Enable/Disable SDC:**
-Set the `X_CSI_SDC_ENABLED` value in the CR file. By default, SDC is enabled.
-
--  **Manual Deployment:**
-For unsupported OS versions, follow the manual SDC deployment steps. Refer to https://quay.io/repository/dell/storage/powerflex/sdc for supported OS versions.
-
-- **MDM Value:**
-The operator sets the MDM value for initContainers in the driver CR from the `mdm` attributes in `config.yaml`. Do not set this manually.
-
--  **SDC Monitor:**
-Enable the SDC monitor by setting the `enable` flag to `true`.
-   - **With Sidecar**: Edit the `HOST_PID` and `MDM` fields with the host PID and MDM IPs.
-   - **Without Sidecar**: Leave the `enabled` field set to `false`.
-
-   Example CR: [samples/storage_csm_powerflex_{{< version-docs key="sample_sc_pflex" >}}.yaml](https://github.com/dell/csm-operator/blob/release/{{< version-docs key="csm-operator_latest_version">}}/samples/{{< version-docs key="csm-operator_latest_samples_dir" >}}/storage_csm_powerflex_{{< version-docs key="sample_sc_pflex" >}}.yaml)
-
-```yaml
-sideCars:
-# sdc-monitor is disabled by default, due to high CPU usage
-  - name: sdc-monitor
-    enabled: false
-    image: quay.io/dell/storage/powerflex/sdc:4.5.4
-    envs:
-    - name: HOST_PID
-      value: "1"
-    - name: MDM
-      value: "10.xx.xx.xx,10.xx.xx.xx" #provide the same MDM value from secret
-```
-
-##### **Manual SDC Deployment**
-
-For detailed PowerFlex installation procedure, see the [Dell PowerFlex Deployment Guide](https://docs.delltechnologies.com/bundle/VXF_DEPLOY/page/GUID-DD20489C-42D9-42C6-9795-E4694688CC75.html). Install the PowerFlex SDC using this procedure:
-
-**Steps**
-
-1. **Download SDC:**
-Download the PowerFlex SDC from [Dell Online support](https://www.dell.com/support). The filename is EMC-ScaleIO-sdc-*.rpm, where * is the SDC name corresponding to the PowerFlex installation version.
-2. **Set MDM IPs:**
-  Export the MDM IPs as a comma-separated list:
-    ```bash
-    export MDM_IP=xx.xxx.xx.xx,xx.xxx.xx.xx
-    ```
-   where xxx represents the actual IP address in your environment.
-
-3. **Install SDC:**
-Install the SDC per the _Dell PowerFlex Deployment Guide_:
-
-    - For RPM environments, run:
-     ```bash
-     rpm -iv ./EMC-ScaleIO-sdc-*.x86_64.rpm
-     ```
-     Replace * with the SDC name corresponding to the PowerFlex version.
-
-4. **Add MDM IPs for Multi-Array support:**
-run `/opt/emc/scaleio/sdc/bin/drv_cfg --add_mdm --ip 10.xx.xx.xx.xx,10.xx.xx.xx`.
 
 
 ### CSI Driver Installation
@@ -104,6 +39,8 @@ run `/opt/emc/scaleio/sdc/bin/drv_cfg --add_mdm --ip 10.xx.xx.xx.xx,10.xx.xx.xx`
      endpoint: "https://127.0.0.2"
      skipCertificateValidation: true
      mdm: "10.0.0.3,10.0.0.4"
+     nasName : "nasServer"
+     blockProtocol: "auto"
    ```
       - **Update Parameters:** Replace placeholders with actual values for your Powerflex array.
       - **Add Blocks:** If you have multiple Powerflex arrays, add similar blocks for each one.
@@ -178,7 +115,7 @@ run `/opt/emc/scaleio/sdc/bin/drv_cfg --add_mdm --ip 10.xx.xx.xx.xx,10.xx.xx.xx`
    |<div style="text-align: left"> X_CSI_RENAME_SDC_ENABLED |<div style="text-align: left"> Enable this to rename the SDC with the given prefix. The new name will be ("prefix" + "worker_node_hostname") and it should not exceed 31 chars. | Yes | false |
    |<div style="text-align: left"> X_CSI_APPROVE_SDC_ENABLED |<div style="text-align: left"> Enable this to to approve restricted SDC by GUID during setup | Yes | false |
    |<div style="text-align: left"> X_CSI_HEALTH_MONITOR_ENABLED |<div style="text-align: left"> Enable/Disable health monitor of CSI volumes from Node plugin - volume condition | No | false |
-   |<div style="text-align: left"> X_CSI_SDC_ENABLED |<div style="text-align: left"> Enable/Disable installation of the SDC. | Yes | true |
+   |<div style="text-align: left"> X_CSI_SDC_ENABLED |<div style="text-align: left"> Enable/Disable installation of the SDC. Set to `false` for NVMe/TCP. | Yes | true |
    |<div style="text-align: left"> X_CSI_SDC_SFTP_REPO_ENABLED |<div style="text-align: left"> A boolean that enables/disables the SFTP repository settings for SDC. | No | false |
    |<div style="text-align: left"> X_CSI_SFTP_REPO_ADDRESS  |<div style="text-align: left"> Specifies the address of the Dell SFTP/private repository to look up for SDC kernel files. | No | "sftp://0.0.0.0" |
    |<div style="text-align: left"> X_CSI_SFTP_REPO_USER  |<div style="text-align: left"> Specifies the username to authenticate to the SFTP repository. | No | "sdcSFTPRepoUser" |
