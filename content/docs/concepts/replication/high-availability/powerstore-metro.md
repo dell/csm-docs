@@ -372,8 +372,6 @@ When a Metro `PV` is created, the volumeHandle will have the format `<volumeID/g
 The Metro replicated volumes can be created with different AccessModes. ReadWriteOnce (RWO) and ReadWriteMany (RWX) are supported.
 A `PersistentVolumeClaim` to create metro replicated volumes that is enabled with ReadWriteMany look as follows:
 
-Example using `volumeBindingMode: Immediate`
-
 ```yaml
 apiVersion: v1
 kind: PersistentVolumeClaim
