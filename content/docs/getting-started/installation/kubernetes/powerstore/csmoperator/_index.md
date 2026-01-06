@@ -25,6 +25,16 @@ To deploy the Operator, follow the instructions available [here](../../../operat
 
 <br>
 
+{{< collapse id="auto" title="Automated Install With dellctl" show="true">}}
+
+The `dellctl` tool can automatically install the CSI PowerStore driver and modules, and optionally install protocol prerequisites, and validate data path connectivity.
+
+1. Download `dellctl` following the [installation instructions](../../../../../tooling/cli/#installation-instructions).
+2. See the [dellctl install](../../../../../tooling/cli/#dellctl-install) and [dellctl install powerstore](../../../../../tooling/cli/#dellctl-install-powerstore) command documentation for instructions and examples.
+
+{{< /collapse >}}
+{{< collapse id="manual" title="Manual Install">}}
+
 1. **Create Namespace.**
    ```bash
    kubectl create namespace powerstore
@@ -46,7 +56,7 @@ To deploy the Operator, follow the instructions available [here](../../../operat
    ```
    **Note** :
     skipCertificateValidation flag is currently unsupported. Please refrain from changing its value.
-    
+
       - **Update Parameters:** Replace placeholders with actual values for your PowerStore array.
       - **Add Blocks:** If you have multiple PowerStore arrays, add similar blocks for each one.
       - **Replication:** If replication is enabled, make sure the `config.yaml` includes all involved PowerStore arrays.
@@ -135,7 +145,7 @@ To deploy the Operator, follow the instructions available [here](../../../operat
 
    </br>
 
-2. **Create Storage Class** 
+2. **Create Storage Class**
 
    ```yaml
    apiVersion: storage.k8s.io/v1
@@ -158,8 +168,8 @@ To deploy the Operator, follow the instructions available [here](../../../operat
    kubectl create -f < storage-class.yaml >
    ```
 
-3. **Create Volume Snapshot Class** 
-   ```yaml 
+3. **Create Volume Snapshot Class**
+   ```yaml
    apiVersion: snapshot.storage.k8s.io/v1
    kind: VolumeSnapshotClass
    metadata:
@@ -178,6 +188,7 @@ To deploy the Operator, follow the instructions available [here](../../../operat
    - "Kubelet config dir path" is not yet configurable in case of Operator based driver installation.
    - Snapshotter and resizer sidecars are not optional. They are defaults with Driver installation.
 
+{{< /collapse >}}
 {{< /accordion >}}
 <br>
 
