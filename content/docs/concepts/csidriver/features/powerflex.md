@@ -1330,6 +1330,7 @@ It registers an external identity provider (Azure/Keycloak/Okta) with PowerFlex 
 >Note: 
 CLIENT_ID - Client id of Microsoft Azure/Keycloak/Okta 
 CLIENT_SECRET - Client secret of Microsoft Azure/Keycloak/Okta
+IDP - AzureEntraID/Keycloak/Okta
 For Azure,
 IDP_METADATA_URL - `https://login.microsoftonline.com/<Tenant_id>/v2.0/.well-known/openid-configuration` where the tenant id is Azure Active Directory tenant the identity provider belongs to.
 For Keycloak,
@@ -1374,7 +1375,7 @@ curl -kvvL --request POST \
   ],
   \"pkce_enabled\": true,
   \"code_challenge_method\": \"S256\",
-  \"idp_type\": \"AzureEntraID\"
+  \"idp_type\": \"$IDP\"
 }"
 ```
 >Note: An ID will be generated for the service, which will hereafter be referred to as SERVICE_ID_IDP.
@@ -1451,6 +1452,7 @@ curl -kL --request POST \
 8. Activate the CIAM Login Client 
 
 This step activates and synchronizes the CIAM OAuth2 client created so that it becomes a login-capable client in PowerFlex CIAM.
+CIAM creates a user in Keycloak realm of embedded keycloak and assigns it the given role.
 
 ``` bash
 curl -k -X PATCH https://$IN_IP/rest/v1/login-clients/$CIAM_CLIENT_ID --header 'Accept: application/json' --header 'Content-Type: application/json' --header "Authorization: Bearer ${PM_TOKEN}" --data '{}'
@@ -1459,7 +1461,11 @@ curl -k -X PATCH https://$IN_IP/rest/v1/login-clients/$CIAM_CLIENT_ID --header '
 
 This command will add the application to CIAM 
 
-ROLE refers to the role defined in PowerFlex, CIAM_CLIENT_ID is the ID issued by CIAM, IDP_CLIENT_ID is the client ID from Azure/Keycloak/Okta, METADATA represents the metadata URL of the Azure/Keycloak/Okta application, and SERVICE_ID_IDP denotes the service ID of the identity provider.
+ROLE refers to the role assigned to all tokens exchanged for a specific Identity Provider (IdP) and Application ID, enabling access to the PowerFlex APIs.
+CIAM_CLIENT_ID is the client ID issued by the CIAM system.
+IDP_CLIENT_ID represents the client ID configured in the identity provider (Azure, Keycloak, or Okta).
+METADATA denotes the metadata URL of the corresponding Azure, Keycloak, or Okta application.
+SERVICE_ID_IDP identifies the service ID associated with the configured identity provider.
 
 ``` bash 
 curl -kLvv --request POST \
@@ -1478,7 +1484,7 @@ curl -kLvv --request POST \
   ```
 > Note: Record this application ID; it will be referred to as APP_ID.
 
-10. Configure Role Mapping in the PowerFlex Embedded Keycloak
+10. Legacy Workaround: Configure Keycloak User Attributes for PowerFlex Block API (Pre‑PFMP 5.1)
 
 This step configures role mapping between Azure/Keycloak/Okta and PowerFlex roles within the PowerFlex Realm inside Keycloak (the internal identity provider embedded in PowerFlex).
 This mapping ensures that when a token exchange occurs, CIAM and Keycloak assign the correct PowerFlex roles (e.g., SuperUser, Monitor, Administrator) to the authenticated user.
@@ -1503,25 +1509,5 @@ curl -X GET "https://keycloak-http.powerflex/auth/admin/realms/powerflex/users" 
 curl -k -X POST https://$IN_IP/rest/v1/users/$APP_USER/repair --header 'Accept: application/json' --header 'Content-Type: application/json' \
  --header "Authorization: Bearer ${PM_TOKEN}"
  ```
- Alternatively, this can be done in UI
- a. Log in to Keycloak (PowerFlex Realm Admin Console)
-Open the Keycloak admin UI - https://<PFMP_IP>/auth/admin/
-
-b. Retrieve the Keycloak Admin Credentials
-Run the following command on the PowerFlex MVM:
-kubectl get secret keycloak-admin-credentials -o json -n powerflex | jq '.data | map_values(@base64d)'
-Use these credentials to log in.
-
-c. Select the PowerFlex Realm
-After logging in: On the left menu → Click on Select Realm, Choose PowerFlex. This is where all PowerFlex users and roles are defined.
-
-d. Navigate to Users
-From the left navigation panel: Users → View all users.
-Search for the user with the APP_ID from Step 9. 
-
-e. Open the User Details, Click on the user entry -> Go to the Attributes tab
-
-f. Add Role Attribute
-In the Attributes section:Add an attribute matching the role you mapped during CIAM application creation from Step 9.
-
+ 
 Once all the steps are completed, a handshake is successfully established between the identity provider and PowerFlex.
