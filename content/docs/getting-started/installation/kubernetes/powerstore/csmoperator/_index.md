@@ -19,21 +19,21 @@ To deploy the Operator, follow the instructions available [here](../../../operat
 
 <br>
 
-{{< accordion id="One" title="Automated Install With dellctl" markdown="true" >}}
-`dellctl` installs the CSI PowerStore driver and optional modules, optionally installs protocol prerequisites, and optionally validates data path connectivity.
-
-1. Download `dellctl` following the instructions [here](../../../../../tooling/cli/#installation-instructions).
-2. See the [dellctl install](../../../../../tooling/cli/#dellctl-install) and [dellctl install powerstore](../../../../../tooling/cli/#dellctl-install-powerstore) command documentation for instructions and examples.
-{{< /accordion >}}
-
-<br>
-
-{{< accordion id="Two" title="Manual Install" markdown="true" >}}
-{{< accordion id="Three" title="Base Install" markdown="true" >}}
+{{< accordion id="Two" title="Base Install" markdown="true" >}}
 
 ### CSI Driver Installation
 
 <br>
+
+{{< collapse id="auto" title="Automated Install With dellctl" show="true">}}
+
+The `dellctl` tool can automatically install the CSI PowerStore driver and modules, and optionally install protocol prerequisites, and validate data path connectivity.
+
+1. Download `dellctl` following the instructions [here](../../../../../tooling/cli/#installation-instructions).
+2. See the [dellctl install](../../../../../tooling/cli/#dellctl-install) and [dellctl install powerstore](../../../../../tooling/cli/#dellctl-install-powerstore) command documentation for instructions and examples.
+
+{{< /collapse >}}
+{{< collapse id="manual" title="Manual Install">}}
 
 1. **Create Namespace.**
    ```bash
@@ -56,7 +56,7 @@ To deploy the Operator, follow the instructions available [here](../../../operat
    ```
    **Note** :
     skipCertificateValidation flag is currently unsupported. Please refrain from changing its value.
-    
+
       - **Update Parameters:** Replace placeholders with actual values for your PowerStore array.
       - **Add Blocks:** If you have multiple PowerStore arrays, add similar blocks for each one.
       - **Replication:** If replication is enabled, make sure the `config.yaml` includes all involved PowerStore arrays.
@@ -145,7 +145,7 @@ To deploy the Operator, follow the instructions available [here](../../../operat
 
    </br>
 
-2. **Create Storage Class** 
+2. **Create Storage Class**
 
    ```yaml
    apiVersion: storage.k8s.io/v1
@@ -168,8 +168,8 @@ To deploy the Operator, follow the instructions available [here](../../../operat
    kubectl create -f < storage-class.yaml >
    ```
 
-3. **Create Volume Snapshot Class** 
-   ```yaml 
+3. **Create Volume Snapshot Class**
+   ```yaml
    apiVersion: snapshot.storage.k8s.io/v1
    kind: VolumeSnapshotClass
    metadata:
@@ -188,10 +188,11 @@ To deploy the Operator, follow the instructions available [here](../../../operat
    - "Kubelet config dir path" is not yet configurable in case of Operator based driver installation.
    - Snapshotter and resizer sidecars are not optional. They are defaults with Driver installation.
 
+{{< /collapse >}}
 {{< /accordion >}}
 <br>
 
-{{< accordion id="Four" title="Modules" >}}
+{{< accordion id="Three" title="Modules" >}}
 
 <br>
 {{< markdownify >}}
@@ -210,5 +211,4 @@ The driver and modules versions installable with the Container Storage Modules O
 
 {{< /cardcontainer >}}
 
-{{< /accordion >}}
 {{< /accordion >}}

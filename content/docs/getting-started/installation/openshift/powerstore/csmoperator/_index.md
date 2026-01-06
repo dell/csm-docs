@@ -14,26 +14,15 @@ weight: 2
 
 <br>
 
-<br>
-
-{{< accordion id="One" title="Automated Install With dellctl" markdown="true" >}}
-`dellctl` installs the CSI PowerStore driver and optional modules, optionally installs protocol prerequisites, and optionally validates data path connectivity.
-
-1. Download `dellctl` following the instructions [here](../../../../../tooling/cli/#installation-instructions).
-2. See the [dellctl install](../../../../../tooling/cli/#dellctl-install) and [dellctl install powerstore](../../../../../tooling/cli/#dellctl-install-powerstore) command documentation for instructions and examples.
-{{< /accordion >}}
-
-<br>
-
-{{< accordion id="Two" title="Manual Install" markdown="true" >}}
-<br>
-{{< accordion id="Three" title="Prerequisite" >}}
+{{< accordion id="One" title="Prerequisite" >}}
 <br>
 {{<include  file="content/docs/getting-started/installation/openshift/powerstore/prerequisite/_index.md" >}}
 
 {{< /accordion >}}
+
 <br>
-{{< accordion id="Four" title="Base Install" markdown="true" >}}
+
+{{< accordion id="Two" title="Base Install" markdown="true" >}}
 
 </br>
 
@@ -72,6 +61,16 @@ dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      
 
 ### CSI Driver Installation
 </br>
+
+{{< collapse id="auto" title="Automated Install With dellctl" show="true">}}
+
+The `dellctl` tool can automatically install the CSI PowerStore driver and modules, and optionally install protocol prerequisites, and validate data path connectivity.
+
+1. Download `dellctl` following the instructions [here](../../../../../tooling/cli/#installation-instructions).
+2. See the [dellctl install](../../../../../tooling/cli/#dellctl-install) and [dellctl install powerstore](../../../../../tooling/cli/#dellctl-install-powerstore) command documentation for instructions and examples.
+
+{{< /collapse >}}
+{{< collapse id="manual" title="Manual Install">}}
 
 1. ##### **Create project:**
 
@@ -293,7 +292,7 @@ Check the status of the CR to verify if the driver installation is in the `Succe
     ```
    </br>
 
-
+{{< /collapse >}}
 
 ### Configurations
 <br>
@@ -570,7 +569,7 @@ NAME                    STATUS   VOLUME             CAPACITY   ACCESS MODES   ST
 
 <br>
 
-{{< accordion id="Five" title="Modules" >}}
+{{< accordion id="Three" title="Modules" >}}
 
 <br>
 
@@ -585,5 +584,4 @@ NAME                    STATUS   VOLUME             CAPACITY   ACCESS MODES   ST
     {{< customcard link1="./csm-modules/observability"   image="1" title="Observability"  >}}
 
 {{< /cardcontainer >}}
-{{< /accordion >}}
 {{< /accordion >}}
