@@ -77,6 +77,6 @@ helm install dell-cosi ./cosi --namespace=dell-cosi --values ./my-cosi-values.ya
 <br>
 
 {{< accordion id="Four" title="Post Install" markdown="true" >}}
-{{<include  file="content/docs/concepts/cosidriver/installation/postinstall.md" >}}
+{{<include  file="content/docs/concepts/cosidriver/installation/postinstall" >}}
 {{< /accordion>}}
 <br>

@@ -1,9 +1,3 @@
----
-title: Post Install
-linktitle: Post Install
-weight: 1
-Description: Common steps to be done after installing the driver
----
 ### Bucket Classes, Bucket Access Classes
 
 The COSI driver installation does not create any _Bucket Classes_ nor _Bucket Access Classes_ as part of the driver installation. The following samples can be used to create those objects. Remember to uncomment/update the manifest as per the requirements.
