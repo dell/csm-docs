@@ -48,6 +48,13 @@ weight: 1
 {{</table>}}
 > Note: PowerStore does not support VM cloning or VM snapshot operations while Metro replication is enabled.
 
+## SUSE Virtualization (Harvester)
+{{<table "table table-striped table-bordered table-sm">}}
+| Version     | Capability                                                                                            | PowerStore | PowerScale | PowerFlex | PowerMax | Unity XT |
+|-------------|-------------------------------------------------------------------------------------------------------| :--------: | :--------: | :-------: | :------: | :------: |
+| 1.5.2 - 1.6.1  | <div style="text-align: left"> [Storage](https://github.com/ibrokethecloud/kubevirt-storage-checkup/tree/harvester-v1.5.x) </div>| Yes         | No        | Yes        | Yes      | No       |
+{{</table>}}
+
 ## Tested Host Operating Systems
 
 Container Storage Modules doesn't officially support specific operating systems, but the following are known to work:
