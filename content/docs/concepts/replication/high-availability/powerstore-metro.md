@@ -21,7 +21,7 @@ In PowerStore Metro configurations:
 When the replication session is broken but both arrays are still reachable, there is a possibility of split-brain where both the now disconnected volumes serve IOs and the data between them is not being synced. PowerStore Metro uses polarization to prevent this.
 * The PowerStore system from which the metro source is configured is designated as "preferred" and the other as non-preferred.
 * When the replication link is broken, the "preferred" side remains online and serves the IOs.
-* If the preferred side is offline, non-preferred also remains ofline. To handle such scenarios and add more resiliency to Metro volumes, it is recommended to configure a witness for the pair of Powerstores.
+* If the preferred side is offline, non-preferred also remains offline. To handle such scenarios and add more resiliency to Metro volumes, it is recommended to configure a witness for the pair of PowerStores.
 
 Note: For more details, especially regarding metro volume behavior during different failure scenarios, refer PowerStore Metro Volume documentation.
 
@@ -401,7 +401,7 @@ spec:
 ----------------
 
 ## Workload Resiliency in Metro Configurations
-For PowerStore Metro with resiliency enabled, the workloads remain resilient against node failures, array failures, and complete site failures, provided that the preferred node has connectivity to the surviving array. This applies to both uniform and non-uniform host connectivity configurations except for complete site failures, where resiliency is supported only for uniform configurations.
+For PowerStore Metro with csm-resiliency enabled, the workloads remain resilient against node failures, array failures, and complete site failures, provided that the preferred node has connectivity to the surviving array. This applies to both uniform and non-uniform host connectivity configurations except for complete site failures, where resiliency is supported only for uniform configurations.
 
 Refer to [powerstore-resiliency](../../../getting-started/installation/kubernetes/powerstore/csmoperator/csm-modules/resiliency.md) for installing the CSI PowerStore Driver with resiliency enabled.
 
