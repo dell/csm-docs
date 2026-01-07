@@ -1200,7 +1200,7 @@ authType: "OIDC"
 
 To enable the support for OIDC we need to establish the connection between the ID provider and PowerFlex.
 
-In PowerFlex, the MVM IPs refer to the Management Virtual Machine IP addresses. These are the IPs assigned to the Management Virtual Machines (MVMs) that host the PowerFlex Manager and other management services. These IPs are configured during PowerFlex deployment and can be found in: PowerFlex Manager UI → System → Components → MVM
+In PowerFlex, Management Virtual Machine (MVM) IP addresses are the IPs assigned to the Management Virtual Machines. MVMs host PowerFlex Manager and other management services. These IP addresses are configured during the PowerFlex deployment process and can be accessed through the PowerFlex Manager user interface by navigating to: System → Components → MVM.
 
 Execute the below steps by logging into the MVM IP:
 
@@ -1378,9 +1378,9 @@ curl -kvvL --request POST \
   \"idp_type\": \"$IDP\"
 }"
 ```
->Note: An ID will be generated for the service, which will hereafter be referred to as SERVICE_ID_IDP.
+>Note: An ID will be generated for the service, which will be referred to as SERVICE_ID_IDP
 
-5. Configure the service id in the ID Provider (Optional) 
+(Optional) Configure the service id in the ID Provider  
 
 Since PowerFlex relies on embedded Keycloak for OIDC, a valid redirect URI must be configured for browser based SSO.
 
@@ -1393,7 +1393,7 @@ In Keycloak, Login to Keycloak → Select Realm → Go to Clients → Open the c
 
 In Okta, navigate to the OIDC application → General → Sign-in redirect URIs, and add the PowerFlex Keycloak broker endpoint using the PFMP IP or resolvable hostname.
 
-6.  Configure API permissions 
+5.  Configure API permissions 
 
 In Azure, 
 a. Open the application page and select API permissions.
@@ -1426,7 +1426,7 @@ In Okta,
 
 Also, Ensure the scope is allowed in Access Policies and the relevant Rule for the client application
 
-7. Create OAuth2 client in CIAM 
+6. Create OAuth2 client in CIAM 
 
 This will create a new OAuth2 client in CIAM 
 
@@ -1449,7 +1449,7 @@ curl -kL --request POST \
 ```
 >Note: The ID and secret generated in this step will be referred to as CIAM_CLIENT_ID and CIAM_CLIENT_SECRET in the subsequent steps.
 
-8. Activate the CIAM Login Client 
+7. Activate the CIAM Login Client 
 
 This step activates and synchronizes the CIAM OAuth2 client created so that it becomes a login-capable client in PowerFlex CIAM.
 CIAM creates a user in Keycloak realm of embedded keycloak and assigns it the given role.
@@ -1457,7 +1457,7 @@ CIAM creates a user in Keycloak realm of embedded keycloak and assigns it the gi
 ``` bash
 curl -k -X PATCH https://$IN_IP/rest/v1/login-clients/$CIAM_CLIENT_ID --header 'Accept: application/json' --header 'Content-Type: application/json' --header "Authorization: Bearer ${PM_TOKEN}" --data '{}'
 ```
-9. Add the application to CIAM 
+8. Add the application to CIAM 
 
 This command will add the application to CIAM 
 
@@ -1484,7 +1484,7 @@ curl -kLvv --request POST \
   ```
 > Note: Record this application ID; it will be referred to as APP_ID.
 
-10. Legacy Workaround: Configure Keycloak User Attributes for PowerFlex Block API (Pre‑PFMP 5.1)
+9. Legacy Workaround: Configure Keycloak User Attributes for PowerFlex Block API (Pre‑PFMP 5.1)
 
 This step configures role mapping between Azure/Keycloak/Okta and PowerFlex roles within the PowerFlex Realm inside Keycloak (the internal identity provider embedded in PowerFlex).
 This mapping ensures that when a token exchange occurs, CIAM and Keycloak assign the correct PowerFlex roles (e.g., SuperUser, Monitor, Administrator) to the authenticated user.
