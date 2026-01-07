@@ -51,7 +51,7 @@ kubectl patch deployment container-object-storage-controller -n container-object
 **Steps**
 1. Run `git clone -b main https://github.com/dell/helm-charts.git` to clone the git repository.
 2. Ensure that you have created the namespace where you want to install the driver. You can run `kubectl create namespace dell-cosi` to create a new one. The use of _dell-cosi_ as the namespace is just an example. You can choose any name for the namespace.
-3. Create a new file called `secret.yaml` with the contents of the [configuration file](../configuration_file#configuration-file-example). Edit the file with parameters specific to the ObjectScale instance.
+3. Create a new file called `secret.yaml` with the contents of the [configuration file](../configuration#configuration-file-example). Edit the file with parameters specific to the ObjectScale instance.
 4. Create a secret by running `kubectl create secret generic dell-cosi-config -n dell-cosi --from-file=config.yaml=secret.yaml`
 5. Copy the _charts/cosi/values.yaml_ into a new location with name _my-cosi-values.yaml_, to customize settings for installation.
 6. Edit *my-cosi-values.yaml* to set the following parameters for your installation:

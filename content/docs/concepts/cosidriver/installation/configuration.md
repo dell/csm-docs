@@ -1,6 +1,6 @@
 ---
-title: Configuration File
-linktitle: Configuration File
+title: Configuration
+linktitle: Configuration
 weight: 1
 Description: Description of configuration file for ObjectScale
 ---
