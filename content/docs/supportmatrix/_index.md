@@ -55,7 +55,10 @@ weight: 1
 | 1.5.2  | <div style="text-align: left"> [Storage](https://github.com/ibrokethecloud/kubevirt-storage-checkup/tree/harvester-v1.5.x) </div>| Yes | No   | Yes  | Yes  | No   |
 | 1.6.1  | <div style="text-align: left"> [Storage](https://github.com/ibrokethecloud/kubevirt-storage-checkup/tree/harvester-v1.5.x) </div>| Yes | No   | Yes   | Yes  | No   |
 {{</table>}}
-> Note: PowerStore and PowerMax support iSCSI and NVMe-TCP, and PowerFlex supports SDC and NVMe-TCP for SUSE Virtualization.
+
+**Notes:**
+- PowerStore and PowerMax support iSCSI and NVMe/TCP.
+- PowerFlex supports SDC and NVMe/TCP for SUSE Virtualization.
 
 ## Tested Host Operating Systems
 
