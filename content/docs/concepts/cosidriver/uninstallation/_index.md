@@ -12,3 +12,9 @@ To uninstall a driver use a helm uninstall command:
 ```bash
 helm uninstall dell-cosi --namespace dell-cosi
 ```
+
+## Uninstall COSI driver installed via CSM Operator
+
+```bash
+kubectl -n dell-cosi delete csm cosi
+```

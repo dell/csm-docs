@@ -8,7 +8,7 @@ Description: Installation of COSI Driver using Helm
 The COSI Driver for Dell ObjectScale can be deployed by using the provided Helm v3 charts on Kubernetes platform.
 
 The Helm chart installs the following components in a _Deployment_ in the specified namespace:
-- COSI Driver for ObjectScale
+- dell-cosi
 
 {{< accordion id="One" title="Dependencies" markdown="true" >}}
 ### Dependencies
@@ -46,15 +46,15 @@ kubectl patch deployment container-object-storage-controller -n container-object
 <br>
 
 {{< accordion id="Three" title="Driver Install" markdown="true" >}}
-## Install the Driver
+### Install the Driver
 
 **Steps**
 1. Run `git clone -b main https://github.com/dell/helm-charts.git` to clone the git repository.
 2. Ensure that you have created the namespace where you want to install the driver. You can run `kubectl create namespace dell-cosi` to create a new one. The use of _dell-cosi_ as the namespace is just an example. You can choose any name for the namespace.
 3. Create a new file called `secret.yaml` with the contents of the [configuration file](./configuration_file#features-and-capabilities). Edit the file with parameters specific to the ObjectScale instance.
-4. Create the Secret by running `kubectl create secret generic dell-cosi-config -n dell-cosi --from-file=config.yaml=secret.yaml`
-4. Copy the _charts/cosi/values.yaml_ into a new location with name _my-cosi-values.yaml_, to customize settings for installation.
-5. Edit *my-cosi-values.yaml* to set the following parameters for your installation:
+4. Create a secret by running `kubectl create secret generic dell-cosi-config -n dell-cosi --from-file=config.yaml=secret.yaml`
+5. Copy the _charts/cosi/values.yaml_ into a new location with name _my-cosi-values.yaml_, to customize settings for installation.
+6. Edit *my-cosi-values.yaml* to set the following parameters for your installation:
    The following table lists the primary configurable parameters of the COSI driver Helm chart and their default values. More detailed information can be found in the [`values.yaml`](https://github.com/dell/helm-charts/blob/master/charts/cosi/values.yaml) file in this repository.
 
 {{<table "table table-striped table-bordered table-sm">}}
@@ -77,8 +77,6 @@ helm install dell-cosi ./cosi --namespace=dell-cosi --values ./my-cosi-values.ya
 <br>
 
 {{< accordion id="Four" title="Post Install" markdown="true" >}}
-#### Bucket Classes, Bucket Access Classes
-
-The COSI driver for Dell ObjectScale, `dell-csi-helm-installer` does not create any _Bucket Classes_ nor _Bucket Access Classes_ as part of the driver installation. A sample class manifests are available at `samples/bucketclass/objectscale.yaml` and `samples/bucketaccessclass/objectscale.yaml`. Use this sample manifest to create a _Bucket Classes_ to provision storage. Remember to uncomment/update the manifest as per the requirements.
+{{<include  file="content/docs/concepts/cosidriver/installation/postinstall.md" >}}
 {{< /accordion>}}
 <br>
