@@ -59,6 +59,8 @@ weight: 1
 **Notes:**
 - PowerStore and PowerMax support iSCSI and NVMe/TCP.
 - PowerFlex supports SDC and NVMe/TCP for SUSE Virtualization.
+- SDC version [3.6.6](quay.io/dell/storage/powerflex/sdc:3.6.6) is supported on SUSE.
+- PowerFlex version 5.0 does not support SDC on SUSE.
 
 ## Tested Host Operating Systems
 
