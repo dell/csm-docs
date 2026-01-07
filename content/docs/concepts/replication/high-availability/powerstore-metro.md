@@ -19,7 +19,7 @@ In PowerStore Metro configurations:
 * The devices in the Metro volume are configured with the same external device identity, including the geometry and device WWN.
 
 When the replication session is broken but both arrays are still reachable, there is a possibility of split-brain where both the now disconnected volumes serve IOs and the data between them is not being synced. PowerStore Metro uses polarization to prevent this.
-* The PowerStore system from which the metro source is configured is designated as "preferred" and the other as non-preferred.
+* The PowerStore system on which the metro session is initially configured is designated as "preferred" and the other as non-preferred.
 * When the replication link is broken, the "preferred" side remains online and serves the IOs.
 * If the preferred side is offline, non-preferred also remains offline. To handle such scenarios and add more resiliency to Metro volumes, it is recommended to configure a witness for the pair of PowerStores.
 
