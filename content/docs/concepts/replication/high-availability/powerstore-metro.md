@@ -376,7 +376,29 @@ allowedTopologies:
 
 When a Metro `PV` is created, the volumeHandle will have the format `<volumeID/globalID/protocol:remote-volumeID/remote-globalID>`.
 
--------------------
+----------------
+
+## PersistentVolumeClaim (PVC)
+Metro-replicated volumes can be provisioned using different `accessModes`. Both ReadWriteOnce (RWO) and ReadWriteMany (RWX) are supported.
+A PersistentVolumeClaim configured to create a metro replicated volume with ReadWriteMany access mode would look like this:
+
+```yaml
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pvol
+  namespace: powerstore-metro
+spec:
+  accessModes:
+    - ReadWriteMany
+  volumeMode: Filesystem
+  resources:
+    requests:
+      storage: 8Gi
+  storageClassName: powerstore-metro-storage-class
+```
+
+----------------
 
 ## Workload Resiliency in Metro Configurations
 For PowerStore Metro with resiliency enabled, the workloads remain resilient against node failures, array failures, and complete site failures, provided that the preferred node has connectivity to the surviving array. This applies to both uniform and non-uniform host connectivity configurations except for complete site failures, where resiliency is supported only for uniform configurations.

@@ -62,6 +62,16 @@ dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      
 ### CSI Driver Installation
 </br>
 
+{{< collapse id="auto" title="Automated Install With dellctl" show="true">}}
+
+The `dellctl` tool can automatically install the CSI PowerStore driver and modules, and optionally install protocol prerequisites, and validate data path connectivity.
+
+1. Download `dellctl` following the [installation instructions](../../../../../tooling/cli/#installation-instructions).
+2. See the [dellctl install](../../../../../tooling/cli/#dellctl-install) and [dellctl install powerstore](../../../../../tooling/cli/#dellctl-install-powerstore) command documentation for instructions and examples.
+
+{{< /collapse >}}
+{{< collapse id="manual" title="Manual Install">}}
+
 1. ##### **Create project:**
 
     <br>
@@ -282,7 +292,7 @@ Check the status of the CR to verify if the driver installation is in the `Succe
     ```
    </br>
 
-
+{{< /collapse >}}
 
 ### Configurations
 <br>
