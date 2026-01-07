@@ -1504,7 +1504,7 @@ export KC_PASS=`kubectl get secret keycloak-admin-credentials -o json -n powerfl
 export ACCESS_TOKEN=`curl -k --location --request POST 'https://keycloak-http.powerflex/auth/realms/master/protocol/openid-connect/token' -d "client_id=admin-cli" -d "username=keycloak" -d "password=$KC_PASS" -d "grant_type=password" | jq -r .access_token`
 curl -X GET "https://keycloak-http.powerflex/auth/admin/realms/powerflex/users" -H "Content-Type: application/json" -H "Authorization: bearer ${ACCESS_TOKEN}" | jq
 ```
->Note: Capture the ID from the above command that corresponds to the username from Step 9 (i.e., APP_ID). This ID will be referred to as APP_USER.
+>Note: Capture the ID from the above command that corresponds to the username from Step 7 (i.e., APP_ID). This ID will be referred to as APP_USER.
 
 ```bash
 curl -k -X POST https://$IN_IP/rest/v1/users/$APP_USER/repair --header 'Accept: application/json' --header 'Content-Type: application/json' \
