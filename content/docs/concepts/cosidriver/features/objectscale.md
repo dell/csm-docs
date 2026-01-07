@@ -90,7 +90,7 @@ spec:
 ### Bucket Access Class
 
 Installation of ObjectScale COSI driver does not create `BucketAccessClass` resource. `BucketAccessClass` represents a class of `BucketAccess` resources with similar characteristics.
-Dell COSI Driver is a multi-backend driver, meaning that for every platform the specific `BucketAccessClass` should be created. The `BucketClass` resource should contain the name of multi-backend driver and `parameters.id` for specific Object Storage Platform. 
+Dell COSI Driver is a multi-backend driver, meaning that for every platform the specific `BucketAccessClass` should be created. The `BucketClass` resource should contain the name of multi-backend driver and `parameters.id` for specific Object Storage Platform.
 The default sample is shown below:
 
 ```yaml
@@ -237,7 +237,7 @@ EOF
 
 ## Deleting Buckets
 
-There are a few crucial details regarding bucket deletion. The first one is `deletionPolicy` which is used to specify how COSI should handle deletion of a bucket. It is found in `BucketClass` resource and can be set to `Delete` and `Retain`. The second crucial detail is `emptyBucket` field in the [Helm Chart configuration](../../installation/configuration_file).
+There are a few crucial details regarding bucket deletion. The first one is `deletionPolicy` which is used to specify how COSI should handle deletion of a bucket. It is found in `BucketClass` resource and can be set to `Delete` and `Retain`. The second crucial detail is `emptyBucket` field in the [Helm Chart configuration](../../installation/configuration).
 
 The following example shows how to delete a `BucketClaim`.
 
