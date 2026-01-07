@@ -21,7 +21,7 @@ connections:
 # Configuration specific to the Dell ObjectScale platform.
 - objectscale:
 
-    # Default, unique identifier for the single connection. 
+    # Default, unique identifier for the single connection.
     #
     # It MUST NOT contain any hyphens '-'.
     #
