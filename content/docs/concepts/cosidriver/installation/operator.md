@@ -97,7 +97,7 @@ kubectl patch deployment container-object-storage-controller -n container-object
 3. Create a secret by running `kubectl create secret generic dell-cosi-config -n dell-cosi --from-file=config.yaml=secret.yaml`
 4. Create a Custom Resource (CR) for COSI using either minimal resource file or the more configurable sample. Save one of the following YAML blocks to a file.
     ##### Minimal Configuration
-    The folllowing represents the minumum CR for installing the COSI driver.
+    The following represents the minimum CR for installing the COSI driver.
     ```yaml
     apiVersion: storage.dell.com/v1
     kind: ContainerStorageModule
