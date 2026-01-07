@@ -403,7 +403,7 @@ spec:
 ## Workload Resiliency in Metro Configurations
 For PowerStore Metro with csm-resiliency enabled, the workloads remain resilient against node failures, array failures, and complete site failures, provided that the preferred node has connectivity to the surviving array. This applies to both uniform and non-uniform host connectivity configurations except for complete site failures, where resiliency is supported only for uniform configurations.
 
-Refer to [powerstore-resiliency](../../../getting-started/installation/kubernetes/powerstore/csmoperator/csm-modules/resiliency.md) for installing the CSI PowerStore Driver with resiliency enabled.
+Refer to [Powerstore-Resiliency](../../../getting-started/installation/openshift/powerstore/csmoperator/csm-modules/resiliency.md) for installing the CSI PowerStore Driver with resiliency enabled.
 
 ## Volume Expansion
 When a request is made to increase the size of a Metro `PV`, the metro replication session must be temporarily paused prior to the editing of Kubernetes resources. This can be done from the PowerStore Manager UI or CLI. The size of the local/preferred volume is then increased. The metro session must then be manually resumed. It is important to note that the paths for the remote/non-preferred volume will not become active until the metro session is resumed and the remote/non-preferred volume reflects the updated size.
