@@ -426,4 +426,4 @@ When a VolumeSnapshot object is created for the Metro `PV`, snapshots are create
 - Some CSI Driver Capabilities, such as snapshot or clone, are not supported on the remote/non-preferred side of the Metro volume.
 - While restoring a Metro snapshot or cloning a Metro volume on the local/preferred side, provide a non-Metro storage class. Configuring Metro on clones is not supported on the PowerStore.
 - The following [volume attributes](../../../csidriver/features/powerstore/#configurable-volume-attributes-optional) on PersistentVolumeClaims (PVCs) are not supported for Metro volumes: `csi.dell.com/volume_group_id`, `csi.dell.com/protection_policy_id` if the policy has replication rule.
-- Metro volume with resiliency enabled, does not work for non-uniform complete site failure.
+- Metro volume with resiliency enabled does not support complete site failure for non-uniform configurations.
