@@ -1449,15 +1449,7 @@ curl -kL --request POST \
 ```
 >Note: The ID and secret generated in this step will be referred to as CIAM_CLIENT_ID and CIAM_CLIENT_SECRET in the subsequent steps.
 
-7. Activate the CIAM Login Client 
-
-This step activates and synchronizes the CIAM OAuth2 client created so that it becomes a login-capable client in PowerFlex CIAM.
-CIAM creates a user in Keycloak realm of embedded keycloak and assigns it the given role.
-
-``` bash
-curl -k -X PATCH https://$IN_IP/rest/v1/login-clients/$CIAM_CLIENT_ID --header 'Accept: application/json' --header 'Content-Type: application/json' --header "Authorization: Bearer ${PM_TOKEN}" --data '{}'
-```
-8. Add the application to CIAM 
+7. Add the application to CIAM 
 
 This command will add the application to CIAM 
 
@@ -1483,6 +1475,15 @@ curl -kLvv --request POST \
   ]}"
   ```
 > Note: Record this application ID; it will be referred to as APP_ID.
+
+8. Activate the CIAM Login Client 
+
+This step activates and synchronizes the CIAM OAuth2 client created so that it becomes a login-capable client in PowerFlex CIAM.
+CIAM creates a user in Keycloak realm of embedded keycloak and assigns it the given role.
+
+``` bash
+curl -k -X PATCH https://$IN_IP/rest/v1/login-clients/$CIAM_CLIENT_ID --header 'Accept: application/json' --header 'Content-Type: application/json' --header "Authorization: Bearer ${PM_TOKEN}" --data '{}'
+```
 
 9. Legacy Workaround: Configure Keycloak User Attributes for PowerFlex Block API (Pre‑PFMP 5.1)
 
