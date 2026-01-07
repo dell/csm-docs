@@ -175,5 +175,5 @@ kubectl patch deployment container-object-storage-controller -n container-object
 <br>
 
 {{< accordion id="Five" title="Post Install" markdown="true" >}}
-{{<include  file="content/docs/concepts/cosidriver/installation/postinstall" >}}{{< /accordion>}}
+{{<include  file="content/docs/concepts/cosidriver/installation/postinstall.md" >}}{{< /accordion>}}
 <br>
