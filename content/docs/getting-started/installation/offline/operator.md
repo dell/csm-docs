@@ -15,7 +15,7 @@ To perform an offline installation :
 3. [**Install operator**](../offline#install-operator-1) using the unpacked files.
 4. [**Install Container Storage Modules**](../offline#install-container-storage-module-1) using the unpacked files.
 5. [**Installing Dell CSM Operator on a Disconnected OpenShift Environment**
-](#installing-dell-csm-operator-on-a-disconnected-openshift-environment)
+](../offline#installing-dell-csm-operator-on-a-disconnected-openshift-environment)
 
 >NOTE: Use the same tool (docker or podman) for packing and unpacking images.
 
