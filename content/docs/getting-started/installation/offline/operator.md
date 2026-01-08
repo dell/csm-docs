@@ -220,7 +220,7 @@ This guide provides instructions for installing the Dell CSM Operator on a disco
 
 **Prerequisites**
 Before you begin, ensure you have:
-- `oc` command
+- The `oc` command-line tool (OpenShift CLI)
 - a private container registry to host the mirrored images,
 - enough space to pull all the images locally
 
