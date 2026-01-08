@@ -104,6 +104,7 @@ Container Storage Modules doesn't officially support specific operating systems,
 
 **Note:**
 - [Refer](#container-orchestrator-platforms) our supported Orchestration platform. While the Operator may be displayed, it does not necessarily mean it has been fully qualified by us.
+- LUN Stress Test Validation: PowerMax NFS testing was conducted with 125 pods, which reflects the current limitation of the PowerMax NAS server. The server supports a maximum of 125 file systems concurrently.
 ## Installation Wizard Compatibility
 
 ### Drivers
