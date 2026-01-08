@@ -1269,7 +1269,7 @@ curl -vvL -k --request POST \
     * GA2 (GlobalSign or similar root/intermediate) certificates are part of the certificate chain that validates Azure’s identity endpoints. 
 
       They ensure:
-      - The OIDC metadata URL (https://login.microsoftonline.com/...) and token endpoints are trusted.
+      - The OIDC metadata URL `(https://login.microsoftonline.com/...)` and token endpoints are trusted.
       - Secure HTTPS communication between PowerFlex and Azure IdP.
 
 
@@ -1282,39 +1282,44 @@ curl -vvL -k --request POST \
       * View the site certificate.
       * Export or download the certificate.
       * Save it locally
-      >Note: Ensure the file includes valid PEM headers:
-      -----BEGIN CERTIFICATE-----
-      <certificate-body>
-      -----END CERTIFICATE-----
+      * Note: Ensure the file includes valid PEM headers:
+        ```
+        -----BEGIN CERTIFICATE-----
+        <certificate-body>
+        -----END CERTIFICATE-----
+        ```
 
     - Option 2 — Retrieve the Certificate from the Keycloak UI 
       This option retrieves the actual RS256 signing certificate directly from Keycloak’s admin interface.
       * Log in to Keycloak Admin Console - `https://<PFMP_IP>/auth/admin/`
       Log in using the admin credentials obtained via:
-      `kubectl get secret keycloak-admin-credentials -o json -n powerflex | jq '.data | map_values(@base64d)'`
+        ```bash
+          kubectl get secret keycloak-admin-credentials -o json -n powerflex | jq '.data | map_values(@base64d)'
+        ```
       * Select the Correct Realm. Open the realm dropdown (top-left corner). Choose the realm used by PowerFlex based on the deployment
       * Navigate to the Keys Tab - Go to: Realm Settings → Keys. This page lists all signing keys for the selected realm.
       * Locate the RS256 Signing Key. Find the row where: Algorithm: RS256,Use: SIG, Status: Active. This is the key used to sign all Keycloak-issued JWT tokens.
       * Export the Certificate. In the RS256 row, click Certificate. A dialog appears showing the Base64‑encoded certificate without PEM headers. Copy the entire certificate and add the proper PEM headers:
-      -----BEGIN CERTIFICATE-----
-      <copied-certificate-content>
-      -----END CERTIFICATE-----
-
+        ```
+        -----BEGIN CERTIFICATE-----
+        <copied-certificate-content>
+        -----END CERTIFICATE-----
+        ```
   - For Okta, 
     - Option 1 — Download the Certificate from Browser
       * Open the Okta URL in  browser: `https://<okta-domain-name>.okta.com`
       * Click the lock icon in the address bar.
       * View the site certificate.
       * Export or download the certificate.
-      * Save it locally
+      * Save it locally.
 
-    - Option 2 — Retrieve the Certificate from the Okta UI 
-      * Log in to the Okta Admin Console  and open Okta tenant (e.g., https://<okta-domain-name>.okta.com) by signing in with admin credentials.
+    - Option 2 — Retrieve the Certificate from the Okta UI
+      * Log in to the Okta Admin Console  and open Okta tenant `(e.g., https://<okta-domain-name>.okta.com)` by signing in with admin credentials.
       * Navigate to Applications - From the left navigation panel, go to Applications → Applications.
       * Select the  Application - Click on the application for which the certificate is needed.
       * Open the Sign-On Settings - Go to the Sign On tab inside the application.
-      * Access the OIDC Signing Certificate
-      * Download the Certificate
+      * Access the OIDC Signing Certificate.
+      * Download the Certificate.
 
         ``` bash
         CA=`<PEM_FILE_OF_CERTIFICATE>`
@@ -1477,27 +1482,27 @@ curl -kL --request POST \
 
 This command will add the application to CIAM 
 
-ROLE refers to the role assigned to all tokens exchanged for a specific Identity Provider (IdP) and Application ID, enabling access to the PowerFlex APIs.
-CIAM_CLIENT_ID is the client ID issued by the CIAM system.
-IDP_CLIENT_ID represents the client ID configured in the identity provider (Azure, Keycloak, or Okta).
-METADATA denotes the metadata URL of the corresponding Azure, Keycloak, or Okta application.
-SERVICE_ID_IDP identifies the service ID associated with the configured identity provider.
+- ROLE refers to the role assigned to all tokens exchanged for a specific Identity Provider (IdP) and Application ID, enabling access to the PowerFlex APIs.
+- CIAM_CLIENT_ID is the client ID issued by the CIAM system.
+- IDP_CLIENT_ID represents the client ID configured in the identity provider (Azure, Keycloak, or Okta).
+- METADATA denotes the metadata URL of the corresponding Azure, Keycloak, or Okta application.
+- SERVICE_ID_IDP identifies the service ID associated with the configured identity provider.
 
-```bash 
-curl -kLvv --request POST \
-  --url https://$IN_IP/rest/v1/oauth2-token-exchanges \
-  --header 'Content-Type: application/json' \
-  --header 'clientId: ' \
-  --header "Authorization: Bearer ${PM_TOKEN}" \
-  --data "{
-  \"ciam_oauth2_client_id\": \"$CIAM_CLIENT_ID\",
-  \"customer_client_id\": \"$IDP_CLIENT_ID\",
-  \"customer_metadata_url\": \"$METADATA\",
-  \"idp_service_id\": \"$SERVICE_ID_IDP\",
-  \"static_roles\": [
-    \"$ROLE\"
-  ]}"
-```
+  ```bash 
+  curl -kLvv --request POST \
+    --url https://$IN_IP/rest/v1/oauth2-token-exchanges \
+    --header 'Content-Type: application/json' \
+    --header 'clientId: ' \
+    --header "Authorization: Bearer ${PM_TOKEN}" \
+    --data "{
+    \"ciam_oauth2_client_id\": \"$CIAM_CLIENT_ID\",
+    \"customer_client_id\": \"$IDP_CLIENT_ID\",
+    \"customer_metadata_url\": \"$METADATA\",
+    \"idp_service_id\": \"$SERVICE_ID_IDP\",
+    \"static_roles\": [
+      \"$ROLE\"
+    ]}"
+  ```
 > Note: Record this application ID; it will be referred to as APP_ID.
 
 ##### **8. Activate the CIAM Login Client**
