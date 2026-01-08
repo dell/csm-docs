@@ -1162,22 +1162,24 @@ This means that instead of storing long‑lived PowerFlex credentials inside the
 ### Secret Configuration for OIDC
 Below is the required secret structure for OIDC-enabled authentication.
   ```yaml
-  - username: ""
-    password: ""
+  - username: "ignored"
+    password: "ignored"
     systemID: "2000000000000001"
     endpoint: "https://10.0.0.1"
     skipCertificateValidation: true
     mdm: "10.0.0.2,10.0.0.3"
 
     # OIDC / CIAM values
-    oidcClientId: "csm"
+    oidcClientId: ""
     oidcClientSecret: ""     # base64 encoded
-    issuer: "https://10.0.0.4:1010/realms/CSM"  #for keycloak format
-    # https://login.microsoftonline.com/abcd/v2.0" # for azure format
-    # https://<okta-domain>.okta.com/oauth2/default/.well-known/openid-configuration # for okta format
     # CIAM (optional alternative auth mode)
     ciamClientId: ""
     ciamClientSecret: ""
+    issuer: "https://10.0.0.4:1010/realms/CSM"  #for keycloak format
+    # https://login.microsoftonline.com/abcd/v2.0" # for azure format
+    # https://<okta-domain>.okta.com/oauth2/default # for okta format
+    scopes: ""
+    # openid","profile","email","custom_scopes"
   ```
 
 Enabling OIDC via CSM-Operator
