@@ -231,6 +231,11 @@ Use the following command to mirror the catalog:
 ```bash
 oc adm catalog mirror registry.redhat.io/redhat/certified-operator-index:v[ocp version] [private-registry-url]
 ```
+Example:
+
+```bash
+oc adm catalog mirror registry.redhat.io/redhat/certified-operator-index:v4.19 registry.example.com:5000
+```
 
 For more detailed steps, such as using credentials to authenticate, using a file archive, and more, refer to the official [OpenShift documentation](https://docs.redhat.com/en/documentation/openshift_container_platform/4.20/html/disconnected_environments/index)
 
@@ -252,7 +257,7 @@ Verify the deployment with:
 ```bash
 oc get pods -n openshift-marketplace
 ```
-If all pods are running, the Red Hat certified Operators must be visible from OperatorHub in the OpenShift Webconsole
+If all pods are running, the Red Hat certified Operators must be visible from OperatorHub in the OpenShift Web Console
 
 For more detailed steps on populating the OperatorHub with a new catalog, refer to the official [OpenShift documentation](https://docs.redhat.com/en/documentation/openshift_container_platform/4.20/html/postinstallation_configuration/post-install-preparing-for-users#post-install-mirrored-catalogs).
 
@@ -265,8 +270,8 @@ An alternative method is to mirror only the Dell CSM Operator. To do so use `oc-
 That procedure is documented in the [official documentation](https://docs.redhat.com/en/documentation/openshift_container_platform/4.20/html/disconnected_environments/about-installing-oc-mirror-v2#installation-oc-mirror-v2-about_about-installing-oc-mirror-v2).
 
 The general steps are the similar to the previous section expect that the user needs to:
-- download & install the `oc-mirror` plugin (available from the OpenShift Webconsole or the [Github repository](https://github.com/openshift/oc-mirror/releases)),
-- authenticate `podman` to `registry.redhat.io`,
+- download & install the `oc-mirror` plugin (available from the OpenShift Web Console or the [Github repository](https://github.com/openshift/oc-mirror/releases)),
+- authenticate `podman` to `registry.redhat.io`
 - prepare an `ImageSetConfiguration` to select the Dell CSM Operator only.
 
 Here is a sample `ImageSetConfiguration` file to be adjusted with OpenShift version and CSM operator version:
