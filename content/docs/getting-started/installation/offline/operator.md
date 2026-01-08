@@ -15,7 +15,7 @@ To perform an offline installation :
 3. [**Install operator**](../offline#install-operator-1) using the unpacked files.
 4. [**Install Container Storage Modules**](../offline#install-container-storage-module-1) using the unpacked files.
 5. [**Installing Dell CSM Operator on a Disconnected OpenShift Environment**
-](../offline#installing-dell-csm-operator-on-a-disconnected-environment)
+](#installing-dell-csm-operator-on-a-disconnected-openshift-environment)
 
 >NOTE: Use the same tool (docker or podman) for packing and unpacking images.
 
@@ -236,7 +236,7 @@ For more detailed steps, such as using credentials to authenticate, using a file
 
 **Populating OperatorHub from a mirrored Operator**
 
-After previous step completes successfully, an `ImageDigestMirrorSet` manifest is generated. That resource will translate regular image url and tags into the mirrored ones in the private registry.
+After previous step completes successfully, an `ImageContentSourcePolicy` manifest is generated. That resource will translate regular image url and tags into the mirrored ones in the private registry.
 
 From the disconnected environment run:
 ```bash
@@ -245,7 +245,7 @@ oc create -f imageContentSourcePolicy.yaml
 
 Then you can update the `CatalogSource` to point to the private repository with :
 ```bash
-oc apply - f catalogSource.yaml
+oc apply -f catalogSource.yaml
 ```
 
 Verify the deployment with:
@@ -254,8 +254,7 @@ oc get pods -n openshift-marketplace
 ```
 If all pods are running, the Red Hat certified Operators must be visible from OperatorHub in the OpenShift Webconsole
 
-For more detailed steps on populating the OperatorHub with a new catalog, refer to the official [OpenShift documentation]
-(https://docs.redhat.com/en/documentation/openshift_container_platform/4.20/html/postinstallation_configuration/post-install-preparing-for-users#post-install-mirrored-catalogs).
+For more detailed steps on populating the OperatorHub with a new catalog, refer to the official [OpenShift documentation](https://docs.redhat.com/en/documentation/openshift_container_platform/4.20/html/postinstallation_configuration/post-install-preparing-for-users#post-install-mirrored-catalogs).
 
 **Alternative method, to mirror **only** the Dell CSM Operator**
 
