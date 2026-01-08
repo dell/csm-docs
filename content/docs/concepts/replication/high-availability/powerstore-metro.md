@@ -14,16 +14,16 @@ description: >
 
 In PowerStore Metro configurations:
 
-* The PowerStore Metro volume consists of two volumes on two PowerStore metro arrays with metro replication configured between them.
+* The PowerStore Metro volume consists of two individual volumes, each residing on separate PowerStore Metro arrays with metro replication configured between them.
 * When the replication session between the volumes is active, both volumes are capable of serving IOs.
 * The devices in the Metro volume are configured with the same external device identity, including the geometry and device WWN.
 
-When the replication session is broken but both arrays are still reachable, there is a possibility of split-brain where both the now disconnected volumes serve IOs and the data between them is not being synced. PowerStore Metro uses polarization to prevent this.
+When the replication session is broken but both arrays remain reachable, there is a risk of split‑brain scenario in which both disconnected volumes continue serving I/O independently and their data is no longer synchronized. PowerStore Metro uses polarization to prevent this when the session is broken.
 * The PowerStore system on which the metro session is initially configured is designated as "preferred" and the other as non-preferred.
 * When the replication link is broken, the "preferred" side remains online and serves the IOs.
 * If the preferred side is offline, non-preferred also remains offline. To handle such scenarios and add more resiliency to Metro volumes, it is recommended to configure a witness for the pair of PowerStores.
 
-Note: For more details, especially regarding metro volume behavior during different failure scenarios, refer PowerStore Metro Volume documentation.
+Note: For more details, especially regarding metro volume behavior during different failure scenarios, refer PowerStore Metro Volume documentation [here](https://infohub.delltechnologies.com/en-us/l/dell-powerstore-metro-volume-1/failure-scenarios-with-witness-3/).
 
 With respect to Kubernetes, the PowerStore Metro mode works in single cluster scenarios. When utilizing Metro, both the arrays—[arrays with metro link setup between them](../../../../getting-started/installation/kubernetes/powerstore/helm/csm-modules/replication/csi-driver/#on-storage-array)—involved in the replication are managed by the same `csi-powerstore` driver. The replication is triggered by creating a volume using a `StorageClass` with metro-related parameters.
 The driver on receiving the metro-related parameters in the `CreateVolume` call creates a metro replicated volume and the details about both the volumes are returned in the volume context to the Kubernetes cluster. The Persistent Volume (PV) created in the process represents a pair of metro replicated volumes. When a `PV`, representing a pair of metro replicated volumes, is claimed by a pod, the host treats each of the volumes represented by the single `PV` as a separate data path. The switching between the paths, to read and write the data, is managed by the multipath driver. The switching happens automatically, as configured by the user—in round-robin fashion or otherwise—or when one of the paths goes down. For details on Linux multipath driver setup, [click here](../../../../getting-started/installation/kubernetes/powerstore/prerequisite/#linux-multipathing-requirements).
@@ -401,7 +401,7 @@ spec:
 ----------------
 
 ## Workload Resiliency in Metro Configurations
-For PowerStore Metro with csm-resiliency enabled, the workloads remain resilient against node failures, array failures, and complete site failures, provided that the preferred node has connectivity to the surviving array. This applies to both uniform and non-uniform host connectivity configurations except for complete site failures, where resiliency is supported only for uniform configurations.
+With Resiliency module enabled, PowerStore Metro workloads remain protected against node failures, array failures, and complete site failures as long as the preferred node maintains connectivity to the surviving array. This resiliency applies to both uniform and non‑uniform host connectivity configurations, except in the case of complete site failure, where resiliency is supported only for uniform configurations.
 
 Refer to [Powerstore-Resiliency](../../../getting-started/installation/openshift/powerstore/csmoperator/csm-modules/resiliency.md) for installing the CSI PowerStore Driver with resiliency enabled.
 
