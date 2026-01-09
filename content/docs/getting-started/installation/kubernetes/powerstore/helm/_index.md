@@ -152,6 +152,7 @@ volume stats value under node should be set to true.
 - (Optional) Enable additional Mount Options - A user is able to specify additional mount options as needed for the driver.
    - Mount options are specified in storageclass yaml under _mountOptions_.
    - *WARNING*: Before utilizing mount options, you must first be fully aware of the potential impact and understand your environment's requirements for the specified option.
+- The VolumeJournal CRDs are installed by default as part of CSI PowerStore Driver installation and are required for Metro Volume configurations with resiliency enabled. To skip these CRDs from being installed, update the `disasterRecovery.enable` field to `false` in the my-powerstore-settings.yaml.
 
 ## Certificate validation for PowerStore Gateway REST API calls
 
