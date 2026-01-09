@@ -17,7 +17,10 @@ To deploy the Operator, follow the instructions available [here](../../../operat
 
 {{< accordion id="Four" title="Driver Install" markdown="true" >}}
 **Steps**
-1. Ensure that you have created the namespace where you want to install the driver. You can run `kubectl create namespace dell-cosi` to create a new one. The use of _dell-cosi_ as the namespace is just an example. You can choose any name for the namespace.
+1. Ensure that you have created the namespace where you want to install the driver.
+```bash
+kubectl create namespace dell-cosi
+```
 2. Create a new file called `secret.yaml` with the contents of the [configuration file](../configuration#configuration-file-example). Edit the file with parameters specific to the ObjectScale instance.
 ```yaml
 cat <<EOF > secret.yaml
