@@ -66,7 +66,7 @@ Here is the output of a request to build an offline bundle for the Dell CSM Oper
    quay.io/dell/container-storage-modules/csm-metrics-powerstore:{{< version-docs key="Observability_csm_metrics_PStore_image" >}}
    quay.io/dell/container-storage-modules/dell-csi-replicator:{{< version-docs key="replicator_latest_version" >}}
    quay.io/dell/container-storage-modules/dell-replication-controller:{{< version-docs key="replication_controller_latest_version" >}}
-   quay.io/dell/storage/powerflex/sdc:4.5.4
+   quay.io/dell/storage/powerflex/sdc:5.0
    quay.io/dell/container-storage-modules/dell-csm-operator:{{< version-docs key="csm-operator_latest_version" >}}
    registry.redhat.io/openshift4/ose-kube-rbac-proxy-rhel9:v4.16.0-202409051837.p0.g8ea2c99.assembly.stream.el9
    nginxinc/nginx-unprivileged:1.27
