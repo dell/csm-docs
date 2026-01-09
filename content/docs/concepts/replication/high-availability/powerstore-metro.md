@@ -10,10 +10,15 @@ description: >
 
 ![metro architecture diagram](../../../../../images/replication/powerstore-metro.png)
 
+### Metro Volume Behavior: Preferred Side and Witness
+
 In PowerStore Metro configurations:
-* The application host can write data to both sides of the Metro volume.
+
+* The PowerStore Metro volume consists of two individual volumes, each residing on separate PowerStore Metro arrays with metro replication configured between them.
+* When the replication session between the volumes is active, both volumes are capable of serving IOs.
 * The devices in the Metro volume are configured with the same external device identity, including the geometry and device WWN.
-* When Metro is configured on the volume, the PowerStore system from which the metro source is configured is automatically set as preferred and the other is configured as non-preferred.
+
+When the replication session is broken but both arrays remain reachable, PowerStore Metro uses polarization to prevent a split‑brain scenario. For more details on polarization, refer the [Powerstore documentation](https://infohub.delltechnologies.com/en-us/l/dell-powerstore-metro-volume-1/polarization-4/). Additionally, refer [failure scenarios](https://infohub.delltechnologies.com/en-us/l/dell-powerstore-metro-volume-1/failure-scenarios-with-witness-3/) for more information on metro volume behavior during different failure scenarios.
 
 With respect to Kubernetes, the PowerStore Metro mode works in single cluster scenarios. When utilizing Metro, both the arrays—[arrays with metro link setup between them](../../../../getting-started/installation/kubernetes/powerstore/helm/csm-modules/replication/csi-driver/#on-storage-array)—involved in the replication are managed by the same `csi-powerstore` driver. The replication is triggered by creating a volume using a `StorageClass` with metro-related parameters.
 The driver on receiving the metro-related parameters in the `CreateVolume` call creates a metro replicated volume and the details about both the volumes are returned in the volume context to the Kubernetes cluster. The Persistent Volume (PV) created in the process represents a pair of metro replicated volumes. When a `PV`, representing a pair of metro replicated volumes, is claimed by a pod, the host treats each of the volumes represented by the single `PV` as a separate data path. The switching between the paths, to read and write the data, is managed by the multipath driver. The switching happens automatically, as configured by the user—in round-robin fashion or otherwise—or when one of the paths goes down. For details on Linux multipath driver setup, [click here](../../../../getting-started/installation/kubernetes/powerstore/prerequisite/#linux-multipathing-requirements).
@@ -390,6 +395,11 @@ spec:
 
 ----------------
 
+## Workload Resiliency in Metro Configurations
+With Resiliency module enabled, PowerStore Metro workloads remain protected against node failures, array failures, and complete site failures as long as the preferred node maintains connectivity to the surviving array. This resiliency applies to both uniform and non‑uniform host connectivity configurations, except in the case of complete site failure, where resiliency is supported only for uniform configurations.
+
+Refer to [Powerstore-Resiliency](../../../getting-started/installation/openshift/powerstore/csmoperator/csm-modules/resiliency.md) for installing the CSI PowerStore Driver with resiliency enabled.
+
 ## Volume Expansion
 When a request is made to increase the size of a Metro `PV`, the metro replication session must be temporarily paused prior to the editing of Kubernetes resources. This can be done from the PowerStore Manager UI or CLI. The size of the local/preferred volume is then increased. The metro session must then be manually resumed. It is important to note that the paths for the remote/non-preferred volume will not become active until the metro session is resumed and the remote/non-preferred volume reflects the updated size.
 
@@ -411,3 +421,4 @@ When a VolumeSnapshot object is created for the Metro `PV`, snapshots are create
 - Some CSI Driver Capabilities, such as snapshot or clone, are not supported on the remote/non-preferred side of the Metro volume.
 - While restoring a Metro snapshot or cloning a Metro volume on the local/preferred side, provide a non-Metro storage class. Configuring Metro on clones is not supported on the PowerStore.
 - The following [volume attributes](../../../csidriver/features/powerstore/#configurable-volume-attributes-optional) on PersistentVolumeClaims (PVCs) are not supported for Metro volumes: `csi.dell.com/volume_group_id`, `csi.dell.com/protection_policy_id` if the policy has replication rule.
+- Metro volume with resiliency enabled does not support complete site failure for non-uniform configurations.

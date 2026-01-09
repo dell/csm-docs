@@ -207,6 +207,8 @@ powerstore  3h             powerstore      {{< version-docs key="PStore_latestVe
 ```
 
 Check the status of the CR to verify if the driver installation is in the `Succeeded` state. If the status is not `Succeeded`, see the [Troubleshooting guide](../troubleshooting/#my-dell-csi-driver-install-failed-how-do-i-fix-it) for more information.
+
+Note: The VolumeJournal CRDs are installed by default as part of CSI PowerStore Driver installation and are required for Metro Volume configurations with resiliency enabled. To skip these CRDs from being installed, update the `X_CSM_DR_ENABLED` environment variable to `false`.
 </ul>
 
 <br>
