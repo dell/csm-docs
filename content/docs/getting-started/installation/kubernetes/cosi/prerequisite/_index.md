@@ -6,8 +6,6 @@ description: >
   Prerequisites for installing the COSI Driver
 ---
 
-- Install Kubernetes cluster (see [supported versions](../../../../../supportmatrix))
-
 To use the COSI Driver, you must deploy the following components to your cluster:
 
 - Kubernetes Container Object Storage Interface CRDs
