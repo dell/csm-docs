@@ -135,13 +135,13 @@ csi-powermax:
     transportProtocol: "$NODE_TRANSPORT_PROTOCOL"
     useSecret: $REVPROXY_USE_SECRET
     managedArrays: "$POWERMAX_STORAGE_ARRAY_ID"
-  version: v2.16.0
+  version: v2.15.1
   images:
     # "driver" defines the container image, used for the driver container.
     driver: 
-      image: quay.io/dell/container-storage-modules/csi-powermax:v2.16.0
+      image: quay.io/dell/container-storage-modules/csi-powermax:v2.15.1
     csireverseproxy: 
-      image: quay.io/dell/container-storage-modules/csipowermax-reverseproxy:v2.15.0
+      image: quay.io/dell/container-storage-modules/csipowermax-reverseproxy:v2.14.1
     # CSI sidecars
     attacher: 
       image: registry.k8s.io/sig-storage/csi-attacher:v4.9.0
