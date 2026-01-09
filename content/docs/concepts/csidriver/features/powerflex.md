@@ -1128,10 +1128,10 @@ Enable the SFTP repository settings by enabling the SDC SFTP Repo and configurin
  *NOTE:*
 - Exposing SFTP settings to automatically pull scini.ko modules is only available for SDC 3.6.5 and 4.5.4
 - Ensure that sdcrepo-private-secret and sdcrepo-public-secret are created from the secrets file. 
-```bash
-kubectl create secret generic sdcsftprepo-private-secret -n vxflexos --from-file=user_private_rsa_key=sftp-secret-private.crt
-kubectl create secret generic sdcsftprepo-public-secret -n vxflexos --from-file=repo_public_rsa_key=sftp-secret-public.crt
-```
+  ```bash
+  kubectl create secret generic sdcsftprepo-private-secret -n vxflexos --from-file=user_private_rsa_key=sftp-secret-private.crt
+  kubectl create secret generic sdcsftprepo-public-secret -n vxflexos --from-file=repo_public_rsa_key=sftp-secret-public.crt
+  ```
 - Private key of SFTP server should be obtained and public key should be pulled from known hosts after logging in to server via private key. 
 - The secrets should have permissions set to 600 to ensure security and proper access control. Setting permissions to 600 ensures that only the owner has read and write access, preventing unauthorized users from accessing or modifying the secrets.
 - After creating the private SFTP server,
@@ -1165,8 +1165,8 @@ To enable NVMe/TCP, the following configurations must be applied:
 2.  **Disable SDC**: SDC deployment must be disabled to ensure the driver relies on NVMe/TCP.
     *   **Helm**: Set `sdc.enabled` to `false` in [values.yaml](https://github.com/dell/helm-charts/blob/csi-vxflexos-{{< version-docs key="driver_latestVersion" >}}/charts/csi-vxflexos/values.yaml).
     *   **Operator**: Set `X_CSI_SDC_ENABLED` to `false` in the Custom Resource (CR) [here](https://github.com/dell/csm-operator/blob/release/{{< version-docs key="csm-operator_latest_version">}}/samples/{{< version-docs key="csm-operator_latest_samples_dir" >}}/storage_csm_powerflex_{{< version-docs key="Det_sample_operator_pflex" >}}.yaml).
-
-> **IMPORTANT**: The driver prioritizes SDC over NVMe/TCP. If SDC is enabled (default) or detected on the node, the driver will default to SDC communication, if `blockProtocol` is set to `auto`.
+    
+      > **IMPORTANT**: The driver prioritizes SDC over NVMe/TCP. If SDC is enabled (default) or detected on the node, the driver will default to SDC communication, if `blockProtocol` is set to `auto`.
 
 ### Migration to NVMe/TCP
 
@@ -1178,7 +1178,8 @@ To transition existing nodes from SDC to NVMe/TCP, perform the following steps:
     kubectl label node <node-name> csi-vxflexos.dellemc.com/<system-id>-
     ```
 3.  **Verification**: Upon migration and restart, the driver will detect NVMe/TCP capability and automatically apply the new label: `csi-vxflexos.dellemc.com/<system-id>-nvmetcp=true`.
-  > **Important:** Automatic migration of existing SDC volumes to NVMe/TCP is not supported. After removing SDC, the driver will detect NVMe/TCP and schedule new workloads using NVMe/TCP on those nodes.
+
+    > **Important:** Automatic migration of existing SDC volumes to NVMe/TCP is not supported. After removing SDC, the driver will detect NVMe/TCP and schedule new workloads using NVMe/TCP on those nodes.
 
 **Limitations**
 
