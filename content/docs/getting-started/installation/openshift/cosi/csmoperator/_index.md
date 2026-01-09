@@ -19,7 +19,7 @@ The COSI Driver for Dell ObjectScale can be deployed by using the CSM Operator.
 
 <br>
 
-{{< accordion id="Two" title="Driver Install" markdown="true" >}}  
+{{< accordion id="Two" title="Driver Install" markdown="true" >}}
 
 </br>
 
@@ -27,30 +27,30 @@ The COSI Driver for Dell ObjectScale can be deployed by using the CSM Operator.
 ### Operator Installation
 
 </br>
- 
-1. On the OpenShift console, navigate to **OperatorHub** and use the keyword filter to search for **Dell Container Storage Modules.** 
 
-2. Click **Dell Container Storage Modules** tile 
+1. On the OpenShift console, navigate to **OperatorHub** and use the keyword filter to search for **Dell Container Storage Modules.**
+
+2. Click **Dell Container Storage Modules** tile
 
 3. Keep all default settings and click **Install**.
 
 </br>
 <ol>
 
-Verify that the operator is deployed 
-```terminal 
+Verify that the operator is deployed
+```terminal
 oc get operators
 
 NAME                                                          AGE
 dell-csm-operator-certified.openshift-operators               2d21h
-```  
+```
 
 ```terminal
 oc get pod -n openshift-operators
 
 NAME                                                       READY   STATUS       RESTARTS      AGE
 dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      21 (19h ago)  2d21h
-``` 
+```
 
 
 </ol>
@@ -142,12 +142,11 @@ spec:
 EOF
 ```
 {{< /collapse >}}
-6. Create the COSI CR using the CR.
+5. Create the COSI CR using the CR.
     ```bash
     kubectl create -f csm-cosi.yaml
     ```
-    Where file is the name of the CR resource file that you saved in step 5.
-7. Validate the installation
+6. Validate the installation
     ```terminal
     # kubectl get csm -A
     NAMESPACE   NAME   CREATIONTIME   CSIDRIVERTYPE   CONFIGVERSION   STATE

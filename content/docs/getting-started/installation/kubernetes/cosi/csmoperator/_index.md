@@ -102,12 +102,11 @@ spec:
 EOF
 ```
 {{< /collapse >}}
-6. Create the COSI CR using the CR.
+5. Create the COSI CR using the CR.
     ```bash
     kubectl create -f csm-cosi.yaml
     ```
-    Where file is the name of the CR resource file that you saved in step 5.
-7. Validate the installation
+6. Validate the installation
     ```terminal
     # kubectl get csm -A
     NAMESPACE   NAME   CREATIONTIME   CSIDRIVERTYPE   CONFIGVERSION   STATE
