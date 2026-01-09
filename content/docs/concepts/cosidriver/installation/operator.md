@@ -118,67 +118,66 @@ EOF
 kubectl create secret generic dell-cosi-config -n dell-cosi --from-file=config.yaml=secret.yaml
 ```
 4. Create a Custom Resource (CR) for COSI using either minimal resource file or the more configurable sample. Save one of the following YAML blocks to a file.
-    ##### Minimal Configuration
-    Create a minimal Custom Resource (CR) for COSI.
-    ```yaml
-    cat <<EOF > csm-cosi.yaml
-    apiVersion: storage.dell.com/v1
-    kind: ContainerStorageModule
-    metadata:
-        name: cosi
-        namespace: dell-cosi
-    spec:
-        driver:
-        csiDriverType: "cosi"
-        configVersion: v1.0.0
-        forceRemoveDriver: true
-    EOF
-    ```
-    ##### Detailed Configuration
-    The detailed configuration allows for customization of some attributes of the CR as indicated by the commented sections.
-    ```yaml
-    cat <<EOF > csm-cosi.yaml
-    apiVersion: storage.dell.com/v1
-    kind: ContainerStorageModule
-    metadata:
+{{< collapse id="1" title="Minimal Configuration">}}
+```yaml
+cat <<EOF > csm-cosi.yaml
+apiVersion: storage.dell.com/v1
+kind: ContainerStorageModule
+metadata:
     name: cosi
     namespace: dell-cosi
-    spec:
+spec:
     driver:
-        csiDriverType: "cosi"
-        configVersion: v1.0.0
-        replicas: 2
-        forceRemoveDriver: true
-        common:
-        image: "quay.io/dell/container-storage-modules/cosi:v1.0.0"
-        imagePullPolicy: IfNotPresent
-        # Node selector for scheduling the COSI driver pod.
-        nodeSelector: {}
-        # Tolerations for scheduling the COSI driver pod.
-        tolerations: []
-        envs:
-            # COSI driver log level.
-            # Options are "PANIC", "FATAL", "ERROR", "WARN", "INFO",
-            # "DEBUG", and "TRACE".
-            - name: COSI_LOG_LEVEL
-            value: "INFO"
-            # COSI driver log format
-            # Allowed values: "TEXT" or "JSON"
-            # Default value: "TEXT"
-            - name: COSI_LOG_FORMAT
-            value: "TEXT"
-            # OTEL_COLLECTOR_ADDRESS is the gRPC endpoint for the OTEL Collector.
-            # Example: "otel-collector.namespace:4317"
-            # Default: ""
-            - name: OTEL_COLLECTOR_ADDRESS
-            value: ""
-        sideCars:
-        - name: objectstorage-provisioner-sidecar
-            image: gcr.io/k8s-staging-sig-storage/objectstorage-sidecar:release-0.2
-            imagePullPolicy: IfNotPresent
-    EOF
-    ```
-
+    csiDriverType: "cosi"
+    configVersion: v1.0.0
+    forceRemoveDriver: true
+EOF
+```
+{{< /collapse >}}
+{{< collapse id="2" title="Detailed Configuration">}}
+```yaml
+cat <<EOF > csm-cosi.yaml
+apiVersion: storage.dell.com/v1
+kind: ContainerStorageModule
+metadata:
+name: cosi
+namespace: dell-cosi
+spec:
+driver:
+csiDriverType: "cosi"
+configVersion: v1.0.0
+replicas: 2
+forceRemoveDriver: true
+common:
+image: "quay.io/dell/container-storage-modules/cosi:v1.0.0"
+imagePullPolicy: IfNotPresent
+# Node selector for scheduling the COSI driver pod.
+nodeSelector: {}
+# Tolerations for scheduling the COSI driver pod.
+tolerations: []
+envs:
+    # COSI driver log level.
+    # Options are "PANIC", "FATAL", "ERROR", "WARN", "INFO",
+    # "DEBUG", and "TRACE".
+    - name: COSI_LOG_LEVEL
+    value: "INFO"
+    # COSI driver log format
+    # Allowed values: "TEXT" or "JSON"
+    # Default value: "TEXT"
+    - name: COSI_LOG_FORMAT
+    value: "TEXT"
+    # OTEL_COLLECTOR_ADDRESS is the gRPC endpoint for the OTEL Collector.
+    # Example: "otel-collector.namespace:4317"
+    # Default: ""
+    - name: OTEL_COLLECTOR_ADDRESS
+    value: ""
+sideCars:
+- name: objectstorage-provisioner-sidecar
+    image: gcr.io/k8s-staging-sig-storage/objectstorage-sidecar:release-0.2
+    imagePullPolicy: IfNotPresent
+EOF
+```
+{{< /collapse >}}
 6. Create the COSI CR using the CR.
     ```bash
     kubectl create -f csm-cosi.yaml
