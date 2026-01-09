@@ -6,7 +6,7 @@ description: Offline Installation
 weight: 4
 ---
 
-The `cosi-offline-bundle.sh` script can be used to create a package for the offline installation of Dell COSI storage providers for deployment via Helm.  
+The `cosi-offline-bundle.sh` script can be used to create a package for the offline installation of Dell COSI storage providers for deployment via Helm.
 
 ## Dependencies
 
@@ -20,7 +20,7 @@ If one system has both Internet access and registry access, it can be used for b
 
 ## Dependencies and Usage
 
-Preparing an offline bundle requires the following utilities: 
+Preparing an offline bundle requires the following utilities:
 
 <div class="tdleft">
 
@@ -29,19 +29,19 @@ Preparing an offline bundle requires the following utilities:
 | **`docker` or `podman`**  | Used to pull images from public registries, tag them, and push to a private registry.   |
 |                           | Required on both the system building the offline bundle and the system preparing for installation.  |
 |                           |Tested versions: docker 19.03+ and podman 1.6.4+.
-| **`git`**                 | Used to manually clone repositories to create an offline bundle. 
-|                           | Needed only on the system preparing the offline bundle. 
+| **`git`**                 | Used to manually clone repositories to create an offline bundle.
+|                           | Needed only on the system preparing the offline bundle.
 |                           | Tested versions: git 1.8+ (any version should work).
 
 </div>
 
 <br>
-{{< accordion id="One" title="Operator" markdown="true" >}} 
+{{< accordion id="One" title="Operator" markdown="true" >}}
 {{<include  file="content/docs/getting-started/installation/offline/operator.md" suffix="1">}}
 
 {{< /accordion >}}
-<br> 
-{{< accordion id="Two" title="Helm" markdown="true" >}} 
+<br>
+{{< accordion id="Two" title="Helm" markdown="true" >}}
 
 ## Workflow
 
@@ -63,7 +63,7 @@ The script will perform the following steps:
   - Determine required images by parsing the driver Helm charts
   - Perform an image `pull` of each image required
   - Save all required images to a file by running `docker save` or `podman save`
-  - Build a `tar.gz` file containing the images as well as files required to instal the driver
+  - Build a `tar.gz` file containing the images as well as files required to install the driver
 
 The resulting offline bundle file can be copied to another machine, if necessary, to gain access to the desired image registry.
 
