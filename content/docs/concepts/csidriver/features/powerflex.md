@@ -422,7 +422,7 @@ node:
 
 ## Multiarray Support
 
-The CSI PowerFlex driver version 1.4 added support for managing multiple PowerFlex arrays from the single driver instance. This feature is enabled by default and integrated to even single instance installations.
+The CSI PowerFlex driver version 1.4 added support for managing multiple PowerFlex arrays from the single driver instance. This feature is enabled by default and integrated to even single instance installations.When configuring the driver with multiple PowerFlex arrays, the blockProtocol value must be the same for all arrays.
 
 To manage multiple arrays you need to create an array connection configuration that lists multiple arrays.
 
