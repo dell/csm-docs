@@ -146,6 +146,10 @@ EOF
     ```bash
     kubectl create -f csm-cosi.yaml
     ```
+    You should see the following output:
+    ```terminal
+    containerstoragemodule.storage.dell.com/cosi created
+    ```
 6. Validate the installation
     ```terminal
     # kubectl get csm -A
