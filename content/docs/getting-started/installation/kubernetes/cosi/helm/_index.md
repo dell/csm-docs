@@ -5,45 +5,21 @@ weight: 2
 Description: Installation of COSI Driver using Helm
 ---
 
-The COSI Driver for Dell ObjectScale can be deployed by using the provided Helm v3 charts on Kubernetes platform.
+1. Set up a Kubernetes cluster following the official documentation.
+2. Proceed to the [Prerequisite](../prerequisite/_index.md).
+3. Complete the driver installation.
 
-The Helm chart installs the following components in a _Deployment_ in the specified namespace:
-- dell-cosi
+### Install Helm 3.x
 
-{{< accordion id="One" title="Dependencies" markdown="true" >}}
-### Dependencies
+Install Helm 3.x on the master node before you install the CSI Driver for Dell PowerFlex.
 
-Installing any of the CSI Driver components using Helm requires a few utilities to be installed on the system running the installation.
+**Steps**
 
-{{<table "table table-striped table-bordered table-sm">}}
-| Dependency | Usage                                                                                                                |
-|------------|----------------------------------------------------------------------------------------------------------------------|
-| `kubectl`  | Kubectl is used to validate that the Kubernetes system meets the requirements of the driver.                         |
-| `helm`     | Helm v3 is used as the deployment tool for Charts. Go [here](https://helm.sh/docs/intro/install/) to install Helm 3. |
-{{</table>}}
+  Run the command to install Helm 3.x.
 
-> ℹ️ **NOTE:**
-> To use these tools, a valid `KUBECONFIG` is required. Ensure that either a valid configuration is in the default location, or, that the `KUBECONFIG` environment variable points to a valid configuration before using these tools.
-{{< /accordion>}}
-<br>
-
-{{< accordion id="Two" title="Prerequisites" markdown="true" >}}
-### Prerequisites
-
-- Install Kubernetes cluster (see [supported versions](../../../cosidriver/#features-and-capabilities))
-
-To use the COSI Driver, you must deploy the following components to your cluster:
-
-- Kubernetes Container Object Storage Interface CRDs
-- Container Object Storage Interface Controller
-
-*Note*: The following `kubectl patch` command is required as the current installation procedure for v0.2.1 will use a previous image version.
-```bash
-kubectl create -k 'https://github.com/kubernetes-sigs/container-object-storage-interface//?ref=v0.2.1'
-kubectl patch deployment container-object-storage-controller -n container-object-storage-system -p '{"spec":{"template":{"spec":{"containers":[{"name":"objectstorage-controller","image":"gcr.io/k8s-staging-sig-storage/objectstorage-controller:release-0.2"}]}}}}'
-```
-{{< /accordion>}}
-<br>
+  ```bash
+  curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
+ ```
 
 {{< accordion id="Three" title="Driver Install" markdown="true" >}}
 ### Install the Driver
@@ -58,11 +34,10 @@ connections:
   - objectscale:
       id: objectscale
       credentials:
-        username: namespaceamdin
+        username: namespaceadmin
         password: namespaceadminpassword
       namespace: ns1
       mgmt-endpoint: https://mgmt-endpoint-address:4443
-      region: us-east-1
       emptyBucket: true
       protocols:
         s3:
@@ -96,9 +71,3 @@ kubectl create secret generic dell-cosi-config -n dell-cosi --from-file=config.y
 helm install dell-cosi ./cosi --namespace=dell-cosi --values ./my-cosi-values.yaml
 ```
 {{< /accordion>}}
-<br>
-
-{{< accordion id="Four" title="Post Install" markdown="true" >}}
-{{<include  file="content/docs/concepts/cosidriver/installation/postinstall.md" >}}
-{{< /accordion>}}
-<br>
