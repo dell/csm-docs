@@ -94,7 +94,29 @@ kubectl patch deployment container-object-storage-controller -n container-object
 **Steps**
 1. Ensure that you have created the namespace where you want to install the driver. You can run `kubectl create namespace dell-cosi` to create a new one. The use of _dell-cosi_ as the namespace is just an example. You can choose any name for the namespace.
 2. Create a new file called `secret.yaml` with the contents of the [configuration file](../configuration#configuration-file-example). Edit the file with parameters specific to the ObjectScale instance.
-3. Create a secret by running `kubectl create secret generic dell-cosi-config -n dell-cosi --from-file=config.yaml=secret.yaml`
+```yaml
+cat <<EOF > secret.yaml
+connections:
+  - objectscale:
+      id: objectscale
+      credentials:
+        username: namespaceamdin
+        password: namespaceadminpassword
+      namespace: ns1
+      mgmt-endpoint: https://mgmt-endpoint-address:4443
+      region: us-east-1
+      emptyBucket: true
+      protocols:
+        s3:
+          endpoint: https://s3-endpoint-address:9021
+      tls:
+        insecure: true
+EOF
+```
+3. Create a secret by running
+```bash
+kubectl create secret generic dell-cosi-config -n dell-cosi --from-file=config.yaml=secret.yaml
+```
 4. Create a Custom Resource (CR) for COSI using either minimal resource file or the more configurable sample. Save one of the following YAML blocks to a file.
     ##### Minimal Configuration
     Create a minimal Custom Resource (CR) for COSI.
