@@ -1,17 +1,15 @@
 ---
 title: "Installation"
 linkTitle: "Installation"
-weight: 1
+weight: 2
 description: Process of installation
 no_list: true
 ---
 
 {{< cardcontainer >}}
 
-    {{< customcard link="./configuration"  title="Configuration"  >}}
+    {{< customcard   link="./operator"  title="Operator" >}}
 
-    {{< customcard   link="./helm"  title="Using Helm" >}}
-
-    {{< customcard   link="./operator"  title="Using Operator" >}}
+    {{< customcard   link="./helm"  title="Helm" >}}
 
 {{< /cardcontainer >}}

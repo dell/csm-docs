@@ -1,7 +1,7 @@
 ---
 title: "COSI Driver installation using Operator"
-linkTitle: "Using Operator"
-weight: 2
+linkTitle: "Operator"
+weight: 1
 Description: Installation of COSI Driver using Operator
 ---
 
@@ -97,8 +97,9 @@ kubectl patch deployment container-object-storage-controller -n container-object
 3. Create a secret by running `kubectl create secret generic dell-cosi-config -n dell-cosi --from-file=config.yaml=secret.yaml`
 4. Create a Custom Resource (CR) for COSI using either minimal resource file or the more configurable sample. Save one of the following YAML blocks to a file.
     ##### Minimal Configuration
-    The following represents the minimum CR for installing the COSI driver.
+    Create a minimal Custom Resource (CR) for COSI.
     ```yaml
+    cat <<EOF > csm-cosi.yaml
     apiVersion: storage.dell.com/v1
     kind: ContainerStorageModule
     metadata:
@@ -109,10 +110,12 @@ kubectl patch deployment container-object-storage-controller -n container-object
         csiDriverType: "cosi"
         configVersion: v1.0.0
         forceRemoveDriver: true
+    EOF
     ```
     ##### Detailed Configuration
     The detailed configuration allows for customization of some attributes of the CR as indicated by the commented sections.
     ```yaml
+    cat <<EOF > csm-cosi.yaml
     apiVersion: storage.dell.com/v1
     kind: ContainerStorageModule
     metadata:
@@ -151,11 +154,12 @@ kubectl patch deployment container-object-storage-controller -n container-object
         - name: objectstorage-provisioner-sidecar
             image: gcr.io/k8s-staging-sig-storage/objectstorage-sidecar:release-0.2
             imagePullPolicy: IfNotPresent
+    EOF
     ```
 
-6. Create the COSI CR from one of the sections shown in step 5.
+6. Create the COSI CR using the CR.
     ```bash
-    kubectl create -f <file>
+    kubectl create -f csm-cosi.yaml
     ```
     Where file is the name of the CR resource file that you saved in step 5.
 7. Validate the installation

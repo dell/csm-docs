@@ -1,8 +1,8 @@
 ---
 title: "Features"
-linkTitle: "Features" 
-weight: 4
-description: Description of COSI Driver features 
+linkTitle: "Features"
+weight: 1
+description: Description of COSI Driver features
 no_list: true
 ---
 

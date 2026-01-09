@@ -2,7 +2,7 @@
 title: "Container Storage Modules with COSI"
 linkTitle: "Container Storage Modules with COSI"
 description: About Dell Technologies (Dell) Container Storage Modules with COSI
-no_list: true 
+no_list: true
 weight: 10
 ---
 
@@ -12,15 +12,6 @@ Dell COSI Driver is a multi-backend driver, meaning that it can connect to multi
 
 ## Features and capabilities
 
-### Supported Container Orchestrator Platforms
-
-
-{{<table "table table-striped table-bordered table-sm">}}
-|            |    COSI    |
-|------------|:----------:|
-|  <div style="text-align: left"> Kubernetes | 1.32, 1.33, 1.34 |
-|  <div style="text-align: left"> OpenShift | 4.18, 4.19 |
-{{</table>}}
 
 ### COSI Driver Capabilities
 
@@ -41,13 +32,6 @@ Dell COSI Driver is a multi-backend driver, meaning that it can connect to multi
 |  <div style="text-align: left"> AWS S3     |     Yes     |
 {{</table>}}
 
-## Supported Storage Platforms
-
-{{<table "table table-striped table-bordered table-sm">}}
-| Storage Platform | Versions |
-|------------------|:--------:|
-| <div style="text-align: left">  ObjectScale      |  4.0   |
-{{</table>}}
 
 ## Bucket Lifecycle Workflow
 

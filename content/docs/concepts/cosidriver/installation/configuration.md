@@ -3,12 +3,11 @@ title: Configuration
 linktitle: Configuration
 weight: 1
 Description: Description of configuration file for ObjectScale
+toc_hide: true
 ---
 ## Dell COSI Driver Configuration Schema
 
 This configuration file is used to specify the settings for the Dell COSI Driver, which is responsible for managing connections to the Dell ObjectScale platform. The configuration file is written in YAML format and based on the JSON schema and adheres to its specification.
-
-YAML files can have comments, which are lines in the file that begin with the `#` character. Comments can be used to provide context and explanations for the data in the file, and they are ignored by parsers when reading the YAML data.
 
 ## Configuration file example
 

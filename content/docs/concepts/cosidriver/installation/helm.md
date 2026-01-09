@@ -1,6 +1,6 @@
 ---
 title: "COSI Driver installation using Helm"
-linkTitle: "Using Helm"
+linkTitle: "Helm"
 weight: 2
 Description: Installation of COSI Driver using Helm
 ---
