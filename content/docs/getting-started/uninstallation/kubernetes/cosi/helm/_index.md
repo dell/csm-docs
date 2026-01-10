@@ -1,7 +1,7 @@
 ---
-title: "Uninstallation"
-linkTitle: "Uninstallation"
-weight: 3
+title: "Helm"
+linkTitle: "Helm"
+weight: 4
 description: Methods to uninstall Dell COSI Driver
 ---
 

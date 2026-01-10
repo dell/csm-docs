@@ -1,8 +1,8 @@
 ---
 title: "Component and Image Details"
 linkTitle: "Component and Image Details"
-weight: 1 
---- 
+weight: 1
+---
 
 ### Container Storage Modules Component Version
 
@@ -18,6 +18,7 @@ weight: 1
 |<div style="text-align:left"> Observability | {{< version-docs key="csm-observability" >}} |
 |<div style="text-align:left"> Replication |{{< version-docs key="csm-replication" >}} |
 |<div style="text-align:left"> Resiliency | {{< version-docs key="karavi-resiliency" >}} |
+|<div style="text-align:left"> COSI | {{< version-docs key="cosi" >}} |
 {{</table>}}
 
 ### Container Storage Modules Certified Operator 1.10.0 Images

@@ -9,10 +9,10 @@ weight: 1
 ## Storage Platforms
 
 {{<table "table table-striped table-bordered table-sm tdleft">}}
-| Prerequisites    | PowerStore         | PowerScale | PowerFlex | PowerMax | Unity XT |
-| :--------------: | :----------------: | :--------: | :-------: | :------: | :------: |
-| Version          | 3.6, 4.0, 4.1, 4.2 | OneFS 9.4, 9.5.0.x (x >= 5),<br>9.7, 9.8, 9.9, 9.10, 9.11, 9.12 | 3.6.x, 4.5.x, 4.6.x, 5.0  | Unisphere 10.0, 10.1, 10.2 | 5.3.x, 5.4.x, 5.5 |
-| OS Dependencies  | iscsi-initiator-utils<br>multipathd<br>nvme-cli<br>nfs-utils | nfs-utils | [SDC](https://www.dell.com/support/home/en-us/product-support/product/scaleio/drivers) | iscsi-initiator-utils<br>multipathd or powerpath<br>nvme-cli<br>nfs-utils | iscsi-initiator-utils<br>multipathd<br>nfs-utils |
+| Prerequisites    | PowerStore         | PowerScale | PowerFlex | PowerMax | Unity XT | COSI |
+| :--------------: | :----------------: | :--------: | :-------: | :------: | :------: | :--:
+| Version          | 3.6, 4.0, 4.1, 4.2 | OneFS 9.4, 9.5.0.x (x >= 5),<br>9.7, 9.8, 9.9, 9.10, 9.11, 9.12 | 3.6.x, 4.5.x, 4.6.x, 5.0  | Unisphere 10.0, 10.1, 10.2 | 5.3.x, 5.4.x, 5.5 | ObjectScale 4.0 |
+| OS Dependencies  | iscsi-initiator-utils<br>multipathd<br>nvme-cli<br>nfs-utils | nfs-utils | [SDC](https://www.dell.com/support/home/en-us/product-support/product/scaleio/drivers) | iscsi-initiator-utils<br>multipathd or powerpath<br>nvme-cli<br>nfs-utils | iscsi-initiator-utils<br>multipathd<br>nfs-utils | |
 {{</table>}}
 
 
@@ -60,7 +60,7 @@ weight: 1
 - PowerStore and PowerMax support iSCSI and NVMe/TCP.
 - PowerFlex 4.8 supports [SDC 3.6.6](https://quay.io/dell/storage/powerflex/sdc:3.6.6) and NVMe/TCP on SUSE Virtualization.
 - PowerFlex 5.0 supports NVMe/TCP on SUSE Virtualization, SDC is not supported.
-- Harvester 1.7.x is not supported currently 
+- Harvester 1.7.x is not supported currently
 
 ## Tested Host Operating Systems
 
@@ -123,8 +123,8 @@ Container Storage Modules doesn't officially support specific operating systems,
 ### Drivers
 
 {{<table "table table-striped table-bordered table-sm">}}
-| Wizard   | PowerStore | PowerScale | PowerFlex | PowerMax | Unity XT |
-| -------- | ---------- |------------|-----------|----------|----------|
-| Helm     | Yes        |  Yes        | Yes     | Yes       | No       |
-| Operator | Yes        |  Yes        | No      | Yes       | No       |
+| Wizard   | PowerStore | PowerScale | PowerFlex | PowerMax | Unity XT | COSI |
+| -------- | ---------- |------------|-----------|----------|----------|------|
+| Helm     | Yes        |  Yes        | Yes     | Yes       | No       | No   |
+| Operator | Yes        |  Yes        | No      | Yes       | No       | No   |
 {{</table>}}

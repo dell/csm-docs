@@ -23,7 +23,7 @@ The `starttest.sh` script is located in the `csi-vxflexos/test/helm` directory. 
 1. Navigate to the test/helm directory, which contains the `starttest.sh` and the _2vols_ directories. This directory contains a simple Helm chart that will deploy a pod that uses two PowerFlex volumes.
 *NOTE:* Helm tests are designed assuming users are using the _storageclass_ names (_vxflexos_ and _vxflexos-xfs_). If your _storageclass_ names differ from these values, please update the templates in 2vols accordingly (located in `test/helm/2vols/templates` directory). You can use `kubectl get sc` to check for the _storageclass_ names.
 2. Run `sh starttest.sh 2vols` to deploy the pod. You should see the following:
-```
+```terminal
 Normal Pulled  38s kubelet, k8s113a-10-247-102-215.lss.emc.com Successfully pulled image "docker.io/centos:latest"
 Normal Created 38s kubelet, k8s113a-10-247-102-215.lss.emc.com Created container
 Normal Started 38s kubelet, k8s113a-10-247-102-215.lss.emc.com Started container
@@ -54,15 +54,15 @@ spec:
   storageClassName: vxflexos
 ```
 
-2. The _volumeMode: Filesystem_ requires a mounted file system, and the _resources.requests.storage_ of 8Gi requires an 8 GB file. In this case, the _storageClassName: vxflexos_ directs the system to use a storage class named _vxflexos_. This step yields a mounted _ext4_ file system. You can create the _vxflexos_ and _vxflexos-xfs_ storage classes by using the yamls located in samples/storageclass.  
+2. The _volumeMode: Filesystem_ requires a mounted file system, and the _resources.requests.storage_ of 8Gi requires an 8 GB file. In this case, the _storageClassName: vxflexos_ directs the system to use a storage class named _vxflexos_. This step yields a mounted _ext4_ file system. You can create the _vxflexos_ and _vxflexos-xfs_ storage classes by using the yamls located in samples/storageclass.
 3. If you compare _pvol0.yaml_ and _pvol1.yaml_, you will find that the latter uses a different storage class; _vxflexos-xfs_. This class gives you an _xfs_ file system.
 4. To see the volumes you created, run kubectl get persistentvolumeclaim –n helmtest-vxflexos and kubectl describe persistentvolumeclaim –n helmtest-vxflexos.
 >*NOTE:* For more information about Kubernetes objects like _StatefulSet_ and _PersistentVolumeClaim_ see [Kubernetes documentation: Concepts](https://kubernetes.io/docs/concepts/).
 
 ## Test creating snapshots
 
-Test the workflow for snapshot creation.  
->*NOTE:* Starting with version 2.0, CSI Driver for PowerFlex helm tests are designed to work exclusively with v1 snapshots.  
+Test the workflow for snapshot creation.
+>*NOTE:* Starting with version 2.0, CSI Driver for PowerFlex helm tests are designed to work exclusively with v1 snapshots.
 
 **Steps**
 
@@ -148,7 +148,7 @@ spec:
 - Helm tests are designed assuming users are using the _storageclass_ name: _vxflexos-nfs_. If your _storageclass_ names differ from these values, please update the templates in 1vol-nfs accordingly (located in `test/helm/1vol-nfs/templates` directory). You can use `kubectl get sc` to check for the _storageclass_ names.
 
 3. Run `sh starttest.sh 1vol-nfs` to deploy the pod. You should see the following:
-```
+```terminal
 Normal  Scheduled  default-scheduler, Successfully assigned helmtest-vxflexos/vxflextest-0 to worker-1-zwfjtd4eoblkg.domain
 Normal  SuccessfulAttachVolume  attachdetach-controller, AttachVolume.Attach succeeded for volume "k8s-e279d47296"
 Normal  Pulled  13s   kubelet, Successfully pulled image "docker.io/centos:latest" in 791.117427ms (791.125522ms including waiting)
