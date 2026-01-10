@@ -110,7 +110,7 @@ Installs a Dell CSI Driver and optionally installs protocol prerequisites and va
 | csi-node-prefix <string>                   | The prefix for all CSI nodes provisioned by the driver. | csi-node | No |
 | csi-volume-prefix <string>                 | The prefix for all CSI volumes provisioned by the driver. | csivol | No |
 | force                                      | The existing Container Storage Module resources are deleted and then recreated.  | false | No |
-| machineconfig                              | Configure pre-requisities based on the provided block-protocol parameter. See the relevant orchestrator and platform [installation page](../../getting-started/installation/_index.md) for which prerequisites are configured.  | false | No |
+| machineconfig                              | Configure pre-requisities based on the provided block-protocol parameter. See the relevant orchestrator and platform [installation page](../../getting-started/installation) for which prerequisites are configured.  | false | No |
 | modules <stringArray>                      | Container Storage Modules modules to install. Supported modules are: replication, authorization, observability, resiliency.  | "" | No |
 | namespace <string>                         | Namespace to install into (lowercase alphanumeric, may include dashes, must start/end with alphanumeric).  | "namespace" | Yes |
 | operator-install                           | Container Storage Modules Custom Resource Definitions will be installed.  | false | No |
