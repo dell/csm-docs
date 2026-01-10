@@ -51,8 +51,8 @@ EOF
 kubectl create secret generic dell-cosi-config -n dell-cosi --from-file=config.yaml=secret.yaml
 ```
 5. Copy the _charts/cosi/values.yaml_ into a new location with name _my-cosi-values.yaml_, to customize settings for installation.
-6. Edit *my-cosi-values.yaml* to set the following parameters for your installation:
-   The following table lists the primary configurable parameters of the COSI driver Helm chart and their default values. More detailed information can be found in the [`values.yaml`](https://github.com/dell/helm-charts/blob/master/charts/cosi/values.yaml) file in this repository.
+6. Edit *my-cosi-values.yaml* to set the following parameters for your installation.<br>
+   The following table lists the primary configurable parameters of the COSI driver Helm chart and their default values.<br>More detailed information can be found in the [`values.yaml`](https://github.com/dell/helm-charts/blob/master/charts/cosi/values.yaml) file in this repository.
 <ul>
 {{< collapse id="1" title="Parameters">}}
 | Parameter | Description | Required | Default |
