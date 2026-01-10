@@ -6,7 +6,7 @@ Description: Installation of COSI Driver using Helm
 ---
 
 1. Set up a Kubernetes cluster following the official documentation.
-2. Proceed to the [Prerequisite](../prerequisite/_index.md).
+2. Proceed to the [Prerequisites](../prerequisite/_index.md).
 3. Complete the driver installation.
 
 ### Install Helm 3.x
@@ -53,18 +53,17 @@ kubectl create secret generic dell-cosi-config -n dell-cosi --from-file=config.y
 5. Copy the _charts/cosi/values.yaml_ into a new location with name _my-cosi-values.yaml_, to customize settings for installation.
 6. Edit *my-cosi-values.yaml* to set the following parameters for your installation:
    The following table lists the primary configurable parameters of the COSI driver Helm chart and their default values. More detailed information can be found in the [`values.yaml`](https://github.com/dell/helm-charts/blob/master/charts/cosi/values.yaml) file in this repository.
-
-{{<table "table table-striped table-bordered table-sm">}}
-   | Parameter                    | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                             | Required | Default                                                                        |
-   |------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:--------:|--------------------------------------------------------------------------------|
-   | images.provisioner.image | COSI driver provisioner container image.                                                                                                                                                                                                                                                                                                                                                                                                                     |   yes    | `"quay.io/dell/container-storage-modules/cosi:v1.0.0"`                                                        |
-   | images.sidecar.image        | COSI driver sidecar container image.                                                                                                                                                                                                                                                                                                                                                                                                                            |   yes    | `"gcr.io/k8s-staging-sig-storage/objectstorage-sidecar:release-0.2"`                                                                     |
-   | logLevel         | The logging level for the COSI driver provisioner.                                                                                                                                                                                                                                                                                                                                                                                                                      |   yes    | `info`                                                                         |
-   | logFormat        | The logging format for the COSI driver provisioner.                                                                                                                                                                                                                                                                                                                                                                                                                     |   yes    | `"TEXT"`                                                                       |
-   | imagePullPolicy | COSI driver provisioner container image pull policy. Maps 1-to-1 with [Kubernetes image pull policy](https://kubernetes.io/docs/concepts/containers/images/#image-pull-policy).                                                                                                                                                                                                                                                                                         |   yes    | `"IfNotPresent"`                                                               |
-{{</table>}}
-
-
+<ul>
+{{< collapse id="1" title="Parameters">}}
+| Parameter | Description | Required | Default |
+|-----------|-------------|----------|---------|
+|<div style="text-align: left"> images.provisioner.image |<div style="text-align: left"> COSI driver provisioner container image. | Yes | "quay.io/dell/container-storage-modules/cosi:v1.0.0" |
+|<div style="text-align: left"> images.sidecar.image |<div style="text-align: left"> COSI driver sidecar container image.| Yes | "gcr.io/k8s-staging-sig-storage/objectstorage-sidecar:release-0.2" |
+|<div style="text-align: left"> logLevel |<div style="text-align: left"> The logging level for the COSI driver provisioner.| Yes | "info" |
+|<div style="text-align: left"> logFormat |<div style="text-align: left"> The logging format for the COSI driver provisioner.| Yes | "TEXT" |
+|<div style="text-align: left"> imagePullPolicy |<div style="text-align: left"> COSI driver provisioner container image pull policy. Maps 1-to-1 with [Kubernetes image pull policy](https://kubernetes.io/docs/concepts/containers/images/#image-pull-policy).| Yes | "IfNotPresent" |
+{{< /collapse >}}
+</ul>
 7. Install the driver by running the following command (assuming that the current working directory is _charts_ and _my-cosi-settings.yaml_ is also present in _charts_ directory).
 
 ```bash

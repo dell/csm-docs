@@ -8,7 +8,7 @@ weight: 6
 
 {{< cardcontainer >}}
 
-    {{< customcard  link="./prerequisite"  imageNumber="4" title="Prerequisite">}} 
+    {{< customcard  link="./prerequisite"  imageNumber="4" title="Prerequisites">}}
 
 {{< /cardcontainer >}}
 
