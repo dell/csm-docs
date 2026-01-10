@@ -26,8 +26,8 @@ Install Helm 3.x on the master node before you install the CSI Driver for Dell P
 
 **Steps**
 1. Run `git clone -b main https://github.com/dell/helm-charts.git` to clone the git repository.
-2. Ensure that you have created the namespace where you want to install the driver. You can run `kubectl create namespace dell-cosi` to create a new one. The use of _dell-cosi_ as the namespace is just an example. You can choose any name for the namespace.
-3. Create a new file called `secret.yaml` with the contents of the [configuration file](../configuration#configuration-file-example). Edit the file with parameters specific to the ObjectScale instance.
+2. Ensure that you have created the namespace where you want to install the driver. <br>You can run `kubectl create namespace dell-cosi` to create a new one.<br>The use of _dell-cosi_ as the namespace is just an example. You can choose any name for the namespace.
+3. Create a new file called `secret.yaml` with the contents of the [configuration file](../configuration#configuration-file-example).<br>Edit the file with parameters specific to the ObjectScale instance.
 ```yaml
 cat <<EOF > secret.yaml
 connections:
