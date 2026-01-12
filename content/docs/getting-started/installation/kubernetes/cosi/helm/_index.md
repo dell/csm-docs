@@ -9,9 +9,9 @@ Description: Installation of COSI Driver using Helm
 2. Proceed to the [Prerequisites](../prerequisite/_index.md).
 3. Complete the driver installation.
 
-### Install Helm 3.x
+### Install Helm 3.0
 
-Install Helm 3.x on the master node before you install the CSI Driver for Dell PowerFlex.
+Install Helm 3.0 on the master node before you install the Dell COSI Driver.
 
 **Steps**
 
@@ -22,12 +22,15 @@ Install Helm 3.x on the master node before you install the CSI Driver for Dell P
  ```
 
 {{< accordion id="Three" title="Driver Install" markdown="true" >}}
-### Install the Driver
+## Install Driver
 
 **Steps**
+
 1. Run `git clone -b main https://github.com/dell/helm-charts.git` to clone the git repository.
-2. Ensure that you have created the namespace where you want to install the driver. <br>You can run `kubectl create namespace dell-cosi` to create a new one.<br>The use of _dell-cosi_ as the namespace is just an example. You can choose any name for the namespace.
-3. Create a new file called `secret.yaml` with the contents of the [configuration file](../configuration#configuration-file-example).<br>Edit the file with parameters specific to the ObjectScale instance.
+
+2. Ensure that you have created the namespace where you want to install the driver. You can run `kubectl create namespace dell-cosi` to create a new one. The use of _dell-cosi_ as the namespace is just an example. You can choose any name for the namespace.
+
+3. Create a new file called `secret.yaml` with the contents of the [configuration file](../configuration#configuration-file-example). Edit the file with parameters specific to the ObjectScale instance.
 ```yaml
 cat <<EOF > secret.yaml
 connections:
@@ -51,7 +54,8 @@ EOF
 kubectl create secret generic cosi-config -n dell-cosi --from-file=config.yaml=secret.yaml
 ```
 5. Copy the _charts/cosi/values.yaml_ into a new location with name _my-cosi-values.yaml_, to customize settings for installation.
-6. Edit *my-cosi-values.yaml* to set the following parameters for your installation.<br>
+
+6. Edit *my-cosi-values.yaml* to set the following parameters for your installation.
    The following table lists the primary configurable parameters of the COSI driver Helm chart and their default values.<br>More detailed information can be found in the [`values.yaml`](https://github.com/dell/helm-charts/blob/master/charts/cosi/values.yaml) file in this repository.
 <ul>
 {{< collapse id="1" title="Parameters">}}
@@ -64,6 +68,7 @@ kubectl create secret generic cosi-config -n dell-cosi --from-file=config.yaml=s
 |<div style="text-align: left"> imagePullPolicy |<div style="text-align: left"> COSI driver provisioner container image pull policy. Maps 1-to-1 with [Kubernetes image pull policy](https://kubernetes.io/docs/concepts/containers/images/#image-pull-policy).| Yes | "IfNotPresent" |
 {{< /collapse >}}
 </ul>
+
 7. Install the driver by running the following command (assuming that the current working directory is _charts_ and _my-cosi-settings.yaml_ is also present in _charts_ directory).
 
 ```bash
