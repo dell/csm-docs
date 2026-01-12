@@ -835,3 +835,22 @@ spec:
             values:
             - zone1
 ```
+
+## Support for multiple storage groups with a single storage class
+
+The CSI PowerMax driver supports dynamic creation of multiple Storage Groups(SGs) using a single Storage Class(SC). When an existing SG reaches its maximum volume limit, the driver automatically creates a new SG.
+- New SGs are named using a base name (derived from SC parameters) as a prefix, followed by a numeric suffix (e.g., \-\-1, \-\-2).
+   Example: csi-C1-Diamond-SRP_1-SG\-\-1, csi-C1-Diamond-SRP_1-SG\-\-2
+- The driver enforces a soft limit of 4,000 volumes per SG.
+- For new volume requests, it selects the SG with the lowest volume count among all existing SGs to ensure balanced distribution.
+
+### How to Enable the feature
+
+- Helm installation:
+
+  Set dynamicSGEnabled: true in values.yaml.
+
+
+- Operator installation:
+
+  Edit the sample file and set X_CSI_DYNAMIC_SG_ENABLED to true.
