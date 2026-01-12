@@ -14,7 +14,7 @@ To perform an offline installation :
 2. [**Unpack the offline bundle**](../offline#unpacking-the-offline-bundle-and-preparing-for-installation-1) and prepare for installation.
 3. [**Install operator**](../offline#install-operator-1) using the unpacked files.
 4. [**Install Container Storage Modules**](../offline#install-container-storage-module-1) using the unpacked files.
-5. [**Installing Dell CSM Operator on a Disconnected OpenShift Environment**
+5. [**Installing Dell CSM Operator on a disconnected OpenShift environment**
 ](../offline#installing-dell-csm-operator-on-a-disconnected-openshift-environment)
 
 >NOTE: Use the same tool (docker or podman) for packing and unpacking images.
@@ -214,7 +214,7 @@ Loaded image: registry.k8s.io/sig-storage/csi-snapshotter:{{< version-docs key="
 - Use files from the unpacked offline bundle (dell-csm-operator-bundle.tar.gz) as image tags in the manifests are modified to point to the internal registry.
 - Offline bundle installs the operator in the default namespace via the install.sh script. Ensure the current context in the kubeconfig file is set to default.
 
-#### **Installing Dell CSM Operator on a Disconnected OpenShift Environment**
+#### **Installing Dell CSM Operator on a disconnected OpenShift environment**
 
 This guide provides instructions for installing the Dell CSM Operator on a disconnected OpenShift environment. The most convenient method is to mirror the entire catalog of certified Operators.
 
@@ -276,7 +276,7 @@ The overall workflow is similar to the steps described in the previous section, 
 - Authenticate `podman` with `registry.redhat.io`.
 - Prepare an `ImageSetConfiguration` that includes only the Dell CSM Operator.
 
-Here is a sample `ImageSetConfiguration` file to be adjusted with OpenShift version and CSM operator version:
+Here is a sample `ImageSetConfiguration` file to be adjusted with OpenShift version and CSM Operator version:
 ```yaml
 apiVersion: mirror.openshift.io/v2alpha1
 kind: ImageSetConfiguration
