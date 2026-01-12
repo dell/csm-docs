@@ -219,14 +219,14 @@ Loaded image: registry.k8s.io/sig-storage/csi-snapshotter:{{< version-docs key="
 This guide provides instructions for installing the Dell CSM Operator on a disconnected OpenShift environment. The most convenient method is to mirror the entire catalog of certified Operators.
 
 **Prerequisites**
-Before you begin, ensure you have:
-- The `oc` command-line tool (OpenShift CLI)
-- a private container registry to host the mirrored images,
-- enough space to pull all the images locally
+Before getting started, ensure the following prerequisites are met:
+- The OpenShift CLI (oc) installed
+- Access to a private container registry where the mirrored images will be hosted
+- Sufficient local storage space to download all required images
 
 **Mirror the Certified Operator Catalog**
 
-Use the following command to mirror the catalog:
+Run the following command to mirror the catalog:
 
 ```bash
 oc adm catalog mirror registry.redhat.io/redhat/certified-operator-index:v[ocp version] [private-registry-url]
@@ -248,31 +248,32 @@ From the disconnected environment run:
 oc create -f imageContentSourcePolicy.yaml
 ```
 
-Then you can update the `CatalogSource` to point to the private repository with :
+Then update the `CatalogSource` to reference the mirrored content in the private registry:
 ```bash
 oc apply -f catalogSource.yaml
 ```
 
-Verify the deployment with:
+Verify the deployment:
 ```bash
 oc get pods -n openshift-marketplace
 ```
-If all pods are running, the Red Hat certified Operators must be visible from OperatorHub in the OpenShift Web Console
+
+Once all pods are in a healthy state, the Red Hat–certified Operators should appear in the `OperatorHub` in the OpenShift Web Console
 
 For more detailed steps on populating the OperatorHub with a new catalog, refer to the official [OpenShift documentation](https://docs.redhat.com/en/documentation/openshift_container_platform/4.20/html/postinstallation_configuration/post-install-preparing-for-users#post-install-mirrored-catalogs).
 
-**Alternative method, to mirror **only** the Dell CSM Operator**
+**Mirroring only the Dell CSM Operator**
 
-The synchronization of the entire certified operator catalog is an operation that takes time (several hours) and resources (1+ TB on the container registry).
+The synchronization of the full certified operator catalog is a resource‑intensive process and can take several hours to complete. It also requires significant storage capacity on the container registry (typically more than 1 TB).
 
 An alternative method is to mirror only the Dell CSM Operator. To do so use `oc-mirror` plugin to select the __dell-csm-operator-certified__ only. 
 
 That procedure is documented in the [official documentation](https://docs.redhat.com/en/documentation/openshift_container_platform/4.20/html/disconnected_environments/about-installing-oc-mirror-v2#installation-oc-mirror-v2-about_about-installing-oc-mirror-v2).
 
-The general steps are the similar to the previous section expect that the user needs to:
-- download & install the `oc-mirror` plugin (available from the OpenShift Web Console or the [Github repository](https://github.com/openshift/oc-mirror/releases)),
-- authenticate `podman` to `registry.redhat.io`
-- prepare an `ImageSetConfiguration` to select the Dell CSM Operator only.
+The overall workflow is similar to the steps described in the previous section, with the following additional requirements:
+- Download and install the `oc-mirror` plugin (available through the OpenShift Web Console or from the [Github repository](https://github.com/openshift/oc-mirror/releases)).
+- Authenticate `podman` with `registry.redhat.io`.
+- Prepare an `ImageSetConfiguration` that includes only the Dell CSM Operator.
 
 Here is a sample `ImageSetConfiguration` file to be adjusted with OpenShift version and CSM operator version:
 ```yaml
@@ -288,22 +289,22 @@ mirror:
               minVersion: "[dell csm operator version]"
 ```
 
-In a fully disconnected environment you need to download the images locally:
+In a fully disconnected environment, the required images must be downloaded locally:
 ```bash
 oc mirror --config=dell-csm-operator-mirror.yml file:///tmp/dell-csm-operator-imageset --v2
 ```
 
-Then push them to the private registry with:
+Push the images to the private registry:
 ```bash
 oc mirror --config=dell-csm-operator-mirror.yml --from file:///tmp/dell-csm-operator-imageset docker://<mirror_registry_url> --v2
 ```
 
-Finally you need to patch the `ImageDigestMirrorSet`:
+Finally, patch the `ImageDigestMirrorSet`:
 ```bash
 oc apply -f cluster-resources
 ```
 
-And you can verify everything is functional with:
+Verification can be performed using:
 ```bash
 oc get imagedigestmirrorset
 oc get catalogsource -n openshift-marketplace
