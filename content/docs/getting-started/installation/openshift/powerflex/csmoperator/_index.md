@@ -58,6 +58,8 @@ dell-csm-operator-controller-manager-86dcdc8c48-6dkxm      2/2     Running      
 
 ### CSI Driver Installation
 
+> For details on enabling NVMe/TCP, refer to the [NVMe/TCP Support](../../../../../concepts/csidriver/features/powerflex#nvmetcp-support) section in the Features page.
+
 </br>
 
 1. ##### **Create project:**

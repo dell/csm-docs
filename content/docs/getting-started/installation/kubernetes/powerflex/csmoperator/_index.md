@@ -17,6 +17,7 @@ To deploy the Operator, follow the instructions available [here](../../../operat
 
 {{< accordion id="Two" title="Base Install" markdown="true" >}}
 
+> For details on enabling NVMe/TCP, refer to the [NVMe/TCP Support](../../../../../concepts/csidriver/features/powerflex#nvmetcp-support) section in the Features page.
 
 ### CSI Driver Installation
 <br>
@@ -30,32 +31,32 @@ To deploy the Operator, follow the instructions available [here](../../../operat
 
 2. **Create `secret.yaml`.**
 
-   a. Create a file called `secret.yaml` or pick a [sample](https://github.com/dell/csi-powerflex/blob/main/samples/secret.yaml) that has Powerflex array connection details:
+   - Create a file called `secret.yaml` or pick a [sample](https://github.com/dell/csi-powerflex/blob/main/samples/secret.yaml) that has Powerflex array connection details:
 
-   ```yaml
-   - username: "admin"
-     password: "password"
-     systemID: "2b11bb111111bb1b"
-     endpoint: "https://127.0.0.2"
-     skipCertificateValidation: true
-     mdm: "10.0.0.3,10.0.0.4"
-     nasName : "nasServer"
-     blockProtocol: "auto"
-   ```
-      - **Update Parameters:** Replace placeholders with actual values for your Powerflex array.
-      - **Add Blocks:** If you have multiple Powerflex arrays, add similar blocks for each one.
-      - **Replication:** If replication is enabled, make sure the `secret.yaml` includes all involved Powerflex arrays.
+      ```yaml
+      - username: "admin"
+        password: "password"
+        systemID: "2b11bb111111bb1b"
+        endpoint: "https://127.0.0.2"
+        skipCertificateValidation: true
+        mdm: "10.0.0.3,10.0.0.4"
+        nasName : "nasServer"
+        blockProtocol: "auto"
+      ```
+        - **Update Parameters:** Replace placeholders with actual values for your Powerflex array.
+        - **Add Blocks:** If you have multiple Powerflex arrays, add similar blocks for each one.
+        - **Replication:** If replication is enabled, make sure the `secret.yaml` includes all involved Powerflex arrays.
    <br>
-   b. After editing the file, **run this command to create a secret** called `vxflexos-config`.
+   - After editing the file, **run this command to create a secret** called `vxflexos-config`.
 
-    ```bash
-      kubectl create secret generic vxflexos-config -n vxflexos --from-file=config=secret.yaml
-    ```
-     Use this command to **replace or update** the secret:
+        ```bash
+        kubectl create secret generic vxflexos-config -n vxflexos --from-file=config=secret.yaml
+        ```
+        Use this command to **replace or update** the secret:
 
-    ```bash
-      kubectl create secret generic vxflexos-config -n vxflexos --from-file=config=secret.yaml -o yaml --dry-run=client | kubectl replace -f -
-    ```
+        ```bash
+        kubectl create secret generic vxflexos-config -n vxflexos --from-file=config=secret.yaml -o yaml --dry-run=client | kubectl replace -f -
+        ```
 
 3. **Install driver:**
 
