@@ -219,6 +219,7 @@ Loaded image: registry.k8s.io/sig-storage/csi-snapshotter:{{< version-docs key="
 This guide provides instructions for installing the Dell CSM Operator on a disconnected OpenShift environment. The most convenient method is to mirror the entire catalog of certified Operators.
 
 **Prerequisites**
+
 Before getting started, ensure the following prerequisites are met:
 - The OpenShift CLI (oc) installed
 - Access to a private container registry where the mirrored images will be hosted
