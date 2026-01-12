@@ -92,7 +92,7 @@ apiVersion: storage.dell.com/v1
 kind: ContainerStorageModule
 metadata:
   name: cosi
-  namespace: cosi
+  namespace: dell-cosi
 spec:
   driver:
     csiDriverType: "cosi"
@@ -108,7 +108,7 @@ apiVersion: storage.dell.com/v1
 kind: ContainerStorageModule
 metadata:
   name: cosi
-  namespace: cosi
+  namespace: dell-cosi
 spec:
   driver:
     csiDriverType: "cosi"
