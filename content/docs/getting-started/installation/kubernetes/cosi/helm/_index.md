@@ -61,11 +61,11 @@ kubectl create secret generic cosi-config -n dell-cosi --from-file=config.yaml=s
 {{< collapse id="1" title="Parameters">}}
 | Parameter | Description | Required | Default |
 |-----------|-------------|----------|---------|
-|<div style="text-align: left"> images.provisioner.image |<div style="text-align: left"> COSI driver provisioner container image. | Yes | "quay.io/dell/container-storage-modules/cosi:v1.0.0" |
-|<div style="text-align: left"> images.sidecar.image |<div style="text-align: left"> COSI driver sidecar container image.| Yes | "gcr.io/k8s-staging-sig-storage/objectstorage-sidecar:release-0.2" |
-|<div style="text-align: left"> logLevel |<div style="text-align: left"> The logging level for the COSI driver provisioner.| Yes | "info" |
-|<div style="text-align: left"> logFormat |<div style="text-align: left"> The logging format for the COSI driver provisioner.| Yes | "TEXT" |
-|<div style="text-align: left"> imagePullPolicy |<div style="text-align: left"> COSI driver provisioner container image pull policy. Maps 1-to-1 with [Kubernetes image pull policy](https://kubernetes.io/docs/concepts/containers/images/#image-pull-policy).| Yes | "IfNotPresent" |
+|<div style="text-align: left"> images.provisioner.image |<div style="text-align: left"> COSI driver provisioner container image. | Yes | <div style="text-align: left"> "quay.io/dell/container-storage-modules/cosi:v1.0.0" |
+|<div style="text-align: left"> images.sidecar.image |<div style="text-align: left"> COSI driver sidecar container image.| Yes | <div style="text-align: left"> "gcr.io/k8s-staging-sig-storage/objectstorage-sidecar:release-0.2" |
+|<div style="text-align: left"> logLevel |<div style="text-align: left"> The logging level for the COSI driver provisioner.| Yes | <div style="text-align: left"> "info" |
+|<div style="text-align: left"> logFormat |<div style="text-align: left"> The logging format for the COSI driver provisioner.| Yes | <div style="text-align: left"> "TEXT" |
+|<div style="text-align: left"> imagePullPolicy |<div style="text-align: left"> COSI driver provisioner container image pull policy. Maps 1-to-1 with [Kubernetes image pull policy](https://kubernetes.io/docs/concepts/containers/images/#image-pull-policy).| Yes | <div style="text-align: left"> "IfNotPresent" |
 {{< /collapse >}}
 </ul>
 

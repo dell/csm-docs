@@ -13,7 +13,7 @@ The COSI Driver for Dell ObjectScale can be deployed by using the CSM Operator.
 
 {{< accordion id="One" title="Prerequisite" >}}
 <br>
-{{<include  file="content/docs/getting-started/installation/kubernetes/cosi/prerequisite/_index.md" >}}
+{{<include  file="content/docs/getting-started/installation/openshift/cosi/prerequisite/_index.md" >}}
 
 {{< /accordion >}}
 

@@ -77,12 +77,12 @@ Container Storage Modules doesn't officially support specific operating systems,
 
 ## Helm Compatibility
 {{<table "table table-striped table-bordered table-sm">}}
-| Module           | PowerStore | PowerScale | PowerFlex | PowerMax | Unity XT |
-| ---------------- | ---------- |------------|-----------|----------|----------|
-| Authorization v2 | Yes        | Yes        | Yes       | Yes       | No      |
-| Replication      | Yes        | Yes        | Yes       | Yes       | No      |
-| Observability    | Yes        | Yes        | Yes       | Yes       | No      |
-| Resiliency       | Yes        | Yes        | Yes       | Yes       | Yes     |
+| Module           | PowerStore | PowerScale | PowerFlex | PowerMax | Unity XT | COSI |
+| ---------------- | ---------- |------------|-----------|----------|----------|------|
+| Authorization v2 | Yes        | Yes        | Yes       | Yes      | No       | No   |
+| Replication      | Yes        | Yes        | Yes       | Yes      | No       | No   |
+| Observability    | Yes        | Yes        | Yes       | Yes      | No       | No   |
+| Resiliency       | Yes        | Yes        | Yes       | Yes      | Yes      | No   |
 {{</table>}}
 
 **Notes:**
@@ -92,12 +92,12 @@ Container Storage Modules doesn't officially support specific operating systems,
 
 ## Operator Compatibility
 {{<table "table table-striped table-bordered table-sm">}}
-| Module           | PowerStore | PowerScale | PowerFlex | PowerMax | Unity XT |
-| ---------------- | ---------- |------------|-----------|----------|----------|
-| Authorization v2 | Yes        |  Yes        | Yes       | Yes      | No      |
-| Replication      | Yes        |  Yes        | Yes       | Yes      | No      |
-| Observability    | Yes        |  Yes        | Yes       | Yes      | No      |
-| Resiliency       | Yes        |  Yes        | Yes       | Yes      | No      |
+| Module           | PowerStore | PowerScale | PowerFlex | PowerMax | Unity XT | COSI |
+| ---------------- | ---------- |------------|-----------|----------|----------|------|
+| Authorization v2 | Yes        |  Yes        | Yes      | Yes      | No       | No   |
+| Replication      | Yes        |  Yes        | Yes      | Yes      | No       | No   |
+| Observability    | Yes        |  Yes        | Yes      | Yes      | No       | No   |
+| Resiliency       | Yes        |  Yes        | Yes      | Yes      | No       | No   |
 {{</table>}}
 
 **Notes:**
