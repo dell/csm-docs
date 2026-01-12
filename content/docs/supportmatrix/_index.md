@@ -118,6 +118,7 @@ Container Storage Modules doesn't officially support specific operating systems,
 
 **Note:**
 - [Refer](#container-orchestrator-platforms) our supported Orchestration platform. While the Operator may be displayed, it does not necessarily mean it has been fully qualified by us.
+- The PowerMax NAS server has a limitation of supporting up to 125 concurrent file systems, which in turn limits NFS usage to a maximum of 125 pods
 ## Installation Wizard Compatibility
 
 ### Drivers
