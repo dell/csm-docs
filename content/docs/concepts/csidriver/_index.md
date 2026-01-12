@@ -40,7 +40,7 @@ The CSI Drivers implement an interface between [CSI](https://kubernetes-csi.gith
 |----------------------------------------------|:----------------:|:----------------:|:------------------:|:----------------:|:----------------:|
 | <div style="text-align: left"> Fibre Channel | Yes              | N/A              | N/A                | Yes              | Yes               |
 | <div style="text-align: left"> iSCSI         | Yes              | N/A              | N/A                | Yes              | Yes               |
-| <div style="text-align: left"> NVMeTCP       | Yes              | N/A              | No                 | Yes              | N/A               |
+| <div style="text-align: left"> NVMeTCP       | Yes              | N/A              | Yes                 | Yes              | N/A               |
 | <div style="text-align: left"> NVMeFC        | Yes              | N/A              | N/A                | N/A              | N/A               |
 | <div style="text-align: left"> NFS           | Yes              | Yes              | N/A*               | Yes - SDNAS only (No eNAS) | Yes     |
 | <div style="text-align: left"> Other         | N/A              | N/A              | ScaleIO protocol   | N/A              | N/A               |

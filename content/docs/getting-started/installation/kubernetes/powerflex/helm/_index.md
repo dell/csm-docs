@@ -28,6 +28,8 @@ Install Helm 3.x on the master node before you install the CSI Driver for Dell P
 
 {{< accordion id="Two" title="Base Install" markdown="true" >}}
 
+> For details on enabling NVMe/TCP, refer to the [NVMe/TCP Support](../../../../../concepts/csidriver/features/powerflex#nvmetcp-support) section in the Features page.
+
 ## Install Driver
 **Steps**
 1. Run `git clone -b {{< version-docs key="PFlex_latestVersion" >}} https://github.com/dell/csi-powerflex.git` to clone the git repository.
