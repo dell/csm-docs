@@ -82,7 +82,7 @@ EOF
 ```
 3. Create a secret by running
 ```bash
-kubectl create secret generic dell-cosi-config -n dell-cosi --from-file=config.yaml=secret.yaml
+kubectl create secret generic cosi-config -n dell-cosi --from-file=config.yaml=secret.yaml
 ```
 4. Create a Custom Resource (CR) for COSI using either minimal resource file or the more configurable sample. Save one of the following YAML blocks to a file.
 {{< collapse id="1" title="Minimal Configuration">}}

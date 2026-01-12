@@ -48,7 +48,7 @@ EOF
 ```
 4. Create a secret by running
 ```bash
-kubectl create secret generic dell-cosi-config -n dell-cosi --from-file=config.yaml=secret.yaml
+kubectl create secret generic cosi-config -n dell-cosi --from-file=config.yaml=secret.yaml
 ```
 5. Copy the _charts/cosi/values.yaml_ into a new location with name _my-cosi-values.yaml_, to customize settings for installation.
 6. Edit *my-cosi-values.yaml* to set the following parameters for your installation.<br>
