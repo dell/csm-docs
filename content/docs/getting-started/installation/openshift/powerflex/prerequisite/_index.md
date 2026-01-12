@@ -54,7 +54,7 @@ To install CSI driver for Powerflex with automated SDC deployment, you need belo
     # sdc-monitor is disabled by default, due to high CPU usage
       - name: sdc-monitor
         enabled: false
-        image: quay.io/dell/storage/powerflex/sdc:4.5.4
+        image: quay.io/dell/storage/powerflex/sdc:5.0
         envs:
          - name: HOST_PID
           value: "1"
