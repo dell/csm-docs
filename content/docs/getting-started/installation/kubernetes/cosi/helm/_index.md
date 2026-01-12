@@ -67,6 +67,6 @@ kubectl create secret generic cosi-config -n dell-cosi --from-file=config.yaml=s
 7. Install the driver by running the following command (assuming that the current working directory is _charts_ and _my-cosi-settings.yaml_ is also present in _charts_ directory).
 
 ```bash
-helm install dell-cosi ./cosi --namespace=dell-cosi --values ./my-cosi-values.yaml
+helm install cosi ./cosi --namespace=dell-cosi --values ./my-cosi-values.yaml
 ```
 {{< /accordion>}}
