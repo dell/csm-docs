@@ -1126,7 +1126,7 @@ Before setting up or upgrading the cluster, the user must verify that the update
 Enable the SFTP repository settings by enabling the SDC SFTP Repo and configuring the SFTP repository address, username, and secret.
 
  *NOTE:*
-- Exposing SFTP settings to automatically pull scini.ko modules is only available for SDC 3.6.5 and 4.5.4
+- Exposing SFTP settings to automatically pull scini.ko modules is only available for SDC 3.6.5, 4.5.4 and 5.x.
 - Ensure that sdcrepo-private-secret and sdcrepo-public-secret are created from the secrets file. 
   ```bash
   kubectl create secret generic sdcsftprepo-private-secret -n vxflexos --from-file=user_private_rsa_key=sftp-secret-private.crt
