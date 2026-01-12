@@ -1150,8 +1150,6 @@ Enable the SFTP repository settings by enabling the SDC SFTP Repo and configurin
 
 Starting with v2.16.0, the CSI PowerFlex driver supports NVMe/TCP connectivity with PowerFlex 4.x and 5.0. This feature allows the driver to communicate with PowerFlex arrays using the standard NVMe/TCP protocol, eliminating the dependency on the proprietary Storage Data Client (SDC) for worker nodes.
 
-> **Note:** If `blockProtocol` is not specified or set to `auto` in the vxflexos-config secret, the driver will detect the available initiators on the host and choose the protocol. Priority is given to SDC, followed by NVMe/TCP.
-
 ### Configuration Requirements
 
 To enable NVMe/TCP, the following configurations must be applied:
@@ -1160,7 +1158,9 @@ To enable NVMe/TCP, the following configurations must be applied:
     ```yaml
     blockProtocol: "NVMeTCP"
     ```
-     > **Note:** When configuring the driver with multiple PowerFlex arrays, the blockProtocol value must be the same for all arrays.
+     **Note:** 
+     * If `blockProtocol` is not specified or set to `auto` in the vxflexos-config secret, the driver automatically detects the available initiators on the host and selects the appropriate protocol. The selection priority is SDC first, followed by NVMe/TCP.
+     * When configuring the driver with multiple PowerFlex arrays, the blockProtocol value must be the same for all arrays.
 
 2.  **Disable SDC**: SDC deployment must be disabled to ensure the driver relies on NVMe/TCP.
     *   **Helm**: Set `sdc.enabled` to `false` in [values.yaml](https://github.com/dell/helm-charts/blob/csi-vxflexos-{{< version-docs key="driver_latestVersion" >}}/charts/csi-vxflexos/values.yaml).
