@@ -11,7 +11,7 @@ weight: 1
 {{<table "table table-striped table-bordered table-sm tdleft">}}
 | Prerequisites    | PowerStore         | PowerScale | PowerFlex | PowerMax | Unity XT |
 | :--------------: | :----------------: | :--------: | :-------: | :------: | :------: |
-| Version          | 3.6, 4.0, 4.1, 4.2 | OneFS 9.4, 9.5.0.x (x >= 5),<br>9.7, 9.8, 9.9, 9.10, 9.11, 9.12 | 3.6.x, 4.5.x, 4.6.x, 5.0  | Unisphere 10.0, 10.1, 10.2 | 5.3.x, 5.4.x, 5.5 |
+| Version          | 3.6, 4.0, 4.1, 4.2 | OneFS 9.4, 9.5.0.x (x >= 5),<br>9.7, 9.8, 9.9, 9.10, 9.11, 9.12 | 3.6.x, 4.5.x, 4.6.x, 5.0  | Unisphere 10.0, 10.1, 10.2, 10.3 | 5.3.x, 5.4.x, 5.5 |
 | OS Dependencies  | iscsi-initiator-utils<br>multipathd<br>nvme-cli<br>nfs-utils | nfs-utils | [SDC](https://www.dell.com/support/home/en-us/product-support/product/scaleio/drivers)<br>nvme-cli | iscsi-initiator-utils<br>multipathd or powerpath<br>nvme-cli<br>nfs-utils | iscsi-initiator-utils<br>multipathd<br>nfs-utils |
 {{</table>}}
 
