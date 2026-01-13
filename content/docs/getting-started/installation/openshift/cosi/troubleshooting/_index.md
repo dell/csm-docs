@@ -11,7 +11,7 @@ toc_hide: false
 For logs use:
 
 ```bash
-$ kubectl logs <driver pod> -n dell-cosi
+$ oc logs <driver pod> -n dell-cosi
 Defaulted container "objectstorage-provisioner" out of: objectstorage-provisioner, objectstorage-provisioner-sidecar
 2026-01-12T15:49:03Z  [INFO]  Config successfully loaded from /cosi/config.yaml
 2026-01-12T15:49:03Z  [INFO]  Log level set to info
@@ -33,28 +33,27 @@ Defaulted container "objectstorage-provisioner" out of: objectstorage-provisione
 Additionally check kubernetes resources:
 
 ```bash
-$ kubectl get bucketclaim -A
+$ oc get bucketclaim -A
 NAMESPACE   NAME             AGE
 default     my-bucketclaim   50s
 ```
 ```bash
-$ kubectl get buckets
+$ oc get buckets
 NAME                                          AGE
 bucket-5220d661-448c-4dd6-b8b4-9e8e633f979d   115s
 ```
 ```bash
-$ kubectl get bucketaccessclass
+$ oc get bucketaccessclass
 NAME                   AGE
 my-bucketaccessclass   2m14s
 ```
 ```bash
-$ kubectl get bucketclass
+$ oc get bucketclass
 NAME             AGE
 my-bucketclass   2m4s
 ```
 ```bash
-$ kubectl get bucketaccess -A
+$ oc get bucketaccess -A
 NAMESPACE   NAME              AGE
 default     my-bucketaccess   2m57s
 ```
-
