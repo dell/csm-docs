@@ -170,7 +170,6 @@ csi-powermax:
   clusterPrefix: $POWERMAX_CLUSTER_PREFIX
   fsGroupPolicy: "$FSGROUP_POLICY"
   maxPowerMaxVolumesPerNode: $MAX_VOLUMES_PER_NODE
-  dynamicSGEnabled: $DYNAMIC_SG_ENABLED
   podmonAPIPort: 8083
   enableCHAP: $ISCSI_CHAP_ENABLED
   storageCapacity:
