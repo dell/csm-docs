@@ -8,7 +8,7 @@ Description: Installation of COSI Driver using Operator
 The COSI Driver for Dell ObjectScale can be deployed by using the CSM Operator.
 
 1. Set up a Kubernetes cluster following the official documentation.
-2. Proceed to the [Prerequisite](../prerequisite/_index.md).
+2. Proceed to the [Prerequisites](../prerequisite/_index.md).
 3. Complete the driver installation.
 
 ## Operator Installation
@@ -28,7 +28,7 @@ connections:
   - objectscale:
       id: objectscale
       credentials:
-        username: namespaceamdin
+        username: namespaceadmin
         password: namespaceadminpassword
       namespace: ns1
       mgmt-endpoint: https://mgmt-endpoint-address:4443

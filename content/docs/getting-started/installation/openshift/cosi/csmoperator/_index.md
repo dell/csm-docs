@@ -11,7 +11,7 @@ The COSI Driver for Dell ObjectScale can be deployed by using the CSM Operator.
 2. Proceed to the Prerequisites.
 3. Complete the driver installation.
 
-{{< accordion id="One" title="Prerequisite" >}}
+{{< accordion id="One" title="Prerequisites" >}}
 <br>
 {{<include  file="content/docs/getting-started/installation/openshift/cosi/prerequisite/_index.md" >}}
 
@@ -68,7 +68,7 @@ connections:
   - objectscale:
       id: objectscale
       credentials:
-        username: namespaceamdin
+        username: namespaceadmin
         password: namespaceadminpassword
       namespace: ns1
       mgmt-endpoint: https://mgmt-endpoint-address:4443
@@ -82,7 +82,7 @@ EOF
 ```
 3. Create a secret by running
 ```bash
-kubectl create secret generic cosi-config -n dell-cosi --from-file=config.yaml=secret.yaml
+oc create secret generic cosi-config -n dell-cosi --from-file=config.yaml=secret.yaml
 ```
 4. Create a Custom Resource (CR) for COSI using either minimal resource file or the more configurable sample. Save one of the following YAML blocks to a file.
 {{< collapse id="1" title="Minimal Configuration">}}
@@ -147,7 +147,7 @@ EOF
 {{< /collapse >}}
 5. Create the COSI CR using the CR.
     ```bash
-    kubectl create -f csm-cosi.yaml
+    oc create -f csm-cosi.yaml
     ```
     You should see the following output:
     ```terminal
@@ -155,11 +155,11 @@ EOF
     ```
 6. Validate the installation
     ```terminal
-    # kubectl get csm -A
+    # oc get csm -A
     NAMESPACE   NAME   CREATIONTIME   CSIDRIVERTYPE   CONFIGVERSION   STATE
     dell-cosi   cosi   16s            cosi            v1.0.0          Succeeded
 
-    # kubectl -n dell-cosi get pods
+    # oc -n dell-cosi get pods
     NAME                   READY   STATUS    RESTARTS   AGE
     cosi-59fbff5ff-m2j5x   2/2     Running   0          32s
     cosi-59fbff5ff-w2sxm   2/2     Running   0          32s
