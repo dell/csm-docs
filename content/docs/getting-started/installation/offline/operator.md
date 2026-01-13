@@ -13,7 +13,8 @@ To perform an offline installation :
 1. [**Build an offline bundle**](../offline#building-an-offline-bundle-1)
 2. [**Unpack the offline bundle**](../offline#unpacking-the-offline-bundle-and-preparing-for-installation-1) and prepare for installation.
 3. [**Install operator**](../offline#install-operator-1) using the unpacked files.
-4. [**Install Container Storage Modules**](../offline#install-container-storage-module-1) using the unpacked files.
+4. [**Install Container Storage Modules**](../offline#install-container-storage-modules-1) using the unpacked files.
+5. [**Installing Dell CSM Operator on a disconnected OpenShift environment**](../offline#installing-dell-csm-operator-on-a-disconnected-openshift-environment-1)
 
 >NOTE: Use the same tool (docker or podman) for packing and unpacking images.
 
@@ -211,3 +212,101 @@ Loaded image: registry.k8s.io/sig-storage/csi-snapshotter:{{< version-docs key="
 - Offline bundle installation is only supported with manual installs (without using Operator Lifecycle Manager).
 - Use files from the unpacked offline bundle (dell-csm-operator-bundle.tar.gz) as image tags in the manifests are modified to point to the internal registry.
 - Offline bundle installs the operator in the default namespace via the install.sh script. Ensure the current context in the kubeconfig file is set to default.
+
+#### Installing Dell CSM Operator on a disconnected OpenShift environment
+
+This guide provides instructions for installing the Dell CSM Operator on a disconnected OpenShift environment. The most convenient method is to mirror the entire catalog of certified Operators.
+
+**Prerequisites**
+
+Before getting started, ensure the following prerequisites are met:
+- The OpenShift CLI (oc) installed
+- Access to a private container registry where the mirrored images will be hosted
+- Sufficient local storage space to download all required images
+
+**Mirror the Certified Operator Catalog**
+
+Run the following command to mirror the catalog:
+
+```bash
+oc adm catalog mirror registry.redhat.io/redhat/certified-operator-index:v[ocp version] [private-registry-url]
+```
+Example:
+
+```bash
+oc adm catalog mirror registry.redhat.io/redhat/certified-operator-index:v4.19 registry.example.com:5000
+```
+
+For more detailed steps, such as using credentials to authenticate, using a file archive, and more, refer to the official [OpenShift documentation](https://docs.redhat.com/en/documentation/openshift_container_platform/4.20/html/disconnected_environments/index)
+
+**Populating OperatorHub from a mirrored Operator**
+
+After previous step completes successfully, an `ImageContentSourcePolicy` manifest is generated. That resource will translate regular image url and tags into the mirrored ones in the private registry.
+
+From the disconnected environment run:
+```bash
+oc create -f imageContentSourcePolicy.yaml
+```
+
+Then update the `CatalogSource` to reference the mirrored content in the private registry:
+```bash
+oc apply -f catalogSource.yaml
+```
+
+Verify the deployment:
+```bash
+oc get pods -n openshift-marketplace
+```
+
+Once all pods are in a healthy state, the Red Hat–certified Operators should appear in the `OperatorHub` in the OpenShift Web Console
+
+For more detailed steps on populating the OperatorHub with a new catalog, refer to the official [OpenShift documentation](https://docs.redhat.com/en/documentation/openshift_container_platform/4.20/html/postinstallation_configuration/post-install-preparing-for-users#post-install-mirrored-catalogs).
+
+**Mirroring only the Dell CSM Operator**
+
+The synchronization of the full certified operator catalog is a resource‑intensive process and can take several hours to complete. It also requires significant storage capacity on the container registry (typically more than 1 TB).
+
+An alternative method is to mirror only the Dell CSM Operator. To do so use `oc-mirror` plugin to select the __dell-csm-operator-certified__ only. 
+
+That procedure is documented in the [official documentation](https://docs.redhat.com/en/documentation/openshift_container_platform/4.20/html/disconnected_environments/about-installing-oc-mirror-v2#installation-oc-mirror-v2-about_about-installing-oc-mirror-v2).
+
+The overall workflow is similar to the steps described in the previous section, with the following additional requirements:
+- Download and install the `oc-mirror` plugin (available through the OpenShift Web Console or from the [Github repository](https://github.com/openshift/oc-mirror/releases)).
+- Authenticate `podman` with `registry.redhat.io`.
+- Prepare an `ImageSetConfiguration` that includes only the Dell CSM Operator.
+
+Here is a sample `ImageSetConfiguration` file to be adjusted with OpenShift version and CSM Operator version:
+```yaml
+apiVersion: mirror.openshift.io/v2alpha1
+kind: ImageSetConfiguration
+mirror:
+  operators:
+    - catalog: registry.redhat.io/redhat/certified-operator-index:v[ocp version]
+      packages:
+        - name: dell-csm-operator-certified
+          channels:
+            - name: stable
+              minVersion: "[dell csm operator version]"
+```
+
+In a fully disconnected environment, the required images must be downloaded locally:
+```bash
+oc mirror --config=dell-csm-operator-mirror.yml file:///tmp/dell-csm-operator-imageset --v2
+```
+
+Push the images to the private registry:
+```bash
+oc mirror --config=dell-csm-operator-mirror.yml --from file:///tmp/dell-csm-operator-imageset docker://<mirror_registry_url> --v2
+```
+
+Finally, patch the `ImageDigestMirrorSet`:
+```bash
+oc apply -f cluster-resources
+```
+
+Verification can be performed using:
+```bash
+oc get imagedigestmirrorset
+oc get catalogsource -n openshift-marketplace
+oc get clustercatalog
+```
