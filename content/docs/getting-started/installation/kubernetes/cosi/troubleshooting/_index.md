@@ -57,4 +57,3 @@ $ kubectl get bucketaccess -A
 NAMESPACE   NAME              AGE
 default     my-bucketaccess   2m57s
 ```
-
